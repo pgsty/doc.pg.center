@@ -1,0 +1,181 @@
+sections:
+  - hero
+  - type: cards
+    key: components
+  - capabilities
+  - faq
+
+hero:
+  class: pgsql-hero
+  eyebrow: 四套独立 PostgreSQL 文档 · 中文 + English
+  title_lines:
+    - words:
+        - { mark: P, color: blue, text: ostgreSQL }
+    - words:
+        - { text: 社区组件 }
+    - words:
+        - { text: 文档中心 }
+  lead: 为 **Patroni、pgBackRest、PgBouncer 与 pgBadger** 提供四套聚焦、独立的文档入口。
+  note: 选择组件，直接进入它的指南、参考手册、版本记录与支持信息。
+  note_icon: fa-solid fa-circle-check
+  actions:
+    - label: 选择组件
+      url: '#components'
+      icon: fa-solid fa-arrow-down
+      style: primary
+    - label: 打开搜索
+      url: search/
+      icon: fa-solid fa-magnifying-glass
+      style: ghost
+
+components:
+  eyebrow: 选择文档根
+  title: 四个组件，四个直接入口
+  text: 每个组件拥有独立的侧栏、阅读顺序、页面大纲与本地搜索上下文。
+  columns: 4
+  link_label: 阅读文档
+  items:
+    - title: Patroni
+      meta: 高可用
+      icon: fa-solid fa-heart-pulse
+      desc: 使用分布式共识、健康检查与自动故障转移，构建并运行 PostgreSQL 高可用集群。
+      url: docs/patroni/
+    - title: pgBackRest
+      meta: 备份与恢复
+      icon: fa-solid fa-box-archive
+      desc: 设计可靠的备份、恢复、归档、保留策略与时间点恢复工作流。
+      url: docs/pgbackrest/
+    - title: PgBouncer
+      meta: 连接池
+      icon: fa-solid fa-diagram-project
+      desc: 降低连接开销，理解会话、事务与语句池化模式的行为边界。
+      url: docs/pgbouncer/
+    - title: pgBadger
+      meta: 日志分析
+      icon: fa-solid fa-chart-line
+      desc: 把 PostgreSQL 与 PgBouncer 日志转化为查询、负载、错误与运行报告。
+      url: docs/pgbadger/
+
+capabilities:
+  eyebrow: 组件指南
+  title: 每个组件解决什么问题，以及从哪里开始
+  text: 先读简短说明，再用右侧索引直接进入对应手册的具体页面。
+  items:
+    - ref: 01 / 高可用
+      title: Patroni
+      url: docs/patroni/
+      motto: PostgreSQL 高可用方案模板
+      bullets:
+        - 通过分布式配置存储协调领导者选举与集群状态。
+        - 自动执行故障转移，同时为计划内运维保留明确、可控的操作接口。
+        - 覆盖物理机、虚拟机、Kubernetes、Watchdog 与多数据中心模式。
+      value: 从安装与配置开始，再学习日常运维接口。
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: Patroni 文档快捷入口
+        items:
+          - { icon: fa-solid fa-download, title: 安装, url: docs/patroni/installation/ }
+          - { icon: fa-solid fa-sliders, title: 配置, url: docs/patroni/config/ }
+          - { icon: fa-solid fa-terminal, title: patronictl, url: docs/patroni/patronictl/ }
+          - { icon: fa-solid fa-plug, title: REST API, url: docs/patroni/rest_api/ }
+          - { icon: fa-solid fa-arrows-rotate, title: 复制模式, url: docs/patroni/replication_modes/ }
+          - { icon: fa-solid fa-circle-question, title: 常见问题, url: docs/patroni/faq/ }
+    - ref: 02 / 备份与恢复
+      title: pgBackRest
+      url: docs/pgbackrest/
+      motto: 可靠地完成备份、归档、恢复与时间点恢复
+      bullets:
+        - 支持全量、差异、增量与块级备份，并可并行处理。
+        - 管理仓库、保留策略、加密、对象存储与异步 WAL 归档。
+        - 同时提供按系统编写的操作指南与覆盖全部命令的参考手册。
+      value: 先选择适合操作系统的指南，再把配置与命令参考放在手边。
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: pgBackRest 文档快捷入口
+        items:
+          - { icon: fa-solid fa-route, title: 用户指南, url: docs/pgbackrest/user-guide/ }
+          - { icon: fa-brands fa-redhat, title: RHEL 指南, url: docs/pgbackrest/user-guide-rhel/ }
+          - { icon: fa-solid fa-sliders, title: 配置参考, url: docs/pgbackrest/configuration/ }
+          - { icon: fa-solid fa-terminal, title: 命令参考, url: docs/pgbackrest/command/ }
+          - { icon: fa-solid fa-tags, title: 版本记录, url: docs/pgbackrest/release/ }
+          - { icon: fa-solid fa-circle-question, title: 常见问题, url: docs/pgbackrest/faq/ }
+    - ref: 03 / 连接池
+      title: PgBouncer
+      url: docs/pgbouncer/
+      motto: 轻量级 PostgreSQL 连接池
+      bullets:
+        - 复用 PostgreSQL 连接，减少后端进程启动成本与连接压力。
+        - 提供会话、事务与语句池化模式，并明确说明各自的兼容边界。
+        - 用一套紧凑手册讲清认证、路由、连接限制、超时与管理控制台。
+      value: 先理解池化模型，再针对工作负载安装并调整配置。
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: PgBouncer 文档快捷入口
+        items:
+          - { icon: fa-solid fa-list-check, title: 功能特性, url: docs/pgbouncer/features/ }
+          - { icon: fa-solid fa-download, title: 下载, url: docs/pgbouncer/download/ }
+          - { icon: fa-solid fa-wrench, title: 安装, url: docs/pgbouncer/install/ }
+          - { icon: fa-solid fa-terminal, title: 使用方法, url: docs/pgbouncer/usage/ }
+          - { icon: fa-solid fa-sliders, title: 配置参考, url: docs/pgbouncer/config/ }
+          - { icon: fa-solid fa-circle-question, title: 常见问题, url: docs/pgbouncer/faq/ }
+    - ref: 04 / 日志分析
+      title: pgBadger
+      url: docs/pgbadger/
+      motto: 快速分析 PostgreSQL 与 PgBouncer 日志
+      bullets:
+        - 解析多种 PostgreSQL 日志格式、压缩文件、远程输入与 PgBouncer 日志。
+        - 汇总慢查询、高频查询、错误、会话、锁、检查点与 Vacuum 活动等信息。
+        - 生成自包含 HTML、增量报告，以及 JSON、文本、二进制与 CSV 输出。
+      value: 先把日志配置正确，再选择一次性、并行或增量报告方式。
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: pgBadger 文档快捷入口
+        items:
+          - { icon: fa-solid fa-download, title: 下载, url: docs/pgbadger/download/ }
+          - { icon: fa-solid fa-terminal, title: 命令行, url: docs/pgbadger/command-line/ }
+          - { icon: fa-solid fa-file-lines, title: PostgreSQL 日志, url: docs/pgbadger/postgresql-logging/ }
+          - { icon: fa-solid fa-calendar-days, title: 增量报告, url: docs/pgbadger/incremental-reports/ }
+          - { icon: fa-solid fa-file-export, title: 输出格式, url: docs/pgbadger/output-formats/ }
+          - { icon: fa-solid fa-chart-column, title: 示例报告, url: docs/pgbadger/sample-reports/ }
+          - { icon: fa-solid fa-tags, title: 版本记录, url: docs/pgbadger/releases/ }
+          - { icon: fa-solid fa-life-ring, title: 支持, url: docs/pgbadger/support/ }
+
+faq:
+  eyebrow: 常见问题
+  title: 几个有用的答案
+  items:
+    - question: 应该从哪里开始？
+      answer: 选择与你当前任务对应的组件。每张卡片都会进入一套独立文档；上方的详细说明还提供了常用页面的直达入口。
+      open: true
+    - question: pgsql.cc 是 PostgreSQL 官方网站吗？
+      answer: 不是。pgsql.cc 是独立的社区文档项目。本站保留各上游项目的链接、产品名称与技术上下文。
+    - question: 中英文页面如何对应？
+      answer: 每个迁移页面在同一逻辑路径下都有配对翻译。当两种语言都存在时，语言切换器会把读者留在当前页面的对应版本。
+
+footer:
+  brand:
+    name: PGSQL.CC
+    tagline: PostgreSQL 社区组件
+    slogan: 面向生产实践的 PostgreSQL 生态工具双语文档。
+  columns:
+    - title: 组件
+      links:
+        - { label: Patroni, url: docs/patroni/ }
+        - { label: pgBackRest, url: docs/pgbackrest/ }
+        - { label: PgBouncer, url: docs/pgbouncer/ }
+        - { label: pgBadger, url: docs/pgbadger/ }
+    - title: 上游项目
+      links:
+        - { label: PostgreSQL.org, url: https://www.postgresql.org/, external: true }
+        - { label: Patroni, url: https://github.com/patroni/patroni, external: true }
+        - { label: pgBackRest, url: https://pgbackrest.org/, external: true }
+        - { label: PgBouncer, url: https://www.pgbouncer.org/, external: true }
+        - { label: pgBadger, url: https://pgbadger.darold.net/, external: true }
