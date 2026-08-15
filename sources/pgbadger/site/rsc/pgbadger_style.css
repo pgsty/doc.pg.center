@@ -1,0 +1,328 @@
+@import url(https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i);
+
+body {
+  position: relative;
+  color: #232323;
+}
+
+section {
+  background-color: #eeeeee;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+h1 {
+  color: #767676;
+  font-family: 'Rubik', sans-serif;
+  font-size: 4.25rem;
+  font-weight: bold;
+  padding-top: 10px;
+  padding-bottom: 30px;
+}
+
+h2 {
+  color: #767676;
+  font-weight: bold;
+  text-align: left;
+  font-family: 'Rubik', sans-serif;
+  font-size: 3rem;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+h3 {
+  color: #767676;
+  text-align: left;
+  font-weight: bold;
+  font-family: 'Rubik', sans-serif;
+  font-size: 2rem;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+h4 {
+  color: #767676;
+  text-align: left;
+  font-weight: bold;
+  font-family: 'Rubik', sans-serif;
+  font-size: 1rem;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.navbar-caption {
+  color: #fefefe;
+  font-weight: bold;
+  font-family: 'Rubik', sans-serif;
+  font-size: 1rem;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-decoration: none;
+}
+
+.navbar-caption:hover {
+  color: #ffffff;
+}
+
+.nav-link {
+  color: #fefefe;
+  font-weight: bold;
+  font-family: 'Rubik', sans-serif;
+  font-size: 1rem;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+}
+
+.container {
+  position: relative;
+  word-wrap: break-word;
+}
+
+.navbar {
+  background: #232323;
+}
+
+.menu {
+  padding: .5rem 0;
+  background: #232323;
+  transition: none;
+  min-height: 77px;
+}
+
+.menu .nav-item a {
+  padding: 0.7rem 0 !important;
+  margin: 0rem .65rem !important;
+  padding-right: 0.4em;
+  line-height: 0.5em;
+  vertical-align: text-bottom;
+  position: relative;
+  top: -0.2em;
+  text-decoration: none;
+}
+
+.menu .btn {
+  padding: 0.4rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.menu .menu-logo {
+  margin-right: auto;
+}
+
+.menu .menu-logo .navbar-brand {
+  display: flex;
+  margin-left: 5rem;
+  padding: 0;
+  transition: padding .2s;
+  min-height: 3.8rem;
+  align-items: center;
+}
+
+.menu .menu-logo .navbar-brand .navbar-caption-wrap {
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  align-items: center;
+  word-break: break-word;
+  min-width: 7rem;
+  margin: .3rem 0;
+}
+
+.menu .menu-logo .navbar-brand .navbar-caption-wrap .navbar-caption {
+  line-height: 1.2rem !important;
+  padding-right: 2rem;
+  text-decoration: none;
+}
+
+.menu .navbar-expand-md .navbar-collapse {
+  justify-content: flex-end;
+  -webkit-justify-content: flex-end;
+  padding-right: 5rem;
+  width: auto;
+}
+
+.menu .navbar-expand-md .navbar-collapse .navbar-nav {
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  padding-left: 0;
+}
+
+.menu .navbar-expand-md .navbar-collapse .navbar-nav .nav-item {
+  -webkit-align-self: center;
+  align-self: center;
+}
+
+.menu .navbar-expand-md .navbar-collapse .navbar-buttons {
+  padding-left: 0;
+  padding-bottom: 0;
+}
+
+.header {
+  z-index: 0;
+  position: relative;
+  background-image: none;
+  background-attachment: scroll;
+  background-size: auto auto;
+  height: 100%;
+  padding-top: 110px;
+  padding-bottom: 90px;
+}
+
+.cover {
+  background-color: #000;
+  bottom: 0;
+  left: 0;
+  opacity: .5;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 0;
+}
+
+.white-bg {
+  background-color: #fff;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.bloc-section {
+  padding-top: 60px;
+  padding-bottom: 15px;
+  background-color: #efefef;
+  color: #232323;
+  text-align: left;
+}
+
+.text-section {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  background-color: #efefef;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.title-section {
+  padding-top: 60px;
+  padding-bottom: 30px;
+  background-color: #232323;
+  color: #ffffff;
+  text-align: center;
+}
+
+.title-section h3 {
+  color: #ffffff;
+  text-align: center;
+}
+
+.text-zone {
+  text-align: left;
+  margin-left: 1.5rem;
+}
+
+p {
+  font-style: normal;
+  line-height: 1.6;
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
+  margin-top: 1.2rem;
+}
+
+pre {
+  font-style: normal;
+  line-height: 1.2;
+  font-size: 1.0rem;
+}
+
+code {
+  font-style: normal;
+  line-height: 1.2;
+  font-size: 1.0rem;
+  white-space: pre-line;
+  color: black;
+  padding: 2.5rem;
+}
+
+
+.small-text {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.copyright {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 0;
+  color: white;
+  text-align: center;
+}
+
+.text-white {
+  color: white;
+}
+
+.footer {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #2e2e2e;
+}
+
+.social {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.2rem;
+  padding-top: 10px;
+  text-align: right;
+  color: #fefefe;
+}
+
+.social a {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.2rem;
+  padding-top: 10px;
+  text-align: right;
+  color: #fefefe;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+
+  .align-left, .align-center, .align-right {
+    text-align: center;
+  }
+  .text-zone #headertext {
+    text-align: center;
+  }
+  h1 {
+    font-size: 3.4rem;
+    font-size: calc( 2.1374999999999997rem + (4.25 - 2.1374999999999997) * ((100vw - 20rem) / (48 - 20)));
+    line-height: calc( 1.4 * (2.1374999999999997rem + (4.25 - 2.1374999999999997) * ((100vw - 20rem) / (48 - 20))));
+  }
+  p, h2 {
+    font-size: 1.2rem;
+    font-size: calc( 1.175rem + (1.5 - 1.175) * ((100vw - 20rem) / (48 - 20)));
+    line-height: calc( 1.4 * (1.175rem + (1.5 - 1.175) * ((100vw - 20rem) / (48 - 20))));
+  }
+  h3 {
+    font-size: 1.2rem;
+    font-size: calc( 1.175rem + (1.5 - 1.175) * ((100vw - 20rem) / (48 - 20)));
+    line-height: calc( 1.4 * (1.175rem + (1.5 - 1.175) * ((100vw - 20rem) / (48 - 20))));
+  }
+  .small-text, h4 {
+    font-size: 0.8rem;
+    font-size: calc( 1rem + (1 - 1) * ((100vw - 20rem) / (48 - 20)));
+    line-height: calc( 1.4 * (1rem + (1 - 1) * ((100vw - 20rem) / (48 - 20))));
+  }
+  pre { text-align: left; }
+
+  #about { padding-top: 200px; }
+
+}

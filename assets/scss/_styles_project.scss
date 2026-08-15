@@ -1,0 +1,48 @@
+.pgsql-hero {
+  .oink-hero__copy {
+    max-width: 860px;
+  }
+
+  .oink-hero__title {
+    max-width: 980px;
+    letter-spacing: -0.035em;
+  }
+
+  .oink-hero__lead {
+    max-width: 760px;
+  }
+}
+
+.oink-landing {
+  --oink-grid: rgba(51, 103, 145, 0.075);
+}
+
+[data-bs-theme='dark'] .oink-landing {
+  --oink-grid: rgba(113, 166, 209, 0.07);
+}
+
+.oink-cards-section .oink-card__media > i,
+.oink-logo-wall-section .oink-logo-card__media > i {
+  color: #336791;
+}
+
+.td-content img[src$='/img/docs/pgbadger/logo.png'] {
+  width: 180px;
+  max-width: 52vw;
+  height: auto;
+  padding: 1rem;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 1rem;
+  background: #f8fafc;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+}
+
+@media (max-width: 767.98px) {
+  .pgsql-hero .oink-hero__title {
+    font-size: clamp(2.25rem, 11vw, 3.25rem);
+
+    > span {
+      white-space: normal;
+    }
+  }
+}

@@ -1,0 +1,181 @@
+sections:
+  - hero
+  - type: cards
+    key: components
+  - capabilities
+  - faq
+
+hero:
+  class: pgsql-hero
+  eyebrow: Four independent PostgreSQL manuals · English + 中文
+  title_lines:
+    - words:
+        - { mark: P, color: blue, text: ostgreSQL }
+    - words:
+        - { text: Community }
+    - words:
+        - { text: Components }
+  lead: Four focused documentation roots for **Patroni, pgBackRest, PgBouncer, and pgBadger**.
+  note: Pick a component and go straight to its guides, references, releases, and support material.
+  note_icon: fa-solid fa-circle-check
+  actions:
+    - label: Choose a component
+      url: '#components'
+      icon: fa-solid fa-arrow-down
+      style: primary
+    - label: Open search
+      url: search/
+      icon: fa-solid fa-magnifying-glass
+      style: ghost
+
+components:
+  eyebrow: Choose a documentation root
+  title: Four components. Four direct entrances.
+  text: Each component has its own sidebar, reading order, page outline, and local search context.
+  columns: 4
+  link_label: Read the docs
+  items:
+    - title: Patroni
+      meta: High availability
+      icon: fa-solid fa-heart-pulse
+      desc: Build and operate PostgreSQL clusters with distributed consensus, health checks, and automatic failover.
+      url: docs/patroni/
+    - title: pgBackRest
+      meta: Backup & recovery
+      icon: fa-solid fa-box-archive
+      desc: Design reliable backup, restore, archive, retention, and point-in-time recovery workflows.
+      url: docs/pgbackrest/
+    - title: PgBouncer
+      meta: Connection pooling
+      icon: fa-solid fa-diagram-project
+      desc: Reduce connection overhead and understand session, transaction, and statement pooling behavior.
+      url: docs/pgbouncer/
+    - title: pgBadger
+      meta: Log analysis
+      icon: fa-solid fa-chart-line
+      desc: Turn PostgreSQL and PgBouncer logs into query, workload, error, and operational reports.
+      url: docs/pgbadger/
+
+capabilities:
+  eyebrow: Component guides
+  title: What each component does — and where to start
+  text: Read the short orientation, then use the linked index beside it to jump directly into the manual.
+  items:
+    - ref: 01 / HIGH AVAILABILITY
+      title: Patroni
+      url: docs/patroni/
+      motto: A template for PostgreSQL high availability
+      bullets:
+        - Coordinates leader election and cluster state through a distributed configuration store.
+        - Automates failover while retaining explicit controls for planned operational changes.
+        - Covers bare metal, virtual machines, Kubernetes, watchdogs, and multi-datacenter patterns.
+      value: Start with installation and configuration, then learn the operational surfaces.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: Patroni documentation shortcuts
+        items:
+          - { icon: fa-solid fa-download, title: Installation, url: docs/patroni/installation/ }
+          - { icon: fa-solid fa-sliders, title: Configuration, url: docs/patroni/config/ }
+          - { icon: fa-solid fa-terminal, title: patronictl, url: docs/patroni/patronictl/ }
+          - { icon: fa-solid fa-plug, title: REST API, url: docs/patroni/rest_api/ }
+          - { icon: fa-solid fa-arrows-rotate, title: Replication modes, url: docs/patroni/replication_modes/ }
+          - { icon: fa-solid fa-circle-question, title: FAQ, url: docs/patroni/faq/ }
+    - ref: 02 / BACKUP & RECOVERY
+      title: pgBackRest
+      url: docs/pgbackrest/
+      motto: Reliable backup, archive, restore, and point-in-time recovery
+      bullets:
+        - Supports full, differential, incremental, and block-level backups with parallel processing.
+        - Manages repositories, retention, encryption, object storage, and asynchronous WAL archiving.
+        - Documents both guided deployments and every command in the reference interface.
+      value: Begin with the guide for your operating system, then keep configuration and command reference close.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: pgBackRest documentation shortcuts
+        items:
+          - { icon: fa-solid fa-route, title: User guide, url: docs/pgbackrest/user-guide/ }
+          - { icon: fa-brands fa-redhat, title: RHEL guide, url: docs/pgbackrest/user-guide-rhel/ }
+          - { icon: fa-solid fa-sliders, title: Configuration, url: docs/pgbackrest/configuration/ }
+          - { icon: fa-solid fa-terminal, title: Commands, url: docs/pgbackrest/command/ }
+          - { icon: fa-solid fa-tags, title: Releases, url: docs/pgbackrest/release/ }
+          - { icon: fa-solid fa-circle-question, title: FAQ, url: docs/pgbackrest/faq/ }
+    - ref: 03 / CONNECTION POOLING
+      title: PgBouncer
+      url: docs/pgbouncer/
+      motto: A lightweight connection pooler for PostgreSQL
+      bullets:
+        - Reuses PostgreSQL connections to reduce backend startup cost and connection pressure.
+        - Offers session, transaction, and statement pooling with different compatibility boundaries.
+        - Includes a compact but complete guide to authentication, routing, limits, timeouts, and the admin console.
+      value: Read the pooling model first, then install and tune the configuration for your workload.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: PgBouncer documentation shortcuts
+        items:
+          - { icon: fa-solid fa-list-check, title: Features, url: docs/pgbouncer/features/ }
+          - { icon: fa-solid fa-download, title: Download, url: docs/pgbouncer/download/ }
+          - { icon: fa-solid fa-wrench, title: Installation, url: docs/pgbouncer/install/ }
+          - { icon: fa-solid fa-terminal, title: Usage, url: docs/pgbouncer/usage/ }
+          - { icon: fa-solid fa-sliders, title: Configuration, url: docs/pgbouncer/config/ }
+          - { icon: fa-solid fa-circle-question, title: FAQ, url: docs/pgbouncer/faq/ }
+    - ref: 04 / LOG ANALYSIS
+      title: pgBadger
+      url: docs/pgbadger/
+      motto: Fast PostgreSQL and PgBouncer log analysis
+      bullets:
+        - Parses many PostgreSQL log formats, compressed files, remote inputs, and PgBouncer logs.
+        - Reports slow and frequent queries, errors, sessions, locks, checkpoints, vacuum activity, and more.
+        - Generates self-contained HTML, incremental reports, JSON, text, binary, and CSV output.
+      value: Configure logging first, then choose between one-shot, parallel, and incremental reporting.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: pgBadger documentation shortcuts
+        items:
+          - { icon: fa-solid fa-download, title: Download, url: docs/pgbadger/download/ }
+          - { icon: fa-solid fa-terminal, title: Command line, url: docs/pgbadger/command-line/ }
+          - { icon: fa-solid fa-file-lines, title: PostgreSQL logging, url: docs/pgbadger/postgresql-logging/ }
+          - { icon: fa-solid fa-calendar-days, title: Incremental reports, url: docs/pgbadger/incremental-reports/ }
+          - { icon: fa-solid fa-file-export, title: Output formats, url: docs/pgbadger/output-formats/ }
+          - { icon: fa-solid fa-chart-column, title: Sample reports, url: docs/pgbadger/sample-reports/ }
+          - { icon: fa-solid fa-tags, title: Releases, url: docs/pgbadger/releases/ }
+          - { icon: fa-solid fa-life-ring, title: Support, url: docs/pgbadger/support/ }
+
+faq:
+  eyebrow: FAQ
+  title: A few useful answers
+  items:
+    - question: Where should I start?
+      answer: Choose the component that matches your current task. Each card opens an independent documentation root, and the detailed section above links directly to its most-used pages.
+      open: true
+    - question: Is pgsql.cc an official PostgreSQL website?
+      answer: No. pgsql.cc is an independent community documentation project. It links back to each upstream project and keeps product names and technical context intact.
+    - question: How are the English and Chinese pages organized?
+      answer: Every imported page has a paired translation at the same logical route. The language switcher keeps readers on the corresponding page whenever both versions exist.
+
+footer:
+  brand:
+    name: PGSQL.CC
+    tagline: PostgreSQL Community Components
+    slogan: Practical, bilingual documentation for the community stack.
+  columns:
+    - title: Components
+      links:
+        - { label: Patroni, url: docs/patroni/ }
+        - { label: pgBackRest, url: docs/pgbackrest/ }
+        - { label: PgBouncer, url: docs/pgbouncer/ }
+        - { label: pgBadger, url: docs/pgbadger/ }
+    - title: Upstream
+      links:
+        - { label: PostgreSQL.org, url: https://www.postgresql.org/, external: true }
+        - { label: Patroni, url: https://github.com/patroni/patroni, external: true }
+        - { label: pgBackRest, url: https://pgbackrest.org/, external: true }
+        - { label: PgBouncer, url: https://www.pgbouncer.org/, external: true }
+        - { label: pgBadger, url: https://pgbadger.darold.net/, external: true }

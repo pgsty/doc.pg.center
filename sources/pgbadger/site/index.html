@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html><head>
+<title>pgBadger :: PostgreSQL log analyzer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Expires" CONTENT="Tue Aug 28 18:29:36 2018">
+<meta http-equiv="Generator" content="pgBadger">
+<meta http-equiv="Date" content="Tue Aug 28 18:29:36 2018">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="keywords" content="PostgreSQL log analyzer graphical reports">
+<meta name="description" content="PostgreSQL log analyzer with fully detailed reports and graphs">
+<link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAIyMQAAEABAA8BAAAFgAAACgAAAAjAAAARgAAAAEABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAGRsZACgqKQA2OTcASEpJAFpdWwBoa2kAeHt5AImMigCeoZ8AsLOxAMTHxQDR1NIA5enmAPv+/AAAAAAA///////////////////////wAAD///////////H///////////AAAP////////9Fq7Yv////////8AAA////////8V7u7qD////////wAAD///////8B7qWN5AL///////AAAP/////y8Avrc3rtMCH/////8AAA/////xABvbAAAJ6kAA/////wAAD////wAG5tQAAADp6RAP////AAAP//MQBd7C2lRESOWe5xAD//8AAA//8APO7iC+7e7u4A3uxwBf/wAAD/9Aju7iAAvu7u0QAN7ukA7/AAAP/wCe7kAAAF7ugAAAHO6xD/8AAA//AK7CAAAAHO1AAAABnrEP/wAAD/8ArAAAAAAc7kAAAAAIwQ//AAAP/wCjAAAAAC3uQAAAAAHBCf8AAA//AIEBVnIATu5gAXZhAFEP/wAAD/8AIAqxdwBu7pAFoX0QIQ//AAAP/wAAPsBCAL7u4QBwfmAAD/8AAA//AAA8owAC7u7lAAKbYAAJ/wAAD/8AAAAAAAfu7uwAAAAAAA//AAAP/wAAAAAADu7u7jAAAAAAD/8AAA//AAAAAABe7u7uoAAAAAAP/wAAD/8AAAAAAL7u7u7QAAAAAAn/AAAP/wAAAAAB3u7u7uYAAAAAD/8AAA//MAAAAATu7u7u6QAAAAAP/wAAD//wAAAAAM7u7u7TAAAAAD//AAAP//IQAAAAKu7u7UAAAAAB//8AAA////IAAAAAju7BAAAAAP///wAAD////2AAA1je7ulUAAA/////AAAP/////xEAnO7u7pIAH/////8AAA//////9CABju6iACP//////wAAD////////wAAggAP////////AAAP////////8wAAA/////////8AAA///////////w///////////wAAD///////////////////////AAAP/////gAAAA//+//+AAAAD//Af/4AAAAP/4A//gAAAA//AA/+AAAAD/oAA/4AAAAP8AAB/gAAAA/gAAD+AAAADwAAAB4AAAAPAAAADgAAAA4AAAAGAAAADgAAAA4AAAAOAAAADgAAAA4AAAAOAAAADgAAAAYAAAAOAAAADgAAAA4AAAAOAAAADgAAAA4AAA AOAAAABgAAAA4AAAAOAAAADgAAAA4AAAAOAAAADgAAAA4AAAAGAAAADgAAAA4AAAAOAAAADgAAAA8AAAAOAAAADwAAAB4AAAAPwAAAfgAAAA/gAAD+AAAAD/gAA/4AAAAP/AAH/gAAAA//gD/+AAAAD//Af/4AAAAP//v//gAAAA/////+AAAAA" />
+
+  <link rel="stylesheet" href="rsc/bootstrap.css">
+  <link rel="stylesheet" href="rsc/pgbadger_style.css">
+  <script src="rsc/jquery-3.js"></script>
+  <script src="rsc/bootstrap.js"></script>
+
+<style>
+html, body { margin:0; height: 100%;}
+</style>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-12624168-10"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-12624168-10');
+</script>
+</head>
+<body>
+	
+<section class="menu" id="menu">
+    <nav class="navbar navbar-expand-md fixed-top navbar-dark">
+        <div class="menu-logo">
+            <div class="navbar-brand">
+                <span class="navbar-caption-wrap"><a class="navbar-caption" href="http://pgbadger.darold.net/">
+                        PGBADGER</a></span>
+            </div>
+        </div>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav">
+		<li class="nav-item"><a class="nav-link link" href="#news">
+                        NEWS</a></li>
+                <li class="nav-item"><a class="nav-link link" href="#download">
+			DOWNLOAD</a></li>
+                <li class="nav-item"><a class="nav-link link" href="#license">
+			LICENSE</a></li>
+                <li class="nav-item"><a class="nav-link link" href="#support">
+			SUPPORT</a></li>
+                <li class="nav-item"><a class="nav-link link" href="#reports">
+			EXAMPLES</a></li>
+                <li class="nav-item"><a class="nav-link link" href="documentation.html">
+                        DOCUMENTATION</a></li>
+	    </ul>
+        </div>
+    </nav>
+</section>
+
+<section class="header" id="header">
+
+    <div class="cover" style="opacity: 0.8; background-color: rgb(51, 42, 104); height: 100%;">
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+                <h1 class="text-center text-white">The PostgreSQL log analyzer</h1>
+                <h3 class="text-center text-white">Make your reports in seconds!</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center white-bg">
+	    <div class="col-md-4 col-sm-12 mx-auto text-center">
+                <img src="logo_pgbadger.png" alt="pgBadger"></a>  
+	    </div>
+	    <div class="col-md-8 col-sm-12">
+                    <div class="text-zone" id="headertext">
+                            <p>
+			    <br>
+pgBadger is a PostgreSQL log analyzer built for speed with fully detailed reports and professional rendering.  It outperforms any other PostgreSQL log analyzer.
+			    <br>
+			    <div class="navbar-buttons"><a class="btn btn-sm btn-primary small-text" href="#about" style="background-color: rgb(51, 42, 104); opacity: 0.8; border-color: rgb(51, 42, 104);">
+                    LEARN MORE</a></div>
+			    </p>
+                    </div>
+	    </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+
+			<p id="social" class="social">
+			    <strong>Latest release:</strong>
+			    <a href="https://github.com/darold/pgbadger/releases">GitHub Download - Release Notes</a> &nbsp;
+			<a href="https://twitter.com/pgbadger" class="twitter-follow-button" data-show-count="false">Follow @pgbadger</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			    <a href="https://twitter.com/pgbadger"><i class="fa fa-twitter"></i></a>
+			    <a href="https://github.com/darold/pgbadger"><i class="fa fa-github"></i></a>
+			</p>
+<p>&nbsp;</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="title-section" id="about">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h3>ABOUT</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bloc-section" id="about-text">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8">
+                    <div class="text-zone">
+                            <p>
+pgBadger is a standalone Perl program that uses a javascript library (flotr2) to draw graphs so that you don't need to install any additional modules or other packages. Furthermore, this library gives us more features such as zooming. pgBadger also uses the Bootstrap javascript library and the FontAwesome webfont for better design. Everything is embedded.
+			    </p>
+                            <p>
+pgBadger is able to autodetect your PostgreSQL log file format (syslog, stderr, csvlog or jsonlog) as well as pgbouncer log file. It is designed to parse huge log files as well as gzip compressed file. See a complete list of features below.
+			    </p>
+                            <p>
+All charts are zoomable and can be saved as PNG images.
+			    </p>
+                            <p>
+You can also limit pgBadger to only report errors or remove any part of the report using command line options.
+			    </p>
+                            <p>
+			    pgBadger supports any custom format set into the log_line_prefix directive of
+your postgresql.conf file as long as it at least specify a time escape sequence
+(%t, %m or %n) and the process related escape sequence (%p or %c).
+			    </p>
+                            <p>
+pgBadger allow parallel processing on a single log file and multiple files through the use of the -j or -J options and the number of CPUs as value.
+			    </p>
+                            <p>
+If you want to save system performance you can also use log_duration instead of log_min_duration_statement to have reports on duration and number of queries only.
+			    </p>
+                            <p>
+pgBadger supports an incremental mode that allow to construct incremental reports after successives runs of pgBadger. It is possible to run pgbadger each days or even more, each hours, and have cumulatives reports per day and per week. A top index page will allow you to go directly to the weekly and daily reports. 
+			    </p>
+		    </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="title-section" id="news">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h3>LATEST PGBADGER NEWS</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bloc-section" id="news-text">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10">
+
+		<h3><code>Version 12.4 - 2023-12-25</code></h3>
+                <div class="text-zone">
+<p>
+This is a maintenance release of pgBadger that fixes issues reported by
+users since last release.
+</p>
+<pre>
+  - Fix pgbouncer report with version 1.21. Thanks to Ales Zeleny for the patch.
+  - Prevent parallelism perl file to be higher than the number of files. Thanks
+    to maliangzhu for the report.
+  - Fix regression test broken since v12.3. Thanks to ieshin for the report.
+  - Fix cases where LOG entries where counted as ERROR log level entries. Thanks
+    to Matti Linnanvuori for the report.
+</pre>
+                </div>
+                <hr />
+
+		<h3><code>Version 12.3 - 2023-11-27</code></h3>
+                <div class="text-zone">
+<p>
+This is a maintenance release of pgBadger that fixes issues reported by
+users since last release. It also adds two new features:
+</p>
+<pre>
+  * Add option `--include-pid` to only report events related to a session
+    pid (%p). Can be used multiple time. Thanks to Henrietta Dombrovskaya
+    for the feature request.
+  * Add option `--include-session` to only report events related to the
+    session id (%c). Can be used multiple time. Thanks to Henrietta Dombrovskaya
+    for the feature request.
+  * Add option `--dump-raw-csv` to only parse the log and dump the information
+    into CSV format. No further processing is done, no report is generated.
+    Thanks to Henrietta Dombrovskaya for the feature request.
+</pre>
+<p>
+Here is the complete list of changes and acknowledgments:
+</p>
+<pre>
+  - Update pgFormatter to version 5.5
+  - Fix end date of parsing with jsonlog format. Thanks to jw1u1 for the report.
+  - Fix typo in "Sessions per application". Thanks to fairyfar for the patch.
+  - Fix "INSERT/UPDATE/DELETE Traffic" chart bug. Thanks to fairyfar for the
+    patch.
+  - Fix parsing of orphan lines with bind queries. Thanks to youxq for the
+    report.
+  - Fix Analyze per table report with new PG versions. Thanks to Jean-Christophe
+    Arnu for the patch.
+  - Fix syslog entry parser when the syslog timestamp contains milliseconds.
+    Thanks to Pavel Rabel for the report.
+</pre>
+                </div>
+                <hr />
+
+		<h3><code>Version 12.2 - 2023-08-20</code></h3>
+                <div class="text-zone">
+<p>
+This is a maintenance release of pgBadger that fixes issues reported by
+users since last release. It also adds two new features:
+</p>
+<pre>
+  * Add support for max, avg, min autovacuum duration. Thanks to Francisco Reinolds for the patch.
+  * Add support for pgbouncer's average waiting time. Thanks to Francisco Reinolds for the patch.
+</pre>
+<p>
+Here is the complete list of changes and acknowledgments:
+</p>
+<pre>
+  - Fix broken HTML output when application name contains <...>. Thanks to Fabio Geiss for the report.
+  - Fix incorrect association of orphan lines when a filter on database was applied. Thanks to jcasanov for the report.
+  - Fix logplex prefix parsing.
+  - Fix logplex orphan lines detection.
+  - Fix autovacuum's system usage: CPU: ... line parsing. Thanks to Francisco Reinolds for the patch.
+  - Avoid prepending output directory if output is stdout.
+  - Standardize Average Query Duration label. Thanks to Francisco Reinolds for the patch
+  - Update documentation for new pgbadger options. Thanks to Francisco Reinolds for the patch.
+  - Fix case where parsing was not aborted when no file handle can be opened. Thanks to vp for the report.
+  - Fix help by adding %p and %t as mandatory placeholders log information. Thanks to Christophe Courtois for the patch.
+  - Fix --retention parameter. Thanks to Bertrand Bourgier for the patch.
+  - Fix cleanup output directory removed by commit 0e5c7d5 when HTML output dir is set. Thanks to Bertrand Bourgier for the report.
+  - Fix output extension when destination directory contain a character that need to be escaped in regexp. Thanks to Bertrand Bourgier for the patch.
+  - Replace calls to POSIX::strftime("%s", ....) by a call to localtime for Windows port. Thanks to Bertrand Bourgier for the patch.
+  - Fix html output dir cleanup. Thanks to Bertrand Bourgier for the patch.
+  - Use https for explain URL by default. Thanks to Philipp Trulson for the patch.
+</pre>
+                </div>
+                <hr />
+
+		<h3><code>Version 12.1 - 2023-03-20</code></h3>
+                <div class="text-zone">
+<p>
+This is a maintenance release of pgBadger that fixes issues reported by users since past six months.
+</p>
+<p>
+Here is the complete list of changes and acknowledgments:
+</p>
+<pre>
+  - Fix parsing of multiline parameters. Thanks to Bekir Niyaz for the report.
+  - Fix failure to normalize query with ::tsrange. Thanks to Philippe Griboval for the report.
+  - Add logical decoding consistent point and start for slot log entries to the events report.
+  - Handle other ns + timezone format in timestamp. Thanks to Ronan Dunklau for the report.
+  - Fix detection of %m when notation with T is used. Thanks to Ronan Dunklau for the report.
+  - Add parsing of CloudNativePG generated logs. Thanks to codrut panea for the patch.
+  - Fix unused option --outdir in report generation. Thanks to Frederic Guiet for the report.
+  - Update README with last documentation changes. Thanks to Manisankar for the report.
+  - Fix a typo in pgbadger examples. Thanks to Shinichi Hashiba for the patch.
+</pre>
+                </div>
+                <hr />
+
+		<h3><code>Version 12.0 - 2022-09-13</code></h3>
+                <div class="text-zone">
+<p>
+This major release of pgBadger fixes some issues reported by users since
+past five months. As usual there is also new features and improvements:
+</p>
+<pre>
+  * Remove support to Tsung output.
+  * Improve pgbadger performances when there are hundred of bind parameters to replace.
+  * Remove option -n | --nohighlight which is no more used since upgrade to pgFormatter 4.
+  * Use POST method to send auto_explain plan to explain.depesz.com to avoid GET length parameter limit.
+  * Apply --exclude-query and --include-query to bind/parse traces.
+  * Add link to pgBadger report examples to documentation.
+</pre>
+<p>
+Here is the complete list of changes and acknowledgments:
+</p>
+<pre>
+  - Fix monthly reports that was failing on "log file ... must exists". Thanks to Jaume Sabater for the report.
+  - Fix pgbouncer start parsing debug message when input is stdin. Thanks to Ales Zeleny for the report.
+  - Remove support to Tsung output.
+  - Drastically improve pgbadger performances for bind parameters replacement that could make
+    pgbadger run infinitely when there was hundred of parameters. Thanks to Monty Mobile for the report.
+  - Fix documentation about pgBadger return codes and also some wrong return code at some places.
+    Thanks to Jaume Sabater for the report.
+  - Fix several typo. Thanks to David Gilman for the patch.
+  - Remove option -n | --nohighlight which is no more used since upgrade to pgFormatter 4.
+    Thanks to Elena Indrupskaya for the report.
+  - Lot of pgbadger documentation fixes. Thanks to Elena Indrupskay from Postgres Pro for the patch.
+  - Allow half hour in --log-timezone and --timezone, value can be an integer, ex: 2 or a float, ex: 2.5.
+    Thanks to Mujjamil-K for the feature request.
+  - Allow use of regexp for --exclude-app and --exclude-client. Thanks to rdnkrkmz for the feature request.
+  - Allow use of --explain-url with previous commit and restore the limitation to explain text format.
+  - Use POST method to send auto_explain plan to explain.depesz.com to avoid GET length parameter limit.
+    Thanks to hvisage for the report.
+  - Apply --exclude-query and --include-query to bind/parse traces. Thanks to Alec Lazarescu for the report.
+  - Fix parsing of autovacuum stats from RDS logs. Thanks to David Gilman for the report.
+  - Fix passing of log format when parsing remote log. Thanks to spookypeanut the report.
+  - Add link to pgBadger report examples to documentation.
+  - Fix Session per user reports. Thanks to vitalca for the report.
+  - Fix jsonlog parsing from PG15 ouput
+  - Fix text-based error/events reporting. Thanks to Michael Banck for the patch
+  - Fix regexp typo in normalize_error(). Thanks to Michael Banck for the patch.
+</pre>
+                </div>
+                <hr />
+
+		<h3><code>Version 11.8 - 2022-04-08</code></h3>
+                <div class="text-zone">
+<p>
+This release of pgBadger fix some issues reported by users since past
+three months and especially two fixes on new log entries detection in
+incremental mode.
+</p>
+<pre>
+  * Fix detection of new log entries with timestamp when millisecond (%m) or
+    epoch (%n) was used in log_line_prefix.
+  * Fix detection of new log entries in local file when multiprocess was not
+    used.
+</pre>
+<p>
+Here is the complete list of changes and acknowledgments:
+</p>
+<pre>
+  - Full review and simplification of the log file change detection.
+  - Reports messages "could not (receive|send) data (from|to) client" in the
+    Events reports. Thanks to Adrien Nayrat for the report.
+  - Fix parsing issue when the name of a prepared query contain the ':'
+    character. Thanks to aleszeleny for the report.
+  - Fix detection of new log entries with timestamp when millisecond (%m) or
+    epoch (%n). Thanks to aleszeleny for the report.
+  - Fix detection of new log entries in local file when multiprocess was not
+    used. Thanks to aleszeleny for the report.
+  - Fix detection of new log entries in remote files through ssh. Thanks to
+    Luca Ferrari for the report
+  - Fix garbage in username of "Connections per user" report. Thanks to
+    caseyandgina for the report.
+  - Fix ssh command when using URI, the ssh options was missing. Thanks to Luca
+    Ferrari for the report.
+  - Handle queryid %Q placeholder. Thanks to Adrien Nayrat for the patch.
+  - Fix typo in error sentence. Thanks to Luca Ferrari for the patch
+  - Report message: "server process was terminated by signal" in the Events
+    report. Thanks to Avi Vallarapu for the report.
+  - doc: fix filename for incremental every week command. Thanks to Theophile
+    Helleboid for the patch.
+  - t/04_advanced.t: Fix syslog test. Thanks to Christoph Berg for the patch.
+</pre>
+                </div>
+                <hr />
+
+		<h3><code>Version 11.7 - 2022-01-23</code></h3>
+                <div class="text-zone">
+
+                            <p>This release of pgBadger fix some issues reported by users since past
+five months as well as some improvements.</p>
+<pre>
+* Add new option --no-progressbar option to not display it but keep the
+  other outputs.
+* Add new option --day-report that can be used to rebuild an HTML report
+  over the specified day. Like option --month-report but only for a day.
+  It requires the incremental output directories and the presence of all
+  necessary binary data files. The value is date in format: YYYY-MM-DD
+* Improve parsing of Heroku logplex and cloudsql json logs.
+</pre>
+<p>
+Here is the complete list of changes and acknowledgments:
+</p>
+<pre>
+- Update contribution guidelines and Makefile.PL to improve consistency,
+  clarity, and dependencies. Thanks to diffuse for the patch.
+- Fix use of last parse file (--last-parsed) with binary mode. Thanks to
+  wibrt for the report.
+- Add regression test for --last-parsed use and fix regression test on
+  report for temporary files only.
+- Fix title for session per host graph. Thanks to Norbert Bede for the
+  report.
+- Fix week number when computing weeks reports when --iso-week-number
+  and --incremental options was enabled. Thanks to hansgv for the report.
+- Add --no-progressbar option to not display it and keep the other outputs.
+  Thanks to seidlmic for the feature request.
+- Prevent too much unknown format line prints in debug mode for multi-line
+  jsonlog.
+- Fix parsing of single line cloudsql json log. Thanks to Thomas Leclaire
+  for the report.
+- Fix temporary files summary with log_temp_files only.
+- Print debug message with -v even if -q or --quiet is used.
+- Fix autodetection of jsonlog file.
+- Fix parsing of cloudsql log file. Thanks to Luc Lamarle for the report.
+- Fixes pid extraction in parse_json_input. Thanks to Francois Scala for
+  the patch.
+- Add new option --day-report with value as date in format: YYYY-MM-DD
+  that can be used to rebuild an HTML report over the specified day.
+  Thanks to Thomas Leclaire for the feature request.
+- Fix query counter in progress bar. Thanks to Guillaume Lelarge for the
+  report.
+- Fix incomplete queries stored for top bind and prepare reports.
+- Fix normalization of object identifier, in some case the numbers was
+  replaced by a ?.
+- Fix unformatted normalized queries when there is a comment at beginning.
+- Fix multi-line in stderr format when --dbname is used. Thanks to
+  Guillaume Lelarge for the report.
+- Fix not generated reports in incremental mode when --dbname is used.
+  Thanks to Dudley Perkins for the report.
+- Do not die anymore if a binary file is not compatible, switch to next
+  file. Thanks to Thomas Leclaire for the suggestion.
+- Fix Heroku logplex format change in pgbadger parser. Thanks to François
+  Pietka for the report.
+</pre>
+                </div>
+                <hr />
+
+		<h3><code>Version 11.6 - 2021-09-04</code></h3>
+                <div class="text-zone">
+                            <p>This release of pgBadger fix some issues reported by users since past
+seven months as well as some improvements.</p>
+<pre>
+  * Add detection of Query Id in log_line_prefix new in PG14. Thanks to
+    Florent Jardin for the report.
+  * Add advanced regression tests with db exclusion and the explode
+    feature. Thanks to MigOps Inc for the patch.
+  * Apply multiprocess to report generation when --explode is used.
+    Thanks to MigOps Inc for the patch and Thomas Leclaire for the
+    feature request.
+  * Add --iso-week-number in incremental mode, calendar's weeks start
+    on a Monday and respect the ISO 8601 week number, range 01 to 53,
+    where week 1 is the first week that has at least 4 days in the new
+    year. Thanks to Alex Muntada for the feature request.
+  * Add command line option --keep-comments to not remove comments from
+    normalized queries. It can be useful if you want to distinguish
+    between same normalized queries. Thanks to Stefan Corneliu Petrea
+    for the feature request.
+  * Skip INFO lines introduced in PostgreSQL log file by third parties
+    software. Thanks to David Piscitelli for the report.
+  * Add compatibility with PostgresPro log file including rows number
+    and size in bytes following the statement duration. Thanks to
+    panatamann for the report.
+  * Parse times with T's to allow using the timestamps from journalctl.
+    Thanks to Graham Christensen for the patch.
+  * Improve Windows port. Thanks to Bertrand Bourgier for the patches.
+</pre>
+<p>
+Important note:
+</p>
+<pre>
+  * Expect that --iso-week-number will be the default in next major
+    release and that --start-monday option will be removed as the week
+    will always start a Monday. The possibility to have week reports
+    start a Sunday will be removed to simplify the code.
+</pre>
+<p>
+For the complete list of changes, please checkout the <a href="https://github.com/darold/pgbadger/releases/tag/v11.6">release note</a>
+</p>
+                </div>
+                <hr />
+
+		<h3><code>Version 11.5 - 2021-02-18</code></h3>
+                <div class="text-zone">
+                            <p>This release of pgBadger fix some issues reported by users since
+past three months as well as some improvements:</p>
+<pre>
+  * Add report about sessions idle time, computed using:
+    "total sessions time - total queries time / number of sessions
+    This require that log_connection and log disconnection have been
+    enabled and that log_min_duration_statement = 0 (all queries logged)
+    to have a reliable value. This can help to know how much idle time
+    is lost, and if a pooler transaction mode would be useful.
+    This report is available in the "Sessions" tab of "Global Stats"
+    and in the "Sessions" tab of "General Activity" reports (per hour).
+  * Add anonymization of numeric values, replaced by 4 random digits.
+  * Update SQL beautifier based on pgFormatter 5.0.
+</pre>
+<p>
+Here is the complete list of changes and acknowledgments:
+</p>
+<pre>
+  - Fix parsing of cloudsql multi-line statement. Thanks to Jon Young for the report.
+  - Add regression test for anonymization.
+  - Fix anonymization broken by maxlength truncate. Thanks to artl for the report.
+  - Add anonymization of parameter in time consuming prepare and bind reports.
+    Thanks to arlt for the report.
+  - Add support to microseconds in logplex log line prefix. Thanks to Ross Gardiner for the report.
+  - Add report about sessions idle time. Thanks to Guillaume Lelarge for the feature request.
+  - Complete patch to support multi-line in jsonlog format.
+</pre>
+		</div>
+		<hr />
+
+		<h3><code>Version 11.4 - 2020-11-24</code></h3>
+                <div class="text-zone">
+                            <p>This release of pgBadger fix some issues reported by users since
+past four months. Improve support for PostgreSQL 13 log information
+and adds some new features</p>
+<pre>
+  * Add full autovacuum information in "Vacuums per table" report for
+    buffer usage (hits, missed, dirtied), skipped due to pins, skipped
+    frozen and WAL usage (records, full page images, bytes). In report
+    "Tuples removed per table" additional autovacuum information are
+    tuples remaining, tuples not yet removable and pages remaining.
+    These information are only available on the "Table" tab.
+  * Add new repartition report about checkpoint starting causes.
+  * Add detection of application name from connection authorized traces.
+</pre>
+<p>
+Here is the complete list of changes and acknowledgments:
+</p>
+<pre>
+  - Fix typo in an error message. Thanks to Vidar Tyldum for the patch.
+  - Fix Windows port with error: "can not load incompatible binary data".
+    Thanks to Eric Brawner for the report.
+  - Fix typo on option --html-outdir in pgbadger usage and documentation.
+    Thanks to Vidar Tyldum for the patch.
+  - Fix autodetection of jsonlog/cloudsql format. Thanks to Jon Young
+    for the report.
+  - Fix CSV log parsing with PG v13. Thanks to Kanwei Li for the report
+    and Kaarel Moppel for the patch.
+  - Fix sort of queries generating the most temporary files report.
+    Thanks to Sebastien Lardiere for the report.
+  - Add pgbadger version trace in debug mode.
+</pre>
+		</div>
+		<hr />
+		<h3><code>Version 11.3 - 2020-07-26</code></h3>
+                <div class="text-zone">
+                            <p>
+This release of pgBadger fix several issues reported by users since
+past four months. It also adds some new features and new command line
+options:
+</p>
+<pre>
+  * Add autodetection of UTC timestamp to avoid applying timezone
+    for graphs.
+  * Add support to GCP CloudSQL json log format.
+  * Add new option --dump-all-queries to use pgBadger to dump all
+    queries to a text file, no report is generated just the full list
+    of statements found in the PostgreSQL log. Bind parameters are
+    inserted into the queries at their respective position.
+  * Add new option -Q | --query-numbering used to add numbering of
+    queries to the output when using options --dump-all-queries or
+    --normalized-only.
+  * Add new command line option --tempdir to set the directory where
+    temporary files will be written. Can be useful on system that do
+    not allow writing to /tmp.
+  * Add command line option --ssh-port used to set the ssh port if not
+    default to 22. The URI notation also adds support to ssh port
+    specification by using the form:
+        ssh://192.168.1.100:2222//var/log/postgresql-11.log
+</pre>
+		</div>
+
+		<hr />
+		<h3><code>Version 11.2 - 2020-03-17</code></h3>
+                <div class="text-zone">
+                            <p>
+This release of pgBadger fix several
+issues reported by users since past six months. It also adds some new
+features:
+</p>
+<pre>
+  * Add support and autodetection of AWS redshift log format.
+  * Add support to pgbouncer 1.11 new log format.
+  * Handle zstd and lz4 compression format
+  * Allow to fully separate statistics build and HTML report build in
+    incremental mode without having to read a log file. For example
+    it is possible to run pgbadger each hours as follow:
+    
+        pgbadger -I -O "/out-dir/data" --noreport /var/log/postgresql*.log
+    
+    It just creates the data binary files in "/out-dir/data" then
+   for example you can make reports each night for the next day in
+   a separate directory `/out-dir/reports`:
+    
+        pgbadger -I -l "/out-dir/data/LAST_PARSED" -H "/out-dir/reports" /out-dir/data/2020/02/19/*.bin
+    
+    This require to set the path to the last parsed information, the
+    path where HTML reports will be written and the binary data file
+    of the day.
+</pre>
+<p>
+There is also new command line options:
+</p>
+<pre>
+  * Add new command line option --explain-url used to override the url
+    of the graphical explain tool. Default URL is:
+    
+        http://explain.depesz.com/?is_public=0&is_anon=0&plan=
+    
+    If you want to use a local install of PgExplain or an other tool.
+    pgBadger will add the plan in text format escaped at the end of
+    the URL.
+
+  * Add new option --no-week to instruct pgbadger to not build weekly
+    reports in incremental mode. Useful if it takes too much time and
+    resources.
+
+  * Add new command line option --command to be able to set a command
+    that pgBadger will execute to retrieve log entries on stdin.
+    pgBadger will open a pipe to the command and parse log entries
+    generated by the command. For example:
+    
+      pgbadger -f stderr --command 'cat /var/log/postgresql.log'
+    
+    which is the same as executing pgbadger with the log file directly
+    as argument. The interest of this option is obvious if you have to
+    modify the log file on the fly or that log entries are extracted
+    from a program or generated from a database. For example:
+    
+      pgbadger -f csv --command 'psql dbname -c "COPY jrn_log TO STDOUT (FORMAT CSV)"'
+    
+  * Add new command line option --noexplain to prevent pgBadger to
+    parse and report explain plan written to log by auto_explain
+    extension. This is useful if you have a PostgreSQL version < 9.0
+    where pgBadger generate broken reports when there is explain plan
+    in log.
+</pre>
+<p>
+Backward compatibility:
+</p>
+<pre>
+  - By default pgBadger will truncate queries up to 100000 characters.
+    This arbitrary value and can be adjusted using option --maxlength.
+    Previous behavior was to not truncate queries but this could
+    lead in excessive resources usage. Limiting default size is safer
+    and the size limit might allow no truncate in most cases. However
+    queries will not be beautified if they exceed 25000 characters.
+</pre>
+</p>
+For the complete list of changes, please checkout the release note
+on https://github.com/darold/pgbadger/blob/master/ChangeLog
+</p>
+		</div>
+
+		<hr />
+		<h3><code>Version 11.1 - 2019-09-16</code></h3>
+                <div class="text-zone">
+                            <p>
+This release of pgBadger fix several issues reported by users since
+three months. It also adds some new features and reports:
+</p>
+<pre>
+  - Add report of top N queries that consume the most time in the
+    prepare or parse stage.
+  - Add report of top N queries that consume the most time in the
+    bind stage.
+  - Add report of timing for prepare/bind/execute queries parts.
+    Reported in a new "Duration" tab in Global Stats report. Example:
+        Total query duration: 6m16s
+        Prepare/parse total duration: 45s564ms
+        Bind total duration: 4m46s
+        Execute total duration: 44s71m
+    This also fix previous report of "Total query duration" that was
+    only reporting execute total duration.
+  - Add support to RDS and CloudWatch log format, they are detected
+    automatically. You can use -f rds if pgbadger is not able to
+    auto-detect the log format.
+  - Add new configuration option --month-report to be able to build
+    monthly incremental reports.
+  - Restore support to Windows operating system.
+</pre>
+<p>
+For the complete list of changes, please checkout the release note on
+https://github.com/darold/pgbadger/blob/master/ChangeLog
+</p>
+		</div>
+
+		<hr />
+		<h3><code>Version 11.3 - 2020-07-26</code></h3>
+                <div class="text-zone">
+                            <p>
+pgBadger 11.3 was released today, this is a maintenance release that
+fixes issues reported by users during last four months. There is also
+some new useful features:
+</p>
+<pre>
+  * Add autodetection of UTC timestamp to avoid applying timezone
+    for graphs.
+  * Add support to GCP CloudSQL json log format.
+  * Add new option --dump-all-queries to use pgBadger to dump all
+    queries to a text file, no report is generated just the full list
+    of statements found in the PostgreSQL log. Bind parameters are
+    inserted into the queries at their respective position.
+  * Add new option -Q | --query-numbering used to add numbering of
+    queries to the output when using options --dump-all-queries or
+    --normalized-only.
+  * Add new command line option --tempdir to set the directory where
+    temporary files will be written. Can be useful on system that do
+    not allow writing to /tmp.
+  * Add command line option --ssh-port used to set the ssh port if not
+    default to 22. The URI notation also adds support to ssh port
+    specification by using the form:
+        ssh://192.168.1.100:2222//var/log/postgresql-11.log
+</pre>
+<p>
+For the complete list of changes, please checkout the release note
+on https://github.com/darold/pgbadger/blob/master/ChangeLog
+</p>
+		</div>
+
+		<hr />
+		<h3><code>Version 11.2 - 2020-03-11</code></h3>
+                <div class="text-zone">
+                            <p>
+This release of pgBadger fix several issues reported by users since
+past six months. It also adds some new features:
+</p>
+<pre>
+  * Add support and autodetection of AWS redshift log format.
+  * Add support to pgbouncer 1.11 new log format.
+  * Handle zstd and lz4 compression format
+  * Allow to fully separate statistics build and HTML report build in
+    incremental mode without having to read a log file. For example
+    it is possible to run pgbadger each hours as follow:
+    
+        pgbadger -I -O "/out-dir/data" --noreport /var/log/postgresql*.log
+    
+    It just creates the data binary files in "/out-dir/data" then
+   for example you can make reports each night for the next day in
+   a separate directory `/out-dir/reports`:
+    
+        pgbadger -I -l "/out-dir/data/LAST_PARSED" -H "/out-dir/reports" /out-dir/data/2020/02/19/*.bin
+    
+    This require to set the path to the last parsed information, the
+    path where HTML reports will be written and the binary data file
+    of the day.
+</pre>
+<p>
+There is also new command line options:
+</p>
+<pre>
+  * Add new command line option --explain-url used to override the url
+    of the graphical explain tool. Default URL is:
+    
+        http://explain.depesz.com/?is_public=0&is_anon=0&plan=
+    
+    If you want to use a local install of PgExplain or an other tool.
+    pgBadger will add the plan in text format escaped at the end of
+    the URL.
+
+  * Add new option --no-week to instruct pgbadger to not build weekly
+    reports in incremental mode. Useful if it takes too much time and
+    resources.
+
+  * Add new command line option --command to be able to set a command
+    that pgBadger will execute to retrieve log entries on stdin.
+    pgBadger will open a pipe to the command and parse log entries
+    generated by the command. For example:
+    
+      pgbadger -f stderr --command 'cat /var/log/postgresql.log'
+    
+    which is the same as executing pgbadger with the log file directly
+    as argument. The interest of this option is obvious if you have to
+    modify the log file on the fly or that log entries are extracted
+    from a program or generated from a database. For example:
+    
+      pgbadger -f csv --command 'psql dbname -c "COPY jrn_log TO STDOUT (FORMAT CSV)"'
+    
+  * Add new command line option --noexplain to prevent pgBadger to
+    parse and report explain plan written to log by auto_explain
+    extension. This is useful if you have a PostgreSQL version < 9.0
+    where pgBadger generate broken reports when there is explain plan
+    in log.
+</pre>
+<p>
+Backward compatibility:
+</p>
+<pre>
+  - By default pgBadger will truncate queries up to 100000 characters.
+    This arbitrary value and can be adjusted using option --maxlength.
+    Previous behavior was to not truncate queries but this could
+    lead in excessive resources usage. Limiting default size is safer
+    and the size limit might allow no truncate in most cases. However
+    queries will not be beautified if they exceed 25000 characters.
+</pre>
+		</div>
+
+		<hr />
+		<h3><code>Version 11.1 - 2019-09-26</code></h3>
+                <div class="text-zone">
+                            <p>
+This release of pgBadger fix several issues reported by users since
+three months. It also adds some new features and reports:
+</p>
+<pre>
+  - Add report of top N queries that consume the most time in the
+    prepare or parse stage.
+  - Add report of top N queries that consume the most time in the
+    bind stage.
+  - Add report of timing for prepare/bind/execute queries parts.
+    Reported in a new "Duration" tab in Global Stats report. Example:
+        Total query duration: 6m16s
+        Prepare/parse total duration: 45s564ms
+        Bind total duration: 4m46s
+        Execute total duration: 44s71m
+    This also fix previous report of "Total query duration" that was
+    only reporting execute total duration.
+  - Add support to RDS and CloudWatch log format, they are detected
+    automatically. You can use -f rds if pgbadger is not able to
+    auto-detect the log format.
+  - Add new configuration option --month-report to be able to build
+    monthly incremental reports.
+  - Restore support to Windows operating system.
+</pre>
+		</div>
+
+		<hr />
+		<h3><code>Version 11.0 - 2019-06-25</code></h3>
+                <div class="text-zone">
+                            <p>
+This release of pgBadger adds some major new features and fixes some
+issues reported by users since the last four months. New features:
+</p>
+<pre>
+  - Regroup cursor related query (DECLARE,CLOSE,FETCH,MOVE) into new
+    query type CURSOR.
+  - Add top bind queries that generate the more temporary files.
+    Require log_connection and log_disconnection be activated.
+  - Add --exclude-client command line option to be able to exclude log
+    entries for the specified client ip. Can be used multiple time.
+  - Allow to use time only in --begin and --end filters.
+  - Add -H, --html-dir option to be able to set a different path where
+    HTML report must be written in incremental mode. Binary files stay
+    on directory defined with -O, --outdir option.
+  - Add -E | --explode option to explode the main report into one
+    report per database. Global information not related to a database
+    are added to the postgres database report.
+  - Add per database report to incremental mode. In this mode there
+    will be a sub directory per database with dedicated incremental
+    reports.
+  - Add support to Heroku's PostgreSQL logplex format. Log can be
+    parsed using:
+
+      heroku logs -p postgres | pgbadger -f logplex -o heroku.html -
+
+  - When a query is > 10Kb we first limit size of all constant string
+    parameters to 30 characters and then the query is truncated to 10Kb.
+    This prevent pgbadger to waste time/hang with very long queries
+    when inserting bytea for example. The 10Kb limit can be controlled
+    with the --maxlength command line parameter.
+    The query is normalized or truncated to maxlength value only after
+    this first attempt to limit size.
+</pre>
+<p>
+This new release breaks backward compatibility with old binary or JSON
+files. This also mean that incremental mode will not be able to read
+old binary file. If you want to update pgBadger and keep you old reports
+take care to upgrade at start of a new week otherwise weekly report will
+be broken. pgBadger will print a warning and just skip the old binary
+file.
+</p>
+<p>
+For the complete list of changes, please checkout the release note on
+https://github.com/darold/pgbadger/blob/master/ChangeLog
+</p>
+		</div>
+
+		<hr />
+		<h3><code>Version 10.3 - 2019-02-14</code></h3>
+                <div class="text-zone">
+                            <p>
+This release of pgBadger is a maintenance release that fixes some
+log format autodetection issues another pgBouncer log parsing issue
+reported by users. There is also a new feature:
+</p>
+<pre>
+    The -o | --outfile option can now be used multiple time to dump
+    output in several format in a single command. For example:
+        pgbadger -o out.html -o out.json /log/pgsql-11.log
+    will create two reports in html and json format saved in the
+    two corresponding files.
+</pre>
+<p>
+For the complete list of changes, please checkout the release note on
+https://github.com/darold/pgbadger/blob/master/ChangeLog
+</p>
+		</div>
+
+		<hr />
+		<h3><code>Version 10.2 - 2018-12-27</code></h3>
+                <div class="text-zone">
+                            <p>
+This release of pgBadger is a maintenance release that fixes issues
+reported by users during last three months. There is also some new
+features:
+</p>
+<pre>
+  * Add support to pgbouncer 1.8 Stats log format.
+  * Auto adjust javascript graph timezone.
+  * Add support to http or ftp remote PostgreSQL log file download.
+    The log file is parsed during the download using curl command
+    and never saved to disk. With ssh remote log parsing you can use
+    uri as command line argument to specify the PostgreSQL log file.
+    
+            ssh://localhost/postgresql-10-main.log
+            http://localhost/postgresql-10-main.log.gz
+            ftp://localhost/postgresql-10-main.log
+    
+    with http and ftp protocol you need to specify the log file format
+    at end of the uri:
+    
+            http://localhost/postgresql-10-main.log:stderr
+    
+    You can specify multiple uri for log files to be parsed. This is
+    useful when you have pgbouncer log file on a remote host and
+    PostgreSQL logs in the local host.
+
+    With ssh protocol you can use wild card too like with remote
+    mode, ex: ssh://localhost/postgresql-10-main.log*
+    
+    Old syntax to parse remote log file using -r option is still
+    working but is obsolete and might be removed in future versions.
+</pre>
+<p>
+There is a new command line option:
+</p>
+<pre>
+  * Add --exclude-db option to compute report about everything except
+    the specified database.
+</pre>
+</div>
+		<hr />
+		<h3><code>Version 10.1 - 2018-09-12</code></h3>
+                <div class="text-zone">
+                            <p>
+This release of pgBadger is a maintenance release that fixes reports
+in incremental mode and multiprocess with -j option. Log parsing from
+standard input was also broken. If you are using v10.0 please upgrade
+now.
+</p>
+<pre>
+  - Add test on pgbouncer log parser.
+  - Some little performances improvment.
+  - Fix not a valid file descriptor at pgbadger line 12314.
+  - Fix unwanted newline in progressbar at startup.
+  - Remove circleci files from the project.
+  - Remove dependency of bats and jq for the test suite, they are
+    replaced with Test::Simple and JSON::XS.
+  - Add more tests especially for incremental mode and input from
+    stdin that was broken in release 10.0.
+  - Sync pgbadger, pod, and README, and fix some syntax errors.
+    Thanks to Christoph Berg for the patch.
+  - Add documentation on how to install Perl module JSON::XS from
+    apt and yum repositories.
+  - Fix URI for CSS in incremental mode. Thanks to Floris van Nee
+    for the report.
+  - Fix fatal error when looking for log from STDIN. Thanks to
+    Jacek Szpot for the report.
+  - Fixes SED use for OSX builds. Thanks to Steve Newson for the
+    patch.
+  - Fix illegal division by zero in incrental mode. Thanks to
+    aleszeleny for the report.
+  - Replace SQL::Beautify with v3.1 of pgFormatter::Beautify.
+</pre>
+<p>
+Thanks a lot to Etienne Bersac from Dalibo who have initiate the
+pgbadger test suite and added information about contributing in
+the documentation. Unitary tests are still not complete but tests
+of features fixed in this maintenance release have been added.
+</p>
+</div>
+		<hr />
+		<h3><code>Version 10.0 - 2018-09-09</code></h3>
+                <div class="text-zone">
+                            <p>
+pgBadger 10.0 was released today, this release of pgBadger is a
+major release that adds some new features and fix all issues
+reported by users since last release. Every one should upgrade.
+</p>
+<pre>
+  * Add support of pgbouncer syslog log file format.
+  * Add support to all auto_explain format (text, xml, json and yaml).
+  * Add support to %q placeholder in log_line_prefix.
+  * Add jsonlog format of Michael Paquier extension, with -f jsonlog
+    pgbadger will be able to parse the log.
+  * Replace the SQL formatter/beautify with v3.0 of pgFormatter.
+</pre>
+<p>
+There is some new command line options:
+</p>
+<pre>
+  - Add --prettify-json command line option to prettify JSON output.
+  - Add --log-timezone  +/-XX  command line option to set the number
+    of hours from GMT of the timezone that must be used to adjust
+    date/time read from log file before beeing parsed. Note that you
+    might still need to adjust the graph timezone using -Z when the
+    client has not the same timezone.
+  - Add --include-time option to add the ability to choose times that
+    you want to see, instead of excluding all the times you do not
+    want to see (--exclude-time).
+</pre>
+<p>
+The pgBadger project and copyrights has been transferred from Dalibo
+to the author and official maintainer of the project. Please update
+your links:
+</p>
+<pre>
+  - Web site: http://pgbadger.darold.net/
+  - Source code: https://github.com/darold/pgbadger
+</pre>
+<p>
+I want to thanks the great guys at Dalibo for all their investments
+into pgBadger during these years and especially Damien Clochard and
+Jean-paul argudo for their help to promote pgBadger.
+</p>
+<p>
+For the complete list of changes, please checkout the release note on
+https://github.com/darold/pgbadger/blob/master/ChangeLog
+			    </p>
+		</div>
+
+		<hr />
+		<h3><code>pgBadger is back to home - 2018-08-28</code></h3>
+                <div class="text-zone">
+                            <p>
+After one year I'm please to announce that the badger is back to home.
+A new version is coming soon fixing all pending issues and more as usual.
+I built a new website tonight for the occasion.<br>
+Welcome back pgBadger!
+			    </p>
+		</div>
+
+		<hr />
+		<h3><code>Version 9.2 - 2017-07-27</code></h3>
+                <div class="text-zone">
+                            <p>
+This release of pgBadger is a maintenance release that also adds some new features.
+</p>
+<pre>
+  * Add report of checkpoint distance and estimate.
+  * Add support of AWS Redshift keywords to SQL code beautifier.
+  * Add autodetection of log format in remote mode to allow remote
+    parsing of pgbouncer log file together with PostgreSQL log file.
+</pre>
+<p>
+There's also some bugs fixes and features enhancements.
+</p>
+<pre>
+  - Fix reports with histogram that was not showing data upper than
+    the last range.
+  - Fix parsing of journalctl without the the log line number pattern
+    ([%l-n]). Thanks to Christian Schmitt for the report.
+  - Add report of checkpoint distance and estimate. Thanks to jjsantam
+    for the feature request.
+  - Append more information on what is done by script to update CSS
+    and javascript files, tools/updt_embedded_rsc.pl.
+  - Do not warn when all log files are empty and exit with code 0.
+  - Fix build_log_line_prefix_regex() that does not include %n as a
+    lookup in %regex_map. Thanks to ghosthound for the patch.
+  - Change error level of "FATAL: cannot use CSV" to WARNING. Thanks
+    to kong1man for the report.
+  - Fix use of uninitialized value warning. Thanks to Payal for the
+    report.
+  - Add permission denied to error normalization
+  - Update pgbadger to latest commit 5bdc018 of pgFormatter.
+  - Add support for AWS Redshift keywords. Thanks to cavanaug for the
+    feature request.
+  - Fix missing query in temporary file report when the query was
+    canceled. Thanks to Fabrizio de Royes Mello for the report.
+  - Normalize query with binded parameters, replaced with a ?.
+  - Sanity check to avoid end time before start time. Thanks to
+    Christophe Courtois for the patch.
+  - Fix a lot of mystyped words and do some grammatical fixes. Use
+    'pgBadger' where it refers to the program and not the binary file.
+    Also, use "official" expressions such as PgBouncer, GitHub, and
+    CSS. POD file was synced with README. Thanks to Euler Taveira for
+    the patch.
+  - Menu is broken when --disable-type top_cancelled_info test and
+    closing list must be inside disable_type test. While in it, ident
+    disable_lock test. Thanks to Euler Taveira for the patch.
+  - Fix use of uninitialized value. Thanks to johnkrugger for the
+    report.
+  - Remove test to read log file during log format auto-detection when
+    the file is hosted remotly. Thanks to clomdd for the report.
+  - Add autodetection of log format in remote mode to allow remote
+    parsing of pgbouncer log file together with PostgreSQL log file.
+  - Fix number of sessions wrongly increased after log line validation
+    Thanks to Achilleas Mantzios for the report.
+  - Minor reformatting of the pgBadger Description.
+  - Fix repeated info in documentation. Thanks to cscatolini for the patch.
+</pre>
+		</div>
+
+		<hr />
+		<h3><code>Version 9.1 - 2017-01-24</code></h3>
+                <div class="text-zone">
+                            <p>
+This release of pgBadger is a maintenance release that adds some new
+features.
+</p>
+<pre>
+  * Add report of error class distribution when SQLState is available
+    in the log_line_prefix (see %e placeholder).
+  * Update SQL Beautifier to pgFormatter v1.6 code.
+  * Improve error message normalization.
+  * Add --normalized-only option to generate a text file containing all
+    normalized queries found in a log with count.
+  * Allow %c (session id) to replace %p (pid) as unique session id.
+  * Add waiting for lock messages to event reports.
+  * Add --start-monday option to start calendar weeks in Monday
+    instead of default to Sunday.
+</pre>
+<p>
+There's also some bugs fixes and features enhancements.
+</p>
+<pre>
+  - Add report of error class distribution when SQLState is available
+    in the log line prefix. Thanks to jacks33 for the feature request.
+  - Fix incremental global index on resize. Thanks to clomdd for the
+    report.
+  - Fix command tag log_line_prefix placeholder %i to allow space
+    character.
+  - Fix --exclude-line options and removing of obsolete directory
+    when retention is enabled and --noreport is used.
+  - Fix typo in "vacuum activity table". Thanks to Nicolas Gollet for
+    the patch.
+  - Fix autovacuum report. Thanks to Nicolas Gollet for the patch.
+  - Fix author of pgbadger's logo - Damien Cazeils and English in
+    comments. Thanks to Thibaut Madelaine for the patch.
+  - Add information about pgbouncer log format in the -f option.
+    Thanks to clomdd for the report.
+  - Add --normalized-only information in documentation.
+  - Fix broken report of date-time introduced in previous patch.
+  - Fix duration/query association when log_duration=on and
+    log_statement=all. Thanks to Eric Jensen for the report.
+  - Fix normalization of messages about advisory lock. Thanks to
+    Thibaut Madelaine for the report.
+  - Fix report of auto_explain output. Thanks to fch77700 for the
+    report.
+  - Fix unwanted log format auto detection with log entry from stdin.
+    Thanks to Jesus Adolfo Parra for the report.
+  - Add left open parentheses to the "stop" chars of regex to look
+    for db client in the prefix to handle the PostgreSQL client
+    string format that includes source port. Thanks to Jon Nelson
+    for the patch.
+  - Fix some spelling errors. Thanks to Jon Nelson for the patch.
+  - Allow %c (session id) to replace %p (pid) as unique session id.
+    Thanks to Jerryliuk for the report.
+  - Allow pgbadger to parse default log_line_prefix that will be
+    probably used in 10.0: '%m [%p] '
+  - Fix missing first line with interpreter call.
+  - Fix missing Avg values in CSV report. Thanks to Yosuke Tomita
+    for the report.
+  - Fix error message in autodetect_format() method.
+  - Add --start-monday option to start calendar weeks in Monday
+    instead of default to Sunday. Thanks to Joosep Mae for the feature
+    request.
+  - Fix --histo-average option. Thanks to Yves Martin for the report.
+  - Remove plural form of --ssh-option in documentation. Thanks to
+    mark-a-s for the report.
+  - Fix --exclude-time filter and rewrite code to skip unwanted line
+    as well code to update the progress bar. Thanks to Michael
+    Chesterton for the report.
+  - Fix support to %r placeholder in prefix instead of %h.
+</pre>
+		</div>
+
+		<hr />
+		<h3><code>Version 9.0 - 2016-09-02</code></h3>
+                <div class="text-zone">
+                            <p>
+This major release of pgBadger is a port to bootstrap 3 and a version
+upgrade of all resources files (CSS and Javascript). There's also some
+bugs fixes and features enhancements.
+</p>
+<p>
+Backward compatibility with old incremental report might be preserved.
+</p>
+<pre>
+  - Sources and licences of resources files are now on a dedicated
+    subdirectory. A script to update their minified version embedded
+    in pgbager script has been added. Thanks to Christoph Berg for
+    the help and feature request.
+
+  - Try to detect user/database/host from connection strings if
+    log_connection is enabled and log_line_prefix doesn't include
+    them.
+    
+    Extend the regex to autodetect database name, user name, client
+    ip address and application name. The regex now are the following:
+    
+    	db => qr/(?:db|database)=([^,]*)/;
+    	user => qr/(?:user|usr)=([^,]*)/;
+    	client => qr/(?:client|remote|ip|host)=([^,]*)/;
+    	appname => qr/(?:app|application)=([^,]*)/;
+    
+  - Add backward compatibility with older version of pgbadger in
+    incremental mode by creating a subdirectory for new CSS and
+    Javascript files. This subdirectory is named with the major
+    version number of pgbadger.
+    
+  - Increase the size of the pgbadger logo that appears too small
+    with the new font size.
+
+  - Normalize detailed information in all reports.
+
+  - Fix duplicate copy icon in locks report.
+
+  - Fix missing chart on histogram of session time. Thanks to
+    Guillaume Lelarge for the report.
+
+  - Add LICENSE file noting the licenses used by the resource
+    files. Thanks to Christoph Berg for the patch.
+
+  - Add patch to jqplot library to fix an infinite loop when trying
+    to download some charts. Thanks to Julien Tachoires for the help
+    to solve this issue.
+    
+  - Script tools/updt_embedded_rsc.pl will apply the patch to resource
+    file resources/jquery.jqplot.js and doesn't complain if it has
+    already been applied.
+
+  - Remove single last comma at end of pie chart dataset. Thanks to
+    Julien Tachoires for the report.
+
+  - Change display of normalized error
+
+  - Remove unused or auto-generated files
+
+  - Update all resources files (js+css) and create a directory to
+    include source of javascript libraries used in pgbadger. There is
+    also a new script tools/updt_embedded_rsc.pl the can be used to
+    generate the minified version of those files and embedded them
+    into pgbadger.  This script will also embedded the FontAwesome.otf
+    open truetype font into the fontawesome.css file.
+</pre>
+		</div>
+			</div>
+		    </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="title-section" id="download">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h3>DOWNLOAD</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bloc-section" id="download-text">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4 col-sm-12">
+                <div class="text-section">
+			<h3>Official releases</h3>
+                        <p>
+Official release are published to the <a href="https://github.com/darold/pgbadger/releases">GitHub Release page</a> of pgBadger.
+			</p>
+                        <p>
+Not all release are subject to a notification sent to the pgsql-announce mailling list, this is reserved to the main releases.
+			</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                <div class="text-section">
+			<h3>Binary packages</h3>
+                        <p>
+			pgBadger may have a binary package corresponding to your distribution. For RPM packages, thanks to the great work of Devrim GÜNDÜZ, you can find the pgBadger package at the <a href="https://yum.postgresql.org/packages/">PostgreSQL yum repository</a>
+		        </p>
+                        <p>
+			Thanks to Christoph BERG packages for Debian and Ubuntu are available in the <a href="https://wiki.postgresql.org/wiki/Apt">PostgreSQL apt repository</a>
+			</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                <div class="text-section">
+			<h3>Development code</h3>
+                        <p>
+			The latest development code can always be found into the <a href="https://github.com/darold/pgbadger/">pgBadger's GitHub repository</a>
+			</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="title-section" id="license">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h3>LICENSE</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bloc-section" id="license-text">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4 col-sm-12">
+                <div class="text-section">
+			<h3>Pricing</h3>
+                        <p>
+			pgBadger is Free Software and is made fully available free of charge, you can use it as you want without having to pay anything.
+			</p>
+                        <p>
+			Please just pay attention to support the author of pgBadger with your donation, which is purely optional.
+			</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                <div class="text-section">
+			<h3>License</h3>
+                        <p>
+			PostgreSQL is released under the  <a href="http://www.opensource.org/licenses/postgresql">PostgreSQL License</a>, a liberal Open Source license, similar to the BSD or MIT licenses.
+		        </p>
+                        <p>
+			Copyright &copy; 2012-2020 Gilles Darold.
+		        </p>
+                        <p>
+A modified version of the SQL::Beautify Perl Module is embedded in pgBadger with copyright (C) 2009 by Jonas Kramer published under the terms of the Artistic License 2.0.
+			</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                <div class="text-section">
+			<h3>Development effort</h3>
+                        <p>
+Source Lines of Perl Code: 19,678
+			</p>
+                        <p>
+Total Estimated Cost to Develop: $ 617,052
+			</p>
+                        <p>
+(Generated using David A. Wheeler's 'SLOCCount'.)
+			</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="title-section" id="support">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h3>SUPPORT</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bloc-section" id="support-text">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4 col-sm-12">
+                <div class="text-section">
+			<h3>Feature request & Bugs</h3>
+                        <p>
+			Please report any bugs, patches, discussion, etc. using the GitHub tools at <a href="https://github.com/darold/pgbadger/">https://github.com/darold/pgbadger/</a>.
+			</p>
+                        <p>
+If you need new features or you think something is missing, please send your comments and requests. This helps a lot to develop a better/useful tool.
+			</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                <div class="text-section">
+			<h3>How to contribute</h3>
+                        <p>
+			Any contribution to build a better tool is welcome, you just have to send your ideas, features request or patches using the GitHub tools at <a href="https://github.com/darold/pgbadger/">https://github.com/darold/pgbadger/</a>.
+		        </p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                <div class="text-section">
+			<h3>Commercial support</h3>
+                        <p>
+			For a complete list of commercial support near of your place take a look at the <a href="http://www.postgresql.org/support/professional_support">PostgreSQL Professional Services</a> page, they all do great job and most of them can help you.
+			</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="title-section" id="reports">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h3>SAMPLE REPORTS</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bloc-section" id="support-text">
+
+    <div class="container">
+        <div class="col-12">
+             <div class="text-section">
+		<h3><b>sample reports</b></h3>
+                <p>
+		The sample report generated by pgBadger can be found <a href="http://pgbadger.darold.net/examples/sample.html">here</a> with pgbouncer statistics.
+		</p>
+                <p>
+		Incremental report generated by pgBadger can be found <a href="http://pgbadger.darold.net/examples/report/index.html">here</a>.
+		</p>
+                <p>
+		Report of errors/events only can be found <a href="http://pgbadger.darold.net/examples/errors.html">here</a>.
+		</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="footer" id="footer">
+    <div class="container">
+         <div class="col-12">
+            <p class="copyright">
+            &copy; Copyright 2012-2018 Gilles Darold - All Rights Reserved
+            </p>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
