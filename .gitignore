@@ -3,5 +3,6 @@
 /.hugo_build.lock
 /.hugo_cache/
 /.DS_Store
+/.idea/
 __pycache__/
 *.py[cod]

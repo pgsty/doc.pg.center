@@ -7,7 +7,7 @@ sections:
 
 hero:
   class: pgsql-hero
-  eyebrow: Four independent PostgreSQL manuals · English + 中文
+  eyebrow: Six independent component manuals · English + 中文
   title_lines:
     - words:
         - { mark: P, color: blue, text: ostgreSQL }
@@ -15,7 +15,7 @@ hero:
         - { text: Community }
     - words:
         - { text: Components }
-  lead: Four focused documentation roots for **Patroni, pgBackRest, PgBouncer, and pgBadger**.
+  lead: Six focused documentation roots for **Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy, and etcd**.
   note: Pick a component and go straight to its guides, references, releases, and support material.
   note_icon: fa-solid fa-circle-check
   actions:
@@ -29,32 +29,43 @@ hero:
       style: ghost
 
 components:
+  class: pgsql-components
   eyebrow: Choose a documentation root
-  title: Four components. Four direct entrances.
-  text: Each component has its own sidebar, reading order, page outline, and local search context.
-  columns: 4
+  title: Six components. Six direct entrances.
+  text: Each component has its own sidebar, reading order, page outline, and local search context. HAProxy and etcd are English-only for now.
+  columns: 3
   link_label: Read the docs
   items:
     - title: Patroni
       meta: High availability
       icon: fa-solid fa-heart-pulse
       desc: Build and operate PostgreSQL clusters with distributed consensus, health checks, and automatic failover.
-      url: docs/patroni/
+      url: patroni/
     - title: pgBackRest
       meta: Backup & recovery
       icon: fa-solid fa-box-archive
       desc: Design reliable backup, restore, archive, retention, and point-in-time recovery workflows.
-      url: docs/pgbackrest/
+      url: pgbackrest/
     - title: PgBouncer
       meta: Connection pooling
       icon: fa-solid fa-diagram-project
       desc: Reduce connection overhead and understand session, transaction, and statement pooling behavior.
-      url: docs/pgbouncer/
+      url: pgbouncer/
     - title: pgBadger
       meta: Log analysis
       icon: fa-solid fa-chart-line
       desc: Turn PostgreSQL and PgBouncer logs into query, workload, error, and operational reports.
-      url: docs/pgbadger/
+      url: pgbadger/
+    - title: HAProxy
+      meta: Load balancing · English
+      icon: fa-solid fa-shuffle
+      desc: Read the complete HAProxy 3.4 Starter, Configuration, and Management manuals in structured Markdown.
+      url: haproxy/
+    - title: etcd
+      meta: Consensus & coordination · English
+      icon: fa-solid fa-database
+      desc: Operate a strongly consistent distributed key-value store and understand its APIs, Raft model, upgrades, and internals.
+      url: etcd/
 
 capabilities:
   eyebrow: Component guides
@@ -63,7 +74,7 @@ capabilities:
   items:
     - ref: 01 / HIGH AVAILABILITY
       title: Patroni
-      url: docs/patroni/
+      url: patroni/
       motto: A template for PostgreSQL high availability
       bullets:
         - Coordinates leader election and cluster state through a distributed configuration store.
@@ -76,15 +87,15 @@ capabilities:
         columns: 2
         aria_label: Patroni documentation shortcuts
         items:
-          - { icon: fa-solid fa-download, title: Installation, url: docs/patroni/installation/ }
-          - { icon: fa-solid fa-sliders, title: Configuration, url: docs/patroni/config/ }
-          - { icon: fa-solid fa-terminal, title: patronictl, url: docs/patroni/patronictl/ }
-          - { icon: fa-solid fa-plug, title: REST API, url: docs/patroni/rest_api/ }
-          - { icon: fa-solid fa-arrows-rotate, title: Replication modes, url: docs/patroni/replication_modes/ }
-          - { icon: fa-solid fa-circle-question, title: FAQ, url: docs/patroni/faq/ }
+          - { icon: fa-solid fa-download, title: Installation, url: patroni/installation/ }
+          - { icon: fa-solid fa-sliders, title: Configuration, url: patroni/config/ }
+          - { icon: fa-solid fa-terminal, title: patronictl, url: patroni/patronictl/ }
+          - { icon: fa-solid fa-plug, title: REST API, url: patroni/rest_api/ }
+          - { icon: fa-solid fa-arrows-rotate, title: Replication modes, url: patroni/replication_modes/ }
+          - { icon: fa-solid fa-circle-question, title: FAQ, url: patroni/faq/ }
     - ref: 02 / BACKUP & RECOVERY
       title: pgBackRest
-      url: docs/pgbackrest/
+      url: pgbackrest/
       motto: Reliable backup, archive, restore, and point-in-time recovery
       bullets:
         - Supports full, differential, incremental, and block-level backups with parallel processing.
@@ -97,15 +108,15 @@ capabilities:
         columns: 2
         aria_label: pgBackRest documentation shortcuts
         items:
-          - { icon: fa-solid fa-route, title: User guide, url: docs/pgbackrest/user-guide/ }
-          - { icon: fa-brands fa-redhat, title: RHEL guide, url: docs/pgbackrest/user-guide-rhel/ }
-          - { icon: fa-solid fa-sliders, title: Configuration, url: docs/pgbackrest/configuration/ }
-          - { icon: fa-solid fa-terminal, title: Commands, url: docs/pgbackrest/command/ }
-          - { icon: fa-solid fa-tags, title: Releases, url: docs/pgbackrest/release/ }
-          - { icon: fa-solid fa-circle-question, title: FAQ, url: docs/pgbackrest/faq/ }
+          - { icon: fa-solid fa-route, title: User guide, url: pgbackrest/user-guide/ }
+          - { icon: fa-brands fa-redhat, title: RHEL guide, url: pgbackrest/user-guide-rhel/ }
+          - { icon: fa-solid fa-sliders, title: Configuration, url: pgbackrest/configuration/ }
+          - { icon: fa-solid fa-terminal, title: Commands, url: pgbackrest/command/ }
+          - { icon: fa-solid fa-tags, title: Releases, url: pgbackrest/release/ }
+          - { icon: fa-solid fa-circle-question, title: FAQ, url: pgbackrest/faq/ }
     - ref: 03 / CONNECTION POOLING
       title: PgBouncer
-      url: docs/pgbouncer/
+      url: pgbouncer/
       motto: A lightweight connection pooler for PostgreSQL
       bullets:
         - Reuses PostgreSQL connections to reduce backend startup cost and connection pressure.
@@ -118,15 +129,15 @@ capabilities:
         columns: 2
         aria_label: PgBouncer documentation shortcuts
         items:
-          - { icon: fa-solid fa-list-check, title: Features, url: docs/pgbouncer/features/ }
-          - { icon: fa-solid fa-download, title: Download, url: docs/pgbouncer/download/ }
-          - { icon: fa-solid fa-wrench, title: Installation, url: docs/pgbouncer/install/ }
-          - { icon: fa-solid fa-terminal, title: Usage, url: docs/pgbouncer/usage/ }
-          - { icon: fa-solid fa-sliders, title: Configuration, url: docs/pgbouncer/config/ }
-          - { icon: fa-solid fa-circle-question, title: FAQ, url: docs/pgbouncer/faq/ }
+          - { icon: fa-solid fa-list-check, title: Features, url: pgbouncer/features/ }
+          - { icon: fa-solid fa-download, title: Download, url: pgbouncer/download/ }
+          - { icon: fa-solid fa-wrench, title: Installation, url: pgbouncer/install/ }
+          - { icon: fa-solid fa-terminal, title: Usage, url: pgbouncer/usage/ }
+          - { icon: fa-solid fa-sliders, title: Configuration, url: pgbouncer/config/ }
+          - { icon: fa-solid fa-circle-question, title: FAQ, url: pgbouncer/faq/ }
     - ref: 04 / LOG ANALYSIS
       title: pgBadger
-      url: docs/pgbadger/
+      url: pgbadger/
       motto: Fast PostgreSQL and PgBouncer log analysis
       bullets:
         - Parses many PostgreSQL log formats, compressed files, remote inputs, and PgBouncer logs.
@@ -139,14 +150,58 @@ capabilities:
         columns: 2
         aria_label: pgBadger documentation shortcuts
         items:
-          - { icon: fa-solid fa-download, title: Download, url: docs/pgbadger/download/ }
-          - { icon: fa-solid fa-terminal, title: Command line, url: docs/pgbadger/command-line/ }
-          - { icon: fa-solid fa-file-lines, title: PostgreSQL logging, url: docs/pgbadger/postgresql-logging/ }
-          - { icon: fa-solid fa-calendar-days, title: Incremental reports, url: docs/pgbadger/incremental-reports/ }
-          - { icon: fa-solid fa-file-export, title: Output formats, url: docs/pgbadger/output-formats/ }
-          - { icon: fa-solid fa-chart-column, title: Sample reports, url: docs/pgbadger/sample-reports/ }
-          - { icon: fa-solid fa-tags, title: Releases, url: docs/pgbadger/releases/ }
-          - { icon: fa-solid fa-life-ring, title: Support, url: docs/pgbadger/support/ }
+          - { icon: fa-solid fa-download, title: Download, url: pgbadger/download/ }
+          - { icon: fa-solid fa-terminal, title: Command line, url: pgbadger/command-line/ }
+          - { icon: fa-solid fa-file-lines, title: PostgreSQL logging, url: pgbadger/postgresql-logging/ }
+          - { icon: fa-solid fa-calendar-days, title: Incremental reports, url: pgbadger/incremental-reports/ }
+          - { icon: fa-solid fa-file-export, title: Output formats, url: pgbadger/output-formats/ }
+          - { icon: fa-solid fa-chart-column, title: Sample reports, url: pgbadger/sample-reports/ }
+          - { icon: fa-solid fa-tags, title: Releases, url: pgbadger/releases/ }
+          - { icon: fa-solid fa-life-ring, title: Support, url: pgbadger/support/ }
+    - ref: 05 / LOAD BALANCING
+      title: HAProxy
+      url: haproxy/
+      motto: Fast, reliable TCP and HTTP traffic management
+      bullets:
+        - Preserves the complete official 3.4 Starter Guide as nine focused concept and feature topics.
+        - Splits the full 33,031-line Configuration Manual into its 12 native reference chapters.
+        - Splits the Management Guide into 13 operational chapters, including the runtime CLI and debugging.
+      value: Learn the architecture, look up every configuration family, and operate HAProxy from one component root.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: HAProxy documentation shortcuts
+        items:
+          - { icon: fa-solid fa-compass, title: Starter Guide, url: haproxy/load-balancing/ }
+          - { icon: fa-solid fa-file-code, title: Configuration Manual, url: haproxy/http-fundamentals/ }
+          - { icon: fa-solid fa-right-left, title: Proxy directives, url: haproxy/proxies/ }
+          - { icon: fa-solid fa-filter, title: ACLs & samples, url: haproxy/acls-and-samples/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: Management Guide, url: haproxy/prerequisites/ }
+          - { icon: fa-solid fa-chart-line, title: Runtime CLI & stats, url: haproxy/statistics-and-monitoring/ }
+          - { icon: fa-solid fa-bug, title: Debugging, url: haproxy/debugging-and-performance/ }
+          - { icon: fa-solid fa-shield-halved, title: Security, url: haproxy/security/ }
+    - ref: 06 / CONSENSUS & COORDINATION
+      title: etcd
+      url: etcd/
+      motto: A strongly consistent distributed key-value store
+      bullets:
+        - Coordinates distributed systems with a durable key-value API built on the Raft consensus algorithm.
+        - Covers cluster configuration, security, maintenance, monitoring, recovery, and performance tuning.
+        - Documents client APIs, developer tasks, version upgrades, downgrades, and internal design.
+      value: Start with the quickstart, then move to the operations guide and the v3 API reference.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: etcd documentation shortcuts
+        items:
+          - { icon: fa-solid fa-bolt, title: Quickstart, url: etcd/quickstart/ }
+          - { icon: fa-solid fa-download, title: Install, url: etcd/install/ }
+          - { icon: fa-solid fa-sliders, title: Configuration, url: etcd/op-guide/configuration/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: Maintenance, url: etcd/op-guide/maintenance/ }
+          - { icon: fa-solid fa-code, title: API, url: etcd/learning/api/ }
+          - { icon: fa-solid fa-arrow-up-right-dots, title: Upgrade to 3.7, url: etcd/upgrades/upgrade_3_7/ }
 
 faq:
   eyebrow: FAQ
@@ -158,24 +213,4 @@ faq:
     - question: Is pgsql.cc an official PostgreSQL website?
       answer: No. pgsql.cc is an independent community documentation project. It links back to each upstream project and keeps product names and technical context intact.
     - question: How are the English and Chinese pages organized?
-      answer: Every imported page has a paired translation at the same logical route. The language switcher keeps readers on the corresponding page whenever both versions exist.
-
-footer:
-  brand:
-    name: PGSQL.CC
-    tagline: PostgreSQL Community Components
-    slogan: Practical, bilingual documentation for the community stack.
-  columns:
-    - title: Components
-      links:
-        - { label: Patroni, url: docs/patroni/ }
-        - { label: pgBackRest, url: docs/pgbackrest/ }
-        - { label: PgBouncer, url: docs/pgbouncer/ }
-        - { label: pgBadger, url: docs/pgbadger/ }
-    - title: Upstream
-      links:
-        - { label: PostgreSQL.org, url: https://www.postgresql.org/, external: true }
-        - { label: Patroni, url: https://github.com/patroni/patroni, external: true }
-        - { label: pgBackRest, url: https://pgbackrest.org/, external: true }
-        - { label: PgBouncer, url: https://www.pgbouncer.org/, external: true }
-        - { label: pgBadger, url: https://pgbadger.darold.net/, external: true }
+      answer: Patroni, pgBackRest, PgBouncer, and pgBadger have paired translations at the same logical route. HAProxy 3.4 and etcd 3.7 are English-only for now.

@@ -25,10 +25,19 @@ def compare(label: str, english: list[str], chinese: list[str], errors: list[str
 
 def main() -> int:
     project_dir = Path(__file__).resolve().parent.parent
-    docs_dir = project_dir / "content" / "docs"
+    content_dir = project_dir / "content"
+    component_dirs = [
+        content_dir / component
+        for component in ("patroni", "pgbackrest", "pgbouncer", "pgbadger")
+    ]
     errors: list[str] = []
 
-    for chinese_path in sorted(docs_dir.rglob("*.zh.md")):
+    chinese_paths = sorted(
+        path
+        for component_dir in component_dirs
+        for path in component_dir.rglob("*.zh.md")
+    )
+    for chinese_path in chinese_paths:
         english_path = chinese_path.with_name(chinese_path.name.replace(".zh.md", ".md"))
         if not english_path.is_file():
             errors.append(f"missing English pair for {chinese_path.relative_to(project_dir)}")
@@ -42,7 +51,7 @@ def main() -> int:
             errors,
         )
 
-    patroni_dir = docs_dir / "patroni"
+    patroni_dir = content_dir / "patroni"
     english_releases = (patroni_dir / "releases.md").read_text(encoding="utf-8")
     chinese_releases = (patroni_dir / "releases.zh.md").read_text(encoding="utf-8")
     compare(
@@ -76,7 +85,7 @@ def main() -> int:
             print(f"- {error}", file=sys.stderr)
         return 1
 
-    pair_count = sum(1 for _ in docs_dir.rglob("*.zh.md"))
+    pair_count = len(chinese_paths)
     print(f"Validated source parity for {pair_count} bilingual documentation pairs.")
     return 0
 

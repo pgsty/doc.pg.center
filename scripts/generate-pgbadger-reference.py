@@ -9,7 +9,7 @@ from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parent.parent
 SOURCE = PROJECT / "sources" / "pgbadger" / "upstream"
-CONTENT = PROJECT / "content" / "docs" / "pgbadger"
+CONTENT = PROJECT / "content" / "pgbadger"
 COMMIT = "a1ad95a035a0c2d246fe632eb1c361d4bde0ddae"
 SOURCE_URL = f"https://github.com/darold/pgbadger/tree/{COMMIT}"
 
@@ -81,6 +81,7 @@ description: "Complete pgBadger command syntax, options, remote input, return co
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [Reference]
+aliases: [/docs/pgbadger/command-line/]
 ---
 
 This page preserves the command reference generated from the pinned upstream source. Option names and help text remain verbatim so they can be compared directly with `pgbadger --help`.
@@ -96,6 +97,7 @@ description: "完整的 pgBadger 命令语法、选项、远程输入、返回�
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [参考]
+aliases: [/docs/pgbadger/command-line/]
 ---
 
 本页保留固定上游源码生成的完整命令参考。为了能与 `pgbadger --help` 逐项核对，参数名、帮助文字和命令示例均保留英文原文。
@@ -154,6 +156,7 @@ description: "Complete upstream release notes for the pgBadger {major}.x series"
 icon: fa-solid fa-code-branch
 module: [PGBADGER]
 categories: [Release]
+aliases: [/docs/pgbadger/releases/{major}/]
 ---
 
 These entries preserve the complete upstream change record for pgBadger {major}.x, newest first.
@@ -169,6 +172,7 @@ description: "pgBadger {major}.x 系列的完整上游版本记录"
 icon: fa-solid fa-code-branch
 module: [PGBADGER]
 categories: [版本发布]
+aliases: [/docs/pgbadger/releases/{major}/]
 ---
 
 本页按从新到旧的顺序保留 pgBadger {major}.x 的完整上游变更记录。为确保版本、参数、提交者致谢和兼容性描述不被转述改变，正文保留英文原文。

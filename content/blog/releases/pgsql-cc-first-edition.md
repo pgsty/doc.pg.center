@@ -12,10 +12,10 @@ icon: fa-solid fa-book-open
 
 The first edition of **PostgreSQL Community Components** brings four operational layers into one bilingual reading experience, with 78 pages in each language:
 
-- [Patroni](/docs/patroni/) for high availability, distributed consensus, and controlled failover;
-- [pgBackRest](/docs/pgbackrest/) for backup, archiving, restore, and point-in-time recovery;
-- [PgBouncer](/docs/pgbouncer/) for lightweight PostgreSQL connection pooling.
-- [pgBadger](/docs/pgbadger/) for PostgreSQL and PgBouncer log analysis and reporting.
+- [Patroni](/patroni/) for high availability, distributed consensus, and controlled failover;
+- [pgBackRest](/pgbackrest/) for backup, archiving, restore, and point-in-time recovery;
+- [PgBouncer](/pgbouncer/) for lightweight PostgreSQL connection pooling.
+- [pgBadger](/pgbadger/) for PostgreSQL and PgBouncer log analysis and reporting.
 
 Each collection preserves the upstream project's terminology, page hierarchy, source references, and detailed reference material. English and Simplified Chinese pages share the same logical routes, so the language switcher can keep readers on the subject they are already reading.
 
