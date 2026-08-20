@@ -12,10 +12,10 @@ icon: fa-solid fa-book-open
 
 **PostgreSQL 社区组件**第一期将生产运行链路上的四个关键层次，整理进同一套双语阅读体验，中英文各 78 页：
 
-- [Patroni](/zh/docs/patroni/)：高可用、分布式共识与可控故障转移；
-- [pgBackRest](/zh/docs/pgbackrest/)：备份、归档、恢复与时间点恢复；
-- [PgBouncer](/zh/docs/pgbouncer/)：轻量级 PostgreSQL 连接池。
-- [pgBadger](/zh/docs/pgbadger/)：分析 PostgreSQL 与 PgBouncer 日志并生成运行报告。
+- [Patroni](/zh/patroni/)：高可用、分布式共识与可控故障转移；
+- [pgBackRest](/zh/pgbackrest/)：备份、归档、恢复与时间点恢复；
+- [PgBouncer](/zh/pgbouncer/)：轻量级 PostgreSQL 连接池。
+- [pgBadger](/zh/pgbadger/)：分析 PostgreSQL 与 PgBouncer 日志并生成运行报告。
 
 每套文档都保留上游项目的术语、页面层级、来源引用与完整参考资料。英文和简体中文页面使用相同的逻辑路由，因此语言切换器可以让读者停留在正在阅读的同一主题。
 

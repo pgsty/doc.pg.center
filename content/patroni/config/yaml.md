@@ -1,0 +1,510 @@
+---
+title: "YAML Configuration Settings"
+linkTitle: "YAML Config"
+weight: 10
+icon: fa-solid fa-code
+description: "Complete reference for Patroni YAML configuration options and sections."
+module: [PATRONI]
+categories: [Reference]
+aliases: [/docs/patroni/config/yaml/]
+---
+
+> Source: https://patroni.readthedocs.io/en/latest/yaml_configuration.html
+
+<a id="yaml"></a>
+
+--------
+
+## Global/Universal
+
+- **thread_pool_size**: size of thread pool used by Patroni to execute asynchronous tasks and communicate via REST API with other members during leader race or failsafe checks. Minimal value is `5`, default value is `5`.
+- **thread_stack_size**: specifies the stack size to be used for threads started by Patroni. Value must be aligned by `64kB`. Minimal value is `64kB`, default value (set by Patroni) is `512kB`.
+- **name**: the name of the host. Must be unique for the cluster. The value `__patroni_strict_sync_replica_placeholder__` is reserved for internal use by Patroni and cannot be used as a node name.
+- **namespace**: path within the configuration store where Patroni will keep information about the cluster. Default value: "/service"
+- **scope**: cluster name
+
+<a id="log_settings"></a>
+
+--------
+
+## Log
+
+- **type**: sets the format of logs. Can be either **plain** or **json**. To use **json** format, you must have the [jsonlogger](/patroni/installation#extras) installed. The default value is **plain**.
+- **level**: sets the general logging level. Default value is **INFO** (see [the docs for Python logging](https://docs.python.org/3.6/library/logging.html#levels))
+- **traceback_level**: sets the level where tracebacks will be visible. Default value is **ERROR**. Set it to **DEBUG** if you want to see tracebacks only if you enable **log.level=DEBUG**.
+- **format**: sets the log formatting string. If the log type is **plain**, the log format should be a string. Refer to [the LogRecord attributes](https://docs.python.org/3.6/library/logging.html#logrecord-attributes) for available attributes. If the log type is **json**, the log format can be a list in addition to a string. Each list item should correspond to LogRecord attributes. Be cautious that only the field name is required, and the **%(** and **)** should be omitted. If you wish to print a log field with a different key name, use a dictionary where the dictionary key is the log field, and the value is the name of the field you want to be printed in the log. Default value is **%(asctime)s %(levelname)s: %(message)s**
+- **dateformat**: sets the datetime formatting string. (see the [formatTime() documentation](https://docs.python.org/3.6/library/logging.html#logging.Formatter.formatTime))
+- **static_fields**: add additional fields to the log. This option is only available when the log type is set to **json**.
+- **max_queue_size**: Patroni is using two-step logging. Log records are written into the in-memory queue and there is a separate thread which pulls them from the queue and writes to stderr or file. The maximum size of the internal queue is limited by default by **1000** records, which is enough to keep logs for the past 1h20m.
+- **dir**: Directory to write application logs to. The directory must exist and be writable by the user executing Patroni. If you set this value, the application will retain 4 25MB logs by default. You can tune those retention values with `file_num` and `file_size` (see below).
+- **mode**: Permissions for log files (for example, `0644`). If not specified, permissions will be set based on the current umask value.
+- **file_num**: The number of application logs to retain.
+- **file_size**: Size of patroni.log file (in bytes) that triggers a log rolling.
+- **loggers**: This section allows redefining logging level per python module
+  - **patroni.postmaster: WARNING**
+  - **urllib3: DEBUG**
+- **deduplicate_heartbeat_logs**: If set to `true`, successive heartbeat logs that are identical shall not be output. Default value is `false`.
+
+> [!WARNING]
+> The time the HA loop executes at can be very valuable information in diagnosing failovers due to resource exhaustion and similar problems. When `deduplicate_heartbeat_logs` is set to `true` there will be no log generated for the HA loop execution (unless the leader changes) and hence this potentially useful information will not be available from the logs.
+
+Here is an example of how to config patroni to log in json format.
+
+```yaml
+log:
+   type: json
+   format:
+      - message
+      - module
+      - asctime: '@timestamp'
+      - levelname: level
+   static_fields:
+      app: patroni
+```
+
+<a id="bootstrap_settings"></a>
+
+--------
+
+## Bootstrap configuration
+
+> [!NOTE]
+> Once Patroni has initialized the cluster for the first time and settings have been stored in the DCS, all future changes to the `bootstrap.dcs` section of the YAML configuration will not take any effect! If you want to change them please use either [patronictl_edit_config](/patroni/patronictl#patronictl_edit_config) or the Patroni [REST API](/patroni/rest_api#rest_api).
+
+- **bootstrap**:
+  - **dcs**: This section will be written into <span class="title-ref">/\<namespace\>/\<scope\>/config</span> of the given configuration store after initializing the new cluster. The global dynamic configuration for the cluster. You can put any of the parameters described in the [Dynamic Configuration settings](/patroni/config/dynamic#dynamic) under `bootstrap.dcs` and after Patroni has initialized (bootstrapped) the new cluster, it will write this section into <span class="title-ref">/\<namespace\>/\<scope\>/config</span> of the configuration store.
+
+  - **method**: custom script to use for bootstrapping this cluster.
+
+    See [custom bootstrap methods documentation](/patroni/replica_bootstrap#custom_bootstrap) for details. When `initdb` is specified revert to the default `initdb` command. `initdb` is also triggered when no `method` parameter is present in the configuration file.
+
+  - **initdb**: (optional) list options to be passed on to initdb.
+
+    - **- data-checksums**: Must be enabled when pg_rewind is needed on 9.3.
+    - **- encoding: UTF8**: default encoding for new databases.
+    - **- locale: UTF8**: default locale for new databases.
+
+  - **post_bootstrap** or **post_init**: An additional script that will be executed after initializing the cluster. The script receives a connection string URL (with the cluster superuser as a user name). The PGPASSFILE variable is set to the location of pgpass file.
+
+<a id="citus_settings"></a>
+
+--------
+
+## Citus
+
+Enables integration Patroni with [Citus](https://docs.citusdata.com). If configured, Patroni will take care of registering Citus worker nodes on the coordinator. You can find more information about Citus support [here](/patroni/citus#citus).
+
+- **group**: the Citus group id, integer. Use `0` for coordinator and `1`, `2`, etc... for workers
+- **database**: the database where [citus](/patroni/citus#citus) extension should be created. Must be the same on the coordinator and all workers. Currently only one database is supported.
+
+<a id="consul_settings"></a>
+
+--------
+
+## Consul
+
+Most of the parameters are optional, but you have to specify one of the **host** or **url**
+
+- **host**: the host:port for the Consul local agent.
+- **url**: url for the Consul local agent, in format: http(s)://host:port.
+- **port**: (optional) Consul port.
+- **scheme**: (optional) **http** or **https**, defaults to **http**.
+- **token**: (optional) ACL token.
+- **verify**: (optional) whether to verify the SSL certificate for HTTPS requests.
+- **cacert**: (optional) The ca certificate. If present it will enable validation.
+- **cert**: (optional) file with the client certificate.
+- **key**: (optional) file with the client key. Can be empty if the key is part of **cert**.
+- **dc**: (optional) Datacenter to communicate with. By default the datacenter of the host is used.
+- **consistency**: (optional) Select consul consistency mode. Possible values are `default`, `consistent`, or `stale` (more details in [consul API reference](https://www.consul.io/api/features/consistency.html/))
+- **checks**: (optional) list of Consul health checks used for the session. By default an empty list is used.
+- **register_service**: (optional) whether or not to register a service with the name defined by the scope parameter and the tag master, primary, replica, or standby-leader depending on the node's role. Defaults to **false**.
+- **service_tags**: (optional) additional static tags to add to the Consul service apart from the role (`primary`/`replica`/`standby-leader`). By default an empty list is used.
+- **service_check_interval**: (optional) how often to perform health check against registered url. Defaults to '5s'.
+- **service_check_tls_server_name**: (optional) override SNI host when connecting via TLS, see also [consul agent check API reference](https://www.consul.io/api-docs/agent/check#tlsservername).
+
+The `token` needs to have the following ACL permissions:
+
+    service_prefix "${scope}" {
+        policy = "write"
+    }
+    key_prefix "${namespace}/${scope}" {
+        policy = "write"
+    }
+    session_prefix "" {
+        policy = "write"
+    }
+
+--------
+
+## Etcd
+
+Most of the parameters are optional, but you have to specify one of the **host**, **hosts**, **url**, **proxy** or **srv**
+
+- **host**: the host:port for the etcd endpoint.
+- **hosts**: list of etcd endpoint in format host1:port1,host2:port2,etc... Could be a comma separated string or an actual yaml list.
+- **use_proxies**: If this parameter is set to true, Patroni will consider **hosts** as a list of proxies and will not perform a topology discovery of etcd cluster.
+- **url**: url for the etcd.
+- **proxy**: proxy url for the etcd. If you are connecting to the etcd using proxy, use this parameter instead of **url**.
+- **srv**: Domain to search the SRV record(s) for cluster autodiscovery. Patroni will try to query these SRV service names for specified domain (in that order until first success): `_etcd-client-ssl`, `_etcd-client`, `_etcd-ssl`, `_etcd`, `_etcd-server-ssl`, `_etcd-server`. If SRV records for `_etcd-server-ssl` or `_etcd-server` are retrieved then ETCD peer protocol is used do query ETCD for available members. Otherwise hosts from SRV records will be used.
+- **srv_suffix**: Configures a suffix to the SRV name that is queried during discovery. Use this flag to differentiate between multiple etcd clusters under the same domain. Works only with conjunction with **srv**. For example, if `srv_suffix: foo` and `srv: example.org` are set, the following DNS SRV query is made:`_etcd-client-ssl-foo._tcp.example.com` (and so on for every possible ETCD SRV service name).
+- **protocol**: (optional) http or https, if not specified http is used. If the **url** or **proxy** is specified - will take protocol from them.
+- **username**: (optional) username for etcd authentication.
+- **password**: (optional) password for etcd authentication.
+- **cacert**: (optional) The ca certificate. If present it will enable validation.
+- **cert**: (optional) file with the client certificate.
+- **key**: (optional) file with the client key. Can be empty if the key is part of **cert**.
+
+--------
+
+## Etcdv3
+
+If you want that Patroni works with Etcd cluster via protocol version 3, you need to use the `etcd3` section in the Patroni configuration file. All configuration parameters are the same as for `etcd`.
+
+> [!WARNING]
+> Keys created with protocol version 2 are not visible with protocol version 3 and the other way around, therefore it is not possible to switch from `etcd` to `etcd3` just by updating Patroni config file. In addition, Patroni uses Etcd's gRPC-gateway (proxy) to communicate with the V3 API, which means that TLS common name authentication is not possible.
+
+--------
+
+## ZooKeeper
+
+- **hosts**: List of ZooKeeper cluster members in format: \['host1:port1', 'host2:port2', 'etc...'\].
+- **use_ssl**: (optional) Whether SSL is used or not. Defaults to `false`. If set to `false`, all SSL specific parameters are ignored.
+- **cacert**: (optional) The CA certificate. If present it will enable validation.
+- **cert**: (optional) File with the client certificate.
+- **key**: (optional) File with the client key.
+- **key_password**: (optional) The client key password.
+- **verify**: (optional) Whether to verify certificate or not. Defaults to `true`.
+- **set_acls**: (optional) If set, configures Kazoo to apply a default ACL to each ZNode that it creates. ACLs can use either the `x509` schema (default) or other supported ZooKeeper schemes such as `digest`. They should be specified as a dictionary where the key is the full principal (optionally prefixed with the scheme) and the value is a list of permissions. Permissions may be one or more of `CREATE`, `READ`, `WRITE`, `DELETE`, `ADMIN`, or `ALL`. For example, `set_acls: {CN=principal1: [CREATE, READ], digest:principal2:+pjROuBuuwNNSujKyH8dGcEnFPQ=: [ALL]}`.
+- **auth_data**: (optional) Authentication credentials to use for the connection. Should be a dictionary in the form that `scheme` is the key and `credential` is the value. Defaults to empty dictionary.
+
+> [!NOTE]
+> It is required to install `kazoo>=2.6.0` to support SSL.
+
+--------
+
+## Exhibitor
+
+- **hosts**: initial list of Exhibitor (ZooKeeper) nodes in format: 'host1,host2,etc...'. This list updates automatically whenever the Exhibitor (ZooKeeper) cluster topology changes.
+- **poll_interval**: how often the list of ZooKeeper and Exhibitor nodes should be updated from Exhibitor.
+- **port**: Exhibitor port.
+
+<a id="kubernetes_settings"></a>
+
+--------
+
+## Kubernetes
+
+- **bypass_api_service**: (optional) When communicating with the Kubernetes API, Patroni is usually relying on the [kubernetes](/patroni/kubernetes#kubernetes) service, the address of which is exposed in the pods via the `KUBERNETES_SERVICE_HOST` environment variable. If `bypass_api_service` is set to `true`, Patroni will resolve the list of API nodes behind the service and connect directly to them.
+- **namespace**: (optional) Kubernetes namespace where Patroni pod is running. Default value is `default`.
+- **labels**: Labels in format `{label1: value1, label2: value2}`. These labels will be used to find existing objects (Pods and either Endpoints or ConfigMaps) associated with the current cluster. Also Patroni will set them on every object (Endpoint or ConfigMap) it creates.
+- **scope_label**: (optional) name of the label containing cluster name. Default value is `cluster-name`.
+- **bootstrap_labels**: (optional) Labels in format `{label1: value1, label2: value2}`. These labels will be assigned to a Patroni pod when its state is either `initializing new cluster`, `running custom bootstrap script`, `starting after custom bootstrap` or `creating replica`.
+- **role_label**: (optional) name of the label containing role (`primary`, `replica`, or other custom value). Patroni will set this label on the pod it runs in. Default value is `role`.
+- **leader_label_value**: (optional) value of the pod label when Postgres role is `primary`. Default value is `primary`.
+- **follower_label_value**: (optional) value of the pod label when Postgres role is `replica`. Default value is `replica`.
+- **standby_leader_label_value**: (optional) value of the pod label when Postgres role is `standby_leader`. Default value is `primary`.
+- **tmp_role_label**: (optional) name of the temporary label containing role (`primary` or `replica`). Value of this label will always use the default of corresponding role. Set only when necessary.
+- **use_endpoints**: (optional) if set to true, Patroni will use Endpoints instead of ConfigMaps to run leader elections and keep cluster state.
+- **pod_ip**: (optional) IP address of the pod Patroni is running in. This value is required when `use_endpoints` is enabled and is used to populate the leader endpoint subsets when the pod's PostgreSQL is promoted.
+- **ports**: (optional) if the Service object has the name for the port, the same name must appear in the Endpoint object, otherwise service won't work. For example, if your service is defined as `{Kind: Service, spec: {ports: [{name: postgresql, port: 5432, targetPort: 5432}]}}`, then you have to set `kubernetes.ports: [{"name": "postgresql", "port": 5432}]` and Patroni will use it for updating subsets of the leader Endpoint. This parameter is used only if `kubernetes.use_endpoints` is set.
+- **cacert**: (optional) Specifies the file with the CA_BUNDLE file with certificates of trusted CAs to use while verifying Kubernetes API SSL certs. If not provided, patroni will use the value provided by the ServiceAccount secret.
+- **retriable_http_codes**: (optional) list of HTTP status codes from K8s API to retry on. By default Patroni is retrying on `500`, `503`, and `504`, or if K8s API response has `retry-after` HTTP header.
+
+<a id="raft_settings"></a>
+
+--------
+
+## Raft (deprecated)
+
+- **self_addr**: `ip:port` to listen on for Raft connections. The `self_addr` must be accessible from other nodes of the cluster. If not set, the node will not participate in consensus.
+
+- **bind_addr**: (optional) `ip:port` to listen on for Raft connections. If not specified the `self_addr` will be used.
+
+- **partner_addrs**: list of other Patroni nodes in the cluster in format: \['ip1:port', 'ip2:port', 'etc...'\]
+
+- **data_dir**: directory where to store Raft log and snapshot. If not specified the current working directory is used.
+
+- **password**: (optional) Encrypt Raft traffic with a specified password, requires `cryptography` python module.
+- **min_timeout**: (optional) minimum election timeout in seconds for the underlying pysyncobj Raft implementation. Must be greater than 3 * `append_entries_period`. Default: `0.4`.
+- **max_timeout**: (optional) maximum election timeout in seconds for the underlying pysyncobj Raft implementation. Must be greater than `min_timeout`. Default: `1.4`.
+- **connection_timeout**: (optional) time in seconds after which a connection with no data received is considered dead. Must be greater than or equal to `max_timeout`. Default: `3.5`.
+- **append_entries_period**: (optional) interval in seconds for sending heartbeat (append_entries) commands. Must be less than one-third of `min_timeout`. Default: `0.1`.
+- **connection_retry_time**: (optional) interval in seconds between reconnection attempts to offline nodes. Default: `5.0`.
+- **leader_fallback_timeout**: (optional) time in seconds after which a leader with no response from the majority falls back to follower state. Must be greater than `append_entries_period`. Default: `30.0`.
+
+> [!NOTE]
+> These timeout parameters are useful for high-latency networks where the default pysyncobj timeouts are too aggressive. The following constraints must be satisfied: `min_timeout` > 3 * `append_entries_period`, `max_timeout` > `min_timeout`, `connection_timeout` >= `max_timeout`, and `leader_fallback_timeout` > `append_entries_period`. Patroni validates these at startup and will refuse to start if they are violated. These values cannot be changed at runtime and require a restart.
+>
+> [!WARNING]
+> These knobs only relax the pysyncobj election and connection timeouts; they do not extend the per-command deadline that Patroni applies to Raft operations. Each Raft command (leader-lock refresh, cluster-state write) must still complete within `retry_timeout` (default `10`). On very high-latency links - roughly above a few seconds of round-trip time - a single command can exceed `retry_timeout` even when `connection_timeout` is raised well above the RTT, so the DCS will appear unreachable and the primary may demote. On such links you must also raise `retry_timeout` and `ttl` accordingly, keeping `loop_wait + 2 * retry_timeout <= ttl`.
+
+  Short FAQ about Raft implementation
+
+  - Q: How to list all the nodes providing consensus?
+
+    A: `syncobj_admin -conn host:port -status` where the host:port is the address of one of the cluster nodes
+
+  - Q: Node that was a part of consensus and has gone and I can't reuse the same IP for other node. How to remove this node from the consensus?
+
+    A: `syncobj_admin -conn host:port -remove host2:port2` where the `host2:port2` is the address of the node you want to remove from consensus.
+
+  - Q: Where to get the `syncobj_admin` utility?
+
+    A: It is installed together with `pysyncobj` module (python RAFT implementation), which is Patroni dependency.
+
+  - Q: it is possible to run Patroni node without adding in to the consensus?
+
+    A: Yes, just comment out or remove `raft.self_addr` from Patroni configuration.
+
+  - Q: It is possible to run Patroni and PostgreSQL only on two nodes?
+
+    A: Yes, on the third node you can run `patroni_raft_controller` (without Patroni and PostgreSQL). In such a setup, one can temporarily lose one node without affecting the primary.
+
+<a id="postgresql_settings"></a>
+
+--------
+
+## PostgreSQL
+
+- **postgresql**:
+  - **authentication**:
+
+    - **superuser**:
+      - **username**: name for the superuser, set during initialization (initdb) and later used by Patroni to connect to the postgres.
+      - **password**: password for the superuser, set during initialization (initdb).
+      - **sslmode**: (optional) maps to the [sslmode](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE) connection parameter, which allows a client to specify the type of TLS negotiation mode with the server. For more information on how each mode works, please visit the [PostgreSQL documentation](https://www.postgresql.org/docs/current/libpq-ssl.html#LIBPQ-SSL-SSLMODE-STATEMENTS). The default mode is `prefer`.
+      - **sslkey**: (optional) maps to the [sslkey](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLKEY) connection parameter, which specifies the location of the secret key used with the client's certificate.
+      - **sslpassword**: (optional) maps to the [sslpassword](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLPASSWORD) connection parameter, which specifies the password for the secret key specified in `sslkey`.
+      - **sslcert**: (optional) maps to the [sslcert](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCERT) connection parameter, which specifies the location of the client certificate.
+      - **sslrootcert**: (optional) maps to the [sslrootcert](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLROOTCERT) connection parameter, which specifies the location of a file containing one or more certificate authorities (CA) certificates that the client will use to verify a server's certificate.
+      - **sslcrl**: (optional) maps to the [sslcrl](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRL) connection parameter, which specifies the location of a file containing a certificate revocation list. A client will reject connecting to any server that has a certificate present in this list.
+      - **sslcrldir**: (optional) maps to the [sslcrldir](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRLDIR) connection parameter, which specifies the location of a directory with files containing a certificate revocation list. A client will reject connecting to any server that has a certificate present in this list.
+      - **sslnegotiation**: (optional) maps to the [sslnegotiation](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLNEGOTIATION) connection parameter, which controls how SSL encryption is negotiated with the server, if SSL is used.
+      - **gssencmode**: (optional) maps to the [gssencmode](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-GSSENCMODE) connection parameter, which determines whether or with what priority a secure GSS TCP/IP connection will be negotiated with the server
+      - **channel_binding**: (optional) maps to the [channel_binding](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-CHANNEL-BINDING) connection parameter, which controls the client's use of channel binding.
+    - **replication**:
+      - **username**: replication username; the user will be created during initialization. Replicas will use this user to access the replication source via streaming replication
+      - **password**: replication password; the user will be created during initialization.
+      - **sslmode**: (optional) maps to the [sslmode](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE) connection parameter, which allows a client to specify the type of TLS negotiation mode with the server. For more information on how each mode works, please visit the [PostgreSQL documentation](https://www.postgresql.org/docs/current/libpq-ssl.html#LIBPQ-SSL-SSLMODE-STATEMENTS). The default mode is `prefer`.
+      - **sslkey**: (optional) maps to the [sslkey](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLKEY) connection parameter, which specifies the location of the secret key used with the client's certificate.
+      - **sslpassword**: (optional) maps to the [sslpassword](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLPASSWORD) connection parameter, which specifies the password for the secret key specified in `sslkey`.
+      - **sslcert**: (optional) maps to the [sslcert](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCERT) connection parameter, which specifies the location of the client certificate.
+      - **sslrootcert**: (optional) maps to the [sslrootcert](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLROOTCERT) connection parameter, which specifies the location of a file containing one or more certificate authorities (CA) certificates that the client will use to verify a server's certificate.
+      - **sslcrl**: (optional) maps to the [sslcrl](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRL) connection parameter, which specifies the location of a file containing a certificate revocation list. A client will reject connecting to any server that has a certificate present in this list.
+      - **sslcrldir**: (optional) maps to the [sslcrldir](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRLDIR) connection parameter, which specifies the location of a directory with files containing a certificate revocation list. A client will reject connecting to any server that has a certificate present in this list.
+      - **sslnegotiation**: (optional) maps to the [sslnegotiation](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLNEGOTIATION) connection parameter, which controls how SSL encryption is negotiated with the server, if SSL is used.
+      - **gssencmode**: (optional) maps to the [gssencmode](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-GSSENCMODE) connection parameter, which determines whether or with what priority a secure GSS TCP/IP connection will be negotiated with the server
+      - **channel_binding**: (optional) maps to the [channel_binding](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-CHANNEL-BINDING) connection parameter, which controls the client's use of channel binding.
+    - **rewind**:
+      - **username**: (optional) name for the user for `pg_rewind`; the user will be created during initialization of postgres 11+ and all necessary [permissions](https://www.postgresql.org/docs/11/app-pgrewind.html#id-1.9.5.8.8) will be granted.
+      - **password**: (optional) password for the user for `pg_rewind`; the user will be created during initialization.
+      - **sslmode**: (optional) maps to the [sslmode](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE) connection parameter, which allows a client to specify the type of TLS negotiation mode with the server. For more information on how each mode works, please visit the [PostgreSQL documentation](https://www.postgresql.org/docs/current/libpq-ssl.html#LIBPQ-SSL-SSLMODE-STATEMENTS). The default mode is `prefer`.
+      - **sslkey**: (optional) maps to the [sslkey](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLKEY) connection parameter, which specifies the location of the secret key used with the client's certificate.
+      - **sslpassword**: (optional) maps to the [sslpassword](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLPASSWORD) connection parameter, which specifies the password for the secret key specified in `sslkey`.
+      - **sslcert**: (optional) maps to the [sslcert](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCERT) connection parameter, which specifies the location of the client certificate.
+      - **sslrootcert**: (optional) maps to the [sslrootcert](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLROOTCERT) connection parameter, which specifies the location of a file containing one or more certificate authorities (CA) certificates that the client will use to verify a server's certificate.
+      - **sslcrl**: (optional) maps to the [sslcrl](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRL) connection parameter, which specifies the location of a file containing a certificate revocation list. A client will reject connecting to any server that has a certificate present in this list.
+      - **sslcrldir**: (optional) maps to the [sslcrldir](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRLDIR) connection parameter, which specifies the location of a directory with files containing a certificate revocation list. A client will reject connecting to any server that has a certificate present in this list.
+      - **sslnegotiation**: (optional) maps to the [sslnegotiation](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLNEGOTIATION) connection parameter, which controls how SSL encryption is negotiated with the server, if SSL is used.
+      - **gssencmode**: (optional) maps to the [gssencmode](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-GSSENCMODE) connection parameter, which determines whether or with what priority a secure GSS TCP/IP connection will be negotiated with the server
+      - **channel_binding**: (optional) maps to the [channel_binding](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-CHANNEL-BINDING) connection parameter, which controls the client's use of channel binding.
+
+  - **callbacks**: callback scripts to run on certain actions. Patroni will pass the action, role and cluster name. (See scripts/aws.py as an example of how to write them.)
+
+    - **on_reload**: run this script when configuration reload is triggered.
+    - **on_restart**: run this script when the postgres restarts (without changing role).
+    - **on_role_change**: run this script when the postgres is being promoted or demoted.
+    - **on_start**: run this script when the postgres starts.
+    - **on_stop**: run this script when the postgres stops.
+
+  - **connect_address**: IP address + port through which Postgres is accessible from other nodes and applications.
+
+  - **proxy_address**: IP address + port through which a connection pool (e.g. pgbouncer) running next to Postgres is accessible. The value is written to the member key in DCS as `proxy_url` and could be used/useful for service discovery.
+
+  - **create_replica_methods**: an ordered list of the create methods for turning a Patroni node into a new replica. "basebackup" is the default method; other methods are assumed to refer to scripts, each of which is configured as its own config item. See [custom replica creation methods documentation](/patroni/replica_bootstrap#custom_replica_creation) for further explanation.
+
+  - **data_dir**: The location of the Postgres data directory, either [existing](/patroni/existing_data#existing_data) or to be initialized by Patroni.
+
+  - **config_dir**: The location of the Postgres configuration directory, defaults to the data directory. Must be writable by Patroni.
+
+  - **bin_dir**: (optional) Path to PostgreSQL binaries (pg_ctl, initdb, pg_controldata, pg_basebackup, postgres, pg_isready, pg_rewind). If not provided or is an empty string, PATH environment variable will be used to find the executables.
+
+  - **bin_name**: (optional) Make it possible to override Postgres binary names, if you are using a custom Postgres distribution:
+
+    - **pg_ctl**: (optional) Custom name for `pg_ctl` binary.
+    - **initdb**: (optional) Custom name for `initdb` binary.
+    - **pgcontroldata**: (optional) Custom name for `pg_controldata` binary.
+    - **pg_basebackup**: (optional) Custom name for `pg_basebackup` binary.
+    - **postgres**: (optional) Custom name for `postgres` binary.
+    - **pg_isready**: (optional) Custom name for `pg_isready` binary.
+    - **pg_rewind**: (optional) Custom name for `pg_rewind` binary.
+
+  - **listen**: IP address + port that Postgres listens to; must be accessible from other nodes in the cluster, if you're using streaming replication. Multiple comma-separated addresses are permitted, as long as the port component is appended after to the last one with a colon, i.e. `listen: 127.0.0.1,127.0.0.2:5432`. Patroni will use the first address from this list to establish local connections to the PostgreSQL node.
+
+  - **use_unix_socket**: specifies that Patroni should prefer to use unix sockets to connect to the cluster. Default value is `false`. If `unix_socket_directories` is defined, Patroni will use the first suitable value from it to connect to the cluster and fallback to tcp if nothing is suitable. If `unix_socket_directories` is not specified in `postgresql.parameters`, Patroni will assume that the default value should be used and omit `host` from the connection parameters.
+
+  - **use_unix_socket_repl**: specifies that Patroni should prefer to use unix sockets for replication user cluster connection. Default value is `false`. If `unix_socket_directories` is defined, Patroni will use the first suitable value from it to connect to the cluster and fallback to tcp if nothing is suitable. If `unix_socket_directories` is not specified in `postgresql.parameters`, Patroni will assume that the default value should be used and omit `host` from the connection parameters.
+
+  - **pgpass**: path to the [.pgpass](https://www.postgresql.org/docs/current/static/libpq-pgpass.html) password file. Patroni creates this file before executing pg_basebackup, the post_init script and under some other circumstances. The location must be writable by Patroni.
+
+  - **recovery_conf**: additional configuration settings written to recovery.conf when configuring follower.
+
+  - **custom_conf** : path to an optional custom `postgresql.conf` file, that will be used in place of `postgresql.base.conf`. The file must exist on all cluster nodes, be readable by PostgreSQL and will be included from its location on the real `postgresql.conf`. Note that Patroni will not monitor this file for changes, nor backup it. However, its settings can still be overridden by Patroni's own configuration facilities - see [dynamic configuration](/patroni/config#config) for details.
+
+  - **parameters**: configuration parameters (GUCs) for Postgres in format `{ssl: "on", ssl_cert_file: "cert_file"}`.
+  - **parameters_primary**: (optional) role-specific parameter overrides for primary. These values are merged with and override the base **parameters**.
+  - **parameters_replica**: (optional) role-specific parameter overrides for replica. These values are merged with and override the base **parameters**.
+  - **parameters_standby_leader**: (optional) role-specific parameter overrides for standby_leader. These values are merged with and override the base **parameters**.
+
+  - **pg_hba**: list of lines that Patroni will use to generate `pg_hba.conf`. Patroni ignores this parameter if `hba_file` PostgreSQL parameter is set to a non-default value. Together with [dynamic configuration](/patroni/config/dynamic#dynamic) this parameter simplifies management of `pg_hba.conf`.
+
+    - **- host all all 0.0.0.0/0 md5**
+    - **- host replication replicator 127.0.0.1/32 md5**: A line like this is required for replication.
+  - **pg_hba_primary**: (optional) role-specific pg_hba entries for primary. These completely replace **pg_hba** (no merging). If not defined, **pg_hba** is used.
+  - **pg_hba_replica**: (optional) role-specific pg_hba entries for replica. These completely replace **pg_hba** (no merging). If not defined, **pg_hba** is used.
+  - **pg_hba_standby_leader**: (optional) role-specific pg_hba entries for standby_leader. These completely replace **pg_hba** (no merging). If not defined, **pg_hba** is used.
+
+  - **pg_ident**: list of lines that Patroni will use to generate `pg_ident.conf`. Patroni ignores this parameter if `ident_file` PostgreSQL parameter is set to a non-default value. Together with [dynamic configuration](/patroni/config/dynamic#dynamic) this parameter simplifies management of `pg_ident.conf`.
+
+    - **- mapname1 systemname1 pguser1**
+    - **- mapname1 systemname2 pguser2**
+  - **pg_ident_primary**: (optional) role-specific pg_ident entries for primary. These completely replace **pg_ident** (no merging). If not defined, **pg_ident** is used.
+  - **pg_ident_replica**: (optional) role-specific pg_ident entries for replica. These completely replace **pg_ident** (no merging). If not defined, **pg_ident** is used.
+  - **pg_ident_standby_leader**: (optional) role-specific pg_ident entries for standby_leader. These completely replace **pg_ident** (no merging). If not defined, **pg_ident** is used.
+
+  - **pg_ctl_timeout**: How long should pg_ctl wait when doing `start`, `stop` or `restart`. Default value is 60 seconds.
+
+  - **use_pg_rewind**: try to use pg_rewind on the former leader when it joins cluster as a replica. Either the cluster must be initialized with `data page checksums` (`--data-checksums` option for `initdb`) and/or `wal_log_hints` must be set to `on`, or `pg_rewind` will not work.
+
+  - **rewind**: (optional) custom options to pass to the `pg_rewind` command. Can be specified as a list of strings and/or single key-value dictionaries. Not allowed options include: `target-pgdata`, `source-pgdata`, `source-server`, `write-recovery-conf`, `dry-run`, `restore-target-wal`, `config-file`, `no-ensure-shutdown`, `version`, and `help`. Example usage:
+
+    ```yaml
+    postgresql:
+      rewind:
+        - debug
+        - progress
+        - sync-method: fsync
+    ```
+
+  - **remove_data_directory_on_rewind_failure**: If this option is enabled, Patroni will remove the PostgreSQL data directory and recreate the replica. Otherwise it will try to follow the new leader. Default value is **false**.
+
+  - **remove_data_directory_on_diverged_timelines**: Patroni will remove the PostgreSQL data directory and recreate the replica if it notices that timelines are diverging and the former primary can not start streaming from the new primary. This option is useful when `pg_rewind` can not be used. While performing timelines divergence check on PostgreSQL v10 and older Patroni will try to connect with replication credential to the "postgres" database. Hence, such access should be allowed in the pg_hba.conf. Default value is **false**.
+
+  - **replica_method**: for each create_replica_methods other than basebackup, you would add a configuration section of the same name. At a minimum, this should include "command" with a full path to the actual script to be executed. Other configuration parameters will be passed along to the script in the form "parameter=value".
+
+  - **pre_promote**: a fencing script that executes during a failover after acquiring the leader lock but before promoting the replica. If the script exits with a non-zero code, Patroni does not promote the replica and removes the leader key from DCS.
+
+  - **before_stop**: a script that executes immediately prior to stopping postgres. As opposed to a callback, this script runs synchronously, blocking shutdown until it has completed. The return code of this script does not impact whether shutdown proceeds afterwards.
+
+<a id="restapi_settings"></a>
+
+--------
+
+## REST API
+
+- **restapi**:
+  - **thread_pool_size**: size of thread pool used by Patroni to process REST API requests. Minimal value is `5`, default value is `5`.
+  - **connect_address**: IP address (or hostname) and port, to access the Patroni's [REST API](/patroni/rest_api#rest_api). All the members of the cluster must be able to connect to this address, so unless the Patroni setup is intended for a demo inside the localhost, this address must be a non "localhost" or loopback address (ie: "localhost" or "127.0.0.1"). It can serve as an endpoint for HTTP health checks (read below about the "listen" REST API parameter), and also for user queries (either directly or via the REST API), as well as for the health checks done by the cluster members during leader elections (for example, to determine whether the leader is still running, or if there is a node which has a WAL position that is ahead of the one doing the query; etc.) The connect_address is put in the member key in DCS, making it possible to translate the member name into the address to connect to its REST API.
+  - **listen**: IP address (or hostname) and port that Patroni will listen to for the REST API - to provide also the same health checks and cluster messaging between the participating nodes, as described above. to provide health-check information for HAProxy (or any other load balancer capable of doing a HTTP "OPTION" or "GET" checks).
+  - **authentication**: (optional)
+    - **username**: Basic-auth username to protect unsafe REST API endpoints.
+    - **password**: Basic-auth password to protect unsafe REST API endpoints.
+  - **certfile**: (optional): Specifies the file with the certificate in the PEM format. If the certfile is not specified or is left empty, the API server will work without SSL.
+  - **keyfile**: (optional): Specifies the file with the secret key in the PEM format.
+  - **keyfile_password**: (optional): Specifies a password for decrypting the keyfile.
+  - **cafile**: (optional): Specifies the file with the CA_BUNDLE with certificates of trusted CAs to use while verifying client certs.
+  - **ciphers**: (optional): Specifies the permitted cipher suites (e.g. "ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-GCM-SHA256:!SSLv1:!SSLv2:!SSLv3:!TLSv1:!TLSv1.1")
+  - **verify_client**: (optional): `none` (default), `optional` or `required`. When `none` REST API will not check client certificates. When `required` client certificates are required for all REST API calls. When `optional` client certificates are required for all unsafe REST API endpoints. When `required` is used, then client authentication succeeds, if the certificate signature verification succeeds. For `optional` the client cert will only be checked for `PUT`, `POST`, `PATCH`, and `DELETE` requests.
+  - **allowlist**: (optional): Specifies the set of hosts that are allowed to call unsafe REST API endpoints. The single element could be a host name, an IP address or a network address using CIDR notation. By default `allow all` is used. In case if `allowlist` or `allowlist_include_members` are set, anything that is not included is rejected.
+  - **allowlist_include_members**: (optional): If set to `true` it allows accessing unsafe REST API endpoints from other cluster members registered in DCS (IP address or hostname is taken from the members `api_url`). Be careful, it might happen that OS will use a different IP for outgoing connections.
+  - **http_extra_headers**: (optional): HTTP headers let the REST API server pass additional information with an HTTP response.
+  - **https_extra_headers**: (optional): HTTPS headers let the REST API server pass additional information with an HTTP response when TLS is enabled. This will also pass additional information set in `http_extra_headers`.
+  - **request_queue_size**: (optional): Sets request queue size for TCP socket used by Patroni REST API. Once the queue is full, further requests get a "Connection denied" error. The default value is 5.
+  - **server_tokens**: (optional): Configures the value of the `Server` HTTP header.
+    - `Minimal`: The header will contain only the Patroni version, e.g. `Patroni/4.0.0`.
+    - `ProductOnly`: The header will contain only the product name, e.g. `Patroni`.
+    - `Original` (default): The header will expose the original behaviour and display the BaseHTTP and Python versions, e.g. `BaseHTTP/0.6 Python/3.12.3`.
+
+Here is an example of both **http_extra_headers** and **https_extra_headers**:
+
+```yaml
+restapi:
+  listen: <listen>
+  connect_address: <connect_address>
+  authentication:
+    username: <username>
+    password: <password>
+  http_extra_headers:
+    'X-Frame-Options': 'SAMEORIGIN'
+    'X-XSS-Protection': '1; mode=block'
+    'X-Content-Type-Options': 'nosniff'
+  cafile: <ca file>
+  certfile: <cert>
+  keyfile: <key>
+  https_extra_headers:
+    'Strict-Transport-Security': 'max-age=31536000; includeSubDomains'
+```
+
+<div class="warning">
+
+<div class="title">
+
+Warning
+
+</div>
+
+- The `restapi.connect_address` must be accessible from all nodes of a given Patroni cluster. Internally Patroni is using it during the leader race to find nodes with minimal replication lag.
+- If you enabled client certificates validation (`restapi.verify_client` is set to `required`), you also **must** provide **valid client certificates** in the `ctl.certfile`, `ctl.keyfile`, `ctl.keyfile_password`. If not provided, Patroni will not work correctly.
+
+</div>
+
+<a id="patronictl_settings"></a>
+
+--------
+
+## CTL
+
+- **ctl**: (optional)
+  - **authentication**:
+    - **username**: Basic-auth username for accessing protected REST API endpoints. If not provided [patronictl](/patroni/patronictl#patronictl) will use the value provided for REST API "username" parameter.
+    - **password**: Basic-auth password for accessing protected REST API endpoints. If not provided [patronictl](/patroni/patronictl#patronictl) will use the value provided for REST API "password" parameter.
+  - **insecure**: Allow connections to REST API without verifying SSL certs.
+  - **cacert**: Specifies the file with the CA_BUNDLE file or directory with certificates of trusted CAs to use while verifying REST API SSL certs. If not provided [patronictl](/patroni/patronictl#patronictl) will use the value provided for REST API "cafile" parameter.
+  - **certfile**: Specifies the file with the client certificate in the PEM format.
+  - **keyfile**: Specifies the file with the client secret key in the PEM format.
+  - **keyfile_password**: Specifies a password for decrypting the client keyfile.
+
+--------
+
+## Watchdog
+
+- **mode**: `off`, `automatic` or `required`. When `off` watchdog is disabled. When `automatic` watchdog will be used if available, but ignored if it is not. When `required` the node will not become a leader unless watchdog can be successfully enabled.
+- **device**: Path to watchdog device. Defaults to `/dev/watchdog`.
+- **safety_margin**: Number of seconds of safety margin between watchdog triggering and leader key expiration.
+
+<a id="tags_settings"></a>
+
+--------
+
+## Tags
+
+- **clonefrom**: `true` or `false`. If set to `true` other nodes might prefer to use this node for bootstrap (take `pg_basebackup` from). If there are several nodes with `clonefrom` tag set to `true` the node to bootstrap from will be chosen randomly. The default value is `false`.
+- **noloadbalance**: `true` or `false`. If set to `true` the node will return HTTP Status Code 503 for the `GET /replica` REST API health-check and therefore will be excluded from the load-balancing. Defaults to `false`.
+- **replicatefrom**: The name of another replica to replicate from. Used to support cascading replication.
+- **nosync**: `true` or `false`. If set to `true` the node will never be selected as a synchronous replica.
+- **sync_priority**: integer, controls the priority this node should have during synchronous replica selection when [synchronous_mode](/patroni/replication_modes#synchronous_mode) is set to `on`. Nodes with higher priority will be preferred over lower-priority nodes. If the `sync_priority` is 0 or negative - such node is not allowed to be written to `synchronous_standby_names` PostgreSQL parameter (similar to `nosync: true`). Keep in mind, that this parameter has the opposite meaning to `sync_priority` value reported in `pg_stat_replication` view.
+- **nofailover**: `true` or `false`, controls whether this node is allowed to participate in the leader race and become a leader. Defaults to `false`, meaning this node <span id="can">can</span>\_ participate in leader races.
+- **failover_priority**: integer, controls the priority this node should have during failover. Nodes with higher priority will be preferred over lower-priority nodes if they received/replayed the same amount of WAL. However, nodes with higher values of receive/replay LSN are preferred regardless of their priority. If the `failover_priority` is 0 or negative - such node is not allowed to participate in the leader race and to become a leader (similar to `nofailover: true`). Known limitation: `failover_priority` currently doesn't work with [quorum-based synchronous replication](/patroni/replication_modes#quorum_mode).
+- **nostream**: `true` or `false`. If set to `true` the node will not use replication protocol to stream WAL. It will rely instead on archive recovery (if `restore_command` is configured) and `pg_wal`/`pg_xlog` polling. It also disables copying and synchronization of permanent logical replication slots on the node itself and all its cascading replicas. Setting this tag on primary node has no effect.
+
+> [!WARNING]
+> Provide only one of `nofailover` or `failover_priority`. Providing `nofailover: true` is the same as `failover_priority: 0`, and providing `nofailover: false` will give the node priority 1.
+
+In addition to these predefined tags, you can also add your own ones:
+
+- **key1**: `true`
+- **key2**: `false`
+- **key3**: `1.4`
+- **key4**: `"RandomString"`
+
+Tags are visible in the [REST API](/patroni/rest_api#rest_api) and [patronictl_list](/patroni/patronictl#patronictl_list) You can also check for an instance health using these tags. If the tag isn't defined for an instance, or if the respective value doesn't match the querying value, it will return HTTP Status Code 503.

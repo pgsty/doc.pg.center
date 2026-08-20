@@ -4,17 +4,22 @@
 [![GitHub Pages](https://github.com/pgsty/pgsql.cc/actions/workflows/pages.yml/badge.svg)](https://github.com/pgsty/pgsql.cc/actions/workflows/pages.yml)
 [![Hugo](https://img.shields.io/badge/Hugo-extended%200.164.0-FF4088?logo=hugo)](https://gohugo.io/)
 
-PostgreSQL Community Components is a bilingual documentation portal for the tools that run PostgreSQL in production. The current collection covers Patroni, pgBackRest, PgBouncer, and pgBadger in English and Simplified Chinese.
+PostgreSQL Community Components is a documentation portal for the tools that run PostgreSQL in
+production. The current collection covers Patroni, pgBackRest, PgBouncer, and pgBadger in English
+and Simplified Chinese, plus the complete English HAProxy 3.4 Starter, Configuration, and Management
+manuals and the official etcd 3.7 documentation.
 
-本站是 PostgreSQL 生态工具的中英文双语文档站。当前收录 Patroni、pgBackRest、PgBouncer 与 pgBadger。
+本站是 PostgreSQL 生态工具文档站。当前收录 Patroni、pgBackRest、PgBouncer 与 pgBadger
+中英双语文档，以及 HAProxy 3.4 与 etcd 3.7 英文完整文档。
 
 ## Build
 
-The site requires Hugo Extended 0.160.1 or newer and Go. OINK is pinned as a Hugo Module at `github.com/pgsty/oink v0.4.1`.
+The site requires Hugo Extended 0.160.1 or newer and Go. OINK is pinned as a Hugo Module at `github.com/pgsty/oink v0.6.0`. `make dev` uses the sibling `../oink` checkout; `make build`, `make serve`, and `make check` intentionally keep the published module path.
 
 ```sh
 make build
 make dev
+make serve
 make check
 ```
 
@@ -26,8 +31,21 @@ The production domain is **`pgsql.cc`**. `static/CNAME`, Hugo's `baseURL`, gener
 
 ## Information architecture
 
-Patroni, pgBackRest, PgBouncer, and pgBadger are four independent documentation roots under `content/docs/`. They appear directly in the global navbar; each root owns its own sidebar and sequential pager. The homepage is intentionally limited to a three-line hero, four root cards, four detailed shortcut indexes, and a short FAQ. English and Simplified Chinese use the same order and routes.
+Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy, and etcd are six independent documentation roots
+directly under `content/`; there is no shared `content/docs/` wrapper or `/docs/` canonical URL prefix.
+They appear directly in the global navbar, and each root owns its own sidebar and sequential pager.
+The homepage keeps a three-line hero, six root cards, six detailed shortcut indexes, and a short FAQ.
+The first four manuals are bilingual; HAProxy and etcd are intentionally English-only until reviewed
+translations are added. HAProxy keeps all 34 reading pages directly under one root,
+with `_div_intro.md`, `_div_configuration.md`, and `_div_management.md` providing non-linking sidebar
+group labels in a single weighted reading sequence.
 
 ## Content sources
 
-The first import was assembled from paired documentation trees in `pigsty.io` and `pigsty.cc`. pgBadger was imported from a pinned upstream source commit together with a live website snapshot and offline report examples. Imported pages retain their upstream source notices. See [NOTICE.md](NOTICE.md) and [sources/pgbadger/SOURCE.md](sources/pgbadger/SOURCE.md) for provenance and licensing notes.
+The first import was assembled from paired documentation trees in `pigsty.io` and `pigsty.cc`.
+pgBadger was imported from a pinned upstream source commit together with a live website snapshot and
+offline report examples. HAProxy is generated from the official `v3.4.3` Starter, Configuration,
+and Management texts and retains the upstream GPLv2 terms. etcd is adapted from a pinned official
+3.7 website source tree. Imported pages retain their source notices. See
+[NOTICE.md](NOTICE.md), [sources/pgbadger/SOURCE.md](sources/pgbadger/SOURCE.md), and
+[sources/haproxy/SOURCE.md](sources/haproxy/SOURCE.md) for provenance and licensing notes.

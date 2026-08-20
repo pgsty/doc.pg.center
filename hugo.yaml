@@ -15,6 +15,7 @@ markup:
     endLevel: 4
   goldmark:
     parser:
+      wrapStandAloneImageWithinParagraph: false
       attribute:
         block: true
     extensions:
@@ -42,57 +43,83 @@ languages:
             - id: patroni_docs
               title: Open Patroni documentation
               description: High availability, configuration, and operations
-              url: /docs/patroni/
+              url: /patroni/
               icon: fa-solid fa-heart-pulse
               keywords: [ha, failover, dcs, patronictl]
             - id: pgbackrest_docs
               title: Open pgBackRest documentation
               description: Backup, restore, archive, and command reference
-              url: /docs/pgbackrest/
+              url: /pgbackrest/
               icon: fa-solid fa-box-archive
               keywords: [backup, restore, wal, pitr]
             - id: pgbouncer_docs
               title: Open PgBouncer documentation
               description: Connection pooling, configuration, and usage
-              url: /docs/pgbouncer/
+              url: /pgbouncer/
               icon: fa-solid fa-diagram-project
               keywords: [pool, connection, session, transaction]
             - id: pgbadger_docs
               title: Open pgBadger documentation
               description: Log analysis, reports, and command reference
-              url: /docs/pgbadger/
+              url: /pgbadger/
               icon: fa-solid fa-chart-line
               keywords: [log, analyzer, report, performance, pgbadger]
+            - id: haproxy_docs
+              title: Open HAProxy documentation
+              description: Complete Starter, Configuration, and Management manuals
+              url: /haproxy/
+              icon: fa-solid fa-shuffle
+              keywords: [load balancer, proxy, tcp, http, tls, haproxy]
+            - id: etcd_docs
+              title: Open etcd 3.7 documentation
+              description: Distributed key-value store operations, APIs, and internals
+              url: /etcd/
+              icon: fa-solid fa-database
+              keywords: [etcd, raft, consensus, kubernetes, key value]
     menus:
       main:
         - identifier: patroni
           name: Patroni
-          pageRef: /docs/patroni
+          pageRef: /patroni
           weight: 10
           params:
             icon: fa-solid fa-heart-pulse
             description: PostgreSQL high availability and automatic failover
         - identifier: pgbackrest
           name: pgBackRest
-          pageRef: /docs/pgbackrest
+          pageRef: /pgbackrest
           weight: 20
           params:
             icon: fa-solid fa-box-archive
             description: Reliable backup, restore, and archive management
         - identifier: pgbouncer
           name: PgBouncer
-          pageRef: /docs/pgbouncer
+          pageRef: /pgbouncer
           weight: 30
           params:
             icon: fa-solid fa-diagram-project
             description: Lightweight connection pooling for PostgreSQL
         - identifier: pgbadger
           name: pgBadger
-          pageRef: /docs/pgbadger
+          pageRef: /pgbadger
           weight: 40
           params:
             icon: fa-solid fa-chart-line
             description: Fast PostgreSQL and PgBouncer log analysis
+        - identifier: haproxy
+          name: HAProxy
+          pageRef: /haproxy
+          weight: 50
+          params:
+            icon: fa-solid fa-shuffle
+            description: Complete HAProxy 3.4 manuals
+        - identifier: etcd
+          name: etcd
+          pageRef: /etcd
+          weight: 60
+          params:
+            icon: fa-solid fa-database
+            description: Distributed key-value store operations and APIs
 
   zh:
     label: 简体中文
@@ -103,81 +130,89 @@ languages:
       description: 面向生产实践的 PostgreSQL 生态工具中文文档。
       time_format_blog: 2006年1月2日
       time_format_default: 2006年1月2日
-      links:
-        user:
-          - name: Patroni
-            url: /zh/docs/patroni/
-            icon: fa-solid fa-heart-pulse
-            desc: PostgreSQL 高可用
-          - name: pgBackRest
-            url: /zh/docs/pgbackrest/
-            icon: fa-solid fa-box-archive
-            desc: 备份与恢复
-          - name: PgBouncer
-            url: /zh/docs/pgbouncer/
-            icon: fa-solid fa-diagram-project
-            desc: 连接池
-          - name: pgBadger
-            url: /zh/docs/pgbadger/
-            icon: fa-solid fa-chart-line
-            desc: 日志分析
       ui:
         command_palette:
           commands:
             - id: patroni_docs
               title: 打开 Patroni 文档
               description: 高可用、配置与日常运维
-              url: /zh/docs/patroni/
+              url: /zh/patroni/
               icon: fa-solid fa-heart-pulse
               keywords: [高可用, 故障转移, dcs, patronictl]
             - id: pgbackrest_docs
               title: 打开 pgBackRest 文档
               description: 备份、恢复、归档与命令参考
-              url: /zh/docs/pgbackrest/
+              url: /zh/pgbackrest/
               icon: fa-solid fa-box-archive
               keywords: [备份, 恢复, wal, pitr]
             - id: pgbouncer_docs
               title: 打开 PgBouncer 文档
               description: 连接池、配置与使用方法
-              url: /zh/docs/pgbouncer/
+              url: /zh/pgbouncer/
               icon: fa-solid fa-diagram-project
               keywords: [连接池, 连接, 会话, 事务]
             - id: pgbadger_docs
               title: 打开 pgBadger 文档
               description: 日志分析、报告与命令参考
-              url: /zh/docs/pgbadger/
+              url: /zh/pgbadger/
               icon: fa-solid fa-chart-line
               keywords: [日志, 分析, 报告, 性能, pgbadger]
+            - id: haproxy_docs
+              title: 打开 HAProxy 3.4 英文完整文档
+              description: Starter、Configuration 与 Management 三套手册
+              url: ../haproxy/
+              icon: fa-solid fa-shuffle
+              keywords: [负载均衡, 代理, tcp, http, tls, haproxy]
+            - id: etcd_docs
+              title: 打开 etcd 3.7 英文文档
+              description: 分布式键值存储的运维、API 与内部原理
+              url: ../etcd/
+              icon: fa-solid fa-database
+              keywords: [etcd, raft, 共识, kubernetes, 键值存储]
     menus:
       main:
         - identifier: patroni
           name: Patroni
-          pageRef: /docs/patroni
+          pageRef: /patroni
           weight: 10
           params:
             icon: fa-solid fa-heart-pulse
             description: PostgreSQL 高可用与自动故障转移
         - identifier: pgbackrest
           name: pgBackRest
-          pageRef: /docs/pgbackrest
+          pageRef: /pgbackrest
           weight: 20
           params:
             icon: fa-solid fa-box-archive
             description: 可靠的备份、恢复与归档管理
         - identifier: pgbouncer
           name: PgBouncer
-          pageRef: /docs/pgbouncer
+          pageRef: /pgbouncer
           weight: 30
           params:
             icon: fa-solid fa-diagram-project
             description: 轻量级 PostgreSQL 连接池
         - identifier: pgbadger
           name: pgBadger
-          pageRef: /docs/pgbadger
+          pageRef: /pgbadger
           weight: 40
           params:
             icon: fa-solid fa-chart-line
             description: 快速分析 PostgreSQL 与 PgBouncer 日志
+        - identifier: haproxy
+          name: HAProxy
+          url: ../haproxy/
+          weight: 50
+          params:
+            icon: fa-solid fa-shuffle
+            description: HAProxy 3.4 三套完整手册 · 英文原版
+        - identifier: etcd
+          name: etcd
+          url: ../etcd/
+          weight: 60
+          params:
+            icon: fa-solid fa-database
+            description: etcd 3.7 运维、API 与内部原理 · 英文原版
 
 params:
   logo: favicon-512x512.png
@@ -191,56 +226,33 @@ params:
   footer_center_info: 'Built with [OINK](https://oink.pgsty.com/)'
   time_format_blog: January 2, 2006
   time_format_default: January 2, 2006
-  rss_sections: [blog]
-  offlineSearch: true
-  offlineSearchIndex: summary
-  offlineSearchSummaryLength: 80
-  offlineSearchMaxResults: 12
-  prism_syntax_highlighting: false
+  offline_search: true
+  offline_search_index: summary
+  offline_search_summary_length: 80
+  offline_search_max_results: 12
   page_width: normal
   comments:
     enable: false
   ui:
-    typography:
-      preset: technical
-    quick_links: [patroni, pgbackrest, pgbouncer, pgbadger]
+    typography: technical
+    quick_links: [patroni, pgbackrest, pgbouncer, pgbadger, haproxy]
     section_index: cards
-    showLightDarkModeMenu: true
+    dark_mode: true
     sidebar_icon_policy: all
     sidebar_menu_compact: true
     sidebar_menu_foldable: true
     sidebar_root_enabled: true
     sidebar_root_menu: true
     sidebar_headings: 3
-    ul_show: 2
+    sidebar_expand_levels: 2
     landing_search: true
     page_context_menu:
       enable: true
       assistant_links: true
-    image_zoom:
-      enable: true
+    image_zoom: true
     feedback:
       enable: false
-    readingtime:
-      enable: true
-  links:
-    user:
-      - name: Patroni
-        url: /docs/patroni/
-        icon: fa-solid fa-heart-pulse
-        desc: PostgreSQL high availability
-      - name: pgBackRest
-        url: /docs/pgbackrest/
-        icon: fa-solid fa-box-archive
-        desc: Backup and recovery
-      - name: PgBouncer
-        url: /docs/pgbouncer/
-        icon: fa-solid fa-diagram-project
-        desc: Connection pooling
-      - name: pgBadger
-        url: /docs/pgbadger/
-        icon: fa-solid fa-chart-line
-        desc: Log analysis
+    reading_time: true
 
 taxonomies:
   tag: tags

@@ -1,0 +1,22 @@
+brand:
+  name: PGSQL.CC
+  tagline: PostgreSQL 社区组件
+  slogan: 面向生产实践的 PostgreSQL 生态工具双语文档。
+columns:
+  - title: 组件
+    links:
+      - { label: Patroni, url: patroni/ }
+      - { label: pgBackRest, url: pgbackrest/ }
+      - { label: PgBouncer, url: pgbouncer/ }
+      - { label: pgBadger, url: pgbadger/ }
+      - { label: HAProxy, url: ../haproxy/ }
+      - { label: etcd, url: ../etcd/ }
+  - title: 上游项目
+    links:
+      - { label: PostgreSQL.org, url: https://www.postgresql.org/, external: true }
+      - { label: Patroni, url: https://github.com/patroni/patroni, external: true }
+      - { label: pgBackRest, url: https://pgbackrest.org/, external: true }
+      - { label: PgBouncer, url: https://www.pgbouncer.org/, external: true }
+      - { label: pgBadger, url: https://pgbadger.darold.net/, external: true }
+      - { label: HAProxy, url: https://www.haproxy.org/, external: true }
+      - { label: etcd, url: https://etcd.io/, external: true }
