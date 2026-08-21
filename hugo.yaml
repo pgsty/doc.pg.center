@@ -197,6 +197,13 @@ params:
     reading_time: false
     share: [x, bluesky, reddit, hackernews, linkedin, telegram, email, copy]
 
+# Google Analytics 4. OINK gates the tag on `hugo.IsProduction`, so `hugo
+# server` (development by default) serves no tag and no request to Google,
+# while `hugo` and the CI deploy (production by default) both emit it.
+services:
+  googleAnalytics:
+    ID: G-D9E4B60JWX
+
 taxonomies:
   tag: tags
   category: categories
