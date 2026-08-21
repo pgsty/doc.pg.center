@@ -1,7 +1,7 @@
 baseURL: https://pgsql.cc/
 title: PGSQL.CC
 enableRobotsTXT: true
-enableGitInfo: false
+enableGitInfo: true
 enableEmoji: true
 defaultContentLanguage: en
 
@@ -40,42 +40,12 @@ languages:
       ui:
         command_palette:
           commands:
-            - id: patroni_docs
-              title: Open Patroni documentation
-              description: High availability, configuration, and operations
-              url: /patroni/
-              icon: fa-solid fa-heart-pulse
-              keywords: [ha, failover, dcs, patronictl]
-            - id: pgbackrest_docs
-              title: Open pgBackRest documentation
-              description: Backup, restore, archive, and command reference
-              url: /pgbackrest/
-              icon: fa-solid fa-box-archive
-              keywords: [backup, restore, wal, pitr]
-            - id: pgbouncer_docs
-              title: Open PgBouncer documentation
-              description: Connection pooling, configuration, and usage
-              url: /pgbouncer/
-              icon: fa-solid fa-diagram-project
-              keywords: [pool, connection, session, transaction]
-            - id: pgbadger_docs
-              title: Open pgBadger documentation
-              description: Log analysis, reports, and command reference
-              url: /pgbadger/
-              icon: fa-solid fa-chart-line
-              keywords: [log, analyzer, report, performance, pgbadger]
-            - id: haproxy_docs
-              title: Open HAProxy documentation
-              description: Complete Starter, Configuration, and Management manuals
-              url: /haproxy/
-              icon: fa-solid fa-shuffle
-              keywords: [load balancer, proxy, tcp, http, tls, haproxy]
-            - id: etcd_docs
-              title: Open etcd 3.7 documentation
-              description: Distributed key-value store operations, APIs, and internals
-              url: /etcd/
-              icon: fa-solid fa-database
-              keywords: [etcd, raft, consensus, kubernetes, key value]
+            - id: attribution
+              title: Attribution and licensing
+              description: Sources, pinned revisions, and licences for every collection
+              url: /attribution/
+              icon: fa-solid fa-copyright
+              keywords: [licence, license, copyright, upstream, credit, notice]
     menus:
       main:
         - identifier: patroni
@@ -90,35 +60,35 @@ languages:
           pageRef: /pgbackrest
           weight: 20
           params:
-            icon: fa-solid fa-box-archive
+            icon: fa-solid fa-couch
             description: Reliable backup, restore, and archive management
         - identifier: pgbouncer
           name: PgBouncer
           pageRef: /pgbouncer
           weight: 30
           params:
-            icon: fa-solid fa-diagram-project
+            icon: fa-solid fa-arrows-turn-to-dots
             description: Lightweight connection pooling for PostgreSQL
         - identifier: pgbadger
           name: pgBadger
           pageRef: /pgbadger
           weight: 40
           params:
-            icon: fa-solid fa-chart-line
+            icon: fa-solid fa-otter
             description: Fast PostgreSQL and PgBouncer log analysis
         - identifier: haproxy
           name: HAProxy
           pageRef: /haproxy
           weight: 50
           params:
-            icon: fa-solid fa-shuffle
+            icon: fa-solid fa-network-wired
             description: Complete HAProxy 3.4 manuals
         - identifier: etcd
           name: etcd
           pageRef: /etcd
           weight: 60
           params:
-            icon: fa-solid fa-database
+            icon: fa-solid fa-gear
             description: Distributed key-value store operations and APIs
 
   zh:
@@ -128,47 +98,17 @@ languages:
     title: PGSQL.CC
     params:
       description: 面向生产实践的 PostgreSQL 生态工具中文文档。
-      time_format_blog: 2006年1月2日
       time_format_default: 2006年1月2日
       ui:
+        share: [weibo, x, telegram, linkedin, email, copy]
         command_palette:
           commands:
-            - id: patroni_docs
-              title: 打开 Patroni 文档
-              description: 高可用、配置与日常运维
-              url: /zh/patroni/
-              icon: fa-solid fa-heart-pulse
-              keywords: [高可用, 故障转移, dcs, patronictl]
-            - id: pgbackrest_docs
-              title: 打开 pgBackRest 文档
-              description: 备份、恢复、归档与命令参考
-              url: /zh/pgbackrest/
-              icon: fa-solid fa-box-archive
-              keywords: [备份, 恢复, wal, pitr]
-            - id: pgbouncer_docs
-              title: 打开 PgBouncer 文档
-              description: 连接池、配置与使用方法
-              url: /zh/pgbouncer/
-              icon: fa-solid fa-diagram-project
-              keywords: [连接池, 连接, 会话, 事务]
-            - id: pgbadger_docs
-              title: 打开 pgBadger 文档
-              description: 日志分析、报告与命令参考
-              url: /zh/pgbadger/
-              icon: fa-solid fa-chart-line
-              keywords: [日志, 分析, 报告, 性能, pgbadger]
-            - id: haproxy_docs
-              title: 打开 HAProxy 3.4 英文完整文档
-              description: Starter、Configuration 与 Management 三套手册
-              url: ../haproxy/
-              icon: fa-solid fa-shuffle
-              keywords: [负载均衡, 代理, tcp, http, tls, haproxy]
-            - id: etcd_docs
-              title: 打开 etcd 3.7 英文文档
-              description: 分布式键值存储的运维、API 与内部原理
-              url: ../etcd/
-              icon: fa-solid fa-database
-              keywords: [etcd, raft, 共识, kubernetes, 键值存储]
+            - id: attribution
+              title: 归属与授权说明
+              description: 各文档集的来源、固定版本与授权协议
+              url: /zh/attribution/
+              icon: fa-solid fa-copyright
+              keywords: [授权, 版权, 协议, 上游, 归属, 声明]
     menus:
       main:
         - identifier: patroni
@@ -183,40 +123,42 @@ languages:
           pageRef: /pgbackrest
           weight: 20
           params:
-            icon: fa-solid fa-box-archive
+            icon: fa-solid fa-couch
             description: 可靠的备份、恢复与归档管理
         - identifier: pgbouncer
           name: PgBouncer
           pageRef: /pgbouncer
           weight: 30
           params:
-            icon: fa-solid fa-diagram-project
+            icon: fa-solid fa-arrows-turn-to-dots
             description: 轻量级 PostgreSQL 连接池
         - identifier: pgbadger
           name: pgBadger
           pageRef: /pgbadger
           weight: 40
           params:
-            icon: fa-solid fa-chart-line
+            icon: fa-solid fa-otter
             description: 快速分析 PostgreSQL 与 PgBouncer 日志
         - identifier: haproxy
           name: HAProxy
           url: ../haproxy/
           weight: 50
           params:
-            icon: fa-solid fa-shuffle
+            icon: fa-solid fa-network-wired
             description: HAProxy 3.4 三套完整手册 · 英文原版
         - identifier: etcd
           name: etcd
           url: ../etcd/
           weight: 60
           params:
-            icon: fa-solid fa-database
+            icon: fa-solid fa-gear
             description: etcd 3.7 运维、API 与内部原理 · 英文原版
 
 params:
   logo: favicon-512x512.png
   productionURL: https://pgsql.cc
+  github_repo: https://github.com/pgsty/pgsql.cc
+  github_branch: main
   description: Practical documentation for the PostgreSQL community stack.
   version: v1
   copyright:
@@ -224,7 +166,6 @@ params:
     from_year: 2026
     to_year: present
   footer_center_info: 'Built with [OINK](https://oink.pgsty.com/)'
-  time_format_blog: January 2, 2006
   time_format_default: January 2, 2006
   offline_search: true
   offline_search_index: summary
@@ -235,7 +176,8 @@ params:
     enable: false
   ui:
     typography: technical
-    quick_links: [patroni, pgbackrest, pgbouncer, pgbadger, haproxy]
+    quick_links: [patroni, pgbackrest, pgbouncer, pgbadger, haproxy, etcd]
+    translation_notice: en
     section_index: cards
     dark_mode: true
     sidebar_icon_policy: all
@@ -252,7 +194,8 @@ params:
     image_zoom: true
     feedback:
       enable: false
-    reading_time: true
+    reading_time: false
+    share: [x, bluesky, reddit, hackernews, linkedin, telegram, email, copy]
 
 taxonomies:
   tag: tags
