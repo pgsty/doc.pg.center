@@ -82,9 +82,15 @@ chinese_list="$build_dir/chinese.txt"
 ) >"$chinese_list"
 diff -u "$english_list" "$chinese_list"
 
-if rg -n --pcre2 \
-  '(?:\]\(/(?:patroni|pgbackrest|pgbouncer|pgbadger|haproxy|etcd)/|^\s*\[[^]]+\]:\s+/(?:haproxy|etcd)/)(?![^)[:space:]]*\.(?:png|gif|svg|json|txt)(?:[?#][^)]*)?(?:\)|$))' \
-  "$content_dir" -g '*.zh.md'; then
+bad_component_links=$(
+  git -C "$project_dir" grep -n -E \
+    '\]\(/(patroni|pgbackrest|pgbouncer|pgbadger|haproxy|etcd)/|^\[[^]]+\]:[[:space:]]+/(haproxy|etcd)/' \
+    -- ':(glob)content/**/*.zh.md' \
+    | grep -E -v '\.(png|gif|svg|json|txt)([?#][^)]*)?\)?$' \
+    || true
+)
+if [[ -n "$bad_component_links" ]]; then
+  echo "$bad_component_links" >&2
   echo 'Chinese content contains an English-locale component link' >&2
   exit 1
 fi
@@ -108,9 +114,11 @@ grep -Fq 'title: "etcd 3.7 Documentation"' "$content_dir/etcd/_index.md"
 grep -Fq 'title: "etcd 3.7 中文文档"' "$content_dir/etcd/_index.zh.md"
 
 python3 "$project_dir/scripts/check-bilingual-parity.py"
-python3 "$project_dir/scripts/check-component-translations.py" haproxy etcd
 
 hugo --source "$project_dir" --destination "$build_dir/public" --gc --minify --cleanDestinationDir --printPathWarnings --panicOnWarning
+
+TRANSLATION_RENDERED_DIR="$build_dir/public" \
+  python3 "$project_dir/scripts/check-component-translations.py" haproxy etcd
 
 for page in \
   index.html \
