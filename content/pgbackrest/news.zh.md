@@ -7,9 +7,8 @@ icon: fa-solid fa-newspaper
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/news/]
+upstream_link: "https://pgbackrest.org/news.html"
 ---
-
-> 原始页面： <https://pgbackrest.org/news.html>
 
 --------
 

@@ -5,11 +5,11 @@ weight: 40
 description: "Configure query logging, log_line_prefix, locale, and supporting statistics for pgBadger"
 icon: fa-solid fa-database
 module: [PGBADGER]
-categories: [Configuration]
+categories: [Task]
 aliases: [/docs/pgbadger/postgresql-logging/]
+upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_name: "pgBadger README.md"
 ---
-
-> Source: pinned upstream [`README.md`](https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md), sections “PostgreSQL Configuration” and “Log Statements”.
 
 pgBadger can only report information that PostgreSQL writes to the log. Start with a parseable prefix and a deliberate statement-logging policy, then add the operational events you want to analyze.
 

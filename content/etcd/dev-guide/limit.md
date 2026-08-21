@@ -2,9 +2,9 @@
 title: System limits
 weight: 3625
 description: "etcd limits: requests and storage"
+categories: [Reference]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-guide/limit.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-guide/limit.md. -->
 
 ## Request size limit
 

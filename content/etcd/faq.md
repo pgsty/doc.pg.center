@@ -3,9 +3,9 @@ title: FAQ
 weight: 1200
 description: Frequently asked questions
 icon: fa-solid fa-circle-question
+categories: [Reference]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/faq.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/faq.md. -->
 
 ## etcd, general
 

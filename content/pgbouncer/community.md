@@ -6,9 +6,8 @@ icon: fas fa-user-group
 module: [PGBOUNCER]
 categories: [Concept]
 aliases: [/docs/pgbouncer/community/]
+upstream_link: "https://www.pgbouncer.org/community.html"
 ---
-
-> Source: <https://www.pgbouncer.org/community.html>
 
 --------
 

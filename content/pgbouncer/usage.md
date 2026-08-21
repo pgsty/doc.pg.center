@@ -7,9 +7,8 @@ icon: fa-solid fa-bell-concierge
 module: [PGBOUNCER]
 categories: [Task]
 aliases: [/docs/pgbouncer/usage/]
+upstream_link: "https://www.pgbouncer.org/usage.html"
 ---
-
-> Source: <https://www.pgbouncer.org/usage.html>
 
 --------
 

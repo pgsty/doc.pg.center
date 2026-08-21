@@ -2,9 +2,9 @@
 title: Golang modules
 weight: 1650
 description: Organization of the etcd project's golang modules
+categories: [Reference]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-internal/modules.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-internal/modules.md. -->
 
 The etcd project (since version 3.5) is organized into multiple
 [golang modules](https://golang.org/ref/mod) hosted  in a [single repository](https://golang.org/ref/mod#vcs-dir).

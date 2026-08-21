@@ -7,8 +7,8 @@ icon: fa-solid fa-circle-question
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/faq/]
+upstream_link: "https://pgbackrest.org/faq.html"
 ---
-
 
 --------
 

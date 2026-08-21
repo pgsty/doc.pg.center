@@ -6,9 +6,8 @@ description: "Frequently asked questions about Patroni operation and troubleshoo
 module: [PATRONI]
 categories: [Reference]
 aliases: [/docs/patroni/faq/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/faq.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/faq.html
 
 <a id="faq"></a>
 In this section you will find answers for the most frequently asked questions about Patroni. Each sub-section attempts to focus on different kinds of questions.

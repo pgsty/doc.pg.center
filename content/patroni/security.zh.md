@@ -6,9 +6,8 @@ description: "DCS、REST API 及凭据处理的安全注意事项。"
 module: [PATRONI]
 categories: [概念]
 aliases: [/docs/patroni/security/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/security.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/security.html
 
 <a id="security"></a>
 Patroni 集群有两个需要防范未授权访问的接口：分布式配置存储（DCS）和 Patroni REST API。

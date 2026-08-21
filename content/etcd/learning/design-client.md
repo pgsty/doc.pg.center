@@ -2,9 +2,9 @@
 title: etcd client design
 weight: 2250
 description: Client architectural decisions & their implementation details
+categories: [Concept]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/learning/design-client.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/learning/design-client.md. -->
 
 etcd Client Design
 ==================

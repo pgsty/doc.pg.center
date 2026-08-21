@@ -7,9 +7,8 @@ icon: fa-solid fa-circle-check
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/check/]
+upstream_link: "https://pgbackrest.org/command.html#command-check"
 ---
-
-> 原始页面： [pgBackRest Command Docs: check](https://pgbackrest.org/command.html#command-check)
 
 `check` 命令用于验证 pgBackRest 及 `archive_command` 的配置是否正确，确保指定 stanza（stanza 是 pgBackRest 中用于标识 PostgreSQL 集群备份配置的逻辑名称）的归档与备份能够正常运作。该命令会对当前主机上为该 stanza 配置的所有仓库和数据库逐一检查，可检测出配置错误——尤其是归档配置问题，此类问题会导致所需的 WAL 段无法进入归档，从而造成备份不完整。此命令可在 PostgreSQL 主机或仓库主机上运行；也可在备库主机上运行，但由于备库无法执行 `pg_switch_xlog()`/`pg_switch_wal()`，命令仅会测试仓库配置。
 

@@ -8,9 +8,8 @@ sidebar_expanded: true
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/]
+upstream_link: "https://pgbackrest.org/command.html"
 ---
-
-> Source: <https://pgbackrest.org/command.html>
 
 ## Introduction
 

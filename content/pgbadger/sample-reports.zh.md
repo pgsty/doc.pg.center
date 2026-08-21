@@ -5,13 +5,14 @@ weight: 80
 description: "从本地站点快照打开完整、仅错误与增量 pgBadger 报告"
 icon: fa-solid fa-chart-column
 module: [PGBADGER]
-categories: [示例]
+categories: [参考]
 aliases: [/docs/pgbadger/sample-reports/]
+upstream_link: "https://pgbadger.darold.net/#reports"
+upstream_name: "pgBadger website"
+upstream_ref: "site snapshot of 2026-08-15"
 ---
 
-> 来源：[pgBadger 官网](https://pgbadger.darold.net/#reports)链接的三份示例，下载于 2026-08-15。示例内容由 pgBadger 11.8 于 2022 年 5 月生成。
-
-原始示例已与本站一起保存，因此即使无法访问上游服务器，也能继续使用报告导航、图表、样式与脚本。
+示例内容由 pgBadger 11.8 于 2022 年 5 月生成。原始示例已与本站一起保存，因此即使无法访问上游服务器，也能继续使用报告导航、图表、样式与脚本。
 
 | 示例 | 展示内容 | 本地副本 |
 |---|---|---|

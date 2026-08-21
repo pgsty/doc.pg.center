@@ -7,9 +7,10 @@ icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [教程]
 aliases: [/docs/pgbadger/download/]
+upstream_link: "https://pgbadger.darold.net/#download"
+upstream_name: "pgBadger website"
+upstream_ref: "site snapshot of 2026-08-15"
 ---
-
-> 来源：[官网 Download 区段](https://pgbadger.darold.net/#download)与固定上游 [`README.md`](https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md)。
 
 ## 选择分发渠道 {#distribution-channels}
 

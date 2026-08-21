@@ -7,9 +7,8 @@ icon: fa-solid fa-circle-question
 module: [PGBOUNCER]
 categories: [Reference]
 aliases: [/docs/pgbouncer/faq/]
+upstream_link: "https://www.pgbouncer.org/faq.html"
 ---
-
-> Source: <https://www.pgbouncer.org/faq.html>
 
 --------
 

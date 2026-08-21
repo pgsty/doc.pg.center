@@ -6,9 +6,8 @@ description: "Standby cluster setup, behavior, and replication from remote prima
 module: [PATRONI]
 categories: [Task]
 aliases: [/docs/patroni/standby_cluster/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/standby_cluster.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/standby_cluster.html
 
 <a id="standby_cluster"></a>
 Patroni also support running cascading replication to a remote datacenter (region) using a feature that is called "standby cluster". This type of clusters has:

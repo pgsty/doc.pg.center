@@ -2,9 +2,9 @@
 title: Storage Memory Usage Benchmark
 weight: 5125
 description: Performance measures for etcd storage (in-memory index & page cache)
+categories: [Reference]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/benchmarks/etcd-storage-memory-benchmark.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/benchmarks/etcd-storage-memory-benchmark.md. -->
 
 <!---todo: link storage to storage design doc-->
 Two components of etcd storage consume physical memory. The etcd process allocates an *in-memory index* to speed key lookup. The process's *page cache*, managed by the operating system, stores recently-accessed data from disk for quick re-use.

@@ -3,9 +3,9 @@ title: Install
 weight: 1150
 description: Instructions for installing etcd from pre-built binaries or from source.
 icon: fa-solid fa-download
+categories: [Task]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/install.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/install.md. -->
 
 ## Requirements
 

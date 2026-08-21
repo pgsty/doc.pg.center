@@ -7,9 +7,8 @@ icon: fa-solid fa-heart-pulse
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/server-ping/]
+upstream_link: "https://pgbackrest.org/command.html#command-server-ping"
 ---
-
-> 原始页面： [pgBackRest Command Docs: server-ping](https://pgbackrest.org/command.html#command-server-ping)
 
 向 pgBackRest TLS 服务器发送 ping，确认其正在接受连接。此命令仅作为存活性检查，不进行身份验证。
 

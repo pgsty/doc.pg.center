@@ -7,9 +7,9 @@ icon: fa-solid fa-file-export
 module: [PGBADGER]
 categories: [参考]
 aliases: [/docs/pgbadger/output-formats/]
+upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_name: "pgBadger README.md"
 ---
-
-> 来源：固定上游 [`README.md`](https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md) 的 “Binary Format” 与 “JSON Format” 章节，以及生成的命令参考。
 
 pgBadger 会根据输出文件扩展名，或 `-x` / `--extension` 选项选择格式。同一次解析可多次使用 `-o` / `--outfile`，同时生成多种格式。
 

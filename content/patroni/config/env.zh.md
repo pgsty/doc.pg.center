@@ -7,9 +7,8 @@ description: "用于覆盖 Patroni 配置文件参数的环境变量。"
 module: [PATRONI]
 categories: [参考]
 aliases: [/docs/patroni/config/env/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/ENVIRONMENT.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/ENVIRONMENT.html
 
 <a id="env"></a>
 可以使用系统环境变量覆盖 Patroni 配置文件中定义的部分配置参数。本文档列出了 Patroni 处理的所有环境变量。通过环境变量设置的值始终优先于配置文件中的值。

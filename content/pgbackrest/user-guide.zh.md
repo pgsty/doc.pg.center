@@ -7,9 +7,8 @@ icon: fa-brands fa-ubuntu
 module: [PGBACKREST]
 categories: [教程]
 aliases: [/docs/pgbackrest/user-guide/]
+upstream_link: "https://pgbackrest.org/user-guide.html"
 ---
-
-> 原始页面： <https://pgbackrest.org/user-guide.html>
 
 --------
 

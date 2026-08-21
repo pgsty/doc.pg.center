@@ -7,9 +7,8 @@ icon: fa-solid fa-play
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/start/]
+upstream_link: "https://pgbackrest.org/command.html#command-start"
 ---
-
-> Source: [pgBackRest Command Docs: start](https://pgbackrest.org/command.html#command-start)
 
 If the pgBackRest processes were previously stopped using the `stop` command then they can be started again using the `start` command. Note that this will not immediately start up any pgBackRest processes but they are allowed to run. See [Starting and Stopping](/pgbackrest/user-guide/#starting-and-stopping) for more information and examples.
 

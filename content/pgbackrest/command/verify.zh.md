@@ -7,9 +7,8 @@ icon: fa-solid fa-shield-halved
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/verify/]
+upstream_link: "https://pgbackrest.org/command.html#command-verify"
 ---
-
-> 原始页面： [pgBackRest Command Docs: verify](https://pgbackrest.org/command.html#command-verify)
 
 `verify` 用于验证仓库中的备份和归档是否有效。
 

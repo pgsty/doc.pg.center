@@ -2,9 +2,9 @@
 title: Design of runtime reconfiguration
 weight: 4650
 description: The design of etcd’s runtime reconfiguration commands
+categories: [Concept]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/runtime-reconf-design.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/runtime-reconf-design.md. -->
 
 Runtime reconfiguration is one of the hardest and most error prone features in a distributed system, especially in a consensus based system like etcd.
 

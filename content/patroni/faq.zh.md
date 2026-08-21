@@ -6,9 +6,8 @@ description: "关于 Patroni 运维与故障排查的常见问题解答。"
 module: [PATRONI]
 categories: [参考]
 aliases: [/docs/patroni/faq/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/faq.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/faq.html
 
 <a id="faq"></a>
 本节收录了关于 Patroni 最常见问题的解答，各子节聚焦于不同类别的问题。

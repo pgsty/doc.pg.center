@@ -7,9 +7,8 @@ description: "Patroni YAML 配置选项与各配置节的完整参考。"
 module: [PATRONI]
 categories: [参考]
 aliases: [/docs/patroni/config/yaml/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/yaml_configuration.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/yaml_configuration.html
 
 <a id="yaml"></a>
 

@@ -7,9 +7,8 @@ description: "Procedure to convert existing PostgreSQL data into a Patroni clust
 module: [PATRONI]
 categories: [Task]
 aliases: [/docs/patroni/existing_data/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/existing_data.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/existing_data.html
 
 <a id="existing_data"></a>
 This section describes the process for converting a standalone PostgreSQL instance into a Patroni cluster.

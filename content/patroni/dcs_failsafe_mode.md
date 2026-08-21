@@ -6,9 +6,8 @@ description: "DCS failsafe mode behavior, requirements, and operational caveats.
 module: [PATRONI]
 categories: [Concept]
 aliases: [/docs/patroni/dcs_failsafe_mode/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/dcs_failsafe_mode.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/dcs_failsafe_mode.html
 
 <a id="dcs_failsafe_mode"></a>
 

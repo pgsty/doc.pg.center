@@ -7,9 +7,8 @@ description: "Complete reference for Patroni YAML configuration options and sect
 module: [PATRONI]
 categories: [Reference]
 aliases: [/docs/patroni/config/yaml/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/yaml_configuration.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/yaml_configuration.html
 
 <a id="yaml"></a>
 

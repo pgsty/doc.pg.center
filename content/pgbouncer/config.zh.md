@@ -7,9 +7,8 @@ icon: fa-solid fa-code
 module: [PGBOUNCER]
 categories: [参考]
 aliases: [/docs/pgbouncer/config/]
+upstream_link: "https://www.pgbouncer.org/config.html"
 ---
-
-> 原始页面： <https://www.pgbouncer.org/config.html>
 
 --------
 

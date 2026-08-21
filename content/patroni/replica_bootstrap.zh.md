@@ -7,9 +7,8 @@ description: "从库镜像、引导及自定义从库创建工作流。"
 module: [PATRONI]
 categories: [任务]
 aliases: [/docs/patroni/replica_bootstrap/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/replica_bootstrap.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/replica_bootstrap.html
 
 <a id="replica_imaging_and_bootstrap"></a>
 Patroni 支持自定义新从库的创建方式，也支持定义全新空集群在引导时的行为。两者有明确区别：只有当 DCS 中存在 **`initialize`** 键时，Patroni 才会创建从库。若不存在该键，Patroni 将在第一个抢到初始化锁的节点上独占执行引导流程。

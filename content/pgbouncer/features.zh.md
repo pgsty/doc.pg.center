@@ -6,9 +6,8 @@ icon: fa-solid fa-wand-magic-sparkles
 module: [PGBOUNCER]
 categories: [概念]
 aliases: [/docs/pgbouncer/features/]
+upstream_link: "https://www.pgbouncer.org/features.html"
 ---
-
-> 原始页面： <https://www.pgbouncer.org/features.html>
 
 - 连接轮换时，按激进程度分为以下几种策略：
 

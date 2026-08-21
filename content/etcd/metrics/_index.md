@@ -3,9 +3,9 @@ title: Metrics
 weight: 1350
 description: Metrics for real-time monitoring and debugging
 icon: fa-solid fa-chart-line
+categories: [Reference]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/metrics/_index.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/metrics/_index.md. -->
 
 etcd uses [Prometheus][prometheus] for metrics reporting. The metrics can be used for real-time monitoring and debugging. etcd does not persist its metrics; if a member restarts, the metrics will be reset.
 

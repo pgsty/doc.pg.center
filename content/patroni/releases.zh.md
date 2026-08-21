@@ -6,9 +6,8 @@ description: "Patroni 各版本发布说明与变更历史。"
 module: [PATRONI]
 categories: [参考]
 aliases: [/docs/patroni/releases/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/releases.html"
 ---
-
-> 原始页面：https://patroni.readthedocs.io/en/latest/releases.html
 
 <a id="releases"></a>
 

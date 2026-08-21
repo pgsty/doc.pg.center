@@ -7,9 +7,8 @@ icon: fa-solid fa-trash
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/stanza-delete/]
+upstream_link: "https://pgbackrest.org/command.html#command-stanza-delete"
 ---
-
-> Source: [pgBackRest Command Docs: stanza-delete](https://pgbackrest.org/command.html#command-stanza-delete)
 
 The `stanza-delete` command removes data in the repository associated with a stanza.
 

@@ -6,9 +6,8 @@ description: "Patroni 与 Citus 协调节点及工作节点组的集成详情。
 module: [PATRONI]
 categories: [概念]
 aliases: [/docs/patroni/citus/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/citus.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/citus.html
 
 <a id="citus"></a>
 Patroni 使部署 [多节点 Citus](https://docs.citusdata.com/en/stable/installation/multi_node.html) 集群变得极为简单。

@@ -4,19 +4,20 @@ linkTitle: PgBouncer
 weight: 30
 description: >
   PgBouncer - Lightweight connection pooler for PostgreSQL 
-icon: fa-solid fa-diagram-project
+icon: fa-solid fa-arrows-turn-to-dots
 type: docs
 sidebar_root_for: self
 sidebar_root_link_self: true
 module: [PGBOUNCER]
 categories: [Concept]
 aliases: [/docs/pgbouncer/]
+upstream_source: pgbouncer
+upstream_link: "https://www.pgbouncer.org/"
 cascade:
+  upstream_source: pgbouncer
   type: docs
   module: [PGBOUNCER]
 ---
-
-> Source: <https://www.pgbouncer.org/>
 
 **pgbouncer** is a PostgreSQL connection pooler. Any target application
 can be connected to **pgbouncer** as if it were a PostgreSQL server,

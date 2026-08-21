@@ -7,9 +7,8 @@ icon: fa-solid fa-cloud-arrow-up
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/archive-push/]
+upstream_link: "https://pgbackrest.org/command.html#command-archive-push"
 ---
-
-> 原始页面： [pgBackRest Command Docs: archive-push](https://pgbackrest.org/command.html#command-archive-push)
 
 接收来自 PostgreSQL 的 WAL 段，并将其归档到各个仓库中（仓库路径由带索引的 `repo-path` 选项定义，详见 [**仓库选项**](/zh/pgbackrest/configuration/#仓库选项) 章节）。WAL 段可以立即推送到归档，也可以根据 `archive-async` 的值先暂存在本地。配置了多个仓库时，`archive-push` 会尽量向所有仓库推送。
 

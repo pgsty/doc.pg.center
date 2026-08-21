@@ -2,9 +2,9 @@
 title: Upgrading etcd clusters and applications
 weight: 6500
 description: Documentation list for upgrading etcd clusters and applications
+categories: [Task]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/upgrades/upgrading-etcd.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/upgrades/upgrading-etcd.md. -->
 
 This section contains documents specific to upgrading etcd clusters and applications.
 

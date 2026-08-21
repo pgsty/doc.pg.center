@@ -7,8 +7,8 @@ icon: fa-solid fa-scroll
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/release/]
+upstream_link: "https://pgbackrest.org/release.html"
 ---
-
 
 --------
 

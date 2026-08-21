@@ -2,9 +2,9 @@
 title: Downgrading etcd clusters and applications
 weight: 6500
 description: Documentation list for downgrading etcd clusters and applications
+categories: [Task]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/downgrades/downgrading-etcd.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/downgrades/downgrading-etcd.md. -->
 
 This section contains documents specific to downgrading etcd clusters and applications.
 

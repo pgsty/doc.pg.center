@@ -6,9 +6,8 @@ description: "Chronological Patroni release notes and change history."
 module: [PATRONI]
 categories: [Reference]
 aliases: [/docs/patroni/releases/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/releases.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/releases.html
 
 <a id="releases"></a>
 

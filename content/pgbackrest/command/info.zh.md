@@ -7,9 +7,8 @@ icon: fa-solid fa-circle-info
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/info/]
+upstream_link: "https://pgbackrest.org/command.html#command-info"
 ---
-
-> 原始页面： [pgBackRest Command Docs: info](https://pgbackrest.org/command.html#command-info)
 
 `info` 命令可查询单个 stanza（stanza 是 pgBackRest 中用于标识一个 PostgreSQL 集群备份配置的逻辑名称）或所有 stanza 的信息。默认输出为文本格式，以人类可读的摘要展示所请求 stanza 的备份信息。该格式可能随版本更新而变化。
 

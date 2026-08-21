@@ -7,9 +7,8 @@ icon: fa-solid fa-hourglass-end
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/expire/]
+upstream_link: "https://pgbackrest.org/command.html#command-expire"
 ---
-
-> 原始页面： [pgBackRest Command Docs: expire](https://pgbackrest.org/command.html#command-expire)
 
 pgBackRest 基于保留策略对全量备份进行轮换，策略可按数量或时间段定义。按数量保留时，过期操作只关注需要保留的备份数量，不考虑备份的创建时间。差异备份按数量进行保留，但当其依赖的全量备份过期时，差异备份也会随之过期。增量备份没有独立的保留策略——它们始终随关联的全量备份或差异备份一同过期。详情及示例请参见 [**全量备份保留策略**](/zh/pgbackrest/user-guide/#全量备份保留策略) 和 [**差异备份保留策略**](/zh/pgbackrest/user-guide/#差异备份保留策略) 章节。
 

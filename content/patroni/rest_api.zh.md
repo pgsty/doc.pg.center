@@ -6,9 +6,8 @@ description: "Patroni REST API 端点与操作行为参考。"
 module: [PATRONI]
 categories: [参考]
 aliases: [/docs/patroni/rest_api/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/rest_api.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/rest_api.html
 
 <a id="rest_api"></a>
 Patroni 提供了丰富的 REST API，供 Patroni 自身在主库竞选期间调用，也供 [patronictl](/zh/patroni/patronictl#patronictl) 工具执行故障转移、主从切换、重新初始化、重启和重载等操作，还可供 HAProxy 或其他负载均衡器执行 HTTP 健康检查，以及用于监控目的。以下是 Patroni REST API 端点的完整列表。

@@ -2,9 +2,9 @@
 title: PR management
 weight: 8200
 description: "Guidelines for managing etcd pull requests"
+categories: [Task]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/triage/PRs.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/triage/PRs.md. -->
 
 ## Purpose
 

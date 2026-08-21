@@ -7,9 +7,8 @@ icon: fa-solid fa-scroll
 module: [PGBOUNCER]
 categories: [参考]
 aliases: [/docs/pgbouncer/changelog/]
+upstream_link: "https://www.pgbouncer.org/changelog.html"
 ---
-
-> 来源： <https://www.pgbouncer.org/changelog.html>
 
 --------
 

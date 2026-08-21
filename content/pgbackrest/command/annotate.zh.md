@@ -7,9 +7,8 @@ icon: fa-solid fa-pen-to-square
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/annotate/]
+upstream_link: "https://pgbackrest.org/command.html#command-annotate"
 ---
-
-> 原始页面： [pgBackRest Command Docs: annotate](https://pgbackrest.org/command.html#command-annotate)
 
 `backup` 命令执行时附加的注解，可在事后通过 `annotate` 命令进行添加、修改或删除。
 

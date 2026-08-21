@@ -2,9 +2,9 @@
 title: How to save the database
 description: Guide to taking a snapshot of the etcd database
 weight: 1100
+categories: [Task]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/tasks/operator/how-to-save-database.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/tasks/operator/how-to-save-database.md. -->
 
 ## Pre-requisites
 

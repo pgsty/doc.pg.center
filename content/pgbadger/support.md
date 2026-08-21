@@ -5,11 +5,12 @@ weight: 100
 description: "Report bugs, request features, contribute patches, and find professional PostgreSQL support"
 icon: fa-solid fa-life-ring
 module: [PGBADGER]
-categories: [Community]
+categories: [Task]
 aliases: [/docs/pgbadger/support/]
+upstream_link: "https://pgbadger.darold.net/#support"
+upstream_name: "pgBadger website"
+upstream_ref: "site snapshot of 2026-08-15"
 ---
-
-> Sources: [official support section](https://pgbadger.darold.net/#support) and upstream [`CONTRIBUTING.md`](https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/CONTRIBUTING.md).
 
 pgBadger is maintained as an open project. Bug reports, feature proposals, documentation fixes, and patches are handled through the upstream GitHub repository.
 

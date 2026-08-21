@@ -7,9 +7,8 @@ icon: fa-solid fa-arrow-up-right-dots
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/stanza-upgrade/]
+upstream_link: "https://pgbackrest.org/command.html#command-stanza-upgrade"
 ---
-
-> 原始页面： [pgBackRest Command Docs: stanza-upgrade](https://pgbackrest.org/command.html#command-stanza-upgrade)
 
 将 PostgreSQL 升级到新的主版本后，必须立即将所有 pgBackRest 配置中的 `pg-path` 更新为新的数据库位置，然后运行 `stanza-upgrade` 命令。若主机上配置了多个仓库，每个仓库都会执行 stanza 升级。若数据库处于离线状态，请使用 `--no-online` 选项。
 

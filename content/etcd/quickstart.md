@@ -3,9 +3,9 @@ title: Quickstart
 weight: 900
 description: Get etcd up and running in less than 5 minutes!
 icon: fa-solid fa-rocket
+categories: [Tutorial]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/quickstart.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/quickstart.md. -->
 
 Follow these instructions to locally install, run, and test a single-member
 cluster of etcd:

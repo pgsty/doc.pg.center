@@ -7,9 +7,8 @@ description: "贡献工作流程、支持渠道与开发指南。"
 module: [PATRONI]
 categories: [任务]
 aliases: [/docs/patroni/contributing_guidelines/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/contributing_guidelines.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/contributing_guidelines.html
 
 <a id="contributing_guidelines"></a>
 <a id="chatting"></a>

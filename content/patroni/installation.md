@@ -6,9 +6,8 @@ description: "Installation and upgrade instructions for Patroni across supported
 module: [PATRONI]
 categories: [Tutorial]
 aliases: [/docs/patroni/installation/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/installation.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/installation.html
 
 <a id="installation"></a>
 

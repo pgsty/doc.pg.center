@@ -7,9 +7,8 @@ icon: fa-solid fa-circle-info
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/info/]
+upstream_link: "https://pgbackrest.org/command.html#command-info"
 ---
-
-> Source: [pgBackRest Command Docs: info](https://pgbackrest.org/command.html#command-info)
 
 The `info` command operates on a single stanza or all stanzas. Text output is the default and gives a human-readable summary of backups for the stanza(s) requested. This format is subject to change with any release.
 

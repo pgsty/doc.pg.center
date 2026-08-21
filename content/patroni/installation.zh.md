@@ -6,9 +6,8 @@ description: "在各支持平台上安装和升级 Patroni 的详细说明。"
 module: [PATRONI]
 categories: [教程]
 aliases: [/docs/patroni/installation/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/installation.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/installation.html
 
 <a id="installation"></a>
 

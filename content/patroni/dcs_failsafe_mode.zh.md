@@ -6,9 +6,8 @@ description: "DCS 故障安全模式的行为机制、启用条件与操作注�
 module: [PATRONI]
 categories: [概念]
 aliases: [/docs/patroni/dcs_failsafe_mode/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/dcs_failsafe_mode.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/dcs_failsafe_mode.html
 
 <a id="dcs_failsafe_mode"></a>
 

@@ -6,9 +6,8 @@ description: "Patroni integration details for Citus coordinator and worker group
 module: [PATRONI]
 categories: [Concept]
 aliases: [/docs/patroni/citus/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/citus.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/citus.html
 
 <a id="citus"></a>
 Patroni makes it extremely simple to deploy [Multi-Node Citus](https://docs.citusdata.com/en/stable/installation/multi_node.html) clusters.

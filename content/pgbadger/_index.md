@@ -3,14 +3,17 @@ title: "pgBadger 13.2 Documentation"
 linkTitle: pgBadger
 weight: 40
 description: "Fast PostgreSQL and PgBouncer log analysis with detailed, self-contained reports"
-icon: fa-solid fa-chart-line
+icon: fa-solid fa-otter
 type: docs
 sidebar_root_for: self
 sidebar_root_link_self: true
 module: [PGBADGER]
 categories: [Concept]
 aliases: [/docs/pgbadger/, /docs/pgbadger/documentation/]
+upstream_source: pgbadger
+upstream_link: "https://github.com/darold/pgbadger"
 cascade:
+  upstream_source: pgbadger
   type: docs
   module: [PGBADGER]
 ---
@@ -18,8 +21,6 @@ cascade:
 ![pgBadger logo](/img/docs/pgbadger/logo.png "pgBadger")
 
 **pgBadger** is a fast, standalone PostgreSQL log analyzer written in Perl. It reads PostgreSQL or PgBouncer logs and produces detailed HTML, text, binary, JSON, or raw CSV output. The HTML reports are self-contained, interactive, zoomable, and need only a web browser to view.
-
-> Source snapshot: [darold/pgbadger](https://github.com/darold/pgbadger) at commit [`a1ad95a`](https://github.com/darold/pgbadger/commit/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae), downloaded on 2026-08-15. The software and its documentation are open source under the PostgreSQL License.
 
 ## Why pgBadger {#why-pgbadger}
 

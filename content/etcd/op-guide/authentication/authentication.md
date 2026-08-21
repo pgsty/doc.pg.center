@@ -2,9 +2,9 @@
 title: Authentication
 description: Guide to authenticating an etcd cluster
 weight: 4050
+categories: [Task]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/authentication/authentication.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/authentication/authentication.md. -->
 
 `auth`,`user`,`role` for authentication:
 

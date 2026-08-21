@@ -2,9 +2,9 @@
 title: Run etcd clusters as a Kubernetes StatefulSet
 weight: 4200
 description: Running etcd as a Kubernetes StatefulSet
+categories: [Task]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/kubernetes.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/kubernetes.md. -->
 
 Below demonstrates how to perform the [static bootstrap process](/etcd/op-guide/clustering/#static) as a Kubernetes StatefulSet.
 

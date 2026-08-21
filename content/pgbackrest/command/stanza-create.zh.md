@@ -7,9 +7,8 @@ icon: fa-solid fa-square-plus
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/stanza-create/]
+upstream_link: "https://pgbackrest.org/command.html#command-stanza-create"
 ---
-
-> 原始页面： [pgBackRest Command Docs: stanza-create](https://pgbackrest.org/command.html#command-stanza-create)
 
 `stanza-create` 命令须在 `pgbackrest.conf` 中完成 stanza 配置后再执行（stanza 是 pgBackRest 中用于标识一个 PostgreSQL 集群备份配置的逻辑名称）。若配置了多个仓库，`stanza-create` 会在每个仓库上分别建立 stanza。已创建的 stanza 会被跳过，因此即便新增了仓库，也可以随时安全地重复执行 `stanza-create`。
 

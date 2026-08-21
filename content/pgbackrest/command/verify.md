@@ -7,9 +7,8 @@ icon: fa-solid fa-shield-halved
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/verify/]
+upstream_link: "https://pgbackrest.org/command.html#command-verify"
 ---
-
-> Source: [pgBackRest Command Docs: verify](https://pgbackrest.org/command.html#command-verify)
 
 Verify determines if the backups and archives in a repository are valid.
 

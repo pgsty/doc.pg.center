@@ -7,9 +7,8 @@ icon: fa-solid fa-hourglass-end
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/expire/]
+upstream_link: "https://pgbackrest.org/command.html#command-expire"
 ---
-
-> Source: [pgBackRest Command Docs: expire](https://pgbackrest.org/command.html#command-expire)
 
 pgBackRest does full backup rotation based on the retention type which can be a count or a time period. When a count is specified, then expiration is not concerned with when the backups were created but with how many must be retained. Differential backups are count-based but will always be expired when the full backup they depend on is expired. Incremental backups are not expired by retention independently — they are always expired with their related full or differential backup. See sections [Full Backup Retention](/pgbackrest/user-guide/#full-backup-retention) and [Differential Backup Retention](/pgbackrest/user-guide/#differential-backup-retention) for details and examples.
 

@@ -2,7 +2,7 @@
 title: "pgBackRest 2.59.0 中文文档"
 linkTitle: pgBackRest
 weight: 20
-icon: fa-solid fa-box-archive
+icon: fa-solid fa-couch
 type: docs
 sidebar_root_for: self
 sidebar_root_link_self: true
@@ -10,13 +10,13 @@ description: "可靠的 PostgreSQL 备份与恢复工具 —— pgBackRest 文�
 module: [PGBACKREST]
 categories: [概念]
 aliases: [/docs/pgbackrest/]
+upstream_source: pgbackrest
+upstream_link: "https://pgbackrest.org/"
 cascade:
+  upstream_source: pgbackrest
   type: docs
   module: [PGBACKREST]
 ---
-
-> pgBackRest 2.59.0 文档快照： <https://pgbackrest.org/>
-
 
 --------
 

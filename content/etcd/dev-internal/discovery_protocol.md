@@ -2,9 +2,9 @@
 title: Discovery service protocol
 weight: 1500
 description: Discover other etcd members in a cluster bootstrap phase
+categories: [Reference]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-internal/discovery_protocol.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-internal/discovery_protocol.md. -->
 
 Discovery service protocol helps new etcd member to discover all other members in cluster bootstrap phase using a shared discovery token and endpoint list.
 

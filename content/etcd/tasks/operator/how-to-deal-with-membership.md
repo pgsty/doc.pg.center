@@ -2,9 +2,9 @@
 title: How to Add and Remove Members
 description: Guide to dealing with membership in etcd cluster
 weight: 1300
+categories: [Task]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/tasks/operator/how-to-deal-with-membership.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/tasks/operator/how-to-deal-with-membership.md. -->
 
 `member` to add,remove,update membership:
 

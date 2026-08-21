@@ -7,9 +7,8 @@ icon: fa-solid fa-cloud-arrow-down
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/archive-get/]
+upstream_link: "https://pgbackrest.org/command.html#command-archive-get"
 ---
-
-> Source: [pgBackRest Command Docs: archive-get](https://pgbackrest.org/command.html#command-archive-get)
 
 This command is used by PostgreSQL to restore a backup, perform PITR, or as an alternative to streaming for keeping a replica up to date. WAL segments are required for PostgreSQL recovery or to maintain a replica.
 

@@ -7,9 +7,8 @@ description: "Patroni 与外部备份及编排工具的集成方法。"
 module: [PATRONI]
 categories: [概念]
 aliases: [/docs/patroni/tools_integration/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/tools_integration.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/tools_integration.html
 
 <a id="tools_integration"></a>
 Patroni 能够与技术栈中的其他工具集成。本节列举了一些集成示例，并不详尽，但希望能为您提供参考和启发。

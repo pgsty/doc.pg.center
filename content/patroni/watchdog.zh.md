@@ -6,9 +6,8 @@ description: "Patroni 集群的 watchdog 集成与隔离（fencing）注意事�
 module: [PATRONI]
 categories: [概念]
 aliases: [/docs/patroni/watchdog/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/watchdog.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/watchdog.html
 
 <a id="watchdog"></a>
 
