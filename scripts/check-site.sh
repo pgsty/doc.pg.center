@@ -224,6 +224,7 @@ while IFS= read -r source_file; do
   if [[ $(basename "$route") == '_index' || $(basename "$route") == 'index' ]]; then
     route=${route%/*index}
   fi
+  route=$(printf '%s' "$route" | tr '[:upper:]' '[:lower:]')
   test -s "$build_dir/public/$route/index.html"
 done < <(find "$content_dir/haproxy" -maxdepth 1 -type f -name '*.md' ! -name '_div_*.md' | sort)
 
@@ -237,6 +238,7 @@ while IFS= read -r source_file; do
   if [[ $(basename "$route") == '_index' || $(basename "$route") == 'index' ]]; then
     route=${route%/*index}
   fi
+  route=$(printf '%s' "$route" | tr '[:upper:]' '[:lower:]')
   test -s "$build_dir/public/$route/index.html"
 done < <(find "$content_dir/etcd" -type f -name '*.md' | sort)
 
