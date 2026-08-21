@@ -216,6 +216,7 @@ def rendered_heading_ids(source: Path, expected_levels: list[int] | None = None)
         route = relative.parent
     else:
         route = relative.with_suffix("")
+    route = Path(*[part.lower() for part in route.parts])
     rendered = RENDERED_ROOT / route / "index.html"
     if not rendered.is_file():
         raise ValueError(f"missing rendered English page used for anchors: {rendered}")
