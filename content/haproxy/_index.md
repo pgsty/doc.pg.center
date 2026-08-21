@@ -56,4 +56,5 @@ placeholders separate the manuals in the sidebar without adding directory levels
 
 The complete pinned inputs and SHA-256 checksums are retained under `sources/haproxy/`. The
 [upstream license notice](/third_party/haproxy/LICENSE) and [GPLv2 text](/third_party/haproxy/GPL-2.0)
-are published beside the manuals. This edition remains English-only for now.
+are published beside the manuals. A reviewed Simplified Chinese companion edition is available for
+every page.
