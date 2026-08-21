@@ -7,9 +7,8 @@ icon: fa-solid fa-arrow-up-right-dots
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/stanza-upgrade/]
+upstream_link: "https://pgbackrest.org/command.html#command-stanza-upgrade"
 ---
-
-> Source: [pgBackRest Command Docs: stanza-upgrade](https://pgbackrest.org/command.html#command-stanza-upgrade)
 
 Immediately after upgrading PostgreSQL to a newer major version, the `pg-path` for all pgBackRest configurations must be set to the new database location and the `stanza-upgrade` command run. If there is more than one repository configured on the host, the stanza will be upgraded on each. If the database is offline use the `--no-online` option.
 

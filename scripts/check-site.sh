@@ -36,16 +36,30 @@ test "$etcd_markdown_count" -eq "$etcd_markdown_expected"
 test "$etcd_asset_count" -eq "$etcd_asset_expected"
 test "$haproxy_weights" = "$(seq 10 10 370)"
 test ! -e "$content_dir/docs"
+test ! -e "$content_dir/blog"
 for component in patroni pgbackrest pgbouncer pgbadger haproxy etcd; do
   test -d "$content_dir/$component"
   grep -Fq 'type: docs' "$content_dir/$component/_index.md"
   grep -Fq 'sidebar_root_for: self' "$content_dir/$component/_index.md"
 done
 test -z "$(find "$content_dir/haproxy" -mindepth 1 -type d -print -quit)"
-for divider in intro configuration management; do
-  grep -Fq 'sidebar_divider: true' "$content_dir/haproxy/_div_$divider.md"
-  grep -Fq '  render: never' "$content_dir/haproxy/_div_$divider.md"
+
+# OINK 0.6.0 upstream attribution: one registry entry per tree, one cascade
+# that names it, and one upstream_link on every page inside the tree.
+for component in patroni pgbackrest pgbouncer pgbadger haproxy etcd; do
+  grep -Eq "^${component}:\$" "$project_dir/data/upstreams.yaml"
+  grep -Fq "  upstream_source: $component" "$content_dir/$component/_index.md"
 done
+missing_upstream=$(
+  while IFS= read -r source_file; do
+    grep -q '^upstream_link:' "$source_file" || echo "$source_file"
+  done < <(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger,haproxy,etcd} -type f -name '*.md')
+)
+if [[ -n "$missing_upstream" ]]; then
+  echo 'Pages in a vendored tree without upstream_link front matter:' >&2
+  echo "$missing_upstream" >&2
+  exit 1
+fi
 
 english_list="$build_dir/english.txt"
 chinese_list="$build_dir/chinese.txt"
@@ -88,6 +102,8 @@ for page in \
   zh/index.html \
   search/index.html \
   zh/search/index.html \
+  attribution/index.html \
+  zh/attribution/index.html \
   patroni/index.html \
   zh/patroni/index.html \
   pgbackrest/index.html \
@@ -120,8 +136,6 @@ for page in \
   zh/pgbadger/command-line/index.html \
   pgbadger/releases/13/index.html \
   zh/pgbadger/releases/13/index.html \
-  blog/releases/pgsql-cc-first-edition/index.html \
-  zh/blog/releases/pgsql-cc-first-edition/index.html \
   patroni/index.md \
   zh/patroni/index.md \
   _print/patroni/index.html \
@@ -149,6 +163,7 @@ for page in \
   third_party/haproxy/LICENSE \
   third_party/haproxy/GPL-2.0 \
   img/docs/pgbadger/logo.png \
+  img/slonik.svg \
   images/og.png \
   CNAME \
   favicon.ico \

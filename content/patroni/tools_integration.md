@@ -7,9 +7,8 @@ description: "Integrating Patroni with external backup and orchestration tools."
 module: [PATRONI]
 categories: [Concept]
 aliases: [/docs/patroni/tools_integration/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/tools_integration.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/tools_integration.html
 
 <a id="tools_integration"></a>
 Patroni is able to integrate with other tools in your stack. In this section you will find a list of examples, which although not an exhaustive list, might provide you with ideas on how Patroni can integrate with other tools.

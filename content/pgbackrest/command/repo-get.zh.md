@@ -7,9 +7,8 @@ icon: fa-solid fa-file-arrow-down
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/repo-get/]
+upstream_link: "https://pgbackrest.org/command.html#command-repo-get"
 ---
-
-> 原始页面： [pgBackRest Command Docs: repo-get](https://pgbackrest.org/command.html#command-repo-get)
 
 `repo-get` 命令类似于 Unix 的 `cat` 命令，但支持所有仓库类型。使用此命令需要提供完整的文件名，主要用于管理、排查和测试目的，不是常规 pgBackRest 使用流程中的必需命令。
 

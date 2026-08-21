@@ -6,9 +6,8 @@ description: "基于 Patroni 复制的多数据中心高可用架构模式。"
 module: [PATRONI]
 categories: [概念]
 aliases: [/docs/patroni/ha_multi_dc/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/ha_multi_dc.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/ha_multi_dc.html
 
 <a id="ha_multi_dc"></a>
 部署在多个数据中心的 PostgreSQL 集群，其高可用基于复制实现，复制可以是同步的，也可以是异步的（参见 [**复制模式**](/zh/patroni/replication_modes#replication_modes)）。

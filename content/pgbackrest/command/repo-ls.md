@@ -7,9 +7,8 @@ icon: fa-solid fa-list
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/repo-ls/]
+upstream_link: "https://pgbackrest.org/command.html#command-repo-ls"
 ---
-
-> Source: [pgBackRest Command Docs: repo-ls](https://pgbackrest.org/command.html#command-repo-ls)
 
 Similar to the unix `ls` command but works on any supported repository type. This command accepts a path, absolute or relative to the repository path defined by the `--repo-path` option, and is primarily for administration, investigation, and testing. It is not a required part of a normal pgBackRest setup.
 

@@ -7,6 +7,7 @@ icon: fa-brands fa-redhat
 module: [PGBACKREST]
 categories: [Tutorial]
 aliases: [/docs/pgbackrest/user-guide-rhel/]
+upstream_link: "https://pgbackrest.org/user-guide-rhel.html"
 ---
 
 --------

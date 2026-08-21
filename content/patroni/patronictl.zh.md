@@ -6,9 +6,8 @@ description: "patronictl 的配置说明、语法参考与子命令完整参考�
 module: [PATRONI]
 categories: [参考]
 aliases: [/docs/patroni/patronictl/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/patronictl.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/patronictl.html
 
 <a id="patronictl_version_description"></a>
 <a id="patronictl_version_parameters"></a>

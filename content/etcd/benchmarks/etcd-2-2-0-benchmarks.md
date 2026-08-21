@@ -2,9 +2,9 @@
 title: Benchmarking etcd v2.2.0
 weight: 5750
 description: Performance measures for etcd v2.2.0
+categories: [Reference]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/benchmarks/etcd-2-2-0-benchmarks.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/benchmarks/etcd-2-2-0-benchmarks.md. -->
 
 ## Physical Machines
 

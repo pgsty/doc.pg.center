@@ -7,9 +7,8 @@ icon: fa-solid fa-box-archive
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/backup/]
+upstream_link: "https://pgbackrest.org/command.html#command-backup"
 ---
-
-> Source: [pgBackRest Command Docs: backup](https://pgbackrest.org/command.html#command-backup)
 
 When multiple repositories are configured, pgBackRest will backup to the highest priority repository (e.g. `repo1`) unless the `--repo` option is specified.
 

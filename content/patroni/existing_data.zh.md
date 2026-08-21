@@ -7,9 +7,8 @@ description: "将现有 PostgreSQL 数据迁移并转换为 Patroni 集群的操
 module: [PATRONI]
 categories: [任务]
 aliases: [/docs/patroni/existing_data/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/existing_data.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/existing_data.html
 
 <a id="existing_data"></a>
 本节介绍将独立 PostgreSQL 实例转换为 Patroni 集群的操作流程。

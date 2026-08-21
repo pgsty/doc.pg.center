@@ -7,9 +7,8 @@ description: "结合 Kubernetes 对象、标签和服务发现使用 Patroni。"
 module: [PATRONI]
 categories: [任务]
 aliases: [/docs/patroni/kubernetes/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/kubernetes.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/kubernetes.html
 
 <a id="kubernetes"></a>
 Patroni 可以利用 Kubernetes 对象来存储集群状态并管理领导者键，从而无需任何额外的一致性存储即可在 Kubernetes 环境中运行 PostgreSQL——也就是说，不需要单独部署 Etcd。Patroni 支持两种不同类型的 Kubernetes 对象来存储领导者键和配置键，通过 **`kubernetes.use_endpoints`** 配置项或 **`PATRONI_KUBERNETES_USE_ENDPOINTS`** 环境变量进行选择。

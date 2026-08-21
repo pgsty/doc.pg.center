@@ -7,9 +7,8 @@ icon: fa-solid fa-file-arrow-down
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/repo-get/]
+upstream_link: "https://pgbackrest.org/command.html#command-repo-get"
 ---
-
-> Source: [pgBackRest Command Docs: repo-get](https://pgbackrest.org/command.html#command-repo-get)
 
 Similar to the unix `cat` command but works on any supported repository type. This command requires a fully qualified file name and is primarily for administration, investigation, and testing. It is not a required part of a normal pgBackRest setup.
 

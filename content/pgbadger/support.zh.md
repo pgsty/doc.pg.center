@@ -5,11 +5,12 @@ weight: 100
 description: "报告缺陷、提出功能需求、贡献补丁并寻找 PostgreSQL 专业支持"
 icon: fa-solid fa-life-ring
 module: [PGBADGER]
-categories: [社区]
+categories: [任务]
 aliases: [/docs/pgbadger/support/]
+upstream_link: "https://pgbadger.darold.net/#support"
+upstream_name: "pgBadger website"
+upstream_ref: "site snapshot of 2026-08-15"
 ---
-
-> 来源：[官网 Support 区段](https://pgbadger.darold.net/#support)与上游 [`CONTRIBUTING.md`](https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/CONTRIBUTING.md)。
 
 pgBadger 是一个开放维护的项目。缺陷报告、功能建议、文档修复与代码补丁都通过上游 GitHub 仓库处理。
 

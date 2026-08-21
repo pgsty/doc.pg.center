@@ -7,9 +7,8 @@ icon: fa-solid fa-list-check
 module: [PGBACKREST]
 categories: [概念]
 aliases: [/docs/pgbackrest/metric/]
+upstream_link: "https://pgbackrest.org/metric.html"
 ---
-
-> 原始页面： <https://pgbackrest.org/metric.html>
 
 --------
 

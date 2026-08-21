@@ -6,9 +6,8 @@ description: "备用集群的搭建、行为及从远程主库复制的说明。
 module: [PATRONI]
 categories: [任务]
 aliases: [/docs/patroni/standby_cluster/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/standby_cluster.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/standby_cluster.html
 
 <a id="standby_cluster"></a>
 Patroni 还支持通过"备用集群"功能向远程数据中心（Region）运行级联复制。这类集群具有以下特点：

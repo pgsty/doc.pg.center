@@ -7,9 +7,8 @@ description: "Contribution workflow, support channels, and development guideline
 module: [PATRONI]
 categories: [Task]
 aliases: [/docs/patroni/contributing_guidelines/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/contributing_guidelines.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/contributing_guidelines.html
 
 <a id="contributing_guidelines"></a>
 <a id="chatting"></a>

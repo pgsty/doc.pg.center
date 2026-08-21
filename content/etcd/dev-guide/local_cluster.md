@@ -2,9 +2,9 @@
 title: Set up a local cluster
 weight: 3125
 description: Configuring local clusters for testing and development
+categories: [Tutorial]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-guide/local_cluster.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-guide/local_cluster.md. -->
 
 For testing and development deployments, the quickest and easiest way is to configure a local cluster. For a production deployment, refer to the [clustering][clustering] section.
 

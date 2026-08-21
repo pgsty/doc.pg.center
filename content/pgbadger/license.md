@@ -7,9 +7,9 @@ icon: fa-solid fa-scale-balanced
 module: [PGBADGER]
 categories: [Reference]
 aliases: [/docs/pgbadger/license/]
+upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/LICENSE"
+upstream_name: "pgBadger LICENSE"
 ---
-
-> Source: upstream [`LICENSE`](https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/LICENSE), `README.md`, and `resources/LICENSE` at the pinned source commit.
 
 pgBadger is free and open-source software distributed under the PostgreSQL License. It may be used, copied, modified, and distributed without a fee, subject to retaining the copyright and license notices.
 

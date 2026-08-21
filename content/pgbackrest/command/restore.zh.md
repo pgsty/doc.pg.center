@@ -7,9 +7,8 @@ icon: fa-solid fa-clock-rotate-left
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/restore/]
+upstream_link: "https://pgbackrest.org/command.html#command-restore"
 ---
-
-> Source: [pgBackRest Command Docs: restore](https://pgbackrest.org/command.html#command-restore)
 
 `restore` 命令默认从第一个存有备份的仓库中自动选取最新备份（参见 [**快速开始 - 恢复备份**](/zh/pgbackrest/user-guide/#恢复备份)）。仓库的检查顺序由 `pgbackrest.conf` 决定（例如先检查 repo1，再检查 repo2）。若要从特定仓库恢复，可使用 `--repo` 选项（例如 `--repo=1`）。若需恢复非最新的备份，可传入 `--set` 选项。
 

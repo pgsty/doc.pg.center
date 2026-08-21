@@ -7,9 +7,9 @@ icon: fa-solid fa-gauge-high
 module: [PGBADGER]
 categories: [Task]
 aliases: [/docs/pgbadger/parallel-processing/]
+upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_name: "pgBadger README.md"
 ---
-
-> Source: pinned upstream [`README.md`](https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md), section “Parallel Processing”.
 
 pgBadger has two complementary multiprocessing modes. Choose according to the shape of the input, not simply the number of CPUs.
 

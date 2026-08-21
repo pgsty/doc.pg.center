@@ -6,9 +6,8 @@ icon: fas fa-user-group
 module: [PGBOUNCER]
 categories: [概念]
 aliases: [/docs/pgbouncer/community/]
+upstream_link: "https://www.pgbouncer.org/community.html"
 ---
-
-> 来源： <https://www.pgbouncer.org/community.html>
 
 --------
 

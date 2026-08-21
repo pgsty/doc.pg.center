@@ -3,14 +3,17 @@ title: "pgBadger 13.2 中文文档"
 linkTitle: pgBadger
 weight: 40
 description: "快速分析 PostgreSQL 与 PgBouncer 日志，生成完整且可独立浏览的报告"
-icon: fa-solid fa-chart-line
+icon: fa-solid fa-otter
 type: docs
 sidebar_root_for: self
 sidebar_root_link_self: true
 module: [PGBADGER]
 categories: [概念]
 aliases: [/docs/pgbadger/, /docs/pgbadger/documentation/]
+upstream_source: pgbadger
+upstream_link: "https://github.com/darold/pgbadger"
 cascade:
+  upstream_source: pgbadger
   type: docs
   module: [PGBADGER]
 ---
@@ -18,8 +21,6 @@ cascade:
 ![pgBadger 标志](/img/docs/pgbadger/logo.png "pgBadger")
 
 **pgBadger** 是一款使用 Perl 编写的高性能独立 PostgreSQL 日志分析器。它可以读取 PostgreSQL 或 PgBouncer 日志，并生成 HTML、文本、二进制、JSON 或原始 CSV 输出。HTML 报告自带全部资源，图表可交互、缩放并保存为 PNG，只需浏览器即可查看。
-
-> 来源快照：[darold/pgbadger](https://github.com/darold/pgbadger) 提交 [`a1ad95a`](https://github.com/darold/pgbadger/commit/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae)，下载于 2026-08-15。软件及其文档以 PostgreSQL License 开源发布。
 
 ## 为什么使用 pgBadger {#why-pgbadger}
 

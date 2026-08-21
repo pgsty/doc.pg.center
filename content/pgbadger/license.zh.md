@@ -7,9 +7,9 @@ icon: fa-solid fa-scale-balanced
 module: [PGBADGER]
 categories: [参考]
 aliases: [/docs/pgbadger/license/]
+upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/LICENSE"
+upstream_name: "pgBadger LICENSE"
 ---
-
-> 来源：固定源码提交中的上游 [`LICENSE`](https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/LICENSE)、`README.md` 与 `resources/LICENSE`。
 
 pgBadger 是以 PostgreSQL License 发布的自由开源软件。只要保留版权与许可证声明，就可以免费使用、复制、修改与分发。
 

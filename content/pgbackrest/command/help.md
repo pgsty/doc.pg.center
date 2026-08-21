@@ -7,9 +7,8 @@ icon: fa-solid fa-circle-question
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/help/]
+upstream_link: "https://pgbackrest.org/command.html#command-help"
 ---
-
-> Source: [pgBackRest Command Docs: help](https://pgbackrest.org/command.html#command-help)
 
 Three levels of help are provided. If no command is specified then general help will be displayed. If a command is specified (e.g. `pgbackrest help backup`) then a full description of the command will be displayed along with a list of valid options. If an option is specified in addition to a command (e.g. `pgbackrest help backup type`) then a full description of the option as it applies to the command will be displayed.
 

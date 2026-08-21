@@ -6,9 +6,8 @@ description: "Patroni introduction, quick start, and core high-availability conc
 module: [PATRONI]
 categories: [Concept]
 aliases: [/docs/patroni/readme/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/README.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/README.html
 
 <a id="readme"></a>
 Patroni is a template for high availability (HA) PostgreSQL solutions using Python. Patroni originated as a fork of [Governor](https://github.com/compose/governor), the project from Compose. It includes plenty of new features.

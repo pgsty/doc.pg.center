@@ -7,9 +7,8 @@ icon: fa-solid fa-cloud-arrow-up
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/archive-push/]
+upstream_link: "https://pgbackrest.org/command.html#command-archive-push"
 ---
-
-> Source: [pgBackRest Command Docs: archive-push](https://pgbackrest.org/command.html#command-archive-push)
 
 Accepts a WAL segment from PostgreSQL and archives it in each repository defined by the indexed `repo-path` option (see the [Repository](/pgbackrest/configuration/#repository-options) section for information on configuring repositories). The WAL segment may be pushed immediately to the archive or stored locally depending on the value of `archive-async`. With multiple repositories configured, `archive-push` will attempt to push to as many repositories as possible.
 

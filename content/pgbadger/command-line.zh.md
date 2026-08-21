@@ -7,11 +7,11 @@ icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [参考]
 aliases: [/docs/pgbadger/command-line/]
+upstream_link: "https://github.com/darold/pgbadger/tree/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_name: "pgBadger README.md"
 ---
 
 本页保留固定上游源码生成的完整命令参考。为了能与 `pgbadger --help` 逐项核对，参数名、帮助文字和命令示例均保留英文原文。
-
-> Source: [pgBadger `README.md`](https://github.com/darold/pgbadger/tree/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md) at commit [`a1ad95a`](https://github.com/darold/pgbadger/commit/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae).
 
 ## 用法与选项 {#usage-and-options}
 

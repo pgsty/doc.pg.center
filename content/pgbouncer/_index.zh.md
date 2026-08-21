@@ -4,19 +4,20 @@ linkTitle: PgBouncer
 weight: 30
 description: >
   PgBouncer —— PostgreSQL 轻量级连接池，v1.25.2 中文文档
-icon: fa-solid fa-diagram-project
+icon: fa-solid fa-arrows-turn-to-dots
 type: docs
 sidebar_root_for: self
 sidebar_root_link_self: true
 module: [PGBOUNCER]
 categories: [概念]
 aliases: [/docs/pgbouncer/]
+upstream_source: pgbouncer
+upstream_link: "https://www.pgbouncer.org/"
 cascade:
+  upstream_source: pgbouncer
   type: docs
   module: [PGBOUNCER]
 ---
-
-> 原始页面： <https://www.pgbouncer.org/>
 
 **pgbouncer** 是 PostgreSQL 的连接池。任何目标应用都可以像连接 PostgreSQL 服务器一样连接到 **pgbouncer**，**pgbouncer** 将负责创建到实际服务器的连接，或者复用已有的连接。
 

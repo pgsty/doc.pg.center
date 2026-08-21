@@ -8,9 +8,8 @@ sidebar_expanded: true
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/]
+upstream_link: "https://pgbackrest.org/command.html"
 ---
-
-> 原始页面： <https://pgbackrest.org/command.html>
 
 ## 简介
 

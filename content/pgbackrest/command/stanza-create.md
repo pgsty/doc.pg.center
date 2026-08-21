@@ -7,9 +7,8 @@ icon: fa-solid fa-square-plus
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/stanza-create/]
+upstream_link: "https://pgbackrest.org/command.html#command-stanza-create"
 ---
-
-> Source: [pgBackRest Command Docs: stanza-create](https://pgbackrest.org/command.html#command-stanza-create)
 
 The `stanza-create` command must be run after the stanza has been configured in `pgbackrest.conf`. If there is more than one repository configured, the stanza will be created on each. Stanzas that have already been created will be skipped so it is always safe to run `stanza-create`, even when a new repository has been configured.
 

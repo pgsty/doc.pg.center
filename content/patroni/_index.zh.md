@@ -10,12 +10,13 @@ sidebar_root_link_self: true
 module: [PATRONI]
 categories: [概念]
 aliases: [/docs/patroni/]
+upstream_source: patroni
+upstream_link: "https://patroni.readthedocs.io/en/latest/index.html"
 cascade:
+  upstream_source: patroni
   type: docs
   module: [PATRONI]
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/index.html
 
 > [!WARNING]
 > 在内存受限的系统上运行 Python 3.11+ 版本的 Patroni

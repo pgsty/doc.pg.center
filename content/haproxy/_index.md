@@ -3,7 +3,7 @@ title: "HAProxy 3.4.3 Documentation"
 linkTitle: HAProxy
 weight: 50
 description: "Complete English Markdown edition of the HAProxy 3.4 Starter, Configuration, and Management manuals"
-icon: fa-solid fa-shuffle
+icon: fa-solid fa-network-wired
 type: docs
 sidebar_root_for: self
 sidebar_root_link_self: true
@@ -11,7 +11,10 @@ no_list: true
 module: [HAPROXY]
 categories: [Reference]
 aliases: [/docs/haproxy/]
+upstream_source: haproxy
+upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 cascade:
+  upstream_source: haproxy
   type: docs
   module: [HAPROXY]
 ---
@@ -21,12 +24,6 @@ cascade:
 **HAProxy** is a free, fast, and reliable reverse proxy for high availability, TCP and HTTP load
 balancing, and application traffic management. This component contains the complete English text of
 the three core HAProxy 3.4 manuals, reorganized as one flat Markdown reading sequence for OINK.
-
-> [!NOTE]
-> Source snapshot: HAProxy `v3.4.3` at commit
-> [`80ea565fdefb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=80ea565fdefbc34ec82d7374d7d19b0107231379).
-> The upstream prose is distributed under HAProxy's GPLv2 terms. Presentation, links, code
-> signatures, headings, and page grouping are adapted for this edition.
 
 ## Choose a manual {#choose-a-manual}
 

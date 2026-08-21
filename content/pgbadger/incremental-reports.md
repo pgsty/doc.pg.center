@@ -7,9 +7,9 @@ icon: fa-solid fa-calendar-days
 module: [PGBADGER]
 categories: [Task]
 aliases: [/docs/pgbadger/incremental-reports/]
+upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_name: "pgBadger README.md"
 ---
-
-> Source: pinned upstream [`README.md`](https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md), section “Incremental Reports”.
 
 Incremental mode stores parsed statistics in binary form, then builds one HTML report per day, a cumulative report per week, and a calendar-style index linking them together. It is intended for repeated processing of rotated logs without counting the same entries again.
 

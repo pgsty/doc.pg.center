@@ -7,9 +7,8 @@ icon: fa-solid fa-list
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/repo-ls/]
+upstream_link: "https://pgbackrest.org/command.html#command-repo-ls"
 ---
-
-> 原始页面： [pgBackRest Command Docs: repo-ls](https://pgbackrest.org/command.html#command-repo-ls)
 
 `repo-ls` 类似于 Unix 的 `ls` 命令，但支持所有 pgBackRest 仓库类型。该命令接受一个路径参数，可以是绝对路径，也可以是相对于 `--repo-path` 所定义的仓库根路径的相对路径。此命令主要用于管理、排查和测试场景，并非常规部署的必要命令。
 

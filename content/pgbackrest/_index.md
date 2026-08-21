@@ -2,7 +2,7 @@
 title: "pgBackRest 2.59.0 Documentation"
 linkTitle: pgBackRest
 weight: 20
-icon: fa-solid fa-box-archive
+icon: fa-solid fa-couch
 type: docs
 sidebar_root_for: self
 sidebar_root_link_self: true
@@ -10,13 +10,13 @@ description: "Reliable PostgreSQL Backup & Restore — pgBackRest documentation 
 module: [PGBACKREST]
 categories: [Concept]
 aliases: [/docs/pgbackrest/]
+upstream_source: pgbackrest
+upstream_link: "https://pgbackrest.org/"
 cascade:
+  upstream_source: pgbackrest
   type: docs
   module: [PGBACKREST]
 ---
-
-> snapshot of pgBackRest 2.59.0 documentation: <https://pgbackrest.org/>
-
 
 --------
 

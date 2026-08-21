@@ -66,8 +66,6 @@ def read_readme_section(name: str) -> str:
 def write_command_reference() -> None:
     body = read_readme_section("SYNOPSIS")
     common = f"""
-> Source: [pgBadger `README.md`]({SOURCE_URL}/README.md) at commit [`{COMMIT[:7]}`](https://github.com/darold/pgbadger/commit/{COMMIT}).
-
 ## Usage and options {{#usage-and-options}}
 
 {body}
@@ -82,6 +80,8 @@ icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [Reference]
 aliases: [/docs/pgbadger/command-line/]
+upstream_link: "{SOURCE_URL}/README.md"
+upstream_name: "pgBadger README.md"
 ---
 
 This page preserves the command reference generated from the pinned upstream source. Option names and help text remain verbatim so they can be compared directly with `pgbadger --help`.
@@ -98,6 +98,8 @@ icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [参考]
 aliases: [/docs/pgbadger/command-line/]
+upstream_link: "{SOURCE_URL}/README.md"
+upstream_name: "pgBadger README.md"
 ---
 
 本页保留固定上游源码生成的完整命令参考。为了能与 `pgbadger --help` 逐项核对，参数名、帮助文字和命令示例均保留英文原文。
@@ -142,11 +144,7 @@ def write_release_pages() -> None:
         for version, date, body in entries[major]:
             sections.append(f"## v{version} · {date} {{#v{version.replace('.', '-')}}}\n\n{body}")
         release_text = "\n\n".join(sections)
-        common = f"""
-> Source: [upstream `ChangeLog`]({SOURCE_URL}/ChangeLog) at commit [`{COMMIT[:7]}`](https://github.com/darold/pgbadger/commit/{COMMIT}).
-
-{release_text}
-""".strip()
+        common = release_text
 
         english = f"""---
 title: "pgBadger {major}.x Release Notes"
@@ -155,8 +153,10 @@ weight: {weights[major]}
 description: "Complete upstream release notes for the pgBadger {major}.x series"
 icon: fa-solid fa-code-branch
 module: [PGBADGER]
-categories: [Release]
+categories: [Reference]
 aliases: [/docs/pgbadger/releases/{major}/]
+upstream_link: "{SOURCE_URL}/ChangeLog"
+upstream_name: "pgBadger ChangeLog"
 ---
 
 These entries preserve the complete upstream change record for pgBadger {major}.x, newest first.
@@ -171,8 +171,10 @@ weight: {weights[major]}
 description: "pgBadger {major}.x 系列的完整上游版本记录"
 icon: fa-solid fa-code-branch
 module: [PGBADGER]
-categories: [版本发布]
+categories: [参考]
 aliases: [/docs/pgbadger/releases/{major}/]
+upstream_link: "{SOURCE_URL}/ChangeLog"
+upstream_name: "pgBadger ChangeLog"
 ---
 
 本页按从新到旧的顺序保留 pgBadger {major}.x 的完整上游变更记录。为确保版本、参数、提交者致谢和兼容性描述不被转述改变，正文保留英文原文。

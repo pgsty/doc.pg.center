@@ -7,9 +7,8 @@ icon: fa-solid fa-stop
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/stop/]
+upstream_link: "https://pgbackrest.org/command.html#command-stop"
 ---
-
-> Source: [pgBackRest Command Docs: stop](https://pgbackrest.org/command.html#command-stop)
 
 Does not allow any new pgBackRest processes to run. By default running processes will be allowed to complete successfully. Use the `--force` option to terminate running processes.
 

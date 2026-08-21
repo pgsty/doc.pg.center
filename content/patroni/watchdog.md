@@ -6,9 +6,8 @@ description: "Watchdog integration and fencing considerations for Patroni cluste
 module: [PATRONI]
 categories: [Concept]
 aliases: [/docs/patroni/watchdog/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/watchdog.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/watchdog.html
 
 <a id="watchdog"></a>
 

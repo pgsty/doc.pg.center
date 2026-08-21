@@ -7,9 +7,8 @@ description: "Dynamic configuration settings stored in DCS and applied cluster-w
 module: [PATRONI]
 categories: [Reference]
 aliases: [/docs/patroni/config/dynamic/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/dynamic_configuration.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/dynamic_configuration.html
 
 <a id="dynamic"></a>
 Dynamic configuration is stored in the DCS (Distributed Configuration Store) and applied on all cluster nodes.

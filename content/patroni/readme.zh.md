@@ -6,9 +6,8 @@ description: "Patroni 简介、快速上手以及高可用核心概念。"
 module: [PATRONI]
 categories: [概念]
 aliases: [/docs/patroni/readme/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/README.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/README.html
 
 <a id="readme"></a>
 Patroni 是一个基于 Python 构建的高可用 PostgreSQL 解决方案模板框架。它最初 fork 自 Compose 公司的 [Governor](https://github.com/compose/governor) 项目，并在此基础上引入了大量新特性。

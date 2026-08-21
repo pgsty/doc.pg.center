@@ -7,9 +7,8 @@ sidebar_expanded: true
 module: [PATRONI]
 categories: [Reference]
 aliases: [/docs/patroni/config/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/patroni_configuration.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/patroni_configuration.html
 
 <a id="config"></a>
 There are 3 types of Patroni configuration:

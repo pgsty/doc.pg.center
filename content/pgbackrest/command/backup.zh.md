@@ -7,9 +7,8 @@ icon: fa-solid fa-box-archive
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/backup/]
+upstream_link: "https://pgbackrest.org/command.html#command-backup"
 ---
-
-> Source: [pgBackRest Command Docs: backup](https://pgbackrest.org/command.html#command-backup)
 
 配置多个仓库时，pgBackRest 默认备份到优先级最高的仓库（如 `repo1`），除非通过 `--repo` 选项明确指定目标仓库。
 

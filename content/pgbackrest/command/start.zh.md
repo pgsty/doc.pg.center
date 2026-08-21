@@ -7,9 +7,8 @@ icon: fa-solid fa-play
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/start/]
+upstream_link: "https://pgbackrest.org/command.html#command-start"
 ---
-
-> 原始页面： [pgBackRest Command Docs: start](https://pgbackrest.org/command.html#command-start)
 
 如果 pgBackRest 进程之前已通过 `stop` 命令停止，可使用 `start` 命令重新允许它们运行。注意，此命令不会立即启动任何 pgBackRest 进程，只是解除运行限制。详情与示例请参见 [**启动与停止**](/zh/pgbackrest/user-guide/#启动与停止)。
 

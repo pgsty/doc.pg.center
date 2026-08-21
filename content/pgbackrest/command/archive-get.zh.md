@@ -7,9 +7,8 @@ icon: fa-solid fa-cloud-arrow-down
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/archive-get/]
+upstream_link: "https://pgbackrest.org/command.html#command-archive-get"
 ---
-
-> 原始页面： [pgBackRest Command Docs: archive-get](https://pgbackrest.org/command.html#command-archive-get)
 
 PostgreSQL 通过此命令执行备份恢复、PITR，或将其作为流复制的替代方式来维持副本同步。WAL 段是 PostgreSQL 执行恢复或维护副本的必要条件。
 

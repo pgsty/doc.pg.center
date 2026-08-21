@@ -2,9 +2,9 @@
 title: Logging conventions
 weight: 1600
 description: Logging level categories
+categories: [Reference]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-internal/logging.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-internal/logging.md. -->
 
 etcd uses the [zap][zap] library for logging application output categorized into *levels*. A log message's level is determined according to these conventions:
 

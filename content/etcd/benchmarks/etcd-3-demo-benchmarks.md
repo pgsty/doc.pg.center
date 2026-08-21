@@ -2,9 +2,9 @@
 title: Benchmarking etcd v3
 weight: 5375
 description: Performance measures for etcd v3
+categories: [Reference]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/benchmarks/etcd-3-demo-benchmarks.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/benchmarks/etcd-3-demo-benchmarks.md. -->
 
 ## Physical machines
 

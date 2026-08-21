@@ -7,9 +7,8 @@ sidebar_expanded: true
 module: [PATRONI]
 categories: [参考]
 aliases: [/docs/patroni/config/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/patroni_configuration.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/patroni_configuration.html
 
 <a id="config"></a>
 Patroni 的配置分为 3 种类型：

@@ -7,9 +7,10 @@ icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [Tutorial]
 aliases: [/docs/pgbadger/download/]
+upstream_link: "https://pgbadger.darold.net/#download"
+upstream_name: "pgBadger website"
+upstream_ref: "site snapshot of 2026-08-15"
 ---
-
-> Sources: [official download section](https://pgbadger.darold.net/#download) and the pinned upstream [`README.md`](https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md).
 
 ## Choose a distribution channel {#distribution-channels}
 

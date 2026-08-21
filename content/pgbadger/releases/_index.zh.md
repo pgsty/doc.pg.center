@@ -5,13 +5,13 @@ weight: 90
 description: "根据上游 ChangeLog 规范整理的 pgBadger 9.x 至 13.x 完整变更历史"
 icon: fa-solid fa-clock-rotate-left
 module: [PGBADGER]
-categories: [版本发布]
+categories: [参考]
 aliases: [/docs/pgbadger/releases/]
+upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/ChangeLog"
+upstream_name: "pgBadger ChangeLog"
 ---
 
-官网把版本新闻直接堆放在首页，内容停留在 12.4，并且误把 11.1–11.3 用互相冲突的日期重复渲染了一次。本站以固定上游 `ChangeLog` 为规范记录，只去除这些重复展示，同时补入后续 13.x 版本。
-
-> 规范来源：提交 [`a1ad95a`](https://github.com/darold/pgbadger/commit/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae) 中的 [`ChangeLog`](https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/ChangeLog)。每个系列均保留完整条目，并按从新到旧排序。
+官网把版本新闻直接堆放在首页，内容停留在 12.4，并且误把 11.1–11.3 用互相冲突的日期重复渲染了一次。本站以固定上游 `ChangeLog` 为规范记录，只去除这些重复展示，同时补入后续 13.x 版本。每个系列均保留完整条目，并按从新到旧排序。
 
 | 系列 | 收录版本 | 首末发布日期 | 页面 |
 |---|---|---|---|

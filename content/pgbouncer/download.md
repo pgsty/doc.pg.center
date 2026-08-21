@@ -7,9 +7,8 @@ icon: fas fa-download
 module: [PGBOUNCER]
 categories: [Reference]
 aliases: [/docs/pgbouncer/download/]
+upstream_link: "https://www.pgbouncer.org/downloads/"
 ---
-
-> Source: <https://www.pgbouncer.org/downloads/>
 
 --------
 

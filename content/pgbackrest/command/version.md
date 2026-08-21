@@ -7,9 +7,8 @@ icon: fa-solid fa-tag
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/version/]
+upstream_link: "https://pgbackrest.org/command.html#command-version"
 ---
-
-> Source: [pgBackRest Command Docs: version](https://pgbackrest.org/command.html#command-version)
 
 Displays installed pgBackRest version.
 

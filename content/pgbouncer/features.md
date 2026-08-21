@@ -6,9 +6,8 @@ icon: fa-solid fa-wand-magic-sparkles
 module: [PGBOUNCER]
 categories: [Concept]
 aliases: [/docs/pgbouncer/features/]
+upstream_link: "https://www.pgbouncer.org/features.html"
 ---
-
-> Source: <https://www.pgbouncer.org/features.html>
 
 - Several levels of brutality when rotating connections:
 

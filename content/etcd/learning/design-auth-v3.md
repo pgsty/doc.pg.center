@@ -2,9 +2,9 @@
 title: etcd v3 authentication design
 weight: 2500
 description: etcd v3 authentication
+categories: [Concept]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/learning/design-auth-v3.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/learning/design-auth-v3.md. -->
 
 ## Why not reuse the v2 auth system?
 

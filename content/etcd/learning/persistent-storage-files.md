@@ -2,9 +2,9 @@
 title: etcd persistent storage files
 weight: 2650
 description: Reference of the persistent storage format and files
+categories: [Concept]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/learning/persistent-storage-files.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/learning/persistent-storage-files.md. -->
 
 This document explains the etcd persistent storage format: naming, content and tools that allow developers to inspect them. Going forward the document should be extended with changes to the storage model. This document is targeted at etcd developers to help with their data recovery needs.
 

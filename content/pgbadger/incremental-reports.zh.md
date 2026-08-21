@@ -7,9 +7,9 @@ icon: fa-solid fa-calendar-days
 module: [PGBADGER]
 categories: [任务]
 aliases: [/docs/pgbadger/incremental-reports/]
+upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_name: "pgBadger README.md"
 ---
-
-> 来源：固定上游 [`README.md`](https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md) 的 “Incremental Reports” 章节。
 
 增量模式先以二进制形式保存解析统计，再生成每日 HTML 报告、每周累计报告，以及把它们组织起来的日历式索引。它适合反复处理轮转日志，同时避免重复统计相同记录。
 

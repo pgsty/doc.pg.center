@@ -7,6 +7,7 @@ icon: fa-solid fa-code
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/configuration/]
+upstream_link: "https://pgbackrest.org/configuration.html"
 ---
 
 --------

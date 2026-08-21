@@ -7,9 +7,8 @@ icon: fa-solid fa-cloud-arrow-down
 module: [PGBOUNCER]
 categories: [教程]
 aliases: [/docs/pgbouncer/install/]
+upstream_link: "https://www.pgbouncer.org/install.html"
 ---
-
-> 原始页面： <https://www.pgbouncer.org/install.html>
 
 --------
 

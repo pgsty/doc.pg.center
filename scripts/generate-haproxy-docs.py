@@ -39,7 +39,7 @@ class Page:
     weight: int
     icon: str
     section_numbers: tuple[str, ...]
-    category: str = "Guide"
+    category: str = "Concept"
     merge_lead_section: bool = False
     aliases: tuple[str, ...] = ()
 
@@ -122,7 +122,7 @@ INTRO_PAGES = (
         70,
         "fa-solid fa-code-branch",
         ("3.7",),
-        "Operations",
+        "Task",
         True,
         ("/haproxy/releases-and-upgrades/",),
     ),
@@ -160,7 +160,7 @@ CONFIGURATION_CHAPTERS = (
     Page("bind-and-server-options.md", "5. Bind and Server Options", "5. Bind & Server Options", "Listener, server, default-server, and DNS resolution options", 50, "fa-solid fa-network-wired", ("5",), "Reference"),
     Page("cache.md", "6. Cache", "6. Cache", "Cache limitations and setup in cache and proxy sections", 60, "fa-solid fa-box-archive", ("6",), "Reference"),
     Page("acls-and-samples.md", "7. ACLs and Sample Fetching", "7. ACLs & Samples", "ACL matching, conditions, converters, sample fetches, and predefined ACLs", 70, "fa-solid fa-filter", ("7",), "Reference"),
-    Page("configuration-logging.md", "8. Logging", "8. Logging", "Log levels, formats, profiles, timings, captures, states, and examples", 80, "fa-solid fa-file-lines", ("8",), "Operations"),
+    Page("configuration-logging.md", "8. Logging", "8. Logging", "Log levels, formats, profiles, timings, captures, states, and examples", 80, "fa-solid fa-file-lines", ("8",), "Task"),
     Page("filters.md", "9. Supported Filters", "9. Filters", "Trace, compression, SPOE, cache, FastCGI, OpenTracing, and bandwidth filters", 90, "fa-solid fa-layer-group", ("9",), "Reference"),
     Page("fastcgi.md", "10. FastCGI Applications", "10. FastCGI", "FastCGI application setup, parameters, examples, and limitations", 100, "fa-solid fa-bolt", ("10",), "Reference"),
     Page("stick-tables-and-peers.md", "11. Stick Tables and Peers", "11. Stick Tables & Peers", "Stick-table storage and peers replication declarations", 110, "fa-solid fa-table", ("11",), "Reference"),
@@ -169,19 +169,19 @@ CONFIGURATION_CHAPTERS = (
 
 
 MANAGEMENT_CHAPTERS = (
-    Page("prerequisites.md", "1. Prerequisites", "1. Prerequisites", "Expected UNIX administration and troubleshooting knowledge", 10, "fa-solid fa-list-check", ("1",), "Operations"),
+    Page("prerequisites.md", "1. Prerequisites", "1. Prerequisites", "Expected UNIX administration and troubleshooting knowledge", 10, "fa-solid fa-list-check", ("1",), "Task"),
     Page("management-architecture.md", "2. HAProxy Architecture", "2. Architecture", "The process, threading, event loop, chroot, logs, clocks, and TCP proxy model", 20, "fa-solid fa-diagram-project", ("2",), "Concept"),
-    Page("starting.md", "3. Starting HAProxy", "3. Starting HAProxy", "Command-line syntax, options, configuration loading, and startup behavior", 30, "fa-solid fa-play", ("3",), "Operations"),
-    Page("stopping-and-restarting.md", "4. Stopping and Restarting HAProxy", "4. Stop & Restart", "Signals, soft stops, reloads, and master-worker restarts", 40, "fa-solid fa-rotate", ("4",), "Operations"),
-    Page("file-descriptors.md", "5. File-Descriptor Limitations", "5. File Descriptors", "Descriptor limits, sizing, system constraints, and troubleshooting", 50, "fa-solid fa-folder-open", ("5",), "Operations"),
-    Page("memory.md", "6. Memory Management", "6. Memory", "Memory allocation, limits, pools, buffers, and process sizing", 60, "fa-solid fa-memory", ("6",), "Operations"),
-    Page("cpu.md", "7. CPU Usage", "7. CPU", "Threading, CPU affinity, saturation, profiling, and performance behavior", 70, "fa-solid fa-microchip", ("7",), "Operations"),
-    Page("management-logging.md", "8. Logging", "8. Logging", "Syslog integration, startup logs, runtime logs, and log troubleshooting", 80, "fa-solid fa-file-lines", ("8",), "Operations"),
-    Page("statistics-and-monitoring.md", "9. Statistics and Monitoring", "9. Stats & Monitoring", "CSV and typed stats, runtime CLI commands, master CLI, and stats files", 90, "fa-solid fa-chart-line", ("9",), "Operations"),
-    Page("configuration-management.md", "10. Easier Configuration Management", "10. Config Management", "Techniques for making large HAProxy configurations easier to maintain", 100, "fa-solid fa-screwdriver-wrench", ("10",), "Operations"),
-    Page("traps.md", "11. Well-Known Traps to Avoid", "11. Common Traps", "Operational mistakes and surprising behaviors to avoid", 110, "fa-solid fa-triangle-exclamation", ("11",), "Operations"),
-    Page("debugging-and-performance.md", "12. Debugging and Performance Issues", "12. Debugging", "Investigation methods for crashes, stalls, latency, and throughput problems", 120, "fa-solid fa-bug", ("12",), "Operations"),
-    Page("security.md", "13. Security Considerations", "13. Security", "Privilege isolation, attack surface, Linux capabilities, and secure operation", 130, "fa-solid fa-shield-halved", ("13",), "Operations"),
+    Page("starting.md", "3. Starting HAProxy", "3. Starting HAProxy", "Command-line syntax, options, configuration loading, and startup behavior", 30, "fa-solid fa-play", ("3",), "Task"),
+    Page("stopping-and-restarting.md", "4. Stopping and Restarting HAProxy", "4. Stop & Restart", "Signals, soft stops, reloads, and master-worker restarts", 40, "fa-solid fa-rotate", ("4",), "Task"),
+    Page("file-descriptors.md", "5. File-Descriptor Limitations", "5. File Descriptors", "Descriptor limits, sizing, system constraints, and troubleshooting", 50, "fa-solid fa-folder-open", ("5",), "Task"),
+    Page("memory.md", "6. Memory Management", "6. Memory", "Memory allocation, limits, pools, buffers, and process sizing", 60, "fa-solid fa-memory", ("6",), "Task"),
+    Page("cpu.md", "7. CPU Usage", "7. CPU", "Threading, CPU affinity, saturation, profiling, and performance behavior", 70, "fa-solid fa-microchip", ("7",), "Task"),
+    Page("management-logging.md", "8. Logging", "8. Logging", "Syslog integration, startup logs, runtime logs, and log troubleshooting", 80, "fa-solid fa-file-lines", ("8",), "Task"),
+    Page("statistics-and-monitoring.md", "9. Statistics and Monitoring", "9. Stats & Monitoring", "CSV and typed stats, runtime CLI commands, master CLI, and stats files", 90, "fa-solid fa-chart-line", ("9",), "Task"),
+    Page("configuration-management.md", "10. Easier Configuration Management", "10. Config Management", "Techniques for making large HAProxy configurations easier to maintain", 100, "fa-solid fa-screwdriver-wrench", ("10",), "Task"),
+    Page("traps.md", "11. Well-Known Traps to Avoid", "11. Common Traps", "Operational mistakes and surprising behaviors to avoid", 110, "fa-solid fa-triangle-exclamation", ("11",), "Task"),
+    Page("debugging-and-performance.md", "12. Debugging and Performance Issues", "12. Debugging", "Investigation methods for crashes, stalls, latency, and throughput problems", 120, "fa-solid fa-bug", ("12",), "Task"),
+    Page("security.md", "13. Security Considerations", "13. Security", "Privilege isolation, attack surface, Linux capabilities, and secure operation", 130, "fa-solid fa-shield-halved", ("13",), "Task"),
 )
 
 
@@ -736,7 +736,26 @@ def page_aliases(manual: str, page: Page) -> tuple[str, ...]:
     return tuple(dict.fromkeys(alias for alias in aliases if alias != canonical))
 
 
+MANUAL_NAMES = {
+    "intro": "Starter Guide",
+    "configuration": "Configuration Manual",
+    "management": "Management Guide",
+}
+
+
+def section_label(section_numbers: tuple[str, ...]) -> str:
+    if len(section_numbers) == 1:
+        return f"chapter {section_numbers[0]}"
+    if section_numbers == ("1", "5"):
+        return "chapters 1 and 5"
+    return f"sections {section_numbers[0]}–{section_numbers[-1]}"
+
+
 def page_front_matter(page: Page, manual: str) -> str:
+    """Front matter, including the upstream attribution the OINK page annotation
+    renders at the page end. `upstream_source: haproxy` cascades from the root;
+    the per-page facts are which manual and which of its chapters this page
+    preserves."""
     return f'''---
 title: "{page.title}"
 linkTitle: "{page.link_title}"
@@ -745,27 +764,10 @@ description: "{page.description}"
 icon: {page.icon}
 module: [HAPROXY]
 categories: [{page.category}]
-{aliases_yaml(page_aliases(manual, page))}---'''
-
-
-def source_note(manual: str, section_numbers: tuple[str, ...]) -> str:
-    manual_names = {
-        "intro": "Starter Guide",
-        "configuration": "Configuration Manual",
-        "management": "Management Guide",
-    }
-    if len(section_numbers) == 1:
-        label = f"chapter {section_numbers[0]}"
-    elif section_numbers == ("1", "5"):
-        label = "chapters 1 and 5"
-    else:
-        label = f"sections {section_numbers[0]}–{section_numbers[-1]}"
-    return (
-        "> [!NOTE]\n"
-        f"> This page preserves {label} of the official [HAProxy 3.4 {manual_names[manual]}]({DOCS_BASE}/{manual}.html).\n"
-        "> The prose is upstream text; headings, links, spacing, code signatures, and page grouping are\n"
-        "> adapted for Markdown and OINK."
-    )
+{aliases_yaml(page_aliases(manual, page))}upstream_link: "{DOCS_BASE}/{manual}.html"
+upstream_name: "HAProxy 3.4 {MANUAL_NAMES[manual]}"
+upstream_ref: "{UPSTREAM_TAG}, {section_label(page.section_numbers)}"
+---'''
 
 
 def render_intro_page(page: Page, sections: dict[str, Section], introduction: str = "") -> str:
@@ -813,7 +815,7 @@ def render_intro_page(page: Page, sections: dict[str, Section], introduction: st
     return (
         f"{page_front_matter(page, 'intro')}\n\n"
         "<!-- Generated by scripts/generate-haproxy-docs.py from pinned upstream text. -->\n\n"
-        f"{source_note('intro', page.section_numbers)}\n\n{rendered}{extras}\n"
+        f"{rendered}{extras}\n"
     )
 
 
@@ -847,7 +849,7 @@ def render_chapter_page(
     return (
         f"{page_front_matter(page, manual)}\n\n"
         "<!-- Generated by scripts/generate-haproxy-docs.py from pinned upstream text. -->\n\n"
-        f"{source_note(manual, page.section_numbers)}\n\n{rendered}\n"
+        f"{rendered}\n"
     )
 
 
@@ -857,7 +859,7 @@ title: "HAProxy {UPSTREAM_VERSION} Documentation"
 linkTitle: HAProxy
 weight: 50
 description: "Complete English Markdown edition of the HAProxy 3.4 Starter, Configuration, and Management manuals"
-icon: fa-solid fa-shuffle
+icon: fa-solid fa-network-wired
 type: docs
 sidebar_root_for: self
 sidebar_root_link_self: true
@@ -865,7 +867,10 @@ no_list: true
 module: [HAPROXY]
 categories: [Reference]
 aliases: [/docs/haproxy/]
+upstream_source: haproxy
+upstream_link: "{DOCS_BASE}/intro.html"
 cascade:
+  upstream_source: haproxy
   type: docs
   module: [HAPROXY]
 ---
@@ -875,12 +880,6 @@ cascade:
 **HAProxy** is a free, fast, and reliable reverse proxy for high availability, TCP and HTTP load
 balancing, and application traffic management. This component contains the complete English text of
 the three core HAProxy 3.4 manuals, reorganized as one flat Markdown reading sequence for OINK.
-
-> [!NOTE]
-> Source snapshot: HAProxy `{UPSTREAM_TAG}` at commit
-> [`{UPSTREAM_COMMIT[:12]}`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h={UPSTREAM_COMMIT}).
-> The upstream prose is distributed under HAProxy's GPLv2 terms. Presentation, links, code
-> signatures, headings, and page grouping are adapted for this edition.
 
 ## Choose a manual {{#choose-a-manual}}
 
@@ -924,6 +923,7 @@ linkTitle: "{DIVIDER_TITLES[manual]}"
 weight: {DIVIDER_WEIGHTS[manual]}
 sidebar_divider: true
 toc_hide: false
+upstream_link: ""
 build:
   render: never
 ---

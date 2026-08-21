@@ -3,9 +3,9 @@ title: Demo
 weight: 1100
 description: Procedures for working with an etcd cluster
 icon: fa-solid fa-play
+categories: [Tutorial]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/demo.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/demo.md. -->
 
 This series of examples shows the basic procedures for working with an etcd cluster.
 

@@ -7,8 +7,8 @@ icon: fa-solid fa-list-check
 module: [PGBACKREST]
 categories: [Concept]
 aliases: [/docs/pgbackrest/metric/]
+upstream_link: "https://pgbackrest.org/metric.html"
 ---
-
 
 --------
 

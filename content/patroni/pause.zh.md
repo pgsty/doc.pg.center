@@ -7,9 +7,8 @@ description: "Patroni 集群管理中的暂停与恢复模式行为说明。"
 module: [PATRONI]
 categories: [任务]
 aliases: [/docs/patroni/pause/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/pause.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/pause.html
 
 <a id="pause"></a>
 

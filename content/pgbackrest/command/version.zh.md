@@ -7,9 +7,8 @@ icon: fa-solid fa-tag
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/version/]
+upstream_link: "https://pgbackrest.org/command.html#command-version"
 ---
-
-> 原始页面： [pgBackRest Command Docs: version](https://pgbackrest.org/command.html#command-version)
 
 显示已安装的 pgBackRest 版本。
 

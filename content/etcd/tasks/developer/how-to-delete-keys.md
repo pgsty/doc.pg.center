@@ -2,9 +2,9 @@
 title: How to delete keys
 description: Describes a way to delete etcd keys
 weight: 400
+categories: [Task]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/tasks/developer/how-to-delete-keys.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/tasks/developer/how-to-delete-keys.md. -->
 
 ## Prerequisites
 

@@ -2,9 +2,9 @@
 title: Upgrade etcd from 3.3 to 3.4
 weight: 6700
 description: Processes, checklists, and notes on upgrading etcd from 3.3 to 3.4
+categories: [Task]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/upgrades/upgrade_3_4.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/upgrades/upgrade_3_4.md. -->
 
 In the general case, upgrading from etcd 3.3 to 3.4 can be a zero-downtime, rolling upgrade:
  - one by one, stop the etcd v3.3 processes and replace them with etcd v3.4 processes

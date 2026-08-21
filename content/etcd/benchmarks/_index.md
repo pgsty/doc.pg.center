@@ -3,9 +3,9 @@ title: Benchmarks
 weight: 5000
 description: Performance measures for etcd
 icon: fa-solid fa-gauge-high
+categories: [Reference]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/benchmarks/_index.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/benchmarks/_index.md. -->
 
 ## Benchmarks
 

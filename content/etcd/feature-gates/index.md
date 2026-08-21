@@ -2,9 +2,9 @@
 title: Feature Gates
 weight: 1175
 icon: fa-solid fa-toggle-on
+categories: [Reference]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/feature-gates/index.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/feature-gates/index.md. -->
 
 <!-- overview -->
 This page contains an overview of the various feature gates an administrator

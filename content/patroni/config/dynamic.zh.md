@@ -7,9 +7,8 @@ description: "存储在 DCS 中并应用于整个集群的动态配置参数。"
 module: [PATRONI]
 categories: [参考]
 aliases: [/docs/patroni/config/dynamic/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/dynamic_configuration.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/dynamic_configuration.html
 
 <a id="dynamic"></a>
 动态配置存储在 DCS（分布式配置存储）中，并应用于集群的所有节点。

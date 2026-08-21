@@ -7,9 +7,8 @@ icon: fa-solid fa-heart-pulse
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/server-ping/]
+upstream_link: "https://pgbackrest.org/command.html#command-server-ping"
 ---
-
-> Source: [pgBackRest Command Docs: server-ping](https://pgbackrest.org/command.html#command-server-ping)
 
 Ping a pgBackRest TLS server to ensure it is accepting connections. This serves as an aliveness check only since no authentication is attempted.
 

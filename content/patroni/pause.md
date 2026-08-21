@@ -7,9 +7,8 @@ description: "Pause and resume mode behavior for Patroni cluster management."
 module: [PATRONI]
 categories: [Task]
 aliases: [/docs/patroni/pause/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/pause.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/pause.html
 
 <a id="pause"></a>
 

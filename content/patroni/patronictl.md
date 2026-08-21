@@ -6,9 +6,8 @@ description: "Command reference for patronictl configuration, syntax, and subcom
 module: [PATRONI]
 categories: [Reference]
 aliases: [/docs/patroni/patronictl/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/patronictl.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/patronictl.html
 
 <a id="patronictl_version_description"></a>
 <a id="patronictl_version_parameters"></a>

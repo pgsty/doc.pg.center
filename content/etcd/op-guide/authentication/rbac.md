@@ -2,9 +2,9 @@
 title: Role-based access control
 weight: 4100
 description: A basic authentication and role-based access control guide
+categories: [Task]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/authentication/rbac.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/authentication/rbac.md. -->
 
 ## Overview
 

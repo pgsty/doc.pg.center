@@ -6,9 +6,8 @@ icon: fa-solid fa-scroll
 module: [PGBOUNCER]
 categories: [Reference]
 aliases: [/docs/pgbouncer/changelog/]
+upstream_link: "https://www.pgbouncer.org/changelog.html"
 ---
-
-> Source: <https://www.pgbouncer.org/changelog.html>
 
 --------
 

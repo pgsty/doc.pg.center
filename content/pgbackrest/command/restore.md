@@ -7,9 +7,8 @@ icon: fa-solid fa-clock-rotate-left
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/restore/]
+upstream_link: "https://pgbackrest.org/command.html#command-restore"
 ---
-
-> Source: [pgBackRest Command Docs: restore](https://pgbackrest.org/command.html#command-restore)
 
 The restore command automatically defaults to selecting the latest backup from the first repository where backups exist (see [Quick Start - Restore a Backup](/pgbackrest/user-guide/#restore-a-backup)). The order in which the repositories are checked is dictated by the `pgbackrest.conf` (e.g. repo1 will be checked before repo2). To select from a specific repository, the `--repo` option can be passed (e.g. `--repo=1`). The `--set` option can be passed if a backup other than the latest is desired.
 

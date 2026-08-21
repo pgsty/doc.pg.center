@@ -5,11 +5,11 @@ weight: 40
 description: "为 pgBadger 配置查询日志、log_line_prefix、消息语言与运行统计"
 icon: fa-solid fa-database
 module: [PGBADGER]
-categories: [配置]
+categories: [任务]
 aliases: [/docs/pgbadger/postgresql-logging/]
+upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_name: "pgBadger README.md"
 ---
-
-> 来源：固定上游 [`README.md`](https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md) 中的 “PostgreSQL Configuration” 与 “Log Statements” 章节。
 
 pgBadger 只能报告 PostgreSQL 实际写入日志的信息。应先确定可解析的日志前缀与清晰的语句记录策略，再按需要加入检查点、锁、临时文件和自动清理等运行事件。
 

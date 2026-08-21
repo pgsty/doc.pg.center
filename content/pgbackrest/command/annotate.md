@@ -7,9 +7,8 @@ icon: fa-solid fa-pen-to-square
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/annotate/]
+upstream_link: "https://pgbackrest.org/command.html#command-annotate"
 ---
-
-> Source: [pgBackRest Command Docs: annotate](https://pgbackrest.org/command.html#command-annotate)
 
 Annotations included with the `backup` command can be added, modified, or removed afterwards using the `annotate` command.
 

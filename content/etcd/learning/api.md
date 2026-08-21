@@ -2,9 +2,9 @@
 title: etcd API
 weight: 2625
 description: etcd API central design overview
+categories: [Concept]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/learning/api.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/learning/api.md. -->
 
 This document is meant to give an overview of the v3 etcd APIs central design.
 This should not be mistaken with etcd v2 API, deprecated in etcd v3.5.

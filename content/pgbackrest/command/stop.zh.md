@@ -7,9 +7,8 @@ icon: fa-solid fa-stop
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/stop/]
+upstream_link: "https://pgbackrest.org/command.html#command-stop"
 ---
-
-> 原始页面： [pgBackRest Command Docs: stop](https://pgbackrest.org/command.html#command-stop)
 
 禁止任何新的 pgBackRest 进程运行。默认情况下，正在运行的进程将被允许正常完成。使用 `--force` 选项可强制终止正在运行的进程。
 

@@ -7,9 +7,8 @@ icon: fa-solid fa-newspaper
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/news/]
+upstream_link: "https://pgbackrest.org/news.html"
 ---
-
-> Source: <https://pgbackrest.org/news.html>
 
 --------
 

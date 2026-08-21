@@ -6,9 +6,8 @@ description: "Patroni 管理的异步与同步复制模式。"
 module: [PATRONI]
 categories: [概念]
 aliases: [/docs/patroni/replication_modes/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/replication_modes.html"
 ---
-
-> 原始页面： https://patroni.readthedocs.io/en/latest/replication_modes.html
 
 <a id="replication_modes"></a>
 Patroni 使用 PostgreSQL 流复制。关于流复制的更多信息，请参阅 [Postgres 文档](http://www.postgresql.org/docs/current/static/warm-standby.html#STREAMING-REPLICATION)。默认情况下，Patroni 将 PostgreSQL 配置为异步复制。选择哪种复制方案取决于你的业务需求。建议同时研究异步和同步复制，以及其他高可用方案，以确定最适合自己的解决方案。

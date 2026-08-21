@@ -10,12 +10,13 @@ sidebar_root_link_self: true
 module: [PATRONI]
 categories: [Concept]
 aliases: [/docs/patroni/]
+upstream_source: patroni
+upstream_link: "https://patroni.readthedocs.io/en/latest/index.html"
 cascade:
+  upstream_source: patroni
   type: docs
   module: [PATRONI]
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/index.html
 
 > [!WARNING]
 > Running Patroni on **memory-restricted systems with Python 3.11+**

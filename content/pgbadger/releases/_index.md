@@ -5,13 +5,13 @@ weight: 90
 description: "Complete pgBadger 9.x through 13.x change history, normalized from the upstream ChangeLog"
 icon: fa-solid fa-clock-rotate-left
 module: [PGBADGER]
-categories: [Release]
+categories: [Reference]
 aliases: [/docs/pgbadger/releases/]
+upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/ChangeLog"
+upstream_name: "pgBadger ChangeLog"
 ---
 
-The official website publishes release news inline on its home page. That page stops at 12.4 and accidentally repeats 11.1–11.3 with conflicting dates. This edition uses the pinned upstream `ChangeLog` as the canonical record, removes only those duplicate renderings, and adds the later 13.x releases.
-
-> Canonical source: [`ChangeLog`](https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/ChangeLog) at commit [`a1ad95a`](https://github.com/darold/pgbadger/commit/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae). Entries are preserved in full and ordered newest first within each series.
+The official website publishes release news inline on its home page. That page stops at 12.4 and accidentally repeats 11.1–11.3 with conflicting dates. This edition uses the pinned upstream `ChangeLog` as the canonical record, removes only those duplicate renderings, and adds the later 13.x releases. Entries are preserved in full and ordered newest first within each series.
 
 | Series | Versions included | First–last release | Page |
 |---|---|---|---|

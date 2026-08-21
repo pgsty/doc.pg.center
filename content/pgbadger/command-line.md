@@ -7,11 +7,11 @@ icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [Reference]
 aliases: [/docs/pgbadger/command-line/]
+upstream_link: "https://github.com/darold/pgbadger/tree/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_name: "pgBadger README.md"
 ---
 
 This page preserves the command reference generated from the pinned upstream source. Option names and help text remain verbatim so they can be compared directly with `pgbadger --help`.
-
-> Source: [pgBadger `README.md`](https://github.com/darold/pgbadger/tree/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md) at commit [`a1ad95a`](https://github.com/darold/pgbadger/commit/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae).
 
 ## Usage and options {#usage-and-options}
 

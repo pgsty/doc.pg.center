@@ -6,9 +6,8 @@ description: "Security considerations for DCS, REST API, and credential handling
 module: [PATRONI]
 categories: [Concept]
 aliases: [/docs/patroni/security/]
+upstream_link: "https://patroni.readthedocs.io/en/latest/security.html"
 ---
-
-> Source: https://patroni.readthedocs.io/en/latest/security.html
 
 <a id="security"></a>
 A Patroni cluster has two interfaces to be protected from unauthorized access: the distributed configuration storage (DCS) and the Patroni REST API.

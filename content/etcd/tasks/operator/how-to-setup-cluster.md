@@ -2,9 +2,9 @@
 title: How to Set Up a Demo etcd Cluster
 description: Guide to setting up a cluster in etcd
 weight: 100
+categories: [Task]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/tasks/operator/how-to-setup-cluster.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/tasks/operator/how-to-setup-cluster.md. -->
 
 ![01_etcd_clustering_2016050601](/etcd/tasks/img/setup-cluster.gif)
 

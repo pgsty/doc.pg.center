@@ -7,9 +7,8 @@ icon: fa-solid fa-circle-check
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/check/]
+upstream_link: "https://pgbackrest.org/command.html#command-check"
 ---
-
-> Source: [pgBackRest Command Docs: check](https://pgbackrest.org/command.html#command-check)
 
 The `check` command validates that pgBackRest and the archive_command setting are configured correctly for archiving and backups for the specified stanza. It will attempt to check all repositories and databases that are configured for the host on which the command is run. It detects misconfigurations, particularly in archiving, that result in incomplete backups because required WAL segments did not reach the archive. The command can be run on the PostgreSQL or repository host. The command may also be run on the standby host, however, since `pg_switch_xlog()`/`pg_switch_wal()` cannot be performed on the standby, the command will only test the repository configuration.
 

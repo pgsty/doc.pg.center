@@ -12,6 +12,7 @@ ANCHOR_RE = re.compile(r'<a id="([^"]+)"></a>')
 VERSION_RE = re.compile(r"^## Version (.+)$", re.MULTILINE)
 PATRONICTL_RE = re.compile(r"^### (patronictl .+)$", re.MULTILINE)
 METRIC_RE = re.compile(r"^# (?:HELP|TYPE) patroni_.+$", re.MULTILINE)
+UPSTREAM_RE = re.compile(r'^upstream_link: "(.*)"$', re.MULTILINE)
 
 
 def compare(label: str, english: list[str], chinese: list[str], errors: list[str]) -> None:
@@ -50,6 +51,19 @@ def main() -> int:
             ANCHOR_RE.findall(chinese),
             errors,
         )
+        # A translated page is derived from the same upstream material as its
+        # English pair, so the annotation must credit the same source.
+        compare(
+            f"upstream_link in {english_path.relative_to(project_dir)}",
+            UPSTREAM_RE.findall(english),
+            UPSTREAM_RE.findall(chinese),
+            errors,
+        )
+        if not UPSTREAM_RE.findall(english):
+            errors.append(
+                f"{english_path.relative_to(project_dir)} has no upstream_link; "
+                "every page in a vendored tree must name its source"
+            )
 
     patroni_dir = content_dir / "patroni"
     english_releases = (patroni_dir / "releases.md").read_text(encoding="utf-8")

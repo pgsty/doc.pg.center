@@ -7,9 +7,9 @@ icon: fa-solid fa-file-export
 module: [PGBADGER]
 categories: [Reference]
 aliases: [/docs/pgbadger/output-formats/]
+upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_name: "pgBadger README.md"
 ---
-
-> Source: pinned upstream [`README.md`](https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md), sections “Binary Format” and “JSON Format”, plus the generated command reference.
 
 pgBadger selects output from the filename extension or from `-x` / `--extension`. Use `-o` / `--outfile` more than once to create multiple formats from the same parse.
 

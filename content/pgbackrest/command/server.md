@@ -7,9 +7,8 @@ icon: fa-solid fa-server
 module: [PGBACKREST]
 categories: [Reference]
 aliases: [/docs/pgbackrest/command/server/]
+upstream_link: "https://pgbackrest.org/command.html#command-server"
 ---
-
-> Source: [pgBackRest Command Docs: server](https://pgbackrest.org/command.html#command-server)
 
 The pgBackRest server allows access to remote hosts without using the SSH protocol.
 

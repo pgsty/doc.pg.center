@@ -7,9 +7,8 @@ icon: fa-solid fa-server
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/server/]
+upstream_link: "https://pgbackrest.org/command.html#command-server"
 ---
-
-> 原始页面： [pgBackRest Command Docs: server](https://pgbackrest.org/command.html#command-server)
 
 pgBackRest 服务器允许在不使用 SSH 协议的情况下访问远程主机。
 

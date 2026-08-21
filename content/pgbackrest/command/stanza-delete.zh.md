@@ -7,9 +7,8 @@ icon: fa-solid fa-trash
 module: [PGBACKREST]
 categories: [参考]
 aliases: [/docs/pgbackrest/command/stanza-delete/]
+upstream_link: "https://pgbackrest.org/command.html#command-stanza-delete"
 ---
-
-> 原始页面： [pgBackRest Command Docs: stanza-delete](https://pgbackrest.org/command.html#command-stanza-delete)
 
 `stanza-delete` 命令用于删除仓库中与指定 stanza 关联的所有数据。stanza 是 pgBackRest 中用于标识一个 PostgreSQL 集群备份配置的逻辑名称。
 

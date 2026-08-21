@@ -2,9 +2,9 @@
 title: Clustering Guide
 weight: 4150
 description: "Bootstrapping an etcd cluster: Static, etcd Discovery, and DNS Discovery"
+categories: [Task]
+upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/clustering.md"
 ---
-
-<!-- Adapted for OINK from https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/clustering.md. -->
 
 ## Overview
 
