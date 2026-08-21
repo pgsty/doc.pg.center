@@ -6,33 +6,42 @@ content_dir="$project_dir/content"
 build_dir=$(mktemp -d "${TMPDIR:-/tmp}/pgsql-cc-check.XXXXXX")
 trap 'rm -rf "$build_dir"' EXIT
 
-bilingual_expected=78
+legacy_bilingual_expected=78
+total_bilingual_expected=215
 haproxy_expected=38
 etcd_markdown_expected=99
 etcd_asset_expected=42
-english_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger} -type f -name '*.md' ! -name '*.zh.md' | wc -l | tr -d ' ')
-chinese_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger} -type f -name '*.zh.md' | wc -l | tr -d ' ')
+legacy_english_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger} -type f -name '*.md' ! -name '*.zh.md' | wc -l | tr -d ' ')
+legacy_chinese_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger} -type f -name '*.zh.md' | wc -l | tr -d ' ')
+english_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger,haproxy,etcd} -type f -name '*.md' ! -name '*.zh.md' | wc -l | tr -d ' ')
+chinese_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger,haproxy,etcd} -type f -name '*.zh.md' | wc -l | tr -d ' ')
 haproxy_count=$(find "$content_dir/haproxy" -type f -name '*.md' ! -name '*.zh.md' | wc -l | tr -d ' ')
 haproxy_chinese_count=$(find "$content_dir/haproxy" -type f -name '*.zh.md' | wc -l | tr -d ' ')
-haproxy_divider_count=$(find "$content_dir/haproxy" -maxdepth 1 -type f -name '_div_*.md' | wc -l | tr -d ' ')
-haproxy_reading_count=$(find "$content_dir/haproxy" -maxdepth 1 -type f -name '*.md' ! -name '_index.md' ! -name '_div_*.md' | wc -l | tr -d ' ')
-etcd_markdown_count=$(find "$content_dir/etcd" -type f -name '*.md' | wc -l | tr -d ' ')
+haproxy_divider_count=$(find "$content_dir/haproxy" -maxdepth 1 -type f -name '_div_*.md' ! -name '*.zh.md' | wc -l | tr -d ' ')
+haproxy_chinese_divider_count=$(find "$content_dir/haproxy" -maxdepth 1 -type f -name '_div_*.zh.md' | wc -l | tr -d ' ')
+haproxy_reading_count=$(find "$content_dir/haproxy" -maxdepth 1 -type f -name '*.md' ! -name '*.zh.md' ! -name '_index.md' ! -name '_div_*.md' | wc -l | tr -d ' ')
+etcd_markdown_count=$(find "$content_dir/etcd" -type f -name '*.md' ! -name '*.zh.md' | wc -l | tr -d ' ')
+etcd_chinese_count=$(find "$content_dir/etcd" -type f -name '*.zh.md' | wc -l | tr -d ' ')
 etcd_asset_count=$(find "$content_dir/etcd" -type f ! -name '*.md' | wc -l | tr -d ' ')
 haproxy_weights=$(
   {
     while IFS= read -r source_file; do
       sed -n 's/^weight:[[:space:]]*//p' "$source_file"
-    done < <(find "$content_dir/haproxy" -maxdepth 1 -type f -name '*.md' ! -name '_index.md' | sort)
+    done < <(find "$content_dir/haproxy" -maxdepth 1 -type f -name '*.md' ! -name '*.zh.md' ! -name '_index.md' | sort)
   } | sort -n
 )
 
-test "$english_count" -eq "$bilingual_expected"
-test "$chinese_count" -eq "$bilingual_expected"
+test "$legacy_english_count" -eq "$legacy_bilingual_expected"
+test "$legacy_chinese_count" -eq "$legacy_bilingual_expected"
+test "$english_count" -eq "$total_bilingual_expected"
+test "$chinese_count" -eq "$total_bilingual_expected"
 test "$haproxy_count" -eq "$haproxy_expected"
-test "$haproxy_chinese_count" -eq 0
+test "$haproxy_chinese_count" -eq "$haproxy_expected"
 test "$haproxy_divider_count" -eq 3
+test "$haproxy_chinese_divider_count" -eq 3
 test "$haproxy_reading_count" -eq 34
 test "$etcd_markdown_count" -eq "$etcd_markdown_expected"
+test "$etcd_chinese_count" -eq "$etcd_markdown_expected"
 test "$etcd_asset_count" -eq "$etcd_asset_expected"
 test "$haproxy_weights" = "$(seq 10 10 370)"
 test ! -e "$content_dir/docs"
@@ -65,15 +74,17 @@ english_list="$build_dir/english.txt"
 chinese_list="$build_dir/chinese.txt"
 (
   cd "$content_dir"
-  find patroni pgbackrest pgbouncer pgbadger -type f -name '*.md' ! -name '*.zh.md' | sort
+  find patroni pgbackrest pgbouncer pgbadger haproxy etcd -type f -name '*.md' ! -name '*.zh.md' | sort
 ) >"$english_list"
 (
   cd "$content_dir"
-  find patroni pgbackrest pgbouncer pgbadger -type f -name '*.zh.md' | sed 's/\.zh\.md$/.md/' | sort
+  find patroni pgbackrest pgbouncer pgbadger haproxy etcd -type f -name '*.zh.md' | sed 's/\.zh\.md$/.md/' | sort
 ) >"$chinese_list"
 diff -u "$english_list" "$chinese_list"
 
-if rg -n '\]\(/(patroni|pgbackrest|pgbouncer|pgbadger)(/|\))' "$content_dir" -g '*.zh.md'; then
+if rg -n --pcre2 \
+  '(?:\]\(/(?:patroni|pgbackrest|pgbouncer|pgbadger|haproxy|etcd)/|^\s*\[[^]]+\]:\s+/(?:haproxy|etcd)/)(?![^)[:space:]]*\.(?:png|gif|svg|json|txt)(?:[?#][^)]*)?(?:\)|$))' \
+  "$content_dir" -g '*.zh.md'; then
   echo 'Chinese content contains an English-locale component link' >&2
   exit 1
 fi
@@ -92,8 +103,12 @@ grep -Fq 'title: "PgBouncer 1.25.2 中文文档"' "$content_dir/pgbouncer/_index
 grep -Fq 'title: "pgBadger 13.2 Documentation"' "$content_dir/pgbadger/_index.md"
 grep -Fq 'title: "pgBadger 13.2 中文文档"' "$content_dir/pgbadger/_index.zh.md"
 grep -Fq 'title: "HAProxy 3.4.3 Documentation"' "$content_dir/haproxy/_index.md"
+grep -Fq 'title: "HAProxy 3.4.3 中文文档"' "$content_dir/haproxy/_index.zh.md"
+grep -Fq 'title: "etcd 3.7 Documentation"' "$content_dir/etcd/_index.md"
+grep -Fq 'title: "etcd 3.7 中文文档"' "$content_dir/etcd/_index.zh.md"
 
 python3 "$project_dir/scripts/check-bilingual-parity.py"
+python3 "$project_dir/scripts/check-component-translations.py" haproxy etcd
 
 hugo --source "$project_dir" --destination "$build_dir/public" --gc --minify --cleanDestinationDir --printPathWarnings --panicOnWarning
 
@@ -113,17 +128,29 @@ for page in \
   pgbadger/index.html \
   zh/pgbadger/index.html \
   haproxy/index.html \
+  zh/haproxy/index.html \
   haproxy/load-balancing/index.html \
+  zh/haproxy/load-balancing/index.html \
   haproxy/http-fundamentals/index.html \
+  zh/haproxy/http-fundamentals/index.html \
   haproxy/proxies/index.html \
+  zh/haproxy/proxies/index.html \
   haproxy/acls-and-samples/index.html \
+  zh/haproxy/acls-and-samples/index.html \
   haproxy/prerequisites/index.html \
+  zh/haproxy/prerequisites/index.html \
   haproxy/statistics-and-monitoring/index.html \
+  zh/haproxy/statistics-and-monitoring/index.html \
   haproxy/security/index.html \
+  zh/haproxy/security/index.html \
   etcd/index.html \
+  zh/etcd/index.html \
   etcd/quickstart/index.html \
+  zh/etcd/quickstart/index.html \
   etcd/op-guide/configuration/index.html \
+  zh/etcd/op-guide/configuration/index.html \
   etcd/upgrades/upgrade_3_7/index.html \
+  zh/etcd/upgrades/upgrade_3_7/index.html \
   haproxy/intro/index.html \
   haproxy/intro/load-balancing/index.html \
   haproxy/configuration/index.html \
@@ -148,13 +175,20 @@ for page in \
   zh/_print/pgbackrest/index.html \
   zh/_print/pgbouncer/index.html \
   zh/_print/pgbadger/index.html \
+  zh/_print/haproxy/index.html \
+  zh/_print/etcd/index.html \
   pgbadger/index.md \
   zh/pgbadger/index.md \
   haproxy/index.md \
+  zh/haproxy/index.md \
   haproxy/proxies/index.md \
+  zh/haproxy/proxies/index.md \
   haproxy/statistics-and-monitoring/index.md \
+  zh/haproxy/statistics-and-monitoring/index.md \
   etcd/index.md \
+  zh/etcd/index.md \
   etcd/quickstart/index.md \
+  zh/etcd/quickstart/index.md \
   third_party/pgbadger/examples/sample.html \
   third_party/pgbadger/examples/errors.html \
   third_party/pgbadger/examples/report/index.html \
@@ -174,13 +208,29 @@ done
 
 while IFS= read -r source_file; do
   relative=${source_file#"$content_dir/"}
-  if [[ $(basename "$relative") == '_index.md' ]]; then
-    route=${relative%/_index.md}
+  if [[ $relative == *.zh.md ]]; then
+    route="zh/${relative%.zh.md}"
   else
     route=${relative%.md}
   fi
+  if [[ $(basename "$route") == '_index' || $(basename "$route") == 'index' ]]; then
+    route=${route%/*index}
+  fi
   test -s "$build_dir/public/$route/index.html"
-done < <(find "$content_dir/haproxy" -maxdepth 1 -type f -name '*.md' ! -name '*.zh.md' ! -name '_div_*.md' | sort)
+done < <(find "$content_dir/haproxy" -maxdepth 1 -type f -name '*.md' ! -name '_div_*.md' | sort)
+
+while IFS= read -r source_file; do
+  relative=${source_file#"$content_dir/"}
+  if [[ $relative == *.zh.md ]]; then
+    route="zh/${relative%.zh.md}"
+  else
+    route=${relative%.md}
+  fi
+  if [[ $(basename "$route") == '_index' || $(basename "$route") == 'index' ]]; then
+    route=${route%/*index}
+  fi
+  test -s "$build_dir/public/$route/index.html"
+done < <(find "$content_dir/etcd" -type f -name '*.md' | sort)
 
 while IFS= read -r source_file; do
   relative=${source_file#"$content_dir/"}

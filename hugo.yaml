@@ -141,18 +141,18 @@ languages:
             description: 快速分析 PostgreSQL 与 PgBouncer 日志
         - identifier: haproxy
           name: HAProxy
-          url: ../haproxy/
+          pageRef: /haproxy
           weight: 50
           params:
             icon: fa-solid fa-network-wired
-            description: HAProxy 3.4 三套完整手册 · 英文原版
+            description: HAProxy 3.4 入门、配置与管理手册
         - identifier: etcd
           name: etcd
-          url: ../etcd/
+          pageRef: /etcd
           weight: 60
           params:
             icon: fa-solid fa-gear
-            description: etcd 3.7 运维、API 与内部原理 · 英文原版
+            description: etcd 3.7 运维、API 与内部原理
 
 params:
   logo: favicon-512x512.png

@@ -118,7 +118,7 @@ retained [upstream](https://github.com/etcd-io/website/blob/main/LICENSE).
 
 ## This site {#site}
 
-Original text written for pgsql.cc — orientation pages, the Chinese translations of the four
+Original text written for pgsql.cc — orientation pages, the Chinese translations of the six
 translated collections, editorial notes, and the landing page — is published under
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), except where an upstream licence
 above applies to the page instead.

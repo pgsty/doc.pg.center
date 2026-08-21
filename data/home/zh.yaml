@@ -23,7 +23,7 @@ components:
   class: pgsql-components
   eyebrow: 选择文档根
   title: 六个组件，六个直接入口
-  text: 每个组件拥有独立的侧栏、阅读顺序、页面大纲与本地搜索上下文；HAProxy 与 etcd 暂时保留英文原版。
+  text: 每个组件都拥有独立的侧栏、阅读顺序、页面大纲与本地搜索上下文；六套文档均提供中英双语版本。
   columns: 3
   link_label: 阅读文档
   items:
@@ -48,15 +48,15 @@ components:
       desc: 把 PostgreSQL 与 PgBouncer 日志转化为查询、负载、错误与运行报告。
       url: pgbadger/
     - title: HAProxy
-      meta: 负载均衡 · 英文原版
+      meta: 负载均衡
       icon: fa-solid fa-network-wired
-      desc: 阅读完整的 HAProxy 3.4 Starter、Configuration 与 Management 英文手册。
-      url: ../haproxy/
+      desc: 阅读完整的 HAProxy 3.4 入门、配置与管理中文手册。
+      url: haproxy/
     - title: etcd
-      meta: 共识与协调 · 英文原版
+      meta: 共识与协调
       icon: fa-solid fa-gear
       desc: 运维强一致分布式键值存储，并理解其 API、Raft 模型、版本升级与内部原理。
-      url: ../etcd/
+      url: etcd/
 
 capabilities:
   eyebrow: 组件指南
@@ -151,30 +151,30 @@ capabilities:
           - { icon: fa-solid fa-life-ring, title: 支持, url: pgbadger/support/ }
     - ref: 05 / 负载均衡
       title: HAProxy
-      url: ../haproxy/
+      url: haproxy/
       motto: 快速、可靠的 TCP 与 HTTP 流量管理
       bullets:
-        - 完整保留官方 3.4 Starter Guide，并拆成九个概念与功能主题。
-        - 将 33,031 行 Configuration Manual 按原生结构拆成十二章。
-        - 将 Management Guide 拆成十三章，覆盖 Runtime CLI、监控、调试与安全。
+        - 完整收录官方 3.4 入门指南，并拆分为九个概念与功能主题。
+        - 将 33,031 行配置手册按原生结构拆分为十二章。
+        - 将管理指南拆分为十三章，覆盖运行时 CLI、监控、调试与安全。
       value: 在同一个组件根中学习架构、查阅全部配置项并完成 HAProxy 运维。
       visual:
         type: components
         compact: true
         columns: 2
-        aria_label: HAProxy 英文文档快捷入口
+        aria_label: HAProxy 中文文档快捷入口
         items:
-          - { icon: fa-solid fa-compass, title: Starter Guide, url: ../haproxy/load-balancing/ }
-          - { icon: fa-solid fa-file-code, title: Configuration Manual, url: ../haproxy/http-fundamentals/ }
-          - { icon: fa-solid fa-right-left, title: Proxy 配置项, url: ../haproxy/proxies/ }
-          - { icon: fa-solid fa-filter, title: ACL 与采样, url: ../haproxy/acls-and-samples/ }
-          - { icon: fa-solid fa-screwdriver-wrench, title: Management Guide, url: ../haproxy/prerequisites/ }
-          - { icon: fa-solid fa-chart-line, title: Runtime CLI 与统计, url: ../haproxy/statistics-and-monitoring/ }
-          - { icon: fa-solid fa-bug, title: 调试与性能, url: ../haproxy/debugging-and-performance/ }
-          - { icon: fa-solid fa-shield-halved, title: 安全, url: ../haproxy/security/ }
+          - { icon: fa-solid fa-compass, title: 入门指南, url: haproxy/load-balancing/ }
+          - { icon: fa-solid fa-file-code, title: 配置手册, url: haproxy/http-fundamentals/ }
+          - { icon: fa-solid fa-right-left, title: 代理配置项, url: haproxy/proxies/ }
+          - { icon: fa-solid fa-filter, title: ACL 与样本提取, url: haproxy/acls-and-samples/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: 管理指南, url: haproxy/prerequisites/ }
+          - { icon: fa-solid fa-chart-line, title: 运行时 CLI 与统计, url: haproxy/statistics-and-monitoring/ }
+          - { icon: fa-solid fa-bug, title: 调试与性能, url: haproxy/debugging-and-performance/ }
+          - { icon: fa-solid fa-shield-halved, title: 安全, url: haproxy/security/ }
     - ref: 06 / 共识与协调
       title: etcd
-      url: ../etcd/
+      url: etcd/
       motto: 强一致分布式键值存储
       bullets:
         - 基于 Raft 共识算法提供持久化键值 API，为分布式系统提供协调能力。
@@ -187,12 +187,12 @@ capabilities:
         columns: 2
         aria_label: etcd 文档快捷入口
         items:
-          - { icon: fa-solid fa-bolt, title: 快速上手, url: ../etcd/quickstart/ }
-          - { icon: fa-solid fa-download, title: 安装, url: ../etcd/install/ }
-          - { icon: fa-solid fa-sliders, title: 配置, url: ../etcd/op-guide/configuration/ }
-          - { icon: fa-solid fa-screwdriver-wrench, title: 维护, url: ../etcd/op-guide/maintenance/ }
-          - { icon: fa-solid fa-code, title: API, url: ../etcd/learning/api/ }
-          - { icon: fa-solid fa-arrow-up-right-dots, title: 升级到 3.7, url: ../etcd/upgrades/upgrade_3_7/ }
+          - { icon: fa-solid fa-bolt, title: 快速上手, url: etcd/quickstart/ }
+          - { icon: fa-solid fa-download, title: 安装, url: etcd/install/ }
+          - { icon: fa-solid fa-sliders, title: 配置, url: etcd/op-guide/configuration/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: 维护, url: etcd/op-guide/maintenance/ }
+          - { icon: fa-solid fa-code, title: API, url: etcd/learning/api/ }
+          - { icon: fa-solid fa-arrow-up-right-dots, title: 升级到 3.7, url: etcd/upgrades/upgrade_3_7/ }
 
 faq:
   eyebrow: 常见问题
@@ -204,6 +204,6 @@ faq:
     - question: pgsql.cc 是 PostgreSQL 官方网站吗？
       answer: 不是。pgsql.cc 是独立的社区文档项目。本站保留各上游项目的链接、产品名称与技术上下文。
     - question: 中英文页面如何对应？
-      answer: Patroni、pgBackRest、PgBouncer 与 pgBadger 在同一逻辑路径下都有配对翻译；HAProxy 3.4 与 etcd 3.7 暂时仅提供英文原版。
+      answer: 六套文档在同一逻辑路径下均提供一一对应的英文原文与简体中文译文，可通过顶部语言按钮切换。
     - question: 上游文档的归属如何标注？
       answer: 每个页面末尾都有一行署名，指明该页改编自哪份作品、版权归属、授权协议，以及本站中该页面的修改历史链接。[归属与授权页面](/zh/attribution/)汇总了六套文档集的固定版本、授权协议与完整声明。

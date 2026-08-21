@@ -5,12 +5,12 @@
 [![Hugo](https://img.shields.io/badge/Hugo-extended%200.164.0-FF4088?logo=hugo)](https://gohugo.io/)
 
 PostgreSQL Community Components is a documentation portal for the tools that run PostgreSQL in
-production. The current collection covers Patroni, pgBackRest, PgBouncer, and pgBadger in English
-and Simplified Chinese, plus the complete English HAProxy 3.4 Starter, Configuration, and Management
-manuals and the official etcd 3.7 documentation.
+production. The current collection covers Patroni, pgBackRest, PgBouncer, pgBadger, the complete
+HAProxy 3.4 Starter, Configuration, and Management manuals, and the official etcd 3.7 documentation,
+all in English and Simplified Chinese.
 
-本站是 PostgreSQL 生态工具文档站。当前收录 Patroni、pgBackRest、PgBouncer 与 pgBadger
-中英双语文档，以及 HAProxy 3.4 与 etcd 3.7 英文完整文档。
+本站是 PostgreSQL 生态工具文档站。当前收录 Patroni、pgBackRest、PgBouncer、pgBadger、
+HAProxy 3.4 与 etcd 3.7 的完整中英双语文档。
 
 ## Build
 
@@ -35,9 +35,8 @@ Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy, and etcd are six independent 
 directly under `content/`; there is no shared `content/docs/` wrapper or `/docs/` canonical URL prefix.
 They appear directly in the global navbar, and each root owns its own sidebar and sequential pager.
 The homepage keeps a three-line hero, six root cards, six detailed shortcut indexes, and a short FAQ.
-The first four manuals are bilingual; HAProxy and etcd are intentionally English-only until reviewed
-translations are added. HAProxy keeps all 34 reading pages directly under one root,
-with `_div_intro.md`, `_div_configuration.md`, and `_div_management.md` providing non-linking sidebar
+All six manuals are bilingual. HAProxy keeps all 34 reading pages directly under one root, with
+`_div_intro.md`, `_div_configuration.md`, and `_div_management.md` providing non-linking sidebar
 group labels in a single weighted reading sequence.
 
 ## Content sources
