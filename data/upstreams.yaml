@@ -1,0 +1,59 @@
+# Upstream registry for the OINK 0.6.0 page annotation.
+#
+# Each component tree names one entry through `upstream_source` in its
+# `_index.md` cascade; every page inside the tree then adds only the one
+# per-page fact, `upstream_link`, and the annotation renders the credit,
+# the copyright, the licence, and the link to the full notice.
+#
+# `license` is an SPDX identifier resolved through OINK's `data/licenses`
+# table. `notice` points at the site attribution page, which carries the
+# pinned snapshot identity, the retained upstream licence texts, and the
+# obligations a one-line credit cannot state.
+
+patroni:
+  name: Patroni documentation
+  copyright: Copyright (c) 2025 Compose, Zalando SE, Patroni Contributors
+  license: MIT
+  notice: /attribution/#patroni
+  ref: v4.1.5
+  modified: true
+
+pgbackrest:
+  name: pgBackRest documentation
+  copyright: Copyright (c) 2015-2026 The PostgreSQL Global Development Group and David Steele
+  license: MIT
+  notice: /attribution/#pgbackrest
+  ref: v2.59.0
+  modified: true
+
+pgbouncer:
+  name: PgBouncer documentation
+  copyright: Copyright (c) 2007-2009 Marko Kreen, Skype Technologies OÜ
+  license: ISC
+  notice: /attribution/#pgbouncer
+  ref: v1.25.2
+  modified: true
+
+pgbadger:
+  name: pgBadger documentation
+  copyright: Copyright (c) 2012-2026 Gilles Darold
+  license: PostgreSQL
+  notice: /attribution/#pgbadger
+  ref: v13.2, commit a1ad95a
+  modified: true
+
+haproxy:
+  name: HAProxy 3.4 documentation
+  copyright: Copyright 2000-2026 Willy Tarreau
+  license: GPL-2.0-only
+  notice: /attribution/#haproxy
+  ref: v3.4.3
+  modified: true
+
+etcd:
+  name: etcd v3.7 documentation
+  copyright: Copyright 2013-present etcd Authors
+  license: CC-BY-4.0
+  notice: /attribution/#etcd
+  ref: v3.7, commit a9ee660
+  modified: true
