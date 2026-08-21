@@ -5,15 +5,20 @@ from __future__ import annotations
 
 import argparse
 import html
+import os
 import re
 import sys
 from collections import Counter
 from decimal import Decimal
+from html.parser import HTMLParser
 from pathlib import Path
 
 
 PROJECT = Path(__file__).resolve().parent.parent
 CONTENT = PROJECT / "content"
+RENDERED_ROOT = Path(
+    os.environ.get("TRANSLATION_RENDERED_DIR", str(PROJECT / "public"))
+).resolve()
 COMPONENTS = ("haproxy", "etcd")
 
 FENCE_RE = re.compile(r"^\s*(`{3,}|~{3,})")
@@ -211,14 +216,27 @@ def rendered_heading_ids(source: Path, expected_levels: list[int] | None = None)
         route = relative.parent
     else:
         route = relative.with_suffix("")
-    rendered = PROJECT / "public" / route / "index.html"
+    rendered = RENDERED_ROOT / route / "index.html"
     if not rendered.is_file():
         raise ValueError(f"missing rendered English page used for anchors: {rendered}")
     document = rendered.read_text(encoding="utf-8", errors="replace")
-    rendered = [
-        (int(level), html.unescape(value))
-        for level, value in re.findall(r'<h([1-6])[^>]*\sid="([^"]+)"', document)
-    ]
+    class HeadingParser(HTMLParser):
+        def __init__(self) -> None:
+            super().__init__(convert_charrefs=True)
+            self.rows: list[tuple[int, str]] = []
+
+        def handle_starttag(
+            self, tag: str, attrs: list[tuple[str, str | None]]
+        ) -> None:
+            if not re.fullmatch(r"h[1-6]", tag):
+                return
+            heading_id = dict(attrs).get("id")
+            if heading_id:
+                self.rows.append((int(tag[1]), html.unescape(heading_id)))
+
+    parser = HeadingParser()
+    parser.feed(document)
+    rendered = parser.rows
     if expected_levels is not None and len(rendered) != len(expected_levels):
         for start in range(0, len(rendered) - len(expected_levels) + 1):
             window = rendered[start : start + len(expected_levels)]
