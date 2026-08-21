@@ -172,8 +172,28 @@ params:
   offline_search_summary_length: 80
   offline_search_max_results: 12
   page_width: normal
+  # Giscus, backed by GitHub Discussions on the site repository. `pathname`
+  # mapping gives each page its own thread, which also means the English and
+  # Chinese versions of a page keep separate threads -- readers comment in the
+  # language they are reading. Announcements is the category giscus recommends:
+  # only maintainers may open threads there, so no stray discussion can claim a
+  # page's slot. `strict` matches the thread by a hash of the pathname instead
+  # of a fuzzy title search.
   comments:
-    enable: false
+    enable: true
+    type: giscus
+    giscus:
+      repo: pgsty/pgsql.cc
+      repoId: R_kgDOT5P-Ag
+      category: Announcements
+      categoryId: DIC_kwDOT5P-As4DD3wq
+      mapping: pathname
+      strict: 1
+      reactionsEnabled: 1
+      emitMetadata: 0
+      inputPosition: top
+      theme: auto
+      loading: lazy
   ui:
     typography: technical
     quick_links: [patroni, pgbackrest, pgbouncer, pgbadger, haproxy, etcd]
