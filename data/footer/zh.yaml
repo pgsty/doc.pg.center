@@ -3,7 +3,7 @@ brand:
   tagline: PostgreSQL 社区组件
   slogan: 面向生产实践的 PostgreSQL 生态工具双语文档。
 columns:
-  - title: 组件
+  - title: 组件文档
     links:
       - { label: Patroni, url: patroni/ }
       - { label: pgBackRest, url: pgbackrest/ }
@@ -13,10 +13,17 @@ columns:
       - { label: etcd, url: ../etcd/ }
   - title: 上游项目
     links:
-      - { label: PostgreSQL.org, url: https://www.postgresql.org/, external: true }
       - { label: Patroni, url: https://github.com/patroni/patroni, external: true }
       - { label: pgBackRest, url: https://pgbackrest.org/, external: true }
       - { label: PgBouncer, url: https://www.pgbouncer.org/, external: true }
       - { label: pgBadger, url: https://pgbadger.darold.net/, external: true }
       - { label: HAProxy, url: https://www.haproxy.org/, external: true }
       - { label: etcd, url: https://etcd.io/, external: true }
+  - title: 友情链接
+    links:
+      - { label: PGSTY, url: https://pgsty.com, external: true }
+      - { label: Pigsty, url: https://pigsty.cc, external: true }
+      - { label: SILO, url: https://silo.pgsty.com/zh, external: true }
+      - { label: pg.center, url: https://pg.center, external: true }
+      - { label: OINK, url: https://oink.pgsty.com/zh, external: true }
+      - { label: PIG, url: https://pig.pgsty.com/zh, external: true }
