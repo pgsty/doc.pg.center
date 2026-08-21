@@ -1,0 +1,129 @@
+{{- /* Landing hero for pgsql.cc.
+
+     OINK's section dispatcher (landing/section.html) lets a section entry name
+     its own `partial`, so this is an additive project template rather than a
+     fork of the theme's hero: it keeps every `td-landing-hero*` class so the
+     theme's grid, glow, typography, and below-900px collapse still apply, and
+     only adds the two things the stock hero has no field for -- a row of
+     component links in place of CTA buttons, and the orbit beside them.
+
+     The six components are read from the same `components.items` the cards
+     section uses, so the hero, the orbit, and the card grid cannot disagree
+     about a component's name, icon, or destination. */ -}}
+{{- $page := .page -}}
+{{- $home := .home -}}
+{{- $hero := .data -}}
+{{- $id := .id -}}
+{{- $titleLines := index $hero "title_lines" -}}
+{{- $lead := $hero.lead | default $hero.desc | default $hero.text -}}
+{{- $components := (index ($home.components | default dict) "items") | default slice -}}
+{{- $orbit := $hero.orbit | default dict -}}
+{{- if and $orbit (not (reflect.IsMap $orbit)) -}}
+  {{- warnf "%s: hero.orbit must be a map; ignoring it" $page.Path -}}
+  {{- $orbit = dict -}}
+{{- end -}}
+{{- $orbitOn := and $components (ne (index $orbit "enabled") false) -}}
+{{- /* Only three satellites fit legibly on a ring, so the first three
+       components take the inner ring and the rest the outer one. */ -}}
+{{- $split := int ($orbit.split | default 3) -}}
+{{- if or (lt $split 1) (gt $split (len $components)) }}{{ $split = 3 }}{{ end -}}
+<section id="{{ $id }}"
+  class="td-landing-hero{{ if $orbitOn }} td-landing-hero--with-media{{ end }}{{ with $hero.class }} {{ . }}{{ end }}"
+  aria-labelledby="{{ $id }}-title">
+  <div class="td-landing-hero__glow" aria-hidden="true"></div>
+  <div class="td-site-container">
+    <div class="td-landing-hero__copy">
+      {{- with $hero.eyebrow }}
+      <p class="td-landing-hero__eyebrow">
+        <span class="td-landing-status-dot" aria-hidden="true"></span>
+        <span>{{ partial "landing/markdown.html" (dict "page" $page "value" .) }}</span>
+      </p>
+      {{- end }}
+      <h1 class="td-landing-hero__title" id="{{ $id }}-title">
+        {{- with $titleLines -}}
+          {{- range . }}
+        <span>
+            {{- if reflect.IsMap . -}}
+              {{- range $word := .words -}}
+                {{- with $word.mark }}<b class="td-landing-initial{{ with $word.color }} td-landing-initial--{{ . }}{{ end }}">{{ . }}</b>{{ end -}}
+                {{- partial "landing/markdown.html" (dict "page" $page "value" $word.text) -}}{{ " " -}}
+              {{- end -}}
+            {{- else -}}
+              {{- partial "landing/markdown.html" (dict "page" $page "value" .) -}}
+            {{- end -}}
+        </span>
+          {{- end -}}
+        {{- else -}}
+          {{- partial "landing/markdown.html" (dict "page" $page "value" ($hero.title | default $page.Site.Title)) -}}
+        {{- end -}}
+      </h1>
+      {{- with $lead }}<p class="td-landing-hero__lead">{{ partial "landing/markdown.html" (dict "page" $page "value" .) }}</p>{{ end }}
+      {{- with $hero.note }}
+      <p class="td-landing-hero__note"><i class="{{ $hero.note_icon | default "fa-solid fa-circle-check" }}" aria-hidden="true"></i><span>{{ partial "landing/markdown.html" (dict "page" $page "value" .) }}</span></p>
+      {{- end }}
+      {{- with $components }}
+      <nav class="pgsql-hero__links" aria-label="{{ $hero.links_label | default (T "ui_docs" | default "Documentation") }}">
+        {{- range . }}
+        {{- $url := .url | default .href -}}
+        {{- if $url }}
+        <a class="pgsql-hero__link" href="{{ $url | relLangURL }}"{{ if .external }} target="_blank" rel="noopener noreferrer"{{ end }}>
+          {{- with .icon }}<i class="{{ . }}" aria-hidden="true"></i>{{ end }}
+          <span>{{ .title | default .name }}</span>
+        </a>
+        {{- end }}
+        {{- end }}
+      </nav>
+      {{- end }}
+    </div>
+    {{- if $orbitOn }}
+    {{- /* Decorative twin of the link row above: the same six destinations,
+           already reachable by keyboard there, so this copy is hidden from
+           assistive technology and taken out of the tab order rather than
+           announcing every component twice. */ -}}
+    <div class="pgsql-orbit" aria-hidden="true">
+      <svg class="pgsql-orbit__rings" viewBox="0 0 400 400" role="presentation" focusable="false">
+        <defs>
+          <radialGradient id="{{ $id }}-halo" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="var(--pgsql-halo)" stop-opacity="1"/>
+            <stop offset="100%" stop-color="var(--pgsql-halo)" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle class="pgsql-orbit__ring" cx="200" cy="200" r="110"/>
+        <circle class="pgsql-orbit__ring pgsql-orbit__ring--outer" cx="200" cy="200" r="162"/>
+        <circle cx="200" cy="200" r="94" fill="url(#{{ $id }}-halo)"/>
+      </svg>
+      {{- /* Slonik is the body the six satellites orbit. It is a separate
+             element rather than an <image> inside the SVG above so it can carry
+             its own drop shadow and dark-mode treatment. */ -}}
+      <img class="pgsql-orbit__planet" src="{{ ($orbit.center_image | default "img/slonik.svg") | relURL }}"
+           alt="" width="150" height="155" loading="eager">
+      <div class="pgsql-orbit__field">
+        {{- range $i, $item := $components }}
+        {{- $url := $item.url | default $item.href -}}
+        {{- $inner := lt $i $split -}}
+        {{- $count := cond $inner $split (sub (len $components) $split) -}}
+        {{- $index := cond $inner $i (sub $i $split) -}}
+        {{- /* Evenly spaced on the ring; the outer ring is offset by half a
+               step so the two rings never line their satellites up. */ -}}
+        {{- $angle := div (mul 360.0 $index) $count -}}
+        {{- if not $inner }}{{ $angle = add $angle (div 180.0 $count) }}{{ end -}}
+        <div class="pgsql-orbit__sat pgsql-orbit__sat--{{ cond $inner "inner" "outer" }}" style="--a: {{ printf "%.2f" $angle }}deg">
+          <div class="pgsql-orbit__spin">
+            <div class="pgsql-orbit__arm">
+              <div class="pgsql-orbit__counter">
+                {{- if $url }}
+                <a class="pgsql-orbit__link" href="{{ $url | relLangURL }}" tabindex="-1"{{ if $item.external }} target="_blank" rel="noopener noreferrer"{{ end }}>
+                  <span class="pgsql-orbit__chip">{{ with $item.icon }}<i class="{{ . }}"></i>{{ end }}</span>
+                  <span class="pgsql-orbit__label">{{ $item.title | default $item.name }}</span>
+                </a>
+                {{- end }}
+              </div>
+            </div>
+          </div>
+        </div>
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+  </div>
+</section>

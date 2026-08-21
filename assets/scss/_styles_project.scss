@@ -13,6 +13,346 @@
   }
 }
 
+// A two-line display title whose second line is twice as long as the first
+// reads as a ragged block. Scaling the second line down in `em` keeps the two
+// lines ending near the same edge at every viewport width, because the theme's
+// `clamp()` on the title still drives both.
+.pgsql-hero--fit-title .td-landing-hero__title > span:last-child {
+  font-size: calc(1em * var(--pgsql-title-scale, 0.48));
+  letter-spacing: -0.02em;
+  line-height: 1.24;
+}
+
+// Six full-width characters are already close to "PostgreSQL" in width, so the
+// Chinese line only needs a nudge, not the Latin line's halving.
+.pgsql-hero--fit-title-cjk {
+  --pgsql-title-scale: 0.86;
+}
+
+// Between the theme's two-column breakpoint and 1280px the module's 50/50
+// split leaves the copy column too narrow for one-line bullets, while the
+// component board beside it is mostly padding at that size. Give the text the
+// extra room instead of cutting the sentences down to fit the narrowest case.
+@media (min-width: 1001px) and (max-width: 1279.98px) {
+  .td-landing-capabilities .td-landing-module {
+    grid-template-columns: minmax(0, 1.24fr) minmax(0, 0.76fr);
+  }
+
+  // Alternating modules move the copy to the second position with `order`,
+  // so the wide track has to move with it.
+  .td-landing-capabilities .td-landing-module--reverse {
+    grid-template-columns: minmax(0, 0.76fr) minmax(0, 1.24fr);
+  }
+}
+
+// Between 901 and 1000px no split leaves the copy wide enough for one-line
+// sentences and the board wide enough to be legible, so the module stacks
+// there instead -- the same shape the theme already uses below 901px, just
+// entered a breakpoint earlier for this section.
+@media (min-width: 901px) and (max-width: 1000px) {
+  .td-landing-capabilities .td-landing-module {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .td-landing-capabilities .td-landing-module--reverse {
+    .td-landing-module__copy,
+    > :last-child {
+      order: initial;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Landing hero: component link row + orbit
+// ---------------------------------------------------------------------------
+
+// The six component links replace the hero's CTA buttons. They are quieter
+// than a button on purpose: six primary buttons would read as six calls to
+// action rather than one navigation choice.
+// Three across, two down. Wrapping a flex row left a 4 + 2 break whose second
+// row read as an afterthought; a fixed three-column grid gives the six
+// components the same shape they have in the card section below.
+.pgsql-hero__links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 460px;
+  margin: 26px 0 4px;
+}
+
+@media (max-width: 480px) {
+  .pgsql-hero__links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.pgsql-hero__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 9px 13px;
+  border: 1px solid var(--td-line);
+  border-radius: 999px;
+  background: var(--td-paper);
+  color: var(--td-ink);
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+
+  i {
+    width: 1em;
+    flex: none;
+    color: var(--td-blue);
+    font-size: 0.94rem;
+  }
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--td-copper-dim);
+    background: color-mix(in srgb, var(--td-blue) 7%, var(--td-paper));
+    color: var(--td-ink);
+  }
+}
+
+// --- Orbit -----------------------------------------------------------------
+//
+// Geometry lives here rather than in the template: the partial only sets each
+// satellite's starting angle, and the ring modifier picks its radius and
+// period. Radii derive from one container size so the whole system scales with
+// the viewport instead of needing breakpoint-specific coordinates.
+.pgsql-orbit {
+  --pgsql-orbit-size: clamp(320px, 30vw, 440px);
+  --pgsql-orbit-inner: calc(var(--pgsql-orbit-size) * 0.275);
+  --pgsql-orbit-outer: calc(var(--pgsql-orbit-size) * 0.405);
+  --pgsql-orbit-inner-period: 44s;
+  --pgsql-orbit-outer-period: 72s;
+  --pgsql-halo: rgba(51, 103, 145, 0.09);
+
+  position: relative;
+  width: var(--pgsql-orbit-size);
+  height: var(--pgsql-orbit-size);
+  justify-self: center;
+}
+
+[data-bs-theme='dark'] .pgsql-orbit {
+  --pgsql-halo: rgba(126, 183, 229, 0.13);
+}
+
+// Slonik's outer contour is black, which vanishes on the dark ground, so the
+// mark gets a light rim there instead of an invisible one.
+[data-bs-theme='dark'] .pgsql-orbit__planet {
+  filter: drop-shadow(0 0 1px rgba(233, 242, 250, 0.9))
+    drop-shadow(0 0 14px rgba(126, 183, 229, 0.28));
+}
+
+.pgsql-orbit__rings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.pgsql-orbit__ring {
+  fill: none;
+  stroke: var(--td-line);
+  stroke-width: 1;
+  stroke-dasharray: 3 7;
+  opacity: 0.85;
+
+  &--outer {
+    stroke-dasharray: 2 9;
+    opacity: 0.6;
+  }
+}
+
+.pgsql-orbit__planet {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--pgsql-orbit-size) * 0.335);
+  height: auto;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 6px 18px rgba(15, 23, 42, 0.16));
+}
+
+// Every satellite is a full-size box stacked on the others, so without this
+// the last one in the DOM would swallow the pointer across the whole field and
+// only its own chip would ever be clickable. The chips opt back in.
+.pgsql-orbit__rings,
+.pgsql-orbit__field,
+.pgsql-orbit__sat,
+.pgsql-orbit__spin,
+.pgsql-orbit__arm,
+.pgsql-orbit__counter {
+  pointer-events: none;
+}
+
+.pgsql-orbit__link {
+  pointer-events: auto;
+}
+
+.pgsql-orbit__field {
+  position: absolute;
+  inset: 0;
+}
+
+// One job per layer, so the animation never has to reproduce a static offset:
+// `--sat` holds the starting angle, `--spin` turns, `--arm` pushes the
+// satellite out to its radius, and `--counter` undoes the turn so the icon
+// stays upright.
+.pgsql-orbit__sat {
+  position: absolute;
+  inset: 0;
+  transform: rotate(var(--a, 0deg));
+}
+
+.pgsql-orbit__spin {
+  position: absolute;
+  inset: 0;
+  animation: pgsql-orbit-spin var(--period) linear infinite;
+}
+
+.pgsql-orbit__counter {
+  animation: pgsql-orbit-counter var(--period) linear infinite;
+}
+
+.pgsql-orbit__sat--inner {
+  --period: var(--pgsql-orbit-inner-period);
+  --radius: var(--pgsql-orbit-inner);
+}
+
+.pgsql-orbit__sat--outer {
+  --period: var(--pgsql-orbit-outer-period);
+  --radius: var(--pgsql-orbit-outer);
+}
+
+.pgsql-orbit__arm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(calc(-1 * var(--radius)));
+}
+
+// The satellite's own starting angle is static, so the label is straightened
+// with the same static rotation in reverse.
+.pgsql-orbit__link {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  transform: rotate(calc(-1 * var(--a, 0deg)));
+  text-decoration: none;
+}
+
+.pgsql-orbit__chip {
+  display: grid;
+  width: 50px;
+  height: 50px;
+  place-items: center;
+  border: 1px solid var(--td-line);
+  border-radius: 15px;
+  background: var(--td-paper);
+  box-shadow: var(--td-shadow);
+  color: var(--td-blue);
+  font-size: 1.28rem;
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+// Out of flow and out of hit-testing: in flow it pushed the chip off its
+// orbit radius, and at opacity 0 it still swallowed clicks aimed at whichever
+// neighbouring satellite happened to drift underneath it.
+.pgsql-orbit__label {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--td-paper);
+  color: var(--td-soft);
+  font-family: var(--td-meta-font-family);
+  font-size: 0.63rem;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  transition: opacity 180ms ease;
+  white-space: nowrap;
+}
+
+.pgsql-orbit__link:hover {
+  .pgsql-orbit__chip {
+    border-color: var(--td-copper-dim);
+    color: var(--td-copper);
+    transform: scale(1.12);
+  }
+
+  .pgsql-orbit__label {
+    opacity: 1;
+  }
+}
+
+// Hovering anywhere in the system halts it, so a satellite the reader is
+// aiming at stops moving under the pointer.
+.pgsql-orbit:hover .pgsql-orbit__spin,
+.pgsql-orbit:hover .pgsql-orbit__counter {
+  animation-play-state: paused;
+}
+
+@keyframes pgsql-orbit-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pgsql-orbit-counter {
+  to { transform: rotate(-360deg); }
+}
+
+// Below the theme's own hero breakpoint the copy column goes full width, so
+// the orbit would only crowd it.
+@media (max-width: 900px) {
+  .pgsql-orbit {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pgsql-orbit__spin,
+  .pgsql-orbit__counter {
+    animation: none;
+  }
+
+  .pgsql-orbit__chip {
+    transition: none;
+  }
+}
+
+// The whole component card is the link. The visible "Read the docs" anchor
+// keeps its own focus ring and remains the accessible name; the overlay only
+// widens the pointer target.
+.pgsql-components .td-landing-card {
+  position: relative;
+  cursor: pointer;
+
+  .td-landing-card-link::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    border-radius: var(--td-radius-md);
+  }
+}
+
 .td-landing-landing {
   --td-grid: rgba(51, 103, 145, 0.075);
 }
@@ -40,24 +380,6 @@
     flex: none;
     font-size: 0.62rem;
     white-space: nowrap;
-  }
-}
-
-@media (min-width: 901px) {
-  .pgsql-components .td-landing-card-grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-  }
-
-  .pgsql-components .td-landing-card {
-    grid-column: span 2;
-  }
-
-  .pgsql-components .td-landing-card:nth-last-child(2) {
-    grid-column: 2 / span 2;
-  }
-
-  .pgsql-components .td-landing-card:last-child {
-    grid-column: 4 / span 2;
   }
 }
 

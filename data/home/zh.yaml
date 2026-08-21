@@ -1,32 +1,23 @@
 sections:
-  - hero
+  - key: hero
+    partial: pgsql/hero-orbit.html
   - type: cards
     key: components
   - capabilities
   - faq
 
 hero:
-  class: pgsql-hero
-  eyebrow: 六个组件入口 · 四套双语 + 两套英文
+  class: pgsql-hero pgsql-hero--fit-title pgsql-hero--fit-title-cjk
+  eyebrow: 六个独立组件的多语言文档
   title_lines:
     - words:
         - { mark: P, color: blue, text: ostgreSQL }
     - words:
-        - { text: 社区组件 }
-    - words:
-        - { text: 文档中心 }
-  lead: 为 **Patroni、pgBackRest、PgBouncer、pgBadger、HAProxy 与 etcd** 提供六个聚焦、独立的文档入口。
-  note: 选择组件，直接进入它的指南、参考手册、版本记录与支持信息。
-  note_icon: fa-solid fa-circle-check
-  actions:
-    - label: 选择组件
-      url: '#components'
-      icon: fa-solid fa-arrow-down
-      style: primary
-    - label: 打开搜索
-      url: search/
-      icon: fa-solid fa-magnifying-glass
-      style: ghost
+        - { text: 社区组件文档 }
+  lead: 独立且美观的多语言文档。
+  links_label: 组件文档
+  orbit:
+    center_image: img/slonik.svg
 
 components:
   class: pgsql-components
@@ -43,27 +34,27 @@ components:
       url: patroni/
     - title: pgBackRest
       meta: 备份与恢复
-      icon: fa-solid fa-box-archive
+      icon: fa-solid fa-couch
       desc: 设计可靠的备份、恢复、归档、保留策略与时间点恢复工作流。
       url: pgbackrest/
     - title: PgBouncer
       meta: 连接池
-      icon: fa-solid fa-diagram-project
+      icon: fa-solid fa-arrows-turn-to-dots
       desc: 降低连接开销，理解会话、事务与语句池化模式的行为边界。
       url: pgbouncer/
     - title: pgBadger
       meta: 日志分析
-      icon: fa-solid fa-chart-line
+      icon: fa-solid fa-otter
       desc: 把 PostgreSQL 与 PgBouncer 日志转化为查询、负载、错误与运行报告。
       url: pgbadger/
     - title: HAProxy
       meta: 负载均衡 · 英文原版
-      icon: fa-solid fa-shuffle
+      icon: fa-solid fa-network-wired
       desc: 阅读完整的 HAProxy 3.4 Starter、Configuration 与 Management 英文手册。
       url: ../haproxy/
     - title: etcd
       meta: 共识与协调 · 英文原版
-      icon: fa-solid fa-database
+      icon: fa-solid fa-gear
       desc: 运维强一致分布式键值存储，并理解其 API、Raft 模型、版本升级与内部原理。
       url: ../etcd/
 
@@ -214,3 +205,5 @@ faq:
       answer: 不是。pgsql.cc 是独立的社区文档项目。本站保留各上游项目的链接、产品名称与技术上下文。
     - question: 中英文页面如何对应？
       answer: Patroni、pgBackRest、PgBouncer 与 pgBadger 在同一逻辑路径下都有配对翻译；HAProxy 3.4 与 etcd 3.7 暂时仅提供英文原版。
+    - question: 上游文档的归属如何标注？
+      answer: 每个页面末尾都有一行署名，指明该页改编自哪份作品、版权归属、授权协议，以及本站中该页面的修改历史链接。[归属与授权页面](/zh/attribution/)汇总了六套文档集的固定版本、授权协议与完整声明。
