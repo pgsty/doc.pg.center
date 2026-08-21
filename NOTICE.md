@@ -20,4 +20,18 @@ HAProxy's license explanation, OpenSSL exception, and complete GPLv2 text are re
 `static/third_party/haproxy/`. These HAProxy-derived pages are not covered by the site's
 `LICENSE-CC-BY-4.0`.
 
-The website uses OINK 0.4.1 as a pinned Hugo Module. OINK is licensed under Apache License 2.0 and carries its own upstream and bundled-dependency notices in the module source.
+The website uses OINK 0.6.0 as a pinned Hugo Module. OINK is licensed under Apache License 2.0 and carries its own upstream and bundled-dependency notices in the module source.
+
+The etcd 3.7 documentation collection was imported from the official etcd website repository at
+commit `a9ee660fdbf9584deb4af639c4dc63b01413e44f`. Its prose is distributed under the Creative
+Commons Attribution 4.0 International license, while code and code samples are distributed under
+the Apache License 2.0, copyright 2013-present etcd Authors.
+
+Per-page attribution for every collection is published at <https://pgsql.cc/attribution/> and is
+generated from `data/upstreams.yaml` together with the `upstream_link` front matter each page
+carries.
+
+The PostgreSQL elephant (Slonik) published at `static/img/slonik.svg` is taken unmodified from the
+postgresql.org website repository. It is a mark of the PostgreSQL Community Association of Canada
+and is used here to refer to PostgreSQL under the project's trademark and logo policy; its use
+does not imply endorsement.
