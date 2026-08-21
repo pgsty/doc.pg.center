@@ -3,7 +3,7 @@ brand:
   tagline: PostgreSQL Community Components
   slogan: Practical, bilingual documentation for the community stack.
 columns:
-  - title: Components
+  - title: Documentation
     links:
       - { label: Patroni, url: patroni/ }
       - { label: pgBackRest, url: pgbackrest/ }
@@ -13,10 +13,17 @@ columns:
       - { label: etcd, url: etcd/ }
   - title: Upstream
     links:
-      - { label: PostgreSQL.org, url: https://www.postgresql.org/, external: true }
       - { label: Patroni, url: https://github.com/patroni/patroni, external: true }
       - { label: pgBackRest, url: https://pgbackrest.org/, external: true }
       - { label: PgBouncer, url: https://www.pgbouncer.org/, external: true }
       - { label: pgBadger, url: https://pgbadger.darold.net/, external: true }
       - { label: HAProxy, url: https://www.haproxy.org/, external: true }
       - { label: etcd, url: https://etcd.io/, external: true }
+  - title: About
+    links:
+      - { label: PGSTY, url: https://pgsty.com, external: true }
+      - { label: Pigsty, url: https://pigsty.io, external: true }
+      - { label: SILO, url: https://silo.pgsty.com, external: true }
+      - { label: pg.center, url: https://pg.center, external: true }
+      - { label: OINK, url: https://oink.pgsty.com, external: true }
+      - { label: PIG, url: https://pig.pgsty.com, external: true }
