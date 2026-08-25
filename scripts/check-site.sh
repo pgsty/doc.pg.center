@@ -95,7 +95,7 @@ if [[ -n "$bad_component_links" ]]; then
   exit 1
 fi
 
-grep -Eq '^require github\.com/pgsty/oink v0\.6\.0$' "$project_dir/go.mod"
+grep -Eq '^require github\.com/pgsty/oink v0\.7\.0$' "$project_dir/go.mod"
 
 test "$(cat "$project_dir/static/CNAME")" = 'pgsql.cc'
 grep -Fxq 'baseURL: https://pgsql.cc/' "$project_dir/hugo.yaml"
@@ -301,5 +301,5 @@ fi
 
 python3 "$project_dir/scripts/check-local-links.py" "$build_dir/public"
 
-printf 'Validated OINK v0.6.0, six top-level component roots, %s paired EN/ZH pages, %s HAProxy reading pages, %s etcd Markdown pages, and legacy redirects.\n' \
+printf 'Validated OINK v0.7.0, six top-level component roots, %s paired EN/ZH pages, %s HAProxy reading pages, %s etcd Markdown pages, and legacy redirects.\n' \
   "$english_count" "$haproxy_reading_count" "$etcd_markdown_count"
