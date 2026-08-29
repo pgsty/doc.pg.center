@@ -53,7 +53,7 @@ for component in patroni pgbackrest pgbouncer pgbadger haproxy etcd; do
 done
 test -z "$(find "$content_dir/haproxy" -mindepth 1 -type d -print -quit)"
 
-# OINK 0.6.0 upstream attribution: one registry entry per tree, one cascade
+# OINK upstream attribution: one registry entry per tree, one cascade
 # that names it, and one upstream_link on every page inside the tree.
 for component in patroni pgbackrest pgbouncer pgbadger haproxy etcd; do
   grep -Eq "^${component}:\$" "$project_dir/data/upstreams.yaml"
@@ -95,7 +95,7 @@ if [[ -n "$bad_component_links" ]]; then
   exit 1
 fi
 
-grep -Eq '^require github\.com/pgsty/oink v0\.7\.0$' "$project_dir/go.mod"
+grep -Eq '^require github\.com/pgsty/oink v1\.0\.0$' "$project_dir/go.mod"
 
 test "$(cat "$project_dir/static/CNAME")" = 'pgsql.cc'
 grep -Fxq 'baseURL: https://pgsql.cc/' "$project_dir/hugo.yaml"
@@ -301,5 +301,5 @@ fi
 
 python3 "$project_dir/scripts/check-local-links.py" "$build_dir/public"
 
-printf 'Validated OINK v0.7.0, six top-level component roots, %s paired EN/ZH pages, %s HAProxy reading pages, %s etcd Markdown pages, and legacy redirects.\n' \
+printf 'Validated OINK v1.0.0, six top-level component roots, %s paired EN/ZH pages, %s HAProxy reading pages, %s etcd Markdown pages, and legacy redirects.\n' \
   "$english_count" "$haproxy_reading_count" "$etcd_markdown_count"
