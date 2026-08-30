@@ -2,7 +2,7 @@
 
 [![Website](https://img.shields.io/badge/web-pgsql.cc-336791?logo=postgresql&logoColor=white)](https://pgsql.cc/)
 [![GitHub Pages](https://github.com/pgsty/pgsql.cc/actions/workflows/pages.yml/badge.svg)](https://github.com/pgsty/pgsql.cc/actions/workflows/pages.yml)
-[![Hugo](https://img.shields.io/badge/Hugo-extended%200.164.0-FF4088?logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-extended%200.165.0-FF4088?logo=hugo)](https://gohugo.io/)
 
 PostgreSQL Community Components is a documentation portal for the tools that run PostgreSQL in
 production. The current collection covers Patroni, pgBackRest, PgBouncer, pgBadger, the complete
@@ -14,7 +14,7 @@ HAProxy 3.4 与 etcd 3.7 的完整中英双语文档。
 
 ## Build
 
-The site requires Hugo Extended 0.160.1 or newer and Go. OINK is pinned as a Hugo Module at `github.com/pgsty/oink v0.6.0`. `make dev` uses the sibling `../oink` checkout; `make build`, `make serve`, and `make check` intentionally keep the published module path.
+The site requires Hugo Extended 0.160.1 or newer and Go 1.27 or newer. OINK is pinned as a Hugo Module at `github.com/pgsty/oink v1.0.0`. `make dev` uses the sibling `../oink` checkout; `make build`, `make serve`, and `make check` intentionally keep the published module path.
 
 ```sh
 make build
@@ -27,7 +27,7 @@ The generated site is written to `public/`. Local preview, a successful build, a
 
 ## Deploy
 
-The production domain is **`pgsql.cc`**. `static/CNAME`, Hugo's `baseURL`, generated canonical URLs, and the GitHub Pages repository setting must all use that exact hostname. Pushing `main` runs the complete bilingual and rendered-link checks, builds with Hugo Extended 0.164.0, and deploys the resulting artifact through GitHub Pages.
+The production domain is **`pgsql.cc`**. `static/CNAME`, Hugo's `baseURL`, generated canonical URLs, and the GitHub Pages repository setting must all use that exact hostname. Pushing `main` runs the complete bilingual and rendered-link checks, builds with Go 1.27.0 and Hugo Extended 0.165.0, and deploys the resulting artifact through GitHub Pages.
 
 ## Information architecture
 
@@ -38,6 +38,13 @@ The homepage keeps a three-line hero, six root cards, six detailed shortcut inde
 All six manuals are bilingual. HAProxy keeps all 34 reading pages directly under one root, with
 `_div_intro.md`, `_div_configuration.md`, and `_div_management.md` providing non-linking sidebar
 group labels in a single weighted reading sequence.
+
+The site uses OINK's native landing-page sections and documentation shell. A focused local Hero
+partial preserves the six-component navigator and animated Slonik orbit; the Cards, Capabilities,
+and FAQ sections remain theme-native. Static backlinks are enabled globally. Every page has
+semantic Markdown output, each manual publishes a section-level `llms-full.txt`, and each language
+publishes `llms.txt` plus a `navigation.json` view of the same navigation tree used by the sidebar
+and pager.
 
 ## Content sources
 

@@ -3,6 +3,7 @@ title: "etcd 3.7 中文文档"
 linkTitle: "etcd 3.7"
 description: "etcd 3.7 开发、运维、升级、API 与内部原理中文指南"
 type: docs
+outputs: [HTML, RSS, print, markdown, LLMSFULL]
 weight: 60
 icon: fa-solid fa-gear
 sidebar_root_for: self

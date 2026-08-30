@@ -5,6 +5,7 @@ weight: 40
 description: "Fast PostgreSQL and PgBouncer log analysis with detailed, self-contained reports"
 icon: fa-solid fa-otter
 type: docs
+outputs: [HTML, RSS, print, markdown, LLMSFULL]
 sidebar_root_for: self
 sidebar_root_link_self: true
 module: [PGBADGER]

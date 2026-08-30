@@ -5,6 +5,7 @@ weight: 50
 description: "Complete English Markdown edition of the HAProxy 3.4 Starter, Configuration, and Management manuals"
 icon: fa-solid fa-network-wired
 type: docs
+outputs: [HTML, RSS, print, markdown, LLMSFULL]
 sidebar_root_for: self
 sidebar_root_link_self: true
 no_list: true
@@ -27,21 +28,10 @@ the three core HAProxy 3.4 manuals, reorganized as one flat Markdown reading seq
 
 ## Choose a manual {#choose-a-manual}
 
-<div class="haproxy-manual-cards">
-
-{{< cards >}}
-{{< card title="Starter Guide" link="/haproxy/load-balancing/" icon="fa-solid fa-compass" badge="9 TOPICS" >}}
-Load-balancing concepts, HAProxy architecture, features, sizing, releases, and ecosystem.
-{{< /card >}}
-{{< card title="Configuration Manual" link="/haproxy/http-fundamentals/" icon="fa-solid fa-file-code" badge="12 CHAPTERS" >}}
-Complete configuration-language reference, including proxies, ACLs, samples, logging, filters, and every option family.
-{{< /card >}}
-{{< card title="Management Guide" link="/haproxy/prerequisites/" icon="fa-solid fa-screwdriver-wrench" badge="13 CHAPTERS" >}}
-Startup, reloads, resources, logging, statistics, runtime CLI, debugging, and security.
-{{< /card >}}
-{{< /cards >}}
-
-</div>
+- [Starter Guide](/haproxy/load-balancing/) — 9 topics on load-balancing concepts, HAProxy architecture, features, sizing, releases, and ecosystem.
+- [Configuration Manual](/haproxy/http-fundamentals/) — 12 chapters covering proxies, ACLs, samples, logging, filters, and every option family.
+- [Management Guide](/haproxy/prerequisites/) — 13 chapters on startup, reloads, resources, logging, statistics, runtime CLI, debugging, and security.
+{.cards}
 
 ## Edition coverage {#edition-coverage}
 

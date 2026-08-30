@@ -6,7 +6,7 @@ enableEmoji: true
 defaultContentLanguage: en
 
 outputs:
-  home: [HTML, RSS, markdown, LLMS]
+  home: [HTML, RSS, markdown, LLMS, NAVJSON]
   page: [HTML, markdown]
   section: [HTML, RSS, print, markdown]
 
@@ -96,6 +96,7 @@ languages:
     locale: zh-CN
     weight: 2
     title: PGSQL.CC
+    hasCJKLanguage: true
     params:
       description: 面向生产实践的 PostgreSQL 生态工具中文文档。
       time_format_default: 2006年1月2日
@@ -196,9 +197,11 @@ params:
       loading: lazy
   ui:
     typography: technical
+    theme_color: '#336791'
     quick_links: [patroni, pgbackrest, pgbouncer, pgbadger, haproxy, etcd]
     translation_notice: en
     section_index: cards
+    backlinks: true
     dark_mode: true
     sidebar_icon_policy: all
     sidebar_menu_compact: true

@@ -4,6 +4,7 @@ linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
 type: docs
+outputs: [HTML, RSS, print, markdown, LLMSFULL]
 sidebar_root_for: self
 sidebar_root_link_self: true
 description: "可靠的 PostgreSQL 备份与恢复工具 —— pgBackRest 文档与参考手册。"
