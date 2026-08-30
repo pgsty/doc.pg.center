@@ -3,7 +3,7 @@ title: Logging conventions
 weight: 1600
 description: Logging level categories
 categories: [Reference]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-internal/logging.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-internal/logging.md"
 ---
 
 etcd uses the [zap][zap] library for logging application output categorized into *levels*. A log message's level is determined according to these conventions:

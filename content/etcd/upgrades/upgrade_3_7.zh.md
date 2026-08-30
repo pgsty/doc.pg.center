@@ -3,7 +3,7 @@ title: 将 etcd 从 v3.6 升级到 v3.7
 weight: 6700
 description: 升级 etcd 3.6 至 3.7 的流程、检查清单与注意事项
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/upgrades/upgrade_3_7.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_7.md"
 ---
 
 在一般情况下，从 etcd v3.6 升级到 v3.7 可以实现零停机滚动升级：

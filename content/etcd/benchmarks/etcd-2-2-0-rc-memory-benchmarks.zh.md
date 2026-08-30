@@ -3,7 +3,7 @@ title: etcd v2.2.0-rc 内存基准测试
 weight: 5500
 description: etcd v2.2.0-rc-memory 的性能指标
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/benchmarks/etcd-2-2-0-rc-memory-benchmarks.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/benchmarks/etcd-2-2-0-rc-memory-benchmarks.md"
 ---
 
 ## 物理机 {#physical-machine}

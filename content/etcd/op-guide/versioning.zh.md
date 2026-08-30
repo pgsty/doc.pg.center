@@ -3,7 +3,7 @@ title: 版本管理
 weight: 4900
 description: etcd 的版本支持
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/versioning.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/versioning.md"
 ---
 
 本文描述了 etcd 项目所支持的版本。

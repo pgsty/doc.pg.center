@@ -3,7 +3,7 @@ title: gRPC 命名与发现
 weight: 3500
 description: "go-grpc：使用 etcd 后端解析 gRPC 端点"
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-guide/grpc_naming.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/grpc_naming.md"
 ---
 
 etcd 提供了一个 gRPC 解析器，用于支持一种替代名称系统，该系统从 etcd 获取端点以发现 gRPC 服务。其底层机制基于监听以服务名称为前缀的键的更新。

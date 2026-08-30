@@ -3,7 +3,7 @@ title: Issue 分类处置指南
 weight: 8100
 description: "etcd Issue 分类处置指南"
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/triage/issues.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/triage/issues.md"
 ---
 
 ## 目的 {#purpose}

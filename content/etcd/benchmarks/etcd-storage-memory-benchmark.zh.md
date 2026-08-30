@@ -3,7 +3,7 @@ title: 存储内存使用量基准测试
 weight: 5125
 description: etcd 存储的性能指标（内存索引与页面缓存）
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/benchmarks/etcd-storage-memory-benchmark.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/benchmarks/etcd-storage-memory-benchmark.md"
 ---
 
 <!---todo: link storage to storage design doc-->

@@ -3,7 +3,7 @@ title: 支持的平台
 weight: 4800
 description: etcd 支持常见架构与操作系统
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/supported-platform.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/supported-platform.md"
 ---
 
 ## 支持层级 {#support-tiers}

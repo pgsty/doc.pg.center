@@ -4,7 +4,7 @@ weight: 1300
 description: etcd 工具和客户端库列表
 icon: fa-solid fa-puzzle-piece
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/integrations.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/integrations.md"
 ---
 
 请注意，以下第三方库和工具未托管在 https://github.com/etcd-io 下，也未经 etcd 团队测试或维护。使用前应自行阅读相关资料并评估其可靠性。
@@ -172,7 +172,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639
 ## 使用 etcd 的项目 {#projects-using-etcd}
 
 - [etcd Raft 用户](https://github.com/etcd-io/raft/blob/main/README.md#notable-users) - 使用 etcd 的 Raft 库实现的项目。
-- [apache/apisix](https://github.com/apache/apisix) - 一个动态、实时、高性能的 API 网关。
+- [Apache APISIX](https://github.com/apache/apisix) - 将 etcd 用作配置存储的 API 网关。
 - [apache/celix](https://github.com/apache/celix) - 适用于 C 和 C++ 的 OSGi 规范实现。
 - [binocarlos/yoda](https://github.com/binocarlos/yoda) - etcd + ZeroMQ。
 - [blox/blox](https://github.com/blox/blox) - 一组用于容器管理与编排的开源项目，支持 AWS ECS。
@@ -204,7 +204,6 @@ upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639
 - [Rook](https://github.com/rook/rook) - Kubernetes 的存储编排。
 - [Patroni](https://github.com/zalando/patroni) - 基于 ZooKeeper、etcd 或 Consul 的 PostgreSQL 高可用性模板。
 - [Trillian](https://github.com/google/trillian) - Trillian 实现了一种默克尔树，其内容由数据存储层提供，以支持极大规模树的可扩展性。
-- [Apache APISIX](https://github.com/apache/apisix) - Apache APISIX 是一个动态、实时、高性能的 API 网关。
 - [purpleidea/mgmt](https://github.com/purpleidea/mgmt) - 新一代分布式、事件驱动、并行配置管理工具。
 - [Portworx/kvdb](https://docs.portworx.com/concepts/internal-kvdb/) - 用于存储 Portworx 集群配置的内部 kvdb。
 - [Apache Pulsar](https://pulsar.apache.org/) - Apache Pulsar 是一个面向云的开源分布式消息与流平台。

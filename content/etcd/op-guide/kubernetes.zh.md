@@ -3,7 +3,7 @@ title: 以 Kubernetes StatefulSet 运行 etcd 集群
 weight: 4200
 description: 以 Kubernetes StatefulSet 运行 etcd
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/kubernetes.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/kubernetes.md"
 ---
 
 以下演示如何作为 Kubernetes StatefulSet 执行 [静态引导过程](/zh/etcd/op-guide/clustering/#static)。

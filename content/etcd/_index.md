@@ -12,7 +12,7 @@ section_index: cards
 section_index_columns: 3
 upstream_source: etcd
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/tree/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7"
+upstream_link: "https://github.com/etcd-io/website/tree/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7"
 cascade:
   upstream_source: etcd
   type: docs

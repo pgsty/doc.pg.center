@@ -4,7 +4,7 @@ weight: 1450
 description: 何时调整心跳间隔和选举超时设置
 icon: fa-solid fa-sliders
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/tuning.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tuning.md"
 ---
 
 默认情况下，etcd 的配置在平均网络延迟较低的本地网络环境中应能良好运行。然而，当在多个数据中心之间或高延迟网络上使用 etcd 时，可能需要调整心跳间隔和选举超时设置。

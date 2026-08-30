@@ -4,7 +4,7 @@ weight: 1100
 description: 使用 etcd 集群的步骤
 icon: fa-solid fa-play
 categories: [教程]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/demo.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/demo.md"
 ---
 
 本系列示例展示了操作 etcd 集群的基本流程。

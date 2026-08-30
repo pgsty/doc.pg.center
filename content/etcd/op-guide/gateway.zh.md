@@ -3,7 +3,7 @@ title: etcd 网关
 weight: 4300
 description: etcd 网关的使用场景及配置方法
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/gateway.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/gateway.md"
 ---
 
 ## etcd 网关是什么 {#what-is-etcd-gateway}

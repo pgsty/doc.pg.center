@@ -3,7 +3,7 @@ title: 运行时重配置设计
 weight: 4650
 description: etcd 运行时重配置命令的设计
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/runtime-reconf-design.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/runtime-reconf-design.md"
 ---
 
 运行时重配置是分布式系统中最为复杂且最容易出错的功能之一，尤其是在基于共识的系统（如 etcd）中。

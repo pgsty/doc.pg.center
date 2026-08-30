@@ -55,5 +55,5 @@ etcd:
   copyright: Copyright 2013-present etcd Authors
   license: CC-BY-4.0
   notice: /attribution/#etcd
-  ref: v3.7, commit a9ee660
+  ref: v3.7, commit 8245979
   modified: true

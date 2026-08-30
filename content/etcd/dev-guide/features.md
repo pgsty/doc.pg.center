@@ -3,7 +3,7 @@ title: etcd features
 weight: 3750
 description: using etcd features
 categories: [Reference]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-guide/features.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/features.md"
 ---
 
 This document provides an overview of etcd features to help users better understand the features and related deprecation process. If you are interested in knowing about how features are developed in the etcd, please see these [development guidelines](https://github.com/etcd-io/etcd/blob/main/Documentation/contributor-guide/features.md).

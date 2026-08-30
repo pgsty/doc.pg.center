@@ -4,7 +4,7 @@ weight: 1300
 description: A listing of etcd tools and client libraries
 icon: fa-solid fa-puzzle-piece
 categories: [Reference]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/integrations.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/integrations.md"
 ---
 
 Note that third-party libraries and tools (not hosted on https://github.com/etcd-io) mentioned below are not tested or maintained by the etcd team. Before using them, users are recommended to read and investigate them.
@@ -172,7 +172,7 @@ The sections below list etcd client libraries by language.
 ## Projects using etcd
 
 - [etcd Raft users](https://github.com/etcd-io/raft/blob/main/README.md#notable-users) - projects using etcd's raft library implementation.
-- [apache/apisix](https://github.com/apache/apisix) - A dynamic, real-time, high-performance API gateway
+- [Apache APISIX](https://github.com/apache/apisix) - An API gateway that uses etcd as its configuration store.
 - [apache/celix](https://github.com/apache/celix) - an implementation of the OSGi specification adapted to C and C++
 - [binocarlos/yoda](https://github.com/binocarlos/yoda) - etcd + ZeroMQ
 - [blox/blox](https://github.com/blox/blox) - a collection of open source projects for container management and orchestration with AWS ECS
@@ -204,7 +204,6 @@ The sections below list etcd client libraries by language.
 - [Rook](https://github.com/rook/rook) - Storage Orchestration for Kubernetes
 - [Patroni](https://github.com/zalando/patroni) - A template for PostgreSQL High Availability with ZooKeeper, etcd, or Consul
 - [Trillian](https://github.com/google/trillian) - Trillian implements a Merkle tree whose contents are served from a data storage layer, to allow scalability to extremely large trees.
-- [Apache APISIX](https://github.com/apache/apisix) - Apache APISIX is a dynamic, real-time, high-performance API gateway.
 - [purpleidea/mgmt](https://github.com/purpleidea/mgmt) - Next generation distributed, event-driven, parallel config management!
 - [Portworx/kvdb](https://docs.portworx.com/concepts/internal-kvdb/) - The internal kvdb for storing Portworx cluster configuration.
 - [Apache Pulsar](https://pulsar.apache.org/) - Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.

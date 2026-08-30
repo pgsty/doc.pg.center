@@ -3,7 +3,7 @@ title: Reading from etcd
 description: Reading a value in an etcd cluster
 weight: 200
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/tasks/developer/reading-from-etcd.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/developer/reading-from-etcd.md"
 ---
 
 ## Prerequisites

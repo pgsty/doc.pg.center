@@ -3,7 +3,7 @@ title: 灾难恢复
 weight: 4275
 description: etcd v3 快照与恢复功能
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/recovery.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/recovery.md"
 ---
 
 etcd 设计用于抵御机器故障。etcd 集群可自动从临时故障（例如机器重启）中恢复，并能容忍最多 *(N−1)/2* 个成员的永久性故障，适用于由 N 个成员组成的集群。当某个成员发生永久性故障（无论是硬件故障还是磁盘损坏）时，该成员将失去对集群的访问权限。若集群永久性丢失超过 *(N−1)/2* 个成员，则将发生灾难性故障，法定人数不可逆地丢失。一旦法定人数丢失，集群将无法达成共识，因而无法继续接受更新。

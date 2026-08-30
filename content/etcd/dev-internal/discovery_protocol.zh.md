@@ -3,7 +3,7 @@ title: 发现服务协议
 weight: 1500
 description: 在集群引导阶段发现集群其他成员
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-internal/discovery_protocol.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-internal/discovery_protocol.md"
 ---
 
 发现服务协议有助于新 etcd 成员在集群引导阶段，通过共享的发现令牌和端点列表，发现集群中的所有其他成员。

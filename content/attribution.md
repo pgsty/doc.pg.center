@@ -32,7 +32,7 @@ which licence, and where the complete upstream notice is retained.
 | [PgBouncer](/pgbouncer/) | [PgBouncer documentation](https://www.pgbouncer.org/) | v1.25.2 | [ISC](https://opensource.org/license/isc-license-txt) | [Upstream `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/master/COPYRIGHT) |
 | [pgBadger](/pgbadger/) | [pgBadger documentation](https://pgbadger.darold.net/) | v13.2, commit `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/haproxy/) | [HAProxy 3.4 manuals](https://docs.haproxy.org/3.4/) | v3.4.4, commit `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/etcd/) | [etcd v3.7 documentation](https://etcd.io/docs/v3.7/) | v3.7, commit `a9ee660` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Upstream `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [etcd](/etcd/) | [etcd v3.7 documentation](https://etcd.io/docs/v3.7/) | v3.7, commit `8245979` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Upstream `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 Every collection is **adapted**, not mirrored. Headings, anchors, cross-links, code signatures,
 page grouping, and navigation are reworked for this edition; the upstream prose itself is
@@ -108,9 +108,10 @@ published as [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) and
 
 ## etcd {#etcd}
 
-Imported from the
-[official etcd v3.7 documentation](https://github.com/etcd-io/website/tree/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7)
-at commit [`a9ee660fdbf9`](https://github.com/etcd-io/website/commit/a9ee660fdbf9584deb4af639c4dc63b01413e44f).
+Imported from the official etcd v3.7 documentation and refreshed on 2026-08-30 at commit
+[`824597935df6`](https://github.com/etcd-io/website/commit/824597935df6e95992ef61c07e3222f4f796ca6c).
+The pinned source tree is
+[`content/en/docs/v3.7`](https://github.com/etcd-io/website/tree/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7).
 
 The etcd documentation is copyright 2013-present etcd Authors. Its prose is licensed under
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), while code and code samples are

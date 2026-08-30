@@ -3,7 +3,7 @@ title: etcd API
 weight: 2625
 description: etcd API 核心设计概述
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/learning/api.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/api.md"
 ---
 
 本文旨在概述 v3 版 etcd API 的核心设计。

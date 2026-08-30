@@ -3,7 +3,7 @@ title: 集群指南
 weight: 4150
 description: "配置 etcd 集群：静态配置、etcd 发现和 DNS 发现"
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/clustering.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/clustering.md"
 ---
 
 ## 概述 {#overview}

@@ -3,7 +3,7 @@ title: 术语表
 weight: 2900
 description: etcd 文档、命令行和源代码中使用的术语
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/learning/glossary.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/glossary.md"
 ---
 
 本文定义了 etcd 文档、命令行和源代码中使用的各种术语。

@@ -3,7 +3,7 @@ title: Run etcd clusters inside containers
 weight: 4200
 description: Running etcd with Docker using static bootstrapping
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/container.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/container.md"
 ---
 
 The following guide shows how to run etcd with  Docker using the [static bootstrap process](/etcd/op-guide/clustering/#static).
