@@ -4,6 +4,7 @@ linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
 type: docs
+outputs: [HTML, RSS, print, markdown, LLMSFULL]
 sidebar_root_for: self
 sidebar_root_link_self: true
 description: "Reliable PostgreSQL Backup & Restore — pgBackRest documentation and reference."

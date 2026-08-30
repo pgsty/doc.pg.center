@@ -6,6 +6,7 @@ description: >
   PgBouncer —— PostgreSQL 轻量级连接池，v1.25.2 中文文档
 icon: fa-solid fa-arrows-turn-to-dots
 type: docs
+outputs: [HTML, RSS, print, markdown, LLMSFULL]
 sidebar_root_for: self
 sidebar_root_link_self: true
 module: [PGBOUNCER]

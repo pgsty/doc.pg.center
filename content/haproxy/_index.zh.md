@@ -5,6 +5,7 @@ weight: 50
 description: "HAProxy 3.4 入门、配置与管理三套完整手册的简体中文译本"
 icon: fa-solid fa-network-wired
 type: docs
+outputs: [HTML, RSS, print, markdown, LLMSFULL]
 sidebar_root_for: self
 sidebar_root_link_self: true
 no_list: true
@@ -25,21 +26,10 @@ cascade:
 
 ## 选择手册 {#choose-a-manual}
 
-<div class="haproxy-manual-cards">
-
-{{< cards >}}
-{{< card title="入门指南" link="/zh/haproxy/load-balancing/" icon="fa-solid fa-compass" badge="9 个主题" >}}
-介绍负载均衡基础、HAProxy 架构、功能、容量规划、版本升级与周边生态。
-{{< /card >}}
-{{< card title="配置手册" link="/zh/haproxy/http-fundamentals/" icon="fa-solid fa-file-code" badge="12 章" >}}
-完整的配置语言参考，涵盖代理、ACL、样本提取、日志、过滤器及各类选项。
-{{< /card >}}
-{{< card title="管理指南" link="/zh/haproxy/prerequisites/" icon="fa-solid fa-screwdriver-wrench" badge="13 章" >}}
-涵盖启动、重载、资源、日志、统计信息、运行时 CLI、故障排查与安全。
-{{< /card >}}
-{{< /cards >}}
-
-</div>
+- [入门指南](/zh/haproxy/load-balancing/) — 用 9 个主题介绍负载均衡基础、HAProxy 架构、功能、容量规划、版本升级与周边生态。
+- [配置手册](/zh/haproxy/http-fundamentals/) — 用 12 章完整覆盖代理、ACL、样本提取、日志、过滤器及各类选项。
+- [管理指南](/zh/haproxy/prerequisites/) — 用 13 章讲解启动、重载、资源、日志、统计信息、运行时 CLI、故障排查与安全。
+{.cards}
 
 ## 版本涵盖范围 {#edition-coverage}
 

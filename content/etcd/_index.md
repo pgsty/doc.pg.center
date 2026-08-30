@@ -3,6 +3,7 @@ title: "etcd 3.7 Documentation"
 linkTitle: "etcd 3.7"
 description: "Official etcd 3.7 guides for developers, operators, upgrades, APIs, and internals."
 type: docs
+outputs: [HTML, RSS, print, markdown, LLMSFULL]
 weight: 60
 icon: fa-solid fa-gear
 sidebar_root_for: self

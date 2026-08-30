@@ -5,6 +5,7 @@ weight: 40
 description: "快速分析 PostgreSQL 与 PgBouncer 日志，生成完整且可独立浏览的报告"
 icon: fa-solid fa-otter
 type: docs
+outputs: [HTML, RSS, print, markdown, LLMSFULL]
 sidebar_root_for: self
 sidebar_root_link_self: true
 module: [PGBADGER]

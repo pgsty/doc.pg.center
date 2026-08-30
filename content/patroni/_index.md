@@ -5,6 +5,7 @@ weight: 10
 icon: fa-solid fa-heart-pulse
 description: "Overview of Patroni high-availability documentation for PostgreSQL."
 type: docs
+outputs: [HTML, RSS, print, markdown, LLMSFULL]
 sidebar_root_for: self
 sidebar_root_link_self: true
 module: [PATRONI]

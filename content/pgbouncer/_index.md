@@ -6,6 +6,7 @@ description: >
   PgBouncer - Lightweight connection pooler for PostgreSQL 
 icon: fa-solid fa-arrows-turn-to-dots
 type: docs
+outputs: [HTML, RSS, print, markdown, LLMSFULL]
 sidebar_root_for: self
 sidebar_root_link_self: true
 module: [PGBOUNCER]

@@ -50,8 +50,29 @@ for component in patroni pgbackrest pgbouncer pgbadger haproxy etcd; do
   test -d "$content_dir/$component"
   grep -Fq 'type: docs' "$content_dir/$component/_index.md"
   grep -Fq 'sidebar_root_for: self' "$content_dir/$component/_index.md"
+  grep -Fq 'outputs: [HTML, RSS, print, markdown, LLMSFULL]' "$content_dir/$component/_index.md"
+  grep -Fq 'outputs: [HTML, RSS, print, markdown, LLMSFULL]' "$content_dir/$component/_index.zh.md"
 done
 test -z "$(find "$content_dir/haproxy" -mindepth 1 -type d -print -quit)"
+
+# OINK 1.0 site surface: the bespoke Hero keeps its six-component navigator
+# and orbit, while Cards, Capabilities, FAQ, the docs shell, backlinks, and
+# agent indexes stay on the theme's native contracts.
+test -s "$project_dir/layouts/_partials/pgsql/hero-orbit.html"
+test -s "$project_dir/assets/scss/_styles_project.scss"
+test "$(find "$project_dir/layouts" -type f | wc -l | tr -d ' ')" -eq 1
+grep -Fq '    partial: pgsql/hero-orbit.html' "$project_dir/data/home/en.yaml"
+grep -Fq '    partial: pgsql/hero-orbit.html' "$project_dir/data/home/zh.yaml"
+grep -Fq '    key: components' "$project_dir/data/home/en.yaml"
+grep -Fq '    key: components' "$project_dir/data/home/zh.yaml"
+grep -Fq 'home: [HTML, RSS, markdown, LLMS, NAVJSON]' "$project_dir/hugo.yaml"
+grep -Fq '    backlinks: true' "$project_dir/hugo.yaml"
+grep -Fq '{.cards}' "$content_dir/haproxy/_index.md"
+grep -Fq '{.cards}' "$content_dir/haproxy/_index.zh.md"
+if grep -Fq '{{< cards' "$content_dir/haproxy/_index.md" "$content_dir/haproxy/_index.zh.md"; then
+  echo 'HAProxy root pages reverted to shortcode cards' >&2
+  exit 1
+fi
 
 # OINK upstream attribution: one registry entry per tree, one cascade
 # that names it, and one upstream_link on every page inside the tree.
@@ -210,9 +231,53 @@ for page in \
   CNAME \
   favicon.ico \
   zh/llms.txt \
-  llms.txt; do
+  llms.txt \
+  navigation.json \
+  zh/navigation.json \
+  patroni/llms-full.txt \
+  zh/patroni/llms-full.txt \
+  pgbackrest/llms-full.txt \
+  zh/pgbackrest/llms-full.txt \
+  pgbouncer/llms-full.txt \
+  zh/pgbouncer/llms-full.txt \
+  pgbadger/llms-full.txt \
+  zh/pgbadger/llms-full.txt \
+  haproxy/llms-full.txt \
+  zh/haproxy/llms-full.txt \
+  etcd/llms-full.txt \
+  zh/etcd/llms-full.txt; do
   test -s "$build_dir/public/$page"
 done
+
+python3 - "$build_dir/public/navigation.json" "$build_dir/public/zh/navigation.json" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+expected_roots = {
+    "/patroni/",
+    "/pgbackrest/",
+    "/pgbouncer/",
+    "/pgbadger/",
+    "/haproxy/",
+    "/etcd/",
+}
+for filename, language in zip(sys.argv[1:], ("en", "zh")):
+    payload = json.loads(Path(filename).read_text(encoding="utf-8"))
+    assert payload["schemaVersion"] == 1
+    assert payload["language"] == language
+    roots = {child["id"] for child in payload["root"]["children"]}
+    assert expected_roots <= roots
+PY
+
+grep -Fq 'navigation.json' "$build_dir/public/llms.txt"
+grep -Fq 'navigation.json' "$build_dir/public/zh/llms.txt"
+grep -Fq 'Source: https://pgsql.cc/patroni/index.md' "$build_dir/public/patroni/llms-full.txt"
+grep -Fq 'Source: https://pgsql.cc/zh/patroni/index.md' "$build_dir/public/zh/patroni/llms-full.txt"
+grep -Fq 'td-shell-backlinks' "$build_dir/public/patroni/config/index.html"
+grep -Fq 'td-shell-backlinks' "$build_dir/public/zh/patroni/config/index.html"
+grep -Fq 'Backlinks:' "$build_dir/public/patroni/config/index.md"
+grep -Fq '反链：' "$build_dir/public/zh/patroni/config/index.md"
 
 while IFS= read -r source_file; do
   relative=${source_file#"$content_dir/"}
@@ -301,5 +366,5 @@ fi
 
 python3 "$project_dir/scripts/check-local-links.py" "$build_dir/public"
 
-printf 'Validated OINK v1.0.0, six top-level component roots, %s paired EN/ZH pages, %s HAProxy reading pages, %s etcd Markdown pages, and legacy redirects.\n' \
+printf 'Validated OINK v1.0.0 native landing, backlinks, agent indexes, six top-level component roots, %s paired EN/ZH pages, %s HAProxy reading pages, %s etcd Markdown pages, and legacy redirects.\n' \
   "$english_count" "$haproxy_reading_count" "$etcd_markdown_count"

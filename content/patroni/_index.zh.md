@@ -5,6 +5,7 @@ weight: 10
 icon: fa-solid fa-heart-pulse
 description: "Patroni PostgreSQL 高可用模板，v4.1.5 中文文档"
 type: docs
+outputs: [HTML, RSS, print, markdown, LLMSFULL]
 sidebar_root_for: self
 sidebar_root_link_self: true
 module: [PATRONI]
