@@ -85,12 +85,12 @@ Installing pgBackRest from a package is preferable to building from source. See 
 
 When building from source it is best to use a build host rather than building on production. Many of the tools required for the build should generally not be installed in production. pgBackRest consists of a single executable so it is easy to copy to a new host once it is built.
 
-build **⇒** Download version `2.59.0` of pgBackRest to `/build` path
+build **⇒** Download version `2.59.1` of pgBackRest to `/build` path
 
 ```bash
 mkdir -p /build
 curl -fsSL \
-       https://github.com/pgbackrest/pgbackrest/releases/download/release%2F2.59.0/pgbackrest-2.59.0.tar.gz | \
+       https://github.com/pgbackrest/pgbackrest/releases/download/release%2F2.59.1/pgbackrest-2.59.1.tar.gz | \
        tar zx -C /build
 ```
 
@@ -104,7 +104,7 @@ sudo apt-get install python3-distutils meson gcc libpq-dev libssl-dev libxml2-de
 build **⇒** Configure and compile pgBackRest
 
 ```bash
-meson setup /build/pgbackrest /build/pgbackrest-2.59.0
+meson setup /build/pgbackrest /build/pgbackrest-2.59.1
 ninja -C /build/pgbackrest
 ```
 
@@ -112,15 +112,14 @@ build **⇒** Optionally run smoke tests to verify pgBackRest was built correctl
 
 ```bash
 meson test -C /build/pgbackrest --suite smoke
-ninja: Entering directory `/build/pgbackrest'
-ninja: no work to do.
 ```
 
 ```text
-1/1 smoke OK               14.97s
+ninja: Entering directory `/build/pgbackrest'
+ninja: no work to do.
+1/1 smoke OK               11.75s
        [filtered 7 lines of output]
 ```
-
 
 --------
 
@@ -167,8 +166,10 @@ pg-primary **⇒** Make sure the installation worked
 
 ```bash
 sudo -u postgres pgbackrest
+```
 
-pgBackRest 2.59.0 - General help
+```text
+pgBackRest 2.59.1 - General help
 
 Usage:
     pgbackrest [options] [command]
@@ -198,7 +199,6 @@ Commands:
 Use 'pgbackrest help [command]' for more information.
 ```
 
-
 --------
 
 ## Quick Start
@@ -215,7 +215,6 @@ pg-primary **⇒** Create the demo cluster
 ```bash
 sudo -u postgres /usr/lib/postgresql/17/bin/initdb \
        -D /var/lib/postgresql/17/demo -k -A peer
-
 sudo pg_createcluster 17 demo
 ```
 
@@ -224,7 +223,6 @@ Configuring already existing cluster (configuration: /etc/postgresql/17/demo, da
 Ver Cluster Port Status Owner    Data directory              Log file
 17  demo    5432 down   postgres /var/lib/postgresql/17/demo /var/log/postgresql/postgresql-17-demo.log
 ```
-
 
 ### Configure Cluster Stanza
 
@@ -244,6 +242,7 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure the PostgreSQL cl
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
 ```
 
@@ -276,22 +275,18 @@ pg-primary **⇒** Configure `log-path` using the environment
 sudo -u postgres bash -c ' \
        export PGBACKREST_LOG_PATH=/path/set/by/env && \
        pgbackrest --log-level-console=error help backup log-path'
+```
 
-pgBackRest 2.59.0 - 'backup' command - 'log-path' option help
+```text
+pgBackRest 2.59.1 - 'backup' command - 'log-path' option help
 
 Path where log files are stored.
 
 The log path provides a location for pgBackRest to store log files. Note that
 if log-level-file=off then no log path is required.
-
-```
-
-```text
 current: /path/set/by/env
-
 default: /var/log/pgbackrest
 ```
-
 
 ### Create the Repository
 
@@ -315,8 +310,13 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure the pgBackRest re
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 repo1-path=/var/lib/pgbackrest
 ```
 
@@ -331,6 +331,7 @@ pg-primary:`/etc/postgresql/17/demo/postgresql.conf` **⇒** Configure archive s
 
 ```ini
 archive_command = 'pgbackrest --stanza=demo archive-push %p'
+
 archive_mode = on
 ```
 
@@ -342,6 +343,8 @@ pg-primary **⇒** Restart the demo cluster
 sudo pg_ctlcluster 17 demo restart
 ```
 
+The `hot_standby` setting is enabled by default and should be left that way on every cluster. Any cluster may be restored as a standby later, e.g. a primary that is rebuilt as a standby after failover, and a standby will not accept read-only connections without it.
+
 When archiving a WAL segment is expected to take more than 60 seconds (the default) to reach the pgBackRest repository, then the pgBackRest `archive-timeout` option should be increased. Note that this option is not the same as the PostgreSQL archive_timeout option which is used to force a WAL segment switch; useful for databases where there are long periods of inactivity. For more information on the PostgreSQL archive_timeout option, see PostgreSQL [Write Ahead Log](https://www.postgresql.org/docs/current/static/runtime-config-wal.html).
 
 The `archive-push` command can be configured with its own options. For example, a lower compression level may be set to speed archiving without affecting the compression used for backups.
@@ -350,10 +353,19 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Config `archive-push` to us
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 repo1-path=/var/lib/pgbackrest
+
+
+
 [global:archive-push]
+
 compress-level=3
 ```
 
@@ -368,11 +380,21 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure retention to 2 fu
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-full=2
+
+
+
 [global:archive-push]
+
 compress-level=3
 ```
 
@@ -389,13 +411,25 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure pgBackRest reposi
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 repo1-cipher-pass=zWaf6XtpjIVZC5444yXB+cgFDFl7MxGlgkZSaoPvTGirhPygu4jOKOXf9LO4vjfO
+
 repo1-cipher-type=aes-256-cbc
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-full=2
+
+
+
 [global:archive-push]
+
 compress-level=3
 ```
 
@@ -417,12 +451,10 @@ sudo -u postgres pgbackrest --stanza=demo --log-level-console=info stanza-create
 ```
 
 ```text
-P00   INFO: stanza-create command begin 2.59.0: --exec-id=415-78abd183 --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo1-cipher-pass= --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --stanza=demo
+P00   INFO: stanza-create command begin 2.59.1: --exec-id=407-5732f46e --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo1-cipher-pass=<redacted> --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --stanza=demo
 P00   INFO: stanza-create for stanza 'demo' on repo1
-
 P00   INFO: stanza-create command end: completed successfully
 ```
-
 
 ### Check the Configuration
 
@@ -437,15 +469,12 @@ sudo -u postgres pgbackrest --stanza=demo --log-level-console=info check
 ```
 
 ```text
-P00   INFO: check command begin 2.59.0: --exec-id=424-13bdd96c --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo1-cipher-pass= --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --stanza=demo
+P00   INFO: check command begin 2.59.1: --exec-id=416-47cf298c --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo1-cipher-pass=<redacted> --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --stanza=demo
 P00   INFO: check repo1 configuration (primary)
 P00   INFO: check repo1 archive for WAL (primary)
-
-P00   INFO: WAL segment 000000010000000000000001 successfully archived to '/var/lib/pgbackrest/archive/demo/17-1/0000000100000000/000000010000000000000001-da969c4afd42c88e82d82b8072c86786941339bf.gz' on repo1
-
+P00   INFO: WAL segment 000000010000000000000001 successfully archived to '/var/lib/pgbackrest/archive/demo/17-1/0000000100000000/000000010000000000000001-b481bd553a004c1bceaa393a9f80bce8b015574b.gz' on repo1
 P00   INFO: check command end: completed successfully
 ```
-
 
 ### Performance Tuning
 
@@ -470,14 +499,27 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure backup fast start
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 repo1-cipher-pass=zWaf6XtpjIVZC5444yXB+cgFDFl7MxGlgkZSaoPvTGirhPygu4jOKOXf9LO4vjfO
+
 repo1-cipher-type=aes-256-cbc
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-full=2
+
 start-fast=y
+
+
+
 [global:archive-push]
+
 compress-level=3
 ```
 
@@ -491,20 +533,16 @@ sudo -u postgres pgbackrest --stanza=demo \
 ```
 
 ```text
-P00   INFO: backup command begin 2.59.0: --exec-id=451-8c17d67f --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo1-cipher-pass= --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo1-retention-full=2 --stanza=demo --start-fast
-
+P00   INFO: backup command begin 2.59.1: --exec-id=443-5b80dea3 --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo1-cipher-pass=<redacted> --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo1-retention-full=2 --stanza=demo --start-fast
 P00   WARN: no prior backup exists, incr backup has been changed to full
-
 P00   INFO: execute backup start: backup begins after the requested immediate checkpoint completes
 P00   INFO: backup start archive = 000000010000000000000002, lsn = 0/2000028
        [filtered 3 lines of output]
 P00   INFO: check archive for segment(s) 000000010000000000000002:000000010000000000000003
-P00   INFO: new backup label = 20260720-005040F
-
+P00   INFO: new backup label = 20260817-045036F
 P00   INFO: full backup size = 22MB, file total = 963
-
 P00   INFO: backup command end: completed successfully
-P00   INFO: expire command begin 2.59.0: --exec-id=451-8c17d67f --log-level-console=info --no-log-timestamp --repo1-cipher-pass= --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo1-retention-full=2 --stanza=demo
+P00   INFO: expire command begin 2.59.1: --exec-id=443-5b80dea3 --log-level-console=info --no-log-timestamp --repo1-cipher-pass=<redacted> --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo1-retention-full=2 --stanza=demo
 ```
 
 By default pgBackRest will attempt to perform an incremental backup. However, an incremental backup must be based on a full backup and since no full backup existed pgBackRest ran a full backup instead.
@@ -521,12 +559,10 @@ sudo -u postgres pgbackrest --stanza=demo --type=diff \
 ```text
        [filtered 7 lines of output]
 P00   INFO: check archive for segment(s) 000000010000000000000004:000000010000000000000005
-P00   INFO: new backup label = 20260720-005040F_20260720-005043D
-
+P00   INFO: new backup label = 20260817-045036F_20260817-045039D
 P00   INFO: diff backup size = 8.3KB, file total = 963
-
 P00   INFO: backup command end: completed successfully
-P00   INFO: expire command begin 2.59.0: --exec-id=478-06c17053 --log-level-console=info --no-log-timestamp --repo1-cipher-pass= --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo1-retention-full=2 --stanza=demo
+P00   INFO: expire command begin 2.59.1: --exec-id=468-69e2296f --log-level-console=info --no-log-timestamp --repo1-cipher-pass=<redacted> --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo1-retention-full=2 --stanza=demo
 ```
 
 This time there was no warning because a full backup already existed. While incremental backups can be based on a full *or* differential backup, differential backups must be based on a full backup. A full backup can be performed by running the `backup` command with `--type=full`.
@@ -566,17 +602,13 @@ stanza: demo
 
     db (current)
         wal archive min/max (17): 000000010000000000000001/000000010000000000000005
-
-        full backup: 20260720-005040F
-
-            timestamp start/stop: 2026-07-20 00:50:40+00 / 2026-07-20 00:50:42+00
+        full backup: 20260817-045036F
+            timestamp start/stop: 2026-08-17 04:50:36+00 / 2026-08-17 04:50:39+00
             wal start/stop: 000000010000000000000002 / 000000010000000000000003
             database size: 22MB, database backup size: 22MB
             repo1: backup set size: 2.9MB, backup size: 2.9MB
-
-        diff backup: 20260720-005040F_20260720-005043D
-
-            timestamp start/stop: 2026-07-20 00:50:43+00 / 2026-07-20 00:50:44+00
+        diff backup: 20260817-045036F_20260817-045039D
+            timestamp start/stop: 2026-08-17 04:50:39+00 / 2026-08-17 04:50:41+00
             wal start/stop: 000000010000000000000004 / 000000010000000000000005
             database size: 22MB, database backup size: 8.3KB
             repo1: backup set size: 2.9MB, backup size: 464B
@@ -627,9 +659,7 @@ sudo pg_ctlcluster 17 demo start
 
 ```text
 Error: /usr/lib/postgresql/17/bin/pg_ctl /usr/lib/postgresql/17/bin/pg_ctl start -D /var/lib/postgresql/17/demo -l /var/log/postgresql/postgresql-17-demo.log -s -o  -c config_file="/etc/postgresql/17/demo/postgresql.conf"  exited with status 1:
-
 postgres: could not find the database system
-
 Expected to find it in the directory "/var/lib/postgresql/17/demo",
 but could not open file "/var/lib/postgresql/17/demo/global/pg_control": No such file or directory
 Examine the log output.
@@ -675,7 +705,7 @@ sudo -u postgres cat \
        /var/lib/postgresql/pgbackrest/doc/example/pgsql-pgbackrest-info.sql
 ```
 
-```sql
+```text
 -- An example of monitoring pgBackRest from within PostgreSQL
 --
 -- Use copy to export data from the pgBackRest info command into the jsonb
@@ -722,7 +752,7 @@ sudo -u postgres cat \
        /var/lib/postgresql/pgbackrest/doc/example/pgsql-pgbackrest-query.sql
 ```
 
-```sql
+```text
 -- Get last successful backup for each stanza
 --
 -- Requires the monitor.pgbackrest_info function.
@@ -748,12 +778,11 @@ sudo -u postgres psql -f \
 ```
 
 ```text
-  name  | last_successful_backup |    last_archived_wal     
+  name  | last_successful_backup |    last_archived_wal
 --------+------------------------+--------------------------
- "demo" | 2026-07-20 00:50:44+00 | 000000010000000000000005
+ "demo" | 2026-08-17 04:50:41+00 | 000000010000000000000005
 (1 row)
 ```
-
 
 ### Using jq
 
@@ -775,7 +804,7 @@ sudo -u postgres pgbackrest --output=json --stanza=demo info | \
 ```
 
 ```text
-1784508644
+1786942241
 ```
 
 Or the last archived WAL.
@@ -821,15 +850,29 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure `repo1-bundle`
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 repo1-bundle=y
+
 repo1-cipher-pass=zWaf6XtpjIVZC5444yXB+cgFDFl7MxGlgkZSaoPvTGirhPygu4jOKOXf9LO4vjfO
+
 repo1-cipher-type=aes-256-cbc
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-full=2
+
 start-fast=y
+
+
+
 [global:archive-push]
+
 compress-level=3
 ```
 
@@ -866,19 +909,33 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure `repo1-block`
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 repo1-block=y
+
 repo1-bundle=y
+
 repo1-cipher-pass=zWaf6XtpjIVZC5444yXB+cgFDFl7MxGlgkZSaoPvTGirhPygu4jOKOXf9LO4vjfO
+
 repo1-cipher-type=aes-256-cbc
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-full=2
+
 start-fast=y
+
+
+
 [global:archive-push]
+
 compress-level=3
 ```
-
 
 ### Backup Annotations
 
@@ -896,7 +953,7 @@ Annotations are output by the `info` command text output when a backup is specif
 pg-primary **⇒** Get info for the demo cluster
 
 ```bash
-sudo -u postgres pgbackrest --stanza=demo --set=20260720-005100F info
+sudo -u postgres pgbackrest --stanza=demo --set=20260817-045055F info
 ```
 
 ```text
@@ -907,16 +964,14 @@ stanza: demo
     db (current)
         wal archive min/max (17): 000000020000000000000007/000000020000000000000009
 
-        full backup: 20260720-005100F
-            timestamp start/stop: 2026-07-20 00:51:00+00 / 2026-07-20 00:51:02+00
+        full backup: 20260817-045055F
+            timestamp start/stop: 2026-08-17 04:50:55+00 / 2026-08-17 04:50:56+00
             wal start/stop: 000000020000000000000008 / 000000020000000000000009
             lsn start/stop: 0/8000028 / 0/9000050
             database size: 22MB, database backup size: 22MB
             repo1: backup size: 2.9MB
             database list: postgres (5)
-
             annotation(s)
-
                 key: value
                 source: demo backup
 ```
@@ -926,10 +981,9 @@ Annotations included with the `backup` command can be added, modified, or remove
 pg-primary **⇒** Change backup annotations
 
 ```bash
-sudo -u postgres pgbackrest --stanza=demo --set=20260720-005100F \
+sudo -u postgres pgbackrest --stanza=demo --set=20260817-045055F \
        --annotation=key= --annotation=new_key=new_value annotate
-
-sudo -u postgres pgbackrest --stanza=demo --set=20260720-005100F info
+sudo -u postgres pgbackrest --stanza=demo --set=20260817-045055F info
 ```
 
 ```text
@@ -940,20 +994,17 @@ stanza: demo
     db (current)
         wal archive min/max (17): 000000020000000000000007/000000020000000000000009
 
-        full backup: 20260720-005100F
-            timestamp start/stop: 2026-07-20 00:51:00+00 / 2026-07-20 00:51:02+00
+        full backup: 20260817-045055F
+            timestamp start/stop: 2026-08-17 04:50:55+00 / 2026-08-17 04:50:56+00
             wal start/stop: 000000020000000000000008 / 000000020000000000000009
             lsn start/stop: 0/8000028 / 0/9000050
             database size: 22MB, database backup size: 22MB
             repo1: backup size: 2.9MB
             database list: postgres (5)
-
             annotation(s)
-
                 new_key: new_value
                 source: demo backup
 ```
-
 
 --------
 
@@ -976,16 +1027,31 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure `repo1-retention-
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 repo1-block=y
+
 repo1-bundle=y
+
 repo1-cipher-pass=zWaf6XtpjIVZC5444yXB+cgFDFl7MxGlgkZSaoPvTGirhPygu4jOKOXf9LO4vjfO
+
 repo1-cipher-type=aes-256-cbc
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-full=2
+
 start-fast=y
+
+
+
 [global:archive-push]
+
 compress-level=3
 ```
 
@@ -1000,11 +1066,9 @@ sudo -u postgres pgbackrest --stanza=demo --type=full \
 
 ```text
        [filtered 975 lines of output]
-P00   INFO: repo1: remove expired backup 20260720-005057F
-P00 DETAIL: repo1: 17-1 archive retention on backup 20260720-005100F, start = 000000020000000000000008
-
+P00   INFO: repo1: remove expired backup 20260817-045053F
+P00 DETAIL: repo1: 17-1 archive retention on backup 20260817-045055F, start = 000000020000000000000008
 P00   INFO: repo1: 17-1 remove archive, start = 000000020000000000000007, stop = 000000020000000000000007
-
 P00   INFO: expire command end: completed successfully
 ```
 
@@ -1019,15 +1083,13 @@ sudo -u postgres pgbackrest --stanza=demo --type=full \
 
 ```text
        [filtered 11 lines of output]
-P00   INFO: repo1: expire full backup 20260720-005100F
-P00   INFO: repo1: remove expired backup 20260720-005100F
-
-P00   INFO: repo1: 17-1 remove archive, start = 000000020000000000000008, stop = 00000002000000000000000A
-
+P00   INFO: repo1: expire full backup 20260817-045055F
+P00   INFO: repo1: remove expired backup 20260817-045055F
+P00   INFO: repo1: 17-1 remove archive, start = 000000020000000000000008, stop = 000000020000000000000009
 P00   INFO: expire command end: completed successfully
 ```
 
-The `20260720-005040F` full backup is expired and archive retention is based on the `20260720-005103F` which is now the oldest full backup.
+The `20260817-045036F` full backup is expired and archive retention is based on the `20260817-045058F` which is now the oldest full backup.
 
 
 ### Differential Backup Retention
@@ -1038,17 +1100,33 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure `repo1-retention-
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 repo1-block=y
+
 repo1-bundle=y
+
 repo1-cipher-pass=zWaf6XtpjIVZC5444yXB+cgFDFl7MxGlgkZSaoPvTGirhPygu4jOKOXf9LO4vjfO
+
 repo1-cipher-type=aes-256-cbc
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-diff=1
+
 repo1-retention-full=2
+
 start-fast=y
+
+
+
 [global:archive-push]
+
 compress-level=3
 ```
 
@@ -1073,15 +1151,12 @@ sudo -u postgres pgbackrest --stanza=demo --type=diff \
 ```text
        [filtered 10 lines of output]
 P00   INFO: backup command end: completed successfully
-P00   INFO: expire command begin 2.59.0: --exec-id=952-88e66707 --log-level-console=info --no-log-timestamp --repo1-cipher-pass= --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo1-retention-diff=1 --repo1-retention-full=2 --stanza=demo
-
-P00   INFO: repo1: expire diff backup set 20260720-005106F_20260720-005108D, 20260720-005106F_20260720-005109I
-
-P00   INFO: repo1: remove expired backup 20260720-005106F_20260720-005109I
-P00   INFO: repo1: remove expired backup 20260720-005106F_20260720-005108D
+P00   INFO: expire command begin 2.59.1: --exec-id=930-d66fce46 --log-level-console=info --no-log-timestamp --repo1-cipher-pass=<redacted> --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo1-retention-diff=1 --repo1-retention-full=2 --stanza=demo
+P00   INFO: repo1: expire diff backup set 20260817-045100F_20260817-045102D, 20260817-045100F_20260817-045103I
+P00   INFO: repo1: remove expired backup 20260817-045100F_20260817-045103I
+P00   INFO: repo1: remove expired backup 20260817-045100F_20260817-045102D
 P00   INFO: expire command end: completed successfully
 ```
-
 
 ### Archive Retention
 
@@ -1093,17 +1168,33 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure `repo1-retention-
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 repo1-block=y
+
 repo1-bundle=y
+
 repo1-cipher-pass=zWaf6XtpjIVZC5444yXB+cgFDFl7MxGlgkZSaoPvTGirhPygu4jOKOXf9LO4vjfO
+
 repo1-cipher-type=aes-256-cbc
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-diff=2
+
 repo1-retention-full=2
+
 start-fast=y
+
+
+
 [global:archive-push]
+
 compress-level=3
 ```
 
@@ -1118,9 +1209,7 @@ sudo -u postgres pgbackrest --stanza=demo --type=diff \
        [filtered 6 lines of output]
 P00   INFO: backup stop archive = 000000020000000000000017, lsn = 0/17000050
 P00   INFO: check archive for segment(s) 000000020000000000000016:000000020000000000000017
-
-P00   INFO: new backup label = 20260720-005106F_20260720-005112D
-
+P00   INFO: new backup label = 20260817-045100F_20260817-045106D
 P00   INFO: diff backup size = 8.3KB, file total = 963
 P00   INFO: backup command end: completed successfully
        [filtered 2 lines of output]
@@ -1134,21 +1223,17 @@ sudo -u postgres pgbackrest --stanza=demo --log-level-console=detail \
 ```
 
 ```text
-P00   INFO: expire command begin 2.59.0: --exec-id=1034-c8a8377e --log-level-console=detail --no-log-timestamp --repo1-cipher-pass= --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo1-retention-archive=1 --repo1-retention-archive-type=diff --repo1-retention-diff=2 --repo1-retention-full=2 --stanza=demo
-P00 DETAIL: repo1: 17-1 archive retention on backup 20260720-005103F, start = 00000002000000000000000B, stop = 00000002000000000000000B
-P00 DETAIL: repo1: 17-1 archive retention on backup 20260720-005106F, start = 00000002000000000000000C, stop = 00000002000000000000000D
-
-P00 DETAIL: repo1: 17-1 archive retention on backup 20260720-005106F_20260720-005110D, start = 000000020000000000000012, stop = 000000020000000000000013
-
-P00 DETAIL: repo1: 17-1 archive retention on backup 20260720-005106F_20260720-005112D, start = 000000020000000000000016
-
+P00   INFO: expire command begin 2.59.1: --exec-id=1009-97f280d8 --log-level-console=detail --no-log-timestamp --repo1-cipher-pass=<redacted> --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo1-retention-archive=1 --repo1-retention-archive-type=diff --repo1-retention-diff=2 --repo1-retention-full=2 --stanza=demo
+P00 DETAIL: repo1: 17-1 archive retention on backup 20260817-045058F, start = 00000002000000000000000A, stop = 00000002000000000000000B
+P00 DETAIL: repo1: 17-1 archive retention on backup 20260817-045100F, start = 00000002000000000000000C, stop = 00000002000000000000000D
+P00 DETAIL: repo1: 17-1 archive retention on backup 20260817-045100F_20260817-045104D, start = 000000020000000000000012, stop = 000000020000000000000013
+P00 DETAIL: repo1: 17-1 archive retention on backup 20260817-045100F_20260817-045106D, start = 000000020000000000000016
 P00   INFO: repo1: 17-1 remove archive, start = 00000002000000000000000E, stop = 000000020000000000000011
 P00   INFO: repo1: 17-1 remove archive, start = 000000020000000000000014, stop = 000000020000000000000015
-
 P00   INFO: expire command end: completed successfully
 ```
 
-The `20260720-005106F_20260720-005110D` differential backup has archived WAL segments that must be retained to make the older backups consistent even though they cannot be played any further forward with PITR. WAL segments generated after `20260720-005106F_20260720-005110D` but before `20260720-005106F_20260720-005112D` are removed. WAL segments generated after the new backup `20260720-005106F_20260720-005112D` remain and can be used for PITR.
+The `20260817-045100F_20260817-045104D` differential backup has archived WAL segments that must be retained to make the older backups consistent even though they cannot be played any further forward with PITR. WAL segments generated after `20260817-045100F_20260817-045104D` but before `20260817-045100F_20260817-045106D` are removed. WAL segments generated after the new backup `20260817-045100F_20260817-045106D` remain and can be used for PITR.
 
 Since full backups are considered differential backups for the purpose of differential archive retention, if a full backup is now performed with the same settings, only the archive for that full backup is retained for PITR.
 
@@ -1189,20 +1274,16 @@ sudo -u postgres pgbackrest --stanza=demo --delta \
        [filtered 2 lines of output]
 P00 DETAIL: check '/var/lib/postgresql/17/demo' exists
 P00 DETAIL: remove 'global/pg_control' so cluster will not start if restore does not complete
-
 P00   INFO: remove invalid files/links/paths from '/var/lib/postgresql/17/demo'
-
 P00 DETAIL: remove invalid file '/var/lib/postgresql/17/demo/backup_label.old'
 P00 DETAIL: remove invalid file '/var/lib/postgresql/17/demo/base/1/pg_internal.init'
-       [filtered 129 lines of output]
-P01 DETAIL: restore file /var/lib/postgresql/17/demo/base/1/113 - exists and matches backup (bundle 20260720-005106F/1/58072, 8KB, 5.76%) checksum 1cd643347b87a472ff001ae124e4b532ce998d2f
-P01 DETAIL: restore file /var/lib/postgresql/17/demo/base/1/112 - exists and matches backup (bundle 20260720-005106F/1/58160, 8KB, 5.79%) checksum 2cbd5cf8fb22ef627eb539776c5ec7457bdb2890
-
-P01 DETAIL: restore file /var/lib/postgresql/17/demo/PG_VERSION - exists and matches backup (bundle 20260720-005106F/1/58248, 3B, 5.79%) checksum ad48103e4fc71796e9708cafc43adeed0d1076b7
-
-P01 DETAIL: restore file /var/lib/postgresql/17/demo/global/6303 - exists and matches backup (bundle 20260720-005106F/1/58272, 16KB, 5.86%) checksum f5bab995185b4b5cc2a02777c157dff2937879bf
-P01 DETAIL: restore file /var/lib/postgresql/17/demo/global/6302 - exists and matches backup (bundle 20260720-005106F/1/58480, 16KB, 5.94%) checksum eb54339bce7ce3a899043e950ba88034d2450218
-       [filtered 873 lines of output]
+       [filtered 769 lines of output]
+P01 DETAIL: restore file /var/lib/postgresql/17/demo/base/1/113 - exists and matches backup (bundle 20260817-045100F/1/2665832, 8KB, 88.00%) checksum 1cd643347b87a472ff001ae124e4b532ce998d2f
+P01 DETAIL: restore file /var/lib/postgresql/17/demo/base/1/112 - exists and matches backup (bundle 20260817-045100F/1/2665920, 8KB, 88.03%) checksum 2cbd5cf8fb22ef627eb539776c5ec7457bdb2890
+P01 DETAIL: restore file /var/lib/postgresql/17/demo/PG_VERSION - exists and matches backup (bundle 20260817-045100F/1/2666008, 3B, 88.03%) checksum ad48103e4fc71796e9708cafc43adeed0d1076b7
+P01 DETAIL: restore file /var/lib/postgresql/17/demo/base/5/2608_fsm - exists and matches backup (bundle 20260817-045100F/1/2666032, 24KB, 88.14%) checksum e807fe622bbfccc5e9ad7f453ecb4f0eaccb75e2
+P01 DETAIL: restore file /var/lib/postgresql/17/demo/postgresql.auto.conf - exists and matches backup (bundle 20260817-045100F/1/2666272, 229B, 88.14%) checksum 4c90da9d2877b1d48cf7f75c3a53cbd9fce086e7
+       [filtered 233 lines of output]
 ```
 
 pg-primary **⇒** Restart PostgreSQL
@@ -1210,7 +1291,6 @@ pg-primary **⇒** Restart PostgreSQL
 ```bash
 sudo pg_ctlcluster 17 demo start
 ```
-
 
 ### Restore Selected Databases
 
@@ -1224,7 +1304,7 @@ pg-primary **⇒** Create two test databases
 sudo -u postgres psql -c "create database test1;"
 ```
 
-```sql
+```text
 CREATE DATABASE
 ```
 
@@ -1232,7 +1312,7 @@ CREATE DATABASE
 sudo -u postgres psql -c "create database test2;"
 ```
 
-```sql
+```text
 CREATE DATABASE
 ```
 
@@ -1245,7 +1325,7 @@ sudo -u postgres psql -c "create table test1_table (id int); \
        insert into test1_table (id) values (1);" test1
 ```
 
-```sql
+```text
 CREATE TABLE
 INSERT 0 1
 ```
@@ -1255,7 +1335,7 @@ sudo -u postgres psql -c "create table test2_table (id int); \
        insert into test2_table (id) values (2);" test2
 ```
 
-```sql
+```text
 CREATE TABLE
 INSERT 0 1
 ```
@@ -1286,14 +1366,13 @@ pg-primary **⇒** Show database list for backup
 
 ```bash
 sudo -u postgres pgbackrest --stanza=demo \
-       --set=20260720-005106F_20260720-005120I info
+       --set=20260817-045100F_20260817-045113I info
 ```
 
 ```text
        [filtered 12 lines of output]
             repo1: backup size: 1.9MB
-            backup reference list: 20260720-005106F, 20260720-005106F_20260720-005112D
-
+            backup reference list: 20260817-045100F, 20260817-045100F_20260817-045106D
             database list: postgres (5), test1 (32768), test2 (32769)
 ```
 
@@ -1309,7 +1388,6 @@ pg-primary **⇒** Restore from last backup including only the test2 database
 sudo pg_ctlcluster 17 demo stop
 sudo -u postgres pgbackrest --stanza=demo --delta \
        --db-include=test2 --type=immediate --target-action=promote restore
-
 sudo pg_ctlcluster 17 demo start
 ```
 
@@ -1322,7 +1400,7 @@ sudo -u postgres psql -c "select * from test2_table;" test2
 ```
 
 ```text
- id 
+ id
 ----
   2
 (1 row)
@@ -1334,6 +1412,9 @@ pg-primary **⇒** Attempting to connect to the test1 database will produce an e
 
 ```bash
 sudo -u postgres psql -c "select * from test1_table;" test1
+```
+
+```text
 psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  relation mapping file "base/32768/pg_filenode.map" contains invalid data
 ```
 
@@ -1359,7 +1440,7 @@ pg-primary **⇒** Drop the test1 database
 sudo -u postgres psql -c "drop database test1;"
 ```
 
-```sql
+```text
 DROP DATABASE
 ```
 
@@ -1372,17 +1453,14 @@ sudo -u postgres psql -c "select oid, datname from pg_database order by oid;"
 ```
 
 ```text
-  oid  |  datname  
+  oid  |  datname
 -------+-----------
      1 | template1
      4 | template0
      5 | postgres
-
  32769 | test2
-
 (4 rows)
 ```
-
 
 --------
 
@@ -1404,11 +1482,9 @@ sudo -u postgres psql -c "begin; \
 
 ```text
        [filtered 4 lines of output]
-    message     
+    message
 ----------------
-
  Important Data
-
 (1 row)
 ```
 
@@ -1421,7 +1497,7 @@ sudo -u postgres psql -Atc "select current_timestamp"
 ```
 
 ```text
-2026-07-20 00:51:32.323409+00
+2026-08-17 04:51:24.23782+00
 ```
 
 Now that the time has been recorded the table is dropped. In practice finding the exact time that the table was dropped is a lot harder than in this example. It may not be possible to find the exact time, but some forensic work should be able to get you close.
@@ -1435,14 +1511,10 @@ sudo -u postgres psql -c "begin; \
        select * from important_table;"
 ```
 
-```sql
+```text
 BEGIN
 DROP TABLE
-```
-
-```text
 COMMITERROR:  relation "important_table" does not exist
-
 LINE 1: ...le important_table;     commit;     select * from important_...
                                                              ^
 ```
@@ -1459,10 +1531,8 @@ sudo -u postgres pgbackrest info
 ```text
        [filtered 38 lines of output]
             backup reference total: 1 full, 1 diff
-
-        incr backup: 20260720-005106F_20260720-005133I
-
-            timestamp start/stop: 2026-07-20 00:51:33+00 / 2026-07-20 00:51:35+00
+        incr backup: 20260817-045100F_20260817-045125I
+            timestamp start/stop: 2026-08-17 04:51:25+00 / 2026-08-17 04:51:26+00
             wal start/stop: 00000004000000000000001A / 00000004000000000000001A
        [filtered 2 lines of output]
 ```
@@ -1474,20 +1544,17 @@ pg-primary **⇒** Attempt recovery from an incorrect backup
 ```bash
 sudo pg_ctlcluster 17 demo stop
 sudo -u postgres pgbackrest --stanza=demo --delta \
-       --set=20260720-005106F_20260720-005133I --target-timeline=current \
-       --type=time "--target=2026-07-20 00:51:32.323409+00" --target-action=promote restore
-
+       --set=20260817-045100F_20260817-045125I --target-timeline=current \
+       --type=time "--target=2026-08-17 04:51:24.23782+00" --target-action=promote restore
 sudo pg_ctlcluster 17 demo start
 ```
 
 ```text
        [filtered 13 lines of output]
 LOG:  database system is ready to accept read-only connections
-LOG:  redo done at 0/1A000120 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.03 s
-
+LOG:  redo done at 0/1A000120 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.02 s
 FATAL:  recovery ended before configured recovery target was reached
-
-LOG:  startup process (PID 1434) exited with exit code 1
+LOG:  startup process (PID 1402) exited with exit code 1
 LOG:  terminating any other active server processes
        [filtered 3 lines of output]
 ```
@@ -1498,24 +1565,20 @@ NOTE:
 
 pgBackRest cannot automatically select a backup when the restore type is `xid` or `name`.
 
-pg-primary **⇒** Restore the demo cluster to `2026-07-20 00:51:32.323409+00`
+pg-primary **⇒** Restore the demo cluster to `2026-08-17 04:51:24.23782+00`
 
 ```bash
 sudo -u postgres pgbackrest --stanza=demo --delta \
-       --type=time "--target=2026-07-20 00:51:32.323409+00" \
+       --type=time "--target=2026-08-17 04:51:24.23782+00" \
        --target-action=promote restore
-
 sudo -u postgres cat /var/lib/postgresql/17/demo/postgresql.auto.conf
 ```
 
 ```text
        [filtered 9 lines of output]
-# Recovery settings generated by pgBackRest restore on 2026-07-20 00:51:38
+# Recovery settings generated by pgBackRest restore on 2026-08-17 04:51:28
 restore_command = 'pgbackrest --stanza=demo archive-get %f "%p"'
-```
-
-```ini
-recovery_target_time = '2026-07-20 00:51:32.323409+00'
+recovery_target_time = '2026-08-17 04:51:24.23782+00'
 recovery_target_action = 'promote'
 ```
 
@@ -1529,11 +1592,9 @@ sudo -u postgres psql -c "select * from important_table"
 ```
 
 ```text
-    message     
+    message
 ----------------
-
  Important Data
-
 (1 row)
 ```
 
@@ -1549,15 +1610,15 @@ sudo -u postgres cat /var/log/postgresql/postgresql-17-demo.log
        [filtered 7 lines of output]
 LOG:  restored log file "00000004.history" from archive
 LOG:  restored log file "000000040000000000000019" from archive
-LOG:  starting point-in-time recovery to 2026-07-20 00:51:32.323409+00
+LOG:  starting point-in-time recovery to 2026-08-17 04:51:24.23782+00
 LOG:  restored log file "00000003.history" from archive
 LOG:  redo starts at 0/19000028
        [filtered 2 lines of output]
 LOG:  database system is ready to accept read-only connections
 LOG:  restored log file "00000004000000000000001A" from archive
-LOG:  recovery stopping before commit of transaction 748, time 2026-07-20 00:51:33.723321+00
-LOG:  redo done at 0/1901CC00 system usage: CPU: user: 0.00 s, system: 0.02 s, elapsed: 0.10 s
-LOG:  last completed transaction was at log time 2026-07-20 00:51:30.931579+00
+LOG:  recovery stopping before commit of transaction 748, time 2026-08-17 04:51:25.556252+00
+LOG:  redo done at 0/1901CC00 system usage: CPU: user: 0.00 s, system: 0.01 s, elapsed: 0.09 s
+LOG:  last completed transaction was at log time 2026-08-17 04:51:22.942835+00
 LOG:  restored log file "000000040000000000000019" from archive
 LOG:  selected new timeline ID: 5
        [filtered 5 lines of output]
@@ -1596,8 +1657,7 @@ sudo -u postgres pgbackrest --stanza=demo --log-level-console=info stop
 ```
 
 ```text
-P00   INFO: stop command begin 2.59.0: --exec-id=1563-7c6f409e --log-level-console=info --no-log-timestamp --stanza=demo
-
+P00   INFO: stop command begin 2.59.1: --exec-id=1531-7c532db6 --log-level-console=info --no-log-timestamp --stanza=demo
 P00   INFO: stop command end: completed successfully
 ```
 
@@ -1609,11 +1669,9 @@ sudo -u postgres pgbackrest --stanza=demo --repo=1 \
 ```
 
 ```text
-P00   INFO: stanza-delete command begin 2.59.0: --exec-id=1571-372cc4e9 --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo=1 --repo1-cipher-pass= --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --stanza=demo
-
+P00   INFO: stanza-delete command begin 2.59.1: --exec-id=1538-cfcbf395 --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo=1 --repo1-cipher-pass=<redacted> --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --stanza=demo
 P00   INFO: stanza-delete command end: completed successfully
 ```
-
 
 --------
 
@@ -1644,23 +1702,45 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure Azure
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 repo1-block=y
+
 repo1-bundle=y
+
 repo1-cipher-pass=zWaf6XtpjIVZC5444yXB+cgFDFl7MxGlgkZSaoPvTGirhPygu4jOKOXf9LO4vjfO
+
 repo1-cipher-type=aes-256-cbc
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-diff=2
+
 repo1-retention-full=2
+
 repo2-azure-account=pgbackrest
+
 repo2-azure-container=demo-container
+
 repo2-azure-key=YXpLZXk=
+
 repo2-path=/demo-repo
+
 repo2-retention-full=4
+
 repo2-type=azure
+
 start-fast=y
+
+
+
 [global:archive-push]
+
 compress-level=3
 ```
 
@@ -1675,10 +1755,9 @@ sudo -u postgres pgbackrest --stanza=demo --log-level-console=info stanza-create
 ```
 
 ```text
-P00   INFO: stanza-create command begin 2.59.0: --exec-id=1652-548991ed --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo2-azure-account= --repo2-azure-container=demo-container --repo2-azure-key= --repo1-cipher-pass= --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo2-path=/demo-repo --repo2-type=azure --stanza=demo
+P00   INFO: stanza-create command begin 2.59.1: --exec-id=1617-2bccee33 --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo2-azure-account=<redacted> --repo2-azure-container=demo-container --repo2-azure-key=<redacted> --repo1-cipher-pass=<redacted> --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo2-path=/demo-repo --repo2-type=azure --stanza=demo
 P00   INFO: stanza-create for stanza 'demo' on repo1
 P00   INFO: stanza-create for stanza 'demo' on repo2
-
 P00   INFO: stanza-create command end: completed successfully
 ```
 
@@ -1692,22 +1771,17 @@ sudo -u postgres pgbackrest --stanza=demo --repo=2 \
 ```
 
 ```text
-P00   INFO: backup command begin 2.59.0: --exec-id=1661-ae2af622 --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo=2 --repo2-azure-account= --repo2-azure-container=demo-container --repo2-azure-key= --repo1-block --repo1-bundle --repo1-cipher-pass= --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo2-path=/demo-repo --repo1-retention-diff=2 --repo1-retention-full=2 --repo2-retention-full=4 --repo2-type=azure --stanza=demo --start-fast
-
+P00   INFO: backup command begin 2.59.1: --exec-id=1626-8e5019a5 --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo=2 --repo2-azure-account=<redacted> --repo2-azure-container=demo-container --repo2-azure-key=<redacted> --repo1-block --repo1-bundle --repo1-cipher-pass=<redacted> --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo2-path=/demo-repo --repo1-retention-diff=2 --repo1-retention-full=2 --repo2-retention-full=4 --repo2-type=azure --stanza=demo --start-fast
 P00   WARN: no prior backup exists, incr backup has been changed to full
-
 P00   INFO: execute backup start: backup begins after the requested immediate checkpoint completes
 P00   INFO: backup start archive = 00000005000000000000001B, lsn = 0/1B000028
        [filtered 3 lines of output]
 P00   INFO: check archive for segment(s) 00000005000000000000001B:00000005000000000000001B
-P00   INFO: new backup label = 20260720-005151F
-
+P00   INFO: new backup label = 20260817-045139F
 P00   INFO: full backup size = 29.2MB, file total = 1265
-
 P00   INFO: backup command end: completed successfully
-P00   INFO: expire command begin 2.59.0: --exec-id=1661-ae2af622 --log-level-console=info --no-log-timestamp --repo=2 --repo2-azure-account= --repo2-azure-container=demo-container --repo2-azure-key= --repo1-cipher-pass= --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo2-path=/demo-repo --repo1-retention-diff=2 --repo1-retention-full=2 --repo2-retention-full=4 --repo2-type=azure --stanza=demo
+P00   INFO: expire command begin 2.59.1: --exec-id=1626-8e5019a5 --log-level-console=info --no-log-timestamp --repo=2 --repo2-azure-account=<redacted> --repo2-azure-container=demo-container --repo2-azure-key=<redacted> --repo1-cipher-pass=<redacted> --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo2-path=/demo-repo --repo1-retention-diff=2 --repo1-retention-full=2 --repo2-retention-full=4 --repo2-type=azure --stanza=demo
 ```
-
 
 --------
 
@@ -1719,31 +1793,61 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure S3
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 repo1-block=y
+
 repo1-bundle=y
+
 repo1-cipher-pass=zWaf6XtpjIVZC5444yXB+cgFDFl7MxGlgkZSaoPvTGirhPygu4jOKOXf9LO4vjfO
+
 repo1-cipher-type=aes-256-cbc
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-diff=2
+
 repo1-retention-full=2
+
 repo2-azure-account=pgbackrest
+
 repo2-azure-container=demo-container
+
 repo2-azure-key=YXpLZXk=
+
 repo2-path=/demo-repo
+
 repo2-retention-full=4
+
 repo2-type=azure
+
 repo3-path=/demo-repo
+
 repo3-retention-full=4
+
 repo3-s3-bucket=demo-bucket
+
 repo3-s3-endpoint=s3.us-east-1.amazonaws.com
+
 repo3-s3-key=accessKey1
+
 repo3-s3-key-secret=verySecretKey1
+
 repo3-s3-region=us-east-1
+
 repo3-type=s3
+
 start-fast=y
+
+
+
 [global:archive-push]
+
 compress-level=3
 ```
 
@@ -1824,7 +1928,6 @@ sudo -u postgres pgbackrest --stanza=demo --log-level-console=info stanza-create
        [filtered 4 lines of output]
 P00   INFO: stanza 'demo' already exists on repo2 and is valid
 P00   INFO: stanza-create for stanza 'demo' on repo3
-
 P00   INFO: stanza-create command end: completed successfully
 ```
 
@@ -1838,22 +1941,17 @@ sudo -u postgres pgbackrest --stanza=demo --repo=3 \
 ```
 
 ```text
-P00   INFO: backup command begin 2.59.0: --exec-id=1763-f64148cd --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo=3 --repo2-azure-account= --repo2-azure-container=demo-container --repo2-azure-key= --repo1-block --repo1-bundle --repo1-cipher-pass= --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo2-path=/demo-repo --repo3-path=/demo-repo --repo1-retention-diff=2 --repo1-retention-full=2 --repo2-retention-full=4 --repo3-retention-full=4 --repo3-s3-bucket=demo-bucket --repo3-s3-endpoint=s3.us-east-1.amazonaws.com --repo3-s3-key= --repo3-s3-key-secret= --repo3-s3-region=us-east-1 --repo2-type=azure --repo3-type=s3 --stanza=demo --start-fast
-
+P00   INFO: backup command begin 2.59.1: --exec-id=1726-b8012aef --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo=3 --repo2-azure-account=<redacted> --repo2-azure-container=demo-container --repo2-azure-key=<redacted> --repo1-block --repo1-bundle --repo1-cipher-pass=<redacted> --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo2-path=/demo-repo --repo3-path=/demo-repo --repo1-retention-diff=2 --repo1-retention-full=2 --repo2-retention-full=4 --repo3-retention-full=4 --repo3-s3-bucket=demo-bucket --repo3-s3-endpoint=s3.us-east-1.amazonaws.com --repo3-s3-key=<redacted> --repo3-s3-key-secret=<redacted> --repo3-s3-region=us-east-1 --repo2-type=azure --repo3-type=s3 --stanza=demo --start-fast
 P00   WARN: no prior backup exists, incr backup has been changed to full
-
 P00   INFO: execute backup start: backup begins after the requested immediate checkpoint completes
 P00   INFO: backup start archive = 00000005000000000000001D, lsn = 0/1D000028
        [filtered 3 lines of output]
 P00   INFO: check archive for segment(s) 00000005000000000000001D:00000005000000000000001D
-P00   INFO: new backup label = 20260720-005210F
-
+P00   INFO: new backup label = 20260817-045153F
 P00   INFO: full backup size = 29.2MB, file total = 1265
-
 P00   INFO: backup command end: completed successfully
-P00   INFO: expire command begin 2.59.0: --exec-id=1763-f64148cd --log-level-console=info --no-log-timestamp --repo=3 --repo2-azure-account= --repo2-azure-container=demo-container --repo2-azure-key= --repo1-cipher-pass= --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo2-path=/demo-repo --repo3-path=/demo-repo --repo1-retention-diff=2 --repo1-retention-full=2 --repo2-retention-full=4 --repo3-retention-full=4 --repo3-s3-bucket=demo-bucket --repo3-s3-endpoint=s3.us-east-1.amazonaws.com --repo3-s3-key= --repo3-s3-key-secret= --repo3-s3-region=us-east-1 --repo2-type=azure --repo3-type=s3 --stanza=demo
+P00   INFO: expire command begin 2.59.1: --exec-id=1726-b8012aef --log-level-console=info --no-log-timestamp --repo=3 --repo2-azure-account=<redacted> --repo2-azure-container=demo-container --repo2-azure-key=<redacted> --repo1-cipher-pass=<redacted> --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo2-path=/demo-repo --repo3-path=/demo-repo --repo1-retention-diff=2 --repo1-retention-full=2 --repo2-retention-full=4 --repo3-retention-full=4 --repo3-s3-bucket=demo-bucket --repo3-s3-endpoint=s3.us-east-1.amazonaws.com --repo3-s3-key=<redacted> --repo3-s3-key-secret=<redacted> --repo3-s3-region=us-east-1 --repo2-type=azure --repo3-type=s3 --stanza=demo
 ```
-
 
 --------
 
@@ -1865,40 +1963,79 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure SFTP
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 process-max=4
+
 repo1-block=y
+
 repo1-bundle=y
+
 repo1-cipher-pass=zWaf6XtpjIVZC5444yXB+cgFDFl7MxGlgkZSaoPvTGirhPygu4jOKOXf9LO4vjfO
+
 repo1-cipher-type=aes-256-cbc
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-diff=2
+
 repo1-retention-full=2
+
 repo2-azure-account=pgbackrest
+
 repo2-azure-container=demo-container
+
 repo2-azure-key=YXpLZXk=
+
 repo2-path=/demo-repo
+
 repo2-retention-full=4
+
 repo2-type=azure
+
 repo3-path=/demo-repo
+
 repo3-retention-full=4
+
 repo3-s3-bucket=demo-bucket
+
 repo3-s3-endpoint=s3.us-east-1.amazonaws.com
+
 repo3-s3-key=accessKey1
+
 repo3-s3-key-secret=verySecretKey1
+
 repo3-s3-region=us-east-1
+
 repo3-type=s3
+
 repo4-bundle=y
+
 repo4-path=/demo-repo
+
 repo4-sftp-host=sftp-server
+
 repo4-sftp-host-key-hash-type=sha1
+
 repo4-sftp-host-user=pgbackrest
+
 repo4-sftp-private-key-file=/var/lib/postgresql/.ssh/id_rsa_sftp
+
 repo4-sftp-public-key-file=/var/lib/postgresql/.ssh/id_rsa_sftp.pub
+
 repo4-type=sftp
+
 start-fast=y
+
+
+
 [global:archive-push]
+
 compress-level=3
 ```
 
@@ -1916,7 +2053,6 @@ sftp-server **⇒** Copy pg-primary SFTP backup public key to sftp-server
 
 ```bash
 sudo -u pgbackrest mkdir -m 750 -p /home/pgbackrest/.ssh
-
 (sudo ssh root@pg-primary cat /var/lib/postgresql/.ssh/id_rsa_sftp.pub) | \
        sudo -u pgbackrest tee -a /home/pgbackrest/.ssh/authorized_keys
 ```
@@ -1939,7 +2075,6 @@ sudo -u postgres pgbackrest --stanza=demo --log-level-console=info stanza-create
        [filtered 6 lines of output]
 P00   INFO: stanza 'demo' already exists on repo3 and is valid
 P00   INFO: stanza-create for stanza 'demo' on repo4
-
 P00   INFO: stanza-create command end: completed successfully
 ```
 
@@ -1951,25 +2086,20 @@ sudo -u postgres pgbackrest --stanza=demo --repo=4 \
 ```
 
 ```text
-P00   INFO: backup command begin 2.59.0: --exec-id=1854-09375597 --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --process-max=4 --repo=4 --repo2-azure-account= --repo2-azure-container=demo-container --repo2-azure-key= --repo1-block --repo1-bundle --repo4-bundle --repo1-cipher-pass= --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo2-path=/demo-repo --repo3-path=/demo-repo --repo4-path=/demo-repo --repo1-retention-diff=2 --repo1-retention-full=2 --repo2-retention-full=4 --repo3-retention-full=4 --repo3-s3-bucket=demo-bucket --repo3-s3-endpoint=s3.us-east-1.amazonaws.com --repo3-s3-key= --repo3-s3-key-secret= --repo3-s3-region=us-east-1 --repo4-sftp-host=sftp-server --repo4-sftp-host-key-hash-type=sha1 --repo4-sftp-host-user=pgbackrest --repo4-sftp-private-key-file=/var/lib/postgresql/.ssh/id_rsa_sftp --repo4-sftp-public-key-file=/var/lib/postgresql/.ssh/id_rsa_sftp.pub --repo2-type=azure --repo3-type=s3 --repo4-type=sftp --stanza=demo --start-fast
+P00   INFO: backup command begin 2.59.1: --exec-id=1815-96aacc2b --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --process-max=4 --repo=4 --repo2-azure-account=<redacted> --repo2-azure-container=demo-container --repo2-azure-key=<redacted> --repo1-block --repo1-bundle --repo4-bundle --repo1-cipher-pass=<redacted> --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo2-path=/demo-repo --repo3-path=/demo-repo --repo4-path=/demo-repo --repo1-retention-diff=2 --repo1-retention-full=2 --repo2-retention-full=4 --repo3-retention-full=4 --repo3-s3-bucket=demo-bucket --repo3-s3-endpoint=s3.us-east-1.amazonaws.com --repo3-s3-key=<redacted> --repo3-s3-key-secret=<redacted> --repo3-s3-region=us-east-1 --repo4-sftp-host=sftp-server --repo4-sftp-host-key-hash-type=sha1 --repo4-sftp-host-user=pgbackrest --repo4-sftp-private-key-file=/var/lib/postgresql/.ssh/id_rsa_sftp --repo4-sftp-public-key-file=/var/lib/postgresql/.ssh/id_rsa_sftp.pub --repo2-type=azure --repo3-type=s3 --repo4-type=sftp --stanza=demo --start-fast
 P00   WARN: option 'repo4-retention-full' is not set for 'repo4-retention-full-type=count', the repository may run out of space
             HINT: to retain full backups indefinitely (without warning), set option 'repo4-retention-full' to the maximum.
-
 P00   WARN: no prior backup exists, incr backup has been changed to full
-
 P00   INFO: execute backup start: backup begins after the requested immediate checkpoint completes
 P00   INFO: backup start archive = 00000005000000000000001F, lsn = 0/1F000028
        [filtered 3 lines of output]
 P00   INFO: check archive for segment(s) 00000005000000000000001F:00000005000000000000001F
-P00   INFO: new backup label = 20260720-005234F
-
+P00   INFO: new backup label = 20260817-045208F
 P00   INFO: full backup size = 29.2MB, file total = 1265
-
 P00   INFO: backup command end: completed successfully
-P00   INFO: expire command begin 2.59.0: --exec-id=1854-09375597 --log-level-console=info --no-log-timestamp --repo=4 --repo2-azure-account= --repo2-azure-container=demo-container --repo2-azure-key= --repo1-cipher-pass= --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo2-path=/demo-repo --repo3-path=/demo-repo --repo4-path=/demo-repo --repo1-retention-diff=2 --repo1-retention-full=2 --repo2-retention-full=4 --repo3-retention-full=4 --repo3-s3-bucket=demo-bucket --repo3-s3-endpoint=s3.us-east-1.amazonaws.com --repo3-s3-key= --repo3-s3-key-secret= --repo3-s3-region=us-east-1 --repo4-sftp-host=sftp-server --repo4-sftp-host-key-hash-type=sha1 --repo4-sftp-host-user=pgbackrest --repo4-sftp-private-key-file=/var/lib/postgresql/.ssh/id_rsa_sftp --repo4-sftp-public-key-file=/var/lib/postgresql/.ssh/id_rsa_sftp.pub --repo2-type=azure --repo3-type=s3 --repo4-type=sftp --stanza=demo
+P00   INFO: expire command begin 2.59.1: --exec-id=1815-96aacc2b --log-level-console=info --no-log-timestamp --repo=4 --repo2-azure-account=<redacted> --repo2-azure-container=demo-container --repo2-azure-key=<redacted> --repo1-cipher-pass=<redacted> --repo1-cipher-type=aes-256-cbc --repo1-path=/var/lib/pgbackrest --repo2-path=/demo-repo --repo3-path=/demo-repo --repo4-path=/demo-repo --repo1-retention-diff=2 --repo1-retention-full=2 --repo2-retention-full=4 --repo3-retention-full=4 --repo3-s3-bucket=demo-bucket --repo3-s3-endpoint=s3.us-east-1.amazonaws.com --repo3-s3-key=<redacted> --repo3-s3-key-secret=<redacted> --repo3-s3-region=us-east-1 --repo4-sftp-host=sftp-server --repo4-sftp-host-key-hash-type=sha1 --repo4-sftp-host-user=pgbackrest --repo4-sftp-private-key-file=/var/lib/postgresql/.ssh/id_rsa_sftp --repo4-sftp-public-key-file=/var/lib/postgresql/.ssh/id_rsa_sftp.pub --repo2-type=azure --repo3-type=s3 --repo4-type=sftp --stanza=demo
 P00   INFO: expire command end: completed successfully
 ```
-
 
 --------
 
@@ -1981,44 +2111,87 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure GCS
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 process-max=4
+
 repo1-block=y
+
 repo1-bundle=y
+
 repo1-cipher-pass=zWaf6XtpjIVZC5444yXB+cgFDFl7MxGlgkZSaoPvTGirhPygu4jOKOXf9LO4vjfO
+
 repo1-cipher-type=aes-256-cbc
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-diff=2
+
 repo1-retention-full=2
+
 repo2-azure-account=pgbackrest
+
 repo2-azure-container=demo-container
+
 repo2-azure-key=YXpLZXk=
+
 repo2-path=/demo-repo
+
 repo2-retention-full=4
+
 repo2-type=azure
+
 repo3-path=/demo-repo
+
 repo3-retention-full=4
+
 repo3-s3-bucket=demo-bucket
+
 repo3-s3-endpoint=s3.us-east-1.amazonaws.com
+
 repo3-s3-key=accessKey1
+
 repo3-s3-key-secret=verySecretKey1
+
 repo3-s3-region=us-east-1
+
 repo3-type=s3
+
 repo4-bundle=y
+
 repo4-path=/demo-repo
+
 repo4-sftp-host=sftp-server
+
 repo4-sftp-host-key-hash-type=sha1
+
 repo4-sftp-host-user=pgbackrest
+
 repo4-sftp-private-key-file=/var/lib/postgresql/.ssh/id_rsa_sftp
+
 repo4-sftp-public-key-file=/var/lib/postgresql/.ssh/id_rsa_sftp.pub
+
 repo4-type=sftp
+
 repo5-gcs-bucket=demo-bucket
+
 repo5-gcs-key=/etc/pgbackrest/gcs-key.json
+
 repo5-path=/demo-repo
+
 repo5-type=gcs
+
 start-fast=y
+
+
+
 [global:archive-push]
+
 compress-level=3
 ```
 
@@ -2061,7 +2234,6 @@ sudo -u postgres pgbackrest --stanza=demo --repo=3 info
 
 ```text
 stanza: demo
-
     status: error (missing stanza path)
 ```
 
@@ -2085,9 +2257,9 @@ key=demo-repo/backup/demo/backup.info; \
 +--------+----------------------------+-------------------------------------+
 | Action |         Modified           |               Object                |
 +--------+----------------------------+-------------------------------------+
-|  PUT   |  2026-07-20T00:52:10.222Z  |  demo-repo/backup/demo/backup.info  |
-|  PUT   |  2026-07-20T00:52:29.141Z  |  demo-repo/backup/demo/backup.info  |
-|  DELETE|  2026-07-20T00:52:41.328Z  |  demo-repo/backup/demo/backup.info  |
+|  PUT   |  2026-08-17T04:51:53.020Z  |  demo-repo/backup/demo/backup.info  |
+|  PUT   |  2026-08-17T04:52:04.161Z  |  demo-repo/backup/demo/backup.info  |
+|  DELETE|  2026-08-17T04:52:12.845Z  |  demo-repo/backup/demo/backup.info  |
 +--------+----------------------------+-------------------------------------+
 ```
 
@@ -2097,16 +2269,14 @@ pg-primary **⇒** Info with target time
 
 ```bash
 sudo -u postgres pgbackrest --stanza=demo --repo=3 \
-       --repo-target-time="2026-07-20 00:52:29+00" info
+       --repo-target-time="2026-08-17 04:52:04+00" info
 ```
 
 ```text
        [filtered 5 lines of output]
         wal archive min/max (17): 00000005000000000000001C/00000005000000000000001D
-
-        full backup: 20260720-005210F
-
-            timestamp start/stop: 2026-07-20 00:52:10+00 / 2026-07-20 00:52:28+00
+        full backup: 20260817-045153F
+            timestamp start/stop: 2026-08-17 04:51:53+00 / 2026-08-17 04:52:03+00
             wal start/stop: 00000005000000000000001D / 00000005000000000000001D
             repo3: backup set size: 3.8MB, backup size: 3.8MB
 ```
@@ -2117,14 +2287,12 @@ pg-primary **⇒** Restore with target time
 
 ```bash
 sudo -u postgres pgbackrest --stanza=demo --repo=3 --delta \
-       --repo-target-time="2026-07-20 00:52:29+00" --log-level-console=info restore
+       --repo-target-time="2026-08-17 04:52:04+00" --log-level-console=info restore
 ```
 
 ```text
-P00   INFO: restore command begin 2.59.0: --delta --exec-id=1948-6793703a --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --process-max=4 --repo=3 --repo2-azure-account= --repo2-azure-container=demo-container --repo2-azure-key= --repo1-cipher-pass= --repo1-cipher-type=aes-256-cbc --repo5-gcs-bucket=demo-bucket --repo5-gcs-key= --repo1-path=/var/lib/pgbackrest --repo2-path=/demo-repo --repo3-path=/demo-repo --repo4-path=/demo-repo --repo5-path=/demo-repo --repo3-s3-bucket=demo-bucket --repo3-s3-endpoint=s3.us-east-1.amazonaws.com --repo3-s3-key= --repo3-s3-key-secret= --repo3-s3-region=us-east-1 --repo4-sftp-host=sftp-server --repo4-sftp-host-key-hash-type=sha1 --repo4-sftp-host-user=pgbackrest --repo4-sftp-private-key-file=/var/lib/postgresql/.ssh/id_rsa_sftp --repo4-sftp-public-key-file=/var/lib/postgresql/.ssh/id_rsa_sftp.pub --repo-target-time="2026-07-20 00:52:29+00" --repo2-type=azure --repo3-type=s3 --repo4-type=sftp --repo5-type=gcs --stanza=demo
-
-P00   INFO: repo3: restore backup set 20260720-005210F, recovery will start at 2026-07-20 00:52:10
-
+P00   INFO: restore command begin 2.59.1: --delta --exec-id=1906-0f3d66ad --log-level-console=info --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --process-max=4 --repo=3 --repo2-azure-account=<redacted> --repo2-azure-container=demo-container --repo2-azure-key=<redacted> --repo1-cipher-pass=<redacted> --repo1-cipher-type=aes-256-cbc --repo5-gcs-bucket=demo-bucket --repo5-gcs-key=<redacted> --repo1-path=/var/lib/pgbackrest --repo2-path=/demo-repo --repo3-path=/demo-repo --repo4-path=/demo-repo --repo5-path=/demo-repo --repo3-s3-bucket=demo-bucket --repo3-s3-endpoint=s3.us-east-1.amazonaws.com --repo3-s3-key=<redacted> --repo3-s3-key-secret=<redacted> --repo3-s3-region=us-east-1 --repo4-sftp-host=sftp-server --repo4-sftp-host-key-hash-type=sha1 --repo4-sftp-host-user=pgbackrest --repo4-sftp-private-key-file=/var/lib/postgresql/.ssh/id_rsa_sftp --repo4-sftp-public-key-file=/var/lib/postgresql/.ssh/id_rsa_sftp.pub --repo-target-time="2026-08-17 04:52:04+00" --repo2-type=azure --repo3-type=s3 --repo4-type=sftp --repo5-type=gcs --stanza=demo
+P00   INFO: repo3: restore backup set 20260817-045153F, recovery will start at 2026-08-17 04:51:53
 P00   INFO: remove invalid files/links/paths from '/var/lib/postgresql/17/demo'
 P00   INFO: write updated /var/lib/postgresql/17/demo/postgresql.auto.conf
        [filtered 2 lines of output]
@@ -2133,7 +2301,6 @@ P00   INFO: write updated /var/lib/postgresql/17/demo/postgresql.auto.conf
 ```bash
 sudo pg_ctlcluster 17 demo start
 ```
-
 
 --------
 
@@ -2205,7 +2372,6 @@ sudo chmod 750 /var/lib/pgbackrest
 sudo chown pgbackrest:pgbackrest /var/lib/pgbackrest
 ```
 
-
 ### Setup Passwordless SSH
 
 pgBackRest can use passwordless SSH to enable communication between the hosts. It is also possible to use TLS, see [Setup TLS](/pgbackrest/user-guide-rhel/#configuration).
@@ -2273,11 +2439,19 @@ repository:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure `pg1-host`/`pg1-h
 
 ```ini
 [demo]
+
 pg1-host=pg-primary
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-full=2
+
 start-fast=y
 ```
 
@@ -2287,9 +2461,15 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure `repo1-host`/`rep
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 log-level-file=detail
+
 repo1-host=repository
 ```
 
@@ -2322,7 +2502,6 @@ repository **⇒** Check the configuration
 sudo -u pgbackrest pgbackrest --stanza=demo check
 ```
 
-
 ### Perform a Backup
 
 To perform a backup of the PostgreSQL cluster run pgBackRest with the `backup` command on the repository host.
@@ -2352,7 +2531,6 @@ sudo -u postgres pgbackrest --stanza=demo --delta restore
 sudo pg_ctlcluster 17 demo start
 ```
 
-
 --------
 
 ## Parallel Backup / Restore
@@ -2373,12 +2551,21 @@ repository:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure pgBackRest to use
 
 ```ini
 [demo]
+
 pg1-host=pg-primary
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 process-max=3
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-full=2
+
 start-fast=y
 ```
 
@@ -2402,18 +2589,14 @@ stanza: demo
     db (current)
         wal archive min/max (17): 000000070000000000000023/000000070000000000000025
 
-        full backup: 20260720-005325F
-
-            timestamp start/stop: 2026-07-20 00:53:25+00 / 2026-07-20 00:53:29+00
-
+        full backup: 20260817-045249F
+            timestamp start/stop: 2026-08-17 04:52:49+00 / 2026-08-17 04:52:53+00
             wal start/stop: 000000070000000000000023 / 000000070000000000000023
             database size: 29.2MB, database backup size: 29.2MB
             repo1: backup set size: 3.8MB, backup size: 3.8MB
 
-        full backup: 20260720-005331F
-
-            timestamp start/stop: 2026-07-20 00:53:31+00 / 2026-07-20 00:53:36+00
-
+        full backup: 20260817-045255F
+            timestamp start/stop: 2026-08-17 04:52:55+00 / 2026-08-17 04:52:58+00
             wal start/stop: 000000070000000000000024 / 000000070000000000000025
             database size: 29.2MB, database backup size: 29.2MB
             repo1: backup set size: 3.8MB, backup size: 3.8MB
@@ -2446,7 +2629,6 @@ sudo -u pgbackrest pgbackrest --stanza=demo backup
 
 ```text
 P00   WARN: unable to check pg1: [StopError] raised from remote-0 ssh protocol on 'pg-primary': stop file exists for all stanzas
-
 P00  ERROR: [056]: unable to find primary cluster - cannot proceed
             HINT: are all available clusters in recovery?
 ```
@@ -2489,7 +2671,6 @@ sudo -u pgbackrest pgbackrest --stanza=demo backup
 
 ```text
 P00   WARN: unable to check pg1: [StopError] raised from remote-0 ssh protocol on 'pg-primary': stop file exists for stanza demo
-
 P00  ERROR: [056]: unable to find primary cluster - cannot proceed
             HINT: are all available clusters in recovery?
 ```
@@ -2501,7 +2682,6 @@ pg-primary **⇒** Start pgBackRest write commands for the `demo` stanza
 ```bash
 sudo -u postgres pgbackrest --stanza=demo start
 ```
-
 
 --------
 
@@ -2546,7 +2726,6 @@ sudo touch /etc/pgbackrest/pgbackrest.conf
 sudo chmod 640 /etc/pgbackrest/pgbackrest.conf
 sudo chown postgres:postgres /etc/pgbackrest/pgbackrest.conf
 ```
-
 
 ### Setup Passwordless SSH
 
@@ -2594,7 +2773,6 @@ pg-standby **⇒** Test connection from pg-standby to repository
 sudo -u postgres ssh pgbackrest@repository
 ```
 
-
 ### Hot Standby
 
 A hot standby performs replication using the WAL archive and allows read-only queries.
@@ -2605,9 +2783,15 @@ pg-standby:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure pgBackRest on the
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 log-level-file=detail
+
 repo1-host=repository
 ```
 
@@ -2630,39 +2814,41 @@ pg-standby **⇒** Restore the demo standby cluster
 ```bash
 sudo -u postgres pgbackrest --stanza=demo --delta --type=standby restore
 sudo -u postgres cat /var/lib/postgresql/17/demo/postgresql.auto.conf
+```
 
+```text
 # Do not edit this file manually!
 # It will be overwritten by the ALTER SYSTEM command.
 
-# Recovery settings generated by pgBackRest restore on 2026-07-20 00:50:46
+# Recovery settings generated by pgBackRest restore on 2026-08-17 04:50:43
 restore_command = 'pgbackrest --stanza=demo archive-get %f "%p"'
 
-# Recovery settings generated by pgBackRest restore on 2026-07-20 00:51:14
+# Recovery settings generated by pgBackRest restore on 2026-08-17 04:51:08
 restore_command = 'pgbackrest --stanza=demo archive-get %f "%p"'
 
-# Recovery settings generated by pgBackRest restore on 2026-07-20 00:51:38
+# Recovery settings generated by pgBackRest restore on 2026-08-17 04:51:28
 restore_command = 'pgbackrest --stanza=demo archive-get %f "%p"'
-# Removed by pgBackRest restore on 2026-07-20 00:52:47 # recovery_target_time = '2026-07-20 00:51:32.323409+00'
-# Removed by pgBackRest restore on 2026-07-20 00:52:47 # recovery_target_action = 'promote'
+# Removed by pgBackRest restore on 2026-08-17 04:52:17 # recovery_target_time = '2026-08-17 04:51:24.23782+00'
+# Removed by pgBackRest restore on 2026-08-17 04:52:17 # recovery_target_action = 'promote'
 
-# Recovery settings generated by pgBackRest restore on 2026-07-20 00:52:47
-restore_command = 'pgbackrest --repo=3 --repo-target-time="2026-07-20 00:52:29+00" --stanza=demo archive-get %f "%p"'
+# Recovery settings generated by pgBackRest restore on 2026-08-17 04:52:17
+restore_command = 'pgbackrest --repo=3 --repo-target-time="2026-08-17 04:52:04+00" --stanza=demo archive-get %f "%p"'
 
-# Recovery settings generated by pgBackRest restore on 2026-07-20 00:53:18
+# Recovery settings generated by pgBackRest restore on 2026-08-17 04:52:43
 restore_command = 'pgbackrest --stanza=demo archive-get %f "%p"'
 
-# Recovery settings generated by pgBackRest restore on 2026-07-20 00:53:55
+# Recovery settings generated by pgBackRest restore on 2026-08-17 04:53:15
 restore_command = 'pgbackrest --stanza=demo archive-get %f "%p"'
 ```
 
-The hot_standby setting must be enabled before starting PostgreSQL to allow read-only connections on pg-standby. Otherwise, connection attempts will be refused. The rest of the configuration is in case the standby is promoted to a primary.
+The configuration is in case the standby is promoted to a primary.
 
 pg-standby:`/etc/postgresql/17/demo/postgresql.conf` **⇒** Configure PostgreSQL
 
 ```ini
 archive_command = 'pgbackrest --stanza=demo archive-push %p'
+
 archive_mode = on
-hot_standby = on
 ```
 
 pg-standby **⇒** Start PostgreSQL
@@ -2683,9 +2869,7 @@ sudo -u postgres cat /var/log/postgresql/postgresql-17-demo.log
        [filtered 6 lines of output]
 LOG:  restored log file "00000007.history" from archive
 LOG:  restored log file "000000070000000000000024" from archive
-
 LOG:  entering standby mode
-
 LOG:  redo starts at 0/24000028
 LOG:  restored log file "000000070000000000000025" from archive
        [filtered 3 lines of output]
@@ -2706,11 +2890,9 @@ sudo -u postgres psql -c " \
 
 ```text
        [filtered 4 lines of output]
-    message     
+    message
 ----------------
-
  Important Data
-
 (1 row)
 ```
 
@@ -2724,7 +2906,6 @@ sudo -u postgres psql -c "select * from replicated_table;"
 
 ```text
 ERROR:  relation "replicated_table" does not exist
-
 LINE 1: select * from replicated_table;
                       ^
 ```
@@ -2740,9 +2921,9 @@ sudo -u postgres psql -c "select *, current_timestamp from pg_switch_wal()";
 ```
 
 ```text
- pg_switch_wal |       current_timestamp       
+ pg_switch_wal |       current_timestamp
 ---------------+-------------------------------
- 0/26019600    | 2026-07-20 00:54:03.825464+00
+ 0/260195C8    | 2026-08-17 04:53:22.649899+00
 (1 row)
 ```
 
@@ -2758,9 +2939,7 @@ sudo -u postgres psql -c " \
 ```text
     message     |       current_timestamp
 ----------------+-------------------------------
-
- Important Data | 2026-07-20 00:54:05.488701+00
-
+ Important Data | 2026-08-17 04:53:24.247724+00
 (1 row)
 ```
 
@@ -2773,14 +2952,11 @@ sudo -u postgres pgbackrest --stanza=demo --log-level-console=info check
 ```
 
 ```text
-P00   INFO: check command begin 2.59.0: --exec-id=487-8da2e26b --log-level-console=info --log-level-file=detail --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo1-host=repository --stanza=demo
+P00   INFO: check command begin 2.59.1: --exec-id=505-273c787f --log-level-console=info --log-level-file=detail --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo1-host=repository --stanza=demo
 P00   INFO: check repo1 (standby)
-
 P00   INFO: switch wal not performed because this is a standby
-
 P00   INFO: check command end: completed successfully
 ```
-
 
 ### Streaming Replication
 
@@ -2795,7 +2971,7 @@ sudo -u postgres psql -c " \
        create user replicator password 'jw8s0F4' replication";
 ```
 
-```sql
+```text
 CREATE ROLE
 ```
 
@@ -2807,7 +2983,6 @@ pg-primary **⇒** Create `pg_hba.conf` entry for replication user
 sudo -u postgres sh -c 'echo \
        "host    replication     replicator      172.17.0.8/32           md5" \
        >> /etc/postgresql/17/demo/pg_hba.conf'
-
 sudo pg_ctlcluster 17 demo reload
 ```
 
@@ -2817,10 +2992,17 @@ pg-standby:`/etc/pgbackrest/pgbackrest.conf` **⇒** Set primary_conninfo
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
 recovery-option=primary_conninfo=host=172.17.0.6 port=5432 user=replicator
+
+
+
 [global]
+
 log-level-file=detail
+
 repo1-host=repository
 ```
 
@@ -2832,7 +3014,6 @@ pg-standby **⇒** Configure the replication password in the `.pgpass` file.
 sudo -u postgres sh -c 'echo \
        "172.17.0.6:*:replication:replicator:jw8s0F4" \
        >> /var/lib/postgresql/.pgpass'
-
 sudo -u postgres chmod 600 /var/lib/postgresql/.pgpass
 ```
 
@@ -2844,28 +3025,30 @@ pg-standby **⇒** Stop PostgreSQL and restore the demo standby cluster
 sudo pg_ctlcluster 17 demo stop
 sudo -u postgres pgbackrest --stanza=demo --delta --type=standby restore
 sudo -u postgres cat /var/lib/postgresql/17/demo/postgresql.auto.conf
+```
 
+```text
 # Do not edit this file manually!
 # It will be overwritten by the ALTER SYSTEM command.
 
-# Recovery settings generated by pgBackRest restore on 2026-07-20 00:50:46
+# Recovery settings generated by pgBackRest restore on 2026-08-17 04:50:43
 restore_command = 'pgbackrest --stanza=demo archive-get %f "%p"'
 
-# Recovery settings generated by pgBackRest restore on 2026-07-20 00:51:14
+# Recovery settings generated by pgBackRest restore on 2026-08-17 04:51:08
 restore_command = 'pgbackrest --stanza=demo archive-get %f "%p"'
 
-# Recovery settings generated by pgBackRest restore on 2026-07-20 00:51:38
+# Recovery settings generated by pgBackRest restore on 2026-08-17 04:51:28
 restore_command = 'pgbackrest --stanza=demo archive-get %f "%p"'
-# Removed by pgBackRest restore on 2026-07-20 00:52:47 # recovery_target_time = '2026-07-20 00:51:32.323409+00'
-# Removed by pgBackRest restore on 2026-07-20 00:52:47 # recovery_target_action = 'promote'
+# Removed by pgBackRest restore on 2026-08-17 04:52:17 # recovery_target_time = '2026-08-17 04:51:24.23782+00'
+# Removed by pgBackRest restore on 2026-08-17 04:52:17 # recovery_target_action = 'promote'
 
-# Recovery settings generated by pgBackRest restore on 2026-07-20 00:52:47
-restore_command = 'pgbackrest --repo=3 --repo-target-time="2026-07-20 00:52:29+00" --stanza=demo archive-get %f "%p"'
+# Recovery settings generated by pgBackRest restore on 2026-08-17 04:52:17
+restore_command = 'pgbackrest --repo=3 --repo-target-time="2026-08-17 04:52:04+00" --stanza=demo archive-get %f "%p"'
 
-# Recovery settings generated by pgBackRest restore on 2026-07-20 00:53:18
+# Recovery settings generated by pgBackRest restore on 2026-08-17 04:52:43
 restore_command = 'pgbackrest --stanza=demo archive-get %f "%p"'
 
-# Recovery settings generated by pgBackRest restore on 2026-07-20 00:54:08
+# Recovery settings generated by pgBackRest restore on 2026-08-17 04:53:27
 primary_conninfo = 'host=172.17.0.6 port=5432 user=replicator'
 restore_command = 'pgbackrest --stanza=demo archive-get %f "%p"'
 ```
@@ -2892,7 +3075,6 @@ sudo -u postgres cat /var/log/postgresql/postgresql-17-demo.log
        [filtered 13 lines of output]
 LOG:  consistent recovery state reached at 0/25000088
 LOG:  database system is ready to accept read-only connections
-
 LOG:  started streaming WAL from primary at 0/27000000 on timeline 7
 ```
 
@@ -2911,11 +3093,9 @@ sudo -u postgres psql -c " \
 
 ```text
        [filtered 4 lines of output]
-    message     |       current_timestamp       
+    message     |       current_timestamp
 ----------------+-------------------------------
-
- Important Data | 2026-07-20 00:54:16.127931+00
-
+ Important Data | 2026-08-17 04:53:33.817993+00
 (1 row)
 ```
 
@@ -2927,14 +3107,11 @@ sudo -u postgres psql -c " \
 ```
 
 ```text
-    message     |      current_timestamp
-----------------+------------------------------
-
- Important Data | 2026-07-20 00:54:16.56118+00
-
+    message     |       current_timestamp
+----------------+-------------------------------
+ Important Data | 2026-08-17 04:53:34.003849+00
 (1 row)
 ```
-
 
 --------
 
@@ -2979,7 +3156,6 @@ sudo touch /etc/pgbackrest/pgbackrest.conf
 sudo chmod 640 /etc/pgbackrest/pgbackrest.conf
 sudo chown postgres:postgres /etc/pgbackrest/pgbackrest.conf
 ```
-
 
 ### Setup Passwordless SSH
 
@@ -3027,7 +3203,6 @@ pg-alt **⇒** Test connection from pg-alt to repository
 sudo -u postgres ssh pgbackrest@repository
 ```
 
-
 ### Configuration
 
 pgBackRest configuration is nearly identical to pg-primary except that the `demo-alt` stanza will be used so backups and archive will be stored in a separate location.
@@ -3036,9 +3211,15 @@ pg-alt:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure pgBackRest on the new
 
 ```ini
 [demo-alt]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 log-level-file=detail
+
 repo1-host=repository
 ```
 
@@ -3046,18 +3227,31 @@ repository:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure `pg1-host`/`pg1-h
 
 ```ini
 [demo]
+
 pg1-host=pg-primary
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [demo-alt]
+
 pg1-host=pg-alt
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 process-max=3
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-full=2
+
 start-fast=y
 ```
-
 
 ### Setup Demo Cluster
 
@@ -3066,7 +3260,6 @@ pg-alt **⇒** Create the demo cluster
 ```bash
 sudo -u postgres /usr/lib/postgresql/17/bin/initdb \
        -D /var/lib/postgresql/17/demo -k -A peer
-
 sudo pg_createcluster 17 demo
 ```
 
@@ -3080,6 +3273,7 @@ pg-alt:`/etc/postgresql/17/demo/postgresql.conf` **⇒** Configure PostgreSQL se
 
 ```ini
 archive_command = 'pgbackrest --stanza=demo-alt archive-push %p'
+
 archive_mode = on
 ```
 
@@ -3088,7 +3282,6 @@ pg-alt **⇒** Start the demo cluster
 ```bash
 sudo pg_ctlcluster 17 demo restart
 ```
-
 
 ### Create the Stanza and Check Configuration
 
@@ -3101,9 +3294,8 @@ sudo -u postgres pgbackrest --stanza=demo-alt --log-level-console=info stanza-cr
 ```
 
 ```text
-P00   INFO: stanza-create command begin 2.59.0: --exec-id=382-e3df02cb --log-level-console=info --log-level-file=detail --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo1-host=repository --stanza=demo-alt
+P00   INFO: stanza-create command begin 2.59.1: --exec-id=372-b225fca7 --log-level-console=info --log-level-file=detail --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo1-host=repository --stanza=demo-alt
 P00   INFO: stanza-create for stanza 'demo-alt' on repo1
-
 P00   INFO: stanza-create command end: completed successfully
 ```
 
@@ -3112,15 +3304,11 @@ sudo -u postgres pgbackrest --log-level-console=info check
 ```
 
 ```text
-P00   INFO: check command begin 2.59.0: --exec-id=392-66f94f82 --log-level-console=info --log-level-file=detail --no-log-timestamp --repo1-host=repository
-
+P00   INFO: check command begin 2.59.1: --exec-id=382-ccef16c6 --log-level-console=info --log-level-file=detail --no-log-timestamp --repo1-host=repository
 P00   INFO: check stanza 'demo-alt'
-
 P00   INFO: check repo1 configuration (primary)
 P00   INFO: check repo1 archive for WAL (primary)
-
-P00   INFO: WAL segment 000000010000000000000001 successfully archived to '/var/lib/pgbackrest/archive/demo-alt/17-1/0000000100000000/000000010000000000000001-203efafdd9df967f3a930969cc53b0303472f932.gz' on repo1
-
+P00   INFO: WAL segment 000000010000000000000001 successfully archived to '/var/lib/pgbackrest/archive/demo-alt/17-1/0000000100000000/000000010000000000000001-df38b84009fe42b2c6af1be56a25c22b25004849.gz' on repo1
 P00   INFO: check command end: completed successfully
 ```
 
@@ -3133,24 +3321,17 @@ sudo -u pgbackrest pgbackrest --log-level-console=info check
 ```
 
 ```text
-P00   INFO: check command begin 2.59.0: --exec-id=1257-861abd63 --log-level-console=info --no-log-timestamp --repo1-path=/var/lib/pgbackrest
-
+P00   INFO: check command begin 2.59.1: --exec-id=1249-f7860275 --log-level-console=info --no-log-timestamp --repo1-path=/var/lib/pgbackrest
 P00   INFO: check stanza 'demo'
-
 P00   INFO: check repo1 configuration (primary)
 P00   INFO: check repo1 archive for WAL (primary)
-
-P00   INFO: WAL segment 000000070000000000000027 successfully archived to '/var/lib/pgbackrest/archive/demo/17-1/0000000700000000/000000070000000000000027-221bbbda8246b36621dd12ef128e8906b5b1f9ea.gz' on repo1
+P00   INFO: WAL segment 000000070000000000000027 successfully archived to '/var/lib/pgbackrest/archive/demo/17-1/0000000700000000/000000070000000000000027-4d7f856eebbec0a9d75eb22920ce0c0c07a023a3.gz' on repo1
 P00   INFO: check stanza 'demo-alt'
-
 P00   INFO: check repo1 configuration (primary)
 P00   INFO: check repo1 archive for WAL (primary)
-
-P00   INFO: WAL segment 000000010000000000000002 successfully archived to '/var/lib/pgbackrest/archive/demo-alt/17-1/0000000100000000/000000010000000000000002-e9f6eb2b48ad5cb3b1a169259690bbff3d7a2805.gz' on repo1
-
+P00   INFO: WAL segment 000000010000000000000002 successfully archived to '/var/lib/pgbackrest/archive/demo-alt/17-1/0000000100000000/000000010000000000000002-7c0a567acd264e55aa6391e2c9609c4bd0777559.gz' on repo1
 P00   INFO: check command end: completed successfully
 ```
-
 
 --------
 
@@ -3180,15 +3361,31 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure the spool path an
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 archive-async=y
+
 log-level-file=detail
+
 repo1-host=repository
+
 spool-path=/var/spool/pgbackrest
+
+
+
 [global:archive-get]
+
 process-max=2
+
+
+
 [global:archive-push]
+
 process-max=2
 ```
 
@@ -3196,16 +3393,33 @@ pg-standby:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure the spool path an
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/17/demo
+
 recovery-option=primary_conninfo=host=172.17.0.6 port=5432 user=replicator
+
+
+
 [global]
+
 archive-async=y
+
 log-level-file=detail
+
 repo1-host=repository
+
 spool-path=/var/spool/pgbackrest
+
+
+
 [global:archive-get]
+
 process-max=2
+
+
+
 [global:archive-push]
+
 process-max=2
 ```
 
@@ -3221,7 +3435,7 @@ pg-primary **⇒** Break streaming replication by changing the replication passw
 sudo -u postgres psql -c "alter user replicator password 'bogus'"
 ```
 
-```sql
+```text
 ALTER ROLE
 ```
 
@@ -3230,7 +3444,6 @@ pg-standby **⇒** Restart standby to break connection
 ```bash
 sudo pg_ctlcluster 17 demo restart
 ```
-
 
 ### Archive Push
 
@@ -3253,17 +3466,14 @@ sudo -u postgres psql -c " \
        select pg_create_restore_point('test async push'); select pg_switch_wal(); \
        select pg_create_restore_point('test async push'); select pg_switch_wal(); \
        select pg_create_restore_point('test async push'); select pg_switch_wal();"
-
 sudo -u postgres pgbackrest --stanza=demo --log-level-console=info check
 ```
 
 ```text
-P00   INFO: check command begin 2.59.0: --exec-id=2581-64d295fa --log-level-console=info --log-level-file=detail --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo1-host=repository --stanza=demo
+P00   INFO: check command begin 2.59.1: --exec-id=2530-9a7af218 --log-level-console=info --log-level-file=detail --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --repo1-host=repository --stanza=demo
 P00   INFO: check repo1 configuration (primary)
 P00   INFO: check repo1 archive for WAL (primary)
-
-P00   INFO: WAL segment 00000007000000000000002D successfully archived to '/var/lib/pgbackrest/archive/demo/17-1/0000000700000000/00000007000000000000002D-d2d2b7910f776f59b73a176513de8e15846608b8.gz' on repo1
-
+P00   INFO: WAL segment 00000007000000000000002D successfully archived to '/var/lib/pgbackrest/archive/demo/17-1/0000000700000000/00000007000000000000002D-c467ce0a3301b25e7031ee7d8eb7ec6233f85d9e.gz' on repo1
 P00   INFO: check command end: completed successfully
 ```
 
@@ -3277,26 +3487,21 @@ sudo -u postgres cat /var/log/pgbackrest/demo-archive-push-async.log
 
 ```text
 -------------------PROCESS START-------------------
-P00   INFO: archive-push:async command begin 2.59.0: [/var/lib/postgresql/17/demo/pg_wal] --archive-async --exec-id=2567-fdf7e175 --log-level-console=off --log-level-file=detail --log-level-stderr=off --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --process-max=2 --repo1-host=repository --spool-path=/var/spool/pgbackrest --stanza=demo
-
+P00   INFO: archive-push:async command begin 2.59.1: [/var/lib/postgresql/17/demo/pg_wal] --archive-async --exec-id=2516-b69036b0 --log-level-console=off --log-level-file=detail --log-level-stderr=off --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --process-max=2 --repo1-host=repository --spool-path=/var/spool/pgbackrest --stanza=demo
 P00   INFO: push 1 WAL file(s) to archive: 000000070000000000000028
 P01 DETAIL: pushed WAL file '000000070000000000000028' to the archive
-
 P00   INFO: archive-push:async command end: completed successfully
 
 -------------------PROCESS START-------------------
-P00   INFO: archive-push:async command begin 2.59.0: [/var/lib/postgresql/17/demo/pg_wal] --archive-async --exec-id=2585-277ad4a9 --log-level-console=off --log-level-file=detail --log-level-stderr=off --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --process-max=2 --repo1-host=repository --spool-path=/var/spool/pgbackrest --stanza=demo
-
+P00   INFO: archive-push:async command begin 2.59.1: [/var/lib/postgresql/17/demo/pg_wal] --archive-async --exec-id=2534-68722823 --log-level-console=off --log-level-file=detail --log-level-stderr=off --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --process-max=2 --repo1-host=repository --spool-path=/var/spool/pgbackrest --stanza=demo
 P00   INFO: push 5 WAL file(s) to archive: 000000070000000000000029...00000007000000000000002D
-P02 DETAIL: pushed WAL file '00000007000000000000002A' to the archive
 P01 DETAIL: pushed WAL file '000000070000000000000029' to the archive
-P02 DETAIL: pushed WAL file '00000007000000000000002B' to the archive
-P01 DETAIL: pushed WAL file '00000007000000000000002C' to the archive
-P02 DETAIL: pushed WAL file '00000007000000000000002D' to the archive
-
+P02 DETAIL: pushed WAL file '00000007000000000000002A' to the archive
+P01 DETAIL: pushed WAL file '00000007000000000000002B' to the archive
+P02 DETAIL: pushed WAL file '00000007000000000000002C' to the archive
+P01 DETAIL: pushed WAL file '00000007000000000000002D' to the archive
 P00   INFO: archive-push:async command end: completed successfully
 ```
-
 
 ### Archive Get
 
@@ -3314,37 +3519,26 @@ sudo -u postgres cat /var/log/pgbackrest/demo-archive-get-async.log
 
 ```text
 -------------------PROCESS START-------------------
-P00   INFO: archive-get:async command begin 2.59.0: [000000070000000000000024, 000000070000000000000025, 000000070000000000000026, 000000070000000000000027, 000000070000000000000028, 000000070000000000000029, 00000007000000000000002A, 00000007000000000000002B] --archive-async --exec-id=707-b9ced134 --log-level-console=off --log-level-file=detail --log-level-stderr=off --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --process-max=2 --repo1-host=repository --spool-path=/var/spool/pgbackrest --stanza=demo
+P00   INFO: archive-get:async command begin 2.59.1: [000000070000000000000024, 000000070000000000000025, 000000070000000000000026, 000000070000000000000027, 000000070000000000000028, 000000070000000000000029, 00000007000000000000002A, 00000007000000000000002B] --archive-async --exec-id=719-dc191549 --log-level-console=off --log-level-file=detail --log-level-stderr=off --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --process-max=2 --repo1-host=repository --spool-path=/var/spool/pgbackrest --stanza=demo
 P00   INFO: get 8 WAL file(s) from archive: 000000070000000000000024...00000007000000000000002B
-
-P01 DETAIL: found 000000070000000000000024 in the repo1: 17-1 archive
 P02 DETAIL: found 000000070000000000000025 in the repo1: 17-1 archive
-P01 DETAIL: found 000000070000000000000026 in the repo1: 17-1 archive
-P02 DETAIL: found 000000070000000000000027 in the repo1: 17-1 archive
-
+P01 DETAIL: found 000000070000000000000024 in the repo1: 17-1 archive
+P02 DETAIL: found 000000070000000000000026 in the repo1: 17-1 archive
+P01 DETAIL: found 000000070000000000000027 in the repo1: 17-1 archive
 P00 DETAIL: unable to find 000000070000000000000028 in the archive
 P00   INFO: archive-get:async command end: completed successfully
        [filtered 14 lines of output]
-P00   INFO: archive-get:async command begin 2.59.0: [000000070000000000000028, 000000070000000000000029, 00000007000000000000002A, 00000007000000000000002B, 00000007000000000000002C, 00000007000000000000002D, 00000007000000000000002E, 00000007000000000000002F] --archive-async --exec-id=752-5e97a136 --log-level-console=off --log-level-file=detail --log-level-stderr=off --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --process-max=2 --repo1-host=repository --spool-path=/var/spool/pgbackrest --stanza=demo
+P00   INFO: archive-get:async command begin 2.59.1: [000000070000000000000028, 000000070000000000000029, 00000007000000000000002A, 00000007000000000000002B, 00000007000000000000002C, 00000007000000000000002D, 00000007000000000000002E, 00000007000000000000002F] --archive-async --exec-id=771-11074399 --log-level-console=off --log-level-file=detail --log-level-stderr=off --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --process-max=2 --repo1-host=repository --spool-path=/var/spool/pgbackrest --stanza=demo
 P00   INFO: get 8 WAL file(s) from archive: 000000070000000000000028...00000007000000000000002F
-
 P01 DETAIL: found 000000070000000000000028 in the repo1: 17-1 archive
 P02 DETAIL: found 000000070000000000000029 in the repo1: 17-1 archive
 P01 DETAIL: found 00000007000000000000002A in the repo1: 17-1 archive
-
-P00 DETAIL: unable to find 00000007000000000000002B in the archive
-P00   INFO: archive-get:async command end: completed successfully
-       [filtered 2 lines of output]
-P00   INFO: archive-get:async command begin 2.59.0: [00000007000000000000002B, 00000007000000000000002C, 00000007000000000000002D, 00000007000000000000002E, 00000007000000000000002F, 000000070000000000000030, 000000070000000000000031] --archive-async --exec-id=761-af866388 --log-level-console=off --log-level-file=detail --log-level-stderr=off --no-log-timestamp --pg1-path=/var/lib/postgresql/17/demo --process-max=2 --repo1-host=repository --spool-path=/var/spool/pgbackrest --stanza=demo
-P00   INFO: get 7 WAL file(s) from archive: 00000007000000000000002B...000000070000000000000031
-
-P02 DETAIL: found 00000007000000000000002C in the repo1: 17-1 archive
-P01 DETAIL: found 00000007000000000000002B in the repo1: 17-1 archive
+P02 DETAIL: found 00000007000000000000002B in the repo1: 17-1 archive
 P02 DETAIL: found 00000007000000000000002D in the repo1: 17-1 archive
-
+P01 DETAIL: found 00000007000000000000002C in the repo1: 17-1 archive
 P00 DETAIL: unable to find 00000007000000000000002E in the archive
 P00   INFO: archive-get:async command end: completed successfully
-       [filtered 17 lines of output]
+       [filtered 9 lines of output]
 ```
 
 pg-primary **⇒** Fix streaming replication by changing the replication password
@@ -3353,10 +3547,9 @@ pg-primary **⇒** Fix streaming replication by changing the replication passwor
 sudo -u postgres psql -c "alter user replicator password 'jw8s0F4'"
 ```
 
-```sql
+```text
 ALTER ROLE
 ```
-
 
 --------
 
@@ -3368,18 +3561,35 @@ repository:`/etc/pgbackrest/pgbackrest.conf` **⇒** Configure `pg2-host`/`pg2-h
 
 ```ini
 [demo]
+
 pg1-host=pg-primary
+
 pg1-path=/var/lib/postgresql/17/demo
+
 pg2-host=pg-standby
+
 pg2-path=/var/lib/postgresql/17/demo
+
+
+
 [demo-alt]
+
 pg1-host=pg-alt
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 backup-standby=y
+
 process-max=3
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-full=2
+
 start-fast=y
 ```
 
@@ -3395,17 +3605,14 @@ sudo -u pgbackrest pgbackrest --stanza=demo --log-level-console=detail backup
        [filtered 2 lines of output]
 P00   INFO: execute backup start: backup begins after the requested immediate checkpoint completes
 P00   INFO: backup start archive = 00000007000000000000002F, lsn = 0/2F000028
-
 P00   INFO: wait for replay on the standby to reach 0/2F000028
 P00   INFO: replay on the standby reached 0/2F000028
-
 P00   INFO: check archive for prior segment 00000007000000000000002E
-
-P01 DETAIL: backup file pg-primary:/var/lib/postgresql/17/demo/global/pg_control (8KB, 0.53%) checksum 2fef26e26ab8ddbe9e264353b23ff2e2dc12d814
-
-P01 DETAIL: match file from prior backup pg-primary:/var/lib/postgresql/17/demo/pg_logical/replorigin_checkpoint (8B, 0.53%) checksum 347fc8f2df71bd4436e38bd1516ccd7ea0d46532
-P02 DETAIL: backup file pg-standby:/var/lib/postgresql/17/demo/base/5/1249 (448KB, 30.16%) checksum 317023e2773903a20f6633ef1ae9066fccbf9192
-       [filtered 1278 lines of output]
+P04 DETAIL: backup file pg-standby:/var/lib/postgresql/17/demo/base/5/1247 (120KB, 7.94%) checksum fa2fb6657bf9785e320a8a5516851de78d7a7a33
+P01 DETAIL: backup file pg-primary:/var/lib/postgresql/17/demo/global/pg_control (8KB, 8.47%) checksum 285bd888f4f957a70cbfd99129b783f2b523b529
+P01 DETAIL: match file from prior backup pg-primary:/var/lib/postgresql/17/demo/pg_logical/replorigin_checkpoint (8B, 8.47%) checksum 347fc8f2df71bd4436e38bd1516ccd7ea0d46532
+P02 DETAIL: backup file pg-standby:/var/lib/postgresql/17/demo/base/5/1249 (448KB, 38.10%) checksum 3b6f5ca3b766aa5972894958f6b2f4d0d98f0228
+       [filtered 1277 lines of output]
 ```
 
 This incremental backup shows that most of the files are copied from the pg-standby host and only a few are copied from the pg-primary host.
@@ -3442,7 +3649,6 @@ pg-primary **⇒** Create new cluster and perform the upgrade
 ```bash
 sudo -u postgres /usr/lib/postgresql/18/bin/initdb \
        -D /var/lib/postgresql/18/demo -k -A peer
-
 sudo pg_createcluster 18 demo
 sudo -u postgres sh -c 'cd /var/lib/postgresql && \
        /usr/lib/postgresql/18/bin/pg_upgrade \
@@ -3457,9 +3663,7 @@ sudo -u postgres sh -c 'cd /var/lib/postgresql && \
 ```text
        [filtered 44 lines of output]
 Checking for extension updates                                ok
-
 Upgrade Complete
-
 ----------------
 Some statistics are not transferred by pg_upgrade.
        [filtered 4 lines of output]
@@ -3471,6 +3675,7 @@ pg-primary:`/etc/postgresql/18/demo/postgresql.conf` **⇒** Configure PostgreSQ
 
 ```ini
 archive_command = 'pgbackrest --stanza=demo archive-push %p'
+
 archive_mode = on
 ```
 
@@ -3480,15 +3685,31 @@ pg-primary:`/etc/pgbackrest/pgbackrest.conf` **⇒** Upgrade the `pg1-path`
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/18/demo
+
+
+
 [global]
+
 archive-async=y
+
 log-level-file=detail
+
 repo1-host=repository
+
 spool-path=/var/spool/pgbackrest
+
+
+
 [global:archive-get]
+
 process-max=2
+
+
+
 [global:archive-push]
+
 process-max=2
 ```
 
@@ -3496,16 +3717,33 @@ pg-standby:`/etc/pgbackrest/pgbackrest.conf` **⇒** Upgrade the `pg-path`
 
 ```ini
 [demo]
+
 pg1-path=/var/lib/postgresql/18/demo
+
 recovery-option=primary_conninfo=host=172.17.0.6 port=5432 user=replicator
+
+
+
 [global]
+
 archive-async=y
+
 log-level-file=detail
+
 repo1-host=repository
+
 spool-path=/var/spool/pgbackrest
+
+
+
 [global:archive-get]
+
 process-max=2
+
+
+
 [global:archive-push]
+
 process-max=2
 ```
 
@@ -3513,18 +3751,35 @@ repository:`/etc/pgbackrest/pgbackrest.conf` **⇒** Upgrade `pg1-path` and `pg2
 
 ```ini
 [demo]
+
 pg1-host=pg-primary
+
 pg1-path=/var/lib/postgresql/18/demo
+
 pg2-host=pg-standby
+
 pg2-path=/var/lib/postgresql/18/demo
+
+
+
 [demo-alt]
+
 pg1-host=pg-alt
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 backup-standby=n
+
 process-max=3
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-full=2
+
 start-fast=y
 ```
 
@@ -3545,9 +3800,8 @@ sudo -u postgres pgbackrest --stanza=demo --no-online \
 ```
 
 ```text
-P00   INFO: stanza-upgrade command begin 2.59.0: --exec-id=3008-04f6b03b --log-level-console=info --log-level-file=detail --no-log-timestamp --no-online --pg1-path=/var/lib/postgresql/18/demo --repo1-host=repository --stanza=demo
+P00   INFO: stanza-upgrade command begin 2.59.1: --exec-id=2952-4ae81a5e --log-level-console=info --log-level-file=detail --no-log-timestamp --no-online --pg1-path=/var/lib/postgresql/18/demo --repo1-host=repository --stanza=demo
 P00   INFO: stanza-upgrade for stanza 'demo' on repo1
-
 P00   INFO: stanza-upgrade command end: completed successfully
 ```
 
@@ -3595,7 +3849,7 @@ sudo -u pgbackrest pgbackrest --stanza=demo check
 
 ```text
 P00   WARN: unable to check pg2: [DbConnectError] raised from remote-0 ssh protocol on 'pg-standby': unable to connect to 'dbname='postgres' port=5432': connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
-            	Is the server running locally and accepting connections on that socket?
+                Is the server running locally and accepting connections on that socket?
 ```
 
 Run a full backup on the new cluster and then restore the standby from the backup. The backup type will automatically be changed to `full` if `incr` or `diff` is requested.
@@ -3612,12 +3866,6 @@ pg-standby **⇒** Restore the demo standby cluster
 sudo -u postgres pgbackrest --stanza=demo --delta --type=standby restore
 ```
 
-pg-standby:`/etc/postgresql/18/demo/postgresql.conf` **⇒** Configure PostgreSQL
-
-```ini
-hot_standby = on
-```
-
 pg-standby **⇒** Start PostgreSQL and check the pgBackRest configuration
 
 ```bash
@@ -3631,17 +3879,34 @@ repository:`/etc/pgbackrest/pgbackrest.conf` **⇒** Re-enable backup from stand
 
 ```ini
 [demo]
+
 pg1-host=pg-primary
+
 pg1-path=/var/lib/postgresql/18/demo
+
 pg2-host=pg-standby
+
 pg2-path=/var/lib/postgresql/18/demo
+
+
+
 [demo-alt]
+
 pg1-host=pg-alt
+
 pg1-path=/var/lib/postgresql/17/demo
+
+
+
 [global]
+
 backup-standby=y
+
 process-max=3
+
 repo1-path=/var/lib/pgbackrest
+
 repo1-retention-full=2
+
 start-fast=y
 ```

@@ -23,7 +23,7 @@ pgbackrest:
   copyright: Copyright (c) 2015-2026 The PostgreSQL Global Development Group and David Steele
   license: MIT
   notice: /attribution/#pgbackrest
-  ref: v2.59.0
+  ref: v2.59.1
   modified: true
 
 pgbouncer:

@@ -28,7 +28,7 @@ which licence, and where the complete upstream notice is retained.
 | Component | Upstream work | Pinned at | Licence | Retained notice |
 |---|---|---|---|---|
 | [Patroni](/patroni/) | [Patroni documentation](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/pgbackrest/) | [pgBackRest documentation](https://pgbackrest.org/) | v2.59.0 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [pgBackRest](/pgbackrest/) | [pgBackRest documentation](https://pgbackrest.org/) | v2.59.1 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
 | [PgBouncer](/pgbouncer/) | [PgBouncer documentation](https://www.pgbouncer.org/) | v1.25.2 | [ISC](https://opensource.org/license/isc-license-txt) | [Upstream `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/master/COPYRIGHT) |
 | [pgBadger](/pgbadger/) | [pgBadger documentation](https://pgbadger.darold.net/) | v13.2, commit `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/haproxy/) | [HAProxy 3.4 manuals](https://docs.haproxy.org/3.4/) | v3.4.3, commit `80ea565` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
@@ -50,8 +50,9 @@ the [MIT License](https://opensource.org/license/mit). The complete licence text
 
 ## pgBackRest {#pgbackrest}
 
-Imported on 2026-08-15 from the [pgBackRest documentation site](https://pgbackrest.org/) for
-**v2.59.0**, with a Simplified Chinese translation prepared alongside it.
+Imported on 2026-08-15 and refreshed on 2026-08-30 from the
+[pgBackRest documentation site](https://pgbackrest.org/) for **v2.59.1**, with a Simplified
+Chinese translation maintained alongside it.
 
 pgBackRest is copyright (c) 2015-2026 The PostgreSQL Global Development Group and David Steele,
 and is distributed under the [MIT License](https://opensource.org/license/mit). The complete
