@@ -3,7 +3,7 @@
                           Configuration Manual
                          ----------------------
                               version 3.4
-                              2026/07/29
+                              2026/08/27
 
 
 This document covers the configuration language as implemented in the version
@@ -6029,6 +6029,10 @@ of defaults sections. This can be convenient to establish certain configuration
 profiles to carry groups of default settings (e.g. TCP vs HTTP or short vs long
 timeouts) but can quickly become confusing to follow.
 
+By default, named defaults sections are preserved after configuration parsing.
+This allows to reuse them for dynamic backends creation. This behavior can be
+changed globally via "tune.defaults.purge" keyword.
+
 All proxy names must be formed from upper and lower case letters, digits,
 '-' (dash), '_' (underscore) , '.' (dot) and ':' (colon). ACL names are
 case-sensitive, which means that "www" and "WWW" are two different proxies.
@@ -6152,6 +6156,7 @@ Note: Some dangerous and not recommended directives are intentionnaly not
 acl                                       X (!)      X         X         X
 backlog                                   X          X         X         -
 balance                                   X          -         X         X
+be-unpublished                            -          -         X         X
 bind                                      -          X         X         -
 capture cookie                            -          X         X         -
 capture request header                    -          X         X         -
@@ -6754,6 +6759,26 @@ balance url_param <param> [check_post]
       type message bodies.
 
   See also : "dispatch", "cookie", "transparent", "hash-type".
+
+
+be-unpublished
+  Instructs the backend to start in the unpublished state.
+
+  May be used in the following contexts: tcp, http, log
+
+  May be used in sections :   defaults | frontend | listen | backend
+                                  no   |    no    |   yes  |   yes
+
+  In effect, any use_backend and default_backend rules from another proxy which
+  reference the current proxy are ignored and the next content switching rules
+  are evaluated. This can be bypassed though via a "force-be-switch" rule.
+
+  This state is similar to the disabled one but with some differences. First,
+  an unpublished backend will still be fully initialized, including the server
+  health checks which remain active. Finally, a backend can be publicly exposed
+  via the command "publish backend" on the CLI. See the management manual.
+
+  See also : "force-be-switch"
 
 
 bind [<address>]:<port_range> [, ...] [param*]
@@ -8041,7 +8066,7 @@ force-be-switch { if | unless } <condition>
   May be used in sections:    defaults | frontend | listen | backend
                                  no    |   yes    |   yes  |   no
 
-  See also : "disabled"
+  See also : "be-unpublished", "disabled"
 
 
 filter <name> [param*]
@@ -20519,7 +20544,11 @@ process-vary <on/off>
   (which might come with a cpu cost) which will be used to build a secondary
   key for a given request (see RFC 7234#4.1). The secondary key is built out of
   the contents of the 'accept-encoding', 'referer' and 'origin' headers for
-  now. The default value is off (disabled).
+  now. Note that the 'origin' and 'referer' headers are single-valued per the
+  RFC, so a request carrying more than one occurrence of either should be
+  considered malformed. For such requests no secondary key is built and the
+  response is never delivered from the cache so that we can let the server
+  decide how to handle the situation. The default value is off (disabled).
 
 total-max-size <megabytes>
   Define the size in RAM of the cache in megabytes. This size is split in
@@ -21210,6 +21239,7 @@ fe_exists                                          string       boolean
 field(index,delimiters[,count])                    string       string
 fix_is_valid                                       binary       boolean
 fix_tag_value(tag)                                 binary       binary
+has_ctl([mask])                                    binary       boolean
 hex                                                binary       string
 hex2i                                              binary       integer
 hmac(algorithm,key)                                binary       binary
@@ -21792,6 +21822,24 @@ fix_tag_value(<tag>)
       # MsgType tag ID is 35, so both lines below will return the same content
       tcp-request content set-var(txn.foo) req.payload(0,0),fix_tag_value(35)
       tcp-request content set-var(txn.bar) req.payload(0,0),fix_tag_value(MsgType)
+
+has_ctl([mask])
+  Checks the input binary sample for control characters as defined by the mask
+  argument. The mask is a 33-bit number (either decimal or hexadecimal prefixed
+  by "0x"), which has one bit set for each character to be detected in the 0x00
+  to 0x1F range, and bit 32 set to match the DEL character (0x7F). When no mask
+  is specified, the converter will use value 0x1FFFFFDFF, matching all control
+  characters except TAB (0x09), which is commonly used in HTTP headers. The
+  special mask "any" corresponds to 0x1FFFFFFFF which will match all control
+  characters, TAB included. The special mask "http" corresponds to 0x2401 and
+  will only cause the control characterss forbidden in HTTP header values to be
+  matched, which are CR (0x0D), LF (0x0A) and NUL (0x00).
+
+  Examples:
+    # reject presence of DEL, CR, LF, NUL characters in the referer header
+    http-request deny if { req.fhdr(referer),has_ctl(0x100002401) }
+    # reject presence of any control char but tab in any HTTP header value
+    http-request deny if { req.hdr(),has_ctl }
 
 hex
   Converts a binary input sample to a hex string containing two hex digits per
@@ -26420,6 +26468,9 @@ ssl_c_i_dn([<entry>[,<occ>[,<format>]]]) : string
   LDAP v3.
   If you'd like to modify the format only you can specify an empty string
   and zero for the first two parameters. Example: ssl_c_i_dn(,0,rfc2253)
+  If the requested entry's ASN.1 value (or, when no <entry> is specified,
+  any entry in the DN) contains an embedded NUL byte followed by other
+  data, it is considered malformed and no data is returned.
 
 ssl_c_key_alg : string
   Returns the name of the algorithm used to generate the key of the certificate
@@ -26449,6 +26500,9 @@ ssl_c_r_dn([<entry>[,<occ>[,<format>]]]) : string
   different protocols. Currently supported is rfc2253 for LDAP v3. If you'd like
   to modify the format only you can specify an empty string and zero for the
   first two parameters. Example: ssl_c_r_dn(,0,rfc2253)
+  If the requested entry's ASN.1 value (or, when no <entry> is specified,
+  any entry in the DN) contains an embedded NUL byte followed by other
+  data, it is considered malformed and no data is returned.
 
 ssl_c_s_dn([<entry>[,<occ>[,<format>]]]) : string
   When the incoming connection was made over an SSL/TLS transport layer,
@@ -26464,6 +26518,9 @@ ssl_c_s_dn([<entry>[,<occ>[,<format>]]]) : string
   LDAP v3.
   If you'd like to modify the format only you can specify an empty string
   and zero for the first two parameters. Example: ssl_c_s_dn(,0,rfc2253)
+  If the requested entry's ASN.1 value (or, when no <entry> is specified,
+  any entry in the DN) contains an embedded NUL byte followed by other
+  data, it is considered malformed and no data is returned.
 
 ssl_c_san : string
   When the incoming connection was made over an SSL/TLS transport layer, and was
@@ -26535,6 +26592,9 @@ ssl_f_i_dn([<entry>[,<occ>[,<format>]]]) : string
   LDAP v3.
   If you'd like to modify the format only you can specify an empty string
   and zero for the first two parameters. Example: ssl_f_i_dn(,0,rfc2253)
+  If the requested entry's ASN.1 value (or, when no <entry> is specified,
+  any entry in the DN) contains an embedded NUL byte followed by other
+  data, it is considered malformed and no data is returned.
 
 ssl_f_key_alg : string
   Returns the name of the algorithm used to generate the key of the certificate
@@ -26565,6 +26625,9 @@ ssl_f_s_dn([<entry>[,<occ>[,<format>]]]) : string
   LDAP v3.
   If you'd like to modify the format only you can specify an empty string
   and zero for the first two parameters. Example: ssl_f_s_dn(,0,rfc2253)
+  If the requested entry's ASN.1 value (or, when no <entry> is specified,
+  any entry in the DN) contains an embedded NUL byte followed by other
+  data, it is considered malformed and no data is returned.
 
 ssl_f_serial : binary
   Returns the serial of the certificate presented by the frontend when the
@@ -26990,6 +27053,9 @@ ssl_s_i_dn([<entry>[,<occ>[,<format>]]]) : string
   LDAP v3.
   If you'd like to modify the format only you can specify an empty string
   and zero for the first two parameters. Example: ssl_s_i_dn(,0,rfc2253)
+  If the requested entry's ASN.1 value (or, when no <entry> is specified,
+  any entry in the DN) contains an embedded NUL byte followed by other
+  data, it is considered malformed and no data is returned.
 
 ssl_s_key_alg : string
   Returns the name of the algorithm used to generate the key of the certificate
@@ -27020,6 +27086,9 @@ ssl_s_s_dn([<entry>[,<occ>[,<format>]]]) : string
   LDAP v3.
   If you'd like to modify the format only you can specify an empty string
   and zero for the first two parameters. Example: ssl_s_s_dn(,0,rfc2253)
+  If the requested entry's ASN.1 value (or, when no <entry> is specified,
+  any entry in the DN) contains an embedded NUL byte followed by other
+  data, it is considered malformed and no data is returned.
 
 ssl_s_serial : binary
   Returns the serial of the certificate presented by the server when the
@@ -27248,7 +27317,10 @@ req.ssl_alpn : string
   request buffer and not to the contents deciphered via an SSL data layer, so
   this will not work with "bind" lines having the "ssl" option. This is useful
   in ACL to make a routing decision based upon the ALPN preferences of a TLS
-  client, like in the example below. See also "ssl_fc_alpn".
+  client, like in the example below. See also "ssl_fc_alpn". This fetch only
+  analyzes the first ClientHello message found in the request buffer, see the
+  "req.ssl_sni" keyword documentation for more details about the implications
+  of this limitation (HelloRetryRequest, Renegotiation, Encrypted Client Hello).
 
   Examples :
      # Wait for a client hello for at most 5 seconds
@@ -27263,7 +27335,11 @@ req.ssl_cipherlist binary
   only applies to raw contents found in the request buffer and not to contents
   deciphered via an SSL data layer, so this will not work with "bind" lines
   having the "ssl" option. Refer to "ssl_fc_cipherlist_bin" which is the SSL
-  bind equivalent that can be used when the "ssl" option is specified.
+  bind equivalent that can be used when the "ssl" option is specified. This
+  fetch only analyzes the first ClientHello message found in the request
+  buffer, see the "req.ssl_sni" keyword documentation for more details about
+  the implications of this limitation (HelloRetryRequest, Renegotiation,
+  Encrypted Client Hello).
 
   Examples :
     # Wait for a client hello for at most 5 seconds
@@ -27279,7 +27355,10 @@ req.ssl_ec_ext : boolean
   certificate and to use RSA for all others, on the same IP address. Note that
   this only applies to raw contents found in the request buffer and not to
   contents deciphered via an SSL data layer, so this will not work with "bind"
-  lines having the "ssl" option.
+  lines having the "ssl" option. This fetch only analyzes the first
+  ClientHello message found in the request buffer, see the "req.ssl_sni"
+  keyword documentation for more details about the implications of this
+  limitation (HelloRetryRequest, Renegotiation, Encrypted Client Hello).
 
 req.ssl_hello_type : integer
 req_ssl_hello_type : integer (deprecated)
@@ -27289,7 +27368,11 @@ req_ssl_hello_type : integer (deprecated)
   contents found in the request buffer and not to contents deciphered via an
   SSL data layer, so this will not work with "bind" lines having the "ssl"
   option. This is mostly used in ACL to detect presence of an SSL hello message
-  that is supposed to contain an SSL session ID usable for stickiness.
+  that is supposed to contain an SSL session ID usable for stickiness. This
+  fetch only analyzes the first ClientHello message found in the request
+  buffer, see the "req.ssl_sni" keyword documentation for more details about
+  the implications of this limitation (HelloRetryRequest, Renegotiation,
+  Encrypted Client Hello).
 
 req.ssl_keyshare_groups binary
   Return the binary format of the list of cryptographic parameters for key exchange
@@ -27297,7 +27380,10 @@ req.ssl_keyshare_groups binary
   is part of the ClientHello message and is the final client hello extension. Note
   that this only applies to raw contents found in the request buffer and not to
   contents deciphered via an  SSL data layer, so this will not work with "bind"
-  lines having the "ssl" option.
+  lines having the "ssl" option. This fetch only analyzes the first ClientHello
+  message found in the request buffer, see the "req.ssl_sni" keyword
+  documentation for more details about the implications of this limitation
+  (HelloRetryRequest, Renegotiation, Encrypted Client Hello).
 
   Examples :
     # Wait for a client hello for at most 5 seconds
@@ -27313,7 +27399,10 @@ req.ssl_sigalgs binary
   buffer and not to contents deciphered via an SSL data layer, so this will not
   work with "bind" lines having the "ssl" option. Refer to "ssl_fc_sigalgs_bin"
   which is the SSL bind equivalent that can be used when the "ssl" option is
-  specified.
+  specified. This fetch only analyzes the first ClientHello message found in
+  the request buffer, see the "req.ssl_sni" keyword documentation for more
+  details about the implications of this limitation (HelloRetryRequest,
+  Renegotiation, Encrypted Client Hello).
 
   Examples :
     # Wait for a client hello for at most 5 seconds
@@ -27333,11 +27422,30 @@ req_ssl_sni : string (deprecated)
   implicit TLS based protocols like HTTPS (443), IMAPS (993), SMTPS (465),
   however it will not work for explicit TLS based protocols, like SMTP (25/587)
   or IMAP (143). SNI normally contains the name of the host the client tries to
-  connect to (for recent browsers). SNI is useful for allowing or denying access
-  to certain hosts when SSL/TLS is used by the client. This test was designed to
-  be used with TCP request content inspection. If content switching is needed,
-  it is recommended to first wait for a complete client hello (type 1), like in
-  the example below. See also "ssl_fc_sni".
+  connect to (for recent browsers). This test was designed to be used with TCP
+  request content inspection. If content switching is needed, it is
+  recommended to first wait for a complete client hello (type 1), like in the
+  example below. See also "ssl_fc_sni". Beware that, for the reasons detailed
+  below (HelloRetryRequest, Renegotiation, Encrypted Client Hello), the value
+  returned by this fetch is not reliable enough to be used alone for allowing
+  or denying access to certain hosts.
+
+  This fetch only parses the first ClientHello message found in the request
+  buffer. If the client sends several ClientHello messages within the same
+  TCP stream, for instance because the server requested a HelloRetryRequest
+  (HRR) as part of TLS 1.3, or because the client initiates a TLS
+  renegotiation (which sends a new ClientHello later in the same TCP stream,
+  possibly carrying a different SNI), only the SNI carried by that very first
+  ClientHello will be returned, the content of any subsequent ClientHello
+  will be ignored.
+
+  When Encrypted Client Hello (ECH) is used, the ClientHello seen on the wire
+  is only the "Outer" ClientHello, which embeds the real, encrypted "Inner"
+  ClientHello. The SNI extracted by this fetch in that case is the one from
+  the Outer ClientHello, which is a decoy SNI and not the actual host the
+  client intends to reach. This fetch is currently not able to decrypt nor
+  analyze the Inner ClientHello, so it must not be relied upon to make
+  routing or access control decisions when ECH is in use.
 
   ACL derivatives :
     req.ssl_sni : exact string match
@@ -27358,7 +27466,10 @@ req.ssl_st_ext : integer
   "bind" lines having the "ssl" option. This can for example be used to detect
   whether the client sent a SessionTicket or not and stick it accordingly, if
   no SessionTicket then stick on SessionID or don't stick as there's no server
-  side state is there when SessionTickets are in use.
+  side state is there when SessionTickets are in use. This fetch only analyzes
+  the first ClientHello message found in the request buffer, see the
+  "req.ssl_sni" keyword documentation for more details about the implications
+  of this limitation (HelloRetryRequest, Renegotiation, Encrypted Client Hello).
 
 req.ssl_supported_groups binary
   Returns the binary form of the list of supported groups supported by the client
@@ -27367,7 +27478,10 @@ req.ssl_supported_groups binary
   contents found in the request buffer and not to contents deciphered via an SSL
   data layer, so this will not  work with "bind" lines having the "ssl" option.
   Refer to "ssl_fc_eclist_bin" which is the SSL bind equivalent that can be used
-  when the "ssl" option is specified.
+  when the "ssl" option is specified. This fetch only analyzes the first
+  ClientHello message found in the request buffer, see the "req.ssl_sni"
+  keyword documentation for more details about the implications of this
+  limitation (HelloRetryRequest, Renegotiation, Encrypted Client Hello).
 
   Examples :
     # Wait for a client hello for at most 5 seconds
@@ -27386,7 +27500,10 @@ req_ssl_ver : integer (deprecated)
   buffer and not to contents deciphered via an SSL data layer, so this will not
   work with "bind" lines having the "ssl" option. The ACL version of the test
   matches against a decimal notation in the form MAJOR.MINOR (e.g. 3.1). This
-  fetch is mostly used in ACL.
+  fetch is mostly used in ACL. This fetch only analyzes the first ClientHello
+  message found in the request buffer, see the "req.ssl_sni" keyword
+  documentation for more details about the implications of this limitation
+  (HelloRetryRequest, Renegotiation, Encrypted Client Hello).
 
   ACL derivatives :
     req.ssl_ver : decimal match

@@ -14,9 +14,9 @@ from pathlib import Path
 PROJECT = Path(__file__).resolve().parent.parent
 SOURCE_ROOT = PROJECT / "sources" / "haproxy" / "upstream"
 CONTENT = PROJECT / "content" / "haproxy"
-UPSTREAM_VERSION = "3.4.3"
+UPSTREAM_VERSION = "3.4.4"
 UPSTREAM_TAG = f"v{UPSTREAM_VERSION}"
-UPSTREAM_COMMIT = "80ea565fdefbc34ec82d7374d7d19b0107231379"
+UPSTREAM_COMMIT = "7f03ae65c28605152c7a1a9ba7d9d0bcfb50f8b0"
 DOCS_BASE = "https://docs.haproxy.org/3.4"
 SOURCE_BASE = "https://git.haproxy.org/?p=haproxy-3.4.git;a=blob"
 BACKSLASH_TOKEN = "HAPROXYBACKSLASHPLACEHOLDER"
@@ -894,7 +894,7 @@ the three core HAProxy 3.4 manuals, reorganized as one flat Markdown reading seq
 | Manual | Upstream source | Local organization |
 | --- | ---: | ---: |
 | Starter Guide | 1,695 lines | 9 flat topic pages |
-| Configuration Manual | 33,031 lines | 12 flat chapter pages |
+| Configuration Manual | 33,148 lines | 12 flat chapter pages |
 | Management Guide | 5,285 lines | 13 flat chapter pages |
 
 All 34 reading pages live directly under the HAProxy component root. Three non-linking divider

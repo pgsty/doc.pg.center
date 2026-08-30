@@ -5,23 +5,23 @@ This directory records the complete material used to build the three HAProxy man
 
 ## Snapshot identity
 
-- Imported: 2026-08-16 (Asia/Shanghai)
+- Imported: 2026-08-16; refreshed: 2026-08-30 (Asia/Shanghai)
 - Official rendered guide: <https://docs.haproxy.org/3.4/intro.html>
 - Official maintenance repository: <https://git.haproxy.org/?p=haproxy-3.4.git>
-- Upstream tag: `v3.4.3`
-- Peeled tag commit: `80ea565fdefbc34ec82d7374d7d19b0107231379`
-- Upstream release date: 2026-07-29
+- Upstream tag: `v3.4.4`
+- Peeled tag commit: `7f03ae65c28605152c7a1a9ba7d9d0bcfb50f8b0`
+- Upstream release date: 2026-08-27
 
-The rendered Starter, Configuration, and Management pages all identified themselves as HAProxy
-`3.4.3-1` during the import. The pinned source tag is the corresponding public HAProxy `3.4.3`
+The rendered Starter, Configuration, and Management pages identify themselves as HAProxy
+`3.4.4`. The pinned source tag is the corresponding public HAProxy `3.4.4`
 release and avoids silently following later 3.4 maintenance changes.
 
 ## Transformation
 
-The upstream input comprises 40,011 lines and 2,033,165 bytes across three 80-column text manuals:
+The upstream input comprises 40,128 lines and 2,040,685 bytes across three 80-column text manuals:
 
 - `doc/intro.txt`: 1,695 lines.
-- `doc/configuration.txt`: 33,031 lines and 12 top-level chapters.
+- `doc/configuration.txt`: 33,148 lines and 12 top-level chapters.
 - `doc/management.txt`: 5,285 lines and 13 top-level chapters.
 
 The local edition preserves their complete English prose while adapting the presentation for

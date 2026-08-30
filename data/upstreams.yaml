@@ -47,7 +47,7 @@ haproxy:
   copyright: Copyright 2000-2026 Willy Tarreau
   license: GPL-2.0-only
   notice: /attribution/#haproxy
-  ref: v3.4.3
+  ref: v3.4.4
   modified: true
 
 etcd:

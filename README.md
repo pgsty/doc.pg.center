@@ -50,7 +50,7 @@ and pager.
 
 The first import was assembled from paired documentation trees in `pigsty.io` and `pigsty.cc`.
 pgBadger was imported from a pinned upstream source commit together with a live website snapshot and
-offline report examples. HAProxy is generated from the official `v3.4.3` Starter, Configuration,
+offline report examples. HAProxy is generated from the official `v3.4.4` Starter, Configuration,
 and Management texts and retains the upstream GPLv2 terms. etcd is adapted from a pinned official
 3.7 website source tree. Imported pages retain their source notices. See
 [NOTICE.md](NOTICE.md), [sources/pgbadger/SOURCE.md](sources/pgbadger/SOURCE.md), and

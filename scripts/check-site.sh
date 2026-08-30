@@ -129,8 +129,8 @@ grep -Fq 'title: "PgBouncer 1.25.2 Documentation"' "$content_dir/pgbouncer/_inde
 grep -Fq 'title: "PgBouncer 1.25.2 中文文档"' "$content_dir/pgbouncer/_index.zh.md"
 grep -Fq 'title: "pgBadger 13.2 Documentation"' "$content_dir/pgbadger/_index.md"
 grep -Fq 'title: "pgBadger 13.2 中文文档"' "$content_dir/pgbadger/_index.zh.md"
-grep -Fq 'title: "HAProxy 3.4.3 Documentation"' "$content_dir/haproxy/_index.md"
-grep -Fq 'title: "HAProxy 3.4.3 中文文档"' "$content_dir/haproxy/_index.zh.md"
+grep -Fq 'title: "HAProxy 3.4.4 Documentation"' "$content_dir/haproxy/_index.md"
+grep -Fq 'title: "HAProxy 3.4.4 中文文档"' "$content_dir/haproxy/_index.zh.md"
 grep -Fq 'title: "etcd 3.7 Documentation"' "$content_dir/etcd/_index.md"
 grep -Fq 'title: "etcd 3.7 中文文档"' "$content_dir/etcd/_index.zh.md"
 
@@ -350,7 +350,7 @@ done
 
 (cd "$project_dir/sources/pgbadger" && shasum -a 256 -c SHA256SUMS >/dev/null)
 (cd "$project_dir/sources/haproxy" && shasum -a 256 -c SHA256SUMS >/dev/null)
-test "$(tr -d '\r\n' < "$project_dir/sources/haproxy/upstream/VERSION")" = '3.4.3'
+test "$(tr -d '\r\n' < "$project_dir/sources/haproxy/upstream/VERSION")" = '3.4.4'
 grep -Fq 'HAProxy Starter Guide' "$project_dir/sources/haproxy/upstream/intro.txt"
 grep -Fq 'Configuration Manual' "$project_dir/sources/haproxy/upstream/configuration.txt"
 grep -Fq 'HAProxy Management Guide' "$project_dir/sources/haproxy/upstream/management.txt"

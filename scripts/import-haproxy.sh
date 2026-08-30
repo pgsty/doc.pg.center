@@ -4,8 +4,8 @@ set -euo pipefail
 project_dir=$(cd "$(dirname "$0")/.." && pwd)
 snapshot_dir="$project_dir/sources/haproxy"
 license_dir="$project_dir/static/third_party/haproxy"
-upstream_tag=v3.4.3
-upstream_commit=80ea565fdefbc34ec82d7374d7d19b0107231379
+upstream_tag=v3.4.4
+upstream_commit=7f03ae65c28605152c7a1a9ba7d9d0bcfb50f8b0
 work_dir=$(mktemp -d "${TMPDIR:-/tmp}/pgsql-cc-haproxy.XXXXXX")
 
 trap 'rm -rf "$work_dir"' EXIT
@@ -36,7 +36,7 @@ fetch_source doc/gpl.txt GPL-2.0
 fetch_source VERSION VERSION
 fetch_source VERDATE VERDATE
 
-test "$(tr -d '\r\n' < "$work_dir/upstream/VERSION")" = '3.4.3'
+test "$(tr -d '\r\n' < "$work_dir/upstream/VERSION")" = '3.4.4'
 grep -Fq 'HAProxy Starter Guide' "$work_dir/upstream/intro.txt"
 grep -Fq 'version 3.4' "$work_dir/upstream/intro.txt"
 grep -Fq 'Configuration Manual' "$work_dir/upstream/configuration.txt"
