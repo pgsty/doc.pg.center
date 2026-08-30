@@ -80,6 +80,8 @@ process-max=1
 
 RFC-2818 does not allow wildcards to match on a dot (.) so s3 bucket names must not contain dots. If there are dots in the S3 bucket name then an error such as "unable to find hostname 'my.backup.bucket.s3.amazonaws.com' in certificate common name or subject alternative names" will occur.
 
+The exception is `repo-s3-uri-style=path`, which prepends the bucket to the URI instead of the host. Since the bucket is not part of the host name, the certificate is matched against the endpoint alone and dots in the bucket name are not a problem. Note that path-style URIs are not supported by all S3-compatible object stores.
+
 
 --------
 
