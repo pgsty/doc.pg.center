@@ -4,7 +4,7 @@ weight: 1400
 description: How to file issue reports for the etcd project
 icon: fa-solid fa-bug
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/reporting_bugs.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/reporting_bugs.md"
 ---
 
 If any part of the etcd project has bugs or documentation mistakes, please let us know by [opening an issue][etcd-issue]. We treat bugs and mistakes very seriously and believe no issue is too small. Before creating a bug report, please check that an issue reporting the same problem does not already exist.

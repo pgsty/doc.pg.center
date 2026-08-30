@@ -3,7 +3,7 @@ title: Configuration options
 weight: 4050
 description: etcd configuration files, flags, and environment variables
 categories: [Reference]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/configuration.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/configuration.md"
 ---
 
 You can configure etcd through the following:

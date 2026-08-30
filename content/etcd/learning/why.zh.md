@@ -3,7 +3,7 @@ title: etcd 与其它键值存储系统比较
 weight: 2875
 description: etcd 的历史与用途及与其他工具的比较
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/learning/why.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/why.md"
 ---
 
 etcd 这个名称源自两个理念：Unix 系统中的“/etc”目录和“d”istributed（分布式）系统。其中，“/etc”目录是用于存储单个系统配置数据的路径，而 etcd 则用于存储大规模分布式系统的配置信息。因此，“d”istributed “/etc”即为 etcd。
@@ -107,7 +107,7 @@ etcd 提供 [lock APIs][etcd-v3lock]，其基于 [租约机制][lease] 以及 [e
 [consul-json]: https://www.consul.io/api-docs#formatted-json-output
 [consul-linread]: https://www.consul.io/api-docs#consistency
 [consul-lock]: https://www.consul.io/commands/lock
-[consul-reconfig]: https://learn.hashicorp.com/tutorials/consul/add-remove-servers?in=consul/day-2-operations
+[consul-reconfig]: https://developer.hashicorp.com/consul/tutorials/datacenter-operations/add-remove-servers
 [consul-txn]: https://www.consul.io/api/kv#txn
 [consul-watch]: https://www.consul.io/docs/dynamic-app-config/watches
 [container-linux]: https://coreos.com/why

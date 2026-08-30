@@ -4,7 +4,7 @@ weight: 900
 description: Get etcd up and running in less than 5 minutes!
 icon: fa-solid fa-rocket
 categories: [Tutorial]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/quickstart.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/quickstart.md"
 ---
 
 Follow these instructions to locally install, run, and test a single-member

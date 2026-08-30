@@ -3,7 +3,7 @@ title: gRPC naming and discovery
 weight: 3500
 description: "go-grpc: for resolving gRPC endpoints with an etcd backend"
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-guide/grpc_naming.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/grpc_naming.md"
 ---
 
 etcd provides a gRPC resolver to support an alternative name system that fetches endpoints from etcd for discovering gRPC services. The underlying mechanism is based on watching updates to keys prefixed with the service name.

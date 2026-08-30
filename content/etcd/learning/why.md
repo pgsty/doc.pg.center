@@ -3,7 +3,7 @@ title: etcd versus other key-value stores
 weight: 2875
 description: History and use of etcd & comparison with other tools
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/learning/why.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/why.md"
 ---
 
 The name "etcd" originated from two ideas, the unix "/etc" folder and "d"istributed systems. The "/etc" folder is a place to store configuration data for a single system whereas etcd stores configuration information for large scale distributed systems. Hence, a "d"istributed "/etc" is "etcd".
@@ -107,7 +107,7 @@ Note that in the case of etcd keys, it can be locked efficiently because of the 
 [consul-json]: https://www.consul.io/api-docs#formatted-json-output
 [consul-linread]: https://www.consul.io/api-docs#consistency
 [consul-lock]: https://www.consul.io/commands/lock
-[consul-reconfig]: https://learn.hashicorp.com/tutorials/consul/add-remove-servers?in=consul/day-2-operations
+[consul-reconfig]: https://developer.hashicorp.com/consul/tutorials/datacenter-operations/add-remove-servers
 [consul-txn]: https://www.consul.io/api/kv#txn
 [consul-watch]: https://www.consul.io/docs/dynamic-app-config/watches
 [container-linux]: https://coreos.com/why

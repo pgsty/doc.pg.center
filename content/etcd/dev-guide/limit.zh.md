@@ -3,7 +3,7 @@ title: 系统限制
 weight: 3625
 description: "etcd 限制：请求与存储系统"
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-guide/limit.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/limit.md"
 ---
 
 ## 请求大小限制 {#request-size-limit}

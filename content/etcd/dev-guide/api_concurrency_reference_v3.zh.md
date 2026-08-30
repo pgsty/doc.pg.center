@@ -3,7 +3,7 @@ title: "API 参考：并发"
 weight: 3900
 description: "etcd 并发 API 参考"
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-guide/api_concurrency_reference_v3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/api_concurrency_reference_v3.md"
 ---
 
 本文 API 参考由命名的 `.proto` 文件自动生成。

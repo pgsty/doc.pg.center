@@ -3,7 +3,7 @@ title: Glossary
 weight: 2900
 description: Terms used in etcd documentation, command line, and source code
 categories: [Reference]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/learning/glossary.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/glossary.md"
 ---
 
 This document defines the various terms used in etcd documentation, command line and source code.

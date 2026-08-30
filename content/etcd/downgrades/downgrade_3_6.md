@@ -3,7 +3,7 @@ title: Downgrade etcd from v3.6 to v3.5
 weight: 6650
 description: Processes, checklists, and notes on downgrading etcd from v3.6 to v3.5
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/downgrades/downgrade_3_6.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/downgrades/downgrade_3_6.md"
 ---
 
 In the general case, downgrading from etcd v3.6 to v3.5 can be a zero-downtime, rolling downgrade:

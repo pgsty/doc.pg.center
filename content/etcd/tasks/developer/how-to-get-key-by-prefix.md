@@ -3,7 +3,7 @@ title: How to get keys by prefix
 description: Guide to extracting etcd keys by their prefix
 weight: 300
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/tasks/developer/how-to-get-key-by-prefix.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/developer/how-to-get-key-by-prefix.md"
 ---
 
 ## Pre-requisites

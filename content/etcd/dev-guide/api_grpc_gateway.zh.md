@@ -3,7 +3,7 @@ title: 为什么使用 gRPC 网关
 weight: 3375
 description: 为何应考虑使用 gRPC 网关
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-guide/api_grpc_gateway.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/api_grpc_gateway.md"
 ---
 
 etcd v3 使用 [gRPC][grpc] 作为其消息协议。etcd 项目包含一个基于 gRPC 的 [Go 客户端][go-client]，以及一个命令行工具 [etcdctl][etcdctl]，用于通过 gRPC 与 etcd 集群通信。对于不支持 gRPC 的语言，etcd 提供一个 JSON [gRPC 网关][grpc-gateway]。该网关提供一个 RESTful 代理，可将 HTTP/JSON 请求转换为 gRPC 消息。

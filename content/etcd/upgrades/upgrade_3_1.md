@@ -3,7 +3,7 @@ title: Upgrade etcd from 3.0 to 3.1
 weight: 6850
 description: Processes, checklists, and notes on upgrading etcd from 3.0 to 3.1
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/upgrades/upgrade_3_1.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_1.md"
 ---
 
 In the general case, upgrading from etcd 3.0 to 3.1 can be a zero-downtime, rolling upgrade:

@@ -3,7 +3,7 @@ title: Upgrade etcd from v3.5 to v3.6
 weight: 6600
 description: Processes, checklists, and notes on upgrading etcd from v3.5 to v3.6
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/upgrades/upgrade_3_6.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_6.md"
 ---
 
 In the general case, upgrading from etcd v3.5 to v3.6 can be a zero-downtime, rolling upgrade:

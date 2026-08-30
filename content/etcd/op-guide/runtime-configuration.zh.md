@@ -3,7 +3,7 @@ title: 运行时重配置
 weight: 4700
 description: etcd 增量运行时重配置支持
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/runtime-configuration.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/runtime-configuration.md"
 ---
 
 etcd 支持增量式运行时重配置，允许用户在运行时更新集群成员。

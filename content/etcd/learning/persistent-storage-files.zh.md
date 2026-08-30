@@ -3,7 +3,7 @@ title: etcd 持久化存储文件
 weight: 2650
 description: 持久化存储格式与文件参考
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/learning/persistent-storage-files.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/persistent-storage-files.md"
 ---
 
 本文介绍了 etcd 持久化存储格式：命名规则、内容结构以及可供开发者用于检查存储内容的工具。后续应随着存储模型的变更持续扩展本文内容。本文面向 etcd 开发者，旨在帮助其满足数据恢复需求。
@@ -467,7 +467,7 @@ etcd 的 WAL 日志可使用 [etcd-dump-logs](https://github.com/etcd-io/etcd/tr
 * 任期
 * 索引
 * 成员数据：
-    * <code>/0/members/8e9e05c52164694d/attributes -> <strong>{\"name\":\"default\",\"clientURLs\":[\"[http://localhost:2379\](http://localhost:2379\)"]}</strong></code>
+    * <code>/0/members/8e9e05c52164694d/attributes -> <strong>{\"name\":\"default\",\"clientURLs\":[\"http://localhost:2379\"]}</strong></code>
     * <code>/0/members/8e9e05c52164694d/RaftAttributes -> <strong>"{\"peerURLs\":[\"http://localhost:2380\"]}"</strong></code>
 * 存储版本：/0/version -> 3.5.0
 

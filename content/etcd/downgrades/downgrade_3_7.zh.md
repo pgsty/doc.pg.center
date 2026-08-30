@@ -3,7 +3,7 @@ title: 将 etcd 从 v3.7 降级到 v3.6
 weight: 6600
 description: 降级 etcd 3.7 至 3.6 的流程、检查清单与注意事项
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/downgrades/downgrade_3_7.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/downgrades/downgrade_3_7.md"
 ---
 
 在一般情况下，从 etcd v3.7 降级到 v3.6 可以实现零停机、滚动降级：

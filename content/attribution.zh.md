@@ -29,7 +29,7 @@ pgsql.cc 转载并整理了六个上游项目撰写的文档。每一个文档�
 | [PgBouncer](/zh/pgbouncer/) | [PgBouncer 文档](https://www.pgbouncer.org/) | v1.25.2 | [ISC](https://opensource.org/license/isc-license-txt) | [上游 `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/master/COPYRIGHT) |
 | [pgBadger](/zh/pgbadger/) | [pgBadger 文档](https://pgbadger.darold.net/) | v13.2，提交 `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/zh/haproxy/) | [HAProxy 3.4 手册](https://docs.haproxy.org/3.4/) | v3.4.4，提交 `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/zh/etcd/) | [etcd v3.7 文档](https://etcd.io/docs/v3.7/) | v3.7，提交 `a9ee660` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [上游 `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [etcd](/zh/etcd/) | [etcd v3.7 文档](https://etcd.io/docs/v3.7/) | v3.7，提交 `8245979` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [上游 `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 所有文档集都是**改编**而非镜像：标题、锚点、交叉链接、代码签名、页面分组与导航结构都为本站重新组织，
 上游正文本身则予以保留。页末署名会明确说明这一点，并链接到本站中该页面的修改历史。
@@ -98,8 +98,10 @@ HAProxy 自身的授权说明、OpenSSL 例外条款与完整 GPLv2 文本发布
 
 ## etcd {#etcd}
 
-从[官方 etcd v3.7 文档](https://github.com/etcd-io/website/tree/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7)
-的提交 [`a9ee660fdbf9`](https://github.com/etcd-io/website/commit/a9ee660fdbf9584deb4af639c4dc63b01413e44f) 导入。
+从官方 etcd v3.7 文档导入，并于 2026-08-30 刷新到提交
+[`824597935df6`](https://github.com/etcd-io/website/commit/824597935df6e95992ef61c07e3222f4f796ca6c)。
+固定的上游源码树为
+[`content/en/docs/v3.7`](https://github.com/etcd-io/website/tree/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7)。
 
 etcd 文档版权归 etcd Authors 所有（Copyright 2013-present）。其正文依
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 授权，代码与代码示例依

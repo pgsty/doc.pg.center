@@ -3,7 +3,7 @@ title: 如何在事务中进行多次写操作
 description: 事务性写操作指南
 weight: 500
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/tasks/developer/how-to-transactional-write.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/developer/how-to-transactional-write.md"
 ---
 
 ## 先决条件 {#prerequisites}

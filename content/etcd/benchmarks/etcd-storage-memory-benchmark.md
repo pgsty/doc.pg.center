@@ -3,7 +3,7 @@ title: Storage Memory Usage Benchmark
 weight: 5125
 description: Performance measures for etcd storage (in-memory index & page cache)
 categories: [Reference]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/benchmarks/etcd-storage-memory-benchmark.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/benchmarks/etcd-storage-memory-benchmark.md"
 ---
 
 <!---todo: link storage to storage design doc-->

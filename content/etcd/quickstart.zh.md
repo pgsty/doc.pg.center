@@ -4,7 +4,7 @@ weight: 900
 description: 不到 5 分钟即可启动并运行 etcd！
 icon: fa-solid fa-rocket
 categories: [教程]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/quickstart.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/quickstart.md"
 ---
 
 按照以下步骤本地安装、运行并测试单成员 etcd 集群：

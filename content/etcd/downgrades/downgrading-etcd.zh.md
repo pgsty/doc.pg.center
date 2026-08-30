@@ -3,7 +3,7 @@ title: 降级 etcd 集群与应用程序
 weight: 6500
 description: etcd 集群和应用降级文档列表
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/downgrades/downgrading-etcd.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/downgrades/downgrading-etcd.md"
 ---
 
 本节包含与降级 etcd 集群及应用程序相关的文档。

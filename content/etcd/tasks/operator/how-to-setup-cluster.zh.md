@@ -3,7 +3,7 @@ title: 如何搭建演示集群
 description: etcd 集群部署指南
 weight: 100
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/tasks/operator/how-to-setup-cluster.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/operator/how-to-setup-cluster.md"
 ---
 
 ![01_etcd_clustering_2016050601](/etcd/tasks/img/setup-cluster.gif)

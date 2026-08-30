@@ -4,7 +4,7 @@ weight: 1350
 description: 实时监控和调试指标
 icon: fa-solid fa-chart-line
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/metrics/_index.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/metrics/_index.md"
 ---
 
 etcd 使用 [Prometheus][prometheus] 进行指标报告。指标可用于实时监控和调试。etcd 不会持久化其指标；若成员重启，指标将被重置。

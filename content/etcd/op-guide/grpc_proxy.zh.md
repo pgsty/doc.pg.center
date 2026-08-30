@@ -3,7 +3,7 @@ title: gRPC 代理
 weight: 4350
 description: 一个无状态的 etcd 代理，运行在 gRPC 层
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/op-guide/grpc_proxy.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/grpc_proxy.md"
 ---
 
 gRPC 代理是运行在 gRPC 层（L7）的无状态 etcd 反向代理。该代理旨在降低核心 etcd 集群的总体处理负载。为实现横向扩展，代理会合并监听和租约 API 请求。为防止恶意客户端对集群造成影响，代理会缓存键范围请求。

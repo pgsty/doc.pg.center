@@ -3,7 +3,7 @@ title: 配置本地集群
 weight: 3125
 description: 配置本地集群进行测试和开发
 categories: [教程]
-upstream_link: "https://github.com/etcd-io/website/blob/a9ee660fdbf9584deb4af639c4dc63b01413e44f/content/en/docs/v3.7/dev-guide/local_cluster.md"
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/local_cluster.md"
 ---
 
 对于测试和开发部署，最快捷简便的方式是配置本地集群。对于生产部署，请参考 [clustering][clustering] 章节。
