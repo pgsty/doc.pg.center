@@ -31,7 +31,7 @@ which licence, and where the complete upstream notice is retained.
 | [pgBackRest](/pgbackrest/) | [pgBackRest documentation](https://pgbackrest.org/) | v2.59.1 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
 | [PgBouncer](/pgbouncer/) | [PgBouncer documentation](https://www.pgbouncer.org/) | v1.25.2 | [ISC](https://opensource.org/license/isc-license-txt) | [Upstream `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/master/COPYRIGHT) |
 | [pgBadger](/pgbadger/) | [pgBadger documentation](https://pgbadger.darold.net/) | v13.2, commit `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/haproxy/) | [HAProxy 3.4 manuals](https://docs.haproxy.org/3.4/) | v3.4.3, commit `80ea565` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [HAProxy](/haproxy/) | [HAProxy 3.4 manuals](https://docs.haproxy.org/3.4/) | v3.4.4, commit `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/etcd/) | [etcd v3.7 documentation](https://etcd.io/docs/v3.7/) | v3.7, commit `a9ee660` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Upstream `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 Every collection is **adapted**, not mirrored. Headings, anchors, cross-links, code signatures,
@@ -90,11 +90,11 @@ retained beside the offline examples as
 
 ## HAProxy {#haproxy}
 
-Imported on 2026-08-16 from the official HAProxy 3.4 maintenance repository at tag `v3.4.3`,
-commit
-[`80ea565fdefb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=80ea565fdefbc34ec82d7374d7d19b0107231379).
+Imported on 2026-08-16 and refreshed on 2026-08-30 from the official HAProxy 3.4 maintenance
+repository at tag `v3.4.4`, commit
+[`7f03ae65c286`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=7f03ae65c28605152c7a1a9ba7d9d0bcfb50f8b0).
 The English prose is derived from the complete `doc/intro.txt`, `doc/configuration.txt`, and
-`doc/management.txt` manuals — 40,011 lines in total — reorganized into 34 reading pages.
+`doc/management.txt` manuals — 40,128 lines in total — reorganized into 34 reading pages.
 
 HAProxy is copyright 2000-2026 Willy Tarreau and is distributed under the
 [GNU General Public License version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).

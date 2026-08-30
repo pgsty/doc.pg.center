@@ -1,5 +1,5 @@
 ---
-title: "HAProxy 3.4.3 Documentation"
+title: "HAProxy 3.4.4 Documentation"
 linkTitle: HAProxy
 weight: 50
 description: "Complete English Markdown edition of the HAProxy 3.4 Starter, Configuration, and Management manuals"
@@ -38,7 +38,7 @@ the three core HAProxy 3.4 manuals, reorganized as one flat Markdown reading seq
 | Manual | Upstream source | Local organization |
 | --- | ---: | ---: |
 | Starter Guide | 1,695 lines | 9 flat topic pages |
-| Configuration Manual | 33,031 lines | 12 flat chapter pages |
+| Configuration Manual | 33,148 lines | 12 flat chapter pages |
 | Management Guide | 5,285 lines | 13 flat chapter pages |
 
 All 34 reading pages live directly under the HAProxy component root. Three non-linking divider

@@ -28,7 +28,7 @@ pgsql.cc 转载并整理了六个上游项目撰写的文档。每一个文档�
 | [pgBackRest](/zh/pgbackrest/) | [pgBackRest 文档](https://pgbackrest.org/) | v2.59.1 | [MIT](https://opensource.org/license/mit) | [上游 `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
 | [PgBouncer](/zh/pgbouncer/) | [PgBouncer 文档](https://www.pgbouncer.org/) | v1.25.2 | [ISC](https://opensource.org/license/isc-license-txt) | [上游 `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/master/COPYRIGHT) |
 | [pgBadger](/zh/pgbadger/) | [pgBadger 文档](https://pgbadger.darold.net/) | v13.2，提交 `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/zh/haproxy/) | [HAProxy 3.4 手册](https://docs.haproxy.org/3.4/) | v3.4.3，提交 `80ea565` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [HAProxy](/zh/haproxy/) | [HAProxy 3.4 手册](https://docs.haproxy.org/3.4/) | v3.4.4，提交 `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/zh/etcd/) | [etcd v3.7 文档](https://etcd.io/docs/v3.7/) | v3.7，提交 `a9ee660` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [上游 `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 所有文档集都是**改编**而非镜像：标题、锚点、交叉链接、代码签名、页面分组与导航结构都为本站重新组织，
@@ -81,10 +81,11 @@ pgBadger 版权归 Gilles Darold 所有（Copyright (c) 2012-2026），
 
 ## HAProxy {#haproxy}
 
-于 2026-08-16 从 HAProxy 3.4 官方维护仓库的 `v3.4.3` 标签、提交
-[`80ea565fdefb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=80ea565fdefbc34ec82d7374d7d19b0107231379)
-导入。英文正文取自完整的 `doc/intro.txt`、`doc/configuration.txt` 与 `doc/management.txt` 三份手册
-（共 40,011 行），重新组织为 34 个阅读页面。
+于 2026-08-16 从 HAProxy 3.4 官方维护仓库导入，并于 2026-08-30 刷新到 `v3.4.4`
+标签、提交
+[`7f03ae65c286`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=7f03ae65c28605152c7a1a9ba7d9d0bcfb50f8b0)。
+英文正文取自完整的 `doc/intro.txt`、`doc/configuration.txt` 与 `doc/management.txt` 三份手册
+（共 40,128 行），重新组织为 34 个阅读页面。
 
 HAProxy 版权归 Willy Tarreau 所有（Copyright 2000-2026），
 依 [GNU 通用公共许可证第 2 版](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)授权。
