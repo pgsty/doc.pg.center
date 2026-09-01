@@ -1,0 +1,51 @@
+{{- /* pgsql.cc uses one focused capabilities shape: prose plus a board of
+     component shortcuts. Resolve every shortcut through the partial-locale
+     fallback helper so newly translated pages become local automatically. */ -}}
+{{- $page := .page -}}
+{{- $data := .data -}}
+{{- $id := .id -}}
+<section id="{{ $id }}" class="td-landing-section td-landing-capabilities{{ with $data.class }} {{ . }}{{ end }}"{{ with $data.title }} aria-labelledby="{{ $id }}-title"{{ end }}>
+  <div class="td-site-container">
+    {{- partial "landing/heading.html" (dict "page" $page "data" $data "id" $id) }}
+    {{- range $index, $module := $data.items }}
+    {{- $moduleURL := $module.url | default $module.href -}}
+    {{- $moduleTarget := dict -}}
+    {{- if $moduleURL }}{{ $moduleTarget = partial "pgsql/link-target.html" (dict "page" $page "url" $moduleURL) }}{{ end -}}
+    <article class="td-landing-module{{ if eq (mod $index 2) 1 }} td-landing-module--reverse{{ end }}">
+      <div class="td-landing-module__copy">
+        {{- with $module.ref }}<p class="td-landing-module__ref">{{ partial "landing/markdown.html" (dict "page" $page "value" .) }}</p>{{ end }}
+        <h3>
+          {{- if $moduleURL }}<a href="{{ $moduleTarget.href | safeURL }}"{{ if $moduleTarget.fallback }} class="pgsql-link--fallback" hreflang="{{ $moduleTarget.language }}" data-fallback-language="{{ $moduleTarget.language }}"{{ end }}>{{ end -}}
+          {{- partial "landing/markdown.html" (dict "page" $page "value" ($module.title | default $module.name)) -}}
+          {{- if and $moduleURL $moduleTarget.fallback }} <small class="pgsql-link-fallback" aria-label="English fallback">EN</small>{{ end -}}
+          {{- if $moduleURL }}</a>{{ end -}}
+        </h3>
+        {{- with $module.motto }}<p class="td-landing-module__motto">◇ {{ partial "landing/markdown.html" (dict "page" $page "value" .) }}</p>{{ end }}
+        {{- with $module.bullets }}<ul>{{ range . }}<li>{{ partial "landing/markdown.html" (dict "page" $page "value" .) }}</li>{{ end }}</ul>{{ end }}
+        {{- with $module.value }}<p class="td-landing-module__value">{{ partial "landing/markdown.html" (dict "page" $page "value" .) }}</p>{{ end }}
+      </div>
+      {{- with $module.visual }}
+        {{- $visualType := lower (strings.TrimSpace (printf "%v" (.type | default ""))) -}}
+        {{- if ne $visualType "components" }}
+          {{- warnf "%s: pgsql capabilities item %d requires visual.type components; dropping %q" $page.Path (add $index 1) $visualType -}}
+        {{- else -}}
+          {{- $columns := partial "validate.html" (dict "value" .columns "kind" "int" "min" 1 "fallback" 2 "key" "capabilities visual columns" "where" $page.Path) -}}
+          {{- if gt $columns 4 }}{{ $columns = 4 }}{{ end }}
+      <div class="td-landing-component-board td-landing-component-board--nav{{ if .compact }} td-landing-component-board--compact{{ end }}"
+           style="--td-component-columns: {{ $columns }}" role="navigation" aria-label="{{ .aria_label | default $module.title }}">
+          {{- range .items }}
+            {{- $itemURL := .url | default .href -}}
+            {{- if $itemURL -}}
+              {{- $itemTarget := partial "pgsql/link-target.html" (dict "page" $page "url" $itemURL) -}}
+        <a href="{{ $itemTarget.href | safeURL }}"{{ if $itemTarget.fallback }} class="pgsql-link--fallback" hreflang="{{ $itemTarget.language }}" data-fallback-language="{{ $itemTarget.language }}"{{ end }}><i class="{{ .icon }}" aria-hidden="true"></i><b>{{ .title }}</b>{{ if $itemTarget.fallback }}<small class="pgsql-link-fallback" aria-label="English fallback">EN</small>{{ else }}{{ with .detail }}<small>{{ . }}</small>{{ end }}{{ end }}</a>
+            {{- else }}
+        <span><i class="{{ .icon }}" aria-hidden="true"></i><b>{{ .title }}</b>{{ with .detail }}<small>{{ . }}</small>{{ end }}</span>
+            {{- end }}
+          {{- end }}
+      </div>
+        {{- end }}
+      {{- end }}
+    </article>
+    {{- end }}
+  </div>
+</section>

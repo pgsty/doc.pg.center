@@ -66,9 +66,11 @@
         {{- range . }}
         {{- $url := .url | default .href -}}
         {{- if $url }}
-        <a class="pgsql-hero__link" href="{{ $url | relLangURL }}"{{ if .external }} target="_blank" rel="noopener noreferrer"{{ end }}>
+        {{- $target := partial "pgsql/link-target.html" (dict "page" $page "url" $url) }}
+        <a class="pgsql-hero__link{{ if $target.fallback }} pgsql-link--fallback{{ end }}" href="{{ $target.href | safeURL }}"{{ if $target.fallback }} hreflang="{{ $target.language }}" data-fallback-language="{{ $target.language }}"{{ end }}{{ if or $target.external (.external | default false) }} target="_blank" rel="noopener noreferrer"{{ end }}>
           {{- with .icon }}<i class="{{ . }}" aria-hidden="true"></i>{{ end }}
           <span>{{ .title | default .name }}</span>
+          {{- if $target.fallback }}<small class="pgsql-link-fallback" aria-label="English fallback">EN</small>{{ end }}
         </a>
         {{- end }}
         {{- end }}
@@ -112,7 +114,8 @@
             <div class="pgsql-orbit__arm">
               <div class="pgsql-orbit__counter">
                 {{- if $url }}
-                <a class="pgsql-orbit__link" href="{{ $url | relLangURL }}" tabindex="-1"{{ if $item.external }} target="_blank" rel="noopener noreferrer"{{ end }}>
+                {{- $target := partial "pgsql/link-target.html" (dict "page" $page "url" $url) }}
+                <a class="pgsql-orbit__link" href="{{ $target.href | safeURL }}" tabindex="-1"{{ if $target.fallback }} hreflang="{{ $target.language }}" data-fallback-language="{{ $target.language }}"{{ end }}{{ if or $target.external ($item.external | default false) }} target="_blank" rel="noopener noreferrer"{{ end }}>
                   <span class="pgsql-orbit__chip">{{ with $item.icon }}<i class="{{ . }}"></i>{{ end }}</span>
                   <span class="pgsql-orbit__label">{{ $item.title | default $item.name }}</span>
                 </a>

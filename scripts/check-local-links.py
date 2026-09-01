@@ -101,7 +101,17 @@ def main() -> int:
                 target_document = documents.get(target)
                 if target_document is None:
                     target_document = load_document(target)
-                if fragment not in target_document.anchors:
+                # OINK print bundles namespace every source-page heading as
+                # ``pg-<page-hash>--<anchor>`` so duplicate headings from
+                # different pages remain valid in one HTML document. A local
+                # ``#anchor`` link inside the bundle therefore resolves to a
+                # namespaced anchor even though the literal ID is no longer
+                # present.
+                print_fragment = "_print" in target.parts and any(
+                    anchor.endswith(f"--{fragment}")
+                    for anchor in target_document.anchors
+                )
+                if fragment not in target_document.anchors and not print_fragment:
                     errors.append(
                         f"{source_rel}: missing fragment #{fragment} in {target_rel} from {attribute}={raw_url!r}"
                     )

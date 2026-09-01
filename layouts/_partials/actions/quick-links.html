@@ -1,0 +1,27 @@
+{{- /* Resolve the same configured top-level Hugo Menu entries used by the
+     shell utility rail into inert Palette rows. */ -}}
+{{- $p := . -}}
+{{- $config := partialCached "shell/config.html" $p $p.Site.Language.Lang -}}
+{{- $links := slice -}}
+{{- range $p.Site.Menus.main -}}
+  {{- $key := .Identifier -}}
+  {{- with .Page }}{{ if not $key }}{{ $key = .Section }}{{ end }}{{ end -}}
+  {{- if in $config.quickLinks $key -}}
+    {{- $target := partial "pgsql/link-target.html" (dict "page" $p "url" .URL) -}}
+    {{- $href := $target.href -}}
+    {{- $description := .Params.description | default "" | plainify -}}
+    {{- $external := $target.external -}}
+    {{- with .Page -}}
+      {{- $href = .RelPermalink -}}
+      {{- $description = .Description | default $description | plainify -}}
+    {{- end -}}
+    {{- $links = $links | append (dict
+      "id" (printf "quick_%s" ($key | default .Name | urlize))
+      "title" (.Name | plainify) "description" $description
+      "icon" (partial "menu-icon.html" .) "keywords" (slice (.Name | plainify) $key)
+      "kind" "url" "url" $href "target" (cond $external "blank" "self")
+      "available" true "disabledReason" ""
+    ) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $links -}}

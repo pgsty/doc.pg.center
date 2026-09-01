@@ -6,11 +6,23 @@
 
 PostgreSQL Community Components is a documentation portal for the tools that run PostgreSQL in
 production. The current collection covers Patroni, pgBackRest, PgBouncer, pgBadger, the complete
-HAProxy 3.4 Starter, Configuration, and Management manuals, and the official etcd 3.7 documentation,
-all in English and Simplified Chinese.
+HAProxy 3.4 Starter, Configuration, and Management manuals, and the official etcd 3.7 documentation.
+English, Simplified Chinese, and French cover every page. Japanese, German, and Russian publish the
+translations already completed and fall back to the English page for any missing route.
 
 本站是 PostgreSQL 生态工具文档站。当前收录 Patroni、pgBackRest、PgBouncer、pgBadger、
-HAProxy 3.4 与 etcd 3.7 的完整中英双语文档。
+HAProxy 3.4 与 etcd 3.7。英文、简体中文与法文完整覆盖全部页面；日文、德文和俄文发布
+已经完成的译文，尚未翻译的链接会自动回退到对应英文页面。
+
+## Language coverage
+
+- **English / 简体中文 / Français:** all six collections, 218 pages per locale.
+- **日本語:** complete PgBouncer documentation plus the localized home, search, and attribution pages, 12 pages total.
+- **Deutsch:** complete pgBadger documentation and translated subsets of Patroni, PgBouncer, HAProxy, and etcd, 34 pages total.
+- **Русский:** complete Patroni, PgBouncer, pgBadger, and etcd documentation plus the localized site pages, 151 pages total.
+
+Localized navigation resolves each route at build time. Existing translations stay in the selected
+language; gaps link to the matching English page and are marked `EN` on the homepage.
 
 ## Build
 
@@ -27,7 +39,7 @@ The generated site is written to `public/`. Local preview, a successful build, a
 
 ## Deploy
 
-The production domain is **`pgsql.cc`**. `static/CNAME`, Hugo's `baseURL`, generated canonical URLs, and the GitHub Pages repository setting must all use that exact hostname. Pushing `main` runs the complete bilingual and rendered-link checks, builds with Go 1.27.0 and Hugo Extended 0.165.0, and deploys the resulting artifact through GitHub Pages.
+The production domain is **`pgsql.cc`**. `static/CNAME`, Hugo's `baseURL`, generated canonical URLs, and the GitHub Pages repository setting must all use that exact hostname. Pushing `main` runs the multilingual source and rendered-link checks, builds with Go 1.27.0 and Hugo Extended 0.165.0, and deploys the resulting artifact through GitHub Pages.
 
 ## Information architecture
 
@@ -35,13 +47,16 @@ Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy, and etcd are six independent 
 directly under `content/`; there is no shared `content/docs/` wrapper or `/docs/` canonical URL prefix.
 They appear directly in the global navbar, and each root owns its own sidebar and sequential pager.
 The homepage keeps a three-line hero, six root cards, six detailed shortcut indexes, and a short FAQ.
-All six manuals are bilingual. HAProxy keeps all 34 reading pages directly under one root, with
+English, Simplified Chinese, and French provide complete same-route editions. Partial locales expose
+their completed pages and resolve untranslated destinations to the English route. HAProxy keeps all
+34 reading pages directly under one root, with
 `_div_intro.md`, `_div_configuration.md`, and `_div_management.md` providing non-linking sidebar
 group labels in a single weighted reading sequence.
 
 The site uses OINK's native landing-page sections and documentation shell. A focused local Hero
-partial preserves the six-component navigator and animated Slonik orbit; the Cards, Capabilities,
-and FAQ sections remain theme-native. Static backlinks are enabled globally. Every page has
+partial preserves the six-component navigator and animated Slonik orbit; focused link and
+Capabilities partials add per-page English fallback while the Cards and FAQ retain the theme's
+native structure. Static backlinks are enabled globally. Every page has
 semantic Markdown output, each manual publishes a section-level `llms-full.txt`, and each language
 publishes `llms.txt` plus a `navigation.json` view of the same navigation tree used by the sidebar
 and pager.

@@ -155,6 +155,255 @@ languages:
             icon: fa-solid fa-gear
             description: etcd 3.7 运维、API 与内部原理
 
+  fr:
+    label: Français
+    locale: fr-FR
+    weight: 3
+    title: PGSQL.CC
+    params:
+      description: Documentation pratique des outils qui font fonctionner PostgreSQL en production.
+      ui:
+        share: [x, bluesky, linkedin, telegram, email, copy]
+        command_palette:
+          commands:
+            - id: attribution
+              title: Attribution et licences
+              description: Sources, révisions épinglées et licences de chaque collection
+              url: /fr/attribution/
+              icon: fa-solid fa-copyright
+              keywords: [licence, copyright, amont, attribution, source]
+    menus:
+      main:
+        - identifier: patroni
+          name: Patroni
+          pageRef: /patroni
+          weight: 10
+          params:
+            icon: fa-solid fa-heart-pulse
+            description: Haute disponibilité PostgreSQL et basculement automatique
+        - identifier: pgbackrest
+          name: pgBackRest
+          pageRef: /pgbackrest
+          weight: 20
+          params:
+            icon: fa-solid fa-couch
+            description: Sauvegarde, restauration et archivage fiables
+        - identifier: pgbouncer
+          name: PgBouncer
+          pageRef: /pgbouncer
+          weight: 30
+          params:
+            icon: fa-solid fa-arrows-turn-to-dots
+            description: Pooling de connexions PostgreSQL léger
+        - identifier: pgbadger
+          name: pgBadger
+          pageRef: /pgbadger
+          weight: 40
+          params:
+            icon: fa-solid fa-otter
+            description: Analyse rapide des journaux PostgreSQL et PgBouncer
+        - identifier: haproxy
+          name: HAProxy
+          pageRef: /haproxy
+          weight: 50
+          params:
+            icon: fa-solid fa-network-wired
+            description: Manuels de démarrage, de configuration et d'administration HAProxy 3.4
+        - identifier: etcd
+          name: etcd
+          pageRef: /etcd
+          weight: 60
+          params:
+            icon: fa-solid fa-gear
+            description: Exploitation, API et fonctionnement interne d'etcd 3.7
+
+  ja:
+    label: 日本語
+    locale: ja-JP
+    weight: 4
+    title: PGSQL.CC
+    hasCJKLanguage: true
+    params:
+      description: PostgreSQL を本番環境で運用するツールの実践的な日本語ドキュメント。
+      time_format_default: 2006年1月2日
+      ui:
+        share: [x, linkedin, telegram, email, copy]
+        command_palette:
+          commands:
+            - id: attribution
+              title: 帰属とライセンス
+              description: 各ドキュメント集の出典、固定リビジョン、ライセンス
+              url: /ja/attribution/
+              icon: fa-solid fa-copyright
+              keywords: [ライセンス, 著作権, アップストリーム, 帰属, 出典]
+    menus:
+      main:
+        - identifier: patroni
+          name: Patroni
+          url: https://pgsql.cc/patroni/
+          weight: 10
+          params:
+            icon: fa-solid fa-heart-pulse
+            description: PostgreSQL の高可用性と自動フェイルオーバー
+        - identifier: pgbackrest
+          name: pgBackRest
+          url: https://pgsql.cc/pgbackrest/
+          weight: 20
+          params:
+            icon: fa-solid fa-couch
+            description: 信頼性の高いバックアップ、リストア、アーカイブ管理
+        - identifier: pgbouncer
+          name: PgBouncer
+          pageRef: /pgbouncer
+          weight: 30
+          params:
+            icon: fa-solid fa-arrows-turn-to-dots
+            description: PostgreSQL 向けの軽量コネクションプーリング
+        - identifier: pgbadger
+          name: pgBadger
+          url: https://pgsql.cc/pgbadger/
+          weight: 40
+          params:
+            icon: fa-solid fa-otter
+            description: PostgreSQL と PgBouncer の高速ログ解析
+        - identifier: haproxy
+          name: HAProxy
+          url: https://pgsql.cc/haproxy/
+          weight: 50
+          params:
+            icon: fa-solid fa-network-wired
+            description: HAProxy 3.4 の入門、設定、管理マニュアル
+        - identifier: etcd
+          name: etcd
+          url: https://pgsql.cc/etcd/
+          weight: 60
+          params:
+            icon: fa-solid fa-gear
+            description: etcd 3.7 の運用、API、内部構造
+
+  de:
+    label: Deutsch
+    locale: de-DE
+    weight: 5
+    title: PGSQL.CC
+    params:
+      description: Praxisnahe Dokumentation für Werkzeuge, die PostgreSQL im Produktivbetrieb unterstützen.
+      ui:
+        command_palette:
+          commands:
+            - id: attribution
+              title: Quellenangaben und Lizenzen
+              description: Quellen, festgelegte Revisionen und Lizenzen aller Sammlungen
+              url: /de/attribution/
+              icon: fa-solid fa-copyright
+              keywords: [Lizenz, Urheberrecht, Quelle, Upstream, Namensnennung, Hinweis]
+    menus:
+      main:
+        - identifier: patroni
+          name: Patroni
+          pageRef: /patroni
+          weight: 10
+          params:
+            icon: fa-solid fa-heart-pulse
+            description: PostgreSQL-Hochverfügbarkeit und automatisches Failover
+        - identifier: pgbackrest
+          name: pgBackRest
+          url: https://pgsql.cc/pgbackrest/
+          weight: 20
+          params:
+            icon: fa-solid fa-couch
+            description: Zuverlässige Verwaltung von Sicherungen, Wiederherstellungen und Archiven
+        - identifier: pgbouncer
+          name: PgBouncer
+          pageRef: /pgbouncer
+          weight: 30
+          params:
+            icon: fa-solid fa-arrows-turn-to-dots
+            description: Leichtgewichtiger Verbindungspool für PostgreSQL
+        - identifier: pgbadger
+          name: pgBadger
+          pageRef: /pgbadger
+          weight: 40
+          params:
+            icon: fa-solid fa-otter
+            description: Schnelle Analyse von PostgreSQL- und PgBouncer-Protokollen
+        - identifier: haproxy
+          name: HAProxy
+          pageRef: /haproxy
+          weight: 50
+          params:
+            icon: fa-solid fa-network-wired
+            description: Vollständige Handbücher zu HAProxy 3.4
+        - identifier: etcd
+          name: etcd
+          pageRef: /etcd
+          weight: 60
+          params:
+            icon: fa-solid fa-gear
+            description: Betrieb, APIs und Interna des verteilten Schlüssel-Wert-Speichers etcd 3.7
+
+  ru:
+    label: Русский
+    locale: ru-RU
+    weight: 6
+    title: PGSQL.CC
+    params:
+      description: Практическая документация по инструментам экосистемы PostgreSQL для промышленной эксплуатации.
+      time_format_default: 2 January 2006 г.
+      ui:
+        command_palette:
+          commands:
+            - id: attribution
+              title: Атрибуция и лицензирование
+              description: Источники, зафиксированные версии и лицензии всех сборников
+              url: /ru/attribution/
+              icon: fa-solid fa-copyright
+              keywords: [лицензия, авторское право, источник, оригинал, атрибуция, уведомление]
+    menus:
+      main:
+        - identifier: patroni
+          name: Patroni
+          pageRef: /patroni
+          weight: 10
+          params:
+            icon: fa-solid fa-heart-pulse
+            description: Высокая доступность PostgreSQL и автоматическое переключение при сбоях
+        - identifier: pgbackrest
+          name: pgBackRest
+          url: https://pgsql.cc/pgbackrest/
+          weight: 20
+          params:
+            icon: fa-solid fa-couch
+            description: Надёжное резервное копирование, восстановление и управление архивами
+        - identifier: pgbouncer
+          name: PgBouncer
+          pageRef: /pgbouncer
+          weight: 30
+          params:
+            icon: fa-solid fa-arrows-turn-to-dots
+            description: Легковесный пул соединений для PostgreSQL
+        - identifier: pgbadger
+          name: pgBadger
+          pageRef: /pgbadger
+          weight: 40
+          params:
+            icon: fa-solid fa-otter
+            description: Быстрый анализ журналов PostgreSQL и PgBouncer
+        - identifier: haproxy
+          name: HAProxy
+          url: https://pgsql.cc/haproxy/
+          weight: 50
+          params:
+            icon: fa-solid fa-network-wired
+            description: Полные руководства по HAProxy 3.4
+        - identifier: etcd
+          name: etcd
+          pageRef: /etcd
+          weight: 60
+          params:
+            icon: fa-solid fa-gear
+            description: Эксплуатация распределённого хранилища ключ-значение и его API
+
 params:
   logo: favicon-512x512.png
   productionURL: https://pgsql.cc
@@ -174,9 +423,9 @@ params:
   offline_search_max_results: 12
   page_width: normal
   # Giscus, backed by GitHub Discussions on the site repository. `pathname`
-  # mapping gives each page its own thread, which also means the English and
-  # Chinese versions of a page keep separate threads -- readers comment in the
-  # language they are reading. Announcements is the category giscus recommends:
+  # mapping gives each page its own thread, which also means every language
+  # version of a page keeps a separate thread -- readers comment in the language
+  # they are reading. Announcements is the category giscus recommends:
   # only maintainers may open threads there, so no stray discussion can claim a
   # page's slot. `strict` matches the thread by a hash of the pathname instead
   # of a fuzzy title search.

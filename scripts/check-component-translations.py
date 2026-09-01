@@ -649,7 +649,7 @@ def main() -> int:
         for source in sorted(
             path
             for path in (CONTENT / component).rglob("*.md")
-            if not path.name.endswith(".zh.md")
+            if not path.name.endswith((".zh.md", ".fr.md", ".ja.md", ".de.md", ".ru.md"))
         ):
             target = source.with_name(source.stem + ".zh.md")
             if not target.is_file():
