@@ -1,0 +1,29 @@
+brand:
+  name: PGSQL.CC
+  tagline: PostgreSQL コミュニティコンポーネント
+  slogan: コミュニティスタックのための実践的な多言語ドキュメント。
+columns:
+  - title: ドキュメント
+    links:
+      - { label: Patroni, url: https://patroni.readthedocs.io/en/latest/ }
+      - { label: pgBackRest, url: https://pgbackrest.org/ }
+      - { label: PgBouncer, url: pgbouncer/ }
+      - { label: pgBadger, url: https://pgbadger.darold.net/ }
+      - { label: HAProxy, url: https://docs.haproxy.org/3.4/ }
+      - { label: etcd, url: https://etcd.io/docs/v3.7/ }
+  - title: アップストリーム
+    links:
+      - { label: Patroni, url: https://github.com/patroni/patroni, external: true }
+      - { label: pgBackRest, url: https://pgbackrest.org/, external: true }
+      - { label: PgBouncer, url: https://www.pgbouncer.org/, external: true }
+      - { label: pgBadger, url: https://pgbadger.darold.net/, external: true }
+      - { label: HAProxy, url: https://www.haproxy.org/, external: true }
+      - { label: etcd, url: https://etcd.io/, external: true }
+  - title: 関連サイト
+    links:
+      - { label: PGSTY, url: https://pgsty.com, external: true }
+      - { label: Pigsty, url: https://pigsty.io, external: true }
+      - { label: SILO, url: https://silo.pgsty.com, external: true }
+      - { label: pg.center, url: https://pg.center, external: true }
+      - { label: OINK, url: https://oink.pgsty.com, external: true }
+      - { label: PIG, url: https://pig.pgsty.com, external: true }

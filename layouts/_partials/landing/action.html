@@ -1,0 +1,20 @@
+{{- $page := .page -}}
+{{- $item := .item -}}
+{{- $url := $item.url | default $item.href -}}
+{{- with $url -}}
+  {{- $name := $item.name | default $item.title | default "item" | markdownify | plainify -}}
+  {{- $label := $item.link_label | default $.label -}}
+  {{- $target := partial "pgsql/link-target.html" (dict "page" $page "url" .) -}}
+  {{- $external := or $target.external ($item.external | default false) -}}
+<a class="td-landing-card-link{{ if $target.fallback }} pgsql-link--fallback{{ end }}" href="{{ $target.href | safeURL }}"
+  {{- if $target.fallback }} hreflang="{{ $target.language }}" data-fallback-language="{{ $target.language }}"{{ end -}}
+  {{- if $external }} target="_blank" rel="noopener noreferrer"{{ end }}>
+  {{- with $label -}}
+    {{- partial "landing/markdown.html" (dict "page" $page "value" .) -}}
+  {{- else -}}
+  <span class="visually-hidden">{{ $name }}</span>
+  {{- end }}
+  {{- if $target.fallback }}<small class="pgsql-link-fallback" aria-label="English fallback">EN</small>{{ end -}}
+  <i class="{{ $item.link_icon | default "fa-solid fa-arrow-right" }}" aria-hidden="true"></i>
+</a>
+{{- end -}}

@@ -3,7 +3,8 @@ sections:
     partial: pgsql/hero-orbit.html
   - type: cards
     key: components
-  - capabilities
+  - key: capabilities
+    partial: pgsql/capabilities.html
   - faq
 
 hero:
@@ -23,7 +24,7 @@ components:
   class: pgsql-components
   eyebrow: Choose a documentation root
   title: Six components. Six direct entrances.
-  text: Each component has its own sidebar, reading order, page outline, and local search context. All six collections are bilingual.
+  text: English, Simplified Chinese, and French cover all six collections. Japanese covers PgBouncer, Russian covers four collections, and German provides translated pages across five. Missing translations fall back to English and carry an EN marker.
   columns: 3
   link_label: Read the docs
   items:
@@ -203,7 +204,7 @@ faq:
       open: true
     - question: Is pgsql.cc an official PostgreSQL website?
       answer: No. pgsql.cc is an independent community documentation project. It links back to each upstream project and keeps product names and technical context intact.
-    - question: How are the English and Chinese pages organized?
-      answer: All six collections pair the English source and Simplified Chinese translation at the same logical route, with the language control switching between them.
+    - question: How does partial language coverage work?
+      answer: A link opens the current language whenever that page exists. If it has not been translated yet, the same link opens the English page and shows an EN marker; the language selector remains available on every page.
     - question: How is the upstream documentation credited?
       answer: Every page ends with one line naming the work it is adapted from, its copyright holder, its licence, and a link to this site's change history for that page. The [attribution page](/attribution/) collects the pinned revisions, licences, and retained notices for all six collections.

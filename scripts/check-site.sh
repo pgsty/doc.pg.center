@@ -6,42 +6,64 @@ content_dir="$project_dir/content"
 build_dir=$(mktemp -d "${TMPDIR:-/tmp}/pgsql-cc-check.XXXXXX")
 trap 'rm -rf "$build_dir"' EXIT
 
-legacy_bilingual_expected=78
-total_bilingual_expected=215
+legacy_complete_expected=78
+total_complete_expected=215
 haproxy_expected=38
 etcd_markdown_expected=99
 etcd_asset_expected=42
-legacy_english_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger} -type f -name '*.md' ! -name '*.zh.md' | wc -l | tr -d ' ')
+legacy_english_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger} -type f -name '*.md' ! -name '*.zh.md' ! -name '*.fr.md' ! -name '*.ja.md' ! -name '*.de.md' ! -name '*.ru.md' | wc -l | tr -d ' ')
 legacy_chinese_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger} -type f -name '*.zh.md' | wc -l | tr -d ' ')
-english_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger,haproxy,etcd} -type f -name '*.md' ! -name '*.zh.md' | wc -l | tr -d ' ')
+legacy_french_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger} -type f -name '*.fr.md' | wc -l | tr -d ' ')
+english_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger,haproxy,etcd} -type f -name '*.md' ! -name '*.zh.md' ! -name '*.fr.md' ! -name '*.ja.md' ! -name '*.de.md' ! -name '*.ru.md' | wc -l | tr -d ' ')
 chinese_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger,haproxy,etcd} -type f -name '*.zh.md' | wc -l | tr -d ' ')
-haproxy_count=$(find "$content_dir/haproxy" -type f -name '*.md' ! -name '*.zh.md' | wc -l | tr -d ' ')
+french_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger,haproxy,etcd} -type f -name '*.fr.md' | wc -l | tr -d ' ')
+japanese_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger,haproxy,etcd} -type f -name '*.ja.md' | wc -l | tr -d ' ')
+german_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger,haproxy,etcd} -type f -name '*.de.md' | wc -l | tr -d ' ')
+russian_count=$(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger,haproxy,etcd} -type f -name '*.ru.md' | wc -l | tr -d ' ')
+haproxy_count=$(find "$content_dir/haproxy" -type f -name '*.md' ! -name '*.zh.md' ! -name '*.fr.md' ! -name '*.ja.md' ! -name '*.de.md' ! -name '*.ru.md' | wc -l | tr -d ' ')
 haproxy_chinese_count=$(find "$content_dir/haproxy" -type f -name '*.zh.md' | wc -l | tr -d ' ')
-haproxy_divider_count=$(find "$content_dir/haproxy" -maxdepth 1 -type f -name '_div_*.md' ! -name '*.zh.md' | wc -l | tr -d ' ')
+haproxy_french_count=$(find "$content_dir/haproxy" -type f -name '*.fr.md' | wc -l | tr -d ' ')
+haproxy_divider_count=$(find "$content_dir/haproxy" -maxdepth 1 -type f -name '_div_*.md' ! -name '*.zh.md' ! -name '*.fr.md' ! -name '*.ja.md' ! -name '*.de.md' ! -name '*.ru.md' | wc -l | tr -d ' ')
 haproxy_chinese_divider_count=$(find "$content_dir/haproxy" -maxdepth 1 -type f -name '_div_*.zh.md' | wc -l | tr -d ' ')
-haproxy_reading_count=$(find "$content_dir/haproxy" -maxdepth 1 -type f -name '*.md' ! -name '*.zh.md' ! -name '_index.md' ! -name '_div_*.md' | wc -l | tr -d ' ')
-etcd_markdown_count=$(find "$content_dir/etcd" -type f -name '*.md' ! -name '*.zh.md' | wc -l | tr -d ' ')
+haproxy_french_divider_count=$(find "$content_dir/haproxy" -maxdepth 1 -type f -name '_div_*.fr.md' | wc -l | tr -d ' ')
+haproxy_reading_count=$(find "$content_dir/haproxy" -maxdepth 1 -type f -name '*.md' ! -name '*.zh.md' ! -name '*.fr.md' ! -name '*.ja.md' ! -name '*.de.md' ! -name '*.ru.md' ! -name '_index.md' ! -name '_div_*.md' | wc -l | tr -d ' ')
+etcd_markdown_count=$(find "$content_dir/etcd" -type f -name '*.md' ! -name '*.zh.md' ! -name '*.fr.md' ! -name '*.ja.md' ! -name '*.de.md' ! -name '*.ru.md' | wc -l | tr -d ' ')
 etcd_chinese_count=$(find "$content_dir/etcd" -type f -name '*.zh.md' | wc -l | tr -d ' ')
+etcd_french_count=$(find "$content_dir/etcd" -type f -name '*.fr.md' | wc -l | tr -d ' ')
 etcd_asset_count=$(find "$content_dir/etcd" -type f ! -name '*.md' | wc -l | tr -d ' ')
 haproxy_weights=$(
   {
     while IFS= read -r source_file; do
       sed -n 's/^weight:[[:space:]]*//p' "$source_file"
-    done < <(find "$content_dir/haproxy" -maxdepth 1 -type f -name '*.md' ! -name '*.zh.md' ! -name '_index.md' | sort)
+    done < <(find "$content_dir/haproxy" -maxdepth 1 -type f -name '*.md' ! -name '*.zh.md' ! -name '*.fr.md' ! -name '*.ja.md' ! -name '*.de.md' ! -name '*.ru.md' ! -name '_index.md' | sort)
   } | sort -n
 )
 
-test "$legacy_english_count" -eq "$legacy_bilingual_expected"
-test "$legacy_chinese_count" -eq "$legacy_bilingual_expected"
-test "$english_count" -eq "$total_bilingual_expected"
-test "$chinese_count" -eq "$total_bilingual_expected"
+test "$legacy_english_count" -eq "$legacy_complete_expected"
+test "$legacy_chinese_count" -eq "$legacy_complete_expected"
+test "$legacy_french_count" -eq "$legacy_complete_expected"
+test "$english_count" -eq "$total_complete_expected"
+test "$chinese_count" -eq "$total_complete_expected"
+test "$french_count" -eq "$total_complete_expected"
+test "$japanese_count" -eq 9
+test "$german_count" -eq 31
+test "$russian_count" -eq 148
+test "$(find "$content_dir/pgbouncer" -type f -name '*.ja.md' | wc -l | tr -d ' ')" -eq 9
+test "$(find "$content_dir/pgbadger" -type f -name '*.de.md' | wc -l | tr -d ' ')" -eq 16
+test "$(find "$content_dir/patroni" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -eq 24
+test "$(find "$content_dir/pgbouncer" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -eq 9
+test "$(find "$content_dir/pgbadger" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -eq 16
+test "$(find "$content_dir/etcd" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -eq 99
 test "$haproxy_count" -eq "$haproxy_expected"
 test "$haproxy_chinese_count" -eq "$haproxy_expected"
+test "$haproxy_french_count" -eq "$haproxy_expected"
 test "$haproxy_divider_count" -eq 3
 test "$haproxy_chinese_divider_count" -eq 3
+test "$haproxy_french_divider_count" -eq 3
 test "$haproxy_reading_count" -eq 34
 test "$etcd_markdown_count" -eq "$etcd_markdown_expected"
 test "$etcd_chinese_count" -eq "$etcd_markdown_expected"
+test "$etcd_french_count" -eq "$etcd_markdown_expected"
 test "$etcd_asset_count" -eq "$etcd_asset_expected"
 test "$haproxy_weights" = "$(seq 10 10 370)"
 test ! -e "$content_dir/docs"
@@ -52,19 +74,27 @@ for component in patroni pgbackrest pgbouncer pgbadger haproxy etcd; do
   grep -Fq 'sidebar_root_for: self' "$content_dir/$component/_index.md"
   grep -Fq 'outputs: [HTML, RSS, print, markdown, LLMSFULL]' "$content_dir/$component/_index.md"
   grep -Fq 'outputs: [HTML, RSS, print, markdown, LLMSFULL]' "$content_dir/$component/_index.zh.md"
+  grep -Fq 'outputs: [HTML, RSS, print, markdown, LLMSFULL]' "$content_dir/$component/_index.fr.md"
 done
 test -z "$(find "$content_dir/haproxy" -mindepth 1 -type d -print -quit)"
 
 # OINK 1.0 site surface: the bespoke Hero keeps its six-component navigator
-# and orbit, while Cards, Capabilities, FAQ, the docs shell, backlinks, and
-# agent indexes stay on the theme's native contracts.
+# and orbit. Project link resolvers keep partial locales on translated pages
+# where available and fall back to the matching English route for gaps.
 test -s "$project_dir/layouts/_partials/pgsql/hero-orbit.html"
+test -s "$project_dir/layouts/_partials/pgsql/link-target.html"
+test -s "$project_dir/layouts/_partials/pgsql/capabilities.html"
+test -s "$project_dir/layouts/_markup/render-link.html"
+test -s "$project_dir/layouts/_partials/navbar-entry-link.html"
+test -s "$project_dir/layouts/_partials/footer.html"
 test -s "$project_dir/assets/scss/_styles_project.scss"
-test "$(find "$project_dir/layouts" -type f | wc -l | tr -d ' ')" -eq 1
-grep -Fq '    partial: pgsql/hero-orbit.html' "$project_dir/data/home/en.yaml"
-grep -Fq '    partial: pgsql/hero-orbit.html' "$project_dir/data/home/zh.yaml"
-grep -Fq '    key: components' "$project_dir/data/home/en.yaml"
-grep -Fq '    key: components' "$project_dir/data/home/zh.yaml"
+for language in en zh fr ja de ru; do
+  test -s "$project_dir/data/home/$language.yaml"
+  test -s "$project_dir/data/footer/$language.yaml"
+  grep -Fq '    partial: pgsql/hero-orbit.html' "$project_dir/data/home/$language.yaml"
+  grep -Fq '    key: components' "$project_dir/data/home/$language.yaml"
+  grep -Fq '    partial: pgsql/capabilities.html' "$project_dir/data/home/$language.yaml"
+done
 grep -Fq 'home: [HTML, RSS, markdown, LLMS, NAVJSON]' "$project_dir/hugo.yaml"
 grep -Fq '    backlinks: true' "$project_dir/hugo.yaml"
 grep -Fq '{.cards}' "$content_dir/haproxy/_index.md"
@@ -93,15 +123,32 @@ fi
 
 english_list="$build_dir/english.txt"
 chinese_list="$build_dir/chinese.txt"
+french_list="$build_dir/french.txt"
+japanese_pgbouncer_list="$build_dir/japanese-pgbouncer.txt"
+english_pgbouncer_list="$build_dir/english-pgbouncer.txt"
 (
   cd "$content_dir"
-  find patroni pgbackrest pgbouncer pgbadger haproxy etcd -type f -name '*.md' ! -name '*.zh.md' | sort
+  find patroni pgbackrest pgbouncer pgbadger haproxy etcd -type f -name '*.md' ! -name '*.zh.md' ! -name '*.fr.md' ! -name '*.ja.md' ! -name '*.de.md' ! -name '*.ru.md' | sort
 ) >"$english_list"
 (
   cd "$content_dir"
   find patroni pgbackrest pgbouncer pgbadger haproxy etcd -type f -name '*.zh.md' | sed 's/\.zh\.md$/.md/' | sort
 ) >"$chinese_list"
+(
+  cd "$content_dir"
+  find patroni pgbackrest pgbouncer pgbadger haproxy etcd -type f -name '*.fr.md' | sed 's/\.fr\.md$/.md/' | sort
+) >"$french_list"
 diff -u "$english_list" "$chinese_list"
+diff -u "$english_list" "$french_list"
+(
+  cd "$content_dir"
+  find pgbouncer -type f -name '*.md' ! -name '*.zh.md' ! -name '*.fr.md' ! -name '*.ja.md' ! -name '*.de.md' ! -name '*.ru.md' | sort
+) >"$english_pgbouncer_list"
+(
+  cd "$content_dir"
+  find pgbouncer -type f -name '*.ja.md' | sed 's/\.ja\.md$/.md/' | sort
+) >"$japanese_pgbouncer_list"
+diff -u "$english_pgbouncer_list" "$japanese_pgbouncer_list"
 
 bad_component_links=$(
   git -C "$project_dir" grep -n -E \
@@ -113,6 +160,19 @@ bad_component_links=$(
 if [[ -n "$bad_component_links" ]]; then
   echo "$bad_component_links" >&2
   echo 'Chinese content contains an English-locale component link' >&2
+  exit 1
+fi
+
+bad_french_component_links=$(
+  git -C "$project_dir" grep -n -E \
+    '\]\(/(patroni|pgbackrest|pgbouncer|pgbadger|haproxy|etcd)/|^\[[^]]+\]:[[:space:]]+/(patroni|pgbackrest|pgbouncer|pgbadger|haproxy|etcd)/' \
+    -- ':(glob)content/**/*.fr.md' \
+    | grep -E -v '\.(png|gif|svg|json|txt)([?#][^)]*)?\)?$' \
+    || true
+)
+if [[ -n "$bad_french_component_links" ]]; then
+  echo "$bad_french_component_links" >&2
+  echo 'French content contains an English-locale component link' >&2
   exit 1
 fi
 
@@ -140,30 +200,61 @@ hugo --source "$project_dir" --destination "$build_dir/public" --gc --minify --c
 
 TRANSLATION_RENDERED_DIR="$build_dir/public" \
   python3 "$project_dir/scripts/check-component-translations.py" haproxy etcd
+python3 "$project_dir/scripts/check-german-parity.py" --allow-partial --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/check-german-prose.py"
+python3 "$project_dir/scripts/check-russian-parity.py" --allow-partial
 
 for page in \
   index.html \
   zh/index.html \
+  fr/index.html \
+  ja/index.html \
+  de/index.html \
+  ru/index.html \
   search/index.html \
   zh/search/index.html \
+  fr/search/index.html \
+  ja/search/index.html \
+  de/search/index.html \
+  ru/search/index.html \
   attribution/index.html \
   zh/attribution/index.html \
+  fr/attribution/index.html \
+  ja/attribution/index.html \
+  de/attribution/index.html \
+  ru/attribution/index.html \
   patroni/index.html \
   zh/patroni/index.html \
+  fr/patroni/index.html \
   pgbackrest/index.html \
   zh/pgbackrest/index.html \
+  fr/pgbackrest/index.html \
   pgbouncer/index.html \
   zh/pgbouncer/index.html \
+  fr/pgbouncer/index.html \
+  ja/pgbouncer/index.html \
+  de/pgbouncer/index.html \
+  ru/pgbouncer/index.html \
+  ja/pgbouncer/usage/index.html \
+  de/pgbouncer/usage/index.html \
+  ru/pgbouncer/usage/index.html \
   pgbadger/index.html \
   zh/pgbadger/index.html \
+  fr/pgbadger/index.html \
+  de/pgbadger/index.html \
+  ru/pgbadger/index.html \
+  de/pgbadger/command-line/index.html \
+  ru/pgbadger/command-line/index.html \
   haproxy/index.html \
   zh/haproxy/index.html \
+  fr/haproxy/index.html \
   haproxy/load-balancing/index.html \
   zh/haproxy/load-balancing/index.html \
   haproxy/http-fundamentals/index.html \
   zh/haproxy/http-fundamentals/index.html \
   haproxy/proxies/index.html \
   zh/haproxy/proxies/index.html \
+  fr/haproxy/proxies/index.html \
   haproxy/acls-and-samples/index.html \
   zh/haproxy/acls-and-samples/index.html \
   haproxy/prerequisites/index.html \
@@ -174,10 +265,16 @@ for page in \
   zh/haproxy/security/index.html \
   etcd/index.html \
   zh/etcd/index.html \
+  fr/etcd/index.html \
+  ru/etcd/index.html \
   etcd/quickstart/index.html \
   zh/etcd/quickstart/index.html \
+  fr/etcd/quickstart/index.html \
+  de/etcd/quickstart/index.html \
+  ru/etcd/quickstart/index.html \
   etcd/op-guide/configuration/index.html \
   zh/etcd/op-guide/configuration/index.html \
+  fr/etcd/op-guide/configuration/index.html \
   etcd/upgrades/upgrade_3_7/index.html \
   zh/etcd/upgrades/upgrade_3_7/index.html \
   haproxy/intro/index.html \
@@ -194,6 +291,11 @@ for page in \
   zh/pgbadger/releases/13/index.html \
   patroni/index.md \
   zh/patroni/index.md \
+  fr/patroni/index.md \
+  ru/patroni/index.md \
+  de/patroni/security/index.html \
+  ru/patroni/security/index.html \
+  de/haproxy/prerequisites/index.html \
   _print/patroni/index.html \
   _print/pgbackrest/index.html \
   _print/pgbouncer/index.html \
@@ -206,16 +308,34 @@ for page in \
   zh/_print/pgbadger/index.html \
   zh/_print/haproxy/index.html \
   zh/_print/etcd/index.html \
+  fr/_print/patroni/index.html \
+  fr/_print/pgbackrest/index.html \
+  fr/_print/pgbouncer/index.html \
+  fr/_print/pgbadger/index.html \
+  fr/_print/haproxy/index.html \
+  fr/_print/etcd/index.html \
+  ja/_print/pgbouncer/index.html \
+  de/_print/pgbouncer/index.html \
+  de/_print/pgbadger/index.html \
+  ru/_print/patroni/index.html \
+  ru/_print/pgbouncer/index.html \
+  ru/_print/pgbadger/index.html \
+  ru/_print/etcd/index.html \
   pgbadger/index.md \
   zh/pgbadger/index.md \
+  de/pgbadger/index.md \
+  ru/pgbadger/index.md \
   haproxy/index.md \
   zh/haproxy/index.md \
+  fr/haproxy/index.md \
   haproxy/proxies/index.md \
   zh/haproxy/proxies/index.md \
   haproxy/statistics-and-monitoring/index.md \
   zh/haproxy/statistics-and-monitoring/index.md \
   etcd/index.md \
   zh/etcd/index.md \
+  fr/etcd/index.md \
+  ru/etcd/index.md \
   etcd/quickstart/index.md \
   zh/etcd/quickstart/index.md \
   third_party/pgbadger/examples/sample.html \
@@ -231,30 +351,56 @@ for page in \
   CNAME \
   favicon.ico \
   zh/llms.txt \
+  fr/llms.txt \
+  ja/llms.txt \
+  de/llms.txt \
+  ru/llms.txt \
   llms.txt \
   navigation.json \
   zh/navigation.json \
+  fr/navigation.json \
+  ja/navigation.json \
+  de/navigation.json \
+  ru/navigation.json \
   patroni/llms-full.txt \
   zh/patroni/llms-full.txt \
+  fr/patroni/llms-full.txt \
+  ru/patroni/llms-full.txt \
   pgbackrest/llms-full.txt \
   zh/pgbackrest/llms-full.txt \
   pgbouncer/llms-full.txt \
   zh/pgbouncer/llms-full.txt \
+  fr/pgbouncer/llms-full.txt \
+  ja/pgbouncer/llms-full.txt \
+  de/pgbouncer/llms-full.txt \
+  ru/pgbouncer/llms-full.txt \
   pgbadger/llms-full.txt \
   zh/pgbadger/llms-full.txt \
+  fr/pgbadger/llms-full.txt \
+  de/pgbadger/llms-full.txt \
+  ru/pgbadger/llms-full.txt \
   haproxy/llms-full.txt \
   zh/haproxy/llms-full.txt \
+  fr/haproxy/llms-full.txt \
   etcd/llms-full.txt \
-  zh/etcd/llms-full.txt; do
+  zh/etcd/llms-full.txt \
+  fr/etcd/llms-full.txt \
+  ru/etcd/llms-full.txt; do
   test -s "$build_dir/public/$page"
 done
 
-python3 - "$build_dir/public/navigation.json" "$build_dir/public/zh/navigation.json" <<'PY'
+python3 - \
+  "$build_dir/public/navigation.json" \
+  "$build_dir/public/zh/navigation.json" \
+  "$build_dir/public/fr/navigation.json" \
+  "$build_dir/public/ja/navigation.json" \
+  "$build_dir/public/de/navigation.json" \
+  "$build_dir/public/ru/navigation.json" <<'PY'
 import json
 import sys
 from pathlib import Path
 
-expected_roots = {
+complete_roots = {
     "/patroni/",
     "/pgbackrest/",
     "/pgbouncer/",
@@ -262,27 +408,101 @@ expected_roots = {
     "/haproxy/",
     "/etcd/",
 }
-for filename, language in zip(sys.argv[1:], ("en", "zh")):
+expected_roots = {
+    "en": complete_roots,
+    "zh": complete_roots,
+    "fr": complete_roots,
+    "ja": {"/pgbouncer/"},
+    "de": {"/patroni/", "/pgbouncer/", "/pgbadger/", "/haproxy/", "/etcd/"},
+    "ru": {"/patroni/", "/pgbouncer/", "/pgbadger/", "/etcd/"},
+}
+for filename, language in zip(sys.argv[1:], expected_roots):
     payload = json.loads(Path(filename).read_text(encoding="utf-8"))
     assert payload["schemaVersion"] == 1
     assert payload["language"] == language
     roots = {child["id"] for child in payload["root"]["children"]}
-    assert expected_roots <= roots
+    assert expected_roots[language] <= roots
 PY
 
-grep -Fq 'navigation.json' "$build_dir/public/llms.txt"
-grep -Fq 'navigation.json' "$build_dir/public/zh/llms.txt"
+for language_root in "" zh/ fr/ ja/ de/ ru/; do
+  grep -Fq 'navigation.json' "$build_dir/public/${language_root}llms.txt"
+done
 grep -Fq 'Source: https://pgsql.cc/patroni/index.md' "$build_dir/public/patroni/llms-full.txt"
 grep -Fq 'Source: https://pgsql.cc/zh/patroni/index.md' "$build_dir/public/zh/patroni/llms-full.txt"
+grep -Fq 'Source: https://pgsql.cc/fr/patroni/index.md' "$build_dir/public/fr/patroni/llms-full.txt"
 grep -Fq 'td-shell-backlinks' "$build_dir/public/patroni/config/index.html"
 grep -Fq 'td-shell-backlinks' "$build_dir/public/zh/patroni/config/index.html"
 grep -Fq 'Backlinks:' "$build_dir/public/patroni/config/index.md"
 grep -Fq '反链：' "$build_dir/public/zh/patroni/config/index.md"
 
+python3 - "$build_dir/public" <<'PY'
+from html.parser import HTMLParser
+from pathlib import Path
+import sys
+
+
+class Anchors(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.items: list[dict[str, str]] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag == "a":
+            self.items.append({key: value or "" for key, value in attrs})
+
+
+def home(language: str) -> tuple[str, list[dict[str, str]]]:
+    path = Path(sys.argv[1]) / (f"{language}/index.html" if language != "en" else "index.html")
+    text = path.read_text(encoding="utf-8")
+    parser = Anchors()
+    parser.feed(text)
+    return text, parser.items
+
+
+def has_link(items: list[dict[str, str]], href: str, fallback: str = "") -> bool:
+    return any(
+        item.get("href") == href
+        and item.get("data-fallback-language", "") == fallback
+        for item in items
+    )
+
+
+for language in ("en", "zh", "fr"):
+    _, items = home(language)
+    assert not any("data-fallback-language" in item for item in items), language
+
+for language in ("ja", "de", "ru"):
+    text, items = home(language)
+    assert "pgsql-link-fallback" in text, language
+    assert any(item.get("data-fallback-language") == "en" for item in items), language
+
+_, ja = home("ja")
+assert has_link(ja, "/ja/pgbouncer/")
+assert has_link(ja, "/patroni/", "en")
+
+_, de = home("de")
+assert has_link(de, "/de/pgbadger/")
+assert has_link(de, "/de/patroni/")
+assert has_link(de, "/pgbackrest/", "en")
+
+_, ru = home("ru")
+assert has_link(ru, "/ru/etcd/")
+assert has_link(ru, "/ru/patroni/")
+assert has_link(ru, "/haproxy/", "en")
+PY
+
 while IFS= read -r source_file; do
   relative=${source_file#"$content_dir/"}
   if [[ $relative == *.zh.md ]]; then
     route="zh/${relative%.zh.md}"
+  elif [[ $relative == *.fr.md ]]; then
+    route="fr/${relative%.fr.md}"
+  elif [[ $relative == *.ja.md ]]; then
+    route="ja/${relative%.ja.md}"
+  elif [[ $relative == *.de.md ]]; then
+    route="de/${relative%.de.md}"
+  elif [[ $relative == *.ru.md ]]; then
+    route="ru/${relative%.ru.md}"
   else
     route=${relative%.md}
   fi
@@ -297,6 +517,14 @@ while IFS= read -r source_file; do
   relative=${source_file#"$content_dir/"}
   if [[ $relative == *.zh.md ]]; then
     route="zh/${relative%.zh.md}"
+  elif [[ $relative == *.fr.md ]]; then
+    route="fr/${relative%.fr.md}"
+  elif [[ $relative == *.ja.md ]]; then
+    route="ja/${relative%.ja.md}"
+  elif [[ $relative == *.de.md ]]; then
+    route="de/${relative%.de.md}"
+  elif [[ $relative == *.ru.md ]]; then
+    route="ru/${relative%.ru.md}"
   else
     route=${relative%.md}
   fi
@@ -307,6 +535,18 @@ while IFS= read -r source_file; do
   test -s "$build_dir/public/$route/index.html"
 done < <(find "$content_dir/etcd" -type f -name '*.md' | sort)
 
+for language in ja de ru; do
+  while IFS= read -r source_file; do
+    relative=${source_file#"$content_dir/"}
+    route="$language/${relative%.$language.md}"
+    if [[ $(basename "$route") == '_index' || $(basename "$route") == 'index' ]]; then
+      route=${route%/*index}
+    fi
+    route=$(printf '%s' "$route" | tr '[:upper:]' '[:lower:]')
+    test -s "$build_dir/public/$route/index.html"
+  done < <(find "$content_dir" -type f -name "*.$language.md" | sort)
+done
+
 while IFS= read -r source_file; do
   relative=${source_file#"$content_dir/"}
   if [[ $relative == *.zh.md ]]; then
@@ -316,7 +556,7 @@ while IFS= read -r source_file; do
   fi
   legacy_route=${legacy_route%/_index}
   test -s "$build_dir/public/$legacy_route/index.html"
-done < <(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger,haproxy} -type f -name '*.md' ! -name '_div_*.md' | sort)
+done < <(find "$content_dir"/{patroni,pgbackrest,pgbouncer,pgbadger,haproxy} -type f -name '*.md' ! -name '*.fr.md' ! -name '*.ja.md' ! -name '*.de.md' ! -name '*.ru.md' ! -name '_div_*.md' | sort)
 
 for divider in intro configuration management; do
   test ! -e "$build_dir/public/haproxy/_div_$divider/index.html"
@@ -366,5 +606,5 @@ fi
 
 python3 "$project_dir/scripts/check-local-links.py" "$build_dir/public"
 
-printf 'Validated OINK v1.0.0 native landing, backlinks, agent indexes, six top-level component roots, %s paired EN/ZH pages, %s HAProxy reading pages, %s etcd Markdown pages, and legacy redirects.\n' \
-  "$english_count" "$haproxy_reading_count" "$etcd_markdown_count"
+printf 'Validated OINK v1.0.0 landing and fallback navigation across six locales, backlinks, agent indexes, %s complete EN/ZH/FR component pages, %s JA, %s DE, %s RU component translations, %s HAProxy reading pages, %s etcd Markdown pages, and legacy redirects.\n' \
+  "$english_count" "$japanese_count" "$german_count" "$russian_count" "$haproxy_reading_count" "$etcd_markdown_count"

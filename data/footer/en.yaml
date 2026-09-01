@@ -1,7 +1,7 @@
 brand:
   name: PGSQL.CC
   tagline: PostgreSQL Community Components
-  slogan: Practical, bilingual documentation for the community stack.
+  slogan: Practical, multilingual documentation for the community stack.
 columns:
   - title: Documentation
     links:

@@ -1,0 +1,29 @@
+brand:
+  name: PGSQL.CC
+  tagline: Composants de la communauté PostgreSQL
+  slogan: Documentation pratique et multilingue pour les outils de la communauté.
+columns:
+  - title: Documentation
+    links:
+      - { label: Patroni, url: patroni/ }
+      - { label: pgBackRest, url: pgbackrest/ }
+      - { label: PgBouncer, url: pgbouncer/ }
+      - { label: pgBadger, url: pgbadger/ }
+      - { label: HAProxy, url: haproxy/ }
+      - { label: etcd, url: etcd/ }
+  - title: Projets amont
+    links:
+      - { label: Patroni, url: https://github.com/patroni/patroni, external: true }
+      - { label: pgBackRest, url: https://pgbackrest.org/, external: true }
+      - { label: PgBouncer, url: https://www.pgbouncer.org/, external: true }
+      - { label: pgBadger, url: https://pgbadger.darold.net/, external: true }
+      - { label: HAProxy, url: https://www.haproxy.org/, external: true }
+      - { label: etcd, url: https://etcd.io/, external: true }
+  - title: À propos
+    links:
+      - { label: PGSTY, url: https://pgsty.com, external: true }
+      - { label: Pigsty, url: https://pigsty.io, external: true }
+      - { label: SILO, url: https://silo.pgsty.com, external: true }
+      - { label: pg.center, url: https://pg.center, external: true }
+      - { label: OINK, url: https://oink.pgsty.com, external: true }
+      - { label: PIG, url: https://pig.pgsty.com, external: true }

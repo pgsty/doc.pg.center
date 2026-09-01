@@ -1,0 +1,210 @@
+sections:
+  - key: hero
+    partial: pgsql/hero-orbit.html
+  - type: cards
+    key: components
+  - key: capabilities
+    partial: pgsql/capabilities.html
+  - faq
+
+hero:
+  class: pgsql-hero pgsql-hero--fit-title
+  eyebrow: Многоязычная документация для шести независимых компонентов
+  title_lines:
+    - words:
+        - { mark: P, color: blue, text: ostgreSQL }
+    - words:
+        - { text: Компоненты сообщества }
+  lead: Независимая, удобная и многоязычная документация.
+  links_label: Документация по компонентам
+  orbit:
+    center_image: img/slonik.svg
+
+components:
+  class: pgsql-components
+  eyebrow: Выберите раздел документации
+  title: Шесть компонентов. Шесть прямых входов.
+  text: Русская версия полностью охватывает Patroni, PgBouncer, pgBadger и etcd. Ссылки на ещё не переведённые страницы pgBackRest и HAProxy автоматически открывают английскую версию и помечены EN.
+  columns: 3
+  link_label: Читать документацию
+  items:
+    - title: Patroni
+      meta: Высокая доступность
+      icon: fa-solid fa-heart-pulse
+      desc: Эксплуатация кластеров PostgreSQL с распределённым консенсусом и автоматическим переключением при сбоях.
+      url: patroni/
+    - title: pgBackRest
+      meta: Резервное копирование и восстановление
+      icon: fa-solid fa-couch
+      desc: Проектирование надёжных процессов резервного копирования, восстановления, архивации и восстановления на момент времени.
+      url: pgbackrest/
+    - title: PgBouncer
+      meta: Пул соединений
+      icon: fa-solid fa-arrows-turn-to-dots
+      desc: Сокращение накладных расходов на соединения с помощью пулов сеансов, транзакций и операторов.
+      url: pgbouncer/
+    - title: pgBadger
+      meta: Анализ журналов
+      icon: fa-solid fa-otter
+      desc: Преобразование журналов PostgreSQL и PgBouncer в отчёты о запросах, нагрузке и ошибках.
+      url: pgbadger/
+    - title: HAProxy
+      meta: Балансировка нагрузки
+      icon: fa-solid fa-network-wired
+      desc: Полные начальное, конфигурационное и эксплуатационное руководства по HAProxy 3.4.
+      url: haproxy/
+    - title: etcd
+      meta: Консенсус и координация
+      icon: fa-solid fa-gear
+      desc: Эксплуатация строго согласованного хранилища ключ-значение, его API, модели Raft и внутренних механизмов.
+      url: etcd/
+
+capabilities:
+  eyebrow: Руководства по компонентам
+  title: Что делает каждый компонент и с чего начать
+  text: Прочитайте краткое введение, а затем используйте расположенный рядом указатель, чтобы сразу перейти к нужному разделу руководства.
+  items:
+    - ref: 01 / ВЫСОКАЯ ДОСТУПНОСТЬ
+      title: Patroni
+      url: patroni/
+      motto: Шаблон высокой доступности PostgreSQL
+      bullets:
+        - Выбирает лидера и хранит состояние кластера через DCS.
+        - Автоматизирует переключение при сбоях и позволяет управлять плановыми изменениями.
+        - Поддерживает физические серверы, виртуальные машины, Kubernetes и несколько центров обработки данных.
+      value: Начните с установки и настройки, затем переходите к средствам эксплуатации.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: Быстрые ссылки на документацию Patroni
+        items:
+          - { icon: fa-solid fa-download, title: Установка, url: patroni/installation/ }
+          - { icon: fa-solid fa-sliders, title: Настройка, url: patroni/config/ }
+          - { icon: fa-solid fa-terminal, title: patronictl, url: patroni/patronictl/ }
+          - { icon: fa-solid fa-plug, title: REST API, url: patroni/rest_api/ }
+          - { icon: fa-solid fa-arrows-rotate, title: Режимы репликации, url: patroni/replication_modes/ }
+          - { icon: fa-solid fa-circle-question, title: Частые вопросы, url: patroni/faq/ }
+    - ref: 02 / РЕЗЕРВНОЕ КОПИРОВАНИЕ И ВОССТАНОВЛЕНИЕ
+      title: pgBackRest
+      url: pgbackrest/
+      motto: Надёжное резервное копирование, архивация, восстановление и восстановление на момент времени
+      bullets:
+        - Полные, дифференциальные, инкрементальные и блочные резервные копии.
+        - Управляет репозиториями, сроками хранения и архивацией WAL.
+        - Документирует пошаговое развёртывание и каждую команду.
+      value: Начните с руководства для своей ОС, затем держите под рукой справочники по настройке и командам.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: Быстрые ссылки на документацию pgBackRest
+        items:
+          - { icon: fa-solid fa-route, title: Руководство пользователя, url: pgbackrest/user-guide/ }
+          - { icon: fa-brands fa-redhat, title: Руководство для RHEL, url: pgbackrest/user-guide-rhel/ }
+          - { icon: fa-solid fa-sliders, title: Настройка, url: pgbackrest/configuration/ }
+          - { icon: fa-solid fa-terminal, title: Команды, url: pgbackrest/command/ }
+          - { icon: fa-solid fa-tags, title: Выпуски, url: pgbackrest/release/ }
+          - { icon: fa-solid fa-circle-question, title: Частые вопросы, url: pgbackrest/faq/ }
+    - ref: 03 / ПУЛ СОЕДИНЕНИЙ
+      title: PgBouncer
+      url: pgbouncer/
+      motto: Легковесный пул соединений для PostgreSQL
+      bullets:
+        - Повторно использует соединения, сокращая стоимость запуска серверных процессов.
+        - Поддерживает пулы на уровне сеанса, транзакции и оператора.
+        - Описывает аутентификацию, маршрутизацию, ограничения и консоль.
+      value: Сначала изучите модель пула, затем установите и настройте его под свою нагрузку.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: Быстрые ссылки на документацию PgBouncer
+        items:
+          - { icon: fa-solid fa-list-check, title: Возможности, url: pgbouncer/features/ }
+          - { icon: fa-solid fa-download, title: Загрузка, url: pgbouncer/download/ }
+          - { icon: fa-solid fa-wrench, title: Установка, url: pgbouncer/install/ }
+          - { icon: fa-solid fa-terminal, title: Использование, url: pgbouncer/usage/ }
+          - { icon: fa-solid fa-sliders, title: Настройка, url: pgbouncer/config/ }
+          - { icon: fa-solid fa-circle-question, title: Частые вопросы, url: pgbouncer/faq/ }
+    - ref: 04 / АНАЛИЗ ЖУРНАЛОВ
+      title: pgBadger
+      url: pgbadger/
+      motto: Быстрый анализ журналов PostgreSQL и PgBouncer
+      bullets:
+        - Разбирает журналы PostgreSQL и PgBouncer во множестве форматов.
+        - Формирует отчёты о медленных запросах, ошибках, блокировках и работе VACUUM.
+        - Создаёт автономные отчёты в форматах HTML, JSON, текста и CSV.
+      value: Сначала настройте журналирование, затем выберите разовый, параллельный или инкрементальный режим.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: Быстрые ссылки на документацию pgBadger
+        items:
+          - { icon: fa-solid fa-download, title: Загрузка, url: pgbadger/download/ }
+          - { icon: fa-solid fa-terminal, title: Командная строка, url: pgbadger/command-line/ }
+          - { icon: fa-solid fa-file-lines, title: Журналирование PostgreSQL, url: pgbadger/postgresql-logging/ }
+          - { icon: fa-solid fa-calendar-days, title: Инкрементальные отчёты, url: pgbadger/incremental-reports/ }
+          - { icon: fa-solid fa-file-export, title: Форматы вывода, url: pgbadger/output-formats/ }
+          - { icon: fa-solid fa-chart-column, title: Примеры отчётов, url: pgbadger/sample-reports/ }
+          - { icon: fa-solid fa-tags, title: Выпуски, url: pgbadger/releases/ }
+          - { icon: fa-solid fa-life-ring, title: Поддержка, url: pgbadger/support/ }
+    - ref: 05 / БАЛАНСИРОВКА НАГРУЗКИ
+      title: HAProxy
+      url: haproxy/
+      motto: Быстрое и надёжное управление TCP- и HTTP-трафиком
+      bullets:
+        - Полное начальное руководство версии 3.4, разбитое на девять тематических разделов.
+        - Руководство по конфигурации в исходных 12 главах.
+        - Руководство по эксплуатации в 13 главах.
+      value: Изучите архитектуру, находите любые ключевые слова и эксплуатируйте HAProxy.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: Быстрые ссылки на документацию HAProxy
+        items:
+          - { icon: fa-solid fa-compass, title: Начальное руководство, url: haproxy/load-balancing/ }
+          - { icon: fa-solid fa-file-code, title: Руководство по конфигурации, url: haproxy/http-fundamentals/ }
+          - { icon: fa-solid fa-right-left, title: Директивы прокси, url: haproxy/proxies/ }
+          - { icon: fa-solid fa-filter, title: ACL и образцы, url: haproxy/acls-and-samples/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: Руководство по эксплуатации, url: haproxy/prerequisites/ }
+          - { icon: fa-solid fa-chart-line, title: CLI среды выполнения и статистика, url: haproxy/statistics-and-monitoring/ }
+          - { icon: fa-solid fa-bug, title: Отладка, url: haproxy/debugging-and-performance/ }
+          - { icon: fa-solid fa-shield-halved, title: Безопасность, url: haproxy/security/ }
+    - ref: 06 / КОНСЕНСУС И КООРДИНАЦИЯ
+      title: etcd
+      url: etcd/
+      motto: Строго согласованное распределённое хранилище ключ-значение
+      bullets:
+        - Надёжный API ключ-значение, построенный на алгоритме Raft.
+        - Охватывает настройку, безопасность, обслуживание и оптимизацию.
+        - Документирует клиентские API, обновления и внутреннее устройство.
+      value: Начните с быстрого старта, затем перейдите к руководству по эксплуатации и справочнику API v3.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: Быстрые ссылки на документацию etcd
+        items:
+          - { icon: fa-solid fa-bolt, title: Быстрый старт, url: etcd/quickstart/ }
+          - { icon: fa-solid fa-download, title: Установка, url: etcd/install/ }
+          - { icon: fa-solid fa-sliders, title: Настройка, url: etcd/op-guide/configuration/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: Обслуживание, url: etcd/op-guide/maintenance/ }
+          - { icon: fa-solid fa-code, title: API, url: etcd/learning/api/ }
+          - { icon: fa-solid fa-arrow-up-right-dots, title: Обновление до 3.7, url: etcd/upgrades/upgrade_3_7/ }
+
+faq:
+  eyebrow: Частые вопросы
+  title: Несколько полезных ответов
+  items:
+    - question: С чего начать?
+      answer: Выберите компонент, соответствующий вашей текущей задаче. Каждая карточка открывает независимый раздел документации, а подробный указатель выше ведёт прямо к самым востребованным страницам.
+      open: true
+    - question: pgsql.cc — официальный сайт PostgreSQL?
+      answer: Нет. pgsql.cc — независимый проект документации сообщества. Он ссылается на каждый исходный проект и сохраняет названия продуктов и технический контекст.
+    - question: Что происходит со ссылками на ещё не переведённые страницы?
+      answer: Если русская страница существует, ссылка открывает её напрямую. Иначе открывается соответствующая английская страница с пометкой EN; переключатель языка остаётся доступен на каждой странице.
+    - question: Как указаны источники исходной документации?
+      answer: Каждая страница завершается строкой с названием исходной работы, правообладателем, лицензией и ссылкой на историю изменений этой страницы. На [странице атрибуции](/ru/attribution/) собраны зафиксированные версии, лицензии и сохранённые уведомления всех шести сборников.

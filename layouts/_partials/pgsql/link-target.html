@@ -1,0 +1,78 @@
+{{- /* Resolve a documentation link in the current language when that page
+     exists, otherwise fall back to the English page at the same logical
+     route. This keeps partial translations navigable without publishing dead
+     localized URLs. External URLs, fragments, and non-page assets retain
+     their original destinations. */ -}}
+{{- $page := .page -}}
+{{- $raw := strings.TrimSpace (printf "%v" (.url | default "")) -}}
+{{- $href := $raw -}}
+{{- $fallback := false -}}
+{{- $external := false -}}
+{{- $targetLanguage := $page.Site.Language.Lang -}}
+
+{{- if $raw -}}
+  {{- $parsedResult := try (urls.Parse $raw) -}}
+  {{- if not $parsedResult.Err -}}
+    {{- $parsed := $parsedResult.Value -}}
+    {{- $scheme := lower $parsed.Scheme -}}
+    {{- $baseHost := (urls.Parse $page.Site.BaseURL).Host -}}
+    {{- $productionHost := (urls.Parse ($page.Site.Params.productionURL | default $page.Site.BaseURL)).Host -}}
+    {{- $internalHost := or (eq $parsed.Host $baseHost) (eq $parsed.Host $productionHost) -}}
+    {{- $external = and $parsed.Host (not $internalHost) -}}
+    {{- if and (not $external) (or (not $scheme) (in (slice "http" "https") $scheme)) $parsed.Path -}}
+      {{- $path := $parsed.Path -}}
+      {{- $logical := strings.TrimPrefix "/" $path -}}
+      {{- range hugo.Sites -}}
+        {{- if not .IsDefault -}}
+          {{- $prefix := printf "%s/" .Language.Lang -}}
+          {{- if hasPrefix $logical $prefix }}{{ $logical = strings.TrimPrefix $prefix $logical }}{{ end -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{- $suffix := "" -}}
+      {{- with $parsed.RawQuery }}{{ $suffix = printf "?%s" . }}{{ end -}}
+      {{- with $parsed.Fragment }}{{ $suffix = printf "%s#%s" $suffix . }}{{ end -}}
+      {{- $rooted := or (hasPrefix $path "/") $parsed.Host -}}
+      {{- $currentTarget := false -}}
+      {{- if $rooted -}}
+        {{- with $page.Site.GetPage (printf "/%s" $logical) }}{{ $currentTarget = . }}{{ end -}}
+      {{- else -}}
+        {{- with $page.GetPage $path }}{{ $currentTarget = . }}{{ end -}}
+      {{- end -}}
+
+      {{- if $currentTarget -}}
+        {{- $href = printf "%s%s" $currentTarget.RelPermalink $suffix -}}
+      {{- else -}}
+        {{- $defaultSite := $page.Site -}}
+        {{- range hugo.Sites }}{{ if .IsDefault }}{{ $defaultSite = . }}{{ end }}{{ end -}}
+        {{- $defaultContext := false -}}
+        {{- if $page.Site.IsDefault -}}
+          {{- $defaultContext = $page -}}
+        {{- else -}}
+          {{- range $page.AllTranslations }}{{ if .Site.IsDefault }}{{ $defaultContext = . }}{{ end }}{{ end -}}
+        {{- end -}}
+        {{- if not $defaultContext }}{{ $defaultContext = $defaultSite.Home }}{{ end -}}
+        {{- $defaultTarget := false -}}
+        {{- if $rooted -}}
+          {{- with $defaultSite.GetPage (printf "/%s" $logical) }}{{ $defaultTarget = . }}{{ end -}}
+        {{- else -}}
+          {{- with $defaultContext.GetPage $path }}{{ $defaultTarget = . }}{{ end -}}
+        {{- end -}}
+        {{- if $defaultTarget -}}
+          {{- $href = printf "%s%s" $defaultTarget.RelPermalink $suffix -}}
+          {{- if not $page.Site.IsDefault -}}
+            {{- $fallback = true -}}
+            {{- $targetLanguage = $defaultSite.Language.Lang -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return (dict
+  "href" $href
+  "external" $external
+  "fallback" $fallback
+  "language" $targetLanguage
+) -}}

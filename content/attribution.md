@@ -19,6 +19,11 @@ This page is that record. It states what was imported, when, from which pinned r
 which licence, and where the complete upstream notice is retained.
 
 > [!NOTE]
+> English, Simplified Chinese, and French cover all six collections. Japanese,
+> German, and Russian publish the translations already completed; links to
+> missing translations fall back to the corresponding English page.
+
+> [!NOTE]
 > pgsql.cc is an independent community documentation project. It is not affiliated with, endorsed
 > by, or an official publication of any of the projects below, nor of the PostgreSQL Global
 > Development Group.
@@ -120,8 +125,9 @@ retained [upstream](https://github.com/etcd-io/website/blob/main/LICENSE).
 
 ## This site {#site}
 
-Original text written for pgsql.cc — orientation pages, the Chinese translations of the six
-translated collections, editorial notes, and the landing page — is published under
+Original text written for pgsql.cc — orientation pages, the complete Simplified Chinese and French
+editions, the published Japanese, German, and Russian translations, editorial notes, and the
+landing pages — is published under
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), except where an upstream licence
 above applies to the page instead.
 
@@ -133,7 +139,7 @@ and republished here unmodified under
 as a reference to PostgreSQL. It is a mark of the PostgreSQL Community Association of Canada and
 its use here does not imply endorsement.
 
-The site is built with [OINK](https://oink.pgsty.com/) v0.6.0, a Hugo theme licensed under the
+The site is built with [OINK](https://oink.pgsty.com/) v1.0.0, a Hugo theme licensed under the
 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0), which carries its own upstream
 and bundled-dependency notices in the module source.
 

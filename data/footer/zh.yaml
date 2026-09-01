@@ -1,7 +1,7 @@
 brand:
   name: PGSQL.CC
   tagline: PostgreSQL 社区组件
-  slogan: 面向生产实践的 PostgreSQL 生态工具双语文档。
+  slogan: 面向生产实践的 PostgreSQL 生态工具多语言文档。
 columns:
   - title: 组件文档
     links:

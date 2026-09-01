@@ -1,0 +1,2 @@
+{{- $target := partial "pgsql/link-target.html" (dict "page" .Page "url" .Destination) -}}
+<a href="{{ $target.href | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $target.fallback }} hreflang="{{ $target.language }}" data-fallback-language="{{ $target.language }}"{{ end }}>{{ .Text | safeHTML }}</a>

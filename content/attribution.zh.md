@@ -17,6 +17,10 @@ pgsql.cc 转载并整理了六个上游项目撰写的文档。每一个文档�
 本页就是那份记录：说明每份材料从哪里、在什么时间、从哪个固定版本导入，依据什么协议，以及完整的上游声明保存在何处。
 
 > [!NOTE]
+> 英文、简体中文与法文完整覆盖六套文档；日文、德文与俄文发布已经完成的译文，
+> 尚无译文的链接会回退到对应英文页面。
+
+> [!NOTE]
 > pgsql.cc 是独立的社区文档项目，与下列任何项目均无隶属关系，也未获得其背书，
 > 不是它们的官方出版物，也不代表 PostgreSQL 全球开发组。
 
@@ -110,7 +114,8 @@ etcd 文档版权归 etcd Authors 所有（Copyright 2013-present）。其正文
 
 ## 本站 {#site}
 
-为 pgsql.cc 原创撰写的内容——导览页面、六套文档集的中文译文、编辑说明与首页——依
+为 pgsql.cc 原创撰写的内容——导览页面、完整的简体中文与法文版本、已经发布的日文、
+德文与俄文译文、编辑说明与各语言首页——依
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 发布；
 若某页面适用上述上游协议，则以上游协议为准。
 
@@ -121,7 +126,7 @@ etcd 文档版权归 etcd Authors 所有（Copyright 2013-present）。其正文
 在此用于指代 PostgreSQL。该标识归 PostgreSQL Community Association of Canada 所有，
 在此使用不代表其认可或背书。
 
-本站由 [OINK](https://oink.pgsty.cc/) v0.6.0 构建，该 Hugo 主题依
+本站由 [OINK](https://oink.pgsty.com/) v1.0.0 构建，该 Hugo 主题依
 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) 授权，
 其自身的上游与内置依赖声明随模块源码一并提供。
 

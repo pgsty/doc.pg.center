@@ -3,7 +3,8 @@ sections:
     partial: pgsql/hero-orbit.html
   - type: cards
     key: components
-  - capabilities
+  - key: capabilities
+    partial: pgsql/capabilities.html
   - faq
 
 hero:
@@ -23,7 +24,7 @@ components:
   class: pgsql-components
   eyebrow: 选择文档根
   title: 六个组件，六个直接入口
-  text: 每个组件都拥有独立的侧栏、阅读顺序、页面大纲与本地搜索上下文；六套文档均提供中英双语版本。
+  text: 英文、简体中文与法文完整覆盖六套文档；日文覆盖 PgBouncer，俄文覆盖四套组件，德文已覆盖五套组件中的部分页面。尚无译文的链接会回退到英文，并显示 EN 标记。
   columns: 3
   link_label: 阅读文档
   items:
@@ -203,7 +204,7 @@ faq:
       open: true
     - question: pgsql.cc 是 PostgreSQL 官方网站吗？
       answer: 不是。pgsql.cc 是独立的社区文档项目。本站保留各上游项目的链接、产品名称与技术上下文。
-    - question: 中英文页面如何对应？
-      answer: 六套文档在同一逻辑路径下均提供一一对应的英文原文与简体中文译文，可通过顶部语言按钮切换。
+    - question: 部分语言尚未完整覆盖时如何处理？
+      answer: 如果当前语言已有对应页面，链接会直接打开译文；尚未翻译的页面会自动打开同一路径的英文版，并显示 EN 标记。每个页面仍可通过语言选择器切换版本。
     - question: 上游文档的归属如何标注？
       answer: 每个页面末尾都有一行署名，指明该页改编自哪份作品、版权归属、授权协议，以及本站中该页面的修改历史链接。[归属与授权页面](/zh/attribution/)汇总了六套文档集的固定版本、授权协议与完整声明。

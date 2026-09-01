@@ -1,0 +1,210 @@
+sections:
+  - key: hero
+    partial: pgsql/hero-orbit.html
+  - type: cards
+    key: components
+  - key: capabilities
+    partial: pgsql/capabilities.html
+  - faq
+
+hero:
+  class: pgsql-hero pgsql-hero--fit-title
+  eyebrow: 6つの独立した PostgreSQL コミュニティコンポーネント
+  title_lines:
+    - words:
+        - { mark: P, color: blue, text: ostgreSQL }
+    - words:
+        - { text: コミュニティコンポーネント }
+  lead: 独立性と読みやすさを備えた多言語ドキュメント。
+  links_label: コンポーネントドキュメント
+  orbit:
+    center_image: img/slonik.svg
+
+components:
+  class: pgsql-components
+  eyebrow: ドキュメントを選択
+  title: 6つのコンポーネント、6つの入口。
+  text: 日本語版は PgBouncer を完全に収録しています。日本語訳があるページはそのまま開き、未翻訳のページは EN マーク付きで同じサイトの英語版へ自動的に切り替わります。
+  columns: 3
+  link_label: ドキュメントを読む
+  items:
+    - title: Patroni
+      meta: 高可用性
+      icon: fa-solid fa-heart-pulse
+      desc: 分散コンセンサスと自動フェイルオーバーを備えた PostgreSQL クラスターを運用します。
+      url: patroni/
+    - title: pgBackRest
+      meta: バックアップとリカバリー
+      icon: fa-solid fa-couch
+      desc: 信頼性の高いバックアップ、リストア、アーカイブ、ポイントインタイムリカバリーを設計します。
+      url: pgbackrest/
+    - title: PgBouncer
+      meta: コネクションプーリング
+      icon: fa-solid fa-arrows-turn-to-dots
+      desc: セッション、トランザクション、ステートメントの各プーリングで接続オーバーヘッドを削減します。
+      url: pgbouncer/
+    - title: pgBadger
+      meta: ログ解析
+      icon: fa-solid fa-otter
+      desc: PostgreSQL と PgBouncer のログから、クエリー、ワークロード、エラーのレポートを生成します。
+      url: pgbadger/
+    - title: HAProxy
+      meta: 負荷分散
+      icon: fa-solid fa-network-wired
+      desc: HAProxy 3.4 の入門、設定、管理マニュアルをすべて参照できます。
+      url: haproxy/
+    - title: etcd
+      meta: コンセンサスと協調
+      icon: fa-solid fa-gear
+      desc: 強い整合性を持つキー・バリューストア、その API、Raft モデル、内部構造を運用します。
+      url: etcd/
+
+capabilities:
+  eyebrow: コンポーネントガイド
+  title: 各コンポーネントの役割と読み始める場所
+  text: 概要を読んだ後、隣のリンク集から目的のマニュアルへ直接移動できます。
+  items:
+    - ref: 01 / 高可用性
+      title: Patroni
+      url: patroni/
+      motto: PostgreSQL 高可用性のテンプレート
+      bullets:
+        - DCS を通じてリーダー選出とクラスター状態を管理します。
+        - 計画的な変更を制御しながらフェイルオーバーを自動化します。
+        - ベアメタル、VM、Kubernetes、マルチデータセンターに対応します。
+      value: インストールと設定から始め、次に運用インターフェースへ進みます。
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: Patroni ドキュメントへのショートカット
+        items:
+          - { icon: fa-solid fa-download, title: インストール, url: patroni/installation/ }
+          - { icon: fa-solid fa-sliders, title: 設定, url: patroni/config/ }
+          - { icon: fa-solid fa-terminal, title: patronictl, url: patroni/patronictl/ }
+          - { icon: fa-solid fa-plug, title: REST API, url: patroni/rest_api/ }
+          - { icon: fa-solid fa-arrows-rotate, title: レプリケーションモード, url: patroni/replication_modes/ }
+          - { icon: fa-solid fa-circle-question, title: FAQ, url: patroni/faq/ }
+    - ref: 02 / バックアップとリカバリー
+      title: pgBackRest
+      url: pgbackrest/
+      motto: 信頼性の高いバックアップ、アーカイブ、リストア、ポイントインタイムリカバリー
+      bullets:
+        - フル、差分、増分、ブロックレベルのバックアップに対応します。
+        - リポジトリ、保持期間、WAL アーカイブを管理します。
+        - 導入手順とすべてのコマンドを解説します。
+      value: 使用する OS のガイドから始め、設定とコマンドリファレンスを手元に置きます。
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: pgBackRest ドキュメントへのショートカット
+        items:
+          - { icon: fa-solid fa-route, title: ユーザーガイド, url: pgbackrest/user-guide/ }
+          - { icon: fa-brands fa-redhat, title: RHEL ガイド, url: pgbackrest/user-guide-rhel/ }
+          - { icon: fa-solid fa-sliders, title: 設定, url: pgbackrest/configuration/ }
+          - { icon: fa-solid fa-terminal, title: コマンド, url: pgbackrest/command/ }
+          - { icon: fa-solid fa-tags, title: リリース, url: pgbackrest/release/ }
+          - { icon: fa-solid fa-circle-question, title: FAQ, url: pgbackrest/faq/ }
+    - ref: 03 / コネクションプーリング
+      title: PgBouncer
+      url: pgbouncer/
+      motto: PostgreSQL 向けの軽量コネクションプーラー
+      bullets:
+        - 接続を再利用してバックエンド起動コストを削減します。
+        - セッション、トランザクション、ステートメントの各プーリングを提供します。
+        - 認証、ルーティング、制限、管理コンソールを解説します。
+      value: 最初にプーリングモデルを理解し、その後ワークロードに合わせて導入、調整します。
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: PgBouncer ドキュメントへのショートカット
+        items:
+          - { icon: fa-solid fa-list-check, title: 機能, url: pgbouncer/features/ }
+          - { icon: fa-solid fa-download, title: ダウンロード, url: pgbouncer/download/ }
+          - { icon: fa-solid fa-wrench, title: インストール, url: pgbouncer/install/ }
+          - { icon: fa-solid fa-terminal, title: 使用方法, url: pgbouncer/usage/ }
+          - { icon: fa-solid fa-sliders, title: 設定, url: pgbouncer/config/ }
+          - { icon: fa-solid fa-circle-question, title: FAQ, url: pgbouncer/faq/ }
+    - ref: 04 / ログ解析
+      title: pgBadger
+      url: pgbadger/
+      motto: PostgreSQL と PgBouncer の高速ログ解析
+      bullets:
+        - さまざまな形式の PostgreSQL と PgBouncer のログを解析します。
+        - スロークエリー、エラー、ロック、Vacuum の動作をレポートします。
+        - 自己完結型 HTML、JSON、テキスト、CSV を出力します。
+      value: 最初にログを設定し、単発、並列、増分のレポート方式を選びます。
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: pgBadger ドキュメントへのショートカット
+        items:
+          - { icon: fa-solid fa-download, title: ダウンロード, url: pgbadger/download/ }
+          - { icon: fa-solid fa-terminal, title: コマンドライン, url: pgbadger/command-line/ }
+          - { icon: fa-solid fa-file-lines, title: PostgreSQL ログ, url: pgbadger/postgresql-logging/ }
+          - { icon: fa-solid fa-calendar-days, title: 増分レポート, url: pgbadger/incremental-reports/ }
+          - { icon: fa-solid fa-file-export, title: 出力形式, url: pgbadger/output-formats/ }
+          - { icon: fa-solid fa-chart-column, title: サンプルレポート, url: pgbadger/sample-reports/ }
+          - { icon: fa-solid fa-tags, title: リリース, url: pgbadger/releases/ }
+          - { icon: fa-solid fa-life-ring, title: サポート, url: pgbadger/support/ }
+    - ref: 05 / 負荷分散
+      title: HAProxy
+      url: haproxy/
+      motto: 高速で信頼性の高い TCP/HTTP トラフィック管理
+      bullets:
+        - HAProxy 3.4 入門ガイド全体を9つのテーマに分けて収録します。
+        - 設定マニュアルを元の構成に沿った12章で収録します。
+        - 管理ガイドを運用に焦点を当てた13章で収録します。
+      value: アーキテクチャを学び、すべてのキーワードを検索し、HAProxy を運用します。
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: HAProxy ドキュメントへのショートカット
+        items:
+          - { icon: fa-solid fa-compass, title: 入門ガイド, url: haproxy/load-balancing/ }
+          - { icon: fa-solid fa-file-code, title: 設定マニュアル, url: haproxy/http-fundamentals/ }
+          - { icon: fa-solid fa-right-left, title: プロキシディレクティブ, url: haproxy/proxies/ }
+          - { icon: fa-solid fa-filter, title: ACL とサンプル, url: haproxy/acls-and-samples/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: 管理ガイド, url: haproxy/prerequisites/ }
+          - { icon: fa-solid fa-chart-line, title: ランタイム CLI と統計, url: haproxy/statistics-and-monitoring/ }
+          - { icon: fa-solid fa-bug, title: デバッグ, url: haproxy/debugging-and-performance/ }
+          - { icon: fa-solid fa-shield-halved, title: セキュリティ, url: haproxy/security/ }
+    - ref: 06 / コンセンサスと協調
+      title: etcd
+      url: etcd/
+      motto: 強い整合性を持つ分散キー・バリューストア
+      bullets:
+        - Raft アルゴリズムに基づく永続的なキー・バリュー API を提供します。
+        - 設定、セキュリティ、保守、チューニングを解説します。
+        - クライアント API、アップグレード、内部設計を解説します。
+      value: クイックスタートから始め、運用ガイドと v3 API リファレンスへ進みます。
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: etcd ドキュメントへのショートカット
+        items:
+          - { icon: fa-solid fa-bolt, title: クイックスタート, url: etcd/quickstart/ }
+          - { icon: fa-solid fa-download, title: インストール, url: etcd/install/ }
+          - { icon: fa-solid fa-sliders, title: 設定, url: etcd/op-guide/configuration/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: 保守, url: etcd/op-guide/maintenance/ }
+          - { icon: fa-solid fa-code, title: API, url: etcd/learning/api/ }
+          - { icon: fa-solid fa-arrow-up-right-dots, title: 3.7 へのアップグレード, url: etcd/upgrades/upgrade_3_7/ }
+
+faq:
+  eyebrow: FAQ
+  title: よくある質問
+  items:
+    - question: どこから読み始めればよいですか？
+      answer: 現在の作業に対応するコンポーネントを選んでください。各カードは独立したドキュメントを開き、上の詳細セクションにはよく使うページへの直接リンクがあります。
+      open: true
+    - question: pgsql.cc は PostgreSQL の公式サイトですか？
+      answer: いいえ。pgsql.cc は独立したコミュニティドキュメントプロジェクトです。各アップストリームプロジェクトへのリンクを示し、製品名と技術的文脈を維持しています。
+    - question: 未翻訳のページへのリンクはどうなりますか？
+      answer: 現在の日本語版は PgBouncer の全ページを提供しています。対応する日本語ページがないリンクは同じサイトの英語ページを開き、EN マークで切り替わることを示します。言語選択はすべてのページで利用できます。
+    - question: アップストリーム文書の出典はどのように示されていますか？
+      answer: 各ページの末尾には、改変元の著作物、著作権者、ライセンス、およびこのサイトでの変更履歴へのリンクがあります。[帰属とライセンスのページ](/ja/attribution/)には、6つのドキュメントセットの固定リビジョン、ライセンス、保持している通知をまとめています。
