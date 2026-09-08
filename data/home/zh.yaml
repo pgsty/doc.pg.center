@@ -24,7 +24,7 @@ components:
   class: pgsql-components
   eyebrow: 选择文档根
   title: 六个组件，六个直接入口
-  text: 英文、简体中文与法文完整覆盖六套文档；日文覆盖 PgBouncer，俄文覆盖四套组件，德文已覆盖五套组件中的部分页面。尚无译文的链接会回退到英文，并显示 EN 标记。
+  text: 英文、简体中文与法文完整覆盖六套文档；日文完整覆盖 Patroni、PgBouncer 与 pgBadger，俄文覆盖四套组件，德文已覆盖五套组件中的部分页面。尚无译文的链接会回退到英文，并显示 EN 标记。
   columns: 3
   link_label: 阅读文档
   items:

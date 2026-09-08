@@ -24,7 +24,7 @@ components:
   class: pgsql-components
   eyebrow: Choose a documentation root
   title: Six components. Six direct entrances.
-  text: English, Simplified Chinese, and French cover all six collections. Japanese covers PgBouncer, Russian covers four collections, and German provides translated pages across five. Missing translations fall back to English and carry an EN marker.
+  text: English, Simplified Chinese, and French cover all six collections. Japanese covers Patroni, PgBouncer, and pgBadger, Russian covers four collections, and German provides translated pages across five. Missing translations fall back to English and carry an EN marker.
   columns: 3
   link_label: Read the docs
   items:

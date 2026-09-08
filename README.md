@@ -17,9 +17,9 @@ HAProxy 3.4 与 etcd 3.7。英文、简体中文与法文完整覆盖全部页�
 ## Language coverage
 
 - **English / 简体中文 / Français:** all six collections, 218 pages per locale.
-- **日本語:** complete PgBouncer documentation plus the localized home, search, and attribution pages, 12 pages total.
+- **日本語:** complete Patroni, PgBouncer, and pgBadger documentation, translated subsets of pgBackRest, HAProxy, and etcd, and localized site pages, 108 pages total.
 - **Deutsch:** complete pgBadger documentation and translated subsets of Patroni, PgBouncer, HAProxy, and etcd, 34 pages total.
-- **Русский:** complete Patroni, PgBouncer, pgBadger, and etcd documentation plus the localized site pages, 151 pages total.
+- **Русский:** complete Patroni, PgBouncer, pgBadger, and etcd documentation, translated subsets of pgBackRest and HAProxy, and localized site pages, 190 pages total.
 
 Localized navigation resolves each route at build time. Existing translations stay in the selected
 language; gaps link to the matching English page and are marked `EN` on the homepage.

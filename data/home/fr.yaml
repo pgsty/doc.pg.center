@@ -24,7 +24,7 @@ components:
   class: pgsql-components
   eyebrow: Choisissez une collection documentaire
   title: Six composants. Six accès directs.
-  text: L’anglais, le chinois simplifié et le français couvrent les six collections. Le japonais couvre PgBouncer, le russe quatre collections et l’allemand des pages réparties dans cinq collections. Les traductions manquantes renvoient vers l’anglais avec l’indicateur EN.
+  text: L’anglais, le chinois simplifié et le français couvrent les six collections. Le japonais couvre Patroni, PgBouncer et pgBadger, le russe quatre collections et l’allemand des pages réparties dans cinq collections. Les traductions manquantes renvoient vers l’anglais avec l’indicateur EN.
   columns: 3
   link_label: Lire la documentation
   items:
