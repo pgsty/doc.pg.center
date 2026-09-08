@@ -240,14 +240,14 @@ languages:
       main:
         - identifier: patroni
           name: Patroni
-          url: https://pgsql.cc/patroni/
+          pageRef: /patroni
           weight: 10
           params:
             icon: fa-solid fa-heart-pulse
             description: PostgreSQL の高可用性と自動フェイルオーバー
         - identifier: pgbackrest
           name: pgBackRest
-          url: https://pgsql.cc/pgbackrest/
+          pageRef: /pgbackrest
           weight: 20
           params:
             icon: fa-solid fa-couch
@@ -261,21 +261,21 @@ languages:
             description: PostgreSQL 向けの軽量コネクションプーリング
         - identifier: pgbadger
           name: pgBadger
-          url: https://pgsql.cc/pgbadger/
+          pageRef: /pgbadger
           weight: 40
           params:
             icon: fa-solid fa-otter
             description: PostgreSQL と PgBouncer の高速ログ解析
         - identifier: haproxy
           name: HAProxy
-          url: https://pgsql.cc/haproxy/
+          pageRef: /haproxy
           weight: 50
           params:
             icon: fa-solid fa-network-wired
             description: HAProxy 3.4 の入門、設定、管理マニュアル
         - identifier: etcd
           name: etcd
-          url: https://pgsql.cc/etcd/
+          pageRef: /etcd
           weight: 60
           params:
             icon: fa-solid fa-gear
@@ -370,7 +370,7 @@ languages:
             description: Высокая доступность PostgreSQL и автоматическое переключение при сбоях
         - identifier: pgbackrest
           name: pgBackRest
-          url: https://pgsql.cc/pgbackrest/
+          pageRef: /pgbackrest
           weight: 20
           params:
             icon: fa-solid fa-couch
@@ -391,7 +391,7 @@ languages:
             description: Быстрый анализ журналов PostgreSQL и PgBouncer
         - identifier: haproxy
           name: HAProxy
-          url: https://pgsql.cc/haproxy/
+          pageRef: /haproxy
           weight: 50
           params:
             icon: fa-solid fa-network-wired

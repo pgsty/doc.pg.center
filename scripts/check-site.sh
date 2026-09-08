@@ -45,9 +45,9 @@ test "$legacy_french_count" -eq "$legacy_complete_expected"
 test "$english_count" -eq "$total_complete_expected"
 test "$chinese_count" -eq "$total_complete_expected"
 test "$french_count" -eq "$total_complete_expected"
-test "$japanese_count" -eq 9
+test "$japanese_count" -eq 105
 test "$german_count" -eq 31
-test "$russian_count" -eq 148
+test "$russian_count" -eq 187
 test "$(find "$content_dir/pgbouncer" -type f -name '*.ja.md' | wc -l | tr -d ' ')" -eq 9
 test "$(find "$content_dir/pgbadger" -type f -name '*.de.md' | wc -l | tr -d ' ')" -eq 16
 test "$(find "$content_dir/patroni" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -eq 24
@@ -412,9 +412,9 @@ expected_roots = {
     "en": complete_roots,
     "zh": complete_roots,
     "fr": complete_roots,
-    "ja": {"/pgbouncer/"},
+    "ja": complete_roots,
     "de": {"/patroni/", "/pgbouncer/", "/pgbadger/", "/haproxy/", "/etcd/"},
-    "ru": {"/patroni/", "/pgbouncer/", "/pgbadger/", "/etcd/"},
+    "ru": complete_roots,
 }
 for filename, language in zip(sys.argv[1:], expected_roots):
     payload = json.loads(Path(filename).read_text(encoding="utf-8"))
@@ -478,7 +478,8 @@ for language in ("ja", "de", "ru"):
 
 _, ja = home("ja")
 assert has_link(ja, "/ja/pgbouncer/")
-assert has_link(ja, "/patroni/", "en")
+assert has_link(ja, "/ja/patroni/")
+assert has_link(ja, "/pgbackrest/user-guide/", "en")
 
 _, de = home("de")
 assert has_link(de, "/de/pgbadger/")
@@ -488,7 +489,8 @@ assert has_link(de, "/pgbackrest/", "en")
 _, ru = home("ru")
 assert has_link(ru, "/ru/etcd/")
 assert has_link(ru, "/ru/patroni/")
-assert has_link(ru, "/haproxy/", "en")
+assert has_link(ru, "/ru/haproxy/")
+assert has_link(ru, "/haproxy/proxies/", "en")
 PY
 
 while IFS= read -r source_file; do
@@ -544,7 +546,7 @@ for language in ja de ru; do
     fi
     route=$(printf '%s' "$route" | tr '[:upper:]' '[:lower:]')
     test -s "$build_dir/public/$route/index.html"
-  done < <(find "$content_dir" -type f -name "*.$language.md" | sort)
+  done < <(find "$content_dir" -type f -name "*.$language.md" ! -name "_div_*.md" | sort)
 done
 
 while IFS= read -r source_file; do
