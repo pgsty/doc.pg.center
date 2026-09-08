@@ -1,0 +1,188 @@
+---
+title: "pgBackRest 2.59.1 ドキュメント"
+linkTitle: pgBackRest
+weight: 20
+icon: fa-solid fa-couch
+type: docs
+outputs: [HTML, RSS, print, markdown, LLMSFULL]
+sidebar_root_for: self
+sidebar_root_link_self: true
+description: "信頼性の高いPostgreSQLのバックアップとリストア — pgBackRestのドキュメントとリファレンス。"
+module: [PGBACKREST]
+categories: [概念]
+aliases: [/pgbackrest/]
+upstream_source: pgbackrest
+upstream_link: "https://pgbackrest.org/"
+cascade:
+  upstream_source: pgbackrest
+  type: docs
+  module: [PGBACKREST]
+---
+
+--------
+
+## はじめに {#introduction}
+
+pgBackRestは、最大規模のデータベースやワークロードにもシームレスに対応できる、PostgreSQL向けの信頼性の高いバックアップとリストアのソリューションです。
+
+現在の安定版はpgBackRest [v2.59.1](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.1)です。リリースノートは[リリース](/ja/docs/pgbackrest/release/)ページにあります。
+
+pgBackRestを気に入っていただけたら、[GitHub](https://github.com/pgbackrest/pgbackrest)でスターを付けてください！
+
+
+--------
+
+## ニュース {#news}
+
+**2026年8月17日** - [pgBackRest 2.59.1をリリース](/ja/docs/pgbackrest/news/#release-2-59-1)
+
+**2026年7月20日** - [新しい配布用tarアーカイブ](/ja/docs/pgbackrest/news/#distribution-tarball)
+
+**2026年7月20日** - [pgBackRest 2.59.0をリリース](/ja/docs/pgbackrest/news/#release-2-59-0)
+
+
+--------
+
+## スポンサー {#sponsors}
+
+pgBackRestはスポンサーの支援なしには存在し得ません。新機能の開発、バグの修正、コントリビューションのレビュー、コミュニティからの質問への回答、保守には、いずれも多くの時間がかかります。企業でpgBackRestを使用している場合は、[スポンサーとしての支援](https://github.com/sponsors/dwsteele)をご検討ください。
+
+スポンサー：[AWS](https://aws.amazon.com)、[Supabase](https://supabase.com)、[pgEdge](https://pgedge.com)、[Tiger Data](https://tigerdata.com)、[Percona](https://percona.com)、[Eon](https://eon.io)、[Xata](https://xata.io)、[Dalibo](https://dalibo.com)、[Data Egret](https://dataegret.com/)。
+
+PostgreSQLコミュニティ全体に役立つオープンソースのインフラストラクチャーへの投資に、心より感謝いたします。
+
+過去のスポンサー：[Crunchy Data](https://crunchydata.com)、[Resonate](https://resonate.com)。
+
+
+--------
+
+## 機能 {#features}
+
+
+### 並列バックアップとリストア {#parallel-backup--restore}
+
+バックアップ処理では通常、圧縮がボトルネックになります。pgBackRestは、並列処理と、`lz4`や`zstd`などのより効率的な圧縮アルゴリズムによってこの問題を解決します。
+
+
+### ローカルまたはリモートでの操作 {#local-or-remote-operation}
+
+独自のプロトコルにより、最小限の構成で、ローカルまたはTLS/SSH経由のリモートでバックアップ、リストア、アーカイブを実行できます。プロトコル層にはPostgreSQLにクエリーを実行するインターフェースも用意されているため、PostgreSQLへのリモートアクセスは一切不要となり、セキュリティが向上します。
+
+
+### 複数のリポジトリ {#multiple-repositories}
+
+複数のリポジトリを使用すると、たとえば、高速なリストアのために保持期間を最小限にしたローカルリポジトリと、冗長性および企業全体からのアクセスのために保持期間を長くしたリモートリポジトリを併用できます。
+
+
+### フル・差分・増分バックアップ（ファイル単位またはブロック単位） {#full-differential--incremental-backups-at-file-or-block-level}
+
+フルバックアップ、差分バックアップ、増分バックアップをサポートしています。pgBackRestは`rsync`の時刻分解能の問題の影響を受けないため、各ファイルのチェックサムを計算しなくても、差分バックアップと増分バックアップを安全に実行できます。ブロック単位のバックアップでは、ファイルの変更された部分だけをコピーすることで容量を節約します。
+
+
+### バックアップの世代管理とアーカイブの期限切れ処理 {#backup-rotation--archive-expiration}
+
+フルバックアップと差分バックアップの保持ポリシーを設定し、任意の期間をカバーできます。WALアーカイブは、すべてのバックアップに対して保持することも、直近のバックアップだけに限定して保持することもできます。後者の場合でも、古いバックアップの整合性を確保するために必要なWALはアーカイブに保持されます。
+
+
+### バックアップの整合性 {#backup-integrity}
+
+バックアップ内のすべてのファイルについてチェックサムを計算し、リストアまたは検証時に再確認します。バックアップのファイルコピーが完了すると、バックアップの整合性を確保するために必要なすべてのWALセグメントがリポジトリに到着するまで待機します。
+
+リポジトリ内のバックアップは、テーブルスペースを含む標準的なPostgreSQLクラスターと同じ形式で保存できます。圧縮を無効にし、ハードリンクを有効にすると、リポジトリ内のバックアップのスナップショットを作成し、そのスナップショット上でPostgreSQLクラスターを直接起動できます。これは、従来の方法ではリストアに時間がかかるテラバイト規模のデータベースに有用です。
+
+すべての操作でファイルとディレクトリ単位のfsyncを使用し、永続性を確保します。
+
+
+### ページチェックサム {#page-checksums}
+
+ページチェックサムが有効な場合、pgBackRestはバックアップ中にコピーするすべてのファイルのチェックサムを検証します。フルバックアップではすべてのページチェックサムを検証し、差分バックアップと増分バックアップでは変更されたファイルのチェックサムを検証します。
+
+検証に失敗してもバックアップ処理は停止しませんが、検証に失敗したページを特定する詳細な警告をコンソールとファイルログに出力します。
+
+この機能により、正常なデータのコピーを含むバックアップの保持期限が切れる前に、ページ単位の破損を早期に検出できます。
+
+
+### バックアップの再開 {#backup-resume}
+
+中断されたバックアップは、停止した時点から再開できます。すでにコピーされたファイルをマニフェスト内のチェックサムと比較し、整合性を確認します。この操作はリポジトリホスト内だけで完結するため、PostgreSQLホストの負荷を軽減できます。また、チェックサムの計算はデータの圧縮と再転送より速いため、時間も短縮できます。
+
+
+### ストリーミング圧縮とチェックサム {#streaming-compression--checksums}
+
+リポジトリがローカルとリモートのどちらにある場合でも、ファイルをリポジトリにコピーする際に、ストリーム内で圧縮とチェックサムの計算を実行します。
+
+リポジトリがリポジトリホスト上にある場合は、PostgreSQLホストで圧縮を実行し、圧縮形式でファイルを転送します。リポジトリホストではそのまま保存するだけです。圧縮が無効な場合は、CPUの負荷を最小限に抑えながら利用可能な帯域幅を効率的に使うため、低い圧縮レベルを使用します。
+
+
+### 差分リストア {#delta-restore}
+
+マニフェストにはバックアップ内のすべてのファイルのチェックサムが含まれているため、リストア時にこれらを利用して処理を大幅に高速化できます。差分リストアでは、まずバックアップに存在しないファイルを削除し、残ったファイルのチェックサムを計算します。バックアップと一致するファイルはそのまま残し、それ以外のファイルは通常どおりリストアします。並列処理により、リストア時間を大幅に短縮できます。
+
+
+### WALの並列・非同期送信と取得 {#parallel-asynchronous-wal-push--get}
+
+WALをアーカイブへ送信する専用コマンドと、アーカイブから取得する専用コマンドを備えています。両コマンドとも、処理を高速化するための並列処理をサポートし、PostgreSQLへの応答時間を可能な限り短縮するため非同期に動作します。
+
+WALの送信では、複数回送信されたWALセグメントを自動的に検出し、同一のセグメントであれば重複を排除し、異なる場合はエラーを返します。非同期のWAL送信では、転送を別のプロセスに任せ、そのプロセスでWALセグメントを並列に圧縮してスループットを最大化できます。これは、書き込み量が極めて多いデータベースにとって重要な機能となり得ます。
+
+非同期のWAL取得では、展開済みで再生可能なWALセグメントのローカルキューを維持します。これにより、PostgreSQLにWALを提供するまでの時間を短縮し、再生速度を最大化します。レイテンシーの高い接続やストレージ（S3など）で特に効果があります。
+
+送信コマンドと取得コマンドは、いずれもPostgreSQLのバージョンとシステム識別子を比較し、データベースとリポジトリが一致することを確認します。これにより、WALアーカイブの保存先を誤って設定する可能性をほぼ排除できます。
+
+
+### テーブルスペースとリンクのサポート {#tablespace--link-support}
+
+テーブルスペースを完全にサポートし、リストア時には任意の場所に再配置できます。単一のコマンドですべてのテーブルスペースを一か所に再配置することもでき、開発用のリストアに便利です。
+
+PostgreSQLクラスター内の任意のファイルやディレクトリに対するリンクをサポートしています。リストア時には、すべてのリンクを元の場所に復元する、一部またはすべてのリンクを再配置する、あるいは一部またはすべてのリンクをクラスターのディレクトリ内の通常のファイルやディレクトリとしてリストアすることができます。
+
+
+### S3、Azure、GCS互換オブジェクトストアのサポート {#s3-azure-and-gcs-compatible-object-store-support}
+
+pgBackRestのリポジトリは、S3、Azure、GCS互換のオブジェクトストアに配置でき、事実上無制限の容量と保持期間を実現できます。
+
+
+### 暗号化 {#encryption}
+
+pgBackRestはリポジトリを暗号化でき、保存場所にかかわらずバックアップを保護します。
+
+
+### ランサムウェアとマルウェアからの保護 {#ransomware--malware-protection}
+
+リポジトリがバージョニングを有効にしたオブジェクトストレージに保存されている場合、pgBackRestは特定時点の状態のリポジトリを読み取ることができます。誤操作、マルウェア、ランサムウェアによってバックアップが削除または破損した場合は、対象時刻を指定し、被害が発生する前のデータをリカバリーできます。
+
+バージョニングはS3、Azure、GCS互換のオブジェクトストアでサポートされています。S3のオブジェクトロックや、GCSまたはAzureの論理削除によって、改ざんに対する保護をさらに強化できます。
+
+
+### PostgreSQLの10バージョンとの互換性 {#compatibility-with-ten-versions-of-postgresql}
+
+pgBackRestは、サポート対象の5バージョンと、直近のサポート終了済み5バージョン、計10バージョンのPostgreSQLをサポートしています。これにより、サポート対象のバージョンへアップグレードするための十分な時間を確保できます。
+
+
+--------
+
+## 使い始めるには {#getting-started}
+
+pgBackRestは、簡単に構成して運用できることを目指しています。
+
+- 各種オペレーティングシステムとPostgreSQLのバージョンに対応した[ユーザーガイド](/ja/docs/pgbackrest/user-guide/)。
+- コマンドライン操作のコマンドページ：[backup](/ja/docs/pgbackrest/command/backup/)、[restore](/ja/docs/pgbackrest/command/restore/)、[check](/ja/docs/pgbackrest/command/check/)、[info](/ja/docs/pgbackrest/command/info/)。
+- pgBackRestの構成を作成するための[構成リファレンス](/ja/docs/pgbackrest/configuration/)。
+
+
+--------
+
+## コントリビューション {#contributions}
+
+pgBackRestへのコントリビューションは常に歓迎しています。機能の追加、改善、問題の報告については、[コントリビューションガイドライン](https://github.com/pgbackrest/pgbackrest/blob/main/CONTRIBUTING.md)をご覧ください。
+
+
+--------
+
+## サポート {#support}
+
+pgBackRestは、[MIT](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE)ライセンスのもとで公開されている、完全に無償のオープンソースソフトウェアです。個人利用でも商用利用でも、一切の制限なく使用できます。バグ報告は重く受け止め、可能な限り速やかに対応します。バグは[こちら](https://github.com/pgbackrest/pgbackrest/issues)から報告してください。
+
+適切なレプリケーションとバックアップ戦略を備えた堅牢な災害復旧ポリシーの策定は、非常に複雑で困難な作業となる場合があります。アーキテクチャーの設計段階で支援が必要になったり、企業の円滑な運営を継続するために継続的なサポートが必要になったりすることもあります。
+
+[スポンサー](#sponsors)は、pgBackRestのサポートを含む製品やサービスを提供しており、災害復旧のニーズに応じた支援を受けられます。

@@ -1,0 +1,69 @@
+---
+title: Quickstart
+weight: 900
+description: Get etcd up and running in less than 5 minutes!
+icon: fa-solid fa-rocket
+categories: [Tutorial]
+upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/quickstart.md"
+aliases: [/etcd/quickstart/]
+---
+
+Follow these instructions to locally install, run, and test a single-member
+cluster of etcd:
+
+ 1. Install etcd from pre-built binaries or from source. For details, see
+    [Install][].
+
+    > [!WARNING]
+    > **Important**: Ensure that you perform the last
+    > step of the installation instructions to verify that `etcd` is in your path.
+
+ 2. Launch `etcd`:
+
+    ```console
+    $ etcd
+    {"level":"info","ts":"2021-09-17T09:19:32.783-0400","caller":"etcdmain/etcd.go:72","msg":... }
+    ⋮
+    ```
+
+    > [!NOTE]
+    > **Note**: The output produced by `etcd` are
+    > [logs](/docs/etcd/op-guide/configuration/#logging) &mdash; info-level logs can
+    > be ignored.
+
+ 3. From **another terminal**, use `etcdctl` to set a key:
+
+    ```console
+    $ etcdctl put greeting "Hello, etcd"
+    OK
+    ```
+
+ 4. From the same terminal, retrieve the key:
+
+    ```console
+    $ etcdctl get greeting
+    greeting
+    Hello, etcd
+    ```
+
+## What's next?
+
+Learn about more ways to configure and use etcd from the following pages:
+
+- If you are a developer:
+  - Explore the gRPC [API][].
+  - Find [language bindings and tools][integrations].
+
+- If you are an operator or admin:
+  - Set up a [multi-machine cluster][clustering].
+  - Learn how to [configure][] etcd.
+  - Use TLS to [secure an etcd cluster][security].
+  - [Tune etcd][tuning].
+
+[api]: /docs/etcd/learning/api
+[clustering]: /docs/etcd/op-guide/clustering
+[configure]: /docs/etcd/op-guide/configuration
+[integrations]: /docs/etcd/integrations
+[security]: /docs/etcd/op-guide/security
+[tuning]: /docs/etcd/tuning
+[Install]: /docs/etcd/install/
