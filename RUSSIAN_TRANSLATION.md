@@ -39,7 +39,7 @@ The initial Russian edition covers all six component collections:
   existing fragment links continue to work.
 - Preserve external URLs exactly.  Local documentation links to any of the six
   component collections use the Russian route, for example
-  `/patroni/rest_api/` becomes `/ru/patroni/rest_api/`.
+  `/docs/patroni/rest_api/` becomes `/ru/docs/patroni/rest_api/`.
 - Shared assets remain language-neutral: paths to images, downloads, JSON,
   text, configuration samples, and files below `/third_party/` do not acquire
   a `/ru/` prefix.

@@ -16,7 +16,7 @@ from urllib.parse import urlsplit
 
 PROJECT = Path(__file__).resolve().parent.parent
 CONTENT = PROJECT / "content"
-EXPECTED_ENGLISH_PAGES = 218
+EXPECTED_ENGLISH_PAGES = 219
 COMPONENTS = (
     "patroni",
     "pgbackrest",
@@ -25,7 +25,7 @@ COMPONENTS = (
     "haproxy",
     "etcd",
 )
-LOCALIZED_ROUTES = frozenset((*COMPONENTS, "attribution", "search"))
+LOCALIZED_ROUTES = frozenset(("docs", "attribution", "search"))
 
 # A locale suffix is a BCP-47-like final filename component.  Checking the
 # final component, rather than merely excluding .zh.md and .de.md, prevents a

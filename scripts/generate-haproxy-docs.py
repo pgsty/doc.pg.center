@@ -13,7 +13,7 @@ from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parent.parent
 SOURCE_ROOT = PROJECT / "sources" / "haproxy" / "upstream"
-CONTENT = PROJECT / "content" / "haproxy"
+CONTENT = PROJECT / "content" / "docs" / "haproxy"
 UPSTREAM_VERSION = "3.4.4"
 UPSTREAM_TAG = f"v{UPSTREAM_VERSION}"
 UPSTREAM_COMMIT = "7f03ae65c28605152c7a1a9ba7d9d0bcfb50f8b0"
@@ -219,7 +219,7 @@ LEGACY_FILENAMES = {
 
 
 def page_route(page: Page) -> str:
-    return f"/haproxy/{Path(page.filename).stem}/"
+    return f"/docs/haproxy/{Path(page.filename).stem}/"
 
 
 MANUAL_PATHS = {
@@ -731,8 +731,10 @@ def page_aliases(manual: str, page: Page) -> tuple[str, ...]:
     if page == MANUAL_PAGES[manual][0]:
         aliases.append(f"/haproxy/{manual}/")
     canonical = page_route(page)
+    old_canonical = canonical.removeprefix("/docs")
+    aliases = [alias for alias in aliases if alias != old_canonical]
     aliases.extend(f"/docs{alias}" for alias in tuple(aliases) if alias.startswith("/haproxy/"))
-    aliases.append(f"/docs{canonical}")
+    aliases.append(old_canonical)
     return tuple(dict.fromkeys(alias for alias in aliases if alias != canonical))
 
 
@@ -867,7 +869,7 @@ sidebar_root_link_self: true
 no_list: true
 module: [HAPROXY]
 categories: [Reference]
-aliases: [/docs/haproxy/]
+aliases: [/haproxy/]
 upstream_source: haproxy
 upstream_link: "{DOCS_BASE}/intro.html"
 cascade:

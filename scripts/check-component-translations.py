@@ -15,7 +15,7 @@ from pathlib import Path
 
 
 PROJECT = Path(__file__).resolve().parent.parent
-CONTENT = PROJECT / "content"
+CONTENT = PROJECT / "content" / "docs"
 RENDERED_ROOT = Path(
     os.environ.get("TRANSLATION_RENDERED_DIR", str(PROJECT / "public"))
 ).resolve()
@@ -90,7 +90,7 @@ def html_comments(body: str) -> list[str]:
 
 
 def normalize_localized_target(value: str, component: str) -> str:
-    return value.replace(f"/zh/{component}/", f"/{component}/")
+    return value.replace(f"/zh/docs/{component}/", f"/docs/{component}/")
 
 
 def link_targets(body: str, component: str, *, normalize: bool = True) -> list[str]:
@@ -211,7 +211,7 @@ def blockquote_signature(body: str) -> list[tuple[str, int]]:
 
 
 def rendered_heading_ids(source: Path, expected_levels: list[int] | None = None) -> list[str]:
-    relative = source.relative_to(CONTENT)
+    relative = source.relative_to(PROJECT / "content")
     if source.name in {"_index.md", "index.md"}:
         route = relative.parent
     else:
@@ -260,6 +260,9 @@ def residual_english(body: str, *, include_indented: bool = False) -> list[tuple
         ):
             continue
         stripped = INLINE_CODE_RE.sub("", stripped)
+        # Link destinations are routing data, not prose. A deeper URL must
+        # not make otherwise translated sentences look like English text.
+        stripped = re.sub(r"\]\([^)]*\)", "]", stripped)
         stripped = re.sub(r"https?://\S+", "", stripped)
         stripped = re.sub(r"</?[A-Za-z][^>]*>", "", stripped)
         stripped = re.sub(r"\{\{[%<].*?[>%]\}\}", "", stripped)
@@ -584,7 +587,7 @@ def validate_pair(source: Path, target: Path, errors: list[str]) -> None:
         target
         for target in link_targets(zh_body, component, normalize=False)
         if re.match(
-            rf"^/zh/{re.escape(component)}/.*\.(?:png|gif|svg|json|txt)(?:[?#].*)?$",
+            rf"^/zh/docs/{re.escape(component)}/.*\.(?:png|gif|svg|json|txt)(?:[?#].*)?$",
             target,
             flags=re.IGNORECASE,
         )

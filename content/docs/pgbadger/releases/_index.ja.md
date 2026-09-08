@@ -1,0 +1,25 @@
+---
+title: "リリース履歴"
+linkTitle: "リリース履歴"
+weight: 90
+description: "pgBadger 9.x から 13.x までの変更履歴（上流の ChangeLog から正規化）"
+icon: fa-solid fa-clock-rotate-left
+module: [PGBADGER]
+categories: [リファレンス]
+aliases: [/pgbadger/releases/]
+upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/ChangeLog"
+upstream_name: "pgBadger ChangeLog"
+---
+
+公式ウェブサイトはリリース情報をホームページに直接掲載しています。そのページはバージョン 12.4 までしか記載されておらず、誤って 11.1–11.3 の情報が日付が矛盾する形で繰り返されています。この版では、上流の `ChangeLog` を正規記録として固定し、重複する表示を削除した上で、以降の 13.x リリースを追加しています。各シリーズ内では最新のエントリを先頭に保ち、すべてのエントリをそのまま保持します。
+
+| シリーズ | 含まれるバージョン | 最初–最後のリリース | ページ |
+|---|---|---|---|
+| 13.x | 13.0–13.2 | 2024-12-08 – 2025-12-29 | [13.xを読む](/ja/docs/pgbadger/releases/13/) |
+| 12.x | 12.0–12.4 | 2022-09-13 – 2023-12-25 | [12.xを読む](/ja/docs/pgbadger/releases/12/) |
+| 11.x | 11.0–11.8 | 2019-06-25 – 2022-04-08 | [11.xを読む](/ja/docs/pgbadger/releases/11/) |
+| 10.x | 10.0–10.3 | 2018-09-09 – 2019-02-14 | [10.xを読む](/ja/docs/pgbadger/releases/10/) |
+| 9.x | 9.0–9.2 | 2016-09-02 – 2017-07-27 | [9.xを読む](/ja/docs/pgbadger/releases/9/) |
+
+ダウンロード可能なアーカイブやアセットについては、[GitHub Releases](https://github.com/darold/pgbadger/releases) をご利用ください。本セクションに記載のリリース日は、上流のソース履歴を示すものであり、このドキュメントスナップショットのダウンロード時刻とは異なります。
+

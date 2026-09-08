@@ -1,0 +1,16 @@
+{{- /* OINK's full-text bundle, scoped to an independent documentation root.
+     Component roots remain independent after nesting them under /docs/. */ -}}
+{{- $root := . -}}
+{{- if or (ne $root.Kind "section") (ne $root.Params.sidebar_root_for "self") -}}
+  {{- errorf "LLMSFULL output requires an independent documentation root at %s" $root.Path -}}
+{{- else -}}
+  {{- $pages := partial "shell/nav-flatten.html" (dict "page" $root "root" $root) -}}
+  {{- range $page := $pages -}}
+    {{- $source := $page.Permalink -}}
+    {{- with $page.OutputFormats.Get "markdown" }}{{ $source = .Permalink }}{{ end -}}
+    {{- printf "================\nSource: %s\n================\n\n" $source -}}
+    {{- $page.Store.Set "tdOutputFormat" "markdown" -}}
+    {{- partial "content/markdown-document.md" $page -}}
+    {{- printf "\n\n" -}}
+  {{- end -}}
+{{- end -}}

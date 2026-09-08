@@ -21,7 +21,7 @@ translations live beside them and use the suffix `.de.md`; section indexes use
 - Preserve every explicit English anchor exactly. When an English heading has
   no explicit anchor, append its rendered English anchor to the translated
   heading so existing fragment links continue to work.
-- Localize links between component pages to `/de/<component>/...`. Images,
+- Localize links between component pages to `/de/docs/<component>/...`. Images,
   downloads, JSON, SVG, and other shared assets retain their language-neutral
   paths.
 - Preserve all numbers, versions, units, defaults, deprecation states,

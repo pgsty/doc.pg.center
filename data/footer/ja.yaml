@@ -7,7 +7,7 @@ columns:
     links:
       - { label: Patroni, url: https://patroni.readthedocs.io/en/latest/ }
       - { label: pgBackRest, url: https://pgbackrest.org/ }
-      - { label: PgBouncer, url: pgbouncer/ }
+      - { label: PgBouncer, url: /docs/pgbouncer/ }
       - { label: pgBadger, url: https://pgbadger.darold.net/ }
       - { label: HAProxy, url: https://docs.haproxy.org/3.4/ }
       - { label: etcd, url: https://etcd.io/docs/v3.7/ }

@@ -26,7 +26,7 @@ def compare(label: str, english: list[str], chinese: list[str], errors: list[str
 
 def main() -> int:
     project_dir = Path(__file__).resolve().parent.parent
-    content_dir = project_dir / "content"
+    content_dir = project_dir / "content" / "docs"
     component_dirs = [
         content_dir / component
         for component in ("patroni", "pgbackrest", "pgbouncer", "pgbadger")

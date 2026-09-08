@@ -27,7 +27,7 @@ from types import ModuleType
 
 
 PROJECT = Path(__file__).resolve().parent.parent
-CONTENT = PROJECT / "content"
+CONTENT = PROJECT / "content" / "docs"
 STYLE_GUIDE = PROJECT / "RUSSIAN_TRANSLATION.md"
 BASE_TRANSLATOR = Path(__file__).with_name("translate-component-docs.py")
 DEFAULT_CACHE = PROJECT / ".hugo_cache" / "russian-translation-cache.json"
@@ -1090,7 +1090,7 @@ def translate_body(
 def localize_internal_links(document: str) -> str:
     """Prefix Russian documentation routes without changing shared assets."""
 
-    route_names = SUPPORTED_COMPONENTS + ("attribution", "search")
+    route_names = tuple(f"docs/{name}" for name in SUPPORTED_COMPONENTS) + ("attribution", "search")
     routes = "|".join(re.escape(route) for route in route_names)
     pattern = re.compile(
         rf"(?<![A-Za-z0-9_:/])/(?P<route>{routes})(?P<tail>/|(?=[#?)\"']))"
@@ -1181,7 +1181,7 @@ def normalize_localized_routes(document: str) -> str:
     """Reverse localized routes for source/target structural comparison."""
 
     routes = "|".join(
-        re.escape(route) for route in SUPPORTED_COMPONENTS + ("attribution", "search")
+        re.escape(route) for route in tuple(f"docs/{name}" for name in SUPPORTED_COMPONENTS) + ("attribution", "search")
     )
     pattern = re.compile(rf"/ru/(?P<route>{routes})(?=/|[#?)\"'])")
     # Reuse the same literal-awareness as localization by temporarily swapping
@@ -1521,7 +1521,7 @@ def source_component(path: Path) -> str:
     try:
         relative = path.resolve().relative_to(CONTENT.resolve())
     except ValueError as exc:
-        raise RuntimeError(f"source is outside content/: {path}") from exc
+        raise RuntimeError(f"source is outside content/docs/: {path}") from exc
     if not relative.parts or relative.parts[0] not in SUPPORTED_COMPONENTS:
         raise RuntimeError(f"source is outside the six component collections: {path}")
     return relative.parts[0]

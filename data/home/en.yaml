@@ -32,32 +32,32 @@ components:
       meta: High availability
       icon: fa-solid fa-heart-pulse
       desc: Run PostgreSQL clusters with distributed consensus and automatic failover.
-      url: patroni/
+      url: /docs/patroni/
     - title: pgBackRest
       meta: Backup & recovery
       icon: fa-solid fa-couch
       desc: Design reliable backup, restore, archive, and point-in-time recovery workflows.
-      url: pgbackrest/
+      url: /docs/pgbackrest/
     - title: PgBouncer
       meta: Connection pooling
       icon: fa-solid fa-arrows-turn-to-dots
       desc: Cut connection overhead with session, transaction, and statement pooling.
-      url: pgbouncer/
+      url: /docs/pgbouncer/
     - title: pgBadger
       meta: Log analysis
       icon: fa-solid fa-otter
       desc: Turn PostgreSQL and PgBouncer logs into query, workload, and error reports.
-      url: pgbadger/
+      url: /docs/pgbadger/
     - title: HAProxy
       meta: Load balancing
       icon: fa-solid fa-network-wired
       desc: Read the complete HAProxy 3.4 Starter, Configuration, and Management manuals.
-      url: haproxy/
+      url: /docs/haproxy/
     - title: etcd
       meta: Consensus & coordination
       icon: fa-solid fa-gear
       desc: Operate a strongly consistent key-value store, its APIs, Raft model, and internals.
-      url: etcd/
+      url: /docs/etcd/
 
 capabilities:
   eyebrow: Component guides
@@ -66,7 +66,7 @@ capabilities:
   items:
     - ref: 01 / HIGH AVAILABILITY
       title: Patroni
-      url: patroni/
+      url: /docs/patroni/
       motto: A template for PostgreSQL high availability
       bullets:
         - Runs leader election and cluster state through a DCS.
@@ -79,15 +79,15 @@ capabilities:
         columns: 2
         aria_label: Patroni documentation shortcuts
         items:
-          - { icon: fa-solid fa-download, title: Installation, url: patroni/installation/ }
-          - { icon: fa-solid fa-sliders, title: Configuration, url: patroni/config/ }
-          - { icon: fa-solid fa-terminal, title: patronictl, url: patroni/patronictl/ }
-          - { icon: fa-solid fa-plug, title: REST API, url: patroni/rest_api/ }
-          - { icon: fa-solid fa-arrows-rotate, title: Replication modes, url: patroni/replication_modes/ }
-          - { icon: fa-solid fa-circle-question, title: FAQ, url: patroni/faq/ }
+          - { icon: fa-solid fa-download, title: Installation, url: /docs/patroni/installation/ }
+          - { icon: fa-solid fa-sliders, title: Configuration, url: /docs/patroni/config/ }
+          - { icon: fa-solid fa-terminal, title: patronictl, url: /docs/patroni/patronictl/ }
+          - { icon: fa-solid fa-plug, title: REST API, url: /docs/patroni/rest_api/ }
+          - { icon: fa-solid fa-arrows-rotate, title: Replication modes, url: /docs/patroni/replication_modes/ }
+          - { icon: fa-solid fa-circle-question, title: FAQ, url: /docs/patroni/faq/ }
     - ref: 02 / BACKUP & RECOVERY
       title: pgBackRest
-      url: pgbackrest/
+      url: /docs/pgbackrest/
       motto: Reliable backup, archive, restore, and point-in-time recovery
       bullets:
         - Full, differential, incremental, and block-level backups.
@@ -100,15 +100,15 @@ capabilities:
         columns: 2
         aria_label: pgBackRest documentation shortcuts
         items:
-          - { icon: fa-solid fa-route, title: User guide, url: pgbackrest/user-guide/ }
-          - { icon: fa-brands fa-redhat, title: RHEL guide, url: pgbackrest/user-guide-rhel/ }
-          - { icon: fa-solid fa-sliders, title: Configuration, url: pgbackrest/configuration/ }
-          - { icon: fa-solid fa-terminal, title: Commands, url: pgbackrest/command/ }
-          - { icon: fa-solid fa-tags, title: Releases, url: pgbackrest/release/ }
-          - { icon: fa-solid fa-circle-question, title: FAQ, url: pgbackrest/faq/ }
+          - { icon: fa-solid fa-route, title: User guide, url: /docs/pgbackrest/user-guide/ }
+          - { icon: fa-brands fa-redhat, title: RHEL guide, url: /docs/pgbackrest/user-guide-rhel/ }
+          - { icon: fa-solid fa-sliders, title: Configuration, url: /docs/pgbackrest/configuration/ }
+          - { icon: fa-solid fa-terminal, title: Commands, url: /docs/pgbackrest/command/ }
+          - { icon: fa-solid fa-tags, title: Releases, url: /docs/pgbackrest/release/ }
+          - { icon: fa-solid fa-circle-question, title: FAQ, url: /docs/pgbackrest/faq/ }
     - ref: 03 / CONNECTION POOLING
       title: PgBouncer
-      url: pgbouncer/
+      url: /docs/pgbouncer/
       motto: A lightweight connection pooler for PostgreSQL
       bullets:
         - Reuses connections to cut backend startup cost.
@@ -121,15 +121,15 @@ capabilities:
         columns: 2
         aria_label: PgBouncer documentation shortcuts
         items:
-          - { icon: fa-solid fa-list-check, title: Features, url: pgbouncer/features/ }
-          - { icon: fa-solid fa-download, title: Download, url: pgbouncer/download/ }
-          - { icon: fa-solid fa-wrench, title: Installation, url: pgbouncer/install/ }
-          - { icon: fa-solid fa-terminal, title: Usage, url: pgbouncer/usage/ }
-          - { icon: fa-solid fa-sliders, title: Configuration, url: pgbouncer/config/ }
-          - { icon: fa-solid fa-circle-question, title: FAQ, url: pgbouncer/faq/ }
+          - { icon: fa-solid fa-list-check, title: Features, url: /docs/pgbouncer/features/ }
+          - { icon: fa-solid fa-download, title: Download, url: /docs/pgbouncer/download/ }
+          - { icon: fa-solid fa-wrench, title: Installation, url: /docs/pgbouncer/install/ }
+          - { icon: fa-solid fa-terminal, title: Usage, url: /docs/pgbouncer/usage/ }
+          - { icon: fa-solid fa-sliders, title: Configuration, url: /docs/pgbouncer/config/ }
+          - { icon: fa-solid fa-circle-question, title: FAQ, url: /docs/pgbouncer/faq/ }
     - ref: 04 / LOG ANALYSIS
       title: pgBadger
-      url: pgbadger/
+      url: /docs/pgbadger/
       motto: Fast PostgreSQL and PgBouncer log analysis
       bullets:
         - Parses PostgreSQL and PgBouncer logs in many formats.
@@ -142,17 +142,17 @@ capabilities:
         columns: 2
         aria_label: pgBadger documentation shortcuts
         items:
-          - { icon: fa-solid fa-download, title: Download, url: pgbadger/download/ }
-          - { icon: fa-solid fa-terminal, title: Command line, url: pgbadger/command-line/ }
-          - { icon: fa-solid fa-file-lines, title: PostgreSQL logging, url: pgbadger/postgresql-logging/ }
-          - { icon: fa-solid fa-calendar-days, title: Incremental reports, url: pgbadger/incremental-reports/ }
-          - { icon: fa-solid fa-file-export, title: Output formats, url: pgbadger/output-formats/ }
-          - { icon: fa-solid fa-chart-column, title: Sample reports, url: pgbadger/sample-reports/ }
-          - { icon: fa-solid fa-tags, title: Releases, url: pgbadger/releases/ }
-          - { icon: fa-solid fa-life-ring, title: Support, url: pgbadger/support/ }
+          - { icon: fa-solid fa-download, title: Download, url: /docs/pgbadger/download/ }
+          - { icon: fa-solid fa-terminal, title: Command line, url: /docs/pgbadger/command-line/ }
+          - { icon: fa-solid fa-file-lines, title: PostgreSQL logging, url: /docs/pgbadger/postgresql-logging/ }
+          - { icon: fa-solid fa-calendar-days, title: Incremental reports, url: /docs/pgbadger/incremental-reports/ }
+          - { icon: fa-solid fa-file-export, title: Output formats, url: /docs/pgbadger/output-formats/ }
+          - { icon: fa-solid fa-chart-column, title: Sample reports, url: /docs/pgbadger/sample-reports/ }
+          - { icon: fa-solid fa-tags, title: Releases, url: /docs/pgbadger/releases/ }
+          - { icon: fa-solid fa-life-ring, title: Support, url: /docs/pgbadger/support/ }
     - ref: 05 / LOAD BALANCING
       title: HAProxy
-      url: haproxy/
+      url: /docs/haproxy/
       motto: Fast, reliable TCP and HTTP traffic management
       bullets:
         - The complete 3.4 Starter Guide as nine focused topics.
@@ -165,17 +165,17 @@ capabilities:
         columns: 2
         aria_label: HAProxy documentation shortcuts
         items:
-          - { icon: fa-solid fa-compass, title: Starter Guide, url: haproxy/load-balancing/ }
-          - { icon: fa-solid fa-file-code, title: Configuration Manual, url: haproxy/http-fundamentals/ }
-          - { icon: fa-solid fa-right-left, title: Proxy directives, url: haproxy/proxies/ }
-          - { icon: fa-solid fa-filter, title: ACLs & samples, url: haproxy/acls-and-samples/ }
-          - { icon: fa-solid fa-screwdriver-wrench, title: Management Guide, url: haproxy/prerequisites/ }
-          - { icon: fa-solid fa-chart-line, title: Runtime CLI & stats, url: haproxy/statistics-and-monitoring/ }
-          - { icon: fa-solid fa-bug, title: Debugging, url: haproxy/debugging-and-performance/ }
-          - { icon: fa-solid fa-shield-halved, title: Security, url: haproxy/security/ }
+          - { icon: fa-solid fa-compass, title: Starter Guide, url: /docs/haproxy/load-balancing/ }
+          - { icon: fa-solid fa-file-code, title: Configuration Manual, url: /docs/haproxy/http-fundamentals/ }
+          - { icon: fa-solid fa-right-left, title: Proxy directives, url: /docs/haproxy/proxies/ }
+          - { icon: fa-solid fa-filter, title: ACLs & samples, url: /docs/haproxy/acls-and-samples/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: Management Guide, url: /docs/haproxy/prerequisites/ }
+          - { icon: fa-solid fa-chart-line, title: Runtime CLI & stats, url: /docs/haproxy/statistics-and-monitoring/ }
+          - { icon: fa-solid fa-bug, title: Debugging, url: /docs/haproxy/debugging-and-performance/ }
+          - { icon: fa-solid fa-shield-halved, title: Security, url: /docs/haproxy/security/ }
     - ref: 06 / CONSENSUS & COORDINATION
       title: etcd
-      url: etcd/
+      url: /docs/etcd/
       motto: A strongly consistent distributed key-value store
       bullets:
         - A durable key-value API built on the Raft algorithm.
@@ -188,12 +188,12 @@ capabilities:
         columns: 2
         aria_label: etcd documentation shortcuts
         items:
-          - { icon: fa-solid fa-bolt, title: Quickstart, url: etcd/quickstart/ }
-          - { icon: fa-solid fa-download, title: Install, url: etcd/install/ }
-          - { icon: fa-solid fa-sliders, title: Configuration, url: etcd/op-guide/configuration/ }
-          - { icon: fa-solid fa-screwdriver-wrench, title: Maintenance, url: etcd/op-guide/maintenance/ }
-          - { icon: fa-solid fa-code, title: API, url: etcd/learning/api/ }
-          - { icon: fa-solid fa-arrow-up-right-dots, title: Upgrade to 3.7, url: etcd/upgrades/upgrade_3_7/ }
+          - { icon: fa-solid fa-bolt, title: Quickstart, url: /docs/etcd/quickstart/ }
+          - { icon: fa-solid fa-download, title: Install, url: /docs/etcd/install/ }
+          - { icon: fa-solid fa-sliders, title: Configuration, url: /docs/etcd/op-guide/configuration/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: Maintenance, url: /docs/etcd/op-guide/maintenance/ }
+          - { icon: fa-solid fa-code, title: API, url: /docs/etcd/learning/api/ }
+          - { icon: fa-solid fa-arrow-up-right-dots, title: Upgrade to 3.7, url: /docs/etcd/upgrades/upgrade_3_7/ }
 
 faq:
   eyebrow: FAQ

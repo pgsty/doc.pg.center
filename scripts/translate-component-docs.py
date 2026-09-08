@@ -26,6 +26,7 @@ from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parent.parent
 CONTENT = PROJECT / "content"
+DOCS = CONTENT / "docs"
 CHINESE_STYLE_GUIDE = PROJECT / "TRANSLATION.md"
 FRENCH_STYLE_GUIDE = PROJECT / "TRANSLATION.fr.md"
 JAPANESE_STYLE_GUIDE = PROJECT / "TRANSLATION.ja.md"
@@ -44,16 +45,16 @@ DOCUMENT_COMPONENTS = (
     "etcd",
 )
 SUPPORTED_COMPONENTS = DOCUMENT_COMPONENTS + ("site",)
-LOCALIZABLE_ROOTS = DOCUMENT_COMPONENTS + ("attribution", "search")
+LOCALIZABLE_ROOTS = tuple(f"docs/{name}" for name in DOCUMENT_COMPONENTS) + ("attribution", "search")
 TARGET_LANGUAGE = "zh"
 TARGET_SUFFIX = ".zh.md"
 USABLE_IN_TRANSLATION = "适用范围："
 
 MANUAL_TRANSLATIONS = {
     (
-        "Before beginning, [download the snapshot backup](/etcd/op-guide/maintenance/#snapshot-backup). Should something go wrong with the upgrade, it is possible to use this backup to [rollback](#rollback) back to existing etcd version. Please note that the `snapshot` command only backs up the v3 data."
+        "Before beginning, [download the snapshot backup](/docs/etcd/op-guide/maintenance/#snapshot-backup). Should something go wrong with the upgrade, it is possible to use this backup to [rollback](#rollback) back to existing etcd version. Please note that the `snapshot` command only backs up the v3 data."
     ): (
-        "开始前，请先 [下载快照备份](/etcd/op-guide/maintenance/#snapshot-backup)。如果升级出现问题，可以使用此备份 [回滚](#rollback)到现有 etcd 版本。请注意，`snapshot` 命令只备份 v3 数据。"
+        "开始前，请先 [下载快照备份](/docs/etcd/op-guide/maintenance/#snapshot-backup)。如果升级出现问题，可以使用此备份 [回滚](#rollback)到现有 etcd 版本。请注意，`snapshot` 命令只备份 v3 数据。"
     ),
     (
         "However, a certificate whose SAN field does [not include any domain names but only IP addresses](https://github.com/etcd-io/etcd/issues/9541) would request `*tls.ClientHelloInfo` with an empty `ServerName` field, thus failing to trigger the TLS reload on initial TLS handshake; this becomes a problem when expired certificates need to be replaced online."
@@ -99,13 +100,13 @@ MANUAL_TRANSLATIONS = {
         "索引从 1 或 -1 开始；分隔符为格式化字符列表。可以指定要提取的字段数 `<count>`（默认值：1）。"
         "值 0 表示提取所有剩余字段。"
     ),
-    "  Algorithms mentioned in [section 3.1](/haproxy/global/#section-3-1) of RFC7518 are managed:": (
-        "  支持 RFC7518 [第 3.1 节](/haproxy/global/#section-3-1)中列出的算法："
+    "  Algorithms mentioned in [section 3.1](/docs/haproxy/global/#section-3-1) of RFC7518 are managed:": (
+        "  支持 RFC7518 [第 3.1 节](/docs/haproxy/global/#section-3-1)中列出的算法："
     ),
     (
-        "  Algorithms mentioned in [section 3.1](/haproxy/global/#section-3-1) of RFC7518 are managed "
+        "  Algorithms mentioned in [section 3.1](/docs/haproxy/global/#section-3-1) of RFC7518 are managed "
         "(apart from HMAC ones):"
-    ): "  支持 RFC7518 [第 3.1 节](/haproxy/global/#section-3-1)中列出的算法（HMAC 算法除外）：",
+    ): "  支持 RFC7518 [第 3.1 节](/docs/haproxy/global/#section-3-1)中列出的算法（HMAC 算法除外）：",
     (
         "Extracts the nth word counting from the beginning (positive index) or from the end (negative index)\n"
         "considering given delimiters from an input string. Indexes start at 1 or -1 and delimiters are a\n"
@@ -1241,12 +1242,12 @@ FRENCH_MANUAL_TRANSLATIONS = {
     ),
     (
         "  If `register_service` parameter in the consul "
-        "[configuration](/patroni/config/yaml#consul_settings) is enabled, the "
+        "[configuration](/docs/patroni/config/yaml#consul_settings) is enabled, the "
         "node will register a service with the name `scope` and the tag "
         "`master`, `replica` or `standby-leader`."
     ): (
         "  Si le paramètre `register_service` de la "
-        "[configuration Consul](/patroni/config/yaml#consul_settings) est "
+        "[configuration Consul](/docs/patroni/config/yaml#consul_settings) est "
         "activé, le nœud enregistre un service nommé `scope` avec le tag "
         "`master`, `replica` ou `standby-leader`."
     ),
@@ -1285,12 +1286,12 @@ FRENCH_MANUAL_TRANSLATIONS = {
     (
         "  On Windows it would be the `more.com`. In addition to that, `cdiff` "
         "was changed to `ydiff` in `requirements.txt`, but "
-        "[patronictl](/patroni/patronictl#patronictl) still supports both for "
+        "[patronictl](/docs/patroni/patronictl#patronictl) still supports both for "
         "compatibility."
     ): (
         "  Sous Windows, il s'agit de `more.com`. En outre, `cdiff` a été "
         "remplacé par `ydiff` dans `requirements.txt`, mais "
-        "[patronictl](/patroni/patronictl#patronictl) continue de prendre en "
+        "[patronictl](/docs/patroni/patronictl#patronictl) continue de prendre en "
         "charge chacun d'eux à des fins de compatibilité."
     ),
     "  There were chances that Patroni was sleeping up to twice longer between running HA code.": (
@@ -1299,13 +1300,13 @@ FRENCH_MANUAL_TRANSLATIONS = {
     ),
     (
         "  It is possible to specify `wal_keep_segments` as a string in the "
-        "global [dynamic configuration](/patroni/config/dynamic#dynamic) and "
+        "global [dynamic configuration](/docs/patroni/config/dynamic#dynamic) and "
         "due to Python being a dynamically typed language the string was simply "
         "multiplied. Example: `wal_keep_segments: \"100\"` was converted to "
         "`100100100100100100100100100100100100100100100100MB`."
     ): (
         "  Il est possible de définir `wal_keep_segments` sous forme de chaîne "
-        "dans la [configuration dynamique](/patroni/config/dynamic#dynamic) "
+        "dans la [configuration dynamique](/docs/patroni/config/dynamic#dynamic) "
         "globale. Python étant un langage à typage dynamique, la chaîne était "
         "simplement multipliée. Par exemple, `wal_keep_segments: \"100\"` était "
         "converti en `100100100100100100100100100100100100100100100100MB`."
@@ -1383,13 +1384,13 @@ FRENCH_MANUAL_TRANSLATIONS = {
         "  - **pg_hba**: list of lines that Patroni will use to generate "
         "`pg_hba.conf`. Patroni ignores this parameter if `hba_file` PostgreSQL "
         "parameter is set to a non-default value. Together with "
-        "[dynamic configuration](/patroni/config/dynamic#dynamic) this parameter "
+        "[dynamic configuration](/docs/patroni/config/dynamic#dynamic) this parameter "
         "simplifies management of `pg_hba.conf`."
     ): (
         "  - **pg_hba** : liste des lignes que Patroni utilisera pour générer "
         "`pg_hba.conf`. Patroni ignore ce paramètre si le paramètre PostgreSQL "
         "`hba_file` possède une valeur différente de celle par défaut. Associé à "
-        "la [configuration dynamique](/patroni/config/dynamic#dynamic), ce "
+        "la [configuration dynamique](/docs/patroni/config/dynamic#dynamic), ce "
         "paramètre simplifie la gestion de `pg_hba.conf`."
     ),
     (
@@ -1412,7 +1413,7 @@ FRENCH_MANUAL_TRANSLATIONS = {
         "- **PATRONI_CTL_CACERT**: (optional) Specifies the file with the "
         "CA_BUNDLE file or directory with certificates of trusted CAs to use "
         "while verifying REST API SSL certs. If not provided "
-        "[patronictl](/patroni/patronictl#patronictl) will use the value provided "
+        "[patronictl](/docs/patroni/patronictl#patronictl) will use the value provided "
         "for REST API \"cafile\" parameter.\n"
         "- **PATRONI_CTL_CERTFILE**: (optional) Specifies the file with the "
         "client certificate in the PEM format.\n"
@@ -1422,7 +1423,7 @@ FRENCH_MANUAL_TRANSLATIONS = {
         "- **PATRONI_CTL_CACERT** : (facultatif) indique le fichier CA_BUNDLE "
         "ou le répertoire contenant les certificats des autorités de certification "
         "approuvées pour vérifier les certificats SSL de l'API REST. En l'absence "
-        "de valeur, [patronictl](/patroni/patronictl#patronictl) utilise le "
+        "de valeur, [patronictl](/docs/patroni/patronictl#patronictl) utilise le "
         "paramètre \"cafile\" de l'API REST.\n"
         "- **PATRONI_CTL_CERTFILE** : (facultatif) indique le fichier du "
         "certificat client au format PEM.\n"
@@ -1570,7 +1571,7 @@ FRENCH_MANUAL_TRANSLATIONS = {
         "7.  Patroni will also maintain `pg_dist_node` in case "
         "failover/switchover on the coordinator or worker clusters occurs."
     ): (
-        "5.  Les [identifiants](/patroni/config/yaml#postgresql_settings) "
+        "5.  Les [identifiants](/docs/patroni/config/yaml#postgresql_settings) "
         "actuels du superutilisateur seront ajoutés à la table "
         "`pg_dist_authinfo` pour permettre la communication entre les nœuds. "
         "N'oubliez pas de les mettre à jour si vous modifiez ensuite le nom "
@@ -1626,36 +1627,36 @@ FRENCH_MANUAL_TRANSLATIONS = {
     ),
     (
         "2.  Specify one of `psycopg`, `psycopg2`, or `psycopg2-binary` in "
-        "the [list of dependencies](/patroni/installation#extras) when "
+        "the [list of dependencies](/docs/patroni/installation#extras) when "
         "installing Patroni with pip."
     ): (
         "2.  Indiquez `psycopg`, `psycopg2` ou `psycopg2-binary` dans la "
-        "[liste des dépendances](/patroni/installation#extras) lors de "
+        "[liste des dépendances](/docs/patroni/installation#extras) lors de "
         "l'installation de Patroni avec pip."
     ),
     (
         "  Before enabling the `failsafe_mode` please make sure that Patroni "
         "version on all members is up-to-date. After that, you can use either "
-        "the `PATCH /config` [REST API](/patroni/rest_api#rest_api) or "
+        "the `PATCH /config` [REST API](/docs/patroni/rest_api#rest_api) or "
         "[patronictl edit-config -s failsafe_mode=true]"
         "(/patroni/patronictl#patronictl_edit_config_parameters)"
     ): (
         "  Avant d'activer `failsafe_mode`, assurez-vous que tous les membres "
         "utilisent une version à jour de Patroni. Vous pouvez ensuite employer "
-        "soit l'[API REST](/patroni/rest_api#rest_api) `PATCH /config`, soit "
+        "soit l'[API REST](/docs/patroni/rest_api#rest_api) `PATCH /config`, soit "
         "[patronictl edit-config -s failsafe_mode=true]"
         "(/patroni/patronictl#patronictl_edit_config_parameters)."
     ),
     (
         "We introduce a new special option, the `failsafe_mode`. It could be "
-        "enabled only via global [dynamic configuration](/patroni/config/dynamic#dynamic) "
+        "enabled only via global [dynamic configuration](/docs/patroni/config/dynamic#dynamic) "
         "stored in the DCS `/config` key. If the failsafe mode is enabled and "
         "the leader lock update in DCS failed due to reasons different from the "
         "version/value/index mismatch, Postgres may continue to run as a primary "
         "if it can access all known members of the cluster via Patroni REST API."
     ): (
         "Nous introduisons une option spéciale, `failsafe_mode`. Elle ne peut être "
-        "activée que par la [configuration dynamique](/patroni/config/dynamic#dynamic) "
+        "activée que par la [configuration dynamique](/docs/patroni/config/dynamic#dynamic) "
         "globale stockée dans la clé DCS `/config`. Si le mode de secours est "
         "activé et que la mise à jour du verrou de leader dans le DCS échoue pour "
         "une raison autre qu'une discordance de version, de valeur ou d'index, "
@@ -1922,14 +1923,14 @@ FRENCH_MANUAL_TRANSLATIONS = {
         "This converter also manages tokens that have an algorithm (\"alg\" field of the JOSE header) in the\n"
         "RSA family (RSA-OAEP or RSA-OAEP-256) when provided an 'RSA' JWK, or in the ECDH family (ECDH-ES,\n"
         "ECDH-ES+A128KW, ECDH-ES+A192KW or ECDH-ES+A256KW) when provided an 'EC' JWK. The RSA1_5 algorithm is\n"
-        "implemented but disabled by default following what is suggested in [section 3.2](/haproxy/global/#section-3-2) of RFC 8725. It can\n"
+        "implemented but disabled by default following what is suggested in [section 3.2](/docs/haproxy/global/#section-3-2) of RFC 8725. It can\n"
         "be reenabled if needed thanks to 'jwt.decrypt_alg_list' global option."
     ): (
         "Ce convertisseur gère également les jetons dont l'algorithme (champ \"alg\" de l'en-tête JOSE) "
         "appartient à la famille RSA (RSA-OAEP ou RSA-OAEP-256) lorsqu'une JWK 'RSA' est fournie, ou à la "
         "famille ECDH (ECDH-ES, ECDH-ES+A128KW, ECDH-ES+A192KW ou ECDH-ES+A256KW) lorsqu'une JWK 'EC' est "
         "fournie. L'algorithme RSA1_5 est implémenté, mais désactivé par défaut conformément à la "
-        "[section 3.2](/haproxy/global/#section-3-2) de RFC 8725. Il peut être réactivé si nécessaire grâce "
+        "[section 3.2](/docs/haproxy/global/#section-3-2) de RFC 8725. Il peut être réactivé si nécessaire grâce "
         "à l'option globale 'jwt.decrypt_alg_list'."
     ),
     (
@@ -2088,7 +2089,7 @@ FRENCH_MANUAL_TRANSLATIONS = {
         "> generated-report resources include MIT, GPL-2.0, and SIL Open Font License 1.1 components. The\n"
         "> complete upstream resource inventory is retained as\n"
         "> [`/third_party/pgbadger/THIRD-PARTY-LICENSES`](/third_party/pgbadger/THIRD-PARTY-LICENSES).\n"
-        "> The [sample reports](/pgbadger/sample-reports/) published here are historical generated\n"
+        "> The [sample reports](/docs/pgbadger/sample-reports/) published here are historical generated\n"
         "> artifacts and keep their original embedded notices."
     ): (
         "> [!IMPORTANT]\n"
@@ -2096,22 +2097,22 @@ FRENCH_MANUAL_TRANSLATIONS = {
         "> de ses rapports générés comprennent aussi des composants sous licence MIT, GPL-2.0 et SIL Open\n"
         "> Font License 1.1. L'inventaire complet des ressources en amont est conservé dans\n"
         "> [`/third_party/pgbadger/THIRD-PARTY-LICENSES`](/third_party/pgbadger/THIRD-PARTY-LICENSES).\n"
-        "> Les [rapports d'exemple](/pgbadger/sample-reports/) publiés ici sont des artefacts historiques\n"
+        "> Les [rapports d'exemple](/docs/pgbadger/sample-reports/) publiés ici sont des artefacts historiques\n"
         "> générés qui conservent leurs mentions d'origine."
     ),
     (
-        "[^0]: Startup parameters are: `client_encoding`, `DateStyle`, `IntervalStyle`, `Timezone`, `standard_conforming_strings`, and `application_name`. PgBouncer detects their changes and so it can guarantee they remain consistent for the client. If you need PgBouncer to support more than these, take a look at [`track_extra_parameters`](/pgbouncer/config/#track_extra_parameters) and [`ignore_startup_parameters`](/pgbouncer/config/#ignore_startup_parameters)."
+        "[^0]: Startup parameters are: `client_encoding`, `DateStyle`, `IntervalStyle`, `Timezone`, `standard_conforming_strings`, and `application_name`. PgBouncer detects their changes and so it can guarantee they remain consistent for the client. If you need PgBouncer to support more than these, take a look at [`track_extra_parameters`](/docs/pgbouncer/config/#track_extra_parameters) and [`ignore_startup_parameters`](/docs/pgbouncer/config/#ignore_startup_parameters)."
     ): (
         "[^0]: Les paramètres de démarrage sont `client_encoding`, `DateStyle`, `IntervalStyle`, `Timezone`, "
         "`standard_conforming_strings` et `application_name`. PgBouncer détecte leurs modifications et peut "
         "ainsi garantir leur cohérence pour le client. Pour prendre en charge d'autres paramètres, consultez "
-        "[`track_extra_parameters`](/pgbouncer/config/#track_extra_parameters) et "
-        "[`ignore_startup_parameters`](/pgbouncer/config/#ignore_startup_parameters)."
+        "[`track_extra_parameters`](/docs/pgbouncer/config/#track_extra_parameters) et "
+        "[`ignore_startup_parameters`](/docs/pgbouncer/config/#ignore_startup_parameters)."
     ),
     (
-        "[^1]: You need to change [`max_prepared_statements`](/pgbouncer/config/#max_prepared_statements) to a non-zero value to enable this support."
+        "[^1]: You need to change [`max_prepared_statements`](/docs/pgbouncer/config/#max_prepared_statements) to a non-zero value to enable this support."
     ): (
-        "[^1]: Vous devez définir [`max_prepared_statements`](/pgbouncer/config/#max_prepared_statements) "
+        "[^1]: Vous devez définir [`max_prepared_statements`](/docs/pgbouncer/config/#max_prepared_statements) "
         "sur une valeur non nulle pour activer cette prise en charge."
     ),
 }
@@ -4567,7 +4568,7 @@ def verbatim_ranges(lines: list[str]) -> list[bool]:
 def preserve_legal_text(lines: list[str], flags: list[bool], source: Path) -> None:
     """Keep the embedded PostgreSQL License text legally authoritative."""
 
-    if source.relative_to(CONTENT).as_posix() != "pgbadger/license.md":
+    if source.relative_to(CONTENT).as_posix() != "docs/pgbadger/license.md":
         return
     in_license = False
     for index, line in enumerate(lines):
@@ -4867,9 +4868,9 @@ def localize_internal_links(document: str, component: str) -> str:
         if TARGET_LANGUAGE == "fr":
             roots = LOCALIZABLE_ROOTS
         elif TARGET_LANGUAGE == "ja":
-            roots = ("pgbouncer", "attribution", "search")
+            roots = ("docs/pgbouncer", "attribution", "search")
         else:
-            roots = (component,)
+            roots = (f"docs/{component}",)
         for root in roots:
             pattern = re.compile(rf'(?<![A-Za-z0-9_:/])/{re.escape(root)}/')
             localized = pattern.sub(f'/{TARGET_LANGUAGE}/{root}/', localized)
@@ -4904,9 +4905,9 @@ def validate_pair(source_text: str, translated_text: str, source: Path) -> None:
         if TARGET_LANGUAGE == "fr":
             roots = LOCALIZABLE_ROOTS
         elif TARGET_LANGUAGE == "ja":
-            roots = ("pgbouncer", "attribution", "search")
+            roots = ("docs/pgbouncer", "attribution", "search")
         else:
-            roots = (source.relative_to(CONTENT).parts[0],)
+            roots = (f"docs/{source.relative_to(DOCS).parts[0]}",)
         for root in roots:
             line = line.replace(f"/{TARGET_LANGUAGE}/{root}/", f"/{root}/")
         target_refs.append(line)
@@ -4968,7 +4969,7 @@ def translate_file(
 
 
 def discover_sources(component: str, requested: list[str]) -> list[Path]:
-    root = CONTENT if component == "site" else CONTENT / component
+    root = CONTENT if component == "site" else DOCS / component
     if requested:
         sources = []
         for value in requested:

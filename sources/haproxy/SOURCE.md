@@ -1,7 +1,7 @@
 # HAProxy 3.4 documentation source snapshot
 
 This directory records the complete material used to build the three HAProxy manuals in
-`content/haproxy`.
+`content/docs/haproxy`.
 
 ## Snapshot identity
 

@@ -25,12 +25,12 @@ pgsql.ccは、6つのアップストリームプロジェクトが作成した�
 
 | コンポーネント | アップストリームの著作物 | 固定バージョン | ライセンス | 保存されている通知 |
 |---|---|---|---|---|
-| [Patroni](/ja/patroni/) | [Patroniドキュメント](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [アップストリームの`LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/ja/pgbackrest/) | [pgBackRestドキュメント](https://pgbackrest.org/) | v2.59.1 | [MIT](https://opensource.org/license/mit) | [アップストリームの`LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/ja/pgbouncer/) | [PgBouncerドキュメント](https://www.pgbouncer.org/) | v1.25.2 | [ISC](https://opensource.org/license/isc-license-txt) | [アップストリームの`COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/master/COPYRIGHT) |
-| [pgBadger](/ja/pgbadger/) | [pgBadgerドキュメント](https://pgbadger.darold.net/) | v13.2、コミット`a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/ja/haproxy/) | [HAProxy 3.4マニュアル](https://docs.haproxy.org/3.4/) | v3.4.4、コミット`7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/ja/etcd/) | [etcd v3.7ドキュメント](https://etcd.io/docs/v3.7/) | v3.7、コミット`8245979` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [アップストリームの`LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [Patroni](/ja/docs/patroni/) | [Patroniドキュメント](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [アップストリームの`LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
+| [pgBackRest](/ja/docs/pgbackrest/) | [pgBackRestドキュメント](https://pgbackrest.org/) | v2.59.1 | [MIT](https://opensource.org/license/mit) | [アップストリームの`LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [PgBouncer](/ja/docs/pgbouncer/) | [PgBouncerドキュメント](https://www.pgbouncer.org/) | v1.25.2 | [ISC](https://opensource.org/license/isc-license-txt) | [アップストリームの`COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/master/COPYRIGHT) |
+| [pgBadger](/ja/docs/pgbadger/) | [pgBadgerドキュメント](https://pgbadger.darold.net/) | v13.2、コミット`a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
+| [HAProxy](/ja/docs/haproxy/) | [HAProxy 3.4マニュアル](https://docs.haproxy.org/3.4/) | v3.4.4、コミット`7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [etcd](/ja/docs/etcd/) | [etcd v3.7ドキュメント](https://etcd.io/docs/v3.7/) | v3.7、コミット`8245979` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [アップストリームの`LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 各ドキュメント集は単なるミラーではなく、**編集を加えたもの**です。見出し、アンカー、相互リンク、コードシグネチャ、ページの分類、ナビゲーションをこの版に合わせて再構成し、アップストリームの本文自体は保持しています。ページ末尾の帰属表示にその旨を記載し、閲覧中のページのサイト内変更履歴へリンクしています。
 
@@ -60,7 +60,7 @@ pgBadgerの著作権表示はcopyright (c) 2012-2026 Gilles Daroldです。[Post
 
 > [!IMPORTANT]
 > pgBadgerには、Artistic License 2.0のもとで改変された`SQL::Beautify`モジュールが組み込まれています。また、生成レポートのリソースには、MIT、GPL-2.0、SIL Open Font License 1.1のコンポーネントが含まれます。アップストリームの完全なリソース一覧は[`/third_party/pgbadger/THIRD-PARTY-LICENSES`](/third_party/pgbadger/THIRD-PARTY-LICENSES)に保存されています。
-> ここで公開している[サンプルレポート](/ja/pgbadger/sample-reports/)は過去に生成された成果物であり、元の埋め込み通知を保持しています。
+> ここで公開している[サンプルレポート](/ja/docs/pgbadger/sample-reports/)は過去に生成された成果物であり、元の埋め込み通知を保持しています。
 
 ## HAProxy {#haproxy}
 

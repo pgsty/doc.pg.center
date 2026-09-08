@@ -11,7 +11,7 @@ With no arguments, every ``*.de.md`` file below ``content`` is checked.  Files
 and directories may be supplied explicitly::
 
     scripts/check-german-prose.py
-    scripts/check-german-prose.py content/pgbouncer content/search.de.md
+    scripts/check-german-prose.py content/docs/pgbouncer content/search.de.md
 
 Exit status is 1 when findings are reported, 2 for invalid input/read errors,
 and 0 otherwise.

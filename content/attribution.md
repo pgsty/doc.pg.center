@@ -32,12 +32,12 @@ which licence, and where the complete upstream notice is retained.
 
 | Component | Upstream work | Pinned at | Licence | Retained notice |
 |---|---|---|---|---|
-| [Patroni](/patroni/) | [Patroni documentation](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/pgbackrest/) | [pgBackRest documentation](https://pgbackrest.org/) | v2.59.1 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/pgbouncer/) | [PgBouncer documentation](https://www.pgbouncer.org/) | v1.25.2 | [ISC](https://opensource.org/license/isc-license-txt) | [Upstream `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/master/COPYRIGHT) |
-| [pgBadger](/pgbadger/) | [pgBadger documentation](https://pgbadger.darold.net/) | v13.2, commit `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/haproxy/) | [HAProxy 3.4 manuals](https://docs.haproxy.org/3.4/) | v3.4.4, commit `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/etcd/) | [etcd v3.7 documentation](https://etcd.io/docs/v3.7/) | v3.7, commit `8245979` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Upstream `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [Patroni](/docs/patroni/) | [Patroni documentation](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
+| [pgBackRest](/docs/pgbackrest/) | [pgBackRest documentation](https://pgbackrest.org/) | v2.59.1 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [PgBouncer](/docs/pgbouncer/) | [PgBouncer documentation](https://www.pgbouncer.org/) | v1.25.2 | [ISC](https://opensource.org/license/isc-license-txt) | [Upstream `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/master/COPYRIGHT) |
+| [pgBadger](/docs/pgbadger/) | [pgBadger documentation](https://pgbadger.darold.net/) | v13.2, commit `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
+| [HAProxy](/docs/haproxy/) | [HAProxy 3.4 manuals](https://docs.haproxy.org/3.4/) | v3.4.4, commit `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [etcd](/docs/etcd/) | [etcd v3.7 documentation](https://etcd.io/docs/v3.7/) | v3.7, commit `8245979` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Upstream `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 Every collection is **adapted**, not mirrored. Headings, anchors, cross-links, code signatures,
 page grouping, and navigation are reworked for this edition; the upstream prose itself is
@@ -90,7 +90,7 @@ retained beside the offline examples as
 > generated-report resources include MIT, GPL-2.0, and SIL Open Font License 1.1 components. The
 > complete upstream resource inventory is retained as
 > [`/third_party/pgbadger/THIRD-PARTY-LICENSES`](/third_party/pgbadger/THIRD-PARTY-LICENSES).
-> The [sample reports](/pgbadger/sample-reports/) published here are historical generated
+> The [sample reports](/docs/pgbadger/sample-reports/) published here are historical generated
 > artifacts and keep their original embedded notices.
 
 ## HAProxy {#haproxy}

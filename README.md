@@ -16,10 +16,10 @@ HAProxy 3.4 与 etcd 3.7。英文、简体中文与法文完整覆盖全部页�
 
 ## Language coverage
 
-- **English / 简体中文 / Français:** all six collections, 218 pages per locale.
-- **日本語:** complete Patroni, PgBouncer, and pgBadger documentation, translated subsets of pgBackRest, HAProxy, and etcd, and localized site pages, 108 pages total.
-- **Deutsch:** complete pgBadger documentation and translated subsets of Patroni, PgBouncer, HAProxy, and etcd, 34 pages total.
-- **Русский:** complete Patroni, PgBouncer, pgBadger, and etcd documentation, translated subsets of pgBackRest and HAProxy, and localized site pages, 190 pages total.
+- **English / 简体中文 / Français:** all six collections, 219 pages per locale.
+- **日本語:** complete Patroni, PgBouncer, and pgBadger documentation, translated subsets of pgBackRest, HAProxy, and etcd, and localized site pages, 109 pages total.
+- **Deutsch:** complete pgBadger documentation and translated subsets of Patroni, PgBouncer, HAProxy, and etcd, 38 pages total.
+- **Русский:** complete Patroni, PgBouncer, pgBadger, and etcd documentation, translated subsets of pgBackRest and HAProxy, and localized site pages, 191 pages total.
 
 Localized navigation resolves each route at build time. Existing translations stay in the selected
 language; gaps link to the matching English page and are marked `EN` on the homepage.
@@ -43,9 +43,12 @@ The production domain is **`pgsql.cc`**. `static/CNAME`, Hugo's `baseURL`, gener
 
 ## Information architecture
 
-Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy, and etcd are six independent documentation roots
-directly under `content/`; there is no shared `content/docs/` wrapper or `/docs/` canonical URL prefix.
-They appear directly in the global navbar, and each root owns its own sidebar and sequential pager.
+Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy, and etcd live under `content/docs/`.
+The documentation index is `/docs/`, component roots use `/docs/<component>/`, and localized
+editions use `/<language>/docs/<component>/` (for example, `/zh/docs/patroni/`).
+The six components appear directly in the global navbar, and each keeps its own sidebar and
+sequential pager. Existing root-level page URLs redirect to their new canonical addresses;
+Hugo aliases omit the language prefix so each locale receives exactly one prefix.
 The homepage keeps a three-line hero, six root cards, six detailed shortcut indexes, and a short FAQ.
 English, Simplified Chinese, and French provide complete same-route editions. Partial locales expose
 their completed pages and resolve untranslated destinations to the English route. HAProxy keeps all
@@ -70,3 +73,13 @@ and Management texts and retains the upstream GPLv2 terms. etcd is adapted from 
 3.7 website source tree. Imported pages retain their source notices. See
 [NOTICE.md](NOTICE.md), [sources/pgbadger/SOURCE.md](sources/pgbadger/SOURCE.md), and
 [sources/haproxy/SOURCE.md](sources/haproxy/SOURCE.md) for provenance and licensing notes.
+
+## Documentation route maintenance
+
+`scripts/migrate-docs-prefix.py` records the directory, link, and alias migration. It previews
+changes by default, applies them with `--write`, and leaves already-moved trees alone.
+The import generators and translation tools target `content/docs/`; page links in their output
+use `/docs/` with any locale prefix before it. Fenced code, API endpoints, upstream URLs,
+shared assets in `static/`, and pinned upstream snapshots retain their original paths.
+Run `make check` after updating content or navigation to validate source parity, canonical
+routes, legacy redirects, Markdown/print/agent outputs, and rendered links and anchors.

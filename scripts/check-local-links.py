@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
@@ -12,6 +13,10 @@ from urllib.parse import unquote, urlsplit
 
 INTERNAL_HOSTS = {"pgsql.cc", "www.pgsql.cc"}
 SKIP_SCHEMES = {"data", "javascript", "mailto", "tel"}
+LEGACY_COMPONENT_ROUTE = re.compile(
+    r"^(?:(?:zh|fr|ja|de|ru)/)?(?:_print/)?"
+    r"(?:patroni|pgbackrest|pgbouncer|pgbadger|haproxy|etcd)(?:/|$)"
+)
 
 
 class DocumentParser(HTMLParser):
@@ -94,6 +99,8 @@ def main() -> int:
             except ValueError:
                 errors.append(f"{source_rel}: {attribute} escapes site root: {raw_url}")
                 continue
+            if LEGACY_COMPONENT_ROUTE.match(target_rel.as_posix()):
+                errors.append(f"{source_rel}: component link lacks /docs prefix: {raw_url!r}")
             if not target.exists():
                 errors.append(f"{source_rel}: missing {target_rel} from {attribute}={raw_url!r}")
                 continue

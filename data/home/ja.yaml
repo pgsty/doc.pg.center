@@ -32,32 +32,32 @@ components:
       meta: 高可用性
       icon: fa-solid fa-heart-pulse
       desc: 分散コンセンサスと自動フェイルオーバーを備えた PostgreSQL クラスターを運用します。
-      url: patroni/
+      url: /docs/patroni/
     - title: pgBackRest
       meta: バックアップとリカバリー
       icon: fa-solid fa-couch
       desc: 信頼性の高いバックアップ、リストア、アーカイブ、ポイントインタイムリカバリーを設計します。
-      url: pgbackrest/
+      url: /docs/pgbackrest/
     - title: PgBouncer
       meta: コネクションプーリング
       icon: fa-solid fa-arrows-turn-to-dots
       desc: セッション、トランザクション、ステートメントの各プーリングで接続オーバーヘッドを削減します。
-      url: pgbouncer/
+      url: /docs/pgbouncer/
     - title: pgBadger
       meta: ログ解析
       icon: fa-solid fa-otter
       desc: PostgreSQL と PgBouncer のログから、クエリー、ワークロード、エラーのレポートを生成します。
-      url: pgbadger/
+      url: /docs/pgbadger/
     - title: HAProxy
       meta: 負荷分散
       icon: fa-solid fa-network-wired
       desc: HAProxy 3.4 の入門、設定、管理マニュアルをすべて参照できます。
-      url: haproxy/
+      url: /docs/haproxy/
     - title: etcd
       meta: コンセンサスと協調
       icon: fa-solid fa-gear
       desc: 強い整合性を持つキー・バリューストア、その API、Raft モデル、内部構造を運用します。
-      url: etcd/
+      url: /docs/etcd/
 
 capabilities:
   eyebrow: コンポーネントガイド
@@ -66,7 +66,7 @@ capabilities:
   items:
     - ref: 01 / 高可用性
       title: Patroni
-      url: patroni/
+      url: /docs/patroni/
       motto: PostgreSQL 高可用性のテンプレート
       bullets:
         - DCS を通じてリーダー選出とクラスター状態を管理します。
@@ -79,15 +79,15 @@ capabilities:
         columns: 2
         aria_label: Patroni ドキュメントへのショートカット
         items:
-          - { icon: fa-solid fa-download, title: インストール, url: patroni/installation/ }
-          - { icon: fa-solid fa-sliders, title: 設定, url: patroni/config/ }
-          - { icon: fa-solid fa-terminal, title: patronictl, url: patroni/patronictl/ }
-          - { icon: fa-solid fa-plug, title: REST API, url: patroni/rest_api/ }
-          - { icon: fa-solid fa-arrows-rotate, title: レプリケーションモード, url: patroni/replication_modes/ }
-          - { icon: fa-solid fa-circle-question, title: FAQ, url: patroni/faq/ }
+          - { icon: fa-solid fa-download, title: インストール, url: /docs/patroni/installation/ }
+          - { icon: fa-solid fa-sliders, title: 設定, url: /docs/patroni/config/ }
+          - { icon: fa-solid fa-terminal, title: patronictl, url: /docs/patroni/patronictl/ }
+          - { icon: fa-solid fa-plug, title: REST API, url: /docs/patroni/rest_api/ }
+          - { icon: fa-solid fa-arrows-rotate, title: レプリケーションモード, url: /docs/patroni/replication_modes/ }
+          - { icon: fa-solid fa-circle-question, title: FAQ, url: /docs/patroni/faq/ }
     - ref: 02 / バックアップとリカバリー
       title: pgBackRest
-      url: pgbackrest/
+      url: /docs/pgbackrest/
       motto: 信頼性の高いバックアップ、アーカイブ、リストア、ポイントインタイムリカバリー
       bullets:
         - フル、差分、増分、ブロックレベルのバックアップに対応します。
@@ -100,15 +100,15 @@ capabilities:
         columns: 2
         aria_label: pgBackRest ドキュメントへのショートカット
         items:
-          - { icon: fa-solid fa-route, title: ユーザーガイド, url: pgbackrest/user-guide/ }
-          - { icon: fa-brands fa-redhat, title: RHEL ガイド, url: pgbackrest/user-guide-rhel/ }
-          - { icon: fa-solid fa-sliders, title: 設定, url: pgbackrest/configuration/ }
-          - { icon: fa-solid fa-terminal, title: コマンド, url: pgbackrest/command/ }
-          - { icon: fa-solid fa-tags, title: リリース, url: pgbackrest/release/ }
-          - { icon: fa-solid fa-circle-question, title: FAQ, url: pgbackrest/faq/ }
+          - { icon: fa-solid fa-route, title: ユーザーガイド, url: /docs/pgbackrest/user-guide/ }
+          - { icon: fa-brands fa-redhat, title: RHEL ガイド, url: /docs/pgbackrest/user-guide-rhel/ }
+          - { icon: fa-solid fa-sliders, title: 設定, url: /docs/pgbackrest/configuration/ }
+          - { icon: fa-solid fa-terminal, title: コマンド, url: /docs/pgbackrest/command/ }
+          - { icon: fa-solid fa-tags, title: リリース, url: /docs/pgbackrest/release/ }
+          - { icon: fa-solid fa-circle-question, title: FAQ, url: /docs/pgbackrest/faq/ }
     - ref: 03 / コネクションプーリング
       title: PgBouncer
-      url: pgbouncer/
+      url: /docs/pgbouncer/
       motto: PostgreSQL 向けの軽量コネクションプーラー
       bullets:
         - 接続を再利用してバックエンド起動コストを削減します。
@@ -121,15 +121,15 @@ capabilities:
         columns: 2
         aria_label: PgBouncer ドキュメントへのショートカット
         items:
-          - { icon: fa-solid fa-list-check, title: 機能, url: pgbouncer/features/ }
-          - { icon: fa-solid fa-download, title: ダウンロード, url: pgbouncer/download/ }
-          - { icon: fa-solid fa-wrench, title: インストール, url: pgbouncer/install/ }
-          - { icon: fa-solid fa-terminal, title: 使用方法, url: pgbouncer/usage/ }
-          - { icon: fa-solid fa-sliders, title: 設定, url: pgbouncer/config/ }
-          - { icon: fa-solid fa-circle-question, title: FAQ, url: pgbouncer/faq/ }
+          - { icon: fa-solid fa-list-check, title: 機能, url: /docs/pgbouncer/features/ }
+          - { icon: fa-solid fa-download, title: ダウンロード, url: /docs/pgbouncer/download/ }
+          - { icon: fa-solid fa-wrench, title: インストール, url: /docs/pgbouncer/install/ }
+          - { icon: fa-solid fa-terminal, title: 使用方法, url: /docs/pgbouncer/usage/ }
+          - { icon: fa-solid fa-sliders, title: 設定, url: /docs/pgbouncer/config/ }
+          - { icon: fa-solid fa-circle-question, title: FAQ, url: /docs/pgbouncer/faq/ }
     - ref: 04 / ログ解析
       title: pgBadger
-      url: pgbadger/
+      url: /docs/pgbadger/
       motto: PostgreSQL と PgBouncer の高速ログ解析
       bullets:
         - さまざまな形式の PostgreSQL と PgBouncer のログを解析します。
@@ -142,17 +142,17 @@ capabilities:
         columns: 2
         aria_label: pgBadger ドキュメントへのショートカット
         items:
-          - { icon: fa-solid fa-download, title: ダウンロード, url: pgbadger/download/ }
-          - { icon: fa-solid fa-terminal, title: コマンドライン, url: pgbadger/command-line/ }
-          - { icon: fa-solid fa-file-lines, title: PostgreSQL ログ, url: pgbadger/postgresql-logging/ }
-          - { icon: fa-solid fa-calendar-days, title: 増分レポート, url: pgbadger/incremental-reports/ }
-          - { icon: fa-solid fa-file-export, title: 出力形式, url: pgbadger/output-formats/ }
-          - { icon: fa-solid fa-chart-column, title: サンプルレポート, url: pgbadger/sample-reports/ }
-          - { icon: fa-solid fa-tags, title: リリース, url: pgbadger/releases/ }
-          - { icon: fa-solid fa-life-ring, title: サポート, url: pgbadger/support/ }
+          - { icon: fa-solid fa-download, title: ダウンロード, url: /docs/pgbadger/download/ }
+          - { icon: fa-solid fa-terminal, title: コマンドライン, url: /docs/pgbadger/command-line/ }
+          - { icon: fa-solid fa-file-lines, title: PostgreSQL ログ, url: /docs/pgbadger/postgresql-logging/ }
+          - { icon: fa-solid fa-calendar-days, title: 増分レポート, url: /docs/pgbadger/incremental-reports/ }
+          - { icon: fa-solid fa-file-export, title: 出力形式, url: /docs/pgbadger/output-formats/ }
+          - { icon: fa-solid fa-chart-column, title: サンプルレポート, url: /docs/pgbadger/sample-reports/ }
+          - { icon: fa-solid fa-tags, title: リリース, url: /docs/pgbadger/releases/ }
+          - { icon: fa-solid fa-life-ring, title: サポート, url: /docs/pgbadger/support/ }
     - ref: 05 / 負荷分散
       title: HAProxy
-      url: haproxy/
+      url: /docs/haproxy/
       motto: 高速で信頼性の高い TCP/HTTP トラフィック管理
       bullets:
         - HAProxy 3.4 入門ガイド全体を9つのテーマに分けて収録します。
@@ -165,17 +165,17 @@ capabilities:
         columns: 2
         aria_label: HAProxy ドキュメントへのショートカット
         items:
-          - { icon: fa-solid fa-compass, title: 入門ガイド, url: haproxy/load-balancing/ }
-          - { icon: fa-solid fa-file-code, title: 設定マニュアル, url: haproxy/http-fundamentals/ }
-          - { icon: fa-solid fa-right-left, title: プロキシディレクティブ, url: haproxy/proxies/ }
-          - { icon: fa-solid fa-filter, title: ACL とサンプル, url: haproxy/acls-and-samples/ }
-          - { icon: fa-solid fa-screwdriver-wrench, title: 管理ガイド, url: haproxy/prerequisites/ }
-          - { icon: fa-solid fa-chart-line, title: ランタイム CLI と統計, url: haproxy/statistics-and-monitoring/ }
-          - { icon: fa-solid fa-bug, title: デバッグ, url: haproxy/debugging-and-performance/ }
-          - { icon: fa-solid fa-shield-halved, title: セキュリティ, url: haproxy/security/ }
+          - { icon: fa-solid fa-compass, title: 入門ガイド, url: /docs/haproxy/load-balancing/ }
+          - { icon: fa-solid fa-file-code, title: 設定マニュアル, url: /docs/haproxy/http-fundamentals/ }
+          - { icon: fa-solid fa-right-left, title: プロキシディレクティブ, url: /docs/haproxy/proxies/ }
+          - { icon: fa-solid fa-filter, title: ACL とサンプル, url: /docs/haproxy/acls-and-samples/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: 管理ガイド, url: /docs/haproxy/prerequisites/ }
+          - { icon: fa-solid fa-chart-line, title: ランタイム CLI と統計, url: /docs/haproxy/statistics-and-monitoring/ }
+          - { icon: fa-solid fa-bug, title: デバッグ, url: /docs/haproxy/debugging-and-performance/ }
+          - { icon: fa-solid fa-shield-halved, title: セキュリティ, url: /docs/haproxy/security/ }
     - ref: 06 / コンセンサスと協調
       title: etcd
-      url: etcd/
+      url: /docs/etcd/
       motto: 強い整合性を持つ分散キー・バリューストア
       bullets:
         - Raft アルゴリズムに基づく永続的なキー・バリュー API を提供します。
@@ -188,12 +188,12 @@ capabilities:
         columns: 2
         aria_label: etcd ドキュメントへのショートカット
         items:
-          - { icon: fa-solid fa-bolt, title: クイックスタート, url: etcd/quickstart/ }
-          - { icon: fa-solid fa-download, title: インストール, url: etcd/install/ }
-          - { icon: fa-solid fa-sliders, title: 設定, url: etcd/op-guide/configuration/ }
-          - { icon: fa-solid fa-screwdriver-wrench, title: 保守, url: etcd/op-guide/maintenance/ }
-          - { icon: fa-solid fa-code, title: API, url: etcd/learning/api/ }
-          - { icon: fa-solid fa-arrow-up-right-dots, title: 3.7 へのアップグレード, url: etcd/upgrades/upgrade_3_7/ }
+          - { icon: fa-solid fa-bolt, title: クイックスタート, url: /docs/etcd/quickstart/ }
+          - { icon: fa-solid fa-download, title: インストール, url: /docs/etcd/install/ }
+          - { icon: fa-solid fa-sliders, title: 設定, url: /docs/etcd/op-guide/configuration/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: 保守, url: /docs/etcd/op-guide/maintenance/ }
+          - { icon: fa-solid fa-code, title: API, url: /docs/etcd/learning/api/ }
+          - { icon: fa-solid fa-arrow-up-right-dots, title: 3.7 へのアップグレード, url: /docs/etcd/upgrades/upgrade_3_7/ }
 
 faq:
   eyebrow: FAQ

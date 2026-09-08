@@ -145,8 +145,8 @@ def blockquoted_fenced_blocks(body: str) -> list[str]:
 def normalized_target(target: str) -> str:
     value = target
     for component in COMPONENTS:
-        value = value.replace(f"/ru/{component}/", f"/{component}/")
-    value = re.sub(r"^/ru/(?=(?:search|attribution)(?:/|$))", "/", value)
+        value = value.replace(f"/ru/docs/{component}/", f"/docs/{component}/")
+    value = re.sub(r"^/ru/(?=(?:docs|search|attribution)(?:/|$))", "/", value)
     return value
 
 

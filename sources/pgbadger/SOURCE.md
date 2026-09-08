@@ -1,6 +1,6 @@
 # pgBadger source snapshot
 
-This directory records the material used to build the pgBadger documentation in `content/pgbadger`.
+This directory records the material used to build the pgBadger documentation in `content/docs/pgbadger`.
 
 ## Snapshot identity
 

@@ -23,6 +23,7 @@ from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parent.parent
 CONTENT = PROJECT / "content"
+DOCS = CONTENT / "docs"
 STYLE_GUIDE = PROJECT / "TRANSLATION_DE.md"
 HELPER_PATH = PROJECT / "scripts" / "translate-component-docs.py"
 CHECKER_PATH = PROJECT / "scripts" / "check-german-parity.py"
@@ -499,7 +500,7 @@ def validate_german_fragment_structure(source: str, translated: str) -> None:
 
 def localize_internal_links(document: str, _component: str) -> str:
     """Route document links through /de while leaving shared assets untouched."""
-    roots = "|".join(map(re.escape, COMPONENTS))
+    roots = "|".join(re.escape(f"docs/{name}") for name in COMPONENTS)
     component_pattern = re.compile(rf"(?<![A-Za-z0-9_:/])/(?P<root>{roots})/")
     site_pattern = re.compile(r"(?<![A-Za-z0-9_:/])/(?P<root>attribution|search)/")
     asset_pattern = re.compile(
@@ -576,7 +577,7 @@ def translate_german_body(
     source_document = source.read_text(encoding="utf-8")
     source_front, _ = base.split_front_matter(source_document)
     file_line_offset = len(source_front.splitlines()) + 2
-    source_relative = str(source.relative_to(CONTENT))
+    source_relative = str(source.relative_to(DOCS if source.is_relative_to(DOCS) else CONTENT))
     body = base.add_heading_anchors(body, source)
     lines = body.splitlines(keepends=True)
     flags = base.verbatim_ranges(lines)
@@ -806,7 +807,7 @@ def translate_german_body(
 
 def legal_passthroughs() -> dict[str, str]:
     """Keep the pgBadger PostgreSQL License clauses verbatim."""
-    source = (CONTENT / "pgbadger" / "license.md").read_text(encoding="utf-8")
+    source = (DOCS / "pgbadger" / "license.md").read_text(encoding="utf-8")
     body = source.split("## PostgreSQL License {#postgresql-license}\n", 1)[1]
     legal = body.split("\n## Authors and design credits", 1)[0]
     return {
@@ -1023,8 +1024,7 @@ def target_for(source: Path) -> Path:
 
 
 def component_for(source: Path) -> str:
-    relative = source.relative_to(CONTENT)
-    return relative.parts[0] if len(relative.parts) > 1 else "site"
+    return source.relative_to(DOCS).parts[0] if source.is_relative_to(DOCS) and len(source.relative_to(DOCS).parts) > 1 else "site"
 
 
 def translate_file(

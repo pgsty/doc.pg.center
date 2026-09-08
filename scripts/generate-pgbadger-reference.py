@@ -9,7 +9,7 @@ from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parent.parent
 SOURCE = PROJECT / "sources" / "pgbadger" / "upstream"
-CONTENT = PROJECT / "content" / "pgbadger"
+CONTENT = PROJECT / "content" / "docs" / "pgbadger"
 COMMIT = "a1ad95a035a0c2d246fe632eb1c361d4bde0ddae"
 SOURCE_URL = f"https://github.com/darold/pgbadger/tree/{COMMIT}"
 
@@ -79,7 +79,7 @@ description: "Complete pgBadger command syntax, options, remote input, return co
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [Reference]
-aliases: [/docs/pgbadger/command-line/]
+aliases: [/pgbadger/command-line/]
 upstream_link: "{SOURCE_URL}/README.md"
 upstream_name: "pgBadger README.md"
 ---
@@ -97,7 +97,7 @@ description: "完整的 pgBadger 命令语法、选项、远程输入、返回�
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [参考]
-aliases: [/docs/pgbadger/command-line/]
+aliases: [/pgbadger/command-line/]
 upstream_link: "{SOURCE_URL}/README.md"
 upstream_name: "pgBadger README.md"
 ---
@@ -154,7 +154,7 @@ description: "Complete upstream release notes for the pgBadger {major}.x series"
 icon: fa-solid fa-code-branch
 module: [PGBADGER]
 categories: [Reference]
-aliases: [/docs/pgbadger/releases/{major}/]
+aliases: [/pgbadger/releases/{major}/]
 upstream_link: "{SOURCE_URL}/ChangeLog"
 upstream_name: "pgBadger ChangeLog"
 ---
@@ -172,7 +172,7 @@ description: "pgBadger {major}.x 系列的完整上游版本记录"
 icon: fa-solid fa-code-branch
 module: [PGBADGER]
 categories: [参考]
-aliases: [/docs/pgbadger/releases/{major}/]
+aliases: [/pgbadger/releases/{major}/]
 upstream_link: "{SOURCE_URL}/ChangeLog"
 upstream_name: "pgBadger ChangeLog"
 ---
