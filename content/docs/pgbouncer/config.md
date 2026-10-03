@@ -7,7 +7,7 @@ icon: fa-solid fa-code
 module: [PGBOUNCER]
 categories: [Reference]
 aliases: [/pgbouncer/config/]
-upstream_link: "https://www.pgbouncer.org/config.html"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/doc/config.md"
 ---
 
 --------
@@ -53,8 +53,6 @@ Default: 6432
 ### unix_socket_dir
 
 Specifies the location for Unix sockets. Applies to both the listening socket and to server connections. If set to an empty string, Unix sockets are disabled. A value that starts with `@` specifies that a Unix socket in the abstract namespace should be created (currently supported on Linux and Windows).
-
-For online reboot (`-R`) to work, a Unix socket needs to be configured, and it needs to be in the file-system namespace.
 
 Default: `/tmp` (empty on Windows)
 
@@ -181,23 +179,38 @@ Default: 0
 
 ### track_extra_parameters
 
-By default, PgBouncer tracks `client_encoding`, `datestyle`, `timezone`, `standard_conforming_strings` and `application_name` parameters per client. To allow other parameters to be tracked, they can be specified here, so that PgBouncer knows that they should be maintained in the client variable cache and restored in the server whenever the client becomes active.
+By default, PgBouncer tracks all the parameters that Postgres reports to the client and that can be changed by the client:
 
-If you need to specify multiple values, use a comma-separated list (e.g. `default_transaction_read_only, IntervalStyle`)
+- `application_name`
+- `client_encoding`
+- `DateStyle`
+- `default_transaction_read_only`
+- `IntervalStyle`
+- `scram_iterations` (since PostgreSQL version 16)
+- `search_path` (since PostgreSQL version 18)
+- `session_authorization`
+- `standard_conforming_strings`
+- `TimeZone`
 
-Note: Most parameters cannot be tracked this way. The only parameters that can be tracked are ones that Postgres reports to the client. Postgres has [an official list of parameters that it reports to the client](https://www.postgresql.org/docs/15/protocol-flow.html#PROTOCOL-ASYNC). Postgres extensions can change this list though, they can add parameters themselves that they also report, and they can start reporting already existing parameters that Postgres does not report. Notably Citus 12.0+ causes Postgres to also report `search_path`.
+To allow other parameters to be tracked, they can be specified here, so that PgBouncer knows that they should be maintained in the client variable cache and restored in the server whenever the client becomes active.
+
+If you need to specify multiple values, use a comma-separated list (e.g. `some_extension.setting, other_extension.setting`)
+
+Note: Most parameters cannot be fully tracked this way. PgBouncer only learns about changes made with `SET` for parameters that Postgres reports to the client. Postgres has [an official list of parameters that it reports to the client](https://www.postgresql.org/docs/current/protocol-flow.html#PROTOCOL-ASYNC). Postgres extensions can change this list though, they can add parameters themselves that they also report, and they can start reporting already existing parameters that Postgres does not report.  Notably Citus 12.0+ causes Postgres to also report `search_path`. Some of the parameters that are tracked by default are also only reported by newer Postgres versions: `default_transaction_read_only` since Postgres 14, `scram_iterations` since Postgres 16 and `search_path` since Postgres 18.
+
+For a tracked parameter that Postgres does not report (e.g. `search_path` on Postgres versions before 18), PgBouncer only knows the value that a client specified in its startup packet (or in the `options` startup parameter). That value is applied to the server connection whenever the client becomes active, and the parameter is reset to its default for clients that did not specify it. Changes made with `SET` after connecting are not tracked for such parameters, so they leak to other clients sharing the server connection, unless `server_reset_query_always` is used.
 
 The Postgres protocol allows specifying parameters settings, both directly as a parameter in the startup packet, or inside the [`options` startup packet][options-startup]. Parameters specified using both of these methods are supported by `track_extra_parameters`. However, it's not possible to include `options` itself in `track_extra_parameters`, only the parameters contained in `options`.
 
-Default: IntervalStyle
+Default: empty
 
 ### ignore_startup_parameters
 
-By default, PgBouncer allows only parameters it can keep track of in startup packets: `client_encoding`, `datestyle`, `timezone` and `standard_conforming_strings`. All others parameters will raise an error. To allow others parameters, they can be specified here, so that PgBouncer knows that they are handled by the admin and it can ignore them.
+By default, PgBouncer allows only parameters it can keep track of in startup packets (see `track_extra_parameters` for the list). All other parameters will raise an error. To allow other parameters, they can be specified here, so that PgBouncer knows that they are handled by the admin and it can ignore them.
 
 If you need to specify multiple values, use a comma-separated list (e.g. `options,extra_float_digits`)
 
-The Postgres protocol allows specifying parameters settings, both directly as a parameter in the startup packet, or inside the [`options` startup packet][options-startup]. Parameters specified using both of these methods are supported by `ignore_startup_parameters`. It's even possible to include `options` itself in `track_extra_parameters`, which results in any unknown parameters contained inside `options` to be ignored.
+The Postgres protocol allows specifying parameters settings, both directly as a parameter in the startup packet, or inside the [`options` startup packet][options-startup]. Parameters specified using both of these methods are supported by `ignore_startup_parameters`. It's even possible to include `options` itself in `ignore_startup_parameters`, which results in any unknown parameters contained inside `options` to be ignored.
 
 [options-startup]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-OPTIONS
 
@@ -247,7 +260,7 @@ Default: 60
 
 When this is set to a non-zero value PgBouncer tracks protocol-level named prepared statements related commands sent by the client in transaction and statement pooling mode. PgBouncer makes sure that any statement prepared by a client is available on the backing server connection. Even when the statement was originally prepared on another server connection.
 
-PgBouncer internally examines all the queries that are sent by clients as a prepared statement, and gives each unique query string an internal name with the format `PGBOUNCER_{unique_id}`. If the same query string is prepared multiple times (possibly by different clients), then these queries share the same internal name. PgBouncer only prepares the statement on the actual PostgreSQL server using the internal name (so not the name provided by the client). PgBouncer keeps track of the name that the client gave to each prepared statement. It then rewrites each command that uses a prepared statement to by replacing the client side name with the internal name (e.g. replacing `my_prepared_statement` with `PGBOUNCER_123`) before forwarding that command to the server. More importantly, if the prepared statement that the client wants to execute is not yet prepared on the server (e.g. because a different server is now assigned to the client than when the client prepared the statement), then PgBouncer transparently prepares the statement before executing it.
+PgBouncer internally examines all the queries that are sent by clients as a prepared statement, and gives each unique query string an internal name with the format `PGBOUNCER_{unique_id}`. If the same query string is prepared multiple times (possibly by different clients), then these queries share the same internal name. PgBouncer only prepares the statement on the actual PostgreSQL server using the internal name (so not the name provided by the client). PgBouncer keeps track of the name that the client gave to each prepared statement. It then rewrites each command that uses a prepared statement by replacing the client side name with the internal name (e.g. replacing `my_prepared_statement` with `PGBOUNCER_123`) before forwarding that command to the server. More importantly, if the prepared statement that the client wants to execute is not yet prepared on the server (e.g. because a different server is now assigned to the client than when the client prepared the statement), then PgBouncer transparently prepares the statement before executing it.
 
 Note: This tracking and rewriting of prepared statement commands does not work for SQL-level prepared statement commands, so `PREPARE`, `EXECUTE` and `DEALLOCATE` are forwarded straight to Postgres. The exception to this rule are the `DEALLOCATE ALL` and `DISCARD ALL` commands, these do work as expected and will clear the prepared statements that PgBouncer tracked for the client that sends this command.
 
@@ -304,7 +317,7 @@ How to authenticate users.
 - **`scram-sha-256`**: Use password check with SCRAM-SHA-256. `auth_file` has to contain SCRAM secrets or plain-text passwords.
 - **`plain`**: The clear-text password is sent over the wire. Deprecated.
 - **`trust`**: No authentication is done. The user name must still exist in `auth_file`.
-- **`any`**: Like the `trust` method, but the user name given is ignored. Requires that all databases are configured to log in as a specific user. Additionally, the console database allows any user to log in as admin.
+- **`any`**: Like the `trust` method, but the user name given is ignored. Requires that all databases are configured to log in as a specific user. Additionally, the console database allows any user to log in as a statistics user; users listed in `admin_users` receive administrator privileges.
 - **`hba`**: The actual authentication type is loaded from `auth_hba_file`. This allows different authentication methods for different access paths, for example: connections over Unix socket use the `peer` authentication method, connections over TCP must use TLS.
 - **`ldap`**: Users are authenticated against an LDAP server, like in PostgreSQL (see <https://www.postgresql.org/docs/current/auth-ldap.html> for details). The LDAP connection options are configured using the setting `auth_ldap_options`, or alternatively in the `auth_hba_file`.
 - **`pam`**: PAM is used to authenticate users, `auth_file` is ignored. This method is not compatible with databases using the `auth_user` option. The service name reported to PAM is "pgbouncer". `pam` is not supported in the HBA configuration file.
@@ -344,6 +357,8 @@ Query to load user's password from database.
 Direct access to `pg_authid` requires admin rights. It's preferable to use a non-superuser that calls a SECURITY DEFINER function instead.
 
 Note that the query is run inside the target database. So if a function is used, it needs to be installed into each database.
+
+The query must return two columns, the user name and the password (appropriately encrypted/hashed). To report that the user does not exist, either return no rows or a row with a null value for the user. (The default query below returns no rows for a nonexistent user. The variant with the null value is useful when the query calls a record-returning function, as in the example shown under [Examples](#examples) below.) A null value in the password column means that the user exists but no password is available for it, so that no password that the client offers will be accepted.
 
 Default: `SELECT rolname, CASE WHEN rolvaliduntil < now() THEN NULL ELSE rolpassword END FROM pg_authid WHERE rolname=$1 AND rolcanlogin`
 
@@ -417,13 +432,13 @@ Default: 0
 
 ### admin_users
 
-Comma-separated list of database users that are allowed to connect and run all commands on the console. Ignored when `auth_type` is `any`, in which case any user name is allowed in as admin.
+Comma-separated list of database users that are allowed to connect and run all commands on the console. With `auth_type=any`, this list still determines who receives administrator privileges; other users can log in as statistics users. See the [1.26.0 console access checks](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/src/admin.c#L1572-L1609).
 
 Default: empty
 
 ### stats_users
 
-Comma-separated list of database users that are allowed to connect and run read-only queries on the console. That means all `SHOW` commands except `SHOW FDS`.
+Comma-separated list of database users that are allowed to connect and run read-only queries on the console. That means all `SHOW` commands.
 
 Default: empty
 
@@ -505,7 +520,7 @@ Default: 15.0
 
 ### client_login_timeout
 
-If a client connects but does not manage to log in in this amount of time, it will be disconnected. Mainly needed to avoid dead connections stalling `SUSPEND` and thus online restart. [seconds]
+If a client connects but does not manage to log in in this amount of time, it will be disconnected. [seconds]
 
 Default: 60.0
 
@@ -514,6 +529,14 @@ Default: 60.0
 If the automatically created (via `*`) database pools have been unused this many seconds, they are freed. The negative aspect of that is that their statistics are also forgotten. [seconds]
 
 Default: 3600.0
+
+### pool_idle_timeout
+
+If a pool (a specific database/user pair) has had no client connections and no server connections for this many seconds, it is freed. This is similar to `autodb_idle_timeout`, but frees individual pools rather than whole automatically created databases. Note that, unlike `server_idle_timeout` (which closes idle server connections but keeps the pool around), this frees the whole pool, and only once it is completely empty.
+
+As with `autodb_idle_timeout`, the negative aspect is that a freed pool's statistics are forgotten. Because the per-database totals in `SHOW STATS` are the sum over the currently existing pools, freeing a pool makes those totals decrease, which monitoring systems may misread as a counter reset. For that reason this is disabled by default. 0 disables. [seconds]
+
+Default: 0 (disabled)
 
 ### dns_max_ttl
 
@@ -554,6 +577,12 @@ Time that a client will be queued for before PgBouncer sends a notification mess
 A value of 0 disables this notification message.
 
 Default: 5
+
+### login_notify_message
+
+Welcome notify message that is sent to the client after a login is successful. Can be used to ensure that clients understand that they are connecting to pgbouncer instead of postgres directly.
+
+Default: empty (no welcome message sent)
 
 --------
 
@@ -695,7 +724,7 @@ Allowed TLS v1.3 ciphers. When empty it will use the value of `server_tls_cipher
 - `TLS_AES_128_CCM_8_SHA256`
 - `TLS_AES_128_CCM_SHA256`
 
-Only connections using TLS version 1.3 and higher are affected. For version 1.2 and lower see `client_tls_ciphers`.
+Only connections using TLS version 1.3 and higher are affected. For version 1.2 and lower see `server_tls_ciphers`.
 
 Default: `<empty>`
 
@@ -716,6 +745,8 @@ Default: 0.0 (disabled)
 Maximum time queries are allowed to spend waiting for execution. If the query is not assigned to a server during that time, the client is disconnected. 0 disables. If this is disabled, clients will be queued indefinitely. [seconds]
 
 This setting is used to prevent unresponsive servers from grabbing up connections. It also helps when the server is down or rejects connections for any reason.
+
+This setting can also be configured per database and per user. The precedence is user, then database, then global. An explicit 0 at the selected level disables this timeout. See the [1.26.0 timeout selection code](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/src/janitor.c#L328-L336).
 
 Default: 120.0
 
@@ -744,12 +775,6 @@ Default: 0.0 (disabled)
 If a client has been in "in transaction" state longer, it will be disconnected. [seconds]
 
 Default: 0.0 (disabled)
-
-### suspend_timeout
-
-How long to wait for buffer flush during `SUSPEND` or reboot (`-R`). A connection is dropped if the flush does not succeed. [seconds]
-
-Default: 10
 
 --------
 
@@ -947,6 +972,14 @@ Query to be executed after a connection is established, but before allowing the 
 
 Set the pool mode specific to this database. If not set, the default `pool_mode` is used.
 
+### query_wait_timeout
+
+Maximum time queries are allowed to spend waiting for execution. 0 disables. Omit this setting to inherit the applicable default. [seconds]
+
+See description of the global `query_wait_timeout` setting for additional detail.
+
+A user-level `query_wait_timeout` overrides this database setting. If neither is set, the global `query_wait_timeout` is used.
+
 ### load_balance_hosts
 
 When a comma-separated list is specified in `host`, `load_balance_hosts` controls which entry is chosen for a new connection.
@@ -1023,6 +1056,14 @@ Configure a maximum for the user of server connections (i.e. all pools with the 
 ### query_timeout
 
 Set the maximum number of seconds that a user query can run for. If set this timeout overrides the server level `query_timeout` described above.
+
+### query_wait_timeout
+
+Maximum time queries are allowed to spend waiting for execution. 0 disables. Omit this setting to inherit the applicable default. [seconds]
+
+See description of the global `query_wait_timeout` setting for additional detail.
+
+This setting overrides both the database and global `query_wait_timeout`. If not set, the database setting is used, falling back to the global value.
 
 ### idle_transaction_timeout
 

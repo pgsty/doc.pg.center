@@ -12,6 +12,14 @@ upstream_link: "https://www.pgbouncer.org/downloads/"
 
 --------
 
+## PgBouncer 1.26
+
+| File | Date | Size | Checksum |
+|------|------|------|----------|
+| [pgbouncer-1.26.0.tar.gz](https://www.pgbouncer.org/downloads/files/1.26.0/pgbouncer-1.26.0.tar.gz) | 2026-09-23 | 897943 bytes | [sha256](https://www.pgbouncer.org/downloads/files/1.26.0/pgbouncer-1.26.0.tar.gz.sha256) |
+
+--------
+
 ## PgBouncer 1.25
 
 | File                                                                                                |    Date    |     Size     |                                          SHA256                                           |

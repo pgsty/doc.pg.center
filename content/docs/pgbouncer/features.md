@@ -26,7 +26,7 @@ upstream_link: "https://www.pgbouncer.org/features.html"
 
 - Supports online reconfiguration for most settings.
 
-- Supports online restart/upgrade without dropping client connections.
+- Supports [rolling restarts and upgrades](/docs/pgbouncer/usage/#shutdown-wait_for_clients) using multiple processes with [`so_reuseport`](/docs/pgbouncer/config/#so_reuseport). The legacy online restart (`-R`) was removed in 1.26.0.
 
 --------
 
@@ -37,7 +37,7 @@ The following table lists various PostgreSQL features and whether they are compa
 | Feature                          | Session pooling  |  Transaction pooling  |
 |----------------------------------|:----------------:|:---------------------:|
 | Startup parameters [^0]          | Yes              |          Yes          |
-| SET/RESET                        | Yes              |         Never         |
+| SET/RESET                        | Yes              | For tracked parameters [^0] |
 | LISTEN                           | Yes              |         Never         |
 | NOTIFY                           | Yes              |          Yes          |
 | WITHOUT HOLD CURSOR              | Yes              |          Yes          |
@@ -50,6 +50,6 @@ The following table lists various PostgreSQL features and whether they are compa
 | LOAD statement                   | Yes              |         Never         |
 | Session-level advisory locks     | Yes              |         Never         |
 
-[^0]: Startup parameters are: `client_encoding`, `DateStyle`, `IntervalStyle`, `Timezone`, `standard_conforming_strings`, and `application_name`. PgBouncer detects their changes and so it can guarantee they remain consistent for the client. If you need PgBouncer to support more than these, take a look at [`track_extra_parameters`](/docs/pgbouncer/config/#track_extra_parameters) and [`ignore_startup_parameters`](/docs/pgbouncer/config/#ignore_startup_parameters).
+[^0]: Since 1.26.0, PgBouncer tracks all server-reported parameters that clients can change: `application_name`, `client_encoding`, `DateStyle`, `default_transaction_read_only` (PostgreSQL 14+), `IntervalStyle`, `scram_iterations` (PostgreSQL 16+), `search_path` (PostgreSQL 18+), `session_authorization`, `standard_conforming_strings`, and `TimeZone`. For parameters that the server does not report, only startup values are tracked; later `SET` changes are not. See [`track_extra_parameters`](/docs/pgbouncer/config/#track_extra_parameters) and [`ignore_startup_parameters`](/docs/pgbouncer/config/#ignore_startup_parameters) for details and extension-provided parameters.
 
-[^1]: You need to change [`max_prepared_statements`](/docs/pgbouncer/config/#max_prepared_statements) to a non-zero value to enable this support.
+[^1]: Protocol-level prepared statement support is enabled when [`max_prepared_statements`](/docs/pgbouncer/config/#max_prepared_statements) is non-zero. The default is 200; setting it to 0 disables this support. SQL-level `PREPARE` / `DEALLOCATE` remains incompatible with transaction pooling, except for `DEALLOCATE ALL` and `DISCARD ALL` when tracking is enabled.

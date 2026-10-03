@@ -4,6 +4,13 @@ The first pgsql.cc documentation collection was imported on 2026-08-15 from the 
 
 The imported documentation is distributed under the Creative Commons Attribution 4.0 International license used by the source documentation sites. A copy is included as `LICENSE-CC-BY-4.0`.
 
+The English and Simplified Chinese PgBouncer manuals were refreshed on 2026-10-04
+to version 1.26.0 (`pgbouncer_1_26_0`), using the proofread `pigsty.io` commit
+`fe0a9f08259fd6a55856d202609205606ba3c704` and `pigsty.cc` commit
+`e22fbc56ec1631a4d56a15ffb2b7e8721f411184`. They include corrections to four kinds
+of upstream reference errors, checked against the release implementation.
+Other language editions retain the 1.25.2 snapshot.
+
 The pgBadger collection was imported on 2026-08-15 from <https://pgbadger.darold.net/> and from `darold/pgbadger` commit `a1ad95a035a0c2d246fe632eb1c361d4bde0ddae`. Its source code and source documentation are distributed under the PostgreSQL License, copyright 2012-2026 Gilles Darold. The complete license is retained in `sources/pgbadger/upstream/LICENSE` and beside the offline examples in `static/third_party/pgbadger/LICENSE`.
 
 pgBadger embeds a modified `SQL::Beautify` module under Artistic License 2.0. Its generated-report resources include MIT, GPL-2.0, and SIL Open Font License 1.1 components; the complete upstream resource inventory is retained in `sources/pgbadger/upstream/RESOURCE-LICENSES` and `static/third_party/pgbadger/THIRD-PARTY-LICENSES`. The original website HTML is stored only as a provenance snapshot under `sources/pgbadger/site` and is not part of the normal Hugo output.

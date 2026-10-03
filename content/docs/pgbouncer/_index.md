@@ -1,5 +1,5 @@
 ---
-title: "PgBouncer 1.25.2 Documentation"
+title: "PgBouncer 1.26.0 Documentation"
 linkTitle: PgBouncer
 weight: 30
 description: >
@@ -19,6 +19,8 @@ cascade:
   type: docs
   module: [PGBOUNCER]
 ---
+
+This manual is based on [PgBouncer 1.26.0](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0), released on 2026-09-23. See the [release notes](/docs/pgbouncer/changelog/#pgbouncer-126x) for the changes from earlier versions.
 
 **pgbouncer** is a PostgreSQL connection pooler. Any target application
 can be connected to **pgbouncer** as if it were a PostgreSQL server,

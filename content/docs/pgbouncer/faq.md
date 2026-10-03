@@ -21,14 +21,22 @@ PgBouncer port.
 
 ## How to load-balance queries between several servers?
 
-PgBouncer does not have an internal multi-host configuration.
-It is possible via external tools:
+PgBouncer supports a comma-separated list of hosts in a database connection
+string. With [`load_balance_hosts=round-robin`](/docs/pgbouncer/config/#load_balance_hosts),
+new server connections rotate through that list. For example:
+
+```ini
+[databases]
+app = host=pg1,pg2 port=5432 dbname=app load_balance_hosts=round-robin
+```
+
+You can also use external tools:
 
 1.  DNS round-robin. Use several IPs behind one DNS name. PgBouncer does
     not look up DNS each time a new connection is launched. Instead, it
     caches all IPs and does round-robin internally. Note: if there are
     more than 8 IPs behind one name, the DNS backend must support the EDNS0
-    protocol. See README for details.
+    protocol. See [DNS lookup support](/docs/pgbouncer/install/#dns-lookup-support) for details.
 
 2.  Use a TCP connection load-balancer. Either
     [LVS](http://www.linuxvirtualserver.org/) or
@@ -42,8 +50,12 @@ It is possible via external tools:
 
 ## How to failover
 
-PgBouncer does not have internal failover-host configuration nor detection.
-It is possible with external tools:
+With a comma-separated host list and
+[`load_balance_hosts=disable`](/docs/pgbouncer/config/#load_balance_hosts),
+PgBouncer continues using the same host until a connection attempt fails,
+then tries the next host. This does not perform primary/replica role
+detection. For failover that follows changes in the database topology,
+use external tools:
 
 1. DNS reconfiguration: When the IP address behind a DNS name is
    reconfigured, PgBouncer will reconnect to the new server.  This
@@ -71,7 +83,7 @@ It is possible with external tools:
 
 In session pooling mode, the reset query must clean old prepared
 statements.  This can be achieved by `server_reset_query = DISCARD ALL;`
-or at least to `DEALLOCATE ALL;`
+or at least `DEALLOCATE ALL;`.
 
 --------
 
@@ -80,12 +92,12 @@ or at least to `DEALLOCATE ALL;`
 Since version 1.21.0 PgBouncer can track prepared statements in transaction
 pooling mode and make sure they get prepared on-the-fly on the linked server
 connection. To enable this feature, `max_prepared_statements` needs to be
-set to a non-zero value. See the [docs for
+set to a non-zero value (the default is 200). See the [docs for
 `max_prepared_statements`](/docs/pgbouncer/config/#max_prepared_statements)
 for more details.
 
 If you use PHP/PDO, depending on its version it might be incompatible with
-PgBouncer its prepared statement support ([#991]). PHP/PDO is only compatible
+PgBouncer's prepared statement support ([#991]). PHP/PDO is only compatible
 when [PHP 8.4+ **and** libpq 17][php-fix] are used. So for setups with older versions it's
 recommended to upgrade, or to disable prepared statements on the client
 side.

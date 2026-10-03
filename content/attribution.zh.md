@@ -30,7 +30,7 @@ pgsql.cc 转载并整理了六个上游项目撰写的文档。每一个文档�
 |---|---|---|---|---|
 | [Patroni](/zh/docs/patroni/) | [Patroni 文档](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [上游 `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
 | [pgBackRest](/zh/docs/pgbackrest/) | [pgBackRest 文档](https://pgbackrest.org/) | v2.59.1 | [MIT](https://opensource.org/license/mit) | [上游 `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/zh/docs/pgbouncer/) | [PgBouncer 文档](https://www.pgbouncer.org/) | v1.25.2 | [ISC](https://opensource.org/license/isc-license-txt) | [上游 `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/master/COPYRIGHT) |
+| [PgBouncer](/zh/docs/pgbouncer/) | [PgBouncer 文档](https://www.pgbouncer.org/) | v1.26.0（英文 / 简体中文） | [ISC](https://opensource.org/license/isc-license-txt) | [上游 `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/zh/docs/pgbadger/) | [pgBadger 文档](https://pgbadger.darold.net/) | v13.2，提交 `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/zh/docs/haproxy/) | [HAProxy 3.4 手册](https://docs.haproxy.org/3.4/) | v3.4.4，提交 `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/zh/docs/etcd/) | [etcd v3.7 文档](https://etcd.io/docs/v3.7/) | v3.7，提交 `8245979` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [上游 `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
@@ -59,9 +59,11 @@ pgBackRest 版权归 The PostgreSQL Global Development Group 与 David Steele �
 
 于 2026-08-15 从 [PgBouncer 文档站](https://www.pgbouncer.org/) **v1.25.2** 导入，并同时准备了简体中文译本。
 
+英文与简体中文版本于 2026-10-04 更新至 [**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0)，分别同步自 `pigsty.io` 与 `pigsty.cc` 中已校对的文档。参考说明已与该版本的实现核对，并修正了四类上游说明与实现不符的问题。其他语言版本仍保留 v1.25.2 的文档快照。
+
 PgBouncer 版权归 Marko Kreen 与 Skype Technologies OÜ 所有（Copyright (c) 2007-2009），
 依 [ISC 协议](https://opensource.org/license/isc-license-txt)授权。
-完整协议文本保存在[上游仓库](https://github.com/pgbouncer/pgbouncer/blob/master/COPYRIGHT)。
+完整协议文本保存在[上游仓库](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT)。
 
 ## pgBadger {#pgbadger}
 
