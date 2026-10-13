@@ -3,11 +3,11 @@ title: Именование и обнаружение gRPC
 weight: 3500
 description: "go-grpc: разрешение конечных точек gRPC с бэкендом etcd"
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/grpc_naming.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/grpc_naming.md"
 aliases: [/etcd/dev-guide/grpc_naming/]
 ---
 
-etcd предоставляет резолвер gRPC для альтернативной системы имён, которая получает конечные точки из etcd при обнаружении служб gRPC. Механизм основан на наблюдении за обновлениями ключей с префиксом имени службы.
+etcd предоставляет резолвер gRPC для поддержки альтернативной системы имён, которая получает конечные точки из etcd при обнаружении служб gRPC. Механизм основан на наблюдении за обновлениями ключей с префиксом имени службы.
 
 Эта возможность является экспериментальной, поскольку зависит от пакета [google.golang.org/grpc/resolver][], который всё ещё считается экспериментальным в grpc-go.
 

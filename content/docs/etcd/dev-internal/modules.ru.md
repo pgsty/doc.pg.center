@@ -3,7 +3,7 @@ title: Модули Golang
 weight: 1650
 description: Организация модулей Golang проекта etcd
 categories: [Справочник]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-internal/modules.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-internal/modules.md"
 aliases: [/etcd/dev-internal/modules/]
 ---
 
@@ -20,7 +20,7 @@ aliases: [/etcd/dev-internal/modules/]
 
   - **go.etcd.io/etcd/client/v3** — клиентская библиотека для сетевого обращения к etcd по grpc. Рекомендуется для всех новых применений etcd.
 
-  - **go.etcd.io/etcd/client/v2** — устаревшая клиентская библиотека для обращения к etcd по протоколу HTTP. Новые проекты должны зависеть от библиотеки /v3.
+  - **go.etcd.io/etcd/client/v2** — прежняя клиентская библиотека для обращения к etcd по протоколу HTTP. Устарела. Все новые применения должны зависеть от библиотеки /v3.
 
   - **go.etcd.io/etcd/raft/v3** — реализация протокола распределённого консенсуса. Не должна содержать код, специфичный для etcd.
 

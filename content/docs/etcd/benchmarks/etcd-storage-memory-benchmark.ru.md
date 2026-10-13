@@ -1,9 +1,9 @@
 ---
 title: Тестирование использования памяти хранилищем
 weight: 5125
-description: Показатели производительности хранилища etcd (индекс в памяти и страничный кеш)
+description: Показатели потребления памяти хранилищем etcd (индекс в памяти и страничный кеш)
 categories: [Справочник]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/benchmarks/etcd-storage-memory-benchmark.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/benchmarks/etcd-storage-memory-benchmark.md"
 aliases: [/etcd/benchmarks/etcd-storage-memory-benchmark/]
 ---
 
@@ -64,7 +64,7 @@ aliases: [/etcd/benchmarks/etcd-storage-memory-benchmark/]
 - 7.5 GB памяти
 - 2x CPU
 
-## Использование памяти индексом в памяти {#in-memory-index-memory-usage}
+## Потребление памяти индексом {#in-memory-index-memory-usage}
 
 В этом тесте измеряется только потребление памяти индексом. Цель — найти упомянутые выше `c1` и `c2` и понять жёсткий предел потребления памяти хранилищем.
 

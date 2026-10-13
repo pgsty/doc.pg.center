@@ -1,9 +1,9 @@
 ---
 title: Тестирование памяти etcd v2.2.0-rc
 weight: 5500
-description: Показатели производительности памяти etcd v2.2.0-rc
+description: Показатели потребления памяти etcd v2.2.0-rc
 categories: [Справочник]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/benchmarks/etcd-2-2-0-rc-memory-benchmarks.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/benchmarks/etcd-2-2-0-rc-memory-benchmarks.md"
 aliases: [/etcd/benchmarks/etcd-2-2-0-rc-memory-benchmarks/]
 ---
 
@@ -29,7 +29,7 @@ Go OS/Arch: linux/amd64
 
 Запускается кластер etcd из 3 участников, каждый из которых использует 2 ядра.
 
-Длина имени ключа всегда составляет 64 bytes — это разумная средняя длина ключа.
+Длина имени ключа всегда составляет 64 байта — это разумная средняя длина ключа.
 
 ## Максимальное использование памяти {#memory-maximal-usage}
 

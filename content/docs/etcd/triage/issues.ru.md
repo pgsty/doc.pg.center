@@ -3,7 +3,7 @@ title: Рекомендации по триажу issue
 weight: 8100
 description: "Рекомендации по триажу issue проекта etcd"
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/triage/issues.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/triage/issues.md"
 aliases: [/etcd/triage/issues/]
 ---
 
@@ -26,7 +26,7 @@ https://github.com/kubernetes/kubernetes/labels
 
 ## Область применения {#scope}
 
-Эти рекомендации служат основным документом по триажу поступающих issue в `etcd`. Помогать с issue и PR могут все желающие, однако описанные здесь работа и обязанности рассчитаны прежде всего на сопровождающих и активных участников `etcd`.
+Эти рекомендации служат основным документом по триажу поступающих issue в `etcd`. Помогать с issue и PR могут все желающие, однако описанные здесь работа и обязанности рассчитаны на сопровождающих и активных участников `etcd`.
 
 ## Проверка, является ли issue ошибкой {#validate-if-an-issue-is-a-bug}
 

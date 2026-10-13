@@ -3,11 +3,11 @@ title: Как создать аренду
 description: Руководство по созданию аренды в etcd
 weight: 700
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/developer/how-to-create-lease.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/developer/how-to-create-lease.md"
 aliases: [/etcd/tasks/developer/how-to-create-lease/]
 ---
 
-`lease` записывать с TTL:
+Команда `lease` позволяет записывать ключи с TTL:
 
 
 ![07_etcdctl_lease_2016050501](/docs/etcd/tasks/img/create-lease.gif)

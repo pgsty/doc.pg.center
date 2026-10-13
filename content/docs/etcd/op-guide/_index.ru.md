@@ -1,9 +1,9 @@
 ---
-title: Руководство по операциям
+title: Руководство по эксплуатации
 weight: 4000
-description: "etcd руководства по установке, обслуживанию и устранению неполадок"
+description: "Руководства по установке, обслуживанию и устранению неполадок etcd"
 icon: fa-solid fa-server
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/_index.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/_index.md"
 aliases: [/etcd/op-guide/]
 ---

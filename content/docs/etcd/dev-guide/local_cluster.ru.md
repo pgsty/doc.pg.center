@@ -3,7 +3,7 @@ title: Настройка локального кластера
 weight: 3125
 description: Настройка локальных кластеров для тестирования и разработки
 categories: [Руководство]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/local_cluster.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/local_cluster.md"
 aliases: [/etcd/dev-guide/local_cluster/]
 ---
 

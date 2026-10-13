@@ -4,11 +4,11 @@ weight: 1300
 description: Перечень инструментов и клиентских библиотек etcd
 icon: fa-solid fa-puzzle-piece
 categories: [Справочник]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/integrations.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/integrations.md"
 aliases: [/etcd/integrations/]
 ---
 
-Обратите внимание: перечисленные ниже сторонние библиотеки и инструменты (размещённые не на https://github.com/etcd-io) не тестируются и не сопровождаются командой etcd. Перед использованием рекомендуется прочитать и изучить их документацию и исходный код.
+Обратите внимание: перечисленные ниже сторонние библиотеки и инструменты (размещённые не на https://github.com/etcd-io) не тестируются и не сопровождаются командой etcd. Перед использованием рекомендуется их прочитать и изучить.
 
 ## Инструменты {#tools}
 
@@ -24,7 +24,7 @@ aliases: [/etcd/integrations/]
 - [etcdloadtest](https://github.com/sinsharat/etcdloadtest) — клиент командной строки для нагрузочного тестирования etcd версии 3.0 и выше.
 - [etcd-tui](https://github.com/olamilekan000/etcd-tui) — современный терминальный пользовательский интерфейс (TUI) для работы с базой данных etcd. Позволяет переходить по ключам, просматривать значения, фильтровать данные и управлять кластером etcd непосредственно из терминала.
 - [etcdfinder](https://etcdfinder.github.io) — сверхбыстрый современный веб-интерфейс etcd с мгновенным поиском. Поддерживает etcd v2 и v3.
-- [lucas](https://github.com/ringtail/lucas) — веб-средство просмотра ключей и значений для кластера kubernetes etcd3.0+.
+- [lucas](https://github.com/ringtail/lucas) — веб-средство просмотра ключей и значений для кластера Kubernetes etcd3.0+.
 - [etcd-manager](https://etcdmanager.io) — современный, эффективный, многоплатформенный и бесплатный графический интерфейс и клиентский инструмент etcd 3.x. Доступен для Windows, Linux и Mac.
 - [etcd-backup-restore](https://github.com/gardener/etcd-backup-restore) — утилита для периодического инкрементного резервного копирования и восстановления etcd.
 - [etcd-druid](https://github.com/gardener/etcd-druid) — оператор Kubernetes для развёртывания кластеров etcd и управления эксплуатационными операциями 2-го дня.
@@ -57,7 +57,7 @@ aliases: [/etcd/integrations/]
 
 ### Perl {#perl}
 
-- [hexfusion/perl-net-etcd](https://github.com/hexfusion/perl-net-etcd) — поддерживает HTTP API шлюза grpc v3
+- [hexfusion/perl-net-etcd](https://github.com/hexfusion/perl-net-etcd) — поддерживает HTTP API шлюза gRPC v3
 - [robn/p5-etcd](https://github.com/robn/p5-etcd) — поддерживает v2
 
 ### Python {#python}
@@ -68,7 +68,7 @@ aliases: [/etcd/integrations/]
 - [cholcombe973/autodock](https://github.com/cholcombe973/autodock) — инструмент автоматизации развёртывания Docker
 - [lisael/aioetcd](https://github.com/lisael/aioetcd) — клиент на корутинах Asyncio (Python 3.4+), поддерживает v2
 - [txaio-etcd](https://github.com/crossbario/txaio-etcd) — асинхронная клиентская библиотека только для etcd v3: для Twisted сейчас и asyncio в будущем
-- [dims/etcd3-gateway](https://github.com/dims/etcd3-gateway) — библиотека API etcd v3, использующая HTTP-шлюз grpc
+- [dims/etcd3-gateway](https://github.com/dims/etcd3-gateway) — библиотека API etcd v3, использующая HTTP-шлюз gRPC
 - [aioetcd3](https://github.com/gaopeiliang/aioetcd3) — API etcd v3 для asyncio (Python 3.6+)
 - [Revolution1/etcd3-py](https://github.com/Revolution1/etcd3-py) — клиент Python для etcd v3 (python2.7 и python3.5+), использующий gRPC-JSON-Gateway
 
@@ -108,17 +108,17 @@ aliases: [/etcd/integrations/]
 ### Erlang {#erlang}
 
 - [marshall-lee/etcd.erl](https://github.com/marshall-lee/etcd.erl) — поддерживает v2
-- [zhongwencool/eetcd](https://github.com/zhongwencool/eetcd) — поддерживает v3+ (только GRPC)
+- [zhongwencool/eetcd](https://github.com/zhongwencool/eetcd) — поддерживает v3+ (только gRPC)
 
 ### Elixir {#elixir}
 
-- [team-telnyx/etcdex](https://github.com/team-telnyx/etcdex) — поддерживает v3+ (только GRPC)
+- [team-telnyx/etcdex](https://github.com/team-telnyx/etcdex) — поддерживает v3+ (только gRPC)
 
 ### .NET {#net}
 
 - [wangjia184/etcdnet](https://github.com/wangjia184/etcdnet) — поддерживает v2
 - [drusellers/etcetera](https://github.com/drusellers/etcetera)
-- [shubhamranjan/dotnet-etcd](https://github.com/shubhamranjan/dotnet-etcd) — поддерживает v3+ (только GRPC)
+- [shubhamranjan/dotnet-etcd](https://github.com/shubhamranjan/dotnet-etcd) — поддерживает v3+ (только gRPC)
 - [SimplifyNet/Etcd.Microsoft.Extensions.Configuration](https://github.com/SimplifyNet/Etcd.Microsoft.Extensions.Configuration)
 
 ### PHP {#php}
@@ -153,7 +153,7 @@ aliases: [/etcd/integrations/]
 
 ### Lua {#lua}
 
-- [api7/lua-resty-etcd](https://github.com/api7/lua-resty-etcd) — поддерживает v2 и v3 (HTTP API шлюза grpc)
+- [api7/lua-resty-etcd](https://github.com/api7/lua-resty-etcd) — поддерживает v2 и v3 (HTTP API шлюза gRPC)
 
 ## Инструменты развёртывания {#deployment-tools}
 
@@ -172,7 +172,7 @@ aliases: [/etcd/integrations/]
 
 ## Проекты, использующие etcd {#projects-using-etcd}
 
-- [Пользователи Raft etcd](https://github.com/etcd-io/raft/blob/main/README.md#notable-users) — проекты, использующие реализацию библиотеки raft от etcd.
+- [Пользователи Raft etcd](https://github.com/etcd-io/raft/blob/main/README.md#notable-users) — проекты, использующие реализацию библиотеки Raft от etcd.
 - [Apache APISIX](https://github.com/apache/apisix) — шлюз API, использующий etcd как хранилище конфигурации.
 - [apache/celix](https://github.com/apache/celix) — адаптированная для C и C++ реализация спецификации OSGi
 - [binocarlos/yoda](https://github.com/binocarlos/yoda) — etcd + ZeroMQ

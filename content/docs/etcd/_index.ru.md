@@ -1,5 +1,5 @@
 ---
-title: "etcd 3.7 Документация"
+title: "Документация etcd 3.7"
 linkTitle: "etcd 3.7"
 description: "Официальные руководства etcd 3.7 для разработчиков, операторов, обновлений, API и внутренней работы."
 type: docs
@@ -12,7 +12,7 @@ section_index: cards
 section_index_columns: 3
 upstream_source: etcd
 categories: [Концепция]
-upstream_link: "https://github.com/etcd-io/website/tree/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7"
+upstream_link: "https://github.com/etcd-io/website/tree/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7"
 cascade:
   upstream_source: etcd
   type: docs
@@ -22,4 +22,4 @@ aliases: [/etcd/]
 
 etcd — это строго согласованное распределённое хранилище ключей и значений. Эти руководства охватывают установку и эксплуатацию etcd, разработку приложений с использованием его API, понимание архитектуры, измерение производительности, а также обновление или понижение версии кластеров в линейке выпусков 3.7.
 
-Начните с [Краткого руководства](/ru/docs/etcd/quickstart/) для локального кластера из одного участника, [Установка](/ru/docs/etcd/install/) для поддерживаемых путей установки или [Руководства по эксплуатации](/ru/docs/etcd/op-guide/) для промышленных развёртываний.
+Начните с [Краткого руководства](/ru/docs/etcd/quickstart/) для локального кластера из одного участника, [Установки](/ru/docs/etcd/install/) для поддерживаемых путей установки или [Руководства по эксплуатации](/ru/docs/etcd/op-guide/) для промышленных развёртываний.

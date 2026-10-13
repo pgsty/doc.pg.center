@@ -3,13 +3,13 @@ title: Как получить ключи по префиксу
 description: Руководство по извлечению ключей etcd по их префиксу
 weight: 300
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/developer/how-to-get-key-by-prefix.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/developer/how-to-get-key-by-prefix.md"
 aliases: [/etcd/tasks/developer/how-to-get-key-by-prefix/]
 ---
 
 ## Предварительные требования {#pre-requisites}
 
-* [Установите etcdctl](/ru/docs/etcd/install/)  
+* [Установите etcdctl](/ru/docs/etcd/install/)
 * [Настройте локальный кластер](/ru/docs/etcd/dev-guide/local_cluster/)
 
 ## Получить ключи по префиксу {#get-keys-by-prefix}

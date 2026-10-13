@@ -3,7 +3,7 @@ title: Мониторинг etcd
 weight: 4500
 description: Мониторинг etcd для проверки состояния системы и отладки кластера
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/monitoring.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/monitoring.md"
 aliases: [/etcd/op-guide/monitoring/]
 ---
 
@@ -180,28 +180,28 @@ Access: proxy
 В v3.5 etcd добавлена распределённая трассировка с помощью [OpenTelemetry](https://github.com/open-telemetry).
 
 > [!NOTE]
-> Эта возможность остаётся экспериментальной и может измениться в любое время.
+> В etcd 3.7 используйте приведённые ниже флаги трассировки без прежнего экспериментального префикса.
 
-Чтобы включить экспериментальную возможность, передайте серверу etcd
-`--experimental-enable-distributed-tracing=true` и флаг
-`--experimental-distributed-tracing-sampling-rate=<number>`, задающий число
+Чтобы включить распределённую трассировку, передайте серверу etcd
+`--enable-distributed-tracing=true` и флаг
+`--distributed-tracing-sampling-rate=<number>`, задающий число
 выборок на миллион спанов. Частота выборки по умолчанию — `0`.
 
 Настройте распределённую трассировку, запустив сервер etcd со следующими необязательными флагами:
 
-- `--experimental-distributed-tracing-address` - (необязательно) - "localhost:4317" - адрес сборщика трассировок.
+- `--distributed-tracing-address` - (необязательно) - "localhost:4317" - адрес сборщика трассировок.
 
-- `--experimental-distributed-tracing-service-name` - (необязательно) - "etcd" - имя службы распределённой трассировки, одинаковое для всех экземпляров etcd.
+- `--distributed-tracing-service-name` - (необязательно) - "etcd" - имя службы распределённой трассировки, которое должно быть одинаковым для всех экземпляров etcd.
 
-- `--experimental-distributed-tracing-instance-id` - (необязательно) - идентификатор экземпляра; хотя параметр необязателен, его настоятельно рекомендуется задать уникальным для каждого экземпляра etcd.
+- `--distributed-tracing-instance-id` - (необязательно) - идентификатор экземпляра; хотя параметр необязателен, его настоятельно рекомендуется задать, и он должен быть уникальным для каждого экземпляра etcd.
 
 Перед включением распределённой трассировки убедитесь, что конечная точка
 OpenTelemetry доступна. Если её адрес отличается от стандартного, переопределите
-его флагом `--experimental-distributed-tracing-address`. Варианты запуска
+его флагом `--distributed-tracing-address`. Варианты запуска
 OpenTelemetry описаны в [документации сборщика](https://opentelemetry.io/docs/collector/getting-started/).
 
 > [!NOTE]
-> Как и любой сигнал наблюдаемости, эта возможность расходует ресурсы. По первым измерениям дополнительные затраты CPU составляют от 2% - 4%.
+> Как и любой сигнал наблюдаемости, эта возможность расходует ресурсы. По первым измерениям дополнительные затраты CPU могут составлять от 2% до 4%.
 
 [grafana]: http://grafana.org/
 [prometheus]: https://prometheus.io/

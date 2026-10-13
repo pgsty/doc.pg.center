@@ -3,7 +3,7 @@ title: "Справочник API: конкурентность"
 weight: 3900
 description: "Справочник по API конкурентности etcd"
 categories: [Справочник]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/api_concurrency_reference_v3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/api_concurrency_reference_v3.md"
 aliases: [/etcd/dev-guide/api_concurrency_reference_v3/]
 ---
 

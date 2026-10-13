@@ -3,7 +3,7 @@ title: Как добавлять и удалять участников
 description: Руководство по управлению составом кластера etcd
 weight: 1300
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/operator/how-to-deal-with-membership.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/operator/how-to-deal-with-membership.md"
 aliases: [/etcd/tasks/operator/how-to-deal-with-membership/]
 ---
 
