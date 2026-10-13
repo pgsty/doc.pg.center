@@ -3,14 +3,14 @@ title: "Comment effectuer l'élection du leader dans un cluster etcd"
 description: Étapes pour effectuer une élection de leader via le client etcdctl
 weight: 900
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/operator/how-to-conduct-elections.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/operator/how-to-conduct-elections.md"
 aliases: [/etcd/tasks/operator/how-to-conduct-elections/]
 ---
 
 ## Prérequis {#prerequisites}
 
 - Vérifiez que [`etcd`](/fr/docs/etcd/install/) et [`etcdctl`](/fr/docs/etcd/install/) sont installés.
-- Vérifiez l'état du cluster etcd actif.
+- Vérifiez la présence d'un cluster etcd actif.
 
 ## Conduire l'élection du leader {#conduct-leader-election}
 
@@ -24,7 +24,7 @@ etcdctl --endpoints=$ENDPOINTS elect election-name p1
 
 ### Options {#options}
 
--  `--endpoints : $ENDPOINTS`
+- `--endpoints : $ENDPOINTS`
 
 Adresse de chaque membre du cluster etcd.
 

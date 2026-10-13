@@ -4,11 +4,11 @@ weight: 900
 description: "Mettez etcd en marche en moins de 5 minutes !"
 icon: fa-solid fa-rocket
 categories: [Tutoriel]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/quickstart.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/quickstart.md"
 aliases: [/etcd/quickstart/]
 ---
 
-Suivez ces instructions pour installer, exécuter et tester localement un cluster à membre unique de etcd :
+Suivez ces instructions pour installer, exécuter et tester localement un cluster à membre unique d'etcd :
 
  1. Installez etcd à partir de binaires précompilés ou du code source. Pour plus de détails, consultez [Installation][Install].
 
@@ -25,11 +25,11 @@ Suivez ces instructions pour installer, exécuter et tester localement un cluste
     ```
 
     > [!NOTE]
-    > **Remarque** : La sortie produite par `etcd` est
-    > [logs](/fr/docs/etcd/op-guide/configuration/#logging) &mdash; des journaux de niveau info peuvent
+    > **Remarque** : La sortie produite par `etcd` correspond à des
+    > [journaux](/fr/docs/etcd/op-guide/configuration/#logging) &mdash; des journaux de niveau info peuvent
     > être ignorés.
 
- 3. Depuis un autre terminal, utilisez `etcdctl` pour définir une clé :
+ 3. Depuis **un autre terminal**, utilisez `etcdctl` pour définir une clé :
 
     ```console
     $ etcdctl put greeting "Hello, etcd"
@@ -49,12 +49,12 @@ Suivez ces instructions pour installer, exécuter et tester localement un cluste
 Découvrez d'autres méthodes de configuration et d'utilisation d'etcd dans les pages suivantes :
 
 - Si vous êtes développeur :
-  - Explorez l'API gRPC [API][].
+  - Explorez l'[API][] gRPC.
   - Recherchez [des liaisons de langage et des outils][integrations].
 
 - Si vous êtes opérateur ou administrateur :
   - Mettez en place un [cluster multi-machine][clustering].
-  - Apprenez à [configurer][] etcd.
+  - Apprenez à [configurer][configure] etcd.
   - Utilisez TLS pour [sécuriser un cluster etcd][security].
   - [Optimisez etcd][tuning].
 

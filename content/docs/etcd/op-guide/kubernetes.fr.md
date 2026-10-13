@@ -3,14 +3,14 @@ title: Exécuter des clusters etcd en tant que StatefulSet Kubernetes
 weight: 4200
 description: "Exécution d'etcd en tant que StatefulSet Kubernetes"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/kubernetes.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/kubernetes.md"
 aliases: [/etcd/op-guide/kubernetes/]
 ---
 
-Ci-dessous montre comment effectuer le processus de bootstrap statique [comme un StatefulSet Kubernetes](/fr/docs/etcd/op-guide/clustering/#static).
+L’exemple ci-dessous montre comment effectuer le processus de bootstrap statique [comme un StatefulSet Kubernetes](/fr/docs/etcd/op-guide/clustering/#static).
 
 ## Exemple de manifeste {#example-manifest}
-Ce manifeste contient un service et un statefulset pour déployer un cluster etcd statique dans Kubernetes.
+Ce manifeste contient un service et un StatefulSet pour déployer un cluster etcd statique dans Kubernetes.
 
 Si vous copiez le contenu du manifeste dans un fichier nommé `etcd.yaml`, vous pouvez l'appliquer à un cluster à l'aide de cette commande.
 
@@ -28,7 +28,7 @@ etcd-1   1/1     Running   0          24m
 etcd-2   1/1     Running   0          24m
 ```
 
-Le conteneur utilisé dans l’exemple inclut etcdctl et peut être appelé directement à l’intérieur des pods.
+Le conteneur utilisé dans l’exemple inclut etcdctl, qui peut être appelé directement dans les pods.
 
 ```shell
 $ kubectl exec -it etcd-0 -- etcdctl member list -wtable
@@ -162,7 +162,7 @@ spec:
       containers:
       ## This example only has this etcd container.
       - name: etcd
-        image: quay.io/coreos/etcd:v3.7.0
+        image: quay.io/coreos/etcd:v3.7.2
         imagePullPolicy: IfNotPresent
         ports:
         - name: etcd-client
@@ -359,7 +359,7 @@ spec:
 ## Génération des certificats {#generating-certificates}
 Dans cette section, nous utilisons [Helm](https://helm.sh) pour installer un opérateur appelé [cert-manager](https://cert-manager.io/).
 
-Avec cert-manager installé dans le cluster, des certificats auto-signés peuvent être générés directement dans le cluster. Ces certificats générés sont placés dans un objet secret pouvant être attaché en tant que fichiers dans des conteneurs.
+Avec cert-manager installé dans le cluster, des certificats auto-signés peuvent être générés directement dans le cluster. Ces certificats générés sont placés dans un objet Secret pouvant être monté sous forme de fichiers dans les conteneurs.
 
 Voici la commande Helm pour installer cert-manager.
 
@@ -367,7 +367,7 @@ Voici la commande Helm pour installer cert-manager.
 $ helm upgrade --install --create-namespace --namespace cert-manager cert-manager cert-manager --repo https://charts.jetstack.io --set crds.enabled=true
 ```
 
-Voici une configuration d'Issuer de cluster exemple pour la génération de certificats auto-signés.
+Voici un exemple de configuration ClusterIssuer pour la génération de certificats auto-signés.
 
 ```yaml
 # file: issuer.yaml

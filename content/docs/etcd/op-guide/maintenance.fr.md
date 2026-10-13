@@ -3,7 +3,7 @@ title: Maintenance
 weight: 4450
 description: Guide de maintenance périodique du cluster etcd
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/maintenance.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/maintenance.md"
 aliases: [/etcd/op-guide/maintenance/]
 ---
 
@@ -19,15 +19,15 @@ Toute maintenance etcd gère les ressources de stockage consommées par l’espa
 
 Une valeur plus élevée de `--snapshot-count` conserve davantage d'entrées Raft en mémoire jusqu'à l'instantané, entraînant ainsi une [utilisation mémoire accrue et récurrente](https://github.com/kubernetes/kubernetes/issues/60589#issuecomment-371977156). Comme le leader conserve les dernières entrées Raft plus longtemps, un suiveur lent dispose de plus de temps pour se synchroniser avant que le leader ne prenne un instantané. `--snapshot-count` représente un compromis entre une utilisation mémoire plus élevée et une meilleure disponibilité des suiveurs lents.
 
-Depuis la version 3.2, la valeur par défaut de `--snapshot-count` a [passé de 10 000 à 100 000](https://github.com/etcd-io/etcd/pull/7160).
+Dans la version 3.2, la valeur par défaut de `--snapshot-count` est [passée de 10 000 à 100 000](https://github.com/etcd-io/etcd/pull/7160). Dans la version 3.7.0, la valeur par défaut est de 10 000.
 
 Sur le plan des performances, un nombre supérieur à 100 000 pour `--snapshot-count` peut affecter le débit d'écriture. Un plus grand nombre d'objets en mémoire peut ralentir la phase de marquage du ramasse-miettes de [`runtime.scanobject`](https://golang.org/src/runtime/mgc.go), et une récupération mémoire peu fréquente rend l'allocation plus lente. Les performances varient selon les charges de travail et les environnements système. Toutefois, en général, un compactage trop fréquent affecte la disponibilité du cluster et le débit d'écriture. Un compactage trop rare est également préjudiciable, car il exerce une pression excessive sur le ramasse-miettes Go. Voir [Comprendre les aspects de performance d'etcd et de Raft](https://www.slideshare.net/mitakeh/understanding-performance-aspects-of-etcd-and-raft) pour plus de résultats de recherche.
 
 ## Compactage de l'historique : base de données clé-valeur API v3 {#history-compaction-v3-api-key-value-database}
 
-Depuis que etcd conserve une historique exacte de son espace de clés, cette historique doit être régulièrement compactée afin d'éviter une dégradation des performances et une épuisement éventuel de l'espace de stockage. La compactation de l'historique de l'espace de clés supprime toutes les informations relatives aux clés remplacées avant une révision donnée de l'espace de clés. L'espace utilisé par ces clés devient alors disponible pour de nouvelles écritures dans l'espace de clés.
+Depuis que etcd conserve un historique exact de son espace de clés, cet historique doit être régulièrement compacté afin d'éviter une dégradation des performances et un épuisement éventuel de l'espace de stockage. La compactation de l'historique de l'espace de clés supprime toutes les informations relatives aux clés remplacées avant une révision donnée de l'espace de clés. L'espace utilisé par ces clés devient alors disponible pour de nouvelles écritures dans l'espace de clés.
 
-L'espace de clés peut être compacté automatiquement selon la politique de rétention des historiques à fenêtre temporelle de `etcd`, ou manuellement via `etcdctl`. La méthode `etcdctl` offre un contrôle fin du processus de compactage, tandis que la compactage automatique convient aux applications qui nécessitent l'historique des clés pendant une durée déterminée.
+L'espace de clés peut être compacté automatiquement selon la politique de rétention des historiques à fenêtre temporelle de `etcd`, ou manuellement via `etcdctl`. La méthode `etcdctl` offre un contrôle fin du processus de compactage, tandis que le compactage automatique convient aux applications qui nécessitent l'historique des clés pendant une durée déterminée.
 
 Un compactage initié par `etcdctl` fonctionne comme suit :
 
@@ -43,7 +43,7 @@ $ etcdctl get --rev=2 somekey
 Error:  rpc error: code = 11 desc = etcdserver: mvcc: required revision has been compacted
 ```
 
-### Compaction automatique {#auto-compaction}
+### Compactage automatique {#auto-compaction}
 
 `etcd` peut être défini pour effectuer automatiquement le compactage de l'espace de clés à l'aide des options `--auto-compaction-mode` et `--auto-compaction-retention`. Deux modes de compactage sont disponibles : `periodic` (par défaut) et `revision`.
 
@@ -90,9 +90,9 @@ $ etcd --auto-compaction-mode=revision --auto-compaction-retention=1000
 
 etcd vérifie toutes les 5 minutes et effectue une compaction sur `"latest revision" - 1000`. Par exemple, lorsque la dernière révision est 30000, elle effectue une compaction à la révision 29000.
 
-## défragmentation {#defragmentation}
+## Défragmentation {#defragmentation}
 
-Après avoir compacté l’espace de clés, la base de données backend peut présenter une fragmentation interne. Toute fragmentation interne correspond à de l’espace libre pour la base de données backend mais qui continue de consommer de l’espace de stockage. La compactation des anciennes révisions fragmente internement `etcd` en laissant des espaces vides dans la base de données backend. L’espace fragmenté est disponible pour `etcd` mais non disponible pour le système de fichiers hôte. Autrement dit, la suppression des données d’application ne libère pas l’espace sur le disque.
+Après avoir compacté l’espace de clés, la base de données backend peut présenter une fragmentation interne. Toute fragmentation interne correspond à de l’espace libre pour la base de données backend mais qui continue de consommer de l’espace de stockage. La compactation des anciennes révisions fragmente `etcd` en interne en laissant des espaces vides dans la base de données backend. L’espace fragmenté est disponible pour `etcd` mais non disponible pour le système de fichiers hôte. Autrement dit, la suppression des données d’application ne libère pas l’espace sur le disque.
 
 Le processus de défragmentation libère cet espace de stockage au système de fichiers. La défragmentation est effectuée au niveau du membre, afin d'éviter des pics de latence affectant l'ensemble du cluster.
 
@@ -126,16 +126,16 @@ etcdutl defrag --data-dir <path-to-etcd-data-dir>
 
 ## Quota d'espace {#space-quota}
 
-La quota d’espace dans `etcd` garantit un fonctionnement fiable du cluster. Sans quota d’espace, `etcd` peut connaître des performances médiocres si l’espace de clés devient trop volumineux, ou simplement manquer d’espace de stockage, entraînant un comportement imprévisible du cluster. Si la base de données backend de l’espace de clés de tout membre dépasse la quota d’espace, `etcd` déclenche une alarme à l’échelle du cluster, qui met le cluster en mode maintenance, acceptant uniquement les lectures et suppressions de clés. Le cluster ne peut reprendre un fonctionnement normal qu’après avoir libéré suffisamment d’espace dans l’espace de clés, défragmenté la base de données backend et effacé l’alarme de quota d’espace.
+Le quota d’espace dans `etcd` garantit un fonctionnement fiable du cluster. Sans quota d’espace, `etcd` peut connaître des performances médiocres si l’espace de clés devient trop volumineux, ou simplement manquer d’espace de stockage, entraînant un comportement imprévisible du cluster. Si la base de données backend de l’espace de clés de tout membre dépasse le quota d’espace, `etcd` déclenche une alarme à l’échelle du cluster, qui met le cluster en mode maintenance, acceptant uniquement les lectures et suppressions de clés. Le cluster ne peut reprendre un fonctionnement normal qu’après avoir libéré suffisamment d’espace dans l’espace de clés, défragmenté la base de données backend et effacé l’alarme de quota d’espace.
 
-Par défaut, `etcd` définit une quota d'espace conservateur adapté à la plupart des applications, mais il peut être configuré en ligne de commande, en octets :
+Par défaut, `etcd` définit un quota d'espace conservateur adapté à la plupart des applications, mais il peut être configuré en ligne de commande, en octets :
 
 ```sh
 # set a very small 16 MiB quota
 $ etcd --quota-backend-bytes=$((16*1024*1024))
 ```
 
-La quota d’espace peut être déclenchée par une boucle :
+Le quota d’espace peut être déclenché par une boucle :
 
 ```sh
 # fill keyspace

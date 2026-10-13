@@ -3,7 +3,7 @@ title: "Contrôle d'accès basé sur les rôles"
 weight: 4100
 description: Guide d’authentification basique et de contrôle d’accès basé sur les rôles
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/authentication/rbac.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/authentication/rbac.md"
 aliases: [/etcd/op-guide/authentication/rbac/]
 ---
 
@@ -25,7 +25,7 @@ Le rôle `root` peut être attribué à tout utilisateur, en plus de l'utilisate
 
 ## Travail avec les utilisateurs {#working-with-users}
 
-Le sous-commande `user` pour `etcdctl` gère toutes les opérations relatives aux comptes utilisateurs.
+La sous-commande `user` pour `etcdctl` gère toutes les opérations relatives aux comptes utilisateurs.
 
 Une liste des utilisateurs peut être obtenue avec :
 
@@ -47,10 +47,10 @@ La création d’un utilisateur qui ne peut pas être authentifié avec un mot d
 $ etcdctl user add myusername --no-password
 ```
 
-Un tel utilisateur ne peut être authentifié que par [TLS Common Name](#using-tls-common-name).
+Un tel utilisateur ne peut être authentifié que par [nom commun TLS](#using-tls-common-name).
 
 > [!NOTE]
-> etcd ne prend pas en charge l'authentification avec un mot de passe vide via `--user username:`. Par exemple, un utilisateur créé avec un mot de passe vide, tel que `etcdctl user add anonymous:''`, ne peut pas s'authentifier par des requêtes username/password et les requêtes telles que `etcdctl --user anonymous: get foo` échouent avec `user name is empty`.
+> etcd ne prend pas en charge l'authentification avec un mot de passe vide via `--user username:`. Par exemple, un utilisateur créé avec un mot de passe vide, tel que `etcdctl user add anonymous:''`, ne peut pas s'authentifier par des requêtes avec nom d’utilisateur et mot de passe et les requêtes telles que `etcdctl --user anonymous: get foo` échouent avec `user name is empty`.
 
 Les rôles peuvent être attribués ou retirés à un utilisateur avec :
 
@@ -81,7 +81,7 @@ $ etcdctl user delete myusername
 
 ## Travail avec les rôles {#working-with-roles}
 
-Le sous-commande `role` pour `etcdctl` gère toutes les opérations relatives aux contrôles d'accès pour des rôles spécifiques, tels qu'ils ont été attribués à des utilisateurs individuels.
+La sous-commande `role` pour `etcdctl` gère toutes les opérations relatives aux contrôles d'accès pour des rôles spécifiques, tels qu'ils ont été attribués à des utilisateurs individuels.
 
 Lister les rôles avec :
 
@@ -99,7 +99,7 @@ Un rôle n’a pas de mot de passe ; il définit simplement un nouvel ensemble d
 
 Les rôles ont accès à une clé unique ou à une plage de clés.
 
-La plage peut être spécifiée sous la forme d'un intervalle [clé_de_depart, clé_de_fin) où la clé_de_depart doit être strictement inférieure à la clé_de_fin selon un ordre alphabétique.
+La plage peut être spécifiée sous la forme d'un intervalle [clé_de_depart, clé_de_fin) où la clé_de_depart devrait être strictement inférieure à la clé_de_fin selon un ordre alphabétique.
 
 L'accès peut être accordé en lecture, écriture ou les deux, comme dans les exemples suivants :
 
@@ -167,11 +167,11 @@ Lorsque l'authentification est activée avec `etcdctl auth enable`, elle protèg
 
 Les points de terminaison HTTP `/metrics` et `/health` fonctionnent sur un gestionnaire distinct et **ne sont pas** protégés par l'authentification RBAC V3. Ce design permet à Prometheus et aux équilibreurs de charge de récupérer les métriques sans nécessiter d'authentification gRPC, tout en maintenant la protection des données clé-valeur.
 
-Pour sécuriser ces points de visualisation :
+Pour sécuriser ces points de terminaison d'observabilité :
 
 - Activez le mTLS avec `--cert-file`, `--key-file` et `--client-cert-auth`
 - Ou liez les métriques à une interface privée en utilisant `--listen-metrics-urls`
-- Ou utilisez des règles de réseau policies/firewall pour restreindre l'accès
+- Ou utilisez des politiques réseau ou des règles de pare-feu pour restreindre l'accès
 
 ## Utilisation de `etcdctl` pour l'authentification {#using-etcdctl-to-authenticate}
 
@@ -200,4 +200,4 @@ Sinon, toutes les commandes `etcdctl` restent identiques. Les utilisateurs et r�
 À compter de la version v3.2, si un serveur etcd est lancé avec l'option `--client-cert-auth=true`, le champ Common Name (CN) du certificat TLS du client sera utilisé comme utilisateur etcd. Dans ce cas, le nom commun sert à authentifier l'utilisateur, et le client n'a pas besoin de mot de passe. Notez que si les deux conditions suivantes sont remplies : 1. `--client-cert-auth=true` est fourni et le CN est fourni par le client, et 2. le nom d'utilisateur et le mot de passe sont fournis par le client, l'authentification basée sur le nom d'utilisateur et le mot de passe est prioritaire. Notez que cette fonctionnalité ne peut pas être utilisée avec gRPC-proxy ni avec gRPC-gateway. Cela est dû au fait que gRPC-proxy termine la connexion TLS provenant de son client, si bien que tous les clients partagent un certificat du proxy. gRPC-gateway utilise une connexion TLS interne pour transformer une requête HTTP en requête gRPC, ce qui entraîne la même limitation. Par conséquent, les clients ne peuvent pas transmettre correctement leur CN au serveur. gRPC-proxy provoquera une erreur et s'arrêtera si le certificat fourni a un CN non vide. gRPC-proxy renvoie une erreur indiquant que le client possède un CN non vide dans son certificat.
 
 ## Remarques sur la force du mot de passe {#notes-on-password-strength}
-Les API `etcdctl` et etcd n'imposent aucune longueur de mot de passe particulière lors de la création d'un utilisateur ou de la mise à jour de son mot de passe. Il incombe à l'administrateur d'appliquer ces exigences. Pour réduire les risques liés aux mots de passe faibles, utilisez [l'authentification fondée sur le nom commun TLS](#using-tls-common-name) ainsi que des utilisateurs créés avec l'option `--no-password`.
+Les API `etcdctl` et etcd n'imposent aucune longueur de mot de passe particulière lors de la création d'un utilisateur ou de la mise à jour de son mot de passe. Il incombe à l'administrateur d'appliquer ces exigences. Pour éviter les risques de sécurité liés à la force des mots de passe, il est possible d'utiliser [l'authentification fondée sur le nom commun TLS](#using-tls-common-name) ainsi que des utilisateurs créés avec l'option `--no-password`.

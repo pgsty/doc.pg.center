@@ -1,9 +1,9 @@
 ---
 title: Options de configuration
 weight: 4050
-description: "etcd fichiers de configuration, indicateurs et variables d'environnement"
+description: "Fichiers de configuration, options de ligne de commande et variables d’environnement d’etcd"
 categories: [Référence]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/configuration.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/configuration.md"
 aliases: [/etcd/op-guide/configuration/]
 ---
 
@@ -12,7 +12,7 @@ Vous pouvez configurer etcd à l'aide des éléments suivants :
 - **[Options en ligne de commande](#command-line-flags)**
 - **Variables d'environnement** : chaque option a une variable d'environnement correspondante
   dont le nom est identique, mais préfixé par `ETCD_` et écrit en majuscules et
-  [en notation snake case][]. Par exemple, `--some-flag` sera `ETCD_SOME_FLAG`.
+  [en notation snake case][snake case]. Par exemple, `--some-flag` sera `ETCD_SOME_FLAG`.
 - **[Fichier de configuration](#configuration-file)**
 
 > [!WARNING]
@@ -26,15 +26,18 @@ Vous pouvez configurer etcd à l'aide des éléments suivants :
 
 Les indicateurs sont présentés ci-dessous selon le format `--flag-name DEFAULT_VALUE`.
 
-La liste des indicateurs fournie ci-dessous peut ne pas être à jour en raison des modifications en cours de développement. Pour obtenir la liste des indicateurs disponibles, exécutez `etcd --help` ou consultez l’aide de [etcd][].
+> [!NOTE]
+> Cette référence importée conserve certaines anciennes options v2 pour le contexte de migration. Dans etcd 3.7, `--enable-v2` et le mode proxy v2 sont indisponibles. L’option obsolète `--v2-deprecation` ignore les valeurs fournies par l’utilisateur et impose sa valeur par défaut. Consultez la sortie `etcd --help` de la version installée avant d’utiliser des options héritées.
+
+La liste des indicateurs fournie ci-dessous peut ne pas être à jour en raison des modifications en cours de développement. Pour obtenir la liste des indicateurs disponibles, exécutez `etcd --help` ou consultez l'[aide etcd][etcd help].
 
 > [!NOTE]
 >   **Remarque** : Pour plus de détails concernant les indicateurs nouveaux, mis à jour ou obsolètes de la version 3.7,
 >   consultez [CHANGELOG-3.7.md][changelog].
 >   <!-- markdownlint-disable-next-line MD034 -->
->  [journal des modifications] : https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.7.md
+>   [changelog]:  https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.7.md
 
-### membre {#member}
+### Membre {#member}
 
 ```text
 --name 'default'
@@ -183,7 +186,7 @@ La liste des indicateurs fournie ci-dessous peut ne pas être à jour en raison 
   Maximum TLS version supported by etcd (empty will be auto-populated by Go).
 ```
 
-### Auth {#auth}
+### Authentification {#auth}
 
 ```text
 --auth-token 'simple'
@@ -243,10 +246,10 @@ La liste des indicateurs fournie ci-dessous peut ne pas être à jour en raison 
   Number of samples to collect per million spans for distributed tracing.
 ```
 
-### v2 Proxy {#v2-proxy}
+### Proxy v2 {#v2-proxy}
 
 > [!WARNING]
-> **Remarque** : les indicateurs seront obsolètes à partir de la version v3.6.
+> Le proxy v2 a été supprimé avant la version v3.7. Les options suivantes sont conservées uniquement comme référence de migration historique et ne doivent pas être transmises à un serveur etcd v3.7.
 
 ```text
 --proxy 'off'
@@ -333,10 +336,10 @@ La liste des indicateurs fournie ci-dessous peut ne pas être à jour en raison 
 
 ## Fichier de configuration {#configuration-file}
 
-Un fichier de configuration etcd est constitué d'une carte YAML dont les clés sont les noms de drapeaux en ligne de commande et les valeurs sont les valeurs des drapeaux.
+Un fichier de configuration etcd est constitué d’une table de correspondance YAML dont les clés sont les noms de drapeaux en ligne de commande et les valeurs sont les valeurs des drapeaux.
 Pour utiliser ce fichier, indiquez le chemin du fichier comme valeur du drapeau `--config-file` ou de la variable d'environnement `ETCD_CONFIG_FILE`.
 
-Pour un exemple, voir l'exemple [etcd.conf.yml ][].
+Pour un exemple, voir l'exemple [etcd.conf.yml][etcd.conf.yml sample].
 
 > [!NOTE]
 > Les champs de durée tels que `--grpc-keepalive-min-time`, `--grpc-keepalive-interval`,
@@ -349,7 +352,7 @@ Pour un exemple, voir l'exemple [etcd.conf.yml ][].
 > des nanosecondes**. Il s'agit d'une [limitation connue de la bibliothèque standard Go](https://github.com/golang/go/issues/10275),
 > où `time.Duration` est désérialisé comme un entier simple.
 >
-> Par exemple, pour définir un intervalle de notification de progression de 10 minutes dans un fichier de configuration :
+> Par exemple, pour définir un intervalle de notification de progression de surveillance de 10 minutes dans un fichier de configuration :
 >
 > ```yaml
 > # Correct : 10 minutes en nanosecondes

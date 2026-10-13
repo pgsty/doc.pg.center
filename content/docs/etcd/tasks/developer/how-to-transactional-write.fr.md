@@ -3,7 +3,7 @@ title: Comment effectuer plusieurs écritures dans une transaction
 description: Guide des écritures transactionnelles
 weight: 500
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/developer/how-to-transactional-write.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/developer/how-to-transactional-write.md"
 aliases: [/etcd/tasks/developer/how-to-transactional-write/]
 ---
 
@@ -14,12 +14,12 @@ aliases: [/etcd/tasks/developer/how-to-transactional-write/]
 
 ## Terminologie {#terminology}
 
-Voici les définitions de quelques termes clés utilisés dans l’exemple [Example](#example) ci-dessous.
+Voici les définitions de quelques termes clés utilisés dans l’[exemple](#example) ci-dessous.
 
 | Termes | Définition |
 | --- | --- |
 | [etcdctl](https://github.com/etcd-io/etcd/blob/main/etcdctl/README.md#etcdctl) | Outil en ligne de commande pour interagir avec le serveur etcd. |
-| [`txn`](https://github.com/etcd-io/etcd/blob/main/etcdctl/README.md#txn-options) command | `txn` command est une abréviation de « transaction ». Il lit plusieurs requêtes etcd depuis l'entrée standard et les applique comme une transaction atomique unique. Une transaction se compose d'une liste de conditions, d'une liste de requêtes à appliquer si toutes les conditions sont vraies, et d'une liste de requêtes à appliquer si au moins une condition est fausse. Consultez [etcdctl key-value commands](https://github.com/etcd-io/etcd/blob/main/etcdctl/README.md#key-value-commands) pour plus d'informations. |
+| commande [`txn`](https://github.com/etcd-io/etcd/blob/main/etcdctl/README.md#txn-options) | La commande `txn` est une abréviation de « transaction ». Elle lit plusieurs requêtes etcd depuis l'entrée standard et les applique comme une transaction atomique unique. Une transaction se compose d'une liste de conditions, d'une liste de requêtes à appliquer si toutes les conditions sont vraies, et d'une liste de requêtes à appliquer si au moins une condition est fausse. Consultez [commandes clé-valeur d’etcdctl](https://github.com/etcd-io/etcd/blob/main/etcdctl/README.md#key-value-commands) pour plus d'informations. |
 | `compare` | La clause `compare` au sein d'une transaction (`txn`) sert de vérification conditionnelle déterminant si les opérations de la transaction doivent s'exécuter. Elle garantit que les modifications ne sont appliquées que si l'état actuel du magasin clé-valeur correspond aux conditions attendues, assurant ainsi la cohérence des données et évitant les conflits dans les environnements concurrents. Pour voir la structure de la commande, consultez la section [Effectuer une transaction](#2-perform-a-transaction) ci-dessous. |
 
 ## Transactions {#transactions}
@@ -30,7 +30,7 @@ Voici les définitions de quelques termes clés utilisés dans l’exemple [Exam
 etcdctl txn --help
 ```
 
-Les transactions dans etcd permettent d'exécuter plusieurs opérations de manière atomique, garantissant que toutes les opérations sont appliquées ou que aucune ne l'est. Cela est essentiel pour maintenir la cohérence des données lors de mises à jour liées. En savoir plus sur les transactions dans [la documentation de l'API](/fr/docs/etcd/learning/api/#transaction).
+Les transactions dans etcd permettent d'exécuter plusieurs opérations de manière atomique, garantissant que toutes les opérations sont appliquées ou qu’aucune ne l’est. Cela est essentiel pour maintenir la cohérence des données lors de mises à jour liées. En savoir plus sur les transactions dans [la documentation de l'API](/fr/docs/etcd/learning/api/#transaction).
 
 ### Exemple {#example}
 
@@ -38,7 +38,7 @@ Considérons un scénario dans lequel vous souhaitez mettre à jour l’e-mail e
 
 ![05_etcdctl_transaction_2024101213](/docs/etcd/tasks/img/transactional-write.gif)
 
-#### 0. Variables et indicateurs utilisés {#0-variables-and-flags-used}
+#### 0. Variables et drapeaux utilisés {#0-variables-and-flags-used}
 
 | Variables |
 | :--- |
@@ -81,5 +81,5 @@ Mettez à jour l’e-mail et le numéro de téléphone de l’utilisateur dans u
 ### Considérations importantes {#important-considerations}
 
 * **Atomicité** : La transaction garantit que la mise à jour de l’e-mail et du numéro de téléphone s’effectue ensemble. Si la condition initiale (comparaison) n’est pas remplie, aucune mise à jour n’est appliquée.
-* **Consistance** : L’utilisation des transactions assure la cohérence des données, notamment lors de mises à jour multiples liées.
-* **Éviter plusieurs opérations put sur la même clé** : Ne pas effectuer plusieurs mises à jour pour la même clé au sein d’une même transaction, car cela peut entraîner des résultats imprévus. Chaque clé ne doit être mise à jour qu’une seule fois par transaction.
+* **Cohérence** : L’utilisation des transactions assure la cohérence des données, notamment lors de mises à jour multiples liées.
+* **Éviter plusieurs opérations put sur la même clé** : Ne pas effectuer plusieurs mises à jour pour la même clé au sein d’une même transaction, car cela peut entraîner des résultats imprévus. Chaque clé ne devrait être mise à jour qu’une seule fois par transaction.

@@ -3,11 +3,11 @@ title: Mettre à jour etcd de 3.3 à 3.4
 weight: 6700
 description: "Processus, listes de vérification et notes sur la mise à niveau d'etcd de la version 3.3 à la 3.4"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_4.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_4.md"
 aliases: [/etcd/upgrades/upgrade_3_4/]
 ---
 
-Dans le cas général, la mise à niveau de etcd 3.3 vers 3.4 peut s'effectuer sans interruption de service, par mise à niveau progressive :
+Dans le cas général, la mise à niveau d’etcd 3.3 vers 3.4 peut s'effectuer sans interruption de service, par mise à niveau progressive :
  - un par un, arrêtez les processus etcd v3.3 et remplacez-les par des processus etcd v3.4
  - après avoir lancé tous les processus v3.4, les nouvelles fonctionnalités de la version v3.4 sont disponibles pour le cluster
 
@@ -18,9 +18,9 @@ Avant de [lancer la mise à jour](#upgrade-procedure), lisez le reste du présen
 ### Listes de vérification pour la mise à jour {#upgrade-checklists}
 
 > [!WARNING]
-> Lorsque [on migre depuis la version v2 sans données v3](https://github.com/etcd-io/etcd/issues/9480), le serveur etcd v3.2+ provoque une panne lorsqu'il restaure à partir d'un instantané existant mais qu'aucun fichier v3 `ETCD_DATA_DIR/member/snap/db` n'est présent. Cela se produit lorsque le serveur a été migré depuis la version v2 sans données v3 précédentes. Cela empêche également la perte accidentelle de données v3 (par exemple, le fichier `db` pourrait avoir été déplacé). etcd exige que la migration post-v3 ne puisse avoir lieu qu'avec des données v3 présentes. N'effectuez pas la mise à jour vers des versions v3 plus récentes tant que le serveur v3.0 ne contient pas de données v3.
+> Lorsque [on migre depuis la version v2 sans données v3](https://github.com/etcd-io/etcd/issues/9480), le serveur etcd v3.2+ provoque une panne lorsqu'il restaure à partir d'un instantané existant mais qu'aucun fichier v3 `ETCD_DATA_DIR/member/snap/db` n'est présent. Cela se produit lorsque le serveur a été migré depuis la version v2 sans données v3 précédentes. Cela empêche également la perte accidentelle de données v3 (par exemple, le fichier `db` pourrait avoir été déplacé). etcd exige que les opérations après migration vers v3 ne soient effectuées que si des données v3 sont présentes. N'effectuez pas la mise à jour vers des versions v3 plus récentes tant que le serveur v3.0 ne contient pas de données v3.
 
-Changements importants dans la version 3.4.
+Changements de rupture mis en évidence dans la version 3.4.
 
 #### Rendre `ETCDCTL_API=3 etcdctl` par défaut {#make-etcdctl_api3-etcdctl-default}
 
@@ -56,11 +56,11 @@ Si l'API v2 était utilisée, assurez-vous d'activer l'API v2 dans la version 3.
 
 D'autres API HTTP fonctionneront toujours (par exemple `[CLIENT-URL]/metrics`, `[CLIENT-URL]/health`, passerelle gRPC v3).
 
-#### Déprécié les indicateurs `etcd --ca-file` et `etcd --peer-ca-file` {#deprecated-etcd---ca-file-and-etcd---peer-ca-file-flags}
+#### Dépréciation des drapeaux `etcd --ca-file` et `etcd --peer-ca-file` {#deprecated-etcd---ca-file-and-etcd---peer-ca-file-flags}
 
-Les indicateurs `--ca-file` et `--peer-ca-file` sont obsolètes ; ils ont été dépréciés depuis la version v2.1.
+Les drapeaux `--ca-file` et `--peer-ca-file` sont obsolètes ; ils ont été dépréciés depuis la version v2.1.
 
-Note : la configuration de ce paramètre active automatiquement l'authentification par certificat client, quel que soit la valeur définie pour `--client-cert-auth`.
+Note : la configuration de ce paramètre active automatiquement l'authentification par certificat client, quelle que soit la valeur définie pour `--client-cert-auth`.
 
 ```diff
 -etcd --ca-file ca-client.crt
@@ -97,7 +97,7 @@ _, err := kvc.Get(ctx, "a")
 
 #### Exiger `grpc.WithBlock` pour la connexion client {#require-grpcwithblock-for-client-dial}
 
-[Le nouveau chargeur de client](/fr/docs/etcd/learning/design-client/) utilise un résolveur asynchrone pour transmettre les points de terminaison à la fonction gRPC dial. En conséquence, le client v3.4 exige l'option `grpc.WithBlock` pour attendre que la connexion sous-jacente soit active.
+[Le nouveau répartiteur de charge client](/fr/docs/etcd/learning/design-client/) utilise un résolveur asynchrone pour transmettre les points de terminaison à la fonction gRPC dial. En conséquence, le client v3.4 exige l'option `grpc.WithBlock` pour attendre que la connexion sous-jacente soit active.
 
 ```diff
 import (
@@ -198,9 +198,9 @@ Renommez [`etcd --log-output` en `--log-outputs`](https://github.com/etcd-io/etc
 
 v3.4 ajoute la prise en charge de `etcd --logger=zap --log-outputs=stderr` pour la journalisation structurée et plusieurs sorties de journal. La motivation principale est de favoriser la surveillance automatisée d'etcd, plutôt que d'analyser les journaux serveur après une panne. Les développements futurs viseront à réduire au minimum la quantité de logs générés par etcd, et à faciliter sa surveillance grâce aux métriques et aux alertes. **`etcd --logger=capnslog` sera déprécié à partir de v3.5**.
 
-#### Changé le type de champ `log-outputs` dans `etcd --config-file` en `[]string` {#changed-log-outputs-field-type-in-etcd---config-file-to-string}
+#### Changer le type de champ `log-outputs` dans `etcd --config-file` en `[]string` {#changed-log-outputs-field-type-in-etcd---config-file-to-string}
 
-À présent que `log-outputs` (ancien nom de champ `log-output`) accepte plusieurs écritures, le champ du fichier YAML de configuration etcd `log-outputs` doit être modifié en type `[]string` comme indiqué ci-dessous :
+À présent que `log-outputs` (ancien nom de champ `log-output`) accepte plusieurs sorties de journalisation, le champ du fichier YAML de configuration etcd `log-outputs` doit être modifié en type `[]string` comme indiqué ci-dessous :
 
 ```diff
  # Specify 'stdout' or 'stderr' to skip journald logging even when running under systemd.
@@ -208,9 +208,9 @@ v3.4 ajoute la prise en charge de `etcd --logger=zap --log-outputs=stderr` pour 
 +log-outputs: [default]
 ```
 
-#### Renommé `embed.Config.LogOutput` en `embed.Config.LogOutputs` {#renamed-embedconfiglogoutput-to-embedconfiglogoutputs}
+#### Renommer `embed.Config.LogOutput` en `embed.Config.LogOutputs` {#renamed-embedconfiglogoutput-to-embedconfiglogoutputs}
 
-Renommé [**`embed.Config.LogOutput`** en **`embed.Config.LogOutputs`**](https://github.com/etcd-io/etcd/pull/9624) afin de prendre en charge plusieurs sorties de journalisation. Et modifié le type de [`embed.Config.LogOutput` de `string` en `[]string`](https://github.com/etcd-io/etcd/pull/9579) afin de prendre en charge plusieurs sorties de journalisation.
+[**`embed.Config.LogOutput`** a été renommé en **`embed.Config.LogOutputs`**](https://github.com/etcd-io/etcd/pull/9624) afin de prendre en charge plusieurs sorties de journalisation. Le type de [`embed.Config.LogOutput` est également passé de `string` à `[]string`](https://github.com/etcd-io/etcd/pull/9579) afin de prendre en charge plusieurs sorties de journalisation.
 
 ```diff
 import "github.com/coreos/etcd/embed"
@@ -220,9 +220,9 @@ cfg := &embed.Config{Debug: false}
 +cfg.LogOutputs = []string{"stderr"}
 ```
 
-#### v3.5 déconseille `capnslog` {#v35-deprecates-capnslog}
+#### v3.5 déprécie `capnslog` {#v35-deprecates-capnslog}
 
-**v3.5 déprécalera le drapeau `etcd --log-package-levels` pour `capnslog` ; `etcd --logger=zap --log-outputs=stderr` sera la valeur par défaut. **v3.5 déprécalera l'endpoint `[CLIENT-URL]/config/local/log`.**
+**v3.5 dépréciera le drapeau `etcd --log-package-levels` pour `capnslog`** ; `etcd --logger=zap --log-outputs=stderr` sera la valeur par défaut. **v3.5 dépréciera l'endpoint `[CLIENT-URL]/config/local/log`.**
 
 ```diff
 -etcd
@@ -231,7 +231,7 @@ cfg := &embed.Config{Debug: false}
 
 #### Dépréciation du drapeau `etcd --debug` (maintenant `--log-level=debug`) {#deprecating-etcd---debug-flag-now---log-leveldebug}
 
-La version 3.4 déconseille l'utilisation du drapeau [`etcd --debug`](https://github.com/etcd-io/etcd/pull/10947). À la place, utilisez le drapeau `etcd --log-level=debug`.
+La version 3.4 déprécie l'utilisation du drapeau [`etcd --debug`](https://github.com/etcd-io/etcd/pull/10947). À la place, utilisez le drapeau `etcd --log-level=debug`.
 
 ```diff
 -etcd --debug
@@ -257,7 +257,7 @@ if err != nil {
 }
 ```
 
-#### Modifié `embed.Config.SnapCount` en `embed.Config.SnapshotCount` {#changed-embedconfigsnapcount-to-embedconfigsnapshotcount}
+#### Modifier `embed.Config.SnapCount` en `embed.Config.SnapshotCount` {#changed-embedconfigsnapcount-to-embedconfigsnapshotcount}
 
 Pour rester cohérent avec le nom du drapeau `etcd --snapshot-count`, le champ `embed.Config.SnapCount` a été renommé en `embed.Config.SnapshotCount` :
 
@@ -269,7 +269,7 @@ cfg := embed.NewConfig()
 +cfg.SnapshotCount = 100000
 ```
 
-#### Modifié `etcdserver.ServerConfig.SnapCount` en `etcdserver.ServerConfig.SnapshotCount` {#changed-etcdserverserverconfigsnapcount-to-etcdserverserverconfigsnapshotcount}
+#### Modifier `etcdserver.ServerConfig.SnapCount` en `etcdserver.ServerConfig.SnapshotCount` {#changed-etcdserverserverconfigsnapcount-to-etcdserverserverconfigsnapshotcount}
 
 Pour rester cohérent avec le nom du drapeau `etcd --snapshot-count`, le champ `etcdserver.ServerConfig.SnapCount` a été renommé en `etcdserver.ServerConfig.SnapshotCount` :
 
@@ -283,7 +283,7 @@ srvcfg := etcdserver.ServerConfig{
 
 #### Signature de fonction modifiée dans le package `wal` {#changed-function-signature-in-package-wal}
 
-Modifié les signatures de fonction `wal` pour prendre en charge le journalisateur structuré.
+Les signatures de fonction de `wal` ont été modifiées pour prendre en charge le journalisateur structuré.
 
 ```diff
 import "github.com/coreos/etcd/wal"
@@ -304,9 +304,9 @@ import "github.com/coreos/etcd/wal"
 +wal.Create(lg, dirpath, metadata)
 ```
 
-#### Modifié le type `IntervalTree` dans le package `pkg/adt` {#changed-intervaltree-type-in-package-pkgadt}
+#### Modifier le type `IntervalTree` dans le package `pkg/adt` {#changed-intervaltree-type-in-package-pkgadt}
 
-`pkg/adt.IntervalTree` est désormais défini comme un `interface`.
+`pkg/adt.IntervalTree` est désormais défini comme une `interface`.
 
 ```diff
 import (
@@ -320,7 +320,7 @@ func main() {
 +    ivt := adt.NewIntervalTree()
 ```
 
-#### Obsolète `embed.Config.SetupLogging` {#deprecated-embedconfigsetuplogging}
+#### Dépréciation de `embed.Config.SetupLogging` {#deprecated-embedconfigsetuplogging}
 
 `embed.Config.SetupLogging` a été supprimé afin d'éviter une configuration incorrecte de la journalisation, et est désormais configuré automatiquement.
 
@@ -331,7 +331,7 @@ cfg := &embed.Config{Debug: false}
 -cfg.SetupLogging()
 ```
 
-#### Modifié les points d'entrée HTTP de la passerelle gRPC (remplacé `/v3beta` par `/v3`) {#changed-grpc-gateway-http-endpoints-replaced-v3beta-with-v3}
+#### Modifier les points d'entrée HTTP de la passerelle gRPC (remplacé `/v3beta` par `/v3`) {#changed-grpc-gateway-http-endpoints-replaced-v3beta-with-v3}
 
 Avant
 
@@ -379,25 +379,25 @@ En outre, pour garantir une mise à niveau progressive sans incident, le cluster
 
 Avant de mettre à jour etcd, testez toujours les services dépendants d’etcd dans un environnement de préproduction avant de déployer la mise à jour dans l’environnement de production.
 
-Avant de commencer, [téléchargez la sauvegarde d'instantané](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup). Si une erreur survient lors de la mise à jour, il sera possible d'utiliser cette sauvegarde pour [rétrograder](#downgrade) vers la version existante de etcd. Veuillez noter que la `snapshot` commande ne sauvegarde que les données v3. Pour les données v2, consultez [sauvegarde du magasin de données v2](https://etcd.io/docs/v2.3/admin_guide/#backing-up-the-datastore).
+Avant de commencer, [téléchargez la sauvegarde d'instantané](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup). Si une erreur survient lors de la mise à jour, il sera possible d'utiliser cette sauvegarde pour [rétrograder](#downgrade) vers la version existante d’etcd. Veuillez noter que la commande `snapshot` ne sauvegarde que les données v3. Pour les données v2, consultez [sauvegarde du magasin de données v2](https://etcd.io/docs/v2.3/admin_guide/#backing-up-the-datastore).
 
 #### Versions mixtes {#mixed-versions}
 
-Lors d'une mise à jour, un cluster etcd prend en charge des versions mixtes de membres et fonctionne selon le protocole de la version commune la plus basse. Le cluster n'est considéré comme mis à jour qu'une fois que tous ses membres ont été mis à jour vers la version 3.4. Internement, les membres etcd négocient entre eux afin de déterminer la version globale du cluster, qui contrôle la version signalée et les fonctionnalités prises en charge.
+Lors d'une mise à jour, un cluster etcd prend en charge des versions mixtes de membres et fonctionne selon le protocole de la version commune la plus basse. Le cluster n'est considéré comme mis à jour qu'une fois que tous ses membres ont été mis à jour vers la version 3.4. En interne, les membres etcd négocient entre eux afin de déterminer la version globale du cluster, qui contrôle la version signalée et les fonctionnalités prises en charge.
 
 #### Limitations {#limitations}
 
 Note : Si le cluster ne contient que des données v3 et aucune donnée v2, il n'est pas soumis à cette limitation.
 
-Si le cluster sert un jeu de données v2 dont la taille dépasse 50 Mo, chaque membre nouvellement mis à jour peut prendre jusqu’à deux minutes pour rattraper le cluster existant. Vérifiez la taille d’un instantané récent afin d’estimer la taille totale des données. Autrement dit, il est préférable d’attendre deux minutes entre chaque mise à jour de membre.
+Si le cluster sert un jeu de données v2 dont la taille dépasse 50 Mo, chaque membre nouvellement mis à jour peut prendre jusqu’à deux minutes pour rattraper le cluster existant. Vérifiez la taille d’un instantané récent afin d’estimer la taille totale des données. Autrement dit, le plus sûr est d’attendre deux minutes entre chaque mise à jour de membre.
 
 Pour une taille totale de données bien plus importante, de 100 Mo ou plus, ce processus unique peut prendre encore plus de temps. Les administrateurs de clusters etcd très volumineux de cette ampleur peuvent librement contacter l'équipe [etcd][etcd-contact] avant la mise à jour, et nous serons heureux de leur fournir des conseils sur la procédure.
 
 #### Rétrogradation {#downgrade}
 
-Si tous les membres ont été mis à jour vers la version v3.4, le cluster sera mis à jour vers la version v3.4, et un retour en arrière depuis cet état finalisé est **impossible**. Toutefois, si un seul membre reste en version v3.3, le cluster et ses opérations restent "v3.3", et il est possible, depuis cet état de cluster mixte, de revenir à l'utilisation d'une binaire etcd v3.3 sur tous les membres.
+Si tous les membres ont été mis à jour vers la version v3.4, le cluster sera mis à jour vers la version v3.4, et un retour en arrière depuis cet état finalisé est **impossible**. Toutefois, si un seul membre reste en version v3.3, le cluster et ses opérations restent "v3.3", et il est possible, depuis cet état de cluster mixte, de revenir à l'utilisation d’un binaire etcd v3.3 sur tous les membres.
 
-Veuillez [télécharger la sauvegarde d'instantané](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup) afin de permettre la désinstallation du cluster, même après son mise à jour complète.
+Veuillez [télécharger la sauvegarde d'instantané](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup) afin de permettre la rétrogradation du cluster, même après sa mise à jour complète.
 
 ### Procédure de mise à jour {#upgrade-procedure}
 
@@ -431,11 +431,11 @@ curl http://localhost:32379/version
 COMMENT
 ```
 
-#### Étape 2 : télécharger la sauvegarde instantané depuis le leader {#step-2-download-snapshot-backup-from-leader}
+#### Étape 2 : télécharger la sauvegarde d'instantané depuis le leader {#step-2-download-snapshot-backup-from-leader}
 
 [Téléchargez l'instantané de sauvegarde](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup) afin de disposer d'une voie de retour en cas de problème.
 
-Le leader etcd est garanti pour avoir les données d'application les plus récentes ; récupérez donc l'instantané depuis le leader :
+Le leader etcd possède toujours les données d'application les plus récentes ; récupérez donc l'instantané depuis le leader :
 
 ```bash
 curl -sL http://localhost:2379/metrics | grep etcd_server_is_leader

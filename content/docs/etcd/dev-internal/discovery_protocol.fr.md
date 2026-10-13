@@ -3,25 +3,25 @@ title: Protocole du service de découverte
 weight: 1500
 description: "Découvrir les membres etcd lors de la phase d'amorçage d'un cluster"
 categories: [Référence]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-internal/discovery_protocol.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-internal/discovery_protocol.md"
 aliases: [/etcd/dev-internal/discovery_protocol/]
 ---
 
-Le protocole de service de découverte aide un nouveau membre etcd à découvrir tous les autres membres du cluster pendant la phase d'initialisation, en utilisant un jeton de découverte partagé et une liste d'extrémités.
+Le protocole de service de découverte aide un nouveau membre etcd à découvrir tous les autres membres du cluster pendant la phase d'amorçage, en utilisant un jeton de découverte partagé et une liste de points de terminaison.
 
 Le protocole de service de découverte n’est utilisé que pendant la phase d’amorçage du cluster, et ne peut pas être utilisé pour la reconfiguration en temps réel ou la surveillance du cluster.
 
-Le protocole utilise un nouveau jeton de découverte pour initialiser un _unique_ cluster etcd. Souvenez-vous qu’un jeton de découverte ne peut représenter qu’un seul cluster etcd. Dès que le protocole de découverte associé à ce jeton est lancé, même s’il échoue en cours de route, il ne doit pas être utilisé pour initialiser un autre cluster etcd.
+Le protocole utilise un nouveau jeton de découverte pour amorcer un _unique_ cluster etcd. Souvenez-vous qu’un jeton de découverte ne peut représenter qu’un seul cluster etcd. Dès que le protocole de découverte associé à ce jeton est lancé, même s’il échoue en cours de route, il ne doit pas être utilisé pour amorcer un autre cluster etcd.
 
 Le reste de cet article explique le processus de découverte à l’aide d’exemples correspondant à un cluster de découverte auto-hébergé.
 
 Notez que ce document ne concerne que la découverte v3. Consultez le document précédent pour plus de détails sur la découverte [v2][v2-discovery].
 
-## Flot de protocole {#protocol-workflow}
+## Workflow du protocole {#protocol-workflow}
 
 L'idée du protocole de découverte consiste à utiliser un cluster etcd interne pour coordonner le démarrage d'un nouveau cluster. Tout d'abord, tous les nouveaux membres interagissent avec le service de découverte et contribuent à générer la liste de membres attendue. Ensuite, chaque nouveau membre démarre son serveur en utilisant cette liste, ce qui permet d'obtenir la même fonctionnalité que l'option -initial-cluster.
 
-Dans le flux d'exemple suivant, nous allons lister chaque étape du protocole à l'aide de la commande `etcdctl` afin de faciliter la compréhension, et nous supposons que l'hôte `http://example.com:2379` héberge un cluster etcd pour le service de découverte.
+Dans l'exemple de workflow suivant, nous allons lister chaque étape du protocole à l'aide de la commande `etcdctl` afin de faciliter la compréhension, et nous supposons que l'hôte `http://example.com:2379` héberge un cluster etcd pour le service de découverte.
 
 Par convention, le protocole de découverte etcd utilise le préfixe de clé `/_etcd/registry`.
 
@@ -46,11 +46,11 @@ En général, la taille du cluster est de 3, 5 ou 7. Consultez [taille optimale 
 
 ### Mise en marche des processus etcd {#bringing-up-etcd-processes}
 
-Définissez le jeton de découverte `${UUID}` sur le drapeau `--discovery-token`, et définissez les points d'accès du cluster etcd qui prend en charge le service de découverte sur le drapeau `--discovery-endpoints`. Cela activera la découverte v3 pour amorcer le cluster etcd.
+Définissez le jeton de découverte `${UUID}` sur le drapeau `--discovery-token`, et définissez les points de terminaison du cluster etcd qui prend en charge le service de découverte sur le drapeau `--discovery-endpoints`. Cela activera la découverte v3 pour amorcer le cluster etcd.
 
-Chaque processus etcd suivra les étapes internes suivantes si les indicateurs `--discovery-token` et `--discovery-endpoints` sont fournis.
+Chaque processus etcd suivra les étapes internes suivantes si les drapeaux `--discovery-token` et `--discovery-endpoints` sont fournis.
 
-Si le service de découverte active l'authentification par certificat client, configurez les indicateurs suivants. Leur utilisation suit exactement le même schéma que l'utilisation de `etcdctl` pour communiquer avec un cluster etcd.
+Si le service de découverte active l'authentification par certificat client, configurez les drapeaux suivants. Leur utilisation suit exactement le même schéma que l'utilisation de `etcdctl` pour communiquer avec un cluster etcd.
 ```
 --discovery-insecure-transport
 --discovery-insecure-skip-tls-verify
@@ -59,7 +59,7 @@ Si le service de découverte active l'authentification par certificat client, co
 --discovery-cacert
 ```
 
-Si le service de découverte active l'authentification basée sur les rôles, configurez les indicateurs suivants. Leur utilisation suit exactement le même schéma que l'utilisation de `etcdctl` pour communiquer avec un cluster etcd.
+Si le service de découverte active l'authentification basée sur les rôles, configurez les drapeaux suivants. Leur utilisation suit exactement le même schéma que l'utilisation de `etcdctl` pour communiquer avec un cluster etcd.
 ```
 --discovery-user
 --discovery-password

@@ -1,9 +1,9 @@
 ---
-title: etcd fichiers de stockage persistant
+title: Fichiers de stockage persistant d'etcd
 weight: 2650
 description: Référence du format de stockage persistant et des fichiers
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/persistent-storage-files.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/persistent-storage-files.md"
 aliases: [/etcd/learning/persistent-storage-files/]
 ---
 
@@ -20,7 +20,7 @@ Les articles suivants fournissent des informations de fond utiles pour ce docume
 
 ## Aperçu {#overview}
 
-### Fichiers en attente prolongée {#long-leaving-files}
+### Fichiers de longue durée de vie {#long-leaving-files}
 
 <table>
   <tr>
@@ -30,7 +30,7 @@ Les articles suivants fournissent des informations de fond utiles pour ce docume
 
   <tr>
     <td><pre>./member/snap/db</pre></td>
-    <td><strong>bbolt <a href="https://en.wikipedia.org/wiki/B%2B_tree">b+tree</a></strong> qui stocke toutes les données appliquées, les informations d'autorisation d'appartenance et les métadonnées. Il est au courant de l'index du dernier journal WAL appliqué (<a href="https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/server/etcdserver/cindex/cindex.go#L92">"consistent_index"</a>).
+    <td><strong>bbolt <a href="https://en.wikipedia.org/wiki/B%2B_tree">b+tree</a></strong> qui stocke toutes les données appliquées, les informations d'autorisation d'appartenance et les métadonnées. Il connaît l'index du dernier journal WAL appliqué (<a href="https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/server/etcdserver/cindex/cindex.go#L92">"consistent_index"</a>).
     </td>
   </tr>
 
@@ -46,23 +46,23 @@ Les articles suivants fournissent des informations de fond utiles pour ce docume
           <li>etcd-version</li>
         </ul>
       </p>
-      <p>À compter de etcd v3, le contenu est redondant par rapport au contenu des fichiers /snap/db.</p>
-      <p>Périodiquement (<a href="https://github.com/etcd-io/etcd/blob/a4570a60e771402360755beb7d662bdbca1f87f2/server/etcdserver/server.go#L87">30s</a>), ces fichiers <a href="https://github.com/etcd-io/etcd/blob/aa97484166d2b3fb6afeb4390344e68b02afb566/server/etcdserver/server.go#L597">sont supprimés</a>, et les derniers <code>--max-snapshots=5</code>sont conservés.</p>
+      <p>À compter d'etcd v3, le contenu est redondant par rapport au contenu des fichiers /snap/db.</p>
+      <p>Périodiquement (<a href="https://github.com/etcd-io/etcd/blob/a4570a60e771402360755beb7d662bdbca1f87f2/server/etcdserver/server.go#L87">30s</a>), ces fichiers <a href="https://github.com/etcd-io/etcd/blob/aa97484166d2b3fb6afeb4390344e68b02afb566/server/etcdserver/server.go#L597">sont supprimés</a>, et les derniers <code>--max-snapshots=5</code> sont conservés.</p>
    </td>
   </tr>
 
   <tr>
     <td><pre>/member/snap/000000000007a178.snap.db</pre></td>
     <td>
-      <p>Un instantané <strong>bbolt téléchargé</strong> depuis le leader etcd si la réplica était trop en retard.</p>
+      <p>Un instantané <strong>bbolt complet téléchargé</strong> depuis le leader etcd si la réplique était trop en retard.</p>
       <p>Possède le même type de contenu que le fichier (<code>./member/snap/db</code>)</p>
       <p>
         Le fichier est utilisé dans deux scénarios :
         <ul>
           <li>En réponse à la demande du leader de se rétablir à partir de l'instantané.</li>
-          <li><a href="https://github.com/etcd-io/etcd/blob/a4570a60e771402360755beb7d662bdbca1f87f2/server/etcdserver/server.go#L444">Lors du démarrage du serveur</a>, lorsque le dernier instantané (.snap.db) est trouvé et détecté comme ayant un index plus récent que l'index cohérent dans le fichier actuel <code>snap.db</code>.</li>
+          <li><a href="https://github.com/etcd-io/etcd/blob/a4570a60e771402360755beb7d662bdbca1f87f2/server/etcdserver/server.go#L444">Lors du démarrage du serveur</a>, lorsque le dernier instantané (.snap.db) est trouvé et détecté comme ayant un index plus récent que consistent_index dans le fichier actuel <code>snap.db</code>.</li>
         </ul>
-        Note : Les instantanés périodiques générés sur chaque réplica ne sont émis qu'au format de fichier *.snap (et non *.snap.db). Ainsi, aucune garantie n'est donnée que le dernier instantané (dans le journal WAL) dispose d'un fichier *.snap.db. Toutefois, dans un tel cas, le backend (snap/db) doit être plus récent que l'instantané.
+        Note : Les instantanés périodiques générés sur chaque réplique ne sont émis qu'au format de fichier *.snap (et non *.snap.db). Ainsi, aucune garantie n'est donnée que le dernier instantané (dans le journal WAL) dispose d'un fichier *.snap.db. Toutefois, dans un tel cas, le backend (snap/db) doit être plus récent que l'instantané.
       </p>
       <p>
         Le fichier <a href="https://github.com/etcd-io/etcd/blob/a4570a60e771402360755beb7d662bdbca1f87f2/server/etcdserver/server.go#L1236"> n'est pas supprimé une fois la récupération terminée</a> (le contenu entier est donc copié dans le fichier ./member/snap/db). Périodiquement (<a href="https://github.com/etcd-io/etcd/blob/a4570a60e771402360755beb7d662bdbca1f87f2/server/etcdserver/server.go#L87">30s</a>), les fichiers <a href="https://github.com/etcd-io/etcd/blob/a4570a60e771402360755beb7d662bdbca1f87f2/server/etcdserver/server.go#L774">sont</a> purgés.
@@ -77,7 +77,7 @@ Ici aussi, <code>--max-snapshots=5</code> sont conservés. Comme ces fichiers pe
     </td>
     <td>
       <p><strong>Journaux d'écriture de Raft</strong>, contenant les transactions récentes acceptées par Raft, ainsi que des instantanés périodiques ou des enregistrements CRC.</p>
-      <p> Les fichiers récents <code>--max-wals=5</code> sont conservés. Chaque fichier mesure <code>~64*10^6</code> octets. Le fichier est tronqué lorsqu'il dépasse cette taille fixée, de sorte que les fichiers peuvent légèrement dépasser cette taille (le préallocation <code>0.tmp</code> ne garantit donc pas une protection complète contre le dépassement du disque).</p>
+      <p> Les fichiers récents <code>--max-wals=5</code> sont conservés. Chaque fichier mesure <code>~64*10^6</code> octets. Le fichier est coupé lorsqu'il dépasse cette taille codée en dur, de sorte que les fichiers peuvent légèrement dépasser cette taille (la préallocation <code>0.tmp</code> ne garantit donc pas une protection complète contre le dépassement du disque).</p>
       <p>Si les instantanés sont trop espacés, il peut y avoir plus de <code>--max-wals=5</code>, car les verrous au niveau du système de fichiers protègent les fichiers, empêchant qu'ils ne soient supprimés trop tôt.</p>
     </td>
   </tr>
@@ -85,7 +85,7 @@ Ici aussi, <code>--max-snapshots=5</code> sont conservés. Comme ces fichiers pe
   <tr>
     <td><pre>./member/wal/0.tmp (or .../1.tmp)</pre></td>
     <td>
-      <strong>Espace préalloué</strong> pour le prochain fichier de journalisation d'avance.
+      <strong>Espace préalloué</strong> pour le prochain fichier de journal d'écriture anticipée.
       Utilisé pour éviter que Raft ne reste bloqué en raison d'un manque de capacité des journaux WAL, sans possibilité de déclencher une alarme.
     </td>
   </tr>
@@ -106,15 +106,15 @@ Pendant le traitement interne d’etcd, il est possible de rencontrer plusieurs 
     <td>
       <p>Les fichiers d'instantané sont renommés en « broken » lorsqu'ils ne peuvent pas être <a href="https://github.com/etcd-io/etcd/blob/aa97484166d2b3fb6afeb4390344e68b02afb566/server/etcdserver/api/snap/snapshotter.go#L144">chargés</a>.<p>
       <!-- TODO: etcdserver/api/snap/snapshotter.go:148 -->
-      L'essai de charger le fichier le plus récent a lieu lorsque etcd est <a href="https://github.com/etcd-io/etcd/blob/aa97484166d2b3fb6afeb4390344e68b02afb566/server/etcdserver/server.go#L302">démarré</a>. <p> </p>
+      <p>La tentative de chargement du fichier le plus récent a lieu lorsqu’etcd est <a href="https://github.com/etcd-io/etcd/blob/aa97484166d2b3fb6afeb4390344e68b02afb566/server/etcdserver/server.go#L302">démarré</a>.</p>
       <!-- TODO: etcdserver/server.go:428 -->
-      <p>Ou lors des commandes de sauvegarde/restauration d'etcdctl.</p>
+      <p>Ou lors des commandes de sauvegarde/migration d'etcdctl.</p>
    </td>
   </tr>
   <tr>
     <td><pre>./member/snap/tmp071677638 (random suffix)</pre></td>
     <td>
-      <p><a href="https://github.com/etcd-io/etcd/blob/ae9734ed278b7a1a7dfc82e800471ebbf9fce56f/etcdserver/api/snap/db.go#L39">Fichier temporaire</a> (bbolt) créé sur les réplicas en réponse à la demande de snapshot du leader, afin de répondre à la demande du leader de restaurer le stockage à partir de l'instantané fourni.</p>
+      <p><a href="https://github.com/etcd-io/etcd/blob/ae9734ed278b7a1a7dfc82e800471ebbf9fce56f/etcdserver/api/snap/db.go#L39">Fichier temporaire</a> (bbolt) créé sur les répliques en réponse à la demande msgSnap du leader, afin de répondre à la demande du leader de restaurer le stockage à partir de l'instantané fourni.</p>
       <p>
         Après une récupération réussie (complète) du contenu, le fichier est <a href="https://github.com/etcd-io/etcd/blob/ae9734ed278b7a1a7dfc82e800471ebbf9fce56f/etcdserver/api/snap/db.go#L55">renommé</a> en : <code>/member/snap/[SNAPSHOT-INDEX].snap.db</code>. En cas de mort du serveur ou de son interruption pendant le téléchargement des fichiers, ceux-ci restent sur le disque et ne sont jamais nettoyés automatiquement. Ils peuvent être de taille importante (en gigaoctets).
       </p>
@@ -145,7 +145,7 @@ Le fichier bbolt ne se réduit jamais automatiquement. Seul le processus de déf
 
 ### Organisation logique {#logical-organization}
 
-Le stockage bbolt est divisé en compartiments. Dans chaque compartiment, des clés (paires byte[]->byte[] valeurs) sont stockées dans l'ordre lexicographique. La liste ci-dessous représente les compartiments utilisés par etcd (à partir de la version 3.5) ainsi que les clés en usage.
+Le stockage bbolt est divisé en compartiments. Dans chaque compartiment, des clés (paires byte[]->byte[] valeurs) sont stockées dans l'ordre lexicographique. La liste ci-dessous représente les compartiments utilisés par etcd (dans la version 3.5) ainsi que les clés en usage.
 
 <table>
   <tr>
@@ -155,9 +155,9 @@ Le stockage bbolt est divisé en compartiments. Dans chaque compartiment, des cl
     <th>Description</th>
   </tr>
   <tr>
-    <td>alarme</td>
+    <td>alarm</td>
     <td><code><a href="https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/api/etcdserverpb/rpc.proto#L976">rpcpb.Alarm</a> :
-    {MemberID, Alarme : NONE|NOSPACE|CORRUPT}</code>
+    {MemberID, Alarm: NONE|NOSPACE|CORRUPT}</code>
     </td>
     <td><code>nil</code></td>
     <td>Indique que des problèmes ont été diagnostiqués sur l'un des membres.</td>
@@ -189,10 +189,10 @@ Le stockage bbolt est divisé en compartiments. Dans chaque compartiment, des cl
     <td rowspan="2" >cluster</td>
     <td>"clusterVersion"</td>
     <td><code>"3.5.0"</code> (chaîne)</td>
-    <td><a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/etcdserver/server.go#L2314">mineur</a> version du consensus-agréé de la version de stockage commun.</td>
+    <td><a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/etcdserver/server.go#L2314">version mineure</a>, agréée par consensus, de la version de stockage commune.</td>
   </tr>
   <tr>
-    <td>"désinstaller"</td>
+    <td>"downgrade"</td>
     <td>JSON: <pre>{
   "target-version": "3.4.0"
   "enabled": true/false
@@ -204,25 +204,25 @@ Le stockage bbolt est divisé en compartiments. Dans chaque compartiment, des cl
     </td>
   </tr>
   <tr>
-    <td><strong>clé</strong></td>
+    <td><strong>key</strong></td>
     <td>
-      <p>[révisionId] encodée à l'aide de <a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/mvcc/revision.go#L56">bytesToRev</a>{principal,sous}</p>
-      <p>Les suppressions de paires clé-valeur sont sérialisées avec un « t » à la fin (comme une « sépulture »)</p>
+      <p>[revisionId] encodée à l'aide de <a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/mvcc/revision.go#L56">bytesToRev</a>{main,sub}</p>
+      <p>Les suppressions de paires clé-valeur sont sérialisées avec un « t » à la fin (comme une « pierre tombale »)</p>
     </td>
-    <td><a href="https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/api/mvccpb/kv.proto#L12"><code>mvccpb.KeyValue</code></a> protocole encodé (<code>key, create_rev, mod_rev, version, value, lease id</code>)</td>
+    <td><a href="https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/api/mvccpb/kv.proto#L12"><code>mvccpb.KeyValue</code></a> sérialisé au format Protocol Buffers (<code>key, create_rev, mod_rev, version, value, lease id</code>)</td>
     <td></td>
   </tr>
   <tr>
-    <td>bail</td>
+    <td>lease</td>
     <td></td>
-    <td><a href="https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/server/lease/leasepb/lease.proto#L13"><code>leasepb.Lease</code></a> protocole marshalled (ID, TTL, RemainingTTL)</td>
+    <td><a href="https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/server/lease/leasepb/lease.proto#L13"><code>leasepb.Lease</code></a> sérialisé au format Protocol Buffers (ID, TTL, RemainingTTL)</td>
     <td>
       <p>Remarque : LeaseCheckpoint étend uniquement RemainingTTL. Le TTL provient uniquement de l'origine de Grant.</p>
       <p style="text-decoration:underline;">Note2 : les TTL sont conservés en secondes (à partir de la valeur « now » non définie). Un serveur pris dans une boucle de redémarrage ne libère pas les baux !!!</p>
     </td>
   </tr>
   <tr>
-    <td>membres</td>
+    <td>members</td>
     <td>[memberId] en hexadécimal sous forme de chaîne : <code>"8e9e05c52164694d"</code></td>
     <td>
       <em>Chaîne JSON sérialisée du type <a href="https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/server/etcdserver/api/membership/member.go#L43">membre</a> :</em>
@@ -237,7 +237,7 @@ Le stockage bbolt est divisé en compartiments. Dans chaque compartiment, des cl
     <td>Informations d'appartenance au cluster convenues.</td>
   </tr>
   <tr>
-    <td>membres_supprimés</td>
+    <td>members_removed</td>
     <td>[memberId] en hexadécimal sous forme de chaîne : <code>"8e9e05c52164694d"</code></td>
     <td><code>[]byte("removed")</code></td>
     <td>
@@ -253,13 +253,13 @@ Le stockage bbolt est divisé en compartiments. Dans chaque compartiment, des cl
   </tr>
   <tr>
     <td><a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/mvcc/kvstore.go#L41">"scheduledCompactRev"</a></td>
-    <td><a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/mvcc/revision.go#L56">bytesToRev</a>encodés {main,sub}. (16 octets)</td>
+    <td><a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/mvcc/revision.go#L56">bytesToRev</a>{main,sub} encodé. (16 octets)</td>
     <td>Utilisé pour réinitialiser le compactage si un incident s'est produit après une demande de compactage.</td>
   </tr>
   <tr>
     <td><a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/mvcc/kvstore.go#L42">"finishedCompactRev"</a></td>
-    <td><a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/mvcc/revision.go#L56">bytesToRev</a>encodés {main,sub}. (16 octets)</td>
-    <td>Révision à laquelle le magasin a été récemment compacté (<a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/mvcc/kvstore_compaction.go#L54">https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/mvcc/kvstore_compaction.go#L54</a>)</td>
+    <td><a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/mvcc/revision.go#L56">bytesToRev</a>{main,sub} encodé. (16 octets)</td>
+    <td>Révision à laquelle le magasin a été récemment compacté avec succès (<a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/mvcc/kvstore_compaction.go#L54">https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/mvcc/kvstore_compaction.go#L54</a>)</td>
   </tr>
   <tr>
     <td></td>
@@ -275,7 +275,7 @@ Le stockage bbolt est divisé en compartiments. Dans chaque compartiment, des cl
   </tr>
   <tr>
     <td></td>
-    <td>"version-stockage"</td>
+    <td>"storage-version"</td>
     <td></td>
     <td></td>
   </tr>
@@ -326,7 +326,7 @@ Le journal d’écriture anticipée (Write ahead log) est un stockage persistant
 Le journal WAL utilisé dans etcd diffère du modèle Raft canonique en deux sens :
 
 *  Il persiste non seulement les entrées indexées, mais aussi les instantanés Raft (légers) et l’état dur. Ainsi, l’état Raft complet du membre peut être récupéré à partir du journal WAL seul.
-*  Il est en écriture seule. Les entrées ne sont pas remplacées in situ, mais une entrée ajoutée ultérieurement dans le fichier (avec le même index) remplace la précédente.
+*  Il fonctionne uniquement en ajout. Les entrées ne sont pas remplacées in situ, mais une entrée ajoutée ultérieurement dans le fichier (avec le même index) remplace la précédente.
 
 
 ### Noms de fichiers {#file-names}
@@ -355,15 +355,15 @@ Le fichier de journal WAL contient une séquence de "[Frames](https://github.com
 2. Remplissage : un certain nombre d'octets nuls, de manière à ce que la taille totale du cadre soit alignée (modulo 8)
 3. Données marshallées [walpb.Record](https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/server/wal/walpb/record.proto#L11) :
     1. [type](https://github.com/etcd-io/etcd/blob/aa97484166d2b3fb6afeb4390344e68b02afb566/server/storage/wal/wal.go#L39) - énumération entière codée déterminant l'interprétation du champ de données ci-dessous
-    2. data - selon le type, généralement une donnée protocole marshallée
-    3. crc - somme de contrôle RC-32 de tous les champs « data » combinés (sans type) dans tous les enregistrements du journal sur cette réplica particulière depuis la création du journal WAL. Veuillez noter que la somme de contrôle prend en compte TOUS les enregistrements (même ceux qui n’ont pas été validés par Raft).
+    2. data - selon le type, généralement un message Protocol Buffers sérialisé
+    3. crc - somme de contrôle CRC-32 de tous les champs « data » combinés (sans type) dans tous les enregistrements du journal sur cette réplique particulière depuis la création du journal WAL. Veuillez noter que la somme de contrôle prend en compte TOUS les enregistrements (même ceux qui n’ont pas été validés par Raft).
 
 Les fichiers sont « coupés » (un nouveau fichier est créé) lorsque le fichier actuel dépasse <code>64*10^6</code> octets.
 
 
 ### Contenu logique {#logical-content}
 
-Les fichiers de journalisation anticipée dans la couche logique contiennent :
+Les fichiers de journal d'écriture anticipée dans la couche logique contiennent :
 
 * `Raftpb.Entry: `propositions récentes répliquées par le leader Raft. Certaines de ces propositions sont considérées comme « validées », tandis que d'autres peuvent être logiquement remplacées.
 * `Raftpb.HardState(term,commit,vote): `information périodique (très fréquente) sur l'index d'une entrée de journal qui est « validée » (répliquée sur la majorité des serveurs), garantissant ainsi qu'elle ne sera pas modifiée ou remplacée, et pouvant être appliquée aux backends (v2, v3). Elle contient également un « terme » (indicateur indiquant s'il y a eu des modifications liées à une élection) et un vote — le membre pour lequel la réplique actuelle a voté durant le terme en cours.
@@ -371,18 +371,18 @@ Les fichiers de journalisation anticipée dans la couche logique contiennent :
     * Le contenu du magasin V2 est stocké dans des fichiers *.store séparés.
     * Le contenu du magasin V3 est conservé dans le fichier bbolt, et devient un instantané implicite dès que les entrées y sont appliquées.
 * enregistrement de somme de contrôle crc32 (au début de chaque fichier), utilisé pour reprendre le contrôle CRC pour le reste du fichier.
-* `etcdserverpb.Metadata(node_id, cluster_id)` - identification du cluster et de la réplica représentés par le journal.
+* `etcdserverpb.Metadata(node_id, cluster_id)` - identification du cluster et de la réplique représentés par le journal.
 
 Chaque fichier de journal WAL est construit à partir de (dans l'ordre) :
 
 1. CRC-32 (valeur CRC calculée sur tous les fichiers précédents, 0 pour le premier fichier).
-2. Cadre de métadonnées (identifiants du cluster et de la réplica)
+2. Cadre de métadonnées (identifiants du cluster et de la réplique)
 3. Uniquement pour le premier fichier WAL :
 
     * Trame d'instantané vide (Index : 0, Terme : 0).
         L'objectif de cette trame est de maintenir l'invariant selon lequel toutes les entrées sont « précédées » par un instantané.
 
-Pour le fichier WAL non initial (2e+ fichier) :
+   Pour le fichier WAL non initial (2e+ fichier) :
 
     * Trame HardState.
 
@@ -396,8 +396,8 @@ Les « termes » dans le journal WAL sont censés être monotones.
 
 Les « indexes » dans le journal WAL sont censés :
 
-1. démarre à partir d’un instantané
-2. croît séquentiellement à partir de cet instantané tant qu’il reste dans le même « terme »
+1. démarrer à partir d’un instantané
+2. croître séquentiellement à partir de cet instantané tant qu’il reste dans le même « terme »
 3. si le terme change, l’index peut diminuer, mais uniquement jusqu’à une nouvelle valeur supérieure à celle de HardState.commit
 4. un nouvel instantané peut avoir lieu avec un index quelconque supérieur ou égal à HardState.commit, ce qui ouvre une nouvelle séquence pour les index
 
@@ -420,17 +420,17 @@ Les journaux WAL d'etcd peuvent être lus à l'aide de l'outil [etcd-dump-logs](
 
 Prenez note que :
 
-* Outil qui affiche uniquement les entrées, et non toutes les enregistrements WAL (instantanés, HardStates) présents dans les fichiers de journal WAL.
+* L'outil affiche uniquement les entrées, et non tous les enregistrements WAL (instantanés, HardStates) présents dans les fichiers de journal WAL.
 * L'outil applique automatiquement des « substitutions » aux entrées. Si une entrée est remplacée (par une entrée plus récente au même index), l'outil n'affiche que la valeur finale.
 * L'outil affiche également les entrées non validées (issues de la fin du LOG), sans information sur HardState.commitIndex, de sorte qu'il n'est pas possible de savoir si les entrées sont définitives ou non.
 
 
-## Instantanés de (Store V2) : **membre/snap/{term}-{index}.snap** {#snapshots-of-store-v2-membersnapterm-indexsnap}
+## Instantanés de (Store V2) : **member/snap/{term}-{index}.snap** {#snapshots-of-store-v2-membersnapterm-indexsnap}
 
 
 ### Noms de fichiers : {#file-names-1}
 
-**membre/snap/{term}-{index}.snap**
+**member/snap/{term}-{index}.snap**
 
 Les noms de fichiers sont générés [ici](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/server/etcdserver/api/snap/snapshotter.go#L78) `("%016x-%016x.snap") ` et utilisent deux composants encodés en hexadécimal :
 
@@ -445,18 +445,18 @@ Les fichiers *.snap sont créés par la méthode [Snapshotter.SaveSnap](https://
 Il existe 2 déclencheurs contrôlant la création de ces fichiers :
 
 
-* Un nouveau fichier est créé toutes les --snapshotCount= propositions appliquées environ (100'000 par défaut). Cette valeur est approximative : les propositions peuvent arriver par lots, la création d'un instantané n'est envisagée qu'à la fin du lot et le processus est finalement planifié de manière asynchrone.
-  Le nom de l'option (--snapshotCount) est assez trompeur : elle contrôle la [différence de valeur d'index entre ](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/server/etcdserver/server.go#L1266)le dernier index d'instantané et le dernier index de proposition appliquée.
-* Raft demande au réplica de restaurer à partir de l'instantané. Pendant qu'un réplica reçoit l'instantané via le message msgSnap, il le sauvegarde également (de manière légère) dans le journal WAL. Cela garantit que dans la queue du journal WAL se trouve toujours un instantané valide suivi d'entrées. Cela supprime ainsi tout risque de discontinuité dans les journaux WAL.
+* Un nouveau fichier est créé toutes les --snapshot-count= propositions appliquées environ (10 000 par défaut dans v3.7.0). Cette valeur est approximative : les propositions peuvent arriver par lots, la création d'un instantané n'est envisagée qu'à la fin du lot et le processus est finalement planifié de manière asynchrone.
+  Le nom de l'option (--snapshot-count) est assez trompeur : elle contrôle la [différence de valeur d’index](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/server/etcdserver/server.go#L1266) entre le dernier index d’instantané et le dernier index de proposition appliquée.
+* Raft demande à la réplique de restaurer à partir de l'instantané. Pendant qu'une réplique reçoit l'instantané via le message msgSnap, il le sauvegarde également (de manière légère) dans le journal WAL. Cela garantit que dans la queue du journal WAL se trouve toujours un instantané valide suivi d'entrées. Cela supprime ainsi tout risque de discontinuité dans les journaux WAL.
 
-Actuellement, les fichiers sont approximativement [^3] associés 1 à 1 aux journaux WAL. Avec le décommissionnement du store v2, nous prévoyons que les fichiers ne seront plus écrits du tout (optionnel : 3.5.x, obligatoire : 3.6.x).
+Actuellement, les fichiers sont approximativement [^3] associés 1 à 1 aux entrées Snapshot des journaux WAL. Avec le décommissionnement du store v2, nous prévoyons que les fichiers ne seront plus écrits du tout (optionnel : 3.5.x, obligatoire : 3.6.x).
 
 
 ### Contenu {#content}
 
 Le fichier contient un proto [snapdb.snapshot](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/server/etcdserver/api/snap/snappb/snap.proto#L11) `(uint32 crc, bytes data)` marshallé,
 
-qui se trouve dans le champ 'data' et contient [Raftpb.Snapshot](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/raft/raftpb/raft.proto#L31) :
+dont le champ 'data' contient [Raftpb.Snapshot](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/raft/raftpb/raft.proto#L31) :
 
 (bytes data, SnapshotMetadata{index, term, [conf](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/raft/raftpb/raft.proto#L99)} metadata),
 
@@ -470,7 +470,7 @@ En particulier, il y a :
 * Données d'appartenance :
     *  <code>/0/members/8e9e05c52164694d/attributes -> <strong>{\"name\":\"default\",\"clientURLs\":[\"http://localhost:2379\"]}</strong></code>
     *  <code>/0/members/8e9e05c52164694d/RaftAttributes -> <strong>"{\"peerURLs\":[\"http://localhost:2380\"]}"</strong></code>
-* Version du stockage : /0/version- > 3.5.0
+* Version du stockage : /0/version-> 3.5.0
 
 
 ### Outils {#tools-2}
@@ -491,7 +491,7 @@ cat default.etcd/member/snap/0000000000000002-0000000000049425.snap |
 ```
 
 
-De même, vous pouvez extraire le champ 'data' et le décoder en tant que '[Raftpb.Snapshot](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/raft/raftpb/raft.proto#L31)`'`
+De même, vous pouvez extraire le champ 'data' et le décoder en tant que [Raftpb.Snapshot](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/raft/raftpb/raft.proto#L31).
 
 
 ### Exemple de contenu du magasin sérialisé JSON version 2 dans les fichiers *.snap d'etcd 3.4 : {#exemplar-json-serialized-store-v2-content-in-etcd-34-snap-files}
@@ -611,11 +611,11 @@ De même, vous pouvez extraire le champ 'data' et le décoder en tant que '[Raft
 
 Cette section est réservée à la description des modifications apportées aux formats de fichier introduits entre différentes versions d'etcd.
 
-[^1] :
+[^1]:
      Les pages de métadonnées situées au début du fichier bbolt sont modifiées in situ.
 
-[^2] :
+[^2]:
      Incohérent, car la majorité des uint sont écrits en big endian
 
-[^3] :
+[^3]:
      L'instantané initial (index : 0) au début du journal WAL n'est pas associé à un fichier *.snap. Les anciens fichiers *.snap (ou journaux WAL) peuvent être supprimés.

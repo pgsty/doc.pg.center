@@ -3,7 +3,7 @@ title: "Benchmarking d'etcd v2.2.0"
 weight: 5750
 description: Mesures de performance pour etcd v2.2.0
 categories: [Référence]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/benchmarks/etcd-2-2-0-benchmarks.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/benchmarks/etcd-2-2-0-benchmarks.md"
 aliases: [/etcd/benchmarks/etcd-2-2-0-benchmarks/]
 ---
 
@@ -41,12 +41,12 @@ Les performances sont calculées à partir des résultats de 100 itérations de 
 
 | taille de la clé en octets | nombre de clients | serveur etcd cible | débit moyen de lecture (QPS) | écart-type du débit de lecture (QPS) | latence moyenne au 90e percentile (ms) | écart-type de la latence |
 |-----------------------------|-------------------|--------------------|-------------------------------|------------------------------------|----------------------------------------|--------------------------|
-| 64                          | 1                 | seul leader        | 2303                          | 200                                | 0,49                                   | 0,06                     |
-| 64                          | 64                | seul leader        | 15048                         | 685                                | 7,60                                   | 0,46                     |
-| 64                          | 256               | seul leader        | 14508                         | 434                                | 29,76                                  | 1,05                     |
-| 256                         | 1                 | seul leader        | 2162                          | 214                                | 0,52                                   | 0,06                     |
-| 256                         | 64                | seul leader        | 14789                         | 792                                | 7,69                                   | 0,48                     |
-| 256                         | 256               | seul leader        | 14424                         | 512                                | 29,92                                  | 1,42                     |
+| 64                          | 1                 | leader uniquement        | 2303                          | 200                                | 0,49                                   | 0,06                     |
+| 64                          | 64                | leader uniquement        | 15048                         | 685                                | 7,60                                   | 0,46                     |
+| 64                          | 256               | leader uniquement        | 14508                         | 434                                | 29,76                                  | 1,05                     |
+| 256                         | 1                 | leader uniquement        | 2162                          | 214                                | 0,52                                   | 0,06                     |
+| 256                         | 64                | leader uniquement        | 14789                         | 792                                | 7,69                                   | 0,48                     |
+| 256                         | 256               | leader uniquement        | 14424                         | 512                                | 29,92                                  | 1,42                     |
 | 64                          | 64                | tous les serveurs  | 45752                         | 2048                               | 2,47                                   | 0,14                     |
 | 64                          | 256               | tous les serveurs  | 46592                         | 1273                               | 10,14                                  | 0,59                     |
 | 256                         | 64                | tous les serveurs  | 45332                         | 1847                               | 2,48                                   | 0,12                     |
@@ -67,10 +67,10 @@ Les performances sont calculées à partir des résultats de 100 itérations de 
 | 256 | 64 | tous les serveurs | 1599 | 94 | 60,11 | 6,43 |
 | 256 | 256 | tous les serveurs | 4315 | 193 | 88,98 | 7,01 |
 
-## Améliorations des performances {#performance-changes}
+## Évolutions des performances {#performance-changes}
 
 - Comme etcd enregistre désormais des métriques pour chaque appel d'API, la performance en QPS de lecture semble légèrement diminuer dans la plupart des scénarios. Ce léger impact sur les performances a été jugé acceptable en échange de la richesse des informations de surveillance et de débogage fournies.
 
-- Le taux de requêtes d'écriture QPS vers les leaders du cluster semble avoir légèrement augmenté. Cela est dû au fait que la boucle principale et les boucles d'entrée ont été déconnectées dans la logique Raft d'etcd, éliminant plusieurs blocages entre elles.
+- Le taux de requêtes d'écriture QPS vers les leaders du cluster semble avoir légèrement augmenté. Cela est dû au fait que la boucle principale et les boucles d'application des entrées ont été découplées dans la logique Raft d'etcd, éliminant plusieurs blocages entre elles.
 
 - Le QPS d'écriture vers tous les membres semble avoir augmenté de manière significative, car les suiveurs reçoivent désormais l'index de validation le plus récent plus rapidement, et traitent les propositions de validation plus rapidement.

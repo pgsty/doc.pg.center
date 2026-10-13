@@ -1,5 +1,5 @@
 ---
-title: "etcd 3.7 Documentation"
+title: "Documentation etcd 3.7"
 linkTitle: "etcd 3.7"
 description: "Guides officiels etcd 3.7 pour développeurs, opérateurs, mises à jour, API et fonctionnement interne."
 type: docs
@@ -12,7 +12,7 @@ section_index: cards
 section_index_columns: 3
 upstream_source: etcd
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/tree/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7"
+upstream_link: "https://github.com/etcd-io/website/tree/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7"
 cascade:
   upstream_source: etcd
   type: docs

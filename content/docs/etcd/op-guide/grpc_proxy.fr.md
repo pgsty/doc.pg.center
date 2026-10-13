@@ -1,17 +1,17 @@
 ---
-title: Proxie gRPC
+title: Proxy gRPC
 weight: 4350
-description: Un proxy inversé etcd sans état fonctionnant au niveau gRPC
+description: Un proxy inverse etcd sans état fonctionnant au niveau gRPC
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/grpc_proxy.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/grpc_proxy.md"
 aliases: [/etcd/op-guide/grpc_proxy/]
 ---
 
-Le proxy gRPC est un proxy inverse etcd sans état fonctionnant au niveau du protocole gRPC (L7). Le proxy est conçu pour réduire la charge de traitement totale imposée au cluster etcd principal. Pour assurer une évolutivité horizontale, il regroupe les requêtes d'API de surveillance et de bail. Pour protéger le cluster contre les clients abusifs, il met en mémoire tampon les requêtes portant sur des plages de clés.
+Le proxy gRPC est un proxy inverse etcd sans état fonctionnant au niveau du protocole gRPC (L7). Le proxy est conçu pour réduire la charge de traitement totale imposée au cluster etcd principal. Pour assurer une évolutivité horizontale, il regroupe les requêtes d'API de surveillance et de bail. Pour protéger le cluster contre les clients abusifs, il met en cache les requêtes portant sur des plages de clés.
 
 Le proxy gRPC prend en charge plusieurs points d'entrée de serveur etcd. Au démarrage du proxy, il choisit aléatoirement un point d'entrée de serveur etcd à utiliser. Ce point d'entrée traite toutes les requêtes jusqu'à ce que le proxy détecte une défaillance. Si le proxy gRPC détecte une défaillance d'un point d'entrée, il bascule vers un autre point d'entrée, si disponible, afin de masquer les défaillances à ses clients. D'autres politiques de réessai, telles que le round-robin pondéré, pourraient être prises en charge à l'avenir.
 
-## API de surveillance évolutif {#scalable-watch-api}
+## API de surveillance évolutive {#scalable-watch-api}
 
 Le proxy gRPC regroupe plusieurs observateurs clients (`c-watchers`) sur la même clé ou plage en un seul observateur (`s-watcher`) connecté à un serveur etcd. Le proxy diffuse tous les événements provenant du `s-watcher` à ses `c-watchers`.
 
@@ -45,13 +45,13 @@ Des limitations similaires s'appliquent à l'annulation. Lorsqu'un observateur e
 
 Ces deux limitations ne devraient pas poser de problème pour la plupart des cas d'utilisation. À l'avenir, des options supplémentaires pourraient être disponibles afin de forcer l'observateur à contourner le proxy gRPC pour des réponses de révision plus précises.
 
-## API bail évolutif {#scalable-lease-api}
+## API de bail évolutive {#scalable-lease-api}
 
-Pour maintenir ses bails actifs, un client doit établir au moins une connexion gRPC avec un serveur etcd afin d'envoyer des signaux d'activité périodiques. Si une charge de travail etcd implique une activité de bail importante répartie sur de nombreux clients, ces connexions peuvent entraîner une utilisation excessive du processeur. Pour réduire le nombre total de connexions sur le cluster principal, le proxy prend en charge la fusion des connexions de bail.
+Pour maintenir ses baux actifs, un client doit établir au moins un flux gRPC avec un serveur etcd afin d'envoyer des signaux d'activité périodiques. Si une charge de travail etcd implique une activité de bail importante répartie sur de nombreux clients, ces flux peuvent entraîner une utilisation excessive du processeur. Pour réduire le nombre total de flux sur le cluster principal, le proxy prend en charge la fusion des flux de bail.
 
-En supposant que N clients mettent à jour des bails, un unique proxy gRPC réduit la charge des flux sur le serveur etcd de N à 1. Les déploiements peuvent inclure des proxies gRPC supplémentaires afin de répartir davantage les flux sur plusieurs proxies.
+En supposant que N clients mettent à jour des baux, un unique proxy gRPC réduit la charge des flux sur le serveur etcd de N à 1. Les déploiements peuvent inclure des proxies gRPC supplémentaires afin de répartir davantage les flux sur plusieurs proxies.
 
-Dans l'exemple suivant, trois clients mettent à jour trois bails indépendants (`L1`, `L2` et `L3`). Le proxy gRPC fusionne les trois flux de bail client (`c-streams`) en un seul flux de renouvellement de bail (`s-stream`) associé à un serveur etcd. Le proxy transfère les battements de cœur de bail côté client provenant des flux c vers le flux s, puis renvoie les réponses aux flux c correspondants.
+Dans l'exemple suivant, trois clients mettent à jour trois baux indépendants (`L1`, `L2` et `L3`). Le proxy gRPC fusionne les trois flux de bail client (`c-streams`) en un seul flux de renouvellement de bail (`s-stream`) associé à un serveur etcd. Le proxy transfère les battements de cœur de bail côté client provenant des flux c vers le flux s, puis renvoie les réponses aux flux c correspondants.
 
 ```
           +-------------+
@@ -74,7 +74,7 @@ heartbeat L1 |      | heartbeat L2  |
 
 ## Protection contre les clients abusifs {#abusive-clients-protection}
 
-Le proxy gRPC met en mémoire tampon les réponses aux requêtes lorsqu'il ne compromet pas les exigences de cohérence. Cela peut protéger le serveur etcd contre les clients abusifs exécutant des boucles serrées.
+Le proxy gRPC met en cache les réponses aux requêtes lorsqu'il ne compromet pas les exigences de cohérence. Cela peut protéger le serveur etcd contre les clients abusifs exécutant des boucles serrées.
 
 ## Démarrer le proxy gRPC etcd {#start-etcd-grpc-proxy}
 
@@ -106,9 +106,9 @@ bar
 
 ## Synchronisation des points de terminaison client et résolution de noms {#client-endpoint-synchronization-and-name-resolution}
 
-Le proxy prend en charge l'enregistrement de ses points d'accès pour la découverte, en écrivant sur un point d'accès défini par l'utilisateur. Cela sert deux objectifs. Premièrement, cela permet aux clients de synchroniser leurs points d'accès avec un ensemble de points d'accès du proxy afin d'assurer une haute disponibilité. Deuxièmement, il agit comme un fournisseur de points d'accès pour etcd [gRPC naming](/fr/docs/etcd/dev-guide/grpc_naming/).
+Le proxy prend en charge l'enregistrement de ses points d'accès pour la découverte, en écrivant sur un point d'accès défini par l'utilisateur. Cela sert deux objectifs. Premièrement, cela permet aux clients de synchroniser leurs points d'accès avec un ensemble de points d'accès du proxy afin d'assurer une haute disponibilité. Deuxièmement, il agit comme un fournisseur de points d'accès pour etcd [résolution de noms gRPC](/fr/docs/etcd/dev-guide/grpc_naming/).
 
-Inscrivez le ou les proxy en précisant un préfixe défini par l'utilisateur :
+Enregistrez le ou les proxies en précisant un préfixe défini par l'utilisateur :
 
 ```bash
 $ etcd grpc-proxy start --endpoints=localhost:2379 \
@@ -178,7 +178,7 @@ ETCDCTL_API=3 etcdctl --endpoints=http://localhost:23792 member list --write-out
 
 Supposons qu'une application exige un contrôle total sur l'ensemble de l'espace de clés, mais que le cluster etcd soit partagé avec d'autres applications. Pour permettre à toutes les applications de fonctionner sans se perturber mutuellement, le proxy peut partitionner l'espace de clés etcd de manière à ce que les clients perçoivent un accès à l'espace de clés complet. Lorsque le proxy reçoit le drapeau `--namespace`, toutes les requêtes clientes entrant dans le proxy sont traduites afin d'ajouter un préfixe défini par l'utilisateur aux clés. Les accès au cluster etcd se font sous ce préfixe, et les réponses du proxy suppriment ce préfixe ; pour le client, il semble qu'aucun préfixe n'existe.
 
-Pour nommer un proxy, lancez-le avec `--namespace` :
+Pour attribuer un espace de noms à un proxy, lancez-le avec `--namespace` :
 
 ```bash
 $ etcd grpc-proxy start --endpoints=localhost:2379 \
@@ -201,7 +201,7 @@ $ ETCDCTL_API=3 etcdctl --endpoints=localhost:2379 get my-prefix/my-key
 
 ## Terminaison TLS {#tls-termination}
 
-Met fin au TLS d’un cluster etcd sécurisé en utilisant le proxy gRPC en exposant un point d’accès local non chiffré.
+Utilisez le proxy gRPC pour terminer les connexions TLS à un cluster etcd sécurisé et exposer un point d’accès local non chiffré.
 
 Pour le tester, démarrez un cluster etcd à membre unique avec un client HTTPS :
 
@@ -218,7 +218,7 @@ $ ETCDCTL_API=3 etcdctl --endpoints=http://localhost:2379 endpoint status
 $ ETCDCTL_API=3 etcdctl --endpoints=https://localhost:2379 --cert=client.crt --key=client.key --cacert=ca.crt endpoint status
 ```
 
-Ensuite, démarrez un proxy gRPC sur `localhost:12379` en vous connectant au point d'extrémité etcd `https://localhost:2379` à l'aide des certificats clients :
+Ensuite, démarrez un proxy gRPC sur `localhost:12379` en vous connectant au point de terminaison etcd `https://localhost:2379` à l'aide des certificats clients :
 
 ```sh
 $ etcd grpc-proxy start --endpoints=https://localhost:2379 --listen-addr localhost:12379 --cert client.crt --key client.key --cacert=ca.crt --insecure-skip-tls-verify &
@@ -250,7 +250,7 @@ $ etcd grpc-proxy start \
 
 ### Problème connu {#known-issue}
 
-L'interface principale du proxy sert à la fois HTTP2 et HTTP/1.1.. Si le proxy est configuré avec TLS comme indiqué dans l'exemple ci-dessus, l'utilisation d'un client tel que cURL contre l'interface d'écoute nécessite de définir explicitement le protocole à HTTP/1.1 dans la requête afin de retourner `/metrics` ou `/health`. En utilisant le drapeau `--metrics-addr`, l'interface secondaire n'aura pas cette exigence.
+L'interface principale du proxy sert à la fois HTTP2 et HTTP/1.1. Si le proxy est configuré avec TLS comme indiqué dans l'exemple ci-dessus, l'utilisation d'un client tel que cURL contre l'interface d'écoute nécessite de définir explicitement le protocole à HTTP/1.1 dans la requête afin de retourner `/metrics` ou `/health`. En utilisant le drapeau `--metrics-addr`, l'interface secondaire n'aura pas cette exigence.
 
 ```bash
  $ curl --cacert proxy-ca.pem --key proxy-client.key --cert proxy-client.crt https://127.0.0.1:23790/metrics --http1.1

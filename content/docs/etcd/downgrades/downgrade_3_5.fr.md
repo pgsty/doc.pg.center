@@ -1,31 +1,29 @@
 ---
 title: "Rétrogradation d'etcd de la version 3.5 à la 3.4"
-weight: 6650
-description: "Processus, listes de vérification et notes sur la mise à jour inverse d'etcd de la version 3.5 à la 3.4"
+weight: 6700
+description: "Processus, listes de vérification et notes sur la rétrogradation d'etcd de la version 3.5 à la 3.4"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/downgrades/downgrade_3_5.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/downgrades/downgrade_3_5.md"
 aliases: [/etcd/downgrades/downgrade_3_5/]
 ---
 
-Dans le cas général, la rétrogradation de etcd 3.5 vers 3.4 peut s'effectuer sans interruption de service, en mode rolling :
+Dans le cas général, la rétrogradation d'etcd 3.5 vers 3.4 peut s'effectuer sans interruption de service, en mode rolling :
 
 -  un par un, arrêtez les processus etcd 3.5 et remplacez-les par des processus etcd 3.4
--  après avoir lancé des processus 3.4, les nouvelles fonctionnalités de 3.5 ne sont plus disponibles pour le cluster
+-  dès le démarrage d’un processus 3.4, les nouvelles fonctionnalités de 3.5 ne sont plus disponibles pour le cluster
 
-Avant de [effectuer une mise vers une version antérieure](#downgrade-procedure), lisez le reste du présent guide afin de vous préparer.
+Avant de [commencer la rétrogradation](#downgrade-procedure), lisez le reste du présent guide afin de vous préparer.
 
-### Listes de vérification pour la mise à jour vers une version antérieure {#downgrade-checklists}
-
-content/enhttps://etcd.io/docs/v3.5/op-guide/authentication/rbac.md
+### Listes de vérification pour la rétrogradation {#downgrade-checklists}
 
 > [!WARNING]
-> Si votre cluster a activé l'authentification, la mise à jour rétrograde depuis la version 3.5 n'est pas prise en charge, car la version 3.5 [modifie le format des entrées WAL liées à l'authentification](https://github.com/etcd-io/etcd/pull/11943). Vous pouvez suivre les [instructions d'authentification](/fr/docs/etcd/op-guide/authentication/rbac/) pour désactiver l'authentification, puis supprimer tous les utilisateurs.
+> Si votre cluster a activé l'authentification, la rétrogradation progressive depuis la version 3.5 n'est pas prise en charge, car la version 3.5 [modifie le format des entrées WAL liées à l'authentification](https://github.com/etcd-io/etcd/pull/11943). Vous pouvez suivre les [instructions d'authentification](/fr/docs/etcd/op-guide/authentication/rbac/) pour désactiver l'authentification, puis supprimer tous les utilisateurs.
 
-Changements importants ayant pour effet de rupture entre 3.5 et 3.4 :
+Principaux changements avec rupture de compatibilité entre 3.5 et 3.4 :
 
 #### Différence entre les drapeaux {#difference-in-flags}
 
-Si vous utilisez l'un des drapeaux suivants dans vos configurations 3.5, veillez à les supprimer, les renommer ou modifier leur valeur par défaut lors de la mise à jour vers la version 3.4.
+Si vous utilisez l'un des drapeaux suivants dans vos configurations 3.5, veillez à les supprimer, les renommer ou modifier leur valeur par défaut lors de la rétrogradation vers la version 3.4.
 
 > [!NOTE]
 > La différence est basée sur les versions 3.5.14 et 3.4.33. La différence réelle dépend de votre version de correctif ; vérifiez d'abord avec `diff <(etcd-3.5/bin/etcd -h | grep \\-\\-) <(etcd-3.4/bin/etcd -h | grep \\-\\-)`.
@@ -65,7 +63,7 @@ Si vous utilisez l'un des drapeaux suivants dans vos configurations 3.5, veillez
 
 #### `etcd --logger zap` {#etcd---logger-zap}
 
-3.4 est par défaut `--logger=capnslog` tandis que 3.5 est par défaut `--logger=zap`.
+3.4 utilise par défaut `--logger=capnslog` tandis que 3.5 utilise par défaut `--logger=zap`.
 
 Si vous souhaitez continuer à utiliser `zap`, il doit être spécifié explicitement.
 
@@ -83,35 +81,35 @@ Si vous souhaitez continuer à utiliser `zap`, il doit être spécifié explicit
 -etcd_debugging_mvcc_db_compaction_last
 ```
 
-### Liste de vérification pour la mise à jour vers une version antérieure du serveur {#server-downgrade-checklists}
+### Liste de vérification pour la rétrogradation du serveur {#server-downgrade-checklists}
 
-#### Exigences de mise à jour vers une version antérieure {#downgrade-requirements}
+#### Exigences de rétrogradation {#downgrade-requirements}
 
-Pour garantir une mise à jour descendante progressive sans incident, le cluster en cours d'exécution doit être sain. Vérifiez l'état du cluster à l'aide de la commande `etcdctl endpoint health` avant de poursuivre.
+Pour garantir une rétrogradation progressive sans incident, le cluster en cours d'exécution doit être sain. Vérifiez l'état du cluster à l'aide de la commande `etcdctl endpoint health` avant de poursuivre.
 
 La version 3.4 vers laquelle effectuer la rétrogradation doit être supérieure ou égale à 3.4.32.
 
 #### Préparation {#preparation}
 
-Avant de procéder à une mise vers une version antérieure d’etcd, testez toujours les services dépendants d’etcd dans un environnement de préproduction avant de déployer la mise à jour vers l’environnement de production.
+Avant de rétrograder etcd, testez toujours les services dépendants d’etcd dans un environnement de préproduction avant de déployer la mise à jour vers l’environnement de production.
 
-Avant de commencer, [téléchargez la sauvegarde d'instantané](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup). Si une erreur survient lors de la rétrogradation, il sera possible d'utiliser cette sauvegarde pour [annuler](#rollback) la mise à jour et revenir à la version étcd existante. Veuillez noter que la `snapshot` commande ne sauvegarde que les données v3. Pour les données v2, consultez [sauvegarde du magasin de données v2](https://etcd.io/docs/v2.3/admin_guide#backing-up-the-datastore).
+Avant de commencer, [téléchargez la sauvegarde d'instantané](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup). Si une erreur survient lors de la rétrogradation, il sera possible d'utiliser cette sauvegarde pour [annuler](#rollback) la mise à jour et revenir à la version etcd existante. Veuillez noter que la commande `snapshot` ne sauvegarde que les données v3. Pour les données v2, consultez [sauvegarde du magasin de données v2](https://etcd.io/docs/v2.3/admin_guide#backing-up-the-datastore).
 
 Avant de commencer, téléchargez la dernière version d’etcd 3.4, et vérifiez que sa version est supérieure ou égale à 3.4.32.
 
 #### Versions mixtes {#mixed-versions}
 
-Lors d'une opération de rétrogradation, un cluster etcd prend en charge des versions mixtes de membres et fonctionne selon le protocole de la version commune la plus basse. Le cluster est considéré comme rétrogradé dès qu’un de ses membres est rétrogradé à la version 3.4. Internement, les membres etcd négocient entre eux afin de déterminer la version globale du cluster, qui détermine la version signalée et les fonctionnalités prises en charge.
+Lors d'une opération de rétrogradation, un cluster etcd prend en charge des versions mixtes de membres et fonctionne selon le protocole de la version commune la plus basse. Le cluster est considéré comme rétrogradé dès qu’un de ses membres est rétrogradé à la version 3.4. En interne, les membres etcd négocient entre eux afin de déterminer la version globale du cluster, qui détermine la version signalée et les fonctionnalités prises en charge.
 
 #### Limitations {#limitations}
 
 Note : Si le cluster ne contient que des données v3 et aucune donnée v2, il n'est pas soumis à cette limitation.
 
-Si le cluster sert un jeu de données v2 d'une taille supérieure à 50 Mo, chaque membre nouvellement rétrogradé peut prendre jusqu'à deux minutes pour se synchroniser avec le cluster existant. Vérifiez la taille d'un instantané récent afin d'estimer la taille totale des données. Autrement dit, il est préférable d'attendre deux minutes entre chaque rétrogradation de membre.
+Si le cluster sert un jeu de données v2 d'une taille supérieure à 50 Mo, chaque membre nouvellement rétrogradé peut prendre jusqu'à deux minutes pour se synchroniser avec le cluster existant. Vérifiez la taille d'un instantané récent afin d'estimer la taille totale des données. Autrement dit, le plus sûr est d'attendre deux minutes entre chaque rétrogradation de membre.
 
-Pour une taille totale de données bien plus importante, de 100 Mo ou plus, ce processus unique peut prendre encore plus de temps. Les administrateurs de clusters etcd très volumineux de cette ampleur peuvent librement contacter l'équipe [etcd][etcd-contact] avant la mise à jour inférieure, et nous serons heureux de leur fournir des conseils sur la procédure.
+Pour une taille totale de données bien plus importante, de 100 Mo ou plus, ce processus unique peut prendre encore plus de temps. Les administrateurs de clusters etcd très volumineux de cette ampleur peuvent librement contacter l'équipe [etcd][etcd-contact] avant la rétrogradation, et nous serons heureux de leur fournir des conseils sur la procédure.
 
-#### Annuler {#rollback}
+#### Retour en arrière {#rollback}
 
 Si un membre a été rétrogradé à la version 3.4, la version du cluster sera rétrogradée à 3.4, et les opérations seront compatibles avec "3.4". Vous devrez suivre les instructions [Mettre à jour etcd de 3.4 vers 3.5](/fr/docs/etcd/upgrades/upgrade_3_5/) pour effectuer un retour en arrière.
 
@@ -119,7 +117,7 @@ Veuillez [télécharger la sauvegarde d'instantané](/fr/docs/etcd/op-guide/main
 
 ### Procédure de rétrogradation {#downgrade-procedure}
 
-Cet exemple montre comment effectuer une mise à jour vers une version antérieure d’un cluster etcd 3.5 composé de 3 membres, en cours d’exécution sur une machine locale.
+Cet exemple montre comment effectuer une rétrogradation d’un cluster etcd 3.5 composé de 3 membres, en cours d’exécution sur une machine locale.
 
 #### Étape 1 : vérifier les conditions de rétrogradation {#step-1-check-downgrade-requirements}
 
@@ -149,9 +147,9 @@ curl http://localhost:32379/version
 COMMENT
 ```
 
-#### Étape 2 : télécharger la sauvegarde instantané depuis le leader {#step-2-download-snapshot-backup-from-leader}
+#### Étape 2 : télécharger la sauvegarde d'instantané depuis le leader {#step-2-download-snapshot-backup-from-leader}
 
-[Téléchargez l'instantané de sauvegarde](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup) afin de disposer d'une voie de retour en cas de problème.
+[Téléchargez l'instantané de sauvegarde](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup) afin de pouvoir annuler cette rétrogradation et restaurer l’état antérieur en cas de problème.
 
 #### Étape 3 : arrêter un serveur etcd existant {#step-3-stop-one-existing-etcd-server}
 
@@ -170,7 +168,7 @@ etcdctl --endpoints=localhost:2379,localhost:22379,localhost:32379 endpoint stat
 COMMENT
 ```
 
-Si le serveur à arrêter est le leader, vous pouvez réduire la durée d'indisponibilité en `move-leader` vers un autre serveur avant d'arrêter ce serveur.
+Si le serveur à arrêter est le leader, vous pouvez réduire la durée d'indisponibilité en transférant le rôle de leader vers un autre serveur avec `move-leader` avant d'arrêter ce serveur.
 
 ```bash
 etcdctl --endpoints=localhost:2379,localhost:22379,localhost:32379 move-leader 91bc3c398fb3c146
@@ -236,7 +234,7 @@ Le nouvel etcd 3.4 publiera ses informations dans le cluster. À ce stade, le cl
 > `{"level":"info","ts":"2024-05-13T21:05:46.452631Z","caller":"membership/cluster.go:549","msg":"updated cluster version","cluster-id":"ef37ad9dc622a7c4","local-member-id":"8211f1d0f64f3269","from":"3.5","from":"3.4"}`
 ```
 
-Vérifiez que chaque membre, puis l’intégralité du cluster, deviennent sains avec la nouvelle binaire etcd 3.4 :
+Vérifiez que chaque membre, puis l’intégralité du cluster, deviennent sains avec le nouveau binaire etcd 3.4 :
 
 ```bash
 etcdctl endpoint health --endpoints=localhost:2379,localhost:22379,localhost:32379
@@ -247,7 +245,7 @@ localhost:2379 is healthy: successfully committed proposal: took = 2.124843ms
 COMMENT
 ```
 
-Les membres non mis à jour logueront des informations semblables aux suivantes
+Les membres non rétrogradés enregistreront des informations semblables aux suivantes
 
 ```bash
 {"level":"info","ts":"2024-05-13T21:05:46.450764Z","caller":"etcdserver/server.go:2633","msg":"updating cluster version using v2 API","from":"3.5","to":"3.4"}

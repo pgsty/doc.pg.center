@@ -4,11 +4,11 @@ weight: 1300
 description: Liste des outils et bibliothèques clientes etcd
 icon: fa-solid fa-puzzle-piece
 categories: [Référence]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/integrations.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/integrations.md"
 aliases: [/etcd/integrations/]
 ---
 
-Notez que les bibliothèques et outils tiers (non hébergés sur https://github.com/etcd-io) mentionnés ci-dessous ne sont pas testés ni entretenus par l'équipe etcd. Avant de les utiliser, les utilisateurs sont invités à les lire et à les examiner.
+Notez que les bibliothèques et outils tiers (non hébergés sur https://github.com/etcd-io) mentionnés ci-dessous ne sont pas testés ni entretenus par l'équipe etcd. Avant de les utiliser, il est recommandé de consulter leur documentation et de les évaluer.
 
 ## Outils {#tools}
 
@@ -20,14 +20,14 @@ Notez que les bibliothèques et outils tiers (non hébergés sur https://github.
 - [etcd-lock](https://github.com/datawisesystems/etcd-lock) - Implémentation d'élection de maître et de verrouillage lecture/écriture distribué utilisant etcd - Prend en charge la version 2
 - [etcd-console](https://github.com/matishsiao/etcd-console) - Éditeur web de magasin clé-valeur pour etcd utilisant PHP
 - [etcd-viewer](https://github.com/nikfoundas/etcd-viewer) - Éditeur/visualiseur de magasin clé-valeur etcd écrit en Java
-- [etcdtool](https://github.com/mickep76/etcdtool) - Export/Import/Edit répertoire etcd en tant que JSON/YAML/TOML et validation du répertoire à l’aide d’un schéma JSON
+- [etcdtool](https://github.com/mickep76/etcdtool) - Exporter, importer et modifier un répertoire etcd au format JSON/YAML/TOML et validation du répertoire à l’aide d’un schéma JSON
 - [etcdloadtest](https://github.com/sinsharat/etcdloadtest) - Client de test de charge en ligne de commande pour etcd 3.0 et versions ultérieures
 - [etcd-tui](https://github.com/olamilekan000/etcd-tui) - Une interface utilisateur moderne en mode terminal (TUI) pour interagir avec votre base de données etcd. Parcourez les clés, affichez les valeurs, filtrez les données et gérez votre cluster etcd directement depuis votre terminal.
 - [etcdfinder](https://etcdfinder.github.io) - Une interface web moderne et ultra-rapide pour etcd, avec recherche instantanée. Prend en charge à la fois etcd v2 et v3.
-- [lucas](https://github.com/ringtail/lucas) - Un visualiseur de paires clé-valeur basé sur web pour les clusters etcd3.0+ de Kubernetes.
+- [lucas](https://github.com/ringtail/lucas) - Un visualiseur de paires clé-valeur basé sur le web pour les clusters etcd3.0+ de Kubernetes.
 - [etcd-manager](https://etcdmanager.io) - Outil graphique et client moderne, efficace, multiplateforme et gratuit pour etcd 3.x. Disponible pour Windows, Linux et Mac.
 - [etcd-backup-restore](https://github.com/gardener/etcd-backup-restore) - Utilitaire permettant de sauvegarder et de restaurer de manière périodique et incrémentielle etcd.
-- [etcd-druid](https://github.com/gardener/etcd-druid) - Opérateur Kubernetes permettant de déployer des clusters etcd et de gérer les opérations de gestion de jour 2.
+- [etcd-druid](https://github.com/gardener/etcd-druid) - Opérateur Kubernetes permettant de déployer des clusters etcd et de gérer les opérations d’exploitation après le déploiement.
 - [etcdadm](https://github.com/kubernetes-sigs/etcdadm) - Outil en ligne de commande pour gérer un cluster etcd.
 - [etcd-defrag](https://github.com/ahrtr/etcd-defrag) - Outil de défragmentation etcd plus facile à utiliser et plus intelligent.
 - [etcdhelper](https://github.com/tsonglew/intellij-etcdhelper) - Plugin pour la plateforme IntelliJ pour etcd.
@@ -57,7 +57,7 @@ Les sections ci-dessous listent les bibliothèques clientes etcd par langage.
 
 ### Perl {#perl}
 
-- [hexfusion/perl-net-etcd](https://github.com/hexfusion/perl-net-etcd) - Prise en charge de l'API HTTP du passerelle gRPC v3
+- [hexfusion/perl-net-etcd](https://github.com/hexfusion/perl-net-etcd) - Prise en charge de l'API HTTP de la passerelle gRPC v3
 - [robn/p5-etcd](https://github.com/robn/p5-etcd) - Prise en charge de la version 2
 
 ### Python {#python}
@@ -72,7 +72,7 @@ Les sections ci-dessous listent les bibliothèques clientes etcd par langage.
 - [aioetcd3](https://github.com/gaopeiliang/aioetcd3) - API etcd v3 pour asyncio (Python 3.6+)
 - [Revolution1/etcd3-py](https://github.com/Revolution1/etcd3-py) - Client Python pour etcd v3 (python2.7 et python3.5+), utilisant gRPC-JSON-Gateway
 
-### Nœud {#node}
+### Node {#node}
 
 - [mixer/etcd3](https://github.com/mixer/etcd3) - Prise en charge de la version 3
 - [stianeikeland/node-etcd](https://github.com/stianeikeland/node-etcd) - Prise en charge de la version 2 (avec CoffeeScript)
@@ -110,7 +110,7 @@ Les sections ci-dessous listent les bibliothèques clientes etcd par langage.
 - [marshall-lee/etcd.erl](https://github.com/marshall-lee/etcd.erl) - Prise en charge de la version 2
 - [zhongwencool/eetcd](https://github.com/zhongwencool/eetcd) - Prise en charge de la version 3+ (GRPC uniquement)
 
-### Élixir {#elixir}
+### Elixir {#elixir}
 
 - [team-telnyx/etcdex](https://github.com/team-telnyx/etcdex) - Prise en charge des versions v3+ (GRPC uniquement)
 
@@ -165,7 +165,7 @@ Les sections ci-dessous listent les bibliothèques clientes etcd par langage.
 
 - [spheromak/etcd-cookbook](https://github.com/spheromak/etcd-cookbook)
 
-### Libérations BOSH {#bosh-releases}
+### Releases BOSH {#bosh-releases}
 
 - [cloudfoundry-community/etcd-boshrelease](https://github.com/cloudfoundry-community/etcd-boshrelease)
 - [cloudfoundry/cf-release](https://github.com/cloudfoundry/cf-release/tree/master/jobs/etcd)
@@ -187,7 +187,7 @@ Les sections ci-dessous listent les bibliothèques clientes etcd par langage.
 - [mattn/etcdenv](https://github.com/mattn/etcdenv) - Shebang « env » avec intégration à etcd
 - [kelseyhightower/confd](https://github.com/kelseyhightower/confd) - Gérer les fichiers de configuration d'applications locales à l'aide de modèles et de données provenant d'etcd
 - [configdb](https://git.autistici.org/ai/configdb/tree/master) - Une abstraction relationnelle REST au-dessus de backends de bases de données arbitraires, destinée au stockage de configurations et d'inventaires.
-- [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes) - Gestionnaire de cluster conteneurs développé par Google.
+- [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes) - Gestionnaire de clusters de conteneurs introduit par Google.
 - [mailgun/vulcand](https://github.com/mailgun/vulcand) - Proxy HTTP utilisant etcd comme backend de configuration.
 - [duedil-ltd/discodns](https://github.com/duedil-ltd/discodns) - Serveur DNS simple utilisant etcd comme base de données pour les noms et les enregistrements.
 - [skynetservices/skydns](https://github.com/skynetservices/skydns) - Serveur DNS conforme aux RFC

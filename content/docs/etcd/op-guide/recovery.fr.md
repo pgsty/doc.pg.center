@@ -1,15 +1,15 @@
 ---
 title: Récupération après sinistre
 weight: 4275
-description: "etcd Fonctionnalités d'instantané et de restauration v3"
+description: "Fonctionnalités d'instantané et de restauration d'etcd v3"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/recovery.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/recovery.md"
 aliases: [/etcd/op-guide/recovery/]
 ---
 
 etcd est conçu pour résister aux pannes de machines. Un cluster etcd se rétablit automatiquement après des pannes temporaires (par exemple, redémarrages de machine) et tolère jusqu'à *(N-1)/2* pannes permanentes pour un cluster composé de N membres. Lorsqu'un membre subit une panne permanente, qu'elle soit due à une défaillance matérielle ou à une corruption du disque, il perd accès au cluster. Si le cluster perd définitivement plus de *(N-1)/2* membres, il subit une panne catastrophique, perdant irrévocablement son quorum. Une fois le quorum perdu, le cluster ne peut plus atteindre de consensus et ne peut donc plus accepter de mises à jour.
 
-Pour récupérer après une panne catastrophique, etcd v3 fournit des fonctionnalités d'instantané et de restauration afin de recréer le cluster sans perte de données clés v3. Pour récupérer les clés v2, reportez-vous au [guide d'administration v2][v2_recover].
+Pour récupérer après une panne catastrophique, etcd v3 fournit des fonctionnalités d'instantané et de restauration afin de recréer le cluster sans perte des données associées aux clés v3. Pour récupérer les clés v2, reportez-vous au [guide d'administration v2][v2_recover].
 
 [v2_recover]: https://etcd.io/docs/v2.3/admin_guide#disaster-recovery
 
@@ -40,15 +40,15 @@ $ etcdutl snapshot status snapshot.db -w table
 
 ### Différence de révision {#revision-difference}
 
-Lorsque vous restaurez un cluster, les clients existants peuvent percevoir une révision qui remonte de plusieurs centaines ou milliers d'unités. Cela est dû au fait qu’un instantané donné ne contient que l'historique des données jusqu’au moment où il a été pris, alors que l’état actuel du cluster peut déjà être plus avancé.
+Lorsque vous restaurez un cluster, les clients existants peuvent percevoir une révision qui revient en arrière de plusieurs centaines ou milliers d'unités. Cela est dû au fait qu’un instantané donné ne contient que l'historique des données jusqu’au moment où il a été pris, alors que l’état actuel du cluster peut déjà être plus avancé.
 
-Cela pose particulièrement problème lors de l'exécution de Kubernetes avec etcd, où les contrôleurs et les opérateurs peuvent utiliser ce qu'on appelle `informers`, qui agissent comme des caches locaux et reçoivent des notifications de mise à jour via des surveillance. Le retour à une révision antérieure peut ne pas actualiser correctement ces caches, entraînant un comportement imprévisible et incohérent dans les contrôleurs.
+Cela pose particulièrement problème lors de l'exécution de Kubernetes avec etcd, où les contrôleurs et les opérateurs peuvent utiliser ce qu'on appelle `informers`, qui agissent comme des caches locaux et reçoivent des notifications de mise à jour via des surveillances. Le retour à une révision antérieure peut ne pas actualiser correctement ces caches, entraînant un comportement imprévisible et incohérent dans les contrôleurs.
 
 Lors de la restauration à partir d’un instantané dans le cadre de : consommateurs connus de l’API de surveillance, copies locales mises en cache des données etcd ou de l’utilisation générale de Kubernetes, il est fortement recommandé de procéder à la restauration en utilisant les « augmentations de révision » ci-dessous.
 
 ### Restauration à partir d’un instantané {#restoring-from-snapshot}
 
-Pour restaurer un cluster, il suffit d’un seul fichier d’instantané « db ». La restauration d’un cluster avec `etcdutl snapshot restore` crée de nouveaux répertoires de données etcd ; tous les membres doivent restaurer à l’aide du même instantané. La restauration écrase certaines métadonnées de l’instantané (en particulier l’ID de membre et l’ID de cluster) ; le membre perd alors son identité antérieure. Cette écrasement des métadonnées empêche le nouveau membre de rejoindre involontairement un cluster existant. Par conséquent, pour démarrer un cluster à partir d’un instantané, la restauration doit démarrer un nouveau cluster logique.
+Pour restaurer un cluster, il suffit d’un seul fichier d’instantané « db ». La restauration d’un cluster avec `etcdutl snapshot restore` crée de nouveaux répertoires de données etcd ; tous les membres doivent restaurer à l’aide du même instantané. La restauration écrase certaines métadonnées de l’instantané (en particulier l’ID de membre et l’ID de cluster) ; le membre perd alors son identité antérieure. Cet écrasement des métadonnées empêche le nouveau membre de rejoindre involontairement un cluster existant. Par conséquent, pour démarrer un cluster à partir d’un instantané, la restauration doit démarrer un nouveau cluster logique.
 
 Une restauration simple peut être exécutée comme suit :
 
@@ -63,9 +63,9 @@ L'intégrité de l'instantané peut être vérifiée de manière facultative au 
 
 ### Restauration avec augmentation de la révision {#restoring-with-revision-bump}
 
-Afin de garantir que les révisions ne diminuent jamais après une restauration, vous pouvez utiliser l'option `--bump-revision`. Cette option prend un entier sur 64 bits, qui indique le nombre de révisions à ajouter à la révision actuelle de l'instantané. Étant donné qu'une écriture dans etcd augmente la révision de un, vous pouvez couvrir un instantané datant d'une semaine en augmentant la révision de 1'000'000'000, à condition que etcd fonctionne avec moins de 1500 écritures par seconde.
+Afin de garantir que les révisions ne diminuent jamais après une restauration, vous pouvez utiliser l'option `--bump-revision`. Cette option prend un entier sur 64 bits, qui indique le nombre de révisions à ajouter à la révision actuelle de l'instantané. Étant donné qu'une écriture dans etcd augmente la révision d'une unité, vous pouvez couvrir un instantané datant d'une semaine en augmentant la révision de 1'000'000'000, à condition que etcd fonctionne avec moins de 1500 écritures par seconde.
 
-Dans le contexte des contrôleurs Kubernetes, il est également important de marquer toutes les révisions, y compris la mise à jour, comme compactées à l’aide de `--mark-compacted`. Cela garantit que toutes les surveillance sont terminées et qu’etcd ne répond pas aux requêtes concernant les révisions survenues après la prise de l’instantané — ce qui invalide effectivement les caches d’informateurs.
+Dans le contexte des contrôleurs Kubernetes, il est également important de marquer toutes les révisions, y compris l'augmentation de révision, comme compactées à l’aide de `--mark-compacted`. Cela garantit que toutes les surveillances sont terminées et qu’etcd ne répond pas aux requêtes concernant les révisions survenues après la prise de l’instantané — ce qui invalide effectivement les caches des informers.
 
 Un appel complet peut avoir l'aspect suivant :
 
@@ -73,7 +73,7 @@ Un appel complet peut avoir l'aspect suivant :
 $ etcdutl snapshot restore snapshot.db --bump-revision 1000000000 --mark-compacted --data-dir output-dir
 ```
 
-### Restauration avec membre mis à jour {#restoring-with-updated-membership}
+### Restauration avec une appartenance mise à jour {#restoring-with-updated-membership}
 
 Les membres d’un cluster etcd sont stockés dans etcd lui-même et maintenus grâce à l'algorithme de consensus Raft. Lorsque le quorum est entièrement perdu, vous devrez peut-être reconsidérer l'emplacement et la manière dont le nouveau cluster est constitué, par exemple sur un ensemble entièrement nouveau de membres.
 

@@ -1,31 +1,31 @@
 ---
 title: "Rétrogradation d'etcd de la version v3.7 à la v3.6"
 weight: 6600
-description: "Processus, listes de vérification et notes sur la mise à jour inverse d'etcd de la version 3.7 à la version 3.6"
+description: "Processus, listes de vérification et notes sur la rétrogradation d'etcd de la version 3.7 à la version 3.6"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/downgrades/downgrade_3_7.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/downgrades/downgrade_3_7.md"
 aliases: [/etcd/downgrades/downgrade_3_7/]
 ---
 
-Dans le cas général, la rétrogradation de etcd v3.7 vers v3.6 peut se faire sans interruption de service, par mise à jour progressive :
+Dans le cas général, la rétrogradation d'etcd v3.7 vers v3.6 peut se faire sans interruption de service, par mise à jour progressive :
 
 -  un à un, arrêtez les processus etcd v3.7 et remplacez-les par des processus etcd v3.6
--  après avoir activé la remontée de version, les nouvelles fonctionnalités de la v3.7 ne sont plus disponibles pour le cluster
+-  après avoir activé la rétrogradation, les nouvelles fonctionnalités de la v3.7 ne sont plus disponibles pour le cluster
 
-Avant de [effectuer une mise vers une version antérieure](#downgrade-procedure), lisez le reste du présent guide afin de vous préparer.
+Avant de [commencer la rétrogradation](#downgrade-procedure), lisez le reste du présent guide afin de vous préparer.
 
-### Listes de vérification pour la mise à jour vers une version antérieure {#downgrade-checklists}
+### Listes de vérification pour la rétrogradation {#downgrade-checklists}
 
 Différences notables entre v3.7 et v3.6 :
 
 #### Différence entre les drapeaux {#difference-in-flags}
 
-La version 3.7 n'introduit aucune nouvelle option, aussi un processus v3.6 accepte toutes les options d'une configuration v3.7, et aucune modification de configuration n'est requise lors d'une mise à jour rétrograde.
+La version 3.7 n'introduit aucune nouvelle option, aussi un processus v3.6 accepte toutes les options d'une configuration v3.7, et aucune modification de configuration n'est requise lors d'une rétrogradation.
 
 > [!NOTE]
 > La différence est basée sur les versions v3.7.0-rc.0 et v3.6.13. La différence réelle dépendra de votre version de correctif ; vérifiez d'abord avec `diff <(etcd-3.7/bin/etcd -h | grep \\-\\-) <(etcd-3.6/bin/etcd -h | grep \\-\\-)`.
 
-Les indicateurs `--experimental-*` obsolètes, supprimés à partir de la version v3.7, existent encore dans la version v3.6, mais ne les réinstallez pas après une mise à jour rétrograde ; utilisez leurs équivalents non expérimentaux ou les entrées `--feature-gates`, qui fonctionnent sur les deux versions.
+Les indicateurs `--experimental-*` obsolètes, supprimés à partir de la version v3.7, existent encore dans la version v3.6, mais ne les réajoutez pas après une rétrogradation ; utilisez leurs équivalents non expérimentaux ou les entrées `--feature-gates`, qui fonctionnent sur les deux versions.
 
 #### Différence entre les métriques Prometheus {#difference-in-prometheus-metrics}
 
@@ -38,35 +38,35 @@ Les indicateurs `--experimental-*` obsolètes, supprimés à partir de la versio
 -etcd_debugging_server_watch_send_loop_watch_stream_duration_per_event_seconds
 ```
 
-### Liste de vérification pour la mise à jour vers une version antérieure du serveur {#server-downgrade-checklists}
+### Liste de vérification pour la rétrogradation du serveur {#server-downgrade-checklists}
 
-#### Exigences de mise à jour vers une version antérieure {#downgrade-requirements}
+#### Exigences de rétrogradation {#downgrade-requirements}
 
-Pour garantir une mise à jour descendante progressive sans incident, le cluster en cours d'exécution doit être sain. Vérifiez l'état du cluster à l'aide de la commande `etcdctl endpoint health` avant de poursuivre.
+Pour garantir une rétrogradation progressive sans incident, le cluster en cours d'exécution doit être sain. Vérifiez l'état du cluster à l'aide de la commande `etcdctl endpoint health` avant de poursuivre.
 
 #### Préparation {#preparation}
 
-Avant de procéder à une mise vers une version antérieure d’etcd, testez toujours les services dépendants d’etcd dans un environnement de préproduction avant de déployer la mise à jour vers l’environnement de production.
+Avant de rétrograder etcd, testez toujours les services dépendants d’etcd dans un environnement de préproduction avant de déployer la mise à jour vers l’environnement de production.
 
-Avant de commencer, [téléchargez l'instantané de sauvegarde](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup). Si une erreur survient lors de la rétrogradation, il sera possible d'utiliser cette sauvegarde pour [annuler](#rollback) la mise à jour et revenir à la version existante de etcd.
+Avant de commencer, [téléchargez l'instantané de sauvegarde](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup). Si une erreur survient lors de la rétrogradation, il sera possible d'utiliser cette sauvegarde pour [annuler](#rollback) la mise à jour et revenir à la version existante d'etcd.
 
-Avant de commencer, téléchargez la dernière version de etcd v3.6.
+Avant de commencer, téléchargez la dernière version d'etcd v3.6.
 
 #### Versions mixtes {#mixed-versions}
 
-Lors d'une mise à jour vers une version inférieure, un cluster etcd prend en charge des versions mixtes de membres et fonctionne selon le protocole de la version commune la plus basse. Le cluster est considéré comme mis à jour vers une version inférieure une fois que la mise à jour vers une version inférieure est activée par `etcdctl downgrade enable 3.6`. Internement, la version globale du cluster est définie sur la version cible de la mise à jour vers une version inférieure, ce qui contrôle la version signalée et les fonctionnalités prises en charge.
+Lors d'une rétrogradation, un cluster etcd prend en charge des versions mixtes de membres et fonctionne selon le protocole de la version commune la plus basse. Le cluster est considéré comme rétrogradé une fois que la rétrogradation est activée par `etcdctl downgrade enable 3.6`. En interne, la version globale du cluster est définie sur la version cible de la rétrogradation, ce qui contrôle la version signalée et les fonctionnalités prises en charge.
 
-#### Annuler {#rollback}
+#### Retour en arrière {#rollback}
 
-Avant de procéder à la mise à jour inférieure de votre cluster etcd, créez et [téléchargez une sauvegarde sous forme d'instantané](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup) de votre cluster etcd. Cet instantané peut être utilisé pour restaurer le cluster dans son état antérieur à la mise à jour, le cas échéant. Si des utilisateurs rencontrent des problèmes pendant la mise à jour inférieure, ils doivent d'abord identifier et résoudre la cause racine.
+Avant de procéder à la rétrogradation de votre cluster etcd, créez et [téléchargez une sauvegarde sous forme d'instantané](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup) de votre cluster etcd. Cet instantané peut être utilisé pour restaurer le cluster dans son état antérieur à la rétrogradation, le cas échéant. Si des utilisateurs rencontrent des problèmes pendant la rétrogradation, ils doivent d'abord identifier et résoudre la cause racine.
 
-Si la désinstallation a commencé après l'exécution de `etcdctl downgrade enable`, et que le cluster est toujours dans un état de version mixte, où au moins un membre reste sur la version v3.7, les utilisateurs peuvent annuler le processus de mise à jour en cours en exécutant `etcdctl downgrade cancel`, puis en redémarrant tous les membres mis à jour avec les binaires d'origine v3.7.
+Si la rétrogradation a commencé après l'exécution de `etcdctl downgrade enable`, et que le cluster est toujours dans un état de version mixte, où au moins un membre reste sur la version v3.7, les utilisateurs peuvent annuler le processus de rétrogradation en cours en exécutant `etcdctl downgrade cancel`, puis en redémarrant tous les membres rétrogradés avec les binaires d'origine v3.7.
 
-Une fois que tous les membres ont été rétrogradés vers la version v3.6, le cluster est considéré comme entièrement rétrogradé. Si les utilisateurs souhaitent revenir à la version d'origine après avoir achevé un rétrogradation complète, ils doivent suivre le guide officiel d'[mise à jour](/fr/docs/etcd/upgrades/upgrade_3_7/) afin d'assurer la cohérence et d'éviter toute corruption des données.
+Une fois que tous les membres ont été rétrogradés vers la version v3.6, le cluster est considéré comme entièrement rétrogradé. Si les utilisateurs souhaitent revenir à la version d'origine après avoir achevé une rétrogradation complète, ils doivent suivre le guide officiel de [mise à jour](/fr/docs/etcd/upgrades/upgrade_3_7/) afin d'assurer la cohérence et d'éviter toute corruption des données.
 
 ### Procédure de rétrogradation {#downgrade-procedure}
 
-Cet exemple montre comment effectuer une mise à jour vers une version antérieure d’un cluster etcd à 3 membres en version v3.7, exécuté sur une machine locale. La sortie ci-dessous provient d’une exécution réelle contre etcd v3.7.0-rc.0 et etcd v3.6.13 sur un seul hôte, utilisant trois ports de boucle, sur un cluster qui a été mis à jour depuis v3.6.13 peu de temps auparavant.
+Cet exemple montre comment effectuer une rétrogradation d’un cluster etcd à 3 membres en version v3.7, exécuté sur une machine locale. La sortie ci-dessous provient d’une exécution réelle contre etcd v3.7.0-rc.0 et etcd v3.6.13 sur un seul hôte, utilisant trois ports de bouclage, sur un cluster qui a été mis à jour depuis v3.6.13 peu de temps auparavant.
 
 #### Étape 1 : vérifier les conditions de rétrogradation {#step-1-check-downgrade-requirements}
 
@@ -107,9 +107,9 @@ etcdctl --endpoints=localhost:2379,localhost:22379,localhost:32379 endpoint stat
 COMMENT
 ```
 
-#### Étape 2 : télécharger la sauvegarde instantané depuis le leader {#step-2-download-snapshot-backup-from-leader}
+#### Étape 2 : télécharger la sauvegarde d'instantané depuis le leader {#step-2-download-snapshot-backup-from-leader}
 
-[Téléchargez l'instantané de sauvegarde](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup) afin de disposer d'un chemin de retour en cas de problème :
+[Téléchargez l'instantané de sauvegarde](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup) afin de pouvoir annuler cette rétrogradation et restaurer l’état antérieur en cas de problème :
 
 ```bash
 etcdctl --endpoints=localhost:2379 snapshot save backup.db
@@ -125,11 +125,11 @@ Server version 3.7.0
 COMMENT
 ```
 
-#### Étape 3 : valider la version cible de la mise à jour vers une version antérieure {#step-3-validate-downgrade-target-version}
+#### Étape 3 : valider la version cible de la rétrogradation {#step-3-validate-downgrade-target-version}
 
 Validez la version cible de la rétrogradation avant d’activer la rétrogradation :
 
-- Nous ne supportons que le retour arrière d'une version mineure à la fois. Par exemple, le passage de la version v3.7 à la version v3.5 n'est pas autorisé.
+- Nous ne prenons en charge la rétrogradation que d'une version mineure à la fois. Par exemple, la rétrogradation de la version v3.7 vers la v3.5 n'est pas autorisée.
 - Veuillez ne pas passer à l'étape suivante tant que la validation n'est pas réussie.
 
 ```bash
@@ -139,7 +139,7 @@ Downgrade validate success, cluster version 3.7
 COMMENT
 ```
 
-#### Étape 4 : activer la remontée de version {#step-4-enable-downgrade}
+#### Étape 4 : activer la rétrogradation {#step-4-enable-downgrade}
 
 ```bash
 etcdctl downgrade enable 3.6
@@ -148,7 +148,7 @@ Downgrade enable success, cluster version 3.7
 COMMENT
 ```
 
-Après avoir activé la désinstallation, le cluster commencera à fonctionner avec le protocole v3.6, qui est la version cible de la désinstallation. En outre, etcd migrera automatiquement le schéma vers la version cible de la désinstallation, ce qui se produit généralement très rapidement. Vérifiez que la version de stockage de tous les serveurs a bien été migrée vers la v3.6 en consultant l’état des points de terminaison avant de passer à l’étape suivante.
+Après avoir activé la rétrogradation, le cluster commencera à fonctionner avec le protocole v3.6, qui est la version cible de la rétrogradation. En outre, etcd migrera automatiquement le schéma vers la version cible de la rétrogradation, ce qui se produit généralement très rapidement. Vérifiez que la version de stockage de tous les serveurs a bien été migrée vers la v3.6 en consultant l’état des points de terminaison avant de passer à l’étape suivante.
 
 ```bash
 etcdctl --endpoints=localhost:2379,localhost:22379,localhost:32379 endpoint status -w=table
@@ -164,11 +164,11 @@ COMMENT
 ```
 
 > [!NOTE]
-> Une fois la désinstallation autorisée, le cluster continuera à fonctionner avec le protocole v3.6, même si tous les serveurs exécutent encore le binaire v3.7, à moins que la désinstallation ne soit annulée à l’aide de `etcdctl downgrade cancel`
+> Une fois la rétrogradation activée, le cluster continuera à fonctionner avec le protocole v3.6, même si tous les serveurs exécutent encore le binaire v3.7, à moins que la rétrogradation ne soit annulée à l’aide de `etcdctl downgrade cancel`
 
 #### Étape 5 : arrêter un serveur etcd existant {#step-5-stop-one-existing-etcd-server}
 
-Avant d'arrêter le serveur, vérifiez s'il est le leader. Nous recommandons de mettre hors service le leader en dernier. Si le serveur à arrêter est le leader, vous pouvez réduire une partie de la durée d'indisponibilité en `move-leader` vers un autre serveur avant d'arrêter ce serveur.
+Avant d'arrêter le serveur, vérifiez s'il est le leader. Nous recommandons de rétrograder le leader en dernier. Si le serveur à arrêter est le leader, vous pouvez réduire une partie de la durée d'indisponibilité en transférant le rôle de leader vers un autre serveur avec `move-leader` avant d'arrêter ce serveur.
 
 ```bash
 etcdctl --endpoints=localhost:2379,localhost:22379,localhost:32379 move-leader 729934363faa4a24
@@ -230,7 +230,7 @@ COMMENT
 
 #### Étape 7 : répéter *étape 5* et *étape 6* pour les membres restants {#step-7-repeat-step-5-and-step-6-for-rest-of-the-members}
 
-Lorsque tous les membres sont désactivés, la désactivation est automatiquement terminée et `DOWNGRADE ENABLED` est réinitialisé à false. Vérifiez l'état de santé et le statut du cluster, puis confirmez que la version mineure de tous les membres et la version de stockage sont v3.6 :
+Lorsque tous les membres sont rétrogradés, la rétrogradation se termine automatiquement et `DOWNGRADE ENABLED` est réinitialisé à false. Vérifiez l'état de santé et le statut du cluster, puis confirmez que la version mineure de tous les membres et la version de stockage sont v3.6 :
 
 ```bash
 etcdctl --endpoints=localhost:2379,localhost:22379,localhost:32379 endpoint status -w=table

@@ -3,7 +3,7 @@ title: Mise à jour des clusters etcd et des applications
 weight: 6500
 description: Liste de documentation pour la mise à jour des clusters etcd et des applications
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrading-etcd.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrading-etcd.md"
 aliases: [/etcd/upgrades/upgrading-etcd/]
 ---
 
@@ -13,8 +13,8 @@ Cette section contient les documents spécifiques à la mise à jour des cluster
 
 Avant la mise à jour, notez qu’etcd ne prend en charge que les deux cas de mise à jour suivants :
 
-* **Mise à jour correctif :** Mise à jour entre des versions correctives du même numéro de version mineure (par exemple, 3.7.0 → 3.7.1).
-* **Mise à jour mineure :** Mise à jour d'une version mineure à la fois (par exemple, 3.6 → 3.7). Les mises à jour qui sautent une version mineure ne sont pas prises en charge et risquent de échouer. Mettez à jour vers la dernière version correctif avant de passer à la version mineure suivante.
+* **Mise à jour corrective :** Mise à jour entre des versions correctives du même numéro de version mineure (par exemple, 3.7.0 → 3.7.1).
+* **Mise à jour mineure :** Mise à jour d'une version mineure à la fois (par exemple, 3.6 → 3.7). Les mises à jour qui sautent une version mineure ne sont pas prises en charge et risquent d’échouer. Mettez à jour vers la dernière version corrective avant de passer à la version mineure suivante.
 
 ## Mise à jour d'un cluster etcd v3.x {#upgrading-an-etcd-v3x-cluster}
 

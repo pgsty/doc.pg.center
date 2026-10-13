@@ -1,13 +1,13 @@
 ---
 title: Comment ajouter et supprimer des membres
-description: Guide de gestion de la configuration du cluster dans etcd
+description: Guide de gestion des membres dans un cluster etcd
 weight: 1300
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/operator/how-to-deal-with-membership.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/operator/how-to-deal-with-membership.md"
 aliases: [/etcd/tasks/operator/how-to-deal-with-membership/]
 ---
 
-`member` pour ajouter, supprimer ou mettre à jour le membre :
+`member` pour ajouter, supprimer ou mettre à jour des membres :
 
 ![13_etcdctl_member_2016062301](/docs/etcd/tasks/img/manage-members.gif)
 

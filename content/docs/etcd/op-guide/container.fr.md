@@ -3,15 +3,15 @@ title: Exécuter des clusters etcd dans des conteneurs
 weight: 4200
 description: "Exécution d'etcd avec Docker en utilisant le bootstrap statique"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/container.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/container.md"
 aliases: [/etcd/op-guide/container/]
 ---
 
-Le guide suivant explique comment exécuter etcd avec Docker en utilisant le processus de bootstrap statique [static bootstrap process](/fr/docs/etcd/op-guide/clustering/#static).
+Le guide suivant explique comment exécuter etcd avec Docker en utilisant le [processus de bootstrap statique](/fr/docs/etcd/op-guide/clustering/#static).
 
 ## Docker {#docker}
 
-Afin d’exposer l’API etcd aux clients situés en dehors de l’hôte Docker, utilisez l’adresse IP hôte du conteneur. Voir [`docker inspect`](https://docs.docker.com/engine/reference/commandline/inspect) pour plus de détails sur la manière d’obtenir l’adresse IP. En alternative, spécifiez le drapeau `--net=host` à la commande `docker run` afin de passer outre la mise du conteneur dans une pile réseau séparée.
+Afin d’exposer l’API etcd aux clients situés en dehors de l’hôte Docker, utilisez l’adresse IP hôte du conteneur. Voir [`docker inspect`](https://docs.docker.com/engine/reference/commandline/inspect) pour plus de détails sur la manière d’obtenir l’adresse IP. En alternative, spécifiez le drapeau `--net=host` à la commande `docker run` afin d’éviter de placer le conteneur dans une pile réseau distincte.
 
 ### Exécution d’un nœud unique etcd {#running-a-single-node-etcd}
 
@@ -28,10 +28,10 @@ docker volume create --name etcd-data
 export DATA_DIR="etcd-data"
 ```
 
-Exécutez la dernière version d’etcd (`v3.7.0` au moment de la rédaction) :
+Exécutez la dernière version d’etcd (`v3.7.2` au moment de la rédaction) :
 
 ```
-ETCD_VERSION=v3.7.0
+ETCD_VERSION=v3.7.2
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd
@@ -43,8 +43,8 @@ docker run \
   --name etcd ${REGISTRY}:${ETCD_VERSION} \
   /usr/local/bin/etcd \
   --data-dir=/etcd-data --name node1 \
-  --initial-advertise-peer-urls http://${NODE1}:2380 --listen-peer-urls http://0.0.0.0:2380 \
-  --advertise-client-urls http://${NODE1}:2379 --listen-client-urls http://0.0.0.0:2379 \
+  --initial-advertise-peer-urls http://${NODE1}:2380 --listen-peer-urls http://0.0.0.0:2380 \
+  --advertise-client-urls http://${NODE1}:2379 --listen-client-urls http://0.0.0.0:2379 \
   --initial-cluster node1=http://${NODE1}:2380
 ```
 
@@ -62,7 +62,7 @@ REGISTRY=quay.io/coreos/etcd
 REGISTRY=gcr.io/etcd-development/etcd
 
 # For each machine
-ETCD_VERSION=v3.7.0
+ETCD_VERSION=v3.7.2
 TOKEN=my-etcd-token
 CLUSTER_STATE=new
 NAME_1=etcd-node-0
@@ -84,8 +84,8 @@ docker run \
   --name etcd ${REGISTRY}:${ETCD_VERSION} \
   /usr/local/bin/etcd \
   --data-dir=/etcd-data --name ${THIS_NAME} \
-  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
-  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
+  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
+  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
   --initial-cluster ${CLUSTER} \
   --initial-cluster-state ${CLUSTER_STATE} --initial-cluster-token ${TOKEN}
 
@@ -99,8 +99,8 @@ docker run \
   --name etcd ${REGISTRY}:${ETCD_VERSION} \
   /usr/local/bin/etcd \
   --data-dir=/etcd-data --name ${THIS_NAME} \
-  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
-  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
+  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
+  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
   --initial-cluster ${CLUSTER} \
   --initial-cluster-state ${CLUSTER_STATE} --initial-cluster-token ${TOKEN}
 
@@ -114,8 +114,8 @@ docker run \
   --name etcd ${REGISTRY}:${ETCD_VERSION} \
   /usr/local/bin/etcd \
   --data-dir=/etcd-data --name ${THIS_NAME} \
-  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
-  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
+  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
+  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
   --initial-cluster ${CLUSTER} \
   --initial-cluster-state ${CLUSTER_STATE} --initial-cluster-token ${TOKEN}
 ```
@@ -132,10 +132,12 @@ Pour provisionner un cluster etcd à 3 nœuds sur du matériel physique, les exe
 
 ## Montage d'un volume de certificat {#mounting-a-certificate-volume}
 
-Le conteneur de version d'étcd ne contient pas de certificats racines par défaut. Pour utiliser HTTPS avec des certificats approuvés par une autorité racine (par exemple, pour la découverte), montez un répertoire de certificats dans le conteneur etcd :
+L’image de conteneur distribuée avec etcd ne contient pas de certificats racines par défaut. Pour utiliser HTTPS avec des certificats approuvés par une autorité racine (par exemple, pour la découverte), montez un répertoire de certificats dans le conteneur etcd :
+
+La commande `rkt` suivante est un exemple historique. Sa configuration de découverte v2 est incompatible avec etcd 3.7 ; pour les déploiements actuels, utilisez les exemples de bootstrap statique ci-dessus.
 
 ```
-ETCD_VERSION=v3.7.0
+ETCD_VERSION=v3.7.2
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=docker://gcr.io/etcd-development/etcd
@@ -150,8 +152,10 @@ rkt run \
   --discovery https://discovery.etcd.io/c11fbcdc16972e45253491a24fcf45e1
 ```
 
+L’exemple Docker ci-dessous réutilise `NODE1` défini plus haut et utilise le bootstrap statique pour montrer le montage d’un volume de certificat.
+
 ```
-ETCD_VERSION=v3.7.0
+ETCD_VERSION=v3.7.2
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd
@@ -162,7 +166,7 @@ docker run \
   --volume=/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt \
   ${REGISTRY}:${ETCD_VERSION} \
   /usr/local/bin/etcd --name my-name \
-  --initial-advertise-peer-urls http://localhost:2380 --listen-peer-urls http://localhost:2380 \
-  --advertise-client-urls http://localhost:2379 --listen-client-urls http://localhost:2379 \
-  --discovery https://discovery.etcd.io/86a9ff6c8cb8b4c4544c1a2f88f8b801
+  --initial-advertise-peer-urls http://${NODE1}:2380 --listen-peer-urls http://0.0.0.0:2380 \
+  --advertise-client-urls http://${NODE1}:2379 --listen-client-urls http://0.0.0.0:2379 \
+  --initial-cluster my-name=http://${NODE1}:2380
 ```

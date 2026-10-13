@@ -1,14 +1,14 @@
 ---
 title: etcd API
 weight: 2625
-description: "etcd Aperçu du design de l'API centrale"
+description: "Aperçu de la conception de l’API etcd"
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/api.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/api.md"
 aliases: [/etcd/learning/api/]
 ---
 
 Ce document a pour objectif de présenter une vue d'ensemble des principes fondamentaux de l'API v3 d'etcd.
-Il ne doit pas être confondu avec l'API etcd v2, dépréciée à partir d'etcd v3.5.
+Il ne devrait pas être confondu avec l'API etcd v2, dépréciée à partir d'etcd v3.5.
 Il ne prétend pas être exhaustif, mais vise à se concentrer sur les idées de base nécessaires à la compréhension d'etcd, sans les distractions des appels d'API moins courants.
 Toutes les API etcd sont définies dans des services [gRPC][grpc-service], qui catégorisent les appels de procédure distante (RPC) compris par le serveur etcd.
 Une liste complète de toutes les RPC etcd est documentée au format markdown dans le [listing des API gRPC][grpc-api].
@@ -17,15 +17,15 @@ Une liste complète de toutes les RPC etcd est documentée au format markdown da
 
 Chaque requête d'API envoyée à un serveur etcd est un appel de procédure à distance gRPC. Les appels RPC dans etcd sont catégorisés selon leur fonctionnalité en services.
 
-Les services importants pour la gestion de l'espace clé de etcd incluent :
+Les services importants pour la gestion de l'espace de clés d'etcd incluent :
 * KV - Crée, met à jour, récupère et supprime des paires clé-valeur.
 * Watch - Surveille les modifications apportées aux clés.
 * Lease - Primitives pour consommer les messages de maintien de connexion client.
 
 Les services qui gèrent le cluster lui-même incluent :
-* Auth - Mécanisme d'authentification basée sur les rôles pour authentifier les utilisateurs.
+* Auth - Mécanisme d'authentification basé sur les rôles pour authentifier les utilisateurs.
 * Cluster - Fournit des informations sur les membres et des fonctionnalités de configuration.
-* Maintenance - Prend des instantanés de récupération, défait les fragments du magasin et retourne des informations d'état par membre.
+* Maintenance - Prend des instantanés de récupération, défragmente le magasin et retourne des informations d'état par membre.
 
 ### Requêtes et réponses {#requests-and-responses}
 
@@ -54,7 +54,7 @@ message ResponseHeader {
 * Cluster_ID - l'identifiant du cluster générant la réponse.
 * Member_ID - l'identifiant du membre générant la réponse.
 * Revision - la révision du magasin clé-valeur lors de la génération de la réponse.
-* Raft_Term - le terme Raft du membre lors de la génération de la réponse.
+* Raft_Term - le mandat Raft du membre lors de la génération de la réponse.
 
 Une application peut lire le champ `Cluster_ID` ou `Member_ID` pour s'assurer qu'elle communique avec le cluster (membre) prévu.
 
@@ -83,21 +83,21 @@ message KeyValue {
 }
 ```
 
-* Clé - clé sous forme d'octets. Une clé vide n'est pas autorisée.
-* Valeur - valeur sous forme d'octets.
+* Key - clé sous forme d'octets. Une clé vide n'est pas autorisée.
+* Value - valeur sous forme d'octets.
 * Version - version de la clé. Une suppression réinitialise la version à zéro, et toute modification de la clé augmente sa version.
-* Révision_Création - révision de la dernière création sur la clé.
-* Révision_Modification - révision de la dernière modification sur la clé.
-* Bail - identifiant du bail attaché à la clé. Si le bail est égal à zéro, aucun bail n'est attaché à la clé.
+* Create_Revision - révision de la dernière création sur la clé.
+* Mod_Revision - révision de la dernière modification sur la clé.
+* Lease - identifiant du bail attaché à la clé. Si le bail est égal à zéro, aucun bail n'est attaché à la clé.
 
 
-En plus de la clé et de sa valeur, etcd attache des métadonnées de révision supplémentaires au message de clé. Ces informations de révision ordonnent les clés selon leur date de création et de modification, ce qui est utile pour gérer la concurrence dans la synchronisation distribuée. Les verrous partagés distribués du client etcd [verrous partagés distribués][locks] utilisent la révision de création pour attendre la possession du verrou. De même, la révision de modification est utilisée pour détecter les conflits sur l’ensemble de lecture du [mémoire transactionnelle logicielle][STM] et attendre les mises à jour du [élection du leader][elections].
+En plus de la clé et de sa valeur, etcd attache des métadonnées de révision supplémentaires au message de clé. Ces informations de révision ordonnent les clés selon leur date de création et de modification, ce qui est utile pour gérer la concurrence dans la synchronisation distribuée. Les [verrous partagés distribués][locks] du client etcd utilisent la révision de création pour attendre la possession du verrou. De même, la révision de modification est utilisée pour détecter les conflits sur l'ensemble de lecture de la [mémoire transactionnelle logicielle][STM] et attendre les mises à jour de l'[élection du leader][elections].
 
 #### Révisions {#revisions}
 
-etcd maintient un compteur 64 bits valable pour l’ensemble du cluster, appelé révision du magasin, qui est incrémenté à chaque modification de l’espace clé. La révision sert d’horloge logique globale, ordonnant séquentiellement toutes les mises à jour du magasin. Le changement représenté par une nouvelle révision est incrémental ; les données associées à une révision sont celles qui ont modifié le magasin. En interne, une nouvelle révision signifie écrire les modifications dans l’arbre B+ du backend, indexées par la révision incrémentée.
+etcd maintient un compteur 64 bits valable pour l’ensemble du cluster, appelé révision du magasin, qui est incrémenté à chaque modification de l’espace de clés. La révision sert d’horloge logique globale, ordonnant séquentiellement toutes les mises à jour du magasin. Le changement représenté par une nouvelle révision est incrémental ; les données associées à une révision sont celles qui ont modifié le magasin. En interne, une nouvelle révision signifie écrire les modifications dans l’arbre B+ du backend, indexées par la révision incrémentée.
 
-Les révisions prennent davantage de valeur lorsqu’on considère le backend [contrôle de concurrence à plusieurs versions][mvcc] d’etcd. Le modèle MVCC signifie que le magasin clé-valeur peut être consulté à partir de révisions passées, car les anciennes versions des clés sont conservées. La politique de conservation de cet historique peut être configurée par les administrateurs du cluster afin de gérer finement le stockage ; en général, etcd supprime les anciennes révisions des clés selon un horaire. Un cluster etcd typique conserve les données obsolètes des clés pendant plusieurs heures. Cela permet également une gestion fiable des déconnexions longues des clients, et non seulement des perturbations réseau transitoires : les observateurs reprennent simplement à partir de la dernière révision historique observée. De même, pour lire dans le magasin à un instant précis, les requêtes de lecture peuvent être étiquetées avec une révision afin de retourner les clés selon une vue de l’espace des clés au moment où cette révision a été validée.
+Les révisions prennent davantage de valeur lorsqu’on considère le backend [contrôle de concurrence à plusieurs versions][mvcc] d’etcd. Le modèle MVCC signifie que le magasin clé-valeur peut être consulté à partir de révisions passées, car les anciennes révisions des clés sont conservées. La politique de conservation de cet historique peut être configurée par les administrateurs du cluster afin de gérer finement le stockage ; en général, etcd supprime les anciennes révisions des clés selon un horaire. Un cluster etcd typique conserve les données obsolètes des clés pendant plusieurs heures. Cela permet également une gestion fiable des déconnexions longues des clients, et non seulement des perturbations réseau transitoires : les observateurs reprennent simplement à partir de la dernière révision historique observée. De même, pour lire dans le magasin à un instant précis, les requêtes de lecture peuvent être étiquetées avec une révision afin de retourner les clés selon une vue de l’espace des clés au moment où cette révision a été validée.
 
 #### Plages de clés {#key-ranges}
 
@@ -107,7 +107,7 @@ Ces intervalles sont souvent appelés « plages » dans etcd. Les opérations su
 
 Par convention, les plages pour une requête sont indiquées par les champs `key` et `range_end`. Le champ `key` est la première clé de la plage et doit être non vide. Le champ `range_end` est la clé suivant la dernière clé de la plage. Si `range_end` n’est pas fourni ou est vide, la plage est définie comme ne contenant que la clé fournie. Si `range_end` est égal à `key` plus un (par exemple, "aa"+1 == "ab", "a\xff"+1 == "b"), alors la plage représente toutes les clés ayant pour préfixe la clé. Si les deux champs `key` et `range_end` sont égaux à '\0', la plage représente toutes les clés. Si `range_end` est égal à '\0', la plage correspond à toutes les clés supérieures ou égales à la clé fournie.
 
-### Plage {#range}
+### Range {#range}
 
 Les clés sont récupérées depuis le magasin clé-valeur à l’aide de l’appel d’API `Range`, qui prend un `RangeRequest` :
 
@@ -142,18 +142,18 @@ message RangeRequest {
 }
 ```
 
-* Clé, PlageFin - Plage de clés à récupérer.
-* Limite - nombre maximal de clés retournées pour la requête. Si la limite est définie à 0, elle est traitée comme sans limite.
-* Révision - instantané du magasin clé-valeur à utiliser pour la plage. Si la révision est inférieure ou égale à zéro, la plage concerne le dernier magasin clé-valeur. Si la révision est compactée, la réponse renvoie ErrCompacted.
-* OrdreTri - ordre de tri pour les requêtes triées.
-* CibleTri - champ du magasin clé-valeur à trier.
-* Sérialisable - active les lectures locales sérialisables pour la requête de plage. Par défaut, Range est linéarisable ; elle reflète le consensus actuel du cluster. Pour de meilleures performances et disponibilité, au prix de lectures potentiellement obsolètes, une requête de plage sérialisable est servie localement sans nécessiter de consensus avec les autres nœuds du cluster.
-* ClésUniquement - ne retourne que les clés, et non les valeurs.
-* ComptageUniquement - ne retourne que le nombre de clés dans la plage.
-* MinRévisionMod - borne inférieure des révisions de modification des clés ; filtre les révisions inférieures.
-* MaxRévisionMod - borne supérieure des révisions de modification des clés ; filtre les révisions supérieures.
-* MinRévisionCréation - borne inférieure des révisions de création des clés ; filtre les révisions inférieures.
-* MaxRévisionCréation - borne supérieure des révisions de création des clés ; filtre les révisions supérieures.
+* Key, Range_End - Plage de clés à récupérer.
+* Limit - nombre maximal de clés retournées pour la requête. Si la limite est définie à 0, elle est traitée comme sans limite.
+* Revision - instantané du magasin clé-valeur à utiliser pour la plage. Si la révision est inférieure ou égale à zéro, la plage concerne l’état le plus récent du magasin clé-valeur. Si la révision est compactée, la réponse renvoie ErrCompacted.
+* Sort_Order - ordre de tri pour les requêtes triées.
+* Sort_Target - champ du magasin clé-valeur à trier.
+* Serializable - active les lectures sérialisables locales au membre pour la requête de plage. Par défaut, Range est linéarisable ; elle reflète le consensus actuel du cluster. Pour de meilleures performances et disponibilité, au prix de lectures potentiellement obsolètes, une requête de plage sérialisable est servie localement sans nécessiter de consensus avec les autres nœuds du cluster.
+* Keys_Only - ne retourne que les clés, et non les valeurs.
+* Count_Only - ne retourne que le nombre de clés dans la plage.
+* Min_Mod_Revision - borne inférieure des révisions de modification des clés ; filtre les révisions inférieures.
+* Max_Mod_Revision - borne supérieure des révisions de modification des clés ; filtre les révisions supérieures.
+* Min_Create_Revision - borne inférieure des révisions de création des clés ; filtre les révisions inférieures.
+* Max_Create_Revision - borne supérieure des révisions de création des clés ; filtre les révisions supérieures.
 
 Le client reçoit un message `RangeResponse` de l'appel `Range` :
 
@@ -184,23 +184,23 @@ message RangeStreamResponse {
 }
 ```
 
-Remplissage des champs par tranches :
+Remplissage des champs par morceaux :
 
-* Kvs - chaque tranche contient une tranche disjointe du résultat. En concaténant les `kvs` de chaque tranche dans l'ordre de leur arrivée, on obtient le même ensemble de clés qu'une unique requête `Range`.
-* Header, More, Count - renseignés uniquement dans la dernière tranche, et uniquement lorsque le flux se termine sans erreur. Les tranches précédentes laissent ces champs à zéro. Appliquer `proto.Merge` sur le `range_response` de chaque tranche donne un `RangeResponse` équivalent à ce que `Range` aurait retourné.
+* Kvs - chaque morceau contient une tranche disjointe du résultat. En concaténant les `kvs` de chaque morceau dans l'ordre de leur arrivée, on obtient le même ensemble de clés qu'une unique requête `Range`.
+* Header, More, Count - renseignés uniquement dans le dernier morceau, et uniquement lorsque le flux se termine sans erreur. Les morceaux précédents laissent ces champs à zéro. Appliquer `proto.Merge` sur le `range_response` de chaque morceau donne un `RangeResponse` équivalent à ce que `Range` aurait retourné.
 
 Si le flux se termine avec une erreur, aucun morceau ne contient de `header`, `more` ou `count` valide.
 
 Chaque morceau du flux est servi en référence à la même révision. Si la requête ne définit pas `Revision`, le serveur capture la dernière révision validée au moment du démarrage du flux et la réutilise pour le reste du flux.
 
-`RangeStream` ne prend pas en charge les ordres de tri personnalisés ni les filtres de révision (`min_mod_revision`, `max_mod_revision`, `min_create_revision`, `max_create_revision`). Les requêtes utilisant l’un ou l’autre retournent `Unimplemented`. `RangeStream` n’est également pas pris en charge par le proxy gRPC etcd.
+`RangeStream` ne prend pas en charge les ordres de tri personnalisés ni les filtres de révision (`min_mod_revision`, `max_mod_revision`, `min_create_revision`, `max_create_revision`). Les requêtes utilisant l’un ou l’autre retournent `Unimplemented`. `RangeStream` n’est pas non plus pris en charge par le proxy gRPC etcd.
 
 Il existe deux méthodes courantes pour consommer un `RangeStream` :
 
 1. **Traitez chaque tranche indépendamment.** Adapté aux scénarios à haute performance où le client souhaite décoder et agir sur les clés au fur et à mesure de leur arrivée, plutôt que de collecter l’ensemble du résultat d’abord. Le client itère les tranches et traite `kvs` de chacune, puis lit `header`, `more` ou `count` de la dernière tranche après la fin propre du flux.
 2. **Assemblez une seule réponse.** Adapté lorsque le client souhaite obtenir un résultat équivalent à une requête unaire `Range`. Le client fusionne chaque `range_response` de tranche en un seul `RangeResponse` (par exemple, à l’aide de `proto.Merge`). Le résultat fusionné contient l’intégralité de `kvs`, ainsi que `header`, `more` et `count` provenant de la dernière tranche. Le client Go fournit `clientv3.GetStreamToGetResponse` comme aide pour ce schéma.
 
-### Mettre {#put}
+### Put {#put}
 
 Les clés sont stockées dans le magasin clé-valeur en émettant un appel à `Put`, qui prend un `PutRequest` :
 
@@ -215,12 +215,12 @@ message PutRequest {
 }
 ```
 
-* Clé - le nom de la clé à insérer dans le magasin clé-valeur.
-* Valeur - la valeur, en octets, à associer à la clé dans le magasin clé-valeur.
-* Bail - l'identifiant de bail à associer à la clé dans le magasin clé-valeur. Une valeur de bail égale à 0 indique l'absence de bail.
-* Préc_Kv - lorsque défini, renvoie les données de la paire clé-valeur précédente à la mise à jour effectuée par cette `Put` requête.
-* Ignorer_Valeur - lorsque défini, met à jour la clé sans modifier sa valeur actuelle. Retourne une erreur si la clé n'existe pas.
-* Ignorer_Bail - lorsque défini, met à jour la clé sans modifier son bail actuel. Retourne une erreur si la clé n'existe pas.
+* Key - le nom de la clé à insérer dans le magasin clé-valeur.
+* Value - la valeur, en octets, à associer à la clé dans le magasin clé-valeur.
+* Lease - l'identifiant de bail à associer à la clé dans le magasin clé-valeur. Une valeur de bail égale à 0 indique l'absence de bail.
+* Prev_Kv - lorsque défini, renvoie les données de la paire clé-valeur précédant la mise à jour effectuée par cette requête `Put`.
+* Ignore_Value - lorsque défini, met à jour la clé sans modifier sa valeur actuelle. Retourne une erreur si la clé n'existe pas.
+* Ignore_Lease - lorsque défini, met à jour la clé sans modifier son bail actuel. Retourne une erreur si la clé n'existe pas.
 
 Le client reçoit un message `PutResponse` de l'appel `Put` :
 
@@ -245,8 +245,8 @@ message DeleteRangeRequest {
 }
 ```
 
-* Clé, PlageFin — Plage de clés à supprimer.
-* ValeurPrécédente — si définie, retourne le contenu des paires clé-valeur supprimées.
+* Key, Range_End - Plage de clés à supprimer.
+* Prev_Kv - si défini, retourne le contenu des paires clé-valeur supprimées.
 
 Le client reçoit un message `DeleteRangeResponse` de l'appel `DeleteRange` :
 
@@ -258,7 +258,7 @@ message DeleteRangeResponse {
 }
 ```
 
-* Supprimé - nombre de clés supprimées.
+* Deleted - nombre de clés supprimées.
 * Prev_Kv - liste de toutes les paires clé-valeur supprimées par l'opération `DeleteRange`.
 
 ### Transaction {#transaction}
@@ -299,10 +299,10 @@ message Compare {
 }
 ```
 
-* Résultat - le type d'opération de comparaison logique (par exemple, égal, inférieur à, etc.).
-* Cible - le champ clé-valeur à comparer. Soit la version de la clé, la révision de création, la révision de modification ou la valeur.
-* Clé - la clé pour la comparaison.
-* Cible_Union - les données spécifiées par l'utilisateur pour la comparaison.
+* Result - le type d'opération de comparaison logique (par exemple, égal, inférieur à, etc.).
+* Target - le champ clé-valeur à comparer. Soit la version de la clé, la révision de création, la révision de modification ou la valeur.
+* Key - la clé pour la comparaison.
+* Target_Union - les données spécifiées par l'utilisateur pour la comparaison.
 
 Après le traitement du bloc de comparaison, la transaction applique un bloc de requêtes. Un bloc est une liste de messages `RequestOp` :
 
@@ -321,7 +321,7 @@ message RequestOp {
 * Request_Put - une `PutRequest`. Les clés doivent être uniques. Elle ne peut pas partager de clés avec d'autres opérations Put ou Delete.
 * Request_Delete_Range - une `DeleteRangeRequest`. Elle ne peut pas partager de clés avec des requêtes Put ou Delete.
 
-Ensemble, une transaction est émise par un appel API `Txn`, qui prend un `TxnRequest` :
+Ces éléments sont réunis dans une transaction émise par un appel API `Txn`, qui prend un `TxnRequest` :
 
 ```protobuf
 message TxnRequest {
@@ -345,8 +345,8 @@ message TxnResponse {
 }
 ```
 
-* Réussi - Indique si `Compare` a été évalué à true ou false.
-* Réponses - Liste des réponses correspondant aux résultats de l'application du bloc `Success` si réussi est true, ou du bloc `Failure` si réussi est false.
+* Succeeded - Indique si `Compare` a été évalué à true ou false.
+* Responses - Liste des réponses correspondant aux résultats de l'application du bloc `Success` si succeeded est true, ou du bloc `Failure` si succeeded est false.
 
 La liste `Responses` correspond aux résultats de la liste `RequestOp` appliquée, chaque réponse étant encodée sous la forme d’un `ResponseOp` :
 
@@ -360,8 +360,8 @@ message ResponseOp {
 }
 ```
 
-Le `ResponseHeader` inclus dans chaque réponse interne ne doit en aucun cas être interprété.
-Si les clients doivent obtenir la dernière révision, ils doivent toujours vérifier le `ResponseHeader` au niveau supérieur dans `TxnResponse`.
+Le `ResponseHeader` inclus dans chaque réponse interne ne devrait en aucun cas être interprété.
+Si les clients ont besoin d'obtenir la dernière révision, ils devraient toujours vérifier le `ResponseHeader` au niveau supérieur dans `TxnResponse`.
 
 
 ## API de surveillance {#watch-api}
@@ -390,7 +390,7 @@ message Event {
 
 ### Surveillance des flux {#watch-streams}
 
-Les surveillance sont des requêtes à exécution longue et utilisent des flux gRPC pour transmettre les données d’événements. Un flux de surveillance est bidirectionnel : le client écrit dans le flux pour établir des surveillance et lit pour recevoir les événements de surveillance. Un seul flux de surveillance peut multiplexer plusieurs surveillance distinctes en étiquetant les événements avec des identifiants propres à chaque surveillance. Cette multiplexion permet de réduire la charge mémoire et le surcroît de connexion sur le cluster central etcd.
+Les surveillances sont des requêtes à exécution longue et utilisent des flux gRPC pour transmettre les données d’événements. Un flux de surveillance est bidirectionnel : le client écrit dans le flux pour établir des surveillances et lit pour recevoir les événements de surveillance. Un seul flux de surveillance peut multiplexer plusieurs surveillances distinctes en étiquetant les événements avec des identifiants propres à chaque surveillance. Cette multiplexion permet de réduire la charge mémoire et le surcroît de connexion sur le cluster central etcd.
 
 Pour en savoir plus sur les garanties relatives aux événements de surveillance, veuillez consulter [garanties de l'API etcd][watch-api-guarantees].
 
@@ -412,11 +412,11 @@ message WatchCreateRequest {
 }
 ```
 
-* Clé, PlageFin - La plage de clés à surveiller.
-* RévisionDébut - Une révision facultative à partir de laquelle commencer la surveillance de manière inclusive. Si elle n'est pas fournie, la diffusion en continu des événements suit la révision indiquée dans l'en-tête de réponse de création de surveillance. L'historique complet des événements peut être surveillé à partir de la dernière révision de compactage.
-* NotificationProgression - Lorsqu'elle est définie, la surveillance reçoit périodiquement une réponse de surveillance sans événements, si aucun événement récent n'est disponible. Cela est utile lorsque les clients souhaitent récupérer un observateur déconnecté à partir d'une révision connue récente. Le serveur etcd détermine la fréquence d'envoi des notifications en fonction de la charge actuelle du serveur.
-* Filtres - Liste des types d'événements à filtrer côté serveur.
-* ValeurPrécédente - Lorsqu'elle est définie, la surveillance reçoit les données clé-valeur antérieures à l'événement. Cela est utile pour connaître les données qui ont été écrasées.
+* Key, Range_End - La plage de clés à surveiller.
+* Start_Revision - Une révision facultative à partir de laquelle commencer la surveillance de manière inclusive. Si elle n'est pas fournie, la diffusion en continu des événements suit la révision indiquée dans l'en-tête de réponse de création de surveillance. L'historique complet des événements peut être surveillé à partir de la dernière révision de compactage.
+* Progress_Notify - Lorsqu'elle est définie, la surveillance reçoit périodiquement une réponse de surveillance sans événements, si aucun événement récent n'est disponible. Cela est utile lorsque les clients souhaitent récupérer un observateur déconnecté à partir d'une révision connue récente. Le serveur etcd détermine la fréquence d'envoi des notifications en fonction de la charge actuelle du serveur.
+* Filters - Liste des types d’événements à exclure côté serveur.
+* Prev_Kv - Lorsqu'il est défini, la surveillance reçoit les données clé-valeur antérieures à l'événement. Cela est utile pour connaître les données qui ont été écrasées.
 
 En réponse à un `WatchCreateRequest` ou si un nouvel événement est détecté pour une surveillance déjà établie, le client reçoit un `WatchResponse` :
 
@@ -433,10 +433,10 @@ message WatchResponse {
 ```
 
 * Watch_ID - l'identifiant de la surveillance correspondant à la réponse.
-* Créé - défini à true si la réponse correspond à une requête de création de surveillance. Le client doit stocker l'identifiant et s'attendre à recevoir des événements pour cette surveillance sur le flux. Tous les événements envoyés à l'observateur créé auront le même watch_id.
-* Annulé - défini à true si la réponse correspond à une requête d'annulation de surveillance. Aucun événement supplémentaire ne sera envoyé à l'observateur annulé.
-* Révision_Compactée - défini à la révision historique minimale disponible dans etcd si un observateur tente de surveiller à une révision compactée. Cela se produit lorsqu'un observateur est créé à une révision compactée ou lorsque l'observateur ne parvient pas à suivre l'évolution du magasin clé-valeur. L'observateur sera annulé ; la création de nouvelles surveillances avec la même start_revision échouera.
-* Événements - une liste d'événements nouveaux, dans l'ordre, correspondant à l'identifiant de surveillance donné.
+* Created - défini à true si la réponse correspond à une requête de création de surveillance. Le client doit stocker l'identifiant et s'attendre à recevoir des événements pour cette surveillance sur le flux. Tous les événements envoyés à l'observateur créé auront le même watch_id.
+* Canceled - défini à true si la réponse correspond à une requête d'annulation de surveillance. Aucun événement supplémentaire ne sera envoyé à l'observateur annulé.
+* Compact_Revision - défini à la révision historique minimale disponible dans etcd si un observateur tente de surveiller à une révision compactée. Cela se produit lorsqu'un observateur est créé à une révision compactée ou lorsque l'observateur ne parvient pas à suivre l'évolution du magasin clé-valeur. L'observateur sera annulé ; la création de nouvelles surveillances avec la même start_revision échouera.
+* Events - une liste d'événements nouveaux, dans l'ordre, correspondant à l'identifiant de surveillance donné.
 
 Si le client souhaite cesser de recevoir des événements pour une surveillance, il émet un `WatchCancelRequest` :
 
@@ -450,13 +450,13 @@ message WatchCancelRequest {
 
 ## API bail {#lease-api}
 
-Les bails sont un mécanisme de détection de la disponibilité des clients. Le cluster accorde des bails avec une durée de vie. Un bail expire si le cluster etcd ne reçoit pas de keepAlive dans le délai TTL imparti.
+Les baux sont un mécanisme de détection de la disponibilité des clients. Le cluster accorde des baux avec une durée de vie. Un bail expire si le cluster etcd ne reçoit pas de keepAlive dans le délai TTL imparti.
 
-Pour lier les bails au magasin clé-valeur, chaque clé peut être associée à au plus un bail. Lorsqu’un bail expire ou est révoqué, toutes les clés associées à ce bail sont supprimées. Chaque clé supprimée génère un événement de suppression dans l'historique des événements.
+Pour lier les baux au magasin clé-valeur, chaque clé peut être associée à au plus un bail. Lorsqu’un bail expire ou est révoqué, toutes les clés associées à ce bail sont supprimées. Chaque clé expirée génère un événement de suppression dans l'historique des événements.
 
-### Obtention des bails {#obtaining-leases}
+### Obtention des baux {#obtaining-leases}
 
-Les bails sont obtenus via l'appel d'API `LeaseGrant`, qui prend un `LeaseGrantRequest` :
+Les baux sont obtenus via l'appel d'API `LeaseGrant`, qui prend un `LeaseGrantRequest` :
 
 ```protobuf
 message LeaseGrantRequest {
@@ -465,7 +465,7 @@ message LeaseGrantRequest {
 }
 ```
 
-* TTL - le délai d'expiration conseillé, en secondes.
+* TTL - le délai d'expiration indicatif, en secondes.
 * ID - l'identifiant demandé pour le bail. Si l'ID est défini à 0, etcd choisira un identifiant.
 
 Le client reçoit un `LeaseGrantResponse` de l'appel `LeaseGrant` :
@@ -489,9 +489,9 @@ message LeaseRevokeRequest {
 
 * ID - l'identifiant du bail à révoquer. Lorsque le bail est révoqué, toutes les clés associées sont supprimées.
 
-### Keep alives {#keep-alives}
+### Renouvellement des baux {#keep-alives}
 
-Les bails sont actualisés à l’aide d’un flux bidirectionnel créé à l’aide de l’appel d’API `LeaseKeepAlive`. Lorsque le client souhaite actualiser un bail, il envoie un `LeaseKeepAliveRequest` sur le flux :
+Les baux sont actualisés à l’aide d’un flux bidirectionnel créé à l’aide de l’appel d’API `LeaseKeepAlive`. Lorsque le client souhaite actualiser un bail, il envoie un `LeaseKeepAliveRequest` sur le flux :
 
 ```protobuf
 message LeaseKeepAliveRequest {

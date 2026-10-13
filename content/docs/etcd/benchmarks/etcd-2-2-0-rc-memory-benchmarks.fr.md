@@ -3,7 +3,7 @@ title: Benchmarking etcd v2.2.0-rc-memory
 weight: 5500
 description: Mesures de performance pour etcd v2.2.0-rc-memory
 categories: [Référence]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/benchmarks/etcd-2-2-0-rc-memory-benchmarks.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/benchmarks/etcd-2-2-0-rc-memory-benchmarks.md"
 aliases: [/etcd/benchmarks/etcd-2-2-0-rc-memory-benchmarks/]
 ---
 
@@ -36,7 +36,7 @@ La longueur du nom de clé est toujours de 64 octets, ce qui constitue une longu
 -  etcd peut utiliser une mémoire maximale si un suiveur est défaillant et que le leader continue d'envoyer des instantanés.
 - `max RSS` est la consommation mémoire maximale enregistrée sur 3 exécutions.
 
-| taille valeur (octets) | nombre de clés | taille données (Mo) | RSS maximal (Mo) | débit maximal RSS/data sur le leader |
+| taille de la valeur (octets) | nombre de clés | taille des données (Mo) | RSS maximal (Mo) | taux maximal RSS/données sur le leader |
 |-------------------------|-----------------|-------------------|------------------|----------------------------------------|
 | 128                     | 50000           | 6                 | 433              | 72x                                    |
 | 128                     | 100000          | 12                | 659              | 54x                                    |
@@ -48,9 +48,9 @@ La longueur du nom de clé est toujours de 64 octets, ce qui constitue une longu
 ## Seuil de taille des données {#data-size-threshold}
 
 - Lorsque etcd atteint le seuil de taille des données, il peut déclencher facilement une élection de leader et rejeter une partie des propositions.
-- Dans la plupart des cas, le cluster etcd fonctionne correctement s'il ne dépasse pas ce seuil. Si le fonctionnement est dégradé en raison d'une ressource insuffisante, réduisez la taille des données.
+- Dans la plupart des cas, le cluster etcd devrait fonctionner correctement s'il ne dépasse pas ce seuil. Si le fonctionnement est dégradé en raison de ressources insuffisantes, réduisez la taille des données.
 
-| taille en octets | limitation sur le nombre de clés | seuil de taille de données suggéré (Mo) | mémoire RSS consommée (Mo) |
+| taille de la valeur (octets) | limitation sur le nombre de clés | seuil de taille de données suggéré (Mo) | mémoire RSS consommée (Mo) |
 |-------------------|----------------------|-----------------------------------|------------------|
 | 128               | 400K                 | 48                                | 2400             |
 | 1024              | 300K                 | 292                               | 6500             |

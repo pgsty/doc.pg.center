@@ -3,11 +3,11 @@ title: Mettre à jour etcd de 3.4 à 3.5
 weight: 6650
 description: "Processus, listes de vérification et notes sur la mise à niveau d'etcd de la version 3.4 à la 3.5"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_5.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_5.md"
 aliases: [/etcd/upgrades/upgrade_3_5/]
 ---
 
-Dans le cas général, la mise à niveau de etcd 3.4 vers 3.5 peut être effectuée sans interruption de service, en mode mise à niveau progressive :
+Dans le cas général, la mise à niveau d’etcd 3.4 vers 3.5 peut être effectuée sans interruption de service, en mode mise à niveau progressive :
  - un par un, arrêtez les processus etcd v3.4 et remplacez-les par des processus etcd v3.5
  - après avoir lancé tous les processus v3.5, les nouvelles fonctionnalités de la version v3.5 sont disponibles pour le cluster
 
@@ -18,16 +18,16 @@ Avant de [lancer la mise à jour](#upgrade-procedure), lisez le reste du présen
 ### Listes de vérification pour la mise à jour {#upgrade-checklists}
 
 > [!WARNING]
-> Lorsque [on migre depuis la version v2 sans données v3](https://github.com/etcd-io/etcd/issues/9480), le serveur etcd v3.2+ provoque une panne lorsqu'il restaure à partir d'un instantané existant mais qu'aucun fichier v3 `ETCD_DATA_DIR/member/snap/db` n'est présent. Cela se produit lorsque le serveur a été migré depuis la version v2 sans données v3 précédentes. Cela empêche également la perte accidentelle de données v3 (par exemple, le fichier `db` pourrait avoir été déplacé). etcd exige que la migration post-v3 ne puisse avoir lieu qu'avec des données v3 présentes. N'effectuez pas la mise à jour vers des versions v3 plus récentes tant que le serveur v3.0 ne contient pas de données v3.
+> Lorsque [on migre depuis la version v2 sans données v3](https://github.com/etcd-io/etcd/issues/9480), le serveur etcd v3.2+ provoque une panne lorsqu'il restaure à partir d'un instantané existant mais qu'aucun fichier v3 `ETCD_DATA_DIR/member/snap/db` n'est présent. Cela se produit lorsque le serveur a été migré depuis la version v2 sans données v3 précédentes. Cela empêche également la perte accidentelle de données v3 (par exemple, le fichier `db` pourrait avoir été déplacé). etcd exige que les opérations après migration vers v3 ne soient effectuées que si des données v3 sont présentes. N'effectuez pas la mise à jour vers des versions v3 plus récentes tant que le serveur v3.0 ne contient pas de données v3.
 
 > [!WARNING]
 > Si votre cluster a l'authentification activée, la mise à niveau progressive à partir d'une version 3.4 ou antérieure n'est pas prise en charge, car la version 3.5 [modifie le format des entrées WAL liées à l'authentification](https://github.com/etcd-io/etcd/pull/11943).
 
-Changements importants dans la version 3.5.
+Changements de rupture mis en évidence dans la version 3.5.
 
 #### Métriques Prometheus `etcd_debugging_mvcc_db_total_size_in_bytes` obsolètes {#deprecated-etcd_debugging_mvcc_db_total_size_in_bytes-prometheus-metrics}
 
-v3.5 a promu les métriques Prometheus `etcd_debugging_mvcc_db_total_size_in_bytes` à `etcd_mvcc_db_total_size_in_bytes`, afin de favoriser la surveillance du stockage etcd. La version v3.5 déconseille complètement `etcd_debugging_mvcc_db_total_size_in_bytes`.
+v3.5 a promu les métriques Prometheus `etcd_debugging_mvcc_db_total_size_in_bytes` à `etcd_mvcc_db_total_size_in_bytes`, afin de favoriser la surveillance du stockage etcd. La version v3.5 déprécie complètement `etcd_debugging_mvcc_db_total_size_in_bytes`.
 
 ```diff
 -etcd_debugging_mvcc_db_total_size_in_bytes
@@ -38,7 +38,7 @@ Notez que les métriques de l'espace de noms `etcd_debugging_*` sont marquées c
 
 #### Métriques Prometheus `etcd_debugging_mvcc_put_total` obsolètes {#deprecated-etcd_debugging_mvcc_put_total-prometheus-metrics}
 
-v3.5 a promu les métriques Prometheus `etcd_debugging_mvcc_put_total` à `etcd_mvcc_put_total`, afin de favoriser la surveillance du stockage etcd. La version v3.5 déconseille complètement `etcd_debugging_mvcc_put_total`.
+v3.5 a promu les métriques Prometheus `etcd_debugging_mvcc_put_total` à `etcd_mvcc_put_total`, afin de favoriser la surveillance du stockage etcd. La version v3.5 déprécie complètement `etcd_debugging_mvcc_put_total`.
 
 ```diff
 -etcd_debugging_mvcc_put_total
@@ -49,7 +49,7 @@ Notez que les métriques de l'espace de noms `etcd_debugging_*` sont marquées c
 
 #### Métriques Prometheus `etcd_debugging_mvcc_delete_total` obsolètes {#deprecated-etcd_debugging_mvcc_delete_total-prometheus-metrics}
 
-v3.5 a promu les métriques Prometheus `etcd_debugging_mvcc_delete_total` à `etcd_mvcc_delete_total`, afin de favoriser la surveillance du stockage etcd. La version v3.5 déconseille complètement `etcd_debugging_mvcc_delete_total`.
+v3.5 a promu les métriques Prometheus `etcd_debugging_mvcc_delete_total` à `etcd_mvcc_delete_total`, afin de favoriser la surveillance du stockage etcd. La version v3.5 déprécie complètement `etcd_debugging_mvcc_delete_total`.
 
 ```diff
 -etcd_debugging_mvcc_delete_total
@@ -60,7 +60,7 @@ Notez que les métriques de l'espace de noms `etcd_debugging_*` sont marquées c
 
 #### Métriques Prometheus `etcd_debugging_mvcc_txn_total` obsolètes {#deprecated-etcd_debugging_mvcc_txn_total-prometheus-metrics}
 
-v3.5 a promu les métriques Prometheus `etcd_debugging_mvcc_txn_total` à `etcd_mvcc_txn_total`, afin de favoriser la surveillance du stockage etcd. La version v3.5 déconseille complètement `etcd_debugging_mvcc_txn_total`.
+v3.5 a promu les métriques Prometheus `etcd_debugging_mvcc_txn_total` à `etcd_mvcc_txn_total`, afin de favoriser la surveillance du stockage etcd. La version v3.5 déprécie complètement `etcd_debugging_mvcc_txn_total`.
 
 ```diff
 -etcd_debugging_mvcc_txn_total
@@ -71,7 +71,7 @@ Notez que les métriques de l'espace de noms `etcd_debugging_*` sont marquées c
 
 #### Métriques Prometheus `etcd_debugging_mvcc_range_total` obsolètes {#deprecated-etcd_debugging_mvcc_range_total-prometheus-metrics}
 
-v3.5 a promu les métriques Prometheus `etcd_debugging_mvcc_range_total` à `etcd_mvcc_range_total`, afin de favoriser la surveillance du stockage etcd. La version v3.5 déconseille complètement `etcd_debugging_mvcc_range_total`.
+v3.5 a promu les métriques Prometheus `etcd_debugging_mvcc_range_total` à `etcd_mvcc_range_total`, afin de favoriser la surveillance du stockage etcd. La version v3.5 déprécie complètement `etcd_debugging_mvcc_range_total`.
 
 ```diff
 -etcd_debugging_mvcc_range_total
@@ -80,11 +80,11 @@ v3.5 a promu les métriques Prometheus `etcd_debugging_mvcc_range_total` à `etc
 
 Notez que les métriques de l'espace de noms `etcd_debugging_*` sont marquées comme expérimentales. Au fur et à mesure que nous améliorons le guide de surveillance, certaines métriques pourraient être promues.
 
-#### Déprécié `etcd --logger capnslog` {#deprecated-etcd---logger-capnslog}
+#### Dépréciation de `etcd --logger capnslog` {#deprecated-etcd---logger-capnslog}
 
-La version 3.4 utilise par défaut `--logger=zap` afin de prendre en charge plusieurs sorties de journalisation et la journalisation structurée.
+La version 3.5 utilise par défaut `--logger=zap` afin de prendre en charge plusieurs sorties de journalisation et la journalisation structurée.
 
-**`etcd --logger=capnslog` a été obsolète à partir de la version 3.5**, et `--logger=zap` est désormais la valeur par défaut.
+**`etcd --logger=capnslog` a été déprécié à partir de la version 3.5**, et `--logger=zap` est désormais la valeur par défaut.
 
 ```diff
 -etcd --logger=capnslog
@@ -96,7 +96,7 @@ La version 3.4 utilise par défaut `--logger=zap` afin de prendre en charge plus
 
 v3.4 ajoute la prise en charge de `etcd --logger=zap` pour la journalisation structurée et plusieurs sorties de journal. La motivation principale est de favoriser la surveillance automatisée d’etcd, plutôt que d’analyser les journaux serveur lorsqu’il commence à présenter des anomalies. Les développements futurs viseront à réduire au minimum la quantité de logs générés par etcd, et à faciliter sa surveillance grâce aux métriques et aux alertes. **`etcd --logger=capnslog` sera déprécié à partir de v3.5.**
 
-#### Obsolète `etcd --log-output` {#deprecated-etcd---log-output}
+#### Dépréciation de `etcd --log-output` {#deprecated-etcd---log-output}
 
 v3.4 a renommé [`etcd --log-output` en `--log-outputs`](https://github.com/etcd-io/etcd/pull/9624) afin de prendre en charge plusieurs sorties de journalisation.
 
@@ -107,7 +107,7 @@ v3.4 a renommé [`etcd --log-output` en `--log-outputs`](https://github.com/etcd
 +etcd --log-outputs=stderr
 ```
 
-#### Déprécié le drapeau `etcd --debug` (maintenant `--log-level=debug`) {#deprecated-etcd---debug-flag-now---log-leveldebug}
+#### Dépréciation de le drapeau `etcd --debug` (maintenant `--log-level=debug`) {#deprecated-etcd---debug-flag-now---log-leveldebug}
 
 **Le drapeau `etcd --debug` a été déprécié.**
 
@@ -116,7 +116,7 @@ v3.4 a renommé [`etcd --log-output` en `--log-outputs`](https://github.com/etcd
 +etcd --log-level debug
 ```
 
-#### Déprécié `etcd --log-package-levels` {#deprecated-etcd---log-package-levels}
+#### Dépréciation de `etcd --log-package-levels` {#deprecated-etcd---log-package-levels}
 
 **Le drapeau `etcd --log-package-levels` pour `capnslog` a été déprécié.**
 
@@ -127,7 +127,7 @@ Maintenant, **`etcd --logger=zap`** est la valeur par défaut.
 +etcd --logger=zap --log-outputs=stderr
 ```
 
-#### Obsolète `[CLIENT-URL]/config/local/log` {#deprecated-client-urlconfiglocallog}
+#### Dépréciation de `[CLIENT-URL]/config/local/log` {#deprecated-client-urlconfiglocallog}
 
 **L'endpoint `/config/local/log` est déprécié à partir de la version 3.5, tout comme le drapeau `etcd --log-package-levels`.**
 
@@ -136,7 +136,7 @@ Maintenant, **`etcd --logger=zap`** est la valeur par défaut.
 -# debug logging enabled
 ```
 
-#### Modifié les points d'accès HTTP de la passerelle gRPC (obsolète `/v3beta`) {#changed-grpc-gateway-http-endpoints-deprecated-v3beta}
+#### Modifier les points d'accès HTTP de la passerelle gRPC (obsolète `/v3beta`) {#changed-grpc-gateway-http-endpoints-deprecated-v3beta}
 
 Avant
 
@@ -160,7 +160,7 @@ curl -L http://localhost:2379/v3/kv/put \
 
 #### Exigences de mise à jour {#upgrade-requirements}
 
-Pour mettre à jour un déploiement etcd existant vers la version 3.5, le cluster en cours d'exécution doit être la version 3.4 ou ultérieure. Si la version est antérieure à 3.4, veuillez [mettre à jour vers la version 3.4](/fr/docs/etcd/upgrades/upgrade_3_3/) avant de procéder à la mise à jour vers la version 3.5.
+Pour mettre à jour un déploiement etcd existant vers la version 3.5, le cluster en cours d'exécution doit être la version 3.4 ou ultérieure. Si la version est antérieure à 3.4, veuillez [mettre à jour vers la version 3.4](/fr/docs/etcd/upgrades/upgrade_3_4/) avant de procéder à la mise à jour vers la version 3.5.
 
 En outre, pour garantir une mise à niveau progressive sans incident, le cluster en cours d'exécution doit être sain. Vérifiez l'état de santé du cluster à l'aide de la commande `etcdctl endpoint health` avant de poursuivre.
 
@@ -168,25 +168,25 @@ En outre, pour garantir une mise à niveau progressive sans incident, le cluster
 
 Avant de mettre à jour etcd, testez toujours les services dépendants d’etcd dans un environnement de préproduction avant de déployer la mise à jour dans l’environnement de production.
 
-Avant de commencer, [téléchargez l'instantané de sauvegarde](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup). Si une erreur survient lors de la mise à jour, il sera possible d'utiliser cette sauvegarde pour [rétrograder](#downgrade) vers la version existante de etcd. Veuillez noter que la `snapshot` commande ne sauvegarde que les données v3. Pour les données v2, consultez [sauvegarde du magasin de données v2](https://etcd.io/docs/v2.3/admin_guide#backing-up-the-datastore).
+Avant de commencer, [téléchargez l'instantané de sauvegarde](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup). Si une erreur survient lors de la mise à jour, il sera possible d'utiliser cette sauvegarde pour [rétrograder](#downgrade) vers la version existante d’etcd. Veuillez noter que la commande `snapshot` ne sauvegarde que les données v3. Pour les données v2, consultez [sauvegarde du magasin de données v2](https://etcd.io/docs/v2.3/admin_guide#backing-up-the-datastore).
 
 #### Versions mixtes {#mixed-versions}
 
-Lors d'une mise à jour, un cluster etcd prend en charge des versions mixtes de membres et fonctionne selon le protocole de la version commune la plus basse. Le cluster n'est considéré comme mis à jour qu'une fois que tous ses membres ont été mis à jour vers la version 3.5. Internement, les membres etcd négocient entre eux afin de déterminer la version globale du cluster, qui contrôle la version signalée et les fonctionnalités prises en charge.
+Lors d'une mise à jour, un cluster etcd prend en charge des versions mixtes de membres et fonctionne selon le protocole de la version commune la plus basse. Le cluster n'est considéré comme mis à jour qu'une fois que tous ses membres ont été mis à jour vers la version 3.5. En interne, les membres etcd négocient entre eux afin de déterminer la version globale du cluster, qui contrôle la version signalée et les fonctionnalités prises en charge.
 
 #### Limitations {#limitations}
 
 Note : Si le cluster ne contient que des données v3 et aucune donnée v2, il n'est pas soumis à cette limitation.
 
-Si le cluster sert un jeu de données v2 dont la taille dépasse 50 Mo, chaque membre nouvellement mis à jour peut prendre jusqu’à deux minutes pour rattraper le cluster existant. Vérifiez la taille d’un instantané récent afin d’estimer la taille totale des données. Autrement dit, il est préférable d’attendre deux minutes entre chaque mise à jour de membre.
+Si le cluster sert un jeu de données v2 dont la taille dépasse 50 Mo, chaque membre nouvellement mis à jour peut prendre jusqu’à deux minutes pour rattraper le cluster existant. Vérifiez la taille d’un instantané récent afin d’estimer la taille totale des données. Autrement dit, le plus sûr est d’attendre deux minutes entre chaque mise à jour de membre.
 
 Pour une taille totale de données bien plus importante, de 100 Mo ou plus, ce processus unique peut prendre encore plus de temps. Les administrateurs de clusters etcd très volumineux de cette ampleur peuvent librement contacter l'équipe [etcd][etcd-contact] avant la mise à jour, et nous serons heureux de leur fournir des conseils sur la procédure.
 
 #### Rétrogradation {#downgrade}
 
-Si tous les membres ont été mis à jour vers la version v3.5, le cluster sera mis à jour vers la v3.5, et un retour en arrière depuis cet état finalisé est **impossible**. Toutefois, si un seul membre reste en version v3.4, le cluster et ses opérations restent "v3.4", et il est possible, depuis cet état de cluster mixte, de revenir à l'utilisation d'une binaire etcd v3.4 sur tous les membres.
+Si tous les membres ont été mis à jour vers la version v3.5, le cluster sera mis à jour vers la v3.5, et un retour en arrière depuis cet état finalisé est **impossible**. Toutefois, si un seul membre reste en version v3.4, le cluster et ses opérations restent "v3.4", et il est possible, depuis cet état de cluster mixte, de revenir à l'utilisation d’un binaire etcd v3.4 sur tous les membres.
 
-Veuillez [télécharger la sauvegarde d'instantané](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup) afin de permettre la désinstallation du cluster, même après son mise à jour complète.
+Veuillez [télécharger la sauvegarde d'instantané](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup) afin de permettre la rétrogradation du cluster, même après sa mise à jour complète.
 
 ### Procédure de mise à jour {#upgrade-procedure}
 
@@ -220,11 +220,11 @@ curl http://localhost:32379/version
 COMMENT
 ```
 
-#### Étape 2 : télécharger la sauvegarde instantané depuis le leader {#step-2-download-snapshot-backup-from-leader}
+#### Étape 2 : télécharger la sauvegarde d'instantané depuis le leader {#step-2-download-snapshot-backup-from-leader}
 
 [Téléchargez l'instantané de sauvegarde](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup) afin de disposer d'une voie de retour en cas de problème.
 
-Le leader etcd est garanti pour avoir les données d'application les plus récentes ; récupérez donc l'instantané depuis le leader :
+Le leader etcd possède toujours les données d'application les plus récentes ; récupérez donc l'instantané depuis le leader :
 
 ```bash
 curl -sL http://localhost:2379/metrics | grep etcd_server_is_leader
@@ -338,7 +338,7 @@ Le nouvel etcd v3.5 publiera ses informations dans le cluster. À ce stade, le c
 
 > `{"level":"info","ts":1526586617.2107732,"caller":"etcdserver/server.go:1770","msg":"published local member to cluster through raft","local-member-id":"7339c4e5e833c029","local-member-attributes":"{Name:s1 ClientURLs:[http://localhost:2379]}","request-path":"/0/members/7339c4e5e833c029/attributes","cluster-id":"7dee9ba76d59ed53","publish-timeout":7}`
 
-Vérifiez que chaque membre, puis l’intégralité du cluster, deviennent sains avec la nouvelle binaire etcd v3.5 :
+Vérifiez que chaque membre, puis l’intégralité du cluster, deviennent sains avec le nouveau binaire etcd v3.5 :
 
 ```bash
 etcdctl endpoint health --endpoints=localhost:2379,localhost:22379,localhost:32379

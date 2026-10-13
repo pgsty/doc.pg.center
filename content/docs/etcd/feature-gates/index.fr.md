@@ -3,14 +3,14 @@ title: Portes fonctionnelles
 weight: 1175
 icon: fa-solid fa-toggle-on
 categories: [Référence]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/feature-gates/index.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/feature-gates/index.md"
 aliases: [/etcd/feature-gates/]
 ---
 
 <!-- overview -->
 Cette page présente un aperçu des diverses options de fonctionnalité qu’un administrateur peut spécifier sur etcd.
 
-Voir [étapes du fonctionnement](#feature-stages) pour une explication des étapes d'une fonctionnalité.
+Voir [stades des fonctionnalités](#feature-stages) pour une explication des stades d'une fonctionnalité.
 
 <!-- body -->
 ## Aperçu {#overview}
@@ -18,9 +18,9 @@ Voir [étapes du fonctionnement](#feature-stages) pour une explication des étap
 Les portes fonctionnelles sont un ensemble de paires clé=valeur qui décrivent les fonctionnalités d'etcd.
 Vous pouvez activer ou désactiver ces fonctionnalités à l'aide du drapeau de ligne de commande `--feature-gates` sur etcd.
 
-etcd vous permet d'activer ou de désactiver un ensemble de fonctionnalités expérimentales.
-Utilisez le drapeau `-h` pour afficher la liste complète des fonctionnalités expérimentales.
-Pour définir les fonctionnalités expérimentales, utilisez le drapeau `--feature-gates` avec une liste de paires fonctionnalité=valeur en ligne de commande :
+etcd vous permet d'activer ou de désactiver un ensemble de portes fonctionnelles.
+Utilisez le drapeau `-h` pour afficher la liste complète des portes fonctionnelles.
+Pour définir les portes fonctionnelles, utilisez le drapeau `--feature-gates` avec une liste de paires fonctionnalité=valeur en ligne de commande :
 
 ```shell
 --feature-gates=...,StopGRPCServiceOnDefrag=true
@@ -32,9 +32,9 @@ Ou spécifiez `feature-gates` dans le fichier de configuration YAML :
 feature-gates: ...,StopGRPCServiceOnDefrag=true
 ```
 
-### Modification de la structure `embed.EtcdServer` {#change-in-embedetcdserver-struct}
+### Modification de la structure `embed.Config` {#change-in-embedetcdserver-struct}
 
-En 3.6, le champ `ServerFeatureGate` est ajouté à `embed.Config`, et doit remplacer les champs expérimentaux ci-dessous :
+En 3.6, le champ `ServerFeatureGate` est ajouté à `embed.Config`, et devrait remplacer les champs expérimentaux ci-dessous :
 
 ```diff
 package embed
@@ -65,15 +65,15 @@ type Config struct {
 
 ### Portes d’activation pour les fonctionnalités Alpha ou Beta {#feature-gates-for-alpha-or-beta-features}
 
-Les tableaux suivants résumé les portes de fonctionnalité que vous pouvez activer sur etcd.
+Les tableaux suivants résument les portes de fonctionnalité que vous pouvez activer sur etcd.
 
 | Fonctionnalité                     | Valeur par défaut | Étape   | Détails                                                                                                                             |
 |------------------------------------|-------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------|
-| CompactHashCheck                   | false             | Alpha   | Active la vérification de corruption des données avant de servir tout trafic client/peer.                                                                 |
-| InitialCorruptCheck                | false             | Alpha   | Active la vérification périodique par le leader des hachages de compactage des suiveurs.                                                                 |
+| CompactHashCheck                   | false             | Alpha   | Active la vérification périodique par le leader des hachages de compactage des suiveurs.                                                                 |
+| InitialCorruptCheck                | false             | Alpha   | Active la vérification de corruption des données avant de servir tout trafic client/pair.                                                                 |
 | LeaseCheckpoint                    | false             | Alpha   | Active l'envoi de points de contrôle réguliers par le leader aux autres membres afin d'éviter la réinitialisation du TTL restant lors d'un changement de leader. |
-| LeaseCheckpointPersist             | false             | Alpha   | Active la persistance du TTL restant afin d'éviter une auto-renouvellement indéfini des bails longs.                                                                 |
-| SetMemberLocalAddr                 | false             | Alpha   | Active l'utilisation de la première adresse locale non boucle spécifiée dans initial-advertise-peer-urls comme adresse locale lors de la communication avec un pair. |
+| LeaseCheckpointPersist             | false             | Alpha   | Active la persistance du TTL restant afin d'éviter un auto-renouvellement indéfini des baux longs.                                                                 |
+| SetMemberLocalAddr                 | false             | Alpha   | Active l'utilisation de la première adresse locale spécifiée ne relevant pas de l'adresse de bouclage dans initial-advertise-peer-urls comme adresse locale lors de la communication avec un pair. |
 | StopGRPCServiceOnDefrag            | false             | Alpha   | Active l'arrêt du service gRPC etcd lors de la défragmentation afin de ne plus servir les requêtes clients.                                                                 |
 | TxnModeWriteWithSharedBuffer       | true              | Beta    | Active l'utilisation d'un tampon partagé lors des opérations de vérification en lecture seule dans les transactions d'écriture.                                                                 |
 
@@ -84,7 +84,7 @@ Les tableaux suivants résumé les portes de fonctionnalité que vous pouvez act
 Une fonctionnalité peut être à l’étape *Alpha*, *Beta*, *GA* ou *Deprecated*.
 Une fonctionnalité *Alpha* signifie :
 
-*  Désactivé par défaut.
+*  Désactivée par défaut.
 *  Peut présenter des bugs. L'activation de cette fonctionnalité peut exposer des bugs.
 *  Le support de cette fonctionnalité peut être supprimé à tout moment sans préavis.
 *  L'API peut évoluer de manière incompatible dans une version logicielle ultérieure sans préavis.
@@ -92,10 +92,10 @@ Une fonctionnalité *Alpha* signifie :
 
 Une fonctionnalité *Beta* signifie :
 
-* Activé par défaut.
+* Activée par défaut.
 * La fonctionnalité est bien testée. Son activation est considérée comme sûre.
 * Le support de la fonctionnalité globale ne sera pas supprimé, bien que les détails puissent évoluer.
-* Recommandé uniquement pour des utilisations non critiques pour l'activité car il existe un risque de découverte de bogues difficiles à détecter grâce à une adoption plus large.
+* Recommandé uniquement pour des utilisations non critiques pour l'activité car il existe un risque de découverte de bogues difficiles à détecter au travers d'une adoption plus large.
 
 > [!NOTE]
 > N'hésitez pas à essayer les fonctionnalités *Beta* et à nous faire part de vos retours !

@@ -3,17 +3,17 @@ title: Modèle de sécurité du transport
 weight: 4125
 description: Sécurisation des données en transit
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/security.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/security.md"
 aliases: [/etcd/op-guide/security/]
 ---
 
-etcd prend en charge le chiffrement TLS automatique ainsi que l’authentification par certificats clients pour les communications clients vers serveur, ainsi que pour les communications entre pairs (serveur vers serveur / cluster). **Notez qu’etcd n’active pas par défaut l’authentification basée sur [RBAC][auth] ni la fonctionnalité d’authentification au niveau du transport afin de réduire les obstacles pour les utilisateurs débutants avec la base de données. En outre, modifier cette valeur par défaut constituerait une modification incompatible pour le projet, établie depuis 2013. Un cluster etcd qui n’active pas les fonctionnalités de sécurité peut exposer ses données à tout client.**
+etcd prend en charge le chiffrement TLS automatique ainsi que l’authentification par certificats clients pour les communications clients vers serveur, ainsi que pour les communications entre pairs (serveur vers serveur / cluster). **Notez qu’etcd n’active pas par défaut l’authentification basée sur [RBAC][auth] ni la fonctionnalité d’authentification au niveau du transport afin de réduire les obstacles pour les utilisateurs débutants avec la base de données. En outre, modifier cette valeur par défaut constituerait une modification incompatible pour le projet, établi depuis 2013. Un cluster etcd qui n’active pas les fonctionnalités de sécurité peut exposer ses données à tout client.**
 
 Pour démarrer, disposez tout d’abord d’un certificat CA et d’une paire de clés signées pour un membre. Il est recommandé de créer et de signer une nouvelle paire de clés pour chaque membre d’un cluster.
 
 Pour plus de commodité, l'outil [cfssl] propose une interface simplifiée pour la génération de certificats, et nous fournissons un exemple utilisant cet outil [ici][tls-setup]. En alternative, consultez ce [guide pour générer des paires de clés auto-signées][tls-guide].
 
-La liste des indicateurs fournie ci-dessous peut ne pas être à jour en raison des modifications en cours de développement. Pour obtenir la liste des indicateurs disponibles, exécutez `etcd --help` ou consultez l’aide de [etcd][].
+La liste des indicateurs fournie ci-dessous peut ne pas être à jour en raison des modifications en cours de développement. Pour obtenir la liste des indicateurs disponibles, exécutez `etcd --help` ou consultez l’aide de [etcd][etcd help].
 
 ## Configuration de base {#basic-setup}
 
@@ -25,7 +25,7 @@ etcd prend plusieurs options de configuration liées aux certificats, soit par d
 
 `--key-file=<path>` : Clé du certificat. Doit être non chiffrée.
 
-`--client-cert-auth` : Lorsque cette option est définie, etcd vérifie que toutes les requêtes HTTPS entrantes incluent un certificat client signé par l'autorité de certification fiable. Les requêtes ne fournissant pas de certificat client valide échoueront. Si [authentification][auth] est activée, le certificat fournit les identifiants pour le nom d'utilisateur indiqué dans le champ Common Name.
+`--client-cert-auth` : Lorsque cette option est définie, etcd vérifie que toutes les requêtes HTTPS entrantes incluent un certificat client signé par l'autorité de certification fiable. Les requêtes ne fournissant pas de certificat client valide échoueront. Si l'[authentification][auth] est activée, le certificat fournit les identifiants pour le nom d'utilisateur indiqué dans le champ Common Name.
 
 `--trusted-ca-file=<path>`: Autorité de certification de confiance.
 
@@ -45,7 +45,7 @@ Les options de pair fonctionnent de la même manière que les options client-ser
 
 `--peer-auto-tls` : Utilisez des certificats auto-signés générés automatiquement pour les connexions TLS entre pairs.
 
-Si un certificat client-serveur ou un certificat pair est fourni, la clé doit également être définie. Toutes ces options de configuration sont également disponibles via les variables d'environnement, `ETCD_CA_FILE`, `ETCD_PEER_CA_FILE` et ainsi de suite.
+Si un certificat client-serveur ou un certificat pair est fourni, la clé doit également être définie. Toutes ces options de configuration sont également disponibles via les variables d'environnement, `ETCD_TRUSTED_CA_FILE`, `ETCD_PEER_TRUSTED_CA_FILE` et ainsi de suite.
 
 **Options communes :**
 
@@ -55,7 +55,7 @@ Si un certificat client-serveur ou un certificat pair est fourni, la clé doit �
 
 `--tls-max-version=<version>` Définit la version TLS maximale prise en charge par etcd. Si ce paramètre n'est pas défini, la version maximale prise en charge par Go sera utilisée.
 
-### Usage de clé et extendedKeyUsage du certificat TLS {#tls-certificate-keyusage-and-extendedkeyusage}
+### keyUsage et extendedKeyUsage du certificat TLS {#tls-certificate-keyusage-and-extendedkeyusage}
 
 Lors de la génération de certificats X.509 pour sécuriser le transport etcd,
 les certificats doivent inclure les champs `keyUsage` et `extendedKeyUsage` appropriés selon leur rôle.
@@ -72,7 +72,7 @@ Le tableau suivant résume les utilisations recommandées pour les rôles de cer
 
 Notes :
 
-- Lorsque `--peer-client-cert-auth` est activé, les certificats de pair sont utilisés pour établir une TLS mutuelle entre les membres etcd, ce qui impose l'utilisation de `serverAuth` et de `clientAuth`.
+- Lorsque `--peer-client-cert-auth` est activé, les certificats de pair sont utilisés pour établir un TLS mutuel entre les membres etcd, ce qui impose l'utilisation de `serverAuth` et de `clientAuth`.
 - Les certificats clients utilisés avec `--client-cert-auth` doivent inclure `clientAuth`.
 
 ## Exemple 1 : Sécurité du transport client-serveur avec HTTPS {#example-1-client-to-server-transport-security-with-https}
@@ -96,7 +96,7 @@ $ curl --cacert /path/to/ca.crt https://127.0.0.1:2379/v2/keys/foo -XPUT -d valu
 La commande doit indiquer que la négociation a réussi. Étant donné que nous utilisons des certificats auto-signés avec notre propre autorité de certification, il est nécessaire de transmettre l'autorité de certification à curl en utilisant l'option `--cacert`. Une autre possibilité consisterait à ajouter le certificat de l'autorité de certification au répertoire des certificats fiables du système (généralement situé dans `/etc/pki/tls/certs` ou `/etc/ssl/certs`).
 
 **Utilisateurs OSX 10.9+** : curl 7.30.0 sous OSX 10.9+ ne comprend pas les certificats passés en ligne de commande.
-Au lieu de cela, importez directement le certificat dummy ca.crt dans la clé, ou ajoutez le drapeau `-k` à curl pour ignorer les erreurs.
+Au lieu de cela, importez directement le certificat de test ca.crt dans le trousseau, ou ajoutez le drapeau `-k` à curl pour ignorer les erreurs.
 Pour tester sans le drapeau `-k`, exécutez `open ./tests/fixtures/ca/ca.crt` et suivez les invites.
 Veuillez supprimer ce certificat après le test !
 Si une solution de contournement existe, faites-le nous savoir.
@@ -159,9 +159,9 @@ Et également la réponse du serveur :
 }
 ```
 
-Spécifiez les suites de chiffrement à bloquer [suites de chiffrement TLS faibles](https://github.com/etcd-io/etcd/issues/8320).
+Spécifiez des suites de chiffrement pour bloquer les [suites de chiffrement TLS faibles](https://github.com/etcd-io/etcd/issues/8320).
 
-L’établissement de la mainshaking TLS échouerait lorsque le client Hello est demandé avec des suites de chiffrement non valides.
+La négociation TLS échoue si le message ClientHello du client propose des suites de chiffrement non valides.
 
 Par exemple :
 
@@ -173,7 +173,7 @@ $ etcd \
   --cipher-suites TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
 ```
 
-Ensuite, les requêtes clientes doivent préciser l’un des suites de chiffrement spécifiées sur le serveur :
+Ensuite, les requêtes clientes doivent préciser l’une des suites de chiffrement spécifiées sur le serveur :
 
 ```bash
 # valid cipher suite
@@ -232,7 +232,7 @@ Les membres etcd formeront un cluster et toutes les communications entre les mem
 > [!WARNING]
 > Lorsque vous spécifiez ClientAutoTLS et PeerAutoTLS, la période de validité du certificat client et du certificat pair automatiquement générés par etcd est limitée à 1 an. Vous pouvez utiliser le drapeau --self-signed-cert-validity pour définir la période de validité du certificat en années.
 
-Dans les cas où une encryption de la communication est requise, mais pas une authentification, etcd prend en charge le chiffrement de ses messages à l’aide de certificats auto-signés générés automatiquement. Cela simplifie le déploiement, car il n’est pas nécessaire de gérer séparément les certificats et les clés en dehors d’etcd.
+Dans les cas où un chiffrement de la communication est requis, mais pas une authentification, etcd prend en charge le chiffrement de ses messages à l’aide de certificats auto-signés générés automatiquement. Cela simplifie le déploiement, car il n’est pas nécessaire de gérer séparément les certificats et les clés en dehors d’etcd.
 Configurez etcd pour utiliser des certificats auto-signés pour les connexions clientes et entre pairs à l’aide des indicateurs `--auto-tls` et `--peer-auto-tls` :
 
 ```sh
@@ -269,6 +269,9 @@ Depuis la version 3.1.0 (sauf 3.2.9), le démarrage par découverte SRV authenti
 
 ## Notes sur le proxy etcd {#notes-for-etcd-proxy}
 
+> [!NOTE]
+> Cette section décrit l’ancien proxy v2, qui a été supprimé. Pour etcd 3.7, utilisez le [proxy gRPC v3](/fr/docs/etcd/op-guide/grpc_proxy/).
+
 Le proxy etcd termine le TLS provenant de son client si la connexion est sécurisée, puis utilise sa propre clé/certificat spécifiés dans `--peer-key-file` et `--peer-cert-file` pour communiquer avec les membres etcd.
 
 Le proxy communique avec les membres etcd à l’aide des `--advertise-client-urls` et `--advertise-peer-urls` d’un membre donné. Il achemine les requêtes clientes vers les URL de client annoncées des membres etcd, et synchronise la configuration initiale du cluster à l’aide des URL de pair annoncées des membres etcd.
@@ -277,7 +280,7 @@ Lorsqu'une authentification client est activée pour un membre etcd, l'administr
 
 ## Notes sur l'authentification TLS {#notes-for-tls-authentication}
 
-Depuis [v3.2.0](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.2.md#v320-2017-06-09), [les certificats TLS sont rechargés à chaque connexion client](https://github.com/etcd-io/etcd/pull/7829). Cela est utile pour remplacer des certificats expirés sans arrêter les serveurs etcd ; cela peut être réalisé en écrasant les anciens certificats par de nouveaux. Le rechargement des certificats à chaque connexion ne devrait pas entraîner un surcroît de charge important, mais pourrait être amélioré à l’avenir grâce à une couche de mise en mémoire tampon. Des exemples de tests sont disponibles [ici](https://github.com/etcd-io/etcd/blob/b041ce5d514a4b4aaeefbffb008f0c7570a18986/integration/v3_grpc_test.go#L1601-L1757).
+Depuis [v3.2.0](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.2.md#v320-2017-06-09), [les certificats TLS sont rechargés à chaque connexion client](https://github.com/etcd-io/etcd/pull/7829). Cela est utile pour remplacer des certificats expirés sans arrêter les serveurs etcd ; cela peut être réalisé en écrasant les anciens certificats par de nouveaux. Le rechargement des certificats à chaque connexion ne devrait pas entraîner un surcroît de charge important, mais pourrait être amélioré à l’avenir grâce à une couche de cache. Des exemples de tests sont disponibles [ici](https://github.com/etcd-io/etcd/blob/b041ce5d514a4b4aaeefbffb008f0c7570a18986/integration/v3_grpc_test.go#L1601-L1757).
 
 Depuis [v3.2.0](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.2.md#v320-2017-06-09), [le serveur refuse les certificats pairs entrants comportant une IP incorrecte `SAN`](https://github.com/etcd-io/etcd/pull/7687). Par exemple, si le certificat pair contient des adresses IP dans le champ Nom alternatif du sujet (SAN), le serveur authentifie un pair uniquement lorsque l'adresse IP distante correspond à l'une de ces adresses. Ceci vise à empêcher les points de terminaison non autorisés de rejoindre le cluster. Par exemple, la demande de signature de certificat (CSR) du pair B (avec `cfssl`) est :
 
@@ -303,9 +306,9 @@ Depuis [v3.2.0](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.
 }
 ```
 
-Lorsque l'adresse IP réelle du pair B est `10.138.0.2`, et non `10.138.0.27`. Lorsque le pair B tente de rejoindre le cluster, le pair A rejette B avec l'erreur `x509: certificate is valid for 10.138.0.27, not 10.138.0.2`, car l'adresse IP distante de B ne correspond pas à celle figurant dans le champ Nom alternatif (SAN).
+L’adresse IP réelle du pair B est `10.138.0.2`, et non `10.138.0.27`. Lorsque le pair B tente de rejoindre le cluster, le pair A rejette B avec l'erreur `x509: certificate is valid for 10.138.0.27, not 10.138.0.2`, car l'adresse IP distante de B ne correspond pas à celle figurant dans le champ Nom alternatif (SAN).
 
-Depuis [v3.2.0](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.2.md#v320-2017-06-09), [server résout le TLS `DNSNames` lors de la vérification `SAN`](https://github.com/etcd-io/etcd/pull/7767). Par exemple, si le certificat pair ne contient que des noms DNS (aucune adresse IP) dans le champ Nom alternatif du sujet (SAN), le serveur authentifie un pair uniquement lorsque les résolutions inverses (`dig b.com`) de ces noms DNS correspondent à l'adresse IP distante. Par exemple, la demande de signature de certificat (CSR) du pair B (avec `cfssl`) est :
+Depuis [v3.2.0](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.2.md#v320-2017-06-09), [le serveur résout le TLS `DNSNames` lors de la vérification `SAN`](https://github.com/etcd-io/etcd/pull/7767). Par exemple, si le certificat pair ne contient que des noms DNS (aucune adresse IP) dans le champ Nom alternatif du sujet (SAN), le serveur authentifie un pair uniquement lorsque les résolutions directes (`dig b.com`) de ces noms DNS correspondent à l'adresse IP distante. Par exemple, la demande de signature de certificat (CSR) du pair B (avec `cfssl`) est :
 
 ```json
 {
@@ -315,7 +318,7 @@ Depuis [v3.2.0](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.
   ],
 ```
 
-Lorsque l'adresse IP distante du pair B est `10.138.0.2`. Lorsque le pair B tente de rejoindre le cluster, le pair A recherche l'hôte entrant `b.com` afin d'obtenir la liste des adresses IP (par exemple `dig b.com`). Il rejette B si la liste ne contient pas l'adresse IP `10.138.0.2`, avec l'erreur `tls: 10.138.0.2 does not match any of DNSNames ["b.com"]`.
+L’adresse IP distante du pair B est `10.138.0.2`. Lorsque le pair B tente de rejoindre le cluster, le pair A recherche l'hôte entrant `b.com` afin d'obtenir la liste des adresses IP (par exemple `dig b.com`). Il rejette B si la liste ne contient pas l'adresse IP `10.138.0.2`, avec l'erreur `tls: 10.138.0.2 does not match any of DNSNames ["b.com"]`.
 
 Depuis [v3.2.2](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.2.md#v322-2017-07-07), [le serveur accepte les connexions si l'IP correspond, sans vérifier les entrées DNS](https://github.com/etcd-io/etcd/pull/8223). Par exemple, si le certificat du pair contient des adresses IP et des noms DNS dans le champ Nom alternatif du sujet (SAN), et que l'adresse IP distante correspond à l'une de ces adresses IP, le serveur accepte simplement la connexion sans vérifier davantage les noms DNS. Par exemple, la demande de signature de certificat (CSR) du pair B (avec `cfssl`) est :
 
@@ -328,9 +331,9 @@ Depuis [v3.2.2](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.
   ],
 ```
 
-Lorsque l'adresse IP distante du pair B est `10.138.0.2` et que `invalid.domain` est un hôte non valide. Lorsque le pair B tente de rejoindre le cluster, le pair A authentifie B avec succès, car le champ Nom alternatif du sujet (SAN) contient une adresse IP correspondante valide. Pour plus de détails, consultez [issue#8206](https://github.com/etcd-io/etcd/issues/8206).
+L’adresse IP distante du pair B est `10.138.0.2` et `invalid.domain` est un hôte non valide. Lorsque le pair B tente de rejoindre le cluster, le pair A authentifie B avec succès, car le champ Nom alternatif du sujet (SAN) contient une adresse IP correspondante valide. Pour plus de détails, consultez [issue#8206](https://github.com/etcd-io/etcd/issues/8206).
 
-Depuis [v3.2.5](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.2.md#v325-2017-08-04), [server prend en charge la recherche inverse sur les noms DNS avec caractères génériques `SAN`](https://github.com/etcd-io/etcd/pull/8281). Par exemple, si le certificat pair ne contient que des noms DNS (aucune adresse IP) dans le champ Subject Alternative Name (SAN), le serveur effectue d'abord une recherche inverse de l'adresse IP distante pour obtenir la liste des noms associés à cette adresse (par exemple, `nslookup IPADDR`). Ensuite, il accepte la connexion si ces noms correspondent à un nom du certificat pair (par correspondance exacte ou avec caractère générique). Si aucune correspondance n'est trouvée, le serveur effectue une recherche directe pour chaque entrée DNS du certificat pair (par exemple, recherche de `example.default.svc` lorsque l'entrée est `*.example.default.svc`), et accepte la connexion uniquement si les adresses résolues par l'hôte correspondent à l'adresse IP distante du certificat pair. Par exemple, la demande de signature de certificat (CSR) du pair B (avec `cfssl`) est :
+Depuis [v3.2.5](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.2.md#v325-2017-08-04), [le serveur prend en charge la recherche inverse sur les noms DNS avec caractères génériques `SAN`](https://github.com/etcd-io/etcd/pull/8281). Par exemple, si le certificat pair ne contient que des noms DNS (aucune adresse IP) dans le champ Nom alternatif du sujet (SAN), le serveur effectue d'abord une recherche inverse de l'adresse IP distante pour obtenir la liste des noms associés à cette adresse (par exemple, `nslookup IPADDR`). Ensuite, il accepte la connexion si ces noms correspondent à un nom du certificat pair (par correspondance exacte ou avec caractère générique). Si aucune correspondance n'est trouvée, le serveur effectue une recherche directe pour chaque entrée DNS du certificat pair (par exemple, recherche de `example.default.svc` lorsque l'entrée est `*.example.default.svc`), et accepte la connexion uniquement si les adresses résolues par l'hôte correspondent à l'adresse IP distante du certificat pair. Par exemple, la demande de signature de certificat (CSR) du pair B (avec `cfssl`) est :
 
 ```json
 {
@@ -341,9 +344,9 @@ Depuis [v3.2.5](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.
   ],
 ```
 
-Lorsque l'adresse IP distante du pair B est `10.138.0.2`. Lorsque le pair B tente de rejoindre le cluster, le pair A effectue une recherche inverse de l'IP `10.138.0.2` afin d'obtenir la liste des noms d'hôte. Il effectue ensuite une correspondance exacte ou avec caractère générique entre les noms d'hôte et les noms DNS du certificat du pair B dans le champ Nom alternatif du sujet (SAN). Si aucune recherche inverse ni forward n'a abouti, une erreur `"tls: "10.138.0.2" does not match any of DNSNames ["*.example.default.svc","*.example.default.svc.cluster.local"]` est renvoyée. Pour plus de détails, voir [issue#8268](https://github.com/etcd-io/etcd/issues/8268).
+L’adresse IP distante du pair B est `10.138.0.2`. Lorsque le pair B tente de rejoindre le cluster, le pair A effectue une recherche inverse de l'IP `10.138.0.2` afin d'obtenir la liste des noms d'hôte. Il effectue ensuite une correspondance exacte ou avec caractère générique entre les noms d'hôte et les noms DNS du certificat du pair B dans le champ Nom alternatif du sujet (SAN). Si aucune recherche inverse ni directe n'a abouti, une erreur `"tls: "10.138.0.2" does not match any of DNSNames ["*.example.default.svc","*.example.default.svc.cluster.local"]` est renvoyée. Pour plus de détails, voir [issue#8268](https://github.com/etcd-io/etcd/issues/8268).
 
-[v3.3.0](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.3.md) ajoute le drapeau [`etcd --peer-cert-allowed-cn`](https://github.com/etcd-io/etcd/pull/8616) pour prendre en charge l'authentification [CN (Common Name)-based pour les connexions inter-membres](https://github.com/etcd-io/etcd/issues/8262). Le démarrage TLS de Kubernetes consiste à générer des certificats dynamiques pour les membres et autres composants du système (par exemple, serveur API, kubelet, etc.). Maintenir des autorités de certification (CA) différentes pour chaque composant permet un contrôle d'accès plus strict sur le cluster etcd, mais peut s'avérer fastidieux. Lorsque le drapeau --peer-cert-allowed-cn est spécifié, un nœud ne peut se joindre qu'avec un nom commun correspondant, même avec des CA partagées. La correspondance est une comparaison exacte de chaîne par rapport au champ Common Name (CN) du certificat — aucune prise en charge des caractères génériques ou des correspondances par préfixe. Pour le filtrage basé sur le nom d'hôte utilisant --peer-cert-allowed-hostname ou --client-cert-allowed-hostname, la correspondance utilise x509.Certificate.VerifyHostname() de Go, qui prend en charge à la fois les noms d'hôte exacts et les entrées génériques (par exemple, *.example.com). Par exemple, chaque membre d'un cluster à 3 nœuds est configuré avec des demandes de signature de certificat (CSRs) (avec cfssl) comme suit :
+[v3.3.0](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.3.md) ajoute le drapeau [`etcd --peer-cert-allowed-cn`](https://github.com/etcd-io/etcd/pull/8616) pour prendre en charge [l'authentification basée sur le CN (Common Name) pour les connexions inter-membres](https://github.com/etcd-io/etcd/issues/8262). Le démarrage TLS de Kubernetes consiste à générer des certificats dynamiques pour les membres et autres composants du système (par exemple, serveur API, kubelet, etc.). Maintenir des autorités de certification (CA) différentes pour chaque composant permet un contrôle d'accès plus strict sur le cluster etcd, mais peut s'avérer fastidieux. Lorsque le drapeau --peer-cert-allowed-cn est spécifié, un nœud ne peut se joindre qu'avec un nom commun correspondant, même avec des CA partagées. La correspondance est une comparaison exacte de chaîne par rapport au champ Common Name (CN) du certificat — aucune prise en charge des caractères génériques ou des correspondances par préfixe. Pour le filtrage basé sur le nom d'hôte utilisant --peer-cert-allowed-hostname ou --client-cert-allowed-hostname, la correspondance utilise x509.Certificate.VerifyHostname() de Go, qui prend en charge à la fois les noms d'hôte exacts et les entrées génériques (par exemple, *.example.com). Par exemple, chaque membre d'un cluster à 3 nœuds est configuré avec des demandes de signature de certificat (CSRs) (avec cfssl) comme suit :
 
 
 
@@ -416,7 +419,7 @@ I | embed: serving client requests on 127.0.0.1:2379
   ],
 ```
 
-En Go, le serveur appelle `(*tls.Config).GetCertificate` pour recharger le TLS uniquement si le champ `(*tls.Config).Certificates` du serveur n'est pas vide, ou si `(*tls.ClientHelloInfo).ServerName` n'est pas vide et que le client fournit un SNI valide. Auparavant, etcd remplissait toujours `(*tls.Config).Certificates` lors de la première négociation TLS client, en le rendant non vide. Le client était donc toujours censé fournir un SNI correspondant afin de réussir la vérification TLS et de déclencher le rechargement des ressources TLS via `(*tls.Config).GetCertificate`.
+En Go, le serveur appelle `(*tls.Config).GetCertificate` pour recharger le TLS uniquement si le champ `(*tls.Config).Certificates` du serveur est vide, ou si `(*tls.ClientHelloInfo).ServerName` n'est pas vide et que le client fournit un SNI valide. Auparavant, etcd remplissait toujours `(*tls.Config).Certificates` lors de la première négociation TLS client, en le rendant non vide. Le client était donc toujours censé fournir un SNI correspondant afin de réussir la vérification TLS et de déclencher le rechargement des ressources TLS via `(*tls.Config).GetCertificate`.
 
 Toutefois, un certificat dont le champ SAN ne contient [aucun nom de domaine, mais uniquement des adresses IP](https://github.com/etcd-io/etcd/issues/9541) demanderait `*tls.ClientHelloInfo` avec un champ `ServerName` vide, ce qui empêcherait le rechargement TLS lors de la première négociation TLS ; cela pose problème lorsque des certificats expirés doivent être remplacés en ligne.
 
@@ -426,14 +429,14 @@ Maintenant, `(*tls.Config).Certificates` est créé vide lors de la première po
 
 L'indicateur `etcd --host-whitelist` spécifie les noms d'hôte acceptables provenant des requêtes HTTP clients. La politique d'origine des clients protège contre les attaques de type [« rebinding DNS »](https://en.wikipedia.org/wiki/DNS_rebinding) ciblant des serveurs etcd non sécurisés. En effet, tout site web peut simplement créer un nom DNS autorisé et rediriger ce nom vers `"localhost"` (ou toute autre adresse). Ainsi, tous les points de terminaison HTTP du serveur etcd écoutant sur `"localhost"` deviennent accessibles, exposant le serveur aux attaques de rebinding DNS. Pour plus de détails, consultez [CVE-2018-5702](https://bugs.chromium.org/p/project-zero/issues/detail?id=1447#c2).
 
-Politique d’origine du client fonctionne comme suit :
+La politique d’origine du client fonctionne comme suit :
 
 1. Si la connexion cliente est sécurisée via HTTPS, autoriser n'importe quel nom d'hôte.
 2. Si la connexion cliente n'est pas sécurisée et que `"HostWhitelist"` n'est pas vide, autoriser uniquement les requêtes HTTP dont le champ Host figure dans la liste blanche.
 
 Notez que la politique d’origine du client est appliquée, qu’une authentification soit activée ou non, pour des contrôles plus stricts.
 
-Par défaut, `etcd --host-whitelist` et `embed.Config.HostWhitelist` sont définis sur *vide* afin d'autoriser tous les noms d'hôte. Notez qu'en spécifiant des noms d'hôte, les adresses de boucle locale ne sont pas ajoutées automatiquement. Pour autoriser les interfaces de boucle locale, ajoutez-les manuellement à la liste blanche (par exemple `"localhost"`, `"127.0.0.1"`, etc.).
+Par défaut, `etcd --host-whitelist` et `embed.Config.HostWhitelist` ont pour valeur par défaut `*`, ce qui autorise tous les noms d’hôte ; une liste blanche vide les autorise également tous. Notez qu'en spécifiant des noms d'hôte, les adresses de boucle locale ne sont pas ajoutées automatiquement. Pour autoriser les interfaces de boucle locale, ajoutez-les manuellement à la liste blanche (par exemple `"localhost"`, `"127.0.0.1"`, etc.).
 
 ## Questions fréquemment posées {#frequently-asked-questions}
 
@@ -444,7 +447,7 @@ Pour utiliser la clé publique du certificat à des fins d'authentification clie
 
 Voici comment procéder :
 
-Ajoutez la section suivante à OpenSSL.cnf :
+Ajoutez la section suivante à openssl.cnf :
 
 ```
 [ ssl_client ]
@@ -459,17 +462,17 @@ Lors de la création du certificat, veillez à le référencer dans le drapeau `
 $ openssl ca -config openssl.cnf -policy policy_anything -extensions ssl_client -out certs/machine.crt -infiles machine.csr
 ```
 
-### Avec l'authentification par certificat pair, j'obtiens « le certificat est valide pour 127.0.0.1, pas pour $MY_IP » {#with-peer-certificate-authentication-i-receive-certificate-is-valid-for-127001-not-my_ip}
+### Avec l'authentification par certificat pair, j'obtiens « certificate is valid for 127.0.0.1, not $MY_IP » {#with-peer-certificate-authentication-i-receive-certificate-is-valid-for-127001-not-my_ip}
 Assurez-vous de signer les certificats avec un nom sujet correspondant à l'adresse IP publique du membre. L'outil `etcd-ca`, par exemple, propose une option `--ip=` pour sa commande `new-cert`.
 
-Le certificat doit être signé pour le nom DNS complet (FQDN) du membre dans son champ « Sujet », utilisez les noms alternatifs du sujet (SAN courts, IP) pour ajouter l'adresse IP. L'outil `etcd-ca` propose l'option `--domain=` pour sa commande `new-cert`, et OpenSSL peut également générer [it][alt-name].
+Le certificat doit être signé pour le nom DNS complet (FQDN) du membre dans son champ « Sujet », utilisez les noms alternatifs du sujet pour les adresses IP (IP SAN) pour ajouter l'adresse IP. L'outil `etcd-ca` propose l'option `--domain=` pour sa commande `new-cert`, et OpenSSL peut également [le faire][alt-name].
 
 ### etcd chiffre-t-il les données stockées sur les disques ? {#does-etcd-encrypt-data-stored-on-disk-drives}
-No. etcd ne chiffre pas les données clé/valeur stockées sur les disques. Si un utilisateur doit chiffrer les données stockées dans etcd, plusieurs options sont disponibles :
+Non. etcd ne chiffre pas les données clé/valeur stockées sur les disques. Si un utilisateur doit chiffrer les données stockées dans etcd, plusieurs options sont disponibles :
 * Faire chiffrer et déchiffrer les données par les applications clientes
 * Utiliser une fonctionnalité du système de stockage sous-jacent pour chiffrer les données stockées, comme [dm-crypt]
 
-### J'ai un avertissement dans les journaux indiquant que « le répertoire X existe sans les permissions recommandées -rwx------ » {#im-seeing-a-log-warning-that-directory-x-exist-without-recommended-permission--rwx}
+### J'ai un avertissement dans les journaux indiquant que « directory X exist without recommended permission -rwx------ » {#im-seeing-a-log-warning-that-directory-x-exist-without-recommended-permission--rwx}
 Lorsque etcd crée certains répertoires nouveaux, il définit les permissions des fichiers à 700 afin de limiter au maximum l'accès non autorisé. Toutefois, si l'utilisateur a déjà créé un répertoire selon ses préférences, etcd utilise ce répertoire existant et affiche un message d'avertissement si les permissions diffèrent de 700.
 
 [alt-name]: http://wiki.cacert.org/FAQ/subjectAltName
