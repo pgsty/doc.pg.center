@@ -4,7 +4,7 @@ weight: 1350
 description: Метрики для мониторинга и отладки в реальном времени
 icon: fa-solid fa-chart-line
 categories: [Справочник]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/metrics/_index.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/metrics/_index.md"
 aliases: [/etcd/metrics/]
 ---
 
@@ -98,7 +98,7 @@ aliases: [/etcd/metrics/]
 
 | Имя                                       | Описание                                                     | Тип       |
 |-------------------------------------------|--------------------------------------------------------------|-----------|
-| snapshot_save_total_duration_seconds      | Общее распределение задержки вызова сохранения снимком        | Histogram |
+| snapshot_save_total_duration_seconds      | Распределение общей длительности сохранения снимка        | Histogram |
 
 Аномально большая длительность создания снимка (`snapshot_save_total_duration_seconds`) указывает на проблемы с диском и может сделать кластер нестабильным.
 

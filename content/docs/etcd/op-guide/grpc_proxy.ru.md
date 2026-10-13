@@ -3,7 +3,7 @@ title: Прокси gRPC
 weight: 4350
 description: Не сохраняющий состояние обратный прокси etcd, работающий на уровне gRPC
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/grpc_proxy.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/grpc_proxy.md"
 aliases: [/etcd/op-guide/grpc_proxy/]
 ---
 
@@ -74,7 +74,7 @@ heartbeat L1 |      | heartbeat L2  |
 
 ## Защита от злоупотребляющих клиентов {#abusive-clients-protection}
 
-Прокси gRPC кэширует ответы на запросы, когда это не нарушает требований согласованности. Так сервер etcd можно защитить от злоупотребляющих клиентов с плотными циклами for.
+Прокси gRPC кэширует ответы на запросы, когда это не нарушает требований согласованности. Так сервер etcd можно защитить от злоупотребляющих клиентов с циклами for без пауз.
 
 ## Запуск прокси gRPC etcd {#start-etcd-grpc-proxy}
 

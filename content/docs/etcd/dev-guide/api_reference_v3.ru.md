@@ -3,7 +3,7 @@ title: Справочник API
 weight: 3800
 description: "Полный справочник API etcd v3"
 categories: [Справочник]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/api_reference_v3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/api_reference_v3.md"
 aliases: [/etcd/dev-guide/api_reference_v3/]
 ---
 
@@ -22,7 +22,7 @@ aliases: [/etcd/dev-guide/api_reference_v3/]
 | UserList | AuthUserListRequest | AuthUserListResponse | UserList получает список всех пользователей. |
 | UserDelete | AuthUserDeleteRequest | AuthUserDeleteResponse | UserDelete удаляет указанного пользователя. |
 | UserChangePassword | AuthUserChangePasswordRequest | AuthUserChangePasswordResponse | UserChangePassword изменяет пароль указанного пользователя. |
-| UserGrantRole | AuthUserGrantRoleRequest | AuthUserGrantRoleResponse | UserGrant предоставляет указанному пользователю роль. |
+| UserGrantRole | AuthUserGrantRoleRequest | AuthUserGrantRoleResponse | UserGrantRole предоставляет указанному пользователю роль. |
 | UserRevokeRole | AuthUserRevokeRoleRequest | AuthUserRevokeRoleResponse | UserRevokeRole отзывает роль указанного пользователя. |
 | RoleAdd | AuthRoleAddRequest | AuthRoleAddResponse | RoleAdd добавляет новую роль. Имя роли не может быть пустым. |
 | RoleGet | AuthRoleGetRequest | AuthRoleGetResponse | RoleGet получает подробные сведения о роли. |
@@ -93,7 +93,7 @@ aliases: [/etcd/dev-guide/api_reference_v3/]
 | Поле | Описание | Тип |
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
-| action | action — тип отправляемого запроса аварийного сигнала. Действие может GET состояния сигналов, ACTIVATE сигнал или DEACTIVATE активированный сигнал. | AlarmAction |
+| action | action — тип отправляемого запроса аварийного сигнала. Действие может запрашивать состояния сигналов (GET), активировать сигнал (ACTIVATE) или отключать активированный сигнал (DEACTIVATE). | AlarmAction |
 | memberID | memberID — идентификатор участника, связанного с сигналом. Если memberID равен 0, запрос относится ко всем участникам. | uint64 |
 | alarm | alarm — тип аварийного сигнала, рассматриваемого запросом. | AlarmType |
 
@@ -257,7 +257,7 @@ aliases: [/etcd/dev-guide/api_reference_v3/]
 | (versionpb.etcd_version_msg) |  | option |
 | name | name — имя пользователя, пароль которого изменяется. | string |
 | password | password — новый пароль пользователя. Обратите внимание: это поле будет удалено на уровне API. | string |
-| hashedPassword | hashedPassword — новый пароль пользователя. Обратите внимание: это поле будет инициализировано на уровне API. | string |
+| hashedPassword | hashedPassword — новый хешированный пароль пользователя. Обратите внимание: это поле будет инициализировано на уровне API. | string |
 
 ##### Сообщение `AuthUserChangePasswordResponse` (api/etcdserverpb/rpc.proto) {#message-authuserchangepasswordresponse-apietcdserverpbrpcproto}
 
@@ -407,7 +407,7 @@ CompactionRequest компактизирует хранилище ключей �
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | key | key — первый удаляемый ключ диапазона. | bytes |
-| range_end | range_end — ключ, следующий за последним удаляемым ключом диапазона [key, range_end). Если range_end не задан, диапазон содержит только аргумент key. Если range_end на один бит больше заданного ключа, диапазон содержит все ключи с префиксом заданного ключа. Если range_end равен '\0', диапазон содержит все ключи, большие либо равные аргументу key. | bytes |
+| range_end | range_end — ключ, следующий за последним удаляемым ключом диапазона [key, range_end). Если range_end не задан, диапазон содержит только аргумент key. Если range_end равен заданному ключу плюс один, диапазон содержит все ключи с префиксом заданного ключа. Если range_end равен '\0', диапазон содержит все ключи, большие либо равные аргументу key. | bytes |
 | prev_kv | Если prev_kv задан, etcd получает предыдущие пары «ключ — значение» перед удалением. Они возвращаются в ответе удаления. | bool |
 
 ##### Сообщение `DeleteRangeResponse` (api/etcdserverpb/rpc.proto) {#message-deleterangeresponse-apietcdserverpbrpcproto}
@@ -431,7 +431,7 @@ CompactionRequest компактизирует хранилище ключей �
 | Поле | Описание | Тип |
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
-| action | action — тип отправляемого запроса понижения версии. Действие может VALIDATE целевую версию, DOWNGRADE версию кластера или CANCEL текущую задачу понижения. | DowngradeAction |
+| action | action — тип отправляемого запроса понижения версии. Действие может проверять целевую версию (VALIDATE), понижать версию кластера (DOWNGRADE) или отменять текущую задачу понижения (CANCEL). | DowngradeAction |
 | version | version — целевая версия понижения. | string |
 
 ##### Сообщение `DowngradeResponse` (api/etcdserverpb/rpc.proto) {#message-downgraderesponse-apietcdserverpbrpcproto}
@@ -790,7 +790,7 @@ DowngradeVersionTestRequest используется только для тес�
 | header | header содержит текущие сведения о хранилище ключей и значений. Первый заголовок в потоке снимка указывает момент времени снимка. | ResponseHeader |
 | remaining_bytes | remaining_bytes — количество байтов blob, отправляемых после этого сообщения | uint64 |
 | blob | blob содержит следующий фрагмент снимка в потоке снимка. | bytes |
-| version | локальная версия сервера, создавшего снимок. В кластере с двоичными файлами разных версий каждый участник может возвращать иной результат. Указывает, какую версию сервера etcd следует использовать при восстановлении снимка. | string |
+| version | Версия схемы хранилища, записанная в снимке. Она считывается из локального бэкенда участника и может отличаться от версии его двоичного файла. Указывает, какая версия хранилища etcd должна поддерживаться при восстановлении снимка. | string |
 
 ##### Сообщение `StatusRequest` (api/etcdserverpb/rpc.proto) {#message-statusrequest-apietcdserverpbrpcproto}
 
@@ -804,7 +804,7 @@ DowngradeVersionTestRequest используется только для тес�
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
-| version | version — версия протокола кластера, используемая отвечающим участником. | string |
+| version | version — версия двоичного файла отвечающего участника etcd. Версия схемы хранилища отдельно сообщается в storageVersion. | string |
 | dbSize | dbSize — физически выделенный размер базы данных бэкенда отвечающего участника в байтах. | int64 |
 | leader | leader — идентификатор участника, которого отвечающий участник считает текущим лидером. | uint64 |
 | raftIndex | raftIndex — текущий зафиксированный индекс raft отвечающего участника. | uint64 |
@@ -850,7 +850,7 @@ DowngradeVersionTestRequest используется только для тес�
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | key | key — ключ, регистрируемый для наблюдения. | bytes |
-| range_end | range_end — конец наблюдаемого диапазона [key, range_end). Если range_end не задан, наблюдается только аргумент key. Если range_end равен '\0', наблюдаются все ключи, большие либо равные аргументу key. Если range_end на один бит больше заданного ключа, наблюдаются все ключи с префиксом заданного ключа. | bytes |
+| range_end | range_end — конец наблюдаемого диапазона [key, range_end). Если range_end не задан, наблюдается только аргумент key. Если range_end равен '\0', наблюдаются все ключи, большие либо равные аргументу key. Если range_end равен заданному ключу плюс один, наблюдаются все ключи с префиксом заданного ключа. | bytes |
 | start_revision | start_revision — необязательная ревизия, с которой включительно начинается наблюдение. Отсутствие start_revision означает "now". | int64 |
 | progress_notify | progress_notify задаётся, чтобы сервер etcd периодически отправлял новому наблюдателю WatchResponse без событий, если недавних событий нет. Это полезно для восстановления отключённого наблюдателя с недавней известной ревизии. Сервер etcd может выбирать частоту уведомлений по текущей нагрузке. | bool |
 | filters | filters фильтруют события на стороне сервера до их отправки наблюдателю. | (slice of) FilterType |
@@ -887,7 +887,7 @@ DowngradeVersionTestRequest используется только для тес�
 | canceled | canceled равно true, если это ответ на запрос отмены наблюдения или start_revision уже компактизирована. Отменённому наблюдателю больше не отправляются события. | bool |
 | compact_revision | compact_revision содержит минимальный индекс, если наблюдатель пытается наблюдать с компактизированного индекса. Это происходит при создании наблюдателя на компактизированной ревизии или когда наблюдатель не успевает за изменениями хранилища ключей и значений. Клиент должен считать наблюдателя отменённым и больше не пытаться создавать наблюдателя с тем же start_revision. | int64 |
 | cancel_reason | cancel_reason указывает причину отмены наблюдателя. | string |
-| fragment | framgment равно true, если большой ответ наблюдения разбит на несколько ответов. | bool |
+| fragment | fragment равно true, если большой ответ наблюдения разбит на несколько ответов. | bool |
 | events |  | (slice of) mvccpb.Event |
 
 ##### Сообщение `Event` (api/mvccpb/kv.proto) {#message-event-apimvccpbkvproto}

@@ -3,7 +3,7 @@ title: Чтение из etcd
 description: Чтение значения в кластере etcd
 weight: 200
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/developer/reading-from-etcd.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/developer/reading-from-etcd.md"
 aliases: [/etcd/tasks/developer/reading-from-etcd/]
 ---
 
@@ -36,4 +36,4 @@ $ etcdctl --endpoints=$ENDPOINTS --write-out="json" get foo
 $
 ```
 
-где `write-out="json"` заставляет выводить значение в формате JSON (обратите внимание, ключ не возвращается).
+где `write-out="json"` задаёт вывод в формате JSON. Ответ содержит и ключ, и значение, закодированные в base64.

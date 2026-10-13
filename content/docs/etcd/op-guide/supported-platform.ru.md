@@ -3,7 +3,7 @@ title: Поддерживаемые платформы
 weight: 4800
 description: Поддержка распространённых архитектур и операционных систем в etcd
 categories: [Справочник]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/supported-platform.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/supported-platform.md"
 aliases: [/etcd/op-guide/supported-platform/]
 ---
 
@@ -54,8 +54,8 @@ etcd работает на разных платформах, однако пр�
 ## Неподдерживаемые платформы {#unsupported-platforms}
 
 Чтобы сервер etcd не был случайно запущен на неподдерживаемой платформе, etcd
-выводит предупреждение и немедленно завершает работу, если переменная окружения
-`ETCD_UNSUPPORTED_ARCH` не содержит целевую архитектуру.
+выводит предупреждение и немедленно завершает работу, если в переменной окружения
+`ETCD_UNSUPPORTED_ARCH` не указана целевая архитектура.
 
 > [!WARNING]
 > **32-bit системы**

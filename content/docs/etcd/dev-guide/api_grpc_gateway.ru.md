@@ -3,7 +3,7 @@ title: Зачем нужен шлюз gRPC
 weight: 3375
 description: Почему стоит использовать шлюз gRPC
 categories: [Концепция]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/api_grpc_gateway.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/api_grpc_gateway.md"
 aliases: [/etcd/dev-guide/api_grpc_gateway/]
 ---
 
@@ -146,8 +146,8 @@ curl -L http://localhost:2379/v3/kv/put \
 но etcd v3.6 и более новые версии его не поддерживают.
 
 Клиентам следует считать код состояния HTTP главным признаком успеха или ошибки.
-При ошибке запроса основным источником сведений должно быть поле `message`, а
-дополнительные данные следует использовать как контекст.
+При ошибке запроса основным источником сведений следует считать поле `message`, а
+любые дополнительные данные использовать для дальнейшего контекста.
 
 ## Swagger {#swagger}
 

@@ -3,7 +3,7 @@ title: Как сохранить базу данных
 description: Руководство по созданию снимка базы данных etcd
 weight: 1100
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/operator/how-to-save-database.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/operator/how-to-save-database.md"
 aliases: [/etcd/tasks/operator/how-to-save-database/]
 ---
 
@@ -28,7 +28,7 @@ etcdctl --endpoints=$ENDPOINT snapshot save DB_NAME
 --endpoints=[127.0.0.1:2379], gRPC endpoints
 ```
 
-Снимок можно запрашивать только у одного узла etcd, поэтому флаг `--endpoints` должен содержать только одну конечную точку.
+Снимок можно запрашивать только у одного узла etcd, поэтому во флаге `--endpoints` следует указывать только одну конечную точку.
 
 #### etcdutl {#etcdutl}
 

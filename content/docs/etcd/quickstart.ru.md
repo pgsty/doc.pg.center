@@ -4,7 +4,7 @@ weight: 900
 description: Запустите etcd менее чем за 5 минут!
 icon: fa-solid fa-rocket
 categories: [Руководство]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/quickstart.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/quickstart.md"
 aliases: [/etcd/quickstart/]
 ---
 
@@ -12,7 +12,7 @@ aliases: [/etcd/quickstart/]
 из одного участника:
 
  1. Установите etcd из готовых бинарных файлов или исходного кода. Подробности см. в разделе
-    [Установка][].
+    [Установка][Install].
 
     > [!WARNING]
     > **Важно**: обязательно выполните последний

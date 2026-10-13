@@ -3,7 +3,7 @@ title: Файлы постоянного хранилища etcd
 weight: 2650
 description: Справочник по формату и файлам постоянного хранилища
 categories: [Концепция]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/persistent-storage-files.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/persistent-storage-files.md"
 aliases: [/etcd/learning/persistent-storage-files/]
 ---
 
@@ -30,7 +30,7 @@ aliases: [/etcd/learning/persistent-storage-files/]
 
   <tr>
     <td><pre>./member/snap/db</pre></td>
-    <td><strong><a href="https://en.wikipedia.org/wiki/B%2B_tree">b+tree</a> bbolt</strong>, хранящее все применённые данные, сведения об авторизации состава кластера и метаданные. Оно знает последний применённый индекс журнала WAL (<a href="https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/server/etcdserver/cindex/cindex.go#L92">"consistent_index"</a>).
+    <td><strong><a href="https://en.wikipedia.org/wiki/B%2B_tree">b+tree</a> bbolt</strong>, хранящее все применённые данные, сведения о составе кластера и авторизации, а также метаданные. Оно знает последний применённый индекс журнала WAL (<a href="https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/server/etcdserver/cindex/cindex.go#L92">"consistent_index"</a>).
     </td>
   </tr>
 
@@ -77,7 +77,7 @@ aliases: [/etcd/learning/persistent-storage-files/]
     </td>
     <td>
       <p><strong>Журналы предзаписи Raft</strong>, содержащие недавние транзакции, принятые Raft, периодические снимки или записи CRC.</p>
-      <p>Сохраняются последние <code>--max-wals=5</code> файлов. Размер каждого составляет <code>~64*10^6</code> байтов. Файл обрезается после превышения этого жёстко заданного размера, поэтому файлы могут быть немного больше (и предварительно выделенный <code>0.tmp</code> не обеспечивает полной защиты от переполнения диска).</p>
+      <p>Сохраняются последние <code>--max-wals=5</code> файлов. Размер каждого составляет <code>~64*10^6</code> байтов. После превышения этого жёстко заданного размера запись продолжается в новом файле, поэтому файлы могут быть немного больше (и предварительно выделенный <code>0.tmp</code> не обеспечивает полной защиты от переполнения диска).</p>
       <p>Если снимки создаются слишком редко, файлов может быть больше <code>--max-wals=5</code>, поскольку блокировки на уровне файловой системы защищают их от слишком раннего удаления.</p>
     </td>
   </tr>
@@ -145,11 +145,11 @@ aliases: [/etcd/learning/persistent-storage-files/]
 
 ### Логическая организация {#logical-organization}
 
-Хранилище bbolt разделено на сегменты. В каждом сегменте ключи (пары byte[]->value byte[]) хранятся в лексикографическом порядке. Ниже перечислены сегменты, используемые etcd по состоянию на версию 3.5, и задействованные ключи.
+Хранилище bbolt разделено на bucket. В каждом bucket ключи (пары byte[]->value byte[]) хранятся в лексикографическом порядке. Ниже перечислены bucket, используемые etcd по состоянию на версию 3.5, и задействованные ключи.
 
 <table>
   <tr>
-    <th>Сегмент</th>
+    <th>Bucket</th>
     <th>Ключ</th>
     <th>Пример значения</th>
     <th>Описание</th>
@@ -165,7 +165,7 @@ aliases: [/etcd/learning/persistent-storage-files/]
   <tr>
     <td>auth</td>
     <td>"authRevision"</td>
-    <td><code>""</code> (empty) or <code>BigEndian.PutUint64</code></td>
+    <td><code>""</code> (пустое) или <code>BigEndian.PutUint64</code></td>
     <td>
       <p>Любое изменение ролей или пользователей увеличивает это поле при фиксации транзакции.</p>
       <p>
@@ -189,7 +189,7 @@ aliases: [/etcd/learning/persistent-storage-files/]
     <td rowspan="2" >cluster</td>
     <td>"clusterVersion"</td>
     <td><code>"3.5.0"</code> (string)</td>
-    <td><a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/etcdserver/server.go#L2314">Дополнительная</a> версия общей версии хранилища, согласованной консенсусом.</td>
+    <td><a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/etcdserver/server.go#L2314">Минорная</a> версия общей версии хранилища, согласованной консенсусом.</td>
   </tr>
   <tr>
     <td>"downgrade"</td>
@@ -291,7 +291,7 @@ bbolt предоставляет инструмент командной стр�
 
 Примеры использования:
 
-##### Перечисление всех сегментов заданного файла bbolt: {#list-all-buckets-in-given-bbolt-file}
+##### Перечисление всех bucket заданного файла bbolt: {#list-all-buckets-in-given-bbolt-file}
 
 ```
 % go run go.etcd.io/bbolt/cmd/bbolt buckets ./default.etcd/member/snap/db
@@ -356,9 +356,9 @@ auth
 3. Сериализованные данные [walpb.Record](https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/server/wal/walpb/record.proto#L11):
     1. [type](https://github.com/etcd-io/etcd/blob/aa97484166d2b3fb6afeb4390344e68b02afb566/server/storage/wal/wal.go#L39) — перечисление в кодировке int, определяющее интерпретацию поля data ниже
     2. data — в зависимости от типа, обычно сериализованный proto
-    3. crc — контрольная сумма RC-32 совокупности всех полей “data” без type во всех записях журнала этой реплики с момента создания WAL. Обратите внимание: CRC учитывает ВСЕ записи, даже если Raft их не зафиксировал.
+    3. crc — контрольная сумма CRC-32 совокупности всех полей “data” без type во всех записях журнала этой реплики с момента создания WAL. Обратите внимание: CRC учитывает ВСЕ записи, даже если Raft их не зафиксировал.
 
-Файлы «обрезаются» (начинается новый файл), когда текущий превышает <code>64*10^6</code> байтов.
+Когда текущий файл превышает <code>64*10^6</code> байтов, начинается новый файл WAL.
 
 
 ### Логическое содержимое {#logical-content}
@@ -445,11 +445,11 @@ auth
 Создание этих файлов управляется 2 триггерами:
 
 
-* Новый файл создаётся примерно каждые --snapshotCount=(по умолчанию 100'000) применённых предложений. Значение приблизительно, поскольку предложения могут поступать пакетами, создание снимка рассматривается только в конце пакета, а сам процесс планируется асинхронно.
-  Имя флага (--snapshotCount) не вполне точно: он определяет [разницу значений индекса между ](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/server/etcdserver/server.go#L1266)индексом последнего снимка и индексом последнего применённого предложения.
+* Новый файл создаётся примерно каждые --snapshot-count=(по умолчанию 10,000 в v3.7.0) применённых предложений. Значение приблизительно, поскольку предложения могут поступать пакетами, создание снимка рассматривается только в конце пакета, а сам процесс планируется асинхронно.
+  Имя флага (--snapshot-count) не вполне точно: он определяет [разницу значений индекса между ](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/server/etcdserver/server.go#L1266)индексом последнего снимка и индексом последнего применённого предложения.
 * Raft требует, чтобы реплика восстановилась из снимка. Получая снимок по сети в сообщении msgSnap, реплика также создаёт его облегчённую контрольную точку в журнале WAL. Это гарантирует, что в хвосте журналов WAL всегда находится действительный снимок с последующими записями, и предотвращает возможный разрыв непрерывности журналов.
 
-Сейчас файлы приблизительно[^3] соответствуют записям Snapshot журналов WAL в отношении 1-1. После вывода хранилища v2 из эксплуатации запись этих файлов должна полностью прекратиться (необязательно в 3.5.x, обязательно в 3.6.x).
+Сейчас файлы приблизительно[^3] соответствуют записям Snapshot журналов WAL в отношении 1-1. После вывода хранилища v2 из эксплуатации запись этих файлов должна полностью прекратиться (opt-in в 3.5.x, обязательно в 3.6.x).
 
 
 ### Содержимое {#content}
@@ -491,7 +491,7 @@ cat default.etcd/member/snap/0000000000000002-0000000000049425.snap |
 ```
 
 
-Аналогично можно извлечь поле 'data' и декодировать его как '[Raftpb.Snapshot](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/raft/raftpb/raft.proto#L31)`'`
+Аналогично можно извлечь поле 'data' и декодировать его как [Raftpb.Snapshot](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/raft/raftpb/raft.proto#L31).
 
 
 ### Пример сериализованного в JSON содержимого хранилища v2 в файлах *.snap etcd 3.4: {#exemplar-json-serialized-store-v2-content-in-etcd-34-snap-files}
