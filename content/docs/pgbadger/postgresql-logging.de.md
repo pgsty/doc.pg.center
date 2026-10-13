@@ -99,7 +99,7 @@ Locale-Einstellungen wie `fr_FR.UTF-8` werden vom Parser des Originalprojekts ni
 
 ## Widersprüchliche Einstellungen für Anweisungen vermeiden {#statement-setting-conflicts}
 
-Aktivieren Sie `log_min_duration_statement`, `log_duration` und `log_statement = 'all'` nicht gemeinsam. Dieselbe Ausführung kann mehrfach protokolliert werden, was die pgBadger-Zähler verfälscht und die Protokollmenge erheblich erhöht.
+Aktivieren Sie `log_min_duration_statement`, `log_duration` und `log_statement = 'all'` nicht gemeinsam. Dieselbe Ausführung kann mehrfach protokolliert werden, was zu fälschlich überhöhten pgBadger-Zählern und einer erheblich größeren Protokollmenge führt.
 
 | Ziel | Empfohlene Einstellung |
 |---|---|

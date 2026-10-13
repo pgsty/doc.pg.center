@@ -22,7 +22,7 @@ Die Beispielberichte wurden im Mai 2022 mit pgBadger 11.8 erzeugt. Die Originalb
 
 ## Vollständiger Bericht {#complete-report}
 
-Der vollständige Bericht ist eine in sich geschlossene HTML-Datei. Über die obere Navigationsleiste können Sie globale Statistiken, Abfragen, Sitzungen, Verbindungen, temporäre Dateien, Prüfpunkte, Autovacuum-Aktivität, Sperren und PgBouncer-spezifische Diagramme untersuchen.
+Der vollständige Bericht ist eine in sich geschlossene HTML-Datei. Über die obere Navigationsleiste können Sie globale Statistiken, Abfragen, Sitzungen, Verbindungen, temporäre Dateien, Checkpoints, Autovacuum-Aktivität, Sperren und PgBouncer-spezifische Diagramme untersuchen.
 
 Die Daten dienen ausschließlich Demonstrationszwecken und stellen keinen aktuellen Leistungsbenchmark dar. Die Werte, PostgreSQL-Versionen und die eingebettete pgBadger-Benutzeroberfläche (UI) entsprechen dem Stand zum Zeitpunkt der Berichtserstellung.
 

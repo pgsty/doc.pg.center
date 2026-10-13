@@ -45,7 +45,7 @@ $ pgbadger --incremental --retention 8 \
 
 ## Gemeinsam genutzte Ressourcen separat speichern {#shared-assets}
 
-Standardmäßig betten HTML-Berichte ihre JavaScript- und CSS-Dateien ein. In einem Verzeichnis mit vielen inkrementellen Berichten speichert `-X` / `--extra-files` gemeinsam genutzte Ressourcen separat und vermeidet dadurch doppelte Daten in der Ausgabe:
+Standardmäßig betten HTML-Berichte ihre JavaScript- und CSS-Dateien ein. In einem Verzeichnis mit vielen inkrementellen Berichten speichert `-X` / `--extra-files` gemeinsam genutzte Ressourcen separat und verringert dadurch die mehrfach gespeicherte Datenmenge in der Ausgabe:
 
 ```console
 $ pgbadger -X -I -O /var/www/pg_reports postgresql.log.1
