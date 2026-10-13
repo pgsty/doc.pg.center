@@ -1,4 +1,4 @@
-{{- /* Landing hero for pgsql.cc.
+{{- /* Landing hero for pig.center.
 
      OINK's section dispatcher (landing/section.html) lets a section entry name
      its own `partial`, so this is an additive project template rather than a
@@ -62,7 +62,7 @@
       <p class="td-landing-hero__note"><i class="{{ $hero.note_icon | default "fa-solid fa-circle-check" }}" aria-hidden="true"></i><span>{{ partial "landing/markdown.html" (dict "page" $page "value" .) }}</span></p>
       {{- end }}
       {{- with $components }}
-      <nav class="pgsql-hero__links" aria-label="{{ $hero.links_label | default (T "ui_docs" | default "Documentation") }}">
+      <nav class="pgsql-hero__links" aria-label="{{ $hero.links_label | default "Documentation" }}">
         {{- range . }}
         {{- $url := .url | default .href -}}
         {{- if $url }}

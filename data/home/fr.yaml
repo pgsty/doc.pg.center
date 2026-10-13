@@ -202,8 +202,8 @@ faq:
     - question: Par où commencer ?
       answer: Choisissez le composant qui correspond à votre tâche. Chaque carte ouvre une collection documentaire indépendante, et la section détaillée ci-dessus renvoie directement vers ses pages les plus consultées.
       open: true
-    - question: pgsql.cc est-il un site PostgreSQL officiel ?
-      answer: Non. pgsql.cc est un projet documentaire communautaire indépendant. Il renvoie vers chaque projet amont et préserve les noms des produits ainsi que leur contexte technique.
+    - question: pig.center est-il un site PostgreSQL officiel ?
+      answer: Non. pig.center est un projet documentaire communautaire indépendant. Il renvoie vers chaque projet amont et préserve les noms des produits ainsi que leur contexte technique.
     - question: Comment fonctionne une langue encore partiellement traduite ?
       answer: Un lien ouvre la page dans la langue courante lorsqu’elle existe. Sinon, il ouvre automatiquement la page anglaise correspondante et affiche l’indicateur EN ; le sélecteur de langue reste disponible sur chaque page.
     - question: Comment les sources amont sont-elles créditées ?

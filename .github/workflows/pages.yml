@@ -1,4 +1,4 @@
-name: Build and Deploy pgsql.cc
+name: Build and Deploy pig.center
 
 on:
   push:

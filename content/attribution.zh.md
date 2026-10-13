@@ -11,7 +11,7 @@ translation_notice: false
 outputs: [HTML, markdown]
 ---
 
-pgsql.cc 转载并整理了六个上游项目撰写的文档。每一个文档页面的末尾都有一行署名，指明该页改编自哪份作品、
+pig.center 转载并整理了六个上游项目撰写的文档。每一个文档页面的末尾都有一行署名，指明该页改编自哪份作品、
 版权归属于谁、依据什么协议授权，并链接回本页对应的小节。
 
 本页就是那份记录：说明每份材料从哪里、在什么时间、从哪个固定版本导入，依据什么协议，以及完整的上游声明保存在何处。
@@ -21,7 +21,7 @@ pgsql.cc 转载并整理了六个上游项目撰写的文档。每一个文档�
 > 尚无译文的链接会回退到对应英文页面。
 
 > [!NOTE]
-> pgsql.cc 是独立的社区文档项目，与下列任何项目均无隶属关系，也未获得其背书，
+> pig.center 是独立的社区文档项目，与下列任何项目均无隶属关系，也未获得其背书，
 > 不是它们的官方出版物，也不代表 PostgreSQL 全球开发组。
 
 ## 总览 {#summary}
@@ -29,7 +29,7 @@ pgsql.cc 转载并整理了六个上游项目撰写的文档。每一个文档�
 | 组件 | 上游作品 | 固定版本 | 授权协议 | 保留的完整声明 |
 |---|---|---|---|---|
 | [Patroni](/zh/docs/patroni/) | [Patroni 文档](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [上游 `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/zh/docs/pgbackrest/) | [pgBackRest 文档](https://pgbackrest.org/) | v2.59.1 | [MIT](https://opensource.org/license/mit) | [上游 `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [pgBackRest](/zh/docs/pgbackrest/) | [pgBackRest 文档](https://pgbackrest.org/) | v2.59.2（英文 / 简体中文）；v2.59.1（其他译文） | [MIT](https://opensource.org/license/mit) | [上游 `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
 | [PgBouncer](/zh/docs/pgbouncer/) | [PgBouncer 文档](https://www.pgbouncer.org/) | v1.26.0（英文 / 简体中文） | [ISC](https://opensource.org/license/isc-license-txt) | [上游 `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/zh/docs/pgbadger/) | [pgBadger 文档](https://pgbadger.darold.net/) | v13.2，提交 `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/zh/docs/haproxy/) | [HAProxy 3.4 手册](https://docs.haproxy.org/3.4/) | v3.4.4，提交 `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
@@ -48,8 +48,8 @@ Patroni 版权归 Compose、Zalando SE 与 Patroni Contributors 所有（Copyrig
 
 ## pgBackRest {#pgbackrest}
 
-于 2026-08-15 从 [pgBackRest 文档站](https://pgbackrest.org/) 导入，并于 2026-08-30 刷新到
-**v2.59.1**；简体中文译本与英文版本同步维护。
+于 2026-08-15 从 [pgBackRest 文档站](https://pgbackrest.org/) 导入。
+英文和简体中文文档于 2026-10-04 刷新到 **v2.59.2**；其他现有译文仍为 **v2.59.1**，上次刷新日期为 2026-08-30。
 
 pgBackRest 版权归 The PostgreSQL Global Development Group 与 David Steele 所有（Copyright (c) 2015-2026），
 依 [MIT 协议](https://opensource.org/license/mit)授权。
@@ -116,7 +116,7 @@ etcd 文档版权归 etcd Authors 所有（Copyright 2013-present）。其正文
 
 ## 本站 {#site}
 
-为 pgsql.cc 原创撰写的内容——导览页面、完整的简体中文与法文版本、已经发布的日文、
+为 pig.center 原创撰写的内容——导览页面、完整的简体中文与法文版本、已经发布的日文、
 德文与俄文译文、编辑说明与各语言首页——依
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 发布；
 若某页面适用上述上游协议，则以上游协议为准。
@@ -128,8 +128,8 @@ etcd 文档版权归 etcd Authors 所有（Copyright 2013-present）。其正文
 在此用于指代 PostgreSQL。该标识归 PostgreSQL Community Association of Canada 所有，
 在此使用不代表其认可或背书。
 
-本站由 [OINK](https://oink.pgsty.com/) v1.0.0 构建，该 Hugo 主题依
+本站由 [OINK](https://oink.pgsty.com/) v1.2.0 构建，该 Hugo 主题依
 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) 授权，
 其自身的上游与内置依赖声明随模块源码一并提供。
 
-如果发现本页任何归属信息有误，欢迎通过[站点仓库](https://github.com/pgsty/pgsql.cc/issues)提出。
+如果发现本页任何归属信息有误，欢迎通过[站点仓库](https://github.com/pgsty/pig.center/issues)提出。

@@ -1,6 +1,6 @@
 # Content and dependency notice
 
-The first pgsql.cc documentation collection was imported on 2026-08-15 from the English `pigsty.io` and Simplified Chinese `pigsty.cc` documentation trees maintained by PGSTY. Individual manuals retain links to the Patroni, pgBackRest, and PgBouncer upstream sources from which those documentation snapshots were prepared.
+The first pig.center documentation collection was imported on 2026-08-15 from the English `pigsty.io` and Simplified Chinese `pigsty.cc` documentation trees maintained by PGSTY. Individual manuals retain links to the Patroni, pgBackRest, and PgBouncer upstream sources from which those documentation snapshots were prepared.
 
 The imported documentation is distributed under the Creative Commons Attribution 4.0 International license used by the source documentation sites. A copy is included as `LICENSE-CC-BY-4.0`.
 
@@ -28,14 +28,14 @@ HAProxy's license explanation, OpenSSL exception, and complete GPLv2 text are re
 `static/third_party/haproxy/`. These HAProxy-derived pages are not covered by the site's
 `LICENSE-CC-BY-4.0`.
 
-The website uses OINK 0.6.0 as a pinned Hugo Module. OINK is licensed under Apache License 2.0 and carries its own upstream and bundled-dependency notices in the module source.
+The website uses OINK 1.2.0 as a pinned Hugo Module. OINK is licensed under Apache License 2.0 and carries its own upstream and bundled-dependency notices in the module source.
 
 The etcd 3.7 documentation collection was imported from the official etcd website repository and
 refreshed on 2026-08-30 at commit `824597935df6e95992ef61c07e3222f4f796ca6c`. Its prose is distributed under the Creative
 Commons Attribution 4.0 International license, while code and code samples are distributed under
 the Apache License 2.0, copyright 2013-present etcd Authors.
 
-Per-page attribution for every collection is published at <https://pgsql.cc/attribution/> and is
+Per-page attribution for every collection is published at <https://pig.center/attribution/> and is
 generated from `data/upstreams.yaml` together with the `upstream_link` front matter each page
 carries.
 

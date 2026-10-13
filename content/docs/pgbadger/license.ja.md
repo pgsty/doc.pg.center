@@ -48,5 +48,5 @@ Darold SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 
 ## ドキュメントのスナップショット {#documentation-snapshot}
 
-このpgsql.cc版では、アップストリームのドキュメントが Hugo ページに再編成され、ナビゲーションと中国語での読解支援が追加され、忠実度が重要な場合には正確なコマンド ヘルプと ChangeLog テキストが保存されます。 pgBadger のソース ドキュメントは PostgreSQL ライセンスの下に残ります。元のプロジェクト名、作成者、上流リンクは保持されます。
+このpig.center版では、アップストリームのドキュメントが Hugo ページに再編成され、ナビゲーションと中国語での読解支援が追加され、忠実度が重要な場合には正確なコマンド ヘルプと ChangeLog テキストが保存されます。 pgBadger のソース ドキュメントは PostgreSQL ライセンスの下に残ります。元のプロジェクト名、作成者、上流リンクは保持されます。
 

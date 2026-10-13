@@ -48,4 +48,4 @@ La capture source locale conserve l'intégralité du `resources/LICENSE` d'origi
 
 ## Capture de documentation {#documentation-snapshot}
 
-Cette édition pgsql.cc réorganise la documentation d'origine en pages Hugo, ajoute une navigation et des aides à la lecture en chinois, et conserve intégralement le texte d'aide des commandes et le journal des modifications là où la fidélité est essentielle. La documentation source du projet pgBadger reste soumise à la Licence PostgreSQL ; les noms d'origine du projet, l'auteur et les liens vers les sources d'origine sont conservés.
+Cette édition pig.center réorganise la documentation d'origine en pages Hugo, ajoute une navigation et des aides à la lecture en chinois, et conserve intégralement le texte d'aide des commandes et le journal des modifications là où la fidélité est essentielle. La documentation source du projet pgBadger reste soumise à la Licence PostgreSQL ; les noms d'origine du projet, l'auteur et les liens vers les sources d'origine sont conservés.

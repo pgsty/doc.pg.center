@@ -12,6 +12,45 @@ upstream_link: "https://pgbackrest.org/news.html"
 
 --------
 
+## pgBackRest 2.59.2 Released {#release-2-59-2}
+
+**September 27, 2026**
+
+The pgBackRest community is pleased to announce the release of [pgBackRest](https://pgbackrest.org) 2.59.2, the latest version of the reliable, easy-to-use backup and restore solution that can seamlessly scale up to the largest databases and workloads.
+
+pgBackRest supports a robust set of features for managing your backup and recovery infrastructure, including: parallel backup/restore, full/differential/incremental backups, block incremental backup, multiple repositories, delta restore, parallel asynchronous archiving, malware/ransomware protection, per-file checksums, page checksums (when enabled) validated during backup, multiple compression types, encryption, partial/failed backup resume, backup from standby, tablespace and link support, S3/Azure/GCS/SFTP support, backup expiration, local/remote operation via SSH or TLS, flexible configuration, and more.
+
+pgBackRest can be installed from the [PostgreSQL Yum Repository](https://yum.postgresql.org) or the [PostgreSQL APT Repository](https://apt.postgresql.org) and packages are also available for many other distributions. Source code can be downloaded from [releases](/docs/pgbackrest/release/).
+
+### New Features and Bug Fixes {#release-2-59-2-feature}
+
+- PostgreSQL 19beta4 support (David Steele)
+- Fix empty block map when file is truncated to zero during backup (David Steele)
+- Disable read retry when filters are passed to the driver (David Steele)
+- Fix pagination of S3 version listing (David Steele)
+- Set the Azure version header for SAS authentication (David Steele)
+- Fix async `archive-push` stalling on a zero-size backup history file (Andrew Kroh)
+- Fix `annotate` command on a remote encrypted repository (Douglas J Hunley)
+
+See the [2.59.2 Release Notes](/docs/pgbackrest/release/#v2592-release-notes) for additional fixes and improvements.
+
+### Important Notes {#release-2-59-2-note}
+
+- PostgreSQL 19beta4 changed the `pg_control` and WAL formats, so clusters and WAL from an earlier 19 beta are no longer supported. Clusters running an earlier beta should be recreated with 19beta4.
+
+### Links {#release-2-59-2-link}
+
+- [Website](/docs/pgbackrest/)
+- [User Guides](/docs/pgbackrest/user-guide/)
+- [Release Notes](/docs/pgbackrest/release/)
+
+### Sponsorship {#release-2-59-2-sponsorship}
+
+This release was made possible by the generous sponsorship of [AWS](https://aws.amazon.com), [Supabase](https://supabase.com), [pgEdge](https://pgedge.com), [Tiger Data](https://tigerdata.com), [Percona](https://percona.com), [Eon](https://eon.io), [Xata](https://xata.io), [Dalibo](https://dalibo.com), and [Data Egret](https://dataegret.com/).
+
+
+--------
+
 ## pgBackRest 2.59.1 Released {#release-2-59-1}
 
 **August 17, 2026**

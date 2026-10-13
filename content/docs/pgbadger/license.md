@@ -48,5 +48,5 @@ The local source snapshot retains the complete upstream `resources/LICENSE`. The
 
 ## Documentation snapshot {#documentation-snapshot}
 
-This pgsql.cc edition reorganizes the upstream documentation into Hugo pages, adds navigation and Chinese reading aids, and preserves exact command help and ChangeLog text where fidelity matters. The pgBadger source documentation remains under the PostgreSQL License; original project names, authorship, and upstream links are retained.
+This pig.center edition reorganizes the upstream documentation into Hugo pages, adds navigation and Chinese reading aids, and preserves exact command help and ChangeLog text where fidelity matters. The pgBadger source documentation remains under the PostgreSQL License; original project names, authorship, and upstream links are retained.
 

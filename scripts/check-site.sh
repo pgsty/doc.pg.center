@@ -4,7 +4,7 @@ set -euo pipefail
 project_dir=$(cd "$(dirname "$0")/.." && pwd)
 content_dir="$project_dir/content"
 docs_dir="$content_dir/docs"
-build_dir=$(mktemp -d "${TMPDIR:-/tmp}/pgsql-cc-check.XXXXXX")
+build_dir=$(mktemp -d "${TMPDIR:-/tmp}/pig-center-check.XXXXXX")
 trap 'rm -rf "$build_dir"' EXIT
 
 legacy_complete_expected=78
@@ -152,6 +152,17 @@ diff -u "$english_list" "$french_list"
 ) >"$japanese_pgbouncer_list"
 diff -u "$english_pgbouncer_list" "$japanese_pgbouncer_list"
 
+python3 "$project_dir/scripts/report-coverage.py" >"$build_dir/coverage.md"
+python3 - "$project_dir/README.md" "$build_dir/coverage.md" <<'PY'
+from pathlib import Path
+import sys
+
+readme = Path(sys.argv[1]).read_text(encoding="utf-8")
+coverage = Path(sys.argv[2]).read_text(encoding="utf-8").strip()
+if coverage not in readme:
+    raise SystemExit("README coverage table is stale; run python3 scripts/report-coverage.py")
+PY
+
 bad_component_links=$(
   rg -n \
     '\]\(/docs/(patroni|pgbackrest|pgbouncer|pgbadger|haproxy|etcd)/|^\[[^]]+\]:[[:space:]]+/docs/(haproxy|etcd)/' \
@@ -178,15 +189,15 @@ if [[ -n "$bad_french_component_links" ]]; then
   exit 1
 fi
 
-grep -Eq '^require github\.com/pgsty/oink v1\.0\.0$' "$project_dir/go.mod"
+grep -Eq '^require github\.com/pgsty/oink v1\.2\.0$' "$project_dir/go.mod"
 
-test "$(cat "$project_dir/static/CNAME")" = 'pgsql.cc'
-grep -Fxq 'baseURL: https://pgsql.cc/' "$project_dir/hugo.yaml"
-grep -Fxq '  productionURL: https://pgsql.cc' "$project_dir/hugo.yaml"
+test "$(cat "$project_dir/static/CNAME")" = 'pig.center'
+grep -Fxq 'baseURL: https://pig.center/' "$project_dir/hugo.yaml"
+grep -Fxq '  productionURL: https://pig.center' "$project_dir/hugo.yaml"
 grep -Fq 'title: "Patroni 4.1.5 Documentation"' "$docs_dir/patroni/_index.md"
 grep -Fq 'title: "Patroni 4.1.5 中文文档"' "$docs_dir/patroni/_index.zh.md"
-grep -Fq 'title: "pgBackRest 2.59.1 Documentation"' "$docs_dir/pgbackrest/_index.md"
-grep -Fq 'title: "pgBackRest 2.59.1 中文文档"' "$docs_dir/pgbackrest/_index.zh.md"
+grep -Fq 'title: "pgBackRest 2.59.2 Documentation"' "$docs_dir/pgbackrest/_index.md"
+grep -Fq 'title: "pgBackRest 2.59.2 中文文档"' "$docs_dir/pgbackrest/_index.zh.md"
 grep -Fq 'title: "PgBouncer 1.26.0 Documentation"' "$docs_dir/pgbouncer/_index.md"
 grep -Fq 'title: "PgBouncer 1.26.0 中文文档"' "$docs_dir/pgbouncer/_index.zh.md"
 grep -Fq 'title: "pgBadger 13.2 Documentation"' "$docs_dir/pgbadger/_index.md"
@@ -198,7 +209,7 @@ grep -Fq 'title: "etcd 3.7 中文文档"' "$docs_dir/etcd/_index.zh.md"
 
 python3 "$project_dir/scripts/check-bilingual-parity.py"
 
-hugo --source "$project_dir" --destination "$build_dir/public" --gc --minify --cleanDestinationDir --printPathWarnings --panicOnWarning
+hugo --source "$project_dir" --destination "$build_dir/public" --gc --minify --cleanDestinationDir --printPathWarnings --printI18nWarnings --panicOnWarning
 
 TRANSLATION_RENDERED_DIR="$build_dir/public" \
   python3 "$project_dir/scripts/check-component-translations.py" haproxy etcd
@@ -430,9 +441,9 @@ PY
 for language_root in "" zh/ fr/ ja/ de/ ru/; do
   grep -Fq 'navigation.json' "$build_dir/public/${language_root}llms.txt"
 done
-grep -Fq 'Source: https://pgsql.cc/docs/patroni/index.md' "$build_dir/public/docs/patroni/llms-full.txt"
-grep -Fq 'Source: https://pgsql.cc/zh/docs/patroni/index.md' "$build_dir/public/zh/docs/patroni/llms-full.txt"
-grep -Fq 'Source: https://pgsql.cc/fr/docs/patroni/index.md' "$build_dir/public/fr/docs/patroni/llms-full.txt"
+grep -Fq 'Source: https://pig.center/docs/patroni/index.md' "$build_dir/public/docs/patroni/llms-full.txt"
+grep -Fq 'Source: https://pig.center/zh/docs/patroni/index.md' "$build_dir/public/zh/docs/patroni/llms-full.txt"
+grep -Fq 'Source: https://pig.center/fr/docs/patroni/index.md' "$build_dir/public/fr/docs/patroni/llms-full.txt"
 grep -Fq 'td-shell-backlinks' "$build_dir/public/docs/patroni/config/index.html"
 grep -Fq 'td-shell-backlinks' "$build_dir/public/zh/docs/patroni/config/index.html"
 grep -Fq 'Backlinks:' "$build_dir/public/docs/patroni/config/index.md"
@@ -604,8 +615,8 @@ grep -Fq 'HAProxy Management Guide' "$project_dir/sources/haproxy/upstream/manag
 cmp "$project_dir/sources/haproxy/upstream/LICENSE" "$project_dir/static/third_party/haproxy/LICENSE"
 cmp "$project_dir/sources/haproxy/upstream/GPL-2.0" "$project_dir/static/third_party/haproxy/GPL-2.0"
 
-grep -q 'https://pgsql.cc/images/og.png' "$build_dir/public/index.html"
-grep -q 'https://pgsql.cc/images/og.png' "$build_dir/public/zh/index.html"
+grep -q 'https://pig.center/images/og.png' "$build_dir/public/index.html"
+grep -q 'https://pig.center/images/og.png' "$build_dir/public/zh/index.html"
 if grep -q '/images/og.png' "$build_dir/public/docs/patroni/index.html"; then
   echo 'A detail page inherited the homepage social image' >&2
   exit 1
@@ -614,5 +625,5 @@ fi
 python3 "$project_dir/scripts/check-docs-routes.py" "$build_dir/public"
 python3 "$project_dir/scripts/check-local-links.py" "$build_dir/public"
 
-printf 'Validated OINK v1.0.0 landing and fallback navigation across six locales, backlinks, agent indexes, %s complete EN/ZH/FR component pages, %s JA, %s DE, %s RU component translations, %s HAProxy reading pages, %s etcd Markdown pages, and legacy redirects.\n' \
+printf 'Validated OINK v1.2.0 landing and fallback navigation across six locales, backlinks, agent indexes, README coverage, %s EN/ZH/FR component Markdown sources, %s JA, %s DE, %s RU translated sources (including sidebar dividers), %s HAProxy reading pages, %s etcd Markdown pages, and legacy redirects.\n' \
   "$english_count" "$japanese_count" "$german_count" "$russian_count" "$haproxy_reading_count" "$etcd_markdown_count"

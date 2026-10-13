@@ -30,7 +30,10 @@
             <h2>{{ .title }}</h2>
             <ul>
               {{- range .links }}
-              {{- $target := partial "pgsql/link-target.html" (dict "page" $ "url" .url) -}}
+              {{- $target := dict "href" .url "external" true -}}
+              {{- if not (.external | default false) -}}
+                {{- $target = partial "pgsql/link-target.html" (dict "page" $ "url" .url) -}}
+              {{- end -}}
               {{- $external := or $target.external (.external | default false) -}}
               <li><a href="{{ $target.href | safeURL }}"{{ if $target.fallback }} class="pgsql-link--fallback" hreflang="{{ $target.language }}" data-fallback-language="{{ $target.language }}"{{ end }}{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .label }}</a></li>
               {{- end }}

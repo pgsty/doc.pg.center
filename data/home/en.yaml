@@ -202,8 +202,8 @@ faq:
     - question: Where should I start?
       answer: Choose the component that matches your current task. Each card opens an independent documentation root, and the detailed section above links directly to its most-used pages.
       open: true
-    - question: Is pgsql.cc an official PostgreSQL website?
-      answer: No. pgsql.cc is an independent community documentation project. It links back to each upstream project and keeps product names and technical context intact.
+    - question: Is pig.center an official PostgreSQL website?
+      answer: No. pig.center is an independent community documentation project. It links back to each upstream project and keeps product names and technical context intact.
     - question: How does partial language coverage work?
       answer: A link opens the current language whenever that page exists. If it has not been translated yet, the same link opens the English page and shows an EN marker; the language selector remains available on every page.
     - question: How is the upstream documentation credited?

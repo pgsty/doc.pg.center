@@ -44,11 +44,26 @@ Command line example: `--io-timeout=90`<br/>Configuration file example: `db-time
 
 **List**: Option may be provided multiple times.
 
-Command line example: `--db-exclude=db1 --db-exclude=db2 --db-exclude=db5`<br/>Configuration file example, each on its own line: `db-exclude=db1 db-exclude=db2 db-exclude=db5`
+Command line example: `--db-exclude=db1 --db-exclude=db2 --db-exclude=db5`
+
+Configuration file example, each on its own line:
+
+```ini
+db-exclude=db1
+db-exclude=db2
+db-exclude=db5
+```
 
 **Key/Value**: Option may be provided multiple times in the form `key=value`.
 
-Command line example: `--tablespace-map=ts_01=/db/ts_01 --tablespace-map=ts_02=/db/ts_02`<br/>Configuration file example, each on its own line: `tablespace-map=ts_01=/db/ts_01 tablespace-map=ts_02=/db/ts_02`
+Command line example: `--tablespace-map=ts_01=/db/ts_01 --tablespace-map=ts_02=/db/ts_02`
+
+Configuration file example, each on its own line:
+
+```ini
+tablespace-map=ts_01=/db/ts_01
+tablespace-map=ts_02=/db/ts_02
+```
 
 --------
 

@@ -202,8 +202,8 @@ faq:
     - question: 应该从哪里开始？
       answer: 选择与你当前任务对应的组件。每张卡片都会进入一套独立文档；上方的详细说明还提供了常用页面的直达入口。
       open: true
-    - question: pgsql.cc 是 PostgreSQL 官方网站吗？
-      answer: 不是。pgsql.cc 是独立的社区文档项目。本站保留各上游项目的链接、产品名称与技术上下文。
+    - question: pig.center 是 PostgreSQL 官方网站吗？
+      answer: 不是。pig.center 是独立的社区文档项目。本站保留各上游项目的链接、产品名称与技术上下文。
     - question: 部分语言尚未完整覆盖时如何处理？
       answer: 如果当前语言已有对应页面，链接会直接打开译文；尚未翻译的页面会自动打开同一路径的英文版，并显示 EN 标记。每个页面仍可通过语言选择器切换版本。
     - question: 上游文档的归属如何标注？
