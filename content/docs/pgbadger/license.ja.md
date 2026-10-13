@@ -2,7 +2,7 @@
 title: "ライセンスとクレジット"
 linkTitle: "ライセンス"
 weight: 110
-description: "PostgreSQL のライセンス条項、著作者、およびバンドルされているサードパーティ コンポーネント"
+description: "PostgreSQLのライセンス条項、著作者、およびバンドルされているサードパーティコンポーネント"
 icon: fa-solid fa-scale-balanced
 module: [PGBADGER]
 categories: [リファレンス]
@@ -11,7 +11,7 @@ upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632e
 upstream_name: "pgBadger LICENSE"
 ---
 
-pgBadger は、PostgreSQL ライセンスに基づいて配布される無料のオープンソース ソフトウェアです。著作権およびライセンス通知を保持することを条件として、無償で使用、コピー、変更、配布することができます。
+pgBadgerは、PostgreSQLライセンスに基づいて配布される無料のオープンソースソフトウェアです。著作権およびライセンス通知を保持することを条件として、無償で使用、コピー、変更、配布することができます。
 
 ## PostgreSQLライセンス {#postgresql-license}
 
@@ -25,28 +25,28 @@ Darold SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 
 ## 著者とデザインのクレジット {#credits}
 
-- pgBadger は、Gilles Darold によるオリジナル作品です。
-- pgBadger ロゴは、Damien Cazeils によるオリジナルの作品です。
-- pgBadger v4.x のデザインは、「Art is code」会社から提供されました。
-- このウェブサイトは Gilles Darold の作品です。
-- 貢献者は、上流の ChangeLog 全体にクレジットされます。
+- pgBadgerは、Gilles Daroldによるオリジナル作品です。
+- pgBadgerロゴは、Damien Cazeilsによるオリジナルの作品です。
+- pgBadger v4.xのデザインは、「Art is code」会社から提供されました。
+- このウェブサイトはGilles Daroldの作品です。
+- 貢献者は、アップストリームのChangeLog全体にクレジットされます。
 
-## 埋め込みリソースとレポート リソース {#third-party-resources}
+## 埋め込みリソースとレポートリソース {#third-party-resources}
 
-`SQL::Beautify` Perl モジュールの修正バージョンが pgBadger に埋め込まれています。この作品の著作権は © 2009 Jonas Kramer にあり、Artistic License 2.0 に基づいて公開されています。
+`SQL::Beautify` Perlモジュールの修正バージョンがpgBadgerに埋め込まれています。この作品の著作権は © 2009 Jonas Kramerにあり、Artistic License 2.0に基づいて公開されています。
 
-生成されたレポート リソースには、次のような独自の通知があります。
+生成されたレポートリソースには、次のような独自の通知があります。
 
-|コンポーネント |ライセンス |
+| コンポーネント | ライセンス |
 |---|---|
-| bean.js, Bootstrap, jQuery, Underscore |MIT |
-| jqPlot | MIT または GPL-2.0、ユーザーの選択 |
-|Font Awesomeフォント | SIL Open Font License 1.1 |
-|Font Awesome CSS |MIT |
+| bean.js、Bootstrap、jQuery、Underscore | MIT |
+| jqPlot | MITまたはGPL-2.0(ユーザーの選択) |
+| Font Awesomeフォント | SIL Open Font License 1.1 |
+| Font Awesome CSS | MIT |
 
-ローカル ソース スナップショットには、完全なアップストリーム `resources/LICENSE` が保持されます。バンドルされたサンプル レポートは過去に生成された成果物であり、元の埋め込み通知とリソースのバージョンが保持されます。
+ローカルソーススナップショットには、完全なアップストリーム `resources/LICENSE`が保持されます。バンドルされたサンプルレポートは過去に生成された成果物であり、元の埋め込み通知とリソースのバージョンが保持されます。
 
 ## ドキュメントのスナップショット {#documentation-snapshot}
 
-このpig.center版では、アップストリームのドキュメントが Hugo ページに再編成され、ナビゲーションと中国語での読解支援が追加され、忠実度が重要な場合には正確なコマンド ヘルプと ChangeLog テキストが保存されます。 pgBadger のソース ドキュメントは PostgreSQL ライセンスの下に残ります。元のプロジェクト名、作成者、上流リンクは保持されます。
+このpig.center版では、アップストリームのドキュメントがHugoページに再編成され、ナビゲーションと中国語での読解支援が追加され、忠実度が重要な場合には正確なコマンドヘルプとChangeLogテキストが保存されます。pgBadgerのソースドキュメントはPostgreSQLライセンスの下に残ります。元のプロジェクト名、作成者、アップストリームリンクは保持されます。
 

@@ -2,7 +2,7 @@
 title: "リリース履歴"
 linkTitle: "リリース履歴"
 weight: 90
-description: "pgBadger 9.x から 13.x までの変更履歴（上流の ChangeLog から正規化）"
+description: "pgBadger 9.xから13.xまでの変更履歴（アップストリームのChangeLogから正規化）"
 icon: fa-solid fa-clock-rotate-left
 module: [PGBADGER]
 categories: [リファレンス]
@@ -11,7 +11,7 @@ upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632e
 upstream_name: "pgBadger ChangeLog"
 ---
 
-公式ウェブサイトはリリース情報をホームページに直接掲載しています。そのページはバージョン 12.4 までしか記載されておらず、誤って 11.1–11.3 の情報が日付が矛盾する形で繰り返されています。この版では、上流の `ChangeLog` を正規記録として固定し、重複する表示を削除した上で、以降の 13.x リリースを追加しています。各シリーズ内では最新のエントリを先頭に保ち、すべてのエントリをそのまま保持します。
+公式ウェブサイトはリリース情報をホームページに直接掲載しています。そのページはバージョン12.4までしか記載されておらず、誤って11.1–11.3の情報が日付が矛盾する形で繰り返されています。この版では、アップストリームの`ChangeLog`を正規記録として固定し、重複する表示を削除した上で、以降の13.xリリースを追加しています。各シリーズ内では最新のエントリを先頭に保ち、すべてのエントリをそのまま保持します。
 
 | シリーズ | 含まれるバージョン | 最初–最後のリリース | ページ |
 |---|---|---|---|
@@ -21,5 +21,5 @@ upstream_name: "pgBadger ChangeLog"
 | 10.x | 10.0–10.3 | 2018-09-09 – 2019-02-14 | [10.xを読む](/ja/docs/pgbadger/releases/10/) |
 | 9.x | 9.0–9.2 | 2016-09-02 – 2017-07-27 | [9.xを読む](/ja/docs/pgbadger/releases/9/) |
 
-ダウンロード可能なアーカイブやアセットについては、[GitHub Releases](https://github.com/darold/pgbadger/releases) をご利用ください。本セクションに記載のリリース日は、上流のソース履歴を示すものであり、このドキュメントスナップショットのダウンロード時刻とは異なります。
+ダウンロード可能なアーカイブやアセットについては、[GitHub Releases](https://github.com/darold/pgbadger/releases)をご利用ください。本セクションに記載のリリース日は、アップストリームのソース履歴を示すものであり、このドキュメントスナップショットのダウンロード時刻とは異なります。
 
