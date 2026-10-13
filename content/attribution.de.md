@@ -40,7 +40,7 @@ importiert wurden und wo der vollständige Upstream-Hinweis aufbewahrt wird.
 | [PgBouncer](/de/docs/pgbouncer/) | [PgBouncer-Dokumentation](https://www.pgbouncer.org/) | v1.26.0 (alle sechs Sprachen) | [ISC](https://opensource.org/license/isc-license-txt) | [Upstream `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/de/docs/pgbadger/) | [pgBadger-Dokumentation](https://pgbadger.darold.net/) | v13.2, Commit `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/de/docs/haproxy/) | [HAProxy-3.4-Handbücher](https://docs.haproxy.org/3.4/) | v3.4.4, Commit `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/de/docs/etcd/) | [etcd-v3.7-Dokumentation](https://etcd.io/docs/v3.7/) | v3.7, Commit `8245979` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Upstream `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [etcd](/de/docs/etcd/) | [etcd-v3.7-Dokumentation](https://etcd.io/docs/v3.7/) | v3.7, Commit `d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Upstream `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 Jede Sammlung ist **bearbeitet**, nicht gespiegelt. Überschriften, Anker,
 Querverweise, Codesignaturen, Seitengruppierung und Navigation wurden für diese
@@ -145,11 +145,11 @@ vollständige GPLv2-Text werden unter
 
 ## etcd {#etcd}
 
-Aus der offiziellen etcd-v3.7-Dokumentation importiert und am 2026-08-30 beim
+Aus der offiziellen etcd-v3.7-Dokumentation importiert und am 2026-10-13 beim
 Commit
-[`824597935df6`](https://github.com/etcd-io/website/commit/824597935df6e95992ef61c07e3222f4f796ca6c)
+[`d20f8ae346da`](https://github.com/etcd-io/website/commit/d20f8ae346da60ab6eb6f24f200753b328aa9fcc)
 aktualisiert. Der festgeschriebene Quellbaum ist
-[`content/en/docs/v3.7`](https://github.com/etcd-io/website/tree/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7).
+[`content/en/docs/v3.7`](https://github.com/etcd-io/website/tree/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7).
 
 Copyright 2013–heute für die etcd-Dokumentation: etcd Authors. Ihr Fließtext
 steht unter [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), Code und

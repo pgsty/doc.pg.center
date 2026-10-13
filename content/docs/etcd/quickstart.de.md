@@ -4,7 +4,7 @@ weight: 900
 description: "etcd in weniger als 5 Minuten einsatzbereit machen!"
 icon: fa-solid fa-rocket
 categories: [Tutorial]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/quickstart.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/quickstart.md"
 aliases: [/etcd/quickstart/]
 ---
 
@@ -24,8 +24,8 @@ Befolgen Sie diese Anweisungen, um einen lokalen Ein-Mitglied-Cluster mit etcd z
     ```
 
     > [!NOTE]
-    > **Hinweis**: Die Ausgabe von `etcd` enthält
-    > [Protokolle](/de/docs/etcd/op-guide/configuration/#logging) &mdash; Protokolle auf Info-Ebene können ignoriert werden.
+    > **Hinweis**: Die Ausgabe von `etcd` besteht aus
+    > [Protokollen](/de/docs/etcd/op-guide/configuration/#logging) &mdash; Protokolle auf Info-Ebene können ignoriert werden.
 
 3. Verwenden Sie in einem **anderen Terminal** `etcdctl`, um einen Schlüssel festzulegen:
 
