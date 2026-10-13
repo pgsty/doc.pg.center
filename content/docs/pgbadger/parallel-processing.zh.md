@@ -27,16 +27,16 @@ $ pgbadger -j 8 /var/log/postgresql/postgresql.log
 上游算法把每个文件分成 `N` 个字节区间，为每个区间 fork 一个解析进程，把统计结果写入临时二进制文件，最后合并生成报告。
 
 ```text
-对于每个日志文件：
-    把文件划分为 N 个分块
-    确定每个分块的起止偏移量
-    在对应偏移量启动 N 个解析进程
-    每个进程写入一份临时二进制统计文件
-等待所有工作进程结束
-合并二进制文件并生成报告
+for each log file
+    divide the file into N chunks
+    find each chunk's start and end offsets
+    fork N parsers at those offsets
+    write one temporary binary statistics file per parser
+wait for the workers
+merge the binary files and build the report
 ```
 
-日志记录和多行语句不会恰好与字节偏移对齐，因此每个文件约有最多 `N` 条查询可能在边界处被截断、遗漏，或更常见地被重复计数。该模式适合大文件的聚合分析，不适合要求每条记录计数完全精确的取证流程。
+日志记录和多行语句不会恰好与字节偏移对齐，因此每个文件最多约有 `N` 条查询可能在边界处被截断、遗漏，或更常见地被重复计数。该模式适合大文件的聚合分析，不适合要求每条记录计数完全精确的取证流程。
 
 ## 使用 `-J` 并行处理多个文件 {#multiple-file-jobs}
 
