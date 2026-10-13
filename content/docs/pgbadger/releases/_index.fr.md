@@ -2,7 +2,7 @@
 title: "Historique des versions"
 linkTitle: "Historique des versions"
 weight: 90
-description: "Historique des modifications complet de pgBadger 9.x à 13.x, normalisé à partir du fichier ChangeLog upstream"
+description: "Historique des modifications complet de pgBadger 9.x à 13.x, normalisé à partir du fichier ChangeLog du projet amont"
 icon: fa-solid fa-clock-rotate-left
 module: [PGBADGER]
 categories: [Référence]
@@ -11,7 +11,7 @@ upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632e
 upstream_name: "pgBadger ChangeLog"
 ---
 
-Le site officiel publie les annonces de version directement sur sa page d'accueil. Cette page s'arrête à la version 12.4 et répète accidentellement les versions 11.1 à 11.3 avec des dates contradictoires. Cette édition utilise comme référence canonique le dépôt upstream verrouillé `ChangeLog`, supprime uniquement ces rendus en double, et ajoute les versions ultérieures 13.x. Les entrées sont conservées en intégralité et triées par ordre décroissant de date au sein de chaque série.
+Le site officiel publie les annonces de version directement sur sa page d'accueil. Cette page s'arrête à la version 12.4 et répète accidentellement les versions 11.1 à 11.3 avec des dates contradictoires. Cette édition utilise comme référence canonique le `ChangeLog` verrouillé du projet amont, supprime uniquement ces rendus en double, et ajoute les versions ultérieures 13.x. Les entrées sont conservées en intégralité et triées par ordre décroissant de date au sein de chaque série.
 
 | Série | Versions incluses | Première – dernière version | Page |
 |---|---|---|---|

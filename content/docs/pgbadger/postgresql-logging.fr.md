@@ -21,7 +21,7 @@ Pour inclure le texte et la durée de la requête, activez la journalisation des
 log_min_duration_statement = 0
 ```
 
-`0` enregistre chaque instruction terminée. Sur un serveur très sollicité, sélectionnez une valeur plus élevée en millisecondes afin de contrôler le volume des journaux. Mesurez la surcharge et la croissance du stockage avant d'activer une seuil faible en production.
+`0` enregistre chaque instruction terminée. Sur un serveur très sollicité, sélectionnez une valeur plus élevée en millisecondes afin de contrôler le volume des journaux. Mesurez la surcharge et la croissance du stockage avant d'activer un seuil faible en production.
 
 Si vous avez besoin uniquement de la durée et du nombre de requêtes, et non du texte des requêtes, utilisez :
 
@@ -103,7 +103,7 @@ N'activez pas simultanément `log_min_duration_statement`, `log_duration` et `lo
 
 | Objectif | Paramétrage recommandé |
 |---|---|
-| Texte de requête et chronométrage | `log_min_duration_statement = 0` ou une seuil choisi |
+| Texte de requête et chronométrage | `log_min_duration_statement = 0` ou un seuil choisi |
 | Durée et comptage uniquement | `log_min_duration_statement = -1`, `log_duration = on` |
 | Audit des énoncés généraux | Traiter `log_statement` comme une politique de journalisation distincte ; ne pas combiner les trois paramètres pour les statistiques de pgBadger |
 

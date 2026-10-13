@@ -26,7 +26,7 @@ En cas de plantage ou d'erreur de parsing, inclure uniquement les lignes de jour
 
 ## Contribuez à un correctif {#contribute-a-patch}
 
-Le projet inclut un fichier `.editorconfig` pour un espacement cohérent. Veillez à aligner l’aide en ligne des commandes, la documentation POD et la documentation Markdown générée lorsque un changement affecte un comportement visible pour l’utilisateur.
+Le projet inclut un fichier `.editorconfig` pour un espacement cohérent. Veillez à aligner l’aide en ligne des commandes, la documentation POD et la documentation Markdown générée lorsqu'un changement affecte un comportement visible pour l’utilisateur.
 
 Le flux de documentation côté amont est :
 
@@ -35,7 +35,7 @@ $ perl Makefile.PL
 $ make README
 ```
 
-`doc/pgBadger.pod` est la source principale en format long. `pgbadger --help` fournit le résumé, tandis que les fichiers README sont des visualisations générées. Exécutez les tests pertinents avant de soumettre une demande de fusion.
+`doc/pgBadger.pod` est la source principale en format long. `pgbadger --help` fournit le résumé, tandis que les fichiers README sont des vues générées. Exécutez les tests pertinents avant de soumettre une demande de fusion.
 
 - [Dépôt source](https://github.com/darold/pgbadger)
 - [Demandes de tirage](https://github.com/darold/pgbadger/pulls)

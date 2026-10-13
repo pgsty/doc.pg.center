@@ -11,7 +11,7 @@ upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632e
 upstream_name: "pgBadger README.md"
 ---
 
-pgBadger sélectionne la sortie en fonction de l'extension du nom de fichier ou de `-x` / `--extension`. Utilisez `-o` / `--outfile` plus d'une fois pour générer plusieurs formats à partir du même analyse.
+pgBadger sélectionne la sortie en fonction de l'extension du nom de fichier ou de `-x` / `--extension`. Utilisez `-o` / `--outfile` plus d'une fois pour générer plusieurs formats à partir de la même analyse.
 
 | Format | Extension typique | Meilleur usage |
 |---|---|---|
@@ -49,7 +49,7 @@ $ pgbadger --last-parsed .pgbadger_last_state \
     /var/log/pgsql/postgresql-Sun.log
 ```
 
-Fusionnez un ou plusieurs fichiers binaires dans un rapport frais :
+Fusionnez un ou plusieurs fichiers binaires dans un nouveau rapport :
 
 ```console
 $ pgbadger -o sunday.html sunday/*.bin

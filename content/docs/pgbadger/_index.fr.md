@@ -33,7 +33,7 @@ pgBadger est conçu pour les gros volumes de journaux et une utilisation opérat
 - entrée compressée avec gzip, bzip2, lz4, xz, zip ou zstd ;
 - analyse parallèle d'un grand fichier ou de nombreux petits fichiers ;
 - rapports incrémentiels quotidiens, hebdomadaires et mensuels à la demande ;
-- filtres par heure, base de données, utilisateur, client, application, processus, session et motif de requête.
+- filtres par date et heure, base de données, utilisateur, client, application, processus, session et motif de requête.
 
 ## Ce que contiennent les rapports {#report-coverage}
 
@@ -48,7 +48,7 @@ L'ensemble de rapports PostgreSQL couvre :
 
 L'entrée PgBouncer ajoute des rapports sur le débit, la durée moyenne des requêtes, le nombre de sessions simultanées, la répartition des connexions et des sessions, l'utilisation du pool réservé, ainsi que des rapports fréquents sur les erreurs et événements.
 
-## Documentation map {#documentation-map}
+## Plan de la documentation {#documentation-map}
 
 Lisez le manuel dans cet ordre, ou utilisez la barre latérale pour accéder directement à une tâche :
 
