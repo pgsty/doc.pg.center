@@ -2,7 +2,7 @@
 title: "コマンドラインリファレンス"
 linkTitle: "コマンドライン"
 weight: 30
-description: "完全な pgBadger コマンド構文、オプション、リモート入力、リターン コード、および例"
+description: "完全なpgBadgerコマンド構文、オプション、リモート入力、リターンコード、および例"
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [リファレンス]
@@ -11,7 +11,7 @@ upstream_link: "https://github.com/darold/pgbadger/tree/a1ad95a035a0c2d246fe632e
 upstream_name: "pgBadger README.md"
 ---
 
-このページには、固定されたアップストリーム ソースから生成されたコマンド リファレンスが保存されます。オプション名とヘルプ テキストはそのまま残るため、`pgbadger --help` と直接比較できます。
+このページには、固定されたアップストリームソースから生成されたコマンドリファレンスが保存されます。オプション名とヘルプテキストはそのまま残るため、`pgbadger --help`と直接比較できます。
 
 ## 使い方とオプション {#usage-and-options}
 
@@ -237,7 +237,7 @@ use - as filename. Note that input from stdin will not work with csvlog.
                          Default: File::Spec->tmpdir() || '/tmp'
 ```
 
-pgBadger は、パスワードなしの ssh 接続を使用してリモート ログ ファイルを解析できます。 -r または --remote-host を使用して、ホストの IP アドレスまたはホスト名を設定します。 SSH 接続を完全に制御するための追加オプションもいくつかあります。
+pgBadgerは、パスワードなしのssh接続を使用してリモートログファイルを解析できます。 -rまたは --remote-hostを使用して、ホストのIPアドレスまたはホスト名を設定します。 SSH接続を完全に制御するための追加オプションもいくつかあります。
 
 ```text
 --ssh-identity file      path to the identity file to use.
@@ -251,7 +251,7 @@ pgBadger は、パスワードなしの ssh 接続を使用してリモート �
 --ssh-user username      connection login name. Defaults to running user.
 ```
 
-解析するログ ファイルは、URI を使用して指定することもできます。サポートされているプロトコルは http[s] および [s]ftp です。ファイルのダウンロードにはcurlコマンドが使用され、ダウンロード中にファイルが解析されます。 ssh プロトコルもサポートされており、リモート ホストの使用と同様に ssh コマンドを使用します。以下の例を参照してください。
+解析するログファイルは、URIを使用して指定することもできます。サポートされているプロトコルはhttp[s]および [s]ftpです。ファイルのダウンロードにはcurlコマンドが使用され、ダウンロード中にファイルが解析されます。 sshプロトコルもサポートされており、リモートホストの使用と同様にsshコマンドを使用します。以下の例を参照してください。
 
 リターンコード:
 
@@ -281,7 +281,7 @@ pgbadger --prefix 'user=%u,db=%d,client=%h,appname=%a' /pglog/postgresql-2012-08
 pgbadger -j 8 /pglog/postgresql-10.1-main.log
 ```
 
-リモート ログ ファイルには URI 表記を使用します。
+リモートログファイルにはURI表記を使用します。
 
 ```text
 pgbadger http://172.12.110.1//var/log/postgresql/postgresql-10.1-main.log
@@ -289,13 +289,13 @@ pgbadger ftp://username@172.12.110.14/postgresql-10.1-main.log
 pgbadger ssh://username@172.12.110.14:2222//var/log/postgresql/postgresql-10.1-main.log*
 ```
 
-ローカル PostgreSQL ログ ファイルとリモート pgbouncer ログ ファイルを一緒に使用して解析できます。
+ローカルPostgreSQLログファイルとリモートpgbouncerログファイルを一緒に使用して解析できます。
 
 ```text
 pgbadger /var/log/postgresql/postgresql-10.1-main.log ssh://username@172.12.110.14/pgbouncer.log
 ```
 
-cron ジョブごとに毎週エラーを報告します。
+cronジョブごとに毎週エラーを報告します。
 
 ```text
 30 23 * * 1 /usr/bin/pgbadger -q -w /var/log/postgresql.log -o /var/reports/pg_errors.html
@@ -307,7 +307,7 @@ cron ジョブごとに毎週エラーを報告します。
 0 4 * * 1 /usr/bin/pgbadger -q `find /var/log/ -mtime -7 -name "postgresql.log*"` -o /var/reports/pg_errors-`date +\%F`.html -l /var/reports/pgbadger_incremental_file.dat
 ```
 
-これは、ログ ファイルと HTML レポートも毎週ローテーションされることを前提としています。
+これは、ログファイルとHTMLレポートも毎週ローテーションされることを前提としています。
 
 あるいは、自動生成された増分レポートを使用することをお勧めします。
 
@@ -323,29 +323,29 @@ cron ジョブごとに毎週エラーを報告します。
 /usr/bin/pgbadger --retention 2 -I -q /var/log/postgresql/postgresql.log.1 -O /var/www/pg_reports/
 ```
 
-毎日 30 分間、23:00 および 13:00 に pg_dump がある場合、次のように pgBadger を使用して、これらの期間をレポートから除外できます。
+毎日30分間、23:00および13:00にpg_dumpがある場合、次のようにpgBadgerを使用して、これらの期間をレポートから除外できます。
 
 ```text
 pgbadger --exclude-time "2013-09-.* (23|13):.*" postgresql.log
 ```
 
-これにより、pg_dump によって生成された COPY ステートメントが最も遅いクエリのリストの上位に表示されるのを避けることができます。 --exclude-appname "pg_dump" を使用して、この問題をより簡単な方法で解決することもできます。
+これにより、pg_dumpによって生成されたCOPYステートメントが最も遅いクエリのリストの上位に表示されるのを避けることができます。 --exclude-appname "pg_dump" を使用して、この問題をより簡単な方法で解決することもできます。
 
-また、journalctl 出力をログ ファイルであるかのように解析することもできます。
+また、journalctl出力をログファイルであるかのように解析することもできます。
 
 ```text
 pgbadger --journalctl 'journalctl -u postgresql-9.5'
 ```
 
-最悪の場合は、リモート ホストから呼び出します。
+最悪の場合は、リモートホストから呼び出します。
 
 ```text
 pgbadger -r 192.168.1.159 --journalctl 'journalctl -u postgresql-9.5'
 ```
 
-コマンド ラインでログ ファイルを指定する必要はありませんが、解析する他の PostgreSQL ログ ファイルがある場合は、通常どおり追加できます。
+コマンドラインでログファイルを指定する必要はありませんが、解析する他のPostgreSQLログファイルがある場合は、通常どおり追加できます。
 
-すべての増分 HTML レポートを後で再構築するには、次の手順を実行します。
+すべての増分HTMLレポートを後で再構築するには、次の手順を実行します。
 
 ```text
 rm /path/to/reports/*.js
@@ -353,40 +353,40 @@ rm /path/to/reports/*.css
 pgbadger -X -I -O /path/to/reports/ --rebuild
 ```
 
-また、すべてのリソース ファイル (JS および CSS) も更新されます。このオプションを使用してレポートが作成された場合は、-E または --explode を使用します。
+また、すべてのリソースファイル(JSおよびCSS)も更新されます。このオプションを使用してレポートが作成された場合は、-Eまたは --explodeを使用します。
 
-pgBadger は、logplex 形式を使用した Heroku PostgreSQL ログもサポートしています。
+pgBadgerは、logplex形式を使用したHeroku PostgreSQLログもサポートしています。
 
 ```text
 heroku logs -p postgres | pgbadger -f logplex -o heroku.html -
 ```
 
-これにより、標準入力を介して Heroku PostgreSQL ログが pgbadger にストリーミングされます。
+これにより、標準入力を介してHeroku PostgreSQLログがpgbadgerにストリーミングされます。
 
-pgBadger は、rds 形式を使用して RDS および Cloudwatch PostgreSQL ログを自動検出できます。
+pgBadgerは、rds形式を使用してRDSおよびCloudwatch PostgreSQLログを自動検出できます。
 
 ```text
 pgbadger -f rds -o rds_out.html rds.log
 ```
 
-各 CloudSQL PostgreSQL ログはごく普通の PostgreSQL ログですが、JSON 形式でカプセル化されています。これは pgBadger によって自動検出されますが、ログ形式を強制する必要がある場合には \`jsonlog\` を使用します。
+各CloudSQL PostgreSQLログはごく普通のPostgreSQLログですが、JSON形式でカプセル化されています。これはpgBadgerによって自動検出されますが、ログ形式を強制する必要がある場合には \`jsonlog\`を使用します。
 
 ```text
 pgbadger -f jsonlog -o cloudsql_out.html cloudsql.log
 ```
 
-これは jsonlog 拡張機能の場合と同じで、json 形式は異なりますが、pgBadger は両方の形式を解析できます。
+これはjsonlog拡張機能の場合と同じで、json形式は異なりますが、pgBadgerは両方の形式を解析できます。
 
-pgBadger は、Kubernetes の CloudNativePG Postgres オペレーターによって生成されたログもサポートします。
+pgBadgerは、KubernetesのCloudNativePG Postgresオペレーターによって生成されたログもサポートします。
 
 ```text
 pgbadger -f jsonlog -o cnpg_out.html cnpg.log
 ```
 
-1 か月にわたる累積レポートを作成するには、次のコマンドを使用します。
+1か月にわたる累積レポートを作成するには、次のコマンドを使用します。
 
 ```text
 pgbadger --month-report 2919-05 /path/to/incremental/reports/
 ```
 
-これにより、増分レポートのカレンダー ビューに月名へのリンクが追加され、2019 5 月のレポートが表示されます。このオプションを使用してレポートが作成された場合は、-E または --explode を使用します。
+これにより、増分レポートのカレンダービューに月名へのリンクが追加され、2019年5月のレポートが表示されます。このオプションを使用してレポートが作成された場合は、-Eまたは --explodeを使用します。
