@@ -3,7 +3,7 @@ title: Monitoring etcd
 weight: 4500
 description: Monitoring etcd for system health & cluster debugging
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/monitoring.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/monitoring.md"
 aliases: [/etcd/op-guide/monitoring/]
 ---
 
@@ -166,19 +166,19 @@ Sample dashboard:
 In v3.5 etcd has added support for distributed tracing using [OpenTelemetry](https://github.com/open-telemetry).
 
 > [!NOTE]
-> This feature is still experimental and can change at any time.
+> In etcd 3.7, use the tracing flags below without the former experimental prefix.
 
-To enable this experimental feature, pass the `--experimental-enable-distributed-tracing=true` to the etcd server, along with the `--experimental-distributed-tracing-sampling-rate=<number>` flag to choose how many samples to collect per million spans, the default sampling rate is `0`.
+To enable distributed tracing, pass the `--enable-distributed-tracing=true` to the etcd server, along with the `--distributed-tracing-sampling-rate=<number>` flag to choose how many samples to collect per million spans, the default sampling rate is `0`.
 
 Configure the distributed tracing by starting etcd server with the following optional flags:
 
-- `--experimental-distributed-tracing-address` - (Optional) - "localhost:4317" - Address of the tracing collector.
+- `--distributed-tracing-address` - (Optional) - "localhost:4317" - Address of the tracing collector.
 
-- `--experimental-distributed-tracing-service-name` - (Optional) - "etcd" - Distributed tracing service name, must be same across all etcd instances.
+- `--distributed-tracing-service-name` - (Optional) - "etcd" - Distributed tracing service name, must be same across all etcd instances.
 
-- `--experimental-distributed-tracing-instance-id` - (Optional) - Instance ID, while optional it's strongly recommended to set, must be unique per etcd instance.
+- `--distributed-tracing-instance-id` - (Optional) - Instance ID, while optional it's strongly recommended to set, must be unique per etcd instance.
 
-Before enabling the distributed tracing, make sure to have the OpenTelemetry endpoint, if that address differs to the default one, override with the `--experimental-distributed-tracing-address` flag. Due to OpenTelemetry having different ways of running, refer to the [collector documentation](https://opentelemetry.io/docs/collector/getting-started/) to learn more.
+Before enabling the distributed tracing, make sure to have the OpenTelemetry endpoint, if that address differs to the default one, override with the `--distributed-tracing-address` flag. Due to OpenTelemetry having different ways of running, refer to the [collector documentation](https://opentelemetry.io/docs/collector/getting-started/) to learn more.
 
 > [!NOTE]
 > There is a resource overhead, as with any observability signal, according to our initial measurements that overhead could be between 2% - 4% CPU overhead.

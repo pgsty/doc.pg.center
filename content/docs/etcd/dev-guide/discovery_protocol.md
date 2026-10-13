@@ -3,9 +3,12 @@ title: Discovery service protocol
 weight: 1500
 description: Discover other etcd members in a cluster bootstrap phase
 categories: [Reference]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/discovery_protocol.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/discovery_protocol.md"
 aliases: [/etcd/dev-guide/discovery_protocol/]
 ---
+
+> [!NOTE]
+> This page documents the legacy v2 discovery protocol, which was removed in etcd 3.7. For a new v3.7 deployment, use the [v3 discovery protocol](/docs/etcd/dev-internal/discovery_protocol/).
 
 Discovery service protocol helps new etcd member to discover all other members in cluster bootstrap phase using a shared discovery URL.
 

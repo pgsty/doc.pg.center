@@ -3,7 +3,7 @@ title: etcd API guarantees
 weight: 2750
 description: API guarantees made by etcd
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/api_guarantees.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/api_guarantees.md"
 aliases: [/etcd/learning/api_guarantees/]
 ---
 
@@ -79,10 +79,10 @@ at some point between its invocation and its response.`
 For example, consider a client completing a write at time point 1 (*t1*). A
 client issuing a read at *t2* (for *t2* > *t1*) should receive a value at least
 as recent as the previous write, completed at *t1*. However, the read might
-actually complete only by *t3*. Linearizability guarantees the read returns the
-most current value. Without linearizability guarantee, the returned value,
-current at *t2* when the read began, might be "stale" by *t3* because a
-concurrent write might happen between *t2* and *t3*.
+actually complete only by *t3*. The read returns the value that is current at
+a single point between *t2* and *t3*. It may include or exclude a write
+concurrent with that read, so a value current at *t2* can still be returned
+even if another write completes before *t3*.
 
 etcd ensures linearizability for all other operations by default.
 Linearizability comes with a cost, however, because linearized requests must go

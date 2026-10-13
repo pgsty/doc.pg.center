@@ -3,7 +3,7 @@ title: Feature Gates
 weight: 1175
 icon: fa-solid fa-toggle-on
 categories: [Reference]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/feature-gates/index.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/feature-gates/index.md"
 aliases: [/etcd/feature-gates/]
 ---
 
@@ -34,7 +34,7 @@ Or specify `feature-gates` in YAML config file:
 feature-gates: ...,StopGRPCServiceOnDefrag=true
 ```
 
-### Change in `embed.EtcdServer` struct
+### Change in `embed.Config` struct {#change-in-embedetcdserver-struct}
 
 In 3.6, field `ServerFeatureGate` is added to `embed.Config`, and should be replacing the experimental fields listed below:
 
@@ -72,8 +72,8 @@ etcd.
 
 | Feature                          | Default | Stage | Details                                                                               |
 |----------------------------------|---------|-------|--------------------------------------------------------------------------------------|
-| CompactHashCheck                 | false   | Alpha |Enables to check data corruption before serving any client/peer traffic.                                                                              |
-| InitialCorruptCheck              | false   | Alpha |Enables leader to periodically check followers compaction hashes.                                                                           |
+| CompactHashCheck                 | false   | Alpha |Enables leader to periodically check followers compaction hashes.                                                                           |
+| InitialCorruptCheck              | false   | Alpha |Enables to check data corruption before serving any client/peer traffic.                                                                              |
 | LeaseCheckpoint                  | false   | Alpha |Enables leader to send regular checkpoints to other members to prevent reset of remaining TTL on leader change.                                              |
 | LeaseCheckpointPersist           | false   | Alpha |Enables persisting remainingTTL to prevent indefinite auto-renewal of long lived leases.                                                                         |
 | SetMemberLocalAddr               | false   | Alpha |Enables using the first specified and non-loopback local address from initial-advertise-peer-urls as the local address when communicating with a peer.      |

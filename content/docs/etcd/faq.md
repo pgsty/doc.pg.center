@@ -4,7 +4,7 @@ weight: 1200
 description: Frequently asked questions
 icon: fa-solid fa-circle-question
 categories: [Reference]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/faq.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/faq.md"
 aliases: [/etcd/faq/]
 ---
 
@@ -20,7 +20,7 @@ etcd is pronounced **/ˈɛtsiːdiː/**, and means "distributed `etc` directory."
 
 ### Do clients have to send requests to the etcd leader?
 
-[Raft][raft] is leader-based; the leader handles all client requests which need cluster consensus. However, the client does not need to know which node is the leader. Any request that requires consensus sent to a follower is automatically forwarded to the leader. Requests that do not require consensus (e.g., serialized reads) can be processed by any cluster member.
+[Raft][raft] is leader-based; the leader handles all client requests which need cluster consensus. However, the client does not need to know which node is the leader. Any request that requires consensus sent to a follower is automatically forwarded to the leader. Requests that do not require consensus (e.g., serializable reads) can be processed by any cluster member.
 
 ## Configuration
 
@@ -68,7 +68,7 @@ It is recommended to have an odd number of members in a cluster. An odd-size clu
 | 8 | 5 | 3 |
 | 9 | 5 | 4 |
 
-Adding a member to bring the size of cluster up to an even number doesn't buy additional fault tolerance. Likewise, during a network partition, an odd number of members guarantees that there will always be a majority partition that can continue to operate and be the source of truth when the partition ends.
+Adding a member to bring the size of cluster up to an even number doesn't buy additional fault tolerance. Likewise, during a two-way network partition, an odd number of members guarantees that there will always be a majority partition that can continue to operate and be the source of truth when the partition ends.
 
 ### Does etcd work in cross-region or cross data center deployments?
 
@@ -110,7 +110,7 @@ Usually this warning happens after tearing down an old cluster, then reusing som
 
 ### What does "mvcc: database space exceeded" mean and how do I fix it?
 
-The [multi-version concurrency control][api-mvcc] data model in etcd keeps an exact history of the keyspace. Without periodically compacting this history (e.g., by setting `--auto-compaction`), etcd will eventually exhaust its storage space. If etcd runs low on storage space, it raises a space quota alarm to protect the cluster from further writes. So long as the alarm is raised, etcd responds to write requests with the error `mvcc: database space exceeded`.
+The [multi-version concurrency control][api-mvcc] data model in etcd keeps an exact history of the keyspace. Without periodically compacting this history (e.g., by setting `--auto-compaction-mode` and `--auto-compaction-retention`), etcd will eventually exhaust its storage space. If etcd runs low on storage space, it raises a space quota alarm to protect the cluster from further writes. So long as the alarm is raised, etcd responds to write requests with the error `mvcc: database space exceeded`.
 
 To recover from the low space quota alarm:
 

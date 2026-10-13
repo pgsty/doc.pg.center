@@ -4,7 +4,7 @@ weight: 1350
 description: Metrics for real-time monitoring and debugging
 icon: fa-solid fa-chart-line
 categories: [Reference]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/metrics/_index.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/metrics/_index.md"
 aliases: [/etcd/metrics/]
 ---
 
@@ -78,11 +78,11 @@ All these metrics are prefixed with `etcd_network_`
 |---------------------------------|--------------------------------------------------------------------|---------------|
 | peer_sent_bytes_total           | The total number of bytes sent to the peer with ID `To`.           | Counter(To)   |
 | peer_received_bytes_total       | The total number of bytes received from the peer with ID `From`.   | Counter(From) |
-| peer_sent_failures_total        | The total number of send failures from the peer with ID `To`.      | Counter(To)   |
+| peer_sent_failures_total        | The total number of send failures to the peer with ID `To`.      | Counter(To)   |
 | peer_received_failures_total    | The total number of receive failures from the peer with ID `From`. | Counter(From) |
 | peer_round_trip_time_seconds    | Round-Trip-Time histogram between peers.                           | Histogram(To) |
 | client_grpc_sent_bytes_total    | The total number of bytes sent to grpc clients.                    | Counter       |
-| client_grpc_received_bytes_total| The total number of bytes received to grpc clients.                | Counter       |
+| client_grpc_received_bytes_total| The total number of bytes received from grpc clients.                | Counter       |
 
 `peer_sent_bytes_total` counts the total number of bytes sent to a specific peer. Usually the leader member sends more data than other members since it is responsible for transmitting replicated data.
 

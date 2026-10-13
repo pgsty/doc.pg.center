@@ -3,7 +3,7 @@ title: Upgrade etcd from v3.5 to v3.6
 weight: 6600
 description: Processes, checklists, and notes on upgrading etcd from v3.5 to v3.6
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_6.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_6.md"
 aliases: [/etcd/upgrades/upgrade_3_6/]
 ---
 
@@ -243,9 +243,9 @@ If `--enable-v2` **is** configured, run the command `etcdutl check v2store` to v
 
 ```
 
-### Equivalent flags of v3.5 feature gates
+### Migrate v3.5 experimental flags to feature gates {#equivalent-flags-of-v35-feature-gates}
 
-**equivalent flag for feature gate `etcd --experimental-compact-hash-check-enabled=true`**
+**Feature gate corresponding to `etcd --experimental-compact-hash-check-enabled=true`**
 
 ```diff
 
@@ -255,7 +255,7 @@ If `--enable-v2` **is** configured, run the command `etcdutl check v2store` to v
 
 ```
 
-**equivalent flag for feature gate `etcd --experimental-initial-corrupt-check=true`**
+**Feature gate corresponding to `etcd --experimental-initial-corrupt-check=true`**
 
 ```diff
 
@@ -265,7 +265,7 @@ If `--enable-v2` **is** configured, run the command `etcdutl check v2store` to v
 
 ```
 
-**equivalent flag for feature gate `etcd --experimental-enable-lease-checkpoint=true`**
+**Feature gate corresponding to `etcd --experimental-enable-lease-checkpoint=true`**
 
 ```diff
 
@@ -275,7 +275,7 @@ If `--enable-v2` **is** configured, run the command `etcdutl check v2store` to v
 
 ```
 
-**equivalent flag for feature gate `etcd --experimental-enable-lease-checkpoint-persist=true`**
+**Feature gate corresponding to `etcd --experimental-enable-lease-checkpoint-persist=true`**
 
 ```diff
 
@@ -285,7 +285,7 @@ If `--enable-v2` **is** configured, run the command `etcdutl check v2store` to v
 
 ```
 
-**equivalent flag for feature gate `etcd --experimental-stop-grpc-service-on-defrag=true`**
+**Feature gate corresponding to `etcd --experimental-stop-grpc-service-on-defrag=true`**
 
 ```diff
 
@@ -295,7 +295,7 @@ If `--enable-v2` **is** configured, run the command `etcdutl check v2store` to v
 
 ```
 
-**equivalent flag for feature gate `etcd --experimental-txn-mode-write-with-shared-buffer=false`**
+**Feature gate corresponding to `etcd --experimental-txn-mode-write-with-shared-buffer=false`**
 
 ```diff
 
@@ -349,7 +349,7 @@ If `--enable-v2` **is** configured, run the command `etcdutl check v2store` to v
 
 #### Upgrade requirements
 
-To upgrade an existing etcd deployment to v3.6, the running cluster must be v3.5 or greater. If it's before v3.5, please [upgrade to v3.5](/docs/etcd/upgrades/upgrade_3_4/) before upgrading to v3.6.
+To upgrade an existing etcd deployment to v3.6, the running cluster must be v3.5 or greater. If it's before v3.5, please [upgrade to v3.5](/docs/etcd/upgrades/upgrade_3_5/) before upgrading to v3.6.
 
 Also, to ensure a smooth rolling upgrade, the running cluster must be healthy. Check the health of the cluster by using the `etcdctl endpoint health` command before proceeding.
 
@@ -367,7 +367,7 @@ While upgrading, an etcd cluster supports mixed versions of etcd members, and op
 
 Before upgrading your etcd cluster, please create and [download a snapshot backup](/docs/etcd/op-guide/maintenance/#snapshot-backup) of your etcd cluster. This snapshot can be used to restore the cluster to its pre-upgrade state if needed. If users encounter issues during the upgrade, they should first identify and resolve the root cause. If the cluster is still in a mixed-version state—where at least one member remains on v3.5—they can either replace the binary or image with the old v3.5 version or restore the cluster directly using the snapshot. In this mixed state, the cluster continues to operate as a v3.5 cluster, allowing rollback without following a formal downgrade process.
 
-However, once all members have been upgraded to v3.6, the cluster is considered fully upgraded and rollback using binaries is no longer possible. In that case, the only recovery option is to restore from the snapshot taken before the upgrade. If users wish to return to the original version after a full upgrade has completed, they should follow the official downgrade guide to ensure consistency and avoid data corruption.
+However, once all members have been upgraded to v3.6, the cluster is considered fully upgraded and simply replacing binaries is no longer a valid rollback. Recovery options are to restore from the snapshot taken before the upgrade or follow the official downgrade guide to return to the original version while ensuring consistency and avoiding data corruption.
 
 ### Upgrade procedure
 

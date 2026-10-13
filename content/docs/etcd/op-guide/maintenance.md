@@ -3,7 +3,7 @@ title: Maintenance
 weight: 4450
 description: Periodic etcd cluster maintenance guide
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/maintenance.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/maintenance.md"
 aliases: [/etcd/op-guide/maintenance/]
 ---
 
@@ -19,7 +19,7 @@ All etcd maintenance manages storage resources consumed by the etcd keyspace. Fa
 
 Higher `--snapshot-count` holds more Raft entries in memory until snapshot, thus causing [recurrent higher memory usage](https://github.com/kubernetes/kubernetes/issues/60589#issuecomment-371977156). Since leader retains latest Raft entries for longer, a slow follower has more time to catch up before leader snapshot. `--snapshot-count` is a tradeoff between higher memory usage and better availabilities of slow followers.
 
-Since v3.2, the default value of `--snapshot-count` has [changed from from 10,000 to 100,000](https://github.com/etcd-io/etcd/pull/7160).
+In v3.2, the default value of `--snapshot-count` [changed from 10,000 to 100,000](https://github.com/etcd-io/etcd/pull/7160). In v3.7.0, the default is 10,000.
 
 In performance-wise, `--snapshot-count` greater than 100,000 may impact the write throughput. Higher number of in-memory objects can slow down [Go GC mark phase `runtime.scanobject`](https://golang.org/src/runtime/mgc.go), and infrequent memory reclamation makes allocation slow. Performance varies depending on the workloads and system environments. However, in general, too frequent compaction affects cluster availabilities and write throughputs. Too infrequent compaction is also harmful placing too much pressure on Go garbage collector. See [Understanding Performance Aspects of etcd and Raft](https://www.slideshare.net/mitakeh/understanding-performance-aspects-of-etcd-and-raft) for more research results.
 

@@ -6,6 +6,7 @@ content_dir="$project_dir/content"
 docs_dir="$content_dir/docs"
 build_dir=$(mktemp -d "${TMPDIR:-/tmp}/pig-center-check.XXXXXX")
 trap 'rm -rf "$build_dir"' EXIT
+export PYTHONPYCACHEPREFIX="$build_dir/python-cache"
 
 legacy_complete_expected=78
 total_complete_expected=215
@@ -46,8 +47,8 @@ test "$legacy_french_count" -eq "$legacy_complete_expected"
 test "$english_count" -eq "$total_complete_expected"
 test "$chinese_count" -eq "$total_complete_expected"
 test "$french_count" -eq "$total_complete_expected"
-test "$japanese_count" -eq 128
-test "$german_count" -eq 65
+test "$japanese_count" -eq 192
+test "$german_count" -eq 161
 test "$russian_count" -eq 210
 test "$(find "$docs_dir/pgbouncer" -type f -name '*.ja.md' | wc -l | tr -d ' ')" -eq 9
 test "$(find "$docs_dir/pgbouncer" -type f -name '*.de.md' | wc -l | tr -d ' ')" -eq 9
@@ -69,6 +70,8 @@ test "$haproxy_reading_count" -eq 34
 test "$etcd_markdown_count" -eq "$etcd_markdown_expected"
 test "$etcd_chinese_count" -eq "$etcd_markdown_expected"
 test "$etcd_french_count" -eq "$etcd_markdown_expected"
+test "$(find "$docs_dir/etcd" -type f -name '*.ja.md' | wc -l | tr -d ' ')" -eq "$etcd_markdown_expected"
+test "$(find "$docs_dir/etcd" -type f -name '*.de.md' | wc -l | tr -d ' ')" -eq "$etcd_markdown_expected"
 test "$etcd_asset_count" -eq "$etcd_asset_expected"
 test "$haproxy_weights" = "$(seq 10 10 370)"
 test -d "$docs_dir"
@@ -222,6 +225,14 @@ python3 -B "$project_dir/scripts/check-pgbackrest.py"
 
 HUGO_RESOURCEDIR="$build_dir/resources" \
   hugo --source "$project_dir" --destination "$build_dir/public" --cacheDir "${HUGO_CACHEDIR:-$build_dir/cache}" --gc --minify --cleanDestinationDir --printPathWarnings --printI18nWarnings --panicOnWarning
+
+python3 "$project_dir/scripts/test-etcd.py"
+python3 "$project_dir/scripts/check-etcd.py" --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/test-etcd-german.py"
+python3 "$project_dir/scripts/check-etcd-german.py" --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/check-japanese-parity.py" --component etcd --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/check-etcd-ja-rendered.py" --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/test-etcd-ja.py" --rendered-dir "$build_dir/public"
 
 PGBOUNCER_RENDERED_DIR="$build_dir/public" python3 -B "$project_dir/scripts/test-pgbouncer-parity.py"
 python3 -B "$project_dir/scripts/check-pgbouncer.py" --rendered-dir "$build_dir/public"

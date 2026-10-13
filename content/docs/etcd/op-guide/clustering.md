@@ -3,7 +3,7 @@ title: Clustering Guide
 weight: 4150
 description: "Bootstrapping an etcd cluster: Static, etcd Discovery, and DNS Discovery"
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/clustering.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/clustering.md"
 aliases: [/etcd/op-guide/clustering/]
 ---
 
@@ -220,6 +220,9 @@ There two methods that can be used for discovery:
 * DNS SRV records
 
 ### etcd discovery
+
+> [!NOTE]
+> The discovery-service examples in this section describe the legacy v2 protocol, which was removed in etcd 3.7. For a new v3.7 cluster, use [v3 discovery](/docs/etcd/dev-internal/discovery_protocol/) or the static and DNS SRV bootstrap methods in this guide.
 
 To better understand the design of the discovery service protocol, we suggest reading the discovery service protocol [documentation][discovery-proto].
 
@@ -485,9 +488,9 @@ etcd gateway is a simple TCP proxy that forwards network data to the etcd cluste
 
 ### Proxy
 
-When the `--proxy` flag is set, etcd runs in [proxy mode][proxy]. This proxy mode only supports the etcd v2 API; there are no plans to support the v3 API. Instead, for v3 API support, there will be a new proxy with enhanced features following the etcd 3.0 release.
+Older etcd releases supported a v2-only [proxy mode][proxy] through `--proxy`. That mode has been removed and cannot be used with etcd 3.7. For the v3 API, use the [gRPC proxy](/docs/etcd/op-guide/grpc_proxy/).
 
-To setup an etcd cluster with proxies of v2 API, please read the the [clustering doc in etcd 2.3 release][clustering_etcd2].
+For historical v2 proxy deployments, see the [clustering doc in etcd 2.3 release][clustering_etcd2].
 
 [clustering_etcd2]: https://github.com/etcd-io/etcd/blob/release-2.3/Documentation/clustering.md
 [conf-adv-client]: /docs/etcd/op-guide/configuration/#clustering

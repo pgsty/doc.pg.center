@@ -3,7 +3,7 @@ title: Reading from etcd
 description: Reading a value in an etcd cluster
 weight: 200
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/developer/reading-from-etcd.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/developer/reading-from-etcd.md"
 aliases: [/etcd/tasks/developer/reading-from-etcd/]
 ---
 
@@ -36,4 +36,4 @@ $ etcdctl --endpoints=$ENDPOINTS --write-out="json" get foo
 $
 ```
 
-where `write-out="json"` causes the value to be output in JSON format (note that the key is not returned).
+where `write-out="json"` returns JSON output with both the key and value encoded in base64.

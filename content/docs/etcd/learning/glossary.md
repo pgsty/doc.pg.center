@@ -3,7 +3,7 @@ title: Glossary
 weight: 2900
 description: Terms used in etcd documentation, command line, and source code
 categories: [Reference]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/glossary.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/glossary.md"
 aliases: [/etcd/learning/glossary/]
 ---
 
@@ -45,7 +45,7 @@ A user-defined identifier for storing and retrieving user-defined values in etcd
 
 ## Key range
 
-A set of keys containing either an individual key, a lexical interval for all x such that a < x <= b, or all keys greater than a given key.
+A set of keys containing either an individual key, a lexical interval for all x such that a <= x < b, or all keys greater than a given key.
 
 ## Keyspace
 

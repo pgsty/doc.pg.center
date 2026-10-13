@@ -3,7 +3,7 @@ title: Failure modes
 weight: 4250
 description: Kinds of failures and etcd's tolerance for them
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/failures.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/failures.md"
 aliases: [/etcd/op-guide/failures/]
 ---
 
@@ -13,7 +13,7 @@ In this section, we catalog kinds of failures and discuss how etcd is designed t
 
 ## Minor followers failure
 
-When fewer than half of the followers fail, the etcd cluster can still accept requests and make progress without any major disruption. For example, two follower failures will not affect a five member etcd cluster’s operation. However, clients will lose connectivity to the failed members. Client libraries should hide these interruptions from users for read requests by automatically reconnecting to other members. Operators should expect the system load on the other members to increase due to the reconnections.
+When followers fail but fewer than half of all cluster members are unavailable and the leader remains available, the etcd cluster can still accept requests and make progress without any major disruption. For example, two follower failures will not affect a five member etcd cluster’s operation. However, clients will lose connectivity to the failed members. Client libraries should hide these interruptions from users for read requests by automatically reconnecting to other members. Operators should expect the system load on the other members to increase due to the reconnections.
 
 ## Leader failure
 

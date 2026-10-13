@@ -3,7 +3,7 @@ title: Downgrade etcd from v3.7 to v3.6
 weight: 6600
 description: Processes, checklists, and notes on downgrading etcd from v3.7 to v3.6
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/downgrades/downgrade_3_7.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/downgrades/downgrade_3_7.md"
 aliases: [/etcd/downgrades/downgrade_3_7/]
 ---
 
@@ -109,7 +109,7 @@ COMMENT
 
 #### Step 2: download snapshot backup from leader
 
-[Download the snapshot backup](/docs/etcd/op-guide/maintenance/#snapshot-backup) to provide a downgrade path should any problems occur:
+[Download the snapshot backup](/docs/etcd/op-guide/maintenance/#snapshot-backup) to provide a rollback path should any problems occur:
 
 ```bash
 etcdctl --endpoints=localhost:2379 snapshot save backup.db
