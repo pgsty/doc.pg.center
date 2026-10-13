@@ -5,7 +5,7 @@ weight: 80
 description: "Полные, содержащие только ошибки и инкрементальные отчёты pgBadger из локального снимка сайта"
 icon: fa-solid fa-chart-column
 module: [PGBADGER]
-categories: [Reference]
+categories: [Справочник]
 aliases: [/pgbadger/sample-reports/]
 upstream_link: "https://pgbadger.darold.net/#reports"
 upstream_name: "pgBadger website"

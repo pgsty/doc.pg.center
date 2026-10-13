@@ -5,7 +5,7 @@ weight: 100
 description: "Сообщение об ошибках, запрос новых функций, отправка исправлений и профессиональная поддержка PostgreSQL"
 icon: fa-solid fa-life-ring
 module: [PGBADGER]
-categories: [Task]
+categories: [Задача]
 aliases: [/pgbadger/support/]
 upstream_link: "https://pgbadger.darold.net/#support"
 upstream_name: "pgBadger website"

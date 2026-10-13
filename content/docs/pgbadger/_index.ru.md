@@ -9,7 +9,7 @@ outputs: [HTML, RSS, print, markdown, LLMSFULL]
 sidebar_root_for: self
 sidebar_root_link_self: true
 module: [PGBADGER]
-categories: [Concept]
+categories: [Концепция]
 aliases: [/docs/pgbadger/documentation/, /pgbadger/]
 upstream_source: pgbadger
 upstream_link: "https://github.com/darold/pgbadger"

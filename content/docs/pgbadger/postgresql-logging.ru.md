@@ -5,7 +5,7 @@ weight: 40
 description: "Настройка журналирования запросов, log_line_prefix, локали и вспомогательной статистики для pgBadger"
 icon: fa-solid fa-database
 module: [PGBADGER]
-categories: [Task]
+categories: [Задача]
 aliases: [/pgbadger/postgresql-logging/]
 upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
 upstream_name: "pgBadger README.md"
