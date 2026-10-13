@@ -24,7 +24,7 @@ pgBadger dispose de deux modes de traitement parallèle complémentaires. Choisi
 $ pgbadger -j 8 /var/log/postgresql/postgresql.log
 ```
 
-L'algorithme upstream divise chaque fichier en plages de `N` octets, lance un parseur par plage, écrit des statistiques binaires temporaires, puis fusionne ces statistiques pour produire le rapport final.
+L'algorithme du projet amont divise chaque fichier en plages de `N` octets, lance un parseur par plage, écrit des statistiques binaires temporaires, puis fusionne ces statistiques pour produire le rapport final.
 
 ```text
 for each log file
@@ -46,9 +46,9 @@ $ pgbadger -J 8 /var/log/postgresql/postgresql-*.log
 
 Chaque worker possède un fichier complet, ce qui permet d’éviter les lacunes aux limites des tronçons. Ce mode devient particulièrement utile avec des centaines de petits fichiers et une capacité CPU et E/S suffisante. La documentation officielle autorise également `-J` pour des fichiers compressés indépendants ; le découpage en tronçons sur un seul fichier avec `-j` nécessite une entrée accessible par recherche, non compressée.
 
-## Benchmark côté serveur {#benchmark}
+## Benchmark du projet amont {#benchmark}
 
-Le manuel d'origine indique ces mesures sur un hôte à 8 processeurs. Considérez-les comme une comparaison entre les deux algorithmes, et non comme une prédiction pour le matériel actuel.
+Le manuel du projet amont indique ces mesures sur un hôte à 8 processeurs. Considérez-les comme une comparaison entre les deux algorithmes, et non comme une prédiction pour le matériel actuel.
 
 Un fichier de 9,5 Go :
 

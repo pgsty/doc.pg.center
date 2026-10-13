@@ -14,18 +14,18 @@ upstream_ref: "site snapshot of 2026-08-15"
 
 ## Choisissez un canal de distribution {#distribution-channels}
 
-| Channel | Utilisation | Emplacement |
+| Canal | Utilisation | Emplacement |
 |---|---|---|
 | Version officielle | Archives sources et notes de version | [GitHub Releases](https://github.com/darold/pgbadger/releases) |
 | Paquet RPM | Distributions Linux basées sur RPM | [PostgreSQL Yum Repository](https://yum.postgresql.org/packages/) |
 | Paquet Debian/Ubuntu | Distributions Linux basées sur APT | [PostgreSQL Apt Repository](https://wiki.postgresql.org/wiki/Apt) |
 | Code source de développement | Code actuel non encore publié | [darold/pgbadger](https://github.com/darold/pgbadger) |
 
-La version de documentation disponible sur ce site est basée sur l'arbre source 13.2. Vérifiez toujours la page de publication avant de télécharger : la version locale est intentionnellement figée, tandis que les versions upstream évoluent continuellement.
+La version de documentation disponible sur ce site est basée sur l'arbre source 13.2. Vérifiez toujours la page de publication avant de télécharger : la version locale est intentionnellement figée, tandis que les versions du projet amont évoluent continuellement.
 
 ## Conditions requises {#requirements}
 
-Le chemin du rapport HTML doit uniquement :
+Le rapport HTML ne nécessite que :
 
 - une distribution Perl moderne ;
 - un navigateur web pour afficher les graphiques JavaScript intégrés.

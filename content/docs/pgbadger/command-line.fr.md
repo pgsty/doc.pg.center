@@ -11,11 +11,11 @@ upstream_link: "https://github.com/darold/pgbadger/tree/a1ad95a035a0c2d246fe632e
 upstream_name: "pgBadger README.md"
 ---
 
-Cette page conserve la référence de commande générée à partir de la source upstream verrouillée. Les noms d'option et le texte d'aide restent tels quels afin de pouvoir être comparés directement avec `pgbadger --help`.
+Cette page conserve la référence de commande générée à partir de la source verrouillée du projet amont. Les noms d'option et le texte d'aide restent tels quels afin de pouvoir être comparés directement avec `pgbadger --help`.
 
 ## Utilisation et options {#usage-and-options}
 
-Utilisation : pgBadger [options] fichier_journal [...]
+Utilisation : pgbadger [options] logfile [...]
 
 ```text
 PostgreSQL log analyzer with fully detailed reports and graphs.
