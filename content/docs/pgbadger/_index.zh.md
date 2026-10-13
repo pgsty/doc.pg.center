@@ -21,7 +21,7 @@ cascade:
 
 ![pgBadger 标志](/img/docs/pgbadger/logo.png "pgBadger")
 
-**pgBadger** 是一款使用 Perl 编写的高性能独立 PostgreSQL 日志分析器。它可以读取 PostgreSQL 或 PgBouncer 日志，并生成 HTML、文本、二进制、JSON 或原始 CSV 输出。HTML 报告自带全部资源，图表可交互、缩放并保存为 PNG，只需浏览器即可查看。
+**pgBadger** 是一款使用 Perl 编写的高性能独立 PostgreSQL 日志分析器。它可以读取 PostgreSQL 或 PgBouncer 日志，并生成 HTML、文本、二进制、JSON 或原始 CSV 输出。HTML 报告自成一体，支持交互与缩放，只需浏览器即可查看。
 
 ## 为什么使用 pgBadger {#why-pgbadger}
 

@@ -40,7 +40,7 @@ report/
 └── 11/
     ├── pgbadger.min.css
     ├── pgbadger.min.js
-    └── 图表与界面资源
+    └── bundled chart and UI assets
 ```
 
 顶层索引链接到两份周报和七份日报。所有相对链接均已保留，因此只移动 `index.html` 会破坏示例；应始终保持完整目录树。
