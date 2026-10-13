@@ -14,32 +14,37 @@ upstream_link: "https://www.pgbouncer.org/faq.html"
 
 ## PgBouncer への接続方法 {#how-to-connect-to-pgbouncer}
 
-PgBouncer は Postgres サーバーとして動作するため、クライアントを PgBouncer のポートに接続するだけでよい。
+PgBouncer は Postgres サーバーとして動作するため、クライアントを PgBouncer のポートに向けるだけで接続できます。
 
 --------
 
 ## 複数のサーバー間でクエリを負荷分散するには？ {#how-to-load-balance-queries-between-several-servers}
 
-PgBouncer には内部的なマルチホスト構成がありません。
-外部ツールを介して実現可能です：
+PgBouncer は、データベース接続文字列でのコンマ区切りのホストリストをサポートしています。[`load_balance_hosts=round-robin`](/ja/docs/pgbouncer/config/#load_balance_hosts) を指定すると、新しいサーバー接続はそのリストを巡回して作成されます。例：
 
-1.  DNS ラウンドロビン。1 つのドメイン名の背後にある複数の IP アドレスを使用します。PgBouncer は新しい接続を確立するたびに DNS を照会しません。代わりに、すべての IP アドレスをキャッシュし、内部でラウンドロビンを行います。注意：1 つの名前に 8 つ以上の IP アドレスが関連付けられている場合、DNS バックエンドは EDNS0 プロトコルをサポートしている必要があります。詳細については README を参照してください。
+```ini
+[databases]
+app = host=pg1,pg2 port=5432 dbname=app load_balance_hosts=round-robin
+```
 
-2.  TCP接続のロードバランサーを使用してください。[LVS](http://www.linuxvirtualserver.org/) または [HAProxy](https://www.haproxy.org/) が適した選択肢のようです。PgBouncer側では、`server_lifetime` を小さく設定し、`server_round_robin` を有効にするのが良いでしょう。デフォルトでは、アイドル状態の接続はLIFOアルゴリズムで再利用されますが、ロードバランシングが必要な状況では、この動作が十分に機能しない可能性があります。
+外部ツールを使用することもできます：
+
+1.  DNS ラウンドロビン。1 つの DNS 名の背後にある複数の IP アドレスを使用します。PgBouncer は新しい接続が開始されるたびに DNS を照会しません。代わりに、すべての IP をキャッシュし、内部でラウンドロビンを行います。注意：1 つの名前の背後に 8 つを超える IP がある場合、DNS バックエンドは EDNS0 プロトコルをサポートしている必要があります。詳細については [DNS ルックアップサポート](/ja/docs/pgbouncer/install/#dns-lookup-support) を参照してください。
+
+2.  TCP 接続のロードバランサーを使用してください。[LVS](http://www.linuxvirtualserver.org/) または [HAProxy](https://www.haproxy.org/) が適した選択肢のようです。PgBouncer 側では、`server_lifetime` を小さく設定し、あわせて `server_round_robin` を有効にするのが良いでしょう。デフォルトでは、アイドル状態の接続は LIFO アルゴリズムで再利用されますが、負荷分散が必要な状況ではこの動作がうまく機能しない可能性があります。
 
 --------
 
 ## フェイルオーバーの方法 {#how-to-failover}
 
-PgBouncer には内部的なフェイルオーバーホストの設定や検出機能がありません。
-外部ツールを用いることで可能になります：
+コンマ区切りのホストリストと [`load_balance_hosts=disable`](/ja/docs/pgbouncer/config/#load_balance_hosts) を使用すると、PgBouncer は接続試行が失敗するまで同じホストを使い続け、その後次のホストを試します。これはプライマリー／レプリカのロール検出は行いません。データベースのトポロジー変更に追従するフェイルオーバーには、外部ツールを使用してください：
 
-1. DNS の再構成：DNS 名の背後にある IP アドレスが再構成された場合、PgBouncer は新しいサーバーに再接続します。この動作は、次の 2 つの設定パラメーターで調整できます。`dns_max_ttl` はホスト名の有効期間を、`dns_zone_check_period` はゾーン SOA が変更を確認するために頻繁に照会される頻度をそれぞれ調整します。ゾーン SOA レコードが変更された場合、PgBouncer はそのゾーン下のすべてのホスト名を再照会します。
+1. DNS の再構成：DNS 名の背後にある IP アドレスが再構成された場合、PgBouncer は新しいサーバーに再接続します。この動作は、次の 2 つの設定パラメーターで調整できます。`dns_max_ttl` は 1 つのホスト名の生存期間を調整し、`dns_zone_check_period` は変更がないかどうかを確認するためにゾーン SOA を照会する頻度を調整します。ゾーンの SOA レコードが変更された場合、PgBouncer はそのゾーン下のすべてのホスト名を再照会します。
 
-2. 設定ファイルに新しいサーバーを記述し、PgBouncerが再読み込みできるようにします。
-SIGHUP を送信するか、管理コンソールで `RELOAD` コマンドを実行してください。PgBouncer はホスト設定の変更を検出し、新しいサーバーに再接続します。
+2. 設定に新しいホストを書き込み、PgBouncer に再読み込みさせます。
+   SIGHUP を送信するか、管理コンソールで `RELOAD` コマンドを使用してください。PgBouncer はホスト設定の変更を検出し、新しいサーバーに再接続します。
 
-3.  `RECONNECT` コマンドを使用してください。これは、上記の2つのオプションのいずれも適用できない状況で使用するものです。たとえば、前述の HAProxy を使って PgBouncer から下流への接続をルーティングする場合などです。`RECONNECT` は、すべてのサーバー接続を再開するだけです。したがって、他のコンポーネントが接続ルーティング情報を変更した後に実行してください。
+3. `RECONNECT` コマンドを使用してください。これは、上記の 2 つのオプションのいずれも適用できない状況で使用するものです。たとえば、前述の HAProxy を使って PgBouncer から下流への接続をルーティングする場合などです。`RECONNECT` は、単にすべてのサーバー接続を開き直すだけです。したがって、他のコンポーネントが接続ルーティング情報を変更した後に実行してください。
 
 --------
 
@@ -51,7 +56,7 @@ SIGHUP を送信するか、管理コンソールで `RELOAD` コマンドを実
 
 ## トランザクションプーリングとプリペアドステートメントをどのように使用するか？ {#how-to-use-prepared-statements-with-transaction-pooling}
 
-バージョン 1.21.0 以降、PgBouncer はトランザクションプーリングモードでプリペアドステートメントを追跡し、関連するサーバー接続上でオンザフライで準備されるように保証できるようになりました。この機能を有効にするには、`max_prepared_statements` をゼロ以外の値に設定する必要があります。詳細については、[`max_prepared_statements`](/ja/docs/pgbouncer/config/#max_prepared_statements) のドキュメントを参照してください。
+バージョン 1.21.0 以降、PgBouncer はトランザクションプーリングモードでプリペアドステートメントを追跡し、リンクされたサーバー接続上でオンザフライで準備されるように保証できます。この機能を有効にするには、`max_prepared_statements` をゼロ以外の値に設定する必要があります（デフォルトは 200 です）。詳細については、[`max_prepared_statements`](/ja/docs/pgbouncer/config/#max_prepared_statements) のドキュメントを参照してください。
 
 PHP/PDO を使用する場合、バージョンによっては PgBouncer のプリペアドステートメントサポートと互換性がありません ([#991])。PHP/PDO は [PHP 8.4+ **かつ** libpq 17][php-fix] を使用している場合にのみ互換性があります。したがって、古いバージョンを使用する環境では、アップグレードを推奨するか、クライアント側でプリペアドステートメントを無効にする必要があります。
 
@@ -77,19 +82,19 @@ JDBC で行う正しい方法は、接続文字列に `prepareThreshold=0` パ�
 
 ## 接続を落とさずに PgBouncer をアップグレードする方法 {#how-to-upgrade-pgbouncer-without-dropping-connections}
 
-ロールリング再起動は、`SHUTDOWN WAIT_FOR_CLIENTS`のドキュメントの[セクションに記載された手順に従って行うことができます。](/ja/docs/pgbouncer/usage/#shutdown-wait_for_clients)
+[`SHUTDOWN WAIT_FOR_CLIENTS` のドキュメントのセクション](/ja/docs/pgbouncer/usage/#shutdown-wait_for_clients)に記載された手順に従って、ローリング再起動を行うことができます。
 
 --------
 
-## クライアントがどのサーバー接続にあるかを確認するにはどうすればよいですか。 {#how-to-know-which-client-is-on-which-server-connection}
+## クライアントがどのサーバー接続にあるかを確認するにはどうすればよいですか？ {#how-to-know-which-client-is-on-which-server-connection}
 
 管理コンソール上で `SHOW CLIENTS` および `SHOW SERVERS` コマンドを使用します。
 
-1.   クライアント接続をサーバー接続にマッピングするには、`ptr` と `link` を使用してください。
+1.  クライアント接続をサーバー接続にマッピングするには、`ptr` と `link` を使用してください。
 
-2.   クライアント接続の `addr` および `port` を使用して、クライアントからの TCP 接続を識別します。
+2.  クライアント接続の `addr` および `port` を使用して、クライアントからの TCP 接続を識別します。
 
-3.   サーバーへの TCP 接続を識別するために、`local_addr` および `local_port` を使用します。
+3.  サーバーへの TCP 接続を識別するために、`local_addr` および `local_port` を使用します。
 
 --------
 
@@ -97,8 +102,8 @@ JDBC で行う正しい方法は、接続文字列に `prepareThreshold=0` パ�
 
 状況によります。
 
-Web サーバーに PgBouncer をインストールするのは、一時的な接続が使用される場合に適しています。この場合、接続のセットアップ遅延が最小化されます（TCP では接続が利用可能になるまで数回のパケット往復が必要です）。データベースサーバーに PgBouncer をインストールするのは、複数の異なるホスト（例：Web サーバー）が接続する場合に適しています。この場合、それらの接続をまとめて最適化できます。
+Web サーバーに PgBouncer をインストールするのは、短命な接続が使用される場合に適しています。この場合、接続のセットアップ遅延が最小化されます（TCP では接続が利用可能になるまで数回のパケット往復が必要です）。データベースサーバーに PgBouncer をインストールするのは、複数の異なるホスト（例：Web サーバー）が接続する場合に適しています。この場合、それらの接続をまとめて最適化できます。
 
-Web サーバーおよびデータベース サーバーの両方に PgBouncer をインストールすることも可能です。その一方で、各 PgBouncer のホップがクエリごとにわずかな遅延を追加するという欠点があります。
+Web サーバーおよびデータベースサーバーの両方に PgBouncer をインストールすることも可能です。その一方で、各 PgBouncer のホップがクエリごとにわずかな遅延を追加するという欠点があります。
 
-最終的には、パフォーマンス要件に最も適したモデルをテストして選定する必要があります。また、ウェブサーバーまたはデータベースサーバーの障害発生時に PgBouncer を導入することでアプリケーションのフェイルオーバーにどのような影響を与えるかを検討する必要があります。
+最終的には、パフォーマンス要件に最も適したモデルをテストして選定する必要があります。また、Web サーバーとデータベースサーバーのどちらかがダウンした際に、PgBouncer のインストールがアプリケーションのフェイルオーバーにどのような影響を与えるかについても検討する必要があります。

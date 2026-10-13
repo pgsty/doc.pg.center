@@ -36,7 +36,7 @@ pig.center повторно публикует документацию, нап�
 |---|---|---|---|---|
 | [Patroni](/ru/docs/patroni/) | [Документация Patroni](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
 | [pgBackRest](/ru/docs/pgbackrest/) | [Документация pgBackRest](https://pgbackrest.org/) | v2.59.2 (английский / упрощённый китайский); v2.59.1 (другие переводы) | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/ru/docs/pgbouncer/) | [Документация PgBouncer](https://www.pgbouncer.org/) | v1.26.0 (английский / упрощённый китайский) | [ISC](https://opensource.org/license/isc-license-txt) | [Исходный `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
+| [PgBouncer](/ru/docs/pgbouncer/) | [Документация PgBouncer](https://www.pgbouncer.org/) | v1.26.0 (все шесть языков) | [ISC](https://opensource.org/license/isc-license-txt) | [Исходный `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/ru/docs/pgbadger/) | [Документация pgBadger](https://pgbadger.darold.net/) | v13.2, коммит `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/ru/docs/haproxy/) | [Руководства HAProxy 3.4](https://docs.haproxy.org/3.4/) | v3.4.4, коммит `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/ru/docs/etcd/) | [Документация etcd v3.7](https://etcd.io/docs/v3.7/) | v3.7, коммит `8245979` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Исходный `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
@@ -70,14 +70,17 @@ pig.center повторно публикует документацию, нап�
 ## PgBouncer {#pgbouncer}
 
 Импортировано 2026-08-15 из [документации PgBouncer](https://www.pgbouncer.org/) версии
-**v1.25.2**; переводы на упрощённый китайский и русский языки подготовлены параллельно.
+**v1.25.2**; перевод на упрощённый китайский язык подготовлен параллельно.
 
 Английская версия и версия на упрощённом китайском обновлены 2026-10-04 до
 [**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0)
 на основе вычитанных руководств из `pigsty.io` и `pigsty.cc` соответственно.
-Справочные описания сверены с реализацией этого выпуска;
-исправлены четыре вида ошибок в исходной документации.
-Версии на других языках сохраняют документацию v1.25.2.
+
+2026-10-13 все шесть языковых версий были синхронизированы с актуальным английским
+руководством для **v1.26.0**. Справочные описания сверены с реализацией выпуска;
+локальные исправления устраняют фактические, орфографические и грамматические ошибки
+исходной документации. Исходные диагностические сообщения сохранены дословно,
+а каждый перевод прошёл постраничную проверку.
 
 Авторские права на PgBouncer принадлежат Marko Kreen и Skype Technologies OÜ
 (copyright (c) 2007-2009). Материалы распространяются по

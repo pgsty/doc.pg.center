@@ -7,34 +7,50 @@ icon: fa-solid fa-cloud-arrow-down
 module: [PGBOUNCER]
 categories: [Tutorial]
 aliases: [/pgbouncer/install/]
-upstream_link: "https://www.pgbouncer.org/install.html"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/README.md"
 ---
 
 --------
 
 ## Kompilieren {#building}
 
-Für das Kompilieren von PgBouncer werden einige Komponenten benötigt:
+PgBouncer kann entweder mit dem Autoconf-basierten Build-System oder mit dem
+neueren, noch experimentellen Build-System [Meson] kompiliert werden.
+Für produktive Builds und die Paketerstellung wird derzeit Autoconf empfohlen.
+Voraussichtlich wird Meson in einer künftigen Version zum Standard und Autoconf
+entfernt. Daher sind Tests des Meson-Builds und Berichte über Probleme sehr willkommen.
+Für das Kompilieren werden einige Komponenten benötigt:
 
-* [GNU Make] 3.81+
 * [Libevent] 2.0+
 * [pkg-config]
 * [OpenSSL] 1.0.1+ für TLS-Unterstützung
+* ein C-Compiler mit C11-Unterstützung
 * (optional) [c-ares] als Alternative zu evdns von Libevent
 * (optional) LDAP-Bibliotheken
 * (optional) PAM-Bibliotheken
 
+Der Meson-Build benötigt zusätzlich [Meson] 0.58+ und [Ninja], der
+Autoconf-Build [GNU Make] 3.81+.
+
+[Meson]: https://mesonbuild.com/
+[Ninja]: https://ninja-build.org/
 [GNU Make]: https://www.gnu.org/software/make/
 [Libevent]: http://libevent.org/
 [pkg-config]: https://www.freedesktop.org/wiki/Software/pkg-config/
 [OpenSSL]: https://www.openssl.org/
 [c-ares]: http://c-ares.haxx.se/
 
-Wenn alle Abhängigkeiten installiert sind, führen Sie folgende Befehle aus:
+Wenn alle Abhängigkeiten installiert sind, mit Autoconf kompilieren:
 
     $ ./configure --prefix=/usr/local
     $ make
     $ make install
+
+oder mit Meson (experimentell):
+
+    $ meson setup build --prefix=/usr/local
+    $ meson compile -C build
+    $ meson install -C build
 
 Wenn Sie PgBouncer direkt aus dem Git-Repository oder für Windows kompilieren, beachten Sie die entsprechenden Anleitungen weiter unten.
 
@@ -57,33 +73,51 @@ PgBouncer löst Hostnamen beim Verbindungsaufbau auf und nicht nur einmal beim E
 
 c-ares ist die Implementierung mit dem größten Funktionsumfang und wird für die meisten Einsatzbereiche sowie für die Erstellung von Binärpaketen empfohlen (sofern eine ausreichend neue Version verfügbar ist). Das in Libevent integrierte evdns eignet sich unter Beachtung der genannten Einschränkungen ebenfalls für viele Einsatzbereiche. Die übrigen Backends sind inzwischen weitgehend veraltet und werden kaum noch getestet.
 
-Standardmäßig wird c-ares verwendet, sofern es gefunden wird. Der Einsatz lässt sich mit `configure --with-cares` erzwingen oder mit `--without-cares` deaktivieren. Wenn c-ares nicht verwendet wird (weil es nicht gefunden oder deaktiviert wurde), kommt Libevent zum Einsatz. Mit `--disable-evdns` deaktivieren Sie evdns von Libevent; anschließend wird auf eine libc-basierte Implementierung zurückgegriffen.
+Standardmäßig wird c-ares verwendet, sofern es gefunden wird. Der Einsatz lässt
+sich mit `-Dcares=enabled` (configure: `--with-cares`) erzwingen oder mit
+`-Dcares=disabled` (configure: `--without-cares`) deaktivieren. Wenn c-ares nicht
+verwendet wird (weil es nicht gefunden oder deaktiviert wurde), kommt Libevent
+zum Einsatz. Mit `-Devdns=false` (configure: `--disable-evdns`) wird evdns von
+Libevent deaktiviert und auf eine libc-basierte Implementierung zurückgegriffen.
+
+--------
+
+## Optionale Funktionen {#optional-features}
+
+Meson erkennt die Unterstützung für PAM, LDAP und systemd automatisch: Die
+Optionen `-Dpam`, `-Dldap` und `-Dsystemd` haben den Standardwert `auto`.
+Die jeweilige Funktion wird also eingebaut, wenn ihre Bibliotheken vorhanden
+sind. Mit `-D<feature>=enabled` lässt sich eine Funktion ausdrücklich aktivieren,
+mit `-D<feature>=disabled` deaktivieren. Der Autoconf-Build erkennt diese
+Funktionen nicht automatisch; sie müssen ausdrücklich mit `--with-pam`,
+`--with-ldap` oder `--with-systemd` aktiviert werden.
 
 --------
 
 ## PAM-Authentifizierung {#pam-authentication}
 
-Um die PAM-Authentifizierung zu aktivieren, rufen Sie `./configure` mit der Option `--with-pam` auf (standardmäßig deaktiviert). Nach dem Kompilieren mit PAM-Unterstützung steht der neue globale Authentifizierungstyp `pam` zur Verfügung, mit dem Benutzer über PAM authentifiziert werden können.
+Nach dem Kompilieren mit PAM-Unterstützung steht der neue globale Authentifizierungstyp `pam` zur Verfügung, mit dem Benutzer über PAM authentifiziert werden können.
 
 --------
 
 ## LDAP-Authentifizierung {#ldap-authentication}
 
-Um die LDAP-Authentifizierung zu aktivieren, rufen Sie `./configure` mit der Option `--with-ldap` auf (standardmäßig deaktiviert). Nach dem Kompilieren mit LDAP-Unterstützung steht der neue globale Authentifizierungstyp `ldap` zur Verfügung, mit dem Benutzer über LDAP authentifiziert werden können.
+Nach dem Kompilieren mit LDAP-Unterstützung steht der neue globale Authentifizierungstyp `ldap` zur Verfügung, mit dem Benutzer über LDAP authentifiziert werden können.
 
 --------
 
 ## systemd-Integration {#systemd-integration}
 
-Um die systemd-Integration zu aktivieren, rufen Sie `configure` mit der Option `--with-systemd` auf. Damit lassen sich `Type=notify` (oder `Type=notify-reload`, wenn Sie systemd 253 oder neuer verwenden) sowie die Socket-Aktivierung nutzen. Beispiele finden Sie in `etc/pgbouncer.service` und `etc/pgbouncer.socket`.
+Die systemd-Unterstützung ermöglicht die Verwendung von `Type=notify` (oder `Type=notify-reload` mit systemd 253 oder neuer) sowie die Socket-Aktivierung. Beispiele finden sich in `etc/pgbouncer.service` und `etc/pgbouncer.socket`.
 
 --------
 
 ## Aus dem Git-Repository kompilieren {#building-from-git}
 
-Wenn Sie PgBouncer direkt aus dem Git-Repository kompilieren, müssen Sie die Header- und Konfigurationsdateien generieren, bevor Sie `configure` ausführen können:
+Beim Autoconf-Build müssen die Header- und Konfigurationsdateien generiert
+werden, bevor `configure` ausgeführt werden kann:
 
-	$ git clone https://github.com/pgbouncer/pgbouncer.git
+	$ git clone --branch pgbouncer_1_26_0 https://github.com/pgbouncer/pgbouncer.git
 	$ cd pgbouncer
 	$ ./autogen.sh
 	$ ./configure
@@ -92,7 +126,17 @@ Wenn Sie PgBouncer direkt aus dem Git-Repository kompilieren, müssen Sie die He
 
 Standardmäßig werden alle Dateien unter `/usr/local` installiert. Sie können für `configure` eine oder mehrere Befehlszeilenoptionen angeben. Führen Sie `./configure --help` aus, um die verfügbaren Optionen und die Umgebungsvariablen aufzulisten, mit denen sich die Konfiguration anpassen lässt.
 
-Zusätzlich erforderliche Pakete: autoconf, automake, libtool, pandoc
+Zusätzlich erforderliche Pakete für den Autoconf-Build aus Git: autoconf,
+automake, libtool, pandoc
+
+Mit Meson lässt sich direkt aus einem Checkout kompilieren;
+zum Erstellen der Handbuchseiten wird pandoc benötigt:
+
+	$ meson setup build
+	$ meson compile -C build
+	$ meson install -C build
+
+Mit `meson configure build` lassen sich die verfügbaren `-D`-Optionen auflisten.
 
 --------
 
@@ -100,7 +144,7 @@ Zusätzlich erforderliche Pakete: autoconf, automake, libtool, pandoc
 
 Weitere Informationen zum Ausführen der Tests finden Sie in der Datei [`README.md` im Testverzeichnis][1].
 
-[1]: https://github.com/pgbouncer/pgbouncer/blob/master/test/README.md
+[1]: https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/test/README.md
 
 --------
 
@@ -108,12 +152,17 @@ Weitere Informationen zum Ausführen der Tests finden Sie in der Datei [`README.
 
 Die einzige unterstützte Build-Umgebung unter Windows ist MinGW. Cygwin und Visual $ANYTHING werden nicht unterstützt.
 
-Führen Sie zum Kompilieren unter MinGW die üblichen Schritte aus:
+Zum Kompilieren unter MinGW den üblichen Autoconf-Build ausführen:
 
 	$ ./configure
 	$ make
 
-Für eine Cross-Kompilierung unter Unix verwenden Sie:
+oder den experimentellen Meson-Build:
+
+	$ meson setup build
+	$ meson compile -C build
+
+Für eine Cross-Kompilierung von Unix aus mit Autoconf:
 
 	$ ./configure --host=i586-mingw32msvc
 
@@ -123,7 +172,7 @@ Die LDAP-Kompilierungsoption wird unter Windows derzeit nicht unterstützt.
 
 ## Betrieb unter Windows {#running-on-windows}
 
-Der Aufruf über die Befehlszeile erfolgt wie üblich. Die Schalter `-d` (Daemon-Modus), `-R` (Neustart) und `-u` (Benutzerwechsel) funktionieren jedoch nicht.
+Der Aufruf über die Befehlszeile erfolgt wie üblich. Die Schalter `-d` (Daemon-Modus) und `-u` (Benutzerwechsel) funktionieren jedoch nicht.
 
 Wenn Sie PgBouncer als Windows-Dienst ausführen möchten, legen Sie mit dem Parameter `service_name` einen Namen für den Dienst fest. Danach:
 

@@ -7,34 +7,44 @@ icon: fa-solid fa-cloud-arrow-down
 module: [PGBOUNCER]
 categories: [チュートリアル]
 aliases: [/pgbouncer/install/]
-upstream_link: "https://www.pgbouncer.org/install.html"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/README.md"
 ---
 
 --------
 
-## Building {#building}
+## ビルド {#building}
 
-PgBouncer はコンパイルするためのいくつかの要素に依存しています：
+PgBouncer は、Autoconf ベースのビルドシステムでも、より新しい、まだ実験的な [Meson] ビルドシステムでもビルドできます。現時点では、本番用のビルドおよびパッケージングには Autoconf が推奨されます。Meson ビルドは将来のリリースでデフォルトになり、Autoconf ビルドは削除される見込みのため、Meson のテストと問題の報告を歓迎します。コンパイルにはいくつかの要素が必要です：
 
-* [GNU Make] 3.81+
 * [Libevent] 2.0+
 * [pkg-config]
-* [OpenSSL] 1.0.1+（TLS 機能用）
+* [OpenSSL] 1.0.1+（TLS サポート用）
+* C11 対応の C コンパイラー
 * (オプション) [c-ares] は Libevent の evdns の代替として利用可能
 * (オプション) LDAP ライブラリ
 * (オプション) PAM ライブラリ
 
+Meson ビルドにはさらに [Meson] 0.58+ と [Ninja] が必要であり、Autoconf ビルドには [GNU Make] 3.81+ が必要です。
+
+[Meson]: https://mesonbuild.com/
+[Ninja]: https://ninja-build.org/
 [GNU Make]: https://www.gnu.org/software/make/
 [Libevent]: http://libevent.org/
 [pkg-config]: https://www.freedesktop.org/wiki/Software/pkg-config/
 [OpenSSL]: https://www.openssl.org/
 [c-ares]: http://c-ares.haxx.se/
 
-依存関係をインストールしたら、次のように実行します：
+依存関係がインストールされたら、Autoconf でビルドします：
 
     $ ./configure --prefix=/usr/local
     $ make
     $ make install
+
+または Meson でビルドします（実験的）：
+
+    $ meson setup build --prefix=/usr/local
+    $ meson compile -C build
+    $ meson install -C build
 
 Git からビルドする場合、または Windows 用にビルドする場合は、以下の別途のビルド手順を参照してください。
 
@@ -42,48 +52,54 @@ Git からビルドする場合、または Windows 用にビルドする場合�
 
 ## DNS ルックアップサポート {#dns-lookup-support}
 
-PgBouncer は接続時にホスト名の照合を行いますが、設定の読み込み時に一度だけ行うのではなく、接続ごとに実行します。これには非同期 DNS 実装が必要です。以下の表は、サポートされるバックエンドとその照合順序を示しています。
+PgBouncer は、設定の読み込み時に一度だけではなく、接続時にホスト名のルックアップを行います。これには非同期 DNS 実装が必要です。以下の表は、サポートされるバックエンドとその検出順序を示しています。
 
-| バックエンド                    | 平行処理 | EDNS0 (1) | /etc/hosts | SOA ルックアップ (2) | 備考                                  |
+| バックエンド                    | 並列処理 | EDNS0 (1) | /etc/hosts | SOA ルックアップ (2) | 備考                                  |
 |----------------------------|----------|-----------|------------|----------------|---------------------------------------|
 | c-ares                     | はい     | はい      | はい       | はい            | 1.10 以前では IPv6+CNAME にバグあり     |
 | evdns, libevent 2.x        | はい     | いいえ    | はい       | いいえ           | /etc/hosts の更新を確認しない         |
 | getaddrinfo_a, glibc 2.9+  | はい     | はい (3)  | はい       | いいえ           | non-glibc では N/A                     |
 | getaddrinfo, libc          | いいえ   | はい (3)  | はい       | いいえ           | pthreads を必要とする                 |
 
-1. EDNS0 は、1 つのホスト名の背後に 8 件以上のアドレスを設定する場合に必要です。
+1. EDNS0 は、1 つのホスト名の背後に 8 件を超えるアドレスがある場合に必要です。
 2. SOA の照会は、ゾーンシリアルの変更時にホスト名を再確認するために必要です。
 3. EDNS0 を有効にするには、`options edns0` を `/etc/resolv.conf` に追加してください。
 
 c-ares は最も機能が充実しており、ほとんどの用途およびバイナリパッケージング（十分に新しいバージョンが利用可能な場合）に推奨されます。Libevent の組み込み evdns も、記載された制限を除き多くの用途に適しています。他のバックエンドは現在、ほとんどがレガシーな選択肢であり、テストもほとんど行われていません。
 
-デフォルトでは、c-ares が利用可能であればそれを使用します。`configure --with-cares` を指定することで c-ares の使用を強制し、`--without-cares` を指定することで無効化できます。c-ares を使用しない（見つからないか無効化されている）場合、Libevent が使用されます。Libevent の evdns の使用を無効にするには `--disable-evdns` を指定し、libc に基づく実装にフォールバックします。
+デフォルトでは、c-ares が見つかった場合に使用されます。使用を強制するには `-Dcares=enabled`（configure の場合は `--with-cares`）、無効化するには `-Dcares=disabled`（configure の場合は `--without-cares`）を指定します。c-ares を使用しない（見つからないか無効化されている）場合、Libevent が使用されます。Libevent の evdns の使用を無効にして libc ベースの実装にフォールバックするには、`-Devdns=false`（configure の場合は `--disable-evdns`）を指定してください。
+
+--------
+
+## オプション機能 {#optional-features}
+
+PAM、LDAP、systemd の各機能は meson によって自動検出されます。`-Dpam`、`-Dldap`、`-Dsystemd` の各オプションのデフォルトは `auto` であり、それぞれのライブラリが存在する場合にその機能がビルドされます。`-D<feature>=enabled` で強制的に有効に、`-D<feature>=disabled` で強制的に無効にできます。Autoconf ビルドはこれらの機能を自動検出しません。`--with-pam`、`--with-ldap`、または `--with-systemd` で明示的に有効にしてください。
 
 --------
 
 ## PAM 認証 {#pam-authentication}
 
-PAM 認証を有効にするには、`./configure` にフラグ `--with-pam` を設定します（デフォルト値は no）。PAM サポートでコンパイルされた場合、ユーザーを PAM で検証するための新しいグローバル認証タイプ `pam` が利用可能になります。
+PAM サポート付きでコンパイルした場合、PAM を通じてユーザーを検証する新しいグローバル認証タイプ `pam` が利用可能になります。
 
 --------
 
 ## LDAP 認証 {#ldap-authentication}
 
-LDAP 認証を有効にするには、`./configure` にフラグ `--with-ldap` を設定します（デフォルト値は no）。LDAP サポート付きでコンパイルされた場合、ユーザーを LDAP を使って検証するための新しいグローバル認証タイプ `ldap` が利用可能になります。
+LDAP サポート付きでコンパイルした場合、LDAP を通じてユーザーを検証する新しいグローバル認証タイプ `ldap` が利用可能になります。
 
 --------
 
 ## systemd 統合 {#systemd-integration}
 
-systemd 統合を有効にするには、`configure` オプションを使用してください。これにより、`--with-systemd` を使用できるほか、systemd 253 以降では `Type=notify`（または `Type=notify-reload`）も利用可能です。ソケット活性化も可能です。例については `etc/pgbouncer.service` および `etc/pgbouncer.socket` を参照してください。
+systemd サポートでは、`Type=notify`（systemd 253 以降を使用している場合は `Type=notify-reload`）およびソケット活性化を利用できます。例については `etc/pgbouncer.service` および `etc/pgbouncer.socket` を参照してください。
 
 --------
 
 ## Git からビルドする {#building-from-git}
 
-GitからPgBouncerをビルドするには、`configure` を実行する前にヘッダーおよび設定ファイルを生成する必要があります。
+Autoconf ビルドでは、`configure` を実行する前にヘッダーファイルおよび設定ファイルを生成する必要があります：
 
-	$ git clone https://github.com/pgbouncer/pgbouncer.git
+	$ git clone --branch pgbouncer_1_26_0 https://github.com/pgbouncer/pgbouncer.git
 	$ cd pgbouncer
 	$ ./autogen.sh
 	$ ./configure
@@ -91,10 +107,19 @@ GitからPgBouncerをビルドするには、`configure` を実行する前に�
 	$ make install
 
 デフォルトでは、すべてのファイルが `/usr/local` にインストールされます。
-`configure` に1つ以上のコマンドラインオプションを指定できます。
+`configure` に 1 つ以上のコマンドラインオプションを指定できます。
 利用可能なオプションおよび設定をカスタマイズする環境変数を確認するには、`./configure --help` を実行してください。
 
-追加で必要なパッケージ: autoconf, automake, libtool, pandoc
+Git からの Autoconf ビルドに追加で必要なパッケージ: autoconf, automake, libtool, pandoc
+
+Meson ビルドでは、チェックアウトから直接ビルドできます。
+man ページをビルドするには pandoc が必要です：
+
+	$ meson setup build
+	$ meson compile -C build
+	$ meson install -C build
+
+利用可能な `-D` オプションを一覧表示するには、`meson configure build` を実行してください。
 
 --------
 
@@ -102,20 +127,25 @@ GitからPgBouncerをビルドするには、`configure` を実行する前に�
 
 テストディレクトリ内の [`README.md` ファイル][1] を参照して、テストの実行方法を確認してください。
 
-[1]: https://github.com/pgbouncer/pgbouncer/blob/master/test/README.md
+[1]: https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/test/README.md
 
 --------
 
 ## Windows 上でのビルド {#building-on-windows}
 
-Windows でのみサポートされているビルド環境は MinGW です。Cygwin および Visual $ANYTHING はサポートされていません。
+Windows でサポートされている唯一のビルド環境は MinGW です。Cygwin および Visual $ANYTHING はサポートされていません。
 
-MinGW でビルドするには、通常通り以下を実行します：
+MinGW でビルドするには、通常の Autoconf ビルドを行います：
 
 	$ ./configure
 	$ make
 
-Unix からクロスコンパイルする場合:
+または実験的な Meson ビルドを行います：
+
+	$ meson setup build
+	$ meson compile -C build
+
+Autoconf を使って Unix からクロスコンパイルする場合:
 
 	$ ./configure --host=i586-mingw32msvc
 
@@ -125,9 +155,9 @@ LDAP ビルドオプションは現在、Windows ではサポートされてい�
 
 ## Windows 上での実行 {#running-on-windows}
 
-コマンドラインから実行する場合は通常通りですが、`-d`（デーモン化）、`-R`（再起動）、`-u`（ユーザー切り替え）のオプションは機能しません。
+コマンドラインからの実行は通常通りですが、`-d`（デーモン化）と `-u`（ユーザー切り替え）のスイッチは機能しません。
 
-Windows サービスとして PgBouncer を実行するには、`service_name` パラメータを設定してサービス名を指定する必要があります。その後、以下を実行します。
+Windows サービスとして PgBouncer を実行するには、`service_name` パラメーターを設定してサービス名を指定する必要があります。その後、以下を実行します。
 
 	$ pgbouncer -regservice config.ini
 

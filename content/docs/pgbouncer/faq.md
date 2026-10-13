@@ -40,7 +40,7 @@ You can also use external tools:
 
 2.  Use a TCP connection load-balancer. Either
     [LVS](http://www.linuxvirtualserver.org/) or
-    [HAProxy](https://www.haproxy.org/) seem to be good choices. On the
+    [HAProxy](https://www.haproxy.org/) seems to be a good choice. On the
     PgBouncer side it may be a good idea to make `server_lifetime` smaller
     and also turn `server_round_robin` on: by default, idle connections
     are reused by a LIFO algorithm, which may work not so well when
@@ -128,7 +128,7 @@ or later:
 ## How to upgrade PgBouncer without dropping connections?
 
 You can use a rolling restart by following the procedure described in the
-[section of the docs for `SHUTDOWN WAIT_FOR_CLIENTS`](/docs/pgbouncer/usage/#shutdown-wait_for_clients)
+[section of the docs for `SHUTDOWN WAIT_FOR_CLIENTS`](/docs/pgbouncer/usage/#shutdown-wait_for_clients).
 
 --------
 

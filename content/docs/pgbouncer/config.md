@@ -22,7 +22,7 @@ The configuration file is in "ini" format. Section names are between `[` and `]`
 
 ### logfile
 
-Specifies the log file. For daemonization (`-d`), either this or `syslog` need to be set.
+Specifies the log file. For daemonization (`-d`), either this or `syslog` needs to be set.
 
 The log file is kept open, so after rotation, `kill -HUP` or on console `RELOAD;` should be done. On Windows, the service must be stopped and started.
 
@@ -116,7 +116,7 @@ Add more server connections to pool if below this number. Improves behavior when
 
 Only enforced for pools where at least one of the following is true:
 
-* the entry in the `[database]` section for the pool has a value set for the `user` key (aka forced user)
+* the entry in the `[databases]` section for the pool has a value set for the `user` key (aka forced user)
 * there is at least one client connected to the pool
 
 Default: 0 (disabled)
@@ -196,11 +196,11 @@ To allow other parameters to be tracked, they can be specified here, so that PgB
 
 If you need to specify multiple values, use a comma-separated list (e.g. `some_extension.setting, other_extension.setting`)
 
-Note: Most parameters cannot be fully tracked this way. PgBouncer only learns about changes made with `SET` for parameters that Postgres reports to the client. Postgres has [an official list of parameters that it reports to the client](https://www.postgresql.org/docs/current/protocol-flow.html#PROTOCOL-ASYNC). Postgres extensions can change this list though, they can add parameters themselves that they also report, and they can start reporting already existing parameters that Postgres does not report.  Notably Citus 12.0+ causes Postgres to also report `search_path`. Some of the parameters that are tracked by default are also only reported by newer Postgres versions: `default_transaction_read_only` since Postgres 14, `scram_iterations` since Postgres 16 and `search_path` since Postgres 18.
+Note: Most parameters cannot be fully tracked this way. PgBouncer only learns about changes made with `SET` for parameters that Postgres reports to the client. Postgres has [an official list of parameters that it reports to the client](https://www.postgresql.org/docs/current/protocol-flow.html#PROTOCOL-ASYNC). Postgres extensions can change this list though, they can add parameters themselves that they also report, and they can start reporting already existing parameters that Postgres does not report. Notably Citus 12.0+ causes Postgres to also report `search_path`. Some of the parameters that are tracked by default are also only reported by newer Postgres versions: `default_transaction_read_only` since Postgres 14, `scram_iterations` since Postgres 16 and `search_path` since Postgres 18.
 
 For a tracked parameter that Postgres does not report (e.g. `search_path` on Postgres versions before 18), PgBouncer only knows the value that a client specified in its startup packet (or in the `options` startup parameter). That value is applied to the server connection whenever the client becomes active, and the parameter is reset to its default for clients that did not specify it. Changes made with `SET` after connecting are not tracked for such parameters, so they leak to other clients sharing the server connection, unless `server_reset_query_always` is used.
 
-The Postgres protocol allows specifying parameters settings, both directly as a parameter in the startup packet, or inside the [`options` startup packet][options-startup]. Parameters specified using both of these methods are supported by `track_extra_parameters`. However, it's not possible to include `options` itself in `track_extra_parameters`, only the parameters contained in `options`.
+The Postgres protocol allows specifying parameter settings, both directly as a parameter in the startup packet, or inside the [`options` startup packet][options-startup]. Parameters specified using both of these methods are supported by `track_extra_parameters`. However, it's not possible to include `options` itself in `track_extra_parameters`, only the parameters contained in `options`.
 
 Default: empty
 
@@ -210,7 +210,7 @@ By default, PgBouncer allows only parameters it can keep track of in startup pac
 
 If you need to specify multiple values, use a comma-separated list (e.g. `options,extra_float_digits`)
 
-The Postgres protocol allows specifying parameters settings, both directly as a parameter in the startup packet, or inside the [`options` startup packet][options-startup]. Parameters specified using both of these methods are supported by `ignore_startup_parameters`. It's even possible to include `options` itself in `ignore_startup_parameters`, which results in any unknown parameters contained inside `options` to be ignored.
+The Postgres protocol allows specifying parameter settings, both directly as a parameter in the startup packet, or inside the [`options` startup packet][options-startup]. Parameters specified using both of these methods are supported by `ignore_startup_parameters`. It's even possible to include `options` itself in `ignore_startup_parameters`, which results in any unknown parameters contained inside `options` to be ignored.
 
 [options-startup]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-OPTIONS
 
@@ -298,7 +298,7 @@ Default: 200
 
 ### scram_iterations
 
-The number of computational iterations to be performed when encrypting a password using SCRAM-SHA-256. A higher number of iterations provides additional protection against brute-force attacks on stored passwords, but makes authentication slower.
+The number of computational iterations to be performed when hashing a password using SCRAM-SHA-256. A higher number of iterations provides additional protection against brute-force attacks on stored passwords, but makes authentication slower.
 
 Default: 4096
 
@@ -313,7 +313,7 @@ PgBouncer handles its own client authentication and has its own database of user
 How to authenticate users.
 
 - **`cert`**: Client must connect over TLS connection with a valid client certificate. The user name is then taken from the CommonName field from the certificate.
-- **`md5`**: Use MD5-based password check. This is the default authentication method. `auth_file` may contain both MD5-encrypted and plain-text passwords. If `md5` is configured and a user has a SCRAM secret, then SCRAM authentication is used automatically instead.
+- **`md5`**: Use MD5-based password check. This is the default authentication method. `auth_file` may contain both MD5-hashed and plain-text passwords. If `md5` is configured and a user has a SCRAM secret, then SCRAM authentication is used automatically instead.
 - **`scram-sha-256`**: Use password check with SCRAM-SHA-256. `auth_file` has to contain SCRAM secrets or plain-text passwords.
 - **`plain`**: The clear-text password is sent over the wire. Deprecated.
 - **`trust`**: No authentication is done. The user name must still exist in `auth_file`.
@@ -364,7 +364,7 @@ Default: `SELECT rolname, CASE WHEN rolvaliduntil < now() THEN NULL ELSE rolpass
 
 ### auth_dbname
 
-Database name in the `[database]` section to be used for authentication purposes. This option can be either global or overridden in the connection string if this parameter is specified.
+Database name in the `[databases]` section to be used for authentication purposes. This option can be either global or overridden in the connection string if this parameter is specified.
 
 ### auth_ldap_options
 
@@ -673,7 +673,7 @@ Default: `auto`
 TLS mode to use for connections to PostgreSQL servers. The default mode is `prefer`.
 
 - **`disable`**: Plain TCP. TLS is not even requested from the server.
-- **`allow`**: FIXME: if server rejects plain, try TLS?
+- **`allow`**: Behaves like `prefer`: first requests TLS, and falls back to plain TCP if the server refuses TLS. The server certificate is not validated.
 - **`prefer`**: TLS connection is always requested first from PostgreSQL. If refused, the connection will be established over plain TCP. Server certificate is not validated. Default.
 - **`require`**: Connection must go over TLS. If server rejects it, plain TCP is not attempted. Server certificate is not validated.
 - **`verify-ca`**: Connection must go over TLS and server certificate must be valid according to `server_tls_ca_file`. Server host name is not checked against certificate.
@@ -957,7 +957,7 @@ Set the minimum pool size for this database. If not set, the global `min_pool_si
 
 Only enforced if at least one of the following is true:
 
-* this entry in the `[database]` section has a value set for the `user` key (aka forced user)
+* this entry in the `[databases]` section has a value set for the `user` key (aka forced user)
 * there is at least one client connected to the pool
 
 ### reserve_pool_size
@@ -1089,7 +1089,7 @@ Configure a maximum for the user of client connections. This is the user equival
 
 The section `[peers]` defines the peers that PgBouncer can forward cancellation requests to and where those cancellation requests will be routed.
 
-PgBouncer processes can be peered together in a group by defining a `peer_id` value and a `[peers]` section in the configs of all the PgBouncer processes. These PgBouncer processes can then forward cancellations requests to the process that it originated from. This is needed to make cancellations work when multiple PgBouncer processes (possibly on different servers) are behind the same TCP load balancer. Cancellation requests are sent over different TCP connections than the query they are cancelling, so a TCP load balancer might send the cancellation request connection to a different process than the one that it was meant for. By peering them these cancellation requests eventually end up at the right process. A more in-depth explanation is provided in this [recording of a conference talk][cancel-problem-video].
+PgBouncer processes can be peered together in a group by defining a `peer_id` value and a `[peers]` section in the configs of all the PgBouncer processes. These PgBouncer processes can then forward cancellation requests to the process that received the query being canceled. This is needed to make cancellations work when multiple PgBouncer processes (possibly on different servers) are behind the same TCP load balancer. Cancellation requests are sent over different TCP connections than the query they are cancelling, so a TCP load balancer might send the cancellation request connection to a different process than the one that it was meant for. By peering them these cancellation requests eventually end up at the right process. A more in-depth explanation is provided in this [recording of a conference talk][cancel-problem-video].
 
 [cancel-problem-video]: https://www.youtube.com/watch?v=X-nCHcZ6vQU
 
@@ -1106,7 +1106,7 @@ Where the key will be taken as a `peer_id` and the value as a connection string,
 2 = host=/tmp/pgbouncer-2  port=5555
 ```
 
-Note 1: For peering to work, the `peer_id` of each PgBouncer process in the group must be unique within the peered group. And the `[peers]` section should contain entries for each of those peer ids. An example can be found in the examples section of these docs. It **is** allowed, but not necessary, for the `[peers]` section to contain the `peer_id` of the PgBouncer that the config is for. Such an entry will be ignored, but it is allowed to config management easy. Because it allows using the exact same `[peers]` section for multiple configs.
+Note 1: For peering to work, the `peer_id` of each PgBouncer process in the group must be unique within the peered group. And the `[peers]` section should contain entries for each of those peer ids. An example can be found in the examples section of these docs. It **is** allowed, but not necessary, for the `[peers]` section to contain the `peer_id` of the PgBouncer that the config is for. Such an entry will be ignored, but allowing it simplifies configuration management: the exact same `[peers]` section can be used in multiple configs.
 
 Note 2: Cross-version peering is supported as long as all peers are on the same side of the v1.21.0 version boundary. In v1.21.0 some breaking changes were made in how we encode the cancellation tokens that made them incompatible with the ones created by earlier versions.
 
@@ -1131,7 +1131,7 @@ Default: 6432
 
 ### pool_size
 
-Set the maximum number of cancel requests that can be in flight to the peer at the same time. It's quite normal for cancel requests to arrive in bursts, e.g. when the backing Postgres server slow or down. So it's important for `pool_size` to not be so low that it cannot handle these bursts.
+Set the maximum number of cancel requests that can be in flight to the peer at the same time. It's quite normal for cancel requests to arrive in bursts, e.g. when the backing Postgres server is slow or down. So it's important for `pool_size` to not be so low that it cannot handle these bursts.
 
 If not set, the `default_pool_size` is used.
 

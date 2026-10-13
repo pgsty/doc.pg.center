@@ -37,7 +37,7 @@ importiert wurden und wo der vollständige Upstream-Hinweis aufbewahrt wird.
 |---|---|---|---|---|
 | [Patroni](/de/docs/patroni/) | [Patroni-Dokumentation](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
 | [pgBackRest](/de/docs/pgbackrest/) | [pgBackRest-Dokumentation](https://pgbackrest.org/) | v2.59.2 (Englisch / vereinfachtes Chinesisch); v2.59.1 (andere Übersetzungen) | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/de/docs/pgbouncer/) | [PgBouncer-Dokumentation](https://www.pgbouncer.org/) | v1.26.0 (Englisch / vereinfachtes Chinesisch) | [ISC](https://opensource.org/license/isc-license-txt) | [Upstream `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
+| [PgBouncer](/de/docs/pgbouncer/) | [PgBouncer-Dokumentation](https://www.pgbouncer.org/) | v1.26.0 (alle sechs Sprachen) | [ISC](https://opensource.org/license/isc-license-txt) | [Upstream `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/de/docs/pgbadger/) | [pgBadger-Dokumentation](https://pgbadger.darold.net/) | v13.2, Commit `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/de/docs/haproxy/) | [HAProxy-3.4-Handbücher](https://docs.haproxy.org/3.4/) | v3.4.4, Commit `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/de/docs/etcd/) | [etcd-v3.7-Dokumentation](https://etcd.io/docs/v3.7/) | v3.7, Commit `8245979` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Upstream `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
@@ -83,11 +83,15 @@ erstellt.
 
 Die englische und die vereinfachte chinesische Ausgabe wurden am 2026-10-04 auf
 [**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0)
-aktualisiert. Als Grundlage dienten die Korrektur gelesenen Handbücher von
+aktualisiert. Als Grundlage dienten die redaktionell geprüften Handbücher von
 `pigsty.io` beziehungsweise `pigsty.cc`.
-Die Referenzbeschreibungen wurden mit der Implementierung dieser Version abgeglichen;
-dabei wurden vier Arten von Fehlern in der Upstream-Dokumentation korrigiert.
-Die anderen Sprachausgaben behalten den Dokumentationsstand v1.25.2 bei.
+
+Am 2026-10-13 wurden alle sechs Sprachausgaben mit dem aktuellen englischen
+Handbuch für **v1.26.0** synchronisiert. Die Referenzbeschreibungen wurden mit
+der Implementierung dieser Version abgeglichen. Lokale Korrekturen beheben
+Sach-, Rechtschreib- und Grammatikfehler der Upstream-Dokumentation. Die
+ursprünglichen Diagnosemeldungen bleiben unverändert erhalten, und jede
+Übersetzung wurde Seite für Seite geprüft.
 
 Copyright (c) 2007-2009 für PgBouncer: Marko Kreen und Skype Technologies OÜ.
 PgBouncer wird unter der

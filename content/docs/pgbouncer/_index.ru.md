@@ -1,5 +1,5 @@
 ---
-title: "Документация PgBouncer 1.25.2"
+title: "Документация PgBouncer 1.26.0"
 linkTitle: PgBouncer
 weight: 30
 description: >
@@ -13,12 +13,16 @@ module: [PGBOUNCER]
 categories: [Концепция]
 aliases: [/pgbouncer/]
 upstream_source: pgbouncer
+upstream_ref: v1.26.0
 upstream_link: "https://www.pgbouncer.org/"
 cascade:
   upstream_source: pgbouncer
+  upstream_ref: v1.26.0
   type: docs
   module: [PGBOUNCER]
 ---
+
+Это руководство основано на [PgBouncer 1.26.0](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0), выпущенном 2026-09-23. Изменения относительно предыдущих версий описаны в [примечаниях к выпуску](/ru/docs/pgbouncer/changelog/#pgbouncer-126x).
 
 **PgBouncer** — менеджер пула соединений PostgreSQL. Любое клиентское приложение может
 подключаться к **PgBouncer** как к серверу PostgreSQL, а **PgBouncer** создаст

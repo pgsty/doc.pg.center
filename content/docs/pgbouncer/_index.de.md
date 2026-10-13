@@ -1,5 +1,5 @@
 ---
-title: "Dokumentation zu PgBouncer 1.25.2"
+title: "Dokumentation zu PgBouncer 1.26.0"
 linkTitle: PgBouncer
 weight: 30
 description: >
@@ -13,12 +13,16 @@ module: [PGBOUNCER]
 categories: [Konzept]
 aliases: [/pgbouncer/]
 upstream_source: pgbouncer
+upstream_ref: v1.26.0
 upstream_link: "https://www.pgbouncer.org/"
 cascade:
   upstream_source: pgbouncer
+  upstream_ref: v1.26.0
   type: docs
   module: [PGBOUNCER]
 ---
+
+Dieses Handbuch basiert auf [PgBouncer 1.26.0](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0), veröffentlicht am 2026-09-23. Die Änderungen gegenüber früheren Versionen sind in den [Versionshinweisen](/de/docs/pgbouncer/changelog/#pgbouncer-126x) beschrieben.
 
 **PgBouncer** ist ein Verbindungspooler für PostgreSQL. Eine beliebige Client-Anwendung kann sich mit **PgBouncer** verbinden, als handele es sich um einen PostgreSQL-Server. **PgBouncer** stellt dann eine Verbindung zum eigentlichen Server her oder verwendet eine bereits bestehende Verbindung.
 

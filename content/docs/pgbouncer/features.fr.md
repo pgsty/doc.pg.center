@@ -1,7 +1,7 @@
 ---
 title: "Fonctionnalités"
 weight: 10
-description: "Fonctionnalités de PgBouncer — modes de pool et compatibilité SQL"
+description: "Fonctionnalités de PgBouncer — modes de pooling et compatibilité SQL"
 icon: fa-solid fa-wand-magic-sparkles
 module: [PGBOUNCER]
 categories: [Concept]
@@ -12,44 +12,44 @@ upstream_link: "https://www.pgbouncer.org/features.html"
 - Plusieurs niveaux de sévérité lors de la rotation des connexions :
 
   **Pooling de sessions**
-: Méthode la moins intrusive. Lorsqu’un client se connecte, une connexion serveur lui est attribuée pour toute la durée de sa connexion. Lorsque le client se déconnecte, la connexion serveur est remise dans le pool. Ce mode prend en charge toutes les fonctionnalités de PostgreSQL.
+  : Méthode la moins intrusive. Lorsqu’un client se connecte, une connexion serveur lui est attribuée pour toute la durée de sa connexion. Lorsque le client se déconnecte, la connexion serveur est remise dans le pool. Ce mode prend en charge toutes les fonctionnalités de PostgreSQL.
 
   **Pooling de transactions**
-: Une connexion serveur est attribuée à un client uniquement pendant une transaction. Lorsque PgBouncer détecte la fin de la transaction, le serveur est remis dans le pool. Ce mode désactive quelques fonctionnalités basées sur la session de PostgreSQL. Vous ne pouvez l'utiliser que si l'application coopère en ne utilisant pas les fonctionnalités qui causent des incompatibilités. Consultez le tableau ci-dessous pour les fonctionnalités incompatibles.
+  : Une connexion serveur est attribuée à un client uniquement pendant une transaction. Lorsque PgBouncer détecte la fin de la transaction, elle est remise dans le pool. Ce mode est incompatible avec certaines fonctionnalités de PostgreSQL liées à la session. Il ne peut être utilisé que si l'application évite ces fonctionnalités, répertoriées dans le tableau ci-dessous.
 
   **Pooling d'instructions**
-: Méthode la plus agressive. Il s'agit d'un pooling de transactions avec une particularité : les transactions à plusieurs instructions sont interdites. Cette configuration vise à imposer le mode « autocommit » sur le client, principalement destinée à PL/Proxy.
+  : Méthode la plus agressive. Il s'agit d'un pooling de transactions avec une particularité : les transactions à plusieurs instructions sont interdites. Ce mode vise à imposer le fonctionnement en « autocommit » côté client et s'adresse principalement à PL/Proxy.
 
-- Faibles besoins en mémoire (2 kB par connexion par défaut). Cela est dû au fait que PgBouncer n’a pas besoin de voir entièrement les paquets à la fois.
+- Faibles besoins en mémoire (2 kB par connexion par défaut), car PgBouncer n'a pas besoin de lire chaque paquet en entier d'un seul coup.
 
 - Il n’est pas lié à un seul serveur backend. Les bases de données de destination peuvent résider sur des hôtes différents.
 
-- Prise en charge de la reconfiguration en temps réel pour la plupart des paramètres.
+- Prise en charge de la reconfiguration à chaud pour la plupart des paramètres.
 
-- Prise en charge du redémarrage/mise à jour en direct sans interrompre les connexions clients.
+- Prise en charge des [redémarrages et mises à niveau progressifs](/fr/docs/pgbouncer/usage/#shutdown-wait_for_clients) à l'aide de plusieurs processus avec [`so_reuseport`](/fr/docs/pgbouncer/config/#so_reuseport). L'ancien redémarrage en ligne (`-R`) a été supprimé dans la version 1.26.0.
 
 --------
 
-## Carte des fonctionnalités SQL pour les modes de mise en pool {#sql-feature-map-for-pooling-modes}
+## Carte des fonctionnalités SQL pour les modes de pooling {#sql-feature-map-for-pooling-modes}
 
-Le tableau suivant liste diverses fonctionnalités de PostgreSQL et indique leur compatibilité avec les modes de poolage de PgBouncer. Notez que le poolage *transactionnel* rompt délibérément les attentes du client concernant le serveur et ne peut être utilisé que si l'application coopère en ne faisant pas usage des fonctionnalités non prises en charge.
+Le tableau suivant répertorie plusieurs fonctionnalités de PostgreSQL et leur compatibilité avec les modes de pooling de PgBouncer. Le pooling de *transactions* modifie *par conception* le comportement du serveur attendu par le client. Il ne peut donc être utilisé que si l'application évite les fonctionnalités incompatibles.
 
 | Fonctionnalité                        | Pooling de sessions  | Pooling de transactions  |
 |---------------------------------------|:--------------------:|:------------------------:|
 | Paramètres de démarrage [^0]         | Oui                  | Oui                      |
-| SET/RESET                             | Oui                  | Jamais                   |
+| SET/RESET                             | Oui                  | Pour les paramètres suivis [^0] |
 | LISTEN                                | Oui                  | Jamais                   |
 | NOTIFY                                | Oui                  | Oui                      |
-| Curseur WITHOUT HOLD                  | Oui                  | Oui                      |
-| Curseur WITH HOLD                     | Oui                  | Jamais                   |
+| WITHOUT HOLD CURSOR                  | Oui                  | Oui                      |
+| WITH HOLD CURSOR                     | Oui                  | Jamais                   |
 | Plans préparés au niveau du protocole | Oui                  | Oui [^1]              |
 | PREPARE / DEALLOCATE                  | Oui                  | Jamais                   |
-| Suppression des tables temporaires ON COMMIT | Oui                  | Oui                      |
-| Conservation/Suppression des lignes dans les tables temporaires | Oui                  | Jamais                   |
+| Tables temporaires ON COMMIT DROP   | Oui                  | Oui                      |
+| Tables temporaires PRESERVE/DELETE ROWS | Oui                  | Jamais                   |
 | Réinitialisation des plans mis en cache | Oui                  | Oui                      |
 | Instruction LOAD                      | Oui                  | Jamais                   |
-| Verrous d'advisory au niveau de la session | Oui                  | Jamais                   |
+| Verrous advisory au niveau de la session | Oui                  | Jamais                   |
 
-[^0]: Les paramètres de démarrage sont `client_encoding`, `DateStyle`, `IntervalStyle`, `Timezone`, `standard_conforming_strings` et `application_name`. PgBouncer détecte leurs modifications et peut ainsi garantir leur cohérence pour le client. Pour prendre en charge d'autres paramètres, consultez [`track_extra_parameters`](/fr/docs/pgbouncer/config/#track_extra_parameters) et [`ignore_startup_parameters`](/fr/docs/pgbouncer/config/#ignore_startup_parameters).
+[^0]: Depuis la version 1.26.0, PgBouncer suit tous les paramètres signalés par le serveur que les clients peuvent modifier : `application_name`, `client_encoding`, `DateStyle`, `default_transaction_read_only` (PostgreSQL 14+), `IntervalStyle`, `scram_iterations` (PostgreSQL 16+), `search_path` (PostgreSQL 18+), `session_authorization`, `standard_conforming_strings` et `TimeZone`. Pour les paramètres que le serveur ne signale pas, seules les valeurs de démarrage sont suivies ; les modifications ultérieures par `SET` ne le sont pas. Consultez [`track_extra_parameters`](/fr/docs/pgbouncer/config/#track_extra_parameters) et [`ignore_startup_parameters`](/fr/docs/pgbouncer/config/#ignore_startup_parameters) pour plus de détails et pour les paramètres fournis par des extensions.
 
-[^1]: Vous devez définir [`max_prepared_statements`](/fr/docs/pgbouncer/config/#max_prepared_statements) sur une valeur non nulle pour activer cette prise en charge.
+[^1]: La prise en charge des requêtes préparées au niveau du protocole est activée lorsque [`max_prepared_statements`](/fr/docs/pgbouncer/config/#max_prepared_statements) est non nul. La valeur par défaut est 200 ; la définir à 0 désactive cette prise en charge. `PREPARE` / `DEALLOCATE` au niveau SQL reste incompatible avec le pooling de transactions, à l'exception de `DEALLOCATE ALL` et `DISCARD ALL` lorsque le suivi est activé.

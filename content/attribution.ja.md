@@ -27,7 +27,7 @@ pig.centerは、6つのアップストリームプロジェクトが作成した
 |---|---|---|---|---|
 | [Patroni](/ja/docs/patroni/) | [Patroniドキュメント](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [アップストリームの`LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
 | [pgBackRest](/ja/docs/pgbackrest/) | [pgBackRestドキュメント](https://pgbackrest.org/) | v2.59.2（英語 / 簡体字中国語）；v2.59.1（その他の翻訳） | [MIT](https://opensource.org/license/mit) | [アップストリームの`LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/ja/docs/pgbouncer/) | [PgBouncerドキュメント](https://www.pgbouncer.org/) | v1.26.0（英語 / 簡体字中国語） | [ISC](https://opensource.org/license/isc-license-txt) | [アップストリームの`COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
+| [PgBouncer](/ja/docs/pgbouncer/) | [PgBouncerドキュメント](https://www.pgbouncer.org/) | v1.26.0（全6言語） | [ISC](https://opensource.org/license/isc-license-txt) | [アップストリームの`COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/ja/docs/pgbadger/) | [pgBadgerドキュメント](https://pgbadger.darold.net/) | v13.2、コミット`a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/ja/docs/haproxy/) | [HAProxy 3.4マニュアル](https://docs.haproxy.org/3.4/) | v3.4.4、コミット`7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/ja/docs/etcd/) | [etcd v3.7ドキュメント](https://etcd.io/docs/v3.7/) | v3.7、コミット`8245979` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [アップストリームの`LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
@@ -55,8 +55,11 @@ pgBackRestの著作権表示はcopyright (c) 2015-2026 The PostgreSQL Global Dev
 英語版と簡体字中国語版は2026-10-04に
 [**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0)へ更新しました。
 それぞれ`pigsty.io`と`pigsty.cc`の校正済みマニュアルを使用しています。
-リファレンスの説明をこのリリースの実装と照合し、アップストリーム文書の4種類の誤りを修正しました。
-その他の言語版はv1.25.2のドキュメントスナップショットを維持しています。
+
+2026-10-13に、全6言語版を**v1.26.0**の現行英語マニュアルに同期しました。
+リファレンスの説明をこのリリースの実装と照合し、アップストリーム文書の事実誤認、
+スペルミス、文法上の誤りをこのサイトで修正しました。元の診断メッセージは一字一句
+そのまま保持し、各翻訳についてページ単位のレビューを実施しました。
 
 PgBouncerの著作権表示はcopyright (c) 2007-2009 Marko Kreen, Skype Technologies OÜです。[ISC License](https://opensource.org/license/isc-license-txt)のもとで配布されています。完全なライセンス本文は[アップストリーム](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT)に保存されています。
 

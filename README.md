@@ -27,22 +27,32 @@ output formats, and English fallback destinations do not count as translations.
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Patroni | 24 (100%) | 24 (100%) | 24 (100%) | 24 (100%) | 6 (25%) | 24 (100%) |
 | pgBackRest | 29 (100%) | 29 (100%) | 29 (100%) | 6 (20.7%) | 0 (0%) | 6 (20.7%) |
-| PgBouncer | 9 (100%) | 9 (100%) | 9 (100%) | 9 (100%) | 7 (77.8%) | 9 (100%) |
+| PgBouncer | 9 (100%) | 9 (100%) | 9 (100%) | 9 (100%) | 9 (100%) | 9 (100%) |
 | pgBadger | 16 (100%) | 16 (100%) | 16 (100%) | 16 (100%) | 16 (100%) | 16 (100%) |
 | HAProxy | 35 (100%) | 35 (100%) | 35 (100%) | 12 (34.3%) | 2 (5.7%) | 30 (85.7%) |
 | etcd | 99 (100%) | 99 (100%) | 99 (100%) | 35 (35.4%) | 3 (3%) | 99 (100%) |
-| **Component total** | 212 (100%) | 212 (100%) | 212 (100%) | 102 (48.1%) | 34 (16%) | 184 (86.8%) |
+| **Component total** | 212 (100%) | 212 (100%) | 212 (100%) | 102 (48.1%) | 36 (17%) | 184 (86.8%) |
 | Site pages | 4 (100%) | 4 (100%) | 4 (100%) | 4 (100%) | 4 (100%) | 4 (100%) |
-| **All publishable pages** | 216 (100%) | 216 (100%) | 216 (100%) | 106 (49.1%) | 38 (17.6%) | 188 (87%) |
+| **All publishable pages** | 216 (100%) | 216 (100%) | 216 (100%) | 106 (49.1%) | 40 (18.5%) | 188 (87%) |
 
 EN = English; ZH = 简体中文; FR = Français; JA = 日本語; DE = Deutsch; RU = Русский.
 Reproduce this matrix with `python3 scripts/report-coverage.py`.
 
 These percentages measure page availability, not sentence-level translation completeness or
 version freshness. pgBackRest's English and Chinese editions target 2.59.2, while its French,
-Japanese, and Russian editions still target 2.59.1. PgBouncer's English and Chinese editions target
-1.26.0, while French, Japanese, German, and Russian still target 1.25.2. Those translations require
-an update even where page coverage is 100%.
+Japanese, and Russian editions still target 2.59.1.
+Those pgBackRest translations require an update even where page coverage is 100%.
+
+PgBouncer 1.26.0 has nine pages in each of the six editions, with all 45 translation pairs
+reviewed against current English and the release implementation.
+`python3 scripts/check-pgbouncer.py --rendered-dir <production-build>` checks the exact
+reviewed source fingerprints, technical content, routes, navigation, search, aliases, links,
+and complete Markdown, print and LLMS bodies. The [acceptance record](data/translation-audits/pgbouncer.json)
+records verified source corrections and separates semantic review from automated validation.
+`scripts/check-pgbouncer-browser.cjs` additionally exercises all 54 pages at desktop and
+mobile widths, real technical-parameter search, language switching and mobile navigation.
+Serve the production build locally and provide external Playwright/Chromium paths plus
+a report directory outside the repository, as shown in the script header.
 
 Localized navigation resolves each route at build time. Existing translations stay in the selected
 language; gaps link to the matching English page and are marked `EN` on the homepage.
@@ -59,7 +69,7 @@ make check
 ```
 
 `make check` validates the existing German and Russian translations against their declared English
-source version. Older pgBackRest and PgBouncer translation sources are pinned in
+source version. Older pgBackRest translation sources are pinned in
 `data/translation-sources.json` and read from Git history, so validation requires the full repository
 history (CI uses `fetch-depth: 0`). Passing this check does not establish synchronization with the
 latest English edition. Add `--current-source` to the German or Russian parity checker to inspect

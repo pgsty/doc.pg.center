@@ -31,4 +31,6 @@ upstream_link: "https://www.pgbouncer.org/community.html"
 
 - [PgBouncer-Themenbereich](https://stackoverflow.com/questions/tagged/pgbouncer) auf Stack Overflow
 
+- [Chatraum](https://gitter.im/pgbouncer/pgbouncer) auf Gitter
+
 - [Community-Diskussionen](https://github.com/pgbouncer/pgbouncer/discussions) auf GitHub

@@ -12,6 +12,14 @@ upstream_link: "https://www.pgbouncer.org/downloads/"
 
 --------
 
+## PgBouncer 1.26 {#pgbouncer-126}
+
+| Файл | Дата | Размер | Контрольная сумма |
+|------|------|------|----------|
+| [pgbouncer-1.26.0.tar.gz](https://www.pgbouncer.org/downloads/files/1.26.0/pgbouncer-1.26.0.tar.gz) | 2026-09-23 | 897943 bytes | [sha256](https://www.pgbouncer.org/downloads/files/1.26.0/pgbouncer-1.26.0.tar.gz.sha256) |
+
+--------
+
 ## PgBouncer 1.25 {#pgbouncer-125}
 
 | Файл | Дата | Размер | SHA256 |
@@ -258,7 +266,7 @@ upstream_link: "https://www.pgbouncer.org/downloads/"
 
 ## Двоичные пакеты {#binary-packages}
 
-В различных дистрибутивах операционных систем имеются собственные пакеты или порты PgBouncer. Поэтому сначала следует проверить, доступен ли PgBouncer в вашей системе.
+В различных дистрибутивах операционных систем имеются собственные пакеты или порты PgBouncer. Поэтому сначала стоит проверить, доступен ли PgBouncer в вашей системе.
 
 Специализированные сборки могут содержать более новые версии, чем репозитории дистрибутивов:
 
