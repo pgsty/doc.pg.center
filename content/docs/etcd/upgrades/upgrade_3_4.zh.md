@@ -3,7 +3,7 @@ title: 将 etcd 从 3.3 升级到 3.4
 weight: 6700
 description: 升级 etcd 3.3 至 3.4 的流程、检查清单与注意事项
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_4.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_4.md"
 aliases: [/etcd/upgrades/upgrade_3_4/]
 ---
 
@@ -21,7 +21,7 @@ aliases: [/etcd/upgrades/upgrade_3_4/]
 > [!WARNING]
 > 从 [没有 v3 数据的 v2 迁移](https://github.com/etcd-io/etcd/issues/9480)时，如果 etcd 从现有快照恢复，但不存在 v3 `ETCD_DATA_DIR/member/snap/db` 文件，etcd v3.2+ 服务器会发生崩溃。这种情况出现在服务器由 v2 迁移且此前没有 v3 数据时。此限制也可防止意外丢失 v3 数据（例如 `db` 文件可能已被移动）。etcd 要求 v3 迁移后的操作必须有 v3 数据。v3.0 服务器包含 v3 数据之前，请勿升级到更新的 v3 版本。
 
-3.4 版本中的重点变更。
+3.4 版本中的重点破坏性变更。
 
 #### 设置 `ETCDCTL_API=3 etcdctl` 为默认值 {#make-etcdctl_api3-etcdctl-default}
 
@@ -73,7 +73,7 @@ OK
 +etcd --peer-trusted-ca-file ca-peer.crt
 ```
 
-#### 废弃的`grpc.ErrClientConnClosing`错误 {#deprecated-grpcerrclientconnclosing-error}
+#### 已弃用 `grpc.ErrClientConnClosing` 错误 {#deprecated-grpcerrclientconnclosing-error}
 
 `grpc.ErrClientConnClosing` 在 gRPC ≥ 1.10 中已被 [弃用](https://github.com/grpc/grpc-go/pull/1854)。
 
@@ -117,7 +117,7 @@ ccfg := clientv3.Config{
 }
 ```
 
-#### 废弃 `etcd_debugging_mvcc_db_total_size_in_bytes` Prometheus 指标 {#deprecating-etcd_debugging_mvcc_db_total_size_in_bytes-prometheus-metrics}
+#### 弃用 `etcd_debugging_mvcc_db_total_size_in_bytes` Prometheus 指标 {#deprecating-etcd_debugging_mvcc_db_total_size_in_bytes-prometheus-metrics}
 
 v3.4 将 `etcd_debugging_mvcc_db_total_size_in_bytes` Prometheus 指标提升至 `etcd_mvcc_db_total_size_in_bytes`，以鼓励对 etcd 存储进行监控。
 
@@ -130,7 +130,7 @@ v3.4 将 `etcd_debugging_mvcc_db_total_size_in_bytes` Prometheus 指标提升至
 
 请注意，`etcd_debugging_*` 命名空间指标已被标记为实验性。随着监控指南的完善，我们可能会将更多指标升级为正式支持。
 
-#### 废弃 `etcd_debugging_mvcc_put_total` Prometheus 指标 {#deprecating-etcd_debugging_mvcc_put_total-prometheus-metrics}
+#### 弃用 `etcd_debugging_mvcc_put_total` Prometheus 指标 {#deprecating-etcd_debugging_mvcc_put_total-prometheus-metrics}
 
 v3.4 将 `etcd_debugging_mvcc_put_total` Prometheus 指标提升至 `etcd_mvcc_put_total`，以鼓励对 etcd 存储进行监控。
 
@@ -143,7 +143,7 @@ v3.4 将 `etcd_debugging_mvcc_put_total` Prometheus 指标提升至 `etcd_mvcc_p
 
 请注意，`etcd_debugging_*` 命名空间指标已被标记为实验性。随着监控指南的完善，我们可能会将更多指标升级为正式支持。
 
-#### 废弃 `etcd_debugging_mvcc_delete_total` Prometheus 指标 {#deprecating-etcd_debugging_mvcc_delete_total-prometheus-metrics}
+#### 弃用 `etcd_debugging_mvcc_delete_total` Prometheus 指标 {#deprecating-etcd_debugging_mvcc_delete_total-prometheus-metrics}
 
 v3.4 将 `etcd_debugging_mvcc_delete_total` Prometheus 指标提升至 `etcd_mvcc_delete_total`，以鼓励对 etcd 存储进行监控。
 
@@ -156,7 +156,7 @@ v3.4 将 `etcd_debugging_mvcc_delete_total` Prometheus 指标提升至 `etcd_mvc
 
 请注意，`etcd_debugging_*` 命名空间指标已被标记为实验性。随着监控指南的完善，我们可能会将更多指标升级为正式支持。
 
-#### 废弃 `etcd_debugging_mvcc_txn_total` Prometheus 指标 {#deprecating-etcd_debugging_mvcc_txn_total-prometheus-metrics}
+#### 弃用 `etcd_debugging_mvcc_txn_total` Prometheus 指标 {#deprecating-etcd_debugging_mvcc_txn_total-prometheus-metrics}
 
 v3.4 将 `etcd_debugging_mvcc_txn_total` Prometheus 指标提升至 `etcd_mvcc_txn_total`，以鼓励对 etcd 存储进行监控。
 
@@ -169,7 +169,7 @@ v3.4 将 `etcd_debugging_mvcc_txn_total` Prometheus 指标提升至 `etcd_mvcc_t
 
 请注意，`etcd_debugging_*` 命名空间指标已被标记为实验性。随着监控指南的完善，我们可能会将更多指标升级为正式支持。
 
-#### 废弃 Prometheus 元度指标`etcd_debugging_mvcc_range_total` {#deprecating-etcd_debugging_mvcc_range_total-prometheus-metrics}
+#### 弃用 `etcd_debugging_mvcc_range_total` Prometheus 指标 {#deprecating-etcd_debugging_mvcc_range_total-prometheus-metrics}
 
 v3.4 将 `etcd_debugging_mvcc_range_total` 的 Prometheus 指标提升至 `etcd_mvcc_range_total`，以鼓励对 etcd 存储进行监控。
 
@@ -182,7 +182,7 @@ v3.4 将 `etcd_debugging_mvcc_range_total` 的 Prometheus 指标提升至 `etcd_
 
 请注意，`etcd_debugging_*` 命名空间指标已被标记为实验性。随着监控指南的完善，我们可能会将更多指标升级为正式支持。
 
-#### 弃用 `etcd --log-output` 标志（现已 `--log-outputs`） {#deprecating-etcd---log-output-flag-now---log-outputs}
+#### 弃用 `etcd --log-output` 标志（现为 `--log-outputs`） {#deprecating-etcd---log-output-flag-now---log-outputs}
 
 将 [`etcd --log-output` 重命名为 `--log-outputs`](https://github.com/etcd-io/etcd/pull/9624)，以支持多日志输出。**`etcd --logger=capnslog` 不支持多日志输出。**
 
@@ -209,7 +209,7 @@ v3.4 增加 `etcd --logger=zap --log-outputs=stderr` 对结构化日志和多日
 +log-outputs: [default]
 ```
 
-#### 将`embed.Config.LogOutput`重命名为`embed.Config.LogOutputs` {#renamed-embedconfiglogoutput-to-embedconfiglogoutputs}
+#### 将 `embed.Config.LogOutput` 重命名为 `embed.Config.LogOutputs` {#renamed-embedconfiglogoutput-to-embedconfiglogoutputs}
 
 将 [**`embed.Config.LogOutput`** 重命名为 **`embed.Config.LogOutputs`**](https://github.com/etcd-io/etcd/pull/9624)，以支持多日志输出。并将 [`embed.Config.LogOutput` 类型从 `string` 改为 `[]string`](https://github.com/etcd-io/etcd/pull/9579)，以支持多日志输出。
 
@@ -221,16 +221,16 @@ cfg := &embed.Config{Debug: false}
 +cfg.LogOutputs = []string{"stderr"}
 ```
 
-#### v3.5 弃用`capnslog` {#v35-deprecates-capnslog}
+#### v3.5 弃用 `capnslog` {#v35-deprecates-capnslog}
 
-*v3.5 将弃用 `etcd --log-package-levels` 标志的 `capnslog` 功能；`etcd --logger=zap --log-outputs=stderr` 将成为默认值。v3.5 将弃用 `[CLIENT-URL]/config/local/log` 端点。*
+**v3.5 将弃用 `capnslog` 的 `etcd --log-package-levels` 标志**；`etcd --logger=zap --log-outputs=stderr` 将成为默认值。**v3.5 将弃用 `[CLIENT-URL]/config/local/log` 端点。**
 
 ```diff
 -etcd
 +etcd --logger zap
 ```
 
-#### 弃用 `etcd --debug` 标志（现已 `--log-level=debug`） {#deprecating-etcd---debug-flag-now---log-leveldebug}
+#### 弃用 `etcd --debug` 标志（现为 `--log-level=debug`） {#deprecating-etcd---debug-flag-now---log-leveldebug}
 
 v3.4 已弃用 [`etcd --debug`](https://github.com/etcd-io/etcd/pull/10947) 标志。应改用 `etcd --log-level=debug` 标志。
 
@@ -305,7 +305,7 @@ import "github.com/coreos/etcd/wal"
 +wal.Create(lg, dirpath, metadata)
 ```
 
-#### 更改了 `IntervalTree` 类型 在 `pkg/adt` 包中 {#changed-intervaltree-type-in-package-pkgadt}
+#### 更改了 `pkg/adt` 包中的 `IntervalTree` 类型 {#changed-intervaltree-type-in-package-pkgadt}
 
 `pkg/adt.IntervalTree` 现已定义为 `interface`。
 
@@ -332,9 +332,9 @@ cfg := &embed.Config{Debug: false}
 -cfg.SetupLogging()
 ```
 
-#### Changed gRPC 网关 HTTP 端点（替换 `/v3beta` 为 `/v3`） {#changed-grpc-gateway-http-endpoints-replaced-v3beta-with-v3}
+#### 更改了 gRPC 网关 HTTP 端点（将 `/v3beta` 替换为 `/v3`） {#changed-grpc-gateway-http-endpoints-replaced-v3beta-with-v3}
 
-本文未提供内容。
+之前
 
 ```bash
 curl -L http://localhost:2379/v3beta/kv/put \
@@ -380,7 +380,7 @@ curl -L http://localhost:2379/v3/kv/put \
 
 在升级 etcd 之前，请务必在预发环境中测试依赖 etcd 的服务，再将升级部署到生产环境。
 
-在开始之前，[下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。若升级过程中出现异常，可使用此备份将 etcd 版本 [回退](#downgrade)至当前版本。请注意，`snapshot`命令仅备份 v3 数据。如需备份 v2 数据，请参见[备份 v2 数据存储](https://etcd.io/docs/v2.3/admin_guide/#backing-up-the-datastore)。
+在开始之前，[下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。若升级过程中出现异常，可使用此备份 [降级](#downgrade)回现有 etcd 版本。请注意，`snapshot` 命令仅备份 v3 数据。如需备份 v2 数据，请参见[备份 v2 数据存储](https://etcd.io/docs/v2.3/admin_guide/#backing-up-the-datastore)。
 
 #### 混合版本 {#mixed-versions}
 
@@ -390,9 +390,9 @@ curl -L http://localhost:2379/v3/kv/put \
 
 请注意：如果集群仅包含 v3 数据且无 v2 数据，则不受此限制影响。
 
-如果集群正在服务的数据集大小超过 50MB，每个新升级的成员可能需要最多 2 分钟才能追上现有集群。请检查最近快照的大小以估算总数据量。换句话说，升级每个成员之间应至少等待 2 分钟。
+如果集群正在服务的 v2 数据集大小超过 50MB，每个新升级的成员可能需要最多 2 分钟才能追上现有集群。请检查最近快照的大小以估算总数据量。换句话说，升级每个成员之间应至少等待 2 分钟。
 
-对于数据总量更大（例如 100MB 或更多）的情况，此一次性操作可能需要更长时间。对于规模达到此类程度的大型 etcd 集群，系统管理员可在升级前自由联系 [etcd 团队][etcd-contact]，我们将乐意提供升级流程方面的建议。
+对于数据总量更大（100MB 或更多）的情况，此一次性操作可能需要更长时间。对于规模达到此类程度的大型 etcd 集群，系统管理员可在升级前自由联系 [etcd 团队][etcd-contact]，我们将乐意提供升级流程方面的建议。
 
 #### 降级 {#downgrade}
 
@@ -404,7 +404,7 @@ curl -L http://localhost:2379/v3/kv/put \
 
 本示例演示如何升级在本地计算机上运行的 3 个成员的 v3.3 etcd 集群。
 
-#### 步骤 1: 检查升级要求 {#step-1-check-upgrade-requirements}
+#### 第 1 步：检查升级要求 {#step-1-check-upgrade-requirements}
 
 集群是否健康且运行 v3.3.x 版本？
 
@@ -432,7 +432,7 @@ curl http://localhost:32379/version
 COMMENT
 ```
 
-#### Step 2: 从领导者下载快照备份 {#step-2-download-snapshot-backup-from-leader}
+#### 第 2 步：从领导者下载快照备份 {#step-2-download-snapshot-backup-from-leader}
 
 [下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)，以便在出现任何问题时提供回退路径。
 
@@ -545,7 +545,7 @@ WARNING: 2018/05/17 12:45:21 grpc: addrConn.transportMonitor exits due to: grpc:
 
 > `{"level":"info","ts":1526586617.2107732,"caller":"etcdserver/server.go:1770","msg":"published local member to cluster through raft","local-member-id":"7339c4e5e833c029","local-member-attributes":"{Name:s1 ClientURLs:[http://localhost:2379]}","request-path":"/0/members/7339c4e5e833c029/attributes","cluster-id":"7dee9ba76d59ed53","publish-timeout":7}`
 
-验证每个成员以及整个集群在使用新的 v3.4 etcd 二进制文件后是否恢复正常健康状态：
+先验证每个成员，再验证整个集群在使用新的 v3.4 etcd 二进制文件后是否恢复正常健康状态：
 
 ```bash
 etcdctl endpoint health --endpoints=localhost:2379,localhost:22379,localhost:32379

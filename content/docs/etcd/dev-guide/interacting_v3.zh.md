@@ -3,20 +3,17 @@ title: 与 etcd 交互
 weight: 3250
 description: "etcdctl：与 etcd 服务器交互的命令行工具"
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/interacting_v3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/interacting_v3.md"
 aliases: [/etcd/dev-guide/interacting_v3/]
 ---
 
 用户通常通过设置或获取键的值来与 etcd 交互。本节介绍如何使用 etcdctl（用于与 etcd 服务器交互的命令行工具）实现这一操作。此处描述的概念同样适用于 gRPC API 或客户端库 API。
 
-etcdctl 与 etcd 通信时所使用的 API 版本可通过 `ETCDCTL_API` 环境变量设置为 `2` 或 `3`。默认情况下，主分支（3.4）上的 etcdctl 使用 v3 API，而较早版本（3.3 及更早）默认使用 v2 API。
+etcdctl v3.7 使用 v3 API。v2 API 和通过 `ETCDCTL_API` 选择版本的功能均已移除。
 
-请注意，使用 v2 API 创建的任何键均无法通过 v3 API 查询。对 v2 键执行 v3 API ```etcdctl get``` 操作时，将返回 0 且不包含键数据，这是预期行为。
+> [!NOTE]
+> 以下示例保留了历史命令输出，因此显示的版本号可能与你的安装版本不同。较旧的 etcd 版本将 v2 键与 v3 键保存在不同的存储中；升级至 v3.7 之前，请先迁移所有旧的 v2 数据。
 
-
-```bash
-export ETCDCTL_API=3
-```
 
 ## 查找版本 {#find-versions}
 
@@ -41,7 +38,7 @@ $ etcdctl put foo bar
 OK
 ```
 
-此外，可通过为键附加租约，将其设置为指定时间间隔。
+此外，可通过为键附加租约，设置键的存活时间。
 
 以下是将键 `foo1` 的值设置为 `bar1` 并保留 10 秒的命令。
 
@@ -199,7 +196,7 @@ b = 456
 z = 789
 ```
 
-以下是读取键值大于或等于键 `b` 字节值的命令：
+以下是读取字节值大于或等于键 `b` 的键的命令：
 
 ```bash
 $ etcdctl get --from-key b
@@ -257,7 +254,7 @@ $ etcdctl del --prefix zoo
 2 # two keys are deleted
 ```
 
-以下是删除键值大于或等于键 `b` 字节值的命令：
+以下是删除字节值大于或等于键 `b` 的键的命令：
 
 ```bash
 $ etcdctl del --from-key b
@@ -428,7 +425,7 @@ $ etcdctl get mykey -w=json
 
 ## 授予租约 {#grant-leases}
 
-应用程序可从 etcd 集群授予键的租约。当键绑定到租约时，其生命周期与租约的生命周期绑定，而租约的生命周期由生存时间（TTL）决定。每个租约在授予时由应用程序指定最小生存时间（TTL）值。租约的实际 TTL 值至少为最小 TTL，且由 etcd 集群选定。一旦租约的 TTL 到期，租约即失效，所有绑定的键将被删除。
+应用程序可在 etcd 集群中为键创建租约。当键绑定到租约时，其生命周期与租约的生命周期绑定，而租约的生命周期由生存时间（TTL）决定。每个租约在授予时由应用程序指定最小生存时间（TTL）值。租约的实际 TTL 值至少为最小 TTL，且由 etcd 集群选定。一旦租约的 TTL 到期，租约即失效，所有绑定的键将被删除。
 
 以下是授予租约的命令：
 

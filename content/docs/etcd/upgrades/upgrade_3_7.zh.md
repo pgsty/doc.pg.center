@@ -1,9 +1,9 @@
 ---
 title: 将 etcd 从 v3.6 升级到 v3.7
-weight: 6700
+weight: 6550
 description: 升级 etcd 3.6 至 3.7 的流程、检查清单与注意事项
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_7.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_7.md"
 aliases: [/etcd/upgrades/upgrade_3_7/]
 ---
 
@@ -23,7 +23,7 @@ aliases: [/etcd/upgrades/upgrade_3_7/]
 
 #### V2 存储系统 {#v2-store}
 
-v3.7 版本中已完全移除 v2 存储。v2 HTTP API（`--enable-v2`）、v2-on-v3 模拟层（`--experimental-enable-v2v3`）、v2 发现服务、`client/v2` 包，以及 v2 快照文件的加载功能均已不可用。请参阅 [CHANGELOG-3.7](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.7.md) 中的破坏性变更说明。
+v3.7 版本中已完全移除 v2 存储系统。v2 HTTP API（`--enable-v2`）、v2-on-v3 模拟层（`--experimental-enable-v2v3`）、v2 发现服务、`client/v2` 包，以及 v2 快照文件的加载功能均已不可用。请参阅 [CHANGELOG-3.7](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.7.md) 中的破坏性变更说明。
 
 如果从 3.6 版本集群升级，这些标志已不存在，无需采取任何操作。如果从包含自定义 v2 数据的旧版本升级，请在升级前遵循 [v2 迁移指南](https://etcd.io/docs/v3.4/op-guide/v2-migration/)。
 
@@ -39,7 +39,7 @@ v3.7 包含重大的内部重构，对正常升级流程无影响，但在升级
 
 ### 已移除标志 {#flags-removed}
 
-v3.7 版本已移除所有已弃用的 `--experimental-*` 标志（[#19959](https://github.com/etcd-io/etcd/pull/19959)）。在 v3.6 版本中，这些标志均已被同名的非实验性标志或 `--feature-gates` 条目替代。如果仍存在这些标志的设置，请务必在升级至 v3.7 之前，将其替换为 v3.6 对应的等效设置，否则 v3.7 进程将无法启动。
+v3.7 版本已移除所有已弃用的 `--experimental-*` 标志（[#19959](https://github.com/etcd-io/etcd/pull/19959)）。在 v3.6 版本中，这些标志均已被同名的非实验性标志或 `--feature-gates` 条目替代。如果仍存在这些标志的设置，请务必在升级至 v3.7 **之前**，将其替换为 v3.6 对应的等效设置，否则 v3.7 进程将无法启动。
 
 ```diff
 -etcd --experimental-bootstrap-defrag-threshold-megabytes
@@ -67,21 +67,21 @@ v3.7 版本已移除所有已弃用的 `--experimental-*` 标志（[#19959](http
 -etcd --experimental-watch-progress-notify-interval
 ```
 
-请参阅 [v3.5 到 v3.6 升级指南](/zh/docs/etcd/upgrades/upgrade_3_6/)，以获取每个已移除标志与其非实验性等效标志的映射关系，或查阅 `--feature-gates` 条目。
+请参阅 [v3.5 到 v3.6 升级指南](/zh/docs/etcd/upgrades/upgrade_3_6/)，以获取每个已移除标志与其非实验性等效标志或 `--feature-gates` 条目的映射关系。
 
 ### 新增标志 {#flags-added}
 
-None.
+无。
 
 ### 带有新默认值的标志 {#flags-with-new-defaults}
 
-None.
+无。
 
 ### 服务器升级检查清单 {#server-upgrade-checklists}
 
 #### 升级要求 {#upgrade-requirements}
 
-要将现有 etcd 部署升级至 v3.7，运行中的集群必须为 v3.6.11 或更高版本。若当前版本为较旧的小版本，请先 [升级至 v3.6](/zh/docs/etcd/upgrades/upgrade_3_6/)；etcd 仅支持一次升级一个次要版本。
+要将现有 etcd 部署升级至 v3.7，运行中的集群必须为 v3.6.11 或更高版本。若当前为较旧的次版本，请先 [升级至 v3.6](/zh/docs/etcd/upgrades/upgrade_3_6/)；etcd 仅支持一次升级一个次版本。
 
 此外，为确保滚动升级顺利进行，运行中的集群必须处于健康状态。在继续操作前，请使用 `etcdctl endpoint health` 命令检查集群健康状况。
 
@@ -93,7 +93,7 @@ None.
 
 #### 混合版本 {#mixed-versions}
 
-升级期间，etcd 集群支持不同版本的 etcd 成员共存，并以最低共同版本的协议运行。只有当集群中所有成员均升级至 v3.7 版本后，该集群才被视为已完成升级。内部机制上，etcd 成员之间会相互协商以确定集群的整体版本，该版本控制报告的版本及所支持的功能。
+升级期间，etcd 集群支持不同版本的 etcd 成员共存，并以最低公共版本的协议运行。只有当集群中所有成员均升级至 v3.7 版本后，该集群才被视为已完成升级。内部机制上，etcd 成员之间会相互协商以确定集群的整体版本，该版本控制报告的版本及所支持的功能。
 
 #### 回滚 {#rollback}
 
@@ -105,7 +105,7 @@ None.
 
 本示例演示如何升级在本地主机上运行的 3 个成员的 v3.6 etcd 集群。以下输出来自在单个主机上使用三个环回端口对 etcd v3.6.12 和 etcd v3.7.0-rc.0 的实际运行结果。
 
-#### 步骤 1: 检查升级要求 {#step-1-check-upgrade-requirements}
+#### 第 1 步：检查升级要求 {#step-1-check-upgrade-requirements}
 
 集群是否健康且运行 v3.6.11 或更高版本？
 
@@ -123,7 +123,7 @@ curl http://localhost:2379/version
 COMMENT
 ```
 
-#### Step 2: 从领导者下载快照备份 {#step-2-download-snapshot-backup-from-leader}
+#### 第 2 步：从领导者下载快照备份 {#step-2-download-snapshot-backup-from-leader}
 
 [下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)，以便在出现任何问题时提供回退路径。
 

@@ -4,14 +4,14 @@ weight: 1100
 description: 使用 etcd 集群的步骤
 icon: fa-solid fa-play
 categories: [教程]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/demo.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/demo.md"
 aliases: [/etcd/demo/]
 ---
 
 本系列示例展示了操作 etcd 集群的基本流程。
 
 
-## 认证 {#auth}
+## 身份认证 {#auth}
 
 `auth`、`user`、`role` 用于身份认证：
 

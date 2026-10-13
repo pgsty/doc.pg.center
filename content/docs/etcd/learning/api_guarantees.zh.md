@@ -3,38 +3,38 @@ title: etcd API 保证
 weight: 2750
 description: etcd 提供的 API 保证
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/api_guarantees.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/api_guarantees.md"
 aliases: [/etcd/learning/api_guarantees/]
 ---
 
 etcd 是一个一致且持久的键值存储系统。
-键值存储通过 [gRPC Services] 暴露。etcd 为分布式系统提供最强的一致性和持久性保证。
+键值存储通过 [gRPC 服务][grpc Services] 暴露。etcd 为分布式系统提供最强的一致性和持久性保证。
 本文规范列出了 etcd 所提供的 API 保证。
 
 ### 值得考虑的 API {#apis-to-consider}
 
 * KV API
-  * [范围](/zh/docs/etcd/learning/api/#range)
-  * [范围流](/zh/docs/etcd/learning/api/#rangestream)
-  * [写入](/zh/docs/etcd/learning/api/#put)
-  * [删除](/zh/docs/etcd/learning/api/#delete-range)
-  * [事务](/zh/docs/etcd/learning/api/#transaction)
+  * [Range](/zh/docs/etcd/learning/api/#range)
+  * [RangeStream](/zh/docs/etcd/learning/api/#rangestream)
+  * [Put](/zh/docs/etcd/learning/api/#put)
+  * [Delete](/zh/docs/etcd/learning/api/#delete-range)
+  * [Transaction](/zh/docs/etcd/learning/api/#transaction)
 * 监听 API
-  * [监听](/zh/docs/etcd/learning/api/#watch-api)
+  * [Watch](/zh/docs/etcd/learning/api/#watch-api)
 * 租约 API
-  * [授予](/zh/docs/etcd/learning/api/#obtaining-leases)
-  * [撤销]
-  * [保活](/zh/docs/etcd/learning/api/#keep-alives)
+  * [Grant](/zh/docs/etcd/learning/api/#obtaining-leases)
+  * [Revoke]
+  * [Keep alive](/zh/docs/etcd/learning/api/#keep-alives)
 
 KV API 支持对键值存储进行直接读取和操作。
 监听 API 支持订阅键值存储的变更。
 租约 API 支持为键指定生存时间（TTL）。
 
-KV 和 Watch API 均允许访问键的最新版本，同时也可在连续的历史窗口内访问之前的版本，该窗口受压缩操作的限制。
+KV 和监听 API 均允许访问键的最新版本，同时也可在连续的历史窗口内访问之前的版本，该窗口受压缩操作的限制。
 
-调用 KV API 会立即生效，而监听 API 可能会返回存在不可预测的延迟。
+调用 KV API 会立即生效，而监听 API 的返回可能存在无上限的延迟。
 
-在正常运行的 etcd 集群中，通常应能在事件发生后 10 ms 内观察到监听事件。
+在正常运行的 etcd 集群中，通常可在事件发生后约 10 ms 观察到监听事件。
 
 然而，该延迟没有上限，不健康的集群中事件可能永远不会到达。
 
@@ -48,14 +48,14 @@ etcd 保证所有 KV API 调用的持久性和严格可串行化。
 任何已完成的操作都是持久的。所有可访问的数据也是持久数据。
 读操作绝不会返回尚未持久化的数据。
 
-### 严格的串行一致性 {#strict-serializability}
+### 严格可串行化 {#strict-serializability}
 
-KV 服务操作具有原子性，并按全局顺序执行，该顺序与操作的实际时间顺序一致。全局顺序通过 [revision] 隐式确定。有关 [strict serializability] 的更多信息，请参阅相关文档。
+KV 服务操作具有原子性，并按全局顺序执行，该顺序与操作的实际时间顺序一致。全局顺序通过 [修订版本][revision] 隐式确定。有关[严格可串行化][strict serializability]的更多信息，请参阅相关文档。
 
 对于不包含嵌套事务的事务，操作的执行顺序保证与其操作列表中的顺序一致，这意味着事务内部的 GET 操作响应具有稳定性。
 对于包含嵌套事务的事务，执行顺序未作规定。
 
-严格串行化意味着具备其他较弱的保证，这些保证可能更容易理解：
+严格可串行化意味着具备其他较弱的保证，这些保证可能更容易理解：
 
 #### 原子性 {#atomicity}
 
@@ -65,10 +65,10 @@ KV 服务操作具有原子性，并按全局顺序执行，该顺序与操作�
 
 从客户端的角度来看，线性一致性提供了有用的性质，使推理变得简便。这是来自[原始论文][linearizability]的一段清晰描述：`线性一致性提供了这样的假象：并发进程执行的每个操作，都在其调用与响应之间某个时刻瞬间生效。`
 
-例如，考虑一个客户端在时间点 1（*t1*）完成写入操作。在 *t2*（*t2* > *t1*）时刻发起读取的客户端，应获取到至少与 *t1* 时刻完成的写入操作同等最新的值。然而，该读取操作可能实际仅在 *t3* 时刻才完成。线性一致性保证读取返回的是最新值。若无线性一致性保证，读取返回的值在读取开始时刻 *t2* 时是最新值，但在 *t3* 时刻可能已“过时”，因为 *t2* 与 *t3* 之间可能存在并发写入。
+例如，考虑一个客户端在时间点 1（*t1*）完成写入操作。在 *t2*（*t2* > *t1*）时刻发起读取的客户端，获取的值至少应与 *t1* 时刻完成的写入一样新。然而，该读取操作可能实际仅在 *t3* 时刻才完成。读取返回的是 *t2* 与 *t3* 之间某个时刻的最新值。它可能包含，也可能不包含与该读取并发的写入；因此，即使另一次写入在 *t3* 之前完成，读取仍可返回 *t2* 时刻的最新值。
 
 etcd 默认对所有其他操作保证线性一致性。
-然而，线性一致性会带来开销，因为线性化请求必须经过 Raft 共识流程。为降低读请求的延迟并提高吞吐量，客户端可将请求的一致性模式配置为 `serializable`，该模式可能访问相对于法定人数过时的数据，但可消除线性化访问依赖实时共识所带来的性能开销。
+然而，线性一致性会带来开销，因为线性化请求必须经过 Raft 共识流程。为降低读请求的延迟并提高吞吐量，客户端可将请求的一致性模式配置为 `serializable`，该模式可能读取相对于集群法定多数成员而言已陈旧的数据，但可消除线性化访问依赖实时共识所带来的性能开销。
 
 ## 监听 API {#watch-apis}
 
@@ -79,19 +79,19 @@ etcd 默认对所有其他操作保证线性一致性。
 * 可靠性 - 事件序列不会丢失可用历史窗口内的任何子序列。若事件按时间顺序为 a < b < c，且监听收到了事件 a 和 c，则只要 b 仍在可用历史窗口内，就保证会收到事件 b。
 * 原子性 - 事件列表保证涵盖完整的修订版本。同一修订版本中对多个键的更新不会被拆分到多个事件列表中。
 * 可恢复性 - 若监听中断，可通过建立新的监听来恢复，新监听从中断前最后一个事件的修订版本之后开始，只要该修订版本仍在历史窗口内。
-* 可标记性 - 进度通知事件保证所有至指定修订版本的事件均已送达。
+* 可标记性 - 进度通知事件保证直至某一修订版本的所有事件均已送达。
 
 etcd 不保证监听操作的线性一致性。应验证监听事件的修订版本，以确保其与其他操作的顺序正确。
 
 ## 租约 API {#lease-apis}
 
-etcd 提供 [租约机制][lease]。租约的主要用途是实现分布式协调机制，例如分布式锁。租约机制本身较为简单：可通过 grant API 创建租约，通过 put API 将其绑定到键，通过 revoke API 撤销租约，并在生存时间（TTL）到期后由墙钟时间自动过期。然而，用户需注意 [API 和使用方式的重要特性][why]，以正确实现分布式协调机制。
+etcd 提供 [租约机制][lease]。租约的主要用途是实现分布式协调机制，例如分布式锁。租约机制本身较为简单：可通过 grant API 创建租约，通过 put API 将其绑定到键，通过 revoke API 撤销租约，并按墙钟生存时间（TTL）到期。然而，用户需注意 [API 和使用方式的重要特性][why]，以正确实现分布式协调机制。
 
 ## etcd 特定定义 {#etcd-specific-definitions}
 
 ### 操作完成 {#operation-completed}
 
-etcd 操作在通过共识达成一致并由 etcd 存储引擎“执行”（即永久存储）后，被视为已完成。客户端在收到 etcd 服务器的响应时，即可确认操作已完成。请注意，若客户端超时，或客户端与 etcd 成员之间发生网络中断，客户端可能无法确定操作的状态。在发生领导者选举时，etcd 也可能中止操作。在此情况下，etcd 不会向客户端的未完成请求发送 `abort` 响应。
+etcd 操作在通过共识达成一致并由 etcd 存储引擎“执行”（即永久存储）后，被视为已完成。客户端在收到 etcd 服务器的响应时，即可确认操作已完成。请注意，若请求超时，或客户端与 etcd 成员之间发生网络中断，客户端可能无法确定操作的状态。在发生领导者选举时，etcd 也可能中止操作。在此情况下，etcd 不会向客户端的未完成请求发送 `abort` 响应。
 
 ### 修订版本 {#revision}
 

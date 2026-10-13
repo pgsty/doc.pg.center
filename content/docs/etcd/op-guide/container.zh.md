@@ -3,7 +3,7 @@ title: 在容器中运行 etcd 集群
 weight: 4200
 description: 使用静态引导在 Docker 中运行 etcd
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/container.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/container.md"
 aliases: [/etcd/op-guide/container/]
 ---
 
@@ -28,10 +28,10 @@ docker volume create --name etcd-data
 export DATA_DIR="etcd-data"
 ```
 
-运行最新版本的 etcd（`v3.7.0`，撰写本文时的版本）：
+运行最新版本的 etcd（`v3.7.2`，撰写本文时的版本）：
 
 ```
-ETCD_VERSION=v3.7.0
+ETCD_VERSION=v3.7.2
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd
@@ -43,8 +43,8 @@ docker run \
   --name etcd ${REGISTRY}:${ETCD_VERSION} \
   /usr/local/bin/etcd \
   --data-dir=/etcd-data --name node1 \
-  --initial-advertise-peer-urls http://${NODE1}:2380 --listen-peer-urls http://0.0.0.0:2380 \
-  --advertise-client-urls http://${NODE1}:2379 --listen-client-urls http://0.0.0.0:2379 \
+  --initial-advertise-peer-urls http://${NODE1}:2380 --listen-peer-urls http://0.0.0.0:2380 \
+  --advertise-client-urls http://${NODE1}:2379 --listen-client-urls http://0.0.0.0:2379 \
   --initial-cluster node1=http://${NODE1}:2380
 ```
 
@@ -62,7 +62,7 @@ REGISTRY=quay.io/coreos/etcd
 REGISTRY=gcr.io/etcd-development/etcd
 
 # For each machine
-ETCD_VERSION=v3.7.0
+ETCD_VERSION=v3.7.2
 TOKEN=my-etcd-token
 CLUSTER_STATE=new
 NAME_1=etcd-node-0
@@ -84,8 +84,8 @@ docker run \
   --name etcd ${REGISTRY}:${ETCD_VERSION} \
   /usr/local/bin/etcd \
   --data-dir=/etcd-data --name ${THIS_NAME} \
-  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
-  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
+  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
+  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
   --initial-cluster ${CLUSTER} \
   --initial-cluster-state ${CLUSTER_STATE} --initial-cluster-token ${TOKEN}
 
@@ -99,8 +99,8 @@ docker run \
   --name etcd ${REGISTRY}:${ETCD_VERSION} \
   /usr/local/bin/etcd \
   --data-dir=/etcd-data --name ${THIS_NAME} \
-  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
-  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
+  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
+  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
   --initial-cluster ${CLUSTER} \
   --initial-cluster-state ${CLUSTER_STATE} --initial-cluster-token ${TOKEN}
 
@@ -114,8 +114,8 @@ docker run \
   --name etcd ${REGISTRY}:${ETCD_VERSION} \
   /usr/local/bin/etcd \
   --data-dir=/etcd-data --name ${THIS_NAME} \
-  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
-  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
+  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
+  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
   --initial-cluster ${CLUSTER} \
   --initial-cluster-state ${CLUSTER_STATE} --initial-cluster-token ${TOKEN}
 ```
@@ -132,10 +132,12 @@ docker exec etcd /usr/local/bin/etcdctl put foo bar
 
 ## 挂载证书卷 {#mounting-a-certificate-volume}
 
-etcd 发行版容器不包含默认的根证书。如需使用由根证书机构信任的证书（例如用于发现），请将证书目录挂载到 etcd 容器中：
+etcd 发行版容器不包含默认的根证书。如需在使用 HTTPS 时采用受根证书颁发机构信任的证书（例如用于发现），请将证书目录挂载到 etcd 容器中：
+
+以下 `rkt` 命令属于历史示例，其 v2 服务发现配置不适用于 etcd 3.7。当前部署请参考上方的静态引导示例。
 
 ```
-ETCD_VERSION=v3.7.0
+ETCD_VERSION=v3.7.2
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=docker://gcr.io/etcd-development/etcd
@@ -150,8 +152,10 @@ rkt run \
   --discovery https://discovery.etcd.io/c11fbcdc16972e45253491a24fcf45e1
 ```
 
+以下 Docker 示例沿用上方设置的 `NODE1`，以静态引导方式展示证书卷挂载。
+
 ```
-ETCD_VERSION=v3.7.0
+ETCD_VERSION=v3.7.2
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd
@@ -162,7 +166,7 @@ docker run \
   --volume=/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt \
   ${REGISTRY}:${ETCD_VERSION} \
   /usr/local/bin/etcd --name my-name \
-  --initial-advertise-peer-urls http://localhost:2380 --listen-peer-urls http://localhost:2380 \
-  --advertise-client-urls http://localhost:2379 --listen-client-urls http://localhost:2379 \
-  --discovery https://discovery.etcd.io/86a9ff6c8cb8b4c4544c1a2f88f8b801
+  --initial-advertise-peer-urls http://${NODE1}:2380 --listen-peer-urls http://0.0.0.0:2380 \
+  --advertise-client-urls http://${NODE1}:2379 --listen-client-urls http://0.0.0.0:2379 \
+  --initial-cluster my-name=http://${NODE1}:2380
 ```

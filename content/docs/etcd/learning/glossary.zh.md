@@ -3,7 +3,7 @@ title: 术语表
 weight: 2900
 description: etcd 文档、命令行和源代码中使用的术语
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/glossary.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/glossary.md"
 aliases: [/etcd/learning/glossary/]
 ---
 
@@ -11,7 +11,7 @@ aliases: [/etcd/learning/glossary/]
 
 ## 告警 {#alarm}
 
-当集群需要操作员干预以保持可靠性时，etcd 服务器会触发告警。
+当集群需要运维人员干预以保持可靠性时，etcd 服务器会触发告警。
 
 ## 身份认证 {#authentication}
 
@@ -45,7 +45,7 @@ etcd 集群通过 Raft 共识协议在成员之间进行选举，以选出领导
 
 ## 键范围 {#key-range}
 
-一组键，包含单个键、满足 a < x <= b 的字典序区间，或大于给定键的所有键。
+一组键，包含单个键、满足 a <= x < b 的字典序区间，或大于给定键的所有键。
 
 ## 键空间 {#keyspace}
 
@@ -73,7 +73,7 @@ etcd 集群中所有键的集合。
 
 ## 法定人数 {#quorum}
 
-达成法定人数以修改集群状态所需的活跃成员数量。etcd 要求成员多数才能达成法定人数。
+修改集群状态时达成共识所需的活跃成员数量。etcd 要求成员多数才能达成法定人数。
 
 ## 修订版本 {#revision}
 
@@ -81,7 +81,7 @@ etcd 集群中所有键的集合。
 
 ## 角色 {#role}
 
-一组针对键范围的权限单元，可授予一组用户以实现访问控制。
+针对一组键范围的权限单元，可授予一组用户以实现访问控制。
 
 ## 快照 {#snapshot}
 

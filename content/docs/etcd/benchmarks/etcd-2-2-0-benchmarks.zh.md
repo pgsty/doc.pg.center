@@ -1,9 +1,9 @@
 ---
 title: etcd v2.2.0 基准测试
 weight: 5750
-description: etcd 2.2.0 的性能指标
+description: etcd v2.2.0 的性能指标
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/benchmarks/etcd-2-2-0-benchmarks.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/benchmarks/etcd-2-2-0-benchmarks.md"
 aliases: [/etcd/benchmarks/etcd-2-2-0-benchmarks/]
 ---
 
@@ -39,7 +39,7 @@ Go OS/Arch: linux/amd64
 
 ### 单键读取性能 {#single-key-read-performance}
 
-| 键大小（字节） | 客户端数量 | 目标 etcd 服务器 | 平均读取 QPS | 读取 QPS 标准差 | 平均 90th 百分位延迟（毫秒） | 延迟标准差 |
+| 键大小（字节） | 客户端数量 | 目标 etcd 服务器 | 平均读取 QPS | 读取 QPS 标准差 | 平均第 90 百分位延迟（毫秒） | 延迟标准差 |
 |----------------|------------|------------------|--------------|----------------|-------------------------------|------------|
 | 64             | 1          | 仅领导者       | 2303         | 200            | 0.49                          | 0.06       |
 | 64             | 64         | 仅领导者       | 15048        | 685            | 7.60                          | 0.46       |
@@ -54,7 +54,7 @@ Go OS/Arch: linux/amd64
 
 ### 单键写入性能 {#single-key-write-performance}
 
-| 键大小（字节） | 客户端数量 | 目标 etcd 服务器 | 平均写入 QPS | 写入 QPS 标准差 | 平均 90th 百分位延迟（毫秒） | 延迟标准差 |
+| 键大小（字节） | 客户端数量 | 目标 etcd 服务器 | 平均写入 QPS | 写入 QPS 标准差 | 平均第 90 百分位延迟（毫秒） | 延迟标准差 |
 |----------------|------------|------------------|--------------|----------------|-------------------------------|------------|
 | 64             | 1          | 仅领导者       | 55           | 4              | 24.51                         | 13.26      |
 | 64             | 64         | 仅领导者       | 2139         | 125            | 35.23                         | 3.40       |

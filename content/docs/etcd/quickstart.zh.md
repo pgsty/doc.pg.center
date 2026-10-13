@@ -4,13 +4,13 @@ weight: 900
 description: 不到 5 分钟即可启动并运行 etcd！
 icon: fa-solid fa-rocket
 categories: [教程]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/quickstart.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/quickstart.md"
 aliases: [/etcd/quickstart/]
 ---
 
 按照以下步骤本地安装、运行并测试单成员 etcd 集群：
 
-1. 从预构建的二进制文件或源码安装 etcd。详情请参见 [安装][]。
+1. 从预构建的二进制文件或源码安装 etcd。详情请参见 [安装][Install]。
 
     > [!WARNING]
     > **重要**：务必完成安装说明的最后一步，确认可执行文件搜索路径中包含 `etcd`。
@@ -24,7 +24,7 @@ aliases: [/etcd/quickstart/]
     ```
 
     > [!NOTE]
-    > **注意**：`etcd` 生成的输出包含 [日志](/zh/docs/etcd/op-guide/configuration/#logging) &mdash; 信息级别日志可忽略。
+    > **注意**：`etcd` 生成的输出为 [日志](/zh/docs/etcd/op-guide/configuration/#logging) &mdash; 信息级别日志可忽略。
 
 3. 在**另一个终端**中，使用 `etcdctl` 设置键：
 
@@ -51,7 +51,7 @@ aliases: [/etcd/quickstart/]
 
 - 如果是运维人员或管理员：
   - 部署一个 [多机集群][clustering]。
-  - 学习如何 [配置][] etcd。
+  - 学习如何 [配置][configure] etcd。
   - 使用 TLS [保护 etcd 集群][security]。
   - [调优 etcd][tuning]。
 

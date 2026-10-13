@@ -3,7 +3,7 @@ title: 存储内存使用量基准测试
 weight: 5125
 description: etcd 存储的性能指标（内存索引与页面缓存）
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/benchmarks/etcd-storage-memory-benchmark.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/benchmarks/etcd-storage-memory-benchmark.md"
 aliases: [/etcd/benchmarks/etcd-storage-memory-benchmark/]
 ---
 
@@ -87,7 +87,7 @@ GCE n1-standard-2 机器类型
 
 整体内存使用量反映了 etcd 在存储系统上的 RSS 内存占用情况。值的大小对 etcd 的整体内存使用量影响极小，因为值数据存储在磁盘上，仅将热值保留在内存中，由操作系统的页面缓存进行管理。
 
-| N    | versions | 键大小 | 值大小 | 内存占用 |
+| N    | 版本数 | 键大小 | 值大小 | 内存占用 |
 |------|----------|--------|--------|----------|
 | 100K | 1        | 64 字节 | 256 字节 | 40 MB    |
 | 100K | 5        | 64 字节 | 256 字节 | 89 MB    |

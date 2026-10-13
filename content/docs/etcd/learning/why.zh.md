@@ -3,7 +3,7 @@ title: etcd 与其它键值存储系统比较
 weight: 2875
 description: etcd 的历史与用途及与其他工具的比较
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/why.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/why.md"
 aliases: [/etcd/learning/why/]
 ---
 
@@ -26,29 +26,29 @@ etcd 旨在作为大规模分布式系统的通用基础架构。这类系统无
 
 |  | etcd | ZooKeeper | Consul | NewSQL (Cloud Spanner, CockroachDB, TiDB) |
 | --- | --- | --- | --- | --- |
-| 并发原语 | [锁 RPC][etcd-v3lock], [选举 RPC][etcd-v3election], [命令行锁][etcd-etcdctl-lock], [命令行选举][etcd-etcdctl-elect], [Go 中的通用模式][etcd-recipe] | 外部 [Curator 模式][curator]（Java） | [原生锁 API][consul-lock] | [罕见][newsql-leader]，若有也极少 |
+| 并发原语 | [锁 RPC][etcd-v3lock], [选举 RPC][etcd-v3election], [命令行锁][etcd-etcdctl-lock], [命令行选举][etcd-etcdctl-elect], [Go 中的 recipes][etcd-recipe] | 外部 [Curator recipes][curator]（Java） | [原生锁 API][consul-lock] | [罕见][newsql-leader]，若有也极少 |
 | 线性一致读取 | [是][etcd-linread] | 否 | [是][consul-linread] | 有时 |
 | 多版本并发控制 | [是][etcd-mvcc] | 否 | 否 | 有时 |
 | 事务 | [字段比较、读取、写入][etcd-txn] | [版本检查、写入][zk-txn] | [字段比较、锁、读取、写入][consul-txn] | SQL 风格 |
 | 变更通知 | [历史与当前键区间][etcd-watch] | [当前键与目录][zk-watch] | [当前键与前缀][consul-watch] | 触发器（有时） |
 | 用户权限 | [基于角色][etcd-rbac] | [ACL][zk-acl] | [ACL][consul-acl] | 不同（按表 [GRANT][cockroach-grant]，按数据库 [角色][spanner-roles]） |
 | HTTP/JSON API | [是][etcd-json] | 否 | [是][consul-json] | 很少 |
-| 成员变更重配置 | [是][etcd-reconfig] | [3.5.0 及以上][zk-reconfig] | [是][consul-reconfig] | 是 |
+| 成员关系重配置 | [是][etcd-reconfig] | [高于 3.5.0][zk-reconfig] | [是][consul-reconfig] | 是 |
 | 最大可靠数据库容量 | 数 GB | 数百 MB（有时可达数 GB） | 数百 MB | 数 TB 以上 |
 | 最小读取线性化延迟 | 网络 RTT | 无读取线性化 | RTT + fsync | 时钟屏障（原子时钟、NTP） |
 
-### Apache ZooKeeper {#zookeeper}
+### ZooKeeper {#zookeeper}
 
 ZooKeeper 解决的问题与 etcd 相同：分布式系统协调与元数据存储。然而，etcd 拥有从 ZooKeeper 设计与实现的工程和运维经验中汲取的后见之明。从 ZooKeeper 中汲取的教训确实影响了 etcd 的设计，使其能够支持 Kubernetes 等大规模系统。etcd 相较于 ZooKeeper 的改进包括：
 
-* 动态集群成员关系配置
+* 动态集群成员关系重配置
 * 高负载下的稳定读写
 * 多版本并发控制数据模型
 * 可靠的键监控，永不静默丢失事件
 * 租约原语将连接与会话解耦
 * 用于安全分布式共享锁的 API
 
-此外，etcd 原生支持多种语言和框架。与 Zookeeper 采用其专属的自定义 Jute RPC 协议不同，该协议完全专属于 Zookeeper 并限制了 [支持的语言绑定][zk-bindings]，etcd 的客户端协议基于 [gRPC][grpc]，一个广受欢迎的 RPC 框架，提供 Go、C++、Java 等多种语言绑定。同样，gRPC 可通过 HTTP 序列化为 JSON，因此即使是一般的命令行工具如 `curl` 也能与其通信。由于系统可自由选择多种技术方案，它们通常基于 etcd 的原生工具链构建，而非围绕 etcd 采用单一固定的技栈。
+此外，etcd 原生支持多种语言和框架。与 Zookeeper 采用其专属的自定义 Jute RPC 协议不同，该协议完全专属于 Zookeeper 并限制了 [支持的语言绑定][zk-bindings]，etcd 的客户端协议基于 [gRPC][grpc]，一个广受欢迎的 RPC 框架，提供 Go、C++、Java 等多种语言绑定。同样，gRPC 可通过 HTTP 序列化为 JSON，因此即使是一般的命令行工具如 `curl` 也能与其通信。由于系统可自由选择多种技术方案，它们使用各自的原生工具构建在 etcd 之上，而非围绕 etcd 采用单一固定的技术栈。
 
 在考虑功能、支持和稳定性时，计划使用 Zookeeper 作为一致键值存储的新应用程序应选择 etcd。
 
@@ -62,7 +62,7 @@ etcd 与 Consul 解决不同的问题。若需要分布式一致的键值存储�
 
 etcd 与 NewSQL 数据库（例如 [Cockroach][cockroach]、[TiDB][tidb]、[Google Spanner][spanner]）均提供强数据一致性保证，并具备高可用性。然而，显著不同的系统设计参数导致其客户端 API 和性能特征存在显著差异。
 
-NewSQL 数据库旨在跨数据中心水平扩展。这类系统通常将数据分区到多个一致的复制组（分片）中，这些分片可能分布于不同地理位置，存储的数据集规模可达数 TB 及以上。此类扩展方式导致其在分布式协调方面表现不佳，因为其依赖时钟等待，且更新操作的依赖图通常具有高度局部性。数据以表格形式组织，支持类似 SQL 的查询功能，语义比 etcd 更丰富，但相应地增加了查询处理、规划和优化的复杂性。
+NewSQL 数据库旨在跨数据中心水平扩展。这类系统通常将数据分区到多个一致的复制组（分片）中，这些分片可能分布于不同地理位置，存储的数据集规模可达数 TB 及以上。此类扩展方式导致其在分布式协调方面表现不佳，因为其等待时钟会产生较长延迟，且预期更新操作的依赖图大多具有局部性。数据以表格形式组织，支持类似 SQL 的查询功能，语义比 etcd 更丰富，但相应地增加了查询处理、规划和优化的复杂性。
 
 简而言之，选择 etcd 用于存储元数据或协调分布式应用。若需存储超过几 GB 的数据，或需要完整的 SQL 查询功能，则应选择 NewSQL 数据库。
 
@@ -83,7 +83,7 @@ etcd 内置了分布式协调原语，包括事件监听、租约、选举以及
 在分布式协调场景中，选择 etcd 可以避免运维困扰并节省工程投入。
 
 ### 关于锁和租约的使用说明 {#notes-on-the-usage-of-lock-and-lease}
-etcd 提供 [lock APIs][etcd-v3lock]，其基于 [租约机制][lease] 以及 [etcd 中的实现][etcdlease]。租约机制的基本思想是：服务器向请求客户端授予一个令牌，称为租约。当服务器授予租约时，会为其关联一个 TTL。当服务器检测到时间流逝超过 TTL 时，将撤销该租约。只要客户端持有未被撤销的租约，即可声称其拥有与该租约关联的资源的访问权。在 etcd 中，该资源是 etcd 键空间中的一个键。etcd 通过此机制提供锁 API。然而，锁 API 本身不能作为互斥机制使用。API 被称为锁，是由于 [历史原因][chubby]。不过，如以下所述，锁 API 可作为互斥机制的优化手段使用。
+etcd 提供 [锁 API][etcd-v3lock]，其基于 [租约机制][lease] 以及 [etcd 中的实现][etcdlease]。租约机制的基本思想是：服务器向请求客户端授予一个令牌，称为租约。当服务器授予租约时，会为其关联一个 TTL。当服务器检测到时间流逝超过 TTL 时，将撤销该租约。只要客户端持有未被撤销的租约，即可声称其拥有与该租约关联的资源的访问权。在 etcd 中，该资源是 etcd 键空间中的一个键。etcd 通过此机制提供锁 API。然而，锁 API 本身不能作为互斥机制使用。API 被称为锁，是由于 [历史原因][chubby]。不过，如以下所述，锁 API 可作为互斥机制的优化手段使用。
 
 租约机制最重要的方面是，TTL 被定义为物理时间间隔。服务器和客户端均使用各自的时钟来衡量时间的流逝。这可能导致一种情况：服务器已撤销租约，但客户端仍声称自己拥有该租约。
 

@@ -3,15 +3,15 @@ title: 传输安全模型
 weight: 4125
 description: 确保数据传输安全
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/security.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/security.md"
 aliases: [/etcd/op-guide/security/]
 ---
 
-etcd 支持自动 TLS，以及通过客户端证书实现的客户端到服务器和对等成员（服务器到服务器 / 集群）通信的身份认证。请注意，etcd 默认不启用 [基于 RBAC 的身份认证][auth] 或传输层的身份认证功能，以降低用户入门时的使用门槛。此外，更改此默认设置将对该项目造成破坏性变更，该项目自 2013 年确立以来一直保持该设定。未启用安全功能的 etcd 集群可能使数据暴露于任意客户端。
+etcd 支持自动 TLS，以及通过客户端证书实现的客户端到服务器和对等成员（服务器到服务器 / 集群）通信的身份认证。**请注意，etcd 默认不启用 [基于 RBAC 的身份认证][auth] 或传输层的身份认证功能，以降低用户入门时的使用门槛。此外，更改此默认设置将对该项目造成破坏性变更，该项目自 2013 年确立以来一直保持该设定。未启用安全功能的 etcd 集群可能使数据暴露于任意客户端。**
 
 要快速上手，请先准备一个 CA 证书以及一个成员的已签名密钥对。建议为集群中的每个成员创建并签署新的密钥对。
 
-为方便起见，[cfssl] 工具提供了便捷的证书生成接口，我们在此提供一个使用该工具的示例 [here][tls-setup]。或者，可参考此 [指南以生成自签名密钥对][tls-guide]。
+为方便起见，[cfssl] 工具提供了便捷的证书生成接口，我们在此提供一个使用该工具的[示例][tls-setup]。或者，可参考此[生成自签名密钥对的指南][tls-guide]。
 
 以下提供的标志列表可能因持续开发变更而未能保持最新。如需获取最新可用的标志，请运行 `etcd --help` 或查阅 [etcd help][]。
 
@@ -19,11 +19,11 @@ etcd 支持自动 TLS，以及通过客户端证书实现的客户端到服务�
 
 etcd 支持多个与证书相关的配置选项，可通过命令行标志或环境变量进行设置：
 
-**客户端到服务器通信:**
+**客户端到服务器通信：**
 
 `--cert-file=<path>`：用于与 etcd 建立 SSL/TLS 连接的证书。设置此选项后，advertise-client-urls 可使用 HTTPS 方案。
 
-`--key-file=<path>`：证书的键。必须为未加密的。
+`--key-file=<path>`：证书的密钥。必须为未加密的。
 
 `--client-cert-auth`：启用此选项后，etcd 将检查所有传入的 HTTPS 请求，确保其包含由受信任 CA 签发的客户端证书；未提供有效客户端证书的请求将失败。若 [身份认证][auth] 已启用，证书中的通用名称（Common Name）字段将提供用户的用户名凭证。
 
@@ -31,13 +31,13 @@ etcd 支持多个与证书相关的配置选项，可通过命令行标志或环
 
 `--auto-tls`：对与客户端的 TLS 连接使用自动生成的自签名证书。
 
-**对等通信（服务器间/集群）:**
+**对等通信（服务器间/集群）：**
 
 对等成员选项的工作方式与客户端到服务器选项相同：
 
 `--peer-cert-file=<path>`：用于对等成员之间 SSL/TLS 连接的证书。该证书将同时用于在对等成员地址上监听以及向其他对等成员发送请求。
 
-`--peer-key-file=<path>`：证书的键。必须为未加密的。
+`--peer-key-file=<path>`：证书的密钥。必须为未加密的。
 
 `--peer-client-cert-auth`：启用后，etcd 将检查来自集群的所有对等成员请求，确保其客户端证书由指定的 CA 签发。
 
@@ -45,9 +45,9 @@ etcd 支持多个与证书相关的配置选项，可通过命令行标志或环
 
 `--peer-auto-tls`：对等成员之间的 TLS 连接使用自动生成的自签名证书。
 
-若提供客户端到服务器证书或对等成员证书，则必须同时设置密钥。所有这些配置选项也可通过环境变量 `ETCD_CA_FILE`、`ETCD_PEER_CA_FILE` 等进行设置。
+若提供客户端到服务器证书或对等成员证书，则必须同时设置密钥。所有这些配置选项也可通过环境变量 `ETCD_TRUSTED_CA_FILE`、`ETCD_PEER_TRUSTED_CA_FILE` 等进行设置。
 
-**常用选项:**
+**常用选项：**
 
 `--cipher-suites`：服务器/客户端与对等成员之间支持的 TLS 密码套件列表，以逗号分隔（空值将由 Go 自动填充）。
 
@@ -72,7 +72,7 @@ etcd 支持多个与证书相关的配置选项，可通过命令行标志或环
 - 当启用 `--peer-client-cert-auth` 时，对等成员之间使用证书进行双向 TLS，因此必须同时配置 `serverAuth` 和 `clientAuth`。
 - 与 `--client-cert-auth` 一起使用的客户端证书应包含 `clientAuth`。
 
-## 示例 1: 使用 HTTPS 的客户端到服务器传输安全 {#example-1-client-to-server-transport-security-with-https}
+## 示例 1：使用 HTTPS 的客户端到服务器传输安全 {#example-1-client-to-server-transport-security-with-https}
 
 为此，请准备好 CA 证书（`ca.crt`）以及已签名的密钥对（`server.crt`、`server.key`）。
 
@@ -94,7 +94,7 @@ $ curl --cacert /path/to/ca.crt https://127.0.0.1:2379/v2/keys/foo -XPUT -d valu
 
 **OSX 10.9+ 用户**：OSX 10.9+ 上的 curl 7.30.0 不支持在命令行中传递证书。
 
-请将 dummy ca.crt 直接导入钥匙串，或向 curl 添加 `-k` 标志以忽略错误。
+请将 示例 ca.crt 直接导入钥匙串，或向 curl 添加 `-k` 标志以忽略错误。
 
 若要不使用 `-k` 标志进行测试，请运行 `open ./tests/fixtures/ca/ca.crt` 并按照提示操作。
 
@@ -160,9 +160,9 @@ TLS handshake, Finished (20)
 }
 ```
 
-指定要阻止的加密套件 [弱 TLS 加密套件](https://github.com/etcd-io/etcd/issues/8320)。
+指定密码套件以阻止[弱 TLS 密码套件](https://github.com/etcd-io/etcd/issues/8320)。
 
-当客户端使用无效的加密套件请求 Client Hello 时，TLS 握手将失败。
+当客户端使用无效的密码套件请求 Client Hello 时，TLS 握手将失败。
 
 例如：
 
@@ -174,7 +174,7 @@ $ etcd \
   --cipher-suites TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
 ```
 
-然后，客户端请求必须指定服务器中指定的加密套件之一：
+然后，客户端请求必须指定服务器中指定的密码套件之一：
 
 ```bash
 # valid cipher suite
@@ -267,9 +267,12 @@ $ curl -k https://127.0.0.1:2379/v2/keys/foo -Xput -d value=bar -v
 
 ## DNS SRV 服务记录说明 {#notes-for-dns-srv}
 
-自 v3.1.0 版本起（v3.2.9 除外），发现 SRV 引导通过 `ServerName` 的根域名来认证 `--discovery-srv` 标志指定的域名。此举旨在防止中间人证书攻击，要求证书的 Subject Alternative Name（SAN）字段中必须包含与根域名匹配的条目。例如，`etcd --discovery-srv=etcd.local` 仅在提供的证书中包含根域名 `etcd.local` 作为 SAN 字段条目时，才会认证对等成员/客户端。
+自 v3.1.0 版本起（v3.2.9 除外），发现 SRV 引导会使用 `--discovery-srv` 标志指定的根域名对 `ServerName` 进行认证。此举旨在防止中间人证书攻击，要求证书的 Subject Alternative Name（SAN）字段中必须包含与根域名匹配的条目。例如，`etcd --discovery-srv=etcd.local` 仅在提供的证书中包含根域名 `etcd.local` 作为 SAN 字段条目时，才会认证对等成员/客户端。
 
 ## etcd 代理使用说明 {#notes-for-etcd-proxy}
+
+> [!NOTE]
+> 本节描述的是已被移除的历史 v2 代理。对于 etcd 3.7，请使用 [v3 gRPC 代理](/zh/docs/etcd/op-guide/grpc_proxy/)。
 
 etcd 代理在连接安全时终止来自客户端的 TLS，并使用在 `--peer-key-file` 和 `--peer-cert-file` 中指定的代理自身密钥/证书与 etcd 成员通信。
 
@@ -418,7 +421,7 @@ I | embed: serving client requests on 127.0.0.1:2379
   ],
 ```
 
-在 Go 中，仅当服务器的 `(*tls.Config).Certificates` 字段非空，或客户端提供了有效 SNI 且 `(*tls.ClientHelloInfo).ServerName` 非空时，服务器才会调用 `(*tls.Config).GetCertificate` 以重新加载 TLS。此前，etcd 始终在初始客户端 TLS 握手时填充 `(*tls.Config).Certificates`（非空）。因此，客户端始终需提供匹配的 SNI，以通过 TLS 验证并触发 `(*tls.Config).GetCertificate` 重新加载 TLS 资产。
+在 Go 中，仅当服务器的 `(*tls.Config).Certificates` 字段为空，或客户端提供了有效 SNI 且 `(*tls.ClientHelloInfo).ServerName` 非空时，服务器才会调用 `(*tls.Config).GetCertificate` 以重新加载 TLS。此前，etcd 始终在初始客户端 TLS 握手时填充 `(*tls.Config).Certificates`（非空）。因此，客户端始终需提供匹配的 SNI，以通过 TLS 验证并触发 `(*tls.Config).GetCertificate` 重新加载 TLS 资产。
 
 不过，如果证书的 SAN 字段 [不包含任何域名而只有 IP 地址](https://github.com/etcd-io/etcd/issues/9541)，请求中的 `*tls.ClientHelloInfo` 会带有空的 `ServerName` 字段，导致初始 TLS 握手无法触发 TLS 重载；需要在线替换过期证书时，这就会成为问题。
 
@@ -435,18 +438,18 @@ I | embed: serving client requests on 127.0.0.1:2379
 
 请注意，无论是否启用身份认证，客户端来源策略均会被强制执行，以实现更严格的控制。
 
-默认情况下，`etcd --host-whitelist` 和 `embed.Config.HostWhitelist` 被设置为 *空*，以允许所有主机名。请注意，指定主机名时，环回地址不会自动添加。如需允许环回接口，应手动将其添加至白名单（例如 `"localhost"`、`"127.0.0.1"` 等）。
+默认情况下，`etcd --host-whitelist` 和 `embed.Config.HostWhitelist` 默认值为 `*`，允许所有主机名；空白名单同样允许所有主机名。请注意，指定主机名时，环回地址不会自动添加。如需允许环回接口，应手动将其添加至白名单（例如 `"localhost"`、`"127.0.0.1"` 等）。
 
 ## 常见问题解答 {#frequently-asked-questions}
 
 ### 我在使用 TLS 客户端身份认证时遇到 SSLv3 握手失败错误？ {#im-seeing-a-sslv3-alert-handshake-failure-when-using-tls-client-authentication}
 
-`crypto/tls` 包中的 `golang` 在使用证书公钥前会检查其键用途。
-要使用证书公钥进行客户端认证，创建证书公钥时需在 `clientAuth` 中添加 `Extended Key Usage`。
+`golang` 的 `crypto/tls` 包在使用证书公钥前会检查其密钥用途。
+要使用证书公钥进行客户端认证，创建证书公钥时需在 `Extended Key Usage` 中添加 `clientAuth`。
 
 操作方法如下：
 
-在 OpenSSL.cnf 中添加以下章节：
+在 `openssl.cnf` 中添加以下小节：
 
 ```
 [ ssl_client ]
@@ -455,16 +458,16 @@ I | embed: serving client requests on 127.0.0.1:2379
 ...
 ```
 
-生成证书时，请确保在 `-extensions` 标志中引用该证书：
+生成证书时，请确保在 `-extensions` 标志中引用该小节：
 
 ```
 $ openssl ca -config openssl.cnf -policy policy_anything -extensions ssl_client -out certs/machine.crt -infiles machine.csr
 ```
 
-### 使用对等证书身份认证时，我收到“证书有效域名是 127.0.0.1，不是$MY_IP” {#with-peer-certificate-authentication-i-receive-certificate-is-valid-for-127001-not-my_ip}
-请确保使用成员的公网 IP 地址作为证书的主体名称（Subject Name）进行签名。例如，`etcd-ca` 工具为 `new-cert` 命令提供了 `--ip=` 选项。
+### 使用对等证书身份认证时，我收到“证书适用于 127.0.0.1，但不适用于 $MY_IP” {#with-peer-certificate-authentication-i-receive-certificate-is-valid-for-127001-not-my_ip}
+请确保使用成员的公网 IP 地址作为证书的主题名称（Subject Name）进行签名。例如，`etcd-ca` 工具为 `new-cert` 命令提供了 `--ip=` 选项。
 
-证书需在成员的完全限定域名（FQDN）作为其主题名称（Subject Name）时进行签名，使用主题备用名称（IP SANs）添加 IP 地址。`etcd-ca` 工具为 `new-cert` 命令提供 `--domain=` 选项，OpenSSL 也可实现 [it][alt-name]。
+证书需在成员的完全限定域名（FQDN）作为其主题名称（Subject Name）时进行签名，使用主题备用名称（IP SANs）添加 IP 地址。`etcd-ca` 工具为 `new-cert` 命令提供 `--domain=` 选项，OpenSSL 也可以[实现同样效果][alt-name]。
 
 ### etcd 是否对磁盘上存储的数据进行加密？ {#does-etcd-encrypt-data-stored-on-disk-drives}
 etcd 不会对存储在磁盘驱动器上的键值数据进行加密。若用户需要对存储在 etcd 中的数据进行加密，可选择以下方案：

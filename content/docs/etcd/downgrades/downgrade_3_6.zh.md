@@ -3,7 +3,7 @@ title: 将 etcd 从 v3.6 降级到 v3.5
 weight: 6650
 description: 降级 etcd 3.6 至 3.5 的流程、检查清单与注意事项
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/downgrades/downgrade_3_6.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/downgrades/downgrade_3_6.md"
 aliases: [/etcd/downgrades/downgrade_3_6/]
 ---
 
@@ -16,14 +16,14 @@ aliases: [/etcd/downgrades/downgrade_3_6/]
 
 ### 降级检查列表 {#downgrade-checklists}
 
-v3.6 版本到 v3.5 版本的突出变更：
+从 v3.6 到 v3.5 的重点破坏性变更：
 
 #### 不同标志 {#difference-in-flags}
 
 如果在 v3.6 配置中使用了以下任一标志，请在降级至 v3.5 时确保移除、重命名或更改其默认值。
 
 > [!NOTE]
-> 本文的差异对比基于版本 v3.6.0 和 v3.5.18。实际差异取决于所用补丁版本，请先与 `diff <(etcd-3.6/bin/etcd -h | grep \\-\\-) <(etcd-3.5/bin/etcd -h | grep \\-\\-)` 核对。
+> 本文的差异对比基于版本 v3.6.0 和 v.3.5.18。实际差异取决于所用补丁版本，请先与 `diff <(etcd-3.6/bin/etcd -h | grep \\-\\-) <(etcd-3.5/bin/etcd -h | grep \\-\\-)` 核对。
 
 ```diff
 # flags not available in v3.5
@@ -123,7 +123,7 @@ v3.6 版本到 v3.5 版本的突出变更：
 
 在将 etcd 降级之前，务必在预发环境中测试依赖 etcd 的服务，确认无误后再将降级操作部署到生产环境。
 
-在开始之前，[下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。若降级过程中出现异常，可使用此备份对 [回滚](#rollback)至现有 etcd 版本。
+在开始之前，[下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。若降级过程中出现异常，可使用此备份[回滚](#rollback)至现有 etcd 版本。
 
 在开始之前，请下载 etcd v3.5 的最新版本。
 
@@ -133,9 +133,9 @@ v3.6 版本到 v3.5 版本的突出变更：
 
 #### 回滚 {#rollback}
 
-在降级 etcd 集群之前，请创建并 [下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。该快照可用于在需要时将集群恢复至升级前的状态。若用户在降级过程中遇到问题，应首先识别并解决根本原因。
+在降级 etcd 集群之前，请创建并 [下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。该快照可用于在需要时将集群恢复至降级前的状态。若用户在降级过程中遇到问题，应首先识别并解决根本原因。
 
-如果降级操作在执行 `etcdctl downgrade enabled` 之后开始，且集群仍处于混合版本状态（即至少有一个成员仍运行在 v3.6 版本），用户可以通过执行 `etcdctl downgrade cancel` 取消正在进行的降级过程，并使用原始的 v3.6 二进制文件重启所有已降级的成员。
+如果降级操作在执行 `etcdctl downgrade enable` 之后开始，且集群仍处于混合版本状态（即至少有一个成员仍运行在 v3.6 版本），用户可以通过执行 `etcdctl downgrade cancel` 取消正在进行的降级过程，并使用原始的 v3.6 二进制文件重启所有已降级的成员。
 
 当所有成员均降级至 v3.5 版本后，集群即被视为已完全降级。若用户在完成完全降级后希望恢复至原始版本，应遵循官方 [升级指南](/zh/docs/etcd/upgrades/upgrade_3_6/)，以确保一致性并避免数据损坏。
 
@@ -143,7 +143,7 @@ v3.6 版本到 v3.5 版本的突出变更：
 
 本示例演示如何将运行在本地机器上的 3 个成员 v3.6 etcd 集群降级。
 
-#### 步骤 1: 检查降级要求 {#step-1-check-downgrade-requirements}
+#### 第 1 步：检查降级要求 {#step-1-check-downgrade-requirements}
 
 集群是否健康且运行 v3.6.x 版本？
 
@@ -182,9 +182,9 @@ etcdctl --endpoints=localhost:2379,localhost:22379,localhost:32379 endpoint stat
 COMMENT
 ```
 
-#### Step 2: 从领导者下载快照备份 {#step-2-download-snapshot-backup-from-leader}
+#### 第 2 步：从领导者下载快照备份 {#step-2-download-snapshot-backup-from-leader}
 
-[下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)，以便在出现任何问题时提供回退路径。
+[下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)，以便出现问题时回退本次降级、恢复到降级前的状态。
 
 #### 第 3 步：验证降级目标版本 {#step-3-validate-downgrade-target-version}
 
@@ -209,7 +209,7 @@ Downgrade enable success, cluster version 3.6
 COMMENT
 ```
 
-启用降级后，集群将开始使用 v3.5 协议运行，该版本即为降级目标版本。此外，etcd 会自动将模式迁移至降级目标版本，此过程通常非常迅速。在继续下一步之前，请通过检查端点状态确认所有服务器的存储版本均已迁移至 v3.5。
+启用降级后，集群将开始使用 v3.5 协议运行，该版本即为降级目标版本。此外，etcd 会自动将存储模式（schema）迁移至降级目标版本，此过程通常非常迅速。在继续下一步之前，请通过检查端点状态确认所有服务器的存储版本均已迁移至 v3.5。
 
 ```bash
 etcdctl --endpoints=localhost:2379,localhost:22379,localhost:32379 endpoint status -w=table
@@ -287,7 +287,7 @@ COMMENT
   --initial-cluster-state existing
 ```
 
-验证每个成员以及整个集群在使用新的 v3.5 etcd 二进制文件后是否恢复正常健康状态：
+先验证每个成员，再验证整个集群在使用新的 v3.5 etcd 二进制文件后是否恢复正常健康状态：
 
 ```bash
 etcdctl --endpoints=localhost:2379,localhost:22379,localhost:32379 endpoint status -w=table
@@ -314,7 +314,7 @@ COMMENT
 
 #### 第 7 步：重复第 5 步和第 6 步，直至所有成员完成 {#step-7-repeat-step-5-and-step-6-for-rest-of-the-members}
 
-当所有成员均降级后，请检查集群的健康状况和状态，并确认所有成员的次要版本均为 v3.5，且存储版本为空：
+当所有成员均降级后，请检查集群的健康状况和状态，并确认所有成员的次版本均为 v3.5，且存储版本为空：
 
 ```bash
 etcdctl --endpoints=localhost:2379,localhost:22379,localhost:32379 endpoint status -w=table

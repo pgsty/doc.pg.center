@@ -3,7 +3,7 @@ title: etcd v3 基准测试
 weight: 5375
 description: etcd v3 性能指标
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/benchmarks/etcd-3-demo-benchmarks.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/benchmarks/etcd-3-demo-benchmarks.md"
 aliases: [/etcd/benchmarks/etcd-3-demo-benchmarks/]
 ---
 
@@ -19,7 +19,7 @@ GCE n1-highcpu-2 机器类型
 
 ## etcd 集群 {#etcd-cluster}
 
-1 以 v3 演示模式运行的 etcd 成员
+1 个以 v3 演示模式运行的 etcd 成员
 
 ## 测试 {#testing}
 
@@ -35,9 +35,9 @@ GCE n1-highcpu-2 机器类型
 | 256            | 64         | 16623    | 6.1                    |
 | 256            | 256        | 16622    | 21.7                   |
 
-性能几乎与空服务器处理器的情况相同。
+性能几乎与空服务器处理程序的情况相同。
 
-### 读取单个键的操作 {#reading-one-single-key-after-putting}
+### 写入后读取单个键 {#reading-one-single-key-after-putting}
 
 | 键大小（字节） | 客户端数量 | 读取 QPS | 第 90 百分位延迟（毫秒） |
 |----------------|------------|----------|------------------------|
@@ -45,6 +45,6 @@ GCE n1-highcpu-2 机器类型
 | 256            | 64         | 13582    | 8.6                    |
 | 256            | 256        | 13262    | 47.5                   |
 
-空服务器处理器的性能不受单次写入操作影响。因此，性能下降应由存储系统导致。
+空服务器处理程序的性能不受单次写入操作影响。因此，性能下降应由存储系统导致。
 
 [etcd-v3-benchmark]: https://github.com/etcd-io/etcd/tree/main/tools/benchmark

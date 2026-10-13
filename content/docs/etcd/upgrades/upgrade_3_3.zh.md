@@ -3,7 +3,7 @@ title: 将 etcd 从 3.2 升级到 3.3
 weight: 6750
 description: 升级 etcd 3.2 至 3.3 的流程、检查清单与注意事项
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_3.md"
 aliases: [/etcd/upgrades/upgrade_3_3/]
 ---
 
@@ -20,12 +20,12 @@ aliases: [/etcd/upgrades/upgrade_3_3/]
 > 从 [没有 v3 数据的 v2 迁移](https://github.com/etcd-io/etcd/issues/9480)时，如果 etcd 从现有快照恢复，但不存在 v3 `ETCD_DATA_DIR/member/snap/db` 文件，etcd v3.2+ 服务器会发生崩溃。这种情况出现在服务器由 v2 迁移且此前没有 v3 数据时。此限制也可防止意外丢失 v3 数据（例如 `db` 文件可能已被移动）。etcd 要求 v3 迁移后的操作必须有 v3 数据。v3.0 服务器包含 v3 数据之前，请勿升级到更新的 v3 版本。
 
 > [!WARNING]
-> 若启用认证并使用租约（租约 TTL 较小），极有可能遇到 [问题](https://github.com/etcd-io/etcd/issues/11689)，导致数据不一致。强烈建议先升级至 3.2.31+ 以修复此问题，再升级至 3.3。此外，在升级过程中，若无权限用户向 3.3 节点发送 `LeaseRevoke` 请求，仍可能导致数据损坏，因此建议在升级前确保环境中不存在此类异常调用，详情请参见 [#11691](https://github.com/etcd-io/etcd/pull/11691)。
+> 若启用身份认证并使用租约（租约 TTL 较小），极有可能遇到 [问题](https://github.com/etcd-io/etcd/issues/11689)，导致数据不一致。强烈建议先升级至 3.2.31+ 以修复此问题，再升级至 3.3。此外，在升级过程中，若无权限用户向 3.3 节点发送 `LeaseRevoke` 请求，仍可能导致数据损坏，因此最好在升级前确保环境中不存在此类异常调用，详情请参见 [#11691](https://github.com/etcd-io/etcd/pull/11691)。
 
 
-3.3 版本中的重点变更。
+3.3 版本中的重点破坏性变更。
 
-#### 将 `etcd --auto-compaction-retention` 标志的价值类型更改为 `string` {#changed-value-type-of-etcd---auto-compaction-retention-flag-to-string}
+#### 将 `etcd --auto-compaction-retention` 标志的值类型更改为 `string` {#changed-value-type-of-etcd---auto-compaction-retention-flag-to-string}
 
 将 `--auto-compaction-retention` 标志改为 [接受字符串值](https://github.com/etcd-io/etcd/pull/8563)，并支持 [更细粒度](https://github.com/etcd-io/etcd/issues/8503)。由于 `--auto-compaction-retention` 现在接受字符串值，etcd 配置 YAML 文件 `auto-compaction-retention` 字段必须改为 `string` 类型。此前 `--config-file etcd.config.yaml` 可包含 `auto-compaction-retention: 24` 字段，现在必须为 `auto-compaction-retention: "24"` 或 `auto-compaction-retention: "24h"`。若配置为 `--auto-compaction-mode periodic --auto-compaction-retention "24h"`，则 `--auto-compaction-retention` 标志的时间持续值必须对 Go 中的 [`time.ParseDuration`](https://golang.org/pkg/time/#ParseDuration) 函数有效。
 
@@ -38,7 +38,7 @@ aliases: [/etcd/upgrades/upgrade_3_3/]
 +auto-compaction-retention: "24h"
 ```
 
-#### 将 `etcdserver.EtcdServer.ServerConfig` 更改为 `*etcdserver.EtcdServer.ServerConfig` {#changed-etcdserveretcdserverserverconfig-to-etcdserveretcdserverserverconfig}
+#### 将 `*etcdserver.ServerConfig` 更改为 `etcdserver.ServerConfig` {#changed-etcdserveretcdserverserverconfig-to-etcdserveretcdserverserverconfig}
 
 `etcdserver.EtcdServer` 已将成员字段 `*etcdserver.ServerConfig` 的类型更改为 `etcdserver.ServerConfig`。现在 `etcdserver.NewServer` 接受 `etcdserver.ServerConfig`，而非 `*etcdserver.ServerConfig`。
 
@@ -68,10 +68,10 @@ func (e *EtcdServer) Start() error {
     ...
 ```
 
-#### 添加了 `embed.Config.LogOutput` 结构体 {#added-embedconfiglogoutput-struct}
+#### 添加了 `embed.Config.LogOutput` 字段 {#added-embedconfiglogoutput-struct}
 
 > [!WARNING]
-> 请注意，此字段在 v3.4 版本中已重命名为 `embed.Config.LogOutputs`，适用于 `[]string` 类型。详情请参阅 [v3.4 升级指南](/zh/docs/etcd/upgrades/upgrade_3_4/)。
+> 请注意，此字段在 v3.4 版本中已重命名为 `embed.Config.LogOutputs`，类型为 `[]string`。详情请参阅 [v3.4 升级指南](/zh/docs/etcd/upgrades/upgrade_3_4/)。
 
 字段 `LogOutput` 已添加至 `embed.Config`：
 
@@ -85,7 +85,7 @@ type Config struct {
  	...
 ```
 
-在 gRPC 服务器警告被记录到 etcdserver 之前。
+此前，gRPC 服务器警告会记录到 etcdserver 中。
 
 ```
 WARNING: 2017/11/02 11:35:51 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: Error while dialing dial tcp: operation was canceled"; Reconnecting to {localhost:2379 <nil>}
@@ -106,7 +106,7 @@ cfg.SetupLogging()
 
 将 `embed.Config.Debug` 字段设置为 `true` 以启用 gRPC 服务器日志。
 
-#### Changed `/health` 端点响应 {#changed-health-endpoint-response}
+#### 更改了 `/health` 端点响应 {#changed-health-endpoint-response}
 
 此前，`[endpoint]:[client-port]/health` 返回手动序列化的 JSON 值。3.3 版本现在定义了 [`etcdhttp.Health`](https://pkg.go.dev/github.com/etcd-io/etcd/etcdserver/api/etcdhttp#Health) 结构体。
 
@@ -117,9 +117,9 @@ $ curl http://localhost:2379/health
 {"health":"true"}
 ```
 
-#### Changed gRPC 网关 HTTP 端点（替换 `/v3alpha` 为 `/v3beta`） {#changed-grpc-gateway-http-endpoints-replaced-v3alpha-with-v3beta}
+#### 更改了 gRPC 网关 HTTP 端点（将 `/v3alpha` 替换为 `/v3beta`） {#changed-grpc-gateway-http-endpoints-replaced-v3alpha-with-v3beta}
 
-本文未提供内容。
+之前
 
 ```bash
 curl -L http://localhost:2379/v3alpha/kv/put \
@@ -137,7 +137,7 @@ curl -L http://localhost:2379/v3beta/kv/put \
 
 #### 调整了最大请求大小限制 {#changed-maximum-request-size-limits}
 
-3.3 现在允许为服务器端和客户端分别设置自定义请求大小限制。在之前版本（v3.2.10、v3.2.11）中，客户端响应大小限制仅为 4 MiB。
+3.3 现在允许为服务器端和**客户端**设置自定义请求大小限制。在之前版本（v3.2.10、v3.2.11）中，客户端响应大小限制仅为 4 MiB。
 
 服务器端请求限制可通过 `--max-request-bytes` 标志进行配置：
 
@@ -165,7 +165,7 @@ _, err := cli.Put(ctx, "foo", [LARGE VALUE...])
 err == rpctypes.ErrRequestTooLarge
 ```
 
-如果未指定，服务器端限制默认为 1.5 MiB。
+**如果未指定，服务器端限制默认为 1.5 MiB**。
 
 客户端请求限制必须根据服务器端限制进行配置。
 
@@ -206,7 +206,7 @@ _, err = cli.Get(ctx, "foo", clientv3.WithPrefix())
 err.Error() == "rpc error: code = ResourceExhausted desc = grpc: received message larger than max (5240509 vs. 3145728)"
 ```
 
-如果未指定，客户端发送限制默认为 2 MiB（1.5 MiB + gRPC 开销字节），接收限制为 `math.MaxInt32`。请参阅 [clientv3 godoc](https://pkg.go.dev/github.com/etcd-io/etcd/clientv3#Config) 获取更多详细信息。
+**如果未指定，客户端发送限制默认为 2 MiB（1.5 MiB + gRPC 开销字节），接收限制为 `math.MaxInt32`**。请参阅 [clientv3 godoc](https://pkg.go.dev/github.com/etcd-io/etcd/clientv3#Config) 获取更多详细信息。
 
 #### 更改了原始 gRPC 客户端包装函数的签名 {#changed-raw-grpc-client-wrapper-function-signatures}
 
@@ -231,11 +231,11 @@ err.Error() == "rpc error: code = ResourceExhausted desc = grpc: received messag
 +func NewWatchFromWatchClient(wc pb.WatchClient, c *Client) Watcher {
 ```
 
-#### Changed clientv3 `Snapshot` API 错误类型 {#changed-clientv3-snapshot-api-error-type}
+#### 更改了 clientv3 `Snapshot` API 错误类型 {#changed-clientv3-snapshot-api-error-type}
 
 此前，clientv3 `Snapshot` API 返回原始的 [`grpc/*status.statusError`] 类型错误。v3.3 现已将这些错误转换为对应的公开错误类型，以与其他 API 保持一致。
 
-本文未提供内容。
+之前
 
 ```go
 import "context"
@@ -277,11 +277,11 @@ _, err = io.Copy(f, rc)
 err == context.DeadlineExceeded
 ```
 
-#### Changed `etcdctl lease timetolive` 命令输出 {#changed-etcdctl-lease-timetolive-command-output}
+#### 更改了 `etcdctl lease timetolive` 命令输出 {#changed-etcdctl-lease-timetolive-command-output}
 
 此前，对已过期租约执行 `lease timetolive LEASE_ID` 命令时会输出 `-1s` 表示剩余秒数。3.3 版本现在输出更清晰的提示信息。
 
-本文未提供内容。
+之前
 
 
 ```bash
@@ -296,9 +296,9 @@ lease 2d8257079fa1bc0c already expired
 
 #### 变更 `golang.org/x/net/context` 导入 {#changed-golangorgxnetcontext-imports}
 
-`clientv3` 已弃用 `golang.org/x/net/context`。若项目在其他代码中引入 `golang.org/x/net/context`（例如 etcd 生成的协议缓冲区代码）并导入 `github.com/coreos/etcd/clientv3`，则编译时需使用 Go 1.9 或更高版本。
+`clientv3` 已弃用 `golang.org/x/net/context`。若项目在其他代码中将 `golang.org/x/net/context` 收录到 vendor 目录（例如 etcd 生成的协议缓冲区代码）并导入 `github.com/coreos/etcd/clientv3`，则编译时需使用 Go 1.9 或更高版本。
 
-本文未提供内容。
+之前
 
 ```go
 import "golang.org/x/net/context"
@@ -320,7 +320,7 @@ cli.Put(context.Background(), "f", "v")
 
 `grpclog.Logger` 已被弃用，建议改用 [`grpclog.LoggerV2`](https://github.com/grpc/grpc-go/blob/master/grpclog/loggerv2.go)。`clientv3.Logger` 现已改为 `grpclog.LoggerV2`。
 
-本文未提供内容。
+之前
 
 ```go
 import "github.com/coreos/etcd/clientv3"
@@ -341,7 +341,7 @@ clientv3.SetLogger(grpclog.NewLoggerV2(os.Stderr, os.Stderr, os.Stderr))
 
 此前，在客户端连接超时时返回 `grpc.ErrClientConnTimeout` 错误。3.3 版本改为返回 `context.DeadlineExceeded`（参见 [#8504](https://github.com/etcd-io/etcd/issues/8504)）。
 
-本文未提供内容。
+之前
 
 ```go
 // expect dial time-out on ipv4 blackhole
@@ -370,7 +370,7 @@ if err == context.DeadlineExceeded {
 
 etcd 现在使用 [`gcr.io/etcd-development/etcd`](https://gcr.io/etcd-development/etcd) 作为主容器注册表，使用 [`quay.io/coreos/etcd`](https://quay.io/coreos/etcd) 作为备用。
 
-本文未提供内容。
+之前
 
 ```bash
 docker pull quay.io/coreos/etcd:v3.2.5
@@ -382,7 +382,7 @@ docker pull quay.io/coreos/etcd:v3.2.5
 docker pull gcr.io/etcd-development/etcd:v3.3.0
 ```
 
-### 升级至>=v3.3.14 {#upgrades-to--v3314}
+### 升级至 >= v3.3.14 {#upgrades-to--v3314}
 
 [v3.3.14](https://github.com/etcd-io/etcd/releases/tag/v3.3.14) 在尽量减少客户端负载均衡实现差异的前提下，引入了部分 3.4 版本的特性。此版本修复了 [“当首个 etcd-server 不可用时，kube-apiserver 1.13.x 拒绝运行”（kubernetes#72102）](https://github.com/kubernetes/kubernetes/issues/72102) 的问题。
 
@@ -440,7 +440,7 @@ ccfg := clientv3.Config{
 
 在升级 etcd 之前，请务必在预发环境中测试依赖 etcd 的服务，再将升级部署到生产环境。
 
-升级前，请对 etcd 数据执行 [备份 etcd 数据](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。若升级过程中出现异常，可使用此备份将系统 [降级](#downgrade)至现有 etcd 版本。请注意，`snapshot`命令仅备份 v3 数据。如需备份 v2 数据，请参阅 [备份 v2 数据存储](https://etcd.io/docs/v2.3/admin_guide/#backing-up-the-datastore)。
+升级前，请对 etcd 数据执行 [备份 etcd 数据](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。若升级过程中出现异常，可使用此备份将系统 [降级](#downgrade)至现有 etcd 版本。请注意，`snapshot` 命令仅备份 v3 数据。如需备份 v2 数据，请参阅 [备份 v2 数据存储](https://etcd.io/docs/v2.3/admin_guide/#backing-up-the-datastore)。
 
 #### 混合版本 {#mixed-versions}
 
@@ -450,15 +450,15 @@ ccfg := clientv3.Config{
 
 请注意：如果集群仅包含 v3 数据且无 v2 数据，则不受此限制影响。
 
-如果集群正在服务的数据集大小超过 50MB，每个新升级的成员可能需要最多 2 分钟才能追上现有集群。请检查最近快照的大小以估算总数据量。换句话说，升级每个成员之间应至少等待 2 分钟。
+如果集群正在服务的 v2 数据集大小超过 50MB，每个新升级的成员可能需要最多 2 分钟才能追上现有集群。请检查最近快照的大小以估算总数据量。换句话说，升级每个成员之间应至少等待 2 分钟。
 
-对于数据总量更大（例如 100MB 或更多）的情况，此一次性操作可能需要更长时间。对于规模达到此类程度的大型 etcd 集群，系统管理员可在升级前自由联系 [etcd 团队][etcd-contact]，我们将乐意提供升级流程方面的建议。
+对于数据总量更大（100MB 或更多）的情况，此一次性操作可能需要更长时间。对于规模达到此类程度的大型 etcd 集群，系统管理员可在升级前自由联系 [etcd 团队][etcd-contact]，我们将乐意提供升级流程方面的建议。
 
 #### 降级 {#downgrade}
 
 如果所有成员均已升级至 v3.3 版本，集群将升级至 v3.3 版本，从该完成状态回退**不可行**。然而，若任一成员仍为 v3.2 版本，则集群及其操作仍保持 "v3.2" 状态，此时可从该混合集群状态恢复至所有成员均使用 v3.2 etcd 二进制文件。
 
-请备份所有 etcd 成员的数据目录 [backup the data directory](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)，以确保在集群完全升级后仍可执行降级操作。
+请 [备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup) 所有 etcd 成员的数据目录，以确保在集群完全升级后仍可执行降级操作。
 
 ### 升级流程 {#upgrade-procedure}
 
@@ -506,7 +506,7 @@ $ curl http://localhost:2379/version
 $ etcdctl snapshot save backup.db
 ```
 
-#### 3. 插入 etcd v3.3 二进制文件并启动新 etcd 进程 {#3-drop-in-etcd-v33-binary-and-start-the-new-etcd-process}
+#### 3. 替换为 etcd v3.3 二进制文件并启动新 etcd 进程 {#3-drop-in-etcd-v33-binary-and-start-the-new-etcd-process}
 
 新的 v3.3 版 etcd 将向集群发布其信息：
 
@@ -514,7 +514,7 @@ $ etcdctl snapshot save backup.db
 14:14:25.363225 I | etcdserver: published {Name:s1 ClientURLs:[http://localhost:2379]} to cluster a9ededbffcb1b1f1
 ```
 
-验证每个成员以及整个集群在使用新的 v3.3 etcd 二进制文件后是否恢复正常健康状态：
+先验证每个成员，再验证整个集群在使用新的 v3.3 etcd 二进制文件后是否恢复正常健康状态：
 
 ```
 $ ETCDCTL_API=3 /etcdctl endpoint health --endpoints=localhost:2379,localhost:22379,localhost:32379

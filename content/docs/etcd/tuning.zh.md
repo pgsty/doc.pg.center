@@ -4,7 +4,7 @@ weight: 1450
 description: 何时调整心跳间隔和选举超时设置
 icon: fa-solid fa-sliders
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tuning.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tuning.md"
 aliases: [/etcd/tuning/]
 ---
 
@@ -14,13 +14,13 @@ aliases: [/etcd/tuning/]
 
 ## 时间参数 {#time-parameters}
 
-本文所依赖的分布式共识协议依赖两个独立的时间参数，以确保当某个节点停滞或离线时，其他节点能够完成领导权交接。第一个参数称为 *心跳间隔*（Heartbeat Interval）。该参数定义了领导者向跟随者通知自身仍为领导者的时间频率。
+底层的分布式共识协议依赖两个独立的时间参数，以确保当某个节点停滞或离线时，其他节点能够完成领导权交接。第一个参数称为 *心跳间隔*（Heartbeat Interval）。该参数规定领导者向跟随者通告自身仍为领导者的频率。
 
 最佳实践建议，该参数应设置为成员间往返时间的近似值。默认情况下，etcd 使用 `100ms` 的心跳间隔。
 
 第二个参数是 *选举超时时间*。该超时时间表示跟随者节点在未收到心跳消息的情况下，等待多久后将尝试自行成为领导者。默认情况下，etcd 使用 `1000ms` 选举超时时间。
 
-调整这些值需要权衡。心跳间隔的值建议设置为成员间平均往返时间（RTT）的最大值，通常为往返时间的 0.5-1.5x。如果心跳间隔过低，etcd 会发送不必要的消息，增加 CPU 和网络资源的使用。另一方面，心跳间隔过高会导致选举超时时间变长，更高的选举超时会延长对领导者故障的检测时间。测量往返时间（RTT）最简便的方法是使用 [PING utility][ping]。
+调整这些值需要权衡。心跳间隔的值建议约为成员间平均往返时间（RTT）的最大值，通常为往返时间的 0.5-1.5x。如果心跳间隔过低，etcd 会发送不必要的消息，增加 CPU 和网络资源的使用。另一方面，心跳间隔过高会导致选举超时时间变长，更高的选举超时会延长对领导者故障的检测时间。测量往返时间（RTT）最简便的方法是使用 [PING 工具][ping]。
 
 选举超时应根据心跳间隔以及成员之间的平均往返时间进行设置。选举超时必须至少为往返时间的 10 倍，以应对网络波动。例如，若成员之间的往返时间为 10ms，则选举超时应至少设置为 100ms。
 
@@ -48,7 +48,7 @@ etcd 将所有键的变更追加到日志文件中。该日志会无限增长，
 
 ### 快照调优 {#snapshot-tuning}
 
-使用 V2 后端创建快照的开销较高，因此仅在 etcd 发生指定数量的变更后才会创建快照。默认情况下，每发生 10,000 次变更后将生成一次快照。若 etcd 的内存使用率和磁盘使用率过高，可尝试通过命令行设置降低快照阈值：
+Raft 快照在应用指定数量的条目后创建；etcd 3.7 已不再使用 V2 后端。默认情况下，每发生 10,000 次变更后将生成一次快照。若 etcd 的内存使用率和磁盘使用率过高，可尝试通过命令行设置降低快照阈值：
 
 ```sh
 # Command line arguments:
@@ -99,9 +99,9 @@ tc qdisc del dev eth0 root
 
 ## CPU {#cpu}
 
-由于 etcd 对延迟非常敏感，可在 Linux 系统上通过将 CPU 调度器设置为 performance 或 conservative 模式，进一步优化性能。
+由于 etcd 对延迟非常敏感，可在 Linux 系统上通过将 CPU governor 设置为 performance 或 conservative 模式，进一步优化性能。
 
-在 Linux 上，可将 CPU 调度器配置为性能模式：
+在 Linux 上，可将 CPU governor 配置为 performance 模式：
 ```
 echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 ```

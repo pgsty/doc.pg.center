@@ -3,7 +3,7 @@ title: etcd 持久化存储文件
 weight: 2650
 description: 持久化存储格式与文件参考
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/persistent-storage-files.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/persistent-storage-files.md"
 aliases: [/etcd/learning/persistent-storage-files/]
 ---
 
@@ -30,7 +30,7 @@ aliases: [/etcd/learning/persistent-storage-files/]
 
   <tr>
     <td><pre>./member/snap/db</pre></td>
-    <td><strong>bbolt <a href="https://en.wikipedia.org/wiki/B%2B_tree">b+tree</a></strong> 用于存储所有已应用的数据、成员权限信息及元数据。它知晓最新的已应用 WAL 日志索引（<a href="https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/server/etcdserver/cindex/cindex.go#L92">"consistent_index"</a>）。
+    <td><strong>bbolt <a href="https://en.wikipedia.org/wiki/B%2B_tree">b+tree</a></strong> 用于存储所有已应用的数据、成员授权信息及元数据。它知晓最新的已应用 WAL 日志索引（<a href="https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/server/etcdserver/cindex/cindex.go#L92">"consistent_index"</a>）。
     </td>
   </tr>
 
@@ -189,7 +189,7 @@ bbolt 存储系统划分为多个桶。每个桶中以字典序存储键（byte[
     <td rowspan="2" >cluster</td>
     <td>"clusterVersion"</td>
     <td><code>"3.5.0"</code>（字符串）</td>
-    <td><a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/etcdserver/server.go#L2314">次要</a> 版本的共识达成的通用存储版本。</td>
+    <td><a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/etcdserver/server.go#L2314">次版本</a>：经共识确定的通用存储版本。</td>
   </tr>
   <tr>
     <td>"downgrade"</td>
@@ -218,7 +218,7 @@ bbolt 存储系统划分为多个桶。每个桶中以字典序存储键（byte[
     <td><a href="https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/server/lease/leasepb/lease.proto#L13"><code>leasepb.Lease</code></a> 序列化后的 proto（ID、TTL、RemainingTTL）</td>
     <td>
       <p>注意：LeaseCheckpoint 仅扩展 RemainingTTL。TTL 仍来自原始 Grant。</p>
-      <p style="text-decoration:underline;">注意 2：我们以秒为单位持久化 TTL（从未定义的“现在”开始计算）。崩溃循环的服务器不会释放租约！</p>
+      <p style="text-decoration:underline;">注意 2：我们以秒为单位持久化 TTL（从未定义的“现在”开始计算）。崩溃循环的服务器不会释放租约！！！</p>
     </td>
   </tr>
   <tr>
@@ -249,7 +249,7 @@ bbolt 存储系统划分为多个桶。每个桶中以字典序存储键（byte[
     <td rowspan="3"><strong>meta</strong></td>
     <td><a href="https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/server/etcdserver/cindex/cindex.go#L92">"consistent_index"</a></td>
     <td>uint64 字节（大端序）</td>
-    <td>表示最后应用的 WAL 条目在 Bolt DB 存储系统中的偏移量。</td>
+    <td>表示最后一个已应用到 Bolt DB 存储系统的 WAL 条目的偏移量。</td>
   </tr>
   <tr>
     <td><a href="https://github.com/etcd-io/etcd/blob/ae7862e8bc8007eb396099db4e0e04ac026c8df5/server/mvcc/kvstore.go#L41">scheduledCompactRev</a></td>
@@ -356,7 +356,7 @@ WAL 日志文件由一系列“[帧](https://github.com/etcd-io/etcd/blob/a1ff0d
 3. 序列化后的 [walpb.Record](https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/server/wal/walpb/record.proto#L11) 数据：
     1. [type](https://github.com/etcd-io/etcd/blob/aa97484166d2b3fb6afeb4390344e68b02afb566/server/storage/wal/wal.go#L39) - 以整数编码的枚举，用于决定如何解释下述 data 字段
     2. data - 由类型决定，通常是序列化后的 Protocol Buffers 数据
-    3. crc - 自 WAL 日志创建以来，该副本上所有日志记录中所有“data”字段（不包含 type）的 RC-32 校验和。请注意，CRC 计算包含所有记录（即使它们未被 Raft 提交）。
+    3. crc - 自 WAL 日志创建以来，该副本上所有日志记录中所有“data”字段（不包含 type）的 CRC-32 校验和。请注意，CRC 计算包含所有记录（即使它们未被 Raft 提交）。
 
 当当前文件超过 <code>64*10^6</code> 字节时，会将其切分并开始写入新文件。
 
@@ -390,14 +390,14 @@ WAL 日志文件由一系列“[帧](https://github.com/etcd-io/etcd/blob/a1ff0d
 
 WAL 日志可能包含同一索引的多个条目。这种情况可能出现在 [Raft 论文](http://web.stanford.edu/~ouster/cgi-bin/papers/raft-atc14.pdf) 图 7 所描述的场景中。etcd 的 WAL 日志仅支持追加写入，因此当新条目以相同索引写入时，原有条目会被覆盖。
 
-特别是在读取 WAL 时，[逻辑会用新条目覆盖旧条目](https://github.com/etcd-io/etcd/blob/release-3.4/wal/wal.go#L448-L462)。因此，仅当条目索引 entry.index &lt;= HardState.commit 时，才可视为最终版本。索引大于 HardState.commit 的条目可能发生变化。
+特别是在读取 WAL 时，[逻辑会用新条目覆盖旧条目](https://github.com/etcd-io/etcd/blob/release-3.4/wal/wal.go#L448-L462)。因此，对于索引满足 entry.index &lt;= HardState.commit 的条目，仅其最后一个版本可视为最终版本。索引大于 HardState.commit 的条目可能发生变化。
 
 WAL 日志中的“任期”应保持单调递增。
 
 WAL 日志中的“索引”预期满足以下要求：
 
 1. 从某个快照开始
-2. 在该任期期间，索引应持续递增
+2. 从该快照之后开始，只要处于同一任期，索引就应依次连续递增
 3. 若任期发生变化，索引可能减少，但必须大于最新的 HardState.commit 值
 4. 任意索引大于等于 HardState.commit 的新快照都可能发生，从而开启新的索引序列
 
@@ -445,8 +445,8 @@ etcd 的 WAL 日志可使用 [etcd-dump-logs](https://github.com/etcd-io/etcd/tr
 有两个触发器控制这些文件的创建：
 
 
-* 每处理大约 --snapshotCount=（默认为 100'000）个已应用提案，就会创建一个新文件。这只是近似值：提案可能分批到达，而系统只会在一批处理结束时考虑生成快照，最终的快照过程还会异步调度。
-  标志名 --snapshotCount 容易产生误解：它控制[最后一次快照索引与最后一次已应用提案索引之间的索引差](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/server/etcdserver/server.go#L1266)。
+* 每处理大约 --snapshot-count=（v3.7.0 中默认为 10,000）个已应用提案，就会创建一个新文件。这只是近似值：提案可能分批到达，而系统只会在一批处理结束时考虑生成快照，最终的快照过程还会异步调度。
+  标志名 --snapshot-count 容易产生误解：它控制[最后一次快照索引与最后一次已应用提案索引之间的索引差](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/server/etcdserver/server.go#L1266)。
 * Raft 请求副本从快照恢复。副本通过网络接收快照（msgSnap 消息）时，也会将其以轻量方式记录到 WAL 日志中。这可确保 WAL 日志尾部始终存在一个后接日志条目的有效快照，从而避免 WAL 日志中可能出现的不连续。
 
 目前，这些文件大致[^3]与 WAL 日志中的 Snapshot 条目一一对应。随着 v2 存储系统停用，预计将彻底停止写入这些文件（3.5.x 可选启用，3.6.x 强制执行）。

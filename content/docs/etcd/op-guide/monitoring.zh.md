@@ -3,7 +3,7 @@ title: 监控 etcd
 weight: 4500
 description: 监控 etcd 系统健康状况并调试集群
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/monitoring.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/monitoring.md"
 aliases: [/etcd/op-guide/monitoring/]
 ---
 
@@ -11,7 +11,7 @@ aliases: [/etcd/op-guide/monitoring/]
 
 ## 调试端点 {#debug-endpoint}
 
-若设置 `--log-level=debug`，etcd 服务器将在其客户端端口的 `/debug` 路径下导出调试信息。设置 `--log-level=debug` 时需谨慎，因为会导致性能下降和日志输出过于 verbose。
+若设置 `--log-level=debug`，etcd 服务器将在其客户端端口的 `/debug` 路径下导出调试信息。设置 `--log-level=debug` 时需谨慎，因为会导致性能下降并产生过于冗长的日志。
 
 `/debug/pprof` 端点是标准的 Go 运行时性能分析端点。该端点可用于分析 CPU、堆、互斥锁和协程的使用情况。例如，以下命令通过 `go tool pprof` 获取 etcd 花费时间最多的前 10 个函数：
 
@@ -155,7 +155,7 @@ Url:    http://localhost:9090
 Access: proxy
 ```
 
-然后导入默认的 [etcd dashboard template][template] 并进行自定义。例如，若 Prometheus 数据源名称为 `my-etcd`，则 JSON 中的 `datasource` 字段值也需相应设置为 `my-etcd`。
+然后导入默认的 [etcd 仪表板模板][template] 并进行自定义。例如，若 Prometheus 数据源名称为 `my-etcd`，则 JSON 中的 `datasource` 字段值也需相应设置为 `my-etcd`。
 
 示例仪表板：
 
@@ -166,22 +166,22 @@ Access: proxy
 在 v3.5 版本中，etcd 已添加对使用 [OpenTelemetry](https://github.com/open-telemetry) 的分布式追踪支持。
 
 > [!NOTE]
-> 该功能仍处于实验阶段，可能随时更改。
+> 在 etcd 3.7 中，请使用以下跟踪标志，不要使用旧的实验性前缀。
 
-要启用此实验性功能，请向 etcd 服务器传递 `--experimental-enable-distributed-tracing=true`，并配合 `--experimental-distributed-tracing-sampling-rate=<number>` 标志以选择每百万跨度收集的采样数量，默认采样率为 `0`。
+要启用分布式跟踪，请向 etcd 服务器传递 `--enable-distributed-tracing=true`，并配合 `--distributed-tracing-sampling-rate=<number>` 标志以选择每百万跨度收集的采样数量，默认采样率为 `0`。
 
 通过以下可选标志启动 etcd 服务器，以配置分布式追踪：
 
-- `--experimental-distributed-tracing-address` - （可选） - "localhost:4317" - 跟踪收集器的地址。
+- `--distributed-tracing-address` - （可选） - "localhost:4317" - 跟踪收集器的地址。
 
-- `--experimental-distributed-tracing-service-name` - （可选） - "etcd" - 分布式追踪服务名称，所有 etcd 实例之间必须保持一致。
+- `--distributed-tracing-service-name` - （可选） - "etcd" - 分布式追踪服务名称，所有 etcd 实例之间必须保持一致。
 
-- `--experimental-distributed-tracing-instance-id` - （可选） - 实例 ID，虽然可选，但强烈建议设置，每个 etcd 实例必须唯一。
+- `--distributed-tracing-instance-id` - （可选） - 实例 ID，虽然可选，但强烈建议设置，每个 etcd 实例必须唯一。
 
-启用分布式追踪前，请确保已配置 OpenTelemetry 端点。若该地址与默认值不同，请使用 `--experimental-distributed-tracing-address` 标志进行覆盖。由于 OpenTelemetry 存在多种运行方式，请参阅 [collector 文档](https://opentelemetry.io/docs/collector/getting-started/) 以获取更多信息。
+启用分布式追踪前，请确保已配置 OpenTelemetry 端点。若该地址与默认值不同，请使用 `--distributed-tracing-address` 标志进行覆盖。由于 OpenTelemetry 存在多种运行方式，请参阅 [收集器文档](https://opentelemetry.io/docs/collector/getting-started/) 以获取更多信息。
 
 > [!NOTE]
-> 与任何可观测性信号一样，存在资源开销。根据我们的初步测量，该开销可能在 2% 至 4% 的 CPU 开销之间。
+> 与任何可观测性信号一样，存在资源开销。根据我们的初步测量，CPU 开销可能为 2% 至 4%。
 
 [grafana]: http://grafana.org/
 [prometheus]: https://prometheus.io/

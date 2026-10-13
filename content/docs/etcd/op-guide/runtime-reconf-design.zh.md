@@ -3,7 +3,7 @@ title: 运行时重配置设计
 weight: 4650
 description: etcd 运行时重配置命令的设计
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/runtime-reconf-design.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/runtime-reconf-design.md"
 aliases: [/etcd/op-guide/runtime-reconf-design/]
 ---
 
@@ -15,11 +15,11 @@ aliases: [/etcd/op-guide/runtime-reconf-design/]
 
 在 etcd 中，每次运行时重配置都必须出于安全考虑，经过 [两个阶段][add-member]。例如，添加成员时，需先通知集群新配置，再启动新成员。
 
-1 - 通知集群新配置
+阶段 1 - 通知集群新配置
 
 要将成员添加到 etcd 集群，需通过 API 调用请求将新成员加入集群。这是向现有集群添加新成员的唯一方式。API 调用将在集群就配置变更达成一致后返回。
 
-2 阶段 - 启动新成员
+阶段 2 - 启动新成员
 
 要将新的 etcd 成员加入现有集群，需指定正确的 `initial-cluster`，并将 `initial-cluster-state` 设置为 `existing`。成员启动时，会首先联系现有集群，并验证当前集群配置是否与 `initial-cluster` 中指定的预期配置一致。当新成员成功启动后，集群即达到预期配置。
 

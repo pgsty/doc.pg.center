@@ -3,7 +3,7 @@ title: 将 etcd 从 v3.5 升级到 v3.6
 weight: 6600
 description: 升级 etcd 3.5 至 3.6 的流程、检查清单与注意事项
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_6.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_6.md"
 aliases: [/etcd/upgrades/upgrade_3_6/]
 ---
 
@@ -26,7 +26,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 > [!NOTE]
 > 如果未配置 `--enable-v2` 标志或将其设置为 false，则无需采取进一步操作。
 
-如果配置了 `--enable-v2`，请运行命令 `etcdutl check v2store`，以验证 v2store 中是否存在非成员关系（自定义）数据。若不存在自定义数据，可安全移除该标志。否则，请参阅 [v2 迁移指南](https://etcd.io/docs/v3.4/op-guide/v2-migration/) 获取更多详情。
+如果**确实**配置了 `--enable-v2`，请运行命令 `etcdutl check v2store`，以验证 v2store 中是否存在非成员关系（自定义）数据。若不存在自定义数据，可安全移除该标志。否则，请参阅 [v2 迁移指南](https://etcd.io/docs/v3.4/op-guide/v2-migration/) 获取更多详情。
 
 ### 新增标志 {#flags-added}
 
@@ -63,7 +63,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ### 标志已弃用 {#flags-deprecated}
 
-**`etcd --experimental-bootstrap-defrag-threshold-megabytes` 标志已被弃用.**
+**`etcd --experimental-bootstrap-defrag-threshold-megabytes` 标志已被弃用。**
 
 ```diff
 
@@ -73,7 +73,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-compaction-batch-limit` 标志已被弃用.**
+**`etcd --experimental-compaction-batch-limit` 标志已被弃用。**
 
 ```diff
 
@@ -83,7 +83,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-compact-hash-check-time` 标志已被弃用.**
+**`etcd --experimental-compact-hash-check-time` 标志已被弃用。**
 
 ```diff
 
@@ -93,7 +93,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-compaction-sleep-interval` 标志已被弃用.**
+**`etcd --experimental-compaction-sleep-interval` 标志已被弃用。**
 
 ```diff
 
@@ -103,7 +103,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-corrupt-check-time` 标志已被弃用.**
+**`etcd --experimental-corrupt-check-time` 标志已被弃用。**
 
 ```diff
 
@@ -113,7 +113,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-enable-distributed-tracing` 标志已弃用.**
+**`etcd --experimental-enable-distributed-tracing` 标志已弃用。**
 
 ```diff
 
@@ -123,7 +123,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-distributed-tracing-address` 标志已被弃用.**
+**`etcd --experimental-distributed-tracing-address` 标志已被弃用。**
 
 ```diff
 
@@ -133,7 +133,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-distributed-tracing-instance-id` 标志已弃用.**
+**`etcd --experimental-distributed-tracing-instance-id` 标志已弃用。**
 
 ```diff
 
@@ -143,7 +143,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-distributed-tracing-sampling-rate` 标志已被弃用.**
+**`etcd --experimental-distributed-tracing-sampling-rate` 标志已被弃用。**
 
 ```diff
 
@@ -153,7 +153,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-distributed-tracing-service-name` 标志已弃用.**
+**`etcd --experimental-distributed-tracing-service-name` 标志已弃用。**
 
 ```diff
 
@@ -163,7 +163,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-downgrade-check-time` 标志已被弃用.**
+**`etcd --experimental-downgrade-check-time` 标志已被弃用。**
 
 ```diff
 
@@ -173,7 +173,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-max-learners` 标志已被弃用.**
+**`etcd --experimental-max-learners` 标志已被弃用。**
 
 ```diff
 
@@ -183,7 +183,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-memory-mlock` 标志已被弃用.**
+**`etcd --experimental-memory-mlock` 标志已被弃用。**
 
 ```diff
 
@@ -193,7 +193,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-peer-skip-client-san-verification` 标志已被弃用.**
+**`etcd --experimental-peer-skip-client-san-verification` 标志已被弃用。**
 
 ```diff
 
@@ -203,7 +203,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-snapshot-catchup-entries` 标志已被弃用.**
+**`etcd --experimental-snapshot-catchup-entries` 标志已被弃用。**
 
 ```diff
 
@@ -213,7 +213,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-warning-apply-duration` 标志已弃用.**
+**`etcd --experimental-warning-apply-duration` 标志已弃用。**
 
 ```diff
 
@@ -223,7 +223,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-warning-unary-request-duration` 标志已被弃用.**
+**`etcd --experimental-warning-unary-request-duration` 标志已被弃用。**
 
 ```diff
 
@@ -233,7 +233,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**`etcd --experimental-watch-progress-notify-interval` 标志已被弃用.**
+**`etcd --experimental-watch-progress-notify-interval` 标志已被弃用。**
 
 ```diff
 
@@ -243,9 +243,9 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-### v3.5 功能门控的等效标志 {#equivalent-flags-of-v35-feature-gates}
+### 将 v3.5 实验性标志迁移为功能门控 {#equivalent-flags-of-v35-feature-gates}
 
-**对应的功能门控标志 `etcd --experimental-compact-hash-check-enabled=true`**
+**与 `etcd --experimental-compact-hash-check-enabled=true` 对应的功能门控**
 
 ```diff
 
@@ -255,7 +255,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**对应的功能门控标志 `etcd --experimental-initial-corrupt-check=true`**
+**与 `etcd --experimental-initial-corrupt-check=true` 对应的功能门控**
 
 ```diff
 
@@ -265,7 +265,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**对应的功能门控标志 `etcd --experimental-enable-lease-checkpoint=true`**
+**与 `etcd --experimental-enable-lease-checkpoint=true` 对应的功能门控**
 
 ```diff
 
@@ -275,7 +275,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**对应的功能门控标志 `etcd --experimental-enable-lease-checkpoint-persist=true`**
+**与 `etcd --experimental-enable-lease-checkpoint-persist=true` 对应的功能门控**
 
 ```diff
 
@@ -285,7 +285,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**对应的功能门控标志 `etcd --experimental-stop-grpc-service-on-defrag=true`**
+**与 `etcd --experimental-stop-grpc-service-on-defrag=true` 对应的功能门控**
 
 ```diff
 
@@ -295,7 +295,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 ```
 
-**对应的功能门控标志 `etcd --experimental-txn-mode-write-with-shared-buffer=false`**
+**与 `etcd --experimental-txn-mode-write-with-shared-buffer=false` 对应的功能门控**
 
 ```diff
 
@@ -349,7 +349,7 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 #### 升级要求 {#upgrade-requirements}
 
-要将现有的 etcd 部署升级至 v3.6，运行中的集群版本必须为 v3.5 或更高。若版本低于 v3.5，请先 [升级至 v3.5](/zh/docs/etcd/upgrades/upgrade_3_4/)，再升级至 v3.6。
+要将现有的 etcd 部署升级至 v3.6，运行中的集群版本必须为 v3.5 或更高。若版本低于 v3.5，请先 [升级至 v3.5](/zh/docs/etcd/upgrades/upgrade_3_5/)，再升级至 v3.6。
 
 此外，为确保滚动升级顺利进行，运行中的集群必须处于健康状态。在继续操作前，请使用 `etcdctl endpoint health` 命令检查集群健康状况。
 
@@ -367,13 +367,13 @@ aliases: [/etcd/upgrades/upgrade_3_6/]
 
 升级 etcd 集群前，请创建并 [下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。该快照可用于在需要时将集群恢复至升级前的状态。若用户在升级过程中遇到问题，应首先识别并解决根本原因。若集群仍处于混合版本状态——即至少有一个成员仍运行在 v3.5 版本——则可选择将二进制文件或镜像替换为旧版 v3.5，或直接使用快照恢复集群。在此混合状态下，集群仍以 v3.5 集群模式运行，支持回滚而无需执行正式的降级流程。
 
-然而，一旦所有成员均升级至 v3.6 版本，集群即被视为已完全升级，此时使用二进制文件回滚将不再可行。在此情况下，唯一的恢复方式是恢复升级前创建的快照。若用户希望在完成完整升级后返回原始版本，应遵循官方降级指南，以确保一致性并避免数据损坏。
+然而，一旦所有成员均升级至 v3.6 版本，集群即被视为已完全升级，此时仅替换二进制文件不再是有效的回滚方式。恢复选项包括从升级前创建的快照恢复，或遵循官方降级指南返回原始版本，以确保一致性并避免数据损坏。
 
 ### 升级流程 {#upgrade-procedure}
 
 本示例演示如何升级在本地计算机上运行的 3 个成员的 v3.5 etcd 集群。
 
-#### 步骤 1: 检查升级要求 {#step-1-check-upgrade-requirements}
+#### 第 1 步：检查升级要求 {#step-1-check-upgrade-requirements}
 
 集群是否健康且运行 v3.5.x 版本？
 
@@ -401,7 +401,7 @@ curl http://localhost:32379/version
 COMMENT
 ```
 
-#### Step 2: 从领导者下载快照备份 {#step-2-download-snapshot-backup-from-leader}
+#### 第 2 步：从领导者下载快照备份 {#step-2-download-snapshot-backup-from-leader}
 
 [下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)，以便在出现任何问题时提供回退路径。
 

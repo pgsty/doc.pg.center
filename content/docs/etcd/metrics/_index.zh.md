@@ -4,7 +4,7 @@ weight: 1350
 description: 实时监控和调试指标
 icon: fa-solid fa-chart-line
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/metrics/_index.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/metrics/_index.md"
 aliases: [/etcd/metrics/]
 ---
 
@@ -41,7 +41,7 @@ etcd 使用 [Prometheus][prometheus] 进行指标报告。指标可用于实时�
 
 `leader_changes_seen_total` 统计该成员自启动以来所经历的领导者变更次数。频繁的领导权变更会显著影响 etcd 的性能，同时也表明领导者不稳定，可能是由于网络连接问题或 etcd 集群负载过高所致。
 
-`proposals_committed_total` 记录已提交的共识提案总数。如果集群运行正常，该指标应随时间持续增长。etcd 集群中多个健康成员可能在某一时刻拥有不同的已提交提案总数。这种差异可能是由于启动后正在恢复对等成员、落后于领导者，或本身是领导者而拥有最多提交记录所致。必须在集群所有成员上监控此指标；若某个成员与领导者之间持续存在较大延迟，表明该成员运行缓慢或状态异常。
+`proposals_committed_total` 记录已提交的共识提案总数。如果集群运行正常，该指标应随时间持续增长。etcd 集群中多个健康成员可能在某一时刻拥有不同的已提交提案总数。这种差异可能是由于启动后从对等成员恢复、落后于领导者，或本身是领导者而拥有最多提交记录所致。应在集群所有成员上监控此指标；若某个成员与领导者之间持续存在较大延迟，表明该成员运行缓慢或状态异常。
 
 `proposals_applied_total` 记录已应用的共识提案总数。etcd 服务器异步应用每个已提交的提案。`proposals_committed_total` 与 `proposals_applied_total` 之间的差值通常应较小（即使在高负载下也应在数千以内）。如果两者之间的差值持续增大，表明 etcd 服务器已过载。这可能发生在应用高开销查询（如大量范围查询或大型事务操作）时。
 
@@ -60,7 +60,7 @@ etcd 使用 [Prometheus][prometheus] 进行指标报告。指标可用于实时�
 | wal_fsync_duration_seconds         | WAL 调用 fsync 的延迟分布                     | 直方图    |
 | backend_commit_duration_seconds    | 后端调用 commit 的延迟分布                     | 直方图    |
 
-在 etcd 将日志条目写入磁盘并应用之前，会调用 `wal_fsync`。
+etcd 在应用日志条目之前将其持久化到磁盘时，会调用 `wal_fsync`。
 
 当 etcd 将其最近的增量快照写入磁盘时，会调用 `backend_commit`。
 
@@ -102,7 +102,7 @@ etcd 使用 [Prometheus][prometheus] 进行指标报告。指标可用于实时�
 
 快照持续时间异常高（`snapshot_save_total_duration_seconds`）表明存在磁盘问题，可能导致集群不稳定。
 
-## Prometheus 供应的指标 {#prometheus-supplied-metrics}
+## Prometheus 提供的指标 {#prometheus-supplied-metrics}
 
 Prometheus 客户端库在 `go` 和 `process` 命名空间下提供了一系列指标。其中有一些尤为值得关注。
 
@@ -112,7 +112,7 @@ Prometheus 客户端库在 `go` 和 `process` 命名空间下提供了一系列�
 | process_max_fds                   | 最大打开文件描述符数量。                   | 仪表         |
 
 > [!NOTE]
-> 当前版本不支持在 Darwin（macOS）系统上使用进程指标，例如 `process_open_fds` 和 `process_max_fds`。
+> 目前不支持在 Darwin（macOS）系统上使用进程指标，例如 `process_open_fds` 和 `process_max_fds`。
 
 高文件描述符（`process_open_fds`）使用率（即接近进程的文件描述符限制，`process_max_fds`）表明可能存在文件描述符耗尽问题。若文件描述符耗尽，etcd 可能因无法创建新的 WAL 文件而发生崩溃。
 

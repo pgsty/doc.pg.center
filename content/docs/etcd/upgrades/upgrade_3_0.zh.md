@@ -3,7 +3,7 @@ title: 将 etcd 从 2.3 升级到 3.0
 weight: 6900
 description: 升级 etcd 2.3 至 3.0 的流程、检查清单与注意事项
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_0.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_0.md"
 aliases: [/etcd/upgrades/upgrade_3_0/]
 ---
 
@@ -39,7 +39,7 @@ aliases: [/etcd/upgrades/upgrade_3_0/]
 
 当集群总数据量超过 50MB 时，新升级的成员可能需要最多 2 分钟才能追上现有集群。可通过检查最近快照的大小来估算总数据量。换句话说，为确保安全，应在升级每个成员之间至少等待 2 分钟。
 
-对于数据总量更大（例如 100MB 或更多）的情况，此一次性操作可能需要更长时间。对于规模达到此类程度的大型 etcd 集群，系统管理员可在升级前自由联系 [etcd 团队][etcd-contact]，我们将乐意提供升级流程方面的建议。
+对于数据总量更大（100MB 或更多）的情况，此一次性操作可能需要更长时间。对于规模达到此类程度的大型 etcd 集群，系统管理员可在升级前自由联系 [etcd 团队][etcd-contact]，我们将乐意提供升级流程方面的建议。
 
 #### 降级 {#downgrade}
 
@@ -83,7 +83,7 @@ $ etcdctl backup \
       --backup-dir /tmp/etcd_backup
 ```
 
-#### 3. 插入 etcd v3.0 二进制文件并启动新 etcd 进程 {#3-drop-in-etcd-v30-binary-and-start-the-new-etcd-process}
+#### 3. 替换为 etcd v3.0 二进制文件并启动新 etcd 进程 {#3-drop-in-etcd-v30-binary-and-start-the-new-etcd-process}
 
 新版 v3.0 etcd 将向集群发布其信息：
 
@@ -91,7 +91,7 @@ $ etcdctl backup \
 09:58:25.938673 I | etcdserver: published {Name:infra1 ClientURLs:[http://localhost:12379]} to cluster 524400597fb1d5f6
 ```
 
-验证每个成员以及整个集群在使用新的 v3.0 etcd 二进制文件后是否均恢复正常状态：
+先验证每个成员，再验证整个集群在使用新的 v3.0 etcd 二进制文件后是否均恢复正常状态：
 
 ```
 $ etcdctl cluster-health

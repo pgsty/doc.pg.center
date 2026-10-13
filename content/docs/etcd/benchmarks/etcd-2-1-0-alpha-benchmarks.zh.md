@@ -1,9 +1,9 @@
 ---
 title: etcd v2.1.0 基准测试
 weight: 5875
-description: etcd 2.1.0 的性能指标
+description: etcd v2.1.0 的性能指标
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/benchmarks/etcd-2-1-0-alpha-benchmarks.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/benchmarks/etcd-2-1-0-alpha-benchmarks.md"
 aliases: [/etcd/benchmarks/etcd-2-1-0-alpha-benchmarks/]
 ---
 
@@ -23,7 +23,7 @@ GCE n1-highcpu-2 机器类型
 
 ## 测试 {#testing}
 
-引导另一台机器，并使用 [hey HTTP 压力测试工具][hey] 向每个 etcd 成员发送请求。请参阅 [基准测试黑客指南][hack-benchmark] 以获取详细操作说明。
+引导另一台机器，并使用 [hey HTTP 压力测试工具][hey] 向每个 etcd 成员发送请求。请参阅 [基准测试操作指南][hack-benchmark] 以获取详细操作说明。
 
 ## 性能 {#performance}
 
@@ -42,7 +42,7 @@ GCE n1-highcpu-2 机器类型
 | 256            | 64         | 所有服务器       | 24800    | 3.9                      |
 | 256            | 256        | 所有服务器       | 33000    | 11.5                     |
 
-### 编写一个键 {#writing-one-single-key}
+### 写入单个键 {#writing-one-single-key}
 
 | 键大小（字节） | 客户端数量 | 目标 etcd 服务器 | 写入 QPS | 第 90 百分位延迟（毫秒） |
 |----------------|------------|------------------|----------|--------------------------|

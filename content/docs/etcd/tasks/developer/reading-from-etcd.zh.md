@@ -3,7 +3,7 @@ title: 从 etcd 中读取
 description: 在集群中读取值
 weight: 200
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/developer/reading-from-etcd.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/developer/reading-from-etcd.md"
 aliases: [/etcd/tasks/developer/reading-from-etcd/]
 ---
 
@@ -36,4 +36,4 @@ $ etcdctl --endpoints=$ENDPOINTS --write-out="json" get foo
 $
 ```
 
-其中 `write-out="json"` 会导致值以 JSON 格式输出（注意：键不会被返回）。
+其中 `write-out="json"` 返回 JSON 输出，键和值均以 base64 编码。

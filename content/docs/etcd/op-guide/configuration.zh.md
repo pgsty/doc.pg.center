@@ -3,14 +3,14 @@ title: 配置选项
 weight: 4050
 description: etcd 配置文件、命令行标志和环境变量
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/configuration.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/configuration.md"
 aliases: [/etcd/op-guide/configuration/]
 ---
 
 可以通过以下方式配置 etcd：
 
 - **[命令行标志](#command-line-flags)**
-- **环境变量**：每个标志都有一个对应的环境变量，其名称与标志相同，但前缀为 `ETCD_`，并以全大写和 [蛇形命名法][] 格式化。例如，`--some-flag` 对应 `ETCD_SOME_FLAG`。
+- **环境变量**：每个标志都有一个对应的环境变量，其名称与标志相同，但前缀为 `ETCD_`，并以全大写和 [蛇形命名法][snake case] 格式化。例如，`--some-flag` 对应 `ETCD_SOME_FLAG`。
 - **[配置文件](#configuration-file)**
 
 > [!WARNING]
@@ -23,7 +23,10 @@ aliases: [/etcd/op-guide/configuration/]
 
 以下以 `--flag-name DEFAULT_VALUE` 格式展示命令行标志。
 
-以下提供的标志列表可能因持续开发变更而未能保持最新。如需获取最新可用的标志，请运行 `etcd --help` 或查阅 [etcd help][]。
+> [!NOTE]
+> 本导入参考文档保留了部分旧的 v2 选项，以提供迁移背景。在 etcd 3.7 中，`--enable-v2` 和 v2 代理模式均不可用。已弃用的 `--v2-deprecation` 标志会忽略用户输入并强制使用默认值。在使用旧选项前，请查阅所安装版本的 `etcd --help`。
+
+以下提供的标志列表可能因持续开发变更而未能保持最新。如需获取最新可用的标志，请运行 `etcd --help` 或查阅 [etcd 帮助][etcd help]。
 
 > [!NOTE]
 >   **注意**：有关 v3.7 版本新增、更新和已弃用标志的详细信息，请参阅 [CHANGELOG-3.7.md][changelog]。
@@ -83,7 +86,7 @@ aliases: [/etcd/op-guide/configuration/]
   Enable to set socket option SO_REUSEADDR on listeners allowing binding to an address in TIME_WAIT state.
 ```
 
-### 集群管理 {#clustering}
+### 集群 {#clustering}
 
 ```text
 --initial-advertise-peer-urls 'http://localhost:2380'
@@ -179,7 +182,7 @@ aliases: [/etcd/op-guide/configuration/]
   Maximum TLS version supported by etcd (empty will be auto-populated by Go).
 ```
 
-### 认证 {#auth}
+### 身份认证 {#auth}
 
 ```text
 --auth-token 'simple'
@@ -242,7 +245,7 @@ aliases: [/etcd/op-guide/configuration/]
 ### v2 代理 {#v2-proxy}
 
 > [!WARNING]
-> **注意**：标志位将在 v3.6 中被弃用。
+> v2 代理已在 v3.7 之前移除。以下标志仅保留为历史迁移参考，不得传递给 etcd v3.7 服务器。
 
 ```text
 --proxy 'off'
@@ -332,7 +335,7 @@ aliases: [/etcd/op-guide/configuration/]
 etcd 配置文件由一个 YAML 映射组成，其键为命令行标志名称，值为标志的取值。
 为使用此文件，请将文件路径作为 `--config-file` 标志的值或 `ETCD_CONFIG_FILE` 环境变量的值指定。
 
-有关示例，请参见 [etcd.conf.yml 样本][]。
+有关示例，请参见 [etcd.conf.yml 示例][etcd.conf.yml sample]。
 
 > [!NOTE]
 > 诸如 `--grpc-keepalive-min-time`、`--grpc-keepalive-interval`、`--grpc-keepalive-timeout`、`--backend-batch-interval`、`--corrupt-check-time`、`--compact-hash-check-time`、`--compaction-sleep-interval`、`--watch-progress-notify-interval`、`--warning-apply-duration`、`--warning-unary-request-duration` 及 `--downgrade-check-time` 等持续时间字段在作为命令行标志传入时可接受人类可读的字符串（例如 `10m`、`5s`），但在配置文件中仅接受 **以纳秒表示的整数值**。这是 [Go 标准库的一个已知限制](https://github.com/golang/go/issues/10275)，其中 `time.Duration` 被反序列化为普通整数。

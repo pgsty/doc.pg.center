@@ -3,7 +3,7 @@ title: 维护
 weight: 4450
 description: 周期性集群维护指南
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/maintenance.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/maintenance.md"
 aliases: [/etcd/op-guide/maintenance/]
 ---
 
@@ -19,9 +19,9 @@ etcd 集群需要定期维护以保持可靠性。根据 etcd 应用的需求，
 
 较高的 `--snapshot-count` 会在生成快照前将更多 Raft 条目保留在内存中，从而导致 [内存使用量持续较高](https://github.com/kubernetes/kubernetes/issues/60589#issuecomment-371977156)。由于领导者会更长时间保留最新的 Raft 条目，缓慢的跟随者有更多时间在领导者生成快照前完成追赶。`--snapshot-count` 是较高内存使用与缓慢跟随者更高可用性之间的权衡。
 
-自 v3.2 起，`--snapshot-count` 的默认值已 [从 10,000 改为 100,000](https://github.com/etcd-io/etcd/pull/7160)。
+在 v3.2 中，`--snapshot-count` 的默认值[从 10,000 改为 100,000](https://github.com/etcd-io/etcd/pull/7160)。在 v3.7.0 中，默认值为 10,000。
 
-从性能角度而言，`--snapshot-count` 超过 100,000 可能会影响写入吞吐量。内存中对象数量过多会减慢 [Go GC 标记阶段 `runtime.scanobject`](https://golang.org/src/runtime/mgc.go)，且内存回收不频繁会导致分配变慢。性能表现因工作负载和系统环境而异。然而，通常情况下，压缩过于频繁会影响集群可用性及写入吞吐量；压缩过于稀疏同样有害，会向 Go 垃圾回收器施加过大压力。更多研究结果请参见 [Understanding Performance Aspects of etcd and Raft](https://www.slideshare.net/mitakeh/understanding-performance-aspects-of-etcd-and-raft)。
+从性能角度而言，`--snapshot-count` 超过 100,000 可能会影响写入吞吐量。内存中对象数量过多会减慢 [Go GC 标记阶段 `runtime.scanobject`](https://golang.org/src/runtime/mgc.go)，且内存回收不频繁会导致分配变慢。性能表现因工作负载和系统环境而异。然而，通常情况下，压缩过于频繁会影响集群可用性及写入吞吐量；压缩过于稀疏同样有害，会向 Go 垃圾回收器施加过大压力。更多研究结果请参见 [理解 etcd 与 Raft 的性能特性](https://www.slideshare.net/mitakeh/understanding-performance-aspects-of-etcd-and-raft)。
 
 ## 历史压缩：v3 API 键值数据库 {#history-compaction-v3-api-key-value-database}
 

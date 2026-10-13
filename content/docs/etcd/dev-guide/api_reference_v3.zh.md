@@ -3,7 +3,7 @@ title: API 参考
 weight: 3800
 description: "etcd v3 API 完整参考"
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/api_reference_v3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/api_reference_v3.md"
 aliases: [/etcd/dev-guide/api_reference_v3/]
 ---
 
@@ -22,7 +22,7 @@ aliases: [/etcd/dev-guide/api_reference_v3/]
 | UserList | AuthUserListRequest | AuthUserListResponse | UserList 获取所有用户的列表。 |
 | UserDelete | AuthUserDeleteRequest | AuthUserDeleteResponse | UserDelete 删除指定用户。 |
 | UserChangePassword | AuthUserChangePasswordRequest | AuthUserChangePasswordResponse | UserChangePassword 更改指定用户的密码。 |
-| UserGrantRole | AuthUserGrantRoleRequest | AuthUserGrantRoleResponse | UserGrant 为指定用户授予角色。 |
+| UserGrantRole | AuthUserGrantRoleRequest | AuthUserGrantRoleResponse | UserGrantRole 为指定用户授予角色。 |
 | UserRevokeRole | AuthUserRevokeRoleRequest | AuthUserRevokeRoleResponse | UserRevokeRole 撤销指定用户的指定角色。 |
 | RoleAdd | AuthRoleAddRequest | AuthRoleAddResponse | RoleAdd 添加新角色。角色名不能为空。 |
 | RoleGet | AuthRoleGetRequest | AuthRoleGetResponse | RoleGet 获取角色详细信息。 |
@@ -65,14 +65,14 @@ aliases: [/etcd/dev-guide/api_reference_v3/]
 
 | 方法 | 请求类型 | 响应类型 | 描述 |
 | ------ | ------------ | ------------- | ----------- |
-| Alarm | AlarmRequest | AlarmResponse | 告警用于激活、停用和查询与集群健康状态相关的告警。 |
-| Status | StatusRequest | StatusResponse | 状态用于获取成员的状态。 |
-| Defragment | DefragmentRequest | DefragmentResponse | 碎片整理用于对成员的后端数据库进行碎片整理，以恢复存储空间。 |
-| Hash | HashRequest | HashResponse | 哈希用于计算整个后端键空间的哈希值，包括存储中的键、租约及其他桶。此功能仅用于测试！请勿在存在持续事务的生产环境中依赖此操作，因为哈希操作不持有 MVCC 锁。如需对“键”桶进行一致性检查，请改用“HashKV” API。 |
-| HashKV | HashKVRequest | HashKVResponse | 哈希键用于计算指定修订版本之前所有 MVCC 键的哈希值。它仅遍历后端存储中的“键”桶。 |
-| Snapshot | SnapshotRequest | SnapshotResponse | 快照通过流将成员的整个后端数据发送给客户端。 |
-| MoveLeader | MoveLeaderRequest | MoveLeaderResponse | 转移领导者用于请求当前领导者将其领导权转移给指定接收节点。 |
-| Downgrade | DowngradeRequest | DowngradeResponse | 降级用于请求降级、验证可行性或取消集群版本的降级操作。自 etcd 3.5 起支持。 |
+| Alarm | AlarmRequest | AlarmResponse | Alarm 用于激活、停用和查询与集群健康状态相关的告警。 |
+| Status | StatusRequest | StatusResponse | Status 用于获取成员的状态。 |
+| Defragment | DefragmentRequest | DefragmentResponse | Defragment 用于对成员的后端数据库进行碎片整理，以恢复存储空间。 |
+| Hash | HashRequest | HashResponse | Hash 用于计算整个后端键空间的哈希值，包括存储中的 key、lease 及其他桶。此功能仅用于测试！请勿在存在持续事务的生产环境中依赖此操作，因为哈希操作不持有 MVCC 锁。如需对“key”桶进行一致性检查，请改用“HashKV” API。 |
+| HashKV | HashKVRequest | HashKVResponse | HashKV 用于计算截至给定修订版本的所有 MVCC 键的哈希值。它仅遍历后端存储中的“key”桶。 |
+| Snapshot | SnapshotRequest | SnapshotResponse | Snapshot 通过流将成员整个后端的快照发送给客户端。 |
+| MoveLeader | MoveLeaderRequest | MoveLeaderResponse | MoveLeader 用于请求当前领导者将其领导权转移给接收方。 |
+| Downgrade | DowngradeRequest | DowngradeResponse | Downgrade 用于请求对集群版本执行降级、验证可行性或取消降级。自 etcd 3.5 起支持。 |
 
 ##### 服务 `Watch` (api/etcdserverpb/rpc.proto) {#service-watch-apietcdserverpbrpcproto}
 
@@ -93,7 +93,7 @@ aliases: [/etcd/dev-guide/api_reference_v3/]
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
-| action | action 表示要发出的告警请求类型。action 可以是获取告警状态、激活告警，或停用已触发的告警。 | AlarmAction |
+| action | action 表示要发出的告警请求类型。action 可以是 GET（获取告警状态）、ACTIVATE（激活告警），或 DEACTIVATE（停用已触发的告警）。 | AlarmAction |
 | memberID | memberID 表示与告警关联的成员 ID。如果 memberID 为 0，则该告警请求涵盖所有成员。 | uint64 |
 | alarm | alarm 表示本次请求所考虑的告警类型。 | AlarmType |
 
@@ -171,7 +171,7 @@ aliases: [/etcd/dev-guide/api_reference_v3/]
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
 | header |  | ResponseHeader |
-| perm |  | (切片) authpb.Permission |
+| perm |  | (slice of) authpb.Permission |
 
 ##### 消息 `AuthRoleGrantPermissionRequest` (api/etcdserverpb/rpc.proto) {#message-authrolegrantpermissionrequest-apietcdserverpbrpcproto}
 
@@ -377,7 +377,7 @@ CompactionRequest 对键值存储执行压缩，直至指定的修订版本。�
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
-| result | result 是本次比较操作的逻辑比较结果。 | CompareResult |
+| result | result 是本次比较采用的逻辑比较运算。 | CompareResult |
 | target | target 是用于比较的键值字段。 | CompareTarget |
 | key | key 是比较操作的主体键。 | bytes |
 | target_union |  | oneof |
@@ -406,8 +406,8 @@ CompactionRequest 对键值存储执行压缩，直至指定的修订版本。�
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
-| key | 键是范围中要删除的第一个键。 | bytes |
-| range_end | range_end 是范围 [key, range_end) 中最后一个要删除的键的下一个键。若未指定 range_end，则范围仅包含 key 参数。若 range_end 比给定键大一位，则范围包含所有以该键为前缀的键。若 range_end 为 '\0'，则范围包含所有大于或等于 key 参数的键。 | bytes |
+| key | key 是范围中要删除的第一个键。 | bytes |
+| range_end | range_end 是范围 [key, range_end) 中最后一个要删除的键的下一个键。若未指定 range_end，则范围仅包含 key 参数。若 range_end 为给定键加一，则范围包含所有以该键为前缀的键。若 range_end 为 '\0'，则范围包含所有大于或等于 key 参数的键。 | bytes |
 | prev_kv | 若设置 prev_kv，etcd 会在删除前获取对应的键值对。删除响应中将返回先前的键值对。 | bool |
 
 ##### 消息 `DeleteRangeResponse` (api/etcdserverpb/rpc.proto) {#message-deleterangeresponse-apietcdserverpbrpcproto}
@@ -456,7 +456,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
-| revision | 修订版本是哈希操作对应的键值存储修订版本。 | int64 |
+| revision | revision 是哈希操作对应的键值存储修订版本。 | int64 |
 
 ##### 消息 `HashKVResponse` (api/etcdserverpb/rpc.proto) {#message-hashkvresponse-apietcdserverpbrpcproto}
 
@@ -464,7 +464,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
-| hash | hash 是响应成员在指定修订版本前的 MVCC 键计算得出的哈希值。 | uint32 |
+| hash | hash 是根据响应成员截至给定修订版本的 MVCC 键计算得出的哈希值。 | uint32 |
 | compact_revision | compact_revision 是 hash 开始时键值存储的压缩修订版本。 | int64 |
 | hash_revision | hash_revision 是哈希计算所覆盖的修订版本。 | int64 |
 
@@ -487,7 +487,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
-| ID | ID 是要检查点的租约 ID。 | int64 |
+| ID | ID 是要对其执行检查点操作的租约 ID。 | int64 |
 | remaining_TTL | remaining_TTL 是租约到期前剩余的时间。 | int64 |
 
 ##### 消息 `LeaseCheckpointRequest` (api/etcdserverpb/rpc.proto) {#message-leasecheckpointrequest-apietcdserverpbrpcproto}
@@ -509,7 +509,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
-| TTL | TTL 是建议的存活时间（秒）。过期的租约将返回 -1. | int64 |
+| TTL | TTL 是建议的生存时间（秒）。过期的租约将返回 -1。 | int64 |
 | ID | ID 是租约请求的 ID。若 ID 设置为 0，则由租约发放方选择 ID。 | int64 |
 
 ##### 消息 `LeaseGrantResponse` (api/etcdserverpb/rpc.proto) {#message-leasegrantresponse-apietcdserverpbrpcproto}
@@ -519,7 +519,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | ID | ID 是授予租约的租约 ID。 | int64 |
-| TTL | TTL 是服务器选定的租约存活时间（秒）。 | int64 |
+| TTL | TTL 是服务器选定的租约生存时间（秒）。 | int64 |
 | error |  | string |
 
 ##### 消息 `LeaseKeepAliveRequest` (api/etcdserverpb/rpc.proto) {#message-leasekeepaliverequest-apietcdserverpbrpcproto}
@@ -527,7 +527,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
-| ID | ID 是要保持保活的租约的租约 ID。 | int64 |
+| ID | ID 是要保持有效的租约的租约 ID。 | int64 |
 
 ##### 消息 `LeaseKeepAliveResponse` (api/etcdserverpb/rpc.proto) {#message-leasekeepaliveresponse-apietcdserverpbrpcproto}
 
@@ -536,7 +536,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | ID | ID 是保活请求中提供的租约 ID。 | int64 |
-| TTL | TTL 是租约的新存活时间。 | int64 |
+| TTL | TTL 是租约的新生存时间。 | int64 |
 
 ##### 消息 `LeaseLeasesRequest` (api/etcdserverpb/rpc.proto) {#message-leaseleasesrequest-apietcdserverpbrpcproto}
 
@@ -588,9 +588,9 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | ID | ID 是保活请求中提供的租约 ID。 | int64 |
-| TTL | TTL 是租约剩余的有效时间（秒）；租约将在不超过 TTL+1 秒内过期。 | int64 |
-| grantedTTL | GrantedTTL 是租约创建或续期时授予的初始有效时间（秒）。 | int64 |
-| keys | Keys 是附加到该租约的键列表。 | (slice of) bytes |
+| TTL | TTL 是租约剩余的生存时间（秒）；租约将在不到 TTL+1 秒内过期。 | int64 |
+| grantedTTL | GrantedTTL 是租约创建或续期时初始授予的生存时间（秒）。 | int64 |
+| keys | keys 是附加到该租约的键列表。 | (slice of) bytes |
 
 ##### 消息 `Member` (api/etcdserverpb/rpc.proto) {#message-member-apietcdserverpbrpcproto}
 
@@ -700,7 +700,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
-| key | key 是要存入键值对存储的键，以字节形式表示。 | bytes |
+| key | key 是要存入键值存储的键，以字节形式表示。 | bytes |
 | value | value 是要与键关联的值，以字节形式表示。 | bytes |
 | lease | lease 是要与键关联的租约 ID。租约值为 0 表示无租约。 | int64 |
 | prev_kv | 若设置 prev_kv，etcd 在修改前获取该键的先前键值对。先前的键值对将在 put 响应中返回。 | bool |
@@ -726,7 +726,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | revision | revision 是用于范围请求的键值存储的时间点。若 revision 小于或等于零，则范围针对最新的键值存储。若该修订版本已被压缩，则返回 ErrCompacted 作为响应。 | int64 |
 | sort_order | sort_order 是返回结果排序的顺序。 | SortOrder |
 | sort_target | sort_target 是用于排序的键值字段。 | SortTarget |
-| serializable | serializable 将范围请求设置为使用可序列化成员本地读取。范围请求默认为线性一致；线性一致请求的延迟较高、吞吐量较低，但反映集群当前的共识状态。为获得更好性能，可接受可能的陈旧读取，可序列化范围请求在本地服务，无需与其他节点达成共识。 | bool |
+| serializable | serializable 将范围请求设置为使用可串行化的成员本地读取。范围请求默认为线性一致；线性一致请求的延迟较高、吞吐量较低，但反映集群当前的共识状态。为获得更好性能，以可能发生陈旧读取为代价，可串行化范围请求在本地提供服务，无需与集群中的其他节点达成共识。 | bool |
 | keys_only | keys_only 为真时，仅返回键而不返回值。 | bool |
 | count_only | count_only 为真时，仅返回范围内键的数量。 | bool |
 | min_mod_revision | min_mod_revision 是返回键修改修订版本的下界；所有修改修订版本较小的键将被过滤掉。 | int64 |
@@ -770,7 +770,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
-| response | response 是事务返回的响应类型集合。 | oneof |
+| response | response 是事务返回的响应类型的联合类型。 | oneof |
 | response_range |  | RangeResponse |
 | response_put |  | PutResponse |
 | response_delete_range |  | DeleteRangeResponse |
@@ -790,7 +790,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | header | header 包含当前键值存储的信息。快照流中的第一个 header 指示快照的时间点。 | ResponseHeader |
 | remaining_bytes | remaining_bytes 表示在本消息之后还需发送的 blob 字节数。 | uint64 |
 | blob | blob 包含快照流中的下一个快照数据块。 | bytes |
-| version | 创建快照的本地服务器版本。在运行不同版本二进制文件的集群中，各集群可能返回不同结果。用于告知恢复快照时应使用的 etcd 服务器版本。 | string |
+| version | 快照中记录的存储模式（schema）版本。该版本从成员的本地后端读取，可能与其二进制版本不同。用于指明恢复快照时必须支持的 etcd 存储版本。 | string |
 
 ##### 消息 `StatusRequest` (api/etcdserverpb/rpc.proto) {#message-statusrequest-apietcdserverpbrpcproto}
 
@@ -804,7 +804,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
-| version | version 是响应成员所使用的集群协议版本。 | string |
+| version | version 是响应 etcd 成员的二进制版本。存储模式（schema）版本会在 storageVersion 中单独报告。 | string |
 | dbSize | dbSize 是响应成员后端数据库实际分配的大小，单位为字节。 | int64 |
 | leader | leader 是响应成员认为当前的领导者成员 ID。 | uint64 |
 | raftIndex | raftIndex 是响应成员当前 Raft 已提交索引。 | uint64 |
@@ -818,8 +818,6 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | downgradeInfo | downgradeInfo 表示是否存在降级过程。 | DowngradeInfo |
 
 ##### 消息 `TxnRequest` (api/etcdserverpb/rpc.proto) {#message-txnrequest-apietcdserverpbrpcproto}
-
-MultiOp 原语
 
 源自 Google PaxosDB 论文：我们的实现基于一种强大的原语，称为 MultiOp。除迭代外，所有数据库操作均通过一次 MultiOp 调用实现。MultiOp 以原子方式应用，包含三个组成部分：1. 一组称为 guard 的测试。guard 中的每个测试检查数据库中的单个条目。测试可检查值是否存在或不存在，或与给定值进行比较。guard 中的两个不同测试可作用于数据库中的同一或不同条目。所有测试均被应用，MultiOp 返回测试结果。若所有测试均为真，则执行 t op（参见下文第 2 项），否则执行 f op（参见下文第 3 项）。2. 一组称为 t op 的数据库操作。列表中的每个操作为插入、删除或查找操作，且作用于单个数据库条目。列表中的两个不同操作可作用于数据库中的同一或不同条目。当 guard 求值为真时执行这些操作。3. 一组称为 f op 的数据库操作。与 t op 类似，但在 guard 求值为假时执行。
 
@@ -837,7 +835,7 @@ MultiOp 原语
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | succeeded | 如果 compare 的评估结果为 true，则 succeeded 设置为 true；否则为 false。 | bool |
-| responses | responses 是一个响应列表，对应于当 succeeded 为 true 时执行成功的结果，或当 succeeded 为 false 时执行失败的结果。 | (slice of) ResponseOp |
+| responses | responses 是一个响应列表，对应于当 succeeded 为 true 时执行 success 请求列表的结果，或当 succeeded 为 false 时执行 failure 请求列表的结果。 | (slice of) ResponseOp |
 
 ##### 消息 `WatchCancelRequest` (api/etcdserverpb/rpc.proto) {#message-watchcancelrequest-apietcdserverpbrpcproto}
 
@@ -852,11 +850,11 @@ MultiOp 原语
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | key | key 是要监听的键。 | bytes |
-| range_end | range_end 是要监听的范围 [key, range_end) 的结束位置。若未提供 range_end，则仅监听 key 参数指定的键。若 range_end 等于 '\0'，则监听所有大于或等于 key 参数的键。若 range_end 比给定键大一位，则监听所有具有该前缀（即给定键）的键。 | bytes |
+| range_end | range_end 是要监听的范围 [key, range_end) 的结束位置。若未提供 range_end，则仅监听 key 参数指定的键。若 range_end 等于 '\0'，则监听所有大于或等于 key 参数的键。若 range_end 为给定键加一，则监听所有具有该前缀（即给定键）的键。 | bytes |
 | start_revision | start_revision 是可选的监听起始修订版本（包含）。未指定 start_revision 表示“现在”。 | int64 |
-| progress_notify | progress_notify 设置后，若无新事件，etcd 服务器将定期向新监听器发送不包含事件的 WatchResponse。此功能在客户端希望从最近已知修订版本恢复断开的监听器时非常有用。etcd 服务器可根据当前负载决定通知发送的频率。 | bool |
+| progress_notify | progress_notify 设置后，若无近期事件，etcd 服务器将定期向新监听器发送不包含事件的 WatchResponse。此功能在客户端希望从最近已知修订版本恢复断开的监听器时非常有用。etcd 服务器可根据当前负载决定通知发送的频率。 | bool |
 | filters | filters 用于在服务器端过滤事件，再发送给监听器。 | (slice of) FilterType |
-| prev_kv | 若设置 prev_kv，监听器将在事件发生前获取对应的前一个 KV。若前一个 KV 已被压缩，则不会返回任何内容。 | bool |
+| prev_kv | 若设置 prev_kv，创建的监听器会获取事件发生前的 KV。若前一个 KV 已被压缩，则不会返回任何内容。 | bool |
 | watch_id | 若提供非零的 watch_id，该 ID 将被分配给此监听器。由于在 etcd 中创建监听器并非同步操作，因此可通过该 ID 确保在同一流上创建多个监听器时顺序正确。若在流上已存在相同 ID 的监听器，则创建操作将返回错误。 | int64 |
 | fragment | fragment 启用将大修订版本拆分为多个监听响应。 | bool |
 
@@ -937,20 +935,20 @@ MultiOp 原语
 
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
-| permType |  | 类型 |
+| permType |  | Type |
 | key |  | bytes |
 | range_end |  | bytes |
 
-##### message `Role` (api/authpb/auth.proto) {#message-role-apiauthpbauthproto}
+##### 消息 `Role` (api/authpb/auth.proto) {#message-role-apiauthpbauthproto}
 
 角色是 authRoles 存储桶中的单个条目。
 
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
 | name |  | bytes |
-| keyPermission |  | (切片) Permission |
+| keyPermission |  | (slice of) Permission |
 
-##### message `User` (api/authpb/auth.proto) {#message-user-apiauthpbauthproto}
+##### 消息 `User` (api/authpb/auth.proto) {#message-user-apiauthpbauthproto}
 
 用户是存储桶 authUsers 中的单个条目
 
@@ -961,7 +959,7 @@ MultiOp 原语
 | roles |  | (slice of) string |
 | options |  | UserAddOptions |
 
-##### message `UserAddOptions` (api/authpb/auth.proto) {#message-useraddoptions-apiauthpbauthproto}
+##### 消息 `UserAddOptions` (api/authpb/auth.proto) {#message-useraddoptions-apiauthpbauthproto}
 
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |

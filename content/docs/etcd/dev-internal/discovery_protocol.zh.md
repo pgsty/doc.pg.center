@@ -3,7 +3,7 @@ title: 发现服务协议
 weight: 1500
 description: 在集群引导阶段发现集群其他成员
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-internal/discovery_protocol.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-internal/discovery_protocol.md"
 aliases: [/etcd/dev-internal/discovery_protocol/]
 ---
 
@@ -42,11 +42,11 @@ UUID=$(uuidgen)
 etcdctl --endpoints=http://example.com:2379 put /_etcd/registry/${UUID}/_config/size ${cluster_size}
 ```
 
-通常，集群大小为 3、5 或 7。请参阅 [optimal cluster size][cluster-size] 以获取更多详细信息。
+通常，集群大小为 3、5 或 7。请参阅[最佳集群规模][cluster-size]以获取更多详细信息。
 
 ### 启动 etcd 进程 {#bringing-up-etcd-processes}
 
-将发现令牌 `${UUID}` 设置为 `--discovery-token` 标志，并将支持发现服务的 etcd 集群端点设置为 `--discovery-endpoints` 标志。这将启用 v3 发现以引导 etcd 集群。
+将发现令牌 `${UUID}` 设置为 `--discovery-token` 标志，并将支持发现服务的 etcd 集群端点设置为 `--discovery-endpoints` 标志。这将启用 v3 发现机制来引导 etcd 集群。
 
 如果给定 `--discovery-token` 和 `--discovery-endpoints` 标志，每个 etcd 进程将内部遵循以下步骤。
 
@@ -65,7 +65,7 @@ etcdctl --endpoints=http://example.com:2379 put /_etcd/registry/${UUID}/_config/
 --discovery-password
 ```
 
-默认的超时时间值也可通过以下标志进行修改，其使用方式与使用 `etcdctl` 与 etcd 集群通信时完全相同。
+默认的时间或超时值也可通过以下标志进行修改，其使用方式与使用 `etcdctl` 与 etcd 集群通信时完全相同。
 ```
 --discovery-dial-timeout
 --discovery-request-timeout

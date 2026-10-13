@@ -3,7 +3,7 @@ title: 支持的平台
 weight: 4800
 description: etcd 支持常见架构与操作系统
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/supported-platform.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/supported-platform.md"
 aliases: [/etcd/op-guide/supported-platform/]
 ---
 
@@ -11,7 +11,7 @@ aliases: [/etcd/op-guide/supported-platform/]
 
 etcd 可在不同平台上运行，但其提供的保证取决于平台的支持级别：
 
-- **Tier 1**：由 [etcd 维护者][] 完全支持；etcd 保证通过所有测试，包括功能测试和健壮性测试。
+- **Tier 1**：由 [etcd 维护者][etcd maintainers] 完全支持；etcd 保证通过所有测试，包括功能测试和健壮性测试。
 - **Tier 2**：etcd 保证通过集成测试和端到端测试，但不保证通过功能测试或健壮性测试。
 - **Tier 3**：etcd 保证可构建，可能仅进行轻度测试（或未测试），因此应视为 _不稳定_。
 
@@ -21,8 +21,8 @@ etcd 可在不同平台上运行，但其提供的保证取决于平台的支持
 
 | 架构 | 操作系统 | 支持层级 | 维护者 |
 |:------------:|:----------------:|:------------:|:--------------------:|
-| AMD64        | Linux            |      1       | [etcd maintainers][] |
-| ARM64        | Linux            |      1       | [etcd maintainers][] |
+| AMD64        | Linux            |      1       | [etcd 维护者][etcd maintainers] |
+| ARM64        | Linux            |      1       | [etcd 维护者][etcd maintainers] |
 | AMD64        | Darwin           |      3       |                      |
 | ARM64        | Darwin           |      3       |                      |
 | AMD64        | Windows          |      3       |                      |
@@ -42,7 +42,7 @@ etcd 可在不同平台上运行，但其提供的保证取决于平台的支持
 | 集成与端到端测试通过 | &check; | &check; |        |
 | 健壮性测试通过 | &check; |        |        |
 
-有关为 ARM64 设置二级 CI 的示例，请参见 [etcd PR #12928][]。
+有关为 ARM64 设置 Tier 2 CI 的示例，请参见 [etcd PR #12928][]。
 
 ## 不支持的平台 {#unsupported-platforms}
 

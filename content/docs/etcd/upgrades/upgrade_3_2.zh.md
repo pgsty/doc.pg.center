@@ -3,7 +3,7 @@ title: 将 etcd 从 3.1 升级到 3.2
 weight: 6800
 description: 升级 etcd 3.1 至 3.2 的流程、检查清单与注意事项
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_2.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_2.md"
 aliases: [/etcd/upgrades/upgrade_3_2/]
 ---
 
@@ -19,9 +19,9 @@ aliases: [/etcd/upgrades/upgrade_3_2/]
 > [!WARNING]
 > 从 [没有 v3 数据的 v2 迁移](https://github.com/etcd-io/etcd/issues/9480)时，如果 etcd 从现有快照恢复，但不存在 v3 `ETCD_DATA_DIR/member/snap/db` 文件，etcd v3.2+ 服务器会发生崩溃。这种情况出现在服务器由 v2 迁移且此前没有 v3 数据时。此限制也可防止意外丢失 v3 数据（例如 `db` 文件可能已被移动）。etcd 要求 v3 迁移后的操作必须有 v3 数据。v3.0 服务器包含 v3 数据之前，请勿升级到更新的 v3 版本。
 
-3.2 版本中的重点变更。
+3.2 版本中的重点破坏性变更。
 
-#### Changed default `snapshot-count` value {#changed-default-snapshot-count-value}
+#### 更改了默认 `snapshot-count` 值 {#changed-default-snapshot-count-value}
 
 较高的 `--snapshot-count` 会在生成快照前将更多 Raft 条目保留在内存中，从而导致 [内存使用量持续较高](https://github.com/kubernetes/kubernetes/issues/60589#issuecomment-371977156)。由于领导者会更长时间保留最新的 Raft 条目，缓慢的跟随者有更多时间在领导者生成快照前完成追赶。`--snapshot-count` 是较高内存使用与缓慢跟随者更高可用性之间的权衡。
 
@@ -35,7 +35,7 @@ aliases: [/etcd/upgrades/upgrade_3_2/]
 
 `grpclog.Logger` 已被弃用，建议改用 [`grpclog.LoggerV2`](https://github.com/grpc/grpc-go/blob/master/grpclog/loggerv2.go)。`clientv3.Logger` 现已改为 `grpclog.LoggerV2`。
 
-本文未提供内容。
+之前
 
 ```go
 import "github.com/coreos/etcd/clientv3"
@@ -56,7 +56,7 @@ clientv3.SetLogger(grpclog.NewLoggerV2(os.Stderr, os.Stderr, os.Stderr))
 
 此前，在客户端连接超时时返回 `grpc.ErrClientConnTimeout` 错误。3.2 版本改为返回 `context.DeadlineExceeded`（参见 [#8504](https://github.com/etcd-io/etcd/issues/8504)）。
 
-本文未提供内容。
+之前
 
 ```go
 // expect dial time-out on ipv4 blackhole
@@ -83,7 +83,7 @@ if err == context.DeadlineExceeded {
 
 #### 调整了最大请求大小限制（>=3.2.10） {#changed-maximum-request-size-limits-3210}
 
-3.2.10 和 3.2.11 版本允许在服务端自定义请求大小限制。从 3.2.12 版本开始，服务端和客户端均支持自定义请求大小限制。在之前的版本（v3.2.10、v3.2.11）中，客户端响应大小仅限于 4 MiB。
+3.2.10 和 3.2.11 版本允许在服务端自定义请求大小限制。从 3.2.12 版本开始，服务端和**客户端**均支持自定义请求大小限制。在之前的版本（v3.2.10、v3.2.11）中，客户端响应大小仅限于 4 MiB。
 
 服务器端请求限制可通过 `--max-request-bytes` 标志进行配置：
 
@@ -111,7 +111,7 @@ _, err := cli.Put(ctx, "foo", [LARGE VALUE...])
 err == rpctypes.ErrRequestTooLarge
 ```
 
-如果未指定，服务器端限制默认为 1.5 MiB。
+**如果未指定，服务器端限制默认为 1.5 MiB**。
 
 客户端请求限制必须根据服务器端限制进行配置。
 
@@ -152,7 +152,7 @@ _, err = cli.Get(ctx, "foo", clientv3.WithPrefix())
 err.Error() == "rpc error: code = ResourceExhausted desc = grpc: received message larger than max (5240509 vs. 3145728)"
 ```
 
-如果未指定，客户端发送限制默认为 2 MiB（1.5 MiB + gRPC 开销字节），接收限制为 `math.MaxInt32`。请参阅 [clientv3 godoc](https://pkg.go.dev/github.com/etcd-io/etcd/clientv3#Config) 获取更多详细信息。
+**如果未指定，客户端发送限制默认为 2 MiB（1.5 MiB + gRPC 开销字节），接收限制为 `math.MaxInt32`**。请参阅 [clientv3 godoc](https://pkg.go.dev/github.com/etcd-io/etcd/clientv3#Config) 获取更多详细信息。
 
 #### 更改了原始 gRPC 客户端包装器 {#changed-raw-grpc-client-wrappers}
 
@@ -181,7 +181,7 @@ err.Error() == "rpc error: code = ResourceExhausted desc = grpc: received messag
 
 此前，`clientv3.Lease.TimeToLive` API 在不存在的租约 ID 上返回 `lease.ErrLeaseNotFound`。3.2 版本改为在响应中返回 TTL=-1 且不返回错误（参见 [#7305](https://github.com/etcd-io/etcd/pull/7305)）。
 
-本文未提供内容。
+之前
 
 ```go
 // when leaseID does not exist
@@ -199,11 +199,11 @@ resp.TTL == -1
 err == nil
 ```
 
-#### 将`clientv3.NewFromConfigFile`移动到`clientv3.yaml.NewConfig` {#moved-clientv3newfromconfigfile-to-clientv3yamlnewconfig}
+#### 将 `clientv3.NewFromConfigFile` 移动到 `clientv3.yaml.NewConfig` {#moved-clientv3newfromconfigfile-to-clientv3yamlnewconfig}
 
 `clientv3.NewFromConfigFile` 已移至 `yaml.NewConfig`。
 
-本文未提供内容。
+之前
 
 ```go
 import "github.com/coreos/etcd/clientv3"
@@ -217,7 +217,7 @@ import clientv3yaml "github.com/coreos/etcd/clientv3/yaml"
 clientv3yaml.NewConfig
 ```
 
-#### Change in `--listen-peer-urls` and `--listen-client-urls` {#change-in---listen-peer-urls-and---listen-client-urls}
+#### `--listen-peer-urls` 和 `--listen-client-urls` 的变更 {#change-in---listen-peer-urls-and---listen-client-urls}
 
 3.2 现在拒绝为 `--listen-peer-urls` 和 `--listen-client-urls` 使用域名（3.1 仅输出警告），因为域名对网络接口绑定无效。请确保这些 URL 已正确格式化为 `scheme://IP:port`。
 
@@ -235,7 +235,7 @@ clientv3yaml.NewConfig
 
 在升级 etcd 之前，请务必在预发环境中测试依赖 etcd 的服务，再将升级部署到生产环境。
 
-升级前，请对 etcd 数据执行 [备份 etcd 数据](/zh/docs/etcd/op-guide/maintenance#snapshot-backup)。若升级过程中出现异常，可使用此备份将系统 [降级](#downgrade)至现有 etcd 版本。请注意，`snapshot`命令仅备份 v3 数据。如需备份 v2 数据，请参阅 [备份 v2 数据存储](https://etcd.io/docs/v2.3/admin_guide#backing-up-the-datastore)。
+升级前，请对 etcd 数据执行 [备份 etcd 数据](/zh/docs/etcd/op-guide/maintenance#snapshot-backup)。若升级过程中出现异常，可使用此备份将系统 [降级](#downgrade)至现有 etcd 版本。请注意，`snapshot` 命令仅备份 v3 数据。如需备份 v2 数据，请参阅 [备份 v2 数据存储](https://etcd.io/docs/v2.3/admin_guide#backing-up-the-datastore)。
 
 #### 混合版本 {#mixed-versions}
 
@@ -245,15 +245,15 @@ clientv3yaml.NewConfig
 
 请注意：如果集群仅包含 v3 数据且无 v2 数据，则不受此限制影响。
 
-如果集群正在服务的数据集大小超过 50MB，每个新升级的成员可能需要最多 2 分钟才能追上现有集群。请检查最近快照的大小以估算总数据量。换句话说，升级每个成员之间应至少等待 2 分钟。
+如果集群正在服务的 v2 数据集大小超过 50MB，每个新升级的成员可能需要最多 2 分钟才能追上现有集群。请检查最近快照的大小以估算总数据量。换句话说，升级每个成员之间应至少等待 2 分钟。
 
-对于数据总量更大（例如 100MB 或更多）的情况，此一次性操作可能需要更长时间。对于规模达到此类程度的大型 etcd 集群，系统管理员可在升级前自由联系 [etcd 团队][etcd-contact]，我们将乐意提供升级流程方面的建议。
+对于数据总量更大（100MB 或更多）的情况，此一次性操作可能需要更长时间。对于规模达到此类程度的大型 etcd 集群，系统管理员可在升级前自由联系 [etcd 团队][etcd-contact]，我们将乐意提供升级流程方面的建议。
 
 #### 降级 {#downgrade}
 
 如果所有成员均已升级至 v3.2 版本，集群将升级至 v3.2 版本，从该完成状态回退**不可行**。然而，若任一成员仍为 v3.1 版本，则集群及其操作仍保持 "v3.1" 状态，此时可从该混合集群状态恢复至所有成员均使用 v3.1 etcd 二进制文件。
 
-请注意，务必对所有 etcd 成员的数据目录 [backup the data directory](/zh/docs/etcd/op-guide/maintenance#snapshot-backup) 进行备份，以确保在集群完全升级后仍可执行降级操作。
+请注意，务必 [备份](/zh/docs/etcd/op-guide/maintenance#snapshot-backup) 所有 etcd 成员的数据目录，以确保在集群完全升级后仍可执行降级操作。
 
 ### 升级流程 {#upgrade-procedure}
 
@@ -301,7 +301,7 @@ $ curl http://localhost:2379/version
 $ etcdctl snapshot save backup.db
 ```
 
-#### 3. 直接部署 etcd v3.2 二进制文件并启动新 etcd 进程 {#3-drop-in-etcd-v32-binary-and-start-the-new-etcd-process}
+#### 3. 替换为 etcd v3.2 二进制文件并启动新 etcd 进程 {#3-drop-in-etcd-v32-binary-and-start-the-new-etcd-process}
 
 新的 v3.2 版 etcd 将向集群发布其信息：
 
@@ -309,7 +309,7 @@ $ etcdctl snapshot save backup.db
 2017-04-27 14:14:25.363225 I | etcdserver: published {Name:s1 ClientURLs:[http://localhost:2379]} to cluster a9ededbffcb1b1f1
 ```
 
-验证每个成员，然后整个集群，使用新的 v3.2 etcd 二进制文件后是否健康：
+先验证每个成员，再验证整个集群在使用新的 v3.2 etcd 二进制文件后是否健康：
 
 ```
 $ ETCDCTL_API=3 /etcdctl endpoint health --endpoints=localhost:2379,localhost:22379,localhost:32379

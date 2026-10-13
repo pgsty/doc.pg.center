@@ -12,7 +12,7 @@ section_index: cards
 section_index_columns: 3
 upstream_source: etcd
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/tree/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7"
+upstream_link: "https://github.com/etcd-io/website/tree/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7"
 cascade:
   upstream_source: etcd
   type: docs
@@ -22,4 +22,4 @@ aliases: [/etcd/]
 
 etcd 是一个强一致的分布式键值存储。本套指南涵盖 etcd 3.7 系列的安装与运行、API 应用开发、设计原理、性能衡量，以及集群升级与降级。
 
-从 [快速入门](/zh/docs/etcd/quickstart/) 开始，部署本地单成员集群；通过 [安装](/zh/docs/etcd/install/) 了解受支持的安装路径；或参考 [运维指南](/zh/docs/etcd/op-guide/) 进行生产环境部署。
+从 [快速入门](/zh/docs/etcd/quickstart/) 开始，部署本地单成员集群；通过 [安装](/zh/docs/etcd/install/) 了解受支持的安装路径；或参考 [操作指南](/zh/docs/etcd/op-guide/) 进行生产环境部署。

@@ -3,7 +3,7 @@ title: 身份认证
 description: etcd 集群身份认证指南
 weight: 4050
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/authentication/authentication.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/authentication/authentication.md"
 aliases: [/etcd/op-guide/authentication/authentication/]
 ---
 
@@ -37,4 +37,4 @@ etcdctl --endpoints=${ENDPOINTS} --user=user0:123 get foo1
 ```
 
 ### 注意： {#note}
-本文仅为示例，需补充并更新关于身份认证的更多信息。上述文本仅为代码示例。
+本文只是一篇占位文档，需补充并更新关于身份认证的更多信息。上述文本仅为代码示例。

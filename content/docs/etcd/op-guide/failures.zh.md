@@ -3,7 +3,7 @@ title: 故障模式
 weight: 4250
 description: 不同类型的故障及 etcd 的容错能力
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/failures.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/failures.md"
 aliases: [/etcd/op-guide/failures/]
 ---
 
@@ -11,11 +11,11 @@ aliases: [/etcd/op-guide/failures/]
 
 本节列举各类故障，并讨论 etcd 的设计如何容忍这些故障。大多数用户（若非全部）均可将特定故障归入某一类故障。为应对罕见或 [不可恢复的故障][unrecoverable]，务必 [备份][backup] etcd 集群。
 
-## 次要跟随者故障 {#minor-followers-failure}
+## 少数跟随者故障 {#minor-followers-failure}
 
-当少于一半的跟随者发生故障时，etcd 集群仍可接受请求并持续进展，不会出现重大中断。例如，五个成员的 etcd 集群中发生两个跟随者故障，不会影响集群的正常运行。然而，客户端将与故障成员失去连接。客户端库应通过自动重连至其他成员，隐藏读请求的中断对用户的影响。系统管理员应预期其他成员的系统负载因重连而增加。
+当跟随者发生故障，但不可用的成员少于集群总成员数的一半，且领导者仍可用时，etcd 集群仍可接受请求并持续进展，不会出现重大中断。例如，五个成员的 etcd 集群中发生两个跟随者故障，不会影响集群的正常运行。然而，客户端将与故障成员失去连接。客户端库应通过自动重连至其他成员，隐藏读请求的中断对用户的影响。系统管理员应预期其他成员的系统负载因重连而增加。
 
-## 领导者故障排查 {#leader-failure}
+## 领导者故障 {#leader-failure}
 
 当领导者发生故障时，etcd 集群会自动选举新的领导者。领导者故障后，选举不会立即发生。由于故障检测机制基于超时，因此需要大约一个选举超时时间才能完成新领导者的选举。
 
@@ -25,11 +25,11 @@ aliases: [/etcd/op-guide/failures/]
 
 新领导者会自动延长所有租约的超时时间。此机制确保即使租约由旧领导者授予，其有效期也不会在授予的 TTL 到期前终止。
 
-## 多数节点故障 {#majority-failure}
+## 多数成员故障 {#majority-failure}
 
 当集群的多数成员发生故障时，etcd 集群将失效，无法接受更多写入操作。
 
-etcd 集群仅在多数成员恢复可用后，方可完成恢复。若多数成员无法恢复上线，则操作员必须启动 [灾难恢复][unrecoverable] 以恢复集群。
+etcd 集群仅在多数成员恢复可用后，方可完成恢复。若多数成员无法恢复上线，则运维人员必须启动 [灾难恢复][unrecoverable] 以恢复集群。
 
 一旦多数成员正常工作，etcd 集群将自动选举出新的领导者，并恢复到健康状态。新的领导者会自动延长所有租约的超时时间。该机制确保因服务器端不可用而导致的租约过期问题不会发生。
 
@@ -41,11 +41,11 @@ etcd 集群仅在多数成员恢复可用后，方可完成恢复。若多数成
 
 网络分区解除后，少数方会自动识别多数方的领导者，并恢复其状态。
 
-## 启动过程中失败 {#failure-during-bootstrapping}
+## 引导过程中的故障 {#failure-during-bootstrapping}
 
 集群引导仅在所有必需成员均成功启动时才能成功。若引导过程中发生任何故障，请删除所有成员上的数据目录，并使用新的集群令牌或新的发现令牌重新引导集群。
 
-当然，可以像恢复运行中的集群一样恢复已启动失败的集群。然而，恢复该集群通常需要比启动新集群更多的时间和资源，因为无需恢复任何数据。
+当然，可以像恢复运行中的集群一样恢复引导失败的集群。然而，恢复该集群几乎总是需要比引导新集群更多的时间和资源，因为无需恢复任何数据。
 
 [backup]: /zh/docs/etcd/op-guide/maintenance/#snapshot-backup
 [unrecoverable]: /zh/docs/etcd/op-guide/recovery/
