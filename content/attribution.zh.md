@@ -29,7 +29,7 @@ pig.center 转载并整理了六个上游项目撰写的文档。每一个文档
 | 组件 | 上游作品 | 固定版本 | 授权协议 | 保留的完整声明 |
 |---|---|---|---|---|
 | [Patroni](/zh/docs/patroni/) | [Patroni 文档](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [上游 `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/zh/docs/pgbackrest/) | [pgBackRest 文档](https://pgbackrest.org/) | v2.59.2（英文 / 简体中文）；v2.59.1（其他译文） | [MIT](https://opensource.org/license/mit) | [上游 `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [pgBackRest](/zh/docs/pgbackrest/) | [pgBackRest 文档](https://pgbackrest.org/) | v2.59.3 (全部六种语言) | [MIT](https://opensource.org/license/mit) | [上游 `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
 | [PgBouncer](/zh/docs/pgbouncer/) | [PgBouncer 文档](https://www.pgbouncer.org/) | v1.26.0（全部六种语言） | [ISC](https://opensource.org/license/isc-license-txt) | [上游 `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/zh/docs/pgbadger/) | [pgBadger 文档](https://pgbadger.darold.net/) | v13.2，提交 `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/zh/docs/haproxy/) | [HAProxy 3.4 手册](https://docs.haproxy.org/3.4/) | v3.4.4，提交 `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
@@ -49,7 +49,7 @@ Patroni 版权归 Compose、Zalando SE 与 Patroni Contributors 所有（Copyrig
 ## pgBackRest {#pgbackrest}
 
 于 2026-08-15 从 [pgBackRest 文档站](https://pgbackrest.org/) 导入。
-英文和简体中文文档于 2026-10-04 刷新到 **v2.59.2**；其他现有译文仍为 **v2.59.1**，上次刷新日期为 2026-08-30。
+英文和简体中文文档于 2026-10-04 刷新到 **v2.59.2**。截至 2026-10-13，全部六种语言均已对齐 **v2.59.3** 基线。本次发布核验依据对应版本的上游实现和 XML，修正了过时的 PITR 备份选择说明和一段被截断的历史警告；详见 `data/translation-audits/pgbackrest.json`。
 
 pgBackRest 版权归 The PostgreSQL Global Development Group 与 David Steele 所有（Copyright (c) 2015-2026），
 依 [MIT 协议](https://opensource.org/license/mit)授权。

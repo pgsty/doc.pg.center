@@ -1,5 +1,5 @@
 ---
-title: "pgBackRest 2.59.1 Documentation"
+title: "Documentation de pgBackRest 2.59.3"
 linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
@@ -12,9 +12,11 @@ module: [PGBACKREST]
 categories: [Concept]
 aliases: [/pgbackrest/]
 upstream_source: pgbackrest
+upstream_ref: v2.59.3
 upstream_link: "https://pgbackrest.org/"
 cascade:
   upstream_source: pgbackrest
+  upstream_ref: v2.59.3
   type: docs
   module: [PGBACKREST]
 ---
@@ -23,9 +25,11 @@ cascade:
 
 ## Introduction {#introduction}
 
-pgBackRest est une solution fiable de sauvegarde et de restauration pour PostgreSQL, qui s'adapte sans heurt aux plus grands bases de données et charges de travail.
+pgBackRest est une solution fiable de sauvegarde et de restauration pour PostgreSQL, qui s'adapte sans heurt aux plus grandes bases de données et charges de travail.
 
-pgBackRest [v2.59.1](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.1) est la version stable actuelle. Les notes de version se trouvent sur la page [Releases](/fr/docs/pgbackrest/release/).
+Ce miroir de documentation couvre pgBackRest [v2.59.3](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.3). Les notes de version se trouvent sur la page [Notes de version](/fr/docs/pgbackrest/release/).
+
+La version 2.59.3 corrige la génération possible de sous-clés de chiffrement et de sels faibles. La mise à niveau ne remplace pas les sous-clés faibles existantes d’une stanza ; consultez [Sous-clés de chiffrement et sels faibles](/fr/docs/pgbackrest/news/#weak-encryption) pour les vérifications et les mesures correctives.
 
 Merci de nous donner une étoile sur [GitHub](https://github.com/pgbackrest/pgbackrest) si vous appréciez pgBackRest !
 
@@ -34,24 +38,24 @@ Merci de nous donner une étoile sur [GitHub](https://github.com/pgbackrest/pgba
 
 ## Actualités {#news}
 
-**17 août 2026** - [pgBackRest 2.59.1 publié](/fr/docs/pgbackrest/news/#release-2-59-1)
+**4 octobre 2026** - [Sous-clés de chiffrement et sels faibles](/fr/docs/pgbackrest/news/#weak-encryption)
 
-**20 juillet 2026** - [Nouveau paquet tar de distribution](/fr/docs/pgbackrest/news/#distribution-tarball)
+**4 octobre 2026** - [pgBackRest 2.59.3 publié](/fr/docs/pgbackrest/news/#release-2-59-3)
 
-**20 juillet 2026** - [pgBackRest 2.59.0 publié](/fr/docs/pgbackrest/news/#release-2-59-0)
+**27 septembre 2026** - [pgBackRest 2.59.2 publié](/fr/docs/pgbackrest/news/#release-2-59-2)
 
 
 --------
 
 ## Parrains {#sponsors}
 
-pgBackRest n'existerait pas sans le soutien financier. La rédaction de nouvelles fonctionnalités, la correction des bogues, la revue des contributions, la réponse aux questions de la communauté et la maintenance prennent une quantité considérable de temps. Veuillez envisager un [parrainage](https://github.com/sponsors/dwsteele) si vous utilisez pgBackRest dans votre entreprise.
+pgBackRest n'existerait pas sans parrainage. La rédaction de nouvelles fonctionnalités, la correction des bogues, la revue des contributions, la réponse aux questions de la communauté et la maintenance prennent une quantité considérable de temps. Veuillez envisager un [parrainage](https://github.com/sponsors/dwsteele) si vous utilisez pgBackRest dans votre entreprise.
 
-Nos partenaires : [AWS](https://aws.amazon.com), [Supabase](https://supabase.com), [pgEdge](https://pgedge.com), [Tiger Data](https://tigerdata.com), [Percona](https://percona.com), [Eon](https://eon.io), [Xata](https://xata.io), [Dalibo](https://dalibo.com), et [Data Egret](https://dataegret.com/).
+Nos parrains : [AWS](https://aws.amazon.com), [Supabase](https://supabase.com), [pgEdge](https://pgedge.com), [Tiger Data](https://tigerdata.com), [Percona](https://percona.com), [Eon](https://eon.io), [Xata](https://xata.io), [Dalibo](https://dalibo.com), et [Data Egret](https://dataegret.com/).
 
-Nous remercions nos commanditaires pour leur investissement dans l'infrastructure open source, au bénéfice de l'ensemble de la communauté PostgreSQL.
+Nous remercions nos parrains pour leur investissement dans l'infrastructure open source, au bénéfice de l'ensemble de la communauté PostgreSQL.
 
-Anciens commanditaires : [Crunchy Data](https://crunchydata.com), [Resonate](https://resonate.com).
+Anciens parrains : [Crunchy Data](https://crunchydata.com), [Resonate](https://resonate.com).
 
 
 --------
@@ -93,13 +97,13 @@ Les sauvegardes dans le dépôt peuvent être stockées au même format qu’un 
 Toutes les opérations utilisent fsync au niveau des fichiers et des répertoires pour garantir la durabilité.
 
 
-### Page Sommes de contrôle {#page-checksums}
+### Sommes de contrôle des pages {#page-checksums}
 
-Si les sommes de contrôle des pages sont activées, pgBackRest vérifiera les sommes de contrôle de chaque fichier copié lors d'une sauvegarde. Toutes les sommes de contrôle sont vérifiées lors d'une sauvegarde complète, et les sommes de contrôle des fichiers modifiés sont vérifiées lors des sauvegardes différentielles et incrémentielles.
+Si les sommes de contrôle des pages sont activées, pgBackRest vérifiera les sommes de contrôle de chaque fichier copié lors d'une sauvegarde. Toutes les sommes de contrôle des pages sont vérifiées lors d'une sauvegarde complète, et les sommes de contrôle des fichiers modifiés sont vérifiées lors des sauvegardes différentielles et incrémentielles.
 
 Les échecs de validation n'interrompent pas le processus de sauvegarde, mais des avertissements précisant exactement quelles pages ont échoué sont affichés sur la console et dans le fichier de journal.
 
-Cette fonctionnalité permet de détecter précocement les corruption au niveau de la page, avant que les sauvegardes contenant des copies valides des données ne soient expirées.
+Cette fonctionnalité permet de détecter précocement les corruptions au niveau de la page, avant que les sauvegardes contenant des copies valides des données n'aient expiré.
 
 
 ### Reprise de sauvegarde {#backup-resume}
@@ -114,16 +118,16 @@ Les calculs de compression et de somme de contrôle sont effectués en flux pend
 Si le dépôt est hébergé sur un hôte de dépôt, la compression est effectuée sur l'hôte PostgreSQL et les fichiers sont transmis au format compressé, puis stockés directement sur l'hôte de dépôt. Lorsque la compression est désactivée, un niveau de compression inférieur est utilisé afin d'utiliser efficacement la bande passante disponible tout en minimisant la charge CPU.
 
 
-### Restauration incrémentielle {#delta-restore}
+### Restauration delta {#delta-restore}
 
-Le manifeste contient des sommes de contrôle pour chaque fichier de la sauvegarde, ce qui permet, lors d'une restauration, d'utiliser ces sommes de contrôle pour accélérer considérablement le traitement. Lors d'une restauration incrémentielle, les fichiers absents de la sauvegarde sont d'abord supprimés, puis des sommes de contrôle sont générées pour les fichiers restants. Les fichiers correspondant à ceux de la sauvegarde sont laissés en place, et les autres fichiers sont restaurés selon le processus habituel. Le traitement parallèle peut entraîner une réduction importante du temps de restauration.
+Le manifeste contient des sommes de contrôle pour chaque fichier de la sauvegarde, ce qui permet, lors d'une restauration, d'utiliser ces sommes de contrôle pour accélérer considérablement le traitement. Lors d'une restauration delta, les fichiers absents de la sauvegarde sont d'abord supprimés, puis des sommes de contrôle sont générées pour les fichiers restants. Les fichiers correspondant à ceux de la sauvegarde sont laissés en place, et les autres fichiers sont restaurés selon le processus habituel. Le traitement parallèle peut entraîner une réduction importante du temps de restauration.
 
 
-### Parallèle, transmission asynchrone WAL et récupération {#parallel-asynchronous-wal-push--get}
+### Envoi et récupération parallèles et asynchrones des WAL {#parallel-asynchronous-wal-push--get}
 
-Des commandes dédiées permettent d'envoyer le WAL vers l'archive et de le récupérer. Ces commandes prennent en charge le parallélisme afin d'accélérer le traitement et s'exécutent de manière asynchrone pour offrir à PostgreSQL le temps de réponse le plus court possible.
+Des commandes dédiées permettent d'envoyer le WAL vers l'archive et de le récupérer depuis l'archive. Ces commandes prennent en charge le parallélisme afin d'accélérer le traitement et s'exécutent de manière asynchrone pour offrir à PostgreSQL le temps de réponse le plus court possible.
 
-La transmission asynchrone des segments WAL détecte automatiquement les segments WAL qui sont envoyés plusieurs fois et supprime les doublons lorsque les segments sont identiques ; sinon, une erreur est signalée. La transmission asynchrone des segments WAL permet de déléguer le transfert à un autre processus qui compresse les segments WAL en parallèle, afin d’optimiser le débit. Cette fonction peut être essentielle pour les bases de données générant un volume d’écriture extrêmement élevé.
+La transmission des segments WAL détecte automatiquement les segments WAL qui sont envoyés plusieurs fois et supprime les doublons lorsque les segments sont identiques ; sinon, une erreur est signalée. La transmission asynchrone des segments WAL permet de déléguer le transfert à un autre processus qui compresse les segments WAL en parallèle, afin d’optimiser le débit. Cette fonction peut être essentielle pour les bases de données générant un volume d’écriture extrêmement élevé.
 
 La récupération asynchrone des WAL maintient une file locale de segments WAL décompressés et prêts à être rejoués. Cela réduit le temps nécessaire pour fournir les WAL à PostgreSQL, ce qui maximise la vitesse de relecture. Les connexions et le stockage à latence élevée (comme S3) en bénéficient le plus.
 
@@ -147,11 +151,11 @@ Les dépôts pgBackRest peuvent être situés dans des magasins d'objets compati
 pgBackRest peut chiffrer le dépôt afin de protéger les sauvegardes, quel que soit l'emplacement de stockage.
 
 
-### Protection contre les logiciels malveillants et les logiciels de rançon {#ransomware--malware-protection}
+### Protection contre les rançongiciels et les logiciels malveillants {#ransomware--malware-protection}
 
-Lorsque le dépôt est stocké dans un stockage d'objets versionné, pgBackRest peut lire le dépôt tel qu'il était à un instant donné. Si des sauvegardes sont supprimées ou corrompues par erreur, par un logiciel malveillant ou un logiciel de rançon, une heure cible peut être utilisée pour récupérer des données antérieures à la survenance des dégâts.
+Lorsque le dépôt est stocké dans un stockage d'objets versionné, pgBackRest peut lire le dépôt tel qu'il était à un instant donné. Si des sauvegardes sont supprimées ou corrompues par erreur, par un logiciel malveillant ou un rançongiciel, un instant cible peut être utilisé pour récupérer des données antérieures à la survenance des dégâts.
 
-La versionning est pris en charge par les magasins d'objets compatibles S3, Azure et GCS. Le verrouillage d'objets pour S3 ou la suppression progressive pour GCS ou Azure peut offrir une protection supplémentaire contre toute modification non autorisée.
+Le versionnement est pris en charge par les magasins d'objets compatibles S3, Azure et GCS. Le verrouillage d'objets pour S3 ou la suppression réversible pour GCS ou Azure peut offrir une protection supplémentaire contre toute modification non autorisée.
 
 
 ### Compatibilité avec dix versions de PostgreSQL {#compatibility-with-ten-versions-of-postgresql}

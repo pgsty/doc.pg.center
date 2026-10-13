@@ -21,7 +21,26 @@ pgBackRest release numbers consist of two parts, major and minor. A major releas
 
 ## Documented Stable Release {#current-stable-release}
 
-This mirror covers v2.59.2. See the [upstream release history](https://pgbackrest.org/release.html) for newer versions.
+This mirror covers v2.59.3. See the [upstream release history](https://pgbackrest.org/release.html) for newer versions.
+
+### v2.59.3 Release Notes {#v2593-release-notes}
+
+*Weak Encryption Subkey Bug*
+
+*Released October 4, 2026*
+
+**IMPORTANT NOTE**: In prior versions it was possible for weak encryption subkeys and salts to be generated if there was an error accessing system random data. See [Weak Encryption Subkeys and Salts](/docs/pgbackrest/news/#weak-encryption) for more information.
+
+**Bug Fixes:**
+
+- Fix possible checksum error loading encrypted info and manifest files. (*Fixed by j0uinim. Reviewed by David Steele.*)
+- Fix possible weak encryption subkeys/salts. (*Fixed by j0uinim. Reviewed by David Steele, Stefan Fercot, Douglas J Hunley.*)
+
+
+--------
+
+## Stable Releases
+
 
 ### v2.59.2 Release Notes
 
@@ -42,10 +61,6 @@ This mirror covers v2.59.2. See the [upstream release history](https://pgbackres
 
 - PostgreSQL 19beta4 support.
 
-
---------
-
-## Stable Releases
 
 
 ### v2.59.1 Release Notes
@@ -2055,7 +2070,7 @@ This mirror covers v2.59.2. See the [upstream release history](https://pgbackres
 
 *Released June 27, 2017*
 
-**IMPORTANT NOTE**: PostgreSQL 8.3 and 8.4 installations utilizing tablespaces should upgrade immediately from any v1 release and run a full backup. A bug prevented tablespaces from being backed up on these versions only. PostgreSQL ≥ 9.0
+**IMPORTANT NOTE**: PostgreSQL 8.3 and 8.4 installations utilizing tablespaces should upgrade immediately from any v1 release and run a full backup. A bug prevented tablespaces from being backed up on these versions only. PostgreSQL ≥ 9.0 is not affected.
 
 **Bug Fixes:**
 

@@ -18,7 +18,7 @@ pgBackRest vise à obtenir une couverture complète des fonctions, branches et l
 
 La couverture fonctionnelle et par ligne est complète, sans exception.
 
-La couverture de branche exclut les branches à l'intérieur des macros et les appels à `assert()`. Les macros ont leurs propres tests unitaires, donc elles n'ont pas besoin d'être testées à chaque endroit où elles apparaissent. Les assertions ne doivent pas être complètement couvertes en termes de branche, car elles vérifient des cas qui doivent toujours être vrais.
+La couverture de branche exclut les branches à l'intérieur des macros et les appels à `assert()`. Les macros ont leurs propres tests unitaires, donc elles n'ont pas besoin d'être testées à chaque endroit où elles apparaissent. Il n'est pas attendu que les assertions aient une couverture de branche complète, car elles testent des cas qui devraient toujours être vrais.
 
 | Répertoire           |           Fonctions |             Branches |                 Lignes |
 |----------------------|--------------------:|---------------------:|----------------------:|
@@ -28,11 +28,11 @@ La couverture de branche exclut les branches à l'intérieur des macros et les a
 | build/help           |     13/13 (100.00%) |    138/138 (100.00%) |     265/265 (100.00%) |
 | build/postgres       |       8/8 (100.00%) |      58/58 (100.00%) |     149/149 (100.00%) |
 | command              |     17/17 (100.00%) |    104/104 (100.00%) |     210/210 (100.00%) |
-| command/annotate     |       1/1 (100.00%) |      12/12 (100.00%) |       30/30 (100.00%) |
+| command/annotate     |       1/1 (100.00%) |      12/12 (100.00%) |       31/31 (100.00%) |
 | command/archive      |     14/14 (100.00%) |      98/98 (100.00%) |     189/189 (100.00%) |
 | command/archive/get  |     10/10 (100.00%) |    208/208 (100.00%) |     447/447 (100.00%) |
-| command/archive/push |     12/12 (100.00%) |    142/142 (100.00%) |     359/359 (100.00%) |
-| command/backup       |     50/50 (100.00%) |    786/786 (100.00%) |   1640/1640 (100.00%) |
+| command/archive/push |     12/12 (100.00%) |    148/148 (100.00%) |     365/365 (100.00%) |
+| command/backup       |     50/50 (100.00%) |    790/790 (100.00%) |   1641/1641 (100.00%) |
 | command/check        |     13/13 (100.00%) |    106/106 (100.00%) |     214/214 (100.00%) |
 | command/control      |       4/4 (100.00%) |      34/34 (100.00%) |       48/48 (100.00%) |
 | command/expire       |     11/11 (100.00%) |    274/274 (100.00%) |     392/392 (100.00%) |
@@ -63,17 +63,17 @@ La couverture de branche exclut les branches à l'intérieur des macros et les a
 | db                   |     23/23 (100.00%) |      94/94 (100.00%) |     301/301 (100.00%) |
 | info                 |     48/48 (100.00%) |    240/240 (100.00%) |     712/712 (100.00%) |
 | info/manifest        |     10/10 (100.00%) |    132/132 (100.00%) |     303/303 (100.00%) |
-| postgres             |     36/36 (100.00%) |    140/140 (100.00%) |     336/336 (100.00%) |
+| postgres             |     36/36 (100.00%) |    128/128 (100.00%) |     333/333 (100.00%) |
 | postgres/interface   |       4/4 (100.00%) |      10/10 (100.00%) |       35/35 (100.00%) |
 | protocol             |     60/60 (100.00%) |    266/266 (100.00%) |     860/860 (100.00%) |
-| storage              |     68/68 (100.00%) |    298/298 (100.00%) |     754/754 (100.00%) |
-| storage/azure        |     26/26 (100.00%) |    164/164 (100.00%) |     487/487 (100.00%) |
+| storage              |     68/68 (100.00%) |    304/304 (100.00%) |     759/759 (100.00%) |
+| storage/azure        |     26/26 (100.00%) |    162/162 (100.00%) |     487/487 (100.00%) |
 | storage/cifs         |       2/2 (100.00%) |                  --- |         6/6 (100.00%) |
 | storage/gcs          |     34/34 (100.00%) |    176/176 (100.00%) |     574/574 (100.00%) |
 | storage/posix        |     29/29 (100.00%) |     165/166 (99.40%) |     328/328 (100.00%) |
 | storage/remote       |     40/40 (100.00%) |    128/128 (100.00%) |     568/568 (100.00%) |
-| storage/s3           |     31/31 (100.00%) |    194/194 (100.00%) |     651/651 (100.00%) |
+| storage/s3           |     31/31 (100.00%) |    200/200 (100.00%) |     661/661 (100.00%) |
 | storage/sftp         |     39/39 (100.00%) |    408/408 (100.00%) |     762/762 (100.00%) |
-| TOTAL                | 1705/1705 (100.00%) | 10608/10610 (99.98%) | 25128/25128 (100.00%) |
+| TOTAL                | 1705/1705 (100.00%) | 10616/10618 (99.98%) | 25148/25148 (100.00%) |
 
-Les modules de tests unitaires C dans `/test/src/module` bénéficient également d'une couverture complète fonctionnalité/ligne, mais ne sont pas inclus dans le rapport.
+Les modules de tests unitaires C dans `/test/src/module` bénéficient également d'une couverture complète fonction/ligne, mais ne sont pas inclus dans le rapport.

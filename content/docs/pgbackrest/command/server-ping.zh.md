@@ -129,9 +129,9 @@ example: --priority=19
 
 ### 保活选项（`--sck-keep-alive`）
 
-启用 keep-alive。
+启用保活。
 
-在 socket 连接上启用 keep-alive 消息。
+在 socket 连接上启用保活消息。
 
 ```yaml
 default: y
@@ -140,9 +140,9 @@ example: --no-sck-keep-alive
 
 ### TCP 保活计数选项（`--tcp-keep-alive-count`）
 
-keep-alive 探测次数。
+保活计数。
 
-指定在判定连接已断开之前，允许丢失的 TCP keep-alive 消息数量。
+指定在判定连接已断开之前，允许丢失的 TCP 保活消息数量。
 
 此选项仅在支持 `TCP_KEEPCNT` socket 选项的系统上可用。
 
@@ -153,9 +153,9 @@ example: --tcp-keep-alive-count=3
 
 ### TCP 保活空闲时间选项（`--tcp-keep-alive-idle`）
 
-keep-alive 空闲时间。
+保活空闲时间。
 
-指定在多长时间无网络活动后（单位：秒），操作系统开始发送 TCP keep-alive 消息。
+指定在多长时间无网络活动后（单位：秒），操作系统开始发送 TCP 保活消息。
 
 此选项仅在支持 `TCP_KEEPIDLE` socket 选项的系统上可用。
 
@@ -166,9 +166,9 @@ example: --tcp-keep-alive-idle=60
 
 ### TCP 保活间隔选项（`--tcp-keep-alive-interval`）
 
-keep-alive 重传间隔时间。
+保活重传间隔时间。
 
-指定未收到确认的 TCP keep-alive 消息在多长时间后重传（单位：秒）。
+指定未收到确认的 TCP 保活消息在多长时间后重传（单位：秒）。
 
 此选项仅在支持 `TCP_KEEPINTVL` socket 选项的系统上可用。
 

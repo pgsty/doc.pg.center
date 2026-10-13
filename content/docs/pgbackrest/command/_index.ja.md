@@ -2,7 +2,7 @@
 title: "コマンドリファレンス"
 linkTitle: "コマンド"
 weight: 40
-description: "バックアップ、復元、アーカイブ、および管理操作のすべてのオプションを含む pgBackRest コマンド リファレンス。"
+description: "バックアップ、リストア、アーカイブ、管理操作の全オプションを網羅したpgBackRestのコマンドリファレンス。"
 icon: fa-solid fa-terminal
 sidebar_expanded: true
 module: [PGBACKREST]
@@ -11,42 +11,42 @@ aliases: [/pgbackrest/command/]
 upstream_link: "https://pgbackrest.org/command.html"
 ---
 
-## 導入 {#introduction}
+## はじめに {#introduction}
 
-コマンドは、さまざまな pgBackRest 関数を実行するために使用されます。ここでは、コマンド オプションが網羅的にリストされています。つまり、コマンドに適用される各オプションは、1 つ以上の他のコマンドに適用される場合でも、そのコマンドとともにリストされます。これには、`pgbackrest.conf` で構成できるすべてのオプションが含まれます。
+コマンドは、pgBackRestのさまざまな機能を実行するために使用します。ここでは、各コマンドのオプションを網羅しています。複数のコマンドに適用されるオプションも、該当する各コマンドのページに記載しています。`pgbackrest.conf`で設定できるオプションもすべて含まれます。
 
-`pgbackrest.conf` で構成された非ブール型オプションは、`reset-` プレフィックスを使用してコマンドラインでデフォルトにリセットできます。この機能は、バックアップをリポジトリ ホストに直接復元するために使用できます。通常、pgBackRest はデータベース ホストがリモートにあり、復元をリモートで実行できないことがわかるため、エラーが発生します。コマンドラインに `--reset-pg1-host` を追加すると、pgBackRest はリモート データベース ホストを無視し、ローカルに復元します。特定のパス (データベース ホストで使用されているパスではない) で復元を強制的に実行するには、新しい `--pg1-path` を渡すことが必要な場合があります。
+`pgbackrest.conf`に設定した非ブール型のオプションは、コマンドラインで`reset-`接頭辞を使用するとデフォルト値に戻せます。この機能を使うと、リポジトリホスト上で直接バックアップをリストアできます。通常、pgBackRestはデータベースホストがリモートにあることを認識し、リモートでのリストアはできないためエラーになります。コマンドラインに`--reset-pg1-host`を追加すると、リモートのデータベースホストを無視してローカルにリストアします。データベースホストで使用していたパスではなく、特定のパスにリストアするには、`--pg1-path`に新しい値を指定する必要がある場合があります。
 
-`no-` プレフィックスは、コマンドラインでブール型オプションを false に設定するために使用できます。
+コマンドラインで`no-`接頭辞を使用すると、ブール型のオプションを偽に設定できます。
 
-`PGBACKREST_` プレフィックスと、`-` を `_` に置き換えるすべて大文字のオプション名を使用して、任意のオプションを環境変数に設定できます。 `pg1-path` は `PGBACKREST_PG1_PATH` になり、`stanza` は `PGBACKREST_STANZA` になります。ブール値オプションは、設定ファイル内にあるものと同じように表現されます。 `PGBACKREST_COMPRESS="n"` および `reset-*` のバリアントは許可されません。コマンドラインまたは構成ファイルで複数回指定できるオプションは、値をコロンで区切ることで表すことができます。 `PGBACKREST_DB_INCLUDE="db1:db2"`。
+すべてのオプションは、`PGBACKREST_`接頭辞に、`-`を`_`に置き換えた大文字のオプション名を続けることで、環境変数に設定できます。たとえば、`pg1-path`は`PGBACKREST_PG1_PATH`、`stanza`は`PGBACKREST_STANZA`になります。ブール型のオプションは、`PGBACKREST_COMPRESS="n"`のように設定ファイルと同じ形式で表し、`reset-*`形式は使用できません。コマンドラインや設定ファイルで複数回指定できるオプションは、`PGBACKREST_DB_INCLUDE="db1:db2"`のように値をコロンで区切って表せます。
 
-コマンドライン オプションは、構成ファイル オプションをオーバーライドする環境オプションをオーバーライドします。
+コマンドラインのオプションは環境変数のオプションより優先され、環境変数のオプションは設定ファイルのオプションより優先されます。
 
-オプションの種類については、[構成の概要](/ja/docs/pgbackrest/configuration/#introduction)を参照してください。
+オプションの型については、[構成の概要](/ja/docs/pgbackrest/configuration/#introduction)を参照してください。
 
 ## コマンド {#commands}
 
-|コマンド |概要 |
-|-----------------------------------------------------------------|------------------------------------------------------------------------------------|
-| [**`annotate`**](/ja/docs/pgbackrest/command/annotate/) |バックアップの作成後に、バックアップの注釈を追加、変更、または削除します。                  |
-| [**`archive-get`**](/ja/docs/pgbackrest/command/archive-get/) |復元、PITR、またはレプリカのリカバリのために、アーカイブされた WAL セグメントをフェッチします。                     |
-| [**`archive-push`**](/ja/docs/pgbackrest/command/archive-push/) | PostgreSQL から WAL セグメントを受け入れ、構成されたリポジトリにプッシュします。           |
-| [**`backup`**](/ja/docs/pgbackrest/command/backup/) |ターゲット リポジトリ (デフォルトでは最も優先度の高いリポジトリ) にバックアップを作成します。      |
-| [**`check`**](/ja/docs/pgbackrest/command/check/) |スタンザのバックアップ/アーカイブ構成と WAL アーカイブの健全性を検証します。                  |
-| [**`expire`**](/ja/docs/pgbackrest/command/expire/) |構成された保持ポリシーに基づいて、バックアップとアーカイブされた WAL を期限切れにします。                 |
-| [**`help`**](/ja/docs/pgbackrest/command/help/) |コマンドおよびオプションのヘルプを一般、コマンド、またはオプションのレベルで表示します。                      |
-| [**`info`**](/ja/docs/pgbackrest/command/info/) |スタンザとバックアップのステータス/メタデータをテキストまたは JSON 形式で表示します。                       |
-| [**`repo-get`**](/ja/docs/pgbackrest/command/repo-get/) |管理、調査、テストのためにリポジトリ ファイル (`cat` など) を読み取ります。      |
-| [**`repo-ls`**](/ja/docs/pgbackrest/command/repo-ls/) |管理、調査、テストのためにリポジトリ ファイル/パス (`ls` など) をリストします。 |
-| [**`restore`**](/ja/docs/pgbackrest/command/restore/) |オプションのポイントインタイムリカバリを使用して、バックアップ (デフォルトでは最新) から復元します。           |
-| [**`server`**](/ja/docs/pgbackrest/command/server/) | SSH を使用しないリモート ホスト アクセスには、pgBackRest TLS サーバーを実行します。                       |
-| [**`server-ping`**](/ja/docs/pgbackrest/command/server-ping/) | pgBackRest TLS サーバーに ping を実行して、接続が受け入れられていることを確認します。                     |
-| [**`stanza-create`**](/ja/docs/pgbackrest/command/stanza-create/) |構成されているすべてのリポジトリにスタンザ メタデータを作成します。                                  |
-| [**`stanza-delete`**](/ja/docs/pgbackrest/command/stanza-delete/) |スタンザのすべてのバックアップとアーカイブを完全に削除します。                               |
-| [**`stanza-upgrade`**](/ja/docs/pgbackrest/command/stanza-upgrade/) | PostgreSQL メジャー バージョンのアップグレード後にスタンザ メタデータをアップグレードします。                       |
-| [**`start`**](/ja/docs/pgbackrest/command/start/) |前回の `stop` の後に pgBackRest プロセスが実行できるようにします。                           |
-| [**`stop`**](/ja/docs/pgbackrest/command/stop/) |新しい pgBackRest プロセスを防止し、オプションで実行中のプロセスを強制停止します。                |
-| [**`verify`**](/ja/docs/pgbackrest/command/verify/) |リポジトリ内のバックアップおよびアーカイブ データが有効であることを確認します。                         |
-| [**`version`**](/ja/docs/pgbackrest/command/version/) |インストールされている pgBackRest のバージョンを表示します。                                               |
+| コマンド | 概要 |
+|------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| [**`annotate`**](/ja/docs/pgbackrest/command/annotate/) | バックアップの作成後に注釈を追加、変更、削除します。 |
+| [**`archive-get`**](/ja/docs/pgbackrest/command/archive-get/) | リストア、PITR、レプリカのリカバリーに使用する、アーカイブ済みWALセグメントを取得します。 |
+| [**`archive-push`**](/ja/docs/pgbackrest/command/archive-push/) | PostgreSQLからWALセグメントを受け取り、設定したリポジトリに送信します。 |
+| [**`backup`**](/ja/docs/pgbackrest/command/backup/) | 対象リポジトリにバックアップを作成します。デフォルトでは最も優先度の高いリポジトリを使用します。 |
+| [**`check`**](/ja/docs/pgbackrest/command/check/) | stanzaのバックアップ・アーカイブ設定と、WALアーカイブの正常性を検証します。 |
+| [**`expire`**](/ja/docs/pgbackrest/command/expire/) | 設定した保持ポリシーに基づき、バックアップとアーカイブ済みWALを期限切れとして削除します。 |
+| [**`help`**](/ja/docs/pgbackrest/command/help/) | 全般、コマンド、オプションの各レベルでヘルプを表示します。 |
+| [**`info`**](/ja/docs/pgbackrest/command/info/) | stanzaとバックアップの状態・メタデータをテキストまたはJSON形式で表示します。 |
+| [**`repo-get`**](/ja/docs/pgbackrest/command/repo-get/) | 管理、調査、テストのため、`cat`と同様にリポジトリ内のファイルを読み取ります。 |
+| [**`repo-ls`**](/ja/docs/pgbackrest/command/repo-ls/) | 管理、調査、テストのため、`ls`と同様にリポジトリ内のファイル・パスを一覧表示します。 |
+| [**`restore`**](/ja/docs/pgbackrest/command/restore/) | バックアップからリストアします。デフォルトでは最新のバックアップを使用し、ポイントインタイムリカバリーも指定できます。 |
+| [**`server`**](/ja/docs/pgbackrest/command/server/) | SSHを使わずにリモートホストにアクセスするため、pgBackRestのTLSサーバーを実行します。 |
+| [**`server-ping`**](/ja/docs/pgbackrest/command/server-ping/) | pgBackRestのTLSサーバーにpingを送信し、接続を受け付けていることを確認します。 |
+| [**`stanza-create`**](/ja/docs/pgbackrest/command/stanza-create/) | 設定したすべてのリポジトリにstanzaのメタデータを作成します。 |
+| [**`stanza-delete`**](/ja/docs/pgbackrest/command/stanza-delete/) | stanzaのすべてのバックアップとアーカイブを完全に削除します。 |
+| [**`stanza-upgrade`**](/ja/docs/pgbackrest/command/stanza-upgrade/) | PostgreSQLのメジャーバージョンアップグレード後にstanzaのメタデータを更新します。 |
+| [**`start`**](/ja/docs/pgbackrest/command/start/) | `stop`によって停止したpgBackRestプロセスの実行を再び許可します。 |
+| [**`stop`**](/ja/docs/pgbackrest/command/stop/) | 新しいpgBackRestプロセスの実行を禁止し、指定に応じて実行中のプロセスを強制停止します。 |
+| [**`verify`**](/ja/docs/pgbackrest/command/verify/) | リポジトリ内のバックアップとアーカイブデータが有効であることを検証します。 |
+| [**`version`**](/ja/docs/pgbackrest/command/version/) | インストールされているpgBackRestのバージョンを表示します。 |
 {.full-width}

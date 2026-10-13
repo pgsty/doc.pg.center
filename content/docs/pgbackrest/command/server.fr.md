@@ -85,7 +85,7 @@ example: --tls-server-port=8000
 
 Permettre à la commande de s'exécuter en tant qu'utilisateur root.
 
-Par défaut, seul la commande `restore` peut être exécutée en tant qu'utilisateur root, car elle est conçue pour gérer soigneusement les propriétés des fichiers. Exécuter d'autres commandes en tant que root risque de créer des fichiers (par exemple dans le dépôt) dont le propriétaire est root, rendant ces fichiers inaccessibles à l'utilisateur PostgreSQL, ce qui entraîne l'échec des commandes ultérieures.
+Par défaut, seule la commande `restore` peut être exécutée en tant qu'utilisateur root, car elle est conçue pour gérer soigneusement les propriétés des fichiers. Exécuter d'autres commandes en tant que root risque de créer des fichiers (par exemple dans le dépôt) dont le propriétaire est root, rendant ces fichiers inaccessibles à l'utilisateur PostgreSQL, ce qui entraîne l'échec des commandes ultérieures.
 
 Activez cette option pour exécuter une commande en tant qu'utilisateur root malgré tout. Toutefois, il est bien préférable d'exécuter pgBackRest en tant qu'utilisateur propriétaire du dépôt et du cluster PostgreSQL.
 
@@ -144,7 +144,7 @@ example: --config-path=/conf/pgbackrest
 
 ### Option d'expiration I/O (`--io-timeout`) {#io-timeout-option---io-timeout}
 
-Délai d'attente d'E/S dépassé.
+Délai d'attente d'E/S.
 
 Délai d'attente, en secondes, utilisé pour les connexions et les opérations de lecture/écriture.
 
@@ -207,7 +207,7 @@ example: --tcp-keep-alive-count=3
 
 ### Option d'idle Keep Alive (`--tcp-keep-alive-idle`) {#keep-alive-idle-option---tcp-keep-alive-idle}
 
-Délai d'inactivité pour la maintien de la connexion.
+Délai d'inactivité pour le maintien de la connexion.
 
 Spécifie la durée (en secondes) pendant laquelle aucune activité réseau ne se produit, après laquelle le système d'exploitation doit envoyer un message de maintien de connexion TCP.
 
@@ -220,7 +220,7 @@ example: --tcp-keep-alive-idle=60
 
 ### Option Intervalle Keep Alive (`--tcp-keep-alive-interval`) {#keep-alive-interval-option---tcp-keep-alive-interval}
 
-Intervalle de temps pour la maintien de la connexion active.
+Intervalle de temps pour le maintien de la connexion active.
 
 Spécifie la durée (en secondes) après laquelle un message TCP keep-alive non reconnu doit être renvoyé.
 

@@ -35,7 +35,7 @@ pig.center повторно публикует документацию, нап�
 | Компонент | Исходная работа | Зафиксированная версия | Лицензия | Сохранённое уведомление |
 |---|---|---|---|---|
 | [Patroni](/ru/docs/patroni/) | [Документация Patroni](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/ru/docs/pgbackrest/) | [Документация pgBackRest](https://pgbackrest.org/) | v2.59.2 (английский / упрощённый китайский); v2.59.1 (другие переводы) | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [pgBackRest](/ru/docs/pgbackrest/) | [Документация pgBackRest](https://pgbackrest.org/) | v2.59.3 (все шесть языков) | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
 | [PgBouncer](/ru/docs/pgbouncer/) | [Документация PgBouncer](https://www.pgbouncer.org/) | v1.26.0 (все шесть языков) | [ISC](https://opensource.org/license/isc-license-txt) | [Исходный `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/ru/docs/pgbadger/) | [Документация pgBadger](https://pgbadger.darold.net/) | v13.2, коммит `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/ru/docs/haproxy/) | [Руководства HAProxy 3.4](https://docs.haproxy.org/3.4/) | v3.4.4, коммит `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
@@ -59,8 +59,7 @@ pig.center повторно публикует документацию, нап�
 
 Импортировано 2026-08-15 с [сайта документации pgBackRest](https://pgbackrest.org/).
 Английская версия и версия на упрощённом китайском обновлены 2026-10-04 до **v2.59.2**.
-Другие существующие переводы остаются на **v2.59.1**; их последнее обновление выполнено 2026-08-30.
-Русская версия pgBackRest пока не опубликована.
+По состоянию на 2026-10-13 все шесть языковых версий приведены к базовой версии **v2.59.3**. При проверке перед публикацией устаревшие инструкции по выбору резервной копии для PITR и обрезанное историческое предупреждение исправлены по реализации и XML соответствующей версии исходного проекта; см. `data/translation-audits/pgbackrest.json`.
 
 Авторские права на pgBackRest принадлежат The PostgreSQL Global Development Group и David Steele
 (copyright (c) 2015-2026). Материалы распространяются по

@@ -1,5 +1,5 @@
 ---
-title: "Info Commande (info)"
+title: "Commande d’information (info)"
 linkTitle: "info"
 weight: 80
 description: "Référence des options et du comportement de la commande pgBackRest `info`."
@@ -10,7 +10,7 @@ aliases: [/pgbackrest/command/info/]
 upstream_link: "https://pgbackrest.org/command.html#command-info"
 ---
 
-La commande `info` s'applique à une seule stanza ou à toutes les stanzas. La sortie texte est la valeur par défaut et fournit un résumé lisible par l'humain des sauvegardes pour la ou les stanzas demandées. Ce format peut évoluer à tout moment dans une version.
+La commande `info` s'applique à une seule stanza ou à toutes les stanzas. La sortie texte est la valeur par défaut et fournit un résumé lisible par l'humain des sauvegardes pour la ou les stanzas demandées. Ce format est susceptible de changer à chaque version.
 
 Pour une sortie lisible par machine, utilisez `--output=json`. La sortie JSON contient bien plus d'informations que la sortie texte et est maintenue stable, sauf en cas de bug.
 
@@ -18,7 +18,7 @@ Pour accélérer l'exécution, restreindre la sortie à l'information de progres
 
 Chaque stanza dispose d'une section distincte et il est possible de limiter la sortie à une seule stanza à l'aide de l'option `--stanza`. La stanza '`status`' indique brièvement l'état de santé de la stanza. Si cette valeur est '`ok`', pgBackRest fonctionne normalement. Si plusieurs dépôts sont configurés, une valeur de '`mixed`' indique que la stanza n'est pas dans un état sain sur un ou plusieurs dépôts ; dans ce cas, l'état de la stanza sera détaillé par dépôt. Dans les cas où une erreur s'est produite sur un dépôt sans correspondre à un code d'erreur connu, un code d'erreur de '`other`' sera utilisé et les détails complets de l'erreur seront fournis. La '`wal archive min/max`' affiche le WAL minimum et maximum actuellement stockés dans l'archive et, dans le cas de plusieurs dépôts, sera rapportée sur l'ensemble des dépôts sauf si l'option `--repo` est définie. Notez qu'il peut y avoir des lacunes dues aux politiques de rétention des archives ou à d'autres raisons.
 
-Les messages '`backup/expire running`' et/ou '`restore running`' s'affichent aux côtés des informations '`status`' si l'une quelconque de ces commandes est actuellement en cours d'exécution sur l'hôte. La progression par répertoire sera également indiquée dans la sortie texte, et un tableau '`repo`' sera inclus dans la sortie JSON.
+Les messages '`backup/expire running`' et/ou '`restore running`' s'affichent aux côtés des informations '`status`' si l'une quelconque de ces commandes est actuellement en cours d'exécution sur l'hôte. La progression par dépôt sera également indiquée dans la sortie texte, et un tableau '`repo`' sera inclus dans la sortie JSON.
 
 Les sauvegardes sont affichées du plus ancien au plus récent. La sauvegarde la plus ancienne sera *toujours* une sauvegarde complète (indiquée par un `F` à la fin de l'étiquette), mais la sauvegarde la plus récente peut être complète, différentielle (se terminant par `D`) ou incrémentielle (se terminant par `I`).
 
@@ -26,7 +26,7 @@ Le '`timestamp start/stop`' définit la période pendant laquelle la sauvegarde 
 
 Le '`wal start/stop`' définit la plage de WAL nécessaire pour rendre la base de données cohérente lors d'une restauration. La commande `backup` s'assurera que cette plage de WAL se trouve dans l'archive avant de se terminer.
 
-La '`database size`' correspond à la taille totale non compressée de la base de données, tandis que la '`database backup size`' représente la quantité de données à sauvegarder réellement ; elles sont identiques pour les sauvegardes complètes.
+La '`database size`' correspond à la taille totale non compressée de la base de données, tandis que la '`database backup size`' représente la quantité de données de la base de données à réellement sauvegarder ; elles sont identiques pour les sauvegardes complètes.
 
 Le '`repo`' indique dans quel dépôt se trouve cette sauvegarde. Le '`backup set size`' inclut tous les fichiers de cette sauvegarde ainsi que toutes les sauvegardes référencées dans le dépôt nécessaires à la restauration de la base de données à partir de cette sauvegarde, tandis que le '`backup size`' inclut uniquement les fichiers de cette sauvegarde (ceux-ci seront également identiques pour les sauvegardes complètes). Les tailles des dépôts reflètent les tailles des fichiers compressés si la compression est activée dans pgBackRest.
 
@@ -34,7 +34,7 @@ Le '`backup reference total`' résume la liste des sauvegardes supplémentaires 
 
 ## Options de commande {#command-options}
 
-### Niveau de détail Option (`--detail-level`) {#detail-level-option---detail-level}
+### Option de niveau de détail (`--detail-level`) {#detail-level-option---detail-level}
 
 Niveau de détail de la sortie.
 
@@ -64,7 +64,7 @@ example: --output=json
 
 ### Définir l'option (`--set`) {#set-option---set}
 
-Sauvegarde définie en détail.
+Ensemble de sauvegarde à détailler.
 
 Les détails incluent la liste complète des sauvegardes supplémentaires nécessaires à la restauration de cette sauvegarde, la liste des bases de données (avec leurs OIDs) présentes dans l'ensemble de sauvegarde (à l'exclusion des bases modèles), des espaces de table (avec leurs OIDs) ainsi que l'emplacement de destination par défaut où ils seront restaurés, ainsi que des liens symboliques et leur emplacement de destination lorsqu’`--link-all` est spécifié.
 
@@ -72,7 +72,7 @@ Les détails incluent la liste complète des sauvegardes supplémentaires néces
 example: --set=20150131-153358F_20150131-153401I
 ```
 
-### Type Option (`--type`) {#type-option---type}
+### Option de type (`--type`) {#type-option---type}
 
 Filtrer par type de sauvegarde.
 
@@ -92,7 +92,7 @@ example: --type=full
 
 Permettre à la commande de s'exécuter en tant qu'utilisateur root.
 
-Par défaut, seul la commande `restore` peut être exécutée en tant qu'utilisateur root, car elle est conçue pour gérer soigneusement les propriétés des fichiers. Exécuter d'autres commandes en tant que root risque de créer des fichiers (par exemple dans le dépôt) dont le propriétaire est root, rendant ces fichiers inaccessibles à l'utilisateur PostgreSQL, ce qui entraîne l'échec des commandes ultérieures.
+Par défaut, seule la commande `restore` peut être exécutée en tant qu'utilisateur root, car elle est conçue pour gérer soigneusement les propriétés des fichiers. Exécuter d'autres commandes en tant que root risque de créer des fichiers (par exemple dans le dépôt) dont le propriétaire est root, rendant ces fichiers inaccessibles à l'utilisateur PostgreSQL, ce qui entraîne l'échec des commandes ultérieures.
 
 Activez cette option pour exécuter une commande en tant qu'utilisateur root malgré tout. Toutefois, il est bien préférable d'exécuter pgBackRest en tant qu'utilisateur propriétaire du dépôt et du cluster PostgreSQL.
 
@@ -129,7 +129,7 @@ example: --cmd-ssh=/usr/bin/ssh
 
 Niveau de compression du réseau.
 
-Définit le niveau de compression réseau lorsque `compress-type=none` et la commande ne sont pas exécutées sur le même hôte que le dépôt. La compression est utilisée pour réduire le trafic réseau. Lorsque `compress-type` est différent de `none`, le paramètre `compress-level-network` est ignoré et `compress-level` est utilisé à la place, afin que le fichier ne soit compressé qu'une seule fois.
+Définit le niveau de compression réseau lorsque `compress-type=none` et que la commande n'est pas exécutée sur le même hôte que le dépôt. La compression est utilisée pour réduire le trafic réseau. Lorsque `compress-type` est différent de `none`, le paramètre `compress-level-network` est ignoré et `compress-level` est utilisé à la place, afin que le fichier ne soit compressé qu'une seule fois.
 
 ```yaml
 default: 1
@@ -174,7 +174,7 @@ example: --config-path=/conf/pgbackrest
 
 ### Option d'expiration I/O (`--io-timeout`) {#io-timeout-option---io-timeout}
 
-Délai d'attente d'E/S dépassé.
+Délai d'attente des E/S.
 
 Délai d'attente, en secondes, utilisé pour les connexions et les opérations de lecture/écriture.
 
@@ -260,7 +260,7 @@ example: --tcp-keep-alive-count=3
 
 ### Option d'idle Keep Alive (`--tcp-keep-alive-idle`) {#keep-alive-idle-option---tcp-keep-alive-idle}
 
-Délai d'inactivité pour la maintien de la connexion.
+Délai d'inactivité pour le maintien de la connexion.
 
 Spécifie la durée (en secondes) pendant laquelle aucune activité réseau ne se produit, après laquelle le système d'exploitation doit envoyer un message de maintien de connexion TCP.
 
@@ -273,7 +273,7 @@ example: --tcp-keep-alive-idle=60
 
 ### Option Intervalle Keep Alive (`--tcp-keep-alive-interval`) {#keep-alive-interval-option---tcp-keep-alive-interval}
 
-Intervalle de temps pour la maintien de la connexion active.
+Intervalle de temps pour le maintien de la connexion active.
 
 Spécifie la durée (en secondes) après laquelle un message TCP keep-alive non reconnu doit être renvoyé.
 
@@ -480,9 +480,9 @@ example: --repo1-cipher-type=aes-256-cbc
 
 ### Option de bac de dépôt GCS (`--repo-gcs-bucket`) {#gcs-repository-bucket-option---repo-gcs-bucket}
 
-Dépôt de bucket GCS.
+Bucket du dépôt GCS.
 
-Dépôt GCS utilisé pour stocker le dépôt.
+Bucket GCS utilisé pour stocker le dépôt.
 
 Les dépôts pgBackRest peuvent être stockés à la racine du bucket en définissant `repo-path=/`, mais il est généralement préférable de préciser un préfixe, tel que `/repo`, afin de pouvoir également stocker les journaux et d'autres contenus générés par GCS dans le bucket.
 
@@ -572,7 +572,7 @@ example: --repo1-host-cert-file=/path/to/client.crt
 
 ### Option de commande hôte du dépôt (`--repo-host-cmd`) {#repository-host-command-option---repo-host-cmd}
 
-Hôte du dépôt commande pgBackRest.
+Commande pgBackRest de l'hôte du dépôt.
 
 Requis uniquement si le chemin vers la commande pgBackRest est différent sur les hôtes local et de dépôt. Si non défini, la commande de dépôt sera définie de la même manière que celle de l'hôte local.
 
@@ -594,11 +594,11 @@ default: CFGOPTDEF_CONFIG_PATH "/" PROJECT_CONFIG_FILE
 example: --repo1-host-config=/conf/pgbackrest/pgbackrest.conf
 ```
 
-Nom obsolète : sauvegarde-config
+Nom obsolète : backup-config
 
 ### Option de chemin d'inclusion de configuration d'hôte de dépôt (`--repo-host-config-include-path`) {#repository-host-configuration-include-path-option---repo-host-config-include-path}
 
-Configuration du serveur de dépôt pgBackRest incluant le chemin.
+Chemin d'inclusion de configuration de l'hôte du dépôt pgBackRest.
 
 Définit l'emplacement du chemin d'inclusion de configuration sur l'hôte du dépôt. Cette option est nécessaire uniquement si le chemin d'inclusion de configuration de l'hôte du dépôt est différent du chemin d'inclusion de configuration local.
 
@@ -688,9 +688,9 @@ example: --repo1-path=/backup/db/backrest
 
 ### Option de bac de dépôt S3 (`--repo-s3-bucket`) {#s3-repository-bucket-option---repo-s3-bucket}
 
-Dépôt S3.
+Bucket du dépôt S3.
 
-Dépôt S3 utilisé pour stocker le dépôt.
+Bucket S3 utilisé pour stocker le dépôt.
 
 Les dépôts pgBackRest peuvent être stockés à la racine du bucket en définissant `repo-path=/`, mais il est généralement préférable de préciser un préfixe, tel que `/repo`, afin de pouvoir également stocker les journaux et d'autres contenus générés par AWS dans le bucket.
 
@@ -761,7 +761,7 @@ example: --repo1-s3-region=us-east-1
 
 ### Option Requesteur Payant pour le dépôt S3 (`--repo-s3-requester-pays`) {#s3-repository-requestor-pays-option---repo-s3-requester-pays}
 
-Dépôt S3 payeur de la demande.
+Paiement par le demandeur pour le dépôt S3.
 
 Active le paiement par le demandeur S3.
 
@@ -809,7 +809,7 @@ Style d'URI S3.
 Les styles d'URI suivants sont pris en charge :
 
 - `host` - Se connecter à l'hôte `bucket.endpoint`.
-- `path` - Se connecter à l'hôte `endpoint` et préfixer les URI par le répertoire.
+- `path` - Se connecter à l'hôte `endpoint` et préfixer les URI par le bucket.
 
 ```yaml
 default: host
@@ -976,17 +976,17 @@ Il n'existe aucune fonctionnalité dans pgBackRest permettant de modifier ces ba
 example: --repo1-storage-tag=key1=value1
 ```
 
-### Option de taille de morceau de chargement du dépôt (`--repo-storage-upload-chunk-size`) {#repository-storage-upload-chunk-size-option---repo-storage-upload-chunk-size}
+### Option de taille de morceau de téléversement vers le dépôt (`--repo-storage-upload-chunk-size`) {#repository-storage-upload-chunk-size-option---repo-storage-upload-chunk-size}
 
-Taille du morceau de chargement du dépôt.
+Taille du morceau de téléversement vers le dépôt.
 
-Les magasins d’objets tels que S3 permettent de télécharger des fichiers par morceaux lorsque le fichier est trop volumineux pour être stocké en mémoire. Même si le fichier peut être stocké en mémoire, il est plus efficace en mémoire de limiter la quantité de mémoire utilisée pour les téléchargements.
+Les magasins d’objets tels que S3 permettent de téléverser des fichiers par morceaux lorsque le fichier est trop volumineux pour être stocké en mémoire. Même si le fichier peut être stocké en mémoire, il est plus efficace en mémoire de limiter la quantité de mémoire utilisée pour les téléversements.
 
-Une taille de morceau plus élevée entraîne généralement de meilleures performances, car elle réduit le nombre de requêtes de téléchargement et permet de télécharger plus de fichiers en une seule requête plutôt qu’en morceaux. Le désavantage est que la consommation mémoire sera plus élevée, et comme la mémoire tampon de morceau doit être allouée par processus, des valeurs plus élevées de `process-max` entraînent une consommation mémoire globale plus importante.
+Une taille de morceau plus élevée entraîne généralement de meilleures performances, car elle réduit le nombre de requêtes de téléversement et permet de téléverser plus de fichiers en une seule requête plutôt qu’en morceaux. Le désavantage est que la consommation mémoire sera plus élevée, et comme la mémoire tampon de morceau doit être allouée par processus, des valeurs plus élevées de `process-max` entraînent une consommation mémoire globale plus importante.
 
 Notez que les tailles de morceau valides varient selon le type de stockage et la plateforme. Par exemple, AWS S3 impose une taille minimale de morceau de 5MiB. La terminologie relative à la taille du morceau varie selon le type de stockage ; utilisez donc « part size » pour AWS S3, « chunk size » pour GCS et « block size » pour Azure lorsque vous recherchez les valeurs minimales ou maximales.
 
-Si un fichier est plus grand que 1GiB (la taille maximale que PostgreSQL crée par défaut), la taille de tranche sera augmentée progressivement jusqu'à la valeur maximale autorisée afin de terminer le téléchargement du fichier.
+Si un fichier est plus grand que 1GiB (la taille maximale que PostgreSQL crée par défaut), la taille de morceau sera augmentée progressivement jusqu'à la valeur maximale autorisée afin de terminer le téléversement du fichier.
 
 ```yaml
 default (depending on repo-type):
@@ -1021,9 +1021,9 @@ Heure cible pour le dépôt.
 
 Le temps cible définit l'instant auquel les commandes lisent un dépôt sur un stockage versionné. Cela permet à la commande de lire le dépôt tel qu'il était à un instant donné, afin de récupérer des données supprimées ou corrompues par une erreur utilisateur ou un logiciel malveillant.
 
-Le stockage versionné est pris en charge par S3, GCS et Azure, mais il est généralement désactivé par défaut. En plus d’activer la versioning, il peut être utile d’activer le verrouillage d’objets pour S3, ou la suppression progressive pour GCS ou Azure.
+Le stockage versionné est pris en charge par S3, GCS et Azure, mais il est généralement désactivé par défaut. En plus d’activer le versioning, il peut être utile d’activer le verrouillage d’objets pour S3 et soft delete pour GCS ou Azure.
 
-Lorsque l'option `repo-target-time` est spécifiée, l'option `repo` doit également être fournie. Il est probable que tous les types de dépôt ne prennent pas en charge la versionning, et il est généralement préférable de cibler un seul dépôt pour la récupération.
+Lorsque l'option `repo-target-time` est spécifiée, l'option `repo` doit également être fournie. Il est probable que tous les types de dépôt ne prennent pas en charge le versioning, et il est généralement préférable de cibler un seul dépôt pour la récupération.
 
 Notez que les comparaisons avec l'horodatage de stockage sont <= à l'horodatage fourni et que les millisecondes sont tronquées de l'horodatage lorsqu'elles sont fournies.
 

@@ -26,22 +26,28 @@ output formats, and English fallback destinations do not count as translations.
 | Collection | EN | ZH | FR | JA | DE | RU |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Patroni | 24 (100%) | 24 (100%) | 24 (100%) | 24 (100%) | 6 (25%) | 24 (100%) |
-| pgBackRest | 29 (100%) | 29 (100%) | 29 (100%) | 6 (20.7%) | 0 (0%) | 6 (20.7%) |
+| pgBackRest | 29 (100%) | 29 (100%) | 29 (100%) | 29 (100%) | 29 (100%) | 29 (100%) |
 | PgBouncer | 9 (100%) | 9 (100%) | 9 (100%) | 9 (100%) | 9 (100%) | 9 (100%) |
 | pgBadger | 16 (100%) | 16 (100%) | 16 (100%) | 16 (100%) | 16 (100%) | 16 (100%) |
 | HAProxy | 35 (100%) | 35 (100%) | 35 (100%) | 12 (34.3%) | 2 (5.7%) | 30 (85.7%) |
 | etcd | 99 (100%) | 99 (100%) | 99 (100%) | 35 (35.4%) | 3 (3%) | 99 (100%) |
-| **Component total** | 212 (100%) | 212 (100%) | 212 (100%) | 102 (48.1%) | 36 (17%) | 184 (86.8%) |
+| **Component total** | 212 (100%) | 212 (100%) | 212 (100%) | 125 (59%) | 65 (30.7%) | 207 (97.6%) |
 | Site pages | 4 (100%) | 4 (100%) | 4 (100%) | 4 (100%) | 4 (100%) | 4 (100%) |
-| **All publishable pages** | 216 (100%) | 216 (100%) | 216 (100%) | 106 (49.1%) | 40 (18.5%) | 188 (87%) |
+| **All publishable pages** | 216 (100%) | 216 (100%) | 216 (100%) | 129 (59.7%) | 69 (31.9%) | 211 (97.7%) |
 
 EN = English; ZH = 简体中文; FR = Français; JA = 日本語; DE = Deutsch; RU = Русский.
 Reproduce this matrix with `python3 scripts/report-coverage.py`.
 
 These percentages measure page availability, not sentence-level translation completeness or
-version freshness. pgBackRest's English and Chinese editions target 2.59.2, while its French,
-Japanese, and Russian editions still target 2.59.1.
-Those pgBackRest translations require an update even where page coverage is 100%.
+version freshness. All six pgBackRest editions target the same 2.59.3 stable-tag snapshot. The
+[publication review](data/translation-audits/pgbackrest.json) records source corrections,
+translation fixes, review scope and exact fingerprints for all 145 translation pairs.
+`python3 scripts/check-pgbackrest.py --rendered-dir <production-build>` checks every
+source pair and all 174 published pages, including technical content, search/navigation,
+local links, aliases and complete Markdown, print and LLMS outputs. The source is
+`release/2.59.3` (`46cdca625a73403cad4774d97354a1fac1e91e51`); the security advisory,
+release notes and examples are synchronized to that tag, retaining the reviewed PITR
+and historical-warning corrections. Development-branch changes are excluded.
 
 PgBouncer 1.26.0 has nine pages in each of the six editions, with all 45 translation pairs
 reviewed against current English and the release implementation.
@@ -68,12 +74,34 @@ make serve
 make check
 ```
 
-`make check` validates the existing German and Russian translations against their declared English
-source version. Older pgBackRest translation sources are pinned in
-`data/translation-sources.json` and read from Git history, so validation requires the full repository
-history (CI uses `fetch-depth: 0`). Passing this check does not establish synchronization with the
-latest English edition. Add `--current-source` to the German or Russian parity checker to inspect
-that synchronization gap explicitly.
+`make check` runs the source and rendered-output gates against a production build.
+The pgBackRest gate always uses current English; its former French 2.59.1 source pin
+has been removed after the 29 French pages were checked against 2.59.2. Other
+components may declare historical source snapshots in `data/translation-sources.json`;
+validation of such snapshots requires full Git history (CI uses `fetch-depth: 0`).
+
+For pgBackRest, `python3 scripts/test-pgbackrest.py` exercises deliberate regressions
+in source fingerprints, code, numeric facts, diagnostic strings, metadata and missing
+translations. Existing German, Japanese and Russian gates remain complementary checks.
+Their earlier per-language acceptance records are retained as review history; the
+[current publication record](data/translation-audits/pgbackrest.json) supersedes their
+fingerprints after the shared source corrections. It distinguishes prior full bilingual
+review from this pass's complete technical checks and focused semantic review.
+The record also separates browser observations from automated source/output checks.
+Repeat desktop and mobile browser checks of layout, search, same-page language
+switching, fragment jumps and mobile navigation when changing the site's templates.
+
+The guide examples come from `doc/resource/exe.cache` at the two stable tags, since
+the distribution HTML suppresses some command outputs. Keep downloaded caches and
+distribution archives outside this repository. To review a subsequent update, run
+`python3 scripts/sync-pgbackrest-examples.py --from-cache <old-cache> --to-cache <new-cache> --from-version 2.59.2 --to-version 2.59.3`
+against the old guide sources; add `--write` after checking the dry-run receipt.
+The importer validates command identities, existing output blocks and all six code
+copies before changing any files. It does not execute example commands. The audit
+records the source and asset hashes and the actual replacement counts.
+The local OINK search override retains Cyrillic queries.
+`node scripts/test-pgbackrest-search.cjs <production-build>` checks security-advisory
+search in all six languages and proves Latin/CJK results remain unchanged.
 
 The generated site is written to `public/`. Local preview, a successful build, and deployment to `pig.center` are separate delivery stages.
 

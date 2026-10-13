@@ -1,5 +1,5 @@
 ---
-title: "pgBackRest 2.59.2 Documentation"
+title: "pgBackRest 2.59.3 Documentation"
 linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
@@ -12,11 +12,11 @@ module: [PGBACKREST]
 categories: [Concept]
 aliases: [/pgbackrest/]
 upstream_source: pgbackrest
-upstream_ref: v2.59.2
+upstream_ref: v2.59.3
 upstream_link: "https://pgbackrest.org/"
 cascade:
   upstream_source: pgbackrest
-  upstream_ref: v2.59.2
+  upstream_ref: v2.59.3
   type: docs
   module: [PGBACKREST]
 ---
@@ -27,9 +27,9 @@ cascade:
 
 pgBackRest is a reliable backup and restore solution for PostgreSQL that seamlessly scales up to the largest databases and workloads.
 
-This documentation mirror covers pgBackRest [v2.59.2](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.2). Release notes are on the [Releases](/docs/pgbackrest/release/) page.
+This documentation mirror covers pgBackRest [v2.59.3](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.3). Release notes are on the [Releases](/docs/pgbackrest/release/) page.
 
-Upstream released [v2.59.3](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.3) on October 4, 2026; this mirror remains at v2.59.2. See the [upstream releases](https://pgbackrest.org/release.html) for newer versions.
+Version 2.59.3 fixes possible weak encryption subkeys and salts. Upgrading does not replace existing weak stanza subkeys; see [Weak Encryption Subkeys and Salts](/docs/pgbackrest/news/#weak-encryption) for checks and remediation.
 
 Please give us a star on [GitHub](https://github.com/pgbackrest/pgbackrest) if you like pgBackRest!
 
@@ -38,11 +38,11 @@ Please give us a star on [GitHub](https://github.com/pgbackrest/pgbackrest) if y
 
 ## News
 
+**October 4, 2026** - [Weak Encryption Subkeys and Salts](/docs/pgbackrest/news/#weak-encryption)
+
+**October 4, 2026** - [pgBackRest 2.59.3 Released](/docs/pgbackrest/news/#release-2-59-3)
+
 **September 27, 2026** - [pgBackRest 2.59.2 Released](/docs/pgbackrest/news/#release-2-59-2)
-
-**August 17, 2026** - [pgBackRest 2.59.1 Released](/docs/pgbackrest/news/#release-2-59-1)
-
-**July 20, 2026** - [New Distribution Tarball](/docs/pgbackrest/news/#distribution-tarball)
 
 
 --------

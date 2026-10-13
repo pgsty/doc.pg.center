@@ -33,7 +33,7 @@ which licence, and where the complete upstream notice is retained.
 | Component | Upstream work | Pinned at | Licence | Retained notice |
 |---|---|---|---|---|
 | [Patroni](/docs/patroni/) | [Patroni documentation](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/docs/pgbackrest/) | [pgBackRest documentation](https://pgbackrest.org/) | v2.59.2 (English / Simplified Chinese); v2.59.1 (other translations) | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [pgBackRest](/docs/pgbackrest/) | [pgBackRest documentation](https://pgbackrest.org/) | v2.59.3 (all six languages) | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
 | [PgBouncer](/docs/pgbouncer/) | [PgBouncer documentation](https://www.pgbouncer.org/) | v1.26.0 (all six languages) | [ISC](https://opensource.org/license/isc-license-txt) | [Upstream `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/docs/pgbadger/) | [pgBadger documentation](https://pgbadger.darold.net/) | v13.2, commit `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/docs/haproxy/) | [HAProxy 3.4 manuals](https://docs.haproxy.org/3.4/) | v3.4.4, commit `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
@@ -57,7 +57,7 @@ the [MIT License](https://opensource.org/license/mit). The complete licence text
 
 Imported on 2026-08-15 from the [pgBackRest documentation site](https://pgbackrest.org/).
 The English and Simplified Chinese editions were refreshed on 2026-10-04 to **v2.59.2**.
-Other existing translations remain at **v2.59.1**, last refreshed on 2026-08-30.
+All six language editions are aligned with the **v2.59.3** baseline as of 2026-10-13. The publication review corrects obsolete PITR selection guidance and a truncated historical warning using the pinned upstream implementation and XML; see `data/translation-audits/pgbackrest.json`.
 
 pgBackRest is copyright (c) 2015-2026 The PostgreSQL Global Development Group and David Steele,
 and is distributed under the [MIT License](https://opensource.org/license/mit). The complete

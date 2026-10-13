@@ -49,7 +49,7 @@ example: --no-archive-check
 
 这是一个相对保守的选项，通过将一致性所需的 WAL 段直接存入备份，防范 WAL 归档损坏。WAL 段仍会写入归档，因此此选项会额外占用存储空间。
 
-使用此选项时，建议 `archive-push` 和 `backup` 命令采用相同的压缩类型（如 `lz4`）。否则，WAL 段需要按备份所用的压缩类型重新压缩，这取决于备份期间产生的 WAL 量，代价可能较高。
+使用此选项时，建议 `archive-push` 和 `backup` 命令采用相同的 `compress-type`（如 `lz4`）。否则，WAL 段需要按备份所用的 `compress-type`重新压缩，这取决于备份期间产生的 WAL 量，代价可能较高。
 
 恢复时，WAL 段位于 `pg_xlog/pg_wal` 目录中，PostgreSQL 会优先使用这些文件，而不调用 `restore_command`。
 
@@ -126,7 +126,7 @@ example: --no-checksum-page
 
 **请谨慎使用此功能——极易误排除关键文件，导致备份不一致。务必测试恢复！**
 
-所有被排除的文件都会以 `info` 级别写入日志，并注明排除规则。请仔细审查被排除的文件列表，确认没有意外排除重要内容。
+所有被排除的文件都会以 `info` 级别写入日志，并注明排除规则。请仔细审查被排除的文件列表，确认没有被意外排除的内容。
 
 > **注意：** delta 恢复不遵循排除规则。备份时被排除的文件/目录，在 delta 恢复时会被 *删除*。
 
@@ -301,16 +301,16 @@ example: --no-compress
 
 ```yaml
 default (depending on compress-type):
-   bz2 - 9
-   gz - 6
-   lz4 - 1
-   zst - 3
+    bz2 - 9
+    gz - 6
+    lz4 - 1
+    zst - 3
 
 allow range (depending on compress-type):
-   bz2 - [1, 9]
-   gz - [-1, 9]
-   lz4 - [-5, 12]
-   zst - [-7, 22]
+    bz2 - [1, 9]
+    gz - [-1, 9]
+    lz4 - [-5, 12]
+    zst - [-7, 22]
 
 example: --compress-level=9
 ```
@@ -319,7 +319,7 @@ example: --compress-level=9
 
 网络压缩级别。
 
-当 `compress-type=none` 且命令不在仓库所在主机上运行时，指定网络压缩级别，用于减少网络流量。当 `compress-type` 不等于 `none` 时，此选项会被忽略，转而使用 `compress-level`，以避免文件被压缩两次。
+当 `compress-type=none` 且命令不在仓库所在主机上运行时，设置网络传输的压缩级别，以减少网络流量。当 `compress-type` 不等于 `none` 时，`compress-level-network` 设置会被忽略，改用 `compress-level`，使文件只压缩一次。
 
 ```yaml
 default: 1
@@ -494,11 +494,11 @@ example: --no-sck-keep-alive
 
 ### Stanza 选项（`--stanza`）
 
-定义 stanza（stanza 是 pgBackRest 中用于标识一个 PostgreSQL 集群备份配置的逻辑名称）。
+定义 stanza。
 
 一个 stanza 包含某个 PostgreSQL 数据库集群的完整配置，定义了集群的位置、备份方式、归档选项等。大多数数据库主机只有一个 PostgreSQL 集群，因此只有一个 stanza；而备份服务器通常为每个需要备份的数据库集群单独配置一个 stanza。
 
-命名 stanza 时，常见做法是以主集群名称命名，但更好的方式是以集群中承载的业务来命名。由于 stanza 名称同时适用于主库和所有副本，选择能反映集群实际功能的名称（如 `app` 或 `dw`）比使用本地集群名称（如 `main` 或 `prod`）更为合适。
+命名 stanza 时，常见做法是以主集群名称命名，但更好的名称应描述集群所包含的数据库。由于 stanza 名称同时适用于主库和所有副本，选择能反映集群实际功能的名称（如 `app` 或 `dw`）比使用本地集群名称（如 `main` 或 `prod`）更为合适。
 
 ```yaml
 example: --stanza=main
@@ -987,7 +987,7 @@ example: --repo1-host-key-file=/path/to/client.key
 
 ### 仓库主机端口选项（`--repo-host-port`）
 
-设置 `repo-host` 时使用的仓库主机端口。
+设置 `repo-host` 时，用于连接仓库主机的端口。
 
 使用此选项为仓库主机协议指定非默认端口。
 
@@ -995,7 +995,7 @@ example: --repo1-host-key-file=/path/to/client.key
 
 ```yaml
 default (depending on repo-host-type):
-   tls - 8432
+    tls - 8432
 
 allowed: [0, 65535]
 example: --repo1-host-port=25
@@ -1019,7 +1019,7 @@ example: --repo1-host-type=tls
 
 ### 仓库主机用户选项（`--repo-host-user`）
 
-设置 `repo-host` 时使用的仓库主机用户。
+设置 `repo-host` 时，用于登录仓库主机的用户。
 
 定义在仓库主机上执行操作所使用的用户。建议不使用 `postgres` 用户，而改用专用用户（如 `pgbackrest`）。若 PostgreSQL 也运行在仓库主机上，可将 `postgres` 用户加入 `pgbackrest` 组，使其拥有仓库的读权限，同时避免意外损坏仓库内容。
 
@@ -1036,7 +1036,7 @@ example: --repo1-host-user=repo-user
 
 仓库是 pgBackRest 存储备份和归档 WAL 段的位置。
 
-预先估算所需空间可能比较困难。建议先执行若干次备份，记录不同类型备份（全量/增量/差异）的大小，并测量每天产生的 WAL 量，以此对所需空间有一个大致判断。随着数据库的演进，需求也会随时间变化。
+预先估算所需空间可能比较困难。建议先执行若干次备份，记录不同类型备份（全量/增量/差异）的大小，并测量每天产生的 WAL 量，以此对所需空间有一个大致判断。随着数据库的演进，需求也很可能随时间变化。
 
 ```yaml
 default: /var/lib/pgbackrest
@@ -1107,7 +1107,7 @@ example: --repo1-retention-full=2
 
 决定 `repo-retention-full` 表示时间周期（天数）还是保留的全量备份数量。
 
-若设置为 `time`，则超过 `repo-retention-full` 天的全量备份将被删除，前提是至少存在一个不早于 `repo-retention-full` 天的备份。例如，若 `repo-retention-full` 为 30（天），且有 2 个全量备份，分别为 25 天前和 35 天前创建，则两个备份均不会过期——因为删除 35 天前的备份将只剩 25 天前的备份，不满足"至少保留一个 30 天以内的备份"的策略要求。早于保留的最旧全量备份的归档 WAL 将自动过期，除非显式设置了 `repo-retention-archive-type` 和 `repo-retention-archive`。
+若设置为 `time`，则年龄超过 `repo-retention-full` 天的全量备份会从仓库中删除，前提是至少还存在另一个年龄达到或超过 `repo-retention-full` 天的备份。例如，若 `repo-retention-full` 为 30（天），且有 2 个全量备份，分别创建于 25 天前和 35 天前，则两者均不会过期：删除 35 天前的备份后只剩 25 天前的备份，这会违反 30 天保留策略，即必须至少保留一个年龄达到 30 天的备份，才能删除更旧的备份。早于所保留的最旧全量备份的归档 WAL 会自动过期，除非显式设置了 `repo-retention-archive-type` 和 `repo-retention-archive`。
 
 若设置为 `count`，则超过 `repo-retention-full` 数量的全量备份将过期。例如，若 `repo-retention-full` 为 `4` 且第五个全量备份完成，则最旧的全量备份将过期以保持数量为 4。
 
@@ -1437,14 +1437,14 @@ example: --repo1-storage-tag=key1=value1
 
 ```yaml
 default (depending on repo-type):
-   azure - 4MiB
-   gcs - 4MiB
-   s3 - 5MiB
+    azure - 4MiB
+    gcs - 4MiB
+    s3 - 5MiB
 
 allow range (depending on repo-type):
-   azure - [4MiB, 1GiB]
-   gcs - [4MiB, 1GiB]
-   s3 - [5MiB, 1GiB]
+    azure - [4MiB, 1GiB]
+    gcs - [4MiB, 1GiB]
+    s3 - [5MiB, 1GiB]
 
 example: --repo1-storage-upload-chunk-size=16MiB
 ```
@@ -1612,7 +1612,7 @@ example: --pg1-host-key-file=/path/to/client.key
 
 ### PostgreSQL 主机端口选项（`--pg-host-port`）
 
-设置 `pg-host` 时使用的 PostgreSQL 主机端口。
+设置 `pg-host` 时，用于连接 PostgreSQL 主机的端口。
 
 使用此选项为 PostgreSQL 主机协议指定非默认端口。
 
@@ -1620,7 +1620,7 @@ example: --pg1-host-key-file=/path/to/client.key
 
 ```yaml
 default (depending on pg-host-type):
-   tls - 8432
+    tls - 8432
 
 allowed: [0, 65535]
 example: --pg1-host-port=25
@@ -1644,7 +1644,7 @@ example: --pg1-host-type=tls
 
 ### PostgreSQL 主机用户选项（`--pg-host-user`）
 
-设置 `pg-host` 时使用的 PostgreSQL 主机登录用户。
+设置 `pg-host` 时，用于登录 PostgreSQL 主机的用户。
 
 该用户同时拥有远程 pgBackRest 进程，并负责发起与 PostgreSQL 的连接。为使其正常工作，此用户应为 PostgreSQL 数据库集群的所有者，通常为默认值 `postgres`。
 

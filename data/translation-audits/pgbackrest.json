@@ -1,0 +1,1350 @@
+{
+  "schema_version": 1,
+  "component": "pgbackrest",
+  "date": "2026-10-13",
+  "status": "accepted-for-publication",
+  "source": {
+    "version": "2.59.3",
+    "policy": "Stable release tag only; preserve prior reviewed source and translation corrections. Development-branch changes are excluded.",
+    "old_french_pin_removed": "f643529cb91973f071ee09eae958b0cb0d7c44b1 / 2.59.1; all 29 French bodies and protected code match current source",
+    "tag": "release/2.59.3",
+    "commit": "46cdca625a73403cad4774d97354a1fac1e91e51",
+    "distribution": {
+      "url": "https://github.com/pgbackrest/pgbackrest/releases/download/release/2.59.3/pgbackrest-2.59.3.tar.gz",
+      "sha256": "14037901db002e5536a948bf9f0fc0ff6cde31f4e675d3e9b46f129071bf2e5f",
+      "bytes": 1165978
+    },
+    "verified_files": {
+      "doc/xml/news.xml": "ad2c406204553a580f626a51fb9ad6c3faf418cb43586f0f01470e84ab76a7ce",
+      "doc/xml/release/2020s/2026/2.59.3.xml": "5a07d918a373b3a716bff8b67d129f1b5d1e97fef229fcd6e5b27114e2c164c7",
+      "doc/xml/auto/metric-coverage-report.auto.xml": "2991bf5fbfdebb55772ea576a23994a5b8b7255ec5d8ea242cc8f7bd2fcc4fe7",
+      "doc/resource/exe.cache": "d6f2b94dcddf0ba5b49d777d32e966d4cb68ba25ebc67be8d8e8c593b0a7e217"
+    },
+    "previous_example_cache_sha256": "10a07e595111aaab65ee17016c84531da2ff1b8124da04e7b7f606769fa82a47",
+    "upstream_delta": "News, release entry, root news list, eight coverage cells and guide execution cache. Guide, command, configuration and FAQ XML prose did not change between the stable tags."
+  },
+  "coverage": {
+    "english_pages": 29,
+    "languages": [
+      "en",
+      "zh",
+      "fr",
+      "ja",
+      "de",
+      "ru"
+    ],
+    "translation_pairs": 145,
+    "published_routes": 174
+  },
+  "review_scopes": {
+    "prior_full_review_plus_delta": "Earlier full bilingual review in pgbackrest-ja/de/ru.json, rechecked against preserved output bodies; later wording changes and all six-language source corrections inspected, plus new full technical and rendered checks.",
+    "full_technical_and_targeted_semantic": "All 29 bodies checked for aligned prose-unit coverage, code, metadata, headings, numerical facts and protected literals; semantic review concentrated on PITR, backup dependencies/retention, exclusions, encryption, SFTP, delta behavior, transferred data, FAQs and anomalies. This is not a new independent line-by-line review of every historical release sentence.",
+    "stable_release_delta": "Full bilingual review of all added security/release paragraphs in five translations, exact security script from pinned XML, both guide caches matched before updating, review of metrics and metadata. All prior PITR, terminology, option-name and historical-warning corrections retained."
+  },
+  "findings": [
+    {
+      "severity": "P1",
+      "issue": "PITR fallback-to-latest claim contradicted the 2.59.2 implementation and v2.37 release history",
+      "resolution": "Corrected FAQ, restore command and both guides in all six editions. A missing matching time/LSN backup is an error. Time requires backup stop < target; LSN requires backup stop <= target.",
+      "evidence": [
+        "https://github.com/pgbackrest/pgbackrest/blob/release/2.59.2/src/command/restore/select.c.inc",
+        "content/docs/pgbackrest/release.md#v237-release-notes"
+      ]
+    },
+    {
+      "severity": "P2",
+      "issue": "French source pin/attribution remained 2.59.1 while actual content and examples used 2.59.2",
+      "resolution": "Removed obsolete pin; aligned cascade, registry, six attribution pages and README."
+    },
+    {
+      "severity": "P2",
+      "issue": "French delta restore/backup confused with incremental, upload with download, soft delete with progressive deletion; diagnostic message translated",
+      "resolution": "Source-aware corrections preserve delta/incremental distinction, upload direction, reversible deletion, exact diagnostic and command meanings."
+    },
+    {
+      "severity": "P2",
+      "issue": "Chinese omitted some host-option conditions and reference names",
+      "resolution": "Restored repo-host/pg-host conditions, compression/database-selection/SFTP option names and complete retention examples."
+    },
+    {
+      "severity": "P2",
+      "issue": "Historical v1.20 warning truncated in English and four translations",
+      "resolution": "Completed the statement that PostgreSQL >= 9.0 is not affected, using the pinned upstream XML. Chinese was already complete. Corrected French implication that upgrading beyond major version v1 was necessary.",
+      "evidence": [
+        "https://github.com/pgbackrest/pgbackrest/blob/release/2.59.2/doc/xml/release/2010s/2017/1.20.xml"
+      ]
+    },
+    {
+      "severity": "P2",
+      "issue": "Earlier language-specific acceptance fingerprints were stale and not enforced by their gates",
+      "resolution": "This shared gate requires all 145 final source/translation fingerprints, independent technical checks and complete production outputs."
+    },
+    {
+      "severity": "P3",
+      "issue": "Untranslated French captions, awkward command titles, malformed German conditional sentence and Russian trailing whitespace",
+      "resolution": "Corrected display prose while retaining all source anchors and executable blocks."
+    },
+    {
+      "severity": "P1",
+      "issue": "Stable 2.59.3 security advisory and release notes were absent from all six mirrored editions",
+      "resolution": "Added the complete pinned advisory, exact check script, OpenSSL 1.0 detection limitation, stanza/repository remediation, both bug fixes and localized current-release links."
+    },
+    {
+      "severity": "P2",
+      "issue": "Guide output, restore selectors and coverage data still used the 2.59.2 snapshot",
+      "resolution": "Synchronized 12 guides using both stable execution caches, including fractional PITR targets, plus the eight changed coverage cells. All other reviewed technical examples and prose corrections are preserved."
+    },
+    {
+      "severity": "P2",
+      "issue": "OINK 1.2.0 English Lunr pipeline discarded Cyrillic queries, hiding Russian security and recovery topics",
+      "resolution": "Included the existing minimal Cyrillic substring-search override after verifying its exact delta from the published module. Added six-language security-query and Latin/CJK non-regression tests, then verified actual desktop/mobile interactions."
+    }
+  ],
+  "protected_content": {
+    "code_fences_per_english_edition": 2048,
+    "all_translation_fences": "byte-identical to current English",
+    "chinese_anchors": "Existing localized Chinese anchors retained; real links are checked, including cross-page fragments.",
+    "technical_variants": "Only two reviewed Chinese wording variants; neither changes a command, value or example.",
+    "stable_release_delta": "Only the new upstream security-check script and verified stable-tag guide examples change protected blocks; other command/configuration examples retain the reviewed baseline.",
+    "security_check_sha256": "6589a3d180c75756c206691cf323d0dde8c0af8e10f8110a5da8f80f45b305cd"
+  },
+  "validation": {
+    "source": "145 current-English translation pairs, exact review fingerprints, technical values/literals, code and localized destinations passed.",
+    "preservation": {
+      "unchanged_other_documents": 138,
+      "guide_exact_reproduction": 12,
+      "old_news_preserved": 6,
+      "older_release_history_preserved": 6,
+      "coverage_table_matches_stable_xml": true
+    },
+    "rendered": {
+      "pairs": 145,
+      "outputs": {
+        "en": {
+          "pages": 29,
+          "print_blocks": 10030
+        },
+        "zh": {
+          "pages": 29,
+          "print_blocks": 10030
+        },
+        "fr": {
+          "pages": 29,
+          "print_blocks": 10108
+        },
+        "ja": {
+          "pages": 29,
+          "print_blocks": 10030
+        },
+        "de": {
+          "pages": 29,
+          "print_blocks": 10030
+        },
+        "ru": {
+          "pages": 29,
+          "print_blocks": 10030
+        }
+      },
+      "errors": []
+    },
+    "build": {
+      "hugo": "v0.166.0+extended+withdeploy",
+      "result": "Production builds passed with --panicOnWarning; all caches and outputs outside the repository."
+    },
+    "regression_tests": {
+      "shared_gate_and_importer": 12,
+      "japanese_source_gate": 9,
+      "japanese_print_gate": 7,
+      "python_total": 28,
+      "search": "Real Lunr: six localized security queries and uppercase variants, Russian recovery queries, identical Latin/CJK results compared with the published OINK module."
+    },
+    "language_specific_gates": {
+      "de": "29/29 source and rendered checks passed using shared reviewed technical fingerprints and independent German output checks.",
+      "ja": "29/29 current source and all rendered outputs passed.",
+      "ru": "Shared 29/29 current-source and rendered checks plus the existing Russian source gate passed."
+    },
+    "browser": {
+      "tool": "Codex in-app browser via cua_repl",
+      "viewports": [
+        {
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "width": 390,
+          "height": 844
+        }
+      ],
+      "route_visits": 348,
+      "layout_or_loading_issues": [],
+      "security_search": {
+        "queries": {
+          "en": "Weak Encryption",
+          "zh": "弱加密",
+          "fr": "Sous-clés",
+          "ja": "脆弱",
+          "de": "Unterschlüssel",
+          "ru": "Слабые"
+        },
+        "passed": 12
+      },
+      "desktop_same_page_language_switches": 6,
+      "mobile_drawer_release_security_anchor_checks": 6,
+      "visual_samples": [
+        "German security advisory desktop",
+        "French security advisory mobile",
+        "English 2.59.3 release notes mobile",
+        "Chinese versioned root"
+      ],
+      "limits": "DOM layout checks cover every route at both widths; screenshots are representative. The final search-only asset change was followed by real six-language searches at both sizes. Wrapped links were also activated using the keyboard."
+    },
+    "site_wide": {
+      "command": "make check",
+      "result": "passed",
+      "scope": "Isolated candidate built from 7d661e58d40e67ad3d4069f779cd9a749c55efa6 plus this component, scoped shared metadata/check integration and the required Cyrillic search override. Unrelated dirty work is excluded.",
+      "documentation_pages": 1033,
+      "legacy_aliases": 1361,
+      "html_files_checked_for_internal_links": 2590
+    },
+    "diff_check": "Scoped git diff --check passed",
+    "evidence_sha256": {
+      "candidate-check-final.log": "36acb32ac1a125684bbdd84cf8a138193350ebe983ded81bb6e34be322a0ce3a",
+      "candidate-build.log": "a1d7f9d036bcb9371048039c94339fa8f7cc4af85c1159fc9e1e29851eb3ecfa",
+      "browser-report.json": "4560bda84d5866151f2b40a2e0fa4f71e6d13775404ab4c4092186f770093862",
+      "preservation.json": "2d6a01359872dc78aacb3a9827c34bb2186916b14cfdb4143d9432f2a234d609",
+      "examples-receipt.json": "4a95642f0c6d4317892ecdddfe0191509d54a37f251ac6637fda6b8b985d19aa"
+    },
+    "final_staging": {
+      "changed_files": 174,
+      "candidate_source_files_checked": 198,
+      "largest_file_bytes": 284636,
+      "binary_or_generated_files": 0
+    }
+  },
+  "delivery": {
+    "scope": "Accepted source-only Git change; see the commit containing this record. Public deployment is a separate delivery stage.",
+    "push": false,
+    "deployment": false
+  },
+  "pages": [
+    {
+      "source": "content/docs/pgbackrest/_index.md",
+      "translation": "content/docs/pgbackrest/_index.zh.md",
+      "source_sha256": "6c6af2a35e043d05451e5483ad56162802353bfe7a3cb5af1b97261189e60dcd",
+      "translation_sha256": "3f584866087e841950a5632ea33abada9c811fb3c73fe85467afadddb7bcd0fb",
+      "review_scope": "full_technical_and_targeted_semantic",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/_index.md",
+      "translation": "content/docs/pgbackrest/_index.fr.md",
+      "source_sha256": "6c6af2a35e043d05451e5483ad56162802353bfe7a3cb5af1b97261189e60dcd",
+      "translation_sha256": "911ab8933ec61599ca803c23dfd180c117b3efd8fb058941b7ff3b5492231c95",
+      "review_scope": "full_technical_and_targeted_semantic",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/_index.md",
+      "translation": "content/docs/pgbackrest/_index.ja.md",
+      "source_sha256": "6c6af2a35e043d05451e5483ad56162802353bfe7a3cb5af1b97261189e60dcd",
+      "translation_sha256": "f31efd62909c96e466e095f49498f3272b9d395da2591bc244f45e93677049a8",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/_index.md",
+      "translation": "content/docs/pgbackrest/_index.de.md",
+      "source_sha256": "6c6af2a35e043d05451e5483ad56162802353bfe7a3cb5af1b97261189e60dcd",
+      "translation_sha256": "0eedc5636bfa439c7cba253f7864382b4768400949027c403e334f2f7a9c086e",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/_index.md",
+      "translation": "content/docs/pgbackrest/_index.ru.md",
+      "source_sha256": "6c6af2a35e043d05451e5483ad56162802353bfe7a3cb5af1b97261189e60dcd",
+      "translation_sha256": "95561e925e59dc707852f5231f8bf0c4111dab92e12a74233052f19a3aea52d1",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/_index.md",
+      "translation": "content/docs/pgbackrest/command/_index.zh.md",
+      "source_sha256": "4760c9c1f79522940568ddf9a482f5d9528c961a09b3a29b5856211854e9139f",
+      "translation_sha256": "a02bf8efe8858a287669d3df9930b9204f225b3ad15402d30660395bfc9f2602",
+      "review_scope": "full_technical_and_targeted_semantic",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/_index.md",
+      "translation": "content/docs/pgbackrest/command/_index.fr.md",
+      "source_sha256": "4760c9c1f79522940568ddf9a482f5d9528c961a09b3a29b5856211854e9139f",
+      "translation_sha256": "14af1a193d2e7ac1d94b0418cc71a6a878a919facc9a27b1cf4527c1e6efac56",
+      "review_scope": "full_technical_and_targeted_semantic",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/_index.md",
+      "translation": "content/docs/pgbackrest/command/_index.ja.md",
+      "source_sha256": "4760c9c1f79522940568ddf9a482f5d9528c961a09b3a29b5856211854e9139f",
+      "translation_sha256": "fb4f477743655fef3d045ef33ed44314151ee237f1be94eda069fb2622345fbf",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/_index.md",
+      "translation": "content/docs/pgbackrest/command/_index.de.md",
+      "source_sha256": "4760c9c1f79522940568ddf9a482f5d9528c961a09b3a29b5856211854e9139f",
+      "translation_sha256": "6d9913f6e6675d08c1a93b1d56e5c51a21351b0cfca7372e07d47386c00e0649",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/_index.md",
+      "translation": "content/docs/pgbackrest/command/_index.ru.md",
+      "source_sha256": "4760c9c1f79522940568ddf9a482f5d9528c961a09b3a29b5856211854e9139f",
+      "translation_sha256": "ce706167b3a9b3974160ebdd5b02661b9adeb39dbe4d21b2b0ac660a1d030bf4",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/annotate.md",
+      "translation": "content/docs/pgbackrest/command/annotate.zh.md",
+      "source_sha256": "406595e7b5218f3c594501469cff8700c12a5d4e86b3b3ebb0902df0622b79d0",
+      "translation_sha256": "58f537c55086c4b0fb94ecd13032e01a9703b93b537421a60e002d306c0d3023",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/annotate.md",
+      "translation": "content/docs/pgbackrest/command/annotate.fr.md",
+      "source_sha256": "406595e7b5218f3c594501469cff8700c12a5d4e86b3b3ebb0902df0622b79d0",
+      "translation_sha256": "9d93e42376ccabe4faa3f834cb67bf22ea6cfa7de0f5df497a0b9bb18b5b82d8",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/annotate.md",
+      "translation": "content/docs/pgbackrest/command/annotate.ja.md",
+      "source_sha256": "406595e7b5218f3c594501469cff8700c12a5d4e86b3b3ebb0902df0622b79d0",
+      "translation_sha256": "51bebbdad8b93ae49b1615c48b52ea72e43db6165cff01c48ef67c546a52a0e9",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/annotate.md",
+      "translation": "content/docs/pgbackrest/command/annotate.de.md",
+      "source_sha256": "406595e7b5218f3c594501469cff8700c12a5d4e86b3b3ebb0902df0622b79d0",
+      "translation_sha256": "b34d55a62d7c494271b05c2ae3badbd8e0ba43e5407f755a5771909ecdc2a5fd",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/annotate.md",
+      "translation": "content/docs/pgbackrest/command/annotate.ru.md",
+      "source_sha256": "406595e7b5218f3c594501469cff8700c12a5d4e86b3b3ebb0902df0622b79d0",
+      "translation_sha256": "e92b57ff3b9605c5ceaaee9a1b40715e9eaf3a3da8ec5a80c550c6d0fe7596cd",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/archive-get.md",
+      "translation": "content/docs/pgbackrest/command/archive-get.zh.md",
+      "source_sha256": "2c45cc33e6b6f630e20c1f615f361244b0b63ae249d37d186085b45975164202",
+      "translation_sha256": "2e2165704f9061145f867138bd2a3895bbddc5e1679a0a0a1a7da1e5a5a847b0",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/archive-get.md",
+      "translation": "content/docs/pgbackrest/command/archive-get.fr.md",
+      "source_sha256": "2c45cc33e6b6f630e20c1f615f361244b0b63ae249d37d186085b45975164202",
+      "translation_sha256": "6a509c29e7a8b8f5262d983a7dc6fdb2552454b4ed3737ff8f6b66b0938ce972",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/archive-get.md",
+      "translation": "content/docs/pgbackrest/command/archive-get.ja.md",
+      "source_sha256": "2c45cc33e6b6f630e20c1f615f361244b0b63ae249d37d186085b45975164202",
+      "translation_sha256": "018b1cc44b53766496f7b2015e471e1caeede9ef92481de5db4ade08dc6c8b9f",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/archive-get.md",
+      "translation": "content/docs/pgbackrest/command/archive-get.de.md",
+      "source_sha256": "2c45cc33e6b6f630e20c1f615f361244b0b63ae249d37d186085b45975164202",
+      "translation_sha256": "9b30ad5b2c3008b985bfbccedf6d96220355776a778a4cd10e75a3f58530f52b",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/archive-get.md",
+      "translation": "content/docs/pgbackrest/command/archive-get.ru.md",
+      "source_sha256": "2c45cc33e6b6f630e20c1f615f361244b0b63ae249d37d186085b45975164202",
+      "translation_sha256": "f3555b39e6bb86c16153c198ea3caa176383e3cc3934b0ff1babc5d439e2b7e0",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/archive-push.md",
+      "translation": "content/docs/pgbackrest/command/archive-push.zh.md",
+      "source_sha256": "4bfea7793ea6afb4aa7f94f6125a6ec434823788d6cb4913874e79e2c234fea4",
+      "translation_sha256": "65d9a5ed822c8f7357e8b262aa2dacb1fa82b08d74d4d54a4633915a28f5353c",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/archive-push.md",
+      "translation": "content/docs/pgbackrest/command/archive-push.fr.md",
+      "source_sha256": "4bfea7793ea6afb4aa7f94f6125a6ec434823788d6cb4913874e79e2c234fea4",
+      "translation_sha256": "c821ae72adcc867793fe28ba74d405f9b5083d421da914f46dee277e40186f22",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/archive-push.md",
+      "translation": "content/docs/pgbackrest/command/archive-push.ja.md",
+      "source_sha256": "4bfea7793ea6afb4aa7f94f6125a6ec434823788d6cb4913874e79e2c234fea4",
+      "translation_sha256": "0c664f895f78d994eba3e2ff7037d45acf17725ed610da78f6a94d5d693dbaa0",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/archive-push.md",
+      "translation": "content/docs/pgbackrest/command/archive-push.de.md",
+      "source_sha256": "4bfea7793ea6afb4aa7f94f6125a6ec434823788d6cb4913874e79e2c234fea4",
+      "translation_sha256": "5fa78c9661192f6d6060b3bf65a4375adbd2fb192eda2ea2d587aa920beeb3ca",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/archive-push.md",
+      "translation": "content/docs/pgbackrest/command/archive-push.ru.md",
+      "source_sha256": "4bfea7793ea6afb4aa7f94f6125a6ec434823788d6cb4913874e79e2c234fea4",
+      "translation_sha256": "125a642447a1c7f045fd44b81fcc6676e8fc7b64f73c36f837b47ccdcaed6a18",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/backup.md",
+      "translation": "content/docs/pgbackrest/command/backup.zh.md",
+      "source_sha256": "8a3e8d7235a77ae7f2eece0e992dfbec8b3b2665a2e80b1932ddc9ed48416d56",
+      "translation_sha256": "50e9ef64e09dcbd4b3456fb6327bd18f5ae0fef83cd8d91146cf749c2a261e7b",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/backup.md",
+      "translation": "content/docs/pgbackrest/command/backup.fr.md",
+      "source_sha256": "8a3e8d7235a77ae7f2eece0e992dfbec8b3b2665a2e80b1932ddc9ed48416d56",
+      "translation_sha256": "97090d70b2d64ab314b4b71809005fd5e7ada608ce575e6c12e5ea7d9b5ec24f",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/backup.md",
+      "translation": "content/docs/pgbackrest/command/backup.ja.md",
+      "source_sha256": "8a3e8d7235a77ae7f2eece0e992dfbec8b3b2665a2e80b1932ddc9ed48416d56",
+      "translation_sha256": "ec20a5fe9374661a8b473767da61dcdac58782226dc0d28e0c918d3ba69ff1e7",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/backup.md",
+      "translation": "content/docs/pgbackrest/command/backup.de.md",
+      "source_sha256": "8a3e8d7235a77ae7f2eece0e992dfbec8b3b2665a2e80b1932ddc9ed48416d56",
+      "translation_sha256": "0317395402055af16c435c9710e68dc11af70bc71b7b51636f2cbf59ad4d64c8",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/backup.md",
+      "translation": "content/docs/pgbackrest/command/backup.ru.md",
+      "source_sha256": "8a3e8d7235a77ae7f2eece0e992dfbec8b3b2665a2e80b1932ddc9ed48416d56",
+      "translation_sha256": "04b8804eb23f07eb4b916784fb0895d986429a72e81d08b3259f2779eae12fb3",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/check.md",
+      "translation": "content/docs/pgbackrest/command/check.zh.md",
+      "source_sha256": "424a487db5db27bf20ea92022943ed3aa81754deca5233dbd54e8b911e46233d",
+      "translation_sha256": "81001706aba6c6e28662f79650fd4f4a040d6e9c8df9bfce276dc40ac81c5f6a",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/check.md",
+      "translation": "content/docs/pgbackrest/command/check.fr.md",
+      "source_sha256": "424a487db5db27bf20ea92022943ed3aa81754deca5233dbd54e8b911e46233d",
+      "translation_sha256": "b2e7bfa44c8f0256940438e72e873efb7188b9c0e8938a3c5e9797edf5d7e0d4",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/check.md",
+      "translation": "content/docs/pgbackrest/command/check.ja.md",
+      "source_sha256": "424a487db5db27bf20ea92022943ed3aa81754deca5233dbd54e8b911e46233d",
+      "translation_sha256": "3e50ffb7d108ccf6323f154c0edc48f63dc118109b498cf9a0823299bcf52077",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/check.md",
+      "translation": "content/docs/pgbackrest/command/check.de.md",
+      "source_sha256": "424a487db5db27bf20ea92022943ed3aa81754deca5233dbd54e8b911e46233d",
+      "translation_sha256": "908cccb495bb9ffe02cfe837bab13ed2f97838e061d013b7caf2dd08df95f727",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/check.md",
+      "translation": "content/docs/pgbackrest/command/check.ru.md",
+      "source_sha256": "424a487db5db27bf20ea92022943ed3aa81754deca5233dbd54e8b911e46233d",
+      "translation_sha256": "34497b953c1fe2678198f18bffc911ff10414c281875b79991d354080fe4e8e6",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/expire.md",
+      "translation": "content/docs/pgbackrest/command/expire.zh.md",
+      "source_sha256": "239f312170bb2081ee1e79b422e2db50f6c258e5160a0e9336baa131384a2321",
+      "translation_sha256": "9916c5d7606aa88fa6e6722eb1873200a0d718e2c464e4e4be26ce64807258ea",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/expire.md",
+      "translation": "content/docs/pgbackrest/command/expire.fr.md",
+      "source_sha256": "239f312170bb2081ee1e79b422e2db50f6c258e5160a0e9336baa131384a2321",
+      "translation_sha256": "a9f76dc8870604cdab22159ce7b670d8fe2dd3e3cb12c805cd5e78d51504492c",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/expire.md",
+      "translation": "content/docs/pgbackrest/command/expire.ja.md",
+      "source_sha256": "239f312170bb2081ee1e79b422e2db50f6c258e5160a0e9336baa131384a2321",
+      "translation_sha256": "fef1db316074c33833f98ded1e1e7de173ed1a9a6f23505b02d236cd7a0ac112",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/expire.md",
+      "translation": "content/docs/pgbackrest/command/expire.de.md",
+      "source_sha256": "239f312170bb2081ee1e79b422e2db50f6c258e5160a0e9336baa131384a2321",
+      "translation_sha256": "64e68f173ac9ec3a9778dd697d8b38c6ff94f30372b77849707fa0502d8874bf",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/expire.md",
+      "translation": "content/docs/pgbackrest/command/expire.ru.md",
+      "source_sha256": "239f312170bb2081ee1e79b422e2db50f6c258e5160a0e9336baa131384a2321",
+      "translation_sha256": "581e720a476aa1b170d797df80eb4cd9e3b7da7016bd4437d50aab49aea28c85",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/help.md",
+      "translation": "content/docs/pgbackrest/command/help.zh.md",
+      "source_sha256": "546f813034e32c982781d7fd5e383a4ac886aee06920089b67d9fd11aaed326e",
+      "translation_sha256": "c040faa631ab4e008f181b28cfa7ff8cce2ebf1d08d4b79200b0246dc4ba135a",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/help.md",
+      "translation": "content/docs/pgbackrest/command/help.fr.md",
+      "source_sha256": "546f813034e32c982781d7fd5e383a4ac886aee06920089b67d9fd11aaed326e",
+      "translation_sha256": "e243e8b5189cf2d2b74c86cf0ff0974943e794531514ba80e10eead6294d930b",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/help.md",
+      "translation": "content/docs/pgbackrest/command/help.ja.md",
+      "source_sha256": "546f813034e32c982781d7fd5e383a4ac886aee06920089b67d9fd11aaed326e",
+      "translation_sha256": "f87bffed53354eb2c5ee535f781d0748ad36e1fa806acd680e884221624b2344",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/help.md",
+      "translation": "content/docs/pgbackrest/command/help.de.md",
+      "source_sha256": "546f813034e32c982781d7fd5e383a4ac886aee06920089b67d9fd11aaed326e",
+      "translation_sha256": "0b37ea36daa915fc514de5df9e2d8815a4c97b536f035249e0e737e024743d40",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/help.md",
+      "translation": "content/docs/pgbackrest/command/help.ru.md",
+      "source_sha256": "546f813034e32c982781d7fd5e383a4ac886aee06920089b67d9fd11aaed326e",
+      "translation_sha256": "a4ba877bcb2075e0b1ce8f448714ab66c8beb7c1fdc28891d76b75e5f216e71c",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/info.md",
+      "translation": "content/docs/pgbackrest/command/info.zh.md",
+      "source_sha256": "db2687efcc8ad0f92dfd2249ccbc2509f549db40c90390dd54901b934cd243aa",
+      "translation_sha256": "0d503c10083c8384906fddd09238240d1cb68360334d53db58c0e9f9f64b9b52",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/info.md",
+      "translation": "content/docs/pgbackrest/command/info.fr.md",
+      "source_sha256": "db2687efcc8ad0f92dfd2249ccbc2509f549db40c90390dd54901b934cd243aa",
+      "translation_sha256": "cfab8a669686f1f4061ffa6f74cc8e6ab0513c0f3089d867ce2eddca67b4b32c",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/info.md",
+      "translation": "content/docs/pgbackrest/command/info.ja.md",
+      "source_sha256": "db2687efcc8ad0f92dfd2249ccbc2509f549db40c90390dd54901b934cd243aa",
+      "translation_sha256": "37f01e350a0d632c4a621c70c2c25913d5bc1a54e54bc7a215a58ffd750d247a",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/info.md",
+      "translation": "content/docs/pgbackrest/command/info.de.md",
+      "source_sha256": "db2687efcc8ad0f92dfd2249ccbc2509f549db40c90390dd54901b934cd243aa",
+      "translation_sha256": "79b9ce651d5a5a8af6a3e268a016110e5d8bb8aed0f3875e3abe61838ac56555",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/info.md",
+      "translation": "content/docs/pgbackrest/command/info.ru.md",
+      "source_sha256": "db2687efcc8ad0f92dfd2249ccbc2509f549db40c90390dd54901b934cd243aa",
+      "translation_sha256": "e2679c2fba0a537650797e68e2d101c8bf9317b03b6eacaa49033b75141cf0a5",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/repo-get.md",
+      "translation": "content/docs/pgbackrest/command/repo-get.zh.md",
+      "source_sha256": "6e8372379d11a5f2e21b9d89bb175bde2bc4313ff5d959e17a0c63ccdbee45dd",
+      "translation_sha256": "2220baf08164950a76ae7aae7caa7bdf65117f0e2f73e074da55df02eacb46e7",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/repo-get.md",
+      "translation": "content/docs/pgbackrest/command/repo-get.fr.md",
+      "source_sha256": "6e8372379d11a5f2e21b9d89bb175bde2bc4313ff5d959e17a0c63ccdbee45dd",
+      "translation_sha256": "3def97606d8974b20ab906ddfa45d2e25c2bfb9d49ba3c2c1f4c1fea9e177ac3",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/repo-get.md",
+      "translation": "content/docs/pgbackrest/command/repo-get.ja.md",
+      "source_sha256": "6e8372379d11a5f2e21b9d89bb175bde2bc4313ff5d959e17a0c63ccdbee45dd",
+      "translation_sha256": "4ae8834fda18277fce611dff6515775b4134b366211c3cd21ef3df299605ed89",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/repo-get.md",
+      "translation": "content/docs/pgbackrest/command/repo-get.de.md",
+      "source_sha256": "6e8372379d11a5f2e21b9d89bb175bde2bc4313ff5d959e17a0c63ccdbee45dd",
+      "translation_sha256": "b1feaeafefc401ee9376c96cd70d78def8e3980381a7728b9d0145938d37e719",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/repo-get.md",
+      "translation": "content/docs/pgbackrest/command/repo-get.ru.md",
+      "source_sha256": "6e8372379d11a5f2e21b9d89bb175bde2bc4313ff5d959e17a0c63ccdbee45dd",
+      "translation_sha256": "61f3ae81acebafaf6b6484ab4addf3bc35f29fc64fa1b1851794d15446d515a1",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/repo-ls.md",
+      "translation": "content/docs/pgbackrest/command/repo-ls.zh.md",
+      "source_sha256": "042ad830a608976fff7ec2f7c6733105f57ff88854a93d5889b1e1384a84ea8e",
+      "translation_sha256": "1441c46bf7c614f445afa033d9c316e9403710ee6bae70acd4de9b05c8edc07e",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/repo-ls.md",
+      "translation": "content/docs/pgbackrest/command/repo-ls.fr.md",
+      "source_sha256": "042ad830a608976fff7ec2f7c6733105f57ff88854a93d5889b1e1384a84ea8e",
+      "translation_sha256": "9ce7aea6a67565c50a0546b864d15abf642c70cc5c3cf9398344f9736bb3d014",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/repo-ls.md",
+      "translation": "content/docs/pgbackrest/command/repo-ls.ja.md",
+      "source_sha256": "042ad830a608976fff7ec2f7c6733105f57ff88854a93d5889b1e1384a84ea8e",
+      "translation_sha256": "33c78d2e293036602f50810c232b7e37f2f4a52e4381704b258b3a4430f3fecb",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/repo-ls.md",
+      "translation": "content/docs/pgbackrest/command/repo-ls.de.md",
+      "source_sha256": "042ad830a608976fff7ec2f7c6733105f57ff88854a93d5889b1e1384a84ea8e",
+      "translation_sha256": "85ed06d7fd6a3b47d662c9be5f335e27f4a3caf0876fb3a17d81414ab4c6d8f7",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/repo-ls.md",
+      "translation": "content/docs/pgbackrest/command/repo-ls.ru.md",
+      "source_sha256": "042ad830a608976fff7ec2f7c6733105f57ff88854a93d5889b1e1384a84ea8e",
+      "translation_sha256": "788d790ecdf90f65f3e11d79b530fd578c499cac646352bbf95088195a3e6137",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/restore.md",
+      "translation": "content/docs/pgbackrest/command/restore.zh.md",
+      "source_sha256": "240ff96492e272e872b83725d453d544b36cab5fed13528c10cd46f896863655",
+      "translation_sha256": "1653248cd639a362687c06c43926371d03e3108438d33b487687a93e97dc6381",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/restore.md",
+      "translation": "content/docs/pgbackrest/command/restore.fr.md",
+      "source_sha256": "240ff96492e272e872b83725d453d544b36cab5fed13528c10cd46f896863655",
+      "translation_sha256": "154de623cc3548f80935807134470af6bf27cc2acde0cbd6bef0075e06f809fc",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/restore.md",
+      "translation": "content/docs/pgbackrest/command/restore.ja.md",
+      "source_sha256": "240ff96492e272e872b83725d453d544b36cab5fed13528c10cd46f896863655",
+      "translation_sha256": "d7142def227959ac043e03f850fb4e9393a4439bae7ab520f18e738e8df3841a",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/restore.md",
+      "translation": "content/docs/pgbackrest/command/restore.de.md",
+      "source_sha256": "240ff96492e272e872b83725d453d544b36cab5fed13528c10cd46f896863655",
+      "translation_sha256": "dd489e32433e2392357b802c97781cd4208f5a793ddf3e0c48c7c44aa56a222c",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/restore.md",
+      "translation": "content/docs/pgbackrest/command/restore.ru.md",
+      "source_sha256": "240ff96492e272e872b83725d453d544b36cab5fed13528c10cd46f896863655",
+      "translation_sha256": "1a10864f979f9b1abe581c4274ed4a77d292485061626c404b209d2baa55de3f",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/server-ping.md",
+      "translation": "content/docs/pgbackrest/command/server-ping.zh.md",
+      "source_sha256": "6ae4d32b075c26800ebabbe9553b76eb6503f7a7458622bce532dfb6e9377fa4",
+      "translation_sha256": "cca053bb3fed2e09a745b6df27a0161282043e05d5a94706c981db0357e46d3b",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/server-ping.md",
+      "translation": "content/docs/pgbackrest/command/server-ping.fr.md",
+      "source_sha256": "6ae4d32b075c26800ebabbe9553b76eb6503f7a7458622bce532dfb6e9377fa4",
+      "translation_sha256": "4b20de534dde1ca863f5b6db2f9dadc35c748095d726d3f47e66a71a846f63ba",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/server-ping.md",
+      "translation": "content/docs/pgbackrest/command/server-ping.ja.md",
+      "source_sha256": "6ae4d32b075c26800ebabbe9553b76eb6503f7a7458622bce532dfb6e9377fa4",
+      "translation_sha256": "0737deb82fe43403cec3e7f7a8e3661a839f7523c98f34efe8cd8a26a29fa947",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/server-ping.md",
+      "translation": "content/docs/pgbackrest/command/server-ping.de.md",
+      "source_sha256": "6ae4d32b075c26800ebabbe9553b76eb6503f7a7458622bce532dfb6e9377fa4",
+      "translation_sha256": "925df8b2e52140a634f55d83902900dc3a57117584558a7c14ec56d39e1cb572",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/server-ping.md",
+      "translation": "content/docs/pgbackrest/command/server-ping.ru.md",
+      "source_sha256": "6ae4d32b075c26800ebabbe9553b76eb6503f7a7458622bce532dfb6e9377fa4",
+      "translation_sha256": "5c1ff7aa4a054512b2ee493af8113f6fe4d0e540a63b67e1ab590115656594c3",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/server.md",
+      "translation": "content/docs/pgbackrest/command/server.zh.md",
+      "source_sha256": "86725a19121f6734026269fa742e28d66c61b8acd2ea5d2a157d08b1917582c0",
+      "translation_sha256": "754a037b2ccb551207a1deaf7c2d567f6c465d2e64978a5595ddf35f9fe1f433",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/server.md",
+      "translation": "content/docs/pgbackrest/command/server.fr.md",
+      "source_sha256": "86725a19121f6734026269fa742e28d66c61b8acd2ea5d2a157d08b1917582c0",
+      "translation_sha256": "ddb47ea3d962839e21dddc4c192f747c2601da8441f18c0177b0f42c0c94715e",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/server.md",
+      "translation": "content/docs/pgbackrest/command/server.ja.md",
+      "source_sha256": "86725a19121f6734026269fa742e28d66c61b8acd2ea5d2a157d08b1917582c0",
+      "translation_sha256": "cc4f8f449f5ac007d670a0d432071689fcf7dd45691ec7f8ef2685cb37d314cf",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/server.md",
+      "translation": "content/docs/pgbackrest/command/server.de.md",
+      "source_sha256": "86725a19121f6734026269fa742e28d66c61b8acd2ea5d2a157d08b1917582c0",
+      "translation_sha256": "2c12f5e4e992129c2559138a70822af39a8fd2c22740617304fa5db8fccf3ea1",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/server.md",
+      "translation": "content/docs/pgbackrest/command/server.ru.md",
+      "source_sha256": "86725a19121f6734026269fa742e28d66c61b8acd2ea5d2a157d08b1917582c0",
+      "translation_sha256": "51222a8413f7a41375c6c1c2f256536dd7da5d983b0f1531ca173f432df8c366",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stanza-create.md",
+      "translation": "content/docs/pgbackrest/command/stanza-create.zh.md",
+      "source_sha256": "4b6ef36f72761d49d28533ff6482c631ee6a19077057f2e8ddd33bbfd0b0bce2",
+      "translation_sha256": "6cc4af2b44df49f5b5b685ba7d9a6ebe3c7a68be571c484d55de08857a86e6e7",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stanza-create.md",
+      "translation": "content/docs/pgbackrest/command/stanza-create.fr.md",
+      "source_sha256": "4b6ef36f72761d49d28533ff6482c631ee6a19077057f2e8ddd33bbfd0b0bce2",
+      "translation_sha256": "a7f67366f252dc115b85999c0fe36905ef219522b0ebae4cc2a84c94248030b8",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stanza-create.md",
+      "translation": "content/docs/pgbackrest/command/stanza-create.ja.md",
+      "source_sha256": "4b6ef36f72761d49d28533ff6482c631ee6a19077057f2e8ddd33bbfd0b0bce2",
+      "translation_sha256": "f443ce520fcc91fef7e935822901e32294228a2e07967ed6e27882f92c033d94",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stanza-create.md",
+      "translation": "content/docs/pgbackrest/command/stanza-create.de.md",
+      "source_sha256": "4b6ef36f72761d49d28533ff6482c631ee6a19077057f2e8ddd33bbfd0b0bce2",
+      "translation_sha256": "90e1d73717c2c74b004821a132964505165e40da10dde23b9a09af38461302a1",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stanza-create.md",
+      "translation": "content/docs/pgbackrest/command/stanza-create.ru.md",
+      "source_sha256": "4b6ef36f72761d49d28533ff6482c631ee6a19077057f2e8ddd33bbfd0b0bce2",
+      "translation_sha256": "c5d3aab993fd8d9f50a5db5d2f10c7b258064a036a01b3ef35cee8c49308e34d",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stanza-delete.md",
+      "translation": "content/docs/pgbackrest/command/stanza-delete.zh.md",
+      "source_sha256": "6760ae68d1bf40b0d90ebd7501883ecd6646b5ad44af43220b7ecbd3f4d56160",
+      "translation_sha256": "82184d8e80886f90cc55e9079ca1f4b106c467f6239cfe26e2226f566d9cf760",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stanza-delete.md",
+      "translation": "content/docs/pgbackrest/command/stanza-delete.fr.md",
+      "source_sha256": "6760ae68d1bf40b0d90ebd7501883ecd6646b5ad44af43220b7ecbd3f4d56160",
+      "translation_sha256": "e2ae005e1f6e4f58e45bef84082ce2c8451c9ecbc210e15e83ad9e2067e44850",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stanza-delete.md",
+      "translation": "content/docs/pgbackrest/command/stanza-delete.ja.md",
+      "source_sha256": "6760ae68d1bf40b0d90ebd7501883ecd6646b5ad44af43220b7ecbd3f4d56160",
+      "translation_sha256": "1536ae9f796a547f5b66c3a8906b8b33b1515ddd485f3c27b892e0ec846506e4",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stanza-delete.md",
+      "translation": "content/docs/pgbackrest/command/stanza-delete.de.md",
+      "source_sha256": "6760ae68d1bf40b0d90ebd7501883ecd6646b5ad44af43220b7ecbd3f4d56160",
+      "translation_sha256": "4f05e5db6fa6c621212a256be1feec0807601b945e099ced57665b27120d016a",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stanza-delete.md",
+      "translation": "content/docs/pgbackrest/command/stanza-delete.ru.md",
+      "source_sha256": "6760ae68d1bf40b0d90ebd7501883ecd6646b5ad44af43220b7ecbd3f4d56160",
+      "translation_sha256": "bffcd4f11c2cb475ba31b013c7e1030b807dfd0594257bb636e28f6728ab1c97",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stanza-upgrade.md",
+      "translation": "content/docs/pgbackrest/command/stanza-upgrade.zh.md",
+      "source_sha256": "3c0587be5a2becd842b14a08ebbdcbd4c3bff92688002d67a648bda159ae4bb8",
+      "translation_sha256": "0cf5a54406e28cf7b9bc1fae6f667e67720fc72feb056f1f90caff49d0c0daaa",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stanza-upgrade.md",
+      "translation": "content/docs/pgbackrest/command/stanza-upgrade.fr.md",
+      "source_sha256": "3c0587be5a2becd842b14a08ebbdcbd4c3bff92688002d67a648bda159ae4bb8",
+      "translation_sha256": "21f36b1f63e0f055d99e4fe184ab40c773c451637b3b9803e4cc728751a7e849",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stanza-upgrade.md",
+      "translation": "content/docs/pgbackrest/command/stanza-upgrade.ja.md",
+      "source_sha256": "3c0587be5a2becd842b14a08ebbdcbd4c3bff92688002d67a648bda159ae4bb8",
+      "translation_sha256": "f23b3d248939dbc23a3648564d930a77d1029cb367ade1065df0175756caabd2",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stanza-upgrade.md",
+      "translation": "content/docs/pgbackrest/command/stanza-upgrade.de.md",
+      "source_sha256": "3c0587be5a2becd842b14a08ebbdcbd4c3bff92688002d67a648bda159ae4bb8",
+      "translation_sha256": "88661206b5c42991405f6be3bcb750c4c88c5f913f79b5696d819d9845c9619b",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stanza-upgrade.md",
+      "translation": "content/docs/pgbackrest/command/stanza-upgrade.ru.md",
+      "source_sha256": "3c0587be5a2becd842b14a08ebbdcbd4c3bff92688002d67a648bda159ae4bb8",
+      "translation_sha256": "40f81477ce6c89edc0ec491fe4879b41040cfa33ddffe1076a6352cf103f4c9a",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/start.md",
+      "translation": "content/docs/pgbackrest/command/start.zh.md",
+      "source_sha256": "30cfad04e2f0d9ef2e95b4a2d74277530175e15c132708f7488346e4f222e511",
+      "translation_sha256": "91cb06a2dbcd417b050675a4b85b2f9739801e245df4c7b3bfd75982b4bba969",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/start.md",
+      "translation": "content/docs/pgbackrest/command/start.fr.md",
+      "source_sha256": "30cfad04e2f0d9ef2e95b4a2d74277530175e15c132708f7488346e4f222e511",
+      "translation_sha256": "80d521a1dd021be97d2ebdc8f5f36cf5221289998ddbdcc42d9d5fba8c35fe8a",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/start.md",
+      "translation": "content/docs/pgbackrest/command/start.ja.md",
+      "source_sha256": "30cfad04e2f0d9ef2e95b4a2d74277530175e15c132708f7488346e4f222e511",
+      "translation_sha256": "0c31bfea82c137d90d1ab05bf5df4e2b80d41e70da52f56816cb141bacd69761",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/start.md",
+      "translation": "content/docs/pgbackrest/command/start.de.md",
+      "source_sha256": "30cfad04e2f0d9ef2e95b4a2d74277530175e15c132708f7488346e4f222e511",
+      "translation_sha256": "e16bba7e525381112ab8e9d209303ad5aef21716d8e27e6442e92306f9d02319",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/start.md",
+      "translation": "content/docs/pgbackrest/command/start.ru.md",
+      "source_sha256": "30cfad04e2f0d9ef2e95b4a2d74277530175e15c132708f7488346e4f222e511",
+      "translation_sha256": "0cd7136ad4ce99dec2936a5c32897d00bc62da0a16dbe30184beb904ffc0abb1",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stop.md",
+      "translation": "content/docs/pgbackrest/command/stop.zh.md",
+      "source_sha256": "621e44a2c1b9f8769e11e49a0ca9e356cd60254144c9db18b66f828ef672660e",
+      "translation_sha256": "8f613415ce451b3f317b1159e80c313ccea43edf403db8cf883b913febd4b5f6",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stop.md",
+      "translation": "content/docs/pgbackrest/command/stop.fr.md",
+      "source_sha256": "621e44a2c1b9f8769e11e49a0ca9e356cd60254144c9db18b66f828ef672660e",
+      "translation_sha256": "f4d8fe178d305b99cefd81130c0d365c8c4bc1caa48ca49b4ed836c869584406",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stop.md",
+      "translation": "content/docs/pgbackrest/command/stop.ja.md",
+      "source_sha256": "621e44a2c1b9f8769e11e49a0ca9e356cd60254144c9db18b66f828ef672660e",
+      "translation_sha256": "05dc76dfd3753d80748e2b2ed55c08038ea27fa081e234c1ac52af71aab94e89",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stop.md",
+      "translation": "content/docs/pgbackrest/command/stop.de.md",
+      "source_sha256": "621e44a2c1b9f8769e11e49a0ca9e356cd60254144c9db18b66f828ef672660e",
+      "translation_sha256": "fc63ee4d770d60ad1fdefe0e4a1c2b97c57985769b4784874cf94d5a1e783cf5",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/stop.md",
+      "translation": "content/docs/pgbackrest/command/stop.ru.md",
+      "source_sha256": "621e44a2c1b9f8769e11e49a0ca9e356cd60254144c9db18b66f828ef672660e",
+      "translation_sha256": "196159d63d25d3847836bbfeb462a3139d5386796af01faa64e4815a4f67300f",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/verify.md",
+      "translation": "content/docs/pgbackrest/command/verify.zh.md",
+      "source_sha256": "6e0f6fa8caab98121064dc001f7642095542b6793e9739bc8b5d2bee3760449a",
+      "translation_sha256": "50c0d76b6814bb9aab45c5d4b20b92373a3280a3afac835de21aa74903e3bff0",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/verify.md",
+      "translation": "content/docs/pgbackrest/command/verify.fr.md",
+      "source_sha256": "6e0f6fa8caab98121064dc001f7642095542b6793e9739bc8b5d2bee3760449a",
+      "translation_sha256": "9312fc0ff407ccdca4e5f5289bc8f0c43de9ecb9a1f51cd342e950d2ed077701",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/verify.md",
+      "translation": "content/docs/pgbackrest/command/verify.ja.md",
+      "source_sha256": "6e0f6fa8caab98121064dc001f7642095542b6793e9739bc8b5d2bee3760449a",
+      "translation_sha256": "42eabc37f1908dd08a83ac71d90464ad00e66d839298d5503817555cba540397",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/verify.md",
+      "translation": "content/docs/pgbackrest/command/verify.de.md",
+      "source_sha256": "6e0f6fa8caab98121064dc001f7642095542b6793e9739bc8b5d2bee3760449a",
+      "translation_sha256": "234097b9df710c32d89ea3b22c4e4adcc3e0c2146310548b31e38a5baa1e9338",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/verify.md",
+      "translation": "content/docs/pgbackrest/command/verify.ru.md",
+      "source_sha256": "6e0f6fa8caab98121064dc001f7642095542b6793e9739bc8b5d2bee3760449a",
+      "translation_sha256": "eb57858f77812d6e30560b6767c1250ff9a439b0d88e493c9c7cf731acea405f",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/version.md",
+      "translation": "content/docs/pgbackrest/command/version.zh.md",
+      "source_sha256": "863140c634152922ed9547565bba9da6c53eb20c3378f17833ec84e8f7a18ab2",
+      "translation_sha256": "6d6dcf583390016a5e08bb17212a78a06a12a418f86e8f81251c8120f0e3f299",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/version.md",
+      "translation": "content/docs/pgbackrest/command/version.fr.md",
+      "source_sha256": "863140c634152922ed9547565bba9da6c53eb20c3378f17833ec84e8f7a18ab2",
+      "translation_sha256": "e9cfdf21df77a4014a95493d1cdf42d134f717ba4ed9b0abfaa3816467b117b6",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/version.md",
+      "translation": "content/docs/pgbackrest/command/version.ja.md",
+      "source_sha256": "863140c634152922ed9547565bba9da6c53eb20c3378f17833ec84e8f7a18ab2",
+      "translation_sha256": "3407e14b57ceb6fe276f4d54dfd51ebef70b3a2dca57c100a97d17748b68ace7",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/version.md",
+      "translation": "content/docs/pgbackrest/command/version.de.md",
+      "source_sha256": "863140c634152922ed9547565bba9da6c53eb20c3378f17833ec84e8f7a18ab2",
+      "translation_sha256": "01c99774ff606837eed423a9fad2c8f65186fddfdaef9d56737b3319f4fbc4ac",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/command/version.md",
+      "translation": "content/docs/pgbackrest/command/version.ru.md",
+      "source_sha256": "863140c634152922ed9547565bba9da6c53eb20c3378f17833ec84e8f7a18ab2",
+      "translation_sha256": "95ae82bf9e361c62d65329924eced5d75daccd3898094297e71290de0516146e",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/configuration.md",
+      "translation": "content/docs/pgbackrest/configuration.zh.md",
+      "source_sha256": "0647a00dc1e0e80da707a3ed817fd9cd95fd0ed2e91e4964bfec652bdd5a4da9",
+      "translation_sha256": "ebe9aad8f3be9041bc598b1f500bfd2daa393b2a5bdda1ea63e2c68e5cefff71",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/configuration.md",
+      "translation": "content/docs/pgbackrest/configuration.fr.md",
+      "source_sha256": "0647a00dc1e0e80da707a3ed817fd9cd95fd0ed2e91e4964bfec652bdd5a4da9",
+      "translation_sha256": "743ae9a03d82b901cd7b32ca9bf0fd2f92fe7ec6fb9193303c7952f469124dcc",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/configuration.md",
+      "translation": "content/docs/pgbackrest/configuration.ja.md",
+      "source_sha256": "0647a00dc1e0e80da707a3ed817fd9cd95fd0ed2e91e4964bfec652bdd5a4da9",
+      "translation_sha256": "8aaa3c8fc3d9da09ab348fb19a4d0f973f0b2e89ee8294522e0c1346ae249d99",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/configuration.md",
+      "translation": "content/docs/pgbackrest/configuration.de.md",
+      "source_sha256": "0647a00dc1e0e80da707a3ed817fd9cd95fd0ed2e91e4964bfec652bdd5a4da9",
+      "translation_sha256": "ad3980b49677afe7e92dcbc7f71fae51634c1cc638d154a37fc13087a997125e",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/configuration.md",
+      "translation": "content/docs/pgbackrest/configuration.ru.md",
+      "source_sha256": "0647a00dc1e0e80da707a3ed817fd9cd95fd0ed2e91e4964bfec652bdd5a4da9",
+      "translation_sha256": "983ed7648f77a0404868b11db0fe11c740e7c5c6ba27c74e2dfe0e55206159a1",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/faq.md",
+      "translation": "content/docs/pgbackrest/faq.zh.md",
+      "source_sha256": "c140ff5461dbb6a25694504a644632d5f6371c466c616612dc929012e6e7f825",
+      "translation_sha256": "60bc0c5a2a420d341703c27336b7a44e3958941fdc65cab8efece1ab33f633bc",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/faq.md",
+      "translation": "content/docs/pgbackrest/faq.fr.md",
+      "source_sha256": "c140ff5461dbb6a25694504a644632d5f6371c466c616612dc929012e6e7f825",
+      "translation_sha256": "c5e4b2b6f036a6d563c3d042aced1edf367e5d9f40c8057937caf35c1cfb317a",
+      "review_scope": "full_technical_and_targeted_semantic"
+    },
+    {
+      "source": "content/docs/pgbackrest/faq.md",
+      "translation": "content/docs/pgbackrest/faq.ja.md",
+      "source_sha256": "c140ff5461dbb6a25694504a644632d5f6371c466c616612dc929012e6e7f825",
+      "translation_sha256": "75921b398461778bb3361bcd1ea7ed394e06d1b286f1e6264d270efa82e57990",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/faq.md",
+      "translation": "content/docs/pgbackrest/faq.de.md",
+      "source_sha256": "c140ff5461dbb6a25694504a644632d5f6371c466c616612dc929012e6e7f825",
+      "translation_sha256": "239952f0f0b23c3b0f140a1024e6327bae7521af1a37bf11e6f34e902552102e",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/faq.md",
+      "translation": "content/docs/pgbackrest/faq.ru.md",
+      "source_sha256": "c140ff5461dbb6a25694504a644632d5f6371c466c616612dc929012e6e7f825",
+      "translation_sha256": "812e61f5f21f3815968c0dbdd1b442640e97192a5a8c47492a6f8f926ca15eb7",
+      "review_scope": "prior_full_review_plus_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/metric.md",
+      "translation": "content/docs/pgbackrest/metric.zh.md",
+      "source_sha256": "706a85f024cfb69c8a3227ecd0bbda06c22f2e3c72637d8282e526da3a4f195f",
+      "translation_sha256": "3a0e2d488cb6db6b2116283c9ad8ed83b2ff662ce31769fa35b539682288aceb",
+      "review_scope": "full_technical_and_targeted_semantic",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/metric.md",
+      "translation": "content/docs/pgbackrest/metric.fr.md",
+      "source_sha256": "706a85f024cfb69c8a3227ecd0bbda06c22f2e3c72637d8282e526da3a4f195f",
+      "translation_sha256": "fd183ea462e476b9988f69c3b1f60b2388ab7ce5bd449defcaddf3273fa33700",
+      "review_scope": "full_technical_and_targeted_semantic",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/metric.md",
+      "translation": "content/docs/pgbackrest/metric.ja.md",
+      "source_sha256": "706a85f024cfb69c8a3227ecd0bbda06c22f2e3c72637d8282e526da3a4f195f",
+      "translation_sha256": "846b5f3e0aed28025e9cdb210ca80be6ead6540936f2caf83859f76516cd2879",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/metric.md",
+      "translation": "content/docs/pgbackrest/metric.de.md",
+      "source_sha256": "706a85f024cfb69c8a3227ecd0bbda06c22f2e3c72637d8282e526da3a4f195f",
+      "translation_sha256": "e1934ab850704262ff0e00ab2d2a494b8eb1a2aa965f66b716a9b597df8a1a00",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/metric.md",
+      "translation": "content/docs/pgbackrest/metric.ru.md",
+      "source_sha256": "706a85f024cfb69c8a3227ecd0bbda06c22f2e3c72637d8282e526da3a4f195f",
+      "translation_sha256": "edcf4917fafbda96c295c4198e3c81e16d1ba56775bca27c2c99e54f2d9749dc",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/news.md",
+      "translation": "content/docs/pgbackrest/news.zh.md",
+      "source_sha256": "8f21696ada510b6e66c158e6203d3d6dd932e6279a4b6138d32ace7379d185a7",
+      "translation_sha256": "0cf832664c3221d7baa3c92d20414784ffd60dfc5a500434786abb94024eb17e",
+      "review_scope": "full_technical_and_targeted_semantic",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/news.md",
+      "translation": "content/docs/pgbackrest/news.fr.md",
+      "source_sha256": "8f21696ada510b6e66c158e6203d3d6dd932e6279a4b6138d32ace7379d185a7",
+      "translation_sha256": "74f5b9929724f9ef495f3e72408780ad6fddad277c575a60e59ce3c6f01db3c9",
+      "review_scope": "full_technical_and_targeted_semantic",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/news.md",
+      "translation": "content/docs/pgbackrest/news.ja.md",
+      "source_sha256": "8f21696ada510b6e66c158e6203d3d6dd932e6279a4b6138d32ace7379d185a7",
+      "translation_sha256": "f04749ebdd32bd6d711d9944d02bd62cd882b456cd6fde71bfe49b6baa155ca7",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/news.md",
+      "translation": "content/docs/pgbackrest/news.de.md",
+      "source_sha256": "8f21696ada510b6e66c158e6203d3d6dd932e6279a4b6138d32ace7379d185a7",
+      "translation_sha256": "991c37b6f219ef6e383b083ed62e7b2a72e7677dcb6dda9dc191c34ceda4cb74",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/news.md",
+      "translation": "content/docs/pgbackrest/news.ru.md",
+      "source_sha256": "8f21696ada510b6e66c158e6203d3d6dd932e6279a4b6138d32ace7379d185a7",
+      "translation_sha256": "cad6389d9a8133e538ecbde6ebecaca121f80b3b05fdc60775471373890358c5",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/release.md",
+      "translation": "content/docs/pgbackrest/release.zh.md",
+      "source_sha256": "795a94fd1eb7d4c6a6593cd99bc445fe657c9667ecb3b259924c0bdf6854f9f9",
+      "translation_sha256": "aabe55679df5b011583e851697248a0b3d2ea719af0f8829e9c682c70f010f3c",
+      "review_scope": "full_technical_and_targeted_semantic",
+      "reviewed_variants": [
+        {
+          "unit": 611,
+          "difference": {
+            "numbers": {
+              "missing": {},
+              "extra": {}
+            },
+            "literals": [
+              "space"
+            ]
+          },
+          "reason": "English space denotes the space character, translated as 空格; it is not a literal database name."
+        },
+        {
+          "unit": 815,
+          "difference": {
+            "numbers": {
+              "missing": {},
+              "extra": {}
+            },
+            "literals": [
+              "stanza-create/update/delete"
+            ]
+          },
+          "reason": "Combined English command shorthand is expanded to the exact three names stanza-create, stanza-update and stanza-delete."
+        }
+      ],
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/release.md",
+      "translation": "content/docs/pgbackrest/release.fr.md",
+      "source_sha256": "795a94fd1eb7d4c6a6593cd99bc445fe657c9667ecb3b259924c0bdf6854f9f9",
+      "translation_sha256": "dc59985cdb930d3f2d96bffa4dc480c318a3557bf8c83b4e051b29770b5dd75f",
+      "review_scope": "full_technical_and_targeted_semantic",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/release.md",
+      "translation": "content/docs/pgbackrest/release.ja.md",
+      "source_sha256": "795a94fd1eb7d4c6a6593cd99bc445fe657c9667ecb3b259924c0bdf6854f9f9",
+      "translation_sha256": "eb58d6de890964f1f3e56937a254d0951ee981a7c63d01acfb40d411fb0853d7",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/release.md",
+      "translation": "content/docs/pgbackrest/release.de.md",
+      "source_sha256": "795a94fd1eb7d4c6a6593cd99bc445fe657c9667ecb3b259924c0bdf6854f9f9",
+      "translation_sha256": "1790d21718f4f382d64733757c0649140b6196eb078b717095f50a5d8837f56d",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/release.md",
+      "translation": "content/docs/pgbackrest/release.ru.md",
+      "source_sha256": "795a94fd1eb7d4c6a6593cd99bc445fe657c9667ecb3b259924c0bdf6854f9f9",
+      "translation_sha256": "9fdd0a36bc0c4deca437a59b458d2b24627af54558d7a4f941e0d9f9baeeb794",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/user-guide-rhel.md",
+      "translation": "content/docs/pgbackrest/user-guide-rhel.zh.md",
+      "source_sha256": "dbb482ad87f210625f284ed007da16ceb21c0a54f2aed525224300dbab53b0ab",
+      "translation_sha256": "a16cb93297cd34aa4ba9262d2986b28551933ed86375189419a271e30fae6b2b",
+      "review_scope": "full_technical_and_targeted_semantic",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/user-guide-rhel.md",
+      "translation": "content/docs/pgbackrest/user-guide-rhel.fr.md",
+      "source_sha256": "dbb482ad87f210625f284ed007da16ceb21c0a54f2aed525224300dbab53b0ab",
+      "translation_sha256": "aef48c8ec910726eaf2aca4e9ee09710cf2886e9564bf460c83174af1b1a80eb",
+      "review_scope": "full_technical_and_targeted_semantic",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/user-guide-rhel.md",
+      "translation": "content/docs/pgbackrest/user-guide-rhel.ja.md",
+      "source_sha256": "dbb482ad87f210625f284ed007da16ceb21c0a54f2aed525224300dbab53b0ab",
+      "translation_sha256": "e02126b36679ba94c4aa0c7f0f216bc3a50731ec9788dde3138e2124cafec6b2",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/user-guide-rhel.md",
+      "translation": "content/docs/pgbackrest/user-guide-rhel.de.md",
+      "source_sha256": "dbb482ad87f210625f284ed007da16ceb21c0a54f2aed525224300dbab53b0ab",
+      "translation_sha256": "a6266f484d7442f3969aa3a0312ad4c6b3dcd17dbee2bb564cbbb1ab0ba63302",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/user-guide-rhel.md",
+      "translation": "content/docs/pgbackrest/user-guide-rhel.ru.md",
+      "source_sha256": "dbb482ad87f210625f284ed007da16ceb21c0a54f2aed525224300dbab53b0ab",
+      "translation_sha256": "550e77c59610bb73e107f39f29f084699ad3bb40fd3be2669640724f4ff880b8",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/user-guide.md",
+      "translation": "content/docs/pgbackrest/user-guide.zh.md",
+      "source_sha256": "9d60334c7e36741d40840ca84efcdd92ec564e20065c9158f22f49203f9cb50d",
+      "translation_sha256": "a02b8c6cad68e94a41af6bb2150b271c638736719593aeac3c49b008da867f09",
+      "review_scope": "full_technical_and_targeted_semantic",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/user-guide.md",
+      "translation": "content/docs/pgbackrest/user-guide.fr.md",
+      "source_sha256": "9d60334c7e36741d40840ca84efcdd92ec564e20065c9158f22f49203f9cb50d",
+      "translation_sha256": "b554f2ea687fa85186afb9e2a8b9136af3128e38ed5ab25333837d325b5db799",
+      "review_scope": "full_technical_and_targeted_semantic",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/user-guide.md",
+      "translation": "content/docs/pgbackrest/user-guide.ja.md",
+      "source_sha256": "9d60334c7e36741d40840ca84efcdd92ec564e20065c9158f22f49203f9cb50d",
+      "translation_sha256": "d2307115403fd7e5dacc63ef071530872866f97a8b4c8b70e63d36c0f6db5706",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/user-guide.md",
+      "translation": "content/docs/pgbackrest/user-guide.de.md",
+      "source_sha256": "9d60334c7e36741d40840ca84efcdd92ec564e20065c9158f22f49203f9cb50d",
+      "translation_sha256": "71d01e87f6320da05926569dcfe14030b06f7ad161343f0d40e14abb0c791f1f",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    },
+    {
+      "source": "content/docs/pgbackrest/user-guide.md",
+      "translation": "content/docs/pgbackrest/user-guide.ru.md",
+      "source_sha256": "9d60334c7e36741d40840ca84efcdd92ec564e20065c9158f22f49203f9cb50d",
+      "translation_sha256": "b55bfae1ad880bb0c9f662ff3e463854db9255128f32b4796b81f67a3faad394",
+      "review_scope": "prior_full_review_plus_delta",
+      "delta_review_scope": "stable_release_delta"
+    }
+  ],
+  "publication_readiness": {
+    "pgbackrest": "Ready as a clearly versioned 2.59.2 documentation snapshot after the recorded fixes and checks.",
+    "site_wide": "Not certified: make check stops at the separate PgBouncer German changelog inline-literal check; that component was not changed by this task.",
+    "production": "Not deployed or publicly verified in this task."
+  },
+  "changed_document_counts": {
+    "de": 7,
+    "ja": 6,
+    "zh": 21,
+    "fr": 21,
+    "ru": 7,
+    "en": 6
+  },
+  "example_sync": {
+    "written": true,
+    "files": 12,
+    "guides": {
+      "user-guide": {
+        "changed_cached_outputs": 59,
+        "replaced_output_blocks": 50,
+        "updated_selector_values": 10,
+        "changed_fences": 59,
+        "final_fences_sha256": "6b1d34542f91ce26347e91575aac6fccd446b9e504d4ebbe32df6f94032cb5b0"
+      },
+      "user-guide-rhel": {
+        "changed_cached_outputs": 57,
+        "replaced_output_blocks": 48,
+        "updated_selector_values": 10,
+        "changed_fences": 57,
+        "final_fences_sha256": "467cc96d501087e4157fbbc7d40d62674dcdb398f23b7c84e2177963bcd60ba4"
+      }
+    },
+    "method": "scripts/sync-pgbackrest-examples.py; full command identity and output matching against both stable-tag caches; commands were not executed. Distribution HTML output placeholders were not imported."
+  },
+  "prior_acceptance": {
+    "version": "2.59.2",
+    "status": "component-accepted-local",
+    "review_date": "2026-10-13",
+    "preserved_findings": 7,
+    "note": "Earlier browser and rendered results described the 2.59.2 snapshot. Current results below supersede them."
+  }
+}

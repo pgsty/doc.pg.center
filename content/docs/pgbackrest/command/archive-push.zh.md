@@ -184,16 +184,16 @@ example: --no-compress
 
 ```yaml
 default (depending on compress-type):
-   bz2 - 9
-   gz - 6
-   lz4 - 1
-   zst - 3
+    bz2 - 9
+    gz - 6
+    lz4 - 1
+    zst - 3
 
 allow range (depending on compress-type):
-   bz2 - [1, 9]
-   gz - [-1, 9]
-   lz4 - [-5, 12]
-   zst - [-7, 22]
+    bz2 - [1, 9]
+    gz - [-1, 9]
+    lz4 - [-5, 12]
+    zst - [-7, 22]
 
 example: --compress-level=9
 ```
@@ -371,9 +371,9 @@ example: --spool-path=/backup/db/spool
 
 定义 stanza。
 
-stanza 是 pgBackRest 中用于标识一个 PostgreSQL 集群备份配置的逻辑名称，定义了集群的位置、备份方式、归档选项等。大多数数据库服务器只有一个 PostgreSQL 集群，因此只有一个 stanza；备份服务器则为每个需要备份的数据库集群各配置一个 stanza。
+一个 stanza 包含某个 PostgreSQL 数据库集群的完整配置，定义了集群的位置、备份方式、归档选项等。大多数数据库主机只有一个 PostgreSQL 集群，因此只有一个 stanza；而备份服务器通常为每个需要备份的数据库集群单独配置一个 stanza。
 
-命名 stanza 时，以主集群名称命名虽然直观，但更好的做法是描述集群中所承载的数据库内容。由于 stanza 名称同时适用于主库和所有副本，选用描述集群实际功能的名称（如 `app` 或 `dw`）比使用本地集群名称（如 `main` 或 `prod`）更为合适。
+命名 stanza 时，常见做法是以主集群名称命名，但更好的名称应描述集群所包含的数据库。由于 stanza 名称同时适用于主库和所有副本，选择能反映集群实际功能的名称（如 `app` 或 `dw`）比使用本地集群名称（如 `main` 或 `prod`）更为合适。
 
 ```yaml
 example: --stanza=main
@@ -780,7 +780,7 @@ example: --repo1-host-key-file=/path/to/client.key
 
 ### 仓库主机端口选项（`--repo-host-port`）
 
-设置了 `repo-host` 时使用的仓库主机端口。
+设置 `repo-host` 时，用于连接仓库主机的端口。
 
 为仓库主机协议指定非默认端口。
 
@@ -788,7 +788,7 @@ example: --repo1-host-key-file=/path/to/client.key
 
 ```yaml
 default (depending on repo-host-type):
-   tls - 8432
+    tls - 8432
 
 allowed: [0, 65535]
 example: --repo1-host-port=25
@@ -812,7 +812,7 @@ example: --repo1-host-type=tls
 
 ### 仓库主机用户选项（`--repo-host-user`）
 
-设置了 `repo-host` 时使用的仓库主机用户。
+设置 `repo-host` 时，用于登录仓库主机的用户。
 
 定义在仓库主机上执行操作的用户。建议使用非 `postgres` 的专用用户（如 `pgbackrest`）。若 PostgreSQL 运行在仓库主机上，可将 `postgres` 用户加入 `pgbackrest` 组，使其具有仓库读取权限，同时避免意外损坏仓库内容。
 
@@ -829,7 +829,7 @@ example: --repo1-host-user=repo-user
 
 pgBackRest 在此仓库中存储备份并归档 WAL 段。
 
-预估所需空间并不容易。建议先执行几次备份，记录不同类型（全量/增量/差异）的备份大小及每天产生的 WAL 量，从而大致估算所需空间。当然，随着数据库规模增长，需求也会相应变化。
+预估所需空间并不容易。建议先执行几次备份，记录不同类型（全量/增量/差异）的备份大小及每天产生的 WAL 量，从而大致估算所需空间。当然，随着数据库的演进，实际需求也很可能随时间变化。
 
 ```yaml
 default: /var/lib/pgbackrest
@@ -854,7 +854,7 @@ S3 仓库端点地址。
 
 AWS 端点应与所选区域匹配。
 
-对于自定义或测试配置，可参考 `repo-storage-ca-file`、`repo-storage-ca-path`、`repo-storage-host`、`repo-storage-port` 和 `repo-storage-verify-tls` 选项。
+对于自定义或测试配置，`repo-storage-ca-file`、`repo-storage-ca-path`、`repo-storage-host`、`repo-storage-port` 和 `repo-storage-verify-tls` 选项可能有所帮助。
 
 ```yaml
 example: --repo1-s3-endpoint=s3.amazonaws.com
@@ -1140,14 +1140,14 @@ example: --repo1-storage-tag=key1=value1
 
 ```yaml
 default (depending on repo-type):
-   azure - 4MiB
-   gcs - 4MiB
-   s3 - 5MiB
+    azure - 4MiB
+    gcs - 4MiB
+    s3 - 5MiB
 
 allow range (depending on repo-type):
-   azure - [4MiB, 1GiB]
-   gcs - [4MiB, 1GiB]
-   s3 - [5MiB, 1GiB]
+    azure - [4MiB, 1GiB]
+    gcs - [4MiB, 1GiB]
+    s3 - [5MiB, 1GiB]
 
 example: --repo1-storage-upload-chunk-size=16MiB
 ```
@@ -1178,7 +1178,7 @@ example: --no-repo1-storage-verify-tls
 - `s3` - AWS Simple Storage Service
 - `sftp` - 安全文件传输协议
 
-将 NFS 挂载用作 `posix` 仓库时，适用的规则与 PostgreSQL 文档中描述的规则相同，详见 [**Creating a Database Cluster - File Systems**](https://www.postgresql.org/docs/current/creating-cluster.html#CREATING-CLUSTER-FILESYSTEM)。
+使用 NFS 挂载作为 `posix` 仓库时，适用规则与 PostgreSQL 文档中描述的相同：[**创建数据库集群 - 文件系统**](https://www.postgresql.org/docs/current/creating-cluster.html#CREATING-CLUSTER-FILESYSTEM)。
 
 ```yaml
 default: posix

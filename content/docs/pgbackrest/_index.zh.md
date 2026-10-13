@@ -1,5 +1,5 @@
 ---
-title: "pgBackRest 2.59.2 中文文档"
+title: "pgBackRest 2.59.3 中文文档"
 linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
@@ -12,11 +12,11 @@ module: [PGBACKREST]
 categories: [概念]
 aliases: [/pgbackrest/]
 upstream_source: pgbackrest
-upstream_ref: v2.59.2
+upstream_ref: v2.59.3
 upstream_link: "https://pgbackrest.org/"
 cascade:
   upstream_source: pgbackrest
-  upstream_ref: v2.59.2
+  upstream_ref: v2.59.3
   type: docs
   module: [PGBACKREST]
 ---
@@ -27,9 +27,9 @@ cascade:
 
 pgBackRest 是一款可靠的 PostgreSQL 备份与恢复解决方案，可无缝扩展以应对超大规模数据库和各类工作负载。
 
-本站文档对应 pgBackRest [`v2.59.2`](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.2)。发布说明请查阅 [**发布历史**](/zh/docs/pgbackrest/release/) 页面。
+本站文档对应 pgBackRest [`v2.59.3`](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.3)。发布说明请查阅 [**发布历史**](/zh/docs/pgbackrest/release/) 页面。
 
-上游已于 2026 年 10 月 4 日发布 [v2.59.3](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.3)；本站文档快照仍为 v2.59.2。更新版本请查阅[上游发布记录](https://pgbackrest.org/release.html)。
+2.59.3 修复了可能生成弱加密子密钥和盐值的问题。升级不会替换 stanza 已有的弱子密钥；检查方法与修复措施请参阅[弱加密子密钥和盐值](/zh/docs/pgbackrest/news/#weak-encryption)。
 
 如果您喜欢 pgBackRest，欢迎在 [**GitHub**](https://github.com/pgbackrest/pgbackrest) 上给我们点星！
 
@@ -38,16 +38,16 @@ pgBackRest 是一款可靠的 PostgreSQL 备份与恢复解决方案，可无缝
 
 ## 新闻
 
+**2026 年 10 月 4 日** - [弱加密子密钥和盐值](/zh/docs/pgbackrest/news/#weak-encryption)
+
+**2026 年 10 月 4 日** - [pgBackRest 2.59.3 正式发布](/zh/docs/pgbackrest/news/#release-2-59-3)
+
 **2026 年 9 月 27 日** - [pgBackRest 2.59.2 正式发布](/zh/docs/pgbackrest/news/#release-2-59-2)
-
-**2026 年 8 月 17 日** - [pgBackRest 2.59.1 正式发布](/zh/docs/pgbackrest/news/#release-2-59-1)
-
-**2026 年 7 月 20 日** - [新的发行版 tarball](/zh/docs/pgbackrest/news/#distribution-tarball)
 
 
 --------
 
-## 赞助商
+## 赞助商 {#sponsors}
 
 没有赞助就不会有 pgBackRest。开发新功能、修复缺陷、审核贡献、回答社区问题以及日常维护都需要投入大量时间。如果您在企业中使用 pgBackRest，请考虑 [**赞助**](https://github.com/sponsors/dwsteele) 项目。
 
@@ -170,7 +170,7 @@ pgBackRest 支持十个 PostgreSQL 版本，包括五个仍在官方支持期内
 pgBackRest 致力于提供简便的配置和操作体验：
 
 - 针对各种操作系统和 PostgreSQL 版本的 [**用户指南**](/zh/docs/pgbackrest/user-guide/)。
-- 常用命令行操作参考： [**`backup`**](/zh/docs/pgbackrest/command/backup/)、 [**`restore`**](/zh/docs/pgbackrest/command/restore/)、 [**`check`**](/zh/docs/pgbackrest/command/check/) 和 [**`info`**](/zh/docs/pgbackrest/command/info/)。
+- 命令行操作的命令页面： [**`backup`**](/zh/docs/pgbackrest/command/backup/)、 [**`restore`**](/zh/docs/pgbackrest/command/restore/)、 [**`check`**](/zh/docs/pgbackrest/command/check/) 和 [**`info`**](/zh/docs/pgbackrest/command/info/)。
 - 创建 pgBackRest 配置的 [**配置参考**](/zh/docs/pgbackrest/configuration/)。
 
 
@@ -189,4 +189,4 @@ pgBackRest 基于 [**MIT**](https://github.com/pgbackrest/pgbackrest/blob/main/L
 
 制定完善的容灾方案（包含合理的复制和备份策略）可能是一项复杂而艰巨的任务。在架构设计阶段和持续运营中，您可能需要专业支持以确保企业业务平稳运行。
 
-我们的 [赞助商](#赞助商) 所提供的产品和服务包含 pgBackRest 支持，可协助您满足容灾需求。
+我们的 [赞助商](#sponsors) 所提供的产品和服务包含 pgBackRest 支持，可协助您满足容灾需求。

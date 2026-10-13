@@ -47,7 +47,7 @@ example: --no-archive-check
 
 Copiez les segments WAL nécessaires à la cohérence vers la sauvegarde.
 
-Cette option, légèrement paranoïaque, protège contre les corruption dans l’archive des segments WAL en stockant directement dans la sauvegarde les segments WAL nécessaires à la cohérence. Les segments WAL sont toujours stockés dans l’archive, donc cette option utilise un espace supplémentaire.
+Cette option, légèrement paranoïaque, protège contre les corruptions dans l’archive des segments WAL en stockant directement dans la sauvegarde les segments WAL nécessaires à la cohérence. Les segments WAL sont toujours stockés dans l’archive, donc cette option utilise un espace supplémentaire.
 
 Il est préférable que les commandes `archive-push` et `backup` utilisent le même `compress-type` (par exemple `lz4`) lors de l'utilisation de cette option. Sinon, les segments WAL devront être récompressés avec le `compress-type` utilisé par la sauvegarde, ce qui peut s'avérer assez coûteux selon la quantité de WAL générée pendant la sauvegarde.
 
@@ -128,7 +128,7 @@ Toutes les exclusions sont relatives à `$PGDATA`. Si l'exclusion se termine par
 
 Tous les fichiers exclus seront journalisés au niveau `info` ainsi que la règle d'exclusion. Vérifiez soigneusement la liste des fichiers exclus afin de vous assurer qu'aucun fichier inattendu n'est exclu.
 
-> **NOTE :** Les exclusions ne sont pas prises en compte lors d'une restauration incrémentielle. Tous les fichiers ou répertoires exclus lors de la sauvegarde seront *supprimés* lors d'une restauration incrémentielle.
+> **NOTE :** Les exclusions ne sont pas prises en compte lors d'une restauration delta. Tous les fichiers ou répertoires exclus lors de la sauvegarde seront *supprimés* lors d'une restauration delta.
 
 Cette option ne doit pas être utilisée pour exclure les journaux PostgreSQL d'une sauvegarde. Les journaux peuvent être déplacés hors du répertoire `PGDATA` à l'aide de la configuration PostgreSQL `log_directory`, ce qui permet de conserver les journaux après une restauration.
 
@@ -151,7 +151,7 @@ default: y
 example: --expire-auto
 ```
 
-### Option obligatoire (`--force`) {#force-option---force}
+### Option de forçage (`--force`) {#force-option---force}
 
 Forcer une sauvegarde hors ligne.
 
@@ -166,9 +166,9 @@ example: --force
 
 ### Option seuil d'enregistrement du manifeste (`--manifest-save-threshold`) {#manifest-save-threshold-option---manifest-save-threshold}
 
-Seuil de sauvegarde manifeste pendant la sauvegarde.
+Seuil d'enregistrement du manifeste pendant la sauvegarde.
 
-Définit la fréquence à laquelle le manifeste sera enregistré pendant une sauvegarde. Enregistrer le manifeste est important car il stocke les sommes de contrôle et permet au fonctionnement de la reprise d’être efficace. La seuil réel utilisé est le plus élevé entre 1 % de la taille de la sauvegarde et `manifest-save-threshold`.
+Définit la fréquence à laquelle le manifeste sera enregistré pendant une sauvegarde. Enregistrer le manifeste est important car il stocke les sommes de contrôle et permet au fonctionnement de la reprise d’être efficace. Le seuil réel utilisé est le plus élevé entre 1 % de la taille de la sauvegarde et `manifest-save-threshold`.
 
 ```yaml
 default: 1GiB
@@ -189,7 +189,7 @@ default: y
 example: --no-online
 ```
 
-### Option Résumé (`--resume`) {#resume-option---resume}
+### Option de reprise (`--resume`) {#resume-option---resume}
 
 Permet la reprise d'une sauvegarde interrompue.
 
@@ -211,7 +211,7 @@ default: n
 example: --start-fast
 ```
 
-### Type Option (`--type`) {#type-option---type}
+### Option de type (`--type`) {#type-option---type}
 
 Type de sauvegarde.
 
@@ -232,7 +232,7 @@ example: --type=full
 
 Permettre à la commande de s'exécuter en tant qu'utilisateur root.
 
-Par défaut, seul la commande `restore` peut être exécutée en tant qu'utilisateur root, car elle est conçue pour gérer soigneusement les propriétés des fichiers. Exécuter d'autres commandes en tant que root risque de créer des fichiers (par exemple dans le dépôt) dont le propriétaire est root, rendant ces fichiers inaccessibles à l'utilisateur PostgreSQL, ce qui entraîne l'échec des commandes ultérieures.
+Par défaut, seule la commande `restore` peut être exécutée en tant qu'utilisateur root, car elle est conçue pour gérer soigneusement les propriétés des fichiers. Exécuter d'autres commandes en tant que root risque de créer des fichiers (par exemple dans le dépôt) dont le propriétaire est root, rendant ces fichiers inaccessibles à l'utilisateur PostgreSQL, ce qui entraîne l'échec des commandes ultérieures.
 
 Activez cette option pour exécuter une commande en tant qu'utilisateur root malgré tout. Toutefois, il est bien préférable d'exécuter pgBackRest en tant qu'utilisateur propriétaire du dépôt et du cluster PostgreSQL.
 
@@ -319,7 +319,7 @@ example: --compress-level=9
 
 Niveau de compression du réseau.
 
-Définit le niveau de compression réseau lorsque `compress-type=none` et la commande ne sont pas exécutées sur le même hôte que le dépôt. La compression est utilisée pour réduire le trafic réseau. Lorsque `compress-type` est différent de `none`, le paramètre `compress-level-network` est ignoré et `compress-level` est utilisé à la place, afin que le fichier ne soit compressé qu'une seule fois.
+Définit le niveau de compression réseau lorsque `compress-type=none` et que la commande n'est pas exécutée sur le même hôte que le dépôt. La compression est utilisée pour réduire le trafic réseau. Lorsque `compress-type` est différent de `none`, le paramètre `compress-level-network` est ignoré et `compress-level` est utilisé à la place, afin que le fichier ne soit compressé qu'une seule fois.
 
 ```yaml
 default: 1
@@ -381,7 +381,7 @@ example: --config-path=/conf/pgbackrest
 
 ### Option de délai d'attente de la base de données (`--db-timeout`) {#database-timeout-option---db-timeout}
 
-Délai d'attente dépassé pour la requête de base de données.
+Délai d'attente des requêtes de base de données.
 
 Définit le délai d'attente, en secondes, des requêtes effectuées contre la base de données. Cela inclut les fonctions de démarrage et d'arrêt de la sauvegarde, qui peuvent chacune prendre beaucoup de temps. En raison de cela, le délai d'attente doit être maintenu élevé, sauf si vous savez que ces fonctions retourneront rapidement (par exemple, si vous avez défini `start-fast=y` et que vous savez que le cluster de base de données ne générera pas beaucoup de segments WAL pendant la sauvegarde).
 
@@ -397,7 +397,7 @@ example: --db-timeout=600
 
 Restauration ou sauvegarde à l’aide de sommes de contrôle.
 
-Lors d'une restauration, par défaut, les répertoires de données PostgreSQL et les répertoires de tablespace sont supposés exister mais être vides. Cette option effectue une restauration incrémentielle à l'aide des sommes de contrôle.
+Lors d'une restauration, par défaut, les répertoires de données PostgreSQL et les répertoires de tablespace sont supposés exister mais être vides. Cette option effectue une restauration delta à l'aide des sommes de contrôle.
 
 Pendant une sauvegarde, cette option utilisera les sommes de contrôle au lieu des horodatages pour déterminer si les fichiers seront copiés.
 
@@ -408,7 +408,7 @@ example: --delta
 
 ### Option d'expiration I/O (`--io-timeout`) {#io-timeout-option---io-timeout}
 
-Délai d'attente d'E/S dépassé.
+Délai d'attente des E/S.
 
 Délai d'attente, en secondes, utilisé pour les connexions et les opérations de lecture/écriture.
 
@@ -519,7 +519,7 @@ example: --tcp-keep-alive-count=3
 
 ### Option d'idle Keep Alive (`--tcp-keep-alive-idle`) {#keep-alive-idle-option---tcp-keep-alive-idle}
 
-Délai d'inactivité pour la maintien de la connexion.
+Délai d'inactivité pour le maintien de la connexion.
 
 Spécifie la durée (en secondes) pendant laquelle aucune activité réseau ne se produit, après laquelle le système d'exploitation doit envoyer un message de maintien de connexion TCP.
 
@@ -532,7 +532,7 @@ example: --tcp-keep-alive-idle=60
 
 ### Option Intervalle Keep Alive (`--tcp-keep-alive-interval`) {#keep-alive-interval-option---tcp-keep-alive-interval}
 
-Intervalle de temps pour la maintien de la connexion active.
+Intervalle de temps pour le maintien de la connexion active.
 
 Spécifie la durée (en secondes) après laquelle un message TCP keep-alive non reconnu doit être renvoyé.
 
@@ -754,7 +754,7 @@ example: --repo1-azure-uri-style=path
 
 Activez la sauvegarde incrémentielle par bloc.
 
-Le mode incrémentiel par bloc permet des sauvegardes plus granulaires en divisant les fichiers en blocs pouvant être sauvegardés indépendamment. Cela permet d'économiser de l'espace dans le dépôt et peut améliorer les performances de restauration incrémentielle, car des blocs individuels peuvent être récupérés sans devoir lire entièrement le fichier depuis le dépôt.
+Le mode incrémentiel par bloc permet des sauvegardes plus granulaires en divisant les fichiers en blocs pouvant être sauvegardés indépendamment. Cela permet d'économiser de l'espace dans le dépôt et peut améliorer les performances de restauration delta, car des blocs individuels peuvent être récupérés sans devoir lire entièrement le fichier depuis le dépôt.
 
 > **NOTE :** L'option `repo-bundle` doit être activée avant que `repo-block` ne puisse l'être.
 
@@ -769,7 +769,7 @@ example: --repo1-block
 
 ### Option des paquets de dépôt (`--repo-bundle`) {#repository-bundles-option---repo-bundle}
 
-Fichier du dépôt regroupés.
+Fichiers du dépôt regroupés.
 
 Regrouper les petits fichiers afin de réduire le nombre total de fichiers écrits dans le dépôt. Écrire moins de fichiers est généralement plus efficace, en particulier sur les magasins d'objets tels que S3. En outre, les fichiers vides ne sont pas stockés, sauf dans le manifeste, ce qui économise du temps et de l'espace.
 
@@ -784,7 +784,7 @@ Limite pour les paquets de fichiers.
 
 Limite de taille pour les fichiers inclus dans les bundles. Les fichiers dont la taille dépasse cette limite seront stockés séparément.
 
-Les fichiers intégrés ne peuvent pas être réutilisés lors d'une reprise d'une sauvegarde, donc cette option contrôle les fichiers pouvant être repris, c'est-à-dire que des valeurs plus élevées entraînent un nombre réduit de fichiers reprises.
+Les fichiers intégrés ne peuvent pas être réutilisés lors d'une reprise d'une sauvegarde, donc cette option contrôle les fichiers pouvant être repris, c'est-à-dire que des valeurs plus élevées entraînent un nombre réduit de fichiers pouvant être repris.
 
 ```yaml
 default: 2MiB
@@ -824,9 +824,9 @@ example: --repo1-cipher-type=aes-256-cbc
 
 ### Option de bac de dépôt GCS (`--repo-gcs-bucket`) {#gcs-repository-bucket-option---repo-gcs-bucket}
 
-Dépôt de bucket GCS.
+Bucket du dépôt GCS.
 
-Dépôt GCS utilisé pour stocker le dépôt.
+Bucket GCS utilisé pour stocker le dépôt.
 
 Les dépôts pgBackRest peuvent être stockés à la racine du bucket en définissant `repo-path=/`, mais il est généralement préférable de préciser un préfixe, tel que `/repo`, afin de pouvoir également stocker les journaux et d'autres contenus générés par GCS dans le bucket.
 
@@ -876,7 +876,7 @@ example: --repo1-gcs-user-project=my-project
 
 Crée des liens durs entre les fichiers des sauvegardes dans le dépôt.
 
-Activez le lien dur des fichiers dans les sauvegardes différentielles et incrémentielles vers leurs sauvegardes complètes. Cela donne l'illusion qu'à niveau système de fichiers, chaque sauvegarde est une sauvegarde complète. Faites attention toutefois, car la modification de fichiers liés par lien dur peut affecter toutes les sauvegardes de l'ensemble.
+Activez le lien dur des fichiers dans les sauvegardes différentielles et incrémentielles vers leurs sauvegardes complètes. Cela donne l'illusion qu'au niveau du système de fichiers, chaque sauvegarde est une sauvegarde complète. Faites attention toutefois, car la modification de fichiers liés par lien dur peut affecter toutes les sauvegardes de l'ensemble.
 
 ```yaml
 default: n
@@ -929,7 +929,7 @@ example: --repo1-host-cert-file=/path/to/client.crt
 
 ### Option de commande hôte du dépôt (`--repo-host-cmd`) {#repository-host-command-option---repo-host-cmd}
 
-Hôte du dépôt commande pgBackRest.
+Commande pgBackRest de l'hôte du dépôt.
 
 Requis uniquement si le chemin vers la commande pgBackRest est différent sur les hôtes local et de dépôt. Si non défini, la commande de dépôt sera définie de la même manière que celle de l'hôte local.
 
@@ -951,11 +951,11 @@ default: CFGOPTDEF_CONFIG_PATH "/" PROJECT_CONFIG_FILE
 example: --repo1-host-config=/conf/pgbackrest/pgbackrest.conf
 ```
 
-Nom obsolète : sauvegarde-config
+Nom obsolète : backup-config
 
 ### Option de chemin d'inclusion de configuration d'hôte de dépôt (`--repo-host-config-include-path`) {#repository-host-configuration-include-path-option---repo-host-config-include-path}
 
-Configuration du serveur de dépôt pgBackRest incluant le chemin.
+Chemin d'inclusion de configuration de l'hôte du dépôt pgBackRest.
 
 Définit l'emplacement du chemin d'inclusion de configuration sur l'hôte du dépôt. Cette option est nécessaire uniquement si le chemin d'inclusion de configuration de l'hôte du dépôt est différent du chemin d'inclusion de configuration local.
 
@@ -1058,20 +1058,20 @@ allowed: [1, 9999999]
 example: --repo1-retention-archive=2
 ```
 
-Nom obsolète : rétention-archive
+Nom obsolète : retention-archive
 
 ### Type de rétention des archives (`--repo-retention-archive-type`) {#archive-retention-type-option---repo-retention-archive-type}
 
 Type de sauvegarde pour la rétention de WAL.
 
-Si défini sur `full`, pgBackRest conservera les journaux d'archive pendant le nombre de sauvegardes complètes défini par `repo-retention-archive`. Si défini sur `diff` (différentiel), pgBackRest conservera les journaux d'archive pendant le nombre de sauvegardes complètes et différentielles défini par `repo-retention-archive`, ce qui signifie qu'une sauvegarde complète prise en dernier sera comptée comme une sauvegarde différentielle pour l'application de la rétention du référentiel. Si défini sur `incr` (incrémentielle), pgBackRest conservera les journaux d'archive pendant le nombre de sauvegardes complètes, différentielles et incrémentielles défini par `repo-retention-archive`. Il est recommandé de ne pas modifier cette option par rapport à sa valeur par défaut, qui n'expire les WAL que conjointement à l'expiration des sauvegardes complètes.
+Si défini sur `full`, pgBackRest conservera les journaux d'archive pendant le nombre de sauvegardes complètes défini par `repo-retention-archive`. Si défini sur `diff` (différentiel), pgBackRest conservera les journaux d'archive pendant le nombre de sauvegardes complètes et différentielles défini par `repo-retention-archive`, ce qui signifie qu'une sauvegarde complète prise en dernier sera comptée comme une sauvegarde différentielle pour l'application de la rétention du dépôt. Si défini sur `incr` (incrémentielle), pgBackRest conservera les journaux d'archive pendant le nombre de sauvegardes complètes, différentielles et incrémentielles défini par `repo-retention-archive`. Il est recommandé de ne pas modifier cette option par rapport à sa valeur par défaut, qui n'expire les WAL que conjointement à l'expiration des sauvegardes complètes.
 
 ```yaml
 default: full
 example: --repo1-retention-archive-type=diff
 ```
 
-Nom obsolète : rétention-archive-type
+Nom obsolète : retention-archive-type
 
 ### Option de rétention différentielle (`--repo-retention-diff`) {#differential-retention-option---repo-retention-diff}
 
@@ -1086,7 +1086,7 @@ allowed: [1, 9999999]
 example: --repo1-retention-diff=3
 ```
 
-Nom obsolète : rétention-diff
+Nom obsolète : retention-diff
 
 ### Option de rétention complète (`--repo-retention-full`) {#full-retention-option---repo-retention-full}
 
@@ -1099,7 +1099,7 @@ allowed: [1, 9999999]
 example: --repo1-retention-full=2
 ```
 
-Nom obsolète : rétention-full
+Nom obsolète : retention-full
 
 ### Type d'option de rétention complète (`--repo-retention-full-type`) {#full-retention-type-option---repo-retention-full-type}
 
@@ -1107,9 +1107,9 @@ Type de rétention pour les sauvegardes complètes.
 
 Détermine si le paramètre `repo-retention-full` représente une période de temps (en jours) ou un nombre de sauvegardes complètes à conserver.
 
-Si la valeur est définie à `time`, les sauvegardes complètes dont l'âge dépasse `repo-retention-full` seront supprimées du dépôt si au moins une autre sauvegarde est égale ou supérieure à la valeur définie par `repo-retention-full`. Par exemple, si `repo-retention-full` est égal à 30 (jours) et qu'il existe deux sauvegardes complètes : l'une âgée de 25 jours et l'autre de 35 jours, aucune sauvegarde complète ne sera expirée, car la suppression de la sauvegarde âgée de 35 jours laisserait uniquement la sauvegarde âgée de 25 jours, ce qui violerait la politique de rétention de 30 jours exigeant qu'au moins une sauvegarde ait au moins 30 jours d'âge avant qu'une sauvegarde plus ancienne ne puisse être expirée. Les archives WAL plus anciennes que la plus ancienne sauvegarde complète restante seront automatiquement expirées, sauf si `repo-retention-archive-type` et `repo-retention-archive` sont explicitement définis.
+Si la valeur est définie à `time`, les sauvegardes complètes dont l'âge dépasse `repo-retention-full` seront supprimées du dépôt si au moins une autre sauvegarde a un âge supérieur ou égal au nombre de jours défini par `repo-retention-full`. Par exemple, si `repo-retention-full` est égal à 30 (jours) et qu'il existe 2 sauvegardes complètes : l'une âgée de 25 jours et l'autre de 35 jours, aucune sauvegarde complète ne sera expirée, car la suppression de la sauvegarde âgée de 35 jours laisserait uniquement la sauvegarde âgée de 25 jours, ce qui violerait la politique de rétention de 30 jours exigeant qu'au moins une sauvegarde ait au moins 30 jours d'âge avant qu'une sauvegarde plus ancienne ne puisse être expirée. Les archives WAL plus anciennes que la plus ancienne sauvegarde complète restante seront automatiquement expirées, sauf si `repo-retention-archive-type` et `repo-retention-archive` sont explicitement définis.
 
-Si la valeur est définie à `count`, les sauvegardes complètes dont la taille dépasse `repo-retention-full` seront supprimées. Par exemple, si `repo-retention-full` est égal à `4` et qu'une cinquième sauvegarde complète est effectuée, la sauvegarde complète la plus ancienne sera supprimée afin de maintenir le nombre à 4.
+Si la valeur est définie à `count`, les sauvegardes complètes dépassant `repo-retention-full` seront supprimées. Par exemple, si `repo-retention-full` est égal à `4` et qu'une cinquième sauvegarde complète est effectuée, la sauvegarde complète la plus ancienne sera supprimée afin de maintenir le nombre à 4.
 
 Notez qu'une sauvegarde ne sera prise en compte pour la rétention qu'après avoir été correctement terminée. Par exemple, si `repo-retention-full-type` est `count` et `repo-retention-full` est `2`, il doit y avoir 3 sauvegardes complètes avant que la plus ancienne ne soit supprimée.
 
@@ -1135,9 +1135,9 @@ example: --repo1-retention-history=365
 
 ### Option de bac de dépôt S3 (`--repo-s3-bucket`) {#s3-repository-bucket-option---repo-s3-bucket}
 
-Dépôt S3.
+Bucket du dépôt S3.
 
-Dépôt S3 utilisé pour stocker le dépôt.
+Bucket S3 utilisé pour stocker le dépôt.
 
 Les dépôts pgBackRest peuvent être stockés à la racine du bucket en définissant `repo-path=/`, mais il est généralement préférable de préciser un préfixe, tel que `/repo`, afin de pouvoir également stocker les journaux et d'autres contenus générés par AWS dans le bucket.
 
@@ -1208,7 +1208,7 @@ example: --repo1-s3-region=us-east-1
 
 ### Option Requesteur Payant pour le dépôt S3 (`--repo-s3-requester-pays`) {#s3-repository-requestor-pays-option---repo-s3-requester-pays}
 
-Dépôt S3 payeur de la demande.
+Paiement par le demandeur pour le dépôt S3.
 
 Active le paiement par le demandeur S3.
 
@@ -1256,7 +1256,7 @@ Style d'URI S3.
 Les styles d'URI suivants sont pris en charge :
 
 - `host` - Se connecter à l'hôte `bucket.endpoint`.
-- `path` - Se connecter à l'hôte `endpoint` et préfixer les URI par le répertoire.
+- `path` - Se connecter à l'hôte `endpoint` et préfixer les URI par le bucket.
 
 ```yaml
 default: host
@@ -1423,17 +1423,17 @@ Il n'existe aucune fonctionnalité dans pgBackRest permettant de modifier ces ba
 example: --repo1-storage-tag=key1=value1
 ```
 
-### Option de taille de morceau de chargement du dépôt (`--repo-storage-upload-chunk-size`) {#repository-storage-upload-chunk-size-option---repo-storage-upload-chunk-size}
+### Option de taille de morceau de téléversement vers le dépôt (`--repo-storage-upload-chunk-size`) {#repository-storage-upload-chunk-size-option---repo-storage-upload-chunk-size}
 
-Taille du morceau de chargement du dépôt.
+Taille du morceau de téléversement vers le dépôt.
 
-Les magasins d’objets tels que S3 permettent de télécharger des fichiers par morceaux lorsque le fichier est trop volumineux pour être stocké en mémoire. Même si le fichier peut être stocké en mémoire, il est plus efficace en mémoire de limiter la quantité de mémoire utilisée pour les téléchargements.
+Les magasins d’objets tels que S3 permettent de téléverser des fichiers par morceaux lorsque le fichier est trop volumineux pour être stocké en mémoire. Même si le fichier peut être stocké en mémoire, il est plus efficace en mémoire de limiter la quantité de mémoire utilisée pour les téléversements.
 
-Une taille de morceau plus élevée entraîne généralement de meilleures performances, car elle réduit le nombre de requêtes de téléchargement et permet de télécharger plus de fichiers en une seule requête plutôt qu’en morceaux. Le désavantage est que la consommation mémoire sera plus élevée, et comme la mémoire tampon de morceau doit être allouée par processus, des valeurs plus élevées de `process-max` entraînent une consommation mémoire globale plus importante.
+Une taille de morceau plus élevée entraîne généralement de meilleures performances, car elle réduit le nombre de requêtes de téléversement et permet de téléverser plus de fichiers en une seule requête plutôt qu’en morceaux. Le désavantage est que la consommation mémoire sera plus élevée, et comme la mémoire tampon de morceau doit être allouée par processus, des valeurs plus élevées de `process-max` entraînent une consommation mémoire globale plus importante.
 
 Notez que les tailles de morceau valides varient selon le type de stockage et la plateforme. Par exemple, AWS S3 impose une taille minimale de morceau de 5MiB. La terminologie relative à la taille du morceau varie selon le type de stockage ; utilisez donc « part size » pour AWS S3, « chunk size » pour GCS et « block size » pour Azure lorsque vous recherchez les valeurs minimales ou maximales.
 
-Si un fichier est plus grand que 1GiB (la taille maximale que PostgreSQL crée par défaut), la taille de tranche sera augmentée progressivement jusqu'à la valeur maximale autorisée afin de terminer le téléchargement du fichier.
+Si un fichier est plus grand que 1GiB (la taille maximale que PostgreSQL crée par défaut), la taille de morceau sera augmentée progressivement jusqu'à la valeur maximale autorisée afin de terminer le téléversement du fichier.
 
 ```yaml
 default (depending on repo-type):
@@ -1554,7 +1554,7 @@ example: --pg1-host-cert-file=/path/to/client.crt
 
 ### Option de commande hôte PostgreSQL (`--pg-host-cmd`) {#postgresql-host-command-option---pg-host-cmd}
 
-Hôte PostgreSQL : commande pgBackRest.
+Commande pgBackRest de l'hôte PostgreSQL.
 
 Requis uniquement si le chemin vers la commande pgBackRest est différent sur les hôtes locaux et PostgreSQL. Si ce n'est pas défini, la commande sur l'hôte PostgreSQL sera définie de la même manière que celle sur l'hôte local.
 
@@ -1580,7 +1580,7 @@ Nom obsolète : db-config
 
 ### Chemin d'inclusion de la configuration hôte PostgreSQL (`--pg-host-config-include-path`) {#postgresql-host-configuration-include-path-option---pg-host-config-include-path}
 
-Configuration de l'hôte de base de données pgBackRest incluant le chemin.
+Chemin d'inclusion de configuration de l'hôte de base de données pgBackRest.
 
 Définit l'emplacement du chemin d'inclusion de configuration sur l'hôte PostgreSQL. Cette option est nécessaire uniquement si le chemin d'inclusion de configuration PostgreSQL se trouve dans un emplacement différent du chemin d'inclusion de configuration local.
 

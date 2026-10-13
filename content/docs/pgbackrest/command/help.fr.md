@@ -16,9 +16,9 @@ Trois niveaux d’aide sont proposés. Si aucune commande n’est spécifiée, u
 
 ### Afficher l’option d’aide (`--help`) {#display-help-option---help}
 
-Affiche l’aide.
+Afficher l’aide.
 
-Affiche l’aide même si la commande `help` n’est pas précisée et ignore l’option `--version`.
+Affiche l’aide même si la commande `help` n’est pas précisée et remplace l’option `--version`.
 
 ```yaml
 default: n
