@@ -49,7 +49,7 @@ $ pgbadger --last-parsed .pgbadger_last_state \
     /var/log/pgsql/postgresql-Sun.log
 ```
 
-Führen Sie ein oder mehrere Binärdateien in einem neuen Bericht zusammen:
+Führen Sie eine oder mehrere Binärdateien in einem neuen Bericht zusammen:
 
 ```console
 $ pgbadger -o sunday.html sunday/*.bin

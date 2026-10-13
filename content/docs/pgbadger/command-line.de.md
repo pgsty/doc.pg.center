@@ -1,6 +1,6 @@
 ---
-title: "Kommandozeilenreferenz"
-linkTitle: "Kommandozeile"
+title: "Befehlszeilenreferenz"
+linkTitle: "Befehlszeile"
 weight: 30
 description: "Vollständige pgBadger-Befehlssyntax, Optionen, Remote-Eingabe, Rückgabecodes und Beispiele"
 icon: fa-solid fa-terminal
@@ -327,7 +327,7 @@ Berichte:
 0 4 * * * /usr/bin/pgbadger -I -q /var/log/postgresql/postgresql.log.1 -O /var/www/pg_reports/
 ```
 
-Dieser Aufruf erzeugt täglich und wöchentlich einen Bericht.
+Dieser Aufruf erzeugt jeweils einen Bericht pro Tag und pro Woche.
 
 Im inkrementellen Modus können Sie außerdem festlegen, wie viele Berichtswochen
 aufbewahrt werden:
@@ -343,9 +343,9 @@ können Sie diese Zeiträume wie folgt aus dem Bericht ausschließen:
 pgbadger --exclude-time "2013-09-.* (23|13):.*" postgresql.log
 ```
 
-Dadurch erscheinen die von pg_dump erzeugten COPY-Anweisungen nicht mehr am
-Anfang der Liste der langsamsten Abfragen. Alternativ können Sie das Problem
-einfacher mit --exclude-appname "pg_dump" lösen.
+Dies hilft zu vermeiden, dass die von pg_dump erzeugten COPY-Anweisungen am
+Anfang der Liste der langsamsten Abfragen stehen. Alternativ können Sie das
+Problem einfacher mit --exclude-appname "pg_dump" lösen.
 
 Auch die Ausgabe von journalctl lässt sich wie eine Protokolldatei parsen:
 
@@ -381,7 +381,7 @@ pgBadger unterstützt außerdem Heroku-PostgreSQL-Protokolle im Logplex-Format:
 heroku logs -p postgres | pgbadger -f logplex -o heroku.html -
 ```
 
-Damit wird das Heroku-PostgreSQL-Protokoll über stdin an pgbadger
+Damit wird das Heroku-PostgreSQL-Protokoll über stdin an pgBadger
 weitergeleitet.
 
 pgBadger kann RDS- und CloudWatch-Protokolle von PostgreSQL automatisch anhand

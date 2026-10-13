@@ -41,7 +41,7 @@ Die PostgreSQL-Berichte umfassen:
 
 - Gesamtaktivität und Abfragestatistiken;
 - langsame, häufige, besonders zeitintensive, wartende und abgebrochene Abfragen;
-- temporäre Dateien, Prüfpunkte, Sperren, Sitzungen und Verbindungen;
+- temporäre Dateien, Checkpoints, Sperren, Sitzungen und Verbindungen;
 - Autovacuum- und Autoanalyze-Aktivität nach Tabelle;
 - Fehler und Ereignisse nach Schweregrad und Kategorie;
 - Verteilungen nach Datenbank, Benutzer, Client, Anwendung und Anweisungstyp.
