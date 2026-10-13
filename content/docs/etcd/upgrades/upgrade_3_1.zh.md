@@ -3,7 +3,7 @@ title: 将 etcd 从 3.0 升级到 3.1
 weight: 6850
 description: 升级 etcd 3.0 至 3.1 的流程、检查清单与注意事项
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_1.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_1.md"
 aliases: [/etcd/upgrades/upgrade_3_1/]
 ---
 
@@ -38,7 +38,7 @@ aliases: [/etcd/upgrades/upgrade_3_1/]
 
 在升级 etcd 之前，请务必在预发环境中测试依赖 etcd 的服务，再将升级部署到生产环境。
 
-升级前，请对 etcd 数据执行 [备份 etcd 数据](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。若升级过程中出现异常，可使用此备份将系统 [降级](#downgrade)至现有 etcd 版本。请注意，`snapshot`命令仅备份 v3 数据。如需备份 v2 数据，请参阅 [备份 v2 数据存储](https://etcd.io/docs/v2.3/admin_guide#backing-up-the-datastore)。
+升级前，请对 etcd 数据执行 [备份 etcd 数据](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。若升级过程中出现异常，可使用此备份将系统 [降级](#downgrade)至现有 etcd 版本。请注意，`snapshot` 命令仅备份 v3 数据。如需备份 v2 数据，请参阅 [备份 v2 数据存储](https://etcd.io/docs/v2.3/admin_guide#backing-up-the-datastore)。
 
 #### 混合版本 {#mixed-versions}
 
@@ -48,15 +48,15 @@ aliases: [/etcd/upgrades/upgrade_3_1/]
 
 请注意：如果集群仅包含 v3 数据且无 v2 数据，则不受此限制影响。
 
-如果集群正在服务的数据集大小超过 50MB，每个新升级的成员可能需要最多 2 分钟才能追上现有集群。请检查最近快照的大小以估算总数据量。换句话说，升级每个成员之间应至少等待 2 分钟。
+如果集群正在服务的 v2 数据集大小超过 50MB，每个新升级的成员可能需要最多 2 分钟才能追上现有集群。请检查最近快照的大小以估算总数据量。换句话说，升级每个成员之间应至少等待 2 分钟。
 
-对于数据总量更大（例如 100MB 或更多）的情况，此一次性操作可能需要更长时间。对于规模达到此类程度的大型 etcd 集群，系统管理员可在升级前自由联系 [etcd 团队][etcd-contact]，我们将乐意提供升级流程方面的建议。
+对于数据总量更大（100MB 或更多）的情况，此一次性操作可能需要更长时间。对于规模达到此类程度的大型 etcd 集群，系统管理员可在升级前自由联系 [etcd 团队][etcd-contact]，我们将乐意提供升级流程方面的建议。
 
 #### 降级 {#downgrade}
 
 如果所有成员均已升级至 v3.1 版本，集群将升级至 v3.1 版本，从该完成状态回退**不可行**。然而，若任一成员仍为 v3.0 版本，则集群及其操作仍保持 "v3.0" 状态，此时可从该混合集群状态恢复至所有成员均使用 v3.0 etcd 二进制文件。
 
-请注意，务必对所有 etcd 成员的数据目录 [backup the data directory](/zh/docs/etcd/op-guide/maintenance#snapshot-backup) 进行备份，以确保在集群完全升级后仍可执行降级操作。
+请注意，务必 [备份](/zh/docs/etcd/op-guide/maintenance#snapshot-backup) 所有 etcd 成员的数据目录，以确保在集群完全升级后仍可执行降级操作。
 
 ### 升级流程 {#upgrade-procedure}
 
@@ -103,7 +103,7 @@ $ etcdctl snapshot save backup.db
 2017-01-17 09:36:00.996590 I | etcdserver: published {Name:my-etcd-1 ClientURLs:[http://localhost:2379]} to cluster 46bc3ce73049e678
 ```
 
-验证每个成员以及整个集群在使用新的 v3.1 etcd 二进制文件后是否恢复正常健康状态：
+先验证每个成员，再验证整个集群在使用新的 v3.1 etcd 二进制文件后是否恢复正常健康状态：
 
 ```
 $ ETCDCTL_API=3 /etcdctl endpoint health --endpoints=localhost:2379,localhost:22379,localhost:32379

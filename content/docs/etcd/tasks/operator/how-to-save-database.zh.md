@@ -1,9 +1,9 @@
 ---
 title: 如何保存数据库
-description: etcd 数据库快照的使用指南
+description: etcd 数据库快照创建指南
 weight: 1100
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/operator/how-to-save-database.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/operator/how-to-save-database.md"
 aliases: [/etcd/tasks/operator/how-to-save-database/]
 ---
 
@@ -30,7 +30,7 @@ etcdctl --endpoints=$ENDPOINT snapshot save DB_NAME
 
 快照只能从一个 etcd 节点请求，因此 `--endpoints` 标志中应仅包含一个端点。
 
-#### etcd 工具 {#etcdutl}
+#### etcdutl {#etcdutl}
 
 ```bash
 -w, --write-out string   set the output format (fields, json, protobuf, simple, table) (default "simple")

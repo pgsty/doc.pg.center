@@ -1,9 +1,9 @@
 ---
 title: 集群指南
 weight: 4150
-description: "配置 etcd 集群：静态配置、etcd 发现和 DNS 发现"
+description: "引导 etcd 集群：静态、etcd 发现与 DNS 发现"
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/clustering.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/clustering.md"
 aliases: [/etcd/op-guide/clustering/]
 ---
 
@@ -77,11 +77,11 @@ $ etcd --name infra2 --initial-advertise-peer-urls http://10.0.1.12:2380 \
   --initial-cluster-state new
 ```
 
-以 `--initial-cluster` 开头的命令行参数在 etcd 的后续运行中将被忽略。引导过程完成后，可自由移除环境变量或命令行标志。如需后续修改配置（例如向集群中添加或移除成员），请参阅 [runtime configuration][runtime-conf] 指南。
+以 `--initial-cluster` 开头的命令行参数在 etcd 的后续运行中将被忽略。引导过程完成后，可自由移除环境变量或命令行标志。如需后续修改配置（例如向集群中添加或移除成员），请参阅 [运行时重配置][runtime-conf] 指南。
 
 ### TLS {#tls}
 
-etcd 通过 TLS 协议支持加密通信。TLS 通道可用于对等成员之间的集群内部加密通信，也可用于客户端流量的加密。本节提供配置启用对等成员和客户端 TLS 的集群示例。有关 etcd TLS 支持的更多详细信息，请参阅 [security guide][security-guide]。
+etcd 通过 TLS 协议支持加密通信。TLS 通道可用于对等成员之间的集群内部加密通信，也可用于客户端流量的加密。本节提供配置启用对等成员和客户端 TLS 的集群示例。有关 etcd TLS 支持的更多详细信息，请参阅 [安全指南][security-guide]。
 
 #### 自签名证书 {#self-signed-certificates}
 
@@ -221,11 +221,14 @@ exit 1
 
 ### etcd 发现 {#etcd-discovery}
 
-为更好地理解发现服务协议的设计，建议阅读发现服务协议 [documentation][discovery-proto]。
+> [!NOTE]
+> 本节中的发现服务示例描述的是旧的 v2 协议，该协议已在 etcd 3.7 中移除。对于新的 v3.7 集群，请使用 [v3 发现](/zh/docs/etcd/dev-internal/discovery_protocol/)，或本指南中的静态引导和 DNS SRV 引导方式。
+
+为更好地理解发现服务协议的设计，建议阅读发现服务协议[文档][discovery-proto]。
 
 #### 发现 URL 的生命周期 {#lifetime-of-a-discovery-url}
 
-发现 URL 用于标识一个唯一的 etcd 集群。每个 etcd 实例应共享一个新的发现 URL，以引导新集群，而非复用现有的发现 URL。
+发现 URL 用于标识一个唯一的 etcd 集群。同一新集群中的各个 etcd 实例共享一个新的发现 URL 来引导该集群，而非复用现有的发现 URL。
 
 此外，发现 URL 仅可用于集群的初始引导。若需在集群运行后更改集群成员关系，请参阅 [运行时重配置][runtime-conf] 指南。
 
@@ -237,7 +240,7 @@ exit 1
 $ curl -X PUT https://myetcd.local/v2/keys/discovery/6c007a14875d53d9bf0ef5a6fc0257c817f0fb83/_config/size -d value=3
 ```
 
-通过将 size 键设置为 URL，可创建一个预期集群大小为 3 的发现 URL。
+在该 URL 下将 size 键设置为 3，可创建一个预期集群大小为 3 的发现 URL。
 
 此情况下使用的 URL 为 `https://myetcd.local/v2/keys/discovery/6c007a14875d53d9bf0ef5a6fc0257c817f0fb83`，etcd 成员在启动时将使用 `https://myetcd.local/v2/keys/discovery/6c007a14875d53d9bf0ef5a6fc0257c817f0fb83` 目录进行注册。
 
@@ -369,7 +372,7 @@ DNS [SRV 记录][rfc-srv] 可用作发现机制。`--discovery-srv` 标志可用
 [...] rejected connection from "10.0.1.11:53162" (error "remote error: tls: bad certificate", ServerName "example.com")
 ```
 
-如果 etcd 使用 TLS 但未使用自定义证书颁发机构，则发现域名（例如 example.com）必须与 SRV 记录域名（例如 infra1.example.com）匹配。此举旨在防范伪造 SRV 记录指向其他域名的攻击；若域名匹配，即使该域名在 PKI 下拥有有效证书，也不会被未知第三方控制。
+如果 etcd 使用 TLS 但未使用自定义证书颁发机构，则发现域名（例如 example.com）必须与 SRV 记录域名（例如 infra1.example.com）匹配。此举旨在防范伪造 SRV 记录指向其他域名的攻击；此类域名在 PKI 下可能拥有有效证书，但实际由未知第三方控制。
 
 `-discovery-srv-name` 标志还可配置在发现过程中查询的 SRV 名称后缀。
 使用此标志可在同一域名下区分多个 etcd 集群。
@@ -406,7 +409,7 @@ infra2.example.com.  300  IN  A  10.0.1.12
 etcd 集群成员可通告域名或 IP 地址，引导过程将解析 DNS A 记录。
 自 3.2 版本起（3.1 版本会打印警告）`--listen-peer-urls` 和 `--listen-client-urls` 将拒绝为网络接口绑定使用域名。
 
-`--initial-advertise-peer-urls` 中解析出的地址必须与 SRV 目标中的任一解析地址匹配。etcd 成员会读取解析地址，以判断其是否属于 SRV 记录中定义的集群。
+`--initial-advertise-peer-urls` 中解析出的地址*必须*与 SRV 目标中的任一解析地址匹配。etcd 成员会读取解析地址，以判断其是否属于 SRV 记录中定义的集群。
 
 ```
 $ etcd --name infra0 \
@@ -484,9 +487,9 @@ etcd 网关是一个简单的 TCP 代理，用于将网络数据转发至 etcd �
 
 ### 代理 {#proxy}
 
-当设置 `--proxy` 标志时，etcd 以 [代理模式][proxy] 运行。该代理模式仅支持 etcd v2 API；目前无计划支持 v3 API。对于 v3 API 支持，将在 etcd 3.0 发布后推出具备增强功能的新代理。
+旧版 etcd 曾通过 `--proxy` 支持仅适用于 v2 的[代理模式][proxy]。该模式已被移除，无法用于 etcd 3.7。对于 v3 API，请使用 [gRPC 代理](/zh/docs/etcd/op-guide/grpc_proxy/)。
 
-要使用 v2 API 代理搭建 etcd 集群，请阅读 etcd 2.3 版本发布中的 [集群化文档][clustering_etcd2]。
+有关历史 v2 代理部署，请参阅 etcd 2.3 版本的[集群文档][clustering_etcd2]。
 
 [clustering_etcd2]: https://github.com/etcd-io/etcd/blob/release-2.3/Documentation/clustering.md
 [conf-adv-client]: /zh/docs/etcd/op-guide/configuration/#clustering

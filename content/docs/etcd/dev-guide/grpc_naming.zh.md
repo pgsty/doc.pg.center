@@ -3,7 +3,7 @@ title: gRPC 命名与发现
 weight: 3500
 description: "go-grpc：使用 etcd 后端解析 gRPC 端点"
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/grpc_naming.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/grpc_naming.md"
 aliases: [/etcd/dev-guide/grpc_naming/]
 ---
 

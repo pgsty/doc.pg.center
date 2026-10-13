@@ -1,9 +1,9 @@
 ---
 title: 将 etcd 从 3.5 降级到 3.4
-weight: 6650
+weight: 6700
 description: 降级 etcd 3.5 至 3.4 的流程、检查清单与注意事项
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/downgrades/downgrade_3_5.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/downgrades/downgrade_3_5.md"
 aliases: [/etcd/downgrades/downgrade_3_5/]
 ---
 
@@ -16,12 +16,10 @@ aliases: [/etcd/downgrades/downgrade_3_5/]
 
 ### 降级检查列表 {#downgrade-checklists}
 
-content/enhttps://etcd.io/docs/v3.5/op-guide/authentication/rbac.md
-
 > [!WARNING]
-> 如果集群启用了身份认证，将无法回滚降级至 3.5 版本，因为 3.5 [更改了与身份认证相关的 WAL 条目格式](https://github.com/etcd-io/etcd/pull/11943)。可以参考 [身份认证操作指南](/zh/docs/etcd/op-guide/authentication/rbac/)禁用身份认证，并先删除所有用户。
+> 如果集群启用了身份认证，则不支持从 3.5 滚动降级，因为 3.5 [更改了与身份认证相关的 WAL 条目格式](https://github.com/etcd-io/etcd/pull/11943)。可以参考 [身份认证操作指南](/zh/docs/etcd/op-guide/authentication/rbac/)禁用身份认证，并先删除所有用户。
 
-3.5 版本到 3.4 版本的突出变更：
+从 3.5 到 3.4 的重点破坏性变更：
 
 #### 不同标志 {#difference-in-flags}
 
@@ -89,13 +87,13 @@ content/enhttps://etcd.io/docs/v3.5/op-guide/authentication/rbac.md
 
 为确保平滑的滚动降级，运行中的集群必须处于健康状态。在继续操作前，请使用 `etcdctl endpoint health` 命令检查集群健康状况。
 
-必须降级至的 3.4 版本应大于等于 3.4.32。
+降级至的 3.4 版本必须大于等于 3.4.32。
 
 #### 准备 {#preparation}
 
 在将 etcd 降级之前，务必在预发环境中测试依赖 etcd 的服务，确认无误后再将降级操作部署到生产环境。
 
-在开始之前，[下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。若降级过程中出现异常，可使用此备份执行[回滚](#rollback)至当前 etcd 版本。请注意，`snapshot`命令仅备份 v3 数据。如需备份 v2 数据，请参见[备份 v2 数据存储](https://etcd.io/docs/v2.3/admin_guide#backing-up-the-datastore)。
+在开始之前，[下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。若降级过程中出现异常，可使用此备份执行[回滚](#rollback)至当前 etcd 版本。请注意，`snapshot` 命令仅备份 v3 数据。如需备份 v2 数据，请参见[备份 v2 数据存储](https://etcd.io/docs/v2.3/admin_guide#backing-up-the-datastore)。
 
 开始之前，请下载 etcd 3.4 的最新版本，并确保其版本号 ≥ 3.4.32。
 
@@ -107,13 +105,13 @@ content/enhttps://etcd.io/docs/v3.5/op-guide/authentication/rbac.md
 
 请注意：如果集群仅包含 v3 数据且无 v2 数据，则不受此限制影响。
 
-如果集群正在服务的数据集大小超过 50MB，每个新降级的成员可能需要长达两分钟才能追上现有集群。请检查最近快照的大小，以估算总数据量。换句话说，为确保安全，应在降级每个成员之间等待两分钟。
+如果集群正在服务的 v2 数据集大小超过 50MB，每个新降级的成员可能需要长达两分钟才能追上现有集群。请检查最近快照的大小，以估算总数据量。换句话说，为确保安全，应在降级每个成员之间等待两分钟。
 
 对于数据量更大的情况，总数据大小达到 100MB 或更多时，此一次性操作可能需要更长时间。对于规模达到此类程度的大型 etcd 集群，系统管理员可在降级前自由联系 [etcd 团队][etcd-contact]，我们将乐意提供相关操作建议。
 
 #### 回滚 {#rollback}
 
-如果任一成员降级至 3.4 版本，集群版本将降级至 3.4，操作将保持 "3.4" 兼容。如需回滚，请遵循 [升级 etcd 从 3.4 到 3.5](/zh/docs/etcd/upgrades/upgrade_3_5/) 的说明。
+如果任一成员降级至 3.4 版本，集群版本将降级至 3.4，操作将保持 "3.4" 兼容。如需回滚，请遵循 [将 etcd 从 3.4 升级到 3.5](/zh/docs/etcd/upgrades/upgrade_3_5/) 的说明。
 
 请 [下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)，以便在集群完全降级后仍可进行回滚。
 
@@ -121,7 +119,7 @@ content/enhttps://etcd.io/docs/v3.5/op-guide/authentication/rbac.md
 
 本示例演示如何将运行在本地机器上的 3 成员 3.5 版 etcd 集群降级。
 
-#### 步骤 1: 检查降级要求 {#step-1-check-downgrade-requirements}
+#### 第 1 步：检查降级要求 {#step-1-check-downgrade-requirements}
 
 集群是否健康且运行 3.5.x 版本？
 
@@ -149,9 +147,9 @@ curl http://localhost:32379/version
 COMMENT
 ```
 
-#### Step 2: 从领导者下载快照备份 {#step-2-download-snapshot-backup-from-leader}
+#### 第 2 步：从领导者下载快照备份 {#step-2-download-snapshot-backup-from-leader}
 
-[下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)，以便在出现任何问题时提供回退路径。
+[下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)，以便出现问题时回退本次降级、恢复到降级前的状态。
 
 #### 第 3 步：停止一个现有的 etcd 服务器 {#step-3-stop-one-existing-etcd-server}
 
@@ -236,7 +234,7 @@ COMMENT
 > `{"level":"info","ts":"2024-05-13T21:05:46.452631Z","caller":"membership/cluster.go:549","msg":"updated cluster version","cluster-id":"ef37ad9dc622a7c4","local-member-id":"8211f1d0f64f3269","from":"3.5","from":"3.4"}`
 ```
 
-验证每个成员以及整个集群在使用新的 3.4 etcd 二进制文件后是否恢复正常健康状态：
+先验证每个成员，再验证整个集群在使用新的 3.4 etcd 二进制文件后是否恢复正常健康状态：
 
 ```bash
 etcdctl endpoint health --endpoints=localhost:2379,localhost:22379,localhost:32379

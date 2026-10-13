@@ -3,7 +3,7 @@ title: 版本管理
 weight: 4900
 description: etcd 的版本支持
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/versioning.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/versioning.md"
 aliases: [/etcd/op-guide/versioning/]
 ---
 
@@ -19,7 +19,7 @@ etcd 项目为当前版本及前一个版本维护发布分支。例如，当 v3
 根据严重性和可行性，适用于这两个发布分支的修复（包括安全修复）可能被回溯应用。
 必要时，将从这些分支中发布补丁版本。
 
-项目 [Maintainers](https://github.com/etcd-io/etcd/blob/main/OWNERS) 拥有此决策权。
+项目[维护者](https://github.com/etcd-io/etcd/blob/main/OWNERS) 拥有此决策权。
 
 可以使用 `etcdctl` 检查正在运行的 etcd 集群版本：
 

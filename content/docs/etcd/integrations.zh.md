@@ -4,7 +4,7 @@ weight: 1300
 description: etcd 工具和客户端库列表
 icon: fa-solid fa-puzzle-piece
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/integrations.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/integrations.md"
 aliases: [/etcd/integrations/]
 ---
 
@@ -36,7 +36,7 @@ aliases: [/etcd/integrations/]
 
 以下各节按语言列出了 etcd 客户端库。
 
-### Golang {#go}
+### Go {#go}
 
 - [etcd/client/v3](https://github.com/etcd-io/etcd/tree/main/client/v3) - v3 版本的官方维护 Go 客户端
 - [go-etcd](https://github.com/coreos/go-etcd) - 已弃用的官方客户端。对较旧版本（<2.0.0）的 etcd 可能仍有用处。
@@ -72,7 +72,7 @@ aliases: [/etcd/integrations/]
 - [aioetcd3](https://github.com/gaopeiliang/aioetcd3) - (Python 3.6+) asyncio 专用的 etcd v3 API
 - [Revolution1/etcd3-py](https://github.com/Revolution1/etcd3-py) - (Python 2.7 和 Python 3.5+) 使用 gRPC-JSON-Gateway 的 etcd v3 Python 客户端
 
-### 节点 {#node}
+### Node {#node}
 
 - [mixer/etcd3](https://github.com/mixer/etcd3) - 支持 v3
 - [stianeikeland/node-etcd](https://github.com/stianeikeland/node-etcd) - 支持 v2（使用 CoffeeScript）
@@ -119,7 +119,7 @@ aliases: [/etcd/integrations/]
 - [wangjia184/etcdnet](https://github.com/wangjia184/etcdnet) - 支持 v2
 - [drusellers/etcetera](https://github.com/drusellers/etcetera)
 - [shubhamranjan/dotnet-etcd](https://github.com/shubhamranjan/dotnet-etcd) - 支持 v3+（仅 GRPC）
-- [SimplifyNet/etcd.Microsoft.Extensions.Configuration](https://github.com/SimplifyNet/Etcd.Microsoft.Extensions.Configuration)
+- [SimplifyNet/Etcd.Microsoft.Extensions.Configuration](https://github.com/SimplifyNet/Etcd.Microsoft.Extensions.Configuration)
 
 ### PHP {#php}
 
@@ -161,7 +161,7 @@ aliases: [/etcd/integrations/]
 
 - [coderanger/etcd-chef](https://github.com/coderanger/etcd-chef)
 
-### Chef 转译包 {#chef-cookbooks}
+### Chef Cookbook {#chef-cookbooks}
 
 - [spheromak/etcd-cookbook](https://github.com/spheromak/etcd-cookbook)
 

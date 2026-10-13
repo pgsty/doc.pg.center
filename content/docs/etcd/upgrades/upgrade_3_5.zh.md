@@ -3,7 +3,7 @@ title: 将 etcd 从 3.4 升级到 3.5
 weight: 6650
 description: 升级 etcd 3.4 至 3.5 的流程、检查清单与注意事项
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_5.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_5.md"
 aliases: [/etcd/upgrades/upgrade_3_5/]
 ---
 
@@ -22,9 +22,9 @@ aliases: [/etcd/upgrades/upgrade_3_5/]
 > 从 [没有 v3 数据的 v2 迁移](https://github.com/etcd-io/etcd/issues/9480)时，如果 etcd 从现有快照恢复，但不存在 v3 `ETCD_DATA_DIR/member/snap/db` 文件，etcd v3.2+ 服务器会发生崩溃。这种情况出现在服务器由 v2 迁移且此前没有 v3 数据时。此限制也可防止意外丢失 v3 数据（例如 `db` 文件可能已被移动）。etcd 要求 v3 迁移后的操作必须有 v3 数据。v3.0 服务器包含 v3 数据之前，请勿升级到更新的 v3 版本。
 
 > [!WARNING]
-> 如果集群启用了认证，将无法执行从 3.4 或更早版本的滚动升级，因为 3.5 [更改了与认证相关的 WAL 条目格式](https://github.com/etcd-io/etcd/pull/11943)。
+> 如果集群启用了身份认证，则不支持从 3.4 或更早版本进行滚动升级，因为 3.5 [更改了与身份认证相关的 WAL 条目格式](https://github.com/etcd-io/etcd/pull/11943)。
 
-3.5 版本中的重点变更。
+3.5 版本中的重点破坏性变更。
 
 #### 已弃用 `etcd_debugging_mvcc_db_total_size_in_bytes` Prometheus 指标 {#deprecated-etcd_debugging_mvcc_db_total_size_in_bytes-prometheus-metrics}
 
@@ -72,7 +72,7 @@ v3.5 将 `etcd_debugging_mvcc_txn_total` 的 Prometheus 指标提升至 `etcd_mv
 
 #### 已弃用 `etcd_debugging_mvcc_range_total` Prometheus 指标 {#deprecated-etcd_debugging_mvcc_range_total-prometheus-metrics}
 
-v3.5 将 `etcd_debugging_mvcc_range_total` Prometheus 指标提升至 `etcd_mvcc_range_total` 级别，以鼓励对 etcd 存储进行监控。v3.5 完全弃用了 `etcd_debugging_mvcc_range_total`。
+v3.5 将 `etcd_debugging_mvcc_range_total` Prometheus 指标提升至 `etcd_mvcc_range_total`，以鼓励对 etcd 存储进行监控。v3.5 完全弃用了 `etcd_debugging_mvcc_range_total`。
 
 ```diff
 -etcd_debugging_mvcc_range_total
@@ -83,9 +83,9 @@ v3.5 将 `etcd_debugging_mvcc_range_total` Prometheus 指标提升至 `etcd_mvcc
 
 #### 已弃用 `etcd --logger capnslog` {#deprecated-etcd---logger-capnslog}
 
-v3.4 默认使用 `--logger=zap`，以支持多日志输出和结构化日志。
+v3.5 默认使用 `--logger=zap`，以支持多日志输出和结构化日志。
 
-`etcd --logger=capnslog` 在 v3.5 中已被弃用，现在 `--logger=zap` 为默认值。
+**`etcd --logger=capnslog` 在 v3.5 中已被弃用**，现在 `--logger=zap` 为默认值。
 
 ```diff
 -etcd --logger=capnslog
@@ -101,16 +101,16 @@ v3.4 增加 `etcd --logger=zap` 对结构化日志和多日志输出的支持。
 
 v3.4 将 [`etcd --log-output` 重命名为 `--log-outputs`](https://github.com/etcd-io/etcd/pull/9624)，以支持多日志输出。
 
-**`etcd --log-output` 已在 v3.5 中弃用.**
+**`etcd --log-output` 已在 v3.5 中弃用。**
 
 ```diff
 -etcd --log-output=stderr
 +etcd --log-outputs=stderr
 ```
 
-#### 已弃用 `etcd --debug` 标志（现已 `--log-level=debug`） {#deprecated-etcd---debug-flag-now---log-leveldebug}
+#### 已弃用 `etcd --debug` 标志（现为 `--log-level=debug`） {#deprecated-etcd---debug-flag-now---log-leveldebug}
 
-**`etcd --debug` 标志已弃用.**
+**`etcd --debug` 标志已弃用。**
 
 ```diff
 -etcd --debug
@@ -119,7 +119,7 @@ v3.4 将 [`etcd --log-output` 重命名为 `--log-outputs`](https://github.com/e
 
 #### 已弃用 `etcd --log-package-levels` {#deprecated-etcd---log-package-levels}
 
-**`etcd --log-package-levels` 标志在 `capnslog` 中已弃用.**
+**用于 `capnslog` 的 `etcd --log-package-levels` 标志已弃用。**
 
 现在，**`etcd --logger=zap`** 为默认值。
 
@@ -130,7 +130,7 @@ v3.4 将 [`etcd --log-output` 重命名为 `--log-outputs`](https://github.com/e
 
 #### 已弃用 `[CLIENT-URL]/config/local/log` {#deprecated-client-urlconfiglocallog}
 
-**`/config/local/log` 端点在 v3.5 中正在被弃用，同时 `etcd --log-package-levels` 标志也将被弃用.**
+**`/config/local/log` 端点在 v3.5 中正在被弃用，同时 `etcd --log-package-levels` 标志也将被弃用。**
 
 ```diff
 -$ curl http://127.0.0.1:2379/config/local/log -XPUT -d '{"Level":"DEBUG"}'
@@ -139,7 +139,7 @@ v3.4 将 [`etcd --log-output` 重命名为 `--log-outputs`](https://github.com/e
 
 #### 变更 gRPC 网关 HTTP 端点（已弃用 `/v3beta`） {#changed-grpc-gateway-http-endpoints-deprecated-v3beta}
 
-本文未提供内容。
+之前
 
 ```bash
 curl -L http://localhost:2379/v3beta/kv/put \
@@ -161,7 +161,7 @@ curl -L http://localhost:2379/v3/kv/put \
 
 #### 升级要求 {#upgrade-requirements}
 
-要将现有 etcd 部署升级至 3.5 版本，运行中的集群版本必须为 3.4 或更高。若版本低于 3.4，请先 [升级至 3.4](/zh/docs/etcd/upgrades/upgrade_3_3/)，再升级至 3.5。
+要将现有 etcd 部署升级至 3.5 版本，运行中的集群版本必须为 3.4 或更高。若版本低于 3.4，请先 [升级至 3.4](/zh/docs/etcd/upgrades/upgrade_3_4/)，再升级至 3.5。
 
 此外，为确保滚动升级顺利进行，运行中的集群必须处于健康状态。在继续操作前，请使用 `etcdctl endpoint health` 命令检查集群健康状况。
 
@@ -169,7 +169,7 @@ curl -L http://localhost:2379/v3/kv/put \
 
 在升级 etcd 之前，请务必在预发环境中测试依赖 etcd 的服务，再将升级部署到生产环境。
 
-在开始之前，[下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。若升级过程中出现异常，可使用此备份将 etcd 版本 [回退](#downgrade)至当前版本。请注意，`snapshot`命令仅备份 v3 数据。如需备份 v2 数据，请参见[备份 v2 数据存储](https://etcd.io/docs/v2.3/admin_guide#backing-up-the-datastore)。
+在开始之前，[下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。若升级过程中出现异常，可使用此备份 [降级](#downgrade)回现有 etcd 版本。请注意，`snapshot` 命令仅备份 v3 数据。如需备份 v2 数据，请参见[备份 v2 数据存储](https://etcd.io/docs/v2.3/admin_guide#backing-up-the-datastore)。
 
 #### 混合版本 {#mixed-versions}
 
@@ -179,9 +179,9 @@ curl -L http://localhost:2379/v3/kv/put \
 
 请注意：如果集群仅包含 v3 数据且无 v2 数据，则不受此限制影响。
 
-如果集群正在服务的数据集大小超过 50MB，每个新升级的成员可能需要最多 2 分钟才能追上现有集群。请检查最近快照的大小以估算总数据量。换句话说，升级每个成员之间应至少等待 2 分钟。
+如果集群正在服务的 v2 数据集大小超过 50MB，每个新升级的成员可能需要最多 2 分钟才能追上现有集群。请检查最近快照的大小以估算总数据量。换句话说，升级每个成员之间应至少等待 2 分钟。
 
-对于数据总量更大（例如 100MB 或更多）的情况，此一次性操作可能需要更长时间。对于规模达到此类程度的大型 etcd 集群，系统管理员可在升级前自由联系 [etcd 团队][etcd-contact]，我们将乐意提供升级流程方面的建议。
+对于数据总量更大（100MB 或更多）的情况，此一次性操作可能需要更长时间。对于规模达到此类程度的大型 etcd 集群，系统管理员可在升级前自由联系 [etcd 团队][etcd-contact]，我们将乐意提供升级流程方面的建议。
 
 #### 降级 {#downgrade}
 
@@ -193,7 +193,7 @@ curl -L http://localhost:2379/v3/kv/put \
 
 本示例演示如何升级在本地计算机上运行的 3 个成员的 v3.4 etcd 集群。
 
-#### 步骤 1: 检查升级要求 {#step-1-check-upgrade-requirements}
+#### 第 1 步：检查升级要求 {#step-1-check-upgrade-requirements}
 
 集群是否健康且运行 v3.4.x 版本？
 
@@ -221,7 +221,7 @@ curl http://localhost:32379/version
 COMMENT
 ```
 
-#### Step 2: 从领导者下载快照备份 {#step-2-download-snapshot-backup-from-leader}
+#### 第 2 步：从领导者下载快照备份 {#step-2-download-snapshot-backup-from-leader}
 
 [下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)，以便在出现任何问题时提供回退路径。
 
@@ -339,7 +339,7 @@ COMMENT
 
 > `{"level":"info","ts":1526586617.2107732,"caller":"etcdserver/server.go:1770","msg":"published local member to cluster through raft","local-member-id":"7339c4e5e833c029","local-member-attributes":"{Name:s1 ClientURLs:[http://localhost:2379]}","request-path":"/0/members/7339c4e5e833c029/attributes","cluster-id":"7dee9ba76d59ed53","publish-timeout":7}`
 
-验证每个成员以及整个集群在使用新的 v3.5 etcd 二进制文件后是否恢复正常健康状态：
+先验证每个成员，再验证整个集群在使用新的 v3.5 etcd 二进制文件后是否恢复正常健康状态：
 
 ```bash
 etcdctl endpoint health --endpoints=localhost:2379,localhost:22379,localhost:32379

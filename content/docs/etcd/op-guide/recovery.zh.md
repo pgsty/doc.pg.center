@@ -3,7 +3,7 @@ title: 灾难恢复
 weight: 4275
 description: etcd v3 快照与恢复功能
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/recovery.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/recovery.md"
 aliases: [/etcd/op-guide/recovery/]
 ---
 
@@ -42,7 +42,7 @@ $ etcdutl snapshot status snapshot.db -w table
 
 在恢复集群时，现有客户端可能会感知到修订版本倒退数百甚至数千个。这是因为特定快照仅包含截至其创建时刻的数据版本历史，而当前状态可能已向前推进得更远。
 
-当使用 etcd 运行 Kubernetes 时，此问题尤为突出，控制器和操作员可能使用所谓的 `informers` 作为本地缓存，并通过监听机制获取更新通知。恢复到较早的修订版本可能无法正确刷新缓存，导致控制器出现不可预测且不一致的行为。
+当使用 etcd 运行 Kubernetes 时，此问题尤为突出，控制器和 Operator 组件可能使用所谓的 `informers` 作为本地缓存，并通过监听机制获取更新通知。恢复到较早的修订版本可能无法正确刷新缓存，导致控制器出现不可预测且不一致的行为。
 
 在从快照恢复的场景下，例如已知的监听 API 消费者、etcd 数据的本地缓存副本，或在一般情况下使用 Kubernetes 时，强烈建议使用以下“修订版本提升”方式进行恢复。
 
@@ -61,11 +61,11 @@ $ etcdutl snapshot restore snapshot.db --data-dir output-dir
 快照完整性可在恢复时选择性地进行验证。若快照是使用 `etcdctl snapshot save` 创建的，则会包含完整性哈希，该哈希由 `etcdutl snapshot restore` 进行校验。若快照是从数据目录复制的，则不包含完整性哈希，只能通过 `--skip-hash-check` 恢复。
 
 
-### 使用修订版本恢复 {#restoring-with-revision-bump}
+### 使用修订版本提升恢复 {#restoring-with-revision-bump}
 
 为确保恢复后修订版本永不递减，可提供 `--bump-revision` 选项。该选项接受一个 64 位整数，表示在快照当前修订版本基础上增加的修订版本数。由于每次向 etcd 写入都会使修订版本加一，因此只要 etcd 每秒写入次数少于 1500 次，即可通过增加 1'000'000'000 个修订版本来覆盖一周前的快照。
 
-在 Kubernetes 控制器的上下文中，还应使用 `--mark-compacted` 标记所有修订版本，包括版本递增操作，以执行压缩。这可确保所有监听操作被终止，且 etcd 不再响应关于快照创建后发生的修订版本的请求——从而有效使 informer 缓存失效。
+在 Kubernetes 控制器的上下文中，还应使用 `--mark-compacted` 将包括提升部分在内的所有修订版本标记为已压缩。这可确保所有监听操作被终止，且 etcd 不再响应关于快照创建后发生的修订版本的请求——从而有效使 informer 缓存失效。
 
 完整调用示例如下：
 
@@ -75,7 +75,7 @@ $ etcdutl snapshot restore snapshot.db --bump-revision 1000000000 --mark-compact
 
 ### 使用更新后的成员信息恢复 {#restoring-with-updated-membership}
 
-etcd 集群的成员信息存储在 etcd 自身中，并通过 Raft 共识算法进行维护。当完全失去法定人数时，应重新考虑新集群的组建位置和方式，例如在一组全新的成员上进行组建。
+etcd 集群的成员信息存储在 etcd 自身中，并通过 Raft 共识算法进行维护。当完全失去法定人数时，可重新考虑新集群的组建位置和方式，例如在一组全新的成员上进行组建。
 
 从快照恢复时，可直接将新的成员信息提供给数据存储，如下所示：
 

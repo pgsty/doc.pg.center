@@ -3,13 +3,13 @@ title: etcd 网关
 weight: 4300
 description: etcd 网关的使用场景及配置方法
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/gateway.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/gateway.md"
 aliases: [/etcd/op-guide/gateway/]
 ---
 
 ## etcd 网关是什么 {#what-is-etcd-gateway}
 
-etcd 网关是一个简单的 TCP 代理，负责将网络数据转发至 etcd 集群。网关为无状态且透明的；它既不检查客户端请求，也不干扰集群响应。网关不会终止 TLS 连接，不会代表客户端执行 TLS 握手，也不会验证连接是否已加密。
+etcd 网关是一个简单的 TCP 代理，负责将网络数据转发至 etcd 集群。网关为无状态且透明的；它既不检查客户端请求，也不干扰集群响应。网关不会终止 TLS 连接，不会代表客户端执行 TLS 握手，也不会验证连接是否安全。
 
 网关支持多个 etcd 服务器端点，并采用简单的轮询策略。它仅将请求路由至可用端点，并向客户端隐藏故障。未来可能支持其他重试策略，例如加权轮询。
 
@@ -19,7 +19,7 @@ etcd 网关是一个简单的 TCP 代理，负责将网络数据转发至 etcd �
 
 etcd 网关通过作为稳定的本地端点来解决此问题。典型的 etcd 网关配置中，每台机器上运行一个监听本地地址的网关，每个 etcd 应用程序连接到其本地网关。结果是，只需更新网关的端点，而无需逐一更新每个应用程序。
 
-综上所述，为自动传播集群端点变更，etcd 网关需在每台运行多个访问同一 etcd 集群的应用程序的机器上运行。
+综上所述，为自动传播集群端点变更，etcd 网关在每台运行多个访问同一 etcd 集群的应用程序的机器上运行。
 
 ## 何时不应使用 etcd 网关 {#when-not-to-use-etcd-gateway}
 
@@ -91,7 +91,7 @@ $ etcd gateway start --discovery-srv=example.com
 
 #### --listen-addr {#listen-addr}
 
-* 用于接收客户端请求的接口和端口。
+* 用于绑定并接收客户端请求的接口和端口。
 * 默认值：`127.0.0.1:23790`
 
 #### --retry-delay {#retry-delay}

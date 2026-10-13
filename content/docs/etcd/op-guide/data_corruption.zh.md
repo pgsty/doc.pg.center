@@ -3,19 +3,22 @@ title: 数据损坏
 weight: 5000
 description: etcd 数据损坏和恢复
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/data_corruption.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/data_corruption.md"
 aliases: [/etcd/op-guide/data_corruption/]
 ---
 
 etcd 内置了自动数据损坏检测机制，以防止成员状态发生不一致。
 
+> [!NOTE]
+> 在 etcd 3.7 中，请使用以下功能门控和时长标志。原有的实验性数据损坏检查标志已被移除；请参阅[配置选项](/zh/docs/etcd/op-guide/configuration/#feature-gates)。
+
 ## 启用数据损坏检测 {#enabling-data-corruption-detection}
 
 数据损坏检测可通过以下方式执行：
-* 初始检查，通过 `--experimental-initial-corrupt-check` 标志启用。
+* 初始检查，通过 `--feature-gates=InitialCorruptCheck=true` 标志启用。
 * 定期检查包括：
-  * 已压缩的修订版本哈希，通过 `--experimental-compact-hash-check-enabled` 标志启用。
-  * 最新修订版本哈希，通过 `--experimental-corrupt-check-time` 标志启用。
+  * 已压缩的修订版本哈希，通过 `--feature-gates=CompactHashCheck=true` 标志启用。
+  * 最新修订版本哈希，通过 `--corrupt-check-time` 标志启用。
 
 引导过程中将执行初始检查。
 成员将比较其持久化状态与其他成员的状态，若发现不匹配则退出。
@@ -28,20 +31,20 @@ etcd 内置了自动数据损坏检测机制，以防止成员状态发生不一
 
 ### 压缩修订版本哈希检查 {#compacted-revision-hash-check}
 
-启用 `--experimental-compact-hash-check-enabled` 标志后，每分钟执行一次检查。
-可使用 `--experimental-compact-hash-check-time` 标志调整检查频率，格式为：`1m` - 每分钟，`1h` - 每小时。
+启用 `--feature-gates=CompactHashCheck=true` 标志后，每分钟执行一次检查。
+可使用 `--compact-hash-check-time` 标志调整检查频率，格式为：`1m` - 每分钟，`1h` - 每小时。
 该检查将压缩功能扩展为同时计算校验和，以便在集群成员之间进行比对。
 不会引起额外的数据库扫描，因此开销极低，但要求集群定期执行压缩。
 
-### 最新修订版本哈希校验 {#latest-revision-hash-check}
+### 最新修订版本哈希检查 {#latest-revision-hash-check}
 
-通过 `--experimental-corrupt-check-time` 标志启用，需以如下格式提供执行周期：`1m` —— 每分钟，`1h` —— 每小时。
+通过 `--corrupt-check-time` 标志启用，需以如下格式提供执行周期：`1m` - 每分钟，`1h` - 每小时。
 由于性能开销较高，建议周期为数小时。
 运行检查需在指定修订版本下扫描整个 etcd 内容以计算校验和。
 
-## 恢复受损成员 {#restoring-a-corrupted-member}
+## 恢复损坏的成员 {#restoring-a-corrupted-member}
 
-恢复损坏成员有三种方法：
+恢复损坏的成员有三种方法：
 * 清除成员持久化状态
 * 替换成员
 * 恢复整个集群

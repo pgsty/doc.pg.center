@@ -3,7 +3,7 @@ title: 监听内存使用量基准测试
 weight: 5250
 description: etcd 监听器的性能指标
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/benchmarks/etcd-3-watch-memory-benchmark.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/benchmarks/etcd-3-watch-memory-benchmark.md"
 aliases: [/etcd/benchmarks/etcd-3-watch-memory-benchmark/]
 ---
 
@@ -15,10 +15,10 @@ etcd 的一个核心目标是支持大量客户端执行海量监听操作。etc
 
 etcd 监听功能的三个相关组件会占用物理内存：每个 `grpc.Conn`、每个监听流以及每次监听活动的实例。`grpc.Conn` 维护实际的 TCP 连接及其他 gRPC 连接状态。每个 `grpc.Conn` 消耗约 10 KB 内存，且可能关联多个监听流。
 
-每个监听流都是一个独立的 HTTP2 连接，消耗额外约 10 kB 的内存。
+每个监听流都是一个独立的 HTTP2 连接，消耗额外约 10 KB 的内存。
 多个监听操作可能共享一个监听流。
 
-监听是实际用于跟踪键值存储变更的结构。每个监听操作的内存消耗应低于 < 1 KB。
+监听是实际用于跟踪键值存储变更的结构。每个监听操作的内存消耗应低于 1 KB。
 
 ```
                                           +-------+

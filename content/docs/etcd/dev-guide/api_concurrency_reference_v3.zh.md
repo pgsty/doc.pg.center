@@ -3,7 +3,7 @@ title: "API 参考：并发"
 weight: 3900
 description: "etcd 并发 API 参考"
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/api_concurrency_reference_v3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/api_concurrency_reference_v3.md"
 aliases: [/etcd/dev-guide/api_concurrency_reference_v3/]
 ---
 
@@ -15,7 +15,7 @@ aliases: [/etcd/dev-guide/api_concurrency_reference_v3/]
 
 | 方法 | 请求类型 | 响应类型 | 描述 |
 | ------ | ------------ | ------------- | ----------- |
-| Lock | LockRequest | LockResponse | Lock 在指定名称的锁上获取分布式共享锁。成功时，将返回一个唯一键，该键在调用方持有锁期间持续存在。该键可与事务配合使用，以确保对 etcd 的更新仅在持有锁所有权时发生。锁将持续持有，直至对键调用 Unlock，或与所有者关联的租约到期。 |
+| Lock | LockRequest | LockResponse | Lock 在指定名称的锁上获取分布式共享锁。成功时，将返回一个唯一键，该键在调用方持有锁期间持续存在。该键可与事务配合使用，以安全地确保对 etcd 的更新仅在持有锁所有权时发生。锁将持续持有，直至对键调用 Unlock，或与所有者关联的租约到期。 |
 | Unlock | UnlockRequest | UnlockResponse | Unlock 接收 Lock 返回的键，并释放对锁的持有。等待获取锁的下一个 Lock 调用者将被唤醒，并获得锁的所有权。 |
 
 ##### 消息 `LockRequest` (server/etcdserver/api/v3lock/v3lockpb/v3lock.proto) {#message-lockrequest-serveretcdserverapiv3lockv3lockpbv3lockproto}
@@ -30,7 +30,7 @@ aliases: [/etcd/dev-guide/api_concurrency_reference_v3/]
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
-| key | 键是在锁持有者持有锁期间存在于 etcd 中的键。用户不应修改此键，否则锁可能表现出未定义行为。 | bytes |
+| key | key 是在 Lock 调用方持有锁期间存在于 etcd 中的键。用户不应修改此键，否则锁可能表现出未定义行为。 | bytes |
 
 ##### 消息 `UnlockRequest` (server/etcdserver/api/v3lock/v3lockpb/v3lock.proto) {#message-unlockrequest-serveretcdserverapiv3lockv3lockpbv3lockproto}
 
@@ -60,7 +60,7 @@ aliases: [/etcd/dev-guide/api_concurrency_reference_v3/]
 
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
-| name | name 是竞选的标识符。 | bytes |
+| name | name 是该竞选对应的选举标识符。 | bytes |
 | lease | lease 是与选举领导权关联的租约 ID。如果在放弃领导权之前租约到期或被撤销，则领导权将转移给下一个竞选者（如果存在）。 | int64 |
 | value | value 是竞选者赢得选举时设置的初始声明值。 | bytes |
 
@@ -110,7 +110,7 @@ aliases: [/etcd/dev-guide/api_concurrency_reference_v3/]
 
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
-| leader | leader 是通过辞职放弃领导权的领导者。 | LeaderKey |
+| leader | leader 是要通过辞职而放弃的领导权。 | LeaderKey |
 
 ##### 消息 `ResignResponse` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-resignresponse-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
@@ -130,9 +130,9 @@ aliases: [/etcd/dev-guide/api_concurrency_reference_v3/]
 
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
-| key | key 是以字节形式表示的键。不允许使用空键。 | 字节 |
+| key | key 是以字节形式表示的键。不允许使用空键。 | bytes |
 | create_revision | create_revision 是该键上次创建时的修订版本。 | int64 |
 | mod_revision | mod_revision 是该键上次修改时的修订版本。 | int64 |
 | version | version 是键的版本号。删除操作会将版本号重置为零，任何对键的修改都会增加其版本号。 | int64 |
-| value | value 是键所持有的值，以字节形式表示。 | 字节 |
+| value | value 是键所持有的值，以字节形式表示。 | bytes |
 | lease | lease 是附加到该键的租约 ID。当附加的租约到期时，该键将被删除。若 lease 为 0，则表示该键未附加任何租约。 | int64 |

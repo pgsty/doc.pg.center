@@ -3,13 +3,13 @@ title: 以 Kubernetes StatefulSet 运行 etcd 集群
 weight: 4200
 description: 以 Kubernetes StatefulSet 运行 etcd
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/kubernetes.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/kubernetes.md"
 aliases: [/etcd/op-guide/kubernetes/]
 ---
 
 以下演示如何作为 Kubernetes StatefulSet 执行 [静态引导过程](/zh/docs/etcd/op-guide/clustering/#static)。
 
-## 示例 Manifest {#example-manifest}
+## 示例清单 {#example-manifest}
 本文档包含用于在 Kubernetes 中部署静态 etcd 集群的服务和有状态集（StatefulSet）配置。
 
 如果将清单内容复制到名为 `etcd.yaml` 的文件中，可使用以下命令将其应用到集群。
@@ -162,7 +162,7 @@ spec:
       containers:
       ## This example only has this etcd container.
       - name: etcd
-        image: quay.io/coreos/etcd:v3.7.0
+        image: quay.io/coreos/etcd:v3.7.2
         imagePullPolicy: IfNotPresent
         ports:
         - name: etcd-client
@@ -361,7 +361,7 @@ spec:
 
 在集群中安装 cert-manager 后，可在集群内生成自签名证书。生成的证书将存放在一个 Secret 对象中，该对象可作为文件挂载到容器中。
 
-本文是用于安装 cert-manager 的 Helm 命令。
+以下是用于安装 cert-manager 的 Helm 命令。
 
 ```shell
 $ helm upgrade --install --create-namespace --namespace cert-manager cert-manager cert-manager --repo https://charts.jetstack.io --set crds.enabled=true

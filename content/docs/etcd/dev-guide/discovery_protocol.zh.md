@@ -3,9 +3,12 @@ title: 发现服务协议
 weight: 1500
 description: 在集群引导阶段发现集群其他成员
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/discovery_protocol.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/discovery_protocol.md"
 aliases: [/etcd/dev-guide/discovery_protocol/]
 ---
+
+> [!NOTE]
+> 本页介绍的是旧的 v2 发现协议，该协议已在 etcd 3.7 中移除。对于新的 v3.7 部署，请使用 [v3 发现协议](/zh/docs/etcd/dev-internal/discovery_protocol/)。
 
 发现服务协议有助于新 etcd 成员在集群引导阶段通过共享的发现 URL 发现集群中的所有其他成员。
 
@@ -39,7 +42,7 @@ UUID=$(uuidgen)
 curl -X PUT http://example.com/v2/keys/_etcd/registry/${UUID}/_config/size -d value=${cluster_size}
 ```
 
-通常，集群大小为 3、5 或 7。请参阅 [optimal cluster size][cluster-size] 以获取更多详细信息。
+通常，集群大小为 3、5 或 7。请参阅[最佳集群规模][cluster-size]以获取更多详细信息。
 
 ### 启动 etcd 进程 {#bringing-up-etcd-processes}
 
@@ -47,7 +50,7 @@ curl -X PUT http://example.com/v2/keys/_etcd/registry/${UUID}/_config/size -d va
 
 ### 自我注册 {#registering-itself}
 
-etcd 进程的首要任务是将自身作为成员注册到发现 URL。这是通过在发现 URL 中以成员 ID 作为键来创建实现的。
+etcd 进程的首要任务是将自身作为成员注册到发现 URL。具体做法是在发现 URL 下创建一个以成员 ID 为键的条目。
 
 ```
 curl -X PUT http://example.com/v2/keys/_etcd/registry/${UUID}/${member_id}?prevExist=false -d value="${member_name}=${member_peer_url_1}&${member_name}=${member_peer_url_2}"
@@ -112,7 +115,7 @@ GET /${UUID}
 
 ### 开源代码库 {#open-source-repository}
 
-仓库位于 https://github.com/coreos/discovery.etcd.io.，可用于构建自定义发现服务。
+仓库位于 https://github.com/coreos/discovery.etcd.io，可用于构建自定义发现服务。
 
 [api]: https://etcd.io/docs/v2.3/api#waiting-for-a-change
 [cluster-size]: https://etcd.io/docs/v2.3/admin_guide#optimal-cluster-size

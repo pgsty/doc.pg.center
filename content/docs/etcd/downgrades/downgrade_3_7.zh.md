@@ -3,7 +3,7 @@ title: 将 etcd 从 v3.7 降级到 v3.6
 weight: 6600
 description: 降级 etcd 3.7 至 3.6 的流程、检查清单与注意事项
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/downgrades/downgrade_3_7.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/downgrades/downgrade_3_7.md"
 aliases: [/etcd/downgrades/downgrade_3_7/]
 ---
 
@@ -25,7 +25,7 @@ v3.7 未引入任何新标志，因此 v3.6 进程可接受 v3.7 配置中的所
 > [!NOTE]
 > 本次差异对比基于版本 v3.7.0-rc.0 与 v3.6.13。实际差异取决于所用补丁版本，请先查阅 `diff <(etcd-3.7/bin/etcd -h | grep \\-\\-) <(etcd-3.6/bin/etcd -h | grep \\-\\-)`。
 
-在 v3.7 中已弃用的 `--experimental-*` 标志在 v3.6 中仍存在，但降级后不得重新添加；应使用其非实验性等效标志或 `--feature-gates` 条目，两者在两个版本中均有效。
+在 v3.7 中已移除的弃用标志 `--experimental-*` 在 v3.6 中仍存在，但降级后不得重新添加；应使用其非实验性等效标志或 `--feature-gates` 条目，两者在两个版本中均有效。
 
 #### Prometheus 指标差异 {#difference-in-prometheus-metrics}
 
@@ -48,7 +48,7 @@ v3.7 未引入任何新标志，因此 v3.6 进程可接受 v3.7 配置中的所
 
 在将 etcd 降级之前，务必在预发环境中测试依赖 etcd 的服务，确认无误后再将降级操作部署到生产环境。
 
-在开始之前，[下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。若降级过程中出现异常，可使用此备份对 [回滚](#rollback)至现有 etcd 版本。
+在开始之前，[下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)。若降级过程中出现异常，可使用此备份[回滚](#rollback)至现有 etcd 版本。
 
 在开始之前，请下载 etcd v3.6 的最新版本。
 
@@ -68,7 +68,7 @@ v3.7 未引入任何新标志，因此 v3.6 进程可接受 v3.7 配置中的所
 
 本示例演示如何将运行在本地机器上的 3 个成员 v3.7 etcd 集群降级。以下输出来自在单个主机上使用三个环回端口，对 v3.7.0-rc.0 和 v3.6.13 版本的 etcd 执行的实际运行，该集群在不久之前从 v3.6.13 升级而来。
 
-#### 步骤 1: 检查降级要求 {#step-1-check-downgrade-requirements}
+#### 第 1 步：检查降级要求 {#step-1-check-downgrade-requirements}
 
 集群是否健康且运行 v3.7.x 版本？
 
@@ -107,9 +107,9 @@ etcdctl --endpoints=localhost:2379,localhost:22379,localhost:32379 endpoint stat
 COMMENT
 ```
 
-#### Step 2: 从领导者下载快照备份 {#step-2-download-snapshot-backup-from-leader}
+#### 第 2 步：从领导者下载快照备份 {#step-2-download-snapshot-backup-from-leader}
 
-[下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)，以便在出现任何问题时提供回退路径：
+[下载快照备份](/zh/docs/etcd/op-guide/maintenance/#snapshot-backup)，以便出现问题时回退本次降级、恢复到降级前的状态：
 
 ```bash
 etcdctl --endpoints=localhost:2379 snapshot save backup.db
@@ -148,7 +148,7 @@ Downgrade enable success, cluster version 3.7
 COMMENT
 ```
 
-启用降级后，集群将开始使用 v3.6 协议运行，该版本即为降级目标版本。此外，etcd 会自动将模式迁移至降级目标版本，此过程通常非常迅速。在继续下一步之前，请通过检查端点状态确认所有服务器的存储版本均已迁移至 v3.6。
+启用降级后，集群将开始使用 v3.6 协议运行，该版本即为降级目标版本。此外，etcd 会自动将存储模式（schema）迁移至降级目标版本，此过程通常非常迅速。在继续下一步之前，请通过检查端点状态确认所有服务器的存储版本均已迁移至 v3.6。
 
 ```bash
 etcdctl --endpoints=localhost:2379,localhost:22379,localhost:32379 endpoint status -w=table
@@ -168,7 +168,7 @@ COMMENT
 
 #### 第 5 步：停止一个现有的 etcd 服务器 {#step-5-stop-one-existing-etcd-server}
 
-在停止服务器之前，请检查其是否为领导者。我们建议最后再停用领导者。如果要停止的服务器是领导者，可以在停止该服务器前通过 `move-leader` 将领导者角色转移至其他服务器，以减少停机时间。
+在停止服务器之前，请检查其是否为领导者。我们建议最后再降级领导者。如果要停止的服务器是领导者，可以在停止该服务器前通过 `move-leader` 将领导者角色转移至其他服务器，以减少停机时间。
 
 ```bash
 etcdctl --endpoints=localhost:2379,localhost:22379,localhost:32379 move-leader 729934363faa4a24
@@ -226,11 +226,11 @@ COMMENT
 ```
 
 > [!NOTE]
-> 与 v3.5 不同，v3.6 的状态端点会报告降级信息，因此降级中的成员会持续显示 `DOWNGRADE ENABLED` 为 true 以及其存储版本，直至降级完成。
+> 与 v3.5 不同，v3.6 的状态端点会报告降级信息，因此已降级的成员会持续显示 `DOWNGRADE ENABLED` 为 true 以及其存储版本，直至降级完成。
 
 #### 第 7 步：重复第 5 步和第 6 步，直至所有成员完成 {#step-7-repeat-step-5-and-step-6-for-rest-of-the-members}
 
-当所有成员均完成降级后，降级操作将自动完成，`DOWNGRADE ENABLED` 被重置为 false。检查集群的健康状况和状态，确认所有成员的次要版本以及存储版本均为 v3.6：
+当所有成员均完成降级后，降级操作将自动完成，`DOWNGRADE ENABLED` 被重置为 false。检查集群的健康状况和状态，确认所有成员的次版本以及存储版本均为 v3.6：
 
 ```bash
 etcdctl --endpoints=localhost:2379,localhost:22379,localhost:32379 endpoint status -w=table

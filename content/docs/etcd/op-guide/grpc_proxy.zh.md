@@ -1,9 +1,9 @@
 ---
 title: gRPC 代理
 weight: 4350
-description: 一个无状态的 etcd 代理，运行在 gRPC 层
+description: 一个运行在 gRPC 层的无状态 etcd 反向代理
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/grpc_proxy.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/grpc_proxy.md"
 aliases: [/etcd/op-guide/grpc_proxy/]
 ---
 
@@ -51,7 +51,7 @@ watch key A ^     ^ watch key A    |
 
 假设有 N 个客户端在更新租约，单个 gRPC 代理可将 etcd 服务器的流负载从 N 降低至 1。部署中可增加额外的 gRPC 代理，以进一步将流分布到多个代理上。
 
-在以下示例中，三个客户端分别更新三个独立的租约（`L1`、`L2` 和 `L3`）。gRPC 代理将这三个客户端的租约流（`c-streams`）合并为一个附加到 etcd 服务器的租约保活流（`s-stream`）。代理将客户端侧租约心跳从 c-流转发至 s-流，随后将响应返回至对应的 c-流。
+在以下示例中，三个客户端分别更新三个独立的租约（`L1`、`L2` 和 `L3`）。gRPC 代理将这三个客户端的租约流（`c-streams`）合并为一个附加到 etcd 服务器的租约保活流（`s-stream`）。代理将客户端侧的租约心跳从各 c-stream 转发至 s-stream，随后将响应返回至对应的 c-stream。
 
 ```
           +-------------+
@@ -106,7 +106,7 @@ bar
 
 ## 客户端端点同步与名称解析 {#client-endpoint-synchronization-and-name-resolution}
 
-代理支持将端点注册至用户定义的发现端点，以供发现。此举具有两个目的。首先，它允许客户端将其端点与一组代理端点同步，以实现高可用性。其次，它是 etcd [gRPC 命名](/zh/docs/etcd/dev-guide/grpc_naming/)的端点提供者。
+代理支持通过写入用户自定义的端点来注册其自身端点，以供发现。此举具有两个目的。首先，它允许客户端将其端点与一组代理端点同步，以实现高可用性。其次，它是 etcd [gRPC 命名](/zh/docs/etcd/dev-guide/grpc_naming/)的端点提供者。
 
 通过提供用户自定义前缀来注册代理：
 
@@ -162,7 +162,7 @@ $ etcd grpc-proxy start --endpoints=localhost:2379 \
   --advertise-client-url=127.0.0.1:23792
 ```
 
-成员列表 API 通过 gRPC 代理返回其自身的 `advertise-client-url`：
+对 gRPC 代理调用成员列表 API 将返回其自身的 `advertise-client-url`：
 
 ```bash
 ETCDCTL_API=3 etcdctl --endpoints=http://localhost:23792 member list --write-out table
@@ -178,7 +178,7 @@ ETCDCTL_API=3 etcdctl --endpoints=http://localhost:23792 member list --write-out
 
 假设某个应用需要完全控制整个键空间，但 etcd 集群与其他应用共享。为使所有应用能够互不干扰地运行，代理可对 etcd 键空间进行分区，使客户端看似拥有对完整键空间的访问权限。当代理收到标志 `--namespace` 时，所有进入代理的客户端请求都会被转换，使键带上用户自定义的前缀。对 etcd 集群的访问将基于该前缀，而代理返回的响应会移除前缀；对客户端而言，似乎根本不存在前缀。
 
-要为代理命名空间，请使用 `--namespace` 启动它：
+要为代理设置命名空间，请使用 `--namespace` 启动它：
 
 ```bash
 $ etcd grpc-proxy start --endpoints=localhost:2379 \
@@ -201,9 +201,9 @@ $ ETCDCTL_API=3 etcdctl --endpoints=localhost:2379 get my-prefix/my-key
 
 ## TLS 终止 {#tls-termination}
 
-通过 gRPC 代理终止安全 etcd 集群的 TLS，通过提供一个未加密的本地端点。
+通过 gRPC 代理提供一个未加密的本地端点，以终止来自安全 etcd 集群的 TLS。
 
-尝试操作，请使用客户端 HTTPS 启动单成员 etcd 集群：
+要尝试此操作，请使用客户端 HTTPS 启动单成员 etcd 集群：
 
 ```sh
 $ etcd --listen-client-urls https://localhost:2379 --advertise-client-urls https://localhost:2379 --cert-file=peer.crt --key-file=peer.key --trusted-ca-file=ca.crt --client-cert-auth
