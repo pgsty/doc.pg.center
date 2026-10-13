@@ -1,7 +1,7 @@
 # Norme de traduction française
 
 Ce document définit la base terminologique et stylistique des pages françaises de
-pgsql.cc. L'anglais est la source de vérité. Une traduction française est placée à
+pig.center. L'anglais est la source de vérité. Une traduction française est placée à
 côté de sa source et porte le suffixe `.fr.md`.
 
 ## Périmètre et structure

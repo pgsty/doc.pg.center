@@ -13,6 +13,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit
 
+from translation_sources import describe_sources, read_source
+
 
 PROJECT = Path(__file__).resolve().parent.parent
 CONTENT = PROJECT / "content"
@@ -67,7 +69,7 @@ SHARED_ASSET_EXTENSIONS = frozenset(
         ".zip",
     }
 )
-INTERNAL_HOSTS = frozenset({"pgsql.cc", "www.pgsql.cc"})
+INTERNAL_HOSTS = frozenset({"pig.center", "www.pig.center"})
 
 FENCE_OPEN_RE = re.compile(r"^ {0,3}(`{3,}|~{3,})(?:[^\r\n]*)$")
 ATX_HEADING_RE = re.compile(r"^ {0,3}(#{1,6})(?:[ \t]+|$)(.*)$")
@@ -695,10 +697,11 @@ def validate_pair(
     target: Path,
     rendered_root: Path | None,
     errors: list[str],
+    current_source: bool = False,
 ) -> None:
     label = relative(source)
     try:
-        english = source.read_text(encoding="utf-8")
+        english, source_revision = read_source(source, "de", current=current_source)
         german = target.read_text(encoding="utf-8")
         en_front, en_body = split_front_matter(english)
         de_front, de_body = split_front_matter(german)
@@ -797,7 +800,7 @@ def validate_pair(
         try:
             expected_ids = (
                 rendered_heading_ids(source, en_headings, rendered_root)
-                if rendered_root is not None
+                if rendered_root is not None and source_revision is None
                 else inferred_heading_ids(en_headings)
             )
         except ValueError as exc:
@@ -875,7 +878,11 @@ def validate_pair(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Check all 218 English/German documentation pairs."
+        description="Check English/German documentation against each translation's source version."
+    )
+    parser.add_argument(
+        "--current-source", action="store_true",
+        help="compare older translations with current English instead of their pinned source version",
     )
     parser.add_argument(
         "rendered_dir",
@@ -934,7 +941,7 @@ def main() -> int:
         if target not in german_pages:
             continue
         pair_count += 1
-        validate_pair(source, target, args.rendered_dir, errors)
+        validate_pair(source, target, args.rendered_dir, errors, args.current_source)
 
     if errors:
         print("German documentation parity validation failed:", file=sys.stderr)
@@ -952,7 +959,9 @@ def main() -> int:
     scope = "existing " if args.allow_partial else ""
     print(
         f"Validated {pair_count} {scope}English/German documentation pairs "
-        f"with {'rendered' if args.rendered_dir else 'inferred'} English heading IDs."
+        f"against {describe_sources('de', current=args.current_source)}. "
+        "Pinned snapshots use inferred heading IDs; current sources use "
+        f"{'rendered' if args.rendered_dir else 'inferred'} heading IDs."
     )
     return 0
 

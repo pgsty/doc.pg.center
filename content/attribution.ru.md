@@ -11,7 +11,7 @@ translation_notice: false
 outputs: [HTML, markdown]
 ---
 
-pgsql.cc повторно публикует документацию, написанную шестью исходными проектами. В конце каждой
+pig.center повторно публикует документацию, написанную шестью исходными проектами. В конце каждой
 страницы документации приведена строка атрибуции: из какой работы она получена, кому принадлежат
 авторские права, по какой лицензии распространяется и в каком разделе этой страницы приведены
 соответствующие сведения.
@@ -26,7 +26,7 @@ pgsql.cc повторно публикует документацию, напи�
 > страницу.
 
 > [!NOTE]
-> pgsql.cc — независимый проект документации сообщества. Он не связан ни с одним из перечисленных
+> pig.center — независимый проект документации сообщества. Он не связан ни с одним из перечисленных
 > ниже проектов и с PostgreSQL Global Development Group, не одобрен ими и не является их официальным
 > изданием.
 
@@ -35,8 +35,8 @@ pgsql.cc повторно публикует документацию, напи�
 | Компонент | Исходная работа | Зафиксированная версия | Лицензия | Сохранённое уведомление |
 |---|---|---|---|---|
 | [Patroni](/ru/docs/patroni/) | [Документация Patroni](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/ru/docs/pgbackrest/) | [Документация pgBackRest](https://pgbackrest.org/) | v2.59.1 | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/ru/docs/pgbouncer/) | [Документация PgBouncer](https://www.pgbouncer.org/) | v1.25.2 | [ISC](https://opensource.org/license/isc-license-txt) | [Исходный `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/master/COPYRIGHT) |
+| [pgBackRest](/ru/docs/pgbackrest/) | [Документация pgBackRest](https://pgbackrest.org/) | v2.59.2 (английский / упрощённый китайский); v2.59.1 (другие переводы) | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [PgBouncer](/ru/docs/pgbouncer/) | [Документация PgBouncer](https://www.pgbouncer.org/) | v1.26.0 (английский / упрощённый китайский) | [ISC](https://opensource.org/license/isc-license-txt) | [Исходный `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/ru/docs/pgbadger/) | [Документация pgBadger](https://pgbadger.darold.net/) | v13.2, коммит `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/ru/docs/haproxy/) | [Руководства HAProxy 3.4](https://docs.haproxy.org/3.4/) | v3.4.4, коммит `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/ru/docs/etcd/) | [Документация etcd v3.7](https://etcd.io/docs/v3.7/) | v3.7, коммит `8245979` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Исходный `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
@@ -57,10 +57,10 @@ pgsql.cc повторно публикует документацию, напи�
 
 ## pgBackRest {#pgbackrest}
 
-Импортировано 2026-08-15 и обновлено 2026-08-30 из
-[документации pgBackRest](https://pgbackrest.org/) до версии **v2.59.1**; полные переводы на
-упрощённый китайский и французский языки поддерживаются параллельно. Русская версия pgBackRest
-пока не опубликована.
+Импортировано 2026-08-15 с [сайта документации pgBackRest](https://pgbackrest.org/).
+Английская версия и версия на упрощённом китайском обновлены 2026-10-04 до **v2.59.2**.
+Другие существующие переводы остаются на **v2.59.1**; их последнее обновление выполнено 2026-08-30.
+Русская версия pgBackRest пока не опубликована.
 
 Авторские права на pgBackRest принадлежат The PostgreSQL Global Development Group и David Steele
 (copyright (c) 2015-2026). Материалы распространяются по
@@ -72,10 +72,17 @@ pgsql.cc повторно публикует документацию, напи�
 Импортировано 2026-08-15 из [документации PgBouncer](https://www.pgbouncer.org/) версии
 **v1.25.2**; переводы на упрощённый китайский и русский языки подготовлены параллельно.
 
+Английская версия и версия на упрощённом китайском обновлены 2026-10-04 до
+[**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0)
+на основе вычитанных руководств из `pigsty.io` и `pigsty.cc` соответственно.
+Справочные описания сверены с реализацией этого выпуска;
+исправлены четыре вида ошибок в исходной документации.
+Версии на других языках сохраняют документацию v1.25.2.
+
 Авторские права на PgBouncer принадлежат Marko Kreen и Skype Technologies OÜ
 (copyright (c) 2007-2009). Материалы распространяются по
 [лицензии ISC](https://opensource.org/license/isc-license-txt). Полный текст лицензии сохранён в
-[исходном проекте](https://github.com/pgbouncer/pgbouncer/blob/master/COPYRIGHT).
+[исходном проекте](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT).
 
 ## pgBadger {#pgbadger}
 
@@ -131,7 +138,7 @@ pgsql.cc повторно публикует документацию, напи�
 
 ## Этот сайт {#site}
 
-Оригинальные материалы, написанные для pgsql.cc, — обзорные страницы, полные версии на упрощённом
+Оригинальные материалы, написанные для pig.center, — обзорные страницы, полные версии на упрощённом
 китайском и французском языках, опубликованные переводы на японский, немецкий и русский языки,
 редакторские примечания и локализованные главные страницы — публикуются по
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), кроме страниц, к которым применима одна
@@ -144,9 +151,9 @@ pgsql.cc повторно публикует документацию, напи�
 как обозначение PostgreSQL. Знак принадлежит PostgreSQL Community Association of Canada; его
 использование здесь не означает одобрения проекта.
 
-Сайт построен на [OINK](https://oink.pgsty.com/) v1.0.0 — теме Hugo, распространяемой по
+Сайт построен на [OINK](https://oink.pgsty.com/) v1.2.0 — теме Hugo, распространяемой по
 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0). Её собственные уведомления об
 исходных материалах и встроенных зависимостях входят в исходный код модуля.
 
 Сообщить об ошибке в сведениях об атрибуции можно через
-[репозиторий сайта](https://github.com/pgsty/pgsql.cc/issues).
+[репозиторий сайта](https://github.com/pgsty/pig.center/issues).

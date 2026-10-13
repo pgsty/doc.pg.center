@@ -11,7 +11,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 
-INTERNAL_HOSTS = {"pgsql.cc", "www.pgsql.cc"}
+INTERNAL_HOSTS = {"pig.center", "www.pig.center"}
 SKIP_SCHEMES = {"data", "javascript", "mailto", "tel"}
 LEGACY_COMPONENT_ROUTE = re.compile(
     r"^(?:(?:zh|fr|ja|de|ru)/)?(?:_print/)?"

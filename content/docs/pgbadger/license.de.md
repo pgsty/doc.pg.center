@@ -48,4 +48,4 @@ Der lokale Quellcode-Snapshot enthält weiterhin die vollständige Datei `resour
 
 ## Dokumentations-Snapshot {#documentation-snapshot}
 
-Diese Ausgabe auf pgsql.cc gliedert die Originaldokumentation in Hugo-Seiten, ergänzt Navigation und Lesehilfen für die chinesische Fassung und übernimmt die Befehlszeilenhilfe sowie den ChangeLog dort wortgetreu, wo höchste Genauigkeit erforderlich ist. Die Quelldokumentation von pgBadger bleibt unter der PostgreSQL-Lizenz; die ursprünglichen Projektnamen, Urheberangaben und Links zum Originalprojekt bleiben erhalten.
+Diese Ausgabe auf pig.center gliedert die Originaldokumentation in Hugo-Seiten, ergänzt Navigation und Lesehilfen für die chinesische Fassung und übernimmt die Befehlszeilenhilfe sowie den ChangeLog dort wortgetreu, wo höchste Genauigkeit erforderlich ist. Die Quelldokumentation von pgBadger bleibt unter der PostgreSQL-Lizenz; die ursprünglichen Projektnamen, Urheberangaben und Links zum Originalprojekt bleiben erhalten.

@@ -1,4 +1,4 @@
-# Upstream registry for the OINK 0.6.0 page annotation.
+# Upstream registry for the OINK page annotation.
 #
 # Each component tree names one entry through `upstream_source` in its
 # `_index.md` cascade; every page inside the tree then adds only the one

@@ -1,5 +1,5 @@
 ---
-title: "pgBackRest 2.59.1 中文文档"
+title: "pgBackRest 2.59.2 中文文档"
 linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
@@ -12,9 +12,11 @@ module: [PGBACKREST]
 categories: [概念]
 aliases: [/pgbackrest/]
 upstream_source: pgbackrest
+upstream_ref: v2.59.2
 upstream_link: "https://pgbackrest.org/"
 cascade:
   upstream_source: pgbackrest
+  upstream_ref: v2.59.2
   type: docs
   module: [PGBACKREST]
 ---
@@ -25,7 +27,9 @@ cascade:
 
 pgBackRest 是一款可靠的 PostgreSQL 备份与恢复解决方案，可无缝扩展以应对超大规模数据库和各类工作负载。
 
-pgBackRest [`v2.59.1`](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.1) 是当前稳定版本。发布说明请查阅 [**发布历史**](/zh/docs/pgbackrest/release/) 页面。
+本站文档对应 pgBackRest [`v2.59.2`](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.2)。发布说明请查阅 [**发布历史**](/zh/docs/pgbackrest/release/) 页面。
+
+上游已于 2026 年 10 月 4 日发布 [v2.59.3](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.3)；本站文档快照仍为 v2.59.2。更新版本请查阅[上游发布记录](https://pgbackrest.org/release.html)。
 
 如果您喜欢 pgBackRest，欢迎在 [**GitHub**](https://github.com/pgbackrest/pgbackrest) 上给我们点星！
 
@@ -34,11 +38,11 @@ pgBackRest [`v2.59.1`](https://github.com/pgbackrest/pgbackrest/releases/tag/rel
 
 ## 新闻
 
+**2026 年 9 月 27 日** - [pgBackRest 2.59.2 正式发布](/zh/docs/pgbackrest/news/#release-2-59-2)
+
 **2026 年 8 月 17 日** - [pgBackRest 2.59.1 正式发布](/zh/docs/pgbackrest/news/#release-2-59-1)
 
 **2026 年 7 月 20 日** - [新的发行版 tarball](/zh/docs/pgbackrest/news/#distribution-tarball)
-
-**2026 年 7 月 20 日** - [pgBackRest 2.59.0 正式发布](/zh/docs/pgbackrest/news/#release-2-59-0)
 
 
 --------

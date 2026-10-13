@@ -13,9 +13,11 @@ module: [PGBOUNCER]
 categories: [概念]
 aliases: [/pgbouncer/]
 upstream_source: pgbouncer
+upstream_ref: v1.26.0
 upstream_link: "https://www.pgbouncer.org/"
 cascade:
   upstream_source: pgbouncer
+  upstream_ref: v1.26.0
   type: docs
   module: [PGBOUNCER]
 ---

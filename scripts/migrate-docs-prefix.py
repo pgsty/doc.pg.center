@@ -23,13 +23,13 @@ LINK_RE = re.compile(
     r"(?P<prefix>\]\(\s*<?|(?:href|src)=[\"']|^\s*\[(?!\^)[^]\n]+\]:\s*<?)"
     r"(?P<url>[^\s<>\"')]+)", re.MULTILINE
 )
-SITE_URL_RE = re.compile(r"https?://(?:www\.)?pgsql\.cc/[^\s<>\"')`\]]*")
+SITE_URL_RE = re.compile(r"https?://(?:www\.)?pig\.center/[^\s<>\"')`\]]*")
 ALIAS_RE = re.compile(r"^aliases:.*(?:\n[ \t]+-[^\n]*)*\n", re.MULTILINE)
 
 
 def prefix_url(url: str) -> str:
     parsed = urlsplit(url)
-    if parsed.netloc and parsed.netloc not in {"pgsql.cc", "www.pgsql.cc"}:
+    if parsed.netloc and parsed.netloc not in {"pig.center", "www.pig.center"}:
         return url
     if parsed.scheme and parsed.scheme not in {"http", "https"}:
         return url

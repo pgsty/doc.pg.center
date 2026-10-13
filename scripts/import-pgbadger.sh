@@ -6,7 +6,7 @@ snapshot_dir="$project_dir/sources/pgbadger"
 example_dir="$project_dir/static/third_party/pgbadger/examples"
 logo_dir="$project_dir/static/img/docs/pgbadger"
 upstream_commit=a1ad95a035a0c2d246fe632eb1c361d4bde0ddae
-work_dir=$(mktemp -d "${TMPDIR:-/tmp}/pgsql-cc-pgbadger.XXXXXX")
+work_dir=$(mktemp -d "${TMPDIR:-/tmp}/pig-center-pgbadger.XXXXXX")
 
 trap 'rm -rf "$work_dir"' EXIT
 

@@ -6,7 +6,7 @@ snapshot_dir="$project_dir/sources/haproxy"
 license_dir="$project_dir/static/third_party/haproxy"
 upstream_tag=v3.4.4
 upstream_commit=7f03ae65c28605152c7a1a9ba7d9d0bcfb50f8b0
-work_dir=$(mktemp -d "${TMPDIR:-/tmp}/pgsql-cc-haproxy.XXXXXX")
+work_dir=$(mktemp -d "${TMPDIR:-/tmp}/pig-center-haproxy.XXXXXX")
 
 trap 'rm -rf "$work_dir"' EXIT
 

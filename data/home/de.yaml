@@ -202,8 +202,8 @@ faq:
     - question: Wo soll ich anfangen?
       answer: Wählen Sie die Komponente, die zu Ihrer aktuellen Aufgabe passt. Jede Karte öffnet einen eigenständigen Dokumentationsbereich; der ausführliche Abschnitt oben verweist direkt auf die am häufigsten genutzten Seiten.
       open: true
-    - question: Ist pgsql.cc eine offizielle PostgreSQL-Website?
-      answer: Nein. pgsql.cc ist ein unabhängiges Dokumentationsprojekt der Community. Es verweist auf die jeweiligen Upstream-Projekte und bewahrt Produktnamen und technischen Kontext.
+    - question: Ist pig.center eine offizielle PostgreSQL-Website?
+      answer: Nein. pig.center ist ein unabhängiges Dokumentationsprojekt der Community. Es verweist auf die jeweiligen Upstream-Projekte und bewahrt Produktnamen und technischen Kontext.
     - question: Was geschieht bei noch nicht übersetzten Seiten?
       answer: Ist eine deutsche Seite vorhanden, öffnet der Link diese direkt. Andernfalls führt er zur entsprechenden englischen Seite und trägt die Kennzeichnung EN; die Sprachauswahl bleibt auf jeder Seite verfügbar.
     - question: Wie werden die Upstream-Dokumentationen gekennzeichnet?

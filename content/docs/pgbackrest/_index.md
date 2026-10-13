@@ -1,5 +1,5 @@
 ---
-title: "pgBackRest 2.59.1 Documentation"
+title: "pgBackRest 2.59.2 Documentation"
 linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
@@ -12,9 +12,11 @@ module: [PGBACKREST]
 categories: [Concept]
 aliases: [/pgbackrest/]
 upstream_source: pgbackrest
+upstream_ref: v2.59.2
 upstream_link: "https://pgbackrest.org/"
 cascade:
   upstream_source: pgbackrest
+  upstream_ref: v2.59.2
   type: docs
   module: [PGBACKREST]
 ---
@@ -25,7 +27,9 @@ cascade:
 
 pgBackRest is a reliable backup and restore solution for PostgreSQL that seamlessly scales up to the largest databases and workloads.
 
-pgBackRest [v2.59.1](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.1) is the current stable release. Release notes are on the [Releases](/docs/pgbackrest/release/) page.
+This documentation mirror covers pgBackRest [v2.59.2](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.2). Release notes are on the [Releases](/docs/pgbackrest/release/) page.
+
+Upstream released [v2.59.3](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.3) on October 4, 2026; this mirror remains at v2.59.2. See the [upstream releases](https://pgbackrest.org/release.html) for newer versions.
 
 Please give us a star on [GitHub](https://github.com/pgbackrest/pgbackrest) if you like pgBackRest!
 
@@ -34,11 +38,11 @@ Please give us a star on [GitHub](https://github.com/pgbackrest/pgbackrest) if y
 
 ## News
 
+**September 27, 2026** - [pgBackRest 2.59.2 Released](/docs/pgbackrest/news/#release-2-59-2)
+
 **August 17, 2026** - [pgBackRest 2.59.1 Released](/docs/pgbackrest/news/#release-2-59-1)
 
 **July 20, 2026** - [New Distribution Tarball](/docs/pgbackrest/news/#distribution-tarball)
-
-**July 20, 2026** - [pgBackRest 2.59.0 Released](/docs/pgbackrest/news/#release-2-59-0)
 
 
 --------

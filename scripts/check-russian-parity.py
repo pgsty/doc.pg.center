@@ -17,6 +17,8 @@ from collections import Counter
 from pathlib import Path
 from urllib.parse import urlsplit, urlunsplit
 
+from translation_sources import describe_sources, read_source
+
 
 PROJECT = Path(__file__).resolve().parent.parent
 CONTENT = PROJECT / "content"
@@ -278,11 +280,11 @@ def residual_english(body: str) -> list[tuple[int, str]]:
     return problems
 
 
-def compare_pair(source: Path, target: Path) -> list[str]:
+def compare_pair(source: Path, target: Path, current_source: bool = False) -> list[str]:
     errors: list[str] = []
     label = source.relative_to(PROJECT)
     try:
-        source_text = source.read_text(encoding="utf-8")
+        source_text, _ = read_source(source, "ru", current=current_source)
         target_text = target.read_text(encoding="utf-8")
         source_front, source_body = split_front_matter(source_text)
         target_front, target_body = split_front_matter(target_text)
@@ -345,6 +347,10 @@ def parse_args() -> argparse.Namespace:
         description="Validate English/Russian source parity."
     )
     parser.add_argument(
+        "--current-source", action="store_true",
+        help="compare older translations with current English instead of their pinned source version",
+    )
+    parser.add_argument(
         "--allow-partial",
         action="store_true",
         help="validate every existing Russian pair without requiring all English pages to be translated",
@@ -368,7 +374,7 @@ def main() -> int:
     for source in english:
         target = russian_path(source)
         if target.is_file():
-            errors.extend(compare_pair(source, target))
+            errors.extend(compare_pair(source, target, args.current_source))
 
     if errors:
         print("Russian source validation failed:", file=sys.stderr)
@@ -380,7 +386,10 @@ def main() -> int:
 
     pair_count = len(actual & expected)
     scope = "existing " if args.allow_partial else ""
-    print(f"Validated {scope}English/Russian parity for {pair_count} documentation pairs.")
+    print(
+        f"Validated {scope}English/Russian parity for {pair_count} documentation pairs "
+        f"against {describe_sources('ru', current=args.current_source)}."
+    )
     return 0
 
 
