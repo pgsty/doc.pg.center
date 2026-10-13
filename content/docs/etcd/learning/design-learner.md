@@ -3,7 +3,7 @@ title: etcd learner design
 weight: 2375
 description: Mitigating common challenges with membership reconfiguration
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/design-learner.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/design-learner.md"
 aliases: [/etcd/learning/design-learner/]
 ---
 
@@ -122,7 +122,7 @@ etcd server must not transfer leadership to learner, since it may still lag behi
 
 *Add "MemberPromote" API.*
 
-Internally in Raft, second `MemberAdd` call to learner node promotes it to a voting member. Leader maintains the progress of each follower and learner. If learner has not completed its snapshot message, reject promote request. Only accept promote request if and only if: The learner node is in a healthy state. The learner is in sync with leader or the delta is within the threshold (e.g. the number of entries to replicate to learner is less than 1/10 of snapshot count, which means it is less likely that even after promotion leader would not need send snapshot to the learner). All these logic are hard-coded in `etcdserver` package and not configurable.
+Internally in Raft, second `MemberAdd` call to learner node promotes it to a voting member. Leader maintains the progress of each follower and learner. If learner has not completed its snapshot message, reject promote request. Only accept promote request if and only if: The learner node is in a healthy state. The learner is in sync with leader or the delta is within the threshold (e.g. the number of entries to replicate to learner is less than 1/10 of snapshot count, which means it is less likely that even after promotion the leader would need to send a snapshot to the learner). All these logic are hard-coded in `etcdserver` package and not configurable.
 
 Reference
 =========

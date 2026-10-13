@@ -3,7 +3,7 @@ title: Benchmarking etcd v2.1.0
 weight: 5875
 description: Performance measures for etcd v2.1.0
 categories: [Reference]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/benchmarks/etcd-2-1-0-alpha-benchmarks.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/benchmarks/etcd-2-1-0-alpha-benchmarks.md"
 aliases: [/etcd/benchmarks/etcd-2-1-0-alpha-benchmarks/]
 ---
 

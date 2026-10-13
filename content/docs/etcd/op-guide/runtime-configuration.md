@@ -3,7 +3,7 @@ title: Runtime reconfiguration
 weight: 4700
 description: etcd incremental runtime reconfiguration support
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/runtime-configuration.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/runtime-configuration.md"
 aliases: [/etcd/op-guide/runtime-configuration/]
 ---
 
@@ -25,7 +25,7 @@ It is safe to remove the leader, however there is a brief period of downtime whi
 
 ### Change the cluster size
 
-Increasing the cluster size can enhance [failure tolerance][fault tolerance table] and provide better read performance. Since clients can read from any member, increasing the number of members increases the overall serialized read throughput.
+Increasing the cluster size can enhance [failure tolerance][fault tolerance table] and provide better read performance. Since clients can read from any member, increasing the number of members increases the overall serializable read throughput.
 
 Decreasing the cluster size can improve the write performance of a cluster, with a trade-off of decreased resilience. Writes into the cluster are replicated to a majority of members of the cluster before considered committed. Decreasing the cluster size lowers the majority, and each write is committed more quickly.
 
@@ -56,7 +56,7 @@ All changes to the cluster must be done sequentially:
 * To increase from 3 to 5 members, issue two add operations
 * To decrease from 5 to 3, issue two remove operations
 
-All of these examples use the `etcdctl` command line tool that ships with etcd. To change membership without `etcdctl`, use the [v2 HTTP members API][member-api] or the [v3 gRPC members API][member-api-grpc].
+All of these examples use the `etcdctl` command line tool that ships with etcd. To change membership without `etcdctl`, use the [v3 gRPC members API][member-api-grpc].
 
 ### Update a member
 
@@ -105,7 +105,7 @@ It is safe to remove the leader, however the cluster will be inactive while a ne
 
 Adding a member is a two step process:
 
- * Add the new member to the cluster via the [HTTP members API][member-api], the [gRPC members API][member-api-grpc], or the `etcdctl member add` command.
+ * Add the new member to the cluster via the [v3 gRPC members API][member-api-grpc] or the `etcdctl member add` command.
  * Start the new member with the new cluster configuration, including a list of the updated members (existing members + the new member).
 
 `etcdctl` adds a new member to the cluster by specifying the member's [name][conf-name] and [advertised peer URLs][conf-adv-peer]:
@@ -184,7 +184,7 @@ etcdserver: assign ids error: the member count is unequal
 exit 1
 ```
 
-In this case, give a different address (10.0.1.14:2380) from the one used to join the cluster (10.0.1.13:2380):
+In this failing example, the member starts with an address (10.0.1.14:2380) that differs from the registered peer address (10.0.1.13:2380):
 
 ```sh
 $ etcd --name infra4 \

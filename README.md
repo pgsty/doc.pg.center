@@ -30,10 +30,10 @@ output formats, and English fallback destinations do not count as translations.
 | PgBouncer | 9 (100%) | 9 (100%) | 9 (100%) | 9 (100%) | 9 (100%) | 9 (100%) |
 | pgBadger | 16 (100%) | 16 (100%) | 16 (100%) | 16 (100%) | 16 (100%) | 16 (100%) |
 | HAProxy | 35 (100%) | 35 (100%) | 35 (100%) | 12 (34.3%) | 2 (5.7%) | 30 (85.7%) |
-| etcd | 99 (100%) | 99 (100%) | 99 (100%) | 35 (35.4%) | 3 (3%) | 99 (100%) |
-| **Component total** | 212 (100%) | 212 (100%) | 212 (100%) | 125 (59%) | 65 (30.7%) | 207 (97.6%) |
+| etcd | 99 (100%) | 99 (100%) | 99 (100%) | 99 (100%) | 99 (100%) | 99 (100%) |
+| **Component total** | 212 (100%) | 212 (100%) | 212 (100%) | 189 (89.2%) | 161 (75.9%) | 207 (97.6%) |
 | Site pages | 4 (100%) | 4 (100%) | 4 (100%) | 4 (100%) | 4 (100%) | 4 (100%) |
-| **All publishable pages** | 216 (100%) | 216 (100%) | 216 (100%) | 129 (59.7%) | 69 (31.9%) | 211 (97.7%) |
+| **All publishable pages** | 216 (100%) | 216 (100%) | 216 (100%) | 193 (89.4%) | 165 (76.4%) | 211 (97.7%) |
 
 EN = English; ZH = 简体中文; FR = Français; JA = 日本語; DE = Deutsch; RU = Русский.
 Reproduce this matrix with `python3 scripts/report-coverage.py`.
@@ -102,6 +102,52 @@ records the source and asset hashes and the actual replacement counts.
 The local OINK search override retains Cyrillic queries.
 `node scripts/test-pgbackrest-search.cjs <production-build>` checks security-advisory
 search in all six languages and proves Latin/CJK results remain unchanged.
+
+The complete Japanese etcd 3.7 collection is checked against current English with
+`python3 scripts/check-japanese-parity.py --component etcd --rendered-dir <production-build>`
+and `python3 scripts/check-etcd-ja-rendered.py --rendered-dir <production-build>`.
+These gates require all 99 pages, exact protected content and English heading IDs,
+Japanese display metadata, reviewed numeric facts, per-page semantic-review hashes,
+and complete routes, aliases, navigation, pager, search, Markdown, print bodies and LLMS.
+`python3 scripts/test-etcd-ja.py --rendered-dir <production-build>` exercises deliberate regressions.
+The [page-by-page review](data/translation-reviews/etcd.ja.json) records 64 added pages,
+9 corrected existing pages, 26 existing pages reviewed unchanged, and exact explained exceptions.
+
+The complete German etcd 3.7 collection is checked against current English with
+`python3 scripts/check-german-parity.py --component etcd --current-source
+--rendered-dir <production-build>` and
+`python3 scripts/check-etcd-german.py --rendered-dir <production-build>`.
+These gates require all pages, preserve the reviewed source/translation fingerprints,
+and check every canonical route, alias, heading, sidebar, pager, language switch,
+search entry, shared asset, Markdown page, print bundle and LLMS output.
+`python3 scripts/check-german-prose.py content/docs/etcd` checks for English prose residues.
+The separate semantic review and per-page completion list are recorded in
+`data/translation-audits/etcd-de.json`.
+
+The [multilingual etcd publication record](data/translation-audits/etcd.json) binds all 495
+translation pairs to current English and records the actual semantic review scope. Chinese,
+French and Russian received complete fresh prose/table review; German and Japanese retain
+their earlier full reviews, with 86 complete pages reread in this follow-up and every changed
+paragraph checked. Verified source corrections include 3.7 flags and Go requirements,
+consistency guarantees, snapshot defaults and storage-versus-binary version fields.
+`python3 scripts/check-etcd.py --rendered-dir <production-build>` checks all 594 pages,
+exact fingerprints, technical content, English heading IDs, aliases, navigation/pager,
+search and complete Markdown, print and LLMS bodies. `python3 scripts/test-etcd.py`
+exercises deliberate regressions; both run in `make check`. `scripts/check-etcd-browser.cjs`
+checks every locale at desktop and mobile widths, real etcdctl search results, language
+switching, fragment jumps and mobile navigation, using the external Playwright/Chrome
+runtime and output directory described in its header. Search uses titles, headings and
+summaries; flags appearing only inside code blocks are outside that configured scope.
+
+The etcd v3.7 source snapshot is synchronized to website commit
+`d20f8ae346da60ab6eb6f24f200753b328aa9fcc` (checked 2026-10-13). Current installation,
+container and Kubernetes examples use released etcd v3.7.2 and its Go 1.26.8 toolchain;
+the upstream documentation cascade still names v3.7.0. Historical versioned examples
+retain their original context, and v3.8-DRAFT is excluded. The `upstream_sync` section
+of the publication record separates body-preserving provenance changes, current
+release adaptations, retained source corrections and fresh validation.
+
+The final acceptance includes a fresh complete reading of natural-language text in all 495 translated pages, plus current-source protected-content and rendered-output checks. The etcd-owned structural helpers keep these checks independent of other pending component work.
 
 The generated site is written to `public/`. Local preview, a successful build, and deployment to `pig.center` are separate delivery stages.
 

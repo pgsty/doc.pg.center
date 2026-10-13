@@ -3,7 +3,7 @@ title: Downgrade etcd from v3.6 to v3.5
 weight: 6650
 description: Processes, checklists, and notes on downgrading etcd from v3.6 to v3.5
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/downgrades/downgrade_3_6.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/downgrades/downgrade_3_6.md"
 aliases: [/etcd/downgrades/downgrade_3_6/]
 ---
 
@@ -133,9 +133,9 @@ While downgrading, an etcd cluster supports mixed versions of etcd members, and 
 
 #### Rollback
 
-Before downgrading your etcd cluster, please create and [download a snapshot backup](/docs/etcd/op-guide/maintenance/#snapshot-backup) of your etcd cluster. This snapshot can be used to restore the cluster to its pre-upgrade state if needed. If users encounter issues during the downgrade, they should first identify and resolve the root cause.
+Before downgrading your etcd cluster, please create and [download a snapshot backup](/docs/etcd/op-guide/maintenance/#snapshot-backup) of your etcd cluster. This snapshot can be used to restore the cluster to its pre-downgrade state if needed. If users encounter issues during the downgrade, they should first identify and resolve the root cause.
 
-If the downgrade has started after running `etcdctl downgrade enabled`, and the cluster is still in a mixed-version state—where at least one member remains on v3.6, users can cancel the ongoing downgrade process by running `etcdctl downgrade cancel`, and restarting all the downgraded members with the original v3.6 binaries.
+If the downgrade has started after running `etcdctl downgrade enable`, and the cluster is still in a mixed-version state—where at least one member remains on v3.6, users can cancel the ongoing downgrade process by running `etcdctl downgrade cancel`, and restarting all the downgraded members with the original v3.6 binaries.
 
 Once all members have been downgraded to v3.5, the cluster is considered fully downgraded. If users wish to return to the original version after a full downgrade has completed, they should follow the official [upgrade guide](/docs/etcd/upgrades/upgrade_3_6/) to ensure consistency and avoid data corruption.
 
@@ -184,7 +184,7 @@ COMMENT
 
 #### Step 2: download snapshot backup from leader
 
-[Download the snapshot backup](/docs/etcd/op-guide/maintenance/#snapshot-backup) to provide a downgrade path should any problems occur.
+[Download the snapshot backup](/docs/etcd/op-guide/maintenance/#snapshot-backup) to provide a rollback path should any problems occur.
 
 #### Step 3: validate downgrade target version
 

@@ -3,7 +3,7 @@ title: Run etcd clusters as a Kubernetes StatefulSet
 weight: 4200
 description: Running etcd as a Kubernetes StatefulSet
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/kubernetes.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/kubernetes.md"
 aliases: [/etcd/op-guide/kubernetes/]
 ---
 
@@ -162,7 +162,7 @@ spec:
       containers:
       ## This example only has this etcd container.
       - name: etcd
-        image: quay.io/coreos/etcd:v3.7.0
+        image: quay.io/coreos/etcd:v3.7.2
         imagePullPolicy: IfNotPresent
         ports:
         - name: etcd-client

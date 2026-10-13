@@ -3,19 +3,22 @@ title: Data Corruption
 weight: 5000
 description: etcd data corruption and recovery
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/data_corruption.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/data_corruption.md"
 aliases: [/etcd/op-guide/data_corruption/]
 ---
 
 etcd has built in automated data corruption detection to prevent member state from diverging.
 
+> [!NOTE]
+> In etcd 3.7, use the feature gates and duration flags below. The former experimental corruption-check flags have been removed; see [configuration options](/docs/etcd/op-guide/configuration/#feature-gates).
+
 ## Enabling data corruption detection
 
 Data corruption detection can be done using:
-* Initial check, enabled with `--experimental-initial-corrupt-check` flag.
+* Initial check, enabled with `--feature-gates=InitialCorruptCheck=true` flag.
 * Periodic check of:
-  * Compacted revision hash, enabled with `--experimental-compact-hash-check-enabled` flag.
-  * Latest revision hash, enabled with `--experimental-corrupt-check-time` flag.
+  * Compacted revision hash, enabled with `--feature-gates=CompactHashCheck=true` flag.
+  * Latest revision hash, enabled with `--corrupt-check-time` flag.
 
 Initial check will be executed during bootstrap of etcd member.
 Member will compare its persistent state vs other members and exit if there is a mismatch.
@@ -28,14 +31,14 @@ Both checks serve the same purpose, however they are both worth enabling to bala
 
 ### Compacted revision hash check
 
-When enabled using `--experimental-compact-hash-check-enabled` flag, check will be executed once every minute.
-This can be adjusted using `--experimental-compact-hash-check-time` flag using format: `1m` - every minute, `1h` - evey hour.
+When enabled using `--feature-gates=CompactHashCheck=true` flag, check will be executed once every minute.
+This can be adjusted using `--compact-hash-check-time` flag using format: `1m` - every minute, `1h` - every hour.
 This check extends compaction to also calculate checksum that can be compared between cluster members.
 Doesn't cause additional database scan making it very cheap, but requiring a regular compaction in cluster.
 
 ### Latest revision hash check
 
-Enabled using `--experimental-corrupt-check-time` flag, requires providing an execution period in format: `1m` - every minute, `1h` - evey hour.
+Enabled using `--corrupt-check-time` flag, requires providing an execution period in format: `1m` - every minute, `1h` - every hour.
 Recommended period is a couple of hours due to a high performance cost.
 Running a check requires computing a checksum by scanning entire etcd content at given revision.
 

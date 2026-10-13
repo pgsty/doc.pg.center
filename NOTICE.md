@@ -33,7 +33,7 @@ HAProxy's license explanation, OpenSSL exception, and complete GPLv2 text are re
 The website uses OINK 1.2.0 as a pinned Hugo Module. OINK is licensed under Apache License 2.0 and carries its own upstream and bundled-dependency notices in the module source.
 
 The etcd 3.7 documentation collection was imported from the official etcd website repository and
-refreshed on 2026-08-30 at commit `824597935df6e95992ef61c07e3222f4f796ca6c`. Its prose is distributed under the Creative
+refreshed on 2026-10-13 at commit `d20f8ae346da60ab6eb6f24f200753b328aa9fcc`. Its prose is distributed under the Creative
 Commons Attribution 4.0 International license, while code and code samples are distributed under
 the Apache License 2.0, copyright 2013-present etcd Authors.
 

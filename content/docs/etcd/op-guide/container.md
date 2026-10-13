@@ -3,7 +3,7 @@ title: Run etcd clusters inside containers
 weight: 4200
 description: Running etcd with Docker using static bootstrapping
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/container.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/container.md"
 aliases: [/etcd/op-guide/container/]
 ---
 
@@ -28,11 +28,11 @@ docker volume create --name etcd-data
 export DATA_DIR="etcd-data"
 ```
 
-Run the latest version of etcd (`v3.7.0` at the time of
+Run the latest version of etcd (`v3.7.2` at the time of
 writing):
 
 ```
-ETCD_VERSION=v3.7.0
+ETCD_VERSION=v3.7.2
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd
@@ -44,8 +44,8 @@ docker run \
   --name etcd ${REGISTRY}:${ETCD_VERSION} \
   /usr/local/bin/etcd \
   --data-dir=/etcd-data --name node1 \
-  --initial-advertise-peer-urls http://${NODE1}:2380 --listen-peer-urls http://0.0.0.0:2380 \
-  --advertise-client-urls http://${NODE1}:2379 --listen-client-urls http://0.0.0.0:2379 \
+  --initial-advertise-peer-urls http://${NODE1}:2380 --listen-peer-urls http://0.0.0.0:2380 \
+  --advertise-client-urls http://${NODE1}:2379 --listen-client-urls http://0.0.0.0:2379 \
   --initial-cluster node1=http://${NODE1}:2380
 ```
 
@@ -63,7 +63,7 @@ REGISTRY=quay.io/coreos/etcd
 REGISTRY=gcr.io/etcd-development/etcd
 
 # For each machine
-ETCD_VERSION=v3.7.0
+ETCD_VERSION=v3.7.2
 TOKEN=my-etcd-token
 CLUSTER_STATE=new
 NAME_1=etcd-node-0
@@ -85,8 +85,8 @@ docker run \
   --name etcd ${REGISTRY}:${ETCD_VERSION} \
   /usr/local/bin/etcd \
   --data-dir=/etcd-data --name ${THIS_NAME} \
-  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
-  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
+  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
+  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
   --initial-cluster ${CLUSTER} \
   --initial-cluster-state ${CLUSTER_STATE} --initial-cluster-token ${TOKEN}
 
@@ -100,8 +100,8 @@ docker run \
   --name etcd ${REGISTRY}:${ETCD_VERSION} \
   /usr/local/bin/etcd \
   --data-dir=/etcd-data --name ${THIS_NAME} \
-  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
-  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
+  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
+  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
   --initial-cluster ${CLUSTER} \
   --initial-cluster-state ${CLUSTER_STATE} --initial-cluster-token ${TOKEN}
 
@@ -115,8 +115,8 @@ docker run \
   --name etcd ${REGISTRY}:${ETCD_VERSION} \
   /usr/local/bin/etcd \
   --data-dir=/etcd-data --name ${THIS_NAME} \
-  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
-  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
+  --initial-advertise-peer-urls http://${THIS_IP}:2380 --listen-peer-urls http://0.0.0.0:2380 \
+  --advertise-client-urls http://${THIS_IP}:2379 --listen-client-urls http://0.0.0.0:2379 \
   --initial-cluster ${CLUSTER} \
   --initial-cluster-state ${CLUSTER_STATE} --initial-cluster-token ${TOKEN}
 ```
@@ -135,8 +135,10 @@ To provision a 3 node etcd cluster on bare-metal, the examples in the [baremetal
 
 The etcd release container does not include default root certificates. To use HTTPS with certificates trusted by a root authority (e.g., for discovery), mount a certificate directory into the etcd container:
 
+The following `rkt` command is a historical example. Its v2 discovery configuration is incompatible with etcd 3.7; use the static bootstrap examples above for current deployments.
+
 ```
-ETCD_VERSION=v3.7.0
+ETCD_VERSION=v3.7.2
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=docker://gcr.io/etcd-development/etcd
@@ -151,8 +153,10 @@ rkt run \
   --discovery https://discovery.etcd.io/c11fbcdc16972e45253491a24fcf45e1
 ```
 
+The Docker example below reuses `NODE1` from above and uses static bootstrapping to demonstrate mounting a certificate volume.
+
 ```
-ETCD_VERSION=v3.7.0
+ETCD_VERSION=v3.7.2
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd
@@ -163,7 +167,7 @@ docker run \
   --volume=/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt \
   ${REGISTRY}:${ETCD_VERSION} \
   /usr/local/bin/etcd --name my-name \
-  --initial-advertise-peer-urls http://localhost:2380 --listen-peer-urls http://localhost:2380 \
-  --advertise-client-urls http://localhost:2379 --listen-client-urls http://localhost:2379 \
-  --discovery https://discovery.etcd.io/86a9ff6c8cb8b4c4544c1a2f88f8b801
+  --initial-advertise-peer-urls http://${NODE1}:2380 --listen-peer-urls http://0.0.0.0:2380 \
+  --advertise-client-urls http://${NODE1}:2379 --listen-client-urls http://0.0.0.0:2379 \
+  --initial-cluster my-name=http://${NODE1}:2380
 ```

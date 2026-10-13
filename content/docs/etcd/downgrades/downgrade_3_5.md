@@ -1,9 +1,9 @@
 ---
 title: Downgrade etcd from 3.5 to 3.4
-weight: 6650
+weight: 6700
 description: Processes, checklists, and notes on downgrading etcd from 3.5 to 3.4
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/downgrades/downgrade_3_5.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/downgrades/downgrade_3_5.md"
 aliases: [/etcd/downgrades/downgrade_3_5/]
 ---
 
@@ -15,8 +15,6 @@ In the general case, downgrading from etcd 3.5 to 3.4 can be a zero-downtime, ro
 Before [starting a downgrade](#downgrade-procedure), read through the rest of this guide to prepare.
 
 ### Downgrade checklists
-
-content/enhttps://etcd.io/docs/v3.5/op-guide/authentication/rbac.md
 
 > [!WARNING]
 > If your cluster enables auth, rolling downgrade from 3.5 isn't supported because 3.5 [changes a format of WAL entries related to auth](https://github.com/etcd-io/etcd/pull/11943). You can follow the [authentification instructions](/docs/etcd/op-guide/authentication/rbac/) to disable auth, and delete all users first.
@@ -115,7 +113,7 @@ For a much larger total data size, 100MB or more , this one-time process might t
 
 If any member has been downgraded to 3.4, the cluster version will be downgraded to 3.4, and operations will be "3.4" compatible. You would need to follow the [Upgrade etcd from 3.4 to 3.5](/docs/etcd/upgrades/upgrade_3_5/) instructions to rollback.
 
-Please [download the snapshot backup](/docs/etcd/op-guide/maintenance/#snapshot-backup) to make downgrading the cluster possible even after it has been completely downgraded.
+Please [download the snapshot backup](/docs/etcd/op-guide/maintenance/#snapshot-backup) to make rolling back the downgrade possible even after the cluster has been completely downgraded.
 
 ### Downgrade procedure
 
@@ -151,7 +149,7 @@ COMMENT
 
 #### Step 2: download snapshot backup from leader
 
-[Download the snapshot backup](/docs/etcd/op-guide/maintenance/#snapshot-backup) to provide a downgrade path should any problems occur.
+[Download the snapshot backup](/docs/etcd/op-guide/maintenance/#snapshot-backup) to provide a rollback path should any problems occur.
 
 #### Step 3: stop one existing etcd server
 

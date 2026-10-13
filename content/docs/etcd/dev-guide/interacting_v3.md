@@ -3,20 +3,17 @@ title: Interacting with etcd
 weight: 3250
 description: "etcdctl: a command line tool for interacting with the etcd server"
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/interacting_v3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/interacting_v3.md"
 aliases: [/etcd/dev-guide/interacting_v3/]
 ---
 
 Users mostly interact with etcd by putting or getting the value of a key. This section describes how to do that by using etcdctl, a command line tool for interacting with etcd server. The concepts described here should apply to the gRPC APIs or client library APIs.
 
-The API version used by etcdctl to speak to etcd may be set to version `2` or `3` via the `ETCDCTL_API` environment variable. By default, etcdctl on master (3.4) uses the v3 API and earlier versions (3.3 and earlier) default to the v2 API.
+etcdctl v3.7 uses the v3 API. The v2 API and `ETCDCTL_API` version selection have been removed.
 
-Note that any key that was created using the v2 API will not be able to be queried via the v3 API.  A v3 API ```etcdctl get``` of a v2 key will exit with 0 and no key data, this is the expected behaviour.
+> [!NOTE]
+> Examples below retain historical command output, so displayed version numbers may differ from your installation. Older etcd releases kept v2 and v3 keys in separate stores; migrate any legacy v2 data before upgrading to v3.7.
 
-
-```bash
-export ETCDCTL_API=3
-```
 
 ## Find versions
 

@@ -3,7 +3,7 @@ title: etcd persistent storage files
 weight: 2650
 description: Reference of the persistent storage format and files
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/persistent-storage-files.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/persistent-storage-files.md"
 aliases: [/etcd/learning/persistent-storage-files/]
 ---
 
@@ -356,7 +356,7 @@ The WAL log file contains a sequence of "[Frames](https://github.com/etcd-io/etc
 3. Marshalled [walpb.Record](https://github.com/etcd-io/etcd/blob/a1ff0d5373335665b3e5f4cb22a538ac63757cb6/server/wal/walpb/record.proto#L11) data:
     1. [type](https://github.com/etcd-io/etcd/blob/aa97484166d2b3fb6afeb4390344e68b02afb566/server/storage/wal/wal.go#L39) - int encoded enum driving interpretation of the data-field below
     2. data - depending on type, usually marshalled proto
-    3. crc - RC-32 checksum of all “data” fields combined (no type) in all the log records on this particular replica since WAL log creation. Please note that CRC takes in consideration ALL records (even if they didn’t get committedcomitted by Raft).
+    3. crc - CRC-32 checksum of all “data” fields combined (no type) in all the log records on this particular replica since WAL log creation. Please note that CRC takes in consideration ALL records (even if they didn’t get committed by Raft).
 
 The files are "cut" (new file is started) when the current file is exceeding <code>64*10^6</code> bytes.
 
@@ -445,8 +445,8 @@ The *.snap files are created by [Snapshotter.SaveSnap](https://github.com/etcd-i
 There are 2 triggers controlling creation of these files:
 
 
-* A new file is created every (approximately) --snapshotCount=(by default 100'000) applied proposals. It’s an approximation as we might receive proposals in batches and we consider snapshotting only at the end of batch, finally the snapshotting process is asynchronously scheduled.
-  The flag name (--snapshotCount) is pretty misleading as it drives [differences in index value between ](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/server/etcdserver/server.go#L1266)last snapshot index and last applied proposal index.
+* A new file is created every (approximately) --snapshot-count=(by default 10,000 in v3.7.0) applied proposals. It’s an approximation as we might receive proposals in batches and we consider snapshotting only at the end of batch, finally the snapshotting process is asynchronously scheduled.
+  The flag name (--snapshot-count) is pretty misleading as it drives [differences in index value between ](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/server/etcdserver/server.go#L1266)last snapshot index and last applied proposal index.
 * Raft requests the replica to restore from the snapshot. As a replica is receiving the snapshot over wire (msgSnap) message, it also checkpoints (lightweight) it into WAL log. This guarantees that in the WAL logs tail there is always a valid snapshot followed by entries. So it suppresses potential lack of continuity in the WAL logs.
 
 Currently the files are roughly[^3] associated 1-1 with WAL logs Snapshot entries. With store v2 decommissioning we expect the files to stop being written at all (opt-in: 3.5.x,  mandatory 3.6.x).
@@ -491,7 +491,7 @@ cat default.etcd/member/snap/0000000000000002-0000000000049425.snap |
 ```
 
 
-Analogously you can extract 'data' field and decode as '[Raftpb.Snapshot](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/raft/raftpb/raft.proto#L31)`'`
+Analogously you can extract 'data' field and decode as [Raftpb.Snapshot](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/raft/raftpb/raft.proto#L31).
 
 
 ### Exemplar JSON serialized store v2 content in etcd 3.4 *.snap files:

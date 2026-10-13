@@ -3,7 +3,7 @@ title: Upgrade etcd from 3.2 to 3.3
 weight: 6750
 description: Processes, checklists, and notes on upgrading etcd from 3.2 to 3.3
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_3.md"
 aliases: [/etcd/upgrades/upgrade_3_3/]
 ---
 
@@ -37,7 +37,7 @@ Changed `--auto-compaction-retention` flag to [accept string values](https://git
 +auto-compaction-retention: "24h"
 ```
 
-#### Changed `etcdserver.EtcdServer.ServerConfig` to `*etcdserver.EtcdServer.ServerConfig`
+#### Changed `*etcdserver.ServerConfig` to `etcdserver.ServerConfig` {#changed-etcdserveretcdserverserverconfig-to-etcdserveretcdserverserverconfig}
 
 `etcdserver.EtcdServer` has changed the type of its member field `*etcdserver.ServerConfig` to `etcdserver.ServerConfig`. And `etcdserver.NewServer` now takes `etcdserver.ServerConfig`, instead of `*etcdserver.ServerConfig`.
 
@@ -67,7 +67,7 @@ func (e *EtcdServer) Start() error {
     ...
 ```
 
-#### Added `embed.Config.LogOutput` struct
+#### Added `embed.Config.LogOutput` field {#added-embedconfiglogoutput-struct}
 
 > [!WARNING]
 > Note that this field has been renamed to `embed.Config.LogOutputs` in `[]string` type in v3.4. Please see [v3.4 upgrade guide](/docs/etcd/upgrades/upgrade_3_4/) for more details.

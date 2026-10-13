@@ -3,7 +3,7 @@ title: Transport security model
 weight: 4125
 description: Securing data in transit
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/security.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/security.md"
 aliases: [/etcd/op-guide/security/]
 ---
 
@@ -45,7 +45,7 @@ The peer options work the same way as the client-to-server options:
 
 `--peer-auto-tls`: Use automatically generated self-signed certificates for TLS connections between peers.
 
-If either a client-to-server or peer certificate is supplied the key must also be set. All of these configuration options are also available through the environment variables, `ETCD_CA_FILE`, `ETCD_PEER_CA_FILE` and so on.
+If either a client-to-server or peer certificate is supplied the key must also be set. All of these configuration options are also available through the environment variables, `ETCD_TRUSTED_CA_FILE`, `ETCD_PEER_TRUSTED_CA_FILE` and so on.
 
 **Common options:**
 
@@ -273,6 +273,9 @@ Since v3.1.0 (except v3.2.9), discovery SRV bootstrapping authenticates `ServerN
 
 ## Notes for etcd proxy
 
+> [!NOTE]
+> This section describes the historical v2 proxy, which has been removed. For etcd 3.7, use the [v3 gRPC proxy](/docs/etcd/op-guide/grpc_proxy/).
+
 etcd proxy terminates the TLS from its client if the connection is secure, and uses proxy's own key/cert specified in `--peer-key-file` and `--peer-cert-file` to communicate with etcd members.
 
 The proxy communicates with etcd members through both the `--advertise-client-urls` and `--advertise-peer-urls` of a given member. It forwards client requests to etcd members’ advertised client urls, and it syncs the initial cluster configuration through etcd members’ advertised peer urls.
@@ -420,7 +423,7 @@ I | embed: serving client requests on 127.0.0.1:2379
   ],
 ```
 
-In Go, server calls `(*tls.Config).GetCertificate` for TLS reload if and only if server's `(*tls.Config).Certificates` field is not empty, or `(*tls.ClientHelloInfo).ServerName` is not empty with a valid SNI from the client. Previously, etcd always populates `(*tls.Config).Certificates` on the initial client TLS handshake, as non-empty. Thus, client was always expected to supply a matching SNI in order to pass the TLS verification and to trigger `(*tls.Config).GetCertificate` to reload TLS assets.
+In Go, server calls `(*tls.Config).GetCertificate` for TLS reload if and only if server's `(*tls.Config).Certificates` field is empty, or `(*tls.ClientHelloInfo).ServerName` is not empty with a valid SNI from the client. Previously, etcd always populates `(*tls.Config).Certificates` on the initial client TLS handshake, as non-empty. Thus, client was always expected to supply a matching SNI in order to pass the TLS verification and to trigger `(*tls.Config).GetCertificate` to reload TLS assets.
 
 However, a certificate whose SAN field does [not include any domain names but only IP addresses](https://github.com/etcd-io/etcd/issues/9541) would request `*tls.ClientHelloInfo` with an empty `ServerName` field, thus failing to trigger the TLS reload on initial TLS handshake; this becomes a problem when expired certificates need to be replaced online.
 
@@ -437,7 +440,7 @@ Client origin policy works as follows:
 
 Note that the client origin policy is enforced whether authentication is enabled or not, for tighter controls.
 
-By default, `etcd --host-whitelist` and `embed.Config.HostWhitelist` are set *empty* to allow all hostnames. Note that when specifying hostnames, loopback addresses are not added automatically. To allow loopback interfaces, add them to whitelist manually (e.g. `"localhost"`, `"127.0.0.1"`, etc.).
+By default, `etcd --host-whitelist` and `embed.Config.HostWhitelist` use `*` to allow all hostnames. An empty whitelist also allows all hostnames. Note that when specifying hostnames, loopback addresses are not added automatically. To allow loopback interfaces, add them to whitelist manually (e.g. `"localhost"`, `"127.0.0.1"`, etc.).
 
 ## Frequently asked questions
 

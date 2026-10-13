@@ -3,7 +3,7 @@ title: etcd features
 weight: 3750
 description: using etcd features
 categories: [Reference]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/features.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/features.md"
 aliases: [/etcd/dev-guide/features/]
 ---
 

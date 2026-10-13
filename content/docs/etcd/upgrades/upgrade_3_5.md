@@ -3,7 +3,7 @@ title: Upgrade etcd from 3.4 to 3.5
 weight: 6650
 description: Processes, checklists, and notes on upgrading etcd from 3.4 to 3.5
 categories: [Task]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_5.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_5.md"
 aliases: [/etcd/upgrades/upgrade_3_5/]
 ---
 
@@ -82,7 +82,7 @@ Note that `etcd_debugging_*` namespace metrics have been marked as experimental.
 
 #### Deprecated `etcd --logger capnslog`
 
-v3.4 defaults to `--logger=zap` in order to support multiple log outputs and structured logging.
+v3.5 defaults to `--logger=zap` in order to support multiple log outputs and structured logging.
 
 **`etcd --logger=capnslog` has been deprecated in v3.5**, and now `--logger=zap` is the default.
 
@@ -160,7 +160,7 @@ curl -L http://localhost:2379/v3/kv/put \
 
 #### Upgrade requirements
 
-To upgrade an existing etcd deployment to 3.5, the running cluster must be 3.4 or greater. If it's before 3.4, please [upgrade to 3.4](/docs/etcd/upgrades/upgrade_3_3/) before upgrading to 3.5.
+To upgrade an existing etcd deployment to 3.5, the running cluster must be 3.4 or greater. If it's before 3.4, please [upgrade to 3.4](/docs/etcd/upgrades/upgrade_3_4/) before upgrading to 3.5.
 
 Also, to ensure a smooth rolling upgrade, the running cluster must be healthy. Check the health of the cluster by using the `etcdctl endpoint health` command before proceeding.
 

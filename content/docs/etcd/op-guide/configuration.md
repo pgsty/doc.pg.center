@@ -3,7 +3,7 @@ title: Configuration options
 weight: 4050
 description: etcd configuration files, flags, and environment variables
 categories: [Reference]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/configuration.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/configuration.md"
 aliases: [/etcd/op-guide/configuration/]
 ---
 
@@ -25,6 +25,10 @@ You can configure etcd through the following:
 ## Command-line flags
 
 Flags are presented below using the format `--flag-name DEFAULT_VALUE`.
+
+> [!NOTE]
+> This imported reference retains some legacy v2 options for migration context. In etcd 3.7, `--enable-v2` and v2 proxy mode are unavailable. The deprecated `--v2-deprecation` flag ignores user input and enforces its default. Consult your installed version's `etcd --help` before using legacy options.
+
 
 The list of flags provided below may not be up-to-date due to ongoing development changes. For the latest available flags, run `etcd --help` or refer to the [etcd help][].
 
@@ -246,7 +250,7 @@ The list of flags provided below may not be up-to-date due to ongoing developmen
 ### v2 Proxy
 
 > [!WARNING]
-> **Note**: flags will be deprecated in v3.6.
+> The v2 proxy was removed before v3.7. The following flags are retained only as historical migration reference and must not be passed to an etcd v3.7 server.
 
 ```text
 --proxy 'off'
