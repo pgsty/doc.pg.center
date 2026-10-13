@@ -3,7 +3,7 @@ title: etcdからの読み取り
 description: etcdクラスターの値を読み取る
 weight: 200
 categories: [タスク]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/developer/reading-from-etcd.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/developer/reading-from-etcd.md"
 aliases: [/etcd/tasks/developer/reading-from-etcd/]
 ---
 
@@ -36,4 +36,4 @@ $ etcdctl --endpoints=$ENDPOINTS --write-out="json" get foo
 $
 ```
 
-ここで、`write-out="json"`を指定すると、値はJSON形式で出力されます（キーは返されない点に注意してください）。
+ここで、`write-out="json"`を指定すると、キーと値の両方がbase64でエンコードされたJSONが返されます。

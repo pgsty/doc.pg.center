@@ -3,7 +3,7 @@ title: etcdクラスターでリーダー選出を行う方法
 description: etcdctlクライアントを使用してリーダー選出を行う手順
 weight: 900
 categories: [タスク]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/operator/how-to-conduct-elections.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/operator/how-to-conduct-elections.md"
 aliases: [/etcd/tasks/operator/how-to-conduct-elections/]
 ---
 
@@ -28,11 +28,11 @@ etcdctl --endpoints=$ENDPOINTS elect election-name p1
 
 各etcdクラスターメンバーのアドレス。
 
-- `election-name`文字列
+- `election-name` string
 
 選出を識別する文字列です。リーダーの地位を競うすべての参加者は、同じ選出名を使用する必要があります。
 
-- `leader-name`文字列
+- `leader-name` string
 
 新しいリーダーの提案値。
 
