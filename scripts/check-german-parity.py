@@ -881,6 +881,10 @@ def parse_args() -> argparse.Namespace:
         description="Check English/German documentation against each translation's source version."
     )
     parser.add_argument(
+        "--exclude-component", choices=COMPONENTS, action="append", default=[],
+        help="skip pair comparisons handled by a component-specific gate; retain global coverage checks",
+    )
+    parser.add_argument(
         "--current-source", action="store_true",
         help="compare older translations with current English instead of their pinned source version",
     )
@@ -937,6 +941,8 @@ def main() -> int:
 
     pair_count = 0
     for source in sources:
+        if any(source.is_relative_to(CONTENT / "docs" / name) for name in args.exclude_component):
+            continue
         target = german_target(source)
         if target not in german_pages:
             continue

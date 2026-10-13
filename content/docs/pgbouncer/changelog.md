@@ -149,7 +149,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
 
 - Features
     * Add LDAP authentication! You can configure it using an HBA file or using `auth_ldap_options`. ([#731])
-    * Add support for client-side direct TLS connections. This allows clients to using the faster TLS connection setup that was introduced in PostgreSQL 17. PgBouncer cannot (yet) connect to PostgreSQL servers using this faster connection setup. ([#1359])
+    * Add support for client-side direct TLS connections. This allows clients to use the faster TLS connection setup that was introduced in PostgreSQL 17. PgBouncer cannot (yet) connect to PostgreSQL servers using this faster connection setup. ([#1359])
     * Add idle state to `SHOW CLIENTS`. ([#1191])
     * Add `transaction_timeout` setting, both globally and at the user level. ([#1242])
     * Send a NOTICE message to the client if it is queued without receiving a connection for more than 5 seconds. This duration can be changed/disabled using `query_wait_notify`. ([#1264])
@@ -164,7 +164,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
     * Enable access to the PgBouncer UNIX socket during shutdown for admin connections. This makes it easier for an operator to find out why a PgBouncer process is not shutting down and/or manually run `KILL_CLIENT` for stuck connections. ([#1305])
     * Change `mkauth.py` to not add an obsolete third field anymore ([#1365])
     * Improve `FATAL` messages in `disconnect_client` and `disconnect_server` functions. ([#1382])
-    * Stop using deprecated OpenSSL function `EVP_PKEY_get0_EC_KEY`. This could cause issues with certain FIPS implementatinos. ([#1384])
+    * Stop using deprecated OpenSSL function `EVP_PKEY_get0_EC_KEY`. This could cause issues with certain FIPS implementations. ([#1384])
 - Fixes
     * Fix crash involving long passwords (1024 characters or more). ([#1215])
     * Fix multi-host connections when using `server_tls_sslmode=verify-full`. ([#1303])
@@ -250,7 +250,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
     cause a temporary but serious performance degradation. Now this only
     happens when the TLS settings are actually changed. ([#1157])
   * Enable prepared statement support by default, `max_prepared_statements` is
-    now set to 200 by default. This change in defaultls should only impact
+    now set to 200 by default. This change in defaults should only impact
     clients that actually use prepared statements. If you do use prepared
     statements it's recommended to read about the limitations of the prepared
     statement support in [our documentation][prepared-docs] ([#1144])
@@ -637,8 +637,7 @@ This is a minor release that fixes a few recently introduced bugs:
 - Features
   * Add `application_name` to `SHOW CLIENTS`/`SERVERS`/`SOCKETS`
     output ([#449](https://github.com/pgbouncer/pgbouncer/pull/449))
-  * Add information about cancel requests to `SHOW
-    CLIENTS `/` SERVERS `/` POOLS` output
+  * Add information about cancel requests to `SHOW CLIENTS`/`SERVERS`/`POOLS` output
     ([#782](https://github.com/pgbouncer/pgbouncer/pull/782))
 
 - Fixes
@@ -789,7 +788,7 @@ This is a minor release with a security fix.
     been fixed.  We now know why they happen, and you shouldn't see
     them anymore. ([#565](https://github.com/pgbouncer/pgbouncer/pull/565))
   * Fix reloading of `default_pool_size`, `min_pool_size`, and
-    `res_pool_size`.  Reloading these settings previously didn't work.
+    `reserve_pool_size`.  Reloading these settings previously didn't work.
 
 - Cleanups
   * Cirrus CI is now
@@ -1180,9 +1179,9 @@ instead expected 20-30k.  Something to keep an eye on when using TLS.
   * Support pipelining count expected ReadyForQuery packets.
     This avoids releasing server too early.  Fixes
     [#52](https://github.com/pgbouncer/pgbouncer/issues/52).
-  * Improved sbuf_loopcnt logic - socket is guarateed to be
-    reprocessed even if there are no event from socket.
-    Required for TLS as it has it's own buffering.
+  * Improved sbuf_loopcnt logic - socket is guaranteed to be
+    reprocessed even if there are no events from the socket.
+    Required for TLS as it has its own buffering.
   * Adapt system tests to work with modern BSD and MacOS.
     (Eric Radman)
   * Remove **crypt** auth.  It's obsolete and not supported
@@ -1309,7 +1308,7 @@ instead expected 20-30k.  Something to keep an eye on when using TLS.
     (Petr Jelinek)
   * Fix 'bad packet' during login when header is delayed.
     (Michał Trojnara, Marko Kreen)
-  * Fix errors detected by Coverty.
+  * Fix errors detected by Coverity.
     (Euler Taveira)
   * Disable server_idle_timeout when server count gets below min_pool (#60)
     (Marko Kreen)
@@ -1522,7 +1521,7 @@ Affected OS-es: \*BSD, Solaris, Win32.
   * release_server missed setting ->last_lifetime_disconnect on lifetime disconnect.
     (Emmanuel Courreges)
   * win32: fix auth file on DOS line endings - load_file() did not take
-    account of file shringage when loading.
+    account of file shrinkage when loading.
     (Rich Schaaf)
   * <usual/endian.h>: add autoconf detection for enc/dec functions
     so it would not create conflicts on BSD.
@@ -1713,7 +1712,7 @@ Affected OS-es: \*BSD, Solaris, Win32.
 
     To use Windows Event Log, event DLL needs to be registered first:
 
-        > regsrv32 pgbevent.dll
+        > regsvr32 pgbevent.dll
 
     Afterwards you can set "syslog = 1" in config.
 
@@ -1723,7 +1722,7 @@ Affected OS-es: \*BSD, Solaris, Win32.
     ident quoting, to allow non-standard characters in db names.
 
   * New tunables: 'reserve_pool_size' and 'reserve_pool_timeout'.
-    In case there are clients in pool that have waited more that
+    In case there are clients in pool that have waited more than
     'reserve_pool_timeout' seconds, 'reserve_pool_size' specifies
     the number of connections that can be added to pool.  It can also
     set per-pool with 'reserve_pool' connection variable.
@@ -1975,9 +1974,9 @@ Older libevent versions crash with new restart code.
 **2007-04-19  -  PgBouncer 1.0.7  -  "With Vitamin A-Z"**
 
 - Fixes
-  * Several error/notice packets with send() blocking between
-    triggered assert.  Fix it by removing flushing logic altogether.
-    As pgbouncer does not actively buffer anything, its not needed.
+  * Sending several error/notice packets with send() blocking between
+    them triggered an assertion. Fix it by removing flushing logic altogether.
+    As PgBouncer does not actively buffer anything, this logic is not needed.
     It was a remnant from the time when buffering was pushed to
     kernel with MSG_MORE.
   * Additionally avoid calling recv() logic when sending unblocks.

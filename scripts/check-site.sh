@@ -47,9 +47,10 @@ test "$english_count" -eq "$total_complete_expected"
 test "$chinese_count" -eq "$total_complete_expected"
 test "$french_count" -eq "$total_complete_expected"
 test "$japanese_count" -eq 105
-test "$german_count" -eq 34
+test "$german_count" -eq 36
 test "$russian_count" -eq 187
 test "$(find "$docs_dir/pgbouncer" -type f -name '*.ja.md' | wc -l | tr -d ' ')" -eq 9
+test "$(find "$docs_dir/pgbouncer" -type f -name '*.de.md' | wc -l | tr -d ' ')" -eq 9
 test "$(find "$docs_dir/pgbadger" -type f -name '*.de.md' | wc -l | tr -d ' ')" -eq 16
 test "$(find "$docs_dir/patroni" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -eq 24
 test "$(find "$docs_dir/pgbouncer" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -eq 9
@@ -208,12 +209,19 @@ grep -Fq 'title: "etcd 3.7 Documentation"' "$docs_dir/etcd/_index.md"
 grep -Fq 'title: "etcd 3.7 中文文档"' "$docs_dir/etcd/_index.zh.md"
 
 python3 "$project_dir/scripts/check-bilingual-parity.py"
+python3 -B "$project_dir/scripts/test-pgbouncer-parity.py"
+python3 -B "$project_dir/scripts/check-pgbouncer.py"
 
-hugo --source "$project_dir" --destination "$build_dir/public" --gc --minify --cleanDestinationDir --printPathWarnings --printI18nWarnings --panicOnWarning
+HUGO_RESOURCEDIR="$build_dir/resources" \
+  hugo --source "$project_dir" --destination "$build_dir/public" --cacheDir "${HUGO_CACHEDIR:-$build_dir/cache}" --gc --minify --cleanDestinationDir --printPathWarnings --printI18nWarnings --panicOnWarning
+
+PGBOUNCER_RENDERED_DIR="$build_dir/public" python3 -B "$project_dir/scripts/test-pgbouncer-parity.py"
+python3 -B "$project_dir/scripts/check-pgbouncer.py" --rendered-dir "$build_dir/public"
 
 TRANSLATION_RENDERED_DIR="$build_dir/public" \
   python3 "$project_dir/scripts/check-component-translations.py" haproxy etcd
-python3 "$project_dir/scripts/check-german-parity.py" --allow-partial --rendered-dir "$build_dir/public"
+# PgBouncer is covered by the complete current-source gate above.
+python3 "$project_dir/scripts/check-german-parity.py" --allow-partial --rendered-dir "$build_dir/public" --exclude-component pgbouncer
 python3 "$project_dir/scripts/check-german-prose.py"
 python3 "$project_dir/scripts/check-russian-parity.py" --allow-partial
 

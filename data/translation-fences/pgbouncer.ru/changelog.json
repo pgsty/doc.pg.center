@@ -1,0 +1,13 @@
+{
+  "source": "content/docs/pgbouncer/changelog.md",
+  "language": "ru",
+  "fences": [],
+  "literal_snippets": [
+    {
+      "classification": "program-output",
+      "text": "FIXME: query end, but query_start == 0",
+      "source_sha256": "83c9e73a80177d06a6f6253ea117e51d50ad43bed80ff780d62b1474f62046b7",
+      "reason": "Exact historical PgBouncer diagnostic quoted in the 1.16.0 release notes, not an unfinished translation. Preserve it verbatim in English and Russian."
+    }
+  ]
+}

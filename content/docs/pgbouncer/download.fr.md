@@ -1,5 +1,5 @@
 ---
-title: "Source Versions Téléchargement"
+title: "Téléchargement des versions sources"
 linkTitle: "Télécharger"
 weight: 50
 description: "Versions sources et paquets binaires de PgBouncer"
@@ -9,6 +9,14 @@ categories: [Référence]
 aliases: [/pgbouncer/download/]
 upstream_link: "https://www.pgbouncer.org/downloads/"
 ---
+
+--------
+
+## PgBouncer 1.26 {#pgbouncer-126}
+
+| Fichier | Date | Taille | Somme de contrôle |
+|------|------|------|----------|
+| [pgbouncer-1.26.0.tar.gz](https://www.pgbouncer.org/downloads/files/1.26.0/pgbouncer-1.26.0.tar.gz) | 2026-09-23 | 897943 octets | [sha256](https://www.pgbouncer.org/downloads/files/1.26.0/pgbouncer-1.26.0.tar.gz.sha256) |
 
 --------
 
@@ -258,9 +266,9 @@ upstream_link: "https://www.pgbouncer.org/downloads/"
 
 ## Paquets binaires {#binary-packages}
 
-Plusieurs distributions de systèmes d'exploitation proposent leur propre paquet ou port de PgBouncer. Il est donc recommandé de vérifier en premier lieu si celui-ci est déjà disponible sur votre système d'exploitation.
+Plusieurs distributions de systèmes d'exploitation proposent leur propre paquet ou port de PgBouncer. Il peut donc être judicieux de vérifier d'abord s'il est déjà disponible sur votre système d'exploitation.
 
-Versions spécifiques, pouvant inclure des versions plus récentes que celles disponibles dans les dépôts du distributeur :
+Builds dédiés, pouvant inclure des versions plus récentes que celles disponibles dans les dépôts des distributeurs :
 
-- RPM : [yum.PostgreSQL.org](https://yum.postgresql.org/)
-- Deb : [apt.PostgreSQL.org](https://apt.postgresql.org/)
+- RPM : [yum.postgresql.org](https://yum.postgresql.org/)
+- Deb : [apt.postgresql.org](https://apt.postgresql.org/)

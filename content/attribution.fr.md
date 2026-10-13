@@ -31,7 +31,7 @@ Cette page est cet enregistrement. Elle indique ce qui a été importé, à quel
 |---|---|---|---|---|
 | [Patroni](/fr/docs/patroni/) | [documentation de Patroni](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Projet amont `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
 | [pgBackRest](/fr/docs/pgbackrest/) | [documentation de pgBackRest](https://pgbackrest.org/) | v2.59.2 (anglais / chinois simplifié) ; v2.59.1 (autres traductions) | [MIT](https://opensource.org/license/mit) | [Projet amont `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/fr/docs/pgbouncer/) | [documentation de PgBouncer](https://www.pgbouncer.org/) | v1.26.0 (anglais / chinois simplifié) | [ISC](https://opensource.org/license/isc-license-txt) | [Projet amont `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
+| [PgBouncer](/fr/docs/pgbouncer/) | [documentation de PgBouncer](https://www.pgbouncer.org/) | v1.26.0 (les six langues) | [ISC](https://opensource.org/license/isc-license-txt) | [Projet amont `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/fr/docs/pgbadger/) | [documentation de pgBadger](https://pgbadger.darold.net/) | v13.2, commit `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/fr/docs/haproxy/) | [manuels HAProxy 3.4](https://docs.haproxy.org/3.4/) | v3.4.4, commit `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/fr/docs/etcd/) | [documentation etcd v3.7](https://etcd.io/docs/v3.7/) | v3.7, commit `8245979` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Projet amont `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
@@ -55,16 +55,24 @@ et est distribué sous la licence [MIT License](https://opensource.org/license/m
 
 ## PgBouncer {#pgbouncer}
 
-Importé le 2026-08-15 depuis le site de documentation [PgBouncer](https://www.pgbouncer.org/) pour **v1.25.2**, accompagné d'une traduction en chinois simplifié.
+Importé le 2026-08-15 depuis le site de documentation [PgBouncer](https://www.pgbouncer.org/)
+pour **v1.25.2**, avec une traduction en chinois simplifié préparée en parallèle.
 
 Les éditions anglaise et en chinois simplifié ont été mises à jour le 2026-10-04 vers
 [**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0),
 à partir des manuels relus de `pigsty.io` et de `pigsty.cc`, respectivement.
-Les descriptions de référence ont été vérifiées par rapport à l'implémentation de cette version,
-avec la correction de quatre types d'erreurs dans la documentation amont.
-Les autres éditions linguistiques conservent la documentation v1.25.2.
 
-PgBouncer est protégé par le droit d'auteur (c) 2007-2009 Marko Kreen, Skype Technologies OÜ, et est distribué sous la licence [ISC License](https://opensource.org/license/isc-license-txt). Le texte intégral de la licence est conservé [en amont](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT).
+Le 2026-10-13, les six éditions linguistiques ont été synchronisées avec le manuel
+anglais actuel de la **v1.26.0**. Les descriptions de référence ont été vérifiées
+par rapport à l'implémentation de cette version. Des corrections locales rectifient
+les erreurs factuelles, d'orthographe et de grammaire de la documentation amont.
+Les messages de diagnostic d'origine sont conservés à l'identique, et chaque
+traduction a été relue page par page.
+
+PgBouncer est protégé par le droit d'auteur (c) 2007-2009 Marko Kreen, Skype Technologies OÜ,
+et est distribué sous la licence [ISC License](https://opensource.org/license/isc-license-txt).
+Le texte intégral de la licence est conservé
+[en amont](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT).
 
 ## pgBadger {#pgbadger}
 

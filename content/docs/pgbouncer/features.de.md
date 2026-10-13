@@ -26,7 +26,7 @@ upstream_link: "https://www.pgbouncer.org/features.html"
 
 - Unterstützt für die meisten Einstellungen eine Neukonfiguration im laufenden Betrieb.
 
-- Unterstützt Neustarts und Upgrades im laufenden Betrieb, ohne Clientverbindungen zu trennen.
+- Unterstützt [rollierende Neustarts und Upgrades](/de/docs/pgbouncer/usage/#shutdown-wait_for_clients) mit mehreren Prozessen und [`so_reuseport`](/de/docs/pgbouncer/config/#so_reuseport). Der bisherige Neustart im laufenden Betrieb (`-R`) wurde in 1.26.0 entfernt.
 
 --------
 
@@ -37,12 +37,12 @@ Die folgende Tabelle zeigt verschiedene PostgreSQL-Funktionen und ihre Kompatibi
 | Funktion                          | Sitzungs-Pooling  | Transaktions-Pooling  |
 |----------------------------------|:-----------------:|:---------------------:|
 | Startparameter [^0]              | Ja                | Ja                    |
-| SET/RESET                        | Ja                | Nie                   |
+| SET/RESET                        | Ja                | Für nachverfolgte Parameter [^0] |
 | LISTEN                           | Ja                | Nie                   |
 | NOTIFY                           | Ja                | Ja                    |
-| CURSOR WITHOUT HOLD              | Ja                | Ja                    |
-| CURSOR WITH HOLD                 | Ja                | Nie                   |
-| Auf Protokollebene vorbereitete Anweisungen | Ja        | Ja [^1]               |
+| WITHOUT HOLD CURSOR              | Ja                | Ja                    |
+| WITH HOLD CURSOR                 | Ja                | Nie                   |
+| Auf Protokollebene vorbereitete Ausführungspläne | Ja        | Ja [^1]               |
 | PREPARE / DEALLOCATE             | Ja                | Nie                   |
 | Temporäre Tabellen mit ON COMMIT DROP | Ja             | Ja                    |
 | Temporäre Tabellen mit PRESERVE/DELETE ROWS | Ja       | Nie                   |
@@ -50,6 +50,6 @@ Die folgende Tabelle zeigt verschiedene PostgreSQL-Funktionen und ihre Kompatibi
 | LOAD-Anweisung                   | Ja                | Nie                   |
 | Advisory Locks auf Sitzungsebene | Ja                | Nie                   |
 
-[^0]: Zu den Startparametern gehören `client_encoding`, `DateStyle`, `IntervalStyle`, `Timezone`, `standard_conforming_strings` und `application_name`. PgBouncer erkennt Änderungen an diesen Parametern und kann so gewährleisten, dass sie für den Client konsistent bleiben. Wenn PgBouncer weitere Parameter unterstützen soll, lesen Sie die Beschreibungen von [`track_extra_parameters`](/de/docs/pgbouncer/config/#track_extra_parameters) und [`ignore_startup_parameters`](/de/docs/pgbouncer/config/#ignore_startup_parameters).
+[^0]: Seit 1.26.0 verfolgt PgBouncer alle vom Server gemeldeten Parameter nach, die Clients ändern können: `application_name`, `client_encoding`, `DateStyle`, `default_transaction_read_only` (PostgreSQL 14+), `IntervalStyle`, `scram_iterations` (PostgreSQL 16+), `search_path` (PostgreSQL 18+), `session_authorization`, `standard_conforming_strings` und `TimeZone`. Bei Parametern, die der Server nicht meldet, werden nur die Startwerte nachverfolgt; spätere Änderungen durch `SET` werden nicht nachverfolgt. Einzelheiten und Hinweise zu Parametern von Erweiterungen finden sich unter [`track_extra_parameters`](/de/docs/pgbouncer/config/#track_extra_parameters) und [`ignore_startup_parameters`](/de/docs/pgbouncer/config/#ignore_startup_parameters).
 
-[^1]: Um diese Unterstützung zu aktivieren, müssen Sie [`max_prepared_statements`](/de/docs/pgbouncer/config/#max_prepared_statements) auf einen Wert ungleich null setzen.
+[^1]: Die Unterstützung vorbereiteter Anweisungen auf Protokollebene ist aktiviert, wenn [`max_prepared_statements`](/de/docs/pgbouncer/config/#max_prepared_statements) ungleich null ist. Der Standardwert ist 200; der Wert 0 deaktiviert diese Unterstützung. `PREPARE` / `DEALLOCATE` auf SQL-Ebene bleibt mit Transaktions-Pooling inkompatibel; ausgenommen sind `DEALLOCATE ALL` und `DISCARD ALL` bei aktivierter Nachverfolgung.

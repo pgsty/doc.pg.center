@@ -3,10 +3,5 @@
     "revision": "f643529cb91973f071ee09eae958b0cb0d7c44b1",
     "version": "2.59.1",
     "languages": ["fr", "ja", "ru"]
-  },
-  "pgbouncer": {
-    "revision": "f643529cb91973f071ee09eae958b0cb0d7c44b1",
-    "version": "1.25.2",
-    "languages": ["fr", "ja", "de", "ru"]
   }
 }

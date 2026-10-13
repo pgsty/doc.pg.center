@@ -136,7 +136,7 @@ Basic setup and usage is as follows.
     is required.  No log messages will be written to stderr after
     going into the background.
 
-    Note: Does not work on Windows; **pgbouncer** need to run as service there.
+    Note: Does not work on Windows; **pgbouncer** needs to run as a service there.
 
 `-u` _USERNAME_, `--user=` _USERNAME_
 :   Switch to the given user on startup.
@@ -202,7 +202,7 @@ total_query_count
 :   Total number of SQL commands pooled by **pgbouncer**.
 
 total_server_assignment_count
-:   Total times a server was assigned to a client
+:   Total number of times a server was assigned to a client.
 
 total_received
 :   Total volume in bytes of network traffic received by **pgbouncer**.
@@ -246,7 +246,7 @@ avg_query_count
 :   Average queries per second in last stat period.
 
 avg_server_assignment_count
-:   Average number of times a server as assigned to a client per second in the
+:   Average number of times a server was assigned to a client per second in the
     last stat period.
 
 avg_recv
@@ -267,16 +267,16 @@ avg_wait_time
     `stats_period`).
 
 avg_client_parse_count
-:   Average number of prepared statements created by clients. Only applicable
+:   Average number of prepared statements created by clients per second. Only applicable
     in named prepared statement tracking mode, see `max_prepared_statements`.
 
 avg_server_parse_count
-:   Average number of prepared statements created by **pgbouncer** on a server. Only
+:   Average number of prepared statements created by **pgbouncer** on a server per second. Only
     applicable in named prepared statement tracking mode, see `max_prepared_statements`.
 
 avg_bind_count
 :   Average number of prepared statements readied for execution by clients and forwarded
-    to PostgreSQL by **pgbouncer**. Only applicable in named prepared statement tracking
+    to PostgreSQL by **pgbouncer** per second. Only applicable in named prepared statement tracking
     mode, see `max_prepared_statements`.
 
 avg_client_login_count
@@ -284,7 +284,7 @@ avg_client_login_count
 
 #### SHOW STATS_TOTALS
 
-Subset of **SHOW STATS** showing the total values (**total_**).
+Shows cumulative per-database statistics corresponding to the **total_** fields in **SHOW STATS**. Output column names omit the **total_** prefix; for example, **total_query_count** is named **query_count**.
 
 
 #### SHOW STATS_AVERAGES
@@ -525,7 +525,7 @@ sv_login
 
 #### SHOW LISTS
 
-Show following internal information, in columns (not rows):
+Shows the following internal lists and their item counts, with one list per row in the **list** and **items** columns.
 
 databases
 :   Count of databases.
@@ -533,13 +533,19 @@ databases
 users
 :   Count of users.
 
+peers
+:   Number of configured peers.
+
 pools
 :   Count of pools.
+
+peer_pools
+:   Number of peer pools.
 
 free_clients
 :   Count of free clients. These are clients that are disconnected, but
     PgBouncer keeps the memory around that was allocated for them so it can be
-    reused for a future clients to avoid allocations.
+    reused for future clients to avoid allocations.
 
 used_clients
 :   Count of used clients.
@@ -550,7 +556,7 @@ login_clients
 free_servers
 :   Count of free servers. These are servers that are disconnected, but
     PgBouncer keeps the memory around that was allocated for them so it can be
-    reused for a future servers to avoid allocations.
+    reused for future servers to avoid allocations.
 
 used_servers
 :   Count of used servers.
@@ -573,10 +579,10 @@ name
 :   The user name
 
 pool_size
-:   The user's override pool_size. or NULL if not set.
+:   The user's pool_size override, or an empty string if not set.
 
 reserve_pool_size
-:   The user's override reserve_pool_size. or NULL if not set.
+:   The user's reserve_pool_size override, or an empty string if not set.
 
 pool_mode
 :   The user's override pool_mode, or NULL if not set.
@@ -640,7 +646,7 @@ current_connections
 :   Current number of server connections for this database.
 
 max_client_connections
-:   Maximum number of allowed client connections for this PgBouncer instance, as set by max_db_client_connections per database.
+:   Maximum number of allowed client connections for this database, as set by max_db_client_connections globally or per database.
 
 current_client_connections
 :   Current number of client connections for this database.
@@ -791,7 +797,7 @@ is called.
 #### KILL_CLIENT id
 
 Immediately kill specified client connection along with any server
-connections for the given client. The client to kill, is identified
+connections for the given client. The client to kill is identified
 by the `id` value that can be found using the `SHOW CLIENTS` command.
 
 An example command will look something like `KILL_CLIENT 1234`.

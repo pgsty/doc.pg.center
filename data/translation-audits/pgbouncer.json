@@ -1,0 +1,1171 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-13T16:14:57.630541+08:00",
+  "status": "accepted_local",
+  "component": "pgbouncer",
+  "version": "1.26.0",
+  "upstream_tag": "pgbouncer_1_26_0",
+  "upstream": "https://github.com/pgbouncer/pgbouncer/tree/pgbouncer_1_26_0",
+  "coverage": {
+    "languages": [
+      "en",
+      "zh",
+      "fr",
+      "ja",
+      "de",
+      "ru"
+    ],
+    "english_pages": 9,
+    "translation_pairs": 45,
+    "published_pages": 54
+  },
+  "source_baseline": "Current English, including implementation-verified local errata; no older PgBouncer snapshot is used by parity checks.",
+  "review_method": [
+    "Each translation pair reviewed against current English; parameter/command semantics, conditional and negative statements, units, default values and version boundaries checked.",
+    "Changed DE/FR and JA/RU technical passages independently cross-reviewed after editing. EN/ZH facts verified against the tagged source code.",
+    "Historical changelogs checked structurally in full and semantically for changed or suspect passages; tests are not represented as a sentence-by-sentence semantic proof.",
+    "Original program diagnostics are protected verbatim; only Markdown escapes/line wrapping are normalized.",
+    "Chinese prose heading IDs retain the established localized scheme; internal links and fragments are checked in the build."
+  ],
+  "old_review_reconciliation": {
+    "records": [
+      "tmp/review/pgbouncer/de.md",
+      "tmp/review/pgbouncer/fr.md",
+      "tmp/review/pgbouncer/ja.md",
+      "tmp/review/pgbouncer/ru.md",
+      "tmp/review/pgbouncer/zh.md"
+    ],
+    "reported_groups": 29,
+    "confirmed_and_fixed": 28,
+    "not_confirmed": 1,
+    "issues": [
+      {
+        "key": "windows-needs",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/usage.md",
+        "line": 139,
+        "summary": "need → needs，补 service 冠词",
+        "evidence": "官方1.26 usage.md 原句语法问题",
+        "old_records": "de:1; fr/ja重复"
+      },
+      {
+        "key": "assignment-was",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/usage.md",
+        "line": 249,
+        "summary": "as → was",
+        "evidence": "SHOW STATS avg_server_assignment_count 定义",
+        "old_records": "de:2; fr/ja重复"
+      },
+      {
+        "key": "pool-override-punctuation",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/usage.md",
+        "line": 582,
+        "summary": "修复 pool_size./reserve_pool_size. 多余句号，并合并真实空字符串修正",
+        "evidence": "官方1.26 src/admin.c:401-416",
+        "old_records": "de:3; fr/ja重复"
+      },
+      {
+        "key": "databases-section",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/config.md",
+        "line": 119,
+        "summary": "三处 [database] → [databases]",
+        "evidence": "官方1.26 src/main.c 的 sect_name=\"databases\"；doc/config.md 实际节标题",
+        "old_records": "de:4; fr/ja/ru重复"
+      },
+      {
+        "key": "server-allow-fixme",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/config.md",
+        "line": 676,
+        "summary": "allow FIXME 按源码改为先请求TLS、拒绝后回退明文、不验证服务端证书",
+        "evidence": "官方1.26 src/server.c:726-733,764-773；src/sbuf.c:1242-1250",
+        "old_records": "de:5; fr/ja/ru重复"
+      },
+      {
+        "key": "cancellation-grammar",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/config.md",
+        "line": 1092,
+        "summary": "cancellations requests及it originated语病修正，明确转发给原查询所在进程",
+        "evidence": "官方1.26 peers行为及doc/config.md原句",
+        "old_records": "de:6; fr重复"
+      },
+      {
+        "key": "config-management-grammar",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/config.md",
+        "line": 1109,
+        "summary": "修复 to config management easy 与残句 Because",
+        "evidence": "官方1.26 doc/config.md 该段说明自身peer配置被忽略但允许复用配置",
+        "old_records": "de:7; fr/ja重复"
+      },
+      {
+        "key": "peer-server-is",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/config.md",
+        "line": 1134,
+        "summary": "补缺失的 is",
+        "evidence": "官方1.26 doc/config.md 原句语法问题",
+        "old_records": "de:8"
+      },
+      {
+        "key": "defaults-spelling",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/changelog.md",
+        "line": 253,
+        "summary": "defaultls → defaults",
+        "evidence": "官方1.26 NEWS.md 1.24.0 #1144 原文拼写",
+        "old_records": "de:9; fr/ja/ru重复"
+      },
+      {
+        "key": "implementations-spelling",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/changelog.md",
+        "line": 167,
+        "summary": "implementatinos → implementations",
+        "evidence": "官方1.26 NEWS.md 1.25.0 #1384 原文拼写",
+        "old_records": "de:10; fr/ja/ru重复"
+      },
+      {
+        "key": "coverity-name",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/changelog.md",
+        "line": 1311,
+        "summary": "Coverty → Coverity",
+        "evidence": "官方1.26 NEWS.md 1.10.x 其他条目正确拼写为Coverity",
+        "old_records": "de:11; fr/ja/ru重复"
+      },
+      {
+        "key": "regsvr32-command",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/changelog.md",
+        "line": 1715,
+        "summary": "历史示例 regsrv32 → regsvr32，六语言同步",
+        "evidence": "官方1.26 README.md Running on Windows 同一命令为regsvr32",
+        "old_records": "de:12; fr/ja重复"
+      },
+      {
+        "key": "show-code-spans",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/changelog.md",
+        "line": 640,
+        "summary": "1.18 SHOW代码跨度/空格修复",
+        "evidence": "官方1.26 NEWS.md #782语义及真实管理命令",
+        "old_records": "de:13; fr/ru重复"
+      },
+      {
+        "key": "either-singular",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/faq.md",
+        "line": 43,
+        "summary": "Either LVS or HAProxy seem → seems，保持二选一语义",
+        "evidence": "FAQ原句语法",
+        "old_records": "de:14"
+      },
+      {
+        "key": "future-articles",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/usage.md",
+        "line": 548,
+        "summary": "a future clients/servers → future clients/servers",
+        "evidence": "官方1.26 usage.md free_clients/free_servers 描述",
+        "old_records": "fr:1; ja重复"
+      },
+      {
+        "key": "assignment-period",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/usage.md",
+        "line": 205,
+        "summary": "Total times补number of及句末句点",
+        "evidence": "官方1.26 usage.md total_server_assignment_count 描述",
+        "old_records": "fr:2; ja重复"
+      },
+      {
+        "key": "scram-hashing",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/config.md",
+        "line": 301,
+        "summary": "SCRAM encrypting → hashing",
+        "evidence": "官方1.26 src/common/scram-common.c:50-73执行迭代HMAC哈希",
+        "old_records": "fr:3"
+      },
+      {
+        "key": "md5-hashing",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/config.md",
+        "line": 316,
+        "summary": "MD5-encrypted → MD5-hashed",
+        "evidence": "官方1.26 doc/config.md Authentication file format 的MD5-hashed及md5公式",
+        "old_records": "fr:3"
+      },
+      {
+        "key": "tracking-spacing",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/config.md",
+        "line": 199,
+        "summary": "track_extra_parameters Note去重复空格",
+        "evidence": "原文排版，不改技术内容",
+        "old_records": "fr:4"
+      },
+      {
+        "key": "shrinkage-spelling",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/changelog.md",
+        "line": 1524,
+        "summary": "shringage → shrinkage",
+        "evidence": "官方1.26 NEWS.md 1.4.1原文拼写",
+        "old_records": "fr:5; ja/ru重复"
+      },
+      {
+        "key": "more-than",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/changelog.md",
+        "line": 1725,
+        "summary": "more that → more than",
+        "evidence": "官方1.26 NEWS.md 1.3原文语法",
+        "old_records": "fr:5; ja/ru重复"
+      },
+      {
+        "key": "send-grammar",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/changelog.md",
+        "line": 1977,
+        "summary": "1.0.7损坏句子重写为send阻塞期间发送多个包触发断言；不改变修复逻辑说明",
+        "evidence": "官方1.26 NEWS.md 1.0.7同一历史条目",
+        "old_records": "fr:5"
+      },
+      {
+        "key": "upgrade-period",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/faq.md",
+        "line": 131,
+        "summary": "升级章节链接后补句点",
+        "evidence": "FAQ排版",
+        "old_records": "fr:6; ja:3"
+      },
+      {
+        "key": "kill-client-comma",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/usage.md",
+        "line": 800,
+        "summary": "去主语谓语间多余逗号",
+        "evidence": "usage.md KILL_CLIENT描述",
+        "old_records": "ja:1"
+      },
+      {
+        "key": "to-use",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/changelog.md",
+        "line": 152,
+        "summary": "to using → to use",
+        "evidence": "官方1.26 NEWS.md 1.25.0 #1359原句语法",
+        "old_records": "ja:2; ru重复"
+      },
+      {
+        "key": "guaranteed-spelling",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/changelog.md",
+        "line": 1182,
+        "summary": "guarateed → guaranteed",
+        "evidence": "官方1.26 NEWS.md 1.7原句拼写",
+        "old_records": "ja:2; ru重复"
+      },
+      {
+        "key": "its-possessive",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/changelog.md",
+        "line": 1184,
+        "summary": "it's own → its own",
+        "evidence": "官方1.26 NEWS.md 1.7原句语法",
+        "old_records": "ru:1"
+      },
+      {
+        "key": "reserve-pool-setting",
+        "status": "fixed",
+        "file": "content/docs/pgbouncer/changelog.md",
+        "line": 791,
+        "summary": "res_pool_size → reserve_pool_size",
+        "evidence": "官方1.16 src/main.c:266公开配置键；res_pool_size为内部变量",
+        "old_records": "zh:1; de/fr/ja/ru重复"
+      },
+      {
+        "key": "query-timeout-direction",
+        "status": "not-a-defect",
+        "file": "content/docs/pgbouncer/config.md",
+        "line": 739,
+        "summary": "方向疑问不成立：服务器 statement_timeout 应略小于 PgBouncer query_timeout，先由数据库取消，后者仅兜底网络异常；中文已明确“略小于此值”，保持原文。",
+        "evidence": "官方1.26 doc/config.md query_timeout 段与 PgBouncer超时用途",
+        "old_records": "zh:2"
+      }
+    ]
+  },
+  "additional_source_corrections": [
+    {
+      "key": "logfile-needs",
+      "status": "fixed",
+      "file": "content/docs/pgbouncer/config.md",
+      "line": 25,
+      "summary": "either this or syslog need → needs",
+      "evidence": "单数并列选择主语语法",
+      "old_records": "本轮源码核验新增"
+    },
+    {
+      "key": "parameter-settings",
+      "status": "fixed",
+      "file": "content/docs/pgbouncer/config.md",
+      "line": 203,
+      "summary": "两处 parameters settings → parameter settings",
+      "evidence": "原文语法",
+      "old_records": "本轮源码核验新增"
+    },
+    {
+      "key": "socket-events",
+      "status": "fixed",
+      "file": "content/docs/pgbouncer/changelog.md",
+      "line": 1183,
+      "summary": "no event from socket → no events from the socket",
+      "evidence": "历史1.7同句语法",
+      "old_records": "本轮源码核验新增"
+    },
+    {
+      "key": "show-users-empty-string",
+      "status": "fixed",
+      "file": "content/docs/pgbouncer/usage.md",
+      "line": 582,
+      "summary": "SHOW USERS pool_size/reserve_pool_size未设置返回空字符串；pool_mode保持NULL",
+      "evidence": "官方1.26 src/admin.c:401-416",
+      "old_records": "本轮源码核验新增"
+    },
+    {
+      "key": "show-databases-limit",
+      "status": "fixed",
+      "file": "content/docs/pgbouncer/usage.md",
+      "line": 649,
+      "summary": "SHOW DATABASES max_client_connections作用域改数据库，说明全局或数据库配置",
+      "evidence": "官方1.26 src/admin.c:314 database_max_client_connections(db)",
+      "old_records": "本轮源码核验新增"
+    },
+    {
+      "key": "stats-totals-columns",
+      "status": "fixed",
+      "file": "content/docs/pgbouncer/usage.md",
+      "line": 287,
+      "summary": "SHOW STATS_TOTALS输出列无total_前缀，增加total_query_count→query_count例子",
+      "evidence": "官方1.26 src/stats.c:215-223",
+      "old_records": "本轮源码核验新增"
+    },
+    {
+      "key": "show-lists-rows",
+      "status": "fixed",
+      "file": "content/docs/pgbouncer/usage.md",
+      "line": 528,
+      "summary": "SHOW LISTS真实为list/items两列，每种列表占一行",
+      "evidence": "官方1.26 src/admin.c:358-376",
+      "old_records": "本轮源码核验新增"
+    },
+    {
+      "key": "show-lists-peers",
+      "status": "fixed",
+      "file": "content/docs/pgbouncer/usage.md",
+      "line": 536,
+      "summary": "SHOW LISTS补齐peers和peer_pools两项",
+      "evidence": "官方1.26 src/admin.c:363,365",
+      "old_records": "本轮源码核验新增"
+    },
+    {
+      "key": "parse-bind-rates",
+      "status": "fixed",
+      "file": "content/docs/pgbouncer/usage.md",
+      "line": 270,
+      "summary": "三个avg_*parse/bind_count补每秒单位",
+      "evidence": "官方1.26 src/stats.c:97-103 USEC*delta/dur",
+      "old_records": "本轮源码核验新增"
+    }
+  ],
+  "translation_corrections": [
+    "French evdns Parallel/EDNS0 reversed cells corrected.",
+    "Japanese server/client connection-limit distinction corrected.",
+    "Japanese four CVE affected-version boundaries corrected.",
+    "Japanese TLS RELOAD recycle/reuse semantics corrected.",
+    "French reverting-PAM meaning corrected; historical subtitles localized and polished.",
+    "Japanese peering target, recommendation strength, console authorization qualifier, prepared-statement scope, pool_mode subject, old send/assert explanation and unclean-server antecedent corrected.",
+    "Translated diagnostic messages restored across all editions.",
+    "German historical log messages are marked as inline code, preserving their original diagnostic wording and avoiding a prose-lint false positive."
+  ],
+  "pages": [
+    {
+      "source": "content/docs/pgbouncer/_index.md",
+      "translation": "content/docs/pgbouncer/_index.zh.md",
+      "language": "zh",
+      "source_sha256": "7086c29119b671921e91c056e8d7c4648f8c338b5c58db596af0c32ba1479e84",
+      "translation_sha256": "806dc97243ad35e2b1f0449d25d77714b1698984a418e3f39ef911d8291e6276",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/_index.md",
+      "translation": "content/docs/pgbouncer/_index.fr.md",
+      "language": "fr",
+      "source_sha256": "7086c29119b671921e91c056e8d7c4648f8c338b5c58db596af0c32ba1479e84",
+      "translation_sha256": "130b6a0c5698fe957785ec26058044869ac486707be05b4e374a21ee5a29862c",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/_index.md",
+      "translation": "content/docs/pgbouncer/_index.ja.md",
+      "language": "ja",
+      "source_sha256": "7086c29119b671921e91c056e8d7c4648f8c338b5c58db596af0c32ba1479e84",
+      "translation_sha256": "ba1835bafa5eead02633dd6b8492fd7992a4ea01fe40b77e9afa60abf36d146e",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/_index.md",
+      "translation": "content/docs/pgbouncer/_index.de.md",
+      "language": "de",
+      "source_sha256": "7086c29119b671921e91c056e8d7c4648f8c338b5c58db596af0c32ba1479e84",
+      "translation_sha256": "5e2ccae4427a1541808bd0797ada23bdeea6cb25ad7de2d29771198270f15d80",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/_index.md",
+      "translation": "content/docs/pgbouncer/_index.ru.md",
+      "language": "ru",
+      "source_sha256": "7086c29119b671921e91c056e8d7c4648f8c338b5c58db596af0c32ba1479e84",
+      "translation_sha256": "abd4ec1d0ab14d47ee93c91273318021cbb327da9a139242190bc84db2881286",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/changelog.md",
+      "translation": "content/docs/pgbouncer/changelog.zh.md",
+      "language": "zh",
+      "source_sha256": "5f014867bc817b6eefe0254a187f2375956f103bc692df5b27f171c682c9cf25",
+      "translation_sha256": "727991129bfa7156b268f1bf255b1563dcdee5978109c1f5805eeeef784eab79",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "additional_numeric_facts": {
+        "counts": {
+          "2025": 1,
+          "1.3": 1,
+          "2291": 1,
+          "2007": 1
+        },
+        "reason": "Chinese repeats dates/CVE identifiers in bilingual historical release subtitles and explicitly repeats TLS 1.3; no source numeric facts are missing."
+      },
+      "protected_diagnostics": [
+        "password is SCRAM secret but client authentication did not provide SCRAM keys",
+        "FATAL in function client_proto(): bad client state: 6/7",
+        "FATAL in function server_proto(): server in bad state: 11",
+        "FATAL in function disconnect_client(): bad client state: 0",
+        "FATAL in function server_proto(): server in bad state: 14",
+        "FIXME: query end, but query_start == 0",
+        "unclean server",
+        "client disconnect while server was not ready",
+        "client disconnect before everything was sent to the server",
+        "bad packet header",
+        "unexpected response from login query",
+        "bad packet",
+        "query timeout",
+        "1.3b+ needed"
+      ]
+    },
+    {
+      "source": "content/docs/pgbouncer/changelog.md",
+      "translation": "content/docs/pgbouncer/changelog.fr.md",
+      "language": "fr",
+      "source_sha256": "5f014867bc817b6eefe0254a187f2375956f103bc692df5b27f171c682c9cf25",
+      "translation_sha256": "fa1ba5d4a225023e8fc69bcd43e9750b2aca5d1baa948e89105f3de7f351557f",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": [
+        "password is SCRAM secret but client authentication did not provide SCRAM keys",
+        "FATAL in function client_proto(): bad client state: 6/7",
+        "FATAL in function server_proto(): server in bad state: 11",
+        "FATAL in function disconnect_client(): bad client state: 0",
+        "FATAL in function server_proto(): server in bad state: 14",
+        "FIXME: query end, but query_start == 0",
+        "unclean server",
+        "client disconnect while server was not ready",
+        "client disconnect before everything was sent to the server",
+        "bad packet header",
+        "unexpected response from login query",
+        "bad packet",
+        "query timeout",
+        "1.3b+ needed"
+      ]
+    },
+    {
+      "source": "content/docs/pgbouncer/changelog.md",
+      "translation": "content/docs/pgbouncer/changelog.ja.md",
+      "language": "ja",
+      "source_sha256": "5f014867bc817b6eefe0254a187f2375956f103bc692df5b27f171c682c9cf25",
+      "translation_sha256": "8ada7c56b237b7f842d5be2d0c10bbcff25d0e57884e06c4200d0237893d6ae4",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "additional_numeric_facts": {
+        "counts": {
+          "1": 10,
+          "2": 2,
+          "5": 1,
+          "1.3": 1,
+          "0": 1,
+          "16": 2,
+          "8": 1
+        },
+        "reason": "Japanese naturally writes English articles, one/two, binary/bit lengths and third-party ordinals as numerals. Per-heading review confirmed no source numeric fact is missing and no technical value changed."
+      },
+      "protected_diagnostics": [
+        "password is SCRAM secret but client authentication did not provide SCRAM keys",
+        "FATAL in function client_proto(): bad client state: 6/7",
+        "FATAL in function server_proto(): server in bad state: 11",
+        "FATAL in function disconnect_client(): bad client state: 0",
+        "FATAL in function server_proto(): server in bad state: 14",
+        "FIXME: query end, but query_start == 0",
+        "unclean server",
+        "client disconnect while server was not ready",
+        "client disconnect before everything was sent to the server",
+        "bad packet header",
+        "unexpected response from login query",
+        "bad packet",
+        "query timeout",
+        "1.3b+ needed"
+      ]
+    },
+    {
+      "source": "content/docs/pgbouncer/changelog.md",
+      "translation": "content/docs/pgbouncer/changelog.de.md",
+      "language": "de",
+      "source_sha256": "5f014867bc817b6eefe0254a187f2375956f103bc692df5b27f171c682c9cf25",
+      "translation_sha256": "603efe74b67955efb09e064a949ab273e83e40889a48dc742616cd5aa94360a3",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": [
+        "password is SCRAM secret but client authentication did not provide SCRAM keys",
+        "FATAL in function client_proto(): bad client state: 6/7",
+        "FATAL in function server_proto(): server in bad state: 11",
+        "FATAL in function disconnect_client(): bad client state: 0",
+        "FATAL in function server_proto(): server in bad state: 14",
+        "FIXME: query end, but query_start == 0",
+        "unclean server",
+        "client disconnect while server was not ready",
+        "client disconnect before everything was sent to the server",
+        "bad packet header",
+        "unexpected response from login query",
+        "bad packet",
+        "query timeout",
+        "1.3b+ needed"
+      ]
+    },
+    {
+      "source": "content/docs/pgbouncer/changelog.md",
+      "translation": "content/docs/pgbouncer/changelog.ru.md",
+      "language": "ru",
+      "source_sha256": "5f014867bc817b6eefe0254a187f2375956f103bc692df5b27f171c682c9cf25",
+      "translation_sha256": "aed810c399636203b9093c3df9a8c0e57668a9739e29cd3308c78decaa2c91f6",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": [
+        "password is SCRAM secret but client authentication did not provide SCRAM keys",
+        "FATAL in function client_proto(): bad client state: 6/7",
+        "FATAL in function server_proto(): server in bad state: 11",
+        "FATAL in function disconnect_client(): bad client state: 0",
+        "FATAL in function server_proto(): server in bad state: 14",
+        "FIXME: query end, but query_start == 0",
+        "unclean server",
+        "client disconnect while server was not ready",
+        "client disconnect before everything was sent to the server",
+        "bad packet header",
+        "unexpected response from login query",
+        "bad packet",
+        "query timeout",
+        "1.3b+ needed"
+      ]
+    },
+    {
+      "source": "content/docs/pgbouncer/community.md",
+      "translation": "content/docs/pgbouncer/community.zh.md",
+      "language": "zh",
+      "source_sha256": "197f2e0232f3f2c5bff3f0778634640f8bcad9f7eab99fbe50744dc24fa51cd4",
+      "translation_sha256": "29372cadab2eeffcc51244eb5141b9d6e92a042beb1ce7014ba41d19bf30b432",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/community.md",
+      "translation": "content/docs/pgbouncer/community.fr.md",
+      "language": "fr",
+      "source_sha256": "197f2e0232f3f2c5bff3f0778634640f8bcad9f7eab99fbe50744dc24fa51cd4",
+      "translation_sha256": "30343eeac0b298a83ee11a21ead0f55d851d303010f51b25ec85b95306e81633",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/community.md",
+      "translation": "content/docs/pgbouncer/community.ja.md",
+      "language": "ja",
+      "source_sha256": "197f2e0232f3f2c5bff3f0778634640f8bcad9f7eab99fbe50744dc24fa51cd4",
+      "translation_sha256": "dd9b26e5dbb251090ceca3e532302f2b926962648ad56a02f996c9df159006aa",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/community.md",
+      "translation": "content/docs/pgbouncer/community.de.md",
+      "language": "de",
+      "source_sha256": "197f2e0232f3f2c5bff3f0778634640f8bcad9f7eab99fbe50744dc24fa51cd4",
+      "translation_sha256": "0d304ef3287e700f4f78b79c00a7ed8f917f046616925fea433ab99e16cde8ef",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/community.md",
+      "translation": "content/docs/pgbouncer/community.ru.md",
+      "language": "ru",
+      "source_sha256": "197f2e0232f3f2c5bff3f0778634640f8bcad9f7eab99fbe50744dc24fa51cd4",
+      "translation_sha256": "c42fc3cc9b0b323cce5f5e8ec100181c9b50fda51e40165a84a205194290482c",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/config.md",
+      "translation": "content/docs/pgbouncer/config.zh.md",
+      "language": "zh",
+      "source_sha256": "742dcde4f0243227917729451830621bbf5506c07dd3767b92c809bd3d1f222b",
+      "translation_sha256": "ba3c6b3017ee74fb8f3cf5a49b1f7aa9c522f0ffd6e6bfabdf47ca70ed7f956f",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": [
+        "no such user",
+        "ERROR:  cached plan must not change result type",
+        "ERROR: permission denied for table pg_authid"
+      ]
+    },
+    {
+      "source": "content/docs/pgbouncer/config.md",
+      "translation": "content/docs/pgbouncer/config.fr.md",
+      "language": "fr",
+      "source_sha256": "742dcde4f0243227917729451830621bbf5506c07dd3767b92c809bd3d1f222b",
+      "translation_sha256": "a35e6ea68a5f75e9f3b40b146217bfdf67bafa4be20789aedda643740d908ed5",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": [
+        "no such user",
+        "ERROR:  cached plan must not change result type",
+        "ERROR: permission denied for table pg_authid"
+      ]
+    },
+    {
+      "source": "content/docs/pgbouncer/config.md",
+      "translation": "content/docs/pgbouncer/config.ja.md",
+      "language": "ja",
+      "source_sha256": "742dcde4f0243227917729451830621bbf5506c07dd3767b92c809bd3d1f222b",
+      "translation_sha256": "10da62b864bc2b07b1226eea3eaaa4793a223c9855b773fec902ee7712a627ee",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "additional_numeric_facts": {
+        "counts": {
+          "1": 18,
+          "0": 1,
+          "2": 4,
+          "3": 1
+        },
+        "reason": "Japanese naturally writes English articles, one/two, binary/bit lengths and third-party ordinals as numerals. Per-heading review confirmed no source numeric fact is missing and no technical value changed."
+      },
+      "protected_diagnostics": [
+        "no such user",
+        "ERROR:  cached plan must not change result type",
+        "ERROR: permission denied for table pg_authid"
+      ]
+    },
+    {
+      "source": "content/docs/pgbouncer/config.md",
+      "translation": "content/docs/pgbouncer/config.de.md",
+      "language": "de",
+      "source_sha256": "742dcde4f0243227917729451830621bbf5506c07dd3767b92c809bd3d1f222b",
+      "translation_sha256": "3480d1b92a5623c09803d2a40132ba1c2891abbf9d4db23864732fabdaa9478e",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": [
+        "no such user",
+        "ERROR:  cached plan must not change result type",
+        "ERROR: permission denied for table pg_authid"
+      ]
+    },
+    {
+      "source": "content/docs/pgbouncer/config.md",
+      "translation": "content/docs/pgbouncer/config.ru.md",
+      "language": "ru",
+      "source_sha256": "742dcde4f0243227917729451830621bbf5506c07dd3767b92c809bd3d1f222b",
+      "translation_sha256": "d065515fca9b3325dc77c7170b1a0d565a2b40ad4740bdab6dfaae36765aada7",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": [
+        "no such user",
+        "ERROR:  cached plan must not change result type",
+        "ERROR: permission denied for table pg_authid"
+      ]
+    },
+    {
+      "source": "content/docs/pgbouncer/download.md",
+      "translation": "content/docs/pgbouncer/download.zh.md",
+      "language": "zh",
+      "source_sha256": "dab3d826fff8f9449d805779049dee5900230276696f4d8ffc962196a15bc628",
+      "translation_sha256": "83d6d50c4bd38623026cac65524df7e7c3c0753a1328b9cb21525c7006e01486",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/download.md",
+      "translation": "content/docs/pgbouncer/download.fr.md",
+      "language": "fr",
+      "source_sha256": "dab3d826fff8f9449d805779049dee5900230276696f4d8ffc962196a15bc628",
+      "translation_sha256": "717f1b3172add170a671fb60a1be643edf4d016b2b4f9360143f0e913dd435d8",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/download.md",
+      "translation": "content/docs/pgbouncer/download.ja.md",
+      "language": "ja",
+      "source_sha256": "dab3d826fff8f9449d805779049dee5900230276696f4d8ffc962196a15bc628",
+      "translation_sha256": "09d8c271e56045c1acddaa7c7450c28b14b8ea96b6acc3dfb7592f271a8a7acd",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/download.md",
+      "translation": "content/docs/pgbouncer/download.de.md",
+      "language": "de",
+      "source_sha256": "dab3d826fff8f9449d805779049dee5900230276696f4d8ffc962196a15bc628",
+      "translation_sha256": "bee483c9e869666c36006678499e5edbd76c1f2a555303179512ba41320145f0",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/download.md",
+      "translation": "content/docs/pgbouncer/download.ru.md",
+      "language": "ru",
+      "source_sha256": "dab3d826fff8f9449d805779049dee5900230276696f4d8ffc962196a15bc628",
+      "translation_sha256": "493c5975dcb8403f8f2aa8ea4bf95e65f1c37c48605cf46804fa9a1438e8e863",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/faq.md",
+      "translation": "content/docs/pgbouncer/faq.zh.md",
+      "language": "zh",
+      "source_sha256": "eea281c5cfddf60372c6b35d667becf33ce1def452810446d136f6869737360b",
+      "translation_sha256": "f898ad47c58314503e7a656a4d775e18973a3c1720ae9ef33f7799ab07f54dde",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/faq.md",
+      "translation": "content/docs/pgbouncer/faq.fr.md",
+      "language": "fr",
+      "source_sha256": "eea281c5cfddf60372c6b35d667becf33ce1def452810446d136f6869737360b",
+      "translation_sha256": "6e2a344085cfa9adfc455e083c18348ba81b4c22e73a53727b1a377e08e4846d",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/faq.md",
+      "translation": "content/docs/pgbouncer/faq.ja.md",
+      "language": "ja",
+      "source_sha256": "eea281c5cfddf60372c6b35d667becf33ce1def452810446d136f6869737360b",
+      "translation_sha256": "f36f0e53afe6630b193ba2beb864437567371d4f6590b3af97ae5a088950368c",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "additional_numeric_facts": {
+        "counts": {
+          "1": 3,
+          "2": 2
+        },
+        "reason": "Japanese naturally writes English articles, one/two, binary/bit lengths and third-party ordinals as numerals. Per-heading review confirmed no source numeric fact is missing and no technical value changed."
+      },
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/faq.md",
+      "translation": "content/docs/pgbouncer/faq.de.md",
+      "language": "de",
+      "source_sha256": "eea281c5cfddf60372c6b35d667becf33ce1def452810446d136f6869737360b",
+      "translation_sha256": "f9403833d07cfc7a3a57552bfd8957b1407c919cba0d4e9f3a384c70c27c7000",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/faq.md",
+      "translation": "content/docs/pgbouncer/faq.ru.md",
+      "language": "ru",
+      "source_sha256": "eea281c5cfddf60372c6b35d667becf33ce1def452810446d136f6869737360b",
+      "translation_sha256": "df90910a453992153013d80206e8ee4ec24fa817c22ec4eb804758d90616e858",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/features.md",
+      "translation": "content/docs/pgbouncer/features.zh.md",
+      "language": "zh",
+      "source_sha256": "7f67594690b4fdb9a2aa6e795ef9c8a2816d2dee6443acc42fe7841af16c1a7e",
+      "translation_sha256": "bded8acfcac4f27be17935ad982c9c8c376be27aca7eed3d9054a77b0b95c646",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/features.md",
+      "translation": "content/docs/pgbouncer/features.fr.md",
+      "language": "fr",
+      "source_sha256": "7f67594690b4fdb9a2aa6e795ef9c8a2816d2dee6443acc42fe7841af16c1a7e",
+      "translation_sha256": "ace4b11a156e331f63f79ccf38e451a5426d0de64546ba4d97456de649563944",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/features.md",
+      "translation": "content/docs/pgbouncer/features.ja.md",
+      "language": "ja",
+      "source_sha256": "7f67594690b4fdb9a2aa6e795ef9c8a2816d2dee6443acc42fe7841af16c1a7e",
+      "translation_sha256": "645282fb8ec475529abb62afcd3141e4afbfb950d971b7e4ac159bdec37802e1",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "additional_numeric_facts": {
+        "counts": {
+          "0": 1
+        },
+        "reason": "Japanese naturally writes English articles, one/two, binary/bit lengths and third-party ordinals as numerals. Per-heading review confirmed no source numeric fact is missing and no technical value changed."
+      },
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/features.md",
+      "translation": "content/docs/pgbouncer/features.de.md",
+      "language": "de",
+      "source_sha256": "7f67594690b4fdb9a2aa6e795ef9c8a2816d2dee6443acc42fe7841af16c1a7e",
+      "translation_sha256": "787e2d7edacfa6e8147fa4d69dd905ba416778490ead46ab7a0b3ee525587077",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/features.md",
+      "translation": "content/docs/pgbouncer/features.ru.md",
+      "language": "ru",
+      "source_sha256": "7f67594690b4fdb9a2aa6e795ef9c8a2816d2dee6443acc42fe7841af16c1a7e",
+      "translation_sha256": "86fa481a1515dd459fe6c93ffb223c90a16c5fe46d46552e34e8e87b29bbcf59",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/install.md",
+      "translation": "content/docs/pgbouncer/install.zh.md",
+      "language": "zh",
+      "source_sha256": "ea0349db7952053b70143e10cb80c5fb1a6190ab7f78fb76f123aef7fdc8ff82",
+      "translation_sha256": "69f884a1a0762915f386f03f78abe7d941bc4ceb71b967a6cfde9575e6fba6ae",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/install.md",
+      "translation": "content/docs/pgbouncer/install.fr.md",
+      "language": "fr",
+      "source_sha256": "ea0349db7952053b70143e10cb80c5fb1a6190ab7f78fb76f123aef7fdc8ff82",
+      "translation_sha256": "b5364e9fb10b6103f1bbbaa4623488a4f15c1a62e135958ba3f25f22440e3ec3",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/install.md",
+      "translation": "content/docs/pgbouncer/install.ja.md",
+      "language": "ja",
+      "source_sha256": "ea0349db7952053b70143e10cb80c5fb1a6190ab7f78fb76f123aef7fdc8ff82",
+      "translation_sha256": "9e3a54fddc1f1274ef460b9fde04dcfb86ffe6210a998729f2a9ac06353b9b03",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "additional_numeric_facts": {
+        "counts": {
+          "1": 2
+        },
+        "reason": "Japanese naturally writes English articles, one/two, binary/bit lengths and third-party ordinals as numerals. Per-heading review confirmed no source numeric fact is missing and no technical value changed."
+      },
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/install.md",
+      "translation": "content/docs/pgbouncer/install.de.md",
+      "language": "de",
+      "source_sha256": "ea0349db7952053b70143e10cb80c5fb1a6190ab7f78fb76f123aef7fdc8ff82",
+      "translation_sha256": "5d4ad5edf262ff2588b0d56fcea3fd0b46ef07de6bdf5145af16b4a7d9604935",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/install.md",
+      "translation": "content/docs/pgbouncer/install.ru.md",
+      "language": "ru",
+      "source_sha256": "ea0349db7952053b70143e10cb80c5fb1a6190ab7f78fb76f123aef7fdc8ff82",
+      "translation_sha256": "9c6a713cd5efdffd4522d902c1a3f739fa0524e3a7c5a66025f2d25985108f9e",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/usage.md",
+      "translation": "content/docs/pgbouncer/usage.zh.md",
+      "language": "zh",
+      "source_sha256": "e94529d92500d18554f8328678705d921f52ebb8e281ceb6f53b5aee91bc6668",
+      "translation_sha256": "0010121db2cc7a46f9d8fa63943a94e790b97cc002ed4ed7f35e9e49ccc88626",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/usage.md",
+      "translation": "content/docs/pgbouncer/usage.fr.md",
+      "language": "fr",
+      "source_sha256": "e94529d92500d18554f8328678705d921f52ebb8e281ceb6f53b5aee91bc6668",
+      "translation_sha256": "40a6d74e46488ef2a1a751a1299403cf61815bfa4bb4312be660252e7e44ebfb",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/usage.md",
+      "translation": "content/docs/pgbouncer/usage.ja.md",
+      "language": "ja",
+      "source_sha256": "e94529d92500d18554f8328678705d921f52ebb8e281ceb6f53b5aee91bc6668",
+      "translation_sha256": "03f072bacbb33fe1d4ba754a0aebf75d2484b43f8b8dd976b8e7907c72dea29f",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "additional_numeric_facts": {
+        "counts": {
+          "1": 15,
+          "2": 2
+        },
+        "reason": "Japanese naturally writes English articles, one/two, binary/bit lengths and third-party ordinals as numerals. Per-heading review confirmed no source numeric fact is missing and no technical value changed."
+      },
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/usage.md",
+      "translation": "content/docs/pgbouncer/usage.de.md",
+      "language": "de",
+      "source_sha256": "e94529d92500d18554f8328678705d921f52ebb8e281ceb6f53b5aee91bc6668",
+      "translation_sha256": "d90ccdbfdae2ddae4af00fc719f2686731c2c4bfe8f2ff563fd599f6b819b2dd",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    },
+    {
+      "source": "content/docs/pgbouncer/usage.md",
+      "translation": "content/docs/pgbouncer/usage.ru.md",
+      "language": "ru",
+      "source_sha256": "e94529d92500d18554f8328678705d921f52ebb8e281ceb6f53b5aee91bc6668",
+      "translation_sha256": "0c571efc57cb0befec9922c4110d97a00cd7790bddae354ed8b9f3a8881d77c1",
+      "semantic_review": "pass",
+      "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "protected_diagnostics": []
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "source_pairs": 45,
+    "rendered_pages": 54,
+    "regression_tests": {
+      "passed": 9,
+      "skipped_in_final_run": 0
+    },
+    "make_check": {
+      "exit_code": 0,
+      "module": "github.com/pgsty/oink v1.2.0",
+      "note": "Full make check executed using the warmed module cache; no checks skipped or disabled."
+    },
+    "rendered_outputs": {
+      "en": {
+        "pages": 9,
+        "print_blocks": 2122
+      },
+      "zh": {
+        "pages": 9,
+        "print_blocks": 2122
+      },
+      "fr": {
+        "pages": 9,
+        "print_blocks": 2121
+      },
+      "ja": {
+        "pages": 9,
+        "print_blocks": 2120
+      },
+      "de": {
+        "pages": 9,
+        "print_blocks": 2122
+      },
+      "ru": {
+        "pages": 9,
+        "print_blocks": 2085
+      }
+    },
+    "local_links": {
+      "html_documents": 3217,
+      "status": "passed"
+    },
+    "routes": {
+      "documentation_pages": 1272,
+      "legacy_aliases": 1734,
+      "status": "passed"
+    },
+    "browser": {
+      "status": "passed",
+      "widths": [
+        1440,
+        390
+      ],
+      "page_visits": 108,
+      "interactive_searches": 12,
+      "same_page_language_switches": "passed in all five translated editions at both widths",
+      "document_overflow": "none",
+      "console_page_errors": "none"
+    },
+    "independent_review": "All source errata verified; DE/FR and JA/RU changes cross-reviewed; acceptance checker independently reviewed and all three discovered guard gaps fixed with regression tests.",
+    "commands": [
+      "python3 scripts/check-pgbouncer.py --rendered-dir <production-build>",
+      "PGBOUNCER_RENDERED_DIR=<production-build> python3 scripts/test-pgbouncer-parity.py",
+      "make check",
+      "PLAYWRIGHT_MODULE=<external/playwright> CHROME_EXECUTABLE=<external/chrome> node scripts/check-pgbouncer-browser.cjs <local-preview-url> <external-report-dir>"
+    ],
+    "shared_worktree_additional_commands": [
+      "python3 scripts/check-russian-parity.py --component pgbouncer --current-source --strict --rendered-dir <production-build>",
+      "python3 scripts/check-german-parity.py --component pgbouncer --current-source --rendered-dir <production-build>"
+    ],
+    "scope_note": "The earlier whole-worktree validation below includes parallel translation work. The scoped_commit_validation section records acceptance of HEAD plus only the PgBouncer commit candidate. Its helper is self-contained; the German utility gains only explicit component exclusion for pair comparisons, and the link utility is unchanged."
+  },
+  "delivery": {
+    "local": "accepted and ready for source delivery",
+    "git": "Scoped PgBouncer-only local source commit; no unrelated component changes included.",
+    "public": "Publication explicitly deferred by the user; no push or deploy.",
+    "remote_main": "8e61c3d0a39814f340ce8d7782b7cdc754cca862",
+    "local_head": "646aa4318c1276fc7d9a49c4f217a2eff0ff26e0",
+    "note": "Shared documents and site checks contain only PgBouncer changes relative to the committed baseline. Other component work remains in the working tree. Build/browser artifacts stay outside Git.",
+    "previously_pending_local_commits": 11
+  },
+  "completed_at": "2026-10-13T16:59:54.301332+08:00",
+  "scoped_commit_validation": {
+    "status": "passed",
+    "base_head": "646aa4318c1276fc7d9a49c4f217a2eff0ff26e0",
+    "scope": "Isolated checkout of the existing committed baseline plus only the PgBouncer documentation, validation scripts and review records; no parallel component work included.",
+    "changed_files": 64,
+    "source_pairs": 45,
+    "rendered_pages": 54,
+    "make_check": {
+      "exit_code": 0,
+      "hugo": "0.166.0+extended+withdeploy",
+      "module": "github.com/pgsty/oink v1.2.0",
+      "cache": "Warm Hugo module cache; no network downloads or generated artifacts included in Git."
+    },
+    "regression_tests": {
+      "passed": 9,
+      "skipped_in_final_rendered_run": 0
+    },
+    "routes": {
+      "documentation_pages": 958,
+      "legacy_aliases": 1286,
+      "status": "passed"
+    },
+    "local_links": {
+      "html_documents": 2438,
+      "status": "passed"
+    },
+    "browser": {
+      "status": "passed",
+      "widths": [
+        1440,
+        390
+      ],
+      "page_visits": 108,
+      "interactive_searches": 12,
+      "same_page_language_switches": "all five translated editions at both widths",
+      "document_overflow": "none",
+      "console_page_errors": "none"
+    },
+    "legacy_german_gate": "Retains global source/page coverage, missing-page and orphan checks; PgBouncer pair comparisons are explicitly delegated to the preceding complete PgBouncer source/rendered gate. The other 31 existing German pairs and prose in all 40 German files pass.",
+    "independent_review": "Standalone helper dependency and protection-boundary review passed. Commit scope, shared-file hunks, UTF-8 text types, metadata paths and exact source fingerprints independently checked.",
+    "publication": "Deferred by explicit user instruction; no push or deployment."
+  }
+}

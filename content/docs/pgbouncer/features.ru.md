@@ -26,7 +26,7 @@ upstream_link: "https://www.pgbouncer.org/features.html"
 
 - Для большинства параметров поддерживается изменение конфигурации без остановки обслуживания.
 
-- Поддерживается перезапуск и обновление без остановки обслуживания и разрыва клиентских соединений.
+- Поддерживаются [поэтапные перезапуски и обновления](/ru/docs/pgbouncer/usage/#shutdown-wait_for_clients) с использованием нескольких процессов и параметра [`so_reuseport`](/ru/docs/pgbouncer/config/#so_reuseport). Прежний перезапуск без остановки обслуживания (`-R`) удалён в версии 1.26.0.
 
 --------
 
@@ -37,7 +37,7 @@ upstream_link: "https://www.pgbouncer.org/features.html"
 | Возможность                      | Сеансовый режим  | Транзакционный режим   |
 |----------------------------------|:----------------:|:---------------------:|
 | Параметры запуска [^0]           | Да               |          Да           |
-| SET/RESET                        | Да               |        Никогда        |
+| SET/RESET                        | Да               | Для отслеживаемых параметров [^0] |
 | LISTEN                           | Да               |        Никогда        |
 | NOTIFY                           | Да               |          Да           |
 | WITHOUT HOLD CURSOR              | Да               |          Да           |
@@ -50,6 +50,6 @@ upstream_link: "https://www.pgbouncer.org/features.html"
 | Оператор LOAD                    | Да               |        Никогда        |
 | Сеансовые рекомендательные блокировки | Да           |        Никогда        |
 
-[^0]: Параметры запуска: `client_encoding`, `DateStyle`, `IntervalStyle`, `Timezone`, `standard_conforming_strings` и `application_name`. PgBouncer отслеживает их изменения и поэтому может гарантировать согласованные значения для клиента. Если PgBouncer должен поддерживать дополнительные параметры, см. [`track_extra_parameters`](/ru/docs/pgbouncer/config/#track_extra_parameters) и [`ignore_startup_parameters`](/ru/docs/pgbouncer/config/#ignore_startup_parameters).
+[^0]: Начиная с версии 1.26.0 PgBouncer отслеживает все сообщаемые сервером параметры, которые клиенты могут изменять: `application_name`, `client_encoding`, `DateStyle`, `default_transaction_read_only` (PostgreSQL 14+), `IntervalStyle`, `scram_iterations` (PostgreSQL 16+), `search_path` (PostgreSQL 18+), `session_authorization`, `standard_conforming_strings` и `TimeZone`. Для параметров, которые сервер не сообщает, отслеживаются только значения, заданные при запуске; последующие изменения через `SET` не отслеживаются. Подробности и сведения о параметрах, предоставляемых расширениями, см. в описаниях [`track_extra_parameters`](/ru/docs/pgbouncer/config/#track_extra_parameters) и [`ignore_startup_parameters`](/ru/docs/pgbouncer/config/#ignore_startup_parameters).
 
-[^1]: Чтобы включить эту поддержку, параметру [`max_prepared_statements`](/ru/docs/pgbouncer/config/#max_prepared_statements) необходимо присвоить ненулевое значение.
+[^1]: Поддержка подготовленных операторов на уровне протокола включается, когда параметр [`max_prepared_statements`](/ru/docs/pgbouncer/config/#max_prepared_statements) имеет ненулевое значение. По умолчанию он равен 200; значение 0 отключает эту поддержку. Операторы `PREPARE` / `DEALLOCATE` на уровне SQL остаются несовместимыми с транзакционным режимом пула, за исключением `DEALLOCATE ALL` и `DISCARD ALL` при включённом отслеживании.

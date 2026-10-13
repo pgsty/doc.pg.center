@@ -7,14 +7,14 @@ icon: fa-solid fa-bell-concierge
 module: [PGBOUNCER]
 categories: [Aufgabe]
 aliases: [/pgbouncer/usage/]
-upstream_link: "https://www.pgbouncer.org/usage.html"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/doc/usage.md"
 ---
 
 --------
 
 ## Zusammenfassung {#synopsis}
 
-    pgbouncer [-d][-R][-v][-u user] <pgbouncer.ini>
+    pgbouncer [-d][-v][-u user] <pgbouncer.ini>
     pgbouncer -V|-h
 
 Unter Windows stehen folgende Optionen zur Verfügung:
@@ -51,6 +51,8 @@ Statement-Pooling
 :   Die restriktivste Methode. Die Serververbindung wird unmittelbar nach Abschluss einer Abfrage in den Pool zurückgegeben. Transaktionen mit mehreren Anweisungen sind in diesem Modus nicht zulässig, da sie sonst nicht funktionieren würden.
 
 Die Administrationsoberfläche von **pgbouncer** umfasst einige zusätzliche `SHOW`-Befehle. Sie stehen bei einer Verbindung mit der speziellen „virtuellen“ Datenbank **pgbouncer** zur Verfügung.
+
+Seit Version 1.26.0 sendet PgBouncer bei der Anmeldung die `ParameterStatus`-Werte `pgbouncer.version`, `pgbouncer.pool_mode` und `pgbouncer.max_prepared_statements` an Clients. Treiber können anhand dieser Werte PgBouncer erkennen und ihr Verhalten anpassen. Die optionale Einstellung [`login_notify_message`](/de/docs/pgbouncer/config/#login_notify_message) sendet nach erfolgreicher Anmeldung eine Begrüßungsmeldung vom Typ NOTICE.
 
 --------
 
@@ -90,11 +92,10 @@ Die grundlegende Einrichtung und Verwendung erfolgen wie folgt:
         pgbouncer=# SHOW HELP;
         NOTICE:  Console usage
         DETAIL:
-          SHOW [HELP|CONFIG|DATABASES|FDS|POOLS|CLIENTS|SERVERS|SOCKETS|LISTS|VERSION|...]
+          SHOW [HELP|CONFIG|DATABASES|POOLS|CLIENTS|SERVERS|SOCKETS|LISTS|VERSION|...]
           SET key = arg
           RELOAD
           PAUSE
-          SUSPEND
           RESUME
           SHUTDOWN
           [...]
@@ -115,15 +116,6 @@ Die grundlegende Einrichtung und Verwendung erfolgen wie folgt:
     Protokollmeldungen mehr auf stderr ausgegeben.
 
     Hinweis: Funktioniert nicht unter Windows; dort muss **pgbouncer** als Dienst ausgeführt werden.
-
-`-R`, `--reboot`
-:   **VERALTET (DEPRECATED): Verwenden Sie statt dieser Option einen rollierenden Neustart mit mehreren pgbouncer-Prozessen, die mithilfe von so_reuseport am selben Port lauschen.**
-    Führt einen Online-Neustart durch. Dazu verbindet sich der neue Prozess mit dem laufenden Prozess,
-    übernimmt dessen offene Sockets und verwendet sie anschließend. Ist kein Prozess aktiv,
-    startet er normal.
-    Hinweis: Funktioniert nur, wenn das Betriebssystem Unix-Sockets unterstützt und `unix_socket_dir`
-    in der Konfiguration nicht deaktiviert ist. Funktioniert nicht unter Windows.
-    Funktioniert nicht mit TLS-Verbindungen; diese werden getrennt.
 
 `-u` _USERNAME_, `--user=` _USERNAME_
 :   Beim Start zum angegebenen Benutzer wechseln.
@@ -163,6 +155,7 @@ Zusätzlich darf sich der Benutzer **pgbouncer** ohne Passwort anmelden, sofern 
 Die Admin-Konsole unterstützt derzeit nur das einfache Abfrageprotokoll. Einige Treiber verwenden für alle Befehle das erweiterte Abfrageprotokoll und können daher nicht mit der Admin-Konsole verwendet werden.
 
 ### Anzeigebefehle {#show-commands}
+
 Die **SHOW**-Befehle geben Informationen aus. Jeder Befehl wird nachfolgend beschrieben.
 
 #### SHOW STATS {#show-stats}
@@ -205,6 +198,9 @@ total_server_parse_count
 total_bind_count
 :   Gesamtzahl der vorbereiteten Anweisungen, die von Clients zur Ausführung bereitgestellt und von **pgbouncer** an PostgreSQL weitergeleitet wurden. Nur bei der Nachverfolgung benannter vorbereiteter Anweisungen relevant, siehe `max_prepared_statements`.
 
+total_client_login_count
+:   Gesamtzahl erfolgreicher Clientanmeldungen.
+
 avg_xact_count
 :   Durchschnittliche Anzahl von Transaktionen pro Sekunde im letzten Statistikzeitraum.
 
@@ -230,17 +226,20 @@ avg_wait_time
 :   Wartezeit der Clients auf einen Server in Mikrosekunden (Durchschnitt der Wartezeiten für Clients, die während des aktuellen `stats_period` einem Backend zugewiesen wurden).
 
 avg_client_parse_count
-:   Durchschnittliche Zahl der von Clients erstellten vorbereiteten Anweisungen. Nur bei der Nachverfolgung benannter vorbereiteter Anweisungen relevant, siehe `max_prepared_statements`.
+:   Durchschnittliche Zahl der von Clients pro Sekunde erstellten vorbereiteten Anweisungen. Nur bei der Nachverfolgung benannter vorbereiteter Anweisungen relevant, siehe `max_prepared_statements`.
 
 avg_server_parse_count
-:   Durchschnittliche Zahl der von **pgbouncer** auf einem Server erstellten vorbereiteten Anweisungen. Nur bei der Nachverfolgung benannter vorbereiteter Anweisungen relevant, siehe `max_prepared_statements`.
+:   Durchschnittliche Zahl der von **pgbouncer** pro Sekunde auf einem Server erstellten vorbereiteten Anweisungen. Nur bei der Nachverfolgung benannter vorbereiteter Anweisungen relevant, siehe `max_prepared_statements`.
 
 avg_bind_count
-:   Durchschnittliche Zahl der vorbereiteten Anweisungen, die von Clients zur Ausführung bereitgestellt und von **pgbouncer** an PostgreSQL weitergeleitet wurden. Nur bei der Nachverfolgung benannter vorbereiteter Anweisungen relevant, siehe `max_prepared_statements`.
+:   Durchschnittliche Zahl der vorbereiteten Anweisungen, die pro Sekunde von Clients zur Ausführung bereitgestellt und von **pgbouncer** an PostgreSQL weitergeleitet wurden. Nur bei der Nachverfolgung benannter vorbereiteter Anweisungen relevant, siehe `max_prepared_statements`.
+
+avg_client_login_count
+:   Durchschnittliche Anzahl erfolgreicher Clientanmeldungen pro Sekunde.
 
 #### SHOW STATS_TOTALS {#show-stats_totals}
 
-Teilmenge von **SHOW STATS** mit den Gesamtwerten (**total_**).
+Zeigt die kumulierten Statistiken pro Datenbank, die den **total_**-Feldern von **SHOW STATS** entsprechen. Die ausgegebenen Spaltennamen tragen kein Präfix **total_**: Die Spalte **total_query_count** heißt hier beispielsweise **query_count**.
 
 #### SHOW STATS_AVERAGES {#show-stats_averages}
 
@@ -292,7 +291,7 @@ wait_us
 :   Nicht für Serververbindungen verwendet.
 
 close_needed
-:   1, wenn die Verbindung so schnell wie möglich geschlossen werden soll,
+:   1, wenn die Verbindung so schnell wie möglich geschlossen wird,
     weil das Neuladen einer Konfigurationsdatei oder eine DNS-Aktualisierung die
     Verbindungsinformationen geändert hat oder **RECONNECT** ausgeführt wurde.
 
@@ -306,7 +305,7 @@ remote_pid
 :   PID des Backend-Serverprozesses. Wurde die Verbindung über einen Unix-Socket hergestellt
     und unterstützt das Betriebssystem das Abrufen von Prozess-ID-Informationen, ist dies die
     Betriebssystem-PID. Andernfalls wird der Wert aus dem vom Server gesendeten Abbruchpaket entnommen;
-    bei einem PostgreSQL-Server sollte dies die PID sein, bei einer anderen PgBouncer-Instanz kann es eine Zufallszahl sein.
+    bei einem PostgreSQL-Server sollte dies die PID sein, bei einer anderen PgBouncer-Instanz ist es eine Zufallszahl.
 
 tls
 :   Eine Zeichenkette mit TLS-Verbindungsinformationen oder leer, wenn TLS nicht verwendet wird.
@@ -416,7 +415,7 @@ sv_active
 :   Serververbindungen, die mit einem Client verbunden sind.
 
 sv_active_cancel
-:   Serververbindungen, die derzeit eine Abbruchanforderung weiterleiten.
+:   Serververbindungen, die derzeit eine Abbruchanfrage weiterleiten.
 
 sv_being_canceled
 :   Serververbindungen, die normalerweise in den Leerlauf wechseln könnten, damit jedoch warten, bis alle noch laufenden Anforderungen zum Abbruch einer Abfrage auf diesem Server abgeschlossen sind.
@@ -451,7 +450,7 @@ load_balance_hosts
 
 Für jeden konfigurierten Peer wird ein neuer peer_pool-Eintrag erstellt.
 
-database
+peer_id
 :   ID des konfigurierten Peer-Eintrags.
 
 cl_active_cancel_req
@@ -461,14 +460,14 @@ cl_waiting_cancel_req
 :   Clientverbindungen, die Abbruchanfragen noch nicht an den Server weitergeleitet haben.
 
 sv_active_cancel
-:   Serververbindungen, die derzeit eine Abbruchanforderung weiterleiten.
+:   Serververbindungen, die derzeit eine Abbruchanfrage weiterleiten.
 
 sv_login
 :   Serververbindungen, deren Anmeldung gerade läuft.
 
 #### SHOW LISTS {#show-lists}
 
-Zeigt die folgenden internen Informationen in Spalten (nicht Zeilen) an:
+Zeigt die folgenden internen Listen und ihre Elementanzahl an. Jede Liste steht in einer eigenen Zeile mit den Spalten **list** und **items**:
 
 databases
 :   Anzahl der Datenbanken.
@@ -476,8 +475,14 @@ databases
 users
 :   Anzahl der Benutzer.
 
+peers
+:   Anzahl der konfigurierten Peers.
+
 pools
 :   Anzahl der Pools.
+
+peer_pools
+:   Anzahl der Peer-Pools.
 
 free_clients
 :   Anzahl freier Clients. Diese Clients sind getrennt, PgBouncer behält jedoch den für sie reservierten Speicher bei, um ihn für künftige Clients wiederzuverwenden und neue Speicherzuweisungen zu vermeiden.
@@ -512,10 +517,10 @@ name
 :   Der Benutzername.
 
 pool_size
-:   Benutzerspezifische Überschreibung von pool_size oder NULL, falls nicht gesetzt.
+:   Benutzerspezifische Überschreibung von pool_size oder eine leere Zeichenfolge, falls nicht gesetzt.
 
 reserve_pool_size
-:   Benutzerspezifische Überschreibung von reserve_pool_size oder NULL, falls nicht gesetzt.
+:   Benutzerspezifische Überschreibung von reserve_pool_size oder eine leere Zeichenfolge, falls nicht gesetzt.
 
 pool_mode
 :   Benutzerspezifische Überschreibung von pool_mode oder NULL, falls nicht gesetzt.
@@ -574,7 +579,7 @@ current_connections
 :   Aktuelle Anzahl der Serververbindungen für diese Datenbank.
 
 max_client_connections
-:   Maximale Anzahl zulässiger Clientverbindungen für diese PgBouncer-Instanz, wie durch max_db_client_connections pro Datenbank festgelegt.
+:   Maximale Anzahl zulässiger Clientverbindungen für diese Datenbank. Maßgeblich ist die datenbankspezifische Einstellung max_db_client_connections oder, falls nicht gesetzt, deren globaler Standardwert.
 
 current_client_connections
 :   Aktuelle Anzahl der Clientverbindungen für diese Datenbank.
@@ -598,39 +603,6 @@ port
 
 pool_size
 :   Maximale Anzahl der Serververbindungen, die zu diesem Peer hergestellt werden können.
-
-#### SHOW FDS {#show-fds}
-
-Interner Befehl – zeigt die Liste der verwendeten Dateideskriptoren mit ihrem internen Zustand.
-
-Wenn der verbundene Benutzer „pgbouncer“ heißt, sich über einen Unix-Socket verbindet und dieselbe UID wie der laufende Prozess besitzt, werden die tatsächlichen FDs über die Verbindung übertragen. Dieses Verfahren wird für einen Online-Neustart verwendet.
-Hinweis: Dies funktioniert nicht unter Windows.
-
-Da dieser Befehl außerdem die interne Ereignisschleife blockiert, sollte er nicht verwendet werden, während PgBouncer in Betrieb ist.
-
-fd
-:   Numerischer Wert des Dateideskriptors.
-
-task
-:   Einer der Werte **pooler**, **client** oder **server**.
-
-user
-:   Benutzer der Verbindung, die diesen FD verwendet.
-
-database
-:   Datenbank der Verbindung, die diesen FD verwendet.
-
-addr
-:   IP-Adresse der Verbindung, die den FD verwendet; **unix**, falls ein Unix-Socket verwendet wird.
-
-port
-:   Port der Verbindung, die den FD verwendet.
-
-cancel
-:   Abbruchschlüssel für diese Verbindung.
-
-link
-:   FD des zugehörigen Servers/Clients. NULL im Leerlauf.
 
 #### SHOW SOCKETS, SHOW ACTIVE_SOCKETS {#show-sockets-show-active_sockets}
 
@@ -689,7 +661,7 @@ Zeigt die PgBouncer-Version als Zeichenkette an.
 
 #### SHOW STATE {#show-state}
 
-Zeigt die Zustandseinstellungen von PgBouncer an. Mögliche Zustände sind active, paused und suspended.
+Zeigt die Zustandseinstellungen von PgBouncer an. Mögliche Zustände sind active und paused.
 
 ### Befehle zur Prozesskontrolle {#process-controlling-commands}
 
@@ -723,7 +695,7 @@ Nach Ausführung dieses Befehls kann es längere Zeit dauern, bis alle Serverver
 
 Trennt sofort alle Client- und Serververbindungen für die angegebene Datenbank oder für alle Datenbanken mit Ausnahme der Administrationsdatenbank.
 
-Neue Clientverbindungen zu einer Datenbank, für die **KILL** ausgeführt wurde, warten, bis **RESUME** aufgerufen wird.
+Neue Clientverbindungen zu einer Datenbank, für die KILL ausgeführt wurde, warten, bis **RESUME** aufgerufen wird.
 
 #### KILL_CLIENT id {#kill_client-id}
 
@@ -731,16 +703,9 @@ Trennt sofort die angegebene Clientverbindung sowie alle Serververbindungen des 
 
 Ein Beispielbefehl sieht etwa so aus: `KILL_CLIENT 1234`.
 
-#### SUSPEND {#suspend}
-
-Alle Socket-Puffer werden geleert, und PgBouncer nimmt auf diesen Sockets keine Daten mehr entgegen.
-Der Befehl kehrt erst zurück, wenn alle Puffer leer sind. Er ist für einen Online-Neustart von PgBouncer vorgesehen.
-
-Neue Clientverbindungen zu einer suspendierten Datenbank warten, bis **RESUME** aufgerufen wird.
-
 #### RESUME [db] {#resume-db}
 
-Nimmt den Betrieb nach einem vorherigen **KILL**-, **PAUSE**- oder **SUSPEND**-Befehl wieder auf.
+Nimmt den Betrieb nach einem vorherigen **KILL**- oder **PAUSE**-Befehl wieder auf.
 
 #### SHUTDOWN {#shutdown}
 

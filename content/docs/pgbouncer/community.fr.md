@@ -15,20 +15,22 @@ upstream_link: "https://www.pgbouncer.org/community.html"
 
 - [Comment configurer PgBouncer pour Postgres Plus Standard Server](https://get.enterprisedb.com/docs/Tutorial_All_PPSS_pgBouncer.pdf)
 
-Vue d'ensemble complète des concepts de PgBouncer.
+  Bonne vue d'ensemble des concepts de PgBouncer.
 
-- [À quoi sert le rebondissement ?](http://www.depesz.com/2012/12/02/what-is-the-point-of-bouncing/)
+- [Quel est l'intérêt du bouncing ?](http://www.depesz.com/2012/12/02/what-is-the-point-of-bouncing/)
 
-Explique les différences entre les modes de regroupement.
+  Explique les différences entre les modes de pooling.
 
 --------
 
-## Prise en charge {#support}
+## Assistance {#support}
 
 - [Page du projet](https://github.com/pgbouncer/pgbouncer) sur GitHub
 
 - [Suivi des problèmes](https://github.com/pgbouncer/pgbouncer/issues) sur GitHub
 
 - [Section PgBouncer sur Stack Overflow](https://stackoverflow.com/questions/tagged/pgbouncer)
+
+- [Salon de discussion](https://gitter.im/pgbouncer/pgbouncer) sur Gitter
 
 - [Discussions de la communauté](https://github.com/pgbouncer/pgbouncer/discussions) sur GitHub

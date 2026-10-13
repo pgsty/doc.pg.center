@@ -15,20 +15,22 @@ upstream_link: "https://www.pgbouncer.org/community.html"
 
 - [Postgres Plus Standard Server 用に PgBouncer を設定する方法](https://get.enterprisedb.com/docs/Tutorial_All_PPSS_pgBouncer.pdf)
 
-PgBouncer の概念についての良い概要。
+  PgBouncer の概念についての良い概要。
 
-- [バウンシングの意味とは何か。](http://www.depesz.com/2012/12/02/what-is-the-point-of-bouncing/)
+- [バウンシングの意味とは何か？](http://www.depesz.com/2012/12/02/what-is-the-point-of-bouncing/)
 
-プーリングモードの違いについて説明します。
+  プーリングモードの違いについて説明します。
 
 --------
 
 ## サポート {#support}
 
-- [プロジェクトページ](https://github.com/pgbouncer/pgbouncer) を GitHub で查看
+- [プロジェクトページ](https://github.com/pgbouncer/pgbouncer)（GitHub）
 
-- [イシュー トラッカー](https://github.com/pgbouncer/pgbouncer/issues) を GitHub で利用
+- [イシュートラッカー](https://github.com/pgbouncer/pgbouncer/issues)（GitHub）
 
-- [PgBouncer セクション](https://stackoverflow.com/questions/tagged/pgbouncer)  at Stack Overflow
+- [PgBouncer セクション](https://stackoverflow.com/questions/tagged/pgbouncer)（Stack Overflow）
 
-- [GitHub でのコミュニティディスカッション](https://github.com/pgbouncer/pgbouncer/discussions)
+- [チャットルーム](https://gitter.im/pgbouncer/pgbouncer)（Gitter）
+
+- [コミュニティディスカッション](https://github.com/pgbouncer/pgbouncer/discussions)（GitHub）

@@ -6,8 +6,104 @@ icon: fa-solid fa-scroll
 module: [PGBOUNCER]
 categories: [リファレンス]
 aliases: [/pgbouncer/changelog/]
-upstream_link: "https://www.pgbouncer.org/changelog.html"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEWS.md"
 ---
+
+--------
+
+## PgBouncer 1.26.x {#pgbouncer-126x}
+
+**2026-09-23  -  PgBouncer 1.26.0  -  「これまでのすべての search_path を無視」**
+
+- セキュリティ
+    * CVE-2026-19888 の修正：1.26.0 より前の PgBouncer は、SCRAM client-final-message に nonce が含まれていることをチェックしていませんでした。認証されていないリモート攻撃者は、nonce を含まない client-final-message を送信することで PgBouncer をクラッシュさせることができました。存在しないユーザーについても同様です。PgBouncer はそのようなユーザーに対して模擬的な SCRAM 交換を実行するためです。このバグは、PgBouncer 1.11.0 で SCRAM サポートが追加されて以来存在していました。
+    * CVE-2026-6668 の修正：1.26.0 より前の PgBouncer におけるパケットバッファ拡張ロジックの整数オーバーフローにより、PgBouncer が無限ループでハングする可能性がありました。これには単一のパケットバッファに大量のデータを送信する必要がありますが、`max_packet_size` がデフォルト値のままの場合、事前に認証しなくても可能です。PgBouncer はシングルスレッドであるため、このハングが発生すると、プロセスが強制終了されるまでどのクライアントにも対応できなくなっていました。
+    * CVE-2026-6669 の修正：1.26.0 より前の PgBouncer は、サーバーから受け入れる SCRAM イテレーション回数に上限を設けていませんでした。悪意のある、または侵害された PostgreSQL サーバーは、単一のログイン中に PgBouncer に無制限の作業を行わせ、その間に他のすべてのクライアントとデータベースへの対応を停止させることができました。イテレーション回数は現在、最大 1000000 である必要があります。
+- 機能
+    * PostgreSQL がデフォルトで報告するすべてのパラメータを追跡するようになりました。特に重要な点として、`search_path`（PostgreSQL 18 以上）と `default_transaction_read_only`（PostgreSQL 14 以上）がデフォルトで追跡されるようになります。以前は、トランザクションプーリングモードで `SET search_path` や `SET default_transaction_read_only = true` を実行したクライアントが、後から同じサーバー接続を使用する他のクライアントに影響を与える可能性がありました。([#1580], [#1573])
+    * しばらく使用されていないプールをクリーンアップする `pool_idle_timeout` 設定を追加しました。これは、頻繁に接続しない多数の異なるユーザーが存在する構成で有用です。この設定を有効にしない場合、そのような構成ではプールの数が無制限に増加します。プールを削除するとその統計情報も失われるため、この設定はデフォルトで無効になっています。([#1491])
+    * `query_wait_timeout` をユーザーごとおよびデータベースごとに設定できるようになりました。([#1449])
+    * `SHOW STATS` に `client_login_count` 統計を追加しました。これはクライアントのログイン成功をカウントします。これにより、接続を頻繁に張り替えるクライアントを検出できます。([#1457])
+    * ログイン時に、PgBouncer 固有の `ParameterStatus` メッセージ（`pgbouncer.version`、`pgbouncer.pool_mode`、`pgbouncer.max_prepared_statements`）をクライアントに送信するようになりました。これにより、クライアントとドライバーは、PgBouncer 経由で接続していることを検出し、それに応じて動作を調整できます。([#1490])
+    * `login_notify_message` 設定を追加しました。設定すると、その値はクライアントのログイン後に NOTICE メッセージとして送信されます。これにより、クライアントが PostgreSQL に直接接続しているのではなく PgBouncer 経由で接続していることを明確にできます。([#1488])
+    * UCRT64 環境を使用した Windows ビルドを含む、meson による PgBouncer のビルドサポートを追加しました。Autoconf によるビルドも引き続きサポートされます。([#1524], [#1426], [#1568], [#1585], [#1602], [#1607])
+    * ロゴを追加しました。([#1609])
+- 変更点
+    * 非推奨となっていたオンライン再起動（`-R`、別名テイクオーバー）機能を、それをサポートするためだけに存在していた `SHOW FDS` および `SUSPEND` 管理コマンドとともに削除しました。代わりに、[`so_reuseport` を使ったローリング再起動][rolling-restart-docs]を使用してください。([#1581])
+    * パスワードの最大長を、libpq に合わせて 65535 バイトに増やしました。([#1310], [#1520])
+    * `auth_query` が `NULL` のユーザー名を返した場合に、エラーとして扱うのではなく、行が返されなかった場合と同じように扱うようにしました。([#1569])
+    * 管理データベースで `SET extra_float_digits` を受け入れるようになりました。新しい PostgreSQL JDBC ドライバーが接続確立時に送信してくるためです。([#1550])
+    * `mkauth.py` が、出力ファイルとして `-` を渡すことで stdout に書き込めるようになりました。([#1514])
+    * OpenSSL 3 に対してビルドした場合に、クライアントからの予期しない EOF に関するノイズの多いエラーをログに出力しないようにしました。([#1507])
+    * OpenSSL 3 に対してビルドした場合に、TLS エラーメッセージに基となるシステムエラーを含めるようにしました。([#1492])
+    * C11 コンパイラを必須にしました。([#1417])
+    * サーバー接続がエビクトされた原因となった上限をログに記録するようになりました。切断理由は、単なる `evicted` ではなく、`evicted for max_db_connections`、`evicted for pool_size`、`evicted for max_user_connections` になりました。([#1597])
+- 修正
+    * トランザクションプーリングモードで、遅延した `COPY` メッセージがプール枯渇を引き起こす問題を修正しました。これにより、トランザクションプーリングモードでは明示的なトランザクションの外でも `COPY` が動作するようになりました。([#1471])
+    * LDAP URL の最大長を増やすことで、長い DN による LDAP 認証の失敗を修正しました。([#1497])
+    * SCRAM パススルーが強制ユーザーのキャッシュされた資格情報を破損する問題を修正しました。この問題により、本物のサーバーが SCRAM プルーフを拒否するため、サーバーログインが失敗していました。([#1612])
+    * サーバーへの再接続後に、保存された SCRAM シークレットで SCRAM パススルーが「password is SCRAM secret but client authentication did not provide SCRAM keys」というエラーで失敗する問題を修正しました。([#1504]、バグは 1.25.1 で導入)
+    * レプリケーションクライアントの切断時に、そのサーバー接続がまだログイン中だった場合に発生する use-after-free クラッシュを修正しました。([#1577])
+    * プールが満杯の場合の、レプリケーションクライアントに対するアイドルサーバー接続のエビクションを修正しました。以前は、単一のレプリケーションクライアントが、1 つだけではなくプール内のすべてのアイドルサーバーをエビクトする可能性があり、予約プールやキャンセル要求のためにプールが `pool_size` を超えてサーバーを保持している場合は、エビクションがまったく発生しませんでした。([#1597])
+    * パケットがパケットバッファの境界にまたがる場合（例えば、長い値を指定した `SET application_name`）に TLS 接続が停滞する問題を修正しました。([#1531])
+    * 1 つのバッチが `Sync` を挟まずに `Parse` メッセージと `Close` メッセージを混ぜる場合に、プリペアドステートメントの応答が誤った順序で送信される問題を修正しました。([#1555])
+    * `track_extra_parameters` にリストされているパラメータのうちサーバーが報告しないものが、クライアントがスタートアップパケットで設定した場合に不正な動作を引き起こす問題を修正しました。([#1576])
+    * サーバーがログインパケットを複数の TCP パケットに分割する場合（例えば、PgBouncer と PostgreSQL の間にもう 1 つプロキシがある場合）にログインに失敗する問題を修正しました。([#1446])
+    * 実行中のクエリがない場合に `query_timeout` が接続を閉じる問題を修正しました。([#1395])
+    * すぐに利用可能なサーバーが存在しない場合に、`NegotiateProtocolVersion` メッセージを重複して送信する問題を修正しました。([#1460])
+    * `SHOW USERS` の `pool_size` 列が、設定されていないユーザーに対して値を表示する問題を修正しました。([#1489])
+    * `ENABLE` 管理コマンドのエラーメッセージを修正しました。([#1308])
+    * `struct asn1_string_st` を不透明にする将来の OpenSSL バージョンに対するコンパイルを修正しました。([#1440])
+    * スタック上の機密性の高い暗号データの消去が、コンパイラの最適化によって除去されないようにしました。([#1508])
+    * Windows で clang を使用した `pgbevent.dll` のリンクを修正しました。([#1571])
+    * リリース tarball 内のルートレベルのファイルのパスを修正しました。これらは `pgbouncer-X.Y.Z/configure` ではなく `pgbouncer-X.Y.Z/./configure` として格納されていました。([#1549])
+    * 設定から `track_extra_parameters` を読み込む際のメモリリークを修正しました。([#1510])
+    * プロトコル拡張パラメータ（`_pq_.` プレフィックス）を含むスタートアップパケットごとのメモリリークを修正しました。これは、認証されていないクライアントによって引き起こすことができました。([#1540])
+
+[rolling-restart-docs]: /ja/docs/pgbouncer/usage/#shutdown-wait_for_clients
+[#1308]: https://github.com/pgbouncer/pgbouncer/pull/1308
+[#1310]: https://github.com/pgbouncer/pgbouncer/pull/1310
+[#1395]: https://github.com/pgbouncer/pgbouncer/pull/1395
+[#1417]: https://github.com/pgbouncer/pgbouncer/pull/1417
+[#1426]: https://github.com/pgbouncer/pgbouncer/pull/1426
+[#1440]: https://github.com/pgbouncer/pgbouncer/pull/1440
+[#1446]: https://github.com/pgbouncer/pgbouncer/pull/1446
+[#1449]: https://github.com/pgbouncer/pgbouncer/pull/1449
+[#1457]: https://github.com/pgbouncer/pgbouncer/pull/1457
+[#1460]: https://github.com/pgbouncer/pgbouncer/pull/1460
+[#1471]: https://github.com/pgbouncer/pgbouncer/pull/1471
+[#1488]: https://github.com/pgbouncer/pgbouncer/pull/1488
+[#1489]: https://github.com/pgbouncer/pgbouncer/pull/1489
+[#1490]: https://github.com/pgbouncer/pgbouncer/pull/1490
+[#1491]: https://github.com/pgbouncer/pgbouncer/pull/1491
+[#1492]: https://github.com/pgbouncer/pgbouncer/pull/1492
+[#1497]: https://github.com/pgbouncer/pgbouncer/pull/1497
+[#1504]: https://github.com/pgbouncer/pgbouncer/pull/1504
+[#1507]: https://github.com/pgbouncer/pgbouncer/pull/1507
+[#1508]: https://github.com/pgbouncer/pgbouncer/pull/1508
+[#1510]: https://github.com/pgbouncer/pgbouncer/pull/1510
+[#1514]: https://github.com/pgbouncer/pgbouncer/pull/1514
+[#1520]: https://github.com/pgbouncer/pgbouncer/pull/1520
+[#1524]: https://github.com/pgbouncer/pgbouncer/pull/1524
+[#1531]: https://github.com/pgbouncer/pgbouncer/pull/1531
+[#1540]: https://github.com/pgbouncer/pgbouncer/pull/1540
+[#1549]: https://github.com/pgbouncer/pgbouncer/pull/1549
+[#1550]: https://github.com/pgbouncer/pgbouncer/pull/1550
+[#1555]: https://github.com/pgbouncer/pgbouncer/pull/1555
+[#1568]: https://github.com/pgbouncer/pgbouncer/pull/1568
+[#1569]: https://github.com/pgbouncer/pgbouncer/pull/1569
+[#1571]: https://github.com/pgbouncer/pgbouncer/pull/1571
+[#1573]: https://github.com/pgbouncer/pgbouncer/pull/1573
+[#1576]: https://github.com/pgbouncer/pgbouncer/pull/1576
+[#1577]: https://github.com/pgbouncer/pgbouncer/pull/1577
+[#1580]: https://github.com/pgbouncer/pgbouncer/pull/1580
+[#1581]: https://github.com/pgbouncer/pgbouncer/pull/1581
+[#1585]: https://github.com/pgbouncer/pgbouncer/pull/1585
+[#1597]: https://github.com/pgbouncer/pgbouncer/pull/1597
+[#1602]: https://github.com/pgbouncer/pgbouncer/pull/1602
+[#1607]: https://github.com/pgbouncer/pgbouncer/pull/1607
+[#1609]: https://github.com/pgbouncer/pgbouncer/pull/1609
+[#1612]: https://github.com/pgbouncer/pgbouncer/pull/1612
 
 --------
 
@@ -16,21 +112,21 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 **2026-05-08  -  PgBouncer 1.25.2  -  「不確実性に満ちたタイトル争いに、新鮮な一撃が加わる」**
 
 - セキュリティ
-  * CVE-2026-6664 の修正：1.25.2 以前の PgBouncer において、ネットワークパケット解析コードに整数オーバーフローが存在し、境界チェックを回避してクラッシュを引き起こす可能性があります。認証されていないリモート攻撃者は、不正な SCRAM 認証パケットを送信することで PgBouncer をクラッシュさせることができます。
-  * CVE-2026-6665 の修正：1.25.2 以前の PgBouncer における SCRAM コードは、SCRAM クライアント最終メッセージの内容を構築する際に `strlcat()` の戻り値を正しくチェックしていなかった。悪意あるバックエンドが長い nonce を含む SCRAM サーバー最終メッセージを送信すると、スタックオーバーフローを引き起こす可能性がある。
-  * CVE-2026-6666 の修正：1.25.2 以前の PgBouncer では、サーバーが SQLSTATE フィールドを含まないエラー応答を送信した場合、ヌルポインタ参照の可能性があり、クラッシュを引き起こすおそれがあります。
-  * CVE-2026-6667 を修正：1.25.2 以前の PgBouncer では、`KILL_CLIENT` 管理コマンドに対する適切な権限チェックが行われていませんでした。管理コンソールにアクセスできるすべてのユーザーがこのコマンドを実行できました。このコマンドは、`admin_users` パラメータにリストされたユーザーにのみ許可されるべきです。
+  * CVE-2026-6664 の修正：1.25.2 より前の PgBouncer には、ネットワークパケット解析コードに整数オーバーフローがあり、境界チェックを回避してクラッシュを引き起こす可能性がありました。認証されていないリモート攻撃者は、不正な SCRAM 認証パケットを送信することで PgBouncer をクラッシュさせることができました。
+  * CVE-2026-6665 の修正：1.25.2 より前の PgBouncer の SCRAM コードは、SCRAM client-final-message の内容を構築する際に `strlcat()` の戻り値を正しくチェックしていませんでした。悪意あるバックエンドが長い nonce を含む SCRAM server-final-message を送信すると、スタックオーバーフローを引き起こす可能性がありました。
+  * CVE-2026-6666 の修正：1.25.2 より前の PgBouncer では、サーバーが SQLSTATE フィールドを含まないエラー応答を送信した場合に、NULL ポインタ参照によるクラッシュが発生する可能性がありました。
+  * CVE-2026-6667 の修正：1.25.2 より前の PgBouncer では、`KILL_CLIENT` 管理コマンドに対する適切な権限チェックが行われていませんでした。管理コンソール（コンソール自体へのアクセスにも認可が必要です）にアクセスできるすべてのユーザーがこのコマンドを実行できました。このコマンドは、`admin_users` パラメータにリストされたユーザーにのみ許可されるべきでした。
 
 - 修正
-  * `default_pool_size` パラメータのドキュメントを明確にします。
-  * ドキュメントは `client_tls13_ciphers` および `server_tls13_ciphers` に対して正しく記述されています。
+  * `default_pool_size` パラメータのドキュメントを明確にしました。
+  * `client_tls13_ciphers` および `server_tls13_ciphers` のドキュメントを修正しました。
 
 **2025-12-03  -  PgBouncer 1.25.1  -  「クリスマス前に多数のバグを修正」**
 
 - セキュリティ
   * CVE-2025-12819 の修正：このリリース以前は、認証中に悪意ある search_path パラメータを StartupMessage で提供することで、未認証の攻撃者が任意の SQL を実行できる可能性がありました。次のすべての設定を有するシステムは脆弱です：
 
-    1. `track_extra_parameters` には search_path が含まれます（非デフォルトの設定で、おそらく Citus または PostgreSQL 18 を使用する設定でのみ構成されています）。
+    1. `track_extra_parameters` には search_path が含まれます（非デフォルトの設定で、おそらく Citus または PostgreSQL 18 を使用する設定でのみ構成されています）
     2. `auth_user` が空でない文字列に設定されている（デフォルト以外の設定）
     3. `auth_query` は完全修飾オブジェクト名を指定せずに設定されています（デフォルト設定、< 演算子はスキーマ修飾されていない）
 
@@ -52,7 +148,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 **2025-11-09  -  PgBouncer 1.25.0  -  「LDAPサポート付きのバージョン」**
 
 - 機能
-    * LDAP 認証を追加できます。HBA ファイルまたは `auth_ldap_options` を使用して設定できます。([#731])
+    * LDAP 認証を追加しました！HBA ファイルまたは `auth_ldap_options` を使用して設定できます。([#731])
     * クライアント側の直接TLS接続をサポートしました。これにより、PostgreSQL 17で導入されたより高速なTLS接続セットアップがクライアントで利用可能になります。PgBouncerは現在、このより高速な接続セットアップを使用してPostgreSQLサーバーに接続することはできません。([#1359])
     *  クライアント接続のアイドル状態を `SHOW CLIENTS` に追加します。 ([#1191])
     *  `transaction_timeout` の設定を、グローバルおよびユーザー単位で追加します。([#1242])
@@ -66,9 +162,9 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
     * PAMキューが満杯になったことを警告としてログ出力する。これにより、この原因で遅延が発生しているクエリの原因を特定しやすくなる。([#1297])
     *  `RELOAD` コマンドは、再読み込み中に発生したエラーを報告するようになりました。([#1231])
     * シャットダウン中に管理者接続用に PgBouncer の UNIX ソケットへのアクセスを有効化します。これにより、オペレーターが PgBouncer プロセスがシャットダウンしない原因を確認しやすくなり、スタックした接続に対して手動で `KILL_CLIENT` を実行できるようになります。([#1305])
-    * `mkauth.py` を変更して、不要な第三フィールドを追加しなくなるようにする ([#1365])
+    * `mkauth.py` を、廃止された第三フィールドを追加しないように変更しました ([#1365])
     *  `FATAL` メッセージを `disconnect_client` および `disconnect_server` 関数で改善しました。 ([#1382])
-    * 非推奨となった OpenSSL 関数 `EVP_PKEY_get0_EC_KEY` の使用を停止してください。これにより、特定の FIPS 実装で問題が発生する可能性があります。([#1384])
+    * 非推奨となった OpenSSL 関数 `EVP_PKEY_get0_EC_KEY` の使用を停止しました。この関数は特定の FIPS 実装で問題を引き起こす可能性がありました。([#1384])
 - 修正内容
     * 長さ 1024 文字以上のパスワードを含むクラッシュを修正しました。([#1215])
     * 複数ホスト接続を `server_tls_sslmode=verify-full` を使用する際に修正しました。 ([#1303])
@@ -102,13 +198,13 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 
 ## PgBouncer 1.24.x {#pgbouncer-124x}
 
-**2025-04-16  -  PgBouncer 1.24.1  -  "CVE-2025-2291 VALID UNTIL yesterday**
+**2025-04-16  -  PgBouncer 1.24.1  -  "CVE-2025-2291 VALID UNTIL yesterday"**
 
 - セキュリティ
   * CVE-2025-2291 の修正：以前、PgBouncer は auth_query を使用してパスワードハッシュを照会する際に、ユーザーのパスワードの VALID UNTIL を考慮していませんでした。したがって、Postgres の前に透明なプロキシとして PgBouncer を使用している場合、すでに有効期限が切れたパスワードが許可される可能性がありました。この問題を解決するため、デフォルトの auth_query およびドキュメント内のカスタム auth_query 関数の例が、VALID UNTIL を考慮するように変更されました。カスタム auth_query を使用している場合は、それに合わせて更新してください。デフォルトの auth_query を使用している場合、PgBouncer 1.24.1 にアップグレードするか、以前のバージョンの PgBouncer で設定を変更して新しいデフォルトの auth_query を使用できます。
 
 - 修正
-  * PAM 認証を修正するために、HBA ファイル内の `pam` 認証サポートを元に戻してください。([#1291]) (1.24.0 で導入されたバグ)
+  * HBA ファイル内の `pam` 認証サポートを元に戻すことで、PAM サポートを修正しました。([#1291]) (1.24.0 で導入されたバグ)
   * ユーザ接続数を減算する際のバグを修正しました。この修正は GitHub のタグ 1.24.0 に含まれていましたが、リリース用の tarball にはこの修正が含まれていませんでした。 ([#1238]) (1.24.0 で導入されたバグ)
   * `test_load_balance_hosts.py` をリリース tarball に追加しました。([#1282])
   * テストの問題を修正し、Debian パッケージャーがテストを実行できるようにします。([#1266], [#1250])
@@ -123,23 +219,23 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 [#1250]: https://github.com/pgbouncer/pgbouncer/pull/1250
 [#1245]: https://github.com/pgbouncer/pgbouncer/pull/1245
 
-**2025-01-10  -  PgBouncer 1.24.0  -  "New year, new bouncer**
+**2025-01-10  -  PgBouncer 1.24.0  -  "New year, new bouncer"**
 
 - 機能
   * systemd 用に `Type=notify-reload` をサポート。この機能には systemd バージョン 253 以降が必要です。([#1148])
   * 管理コンソールに `KILL_CLIENT` コマンドを追加します。これにより、クライアント接続を強制的に終了できます。([#1147])
-  * にグローバルおよびユーザー単位で `max_user_client_connections` 設定を追加します。([#1137])
-  * に `max_db_client_connections` 設定を、グローバルレベルおよびデータベースレベルで追加します。([#1138])
+  * `max_user_client_connections` 設定を、グローバルおよびユーザー単位で追加します。([#1137])
+  * `max_db_client_connections` 設定を、グローバルレベルおよびデータベースレベルで追加します。([#1138])
   * `current_client_connections`カウンタを`SHOW USERS`および`SHOW DATABASES`の出力に追加します。([#1137], [#1138])
-  * に `load_balance_hosts` パラメータを追加し、ホスト間のロードバランシングを**行わない**ようにサポートします。([#736])
-  * で準備済みステートメントの使用カウンタを `SHOW STATS` に公開する。([#1192])
-  * に `client_idle_timeout` 設定を追加します。 ([#1189])
+  * ホスト間のロードバランシングを**行わない**ことをサポートするための `load_balance_hosts` パラメータを追加します。([#736])
+  * プリペアドステートメントの使用カウンタを `SHOW STATS` で公開します。([#1192])
+  * `client_idle_timeout` 設定を追加します。([#1189])
   * ユーザーレベルで `query_timeout` および `reserve_pool_size` を追加します。 ([#1180], [#1228])
   * HBA ファイルで `pam` 認証サポートを有効化します。([#326])
 
 - 変更
-  * RELOAD の際、TLS 設定が変更されていない場合は接続を再利用しない。以前は TLS 接続がある場合、すべての接続が RELOAD で再利用され、一時的に深刻なパフォーマンス低下を引き起こしていた。現在は TLS 設定が実際に変更された場合にのみ、この再利用が行われる。([#1157])
-  * プリペアドステートメントのサポートをデフォルトで有効化し、`max_prepared_statements` のデフォルト値は now 200 に設定されています。このデフォルト値の変更は、実際にプリペアドステートメントを使用するクライアントにのみ影響します。プリペアドステートメントを使用する場合は、[ドキュメント][prepared-docs] でプリペアドステートメントサポートの制限事項について確認することを推奨します ([#1144])
+  * TLS 設定が変更されていない場合、RELOAD で接続を切断して作り直さないようにしました。以前は、TLS 接続がある場合、RELOAD によってすべての接続が作り直され、一時的ながら深刻なパフォーマンス低下を引き起こす可能性がありました。現在は、TLS 設定が実際に変更された場合にのみ、接続を作り直します。([#1157])
+  * プリペアドステートメントのサポートをデフォルトで有効化し、`max_prepared_statements` のデフォルト値は 200 に設定されました。このデフォルト値の変更は、実際にプリペアドステートメントを使用するクライアントにのみ影響します。プリペアドステートメントを使用する場合は、[ドキュメント][prepared-docs] でプリペアドステートメントサポートの制限事項について確認することを推奨します ([#1144])
   * ソケット/クライアント/サーバーは、管理者出力で一意の ID で識別できるようになりました。以前はポインタで識別されていましたが、切断後に新しいクライアントがそのポインタを再利用することがよくありました。([#1172])
   * pidfile が空の場合のエラーを明確にしました。([#1195])
   * クライアントに `server_login_retry` の障害発生時に元のエラーを返します。([#1152])
@@ -194,14 +290,14 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
   * PgBouncer が設定を再読み込みした後に発生する可能性のあるセグメンテーションフォールトを修正しました。([#1105]) (1.23.0 で導入されたバグ)
   * 既知の put_in_order のクラッシュをすべて修正しました。([#1120])
     (1.23.0 で新たなクラッシュが導入されました)
-  * テストに必要なファイルをリリース用 tarball に追加してください。
+  * テストに必要なファイルをリリース tarball に追加しました。
     ([#1124]) (これらのファイルは 1.23.0 で導入されました)
 
 [#1120]: https://github.com/pgbouncer/pgbouncer/pull/1120
 [#1105]: https://github.com/pgbouncer/pgbouncer/pull/1105
 [#1124]: https://github.com/pgbouncer/pgbouncer/pull/1124
 
-**2024-07-03  -  PgBouncer 1.23.0  -  "Into the new beginnings**
+**2024-07-03  -  PgBouncer 1.23.0  -  "Into the new beginnings"**
 
 - 機能
   * ローリング再起動のサポートを追加しました。SIGTERM はもはや PgBouncer プロセスの即時シャットダウンを引き起こしなくなりました。代わりに「スーパー安全シャットダウン」を実行します。すべてのクライアントが切断されるのを待ってからシャットダウンを行います。新しい SIGTERM の振る舞いにより、ロードバランサーの背後にある複数の PgBouncer プロセスのローリング再起動、または `so_reuseport` で同じポートをリッスンしている場合の再起動が可能になります。これは **マイナーな破壊的変更** です。Dockerfile や Systemd サービスファイルで旧来の SIGTERM の振る舞いに依存していた場合は、今後は SIGQUIT を使用する必要があります。([#902])
@@ -211,7 +307,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
   * PgBouncer を介したレプリケーション接続のサポートを追加しました。([#876])
 
 - 変更
-  * `SHOW USERS`接続の出力リストを改善します。([#1040])
+  * `SHOW USERS` の出力の接続一覧を改善しました。([#1040])
   * ユーザーごとの `pool_size` 設定を許可します。([#1049])
   * データベースごとに `server_lifetime` 設定を許可する。([#1057])
   * `SHOW USERS` の出力で動的に作成されたユーザーを一覧表示する機能を追加しました。([#1052])
@@ -223,8 +319,8 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
   * 大容量および部分的なスタートアップパケットの処理に関する問題を修正しました。([#1058])
   * 起動パラメータの options に `--config=value` 形式のサポートを追加します。([#1064])
   * `avg_wait_time`のメトリクス計算を修正しました。([#727])
-  * クライアントとの間でポストグレSQLプロトコルバージョンのネゴシエーションをサポートする。([#1007])
-  * に `auth_query` の保留中のリクエストを追加します。 ([#1034])
+  * クライアントとの間で PostgreSQL プロトコルバージョンをネゴシエーションするサポートを追加しました。([#1007])
+  * `auth_query` の保留中リクエストを追加しました。([#1034])
   * ドキュメントおよびCIの改善を複数実施。
 
 [#996]: https://github.com/pgbouncer/pgbouncer/pull/996
@@ -258,10 +354,10 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 [#1025]: https://github.com/pgbouncer/pgbouncer/pull/1025
 [#1026]: https://github.com/pgbouncer/pgbouncer/pull/1026
 
-**2024-01-31  -  PgBouncer 1.22.0  -  "DEALLOCATE ALL**
+**2024-01-31  -  PgBouncer 1.22.0  -  "DEALLOCATE ALL"**
 
 - 機能
-  * 、`max_prepared_statements` が非ゼロ値に設定されている場合に `DEALLOCATE ALL` および `DISCARD ALL` をサポートします（通常の `DEALLOCATE` は依然として非対応）([#972])
+  * `max_prepared_statements` が非ゼロ値に設定されている場合に `DEALLOCATE ALL` および `DISCARD ALL` をサポートしました（通常の `DEALLOCATE` は依然として非対応）([#972])
   * データベースごとに `auth_query` の設定をサポートしています ([#979])
 
 - 変更
@@ -289,7 +385,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 **2023-10-16  -  PgBouncer 1.21.0  -  「プリペアドステートメント対応版」**
 
 - 機能
-  * プロトコルレベルの名前付き準備ステートメントをサポートしました！これは PgBouncer で最も要望の多かった機能の一つです。準備ステートメントを PgBouncer と併用することで、システムの CPU 負荷を大幅に削減できます（PgBouncer 側および PostgreSQL 側の両方で）。合成ベンチマークでは、ワークロードによってはクエリスループットを 15% から 250% まで向上させることが確認されています。この新機能の恩恵を受けるには、新しい `max_prepared_statements` 設定を 0 以外の値に変更する必要があります（正確な値はワークロードによりますが、100 が妥当な値である可能性があります）。この機能の動作方法、制限事項、および値のチューニング方法については、[`max_prepared_statements`](/ja/docs/pgbouncer/config/#max_prepared_statements) のドキュメントを参照してください。設定後は、クライアントライブラリが実際に準備ステートメントを使用していることを確認する必要があります。その方法は各クライアントごとに異なりますので、使用しているクライアントのドキュメントを確認してください。この機能はリリース前に十分なテストを実施していますが、機能の複雑さからパフォーマンス上の問題やバグが存在する可能性は十分にあります。そのような問題を発見した場合は、報告してください。([#845])
+  * プロトコルレベルの名前付きプリペアドステートメントをサポートしました！これは PgBouncer で最も要望の多かった機能の一つです。プリペアドステートメントを PgBouncer と併用することで、システムの CPU 負荷を大幅に削減できます（PgBouncer 側および PostgreSQL 側の両方で）。合成ベンチマークでは、ワークロードによってはクエリスループットを 15% から 250% まで向上させることが確認されています。この新機能の恩恵を受けるには、新しい `max_prepared_statements` 設定を 0 以外の値に変更する必要があります（正確な値はワークロードによりますが、100 が妥当な値である可能性があります）。この機能の動作方法、制限事項、および値のチューニング方法については、[`max_prepared_statements`](/ja/docs/pgbouncer/config/#max_prepared_statements) のドキュメントを参照してください。設定後は、クライアントライブラリが実際にプリペアドステートメントを使用していることを確認する必要があります。その方法は各クライアントごとに異なりますので、使用しているクライアントのドキュメントを確認してください。この機能はリリース前に十分なテストを実施していますが、機能の複雑さからパフォーマンス上の問題やバグが存在する可能性は十分にあります。そのような問題を発見した場合は、報告してください。([#845])
 
 - 変更
   * OpenSSL の設定のセキュリティを向上させました。従来のデフォルト値は非常に古く、不適切でした。
@@ -299,14 +395,14 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
   * PgBouncer がキャンセルトークンに `peer_id` をエンコードする方法が変更されたため、バージョン 1.21.0 の境界をまたぐ異なる PgBouncer バージョン間でのピアリングは、すべてのバージョンが同じ側にない限り動作しません。([#945])
 
 - 修正
-  * 1.18.0 で導入されたバグにより、エラーメッセージ "FATAL in function client_proto(): bad client state: 6/7" が発生する問題を修正しました ([#928])
+  * 1.18.0 で導入されたバグにより、エラーメッセージ "FATAL in function client\_proto(): bad client state: 6/7" が発生する問題を修正しました ([#928])
   * 1.18.0 で導入されたバグにより、エラーメッセージ "FATAL in function server\_proto(): server in bad state: 11" が発生する問題を修正しました ([#927])
   * キャンセル送信のログレベルを低減する ([#903])
   * peers のログプレフィックスを slog で修正 ([#922])
   * ドキュメントのタイポを修正しました ([#932])
   * 静的解析器が指摘したエラーを修正しました ([#943])
   * ログイン中に一時的な FATAL エラーが発生しても、待機中のすべてのクライアントを終了しないようにする ([#946])
-  * 、`auth_dbname` でデータベースが明示的に設定されていない場合、自動データベース機能を使用する。
+  * `auth_dbname` のデータベースが明示的に設定されていない場合、自動データベースを使用する。
     ([#921])
 
 - クリーンアップ
@@ -335,13 +431,13 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 **2023-08-09  -  PgBouncer 1.20.1  -  「オプションの設定」**
 
 - 修正
-  * 1.20.0 で導入されたバグ修正の再現を修正しました。`options` を `ignore_startup_parameters` 内に配置した場合、`options` スタートアップパラメータ内に含まれる未知のパラメータを無視しなくなる問題を解消しました。([#908])
+  * リグレッションを修正しました。`options` を `ignore_startup_parameters` 内に配置した場合、`options` スタートアップパラメータ内の未知のパラメータが無視されなくなっていました（リグレッションは 1.20.0 で導入）。([#908])
   * ドキュメント内の誤ったタイプミスを修正しました ([#917])
 
 [#908]: https://github.com/pgbouncer/pgbouncer/pull/908
 [#917]: https://github.com/pgbouncer/pgbouncer/pull/917
 
-**2023-07-20  -  PgBouncer 1.20.0  -  "A funny name goes here**
+**2023-07-20  -  PgBouncer 1.20.0  -  "A funny name goes here"**
 
 - 非推奨事項
   * オンライン再起動オプションはもはや非推奨とされています。近年はほとんど開発が行われていません。この機能には複数の既知の問題があり、新しく追加された機能の多くはこれをサポートしていません。現在、オンライン再起動を行う推奨方法は、`so_reuseport` および `peers` 機能を使用することです。これにより、同じポート上で複数の異なる PgBouncer プロセスを実行できます。その後、これらのプロセスを1つずつ再起動することで、常に目的のポートで PgBouncer プロセスがリスニングしていることを保証できます。([#894])
@@ -350,7 +446,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
   * トランザクションプーリングモードでより多くのパラメータを追跡できるようにする `track_extra_parameters` を導入しました。以前は PgBouncer は `application_name`、`DateStyle`、`TimeZone` および `standard_conforming_strings` のみを追跡していました。現在はデフォルトで `IntervalStyle` も追跡するようになっています。また、`track_extra_parameters` を変更することで、さらに多くの設定を追跡できますが、[PostgreSQL がクライアントに報告するもの][guc_report] に限られます。Citus 12.0+ を使用している場合、Citus が PostgreSQL が `search_path` をクライアントに報告するよう保証します。したがって、Citus を使用する場合は `search_path` を `track_extra_parameters` 設定に追加できます。([#867])
   * 認証フェーズで SQLSTATE を転送する。これにより、データベースが存在しないことを検出可能となり、Npgsql（PostgreSQL の .NET データプロバイダ）で利用される。([#814])
   * デフォルト `server_tls_sslmode` を `prefer` に変更します。 ([#866])
-  * `options` パラメータをサポートしました。これにより、[`PGOPTIONS` 環境変数を用いることが可能になります。`psql` および `libpq` が認識しているもの][pgoptions]。この変数を使用することで、起動時に任意の PostgreSQL パラメータを設定できます。これは `track_extra_parameters` を通じて PgBouncer が追跡する PostgreSQL パラメータに限られます。([#878])
+  * `options` スタートアップパラメータをサポートしました。これにより、[`psql` および `libpq` が認識する `PGOPTIONS` 環境変数][pgoptions]を使用できるようになります。この変数を使用することで、起動時に任意の PostgreSQL パラメータを設定できます。これは `track_extra_parameters` を通じて PgBouncer が追跡する PostgreSQL パラメータに限られます。([#878])
 
 - 修正
   * `pgbouncer` が auth_dbname として使用された場合にクラッシュしないようにしました。まだサポートされていませんが、クラッシュする代わりに明確なエラーが表示されるようになりました。([#817])
@@ -374,16 +470,16 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 
 ## PgBouncer 1.19.x {#pgbouncer-119x}
 
-**2023-05-31  -  PgBouncer 1.19.1  -  "Sunny Spring**
+**2023-05-31  -  PgBouncer 1.19.1  -  "Sunny Spring"**
 
 これは最近導入されたバグを修正するマイナーリリースです：
 
 - 修正
-  * 修正: 関数 disconnect_client() で FATAL が発生: クライアントの状態が無効: 0 ([#846])
+  * "FATAL in function disconnect_client(): bad client state: 0" エラーを修正しました。([#846])
     (1.18.0 で導入されたバグ)
-  * 修正: 関数 server_proto() で FATAL: サーバーが異常状態: 14 ([#849])
+  * "FATAL in function server_proto(): server in bad state: 14" エラーを修正しました。([#849])
     (1.18.0 で導入されたバグ)
-  * Python によるテストを実行するのに必要なファイルをリリース用ターボールに追加しました ([#852])
+  * Python によるテストの実行に必要なファイルをリリース tarball に追加しました ([#852])
     (1.19.0 で導入された新しいテスト)
 
 [#846]: https://github.com/pgbouncer/pgbouncer/pull/846
@@ -394,8 +490,8 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 
 - 機能
   * に `auth_dbname` オプションを追加し、`auth_query` を実行する対象のデータベースを指定します。([#764])
-  * `SHOW STATE` コマンドを追加し、PgBouncer がアクティブ、一時停止中、または一時停止状態かどうかを表示します。([#528])
-  * PgBouncer プロセス間のピアリングをサポートしました。これにより、複数の異なる PgBouncer プロセスが単一のロードバランサーの背後にある場合でも、キャンセルリクエストが正常に動作し続けるように設定できるようになります。([#666])
+  * `SHOW STATE` コマンドを追加し、PgBouncer がアクティブ、一時停止（paused）、サスペンド（suspended）のいずれの状態かを表示します。([#528])
+  * PgBouncer プロセス間のピアリングをサポートしました。これにより、複数の異なる PgBouncer プロセスが単一のロードバランサーの背後にある場合でも、キャンセル要求が正常に動作し続けるように設定できるようになります。([#666])
   * 専用の `cancel_wait_timeout` 設定を追加し、キャンセル要求の転送を放棄するまでの時間を決定します。デフォルトは 10 秒です。([#833])
   * 新しいテストフレームワーク ([#792])
 
@@ -403,7 +499,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
   * TLSハンドシェイクの失敗時に可能性のあるメモリリークを修正しました。([#796])
   * Windows でのサポートされていないコマンドラインオプションに対して、より正確なエラーメッセージを表示する。([#620])
   * サーバーが `BEING_CANCELED` 状態にあるときに `disconnect_server` を呼び出す問題を修正しました。 ([#815]) (1.18.0 で導入)
-  * `SIGTERM` が受信されたときに非ゼロステータスで終了しないでください。([#834])
+  * `SIGTERM` を受信しても非ゼロのステータスで終了しないようになりました。([#834])
   * 起動時に `unix_socket_dir` でソケットの作成に失敗した場合は、強制的に終了する。 ([#830])
   * 起動時に `listen_addr` のアドレスのいずれもリスンできなかった場合、強制的に失敗する。 ([#838])
   * `sbuf_connect` が失敗したときに、より詳細な情報を持つ警告メッセージを出力する。特に Unix ソケットの作成に失敗した際に有用である。([#837])
@@ -434,8 +530,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 - 機能
   * `application_name` を `SHOW CLIENTS`/`SERVERS`/`SOCKETS` に追加
     出力 ([#449](https://github.com/pgbouncer/pgbouncer/pull/449))
-  * キャンセル要求に関する情報を `SHOW
-    CLIENTS `/` SERVERS `/` POOLS` 出力に追加
+  * キャンセル要求に関する情報を `SHOW CLIENTS`/`SERVERS`/`POOLS` 出力に追加
     ([#782](https://github.com/pgbouncer/pgbouncer/pull/782))
 
 - 修正
@@ -447,7 +542,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
   * コンマ区切りホストリスト機能におけるオーバーフローバグの修正により、
     接続がUnixソケットに再ルーティングされる問題が解消されました
     ([#747](https://github.com/pgbouncer/pgbouncer/pull/747))
-  * 接続を解放して `min_pool_size` を達成するべきではありません
+  * `min_pool_size` を達成するために接続をエビクトしないようになりました
     ([#648](https://github.com/pgbouncer/pgbouncer/pull/648))
   * PostgreSQL 15 での `SHOW HELP` の修正
     ([#769](https://github.com/pgbouncer/pgbouncer/issues/769))
@@ -468,13 +563,13 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 - 機能
   * データベース定義では、コンマ区切りのホストリストを指定できます。
       ホストはラウンドロビン方式で接続されます。
-  * 非存在のデータベースに接続する場合、エラー（"no such database"）が認証後に報告されるようになりました。これにより、認証されていないクライアントが存在するデータベースを調べるのを防ぎます。（これはバージョン 1.15.0 でユーザーが存在しない場合に認証後にエラーを報告する変更と同様です。）
+  * 存在しないデータベースに接続する場合、エラー（"no such database"）が認証後に報告されるようになりました。これにより、認証されていないクライアントが存在するデータベースを調べるのを防ぎます。（これはバージョン 1.15.0 でユーザーが存在しない場合に認証後にエラーを報告する変更と同様です。）
   * ログイン前にクライアントにサーバー切断エラーを送信しないでください。
       これは、ログインしていないクライアントに、設定情報など公開されていない情報を漏らす可能性があります。
   * パスワード長を再度最大値に増加します。明らかに、前回の増加では長期間にわたって十分ではなかったようです。
-  * 自動的な `auth_file` 再読み込みを削除しました。`auth_file` は設定ファイルの再読み込み時のみ再読み込みされ、変更された直後に自動的に再読み込みされるようではありません。
+  * 自動的な `auth_file` 再読み込みを削除しました。`auth_file` は設定ファイルの再読み込み時にのみ再読み込みされるようになり、変更された直後に自動的に再読み込みされることはなくなりました。
   * Windows ビルドには、バージョン情報リソースファイルが含まれるようになりました。
-  * Windows で CI によって作成されたビルドはもはや静的リンクされているため、依存関係を必要とせずに直接使用できます。
+  * CI で作成された Windows ビルドは静的リンクされるようになったため、依存関係なしで直接使用できます。
 
 - 修正
   * OpenSSL 3 のサポートが修正されました。以前のリリースではクラッシュしていました。
@@ -498,7 +593,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
   * いくつかのエラーメッセージを再構成し、それらがどのコマンドや設定項目に関連しているかが明確になるようにしました。
   * テストスクリプトはもはや GNU sed を必要としなくなりました。
   * `make check` は Windows でも動作します（ただし SSL テストスイートはまだ対応していません）。
-  * 管理コンソールはシンプルなクエリプロトコルのみをサポートしており、この点に関するより良いエラーメッセージを提供します。
+  * 管理コンソールがシンプルなクエリプロトコルのみをサポートすることをドキュメント化し、この点に関するより良いエラーメッセージを提供するようになりました。
 
 --------
 
@@ -510,7 +605,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 
 * PgBouncer をサーバーとして動作させ、SSL または GSS 暗号化ハンドシェイク後に不要なデータを拒否する。
 
-中間者攻撃者がTCP接続にデータを挿入できる場合、暗号化保護されたデータベースセッションの開始部分に平文データを注入できる可能性があります。この攻撃は、PgBouncerが認証データを要求しない設定の場合に、サーバーに偽のSQLコマンドを送信する目的で悪用される可能性があります。（ただし、SSL証明書認証に依存するPgBouncerの設定では、この攻撃が成立しない可能性があります。）（CVE-2021-3935）
+中間者攻撃者がTCP接続にデータを挿入できる場合、暗号化保護されたデータベースセッションの開始部分に平文データを注入できる可能性があります。この攻撃は、PgBouncerが認証データを要求しない設定の場合に、サーバーに偽のSQLコマンドを送信する目的で悪用される可能性があります。（ただし、SSL 証明書認証に依存する PgBouncer の設定では、認証データを要求しない可能性が十分にあります。）（CVE-2021-3935）
 
 **2021-08-09  -  PgBouncer 1.16.0  -  「ジャガーを撃退」**
 
@@ -529,15 +624,14 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
   * クエリのキャンセル処理が修正されました。一部の状況下では、キャンセル要求が長時間スタックするように見えました。これにより、もはや発生しなくなります。実際、キャンセル要求はプールサイズの2倍まで超過可能となり、スタックする心配はほとんどありません。 ([#542](https://github.com/pgbouncer/pgbouncer/pull/542), [#543](https://github.com/pgbouncer/pgbouncer/pull/543))
   * HBA を介した md5 と scram の混在使用が修正されました。
   * Windows での c-ares を使用したビルドが修正されました。
-  * 「FIXME: クエリの終了だが query_start == 0」メッセージは解消されました。発生原因が判明し、これ以上表示されないはずです。([#565](https://github.com/pgbouncer/pgbouncer/pull/565))
-  * 再読み込みを修正しました。`default_pool_size`、`min_pool_size`、および `res_pool_size` を再読み込みしても、以前は機能していませんでした。
+  * "FIXME: query end, but query_start == 0" メッセージは解消されました。発生原因が判明し、これ以上表示されないはずです。([#565](https://github.com/pgbouncer/pgbouncer/pull/565))
+  * `default_pool_size`、`min_pool_size`、`reserve_pool_size` の再読み込みを修正しました。これらの設定の再読み込みは以前は機能していませんでした。
 
 - クリーンアップ
-  * Cirrus CI は now
-    [使用](https://cirrus-ci.com/github/pgbouncer/pgbouncer) され
-    代わりに Travis CI が使用されません。
+  * Cirrus CI が Travis CI の代わりに
+    [使用](https://cirrus-ci.com/github/pgbouncer/pgbouncer)されるようになりました。
   * 通常通り、多数のテストが追加されています。
-  * 「unclean server」のログメッセージを若干明確化しました。現在は、「クライアントがサーバーが準備できていない間に切断された」または「クライアントがサーバーへのすべてのデータ送信前に切断された」と表示されます。後者は、サーバーでトランザクションブロックが開いている状態でクライアント接続が閉じられた場合に発生し、一部のユーザーを混乱させていた問題です。
+  * 「unclean server」のログメッセージを少し明確にしました。現在は「client disconnect while server was not ready」（サーバーが準備できていない間にクライアントが切断）または「client disconnect before everything was sent to the server」（すべてのデータがサーバーに送られる前にクライアントが切断）と表示されます。前者は、サーバーでトランザクションブロックが開いている状態でクライアント接続が閉じられた場合に発生し、一部のユーザーを混乱させていました。
   * 「pgbouncer」をデータベース名として使用できなくなりました。この名前は管理コンソール用に予約されており、通常のデータベース名として使用しても正しく動作していませんでした。これにより、明示的に禁止されています。
   * 接続が閉じられる前にクライアントに送信されるエラーは、もはや単に ERROR ではなく FATAL としてラベル付けされるようになりました。これにより、一部のクライアントが以前は混乱していた問題が解消されました。 ([#564](https://github.com/pgbouncer/pgbouncer/pull/564))
   * GCC 11 でのコンパイラ警告を修正しました。
@@ -547,21 +641,21 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 
 ## PgBouncer 1.15.x {#pgbouncer-115x}
 
-**2020-11-19  -  PgBouncer 1.15.0  -  "Ich hab noch einen Koffer in Berlin**
+**2020-11-19  -  PgBouncer 1.15.0  -  "Ich hab noch einen Koffer in Berlin"**
 
 - 機能
   * 認証失敗の報告を改善しました。認証失敗のメッセージはクライアントに送信される際、失敗したことを示すのみで、詳細は含まれません。詳細は PgBouncer のログで確認できます。また、要求されたユーザーが存在しない場合でも、認証処理は終了まで実行され、同じ汎用的な失敗メッセージになります。これにより、クライアントが PgBouncer インスタンスに対してユーザー名や認証関連の情報を探るのを防ぎます。これは PostgreSQL の動作と同様です。
   * クライアントが即座に切断された場合、何もログに出力しない。モニタリングシステムがTCP/IP接続を開くだけで、データを送信せずに切断する場合にログの雑多な出力を防ぐためである。
-  * systemd ジャーナルを使用する場合は、ログ出力に systemd ジャーナルを利用します。標準エラー出力が systemd ジャーナルに送信されることが検出された場合、ログ出力に systemd のネイティブ関数を使用します。これにより、タイムスタンプや PID の重複出力が回避され、ログが若干きれいになります。また、ログに重大度などのメタデータが追加されるため、ジャーナルが syslog に転送された場合でも、メッセージに有用なメタデータが付与されます。
-  * テストスイートの一部は now Windows で実行できるようになりました。
+  * systemd ジャーナルが使用されている場合は、ログ出力にそれを利用します。標準エラー出力が systemd ジャーナルに送信されることが検出された場合、ログ出力に systemd のネイティブ関数を使用します。これにより、タイムスタンプや PID の重複出力が回避され、ログが若干きれいになります。また、ログに重大度などのメタデータが追加されるため、ジャーナルが syslog に転送された場合でも、メッセージに有用なメタデータが付与されます。
+  * テストスイートの一部は Windows でも実行できるようになりました。
   * `SHOW CONFIG` は設定のデフォルト値も表示するようになりました。
 
 - 修正
   * FreeBSD で `so_reuseport` オプションを修正しました。PgBouncer 1.12.0 の元のコードは FreeBSD では実際に動作していませんでした。 ([#504](https://github.com/pgbouncer/pgbouncer/pull/504))
-  * 1.14.0 で破損した、古い systemd バージョンを搭載したシステムでのコンパイルを修復しました。
+  * 古い systemd バージョンを搭載したシステムでのコンパイルを修復しました。これは 1.14.0 で壊れていました。
       ([#505](https://github.com/pgbouncer/pgbouncer/issues/505))
   * Windows用バイナリzipパッケージをビルドするmakefileターゲットを修復しました。
-  * 長時間のコマンドラインオプションは、Windowsでも現在動作します。
+  * 長いコマンドラインオプションも Windows で動作するようになりました。
   * `auth_user` 設定の動作を修正しました。従来の動作は、設定ファイル内の順序に依存していたため、混乱しやすく脆弱でした。これ以上はそのような状態にはなりません。([#391](https://github.com/pgbouncer/pgbouncer/issues/391), [#393](https://github.com/pgbouncer/pgbouncer/issues/393))
 
 - クリーンアップ
@@ -573,7 +667,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 
 ## PgBouncer 1.14.x {#pgbouncer-114x}
 
-**2020-06-11  -  PgBouncer 1.14.0  -  "La ritrovata magia**
+**2020-06-11  -  PgBouncer 1.14.0  -  "La ritrovata magia"**
 
 - 機能
   * SCRAM 認証のパススルーを追加します。これにより、PgBouncer 内で `userlist.txt` または `auth_query` から取得した暗号化された SCRAM シークレットを使用してサーバーにログインできます。
@@ -588,11 +682,11 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 
 ## PgBouncer 1.13.x {#pgbouncer-113x}
 
-**2020-04-27  -  PgBouncer 1.13.0  -  "My favourite game**
+**2020-04-27  -  PgBouncer 1.13.0  -  "My favourite game"**
 
 - 機能
   * 設定キーワード `tcp_user_timeout` を追加し、対応するソケットオプションを設定します。
-  * `client_tls_protocols` および `server_tls_protocols` は now default to `secure` となり、TLS 1.2 および TLS 1.3 のみが有効になります。古いバージョンは引き続きサポートされていますが、デフォルトでは有効になっていません。
+  * `client_tls_protocols` および `server_tls_protocols` のデフォルトが `secure` となり、TLS 1.2 および TLS 1.3 のみが有効になります。古いバージョンは引き続きサポートされていますが、デフォルトでは有効になっていません。
   * systemd サービス通知をサポートする。現在のところ、これにより `Type=notify` サービスユニットの使用が可能である。今後、より深い統合が計画されている。
 
 - 修正
@@ -624,32 +718,32 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 - 修正
   * 統計カラムを `numeric` として送信し、`bigint` として送信するのを回避します。これにより、`bigint` の範囲を超える値でクライアントライブラリが失敗するのを防ぎます。([#360](https://github.com/pgbouncer/pgbouncer/pull/360), [#401](https://github.com/pgbouncer/pgbouncer/pull/401))
   * PAM ユーザーがパスワードを失う問題を修正しました。 ([#285](https://github.com/pgbouncer/pgbouncer/issues/285))
-  * で SCRAM チャネルバインディングを有効にしたクライアントを受け入れます。以前は、チャネルバインディングをサポートするクライアント（つまり PostgreSQL 11 以降）が、特定の状況下で PgBouncer への接続に失敗していました（PgBouncer はチャネルバインディングをサポートしていません。この変更は、チャネルバインディングを提供するクライアントのサポートを修正するものです）。
+  * SCRAM チャネルバインディングを有効にしたクライアントを受け入れるようになりました。以前は、チャネルバインディングをサポートするクライアント（つまり PostgreSQL 11 以降）が、特定の状況下で PgBouncer への接続に失敗していました（PgBouncer はチャネルバインディングをサポートしていません。この変更は、チャネルバインディングを提供するクライアントのサポートを修正するものです）。
   * musl-libc の最新バージョン（Alpine Linux で使用）とのコンパイルを修正。
 
 - クリーンアップ
-  * に `make check` のターゲットを追加します。これにより、1 つのコマンドからすべてのテストを実行できるようになります。
-  * PostgreSQL wiki への参照を削除しました。すべての情報は now 、PgBouncer のドキュメントまたはウェブサイトにあります。
-  * Libevent 1.x のサポートを削除しました。Libevent 2.x が必須です。Libevent の検出は now pkg-config を使用して行われます。
-  * macOS および Windows でのコンパイラ警告を修正しました。これらのプラットフォームでのビルドは now 警告が発生しなくなりました。
+  * `make check` ターゲットを追加しました。これにより、1 つのコマンドからすべてのテストを実行できるようになります。
+  * PostgreSQL wiki への参照を削除しました。すべての情報は現在、PgBouncer のドキュメントまたはウェブサイトにあります。
+  * Libevent 1.x のサポートを削除しました。Libevent 2.x が必須です。Libevent の検出は現在 pkg-config を使用して行われます。
+  * macOS および Windows でのコンパイラ警告を修正しました。これらのプラットフォームでのビルドは、現在警告なしで行えます。
   * LLVM scan-build からの警告を修正。
 
 --------
 
 ## PgBouncer 1.11.x {#pgbouncer-111x}
 
-**2019-08-27  -  PgBouncer 1.11.0  -  "Instinct for Greatness**
+**2019-08-27  -  PgBouncer 1.11.0  -  "Instinct for Greatness"**
 
 - 機能
   * クライアントおよびサーバーに対する SCRAM 認証のサポートを追加しました。新しい認証タイプ `scram-sha-256` が追加されました。
-  * 保存されたパスワードが md5 の場合、`auth_type=password` を処理し、PostgreSQL サーバーが行うのと同様に処理します。([#129](https://github.com/pgbouncer/pgbouncer/pull/129))
+  * 保存されたパスワードが md5 の場合の `auth_type=password` を、PostgreSQL サーバーと同様に処理するようになりました。([#129](https://github.com/pgbouncer/pgbouncer/pull/129))
   * `log_stats` を追加して、統計情報をログに出力しないようにします。 ([#287](https://github.com/pgbouncer/pgbouncer/pull/287))
   * ログタイムスタンプにタイムゾーンを追加します。
   * ログプレフィックスにPIDを[カッコ]で囲んで出力する。
 - 修正内容
   * OpenSSL の configure テストを、`-Werror` と互換性がある新しい OpenSSL で実行する際に修正します。
   * `auth_user` における待機時間の計算を修正しました。これにより、待機時間がクラッシュするか、不正な値が報告される問題が解消されました。([#393](https://github.com/pgbouncer/pgbouncer/pull/393))
-  * GSSENCRequest パケットの処理。PostgreSQL 12 で追加。現在は何も実行しないが、「不正なパケットヘッダー」という誤ったエラーメッセージを避けるために存在する。
+  * PostgreSQL 12 で追加された GSSENCRequest パケットを処理するようにしました。現在は何も行いませんが、「bad packet header」（不正なパケットヘッダー）という紛らわしいエラーメッセージを回避できます。
 - クリーンアップ
   * テストスイートの多数の改善と、いくつかの新規テスト
   * Windows でのコンパイラ警告を複数修正。
@@ -659,16 +753,16 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 
 ## PgBouncer 1.10.x {#pgbouncer-110x}
 
-**2019-07-01  -  PgBouncer 1.10.0  -  "Afraid of the World**
+**2019-07-01  -  PgBouncer 1.10.0  -  "Afraid of the World"**
 
 - 機能
   * TLS 1.3 の有効化および無効化をサポートする。 (TLS 1.3 はすでに OpenSSL ライブラリに依存してサポートされていたが、今や TLS プロトコルバージョンを選択する設定項目もこれに対応している。)
 - 修正
   * TLS 1.3 のサポートを修正しました。これは OpenSSL 1.1.1 および 1.1.1a で破損していました（それ以前や以降では問題ありません）。
   * `SHOW FDS` での稀なクラッシュを修正しました ([#311](https://github.com/pgbouncer/pgbouncer/issues/311))。
-  * 多数のキャンセルリクエストが到着した場合、長時間の停止が発生する可能性を修正しました
+  * 多数のキャンセル要求が到着した場合、長時間の停止が発生する可能性を修正しました
     ([#329](https://github.com/pgbouncer/pgbouncer/issues/329)).
-  * PostgreSQL の再読み込み後に「ログインクエリからの予期しない応答」を回避する
+  * PostgreSQL の再読み込み後に「unexpected response from login query」（ログインクエリからの予期しない応答）エラーが発生するのを回避します。
       ([#220](https://github.com/pgbouncer/pgbouncer/issues/220)).
   * `idle_transaction_timeout`の計算を修正
     ([#125](https://github.com/pgbouncer/pgbouncer/issues/125))。
@@ -685,7 +779,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 
 ## PgBouncer 1.9.x {#pgbouncer-19x}
 
-**2018-08-13  -  PgBouncer 1.9.0  -  "Chaos Survival**
+**2018-08-13  -  PgBouncer 1.9.0  -  "Chaos Survival"**
 
 - 機能
   * RECONNECT コマンド
@@ -699,13 +793,13 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
   * ポート mkauth.py を Python 3 に移行する
   * シグナルのドキュメントを改善
   * クイックスタートドキュメントの改善
-  * Document SET コマンド
-  * 必須ソフトウェアのリスト
-  * 警告を修正-Wimplicit-fallthrough
+  * SET コマンドをドキュメント化
+  * 必須ソフトウェアのリストを修正
+  * -Wimplicit-fallthrough 警告を修正
   * 各種 SHOW フィールドのドキュメントを追加
   * 再読み込みおよびDNS変更時の再接続動作の説明
-  * KILL が実行された後は RESUME が必要なドキュメント
-  * サーバーのライフタイムに関するドキュメントを明確化
+  * KILL の実行後には RESUME が必要であることをドキュメント化
+  * server_lifetime に関するドキュメントを明確化
   * メッセージおよびドキュメント内のスペルミスと大文字小文字の修正
   * テストでの psql 実行を修正
   * その他のテスト環境設定の改善
@@ -714,21 +808,21 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 
 ## PgBouncer 1.8.x {#pgbouncer-18x}
 
-**2017-12-20 - PgBouncer 1.8.1 - "Ground-and-pound Mentality**
+**2017-12-20  -  PgBouncer 1.8.1  -  "Ground-and-pound Mentality"**
 
 - 修正
   * ディストリビューションの tar パッケージに `include/pam.h` を含めるようにした。これにより、1.8 バージョンの tar パッケージがまったくビルドできなくなっていた。
 
-**2017-12-19 - PgBouncer 1.8 - "Confident at the Helm**
+**2017-12-19  -  PgBouncer 1.8  -  "Confident at the Helm"**
 
 - 機能
   * PAM 認証をサポートします。 (有効にするには `--with-pam` を使用してください。)
   * `SHOW DATABASES` の出力に `paused` および `disabled` フィールドを追加します。
-  * に `maxwait_us` フィールドを `SHOW POOLS` 出力に追加します。
+  * `SHOW POOLS` 出力に `maxwait_us` フィールドを追加します。
   * `wait` および `wait_us` フィールドを `SHOW` コマンドの出力に追加します。
-  * に新しいコマンド `SHOW STATS_TOTALS` と `SHOW STATS_AVERAGES` を追加します。
+  * 新しいコマンド `SHOW STATS_TOTALS` と `SHOW STATS_AVERAGES` を追加します。
   * `SHOW STATS` でクエリとトランザクションを個別に追跡します。`total_requests`、`avg_req`、および `avg_query` フィールドは、新しいフィールドに置き換えられました。
-  * に `wait_time` を `SHOW STATS` に追加します。
+  * `SHOW STATS` に `wait_time` を追加します。
 - 修正内容
   * libusual が OpenSSL 1.1 をサポートするようになりました。
   * Unix ソケット上で TLS を使用しようとしないでください。
@@ -746,12 +840,12 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 
 ## PgBouncer 1.7.x {#pgbouncer-17x}
 
-**2016-02-26  -  PgBouncer 1.7.2  -  "Finally Airborne**
+**2016-02-26  -  PgBouncer 1.7.2  -  "Finally Airborne"**
 
 - 修正
   * 古い pidfile の削除時にクラッシュする問題を修正。この問題は 1.7.1 で導入された。
-  * クリーンアップを無効化する — これはフェイルオーバーを破壊し、本番負荷では有用でない。1.7.1 で導入された問題。
-  * トーキーク後は、pidfileが消えるまで待ってから起動してください。
+  * クリーンアップを無効化 — テイクオーバーを壊し、本番負荷では有用でないため。問題は 1.7.1 で導入。
+  * テイクオーバー後は、pidfile が消えるまで待ってから起動します。
       メモリクリーンアップによる遅延シャットダウンが、既存のレースを露呈しました。
       ([#113](https://github.com/pgbouncer/pgbouncer/issues/113))
 - クリーンアップ
@@ -776,7 +870,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
     送信された場合。以前は検証設定が無効だったため、クライアント証明書を用いた接続が失敗していた。
     ([#105](https://github.com/pgbouncer/pgbouncer/issues/105))
   * データベースを解放する際のメモリリークを修正。
-  * TLS ハンドシェイク中のメモリリークを修正。
+  * tls_handshake() における潜在的なメモリリークを修正。
   * EOF処理を tls_handshake() で修正。
   * memset のサイズが小さすぎる問題を asn1_time_parse 互換性用に修正。
   * TLS 以外の (`--without-openssl`) ビルドを修正。
@@ -818,7 +912,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 
 ## PgBouncer 1.6.x {#pgbouncer-16x}
 
-**2015-09-03  -  PgBouncer 1.6.1  -  "Studio Audience Approves**
+**2015-09-03  -  PgBouncer 1.6.1  -  "Studio Audience Approves"**
 
 - 機能
   * 新しい設定: `server_reset_query_always`。設定すると、
@@ -830,15 +924,15 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
     1.6.x で設定されていますが、1.7 で無効になります。
 
 - 修正
-  * [セキュリティ]  `auth_user` の無効な割当を削除する。(#69)
+  * [セキュリティ] `auth_user` の無効な割当を削除。(#69)
       `auth_user` が設定されており、クライアントが存在しないユーザー名を要求した場合、
       クライアントは `auth_user` としてログインする。これは好ましくない。
 
     [CVE-2015-6817](https://access.redhat.com/security/cve/cve-2015-6817)
 
-  * 認証応答の処理中に NoticeResponse をスキップする。そうでなければ、サーバーでの詳細ログ出力がログイン失敗を引き起こす。
+  * handle_auth_response で NoticeResponse をスキップするようにしました。そうしないと、サーバー側の詳細なログレベルがログイン失敗を引き起こします。
 
-  * 管理コンソール: auth_type=any の場合、`auth_user` を指定してください。それ以外の場合、ログ出力がクラッシュする可能性があります（#67）。
+  * 管理コンソール: auth_type=any の場合に `auth_user` を設定するようにしました。そうしないと、ログ出力がクラッシュする可能性があります（#67）。
 
   * OpenBSD、Solaris、OSX での各種ポータビリティ修正。
 
@@ -854,7 +948,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
         データベースごとに設定することもできます。
 
     auth_query
-        認証ユーザー下で実行する SQL クエリ。
+        auth_user の権限で実行する SQL クエリ。
         デフォルト： "SELECT usename, passwd FROM pg_shadow WHERE usename=$1"
 
     (Cody Cutrer)
@@ -869,9 +963,9 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 
   * 新しいDNSバックエンド: c-ares。すべての有用な機能をサポートする唯一のDNSバックエンドです: /etc/hostsのリフレッシュ、SOA照会、大容量の応答（TCP/EDNS+UDP経由）、IPv6。現在は推奨されるバックエンドであり、将来的には**唯一**のバックエンドになる可能性が高く、不十分なライブラリの多数をサポートする意義がないためです。
 
-    SNAFU: c-ares バージョン 1.10 以下では、IPv6 を有効にした状態で CNAME サポートが破損するバグがあります。（既に上流で修正済み。） 一時的な対策として、c-ares 1.10 以下では IPv4 のみを使用します。したがって、PgBouncer は c-ares >1.10（まだリリースされていない）が公開されてからある程度時間が経過した場合にのみ、他のバックエンドを切断します。
+    SNAFU: c-ares バージョン 1.10 以下では、IPv6 を有効にした状態で CNAME サポートが破損するバグがあります。（既に上流で修正済み。） 一時的な対策として、c-ares 1.10 以下では IPv4 のみを使用します。したがって、PgBouncer は c-ares >1.10（まだリリースされていない）が公開されてからしばらく経った後にのみ、他のバックエンドを廃止します。
 
-  * SHOW CLIENTS/SERVERS でリモート PID を表示します。Unix ソケット経由で接続するクライアントおよび TCP および Unix ソケットの両方に対応するサーバーで利用可能です。TCP サーバーの場合、PID はキャンセルキーから取得されます。
+  * SHOW CLIENTS/SERVERS で remote_pid を表示します。Unix ソケット経由で接続するクライアント、および TCP と Unix ソケットのいずれかで接続するサーバーで利用可能です。TCP サーバーの場合、PID はキャンセルキーから取得されます。
 
   * 負の DNS キャッシュを制御するための別々の設定パラメータ（dns_nxdomain_ttl）を追加。
     (Cody Cutrer)
@@ -887,7 +981,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 
   * log: IPv6 アドレスを [] で囲む
   * log: サーバーへの接続時、ローカルIPアドレスとポートを表示
-  * win32: 長引く引数には GNU スタイルを使用してください: --foo
+  * win32: 長い引数には GNU スタイルを使用: --foo
   * ホスト名に数値を許可し、常に inet_pton でパースを試行する
   * deallocate_all() の修正についての FAQ
   * 例の設定ファイルに誤ったキーワードを修正
@@ -917,7 +1011,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
     (Petr Jelinek)
   * ログイン時にヘッダーが遅延する場合の「bad packet」を修正。
       (Michal Trojnara, Marko Kreen)
-  * Coverty で検出されたエラーを修正。
+  * Coverity で検出されたエラーを修正。
     (Euler Taveira)
   * サーバー数が min_pool を下回った場合、server_idle_timeout を無効にする (#60)
     (Marko Kreen)
@@ -926,7 +1020,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 
 ## PgBouncer 1.5.x {#pgbouncer-15x}
 
-**2015-04-09  -  PgBouncer 1.5.5  -  "Play Dead To Win**
+**2015-04-09  -  PgBouncer 1.5.5  -  "Play Dead To Win"**
 
 - 修正
   * リモートクラッシュを修正 - 無効なパケット順序により NULL ポインタの参照が発生する問題を解消。悪用可能ではなく、DoS にのみ影響。
@@ -942,13 +1036,13 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
   * コンパイラの依存関係サポートチェックを configure で修正。
   * ドキュメントの修正をいくつか実施。
 
-**2012-09-12  -  PgBouncer 1.5.3  -  "Quantum Toaster**
+**2012-09-12  -  PgBouncer 1.5.3  -  "Quantum Toaster"**
 
 - 重大な修正
 
   * データベース名が長すぎるとクラッシュする可能性があり、自動データベース作成が有効な場合、リモートからトリガーされることがあります。
 
-    - 元のチェックはすべての名前が設定ファイルから来ると想定していたため、fatal() を使用しても問題なかったが、autodbs が有効な場合、[databases] セクションで  から '*' に設定されたデータベース名はネットワーク経由で取得される可能性があり、リモートシャットダウンが可能になる。
+    - 元のチェックは、すべての名前が設定ファイルから来ると想定していたため fatal() を使用しても問題ありませんでしたが、autodbs が有効な場合（[databases] セクションの '*' による）、データベース名はネットワークから来る可能性があり、リモートシャットダウンを可能にしていました。
 
     [CVE-2012-4575](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-4575)
 
@@ -961,7 +1055,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
 - 修正
 
   * AntiMake：パス名の操作に $(relpath) および $(abspath) を使用していたが、ソースツリーのパスにシンボリックリンクが含まれる場合にビルドが失敗していた。コードは現在、平文の文字列のみを扱うように変更された。
-  * console: now SET コマンドを使用して空文字列の値を設定できます。
+  * 管理コンソール: SET コマンドで空文字列の値を設定できるようになりました。
   * config.txt：タイムアウトは浮動小数点数で設定可能であることを示す。
       これは 1.4 で導入された、あまり知られていない機能である。
 
@@ -971,7 +1065,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
   * 誤って、reserve_pool_timeout がマイクロ秒単位で扱われていたため、プールが満杯になった際に即座に予約プールが有効化されていました。現在は意図した通り、秒単位で扱うように修正しました。
     (Noticed by Keyur Govande)
 
-**2012-04-17  -  PgBouncer 1.5.1  -  "Abort, Retry, Ignore?**
+**2012-04-17  -  PgBouncer 1.5.1  -  "Abort, Retry, Ignore?"**
 
 - 機能
   * UNIXソケットの権限を調整するためのパラメータ:
@@ -988,7 +1082,7 @@ upstream_link: "https://www.pgbouncer.org/changelog.html"
   * Asciidoc 8.4 以上を必要とします。以前のバージョンとの互換性は失われているようです。
   * close() からの EINTR に対する再試行をやめます。
 
-**2012-01-05  -  PgBouncer 1.5  -  「2007 年よりクライアントの接続を最適化しています」**
+**2012-01-05  -  PgBouncer 1.5  -  「2007 年から満足したクライアントを跳ね返し続ける」**
 
 1 つの DNS 名に 8 個を超える IP アドレスを関連付ける場合、EDNS0 プロトコルで照会する必要があります。
 この機能をサポートするのは getaddrinfo_a()/getaddrinfo() と UDNS バックエンドだけで、libevent 1.x/2.x はサポートしません。
@@ -1002,7 +1096,7 @@ GNU Make 3.81 以上が必要です。
   * DNS ゾーンシリアルに基づくホスト名の無効化。オプション dns_zone_check_period が設定されている場合、すべての DNS ゾーンに対して SOA を照会し、シリアルが変更された時点ですべてのホスト名を照会します。これは、接続の無効化を確定的に実行するため必要です。なぜなら、照会が行われない状態では、照会時の無効化は無意味だからです。新しい UDNS バックエンドでのみ動作します。
   * DNS キャッシュを確認するための新しい SHOW DNS_HOSTS および SHOW DNS_ZONES コマンドを追加。
   * 新しいパラメータ: min_pool_size - ロードがなければ接続をすべて切断しないようにする
-    (Filip Rembialkowski)
+    (Filip Rembiałkowski)
   * idle_in_transaction_timeout - トランザクションが長時間アイドル状態になると終了する。
     デフォルトでは設定されない。
   * DNS ルックアップ用に libudns バックエンドを追加。evdns よりも機能が豊富。
@@ -1024,8 +1118,8 @@ GNU Make 3.81 以上が必要です。
     (Michael Tharp)
   * RESUME コマンドによって発行される誤ったログメッセージを修正。
     (Peter Eisentraut)
-  * user= に password= を指定しない場合、パスワードは userlist から取得されます。
-  * takeover コードで '*' を正しく解析する。
+  * データベース接続文字列に user= があり password= がない場合、パスワードは userlist から取得されます。
+  * テイクオーバーコードで '*' を正しく解析。
   * autogen.sh: 古い autoconf/automake と互換性を持つ。
   * Win32 で mingw/msvc ランタイムの basename() が不正なため、サービス実行時にクラッシュする問題を修正。現在は常に互換性のある basename() が使用される。
 
@@ -1033,7 +1127,7 @@ GNU Make 3.81 以上が必要です。
 
 ## PgBouncer 1.4.x {#pgbouncer-14x}
 
-**2011-06-16  -  PgBouncer 1.4.2  -  "先制アルゴリズム**
+**2011-06-16  -  PgBouncer 1.4.2  -  "先制アルゴリズム"**
 
 影響を受ける OS: \*BSD、Solaris、Win32。
 
@@ -1053,7 +1147,7 @@ GNU Make 3.81 以上が必要です。
 
   * IPv6 アドレスのリスニング/接続をサポートします。
     (Hannu Krosing)
-  * で複数のリスニングアドレスを指定する場合、'listen_addr' では各 getaddrinfo() が呼び出されるため、名前も使用可能である。
+  * 'listen_addr' に複数のリッスンアドレスを指定可能。それぞれに対して getaddrinfo() が呼び出されるため、名前も使用できます。
   * 管理コンソール: クライアントに 'server_version' を送信して PgBouncer のバージョンを通知します。
 
 - 重要な修正
@@ -1087,7 +1181,7 @@ GNU Make 3.81 以上が必要です。
 - 修正
 
   * getaddrinfo_a() を非ブロッキングにするために、並列にリクエストを処理する単一のスレッドを使用して、アドレス解決を行う。
-  * pthread コンパイルを有効にしてください。compat getaddrinfo_a が使用される場合。
+  * compat getaddrinfo_a が使用される場合に pthread コンパイルを有効にしました。
   * release_server がライフタイム切断時に ->last_lifetime_disconnect の設定を失った。
     (Emmanuel Courreges)
   * win32: DOS形式の改行コードに対応した認証ファイルの修正 — load_file() はファイルの短縮を考慮していなかった。
@@ -1104,17 +1198,17 @@ GNU Make 3.81 以上が必要です。
   * find_modules.sh では、互換性を高めるために 'sed' の代わりに 'awk' を使用してください。
     (Giorgio Valoti)
   * 起動時に非同期DNSバックエンドの情報をアクティブログに出力します。
-  * で --disable-evdns を 'yes' ではなく 'no' に設定します。
+  * --disable-evdns が 'yes' ではなく 'no' を意味するように修正。
   * ドキュメントに -R が unix_socket_dir を必要とする点を記載してください。
   * server_reset_query を faq.txt で説明します。
-  * memset のスラブアロケータで失われた機能を復元
+  * スラブアロケータで失われていた memset を復元
   * libusual におけるいくつかの小さなポータビリティ修正。
 
-**2011-01-11  -  PgBouncer 1.4  -  "Gore Code**
+**2011-01-11  -  PgBouncer 1.4  -  "Gore Code"**
 
 - 機能
 
-  * 非同期DNS照合 — リロード時にホスト名を解決するのではなく、接続時に解決し、設定可能なキャッシュをサポートします。
+  * 非同期 DNS ルックアップ — リロード時にホスト名を解決する代わりに、設定可能なキャッシュとともに接続時に解決するようになりました。
       (参照: dns_max_ttl パラメータ。)
 
     デフォルトでは、バックエンドとして getaddrinfo_a() (glibc) を使用します。存在しない場合、getaddrinfo_a() はブロッキング(!) な getaddrinfo() を使ってエミュレートされます。
@@ -1136,7 +1230,7 @@ GNU Make 3.81 以上が必要です。
 - 修正
 
   * DateStyle および TimeZone サーバー設定パラメーターは、正確な大文字・小文字を使用する必要があります。
-  * 管理コンソール：クライアントに日時、タイムゾーンおよび標準出力サーバー設定を送信します。
+  * 管理コンソール：datetime、timezone、stdstr のサーバーパラメータをクライアントに送信。
 
 - 内部のクリーンアップ
 
@@ -1147,29 +1241,29 @@ GNU Make 3.81 以上が必要です。
 
 ## PgBouncer 1.3.x {#pgbouncer-13x}
 
-**2010-09-09  -  PgBouncer 1.3.4  -  "Bouncer is always right**
+**2010-09-09  -  PgBouncer 1.3.4  -  "Bouncer is always right"**
 
 - 修正
   * 接続時に迅速な失敗ロジックを適用します。サーバーが障害状態の場合、クライアントは接続時にエラーを受け取ります。
-  * 再読み込み時にチェックするため、自動生成されたデータベースにタグを付けないでください。それらは設定に存在しないため、殺されてしまいます。
-  * アプリケーション名パラメータをデフォルトで無視します。これにより、Postgres 9.0 のすべてのユーザーが、ignore_startup_parameters= に手動で追加する必要がなくなります。
+  * 自動生成されたデータベースに、再読み込み時のチェック用タグを付けないようにしました。設定ファイルに存在しないため、タグが付いたままだと強制終了されてしまうためです。
+  * application_name パラメータをデフォルトで無視します。これにより、Postgres 9.0 のすべてのユーザーが、それを ignore_startup_parameters= に自分で追加する必要がなくなります。
   * pg_auth の引用を正しく修正しました。 '\' はその場で使用されていません。
   * 管理コンソールでのエラー報告を改善し、ユーザーに受信したクエリを表示します。
   * 対応 OS（OpenBSD）では、tv_sec が time_t でない場合があります。
   * gcc 4.5 での警告を多すぎないようにする。
 
-**2010-05-10  -  PgBouncer 1.3.3  -  "NSFW**
+**2010-05-10  -  PgBouncer 1.3.3  -  "NSFW"**
 
 - 改善
   * listen(2) の引数を設定可能にする: listen_backlog。これは、システムの最大許容値が設定可能な OS で有用です。
   * ログイン失敗の原因となったユーザー名やデータベース名を明示するように、切断メッセージを改善します。
 - 修正内容
-  * クライアントがログインを試みない状態でも、再起動を繰り返すという従来の高速失敗再起動ロジックを変更しました。永続的に破損したデータベースやユーザーの場合、この動作は不快でした。
-  * ログ出力関数が古い errno を保持するようにし、そうでない場合、ログレベルが高くなると pgbouncer が不具合を起こす可能性があります。
+  * 高速失敗（fast-fail）時の再起動ロジックを再構成しました。以前のロジックは、恒久的に壊れたデータベースやユーザーの場合、ログインしたいクライアントがいなくても再試行しようとするため厄介でした。
+  * ログ出力関数が元の errno を保持するようにしました。そうしないと、高いログレベルやロギングの問題時に pgbouncer が奇妙な動作をする可能性があります。
   * 起動関連のバッファサイズを増やして、EDB のノイズの多い起動を処理する。
   * V2 プロトコルの起動リクエストを検出し、切断の明確な理由を提示する。
 
-**2010-03-15  -  PgBouncer 1.3.2  -  "Boomerang Bullet**
+**2010-03-15  -  PgBouncer 1.3.2  -  "Boomerang Bullet"**
 
 - 修正
 
@@ -1183,7 +1277,7 @@ GNU Make 3.81 以上が必要です。
       通常は安全ですが、100% 効果があるとは限りません。
       今後は常に event_del() が呼び出されたかどうかを明確に把握できるようになります。
 
-  * SUSPEND中にメンテナンスを無効化してください。そうでない場合、短いタイムアウト設定では、古いpgBouncerが接続を転送した後にいくつかの接続を閉じてしまう可能性があります。
+  * SUSPEND 中はメンテナンスを無効化しました。そうしないと、短いタイムアウトの設定では、古い PgBouncer が接続を送り渡した後にいくつかの接続を閉じてしまう可能性がありました。
 
   * クライアントがウェルカムパケットを待っている間（最初のサーバー接続時）に client_login_timeout を適用する。そうでなければ、query_timeout が設定されていない限り、無限に待機し続ける可能性がある。
 
@@ -1209,13 +1303,12 @@ GNU Make 3.81 以上が必要です。
   * 管理コンソールへのアクセスは、「auth_type=any」の場合、ユーザー名がドロップされたため無効化されました。
       修正：「auth_type=any」の場合、任意のユーザーが管理者として管理コンソールにアクセスできるようにします。
   * 不具合のある CUSTOM_ALIGN マクロを修正。幸いにも、OS が ALIGN マクロを定義している場合、このマクロは使用されないため、実際の環境では問題が発生していなかったと思われる。
-  * win32: WSAStartup() を常に呼び出し、デーモンモード時のみでない
-    なぜなら、設定の解析時にホストを解決する必要があるため。
+  * win32: 設定解析時にホスト名解決が必要なため、WSAStartup() をデーモンモード時のみではなく常に呼び出すようにしました。
   * win32: サービスのコマンドラインで、パスにスペースを含む場合に備えて設定ファイル名を引用符で囲みます。実行可能ファイルのパスについては、win32 の仕様上、引用符の必要性がありません。
   * SHOW HELP テキストに STATS を追加。
   * doc/usage.txt: 管理コンソールの結果における時間単位はミリ秒ではなくマイクロ秒です。
 
-**2009-02-18  -  PgBouncer 1.3 -  "New Ki-Smash Finishing Move**
+**2009-02-18  -  PgBouncer 1.3 -  "New Ki-Smash Finishing Move"**
 
 - 機能
 
@@ -1235,14 +1328,14 @@ GNU Make 3.81 以上が必要です。
         > pgbouncer.exe config.ini -regservice
         > net start SERVICE_NAME
 
-    To stop and unregister:
+    停止と登録解除は以下の手順で行います。
 
         > net stop SERVICE_NAME
         > pgbouncer.exe config.ini -unregservice
 
     Windows イベントログを使用するには、事前にイベント DLL を登録する必要があります。
 
-        > regsrv32 pgbevent.dll
+        > regsvr32 pgbevent.dll
 
     その後、設定ファイルで syslog = 1 を設定できます。
 
@@ -1257,7 +1350,7 @@ GNU Make 3.81 以上が必要です。
 
     一部の状況（例：SMP サーバー、ローカル Postgres、高速ネットワーク）では、pgbouncer は recv()->send() ループをブロッキングせずに多数回実行できます。しかし、これは他の接続が長時間スタックする原因になります。処理の公平性を高めるため、1 つのソケットに対して recv()->send() を実行する回数を制限します。回数制限に達した場合、他のソケットの処理に進みます。そのソケットの処理は次のイベントループで再開されます。
 
-    Alexander Schocke による報告およびテストのおかげで。
+    Alexander Schöcke による報告とテストに感謝します。
 
   * crypt() 認証は現在オプションになりました。これは Postgres から削除されたためです。
       OS で提供されていなくても、pgbouncer は問題なく動作します。
@@ -1275,7 +1368,7 @@ GNU Make 3.81 以上が必要です。
       しかし、これにより無限ループによるログの洪水が発生していたため、
       libevent がこれを好まないようです。
 
-    Why event_del() report failure first time is still mystery.
+    なぜ event_del() が最初の呼び出しで失敗を報告するのかは、依然として謎です。
 
   * --enable-debug はもはやバイナリからデバッグ情報を削除するかどうかを切り替えるだけです。
       これ以上 -fomit-frame-pointer に影響を与えることはなく、危険なためです。
@@ -1288,24 +1381,24 @@ GNU Make 3.81 以上が必要です。
 
 ## PgBouncer 1.2.x {#pgbouncer-12x}
 
-**2008-08-08  -  PgBouncer 1.2.3  -  "Carefully Selected Bytes**
+**2008-08-08  -  PgBouncer 1.2.3  -  "Carefully Selected Bytes"**
 
 - 修正
   * BSD 用に動作しなかった SO_ACCEPTFILTER コードを無効化します。
   * 例として etc/userlist.txt を tgz に含める。
-  * 再帰には '$(MAKE)' を 'make' の代わりに使用してください (Jorgen Austvik)
+  * 再帰には 'make' の代わりに '$(MAKE)' を使用 (Jørgen Austvik)
   * glibc が無意味になるため、_GNU_SOURCE を定義してください。
-  * libevent 1.1 のリンクテストを通過させ、後に「1.3b+ が必要」を報告できるようにする
+  * libevent 1.1 のリンクテストを通過させ、後に「1.3b+ needed」（1.3b 以降が必要）というメッセージを報告できるようにしました。
   * 古い pidfile を検出し、削除する。
 
-Devrim GUNDUZ および Bjoern Metzdorf による問題報告およびテストのおかげで。
+Devrim GÜNDÜZ と Bjoern Metzdorf による問題報告とテストに感謝します。
 
 **2008-08-06  -  PgBouncer 1.2.2  -  「バーフバッグ付属」**
 
 - 修正
   * 'drop_on_error' を削除してください。これは誤ったアイデアでした。PostgreSQL の破損したプランキャッシュ動作を回避するための暫定対策として追加されたものですが、通常のケースで一部のクエリが常にエラーを返す場合に、損害を引き起こす可能性があります。
 
-**2008-08-04  -  PgBouncer 1.2.1  -  "Waterproof**
+**2008-08-04  -  PgBouncer 1.2.1  -  "Waterproof"**
 
 - 機能
   * 新しいパラメータ 'drop_on_error' — サーバーがエラーを発生させた場合、接続は再利用されず、クライアントが処理を終了した後に破棄されます。これはプランキャッシュを更新するために必要です。自動更新は 8.3 でも動作しません。デフォルトは 1 です。
@@ -1314,10 +1407,10 @@ Devrim GUNDUZ および Bjoern Metzdorf による問題報告およびテスト�
   * SUSPEND で suspend_timeout が発動した場合の無限ループを修正。
 - 軽微な整備
   * struct iovec に <sys/uio.h> を使用してください。
-  * 中断停止（SIGINT からの再開）を RESUME/SIGUSR2 で実行する場合、次回の PAUSE 時に発動しないようにする。
+  * RESUME/SIGUSR2 で（SIGINT による）シャットダウンを取り消すようにしました。そうしないと、次の PAUSE 時に発動してしまいます。
   * 管理コンソール操作がキャンセルされた場合の適切なログメッセージ。
 
-**2008-07-29  -  PgBouncer 1.2  -  "Ordinary Magic Flute**
+**2008-07-29  -  PgBouncer 1.2  -  "Ordinary Magic Flute"**
 
 PgBouncer 1.2 では、libevent バージョン 1.3b 以降が必要です。
 古い libevent バージョンでは、新しい再起動コードでクラッシュします。
@@ -1344,7 +1437,7 @@ PgBouncer 1.2 では、libevent バージョン 1.3b 以降が必要です。
 
     - fork後にSHUTDOWNを保持し、^Cが安全になるようにする
 
-    -  、接続先の Unix ソケットがリスニングしているか確認するために試行されます。
+    - 誰かがリッスンしているかどうかを確認するため、Unix ソケットへの connect() が試行されます。
         これにより、-R は、以前のプロセスが実行されていなくても使用可能になります。
         以前のプロセスが存在する場合でも、-R が使用されない限り、起動は失敗します。
 
@@ -1389,7 +1482,7 @@ PgBouncer 1.2 では、libevent バージョン 1.3b 以降が必要です。
 
 ## PgBouncer 1.1.x {#pgbouncer-11x}
 
-**2007-12-10  -  PgBouncer 1.1.2  -  "The Hammer**
+**2007-12-10  -  PgBouncer 1.1.2  -  "The Hammer"**
 
 - 機能
   * server_lifetime による切断は、(server_lifetime / pool_size) 秒ごとに分離されるようになりました。これにより、pgbouncer が再接続の洪水を引き起こすのを回避できます。
@@ -1402,7 +1495,7 @@ PgBouncer 1.2 では、libevent バージョン 1.3b 以降が必要です。
 - 整理作業。
   * バッファのアライメントを改善するために、構造体 SBuf のフィールドの順序を再配置する。
 
-**2007-10-26  -  PgBouncer 1.1.1  -  "Breakdancing Bee**
+**2007-10-26  -  PgBouncer 1.1.1  -  "Breakdancing Bee"**
 
 - 修正
   * サーバーのパラメーター・キャッシュが初期化されないまま残る場合があり、これにより不要な SET が発生しました。これは 8.1 では standard_conforming_strings を変更できないため問題を引き起こしました。
@@ -1410,7 +1503,7 @@ PgBouncer 1.2 では、libevent バージョン 1.3b 以降が必要です。
   * ドキュメントの修正。
   * doc/fixman.py を .tgz に含める。
 
-**2007-10-09  -  PgBouncer 1.1  -  "Mad-Hat Toolbox**
+**2007-10-09  -  PgBouncer 1.1  -  "Mad-Hat Toolbox"**
 
 - 機能
 
@@ -1420,14 +1513,14 @@ PgBouncer 1.2 では、libevent バージョン 1.3b 以降が必要です。
 
   * データベース接続文字列の拡張機能：
 
-    -  host= で指定されたホスト名を受け入れます。
-    - ホストにカスタム Unix ソケットの場所を許可する
+    - host= でホスト名を受け付けます。
+    - host= でカスタム Unix ソケットの場所を受け付ける
     - クォートされた値を許可: password=' asd''foo'
 
-  * 新しい設定変数: server_reset_query は、リリース直後にすぐに送信されます
+  * 新しい設定変数: server_reset_query。接続の解放直後に送信されます
   * 新しい設定変数: サーバーの接続割り当て方式を LIFO と RR の間で切り替えるための server_round_robin。
-  * でアイドル状態の接続に対して送信された Cancel パケットは、もはや接続を切断しなくなりました。
-  * からの ^C によるキャンセルは、SUSPEND / PAUSE に対して有効です。
+  * アイドル状態の接続に送信されたキャンセルパケットは、接続を切断しなくなりました。
+  * psql からの ^C によるキャンセルが SUSPEND / PAUSE でも機能するようになりました。
   * 起動時に FD 制限を出力する。
   * 一時停止時に、できるだけ早くパケット境界に到達するように試みます。
   * データベースパラメータに 'timezone' を追加します。
@@ -1449,37 +1542,37 @@ PgBouncer 1.2 では、libevent バージョン 1.3b 以降が必要です。
 
 ## PgBouncer 1.0.x {#pgbouncer-10x}
 
-**2007-06-18  -  PgBouncer 1.0.8  -  "Undead Shovel Jutsu**
+**2007-06-18  -  PgBouncer 1.0.8  -  "Undead Shovel Jutsu"**
 
 - 修正
   * キャンセルパケット処理でのクラッシュを修正。(^C による psql からの中断)
 - 機能
-  * 一時停止 <db>；再開 <db>；正常に動作しています。
+  * PAUSE <db> と RESUME <db> が動作するようになりました。
   * 管理コンソールコマンドの解析のクリーンアップ。
-  * 価格の高い in-list アサートチェックを無効化します。
+  * コストの高い in-list アサートチェックを無効化しました。
 
-**2007-04-19  -  PgBouncer 1.0.7  -  "With Vitamin A-Z**
+**2007-04-19  -  PgBouncer 1.0.7  -  "With Vitamin A-Z"**
 
 - 修正
-  * send() の間にエラー/通知パケットが発生し、アサートがトリガーされる。バッファリングのロジックを完全に削除することで修正する。pgbouncer は明示的にバッファを保持しないため、この処理は不要である。これは MSG_MORE でバッファリングをカーネルに押し出していた時代の残骸である。
+  * 複数のエラー／通知パケットを送信する際、パケット間で send() がブロックするとアサーションが発生する問題を、flush ロジックを完全に削除して修正しました。pgbouncer は明示的なバッファリングを行わないため、flush は不要です。これは、MSG_MORE でバッファリングをカーネル側に任せていた時代の名残です。
   * また、送信がブロック解除されたときに recv() のロジックを呼び出さないようにしてください。
   * admin_users および stats_users の検索コードで部分一致が正しく処理されない問題を修正。
   * UNIX ソケットのピア UID を取得する方法を標準化し、getpeereid() を使用する。
 
-**2007-04-12  -  PgBouncer 1.0.6  -  "Daily Dose**
+**2007-04-12  -  PgBouncer 1.0.6  -  "Daily Dose"**
 
 - 修正
-  * 「トーケイ中におけるメンテナンスの無効化」の修正により、メンテナンスが完全に無効化される可能性がある。修正する。
-  * 用の FreeBSD へのコンパイル修正、<sys/ucred.h> は <sys/param.h> が必要です。
+  * 「テイクオーバー中のメンテナンス無効化」の修正が、メンテナンス全体を無効化してしまう可能性がありました。修正しました。
+  * FreeBSD のコンパイル修正。FreeBSD では <sys/ucred.h> に <sys/param.h> が必要です。
       Robert Gogolok による報告に感謝します。
 
 **2007-04-11  -  PgBouncer 1.0.5  -  「今日はこれで十分」**
 
 - 修正
   * オンライン再起動のバグを修正：
-    - Set -> サーバーのアイドル状態を待機可能にします。
+    - アイドル状態のサーバーに ->ready を設定。
     - use_client_socket() から不要なコードを削除します
-    - トーキーイン中にメンテナンスを無効化します。
+    - テイクオーバー中にメンテナンスを無効化。
 
 **2007-04-11  -  PgBouncer 1.0.4  -  「最後の 'last' バグ」**
 
@@ -1488,7 +1581,7 @@ PgBouncer 1.2 では、libevent バージョン 1.3b 以降が必要です。
       release_server() はこれを想定していなかった。
       これを修正するには、それらを破棄してください。
 
-**2007-04-11  -  PgBouncer 1.0.3  -  "Fearless Fork**
+**2007-04-11  -  PgBouncer 1.0.3  -  "Fearless Fork"**
 
 - 修正
   * ログインパスにエラー処理が不足していたため、接続が終了した際にアサーションが発生する可能性がありました。
@@ -1498,20 +1591,20 @@ PgBouncer 1.2 では、libevent バージョン 1.3b 以降が必要です。
 - 新機能
   * 新しい設定変数: log_connections、log_disconnections、log_pooler_errors は、ログ出力を有効または無効にするために使用します。
   * 設定変数: client_login_timeout
-      ログインフェーズで、SUSPEND がスタックする可能性があるため、無応答の接続を切断するタイムアウト時間。
+      ログインフェーズで、SUSPEND ひいてはオンライン再起動を停滞させる可能性のある無応答の接続を切断します。
 
-**2007-03-28  -  PgBouncer 1.0.2  -  "Supersonic Spoon**
+**2007-03-28  -  PgBouncer 1.0.2  -  "Supersonic Spoon"**
 
 - 修正
   * libevent は、同じループ内で削除されたイベントを報告する可能性があります。
       1 つのループ内でソケットの再利用を回避してください。
   * release_server() は、disconnect_client() から呼び出された際に、パケットが実際に送信されたかどうかを確認していなかった。
 
-**2007-03-15  -  PgBouncer 1.0.1  -  "Alien technology**
+**2007-03-15  -  PgBouncer 1.0.1  -  "Alien technology"**
 
 - 修正
   * キャッシュ済みとキャッシュ未使用の時刻の混在、および unsigned usec_t の型定義の使用により、誤った query_timeout エラーが発生していた。
-  * 送信待機からソケットが起床したが、依然としてスタールする稀なケースを修正。
+  * 送信待機からソケットが起床した後も、依然としてストールする稀なケースを修正。
   * サーバー接続のより公正なキューイング。以前は、新しいクエリが古いクエリより先にサーバー接続を取得することができた。
   * サーバーの解放を、すべてのデータが確実に送信された後に遅らせる。
 
@@ -1521,6 +1614,6 @@ PgBouncer 1.2 では、libevent バージョン 1.3b 以降が必要です。
   * 管理コンソールで、SHOW の代わりに SELECT を許可します。
   * さまざまなコードの整備。
 
-**2007-03-13  -  PgBouncer 1.0  -  "Tuunitud bemm**
+**2007-03-13  -  PgBouncer 1.0  -  "Tuunitud bemm"**
 
 - 初の公開リリース。

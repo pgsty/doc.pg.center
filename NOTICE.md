@@ -7,9 +7,11 @@ The imported documentation is distributed under the Creative Commons Attribution
 The English and Simplified Chinese PgBouncer manuals were refreshed on 2026-10-04
 to version 1.26.0 (`pgbouncer_1_26_0`), using the proofread `pigsty.io` commit
 `fe0a9f08259fd6a55856d202609205606ba3c704` and `pigsty.cc` commit
-`e22fbc56ec1631a4d56a15ffb2b7e8721f411184`. They include corrections to four kinds
-of upstream reference errors, checked against the release implementation.
-Other language editions retain the 1.25.2 snapshot.
+`e22fbc56ec1631a4d56a15ffb2b7e8721f411184`. On 2026-10-13, all six editions were synchronized with the current English
+manual for 1.26.0. Local corrections to upstream factual errors, spelling and
+grammar were checked against the release implementation. Original diagnostic
+messages are preserved verbatim. The page-level review and corrected source
+fingerprints are recorded in `data/translation-audits/pgbouncer.json`.
 
 The pgBadger collection was imported on 2026-08-15 from <https://pgbadger.darold.net/> and from `darold/pgbadger` commit `a1ad95a035a0c2d246fe632eb1c361d4bde0ddae`. Its source code and source documentation are distributed under the PostgreSQL License, copyright 2012-2026 Gilles Darold. The complete license is retained in `sources/pgbadger/upstream/LICENSE` and beside the offline examples in `static/third_party/pgbadger/LICENSE`.
 

@@ -1,5 +1,5 @@
 ---
-title: "Source Releases Download"
+title: "ソースリリースのダウンロード"
 linkTitle: "ダウンロード"
 weight: 50
 description: "PgBouncer のソースリリースおよびバイナリパッケージ"
@@ -9,6 +9,14 @@ categories: [リファレンス]
 aliases: [/pgbouncer/download/]
 upstream_link: "https://www.pgbouncer.org/downloads/"
 ---
+
+--------
+
+## PgBouncer 1.26 {#pgbouncer-126}
+
+| ファイル | 日付 | サイズ | チェックサム |
+|------|------|------|----------|
+| [pgbouncer-1.26.0.tar.gz](https://www.pgbouncer.org/downloads/files/1.26.0/pgbouncer-1.26.0.tar.gz) | 2026-09-23 | 897943 バイト | [sha256](https://www.pgbouncer.org/downloads/files/1.26.0/pgbouncer-1.26.0.tar.gz.sha256) |
 
 --------
 
@@ -262,5 +270,5 @@ upstream_link: "https://www.pgbouncer.org/downloads/"
 
 専用ビルドは、ディストリビュータのリポジトリに公開されているバージョンよりも新しい場合があります。
 
-- RPM: [yum.PostgreSQL.org](https://yum.postgresql.org/)
-- Deb: [apt.PostgreSQL.org](https://apt.postgresql.org/)
+- RPM: [yum.postgresql.org](https://yum.postgresql.org/)
+- Deb: [apt.postgresql.org](https://apt.postgresql.org/)
