@@ -202,7 +202,7 @@ example: --no-sck-keep-alive
 
 stanza 是 pgBackRest 中用于标识一个 PostgreSQL 集群备份配置的逻辑名称，包含集群的位置、备份方式、归档选项等信息。大多数数据库主机只有一个 PostgreSQL 集群，因此只需配置一个 stanza；备份服务器则需为每个待备份的集群各配置一个 stanza。
 
-命名 stanza 时，用主库名称固然直观，但用描述数据库实际用途的名称（如 `app` 或 `dw`）更为合适，因为该名称对主库和所有副本均适用，而非仅用于本地集群（如 `main` 或 `prod`）。
+命名 stanza 时，直接使用主集群名称固然省事，但更好的名称应描述集群所包含的数据库。由于 stanza 名称同时用于主库和所有副本，选择描述集群实际功能的名称（如 `app` 或 `dw`）比使用本地集群名称（如 `main` 或 `prod`）更为合适。
 
 ```yaml
 example: --stanza=main
@@ -593,7 +593,7 @@ example: --repo1-host-key-file=/path/to/client.key
 
 ### 仓库主机端口选项（`--repo-host-port`）
 
-设置了 `repo-host` 时的仓库主机端口。
+设置 `repo-host` 时，用于连接仓库主机的端口。
 
 使用此选项为仓库主机协议指定非默认端口。
 
@@ -601,7 +601,7 @@ example: --repo1-host-key-file=/path/to/client.key
 
 ```yaml
 default (depending on repo-host-type):
-   tls - 8432
+    tls - 8432
 
 allowed: [0, 65535]
 example: --repo1-host-port=25
@@ -625,7 +625,7 @@ example: --repo1-host-type=tls
 
 ### 仓库主机用户选项（`--repo-host-user`）
 
-设置了 `repo-host` 时的仓库主机用户。
+设置 `repo-host` 时，用于登录仓库主机的用户。
 
 定义在仓库主机上执行操作所使用的用户。建议使用专用用户（如 `pgbackrest`），而非 `postgres` 用户。若 PostgreSQL 运行在仓库主机上，可将 `postgres` 用户加入 `pgbackrest` 组，使其具有仓库的读取权限，同时防止意外损坏仓库内容。
 
@@ -642,7 +642,7 @@ example: --repo1-host-user=repo-user
 
 仓库是 pgBackRest 存储备份和归档 WAL 段的位置。
 
-预估所需空间可能较为困难。建议先执行几次备份，记录不同备份类型（全量/增量/差异）的大小，并测量每日产生的 WAL 量，从而大致估算所需空间；当然，随着数据库规模增长，实际需求也会随之变化。
+预估所需空间可能较为困难。建议先执行几次备份，记录不同备份类型（全量/增量/差异）的大小，并测量每日产生的 WAL 量，从而大致估算所需空间；当然，随着数据库的演进，实际需求也很可能随时间变化。
 
 ```yaml
 default: /var/lib/pgbackrest
@@ -683,7 +683,7 @@ S3 仓库密钥类型。
 - `auto` - 自动获取临时凭据
 - `web-id` - 自动获取 Web 身份凭据
 - `pod-id` - 自动获取 EKS Pod 身份凭据
-- `process` - 通过外部进程获取凭据
+- `process` - 通过执行进程获取凭据
 
 ```yaml
 default: shared
@@ -819,7 +819,7 @@ example: --repo1-sftp-host-key-check-type=accept-new
 
 SFTP 仓库主机密钥哈希类型。
 
-声明在 SSH 启动时用于计算远程系统主机密钥摘要的哈希算法。较新版本的 `libssh2` 除 md5 和 sha1 外，还支持 `sha256`。
+声明在 SSH 启动时用于计算远程系统主机密钥摘要的哈希类型。较新版本的 `libssh2` 除 md5 和 sha1 外，还支持 `sha256`。
 
 ```yaml
 example: --repo1-sftp-host-key-hash-type=sha256
@@ -851,7 +851,7 @@ example: --repo1-sftp-host-user=pg-backup
 
 SFTP 已知主机文件。
 
-认证时用于搜索 SFTP 主机匹配项的已知主机文件。若未指定，pgBackRest 默认搜索 `~/.ssh/known_hosts`、`~/.ssh/known_hosts2`、`/etc/ssh/ssh_known_hosts` 和 `/etc/ssh/ssh_known_hosts2`。若配置了一个或多个文件路径，pgBackRest 将只在这些文件中搜索匹配项。文件路径必须为完整路径或以波浪号开头的路径。可多次传入 `repo-sftp-known-host` 以指定多个已知主机文件。使用已知主机文件检查时，不得同时指定 `repo-sftp-host-fingerprint`。另请参阅 `repo-sftp-host-check-type` 选项。
+认证时用于搜索 SFTP 主机匹配项的已知主机文件。若未指定，pgBackRest 默认搜索 `~/.ssh/known_hosts`、`~/.ssh/known_hosts2`、`/etc/ssh/ssh_known_hosts` 和 `/etc/ssh/ssh_known_hosts2`。若配置了一个或多个文件路径，pgBackRest 将在这些文件中搜索匹配项。文件路径必须为完整路径或以波浪号开头的路径。可多次传入 `repo-sftp-known-host` 以指定多个已知主机文件。使用已知主机文件检查时，不得同时指定 `repo-sftp-host-fingerprint`。另请参阅 `repo-sftp-host-check-type` 选项。
 
 ```yaml
 example: --repo1-sftp-known-host=/home/postgres/.ssh/known_hosts
@@ -953,14 +953,14 @@ example: --repo1-storage-tag=key1=value1
 
 ```yaml
 default (depending on repo-type):
-   azure - 4MiB
-   gcs - 4MiB
-   s3 - 5MiB
+    azure - 4MiB
+    gcs - 4MiB
+    s3 - 5MiB
 
 allow range (depending on repo-type):
-   azure - [4MiB, 1GiB]
-   gcs - [4MiB, 1GiB]
-   s3 - [5MiB, 1GiB]
+    azure - [4MiB, 1GiB]
+    gcs - [4MiB, 1GiB]
+    s3 - [5MiB, 1GiB]
 
 example: --repo1-storage-upload-chunk-size=16MiB
 ```

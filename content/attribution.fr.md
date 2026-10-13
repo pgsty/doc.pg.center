@@ -30,7 +30,7 @@ Cette page est cet enregistrement. Elle indique ce qui a été importé, à quel
 | Composant | Travail du projet amont | Verrouillé à | Licence | Avis conservé |
 |---|---|---|---|---|
 | [Patroni](/fr/docs/patroni/) | [documentation de Patroni](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Projet amont `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/fr/docs/pgbackrest/) | [documentation de pgBackRest](https://pgbackrest.org/) | v2.59.2 (anglais / chinois simplifié) ; v2.59.1 (autres traductions) | [MIT](https://opensource.org/license/mit) | [Projet amont `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [pgBackRest](/fr/docs/pgbackrest/) | [documentation de pgBackRest](https://pgbackrest.org/) | v2.59.3 (les six langues) | [MIT](https://opensource.org/license/mit) | [Projet amont `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
 | [PgBouncer](/fr/docs/pgbouncer/) | [documentation de PgBouncer](https://www.pgbouncer.org/) | v1.26.0 (les six langues) | [ISC](https://opensource.org/license/isc-license-txt) | [Projet amont `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/fr/docs/pgbadger/) | [documentation de pgBadger](https://pgbadger.darold.net/) | v13.2, commit `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/fr/docs/haproxy/) | [manuels HAProxy 3.4](https://docs.haproxy.org/3.4/) | v3.4.4, commit `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
@@ -48,7 +48,7 @@ Patroni est protégé par le droit d'auteur (c) 2025 Compose, Zalando SE, contri
 
 Importé le 2026-08-15 depuis le [site de documentation pgBackRest](https://pgbackrest.org/).
 Les éditions anglaise et en chinois simplifié ont été mises à jour le 2026-10-04 vers **v2.59.2**.
-Les autres traductions existantes restent à **v2.59.1**, leur dernière mise à jour datant du 2026-08-30.
+Au 2026-10-13, les six éditions linguistiques sont alignées sur **v2.59.3**. La vérification avant publication corrige les instructions obsolètes de sélection des sauvegardes pour la PITR et un avertissement historique tronqué, à partir du code et du XML de la version amont correspondante ; voir `data/translation-audits/pgbackrest.json`.
 
 pgBackRest est protégé par le droit d'auteur (c) 2015-2026 le Groupe de développement mondial de PostgreSQL et David Steele,
 et est distribué sous la licence [MIT License](https://opensource.org/license/mit). Le texte complet de la licence est conservé [en amont](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE).

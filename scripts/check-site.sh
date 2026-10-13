@@ -46,9 +46,9 @@ test "$legacy_french_count" -eq "$legacy_complete_expected"
 test "$english_count" -eq "$total_complete_expected"
 test "$chinese_count" -eq "$total_complete_expected"
 test "$french_count" -eq "$total_complete_expected"
-test "$japanese_count" -eq 105
-test "$german_count" -eq 36
-test "$russian_count" -eq 187
+test "$japanese_count" -eq 128
+test "$german_count" -eq 65
+test "$russian_count" -eq 210
 test "$(find "$docs_dir/pgbouncer" -type f -name '*.ja.md' | wc -l | tr -d ' ')" -eq 9
 test "$(find "$docs_dir/pgbouncer" -type f -name '*.de.md' | wc -l | tr -d ' ')" -eq 9
 test "$(find "$docs_dir/pgbadger" -type f -name '*.de.md' | wc -l | tr -d ' ')" -eq 16
@@ -56,6 +56,9 @@ test "$(find "$docs_dir/patroni" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -
 test "$(find "$docs_dir/pgbouncer" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -eq 9
 test "$(find "$docs_dir/pgbadger" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -eq 16
 test "$(find "$docs_dir/etcd" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -eq 99
+for language in ja de ru; do
+  test "$(find "$docs_dir/pgbackrest" -type f -name "*.$language.md" | wc -l | tr -d ' ')" -eq 29
+done
 test "$haproxy_count" -eq "$haproxy_expected"
 test "$haproxy_chinese_count" -eq "$haproxy_expected"
 test "$haproxy_french_count" -eq "$haproxy_expected"
@@ -197,8 +200,8 @@ grep -Fxq 'baseURL: https://pig.center/' "$project_dir/hugo.yaml"
 grep -Fxq '  productionURL: https://pig.center' "$project_dir/hugo.yaml"
 grep -Fq 'title: "Patroni 4.1.5 Documentation"' "$docs_dir/patroni/_index.md"
 grep -Fq 'title: "Patroni 4.1.5 中文文档"' "$docs_dir/patroni/_index.zh.md"
-grep -Fq 'title: "pgBackRest 2.59.2 Documentation"' "$docs_dir/pgbackrest/_index.md"
-grep -Fq 'title: "pgBackRest 2.59.2 中文文档"' "$docs_dir/pgbackrest/_index.zh.md"
+grep -Fq 'title: "pgBackRest 2.59.3 Documentation"' "$docs_dir/pgbackrest/_index.md"
+grep -Fq 'title: "pgBackRest 2.59.3 中文文档"' "$docs_dir/pgbackrest/_index.zh.md"
 grep -Fq 'title: "PgBouncer 1.26.0 Documentation"' "$docs_dir/pgbouncer/_index.md"
 grep -Fq 'title: "PgBouncer 1.26.0 中文文档"' "$docs_dir/pgbouncer/_index.zh.md"
 grep -Fq 'title: "pgBadger 13.2 Documentation"' "$docs_dir/pgbadger/_index.md"
@@ -212,16 +215,26 @@ python3 "$project_dir/scripts/check-bilingual-parity.py"
 python3 -B "$project_dir/scripts/test-pgbouncer-parity.py"
 python3 -B "$project_dir/scripts/check-pgbouncer.py"
 
+python3 -B "$project_dir/scripts/test-pgbackrest.py"
+python3 -B "$project_dir/scripts/test-pgbackrest-ja.py"
+python3 -B "$project_dir/scripts/test-pgbackrest-ja-print.py"
+python3 -B "$project_dir/scripts/check-pgbackrest.py"
+
 HUGO_RESOURCEDIR="$build_dir/resources" \
   hugo --source "$project_dir" --destination "$build_dir/public" --cacheDir "${HUGO_CACHEDIR:-$build_dir/cache}" --gc --minify --cleanDestinationDir --printPathWarnings --printI18nWarnings --panicOnWarning
 
 PGBOUNCER_RENDERED_DIR="$build_dir/public" python3 -B "$project_dir/scripts/test-pgbouncer-parity.py"
 python3 -B "$project_dir/scripts/check-pgbouncer.py" --rendered-dir "$build_dir/public"
 
+python3 -B "$project_dir/scripts/check-pgbackrest.py" --rendered-dir "$build_dir/public"
+node "$project_dir/scripts/test-pgbackrest-search.cjs" "$build_dir/public"
+python3 -B "$project_dir/scripts/check-pgbackrest-ja.py" --rendered-dir "$build_dir/public"
+python3 -B "$project_dir/scripts/check-pgbackrest-de.py" --rendered-dir "$build_dir/public"
+
 TRANSLATION_RENDERED_DIR="$build_dir/public" \
   python3 "$project_dir/scripts/check-component-translations.py" haproxy etcd
-# PgBouncer is covered by the complete current-source gate above.
-python3 "$project_dir/scripts/check-german-parity.py" --allow-partial --rendered-dir "$build_dir/public" --exclude-component pgbouncer
+# PgBouncer and pgBackRest have complete current-source gates above.
+python3 "$project_dir/scripts/check-german-parity.py" --allow-partial --rendered-dir "$build_dir/public" --exclude-component pgbouncer --exclude-component pgbackrest
 python3 "$project_dir/scripts/check-german-prose.py"
 python3 "$project_dir/scripts/check-russian-parity.py" --allow-partial
 
@@ -501,12 +514,12 @@ for language in ("ja", "de", "ru"):
 _, ja = home("ja")
 assert has_link(ja, "/ja/docs/pgbouncer/")
 assert has_link(ja, "/ja/docs/patroni/")
-assert has_link(ja, "/docs/pgbackrest/user-guide/", "en")
+assert has_link(ja, "/ja/docs/pgbackrest/user-guide/")
 
 _, de = home("de")
 assert has_link(de, "/de/docs/pgbadger/")
 assert has_link(de, "/de/docs/patroni/")
-assert has_link(de, "/docs/pgbackrest/", "en")
+assert has_link(de, "/de/docs/pgbackrest/")
 
 _, ru = home("ru")
 assert has_link(ru, "/ru/docs/etcd/")

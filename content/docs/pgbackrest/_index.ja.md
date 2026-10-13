@@ -1,5 +1,5 @@
 ---
-title: "pgBackRest 2.59.1 ドキュメント"
+title: "pgBackRest 2.59.3 ドキュメント"
 linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
@@ -12,9 +12,11 @@ module: [PGBACKREST]
 categories: [概念]
 aliases: [/pgbackrest/]
 upstream_source: pgbackrest
+upstream_ref: v2.59.3
 upstream_link: "https://pgbackrest.org/"
 cascade:
   upstream_source: pgbackrest
+  upstream_ref: v2.59.3
   type: docs
   module: [PGBACKREST]
 ---
@@ -25,7 +27,9 @@ cascade:
 
 pgBackRestは、最大規模のデータベースやワークロードにもシームレスに対応できる、PostgreSQL向けの信頼性の高いバックアップとリストアのソリューションです。
 
-現在の安定版はpgBackRest [v2.59.1](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.1)です。リリースノートは[リリース](/ja/docs/pgbackrest/release/)ページにあります。
+このドキュメントミラーはpgBackRest [v2.59.3](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.3)を対象としています。リリースノートは[リリース](/ja/docs/pgbackrest/release/)ページにあります。
+
+2.59.3では、脆弱な暗号化サブキーやソルトが生成される可能性がある問題が修正されました。アップグレードしても、スタンザの既存の脆弱なサブキーは置き換わりません。確認手順と対処方法は[脆弱な暗号化サブキーとソルト](/ja/docs/pgbackrest/news/#weak-encryption)を参照してください。
 
 pgBackRestを気に入っていただけたら、[GitHub](https://github.com/pgbackrest/pgbackrest)でスターを付けてください！
 
@@ -34,11 +38,11 @@ pgBackRestを気に入っていただけたら、[GitHub](https://github.com/pgb
 
 ## ニュース {#news}
 
-**2026年8月17日** - [pgBackRest 2.59.1をリリース](/ja/docs/pgbackrest/news/#release-2-59-1)
+**2026年10月4日** - [脆弱な暗号化サブキーとソルト](/ja/docs/pgbackrest/news/#weak-encryption)
 
-**2026年7月20日** - [新しい配布用tarアーカイブ](/ja/docs/pgbackrest/news/#distribution-tarball)
+**2026年10月4日** - [pgBackRest 2.59.3をリリース](/ja/docs/pgbackrest/news/#release-2-59-3)
 
-**2026年7月20日** - [pgBackRest 2.59.0をリリース](/ja/docs/pgbackrest/news/#release-2-59-0)
+**2026年9月27日** - [pgBackRest 2.59.2をリリース](/ja/docs/pgbackrest/news/#release-2-59-2)
 
 
 --------
@@ -104,7 +108,7 @@ PostgreSQLコミュニティ全体に役立つオープンソースのインフ�
 
 ### バックアップの再開 {#backup-resume}
 
-中断されたバックアップは、停止した時点から再開できます。すでにコピーされたファイルをマニフェスト内のチェックサムと比較し、整合性を確認します。この操作はリポジトリホスト内だけで完結するため、PostgreSQLホストの負荷を軽減できます。また、チェックサムの計算はデータの圧縮と再転送より速いため、時間も短縮できます。
+中断されたバックアップは、停止した時点から再開できます。すでにコピーされたファイルをマニフェスト内のチェックサムと比較し、整合性を確認します。この操作はリポジトリホスト内だけで完結できるため、PostgreSQLホストの負荷を軽減できます。また、チェックサムの計算はデータの圧縮と再転送より速いため、時間も短縮できます。
 
 
 ### ストリーミング圧縮とチェックサム {#streaming-compression--checksums}

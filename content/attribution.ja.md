@@ -26,7 +26,7 @@ pig.centerは、6つのアップストリームプロジェクトが作成した
 | コンポーネント | アップストリームの著作物 | 固定バージョン | ライセンス | 保存されている通知 |
 |---|---|---|---|---|
 | [Patroni](/ja/docs/patroni/) | [Patroniドキュメント](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [アップストリームの`LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/ja/docs/pgbackrest/) | [pgBackRestドキュメント](https://pgbackrest.org/) | v2.59.2（英語 / 簡体字中国語）；v2.59.1（その他の翻訳） | [MIT](https://opensource.org/license/mit) | [アップストリームの`LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [pgBackRest](/ja/docs/pgbackrest/) | [pgBackRestドキュメント](https://pgbackrest.org/) | v2.59.3 (全6言語) | [MIT](https://opensource.org/license/mit) | [アップストリームの`LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
 | [PgBouncer](/ja/docs/pgbouncer/) | [PgBouncerドキュメント](https://www.pgbouncer.org/) | v1.26.0（全6言語） | [ISC](https://opensource.org/license/isc-license-txt) | [アップストリームの`COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/ja/docs/pgbadger/) | [pgBadgerドキュメント](https://pgbadger.darold.net/) | v13.2、コミット`a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/ja/docs/haproxy/) | [HAProxy 3.4マニュアル](https://docs.haproxy.org/3.4/) | v3.4.4、コミット`7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
@@ -44,7 +44,7 @@ Patroniの著作権表示はcopyright (c) 2025 Compose, Zalando SE, Patroni Cont
 
 2026-08-15に[pgBackRestドキュメントサイト](https://pgbackrest.org/)からインポートしました。
 英語版と簡体字中国語版は2026-10-04に**v2.59.2**へ更新しました。
-その他の既存の翻訳は**v2.59.1**のままで、最終更新日は2026-08-30です。
+2026-10-13時点で、全6言語版を**v2.59.3**に統一しました。公開前の検証では、該当する上流バージョンの実装とXMLに基づき、古いPITRバックアップ選択の説明と途中で切れていた過去の警告を修正しました。詳細は `data/translation-audits/pgbackrest.json` を参照してください。
 
 pgBackRestの著作権表示はcopyright (c) 2015-2026 The PostgreSQL Global Development Group and David Steeleです。[MIT License](https://opensource.org/license/mit)のもとで配布されています。完全なライセンス本文は[アップストリーム](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE)に保存されています。
 

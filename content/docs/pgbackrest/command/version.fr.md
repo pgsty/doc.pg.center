@@ -1,5 +1,5 @@
 ---
-title: "Commande Version (version)"
+title: "Commande de version (version)"
 linkTitle: "version"
 weight: 200
 description: "Référence des options et du comportement de la commande pgBackRest `version`."

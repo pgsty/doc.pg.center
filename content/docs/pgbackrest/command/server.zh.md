@@ -31,7 +31,7 @@ TLS 服务器授权客户端。
 
 服务器通过验证客户端证书，并将其证书 CN（Common Name，通用名称）与 `tls-server-auth` 选项所配置的列表进行比对，来完成对客户端的授权。
 
-可通过向 `tls-server-auth` 选项传入逗号分隔的列表，授权某个客户端 CN 访问多个 stanza（stanza 是 pgBackRest 中用于标识一个 PostgreSQL 集群备份配置的逻辑名称）；也可通过指定 `tls-server-auth=client-cn=*` 授权其访问所有 stanza。客户端 CN 不支持通配符。
+可通过向 `tls-server-auth` 选项传入逗号分隔的列表，授权某个客户端 CN 访问多个 stanza；也可通过指定 `tls-server-auth=client-cn=*` 授权其访问所有 stanza。客户端 CN 不支持通配符。
 
 ```yaml
 example: --tls-server-auth=client-cn=stanza1,stanza2
@@ -51,7 +51,7 @@ example: --tls-server-ca-file=/path/to/server.ca
 
 TLS 服务器证书文件。
 
-发送给客户端以证明服务器身份的证书。
+发送给客户端以展示服务器身份。
 
 ```yaml
 example: --tls-server-cert-file=/path/to/server.crt
@@ -61,7 +61,7 @@ example: --tls-server-cert-file=/path/to/server.crt
 
 TLS 服务器密钥文件。
 
-用于证明服务器证书归属的私钥。
+证明服务器证书由所有者发送。
 
 ```yaml
 example: --tls-server-key-file=/path/to/server.key

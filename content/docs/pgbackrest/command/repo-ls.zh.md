@@ -95,7 +95,7 @@ example: --allow-root
 
 I/O 操作的缓冲区大小。
 
-该缓冲区用于复制、压缩、加密等操作。实际使用的缓冲区数量取决于具体选项，每种操作可能额外占用内存，例如 `gz` 压缩最多可额外使用 256KiB 内存。
+该缓冲区用于复制、压缩、加密等操作。实际使用的缓冲区数量取决于具体选项，每种操作可能额外占用内存，例如 `gz` 压缩可能额外使用 256KiB 内存。
 
 允许的值为 `16KiB`、`32KiB`、`64KiB`、`128KiB`、`256KiB`、`512KiB`、`1MiB`、`2MiB`、`4MiB`、`8MiB` 和 `16MiB`。
 
@@ -119,7 +119,7 @@ example: --cmd-ssh=/usr/bin/ssh
 
 网络压缩级别。
 
-当 `compress-type=none` 且命令不在仓库所在主机上执行时，此选项设置网络传输的压缩级别，以减少网络流量。若 `compress-type` 不等于 `none`，则忽略此设置，改用 `compress-level`，避免对文件进行二次压缩。
+当 `compress-type=none` 且命令不在仓库所在主机上运行时，设置网络传输的压缩级别，以减少网络流量。当 `compress-type` 不等于 `none` 时，`compress-level-network` 设置会被忽略，改用 `compress-level`，使文件只压缩一次。
 
 ```yaml
 default: 1
@@ -216,9 +216,9 @@ example: --protocol-timeout=630
 
 ### 保活选项（`--sck-keep-alive`）
 
-启用 keep-alive。
+启用保活。
 
-在套接字连接上启用 keep-alive 消息。
+在 socket 连接上启用保活消息。
 
 ```yaml
 default: y
@@ -227,11 +227,11 @@ example: --no-sck-keep-alive
 
 ### TCP 保活计数选项（`--tcp-keep-alive-count`）
 
-Keep-alive 计数。
+保活计数。
 
-指定在判定连接断开之前，允许丢失的 TCP keep-alive 消息数量。
+指定在判定连接断开之前，允许丢失的 TCP 保活消息数量。
 
-此选项仅在系统支持 `TCP_KEEPCNT` 套接字选项时有效。
+此选项仅在系统支持 `TCP_KEEPCNT` socket 选项时可用。
 
 ```yaml
 allowed: [1, 32]
@@ -240,11 +240,11 @@ example: --tcp-keep-alive-count=3
 
 ### TCP 保活空闲时间选项（`--tcp-keep-alive-idle`）
 
-Keep-alive 空闲时间。
+保活空闲时间。
 
-指定在无网络活动达到多少秒后，操作系统开始发送 TCP keep-alive 消息。
+指定在无网络活动达到多少秒后，操作系统开始发送 TCP 保活消息。
 
-此选项仅在系统支持 `TCP_KEEPIDLE` 套接字选项时有效。
+此选项仅在系统支持 `TCP_KEEPIDLE` socket 选项时可用。
 
 ```yaml
 allowed: [1, 3600]
@@ -253,11 +253,11 @@ example: --tcp-keep-alive-idle=60
 
 ### TCP 保活间隔选项（`--tcp-keep-alive-interval`）
 
-Keep-alive 间隔时间。
+保活间隔时间。
 
-指定未收到确认的 TCP keep-alive 消息重新发送前的等待秒数。
+指定未收到确认的 TCP 保活消息重新发送前的等待秒数。
 
-此选项仅在系统支持 `TCP_KEEPINTVL` 套接字选项时有效。
+此选项仅在系统支持 `TCP_KEEPINTVL` socket 选项时可用。
 
 ```yaml
 allowed: [1, 900]
@@ -610,7 +610,7 @@ example: --repo1-host-key-file=/path/to/client.key
 
 ### 仓库主机端口选项（`--repo-host-port`）
 
-`repo-host` 已设置时的仓库主机端口。
+设置 `repo-host` 时，用于连接仓库主机的端口。
 
 通过此选项为仓库主机协议指定非默认端口。
 
@@ -618,7 +618,7 @@ example: --repo1-host-key-file=/path/to/client.key
 
 ```yaml
 default (depending on repo-host-type):
-   tls - 8432
+    tls - 8432
 
 allowed: [0, 65535]
 example: --repo1-host-port=25
@@ -642,7 +642,7 @@ example: --repo1-host-type=tls
 
 ### 仓库主机用户选项（`--repo-host-user`）
 
-`repo-host` 已设置时的仓库主机用户。
+设置 `repo-host` 时，用于登录仓库主机的用户。
 
 定义在仓库主机上执行操作所使用的用户。建议使用专用用户（如 `pgbackrest`）而非 `postgres`。若 PostgreSQL 运行在仓库主机上，可将 `postgres` 用户加入 `pgbackrest` 组，使其对仓库拥有读取权限，同时避免意外损坏仓库内容。
 
@@ -659,7 +659,7 @@ example: --repo1-host-user=repo-user
 
 仓库是 pgBackRest 存储备份和归档 WAL 段的位置。
 
-预先估算所需空间可能比较困难。建议先执行几次备份，分别记录全量、增量、差异备份的大小，并统计每天的 WAL 生成量，从而大致估算所需空间。随着数据库的演进，空间需求也会持续变化。
+预先估算所需空间可能比较困难。建议先执行几次备份，分别记录全量、增量、差异备份的大小，并统计每天的 WAL 生成量，从而大致估算所需空间。随着数据库的演进，空间需求也很可能随时间变化。
 
 ```yaml
 default: /var/lib/pgbackrest
@@ -696,11 +696,11 @@ S3 仓库密钥类型。
 
 支持以下类型：
 
-- `shared` - 共享密钥
-- `auto` - 自动获取临时凭据
-- `web-id` - 自动获取 Web 身份凭据
-- `pod-id` - 自动获取 EKS Pod 身份凭据
-- `process` - 通过外部进程获取凭据
+- `shared` — 共享密钥
+- `auto` — 自动获取临时凭据
+- `web-id` — 自动获取 Web 身份凭据
+- `pod-id` — 自动获取 EKS Pod 身份凭据
+- `process` — 通过执行进程获取凭据
 
 ```yaml
 default: shared
@@ -810,7 +810,7 @@ example: --repo1-sftp-host=sftprepo.domain
 
 SFTP 仓库主机指纹。
 
-指纹的生成方式须与 `repo-sftp-host-key-hash-type` 保持一致。可通过以下命令生成：`awk '{print $2}' ssh_host_xxx_key.pub | base64 -d | (md5sum or sha1sum) -b`。SSH 主机密钥通常位于 `/etc/ssh` 目录下。
+指纹的生成方式应与 `repo-sftp-host-key-hash-type` 保持一致。可通过以下命令生成：`awk '{print $2}' ssh_host_xxx_key.pub | base64 -d | (md5sum or sha1sum) -b`。SSH 主机密钥通常位于 `/etc/ssh` 目录下。
 
 ```yaml
 example: --repo1-sftp-host-fingerprint=f84e172dfead7aeeeae6c1fdfb5aa8cf
@@ -836,7 +836,7 @@ example: --repo1-sftp-host-key-check-type=accept-new
 
 SFTP 仓库主机密钥哈希类型。
 
-声明 SSH 握手时计算远程主机密钥摘要所用的哈希算法。较新版本的 `libssh2` 在 md5 和 sha1 之外还支持 `sha256`。
+声明 SSH 启动时计算远程主机密钥摘要所用的哈希类型。较新版本的 `libssh2` 在 md5 和 sha1 之外还支持 `sha256`。
 
 ```yaml
 example: --repo1-sftp-host-key-hash-type=sha256
@@ -845,6 +845,8 @@ example: --repo1-sftp-host-key-hash-type=sha256
 ### SFTP 仓库主机端口选项（`--repo-sftp-host-port`）
 
 SFTP 仓库主机端口。
+
+SFTP 仓库主机的端口号。
 
 ```yaml
 default: 22
@@ -866,7 +868,7 @@ example: --repo1-sftp-host-user=pg-backup
 
 SFTP 已知主机文件。
 
-认证时用于匹配 SFTP 主机的已知主机文件。若未指定，pgBackRest 默认搜索 `~/.ssh/known_hosts`、`~/.ssh/known_hosts2`、`/etc/ssh/ssh_known_hosts` 和 `/etc/ssh/ssh_known_hosts2`。若指定了一个或多个文件路径，pgBackRest 将仅在这些文件中查找匹配项。路径必须为完整路径或以波浪号（`~`）开头的路径。此选项可多次传入以指定多个文件。使用已知主机文件检查时，不得同时指定 `repo-sftp-host-fingerprint`。另请参阅 `repo-sftp-host-check-type` 选项。
+认证时用于匹配 SFTP 主机的已知主机文件。若未指定，pgBackRest 默认搜索 `~/.ssh/known_hosts`、`~/.ssh/known_hosts2`、`/etc/ssh/ssh_known_hosts` 和 `/etc/ssh/ssh_known_hosts2`。若指定了一个或多个文件路径，pgBackRest 将在这些文件中查找匹配项。路径必须为完整路径或以波浪号（`~`）开头的路径。`repo-sftp-known-host` 选项可多次传入以指定多个文件。使用已知主机文件检查时，不得同时指定 `repo-sftp-host-fingerprint`。另请参阅 `repo-sftp-host-check-type` 选项。
 
 ```yaml
 example: --repo1-sftp-known-host=/home/postgres/.ssh/known_hosts
@@ -920,7 +922,7 @@ example: --repo1-storage-ca-path=/etc/pki/tls/certs
 
 仓库存储主机。
 
-连接到非标准存储端点（如 S3、Azure）的主机地址，通常用于测试。
+连接到存储（如 S3、Azure）端点以外的主机，通常用于测试。
 
 ```yaml
 example: --repo1-storage-host=127.0.0.1
@@ -932,7 +934,7 @@ example: --repo1-storage-host=127.0.0.1
 
 仓库存储端口。
 
-连接对象存储端点（或指定主机）时使用的端口。
+连接存储（如 S3、Azure）端点（或指定主机）时使用的端口。
 
 ```yaml
 default: 443
@@ -968,14 +970,14 @@ S3 等对象存储在文件过大无法整体载入内存时，支持分块上�
 
 ```yaml
 default (depending on repo-type):
-   azure - 4MiB
-   gcs - 4MiB
-   s3 - 5MiB
+    azure - 4MiB
+    gcs - 4MiB
+    s3 - 5MiB
 
 allow range (depending on repo-type):
-   azure - [4MiB, 1GiB]
-   gcs - [4MiB, 1GiB]
-   s3 - [5MiB, 1GiB]
+    azure - [4MiB, 1GiB]
+    gcs - [4MiB, 1GiB]
+    s3 - [5MiB, 1GiB]
 
 example: --repo1-storage-upload-chunk-size=16MiB
 ```
@@ -1001,7 +1003,7 @@ example: --no-repo1-storage-verify-tls
 
 S3、GCS 和 Azure 均支持版本化存储，但通常默认未启用。除启用版本控制外，还可以考虑为 S3 启用对象锁定，为 GCS 或 Azure 启用软删除。
 
-使用 `repo-target-time` 时，必须同时指定 `repo` 选项。并非所有仓库类型都支持版本控制，通常针对单个仓库进行恢复最为合理。
+使用 `repo-target-time` 时，必须同时指定 `repo` 选项。很可能并非所有仓库类型都支持版本控制，通常针对单个仓库进行恢复最为合理。
 
 注意，时间戳比较使用 `<=` 关系，且提供的时间戳中的毫秒部分会被截断。
 
@@ -1022,7 +1024,7 @@ example: --repo-target-time=2024-08-08 12:12:12+00
 - `s3` — AWS 简单存储服务
 - `sftp` — 安全文件传输协议
 
-将 NFS 挂载用作 `posix` 类型仓库时，适用于 pgBackRest 的规则与 PostgreSQL 文档中的描述相同，详见 [Creating a Database Cluster - File Systems](https://www.postgresql.org/docs/current/creating-cluster.html#CREATING-CLUSTER-FILESYSTEM)。
+将 NFS 挂载用作 `posix` 类型仓库时，适用于 pgBackRest 的规则与 PostgreSQL 文档中的描述相同，详见 [**创建数据库集群 - 文件系统**](https://www.postgresql.org/docs/current/creating-cluster.html#CREATING-CLUSTER-FILESYSTEM)。
 
 ```yaml
 default: posix

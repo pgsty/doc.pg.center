@@ -12,6 +12,89 @@ upstream_link: "https://pgbackrest.org/news.html"
 
 --------
 
+## Weak Encryption Subkeys and Salts {#weak-encryption}
+
+**October 4, 2026**
+
+Versions of pgBackRest prior to 2.59.3 did not check for an error when generating random data for encryption. If OpenSSL was unable to get random data from the operating system, then encryption subkeys and salts were generated from data already in memory and no error was reported. Repositories without encryption are not affected.
+
+This error should be rare. Possible causes include a sandbox or seccomp policy that blocks the `getrandom()` system call and an invalid OpenSSL configuration.
+
+The subkeys in `archive.info` and `backup.info` are the main concern. They are generated once by `stanza-create` and used for the life of the stanza, so upgrading does not replace a weak subkey. Weak backup subkeys and salts are removed as backups and WAL expire.
+
+### Impact {#weak-encryption-impact}
+
+The WAL subkey is stored in `archive.info` and the manifest subkey is stored in `backup.info`. A weak subkey is easier to guess than a random subkey, and a guessed subkey decrypts the files encrypted with it without `repo-cipher-pass`. How much easier depends on what was in memory, which varies by platform and build. A weak subkey in `archive.info` exposes all WAL in the repository. A weak subkey in `backup.info` exposes every backup, since the manifests are encrypted with it and each manifest stores the subkey for the files in its backup. This includes WAL and backups added after upgrading.
+
+The subkey for the files in a backup is generated for each full backup and also used by the differential and incremental backups based on it. A weak backup subkey exposes the files in those backups.
+
+A weak salt does not expose a subkey. Files encrypted with the same subkey and salt use the same key and IV, so identical data in those files produces identical encrypted data. The salt is stored unencrypted at the start of each file, and a weak salt may contain up to 8 bytes of data that was previously in memory.
+
+### Check Subkeys {#weak-encryption-check-subkey}
+
+Run the following on a host that has access to the repository, with `STANZA` set to the stanza name. Add `--repo` to the `pgbackrest` commands to check a repository other than the first one.
+
+```bash
+STANZA=demo
+
+for file in archive/$STANZA/archive.info backup/$STANZA/backup.info; do
+    for key in $(pgbackrest --stanza=$STANZA repo-get $file | grep '^cipher-pass=' | grep -oE '[A-Za-z0-9+/]{64}'); do
+        echo "$(printf '%s' $key | base64 -d | od -An -v -tx1 | tr -s ' ' '\n' | grep -c '^00$') $file"
+    done
+done
+```
+
+The first column is the number of zero bytes in the subkey. A random subkey has 6 or more zero bytes less than once in 25,000,000, while the weak subkeys found in testing had 13 or more. A subkey with 6 or more zero bytes should be considered weak.
+
+### OpenSSL 1.0 {#weak-encryption-openssl-1-0}
+
+Versions of pgBackRest prior to 2.53 could be built with OpenSSL 1.0, which generates random data from a state that was not seeded with random data when it is unable to get random data from the operating system. Weak subkeys generated this way cannot be detected with the check above.
+
+### Remediation {#weak-encryption-remediation}
+
+- Upgrade to pgBackRest 2.59.3 or later, which reports an error when random data cannot be generated.
+- If the subkey in `archive.info` or `backup.info` is weak, create the stanza in a new repository and keep the old repository only as long as its backups are needed.
+- Consider making a new full backup after upgrading, since differential and incremental backups use the subkey of their full backup.
+- Weak backup subkeys and salts are removed as backups and WAL from before the upgrade expire. Backups with a long retention period keep them until they expire.
+
+
+--------
+
+## pgBackRest 2.59.3 Released {#release-2-59-3}
+
+**October 4, 2026**
+
+The pgBackRest community is pleased to announce the release of [pgBackRest](https://pgbackrest.org) 2.59.3, the latest version of the reliable, easy-to-use backup and restore solution that can seamlessly scale up to the largest databases and workloads.
+
+pgBackRest supports a robust set of features for managing your backup and recovery infrastructure, including: parallel backup/restore, full/differential/incremental backups, block incremental backup, multiple repositories, delta restore, parallel asynchronous archiving, malware/ransomware protection, per-file checksums, page checksums (when enabled) validated during backup, multiple compression types, encryption, partial/failed backup resume, backup from standby, tablespace and link support, S3/Azure/GCS/SFTP support, backup expiration, local/remote operation via SSH or TLS, flexible configuration, and more.
+
+pgBackRest can be installed from the [PostgreSQL Yum Repository](https://yum.postgresql.org) or the [PostgreSQL APT Repository](https://apt.postgresql.org) and packages are also available for many other distributions. Source code can be downloaded from [releases](/docs/pgbackrest/release/).
+
+### Bug Fixes {#release-2-59-3-feature}
+
+- Fix possible weak encryption subkeys/salts (j0uinim)
+- Fix possible checksum error loading encrypted info and manifest files (j0uinim)
+
+See the [2.59.3 Release Notes](/docs/pgbackrest/release/#v2593-release-notes) for additional fixes and improvements.
+
+### Important Notes {#release-2-59-3-note}
+
+- In prior versions it was possible for weak encryption subkeys and salts to be generated if there was an error accessing system random data. See [Weak Encryption Subkeys and Salts](/docs/pgbackrest/news/#weak-encryption) for more information.
+
+### Links {#release-2-59-3-link}
+
+- [Website](/docs/pgbackrest/)
+- [User Guides](/docs/pgbackrest/user-guide/)
+- [Release Notes](/docs/pgbackrest/release/)
+
+### Sponsorship {#release-2-59-3-sponsorship}
+
+This release was made possible by the generous sponsorship of [AWS](https://aws.amazon.com), [Supabase](https://supabase.com), [pgEdge](https://pgedge.com), [Tiger Data](https://tigerdata.com), [Percona](https://percona.com), [Eon](https://eon.io), [Xata](https://xata.io), [Dalibo](https://dalibo.com), and [Data Egret](https://dataegret.com/).
+
+
+
+--------
+
 ## pgBackRest 2.59.2 Released {#release-2-59-2}
 
 **September 27, 2026**

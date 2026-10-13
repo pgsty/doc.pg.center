@@ -16,7 +16,7 @@ Les processus pgBackRest retourneront une erreur s’ils sont exécutés après 
 
 ## Options de commande {#command-options}
 
-### Option obligatoire (`--force`) {#force-option---force}
+### Option de forçage (`--force`) {#force-option---force}
 
 Forcer l’arrêt de tous les processus pgBackRest.
 
@@ -33,7 +33,7 @@ example: --force
 
 Permettre à la commande de s'exécuter en tant qu'utilisateur root.
 
-Par défaut, seul la commande `restore` peut être exécutée en tant qu'utilisateur root, car elle est conçue pour gérer soigneusement les propriétés des fichiers. Exécuter d'autres commandes en tant que root risque de créer des fichiers (par exemple dans le dépôt) dont le propriétaire est root, rendant ces fichiers inaccessibles à l'utilisateur PostgreSQL, ce qui entraîne l'échec des commandes ultérieures.
+Par défaut, seule la commande `restore` peut être exécutée en tant qu'utilisateur root, car elle est conçue pour gérer soigneusement les propriétés des fichiers. Exécuter d'autres commandes en tant que root risque de créer des fichiers (par exemple dans le dépôt) dont le propriétaire est root, rendant ces fichiers inaccessibles à l'utilisateur PostgreSQL, ce qui entraîne l'échec des commandes ultérieures.
 
 Activez cette option pour exécuter une commande en tant qu'utilisateur root malgré tout. Toutefois, il est bien préférable d'exécuter pgBackRest en tant qu'utilisateur propriétaire du dépôt et du cluster PostgreSQL.
 

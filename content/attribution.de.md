@@ -36,7 +36,7 @@ importiert wurden und wo der vollständige Upstream-Hinweis aufbewahrt wird.
 | Komponente | Ursprungswerk | Festgeschriebener Stand | Lizenz | Hinterlegter Hinweis |
 |---|---|---|---|---|
 | [Patroni](/de/docs/patroni/) | [Patroni-Dokumentation](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/de/docs/pgbackrest/) | [pgBackRest-Dokumentation](https://pgbackrest.org/) | v2.59.2 (Englisch / vereinfachtes Chinesisch); v2.59.1 (andere Übersetzungen) | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [pgBackRest](/de/docs/pgbackrest/) | [pgBackRest-Dokumentation](https://pgbackrest.org/) | v2.59.3 (alle sechs Sprachen) | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
 | [PgBouncer](/de/docs/pgbouncer/) | [PgBouncer-Dokumentation](https://www.pgbouncer.org/) | v1.26.0 (alle sechs Sprachen) | [ISC](https://opensource.org/license/isc-license-txt) | [Upstream `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/de/docs/pgbadger/) | [pgBadger-Dokumentation](https://pgbadger.darold.net/) | v13.2, Commit `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/de/docs/haproxy/) | [HAProxy-3.4-Handbücher](https://docs.haproxy.org/3.4/) | v3.4.4, Commit `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
@@ -64,7 +64,7 @@ aufbewahrt.
 
 Am 2026-08-15 von der [pgBackRest-Dokumentationswebsite](https://pgbackrest.org/) importiert.
 Die englische und die vereinfachte chinesische Ausgabe wurden am 2026-10-04 auf **v2.59.2** aktualisiert.
-Die anderen vorhandenen Übersetzungen bleiben bei **v2.59.1**; ihre letzte Aktualisierung erfolgte am 2026-08-30.
+Stand 2026-10-13 entsprechen alle sechs Sprachausgaben dem Stand **v2.59.3**. Die Prüfung vor der Veröffentlichung korrigiert veraltete Hinweise zur Backup-Auswahl bei PITR sowie einen abgeschnittenen historischen Warnhinweis anhand der Implementierung und der XML-Quelle der entsprechenden Upstream-Version; siehe `data/translation-audits/pgbackrest.json`.
 Eine deutsche pgBackRest-Ausgabe liegt derzeit noch nicht vor.
 
 Copyright (c) 2015-2026 für pgBackRest: The PostgreSQL Global Development Group

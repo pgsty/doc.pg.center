@@ -1,5 +1,5 @@
 ---
-title: "Commande de poussée d'archive (archive-push)"
+title: "Commande d’archivage de WAL (archive-push)"
 linkTitle: "archive-push"
 weight: 30
 description: "Référence des options et du comportement de la commande pgBackRest `archive-push`."
@@ -10,9 +10,9 @@ aliases: [/pgbackrest/command/archive-push/]
 upstream_link: "https://pgbackrest.org/command.html#command-archive-push"
 ---
 
-Accepte un segment WAL de PostgreSQL et l'archive dans chaque dépôt défini par l'option indexée `repo-path` (voir la section [Repository](/fr/docs/pgbackrest/configuration/#repository-options) pour obtenir des informations sur la configuration des dépôts). Le segment WAL peut être envoyé immédiatement à l'archive ou stocké localement, selon la valeur de `archive-async`. En cas de configuration de plusieurs dépôts, `archive-push` tentera d'envoyer à autant de dépôts que possible.
+Accepte un segment WAL de PostgreSQL et l'archive dans chaque dépôt défini par l'option indexée `repo-path` (voir la section [Dépôt](/fr/docs/pgbackrest/configuration/#repository-options) pour obtenir des informations sur la configuration des dépôts). Le segment WAL peut être envoyé immédiatement à l'archive ou stocké localement, selon la valeur de `archive-async`. En cas de configuration de plusieurs dépôts, `archive-push` tentera d'envoyer à autant de dépôts que possible.
 
-Le `archive-push` est destiné à être configuré et appelé par PostgreSQL. Voir [Configurer la sauvegarde d'archive](/fr/docs/pgbackrest/user-guide/#configure-archiving) pour un exemple.
+Le `archive-push` est destiné à être configuré et appelé par PostgreSQL. Voir [Configurer la sauvegarde archivée](/fr/docs/pgbackrest/user-guide/#configure-archiving) pour un exemple.
 
 ## Options de commande {#command-options}
 
@@ -46,13 +46,13 @@ example: --no-archive-check
 
 Vérifiez le paramètre PostgreSQL `archive_mode`.
 
-Activé par défaut, cette option interdit PostgreSQL `archive_mode=always`.
+Activée par défaut, cette option interdit PostgreSQL `archive_mode=always`.
 
 Les segments WAL poussés depuis un serveur de secours peuvent être logiquement identiques aux segments WAL poussés depuis le principal, mais présenter des sommes de contrôle différentes. Il est recommandé de désactiver l'archivage depuis plusieurs sources afin d'éviter les conflits.
 
 AVERTISSEMENT :
 
-Si cette option est désactivée, il est essentiel de s'assurer qu’un seul archivage écrit dans le dépôt via la commande `archive-push`.
+Si cette option est désactivée, il est essentiel de s'assurer qu’un seul processus d'archivage écrit dans le dépôt via la commande `archive-push`.
 
 ```yaml
 default: y
@@ -115,7 +115,7 @@ example: --archive-timeout=30
 
 Permettre à la commande de s'exécuter en tant qu'utilisateur root.
 
-Par défaut, seul la commande `restore` peut être exécutée en tant qu'utilisateur root, car elle est conçue pour gérer soigneusement les propriétés des fichiers. Exécuter d'autres commandes en tant que root risque de créer des fichiers (par exemple dans le dépôt) dont le propriétaire est root, rendant ces fichiers inaccessibles à l'utilisateur PostgreSQL, ce qui entraîne l'échec des commandes ultérieures.
+Par défaut, seule la commande `restore` peut être exécutée en tant qu'utilisateur root, car elle est conçue pour gérer soigneusement les propriétés des fichiers. Exécuter d'autres commandes en tant que root risque de créer des fichiers (par exemple dans le dépôt) dont le propriétaire est root, rendant ces fichiers inaccessibles à l'utilisateur PostgreSQL, ce qui entraîne l'échec des commandes ultérieures.
 
 Activez cette option pour exécuter une commande en tant qu'utilisateur root malgré tout. Toutefois, il est bien préférable d'exécuter pgBackRest en tant qu'utilisateur propriétaire du dépôt et du cluster PostgreSQL.
 
@@ -202,7 +202,7 @@ example: --compress-level=9
 
 Niveau de compression du réseau.
 
-Définit le niveau de compression réseau lorsque `compress-type=none` et la commande ne sont pas exécutées sur le même hôte que le dépôt. La compression est utilisée pour réduire le trafic réseau. Lorsque `compress-type` est différent de `none`, le paramètre `compress-level-network` est ignoré et `compress-level` est utilisé à la place, afin que le fichier ne soit compressé qu'une seule fois.
+Définit le niveau de compression réseau lorsque `compress-type=none` et que la commande n'est pas exécutée sur le même hôte que le dépôt. La compression est utilisée pour réduire le trafic réseau. Lorsque `compress-type` est différent de `none`, le paramètre `compress-level-network` est ignoré et `compress-level` est utilisé à la place, afin que le fichier ne soit compressé qu'une seule fois.
 
 ```yaml
 default: 1
@@ -264,7 +264,7 @@ example: --config-path=/conf/pgbackrest
 
 ### Option d'expiration I/O (`--io-timeout`) {#io-timeout-option---io-timeout}
 
-Délai d'attente d'E/S dépassé.
+Délai d'attente des E/S.
 
 Délai d'attente, en secondes, utilisé pour les connexions et les opérations de lecture/écriture.
 
@@ -348,7 +348,7 @@ default: y
 example: --no-sck-keep-alive
 ```
 
-### Option Chemin de répertoire d'attente (`--spool-path`) {#spool-path-option---spool-path}
+### Option Chemin de spool (`--spool-path`) {#spool-path-option---spool-path}
 
 Chemin où les données transitoires sont stockées.
 
@@ -356,11 +356,11 @@ Ce chemin est utilisé pour stocker les données de la commande asynchrone `arch
 
 La commande asynchrone `archive-push` écrit des accusés de réception dans le répertoire de spool après avoir correctement stocké le WAL dans l'archive, ou une erreur en cas d'échec, afin que le processus au premier plan puisse informer rapidement PostgreSQL. Ces fichiers sont très petits : vides en cas de succès et de quelques centaines d'octets en cas d'erreur.
 
-La commande asynchrone `archive-get` met en file d'attente les fichiers WAL dans le répertoire de stockage provisoire afin de pouvoir les fournir très rapidement lorsque PostgreSQL les demande. Le déplacement des fichiers vers PostgreSQL est le plus efficace lorsque le répertoire de stockage provisoire se trouve sur le même système de fichiers que `pg_xlog`/`pg_wal`. Toutefois, il n'est pas recommandé de placer le répertoire de stockage provisoire *à l'intérieur* du répertoire `pg_xlog`/`pg_wal`, car cela pourrait entraîner des problèmes pour les utilitaires PostgreSQL tels que `pg_rewind`.
+La commande asynchrone `archive-get` met en file d'attente les fichiers WAL dans le chemin de spool afin de pouvoir les fournir très rapidement lorsque PostgreSQL les demande. Le déplacement des fichiers vers PostgreSQL est le plus efficace lorsque le chemin de spool se trouve sur le même système de fichiers que `pg_xlog`/`pg_wal`. Toutefois, il n'est pas recommandé de placer le chemin de spool *à l'intérieur* du répertoire `pg_xlog`/`pg_wal`, car cela pourrait entraîner des problèmes pour les utilitaires PostgreSQL tels que `pg_rewind`.
 
-Les données stockées dans le chemin d’attente ne sont pas strictement temporaires, car elles peuvent et doivent survivre à un redémarrage. Toutefois, leur perte n’est pas problématique. pgBackRest vérifiera simplement chaque segment WAL afin de s’assurer qu’il est correctement archivé pour `archive-push` et reconstruira la file d’attente pour `archive-get`.
+Les données stockées dans le chemin de spool ne sont pas strictement temporaires, car elles peuvent et doivent survivre à un redémarrage. Toutefois, leur perte n’est pas problématique. pgBackRest vérifiera simplement chaque segment WAL afin de s’assurer qu’il est correctement archivé pour `archive-push` et reconstruira la file d’attente pour `archive-get`.
 
-Le chemin d’attente doit être situé sur un système de fichiers local compatible Posix, et non sur un système de fichiers distant tel que NFS ou CIFS.
+Le chemin de spool doit être situé sur un système de fichiers local compatible Posix, et non sur un système de fichiers distant tel que NFS ou CIFS.
 
 ```yaml
 default: /var/spool/pgbackrest
@@ -394,7 +394,7 @@ example: --tcp-keep-alive-count=3
 
 ### Option d'idle Keep Alive (`--tcp-keep-alive-idle`) {#keep-alive-idle-option---tcp-keep-alive-idle}
 
-Délai d'inactivité pour la maintien de la connexion.
+Délai d'inactivité pour le maintien de la connexion.
 
 Spécifie la durée (en secondes) pendant laquelle aucune activité réseau ne se produit, après laquelle le système d'exploitation doit envoyer un message de maintien de connexion TCP.
 
@@ -407,7 +407,7 @@ example: --tcp-keep-alive-idle=60
 
 ### Option Intervalle Keep Alive (`--tcp-keep-alive-interval`) {#keep-alive-interval-option---tcp-keep-alive-interval}
 
-Intervalle de temps pour la maintien de la connexion active.
+Intervalle de temps pour le maintien de la connexion active.
 
 Spécifie la durée (en secondes) après laquelle un message TCP keep-alive non reconnu doit être renvoyé.
 
@@ -546,7 +546,7 @@ example: --no-log-timestamp
 
 Vérifier la version/id de PostgreSQL dans les en-têtes WAL.
 
-Activé par défaut, cette option vérifie l’en-tête WAL contre la version de PostgreSQL et l’identifiant système afin de s’assurer que le WAL est copié dans la bonne stanza. Cela s’ajoute à la vérification de `pg_control` par rapport à la stanza et à la vérification que le WAL est copié à partir du même répertoire de données PostgreSQL où se trouve `pg_control`.
+Activée par défaut, cette option vérifie l’en-tête WAL contre la version de PostgreSQL et l’identifiant système afin de s’assurer que le WAL est copié dans la bonne stanza. Cela s’ajoute à la vérification de `pg_control` par rapport à la stanza et à la vérification que le WAL est copié à partir du même répertoire de données PostgreSQL où se trouve `pg_control`.
 
 Par conséquent, désactiver cette vérification est relativement sûr, mais ne doit être effectué que lorsqu'il est nécessaire, par exemple si le WAL est chiffré.
 
@@ -630,9 +630,9 @@ example: --repo1-cipher-type=aes-256-cbc
 
 ### Option de bac de dépôt GCS (`--repo-gcs-bucket`) {#gcs-repository-bucket-option---repo-gcs-bucket}
 
-Dépôt de bucket GCS.
+Bucket du dépôt GCS.
 
-Dépôt GCS utilisé pour stocker le dépôt.
+Bucket GCS utilisé pour stocker le dépôt.
 
 Les dépôts pgBackRest peuvent être stockés à la racine du bucket en définissant `repo-path=/`, mais il est généralement préférable de préciser un préfixe, tel que `/repo`, afin de pouvoir également stocker les journaux et d'autres contenus générés par GCS dans le bucket.
 
@@ -722,7 +722,7 @@ example: --repo1-host-cert-file=/path/to/client.crt
 
 ### Option de commande hôte du dépôt (`--repo-host-cmd`) {#repository-host-command-option---repo-host-cmd}
 
-Hôte du dépôt commande pgBackRest.
+Commande pgBackRest de l'hôte du dépôt.
 
 Requis uniquement si le chemin vers la commande pgBackRest est différent sur les hôtes local et de dépôt. Si non défini, la commande de dépôt sera définie de la même manière que celle de l'hôte local.
 
@@ -744,11 +744,11 @@ default: CFGOPTDEF_CONFIG_PATH "/" PROJECT_CONFIG_FILE
 example: --repo1-host-config=/conf/pgbackrest/pgbackrest.conf
 ```
 
-Nom obsolète : sauvegarde-config
+Nom obsolète : backup-config
 
 ### Option de chemin d'inclusion de configuration d'hôte de dépôt (`--repo-host-config-include-path`) {#repository-host-configuration-include-path-option---repo-host-config-include-path}
 
-Configuration du serveur de dépôt pgBackRest incluant le chemin.
+Chemin d'inclusion de configuration de l'hôte du dépôt pgBackRest.
 
 Définit l'emplacement du chemin d'inclusion de configuration sur l'hôte du dépôt. Cette option est nécessaire uniquement si le chemin d'inclusion de configuration de l'hôte du dépôt est différent du chemin d'inclusion de configuration local.
 
@@ -838,9 +838,9 @@ example: --repo1-path=/backup/db/backrest
 
 ### Option de bac de dépôt S3 (`--repo-s3-bucket`) {#s3-repository-bucket-option---repo-s3-bucket}
 
-Dépôt S3.
+Bucket du dépôt S3.
 
-Dépôt S3 utilisé pour stocker le dépôt.
+Bucket S3 utilisé pour stocker le dépôt.
 
 Les dépôts pgBackRest peuvent être stockés à la racine du bucket en définissant `repo-path=/`, mais il est généralement préférable de préciser un préfixe, tel que `/repo`, afin de pouvoir également stocker les journaux et d'autres contenus générés par AWS dans le bucket.
 
@@ -911,7 +911,7 @@ example: --repo1-s3-region=us-east-1
 
 ### Option Requesteur Payant pour le dépôt S3 (`--repo-s3-requester-pays`) {#s3-repository-requestor-pays-option---repo-s3-requester-pays}
 
-Dépôt S3 payeur de la demande.
+Paiement par le demandeur pour le dépôt S3.
 
 Active le paiement par le demandeur S3.
 
@@ -959,7 +959,7 @@ Style d'URI S3.
 Les styles d'URI suivants sont pris en charge :
 
 - `host` - Se connecter à l'hôte `bucket.endpoint`.
-- `path` - Se connecter à l'hôte `endpoint` et préfixer les URI par le répertoire.
+- `path` - Se connecter à l'hôte `endpoint` et préfixer les URI par le bucket.
 
 ```yaml
 default: host
@@ -1126,17 +1126,17 @@ Il n'existe aucune fonctionnalité dans pgBackRest permettant de modifier ces ba
 example: --repo1-storage-tag=key1=value1
 ```
 
-### Option de taille de morceau de chargement du dépôt (`--repo-storage-upload-chunk-size`) {#repository-storage-upload-chunk-size-option---repo-storage-upload-chunk-size}
+### Option de taille de morceau de téléversement vers le dépôt (`--repo-storage-upload-chunk-size`) {#repository-storage-upload-chunk-size-option---repo-storage-upload-chunk-size}
 
-Taille du morceau de chargement du dépôt.
+Taille du morceau de téléversement vers le dépôt.
 
-Les magasins d’objets tels que S3 permettent de télécharger des fichiers par morceaux lorsque le fichier est trop volumineux pour être stocké en mémoire. Même si le fichier peut être stocké en mémoire, il est plus efficace en mémoire de limiter la quantité de mémoire utilisée pour les téléchargements.
+Les magasins d’objets tels que S3 permettent de téléverser des fichiers par morceaux lorsque le fichier est trop volumineux pour être stocké en mémoire. Même si le fichier peut être stocké en mémoire, il est plus efficace en mémoire de limiter la quantité de mémoire utilisée pour les téléversements.
 
-Une taille de morceau plus élevée entraîne généralement de meilleures performances, car elle réduit le nombre de requêtes de téléchargement et permet de télécharger plus de fichiers en une seule requête plutôt qu’en morceaux. Le désavantage est que la consommation mémoire sera plus élevée, et comme la mémoire tampon de morceau doit être allouée par processus, des valeurs plus élevées de `process-max` entraînent une consommation mémoire globale plus importante.
+Une taille de morceau plus élevée entraîne généralement de meilleures performances, car elle réduit le nombre de requêtes de téléversement et permet de téléverser plus de fichiers en une seule requête plutôt qu’en morceaux. Le désavantage est que la consommation mémoire sera plus élevée, et comme la mémoire tampon de morceau doit être allouée par processus, des valeurs plus élevées de `process-max` entraînent une consommation mémoire globale plus importante.
 
 Notez que les tailles de morceau valides varient selon le type de stockage et la plateforme. Par exemple, AWS S3 impose une taille minimale de morceau de 5MiB. La terminologie relative à la taille du morceau varie selon le type de stockage ; utilisez donc « part size » pour AWS S3, « chunk size » pour GCS et « block size » pour Azure lorsque vous recherchez les valeurs minimales ou maximales.
 
-Si un fichier est plus grand que 1GiB (la taille maximale que PostgreSQL crée par défaut), la taille de tranche sera augmentée progressivement jusqu'à la valeur maximale autorisée afin de terminer le téléchargement du fichier.
+Si un fichier est plus grand que 1GiB (la taille maximale que PostgreSQL crée par défaut), la taille de morceau sera augmentée progressivement jusqu'à la valeur maximale autorisée afin de terminer le téléversement du fichier.
 
 ```yaml
 default (depending on repo-type):

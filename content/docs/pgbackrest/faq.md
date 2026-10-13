@@ -112,7 +112,7 @@ See the [Dedicated Repository Host](/docs/pgbackrest/user-guide/#dedicated-repos
 
 ## Time-based Point-in-Time Recovery does not appear to work, why?
 
-The most common mistake when using time-based Point-in-Time Recovery is forgetting to choose a backup set that is before the target time. pgBackRest will attempt to discover a backup to play forward from the time specified by the `--target=` if the `--set` option is not specified. If a backup set cannot be found, then restore will default to the latest backup. However, if the latest backup is after the target time, then `--target=` is not considered valid by PostgreSQL and is therefore ignored, resulting in WAL recovery to the latest time available.
+The most common mistake when using time-based Point-in-Time Recovery is choosing a backup that completed after the target time. With `--type=time`, if the `--set` option is not specified, pgBackRest searches the configured repositories for a backup that completed before the time specified by `--target=`. If no suitable backup is found, pgBackRest raises an error rather than restoring the latest backup. A backup completed after the target time cannot be used to reach that earlier target by replaying WAL.
 
 To use the `--set` option, choose a backup set by running the `info` command and finding the backup with a timestamp stop that is before the target time. Then when running the restore, specify the option `--set=BACKUP_LABEL` where `BACKUP_LABEL` is the chosen backup set.
 
