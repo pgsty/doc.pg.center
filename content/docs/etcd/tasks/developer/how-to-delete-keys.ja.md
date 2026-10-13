@@ -3,7 +3,7 @@ title: キーの削除方法
 description: etcdのキーを削除する方法を説明します
 weight: 400
 categories: [タスク]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/developer/how-to-delete-keys.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/developer/how-to-delete-keys.md"
 aliases: [/etcd/tasks/developer/how-to-delete-keys/]
 ---
 
@@ -11,7 +11,7 @@ aliases: [/etcd/tasks/developer/how-to-delete-keys/]
 
 * [`etcd`と`etcdctl`](/ja/docs/etcd/install/)をインストールします。
 
-## キーの追加と削除 {#add-or-delete-keys}
+## キーの追加または削除 {#add-or-delete-keys}
 
 指定したキーまたはキー範囲を削除する`del`：
 
@@ -36,7 +36,7 @@ etcdctl del $KEY [$END_KEY]
 
 ### 例 {#examples}
 
-![04_etcdctl_delete_2016050601](/docs/etcd/tasks/img/delete-keys.gif)
+![etcdctlによるキーの削除例](/docs/etcd/tasks/img/delete-keys.gif)
 
 ```shell
 etcdctl --endpoints=$ENDPOINTS put key myvalue

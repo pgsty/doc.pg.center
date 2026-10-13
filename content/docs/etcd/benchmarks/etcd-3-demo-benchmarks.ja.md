@@ -3,7 +3,7 @@ title: etcd v3のベンチマーク
 weight: 5375
 description: etcd v3の性能測定
 categories: [リファレンス]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/benchmarks/etcd-3-demo-benchmarks.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/benchmarks/etcd-3-demo-benchmarks.md"
 aliases: [/etcd/benchmarks/etcd-3-demo-benchmarks/]
 ---
 
@@ -17,7 +17,7 @@ GCE n1-highcpu-2マシンタイプ
 - CPU × 2
 - etcdバージョン2.2.0
 
-## etcd クラスター {#etcd-cluster}
+## etcdクラスター {#etcd-cluster}
 
 v3デモモードで稼働するetcdメンバー1つ
 

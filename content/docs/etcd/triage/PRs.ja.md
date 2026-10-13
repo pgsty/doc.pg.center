@@ -3,7 +3,7 @@ title: PRの管理
 weight: 8200
 description: "etcdのプルリクエストを管理するためのガイドライン"
 categories: [タスク]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/triage/PRs.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/triage/PRs.md"
 aliases: [/etcd/triage/prs/]
 ---
 
@@ -11,7 +11,7 @@ aliases: [/etcd/triage/prs/]
 
 PRの管理を迅速にすること。
 
-`etcd`のPRはhttps://github.com/etcd-io/etcd/pullsに一覧表示されています。
+`etcd`のPRは https://github.com/etcd-io/etcd/pulls に一覧表示されています。
 PRにはさまざまなラベル、マイルストーン、レビュアーなどを設定できます。ラベルの詳細な一覧は、次のページを参照してください。
 https://github.com/kubernetes/kubernetes/labels
 

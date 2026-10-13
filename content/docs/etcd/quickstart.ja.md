@@ -1,10 +1,10 @@
 ---
 title: クイックスタート
 weight: 900
-description: 5分以内にetcdを起動して使い始めましょう！
+description: 5分足らずでetcdを起動して使い始めましょう！
 icon: fa-solid fa-rocket
 categories: [チュートリアル]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/quickstart.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/quickstart.md"
 aliases: [/etcd/quickstart/]
 ---
 
@@ -24,7 +24,7 @@ aliases: [/etcd/quickstart/]
     ```
 
     > [!NOTE]
-    > **注意**：`etcd`の出力は[ログ](/ja/docs/etcd/op-guide/configuration/#logging)です。&mdash; infoレベルのログは無視できます。
+    > **注意**：`etcd`の出力は[ログ](/ja/docs/etcd/op-guide/configuration/#logging)です&mdash;infoレベルのログは無視できます。
 
  3. **別のターミナル**から、`etcdctl`を使用してキーを設定します。
 
