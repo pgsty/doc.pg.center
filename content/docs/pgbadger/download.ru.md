@@ -5,7 +5,7 @@ weight: 20
 description: "Официальные выпуски, пакеты, требования и установка из исходного кода"
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
-categories: [Tutorial]
+categories: [Руководство]
 aliases: [/pgbadger/download/]
 upstream_link: "https://pgbadger.darold.net/#download"
 upstream_name: "pgBadger website"

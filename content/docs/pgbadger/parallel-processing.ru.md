@@ -5,7 +5,7 @@ weight: 50
 description: "Выбор между параллельной обработкой частей одного журнала и множества журналов"
 icon: fa-solid fa-gauge-high
 module: [PGBADGER]
-categories: [Task]
+categories: [Задача]
 aliases: [/pgbadger/parallel-processing/]
 upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
 upstream_name: "pgBadger README.md"

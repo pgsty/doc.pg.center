@@ -5,7 +5,7 @@ weight: 70
 description: "Выбор вывода HTML, текста, двоичных данных, JSON или необработанного CSV и объединение промежуточных файлов"
 icon: fa-solid fa-file-export
 module: [PGBADGER]
-categories: [Reference]
+categories: [Справочник]
 aliases: [/pgbadger/output-formats/]
 upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
 upstream_name: "pgBadger README.md"

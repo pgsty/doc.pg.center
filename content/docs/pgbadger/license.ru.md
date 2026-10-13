@@ -5,7 +5,7 @@ weight: 110
 description: "Условия лицензии PostgreSQL, авторство и включённые сторонние компоненты"
 icon: fa-solid fa-scale-balanced
 module: [PGBADGER]
-categories: [Reference]
+categories: [Справочник]
 aliases: [/pgbadger/license/]
 upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/LICENSE"
 upstream_name: "pgBadger LICENSE"
@@ -48,4 +48,4 @@ Darold SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 
 ## Снимок документации {#documentation-snapshot}
 
-Эта редакция pig.center преобразует исходную документацию в страницы Hugo, добавляет навигацию и средства чтения на нескольких языках и сохраняет точный текст справки команд и ChangeLog там, где важна дословность. Исходная документация pgBadger остаётся под лицензией PostgreSQL; оригинальные названия проектов, сведения об авторстве и ссылки на исходный проект сохранены.
+Эта редакция pig.center преобразует исходную документацию в страницы Hugo, добавляет навигацию и вспомогательные материалы для чтения на китайском языке и сохраняет точный текст справки команд и ChangeLog там, где важна дословность. Исходная документация pgBadger остаётся под лицензией PostgreSQL; оригинальные названия проектов, сведения об авторстве и ссылки на исходный проект сохранены.

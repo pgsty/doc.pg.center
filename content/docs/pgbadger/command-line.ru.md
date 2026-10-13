@@ -5,7 +5,7 @@ weight: 30
 description: "Полный синтаксис команд pgBadger, параметры, удалённый ввод, коды возврата и примеры"
 icon: fa-solid fa-terminal
 module: [PGBADGER]
-categories: [Reference]
+categories: [Справочник]
 aliases: [/pgbadger/command-line/]
 upstream_link: "https://github.com/darold/pgbadger/tree/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
 upstream_name: "pgBadger README.md"

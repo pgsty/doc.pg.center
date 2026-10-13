@@ -5,7 +5,7 @@ weight: 90
 description: "Полная история изменений pgBadger с 9.x по 13.x, упорядоченная по исходному ChangeLog"
 icon: fa-solid fa-clock-rotate-left
 module: [PGBADGER]
-categories: [Reference]
+categories: [Справочник]
 aliases: [/pgbadger/releases/]
 upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/ChangeLog"
 upstream_name: "pgBadger ChangeLog"

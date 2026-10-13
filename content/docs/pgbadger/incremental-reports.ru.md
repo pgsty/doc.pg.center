@@ -5,7 +5,7 @@ weight: 60
 description: "Создание ежедневных и еженедельных отчётов, управление хранением, пересборка вывода и добавление месячных сводок"
 icon: fa-solid fa-calendar-days
 module: [PGBADGER]
-categories: [Task]
+categories: [Задача]
 aliases: [/pgbadger/incremental-reports/]
 upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
 upstream_name: "pgBadger README.md"
