@@ -4,23 +4,23 @@ weight: 1400
 description: "Comment soumettre des rapports d'incident pour le projet etcd"
 icon: fa-solid fa-bug
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/reporting_bugs.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/reporting_bugs.md"
 aliases: [/etcd/reporting_bugs/]
 ---
 
 Si une partie du projet etcd présente des bogues ou des erreurs de documentation, veuillez nous en informer en [ouvrant une demande][etcd-issue]. Nous prenons très au sérieux les bogues et les erreurs, et considérons qu'aucun problème n'est trop petit. Avant de créer un rapport de bogue, veuillez vérifier qu'une demande signalant le même problème n'existe pas déjà.
 
-Pour que le rapport de bogues soit précis et facile à comprendre, veuillez essayer de rédiger des rapports de bogues qui sont :
+Pour que votre rapport de bogue soit précis et facile à comprendre, veillez à ce qu’il soit :
 
-- Spécifique. Inclure autant de détails que possible : version utilisée, environnement, configuration, etc. Si le bug est lié à l'exécution du serveur etcd, veuillez joindre le journal d'etcd (le journal de démarrage avec la configuration d'etcd est particulièrement important).
+- Spécifique. Incluez autant de détails que possible : version utilisée, environnement, configuration, etc. Si le bogue est lié à l'exécution du serveur etcd, veuillez joindre le journal d'etcd (le journal de démarrage avec la configuration d'etcd est particulièrement important).
 
-- Reproductible. Incluez les étapes permettant de reproduire le problème. Nous comprenons que certains problèmes peuvent être difficiles à reproduire ; veuillez inclure les étapes qui pourraient mener au problème. Si possible, joignez le répertoire de données etcd affecté ainsi que la trace d’empilement (stack strace) au rapport de bogues.
+- Reproductible. Incluez les étapes permettant de reproduire le problème. Nous comprenons que certains problèmes peuvent être difficiles à reproduire ; veuillez inclure les étapes qui pourraient mener au problème. Si possible, joignez le répertoire de données etcd affecté ainsi que la trace de pile au rapport de bogues.
 
-- Isolé. Essayez de reproduire le bug en minimisant les dépendances. Un nombre trop élevé de dépendances dans un rapport de bug ralentit considérablement la résolution. Le débogage des systèmes externes qui dépendent d'etcd est hors sujet, mais nous sommes heureux de fournir des indications dans la bonne direction ou d'aider à utiliser etcd lui-même.
+- Isolé. Essayez d'isoler et de reproduire le bogue avec un minimum de dépendances. Un nombre trop élevé de dépendances dans un rapport de bug ralentit considérablement la résolution. Le débogage des systèmes externes qui dépendent d'etcd est hors sujet, mais nous sommes heureux de fournir des indications dans la bonne direction ou d'aider à utiliser etcd lui-même.
 
-- Unique. Ne pas dupliquer le rapport de bogues existant.
+- Unique. Ne dupliquez pas un rapport de bogue existant.
 
-- Étendu. Un seul bogue par rapport. Ne pas faire de suivi avec un autre bogue dans un même rapport.
+- Délimité. Un seul bogue par rapport. Ne signalez pas un autre bogue dans le même rapport.
 
 Il peut être utile de lire [l’article d’Elika Etemad sur la rédaction de bons rapports de bogues][filing-good-bugs] avant de créer un rapport.
 
@@ -40,14 +40,14 @@ $ kill -QUIT $PID
 $ etcd --version
 ```
 
-### Comment obtenir la configuration et les journaux d'état d'etcd lorsqu'il s'exécute en tant que service systemd « etcd2.service » {#how-to-get-etcd-configuration-and-log-when-it-runs-as-systemd-service-etcd2service}
+### Comment obtenir la configuration et les journaux d'etcd lorsqu'il s'exécute en tant que service systemd « etcd2.service » {#how-to-get-etcd-configuration-and-log-when-it-runs-as-systemd-service-etcd2service}
 
 ``` bash
 $ sudo systemctl cat etcd2
 $ sudo journalctl -u etcd2
 ```
 
-En raison d'un bogue upstream dans systemd, journald peut manquer les dernières lignes de journal lorsque ses processus se terminent. Si journalctl indique que etcd s'est arrêté sans message d'erreur ou d'incident critique, essayez `sudo journalctl -f -t etcd2` afin d'obtenir la totalité du journal.
+En raison d'un bogue upstream dans systemd, journald peut manquer les dernières lignes de journal lorsque ses processus se terminent. Si journalctl indique qu'etcd s'est arrêté sans message fatal ni de panique, essayez `sudo journalctl -f -t etcd2` afin d'obtenir la totalité du journal.
 
 [etcd-issue]: https://github.com/etcd-io/etcd/issues/new
 [filing-good-bugs]: http://fantasai.inkedblade.net/style/talks/filing-good-bugs/

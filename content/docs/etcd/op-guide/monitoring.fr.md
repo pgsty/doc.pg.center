@@ -3,7 +3,7 @@ title: Surveillance d’etcd
 weight: 4500
 description: "Surveillance d'etcd pour l'intégrité du système et le débogage du cluster"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/monitoring.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/monitoring.md"
 aliases: [/etcd/op-guide/monitoring/]
 ---
 
@@ -13,9 +13,7 @@ Chaque serveur etcd fournit des informations de surveillance locales sur son por
 
 Si `--log-level=debug` est défini, le serveur etcd exporte des informations de débogage sur son port client sous le chemin `/debug`. Prenez garde à la définition de `--log-level=debug`, car cela entraînera une dégradation des performances et une journalisation verbose.
 
-Le point de terminaison `/debug/pprof` est le point de terminaison standard de profilage du runtime Go. Il peut être utilisé pour profiler l'utilisation du processeur, de la mémoire, des verrous et des goroutines. Par exemple, voici comment obtenir les 10 fonctions où etcd consacre le plus de temps :
-
-`go tool pprof`
+Le point de terminaison `/debug/pprof` est le point de terminaison standard de profilage du runtime Go. Il peut être utilisé pour profiler l'utilisation du processeur, du tas, des mutex et des goroutines. Par exemple, voici comment `go tool pprof` obtient les 10 fonctions où etcd consacre le plus de temps :
 
 ```sh
 $ go tool pprof http://localhost:2379/debug/pprof/profile
@@ -139,7 +137,7 @@ nohup /tmp/prometheus \
 Prometheus récupérera désormais les métriques etcd toutes les 10 secondes.
 
 
-### Alerting {#alerting}
+### Alertes {#alerting}
 
 Il existe un ensemble d'alertes par défaut [pour les clusters etcd v3 destinées à Prometheus](https://github.com/etcd-io/etcd/tree/main/contrib/mixin).
 
@@ -157,7 +155,7 @@ Url:    http://localhost:9090
 Access: proxy
 ```
 
-Ensuite, importez le modèle de tableau de bord par défaut [etcd dashboard template][template] et personnalisez-le. Par exemple, si le nom de la source de données Prometheus est `my-etcd`, les valeurs du champ `datasource` dans le JSON doivent également être `my-etcd`.
+Ensuite, importez le [modèle de tableau de bord etcd][template] par défaut et personnalisez-le. Par exemple, si le nom de la source de données Prometheus est `my-etcd`, les valeurs du champ `datasource` dans le JSON doivent également être `my-etcd`.
 
 Tableau de bord d'exemple :
 
@@ -168,19 +166,19 @@ Tableau de bord d'exemple :
 À partir de la version 3.5, etcd prend en charge le traçage distribué à l’aide de [OpenTelemetry](https://github.com/open-telemetry).
 
 > [!NOTE]
-> Cette fonctionnalité est encore expérimentale et peut être modifiée à tout moment.
+> Dans etcd 3.7, utilisez les options de traçage ci-dessous sans l’ancien préfixe expérimental.
 
-Pour activer cette fonctionnalité expérimentale, passez le paramètre `--experimental-enable-distributed-tracing=true` au serveur etcd, ainsi que le drapeau `--experimental-distributed-tracing-sampling-rate=<number>` pour choisir le nombre d'échantillons à collecter par million de spans ; le taux d'échantillonnage par défaut est `0`.
+Pour activer le traçage distribué, passez le paramètre `--enable-distributed-tracing=true` au serveur etcd, ainsi que le drapeau `--distributed-tracing-sampling-rate=<number>` pour choisir le nombre d'échantillons à collecter par million de spans ; le taux d'échantillonnage par défaut est `0`.
 
 Configurez le traçage distribué en lançant le serveur etcd avec les indicateurs facultatifs suivants :
 
-- `--experimental-distributed-tracing-address` - (Facultatif) - « localhost:4317 » - Adresse du collecteur de traçage.
+- `--distributed-tracing-address` - (Facultatif) - « localhost:4317 » - Adresse du collecteur de traçage.
 
-- `--experimental-distributed-tracing-service-name` - (Facultatif) - « etcd » - Nom du service de traçage distribué, doit être identique sur toutes les instances etcd.
+- `--distributed-tracing-service-name` - (Facultatif) - « etcd » - Nom du service de traçage distribué, doit être identique sur toutes les instances etcd.
 
-- `--experimental-distributed-tracing-instance-id` - (Facultatif) - Identifiant d'instance ; bien qu'optionnel, il est fortement recommandé de le définir, et doit être unique par instance etcd.
+- `--distributed-tracing-instance-id` - (Facultatif) - Identifiant d'instance ; bien qu'optionnel, il est fortement recommandé de le définir, et doit être unique par instance etcd.
 
-Avant d’activer le traçage distribué, assurez-vous d’avoir un point de terminaison OpenTelemetry. Si cette adresse diffère de la valeur par défaut, remplacez-la à l’aide du drapeau `--experimental-distributed-tracing-address`. En raison des différentes manières de faire fonctionner OpenTelemetry, consultez la documentation du [collector](https://opentelemetry.io/docs/collector/getting-started/) pour en savoir plus.
+Avant d’activer le traçage distribué, assurez-vous d’avoir un point de terminaison OpenTelemetry. Si cette adresse diffère de la valeur par défaut, remplacez-la à l’aide du drapeau `--distributed-tracing-address`. En raison des différentes manières de faire fonctionner OpenTelemetry, consultez la documentation du [collector](https://opentelemetry.io/docs/collector/getting-started/) pour en savoir plus.
 
 > [!NOTE]
 > Un surcroît de charge ressource existe, comme pour tout signal d'observabilité ; selon nos mesures initiales, cette surcharge pourrait s'élever entre 2 % et 4 % de la charge CPU.

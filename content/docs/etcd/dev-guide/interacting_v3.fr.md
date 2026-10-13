@@ -3,20 +3,17 @@ title: Interaction avec etcd
 weight: 3250
 description: "etcdctl : un outil en ligne de commande pour interagir avec le serveur etcd"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/interacting_v3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/interacting_v3.md"
 aliases: [/etcd/dev-guide/interacting_v3/]
 ---
 
 Les utilisateurs interagissent généralement avec etcd en définissant ou en récupérant la valeur d'une clé. Cette section décrit comment effectuer ces opérations à l'aide d'etcdctl, un outil en ligne de commande pour interagir avec le serveur etcd. Les concepts décrits ici s'appliquent également aux API gRPC ou aux API des bibliothèques clientes.
 
-La version de l'API utilisée par etcdctl pour communiquer avec etcd peut être définie à `2` ou `3` via la variable d'environnement `ETCDCTL_API`. Par défaut, etcdctl sur la branche master (3.4) utilise l'API v3, tandis que les versions antérieures (3.3 et antérieures) utilisent par défaut l'API v2.
+etcdctl v3.7 utilise l’API v3. L’API v2 et la sélection de version via `ETCDCTL_API` ont été supprimées.
 
-Notez qu'une clé créée à l'aide de l'API v2 ne pourra pas être interrogée via l'API v3. Une requête v3 ```etcdctl get``` d'une clé v2 se terminera avec le code 0 et sans données de clé ; il s'agit du comportement attendu.
+> [!NOTE]
+> Les exemples ci-dessous conservent des sorties de commandes historiques ; les numéros de version affichés peuvent donc différer de votre installation. Les anciennes versions d’etcd conservaient les clés v2 et v3 dans des magasins séparés ; migrez toutes les données v2 héritées avant de passer à v3.7.
 
-
-```bash
-export ETCDCTL_API=3
-```
 
 ## Rechercher les versions {#find-versions}
 
@@ -41,7 +38,7 @@ $ etcdctl put foo bar
 OK
 ```
 
-Un clé peut également être définie pour une durée déterminée en lui associant un bail.
+Une clé peut également être définie pour une durée déterminée en lui associant un bail.
 
 Voici la commande permettant de définir la valeur de la clé `foo1` à `bar1` pendant 10 s.
 
@@ -199,7 +196,7 @@ b = 456
 z = 789
 ```
 
-Voici la commande permettant de lire les clés dont la valeur d'octet est supérieure ou égale à celle de la clé `b` :
+Voici la commande permettant de lire les clés dont la valeur en octets est supérieure ou égale à celle de la clé `b` :
 
 ```bash
 $ etcdctl get --from-key b
@@ -257,7 +254,7 @@ $ etcdctl del --prefix zoo
 2 # two keys are deleted
 ```
 
-Voici la commande permettant de supprimer les clés dont la valeur d'octet est supérieure ou égale à celle de la clé `b` :
+Voici la commande permettant de supprimer les clés dont la valeur en octets est supérieure ou égale à celle de la clé `b` :
 
 ```bash
 $ etcdctl del --from-key b
@@ -405,7 +402,7 @@ progress notify: 3
 
 ## Révisions compactées {#compacted-revisions}
 
-Comme nous l'avons mentionné, etcd conserve des révisions afin que les applications puissent lire des versions antérieures des clés. Toutefois, afin d'éviter de accumuler une quantité illimitée d'historique, il est important de compacter les révisions passées. Une fois la compaction effectuée, etcd supprime les révisions historiques, libérant ainsi des ressources pour une utilisation future. Toutes les données obsolètes dont la révision est antérieure à la révision compactée deviendront indisponibles.
+Comme nous l'avons mentionné, etcd conserve des révisions afin que les applications puissent lire des versions antérieures des clés. Toutefois, afin d'éviter d'accumuler une quantité illimitée d'historique, il est important de compacter les révisions passées. Une fois la compaction effectuée, etcd supprime les révisions historiques, libérant ainsi des ressources pour une utilisation future. Toutes les données obsolètes dont la révision est antérieure à la révision compactée deviendront indisponibles.
 
 Voici la commande pour compacter les révisions :
 
@@ -426,9 +423,9 @@ $ etcdctl get mykey -w=json
 {"header":{"cluster_id":14841639068965178418,"member_id":10276657743932975437,"revision":15,"raft_term":4}}
 ```
 
-## Accorder des bails {#grant-leases}
+## Accorder des baux {#grant-leases}
 
-Les applications peuvent accorder des bails pour des clés depuis un cluster etcd. Lorsqu'une clé est associée à un bail, sa durée de vie est liée à celle du bail, qui à son tour est régulée par une durée de vie (TTL). Chaque bail a une valeur minimale de durée de vie (TTL) spécifiée par l'application au moment de l'accord. La valeur réelle de TTL du bail est au moins égale à la durée minimale et est choisie par le cluster etcd. Dès qu'une durée de vie (TTL) d'un bail a expiré, le bail expire et toutes les clés associées sont supprimées.
+Les applications peuvent accorder des baux pour des clés depuis un cluster etcd. Lorsqu'une clé est associée à un bail, sa durée de vie est liée à celle du bail, qui à son tour est régulée par une durée de vie (TTL). Chaque bail a une valeur minimale de durée de vie (TTL) spécifiée par l'application au moment de l'accord. La valeur réelle de TTL du bail est au moins égale à la durée minimale et est choisie par le cluster etcd. Dès qu'une durée de vie (TTL) d'un bail a expiré, le bail expire et toutes les clés associées sont supprimées.
 
 Voici la commande pour accorder un bail :
 
@@ -442,9 +439,9 @@ $ etcdctl put --lease=32695410dcc0ca06 foo bar
 OK
 ```
 
-## Révoquer les bails {#revoke-leases}
+## Révoquer les baux {#revoke-leases}
 
-Les applications révoquent les bails par identifiant de bail. La révocation d’un bail supprime toutes les clés associées.
+Les applications révoquent les baux par identifiant de bail. La révocation d’un bail supprime toutes les clés associées.
 
 Supposons que nous ayons terminé la séquence d'opérations suivante :
 
@@ -465,9 +462,9 @@ $ etcdctl get foo
 # empty response since foo is deleted due to lease revocation
 ```
 
-## Maintenir les bails actifs {#keep-leases-alive}
+## Maintenir les baux actifs {#keep-leases-alive}
 
-Les applications peuvent maintenir un bail actif en actualisant périodiquement son TTL afin qu'il ne expire pas.
+Les applications peuvent maintenir un bail actif en actualisant périodiquement son TTL afin qu'il n'expire pas.
 
 Supposons que nous ayons terminé la séquence d'opérations suivante :
 
@@ -488,7 +485,7 @@ lease 32695410dcc0ca06 keepalived with TTL(60)
 
 ## Obtenir les informations sur le bail {#get-lease-information}
 
-Les applications peuvent souhaiter connaître les informations relatives aux bails, afin de les renouveler ou de vérifier s'ils existent encore ou ont expiré. Les applications peuvent également souhaiter connaître les clés auxquelles un bail particulier est associé.
+Les applications peuvent souhaiter connaître les informations relatives aux baux, afin de les renouveler ou de vérifier s'ils existent encore ou ont expiré. Les applications peuvent également souhaiter connaître les clés auxquelles un bail particulier est associé.
 
 Supposons que nous ayons terminé la séquence d'opérations suivante :
 

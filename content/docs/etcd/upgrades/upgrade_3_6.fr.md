@@ -3,11 +3,11 @@ title: Mettre à jour etcd de la version v3.5 à la version v3.6
 weight: 6600
 description: "Processus, listes de vérification et notes sur la mise à niveau d'etcd de la version 3.5 à la version 3.6"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_6.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_6.md"
 aliases: [/etcd/upgrades/upgrade_3_6/]
 ---
 
-Dans le cas général, la mise à niveau de etcd v3.5 vers v3.6 peut être une mise à niveau progressive sans interruption de service :
+Dans le cas général, la mise à niveau d’etcd v3.5 vers v3.6 peut être une mise à niveau progressive sans interruption de service :
 
 -  un à un, arrêtez les processus etcd v3.5 et remplacez-les par des processus etcd v3.6
 -  après avoir lancé tous les processus v3.6, les nouvelles fonctionnalités de la version v3.6 sont disponibles pour le cluster
@@ -243,9 +243,9 @@ Si `--enable-v2` est configuré, exécutez la commande `etcdutl check v2store` p
 
 ```
 
-### Drapeaux équivalents des fonctionnalités v3.5 {#equivalent-flags-of-v35-feature-gates}
+### Migration des options expérimentales de v3.5 vers les portes fonctionnelles {#equivalent-flags-of-v35-feature-gates}
 
-**drapeau équivalent pour la fonctionnalité `etcd --experimental-compact-hash-check-enabled=true`**
+**Porte fonctionnelle correspondant à `etcd --experimental-compact-hash-check-enabled=true`**
 
 ```diff
 
@@ -255,7 +255,7 @@ Si `--enable-v2` est configuré, exécutez la commande `etcdutl check v2store` p
 
 ```
 
-**drapeau équivalent pour la fonctionnalité `etcd --experimental-initial-corrupt-check=true`**
+**Porte fonctionnelle correspondant à `etcd --experimental-initial-corrupt-check=true`**
 
 ```diff
 
@@ -265,7 +265,7 @@ Si `--enable-v2` est configuré, exécutez la commande `etcdutl check v2store` p
 
 ```
 
-**drapeau équivalent pour la fonctionnalité `etcd --experimental-enable-lease-checkpoint=true`**
+**Porte fonctionnelle correspondant à `etcd --experimental-enable-lease-checkpoint=true`**
 
 ```diff
 
@@ -275,7 +275,7 @@ Si `--enable-v2` est configuré, exécutez la commande `etcdutl check v2store` p
 
 ```
 
-**drapeau équivalent pour la fonctionnalité `etcd --experimental-enable-lease-checkpoint-persist=true`**
+**Porte fonctionnelle correspondant à `etcd --experimental-enable-lease-checkpoint-persist=true`**
 
 ```diff
 
@@ -285,7 +285,7 @@ Si `--enable-v2` est configuré, exécutez la commande `etcdutl check v2store` p
 
 ```
 
-**drapeau équivalent pour la fonctionnalité `etcd --experimental-stop-grpc-service-on-defrag=true`**
+**Porte fonctionnelle correspondant à `etcd --experimental-stop-grpc-service-on-defrag=true`**
 
 ```diff
 
@@ -295,7 +295,7 @@ Si `--enable-v2` est configuré, exécutez la commande `etcdutl check v2store` p
 
 ```
 
-**drapeau équivalent pour la fonctionnalité `etcd --experimental-txn-mode-write-with-shared-buffer=false`**
+**Porte fonctionnelle correspondant à `etcd --experimental-txn-mode-write-with-shared-buffer=false`**
 
 ```diff
 
@@ -307,7 +307,7 @@ Si `--enable-v2` est configuré, exécutez la commande `etcdutl check v2store` p
 
 ### Drapeaux avec de nouvelles valeurs par défaut {#flags-with-new-defaults}
 
-**Drapeau par défaut par défaut `etcd --snapshot-count=100000`**
+**Valeur par défaut d'origine du drapeau `etcd --snapshot-count=100000`**
 
 ```diff
 
@@ -317,7 +317,7 @@ Si `--enable-v2` est configuré, exécutez la commande `etcdutl check v2store` p
 
 ```
 
-**Drapeau par défaut `etcd --v2-deprecation='not-yet'`**
+**Valeur par défaut d'origine du drapeau `etcd --v2-deprecation='not-yet'`**
 
 ```diff
 
@@ -327,7 +327,7 @@ Si `--enable-v2` est configuré, exécutez la commande `etcdutl check v2store` p
 
 ```
 
-**Drapeau par défaut `etcd --discovery-fallback='proxy'`**
+**Valeur par défaut d'origine du drapeau `etcd --discovery-fallback='proxy'`**
 
 ```diff
 
@@ -349,7 +349,7 @@ Si `--enable-v2` est configuré, exécutez la commande `etcdutl check v2store` p
 
 #### Exigences de mise à jour {#upgrade-requirements}
 
-Pour mettre à jour un déploiement etcd existant vers la version 3.6, le cluster en cours d'exécution doit être la version 3.5 ou ultérieure. Si la version est antérieure à 3.5, veuillez [mettre à jour vers la version 3.5](/fr/docs/etcd/upgrades/upgrade_3_4/) avant de procéder à la mise à jour vers la version 3.6.
+Pour mettre à jour un déploiement etcd existant vers la version 3.6, le cluster en cours d'exécution doit être la version 3.5 ou ultérieure. Si la version est antérieure à 3.5, veuillez [mettre à jour vers la version 3.5](/fr/docs/etcd/upgrades/upgrade_3_5/) avant de procéder à la mise à jour vers la version 3.6.
 
 En outre, pour garantir une mise à niveau progressive sans incident, le cluster en cours d'exécution doit être sain. Vérifiez l'état de santé du cluster à l'aide de la commande `etcdctl endpoint health` avant de poursuivre.
 
@@ -357,17 +357,17 @@ En outre, pour garantir une mise à niveau progressive sans incident, le cluster
 
 Avant de mettre à jour etcd, testez toujours les services dépendants d’etcd dans un environnement de préproduction avant de déployer la mise à jour dans l’environnement de production.
 
-Avant de commencer, [téléchargez la sauvegarde d'instantané](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup). Si une erreur survient lors de la mise à jour, il sera possible d'utiliser cette sauvegarde pour [annuler](#rollback) la mise à jour et revenir à la version existante de etcd. Veuillez noter que la `snapshot` commande ne sauvegarde que les données v3.
+Avant de commencer, [téléchargez la sauvegarde d'instantané](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup). Si une erreur survient lors de la mise à jour, il sera possible d'utiliser cette sauvegarde pour [annuler](#rollback) la mise à jour et revenir à la version existante d’etcd. Veuillez noter que la commande `snapshot` ne sauvegarde que les données v3.
 
 #### Versions mixtes {#mixed-versions}
 
-Lors d'une mise à jour, un cluster etcd prend en charge des versions mixtes de membres et fonctionne selon le protocole de la version commune la plus basse. Le cluster n'est considéré comme mis à jour qu'une fois que tous ses membres ont été mis à jour vers la version v3.6. Internement, les membres etcd négocient entre eux afin de déterminer la version globale du cluster, qui contrôle la version signalée et les fonctionnalités prises en charge.
+Lors d'une mise à jour, un cluster etcd prend en charge des versions mixtes de membres et fonctionne selon le protocole de la version commune la plus basse. Le cluster n'est considéré comme mis à jour qu'une fois que tous ses membres ont été mis à jour vers la version v3.6. En interne, les membres etcd négocient entre eux afin de déterminer la version globale du cluster, qui contrôle la version signalée et les fonctionnalités prises en charge.
 
-#### Annuler {#rollback}
+#### Retour arrière {#rollback}
 
 Avant de mettre à jour votre cluster etcd, créez et [téléchargez une sauvegarde sous forme d'instantané](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup) de votre cluster etcd. Cet instantané peut être utilisé pour restaurer le cluster dans son état antérieur à la mise à jour si nécessaire. Si les utilisateurs rencontrent des problèmes pendant la mise à jour, ils doivent d'abord identifier et résoudre la cause racine. Si le cluster est toujours dans un état mixte — où au moins un membre reste sur la version v3.5 —, il est possible de remplacer le binaire ou l'image par la version v3.5 antérieure, ou de restaurer directement le cluster à l'aide de l'instantané. Dans cet état mixte, le cluster continue de fonctionner en tant que cluster v3.5, permettant ainsi un retour arrière sans suivre un processus formel de rétrogradation.
 
-Toutefois, une fois que tous les membres ont été mis à jour vers la version v3.6, le cluster est considéré comme entièrement mis à jour et la récupération à l’aide des binaires n’est plus possible. Dans ce cas, la seule option de récupération consiste à restaurer à partir de l’instantané pris avant la mise à jour. Si les utilisateurs souhaitent revenir à la version d’origine après une mise à jour complète, ils doivent suivre le guide officiel de rétrogradation afin d’assurer la cohérence et éviter toute corruption des données.
+Toutefois, une fois que tous les membres ont été mis à jour vers la version v3.6, le cluster est considéré comme entièrement mis à jour et le simple remplacement des binaires n’est plus un retour arrière valide. Les options de récupération consistent à restaurer depuis l’instantané pris avant la mise à jour ou à suivre le guide officiel de rétrogradation pour revenir à la version d’origine en assurant la cohérence et en évitant toute corruption des données.
 
 ### Procédure de mise à jour {#upgrade-procedure}
 
@@ -401,11 +401,11 @@ curl http://localhost:32379/version
 COMMENT
 ```
 
-#### Étape 2 : télécharger la sauvegarde instantané depuis le leader {#step-2-download-snapshot-backup-from-leader}
+#### Étape 2 : télécharger la sauvegarde d'instantané depuis le leader {#step-2-download-snapshot-backup-from-leader}
 
 [Téléchargez l'instantané de sauvegarde](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup) afin de disposer d'une voie de retour en cas de problème.
 
-Le leader etcd est garanti pour avoir les données d'application les plus récentes ; récupérez donc l'instantané depuis le leader :
+Le leader etcd possède toujours les données d'application les plus récentes ; récupérez donc l'instantané depuis le leader :
 
 ```bash
 curl -sL http://localhost:2379/metrics | grep etcd_server_is_leader
@@ -520,7 +520,7 @@ Le nouvel etcd v3.6 publiera ses informations dans le cluster. À ce stade, le c
 >
 > `{"level":"info","ts":"2025-03-01T04:40:36.894+0530","caller":"etcdserver/server.go:1686","msg":"published local member to cluster through raft","local-member-id":"bf9071f4639c75cc","local-member-attributes":"{Name:node1 ClientURLs:[http://127.0.0.1:2379]}","cluster-id":"59a05384c9b79ee","publish-timeout":"7s"}`
 
-Vérifiez que chaque membre, puis l’ensemble du cluster, devient sain avec la nouvelle binaire etcd v3.6 :
+Vérifiez que chaque membre, puis l’ensemble du cluster, devient sain avec le nouveau binaire etcd v3.6 :
 
 ```bash
 etcdctl endpoint health --endpoints=localhost:2379,localhost:22379,localhost:32379

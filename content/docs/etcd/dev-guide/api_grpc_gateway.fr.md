@@ -3,19 +3,19 @@ title: Pourquoi utiliser une passerelle gRPC
 weight: 3375
 description: "Pourquoi envisager l'utilisation de la passerelle gRPC"
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/api_grpc_gateway.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/api_grpc_gateway.md"
 aliases: [/etcd/dev-guide/api_grpc_gateway/]
 ---
 
-etcd v3 utilise [gRPC][grpc] comme protocole de messagerie. Le projet etcd inclut un client [Go][go-client] basé sur gRPC ainsi qu'une utilitaire en ligne de commande, [etcdctl][etcdctl], pour communiquer avec un cluster etcd via gRPC. Pour les langages ne disposant pas de prise en charge gRPC, etcd fournit une passerelle [gRPC][grpc-gateway] en JSON. Cette passerelle fournit un proxy RESTful qui traduit les requêtes HTTP/JSON en messages gRPC.
+etcd v3 utilise [gRPC][grpc] comme protocole de messagerie. Le projet etcd inclut un client [Go][go-client] basé sur gRPC ainsi qu'un utilitaire en ligne de commande, [etcdctl][etcdctl], pour communiquer avec un cluster etcd via gRPC. Pour les langages ne disposant pas de prise en charge gRPC, etcd fournit une passerelle [gRPC][grpc-gateway] en JSON. Cette passerelle fournit un proxy RESTful qui traduit les requêtes HTTP/JSON en messages gRPC.
 
 ## Utilisation de la passerelle gRPC {#using-grpc-gateway}
 
-La passerelle accepte une correspondance [JSON][json-mapping] pour les définitions de messages du protocole buffer [de etcd][api-ref]. Notez que les champs `key` et `value` sont définis comme des tableaux d'octets et doivent donc être encodés en base64 dans le JSON. Les exemples suivants utilisent `curl`, mais tout client HTTP/JSON devrait fonctionner de la même manière.
+La passerelle accepte une correspondance [JSON][json-mapping] pour les définitions de messages du protocole buffer [d'etcd][api-ref]. Notez que les champs `key` et `value` sont définis comme des tableaux d'octets et doivent donc être encodés en base64 dans le JSON. Les exemples suivants utilisent `curl`, mais tout client HTTP/JSON devrait fonctionner de la même manière.
 
 ### Notes {#notes}
 
-Point de terminaison de passerelle gRPC a changé depuis etcd v3.3 :
+Le point de terminaison de la passerelle gRPC a changé depuis etcd v3.3 :
 
 - etcd v3.2 ou antérieure utilise uniquement `[CLIENT-URL]/v3alpha/*`.
 - etcd v3.3 utilise `[CLIENT-URL]/v3beta/*` tout en conservant `[CLIENT-URL]/v3alpha/*`.
@@ -24,7 +24,7 @@ Point de terminaison de passerelle gRPC a changé depuis etcd v3.3 :
 - etcd v3.5 ou ultérieure utilise uniquement `[CLIENT-URL]/v3/*`.
   - **`[CLIENT-URL]/v3beta/*` est obsolète**.
 
-Le passerelle gRPC ne prend pas en charge l'authentification par le nom commun TLS.
+La passerelle gRPC ne prend pas en charge l'authentification par le nom commun TLS.
 
 ### Mettre et obtenir des clés {#put-and-get-keys}
 
@@ -132,7 +132,7 @@ curl -L http://localhost:2379/v3/kv/put \
 
 La passerelle gRPC traduit les états gRPC en codes d’état HTTP et un corps d’erreur au format JSON. À compter d’etcd v3.6, la mise à jour vers grpc-gateway v2 a modifié la gestion des erreurs (voir la note [gestion des erreurs][grpc-gateway-v2-errors] dans le guide de migration v2), et le comportement de la passerelle est désormais conforme à `google.rpc.Status` (code, message, détails) tel que décrit dans [modèle d’erreur d’API de Google][google-api-errors]. Historiquement, les versions antérieures de grpc-gateway incluaient également un champ de niveau supérieur `error`, mais ce champ n’est plus pris en charge à partir d’etcd v3.6 et des versions ultérieures.
 
-Les clients doivent considérer le code d’état HTTP comme l’indicateur principal de succès ou d’échec. Si une requête échoue, les clients doivent s’appuyer sur le champ `message` comme source principale d’information d’erreur et utiliser tout détail supplémentaire pour obtenir un contexte plus précis.
+Les clients devraient considérer le code d'état HTTP comme l'indicateur principal de succès ou d'échec. Si une requête échoue, les clients devraient s'appuyer sur le champ `message` comme source principale d'information d'erreur et utiliser tout détail supplémentaire pour obtenir un contexte plus précis.
 
 ## Swagger {#swagger}
 

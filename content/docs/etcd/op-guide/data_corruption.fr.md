@@ -1,21 +1,24 @@
 ---
 title: Corruption des données
 weight: 5000
-description: etcd corruption des données et récupération
+description: Corruption des données et récupération dans etcd
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/data_corruption.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/data_corruption.md"
 aliases: [/etcd/op-guide/data_corruption/]
 ---
 
-etcd dispose d'une détection automatique des corruption de données intégrée afin d'éviter que l'état du membre ne diverge.
+etcd dispose d'une détection automatique de la corruption de données intégrée afin d'éviter que l'état du membre ne diverge.
 
-## Activation détection corruption données {#enabling-data-corruption-detection}
+> [!NOTE]
+> Dans etcd 3.7, utilisez les portes de fonctionnalités et les options de durée ci-dessous. Les anciennes options expérimentales de vérification de corruption ont été supprimées ; consultez les [options de configuration](/fr/docs/etcd/op-guide/configuration/#feature-gates).
+
+## Activation de la détection de corruption de données {#enabling-data-corruption-detection}
 
 Détection de corruption de données possible à l'aide de :
-* Vérification initiale, activée avec le drapeau `--experimental-initial-corrupt-check`.
+* Vérification initiale, activée avec le drapeau `--feature-gates=InitialCorruptCheck=true`.
 * Vérification périodique de :
-  * Hachage de la révision compactée, activée avec le drapeau `--experimental-compact-hash-check-enabled`.
-  * Hachage de la dernière révision, activée avec le drapeau `--experimental-corrupt-check-time`.
+  * Hachage de la révision compactée, activé avec le drapeau `--feature-gates=CompactHashCheck=true`.
+  * Hachage de la dernière révision, activé avec le drapeau `--corrupt-check-time`.
 
 La vérification initiale sera exécutée lors du démarrage du membre etcd.
 Le membre comparera son état persistant avec celui des autres membres et quittera l'exécution s'il détecte une incohérence.
@@ -23,21 +26,21 @@ Le membre comparera son état persistant avec celui des autres membres et quitte
 Les deux vérifications périodiques seront exécutées par le leader du cluster dans un cluster déjà en cours d'exécution.
 Le leader comparera son état persistant aux autres membres et déclenchera une alarme CORRUPT en cas de désaccord.
 Les deux vérifications ont le même objectif, mais il est recommandé de les activer toutes les deux afin d'équilibrer performance et temps de détection.
-* Vérification de hachage de la révision compactée – nécessite une compactage régulière, coût minimal sur la performance, gère les suiveurs lents.
+* Vérification de hachage de la révision compactée – nécessite un compactage régulier, coût minimal sur la performance, gère les suiveurs lents.
 * Vérification de hachage de la dernière révision – coût élevé sur la performance, ne gère pas les suiveurs lents ni les compactages fréquents.
 
 ### Vérification du hachage de révision compactée {#compacted-revision-hash-check}
 
-Lorsqu’il est activé à l’aide du drapeau `--experimental-compact-hash-check-enabled`, la vérification est exécutée toutes les minutes.
-Cette fréquence peut être ajustée à l’aide du drapeau `--experimental-compact-hash-check-time` selon le format suivant : `1m` - toutes les minutes, `1h` - toutes les heures.
-Cette vérification étend le compactage afin d’effectuer également le calcul d’un checksum pouvant être comparé entre les membres du cluster.
+Lorsqu’elle est activée à l’aide du drapeau `--feature-gates=CompactHashCheck=true`, la vérification est exécutée toutes les minutes.
+Cette fréquence peut être ajustée à l’aide du drapeau `--compact-hash-check-time` selon le format suivant : `1m` - toutes les minutes, `1h` - toutes les heures.
+Cette vérification étend le compactage afin d’effectuer également le calcul d’une somme de contrôle pouvant être comparée entre les membres du cluster.
 Elle ne provoque pas de balayage supplémentaire de la base de données, ce qui la rend très peu coûteuse, mais nécessite un compactage régulier dans le cluster.
 
 ### Vérification du hachage de la dernière révision {#latest-revision-hash-check}
 
-Activé à l'aide du drapeau `--experimental-corrupt-check-time`, nécessite de préciser une période d'exécution au format : `1m` - toutes les minutes, `1h` - toutes les heures.
+Activée à l'aide du drapeau `--corrupt-check-time`, nécessite de préciser une période d'exécution au format : `1m` - toutes les minutes, `1h` - toutes les heures.
 La période recommandée est de quelques heures en raison du coût élevé en performance.
-L'exécution d'un contrôle nécessite le calcul d'un somme de contrôle en analysant l'intégralité du contenu etcd à la révision indiquée.
+L'exécution d'un contrôle nécessite le calcul d'une somme de contrôle en analysant l'intégralité du contenu etcd à la révision indiquée.
 
 ## Restauration d’un membre corrompu {#restoring-a-corrupted-member}
 
@@ -70,5 +73,5 @@ Un membre peut être remplacé par :
 
 ### Restaurer l'intégralité du cluster {#restore-whole-cluster}
 
-Un cluster peut être restauré en sauvegardant un instantané depuis le leader actuel et en le restorant sur tous les membres.
-Exécutez `etcdctl snapshot save` contre le leader et suivez [procédure de restauration d'un cluster](/fr/docs/etcd/op-guide/recovery/).
+Un cluster peut être restauré en sauvegardant un instantané depuis le leader actuel et en le restaurant sur tous les membres.
+Exécutez `etcdctl snapshot save` contre le leader et suivez la [procédure de restauration d'un cluster](/fr/docs/etcd/op-guide/recovery/).

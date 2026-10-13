@@ -3,7 +3,7 @@ title: Mettre en place un cluster local
 weight: 3125
 description: Configuration de clusters locaux pour les tests et le développement
 categories: [Tutoriel]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/local_cluster.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/local_cluster.md"
 aliases: [/etcd/dev-guide/local_cluster/]
 ---
 
@@ -64,7 +64,7 @@ Un `Procfile` situé à la racine du dépôt git d'etcd est fourni pour configur
     $ goreman -f Procfile start
     ```
 
-    Les membres démarrent. Ils écoutent respectivement sur `localhost:2379`, `localhost:22379` et `localhost:32379` les requêtes clientes.
+    Les membres démarrent. Ils écoutent respectivement sur `localhost:2379`, `localhost:22379` et `localhost:32379` pour les requêtes clientes.
 
 ### Interaction avec le cluster {#interacting-with-the-cluster-1}
 
@@ -131,7 +131,7 @@ Pour tester la tolérance aux pannes d'etcd, arrêtez un membre et tentez de ré
     $ etcdctl --endpoints=localhost:22379 get key
     ```
 
-    La commande doit afficher une erreur due à un échec de connexion :
+    La commande devrait afficher une erreur due à un échec de connexion :
 
     ```
     2017/06/18 23:07:35 grpc: Conn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 127.0.0.1:22379: getsockopt: connection refused"; Reconnecting to "localhost:22379"

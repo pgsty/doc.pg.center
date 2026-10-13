@@ -3,7 +3,7 @@ title: Guide de clustering
 weight: 4150
 description: "Initialisation d’un cluster etcd : méthode statique, découverte etcd et découverte DNS"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/clustering.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/clustering.md"
 aliases: [/etcd/op-guide/clustering/]
 ---
 
@@ -11,7 +11,7 @@ aliases: [/etcd/op-guide/clustering/]
 
 Lancer un cluster etcd de manière statique exige que chaque membre connaisse un autre membre du cluster. Dans certains cas, les adresses IP des membres du cluster peuvent être inconnues à l'avance. Dans ces situations, le cluster etcd peut être initialisé à l'aide d'un service de découverte.
 
-Une fois qu’un cluster etcd est en cours d’exécution, l’ajout ou la suppression de membres s’effectue via la reconfiguration en temps réel [runtime reconfiguration][runtime-conf]. Pour mieux comprendre la conception sous-jacente à la reconfiguration en temps réel, nous recommandons de lire [le document de conception de la configuration en temps réel][runtime-reconf-design].
+Une fois qu’un cluster etcd est en cours d’exécution, l’ajout ou la suppression de membres s’effectue via la [reconfiguration à l’exécution][runtime-conf]. Pour mieux comprendre la conception sous-jacente à la reconfiguration à l’exécution, nous recommandons de lire [le document de conception de la configuration à l’exécution][runtime-reconf-design].
 
 Ce guide traite des mécanismes suivants pour amorcer un cluster etcd :
 
@@ -41,7 +41,7 @@ ETCD_INITIAL_CLUSTER_STATE=new
 --initial-cluster-state new
 ```
 
-Notez que les URL spécifiées dans `initial-cluster` sont les URL de pair annoncées, c’est-à-dire qu’elles doivent correspondre à la valeur de `initial-advertise-peer-urls` sur les nœuds respectifs.
+Notez que les URL spécifiées dans `initial-cluster` sont les _URL de pair annoncées_, c’est-à-dire qu’elles devraient correspondre à la valeur de `initial-advertise-peer-urls` sur les nœuds respectifs.
 
 Si vous lancez plusieurs clusters (ou créez et détruyez un seul cluster) avec la même configuration à des fins de test, il est fortement recommandé d’attribuer à chaque cluster un identifiant `initial-cluster-token` unique. En procédant ainsi, etcd peut générer des identifiants de cluster et de membre uniques pour chaque cluster, même s’ils ont exactement la même configuration. Cela protège etcd contre les interactions entre clusters, qui pourraient endommager les clusters.
 
@@ -77,7 +77,7 @@ $ etcd --name infra2 --initial-advertise-peer-urls http://10.0.1.12:2380 \
   --initial-cluster-state new
 ```
 
-Les paramètres de ligne de commande commençant par `--initial-cluster` seront ignorés lors des exécutions ultérieures de etcd. N'hésitez pas à supprimer les variables d'environnement ou les indicateurs de ligne de commande après le processus d'initialisation. Si des modifications de configuration sont nécessaires ultérieurement (par exemple, l'ajout ou la suppression de membres dans le cluster), consultez le guide [configuration en temps réel][runtime-conf].
+Les paramètres de ligne de commande commençant par `--initial-cluster` seront ignorés lors des exécutions ultérieures d’etcd. N'hésitez pas à supprimer les variables d'environnement ou les indicateurs de ligne de commande après le processus d'initialisation. Si des modifications de configuration sont nécessaires ultérieurement (par exemple, l'ajout ou la suppression de membres dans le cluster), consultez le guide [configuration à l’exécution][runtime-conf].
 
 ### TLS {#tls}
 
@@ -85,7 +85,7 @@ etcd prend en charge la communication chiffrée via le protocole TLS. Les canaux
 
 #### Certificats auto-signés {#self-signed-certificates}
 
-Un cluster utilisant des certificats auto-signés chiffrer le trafic et authentifier ses connexions. Pour démarrer un cluster avec des certificats auto-signés, chaque membre du cluster doit disposer d'une paire de clés unique (`member.crt`, `member.key`) signée par un certificat CA partagé du cluster (`ca.crt`) pour les connexions entre pairs et les connexions clients. Les certificats peuvent être générés en suivant l'exemple de configuration [TLS][tls-setup] d'etcd.
+Un cluster utilisant des certificats auto-signés chiffre à la fois le trafic et authentifie ses connexions. Pour démarrer un cluster avec des certificats auto-signés, chaque membre du cluster devrait disposer d'une paire de clés unique (`member.crt`, `member.key`) signée par un certificat CA partagé du cluster (`ca.crt`) pour les connexions entre pairs et les connexions clients. Les certificats peuvent être générés en suivant l'exemple de configuration [TLS][tls-setup] d'etcd.
 
 Sur chaque machine, etcd sera lancé avec ces indicateurs :
 
@@ -219,15 +219,18 @@ Deux méthodes peuvent être utilisées pour la découverte :
 * service de découverte etcd
 * enregistrements DNS SRV
 
-### etcd discovery {#etcd-discovery}
+### Découverte etcd {#etcd-discovery}
 
-Pour mieux comprendre la conception du protocole du service de découverte, nous recommandons de lire la documentation du protocole du service de découverte [documentation][discovery-proto].
+> [!NOTE]
+> Les exemples de service de découverte de cette section décrivent l’ancien protocole v2, supprimé dans etcd 3.7. Pour un nouveau cluster v3.7, utilisez la [découverte v3](/fr/docs/etcd/dev-internal/discovery_protocol/) ou les méthodes d’amorçage statique et par DNS SRV de ce guide.
+
+Pour mieux comprendre la conception du protocole du service de découverte, nous recommandons de lire la [documentation du protocole du service de découverte][discovery-proto].
 
 #### Durée de vie d'une URL de découverte {#lifetime-of-a-discovery-url}
 
 Une URL de découverte identifie un cluster etcd unique. Au lieu de réutiliser une URL de découverte existante, chaque instance etcd partage une nouvelle URL de découverte pour amorcer le nouveau cluster.
 
-En outre, les URL de découverte doivent être utilisées UNIQUEMENT pour le démarrage initial d’un cluster. Pour modifier la composition du cluster une fois qu’il est déjà en cours d’exécution, consultez le guide [reconfiguration en temps réel][runtime-conf].
+En outre, les URL de découverte devraient être utilisées UNIQUEMENT pour le démarrage initial d’un cluster. Pour modifier la composition du cluster une fois qu’il est déjà en cours d’exécution, consultez le guide [reconfiguration à l’exécution][runtime-conf].
 
 #### Service de découverte etcd personnalisé {#custom-etcd-discovery-service}
 
@@ -237,7 +240,7 @@ La découverte utilise un cluster existant pour amorcer son démarrage. Si vous 
 $ curl -X PUT https://myetcd.local/v2/keys/discovery/6c007a14875d53d9bf0ef5a6fc0257c817f0fb83/_config/size -d value=3
 ```
 
-En définissant la clé size à l’URL, une URL de découverte est créée avec une taille de cluster attendue de 3.
+En définissant la clé size à 3 sous cette URL, une URL de découverte est créée avec une taille de cluster attendue de 3.
 
 L'URL à utiliser dans ce cas sera `https://myetcd.local/v2/keys/discovery/6c007a14875d53d9bf0ef5a6fc0257c817f0fb83` et les membres etcd utiliseront le répertoire `https://myetcd.local/v2/keys/discovery/6c007a14875d53d9bf0ef5a6fc0257c817f0fb83` pour s'enregistrer au moment de leur démarrage.
 
@@ -481,13 +484,13 @@ Depuis la version 3.1.0 (sauf la version 3.2.9), lorsque `etcd --discovery-srv=e
 
 ### Passerelle {#gateway}
 
-Le passerelle etcd est un proxy TCP simple qui achemine les données réseau vers le cluster etcd. Veuillez consulter le guide [gateway][gateway] pour plus d'informations.
+La passerelle etcd est un proxy TCP simple qui achemine les données réseau vers le cluster etcd. Veuillez consulter le guide [passerelle][gateway] pour plus d'informations.
 
 ### Proxy {#proxy}
 
-Lorsque le drapeau `--proxy` est défini, etcd s'exécute en mode proxy [proxy mode][proxy]. Ce mode proxy ne prend en charge que l'API etcd v2 ; aucune mise en œuvre de l'API v3 n'est prévue. En revanche, pour la prise en charge de l'API v3, un nouveau proxy doté de fonctionnalités améliorées sera disponible après la sortie d'etcd 3.0.
+Les anciennes versions d’etcd prenaient en charge un [mode proxy][proxy] réservé à v2 via `--proxy`. Ce mode a été supprimé et ne peut pas être utilisé avec etcd 3.7. Pour l’API v3, utilisez le [proxy gRPC](/fr/docs/etcd/op-guide/grpc_proxy/).
 
-Pour configurer un cluster etcd avec des proxys de l'API v2, veuillez consulter le document [clustering][clustering_etcd2] de la version 2.3 d'etcd.
+Pour les déploiements historiques du proxy v2, consultez le [document sur le clustering de la version 2.3 d’etcd][clustering_etcd2].
 
 [clustering_etcd2]: https://github.com/etcd-io/etcd/blob/release-2.3/Documentation/clustering.md
 [conf-adv-client]: /fr/docs/etcd/op-guide/configuration/#clustering

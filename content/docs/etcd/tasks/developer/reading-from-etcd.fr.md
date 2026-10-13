@@ -3,7 +3,7 @@ title: Lecture depuis etcd
 description: "Lecture d'une valeur dans un cluster etcd"
 weight: 200
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/developer/reading-from-etcd.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/developer/reading-from-etcd.md"
 aliases: [/etcd/tasks/developer/reading-from-etcd/]
 ---
 
@@ -27,7 +27,7 @@ où :
 - `foo` est la clé demandée
 - `Hello World!` est la valeur récupérée
 
-Or, pour une sortie formatée :
+Ou, pour une sortie formatée :
 
 ```
 $ etcdctl --endpoints=$ENDPOINTS --write-out="json" get foo
@@ -36,4 +36,4 @@ $ etcdctl --endpoints=$ENDPOINTS --write-out="json" get foo
 $
 ```
 
-où `write-out="json"` fait que la valeur est sortie au format JSON (notez que la clé n'est pas renvoyée).
+où `write-out="json"` renvoie une sortie JSON dont la clé et la valeur sont toutes deux encodées en base64.

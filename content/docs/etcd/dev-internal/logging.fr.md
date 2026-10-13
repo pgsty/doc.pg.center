@@ -3,7 +3,7 @@ title: Conventions de journalisation
 weight: 1600
 description: Catégories de niveau de journalisation
 categories: [Référence]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-internal/logging.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-internal/logging.md"
 aliases: [/etcd/dev-internal/logging/]
 ---
 
@@ -17,20 +17,20 @@ etcd utilise la bibliothèque [zap][zap] pour la journalisation de la sortie de 
 * InfoLevel est la priorité de journalisation par défaut.
   * Exemples :
     * Configuration au démarrage
-    * Effectuer un instantané
+    * Commencer à effectuer un instantané
     * Ajouter un nouveau nœud au cluster
     * Ajouter un nouvel utilisateur au sous-système d'authentification
 
-* Les journaux de niveau Warn sont plus importants que ceux de niveau Info, mais ne nécessitent pas de revue humaine individuelle.
+* Les journaux WarnLevel sont plus importants que ceux de niveau Info, mais ne nécessitent pas de revue humaine individuelle.
   * Exemples :
     * Échec de l’envoi d’un message Raft à un pair distant
     * Échec de réception d’un message de battement de cœur dans le délai d’élection configuré
 
-* Les journaux ErrorLevel sont de haute priorité. Si une application fonctionne correctement, elle ne doit générer aucun journal de niveau erreur.
+* Les journaux ErrorLevel sont de haute priorité. Si une application fonctionne correctement, elle ne devrait générer aucun journal de niveau erreur.
   * Exemples :
     * Échec de l'allocation d'espace disque pour le WAL
 
-* PanicLevel enregistre un message, puis provoque un arrêt anormal.
+* PanicLevel enregistre un message, puis déclenche une panique.
   * Exemples :
     * Échec du codage des messages Raft
 

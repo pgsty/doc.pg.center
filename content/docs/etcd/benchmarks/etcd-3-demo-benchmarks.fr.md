@@ -3,7 +3,7 @@ title: "Benchmarking d'etcd v3"
 weight: 5375
 description: Mesures de performance pour etcd v3
 categories: [Référence]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/benchmarks/etcd-3-demo-benchmarks.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/benchmarks/etcd-3-demo-benchmarks.md"
 aliases: [/etcd/benchmarks/etcd-3-demo-benchmarks/]
 ---
 
@@ -11,7 +11,7 @@ aliases: [/etcd/benchmarks/etcd-3-demo-benchmarks/]
 
 Type de machine GCE n1-highcpu-2
 
-- 1 disque SSD local dédiqué monté sous /var/lib/etcd
+- 1 disque SSD local dédié monté sous /var/lib/etcd
 - 1 disque lent dédié pour le système d'exploitation
 - 1,8 Go de mémoire
 - 2 processeurs
@@ -37,7 +37,7 @@ Utilisez l'outil de benchmark [etcd v3][etcd-v3-benchmark].
 
 Les performances sont presque identiques à celles obtenues avec un gestionnaire de serveur vide.
 
-### lecture d'une seule clé après mise {#reading-one-single-key-after-putting}
+### lecture d'une seule clé après un put {#reading-one-single-key-after-putting}
 
 | taille de la clé en octets | nombre de clients | QPS de lecture | latence au 90e percentile (ms) |
 |-----------------------------|-------------------|----------------|-------------------------------|
@@ -45,6 +45,6 @@ Les performances sont presque identiques à celles obtenues avec un gestionnaire
 | 256                         | 64                | 13582          | 8,6                           |
 | 256                         | 256               | 13262          | 47,5                          |
 
-La performance avec un gestionnaire de serveur vide n'est pas affectée par une opération put. Le dégradé de performance doit donc être dû au package de stockage.
+La performance avec un gestionnaire de serveur vide n'est pas affectée par une opération put. La dégradation des performances devrait donc être causée par le package de stockage.
 
 [etcd-v3-benchmark]: https://github.com/etcd-io/etcd/tree/main/tools/benchmark

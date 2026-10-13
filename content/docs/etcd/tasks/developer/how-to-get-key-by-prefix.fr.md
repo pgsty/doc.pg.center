@@ -1,9 +1,9 @@
 ---
 title: Comment obtenir des clés par préfixe
-description: Guide de extraction des clés etcd par leur préfixe
+description: Guide d'extraction des clés etcd par leur préfixe
 weight: 300
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/developer/how-to-get-key-by-prefix.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/developer/how-to-get-key-by-prefix.md"
 aliases: [/etcd/tasks/developer/how-to-get-key-by-prefix/]
 ---
 

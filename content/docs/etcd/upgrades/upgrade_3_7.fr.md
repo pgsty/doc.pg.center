@@ -1,13 +1,13 @@
 ---
 title: Mettre à jour etcd de la version v3.6 à la version v3.7
-weight: 6700
+weight: 6550
 description: "Processus, listes de vérification et notes sur la mise à niveau d'etcd de v3.6 à v3.7"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_7.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_7.md"
 aliases: [/etcd/upgrades/upgrade_3_7/]
 ---
 
-Dans le cas général, la mise à niveau de etcd v3.6 vers v3.7 peut être une mise à niveau progressive sans interruption de service :
+Dans le cas général, la mise à niveau d’etcd v3.6 vers v3.7 peut être une mise à niveau progressive sans interruption de service :
 
 -  un à un, arrêtez les processus etcd v3.6 et remplacez-les par des processus etcd v3.7
 -  après avoir lancé tous les processus v3.7, les nouvelles fonctionnalités de la version v3.7 sont disponibles pour le cluster
@@ -23,9 +23,9 @@ Avant de [lancer la mise à jour](#upgrade-procedure), lisez le reste du présen
 
 #### Magasin V2 {#v2-store}
 
-Le magasin v2 a été entièrement supprimé dans la version 3.7. L'API HTTP v2 (`--enable-v2`), l'émission v2 sur v3 (`--experimental-enable-v2v3`), le service de découverte v2, le paquet `client/v2` et le chargement des fichiers d'instantané v2 ont tous disparu. Consultez les références aux modifications rétroactives dans [CHANGELOG-3.7](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.7.md).
+Le magasin v2 a été entièrement supprimé dans la version 3.7. L'API HTTP v2 (`--enable-v2`), l'émulation v2 sur v3 (`--experimental-enable-v2v3`), le service de découverte v2, le paquet `client/v2` et le chargement des fichiers d'instantané v2 ont tous disparu. Consultez les références aux changements de rupture dans [CHANGELOG-3.7](https://github.com/etcd-io/etcd/blob/main/CHANGELOG/CHANGELOG-3.7.md).
 
-Si vous effectuez une mise à jour à partir d’un cluster 3.6, ces indicateurs sont déjà absents et aucune action n’est requise. Si vous migrez depuis une version antérieure avec des données v2 personnalisées, suivez le [guide de migration v2](https://etcd.io/docs/v3.4/op-guide/v2-migration/) avant la mise à jour.
+Si vous effectuez une mise à jour à partir d’un cluster 3.6, ces drapeaux sont déjà absents et aucune action n’est requise. Si vous migrez depuis une version antérieure avec des données v2 personnalisées, suivez le [guide de migration v2](https://etcd.io/docs/v3.4/op-guide/v2-migration/) avant la mise à jour.
 
 #### Refactorisation Go {#go-refactoring}
 
@@ -39,7 +39,7 @@ Si vous intégrez etcd en tant que bibliothèque, effectuez la compilation contr
 
 ### Drapeaux supprimés {#flags-removed}
 
-Toutes les options `--experimental-*` obsolètes ont été supprimées dans la version 3.7 ([#19959](https://github.com/etcd-io/etcd/pull/19959)). Dans la version 3.6, chacune de ces options a été remplacée soit par une option non expérimentale du même nom, soit par une entrée `--feature-gates`. Si vous avez encore l'une de ces options définie, remplacez-la par l'équivalent de la version 3.6 **avant** de passer à la version 3.7, sinon le processus de la version 3.7 ne pourra pas démarrer.
+Tous les drapeaux `--experimental-*` obsolètes ont été supprimés dans la version 3.7 ([#19959](https://github.com/etcd-io/etcd/pull/19959)). Dans la version 3.6, chacun de ces drapeaux a été remplacé soit par un drapeau non expérimental du même nom, soit par une entrée `--feature-gates`. Si vous avez encore l'un de ces drapeaux défini, remplacez-le par l'équivalent de la version 3.6 **avant** de passer à la version 3.7, sinon le processus de la version 3.7 ne pourra pas démarrer.
 
 ```diff
 -etcd --experimental-bootstrap-defrag-threshold-megabytes
@@ -67,7 +67,7 @@ Toutes les options `--experimental-*` obsolètes ont été supprimées dans la v
 -etcd --experimental-watch-progress-notify-interval
 ```
 
-Reportez-vous au guide de mise à jour [v3.5 vers v3.6](/fr/docs/etcd/upgrades/upgrade_3_6/) pour la correspondance de chaque indicateur supprimé vers son équivalent non expérimental ou à `--feature-gates` entrée.
+Reportez-vous au guide de mise à jour [v3.5 vers v3.6](/fr/docs/etcd/upgrades/upgrade_3_6/) pour la correspondance de chaque drapeau supprimé vers son équivalent non expérimental ou son entrée `--feature-gates`.
 
 ### Drapeaux ajoutés {#flags-added}
 
@@ -89,17 +89,17 @@ En outre, pour garantir une mise à niveau progressive sans incident, le cluster
 
 Avant de mettre à jour etcd, testez toujours les services dépendants d’etcd dans un environnement de préproduction avant de déployer la mise à jour dans l’environnement de production.
 
-Avant de commencer, téléchargez la sauvegarde d'instance, [instantané de sauvegarde](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup). Si une erreur survient lors de la mise à jour, il sera possible d'utiliser cette sauvegarde pour [annuler](#rollback) la mise à jour et revenir à la version précédente de etcd.
+Avant de commencer, [téléchargez la sauvegarde d'instantané](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup). Si une erreur survient lors de la mise à jour, il sera possible d'utiliser cette sauvegarde pour [annuler](#rollback) la mise à jour et revenir à la version précédente d’etcd.
 
 #### Versions mixtes {#mixed-versions}
 
-Lors d'une mise à jour, un cluster etcd prend en charge des versions mixtes de membres et fonctionne selon le protocole de la version commune la plus basse. Le cluster est considéré comme mis à jour uniquement lorsque tous ses membres ont été mis à jour vers la version v3.7. Internement, les membres etcd négocient entre eux afin de déterminer la version globale du cluster, qui contrôle la version signalée et les fonctionnalités prises en charge.
+Lors d'une mise à jour, un cluster etcd prend en charge des versions mixtes de membres et fonctionne selon le protocole de la version commune la plus basse. Le cluster est considéré comme mis à jour uniquement lorsque tous ses membres ont été mis à jour vers la version v3.7. En interne, les membres etcd négocient entre eux afin de déterminer la version globale du cluster, qui contrôle la version signalée et les fonctionnalités prises en charge.
 
-#### Annuler {#rollback}
+#### Retour arrière {#rollback}
 
 Avant de mettre à jour votre cluster etcd, créez et [téléchargez une sauvegarde sous forme d'instantané](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup) de votre cluster etcd. Cet instantané peut être utilisé pour restaurer le cluster dans son état antérieur à la mise à jour si nécessaire. Si des utilisateurs rencontrent des problèmes pendant la mise à jour, ils doivent d'abord identifier et résoudre la cause racine. Si le cluster est toujours dans un état mixte, où au moins un membre reste sur la version v3.6, il est possible de remplacer le binaire ou l'image par la version v3.6 antérieure, ou de restaurer directement le cluster à l'aide de l'instantané. Dans cet état mixte, le cluster continue de fonctionner en tant que cluster v3.6, permettant ainsi un retour arrière sans suivre un processus formel de rétrogradation.
 
-Toutefois, une fois que tous les membres ont été mis à jour vers la version 3.7, le cluster est considéré comme entièrement mis à jour et la restauration à une version antérieure à l’aide des binaires n’est plus possible. Dans ce cas, les seules options de récupération sont de restaurer à partir de l’instantané pris avant la mise à jour ou de suivre le guide officiel de [désinstallation](/fr/docs/etcd/downgrades/downgrading-etcd/) en cas de problème lors de la mise à jour.
+Toutefois, une fois que tous les membres ont été mis à jour vers la version 3.7, le cluster est considéré comme entièrement mis à jour et la restauration à une version antérieure à l’aide des binaires n’est plus possible. Dans ce cas, les seules options de récupération sont de restaurer à partir de l’instantané pris avant la mise à jour ou de suivre le guide officiel de [rétrogradation](/fr/docs/etcd/downgrades/downgrading-etcd/) en cas de problème lors de la mise à jour.
 
 ### Procédure de mise à jour {#upgrade-procedure}
 
@@ -123,11 +123,11 @@ curl http://localhost:2379/version
 COMMENT
 ```
 
-#### Étape 2 : télécharger la sauvegarde instantané depuis le leader {#step-2-download-snapshot-backup-from-leader}
+#### Étape 2 : télécharger la sauvegarde d'instantané depuis le leader {#step-2-download-snapshot-backup-from-leader}
 
 [Téléchargez l'instantané de sauvegarde](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup) afin de disposer d'une voie de retour en cas de problème.
 
-Le leader etcd est garanti pour avoir les données d'application les plus récentes ; récupérez donc l'instantané depuis le leader :
+Le leader etcd possède toujours les données d'application les plus récentes ; récupérez donc l'instantané depuis le leader :
 
 ```bash
 for p in 2379 22379 32379; do
@@ -185,7 +185,7 @@ Le nouvel etcd v3.7 publiera ses informations dans le cluster. À ce stade, le c
 >
 > `{"level":"info","ts":"2026-06-02T07:01:58.979186+0300","caller":"etcdserver/server.go:1828","msg":"published local member to cluster through raft","local-member-id":"7339c4e5e833c029","local-member-attributes":"{Name:s1 ClientURLs:[http://localhost:2379]}","cluster-id":"7dee9ba76d59ed53","publish-timeout":"7s"}`
 
-Vérifiez que chaque membre, puis l’ensemble du cluster, devient sain avec la nouvelle binaire etcd v3.7 :
+Vérifiez que chaque membre, puis l’ensemble du cluster, devient sain avec le nouveau binaire etcd v3.7 :
 
 ```bash
 etcdctl --endpoints=localhost:2379,localhost:22379,localhost:32379 endpoint status -w table
@@ -200,7 +200,7 @@ etcdctl --endpoints=localhost:2379,localhost:22379,localhost:32379 endpoint stat
 COMMENT
 ```
 
-Les membres non mis à jour et le membre mis à jour vont générer des messages concernant l'état à version mixte jusqu'à ce que l'intégralité du cluster soit mis à jour. Cela est attendu et cessera une fois que tous les membres du cluster etcd auront été mis à jour vers la version 3.7.
+Les membres non mis à jour et le membre mis à jour vont générer des messages concernant l'état à version mixte jusqu'à ce que l'intégralité du cluster soit mise à jour. Cela est attendu et cessera une fois que tous les membres du cluster etcd auront été mis à jour vers la version 3.7.
 
 #### Étape 5 : répéter l'*étape 3* et l'*étape 4* pour les membres restants {#step-5-repeat-step-3-and-step-4-for-rest-of-the-members}
 

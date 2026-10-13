@@ -1,9 +1,9 @@
 ---
-title: Comment configurer un cluster étcd de démonstration
+title: Comment configurer un cluster etcd de démonstration
 description: Guide de configuration d’un cluster dans etcd
 weight: 100
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/operator/how-to-setup-cluster.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/operator/how-to-setup-cluster.md"
 aliases: [/etcd/tasks/operator/how-to-setup-cluster/]
 ---
 

@@ -1,15 +1,15 @@
 ---
-title: etcd gateway
+title: Passerelle etcd
 weight: 4300
-description: "etcd passerelle, quand l'utiliser et comment la configurer"
+description: "Quand utiliser la passerelle etcd et comment la configurer"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/gateway.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/gateway.md"
 aliases: [/etcd/op-guide/gateway/]
 ---
 
 ## Qu'est-ce que la passerelle etcd {#what-is-etcd-gateway}
 
-Le passerelle etcd est un proxy TCP simple qui achemine les données réseau vers le cluster etcd. La passerelle est sans état et transparente ; elle n'inspecte ni les requêtes clients ni les réponses du cluster. Elle ne termine pas les connexions TLS, ne réalise pas d'échanges TLS à la place de ses clients, ni ne vérifie si la connexion est sécurisée.
+La passerelle etcd est un proxy TCP simple qui achemine les données réseau vers le cluster etcd. La passerelle est sans état et transparente ; elle n'inspecte pas les requêtes clients et n'interfère pas avec les réponses du cluster. Elle ne termine pas les connexions TLS, ne réalise pas d'échanges TLS à la place de ses clients, ni ne vérifie si la connexion est sécurisée.
 
 La passerelle prend en charge plusieurs points d'accès serveur etcd et fonctionne selon une politique de rotation simple. Elle ne route que vers les points d'accès disponibles et masque les échecs à ses clients. D'autres politiques de réessai, telles que la rotation pondérée, pourraient être prises en charge à l'avenir.
 
@@ -17,7 +17,7 @@ La passerelle prend en charge plusieurs points d'accès serveur etcd et fonction
 
 Chaque application qui accède à etcd doit d'abord connaître l'adresse d'un point de terminaison client du cluster etcd. Si plusieurs applications sur le même serveur accèdent au même cluster etcd, chaque application doit tout de même connaître les points de terminaison clients annoncés du cluster etcd. Si le cluster etcd est reconfiguré pour utiliser des points de terminaison différents, chaque application peut également devoir mettre à jour sa liste de points de terminaison. Cette reconfiguration à grande échelle est à la fois fastidieuse et sujette aux erreurs.
 
-Le passerelle etcd résout ce problème en agissant comme un point d’accès local stable. Une configuration typique de passerelle etcd fait en sorte que chaque machine exécute une passerelle écoutant sur une adresse locale, et que chaque application etcd se connecte à sa passerelle locale. Le résultat est que seule la passerelle doit mettre à jour ses points de terminaison, et non chaque application individuellement.
+La passerelle etcd résout ce problème en agissant comme un point d’accès local stable. Une configuration typique de passerelle etcd fait en sorte que chaque machine exécute une passerelle écoutant sur une adresse locale, et que chaque application etcd se connecte à sa passerelle locale. Le résultat est que seule la passerelle doit mettre à jour ses points de terminaison, et non chaque application individuellement.
 
 En résumé, pour propager automatiquement les modifications des points d'accès du cluster, la passerelle etcd s'exécute sur chaque machine hébergeant plusieurs applications qui accèdent au même cluster etcd.
 
@@ -25,7 +25,7 @@ En résumé, pour propager automatiquement les modifications des points d'accès
 
 - Amélioration des performances
 
-La passerelle n’est pas conçue pour améliorer les performances du cluster etcd. Elle ne propose ni mise en cache, ni regroupement ou regroupement par lots des opérations de surveillance. L’équipe etcd développe actuellement un proxy de mise en cache conçu pour améliorer l’évolutivité du cluster.
+La passerelle n’est pas conçue pour améliorer les performances du cluster etcd. Elle ne propose ni mise en cache, ni regroupement des opérations de surveillance, ni traitement par lots. L’équipe etcd développe actuellement un proxy de mise en cache conçu pour améliorer l’évolutivité du cluster.
 
 - Exécution sur un système de gestion de cluster
 
@@ -48,7 +48,7 @@ $ etcd gateway start --endpoints=infra0.example.com:2379,infra1.example.com:2379
 2016-08-16 11:21:18.867350 I | tcpproxy: ready to proxy client requests to [...]
 ```
 
-En revanche, si vous utilisez le DNS pour la découverte de service, envisagez les entrées SRV DNS :
+Alternativement, si vous utilisez le DNS pour la découverte de service, envisagez les entrées SRV DNS :
 
 ```bash
 $ dig +noall +answer SRV _etcd-client._tcp.example.com

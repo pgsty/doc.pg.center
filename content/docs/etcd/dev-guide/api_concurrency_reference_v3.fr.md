@@ -3,7 +3,7 @@ title: "Référence API : concurrence"
 weight: 3900
 description: "Référence des API de concurrence etcd"
 categories: [Référence]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/api_concurrency_reference_v3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/api_concurrency_reference_v3.md"
 aliases: [/etcd/dev-guide/api_concurrency_reference_v3/]
 ---
 
@@ -22,7 +22,7 @@ Le service de verrouillage expose des fonctionnalités de verrouillage côté cl
 
 | Champ | Description | Type |
 | ----- | ----------- | ---- |
-| name | name est l'identifiant de la verrouille partagée distribuée à acquérir. | bytes |
+| name | name est l'identifiant du verrou partagé distribué à acquérir. | bytes |
 | lease | lease est l'ID du bail qui sera attaché à la possession du verrou. Si le bail expire ou est révoqué et qu'il détient actuellement le verrou, celui-ci est automatiquement libéré. Les appels à Lock avec le même bail seront traités comme une seule acquisition ; verrouiller deux fois avec le même bail est sans effet. | int64 |
 
 ##### message `LockResponse` (server/etcdserver/api/v3lock/v3lockpb/v3lock.proto) {#message-lockresponse-serveretcdserverapiv3lockv3lockpbv3lockproto}
@@ -30,7 +30,7 @@ Le service de verrouillage expose des fonctionnalités de verrouillage côté cl
 | Champ | Description | Type |
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
-| key | key est une clé qui existera dans etcd pendant toute la durée où l'appelant du verrou détient le verrou. Les utilisateurs ne doivent pas modifier cette clé, sinon le verrou peut présenter un comportement indéfini. | bytes |
+| key | key est une clé qui existera dans etcd pendant toute la durée où l'appelant de Lock détient le verrou. Les utilisateurs ne devraient pas modifier cette clé, sinon le verrou peut présenter un comportement indéfini. | bytes |
 
 ##### message `UnlockRequest` (server/etcdserver/api/v3lock/v3lockpb/v3lock.proto) {#message-unlockrequest-serveretcdserverapiv3lockv3lockpbv3lockproto}
 
@@ -50,18 +50,18 @@ Le service d'élection expose des fonctionnalités d'élection côté client sou
 
 | Méthode | Type de requête | Type de réponse | Description |
 | ------ | ------------ | ------------- | ----------- |
-| Campaign | CampaignRequest | CampaignResponse | Campaign attend d'acquérir le leadership lors d'une élection, en retournant une clé de leader représentant le leadership si l'opération réussit. Cette clé de leader peut ensuite être utilisée pour publier de nouvelles valeurs dans l'élection, protéger transactionnellement les requêtes d'API en fonction du maintien du leadership, ou se retirer de l'élection. |
+| Campaign | CampaignRequest | CampaignResponse | Campaign attend d'acquérir le leadership lors d'une élection, en retournant une LeaderKey représentant le leadership si l'opération réussit. Cette LeaderKey peut ensuite être utilisée pour publier de nouvelles valeurs dans l'élection, protéger transactionnellement les requêtes d'API en fonction du maintien du leadership, et se retirer de l'élection. |
 | Proclaim | ProclaimRequest | ProclaimResponse | Proclaim met à jour la valeur publiée par le leader avec une nouvelle valeur. |
 | Leader | LeaderRequest | LeaderResponse | Leader retourne la proclamation actuelle de l'élection, le cas échéant. |
 | Observe | LeaderRequest | LeaderResponse | Observe diffuse les proclamations d'élection dans l'ordre, telles qu'elles sont émises par les leaders élus. |
-| Resign | ResignRequest | ResignResponse | Resign libère le leadership de l'élection afin que d'autres candidats puissent acquérir le leadership. |
+| Resign | ResignRequest | ResignResponse | Resign libère le leadership de l'élection afin que d'autres candidats puissent acquérir le leadership de l'élection. |
 
 ##### message `CampaignRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-campaignrequest-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
 | Champ | Description | Type |
 | ----- | ----------- | ---- |
 | name | name est l'identifiant de l'élection pour la campagne. | bytes |
-| lease | lease est l'ID du bail associé à la direction de l'élection. Si le bail expire ou est révoqué avant la démission de la direction, la direction est transférée au prochain candidat, le cas échéant. | int64 |
+| lease | lease est l'ID du bail associé au leadership de l'élection. Si le bail expire ou est révoqué avant la démission du leadership, le leadership est transféré au prochain candidat, le cas échéant. | int64 |
 | value | value est la valeur déclarée initiale définie lorsque le candidat remporte l'élection. | bytes |
 
 ##### message `CampaignResponse` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-campaignresponse-serveretcdserverapiv3electionv3electionpbv3electionproto}
@@ -91,13 +91,13 @@ Le service d'élection expose des fonctionnalités d'élection côté client sou
 | Champ | Description | Type |
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
-| kv | kv est la paire clé-valeur représentant la mise à jour récente du leader. | mvccpb.KeyValue |
+| kv | kv est la paire clé-valeur représentant la dernière mise à jour du leader. | mvccpb.KeyValue |
 
 ##### message `ProclaimRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-proclaimrequest-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
 | Champ | Description | Type |
 | ----- | ----------- | ---- |
-| leader | leader est la détenue du leadership lors de l'élection. | LeaderKey |
+| leader | leader est la détention du leadership de l'élection. | LeaderKey |
 | value | value est une mise à jour destinée à remplacer la valeur actuelle du leader. | bytes |
 
 ##### message `ProclaimResponse` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-proclaimresponse-serveretcdserverapiv3electionv3electionpbv3electionproto}
@@ -110,7 +110,7 @@ Le service d'élection expose des fonctionnalités d'élection côté client sou
 
 | Champ | Description | Type |
 | ----- | ----------- | ---- |
-| leader | leader est la prise de leadership à abandonner par démission. | LeaderKey |
+| leader | leader est le leadership à abandonner par démission. | LeaderKey |
 
 ##### message `ResignResponse` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-resignresponse-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
@@ -130,9 +130,9 @@ Le service d'élection expose des fonctionnalités d'élection côté client sou
 
 | Champ | Description | Type |
 | ----- | ----------- | ---- |
-| key | key est la clé sous forme d'octets. Une clé vide n'est pas autorisée. | octets |
+| key | key est la clé sous forme d'octets. Une clé vide n'est pas autorisée. | bytes |
 | create_revision | create_revision est la révision de la dernière création sur cette clé. | int64 |
 | mod_revision | mod_revision est la révision de la dernière modification sur cette clé. | int64 |
 | version | version est la version de la clé. Une suppression réinitialise la version à zéro, et toute modification de la clé augmente sa version. | int64 |
-| value | value est la valeur stockée par la clé, sous forme d'octets. | octets |
-| bail | bail est l'ID du bail associé à la clé. Lorsque le bail associé expire, la clé sera supprimée. Si bail est 0, aucun bail n'est associé à la clé. | int64 |
+| value | value est la valeur stockée par la clé, sous forme d'octets. | bytes |
+| lease | lease est l'ID du bail associé à la clé. Lorsque le bail associé expire, la clé sera supprimée. Si lease est 0, aucun bail n'est associé à la clé. | int64 |

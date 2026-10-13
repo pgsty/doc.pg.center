@@ -3,7 +3,7 @@ title: Comment sauvegarder la base de données
 description: Guide de prise d’un instantané de la base de données etcd
 weight: 1100
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/operator/how-to-save-database.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/operator/how-to-save-database.md"
 aliases: [/etcd/tasks/operator/how-to-save-database/]
 ---
 
@@ -14,7 +14,7 @@ aliases: [/etcd/tasks/operator/how-to-save-database/]
 
 ## Effectuer un instantané d'une base de données {#snapshot-a-database}
 
-`snapshot` pour sauvegarder un instantané du stockage etcd à un instant donné :
+`snapshot` pour sauvegarder un instantané de la base de données etcd à un instant donné :
 
 ```bash
 etcdctl --endpoints=$ENDPOINT snapshot save DB_NAME
@@ -28,7 +28,7 @@ etcdctl --endpoints=$ENDPOINT snapshot save DB_NAME
 --endpoints=[127.0.0.1:2379], gRPC endpoints
 ```
 
-Un instantané ne peut être demandé qu'à un nœud etcd, donc le drapeau `--endpoints` ne doit contenir qu'un seul point de terminaison.
+Un instantané ne peut être demandé qu'à un nœud etcd, donc le drapeau `--endpoints` ne devrait contenir qu'un seul point de terminaison.
 
 #### etcdutl {#etcdutl}
 

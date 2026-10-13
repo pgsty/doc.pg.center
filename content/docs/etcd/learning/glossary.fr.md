@@ -3,7 +3,7 @@ title: Glossaire
 weight: 2900
 description: "Termes utilisés dans la documentation, la ligne de commande et le code source d'etcd"
 categories: [Référence]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/learning/glossary.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/glossary.md"
 aliases: [/etcd/learning/glossary/]
 ---
 
@@ -45,7 +45,7 @@ Identifiant défini par l'utilisateur pour le stockage et la récupération de v
 
 ## Plage de clés {#key-range}
 
-Un ensemble de clés contenant soit une clé individuelle, soit un intervalle lexicographique pour toutes les clés x telles que a < x <= b, soit toutes les clés supérieures à une clé donnée.
+Un ensemble de clés contenant soit une clé individuelle, soit un intervalle lexicographique pour toutes les clés x telles que a <= x < b, soit toutes les clés supérieures à une clé donnée.
 
 ## espace de clés {#keyspace}
 
@@ -53,7 +53,7 @@ L'ensemble de toutes les clés dans un cluster etcd.
 
 ## bail {#lease}
 
-Contrat renouvelable à courte durée qui supprime les clés associées à celui-ci à l'expiration.
+Contrat renouvelable de courte durée qui supprime les clés associées à celui-ci à l'expiration.
 
 ## membre {#member}
 
@@ -98,7 +98,7 @@ Pour un terme donné, il ne peut y avoir qu'un seul leader élu, et le terme est
 
 ## Transaction {#transaction}
 
-Opération en série exécutée de manière atomique. Toutes les clés modifiées au sein d'une transaction partagent la même révision de modification.
+Ensemble d'opérations exécutées de manière atomique. Toutes les clés modifiées au sein d'une transaction partagent la même révision de modification.
 
 ## Version de la clé {#key-version}
 

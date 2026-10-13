@@ -1,15 +1,15 @@
 ---
-title: etcd features
+title: Fonctionnalités d’etcd
 weight: 3750
-description: utilisation des fonctionnalités etcd
+description: Utilisation des fonctionnalités d’etcd
 categories: [Référence]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/dev-guide/features.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/features.md"
 aliases: [/etcd/dev-guide/features/]
 ---
 
-Ce document présente un aperçu des fonctionnalités d’etcd afin d’aider les utilisateurs à mieux comprendre ces fonctionnalités et le processus de mise hors service associé. Si vous souhaitez en savoir plus sur la manière dont les fonctionnalités sont développées dans etcd, veuillez consulter ces [guides de développement](https://github.com/etcd-io/etcd/blob/main/Documentation/contributor-guide/features.md).
+Ce document présente un aperçu des fonctionnalités d’etcd afin d’aider les utilisateurs à mieux comprendre ces fonctionnalités et le processus de dépréciation associé. Si vous souhaitez en savoir plus sur la manière dont les fonctionnalités sont développées dans etcd, veuillez consulter ces [guides de développement](https://github.com/etcd-io/etcd/blob/main/Documentation/contributor-guide/features.md).
 
-Les fonctionnalités d'etcd sont classées en trois états : expérimentales, stables et non sécurisées. Vous pouvez obtenir la liste des fonctionnalités en exécutant `etcd --help`.
+Les fonctionnalités d'etcd sont classées en trois stades : expérimentales, stables et non sécurisées. Vous pouvez obtenir la liste des fonctionnalités en exécutant `etcd --help`.
 
 ## Expérimental {#experimental}
 
@@ -18,8 +18,8 @@ Afin d'obtenir un retour rapide, toute nouvelle fonctionnalité est généraleme
 - Elle est désactivée par défaut.
 - Le support de cette fonctionnalité peut être supprimé à tout moment sans préavis.
     - Elle peut être supprimée dans la prochaine version mineure ou majeure sans respecter la [politique de dépréciation des fonctionnalités](#feature-deprecation), sauf si elle devient stable.
-    - L'équipe du projet apprécierait que les utilisateurs signalent tout problème lié aux fonctionnalités expérimentales. Toutefois, ces problèmes peuvent être priorisés plus bassement que ceux liés aux fonctionnalités stables.
-- Un indicateur de fonctionnalité expérimentale est [déprécié](#feature-deprecation) lorsqu'il atteint l'état stable. Les utilisateurs doivent adopter l'indicateur stable dès que possible.
+    - L'équipe du projet apprécierait que les utilisateurs signalent tout problème lié aux fonctionnalités expérimentales. Toutefois, ces problèmes peuvent recevoir une priorité plus faible que ceux liés aux fonctionnalités stables.
+- Un drapeau de fonctionnalité expérimentale est [déprécié](#feature-deprecation) lorsqu'il atteint le stade stable. Les utilisateurs devraient commencer à utiliser un drapeau de fonctionnalité stable dès que possible.
 
 ## Stable {#stable}
 
@@ -30,13 +30,13 @@ Ce stade est le plus courant pour les fonctionnalités dans etcd. Une fonctionna
 
 ## Non sécurisé {#unsafe}
 
-Les fonctionnalités non sécurisées sont rares et listées dans la section `Unsafe feature:` de la documentation d'utilisation d'etcd. Par défaut, elles sont désactivées. Elles doivent être utilisées avec précaution, conformément à la documentation. Une fonctionnalité non sécurisée peut être supprimée dans la prochaine version mineure ou majeure sans respecter la politique de dépréciation des fonctionnalités.
+Les fonctionnalités non sécurisées sont rares et listées dans la section `Unsafe feature:` de la documentation d'utilisation d'etcd. Par défaut, elles sont désactivées. Elles devraient être utilisées avec précaution, en suivant la documentation. Une fonctionnalité non sécurisée peut être supprimée dans la prochaine version mineure ou majeure sans respecter la politique de dépréciation des fonctionnalités.
 
 ## Dépréciation de fonctionnalité {#feature-deprecation}
 
 ### Expérimental {#experimental-1}
-Une fonctionnalité expérimentale est dépréciée lorsqu'elle atteint l'étape stable.
-- La documentation de la fonctionnalité expérimentale affichera un message de dépréciation accompagné d'une recommandation visant à utiliser un indicateur de fonctionnalité stable associé. Par exemple, `DEPRECATED. Use <feature-name> instead.`
+Une fonctionnalité expérimentale est dépréciée lorsqu'elle atteint le stade stable.
+- La documentation de la fonctionnalité expérimentale affichera un message de dépréciation accompagné d'une recommandation visant à utiliser un drapeau de fonctionnalité stable associé. Par exemple, `DEPRECATED. Use <feature-name> instead.`
 - Une fonctionnalité dépréciée sera supprimée dans la version suivante.
 
 ### Stable {#stable-1}

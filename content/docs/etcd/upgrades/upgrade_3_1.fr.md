@@ -3,7 +3,7 @@ title: Mettre à jour etcd de la version 3.0 à la 3.1
 weight: 6850
 description: "Processus, listes de vérification et notes sur la mise à niveau d’etcd de la version 3.0 à la 3.1"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/upgrades/upgrade_3_1.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_1.md"
 aliases: [/etcd/upgrades/upgrade_3_1/]
 ---
 
@@ -16,7 +16,7 @@ Avant de [lancer la mise à jour](#upgrade-procedure), lisez le reste du présen
 ### Listes de vérification pour la mise à jour {#upgrade-checklists}
 
 > [!WARNING]
-> Lorsque [on migre depuis la version v2 sans données v3](https://github.com/etcd-io/etcd/issues/9480), le serveur etcd v3.2+ provoque une panne lorsqu'il restaure à partir d'un instantané existant mais qu'aucun fichier v3 `ETCD_DATA_DIR/member/snap/db` n'est présent. Cela se produit lorsque le serveur a été migré depuis la version v2 sans données v3 précédentes. Cela empêche également la perte accidentelle de données v3 (par exemple, le fichier `db` pourrait avoir été déplacé). etcd exige que la migration post-v3 ne puisse avoir lieu qu'avec des données v3 présentes. N'effectuez pas la mise à jour vers des versions v3 plus récentes tant que le serveur v3.0 ne contient pas de données v3.
+> Lorsque [on migre depuis la version v2 sans données v3](https://github.com/etcd-io/etcd/issues/9480), le serveur etcd v3.2+ provoque une panne lorsqu'il restaure à partir d'un instantané existant mais qu'aucun fichier v3 `ETCD_DATA_DIR/member/snap/db` n'est présent. Cela se produit lorsque le serveur a été migré depuis la version v2 sans données v3 précédentes. Cela empêche également la perte accidentelle de données v3 (par exemple, le fichier `db` pourrait avoir été déplacé). etcd exige que les opérations après migration vers v3 ne soient effectuées que si des données v3 sont présentes. N'effectuez pas la mise à jour vers des versions v3 plus récentes tant que le serveur v3.0 ne contient pas de données v3.
 
 #### Surveillance {#monitoring}
 
@@ -37,25 +37,25 @@ En outre, pour garantir une mise à niveau progressive sans incident, le cluster
 
 Avant de mettre à jour etcd, testez toujours les services dépendants d’etcd dans un environnement de préproduction avant de déployer la mise à jour dans l’environnement de production.
 
-Avant de commencer, [sauvegardez les données etcd](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup). Si une erreur survient lors de la mise à jour, il sera possible d'utiliser cette sauvegarde pour [rétrograder](#downgrade) vers la version existante de etcd. Veuillez noter que la `snapshot`commande ne sauvegarde que les données v3. Pour les données v2, consultez [sauvegarde du magasin de données v2](https://etcd.io/docs/v2.3/admin_guide#backing-up-the-datastore).
+Avant de commencer, [sauvegardez les données etcd](/fr/docs/etcd/op-guide/maintenance/#snapshot-backup). Si une erreur survient lors de la mise à jour, il sera possible d'utiliser cette sauvegarde pour [rétrograder](#downgrade) vers la version existante d’etcd. Veuillez noter que la commande `snapshot` ne sauvegarde que les données v3. Pour les données v2, consultez [sauvegarde du magasin de données v2](https://etcd.io/docs/v2.3/admin_guide#backing-up-the-datastore).
 
 #### Versions mixtes {#mixed-versions}
 
-Lors d'une mise à jour, un cluster etcd prend en charge des versions mixtes de membres et fonctionne selon le protocole de la version commune la plus basse. Le cluster n'est considéré comme mis à jour qu'une fois que tous ses membres ont été mis à jour vers la version 3.1. Internement, les membres etcd négocient entre eux afin de déterminer la version globale du cluster, qui détermine la version signalée et les fonctionnalités prises en charge.
+Lors d'une mise à jour, un cluster etcd prend en charge des versions mixtes de membres et fonctionne selon le protocole de la version commune la plus basse. Le cluster n'est considéré comme mis à jour qu'une fois que tous ses membres ont été mis à jour vers la version 3.1. En interne, les membres etcd négocient entre eux afin de déterminer la version globale du cluster, qui détermine la version signalée et les fonctionnalités prises en charge.
 
 #### Limitations {#limitations}
 
 Note : Si le cluster ne contient que des données v3 et aucune donnée v2, il n'est pas soumis à cette limitation.
 
-Si le cluster sert un jeu de données v2 dont la taille dépasse 50 Mo, chaque membre nouvellement mis à jour peut prendre jusqu’à deux minutes pour rattraper le cluster existant. Vérifiez la taille d’un instantané récent afin d’estimer la taille totale des données. Autrement dit, il est préférable d’attendre deux minutes entre chaque mise à jour de membre.
+Si le cluster sert un jeu de données v2 dont la taille dépasse 50 Mo, chaque membre nouvellement mis à jour peut prendre jusqu’à deux minutes pour rattraper le cluster existant. Vérifiez la taille d’un instantané récent afin d’estimer la taille totale des données. Autrement dit, le plus sûr est d’attendre deux minutes entre chaque mise à jour de membre.
 
 Pour une taille totale de données bien plus importante, de 100 Mo ou plus, ce processus unique peut prendre encore plus de temps. Les administrateurs de clusters etcd très volumineux de cette ampleur peuvent librement contacter l'équipe [etcd][etcd-contact] avant la mise à jour, et nous serons heureux de leur fournir des conseils sur la procédure.
 
 #### Rétrogradation {#downgrade}
 
-Si tous les membres ont été mis à jour vers la version v3.1, le cluster sera mis à jour vers la v3.1, et un retour en arrière depuis cet état finalisé est **impossible**. Toutefois, si un seul membre reste en version v3.0, le cluster et ses opérations restent "v3.0", et il est possible, depuis cet état de cluster mixte, de revenir à l'utilisation d'une binaire etcd v3.0 sur tous les membres.
+Si tous les membres ont été mis à jour vers la version v3.1, le cluster sera mis à jour vers la v3.1, et un retour en arrière depuis cet état finalisé est **impossible**. Toutefois, si un seul membre reste en version v3.0, le cluster et ses opérations restent "v3.0", et il est possible, depuis cet état de cluster mixte, de revenir à l'utilisation d’un binaire etcd v3.0 sur tous les membres.
 
-Veuillez [sauvegarder le répertoire de données](/fr/docs/etcd/op-guide/maintenance#snapshot-backup) de tous les membres etcd afin de permettre la désinstallation du cluster, même après son mise à jour complète.
+Veuillez [sauvegarder le répertoire de données](/fr/docs/etcd/op-guide/maintenance#snapshot-backup) de tous les membres etcd afin de permettre la rétrogradation du cluster, même après sa mise à jour complète.
 
 ### Procédure de mise à jour {#upgrade-procedure}
 
@@ -88,13 +88,13 @@ Lorsque chaque processus etcd est arrêté, les autres membres du cluster enregi
 2017-01-17 09:34:34.364907 W | etcdserver: failed to reach the peerURL(http://localhost:2380) of member fd32987dcd0511e0 (Get http://localhost:2380/version: dial tcp 127.0.0.1:2380: getsockopt: connection refused)
 ```
 
-Il est recommandé de procéder à un [sauvegarde des données etcd](/fr/docs/etcd/op-guide/maintenance#snapshot-backup) à cette étape afin de disposer d’un chemin de retour en cas de problème :
+Il est recommandé de procéder à une [sauvegarde des données etcd](/fr/docs/etcd/op-guide/maintenance#snapshot-backup) à cette étape afin de disposer d’un chemin de retour en cas de problème :
 
 ```
 $ etcdctl snapshot save backup.db
 ```
 
-#### 3. Lancement d'un binaire etcd v3.1 en mode drop-in et démarrage du nouveau processus etcd {#3-drop-in-etcd-v31-binary-and-start-the-new-etcd-process}
+#### 3. Remplacer le binaire par etcd v3.1 et démarrer le nouveau processus etcd {#3-drop-in-etcd-v31-binary-and-start-the-new-etcd-process}
 
 Le nouvel etcd v3.1 publiera ses informations dans le cluster :
 
@@ -111,7 +111,7 @@ localhost:32379 is healthy: successfully committed proposal: took = 7.321671ms
 localhost:2379 is healthy: successfully committed proposal: took = 10.629901ms
 ```
 
-Les membres mis à jour émettront des avertissements similaires au suivant jusqu'à ce que l'intégralité du cluster soit mis à jour. C'est normal et cessera une fois que tous les membres du cluster etcd auront été mis à jour vers la version 3.1 :
+Les membres mis à jour émettront des avertissements similaires au suivant jusqu'à ce que l'intégralité du cluster soit mise à jour. C'est normal et cessera une fois que tous les membres du cluster etcd auront été mis à jour vers la version 3.1 :
 
 ```
 2017-01-17 09:36:38.406268 W | etcdserver: the local etcd version 3.0.16 is not up-to-date

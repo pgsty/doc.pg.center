@@ -1,9 +1,9 @@
 ---
 title: Comment supprimer des clés
-description: Décris une méthode pour supprimer des clés etcd
+description: Décrit une méthode pour supprimer des clés etcd
 weight: 400
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/tasks/developer/how-to-delete-keys.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/developer/how-to-delete-keys.md"
 aliases: [/etcd/tasks/developer/how-to-delete-keys/]
 ---
 

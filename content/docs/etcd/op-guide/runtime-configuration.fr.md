@@ -1,9 +1,9 @@
 ---
 title: "Reconfiguration en cours d'exécution"
 weight: 4700
-description: etcd prise en charge de la reconfiguration en temps réel incrémentielle
+description: Prise en charge par etcd de la reconfiguration incrémentielle en cours d'exécution
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/824597935df6e95992ef61c07e3222f4f796ca6c/content/en/docs/v3.7/op-guide/runtime-configuration.md"
+upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/runtime-configuration.md"
 aliases: [/etcd/op-guide/runtime-configuration/]
 ---
 
@@ -11,13 +11,13 @@ etcd dispose d’un support pour la reconfiguration incrémentielle en temps d�
 
 Les requêtes de reconfiguration ne peuvent être traitées que lorsque la majorité des membres du cluster sont fonctionnels. Il est **fortement recommandé** de toujours disposer d'un cluster de taille supérieure à deux en production. Il est dangereux de supprimer un membre d'un cluster à deux membres. La majorité d'un cluster à deux membres est également de deux. En cas d'échec pendant le processus de suppression, le cluster pourrait ne pas être en mesure de progresser et nécessiterait un [redémarrage suite à une défaillance de la majorité][majority failure].
 
-Pour mieux comprendre la conception sous-jacente à la reconfiguration en temps réel, veuillez lire [le document de reconfiguration en temps réel][runtime-reconf].
+Pour mieux comprendre la conception sous-jacente à la reconfiguration en cours d’exécution, veuillez lire [le document de reconfiguration en cours d’exécution][runtime-reconf].
 
 ## Cas d'utilisation de la reconfiguration {#reconfiguration-use-cases}
 
 Cette section explique certaines raisons courantes de reconfiguration d’un cluster. La plupart de ces raisons consistent simplement en des combinaisons d’ajout ou de suppression d’un membre, telles qu’expliquées ci-dessous sous [Opérations de reconfiguration du cluster][cluster-reconf].
 
-### Mise à jour ou mise à niveau de plusieurs machines {#cycle-or-upgrade-multiple-machines}
+### Rotation ou mise à niveau de plusieurs machines {#cycle-or-upgrade-multiple-machines}
 
 Si plusieurs membres d’un cluster doivent être déplacés en raison d’une maintenance planifiée (mise à jour matérielle, coupure réseau, etc.), il est recommandé de modifier les membres un par un.
 
@@ -25,7 +25,7 @@ Il est sûr de supprimer le leader, mais un bref temps d'indisponibilité survie
 
 ### Modifier la taille du cluster {#change-the-cluster-size}
 
-L'augmentation de la taille du cluster peut améliorer la [tolérance aux pannes][fault tolerance table] et les performances de lecture. Comme les clients peuvent lire depuis n'importe quel membre, l'augmentation du nombre de membres accroît le débit global des lectures sérialisées.
+L'augmentation de la taille du cluster peut améliorer la [tolérance aux pannes][fault tolerance table] et les performances de lecture. Comme les clients peuvent lire depuis n'importe quel membre, l'augmentation du nombre de membres accroît le débit global des lectures sérialisables.
 
 Réduire la taille du cluster peut améliorer les performances d'écriture du cluster, au prix d'une résilience réduite. Les écritures dans le cluster sont répliquées sur la majorité des membres avant d'être considérées comme validées. Réduire la taille du cluster diminue la taille de la majorité, et chaque écriture est ainsi validée plus rapidement.
 
@@ -37,9 +37,9 @@ Pour remplacer la machine, suivez les instructions pour [supprimer le membre][re
 
 ### Redémarrer le cluster après une défaillance majoritaire {#restart-cluster-from-majority-failure}
 
-Si la majorité du cluster est perdue ou si tous les nœuds ont changé d'adresse IP, une intervention manuelle est nécessaire pour effectuer une récupération en toute sécurité. Les étapes fondamentales du processus de récupération consistent à [créer un nouveau cluster à partir des anciennes données][disaster recovery], forcer un seul membre à agir en tant que leader, puis utiliser la configuration en temps réel pour [ajouter les nouveaux membres][add member] à ce nouveau cluster un par un.
+Si la majorité du cluster est perdue ou si tous les nœuds ont changé d'adresse IP, une intervention manuelle est nécessaire pour effectuer une récupération en toute sécurité. Les étapes fondamentales du processus de récupération consistent à [créer un nouveau cluster à partir des anciennes données][disaster recovery], forcer un seul membre à agir en tant que leader, puis utiliser la configuration en cours d’exécution pour [ajouter les nouveaux membres][add member] à ce nouveau cluster un par un.
 
-### Récupérer un cluster suite à une défaillance de la majorité {#recover-cluster-from-minority-failure}
+### Récupérer un cluster après une défaillance minoritaire {#recover-cluster-from-minority-failure}
 
 Si un membre spécifique est perdu, cela revient à remplacer une machine défaillante. Les étapes sont décrites dans [Remplacer une machine défaillante](/fr/docs/etcd/op-guide/runtime-configuration/#replace-a-failed-machine).
 
@@ -56,7 +56,7 @@ Toutes les modifications apportées au cluster doivent être effectuées séquen
 * Pour passer de 3 à 5 membres, effectuez deux opérations d’ajout
 * Pour passer de 5 à 3 membres, effectuez deux opérations de suppression
 
-Tous ces exemples utilisent l'outil en ligne de commande `etcdctl` fourni avec etcd. Pour modifier l'appartenance sans `etcdctl`, utilisez l'API membres HTTP [v2][member-api] ou l'API membres gRPC [v3][member-api-grpc].
+Tous ces exemples utilisent l'outil en ligne de commande `etcdctl` fourni avec etcd. Pour modifier l'appartenance sans `etcdctl`, utilisez l’API membres gRPC [v3][member-api-grpc].
 
 ### Mettre à jour un membre {#update-a-member}
 
@@ -77,7 +77,7 @@ $ etcdctl member list
 a8266ecf031671f3: name=node1 peerURLs=http://localhost:23801 clientURLs=http://127.0.0.1:23791
 ```
 
-Cet exemple va `update` l'identifiant de membre a8266ecf031671f3 et modifier sa valeur peerURLs en `http://10.0.1.10:2380` :
+Cet exemple utilise `update` pour le membre d’identifiant a8266ecf031671f3 et modifie sa valeur peerURLs en `http://10.0.1.10:2380` :
 
 ```sh
 $ etcdctl member update a8266ecf031671f3 --peer-urls=http://10.0.1.10:2380
@@ -105,10 +105,10 @@ Il est sûr de supprimer le leader, mais le cluster sera inactif pendant la pér
 
 Ajouter un membre est un processus en deux étapes :
 
- * Ajoutez le nouveau membre au cluster au moyen de l'[API HTTP des membres][member-api], de l'[API gRPC des membres][member-api-grpc] ou de la commande `etcdctl member add`.
+ * Ajoutez le nouveau membre au cluster au moyen de l’[API gRPC des membres][member-api-grpc] ou de la commande `etcdctl member add`.
  * Démarrez le nouveau membre avec la nouvelle configuration du cluster, y compris la liste actualisée des membres (membres existants + nouveau membre).
 
-`etcdctl` ajoute un nouveau membre au cluster en spécifiant le [nom][conf-name] du membre et les [URL de pair annoncés][conf-adv-peer] :
+`etcdctl` ajoute un nouveau membre au cluster en spécifiant le [nom][conf-name] du membre et les [URL de pair annoncées][conf-adv-peer] :
 
 ```sh
 $ etcdctl member add infra3 --peer-urls=http://10.0.1.13:2380
@@ -119,7 +119,7 @@ ETCD_INITIAL_CLUSTER="infra0=http://10.0.1.10:2380,infra1=http://10.0.1.11:2380,
 ETCD_INITIAL_CLUSTER_STATE=existing
 ```
 
-`etcdctl` a informé le cluster du nouveau membre et a affiché les variables d'environnement nécessaires pour le démarrer correctement. Désormais, lancez le processus etcd nouveau avec les drapeaux appropriés pour le nouveau membre :
+`etcdctl` a informé le cluster du nouveau membre et a affiché les variables d'environnement nécessaires pour le démarrer correctement. Désormais, lancez le nouveau processus etcd avec les drapeaux appropriés pour le nouveau membre :
 
 ```sh
 $ export ETCD_NAME="infra3"
@@ -135,7 +135,7 @@ Lorsque vous ajoutez plusieurs membres, la meilleure pratique consiste à config
 #### Ajouter un nouveau membre apprenant {#add-a-new-member-as-learner}
 
 À partir de la version v3.4, etcd prend en charge l’ajout d’un nouveau membre en tant que membre apprenant / membre non votant.
-La motivation et la conception sont décrites dans le document [design doc][design-learner].
+La motivation et la conception sont décrites dans le [document de conception][design-learner].
 Afin de rendre le processus d’ajout d’un nouveau membre plus sûr,
 et de réduire la durée d’indisponibilité du cluster lors de l’ajout du nouveau membre,
 il est recommandé de faire rejoindre le nouveau membre au cluster
@@ -147,7 +147,7 @@ Ce processus peut être décrit comme une séquence en trois étapes :
  * Démarrez le nouveau membre avec la configuration mise à jour du cluster, incluant la liste des membres mis à jour (membres existants + le nouveau membre).
      Cette étape est identique à celle précédente.
 
- * Promouvoir le membre apprenant nouvellement ajouté en membre votant via l'API gRPC [members][member-api-grpc] ou la commande `etcdctl member promote`.
+ * Promouvoir le membre apprenant nouvellement ajouté en membre votant via l'[API gRPC des membres][member-api-grpc] ou la commande `etcdctl member promote`.
      Le serveur etcd valide la requête de promotion afin d'assurer sa sécurité opérationnelle.
      Un membre apprenant ne peut être promu en membre votant qu'après avoir rattrapé le journal Raft du leader.
      Si un membre apprenant n'a pas encore rattrapé le journal Raft du leader, la requête de promotion échoue
@@ -167,7 +167,7 @@ ETCD_INITIAL_CLUSTER="infra0=http://10.0.1.10:2380,infra1=http://10.0.1.11:2380,
 ETCD_INITIAL_CLUSTER_STATE=existing
 ```
 
-Après avoir lancé le nouveau processus etcd pour le membre apprenant nouvellement ajouté, utilisez `etcdctl member promote` pour promouvoir le membre apprenant en membre ayant voix délibérative.
+Après avoir lancé le nouveau processus etcd pour le membre apprenant nouvellement ajouté, utilisez `etcdctl member promote` pour promouvoir le membre apprenant en membre votant.
 ```
 $ etcdctl member promote 9bf1b35fc7761a23
 Member 9e29bbaa45d74461 promoted in cluster a7ef944b95711739
@@ -185,7 +185,7 @@ etcdserver: assign ids error: the member count is unequal
 exit 1
 ```
 
-Dans ce cas, indiquez une adresse différente (10.0.1.14:2380) de celle utilisée pour rejoindre le cluster (10.0.1.13:2380) :
+Dans cet exemple d’erreur, l’adresse spécifiée au démarrage (10.0.1.14:2380) diffère de celle enregistrée pour rejoindre le cluster (10.0.1.13:2380) :
 
 ```sh
 $ etcd --name infra4 \
