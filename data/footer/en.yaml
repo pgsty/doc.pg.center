@@ -1,7 +1,7 @@
 brand:
-  name: PIG.CENTER
-  tagline: PostgreSQL Community Components
-  slogan: Practical, multilingual documentation for the community stack.
+  name: doc.pg.center
+  tagline: "Component documentation for [pg.center](https://pg.center/)."
+  slogan: "Six tools. Six languages. One place to read."
 columns:
   - title: Documentation
     links:
@@ -19,15 +19,19 @@ columns:
       - { label: pgBadger, url: https://pgbadger.darold.net/, external: true }
       - { label: HAProxy, url: https://www.haproxy.org/, external: true }
       - { label: etcd, url: https://etcd.io/, external: true }
-  - title: About
+  - title: PG.CENTER
     links:
-      - { label: PGSTY, url: https://pgsty.com, external: true }
-      - { label: Pigsty, url: https://pigsty.io, external: true }
-      - { label: SILO, url: https://silo.pgsty.com, external: true }
-      - { label: OINK, url: https://oink.pgsty.com, external: true }
-      - { label: PIG, url: https://pig.pgsty.com, external: true }
-  - title: "PG resources"
+      - { label: "Main site", url: "https://pg.center/", external: true }
+      - { label: "PostgreSQL manuals", url: "https://pg.center/docs/", external: true }
+      - { label: "Reference & Wiki", url: "https://pg.center/wiki/", external: true }
+      - { label: "Extensions", url: "https://pg.center/ext/", external: true }
+      - { label: "Ecosystem", url: "https://pg.center/ecosystem/", external: true }
+      - { label: "Chinese PostgreSQL docs", url: "https://pgsql.cc/docs/", external: true }
+  - title: "Project"
     links:
-      - { label: "PG Center", url: "https://pg.center/docs/reference/", external: true }
-      - { label: "PGSQL.CC", url: "https://pgsql.cc/docs/", external: true }
-      - { label: "PGEXT.CLOUD", url: "https://pgext.cloud/", external: true }
+      - { label: "Sources & licences", url: "/attribution/" }
+      - { label: "GitHub repository", url: "https://github.com/pgsty/doc.pg.center", external: true }
+      - { label: "Report an issue", url: "https://github.com/pgsty/doc.pg.center/issues", external: true }
+      - { label: "Pigsty", url: "https://pigsty.io/", external: true }
+      - { label: "PGSTY", url: "https://pgsty.com/", external: true }
+      - { label: "OINK", url: "https://oink.pgsty.com/", external: true }

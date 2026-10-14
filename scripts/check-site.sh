@@ -29,29 +29,47 @@ class HeadAndLinks(HTMLParser):
         super().__init__()
         self.canonical = ""
         self.links = set()
+        self.footer_links = set()
+        self.in_footer = False
         self.fallbacks = []
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if tag == "footer":
+            self.in_footer = True
         if tag == "link" and attrs.get("rel") == "canonical":
             self.canonical = attrs.get("href", "")
         if tag == "a":
             self.links.add(attrs.get("href", ""))
+            if self.in_footer:
+                self.footer_links.add(attrs.get("href", ""))
             if "data-fallback-language" in attrs:
                 self.fallbacks.append(attrs)
+
+    def handle_endtag(self, tag):
+        if tag == "footer":
+            self.in_footer = False
 
 for language in languages:
     prefix = "" if language == "en" else language + "/"
     for route in ("", "docs/", "search/", "attribution/"):
         page = public / prefix / route / "index.html"
         assert page.is_file() and page.stat().st_size, page
-        parsed = HeadAndLinks(page.read_text())
+        html = page.read_text()
+        parsed = HeadAndLinks(html)
         assert parsed.canonical == "https://doc.pg.center/" + prefix + route, page
+        assert "G-D9E4B60JWX" in html, f"Shared production analytics missing: {page}"
+        assert "PIG.CENTER" not in html, f"Obsolete site name: {page}"
+        assert "https://github.com/pgsty/doc.pg.center" in parsed.footer_links, page
+        assert f"/{prefix}attribution/" in parsed.footer_links, page
     home = HeadAndLinks((public / prefix / "index.html").read_text())
     assert not home.fallbacks, f"Unexpected English fallback on {language} home"
     for component in components:
         assert f"/{prefix}docs/{component}/" in home.links, (language, component)
+        assert f"/{prefix}docs/{component}/" in home.footer_links, (language, component)
+    parent = "https://pg.center/zh/" if language == "zh" else "https://pg.center/"
+    assert parent in home.footer_links, f"Parent site missing from {language} footer"
     for output in ("index.md", "llms.txt", "navigation.json"):
         path = public / prefix / output
         assert path.is_file() and path.stat().st_size, path

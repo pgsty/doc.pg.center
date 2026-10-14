@@ -9,22 +9,24 @@ sections:
 
 hero:
   class: pgsql-hero pgsql-hero--fit-title
-  eyebrow: Mehrsprachige Dokumentation für sechs unabhängige Komponenten
+  eyebrow: "PG.CENTER / Komponenten-Dokumentation"
   title_lines:
     - words:
         - { mark: P, color: blue, text: ostgreSQL }
     - words:
-        - { text: Community Components }
-  lead: Unabhängige, elegante, mehrsprachige Dokumentation.
+        - { text: "Komponenten-Dokumentation" }
+  lead: "Anleitungen und Referenzen für die Werkzeuge rund um PostgreSQL im Produktivbetrieb."
+  note: "Sechs Komponenten, sechs Sprachen. Ein Angebot von [pg.center](https://pg.center/)."
+  note_icon: fa-solid fa-book-open
   links_label: Komponentendokumentation
   orbit:
     center_image: img/slonik.svg
 
 components:
   class: pgsql-components
-  eyebrow: Dokumentationsbereich auswählen
-  title: Sechs Komponenten. Sechs direkte Einstiege.
-  text: Die deutsche Ausgabe enthält vollständige Dokumentationssammlungen für Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy und etcd.
+  eyebrow: "Dokumentation"
+  title: "Das passende Handbuch finden"
+  text: "Alle Sammlungen sind auf Englisch, vereinfachtem Chinesisch, Französisch, Japanisch, Deutsch und Russisch verfügbar."
   columns: 3
   link_label: Dokumentation lesen
   items:
@@ -203,8 +205,8 @@ faq:
       answer: Wählen Sie die Komponente, die zu Ihrer aktuellen Aufgabe passt. Jede Karte öffnet einen eigenständigen Dokumentationsbereich; der ausführliche Abschnitt oben verweist direkt auf die am häufigsten genutzten Seiten.
       open: true
     - question: Ist doc.pg.center eine offizielle PostgreSQL-Website?
-      answer: Nein. doc.pg.center ist ein unabhängiges Dokumentationsprojekt der Community. Es verweist auf die jeweiligen Upstream-Projekte und bewahrt Produktnamen und technischen Kontext.
-    - question: Was geschieht bei noch nicht übersetzten Seiten?
-      answer: Ist eine deutsche Seite vorhanden, öffnet der Link diese direkt. Andernfalls führt er zur entsprechenden englischen Seite und trägt die Kennzeichnung EN; die Sprachauswahl bleibt auf jeder Seite verfügbar.
+      answer: "Nein. doc.pg.center ist die von PGSTY gepflegte Dokumentationsseite für Komponenten auf [pg.center](https://pg.center/). Diese unabhängige Community-Ausgabe verlinkt die Originalprojekte und bewahrt deren Quellenangaben und Lizenzen."
+    - question: "Welche Sprachen sind verfügbar?"
+      answer: "Alle sechs Sammlungen sind auf Englisch, vereinfachtem Chinesisch, Französisch, Japanisch, Deutsch und Russisch verfügbar. Über die Sprachauswahl öffnen Sie dieselbe Seite in einer anderen Sprache."
     - question: Wie werden die Upstream-Dokumentationen gekennzeichnet?
       answer: Jede Seite endet mit einer Zeile, die das zugrunde liegende Werk, den Urheberrechtsinhaber und die Lizenz nennt sowie auf den Änderungsverlauf dieser Seite verweist. Die [Seite zu Quellenangaben](/attribution/) bündelt die festgeschriebenen Revisionen, Lizenzen und beibehaltenen Hinweise für alle sechs Sammlungen.

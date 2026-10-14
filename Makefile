@@ -2,6 +2,7 @@ HUGO ?= hugo
 BIND ?= 127.0.0.1
 PORT ?= 1313
 DESTINATION ?= public
+OINK_DIR ?= $(HOME)/pgsty/oink
 
 export GOWORK = off
 export HUGO_MODULE_WORKSPACE = off
@@ -14,8 +15,8 @@ build:
 		--printPathWarnings --panicOnWarning --noBuildLock
 
 dev:
-	HUGO_MODULE_REPLACEMENTS='github.com/pgsty/oink -> $(abspath ../oink)' \
-		$(HUGO) server --bind "$(BIND)" --port "$(PORT)" --renderToMemory
+	HUGO_MODULE_REPLACEMENTS='github.com/pgsty/oink -> $(abspath $(OINK_DIR))' \
+		$(HUGO) server --bind "$(BIND)" --port "$(PORT)" --renderToMemory --noBuildLock
 
 serve:
 	env -u HUGO_MODULE_REPLACEMENTS $(HUGO) server --bind "$(BIND)" \

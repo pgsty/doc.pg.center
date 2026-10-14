@@ -1,7 +1,8 @@
 # doc.pg.center
 
-Multilingual documentation for the tools that run PostgreSQL in production,
-built with Hugo Extended and the OINK theme.
+The component documentation site of [pg.center](https://pg.center/), with
+multilingual manuals for the tools that run PostgreSQL in production. Built with
+Hugo Extended and the OINK theme, and maintained by PGSTY.
 
 | Component | Documentation |
 | --- | --- |
@@ -19,6 +20,7 @@ German, and Russian. English is the source for the other five editions.
 
 Install Hugo Extended, Go, Python 3, and Node.js. CI uses Hugo 0.165.0 and Go 1.27.0.
 The theme is pinned in `go.mod`; no local theme checkout is required.
+The local checkout is `~/www/doc.pg.center`.
 
 ```sh
 make check    # Validate sources, build, routes, links, and multilingual search
@@ -27,7 +29,8 @@ make build    # Generate the production site in public/
 ```
 
 `make check` uses an external temporary directory and removes it when finished.
-`make dev` uses an adjacent `../oink` checkout for theme development.
+`make dev` uses `~/pgsty/oink` for theme development. Override the theme path with
+`make dev OINK_DIR=/path/to/oink`.
 Run `python3 scripts/report-coverage.py` to see the current page coverage.
 
 See [AGENTS.md](AGENTS.md) for the repository layout and maintenance workflow:
@@ -47,6 +50,8 @@ Configure the Cloudflare Pages project with the repository root, build command
 `GO_VERSION=1.27.0`, `GOWORK=off`, and `HUGO_MODULE_WORKSPACE=off`; leave
 `HUGO_MODULE_REPLACEMENTS` unset. Add `doc.pg.center` as the custom domain.
 The source configuration keeps that domain as the canonical production URL.
+Production builds use the shared `pg.center` Google Analytics 4 property,
+`G-D9E4B60JWX`. Development builds do not emit the analytics tag.
 
 These are the intended deployment settings; Cloudflare project creation, domain
 setup, and public verification are separate deployment steps. See Cloudflare's

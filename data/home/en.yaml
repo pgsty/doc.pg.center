@@ -9,22 +9,24 @@ sections:
 
 hero:
   class: pgsql-hero pgsql-hero--fit-title
-  eyebrow: Multilingual documentation for six independent components
+  eyebrow: "PG.CENTER / Component documentation"
   title_lines:
     - words:
         - { mark: P, color: blue, text: ostgreSQL }
     - words:
-        - { text: Community Components }
-  lead: Independent, elegant, multilingual documentation.
+        - { text: "Component documentation" }
+  lead: "Guides and references for the tools that keep PostgreSQL running."
+  note: "Six components, six languages. Part of [pg.center](https://pg.center/)."
+  note_icon: fa-solid fa-book-open
   links_label: Component documentation
   orbit:
     center_image: img/slonik.svg
 
 components:
   class: pgsql-components
-  eyebrow: Choose a documentation root
-  title: Six components. Six direct entrances.
-  text: English, Simplified Chinese, and French cover all six collections. Japanese covers Patroni, PgBouncer, and pgBadger, Russian covers four collections, and German provides translated pages across five. Missing translations fall back to English and carry an EN marker.
+  eyebrow: "Documentation"
+  title: "Find the right manual"
+  text: "Every collection is available in English, Simplified Chinese, French, Japanese, German, and Russian."
   columns: 3
   link_label: Read the docs
   items:
@@ -203,8 +205,8 @@ faq:
       answer: Choose the component that matches your current task. Each card opens an independent documentation root, and the detailed section above links directly to its most-used pages.
       open: true
     - question: Is doc.pg.center an official PostgreSQL website?
-      answer: No. doc.pg.center is an independent community documentation project. It links back to each upstream project and keeps product names and technical context intact.
-    - question: How does partial language coverage work?
-      answer: A link opens the current language whenever that page exists. If it has not been translated yet, the same link opens the English page and shows an EN marker; the language selector remains available on every page.
+      answer: "No. doc.pg.center is the component documentation site of [pg.center](https://pg.center/), maintained by PGSTY. This independent community edition links to the original projects and preserves their attribution and licences."
+    - question: "Which languages are available?"
+      answer: "All six collections are available in English, Simplified Chinese, French, Japanese, German, and Russian. Use the language selector to open the same page in another language."
     - question: How is the upstream documentation credited?
       answer: Every page ends with one line naming the work it is adapted from, its copyright holder, its licence, and a link to this site's change history for that page. The [attribution page](/attribution/) collects the pinned revisions, licences, and retained notices for all six collections.

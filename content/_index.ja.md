@@ -1,5 +1,5 @@
 ---
-title: PostgreSQL コミュニティコンポーネント
-description: PostgreSQL を本番環境で運用するツールの実践的な日本語ドキュメント。
+title: "PostgreSQL 周辺ツールのドキュメント"
+description: "Patroni、pgBackRest、PgBouncer、pgBadger、HAProxy、etcd のマニュアルを6言語で提供する pg.center のドキュメントサイト。"
 images: [/images/og-doc-pg-center.png]
 ---

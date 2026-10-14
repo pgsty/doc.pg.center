@@ -1,16 +1,16 @@
 brand:
-  name: PIG.CENTER
-  tagline: PostgreSQL コミュニティコンポーネント
-  slogan: コミュニティスタックのための実践的な多言語ドキュメント。
+  name: doc.pg.center
+  tagline: "[pg.center](https://pg.center/) のコンポーネントドキュメント。"
+  slogan: "6つのツール、6つの言語を一か所で。"
 columns:
   - title: ドキュメント
     links:
-      - { label: Patroni, url: https://patroni.readthedocs.io/en/latest/ }
-      - { label: pgBackRest, url: https://pgbackrest.org/ }
+      - { label: Patroni, url: /docs/patroni/ }
+      - { label: pgBackRest, url: /docs/pgbackrest/ }
       - { label: PgBouncer, url: /docs/pgbouncer/ }
-      - { label: pgBadger, url: https://pgbadger.darold.net/ }
-      - { label: HAProxy, url: https://docs.haproxy.org/3.4/ }
-      - { label: etcd, url: https://etcd.io/docs/v3.7/ }
+      - { label: pgBadger, url: /docs/pgbadger/ }
+      - { label: HAProxy, url: /docs/haproxy/ }
+      - { label: etcd, url: /docs/etcd/ }
   - title: アップストリーム
     links:
       - { label: Patroni, url: https://github.com/patroni/patroni, external: true }
@@ -19,15 +19,19 @@ columns:
       - { label: pgBadger, url: https://pgbadger.darold.net/, external: true }
       - { label: HAProxy, url: https://www.haproxy.org/, external: true }
       - { label: etcd, url: https://etcd.io/, external: true }
-  - title: 関連サイト
+  - title: PG.CENTER
     links:
-      - { label: PGSTY, url: https://pgsty.com, external: true }
-      - { label: Pigsty, url: https://pigsty.io, external: true }
-      - { label: SILO, url: https://silo.pgsty.com, external: true }
-      - { label: OINK, url: https://oink.pgsty.com, external: true }
-      - { label: PIG, url: https://pig.pgsty.com, external: true }
-  - title: "PostgreSQL リソース"
+      - { label: "メインサイト", url: "https://pg.center/", external: true }
+      - { label: "PostgreSQL マニュアル", url: "https://pg.center/docs/", external: true }
+      - { label: "リファレンスと Wiki", url: "https://pg.center/wiki/", external: true }
+      - { label: "拡張機能", url: "https://pg.center/ext/", external: true }
+      - { label: "エコシステム", url: "https://pg.center/ecosystem/", external: true }
+      - { label: "PostgreSQL 中国語版", url: "https://pgsql.cc/docs/", external: true }
+  - title: "このサイト"
     links:
-      - { label: "PG Center", url: "https://pg.center/docs/reference/", external: true }
-      - { label: "PGSQL.CC", url: "https://pgsql.cc/docs/", external: true }
-      - { label: "PGEXT 拡張一覧", url: "https://pgext.cloud/", external: true }
+      - { label: "出典とライセンス", url: "/attribution/" }
+      - { label: "GitHub リポジトリ", url: "https://github.com/pgsty/doc.pg.center", external: true }
+      - { label: "問題を報告", url: "https://github.com/pgsty/doc.pg.center/issues", external: true }
+      - { label: "Pigsty", url: "https://pigsty.io/", external: true }
+      - { label: "PGSTY", url: "https://pgsty.com/", external: true }
+      - { label: "OINK", url: "https://oink.pgsty.com/", external: true }

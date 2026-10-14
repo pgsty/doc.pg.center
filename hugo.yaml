@@ -1,5 +1,5 @@
 baseURL: https://doc.pg.center/
-title: PIG.CENTER
+title: doc.pg.center
 enableRobotsTXT: true
 enableGitInfo: true
 enableEmoji: true
@@ -34,9 +34,9 @@ languages:
     label: English
     locale: en-US
     weight: 1
-    title: PIG.CENTER
+    title: doc.pg.center
     params:
-      description: Practical documentation for the tools that run PostgreSQL in production.
+      description: "The pg.center documentation site for Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy, and etcd, in six languages."
       ui:
         command_palette:
           commands:
@@ -95,10 +95,11 @@ languages:
     label: 简体中文
     locale: zh-CN
     weight: 2
-    title: PIG.CENTER
+    title: doc.pg.center
     hasCJKLanguage: true
     params:
-      description: 面向生产实践的 PostgreSQL 生态工具中文文档。
+      footer_center_info: "由 [OINK](https://oink.pgsty.com/zh/) 构建"
+      description: "pg.center 的组件文档站，提供 Patroni、pgBackRest、PgBouncer、pgBadger、HAProxy 和 etcd 的六种语言手册。"
       time_format_default: 2006年1月2日
       ui:
         share: [weibo, x, telegram, linkedin, email, copy]
@@ -159,9 +160,10 @@ languages:
     label: Français
     locale: fr-FR
     weight: 3
-    title: PIG.CENTER
+    title: doc.pg.center
     params:
-      description: Documentation pratique des outils qui font fonctionner PostgreSQL en production.
+      footer_center_info: "Propulsé par [OINK](https://oink.pgsty.com/)"
+      description: "Le site documentaire de pg.center pour Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy et etcd, en six langues."
       ui:
         share: [x, bluesky, linkedin, telegram, email, copy]
         command_palette:
@@ -221,10 +223,11 @@ languages:
     label: 日本語
     locale: ja-JP
     weight: 4
-    title: PIG.CENTER
+    title: doc.pg.center
     hasCJKLanguage: true
     params:
-      description: PostgreSQL を本番環境で運用するツールの実践的な日本語ドキュメント。
+      footer_center_info: "[OINK](https://oink.pgsty.com/) で構築"
+      description: "Patroni、pgBackRest、PgBouncer、pgBadger、HAProxy、etcd のマニュアルを6言語で提供する pg.center のドキュメントサイト。"
       time_format_default: 2006年1月2日
       ui:
         share: [x, linkedin, telegram, email, copy]
@@ -285,9 +288,10 @@ languages:
     label: Deutsch
     locale: de-DE
     weight: 5
-    title: PIG.CENTER
+    title: doc.pg.center
     params:
-      description: Praxisnahe Dokumentation für Werkzeuge, die PostgreSQL im Produktivbetrieb unterstützen.
+      footer_center_info: "Erstellt mit [OINK](https://oink.pgsty.com/)"
+      description: "Die Dokumentationsseite von pg.center für Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy und etcd in sechs Sprachen."
       ui:
         command_palette:
           commands:
@@ -346,9 +350,10 @@ languages:
     label: Русский
     locale: ru-RU
     weight: 6
-    title: PIG.CENTER
+    title: doc.pg.center
     params:
-      description: Практическая документация по инструментам экосистемы PostgreSQL для промышленной эксплуатации.
+      footer_center_info: "Создано с помощью [OINK](https://oink.pgsty.com/)"
+      description: "Документация pg.center по Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy и etcd на шести языках."
       time_format_default: 2 January 2006 г.
       ui:
         command_palette:
@@ -409,10 +414,10 @@ params:
   productionURL: https://doc.pg.center
   github_repo: https://github.com/pgsty/doc.pg.center
   github_branch: main
-  description: Practical documentation for the PostgreSQL community stack.
+  description: The component documentation site of pg.center, in six languages.
   version: v1
   copyright:
-    authors: '[PostgreSQL Community Components](https://doc.pg.center/)'
+    authors: '[doc.pg.center](https://doc.pg.center/)'
     from_year: 2026
     to_year: present
   footer_center_info: 'Built with [OINK](https://oink.pgsty.com/)'
@@ -471,7 +476,8 @@ params:
     reading_time: false
     share: [x, bluesky, reddit, hackernews, linkedin, telegram, email, copy]
 
-# Google Analytics 4. OINK gates the tag on `hugo.IsProduction`, so `hugo
+# Shared with pg.center: Google Analytics 4 property G-D9E4B60JWX.
+# OINK gates the tag on `hugo.IsProduction`, so `hugo
 # server` (development by default) serves no tag and no request to Google,
 # while `hugo` and the CI deploy (production by default) both emit it.
 services:

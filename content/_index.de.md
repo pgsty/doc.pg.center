@@ -1,5 +1,5 @@
 ---
-title: Komponenten der PostgreSQL-Community
-description: "Praxisnahe Dokumentation für Werkzeuge zum Betrieb von PostgreSQL in Produktionsumgebungen."
+title: "Dokumentation der PostgreSQL-Komponenten"
+description: "Die Dokumentationsseite von pg.center für Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy und etcd in sechs Sprachen."
 images: [/images/og-doc-pg-center.png]
 ---

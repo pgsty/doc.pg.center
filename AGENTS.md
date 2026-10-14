@@ -3,9 +3,15 @@
 ## Purpose
 
 This repository contains the source for **doc.pg.center**, a multilingual
-reference site for the tools used to run PostgreSQL in production. It is an
-independent community project maintained by PGSTY. The site uses Hugo Extended
-and the OINK theme, pinned as a Go module in `go.mod` and `go.sum`.
+documentation subsite of **[pg.center](https://pg.center/)** for the tools used
+to run PostgreSQL in production. PGSTY maintains this independent community
+edition. PostgreSQL core manuals, reference material, and ecosystem resources
+live on the parent site; this repository maintains the six component collections
+listed below. It uses Hugo Extended and the OINK theme, pinned as a Go module in
+`go.mod` and `go.sum`.
+
+Use `doc.pg.center` consistently in the site title, navigation, footer, metadata,
+and project documentation. The local checkout is `~/www/doc.pg.center`.
 
 ## Documentation and languages
 
@@ -80,8 +86,9 @@ make build                    # Build the production site into public/
 python3 scripts/report-coverage.py
 ```
 
-`make dev` uses the adjacent `../oink` checkout for theme development. Release
-checks and builds must use the pinned module: unset `HUGO_MODULE_REPLACEMENTS`
+`make dev` uses `~/pgsty/oink` for theme development; override it with
+`make dev OINK_DIR=/path/to/oink`. Release checks and builds must use the pinned
+module: unset `HUGO_MODULE_REPLACEMENTS`
 and set `GOWORK=off` and `HUGO_MODULE_WORKSPACE=off`. Keep generated files out of
 Git; `public/`, `resources/`, and local caches are ignored.
 
@@ -90,11 +97,16 @@ Git; `public/`, `resources/`, and local caches are ignored.
 - GitHub repository: <https://github.com/pgsty/doc.pg.center>
 - Production branch: `main`.
 - Intended public URL: <https://doc.pg.center/>.
+- Parent site: <https://pg.center/>. Keep its links distinct from local component
+  documentation links, which must stay in the reader's selected language.
 - Hosting and deployment: **Cloudflare Pages**, connected to the GitHub repository.
 - Cloudflare build command: `make build`; output: `public`; root: the repository root.
 - Set `HUGO_VERSION=0.165.0` and `GO_VERSION=1.27.0` in Cloudflare, matching CI.
   Set `GOWORK=off` and `HUGO_MODULE_WORKSPACE=off`. Apply the same toolchain
   settings to preview builds; leave `HUGO_MODULE_REPLACEMENTS` unset.
+- Google Analytics 4: `G-D9E4B60JWX`, shared with `pg.center`. Keep the ID in
+  `services.googleAnalytics.ID`. OINK emits the tag only for production builds;
+  ordinary development previews must not send analytics.
 
 GitHub Actions runs checks. Configure the Pages project and the `doc.pg.center`
 custom domain in Cloudflare. Repository configuration alone does not establish

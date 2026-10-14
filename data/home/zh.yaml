@@ -9,22 +9,24 @@ sections:
 
 hero:
   class: pgsql-hero pgsql-hero--fit-title pgsql-hero--fit-title-cjk
-  eyebrow: 六个独立组件的多语言文档
+  eyebrow: "PG.CENTER / 生态组件文档"
   title_lines:
     - words:
         - { mark: P, color: blue, text: ostgreSQL }
     - words:
-        - { text: 社区组件文档 }
-  lead: 独立且美观的多语言文档。
+        - { text: "生态组件文档" }
+  lead: "查阅 PostgreSQL 生产运维工具的使用指南与参考手册。"
+  note: "六个组件，六种语言。本站是 [pg.center](https://pg.center/zh/) 的文档子站。"
+  note_icon: fa-solid fa-book-open
   links_label: 组件文档
   orbit:
     center_image: img/slonik.svg
 
 components:
   class: pgsql-components
-  eyebrow: 选择文档根
-  title: 六个组件，六个直接入口
-  text: 英文、简体中文与法文完整覆盖六套文档；日文完整覆盖 Patroni、PgBouncer 与 pgBadger，俄文覆盖四套组件，德文已覆盖五套组件中的部分页面。尚无译文的链接会回退到英文，并显示 EN 标记。
+  eyebrow: "组件文档"
+  title: "选择你需要的文档"
+  text: "所有组件文档均提供英文、简体中文、法文、日文、德文和俄文版本。"
   columns: 3
   link_label: 阅读文档
   items:
@@ -155,9 +157,9 @@ capabilities:
       url: /docs/haproxy/
       motto: 快速、可靠的 TCP 与 HTTP 流量管理
       bullets:
-        - 完整收录官方 3.4 入门指南，并拆分为九个概念与功能主题。
-        - 将 33,148 行配置手册按原生结构拆分为十二章。
-        - 将管理指南拆分为十三章，覆盖运行时 CLI、监控、调试与安全。
+        - 从负载均衡、健康检查与连接管理开始，理解 HAProxy 的工作方式。
+        - 按需查阅全局配置、代理配置项、ACL 与 HTTP 处理规则。
+        - 通过运行时 CLI、监控、调试与安全指南完成日常运维。
       value: 在同一个组件根中学习架构、查阅全部配置项并完成 HAProxy 运维。
       visual:
         type: components
@@ -203,8 +205,8 @@ faq:
       answer: 选择与你当前任务对应的组件。每张卡片都会进入一套独立文档；上方的详细说明还提供了常用页面的直达入口。
       open: true
     - question: doc.pg.center 是 PostgreSQL 官方网站吗？
-      answer: 不是。doc.pg.center 是独立的社区文档项目。本站保留各上游项目的链接、产品名称与技术上下文。
-    - question: 部分语言尚未完整覆盖时如何处理？
-      answer: 如果当前语言已有对应页面，链接会直接打开译文；尚未翻译的页面会自动打开同一路径的英文版，并显示 EN 标记。每个页面仍可通过语言选择器切换版本。
+      answer: "不是。doc.pg.center 是 [pg.center](https://pg.center/zh/) 的组件文档子站，由 PGSTY 维护。这是独立的社区整理与翻译版本，保留各上游项目的链接、署名与授权声明。"
+    - question: "提供哪些语言版本？"
+      answer: "六套文档均提供英文、简体中文、法文、日文、德文和俄文版本。使用页面上的语言选择器，可以打开同一页面的其他语言版本。"
     - question: 上游文档的归属如何标注？
       answer: 每个页面末尾都有一行署名，指明该页改编自哪份作品、版权归属、授权协议，以及本站中该页面的修改历史链接。[归属与授权页面](/zh/attribution/)汇总了六套文档集的固定版本、授权协议与完整声明。
