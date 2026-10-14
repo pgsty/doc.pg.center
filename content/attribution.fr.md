@@ -11,12 +11,12 @@ translation_notice: false
 outputs: [HTML, markdown]
 ---
 
-Le fichier doc.pg.center republie la documentation rédigée par six projets amont. Chaque page de documentation comporte une mention d’un seul trait à la fin, indiquant l’œuvre dont elle est issue, son titulaire du droit d’auteur, sa licence, ainsi qu’un lien renvoyant à la section de cette page qui la traite.
+Le fichier PG.CENTER republie la documentation rédigée par six projets amont. Chaque page de documentation comporte une mention d’un seul trait à la fin, indiquant l’œuvre dont elle est issue, son titulaire du droit d’auteur, sa licence, ainsi qu’un lien renvoyant à la section de cette page qui la traite.
 
 Cette page est cet enregistrement. Elle indique ce qui a été importé, à quelle date, à partir de quelle révision verrouillée, selon quelle licence, et où la notice complète du projet amont est conservée.
 
 > [!NOTE]
-> doc.pg.center est un projet de documentation indépendant de la communauté. Il n'est affilié à, approuvé par ni une publication officielle de l'un quelconque des projets ci-dessous, ni du PostgreSQL Global Development Group.
+> PG.CENTER est un projet de documentation indépendant de la communauté. Il n'est affilié à, approuvé par ni une publication officielle de l'un quelconque des projets ci-dessous, ni du PostgreSQL Global Development Group.
 >
 >
 
@@ -96,7 +96,7 @@ La documentation etcd est protégée par le droit d'auteur 2013-présent par les
 
 ## Ce site {#site}
 
-Le texte original rédigé pour doc.pg.center est publié sous [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), sauf lorsqu'une licence amont s'applique à la page.
+Le texte original rédigé pour PG.CENTER est publié sous [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), sauf lorsqu'une licence amont s'applique à la page.
 
 
 L'éléphant PostgreSQL (Slonik) présenté sur la page d'accueil est la marque propre du projet PostgreSQL,

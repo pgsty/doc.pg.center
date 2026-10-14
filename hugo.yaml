@@ -1,5 +1,5 @@
 baseURL: https://doc.pg.center/
-title: doc.pg.center
+title: PG.CENTER
 enableRobotsTXT: true
 enableGitInfo: true
 enableEmoji: true
@@ -34,7 +34,7 @@ languages:
     label: English
     locale: en-US
     weight: 1
-    title: doc.pg.center
+    title: PG.CENTER
     params:
       description: "The pg.center documentation site for Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy, and etcd, in six languages."
       ui:
@@ -48,6 +48,14 @@ languages:
               keywords: [licence, license, copyright, upstream, credit, notice]
     menus:
       main:
+        - identifier: home
+          name: Home
+          url: https://pg.center/
+          weight: 1
+          params:
+            icon: fa-solid fa-house
+            description: PostgreSQL documentation and ecosystem resources
+            new_tab: false
         - identifier: patroni
           name: Patroni
           pageRef: /patroni
@@ -95,7 +103,7 @@ languages:
     label: 简体中文
     locale: zh-CN
     weight: 2
-    title: doc.pg.center
+    title: PG.CENTER
     hasCJKLanguage: true
     params:
       footer_center_info: "由 [OINK](https://oink.pgsty.com/zh/) 构建"
@@ -113,6 +121,14 @@ languages:
               keywords: [授权, 版权, 协议, 上游, 归属, 声明]
     menus:
       main:
+        - identifier: home
+          name: 首页
+          url: https://pg.center/zh/
+          weight: 1
+          params:
+            icon: fa-solid fa-house
+            description: PostgreSQL 文档、参考与生态资源
+            new_tab: false
         - identifier: patroni
           name: Patroni
           pageRef: /patroni
@@ -160,7 +176,7 @@ languages:
     label: Français
     locale: fr-FR
     weight: 3
-    title: doc.pg.center
+    title: PG.CENTER
     params:
       footer_center_info: "Propulsé par [OINK](https://oink.pgsty.com/)"
       description: "Le site documentaire de pg.center pour Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy et etcd, en six langues."
@@ -176,6 +192,14 @@ languages:
               keywords: [licence, copyright, amont, attribution, source]
     menus:
       main:
+        - identifier: home
+          name: Accueil
+          url: https://pg.center/
+          weight: 1
+          params:
+            icon: fa-solid fa-house
+            description: Documentation et ressources PostgreSQL
+            new_tab: false
         - identifier: patroni
           name: Patroni
           pageRef: /patroni
@@ -223,7 +247,7 @@ languages:
     label: 日本語
     locale: ja-JP
     weight: 4
-    title: doc.pg.center
+    title: PG.CENTER
     hasCJKLanguage: true
     params:
       footer_center_info: "[OINK](https://oink.pgsty.com/) で構築"
@@ -241,6 +265,14 @@ languages:
               keywords: [ライセンス, 著作権, アップストリーム, 帰属, 出典]
     menus:
       main:
+        - identifier: home
+          name: ホーム
+          url: https://pg.center/
+          weight: 1
+          params:
+            icon: fa-solid fa-house
+            description: PostgreSQL のドキュメントとエコシステム
+            new_tab: false
         - identifier: patroni
           name: Patroni
           pageRef: /patroni
@@ -288,7 +320,7 @@ languages:
     label: Deutsch
     locale: de-DE
     weight: 5
-    title: doc.pg.center
+    title: PG.CENTER
     params:
       footer_center_info: "Erstellt mit [OINK](https://oink.pgsty.com/)"
       description: "Die Dokumentationsseite von pg.center für Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy und etcd in sechs Sprachen."
@@ -303,6 +335,14 @@ languages:
               keywords: [Lizenz, Urheberrecht, Quelle, Upstream, Namensnennung, Hinweis]
     menus:
       main:
+        - identifier: home
+          name: Startseite
+          url: https://pg.center/
+          weight: 1
+          params:
+            icon: fa-solid fa-house
+            description: PostgreSQL-Dokumentation und Ressourcen
+            new_tab: false
         - identifier: patroni
           name: Patroni
           pageRef: /patroni
@@ -350,7 +390,7 @@ languages:
     label: Русский
     locale: ru-RU
     weight: 6
-    title: doc.pg.center
+    title: PG.CENTER
     params:
       footer_center_info: "Создано с помощью [OINK](https://oink.pgsty.com/)"
       description: "Документация pg.center по Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy и etcd на шести языках."
@@ -366,6 +406,14 @@ languages:
               keywords: [лицензия, авторское право, источник, оригинал, атрибуция, уведомление]
     menus:
       main:
+        - identifier: home
+          name: Главная
+          url: https://pg.center/
+          weight: 1
+          params:
+            icon: fa-solid fa-house
+            description: Документация и ресурсы PostgreSQL
+            new_tab: false
         - identifier: patroni
           name: Patroni
           pageRef: /patroni
@@ -410,14 +458,14 @@ languages:
             description: Эксплуатация распределённого хранилища ключ-значение и его API
 
 params:
-  logo: favicon-512x512.png
+  logo: img/slonik.svg
   productionURL: https://doc.pg.center
   github_repo: https://github.com/pgsty/doc.pg.center
   github_branch: main
   description: The component documentation site of pg.center, in six languages.
   version: v1
   copyright:
-    authors: '[doc.pg.center](https://doc.pg.center/)'
+    authors: '[PG.CENTER](https://pg.center/)'
     from_year: 2026
     to_year: present
   footer_center_info: 'Built with [OINK](https://oink.pgsty.com/)'

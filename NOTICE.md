@@ -1,6 +1,6 @@
 # Content and dependency notice
 
-Original text written for doc.pg.center is licensed under Creative Commons
+Original text written for PG.CENTER at doc.pg.center is licensed under Creative Commons
 Attribution 4.0 International. The full license is in `LICENSE`. Imported manuals
 and third-party assets retain their own copyright and license terms.
 
@@ -45,7 +45,12 @@ repository; published license texts remain in `static/third_party/`.
 The site uses OINK 1.2.0 as a pinned Hugo module. OINK is licensed under Apache
 License 2.0 and carries its upstream and bundled-dependency notices in the module.
 
-The PostgreSQL elephant (Slonik) at `static/img/slonik.svg` is taken unmodified
-from the postgresql.org website repository. It is a mark of the PostgreSQL
+The PostgreSQL elephant (Slonik) at `static/img/slonik.svg` and
+`static/favicon.svg` is taken unmodified from the postgresql.org website
+repository. The PNG at `static/images/postgresql.png` is its original
+`media/img/about/press/elephant.png`, also used by the parent PG.CENTER site.
+`static/favicon.ico` is the parent site's copy of `media/favicon.ico`;
+the 32px and 256px PNG favicons and the touch icon are the original PNG entries
+extracted from that ICO without changing their pixels. It is a mark of the PostgreSQL
 Community Association of Canada and is used to refer to PostgreSQL under the
 project's trademark and logo policy. Its use does not imply endorsement.

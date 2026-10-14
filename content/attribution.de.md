@@ -11,7 +11,7 @@ translation_notice: false
 outputs: [HTML, markdown]
 ---
 
-doc.pg.center veröffentlicht Dokumentationen von sechs Upstream-Projekten erneut. Jede
+PG.CENTER veröffentlicht Dokumentationen von sechs Upstream-Projekten erneut. Jede
 Dokumentationsseite endet mit einer einzeiligen Quellenangabe. Sie nennt das
 Werk, auf dem die Seite basiert, dessen Urheberrechtsinhaber und Lizenz und
 verweist auf den zugehörigen Abschnitt dieser Seite.
@@ -21,7 +21,7 @@ Inhalte wann aus welcher festgeschriebenen Revision unter welcher Lizenz
 importiert wurden und wo der vollständige Upstream-Hinweis aufbewahrt wird.
 
 > [!NOTE]
-> doc.pg.center ist ein unabhängiges Dokumentationsprojekt der Community. Es ist mit
+> PG.CENTER ist ein unabhängiges Dokumentationsprojekt der Community. Es ist mit
 > keinem der unten aufgeführten Projekte und auch nicht mit der PostgreSQL Global
 > Development Group verbunden, wird von diesen nicht unterstützt und ist keine
 > offizielle Veröffentlichung dieser Organisationen.
@@ -142,7 +142,7 @@ aufbewahrt.
 
 ## Diese Website {#site}
 
-Die eigens für doc.pg.center verfassten Texte werden unter
+Die eigens für PG.CENTER verfassten Texte werden unter
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) veröffentlicht, sofern
 für eine Seite nicht stattdessen eine oben genannte Upstream-Lizenz gilt.
 

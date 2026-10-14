@@ -14,6 +14,7 @@
 {{- $target := partial "pgsql/link-target.html" (dict "page" $page "url" $entry.URL) -}}
 {{- $href := $target.href -}}
 {{- $external := $target.external -}}
+{{- $newTab := and $external (ne $entry.Params.new_tab false) -}}
 {{- $fallback := $target.fallback -}}
 {{- with $entry.Page -}}
   {{- $current = eq $page.RelPermalink .RelPermalink -}}
@@ -22,11 +23,12 @@
   {{- $fallback = false -}}
 {{- end -}}
 <a class="{{ $class }}{{ if $active }} active{{ end }}{{ if $fallback }} pgsql-link--fallback{{ end }}" href="{{ $href }}"
+  data-td-navbar-id="{{ $entry.Identifier }}"
   data-td-navbar-level="{{ $level }}" data-td-navbar-kind="{{ $kind }}"
   {{- if and (eq $level 0) (not $external) }} data-td-navbar-route{{ end }}
   aria-label="{{ $entry.Name | plainify }}"
   data-td-navbar-region="{{ $region }}" data-td-navbar-label="{{ $entry.Name | plainify }}"
-  data-td-navbar-external="{{ if $external }}true{{ else }}false{{ end }}"{{ if $fallback }} hreflang="{{ $target.language }}" data-fallback-language="{{ $target.language }}"{{ end }}{{ if $current }} aria-current="page"{{ end }}{{ with .controls }} aria-controls="{{ . }}" aria-expanded="false"{{ end }}{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }}>
+  data-td-navbar-external="{{ if $external }}true{{ else }}false{{ end }}"{{ if $fallback }} hreflang="{{ $target.language }}" data-fallback-language="{{ $target.language }}"{{ end }}{{ if $current }} aria-current="page"{{ end }}{{ with .controls }} aria-controls="{{ . }}" aria-expanded="false"{{ end }}{{ if $newTab }} target="_blank" rel="noopener noreferrer"{{ end }}>
   <i class="{{ partial "menu-icon.html" $entry }}" aria-hidden="true"></i>
   <span class="td-navbar-entry__label">{{ $entry.Name }}</span>
   {{- if $external }}<span class="td-navbar-entry__external">{{ partialCached "shell/icon.html" "external-link" "navbar-external-link" }}</span>{{ end -}}

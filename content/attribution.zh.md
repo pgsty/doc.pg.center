@@ -11,13 +11,13 @@ translation_notice: false
 outputs: [HTML, markdown]
 ---
 
-doc.pg.center 转载并整理了六个上游项目撰写的文档。每一个文档页面的末尾都有一行署名，指明该页改编自哪份作品、
+PG.CENTER 转载并整理了六个上游项目撰写的文档。每一个文档页面的末尾都有一行署名，指明该页改编自哪份作品、
 版权归属于谁、依据什么协议授权，并链接回本页对应的小节。
 
 本页就是那份记录：说明每份材料从哪里、在什么时间、从哪个固定版本导入，依据什么协议，以及完整的上游声明保存在何处。
 
 > [!NOTE]
-> doc.pg.center 是独立的社区文档项目，与下列任何项目均无隶属关系，也未获得其背书，
+> PG.CENTER 是独立的社区文档项目，与下列任何项目均无隶属关系，也未获得其背书，
 > 不是它们的官方出版物，也不代表 PostgreSQL 全球开发组。
 
 ## 总览 {#summary}
@@ -112,7 +112,7 @@ etcd 文档版权归 etcd Authors 所有（Copyright 2013-present）。其正文
 
 ## 本站 {#site}
 
-为 doc.pg.center 原创撰写的内容依
+为 PG.CENTER 原创撰写的内容依
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 发布；
 若某页面适用上述上游协议，则以上游协议为准。
 

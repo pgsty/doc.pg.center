@@ -11,7 +11,7 @@ translation_notice: false
 outputs: [HTML, markdown]
 ---
 
-doc.pg.center republishes documentation written by six upstream projects. Every documentation page
+PG.CENTER republishes documentation written by six upstream projects. Every documentation page
 carries a one-line credit at the end naming the work it is derived from, its copyright holder,
 its licence, and a link back to the section of this page that covers it.
 
@@ -19,7 +19,7 @@ This page is that record. It states what was imported, when, from which pinned r
 which licence, and where the complete upstream notice is retained.
 
 > [!NOTE]
-> doc.pg.center is an independent community documentation project. It is not affiliated with, endorsed
+> PG.CENTER is an independent community documentation project. It is not affiliated with, endorsed
 > by, or an official publication of any of the projects below, nor of the PostgreSQL Global
 > Development Group.
 
@@ -122,7 +122,7 @@ retained [upstream](https://github.com/etcd-io/website/blob/main/LICENSE).
 
 ## This site {#site}
 
-Original text written for doc.pg.center is published under
+Original text written for PG.CENTER is published under
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), except where an upstream licence
 above applies to the page instead.
 

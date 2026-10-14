@@ -1,4 +1,4 @@
-# doc.pg.center
+# PG.CENTER component documentation
 
 The component documentation site of [pg.center](https://pg.center/), with
 multilingual manuals for the tools that run PostgreSQL in production. Built with
@@ -15,6 +15,11 @@ Hugo Extended and the OINK theme, and maintained by PGSTY.
 
 Every collection is available in English, Simplified Chinese, French, Japanese,
 German, and Russian. English is the source for the other five editions.
+
+The site uses the **PG.CENTER** name and PostgreSQL elephant logo. The Home
+navigation link returns to `https://pg.center/zh/` for Chinese and
+`https://pg.center/` for the other languages. Documentation stays at
+`https://doc.pg.center/`.
 
 Each component lives directly under `content/<component>/` and uses the `docs`
 layout. Its URL starts with the component name, for example `/patroni/` or

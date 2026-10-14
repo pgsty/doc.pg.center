@@ -2,16 +2,19 @@
 
 ## Purpose
 
-This repository contains the source for **doc.pg.center**, a multilingual
-documentation subsite of **[pg.center](https://pg.center/)** for the tools used
+This repository contains the source for the **PG.CENTER** component documentation
+site at **doc.pg.center**, part of **[pg.center](https://pg.center/)**, for the tools used
 to run PostgreSQL in production. PGSTY maintains this independent community
 edition. PostgreSQL core manuals, reference material, and ecosystem resources
 live on the parent site; this repository maintains the six component collections
 listed below. It uses Hugo Extended and the OINK theme, pinned as a Go module in
 `go.mod` and `go.sum`.
 
-Use `doc.pg.center` consistently in the site title, navigation, footer, metadata,
-and project documentation. The local checkout is `~/www/doc.pg.center`.
+Use **PG.CENTER** as the site identity in the title, navigation, footer, and
+metadata, with the PostgreSQL elephant as the logo and browser icon. Keep
+`doc.pg.center` as the documentation hostname and repository name. The top-level
+Home link points to `https://pg.center/zh/` in Chinese and `https://pg.center/`
+in all other languages. The local checkout is `~/www/doc.pg.center`.
 
 ## Documentation and languages
 

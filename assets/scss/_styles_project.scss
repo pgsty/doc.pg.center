@@ -124,10 +124,26 @@
   }
 }
 
-// Keep the subdomain legible in the shared header and footer lockups.
+// Share PG.CENTER's elephant and Chakra Petch wordmark across every surface.
 .td-site-header .td-nav-title,
+.td-shell-wordmark,
 .td-site-footer__logo span {
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
+  color: var(--td-ink);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.td-site-header .td-nav-logo {
+  width: 28px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.td-shell-sidebar__brand > img:first-child {
+  width: 24px;
+  height: 26px;
+  object-fit: contain;
 }
 
 .td-site-footer {
@@ -167,7 +183,7 @@
 
 @media (max-width: 767.98px) {
   .td-site-header .td-site-nav {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) auto auto;
   }
 
   .td-site-header .td-nav-title {
@@ -175,9 +191,14 @@
     font-size: 0.95rem;
   }
 
-  // The drawer already contains every component; leave room for the site name.
+  // Keep the parent Home link reachable beside the brand on component pages,
+  // whose drawer contains the component tree rather than the global menu.
   .td-site-header .td-nav-menu-zone {
-    display: none;
+    display: flex;
+
+    > :not([data-td-navbar-id='home']) {
+      display: none;
+    }
   }
 
   .td-site-header .td-nav-util-zone > .td-site-nav__language {

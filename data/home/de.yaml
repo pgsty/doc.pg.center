@@ -204,8 +204,8 @@ faq:
     - question: Wo soll ich anfangen?
       answer: Wählen Sie die Komponente, die zu Ihrer aktuellen Aufgabe passt. Jede Karte öffnet einen eigenständigen Dokumentationsbereich; der ausführliche Abschnitt oben verweist direkt auf die am häufigsten genutzten Seiten.
       open: true
-    - question: Ist doc.pg.center eine offizielle PostgreSQL-Website?
-      answer: "Nein. doc.pg.center ist die von PGSTY gepflegte Dokumentationsseite für Komponenten auf [pg.center](https://pg.center/). Diese unabhängige Community-Ausgabe verlinkt die Originalprojekte und bewahrt deren Quellenangaben und Lizenzen."
+    - question: Ist PG.CENTER eine offizielle PostgreSQL-Website?
+      answer: "Nein. Diese Website enthält die von PGSTY gepflegte Komponenten-Dokumentation von [PG.CENTER](https://pg.center/). Diese unabhängige Community-Ausgabe verlinkt die Originalprojekte und bewahrt deren Quellenangaben und Lizenzen."
     - question: "Welche Sprachen sind verfügbar?"
       answer: "Alle sechs Sammlungen sind auf Englisch, vereinfachtem Chinesisch, Französisch, Japanisch, Deutsch und Russisch verfügbar. Über die Sprachauswahl öffnen Sie dieselbe Seite in einer anderen Sprache."
     - question: Wie werden die Upstream-Dokumentationen gekennzeichnet?
