@@ -63,7 +63,7 @@ Le texte intégral de la licence est conservé
 
 Importé le 2026-08-15 depuis <https://pgbadger.darold.net/> et depuis [`darold/pgbadger`](https://github.com/darold/pgbadger) au commit [`a1ad95a`](https://github.com/darold/pgbadger/commit/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae), dont la dernière version publiée à ce moment était la v13.2.
 
-pgBadger est protégé par le droit d'auteur (c) 2012-2026 Gilles Darold et est distribué sous la licence [PostgreSQL License](https://opensource.org/license/postgresql). Le texte intégral de la licence est conservé à côté des exemples hors ligne sous le nom [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) et dans `sources/pgbadger/upstream/LICENSE` du dépôt du site.
+pgBadger est protégé par le droit d'auteur (c) 2012-2026 Gilles Darold et est distribué sous la licence [PostgreSQL License](https://opensource.org/license/postgresql). Le texte intégral de la licence est conservé à côté des exemples hors ligne sous le nom [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) et dans `static/third_party/pgbadger/LICENSE` du dépôt du site.
 
 > [!IMPORTANT]
 > pgBadger intègre un module `SQL::Beautify` modifié sous Artistic License 2.0 ; les ressources

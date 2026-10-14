@@ -82,7 +82,7 @@ doc.pg.center повторно публикует документацию, на
 распространяются по [лицензии PostgreSQL](https://opensource.org/license/postgresql). Полный текст
 лицензии размещён рядом с автономными примерами по адресу
 [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) и в файле
-`sources/pgbadger/upstream/LICENSE` репозитория сайта.
+`static/third_party/pgbadger/LICENSE` репозитория сайта.
 
 > [!IMPORTANT]
 > pgBadger включает изменённый модуль `SQL::Beautify`, распространяемый по Artistic License 2.0;

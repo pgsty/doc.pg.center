@@ -71,7 +71,7 @@ pgBadger 版权归 Gilles Darold 所有（Copyright (c) 2012-2026），
 依 [PostgreSQL 协议](https://opensource.org/license/postgresql)授权。
 完整协议文本随离线示例一起发布于
 [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE)，
-并保存在站点仓库的 `sources/pgbadger/upstream/LICENSE` 中。
+并保存在站点仓库的 `static/third_party/pgbadger/LICENSE` 中。
 
 > [!IMPORTANT]
 > pgBadger 内置了一份修改过的 `SQL::Beautify` 模块，依 Artistic License 2.0 授权；

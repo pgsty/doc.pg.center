@@ -90,7 +90,7 @@ Copyright (c) 2012-2026 für pgBadger: Gilles Darold. pgBadger wird unter der
 [PostgreSQL License](https://opensource.org/license/postgresql) verbreitet. Der
 vollständige Lizenztext wird neben den Offline-Beispielen unter
 [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) sowie im
-Site-Repository unter `sources/pgbadger/upstream/LICENSE` aufbewahrt.
+Site-Repository unter `static/third_party/pgbadger/LICENSE` aufbewahrt.
 
 > [!IMPORTANT]
 > pgBadger bindet ein modifiziertes `SQL::Beautify`-Modul unter der Artistic License 2.0

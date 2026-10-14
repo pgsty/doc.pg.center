@@ -12,6 +12,9 @@
 
 patroni:
   name: Patroni documentation
+  repository: https://github.com/patroni/patroni
+  documentation: https://patroni.readthedocs.io/en/latest/
+  source_ref: v4.1.5
   copyright: Copyright (c) 2025 Compose, Zalando SE, Patroni Contributors
   license: MIT
   notice: /attribution/#patroni
@@ -20,6 +23,12 @@ patroni:
 
 pgbackrest:
   name: pgBackRest documentation
+  repository: https://github.com/pgbackrest/pgbackrest
+  documentation: https://pgbackrest.org/
+  source_ref: release/2.59.3
+  source_commit: 46cdca625a73403cad4774d97354a1fac1e91e51
+  archive_url: https://github.com/pgbackrest/pgbackrest/releases/download/release/2.59.3/pgbackrest-2.59.3.tar.gz
+  archive_sha256: 14037901db002e5536a948bf9f0fc0ff6cde31f4e675d3e9b46f129071bf2e5f
   copyright: Copyright (c) 2015-2026 The PostgreSQL Global Development Group and David Steele
   license: MIT
   notice: /attribution/#pgbackrest
@@ -28,6 +37,9 @@ pgbackrest:
 
 pgbouncer:
   name: PgBouncer documentation
+  repository: https://github.com/pgbouncer/pgbouncer
+  documentation: https://www.pgbouncer.org/
+  source_ref: pgbouncer_1_26_0
   copyright: Copyright (c) 2007-2009 Marko Kreen, Skype Technologies OÜ
   license: ISC
   notice: /attribution/#pgbouncer
@@ -36,6 +48,11 @@ pgbouncer:
 
 pgbadger:
   name: pgBadger documentation
+  repository: https://github.com/darold/pgbadger
+  documentation: https://pgbadger.darold.net/
+  source_commit: a1ad95a035a0c2d246fe632eb1c361d4bde0ddae
+  archive_url: https://codeload.github.com/darold/pgbadger/tar.gz/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae
+  archive_sha256: 4c708efdcea2c5953c35d064be7a29fe4da23467c9accfef7f7a82da5fc6dc4c
   copyright: Copyright (c) 2012-2026 Gilles Darold
   license: PostgreSQL
   notice: /attribution/#pgbadger
@@ -44,6 +61,15 @@ pgbadger:
 
 haproxy:
   name: HAProxy 3.4 documentation
+  repository: https://git.haproxy.org/?p=haproxy-3.4.git
+  documentation: https://docs.haproxy.org/3.4/
+  source_ref: v3.4.6-66-g16acce1dac1d
+  source_commit: 16acce1dac1dcf1ad5d654204af3a5d45d0e3de8
+  stable_release: 3.4.6
+  source_sha256:
+    doc/intro.txt: 48c138f6c57e0328abe1cf0595453cb83e1542940ad5a7c8dd4ae4e03f8585d0
+    doc/configuration.txt: e7b6c9c919d2a2710409e2538a469b56a2c383db3738bb27d626a813314a209e
+    doc/management.txt: ad377db9c62e740c76acbf4ae506dc12795b16378519d15db1347242ba95a85b
   copyright: Copyright 2000-2026 Willy Tarreau
   license: GPL-2.0-only
   notice: /attribution/#haproxy
@@ -52,6 +78,10 @@ haproxy:
 
 etcd:
   name: etcd v3.7 documentation
+  repository: https://github.com/etcd-io/website
+  documentation: https://etcd.io/docs/v3.7/
+  source_commit: d20f8ae346da60ab6eb6f24f200753b328aa9fcc
+  source_path: content/en/docs/v3.7
   copyright: Copyright 2013-present etcd Authors
   license: CC-BY-4.0
   notice: /attribution/#etcd

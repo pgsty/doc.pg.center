@@ -15,6 +15,14 @@ __pycache__/
 *.swp
 *.swo
 *~
-/sources/pgbadger/*.tar.gz
-/data/translation-audits/*-checkpoint.json
-/TRANSLATION*.progress.md
+
+# Local work and downloaded upstream inputs never belong in Git.
+/source/
+/sources/
+/translation/
+/translations/
+/TRANSLATION*.md
+/RUSSIAN_TRANSLATION.md
+/data/translation-*/
+/data/translation-sources.json
+/.wrangler/

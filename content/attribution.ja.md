@@ -55,7 +55,7 @@ PgBouncerの著作権表示はcopyright (c) 2007-2009 Marko Kreen, Skype Technol
 
 2026-08-15に、<https://pgbadger.darold.net/>と[`darold/pgbadger`](https://github.com/darold/pgbadger)のコミット[`a1ad95a`](https://github.com/darold/pgbadger/commit/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae)からインポートしました。当時の最新公開リリースはv13.2でした。
 
-pgBadgerの著作権表示はcopyright (c) 2012-2026 Gilles Daroldです。[PostgreSQL License](https://opensource.org/license/postgresql)のもとで配布されています。完全なライセンス本文は、オフラインのサンプルとともに[`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE)として保存されており、サイトリポジトリの`sources/pgbadger/upstream/LICENSE`にもあります。
+pgBadgerの著作権表示はcopyright (c) 2012-2026 Gilles Daroldです。[PostgreSQL License](https://opensource.org/license/postgresql)のもとで配布されています。完全なライセンス本文は、オフラインのサンプルとともに[`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE)として保存されており、サイトリポジトリの`static/third_party/pgbadger/LICENSE`にもあります。
 
 > [!IMPORTANT]
 > pgBadgerには、Artistic License 2.0のもとで改変された`SQL::Beautify`モジュールが組み込まれています。また、生成レポートのリソースには、MIT、GPL-2.0、SIL Open Font License 1.1のコンポーネントが含まれます。アップストリームの完全なリソース一覧は[`/third_party/pgbadger/THIRD-PARTY-LICENSES`](/third_party/pgbadger/THIRD-PARTY-LICENSES)に保存されています。

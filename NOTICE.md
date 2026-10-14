@@ -1,49 +1,51 @@
 # Content and dependency notice
 
-The first doc.pg.center documentation collection was imported on 2026-08-15 from the English `pigsty.io` and Simplified Chinese `pigsty.cc` documentation trees maintained by PGSTY. Individual manuals retain links to the Patroni, pgBackRest, and PgBouncer upstream sources from which those documentation snapshots were prepared.
+Original text written for doc.pg.center is licensed under Creative Commons
+Attribution 4.0 International. The full license is in `LICENSE`. Imported manuals
+and third-party assets retain their own copyright and license terms.
 
-The imported documentation is distributed under the Creative Commons Attribution 4.0 International license used by the source documentation sites. A copy is included as `LICENSE-CC-BY-4.0`.
+The first collection was imported on 2026-08-15 from the English `pigsty.io` and
+Simplified Chinese `pigsty.cc` documentation maintained by PGSTY. Those imported
+adaptations use CC BY 4.0, subject to the original upstream terms identified below.
 
-The English and Simplified Chinese PgBouncer manuals were refreshed on 2026-10-04
-to version 1.26.0 (`pgbouncer_1_26_0`), using the proofread `pigsty.io` commit
-`fe0a9f08259fd6a55856d202609205606ba3c704` and `pigsty.cc` commit
-`e22fbc56ec1631a4d56a15ffb2b7e8721f411184`. On 2026-10-13, all six editions were synchronized with the current English
-manual for 1.26.0. Local corrections to upstream factual errors, spelling and
-grammar were checked against the release implementation. Original diagnostic
-messages are preserved verbatim. The page-level review and corrected source
-fingerprints are recorded in `data/translation-audits/pgbouncer.json`.
+## Upstream documentation
 
-The pgBadger collection was imported on 2026-08-15 from <https://pgbadger.darold.net/> and from `darold/pgbadger` commit `a1ad95a035a0c2d246fe632eb1c361d4bde0ddae`. Its source code and source documentation are distributed under the PostgreSQL License, copyright 2012-2026 Gilles Darold. The complete license is retained in `sources/pgbadger/upstream/LICENSE` and beside the offline examples in `static/third_party/pgbadger/LICENSE`.
+| Collection | Maintained edition | Upstream copyright and license |
+| --- | --- | --- |
+| Patroni | v4.1.5 | Copyright (c) 2025 Compose, Zalando SE, Patroni Contributors; MIT |
+| pgBackRest | v2.59.3, commit `46cdca625a73403cad4774d97354a1fac1e91e51` | Copyright (c) 2015-2026 The PostgreSQL Global Development Group and David Steele; MIT |
+| PgBouncer | v1.26.0, tag `pgbouncer_1_26_0` | Copyright (c) 2007-2009 Marko Kreen, Skype Technologies OÜ; ISC |
+| pgBadger | v13.2, commit `a1ad95a035a0c2d246fe632eb1c361d4bde0ddae` | Copyright (c) 2012-2026 Gilles Darold; PostgreSQL License |
+| HAProxy | 3.4.6-66, commit `16acce1dac1dcf1ad5d654204af3a5d45d0e3de8` | Copyright 2000-2026 Willy Tarreau; GPL-2.0-only |
+| etcd | v3.7, website commit `d20f8ae346da60ab6eb6f24f200753b328aa9fcc` | Copyright 2013-present etcd Authors; CC BY 4.0 for prose, Apache 2.0 for code and samples |
 
-pgBadger embeds a modified `SQL::Beautify` module under Artistic License 2.0. Its generated-report resources include MIT, GPL-2.0, and SIL Open Font License 1.1 components; the complete upstream resource inventory is retained in `sources/pgbadger/upstream/RESOURCE-LICENSES` and `static/third_party/pgbadger/THIRD-PARTY-LICENSES`. The original website HTML is stored only as a provenance snapshot under `sources/pgbadger/site` and is not part of the normal Hugo output.
+The HAProxy edition follows a 3.4 maintenance-branch documentation snapshot after
+stable release 3.4.6. It includes the complete Starter, Configuration, and
+Management manual scope, with adapted headings, links, examples, and page grouping.
+HAProxy-derived pages retain GPLv2 terms and are not covered by the site's CC BY 4.0
+license. The upstream license explanation, OpenSSL exception, and complete GPLv2
+text are published from `static/third_party/haproxy/LICENSE` and
+`static/third_party/haproxy/GPL-2.0`.
 
-The HAProxy 3.4 documentation collection was imported on 2026-08-16, refreshed on 2026-08-30,
-and synchronized in all six languages on 2026-10-13 with the current official English
-maintenance snapshot `3.4.6-66`, commit `16acce1dac1dcf1ad5d654204af3a5d45d0e3de8`.
-The latest stable release is `3.4.6` (tag `v3.4.6`); this documentation snapshot includes
-maintenance-branch changes made after that release. Its English prose is
-derived from the complete `doc/intro.txt`, `doc/configuration.txt`, and `doc/management.txt` manuals
-and is distributed under the GNU General Public License version 2 terms stated by HAProxy. The local
-edition changes presentation, links, headings, code-signature treatment, and page grouping; the
-pinned originals remain under `sources/haproxy/upstream/`.
+The pgBadger license is retained in `static/third_party/pgbadger/LICENSE`.
+pgBadger embeds a modified `SQL::Beautify` module under Artistic License 2.0.
+Its report resources include MIT, GPL-2.0, and SIL Open Font License 1.1 components;
+the upstream inventory is in `static/third_party/pgbadger/THIRD-PARTY-LICENSES`.
+The linked historical sample reports retain their original scripts and notices.
 
-HAProxy's license explanation, OpenSSL exception, and complete GPLv2 text are retained under
-`sources/haproxy/upstream/` and published beside the rendered guide under
-`static/third_party/haproxy/`. These HAProxy-derived pages are not covered by the site's
-`LICENSE-CC-BY-4.0`.
+Official source locations, pinned revisions, and available checksums are recorded
+in `data/upstreams.yaml`. Each manual page identifies its source through
+`upstream_link`. Full attribution is maintained in the six localized
+`content/attribution*.md` pages and published at
+<https://doc.pg.center/attribution/>. Upstream downloads are kept outside the
+repository; published license texts remain in `static/third_party/`.
 
-The website uses OINK 1.2.0 as a pinned Hugo Module. OINK is licensed under Apache License 2.0 and carries its own upstream and bundled-dependency notices in the module source.
+## Theme and artwork
 
-The etcd 3.7 documentation collection was imported from the official etcd website repository and
-refreshed on 2026-10-13 at commit `d20f8ae346da60ab6eb6f24f200753b328aa9fcc`. Its prose is distributed under the Creative
-Commons Attribution 4.0 International license, while code and code samples are distributed under
-the Apache License 2.0, copyright 2013-present etcd Authors.
+The site uses OINK 1.2.0 as a pinned Hugo module. OINK is licensed under Apache
+License 2.0 and carries its upstream and bundled-dependency notices in the module.
 
-Per-page attribution for every collection is published at <https://doc.pg.center/attribution/> and is
-generated from `data/upstreams.yaml` together with the `upstream_link` front matter each page
-carries.
-
-The PostgreSQL elephant (Slonik) published at `static/img/slonik.svg` is taken unmodified from the
-postgresql.org website repository. It is a mark of the PostgreSQL Community Association of Canada
-and is used here to refer to PostgreSQL under the project's trademark and logo policy; its use
-does not imply endorsement.
+The PostgreSQL elephant (Slonik) at `static/img/slonik.svg` is taken unmodified
+from the postgresql.org website repository. It is a mark of the PostgreSQL
+Community Association of Canada and is used to refer to PostgreSQL under the
+project's trademark and logo policy. Its use does not imply endorsement.
