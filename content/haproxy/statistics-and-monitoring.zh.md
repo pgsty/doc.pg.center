@@ -1,0 +1,3567 @@
+---
+title: "9. 统计信息与监控"
+linkTitle: "9. 统计信息与监控"
+weight: 330
+description: "CSV 和类型化统计信息、运行时 CLI 命令、主 CLI 和统计文件"
+icon: fa-solid fa-chart-line
+module: [HAPROXY]
+categories: [任务]
+aliases:
+  - /haproxy/management/statistics-and-monitoring/
+upstream_link: "https://docs.haproxy.org/3.4/management.html"
+upstream_name: "HAProxy 3.4 Management Guide"
+upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 9"
+---
+
+可以查询 HAProxy 的运行状态。最常用的机制是 HTTP 统计信息页面。该页面还提供了一种用于监控工具的替代 CSV 输出格式。相同的格式也通过 Unix 套接字提供。
+
+统计信息按类别分组，类别以域（domain）命名，对应 HAProxy 的多个组件。当前提供两个域：proxy 和 resolvers。若未指定，将选择 proxy 域。请注意，仅代理的统计信息会显示在 HTTP 页面上。
+
+## 9.1. CSV 格式 {#section-9-1}
+
+可通过 Unix 套接字或 HTTP 页面查阅统计信息。两种方式均提供 CSV 格式，其字段定义如下。第一行以井号（'#'）开头，每个逗号分隔的字段对应一列标题。从第二行开始的其余行采用标准 CSV 格式，以逗号作为分隔符，双引号（'"'）作为可选的文本分隔符，仅当被包围的文本存在歧义时（如包含引号或逗号）才使用。文本中的双引号字符需以两个双引号（'""'）表示，这是大多数工具所识别的格式。请勿在这些字段前插入任何列，以免破坏依赖硬编码列位置的工具。
+
+对于代理的统计信息，每个字段名后方括号内会列出该字段可能具有值的类型。类型包括 L（监听器）、F（前端）、B（后端）和 S（服务器）。存在一组固定的静态字段，其始终以相同顺序可用。包含字符“-”的列表示静态字段的结束，此后字段的存在性或顺序无法保证。
+
+以下是使用代理统计信息域的静态字段列表：
+
+```text
+ 0. pxname [LFBS]: 代理名称
+ 1. svname [LFBS]: 服务名称（前端为 FRONTEND，后端为 BACKEND，服务器或监听器可为任意名称）
+ 2. qcur [..BS]: 当前排队的请求数。对后端而言，表示尚未分配服务器的排队请求数。
+ 3. qmax [..BS]: qcur 的最大值
+ 4. scur [LFBS]: 当前会话数
+ 5. smax [LFBS]: 最大会话数
+ 6. slim [LFBS]: 配置的会话上限
+ 7. stot [LFBS]: 累计会话数
+ 8. bin [LFBS]: 入站字节数
+ 9. bout [LFBS]: 出站字节数
+10. dreq [LFB.]: 因安全原因而拒绝的请求。
+    - 对 tcp，是因为匹配了 tcp-request content 规则。
+    - 对 http，是因为匹配了 http-request 或 tarpit 规则。
+11. dresp [LFBS]: 因安全原因而拒绝的响应。
+    - 对 http，是因为匹配了 http-request 规则或 "option checkcache"。
+12. ereq [LF..]: 请求错误。可能原因包括：
+    - 请求发送完毕前客户端提前终止。
+    - 从客户端读取时发生错误。
+    - 客户端超时。
+    - 客户端关闭连接。
+    - 客户端发送各种无效请求。
+    - 请求被施加连接陷阱（tarpit）。
+13. econ [..BS]: 尝试连接后端服务器时遇到错误的请求数。后端值为其所有服务器统计值之和，加上未关联具体服务器的连接错误（例如后端无活跃服务器）。
+14. eresp [..BS]: 响应错误，srv_abrt 也计入此项。其他错误包括：
+    - 写入客户端套接字时发生错误（不计入服务器统计）。
+    - 将过滤器应用于响应失败。
+15. wretr [..BS]: 连接服务器时重试的次数。
+16. wredis [..BS]: 请求被重分派到另一服务器的次数。服务器值统计从该服务器切换到其他服务器的次数。
+17. status [LFBS]: 状态（UP/DOWN/NOLB/MAINT/MAINT(via)/MAINT(resolution)...）
+18. weight [..BS]: 有效权重总和（后端），有效权重（服务器）
+19. act [..BS]: 活跃服务器数量（后端），服务器是否为活跃服务器（服务器）
+20. bck [..BS]: 备用服务器数量（后端），服务器是否为备用服务器（服务器）
+21. chkfail [...S]: 失败的检查次数（仅统计服务器上线期间失败的检查）。
+22. chkdown [..BS]: UP->DOWN 转换次数。后端计数器统计整个后端变为离线的次数，而非各服务器计数器之和。
+23. lastchg [..BS]: 距上次 UP<->DOWN 转换经过的秒数
+24. downtime [..BS]: 总离线时长（秒）。后端值为整个后端的离线时长，而非各服务器离线时长之和。
+25. qlimit [...S]: 服务器配置的 maxqueue；值为 0 时不显示（默认值，表示不限制）
+26. pid [LFBS]: 进程 ID（第一个实例为 0，第二个为 1，以此类推）
+27. iid [LFBS]: 唯一代理 ID
+28. sid [L..S]: 服务器 ID（在代理内唯一）
+29. throttle [...S]: 启用 slowstart 时服务器当前的节流百分比；未启用 slowstart 时不显示。
+30. lbtot [..BS]: 因新会话或重分派而选择服务器的总次数。服务器计数器表示选择该服务器的次数。
+31. tracked [...S]: 启用跟踪时的代理/服务器 ID。
+32. type [LFBS]: (0=frontend, 1=backend, 2=server, 3=socket/listener)
+33. rate [.FBS]: 上一个完整秒内的每秒会话数
+34. rate_lim [.F..]: 配置的每秒新会话数上限
+35. rate_max [.FBS]: 每秒新会话数的最大值
+36. check_status [...S]: 上次健康检查状态，可为以下值之一：
+       UNK     -> 未知
+       INI     -> 初始化中
+       SOCKERR -> 套接字错误
+       L4OK    -> 第 4 层检查通过，未启用更高层检查
+       L4TOUT  -> 第 1-4 层超时
+       L4CON   -> 第 1-4 层连接问题，例如
+                  "Connection refused"（tcp rst）或 "No route to host"（icmp）
+       L6OK    -> 第 6 层检查通过
+       L6TOUT  -> 第 6 层（SSL）超时
+       L6RSP   -> 第 6 层响应无效：协议错误
+       L7OK    -> 第 7 层检查通过
+       L7OKC   -> 第 7 层检查有条件通过，例如启用 disable-on-404 时收到 404
+       L7TOUT  -> 第 7 层（HTTP/SMTP）超时
+       L7RSP   -> 第 7 层响应无效：协议错误
+       L7STS   -> 第 7 层响应错误，例如 HTTP 5xx
+    注意：检查正在运行时，报告上次已知状态，并添加 "* " 前缀，例如 "* L7OK"。
+37. check_code [...S]: 第5-7层状态码（若有）
+38. check_duration [...S]: 上次健康检查耗时，单位为 ms
+39. hrsp_1xx [.FBS]: 状态码为 1xx 的 http 响应
+40. hrsp_2xx [.FBS]: 状态码为 2xx 的 http 响应
+41. hrsp_3xx [.FBS]: 状态码为 3xx 的 http 响应
+42. hrsp_4xx [.FBS]: 状态码为 4xx 的 http 响应
+43. hrsp_5xx [.FBS]: 状态码为 5xx 的 http 响应
+44. hrsp_other [.FBS]: 其他状态码的 http 响应（协议错误）
+45. hanafail [...S]: 失败的健康检查详情
+46. req_rate [.F..]: 上一个完整秒内的每秒 HTTP 请求数
+47. req_rate_max [.F..]: 观察到的每秒 HTTP 请求数最大值
+48. req_tot [.FB.]: 收到的 HTTP 请求总数
+49. cli_abrt [..BS]: 客户端中止的数据传输次数
+50. srv_abrt [..BS]: 服务器中止的数据传输次数（也计入 eresp）
+51. comp_in [.FB.]: 送入压缩器的 HTTP 响应字节数
+52. comp_out [.FB.]: 压缩器输出的 HTTP 响应字节数
+53. comp_byp [.FB.]: 绕过 HTTP 压缩器的字节数（CPU/BW 限制）
+54. comp_rsp [.FB.]: 被压缩的 HTTP 响应数量
+55. lastsess [..BS]: 距上次向服务器/后端分配会话经过的秒数
+56. last_chk [...S]: 上次健康检查内容或文本错误
+57. last_agt [...S]: 上次代理检查内容或文本错误
+58. qtime [..BS]: 最近 1024 个请求的平均排队时间，单位为 ms
+59. ctime [..BS]: 最近 1024 个请求的平均连接时间，单位为 ms
+60. rtime [..BS]: 最近 1024 个请求的平均响应时间，单位为 ms（TCP 为 0）
+61. ttime [..BS]: 最近 1024 个请求的平均总会话时间，单位为 ms
+62. agent_status [...S]: 上次代理检查状态，可为以下值之一：
+       UNK     -> 未知
+       INI     -> 初始化中
+       SOCKERR -> 套接字错误
+       L4OK    -> 第 4 层检查通过，未启用更高层检查
+       L4TOUT  -> 第 1-4 层超时
+       L4CON   -> 第 1-4 层连接问题，例如
+                  "Connection refused"（tcp rst）或 "No route to host"（icmp）
+       L7OK    -> 代理报告 "up"
+       L7STS   -> 代理报告 "fail"、"stop" 或 "down"
+63. agent_code [...S]: 代理报告的数值代码（若有，目前未使用）
+64. agent_duration [...S]: 上次检查耗时，单位为 ms
+65. check_desc [...S]: 适合人工阅读的 check_status 简短说明
+66. agent_desc [...S]: 适合人工阅读的 agent_status 简短说明
+67. check_rise [...S]: 检查使用的服务器 "rise" 参数
+68. check_fall [...S]: 检查使用的服务器 "fall" 参数
+69. check_health [...S]: 服务器的健康检查值，介于 0 和 rise+fall-1 之间
+70. agent_rise [...S]: 代理的 "rise" 参数，通常为 1
+71. agent_fall [...S]: 代理的 "fall" 参数，通常为 1
+72. agent_health [...S]: 代理的健康参数，介于 0 和 rise+fall-1 之间
+73. addr [L..S]: address:port（地址:端口），或 "unix"。IPv6 地址用方括号包围。
+74: cookie [..BS]: 服务器的 Cookie 值或后端的 Cookie 名称
+75: mode [LFBS]: 代理模式 (tcp, http, health, unknown)
+76: algo [..B.]: 负载均衡算法
+77: conn_rate [.F..]: 上一个完整秒内的连接数
+78: conn_rate_max [.F..]: 已知的最高 conn_rate
+79: conn_tot [.F..]: 累计连接数
+80: intercepted [.FB.]: 累计拦截的请求数(monitor, stats)
+81: dcon [LF..]: 被 "tcp-request connection" 规则拒绝的请求
+82: dses [LF..]: 被 "tcp-request session" 规则拒绝的请求
+83: wrew [LFBS]: 头重写失败警告的累计次数
+84: connect [..BS]: 累计连接建立尝试次数
+85: reuse [..BS]: 累计连接复用次数
+86: cache_lookups [.FB.]: 累计缓存查找次数
+87: cache_hits [.FB.]: 累计缓存命中次数
+88: srv_icur [...S]: 当前可供复用的空闲连接数
+89: src_ilim [...S]: 可用空闲连接数上限
+90. qtime_max [..BS]: 观察到的最大排队时间，单位为 ms
+91. ctime_max [..BS]: 观察到的最大连接时间，单位为 ms
+92. rtime_max [..BS]: 观察到的最大响应时间，单位为 ms（TCP 为 0）
+93. ttime_max [..BS]: 观察到的最大总会话时间，单位为 ms
+94. eint [LFBS]: 累计内部错误次数
+95. idle_conn_cur [...S]: 当前不安全的空闲连接数
+96. safe_conn_cur [...S]: 当前安全的空闲连接数
+97. used_conn_cur [...S]: 当前使用中的连接数
+98. need_conn_est [...S]: 估算的所需连接数
+99. uweight [..BS]: 用户权重总和（后端），服务器用户权重（服务器）
+100. agg_server_status [..B.]: 后端对服务器状态的聚合瞬时值
+101. agg_server_status_check [..B.]: （已弃用）
+102. agg_check_status [..B.]: 后端对服务器状态检查结果的聚合瞬时值
+103. srid [...S]: 服务器 ID 修订号
+104. sess_other [.F..]: 进程启动以来非 HTTP 会话的总数
+105. h1_sess [.F..]: 进程启动以来 HTTP/1 会话的总数
+106. h2_sess [.F..]: 进程启动以来 HTTP/2 会话的总数
+107. h3_sess [.F..]: 进程启动以来 HTTP/3 会话的总数
+108. req_other [.F..]: 工作进程启动以来此对象处理的非 HTTP 会话总数
+109. h1req [.F..]: 工作进程启动以来此对象处理的 HTTP/1 会话总数
+110. h2req [.F..]: 工作进程启动以来此对象处理的 hTTP/2 会话总数
+111. h3req [.F..]: 工作进程启动以来此对象处理的 HTTP/3 会话总数
+112. proto [L...]: 协议
+113. priv_idle_cur [...S]: 当前私有空闲连接数
+114. reqbin [LFBS]: 工作进程启动以来接收的请求字节总数
+115. reqbout [LFBS]: 工作进程启动以来发送的请求字节总数
+116. resbin [LFBS]: 工作进程启动以来接收的响应字节总数
+117. resbout [LFBS]: 工作进程启动以来发送的响应字节总数
+```
+
+对于所有其他统计信息域，字段的存在与否或顺序均无法保证。此时，应始终使用头行来解析 CSV 数据。
+
+## 9.2. 类型化输出格式 {#section-9-2}
+
+“show info” 和 “show stat” 均支持一种模式，其中每个输出值均附带其类型，以及足够信息以明确该值在进程间应如何聚合，以及其如何演变。
+
+在所有情况下，输出格式为每行仅包含一个值，所有信息均以冒号（':'）分隔的字段形式呈现。
+
+第一列指定被转储的对象或指标。其格式由生成此输出的命令决定，本节不作说明。通常由一系列标识符和字段名组成。
+
+第二列包含四个字符，分别表示所报告值的来源、性质、作用域和持久性状态。第一个字符（来源）表示该值的提取位置。可能的字符如下：
+
+```text
+M   值是指标，在某个时刻有效，并可根据其性质变化。
+
+S   值是状态，表示一个按定义无法聚合的离散值，例如服务器状态（"UP" 或 "DOWN"）、进程 PID 等。
+
+K   值是排序键，表示在其类别中唯一的标识符，可用于将一些值归为一组。
+    所有内部标识符均为键；唯一的名称也可归为键（例如前端名称是唯一的）。
+    键通常来自配置，尽管部分键可能自动分配。大多数用途下，键可视为等同于配置。
+
+C   值来自配置。某些配置值适合出现在输出中，例如并发连接限制或 Cookie 名称。
+    按定义，从同一配置文件启动的所有进程中，这些值均相同。
+
+P   值来自产品本身。此类值很少，通常用于报告产品名称、版本和发布日期。
+    所有进程中的这些值也相同。
+```
+
+第二个字符（即类型）用于表示字段所携带信息的性质，以便聚合器决定对多个值进行聚合时应采用的操作。可能的字符包括：
+
+```text
+A   值表示自上次事件发生以来经过的时间。它与持续时间略有不同，因为它根据当前日期自动计算。
+    典型例子是距服务器上最后一次会话已过去多久。通常取最小值进行聚合，且不需要存储。
+
+a   值表示已求平均的数值，例如平均响应时间和服务器权重。通常可对各进程的平均值再次取平均。
+
+C   值表示累计计数器，持续增长直至回绕。某些监控协议需区分计数器和瞬时值，以报告不同类型。
+    由于计数器表示事件次数或数据量，通常可直接求和，例如连接数或字节数。
+
+D   值表示某种状态的持续时间，例如上次健康检查耗时或服务器离线时长。
+    持续时间通常不求和，大多数情况下保留最大值以计算 SLA。
+
+G   值表示瞬时值，即某一时刻的测量值，例如内存使用量或当前活跃连接数。聚合时通常对此类指标求和。
+
+L   值表示限制（通常由配置指定）。此类值取决于获取它的位置，因此较难聚合。
+    某些情况下可以求和，也可分别保留。
+
+M   值表示最大值，通常应用于瞬时值，保留已知的最高值，例如产品生命周期中遇到的最大并发连接数。
+    要正确聚合最大值，应输出从所有最大值中的最大值到它们总和之间的范围，
+    因为无法知道各个最大值是否同时出现。
+
+m   值表示最小值，通常应用于瞬时值，保留已知的最低值，例如产品生命周期中遇到的最少空闲内存池数量。
+    要正确聚合最小值，应输出从所有最小值中的最小值到它们总和之间的范围，
+    因为无法知道各个最小值是否同时出现。
+
+N   值表示名称，因此是字符串，用于报告代理名称、服务器名称和 Cookie 名称。
+    名称来自配置或键，在所有进程中应相同。
+
+O   值表示自由文本输出，例如各种命令的输出、健康检查的返回值或节点描述。
+
+R   值表示事件速率，是某一时刻的测量值，与瞬时值类似；但接收方知道此值变化较慢，
+    因此可能选择不保存所有值。例如测得的每秒连接数。聚合时通常对此类指标求和。
+
+T   值表示日期或时间，例如输出当前日期的字段。如何聚合此类信息由实现决定。
+    目前没有字段使用此类型。
+```
+
+第三个字符（作用域）表示该值所反映的范围。某些元素可能与进程相关，而其他元素可能与配置或系统相关。明确这一区别至关重要，以判断在聚合过程中是否应保留单一值，还是必须对多个值进行聚合。当前支持的字符如下：
+
+```text
+C   值在整个节点集群内有效，即通过 peers 协议通信的节点集合。
+    例如与其他对等节点复制的粘性表中的条目数量。目前没有指标使用此作用域。
+
+P   值仅对报告它的进程有效。大多数指标使用此作用域。
+
+S   值对整个服务有效，即从同一配置文件一起启动的进程集合。
+    所有来自配置的指标均使用此作用域；某些共享资源的指标也可能使用此作用域，例如共享 SSL 缓存统计。
+
+s   值对整个系统有效，例如系统主机名、当前日期或资源使用量。目前没有指标使用此作用域。
+```
+
+第四个字符（持久性状态）表示该值（指标）在重载后是否保持持久。后续字符的含义如下：
+
+```text
+V   指标是易失的，因为它仅存在于当前进程中，重载时其值会丢失。
+
+P   指标是持久的，因为它可与其他共同运行的进程共享，重载后其值仍保留。
+```
+
+消费这些信息的用户通常只需具备这 4 个字符即可准确报告跨多个进程的聚合信息。
+
+在该列之后，第三列指示字段类型，包括 "s32"（有符号 32 位整数）、"s64"（有符号 64 位整数）、"u32"（无符号 32 位整数）、"u64"（无符号 64 位整数）和 "str"（字符串）。在解析值之前，必须了解其类型，以确保正确读取。例如，仅包含数字的字符串仍然是字符串，而非整数（如通过检查获取的错误码）。
+
+第四列是值本身，其编码方式根据类型而定。字符串在冒号后直接输出，不加任何前导空格。若字符串中包含冒号，将正常显示。这意味着输出不应仅通过冒号进行分割，否则某些检查输出或服务器地址可能被截断。
+
+## 9.3. Unix 套接字命令 {#section-9-3}
+
+统计信息套接字默认未启用。如需启用，必须在 HAProxy 配置的 global 段中添加一行配置。建议添加第二行以设置更大的超时值，手动执行命令时此设置始终有益：
+
+```text
+global
+    stats socket /var/run/haproxy.sock mode 600 level admin
+    stats timeout 2m
+```
+
+也可以通过重复该行来添加多个统计信息套接字实例，并使其监听 TCP 端口而非 Unix 套接字。默认情况下从不这样做，因为存在安全隐患，但在某些情况下可能较为方便：
+
+```text
+global
+    stats socket /var/run/haproxy.sock mode 600 level admin
+    stats socket ipv4@192.168.0.1:9999 level admin
+    stats timeout 2m
+```
+
+要访问套接字，需要使用外部工具，例如“socat”。Socat 是一款功能强大的工具，可用于连接任意两个端点。我们使用它将终端连接到套接字，或将其与若干 stdin/stdout 管道连接，以供脚本使用。我们将主要使用以下两种语法：
+
+```shell
+# socat /var/run/haproxy.sock stdio
+# socat /var/run/haproxy.sock readline
+```
+
+第一个用于脚本。可以将脚本的输出发送给 HAProxy，并将 HAProxy 的输出传递给另一个脚本。例如，这在获取计数器或攻击追踪信息时非常有用。
+
+第二个仅适用于手动执行命令。其优势在于终端由 readline 库处理，支持行编辑和历史记录，当重复执行命令时（例如：监视计数器）非常方便。
+
+套接字支持三种操作模式：
+
+- 非交互式，静默模式
+- 交互式，静默模式
+- 交互式，带提示
+
+非交互模式是 socat 与套接字连接时的默认模式。在此模式下，可发送单行内容。该行将作为整体被处理，响应会返回，并在响应结束时关闭连接。此模式通常由脚本和监控工具使用。在此模式下也可以发送多个命令，但需以分号（`;`）分隔。例如：
+
+```shell
+# echo "show info;show stat;show table" | socat /var/run/haproxy stdio
+```
+
+如果命令需要使用分号或反斜杠（例如在值中），则必须用反斜杠（'&#92;'）进行转义。
+
+交互模式允许在前一行命令执行完毕后发送新命令。
+该模式存在两种变体：一种为静默模式，其行为与非交互模式类似，但套接字会等待新命令而非关闭；另一种在行首显示提示符（`\>`）。
+对于高级工具，推荐使用交互模式；对于人类用户，推荐使用带提示符的模式。
+
+可以使用 "prompt" 命令更改模式。默认情况下，该命令在交互模式与提示模式之间切换。在交互模式下输入 "prompt" 将切换至提示模式。该命令可选择性地指定以下特定模式之一：
+
+- "n"：非交互模式（执行单个命令后退出）
+- "i"：交互模式（执行多个命令，无提示符）
+- "p"：提示符模式（执行多个命令，带有提示符）
+
+由于默认模式为非交互式，必须首先使用“prompt”命令切换模式，否则前一条命令将导致连接关闭。切换至非交互式模式后，同一行的所有命令执行完毕，连接将被关闭。
+
+因此，在手动调试时，通常会从执行“prompt”命令开始：
+
+```haproxy
+# socat /var/run/haproxy readline
+prompt
+```
+
+> show info ...
+
+交互式工具可能更倾向于使用“prompt i”来切换至交互模式，而无需显示提示符。
+
+可选地，提示符中可显示进程的运行时间。为启用此功能，使用命令 `prompt timed` 可启用提示符并切换时间显示状态。运行时间以格式 "d:hh:mm:ss" 显示，其中 "d" 表示天数，"hh"、"mm"、"ss" 分别表示以两位数字表示的小时、分钟和秒：
+
+```haproxy
+# socat /var/run/haproxy readline
+prompt timed
+```
+
+[23:03:34:39]> show version 2.8-dev9-e5e622-18
+
+[23:03:34:41]> quit
+
+当在主 CLI 上设置定时提示时，提示符将显示当前选定进程的运行时间，因此该功能适用于主进程、当前工作进程或较早的工作进程：
+
+```shell
+master> prompt timed
+[0:00:00:50] master> show proc
+(...)
+[0:00:00:58] master> @!11955     <-- 主进程，切换到当前工作进程
+[0:00:01:03] 11955> @!11942      <-- 当前工作进程，切换到旧工作进程
+[0:00:02:17] 11942> @            <-- 旧工作进程，切回主进程
+[0:00:01:10] master>
+```
+
+由于可同时发出多个命令，HAProxy 使用空行作为分隔符，以标记每个命令输出的结束，并确保没有任何命令会在输出中产生空行。因此，脚本可以轻松解析输出，即使多个命令在单行中通过管道传递。
+
+部分命令可接受可选负载。若需为命令添加负载，首行必须以 "\<\<&#92;n" 模式结尾。后续行将被视为负载内容，可包含任意行数。验证带负载的命令时，需以空行结尾。
+
+负载内容的结束模式可自定义，以改变负载的结束方式。若需以非空行的方式结束负载，可在 `<<` 与 `&#92;n` 之间设置自定义模式。除 `<<` 外，最多可使用 64 个字符，否则将不被视为有效负载。使用随机负载模式通常已足够。例如，使用包含空行和注释的 PEM 文件时：
+
+```haproxy
+# echo -e "set ssl cert common.pem <<%EOF%\n$(cat common.pem)\n%EOF%\n" | \
+socat /var/run/haproxy.stat -
+```
+
+存在限制：模式 "\<\<" 不能紧接在行末最后一个单词之后。命令行长度不得超过 tune.bufsize，包括启动负载的模式，但不包含负载本身。负载大小默认限制为 128KB。可通过设置 "tune.cli.max-payload-size" 全局参数进行修改，但需注意相关注意事项。请注意，标记负载结束的模式也包含在此限制范围内。
+
+在交互模式下输入负载时，提示符将从“> ”变为“+ ”。
+
+当多个 HAProxy 进程在相同套接字上启动时，任意一个进程都可能接收请求，并输出其自身的统计信息。
+
+当前支持的统计套接字命令列表如下。若发送了未知命令，HAProxy 将显示使用说明，提醒所有支持的命令。部分命令支持更复杂的语法，通常在出现错误时会说明命令中哪一部分无效。
+
+部分命令需要更高权限才能执行。若权限不足，将收到错误提示“权限被拒绝”。请参阅配置手册中“bind”关键字行的“level”选项以获取更多信息。
+
+<a id="entry-9-3-abort-ssl-ca-file"></a>
+
+**`abort ssl ca-file <cafile>`**
+
+```haproxy
+abort ssl ca-file <cafile>
+```
+
+中止并销毁临时 CA 文件更新事务。
+
+另请参见“set ssl ca-file”和“commit ssl ca-file”。
+
+<a id="entry-9-3-abort-ssl-cert"></a>
+
+**`abort ssl cert <filename>`**
+
+```haproxy
+abort ssl cert <filename>
+```
+
+中止并销毁临时 SSL 证书更新事务。
+
+另请参见“set ssl cert”和“commit ssl cert”。
+
+<a id="entry-9-3-abort-ssl-crl-file"></a>
+
+**`abort ssl crl-file <crlfile>`**
+
+```haproxy
+abort ssl crl-file <crlfile>
+```
+
+中止并销毁临时 CRL 文件更新事务。
+
+另请参见“set ssl crl-file”和“commit ssl crl-file”。
+
+<a id="entry-9-3-acme-renew"></a>
+
+**`acme renew <certificate>`**
+
+```haproxy
+acme renew <certificate>
+```
+
+启动一个使用指定证书名称的 ACME 证书生成任务。该证书必须关联至一个 acme 段，参见配置手册第 [12.8](/zh/haproxy/other-sections/#section-12-8) 段“ACME”。另请参阅“acme status”。
+
+<a id="entry-9-3-acme-status"></a>
+
+**`acme status`**
+
+```haproxy
+acme status
+```
+
+显示所有使用 ACME 配置的证书的状态。
+
+该命令以制表符分隔输出：
+
+- HAProxy 中配置的证书名称
+- 配置中使用的 acme 段
+- acme 任务的状态，取值为 "Running"、"Scheduled" 或 "Stopped"
+- 证书的 UTC 过期日期，格式为 ISO8601
+- 相对过期时间（已过期则为 0d）
+- 证书的 UTC 预定日期，格式为 ISO8601
+- 相对预定时间（若处于 Running 状态则为 0d）
+
+示例：
+
+```shell
+$ echo "@1; acme status" | socat /tmp/master.sock - | column -t -s $'\t'
+# certificate   section  state      expiration date (UTC)  expires in        scheduled date (UTC)  scheduled in
+ecdsa.pem       LE       Running    2020-01-18T09:31:12Z   0d 0h00m00s       2020-01-15T21:31:12Z  0d 0h00m00s
+foobar.pem.rsa  LE       Scheduled  2025-08-04T11:50:54Z   89d 23h01m13s     2025-07-27T23:50:55Z  82d 11h01m14s
+```
+
+<a id="entry-9-3-add-acl"></a>
+
+**`add acl [@<ver>] <acl> <pattern>`**
+
+```haproxy
+add acl [@<ver>] <acl> <pattern>
+```
+
+向 ACL `<acl>` 中添加一项。`<acl>` 为 \#`<id>` 或由 "show acl" 返回的 `<name>`。
+该命令不会验证该项是否已存在。除非使用 "@`<ver>`" 指定特定版本，否则条目将添加至当前 ACL 版本。该版本号必须事先通过 "prepare acl" 分配，且其值须位于 "show acl" 输出中报告的 "curr_ver" 与 "next_ver" 之间。使用特定版本号添加的条目，需在执行 "commit acl" 操作后方可生效匹配。但可使用 "show acl @`<ver>`" 命令查阅，或通过 "clear acl @`<ver>`" 命令清除。
+若参考 `<acl>` 为与映射（map）同名的名称，则禁止使用此命令。此时应改用 "add map" 命令。
+
+<a id="entry-9-3-add-backend"></a>
+
+**`add backend <name> from <defproxy> [mode <mode>] [guid <guid>]`**
+
+```haproxy
+add backend <name> from <defproxy> [mode <mode>] [guid <guid>]
+```
+
+使用名称 `<name>` 实例化一个新的后端代理。
+
+仅可创建 TCP 或 HTTP 代理。所有设置均继承自 `<defproxy>` 默认代理实例。默认情况下，除非 `<defproxy>` 显式定义了后端模式，否则必须通过同名参数指定后端模式。如需，也可选择性地使用 GUID 参数。
+
+可通过命令 `add server` 添加服务器。后端将以未发布状态初始化。确认已就绪可接收流量后，请使用 `publish backend` 命令发布新创建的实例。
+
+所有命名的默认代理均可使用，前提是它们符合配置解析过程中应用的相同继承规则。不过存在一些例外情况，例如当模式既非 TCP 也非 HTTP 时。
+
+此命令受限制，仅可在配置为“admin”级别的套接字上执行。
+
+<a id="entry-9-3-add-map"></a>
+
+**`add map [@<ver>] <map> <key> <value>`**
+
+```haproxy
+add map [@<ver>] <map> <key> <value>
+add map [@<ver>] <map> <payload>
+```
+
+向映射 `<map>` 中添加一项，将值 `<value>` 关联至键 `<key>`。该命令不会验证该项是否已存在。主要用于在执行“clear”或“prepare”操作后填充映射。除非使用 "@`<ver>`" 指定特定版本，否则条目将添加至当前 ACL 版本。该版本号必须事先通过“prepare acl”分配，并且其数值范围应位于“show acl”输出中报告的 "curr_ver" 与 "next_ver" 之间。使用特定版本号添加的条目，需在执行“commit map”操作后方可匹配。但可通过“show map @`<ver>`”命令查阅，或通过“clear acl @`<ver>`”命令清除。若指定的映射同时用作 ACL，则 ACL 仅匹配 `<key>` 部分，忽略 `<value>` 部分。使用载荷语法时，可通过在不同行中输入多个键/值对来添加多组键值对。每行中首个词为键，其余部分视为值，值中可包含空格。
+
+示例：
+
+```shell
+# socat /tmp/sock1 -
+prompt
+
+> add map #-1 <<
++ key1 value1
++ key2 value2 with spaces
++ key3 value3 also with spaces
++ key4 value4
+
+>
+```
+
+<a id="entry-9-3-add-server"></a>
+
+**`add server <backend>/<server> [args]*`**
+
+```haproxy
+add server <backend>/<server> [args]*
+```
+
+为后端 `<backend>` 创建一个新的服务器。
+
+`<server>` 名称在后端中不得已存在。后端必须使用动态负载均衡算法，对此有特殊限制。可从服务器配置文件语句中选取部分关键字来配置服务器行为（参见“add server help”以获取可用关键字列表）。请注意，同一后端中若存在假设的 'default-server' 语句，其设置将不会被复用。
+
+当前，动态服务器使用“none” init-addr 方法进行静态初始化。这意味着，即使服务器创建将被验证，若指定的地址为完全限定域名（FQDN），也不会执行解析。
+
+为支持重载操作，通过 CLI 创建的服务器也应手动插入相应的 HAProxy 配置文件中。未在配置文件中出现的动态服务器在重载操作后将无法恢复。
+
+动态服务器可使用“track”关键字来跟踪配置中另一台服务器的检查状态。然而，无法跟踪另一台动态服务器。此举旨在确保即使在删除动态服务器的情况下，跟踪链仍保持一致。
+
+使用 "check" 关键字启用健康检查支持。请注意，健康检查默认处于禁用状态，必须通过 "enable health" 命令独立启用服务器的健康检查功能。对于代理检查，使用 "agent-check" 关键字和 "enable agent" 命令。请注意，在此情况下，服务器可能根据代理报告的状态自动激活，无需显式执行 "enable server" 命令。这也意味着在移除具有代理检查的动态服务器时需格外谨慎。应首先通过 "disable agent" 命令停用代理，再将服务器置于所需的维护模式，方可执行移除操作。
+
+在使用大量动态服务器时，可能会达到文件描述符限制。在这种情况下，请参考 "u-limit" 全局关键字的文档。
+
+<a id="entry-9-3-add-server-help"></a>
+
+**`add server help`**
+
+```haproxy
+add server help
+```
+
+列出当前 HAProxy 版本支持的动态服务器关键字。关键字语法与配置文件中的服务器行类似，请参阅各自文档以获取详细信息。
+
+<a id="entry-9-3-add-ssl-ca-file"></a>
+
+**`add ssl ca-file <cafile> <payload>`**
+
+```haproxy
+add ssl ca-file <cafile> <payload>
+```
+
+向 ca-file 添加新证书。当 CLI 的缓冲区大小达到上限且需要添加多个证书时，此命令非常有用。无需通过“set”命令一次性设置所有证书，可逐个添加证书。执行“set ssl ca-file”将重置 ca-file。
+
+示例：
+
+```text
+echo -e "set ssl ca-file cafile.pem <<\n$(cat rootCA.crt)\n" | \
+socat /var/run/haproxy.stat -
+echo -e "add ssl ca-file cafile.pem <<\n$(cat intermediate1.crt)\n" | \
+socat /var/run/haproxy.stat -
+echo -e "add ssl ca-file cafile.pem <<\n$(cat intermediate2.crt)\n" | \
+socat /var/run/haproxy.stat -
+echo "commit ssl ca-file cafile.pem" | socat /var/run/haproxy.stat -
+```
+
+<a id="entry-9-3-add-ssl-crt-list"></a>
+
+**`add ssl crt-list <crtlist> <certificate>`**
+
+```haproxy
+add ssl crt-list <crtlist> <certificate>
+add ssl crt-list <crtlist> <payload>
+```
+
+在 crt-list 中添加证书。该命令也可用于目录，因为目录现在与 crt-list 的加载方式相同。该命令允许在参数中使用证书名称；若需使用 SSL 选项或过滤器，则必须改为以负载形式发送一条 crt-list 行。负载中仅支持一条 crt-list 行。该命令将为所有使用 crt-list 的 bind 行加载证书。若要向 HAProxy 推送新证书，必须使用命令 "new ssl cert" 和 "set ssl cert"。
+
+示例：
+
+```shell
+$ echo "new ssl cert foobar.pem" | socat /tmp/sock1 -
+$ echo -e "set ssl cert foobar.pem <<\n$(cat foobar.pem)\n" | socat
+/tmp/sock1 -
+$ echo "commit ssl cert foobar.pem" | socat /tmp/sock1 -
+$ echo "add ssl crt-list certlist1 foobar.pem" | socat /tmp/sock1 -
+
+$ echo -e 'add ssl crt-list certlist1 <<\nfoobar.pem [allow-0rtt] foo.bar.com
+!test1.com\n' | socat /tmp/sock1 -
+```
+
+<a id="entry-9-3-add-ssl-ech"></a>
+
+**`add ssl ech <bind> <payload>`**
+
+```haproxy
+add ssl ech <bind> <payload>
+```
+
+向 `<bind>` 行添加 ECH 密钥。有效载荷必须采用 ECH 格式的 PEM 格式。
+(<https://datatracker.ietf.org/doc/html/draft-farrell-tls-pemesni>)
+
+绑定行格式为 `<frontend>`/@`<filename>`:`<linenum>`（例如：frontend1/@HAProxy.conf:19），或 `<frontend>`/`<name>`（若绑定行使用了 "name" 关键字命名）。
+
+必须使用支持 ECH 的 OpenSSL 版本，且 HAProxy 必须以 USE_ECH=1 编译。
+该命令仅在以实验模式运行的 CLI 连接中受支持（参见“experimental-mode on”）。
+
+另请参见配置手册 [第 5.1 节](/zh/haproxy/bind-and-server-options/#section-5-1) 中的 "show ssl ech" 和 "ech"。
+
+示例：
+
+```shell
+$ openssl ech -public_name foobar.com -out foobar3.com.ech
+$ echo -e "experimental-mode on; add ssl ech frontend1/@haproxy.conf:19 <<%EOF%\n$(cat foobar3.com.ech)\n%EOF%\n" | \
+  socat /tmp/haproxy.sock -
+added a new ECH config to frontend1
+```
+
+<a id="entry-9-3-add-ssl-jwt"></a>
+
+**`add ssl jwt <filename>`**
+
+```haproxy
+add ssl jwt <filename>
+```
+
+将已加载的证书添加到可用于 JWT 验证的证书列表中（参见 "jwt_verify_cert" 转换器）。该命令在正在进行的事务中无效。另请参见“del ssl jwt”和“show ssl jwt”命令。有关更多信息，请参见“jwt”证书选项。
+
+<a id="entry-9-3-clear-counters"></a>
+
+**`clear counters`**
+
+```haproxy
+clear counters
+```
+
+清除每个代理（前端和后端）及每个服务器的统计信息计数器的最大值。累积计数器不受影响。"show activity" 命令报告的内部活动计数器也会被重置。此命令可用于在事件发生后获取干净的计数器，而无需重启或清除流量计数器。该命令受限制，仅可在配置为“operator”或“admin”级别的套接字上执行。
+
+<a id="entry-9-3-clear-counters-all"></a>
+
+**`clear counters all`**
+
+```haproxy
+clear counters all
+```
+
+清除每个代理（前端与后端）及每个服务器的统计信息计数器。此操作效果等同于重启。该命令受限制，仅可在配置为“admin”级别的套接字上执行。
+
+<a id="entry-9-3-clear-acl"></a>
+
+**`clear acl [@<ver>] <acl>`**
+
+```haproxy
+clear acl [@<ver>] <acl>
+```
+
+从 acl `<acl>` 中移除所有条目。`<acl>` 为 "show acl" 返回的 \#`<id>` 或 `<name>`。请注意，若引用 `<acl>` 为名称且与映射共享，则该映射也将被清空。默认情况下仅清除当前版本的 ACL（即正在匹配的版本）。但也可通过在版本号前加 '@' 来指定清除其他版本。
+
+<a id="entry-9-3-clear-map"></a>
+
+**`clear map [@<ver>] <map>`**
+
+```haproxy
+clear map [@<ver>] <map>
+```
+
+清除映射 `<map>` 中的所有条目。`<map>` 为 "show map" 返回的 \#`<id>` 或 `<name>`。请注意，如果引用 `<map>` 为名称且与某个 acl 共享，则该 acl 也将被清除。默认情况下仅清除当前版本的映射（即正在匹配的版本）。但可以使用 '@' 加上指定版本的方式，清除其他版本。
+
+<a id="entry-9-3-clear-table"></a>
+
+**`clear table <table> [ data.<type> <operator> <value> ] | [ key <key> ] |`**
+
+```haproxy
+clear table <table> [ data.<type> <operator> <value> ] | [ key <key> ] |
+                    [ ptr <ptr> ]
+```
+
+从粘性表 `<table>` 中移除条目。
+
+这通常用于解除某些用户因被不当拒绝访问服务而产生的问题，也可用于清除将要被替换的服务器所匹配的会话粘性条目（详见下文“show table”部分）。请注意，有时删除条目会被拒绝，因为该条目当前正被某个会话跟踪。会话结束后等待几秒再重试是常见做法。
+
+若未提供任何选项参数，将删除所有条目。
+
+当使用 "data." 形式时，将移除与通过存储数据应用的过滤器匹配的条目（参见第 4.2 段中的 "stick-table"）。必须在 `<type>` 中指定存储数据类型，且该数据类型必须已存储在表中，否则将报告错误。数据将根据 `<operator>` 与 64 位整数 `<value>` 进行比较。操作符与 ACL 中的相同：
+
+    - eq：匹配数据等于此值的条目
+    - ne：匹配数据不等于此值的条目
+    - le：匹配数据小于或等于此值的条目
+    - ge：匹配数据大于或等于此值的条目
+    - lt：匹配数据小于此值的条目
+    - gt：匹配数据大于此值的条目
+
+使用键形式时，条目 `<key>` 将被移除。键的类型必须与表类型相同，当前仅限于 IPv4、IPv6、整数和字符串。
+
+使用 ptr 形式时，条目 `<ptr>` 将被移除。`<ptr>` 以 0xffff 格式写入，必须与之前执行“show table”命令返回的地址对应。当因键为空或 CLI 上存在不兼容字符而无法通过键匹配条目时，使用指针匹配条目可能具有实际意义。
+
+如果 data.`<type>` 为数组类型，可以使用 "[]" 访问数组中的特定索引，例如：data.gpt[1]
+
+示例：
+
+```shell
+    $ echo "show table http_proxy" | socat stdio /tmp/sock1
+>>> # table: http_proxy, type: ip, size:204800, used:2
+>>> 0x80e6a4c: key=127.0.0.1 use=0 exp=3594729 gpc0=0 conn_rate(30000)=1 \
+      bytes_out_rate(60000)=187
+>>> 0x80e6a80: key=127.0.0.2 use=0 exp=3594740 gpc0=1 conn_rate(30000)=10 \
+      bytes_out_rate(60000)=191
+>>> 0x80e6b40: key=127.0.0.3 use=0 exp=3594743 gpc0=2 conn_rate(30000)=10 \
+      bytes_out_rate(60000)=200
+
+    $ echo "clear table http_proxy key 127.0.0.1" | socat stdio /tmp/sock1
+
+    $ echo "show table http_proxy" | socat stdio /tmp/sock1
+>>> # table: http_proxy, type: ip, size:204800, used:1
+>>> 0x80e6a80: key=127.0.0.2 use=0 exp=3594740 gpc0=1 conn_rate(30000)=10 \
+>>> 0x80e6b40: key=127.0.0.3 use=0 exp=3594743 gpc0=2 conn_rate(30000)=10 \
+      bytes_out_rate(60000)=200
+      bytes_out_rate(60000)=191
+    $ echo "clear table http_proxy data.gpc0 eq 1" | socat stdio /tmp/sock1
+    $ echo "show table http_proxy" | socat stdio /tmp/sock1
+>>> # table: http_proxy, type: ip, size:204800, used:1
+>>> 0x80e6b40: key=127.0.0.3 use=0 exp=3594743 gpc0=2 conn_rate(30000)=10 \
+      bytes_out_rate(60000)=200
+
+    $ echo "clear table http_proxy ptr 0x80e6b40" | socat stdio /tmp/sock1
+    $ echo "show table http_proxy" | socat stdio /tmp/sock1
+>>> # table: http_proxy, type: ip, size:204800, used:0
+```
+
+<a id="entry-9-3-commit-acl"></a>
+
+**`commit acl @<ver> <acl>`**
+
+```haproxy
+commit acl @<ver> <acl>
+```
+
+提交对 ACL `<acl>` 版本 `<ver>` 所做的全部更改，并删除所有历史版本。`<acl>` 为“show acl”返回的 \#`<id>` 或 `<name>`。版本号必须介于 “show acl” 报告的 "curr_ver"+1 与 "next_ver" 之间。如需查看将提交至 ACL 的内容，可使用 “show acl @`<ver>` `<acl>`” 查询。指定的版本号通常由 “prepare acl” 命令创建。该替换操作为原子操作，其过程为将当前版本原子性地更新为指定版本，这将立即使其他版本中的所有条目不可见，同时使新版本中的所有条目变为可见。也可通过先执行 “prepare acl”，再不添加任何条目即进行提交的方式，使用本命令实现对 ACL 中所有可见条目的原子性删除。若引用 `<acl>` 为同时用作映射的名称，则不得使用本命令，此时应改用 “commit map” 命令。
+
+<a id="entry-9-3-commit-map"></a>
+
+**`commit map @<ver> <map>`**
+
+```haproxy
+commit map @<ver> <map>
+```
+
+提交对映射 `<map>` 版本 `<ver>` 所做的全部更改，并删除所有历史版本。`<map>` 为 "show map" 返回的 \#`<id>` 或 `<name>`。版本号必须介于 "curr_ver" + 1 与 "next_ver" 之间，该范围由 "show map" 命令报告。如需查看将提交至映射的内容，可使用 "show map @`<ver>` `<map>`" 命令查询。指定的版本号通常通过 "prepare map" 命令创建。该替换操作为原子操作，其过程为将当前版本原子性地更新为指定版本，这将立即使其他版本中的所有条目不可见，同时使新版本中的所有条目变为可见。也可通过先执行 "prepare map"，再不添加任何条目即执行提交，来实现对映射中所有可见条目的原子性删除。
+
+<a id="entry-9-3-commit-ssl-ca-file"></a>
+
+**`commit ssl ca-file <cafile>`**
+
+```haproxy
+commit ssl ca-file <cafile>
+```
+
+提交临时 SSL CA 文件更新事务。
+
+若存在已有的 CA 文件（在“show ssl ca-file”中显示为“Used”状态），则将新的 CA 文件树条目插入 CA 文件树中，并重建所有使用该 CA 文件条目的实例及其所需的 SSL 上下文。所有先前由已重建实例使用的上下文将被移除。成功后，从树中移除原有的 CA 文件条目。失败时，不进行任何删除或移除操作，所有原始 SSL 上下文均保留并继续使用。临时事务提交后，即被销毁。
+
+在新 CA 文件（经“new ssl ca-file”操作后，且处于“show ssl ca-file”中“未使用”状态）的情况下，该 CA 文件将被插入 CA 文件树中，但 HAProxy 不会在任何地方使用它。如需使用该文件并生成使用它的 SSL 上下文，需通过“add ssl crt-list”将其添加至证书列表中。
+
+另请参阅 "new ssl ca-file"、"set ssl ca-file"、"add ssl ca-file"、"abort ssl ca-file" 和 "add ssl crt-list"。
+
+<a id="entry-9-3-commit-ssl-cert"></a>
+
+**`commit ssl cert <filename>`**
+
+```haproxy
+commit ssl cert <filename>
+```
+
+提交临时 SSL 证书更新事务。
+
+若存在现有证书（在 "show ssl cert" 中显示为 "Used" 状态），则生成其所需的全部 SSL 上下文和 SNIs，插入新证书，并移除旧证书。在配置中所有使用 `<filename>` 的位置，将其在内存中替换为新证书。若操作失败，则不执行任何删除或插入操作。临时事务提交后，立即销毁。
+
+在新证书（经“new ssl cert”操作后，且在“show ssl cert”中处于“Unused”状态）的情况下，该证书将被提交至证书存储，但 HAProxy 中不会在任何地方使用它。若要使用该证书并生成其 SNI，需将其添加至 crt-list 或通过“add ssl crt-list”添加至目录。
+
+另请参阅 “new ssl cert”、“set ssl cert”、“abort ssl cert” 和 “add ssl crt-list”。
+
+<a id="entry-9-3-commit-ssl-crl-file"></a>
+
+**`commit ssl crl-file <crlfile>`**
+
+```haproxy
+commit ssl crl-file <crlfile>
+```
+
+提交临时 SSL CRL 文件更新事务。
+
+在存在现有 CRL 文件（在“show ssl crl-file”中显示为“Used”状态）的情况下，新的 CRL 文件条目将被插入 CA 文件树中（该树同时存储 CA 文件和 CRL 文件），所有使用该 CRL 文件条目的实例都将被重建，以及其所需的 SSL 上下文也将被重建。所有先前由重建后的实例使用的上下文将被移除。成功后，先前的 CRL 文件条目将从树中移除。失败时，不会移除或删除任何内容，所有原始 SSL 上下文将被保留并继续使用。临时事务提交后，将被销毁。
+
+在新 CRL 文件（经“new ssl crl-file”创建且处于“show ssl crl-file”中“未使用”状态）的情况下，该 CRL 文件将被插入 CRL 文件树中，但 HAProxy 任何地方都不会使用它。要使用该文件并生成使用它的 SSL 上下文，需通过“add ssl crt-list”将其添加至 crt-list。
+
+另请参见 "new ssl crl-file"、"set ssl crl-file"、"abort ssl crl-file" 和 "add ssl crt-list"。
+
+<a id="entry-9-3-debug-counters"></a>
+
+**`debug counters [reset|show|on|off|all|bug|chk|cnt|glt|?]*`**
+
+```haproxy
+debug counters [reset|show|on|off|all|bug|chk|cnt|glt|?]*
+```
+
+列出代码中内置的计数器，其具体数量可能因构建选项而异。部分计数器依赖于 DEBUG_STRICT，另一些则依赖于 DEBUG_COUNTERS。该命令接受多个参数的组合，其中部分参数定义动作，另一些定义过滤器：- bug 用于列出 BUG_ON() 语句的计数器 - cnt 用于列出 COUNT_IF() 语句的计数器 - chk 用于列出 CHECK_IF() 语句的计数器 - glt 用于列出 COUNT_GLITCH() 语句的计数器 - all 用于显示从未触发过的计数器（值为 0） - off 动作：禁用 COUNT_IF() 计数器的更新 - on 动作：启用 COUNT_IF() 计数器的更新 - reset 动作：重置所有指定的计数器 - show 动作：显示所有指定的计数器
+
+默认情况下，动作为“show”，用于显示计数器，列出的计数器均为非零值的类型。当未指定其他动作时，“show”命令为隐式执行，仅用于便于从脚本中生成命令。
+
+输出以一个整数计数器开头，后接大写的计数器类型，接着是其在代码中的位置（文件：行号）、函数名称，以及可选的“: ”和描述。请注意，输出格式可能在主版本之间发生变化，且为提升调试能力，新类型和条目可能会被回溯应用到稳定版本中。对这些计数器的任何监控都应以非常宽松和包容的方式进行，且最好避免监控。
+
+通常情况下，终端用户不会使用此命令，但开发者在排查问题、查找 CNT 或 GLT 条目时，可能会邀请用户执行该命令。需要注意的是，非零的“CHK”条目不应出现，若发现此类情况，应报告给开发者，因为这可能表明代码中存在错误的假设。
+
+<a id="entry-9-3-debug-dev"></a>
+
+**`debug dev <command> [args]*`**
+
+```haproxy
+debug dev <command> [args]*
+```
+
+调用开发者专用命令。仅在以专家模式运行的 CLI 连接中受支持（参见“expert-mode on”）。此类命令极为危险且不容出错，误用可能导致进程崩溃。它们仅限专家使用，除非明确指示，否则务必不可使用。部分命令仅在编译 HAProxy 时定义了 DEBUG_DEV 时才可用，因其可能带来安全风险。所有这些命令均需管理员权限，且故意未被文档化，以避免促使不熟悉源代码的人员使用。
+
+<a id="entry-9-3-del-acl"></a>
+
+**`del acl <acl> [<key>|#<ref>]`**
+
+```haproxy
+del acl <acl> [<key>|#<ref>]
+```
+
+从 ACL `<acl>` 中删除与键 `<key>` 对应的所有条目。`<acl>` 为 "show acl" 返回的 #`<id>` 或 `<name>`。若使用 `<ref>`，则仅删除列出的引用。引用可通过列出 ACL 内容获取。请注意，若引用 `<acl>` 为名称且与映射共享，则该条目在映射中也将被删除。
+
+<a id="entry-9-3-del-backend"></a>
+
+**`del backend <name>`**
+
+```haproxy
+del backend <name>
+```
+
+删除名为 `<name>` 的后端代理。
+
+此操作仅适用于 TCP 或 HTTP 代理。要成功执行，后端实例必须已先取消发布。此外，其所有服务器必须先移除（通过 CLI 命令 "del server"）。最后，后端实例上不得仍存在任何关联的流。
+
+存在额外限制，阻止后端的移除。首先，若后端被配置元素显式引用，则无法移除，例如通过 use_backend 规则或在样本表达式中引用。部分代理选项与运行时删除不兼容。目前，当使用已弃用的 dispatch 或 option transparent 时即属此类情况。此外，若后端中声明了 stick-table，则无法移除该后端。最后，若后端中曾存在 QUIC 服务器，则目前无法移除该后端。
+
+在执行此命令前，使用“wait be-removable”检查上述要求可能很有用。这还提供了一种等待与目标后端关联的流最终关闭的方法。
+
+此命令受限制，仅可在配置为“admin”级别的套接字上执行。
+
+<a id="entry-9-3-del-map"></a>
+
+**`del map <map> [<key>|#<ref>]`**
+
+```haproxy
+del map <map> [<key>|#<ref>]
+```
+
+从映射 `<map>` 中删除对应键 `<key>` 的所有条目。`<map>` 为“show map”命令返回的 \#`<id>` 或 `<name>`。若使用 `<ref>`，则仅删除列出的引用。引用可通过列出映射内容来查找。请注意，若引用 `<map>` 为名称且与某个 acl 共享，则该条目在映射中也将被删除。
+
+<a id="entry-9-3-del-ssl-ca-file"></a>
+
+**`del ssl ca-file <cafile>`**
+
+```haproxy
+del ssl ca-file <cafile>
+```
+
+从 HAProxy 中删除 CA 文件树条目。CA 文件必须未被使用，并且已从任何 crt-list 中移除。
+
+使用 "show ssl ca-file" 可查看 CA 文件的状态。若证书通过配置中的 "ca-file" 或 "ca-verify-file" 指令直接引用，则无法执行删除操作。
+
+<a id="entry-9-3-del-ssl-cert"></a>
+
+**`del ssl cert <certfile>`**
+
+```haproxy
+del ssl cert <certfile>
+```
+
+从 HAProxy 中删除证书存储。证书必须未被使用（例如用于 JWT 验证），且已从任意 crt-list 或目录中移除。“show ssl cert” 命令可显示证书状态。若证书通过配置中的 “crt” 指令直接引用，则无法执行删除操作。
+
+<a id="entry-9-3-del-ssl-crl-file"></a>
+
+**`del ssl crl-file <crlfile>`**
+
+```haproxy
+del ssl crl-file <crlfile>
+```
+
+从 HAProxy 中删除 CRL 文件树条目。CRL 文件必须未被使用，并且已从任何 crt-list 中移除。“show ssl crl-file” 命令显示 CRL 文件的状态。若证书通过配置中的 “crl-file” 指令直接引用，则无法执行删除操作。
+
+<a id="entry-9-3-del-ssl-crt-list"></a>
+
+**`del ssl crt-list <filename> <certfile[:line]>`**
+
+```haproxy
+del ssl crt-list <filename> <certfile[:line]>
+```
+
+从 crt-list 中删除条目。此操作将删除该条目在前端中使用的所有 SNI。若证书在 crt-list 中多次使用，需指定要删除的行号。如需显示行号，请使用命令 "show ssl crt-list -n `<crtlist>`"。
+
+<a id="entry-9-3-del-ssl-ech"></a>
+
+**`del ssl ech <bind>`**
+
+```haproxy
+del ssl ech <bind>
+```
+
+删除绑定行中的 ECH 密钥。
+
+绑定行格式为 `<frontend>`/@`<filename>`:`<linenum>`（例如：frontend1/@HAProxy.conf:19），或 `<frontend>`/`<name>`（若绑定行使用了 "name" 关键字命名）。
+
+必须使用支持 ECH 的 OpenSSL 版本，且 HAProxy 必须以 USE_ECH=1 编译。
+该命令仅在以实验模式运行的 CLI 连接中受支持（参见“experimental-mode on”）。
+
+另请参见配置手册 [第 5.1 节](/zh/haproxy/bind-and-server-options/#section-5-1) 中的 "show ssl ech"、"add ssl ech" 和 "ech"。
+
+示例：
+
+```shell
+$ echo "experimental-mode on; del ssl ech frontend1/@haproxy.conf:19" | socat /tmp/haproxy.sock -
+deleted all ECH configs from frontend1/@haproxy.conf:19
+```
+
+<a id="entry-9-3-del-ssl-jwt"></a>
+
+**`del ssl jwt <filename>`**
+
+```haproxy
+del ssl jwt <filename>
+```
+
+从可用于 JWT 验证的证书列表中移除已加载的证书
+（参见 "jwt_verify_cert" 转换器）。该命令在正在进行的事务中无效。另请参见 “add ssl jwt” 和 “show ssl jwt” 命令。有关更多信息，请参见 “jwt” 证书选项。
+
+<a id="entry-9-3-del-server"></a>
+
+**`del server <backend>/<server>`**
+
+```haproxy
+del server <backend>/<server>
+```
+
+从后端 `<backend>` 中删除一个可移除的服务器。可移除的服务器是指同时满足以下所有条件的服务器：
+
+- 未被其他配置元素引用
+- 必须已进入维护模式（参见“disable server”）
+- 不得有任何活动或空闲连接
+
+若上述任一条件未满足，该命令将执行失败。
+
+活跃连接是指至少有一个正在进行的请求的连接。可以使用“shutdown sessions server”命令加速其终止。建议在执行“del server”前使用“wait srv-removable”，以确保所有活跃或空闲连接均已关闭，从而保证命令执行成功。
+
+<a id="entry-9-3-disable-agent"></a>
+
+**`disable agent <backend>/<server>`**
+
+```haproxy
+disable agent <backend>/<server>
+```
+
+将辅助代理检查标记为临时停止。
+
+当代理检查作为辅助检查运行时（由于服务器指令中的 agent-check 参数），仅当代理处于启用状态时才会初始化新的检查。因此，禁用代理将阻止任何新的代理检查启动，直至通过 enable agent 重新启用代理。
+
+当代理被禁用时，若在代理处于启用状态期间已启动辅助代理检查，则处理流程如下：所有可能改变权重的结果，特别是“drain”或代理返回的权重，均被忽略。代理检查的处理过程其余部分保持不变。
+
+此功能的动机在于，允许暂停代理检查对权重的影响，以便在使用 set weight 配置服务器权重时，不会被代理检查所覆盖。
+
+此命令受限制，仅可在配置为“admin”级别的套接字上执行。
+
+<a id="entry-9-3-disable-dynamic-cookie-backend"></a>
+
+**`disable dynamic-cookie backend <backend>`**
+
+```haproxy
+disable dynamic-cookie backend <backend>
+```
+
+禁用为后端 `<backend>` 生成动态 Cookie
+
+<a id="entry-9-3-disable-frontend"></a>
+
+**`disable frontend <frontend>`**
+
+```haproxy
+disable frontend <frontend>
+```
+
+将前端标记为临时停止。这对应于软重启期间所使用的模式：前端会释放端口，但在需要时可重新启用。使用时应谨慎，因为某些非 Linux 操作系统无法重新启用该前端。此功能适用于那些无法想象停止代理的环境，但又必须修复配置错误的代理时。通过这种方式，可以释放端口，并将其绑定到另一个进程以恢复操作。在统计信息页面上，该前端将显示状态为“STOP”。
+
+前端可通过其名称或其数字 ID 指定，数字 ID 前需加井号（'#'）。
+
+此命令受限制，仅可在配置为“admin”级别的套接字上执行。
+
+<a id="entry-9-3-disable-health"></a>
+
+**`disable health <backend>/<server>`**
+
+```haproxy
+disable health <backend>/<server>
+```
+
+将主健康检查标记为临时停止。这将停止发送健康检查，且忽略最后一次健康检查结果。服务器将处于未检查状态，并被视为 UP，除非辅助代理检查强制其变为 DOWN。
+
+此命令受限制，仅可在配置为“admin”级别的套接字上执行。
+
+<a id="entry-9-3-disable-server"></a>
+
+**`disable server <backend>/<server>`**
+
+```haproxy
+disable server <backend>/<server>
+```
+
+将服务器标记为维护状态。在此模式下，直到服务器退出维护状态前，将不再对该服务器执行任何检查。若该服务器被其他服务器跟踪，这些服务器在维护期间将被置为 DOWN。
+
+在统计信息页面中，因维护而处于 DOWN 状态的服务器将显示为“MAINT”状态，其关联的追踪服务器则显示为“MAINT(via)”状态。
+
+后端和服务器均可通过其名称或编号指定，编号前需加井号（'#'）。
+
+此命令受限制，仅可在配置为“admin”级别的套接字上执行。
+
+<a id="entry-9-3-dump-ssl-cert"></a>
+
+**`dump ssl cert <certfile>`**
+
+```haproxy
+dump ssl cert <certfile>
+```
+
+将 HAProxy 内存中加载的证书转储。转储内容按 PEM 格式输出证书，随后是私钥，接着是叶证书，最后是证书链。可通过在文件名前加上星号来转储事务。此操作在通过 CLI 更新证书但未同步到文件系统时，用于将证书保存至文件系统，十分有用。
+
+此命令受限制，仅可在配置为“admin”级别的套接字上执行。
+
+示例：
+
+```shell
+$ echo "dump ssl cert cert1.pem" | socat /tmp/sock1 -
+
+$ echo "dump ssl cert cert1.pem" | socat /tmp/sock1 - | openssl storeutl -noout -text /dev/stdin
+```
+
+<a id="entry-9-3-dump-stats-file"></a>
+
+**`dump stats-file`**
+
+```haproxy
+dump stats-file
+```
+
+生成一个统计文件，该文件可用于在启动时预加载 HAProxy 计数器的值。详见“统计文件”段获取更多详情。
+
+<a id="entry-9-3-echo"></a>
+
+**`echo <text>`**
+
+```haproxy
+echo <text>
+```
+
+通过 CLI 输出一些文本。在导出多个命令结果时，可在命令之间添加注释，此功能可能有用。
+
+示例：
+
+```text
+echo "expert-mode on; echo FDs from fdtab; show fd; echo wild FDs; debug dev fd" | socat /var/run/haproxy.sock -
+
+```
+
+<a id="entry-9-3-enable-agent"></a>
+
+**`enable agent <backend>/<server>`**
+
+```haproxy
+enable agent <backend>/<server>
+```
+
+恢复被临时停止的辅助代理检查。
+
+有关临时启动和停止辅助代理的影响详情，请参见“disable agent”部分。
+
+此命令受限制，仅可在配置为“admin”级别的套接字上执行。
+
+<a id="entry-9-3-enable-dynamic-cookie-backend"></a>
+
+**`enable dynamic-cookie backend <backend>`**
+
+```haproxy
+enable dynamic-cookie backend <backend>
+```
+
+为后端 `<backend>` 启用动态 Cookie 生成。必须同时提供密钥。
+
+<a id="entry-9-3-enable-frontend"></a>
+
+**`enable frontend <frontend>`**
+
+```haproxy
+enable frontend <frontend>
+```
+
+恢复一个曾被临时停止的前端。某些监听端口可能无法重新绑定（例如：在执行“disable frontend”操作后，有其他进程占用了这些端口）。若发生此情况，将显示错误信息。部分操作系统可能无法恢复已被禁用的前端。
+
+前端可通过其名称或其数字 ID 指定，数字 ID 前需加井号（'#'）。
+
+此命令受限制，仅可在配置为“admin”级别的套接字上执行。
+
+<a id="entry-9-3-enable-health"></a>
+
+**`enable health <backend>/<server>`**
+
+```haproxy
+enable health <backend>/<server>
+```
+
+恢复被临时停止的主健康检查。这将重新启用健康检查的发送。请参见“disable health”获取详细信息。
+
+此命令受限制，仅可在配置为“admin”级别的套接字上执行。
+
+<a id="entry-9-3-enable-server"></a>
+
+**`enable server <backend>/<server>`**
+
+```haproxy
+enable server <backend>/<server>
+```
+
+如果服务器之前因维护被标记为 DOWN，则此操作将服务器标记为 UP 并重新启用检查。
+
+后端和服务器均可通过其名称或编号指定，编号前需加井号（'#'）。
+
+此命令受限制，仅可在配置为“admin”级别的套接字上执行。
+
+<a id="entry-9-3-experimental-mode"></a>
+
+**`experimental-mode [on|off]`**
+
+```haproxy
+experimental-mode [on|off]
+```
+
+不带选项时，表示当前连接上是否启用了实验模式。传入 "on" 时，仅对当前 CLI 连接启用实验模式。传入 "off" 时，将其关闭。
+
+实验模式用于访问仍在开发中的额外功能。这些功能当前尚不稳定，应谨慎使用。它们可能在不同版本间发生破坏性变更。
+
+在主 CLI 中使用此命令时，不应添加前缀，因为该命令将在任何工作进程连接到其 CLI 时设置其模式。
+
+示例：
+
+```text
+echo "@1; experimental-mode on; <experimental_cmd>..." | socat /var/run/haproxy.master -
+echo "experimental-mode on; @1 <experimental_cmd>..." | socat /var/run/haproxy.master -
+```
+
+<a id="entry-9-3-expert-mode"></a>
+
+**`expert-mode [on|off]`**
+
+```haproxy
+expert-mode [on|off]
+```
+
+该命令与 experimental-mode 类似，但用于切换专家模式。
+
+专家模式可显示可能对进程造成极大危害的高级命令，这些命令偶尔可帮助开发者收集复杂错误的关键信息。误用这些功能极可能导致进程崩溃。请勿在未被邀请的情况下使用此选项。请注意，该命令故意未列在帮助消息中，仅在管理员级别下可用。切换至其他级别将自动重置专家模式。
+
+在主 CLI 中使用此命令时，不应添加前缀，因为该命令将在任何工作进程连接到其 CLI 时设置其模式。
+
+示例：
+
+```text
+echo "@1; expert-mode on; debug dev exit 1" | socat /var/run/haproxy.master -
+echo "expert-mode on; @1 debug dev exit 1" | socat /var/run/haproxy.master -
+```
+
+<a id="entry-9-3-get-map"></a>
+
+**`get map <map> <value>`**
+
+```haproxy
+get map <map> <value>
+get acl <acl> <value>
+```
+
+在映射 `<map>` 或 ACL `<acl>` 中查找值 `<value>`。`<map>` 或 `<acl>` 为 “show map” 或 “show acl” 命令返回的 `<id>` 或 `<name>`。该命令返回与该映射关联的所有匹配模式。此功能适用于调试映射和 ACL。输出格式由每种匹配类型一行组成。每行由空格分隔的词序列构成。
+
+前两个词是：
+
+```text
+<match method>:   使用的匹配方法，可为 "found"、"bool"、"int"、"ip"、"bin"、"len"、
+                  "str"、"beg"、"sub"、"dir"、"dom"、"end" 或 "reg"。
+
+<match result>:   匹配结果，可为 "match" 或 "no-match"。
+```
+
+以下词语仅在模式与条目匹配时返回。
+
+     `<index type>`：    "tree" 或 "list"，表示内部查找算法。
+
+     `<case>`：          "case-insensitive" 或 "case-sensitive"，表示是否区分大小写。
+
+     `<entry matched>`： match="`<entry>`"，返回匹配的模式，适用于正则表达式。
+
+最后两个词用于显示返回值及其类型。在 "acl" 情况下，该模式不存在。
+
+     return=nothing：       未使用 "map"，因此无返回值。
+     return="`<value>`"：     以字符串格式返回的值。
+     return=cannot-display：该值无法转换为字符串。
+
+     type="`<type>`"：        返回样本的类型。
+
+<a id="entry-9-3-get-var"></a>
+
+**`get var <name>`**
+
+```haproxy
+get var <name>
+```
+
+显示进程级变量 'name' 的存在性、类型和内容。仅可读取进程级变量，因此变量名必须以 'proc.' 开头，否则将无法找到该变量。此命令需要具备 "operator" 或 "admin" 权限级别。
+
+<a id="entry-9-3-get-weight"></a>
+
+**`get weight <backend>/<server>`**
+
+```haproxy
+get weight <backend>/<server>
+```
+
+报告后端 `<backend>` 中服务器 `<server>` 的当前权重和初始权重，若任一不存在则返回错误。初始权重指配置文件中显示的权重。通常两者相等，除非当前权重已被修改。后端和服务器均可通过名称或编号 ID 指定，编号 ID 前需加井号（'#'）。
+
+<a id="entry-9-3-help"></a>
+
+**`help [<command>]`**
+
+```haproxy
+help [<command>]
+```
+
+显示已知关键字及其基本用法列表，或与请求命令匹配的命令列表。未知命令也会显示相同的帮助屏幕。
+
+<a id="entry-9-3-httpclient"></a>
+
+**`httpclient [--htx] <method> <URI>`**
+
+```haproxy
+httpclient [--htx] <method> <URI>
+```
+
+通过 CLI 发起 HTTP 客户端请求，并在 CLI 上打印响应。仅在以专家模式运行的 CLI 连接中受支持（参见“expert-mode on”）。此功能仅用于调试。httpclient 可通过“default”解析器段解析 URL 中的服务器名称，该段默认包含 /etc/resolv.conf 的 DNS 服务器。但若未使用可解析 /etc/hosts 中主机的本地 DNS 守护进程，则无法解析这些主机。
+
+--htx 选项允许使用 HAProxy 内部的 htx 表示形式，通过 htx_dump() 函数实现，主要用于调试。
+
+<a id="entry-9-3-new-ssl-ca-file"></a>
+
+**`new ssl ca-file <cafile>`**
+
+```haproxy
+new ssl ca-file <cafile>
+```
+
+创建一个全新的空 CA 文件树条目，用于填充一组 CA 证书，并添加至 crt-list。该命令应与 "set ssl ca-file"、"add ssl ca-file" 和 "add ssl crt-list" 一同使用。
+
+<a id="entry-9-3-new-ssl-cert"></a>
+
+**`new ssl cert <filename>`**
+
+```haproxy
+new ssl cert <filename>
+```
+
+创建一个全新的空 SSL 证书存储，用于填充证书并添加至目录或 crt-list。此命令应与 "set ssl cert" 和 "add ssl crt-list" 一同使用。
+
+<a id="entry-9-3-new-ssl-crl-file"></a>
+
+**`new ssl crl-file <crlfile>`**
+
+```haproxy
+new ssl crl-file <crlfile>
+```
+
+创建一个全新的空 CRL 文件树条目，用于填充一组 CRL 并添加至 crt-list。此命令应与 "set ssl crl-file" 和 "add ssl crt-list" 一同使用。
+
+<a id="entry-9-3-prepare-acl"></a>
+
+**`prepare acl <acl>`**
+
+```haproxy
+prepare acl <acl>
+```
+
+在 ACL `<acl>` 中分配一个新的版本号，以实现原子替换。`<acl>` 为 "#`<id>`" 或 "show acl" 返回的 `<name>`。新版本号将在 "New version created:" 之后的响应中显示。该编号随后可用于准备向 ACL 添加新条目，待提交后将原子式替换当前条目。该版本号在 "show acl" 中报告为 "next_ver"。分配新版本号不会产生任何影响，因为未使用的版本号在提交更近期版本后将自动移除。版本号为无符号 32 位值，达到上限后会回绕，因此在外部程序中比较时需格外小心。若引用 `<acl>` 为也用作映射的名称，则不得使用此命令。此时应改用 "prepare map" 命令。
+
+<a id="entry-9-3-prepare-map"></a>
+
+**`prepare map <map>`**
+
+```haproxy
+prepare map <map>
+```
+
+在映射 `<map>` 中分配一个新的版本号，以实现原子替换。`<map>` 为 "show map" 返回的 \#`<id>` 或 `<name>`。新版本号将在 "New version created:" 之后的响应中显示。该编号随后可用于准备向映射中添加新条目，待提交后将原子性地替换当前条目。在 "show map" 中，该编号报告为 "next_ver"。分配新版本号不会产生任何影响，因为未使用的版本号在提交更近期版本后将自动被移除。版本号为无符号 32 位值，达到上限后会回绕，因此在外部程序中比较时必须格外小心。
+
+<a id="entry-9-3-prompt"></a>
+
+**`prompt [help | n | i | p | timed]*`**
+
+```haproxy
+prompt [help | n | i | p | timed]*
+```
+
+更改交互模式的行为以及在交互模式下行首显示的提示符：   - "help" ：显示命令的用法   - "n" ：切换至非交互模式   - "i" ：切换至交互模式   - "p" ：切换至交互模式 + 提示符模式   - "timed" ：切换在提示符中显示时间
+
+不带任何选项时，将依次切换至提示模式，然后进入非交互模式。
+在非交互模式下，当前行的最后一个命令执行完成后，连接即被关闭。
+在交互模式下，命令执行完成后不会关闭连接，以便用户输入新命令。
+在提示模式下，仍使用交互模式，行首会显示一个提示符，指示解释器正在等待用户输入新命令。
+提示符由一个右角括号后跟一个空格组成，即 "\> "。
+
+提示模式更适合人类用户，交互模式适合高级脚本，而非交互模式（默认）适合基础脚本。请注意，主套接字不支持非交互模式。
+
+<a id="entry-9-3-publish-backend"></a>
+
+**`publish backend <backend>`**
+
+```haproxy
+publish backend <backend>
+```
+
+激活内容切换至后端实例。此操作为“unpublish backend”命令的逆操作。该命令受限制，仅可在配置为“operator”或“admin”级别的套接字上执行。
+
+<a id="entry-9-3-quit"></a>
+
+**`quit`**
+
+```haproxy
+quit
+```
+
+在交互模式下关闭连接。
+
+<a id="entry-9-3-set-anon"></a>
+
+**`set anon [on|off] [<key>]`**
+
+```haproxy
+set anon [on|off] [<key>]
+```
+
+此命令用于启用或禁用当前 CLI 会话的“匿名模式”，该模式会将命令输出中被视为敏感或机密的某些字段替换为哈希值。这些哈希值保留了元素间足够的一致性，有助于开发者在排查 bug 时识别元素之间的关联，但其位数较低（24 位），由于可能匹配项数量极高，因此无法逆向还原。启用该模式后，若未指定密钥，则将使用全局密钥（在配置文件中通过 "anonkey" 指定，或通过 CLI 命令 "set anon global-key" 设置）。若未设置任何密钥，则将生成一个随机密钥。否则，可指定用于当前会话的 32 位密钥，例如复用之前转储所用的密钥，以帮助对比输出结果。开发者无需此密钥，且建议永不共享，因为该密钥可能被用于确认或否定关于某些哈希值所隐藏内容的猜测。
+
+<a id="entry-9-3-set-dynamic-cookie-key-backend"></a>
+
+**`set dynamic-cookie-key backend <backend> <value>`**
+
+```haproxy
+set dynamic-cookie-key backend <backend> <value>
+```
+
+修改用于生成动态持久化 Cookie 的密钥。这将中断现有会话。
+
+<a id="entry-9-3-set-anon-global-key"></a>
+
+**`set anon global-key <key>`**
+
+```haproxy
+set anon global-key <key>
+```
+
+设置全局匿名化密钥为 `<key>`，该值必须为 0 到 4294967295 之间的 32 位整数（0 表示禁用全局密钥）。此命令需要管理员权限。
+
+<a id="entry-9-3-set-map"></a>
+
+**`set map <map> [<key>|#<ref>] <value>`**
+
+```haproxy
+set map <map> [<key>|#<ref>] <value>
+```
+
+修改映射 `<map>` 中每个键 `<key>` 对应的值。`<map>` 为 "show map" 返回的 \#`<id>` 或 `<name>`。若使用 `<ref>` 代替 `<key>`，则仅修改 `<ref>` 指向的条目。新值为 `<value>`。
+
+<a id="entry-9-3-set-maxconn-frontend"></a>
+
+**`set maxconn frontend <frontend> <value>`**
+
+```haproxy
+set maxconn frontend <frontend> <value>
+```
+
+动态更改指定前端的 maxconn 设置。允许任意正值，包括零，但设置值超过全局 maxconn 限制并无实际意义。若限制值提高且存在待处理连接，这些连接将立即被接受。若限制值降低至当前连接数以下，新连接的接受将延迟，直至达到阈值。前端可通过其名称或以井号（#）前缀的数字 ID 指定。
+
+<a id="entry-9-3-set-maxconn-server"></a>
+
+**`set maxconn server <backend/server> <value>`**
+
+```haproxy
+set maxconn server <backend/server> <value>
+```
+
+动态更改指定服务器的 maxconn 设置。允许任意正值，包括零，但设置值超过全局 maxconn 的情况并无实际意义。
+
+<a id="entry-9-3-set-maxconn-global"></a>
+
+**`set maxconn global <maxconn>`**
+
+```haproxy
+set maxconn global <maxconn>
+```
+
+动态调整全局 maxconn 设置，取值范围受限于初始全局 maxconn 设置。若增大该值，正在等待的连接将立即被接受。若减小至低于当前连接数，新连接的接受将延迟，直至达到阈值。值为零时恢复初始设置。
+
+<a id="entry-9-3-set-profiling-memory"></a>
+
+**`set profiling memory { on | off }`**
+
+```haproxy
+set profiling memory { on | off }
+set profiling tasks { auto | on | off | lock | no-lock | memory | no-memory }
+```
+
+启用或禁用指定子系统的 CPU 或内存剖析功能。这等效于在配置文件的“global”段中设置或清除“profiling”选项。
+请参阅“show profiling”。请注意，手动将任务剖析设置为“on”会自动重置调度器统计信息，从而可检查指定时间段内的活动情况。
+内存剖析仅限于特定操作系统（已知在 linux-glibc 目标上可用），且需要在编译时设置 USE_MEMORY_PROFILING。
+
+. 对于任务性能分析，可以在运行时启用或禁用任务级锁和内存计时的收集，但该更改仅在性能分析器从关闭/自动模式切换至开启模式时（无论是自动还是手动）才会生效。因此，当使用 "no-lock" 禁用任务级锁性能分析以节省 CPU 周期时，建议先关闭再开启任务性能分析，以确保更改生效。
+
+<a id="entry-9-3-set-rate-limit-connections-global"></a>
+
+**`set rate-limit connections global <value>`**
+
+```haproxy
+set rate-limit connections global <value>
+```
+
+更改进程级别的连接速率限制，该限制由全局配置项 `maxconnrate` 设置。值为零时表示禁用限制。此限制适用于所有前端，更改立即生效。数值以每秒连接数为单位。
+
+<a id="entry-9-3-set-rate-limit-http-compression-global"></a>
+
+**`set rate-limit http-compression global <value>`**
+
+```haproxy
+set rate-limit http-compression global <value>
+```
+
+更改最大输入压缩速率，该值由全局配置项 'maxcomprate' 设置。值为零时表示禁用限制。该值以每秒千字节为单位传递。该值可在 "show info" 输出中通过 "CompressBpsRateLim" 行查看，单位为字节。
+
+<a id="entry-9-3-set-rate-limit-sessions-global"></a>
+
+**`set rate-limit sessions global <value>`**
+
+```haproxy
+set rate-limit sessions global <value>
+```
+
+更改进程级会话速率限制，该限制由全局配置项 `maxsessrate` 设置。值为零时表示禁用限制。此限制适用于所有前端，更改立即生效。值以每秒会话数为单位。
+
+<a id="entry-9-3-set-rate-limit-ssl-sessions-global"></a>
+
+**`set rate-limit ssl-sessions global <value>`**
+
+```haproxy
+set rate-limit ssl-sessions global <value>
+```
+
+更改进程级 SSL 会话速率限制，该限制由全局配置项 `maxsslrate` 设置。值为 0 时表示禁用限制。此限制适用于所有前端，更改立即生效。该值以每秒发送至 SSL 栈的会话数为单位，应用于握手之前，以防止对握手机制的滥用。
+
+<a id="entry-9-3-set-server"></a>
+
+**`set server <backend>/<server> addr <ip4 or ip6 address> [port <port>]`**
+
+```haproxy
+set server <backend>/<server> addr <ip4 or ip6 address> [port <port>]
+```
+
+将服务器的当前 IP 地址替换为所提供的地址。可选地，使用 'port' 参数更改端口。请注意，更改端口还支持端口映射的切换（使用 +X 或 -Y 表示），但前提是已为健康检查配置了端口。
+
+<a id="entry-9-3-set-server-2"></a>
+
+**`set server <backend>/<server> agent [ up | down ]`**
+
+```haproxy
+set server <backend>/<server> agent [ up | down ]
+```
+
+强制将服务器的代理状态切换至新状态。此操作可用于立即更改服务器状态，例如在某些代理检查响应较慢时。请注意，若存在跟踪服务器，该变更将被传播至跟踪服务器。
+
+<a id="entry-9-3-set-server-3"></a>
+
+**`set server <backend>/<server> agent-addr <addr> [port <port>]`**
+
+```haproxy
+set server <backend>/<server> agent-addr <addr> [port <port>]
+```
+
+更改服务器代理检查的地址。允许在运行时将代理检查迁移到另一个地址。
+
+可同时指定 IP 地址和主机名，将自动解析。可选地，更改代理检查的端口。
+
+<a id="entry-9-3-set-server-4"></a>
+
+**`set server <backend>/<server> agent-port <port>`**
+
+```haproxy
+set server <backend>/<server> agent-port <port>
+```
+
+更改用于代理检查的端口。
+
+<a id="entry-9-3-set-server-5"></a>
+
+**`set server <backend>/<server> agent-send <value>`**
+
+```haproxy
+set server <backend>/<server> agent-send <value>
+```
+
+更改发送至代理检查目标的代理字符串。可在更改服务器地址时更新字符串，以保持两者一致。
+
+<a id="entry-9-3-set-server-6"></a>
+
+**`set server <backend>/<server> health [ up | stopping | down ]`**
+
+```haproxy
+set server <backend>/<server> health [ up | stopping | down ]
+```
+
+强制将服务器的健康状态更改为新状态。此操作可用于立即切换服务器状态，例如在某些健康检查响应较慢时。请注意，若存在跟踪服务器，该变更将被传播至跟踪服务器。
+
+<a id="entry-9-3-set-server-7"></a>
+
+**`set server <backend>/<server> check-addr <ip4 | ip6> [port <port>]`**
+
+```haproxy
+set server <backend>/<server> check-addr <ip4 | ip6> [port <port>]
+```
+
+更改用于服务器健康检查的 IP 地址。可选地，更改用于服务器健康检查的端口。
+
+<a id="entry-9-3-set-server-8"></a>
+
+**`set server <backend>/<server> check-port <port>`**
+
+```haproxy
+set server <backend>/<server> check-port <port>
+```
+
+将健康检查使用的端口更改为 `<port>`
+
+<a id="entry-9-3-set-server-9"></a>
+
+**`set server <backend>/<server> state [ ready | drain | maint ]`**
+
+```haproxy
+set server <backend>/<server> state [ ready | drain | maint ]
+```
+
+强制将服务器的管理状态更改为新状态。此操作可用于禁用负载均衡和/或向服务器发送任何流量。将状态设为“ready”可使服务器进入正常模式，该命令等同于“enable server”命令。将状态设为“maint”不仅会阻止向服务器发送任何流量，还会禁用所有健康检查。此操作等同于“disable server”命令。将模式设为“drain”仅会将服务器从负载均衡中移除，但仍允许对其进行健康检查，并接受新的持久连接。若存在跟踪服务器，更改将传播至这些服务器。
+
+<a id="entry-9-3-set-server-10"></a>
+
+**`set server <backend>/<server> weight <weight>[%]`**
+
+```haproxy
+set server <backend>/<server> weight <weight>[%]
+```
+
+将服务器的权重更改为参数中传入的值。这与下方的“set weight”命令完全等效。
+
+<a id="entry-9-3-set-server-11"></a>
+
+**`set server <backend>/<server> fqdn <FQDN>`**
+
+```haproxy
+set server <backend>/<server> fqdn <FQDN>
+```
+
+更改服务器的完全限定域名（FQDN）为参数中传入的值。这要求为该服务器配置并启用了内部运行时 DNS 解析器。
+
+<a id="entry-9-3-set-server-12"></a>
+
+**`set server <backend>/<server> ssl [ on | off ]  （已弃用）`**
+
+```haproxy
+set server <backend>/<server> ssl [ on | off ]  （已弃用）
+```
+
+此选项用于配置向服务器发起连接时的 SSL 加密。关闭时，所有流量将变为明文传输；健康检查路径保持不变。
+
+此命令已弃用，请改用“add server”命令动态创建服务器，支持启用或不启用 SSL。
+
+<a id="entry-9-3-set-severity-output"></a>
+
+**`set severity-output [ none | number | string ]`**
+
+```haproxy
+set severity-output [ none | number | string ]
+```
+
+更改当前会话期间统计套接字输出的严重性格式。
+
+<a id="entry-9-3-set-ssl-ca-file"></a>
+
+**`set ssl ca-file <cafile> <payload>`**
+
+```haproxy
+set ssl ca-file <cafile> <payload>
+```
+
+本命令属于事务系统的一部分，可能需要使用“commit ssl ca-file”和“abort ssl ca-file”命令。若当前无正在进行的事务，该命令将创建一个 CA 文件树条目，用于存储负载中包含的证书。该 CA 文件条目不会被保存至 CA 文件树，仅在临时事务中保留。若已存在同名事务，先前的 CA 文件条目将被删除，并由新条目替换。完成修改后，必须通过“commit ssl ca-file”调用提交事务。若需分别添加多个证书，可使用“add ssl ca-file”命令。
+
+示例：
+
+```text
+echo -e "set ssl ca-file cafile.pem <<\n$(cat rootCA.crt)\n" | \
+socat /var/run/haproxy.stat -
+echo "commit ssl ca-file cafile.pem" | socat /var/run/haproxy.stat -
+```
+
+<a id="entry-9-3-set-ssl-cert"></a>
+
+**`set ssl cert <filename> <payload>`**
+
+```haproxy
+set ssl cert <filename> <payload>
+```
+
+此命令属于事务系统的一部分，“commit ssl cert” 和 “abort ssl cert” 命令可能需要使用。该事务系统适用于 “show ssl cert” 命令所显示的任意证书，即适用于任意前端或后端证书。若当前无进行中的事务，系统将把证书 `<filename>` 在内存中复制一份至临时事务，随后使用载荷中的 PEM 文件更新该事务。若存在同名文件的事务，系统将更新该事务。也可对与证书关联的文件（如 .issuer、.sctl、.ocsp 等）进行更新。完成修改后，必须执行 “commit ssl cert” 以提交事务。
+
+通过 CLI 注入文件时必须谨慎，因为空行用于通知负载的结束。建议注入已清理过的 PEM 文件。一种简单的方法是删除所有空行，仅保留 PEM 段中的内容。可使用 sed 命令实现。
+
+示例：
+
+```haproxy
+# With some simple sanitizing
+ echo -e "set ssl cert localhost.pem <<\n$(sed -n '/^$/d;/-BEGIN/,/-END/p' 127.0.0.1.pem)\n" | \
+ socat /var/run/haproxy.stat -
+
+ # Complete example with commit
+ echo -e "set ssl cert localhost.pem <<\n$(cat 127.0.0.1.pem)\n" | \
+ socat /var/run/haproxy.stat -
+ echo -e \
+ "set ssl cert localhost.pem.issuer <<\n $(cat 127.0.0.1.pem.issuer)\n" | \
+ socat /var/run/haproxy.stat -
+ echo -e \
+ "set ssl cert localhost.pem.ocsp <<\n$(base64 -w 1000 127.0.0.1.pem.ocsp)\n" | \
+ socat /var/run/haproxy.stat -
+ echo "commit ssl cert localhost.pem" | socat /var/run/haproxy.stat -
+```
+
+<a id="entry-9-3-set-ssl-crl-file"></a>
+
+**`set ssl crl-file <crlfile> <payload>`**
+
+```haproxy
+set ssl crl-file <crlfile> <payload>
+```
+
+本命令属于事务系统的一部分，可能需要使用“commit ssl crl-file”和“abort ssl crl-file”命令。若当前无正在进行的事务，该命令将创建一个 CRL 文件树条目，用于存储载荷中的吊销列表。该 CRL 文件条目不会被保存至 CRL 文件树，而仅保留在临时事务中。若已存在同名的事务，先前的 CRL 文件条目将被删除，并由新条目替换。完成修改后，必须通过调用“commit ssl crl-file”提交事务。
+
+示例：
+
+```text
+echo -e "set ssl crl-file crlfile.pem <<\n$(cat rootCRL.pem)\n" | \
+socat /var/run/haproxy.stat -
+echo "commit ssl crl-file crlfile.pem" | socat /var/run/haproxy.stat -
+```
+
+<a id="entry-9-3-set-ssl-ech"></a>
+
+**`set ssl ech <bind> <payload>`**
+
+```haproxy
+set ssl ech <bind> <payload>
+```
+
+使用此密钥替换绑定行中的 ECH 密钥。负载必须以 ECH 格式的 PEM 格式提供。
+(<https://datatracker.ietf.org/doc/html/draft-farrell-tls-pemesni>)
+
+绑定行格式为 `<frontend>`/@`<filename>`:`<linenum>`（例如：frontend1/@HAProxy.conf:19），或 `<frontend>`/`<name>`（若绑定行使用了 "name" 关键字命名）。
+
+必须使用支持 ECH 的 OpenSSL 版本，且 HAProxy 必须以 USE_ECH=1 编译。
+该命令仅在以实验模式运行的 CLI 连接中受支持（参见“experimental-mode on”）。
+
+另请参见配置手册 [第 5.1 节](/zh/haproxy/bind-and-server-options/#section-5-1) 中的 "show ssl ech"、"add ssl ech" 和 "ech"。
+
+    $ openssl ech -public_name foobar.com -out foobar3.com.ech
+    $ echo -e "experimental-mode on;
+               set ssl ech frontend1/@haproxy.conf:19 <<%EOF%&#92;n$(cat foobar3.com.ech)&#92;n%EOF%&#92;n" | &#92;
+      socat /tmp/haproxy.sock -
+    set new ECH configs for frontend1/@haproxy.conf:19
+
+<a id="entry-9-3-set-ssl-ocsp-response"></a>
+
+**`set ssl ocsp-response <response | payload>`**
+
+```haproxy
+set ssl ocsp-response <response | payload>
+```
+
+此命令用于更新证书的 OCSP 响应（参见 "bind" 行中的 "crt"）。执行的控制操作与初始加载响应时相同。`<response>` 必须以 Base64 编码的 DER 格式响应字符串形式传递，该响应来自 OCSP 服务器。此命令不支持 BoringSSL。
+
+示例：
+
+```text
+openssl ocsp -issuer issuer.pem -cert server.pem \
+             -host ocsp.issuer.com:80 -respout resp.der
+echo "set ssl ocsp-response $(base64 -w 10000 resp.der)" | \
+             socat stdio /var/run/haproxy.stat
+
+使用载荷语法：
+echo -e "set ssl ocsp-response <<\n$(base64 resp.der)\n" | \
+             socat stdio /var/run/haproxy.stat
+```
+
+<a id="entry-9-3-set-ssl-tls-key"></a>
+
+**`set ssl tls-key <id> <tlskey>`**
+
+```haproxy
+set ssl tls-key <id> <tlskey>
+```
+
+为 `<id>` 监听器设置下一个 TLS 密钥为 `<tlskey>`。该密钥将成为最终密钥，倒数第二密钥用于加密（其余密钥仅用于解密）。最旧的 TLS 密钥将被覆盖。`<id>` 为数值 \#`<id>` 或由 "show tls-keys" 返回的 `<file>`。`<tlskey>` 为经过 base64 编码的 48 字节或 80 字节 TLS 会话票据密钥（例如：OpenSSL rand 80 \| OpenSSL base64 -A）。
+
+<a id="entry-9-3-set-table"></a>
+
+**`set table <table> key <key> [data.<data_type> <value>]*`**
+
+```haproxy
+set table <table> key <key> [data.<data_type> <value>]*
+set table <table> ptr <ptr> [data.<data_type> <value>]*
+```
+
+在表中创建或更新一个粘性表条目。若键不存在，则插入一条新条目。
+
+请参阅第 4.2 段中的 stick-table 以获取 `<data_type>` 的所有可能取值。最常见用法是动态添加源 IP 地址条目，并在 gpc0 中设置标志，以动态屏蔽 IP 地址或影响其服务质量。单次调用中可传递多个 data_type。
+
+可选地，对于现有条目，可使用指针查找代替键查找：`<ptr>` 的格式为 0xffff，且必须与先前执行“show table”命令所返回的地址对应。当因键为空或 CLI 上存在不兼容字符而无法通过键匹配条目时，使用指针匹配条目可能具有实际意义。
+
+如果 data.`<data_type>` 为数组类型，可以使用 "[]" 访问数组中的特定索引，例如：data.gpt[1]
+
+<a id="entry-9-3-set-timeout-cli"></a>
+
+**`set timeout cli <delay>`**
+
+```haproxy
+set timeout cli <delay>
+```
+
+更改当前连接的 CLI 接口超时时间。在需要长时间调试会话且用户需持续检查某些指标而不被断开连接时，此功能非常有用。延迟时间以秒为单位指定。
+
+<a id="entry-9-3-set-var"></a>
+
+**`set var <name> <expression>`**
+
+```haproxy
+set var <name> <expression>
+set var <name> expr <expression>
+set var <name> fmt <format>
+```
+
+允许使用表达式 `<expression>` 或格式字符串 `<format>` 的结果来设置或覆盖进程级变量 'name'。仅可使用进程级变量，因此名称必须以 'proc.' 开头，否则不会设置任何变量。`<expression>` 和 `<format>` 仅可包含“内部”样本提取关键字和转换器，尽管最可能有用的通常是 str('something')、int()、简单字符串或对其他变量的引用。请注意，命令行解析器不识别引号，因此表达式中的任何空格必须以反斜杠转义。该命令需要“operator”或“admin”级别权限。该命令仅在以实验模式运行的 CLI 连接上受支持（参见“experimental-mode on”）。
+
+<a id="entry-9-3-set-weight"></a>
+
+**`set weight <backend>/<server> <weight>[%]`**
+
+```haproxy
+set weight <backend>/<server> <weight>[%]
+```
+
+将服务器的权重更改为参数中传入的值。若该值以百分号（%）结尾，则新权重将相对于初始配置的权重计算。绝对权重允许的范围为 0 至 256。相对权重必须为正数，且最终计算出的绝对权重上限为 256。属于运行静态负载均衡算法的服务器组的服务器具有更严格的限制，因为权重一旦设定便不可更改。因此，对于此类服务器，仅接受的值为 0 和 100%（或 0 和初始权重）。更改立即生效，但某些负载均衡算法需要一定数量的请求后才会考虑权重变化。该命令的典型用法是在更新期间将服务器权重设为 0 以禁用它，更新完成后将其权重恢复为 100% 以重新启用。此命令受限制，仅可在配置为“admin”级别的套接字上执行。后端和服务器均可通过名称或其数值 ID 指定，数值 ID 前需加井号（#）。
+
+<a id="entry-9-3-show-acl"></a>
+
+**`show acl [[@<ver>] <acl>]`**
+
+```haproxy
+show acl [[@<ver>] <acl>]
+```
+
+显示关于 ACL 转换器的信息。若未指定参数，将返回所有可用 ACL 的列表。若指定 `<acl>`，则输出其内容。`<acl>` 为 \#`<id>` 或 `<name>`。默认情况下显示 ACL 的当前版本（即当前用于匹配并作为 'curr_ver' 在 ACL 列表中报告的版本）。可通过在 ACL 标识符前添加 @`<ver>` 来选择输出其他版本。版本号作为过滤器使用，不存在的版本将不返回任何结果。输出格式与映射（map）相同，即使对于样本值（sample value）也是如此。返回的数据并非可用 ACL 的列表，而是构成任意 ACL 的所有模式（pattern）的列表。其中许多模式可与映射（map）共享。'entry_cnt' 值表示 ACL 条目总数，不仅包括激活的条目，还包含当前正在添加的条目。
+
+<a id="entry-9-3-show-anon"></a>
+
+**`show anon`**
+
+```haproxy
+show anon
+```
+
+显示匿名模式的当前状态（启用或禁用）以及当前会话的密钥。
+
+<a id="entry-9-3-show-backend"></a>
+
+**`show backend`**
+
+```haproxy
+show backend
+```
+
+转储运行进程中的可用后端列表
+
+<a id="entry-9-3-show-cli-level"></a>
+
+**`show cli level`**
+
+```haproxy
+show cli level
+```
+
+显示当前 CLI 会话的 CLI 级别。结果可能是 'admin'、'operator' 或 'user'。
+参见 'operator' 和 'user' 命令。
+
+示例：
+
+```shell
+$ socat /tmp/sock1 readline
+prompt
+> operator
+> show cli level
+operator
+> user
+> show cli level
+user
+> operator
+Permission denied
+```
+
+<a id="entry-9-3-operator"></a>
+
+**`operator`**
+
+```haproxy
+operator
+```
+
+将当前 CLI 会话的 CLI 级别降低至 operator。该级别无法提升。同时会退出 expert 和 experimental 模式。参见“show cli level”。
+
+<a id="entry-9-3-unpublish-backend"></a>
+
+**`unpublish backend <backend>`**
+
+```haproxy
+unpublish backend <backend>
+```
+
+将后端标记为未来流量选择中不可用。实际上，引用该后端的 use_backend / default_backend 规则将被忽略，继续评估后续的内容切换规则。与禁用的后端不同，服务器的健康检查仍保持激活状态。该命令受限制，仅可在配置为“operator”或“admin”级别的套接字上执行。
+
+<a id="entry-9-3-user"></a>
+
+**`user`**
+
+```haproxy
+user
+```
+
+将当前 CLI 会话的级别降低至 user。该级别无法提升。同时会退出 expert 和 experimental 模式。参见“show cli level”。
+
+<a id="entry-9-3-show-activity"></a>
+
+**`show activity [-1 | 0 | thread_num]`**
+
+```haproxy
+show activity [-1 | 0 | thread_num]
+```
+
+报告有关内部事件的一些计数器，有助于开发者以及对 HAProxy 有足够了解、能够缩小异常行为报告原因的人员。典型示例为一个正常运行的进程从未休眠且持续占用 100% 的 CPU。输出字段将按每项指标一行组织，同一行内包含各线程的计数器。这些计数器为 32 位，将在进程生命周期内发生溢出，但由于该命令的调用通常会执行两次，因此不会造成问题。字段未被正式文档化，以确保其确切含义在计数器被更新的代码中得到验证。这些值也会被 "clear counters" 命令重置。在多线程部署中，第一列将显示所有线程的总和（或平均值，视指标性质而定），所有线程的值将以方括号形式按线程顺序列出。可选地，可在参数中指定要转储的线程编号。特殊值 "0" 将报告聚合值（第一列），而 "-1"（默认值）将显示所有列。请注意，与单线程模式一样，当仅请求单列时，将不显示方括号。
+
+<a id="entry-9-3-show-cli-sockets"></a>
+
+**`show cli sockets`**
+
+```haproxy
+show cli sockets
+```
+
+列出 CLI 套接字。输出格式由三个以空格分隔的字段组成。第一个字段为套接字地址，可以是 Unix 套接字、IPv4 地址：端口对或 IPv6 地址。其他类型的套接字不会被输出。第二个字段描述套接字的级别：'admin'、'user' 或 'operator'。第三个字段列出套接字绑定的进程，字段间以逗号分隔，可以是进程编号或 'all'。
+
+示例：
+
+```shell
+$ echo 'show cli sockets' | socat stdio /tmp/sock1
+# socket lvl processes
+/tmp/sock1 admin all
+127.0.0.1:9999 user 2,3,4
+127.0.0.2:9969 user 2
+[::1]:9999 operator 2
+```
+
+<a id="entry-9-3-show-cache"></a>
+
+**`show cache`**
+
+```haproxy
+show cache
+```
+
+列出已配置的缓存及其各自缓存树中存储的对象。
+
+$ echo 'show cache' | socat stdio /tmp/sock1 0x7f6ac6c5b03a: foobar (shctx:0x7f6ac6c5b000, available blocks:3918) 1 2 3 4
+
+1. 指向缓存结构的指针
+2. 缓存名称
+3. 指向 mmap 区域的指针（shctx）
+4. shctx 中可用于重用的块数量
+
+0x7f6ac6c5b4cc hash:286881868 vary:0x0011223344556677 size:39114 (39 blocks), refcount:9, expire:237
+1 2 3 4 5 6 7
+
+1. 缓存条目的指针
+2. 哈希值的前 32 位
+3. 在使用 vary 时，条目的二级哈希值
+4. 对象大小，单位为字节
+5. 用于该对象的块数量
+6. 正在使用该条目的事务数量
+7. 过期时间，若已过期则可能为负值
+
+<a id="entry-9-3-show-dev"></a>
+
+**`show dev`**
+
+```haproxy
+show dev
+```
+
+本命令旨在集中提供 HAProxy 开发者可能需要的部分信息，以便更深入理解特定问题的成因。该命令通常对用户无实际帮助，但这些信息有助于开发者排除某些假设。输出格式大致为一系列段，每段包含缩进的多行内容，每行一个元素，例如操作系统类型与版本、CPU 类型或启动时的文件描述符限制等。为避免重复或输出污染，某些无实际价值的字段（如“无限制”值）将被省略。未来可能新增更多字段，部分字段也可能发生变化。此输出不适用于脚本解析，不应被视为高度可靠，其主要目的是为可读者节省时间。
+
+从技术上讲，此类信息直接从启动时存储的内部结构中获取，以便在崩溃后也能在核心转储文件中找到。因此，开发者可能会要求在进程正常运行时提前输出相关信息，以便与核心转储中的内容进行对比，或在多次重载之间进行对比（例如，某些限制值可能发生变化）。若启用了匿名化功能，任何可能敏感的值也将被匿名化（例如，节点名称）。
+
+输出示例：
+
+```shell
+$ socat stdio /tmp/sock1 <<< "show dev"
+Platform info
+  machine vendor: To be filled by O.E.M
+  machine family: Altra
+  cpu model: Impl 0x41 Arch 8 Part 0xd0c r3p1
+  virtual machine: no
+  container: no
+  OS name: Linux
+  OS release: 6.2.0-36-generic
+  OS version: #37~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Mon Oct  9 18:01:07 UTC 2
+  OS architecture: aarch64
+  node name: 489aaf
+Process info
+  pid: 1735846
+  boot uid: 509
+  boot gid: 1002
+  fd limit (soft): 1024
+  fd limit (hard): 1048576
+```
+
+<a id="entry-9-3-show-env"></a>
+
+**`show env [<name>]`**
+
+```haproxy
+show env [<name>]
+```
+
+转储进程已知的一个或全部环境变量。不带参数时，转储所有变量。带参数时，若该变量存在，则仅转储指定变量；否则输出“变量未找到”。变量以与“env”工具存储或返回相同的格式转储，即“`<name>`=`<value>`”。此功能在调试大量使用环境变量的配置文件时尤为有用，可确保其包含预期值。该命令受限制，仅可在配置为“operator”或“admin”级别的套接字上执行。
+
+<a id="entry-9-3-show-errors"></a>
+
+**`show errors [<iid>|<proxy>] [request|response]`**
+
+```haproxy
+show errors [<iid>|<proxy>] [request|response]
+```
+
+转储最近收集的 HTTP/1.x 请求和响应错误，这些错误由前端和后端收集。若指定 `<iid>`，则将转储范围限制为 ID 为 `<iid>` 的前端或后端相关的错误。代理 ID "-1" 将导致所有实例被转储。若指定代理名称，则使用其 ID 作为过滤器。若在代理名称或 ID 后添加 "request" 或 "response"，则仅转储请求或响应错误。此命令受限制，仅可在配置为 "operator" 或 "admin" 级别的套接字上执行。
+
+可能收集的错误包括由协议违规引起的最后一个请求和响应错误，通常源于头字段名称中的无效字符。报告会精确指出具体违反协议的字符。其他重要信息，如错误检测的确切日期、前端和后端名称、服务器名称（如已知）、内部事务 ID 以及发起会话的源地址，也会一并报告。
+
+所有字符均被返回，不可打印字符会被编码。最常见的字符（&#92;t = 9，&#92;n = 10，&#92;r = 13 以及 &#92;e = 27）以反斜杠后接一个字母的形式进行编码。反斜杠本身编码为 '&#92;&#92;'，以避免混淆。其他不可打印字符则编码为 '&#92;xNN'，其中 NN 为字符 ASCII 码的两位十六进制表示。
+
+每行前缀为该行首个字符在缓冲区中的位置，起始位置为 0。每行最多输出一条输入行，过长的行将被拆分为多个连续的输出行，确保输出宽度不超过 79 个字符。若某行被拆分，可通过其不以 '&#92;n' 结尾，且下一行偏移量前带有 '+' 符号来判断，该符号表示当前行是前一行的续行。
+
+示例：
+
+```shell
+    $ echo "show errors -1 response" | socat stdio /tmp/sock1
+>>> [04/Mar/2009:15:46:56.081] backend http-in (#2): invalid response
+      src 127.0.0.1, session #54, frontend fe-eth0 (#1), server s2 (#1)
+      response length 213 bytes, error at position 23:
+
+      00000  HTTP/1.0 200 OK\r\n
+      00017  header/bizarre:blah\r\n
+      00038  Location: blah\r\n
+      00054  Long-line: this is a very long line which should b
+      00104+ e broken into multiple lines on the output buffer,
+      00154+  otherwise it would be too large to print in a ter
+      00204+ minal\r\n
+      00211  \r\n
+
+上述示例中，内部 ID 为 2 的后端 "http-in" 阻止了来自内部 ID 为 1 的服务器 s2 的无效响应。
+请求属于事务 54（此处称为 "session"），由源 127.0.0.1 发起，
+由 ID 为 1 的前端 fe-eth0 接收。检测到错误时，响应总长度为 213 字节，
+错误位于第 23 字节，即头名称 "header/bizarre" 中的斜杠（'/'），
+它不是 HTTP 头名称允许的字符。
+```
+
+<a id="entry-9-3-show-events"></a>
+
+**`show events [<sink>] [-w] [-n] [-0] [-s]`**
+
+```haproxy
+show events [<sink>] [-w] [-n] [-0] [-s]
+```
+
+不带选项时，列出所有已知事件接收端及其类型。带选项时，若接收端类型为缓冲区，则会转储该接收端中所有可用事件。若在接收端名称后传递选项 "-w"，则在到达缓冲区末尾后，命令将等待新事件并显示它们。可通过输入任意内容（该内容将被丢弃）或关闭会话来终止操作。选项 "-n" 用于直接定位到缓冲区末尾，通常与 "-w" 配合使用，以仅报告新事件。为方便起见，可使用 "-wn" 或 "-nw" 一次性启用上述两个选项。默认情况下，所有事件以换行符（'&#92;n' 或 10 或 0x0A）分隔。可通过传递 "-0" 参数将其更改为 NUL 字符（'&#92;0' 或 0）。选项 "-s" 会对输出进行净化处理，避免捕获或解码得到的二进制内容改变终端显示。空白字符（空格和制表符）会替换为空格，使每条记录保持在单行内；其他控制字符（0x00 至 0x1F 以及 0x7F）和非 ASCII 字符（0x80 及以上）会替换为 '?'。输出长度保持不变。这样，转储环形缓冲区就不会向操作者的终端注入 ANSI 转义序列或书写方向控制码，适合直接输出至终端，或输出至不应将输入解释为特殊内容的程序，例如将输出原样复制进报告的监控脚本。
+
+<a id="entry-9-3-show-fd"></a>
+
+**`show fd [-!plcfbsd]* [[<tgid>]/[<fd>] | <fd>]`**
+
+```haproxy
+show fd [-!plcfbsd]* [[<tgid>]/[<fd>] | <fd>]
+```
+
+转储所有打开的文件描述符列表，或仅输出指定编号 `<fd>` 的文件描述符。格式 "`<tgid>`/`<fd>`" 也允许使用，任一侧可为空以作为通配符（例如 "/`<fd>`" 表示跨线程组的 fd `<fd>`，"`<tgid>`/" 表示 `<tgid>` 的所有文件描述符）。目前 `<tgid>` 会被解析但被忽略，待未来支持按线程组的文件描述符表时再启用。可选择性地传入一组标志，以限制仅输出特定类型的文件描述符，或排除特定类型。当遇到 '-' 或 '!' 时，后续字符的选择将被反转，且每次以空格分隔的参数词前都会重置反转状态。可选的文件描述符类型包括：'p' 表示管道，'l' 表示监听器，'c' 表示连接（任意类型），'f' 表示前端连接，'b' 表示后端连接（任意类型），'s' 表示到服务器的连接，'d' 表示到“分发”地址或后端透明地址的连接。通过此方式，'b' 是 'sd' 的快捷方式，'c' 是 'fb' 或 'fsd' 的快捷方式。'c!f' 等价于 'b'（即“除前端连接外的所有连接”确实为后端连接）。该功能仅面向需要观察内部状态以排查复杂问题（如异常 CPU 使用率）的开发者。每行报告一个文件描述符，每行中其在多路复用器中的状态以大写字母表示启用的标志，小写字母表示禁用的标志，使用 "P" 表示“已轮询”，"R" 表示“就绪”，"A" 表示“活跃”，事件状态使用 "H" 表示“挂起”，"E" 表示“错误”，"O" 表示“输出”，"P" 表示“优先级”，"I" 表示“输入”，其他若干标志如 "N" 表示“新”（刚加入文件描述符缓存），"U" 表示“已更新”（在文件描述符缓存中收到更新），"L" 表示 "linger_risk"，"C" 表示“克隆”，随后是缓存条目位置、内部所有者指针、I/O 回调指针及其名称（如已知）。当所有者为连接时，报告连接标志及目标（前端、代理或服务器）。当所有者为监听器时，报告监听器状态及其前端。使用此命令前必须对内部结构有充分了解。请注意，输出格式可能随时间变化，因此不应由设计为长期稳定的工具解析该输出。某些内部结构状态可能对列出它们的函数而言显得可疑，此时输出行将附加感叹号（'!'）。这有助于在诊断事件时找到切入点。
+
+<a id="entry-9-3-show-info"></a>
+
+**`show info [typed|json] [desc] [float]`**
+
+```haproxy
+show info [typed|json] [desc] [float]
+```
+
+在当前进程上转储 HAProxy 状态相关信息。若传入可选参数 "typed"，还将输出字段编号、名称和类型，以便外部监控产品能够轻松检索、可能聚合后报告其未知字段中的信息。每个字段单独占一行。若传入可选参数 "json"，则 "typed" 输出的信息将以 JSON 格式提供，作为 JSON 对象列表。默认格式仅包含由冒号（':'）分隔的两列，左侧为字段名，右侧为值。请注意，在类型化输出格式中，单个对象的转储是连续的，因此消费者无需一次性存储全部内容。若传入可选参数 "float"，部分通常以整数形式输出的字段可能切换为浮点数以提高精度。具体哪些字段受影响未明确指定，因为这可能随时间变化。使用此选项意味着消费者能够处理浮点数。输出格式使用 sprintf("%f")。
+
+使用类型化输出格式时，每行由四个以冒号（':'）分隔的列组成。第一列是一个由点号（.）分隔的三元素序列。第一个元素是字段在列表中的数值位置（从零开始）。该位置不应随时间变化，但根据构建选项或未来字段被删除的情况，可能出现空缺。第二个元素是字段名称，其形式与默认的 "show info" 输出中显示的一致。第三个元素是相对进程编号，从 1 开始。
+
+该行中第一个冒号之后的内容遵循上方段落所述的“类型化输出格式”。简而言之，第二个字段（第一个冒号之后）表示变量的来源、性质和作用域。第三个字段表示字段类型，包括 "s32"、"s64"、"u32"、"u64" 和 "str"。第四个字段为值本身，消费者可根据第三列的类型信息进行解析，并根据第二列的信息进行处理。
+
+因此，类型化模式下的整体行格式为：
+
+```text
+<field_pos>.<field_name>.<process_num>:<tags>:<type>:<value>
+```
+
+当命令后附加 "desc" 时，会在指标后附加一个额外的冒号及一个被引号括起的字符串，用于描述该指标。截至本文撰写时，此功能仅支持 "typed" 和默认输出格式。
+
+示例：
+
+```shell
+> show info
+Name: HAProxy
+Version: 1.7-dev1-de52ea-146
+Release_date: 2016/03/11
+Nbproc: 1
+Process_num: 1
+Pid: 28105
+Uptime: 0d 0h00m04s
+Uptime_sec: 4
+Memmax_MB: 0
+PoolAlloc_MB: 0
+PoolUsed_MB: 0
+PoolFailed: 0
+(...)
+
+> show info typed
+0.Name.1:POSV:str:HAProxy
+1.Version.1:POSV:str:3.1-dev0-7c653d-2466
+2.Release_date.1:POSV:str:2025/07/01
+3.Nbthread.1:CGSV:u32:1
+4.Nbproc.1:CGSV:u32:1
+5.Process_num.1:KGPV:u32:1
+6.Pid.1:SGPV:u32:638069
+7.Uptime.1:MDPV:str:0d 0h00m07s
+8.Uptime_sec.1:MDPV:u32:7
+9.Memmax_MB.1:CLPV:u32:0
+10.PoolAlloc_MB.1:MGPV:u32:0
+11.PoolUsed_MB.1:MGPV:u32:0
+12.PoolFailed.1:MCPV:u32:0
+(...)
+```
+
+在类型化格式中，第一列末尾的进程 ID 使得从多个进程获取的输出能够非常方便地进行视觉聚合。示例：
+
+```shell
+$ ( echo show info typed | socat /var/run/haproxy.sock1;    \
+    echo show info typed | socat /var/run/haproxy.sock2 ) |  \
+  sort -t . -k 1,1n -k 2,2 -k 3,3n
+0.Name.1:POS:str:HAProxy
+0.Name.2:POS:str:HAProxy
+1.Version.1:POS:str:1.7-dev1-868ab3-148
+1.Version.2:POS:str:1.7-dev1-868ab3-148
+2.Release_date.1:POS:str:2016/03/11
+2.Release_date.2:POS:str:2016/03/11
+3.Nbproc.1:CGS:u32:2
+3.Nbproc.2:CGS:u32:2
+4.Process_num.1:KGP:u32:1
+4.Process_num.2:KGP:u32:2
+5.Pid.1:SGP:u32:30120
+5.Pid.2:SGP:u32:30121
+6.Uptime.1:MDP:str:0d 0h01m28s
+6.Uptime.2:MDP:str:0d 0h01m28s
+(...)
+```
+
+JSON 输出格式的定义详见其模式，可使用命令 "show schema json" 输出该模式。
+
+JSON 输出中不包含额外的空白字符，以减少输出体积。如需人工阅读，可通过格式化工具处理输出以提高可读性。示例：
+
+$ echo "show info json" | socat /var/run/haproxy.sock stdio | &#92; python
+-m json.tool
+
+JSON 输出中不包含额外的空白字符，以减少输出体积。如需人工阅读，可通过格式化工具处理输出以提高可读性。示例：
+
+$ echo "show info json" | socat /var/run/haproxy.sock stdio | &#92; python
+-m json.tool
+
+<a id="entry-9-3-show-libs"></a>
+
+**`show libs`**
+
+```haproxy
+show libs
+```
+
+输出已加载的共享动态库和目标文件列表，仅在支持该功能的系统上可用。当可用时，每个共享对象将显示其虚拟地址范围、大小以及路径。例如，可用于尝试估算某函数由哪个库提供。请注意，在许多系统上，每次重启后地址会发生变化（地址空间随机化），因此若需用于分析核心转储文件，该列表应在启动时获取。此命令仅可在配置为“operator”或“admin”级别的套接字上执行。请注意，输出格式可能因操作系统、架构甚至 HAProxy 版本而异，不应在脚本中依赖该格式。
+
+<a id="entry-9-3-show-map"></a>
+
+**`show map [[@<ver>] <map>]`**
+
+```haproxy
+show map [[@<ver>] <map>]
+```
+
+显示关于映射转换器的信息。若未指定参数，将返回所有可用映射的列表。若指定 `<map>`，则输出其内容。`<map>` 为 \#`<id>` 或 `<name>`。默认情况下显示映射的当前版本（即当前用于匹配并作为 'curr_ver' 在映射列表中报告的版本）。可通过在映射标识符前添加 @`<ver>` 来选择输出其他版本。版本号作为过滤器使用，不存在的版本将仅返回无结果。'entry_cnt' 值表示映射中所有条目的总数，而不仅限于激活状态的条目，因此也包含当前正在添加的条目。
+
+输出中，第一列为唯一条目标识符，可用于“del map”和“set map”操作的引用。第二列为模式，第三列为样本（如可用）。返回的数据并非直接列出所有可用映射，而是列出构成任意映射的所有模式。其中许多模式可与 ACL 共享。
+
+<a id="entry-9-3-show-peers"></a>
+
+**`show peers [dict|-] [<peers section>]`**
+
+```haproxy
+show peers [dict|-] [<peers section>]
+```
+
+转储有关“peers”段中配置的对等节点的信息。若未指定参数，将列出所有“peers”段中的对等节点。若指定 `<peers section>`，则仅输出属于该“peers”段的对等节点信息。若在对等节点段名称前指定“dict”，还将转储整个 Tx/Rx 字典缓存（数据量极大）。若对等节点段名为“dict”，可能需要传入“-”以正确输出。
+
+以下是两个输出示例，其中 hostA、hostB 和 hostC 对等节点属于 "sharedlb" 对等节点段。仅 hostA 和 hostB 已建立连接。仅 hostA 向 hostB 发送了数据。
+
+$ echo "show peers" | socat - /tmp/hostA 0x55deb0224320: [15/Apr/2019:11:28:01] id=sharedlb
+state=0 flags=0x3 &#92; resync_timeout=`<PAST>` task_calls=45122
+0x55deb022b540: id=hostC(remote) addr=127.0.0.12:10002 status=CONN &#92;
+reconnect=4s confirm=0 flags=0x0 0x55deb022a440: id=hostA(local) addr=127.0.0.10:10000 status=NONE
+&#92; reconnect=`<NEVER>` confirm=0 flags=0x0 0x55deb0227d70: id=hostB(remote)
+addr=127.0.0.11:10001 status=ESTA reconnect=2s confirm=0 flags=0x20000200 appctx:0x55deb028fba0
+st0=7 st1=0 task_calls=14456 &#92; state=EST xprt=RAW src=127.0.0.1:37257
+addr=127.0.0.10:10000 remote_table:0x55deb0224a10 id=stkt local_id=1 remote_id=1
+last_local_table:0x55deb0224a10 id=stkt local_id=1 remote_id=1 shared tables:
+
+```text
+0x55deb0224a10 local_id=1 remote_id=1 flags=0x0 remote_data=0x65
+  last_acked=0 last_pushed=3 last_get=0 teaching_origin=0 update=3
+  table:0x55deb022d6a0 id=stkt update=3 localupdate=3 \
+    commitupdate=3 syncing=0
+```
+
+$ echo "show peers" | socat - /tmp/hostB 0x55871b5ab320: [15/Apr/2019:11:28:03] id=sharedlb
+state=0 flags=0x3 &#92; resync_timeout=`<PAST>` task_calls=3 0x55871b5b2540:
+id=hostC(remote) addr=127.0.0.12:10002 status=CONN &#92; reconnect=3s
+confirm=0 flags=0x0 0x55871b5b1440: id=hostB(local) addr=127.0.0.11:10001 status=NONE
+&#92; reconnect=`<NEVER>` confirm=0 flags=0x0 0x55871b5aed70: id=hostA(remote)
+addr=127.0.0.10:10000 status=ESTA &#92; reconnect=2s confirm=0
+flags=0x20000200 appctx:0x7fa46800ee00 st0=7 st1=0 task_calls=62356 &#92;
+state=EST remote_table:0x55871b5ab960 id=stkt local_id=1 remote_id=1 last_local_table:0x55871b5ab960
+id=stkt local_id=1 remote_id=1 shared tables:
+
+```text
+0x55871b5ab960 local_id=1 remote_id=1 flags=0x0 remote_data=0x65
+  last_acked=3 last_pushed=0 last_get=3 teaching_origin=0 update=0
+  table:0x55871b5b46a0 id=stkt update=1 localupdate=0 \
+    commitupdate=0 syncing=0
+```
+
+<a id="entry-9-3-show-pools"></a>
+
+**`show pools [byname|bysize|byusage] [detailed] [match <pfx>] [<nb>]`**
+
+```haproxy
+show pools [byname|bysize|byusage] [detailed] [match <pfx>] [<nb>]
+```
+
+转储内部内存池状态。当怀疑存在内存泄漏时，此功能有助于追踪内存使用情况。其行为与在前台运行时发送 SIGQUIT 信号完全相同，但不会刷新内存池。输出默认不排序。若指定 "byname"，则按池名称排序；若指定 "bysize"，则按项目大小降序排序；若指定 "byusage"，则按总使用量降序排序，且仅显示已使用的条目。也可通过指定 `<nb>` 限制输出仅显示前若干条目（例如按使用量排序时）。还可通过指定 "detailed" 输出更多内部详情，包括所有已合并池的列表。最后，若指定 "match" 并后接前缀，则仅显示名称以该前缀开头的池。报告的总和仅针对符合筛选条件的池。示例：
+
+```shell
+$ socat - /tmp/haproxy.sock <<< "show pools match quic byusage"
+Dumping pools usage. Use SIGQUIT to flush them.
+  - Pool quic_conn_r (65560 bytes): 1337 allocated (87653720 bytes), ...
+  - Pool quic_crypto (1048 bytes): 6685 allocated (7005880 bytes), ...
+  - Pool quic_conn (4056 bytes): 1337 allocated (5422872 bytes), ...
+  - Pool quic_rxbuf (262168 bytes): 8 allocated (2097344 bytes), ...
+  - Pool quic_conne (184 bytes): 9359 allocated (1722056 bytes), ...
+  - Pool quic_frame (184 bytes): 7938 allocated (1460592 bytes), ...
+  - Pool quic_tx_pac (152 bytes): 6454 allocated (981008 bytes), ...
+  - Pool quic_tls_ke (56 bytes): 12033 allocated (673848 bytes), ...
+  - Pool quic_rx_pac (408 bytes): 1596 allocated (651168 bytes), ...
+  - Pool quic_tls_se (88 bytes): 6685 allocated (588280 bytes), ...
+  - Pool quic_cstrea (88 bytes): 4011 allocated (352968 bytes), ...
+  - Pool quic_tls_iv (24 bytes): 12033 allocated (288792 bytes), ...
+  - Pool quic_dgram (344 bytes): 732 allocated (251808 bytes), ...
+  - Pool quic_arng (56 bytes): 4011 allocated (224616 bytes), ...
+  - Pool quic_conn_c (152 bytes): 1337 allocated (203224 bytes), ...
+Total: 15 pools, 109578176 bytes allocated, 109578176 used ...
+```
+
+<a id="entry-9-3-show-profiling"></a>
+
+**`show profiling [{all | status | tasks | memory}] [byaddr|bytime|byctx|aggr|<max_lines>]*`**
+
+```haproxy
+show profiling [{all | status | tasks | memory}] [byaddr|bytime|byctx|aggr|<max_lines>]*
+```
+
+以每行一个的方式输出当前的性能分析设置，以及用于修改这些设置的命令。
+当启用任务性能分析时，调度器收集的部分函数级统计信息也将被输出，包括调用次数、总 CPU 时间/平均 CPU 时间以及总延迟/平均延迟的汇总信息。
+当启用内存性能分析时，将报告诸如分配/释放次数及其大小等信息。
+可通过指定相应关键字，将输出限制为仅性能分析状态、任务信息或内存性能分析信息；默认情况下，所有性能分析信息均会被输出。
+还可通过指定数值限制，控制每个类别输出的行数。
+可请求按地址、总执行时间或调用上下文而非使用频率对输出进行排序，例如便于比较后续调用结果或识别需优化的部分，并可按被调用函数聚合任务活动，而非查看详细信息。
+请注意，性能分析本质上面向开发者，用于提示代码中 CPU 周期或内存浪费的位置。该信息对监控无实际用途。
+
+<a id="entry-9-3-show-resolvers"></a>
+
+**`show resolvers [<resolvers section id>]`**
+
+```haproxy
+show resolvers [<resolvers section id>]
+```
+
+转储指定解析器段的统计信息，若未提供段，则转储所有解析器段的统计信息。
+
+针对每个名称服务器，报告以下计数器：
+
+```text
+sent: 向此服务器发送的 DNS 请求数量
+valid: 从此服务器收到的有效 DNS 响应数量
+update: 用于更新服务器 IP 地址的 DNS 响应数量
+cname: CNAME 响应数量
+cname_error: 与此服务器通信时遇到的 CNAME 错误
+any_err: 空响应数量（即服务器不支持 ANY 类型）
+nx: 从此服务器收到的域名不存在响应
+timeout: 此服务器未及时响应的次数
+refused: 被此服务器拒绝的请求数量
+other: 其他 DNS 错误
+invalid: 无效的 DNS 响应（从协议角度看）
+too_big: 过大的响应
+outdated: 到达过晚的响应数量（晚于另一名称服务器）
+```
+
+<a id="entry-9-3-show-quic"></a>
+
+**`show quic [<format>] [<filter>]`**
+
+```haproxy
+show quic [<format>] [<filter>]
+```
+
+转储所有活跃 QUIC 前端连接的信息。此命令受限制，仅可在配置为“operator”或“admin”级别的套接字上执行。
+
+可选参数可用于控制输出的详细程度。其值可按不同方式解释。第一种方式是使用预定义值：使用 "oneline" 表示默认格式，使用 "stream" 列出所有活动流，使用 "full" 显示全部信息。另一种方式是指定以逗号分隔的字段列表，以限制输出内容。当前支持的值包括 "tp"、"sock"、"pktns"、"cc" 和 "mux"。最后，若格式中使用 "help"，则会显示更详细的帮助信息。
+
+最后一个参数用于限制或扩展连接列表。默认情况下，仅显示活跃的前端连接。使用额外参数 "clo" 可列出正在关闭的前端连接，使用 "be" 可列出后端连接，使用 "all" 可列出所有类别。也可以通过指定其十六进制地址来限制为单个连接。
+
+<a id="entry-9-3-show-servers-conn"></a>
+
+**`show servers conn [<backend>]`**
+
+```haproxy
+show servers conn [<backend>]
+```
+
+转储指定后端（或所有后端，若未指定）中服务器的当前连接和空闲连接状态。可使用后端名称或标识符。
+
+输出包含一行标题，显示字段名称，随后每行对应一个服务器，依次包含后端名称和 ID、服务器名称和 ID、地址、端口以及一系列数值。字段数量随线程数量变化而变化。输出格式在不同版本间及线程数量不同时可能略有差异。提取输出值时，需注意标题行以正确对应列，并留意线程数量，因为最后一列数据为每线程独立值：
+
+```text
+bkname/svname         后端名称 '/' 服务器名称
+bkid/svid             后端 ID '/' 服务器 ID
+addr                  服务器 IP 地址
+port                  服务器端口（若无则为零）
+-                     未使用的字段，作为视觉分隔符
+purge_delay           清理连接的间隔，单位为毫秒
+served                当前使用中的连接数
+used_cur              当前使用中的连接数
+                      注意，此值不包含附属于会话的连接
+used_max              进程启动以来 used_cur 的最高值
+need_est              所需连接总数的浮动估算值
+idle_sess             标记为私有的空闲连接数
+unsafe_nb             视为 "unsafe" 的空闲连接数
+safe_nb               视为 "safe" 的空闲连接数
+idle_lim              配置的最大空闲连接数
+idle_cur              各线程当前空闲连接数的总和
+idle_per_thr[NB]      NB 个线程中每个线程的空闲连接数
+```
+
+当 `<idle_cur>` 与 `<used_cur>` 的总和超过估算值 `<need_est>` 时，HAProxy 将每隔 `<purge_delay>` 终止一部分 `<idle_cur>` 空闲连接。该估算值会随连接活动情况变化。
+
+由于空闲连接具有线程特性，必须理解的是，某些值在读取后可能发生改变，因此单行内的数据一致性无法保证。此输出主要用于调试，不应常规监控或绘图。
+
+<a id="entry-9-3-show-servers-state"></a>
+
+**`show servers state [<backend>]`**
+
+```haproxy
+show servers state [<backend>]
+```
+
+转储运行配置中发现的服务器状态。可提供后端名称或标识符，以将输出限制为该后端。
+
+转储文件的格式如下：
+
+- 第一行包含格式版本（本规范中为 1）；
+- 第二行包含列标题，以井号（'#'）开头；
+- 第三行及后续行包含数据；
+- 以井号（'#'）开头的每一行均被视为注释。
+
+由于同一输出可能存在多个版本，以下是各文件格式版本对应的字段及其顺序列表：
+
+```text
+1:
+  be_id:                       后端唯一 ID。
+  be_name:                     后端标签。
+  srv_id:                      服务器唯一 ID（在后端内）。
+  srv_name:                    服务器标签。
+  srv_addr:                    服务器 IP 地址。
+  srv_op_state:                服务器运行状态（UP/DOWN/...）。
+                                 0 = SRV_ST_STOPPED
+                                   服务器离线。
+                                 1 = SRV_ST_STARTING
+                                   服务器正在预热（已上线但仍限流）。
+                                 2 = SRV_ST_RUNNING
+                                   服务器完全上线。
+                                 3 = SRV_ST_STOPPING
+                                   服务器已上线，但正在软停止（例如 404）。
+  srv_admin_state:             服务器管理状态（MAINT/DRAIN/...）。
+                               此状态实际是以下值的位掩码：
+                                 0x01 = SRV_ADMF_FMAINT
+                                   服务器被显式强制进入维护状态。
+                                 0x02 = SRV_ADMF_IMAINT
+                                   服务器继承了所跟踪服务器的维护状态。
+                                 0x04 = SRV_ADMF_CMAINT
+                                   服务器因配置而处于维护状态。
+                                 0x08 = SRV_ADMF_FDRAIN
+                                   服务器被显式强制进入排空状态。
+                                 0x10 = SRV_ADMF_IDRAIN
+                                   服务器继承了所跟踪服务器的排空状态。
+                                 0x20 = SRV_ADMF_RMAINT
+                                   服务器因 IP 地址解析失败而处于维护状态。
+                                 0x40 = SRV_ADMF_HMAINT
+                                   服务器 FQDN 通过统计信息套接字设置。
+
+  srv_uweight:                 用户可见的服务器权重。
+  srv_iweight:                 服务器初始权重。
+  srv_time_since_last_change:  距上次运行状态改变所经过的时间。
+  srv_check_status:            上次健康检查状态。
+  srv_check_result:            上次检查结果（FAILED/PASSED/...）。
+                                 0 = CHK_RES_UNKNOWN
+                                   默认初始化为此值。
+                                 1 = CHK_RES_NEUTRAL
+                                   检查有效，但没有状态信息。
+                                 2 = CHK_RES_FAILED
+                                   检查失败。
+                                 3 = CHK_RES_PASSED
+                                   检查成功，服务器再次完全上线。
+                                 4 = CHK_RES_CONDPASS
+                                   检查报告服务器不接受新会话。
+  srv_check_health:            检查的 rise / fall 当前计数器。
+  srv_check_state:             检查状态（ENABLED/PAUSED/...）。
+                               此状态实际是以下值的位掩码：
+                                 0x01 = CHK_ST_INPROGRESS
+                                   当前正在执行检查。
+                                 0x02 = CHK_ST_CONFIGURED
+                                   已配置此检查，可以启用。
+                                 0x04 = CHK_ST_ENABLED
+                                   此检查当前已在管理层面启用。
+                                 0x08 = CHK_ST_PAUSED
+                                   因维护而暂停检查（仅健康检查）。
+  srv_agent_state:             代理检查状态（ENABLED/PAUSED/...）。
+                               此状态使用与 "srv_check_state" 相同的位掩码，并增加以下专用值：
+                                 0x10 = CHK_ST_AGENT
+                                   此检查为代理检查（否则为健康检查）。
+  bk_f_forced_id:              表示后端 ID 是否由配置强制指定的标志。
+  srv_f_forced_id:             表示服务器 ID 是否由配置强制指定的标志。
+  srv_fqdn:                    服务器 FQDN。
+  srv_port:                    服务器端口。
+  srvrecord:                   与此 SRV 关联的 DNS SRV 记录。
+  srv_use_ssl:                 对服务器连接使用 ssl。
+  srv_check_port:              服务器健康检查端口。
+  srv_check_addr:              服务器健康检查地址。
+  srv_agent_addr:              服务器健康代理地址。
+  srv_agent_port:              服务器健康代理端口。
+```
+
+<a id="entry-9-3-show-sess"></a>
+
+**`show sess [<options>*]`**
+
+```haproxy
+show sess [<options>*]
+```
+
+转储所有已知的活动流（以前称为“会话”）。在慢速连接上应避免执行此操作，因为输出可能非常庞大。此命令受限制，仅可在配置为“operator”或“admin”级别的套接字上执行。请注意，在连接快速回收的机器上，输出的条目数可能少于实际存在的数量，因为该命令仅转储在输入命令前创建的最后一个流之前的所有现有流；在此期间终止的流将不会显示。有关支持的选项，请参见下文。
+
+<a id="entry-9-3-show-sess-2"></a>
+
+**`show sess [<id> | all | help] [<options>*]`**
+
+```haproxy
+show sess [<id> | all | help] [<options>*]
+```
+
+显示关于匹配流的大量内部信息。该命令支持两种输出格式：一种为简短格式，当未指定特定流标识符时，默认采用此格式；另一种为扩展格式，用于列出指定流时使用。简短格式由默认的 "show sess" 命令使用，每行仅输出一个流，包含少量信息，且流标识符位于行首，以十六进制表示（对应流的指针）。
+
+在扩展形式中，由 "show sess `<id>`" 或 "show sess all" 使用时，流会以大量调试细节的形式在多行上输出（每流约 20 行），且仍以标识符开头。此处流之间的分隔符为行首的标识符；属于同一流的额外行以一个或多个空格开头（流内容缩进输出）。输出大量流可能导致输出内容极为庞大，耗时较长且对 CPU 消耗较高，因此始终建议仅输出所需最少信息。这些信息对大多数用户无用，但 HAProxy 开发者可将其用于排查复杂问题。确切的输出格式故意未予文档化，以便根据需求自由演进，包括在稳定分支中亦可调整。该输出旨在结合 src/stream.c 中的 strm_dump_to_buffer() 函数的实现进行解读，以明确特定字段的含义。
+
+"help" 参数将显示命令的详细用法，而非转储流。
+
+可以设置某些选项以自定义转储内容或应用过滤器。以下是支持的选项： - backend `<b>`：仅显示与该后端关联的流   - frontend `<f>`：仅显示与该前端关联的流   - older `<age>`：仅显示超过 `<age>` 秒的流   - server `<b/s>`：仅显示与该后端+服务器关联的流   - show-uri：转储请求分析过程中捕获的事务 URI。仅在已捕获时显示   - susp：仅显示开发人员根据可能随时间或版本变化的标准判定为可疑的流
+
+<a id="entry-9-3-show-stat"></a>
+
+**`show stat [domain <resolvers|proxy>] [{<iid>|<proxy>} <type> <sid>] \`**
+
+```haproxy
+show stat [domain <resolvers|proxy>] [{<iid>|<proxy>} <type> <sid>] \
+          [typed|json] [desc] [up|no-maint]
+```
+
+转储统计信息。域用于选择要打印的统计信息；当前可用的有解析器和代理。默认使用 CSV 格式；若在其他参数后传递 "typed"，可启用上文所述的扩展类型化输出格式；若传递 "json"，则使用 JSON 格式。通过传递 `<id>`、`<type>` 和 `<sid>`，可仅转储选定项目：- `<iid>` 为代理 ID，-1 表示转储全部内容。也可指定代理名称 `<proxy>`，此时将使用该代理的 ID 作为选择器。- `<type>` 用于选择可转储对象的类型：1 表示前端，2 表示后端，4 表示服务器，-1 表示全部。这些值可进行按位或操作，例如：
+
+```text
+1 + 2     = 3   -> 前端 + 后端.
+1 + 2 + 4 = 7   -> 前端 + 后端 + 服务器.
+```
+
+    - `<sid>` 为服务器 ID，-1 表示转储所选代理的全部内容。
+
+示例：
+
+```shell
+    $ echo "show info;show stat" | socat stdio unix-connect:/tmp/sock1
+>>> Name: HAProxy
+    Version: 1.4-dev2-49
+    Release_date: 2009/09/23
+    Nbproc: 1
+    Process_num: 1
+    (...)
+
+    # pxname,svname,qcur,qmax,scur,smax,slim,stot,bin,bout,dreq,  (...)
+    stats,FRONTEND,,,0,0,1000,0,0,0,0,0,0,,,,,OPEN,,,,,,,,,1,1,0, (...)
+    stats,BACKEND,0,0,0,0,1000,0,0,0,0,0,,0,0,0,0,UP,0,0,0,,0,250,(...)
+    (...)
+    www1,BACKEND,0,0,0,0,1000,0,0,0,0,0,,0,0,0,0,UP,1,1,0,,0,250, (...)
+
+    $
+```
+
+在此示例中，同时发出了两条命令。这种方式便于在多进程模式下识别统计信息所对应的进程。在类型化输出格式中，无需如此操作，因为每个输出行都会报告进程编号。请注意，信息输出后有一行空行，用于标记第一个数据块的结束。第二个数据块（统计信息）末尾也出现类似的空行，以便读者确认输出未被截断。
+
+当指定 "typed" 时，输出格式更适用于监控工具，因为其提供了数值位置，并标明了每个输出字段的类型。每个值单独占一行，包含进程编号、元素编号、性质、来源和作用域。该格式也可通过在 HTTP 统计信息 URI 后添加 ";typed" 获得。请注意，在 typed 输出格式中，单个对象的转储是连续的，因此消费者无需一次性存储全部数据。
+
+"up" 修饰符将仅列出报告为正常或未检查的服务器。处于关闭、未解析或维护状态的服务器将不会被列出。这与 HTTP 统计信息中的 ";up" 选项类似。类似地，"no-maint" 修饰符将如同 HTTP 中的 ";no-maint" 修饰符，使处于禁用状态的服务器不被列出。区别在于，处于启用状态但已关闭的服务器不会被排除。
+
+使用类型化输出格式时，每行由 4 个以冒号（':'）分隔的列组成。第一列是由 5 个以点号（'.'）分隔的元素构成的序列。第一个元素是表示所描述对象类型的字母。当前已知的对象类型包括：'F' 表示前端，'B' 表示后端，'L' 表示监听器，'S' 表示服务器。第二个元素是表示该对象所属代理的唯一标识符的正整数。该值等同于 CSV 输出中的 "iid" 列，并与前端或后端段中可选的 "id" 指令前的值匹配。第三个元素是表示代理内部唯一对象标识符的正整数，对应于 CSV 输出中的 "sid" 列。在导出前端或后端时，该值报告为 0。对于监听器或服务器，该值对应其在代理内的相应 ID。第四个元素是字段在列表中的数值位置（从零开始）。该位置不应随时间变化，但根据构建选项或未来字段被删除的情况，可能出现空缺。第五个元素是字段名称，其形式与 CSV 输出中的名称一致。第六个元素是正整数，表示从 1 开始的相对进程编号。
+
+该行中第一个冒号之后的内容遵循上方段落所述的“类型化输出格式”。简而言之，第二个字段（第一个冒号之后）表示变量的来源、性质、作用域及持久化状态。第三个字段表示字段类型，包括 "s32"、"s64"、"u32"、"u64"、"flt" 和 "str"。第四个字段为值本身，消费者可根据第三字段的类型信息进行解析，并依据第二字段的信息进行处理。
+
+当命令后附加 "desc" 时，会在指标后附加一个额外的冒号及一个被引号括起的字符串，用于描述该指标。截至本文撰写时，此功能仅支持 "typed" 输出格式。
+
+因此，类型化模式下的整体行格式为：
+
+```text
+<obj>.<px_id>.<id>.<fpos>.<fname>.<process_num>:<tags>:<type>:<value>
+```
+
+以下是类型化输出格式的示例：
+
+```shell
+$ echo "show stat typed" | socat stdio unix-connect:/tmp/sock1
+F.2.0.0.pxname.1:KNSV:str:dummy
+F.2.0.1.svname.1:KNSV:str:FRONTEND
+F.2.0.4.scur.1:MGPV:u32:0
+F.2.0.5.smax.1:MMPV:u32:0
+F.2.0.6.slim.1:CLPV:u32:524269
+F.2.0.7.stot.1:MCPP:u64:0
+F.2.0.8.bin.1:MCPP:u64:0
+F.2.0.9.bout.1:MCPP:u64:0
+F.2.0.10.dreq.1:MCPP:u64:0
+F.2.0.11.dresp.1:MCPP:u64:0
+F.2.0.12.ereq.1:MCPP:u64:0
+F.2.0.17.status.1:SGPV:str:OPEN
+F.2.0.26.pid.1:KGPV:u32:1
+F.2.0.27.iid.1:KGSV:u32:2
+F.2.0.28.sid.1:KGSV:u32:0
+F.2.0.32.type.1:CGSV:u32:0
+F.2.0.33.rate.1:MRPP:u32:0
+F.2.0.34.rate_lim.1:CLPV:u32:0
+F.2.0.35.rate_max.1:MMPV:u32:0
+F.2.0.46.req_rate.1:MRPP:u32:0
+F.2.0.47.req_rate_max.1:MMPV:u32:0
+F.2.0.48.req_tot.1:MCPP:u64:0
+F.2.0.51.comp_in.1:MCPP:u64:0
+F.2.0.52.comp_out.1:MCPP:u64:0
+F.2.0.53.comp_byp.1:MCPP:u64:0
+F.2.0.54.comp_rsp.1:MCPP:u64:0
+(...)
+```
+
+在类型化格式中，第一列末尾的进程 ID 使得从多个进程获取的输出能够非常方便地进行视觉聚合，如下例所示，每行均对应一个进程：
+
+```shell
+$ ( echo show stat typed | socat /var/run/haproxy.sock1 -; \
+    echo show stat typed | socat /var/run/haproxy.sock2 - ) | \
+  sort -t . -k 1,1 -k 2,2n -k 3,3n -k 4,4n -k 5,5 -k 6,6n
+B.3.0.0.pxname.1:KNSV:str:private-backend
+B.3.0.0.pxname.2:KNSV:str:private-backend
+B.3.0.1.svname.1:KNSV:str:BACKEND
+B.3.0.1.svname.2:KNSV:str:BACKEND
+B.3.0.2.qcur.1:MGPV:u32:0
+B.3.0.2.qcur.2:MGPV:u32:0
+B.3.0.3.qmax.1:MMPV:u32:0
+B.3.0.3.qmax.2:MMPV:u32:0
+B.3.0.4.scur.1:MGPV:u32:0
+B.3.0.4.scur.2:MGPV:u32:0
+B.3.0.5.smax.1:MMPV:u32:0
+B.3.0.5.smax.2:MMPV:u32:0
+B.3.0.6.slim.1:CLPV:u32:1000
+B.3.0.6.slim.2:CLPV:u32:1000
+(...)
+```
+
+JSON 输出格式的定义详见其模式，可使用命令 "show schema json" 输出该模式。
+
+JSON 输出中不包含额外的空白字符，以减少输出体积。如需人工阅读，可通过格式化工具处理输出以提高可读性。示例：
+
+$ echo "show stat json" | socat /var/run/haproxy.sock stdio | &#92; python
+-m json.tool
+
+JSON 输出中不包含额外的空白字符，以减少输出体积。如需人工阅读，可通过格式化工具处理输出以提高可读性。示例：
+
+$ echo "show stat json" | socat /var/run/haproxy.sock stdio | &#92; python
+-m json.tool
+
+<a id="entry-9-3-show-ssl-ca-file"></a>
+
+**`show ssl ca-file [[*][\]<cafile>[:<index>]]`**
+
+```haproxy
+show ssl ca-file [[*][\]<cafile>[:<index>]]
+```
+
+显示进程加载的 CA 文件列表及其各自的证书数量。证书在状态为“已使用”前不会被任何前端或后端使用。列表中可能出现 "@system-ca" 条目，该条目由 httpclient 默认加载，包含 OpenSSL 返回的系统信任 CA 列表。若文件名前缀为星号，则表示该操作尚未提交。若指定 `<cafile>` 而未指定 `<index>`，将显示 CA 文件的状态（“已使用”/“未使用”），随后列出该 CA 文件中包含的所有证书的详细信息。每个证书显示的详细信息与 "show ssl cert" 命令输出一致。若指定 `<cafile>` 后跟 `<index>`，则仅显示指定索引的证书详情。索引从 1 开始。若索引无效（例如过大），则不显示任何内容。该命令可用于检查 CA 文件是否已正确更新。也可通过在文件名前加 '*' 来查看正在进行中的事务详情。若文件名首字符为 '*'，可使用 '&#92;\*' 进行转义。
+
+示例：
+
+```shell
+$ echo "show ssl ca-file" | socat /var/run/haproxy.master -
+# transaction
+*cafile.crt - 2 certificate(s)
+# filename
+cafile.crt - 1 certificate(s)
+
+$ echo "show ssl ca-file cafile.crt" | socat /var/run/haproxy.master -
+Filename: /home/tricot/work/haproxy/reg-tests/ssl/set_cafile_ca2.crt
+Status: Used
+
+Certificate #1:
+Serial: 11A4D2200DC84376E7D233CAFF39DF44BF8D1211
+notBefore: Apr  1 07:40:53 2021 GMT
+notAfter: Aug 17 07:40:53 2048 GMT
+Subject Alternative Name:
+Algorithm: RSA4096
+SHA1 FingerPrint: A111EF0FEFCDE11D47FE3F33ADCA8435EBEA4864
+Subject: /C=FR/ST=Some-State/O=HAProxy Technologies/CN=HAProxy Technologies CA
+Issuer: /C=FR/ST=Some-State/O=HAProxy Technologies/CN=HAProxy Technologies CA
+
+$ echo "show ssl ca-file *cafile.crt:2" | socat /var/run/haproxy.master -
+Filename: */home/tricot/work/haproxy/reg-tests/ssl/set_cafile_ca2.crt
+Status: Unused
+
+Certificate #2:
+Serial: 587A1CE5ED855040A0C82BF255FF300ADB7C8136
+[...]
+```
+
+<a id="entry-9-3-show-ssl-cert"></a>
+
+**`show ssl cert [[*][\]<filename>]`**
+
+```haproxy
+show ssl cert [[*][\]<filename>]
+```
+
+显示已加载到进程中的证书列表。这些证书在状态为“已使用”之前，不会被任何前端或后端使用。若文件名前缀为星号，则表示该证书为尚未提交的事务。若指定文件名，将显示该证书的详细信息。此命令可用于检查证书是否已正确更新。也可通过在文件名前加 '*' 来显示事务的详细信息。若文件名首字符为 '*'，可使用 &#92;\* 进行转义。此命令还可通过在文件名后缀 ".ocsp" 扩展名来显示证书的 OCSP 响应详情。该功能对已提交的证书及正在进行的事务均有效。对于已提交的证书，此命令等效于使用证书对应的 OCSP 响应 ID 调用 "show ssl ocsp-response"。
+
+示例：
+
+```shell
+$ echo "@1 show ssl cert" | socat /var/run/haproxy.master -
+# transaction
+*test.local.pem
+# filename
+test.local.pem
+
+$ echo "@1 show ssl cert test.local.pem" | socat /var/run/haproxy.master -
+Filename: test.local.pem
+Status: Used
+Serial: 03ECC19BA54B25E85ABA46EE561B9A10D26F
+notBefore: Sep 13 21:20:24 2019 GMT
+notAfter: Dec 12 21:20:24 2019 GMT
+Issuer: /C=US/O=Let's Encrypt/CN=Let's Encrypt Authority X3
+Subject: /CN=test.local
+Subject Alternative Name: DNS:test.local, DNS:imap.test.local
+Algorithm: RSA2048
+SHA1 FingerPrint: 417A11CAE25F607B24F638B4A8AEE51D1E211477
+
+$ echo "@1 show ssl cert *test.local.pem" | socat /var/run/haproxy.master -
+Filename: *test.local.pem
+Status: Unused
+[...]
+
+$ echo "@1 show ssl cert \*.local.pem" | socat /var/run/haproxy.master -
+Filename: *.local.pem
+Status: Used
+[...]
+```
+
+<a id="entry-9-3-show-ssl-crl-file"></a>
+
+**`show ssl crl-file [[*][\]<crlfile>[:<index>]]`**
+
+```haproxy
+show ssl crl-file [[*][\]<crlfile>[:<index>]]
+```
+
+显示已加载到进程中的 CRL 文件列表。这些文件在状态为“已使用”之前，不会被任何前端或后端使用。若文件名前缀为星号，表示该操作尚未提交。若指定 `<crlfile>` 而未指定 `<index>`，将显示 CRL 文件的状态（“已使用”/“未使用”），并列出该 CRL 文件中包含的所有吊销列表的详细信息。每个列表的详细信息基于命令 "openssl crl -text -noout -in `<file>`" 的输出。若指定 `<crlfile>` 后跟 `<index>`，则仅显示指定索引的列表详情。索引从 1 开始。若索引无效（例如过大），则不显示任何内容。该命令可用于检查 CRL 文件是否已正确更新。也可以通过在文件名前加 '*' 来查看正在进行中的事务的详情。若文件名首字符为 '*'，可使用 '&#92;\*' 进行转义。
+
+示例：
+
+```shell
+$ echo "show ssl crl-file" | socat /var/run/haproxy.master -
+# transaction
+*crlfile.pem
+# filename
+crlfile.pem
+
+$ echo "show ssl crl-file crlfile.pem" | socat /var/run/haproxy.master -
+Filename: /home/tricot/work/haproxy/reg-tests/ssl/crlfile.pem
+Status: Used
+
+Certificate Revocation List #1:
+Version 1
+Signature Algorithm: sha256WithRSAEncryption
+Issuer: /C=FR/O=HAProxy Technologies/CN=Intermediate CA2
+Last Update: Apr 23 14:45:39 2021 GMT
+Next Update: Sep  8 14:45:39 2048 GMT
+Revoked Certificates:
+    Serial Number: 1008
+        Revocation Date: Apr 23 14:45:36 2021 GMT
+
+Certificate Revocation List #2:
+Version 1
+Signature Algorithm: sha256WithRSAEncryption
+Issuer: /C=FR/O=HAProxy Technologies/CN=Root CA
+Last Update: Apr 23 14:30:44 2021 GMT
+Next Update: Sep  8 14:30:44 2048 GMT
+No Revoked Certificates.
+```
+
+<a id="entry-9-3-show-ssl-crt-list"></a>
+
+**`show ssl crt-list [-n] [<filename>]`**
+
+```haproxy
+show ssl crt-list [-n] [<filename>]
+```
+
+显示 HAProxy 配置中使用的 crt-list 列表和目录列表。若指定文件名，则转储 crt-list 或目录的内容。转储后的输出可作为 crt-list 文件使用。使用 '-n' 选项可显示行号，当与 'del ssl crt-list' 选项配合使用且存在重复条目时尤为有用。使用 '-n' 选项输出的内容不兼容 crt-list 格式，且无法被 HAProxy 加载。
+
+示例：
+
+```shell
+echo "show ssl crt-list -n localhost.crt-list" | socat /tmp/sock1 -
+# localhost.crt-list
+common.pem:1 !not.test1.com *.test1.com !localhost
+common.pem:2
+ecdsa.pem:3 [verify none allow-0rtt ssl-min-ver TLSv1.0 ssl-max-ver TLSv1.3] localhost !www.test1.com
+ecdsa.pem:4 [verify none allow-0rtt ssl-min-ver TLSv1.0 ssl-max-ver TLSv1.3]
+```
+
+<a id="entry-9-3-show-ssl-ech"></a>
+
+**`show ssl ech [<name>]`**
+
+```haproxy
+show ssl ech [<name>]
+```
+
+显示 HAProxy 进程中加载的 ECH 密钥列表。
+
+当指定 `<name>` 时，显示特定绑定行的键。绑定行格式为 `<frontend>`/@`<filename>`:`<linenum>`（例如：frontend1/@HAProxy.conf:19），或 `<frontend>`/`<name>`（若绑定行使用了 "name" 关键字命名）。
+
+'age' 条目表示键在绑定行中加载以来经过的时间（单位：秒）。当 HAProxy 启动、重载或重启时，该值将被重置。
+
+必须使用支持 ECH 的 OpenSSL 版本，且 HAProxy 必须以 USE_ECH=1 编译。
+该命令仅在以实验模式运行的 CLI 连接中受支持（参见“experimental-mode on”）。
+
+另请参见配置手册中 [第 5.1 节](/zh/haproxy/bind-and-server-options/#section-5-1) 的 "ech"。
+
+示例：
+
+```shell
+$ echo "experimental-mode on; show ssl ech" | socat /tmp/haproxy.sock -
+ ***
+ frontend: frontend1
+
+ bind: frontend1/@haproxy.conf:19
+
+ ECH entry: 0 public_name: example.com age: 557 (has private key)
+      [fe0d,94,example.com,[0020,0001,0001],c39285b774bf61c071864181c5292a012b30adaf767e39369a566af05573ef2b,00,00]
+
+ ECH entry: 1 public_name: example.com age: 557 (has private key)
+      [fe0d,ee,example.com,[0020,0001,0001],6572191131b5cabba819f8cacf2d2e06fa0b87b30d9b793644daba7b8866d511,00,00]
+
+ bind: frontend1/@haproxy.conf:20
+
+ ECH entry: 0 public_name: example.com age: 557 (has private key)
+      [fe0d,94,example.com,[0020,0001,0001],c39285b774bf61c071864181c5292a012b30adaf767e39369a566af05573ef2b,00,00]
+
+ ECH entry: 1 public_name: example.com age: 557 (has private key)
+      [fe0d,ee,example.com,[0020,0001,0001],6572191131b5cabba819f8cacf2d2e06fa0b87b30d9b793644daba7b8866d511,00,00]
+
+$ echo "experimental-mode on; show ssl ech frontend1/@haproxy.conf:19" | socat /tmp/haproxy.sock -
+***
+ECH for frontend1/@haproxy.conf:19
+ECH entry: 0 public_name: example.com age: 786 (has private key)
+      [fe0d,94,example.com,[0020,0001,0001],c39285b774bf61c071864181c5292a012b30adaf767e39369a566af05573ef2b,00,00]
+
+ECH entry: 1 public_name: example.com age: 786 (has private key)
+      [fe0d,ee,example.com,[0020,0001,0001],6572191131b5cabba819f8cacf2d2e06fa0b87b30d9b793644daba7b8866d511,00,00]
+```
+
+<a id="entry-9-3-show-ssl-jwt"></a>
+
+**`show ssl jwt`**
+
+```haproxy
+show ssl jwt
+```
+
+显示可用于 JWT 验证的证书列表。参见“add ssl jwt”和“del ssl jwt”命令。有关更多信息，请参见“jwt”证书选项。
+
+示例：
+
+```shell
+echo "show ssl jwt"  | socat /tmp/sock1 -
+#filename
+jwt.pem
+```
+
+<a id="entry-9-3-show-ssl-ocsp-response"></a>
+
+**`show ssl ocsp-response [[text|base64] <id|path>]`**
+
+```haproxy
+show ssl ocsp-response [[text|base64] <id|path>]
+```
+
+显示 HAProxy 中所用所有 OCSP 响应对应的 OCSP 树条目 ID，以及对应前端证书的路径、颁发者名称与密钥哈希，以及该 OCSP 响应所针对证书的序列号。若提供有效的 `<id>` 或有效前端证书的 `<path>`，则显示对应 OCSP 响应的内容。当提供 `<id>` 时，可定义数据转储的格式。'text' 为默认选项，可显示与执行 "openssl ocsp -respin `<ocsp-response>` -text" 命令时相同的 OCSP 响应详细信息。'base64' 格式可将 OCSP 响应内容以 base64 形式转储。
+
+示例：
+
+```shell
+$ echo "show ssl ocsp-response" | socat /var/run/haproxy.master -
+# Certificate IDs
+  Certificate ID key: 303b300906052b0e03021a050004148a83e0060faff709ca7e9b95522a2e81635fda0a0414f652b0e435d5ea923851508f0adbe92d85de007a0202100a
+  Certificate path: /path_to_cert/foo.pem
+    Certificate ID:
+      Issuer Name Hash: 8A83E0060FAFF709CA7E9B95522A2E81635FDA0A
+      Issuer Key Hash: F652B0E435D5EA923851508F0ADBE92D85DE007A
+      Serial Number: 100A
+
+$ echo "show ssl ocsp-response 303b300906052b0e03021a050004148a83e0060faff709ca7e9b95522a2e81635fda0a0414f652b0e435d5ea923851508f0adbe92d85de007a0202100a" | socat /var/run/haproxy.master -
+OCSP Response Data:
+  OCSP Response Status: successful (0x0)
+  Response Type: Basic OCSP Response
+  Version: 1 (0x0)
+  Responder Id: C = FR, O = HAProxy Technologies, CN = ocsp.haproxy.com
+  Produced At: May 27 15:43:38 2021 GMT
+  Responses:
+  Certificate ID:
+    Hash Algorithm: sha1
+    Issuer Name Hash: 8A83E0060FAFF709CA7E9B95522A2E81635FDA0A
+    Issuer Key Hash: F652B0E435D5EA923851508F0ADBE92D85DE007A
+    Serial Number: 100A
+  Cert Status: good
+  This Update: May 27 15:43:38 2021 GMT
+  Next Update: Oct 12 15:43:38 2048 GMT
+  [...]
+
+$ echo "show ssl ocsp-response base64 /path_to_cert/foo.pem" | socat /var/run/haproxy.sock -
+  MIIB8woBAKCCAewwggHoBgkrBgEFBQcwAQEEggHZMIIB1TCBvqE[...]
+```
+
+<a id="entry-9-3-show-ssl-ocsp-updates"></a>
+
+**`show ssl ocsp-updates`**
+
+```haproxy
+show ssl ocsp-updates
+```
+
+显示由 OCSP 更新机制所涉及条目的信息。该命令将为每个 OCSP 响应输出一行，包含响应的预期更新时间、上次成功更新的时间，以及成功和失败更新的计数器。同时，将以数值形式和文本形式提供上次更新的状态（成功或失败）。有关可能错误的完整列表，请参见下文。输出行将按“Next Update”时间升序排列。每行还将包含指向使用该 OCSP 响应的第一个前端证书的路径。有关 OCSP 自动更新的更多信息，请参见“show ssl ocsp-response”命令和“ocsp-update”选项。
+
+更新的错误码和错误字符串可能如下：
+
+```text
+  +----+-------------------------------------+
+  | ID | 消息                                |
+  +----+-------------------------------------+
+  |  0 | "Unknown"                           |
+  |  1 | "Update successful"                 |
+  |  2 | "HTTP error"                        |
+  |  3 | "Missing \"ocsp-response\" header"  |
+  |  4 | "OCSP response check failure"       |
+  |  5 | "Error during insertion"            |
+  +----+-------------------------------------+
+```
+
+示例：
+
+```shell
+$ echo "show ssl ocsp-updates" | socat /tmp/haproxy.sock -
+  OCSP Certid | Path | Next Update | Last Update | Successes | Failures | Last Update Status | Last Update Status (str)
+      303b300906052b0e03021a050004148a83e0060faff709ca7e9b95522a2e81635fda0a0414f652b0e435d5ea923851508f0adbe92d85de007a02021015 | /path_to_cert/cert.pem | 30/Jan/2023:00:08:09 +0000 | - | 0 | 1 | 2 | HTTP error
+      304b300906052b0e03021a0500041448dac9a0fb2bd32d4ff0de68d2f567b735f9b3c40414142eb317b75856cbae500940e61faf9d8b14c2c6021203e16a7aa01542f291237b454a627fdea9c1 | /path_to_cert/other_cert.pem | 30/Jan/2023:01:07:09 +0000 | 30/Jan/2023:00:07:09 +0000 | 1 | 0 | 1 | Update successful
+```
+
+<a id="entry-9-3-show-ssl-providers"></a>
+
+**`show ssl providers`**
+
+```haproxy
+show ssl providers
+```
+
+显示 OpenSSL 初始化期间加载的提供者名称。提供者加载确实可通过 OpenSSL 配置文件进行配置，此选项可用于检查是否加载了正确的提供者。该命令仅在 OpenSSL v3 中可用。
+
+示例：
+
+```shell
+$ echo "show ssl providers" | socat /var/run/haproxy.master -
+Loaded providers:
+    - fips
+    - base
+```
+
+<a id="entry-9-3-show-ssl-sni"></a>
+
+**`show ssl sni [-f <frontend>] [-A] [-t <offset>]`**
+
+```haproxy
+show ssl sni [-f <frontend>] [-A] [-t <offset>]
+```
+
+转储指定前端配置的全部 SNI，若未指定前端则转储所有前端。该功能可用于查看前端提供的 SNI 列表，并识别同一前端是否因多个证书而重复定义了某个 SNI。
+
+-A 选项可用于过滤列表，仅显示已过 notAfter 日期的证书，从而仅展示已过期的证书。
+
+-t 选项接受以秒为单位的偏移量，或带时间单位（s、m、h、d）的偏移量，该偏移量将加到当前时间上，结合 -A. 使用时，可用于检查在偏移时间之后到期的证书。例如，若要检查 30 天后将过期的证书，只需执行命令 "show ssl sni -A -t 30d"。
+
+列之间以单个 &#92;t 分隔，便于简单解析。
+
+“前端/绑定”列显示前端名称，后跟配置中的绑定行位置（前端/文件：行号）。
+
+'SNI' 列显示 SNI，其内容可以是 CN、SAN 或来自 crt-list 的过滤器。绑定行的默认证书（即通过 'default-crt' 显式声明的证书，或在未使用 'strict-sni' 时隐式取绑定行中第一个证书）在 SNI 列中显示为 '\*' 字符。
+
+“负向过滤器”列列出与通配符关联的负向过滤器，该列将显示位于同一 crt-list 行上的所有负向过滤器。若无负向过滤器，则显示连字符。
+
+“类型”列显示加密算法类型，可以是 "rsa"、"ecdsa" 或 "dsa"。
+
+'文件名' 列可以是配置中的文件名，也可以是 crt-store 中声明的别名。
+
+'NotAfter' 和 'NotBefore' 列直接从 X509 叶证书中提取。
+
+示例：
+
+```shell
+$ echo "@1 show ssl sni -A -t 30d" | socat /var/run/haproxy-master.sock - | column -t -s $'\t'
+# Frontend/Bind        SNI        Negative Filter  Type   Filename             NotAfter                  NotBefore
+li1/haproxy.cfg:10021  *.ex.lan   !m1.ex.lan       rsa    example.lan.pem      Jun 13 13:37:21 2024 GMT  May 14 13:37:21 2024 GMT
+li1/haproxy.cfg:10021  machine10  -                ecdsa  machine10.pem.ecdsa  Jun 13 13:37:21 2024 GMT  May 14 13:37:21 2024 GMT
+li1/haproxy.cfg:10021  machine10  -                rsa    machine10.pem.rsa    Jun 13 13:37:21 2024 GMT  May 14 13:37:21 2024 GMT
+li1/haproxy.cfg:10021  machine10  -                ecdsa  machine10.pem.ecdsa  Jun 13 13:37:21 2024 GMT  May 14 13:37:21 2024 GMT
+li1/haproxy.cfg:10021  localhost  -                rsa    localhost.pem.rsa    Jun 13 13:37:11 2024 GMT  May 14 13:37:11 2024 GMT
+li1/haproxy.cfg:10021  localhost  -                ecdsa  localhost.pem.ecdsa  Jun 13 13:37:10 2024 GMT  May 14 13:37:10 2024 GMT
+li1/haproxy.cfg:10021  *          -                rsa    localhost.pem.rsa    Jun 13 13:37:11 2024 GMT  May 14 13:37:11 2024 GMT
+```
+
+<a id="entry-9-3-show-startup-logs"></a>
+
+**`show startup-logs`**
+
+```haproxy
+show startup-logs
+```
+
+输出当前 HAProxy 进程启动期间发出的所有消息，每个 startup-logs 缓冲区均与其 HAProxy 工作进程唯一对应。
+
+该关键字也存在于主 CLI 中，用于显示最新的启动或重载尝试状态。
+
+<a id="entry-9-3-show-table"></a>
+
+**`show table`**
+
+```haproxy
+show table
+```
+
+转储所有已知 stick-table 的通用信息。返回其名称（持有该 stick-table 的代理名称）、类型（当前始终为 0，表示 IP）、最大可能条目数以及当前已使用的条目数。
+
+示例：
+
+```shell
+    $ echo "show table" | socat stdio /tmp/sock1
+>>> # table: front_pub, type: ip, size:204800, used:171454
+>>> # table: back_rdp, type: ip, size:204800, used:0
+```
+
+<a id="entry-9-3-show-table-2"></a>
+
+**`show table <name> [ data.<type> <operator> <value> [data.<type> ...]] |`**
+
+```haproxy
+show table <name> [ data.<type> <operator> <value> [data.<type> ...]] |
+                  [ key <key> ] | [ ptr <ptr> ]
+```
+
+转储 stick-table `<name>` 的内容。在此模式下，首先会报告与“show table”相同的关于该表的通用信息，随后转储所有条目。由于该操作可能产生大量数据，可以指定一个过滤器，以明确显示哪些条目。
+
+当使用 "data." 形式时，过滤器作用于存储的数据（参见第 4.2 段中的 "stick-table"）。必须在 `<type>` 中指定存储的数据类型，且该数据类型必须已存储于表中，否则将报告错误。数据将根据 `<operator>` 与 64 位整数 `<value>` 进行比较。操作符与 ACL 中相同：
+
+    - eq：匹配数据等于此值的条目
+    - ne：匹配数据不等于此值的条目
+    - le：匹配数据小于或等于此值的条目
+    - ge：匹配数据大于或等于此值的条目
+    - lt：匹配数据小于此值的条目
+    - gt：匹配数据大于此值的条目
+
+在此形式中，可使用多个数据过滤器条目，最多可达构建时定义的上限（默认为 4 个）。
+
+使用键值形式时，将显示条目 `<key>`。键的类型必须与表的类型相同，当前仅限于 IPv4、IPv6、整数和字符串。
+
+当使用 ptr 形式时，将显示条目 `<ptr>`。`<ptr>` 以 0xffff 格式书写，必须与先前执行“show table”命令返回的地址对应。若因键为空或 CLI 中存在不兼容字符而无法通过键匹配条目时，使用指针匹配条目可能具有实际意义。
+
+如果 data.`<type>` 为数组类型，可以使用 "[]" 访问数组中的特定索引，例如：data.gpt[1]
+
+示例：
+
+```shell
+    $ echo "show table http_proxy" | socat stdio /tmp/sock1
+>>> # table: http_proxy, type: ip, size:204800, used:2
+>>> 0x80e6a4c: key=127.0.0.1 use=0 exp=3594729 gpc0=0 conn_rate(30000)=1  \
+      bytes_out_rate(60000)=187
+>>> 0x80e6a80: key=127.0.0.2 use=0 exp=3594740 gpc0=1 conn_rate(30000)=10 \
+      bytes_out_rate(60000)=191
+
+    $ echo "show table http_proxy data.gpc0 gt 0" | socat stdio /tmp/sock1
+>>> # table: http_proxy, type: ip, size:204800, used:2
+>>> 0x80e6a80: key=127.0.0.2 use=0 exp=3594740 gpc0=1 conn_rate(30000)=10 \
+      bytes_out_rate(60000)=191
+
+    $ echo "show table http_proxy data.conn_rate gt 5" | \
+        socat stdio /tmp/sock1
+>>> # table: http_proxy, type: ip, size:204800, used:2
+>>> 0x80e6a80: key=127.0.0.2 use=0 exp=3594740 gpc0=1 conn_rate(30000)=10 \
+      bytes_out_rate(60000)=191
+
+    $ echo "show table http_proxy key 127.0.0.2" | \
+        socat stdio /tmp/sock1
+>>> # table: http_proxy, type: ip, size:204800, used:2
+>>> 0x80e6a80: key=127.0.0.2 use=0 exp=3594740 gpc0=1 conn_rate(30000)=10 \
+      bytes_out_rate(60000)=191
+
+    $ echo "show table http_proxy ptr 0x80e6a80" | \
+        socat stdio /tmp/sock1
+>>> # table: http_proxy, type: ip, size:204800, used:2
+>>> 0x80e6a80: key=127.0.0.2 use=0 exp=3594740 gpc0=1 conn_rate(30000)=10 \
+      bytes_out_rate(60000)=191
+```
+
+当数据准则应用于依赖时间的动态值（如字节速率）时，该值会在评估条目期间动态计算，以决定是否需要转储。这意味着此类过滤器可能在一段时间内匹配，随后不再匹配，因为随着时间推移，平均事件速率下降。
+
+可以利用此功能提取滥用服务的 IP 地址列表，以便进行监控，甚至在防火墙中将其列入黑名单。示例：
+
+```shell
+$ echo "show table http_proxy data.gpc0 gt 0" \
+  | socat stdio /tmp/sock1 \
+  | fgrep 'key=' | cut -d' ' -f2 | cut -d= -f2 > abusers-ip.txt
+  ( 或 | awk '/key/{ print a[split($2,a,"=")]; }' )
+```
+
+当粘性表同步至支持分片的对等节点段时，每个键将显示其分片编号（否则报告为“0”）。这有助于确定哪些对等节点将接收该键。示例：
+
+```shell
+$ echo "show table http_proxy" | socat stdio /tmp/sock1 | fgrep shard=
+  0x7f23b0c822a8: key=10.0.0.2 use=0 exp=296398 shard=9 gpc0=0
+  0x7f23a063f948: key=10.0.0.6 use=0 exp=296075 shard=12 gpc0=0
+  0x7f23b03920b8: key=10.0.0.8 use=0 exp=296766 shard=1 gpc0=0
+  0x7f23a43c09e8: key=10.0.0.12 use=0 exp=295368 shard=8 gpc0=0
+```
+
+<a id="entry-9-3-show-tasks"></a>
+
+**`show tasks`**
+
+```haproxy
+show tasks
+```
+
+显示当前运行队列中任务的数量，以及每个函数的任务数量及其平均延迟（当已知时，仅适用于启用了任务剖析的纯任务）。该输出为执行瞬间的快照，结果可能因执行时队列中剩余的任务而有所差异，尤其是在单线程模式下，此时 I/O 操作重新填充队列的可能性较低（除非队列已满）。该命令会独占访问进程，在高负载进程上执行时可能导致轻微但可测量的延迟，因此必须避免被监控机器人滥用。
+
+<a id="entry-9-3-show-threads"></a>
+
+**`show threads`**
+
+```haproxy
+show threads
+```
+
+为每个线程转储一些内部状态和结构，有助于开发者理解问题。输出格式力求可读，每个线程显示一个独立区块。当 HAProxy 以 USE_THREAD_DUMP=1 编译时，会使用涉及线程信号的高级转储机制，使每个线程依次转储自身状态。若未启用此选项，执行命令的线程将显示全部详细信息，其余线程则信息较少。处理命令的线程前会显示星号（'*'）。若某线程前显示右角括号（'>'），表示自上次调用此命令以来该线程未取得任何进展，表明代码中存在必须立即报告的缺陷。若两个线程均出现此情况，通常指示存在死锁。若仅有一个线程出现此情况，则为其他类型缺陷，例如链表损坏。在所有情况下，进程已无法正常运行，必须重启。
+
+输出格式未予文档化，以便在识别新需求时可轻松演进，无需维护任何形式的向后兼容性。与“show activity”类似，若无代码在手，这些值毫无意义。
+
+<a id="entry-9-3-show-tls-keys"></a>
+
+**`show tls-keys [id|*]`**
+
+```haproxy
+show tls-keys [id|*]
+```
+
+转储所有已加载的 TLS 会话票证密钥引用。显示 TLS 会话票证密钥引用 ID 以及密钥加载来源文件。可使用这两个信息通过命令 "set ssl tls-key" 更新 TLS 密钥。若指定 ID 作为参数，将仅转储该引用的会话票证；使用 \* 则转储所有引用中的全部密钥。
+
+<a id="entry-9-3-show-schema-json"></a>
+
+**`show schema json`**
+
+```haproxy
+show schema json
+```
+
+输出 "show info json" 和 "show stat json" 时所使用的模式的转储。
+
+输出中不包含额外的空白字符，以减少输出体积。对于人工阅读，将输出通过格式化打印机处理可能更有帮助。示例：
+
+$ echo "show schema json" | socat /var/run/haproxy.sock stdio | &#92;
+python -m json.tool
+
+该模式遵循“JSON Schema”（json-schema.org）规范，因此可使用验证器对 “show info json” 和 “show stat json” 的输出结果依据该模式进行验证。
+
+<a id="entry-9-3-show-trace"></a>
+
+**`show trace [<source>]`**
+
+```haproxy
+show trace [<source>]
+```
+
+显示当前追踪状态。对于每个源，将显示一行，其中单个字符的状态指示追踪是否已停止、等待或运行。输出接收端（或“none”表示未设置）以及该接收端中丢弃的事件数量，随后是源的简要描述。若指定了源名称，则会列出该源支持的所有事件的详细列表，以及每个动作（报告、启动、暂停、停止）的状态，启用时以“+”表示，否则以“-”表示。所有这些事件相互独立，一个事件可能触发启动但未被报告，反之亦然。
+
+<a id="entry-9-3-show-version"></a>
+
+**`show version`**
+
+```haproxy
+show version
+```
+
+显示当前 HAProxy 进程的版本。此命令可从主进程和工作进程的 CLI 中调用。
+
+示例：
+
+```shell
+$ echo "show version" | socat /var/run/haproxy.sock stdio
+2.4.9
+
+$ echo "show version" | socat /var/run/haproxy-master.sock stdio
+2.5.0
+```
+
+<a id="entry-9-3-shutdown-frontend"></a>
+
+**`shutdown frontend <frontend>`**
+
+```haproxy
+shutdown frontend <frontend>
+```
+
+完全删除指定的前端。该前端绑定的所有端口将被释放。执行此操作后，前端将无法再启用。此操作旨在用于无法想象停止代理的环境，但又必须修复配置错误的代理时使用。通过这种方式，可以释放端口，并将其绑定到其他进程以恢复服务。前端一旦终止，将完全不会出现在统计信息页面上。
+
+前端可通过其名称或其数字 ID 指定，数字 ID 前需加井号（'#'）。
+
+此命令受限制，仅可在配置为“admin”级别的套接字上执行。
+
+<a id="entry-9-3-shutdown-session"></a>
+
+**`shutdown session <id>`**
+
+```haproxy
+shutdown session <id>
+```
+
+立即终止与指定流标识符匹配的流。该标识符是 "show sess" 转储输出中每行开头的第一个字段（对应流指针）。此操作可用于在不等待超时的情况下终止长时间运行的流，或在持续传输进行时终止该流。被终止的流将在日志中以 'K' 标志报告。
+
+<a id="entry-9-3-shutdown-sessions-server"></a>
+
+**`shutdown sessions server <backend>/<server>`**
+
+```haproxy
+shutdown sessions server <backend>/<server>
+```
+
+立即终止与指定服务器关联的所有流。例如，可在将服务器置于维护模式后，使用此操作终止长时间运行的流。被终止的流将在日志中以 'K' 标志报告。
+
+后端连接在空闲状态下保留，除非服务器已进入维护模式，此时连接将立即被安排删除。
+
+<a id="entry-9-3-trace"></a>
+
+**`trace`**
+
+```haproxy
+trace
+```
+
+`trace` 命令单独使用时，会列出追踪源、其当前状态及简要描述。该命令仅作为进入下一级操作的菜单，详见下方其他 `trace` 命令。
+
+<a id="entry-9-3-trace-0"></a>
+
+**`trace 0`**
+
+```haproxy
+trace 0
+```
+
+立即停止所有追踪。此操作用于快速终止调试会话，或在多个源上启用了复杂追踪且影响服务时作为紧急处理动作。
+
+<a id="entry-9-3-trace-2"></a>
+
+**`trace <source> [<args...>]`**
+
+```haproxy
+trace <source> [<args...>]
+```
+
+为源 `<source>` 配置追踪。不带参数时，将列出该源支持的所有子命令。可串联多个子命令。支持的子命令如下：
+
+event [ [+\|-\|!]`<name>` ] 不带参数时，将列出指定源支持的所有事件。已启用的事件前缀为 "+"，未启用的事件前缀为 "-"。请注意，单个追踪可能被标记为多个事件，只要任一已启用的事件与追踪中标记的事件匹配，该事件就会传递至追踪子系统。例如，接收一个类型为 HEADERS 的 HTTP/2 帧可能触发帧事件和流事件，因为该帧会创建一个新流。若该源已启用帧事件或流事件中的任意一个，该帧将被传递至追踪框架。
+
+    带参数时，可切换每个事件的状态，并单独启用或禁用事件。支持两个特殊关键字：
+    "none" 不匹配任何事件，用于一次性禁用所有事件；"any" 匹配所有事件，用于
+    一次性启用所有事件。其他事件由事件源自行定义。指定事件名称即可启用该事件，
+    也可添加 '+' 前缀以便阅读。若在事件名称前添加 '-' 或 '!'，则禁用该事件。
+
+    要完全禁用某个追踪源，可传入 "event none"，该源将立即被完全忽略。
+
+follow `<other_source>`。当另一源 `<other_source>` 锁定于某一条件，且当前源也匹配相同条件时，此操作允许源 `<source>` 同时发出追踪信息。例如，若某一源锁定于会话，从另一源跟随该源将导致后者为与该会话相关的所有事件发出追踪信息。此功能可在一定程度上用于追踪后端请求及其关联的前端连接。"session" 源通过提供 "new" 和 "end" 事件，使此类锁定处理更加简便。请注意，此时源 `<source>` 无需启用追踪，其追踪状态也不会受到影响。然而，若某些事件不包含可用于关联到被追踪元素的信息，则可能遗漏部分事件。该命令也可与元源 "all" 一同使用：此时所有源将跟随 `<other_source>`。
+
+示例：
+
+```text
+trace h1 lock session start sess_new pause sess_end follow session
+```
+
+level [`<level>`] 不带参数时，将列出此源的所有追踪级别，当前级别前会以星号（'*'）作为标记。带参数时，将追踪级别更改为指定级别。详细级别是一种在事件上报前应用的过滤器。此类过滤器用于根据事件的重要程度选择性地包含或排除事件。例如，开发者可能需要精确了解 HTTP 头在代码中的哪个位置被判定为无效，而终端用户可能根本不在意该头的有效性。目前，追踪级别共有 5 个不同等级：
+
+```text
+user       报告适合普通 haproxy 用户观察其流量的信息，通常包含部分 HTTP 请求和响应，
+           但细节较少。为便于操作，大多数跟踪源以此为默认级别。
+
+proto      在 "user" 级别的信息之外，还显示协议层面的变化，例如帧类型或解码后的 HTTP 头。
+
+state      在 "proto" 级别的信息之外，还显示解析器中的状态转换或失败的转换。
+           因此，此级别会显示尝试执行某项操作的过程，而 "proto" 级别仅显示最终操作。
+
+data       在 "state" 级别的信息之外，还包含各层之间的数据传输。
+
+developer  报告全部可用信息，可能包含 "breaking out of this loop" 等高级信息，
+           仅对尝试理解生产环境中偶发缺陷的开发者有用。仅此级别报告函数名称。
+```
+
+    强烈建议始终只使用 "user" 级别，仅在开发者指导下切换至其他级别。切换至更高
+    级别前，应先配置事件，以免在未应用过滤器时转储大量记录。此命令也支持元源
+    "all"：此时，该级别将一次性应用于所有现有源。
+
+lock [criterion] 若不带参数，将列出此源支持的所有锁住条件，并在当前选择的条件前用星号（'*'）标注。锁住（lock-on）表示该源将聚焦于首个匹配的事件，并仅持续关注触发该事件的条件，直到追踪结束前忽略所有其他条件。例如，这可用于对单个连接或单个流进行追踪。以下条件由部分追踪支持，但并非所有追踪均支持，因为某些条件可能对特定源不可用：
+
+```text
+backend      锁定开始跟踪时的后端
+connection   锁定开始跟踪时的连接
+frontend     锁定开始跟踪时的前端
+listener     锁定开始跟踪时的监听器
+nothing      不锁定任何对象
+server       锁定开始跟踪时的服务器
+session      锁定开始跟踪时的会话
+thread       锁定开始跟踪时的线程
+```
+
+    此外，每个源还可提供最多 4 个特定条件，例如内部状态或连接 ID。以 HTTP/2 为例，
+    可在追踪开始后锁定某个 H2 流，并忽略其他流。
+
+    通过参数传入条件后，该条件将替代其他条件，并立即终止所有现有跟踪，以便使用
+    新条件重新开始。所有源均支持特殊关键字 "nothing"，用于永久禁用跟踪。
+
+{ pause \| start \| stop } [ [+\|-\|!]event]
+不带参数时，将列出为该追踪源自动暂停、启动或停止追踪所启用的事件。这些事件因每个追踪源而异。带参数时，将为指定动作启用事件（若可选地以 '+' 前缀）或禁用事件（若以 '-' 或 '!' 前缀）。特殊关键字 "now" 并非事件，而是请求立即执行动作。关键字 "none" 和 "any" 的用法与 "trace event" 中一致。
+
+    支持的 3 个动作分别为 "pause"、"start" 和 "stop"。"pause" 列出使正在运行的追踪
+    暂停的事件，追踪随后等待新的启动事件以恢复运行。"start" 列出启动事件：追踪先
+    进入等待状态，直到其中一个启动事件出现。"stop" 列出使追踪完全停止的事件，
+    追踪随后保持停止状态，直到被手动重新启用。实际操作中，可用 "start now" 手动
+    启动追踪，而无需等待事件，再用 "stop now" 停止追踪。要捕获更细致的事件序列，
+    可将 "start" 设为正常事件（如收到 HTTP 请求），将 "stop" 设为极少发生的事件
+    （如发出某种错误），确保最后捕获的事件符合所需条件。暂停事件可用于检测序列
+    结束、解除锁定，并等待下一次捕获机会。因此，可启用锁定以仅关注某个特定对象
+    （如一个流），将 "start" 设为创建该对象的事件（如所有创建流的事件），将
+    "stop" 设为预期的异常，将 "pause" 设为结束该对象的事件（如任意流结束事件）。
+    此时，追踪日志将包含针对单一对象的完整正常事件序列，最后一个序列则包含从
+    开始到异常发生为止的全部事件。
+
+sink [`<sink>`] 若不带参数，将列出此源可用的所有事件接收端，当前配置的接收端前会附加星号（'*'）。接收端 "none" 始终可用，表示所有事件将被直接丢弃，尽管其处理不会被忽略（例如，锁机制仍会生效）。其他接收端是否可用取决于配置和构建选项，但通常在调试模式下 "stdout" 和 "stderr" 可用，内存环形缓冲区也应可用。指定名称后，接收端将立即切换至指定源。接收端切换期间事件不会被更改。最坏情况下，若使用无效接收端（或 "none"）可能导致部分事件丢失，但操作仍会继续发送至其他目标。该命令也可与元源 "all" 一同使用：此时接收端将同时应用于所有现有源。
+
+verbosity [`<level>`] 不带参数时，将列出此源的所有详细级别，当前级别前会以星号（'*'）标记。带参数时，将详细级别更改为指定值。
+
+    详细级别决定追踪解码器应提供多少详细信息。具体行为取决于追踪源，因为某些源
+    甚至不提供专用解码器。"quiet" 级别始终可用，会禁用所有解码。若要先了解发生了
+    什么，再查看细节，该级别很有用，因为它对性能和追踪数据量的影响很小。若源未
+    声明任何详细级别，则可使用 "default"，在追踪记录中指定解码器时调用它，即仅在
+    有可用解码器时解码。若源声明了详细级别，则会列出各级别及其含义。此时，该源
+    提供的解码器会根据追踪点上可用的信息，尽可能准确地提供详细内容。默认使用
+    高于 "quiet" 的第一个级别。
+
+<a id="entry-9-3-update-ssl-ocsp-response"></a>
+
+**`update ssl ocsp-response <certfile>`**
+
+```haproxy
+update ssl ocsp-response <certfile>
+```
+
+为指定的 `<certfile>` 创建 OCSP 请求，并将其发送至 OCSP 响应器。OCSP 响应器的 URI 应在证书的“权威信息访问”段中指定。仅第一个 URI 会被考虑。随后将检查所接收的 OCSP 响应，并将其插入本地 OCSP 响应树中。该命令仅对已存储 OCSP 响应的证书有效，这些证书的 OCSP 响应可能在初始化时提供，或此前通过 “set ssl cert” 或 “set ssl ocsp-response” 命令设置。若接收到的 OCSP 响应有效且已正确插入本地树中，其内容将显示在标准输出上。格式与 “show ssl ocsp-response” 中描述的相同。
+
+<a id="entry-9-3-wait"></a>
+
+**`wait { -h | <delay> } [<condition> [<args>...]]`**
+
+```haproxy
+wait { -h | <delay> } [<condition> [<args>...]]
+```
+
+在最简单的形式下，不带任何条件时，该操作会等待指定的延迟时间后再继续执行。此功能可用于收集特定时间间隔内的指标数据。
+
+在指定条件和可选参数下，该命令将等待指定条件得到满足、不可恢复地失败，或在 `<delay>` 时长内始终不满足。支持的条件如下：
+
+- be-removable `<proxy>`：等待指定的代理后端可由“del backend”命令移除。某些条件将始终不被接受（例如后端尚未取消发布或其中仍包含服务器），并导致返回特定错误消息，指出未满足的条件。若在延迟时间内一切正常，则返回成功，并终止操作。
+
+- srv-removable `<proxy>`/`<server>`：此选项将等待指定服务器被 “del server” 命令移除，即处于维护状态且不再有任何连接（无论是活动连接还是空闲连接）。某些条件将始终不被接受（例如未处于维护状态），并导致返回特定错误消息，指出未满足的条件。服务器甚至可能已被并行移除，不再存在。若在超时前所有条件均满足，则返回成功，并终止操作。
+
+默认情况下，延迟单位为毫秒，但也可接受其他单位，只要其后缀为常规计时单位（us、ms、s、m、h、d）。使用 `socat` 工具时，请勿忘记将 `socat` 的关闭超时时间延长至覆盖等待时间。将 "-h" 作为第一个或第二个参数传入可显示命令的用法。示例：
+
+```shell
+$ socat -t20 /path/to/socket - <<< "show activity; wait 10s; show activity"
+
+$ socat -t5 /path/to/socket - <<< "
+    disable server px/srv1
+    shutdown sessions server px/srv1
+    wait 2s srv-removable px/srv1
+    del server px/srv1"
+```
+
+## 9.4. 主 CLI {#section-9-4}
+
+主 CLI 是主进程/工作进程模式下绑定至主进程的套接字。该 CLI 可访问所有运行中或即将退出的进程中的 Unix 套接字命令，并允许对这些进程进行基本监控。
+
+主 CLI 仅可通过 HAProxy 程序参数中的 -S 选项进行配置。该选项还接受以逗号分隔的绑定选项。
+
+示例：
+
+```haproxy
+# haproxy -W -S 127.0.0.1:1234 -f test1.cfg
+# haproxy -Ws -S /tmp/master-socket,uid,1000,gid,1000,mode,600 -f test1.cfg
+# haproxy -W -S /tmp/master-socket,level,user -f test1.cfg
+```
+
+### 9.4.1. 主 CLI 命令 {#section-9-4-1}
+
+<a id="entry-9-4-1-entry"></a>
+
+**`@<[!]pid>`**
+
+```haproxy
+@<[!]pid>
+```
+
+主 CLI 使用特殊的前缀表示法来访问多个进程。该表示法易于识别，因其以 @ 开头。
+
+以 @ 开头可后接相对进程号，或后接感叹号和 PID（例如 @1 或 @!1271）。单独使用 @ 可用于指定主进程。即将退出的进程仅能通过 PID 访问，因为相对进程号仅可用于当前进程。
+
+此前缀可用作命令前的包装符，表示仅将该命令及其本身发送至指定进程。此时，完整命令的结束位置与常规命令相同，即行尾或分号处。
+
+缺陷：用于在主进程与工作进程之间实现通信的 sockpair@ 协议在 macOS 上已知不可靠，这是由于 macOS 的 sendmsg(2) 实现存在缺陷所致。因此，命令可能因该问题而无响应。
+
+示例：
+
+```shell
+$ socat /var/run/haproxy-master.sock readline
+prompt
+master> @1 show info; @2 show info
+[...]
+Process_num: 1
+Pid: 1271
+[...]
+Process_num: 2
+Pid: 1272
+[...]
+master>
+
+$ echo '@!1271 show info; @!1272 show info' | socat /var/run/haproxy-master.sock -
+[...]
+```
+
+前缀也可作为独立命令使用，用于将默认执行上下文切换至指定进程，表示所有后续命令均将在该进程内执行，直至新的 '@' 命令再次更改执行上下文。
+
+示例：
+
+```shell
+$ socat /var/run/haproxy-master.sock readline
+prompt
+master> @1
+1271> show info
+[...]
+1271> show stat
+[...]
+1271> @
+master>
+
+$ echo '@1; show info; show stat; @2; show info; show stat' | socat /var/run/haproxy-master.sock -
+[...]
+```
+
+关于限制的说明：少数罕见命令会更改 CLI 会话的状态（例如 "set anon"、"set timeout"），在从主 CLI 执行时可能无法完全保持一致的行为，因为这些命令是逐个发送到各自的 CLI 会话中执行的。类似地，少数罕见命令（"show events"、"wait"）会主动监控 CLI 的输入或关闭状态，一旦 CLI 关闭便会立即中断。通过主 CLI 执行时，这些命令无法按预期工作，因为每个命令执行后其输入流即被关闭。对于此类罕见情况，下方的 "@@" 变体可能更为合适。
+
+<a id="entry-9-4-1-entry-2"></a>
+
+**`@@<[!]pid> [command...]`**
+
+```haproxy
+@@<[!]pid> [command...]
+```
+
+此前缀或命令与上述文档中记录的 "@" 前缀非常相似，不同之处在于它会进入工作进程，将整个命令行原样传递给该进程，并在命令执行完毕前保持连接。分号也会被传递，从而允许在工作进程中执行完整的命令流水线。与工作进程的连接将持续开放，直至命令列表执行完毕。在命令执行完成后发送的任何数据将被转发至工作进程的 CLI，可能被正在执行的命令所消耗，而对主 CLI 来说将丢失，从而实现与工作进程的真正双向连接。因此，使用此类命令的用户必须格外小心，在发送新命令至主 CLI 之前，务必等待当前命令执行完成。
+
+无需执行单个命令，也可以通过不在单独一行上指定任何命令（即仅输入 "@@1"）的方式，在工作进程上打开一个完全交互式的会话。该会话可通过关闭连接或通过退出工作进程（使用 "quit" 命令）来终止。此时，主套接字的提示模式（交互式、提示式、定时式）将传播至工作进程。
+
+缺陷：用于在主进程与工作进程之间实现通信的 sockpair@ 协议在 macOS 上已知不可靠，这是由于 macOS 的 sendmsg(2) 实现存在缺陷所致。因此，命令可能因该问题而无响应。
+
+示例：
+
+```shell
+# gracefully close connections and delete a server once idle (wait max 10s)
+$ socat -t 11 /var/run/haproxy-master.sock - <<< \
+   "@@1 disable server app2/srv36; \
+   wait 10000 srv-removable app2/srv36; \
+   del server app2/srv36"
+
+# forcefully close connections and quickly delete a server
+$ socat /var/run/haproxy-master.sock - <<< \
+   "@@1 disable server app2/srv36; \
+   shutdown sessions server app2/srv36; \
+   wait 100 srv-removable app2/srv36; \
+   del server app2/srv36"
+
+# show messages arriving to this ring in real time ("tail -f" equivalent)
+$ (echo "show events buf0 -w"; read) | socat /var/run/haproxy-master.sock -
+```
+
+<a id="entry-9-4-1-expert-mode"></a>
+
+**`expert-mode [on|off]`**
+
+```haproxy
+expert-mode [on|off]
+```
+
+此命令为通过主 CLI 访问的每个工作进程激活 "expert-mode"。与“mcli-debug-mode”结合使用时，还会在主进程上激活该命令。在主 CLI 提示符中显示标志“e”。
+
+参见 [第 9.3 节](/zh/haproxy/statistics-and-monitoring/#section-9-3) 中的 "expert-mode" 以及 9.4.1 中的 "mcli-debug-mode"。
+
+<a id="entry-9-4-1-experimental-mode"></a>
+
+**`experimental-mode [on|off]`**
+
+```haproxy
+experimental-mode [on|off]
+```
+
+此命令为通过主 CLI 访问的每个工作进程激活“experimental-mode”。
+与“mcli-debug-mode”结合使用时，还会在主进程上激活该命令。
+在主 CLI 提示符中显示标志“x”。
+
+另请参阅 [第 9.3 节](/zh/haproxy/statistics-and-monitoring/#section-9-3) 中的 "experimental-mode" 以及 9.4.1 中的 "mcli-debug-mode"。
+
+<a id="entry-9-4-1-hard-reload"></a>
+
+**`hard-reload`**
+
+```haproxy
+hard-reload
+```
+
+此命令与通过主 CLI 执行的“reload”命令功能相同，区别在于它会对前一个进程执行硬停止（-st），而非停止-停止（-sf）。这意味着前一个进程在退出前不会等待任何操作完成，因此所有连接将被立即关闭。
+
+另请参见“reload”命令。
+
+<a id="entry-9-4-1-mcli-debug-mode"></a>
+
+**`mcli-debug-mode [on|off]`**
+
+```haproxy
+mcli-debug-mode [on|off]
+```
+
+此关键字可在主 CLI 中启用特殊模式，使主 CLI 可使用原本仅限工作进程 CLI 使用的命令，从而支持对主进程进行调试。启用后，可通过输入“help”查看新增可用命令。结合使用“experimental-mode”或“expert-mode”时，可启用更多命令。在主 CLI 提示符中显示标志“d”。
+
+<a id="entry-9-4-1-prompt"></a>
+
+**`prompt`**
+
+```haproxy
+prompt
+```
+
+当通过 "prompt" 命令启用提示符时，CLI 所处的上下文将在提示符中显示。主进程以 "master" 字符串标识，其他进程则以其 PID 标识。若上次重载失败，主进程的提示符将变为 "master[ReloadFailed]>"，以便明确显示当前进程仍在使用旧配置运行，且新配置尚未生效。
+
+主 CLI 提示符可显示多个标志，表示启用的模式。"d" 表示 mcli-debug-mode，"e" 表示 expert-mode，"x" 表示 experimental-mode。
+
+示例：
+
+```shell
+$ socat /var/run/haproxy-master.sock -
+prompt
+master> expert-mode on
+master(e)> experimental-mode on
+master(xe)> mcli-debug-mode on
+master(xed)> @1
+95191(xed)>
+```
+
+<a id="entry-9-4-1-reload"></a>
+
+**`reload`**
+
+```haproxy
+reload
+```
+
+也可以使用“reload”命令重载 HAProxy 主进程，其效果与对主进程执行 `kill -USR2` 相同，前提是用户至少具备“operator”或“admin”权限。
+
+此命令允许执行同步重载，命令将在重载完成后返回重载状态。若使用工具解析该状态，请注意超时设置，状态仅在配置解析完成且新工作进程创建后才会返回。默认情况下，“socat” 命令的超时时间为 0.5s，若重载耗时过长，该工具将在消息显示前退出。“ncat” 默认无超时设置。当使用 USE_SHM_OPEN=1 编译时，重载命令还可输出主进程的启动日志。
+
+示例：
+
+```shell
+$ echo "reload" | socat -t300 /var/run/haproxy-master.sock stdin
+Success=1
+--
+[NOTICE]   (482713): haproxy version is 2.7-dev7-4827fb-69
+[NOTICE]   (482713): path to executable is ./haproxy
+[WARNING]  (482713): config: 'http-request' rules ignored for proxy 'frt1' as they require HTTP mode.
+[NOTICE]   (482713): New worker (482720) forked
+[NOTICE]   (482713): Loading success.
+
+$ echo "reload" | socat -t300 /var/run/haproxy-master.sock stdin
+Success=0
+--
+[NOTICE]   (482886): haproxy version is 2.7-dev7-4827fb-69
+[NOTICE]   (482886): path to executable is ./haproxy
+[ALERT]    (482886): config: parsing [test3.cfg:1]: unknown keyword 'Aglobal' out of section.
+[ALERT]    (482886): config: Fatal errors found in configuration.
+[WARNING]  (482886): Loading failure!
+
+$
+```
+
+重载命令是主 CLI 上最后执行的命令，此后所有命令均被忽略。
+重载命令返回状态后，将关闭与 CLI 的连接。
+
+请注意，重载将关闭与主 CLI 的所有连接。另请参见“hard-reload”命令。
+
+<a id="entry-9-4-1-show-proc"></a>
+
+**`show proc [debug]`**
+
+```haproxy
+show proc [debug]
+```
+
+主 CLI 引入了 `show proc` 命令，用于监视进程。
+
+示例：
+
+```shell
+$ echo 'show proc' | socat /var/run/haproxy-master.sock -
+#<PID>          <type>          <reloads>       <uptime>        <version>
+1162            master          5 [failed: 0]   0d00h02m07s     2.5-dev13
+# workers
+1271            worker          1               0d00h00m00s     2.5-dev13
+# old workers
+1233            worker          3               0d00h00m43s     2.0-dev3-6019f6-289
+```
+
+在此示例中，主进程已重载 5 次，但其中一个旧的工作进程仍在运行，并成功存活了 3 次重载。可以访问该工作进程的 CLI 以了解当前情况。
+
+'debug' 参数有助于显示调试详情，当前用于展示 IPC 通信的文件描述符（FDs）。请注意，调试输出在 HAProxy 不同版本之间无法保证稳定。
+
+<a id="entry-9-4-1-show-startup-logs"></a>
+
+**`show startup-logs`**
+
+```haproxy
+show startup-logs
+```
+
+HAProxy 必须使用 USE_SHM_OPEN=1 编译，才能在主 CLI 上正确使用，否则所有消息将不可见。
+
+与统计套接字上的对应命令类似，该命令可用于显示 HAProxy 的启动消息。但该命令不会输出当前工作进程的启动消息，而是输出最近一次启动或重载的启动消息，这意味着它能够输出失败重载时的解析消息。
+
+这些消息也会通过 "reload" 命令输出。
+
+## 9.5. 统计文件 {#section-9-5}
+
+所谓统计文件可用于在进程启动时，以非零值预加载 HAProxy 内部计数器。其主要用途是在重载期间保留工作进程的统计信息。统计文件中仅包含所有暴露的 HAProxy 统计信息的片段，因为仅对指标类数值进行预加载才有意义。
+
+目前，统计文件中仅支持代理计数器。这允许预先加载前端、后端、服务器和监听器的值。然而，仅存储具有非空 GUID 的对象实例。这确保了即使其他参数不同，也能为类型和 GUID 匹配的对象预先加载值。
+
+CLI 命令 `dump stats-file` 的用途是生成统计信息文件。统计信息文件的格式由内部定义，未来可能随时更改或扩展。该格式至少保证在相邻的 HAProxy 稳定分支版本间兼容，但在将统计信息文件加载到较旧版本的进程时，可能需要额外的可选配置。

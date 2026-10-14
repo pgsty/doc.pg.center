@@ -29,14 +29,17 @@ French (`fr`), Japanese (`ja`), German (`de`), and Russian (`ru`)**.
 
 English is the source language. Files without a language suffix are English;
 translations use the same path with `.zh.md`, `.fr.md`, `.ja.md`, `.de.md`, or
-`.ru.md`. For example, `content/docs/pgbouncer/config.md` is the source for
-`content/docs/pgbouncer/config.fr.md`. English URLs start with `/docs/`;
-translated URLs start with the language code, such as `/fr/docs/`.
+`.ru.md`. For example, `content/pgbouncer/config.md` is the source for
+`content/pgbouncer/config.fr.md`. Each component is a top-level section with
+the `docs` content type. English URLs start with the component name, such as
+`/patroni/`; translations prepend the language code, such as `/fr/patroni/`.
+There is no `/docs/` section or index. Internal links, aliases, and generated
+outputs must use the component routes without a `/docs/` prefix.
 
 ## Repository layout
 
-- `content/docs/<component>/`: maintained manuals and their required images.
-- `content/`: localized home, documentation index, search, and attribution pages.
+- `content/<component>/`: maintained manuals and their required images.
+- `content/`: localized home, search, and attribution pages.
 - `data/`: homepage and footer content, plus the upstream source and license registry.
 - `layouts/`, `assets/`, and `i18n/`: templates, styles, scripts, and interface translations.
 - `static/`: published assets, third-party notices, and linked pgBadger sample reports.

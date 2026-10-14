@@ -1,5 +1,4 @@
-{{- /* OINK's full-text bundle, scoped to an independent documentation root.
-     Component roots remain independent after nesting them under /docs/. */ -}}
+{{- /* OINK's full-text bundle, scoped to a top-level component section. */ -}}
 {{- $root := . -}}
 {{- if or (ne $root.Kind "section") (ne $root.Params.sidebar_root_for "self") -}}
   {{- errorf "LLMSFULL output requires an independent documentation root at %s" $root.Path -}}

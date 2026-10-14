@@ -1,0 +1,187 @@
+---
+title: "Fonctionnalités de base"
+linkTitle: "Fonctionnalités de base"
+weight: 40
+description: "Proxys, TLS, surveillance, haute disponibilité, répartition de charge, persistance, journaux et statistiques"
+icon: fa-solid fa-layer-group
+module: [HAPROXY]
+categories: [Concept]
+aliases:
+  - /haproxy/intro/basic-features/
+upstream_link: "https://docs.haproxy.org/3.4/intro.html"
+upstream_name: "HAProxy 3.4 Starter Guide"
+upstream_ref: "v3.4.6-66-g16acce1dac1d, sections 3.3–3.3.8"
+---
+
+Cette section énumère un certain nombre de fonctionnalités implémentées par HAProxy, certaines étant généralement attendues d’un répartiteur de charge moderne, et d’autres constituant un avantage direct de l’architecture d’HAProxy. Les fonctionnalités avancées seront détaillées dans la section suivante.
+
+## 3.3.1. Fonctionnalités de base : Proxys {#section-3-3-1}
+
+Le proxy consiste à transférer des données entre un client et un serveur via deux connexions indépendantes. Les fonctionnalités de base suivantes sont prises en charge par HAProxy en matière de proxy et de gestion des connexions :
+
+- Fournir au serveur une connexion propre afin de le protéger contre toute défaillance ou attaque côté client ;
+
+- Écouter plusieurs adresses IP et/ou ports, y compris des plages de ports ;
+
+- Acceptation transparente : intercepter le trafic ciblant une adresse IP arbitraire, même n'appartenant pas au système local ;
+
+- Le port serveur n’a pas besoin d’être lié au port d’écoute, et peut même être décalé d'un offset fixe (utile avec les plages) ;
+
+- Connexion transparente : usurper l'adresse IP du client (ou toute autre adresse) si nécessaire lors de la connexion au serveur ;
+
+- Fournir une adresse IP de retour fiable aux serveurs dans les répartiteurs de charge multi-sites ;
+
+- Réduire la charge du serveur grâce à l'utilisation de tampons et éventuellement de connexions à durée de vie courte, afin de diminuer le nombre de connexions simultanées et la consommation mémoire ;
+
+- Optimiser les piles TCP (par exemple SACK), le contrôle de congestion et réduire les impacts du RTT ;
+
+- Prendre en charge différentes familles de protocoles de part et d'autre (par exemple IPv4, IPv6 ou Unix) ;
+
+- Application du délai d'expiration : HAProxy prend en charge plusieurs niveaux de délais d'expiration selon l'étape de la connexion, afin qu'un client ou serveur défaillant, ou un attaquant, ne puisse pas monopoliser les ressources trop longtemps ;
+
+- Validation du protocole : le HTTP, le SSL ou la charge utile est inspectée et les éléments de protocole non valides sont rejetés, sauf instruction contraire pour les accepter malgré tout ;
+
+- Application de la politique : garantir que seul ce qui est autorisé peut être acheminé ;
+
+- Les connexions entrantes et sortantes peuvent être limitées à certains espaces de noms réseau (Linux uniquement),
+    ce qui facilite la mise en œuvre d’un répartiteur de charge inter-conteneurs et multi-locataires ;
+
+- Le protocole PROXY expose l'adresse IP du client au serveur, même pour le trafic non HTTP. Il s'agit d'une extension HAProxy adoptée par plusieurs produits tiers, au moins ceux-ci au moment de la rédaction :
+
+  - client : haproxy, stud, stunnel, exaproxy, ELB, squid
+  - server : haproxy, stud, postfix, exim, nginx, squid, node.js, varnish
+
+## 3.3.2. Fonctionnalités de base : SSL {#section-3-3-2}
+
+La pile SSL d'HAProxy est reconnue comme l'une des plus riches en fonctionnalités selon les ingénieurs de Google (<http://istlsfastyet.com/>). Les fonctionnalités les plus couramment utilisées, qui en font une solution très complète, sont :
+
+- Hébergement multi-hôtes basé sur SNI, sans limite sur le nombre de sites, avec un accent sur les performances. Au moins un déploiement est connu pour gérer 50 000 domaines avec leurs certificats respectifs ;
+
+- la prise en charge des certificats wildcard réduit la nécessité de nombreux certificats ;
+
+- authentification client basée sur un certificat, avec des politiques configurables en cas de non-présentation d’un certificat valide. Cela permet de présenter une ferme serveur différente afin de régénérer le certificat client, par exemple ;
+
+- L'authentification du serveur backend garantit que le serveur backend est bien le véritable serveur et non un intermédiaire malveillant ;
+
+- L'authentification avec le serveur backend permet au serveur backend de savoir qu'il s'agit réellement du nœud HAProxy attendu qui se connecte à celui-ci ;
+
+- Les extensions TLS NPN et ALPN permettent de transférer de manière fiable les connexions SPDY/HTTP2 et de les transmettre en clair aux serveurs backend ;
+
+- Le stapling OCSP réduit davantage le temps de chargement de la première page en livrant inline une réponse OCSP lorsque le client demande un statut de certificat ;
+
+- La taille dynamique des enregistrements offre à la fois des performances élevées et une latence faible, et réduit fortement le temps de chargement des pages en permettant au navigateur de commencer à récupérer de nouveaux objets pendant que les paquets sont encore en transit ;
+
+- accès permanent à toutes les informations pertinentes au niveau SSL/TLS pour la journalisation, le contrôle d'accès, le reporting, etc. Ces éléments peuvent être intégrés dans un en-tête HTTP ou même comme extension du protocole PROXY, afin que le serveur déchargé dispose de toutes les informations qu'il aurait eues s'il avait lui-même effectué la terminaison SSL.
+
+- Détecter, journaliser et bloquer certaines attaques connues, même sur des bibliothèques SSL vulnérables, telles que l'attaque Heartbleed affectant certaines versions d'OpenSSL.
+
+- prise en charge de la reprise de session sans état (extension TLS Ticket RFC 5077). Les tickets TLS peuvent être mis à jour depuis la ligne de commande, ce qui permet d'implémenter une confidentialité persistante parfaite en les renouvelant fréquemment.
+
+## 3.3.3. Fonctionnalités de base : Surveillance {#section-3-3-3}
+
+HAProxy accorde une grande importance à la disponibilité. En conséquence, il surveille l'état des serveurs et signale son propre état aux autres composants du réseau :
+
+- L'état des serveurs est surveillé en continu à l'aide de paramètres propres à chaque serveur. Cela garantit que le chemin vers le serveur est opérationnel pour le trafic régulier ;
+
+- Les contrôles d'état prennent en charge deux seuils d'hystérésis pour les transitions vers le haut et vers le bas, afin de se protéger contre les fluctuations d'état ;
+
+- Les contrôles peuvent être envoyés à une adresse, un port ou un protocole différents : cela facilite le contrôle d'un service unique considéré comme représentatif de plusieurs autres, par exemple le port HTTPS pour un serveur HTTP+HTTPS.
+
+- Les serveurs peuvent suivre d'autres serveurs et tomber en même temps : cela garantit que les serveurs hébergeant plusieurs services échouent de manière atomique, et qu'aucun client ne sera dirigé vers un serveur partiellement défaillant ;
+
+- Les agents peuvent être déployés sur le serveur pour surveiller la charge et l'état : un serveur peut être intéressé de signaler sa charge, son état opérationnel et son état administratif, indépendamment de ce que les contrôles d'état peuvent détecter. En exécutant un agent simple sur le serveur, il est possible de prendre en compte la vision du serveur concernant son propre état, en complément des contrôles d'état qui valident l'intégralité du chemin ;
+
+- Plusieurs méthodes de contrôle sont disponibles : connexion TCP, requête HTTP, hello SMTP, hello SSL, LDAP, SQL, Redis, scripts send/expect, avec ou sans SSL ;
+
+- Le changement d'état est notifié dans les journaux et la page de statistiques avec la raison de la défaillance (par exemple, la réponse HTTP reçue au moment où la défaillance a été détectée). Un courrier électronique peut également être envoyé à une adresse configurable lors d'un tel changement ;
+
+- L'état du serveur est également rapporté sur l'interface de statistiques et peut être utilisé pour prendre des décisions de routage, afin d'envoyer le trafic vers des fermes différentes selon leurs tailles et/ou leur état de santé (par exemple, perte d'une liaison inter-DC) ;
+
+- HAProxy peut utiliser les requêtes de contrôle d'état pour transmettre des informations aux serveurs, telles que leurs noms, leur poids, le nombre d'autres serveurs dans la ferme, etc., afin que les serveurs puissent ajuster leur réponse et leurs décisions en fonction de ces données (par exemple, différer les sauvegardes pour préserver plus de ressources CPU) ;
+
+- Les serveurs peuvent utiliser des contrôles d'état pour signaler un état plus détaillé qu'un simple actif/inactif (par exemple : je souhaite m'arrêter, veuillez cesser d'envoyer de nouveaux visiteurs) ;
+
+- HAProxy peut rapporter son état à des composants externes, tels que des routeurs ou d'autres répartiteurs de charge, permettant ainsi de mettre en œuvre des infrastructures multi-chemins et multi-niveaux très complètes.
+
+## 3.3.4. Fonctionnalités de base : Haute disponibilité {#section-3-3-4}
+
+Tout comme tout répartiteur de charge sérieux, HAProxy accorde une grande importance à la disponibilité afin d'assurer la meilleure continuité de service globale :
+
+- Seuls les serveurs valides sont utilisés ; les autres sont automatiquement exclus des fermes de répartition de charge ;
+    dans certaines conditions, il est toutefois possible de forcer leur utilisation ;
+
+- Prise en charge d'un arrêt progressif afin de pouvoir retirer des serveurs d'une ferme sans affecter les connexions en cours ;
+
+- Les serveurs de secours sont automatiquement utilisés lorsque les serveurs actifs sont hors ligne et les remplacent afin de préserver les sessions lorsque cela est possible. Cela permet également de créer plusieurs chemins pour atteindre le même serveur (par exemple, plusieurs interfaces) ;
+
+- Capacité à renvoyer un statut global d'échec pour une ferme lorsque trop de serveurs sont hors ligne. Cela, combiné aux capacités de surveillance, permet à un composant amont de choisir un autre nœud de répartition de charge pour un service donné ;
+
+- Une conception sans état facilite la mise en cluster : par conception, HAProxy fait tout son possible pour garantir la continuité du service sans avoir à stocker d'informations pouvant être perdues en cas de panne. Cela assure une prise de relais aussi fluide que possible ;
+
+- S'intègre parfaitement au démon VRRP standard keepalived : HAProxy informe facilement keepalived de son état et gère très bien les adresses IP virtuelles flottantes. Remarque : utilisez les protocoles de redondance IP (VRRP/CARP) uniquement de préférence aux solutions basées sur des clusters (Heartbeat, ...), car ce sont eux qui offrent le basculement le plus rapide, le plus transparent et le plus fiable.
+
+## 3.3.5. Fonctionnalités de base : Répartition de charge {#section-3-3-5}
+
+HAProxy propose un ensemble assez complet de fonctionnalités de répartition de charge, dont la plupart ne sont malheureusement pas disponibles dans un certain nombre d'autres produits de répartition de charge :
+
+- au moins 10 algorithmes de répartition de charge sont pris en charge, dont certains s'appliquent aux données d'entrée pour offrir une liste infinie de possibilités. Les plus courants sont : round-robin (pour les connexions courtes, sélectionne chaque serveur tour à tour), leastconn (pour les connexions longues, sélectionne le serveur ayant le moins de connexions actives et le moins récemment utilisé), source (pour les fermes SSL ou les fermes de serveurs terminaux, le serveur dépend directement de l'adresse source du client), URI (pour les caches HTTP, le serveur dépend directement de l'URI HTTP), hdr (le serveur dépend directement du contenu d'un champ d'en-tête HTTP spécifique), first (pour les machines virtuelles à durée de vie courte, toutes les connexions sont regroupées sur le sous-ensemble le plus petit possible de serveurs afin que les serveurs inutilisés puissent être mis hors tension).
+
+- tous les algorithmes ci-dessus prennent en charge les pondérations par serveur, ce qui permet d'intégrer des générations de serveurs différentes dans une ferme, ou de diriger une petite fraction du trafic vers des serveurs spécifiques (mode de débogage, exécution de la prochaine version du logiciel, etc.) ;
+
+- les poids dynamiques sont pris en charge pour les algorithmes round-robin, leastconn et hachage cohérent ; cela permet de modifier les poids des serveurs en temps réel depuis la ligne de commande ou même par un agent en cours d'exécution sur le serveur ;
+
+- le démarrage progressif est pris en charge chaque fois qu'une pondération dynamique est prise en charge ; cela permet à un serveur de prendre progressivement le trafic. Cette fonctionnalité est essentielle pour les serveurs d'applications fragiles qui doivent compiler des classes en cours d'exécution, ainsi que pour les caches froids qui doivent être remplis avant de fonctionner à plein régime ;
+
+- Le hachage peut s'appliquer à divers éléments tels qu'une adresse source cliente, des composants d'URL, un élément de chaîne de requête, des valeurs de champ d'en-tête, un paramètre POST ou un cookie RDP ;
+
+- le hachage cohérent protège les fermes de serveurs contre une redistribution massive lors de l'ajout ou de la suppression de serveurs dans une ferme. C'est très important dans les grandes fermes de cache et cela permet d'utiliser le démarrage progressif pour recharger les caches froids ;
+
+- un certain nombre de métriques internes, telles que le nombre de connexions par serveur, par backend, ou le nombre de slots de connexion disponibles dans un backend, permet de mettre en œuvre des stratégies de répartition de charge très avancées.
+
+## 3.3.6. Fonctionnalités de base : Persistance {#section-3-3-6}
+
+La répartition de charge applicative serait inutile sans la persistance de session. HAProxy propose un ensemble assez complet de possibilités pour maintenir un visiteur sur le même serveur, même en cas d'événements variés tels que l'ajout ou la suppression de serveurs, les cycles de mise hors ligne/mise en ligne, et certaines méthodes sont conçues pour résister à la distance entre plusieurs nœuds de répartition de charge, car elles n'exigent aucune réplication :
+
+- les informations de persistance peuvent être mises en correspondance et apprises individuellement à partir de différents endroits, si souhaité.
+    Par exemple, un cookie JSESSIONID peut être recherché à la fois dans un cookie et dans l'URL. Jusqu'à 8 sources parallèles peuvent être apprises simultanément, chacune pouvant pointer vers une table de persistance différente ;
+
+- Les informations de persistance peuvent provenir de tout élément visible dans une requête ou une réponse,
+    y compris l'adresse source, le décalage et la longueur de la charge utile TCP, les éléments de chaîne de requête HTTP, les valeurs de champs d'en-tête, les cookies, etc.
+
+- les tables de persistance sont répliquées entre tous les nœuds de manière multi-maître ;
+
+- éléments couramment utilisés, tels que l'ID SSL ou les cookies RDP (pour les fermes TSE), sont directement accessibles
+    pour faciliter leur manipulation ;
+
+- toutes les règles de persistance peuvent être conditionnées dynamiquement par des ACL ;
+
+- il est possible de décider de ne pas rester attaché à certains serveurs, tels que des serveurs de secours, afin que, lorsque le serveur nominal revient en ligne, il reprenne automatiquement la charge. Cela est souvent utilisé dans les environnements multi-chemins ;
+
+- en HTTP, il est souvent préférable de ne rien apprendre et de manipuler à la place un cookie dédié à la persistance. Pour cela, il est possible de détecter, modifier, insérer ou préfixer un tel cookie afin que le client mémorise quel serveur lui a été attribué ;
+
+- le serveur peut décider de modifier ou de supprimer le cookie de persistance à la déconnexion, afin que les visiteurs quittant la session soient automatiquement déliés du serveur ;
+
+- en utilisant des règles basées sur les ACL, il est également possible d'ignorer ou d'imposer sélectivement la persistance de session, indépendamment de l'état du serveur ; combiné à des contrôles d'état avancés, cela permet aux administrateurs de vérifier que le serveur qu'ils installent est opérationnel avant de le rendre accessible au monde entier ;
+
+- un mécanisme innovant permettant de définir un délai maximal d'inactivité et une durée pour les cookies assure que la persistance peut être arrêtée de manière fluide sur les appareils qui ne sont jamais fermés (smartphones, téléviseurs, appareils domestiques) sans avoir à les stocker sur un support persistant ;
+
+- plusieurs entrées de serveur peuvent partager les mêmes clés de persistance afin de ne pas perdre la persistance dans les environnements à chemins multiples lorsque l'un des chemins tombe en panne ;
+
+- soft-stop garantit que seuls les utilisateurs possédant des informations de persistance continueront à accéder au serveur qui leur a été attribué, mais aucun nouvel utilisateur n'y sera dirigé.
+
+## 3.3.7. Fonctionnalités de base : Journalisation {#section-3-3-7}
+
+La journalisation est une fonctionnalité extrêmement importante pour un répartiteur de charge, tout d’abord parce qu’un répartiteur de charge est souvent injustement accusé de provoquer les problèmes qu’il révèle, et ensuite parce qu’il est placé à un point critique dans une infrastructure où toute activité normale ou anormale doit être analysée et corrélée avec les autres composants.
+
+HAProxy fournit des journaux très détaillés, avec une précision au millième de seconde et l'heure exacte d'acceptation de la connexion, pouvant être recherchée dans les journaux des pare-feu (par exemple pour la corrélation NAT). Par défaut, les journaux TCP et HTTP sont assez détaillés et contiennent tout ce qui est nécessaire au dépannage, tel que l'adresse IP source et le port, le frontal, le backend, le serveur, les temporisateurs (durée de réception de la requête, durée d'attente en file, temps de mise en place de la connexion, temps de réception des en-têtes de réponse, temps de transfert de données), l'état global du processus, le nombre de connexions, l'état de la file d'attente, le nombre de tentatives, les actions de persistance détaillées et les raisons de déconnexion, ainsi que les captures d'en-têtes avec une encodage de sortie sécurisé. Il est alors possible d'étendre ou de remplacer ce format afin d'inclure toute donnée échantillonnée, variable ou capture, aboutissant à des informations très détaillées. Par exemple, il est possible de journaliser le nombre de requêtes cumulées ou le nombre d'URL différentes visitées par un client.
+
+Le niveau de journalisation peut être ajusté par requête à l’aide des ACL standards, ce qui permet de masquer automatiquement certaines traces considérées comme de la pollution et de générer à la place des avertissements lorsqu’un comportement anormal se produit pour une petite partie du trafic (par exemple, un trop grand nombre d’URL ou d’erreurs HTTP provenant d’une même adresse source).
+Les journaux administratifs sont également émis avec leurs propres niveaux afin d’informer sur la perte ou la récupération d’un serveur, par exemple.
+
+Chaque frontal et chaque backend peut utiliser plusieurs sorties de journalisation indépendantes, ce qui facilite l'exploitation multi-locataire. Les journaux sont préférablement envoyés en UDP, éventuellement encodés au format JSON, et tronqués après une longueur de ligne configurable afin de garantir leur livraison. Il est également possible de les envoyer vers stdout/stderr ou tout descripteur de fichier, ainsi que vers un tampon circulaire auquel un client peut s'abonner pour les récupérer.
+
+## 3.3.8. Fonctionnalités de base : Statistiques {#section-3-3-8}
+
+HAProxy fournit une interface web de rapport statistique avec authentification, niveaux de sécurité et portées. Il est ainsi possible de fournir à chaque client hébergé sa propre page n’affichant que ses propres instances. Cette page peut être située dans une partie cachée de l’URL du site web habituel, sans nécessiter l’ouverture d’un nouveau port. Elle peut également indiquer la disponibilité d’autres nœuds HAProxy, afin de repérer facilement, d’un coup d’œil, si tout fonctionne comme prévu. La vue est synthétique, avec un accès à de nombreuses informations détaillées (comme les causes d’erreur, le dernier accès et la durée depuis le dernier changement, etc.), qui sont également disponibles sous forme de tableau CSV pouvant être importé par d’autres outils pour tracer des graphiques. La page peut se rafraîchir automatiquement, afin d’être utilisée comme page de surveillance sur un grand écran. En mode administration, la page permet également de modifier l’état des serveurs pour faciliter les opérations de maintenance.
+
+Un exportateur Prometheus est également fourni afin que les statistiques puissent être consommées dans un format différent selon le déploiement.

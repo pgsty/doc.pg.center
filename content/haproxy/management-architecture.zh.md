@@ -1,0 +1,41 @@
+---
+title: "2. HAProxy 架构"
+linkTitle: "2. 架构"
+weight: 260
+description: "进程、线程、事件循环、chroot、日志、时钟与 TCP 代理模型"
+icon: fa-solid fa-diagram-project
+module: [HAPROXY]
+categories: [概念]
+aliases:
+  - /haproxy/management/architecture/
+upstream_link: "https://docs.haproxy.org/3.4/management.html"
+upstream_name: "HAProxy 3.4 Management Guide"
+upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 2"
+---
+
+HAProxy 是一个多线程、事件驱动、非阻塞的守护进程。它使用事件多路复用机制调度所有活动，而不依赖系统在多项活动之间切换调度。大多数情况下，HAProxy 只运行一个进程，因此在系统上执行 "ps aux" 时通常只会看到一个 "haproxy" 进程；平滑重载期间是例外，此时旧进程会与新进程并行完成剩余工作。因此，使用 strace 始终可以轻松跟踪其活动。为随可用处理器数量扩展，HAProxy 默认会为每个允许其运行的处理器启动一个工作线程。除非另有明确配置，传入流量会分布到所有这些线程，每个线程运行相同的事件循环。HAProxy 将线程间依赖严格控制在最低水平，以力求实现近乎线性的扩展能力。这也意味着每条连接只由一个线程处理。因此，要充分利用全部处理能力，连接数至少应与线程数相当；实际环境几乎总能满足这一条件。
+
+HAProxy 在启动时设计为将自身隔离到 chroot 环境中，此后将完全无法访问任何文件系统。其依赖的库（如 libc、libssl 等）同样受此限制。直接后果是，运行中的进程无法重新加载配置文件以应用更改，必须使用更新后的配置文件启动新进程。此外，还存在一些不太明显的后果：某些由 libc 在运行时尝试访问的时区文件或解析器文件可能无法找到，不过这种情况通常不应发生，因为这些文件在启动后不再需要。这一原则带来的一个良好结果是，HAProxy 进程完全无状态，终止后无需任何清理操作，因此任何有效的终止方法均可正确执行。
+
+HAProxy 不会写入日志文件，但依赖标准的 syslog 协议将日志发送至远程服务器（该服务器通常位于同一系统上）。
+
+HAProxy 使用内部时钟执行超时控制。该时钟以系统时间为基础，并会纠正意外漂移：HAProxy 限制 poll() 等待事件的时间，再测量实际经过的时长。实际等待时间从不超过一秒。因此，对完全空闲的进程运行 strace 时，可以看到周期性的 poll()（或其变体）调用，前后夹着两次 gettimeofday() 调用。这完全正常且无害，开销低到在系统整体负载中无法察觉，不存在任何异常。示例：
+
+```text
+16:35:40.002320 gettimeofday({1442759740, 2605}, NULL) = 0
+16:35:40.002942 epoll_wait(0, {}, 200, 1000) = 0
+16:35:41.007542 gettimeofday({1442759741, 7641}, NULL) = 0
+16:35:41.007998 gettimeofday({1442759741, 8114}, NULL) = 0
+16:35:41.008391 epoll_wait(0, {}, 200, 1000) = 0
+16:35:42.011313 gettimeofday({1442759742, 11411}, NULL) = 0
+```
+
+HAProxy 是 TCP 代理，而非路由器。它只处理已经过内核验证并建立的连接，不处理任何形式的数据包，也不处理其他状态的套接字（例如 SYN_RECV 或 TIME_WAIT），不过这些套接字的存在可能妨碍端口绑定。HAProxy 依赖系统接受传入连接并发起传出连接。因此，在一条转发连接两端观察到的数据包没有对应关系，其大小、数量甚至协议族都可能不同。连接只能从 LISTEN 状态的套接字接受，所以使用 "netstat" 查看监听套接字时，必然能看到其全部监听套接字。示例：
+
+```haproxy
+# netstat -ltnp
+```
+
+Active Internet connections (only servers) Proto Recv-Q Send-Q Local Address Foreign Address State
+PID/Program name tcp 0 0 0.0.0.0:22 0.0.0.0:\* LISTEN 1629/sshd tcp 0 0 0.0.0.0:80 0.0.0.0:\* LISTEN
+2847/haproxy tcp 0 0 0.0.0.0:443 0.0.0.0:\* LISTEN 2847/haproxy

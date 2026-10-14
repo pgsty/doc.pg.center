@@ -1,0 +1,75 @@
+---
+title: "2. HAProxy Architecture"
+linkTitle: "2. Architecture"
+weight: 260
+description: "The process, threading, event loop, chroot, logs, clocks, and TCP proxy model"
+icon: fa-solid fa-diagram-project
+module: [HAPROXY]
+categories: [Concept]
+aliases:
+  - /haproxy/management/architecture/
+upstream_link: "https://docs.haproxy.org/3.4/management.html"
+upstream_name: "HAProxy 3.4 Management Guide"
+upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 2"
+---
+
+HAProxy is a multi-threaded, event-driven, non-blocking daemon. This means it uses event
+multiplexing to schedule all of its activities instead of relying on the system to schedule between
+multiple activities. Most of the time it runs as a single process, so the output of "ps aux" on a
+system will report only one "haproxy" process, unless a soft reload is in progress and an older
+process is finishing its job in parallel to the new one. It is thus always easy to trace its
+activity using the strace utility. In order to scale with the number of available processors, by
+default haproxy will start one worker thread per processor it is allowed to run on. Unless
+explicitly configured differently, the incoming traffic is spread over all these threads, all
+running the same event loop. A great care is taken to limit inter-thread dependencies to the strict
+minimum, so as to try to achieve near-linear scalability. This has some impacts such as the fact
+that a given connection is served by a single thread. Thus in order to use all available processing
+capacity, it is needed to have at least as many connections as there are threads, which is almost
+always granted.
+
+HAProxy is designed to isolate itself into a chroot jail during startup, where it cannot perform any
+file-system access at all. This is also true for the libraries it depends on (eg: libc, libssl,
+etc). The immediate effect is that a running process will not be able to reload a configuration file
+to apply changes, instead a new process will be started using the updated configuration file. Some
+other less obvious effects are that some timezone files or resolver files the libc might attempt to
+access at run time will not be found, though this should generally not happen as they're not needed
+after startup. A nice consequence of this principle is that the HAProxy process is totally
+stateless, and no cleanup is needed after it's killed, so any killing method that works will do the
+right thing.
+
+HAProxy doesn't write log files, but it relies on the standard syslog protocol to send logs to a
+remote server (which is often located on the same system).
+
+HAProxy uses its internal clock to enforce timeouts, that is derived from the system's time but
+where unexpected drift is corrected. This is done by limiting the time spent waiting in poll() for
+an event, and measuring the time it really took. In practice it never waits more than one second.
+This explains why, when running strace over a completely idle process, periodic calls to poll() (or
+any of its variants) surrounded by two gettimeofday() calls are noticed. They are normal, completely
+harmless and so cheap that the load they imply is totally undetectable at the system scale, so
+there's nothing abnormal there. Example:
+
+```text
+16:35:40.002320 gettimeofday({1442759740, 2605}, NULL) = 0
+16:35:40.002942 epoll_wait(0, {}, 200, 1000) = 0
+16:35:41.007542 gettimeofday({1442759741, 7641}, NULL) = 0
+16:35:41.007998 gettimeofday({1442759741, 8114}, NULL) = 0
+16:35:41.008391 epoll_wait(0, {}, 200, 1000) = 0
+16:35:42.011313 gettimeofday({1442759742, 11411}, NULL) = 0
+```
+
+HAProxy is a TCP proxy, not a router. It deals with established connections that have been validated
+by the kernel, and not with packets of any form nor with sockets in other states (eg: no SYN_RECV
+nor TIME_WAIT), though their existence may prevent it from binding a port. It relies on the system
+to accept incoming connections and to initiate outgoing connections. An immediate effect of this is
+that there is no relation between packets observed on the two sides of a forwarded connection, which
+can be of different size, numbers and even family. Since a connection may only be accepted from a
+socket in LISTEN state, all the sockets it is listening to are necessarily visible using the
+"netstat" utility to show listening sockets. Example:
+
+```haproxy
+# netstat -ltnp
+```
+
+Active Internet connections (only servers) Proto Recv-Q Send-Q Local Address Foreign Address State
+PID/Program name tcp 0 0 0.0.0.0:22 0.0.0.0:\* LISTEN 1629/sshd tcp 0 0 0.0.0.0:80 0.0.0.0:\* LISTEN
+2847/haproxy tcp 0 0 0.0.0.0:443 0.0.0.0:\* LISTEN 2847/haproxy

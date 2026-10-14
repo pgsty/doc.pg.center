@@ -53,7 +53,7 @@ class HeadAndLinks(HTMLParser):
 
 for language in languages:
     prefix = "" if language == "en" else language + "/"
-    for route in ("", "docs/", "search/", "attribution/"):
+    for route in ("", "search/", "attribution/"):
         page = public / prefix / route / "index.html"
         assert page.is_file() and page.stat().st_size, page
         html = page.read_text()
@@ -66,8 +66,8 @@ for language in languages:
     home = HeadAndLinks((public / prefix / "index.html").read_text())
     assert not home.fallbacks, f"Unexpected English fallback on {language} home"
     for component in components:
-        assert f"/{prefix}docs/{component}/" in home.links, (language, component)
-        assert f"/{prefix}docs/{component}/" in home.footer_links, (language, component)
+        assert f"/{prefix}{component}/" in home.links, (language, component)
+        assert f"/{prefix}{component}/" in home.footer_links, (language, component)
     parent = "https://pg.center/zh/" if language == "zh" else "https://pg.center/"
     assert parent in home.footer_links, f"Parent site missing from {language} footer"
     for output in ("index.md", "llms.txt", "navigation.json"):
@@ -75,7 +75,7 @@ for language in languages:
         assert path.is_file() and path.stat().st_size, path
     json.loads((public / prefix / "navigation.json").read_text())
     for divider in ("intro", "configuration", "management"):
-        assert not (public / prefix / f"docs/haproxy/_div_{divider}/index.html").exists()
+        assert not (public / prefix / f"haproxy/_div_{divider}/index.html").exists()
 
 # All published static assets, including third-party notices and sample reports,
 # must survive the build unchanged.
@@ -85,7 +85,7 @@ for source in (project / "static").rglob("*"):
         assert target.is_file() and target.read_bytes() == source.read_bytes(), target
 
 assert "https://doc.pg.center/images/og-doc-pg-center.png" in (public / "index.html").read_text()
-assert "/images/og-doc-pg-center.png" not in (public / "docs/patroni/index.html").read_text()
+assert "/images/og-doc-pg-center.png" not in (public / "patroni/index.html").read_text()
 print("Validated localized landing pages, canonical URLs, navigation, alternate outputs, and static assets.")
 PYTHON
 

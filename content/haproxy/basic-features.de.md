@@ -1,0 +1,272 @@
+---
+title: "Grundfunktionen"
+linkTitle: "Grundfunktionen"
+weight: 40
+description: "Proxy-Betrieb, TLS, Überwachung, Hochverfügbarkeit, Lastverteilung, Sitzungspersistenz, Protokolle und Statistiken"
+icon: fa-solid fa-layer-group
+module: [HAPROXY]
+categories: [Konzept]
+aliases:
+  - /haproxy/intro/basic-features/
+upstream_link: "https://docs.haproxy.org/3.4/intro.html"
+upstream_name: "HAProxy 3.4 Starter Guide"
+upstream_ref: "v3.4.6-66-g16acce1dac1d, sections 3.3–3.3.8"
+---
+
+Dieser Abschnitt beschreibt Funktionen von HAProxy. Manche werden von jedem modernen Load-Balancer erwartet, andere ergeben sich unmittelbar aus der Architektur von HAProxy. Weitergehende Funktionen behandelt der nächste Abschnitt.
+
+## 3.3.1. Grundfunktionen: Proxy-Betrieb {#section-3-3-1}
+
+Im Proxy-Betrieb werden Daten über zwei unabhängige Verbindungen zwischen Client und Server übertragen. Dafür und für die Verbindungsverwaltung unterstützt HAProxy folgende Grundfunktionen:
+
+- Eine bereinigte Verbindung zum Server schützt ihn vor Fehlern und Angriffen auf der Clientseite;
+
+- Lauschen auf mehreren IP-Adressen und/oder Ports, auch auf Portbereichen;
+
+- transparentes Annehmen: Abfangen von Datenverkehr für beliebige IP-Adressen, die nicht einmal
+  zum lokalen System gehören müssen;
+
+- der Serverport muss nicht dem lauschenden Port entsprechen. Er kann auch um einen festen Wert
+  verschoben werden, was bei Portbereichen nützlich ist;
+
+- transparenter Verbindungsaufbau: Beim Verbinden mit dem Server kann bei Bedarf die IP-Adresse
+  des Clients oder eine beliebige andere verwendet werden;
+
+- Bereitstellung einer zuverlässigen IP-Adresse für den Rückweg bei Load-Balancern (LBs) an
+  mehreren Standorten;
+
+- Entlastung der Server durch Puffer und gegebenenfalls kurzlebige Verbindungen, wodurch die
+  Zahl gleichzeitiger Verbindungen und der Speicherbedarf sinken;
+
+- Optimierung von TCP-Stacks, etwa SACK, und der Überlastungssteuerung sowie Verringerung der
+  Auswirkungen der RTT;
+
+- Unterstützung unterschiedlicher Protokollfamilien auf beiden Seiten, etwa IPv4/IPv6/Unix;
+
+- Durchsetzung von Zeitüberschreitungen auf mehreren Ebenen je nach Verbindungsphase, damit
+  ausgefallene Clients oder Server sowie Angreifer Ressourcen nicht zu lange belegen;
+
+- Protokollprüfung: HTTP, SSL oder Nutzdaten werden untersucht. Ungültige Protokollelemente
+  werden zurückgewiesen, sofern ihre Annahme nicht ausdrücklich angeordnet wurde;
+
+- Durchsetzung von Richtlinien, damit nur erlaubter Datenverkehr weitergeleitet wird;
+
+- eingehende und ausgehende Verbindungen können auf bestimmte Netzwerk-Namespaces beschränkt
+  werden, nur unter Linux. So lässt sich leicht ein mandantenfähiger Load-Balancer für mehrere
+  Container aufbauen;
+
+- das PROXY-Protokoll übermittelt die Client-IP-Adresse auch bei Nicht-HTTP-Datenverkehr an den
+  Server. Diese HAProxy-Erweiterung wurde inzwischen von mehreren Drittanbieterprodukten
+  übernommen, zum Zeitpunkt der Erstellung mindestens von folgenden:
+
+  - Client: haproxy, stud, stunnel, exaproxy, ELB, squid
+  - Server: haproxy, stud, postfix, exim, NGINX, squid, node.js, varnish
+
+## 3.3.2. Grundfunktionen: SSL {#section-3-3-2}
+
+Nach Einschätzung von Google-Ingenieuren zählt der SSL-Stack von HAProxy zu den funktionsreichsten (<http://istlsfastyet.com/>). Zu den häufig genutzten Funktionen gehören:
+
+- Leistungsfähiges SNI-basiertes Hosting mehrerer Websites ohne Begrenzung ihrer Anzahl.
+  Mindestens eine bekannte Installation betreibt 50000 Domains mit eigenen Zertifikaten;
+
+- Wildcard-Zertifikate verringern die Anzahl benötigter Zertifikate;
+
+- zertifikatsbasierte Clientauthentifizierung mit konfigurierbaren Regeln für den Fall, dass
+  kein gültiges Zertifikat vorgelegt wird. So kann beispielsweise eine andere Serverfarm
+  bereitgestellt werden, über die das Clientzertifikat erneuert wird;
+
+- die Authentifizierung des Backend-Servers stellt sicher, dass tatsächlich der richtige Server
+  und kein zwischengeschalteter Angreifer angesprochen wird;
+
+- die Authentifizierung gegenüber dem Backend-Server bestätigt diesem, dass sich der erwartete
+  haproxy-Knoten verbindet;
+
+- die TLS-Erweiterungen NPN und ALPN ermöglichen es, die Verarbeitung von SPDY/HTTP2-Verbindungen
+  zuverlässig auszulagern und die Daten unverschlüsselt an Backend-Server weiterzugeben;
+
+- OCSP-Stapling verkürzt die erste Seitenladezeit weiter, indem eine OCSP-Antwort direkt
+  mitgeliefert wird, wenn der Client eine Certificate Status Request anfordert;
+
+- dynamische Record-Größen bieten zugleich hohe Leistung und geringe Latenz. Sie verkürzen die
+  Seitenladezeit deutlich, da der Browser bereits weitere Objekte abrufen kann, während noch
+  Pakete unterwegs sind;
+
+- alle relevanten Informationen der SSL/TLS-Schicht stehen jederzeit für Protokollierung,
+  Zugriffskontrolle, Berichte und andere Zwecke bereit. Sie können in HTTP-Header oder als
+  PROXY-Protokollerweiterung eingebettet werden. Der entlastete Server erhält damit alle
+  Informationen, die er auch bei eigener SSL-Terminierung hätte.
+
+- bestimmte bekannte Angriffe werden selbst bei anfälligen SSL-Bibliotheken erkannt,
+  protokolliert und blockiert, etwa Heartbleed gegen bestimmte OpenSSL-Versionen.
+
+- zustandslose Sitzungswiederaufnahme nach RFC 5077 mit der TLS-Ticket-Erweiterung. TLS-Tickets
+  können über die CLI aktualisiert werden. Häufiger Ticketwechsel ermöglicht damit
+  Perfect Forward Secrecy.
+
+## 3.3.3. Grundfunktionen: Überwachung {#section-3-3-3}
+
+HAProxy legt großen Wert auf Verfügbarkeit. Deshalb überwacht es den Serverzustand und meldet anderen Netzwerkkomponenten seinen eigenen Zustand:
+
+- Der Serverzustand wird kontinuierlich mit serverspezifischen Parametern überwacht.
+  Damit wird geprüft, ob der Weg zum Server für gewöhnlichen Datenverkehr funktioniert;
+
+- Health Checks verwenden getrennte Hysteresen für den Wechsel in den verfügbaren und den
+  ausgefallenen Zustand, um ständige Zustandswechsel zu vermeiden;
+
+- Prüfungen können eine andere Adresse, einen anderen Port oder ein anderes Protokoll verwenden.
+  So lässt sich ein einzelner Dienst prüfen, der als repräsentativ für mehrere Dienste gilt,
+  etwa der HTTPS-Port eines HTTP+HTTPS-Servers.
+
+- Server können den Zustand anderer Server übernehmen und gleichzeitig als ausgefallen gelten.
+  Dadurch können Server mit mehreren Diensten als Ganzes aus der Verteilung genommen werden,
+  und niemand gelangt zu einem nur teilweise funktionsfähigen Server;
+
+- Agenten auf dem Server können Last und Zustand überwachen. Ein Server kann seine Last, seinen
+  Betriebszustand und seinen administrativen Zustand unabhängig von den Health Checks melden.
+  Ein einfacher Agent ermöglicht es, diese Selbsteinschätzung zusätzlich zu den Prüfungen des
+  gesamten Zugriffswegs zu berücksichtigen;
+
+- verschiedene Prüfverfahren stehen zur Verfügung: TCP-Verbindungsaufbau, HTTP-Anfrage,
+  SMTP-Hello, SSL-Hello, LDAP, SQL, Redis und send/expect-Skripte, jeweils mit oder ohne SSL;
+
+- Zustandsänderungen erscheinen mit Fehlerursache in den Protokollen und auf der Statistikseite,
+  etwa mit der beim Erkennen des Fehlers empfangenen HTTP-Antwort. Außerdem kann eine E-Mail
+  an eine konfigurierbare Adresse gesendet werden;
+
+- die Statistikschnittstelle meldet ebenfalls den Serverzustand. Er kann für Routingentscheidungen
+  genutzt werden, um den Datenverkehr je nach Größe und/oder Zustand auf verschiedene Farmen
+  zu verteilen, etwa beim Ausfall einer Verbindung zwischen Rechenzentren (DC);
+
+- HAProxy kann über Health-Check-Anfragen Informationen wie Servernamen, Gewicht oder Anzahl
+  anderer Server der Farm übermitteln. Die Server können damit ihre Antworten und Entscheidungen
+  anpassen, beispielsweise Backups verschieben, um mehr CPU-Leistung freizuhalten;
+
+- Server können über Health Checks mehr als nur „an“ oder „aus“ melden, etwa den Wunsch,
+  herunterzufahren und deshalb keine neuen Besucher mehr zu erhalten;
+
+- HAProxy selbst kann externen Komponenten wie Routern oder anderen Load-Balancern seinen Zustand
+  melden. So lassen sich umfassende Infrastrukturen mit mehreren Pfaden und Schichten aufbauen.
+
+## 3.3.4. Grundfunktionen: Hochverfügbarkeit {#section-3-3-4}
+
+Wie jeder für den ernsthaften Einsatz ausgelegte Load-Balancer legt HAProxy großen Wert auf Verfügbarkeit, um eine möglichst hohe Dienstkontinuität zu gewährleisten:
+
+- Nur funktionsfähige Server werden verwendet; die übrigen werden automatisch aus den
+  Serverfarmen ausgeschlossen. Unter bestimmten Bedingungen kann ihre Verwendung dennoch
+  erzwungen werden;
+
+- geordnetes Herunterfahren erlaubt es, Server ohne Beeinträchtigung bestehender Verbindungen
+  aus einer Farm zu nehmen;
+
+- fallen aktive Server aus, übernehmen automatisch Backup-Server. So gehen Sitzungen nach
+  Möglichkeit nicht verloren. Dies ermöglicht außerdem mehrere Wege zum selben Server,
+  etwa über verschiedene Schnittstellen;
+
+- fallen zu viele Server aus, kann für die gesamte Farm ein Fehlerzustand gemeldet werden.
+  Zusammen mit den Überwachungsfunktionen kann eine vorgeschaltete Komponente dadurch für
+  einen Dienst einen anderen Load-Balancer-Knoten (LB) wählen;
+
+- die zustandslose Architektur erleichtert den Clusteraufbau. HAProxy gewährleistet möglichst
+  hohe Dienstkontinuität, ohne Informationen speichern zu müssen, die bei einem Ausfall verloren
+  gehen könnten. Eine Übernahme erfolgt dadurch möglichst nahtlos;
+
+- gute Integration mit dem üblichen VRRP-Daemon keepalived: HAProxy meldet ihm problemlos seinen
+  Zustand und unterstützt wechselnde virtuelle IP-Adressen sehr gut. Hinweis: Ausschließlich
+  IP-Redundanzprotokolle wie VRRP/CARP anstelle von Cluster-Lösungen wie Heartbeat verwenden.
+  Sie bieten den schnellsten, nahtlosesten und zuverlässigsten Switchover.
+
+## 3.3.5. Grundfunktionen: Lastverteilung {#section-3-3-5}
+
+HAProxy bietet umfangreiche Funktionen zur Lastverteilung, die leider bei vielen anderen Produkten fehlen:
+
+- Mindestens 10 Lastverteilungsverfahren werden unterstützt. Manche verwenden Eingabedaten und
+  eröffnen dadurch unbegrenzt viele Möglichkeiten. Häufig verwendet werden round-robin, das bei
+  kurzen Verbindungen reihum jeden Server auswählt; leastconn, das bei langen Verbindungen unter
+  den Servern mit der kleinsten Verbindungszahl den am längsten nicht verwendeten auswählt;
+  source, das für SSL- oder Terminalserver-Farmen direkt von der Clientquelladresse abhängt;
+  URI, das für HTTP-Caches direkt die HTTP-URI verwendet; hdr, das den Inhalt eines bestimmten
+  HTTP-Headerfelds verwendet; und first, das bei kurzlebigen virtuellen Maschinen alle Verbindungen
+  auf möglichst wenige Server konzentriert, damit ungenutzte Server ausgeschaltet werden können;
+
+- alle genannten Verfahren unterstützen serverspezifische Gewichte. So können verschiedene
+  Servergenerationen in einer Farm kombiniert oder kleine Anteile des Datenverkehrs gezielt
+  an bestimmte Server gesendet werden, etwa für Diagnosezwecke oder eine neue Softwareversion;
+
+- round-robin, leastconn und konsistentes Hashing unterstützen dynamische Gewichte. Diese können
+  zur Laufzeit über die CLI oder sogar durch einen Agenten auf dem Server geändert werden;
+
+- überall dort, wo dynamische Gewichte unterstützt werden, ist auch slow-start verfügbar.
+  Damit übernimmt ein Server schrittweise Datenverkehr. Dies ist wichtig für empfindliche
+  Anwendungsserver, die Klassen zur Laufzeit kompilieren müssen, sowie für kalte Caches, die
+  vor der vollen Auslastung zunächst gefüllt werden müssen;
+
+- Hashing kann unter anderem die Clientquelladresse, URL-Bestandteile, Elemente der
+  Abfragezeichenfolge, Headerfeldwerte, POST-Parameter oder RDP-Cookies verwenden;
+
+- konsistentes Hashing verhindert eine umfangreiche Neuverteilung, wenn Server zur Farm
+  hinzugefügt oder daraus entfernt werden. Das ist für große Cache-Farmen besonders wichtig
+  und ermöglicht die schrittweise Füllung kalter Caches mit slow-start;
+
+- interne Messwerte wie Verbindungszahlen je Server und Backend oder freie Verbindungsplätze
+  eines Backends ermöglichen sehr ausgefeilte Lastverteilungsstrategien.
+
+## 3.3.6. Grundfunktionen: Sitzungspersistenz {#section-3-3-6}
+
+Lastverteilung für Anwendungen wäre ohne Sitzungspersistenz nutzlos. HAProxy bietet umfassende Möglichkeiten, Besucher auch beim Hinzufügen oder Entfernen von Servern sowie bei Ausfällen und Wiederanläufen demselben Server zuzuordnen. Einige Verfahren kommen ohne Replikation aus und funktionieren deshalb auch bei weit voneinander entfernten Load-Balancer-Knoten:
+
+- Informationen zur Sitzungspersistenz können bei Bedarf an unterschiedlichen Stellen abgeglichen
+  und erlernt werden. Beispielsweise kann JSESSIONID sowohl in einem Cookie als auch in der URL
+  abgeglichen werden. Bis zu 8 Quellen können gleichzeitig erlernt werden; jede kann auf eine
+  andere Stick Table verweisen;
+
+- Persistenzinformationen können aus beliebigen sichtbaren Merkmalen einer Anfrage oder Antwort
+  stammen, etwa Quelladresse, Position und Länge von TCP-Nutzdaten, HTTP-Abfrageparametern,
+  Headerfeldwerten oder Cookies.
+
+- Stick Tables werden im Multi-Master-Verfahren zwischen allen Knoten repliziert;
+
+- häufig benötigte Merkmale wie SSL-ID oder RDP-Cookies für TSE-Farmen sind direkt zugänglich
+  und dadurch einfach zu verwenden;
+
+- alle Persistenzregeln können dynamisch durch ACLs bedingt werden;
+
+- bestimmte Server, etwa Backup-Server, können von der dauerhaften Zuordnung ausgeschlossen
+  werden. Sobald der reguläre Server wieder verfügbar ist, übernimmt er die Last automatisch
+  zurück. Dies wird häufig in Umgebungen mit mehreren Pfaden eingesetzt;
+
+- bei HTTP wird häufig auf das Erlernen verzichtet und stattdessen ein eigenes Persistenz-Cookie
+  verwendet. Es kann erkannt, umgeschrieben, eingefügt oder mit einem Präfix versehen werden,
+  damit sich der Client den zugewiesenen Server merkt;
+
+- der Server kann das Persistenz-Cookie bei der Abmeldung ändern oder löschen. Besucher,
+  die die Anwendung verlassen, werden dadurch automatisch vom Server gelöst;
+
+- ACL-Regeln können die Sitzungspersistenz unabhängig vom Serverzustand gezielt ignorieren oder
+  erzwingen. Zusammen mit erweiterten Health Checks lässt sich so prüfen, ob ein gerade
+  eingerichteter Server funktioniert, bevor er öffentlich freigegeben wird;
+
+- ein neuartiges Verfahren begrenzt die maximale Leerlaufzeit und Gesamtdauer von Cookies.
+  So kann die Persistenz auch auf nie ausgeschalteten Geräten wie Smartphones, TV-Geräten und
+  Haushaltsgeräten geordnet beendet werden, ohne die Cookies dauerhaft speichern zu müssen;
+
+- mehrere Servereinträge können dieselben Persistenzschlüssel verwenden. Dadurch bleibt die
+  Zuordnung in Umgebungen mit mehreren Pfaden erhalten, wenn ein Pfad ausfällt;
+
+- soft-stop sorgt dafür, dass nur Nutzer mit vorhandenen Persistenzinformationen weiterhin
+  ihren zugewiesenen Server erreichen. Neue Nutzer gelangen nicht mehr dorthin.
+
+## 3.3.7. Grundfunktionen: Protokollierung {#section-3-3-7}
+
+Die Protokollierung ist für einen Load-Balancer äußerst wichtig. Einerseits wird er oft zu Unrecht für Probleme verantwortlich gemacht, die er lediglich sichtbar macht. Andererseits sitzt er an einem zentralen Punkt der Infrastruktur, an dem normale und ungewöhnliche Aktivitäten ausgewertet und mit anderen Komponenten in Beziehung gesetzt werden müssen.
+
+HAProxy erstellt sehr detaillierte Protokolle mit Millisekundengenauigkeit und dem genauen Zeitpunkt der Verbindungsannahme. Dieser lässt sich in Firewall-Protokollen wiederfinden, etwa zur NAT-Zuordnung. Schon standardmäßig enthalten TCP- und HTTP-Protokolle alle wesentlichen Angaben zur Fehlerbehebung: Quell-IP-Adresse und -Port, Frontend, Backend, Server, Zeitmessungen für Anfrageempfang, Warteschlange, Verbindungsaufbau, Antwort-Header und Datenübertragung, globalen Prozesszustand, Verbindungszahlen, Warteschlangenzustand, Anzahl der Wiederholungsversuche, genaue Persistenzaktionen, Gründe für Verbindungsabbrüche und erfasste Header mit sicherer Ausgabekodierung. Das Format lässt sich erweitern oder ersetzen, um beliebige abgerufene Daten, Variablen und erfasste Werte aufzunehmen. So können etwa die kumulierte Anzahl von Anfragen oder die Anzahl verschiedener von einem Client besuchter URLs protokolliert werden.
+
+Die Protokollstufe kann mit gewöhnlichen ACLs je Anfrage angepasst werden. So lassen sich störende Meldungen automatisch unterdrücken und bei ungewöhnlichem Verhalten eines kleinen Teils des Datenverkehrs stattdessen Warnungen ausgeben, etwa bei zu vielen URLs oder HTTP-Fehlern einer Quelladresse. Verwaltungsereignisse werden ebenfalls mit eigenen Stufen protokolliert, beispielsweise der Ausfall oder die Wiederherstellung eines Servers.
+
+Jedes Frontend und Backend kann mehrere unabhängige Protokollziele verwenden, was den Mandantenbetrieb erleichtert. Meldungen werden vorzugsweise über UDP gesendet, gegebenenfalls JSON-kodiert. Zur Sicherstellung der Zustellung werden sie nach einer konfigurierbaren Zeilenlänge abgeschnitten. Alternativ können sie an stdout/stderr, einen beliebigen Dateideskriptor oder einen Ringpuffer gesendet werden, den ein Client zum Abrufen der Meldungen abonnieren kann.
+
+## 3.3.8. Grundfunktionen: Statistiken {#section-3-3-8}
+
+HAProxy bietet eine webbasierte Statistikschnittstelle mit Authentifizierung, Sicherheitsstufen und Geltungsbereichen. Jeder Hosting-Kunde kann so eine eigene Seite erhalten, die nur seine Instanzen zeigt. Diese Seite kann unter einer verborgenen URL der regulären Website liegen, sodass kein zusätzlicher Port geöffnet werden muss. Sie kann auch die Verfügbarkeit anderer HAProxy-Knoten anzeigen, damit auf einen Blick erkennbar ist, ob alles wie erwartet funktioniert. Die Übersicht bietet zahlreiche Details, etwa Fehlerursachen, Zeit seit dem letzten Zugriff oder der letzten Änderung. Die Daten sind auch als CSV-Tabelle verfügbar, die andere Werkzeuge zur Diagrammerstellung importieren können. Die Seite kann sich automatisch aktualisieren und als Überwachungsanzeige auf einem großen Bildschirm dienen. Im Administrationsmodus lässt sich außerdem der Serverzustand ändern, um Wartungsarbeiten zu erleichtern.
+
+Zusätzlich steht ein Prometheus-Exporter bereit, damit die Statistiken je nach Bereitstellung in einem anderen Format genutzt werden können.

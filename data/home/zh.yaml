@@ -34,32 +34,32 @@ components:
       meta: 高可用
       icon: fa-solid fa-heart-pulse
       desc: 使用分布式共识、健康检查与自动故障转移，构建并运行 PostgreSQL 高可用集群。
-      url: /docs/patroni/
+      url: /patroni/
     - title: pgBackRest
       meta: 备份与恢复
       icon: fa-solid fa-couch
       desc: 设计可靠的备份、恢复、归档、保留策略与时间点恢复工作流。
-      url: /docs/pgbackrest/
+      url: /pgbackrest/
     - title: PgBouncer
       meta: 连接池
       icon: fa-solid fa-arrows-turn-to-dots
       desc: 降低连接开销，理解会话、事务与语句池化模式的行为边界。
-      url: /docs/pgbouncer/
+      url: /pgbouncer/
     - title: pgBadger
       meta: 日志分析
       icon: fa-solid fa-otter
       desc: 把 PostgreSQL 与 PgBouncer 日志转化为查询、负载、错误与运行报告。
-      url: /docs/pgbadger/
+      url: /pgbadger/
     - title: HAProxy
       meta: 负载均衡
       icon: fa-solid fa-network-wired
       desc: 阅读完整的 HAProxy 3.4 入门、配置与管理中文手册。
-      url: /docs/haproxy/
+      url: /haproxy/
     - title: etcd
       meta: 共识与协调
       icon: fa-solid fa-gear
       desc: 运维强一致分布式键值存储，并理解其 API、Raft 模型、版本升级与内部原理。
-      url: /docs/etcd/
+      url: /etcd/
 
 capabilities:
   eyebrow: 组件指南
@@ -68,7 +68,7 @@ capabilities:
   items:
     - ref: 01 / 高可用
       title: Patroni
-      url: /docs/patroni/
+      url: /patroni/
       motto: PostgreSQL 高可用方案模板
       bullets:
         - 通过分布式配置存储协调领导者选举与集群状态。
@@ -81,15 +81,15 @@ capabilities:
         columns: 2
         aria_label: Patroni 文档快捷入口
         items:
-          - { icon: fa-solid fa-download, title: 安装, url: /docs/patroni/installation/ }
-          - { icon: fa-solid fa-sliders, title: 配置, url: /docs/patroni/config/ }
-          - { icon: fa-solid fa-terminal, title: patronictl, url: /docs/patroni/patronictl/ }
-          - { icon: fa-solid fa-plug, title: REST API, url: /docs/patroni/rest_api/ }
-          - { icon: fa-solid fa-arrows-rotate, title: 复制模式, url: /docs/patroni/replication_modes/ }
-          - { icon: fa-solid fa-circle-question, title: 常见问题, url: /docs/patroni/faq/ }
+          - { icon: fa-solid fa-download, title: 安装, url: /patroni/installation/ }
+          - { icon: fa-solid fa-sliders, title: 配置, url: /patroni/config/ }
+          - { icon: fa-solid fa-terminal, title: patronictl, url: /patroni/patronictl/ }
+          - { icon: fa-solid fa-plug, title: REST API, url: /patroni/rest_api/ }
+          - { icon: fa-solid fa-arrows-rotate, title: 复制模式, url: /patroni/replication_modes/ }
+          - { icon: fa-solid fa-circle-question, title: 常见问题, url: /patroni/faq/ }
     - ref: 02 / 备份与恢复
       title: pgBackRest
-      url: /docs/pgbackrest/
+      url: /pgbackrest/
       motto: 可靠地完成备份、归档、恢复与时间点恢复
       bullets:
         - 支持全量、差异、增量与块级备份，并可并行处理。
@@ -102,15 +102,15 @@ capabilities:
         columns: 2
         aria_label: pgBackRest 文档快捷入口
         items:
-          - { icon: fa-solid fa-route, title: 用户指南, url: /docs/pgbackrest/user-guide/ }
-          - { icon: fa-brands fa-redhat, title: RHEL 指南, url: /docs/pgbackrest/user-guide-rhel/ }
-          - { icon: fa-solid fa-sliders, title: 配置参考, url: /docs/pgbackrest/configuration/ }
-          - { icon: fa-solid fa-terminal, title: 命令参考, url: /docs/pgbackrest/command/ }
-          - { icon: fa-solid fa-tags, title: 版本记录, url: /docs/pgbackrest/release/ }
-          - { icon: fa-solid fa-circle-question, title: 常见问题, url: /docs/pgbackrest/faq/ }
+          - { icon: fa-solid fa-route, title: 用户指南, url: /pgbackrest/user-guide/ }
+          - { icon: fa-brands fa-redhat, title: RHEL 指南, url: /pgbackrest/user-guide-rhel/ }
+          - { icon: fa-solid fa-sliders, title: 配置参考, url: /pgbackrest/configuration/ }
+          - { icon: fa-solid fa-terminal, title: 命令参考, url: /pgbackrest/command/ }
+          - { icon: fa-solid fa-tags, title: 版本记录, url: /pgbackrest/release/ }
+          - { icon: fa-solid fa-circle-question, title: 常见问题, url: /pgbackrest/faq/ }
     - ref: 03 / 连接池
       title: PgBouncer
-      url: /docs/pgbouncer/
+      url: /pgbouncer/
       motto: 轻量级 PostgreSQL 连接池
       bullets:
         - 复用 PostgreSQL 连接，减少后端进程启动成本与连接压力。
@@ -123,15 +123,15 @@ capabilities:
         columns: 2
         aria_label: PgBouncer 文档快捷入口
         items:
-          - { icon: fa-solid fa-list-check, title: 功能特性, url: /docs/pgbouncer/features/ }
-          - { icon: fa-solid fa-download, title: 下载, url: /docs/pgbouncer/download/ }
-          - { icon: fa-solid fa-wrench, title: 安装, url: /docs/pgbouncer/install/ }
-          - { icon: fa-solid fa-terminal, title: 使用方法, url: /docs/pgbouncer/usage/ }
-          - { icon: fa-solid fa-sliders, title: 配置参考, url: /docs/pgbouncer/config/ }
-          - { icon: fa-solid fa-circle-question, title: 常见问题, url: /docs/pgbouncer/faq/ }
+          - { icon: fa-solid fa-list-check, title: 功能特性, url: /pgbouncer/features/ }
+          - { icon: fa-solid fa-download, title: 下载, url: /pgbouncer/download/ }
+          - { icon: fa-solid fa-wrench, title: 安装, url: /pgbouncer/install/ }
+          - { icon: fa-solid fa-terminal, title: 使用方法, url: /pgbouncer/usage/ }
+          - { icon: fa-solid fa-sliders, title: 配置参考, url: /pgbouncer/config/ }
+          - { icon: fa-solid fa-circle-question, title: 常见问题, url: /pgbouncer/faq/ }
     - ref: 04 / 日志分析
       title: pgBadger
-      url: /docs/pgbadger/
+      url: /pgbadger/
       motto: 快速分析 PostgreSQL 与 PgBouncer 日志
       bullets:
         - 解析多种 PostgreSQL 日志格式、压缩文件、远程输入与 PgBouncer 日志。
@@ -144,17 +144,17 @@ capabilities:
         columns: 2
         aria_label: pgBadger 文档快捷入口
         items:
-          - { icon: fa-solid fa-download, title: 下载, url: /docs/pgbadger/download/ }
-          - { icon: fa-solid fa-terminal, title: 命令行, url: /docs/pgbadger/command-line/ }
-          - { icon: fa-solid fa-file-lines, title: PostgreSQL 日志, url: /docs/pgbadger/postgresql-logging/ }
-          - { icon: fa-solid fa-calendar-days, title: 增量报告, url: /docs/pgbadger/incremental-reports/ }
-          - { icon: fa-solid fa-file-export, title: 输出格式, url: /docs/pgbadger/output-formats/ }
-          - { icon: fa-solid fa-chart-column, title: 示例报告, url: /docs/pgbadger/sample-reports/ }
-          - { icon: fa-solid fa-tags, title: 版本记录, url: /docs/pgbadger/releases/ }
-          - { icon: fa-solid fa-life-ring, title: 支持, url: /docs/pgbadger/support/ }
+          - { icon: fa-solid fa-download, title: 下载, url: /pgbadger/download/ }
+          - { icon: fa-solid fa-terminal, title: 命令行, url: /pgbadger/command-line/ }
+          - { icon: fa-solid fa-file-lines, title: PostgreSQL 日志, url: /pgbadger/postgresql-logging/ }
+          - { icon: fa-solid fa-calendar-days, title: 增量报告, url: /pgbadger/incremental-reports/ }
+          - { icon: fa-solid fa-file-export, title: 输出格式, url: /pgbadger/output-formats/ }
+          - { icon: fa-solid fa-chart-column, title: 示例报告, url: /pgbadger/sample-reports/ }
+          - { icon: fa-solid fa-tags, title: 版本记录, url: /pgbadger/releases/ }
+          - { icon: fa-solid fa-life-ring, title: 支持, url: /pgbadger/support/ }
     - ref: 05 / 负载均衡
       title: HAProxy
-      url: /docs/haproxy/
+      url: /haproxy/
       motto: 快速、可靠的 TCP 与 HTTP 流量管理
       bullets:
         - 从负载均衡、健康检查与连接管理开始，理解 HAProxy 的工作方式。
@@ -167,17 +167,17 @@ capabilities:
         columns: 2
         aria_label: HAProxy 中文文档快捷入口
         items:
-          - { icon: fa-solid fa-compass, title: 入门指南, url: /docs/haproxy/load-balancing/ }
-          - { icon: fa-solid fa-file-code, title: 配置手册, url: /docs/haproxy/http-fundamentals/ }
-          - { icon: fa-solid fa-right-left, title: 代理配置项, url: /docs/haproxy/proxies/ }
-          - { icon: fa-solid fa-filter, title: ACL 与样本提取, url: /docs/haproxy/acls-and-samples/ }
-          - { icon: fa-solid fa-screwdriver-wrench, title: 管理指南, url: /docs/haproxy/prerequisites/ }
-          - { icon: fa-solid fa-chart-line, title: 运行时 CLI 与统计, url: /docs/haproxy/statistics-and-monitoring/ }
-          - { icon: fa-solid fa-bug, title: 调试与性能, url: /docs/haproxy/debugging-and-performance/ }
-          - { icon: fa-solid fa-shield-halved, title: 安全, url: /docs/haproxy/security/ }
+          - { icon: fa-solid fa-compass, title: 入门指南, url: /haproxy/load-balancing/ }
+          - { icon: fa-solid fa-file-code, title: 配置手册, url: /haproxy/http-fundamentals/ }
+          - { icon: fa-solid fa-right-left, title: 代理配置项, url: /haproxy/proxies/ }
+          - { icon: fa-solid fa-filter, title: ACL 与样本提取, url: /haproxy/acls-and-samples/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: 管理指南, url: /haproxy/prerequisites/ }
+          - { icon: fa-solid fa-chart-line, title: 运行时 CLI 与统计, url: /haproxy/statistics-and-monitoring/ }
+          - { icon: fa-solid fa-bug, title: 调试与性能, url: /haproxy/debugging-and-performance/ }
+          - { icon: fa-solid fa-shield-halved, title: 安全, url: /haproxy/security/ }
     - ref: 06 / 共识与协调
       title: etcd
-      url: /docs/etcd/
+      url: /etcd/
       motto: 强一致分布式键值存储
       bullets:
         - 基于 Raft 共识算法提供持久化键值 API，为分布式系统提供协调能力。
@@ -190,12 +190,12 @@ capabilities:
         columns: 2
         aria_label: etcd 文档快捷入口
         items:
-          - { icon: fa-solid fa-bolt, title: 快速上手, url: /docs/etcd/quickstart/ }
-          - { icon: fa-solid fa-download, title: 安装, url: /docs/etcd/install/ }
-          - { icon: fa-solid fa-sliders, title: 配置, url: /docs/etcd/op-guide/configuration/ }
-          - { icon: fa-solid fa-screwdriver-wrench, title: 维护, url: /docs/etcd/op-guide/maintenance/ }
-          - { icon: fa-solid fa-code, title: API, url: /docs/etcd/learning/api/ }
-          - { icon: fa-solid fa-arrow-up-right-dots, title: 升级到 3.7, url: /docs/etcd/upgrades/upgrade_3_7/ }
+          - { icon: fa-solid fa-bolt, title: 快速上手, url: /etcd/quickstart/ }
+          - { icon: fa-solid fa-download, title: 安装, url: /etcd/install/ }
+          - { icon: fa-solid fa-sliders, title: 配置, url: /etcd/op-guide/configuration/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: 维护, url: /etcd/op-guide/maintenance/ }
+          - { icon: fa-solid fa-code, title: API, url: /etcd/learning/api/ }
+          - { icon: fa-solid fa-arrow-up-right-dots, title: 升级到 3.7, url: /etcd/upgrades/upgrade_3_7/ }
 
 faq:
   eyebrow: 常见问题

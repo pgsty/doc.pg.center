@@ -1,0 +1,315 @@
+---
+title: "9. Supported Filters"
+linkTitle: "9. Filters"
+weight: 200
+description: "Trace, compression, SPOE, cache, FastCGI, OpenTracing, and bandwidth filters"
+icon: fa-solid fa-layer-group
+module: [HAPROXY]
+categories: [Reference]
+aliases:
+  - /haproxy/configuration/filters/
+upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
+upstream_name: "HAProxy 3.4 Configuration Manual"
+upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 9"
+---
+
+Here are listed officially supported filters with the list of parameters they accept. Depending on
+compile options, some of these filters might be unavailable. The list of available filters is
+reported in haproxy -vv.
+
+See also: "filter"
+
+## 9.1. Trace {#section-9-1}
+
+filter trace [name `<name>`] [random-forwarding] [max-fwd `<max>`] [hexdump]
+
+Arguments:
+
+```text
+<name>               is an arbitrary name that will be reported in
+                     messages. If no name is provided, "TRACE" is used.
+
+<quiet>              inhibits trace messages.
+
+<random-forwarding>  enables the random forwarding of parsed data. By
+                     default, this filter forwards all previously parsed
+                     data. With this parameter, it only forwards a random
+                     amount of the parsed data.
+
+<max>                is the maximum amount of data that can be forwarded at
+                     a time. "max-fwd" option can be combined with the
+                     random forwarding. <max> must be an positive integer.
+                     0 means there is no limit.
+
+<hexdump>             dumps all forwarded data to the server and the client.
+```
+
+This filter can be used as a base to develop new filters. It defines all callbacks and print a
+message on the standard error stream (stderr) with useful information for all of them. It may be
+useful to debug the activity of other filters or, quite simply, HAProxy's activity.
+
+Using `<random-parsing>` and/or `<random-forwarding>` parameters is a good way to tests the behavior
+of a filter that parses data exchanged between a client and a server by adding some latencies in the
+processing.
+
+## 9.2. HTTP compression {#section-9-2}
+
+filter comp-req
+
+Enables filter that explicitly tries to compress HTTP requests according to "compression" settings.
+Implicitly sets "compression direction request".
+
+filter comp-res
+
+Enables filter that explicitly tries to compress HTTP responses according to "compression" settings.
+Implicitly sets "compression direction response"
+
+filter compression (deprecated)
+
+Alias for backward compatibility purposes that is functionally equivalent to enabling both
+"comp-req" and "comp-res" filter. "compression" keyword must be used to configure appropriate
+behavior:
+
+The HTTP compression has been moved in a filter in HAProxy 1.7. "compression" keyword must still be
+used to enable and configure the HTTP compression. And when no other filter is used, it is enough.
+When used with the cache or the fcgi-app enabled, it is also enough. In this case, the compression
+is always done after the response is stored in the cache. But it is mandatory to explicitly use a
+filter line to enable the HTTP compression when at least one filter other than the cache or the
+fcgi-app is used for the same listener/frontend/backend. This is important to know the filters
+evaluation order.
+
+See also: "compression", [section 9.4](/haproxy/filters/#section-9-4) about the cache filter and [section 9.5](/haproxy/filters/#section-9-5) about the fcgi-app
+filter.
+
+## 9.3. Stream Processing Offload Engine (SPOE) {#section-9-3}
+
+filter spoe [engine `<name>`] config `<file>`
+
+Arguments:
+
+```text
+<name>      is the engine name that will be used to find the right scope in
+            the configuration file. If not provided, all the file will be
+            parsed.
+
+<file>      is the path of the engine configuration file. This file can
+            contain configuration of several engines. In this case, each
+            part must be placed in its own scope.
+```
+
+The Stream Processing Offload Engine (SPOE) is a filter communicating with external components. It
+allows the offload of some specifics processing on the streams in tiered applications. These
+external components and information exchanged with them are configured in dedicated files, for the
+main part. It also requires dedicated backends, defined in HAProxy configuration.
+
+SPOE communicates with external components using an in-house binary protocol, the Stream Processing
+Offload Protocol (SPOP).
+
+When the SPOE is used on a stream, a dedicated stream is spawned to handle the communication with
+the external component. The main stream is the parent stream of this "SPOE" stream. It means it is
+possible to retrieve variables of the main stream from the "SPOE" stream. See [section 2.8](/haproxy/configuration-basics/#section-2-8) about
+variables for details.
+
+For all information about the SPOE configuration and the SPOP specification, see "doc/SPOE.txt".
+
+## 9.4. Cache {#section-9-4}
+
+filter cache `<name>`
+
+Arguments:
+
+```text
+<name>      is name of the cache section this filter will use.
+```
+
+The cache uses a filter to store cacheable responses. The HTTP rules "cache-store" and "cache-use"
+must be used to define how and when to use a cache. By default the corresponding filter is
+implicitly defined. And when no other filters than fcgi-app or compression are used, it is enough.
+In such case, the compression filter is always evaluated after the cache filter. But it is mandatory
+to explicitly use a filter line to use a cache when at least one filter other than the compression
+or the fcgi-app is used for the same listener/frontend/backend. This is important to know the
+filters evaluation order.
+
+See also: [section 9.2](/haproxy/filters/#section-9-2) about the compression filter, [section 9.5](/haproxy/filters/#section-9-5) about the fcgi-app filter and
+[section 6](/haproxy/cache/) about cache.
+
+## 9.5. Fcgi-app {#section-9-5}
+
+filter fcgi-app `<name>`
+
+Arguments:
+
+```text
+<name>      is name of the fcgi-app section this filter will use.
+```
+
+The FastCGI application uses a filter to evaluate all custom parameters on the request path, and to
+process the headers on the response path. the `<name>` must reference an existing fcgi-app section.
+The directive "use-fcgi-app" should be used to define the application to use. By default the
+corresponding filter is implicitly defined. And when no other filters than cache or compression are
+used, it is enough. But it is mandatory to explicitly use a filter line to a fcgi-app when at least
+one filter other than the compression or the cache is used for the same backend. This is important
+to know the filters evaluation order.
+
+See also: "use-fcgi-app", [section 9.2](/haproxy/filters/#section-9-2) about the compression filter, [section 9.4](/haproxy/filters/#section-9-4) about the cache
+filter and [section 10](/haproxy/fastcgi/) about FastCGI application.
+
+## 9.6. OpenTracing {#section-9-6}
+
+The OpenTracing filter adds native support for using distributed tracing in HAProxy. This is enabled
+by sending an OpenTracing compliant request to one of the supported tracers such as Datadog, Jaeger,
+Lightstep and Zipkin tracers. Please note: tracers are not listed by any preference, but
+alphabetically.
+
+This feature is only enabled when HAProxy was built with USE_OT=1.
+
+The OpenTracing filter activation is done explicitly by specifying it in the HAProxy configuration.
+If this is not done, the OpenTracing filter in no way participates in the work of HAProxy.
+
+filter opentracing [id `<id>`] config `<file>`
+
+Arguments:
+
+```text
+<id>        is the OpenTracing filter id that will be used to find the
+            right scope in the configuration file. If no filter id is
+            specified, 'ot-filter' is used as default.  If scope is not
+            specified in the configuration file, it applies to all defined
+            OpenTracing filters.
+
+<file>      is the path of the OpenTracing configuration file. The same
+            file can contain configurations for multiple OpenTracing
+            filters simultaneously. In that case we do not need to define
+            scope so the same configuration applies to all filters or each
+            filter must have its own scope defined.
+```
+
+More detailed documentation related to the operation, configuration and use of the filter can be
+found in the addons/ot directory.
+
+Note: The OpenTracing filter shouldn't be used for new designs as OpenTracing itself is no longer
+maintained nor supported by its authors. As such OpenTracing will be deprecated in 3.3 and removed
+in 3.5. A replacement filter based on OpenTelemetry is available since 3.4 with complete build
+instructions currently at:
+
+```text
+https://github.com/haproxytech/haproxy-opentelemetry/
+```
+
+## 9.7. Bandwidth limitation {#section-9-7}
+
+```haproxy
+filter bwlim-in  <name> default-limit <size> default-period <time> [min-size <sz>]
+filter bwlim-out <name> default-limit <size> default-period <time> [min-size <sz>]
+filter bwlim-in  <name> limit <size> key <pattern> [table <table>] [min-size <sz>]
+filter bwlim-out <name> limit <size> key <pattern> [table <table>] [min-size <sz>]
+```
+
+Arguments:
+
+```text
+<name>      is the filter name that will be used by 'set-bandwidth-limit'
+            actions to reference a specific bandwidth limitation filter.
+
+<size>      is max number of bytes that can be forwarded over the period.
+            The value must be specified for per-stream and shared bandwidth
+            limitation filters. It follows the HAProxy size format and is
+            expressed in bytes.
+
+<pattern>   is a sample expression rule as described in section 7.3. It
+            describes what elements will be analyzed, extracted, combined,
+            and used to select which table entry to update the counters. It
+            must be specified for shared bandwidth limitation filters only.
+
+<table>     is an optional table to be used instead of the default one,
+            which is the stick-table declared in the current proxy. It can
+            be specified for shared bandwidth limitation filters only.
+
+<time>      is the default time period used to evaluate the bandwidth
+            limitation rate. It can be specified for per-stream bandwidth
+            limitation filters only. It follows the HAProxy time format and
+            is expressed in milliseconds.
+
+<min-size>  is the optional minimum number of bytes forwarded at a time by
+            a stream excluding the last packet that may be smaller. This
+            value can be specified for per-stream and shared bandwidth
+            limitation filters. It follows the HAProxy size format and is
+            expressed in bytes.
+```
+
+Bandwidth limitation filters should be used to restrict the data forwarding speed at the stream
+level. By extension, such filters limit the network bandwidth consumed by a resource. Several
+bandwidth limitation filters can be used. For instance, it is possible to define a limit per source
+address to be sure a client will never consume all the network bandwidth, thereby penalizing other
+clients, and another one per stream to be able to fairly handle several connections for a given
+client.
+
+The definition order of these filters is important. If several bandwidth filters are enabled on a
+stream, the filtering will be applied in their definition order. It is also important to understand
+the definition order of the other filters have an influence. For instance, depending on the HTTP
+compression filter is defined before or after a bandwidth limitation filter, the limit will be
+applied on the compressed payload or not. The same is true for the cache filter.
+
+There are two kinds of bandwidth limitation filters. The first one enforces a default limit and is
+applied per stream. The second one uses a stickiness table to enforce a limit equally divided
+between all streams sharing the same entry in the table.
+
+In addition, for a given filter, depending on the filter keyword used, the limitation can be applied
+on incoming data, received from the client and forwarded to a server, or on outgoing data, received
+from a server and sent to the client. To apply a limit on incoming data, "bwlim-in" keyword must be
+used. To apply it on outgoing data, "bwlim-out" keyword must be used. In both cases, the bandwidth
+limitation is applied on forwarded data, at the stream level.
+
+The bandwidth limitation is applied at the stream level and not at the connection level. For
+multiplexed protocols (H2, H3 and FastCGI), the streams of the same connection may have different
+limits.
+
+For a per-stream bandwidth limitation filter, default period and limit must be defined. As their
+names suggest, they are the default values used to setup the bandwidth limitation rate for a stream.
+However, for this kind of filter and only this one, it is possible to redefine these values using
+sample expressions when the filter is enabled with a TCP/HTTP "set-bandwidth-limit" action.
+
+For a shared bandwidth limitation filter, depending on whether it is applied on incoming or outgoing
+data, the stickiness table used must store the corresponding bytes rate information.
+"bytes_in_rate(`<period>`)" counter must be stored to limit incoming data and
+"bytes_out_rate(`<period>`)" counter must be used to limit outgoing data.
+
+Finally, it is possible to set the minimum number of bytes that a bandwidth limitation filter can
+forward at a time for a given stream. It should be used to not forward too small amount of data, to
+reduce the CPU usage. It must carefully be defined. Too small, a value can increase the CPU usage.
+Too high, it can increase the latency. It is also highly linked to the defined bandwidth limit. If
+it is too close to the bandwidth limit, some pauses may be experienced to not exceed the limit
+because too many bytes will be consumed at a time. It is highly dependent on the filter
+configuration. A good idea is to start with something around 2 TCP MSS, typically 2896 bytes, and
+tune it after some experimentations.
+
+Example:
+
+```text
+frontend http
+    bind *:80
+    mode http
+
+    # If this filter is enabled, the stream will share the download limit
+    # of 10m/s with all other streams with the same source address.
+    filter bwlim-out limit-by-src key src table limit-by-src limit 10m
+
+    # If this filter is enabled, the stream will be limited to download at 1m/s,
+    # independently of all other streams.
+    filter bwlim-out limit-by-strm default-limit 1m default-period 1s
+
+    # Limit all streams to 1m/s (the default limit) and those accessing the
+    # internal API to 100k/s. Limit each source address to 10m/s. The shared
+    # limit is applied first. Both are limiting the download rate.
+    http-request set-bandwidth-limit limit-by-strm
+    http-request set-bandwidth-limit limit-by-strm limit 100k if { path_beg /internal }
+    http-request set-bandwidth-limit limit-by-src
+    ...
+
+backend limit-by-src
+    # The stickiness table used by <limit-by-src> filter
+    stick-table type ip size 1m expire 3600s store bytes_out_rate(1s)
+```
+
+See also: "tcp-request content set-bandwidth-limit", "tcp-response content set-bandwidth-limit",
+"http-request set-bandwidth-limit" and "http-response set-bandwidth-limit".

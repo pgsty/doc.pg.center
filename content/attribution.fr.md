@@ -24,12 +24,12 @@ Cette page est cet enregistrement. Elle indique ce qui a été importé, à quel
 
 | Composant | Travail du projet amont | Verrouillé à | Licence | Avis conservé |
 |---|---|---|---|---|
-| [Patroni](/fr/docs/patroni/) | [documentation de Patroni](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Projet amont `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/fr/docs/pgbackrest/) | [documentation de pgBackRest](https://pgbackrest.org/) | v2.59.3 | [MIT](https://opensource.org/license/mit) | [Projet amont `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/fr/docs/pgbouncer/) | [documentation de PgBouncer](https://www.pgbouncer.org/) | v1.26.0 | [ISC](https://opensource.org/license/isc-license-txt) | [Projet amont `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
-| [pgBadger](/fr/docs/pgbadger/) | [documentation de pgBadger](https://pgbadger.darold.net/) | v13.2, commit `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/fr/docs/haproxy/) | [manuels HAProxy 3.4](https://docs.haproxy.org/3.4/) | instantané 3.4.6-66, commit `16acce1` ; version stable 3.4.6 | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/fr/docs/etcd/) | [documentation etcd v3.7](https://etcd.io/docs/v3.7/) | v3.7, commit `d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Projet amont `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [Patroni](/fr/patroni/) | [documentation de Patroni](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Projet amont `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
+| [pgBackRest](/fr/pgbackrest/) | [documentation de pgBackRest](https://pgbackrest.org/) | v2.59.3 | [MIT](https://opensource.org/license/mit) | [Projet amont `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [PgBouncer](/fr/pgbouncer/) | [documentation de PgBouncer](https://www.pgbouncer.org/) | v1.26.0 | [ISC](https://opensource.org/license/isc-license-txt) | [Projet amont `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
+| [pgBadger](/fr/pgbadger/) | [documentation de pgBadger](https://pgbadger.darold.net/) | v13.2, commit `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
+| [HAProxy](/fr/haproxy/) | [manuels HAProxy 3.4](https://docs.haproxy.org/3.4/) | instantané 3.4.6-66, commit `16acce1` ; version stable 3.4.6 | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [etcd](/fr/etcd/) | [documentation etcd v3.7](https://etcd.io/docs/v3.7/) | v3.7, commit `d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Projet amont `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 Chaque collection est **adaptée**, et non miroirée. Les titres, ancres, liens croisés, signatures de code, regroupement des pages et navigation sont révisés pour cette édition ; le texte original du projet amont est lui-même conservé. Le crédit en fin de page le précise et fournit un lien vers l'historique des modifications de cette page sur le site.
 
@@ -70,7 +70,7 @@ pgBadger est protégé par le droit d'auteur (c) 2012-2026 Gilles Darold et est 
 > de ses rapports générés comprennent aussi des composants sous licence MIT, GPL-2.0 et SIL Open
 > Font License 1.1. L'inventaire complet des ressources en amont est conservé dans
 > [`/third_party/pgbadger/THIRD-PARTY-LICENSES`](/third_party/pgbadger/THIRD-PARTY-LICENSES).
-> Les [rapports d'exemple](/fr/docs/pgbadger/sample-reports/) publiés ici sont des artefacts historiques
+> Les [rapports d'exemple](/fr/pgbadger/sample-reports/) publiés ici sont des artefacts historiques
 > générés qui conservent leurs mentions d'origine.
 
 ## HAProxy {#haproxy}

@@ -30,7 +30,7 @@ for (const [lang, query] of Object.entries(queries)) {
   const documents = JSON.parse(fs.readFileSync(path.join(publicDir, files[0]), 'utf8'));
   const engine = local.create(documents, lunr, 12);
   const original = upstream.create(documents, lunr, 12);
-  const route = (lang === 'en' ? '' : '/' + lang) + '/docs/pgbackrest/news/';
+  const route = (lang === 'en' ? '' : '/' + lang) + '/pgbackrest/news/';
   for (const term of [query, query.toUpperCase()]) {
     assert(engine.query(term).some(({ doc }) => doc.ref === route),
       `${lang} security announcement missing for ${term}`);
@@ -39,7 +39,7 @@ for (const [lang, query] of Object.entries(queries)) {
     assert(!original.query(query).some(({ doc }) => doc.ref === route),
       'upstream Cyrillic regression must be reproduced');
     for (const term of ['Восстановление', 'резервное копирование']) {
-      assert(engine.query(term).some(({ doc }) => doc.ref.startsWith('/ru/docs/pgbackrest/')),
+      assert(engine.query(term).some(({ doc }) => doc.ref.startsWith('/ru/pgbackrest/')),
         `Russian technical search missing for ${term}`);
     }
   } else {

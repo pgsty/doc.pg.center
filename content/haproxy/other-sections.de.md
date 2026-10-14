@@ -1,0 +1,1356 @@
+---
+title: "12. Weitere Abschnitte"
+linkTitle: "12. Weitere Abschnitte"
+weight: 230
+description: "Ablaufverfolgung, Benutzer, Mailer, Fehler, Ringpuffer, Zertifikate, ACME und globale Health Checks"
+icon: fa-solid fa-ellipsis
+module: [HAPROXY]
+categories: [Referenz]
+aliases:
+  - /haproxy/configuration/other-sections/
+upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
+upstream_name: "HAProxy 3.4 Configuration Manual"
+upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 12"
+---
+
+Die nachfolgend beschriebenen Abschnitte werden weniger häufig verwendet und unterstützen in der Regel nur wenige Parameter. Zwischen ihnen besteht keine implizite Beziehung. Alle werden mit einem einzigen Schlüsselwort gestartet. Keiner von ihnen ist vor einem "global"-Abschnitt erlaubt. Die Unterstützung einiger von ihnen kann von Build-Optionen abhängen (z. B. alles SSL-bezogene).
+
+## 12.1. Ablaufverfolgung {#section-12-1}
+
+Zur Fehlersuche ist es möglich, Trace-Ausgaben in einem HAProxy-Subsystem zu aktivieren. Dies führt zu Debug-Nachrichten über ein bestimmtes Subsystem. Es handelt sich um ein sehr leistungsfähiges Werkzeug zur Diagnose von Problemen. Trace-Ausgaben können dynamisch über die CLI konfiguriert werden. Es ist auch möglich, einige Einstellungen in der Konfigurationsdatei vorzugeben, in speziellen "traces"-Abschnitten. Weitere Informationen zu Trace-Ausgaben finden sich im Management-Leitfaden. Es bleibt ein Entwicklerwerkzeug, das während komplexer Fehlersuch-Sitzungen verwendet wird. Es erzeugt umfangreiche Ausgaben und beansprucht Ressourcen; deshalb ist bei seiner Verwendung Vorsicht geboten. Da es ein Entwicklerwerkzeug ist, gibt es keine Garantie für die Rückwärtskompatibilität dieses Abschnitts.
+
+<a id="entry-12-1-traces"></a>
+
+**`traces`**
+
+```haproxy
+traces
+```
+
+Startet einen neuen traces-Abschnitt. Es können ein oder mehrere "traces"-Abschnitte verwendet werden. Alle Direktiven werden in der Deklarationsreihenfolge ausgewertet, wobei die letzten Einstellungen die vorherigen überschreiben.
+
+<a id="entry-12-1-trace"></a>
+
+**`trace <source> <args...>`**
+
+```haproxy
+trace <source> <args...>
+```
+
+Konfiguriert ein "trace"-Subsystem. Jedes davon ist im Management-Handbuch zu finden und folgt exakt der gleichen Syntax. Alle Ausgaben, die der "trace"-Befehl erzeugen würde, werden während des Einlesens des Abschnitts ausgegeben. Meistens handelt es sich dabei um Fehler und Warnungen, aber bestimmte unvollständige Befehle können zulässige Auswahlmöglichkeiten auflisten. Dieser Befehl ist nicht für den regulären Einsatz gedacht und wird in der Regel nur von Entwicklern während komplexer Fehlersuch-Sitzungen empfohlen. Es ist wichtig, sich vor Augen zu führen, dass die Aktivierung von Trace-Ausgaben je nach Trace-Stufe und -Details die globale Leistung erheblich beeinträchtigen kann. Weitere Informationen zur Befehlssyntax finden Sie im Management-Handbuch.
+
+Beispiel:
+
+```text
+ring buf1
+  size 10485760 # 10MB
+  format timed
+  backing-file /tmp/h1.traces
+
+ring buf2
+  size 10485760 # 10MB
+  format timed
+  backing-file /tmp/h2.traces
+
+traces
+  trace h1 sink buf1 level developer verbosity complete start now
+  trace h2 sink buf1 level developer verbosity complete start now
+```
+
+## 12.2. Benutzerlisten {#section-12-2}
+
+Es ist möglich, den Zugriff auf frontend/backend/listen-Abschnitte oder auf HTTP-Statistiken zu steuern, indem nur authentifizierte und autorisierte Benutzer zugelassen werden. Dazu ist es erforderlich, mindestens eine Benutzerliste zu erstellen und Benutzer zu definieren.
+
+<a id="entry-12-2-userlist"></a>
+
+**`userlist <listname>`**
+
+```haproxy
+userlist <listname>
+```
+
+Erstellt eine neue Benutzerliste mit dem Namen `<listname>`. Mehrere unabhängige Benutzerlisten können verwendet werden, um Authentifizierungs- und Autorisierungsdaten für unabhängige Kunden zu speichern.
+
+<a id="entry-12-2-group"></a>
+
+**`group <groupname> [users <user>,<user>,(...)]`**
+
+```haproxy
+group <groupname> [users <user>,<user>,(...)]
+```
+
+Fügt die Gruppe `<groupname>` zur aktuellen Benutzerliste hinzu. Es ist auch möglich, Benutzer dieser Gruppe durch eine durch Komma getrennte Liste von Namen hinzuzufügen, die durch das Schlüsselwort "users" eingeleitet wird.
+
+<a id="entry-12-2-user"></a>
+
+**`user <username> [password|insecure-password <password>]`**
+
+```haproxy
+user <username> [password|insecure-password <password>]
+                [groups <group>,<group>,(...)]
+```
+
+Fügt den Benutzer `<username>` zur aktuellen Benutzerliste hinzu. Es können sowohl sichere (verschlüsselte) als auch unsichere (unverschlüsselte) Passwörter verwendet werden. Verschlüsselte Passwörter werden mithilfe der Funktion crypt(3) ausgewertet, wobei je nach Systemfunktionen verschiedene Algorithmen unterstützt werden. Beispielsweise unterstützen moderne glibc-basierte Linux-Systeme MD5, SHA-256, SHA-512 und natürlich die klassische DES-basierte Methode zur Passwortverschlüsselung.
+
+Achtung: Beachten Sie, dass die Verwendung von verschlüsselten Passwörtern je nach Anzahl der Anfragen und verwendetem Algorithmus erheblich erhöhten CPU-Verbrauch verursachen kann. Bei allen Hash-Varianten muss das Passwort für jede Anfrage durch den gewählten Algorithmus verarbeitet werden, bevor es mit dem in der Konfigurationsdatei angegebenen Wert verglichen werden kann. Die meisten aktuellen Algorithmen sind absichtlich so ausgelegt, dass sie rechenintensiv sind, um Brute-Force-Angriffe zu erschweren. Sie berechnen den Hash des Klartextpassworts mit Salt nicht nur einmal, sondern tausendfach. Dies kann schnell zu einem bedeutenden Faktor im gesamten CPU-Verbrauch von HAProxy werden und sogar zu Anwendungsabstürzen führen!
+
+Um den hohen CPU-Verbrauch von Hash-Funktionen zu reduzieren, kann man die Anzahl der Runden der Hash-Funktion (Algorithmen der SHA-Familie) verringern oder die Kosten der Funktion verringern, falls der Algorithmus dies unterstützt.
+
+Als Randbemerkung: musl-Implementierungen (z. B. Alpine Linux) sind bekannt dafür, Hash-Berechnungen langsamer durchzuführen als ihre glibc-Gegenstücke, daher kann auch dieser Aspekt berücksichtigt werden.
+
+Alle Passwörter werden als normale Argumente behandelt und unterliegen daher den üblichen Regeln für Anführungszeichen und Maskierung aus [Abschnitt 2.2](/de/haproxy/configuration-basics/#section-2-2). Es wird deshalb empfohlen, Passwörter in einfache Anführungszeichen zu setzen.
+
+Beispiel:
+
+```text
+userlist L1
+  group G1 users tiger,scott
+  group G2 users xdb,scott
+
+  user tiger password $6$k6y3o.eP$JlKBx9za9667qe4(...)xHSwRv6J.C0/D7cV91
+  user scott insecure-password 'elgato'
+  user xdb insecure-password 'hello'
+
+userlist L2
+  group G1
+  group G2
+
+  user tiger password $6$k6y3o.eP$JlKBx(...)xHSwRv6J.C0/D7cV91 groups G1
+  user scott insecure-password 'elgato' groups G1,G2
+  user xdb insecure-password 'hello' groups G2
+```
+
+Bitte beachten Sie, dass beide Listen funktional identisch sind.
+
+## 12.3. Mailer {#section-12-3}
+
+Es ist möglich, E-Mail-Benachrichtigungen zu senden, wenn sich der Zustand von Servern ändert. Wenn konfigurierte E-Mail-Benachrichtigungen aktiviert sind, werden diese an jeden Mailer gesendet, der in einem Mailer-Abschnitt konfiguriert ist. E-Mails werden über Lua gesendet (siehe examples/lua/mailers.lua).
+
+<a id="entry-12-3-mailers"></a>
+
+**`mailers <mailersect>`**
+
+```haproxy
+mailers <mailersect>
+```
+
+Erstellt eine neue Mailer-Liste mit dem Namen `<mailersect>`. Es handelt sich um einen unabhängigen Abschnitt, der von einem oder mehreren Proxys referenziert wird.
+
+<a id="entry-12-3-mailer"></a>
+
+**`mailer <mailername> <ip>:<port>`**
+
+```haproxy
+mailer <mailername> <ip>:<port>
+```
+
+Definiert einen Mailer innerhalb eines Mailer-Abschnitts.
+
+Beispiel:
+
+```text
+global
+    # mailers.lua file as provided in the git repository
+    # adjust path as needed
+    lua-load examples/lua/mailers.lua
+
+mailers mymailers
+    mailer smtp1 192.168.0.1:587
+    mailer smtp2 192.168.0.2:587
+
+backend mybackend
+    mode tcp
+    balance roundrobin
+
+    email-alert mailers mymailers
+    email-alert from test1@horms.org
+    email-alert to test2@horms.org
+
+    server srv1 192.168.0.30:80
+    server srv2 192.168.0.31:80
+```
+
+<a id="entry-12-3-timeout-mail"></a>
+
+**`timeout mail <time>`**
+
+```haproxy
+timeout mail <time>
+```
+
+Legt fest, wie viel Zeit verfügbar ist, um eine Mail/Verbindung herzustellen und an den Mail-Server zu senden. Ohne Angabe gilt der Standardwert 10 Sekunden. Damit während des anfänglichen TCP-Handshakes mindestens zwei SYN-ACK-Pakete gesendet werden können, wird ein Wert von mehr als 4 Sekunden empfohlen.
+
+Beispiel:
+
+```text
+mailers mymailers
+    timeout mail 20s
+    mailer smtp1 192.168.0.1:587
+```
+
+## 12.4. HTTP-Fehler {#section-12-4}
+
+Mehrere Gruppen von HTTP-Fehlern können global deklariert und anschließend in beliebige Proxy-Abschnitte importiert werden. Dieselbe Gruppe kann an mehreren Stellen referenziert und vollständig oder teilweise importiert werden.
+
+<a id="entry-12-4-http-errors"></a>
+
+**`http-errors <name>`**
+
+```haproxy
+http-errors <name>
+```
+
+Erstellt eine neue http-errors-Gruppe mit dem Namen `<name>`. Dies ist ein eigenständiger Abschnitt, der von einem oder mehreren Proxies über seinen Namen referenziert werden kann.
+
+<a id="entry-12-4-errorfile"></a>
+
+**`errorfile <code> <file>`**
+
+```haproxy
+errorfile <code> <file>
+```
+
+Ordnet den Inhalt einer Datei einem HTTP-Fehlercode zu.
+
+Argumente:
+
+```text
+<code>    ist der HTTP-Statuscode. HAProxy kann derzeit die Codes
+          200, 400, 401, 403, 404, 405, 407, 408, 410, 425, 429, 500,
+          501, 502, 503 und 504 erzeugen.
+
+<file>    bezeichnet eine Datei mit der vollständigen HTTP-Antwort. Es wird
+          empfohlen, dem Dateinamen wie üblich ".http" anzuhängen, damit die
+          Antwort nicht mit HTML-Fehlerseiten verwechselt wird, und absolute
+          Pfade zu verwenden, da Dateien vor einem möglichen chroot
+          eingelesen werden.
+```
+
+Weitere Einzelheiten enthält das Schlüsselwort "errorfile" in [Abschnitt 4](/de/haproxy/proxies/).
+
+Beispiel:
+
+```text
+http-errors website-1
+    errorfile 400 /etc/haproxy/errorfiles/site1/400.http
+    errorfile 404 /etc/haproxy/errorfiles/site1/404.http
+    errorfile 408 /dev/null  # work around Chrome pre-connect bug
+
+http-errors website-2
+    errorfile 400 /etc/haproxy/errorfiles/site2/400.http
+    errorfile 404 /etc/haproxy/errorfiles/site2/404.http
+    errorfile 408 /dev/null  # work around Chrome pre-connect bug
+```
+
+## 12.5. Ringpuffer {#section-12-5}
+
+Ringpuffer können global deklariert und als Ziel für Log-Server oder Traces verwendet werden.
+
+<a id="entry-12-5-ring"></a>
+
+**`ring <ringname>`**
+
+```haproxy
+ring <ringname>
+```
+
+Erstellt einen neuen Ringpuffer mit dem Namen `<ringname>`.
+
+<a id="entry-12-5-backing-file"></a>
+
+**`backing-file <path>`**
+
+```haproxy
+backing-file <path>
+```
+
+Ersetzt die reguläre Speicherzuweisung durch eine in den RAM eingeblendete Datei zur Speicherung des Ringpuffers. Dies kann nützlich sein, um Traces oder Logs für die nachträgliche Analyse zu sammeln, ohne einen langsamen Client an die CLI anzuschließen. Neuere Inhalte ersetzen automatisch ältere, sodass stets die neuesten Inhalte verfügbar sind. Die in den Ringpuffer geschriebenen Inhalte sind in dieser Datei sichtbar, sobald der Prozess beendet ist (meist sind sie sogar sehr bald sichtbar, dies ist jedoch nicht garantiert, da die Schreibvorgänge nicht synchron sind).
+
+Wenn diese Option verwendet wird, verringert sich der gesamte Speicherbereich um die Größe der Struktur "struct ring", die am Anfang des Bereichs liegt und zur Wiederherstellung seines Inhalts erforderlich ist. Die Datei wird mit dem Benutzer, der den Prozess startet, als Eigentümer, dem Modus 0600 und der mit der Anweisung "size" konfigurierten Größe erstellt. Beim Einlesen der Anweisung (also auch während einer Konfigurationsprüfung) wird jede vorhandene nicht leere Datei zunächst durch Anhängen von ".bak" umbenannt. Eine zuvor vorhandene Datei mit dem Suffix ".bak" wird entfernt. So löscht ein sofortiges Neuladen oder ein Neustart des Prozesses keine wertvollen Debugging-Informationen. Ein Administrator hat Zeit, die neue ".bak"-Datei zu entdecken und bei Bedarf zu archivieren. Nach einem Absturz enthält die durch `<path>` bezeichnete Datei die aktuellsten Informationen; nach einem Neustart des Dienstes stehen diese stattdessen in der Datei "`<path>`.bak". Der insgesamt benötigte Speicherplatz ist daher doppelt so groß wie der Ringpuffer. Fehler bei der Dateirotation werden stillschweigend ignoriert. Wenn keine Sicherungsdatei gewünscht ist, genügt es daher, die Datei in einem Verzeichnis ohne Schreibberechtigung abzulegen.
+
+WARNUNG: Die Verwendung dieser Funktion hat Auswirkungen auf Stabilität und Sicherheit. Erstens kann die Speicherung des Ringpuffers auf einem langsamen Gerät (z. B. einer physischen Festplatte) spürbare Verzögerungen bei Zugriffen und möglicherweise sogar Panics verursachen, wenn zu viele Threads um den Zugriff konkurrieren. Zweitens könnte ein externer Prozess, der den Bereich verändert, den haproxy-Prozess zum Absturz bringen oder dazu führen, dass er Teile seines eigenen Speichers mit Traces überschreibt. Drittens können Schreibvorgänge in den Ringpuffer den Prozess zum Absturz bringen, wenn das Dateisystem voll wird, bevor der Ringpuffer gefüllt ist.
+
+Die Informationen in diesem Ringpuffer sind strukturiert und können NICHT direkt mit einem Texteditor gelesen werden (auch wenn vieles davon gerade noch lesbar aussieht). Die Ausgabe dieser Datei ist ausschließlich für Entwickler bestimmt.
+
+<a id="entry-12-5-description"></a>
+
+**`description <text>`**
+
+```haproxy
+description <text>
+```
+
+Die Beschreibung ist ein optionaler Beschreibungstext für den Ringpuffer. Sie erscheint in der CLI. Standardmäßig wird dieses Feld mit `<name>` gefüllt.
+
+<a id="entry-12-5-format"></a>
+
+**`format <format>`**
+
+```haproxy
+format <format>
+```
+
+Format zur Speicherung von Ereignissen im Ringpuffer.
+
+Argumente:
+
+```text
+<format> ist das Format zur Erzeugung von syslog-Nachrichten. Möglich sind:
+
+  iso     Eine Nachricht, die nur das ISO-Datum enthält, gefolgt vom Text.
+          PID, Prozessname und Systemname entfallen. Dieses Format ist für
+          einen lokalen Protokollserver vorgesehen.
+
+  local   Entspricht dem syslog-Nachrichtenformat rfc3164, jedoch ohne
+          Hostnamenfeld. Dies ist der Standard.
+          Hinweis: Die Option "log-send-hostname" ändert den Standard
+          in rfc3164.
+
+  raw     Eine Nachricht, die nur den Text enthält. Stufe, PID, Datum,
+          Uhrzeit, Prozessname und Systemname entfallen. Dieses Format ist
+          für Container oder die Entwicklung vorgesehen, wo der Schweregrad
+          nur vom verwendeten Dateideskriptor abhängt (stdout/stderr).
+          Dies ist der Standard.
+
+  rfc3164 Das syslog-Nachrichtenformat RFC3164.
+          (https://tools.ietf.org/html/rfc3164)
+
+  rfc5424 Das syslog-Nachrichtenformat RFC5424.
+          (https://tools.ietf.org/html/rfc5424)
+
+  short   Eine Nachricht, die nur eine Stufe in spitzen Klammern wie '<3>'
+          enthält, gefolgt vom Text. PID, Datum, Uhrzeit, Prozessname und
+          Systemname entfallen. Dieses Format ist für einen lokalen
+          Protokollserver vorgesehen und mit dem systemd-Protokolldienst
+          kompatibel.
+
+ priority Eine Nachricht, die nur Stufe und syslog-Facility in spitzen
+          Klammern wie '<63>' enthält, gefolgt vom Text. PID, Datum, Uhrzeit,
+          Prozessname und Systemname entfallen. Dieses Format ist für einen
+          lokalen Protokollserver vorgesehen.
+
+  timed   Eine Nachricht, die nur eine Stufe in spitzen Klammern wie '<3>'
+          enthält, gefolgt vom ISO-Datum und dem Text. PID, Prozessname und
+          Systemname entfallen. Dieses Format ist für einen lokalen
+          Protokollserver vorgesehen.
+```
+
+<a id="entry-12-5-maxlen"></a>
+
+**`maxlen <length>`**
+
+```haproxy
+maxlen <length>
+```
+
+Die maximale Länge einer im Ringpuffer gespeicherten Ereignismeldung einschließlich des formatierten Headers. Ist eine Ereignismeldung länger als `<length>`, wird sie auf diese Länge gekürzt.
+
+<a id="entry-12-5-server"></a>
+
+**`server <name> <address> [param*]`**
+
+```haproxy
+server <name> <address> [param*]
+```
+
+Konfiguriert einen TCP-Syslog-Server, an den Meldungen aus dem Ringpuffer weitergeleitet werden. Alle in Abschnitt 5.2 aufgeführten "server"-Parameter werden unterstützt. Einige dieser Parameter sind für "ring"-Abschnitte nicht relevant. Wichtig: Es gibt kaum einen Grund, einem Ringpuffer mehr als einen Server hinzuzufügen, da alle Server exakt dieselbe Kopie seines Inhalts erhalten. Daher schreitet der Ringpuffer nur mit der Geschwindigkeit des langsamsten Servers voran. Wenn ein Server nicht antwortet, verhindert er das Entfernen alter Meldungen und kann das Einfügen neuer Meldungen in den Ringpuffer blockieren. Die richtige Vorgehensweise zum Senden von Meldungen an mehrere Server besteht darin, für jeden Log-Server einen eigenen Ringpuffer zu verwenden, anstatt mehrere Server an denselben Ringpuffer anzuschließen. Die spezielle Server-Anweisung "log-proto" legt das Protokoll zum Senden der Meldungen fest.
+
+<a id="entry-12-5-size"></a>
+
+**`size <size>`**
+
+```haproxy
+size <size>
+```
+
+Die optionale Größe des Ringpuffers in Byte. Der Standardwert ist BUFSIZE.
+
+<a id="entry-12-5-timeout-connect"></a>
+
+**`timeout connect <timeout>`**
+
+```haproxy
+timeout connect <timeout>
+```
+
+Legt die maximale Wartezeit fest, innerhalb derer ein Verbindungsversuch zu einem Server erfolgreich sein muss.
+
+Argumente:
+
+```text
+<timeout> ist der Zeitüberschreitungswert, standardmäßig in Millisekunden.
+          Jede andere Einheit ist möglich, wenn sie wie am Anfang dieses
+          Dokuments erläutert an die Zahl angehängt wird.
+```
+
+<a id="entry-12-5-timeout-server"></a>
+
+**`timeout server <timeout>`**
+
+```haproxy
+timeout server <timeout>
+```
+
+Legt fest, wie lange ausstehende Daten höchstens im Ausgabepuffer verbleiben dürfen.
+
+Argumente:
+
+```text
+<timeout> ist der Zeitüberschreitungswert, standardmäßig in Millisekunden.
+          Jede andere Einheit ist möglich, wenn sie wie am Anfang dieses
+          Dokuments erläutert an die Zahl angehängt wird.
+```
+
+Beispiel:
+
+```text
+global
+    log ring@myring local7
+
+ring myring
+    description "My local buffer"
+    format rfc5424
+    maxlen 1200
+    size 32764
+    timeout connect 5s
+    timeout server 10s
+    server mysyslogsrv 127.0.0.1:6514 log-proto octet-count
+```
+
+## 12.6. Log-Weiterleitung {#section-12-6}
+
+Es können ein oder mehrere Abschnitte zur Log-Weiterleitung deklariert werden. HAProxy leitet alle empfangenen Log-Meldungen an eine Liste von Log-Servern weiter.
+
+<a id="entry-12-6-log-forward"></a>
+
+**`log-forward <name>`**
+
+```haproxy
+log-forward <name>
+```
+
+Erstellt einen neuen Proxy zur Log-Weiterleitung mit der Kennung `<name>`.
+
+<a id="entry-12-6-backlog"></a>
+
+**`backlog <conns>`**
+
+```haproxy
+backlog <conns>
+```
+
+Gibt dem System beim Annehmen von Verbindungen einen Hinweis auf die ungefähr gewünschte Größe des Listen-Backlogs.
+
+<a id="entry-12-6-bind"></a>
+
+**`bind <addr> [param*]`**
+
+```haproxy
+bind <addr> [param*]
+```
+
+Konfiguriert einen Listener für Log-Datenströme, der die weiterzuleitenden Meldungen empfängt. Die in Abschnitt 5.1 aufgeführten "bind"-Parameter einschließlich der SSL-Parameter werden unterstützt. Einige Angaben wie "alpn" sind jedoch für das Syslog-Protokoll über TCP möglicherweise nicht relevant. Diese Listener unterstützen sowohl den Modus "Octet Counting" als auch "Non-Transparent-Framing" gemäß rfc-6587.
+
+<a id="entry-12-6-dgram-bind"></a>
+
+**`dgram-bind <addr> [param*]`**
+
+```haproxy
+dgram-bind <addr> [param*]
+```
+
+Konfiguriert einen Listener für Log-Datagramme, der die weiterzuleitenden Meldungen empfängt. Adressen müssen im IPv4- oder IPv6-Format mit nachfolgendem Port angegeben werden. Einige der in Abschnitt 5.1 aufgeführten "bind"-Parameter werden unterstützt, darunter "interface", "namespace" und "transparent". Die übrigen werden stillschweigend ignoriert, da sie für UDP/Syslog nicht relevant sind.
+
+<a id="entry-12-6-log-global"></a>
+
+**`log global`**
+
+```haproxy
+log global
+log <target> [len <length>] [format <format>] [sample <ranges>:<sample_size>]
+    <facility> [<level> [<minlevel>]]
+```
+
+Konfiguriert die Ziel-Log-Server. Weitere Einzelheiten enthält die Proxy-Dokumentation. Wenn kein Format angegeben ist, versucht HAProxy, das Format der eingehenden Log-Meldung beizubehalten. Die konfigurierte Facility wird ignoriert, es sei denn, die eingehende Meldung enthält keine Facility, das Ausgabeformat verlangt jedoch eine. Wenn das Eingabeformat keinen Zeitstempel enthält, das Ausgabeformat aber ein entsprechendes Feld hat, verwendet HAProxy das lokale Datum.
+
+Beispiel:
+
+```text
+global
+   log stderr format iso local7
+
+ring myring
+    description "My local buffer"
+    format rfc5424
+    maxlen 1200
+    size 32764
+    timeout connect 5s
+    timeout server 10s
+    # syslog tcp server
+    server mysyslogsrv 127.0.0.1:514 log-proto octet-count
+
+log-forward sylog-loadb
+    dgram-bind 127.0.0.1:1514
+    bind 127.0.0.1:1514
+    # all messages on stderr
+    log global
+    # all messages on local tcp syslog server
+    log ring@myring local0
+    # load balance messages on 4 udp syslog servers
+    log 127.0.0.1:10001 sample 1:4 local0
+    log 127.0.0.1:10002 sample 2:4 local0
+    log 127.0.0.1:10003 sample 3:4 local0
+    log 127.0.0.1:10004 sample 4:4 local0
+```
+
+<a id="entry-12-6-maxconn"></a>
+
+**`maxconn <conns>`**
+
+```haproxy
+maxconn <conns>
+```
+
+Legt die maximale Anzahl gleichzeitiger Verbindungen auf einem Proxy zur Log-Weiterleitung fest. Der Standardwert ist 10.
+
+<a id="entry-12-6-timeout-client"></a>
+
+**`timeout client <timeout>`**
+
+```haproxy
+timeout client <timeout>
+```
+
+Legt die maximale Inaktivitätszeit auf der Client-Seite fest.
+
+<a id="entry-12-6-option-assume-rfc6587-ntf"></a>
+
+**`option assume-rfc6587-ntf`**
+
+```haproxy
+option assume-rfc6587-ntf
+```
+
+Weist HAProxy an, eingehende TCP-Log-Datenströme immer als nicht transparent gerahmt zu behandeln. Diese Option vereinfacht die Logik der Nachrichtenrahmung und sorgt für eine einheitliche Behandlung der Meldungen. Sie ist besonders bei fehlerhaft gebildeten Anfangszeichen nützlich.
+
+<a id="entry-12-6-option-dont-parse-log"></a>
+
+**`option dont-parse-log`**
+
+```haproxy
+option dont-parse-log
+```
+
+Ermöglicht HAProxy, Syslog-Meldungen weiterzuleiten, ohne sie zu analysieren und neu zu strukturieren. Dies ist nützlich für Meldungen, die möglicherweise nicht den üblichen Formaten entsprechen. Diese Option sollte zusammen mit der Einstellung format raw für die Log-Ziele verwendet werden, damit der ursprüngliche Meldungsinhalt erhalten bleibt.
+
+<a id="entry-12-6-option-host"></a>
+
+**`option host { replace | fill | keep | append }`**
+
+```haproxy
+option host { replace | fill | keep | append }
+```
+
+Legt für den Abschnitt log-forward die Strategie zum Umgang mit dem Syslog-Hostname-Feld in ausgehenden rfc3164- oder rfc5424-Meldungen fest.
+
+      replace Enthält die eingehende Meldung bereits einen Wert im
+              Hostname-Feld, wird dieser durch die Quell-IP-Adresse des
+              Absenders ersetzt. Enthält die eingehende Meldung keinen Wert
+              im Hostname-Feld (d. h. '-' in einer eingehenden rfc5424-Meldung
+              oder eine nicht konforme rfc3164- oder rfc5424-Meldung), wird
+              die Quell-IP-Adresse des Absenders als Hostname verwendet.
+
+      fill    Enthält die eingehende Meldung bereits einen Wert im
+              Hostname-Feld, wird dieser beibehalten. Enthält die eingehende
+              Meldung keinen Wert im Hostname-Feld (d. h. '-' in einer
+              eingehenden rfc5424-Meldung oder eine nicht konforme rfc3164-
+              oder rfc5424-Meldung), wird die Quell-IP-Adresse des Absenders
+              als Hostname verwendet.
+              (Dies ist die Standardeinstellung)
+
+      keep    Enthält die eingehende Meldung bereits einen Wert im
+              Hostname-Feld, wird dieser beibehalten. Enthält die eingehende
+              Meldung keinen Wert im Hostname-Feld, wird es auf 'localhost'
+              (rfc3164) bzw. '-' (rfc5424) gesetzt.
+
+      append  Enthält die eingehende Meldung bereits einen Wert im
+              Hostname-Feld, werden ein Komma und die IP-Adresse des
+              Absenders angehängt. Enthält die eingehende Meldung keinen
+              Wert im Hostname-Feld, wird die Quell-IP-Adresse des
+              Absenders verwendet.
+
+Für alle obigen Optionen gilt: Wenn die Quell-IP-Adresse des Absenders nicht verfügbar ist (z. B. bei einem UNIX/ABNS-Socket), wird die Strategie "keep" verwendet.
+
+Diese Option ist nur für das Log-Ausgabeformat rfc3164 oder rfc5424 relevant. Bei anderen Formaten hat sie keine sichtbare Wirkung.
+
+## 12.7. Zertifikatsspeicher {#section-12-7}
+
+HAProxy verwendet einen internen Speichermechanismus zum Laden und Speichern der in der Konfiguration verwendeten Zertifikate. Dieser Speicher kann über einen "crt-store"-Abschnitt konfiguriert werden. Darin lassen sich Zertifikatsdefinitionen und die zu ladenden Dateien festlegen. Eine Zertifikatsdefinition muss vor ihrer Verwendung an anderer Stelle in der Konfiguration stehen.
+
+crt-store [`<name>`]
+
+"crt-store" akzeptiert als optionales Argument einen Namen. Wenn ein Name angegeben ist, muss jedes Zertifikat dieses Speichers mit "@`<name>`/`<crt>`" oder "@`<name>`/`<alias>`" referenziert werden.
+
+Dateien im Zertifikatsspeicher können auch dynamisch über die CLI aktualisiert werden. Siehe "set ssl cert" in [Abschnitt 9.3](/de/haproxy/statistics-and-monitoring/#section-9-3) des Verwaltungshandbuchs.
+
+Im Abschnitt "crt-store" werden die folgenden Schlüsselwörter unterstützt:
+
+- crt-base
+- key-base
+- load
+
+<a id="entry-12-7-crt-base"></a>
+
+**`crt-base <dir>`**
+
+```haproxy
+crt-base <dir>
+```
+
+Legt das Standardverzeichnis fest, aus dem SSL-Zertifikate geladen werden, wenn "crt"-Anweisungen einen relativen Pfad verwenden. Angegebene absolute Pfade haben Vorrang und ignorieren "crt-base". Bei Verwendung in einem crt-store wird crt-base aus dem globalen Abschnitt ignoriert.
+
+<a id="entry-12-7-key-base"></a>
+
+**`key-base <dir>`**
+
+```haproxy
+key-base <dir>
+```
+
+Legt das Standardverzeichnis fest, aus dem private SSL-Schlüssel geladen werden, wenn "key"-Anweisungen einen relativen Pfad verwenden. Angegebene absolute Pfade haben Vorrang und ignorieren "key-base". Bei Verwendung in einem crt-store wird key-base aus dem globalen Abschnitt ignoriert.
+
+<a id="entry-12-7-load"></a>
+
+**`load [crt <filename>] [param*]`**
+
+```haproxy
+load [crt <filename>] [param*]
+```
+
+Lädt SSL-Dateien in den Zertifikatsspeicher. Die Parameterliste steht in Abschnitt „12.7.1. Ladeoptionen“.
+
+Beispiel:
+
+```text
+crt-store
+    load crt "site1.crt" key "site1.key" ocsp "site1.ocsp" alias "site1"
+    load crt "site2.crt" key "site2.key"
+
+frontend in2
+    bind *:443 ssl crt "@/site1" crt "site2.crt"
+
+crt-store web
+    crt-base /etc/ssl/certs/
+    key-base /etc/ssl/private/
+    load crt "site3.crt" alias "site3"
+    load crt "site4.crt" key "site4.key"
+
+frontend in2
+    bind *:443 ssl crt "@/site1" crt "site2.crt"  crt "@web/site3" crt "@web/site4.crt"
+```
+
+### 12.7.1. Ladeoptionen {#section-12-7-1}
+
+Lädt SSL-Dateien in den Zertifikatsspeicher. Das Schlüsselwort load akzeptiert mehrere Parameter, die nachfolgend aufgeführt sind. Diese Schlüsselwörter können auch in einer crt-list verwendet werden.
+
+<a id="entry-12-7-1-crt"></a>
+
+**`crt <filename>`**
+
+```haproxy
+crt <filename>
+```
+
+Dieses Argument ist erforderlich. Es lädt eine PEM-Datei, die das öffentliche Zertifikat enthalten muss, aber auch Zwischenzertifikate und den privaten Schlüssel enthalten kann. Wenn diese Datei keinen privaten Schlüssel enthält, kann ein Schlüssel mit dem Schlüsselwort "key" angegeben werden.
+
+<a id="entry-12-7-1-acme"></a>
+
+**`acme <string>`**
+
+```haproxy
+acme <string>
+```
+
+Diese Option ermöglicht die Konfiguration des ACME-Protokolls für ein bestimmtes Zertifikat. Die Funktion ist experimentell und erfordert das Schlüsselwort "expose-experimental-directives" im globalen Abschnitt.
+
+Bei Verwendung des Schlüsselworts "acme" in einem crt-store ist ein Start ohne vorhandenes Zertifikat auf dem Datenträger möglich. Stattdessen wird ein temporäres Schlüsselpaar verwendet, bis das ACME-Zertifikat erzeugt ist. Dieses Verhalten ist auf crt-stores beschränkt: Weder eine crt-list-Zeile noch eine ssl-f-use-Zeile ermöglicht dies, ohne zuvor einen crt-store zu deklarieren.
+
+Siehe auch [Abschnitt 12.8](/de/haproxy/other-sections/#section-12-8) ("ACME") und "domains" in diesem Abschnitt.
+
+<a id="entry-12-7-1-alias"></a>
+
+**`alias <string>`**
+
+```haproxy
+alias <string>
+```
+
+Optionales Argument. Gibt dem Zertifikat einen Alias, über den es in der Konfiguration referenziert werden kann. Bei Verwendung an anderer Stelle in der Konfiguration muss dem Alias '@/' vorangestellt werden.
+
+<a id="entry-12-7-1-domains"></a>
+
+**`domains <string>`**
+
+```haproxy
+domains <string>
+```
+
+Konfiguriert die Liste der Domains, die für ACME-Zertifikate verwendet werden. Die erste Domain in der Liste wird als CN verwendet. Die Domains werden in der Liste durch Kommas getrennt.
+
+Siehe auch [Abschnitt 12.8](/de/haproxy/other-sections/#section-12-8) ("ACME") und "acme" in diesem Abschnitt.
+
+Beispiel:
+
+```text
+load crt "example.com.pem" acme LE domains "bar.example.com,foo.example.com"
+```
+
+<a id="entry-12-7-1-ips"></a>
+
+**`ips <string>`**
+
+```haproxy
+ips <string>
+```
+
+Konfiguriert die Liste der IP-Adressen, die als IP-SANs in das ACME-Zertifikat aufgenommen werden. Die IP-Adressen werden in der Liste durch Kommas getrennt.
+
+Das Erzeugen eines Zertifikats mit IPs kann die Verwendung des Profils "shortlived" erfordern.
+
+Siehe auch [Abschnitt 12.8](/de/haproxy/other-sections/#section-12-8) ("ACME"), "acme" und "domains" in diesem Abschnitt.
+
+Beispiel:
+
+```text
+load crt "server.pem" acme LE ips "192.0.2.1,2001:db8::1"
+```
+
+<a id="entry-12-7-1-key"></a>
+
+**`key <filename>`**
+
+```haproxy
+key <filename>
+```
+
+Dieses Argument ist optional. Es lädt einen privaten Schlüssel im PEM-Format. Wenn in "crt" bereits ein privater Schlüssel definiert wurde, wird dieser überschrieben.
+
+<a id="entry-12-7-1-ocsp"></a>
+
+**`ocsp <filename>`**
+
+```haproxy
+ocsp <filename>
+```
+
+Dieses Argument ist optional. Es lädt eine OCSP-Antwort im DER-Format. Diese kann über die CLI aktualisiert werden.
+
+<a id="entry-12-7-1-issuer"></a>
+
+**`issuer <filename>`**
+
+```haproxy
+issuer <filename>
+```
+
+Dieses Argument ist optional. Es lädt das OCSP-Ausstellerzertifikat im PEM-Format. Um festzustellen, für welches Zertifikat eine OCSP-Antwort gilt, wird das Zertifikat des Ausstellers benötigt. Wenn das Ausstellerzertifikat nicht in der "crt"-Datei enthalten ist, kann es mit diesem Argument aus einer Datei geladen werden.
+
+<a id="entry-12-7-1-sctl"></a>
+
+**`sctl <filename>`**
+
+```haproxy
+sctl <filename>
+```
+
+Dieses Argument ist optional. Es aktiviert die Unterstützung für die TLS-Erweiterung Certificate Transparency (RFC6962). Die Datei muss eine gültige Signed Certificate Timestamp List gemäß RFC enthalten. Die grundlegende Syntax der Datei wird beim Einlesen geprüft, Signaturen werden jedoch nicht verifiziert.
+
+<a id="entry-12-7-1-ocsp-update"></a>
+
+**`ocsp-update [ off | on ]`**
+
+```haproxy
+ocsp-update [ off | on ]
+```
+
+Aktiviert bei 'on' die automatische Aktualisierung von OCSP-Antworten und deaktiviert sie andernfalls. Der Standardwert ist 'off'. Um die automatische OCSP-Aktualisierung für eine bind-Zeile zu aktivieren, kann diese Option in einem crt-store oder die globale Option "tune.ocsp-update.mode" verwendet werden. Wird ein Zertifikat in mehreren crt-lists mit unterschiedlichen Werten für 'ocsp-update' verwendet, wird ein Fehler ausgelöst. Derselbe Fehler tritt auf, wenn ein Zertifikat in einer bind-Zeile die globale Option erbt und in einer crt-list eine damit unvereinbare explizite 'ocsp-update'-Einstellung hat.
+
+Beispiele:
+
+Beispielkonfiguration zur Aktivierung mit einer crt-list:
+
+haproxy.cfg:
+
+```text
+frontend fe
+    bind :443 ssl crt-list haproxy.list
+```
+
+haproxy.list:
+
+```text
+server_cert.pem [ocsp-update on] foo.bar
+```
+
+Beispielkonfiguration zur Aktivierung mit einem crt-store:
+
+haproxy.cfg:
+
+```text
+crt-store
+  load crt foobar.pem ocsp-update on
+
+frontend fe
+    bind :443 ssl crt foobar.pem
+```
+
+Wenn die Option auf 'on' gesetzt ist, wird versucht, eine OCSP-Antwort abzurufen, sobald im Frontend-Zertifikat eine OCSP-URI gefunden wird. Die einzige Einschränkung dieses Modus besteht darin, dass der Zertifikatsaussteller bekannt sein muss, damit die OCSP-certid gebildet werden kann. Jede OCSP-Antwort wird mindestens einmal pro Stunde aktualisiert, bei einer Ablaufzeit vor dieser Stundengrenze auch häufiger. Es gilt weiterhin ein Mindestintervall von 5 Minuten, damit Antworten mit sehr kurzer Gültigkeitsdauer oder ganz ohne 'Next Update' nicht zu häufig aktualisiert werden. Wegen dieser festen Grenze wird bei aktivierter automatischer Aktualisierung ('on') eine während der Initialisierung geladene OCSP-Antwort frühestens nach 5 Minuten aktualisiert, selbst wenn sie vor now+5m abläuft. Dies sollte kaum Probleme verursachen, da eine OCSP-Antwort beim Laden während der Initialisierung gültig sein muss (ihre Ablaufzeit muss in der Zukunft liegen) und daher wahrscheinlich nicht so kurz nach der Initialisierung abläuft. Ist für ein Zertifikat hingegen eine OCSP-URI angegeben, aber keine OCSP-Antwort vorhanden, sorgt 'on' für dieses Zertifikat dafür, dass die OCSP-Antwort unmittelbar nach der Initialisierung automatisch abgerufen wird. Die Standardwerte für die minimale und maximale Verzögerung (5 Minuten bzw. 1 Stunde) können mit den globalen Optionen "ocsp-update.maxdelay" und "ocsp-update.mindelay" konfiguriert werden.
+
+Wenn eine OCSP-Antwort durch die automatische Aktualisierungsaufgabe oder nach einem Aufruf des CLI-Befehls "update ssl
+ocsp-response" aktualisiert wird, wird eine eigene Log-Zeile ausgegeben. Sie verwendet ein eigenes Format mit dem Header "`<OCSP-UPDATE>`", gefolgt von OCSP-spezifischen Informationen: - dem Pfad des zugehörigen Frontend-Zertifikats - einem numerischen Aktualisierungsstatus - einem textuellen Aktualisierungsstatus - der Anzahl fehlgeschlagener Aktualisierungen dieser Antwort - der Anzahl erfolgreicher Aktualisierungen dieser Antwort. Eine vollständige Liste der Fehlercodes und Fehlermeldungen enthält der CLI-Befehl "show ssl ocsp-updates". Diese Zeile wird unabhängig davon ausgegeben, ob die betreffende OCSP-Antwort erfolgreich aktualisiert wurde. Die OCSP-Anfrage und -Antwort werden über eine http_client-Instanz gesendet und empfangen, für die dontlog-normal gesetzt ist und die bei einem Fehler (etwa einem nicht erreichbaren OCSP-Responder) das reguläre HTTP-Log-Format verwendet. Tritt ein solcher Fehler auf, wird neben der „regulären“ OCSP-Zeile (die wahrscheinlich den Textstatus "HTTP error" enthält) eine weitere Log-Zeile mit HTTP-bezogenen Informationen ausgegeben. Bei einem reinen HTTP-Fehler (etwa einem nicht erreichbaren OCSP-Responder) wird jedoch eine zusätzliche Log-Zeile im regulären HTTP-Log-Format ausgegeben. Nachfolgend stehen zwei Beispiele für solche Log-Zeilen: zuerst eine erfolgreiche OCSP-Aktualisierung, danach ein HTTP-Fehler mit den beiden unterschiedlichen Zeilen (zur besseren Lesbarkeit wurden die Zeilen aufgeteilt und die URL gekürzt):
+
+```text
+<133>Mar  6 11:16:53 haproxy[14872]: <OCSP-UPDATE> /path_to_cert/foo.pem 1 \
+        "Update successful" 0 1
+
+<133>Mar  6 11:18:55 haproxy[14872]: <OCSP-UPDATE> /path_to_cert/bar.pem 2 \
+        "HTTP error" 1 0
+<133>Mar  6 11:18:55 haproxy[14872]: -:- [06/Mar/2023:11:18:52.200] \
+        <OCSP-UPDATE> -/- 2/0/-1/-1/3009 503 217 - - SC-- 0/0/0/0/3 0/0 {} \
+        "GET http://127.0.0.1:12345/MEMwQT HTTP/1.1"
+```
+
+Fehlerbehebung: Ein häufiger Fehler bei Zertifikaten von Let's Encrypt tritt auf, wenn die DNS-Auflösung eine IPv6-Adresse liefert, das System aber keine gültige ausgehende IPv6-Route hat. In diesem Fall kann entweder eine passende Route eingerichtet oder im globalen Abschnitt die Option "httpclient.resolvers.prefer
+ipv4" gesetzt werden. Beim Fehler "OCSP response check failure" kann es sinnvoll sein, die Gültigkeit des bereitgestellten Ausstellerzertifikats zu prüfen. Nach der allgemeinen Fehlermeldung kann in Klammern auch eine genauere Fehlermeldung erscheinen. Dies ist bei den Fehlern "OCSP
+response check failure" und "Error during insertion" möglich.
+
+<a id="entry-12-7-1-jwt"></a>
+
+**`jwt [ off | on ]`**
+
+```haproxy
+jwt [ off | on ]
+```
+
+Ermöglicht bei 'on' die Verwendung dieses Zertifikats für die JWT-Validierung oder -Entschlüsselung über die Konverter "jwt_verify_cert", "jwt_decrypt_cert" oder "jwt_decrypt". Der Standardwert ist 'off'.
+
+Wenn diese Option für ein Zertifikat auf 'on' gesetzt ist, funktioniert der CLI-Befehl "del ssl cert" nicht. Damit ein Zertifikat gelöscht werden kann, darf es weder für SSL-Handshakes noch für die JWT-Validierung verwendet werden.
+
+Diese Option kann zur Laufzeit mit den CLI-Befehlen "add ssl jwt" und "del ssl jwt" geändert werden. Siehe auch den CLI-Befehl "show ssl jwt".
+
+<a id="entry-12-7-1-generate-dummy"></a>
+
+**`generate-dummy [ off | on ]`**
+
+```haproxy
+generate-dummy [ off | on ]
+```
+
+Ermöglicht bei 'on' die Erzeugung eines privaten Schlüssels und des zugehörigen selbstsignierten Zertifikats beim Einlesen der Konfiguration. Dies kann beispielsweise während Tests nützlich sein, wenn kein Zertifikat verfügbar ist. In diesem Fall können "keytype", "bits" und "curves" verwendet werden, um den privaten Schlüssel anzupassen. Ohne Angabe dieser Option gilt der Standardwert 'off'. (Siehe auch "keytype", "bits" und "curves".)
+
+<a id="entry-12-7-1-keytype"></a>
+
+**`keytype [ RSA | ECDSA ]`**
+
+```haproxy
+keytype [ RSA | ECDSA ]
+```
+
+Ermöglicht die Auswahl des Typs des privaten Schlüssels, der beim Einlesen der Konfiguration zur Erzeugung eines selbstsignierten Zertifikats verwendet wird. Dies gilt, wenn "generate-dummy" für dieses Zertifikat auf 'on' gesetzt ist. Ohne Angabe dieser Option gilt der Standardwert 'RSA'. (Siehe auch "generate-dummy".)
+
+<a id="entry-12-7-1-bits"></a>
+
+**`bits <number>`**
+
+```haproxy
+bits <number>
+```
+
+Konfiguriert die Bitanzahl zur Erzeugung eines selbstsignierten RSA-Zertifikats, wenn "generate-dummy" für dieses Zertifikat auf 'on' und "keytype" auf 'RSA' gesetzt ist. Ohne Angabe dieser Option gilt der Standardwert 2048. (Siehe auch "generate-dummy".)
+
+<a id="entry-12-7-1-curves"></a>
+
+**`curves <string>`**
+
+```haproxy
+curves <string>
+```
+
+Konfiguriert die Kurven, wenn "generate-dummy" für dieses selbstsignierte Zertifikat auf 'on' und "keytype" auf 'ECDSA' gesetzt ist. Der Standardwert ist 'P-384'.
+
+## 12.8. ACME {#section-12-8}
+
+acme `<name>`
+
+Das ACME-Protokoll kann über den Abschnitt "acme" konfiguriert werden. Der Abschnitt akzeptiert das Argument "`<name>`", mit dem ein Zertifikat diesem Abschnitt zugeordnet wird.
+
+Der ACME-Abschnitt ermöglicht die Konfiguration von HAProxy als ACMEv2-Client. Diese Funktion ist experimentell. Daher muss "expose-experimental-directives" im globalen Abschnitt stehen, damit sie verwendet werden kann.
+
+Eine Anleitung steht im HAProxy-Wiki unter
+<https://github.com/haproxy/wiki/wiki/ACME:--native-haproxy>
+
+Aktuelle Einschränkungen: <a id="entry-12-8-the-feature-is"></a>
+
+**`- Die Funktion ist auf die Challenges http-01, dns-01 oder dns-persist-01 beschränkt`**
+
+```haproxy
+- Die Funktion ist auf die Challenges http-01, dns-01 oder dns-persist-01 beschränkt
+```
+
+derzeit. http-01 wird vollständig von HAProxy abgewickelt. Für dns-01 und dns-persist-01 wird jedoch entweder die dataplaneAPI oder ein anderes Drittanbieterwerkzeug benötigt, um mit der API eines DNS-Anbieters zu kommunizieren. Bei dns-persist-01 muss der TXT-Eintrag nur einmal gesetzt werden; dies kann daher auch manuell ohne Werkzeug erfolgen.
+<a id="entry-12-8-it-is-possible"></a>
+
+**`- Der Start ist ohne vorhandenes Zertifikat auf dem Datenträger möglich. Dazu`**
+
+```haproxy
+- Der Start ist ohne vorhandenes Zertifikat auf dem Datenträger möglich. Dazu
+```
+
+muss das Zertifikat in einem crt-store konfiguriert sein. Bei Verwendung des Schlüsselworts "acme" in einem crt-store wird ein temporäres Schlüsselpaar verwendet, bis das ACME-Zertifikat erzeugt ist.
+<a id="entry-12-8-the-current-haproxy"></a>
+
+**`- Die aktuelle HAProxy-Architektur arbeitet nicht blockierend; der Zugriff auf den Datenträger`**
+
+```haproxy
+- Die aktuelle HAProxy-Architektur arbeitet nicht blockierend; der Zugriff auf den Datenträger
+```
+
+sollte nach dem Laden der Konfiguration nicht mehr erfolgen, da er die Ereignisschleife und damit den Datenverkehr auf demselben Thread blockieren könnte. Deshalb müssen die von HAProxy erzeugten Zertifikate und Schlüssel außerhalb von HAProxy über "dump ssl cert" am Statistik-Socket exportiert werden. Der Export der Zertifikate lässt sich mit der dataplaneAPI oder dem Skript haproxy-dump-certs im Verzeichnis admin/cli/ automatisieren.
+
+Der ACME-Scheduler startet beim Start von HAProxy. Er durchläuft die Zertifikate und startet eine ACME-Erneuerungsaufgabe, wenn notAfter hinter curtime + (notAfter - notBefore) / 12 liegt; ist notBefore nicht definiert, werden 7 Tage verwendet. Der Scheduler schläft anschließend und wacht nach 12 Stunden wieder auf. Eine Erneuerungsaufgabe kann mit "acme renew" manuell gestartet werden. Siehe auch "acme status" im Verwaltungshandbuch.
+
+Die folgenden Schlüsselwörter können im ACME-Abschnitt verwendet werden:
+
+<a id="entry-12-8-account-key"></a>
+
+**`account-key <filename>`**
+
+```haproxy
+account-key <filename>
+```
+
+Konfiguriert den Pfad zum Kontoschlüssel. Der Schlüssel muss vor dem Start von HAProxy erzeugt werden. Wenn kein account-Schlüsselwort verwendet wird, versucht der acme-Abschnitt, eine Datei mit dem aus dem Abschnittsnamen gebildeten Namen "`<name>`.account.key" zu laden. Ist die Datei nicht vorhanden, erzeugt HAProxy sie mit den Parametern aus dem acme-Abschnitt.
+
+Ein privater RSA-Schlüssel kann auch manuell mit openssl erzeugt werden:
+
+```text
+openssl genrsa -out account.key 2048
+```
+
+Oder ein ECDSA-Schlüssel:
+
+```text
+openssl ecparam -name secp384r1 -genkey -noout -out account.key
+```
+
+<a id="entry-12-8-acme-vars"></a>
+
+**`acme-vars <string>`**
+
+```haproxy
+acme-vars <string>
+```
+
+Übergibt beliebige Variablen über die Senke "dpapi" an das externe Werkzeug zur DNS-Bereitstellung (z. B. die dataplaneAPI). Die Bedeutung hängt vom Werkzeug ab; siehe dessen Dokumentation.
+
+Dieses Schlüsselwort ist nur für den Challenge-Typ "dns-01" oder "dns-persist-01" relevant.
+
+Siehe auch: "challenge", "provider-name"
+
+<a id="entry-12-8-bits"></a>
+
+**`bits <number>`**
+
+```haproxy
+bits <number>
+```
+
+Konfiguriert die Bitanzahl für die Erzeugung eines RSA-Zertifikats. Der Standardwert ist 2048. Ein zu hoher Wert kann eine Warnung auslösen, wenn der Rechner nicht leistungsfähig genug ist. Dies lässt sich mit "warn-blocked-traffic-after" konfigurieren; eine zu lange Blockierung des Datenverkehrs kann jedoch den Watchdog auslösen.
+
+<a id="entry-12-8-challenge"></a>
+
+**`challenge <string>`**
+
+```haproxy
+challenge <string>
+```
+
+Erwartet als Parameter einen Challenge-Typ. Dieser muss http-01, dns-01 oder dns-persist-01 sein. Ohne Angabe ist http-01 der Standard.
+
+dns-persist-01 implementiert draft-ietf-acme-dns-persist. Anders als dns-01 verwendet es einen statischen TXT-Eintrag unter "\_validation-persist.`<domain>`", der einmal gesetzt wird und sich zwischen Erneuerungen nicht ändert. Der Eintrag muss die Konto-URI sowie gegebenenfalls eine optionale Richtlinie enthalten. Dieser Challenge-Typ erfordert keinen Schreibzugriff auf die API des DNS-Anbieters bei jeder Erneuerung.
+
+<a id="entry-12-8-challenge-ready"></a>
+
+**`challenge-ready <value>[,<value>]*`**
+
+```haproxy
+challenge-ready <value>[,<value>]*
+```
+
+Konfiguriert die Bedingungen, die erfüllt sein müssen, bevor dem ACME-Server mitgeteilt wird, dass eine dns-01-Challenge zur Validierung bereit ist. Zulässige Werte sind:
+
+```text
+cli  - Wartet darauf, dass ein Bediener über den CLI-Befehl
+       "acme challenge_ready <crt> domain <domain>" auf der Master-CLI oder
+       dem Statistik-Socket die Bereitschaft meldet. Damit kann ein externes
+       DNS-Bereitstellungswerkzeug bestätigen, dass der TXT-Eintrag gesetzt
+       wurde, bevor HAProxy fortfährt.
+
+dns  - Führt eine DNS-Vorabprüfung durch, indem der TXT-Eintrag für
+       "_acme-challenge.<domain>" über den konfigurierten resolvers-Abschnitt
+       "default" aufgelöst wird, nicht über die autoritativen Nameserver.
+       Die Challenge wird erst übermittelt, wenn der TXT-Eintrag dem erwarteten
+       Token entspricht. DNS-Caching auf Resolver-Ebene kann die Ergebnisse
+       daher beeinflussen. "dns-delay" steuert den Abstand zwischen den
+       Auflösungsversuchen. Diese Option ist vom CLI-Befehl unabhängig;
+       menschliches Eingreifen ist daher nicht erforderlich.
+
+       Bei dns-01 wird der TXT-Eintrag unter "_acme-challenge.<domain>"
+       aufgelöst und muss dem erwarteten Token entsprechen. Bei dns-persist-01
+       wird der TXT-Eintrag unter "_validation-persist.<domain>" aufgelöst
+       und nur geprüft, ob er vorhanden ist.
+
+delay - Wartet zunächst "dns-delay", bevor fortgefahren wird. Ohne "dns"
+        wird die Challenge nach Ablauf dieser Wartezeit übermittelt. In
+        Kombination mit "dns" liegt die anfängliche Wartezeit vor dem
+        Beginn der DNS-Vorabprüfungen.
+
+none - Keine Bereitschaftsbedingung; die Challenge wird sofort an den
+       ACME-Server übermittelt, ohne auf eine externe Bestätigung zu warten.
+       Diese Option kann nicht mit anderen kombiniert werden.
+```
+
+Mehrere Werte können durch Kommas getrennt kombiniert werden. Sind mehrere Bedingungen angegeben, verarbeitet HAProxy sie in folgender Reihenfolge: zuerst auf die CLI-Bestätigung warten ("cli"), dann die anfängliche Wartezeit einhalten ("delay"), danach die DNS-Vorabprüfungen ausführen ("dns").
+
+Diese Option ist nur mit den Challenge-Typen dns-01 und dns-persist-01 kompatibel.
+
+Ist "challenge" auf "dns-01" gesetzt und diese Option nicht konfiguriert, ist "cli" der Standard.
+
+Ist "challenge" auf "dns-persist-01" gesetzt und diese Option nicht konfiguriert, ist "dns,delay" der Standard.
+
+Ist "challenge" auf "dns-persist-01" gesetzt, wird vor der Auswertung der challenge-ready-Bedingungen immer zunächst eine opportunistische DNS-Prüfung ausgeführt. Da der TXT-Eintrag "\_validation-persist.`<domain>`" einmal gesetzt wird und sich zwischen Erneuerungen nicht ändert, prüft HAProxy bei der Erneuerung, ob der Eintrag bereits vorhanden ist. Gelingt die Prüfung für alle Domains, wird die Challenge sofort übermittelt, ohne die challenge-ready-Schritte (cli, delay, dns) zu durchlaufen. Schlägt die Prüfung fehl, greift HAProxy auf den normalen challenge-ready-Ablauf zurück.
+
+Beispiel:
+
+```shell
+# Wait for CLI confirmation, then verify DNS propagation
+challenge-ready cli,dns
+```
+
+<a id="entry-12-8-contact"></a>
+
+**`contact <string>`**
+
+```haproxy
+contact <string>
+```
+
+Die Kontakt-E-Mail-Adresse, die bei der CA dem Kontoschlüssel zugeordnet wird.
+
+<a id="entry-12-8-curves"></a>
+
+**`curves <string>`**
+
+```haproxy
+curves <string>
+```
+
+Konfiguriert bei Verwendung des Schlüsseltyps ECDSA die Kurven. Der Standard ist P-384.
+
+<a id="entry-12-8-directory"></a>
+
+**`directory <string>`**
+
+```haproxy
+directory <string>
+```
+
+Dieses Schlüsselwort konfiguriert die Verzeichnis-URL der CA, die dieser acme-Abschnitt verwendet. Es ist zwingend erforderlich, da keine Standard-URL existiert.
+
+Beispiel:
+
+```text
+directory https://acme-staging-v02.api.letsencrypt.org/directory
+```
+
+<a id="entry-12-8-dns-delay"></a>
+
+**`dns-delay <time>`**
+
+```haproxy
+dns-delay <time>
+```
+
+Konfiguriert die Wartezeit für die "challenge-ready"-Bedingungen "delay" und "dns". Der Wert ist eine Zeitangabe im HAProxy-Zeitformat, etwa "5m" oder "300s". Der Standardwert ist 30 Sekunden.
+
+Ihre Bedeutung hängt von den verwendeten "challenge-ready"-Bedingungen ab:
+
+```text
+delay     - Die Challenge wird nach Ablauf dieser Wartezeit übermittelt,
+            ohne DNS-Vorabprüfung.
+
+dns       - Der Abstand zwischen zwei aufeinanderfolgenden DNS-Auflösungsversuchen.
+            Die erste Prüfung erfolgt sofort ohne anfängliche Wartezeit.
+
+dns+delay - Die anfängliche Wartezeit vor dem ersten DNS-Auflösungsversuch
+            und der Abstand zwischen nachfolgenden Wiederholungsversuchen.
+```
+
+Die Auflösung erfolgt über den konfigurierten resolvers-Abschnitt "default", nicht über die autoritativen Nameserver. DNS-Caching auf Resolver-Ebene kann die Ergebnisse daher weiterhin beeinflussen.
+
+<a id="entry-12-8-dns-timeout"></a>
+
+**`dns-timeout <time>`**
+
+```haproxy
+dns-timeout <time>
+```
+
+Wenn "challenge-ready" den Wert "dns" enthält, konfiguriert dies die maximale Zeit für eine erfolgreiche Auflösung des TXT-Eintrags, bevor die Challenge abgebrochen wird. Der Wert ist eine Zeitangabe im HAProxy-Zeitformat, etwa "10m" oder "600s". Der Standardwert ist 600 Sekunden.
+
+Die Zeitmessung beginnt, sobald der erste DNS-Auflösungsversuch ausgelöst wird, also nach der anfänglichen Wartezeit "dns-delay". Würde der nächste Auflösungsversuch erst nach Ablauf der Zeitüberschreitung ausgelöst, wird die Challenge mit einem Fehler abgebrochen. Dies verhindert endlose Wiederholungsversuche, wenn die DNS-Verbreitung fehlschlägt.
+
+Siehe auch: "dns-delay"
+
+<a id="entry-12-8-keytype"></a>
+
+**`keytype <string>`**
+
+```haproxy
+keytype <string>
+```
+
+Konfiguriert den Typ des zu erzeugenden Schlüssels. Mögliche Werte sind "RSA" und "ECDSA". Für ECDSA können außerdem die "curves" und für RSA die Anzahl der "bits" konfiguriert werden. Standardmäßig werden EC384-Schlüssel erzeugt.
+
+<a id="entry-12-8-map"></a>
+
+**`map <map>`**
+
+```haproxy
+map <map>
+```
+
+Konfiguriert die Zuordnungstabelle zum Speichern von Token als Schlüssel und Fingerabdruck als Wert. Dies ist für die Beantwortung einer Challenge bei mehreren verwendeten Konten nützlich. Die acme-Aufgabe fügt vor der Validierung der Challenge Einträge hinzu und entfernt sie am Ende der Aufgabe.
+
+<a id="entry-12-8-profile"></a>
+
+**`profile <string>`**
+
+```haproxy
+profile <string>
+```
+
+Fordert ein bestimmtes Zertifikatsprofil von der CA an, indem der newOrder-Anfrage ein Feld "profile" hinzugefügt wird. Dies implementiert draft-ietf-acme-profiles.
+
+Profilnamen sind CA-spezifische kurze Bezeichner, etwa "classic" oder "shortlived". Ist ein Profilname gesetzt, wird er unverändert in den JSON-Nutzdaten von newOrder gesendet. Die CA kann die Anfrage ignorieren oder einen Fehler zurückgeben, wenn sie das Profil nicht unterstützt. Ohne Angabe wird kein Profilfeld eingefügt, und die CA verwendet ihre standardmäßige Ausstellungsrichtlinie.
+
+Die Profile von Let's Encrypt sind unter <https://letsencrypt.org/docs/profiles/> beschrieben.
+
+Beispiel:
+
+```shell
+# Request short-lived certificates
+profile shortlived
+```
+
+<a id="entry-12-8-provider-name"></a>
+
+**`provider-name <string>`**
+
+```haproxy
+provider-name <string>
+```
+
+Legt den Namen des DNS-Anbieters fest, der über das Ziel "dpapi" an das externe DNS-Bereitstellungswerkzeug, etwa die dataplaneAPI, übergeben wird. Die zulässigen Werte hängen vom Werkzeug ab; Einzelheiten stehen in dessen Dokumentation.
+
+Dieses Schlüsselwort ist nur bei den Challenge-Typen "dns-01" oder "dns-persist-01" sinnvoll.
+
+Siehe auch: "challenge", "acme-vars"
+
+<a id="entry-12-8-reuse-key"></a>
+
+**`reuse-key { on | off }`**
+
+```haproxy
+reuse-key { on | off }
+```
+
+Bei "on" erzeugt HAProxy keinen neuen privaten Schlüssel, sondern behält den bisherigen bei. Ein regelmäßiger Wechsel privater Schlüssel wird empfohlen. Wird diese Option aktiviert, wird empfohlen, die Schlüssel regelmäßig manuell neu zu erzeugen.
+
+Diese Option kann bei RSA-Schlüsseln größer als 2048 nützlich sein, deren Erzeugung Zeit beanspruchen und dabei einen Thread verlangsamen kann.
+
+Bei Verwendung des Caches des ACME-Servers kann derselbe Schlüssel nützlich sein, um ein gültiges Zertifikat für den aktuellen Schlüssel abzurufen.
+
+Die Standardeinstellung ist "off".
+
+Beispiel:
+
+```text
+global
+    expose-experimental-directives
+    httpclient.resolvers.prefer ipv4
+
+frontend in
+    bind *:80
+    bind *:443 ssl
+    http-request return status 200 content-type text/plain lf-string "%[path,field(-1,/)].%[path,field(-1,/),map(virt@acme)]\n" if { path_beg '/.well-known/acme-challenge/' }
+    ssl-f-use crt "foo.example.com.pem.rsa"   acme LE1 domains "foo.example.com.pem,bar.example.com"
+    ssl-f-use crt "foo.example.com.pem.ecdsa" acme LE2 domains "foo.example.com.pem,bar.example.com"
+
+acme LE1
+    directory https://acme-staging-v02.api.letsencrypt.org/directory
+    account-key /etc/haproxy/letsencrypt.account.key
+    contact john.doe@example.com
+    challenge http-01
+    keytype RSA
+    bits 2048
+    map virt@acme
+
+acme LE2
+    directory https://acme-staging-v02.api.letsencrypt.org/directory
+    account-key /etc/haproxy/letsencrypt.account.key
+    contact john.doe@example.com
+    challenge http-01
+    keytype ECDSA
+    curves P-384
+    map virt@acme
+```
+
+<a id="entry-12-8-eab-key-id"></a>
+
+**`eab-key-id <filename>`**
+
+```haproxy
+eab-key-id <filename>
+```
+
+Konfiguriert den Pfad zur Datei mit der EAB-Schlüssel-ID. Die Zugangsdaten werden von der CA bereitgestellt und müssen vor dem Start von HAProxy unter dem angegebenen Pfad abgelegt werden. Sie werden nur bei der Kontoerstellung verwendet.
+
+Die Datei muss eine einfache ASCII-Zeichenfolge enthalten.
+
+EAB-Zugangsdaten werden nur bei der erstmaligen Erstellung des ACME-Kontos benötigt. Danach können sie aus der Konfiguration entfernt oder die Dateien geleert werden. Eine leere Datei wird ohne Meldung ignoriert. Leerraum wird mit Ausnahme des abschließenden Zeilenumbruchs nicht ignoriert.
+
+Siehe auch: "eab-mac-key", "eab-mac-alg"
+
+<a id="entry-12-8-eab-mac-key"></a>
+
+**`eab-mac-key <filename>`**
+
+```haproxy
+eab-mac-key <filename>
+```
+
+Konfiguriert den Pfad zur Datei mit dem EAB-MAC-Schlüssel. Die Zugangsdaten werden von der CA bereitgestellt und müssen vor dem Start von HAProxy unter dem angegebenen Pfad abgelegt werden. Sie werden nur bei der Kontoerstellung verwendet.
+
+Die Datei muss einen base64url-kodierten MAC-Schlüssel enthalten.
+
+EAB-Zugangsdaten werden nur bei der erstmaligen Erstellung des ACME-Kontos benötigt. Danach können sie aus der Konfiguration entfernt oder die Dateien geleert werden. Eine leere Datei wird ohne Meldung ignoriert. Leerraum wird mit Ausnahme des abschließenden Zeilenumbruchs nicht ignoriert.
+
+Siehe auch: "eab-key-id", "eab-mac-alg"
+
+<a id="entry-12-8-eab-mac-alg"></a>
+
+**`eab-mac-alg { HS256 | HS384 | HS512 }`**
+
+```haproxy
+eab-mac-alg { HS256 | HS384 | HS512 }
+```
+
+Konfiguriert den MAC-Algorithmus für die EAB-Signatur. Der Standard ist HS256. Der EAB-MAC-Schlüssel muss groß genug für den angegebenen MAC-Algorithmus sein. Nicht alle CAs unterstützen andere Algorithmen als HS256.
+
+Siehe auch: "eab-key-id", "eab-mac-key"
+
+## 12.9. Health Checks {#section-12-9}
+
+Mehrere Health Checks können global deklariert und von Servern in der gesamten Konfiguration verwendet werden. Dabei überschreiben sie die lokale Proxy-Konfiguration.
+
+<a id="entry-12-9-healthcheck"></a>
+
+**`healthcheck <name>`**
+
+```haproxy
+healthcheck <name>
+```
+
+Erstellt einen neuen Health Check mit dem Namen `<name>`. Dieser Name muss eindeutig sein. Er sollte in der server-Zeile verwendet werden, um einen bestimmten health-check-Abschnitt zu referenzieren.
+
+<a id="entry-12-9-type"></a>
+
+**`type <type>`**
+
+```haproxy
+type <type>
+```
+
+Legt den Typ des Health Checks fest. Dieser Parameter ist zwingend erforderlich. Folgende Typen werden unterstützt:
+
+    * tcp-check
+    * httpchk
+    * ssl-hello-chk
+    * smtpchk
+    * pgsql-check
+    * redis-check
+    * mysql-check
+    * ldap-check
+    * spop-check
+
+Jeder Typ verwendet, sofern vorhanden, dieselben Parameter wie die entsprechende Proxy-Option. Beispielsweise können für den Typ "httpchk" die Methode, die URI usw. angegeben werden:
+
+Beispiele:
+
+```text
+   healthcheck my-http-check
+type httpchk GET /health HTTP/1.1 %[srv_name]
+```
+
+Siehe auch: "option tcp-check", "option httpchk", "option ssl-hello-chk", "option smtpchk", "option
+mysql-check", "option pgsql-check", "option redis-check", "option ldap-check" und "option spop-check"
+
+<a id="entry-12-9-http-check-comment"></a>
+
+**`http-check comment <string>`**
+
+```haproxy
+http-check comment <string>
+http-check connect [default] [port <expr>] [addr <ip>] [send-proxy]
+                   [via-socks4] [ssl] [sni <sni>] [alpn <alpn>] [linger]
+                   [proto <name>] [comment <msg>]
+http-check disable-on-404
+http-check expect [min-recv <int>] [comment <msg>]
+                  [ok-status <st>] [error-status <st>] [tout-status <st>]
+                  [on-success <fmt>] [on-error <fmt>] [status-code <expr>]
+                  [!] <match> <pattern>
+http-check send [meth <method>] [{ uri <uri> | uri-lf <fmt> }>] [ver <version>]
+                [hdr <name> <fmt>]* [{ body <string> | body-lf <fmt> }]
+                [comment <msg>]
+http-check send-state
+http-check set-var(<var-name>[,<cond>...]) <expr>
+http-check set-var-fmt(<var-name>[,<cond>...]) <fmt>
+http-check unset-var(<var-name>)
+```
+
+Fügt einem Health Check vom Typ "httpchk" eine bestimmte http-check-Regel hinzu. Die Syntax entspricht den zugehörigen Proxy-Direktiven. Einzelheiten stehen in der entsprechenden Proxy-Dokumentation.
+
+<a id="entry-12-9-tcp-check-comment"></a>
+
+**`tcp-check comment <string>`**
+
+```haproxy
+tcp-check comment <string>
+tcp-check connect [default] [port <expr>] [addr <ip>] [send-proxy] [via-socks4]
+                  [ssl] [sni <sni>] [alpn <alpn>] [linger]
+                  [proto <name>] [comment <msg>]
+tcp-check expect [min-recv <int>] [comment <msg>]
+                 [ok-status <st>] [error-status <st>] [tout-status <st>]
+                 [on-success <fmt>] [on-error <fmt>] [status-code <expr>]
+                 [!] <match> <pattern>
+tcp-check send <data> [comment <msg>]
+tcp-check send-lf <fmt> [comment <msg>]
+tcp-check send-binary <hexstring> [comment <msg>]
+tcp-check send-binary-lf <hexfmt> [comment <msg>]
+tcp-check set-var(<var-name>[,<cond>...]) <expr>
+tcp-check set-var-fmt(<var-name>[,<cond>...]) <fmt>
+tcp-check unset-var(<var-name>)
+```
+
+Fügt einem Health Check vom Typ "tcp-check" eine bestimmte tcp-check-Regel hinzu. Die Syntax entspricht den zugehörigen Proxy-Direktiven. Einzelheiten stehen in der entsprechenden Proxy-Dokumentation.

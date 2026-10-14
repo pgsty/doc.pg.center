@@ -34,32 +34,32 @@ components:
       meta: Высокая доступность
       icon: fa-solid fa-heart-pulse
       desc: Эксплуатация кластеров PostgreSQL с распределённым консенсусом и автоматическим переключением при сбоях.
-      url: /docs/patroni/
+      url: /patroni/
     - title: pgBackRest
       meta: Резервное копирование и восстановление
       icon: fa-solid fa-couch
       desc: Проектирование надёжных процессов резервного копирования, восстановления, архивации и восстановления на момент времени.
-      url: /docs/pgbackrest/
+      url: /pgbackrest/
     - title: PgBouncer
       meta: Пул соединений
       icon: fa-solid fa-arrows-turn-to-dots
       desc: Сокращение накладных расходов на соединения с помощью пулов сеансов, транзакций и операторов.
-      url: /docs/pgbouncer/
+      url: /pgbouncer/
     - title: pgBadger
       meta: Анализ журналов
       icon: fa-solid fa-otter
       desc: Преобразование журналов PostgreSQL и PgBouncer в отчёты о запросах, нагрузке и ошибках.
-      url: /docs/pgbadger/
+      url: /pgbadger/
     - title: HAProxy
       meta: Балансировка нагрузки
       icon: fa-solid fa-network-wired
       desc: Полные начальное, конфигурационное и эксплуатационное руководства по HAProxy 3.4.
-      url: /docs/haproxy/
+      url: /haproxy/
     - title: etcd
       meta: Консенсус и координация
       icon: fa-solid fa-gear
       desc: Эксплуатация строго согласованного хранилища ключ-значение, его API, модели Raft и внутренних механизмов.
-      url: /docs/etcd/
+      url: /etcd/
 
 capabilities:
   eyebrow: Руководства по компонентам
@@ -68,7 +68,7 @@ capabilities:
   items:
     - ref: 01 / ВЫСОКАЯ ДОСТУПНОСТЬ
       title: Patroni
-      url: /docs/patroni/
+      url: /patroni/
       motto: Шаблон высокой доступности PostgreSQL
       bullets:
         - Выбирает лидера и хранит состояние кластера через DCS.
@@ -81,15 +81,15 @@ capabilities:
         columns: 2
         aria_label: Быстрые ссылки на документацию Patroni
         items:
-          - { icon: fa-solid fa-download, title: Установка, url: /docs/patroni/installation/ }
-          - { icon: fa-solid fa-sliders, title: Настройка, url: /docs/patroni/config/ }
-          - { icon: fa-solid fa-terminal, title: patronictl, url: /docs/patroni/patronictl/ }
-          - { icon: fa-solid fa-plug, title: REST API, url: /docs/patroni/rest_api/ }
-          - { icon: fa-solid fa-arrows-rotate, title: Режимы репликации, url: /docs/patroni/replication_modes/ }
-          - { icon: fa-solid fa-circle-question, title: Частые вопросы, url: /docs/patroni/faq/ }
+          - { icon: fa-solid fa-download, title: Установка, url: /patroni/installation/ }
+          - { icon: fa-solid fa-sliders, title: Настройка, url: /patroni/config/ }
+          - { icon: fa-solid fa-terminal, title: patronictl, url: /patroni/patronictl/ }
+          - { icon: fa-solid fa-plug, title: REST API, url: /patroni/rest_api/ }
+          - { icon: fa-solid fa-arrows-rotate, title: Режимы репликации, url: /patroni/replication_modes/ }
+          - { icon: fa-solid fa-circle-question, title: Частые вопросы, url: /patroni/faq/ }
     - ref: 02 / РЕЗЕРВНОЕ КОПИРОВАНИЕ И ВОССТАНОВЛЕНИЕ
       title: pgBackRest
-      url: /docs/pgbackrest/
+      url: /pgbackrest/
       motto: Надёжное резервное копирование, архивация, восстановление и восстановление на момент времени
       bullets:
         - Полные, дифференциальные, инкрементные и блочные резервные копии.
@@ -102,15 +102,15 @@ capabilities:
         columns: 2
         aria_label: Быстрые ссылки на документацию pgBackRest
         items:
-          - { icon: fa-solid fa-route, title: Руководство пользователя, url: /docs/pgbackrest/user-guide/ }
-          - { icon: fa-brands fa-redhat, title: Руководство для RHEL, url: /docs/pgbackrest/user-guide-rhel/ }
-          - { icon: fa-solid fa-sliders, title: Настройка, url: /docs/pgbackrest/configuration/ }
-          - { icon: fa-solid fa-terminal, title: Команды, url: /docs/pgbackrest/command/ }
-          - { icon: fa-solid fa-tags, title: Выпуски, url: /docs/pgbackrest/release/ }
-          - { icon: fa-solid fa-circle-question, title: Частые вопросы, url: /docs/pgbackrest/faq/ }
+          - { icon: fa-solid fa-route, title: Руководство пользователя, url: /pgbackrest/user-guide/ }
+          - { icon: fa-brands fa-redhat, title: Руководство для RHEL, url: /pgbackrest/user-guide-rhel/ }
+          - { icon: fa-solid fa-sliders, title: Настройка, url: /pgbackrest/configuration/ }
+          - { icon: fa-solid fa-terminal, title: Команды, url: /pgbackrest/command/ }
+          - { icon: fa-solid fa-tags, title: Выпуски, url: /pgbackrest/release/ }
+          - { icon: fa-solid fa-circle-question, title: Частые вопросы, url: /pgbackrest/faq/ }
     - ref: 03 / ПУЛ СОЕДИНЕНИЙ
       title: PgBouncer
-      url: /docs/pgbouncer/
+      url: /pgbouncer/
       motto: Легковесный пул соединений для PostgreSQL
       bullets:
         - Повторно использует соединения, сокращая стоимость запуска серверных процессов.
@@ -123,15 +123,15 @@ capabilities:
         columns: 2
         aria_label: Быстрые ссылки на документацию PgBouncer
         items:
-          - { icon: fa-solid fa-list-check, title: Возможности, url: /docs/pgbouncer/features/ }
-          - { icon: fa-solid fa-download, title: Загрузка, url: /docs/pgbouncer/download/ }
-          - { icon: fa-solid fa-wrench, title: Установка, url: /docs/pgbouncer/install/ }
-          - { icon: fa-solid fa-terminal, title: Использование, url: /docs/pgbouncer/usage/ }
-          - { icon: fa-solid fa-sliders, title: Настройка, url: /docs/pgbouncer/config/ }
-          - { icon: fa-solid fa-circle-question, title: Частые вопросы, url: /docs/pgbouncer/faq/ }
+          - { icon: fa-solid fa-list-check, title: Возможности, url: /pgbouncer/features/ }
+          - { icon: fa-solid fa-download, title: Загрузка, url: /pgbouncer/download/ }
+          - { icon: fa-solid fa-wrench, title: Установка, url: /pgbouncer/install/ }
+          - { icon: fa-solid fa-terminal, title: Использование, url: /pgbouncer/usage/ }
+          - { icon: fa-solid fa-sliders, title: Настройка, url: /pgbouncer/config/ }
+          - { icon: fa-solid fa-circle-question, title: Частые вопросы, url: /pgbouncer/faq/ }
     - ref: 04 / АНАЛИЗ ЖУРНАЛОВ
       title: pgBadger
-      url: /docs/pgbadger/
+      url: /pgbadger/
       motto: Быстрый анализ журналов PostgreSQL и PgBouncer
       bullets:
         - Разбирает журналы PostgreSQL и PgBouncer во множестве форматов.
@@ -144,17 +144,17 @@ capabilities:
         columns: 2
         aria_label: Быстрые ссылки на документацию pgBadger
         items:
-          - { icon: fa-solid fa-download, title: Загрузка, url: /docs/pgbadger/download/ }
-          - { icon: fa-solid fa-terminal, title: Командная строка, url: /docs/pgbadger/command-line/ }
-          - { icon: fa-solid fa-file-lines, title: Журналирование PostgreSQL, url: /docs/pgbadger/postgresql-logging/ }
-          - { icon: fa-solid fa-calendar-days, title: Инкрементальные отчёты, url: /docs/pgbadger/incremental-reports/ }
-          - { icon: fa-solid fa-file-export, title: Форматы вывода, url: /docs/pgbadger/output-formats/ }
-          - { icon: fa-solid fa-chart-column, title: Примеры отчётов, url: /docs/pgbadger/sample-reports/ }
-          - { icon: fa-solid fa-tags, title: Выпуски, url: /docs/pgbadger/releases/ }
-          - { icon: fa-solid fa-life-ring, title: Поддержка, url: /docs/pgbadger/support/ }
+          - { icon: fa-solid fa-download, title: Загрузка, url: /pgbadger/download/ }
+          - { icon: fa-solid fa-terminal, title: Командная строка, url: /pgbadger/command-line/ }
+          - { icon: fa-solid fa-file-lines, title: Журналирование PostgreSQL, url: /pgbadger/postgresql-logging/ }
+          - { icon: fa-solid fa-calendar-days, title: Инкрементальные отчёты, url: /pgbadger/incremental-reports/ }
+          - { icon: fa-solid fa-file-export, title: Форматы вывода, url: /pgbadger/output-formats/ }
+          - { icon: fa-solid fa-chart-column, title: Примеры отчётов, url: /pgbadger/sample-reports/ }
+          - { icon: fa-solid fa-tags, title: Выпуски, url: /pgbadger/releases/ }
+          - { icon: fa-solid fa-life-ring, title: Поддержка, url: /pgbadger/support/ }
     - ref: 05 / БАЛАНСИРОВКА НАГРУЗКИ
       title: HAProxy
-      url: /docs/haproxy/
+      url: /haproxy/
       motto: Быстрое и надёжное управление TCP- и HTTP-трафиком
       bullets:
         - Полное начальное руководство версии 3.4, разбитое на девять тематических разделов.
@@ -167,17 +167,17 @@ capabilities:
         columns: 2
         aria_label: Быстрые ссылки на документацию HAProxy
         items:
-          - { icon: fa-solid fa-compass, title: Начальное руководство, url: /docs/haproxy/load-balancing/ }
-          - { icon: fa-solid fa-file-code, title: Руководство по конфигурации, url: /docs/haproxy/http-fundamentals/ }
-          - { icon: fa-solid fa-right-left, title: Директивы прокси, url: /docs/haproxy/proxies/ }
-          - { icon: fa-solid fa-filter, title: ACL и образцы, url: /docs/haproxy/acls-and-samples/ }
-          - { icon: fa-solid fa-screwdriver-wrench, title: Руководство по эксплуатации, url: /docs/haproxy/prerequisites/ }
-          - { icon: fa-solid fa-chart-line, title: CLI среды выполнения и статистика, url: /docs/haproxy/statistics-and-monitoring/ }
-          - { icon: fa-solid fa-bug, title: Отладка, url: /docs/haproxy/debugging-and-performance/ }
-          - { icon: fa-solid fa-shield-halved, title: Безопасность, url: /docs/haproxy/security/ }
+          - { icon: fa-solid fa-compass, title: Начальное руководство, url: /haproxy/load-balancing/ }
+          - { icon: fa-solid fa-file-code, title: Руководство по конфигурации, url: /haproxy/http-fundamentals/ }
+          - { icon: fa-solid fa-right-left, title: Директивы прокси, url: /haproxy/proxies/ }
+          - { icon: fa-solid fa-filter, title: ACL и образцы, url: /haproxy/acls-and-samples/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: Руководство по эксплуатации, url: /haproxy/prerequisites/ }
+          - { icon: fa-solid fa-chart-line, title: CLI среды выполнения и статистика, url: /haproxy/statistics-and-monitoring/ }
+          - { icon: fa-solid fa-bug, title: Отладка, url: /haproxy/debugging-and-performance/ }
+          - { icon: fa-solid fa-shield-halved, title: Безопасность, url: /haproxy/security/ }
     - ref: 06 / КОНСЕНСУС И КООРДИНАЦИЯ
       title: etcd
-      url: /docs/etcd/
+      url: /etcd/
       motto: Строго согласованное распределённое хранилище ключ-значение
       bullets:
         - Надёжный API ключ-значение, построенный на алгоритме Raft.
@@ -190,12 +190,12 @@ capabilities:
         columns: 2
         aria_label: Быстрые ссылки на документацию etcd
         items:
-          - { icon: fa-solid fa-bolt, title: Быстрый старт, url: /docs/etcd/quickstart/ }
-          - { icon: fa-solid fa-download, title: Установка, url: /docs/etcd/install/ }
-          - { icon: fa-solid fa-sliders, title: Настройка, url: /docs/etcd/op-guide/configuration/ }
-          - { icon: fa-solid fa-screwdriver-wrench, title: Обслуживание, url: /docs/etcd/op-guide/maintenance/ }
-          - { icon: fa-solid fa-code, title: API, url: /docs/etcd/learning/api/ }
-          - { icon: fa-solid fa-arrow-up-right-dots, title: Обновление до 3.7, url: /docs/etcd/upgrades/upgrade_3_7/ }
+          - { icon: fa-solid fa-bolt, title: Быстрый старт, url: /etcd/quickstart/ }
+          - { icon: fa-solid fa-download, title: Установка, url: /etcd/install/ }
+          - { icon: fa-solid fa-sliders, title: Настройка, url: /etcd/op-guide/configuration/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: Обслуживание, url: /etcd/op-guide/maintenance/ }
+          - { icon: fa-solid fa-code, title: API, url: /etcd/learning/api/ }
+          - { icon: fa-solid fa-arrow-up-right-dots, title: Обновление до 3.7, url: /etcd/upgrades/upgrade_3_7/ }
 
 faq:
   eyebrow: Частые вопросы

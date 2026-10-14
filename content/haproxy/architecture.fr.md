@@ -1,0 +1,99 @@
+---
+title: "Qu'est-ce qu'HAProxy et comment il fonctionne"
+linkTitle: "Architecture"
+weight: 30
+description: "Rôle, limites, architecture orientée événements et modèle de traitement des requêtes de HAProxy"
+icon: fa-solid fa-diagram-project
+module: [HAPROXY]
+categories: [Concept]
+aliases:
+  - /haproxy/introduction/
+  - /haproxy/intro/architecture/
+upstream_link: "https://docs.haproxy.org/3.4/intro.html"
+upstream_name: "HAProxy 3.4 Starter Guide"
+upstream_ref: "v3.4.6-66-g16acce1dac1d, sections 3–3.2"
+---
+
+La graphie « HAProxy » désigne le produit, tandis que « haproxy » désigne le programme exécutable, le paquet logiciel ou un processus. Les deux graphies sont toutefois couramment employées indifféremment pour les deux usages et se prononcent H-A-Proxy. À l'origine, « haproxy » signifiait « high availability proxy » et le nom s'écrivait en deux mots distincts ; aujourd'hui, il ne signifie plus rien d'autre que « HAProxy ».
+
+## 3.1. Ce qu'est HAProxy et ce qu'il n'est pas {#section-3-1}
+
+HAProxy est :
+
+- un proxy TCP : il peut accepter une connexion TCP sur un socket d'écoute, se connecter à un serveur et associer ces sockets afin que le trafic circule dans les deux directions. Les sockets IPv4, IPv6 et même UNIX sont pris en charge de part et d'autre, ce qui permet de traduire facilement les adresses entre différentes familles.
+
+- un proxy inverse HTTP (appelé « passerelle » en terminologie HTTP) : il se présente comme un serveur, reçoit les requêtes HTTP sur des connexions acceptées sur une socket TCP d'écoute, puis transmet les requêtes provenant de ces connexions vers des serveurs en utilisant des connexions distinctes. Il peut utiliser n'importe quelle combinaison de HTTP/1.x ou HTTP/2 de chaque côté et détecte même automatiquement le protocole parlé de chaque côté lorsque ALPN est utilisé sur TLS.
+
+- un terminateur, initiateur ou déchargeur SSL : SSL/TLS peut être utilisé sur la connexion provenant du client, sur celle allant vers le serveur, ou simultanément sur ces connexions. De nombreux paramètres peuvent être appliqués par nom (SNI) et mis à jour à l'exécution sans redémarrage. Ces configurations passent extrêmement bien à l'échelle ; des déploiements comportant des dizaines ou des centaines de milliers de certificats ont été signalés.
+
+- un normalisateur TCP : puisque le système d'exploitation termine les connexions localement, il n'existe aucune relation entre les extrémités. Le trafic anormal, tel que des paquets invalides, des combinaisons de drapeaux, des annonces de fenêtre, des numéros de séquence ou des connexions incomplètes (SYN flood), n'est donc pas transmis à l'autre extrémité. Cela protège les piles TCP fragiles contre les attaques de protocole et permet d'optimiser les paramètres de connexion côté client sans modifier ceux de la pile TCP des serveurs.
+
+- un normalisateur HTTP : lorsqu'il est configuré pour traiter le trafic HTTP, seules les requêtes complètes et valides sont transmises. Cela protège contre de nombreuses attaques basées sur le protocole. En outre, les écarts au protocole pour lesquels une tolérance est prévue dans la spécification sont corrigés afin qu'ils n'entraînent pas de problème sur les serveurs (par exemple, les en-têtes sur plusieurs lignes).
+
+- un outil de correction HTTP : il peut modifier, corriger, ajouter, supprimer ou réécrire l'URL ou n'importe quel en-tête de requête ou de réponse. Cela permet de résoudre les problèmes d'interopérabilité dans des environnements complexes.
+
+- un commutateur basé sur le contenu : il peut prendre en compte n'importe quel élément de la requête pour déterminer le serveur vers lequel acheminer la requête ou la connexion. Il devient ainsi possible de gérer plusieurs protocoles sur un même port (par exemple, HTTP, HTTPS, SSH).
+
+- un répartiteur de charge : il peut répartir les connexions TCP et les requêtes HTTP. En mode TCP, les décisions de répartition sont prises pour toute la connexion. En mode HTTP, les décisions sont prises par requête.
+
+- un régulateur de trafic : il peut appliquer une limitation de débit en divers points, protéger les serveurs contre la surcharge, ajuster les priorités du trafic en fonction du contenu, et même transmettre ces informations aux couches inférieures et aux composants du réseau externe en marquant les paquets.
+
+- une protection contre les attaques DDoS et l'abus de service : elle peut conserver un grand nombre de statistiques par adresse IP, URL, cookie, etc., détecter lorsqu'un abus a lieu, puis prendre des mesures (ralentir les auteurs d'abus, les bloquer, les rediriger vers des contenus obsolètes, etc.).
+
+- un point d'observation pour le dépannage réseau : en raison de la précision des informations rapportées dans les journaux, il est souvent utilisé pour cerner plus précisément certains problèmes liés au réseau.
+
+- un déchargeur de compression HTTP : il peut compresser les réponses qui n'ont pas été compressées par le serveur, réduisant ainsi le temps de chargement des pages pour les clients ayant une connectivité médiocre ou utilisant des réseaux mobiles à forte latence.
+
+- un proxy de cache : il peut mettre en cache des réponses en RAM afin que les requêtes ultérieures pour le même objet évitent le coût d'une nouvelle transmission réseau depuis le serveur, tant que l'objet reste présent et valide. Il ne stockera toutefois pas les objets dans un stockage persistant. Veuillez noter que cette fonction de mise en cache est conçue pour ne nécessiter aucune maintenance et se concentre exclusivement sur l'économie des ressources précieuses de haproxy, et non sur celle des ressources du serveur. Les caches conçus pour optimiser les serveurs nécessitent bien plus de réglages et de flexibilité. Si vous avez besoin d'un tel cache avancé, veuillez utiliser Varnish Cache, qui s'intègre parfaitement à haproxy, notamment lorsque SSL/TLS est requis sur l'un ou l'autre des côtés.
+
+- une passerelle FastCGI : FastCGI peut être considéré comme une représentation différente du protocole HTTP, et HAProxy peut donc répartir directement la charge sur une ferme composée de tout ensemble combiné de serveurs d'applications FastCGI, sans nécessiter de placer un niveau supplémentaire de passerelle entre eux. Cela permet de réaliser des économies de ressources et de réduire les coûts de maintenance.
+
+HAProxy n'est pas :
+
+- un proxy HTTP explicite, c'est-à-dire le proxy utilisé par les navigateurs pour accéder à Internet. Il existe d'excellents logiciels open source dédiés à cette tâche, tels que Squid. Toutefois, HAProxy peut être installé devant un tel proxy afin de fournir une répartition de charge et une haute disponibilité.
+
+- un nettoyeur de données : il ne modifie ni le corps des requêtes ni celui des réponses.
+
+- un serveur web statique : au démarrage, il s'isole dans une prison chroot et abandonne ses privilèges, de sorte qu'il ne réalise aucune opération d'accès au système de fichiers une fois lancé. En conséquence, il ne peut pas être utilisé comme serveur web statique (les serveurs dynamiques sont pris en charge via FastCGI toutefois). Il existe d'excellents logiciels open source à cet effet, tels qu'Apache ou Nginx, et HAProxy peut facilement être installé devant eux pour assurer la répartition de charge, la haute disponibilité et l'accélération.
+
+- un répartiteur de charge basé sur les paquets : il ne traite ni les paquets IP ni les datagrammes UDP, n'effectue pas de NAT, ni encore moins de DSR. Ces tâches relèvent des couches inférieures. Certains composants basés sur le noyau, comme IPVS (Linux Virtual Server), s'en occupent déjà très bien et s'associent parfaitement à HAProxy.
+
+## 3.2. Comment fonctionne HAProxy {#section-3-2}
+
+HAProxy est un moteur événementiel, non bloquant, combinant une couche I/O très rapide à un planificateur multithreadé basé sur la priorité. Conçu avec pour objectif principal le transfert de données, son architecture est optimisée pour acheminer les données aussi rapidement que possible, avec un nombre minimal d'opérations. Il se concentre sur l'optimisation de l'efficacité du cache CPU en maintenant les connexions sur le même processeur aussi longtemps que possible. En conséquence, il met en œuvre un modèle en couches offrant des mécanismes de bypass à chaque niveau, garantissant que les données n'atteignent pas les niveaux supérieurs sauf si nécessaire. La majeure partie du traitement est effectuée dans le noyau, et HAProxy fait tout son possible pour aider le noyau à accomplir son travail aussi rapidement que possible, en fournissant certains indices ou en évitant certaines opérations lorsqu'il estime qu'elles pourraient être regroupées ultérieurement. En conséquence, les chiffres typiques montrent que 15 % du temps de traitement sont consacrés à HAProxy contre 85 % dans le noyau en mode TCP ou HTTP fermé, et environ 30 % pour HAProxy contre 70 % pour le noyau en mode HTTP keep-alive.
+
+Un seul processus peut exécuter de nombreuses instances de proxy ; des configurations comprenant jusqu’à 300 000 proxies distincts dans un seul processus ont été signalées comme fonctionnant correctement. Une configuration à un seul cœur, un seul processeur est largement suffisante pour plus de 99 % des utilisateurs, et les utilisateurs de conteneurs et de machines virtuelles sont donc encouragés à utiliser les images les plus petites possibles afin de réduire les coûts opérationnels et de simplifier le dépannage. Toutefois, la machine sur laquelle HAProxy s’exécute ne doit jamais swapper, et son CPU ne doit pas être artificiellement bridé (allocation d'une fraction de CPU dans les hyperviseurs) ni partagé avec des processus intensifs en calcul, ce qui entraînerait une latence de changement de contexte très élevée.
+
+Le multithreading permet d’exploiter toute la capacité de traitement disponible en utilisant un thread par cœur de CPU. Cela est principalement utile pour le chiffrement SSL ou lorsque des débits de transfert de données supérieurs à 40 Gbps sont requis. Dans ces cas, il est essentiel d’éviter les communications entre plusieurs processeurs physiques, qui peuvent entraîner des goulets d’étranglement importants dans la pile réseau et dans HAProxy lui-même. Bien que cela puisse sembler contre-intuitif pour certains, la première action à entreprendre lorsqu’on rencontre des problèmes de performance est souvent de réduire le nombre de CPU sur lesquels HAProxy s’exécute.
+
+HAProxy nécessite uniquement l'exécutable haproxy et un fichier de configuration pour s'exécuter. Pour la journalisation, il est fortement recommandé de disposer d'un démon syslog correctement configuré ainsi que de rotations de journaux en place. Les journaux peuvent également être envoyés vers stdout/stderr, ce qui peut être utile dans les conteneurs. Les fichiers de configuration sont analysés avant le démarrage, puis HAProxy tente de lier tous les sockets d'écoute, et refuse de démarrer en cas d'échec. À partir de ce point, il ne peut plus échouer. Cela signifie qu'il n'y a aucun échec à l'exécution, et que s'il accepte de démarrer, il fonctionnera jusqu'à son arrêt.
+
+Une fois HAProxy lancé, il effectue exactement 3 opérations :
+
+- traiter les connexions entrantes ;
+
+- vérifier périodiquement l'état des serveurs (opération appelée « contrôle d'état ») ;
+
+- échanger des informations avec d'autres nœuds haproxy.
+
+Le traitement des connexions entrantes est de loin la tâche la plus complexe, car elle dépend de nombreuses possibilités de configuration, mais elle peut être résumée en 9 étapes ci-dessous :
+
+- accepter les connexions entrantes provenant des sockets d'écoute appartenant à une entité de configuration connue sous le nom de « frontal », qui référence une ou plusieurs adresses d'écoute ;
+
+- appliquer les règles spécifiques au frontal à ces connexions, ce qui peut entraîner leur blocage, la modification de certains en-têtes ou leur interception afin d'exécuter certains applets internes, tels que la page de statistiques ou l'interface CLI ;
+
+- transmettre ces connexions entrantes à une autre entité de configuration représentant une ferme de serveurs appelée « backend », qui contient la liste des serveurs et la stratégie de répartition de charge pour cette ferme ;
+
+- appliquer les règles spécifiques au backend à ces connexions ;
+
+- déterminer quel serveur doit recevoir la connexion selon la stratégie de répartition de charge ;
+
+- appliquer les règles spécifiques au backend aux données de réponse ;
+
+- appliquer les règles spécifiques au frontal aux données de réponse ;
+
+- émettre un journal pour rapporter en détail ce qui s'est passé ;
+
+- en HTTP, boucler sur la deuxième étape pour attendre une nouvelle requête, sinon fermer la connexion.
+
+Les frontaux et les backends sont parfois considérés comme des demi-proxies, car ils ne traitent qu’un seul côté d’une connexion bout-en-bout ; le frontal ne s’intéresse qu’aux clients, tandis que le backend ne s’intéresse qu’aux serveurs. HAProxy prend également en charge les proxies complets, qui sont exactement l’union d’un frontal et d’un backend. Lorsqu’un traitement HTTP est requis, la configuration est généralement divisée en frontaux et backends, car cela ouvre de nombreuses possibilités, puisqu’un frontal quelconque peut transférer une connexion à un backend quelconque. Avec des proxies ne gérant que le protocole TCP, l’utilisation de frontaux et de backends apporte rarement d’avantage, et la configuration peut être plus lisible avec des proxies complets.

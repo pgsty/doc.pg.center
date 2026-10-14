@@ -1,0 +1,100 @@
+---
+title: "12. Débogage et problèmes de performance"
+linkTitle: "12. Débogage"
+weight: 360
+description: "Méthodes d'investigation des crashs, blocages, latences et problèmes de débit"
+icon: fa-solid fa-bug
+module: [HAPROXY]
+categories: [Tâche]
+aliases:
+  - /haproxy/management/debugging-and-performance/
+upstream_link: "https://docs.haproxy.org/3.4/management.html"
+upstream_name: "HAProxy 3.4 Management Guide"
+upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 12"
+---
+
+Lorsque HAProxy est lancé avec l'option "-d", il reste en premier plan et affiche une ligne par événement, tel qu'une connexion entrante, la fin d'une connexion, ou chaque ligne d'en-tête de requête ou de réponse observée. Cette sortie de débogage est émise avant le traitement des contenus, elle ne tient donc pas compte des modifications locales. Son usage principal consiste à afficher les requêtes et réponses sans avoir à exécuter un analyseur réseau. La lecture de la sortie devient moins aisée lorsque plusieurs connexions sont gérées en parallèle, mais les scripts "debug2ansi" et "debug2html" présents dans le répertoire examples/ aident certainement dans ce cas en colorant la sortie.
+
+Si une requête ou une réponse HTTP/1.x est rejetée parce que HAProxy détecte qu'elle est mal formée, la meilleure action consiste à se connecter à l'interface CLI et à exécuter la commande « show errors », qui rapporte la dernière requête ou réponse HTTP/1.x incorrecte capturée pour chaque frontal et backend, accompagnée de toutes les informations nécessaires pour indiquer précisément le premier caractère du flux d'entrée rejeté. Cette information est parfois nécessaire pour prouver à des clients ou à des développeurs qu'un bug est présent dans leur code. Dans ce cas, il est souvent possible de relâcher les vérifications (tout en conservant les captures) en utilisant l'option « option accept-unsafe-violations-in-http-request » ou son équivalent pour les réponses provenant du serveur « option accept-unsafe-violations-in-http-response ». Veuillez consulter le manuel de configuration pour plus de détails.
+
+Exemple :
+
+```shell
+> show errors
+Total events captured on [13/Oct/2015:13:43:47.169]: 1
+
+[13/Oct/2015:13:43:40.918] frontend HAProxyLocalStats (#2): invalid request
+  backend <NONE> (#-1), server <NONE> (#-1), event #0
+  src 127.0.0.1:51981, session #0, session flags 0x00000080
+  HTTP msg state 26, msg flags 0x00000000, tx flags 0x00000000
+  HTTP chunk len 0 bytes, HTTP body len 0 bytes
+  buffer flags 0x00808002, out 0 bytes, total 31 bytes
+  pending 31 bytes, wrapping at 8040, error at position 13:
+
+  00000  GET /invalid request HTTP/1.1\r\n
+
+```
+
+La sortie de « show info » dans la CLI fournit plusieurs informations utiles concernant le taux maximal de connexions jamais atteint, le taux maximal de clés SSL jamais atteint, et, en général, toutes les informations pouvant aider à expliquer des problèmes temporaires liés à l'utilisation du CPU ou de la mémoire. Exemple :
+
+```shell
+> show info
+Name: HAProxy
+Version: 1.6-dev7-e32d18-17
+Release_date: 2015/10/12
+Nbproc: 1
+Process_num: 1
+Pid: 7949
+Uptime: 0d 0h02m39s
+Uptime_sec: 159
+Memmax_MB: 0
+Ulimit-n: 120032
+Maxsock: 120032
+Maxconn: 60000
+Hard_maxconn: 60000
+CurrConns: 0
+CumConns: 3
+CumReq: 3
+MaxSslConns: 0
+CurrSslConns: 0
+CumSslConns: 0
+Maxpipes: 0
+PipesUsed: 0
+PipesFree: 0
+ConnRate: 0
+ConnRateLimit: 0
+MaxConnRate: 1
+SessRate: 0
+SessRateLimit: 0
+MaxSessRate: 1
+SslRate: 0
+SslRateLimit: 0
+MaxSslRate: 0
+SslFrontendKeyRate: 0
+SslFrontendMaxKeyRate: 0
+SslFrontendSessionReuse_pct: 0
+SslBackendKeyRate: 0
+SslBackendMaxKeyRate: 0
+SslCacheLookups: 0
+SslCacheMisses: 0
+CompressBpsIn: 0
+CompressBpsOut: 0
+CompressBpsRateLim: 0
+ZlibMemUsage: 0
+MaxZlibMemUsage: 0
+Tasks: 5
+Run_queue: 1
+Idle_pct: 100
+node: wtap
+description:
+```
+
+Lorsqu’un problème semble apparaître de manière aléatoire sur une nouvelle version de HAProxy (par exemple, chaque deuxième requête est interrompue, crash occasionnel, etc.), il peut être utile d’activer l’empoisonnement de la mémoire afin que chaque appel à malloc() soit immédiatement suivi du remplissage de la zone mémoire avec un octet configurable. Par défaut, cet octet est 0x50 (caractère 'P' en ASCII), mais tout autre octet peut être utilisé, y compris zéro (ce qui aura le même effet qu’un calloc() et qui peut faire disparaître certains problèmes). L’empoisonnement de la mémoire est activé en ligne de commande à l’aide de l’option "-dM". Cela impacte légèrement les performances et n’est pas recommandé en production. Si un problème survient systématiquement avec cette option ou ne se produit jamais lorsque l’empoisonnement utilise l’octet zéro, vous avez clairement trouvé un bug et vous devez absolument le signaler. Sinon, si aucun changement clair n’est observé, le problème n’est pas lié.
+
+Lors du débogage de certains problèmes de latence, il est important d'utiliser à la fois strace et tcpdump sur la machine locale, ainsi qu'un autre tcpdump sur le système distant. La raison en est que des délais sont présents à chaque étape de la chaîne de traitement, et il est essentiel de déterminer celui qui cause la latence afin de savoir où intervenir. En pratique, le tcpdump local indiquera quand les données d'entrée arrivent. Strace indiquera quand haproxy reçoit ces données (via recv/recvfrom). Attention, openssl utilise des appels système read()/write() au lieu de recv()/send(). Strace indiquera également quand haproxy envoie les données, et tcpdump indiquera quand le système les envoie à l'interface. Ensuite, le tcpdump externe indiquera quand les données envoyées sont réellement reçues (puisqu'un tcpdump local ne montre que quand les paquets sont mis en file d'attente). L'avantage de capturer sur la machine locale est que strace et tcpdump utiliseront la même horloge de référence. Strace doit être utilisé avec "-tts200" pour obtenir des horodatages complets et rapporter des blocs de données suffisamment gros pour pouvoir être lus. Tcpdump doit être utilisé avec "-nvvttSs0" pour rapporter des paquets complets, des numéros de séquence réels et des horodatages complets.
+
+En pratique, les données reçues sont presque toujours immédiatement reçues par haproxy (sauf si le processeur est saturé ou si ces données sont invalides et non livrées). Si ces données sont reçues mais non envoyées, cela provient généralement d’un tampon de sortie saturé (c’est-à-dire que le destinataire ne consomme pas les données assez rapidement). Cela peut être confirmé en constatant que le polling ne signale pas la possibilité d’écrire sur le descripteur de fichier de sortie pendant un certain temps (il est souvent plus facile de repérer cela dans la sortie de strace lorsque les données finissent par partir, puis en remontant pour voir quand l’événement d’écriture a été signalé). Cela correspond généralement à un accusé de réception (ACK) reçu du destinataire, détecté par tcpdump. Une fois les données envoyées, elles peuvent passer un certain temps dans le système sans action. Là encore, la fenêtre de congestion TCP peut être limitée et empêcher ces données de sortir, en attendant un ACK pour ouvrir la fenêtre. Si le trafic est inactif et que les données mettent 40 ms ou 200 ms à sortir, il s’agit d’un autre problème (qui n’est pas un problème), à savoir que l’algorithme de Nagle empêche les paquets vides de sortir immédiatement, dans l’espoir qu’ils soient fusionnés avec des données ultérieures. HAProxy désactive automatiquement Nagle en mode TCP pur et dans les tunnels. Toutefois, il reste bien activé lors du transfert d’un corps HTTP (ce qui contribue à l’amélioration des performances en réduisant le nombre de paquets). Certaines applications HTTP non conformes peuvent être sensibles à la latence lors de la livraison de messages de réponse HTTP incomplets. Dans ce cas, vous devrez activer « option http-no-delay » pour désactiver Nagle afin de contourner leur conception, tout en gardant à l’esprit que tout autre proxy de la chaîne peut être affecté de manière similaire. Si tcpdump indique que les données partent immédiatement mais que l’autre extrémité ne les voit pas rapidement, cela peut signifier qu’il y a une liaison WAN saturée, un LAN saturé avec le contrôle de flux activé empêchant les données de sortir, ou plus couramment que HAProxy fonctionne effectivement dans une machine virtuelle et que, pour une raison quelconque, l’hyperviseur a décidé que les données n’avaient pas besoin d’être envoyées immédiatement. Dans les environnements virtualisés, les problèmes de latence sont presque toujours dus à la couche de virtualisation, aussi vaut-il la peine, pour gagner du temps, de comparer tout d’abord les sorties tcpdump dans la machine virtuelle et sur les composants externes. Toute différence doit être attribuée à l’hyperviseur et à ses pilotes associés.
+
+Lorsque des segments TCP SACK apparaissent dans les traces tcpdump (en utilisant -vv), cela signifie toujours que le côté émetteur dispose de la preuve de la perte d’un paquet. Le fait de ne pas les voir ne signifie pas qu’il n’y a pas de pertes, mais leur présence indique clairement que le réseau est sujet aux pertes. Les pertes sont normales sur un réseau, mais à un taux tel que les SACK ne sont pas perceptibles à l’œil nu. Si elles apparaissent fréquemment dans les traces, il vaut la peine d’examiner précisément ce qui se passe et où les paquets sont perdus. HTTP ne gère pas bien les pertes TCP, qui entraînent des latences importantes.
+
+La commande « netstat -i » affiche les statistiques par interface. Une interface dont le compteur Rx-Ovr augmente indique que le système ne dispose pas de ressources suffisantes pour recevoir tous les paquets entrants, qui sont perdus avant d’être traités par le pilote réseau. Rx-Drp indique que certains paquets reçus ont été perdus dans la pile réseau parce que l’application ne les traite pas assez rapidement. Cela peut survenir également lors de certaines attaques. Tx-Drp signifie que les files de sortie étaient pleines et que des paquets ont dû être abandonnés. En utilisant TCP, cela devrait être très rare, mais peut indiquer une liaison sortante saturée.

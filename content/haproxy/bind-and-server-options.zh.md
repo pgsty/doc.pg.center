@@ -1,0 +1,3199 @@
+---
+title: "5. 绑定与服务器选项"
+linkTitle: "5. 绑定与服务器选项"
+weight: 160
+description: "监听器、服务器、默认服务器和 DNS 解析选项"
+icon: fa-solid fa-network-wired
+module: [HAPROXY]
+categories: [参考]
+aliases:
+  - /haproxy/configuration/bind-and-server-options/
+upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
+upstream_name: "HAProxy 3.4 Configuration Manual"
+upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 5"
+---
+
+“bind”、“server” 和 “default-server” 关键字支持多种设置，具体取决于构建选项以及 HAProxy 所基于的系统。这些设置通常由一个单词组成，有时后接一个值，与 “bind” 或 “server” 语句位于同一行。所有这些选项均在本节中描述。
+
+## 5.1. 绑定选项 {#section-5-1}
+
+"bind" 关键字支持若干设置，这些设置均作为参数在同一行中传递。参数的排列顺序无关紧要，只要它们出现在绑定地址之后即可。所有这些参数均为可选。部分参数为单个单词（布尔值），而其他参数则需要在其后提供值。对于后者，值必须紧随参数名称之后提供。
+
+当前支持的设置如下：
+
+<a id="entry-5-1-accept-netscaler-cip"></a>
+
+**`accept-netscaler-cip <magic number>`**
+
+```haproxy
+accept-netscaler-cip <magic number>
+```
+
+强制使用 NetScaler 客户端 IP 插入协议，适用于在同一行中声明的任意 TCP 套接字所接受的连接。NetScaler 客户端 IP 插入协议规定，在任何使用地址的场景中均应采用传入连接的第 3/4 层地址，唯一例外是“tcp-request connection”规则仅能获取真实的连接地址。日志将反映协议中指示的地址，除非协议被违反，此时仍使用真实地址。该关键字结合外部组件支持，可作为 X-Forwarded-For 机制的高效且可靠的替代方案，后者并不总是可靠，甚至在某些情况下不可用。有关更细粒度地设置允许使用该协议的客户端，请参见“tcp-request connection expect-netscaler-cip”。
+
+<a id="entry-5-1-accept-proxy"></a>
+
+**`accept-proxy`**
+
+```haproxy
+accept-proxy
+```
+
+强制在由同一行中声明的任意套接字接收的每个连接上使用 PROXY 协议。支持 PROXY 协议版本 1 和版本 2，并能正确识别。PROXY 协议规定，所有使用地址的场景均应采用协议中指示的第 3/4 层地址，唯一例外是“tcp-request connection”规则仅能获取真实的连接地址。日志将反映协议中指示的地址，除非协议被违反，此时仍使用真实地址。该关键字结合外部组件支持，可作为 X-Forwarded-For 机制的高效且可靠的替代方案，后者并非始终可靠，甚至在某些情况下不可用。有关更细粒度地设置允许使用该协议的客户端，请参见“tcp-request connection expect-proxy”。
+
+<a id="entry-5-1-allow-0rtt"></a>
+
+**`allow-0rtt`**
+
+```haproxy
+allow-0rtt
+```
+
+在使用 TLSv1.3 时允许接收早期数据。由于安全考虑，此功能默认已禁用。由于存在重放攻击风险，仅当请求可安全重放时才应启用，即仅限幂等请求。对于不适用于早期数据的请求，可使用“wait-for-handshake”动作。在 QUIC 场景下，0-RTT 支持 QuicTLS、OpenSSL >= 3.5.2 和 AWS-LC。在 TCP/TLS 场景下，0-RTT 仅支持 OpenSSL，且要求客户端发送 ALPN，否则在握手发生前不会考虑早期数据。
+
+<a id="entry-5-1-alpn"></a>
+
+**`alpn <protocols>`**
+
+```haproxy
+alpn <protocols>
+```
+
+启用 TLS ALPN 扩展，并在 ALPN 上声明指定的协议列表作为支持的协议。协议列表由逗号分隔的协议名称组成，例如：http/1.1,http/1.0（不带引号）。此功能要求 SSL 库在编译时启用了 TLS 扩展支持（请通过 haproxy -vv 检查）。ALPN 扩展取代了初始的 NPN 扩展。在协议层，ALPN 是在 HTTPS 前端启用 HTTP/2 以及在 QUIC 前端启用 HTTP/3 所必需的。然而，当此类前端未设置 "npn"、"alpn" 或 "no-alpn" 时，常规 HTTPS 前端将默认使用 "h2,http/1.1"，QUIC 前端则默认使用 "h3"。OpenSSL 1.0.2 之前的版本不支持 ALPN，仅支持现已废弃的 NPN 扩展。截至本文撰写时，大多数浏览器仍同时支持 ALPN 和 NPN 以实现 HTTP/2，因此短期内回退至 NPN 仍可能有效。但必须尽可能使用 ALPN。未声明的协议不会被协商。例如，仅接受 HTTP/2 连接可配置如下：
+
+```text
+bind :443 ssl crt pub.pem alpn h2  # explicitly disable HTTP/1.1
+```
+
+QUIC 仅支持 h3 和 hq-interop 作为 ALPN。h3 用于 HTTP/3，hq-interop 用于 HTTP/0.9 和 QUIC 互操作性测试工具（参见 <https://interop.seemann.io>）。每个 "alpn" 语句将替换之前的设置。如需移除这些设置，请使用 "no-alpn"。
+
+请注意，某些旧版浏览器（如 Firefox 88）曾对 H2 上的 WebSocket 存在兼容性问题。若遇到此类配置，可能需要显式地在 "alpn" 字符串中禁用 HTTP/2，将其强制设为 "http/1.1" 或 "no-alpn"，或全局启用 "h2-workaround-bogus-websocket-clients"。
+
+<a id="entry-5-1-backlog"></a>
+
+**`backlog <backlog>`**
+
+```haproxy
+backlog <backlog>
+```
+
+将套接字的 backlog 队列长度设置为该值。若未指定或值为 0，则使用前端的 backlog 队列长度，通常默认为 maxconn 的值。
+
+<a id="entry-5-1-ca-file"></a>
+
+**`ca-file <cafile>`**
+
+```haproxy
+ca-file <cafile>
+```
+
+此设置仅在编译时启用 OpenSSL 支持时可用。它指定一个 PEM 文件，用于加载用于验证客户端证书的 CA 证书。可加载包含多个 CA 的目录，在此情况下，HAProxy 将尝试加载目录中所有 ".pem"、".crt"、".cer" 和 .crl 文件，以点开头的文件将被忽略。
+
+警告：可使用 `@system-ca` 参数替代 `cafile`，以使用系统中受信任的 CA，方式与 `server` 指令相同。除非清楚自己在做什么，否则不得使用该参数。以这种方式配置意味着绑定将接受由系统中任意 CA 生成的客户端证书，这极其不安全。
+
+<a id="entry-5-1-ca-ignore-err"></a>
+
+**`ca-ignore-err [all|<errorID>,...]`**
+
+```haproxy
+ca-ignore-err [all|<errorID>,...]
+```
+
+此设置仅在编译时启用了 OpenSSL 支持时可用。设置一个以逗号分隔的错误 ID 列表，用于在验证深度大于 0 时忽略这些错误。错误 ID 可以是数值，也可以是 OpenSSL 文档中提供的常量名（X509_V_ERR）：
+<https://www.openssl.org/docs/manmaster/man3/X509_STORE_CTX_get_error.html#ERROR-CODES> 建议使用常量名，因为数值可能在 OpenSSL 新版本中发生变化。若设置为 'all'，则忽略所有错误。忽略错误时不会中止 SSL 握手。
+
+<a id="entry-5-1-ca-sign-file"></a>
+
+**`ca-sign-file <cafile>`**
+
+```haproxy
+ca-sign-file <cafile>
+```
+
+此设置仅在编译时启用 OpenSSL 支持时可用。它指定一个 PEM 文件，其中包含用于生成和签署服务器证书的 CA 证书及 CA 私钥。当启用证书动态生成时，此项为必填设置。详情请参见 'generate-certificates'。
+
+<a id="entry-5-1-ca-sign-pass"></a>
+
+**`ca-sign-pass <passphrase>`**
+
+```haproxy
+ca-sign-pass <passphrase>
+```
+
+此设置仅在编译时启用了 OpenSSL 支持时可用。它是 CA 私钥的密码。此设置为可选，仅在启用证书动态生成时使用。详情请参见 'generate-certificates'。
+
+<a id="entry-5-1-ca-verify-file"></a>
+
+**`ca-verify-file <cafile>`**
+
+```haproxy
+ca-verify-file <cafile>
+```
+
+此设置指定一个 PEM 文件，从中加载用于验证客户端证书的 CA 证书。该设置指定的 CA 证书不得包含在服务器 Hello 消息中发送的 CA 名称列表内。通常，“ca-file”应配置为中间证书，而“ca-verify-file”应配置为用于构建证书链末端的证书，例如根 CA 证书。
+
+<a id="entry-5-1-cc"></a>
+
+**`cc <algo>`**
+
+```haproxy
+cc <algo>
+```
+
+此设置仅在定义了 TCP_CONGESTION 的系统上可用，并已在 Linux 和 FreeBSD 上完成验证。该设置指定一个 TCP 拥塞控制算法名称，并配置监听器在从该监听器接受的所有连接上使用此算法。典型名称包括 "reno"、"cubic"，具体取决于操作系统。在某些系统上，配置特定算法可能需要特殊权限。在 Linux 上，可用算法列表可在 sysctl "net.ipv4.tcp_available_congestion_control" 中找到，而无需特权即可使用的算法列表位于 "net.ipv4.tcp_allowed_congestion_control"。若需访问需要额外权限的算法，可能需要 "cap_net_admin" 能力（参见全局段中的 "setcap"）。若无法配置特定拥塞控制算法，将保持默认算法不变，并发出警告以报告该问题。另请参阅："cc" 服务器关键字（[第 5.2 节](/zh/haproxy/bind-and-server-options/#section-5-2)）。示例：
+
+```text
+frontend public
+    bind :443 cc bbr   # use the BBR algorithm for high bandwidths
+```
+
+<a id="entry-5-1-ciphers"></a>
+
+**`ciphers <ciphers>`**
+
+```haproxy
+ciphers <ciphers>
+```
+
+此设置仅在编译时启用了 OpenSSL 支持时可用。它用于设置在 SSL/TLS 握手过程中协商的密码套件（cipher suite）列表的描述字符串，适用于 TLSv1.2 及以下版本。该字符串的格式由 OpenSSL 手册页中的“man 1 ciphers”定义。有关背景信息和建议，请参阅例如 (<https://wiki.mozilla.org/Security/Server_Side_TLS>) 和 (<https://mozilla.github.io/server-side-tls/ssl-config-generator/>)。对于 TLSv1.3 的密码套件配置，请参阅 “ciphersuites” 关键字。
+
+<a id="entry-5-1-ciphersuites"></a>
+
+**`ciphersuites <ciphersuites>`**
+
+```haproxy
+ciphersuites <ciphersuites>
+```
+
+当编译时启用了 OpenSSL 支持且使用 OpenSSL 1.1.1 或更高版本构建 HAProxy 时，此设置才可用。该设置用于指定在 TLSv1.3 握手过程中协商的密码套件列表的描述字符串。字符串格式由 OpenSSL 手册页中 “man 1 ciphers” 的 “ciphersuites” 部分定义。对于 TLSv1.2 及更早版本的密码套件配置，请参阅 “ciphers” 关键字。此设置可能接受 TLSv1.2 密码套件，但该行为未在文档中说明，不建议使用，因其可能存在不一致或缺陷。OpenSSL 的默认 TLSv1.3 密码套件为：
+"TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256"
+
+TLSv1.3 仅支持 5 种密码套件：
+
+- TLS_AES_128_GCM_SHA256
+- TLS_AES_256_GCM_SHA384
+- TLS_CHACHA20_POLY1305_SHA256
+- TLS_AES_128_CCM_SHA256
+- TLS_AES_128_CCM_8_SHA256
+
+示例：
+
+```text
+ciphers ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-RSA-AES128-GCM-SHA256
+ciphersuites TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256
+```
+
+<a id="entry-5-1-client-sigalgs"></a>
+
+**`client-sigalgs <sigalgs>`**
+
+```haproxy
+client-sigalgs <sigalgs>
+```
+
+此设置仅在编译时启用 OpenSSL 支持时可用。它用于设置描述与客户端认证相关的签名算法列表的字符串，该列表在协商过程中确定。字符串格式由 OpenSSL 手册页中的“man 3 SSL_CTX_set1_client_sigalgs”定义。若未明确特定使用场景，不建议使用此设置。
+
+<a id="entry-5-1-crl-file"></a>
+
+**`crl-file <crlfile>`**
+
+```haproxy
+crl-file <crlfile>
+```
+
+此设置仅在编译时启用了 OpenSSL 支持时可用。它指定一个 PEM 文件，用于加载证书吊销列表，以验证客户端证书。需要为证书信任链中每个证书颁发机构的证书提供相应的证书吊销列表。
+
+<a id="entry-5-1-crt"></a>
+
+**`crt <cert>`**
+
+```haproxy
+crt <cert>
+```
+
+此设置仅在编译时启用了 OpenSSL 支持的情况下可用。
+
+HAProxy 使用缓存系统，证书文件仅在证书存储中加载一次，后续每次使用 "crt" 关键字时均会使用该缓存版本。当证书在 "crt-store" 中声明时，证书存储将从此处填充，不再通过检测文件扩展名尝试加载额外文件。
+
+指定一个包含所需证书及关联私钥的 PEM 文件。
+该文件可通过将多个 PEM 文件合并为一个来构建（例如：cat cert.pem key.pem > combined.pem）。
+如果CA 要求提供中间证书，也可将其合并到此文件中。
+中间证书也可通过 "issuers-chain-path" 指令在目录中共享。
+
+如果该文件不包含私钥，HAProxy 将尝试在相同路径下、附加 ".key" 后缀的位置加载密钥。
+
+如果所使用的 OpenSSL 支持 Diffie-Hellman，则会加载此文件中的参数。
+
+如果使用目录名而非 PEM 文件，则该目录中所有文件将按字母顺序加载，除非文件名以 '.key'、'.issuer'、'.ocsp' 或 '.sctl' 结尾（保留扩展名）。以点号开头的文件也会被忽略。该指令可多次指定，以从多个文件或目录加载证书。当客户端提供有效的 TLS 服务器名称指示（SNI）字段，且该字段匹配证书中的 CN 或备用主题之一时，证书将被呈现给客户端。支持通配符，其中通配符字符 '\*' 用于替代主机名的第一个组件（例如 \*.example.org 匹配 [www.example.org](http://www.example.org)，但不匹配 [www.sub.example.org](http://www.sub.example.org)）。若使用空目录，HAProxy 将不会启动，除非使用了 "strict-sni" 关键字。
+
+如果客户端未提供 SNI，或 SSL 库不支持 TLS 扩展，或客户端提供的 SNI 主机名与任何证书均不匹配，则将呈现第一个加载的证书。这意味着在从目录加载证书时，强烈建议首先加载默认证书文件，或确保其始终为目录中的第一个文件。若需选择多个默认证书（1 个 RSA 和 1 个 ECDSA），有以下 3 种选项：
+
+- 可将多证书捆绑配置为首个证书（`crt foobar.pem`），其中现有文件为 `foobar.pem.ecdsa` 和 `foobar.pem.rsa`。
+- 或在 crt-list 行中为每个证书配置 '\*' 过滤器。
+- 可使用 'default-crt' 关键字。
+
+请注意，同一证书可多次加载而不会产生副作用。
+
+部分证书颁发机构（如 GoDaddy）在申请证书时提供服务器类型下拉列表，但该列表中不包含 HAProxy。若出现此情况，请务必选择证书颁发机构认为需要中间证书的 Web 服务器类型（例如，GoDaddy 选择 Apache Tomcat 可获取正确的证书包，但选择其他类型如 NGINX 等可能导致获取错误的证书包，部分客户端将无法正常工作）。
+
+对于每个 PEM 文件，HAProxy 会检查同路径下是否存有以 ".ocsp" 为后缀的文件。若找到该文件，将自动启用 TLS 证书状态请求扩展（亦称“OCSP 装订”，OCSP stapling）支持。该文件内容为可选项。若不为空，必须包含以 DER 格式编码的有效 OCSP 响应。有效的 OCSP 响应必须满足以下规则：状态必须为良好，必须是针对 PEM 文件中证书的单一响应，且在添加时必须处于有效状态。若不满足上述规则，OCSP 响应将被忽略，并发出警告。为确定 OCSP 响应适用于哪个证书，需提供颁发者证书。若 PEM 文件中未找到颁发者证书，HAProxy 将尝试从与 PEM 文件同路径下以 ".issuer" 为后缀的文件中加载，若该文件不存在则操作失败并报错。
+
+对于每个 PEM 文件，HAProxy 还会检查同路径下附加 ".sctl" 后缀的文件是否存在。若找到该文件，将启用证书透明度（Certificate Transparency，RFC6962）TLS 扩展。该文件必须包含符合 RFC 描述的有效签名证书时间戳列表。HAProxy 会解析文件以检查基本语法，但不会验证签名。
+
+在某些情况下，支持多种密钥类型（例如，在向客户端提供的密码套件中同时支持 RSA 和 ECDSA）是可取的。这使得支持 EC 证书的客户端能够使用 EC 密码套件，同时仍可兼容仅支持 RSA 的旧版客户端。
+
+为实现此功能，需使用 OpenSSL 1.1.1。可通过为每种证书类型提供一个 crt 条目，或采用 HAProxy 1.8 之前所必需的“证书捆绑”方式来配置此行为。参见“ssl-load-extra-files”。
+
+<a id="entry-5-1-crt-ignore-err"></a>
+
+**`crt-ignore-err <errors>`**
+
+```haproxy
+crt-ignore-err <errors>
+```
+
+此设置仅在编译时启用了 OpenSSL 支持时可用。设置一个以逗号分隔的错误 ID 列表，用于在验证深度 == 0 时忽略这些错误。错误 ID 可以是数值，也可以是常量名称（X509_V_ERR），该名称可在 OpenSSL 文档中找到：
+<https://www.openssl.org/docs/manmaster/man3/X509_STORE_CTX_get_error.html#ERROR-CODES> 建议使用常量名称，因为数值可能在 OpenSSL 新版本中发生变化。若设置为 'all'，则忽略所有错误。忽略错误时不会中止 SSL 握手。
+
+<a id="entry-5-1-crt-list"></a>
+
+**`crt-list <file>`**
+
+```haproxy
+crt-list <file>
+```
+
+此设置仅在编译时启用 OpenSSL 支持时可用。它指定一个 PEM 文件列表，每个证书可选配 SSL 配置和 SNI 过滤器，每行格式如下：
+
+```text
+<crtfile> [\[<sslbindconf> ...\]] [[!]<snifilter> ...]
+```
+
+空行以及以井号（'#'）开头的行将被忽略。
+
+可通过统计信息套接字动态操作 crt-list。（参见管理指南中的“add ssl crt-list”、“del ssl crt-list”和“show ssl crt-list”）
+
+crt-list 通常为专用文件，但通过 "crt" 指令加载的目录在内部也表示为 crt-list。前端中的 "ssl-f-use" 指令同样声明了一个与该前端关联的 crt-list。
+
+crtfile:
+
+```text
+这是证书文件名；若证书在其他位置声明（例如通过 CLI 或在 crt-store 中使用别名），则为其标识符。
+
+同一 <crtfile> 可以在多行中使用不同选项和过滤器。
+
+crt-list 支持多证书捆绑（参见 "ssl-load-extra-files"），只需在 <crtfile> 中指定基本名称。
+HAProxy 加载文件时会在内部复制 crt-list 行，为各行添加算法扩展名（.rsa、.ecdsa、.dsa）。
+```
+
+sslbindconf:
+
+```text
+ <sslbindconf> 支持 bind 行中的以下关键字（参见第 5.1 节：绑定选项）：
+
+ - allow-0rtt
+ - alpn
+ - ca-file
+ - ca-verify-file
+ - ciphers
+ - ciphersuites
+ - client-sigalgs
+ - crl-file
+ - curves
+ - ecdhe
+ - no-alpn
+ - no-ca-names
+ - npn
+ - sigalgs
+ - ssl-min-ver
+ - ssl-max-ver
+ - verify
+
+ <sslbindconf> 还支持 crt-store 的 load 关键字中的以下选项（参见第 12.7.1 节：加载选项）：
+
+ - crt
+ - key
+ - ocsp
+ - issuer
+ - sctl
+ - ocsp-update
+
+<sslbindconf> 继承 bind 行中的参数；若未指定这些参数，则继承默认选项。
+<sslbindconf> 中指定的参数会覆盖继承的设置。
+```
+
+snifilter:
+
+```text
+在 crt-list 行中使用 <snifilter> 参数时，握手期间不再使用该行证书的 CN 和 SAN
+选择证书，而是使用 <snifilter>。
+
+<snifilter> 是以空格分隔的条目列表，可以包含域名或通配符。
+通配符采用 DNS 通配符格式，即条目的首字符为单个星号。
+可在单个域名前添加 '!' 作为否定过滤器，将其从通配符匹配中排除。
+在 * 前添加 ! 会被忽略；同一行中只有否定过滤器而没有通配符的情况也不受支持。
+特殊条目 '*' 用于指定默认的证书，在没有匹配域名时作为回退。
+
+客户端提供有效的 TLS Server Name Indication 字段，且匹配某个 SNI 过滤器，
+或匹配 <crtfile> 的 CN 和 SAN 时，就会收到相应证书。
+匹配算法先在列表中查找肯定域名条目，找不到时再尝试查找通配符。
+若通配符匹配，haproxy 会检查同一行中的否定过滤器，必要时取消匹配。
+使用多种密钥算法（RSA,ECDSA,DSA）时，HAProxy 会尝试为每种类型匹配一个证书，
+再根据客户端支持的算法选择合适的证书。
+
+若客户端未提供 SNI，或没有匹配的证书，则回退到默认的证书之一。
+可使用 'strict-sni' 选项禁用此回退。
+定义多个默认的证书时，HAProxy 能根据客户端支持的算法选择合适的 ECDSA 或 RSA 证书。
+
+bind 行中声明的首个证书用作默认的证书，不论来自 crt 还是 crt-list 选项。
+也可声明 '*' 过滤器，将该证书添加到默认的证书列表中。
+为使配置更清晰，可在列表开头显式声明默认的证书（使用 '*' 过滤器），
+避免在它之前添加隐式的默认项。
+由于 crt-list 中的多证书捆绑会按算法复制，只有一种算法占据 crt-list 的首行，
+并被视为默认项。要将整个捆绑指定为默认项，可声明 '*' 作为过滤器，或在 bind 行中设置。
+
+可在统计信息套接字上使用 "show ssl sni" 命令调试配置。
+（参见管理指南中的 "show ssl sni"。）
+```
+
+示例：
+
+```shell
+# comment
+default.pem.rsa *
+default.pem.ecdsa *
+cert2.pem [alpn h2,http/1.1]
+certW.pem *.domain.tld !secure.domain.tld
+certS.pem [curves X25519:P-256 ciphers ECDHE-ECDSA-AES256-GCM-SHA384] secure.domain.tld
+foo.crt [key bar.pem ocsp foo.ocsp ocsp-update on] foo.bar.com
+```
+
+<a id="entry-5-1-default-crt"></a>
+
+**`default-crt <cert>`**
+
+```haproxy
+default-crt <cert>
+```
+
+此选项的功能与 "crt" 选项相同，区别在于该证书也将作为默认证书使用。可以添加多个默认证书，例如同时配置 ECDSA 和 RSA 证书，但添加更多默认证书并无实际意义。
+
+此选项不会禁用隐式默认证书。若在任何 'default-crt' 或其他 'crt' 之前声明了 'crt' 证书，该证书仍会被用作默认证书。
+
+当绑定行未使用 "strict-sni" 选项时，将使用默认证书。当客户端未使用服务器名称扩展，或服务器名称与任何已配置的证书不匹配时，将提供默认证书。
+
+示例：
+
+```shell
+# this bind line has 2 default certificates
+bind *:443 default-crt foobar.pem.rsa default-crt foobar.pem.ecdsa crt website.pem.rsa
+
+# this bind line has 3 default certificates
+bind *:443 crt website.pem.rsa default-crt foobar.pem.rsa default-crt foobar.pem.ecdsa
+```
+
+另请参见“crt”关键字。
+
+<a id="entry-5-1-curves"></a>
+
+**`curves <curves>`**
+
+```haproxy
+curves <curves>
+```
+
+此设置仅在编译时启用 OpenSSL 支持时可用。它用于设置在使用 ECDHE 进行 SSL/TLS 握手时协商的椭圆曲线算法列表（“曲线套件”）的描述字符串。字符串格式为以冒号分隔的曲线名称列表。示例：X25519:P-256（不含引号）。当设置 "curves" 时，"ecdhe" 参数将被忽略。
+
+<a id="entry-5-1-defer-accept"></a>
+
+**`defer-accept`**
+
+```haproxy
+defer-accept
+```
+
+是一个可选关键字，仅在某些 Linux 内核上受支持。它表示连接仅在有数据到达时才会被接受，最迟在首次重传后被接受。该选项应仅用于客户端首先发起通信的协议（例如 HTTP）。通过确保在连接建立时大部分请求数据已就绪，可略微提升性能。另一方面，该选项无法检测未发送数据的连接。请注意，在 2.6.31 及更早的所有内核中此选项均存在缺陷，因为连接始终不会被接受，直到客户端发送数据。这可能导致前端防火墙看到已建立的连接，而代理仅在 SYN_RECV 时才看到该连接。此选项仅对 TCPv4/TCPv6 套接字有效，其他类型的套接字将忽略该选项。
+
+<a id="entry-5-1-ecdhe"></a>
+
+**`ecdhe <named curve>`**
+
+```haproxy
+ecdhe <named curve>
+```
+
+此设置仅在编译时启用了 OpenSSL 支持时可用。它用于设置生成 ECDH 临时密钥所使用的命名曲线（RFC 4492）。默认使用的命名曲线为 prime256v1。
+
+<a id="entry-5-1-ech"></a>
+
+**`ech <dir> [ EXPERIMENTAL ]`**
+
+```haproxy
+ech <dir> [ EXPERIMENTAL ]
+```
+
+将 `<dir>` 中的所有 ECH 密钥应用到绑定行。文件必须具有 .ech 扩展名，并且 ECH 必须使用 PEM 文件格式。（<https://datatracker.ietf.org/doc/draft-farrell-tls-pemesni/>）
+
+此关键字用于在共享模式下启用 ECH，由 HAProxy 同时充当 TLS 端点与 ECH 端点。参见 <https://datatracker.ietf.org/doc/draft-ietf-tls-esni/>
+
+此功能为实验性功能，需在 global 段中启用 "expose-experimental-directives" 指令。该功能还要求使用支持 ECH 的 OpenSSL 版本（<https://github.com/openssl/openssl/tree/feature/ech>），且 HAProxy 必须以 USE_ECH=1 编译。AWS-LC 的 ECH API 不受支持。
+
+示例：
+
+```shell
+$ openssl ech -public_name foobar.com -out /etc/haproxy/echkeydir/foobar.com.ech
+
+$ cat haproxy.cfg
+[...]
+bind :443 ech /etc/haproxy/echkeydir/ ssl crt example.com.pem
+
+// Use the ECHCONFIG section of your .ech file
+$ openssl s_client -tls1_3 -connect example.com:443 -servername example.com \
+-ech_config_list AD3+DQA5cwAgACB6ybtgtFYoM5r8nJSotus4c7K0EG..9vYmFyLmNvbQAA
+```
+
+<a id="entry-5-1-expose-fd-listeners"></a>
+
+**`expose-fd listeners`**
+
+```haproxy
+expose-fd listeners
+```
+
+此选项仅在使用统计信息套接字时可用。它使统计信息套接字具备将监听器文件描述符传递给另一个 HAProxy 进程的能力。在主进程/工作进程模式下，此操作已不再必要，监听器将通过主进程与工作进程之间的内部套接字对自动传递。参见管理指南中的 "-x"。
+
+<a id="entry-5-1-force-sslv3"></a>
+
+**`force-sslv3`**
+
+```haproxy
+force-sslv3
+```
+
+此选项强制仅在从该监听器创建的 SSL 连接中使用 SSLv3。在高连接速率场景下，SSLv3 通常比 TLS 对应版本的开销更低。此选项也可在全局语句 "ssl-default-bind-options" 中使用。另请参见 "ssl-min-ver" 和 "ssl-max-ver"。
+
+<a id="entry-5-1-force-tlsv10"></a>
+
+**`force-tlsv10`**
+
+```haproxy
+force-tlsv10
+```
+
+此选项强制仅在从此监听器创建的 SSL 连接中使用 TLSv1.0。该选项也可在全局语句 "ssl-default-bind-options" 中使用。另请参见 "ssl-min-ver" 和 "ssl-max-ver"。
+
+<a id="entry-5-1-force-tlsv11"></a>
+
+**`force-tlsv11`**
+
+```haproxy
+force-tlsv11
+```
+
+此选项强制仅在从此监听器创建的 SSL 连接中使用 TLSv1.1。该选项也可在全局语句 "ssl-default-bind-options" 中使用。另请参见 "ssl-min-ver" 和 "ssl-max-ver"。
+
+<a id="entry-5-1-force-tlsv12"></a>
+
+**`force-tlsv12`**
+
+```haproxy
+force-tlsv12
+```
+
+此选项强制仅在从此监听器创建的 SSL 连接中使用 TLSv1.2。该选项也可在全局语句 "ssl-default-bind-options" 中使用。另请参阅 "ssl-min-ver" 和 "ssl-max-ver"。
+
+<a id="entry-5-1-force-tlsv13"></a>
+
+**`force-tlsv13`**
+
+```haproxy
+force-tlsv13
+```
+
+此选项强制仅在从此监听器创建的 SSL 连接中使用 TLSv1.3。该选项也可在全局语句 "ssl-default-bind-options" 中使用。另请参见 "ssl-min-ver" 和 "ssl-max-ver"。
+
+<a id="entry-5-1-generate-certificates"></a>
+
+**`generate-certificates`**
+
+```haproxy
+generate-certificates
+```
+
+此设置仅在编译时启用 OpenSSL 支持时可用。它可启用动态 SSL 证书生成。需要 CA 证书及其私钥（参见 'ca-sign-file'）。当 HAProxy 配置为透明正向代理时，由于向客户端呈现的证书存在通用名称不匹配问题，SSL 请求会出错。启用此选项后，HAProxy 将尝试使用客户端提供的 SNI 主机名伪造证书。仅当没有证书与 SNI 主机名匹配时（参见 'crt-list'）才执行此操作。
+
+发生证书生成错误时，连接将回退到默认证书。使用 'strict-sni' 时，不会使用默认证书，连接将导致握手失败。
+
+当 HAProxy 配置为反向代理时，也可用于简化包含多个后端的架构部署。
+
+创建 SSL 证书是一项开销较大的操作，因此使用 LRU 缓存来存储伪造的证书（参见 'tune.ssl.ssl-ctx-cache-size'）。该机制会增加 HAProxy 的内存占用，以降低同一证书被多次使用时的延迟。
+
+<a id="entry-5-1-gid"></a>
+
+**`gid <gid>`**
+
+```haproxy
+gid <gid>
+```
+
+设置 Unix 套接字的组为指定的系统 gid。也可在全局段的 "unix-bind" 语句中默认设置。请注意，某些平台会直接忽略此设置。此设置与 "group" 设置等效，不同之处在于使用组 ID 而非组名。此设置对非 Unix 套接字无效。
+
+<a id="entry-5-1-group"></a>
+
+**`group <group>`**
+
+```haproxy
+group <group>
+```
+
+设置 Unix 套接字所属的系统组。该设置也可在全局段的 "unix-bind" 语句中默认指定。请注意，某些平台会直接忽略此设置。此设置与 "gid" 设置等效，区别在于使用组名而非其 gid。该设置对非 Unix 套接字无效。
+
+<a id="entry-5-1-guid-prefix"></a>
+
+**`guid-prefix <string>`**
+
+```haproxy
+guid-prefix <string>
+```
+
+为当前绑定行上分配的每个监听套接字生成区分大小写的全局唯一 ID。前缀将与当前绑定行上监听器的位置索引连接，以字符“-”作为分隔符。有关其格式的更多信息，请参见“guid”代理关键字的描述。另请参见“shm-stats-file”。
+
+<a id="entry-5-1-id"></a>
+
+**`id <id>`**
+
+```haproxy
+id <id>
+```
+
+固定套接字 ID。默认情况下，套接字 ID 会自动分配，但有时将其固定可以更方便地进行监控。该值必须为严格正数，且在监听器/前端范围内唯一。此选项仅在定义单个套接字时可用。
+
+<a id="entry-5-1-idle-ping"></a>
+
+**`idle-ping <delay>`**
+
+```haproxy
+idle-ping <delay>
+```
+
+可用于以下上下文：tcp、http、log
+
+定义空闲前端连接的周期性存活检测间隔。如果对等节点在下一次预定检测前无法响应，则关闭连接；否则，刷新客户端超时并保持连接。请注意，http-request/http-keep-alive 定时器与 idle-ping 定时器并行运行，且不会因 idle-ping 而刷新。
+
+此功能依赖于特定底层协议支持。目前，仅 H2 mux 实现了该功能。
+其他协议会直接忽略 Idle-ping。
+
+此选项在使用反向 HTTP 时尤为有用。在 bind 行上设置该选项，对负责主动发起连接的对等节点尤为有用，该节点随后将通过这些连接接收入站流量。
+
+<a id="entry-5-1-interface"></a>
+
+**`interface <interface>`**
+
+```haproxy
+interface <interface>
+```
+
+限制套接字绑定到特定网络接口。指定后，仅来自该特定接口的数据包会被套接字处理。此功能当前仅在 Linux 上受支持。接口必须是主系统接口，而非别名接口。若前端绑定到不同接口，可将多个前端绑定至同一地址。请注意，绑定到网络接口需要 root 权限。该参数仅与 TCPv4/TCPv6 套接字兼容。指定后，返回流量将使用与入站流量相同的接口及其关联的路由表，即使已配置通过不同接口的显式路由。此机制在需使同一客户端 IP 地址能够访问位于不同接口上的前端时，可用于解决非对称路由问题。
+
+<a id="entry-5-1-ktls"></a>
+
+**`ktls <on|off> [ EXPERIMENTAL ]`**
+
+```haproxy
+ktls <on|off> [ EXPERIMENTAL ]
+```
+
+启用或禁用套接字的 kTLS。若启用，当内核支持且加密算法兼容时，将使用 kTLS。此功能仅在 Linux 内核 4.17 及以上版本中可用。请注意，部分网络驱动程序和/或 TLS 栈可能将 kTLS 使用限制为仅支持 TLS v1.2。参见“force-tlsv12”。
+
+<a id="entry-5-1-label"></a>
+
+**`label <label>`**
+
+```haproxy
+label <label>
+```
+
+为这些套接字设置一个可选标签。该标签可用于按标签分组套接字，与 bind 行的声明位置无关。
+
+<a id="entry-5-1-level"></a>
+
+**`level <level>`**
+
+```haproxy
+level <level>
+```
+
+此设置仅用于统计信息套接字，以限制可通过套接字发出的命令类型。其他套接字会忽略此设置。`<level>` 可能为以下之一：
+
+- "user" 为最低权限级别；仅可读取非敏感的统计信息，且不允许进行任何更改。在难以限制对套接字访问的系统上，此级别具有实际意义。
+- "operator" 为默认级别，适用于大多数常见场景。所有数据均可读取，仅允许执行非敏感的更改（例如，清空最大计数器）。
+- "admin" 应谨慎使用，因为所有操作均被允许（例如，清空所有计数器）。
+
+<a id="entry-5-1-maxconn"></a>
+
+**`maxconn <maxconn>`**
+
+```haproxy
+maxconn <maxconn>
+```
+
+将套接字的并发连接数限制为该值。多余的连接将保留在系统的 backlog 队列中，直到有连接被释放。若未指定，该限制将与前端的 maxconn 值相同。请注意，当使用端口范围或多地址时，该值将应用于每个套接字。此设置可对高成本套接字（例如 SSL 套接字）施加不同的限制，这类套接字可能轻易耗尽全部内存。
+
+<a id="entry-5-1-mode"></a>
+
+**`mode <mode>`**
+
+```haproxy
+mode <mode>
+```
+
+设置用于定义 Unix 套接字访问权限的八进制模式。该设置也可在全局段的 "unix-bind" 语句中默认配置。请注意，某些平台会直接忽略此设置。该设置对非 Unix 套接字无效。
+
+<a id="entry-5-1-mss"></a>
+
+**`mss <maxseg>`**
+
+```haproxy
+mss <maxseg>
+```
+
+设置要通告的 TCP 最大段大小（MSS）值，用于传入连接。此选项可用于对特定端口强制设置较低的 MSS，例如通过 VPN 传输的连接。请注意，该功能依赖于内核特性，理论上在 Linux 下受支持，但所有 2.6.28 之前版本均存在缺陷。在其他操作系统上可能无法正常工作。该功能也可能不会改变通告的值，而是改变传出段的实际有效大小。在以太网网络上，TCPv4 的常见通告值为 1460 = 1500（MTU） - 40（IP + TCP）。若该值为正，将作为通告的 MSS 使用；若为负，则表示将传入连接的通告 MSS 减少指定数值，用于传出段。此参数仅与 TCP v4/v6 套接字兼容。
+
+<a id="entry-5-1-name"></a>
+
+**`name <name>`**
+
+```haproxy
+name <name>
+```
+
+为这些套接字设置一个可选名称，该名称将在统计信息页面上报告。
+
+<a id="entry-5-1-namespace"></a>
+
+**`namespace <name>`**
+
+```haproxy
+namespace <name>
+```
+
+在 Linux 上，可以指定套接字所属的网络命名空间。该指令允许显式地将监听器绑定到与默认命名空间不同的命名空间。请参阅操作系统的文档以获取有关网络命名空间的更多详细信息。
+
+<a id="entry-5-1-nbconn"></a>
+
+**`nbconn <nbconn> [ EXPERIMENTAL ]`**
+
+```haproxy
+nbconn <nbconn> [ EXPERIMENTAL ]
+```
+
+此设置仅适用于使用反向 HTTP 的监听器实例。它将定义并行挂载的连接数量。若未指定，默认值为 1。
+
+反向 HTTP 当前仍处于积极开发阶段。配置机制未来可能发生变化。因此，该功能在内部被标记为实验性，这意味着必须在本指令之前出现一行 "expose-experimental-directives"。
+
+<a id="entry-5-1-nice"></a>
+
+**`nice <nice>`**
+
+```haproxy
+nice <nice>
+```
+
+设置从套接字发起的连接的“优先级”值。该值必须在 -1024..1024 范围内（含），默认值为零。正值表示此类连接对其他连接更友好，更容易让出调度器中的执行位置。相反，负值表示连接希望以高于其他连接的优先级运行。该差异仅在系统负载较高、接近饱和时显现。对于低延迟或系统管理服务，建议使用负值；对于 CPU 密集型任务（如 SSL 处理或大批量传输），通常推荐使用高值，因为这些任务对延迟不敏感。例如，可对 SMTP 套接字使用正值，对 RDP 套接字使用负值。
+
+<a id="entry-5-1-no-alpn"></a>
+
+**`no-alpn`**
+
+```haproxy
+no-alpn
+```
+
+禁用 ALPN 处理（技术上讲，这会将 ALPN 字符串设置为空，使其不会被通告）。此选项可用于取消先前配置的 "alpn" 设置，并禁用应用层协议协商。也可用于阻止 HTTPS 或 QUIC 监听器与客户端协商 ALPN；默认情况下，HTTPS 监听器会通告 "h2,http/1.1"，QUIC 监听器会通告 "h3"。参见上方的 "alpn" 配置项。请注意，使用 "crt-list" 时，证书可能会覆盖 "alpn" 设置并重新启用其处理。
+
+<a id="entry-5-1-no-ca-names"></a>
+
+**`no-ca-names`**
+
+```haproxy
+no-ca-names
+```
+
+此设置仅在编译时启用 OpenSSL 支持时可用。当使用 ca-file 时，该设置可防止在 Server Hello 消息中发送 CA 名称。请使用 "ca-verify-file" 替代 "ca-file"，并配合 "no-ca-names" 使用。
+
+<a id="entry-5-1-no-sslv3"></a>
+
+**`no-sslv3`**
+
+```haproxy
+no-sslv3
+```
+
+此设置仅在编译时启用 OpenSSL 支持时可用。当 SSL 受支持时，它会禁用从监听器实例化的所有套接字上的 SSLv3 支持。请注意，SSLv2 在代码中已被强制禁用，无法通过任何配置选项启用。此选项也可在全局语句 "ssl-default-bind-options" 中使用。请改用 "ssl-min-ver" 和 "ssl-max-ver"。
+
+<a id="entry-5-1-no-strict-sni"></a>
+
+**`no-strict-sni`**
+
+```haproxy
+no-strict-sni
+```
+
+此设置仅在编译时包含 OpenSSL 支持时可用。它会禁用之前“strict-sni”指令所强制执行的严格 SNI 检查。当通过“ssl-default-bind-options”全局启用严格 SNI 后，可能需要在特定“bind”行上选择性地禁用严格 SNI，此时可使用此设置。参见“strict-sni”绑定选项。
+
+<a id="entry-5-1-no-tls-tickets"></a>
+
+**`no-tls-tickets`**
+
+```haproxy
+no-tls-tickets
+```
+
+此设置仅在编译时启用 OpenSSL 支持时可用。它禁用无状态会话恢复（RFC 5077 TLS 会话票据扩展），强制使用有状态会话恢复。无状态会话恢复的 CPU 消耗更高。该选项也可在全局语句 "ssl-default-bind-options" 中使用。TLS Ticket 机制仅适用于 TLS 1.2 及以下版本。除非通过重载或使用 "tls-ticket-keys" 定期轮换票据密钥，否则使用 TLS Ticket 会损害前向安全性。
+
+<a id="entry-5-1-no-tlsv10"></a>
+
+**`no-tlsv10`**
+
+```haproxy
+no-tlsv10
+```
+
+此设置仅在编译时启用 OpenSSL 支持时可用。当监听器支持 SSL 时，该设置会禁用所有由此监听器实例化套接字的 TLSv1.0 支持。请注意，SSLv2 在代码中已被强制禁用，无法通过任何配置选项启用。该选项也可用于全局语句 "ssl-default-bind-options" 中。建议改用 "ssl-min-ver" 和 "ssl-max-ver"。
+
+<a id="entry-5-1-no-tlsv11"></a>
+
+**`no-tlsv11`**
+
+```haproxy
+no-tlsv11
+```
+
+此设置仅在编译时启用 OpenSSL 支持时可用。当 SSL 受支持时，该设置会禁用从监听器实例化的所有套接字上的 TLSv1.1 支持。请注意，SSLv2 在代码中已被强制禁用，无法通过任何配置选项启用。该选项也可用于全局语句 "ssl-default-bind-options"。建议改用 "ssl-min-ver" 和 "ssl-max-ver"。
+
+<a id="entry-5-1-no-tlsv12"></a>
+
+**`no-tlsv12`**
+
+```haproxy
+no-tlsv12
+```
+
+此设置仅在编译时启用 OpenSSL 支持时可用。当 SSL 受支持时，该设置会禁用从监听器实例化的所有套接字上的 TLSv1.2 支持。请注意，SSLv2 在代码中已被强制禁用，无法通过任何配置选项启用。此选项也可在全局语句 "ssl-default-bind-options" 中使用，请改用 "ssl-min-ver" 和 "ssl-max-ver"。
+
+<a id="entry-5-1-no-tlsv13"></a>
+
+**`no-tlsv13`**
+
+```haproxy
+no-tlsv13
+```
+
+此设置仅在编译时启用 OpenSSL 支持时可用。当 SSL 受支持时，该设置会禁用从监听器实例化的所有套接字上的 TLSv1.3 支持。请注意，SSLv2 在代码中已被强制禁用，无法通过任何配置选项启用。该选项也可用于全局语句 "ssl-default-bind-options"。建议改用 "ssl-min-ver" 和 "ssl-max-ver"。
+
+<a id="entry-5-1-npn"></a>
+
+**`npn <protocols>`**
+
+```haproxy
+npn <protocols>
+```
+
+启用 NPN TLS 扩展，并在 NPN 基础上通告指定的协议列表作为支持的协议。协议列表由逗号分隔的协议名称组成，例如：http/1.1,http/1.0（不带引号）。此功能要求 SSL 库在编译时启用了 TLS 扩展支持（请通过 haproxy -vv 检查）。请注意，NPN 扩展已被 ALPN 扩展取代（参见 "alpn" 关键字），但 ALPN 仅在 OpenSSL 1.0.2 及以上版本中可用。若需在较旧版本的 OpenSSL 上使用 HTTP/2，NPN 仍可使用，因为截至本文撰写时，大多数客户端仍支持该功能。尽管可以同时启用 NPN 和 ALPN，但通常仅用于测试目的，实际并无必要。
+
+<a id="entry-5-1-prefer-client-ciphers"></a>
+
+**`prefer-client-ciphers`**
+
+```haproxy
+prefer-client-ciphers
+```
+
+使用客户端偏好选择密码套件，默认情况下强制使用服务器偏好。此选项也可在全局语句 "ssl-default-bind-options" 中使用。
+
+请注意，当 OpenSSL 版本 ≥ 1.1.1 时，即使未设置此选项，若客户端密码套件列表中首位为 ChaCha20-Poly1305 密码套件，HAProxy 也会自动将其优先级提升。
+
+在使用双算法配置（RSA + ECDSA）时，选择算法将在这两种算法之间进行选择，并始终优先选择 ECDSA。选定正确的证书后，将由 SSL 库负责优先选择加密算法、椭圆曲线等。因此，该选项无法用于优先选择 RSA 证书而非 ECDSA 证书。
+
+<a id="entry-5-1-proto"></a>
+
+**`proto <name>`**
+
+```haproxy
+proto <name>
+```
+
+强制多路复用器协议用于传入连接。该协议必须与前端的模式（TCP 或 HTTP）兼容，且必须可在前端侧使用。可用协议列表见 haproxy -vv。协议属性包括：模式（TCP/HTTP）、侧（FE/BE）、多路复用器名称及其标志。
+
+部分协议在服务器端存在队首阻塞问题（flag=HOL_RISK）。此外，部分协议不支持升级（flag=NO_UPG）。HTX 兼容性状态亦已报告（flag=HTX）。
+
+以下协议可用于绑定行中 "proto" 指令的参数：
+
+```text
+quic: mode=HTTP  side=FE|BE  mux=QUIC  flags=HTX|NO_UPG|FRAMED
+ qmux: mode=HTTP  side=FE|BE  mux=QMUX  flags=HTX|NO_UPG
+ h2  : mode=HTTP  side=FE|BE  mux=H2    flags=HTX|HOL_RISK|NO_UPG
+ h1  : mode=HTTP  side=FE|BE  mux=H1    flags=HTX|NO_UPG
+ none: mode=TCP   side=FE|BE  mux=PASS  flags=NO_UPG
+```
+
+此选项的原理是绕过从该监听套接字创建的所有连接所采用的最佳多路复用协议选择机制。例如，可通过在绑定行中指定 "proto h2"，强制在明文 TCP 上使用 HTTP/2。
+
+如果配置了 ALPN 或 NPN 设置，指定的协议应与多路复用器的协议兼容，以避免出现任何问题。例如，若设置为 "proto h1"，则不应将 ALPN 设置为 "h2"。
+
+QMux 是 QUIC 的一个子集，运行于 TCP 之上。它对应于以下草案协议 <https://www.ietf.org/archive/id/draft-ietf-quic-qmux-01.html>。目前在 HAProxy 中仍处于实验阶段。
+
+<a id="entry-5-1-quic-cc-algo"></a>
+
+**`quic-cc-algo { cubic | newreno | bbr | nocc }[(<args,...>)]`**
+
+```haproxy
+quic-cc-algo { cubic | newreno | bbr | nocc }[(<args,...>)]
+```
+
+这是针对 QUIC 的特定设置，用于选择连接到已配置的 QUIC 监听器时所采用的拥塞控制算法。这些算法与 TCP 所使用的类似。
+
+在拥塞算法基础上启用速率控制，以降低丢包率并提升吞吐量。可通过 "tune.quic.fe.tx.pacing" 全局关键字关闭此功能。在大多数情况下，应保持速率控制开启，尤其是在使用 BBR 时，因为 BBR 依赖该功能以按预期工作。在未启用速率控制的情况下使用 BBR 可能导致传输期间出现性能下降或高丢包率。
+
+默认值：cubic
+
+如需进一步自定义，可在算法标记后指定参数列表。参数必须用括号括起，并以逗号分隔。每个参数均为可选，必要时可为空。各参数的必需顺序如下：
+
+- 最大窗口大小（以字节为单位）。必须大于 10k 且小于 4g。默认情况下使用 "tune.quic.fe.cc.max-win-size" 值。
+
+示例：
+
+```shell
+# newreno congestion control algorithm
+quic-cc-algo newreno
+# cubic congestion control algorithm with one megabytes as window
+quic-cc-algo cubic(1m)
+```
+
+特殊值 "nocc" 可用于强制将拥塞窗口始终设置为最大值。该值专用于调试场景，以消除拥塞控制器引起的任何副作用。不得用于生产环境，否则可能很快导致网络问题，例如高丢包率。
+
+<a id="entry-5-1-quic-force-retry"></a>
+
+**`quic-force-retry`**
+
+```haproxy
+quic-force-retry
+```
+
+本设置为 QUIC 特有选项，强制对所有连接到已配置 QUIC 监听器的连接尝试均启用 QUIC Retry 功能。该机制通过验证对等节点是否能够接收其用于发起新连接的传输地址上的数据包来实现，随后向其发送包含令牌的 Retry 数据包。该令牌必须由对等节点返回给 Retry 数据包发送方，仅该发送方能够验证令牌的有效性。请注意，即使设置了 Retry 阈值（参见 "tune.quic.fe.sec.retry-threshold" 设置），QUIC Retry 仍始终启用。
+
+此设置要求已配置集群密钥，否则启动时将报告错误（参见“cluster-secret”）。
+
+有关 QUIC 重试的更多信息，请参见 <https://www.rfc-editor.org/rfc/rfc9000.html#section-8.1.2>。
+
+<a id="entry-5-1-quic-socket"></a>
+
+**`quic-socket [ connection | listener ]`**
+
+```haproxy
+quic-socket [ connection | listener ]
+```
+
+此 QUIC 特定设置允许为特定监听器定义套接字分配模式。
+请参阅 "tune.quic.fe.sock-per-conn" 以获取每种模式优缺点的完整说明。
+
+此设置与全局 "tune.quic.fe.sock-per-conn" 选项协同生效。若全局调优启用“default-on”模式（此为默认值），则每个 QUIC 连接将使用其专属套接字，但监听器配置为“quic-socket listener”的情况除外。若全局模式设置为“force-off”，则将忽略单个监听器的配置。
+
+<a id="entry-5-1-severity-output"></a>
+
+**`severity-output <format>`**
+
+```haproxy
+severity-output <format>
+```
+
+此设置仅用于统计信息套接字，用于配置附加到信息反馈消息前的严重性级别输出。消息的严重性级别范围为 0 至 7，符合 syslog RFC5424 标准。请求数据的有效且成功的套接字命令（例如 "show map"、"get acl foo" 等）不会附加严重性级别。其他套接字会忽略此设置。`<format>` 可以是：
+
+- "none"（默认值）：反馈消息前不添加严重性级别。
+- "number"：严重性级别以数字形式添加。
+- "string"：严重性级别以字符串形式添加，遵循 rfc5424 规范。
+
+<a id="entry-5-1-shards"></a>
+
+**`shards { <number> | by-thread | by-group }`**
+
+```haproxy
+shards { <number> | by-thread | by-group }
+```
+
+在多线程模式下，若操作系统支持在同一 IP:端口上绑定多个监听器，则会自动为同一配置行创建指定数量的相同监听器，所有监听器均绑定到该监听器所关联线程数量的公平份额。当使用极高的线程数时，此机制可能有所帮助，因为单个套接字的内核锁开销开始产生显著影响。此时，传入流量被分散到多个套接字上，竞争程度得以降低。请注意，这样做可能会因更多线程同时工作而略微增加 CPU 使用率。
+
+如果分片数量超过可用线程数量，系统将自动将其缩减至线程数量（即每个线程对应一个分片）。特殊值 "by-thread" 也会根据 "bind" 行上的线程数量创建相应数量的分片。由于系统会将传入流量均匀分配到所有这些分片，因此该数值必须是线程数量的整数因子。另一种特殊值 "by-group" 则每个线程组创建一个分片。当处理大量线程且不希望创建过多套接字时，此选项较为有用。虽然负载分布的优化程度稍低，但竞争（尤其是系统层面的竞争）仍低于使用单个套接字的情况。
+
+在不支持将多个套接字绑定到同一地址的操作系统上，"by-thread" 和 "by-group" 将自动回退到单个分片。对于 "by-group"，由于单个组的配置不变，不会发出任何警告，且无论如何都会导致每个组的套接字被重复创建。然而，若 "by-thread" 发生此类回退，将发出诊断警告，因为最终的监听器数量将与预期不符。
+
+<a id="entry-5-1-sigalgs"></a>
+
+**`sigalgs <sigalgs>`**
+
+```haproxy
+sigalgs <sigalgs>
+```
+
+此设置仅在编译时启用了 OpenSSL 支持时可用。它用于设置在 TLSv1.2 和 TLSv1.3 握手过程中协商的签名算法列表的描述字符串。字符串格式由 OpenSSL 手册页中的“man 3 SSL_CTX_set1_sigalgs”定义。除非需要与中间设备兼容，否则不建议使用此设置。
+
+<a id="entry-5-1-ssl"></a>
+
+**`ssl`**
+
+```haproxy
+ssl
+```
+
+此设置仅在编译时启用 OpenSSL 支持时可用。它可启用从此监听器建立的连接上的 SSL 解密功能。需要提供证书（参见上文的 "crt"）。缓冲区中的所有内容将以明文形式呈现，因此 ACL 和 HTTP 处理仅能访问解密后的数据。默认情况下禁用 SSLv3，如需启用，请使用 "ssl-min-ver SSLv3"。
+
+<a id="entry-5-1-ssl-max-ver"></a>
+
+**`ssl-max-ver [ SSLv3 | TLSv1.0 | TLSv1.1 | TLSv1.2 | TLSv1.3 ]`**
+
+```haproxy
+ssl-max-ver [ SSLv3 | TLSv1.0 | TLSv1.1 | TLSv1.2 | TLSv1.3 ]
+```
+
+此选项强制在从此监听器创建的 SSL 连接中使用 `<version>` 或更低版本。
+若未设置 "ssl-min-ver" 而使用此选项，可能产生歧义，因为未来 HAProxy 版本中的默认 ssl-min-ver 值可能发生变化。
+此选项也可在全局语句 "ssl-default-bind-options" 中使用。
+另请参阅 "ssl-min-ver"。
+
+<a id="entry-5-1-ssl-min-ver"></a>
+
+**`ssl-min-ver [ SSLv3 | TLSv1.0 | TLSv1.1 | TLSv1.2 | TLSv1.3 ]`**
+
+```haproxy
+ssl-min-ver [ SSLv3 | TLSv1.0 | TLSv1.1 | TLSv1.2 | TLSv1.3 ]
+```
+
+此选项强制在从此监听器创建的 SSL 连接中使用 `<version>` 或更高版本。
+默认值为 "TLSv1.2"。此选项也可在全局语句 "ssl-default-bind-options" 中使用。
+另请参见 "ssl-max-ver"。
+
+<a id="entry-5-1-strict-sni"></a>
+
+**`strict-sni`**
+
+```haproxy
+strict-sni
+```
+
+此设置仅在编译时启用 OpenSSL 支持时可用。仅当客户端提供的 SNI 与某个证书匹配时，才允许进行 SSL/TLS 协商。默认证书不会被使用。此选项还允许在绑定行上不配置任何证书的情况下启动，因此可使用空目录，并稍后通过统计信息套接字填充证书。此选项也可在全局语句 "ssl-default-bind-options" 中使用，并可通过在 "bind" 行上使用 "no-strict-sni" 选择性禁用。有关更多信息，请参见 "crt" 选项。详见管理指南中的 "add ssl crt-list" 命令。
+
+<a id="entry-5-1-tcp-md5sig"></a>
+
+**`tcp-md5sig <password>`**
+
+```haproxy
+tcp-md5sig <password>
+```
+
+启用 TCP MD5 签名（RFC 2385 通过 TCP MD5 签名选项保护 BGP 会话）功能，对从此监听套接字创建的所有入站连接生效。此选项仅在 Linux 上可用。启用后，使用 `<password>` 字符串为每个 TCP 段生成 16 字节的 MD5 摘要进行签名。此举可防范 TCP 连接遭受伪造攻击。该选项的主要用途是使 BGP 能够防范伪造 TCP 段被引入连接流。但对任何长时间持续的 TCP 连接亦可能具有实用价值。
+
+<a id="entry-5-1-tcp-ss"></a>
+
+**`tcp-ss <mode>`**
+
+```haproxy
+tcp-ss <mode>
+```
+
+设置此监听套接字创建的所有传入连接的 TCP Save SYN 选项。
+该选项自 Linux 4.3 版本起可用。它指示内核尝试保存包含 TCP SYN 标志的传入 IP 数据包副本，以便后续通过 "fc_saved_syn" 样本提取函数进行检查。该选项支持 3 种模式：   - 0：禁用 SYN 数据包保存，这是默认值   - 1：启用 SYN 数据包保存，包含 IP 和 TCP 头   - 2：启用 SYN 数据包保存，包含 ETH、IP 和 TCP 头
+
+仅对常规 TCP 连接有效，对其他协议（例如 Unix 套接字）则被忽略。
+另请参阅 "fc_saved_syn"。
+
+<a id="entry-5-1-tcp-ut"></a>
+
+**`tcp-ut <delay>`**
+
+```haproxy
+tcp-ut <delay>
+```
+
+设置此监听套接字创建的所有传入连接的 TCP 用户超时。该选项自 Linux 2.6.37 版本起可用。它允许 HAProxy 为包含尚未收到确认数据的套接字配置超时，超时时间为指定延迟。在长时间保持连接且经历长时间空闲的场景中尤为有用，例如远程终端或数据库连接池，此时客户端和服务器的超时必须设置得较高以允许较长的空闲期，但又必须能够检测到客户端已断开，以便释放与该连接（及服务器会话）相关的所有资源。参数为延迟时间，默认单位为毫秒。该选项仅适用于常规 TCP 连接，对其他协议无效。
+
+<a id="entry-5-1-tfo"></a>
+
+**`tfo`**
+
+```haproxy
+tfo
+```
+
+是可选关键字，仅在 Linux 内核版本 ≥ 3.7 时受支持。该选项在监听套接字上启用 TCP 快速打开功能，意味着支持此特性的客户端在建立第二个及后续连接时，可在三次握手过程中发送请求并接收响应，从而在首次连接后节省一次往返通信。此功能仅在请求速率较高且每次往返均至关重要的协议中才有意义。该选项可能与许多不接受 SYN 包中携带数据的防火墙产生冲突，因此应仅在充分测试后启用。该选项仅对 TCPv4/TCPv6 套接字有效，其他类型的套接字将忽略此设置。若所用 C 库未定义 TCP_FASTOPEN，可能需要使用 USE_TFO=1 编译 HAProxy。
+
+<a id="entry-5-1-thread"></a>
+
+**`thread [<thread-group>/]<thread-set>[,...]`**
+
+```haproxy
+thread [<thread-group>/]<thread-set>[,...]
+```
+
+此选项限制了该监听器可运行的线程列表。它不会强制执行其中任何线程，而是排除不匹配的线程。此设置限制了可处理该监听器传入连接的线程范围。
+
+有两种编号方案。默认情况下，线程编号为进程内的绝对编号，范围介于 1 和 global.nbthread 中指定的值之间。也可以通过指定线程组编号，后跟斜杠（'/'）和相对线程编号来标识线程编号。此时，线程编号同样从 1 开始，终止于 32 或 64，具体取决于平台。当指定绝对线程编号时，一旦确定线程组，将自动将其转换为相对编号。通常，简单配置中建议使用绝对编号，而在涉及 CPU 布局对性能有影响的复杂配置中，建议使用相对编号。
+
+在可选的线程组编号之后，“thread-set” 规定必须采用以下格式：
+
+```text
+"all" | "odd" | "even" | [number][-[number]]
+```
+
+如其名称所示，“all” 验证指定集合中的所有线程（指定组时为该组全部线程，否则为进程全部线程），“odd” 验证所有奇数编号线程（从 1 开始每隔一个线程），适用于进程或组，“even” 验证所有偶数编号线程（从 2 开始每隔一个线程）。若使用线程编号范围，则验证从第一个编号到最后一个编号之间的所有线程。编号为相对编号或绝对编号，取决于是否指定了线程组编号。若未指定第一个线程编号，则使用 “1”，表示该组的第一个线程或进程的第一个线程。若未指定最后一个线程编号，则使用该组的最后一个线程编号（32 或 64），或进程的最后一个线程编号（global.nbthread）。
+
+这些范围可以重复，并用逗号分隔，以便指定不连续的线程集合，且每个新范围都必须重新指定组（如果存在）。请注意，不允许混合使用组相对和绝对指定方式，因为整个 "bind" 行必须统一使用绝对格式或相对格式，未设置的部分将在解析结束时进行解析。
+
+请注意，由“bind”行描述的每个监听器至少会创建一个套接字，该套接字由至少一个文件描述符表示。由于文件描述符无法跨多个线程组共享，若“bind”行指定的线程范围覆盖了多个线程组，则会自动创建多个文件描述符，以确保每个线程组至少拥有一个。从技术上讲，它们在内核中均指向同一个套接字，但在 HAProxy 中将获得不同的标识符，并且在启用“option socket-stats”时，每个文件描述符还将拥有独立的统计信息条目。
+
+主要目的是让多个 bind 行共享相同的 IP:端口，但不共享监听器中的同一线程，从而使系统能够将传入的连接分发到多个队列，绕过 HAProxy 内部的队列负载均衡。目前，已知 Linux 3.9 及以上版本支持此功能。另请参见上方的“shards”关键字，该关键字可自动复制“bind”行，并将其分配到多个线程组中。
+
+该关键字与反向 HTTP 绑定兼容。然而，禁止为此类监听器指定跨越多个线程组的线程集，因为这可能导致 "nbconn" 无法按预期工作。
+
+<a id="entry-5-1-tls-tickets"></a>
+
+**`tls-tickets`**
+
+```haproxy
+tls-tickets
+```
+
+此设置仅在编译时启用 OpenSSL 支持时可用。它启用无状态会话恢复（RFC 5077 TLS 票据扩展）。默认启用，但若通过“ssl-default-bind-options”中提到的“no-tls-tickets”全局禁用了该功能，则可能需要在“bind”行上选择性地重新启用此功能。另请参阅“no-tls-tickets”绑定关键字。
+
+<a id="entry-5-1-tls-ticket-keys"></a>
+
+**`tls-ticket-keys <keyfile>`**
+
+```haproxy
+tls-ticket-keys <keyfile>
+```
+
+设置用于加载 TLS 会话票证密钥的文件。密钥长度需为 48 字节或 80 字节，具体取决于使用 aes128 或 aes256，以 base64 编码，每行一个密钥（例如：OpenSSL rand 80 \| OpenSSL base64 -A \| xargs echo）。第一个密钥决定后续密钥所用的长度：不可混合使用 aes128 和 aes256 密钥。密钥数量由 TLS_TICKETS_NO 构建选项指定（默认值为 3），文件中至少需存在相同数量的密钥。最后 TLS_TICKETS_NO 个密钥用于解密，倒数第二个密钥用于加密。通过仅向文件追加新密钥并重载进程，即可实现密钥的简便轮换。密钥必须定期轮换（例如每 12 小时一次），否则完美前向保密将被破坏。建议将密钥存储于非持久化存储（如 tmpfs）中，避免写入硬盘（提示：使用 tmpfs 并禁用交换这些文件）。生命周期提示可通过 tune.ssl.timeout 进行调整。
+
+<a id="entry-5-1-transparent"></a>
+
+**`transparent`**
+
+```haproxy
+transparent
+```
+
+为可选关键字，仅在特定 Linux 内核上受支持。该关键字表示即使地址不属于本地主机，也应将其绑定，并且针对这些地址的任何数据包都将被拦截，效果如同这些地址已本地配置。通常需要启用 IP 转发。请注意！请勿将此关键字与默认地址 '\*' 一同使用，否则会导致指定端口的所有流量被重定向。该关键字仅在 HAProxy 编译时 USE_LINUX_TPROXY=1 时可用。此参数仅与 TCPv4 和 TCPv6 套接字兼容，具体取决于内核版本。部分发行版内核包含该功能的后向移植，因此请向供应商确认支持情况。
+
+<a id="entry-5-1-uid"></a>
+
+**`uid <uid>`**
+
+```haproxy
+uid <uid>
+```
+
+设置 Unix 套接字的所有者为指定的系统用户 ID。该设置也可在全局段的 "unix-bind" 语句中默认配置。请注意，某些平台会直接忽略此设置。该设置与 "user" 设置等效，区别在于使用用户数字 ID 而非用户名。该设置对非 Unix 套接字无效。
+
+<a id="entry-5-1-user"></a>
+
+**`user <user>`**
+
+```haproxy
+user <user>
+```
+
+设置 Unix 套接字的所有者为指定的系统用户。该设置也可在全局段的 "unix-bind" 语句中默认配置。请注意，某些平台会直接忽略此设置。此设置等效于 "uid" 设置，区别在于使用用户名而非其 UID。该设置对非 Unix 套接字无效。
+
+<a id="entry-5-1-v4v6"></a>
+
+**`v4v6`**
+
+```haproxy
+v4v6
+```
+
+为可选关键字，仅在大多数最新系统（包括 Linux 内核版本 ≥ 2.4.21）中受支持。当使用默认地址时，该关键字用于将套接字同时绑定至 IPv4 和 IPv6。在默认仅绑定 IPv6 的系统上，此操作有时为必需。对非 IPv6 套接字无影响，且会被 "v6only" 选项覆盖。
+
+<a id="entry-5-1-v6only"></a>
+
+**`v6only`**
+
+```haproxy
+v6only
+```
+
+可选关键字，仅在最新系统（包括 Linux 内核版本 ≥ 2.4.21）中受支持。当监听器使用默认地址时，该关键字用于将套接字绑定至 IPv6。与全局设置相比，此方式按监听器粒度进行绑定，有时更受青睐。该选项对非 IPv6 套接字无影响，且优先级高于 "v4v6" 选项。
+
+<a id="entry-5-1-verify"></a>
+
+**`verify [none|optional|required]`**
+
+```haproxy
+verify [none|optional|required]
+```
+
+此设置仅在编译时启用了 OpenSSL 支持时可用。若设置为 `none`，则不请求客户端证书。这是默认行为。其他情况下，将请求客户端证书。若客户端在请求后未提供证书，且 `verify` 设置为 `required`，则握手将被中止；若设置为 `optional`，则握手将继续。客户端提供的证书始终使用 `ca-file` 中的 CA 以及可选的 `crl-file` 中的 CRL 进行验证。验证失败时，无论 `verify` 选项为何，握手均会被中止，除非错误码与 `ca-ignore-err` 或 `crt-ignore-err` 中列出的错误码完全匹配。
+
+## 5.2. 服务器和默认服务器选项 {#section-5-2}
+
+“server” 和 “default-server” 关键字支持若干设置，这些设置均作为参数形式在服务器行中传递。参数的出现顺序无关紧要，且所有设置均为可选。部分设置为单个单词（布尔值），而其他设置在其后需跟一个或多个值。此时，值必须紧随设置名称之后。除 default-server 外，若使用这些设置，必须在服务器地址之后指定：
+
+```text
+server <name> <address>[:port] [settings ...]
+default-server [settings ...]
+```
+
+请注意，所有这些设置均同时支持 `server` 和 `default-server` 关键字，但 `id` 仅支持 `server` 关键字。
+
+当前支持的设置如下：
+
+<a id="entry-5-2-addr"></a>
+
+**`addr <ipv4|ipv6>`**
+
+```haproxy
+addr <ipv4|ipv6>
+```
+
+可用于以下上下文：tcp、http、log
+
+使用 "addr" 参数，可指定不同的 IP 地址用于发送健康检查或探测 agent-check。在某些服务器上，为特定组件分配一个独立的 IP 地址可能是有益的，该组件能够执行更复杂的测试，这些测试相较于应用程序本身更适合用于健康检查。若未设置 "check" 参数，则此参数将被忽略。另请参见 "port" 参数。
+
+<a id="entry-5-2-agent-check"></a>
+
+**`agent-check`**
+
+```haproxy
+agent-check
+```
+
+可用于以下上下文：tcp、http、log
+
+启用一个独立于常规健康检查的辅助代理检查。代理健康检查通过向由 "agent-port" 参数设置的端口建立 TCP 连接，并读取以首个遇到的 '&#92;r' 或 '&#92;n' 结尾的 ASCII 字符串来完成。该字符串由一系列以空格、制表符或逗号分隔的单词组成，顺序不限，每个单词由以下内容构成：
+
+- 以 ASCII 格式表示的正整数百分比，例如 "75%"。采用此格式的值将根据 HAProxy 启动时配置的服务器初始权重按比例设置权重。请注意，权重为零时在统计信息页面上显示为 "DRAIN"，因为其对服务器的影响相同（服务器被从负载均衡池中移除）。这是设置服务器权重的旧有方式。建议使用 "weight:" 前缀进行设置。
+
+- 字符串 "weight:" 后接一个正整数或正整数百分比，中间无空格。若值以 '%' 符号结尾，则新权重将按服务器初始权重成比例计算。否则，该值被视为绝对权重，必须介于 0 到 256 之间。属于运行静态负载均衡算法的服务器组的服务器具有更严格的限制，因为权重一旦设定便不可更改。因此，此类服务器仅接受 0 和 100%（或 0 和初始权重）作为有效值。更改立即生效，但某些负载均衡算法需要一定数量的请求才能考虑权重变化。请注意，统计信息页面上权重为 0 的服务器会显示为 "DRAIN"，因其对服务器的影响相同（即从负载均衡组中移除）。
+
+- 字符串 "maxconn:" 后跟一个整数（两者之间无空格）。以这种格式指定的值将设置服务器的 maxconn。需将通告的最大连接数乘以使用此健康检查的负载均衡器数量以及不同后端的数量，以获得服务器可能接收的总连接数。例如：maxconn:30
+
+- 单词 "ready"。这将把服务器的管理状态切换至 READY 模式，从而取消任何 DRAIN 或 MAINT 状态
+
+- 单词 "drain"。这会将服务器的管理状态设为 DRAIN 模式，使其不再接受任何新的连接，除非是通过会话保持机制已接受的连接。
+
+- 单词 "maint"。这将把服务器的管理状态设为 MAINT 模式，使其完全不再接受任何新连接，并停止健康检查。
+
+- “down”、“fail” 或 “stopped” 这些词，可选地后跟以井号（'#'）引导的描述字符串。以上所有标记均将服务器的运行状态设为 DOWN，但由于这些词本身会显示在统计信息页面上，因此管理员可以据此判断该状态是预期的还是意外的：服务可能被有意停止，可能显示为运行状态但未能通过某些有效性检测，或可能因进程缺失或端口无响应等原因被识别为 DOWN。
+
+- 单词 "up" 将服务器的操作状态设为 UP，前提是健康检查也报告服务可访问。
+
+代理未通告的参数不会被更改。例如，某个代理可能仅用于监控 CPU 使用率，仅报告相对权重，且从不干预运行状态。类似地，代理也可设计为终端用户界面，包含三个单选按钮，允许管理员仅更改服务器的管理状态。然而，需要注意的是，只有代理自身才能撤销其操作，因此若通过代理将服务器设置为 DRAIN 模式或 DOWN 状态，则代理必须实现相应的等效动作，以使服务恢复运行。
+
+连接代理失败不被视为错误，因为连接性由启用“check”参数的常规健康检查进行测试。但需注意，代理报告“down”后即停止代理并非良策，因为只有报告“up”的代理才能再次将服务器置为可用状态。另请注意，Unix 统计信息套接字上的 CLI 也能够强制指定代理结果，以便在必要时绕过有缺陷的代理。
+
+必须设置 "agent-port" 参数。另请参见 "agent-inter" 和 "no-agent-check" 参数。
+
+<a id="entry-5-2-agent-send"></a>
+
+**`agent-send <string>`**
+
+```haproxy
+agent-send <string>
+```
+
+可用于以下上下文：tcp、http、log
+
+若指定此选项，HAProxy 将在连接时将给定字符串（原样）发送至代理服务器。例如，可将后端名称编码至该字符串中，从而使代理能够根据后端发送不同的响应。若希望以换行符终止请求，请确保包含 '&#92;n'。
+
+<a id="entry-5-2-agent-inter"></a>
+
+**`agent-inter <delay>`**
+
+```haproxy
+agent-inter <delay>
+```
+
+可用于以下上下文：tcp、http、log
+
+"agent-inter" 参数设置两次代理检查之间的间隔为 `<delay>` 毫秒。若未指定，延迟默认为 2000 毫秒。
+
+与所有其他基于时间的参数一样，该参数可使用以下任意显式单位输入：{us, ms, s, m, h, d}。若未设置“timeout check”，则“agent-inter”参数也用作代理检查的超时值。为减少在相同硬件上托管多个服务器时产生的“共振”效应，所有服务器的代理检查和健康检查将按微小的时间偏移依次启动。也可通过全局配置项“spread-checks”在代理检查和健康检查间隔中添加一定的随机噪声。例如，当多个后端使用相同服务器时，此设置具有实际意义。
+
+另请参见 "agent-check" 和 "agent-port" 参数。
+
+<a id="entry-5-2-agent-addr"></a>
+
+**`agent-addr <addr>`**
+
+```haproxy
+agent-addr <addr>
+```
+
+可用于以下上下文：tcp、http、log
+
+"agent-addr" 参数用于设置代理检查的地址。
+
+可以将 agent-check 任务委派至其他目标，从而实现统一管理 HAProxy 中定义的服务器状态和权重，尤其适用于无法实现自感知和自管理的服务场景。可指定 IP 地址或主机名，系统将自动解析。
+
+<a id="entry-5-2-agent-port"></a>
+
+**`agent-port <port>`**
+
+```haproxy
+agent-port <port>
+```
+
+可用于以下上下文：tcp、http、log
+
+"agent-port" 参数用于设置代理检查所使用的 TCP 端口。
+
+另请参见 "agent-check" 和 "agent-inter" 参数。
+
+<a id="entry-5-2-allow-0rtt"></a>
+
+**`allow-0rtt`**
+
+```haproxy
+allow-0rtt
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+在使用 TLS 1.3 时，允许向服务器发送早期数据。请注意，仅当客户端使用了早期数据，或后端配置了 "retry-on" 并包含 "0rtt-rejected" 关键字时，才会发送早期数据。使用 QUIC 时，0-RTT 支持 QuicTLS、OpenSSL \>= 3.5.2 和 AWS-LC。使用 TCP/TLS 时，0-RTT 仅支持 OpenSSL。
+
+<a id="entry-5-2-alpn"></a>
+
+**`alpn <protocols>`**
+
+```haproxy
+alpn <protocols>
+```
+
+可用于以下上下文：tcp、http
+
+启用 TLS ALPN 扩展，并在 ALPN 上声明指定的协议列表作为支持的协议。协议列表由逗号分隔的协议名称组成，例如：http/1.1,http/1.0（不带引号）。此功能要求 SSL 库在编译时启用了 TLS 扩展支持（可通过 haproxy -vv 检查）。ALPN 扩展取代了早期的 NPN 扩展。连接至 HTTP/2 服务器时必须使用 ALPN。若需通过 QUIC 服务器使用 HTTP/3，同样必须启用 ALPN；当 QUIC 服务器未设置 "alpn" 时，"h3" 作为默认值。OpenSSL 1.0.2 之前的版本不支持 ALPN，仅支持现已废弃的 NPN 扩展。若预期同时支持 HTTP/2 和 HTTP/1.1，可按优先级顺序声明两者，如下所示：
+
+```text
+server 127.0.0.1:443 ssl crt pub.pem alpn h2,http/1.1
+```
+
+另请参见 "ws"，以对 WebSocket 流使用替代的 ALPN。
+
+<a id="entry-5-2-backup"></a>
+
+**`backup`**
+
+```haproxy
+backup
+```
+
+可用于以下上下文：tcp、http、log
+
+当服务器行中包含 "backup" 时，仅当所有其他非备用服务器均不可用时，该服务器才会参与负载均衡。尽管如此，携带引用该服务器的持久性 Cookie 的请求仍会始终被服务。默认情况下，仅使用第一个运行正常的备用服务器，除非在后端中设置了 "allbackups" 选项。参见 "no-backup" 和 "allbackups" 选项。
+
+<a id="entry-5-2-ca-file"></a>
+
+**`ca-file <cafile>`**
+
+```haproxy
+ca-file <cafile>
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此设置仅在编译时启用 OpenSSL 支持时可用。它指定一个 PEM 文件，用于加载用于验证服务器证书的 CA 证书。可以加载包含多个 CA 的目录，在此情况下，HAProxy 将尝试加载目录中所有 ".pem"、".crt"、".cer" 和 .crl 文件，以点开头的文件将被忽略。
+
+为使用系统自带的受信任 CA，可将 `@system-ca` 参数用于替代 `cafile`。该目录的位置可通过设置 SSL_CERT_DIR 环境变量进行覆盖。
+
+<a id="entry-5-2-cc"></a>
+
+**`cc <algo>`**
+
+```haproxy
+cc <algo>
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此设置仅在定义了 TCP_CONGESTION 的系统上可用，并已在 Linux 和 FreeBSD 上完成验证。该设置指定一个 TCP 拥塞控制算法名称，并配置出站连接使用该算法。典型名称包括 "reno" 或 "cubic"，具体取决于操作系统。在某些系统上，配置特定算法可能需要特殊权限。在 Linux 上，可用算法列于 sysctl "net.ipv4.tcp_available_congestion_control"，无需权限即可使用的算法位于 "net.ipv4.tcp_allowed_congestion_control"。若需访问需要额外权限的算法，可能需要 "cap_net_admin" 能力（参见全局段中的 "setcap"）。若无法配置特定拥塞控制算法，将保持默认算法不变。另请参阅："cc" 绑定关键字（[第 5.1 节](/zh/haproxy/bind-and-server-options/#section-5-1)）。
+
+<a id="entry-5-2-check"></a>
+
+**`check`**
+
+```haproxy
+check
+```
+
+可用于以下上下文：tcp、http、log
+
+本选项用于启用对服务器的健康检查：   - 未设置时，不执行健康检查，服务器始终被视为可用。   - 设置但未配置其他检查方法时，当在最高配置的传输层成功建立连接时，认为服务器可用。默认情况下为 TCP，当设置 "ssl" 或 "check-ssl" 时则为 SSL/TLS，且可与连接前缀（如启用 "send-proxy" 或 "check-send-proxy" 时的 PROXY 协议头）结合使用。动态服务器的处理行为略有不同，请参阅以下段落获取详细信息。   - 设置且定义了应用层健康检查时，应用层交互将在配置的传输层之上执行，且仅当所有交互均成功时，才认为服务器可用。
+
+默认情况下，健康检查在服务器配置的相同地址和端口上执行，使用相同的封装参数（如 SSL/TLS、proxy-protocol 头等）。可以使用“addr”更改目标地址，使用“port”更改端口。设置后，系统将认为服务器不在服务端口上进行健康检查，且不再复用配置的封装参数。如需发送连接头，必须显式设置“check-send-proxy”；如需使用 SSL/TLS，必须显式设置“check-ssl”。
+
+请注意，动态服务器不会隐式配置 ssl 和 PROXY 协议。
+在此情况下，即使未覆盖检查端口，若需启用，也必须显式使用 "check-ssl" 和 "check-send-proxy"。
+
+当在服务器行中设置 "sni" 或 "alpn" 时，其值不会用于健康检查，必须使用 "check-sni" 或 "check-alpn"。
+
+健康检查流量的默认源地址与后端中定义的地址相同。
+可以使用“source”关键字进行更改。
+
+可以使用 "inter" 关键字设置健康检查的间隔时间，使用 "rise" 和 "fall" 关键字可定义需要多少次成功或失败的健康检查，才能将服务器标记为可用或不可用。
+
+可选的应用层健康检查可通过配置 "option httpchk"、"option mysql-check"、"option smtpchk"、"option pgsql-check"、"option ldap-check" 或 "option redis-check" 实现。
+
+示例：
+
+```shell
+# simple tcp check
+backend foo
+  server s1 192.168.0.1:80 check
+# this does a tcp connect + tls handshake
+backend foo
+  server s1 192.168.0.1:443 ssl check
+# simple tcp check is enough for check success
+backend foo
+  option tcp-check
+  tcp-check connect
+  server s1 192.168.0.1:443 ssl check
+```
+
+<a id="entry-5-2-check-reuse-pool"></a>
+
+**`check-reuse-pool`**
+
+```haproxy
+check-reuse-pool
+```
+
+可用于以下上下文：tcp、http
+
+此选项允许在可用时复用空闲连接，而非打开专用连接。检查完成后，连接将重新插入连接池。主要目标是限制对特定服务器的连接打开与关闭次数。此功能仅与 http-check 规则集兼容，对其他检查类型将静默忽略。此外，后端的复用策略应设置为积极模式，因为每次检查尝试均在专用会话上执行。
+
+为简化配置，若在服务器行或通过自定义的 tcp-check connect 规则定义了任何特定的检查连接选项，则此选项将被静默忽略。
+
+此选项在充当被动反向 HTTP 网关的服务器上会自动启用，因为此类服务器仅支持通过复用连接。
+
+另请参见："check-pool-conn-name"
+
+<a id="entry-5-2-check-send-proxy"></a>
+
+**`check-send-proxy`**
+
+```haproxy
+check-send-proxy
+```
+
+可用于以下上下文：tcp、http
+
+此选项强制在发出出站健康检查时发送 PROXY 协议行，无论服务器在正常流量中是否使用 send-proxy。默认情况下，若健康检查已启用正常流量的 PROXY 协议，且未指定“port”或“addr”指令，则健康检查会启用 PROXY 协议。然而，若存在此类指令，则需使用“check-send-proxy”选项以强制启用该协议。有关更多信息，请参见“send-proxy”选项。
+
+<a id="entry-5-2-check-alpn"></a>
+
+**`check-alpn <protocols>`**
+
+```haproxy
+check-alpn <protocols>
+```
+
+可用于以下上下文：tcp、http
+
+定义通过 ALPN 通告的协议。协议列表由逗号分隔的协议名称组成，例如：http/1.1,http/1.0（不带引号）。若未设置，则使用服务器 ALPN。
+
+<a id="entry-5-2-check-pool-conn-name"></a>
+
+**`check-pool-conn-name <name>`**
+
+```haproxy
+check-pool-conn-name <name>
+```
+
+可用于以下上下文：tcp、http
+
+当对检查执行连接复用时，若已设置 `<name>`，则将其用作连接标识符，以匹配连接池中的对应连接。此设置相当于 "pool-conn-name" 服务器关键字。若当前选项未使用，则 "check-sni" 将作为备用方案。
+
+另请参见："check-reuse-pool"
+
+<a id="entry-5-2-check-proto"></a>
+
+**`check-proto <name>`**
+
+```haproxy
+check-proto <name>
+```
+
+可用于以下上下文：tcp、http
+
+强制多路复用器协议用于服务器健康检查连接。该协议必须与健康检查类型（TCP 或 HTTP）兼容，且必须可在后端侧使用。可用协议列表请参见 haproxy -vv。协议属性包括：模式（TCP/HTTP）、侧（FE/BE）、多路复用器名称及其标志。
+
+部分协议在服务器端存在队首阻塞问题（flag=HOL_RISK）。此外，部分协议不支持升级（flag=NO_UPG）。HTX 兼容性状态亦已报告（flag=HTX）。
+
+以下协议可用于服务器行中 "check-proto" 指令的参数：
+
+```text
+h2  : mode=HTTP  side=FE|BE  mux=H2    flags=HTX|HOL_RISK|NO_UPG
+fcgi: mode=HTTP  side=BE     mux=FCGI  flags=HTX|HOL_RISK|NO_UPG
+h1  : mode=HTTP  side=FE|BE  mux=H1    flags=HTX|NO_UPG
+none: mode=TCP   side=FE|BE  mux=PASS  flags=NO_UPG
+quic: mode=HTTP  side=FE|BE  mux=QUIC  flags=HTX|NO_UPG|FRAMED
+spop: mode=SPOP  side=BE     mux=SPOP  flags=HOL_RISK|NO_UPG
+```
+
+此选项的原理是绕过为连接到该服务器的健康检查连接选择最佳多路复用协议的步骤。若未定义，则使用为服务器设置的协议（如已设置）。
+
+如果配置了 ALPN 或 NPN 设置，指定的协议应与多路复用器的协议兼容，以避免出现任何问题。例如，若设置为 "proto h1"，则不应将 ALPN 设置为 "h2"。
+
+QUIC 检查配置尚未完全实现。首先，QUIC 检查仅可对 QUIC 服务器执行。其次，若在 QUIC 服务器上指定了一个或多个检查专用的连接参数，检查协议将回退至使用 TCP。
+
+<a id="entry-5-2-check-sni-auto"></a>
+
+**`check-sni-auto`**
+
+```haproxy
+check-sni-auto
+```
+
+可用于以下上下文：tcp、http、log
+
+此选项在通过 SSL 执行健康检查时，若尚未设置值，则启用自动 SNI 选择。默认启用，但可作为“server”设置使用，用于重置从“default-server”指令继承的任何“no-check-sni-auto”设置。也可作为“default-server”设置使用，用于重置之前设置的“default-server”“no-check-sni-auto”设置。
+
+对于 HTTPS 连接，SNI 会自动选择，但前提是不存在 "http-check connect" 规则。在此情况下，所选 SNI 基于通过 "option httpchk" 指令或 "http-check send" 规则指定的 Host 头值。对于 "http-check connect" 规则，不进行自动选择。对于其他协议，该选项被忽略。
+
+若在健康检查中使用 SNI 的自动选择，则当设置 "check-reuse-pool" 时，该值将被分配给连接名称，除非被服务器关键字 "check-pool-conn-name" 覆盖。
+
+请参阅“sni-auto”选项，以启用代理流量的自动 SNI 选择。
+
+<a id="entry-5-2-check-sni"></a>
+
+**`check-sni <sni>`**
+
+```haproxy
+check-sni <sni>
+```
+
+可用于以下上下文：tcp、http、log
+
+此选项允许指定在通过 SSL 执行健康检查时使用的 SNI。仅可使用字符串设置 `<sni>`。如需为代理流量设置 SNI，请参阅 "sni"。
+
+<a id="entry-5-2-check-ssl"></a>
+
+**`check-ssl`**
+
+```haproxy
+check-ssl
+```
+
+可用于以下上下文：tcp、http、log
+
+此选项强制对所有健康检查使用 SSL 加密，无论服务器在正常流量中是否使用 SSL。当显式指定 "port" 或 "addr" 指令且健康检查不继承 SSL 设置时，通常使用此选项。需要注意的是，此选项在检查下方插入了 SSL 传输层，使得简单的 TCP 连接检查变为 SSL 连接检查，从而取代了旧的 ssl-hello-chk。最常见的用法是结合 "httpchk" 与 SSL 检查发送 HTTPS 检查。所有 SSL 设置对健康检查和流量均通用（例如密码套件）。有关更多信息，请参阅 "ssl" 选项，使用 "no-check-ssl" 可禁用此选项。
+
+<a id="entry-5-2-check-via-socks4"></a>
+
+**`check-via-socks4`**
+
+```haproxy
+check-via-socks4
+```
+
+可用于以下上下文：tcp、http、log
+
+此选项启用通过上游 SOCKS4 代理发起的出站健康检查。默认情况下，即使正常流量已启用 SOCKS 隧道，健康检查也不会经过 SOCKS 隧道。
+
+<a id="entry-5-2-ciphers"></a>
+
+**`ciphers <ciphers>`**
+
+```haproxy
+ciphers <ciphers>
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此设置仅在编译时启用了 OpenSSL 支持时可用。该选项用于设置在与服务器进行 SSL/TLS 握手时协商的密码套件列表的描述字符串。字符串格式由 OpenSSL 手册页中的“man 1 ciphers”定义。有关背景信息和建议，请参阅例如 (<https://wiki.mozilla.org/Security/Server_Side_TLS>) 和 (<https://mozilla.github.io/server-side-tls/ssl-config-generator/>)。对于 TLSv1.3 密码套件配置，请参阅“ciphersuites”关键字。
+
+<a id="entry-5-2-ciphersuites"></a>
+
+**`ciphersuites <ciphersuites>`**
+
+```haproxy
+ciphersuites <ciphersuites>
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此设置仅在编译时启用了 OpenSSL 支持且使用 OpenSSL 1.1.1 或更高版本构建 HAProxy 时可用。该选项用于设置在与服务器进行 TLS 1.3 握手时协商的密码套件列表的描述字符串。字符串格式由 OpenSSL 手册页中“ciphersuites”章节下的“man 1 ciphers”定义。关于 TLSv1.2 及更早版本的密码套件配置，请参阅“ciphers”关键字。
+
+<a id="entry-5-2-client-sigalgs"></a>
+
+**`client-sigalgs <sigalgs>`**
+
+```haproxy
+client-sigalgs <sigalgs>
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此设置仅在编译时启用 OpenSSL 支持时可用。它用于设置描述与客户端认证相关的签名算法列表的字符串，该列表在协商过程中确定。字符串格式由 OpenSSL 手册页中的“man 3 SSL_CTX_set1_client_sigalgs”定义。若未明确特定使用场景，不建议使用此设置。
+
+<a id="entry-5-2-cookie"></a>
+
+**`cookie <value>`**
+
+```haproxy
+cookie <value>
+```
+
+可用于以下上下文：http
+
+"cookie" 参数用于设置分配给服务器的 cookie 值 `<value>`。该值将在传入的请求中被检查，首个拥有相同值的处于正常运行状态的服务器将被选中。在 cookie 插入或重写模式下，该值将被分配给发送给客户端的 cookie。多个服务器共享相同的 cookie 值并无不妥，实际上在正常服务器与备用服务器之间这种情况较为常见。另请参见后端段中的 "cookie" 关键字。
+
+<a id="entry-5-2-crl-file"></a>
+
+**`crl-file <crlfile>`**
+
+```haproxy
+crl-file <crlfile>
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此设置仅在编译时启用 OpenSSL 支持时可用。它指定一个 PEM 文件，用于加载证书吊销列表，以验证服务器证书。
+
+<a id="entry-5-2-crt"></a>
+
+**`crt <cert>`**
+
+```haproxy
+crt <cert>
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此设置仅在编译时启用 OpenSSL 支持时可用。它指定一个 PEM 文件，用于加载证书及其关联的私钥。该文件可通过将两个 PEM 文件合并而成。当服务器发送客户端证书请求时，将发送此证书。
+
+如果文件中不包含私钥，HAProxy 将尝试在相同路径下加载以 ".key" 为后缀的密钥（前提是已相应设置 "ssl-load-extra-files" 选项）。
+
+<a id="entry-5-2-curves"></a>
+
+**`curves <curves>`**
+
+```haproxy
+curves <curves>
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此设置仅在编译时启用 OpenSSL 支持时可用。它用于设置在使用 ECDHE 进行 SSL/TLS 握手时协商的椭圆曲线算法列表（“曲线套件”）的描述字符串。字符串格式为以冒号分隔的曲线名称列表。例如：X25519:P-256（不带引号）
+
+<a id="entry-5-2-disabled"></a>
+
+**`disabled`**
+
+```haproxy
+disabled
+```
+
+可用于以下上下文：tcp、http、log
+
+“disabled” 关键字将服务器置于“disabled”状态。这意味着该服务器在维护模式下被标记为不可用，除持久连接模式允许的连接外，其他任何连接均无法到达它。该设置非常适合用于部署新服务器，因为正常流量永远不会触及这些服务器，同时仍可通过使用 force-persist 机制对服务进行测试。另请参见“enabled”设置。
+
+<a id="entry-5-2-enabled"></a>
+
+**`enabled`**
+
+```haproxy
+enabled
+```
+
+可用于以下上下文：tcp、http、log
+
+此选项可作为“server”设置使用，用于重置从“default-server”指令继承的任何“disabled”设置。也可作为“default-server”设置使用，用于重置之前设置的“default-server”“disabled”设置。
+
+<a id="entry-5-2-error-limit"></a>
+
+**`error-limit <count>`**
+
+```haproxy
+error-limit <count>
+```
+
+可用于以下上下文：tcp、http、log
+
+若启用了健康观察（observe），参数 "error-limit" 指定触发 "on-error" 选项所选事件的连续错误次数。默认值为 10 次连续错误。
+
+另请参阅“check”、“error-limit”和“on-error”。
+
+<a id="entry-5-2-fall"></a>
+
+**`fall <count>`**
+
+```haproxy
+fall <count>
+```
+
+可用于以下上下文：tcp、http、log
+
+"fall" 参数表示，当服务器连续出现 `<count>` 次健康检查失败后，将被视为不可用。若未指定，该值默认为 3。另请参阅 "check"、"inter" 和 "rise" 参数。
+
+<a id="entry-5-2-force-sslv3"></a>
+
+**`force-sslv3`**
+
+```haproxy
+force-sslv3
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项强制在与服务器通信时仅使用 SSLv3。在高连接速率场景下，SSLv3 通常比 TLS 对应版本的开销更低。该选项也可在全局语句 "ssl-default-server-options" 中使用。另请参见 "ssl-min-ver" 和 "ssl-max-ver"。
+
+<a id="entry-5-2-force-tlsv10"></a>
+
+**`force-tlsv10`**
+
+```haproxy
+force-tlsv10
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项强制在与服务器通信时仅使用 TLSv1.0 版本的 SSL。该选项也可在全局语句 "ssl-default-server-options" 中使用。另请参阅 "ssl-min-ver" 和 "ssl-max-ver"。
+
+<a id="entry-5-2-force-tlsv11"></a>
+
+**`force-tlsv11`**
+
+```haproxy
+force-tlsv11
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项强制在与服务器通信时仅使用 TLSv1.1 版本的 SSL。该选项也可在全局语句 "ssl-default-server-options" 中使用。另请参阅 "ssl-min-ver" 和 "ssl-max-ver"。
+
+<a id="entry-5-2-force-tlsv12"></a>
+
+**`force-tlsv12`**
+
+```haproxy
+force-tlsv12
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项强制在与服务器通信时仅使用 TLSv1.2 版本，前提是使用 SSL。该选项也可在全局语句 "ssl-default-server-options" 中使用。另请参阅 "ssl-min-ver" 和 "ssl-max-ver"。
+
+<a id="entry-5-2-force-tlsv13"></a>
+
+**`force-tlsv13`**
+
+```haproxy
+force-tlsv13
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项强制在与服务器通信时仅使用 TLSv1.3 版本，前提是启用 SSL。该选项也可在全局语句 "ssl-default-server-options" 中使用。另请参阅 "ssl-min-ver" 和 "ssl-max-ver"。
+
+<a id="entry-5-2-guid"></a>
+
+**`guid <string>`**
+
+```haproxy
+guid <string>
+```
+
+可用于以下上下文：tcp、http、log
+
+为该服务器指定一个区分大小写的全局唯一 ID。该 ID 必须在所有 HAProxy 配置中所有对象类型间保持唯一。有关其格式的更多信息，请参阅 "guid" 代理关键字的描述。另请参阅 "shm-stats-file"。
+
+<a id="entry-5-2-hash-key"></a>
+
+**`hash-key <key>`**
+
+```haproxy
+hash-key <key>
+```
+
+可用于以下上下文：tcp、http、log
+
+指定“hash-type consistent”节点键的计算方式
+
+参数：
+
+```text
+<key>   <key> 可为以下值之一：
+
+  id         节点键由服务器的数值标识符派生；标识符通过 "id" 设置，默认采用服务器在列表中的位置。
+             这是默认值。注意仅使用 ID 的最低 20 位（即 (id % 1048576)），
+             因此最好只使用 1 到该值之间的数值，以避免重叠。
+
+  id32       节点键由服务器的数值标识符派生；标识符通过 "id" 设置，默认采用服务器在列表中的位置。
+             但使用 ID 的完整 32 位，避免碰撞。此值不像 "id" 那样缩放，
+             因此建议始终与哈希函数（参见 "hash-key"）组合使用，
+             或显式分配均匀分布在 32 位空间中的 ID 值。
+
+  guid       节点键由服务器可用的 guid 派生，否则回退到 "id"。
+             优点是完全不依赖排序，仅依赖可在多个负载均衡器间复制的内部稳定标识符。
+
+  addr       节点键由服务器可用的地址派生，否则回退到 "id"。
+
+  addr-port  节点键由服务器可用的地址和端口派生，否则回退到 "id"。
+```
+
+“addr” 和 “addr-port” 选项在多个 HAProxy 进程对同一组服务器进行流量负载均衡的场景中可能非常有用。如果每个进程的服务器顺序不同（例如，由于 DNS 记录解析顺序不同），则此机制可使各个独立的 HAProxy 进程就路由决策达成一致。请注意：“balance random” 也使用 “hash-type consistent”，其分发质量取决于键的质量。
+
+<a id="entry-5-2-healthcheck"></a>
+
+**`healthcheck <name>`**
+
+```haproxy
+healthcheck <name>
+```
+
+可用于以下上下文：tcp、http
+
+指定用于对服务器执行检查的健康检查段。
+
+参数：
+
+```text
+<name>    是健康检查段的名称。
+```
+
+借助此选项，可使用预服务器健康检查配置，而非使用代理配置。另请参见“healthcheck”段。
+
+<a id="entry-5-2-id"></a>
+
+**`id <value>`**
+
+```haproxy
+id <value>
+```
+
+可用于以下上下文：tcp、http、log
+
+为服务器设置持久化 ID。该 ID 必须为 32 位正整数，且在代理范围内唯一。若未设置，将自动分配一个未使用的 ID。首次分配的值为 1。当前该 ID 仅在统计信息中返回，当使用一致性哈希算法且“hash-key”设置为“id”（默认值）时，用于定位负载均衡节点。此时仅使用该值的低 20 位（即 (id % 1048576)），因此建议仅使用 1 至该值之间的数值，以避免重叠。
+
+<a id="entry-5-2-idle-ping"></a>
+
+**`idle-ping <delay>`**
+
+```haproxy
+idle-ping <delay>
+```
+
+可用于以下上下文：tcp、http、log
+
+定义用于对空闲后端连接进行周期性存活检测的时间间隔。如果对等节点在下一次预定检测前无法响应，则关闭该连接。此关键字针对后端侧，因此可用于检查空闲连接是否仍可用。请注意，这不会阻止连接在空闲连接池清理时被销毁。
+
+此功能依赖于特定底层协议支持。目前，仅 H2 mux 实现了该功能。
+其他协议会直接忽略 Idle-ping。
+
+此选项在使用反向 HTTP 时尤为有用。在服务器行上设置该选项，有助于对等节点监听传入连接，并将其关联到相应的服务器，以便后续重用流量转发。
+
+<a id="entry-5-2-init-addr"></a>
+
+**`init-addr {last | libc | none | <ip>},[...]*`**
+
+```haproxy
+init-addr {last | libc | none | <ip>},[...]*
+```
+
+可用于以下上下文：tcp、http、log
+
+在服务器使用完全限定域名（FQDN）时，指定其地址在启动时应按何种顺序进行解析。
+
+将依次尝试列表中以逗号分隔的方法，直至某方法成功为止。若遍历完列表仍未找到有效方法，则抛出错误。方法 "last" 表示采用状态文件中记录的地址（参见 "server-state-file"）。方法 "libc" 使用 libc 内部解析器（根据操作系统和构建选项，使用 gethostbyname() 或 getaddrinfo()）。方法 "none" 明确表示服务器应以无有效 IP 地址的 down 状态启动。该选项可用于在启动时忽略某些 DNS 问题，等待后续情况得到修复。最后，可直接提供一个 IP 地址（IPv4 或 IPv6）。该地址可以是服务器当前已知的地址（例如由配置生成器填充），也可以是用于捕获旧会话的虚拟服务器地址，以便向客户端返回合理的错误信息。当使用 "first" 负载均衡算法时，该 IP 地址可指向一个假服务器，用于触发动态创建新实例。此选项默认值为 "last,libc"，表示优先使用状态文件中记录的上一次地址（若存在），否则使用 libc 解析器。这确保了与历史行为的持续兼容性。使用内部解析器时，通常建议禁用基于 libc 的解析，或显式指定（详见 [第 5.3 节](/zh/haproxy/bind-and-server-options/#section-5-3)）。
+
+示例 1：
+
+```text
+defaults
+    # never fail on address resolution
+    default-server init-addr last,libc,none
+```
+
+示例 2：
+
+```text
+defaults
+    # disable libc resolution in combination with resolvers
+    default-server init-addr last,none
+```
+
+<a id="entry-5-2-inter"></a>
+
+**`inter <delay>`**
+
+```haproxy
+inter <delay>
+fastinter <delay>
+downinter <delay>
+```
+
+可用于以下上下文：tcp、http、log
+
+"inter" 参数用于设置两次连续健康检查之间的间隔，单位为 `<delay>` 毫秒。若未指定，延迟默认为 2000 毫秒。也可使用 "fastinter" 和 "downinter" 根据服务器状态优化检查间隔：
+
+```text
+             服务器状态                     |         使用的间隔
+    ----------------------------------------+----------------------------------
+     UP 100%（非过渡状态）                   | "inter"
+    ----------------------------------------+----------------------------------
+     过渡中的 UP（经 "fall" 变为离线）、    | 若设置则使用 "fastinter"，
+     过渡中的 DOWN（经 "rise" 变为上线）、  | 否则使用 "inter"。
+     或尚未检查。                           |
+    ----------------------------------------+----------------------------------
+     DOWN 100%（非过渡状态）                 | 若设置则使用 "downinter"，
+                                            | 否则使用 "inter"。
+    ----------------------------------------+----------------------------------
+```
+
+与所有其他基于时间的参数一样，它们可以以任意其他显式单位输入，包括 { us, ms, s, m, h, d }。若未设置 "timeout check"，则 "inter" 参数还用作发送至服务器的健康检查的超时值。为减少在相同硬件上托管多个服务器时产生的“共振”效应，所有服务器的代理和健康检查将按微小的时间偏移依次启动。也可通过全局配置项 "spread-checks" 在代理和健康检查间隔中添加随机噪声。例如当多个后端使用相同服务器时，此设置具有实际意义。全局 "tune.max-checks-per-thread" 设置（若定义为非零值）将限制任意线程上同时执行的健康检查数量。为实现此目的，HAProxy 会将即将在已达到限制的线程上启动的检查放入队列，直至其他检查完成。这将导致有效检查间隔延长。在此情况下，降低 "inter" 设置的效果将非常有限，因为其无法减少检查在队列中等待的时间。
+
+<a id="entry-5-2-init-state"></a>
+
+**`init-state { fully-up | up | down | fully-down | none }`**
+
+```haproxy
+init-state { fully-up | up | down | fully-down | none }
+```
+
+可用于以下上下文：tcp、http
+
+可出现在以下段中：defaults \| frontend \| listen \| backend no \| no \| yes \| yes
+
+"init-state" 指令用于设置服务器的初始状态：   - 当设置为 'fully-up' 时，服务器被视为立即可用；若为此服务器启用了健康检查，则当所有健康检查均失败时，服务器将被置为 DOWN 状态。   - 当设置为 'up' 时，服务器被视为立即可用；若为此服务器启用了健康检查，则在下一次健康检查失败时，服务器将立即被置为 DOWN 状态。   - 当设置为 'down' 时，服务器初始被视为不可用；若为此服务器启用了健康检查，则在下一次健康检查成功时，服务器可被置为 UP 状态。   - 当设置为 'fully-down' 时，服务器初始被视为不可用；若为此服务器启用了健康检查，则当所有健康检查均成功时，服务器将被置为 UP 状态。   - 当设置为 'none'（默认值）时，禁用 init-state 管理。该设置可用于在该参数从 'default-server' 指令继承时恢复默认行为。
+
+服务器的初始状态在 HAProxy 实例（重新）启动时、检测到新服务器（例如通过服务发现或 DNS 解析）、动态服务器被激活、服务器退出维护模式等情况下被考虑。当服务器正在跟踪其他服务器时，此指令不可用。
+
+示例：
+
+```shell
+# pass client traffic ONLY to Redis "master" node
+backend redis-master
+  mode tcp
+  balance first
+  option tcp-check
+  tcp-check send role\r\n
+  tcp-check expect string master
+  server-template redis 3 _redis._tcp.redis-headless-service.sandbox.svc.cluster.local:6379 check ... init-state down
+
+# pass traffic to the server only after 3 successful health checks
+backend google-backend
+  mode http
+  server srv1 google.com:80 check init-state fully-down rise 3
+  server srv2 google.com:80 check init-state fully-down rise 3
+```
+
+另请参见："option tcp-check"，"option httpchk"
+
+<a id="entry-5-2-ktls"></a>
+
+**`ktls <on|off> [ EXPERIMENTAL ]`**
+
+```haproxy
+ktls <on|off> [ EXPERIMENTAL ]
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+启用或禁用套接字的 kTLS。若启用，当内核支持且加密算法兼容时，将使用 kTLS。此功能仅在 Linux 4.17 及以上版本中可用。请注意，部分网络驱动程序和/或 TLS 栈可能将 kTLS 使用限制为仅支持 TLS v1.2。参见 "force-tlsv12"。
+
+<a id="entry-5-2-log-bufsize"></a>
+
+**`log-bufsize <bufsize>`**
+
+```haproxy
+log-bufsize <bufsize>
+```
+
+可用于以下上下文：log
+
+"log-bufsize" 指定用于与日志后端中隐式环形缓冲区关联的日志服务器的环形缓冲区大小。未指定时，默认值为 BUFSIZE。使用更大的值会增加内存占用，但有助于防止因服务器响应缓慢而导致日志消息丢失，因为缓冲区能够容纳更多待处理的消息。此关键字仅可在日志后端段（使用 "mode log" 时）中使用。
+
+<a id="entry-5-2-log-proto"></a>
+
+**`log-proto <logproto>`**
+
+```haproxy
+log-proto <logproto>
+```
+
+可用于以下上下文：log、ring
+
+"log-proto" 指定用于将事件消息转发至 log 或 ring 段中配置的服务器所使用的协议。可能的取值为 "legacy" 和 "octet-count"，分别对应 RFC6587 中的 "Non-transparent-framing" 和 "Octet counting"。"legacy" 为默认值。
+
+<a id="entry-5-2-maxconn"></a>
+
+**`maxconn <maxconn>`**
+
+```haproxy
+maxconn <maxconn>
+```
+
+可用于以下上下文：tcp、http
+
+maxconn 参数指定将发送到该服务器的最大并发连接数。当传入的并发连接数超过此值时，连接将被排队，等待空闲槽位释放。该参数非常重要，可防止脆弱服务器在极端负载下宕机。若同时指定了 minconn 参数，限制将变为动态。默认值为 0，表示无限制。另请参见 minconn 和 maxqueue 参数，以及后端的 fullconn 关键字。
+
+在 HTTP 模式下，该参数限制的是并发请求数量，而非连接数量。多个请求可能复用至服务器的单个 TCP 连接。例如，若指定 maxconn 为 50，则实际服务器连接数可能在 1 到 50 之间，但并发请求数不会超过 50。
+
+<a id="entry-5-2-maxqueue"></a>
+
+**`maxqueue <maxqueue>`**
+
+```haproxy
+maxqueue <maxqueue>
+```
+
+可用于以下上下文：tcp、http
+
+maxqueue 参数指定将等待在该服务器队列中的最大连接数。若达到此限制，后续请求将被重分派至其他服务器，而非无限期等待服务。此举会中断持久性，但可在目标服务器即将失效时，帮助用户快速重新登录。某些负载均衡算法（如 leastconn）会考虑此设置，若显式设置为大于零的值，则允许将请求加入服务器队列至该数值，这通常有助于在处理单数字 maxconn 值时更平滑地分摊负载。默认值为 "0"，表示队列无限制。另请参见 "maxconn" 和 "minconn" 参数以及 "balance leastconn"。
+
+<a id="entry-5-2-max-reuse"></a>
+
+**`max-reuse <count>`**
+
+```haproxy
+max-reuse <count>
+```
+
+可用于以下上下文：http、ring
+
+在 http 上下文中使用时：
+
+“max-reuse” 参数指示 HTTP 连接处理器，向服务器发送新请求时，不应超过此次数复用现有连接。允许的值为 -1（默认值），表示禁用此限制，或任意正整数值。值为零将有效禁用持久连接。该参数仅用于绕过某些服务器缺陷导致的资源随时间泄漏问题。由于底层技术限制，该参数可能无法被下层完全遵守。至少对于 HTTP/2 到服务器的连接，该参数将被遵守。
+
+在环形缓冲区上下文中使用时：
+
+"max-reuse" 参数表示接收端 TCP 连接处理器应限制对服务器连接的复用次数，不得超过指定次数。这意味着，当同一连接上处理的消息数量达到 "max-reuse + 1" 次时，该服务器连接将被强制关闭。随后，连接将自动重新建立。在多线程环境下处理大量消息时，此举有助于更均衡地将环形缓冲区的负载分摊至多个线程。每个连接在其生命周期内始终绑定至同一 CPU 线程：与 HTTP 不同，不存在类似 syslog 事务的概念，因此只要服务器未主动关闭连接或未发生网络错误，该连接可能长期持续存在。通过定期关闭连接，可为其他线程轮流处理消息创造机会。这在 HAProxy 与日志服务器之间存在额外负载均衡层的场景中，也有助于实现日志服务器的优雅轮换。然而请注意，每次连接回收后，出站端口将进入 TIME_WAIT 状态，现代操作系统下该端口约需一分钟才能重新可用。因此，必须谨慎避免设置过低的值，以防源端口迅速耗尽。一般建议，每秒关闭连接的次数不应超过数次，且最好远低于此频率。允许的取值为 -1（默认值），表示禁用此限制，或任意正整数。与 HTTP 上下文不同，当用于接收端服务器时，"max-reuse" 为尽力而为机制：消息以批处理方式发送，因此该限制仅在每批消息处理完毕后检查一次。
+
+<a id="entry-5-2-minconn"></a>
+
+**`minconn <minconn>`**
+
+```haproxy
+minconn <minconn>
+```
+
+可用于以下上下文：tcp、http
+
+当设置 "minconn" 参数时，maxconn 限制将变为动态限制，随后端负载变化而调整。服务器始终至少接受 `<minconn>` 个连接，且不超过 `<maxconn>` 个连接。当后端并发连接数少于 `<fullconn>` 时，该限制将在两个数值之间动态调整。这使得在正常负载下可限制服务器负载，而在重要负载下可进一步提升处理能力，同时在异常负载期间避免服务器过载。另请参见 "maxconn" 和 "maxqueue" 参数，以及 "fullconn" 后端关键字。
+
+<a id="entry-5-2-namespace"></a>
+
+**`namespace <name>`**
+
+```haproxy
+namespace <name>
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+在 Linux 上，可以指定套接字所属的网络命名空间。该指令允许显式地将服务器绑定到与默认命名空间不同的命名空间。有关网络命名空间的更多详细信息，请参阅操作系统的文档。
+
+<a id="entry-5-2-no-agent-check"></a>
+
+**`no-agent-check`**
+
+```haproxy
+no-agent-check
+```
+
+可用于以下上下文：tcp、http、log
+
+此选项可作为“server”设置使用，以重置从“default-server”指令继承的任何“agent-check”设置作为默认值。也可作为“default-server”设置使用，以重置之前设置的“default-server”“agent-check”设置。
+
+<a id="entry-5-2-no-backup"></a>
+
+**`no-backup`**
+
+```haproxy
+no-backup
+```
+
+可用于以下上下文：tcp、http、log
+
+此选项可作为“server”设置使用，以重置从“default-server”指令继承的任何“backup”设置作为默认值。也可作为“default-server”设置使用，以重置之前设置的“default-server”“backup”设置。
+
+<a id="entry-5-2-no-check"></a>
+
+**`no-check`**
+
+```haproxy
+no-check
+```
+
+可用于以下上下文：tcp、http、log
+
+此选项可作为“server”设置使用，用于重置从“default-server”指令继承的任何“check”设置作为默认值。也可作为“default-server”设置使用，用于重置之前设置的“default-server”“check”设置。
+
+<a id="entry-5-2-no-check-reuse-pool"></a>
+
+**`no-check-reuse-pool`**
+
+```haproxy
+no-check-reuse-pool
+```
+
+可用于以下上下文：tcp、http
+
+此选项会取消从 "default-server" 继承的任何先前设置的 "check-reuse-pool"。所有检查将在其专用连接上执行。
+
+<a id="entry-5-2-no-check-sni-auto"></a>
+
+**`no-check-sni-auto`**
+
+```haproxy
+no-check-sni-auto
+```
+
+可用于以下上下文：tcp、http、log
+
+此选项可作为“server”设置使用，以禁用默认启用的 SSL 健康检查中的自动 SNI 选择。
+
+请参阅 "no-sni-auto" 选项，以禁用代理流量的自动 SNI 选择。
+
+<a id="entry-5-2-no-check-ssl"></a>
+
+**`no-check-ssl`**
+
+```haproxy
+no-check-ssl
+```
+
+可用于以下上下文：tcp、http、log
+
+此选项可作为“server”设置使用，用于重置从“default-server”指令继承的“check-ssl”设置（作为默认值）。也可作为“default-server”设置使用，用于重置之前设置的“default-server”“check-ssl”设置。
+
+<a id="entry-5-2-no-renegotiate"></a>
+
+**`no-renegotiate`**
+
+```haproxy
+no-renegotiate
+```
+
+可用于以下上下文：tcp、http、log
+
+此设置仅在编译时启用 OpenSSL 支持时可用。它会禁用指定 SSL 后端的重新协商机制，无论是传统的不安全方式，还是较新的“安全重新协商”方式（RFC 5746 TLS 重新协商指示扩展）。该选项也可在全局语句 `ssl-default-server-options` 中使用。TLS 1.3 中已不再支持重新协商。若未指定 `renegotiate` 或 `no-renegotiate`，则保留 SSL 库的默认行为。请注意，例如 OpenSSL 库默认启用安全重新协商，而 AWS-LC 则默认禁用。另见 `renegotiate`。
+
+<a id="entry-5-2-no-send-proxy"></a>
+
+**`no-send-proxy`**
+
+```haproxy
+no-send-proxy
+```
+
+可用于以下上下文：tcp、http
+
+此选项可作为“server”设置使用，用于重置从“default-server”指令继承的“send-proxy”设置（默认值）。也可作为“default-server”设置使用，用于重置之前设置的“default-server”“send-proxy”选项。
+
+<a id="entry-5-2-no-send-proxy-v2"></a>
+
+**`no-send-proxy-v2`**
+
+```haproxy
+no-send-proxy-v2
+```
+
+可用于以下上下文：tcp、http
+
+此选项可作为“server”设置使用，用于重置从“default-server”指令继承的任何“send-proxy-v2”设置。也可作为“default-server”设置使用，用于重置之前设置的“default-server”“send-proxy-v2”选项。
+
+<a id="entry-5-2-no-send-proxy-v2-ssl"></a>
+
+**`no-send-proxy-v2-ssl`**
+
+```haproxy
+no-send-proxy-v2-ssl
+```
+
+可用于以下上下文：tcp、http
+
+此选项可作为“server”设置使用，用于重置从“default-server”指令继承的任何“send-proxy-v2-ssl”设置。也可作为“default-server”设置使用，用于重置之前设置的“default-server”“send-proxy-v2-ssl”设置。
+
+<a id="entry-5-2-no-send-proxy-v2-ssl-cn"></a>
+
+**`no-send-proxy-v2-ssl-cn`**
+
+```haproxy
+no-send-proxy-v2-ssl-cn
+```
+
+可用于以下上下文：tcp、http
+
+此选项可作为“server”设置使用，用于重置从“default-server”指令继承的任何“send-proxy-v2-ssl-cn”设置。也可作为“default-server”设置使用，用于重置之前设置的“default-server”“send-proxy-v2-ssl-cn”设置。
+
+<a id="entry-5-2-no-sni-auto"></a>
+
+**`no-sni-auto`**
+
+```haproxy
+no-sni-auto
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项可作为“server”设置使用，以禁用默认启用的自动 SNI 选择功能。
+
+请参阅 "no-check-sni-auto" 选项，以禁用 SSL 健康检查中的自动 SNI 选择。
+
+<a id="entry-5-2-no-ssl"></a>
+
+**`no-ssl`**
+
+```haproxy
+no-ssl
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项可作为“server”设置使用，用于重置从“default-server”指令继承的任何“ssl”设置。也可作为“default-server”设置使用，用于重置之前设置的“default-server”“ssl”设置。
+
+请注意，使用 `default-server ssl` 设置和 `no-ssl` 在服务器上将初始化 SSL 连接，因此后续可通过运行时 API 启用：参见管理文档中的 `set server` 命令。
+
+<a id="entry-5-2-no-ssl-reuse"></a>
+
+**`no-ssl-reuse`**
+
+```haproxy
+no-ssl-reuse
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项在与服务器通信时使用 SSL 时禁用 SSL 会话复用。它将强制服务器为每个新连接执行完整的握手过程。该选项可能仅适用于基准测试、故障排查，以及对安全极度敏感的用户。
+
+<a id="entry-5-2-no-sslv3"></a>
+
+**`no-sslv3`**
+
+```haproxy
+no-sslv3
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项在与服务器通信时使用 SSL 时禁用对 SSLv3 的支持。请注意，SSLv2 已在代码中禁用，无法通过任何配置选项启用。请改用 "ssl-min-ver" 和 "ssl-max-ver"。
+
+在 default-server 中受支持：否
+
+<a id="entry-5-2-no-tls-tickets"></a>
+
+**`no-tls-tickets`**
+
+```haproxy
+no-tls-tickets
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此设置仅在编译时启用 OpenSSL 支持时可用。它禁用无状态会话恢复（RFC 5077 TLS 会话票据扩展），强制使用有状态会话恢复。无状态会话恢复对服务器的 CPU 使用率更高。此选项也可在全局语句 "ssl-default-server-options" 中使用。TLS 会话票据机制仅适用于 TLS 1.2 及以下版本。使用 TLS 会话票据会损害前向安全性，除非定期轮换票据密钥（通过重载或使用 "tls-ticket-keys"）。参见 "tls-tickets"。
+
+<a id="entry-5-2-no-tlsv10"></a>
+
+**`no-tlsv10`**
+
+```haproxy
+no-tlsv10
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项在使用 SSL 与服务器通信时禁用对 TLSv1.0 的支持。请注意，SSLv2 在代码中已禁用，无法通过任何配置选项启用。由于 TLSv1 的开销高于 SSLv3，因此在与本地服务器通信时，禁用 TLSv1 通常更为合理。此选项也可在全局语句 "ssl-default-server-options" 中使用，请改用 "ssl-min-ver" 和 "ssl-max-ver"。
+
+在 default-server 中受支持：否
+
+<a id="entry-5-2-no-tlsv11"></a>
+
+**`no-tlsv11`**
+
+```haproxy
+no-tlsv11
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项在使用 SSL 与服务器通信时禁用对 TLSv1.1 的支持。请注意，SSLv2 在代码中已禁用，无法通过任何配置选项启用。由于 TLSv1 的开销高于 SSLv3，因此在与本地服务器通信时，禁用 TLSv1 通常更为合理。此选项也可在全局语句 "ssl-default-server-options" 中使用，请改用 "ssl-min-ver" 和 "ssl-max-ver"。
+
+在 default-server 中受支持：否
+
+<a id="entry-5-2-no-tlsv12"></a>
+
+**`no-tlsv12`**
+
+```haproxy
+no-tlsv12
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项在使用 SSL 与服务器通信时禁用对 TLSv1.2 的支持。请注意，SSLv2 在代码中已禁用，无法通过任何配置选项启用。由于 TLSv1 的开销高于 SSLv3，因此在与本地服务器通信时，禁用 TLSv1 通常更为合理。此选项也可在全局语句 "ssl-default-server-options" 中使用，请改用 "ssl-min-ver" 和 "ssl-max-ver"。
+
+在 default-server 中受支持：否
+
+<a id="entry-5-2-no-tlsv13"></a>
+
+**`no-tlsv13`**
+
+```haproxy
+no-tlsv13
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项在使用 SSL 与服务器通信时禁用对 TLSv1.3 的支持。请注意，SSLv2 在代码中已禁用，无法通过任何配置选项启用。由于 TLSv1 的开销高于 SSLv3，因此在与本地服务器通信时，通常建议禁用 TLSv1。此选项也可在全局语句 "ssl-default-server-options" 中使用，请改用 "ssl-min-ver" 和 "ssl-max-ver"。
+
+在 default-server 中受支持：否
+
+<a id="entry-5-2-no-verifyhost"></a>
+
+**`no-verifyhost`**
+
+```haproxy
+no-verifyhost
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项可作为“server”设置使用，用于重置从“default-server”指令继承的“verifyhost”设置（默认值）。也可作为“default-server”设置使用，用于重置之前设置的“default-server”“verifyhost”设置。
+
+<a id="entry-5-2-no-tfo"></a>
+
+**`no-tfo`**
+
+```haproxy
+no-tfo
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项可作为“server”设置使用，以重置从“default-server”指令继承的任何“tfo”设置作为默认值。也可作为“default-server”设置使用，以重置之前设置的“default-server”“tfo”设置。
+
+<a id="entry-5-2-non-stick"></a>
+
+**`non-stick`**
+
+```haproxy
+non-stick
+```
+
+可用于以下上下文：tcp、http
+
+不要将分配给此服务器的连接添加到粘性表中。此选项可与 backup 配合使用，以确保备用服务器的粘性表持久性被禁用。
+
+<a id="entry-5-2-npn"></a>
+
+**`npn <protocols>`**
+
+```haproxy
+npn <protocols>
+```
+
+可用于以下上下文：tcp、http
+
+启用 NPN TLS 扩展，并在 NPN 基础上通告指定的协议列表作为支持协议。协议列表由逗号分隔的协议名称组成，例如：http/1.1,http/1.0（不带引号）。此功能要求 SSL 库在编译时启用了 TLS 扩展支持（请通过 haproxy -vv 检查）。请注意，NPN 扩展已被 ALPN 扩展取代（参见 "alpn" 关键字），但 ALPN 仅在 OpenSSL 1.0.2 及以上版本中可用。
+
+<a id="entry-5-2-observe"></a>
+
+**`observe <mode>`**
+
+```haproxy
+observe <mode>
+```
+
+可用于以下上下文：tcp、http
+
+本选项启用基于观察与服务器通信情况的健康状态调整功能。默认情况下，此功能处于禁用状态，启用该功能还需同时启用健康检查。目前支持两种模式：“layer4” 和 “layer7”。在 layer4 模式下，仅成功或失败的 TCP 连接具有意义。在 layer7 模式下，仅适用于 HTTP 代理，会验证从服务器接收到的响应，例如有效的或错误的 HTTP 状态码、无法解析的头、超时等。有效的状态码包括 100 至 499、501 和 505。
+
+另请参见“check”、“on-error”和“error-limit”。
+
+<a id="entry-5-2-on-error"></a>
+
+**`on-error <mode>`**
+
+```haproxy
+on-error <mode>
+```
+
+可用于以下上下文：tcp、http、log
+
+当检测到足够多的连续错误时，指定应执行的操作。当前支持四种模式：
+
+- fastinter：强制启用 fastinter
+- fail-check：模拟健康检查失败，同时强制启用 fastinter（默认）
+- sudden-death：模拟致命前的健康检查失败，再有一次检查失败即标记服务器为不可用，强制启用 fastinter
+- mark-down：立即标记服务器为不可用，并强制启用 fastinter
+
+另请参见 "check"、"observe" 和 "error-limit"。
+
+<a id="entry-5-2-on-marked-down"></a>
+
+**`on-marked-down <action>`**
+
+```haproxy
+on-marked-down <action>
+```
+
+可用于以下上下文：tcp、http、log
+
+修改服务器被标记为不可用时的处理方式。当前可用一个动作：
+
+- shutdown-sessions：关闭对等节点的流。启用此设置后，当服务器宕机时，所有到该服务器的连接将立即终止。若健康检查检测到的情况比简单的连接状态更为复杂，且长时间超时会导致服务长时间无响应，可使用此选项。例如，健康检查可能发现数据库已卡死，现有连接已无法再复用。通过此方式终止的连接会在日志中以 'D' 终止码（表示“宕机”）记录。
+
+动作默认被禁用
+
+<a id="entry-5-2-on-marked-up"></a>
+
+**`on-marked-up <action>`**
+
+```haproxy
+on-marked-up <action>
+```
+
+可用于以下上下文：tcp、http、log
+
+修改服务器被标记为上线时的处理行为。当前可用一个动作：
+
+- shutdown-backup-sessions：在所有备用服务器上关闭流。仅当服务器未处于备用状态且未被禁用时执行（其有效权重必须大于 0）。在处理长会话（例如 LDAP、SQL 等）时，此选项可用于强制活跃服务器在恢复后重新接管全部流量。使用此功能可能带来的问题多于其解决的问题（例如未完成的事务），因此应极其谨慎地使用。因服务器上线而被终止的流，其终止码记录为 'U'（表示“上线”）。
+
+动作默认被禁用
+
+<a id="entry-5-2-pool-conn-name"></a>
+
+**`pool-conn-name <expr>`**
+
+```haproxy
+pool-conn-name <expr>
+```
+
+可用于以下上下文：http
+
+后端连接建立后，将评估此表达式以生成连接名称。该名称是空闲服务器池中连接的关键属性之一。参见“http-reuse”关键字。当请求查找现有空闲连接时，将评估此表达式以匹配完全相同的连接。
+
+在使用 SSL SNI 进行后端连接的场景中，连接名称会自动设置为 "sni" 表达式的计算结果。这适用于最常见的使用场景。对于更高级的配置，可以使用 "pool-conn-name" 来覆盖此行为。
+
+另请参见："http-reuse"，"sni"
+
+<a id="entry-5-2-pool-low-conn"></a>
+
+**`pool-low-conn <max>`**
+
+```haproxy
+pool-low-conn <max>
+```
+
+可用于以下上下文：http
+
+设置服务器空闲连接数的低阈值，低于该阈值时，线程将不会尝试从其他线程窃取连接。在涉及大量极快服务器的场景中，此设置有助于优化 CPU 使用模式，确保所有线程始终维持少量空闲连接，而非让连接集中在单一线程上并频繁在不同线程间迁移。通常，将该值设为线程数的两倍即可实现极佳性能，响应时间可低至亚毫秒级。默认值为 0，表示任何空闲连接均可随时使用。这是正常使用场景下的推荐设置。该设置仅适用于可按与 "http-reuse" 相同原则共享的连接。若通过 "tune.idle-pool.shared" 禁用了线程间的连接共享，则使用此设置变得尤为重要，以确保每个线程始终拥有少量连接，否则随着线程数量增加，连接复用率将下降。
+
+<a id="entry-5-2-pool-max-conn"></a>
+
+**`pool-max-conn <max>`**
+
+```haproxy
+pool-max-conn <max>
+```
+
+可用于以下上下文：http
+
+设置服务器的最大空闲连接数。-1 表示无连接数限制，0 表示不允许空闲连接。默认值为 -1。启用空闲连接后，不再属于任何客户端会话的孤立空闲连接将被移至专用池，以便未来客户端继续使用。此机制仅适用于可根据与“http-reuse”相同原则共享的连接。
+
+<a id="entry-5-2-pool-purge-delay"></a>
+
+**`pool-purge-delay <delay>`**
+
+```haproxy
+pool-purge-delay <delay>
+```
+
+可用于以下上下文：http
+
+设置开始清除空闲连接的延迟时间。每个 `<delay>` 间隔，一半的空闲连接将被关闭。0 表示不保留任何空闲连接。默认值为 5s。
+
+<a id="entry-5-2-port"></a>
+
+**`port <port>`**
+
+```haproxy
+port <port>
+```
+
+可用于以下上下文：tcp、http、log
+
+使用 "port" 参数，可指定不同的端口用于发送健康检查或探测 agent-check。在某些服务器上，可能需要为特定组件专门分配一个端口，该组件能够执行复杂的测试，这些测试比应用程序本身更适用于健康检查。例如，通常会在 inetd 中运行一个简单的脚本。若未设置 "check" 参数，则此参数将被忽略。另请参见 "addr" 参数。
+
+<a id="entry-5-2-proto"></a>
+
+**`proto <name>`**
+
+```haproxy
+proto <name>
+```
+
+可用于以下上下文：tcp、http
+
+强制多路复用器协议用于与此服务器的出站连接。该协议必须与后端的模式（TCP 或 HTTP）兼容，且必须可在后端侧使用。可用协议列表在 haproxy -vv 中报告。协议属性包括：模式（TCP/HTTP）、侧（FE/BE）、多路复用器名称及其标志。
+
+部分协议在服务器端存在队首阻塞问题（flag=HOL_RISK）。此外，部分协议不支持升级（flag=NO_UPG）。HTX 兼容性状态亦已报告（flag=HTX）。
+
+以下协议可用于服务器行中 "proto" 指令的参数：
+
+```text
+quic: mode=HTTP  side=FE|BE  mux=QUIC  flags=HTX|NO_UPG|FRAMED
+qmux: mode=HTTP  side=FE|BE  mux=QMUX  flags=HTX|NO_UPG
+h2  : mode=HTTP  side=FE|BE  mux=H2    flags=HTX|HOL_RISK|NO_UPG
+fcgi: mode=HTTP  side=BE     mux=FCGI  flags=HTX|HOL_RISK|NO_UPG
+h1  : mode=HTTP  side=FE|BE  mux=H1    flags=HTX|NO_UPG
+none: mode=TCP   side=FE|BE  mux=PASS  flags=NO_UPG
+spop: mode=SPOP  side=BE     mux=SPOP  flags=HOL_RISK|NO_UPG
+```
+
+此选项的设计理念是绕过为连接到该服务器的所有连接选择最佳多路复用协议的步骤。
+
+如果配置了 ALPN 或 NPN 设置，指定的协议应与多路复用器的协议兼容，以避免出现任何问题。例如，若设置为 "proto h1"，则不应将 ALPN 设置为 "h2"。
+
+另请参见 "ws"，以使用替代协议处理 WebSocket 流。
+
+QMux 是 QUIC 的一个子集，运行于 TCP 之上。它对应于以下草案协议 <https://www.ietf.org/archive/id/draft-ietf-quic-qmux-01.html>。目前在 HAProxy 中仍处于实验阶段。
+
+<a id="entry-5-2-quic-cc-algo"></a>
+
+**`quic-cc-algo { cubic | newreno | bbr | nocc }[(<args,...>)]`**
+
+```haproxy
+quic-cc-algo { cubic | newreno | bbr | nocc }[(<args,...>)]
+```
+
+这是针对 QUIC 的特定设置，用于为指向该服务器的任意连接选择拥塞控制算法。这些算法与 TCP 所使用的类似。有关所有自定义选项的完整说明，请参见名称相似的 bind 选项。
+
+默认值：cubic
+
+另请参阅："tune.quic.be.tx.pacing" 和 "tune.quic.be.cc.max-win-size"
+
+<a id="entry-5-2-redir"></a>
+
+**`redir <prefix>`**
+
+```haproxy
+redir <prefix>
+```
+
+可用于以下上下文：http
+
+“redir” 参数为所有针对此服务器的 GET 和 HEAD 请求启用重定向模式。这意味着 HAProxy 不会将请求转发至服务器，而是立即发送“HTTP 302”响应，其中“Location”头由该前缀紧接请求的 URI 组成，URI 从路径组件的起始“/”开始。这意味着在 `<prefix>` 之后不应使用尾随斜杠。所有无效请求将被拒绝，所有非 GET 或 HEAD 请求将由服务器正常处理。请注意，由于响应完全由 HAProxy 伪造，无法在响应中进行头字段处理或插入 Cookie。然而，请求中的 Cookie 仍会被分析，因此该方案完全可用于在本地发生灾难时将用户引导至远程位置。主要用途在于通过让客户端直接连接静态服务器来提升带宽。注意：切勿在此处使用相对路径，否则会导致客户端与 HAProxy 之间产生循环！
+
+示例：服务器 srv1 192.168.1.1:80 redir <http://image1.mydomain.com> check
+
+<a id="entry-5-2-renegotiate"></a>
+
+**`renegotiate`**
+
+```haproxy
+renegotiate
+```
+
+可用于以下上下文：tcp、http、log
+
+此选项为指定的 SSL 后端启用安全重新协商机制（RFC 5746 TLS 重新协商指示扩展）。它并不表示 SSL 客户端将发送重新协商请求，仅允许后端在服务器请求时进行重新协商。该功能仍需底层 SSL 库实际支持重新协商。此选项也可在全局语句 "ssl-default-server-options" 中使用。在 TLS 1.3 中，重新协商已不可行。若未指定 "renegotiate" 或 "no-renegotiate"，则保留 SSL 库的默认行为。请注意，例如 OpenSSL 库默认启用安全重新协商，而 AWS-LC 则禁用该功能。
+
+<a id="entry-5-2-rise"></a>
+
+**`rise <count>`**
+
+```haproxy
+rise <count>
+```
+
+可用于以下上下文：tcp、http、log
+
+"rise" 参数表示，服务器在连续成功完成 `<count>` 次健康检查后将被视为正常运行。若未指定，该值默认为 2。另请参阅 "check"、"inter" 和 "fall" 参数。
+
+resolve-opts `<option>`,`<option>`,... 可用于以下上下文：tcp、http、log
+
+以逗号分隔的选项列表，用于应用到与此服务器关联的 DNS 解析。
+
+可用选项：
+
+- allow-dup-ip 默认情况下，当运行时执行 DNS 解析时，HAProxy 会阻止后端中 IP 地址的重复。然而，在某些情况下，同一后端中由相同完全限定域名（FQDN）解析的两个服务器具有相同 IP 地址是合理的。对于此类情况，只需启用此选项。此选项与 prevent-dup-ip 相反。
+
+- ignore-weight 忽略 SRV 记录中设置的权重。当希望使用其他方法（例如通过 "agent-check" 或运行时 API）控制权重时，此选项非常有用。
+
+- prevent-dup-ip 确保 HAProxy 的默认行为在服务器上生效：防止在同一个后端中复用已分配给其他服务器的 IP 地址，且这些服务器共享相同的完全限定域名（fqdn）。这与 allow-dup-ip 的行为相反。
+
+示例：
+
+```text
+backend b_myapp
+  default-server init-addr none resolvers dns
+  server s1 myapp.example.com:80 check resolve-opts allow-dup-ip
+  server s2 myapp.example.com:81 check resolve-opts allow-dup-ip
+```
+
+启用 allow-dup-ip 选项时：
+
+- 若名称服务器返回单个 IP 地址，则两个服务器将使用该地址
+- 若名称服务器返回两个 IP 地址，则每个服务器将选择不同的地址
+
+默认值：未设置
+
+<a id="entry-5-2-resolve-prefer"></a>
+
+**`resolve-prefer <family>`**
+
+```haproxy
+resolve-prefer <family>
+```
+
+可用于以下上下文：tcp、http、log
+
+当为服务器启用 DNS 解析且返回了来自不同地址族的多个 IP 地址时，HAProxy 将优先使用 "resolve-prefer" 参数中指定的地址族的 IP 地址。另请参阅全局配置项 "dns-accept-family"，以强制严格使用特定地址族。可用地址族：ipv4 和 ipv6。
+
+默认值：ipv6
+
+示例：
+
+```text
+server s1 app1.domain.com:80 resolvers mydns resolve-prefer ipv6
+```
+
+<a id="entry-5-2-resolve-net"></a>
+
+**`resolve-net <network>[,<network[,...]]`**
+
+```haproxy
+resolve-net <network>[,<network[,...]]
+```
+
+可用于以下上下文：tcp、http、log
+
+此选项优先选择与网络匹配的 IP 地址。在云环境中，这有助于优先选择本地 IP。在某些情况下，云高可用性服务可能在多个不同数据中心通告多个 IP 地址。数据中心之间的延迟不可忽略，因此该配置可优先选择本地数据中心。若没有地址匹配配置的网络，则选择其他地址。
+
+示例：
+
+```text
+server s1 app1.domain.com:80 resolvers mydns resolve-net 10.0.0.0/8
+```
+
+<a id="entry-5-2-resolvers"></a>
+
+**`resolvers <id>`**
+
+```haproxy
+resolvers <id>
+```
+
+可用于以下上下文：tcp、http、log
+
+指向一个现有的 "resolvers" 段，用于解析当前服务器的主机名。当使用 resolvers 时，通常建议禁用基于 libc 的解析，尽管存在例外情况（参见 [第 5.3.1 节](/zh/haproxy/bind-and-server-options/#section-5-3-1)）。无论如何，使用 resolvers 时应显式指定 "init-addr"，以避免遗漏此元素。
+
+示例：
+
+```text
+server s1 app1.domain.com:80 init-addr last,none check resolvers mydns
+```
+
+有关实现细节及需注意的陷阱，请参阅 [第 5.3 节](/zh/haproxy/bind-and-server-options/#section-5-3)。
+
+<a id="entry-5-2-send-proxy"></a>
+
+**`send-proxy`**
+
+```haproxy
+send-proxy
+```
+
+可用于以下上下文：tcp、http
+
+"send-proxy" 参数强制对与此服务器建立的任何连接使用 PROXY 协议。PROXY 协议可向对端告知传入连接的第 3/4 层地址，从而使对端能够获知客户端地址或其访问的公网地址，无论上层协议为何。对于由 "accept-proxy" 或 "accept-netscaler-cip" 监听器接受的连接，将使用通告地址。仅支持 TCPv4 和 TCPv6 地址族，其他地址族（如 Unix 套接字）将报告为 UNKNOWN 家族。使用此选项的服务器可完全与另一个启用 "accept-proxy" 设置的 HAProxy 实例级联。若服务器不支持该协议，则不得使用此设置。当向服务器发送健康检查时，若已设置此选项，将自动使用 PROXY 协议，除非存在显式的 "port" 或 "addr" 指令；此时还需显式添加 "check-send-proxy" 指令，方可使用 PROXY 协议。另请参阅本段的 "no-send-proxy" 选项，以及 "bind" 关键字的 "accept-proxy" 和 "accept-netscaler-cip" 选项。
+
+<a id="entry-5-2-send-proxy-v2"></a>
+
+**`send-proxy-v2`**
+
+```haproxy
+send-proxy-v2
+```
+
+可用于以下上下文：tcp、http
+
+"send-proxy-v2" 参数强制对与此服务器建立的任何连接均使用 PROXY 协议版本 2。PROXY 协议可向对端告知传入连接的第 3/4 层地址，从而使对端能够获知客户端地址或其访问的公网地址，无论上层协议为何。若已协商 ALPN，则该设置还会发送 ALPN 信息。若服务器不支持此协议版本，则不得使用此设置。另请参见本段中的 "no-send-proxy-v2" 选项，以及 "bind" 关键字中的 "send-proxy" 选项。
+
+<a id="entry-5-2-set-proxy-v2-tlv-fmt"></a>
+
+**`set-proxy-v2-tlv-fmt(<id>) <fmt>`**
+
+```haproxy
+set-proxy-v2-tlv-fmt(<id>) <fmt>
+```
+
+可用于以下上下文：tcp、http
+
+"set-proxy-v2-tlv-fmt" 参数用于发送任意的 PROXY 协议版本 2 TLV。有关 TLV 类型编号（`<id>`）的可用范围，请参阅 PROXY 协议规范的第 2.2.8 节。但该值可自由选择，只要不超过最大长度 65,535 字节即可。也可通过使用 fetch "fc_pp_tlv" 从前端获取接收到的 TLV 来实现 TLV 的转发。该参数可作为服务器或 default-server 选项使用。必须与 send-proxy-v2 一同使用，以确保实际发送 PPv2 TLV。
+
+示例：server srv1 192.168.1.1:80 send-proxy-v2 set-proxy-v2-tlv-fmt(0x20) %[fc_pp_tlv(0x20)]
+
+在此情况下，我们将类型为 0x20 的 TLV 作为字符串获取，并将其设置为一个新创建的类型同样为 0x20 的 TLV 的值。
+
+<a id="entry-5-2-proxy-v2-options"></a>
+
+**`proxy-v2-options <option>[,<option>]*`**
+
+```haproxy
+proxy-v2-options <option>[,<option>]*
+```
+
+可用于以下上下文：tcp、http
+
+"proxy-v2-options" 参数用于在使用 "send-proxy-v2" 时，向 PROXY 协议版本 2 添加发送选项。可用选项包括：
+
+- ssl : 参见 "send-proxy-v2-ssl"。
+- cert-cn : 参见 "send-proxy-v2-ssl-cn"。
+- ssl-cipher：所用密码套件的名称。
+- cert-sig：所用证书的签名算法。
+- cert-key：所用证书的密钥算法。
+- authority：客户端传入的主机名值（仅支持来自 TLS 连接的 SNI）。
+- crc32c：PROXYv2 头的校验和。
+- unique-id：在 PROXYv2 头中发送由前端的 "unique-id-format" 生成的唯一 ID。该唯一 ID 主要用于 "mode tcp"。在 "mode http" 中使用可能导致意外结果，因为生成的唯一 ID 也会用于持久连接中的首个 HTTP 请求。
+
+<a id="entry-5-2-send-proxy-v2-ssl"></a>
+
+**`send-proxy-v2-ssl`**
+
+```haproxy
+send-proxy-v2-ssl
+```
+
+可用于以下上下文：tcp、http
+
+"send-proxy-v2-ssl" 参数强制在与该服务器建立的任何连接上使用 PROXY 协议版本 2。PROXY 协议可向对端告知传入连接的第 3/4 层地址，从而使对端能够获知客户端地址或其访问的公网地址，无论上层协议为何。此外，PROXY 协议头中还添加了 SSL 信息扩展。若服务器不支持此协议版本，则不得使用此设置。另请参阅本段中的 "no-send-proxy-v2-ssl" 选项，以及 "bind" 关键字的 "send-proxy-v2" 选项。
+
+<a id="entry-5-2-send-proxy-v2-ssl-cn"></a>
+
+**`send-proxy-v2-ssl-cn`**
+
+```haproxy
+send-proxy-v2-ssl-cn
+```
+
+可用于以下上下文：tcp、http
+
+"send-proxy-v2-ssl" 参数强制在与该服务器建立的任何连接上使用 PROXY 协议版本 2。PROXY 协议可向对端告知传入连接的第 3/4 层地址，从而使对端能够获知客户端地址或其访问的公网地址，无论上层协议为何。此外，PROXY 协议的 SSL 信息扩展，以及客户端证书主体中的通用名称（如存在），将被添加至 PROXY 协议头中。若服务器不支持此协议版本，则不得使用该设置。另请参见本段中的 "no-send-proxy-v2-ssl-cn" 选项，以及 "bind" 关键字中的 "send-proxy-v2" 选项。
+
+<a id="entry-5-2-shard"></a>
+
+**`shard <shard>`**
+
+```haproxy
+shard <shard>
+```
+
+可用于以下上下文：peers
+
+该参数仅在与对等节点的 stick-table 同步协议上下文中使用。“shard” 参数标识将接收以该分片作为分发哈希的所有 stick-table 键更新的对等节点。可接受的值范围为 0 至 “peers” 段中指定的 “shards” 参数值。0 值为默认值，表示该对等节点将接收所有键的更新。大于 “shards” 值的任何数值将被忽略。提供给本地对等节点的任何值亦同此处理。
+
+示例：
+
+```haproxy
+peers mypeers
+     shards 3
+     peer A 127.0.0.1:40001 # local peer without shard value (0 internally)
+     peer B 127.0.0.1:40002 shard 1
+     peer C 127.0.0.1:40003 shard 2
+     peer D 127.0.0.1:40004 shard 3
+```
+
+<a id="entry-5-2-sigalgs"></a>
+
+**`sigalgs <sigalgs>`**
+
+```haproxy
+sigalgs <sigalgs>
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此设置仅在编译时启用了 OpenSSL 支持时可用。它用于设置在 TLSv1.2 和 TLSv1.3 握手过程中协商的签名算法列表的描述字符串。字符串格式由 OpenSSL 手册页中的“man 3 SSL_CTX_set1_sigalgs”定义。除非需要与中间设备兼容，否则不建议使用此设置。
+
+<a id="entry-5-2-slowstart"></a>
+
+**`slowstart <start_time_in_ms>`**
+
+```haproxy
+slowstart <start_time_in_ms>
+```
+
+可用于以下上下文：tcp、http
+
+"slowstart" 参数用于指定服务器在重新上线后经过多长时间（以毫秒为单位）开始以全速运行。与所有其他基于时间的参数一样，该值可以使用以下任意显式单位表示：{ us, ms, s, m, h, d }。在此期间，服务器速度将线性地从 0 增长至 100%。该限制适用于以下两个参数：
+
+- maxconn：服务器接受的连接数将从 1 增长至由 (minconn, maxconn, fullconn) 定义的常规动态限制的 100%。
+
+- weight：当后端使用动态加权算法时，权重从 1 线性增长至 100%。在此情况下，权重会在每次健康检查时更新。因此，必须确保“inter”参数小于“slowstart”参数，以最大化步进数量。
+
+慢启动机制在 HAProxy 启动时不会生效，否则将对正在运行的服务器造成影响。该机制仅在服务器先前曾被识别为失败时才生效。
+
+<a id="entry-5-2-sni"></a>
+
+**`sni <expression>`**
+
+```haproxy
+sni <expression>
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+"sni" 参数会评估样本提取表达式，将其转换为字符串，并将结果用作在 TLS SNI 扩展中发送至服务器的主机名。典型用例是在桥接 TCP/SSL 场景中，将客户端传入的 SNI 原样转发，使用 "ssl_fc_sni" 样本提取作为表达式。此参数不得用于 HTTPS，此时应改用 req.hdr(host)，因为 HTTPS 中的 SNI 必须始终与 Host 字段一致，且客户端允许在同一条连接上使用不同的主机名）。若设置 "verify required"（推荐设置），结果主机名还将与服务器证书中的名称进行匹配。有关详情，请参见 "verify" 指令。如需为健康检查设置 SNI，请参见 "check-sni" 指令获取更多信息。
+
+默认情况下，SNI 会被分配给“http-reuse”的连接名称，除非被服务器关键字“pool-conn-name”覆盖。
+
+<a id="entry-5-2-sni-auto"></a>
+
+**`sni-auto`**
+
+```haproxy
+sni-auto
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+"sni-auto" 参数启用自动 SNI 选择，前提是未预先设置任何值。该参数将 "sni" 表达式设为 "req.hdr(host),field(1,:)"，表示将使用发送至服务器的请求中的 Host 名称作为 SNI，但会去除端口号。该功能默认启用，但也可作为 "server" 设置使用，以重置从 "default-server" 指令继承的任何 "no-sni-auto" 设置。此外，也可作为 "default-server" 设置使用，以重置之前设置的 "default-server" "no-sni-auto" 设置。
+
+对于 HTTPS 连接，若请求头中包含 Host 字段，则所选 SNI 基于该字段的值；否则保持未设置。对于其他协议，该选项被忽略。
+
+若使用自动选择 SNI 的方式，则该值将被分配给连接名称，用于 "http-reuse"，除非被 "pool-conn-name" 服务器关键字覆盖。
+
+请参阅“check-sni-auto”选项，以启用 SSL 健康检查的自动 SNI 选择。
+
+<a id="entry-5-2-source"></a>
+
+**`source <addr>[:<pl>[-<ph>]] [usesrc { <addr2>[:<port2>] | client | clientip } ]`**
+
+```haproxy
+source <addr>[:<pl>[-<ph>]] [usesrc { <addr2>[:<port2>] | client | clientip } ]
+source <addr>[:<port>] [usesrc { <addr2>[:<port2>] | hdr_ip(<hdr>[,<occ>]) } ]
+source <addr>[:<pl>[-<ph>]] [interface <name>] ...
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+"source" 参数用于设置连接服务器时所使用的源地址。其参数和原理与后端的 "source" 关键字完全相同，但仅适用于引用它的服务器。请参阅 "source" 关键字以获取详细信息。
+
+此外，服务器行上的“source”语句允许通过指定用连字符（'-'）分隔的下限和上限来定义源端口范围。某些操作系统在指定源端口范围时可能要求提供有效的 IP 地址。可以为多个服务器指定相同的 IP 地址或地址范围。这样做可绕过总计 64k 并发连接数的上限，此后每个服务器的连接数上限可达到 64k。
+
+自 Linux 4.2/libc 2.23 起，对于指定了源地址但未指定端口的连接，将设置 IP_BIND_ADDRESS_NO_PORT。
+
+<a id="entry-5-2-ssl"></a>
+
+**`ssl`**
+
+```haproxy
+ssl
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项在向服务器发起的出站连接上启用 SSL 加密。使用 SSL 连接服务器时，必须通过 "verify" 选项验证服务器证书，否则通信极易受到简单的中间人攻击，导致 SSL 完全失效。启用此选项后，健康检查也会自动通过 SSL 发送，除非存在 "port" 或 "addr" 指令明确指示检查应发送至其他位置。请参阅 "no-ssl" 以禁用 "ssl" 选项，或使用 "check-ssl" 选项强制健康检查使用 SSL。
+
+<a id="entry-5-2-ssl-max-ver"></a>
+
+**`ssl-max-ver [ SSLv3 | TLSv1.0 | TLSv1.1 | TLSv1.2 | TLSv1.3 ]`**
+
+```haproxy
+ssl-max-ver [ SSLv3 | TLSv1.0 | TLSv1.1 | TLSv1.2 | TLSv1.3 ]
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+当使用 SSL 与服务器通信时，此选项强制使用 `<version>` 或更低版本。
+
+此选项也可在全局语句 "ssl-default-server-options" 中使用。另请参见 "ssl-min-ver"。
+
+<a id="entry-5-2-ssl-min-ver"></a>
+
+**`ssl-min-ver [ SSLv3 | TLSv1.0 | TLSv1.1 | TLSv1.2 | TLSv1.3 ]`**
+
+```haproxy
+ssl-min-ver [ SSLv3 | TLSv1.0 | TLSv1.1 | TLSv1.2 | TLSv1.3 ]
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+当使用 SSL 与服务器通信时，此选项强制使用 `<version>` 或更高版本。
+此选项也可在全局语句 "ssl-default-server-options" 中使用。参见 "ssl-max-ver"。
+
+<a id="entry-5-2-ssl-reuse"></a>
+
+**`ssl-reuse`**
+
+```haproxy
+ssl-reuse
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项可作为“server”设置使用，以重置从“default-server”指令继承的“no-ssl-reuse”设置（默认值）。也可作为“default-server”设置使用，以重置之前设置的“default-server”“no-ssl-reuse”设置。
+
+<a id="entry-5-2-stick"></a>
+
+**`stick`**
+
+```haproxy
+stick
+```
+
+可用于以下上下文：tcp、http
+
+此选项可作为“server”设置使用，以重置从“default-server”指令继承的任何“non-stick”设置作为默认值。也可作为“default-server”设置使用，以重置之前设置的“default-server”“non-stick”设置。
+
+<a id="entry-5-2-strict-maxconn"></a>
+
+**`strict-maxconn`**
+
+```haproxy
+strict-maxconn
+```
+
+可用于以下上下文：tcp、http
+
+maxconn 限制服务器的连接数这一说法有些误导，实际上它配置的是我们发送至服务器的最大请求数。但由于存在空闲连接，实际与服务器建立的总连接数可能更多。若需对服务器连接数施加严格限制，可使用 strict-maxconn。启用后，我们绝不会建立超过 maxconn 数量的连接，必要时会尝试复用或终止现有连接。请注意，这可能导致请求失败，尤其是在无法建立新连接且无空闲连接可用的情况下。这种情况可能发生在建立“私有”连接时，即仅与会话绑定的连接，例如认证已发生的情形。
+
+<a id="entry-5-2-socks4"></a>
+
+**`socks4 <addr>:<port>`**
+
+```haproxy
+socks4 <addr>:<port>
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项为发往服务器的出站连接启用上游 SOCKS4 隧道。使用此选项不会默认强制健康检查通过 SOCKS4 进行。如需启用该功能，必须使用关键字 "check-via-socks4"。
+
+<a id="entry-5-2-tcp-md5sig"></a>
+
+**`tcp-md5sig <password>`**
+
+```haproxy
+tcp-md5sig <password>
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+启用 TCP MD5 签名（RFC 2385 通过 TCP MD5 签名选项保护 BGP 会话）功能，对所有发往该服务器的出站连接生效。此选项仅在 Linux 上可用。启用后，使用 `<password>` 字符串为每个 TCP 段生成 16 字节的 MD5 摘要进行签名。这可防止 TCP 连接遭受伪造攻击。该选项的主要用途是使 BGP 能够防范伪造 TCP 段被引入连接流。但对任何长时间持续的 TCP 连接均可能具有实用价值。
+
+<a id="entry-5-2-tcp-ut"></a>
+
+**`tcp-ut <delay>`**
+
+```haproxy
+tcp-ut <delay>
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+设置此服务器所有出站连接的 TCP 用户超时。该选项自 Linux 2.6.37 版本起可用。它允许 HAProxy 为包含尚未收到确认数据的套接字配置超时，超时时间为指定的延迟时间。在长时间保持连接且经历长时间空闲的场景下尤为有用，例如远程终端或数据库连接池，此时客户端与服务器的超时必须设置得较高以允许较长的空闲期，但同时又必须能够检测到服务器已失效，以便释放与该连接（以及客户端会话）相关的所有资源。一个典型用例是，在健康检查过慢或执行平滑重载期间强制终止已失效的服务器连接，因为此时健康检查已被禁用。该参数默认以毫秒为单位表示延迟时间。此功能仅适用于常规 TCP 连接，对其他协议无效。
+
+<a id="entry-5-2-tfo"></a>
+
+**`tfo`**
+
+```haproxy
+tfo
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项在支持该功能的系统上（目前仅限 Linux 内核 ≥ 4.11）启用与服务器连接时使用 TCP 快速打开。有关 TCP 快速打开的更多信息，请参见“tfo”绑定选项。请注意，使用 tfo 时，应同时使用“conn-failure”、“empty-response”和“response-timeout”作为“retry-on”的关键字，否则 HAProxy 将无法在连接失败时重试。另请参见“no-tfo”。
+
+<a id="entry-5-2-track"></a>
+
+**`track [<backend>/]<server>`**
+
+```haproxy
+track [<backend>/]<server>
+```
+
+可用于以下上下文：tcp、http、log
+
+此选项允许通过跟踪另一个服务器来设置当前服务器的状态。可以跟踪一个自身也在跟踪其他服务器的服务器，前提是链的末端必须有一个启用了健康检查的服务器。如果省略 `<backend>`，则使用当前后端。若使用 disable-on-404，必须在两个代理上均启用该选项。
+
+示例：
+
+```text
+backend A
+server a1 1.1.1.1:80 track B/b1
+server a2 1.1.1.2:80 track B/b1
+
+backend B
+server b1 2.2.2.2:80 check
+```
+
+<a id="entry-5-2-tls-tickets"></a>
+
+**`tls-tickets`**
+
+```haproxy
+tls-tickets
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此选项可作为“server”设置使用，用于重置从“default-server”指令继承的任何“no-tls-tickets”设置。TLS 会话票证机制仅在 TLS 1.2 及以下版本中使用。若未定期轮换票证密钥（通过重载或使用“tls-ticket-keys”），则使用 TLS 票证会损害前向安全性。该选项也可作为“default-server”设置使用，用于重置此前设置的“default-server”“no-tls-tickets”设置。
+
+<a id="entry-5-2-verify"></a>
+
+**`verify [none|required]`**
+
+```haproxy
+verify [none|required]
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+当编译时启用了 OpenSSL 支持时，此设置才可用。若设置为 'none'，则不验证服务器证书。否则，将在确认证书中的 subject 和 subjectAlternateNames 属性所包含的名称与通过 "sni" 指令传递的名称匹配，或未提供时与通过 "verifyhost" 指令传递的静态主机名匹配后，使用 'ca-file' 中的 CA 以及可选的 'crl-file' 中的 CRL 对服务器提供的证书进行验证。若未提供用于校验的名称，则忽略证书中的名称。因此，在未使用 SNI 时，务必使用 "verifyhost"。验证失败时，握手将被中止。使用 SSL 连接服务器时，必须验证服务器证书，否则通信极易受到简单的中间人攻击，导致 SSL 完全失效。除非 "ssl_server_verify" 出现在全局段中，否则 "verify" 默认设置为 "required"。
+
+<a id="entry-5-2-verifyhost"></a>
+
+**`verifyhost <hostname>`**
+
+```haproxy
+verifyhost <hostname>
+```
+
+可用于以下上下文：tcp、http、log、peers、ring
+
+此设置仅在编译时启用了 OpenSSL 支持时可用，且仅在同时指定 "verify required" 时才生效。该指令设置一个默认的静态主机名，用于在未使用 SNI 连接服务器时验证服务器证书。若未使用 SNI，此静态主机名是启用主机名验证的唯一方式。设置该静态主机名后，当健康检查未提供 SNI 值时，该名称也用于健康检查。若证书中的任意主机名均不匹配指定主机名，握手将被中止。服务器提供的证书中的主机名可包含通配符。另请参见 "verify"、"sni" 和 "no-verifyhost" 选项。
+
+<a id="entry-5-2-weight"></a>
+
+**`weight <weight>`**
+
+```haproxy
+weight <weight>
+```
+
+可用于以下上下文：tcp、http
+
+“weight” 参数用于调整服务器相对于其他服务器的权重。所有服务器将按其权重占总权重之和的比例接收负载，因此权重越高，接收的负载越大。默认权重为 1，最大值为 256。权重值为 0 表示该服务器不参与负载均衡，但仍可接受持久连接。若使用该参数根据服务器容量分配负载，建议初始值设置为可增可减的范围，例如在 10 到 100 之间，以便为后续调整留出足够的上下空间。
+
+<a id="entry-5-2-ws"></a>
+
+**`ws { auto | h1 | h2 }`**
+
+```haproxy
+ws { auto | h1 | h2 }
+```
+
+可用于以下上下文：http
+
+此选项用于配置中继 WebSocket 流时所使用的协议。当使用不支持通过 RFC8441 实现 H2 WebSocket 的 HTTP/2 后端时，该选项尤为有用。
+
+默认模式为“auto”。该模式将复用主协议。唯一区别在于使用 ALPN 时，若配置的服务器 ALPN 包含“http/1.1”，则可仅对 WebSocket 流尝试将 ALPN 降级为“http/1.1”。
+
+值 "h1" 用于强制对 WebSocket 流使用 HTTP/1.1，若服务器启用了 SSL ALPN，则通过 ALPN 实现。类似地，可使用 "h2" 强制使用 HTTP/2.0 WebSocket。使用此值时需谨慎：服务器必须支持 RFC8441，否则 HAProxy 在中继 WebSocket 时将报告错误。
+
+请注意，NPN 未被考虑，因其使用已被弃用，取而代之的是 ALPN 扩展。
+
+另请参见 "alpn" 和 "proto"。
+
+## 5.3. 服务器 IP 地址的 DNS 解析 {#section-5-3}
+
+HAProxy 允许在服务器行中使用主机名，并通过域名服务器获取其 IP 地址。默认情况下，HAProxy 在启动时解析配置文件的过程中完成名称解析，并将结果缓存至进程生命周期结束。在某些场景下，此机制不足以满足需求，例如在 Amazon 环境中，服务器的 IP 地址可能在重启后发生变化，或 ELB 虚拟 IP 地址可能随当前负载而变化。
+
+本章描述如何配置 HAProxy，使其在运行时处理服务器的名称解析。
+
+无论运行时服务器名称解析是否启用，HAProxy 默认会在启动时通过 libc 执行首次解析，除非通过 "init-addr" 参数禁用。
+
+### 5.3.1. 全局概述 {#section-5-3-1}
+
+如我们在简介中所见，HAProxy 中的名称解析发生在进程生命周期的两个不同阶段：
+
+```text
+1. 启动时，HAProxy 解析 server 行的定义，发现主机名时使用 libc 函数解析。
+   此解析依赖 /etc/resolv.conf 文件。
+
+2. 运行时，HAProxy 为需要 DNS 解析的服务器定期解析名称。
+```
+
+以下其他事件也可能在运行时触发名称解析：
+
+- 当服务器的健康检查因连接超时而失败时：这可能是由于服务器的 IP 地址已更改。因此，需要触发一次名称解析以获取该新 IP 地址。
+
+使用解析器时，服务器名称可以是主机名，也可以是 SRV 标签。HAProxy 将以下划线开头的任何内容视为 SRV 标签。若指定了 SRV 标签，则会从 DNS 服务器获取相应的 SRV 记录，并使用提供的主机名。SRV 标签将被定期检查，若任何服务器被添加或移除，HAProxy 会自动执行相应操作。
+
+请注意以下几点：
+
+- 同时查询所有名称服务器。HAProxy 将处理第一个有效的响应。
+
+- 当所有服务器均返回错误时，该解析被视为无效（NX、超时、拒绝）。
+
+- HAProxy 内置的 DNS 客户端功能非常基础，无法理解操作系统解析器能够处理的大量选项和高级配置。因此，除非是极为简单的场景——例如，仅通过完全限定域名（FQDN）标识的服务器在任意时刻仅有一个 IP 地址，且偶尔会重新获取（如重启后），强烈建议避免在初始化时使用基于 libc 的解析与运行时基于 DNS 的解析混合使用，此类配置已知会在地址更新时导致故障。综上所述，除非确切了解自身操作，否则在服务器行使用“resolvers”时，应始终将“libc”从“init-addr”中排除。
+
+### 5.3.2. 解析器段 {#section-5-3-2}
+
+本段专门用于配置与 HAProxy 中名称解析相关的主机信息。可根据需要配置多个 resolvers 段。每个段可包含多个名称服务器。
+
+启动时，HAProxy 会尝试生成一个名为 "default" 的 resolvers 段，前提是配置中未显式命名该段。此段默认由 httpclient 使用，并采用 parse-resolv-conf 关键字。若 HAProxy 无法自动生成该段，不会发出任何错误或警告。
+
+当在 resolvers 段中配置了多个名称服务器时，HAProxy 将采用首个有效的响应。若出现无效响应，仅最后一个响应会被处理。此机制旨在为响应较慢的服务器提供机会，在快速但错误或过时的服务器之后返回有效答案。
+
+当每个服务器返回不同的错误类型时，HAProxy 仅使用最后一个错误。对该错误应用以下处理：
+
+```text
+1. HAProxy 使用新的查询类型重试同一 DNS 查询，将 A 查询切换为 AAAA，或反向切换。
+   此步骤不适用于 SRV 查询，也排除超时错误。
+
+2. 完成查询类型的回退后（或不适用回退时），HAProxy 使用首选查询类型重试原始 DNS 查询。
+
+3. HAProxy 将以上步骤重试 <resolve_retries> 次。若仍未收到有效响应，则停止 DNS 解析并报告错误。
+```
+
+例如，在 resolvers 段中配置了 2 台域名服务器时，以下场景是可能的：
+
+- 第一个响应有效，并直接应用，第二个响应被忽略
+
+- 第一个响应无效，第二个响应有效，则应用第二个响应
+
+- 首个响应为 NXDOMAIN，第二个响应为截断响应，则 HAProxy 会使用新的类型重试查询
+
+- 首个响应为 NXDOMAIN，第二个响应为超时，则 HAProxy 会使用新的类型重试查询
+
+- 对两个域名服务器的查询均超时后，HAProxy 会使用相同的查询类型重试该请求
+
+由于 DNS 服务器可能无法在一次 DNS 请求中返回所有 IP 地址，HAProxy 会缓存之前的响应结果。若在 `<hold obsolete>` 秒内未返回该 IP 地址，则认为该响应已过期。
+
+<a id="entry-5-3-2-resolvers"></a>
+
+**`resolvers <resolvers id>`**
+
+```haproxy
+resolvers <resolvers id>
+```
+
+创建一个标记为 `<resolvers id>` 的新名称服务器列表。如上所述，特殊名称 "default" 始终存在，若未显式声明，将自动创建；内部服务（如 httpclient）依赖此名称。声明 "default" 条目将影响此类服务执行名称解析的方式。
+
+resolvers 段接受以下参数：
+
+<a id="entry-5-3-2-accepted-payload-size"></a>
+
+**`accepted_payload_size <nb>`**
+
+```haproxy
+accepted_payload_size <nb>
+```
+
+定义 HAProxy 接受的最大有效负载大小，并向本解析器段中配置的所有域名服务器通告该值。`<nb>` 的单位为字节。若未设置，HAProxy 默认通告 512。最小值由 RFC 6891 定义。
+
+请注意：最大允许值为 65535。对于 UDP，推荐值为 4096，除非确定系统和网络能够处理，否则不建议超过 8192（超过 65507 无意义，因为这是最大 UDP 负载大小）。如果仅使用 TCP 名称服务器处理大型 DNS 响应，应将此值设为最大值：65535。
+
+<a id="entry-5-3-2-nameserver"></a>
+
+**`nameserver <name> <address>[:port] [param*]`**
+
+```haproxy
+nameserver <name> <address>[:port] [param*]
+```
+
+用于配置名称服务器。名称服务器的 `<name>` 应当唯一。默认情况下，`<address>` 被视为数据报类型。这意味着，若配置了 IPv4 或 IPv6 地址但未使用特殊地址前缀（参见第 11 节），将使用 UDP 协议。若使用流协议地址前缀，则名称服务器将被视为流服务器（例如 TCP），且第 5.2 节中与 DNS 解析相关的 "server" 参数将被考虑。
+请注意：当前在 TCP 模式下，同一连接上会并行处理 4 个查询。每 5 秒移除一批空闲连接。可通过配置 "maxconn" 限制并发连接数量，若服务器支持，TLS 也可启用。
+
+<a id="entry-5-3-2-parse-resolv-conf"></a>
+
+**`parse-resolv-conf`**
+
+```haproxy
+parse-resolv-conf
+```
+
+将 /etc/resolv.conf 中找到的所有名称服务器添加到此解析器的名称服务器列表中。顺序与将 /etc/resolv.conf 中每个名称服务器单独放置于解析器段中、取代此指令时的顺序一致。
+
+<a id="entry-5-3-2-hold"></a>
+
+**`hold <status> <period>`**
+
+```haproxy
+hold <status> <period>
+```
+
+收到 DNS 响应 `<status>` 后，判断是否应将服务器的状态从 UP 变更为 DOWN。为做出此判断，它会检查在过去 `<period>` 内是否曾收到任何有效状态，以抵消刚刚收到的无效状态。
+
+    `<status>`：最近一次名称解析的状态。
+           nx        收到 NXDOMAIN 状态后，检查结束周期内是否收到过有效
+                     状态。
+
+           refused   收到 REFUSED 状态后，检查结束周期内是否收到过有效
+                     状态。
+
+           timeout   在 "timeout retry" 超时触发后，检查结束周期内是否
+                     收到过有效状态。
+
+           other     收到任何其他无效状态后，检查结束周期内是否收到过
+                     有效状态。
+
+           valid     仅适用于 "http-request do-resolve" 和
+                     "tcp-request content do-resolve" 动作。它定义服务器在
+                     触发下一次解析之前维持有效响应的周期。它不影响服务器
+                     的动态解析。
+
+           obsolete  定义在收到更新后的应答记录之后、移除过时 DNS 记录
+                     之前需等待的时间。适用于 SRV 记录。
+
+    `<period>`：向过去回溯的时间长度，在此期间必须收到过有效响应。它遵循
+               HAProxy 时间格式，默认以毫秒为单位。
+
+对于依赖动态 DNS 解析来确定其 IP 地址的服务器，若收到无效的 DNS 响应（例如 NXDOMAIN），将导致服务器状态从 UP 变为 DOWN。hold 指令定义了回溯有效响应的时间范围。如果在 `<period>` 内曾收到过有效响应，则本次接收到的无效状态将被忽略。
+
+如果在结束周期内未收到有效响应，该服务器将被标记为 DOWN。例如，若设置“hold nx 30s”，且最后一次收到的 DNS 响应为 NXDOMAIN，则除非在最近 30 秒内收到有效响应，否则该服务器将被标记为 DOWN。
+
+当服务器处于 DOWN 状态时，一旦从 DNS 服务器接收到有效的状态信息，将立即被标记为 UP。
+
+对于 "hold valid" 和 "hold obsolete" 存在独立的行为。
+
+默认值："valid" 为 10s，"obsolete" 为 0s，其他状态为 30s。
+
+<a id="entry-5-3-2-resolve-retries"></a>
+
+**`resolve_retries <nb>`**
+
+```haproxy
+resolve_retries <nb>
+```
+
+定义解析服务器名称时，在放弃前发送的查询次数 `<nb>`。默认值：3
+
+重试发生在域名服务器超时，或当全部 DNS 查询类型故障转移序列结束后，需从默认的 ANY 查询类型重新开始时。
+
+<a id="entry-5-3-2-timeout"></a>
+
+**`timeout <event> <time>`**
+
+```haproxy
+timeout <event> <time>
+```
+
+定义与名称解析相关的超时 `<event>`：`<time>` 超时周期适用的事件。可用事件包括：   - resolve：当无其他时间设置时，触发名称解析的默认时间。默认值：1s   - retry：在未收到有效响应时，两次 DNS 查询之间的间隔时间。默认值：1s
+`<time>`：与事件相关的超时时间。遵循 HAProxy 时间格式。`<time>` 以毫秒为单位。
+
+示例：
+
+```text
+resolvers mydns
+  nameserver dns1 10.0.0.1:53
+  nameserver dns2 10.0.0.2:53
+  nameserver dns3 tcp@10.0.0.3:53
+  parse-resolv-conf
+  resolve_retries       3
+  timeout resolve       1s
+  timeout retry         1s
+  hold other           30s
+  hold refused         30s
+  hold nx              30s
+  hold timeout         30s
+  hold valid           10s
+  hold obsolete        30s
+```

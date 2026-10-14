@@ -50,42 +50,42 @@ languages:
       main:
         - identifier: patroni
           name: Patroni
-          pageRef: /docs/patroni
+          pageRef: /patroni
           weight: 10
           params:
             icon: fa-solid fa-heart-pulse
             description: PostgreSQL high availability and automatic failover
         - identifier: pgbackrest
           name: pgBackRest
-          pageRef: /docs/pgbackrest
+          pageRef: /pgbackrest
           weight: 20
           params:
             icon: fa-solid fa-couch
             description: Reliable backup, restore, and archive management
         - identifier: pgbouncer
           name: PgBouncer
-          pageRef: /docs/pgbouncer
+          pageRef: /pgbouncer
           weight: 30
           params:
             icon: fa-solid fa-arrows-turn-to-dots
             description: Lightweight connection pooling for PostgreSQL
         - identifier: pgbadger
           name: pgBadger
-          pageRef: /docs/pgbadger
+          pageRef: /pgbadger
           weight: 40
           params:
             icon: fa-solid fa-otter
             description: Fast PostgreSQL and PgBouncer log analysis
         - identifier: haproxy
           name: HAProxy
-          pageRef: /docs/haproxy
+          pageRef: /haproxy
           weight: 50
           params:
             icon: fa-solid fa-network-wired
             description: Complete HAProxy 3.4 manuals
         - identifier: etcd
           name: etcd
-          pageRef: /docs/etcd
+          pageRef: /etcd
           weight: 60
           params:
             icon: fa-solid fa-gear
@@ -115,42 +115,42 @@ languages:
       main:
         - identifier: patroni
           name: Patroni
-          pageRef: /docs/patroni
+          pageRef: /patroni
           weight: 10
           params:
             icon: fa-solid fa-heart-pulse
             description: PostgreSQL 高可用与自动故障转移
         - identifier: pgbackrest
           name: pgBackRest
-          pageRef: /docs/pgbackrest
+          pageRef: /pgbackrest
           weight: 20
           params:
             icon: fa-solid fa-couch
             description: 可靠的备份、恢复与归档管理
         - identifier: pgbouncer
           name: PgBouncer
-          pageRef: /docs/pgbouncer
+          pageRef: /pgbouncer
           weight: 30
           params:
             icon: fa-solid fa-arrows-turn-to-dots
             description: 轻量级 PostgreSQL 连接池
         - identifier: pgbadger
           name: pgBadger
-          pageRef: /docs/pgbadger
+          pageRef: /pgbadger
           weight: 40
           params:
             icon: fa-solid fa-otter
             description: 快速分析 PostgreSQL 与 PgBouncer 日志
         - identifier: haproxy
           name: HAProxy
-          pageRef: /docs/haproxy
+          pageRef: /haproxy
           weight: 50
           params:
             icon: fa-solid fa-network-wired
             description: HAProxy 3.4 入门、配置与管理手册
         - identifier: etcd
           name: etcd
-          pageRef: /docs/etcd
+          pageRef: /etcd
           weight: 60
           params:
             icon: fa-solid fa-gear
@@ -178,42 +178,42 @@ languages:
       main:
         - identifier: patroni
           name: Patroni
-          pageRef: /docs/patroni
+          pageRef: /patroni
           weight: 10
           params:
             icon: fa-solid fa-heart-pulse
             description: Haute disponibilité PostgreSQL et basculement automatique
         - identifier: pgbackrest
           name: pgBackRest
-          pageRef: /docs/pgbackrest
+          pageRef: /pgbackrest
           weight: 20
           params:
             icon: fa-solid fa-couch
             description: Sauvegarde, restauration et archivage fiables
         - identifier: pgbouncer
           name: PgBouncer
-          pageRef: /docs/pgbouncer
+          pageRef: /pgbouncer
           weight: 30
           params:
             icon: fa-solid fa-arrows-turn-to-dots
             description: Pooling de connexions PostgreSQL léger
         - identifier: pgbadger
           name: pgBadger
-          pageRef: /docs/pgbadger
+          pageRef: /pgbadger
           weight: 40
           params:
             icon: fa-solid fa-otter
             description: Analyse rapide des journaux PostgreSQL et PgBouncer
         - identifier: haproxy
           name: HAProxy
-          pageRef: /docs/haproxy
+          pageRef: /haproxy
           weight: 50
           params:
             icon: fa-solid fa-network-wired
             description: Manuels de démarrage, de configuration et d'administration HAProxy 3.4
         - identifier: etcd
           name: etcd
-          pageRef: /docs/etcd
+          pageRef: /etcd
           weight: 60
           params:
             icon: fa-solid fa-gear
@@ -243,42 +243,42 @@ languages:
       main:
         - identifier: patroni
           name: Patroni
-          pageRef: /docs/patroni
+          pageRef: /patroni
           weight: 10
           params:
             icon: fa-solid fa-heart-pulse
             description: PostgreSQL の高可用性と自動フェイルオーバー
         - identifier: pgbackrest
           name: pgBackRest
-          pageRef: /docs/pgbackrest
+          pageRef: /pgbackrest
           weight: 20
           params:
             icon: fa-solid fa-couch
             description: 信頼性の高いバックアップ、リストア、アーカイブ管理
         - identifier: pgbouncer
           name: PgBouncer
-          pageRef: /docs/pgbouncer
+          pageRef: /pgbouncer
           weight: 30
           params:
             icon: fa-solid fa-arrows-turn-to-dots
             description: PostgreSQL 向けの軽量コネクションプーリング
         - identifier: pgbadger
           name: pgBadger
-          pageRef: /docs/pgbadger
+          pageRef: /pgbadger
           weight: 40
           params:
             icon: fa-solid fa-otter
             description: PostgreSQL と PgBouncer の高速ログ解析
         - identifier: haproxy
           name: HAProxy
-          pageRef: /docs/haproxy
+          pageRef: /haproxy
           weight: 50
           params:
             icon: fa-solid fa-network-wired
             description: HAProxy 3.4 の入門、設定、管理マニュアル
         - identifier: etcd
           name: etcd
-          pageRef: /docs/etcd
+          pageRef: /etcd
           weight: 60
           params:
             icon: fa-solid fa-gear
@@ -305,42 +305,42 @@ languages:
       main:
         - identifier: patroni
           name: Patroni
-          pageRef: /docs/patroni
+          pageRef: /patroni
           weight: 10
           params:
             icon: fa-solid fa-heart-pulse
             description: PostgreSQL-Hochverfügbarkeit und automatisches Failover
         - identifier: pgbackrest
           name: pgBackRest
-          pageRef: /docs/pgbackrest
+          pageRef: /pgbackrest
           weight: 20
           params:
             icon: fa-solid fa-couch
             description: Zuverlässige Verwaltung von Sicherungen, Wiederherstellungen und Archiven
         - identifier: pgbouncer
           name: PgBouncer
-          pageRef: /docs/pgbouncer
+          pageRef: /pgbouncer
           weight: 30
           params:
             icon: fa-solid fa-arrows-turn-to-dots
             description: Leichtgewichtiger Verbindungspool für PostgreSQL
         - identifier: pgbadger
           name: pgBadger
-          pageRef: /docs/pgbadger
+          pageRef: /pgbadger
           weight: 40
           params:
             icon: fa-solid fa-otter
             description: Schnelle Analyse von PostgreSQL- und PgBouncer-Protokollen
         - identifier: haproxy
           name: HAProxy
-          pageRef: /docs/haproxy
+          pageRef: /haproxy
           weight: 50
           params:
             icon: fa-solid fa-network-wired
             description: Vollständige Handbücher zu HAProxy 3.4
         - identifier: etcd
           name: etcd
-          pageRef: /docs/etcd
+          pageRef: /etcd
           weight: 60
           params:
             icon: fa-solid fa-gear
@@ -368,42 +368,42 @@ languages:
       main:
         - identifier: patroni
           name: Patroni
-          pageRef: /docs/patroni
+          pageRef: /patroni
           weight: 10
           params:
             icon: fa-solid fa-heart-pulse
             description: Высокая доступность PostgreSQL и автоматическое переключение при сбоях
         - identifier: pgbackrest
           name: pgBackRest
-          pageRef: /docs/pgbackrest
+          pageRef: /pgbackrest
           weight: 20
           params:
             icon: fa-solid fa-couch
             description: Надёжное резервное копирование, восстановление и управление архивами
         - identifier: pgbouncer
           name: PgBouncer
-          pageRef: /docs/pgbouncer
+          pageRef: /pgbouncer
           weight: 30
           params:
             icon: fa-solid fa-arrows-turn-to-dots
             description: Легковесный пул соединений для PostgreSQL
         - identifier: pgbadger
           name: pgBadger
-          pageRef: /docs/pgbadger
+          pageRef: /pgbadger
           weight: 40
           params:
             icon: fa-solid fa-otter
             description: Быстрый анализ журналов PostgreSQL и PgBouncer
         - identifier: haproxy
           name: HAProxy
-          pageRef: /docs/haproxy
+          pageRef: /haproxy
           weight: 50
           params:
             icon: fa-solid fa-network-wired
             description: Полные руководства по HAProxy 3.4
         - identifier: etcd
           name: etcd
-          pageRef: /docs/etcd
+          pageRef: /etcd
           weight: 60
           params:
             icon: fa-solid fa-gear

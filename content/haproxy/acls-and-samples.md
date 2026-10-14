@@ -1,0 +1,9854 @@
+---
+title: "7. ACLs and Sample Fetching"
+linkTitle: "7. ACLs & Samples"
+weight: 180
+description: "ACL matching, conditions, converters, sample fetches, and predefined ACLs"
+icon: fa-solid fa-filter
+module: [HAPROXY]
+categories: [Reference]
+aliases:
+  - /haproxy/configuration/acls-and-samples/
+upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
+upstream_name: "HAProxy 3.4 Configuration Manual"
+upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 7"
+---
+
+HAProxy is capable of extracting data from request or response streams, from client or server
+information, from tables, environmental information etc... The action of extracting such data is
+called fetching a sample. Once retrieved, these samples may be used for various purposes such as a
+key to a stick-table, but most common usages consist in matching them against predefined constant
+data called patterns.
+
+## 7.1. ACL basics {#section-7-1}
+
+Access Control Lists (ACL) consist in declaring a named method to compare any piece of information
+against a list of pre-defined patterns. They should be seen as practically equivalent to functions
+in most programming languages, in that their declaration makes them available to be later called
+when needed. Their evaluation only returns a match or a mismatch, which is comparable to booleans in
+many programming languages. Contrary to functions in programming languages, ACLs may be overloaded
+as many times as needed in order to define additional matching methods for the same name. In this
+case they will all be evaluated in their declaration order until one matches.
+
+The use of ACLs provides a flexible solution to perform content switching and generally to take
+decisions based on content extracted from the request, the response or any environmental status. The
+principle is simple:
+
+- extract a data sample from a stream, table or the environment
+- optionally apply some format conversion to the extracted sample
+- apply one or multiple pattern matching methods on this sample
+- perform actions only when a pattern matches the sample
+
+The actions generally consist in blocking a request, selecting a backend, or adding a header.
+
+In order to define a test, the "acl" keyword is used. The syntax is:
+
+```text
+acl <aclname> <criterion> [flags] [operator] [<value>] ...
+```
+
+This creates a new ACL `<aclname>` or completes an existing one with new tests. Those tests apply to
+the portion of request/response specified in `<criterion>` and may be adjusted with optional flags
+[flags]. Some criteria also support an operator which may be specified before the set of values.
+Optionally some conversion operators may be applied to the sample, and they will be specified as a
+comma-delimited list of keywords just after the first keyword. The values are of the type supported
+by the criterion, and are separated by spaces.
+
+ACL names must be formed from upper and lower case letters, digits, '-' (dash), '\_' (underscore) ,
+'.' (dot) and ':' (colon). ACL names are case-sensitive, which means that "my_acl" and "My_Acl" are
+two different ACLs.
+
+There is no enforced limit to the number of ACLs. The unused ones do not affect performance, they
+just consume a small amount of memory.
+
+The criterion generally is the name of a sample fetch method, or one of its ACL specific
+declinations. The default test method is implied by the output type of this sample fetch method. The
+ACL declinations can describe alternate matching methods of a same sample fetch method. The sample
+fetch methods are the only ones supporting a conversion.
+
+Sample fetch methods return data which can be of the following types:
+
+- boolean
+- integer (signed or unsigned)
+- IPv4 or IPv6 address
+- string
+- data block
+
+Converters transform any of these data into any of these. For example, some converters might convert
+a string to a lower-case string while other ones would turn a string to an IPv4 address, or apply a
+netmask to an IP address. The resulting sample is of the type of the last converter applied to the
+list, which defaults to the type of the sample fetch method.
+
+Each sample or converter returns data of a specific type, specified with its keyword in this
+documentation. When an ACL is declared using a standard sample fetch method, certain types
+automatically involved a default matching method which are summarized in the table below:
+
+```text
+   +---------------------+-----------------+
+   | Sample or converter | Default         |
+   |    output type      | matching method |
+   +---------------------+-----------------+
+   | boolean             | bool            |
+   +---------------------+-----------------+
+   | integer             | int             |
+   +---------------------+-----------------+
+   | ip                  | ip              |
+   +---------------------+-----------------+
+   | string              | str             |
+   +---------------------+-----------------+
+   | binary              | none, use "-m"  |
+   +---------------------+-----------------+
+```
+
+Note that in order to match a binary samples, it is mandatory to specify a matching method, see
+below.
+
+The ACL engine can match these types against patterns of the following types:
+
+- boolean
+- integer or integer range
+- IP address / network
+- string (exact, substring, suffix, prefix, subdir, domain)
+- regular expression
+- hex block
+
+The following ACL flags are currently supported:
+
+```text
+-i: ignore case during matching of all subsequent patterns.
+-f: load patterns from a list.
+-m: use a specific pattern matching method
+-n: forbid the DNS resolutions
+-M: load the file pointed by -f like a map.
+-u: force the unique id of the ACL
+--: force end of flags. Useful when a string looks like one of the flags.
+```
+
+The "-f" flag is followed by the name that must follow the format described in 2.7. about name
+format for maps and ACLs. It is even possible to pass multiple "-f" arguments if the patterns are to
+be loaded from multiple lists. if an existing file is referenced, all lines will be read as
+individual values. Empty lines as well as lines beginning with a sharp ('#') will be ignored. All
+leading spaces and tabs will be stripped. If it is absolutely necessary to insert a valid pattern
+beginning with a sharp, just prefix it with a space so that it is not taken for a comment. Depending
+on the data type and match method, HAProxy may load the lines into a binary tree, allowing very fast
+lookups. This is true for IPv4 and exact string matching. In this case, duplicates will
+automatically be removed.
+
+The "-M" flag allows an ACL to use a map. If this flag is set, the list is parsed as two column
+entries. The first column contains the patterns used by the ACL, and the second column contain the
+samples. The sample can be used later by a map. This can be useful in some rare cases where an ACL
+would just be used to check for the existence of a pattern in a map before a mapping is applied.
+
+The "-u" flag forces the unique id of the ACL. This unique id is used with the socket interface to
+identify ACL and dynamically change its values. Note that a file is always identified by its name
+even if an id is set.
+
+Also, note that the "-i" flag applies to subsequent entries and not to entries loaded from files
+preceding it. For instance:
+
+```text
+acl valid-ua hdr(user-agent) -f exact-ua.lst -i -f generic-ua.lst test
+```
+
+In this example, each line of "exact-ua.lst" will be exactly matched against the "user-agent" header
+of the request. Then each line of "generic-ua" will be case-insensitively matched. Then the word
+"test" will be insensitively matched as well.
+
+The "-m" flag is used to select a specific pattern matching method on the input sample. All
+ACL-specific criteria imply a pattern matching method and generally do not need this flag. However,
+this flag is useful with generic sample fetch methods to describe how they're going to be matched
+against the patterns. This is required for sample fetches which return data type for which there is
+no obvious matching method (e.g. string or binary). When "-m" is specified and followed by a pattern
+matching method name, this method is used instead of the default one for the criterion. This makes
+it possible to match contents in ways that were not initially planned, or with sample fetch methods
+which return a string. The matching method also affects the way the patterns are parsed. So, it must
+not be used with sample fetches with a matching suffix (\_beg, \_end, \_sub...). In addition,
+specifying several "-m" pattern matching methods is not allowed.
+
+The "-n" flag forbids the dns resolutions. It is used with the load of ip files. By default, if the
+parser cannot parse ip address it considers that the parsed string is maybe a domain name and try
+dns resolution. The flag "-n" disable this resolution. It is useful for detecting malformed ip
+lists. Note that if the DNS server is not reachable, the HAProxy configuration parsing may last many
+minutes waiting for the timeout. During this time no error messages are displayed. The flag "-n"
+disable this behavior. Note also that during the runtime, this function is disabled for the dynamic
+acl modifications.
+
+There are some restrictions however. Not all methods can be used with all sample fetch methods.
+Also, if "-m" is used in conjunction with "-f", it must be placed first. The pattern matching method
+must be one of the following:
+
+- "found": only check if the requested sample could be found in the stream, but do not compare it
+  against any pattern. It is recommended not to pass any pattern to avoid confusion. This matching
+  method is particularly useful to detect presence of certain contents such as headers, cookies,
+  etc... even if they are empty and without comparing them to anything nor counting them.
+
+- "bool" : check the value as a boolean. It can only be applied to fetches which return a boolean or
+  integer value, and takes no pattern. Value zero or false does not match, all other values do
+  match.
+
+- "int" : match the value as an integer. It can be used with integer and boolean samples. Boolean
+  false is integer 0, true is integer 1.
+
+- "ip" : match the value as an IPv4 or IPv6 address. It is compatible with IP address samples only,
+  so it is implied and never needed.
+
+- "bin" : match the contents against a hexadecimal string representing a binary sequence. This may
+  be used with binary or string samples.
+
+- "len" : match the sample's length as an integer. This may be used with binary or string samples.
+
+- "str" : exact match: match the contents against a string. This may be used with binary or string
+  samples.
+
+- "sub" : substring match: check that the contents contain at least one of the provided string
+  patterns. This may be used with binary or string samples.
+
+- "reg" : regex match: match the contents against a list of regular expressions. This may be used
+  with binary or string samples.
+
+- "beg" : prefix match: check that the contents begin like the provided string patterns. This may be
+  used with binary or string samples.
+
+- "end" : suffix match: check that the contents end like the provided string patterns. This may be
+  used with binary or string samples.
+
+- "dir" : subdir match: check that a slash-delimited portion of the contents exactly matches one of
+  the provided string patterns. This may be used with binary or string samples.
+
+- "dom" : domain match: check that a dot-delimited portion of the contents exactly match one of the
+  provided string patterns. This may be used with binary or string samples.
+
+For example, to quickly detect the presence of cookie "JSESSIONID" in an HTTP request, it is
+possible to do:
+
+```text
+acl jsess_present req.cook(JSESSIONID) -m found
+```
+
+In order to apply a regular expression on the 500 first bytes of data in the buffer, one would use
+the following acl:
+
+```text
+acl script_tag req.payload(0,500) -m reg -i <script>
+```
+
+On systems where the regex library is much slower when using "-i", it is possible to convert the
+sample to lowercase before matching, like this:
+
+```text
+acl script_tag req.payload(0,500),lower -m reg <script>
+```
+
+All ACL-specific criteria imply a default matching method. Most often, these criteria are composed
+by concatenating the name of the original sample fetch method and the matching method. For example,
+"hdr_beg" applies the "beg" match to samples retrieved using the "hdr" fetch method. This matching
+method is only usable when the keyword is used alone, without any converter. In case any such
+converter were to be applied after such an ACL keyword, the default matching method from the ACL
+keyword is simply ignored since what will matter for the matching is the output type of the last
+converter. Since all ACL-specific criteria rely on a sample fetch method, it is always possible
+instead to use the original sample fetch method and the explicit matching method using "-m".
+
+If an alternate match is specified using "-m" on an ACL-specific criterion, the matching method is
+simply applied to the underlying sample fetch method. For example, all ACLs below are exact
+equivalent:
+
+```text
+acl short_form  hdr_beg(host)        www.
+acl alternate1  hdr_beg(host) -m beg www.
+acl alternate2  hdr_dom(host) -m beg www.
+acl alternate3  hdr(host)     -m beg www.
+
+```
+
+The table below summarizes the compatibility matrix between sample or converter types and the
+pattern types to fetch against. It indicates for each compatible combination the name of the
+matching method to be used, surrounded with angle brackets "\>" and "\<" when the method is the
+default one and will work by default without "-m".
+
+```text
+                           +-------------------------------------------------+
+                           |                Input sample type                |
+    +----------------------+---------+---------+---------+---------+---------+
+    |     pattern type     | boolean | integer |   ip    | string  | binary  |
+    +----------------------+---------+---------+---------+---------+---------+
+    | none (presence only) |  found  |  found  |  found  |  found  |  found  |
+    +----------------------+---------+---------+---------+---------+---------+
+    | none (boolean value) |>  bool <|   bool  |         |   bool  |         |
+    +----------------------+---------+---------+---------+---------+---------+
+    | integer (value)      |   int   |>  int  <|   int   |   int   |         |
+    +----------------------+---------+---------+---------+---------+---------+
+    | integer (length)     |   len   |   len   |   len   |   len   |   len   |
+    +----------------------+---------+---------+---------+---------+---------+
+    | IP address           |         |         |>   ip  <|    ip   |    ip   |
+    +----------------------+---------+---------+---------+---------+---------+
+    | exact string         |   str   |   str   |   str   |>  str  <|   str   |
+    +----------------------+---------+---------+---------+---------+---------+
+    | prefix               |   beg   |   beg   |   beg   |   beg   |   beg   |
+    +----------------------+---------+---------+---------+---------+---------+
+    | suffix               |   end   |   end   |   end   |   end   |   end   |
+    +----------------------+---------+---------+---------+---------+---------+
+    | substring            |   sub   |   sub   |   sub   |   sub   |   sub   |
+    +----------------------+---------+---------+---------+---------+---------+
+    | subdir               |   dir   |   dir   |   dir   |   dir   |   dir   |
+    +----------------------+---------+---------+---------+---------+---------+
+    | domain               |   dom   |   dom   |   dom   |   dom   |   dom   |
+    +----------------------+---------+---------+---------+---------+---------+
+    | regex                |   reg   |   reg   |   reg   |   reg   |   reg   |
+    +----------------------+---------+---------+---------+---------+---------+
+    | hex block            |         |         |         |   bin   |   bin   |
+    +----------------------+---------+---------+---------+---------+---------+
+```
+
+### 7.1.1. Matching booleans {#section-7-1-1}
+
+In order to match a boolean, no value is needed and all values are ignored. Boolean matching is used
+by default for all fetch methods of type "boolean". When boolean matching is used, the fetched value
+is returned as-is, which means that a boolean "true" will always match and a boolean "false" will
+never match.
+
+Boolean matching may also be enforced using "-m bool" on fetch methods which return an integer
+value. Then, integer value 0 is converted to the boolean "false" and all other values are converted
+to "true".
+
+### 7.1.2. Matching integers {#section-7-1-2}
+
+Integer matching applies by default to integer fetch methods. It can also be enforced on boolean
+fetches using "-m int". In this case, "false" is converted to the integer 0, and "true" is converted
+to the integer 1.
+
+Integer matching also supports integer ranges and operators. Note that integer matching only applies
+to positive values. A range is a value expressed with a lower and an upper bound separated with a
+colon, both of which may be omitted.
+
+For instance, "1024:65535" is a valid range to represent a range of unprivileged ports, and "1024:"
+would also work. "0:1023" is a valid representation of privileged ports, and ":1023" would also
+work.
+
+As a special case, some ACL functions support decimal numbers which are in fact two integers
+separated by a dot. This is used with some version checks for instance. All integer properties apply
+to those decimal numbers, including ranges and operators.
+
+For an easier usage, comparison operators are also supported. Note that using operators with ranges
+does not make much sense and is strongly discouraged. Similarly, it does not make much sense to
+perform order comparisons with a set of values.
+
+Available operators for integer matching are:
+
+```text
+eq: true if the tested value equals at least one value
+ge: true if the tested value is greater than or equal to at least one value
+gt: true if the tested value is greater than at least one value
+le: true if the tested value is less than or equal to at least one value
+lt: true if the tested value is less than at least one value
+```
+
+For instance, the following ACL matches any negative Content-Length header:
+
+```text
+acl negative-length req.hdr_val(content-length) lt 0
+```
+
+This one matches SSL versions between 3.0 and 3.1 (inclusive):
+
+```text
+acl sslv3 req.ssl_ver 3:3.1
+```
+
+### 7.1.3. Matching strings {#section-7-1-3}
+
+String matching applies to string or binary fetch methods, and exists in 6 different forms:
+
+- exact match (-m str): the extracted string must exactly match the patterns;
+
+- substring match (-m sub): the patterns are looked up inside the extracted string, and the ACL
+  matches if any of them is found inside;
+
+- prefix match (-m beg): the patterns are compared with the beginning of the extracted string, and
+  the ACL matches if any of them matches.
+
+- suffix match (-m end): the patterns are compared with the end of the extracted string, and the ACL
+  matches if any of them matches.
+
+- subdir match (-m dir): the patterns are looked up anywhere inside the extracted string, delimited
+  with slashes ("/"), the beginning or the end of the string. The ACL matches if any of them
+  matches. As such, the string "/images/png/logo/32x32.png", would match "/images", "/images/png",
+  "images/png", "/png/logo", "logo/32x32.png" or "32x32.png" but not "png" nor "32x32".
+
+- domain match (-m dom): the patterns are looked up anywhere inside the extracted string, delimited
+  with dots ("."), colons (":"), slashes ("/"), question marks ("?"), the beginning or the end of
+  the string. This is made to be used with URLs. Leading and trailing delimiters in the pattern are
+  ignored. The ACL matches if any of them matches. As such, in the example string
+  "<http://www1.dc-eu.example.com:80/blah>", the patterns "http", "www1", ".www1", "dc-eu",
+  "example", "com", "80", "dc-eu.example", "blah", ":www1:", "dc-eu.example:80" would match, but not
+  "eu" nor "dc". Using it to match domain suffixes for filtering or routing is generally not a good
+  idea, as the routing could easily be fooled by prepending the matching prefix in front of another
+  domain for example.
+
+String matching applies to verbatim strings as they are passed, with the exception of the backslash
+("&#92;") which makes it possible to escape some characters such as the space.
+If the "-i" flag is passed before the first string, then the matching will be performed ignoring the
+case. In order to match the string "-i", either set it second, or pass the "--" flag before the
+first string. Same applies of course to match the string "--".
+
+Do not use string matches for binary fetches which might contain null bytes (0x00), as the
+comparison stops at the occurrence of the first null byte. Instead, convert the binary fetch to a
+hex string with the hex converter first.
+
+Example:
+
+```shell
+# matches if the string <tag> is present in the binary sample
+acl tag_found req.payload(0,0),hex -m sub 3C7461673E
+```
+
+### 7.1.4. Matching regular expressions (regexes) {#section-7-1-4}
+
+Just like with string matching, regex matching applies to verbatim strings as they are passed, with
+the exception of the backslash ("&#92;") which makes it possible to escape
+some characters such as the space. If the "-i" flag is passed before the first regex, then the
+matching will be performed ignoring the case. In order to match the string "-i", either set it
+second, or pass the "--" flag before the first string. Same principle applies of course to match the
+string "--".
+
+### 7.1.5. Matching arbitrary data blocks {#section-7-1-5}
+
+It is possible to match some extracted samples against a binary block which may not safely be
+represented as a string. For this, the patterns must be passed as a series of hexadecimal digits in
+an even number, when the match method is set to binary. Each sequence of two digits will represent a
+byte. The hexadecimal digits may be used upper or lower case.
+
+Example:
+
+```shell
+# match "Hello\n" in the input stream (\x48 \x65 \x6c \x6c \x6f \x0a)
+acl hello req.payload(0,6) -m bin 48656c6c6f0a
+```
+
+### 7.1.6. Matching IPv4 and IPv6 addresses {#section-7-1-6}
+
+IPv4 addresses values can be specified either as plain addresses or with a netmask appended, in
+which case the IPv4 address matches whenever it is within the network. Plain addresses may also be
+replaced with a resolvable host name, but this practice is generally discouraged as it makes it more
+difficult to read and debug configurations. If hostnames are used, you should at least ensure that
+they are present in /etc/hosts so that the configuration does not depend on any random DNS match at
+the moment the configuration is parsed.
+
+The dotted IPv4 address notation is supported in both regular as well as the abbreviated form with
+all-0-octets omitted:
+
+```text
+    +------------------+------------------+------------------+
+    |   Example 1      |     Example 2    |     Example 3    |
+    +------------------+------------------+------------------+
+    |  192.168.0.1     |   10.0.0.12      |   127.0.0.1      |
+    |  192.168.1       |   10.12          |   127.1          |
+    |  192.168.0.1/22  |   10.0.0.12/8    |   127.0.0.1/8    |
+    |  192.168.1/22    |   10.12/8        |   127.1/8        |
+    +------------------+------------------+------------------+
+```
+
+Notice that this is different from RFC 4632 CIDR address notation in which 192.168.42/24 would be
+equivalent to 192.168.42.0/24.
+
+IPv6 may be entered in their usual form, with or without a netmask appended. Only bit counts are
+accepted for IPv6 netmasks. In order to avoid any risk of trouble with randomly resolved IP
+addresses, host names are never allowed in IPv6 patterns.
+
+HAProxy is also able to match IPv4 addresses with IPv6 addresses in the following situations:
+
+- tested address is IPv4, pattern address is IPv4, the match applies in IPv4 using the supplied mask
+  if any.
+- tested address is IPv6, pattern address is IPv6, the match applies in IPv6 using the supplied mask
+  if any.
+- tested address is IPv6, pattern address is IPv4, the match applies in IPv4 using the pattern's
+  mask if the IPv6 address matches with 2002:IPV4::, ::IPV4 or::ffff:IPV4, otherwise it fails.
+- tested address is IPv4, pattern address is IPv6, the IPv4 address is first converted to IPv6 by
+  prefixing::ffff: in front of it, then the match is applied in IPv6 using the supplied IPv6 mask.
+
+## 7.2. Using ACLs to form conditions {#section-7-2}
+
+Some actions are only performed upon a valid condition. A condition is a combination of ACLs with
+operators. 3 operators are supported:
+
+- AND (implicit)
+- OR (explicit with the "or" keyword or the "\|\|" operator)
+- Negation with the exclamation mark ("!")
+
+A condition is formed as a disjunctive form:
+
+```text
+[!]acl1 [!]acl2 ... [!]acln  { or [!]acl1 [!]acl2 ... [!]acln } ...
+```
+
+Such conditions are generally used after an "if" or "unless" statement, indicating when the
+condition will trigger the action.
+
+For instance, to block HTTP requests to the "\*" URL with methods other than "OPTIONS", as well as
+POST requests without content-length, and GET or HEAD requests with a content-length greater than 0,
+and finally every request which is not either GET/HEAD/POST/OPTIONS !
+
+```haproxy
+acl missing_cl req.hdr_cnt(Content-length) eq 0
+http-request deny if HTTP_URL_STAR !METH_OPTIONS || METH_POST missing_cl
+http-request deny if METH_GET HTTP_CONTENT
+http-request deny unless METH_GET or METH_POST or METH_OPTIONS
+```
+
+To select a different backend for requests to static contents on the "www" site and to every request
+on the "img", "video", "download" and "ftp" hosts:
+
+```text
+acl url_static  path_beg         /static /images /img /css
+acl url_static  path_end         .gif .png .jpg .css .js
+acl host_www    hdr_beg(host) -i www
+acl host_static hdr_beg(host) -i img. video. download. ftp.
+```
+
+```haproxy
+# now use backend "static" for all static-only hosts, and for static URLs
+# of host "www". Use backend "www" for the rest.
+use_backend static if host_static or host_www url_static
+use_backend www    if host_www
+```
+
+It is also possible to form rules using "anonymous ACLs". Those are unnamed ACL expressions that are
+built on the fly without needing to be declared. They must be enclosed between braces, with a space
+before and after each brace (because the braces must be seen as independent words). Example:
+
+```text
+The following rule:
+
+    acl missing_cl req.hdr_cnt(Content-length) eq 0
+    http-request deny if METH_POST missing_cl
+
+Can also be written that way:
+
+    http-request deny if METH_POST { req.hdr_cnt(Content-length) eq 0 }
+```
+
+It is generally not recommended to use this construct because it's a lot easier to leave errors in
+the configuration when written that way. However, for very simple rules matching only one source IP
+address for instance, it can make more sense to use them than to declare ACLs with random names.
+Another example of good use is the following:
+
+```text
+With named ACLs:
+
+     acl site_dead nbsrv(dynamic) lt 2
+     acl site_dead nbsrv(static)  lt 2
+     monitor fail  if site_dead
+
+With anonymous ACLs:
+
+     monitor fail if { nbsrv(dynamic) lt 2 } || { nbsrv(static) lt 2 }
+```
+
+See [section 4.2](/haproxy/proxies/#section-4-2) for detailed help on the "http-request deny" and "use_backend" keywords.
+
+## 7.3. Fetching samples {#section-7-3}
+
+Historically, sample fetch methods were only used to retrieve data to match against patterns using
+ACLs. With the arrival of stick-tables, a new class of sample fetch methods was created, most often
+sharing the same syntax as their ACL counterpart. These sample fetch methods are also known as
+"fetches". As of now, ACLs and fetches have converged. All ACL fetch methods have been made
+available as fetch methods, and ACLs may use any sample fetch method as well.
+
+This section details all available sample fetch methods and their output type. Some sample fetch
+methods have deprecated aliases that are used to maintain compatibility with existing
+configurations. They are then explicitly marked as deprecated and should not be used in new setups.
+
+Samples are typed. A sample's type determines how it may be matched against patterns, which
+converters may be applied to it, and how it is converted when another type is expected. The
+following types are used:
+
+- boolean: a true or false value, as returned by the fetch methods which only report a condition.
+  Such samples are matched without any "-m" option. An integer is considered true when it is not
+  zero, and a string is first parsed as an integer.
+
+- integer: a signed 64-bit integer, that is a value between -2^63 and 2^63-1 (-9223372036854775808
+  and 9223372036854775807). When a string is cast to an integer, the conversion stops at the first
+  non-digit character that is not the leading sign character ('+' or '-'). The value formed by the
+  digits read is used, which is zero if there was none, but empty strings fail to convert. Values
+  which do not fit are bound to the smallest or the largest representable integer.
+
+- IPv4 address and IPv6 address: these are two distinct types, even though most places which accept
+  one also accept the other and are simply documented as taking an address. An IPv4 address may be
+  cast to an integer, which gives the 32-bit value of the address, and to an IPv6 address, which
+  gives its IPv4-mapped form ("::ffff:a.b.c.d"). The reverse casts are more limited: an IPv6 address
+  has no integer form at all, and it only converts to an IPv4 address if it is an IPv4-mapped,
+  IPv4-compatible or 6to4 address.
+
+- string: a series of bytes stopping at the first NUL character (0x00), which is not part of the
+  string (use the binary type if an embedded NUL character is needed). No encoding is inferred:
+  haproxy does not try to interpret these bytes as characters, and whether they represent text at
+  all, in which charset, and how they are rendered, solely depends on what the string is used for.
+  Casting a binary sample to a string therefore silently drops everything from the first NUL
+  character on, whether the cast is explicit or implicit.
+
+- binary: a block of bytes whose length is known, each byte being able to take any value from 0 to
+  255, NUL included. This is what the fetch methods extracting raw data return, such as a request
+  body or the contents of a binary protocol. Such a sample cannot be cast to a boolean, an integer
+  nor an address, and must either be matched as a binary block using "-m bin" (see [section 7.1.5](/haproxy/acls-and-samples/#section-7-1-5)) or
+  be turned into a printable form first, for instance using the "hex" converter. The opposite cast
+  is free, since a string is always a valid binary block.
+
+- method: an HTTP method. The methods known to haproxy are represented by an identifier, the others
+  keep their original string.
+
+The converters table below also uses "any" to designate the converters which accept any input type.
+
+The ACL derivatives are also indicated when available, with their respective matching methods. These
+ones all have a well defined default pattern matching method, so it is never necessary (though
+allowed) to pass the "-m" option to indicate how the sample will be matched using ACLs.
+
+As indicated in the sample type versus matching compatibility matrix above, when using a generic
+sample fetch method in an ACL, the "-m" option is mandatory unless the sample type is one of
+boolean, integer, IPv4 or IPv6. When the same keyword exists as an ACL keyword and as a standard
+fetch method, the ACL engine will automatically pick the ACL-only one by default.
+
+Some of these keywords support one or multiple mandatory arguments, and one or multiple optional
+arguments. These arguments are strongly typed and are checked when the configuration is parsed so
+that there is no risk of running with an incorrect argument (e.g. an unresolved backend name). Fetch
+function arguments are passed between parenthesis and are delimited by commas. When an argument is
+optional, it will be indicated below between square brackets ('[ ]'). When all arguments are
+optional, the parenthesis may be omitted.
+
+Thus, the syntax of a standard sample fetch method is one of the following:
+
+- name
+- name(arg1)
+- name(arg1,arg2)
+
+### 7.3.1. Converters {#section-7-3-1}
+
+Sample fetch methods may be combined with transformations to be applied on top of the fetched sample
+(also called "converters"). These combinations form what is called "sample expressions" and the
+result is a "sample". Initially this was only supported by "stick on" and "stick store-request"
+directives but this has now be extended to all places where samples may be used (ACLs, log-format,
+unique-id-format, add-header, ...).
+
+These transformations are enumerated as a series of specific keywords after the sample fetch method.
+These keywords may equally be appended immediately after the fetch keyword's argument, delimited by
+a comma. These keywords can also support some arguments (e.g. a netmask) which must be passed in
+parenthesis.
+
+A certain category of converters are bitwise and arithmetic operators which support performing basic
+operations on integers. Some bitwise operations are supported (and, or, xor, cpl) and some
+arithmetic operations are supported (add, sub, mul, div, mod, neg). Some comparators are provided
+(odd, even, not, bool) which make it possible to report a match without having to write an ACL.
+
+The following keywords are supported:
+
+```text
+   keyword                                         input type   output type
+------------------------------------------------+-------------+----------------
+51d.single(prop[,prop*])                           string       string
+add(value)                                         integer      integer
+add_item(delim[,var[,suff]])                       string       string
+aes_cbc_dec(bits,nonce,key[,<aad>])                binary       binary
+aes_cbc_enc(bits,nonce,key[,<aad>])                binary       binary
+aes_gcm_dec(bits,nonce,key,aead_tag[,aad])         binary       binary
+aes_gcm_enc(bits,nonce,key,aead_tag[,aad])         binary       binary
+and(value)                                         integer      integer
+b64dec                                             string       binary
+base2                                              binary       string
+base64                                             binary       string
+be2dec(separator,chunk_size[,truncate])            binary       string
+le2dec(separator,chunk_size[,truncate])            binary       string
+be2hex([separator[,chunk_size[,truncate]]])        binary       string
+bool                                               integer      boolean
+bytes(offset[,length])                             binary       binary
+capture-req(id)                                    string       string
+capture-res(id)                                    string       string
+concat([start[,var[,end]]])                        string       string
+cpl                                                integer      integer
+crc32([avalanche])                                 binary       integer
+crc32c([avalanche])                                binary       integer
+cut_crlf                                           string       string
+da-csv-conv(prop[,prop*])                          string       string
+date                                               string       integer
+debug([prefix][,destination])                       any          same
+-- keyword -------------------------------------+- input type + output type -
+digest(algorithm)                                  binary       binary
+div(value)                                         integer      integer
+djb2([avalanche])                                  binary       integer
+eth.data                                           binary       binary
+eth.dst                                            binary       binary
+eth.hdr                                            binary       binary
+eth.proto                                          binary       integer
+eth.src                                            binary       binary
+eth.vlan                                           binary       integer
+even                                               integer      boolean
+fe_exists                                          string       boolean
+field(index,delimiters[,count])                    string       string
+fix_is_valid                                       binary       boolean
+fix_tag_value(tag)                                 binary       binary
+has_ctl([mask])                                    binary       boolean
+hex                                                binary       string
+hex2i                                              binary       integer
+hmac(algorithm,key)                                binary       binary
+host_only                                          string       string
+htonl                                              integer      integer
+http_date([offset[,unit]])                         integer      string
+iif(true,false)                                    boolean      string
+in_table([table])                                  any          boolean
+ip.data                                            binary       binary
+ip.df                                              binary       integer
+ip.dst                                             binary       address
+ip.fp                                              binary       binary
+ip.hdr                                             binary       binary
+ip.proto                                           binary       integer
+ip.src                                             binary       address
+ip.tos                                             binary       integer
+ip.ttl                                             binary       integer
+ip.ver                                             binary       integer
+ipmask(mask4[,mask6])                              address      address
+json([input-code])                                 string       string
+json_query(json_path[,output_type])                string       _outtype_
+jwt_decrypt_jwk(<jwk>)                             string       binary
+jwt_decrypt_cert(<cert>)                           string       binary
+jwt_decrypt_secret(<secret>)                       string       binary
+jwt_header_query([json_path[,output_type]])        string       string
+jwt_payload_query([json_path[,output_type]])       string       string
+-- keyword -------------------------------------+- input type + output type -
+jwt_verify(alg,key)                                string       integer
+jwt_verify_cert(alg,cert)                          string       integer
+language(value[,default])                          string       string
+length                                             string       integer
+lower                                              string       string
+ltime(format[,offset])                             integer      string
+ltrim(chars)                                       string       string
+map(map_name[,default_value])                      string       string
+map_match(map_name[,default_value])                _match_      string
+map_match_output(map_name[,default_value])         _match_      _output_
+mod(value)                                         integer      integer
+mqtt_field_value(pkt_type,fieldname_or_prop_ID)    binary       binary
+mqtt_is_valid                                      binary       boolean
+ms_ltime(format[,offset])                          integer      string
+ms_utime(format[,offset])                          integer      string
+mul(value)                                         integer      integer
+nbsrv                                              string       integer
+neg                                                integer      integer
+not                                                integer      boolean
+odd                                                integer      boolean
+or(value)                                          integer      integer
+-- keyword -------------------------------------+- input type + output type -
+param(name[,delim])                                string       string
+port_only                                          string       integer
+protobuf(field_number[,field_type])                binary       binary
+regsub(regex,subst[,flags])                        string       string
+reverse                                            string       string
+reverse_dom                                        string       string
+rfc7239_field(field)                               string       string
+rfc7239_is_valid                                   string       boolean
+rfc7239_n2nn                                       string       address / str
+rfc7239_n2np                                       string       integer / str
+rfc7239_nn                                         address/str  string
+rfc7239_np                                         integer/str  string
+rtrim(chars)                                       string       string
+sdbm([avalanche])                                  binary       integer
+secure_memcmp(var)                                 string       boolean
+set-var(var[,cond...])                              any          same
+sha1                                               binary       binary
+sha2([bits])                                       binary       binary
+srv_is_up                                          string       boolean
+srv_queue                                          string       integer
+strcmp(var)                                        string       boolean
+sub(value)                                         integer      integer
+table_bytes_in_rate([table])                       any          integer
+table_bytes_out_rate([table])                      any          integer
+table_clr_gpc(idx[,table])                         any          integer
+table_clr_gpc0([table])                            any          integer
+table_clr_gpc1([table])                            any          integer
+table_conn_cnt([table])                            any          integer
+-- keyword -------------------------------------+- input type + output type -
+table_conn_cur([table])                            any          integer
+table_conn_rate([table])                           any          integer
+table_expire([table[,default_value]])              any          integer
+table_glitch_cnt([table])                          any          integer
+table_glitch_rate([table])                         any          integer
+table_gpc(idx[,table])                             any          integer
+table_gpc0([table])                                any          integer
+table_gpc0_rate([table])                           any          integer
+table_gpc1([table])                                any          integer
+table_gpc1_rate([table])                           any          integer
+table_gpc_rate(idx[,table])                        any          integer
+table_gpt(idx[,table])                             any          integer
+table_gpt0([table])                                any          integer
+table_http_err_cnt([table])                        any          integer
+table_http_err_rate([table])                       any          integer
+table_http_fail_cnt([table])                       any          integer
+table_http_fail_rate([table])                      any          integer
+table_http_req_cnt([table])                        any          integer
+table_http_req_rate([table])                       any          integer
+table_idle([table[,default_value]])                any          integer
+table_inc_gpc(idx[,table])                         any          integer
+table_inc_gpc0([table])                            any          integer
+table_inc_gpc1([table])                            any          integer
+table_kbytes_in([table])                           any          integer
+-- keyword -------------------------------------+- input type + output type -
+table_kbytes_out([table])                          any          integer
+table_server_id([table])                           any          integer
+table_sess_cnt([table])                            any          integer
+table_sess_rate([table])                           any          integer
+table_trackers([table])                            any          integer
+tcp.dst                                            binary       integer
+tcp.flags                                          binary       integer
+tcp.options.mss                                    binary       integer
+tcp.options.sack                                   binary       integer
+tcp.options.tsopt                                  binary       integer
+tcp.options.tsval                                  binary       integer
+tcp.options.wscale                                 binary       integer
+tcp.options.wsopt                                  binary       integer
+tcp.options_list                                   binary       binary
+tcp.seq                                            binary       integer
+tcp.src                                            binary       integer
+tcp.win                                            binary       integer
+ub64dec                                            string       string
+ub64enc                                            string       string
+ungrpc(field_number[,field_type])                  binary       binary / int
+unset-var(var)                                      any          same
+upper                                              string       string
+url_dec([in_form])                                 string       string
+url_enc([enc_type])                                string       string
+us_ltime(format[,offset])                          integer      string
+us_utime(format[,offset])                          integer      string
+utime(format[,offset])                             integer      string
+when(condition)                                     any          same
+word(index,delimiters[,count])                     string       string
+wt6([avalanche])                                   binary       integer
+x509_v_err_str                                     integer      string
+xor(value)                                         integer      integer
+-- keyword -------------------------------------+- input type + output type -
+xxh3([seed])                                       binary       integer
+xxh32([seed])                                      binary       integer
+xxh64([seed])                                      binary       integer
+```
+
+The detailed list of converter keywords follows:
+
+<a id="entry-7-3-1-51d-single"></a>
+
+**`51d.single(<prop>[,<prop>*])`**
+
+```haproxy
+51d.single(<prop>[,<prop>*])
+```
+
+Returns values for the properties requested as a string, where values are separated by the delimiter
+specified with "51degrees-property-separator". The device is identified using the User-Agent header
+passed to the converter. The function can be passed up to five property names, and if a property
+name can't be found, the value "NoData" is returned.
+
+Example:
+
+```shell
+# Here the header "X-51D-DeviceTypeMobileTablet" is added to the request,
+# containing values for the three properties requested by using the
+# User-Agent passed to the converter.
+frontend http-in
+  bind *:8081
+  default_backend servers
+  http-request set-header X-51D-DeviceTypeMobileTablet \
+    %[req.fhdr(User-Agent),51d.single(DeviceType,IsMobile,IsTablet)]
+```
+
+<a id="entry-7-3-1-add"></a>
+
+**`add(<value>)`**
+
+```haproxy
+add(<value>)
+```
+
+Adds `<value>` to the input value of type signed integer, and returns the result as a signed
+integer. `<value>` can be a numeric value or a variable name. See [section 2.8](/haproxy/configuration-basics/#section-2-8) about variables for
+details.
+
+<a id="entry-7-3-1-add-item"></a>
+
+**`add_item(<delim>[,<var>[,<suff>]])`**
+
+```haproxy
+add_item(<delim>[,<var>[,<suff>]])
+```
+
+Concatenates a minimum of 2 and up to 3 fields after the current sample which is then turned into a
+string. The first one, `<delim>`, is a constant string, that will be appended immediately after the
+existing sample if an existing sample is not empty and either the `<var>` or the `<suff>` is not
+empty. The second one, `<var>`, is a variable name. The variable will be looked up, its contents
+converted to a string, and it will be appended immediately after the `<delim>` part. If the variable
+is not found, nothing is appended. It is optional and may optionally be followed by a constant
+string `<suff>`, however if `<var>` is omitted, then `<suff>` is mandatory. This converter is
+similar to the concat converter and can be used to build new variables made of a succession of other
+variables but the main difference is that it does the checks if adding a delimiter makes sense as
+wouldn't be the case if e.g. the current sample is empty. That situation would require 2 separate
+rules using concat converter where the first rule would have to check if the current sample string
+is empty before adding a delimiter. If commas or closing parenthesis are needed as delimiters, they
+must be protected by quotes or backslashes, themselves protected so that they are not stripped by
+the first level parser (please see [section 2.2](/haproxy/configuration-basics/#section-2-2) for quoting and escaping). See examples below.
+
+Example:
+
+```text
+http-request set-var(req.tagged) 'var(req.tagged),add_item(",",req.score1,"(site1)") if src,in_table(site1)'
+http-request set-var(req.tagged) 'var(req.tagged),add_item(",",req.score2,"(site2)") if src,in_table(site2)'
+http-request set-var(req.tagged) 'var(req.tagged),add_item(",",req.score3,"(site3)") if src,in_table(site3)'
+http-request set-header x-tagged %[var(req.tagged)]
+
+http-request set-var(req.tagged) 'var(req.tagged),add_item(",",req.score1),add_item(",",req.score2)'
+http-request set-var(req.tagged) 'var(req.tagged),add_item(",",,(site1))' if src,in_table(site1)
+```
+
+<a id="entry-7-3-1-aes-cbc-dec"></a>
+
+**`aes_cbc_dec(<bits>,<nonce>,<key>[,<aad>])`**
+
+```haproxy
+aes_cbc_dec(<bits>,<nonce>,<key>[,<aad>])
+```
+
+Decrypts the raw byte input using the AES128-CBC, AES192-CBC or AES256-CBC algorithm, depending on
+the `<bits>` parameter. All other parameters need to be base64 encoded and the returned result is in
+raw byte format. The `<aad>` parameter is optional. If the `<aad>` validation fails, the converter
+doesn't return any data. The `<nonce>`, `<key>` and `<aad>` can either be strings or variables. This
+converter requires at least OpenSSL 1.0.1.
+
+Example:
+
+```text
+http-response set-header X-Decrypted-Text %[var(txn.enc),\
+  aes_cbc_dec(128,txn.nonce,Zm9vb2Zvb29mb29wZm9vbw==)]
+```
+
+<a id="entry-7-3-1-aes-cbc-enc"></a>
+
+**`aes_cbc_enc(<bits>,<nonce>,<key>[,<aad>])`**
+
+```haproxy
+aes_cbc_enc(<bits>,<nonce>,<key>[,<aad>])
+```
+
+Encrypts the raw byte input using the AES128-CBC, AES192-CBC or AES256-CBC algorithm, depending on
+the `<bits>` parameter. `<nonce>`, `<key>` and `<aad>` parameters must be base64 encoded. The
+`<aad>` parameter is optional. The returned result is in raw byte format. The `<nonce>`, `<key>` and
+`<aad>` can either be strings or variables. This converter requires at least OpenSSL 1.0.1.
+
+Example:
+
+```text
+http-response set-header X-Encrypted-Text %[var(txn.plain),\
+  aes_cbc_enc(128,txn.nonce,Zm9vb2Zvb29mb29wZm9vbw==)]
+```
+
+<a id="entry-7-3-1-aes-gcm-dec"></a>
+
+**`aes_gcm_dec(<bits>,<nonce>,<key>,<aead_tag>[,<aad>])`**
+
+```haproxy
+aes_gcm_dec(<bits>,<nonce>,<key>,<aead_tag>[,<aad>])
+```
+
+Decrypts the raw byte input using the AES128-GCM, AES192-GCM or AES256-GCM algorithm, depending on
+the `<bits>` parameter. All other parameters need to be base64 encoded and the returned result is in
+raw byte format. If the `<aead_tag>` or `<aad>` validation fails, the converter doesn't return any
+data. The `<aad>` parameter is optional. The `<nonce>`, `<key>`, `<aead_tag>` and `<aad>` can either
+be strings or variables. This converter requires at least OpenSSL 1.0.1.
+
+Example:
+
+```text
+http-response set-header X-Decrypted-Text %[var(txn.enc),\
+  aes_gcm_dec(128,txn.nonce,Zm9vb2Zvb29mb29wZm9vbw==,txn.aead_tag)]
+```
+
+<a id="entry-7-3-1-aes-gcm-enc"></a>
+
+**`aes_gcm_enc(<bits>,<nonce>,<key>,<aead_tag>[,<aad>])`**
+
+```haproxy
+aes_gcm_enc(<bits>,<nonce>,<key>,<aead_tag>[,<aad>])
+```
+
+Encrypts the raw byte input using the AES128-GCM, AES192-GCM or AES256-GCM algorithm, depending on
+the `<bits>` parameter. `<nonce>`, `<key>` and `<aad>` parameters must be base64 encoded. Parameter
+`<aead_tag>` must be a variable. The AEAD tag will be stored base64 encoded into that variable. The
+`<aad>` parameter is optional. The returned result is in raw byte format. The `<nonce>`, `<key>` and
+`<aad>` can either be strings or variables. This converter requires at least OpenSSL 1.0.1.
+
+Example:
+
+```text
+http-response set-header X-Encrypted-Text %[var(txn.plain),\
+  aes_gcm_enc(128,txn.nonce,Zm9vb2Zvb29mb29wZm9vbw==,txn.aead_tag)]
+```
+
+<a id="entry-7-3-1-and"></a>
+
+**`and(<value>)`**
+
+```haproxy
+and(<value>)
+```
+
+Performs a bitwise "AND" between `<value>` and the input value of type signed integer, and returns
+the result as an signed integer. `<value>` can be a numeric value or a variable name. See [section
+2.8](/haproxy/configuration-basics/#section-2-8) about variables for details.
+
+<a id="entry-7-3-1-b64dec"></a>
+
+**`b64dec`**
+
+```haproxy
+b64dec
+```
+
+Converts (decodes) a base64 encoded input string to its binary representation. It performs the
+inverse operation of base64(). For base64url("URL and Filename Safe Alphabet" (RFC 4648)) variant
+see "ub64dec".
+
+<a id="entry-7-3-1-base2"></a>
+
+**`base2`**
+
+```haproxy
+base2
+```
+
+Converts a binary input sample to a binary string containing eight binary digits per input byte. It
+is used to be able to perform longest prefix match on types where the native representation does not
+allow prefix matching, for example IP prefixes.
+
+<a id="entry-7-3-1-base64"></a>
+
+**`base64`**
+
+```haproxy
+base64
+```
+
+Converts a binary input sample to a base64 string. It is used to log or transfer binary content in a
+way that can be reliably transferred (e.g. an SSL ID can be copied in a header). For base64url("URL
+and Filename Safe Alphabet" (RFC 4648)) variant see "ub64enc".
+
+<a id="entry-7-3-1-be2dec"></a>
+
+**`be2dec(<separator>,<chunk_size>[,<truncate>])`**
+
+```haproxy
+be2dec(<separator>,<chunk_size>[,<truncate>])
+```
+
+Converts big-endian binary input sample to a string containing an unsigned integer number per
+`<chunk_size>` input bytes. `<separator>` is put every `<chunk_size>` binary input bytes if
+specified. `<truncate>` flag indicates whatever binary input is truncated at `<chunk_size>`
+boundaries. `<chunk_size>` maximum value is limited by the size of long long int (8 bytes).
+
+Example:
+
+```text
+bin(01020304050607),be2dec(:,2)   # 258:772:1286:7
+bin(01020304050607),be2dec(-,2,1) # 258-772-1286
+bin(01020304050607),be2dec(,2,1)  # 2587721286
+bin(7f000001),be2dec(.,1)         # 127.0.0.1
+```
+
+<a id="entry-7-3-1-le2dec"></a>
+
+**`le2dec(<separator>,<chunk_size>[,<truncate>])`**
+
+```haproxy
+le2dec(<separator>,<chunk_size>[,<truncate>])
+```
+
+Converts little-endian binary input sample to a string containing an unsigned integer number per
+`<chunk_size>` input bytes. `<separator>` is inserted every `<chunk_size>` binary input bytes if
+specified. The `<truncate>` flag indicates whether the binary input is truncated at `<chunk_size>`
+boundaries. The maximum value for `<chunk_size>` is limited by the size of long long int (8 bytes).
+
+Example:
+
+```text
+bin(01020304050607),le2dec(:,2)   # 513:1284:2055:7
+bin(01020304050607),le2dec(-,2,1) # 513-1284-2055
+bin(01020304050607),le2dec(,2,1)  # 51312842055
+bin(7f000001),le2dec(.,1)         # 127.0.0.1
+```
+
+<a id="entry-7-3-1-be2hex"></a>
+
+**`be2hex([<separator>[,<chunk_size>[,<truncate>]]])`**
+
+```haproxy
+be2hex([<separator>[,<chunk_size>[,<truncate>]]])
+```
+
+Converts big-endian binary input sample to a hex string containing two hex digits per input byte. It
+is used to log or transfer hex dumps of some binary input data in a way that can be reliably
+transferred (e.g. an SSL ID can be copied in a header). `<separator>` is put every `<chunk_size>`
+binary input bytes if specified. `<truncate>` flag indicates whatever binary input is truncated at
+`<chunk_size>` boundaries.
+
+Example:
+
+```text
+bin(01020304050607),be2hex         # 01020304050607
+bin(01020304050607),be2hex(:,2)    # 0102:0304:0506:07
+bin(01020304050607),be2hex(--,2,1) # 0102--0304--0506
+bin(0102030405060708),be2hex(,3,1) # 010203040506
+```
+
+<a id="entry-7-3-1-bool"></a>
+
+**`bool`**
+
+```haproxy
+bool
+```
+
+Returns a boolean TRUE if the input value of type signed integer is non-null, otherwise returns
+FALSE. Used in conjunction with and(), it can be used to report true/false for bit testing on input
+values (e.g. verify the presence of a flag).
+
+<a id="entry-7-3-1-bytes"></a>
+
+**`bytes(<offset>[,<length>])`**
+
+```haproxy
+bytes(<offset>[,<length>])
+```
+
+Extracts some bytes from an input binary sample. The result is a binary sample starting at an offset
+(in bytes) of the original sample and optionally truncated at the given length. `<offset>` and
+`<length>` can be numeric values or variable names. The converter returns an empty sample if either
+`<offset>` or `<length>` is invalid. Invalid `<offset>` means a negative value or a value \>= length
+of the input sample. Invalid `<length>` means a negative value.
+
+Example:
+
+```text
+http-request set-var(txn.input) req.hdr(input) # let's say input is "012345"
+
+http-response set-header bytes_0 "%[var(txn.input),bytes(0)]"  # outputs "012345"
+http-response set-header bytes_1_3 "%[var(txn.input),bytes(1,3)]"  # outputs "123"
+
+http-response set-var(txn.var_start) int(1)
+http-response set-var(txn.var_length) int(3)
+http-response set-header bytes_var1_var3    "%[var(txn.input),bytes(txn.var_start,txn.var_length)]"  # outputs "123"
+```
+
+<a id="entry-7-3-1-capture-req"></a>
+
+**`capture-req(<id>)`**
+
+```haproxy
+capture-req(<id>)
+```
+
+Capture the string entry in the request slot `<id>` and returns the entry as is. If the slot doesn't
+exist, the capture fails silently.
+
+See also: "declare capture", "http-request capture", "http-response capture", "capture.req.hdr" and
+"capture.res.hdr" (sample fetches).
+
+<a id="entry-7-3-1-capture-res"></a>
+
+**`capture-res(<id>)`**
+
+```haproxy
+capture-res(<id>)
+```
+
+Capture the string entry in the response slot `<id>` and returns the entry as is. If the slot
+doesn't exist, the capture fails silently.
+
+See also: "declare capture", "http-request capture", "http-response capture", "capture.req.hdr" and
+"capture.res.hdr" (sample fetches).
+
+<a id="entry-7-3-1-concat"></a>
+
+**`concat([<start>[,<var>[,<end>]]])`**
+
+```haproxy
+concat([<start>[,<var>[,<end>]]])
+```
+
+Concatenates up to 3 fields after the current sample which is then turned to a string. The first
+one, `<start>`, is a constant string, that will be appended immediately after the existing sample.
+It may be omitted if not used. The second one, `<var>`, is a variable name. The variable will be
+looked up, its contents converted to a string, and it will be appended immediately after the
+`<first>` part. If the variable is not found, nothing is appended. It may be omitted as well. The
+third field, `<end>` is a constant string that will be appended after the variable. It may also be
+omitted. Together, these elements allow to concatenate variables with delimiters to an existing set
+of variables. This can be used to build new variables made of a succession of other variables, such
+as colon-delimited values. If commas or closing parenthesis are needed as delimiters, they must be
+protected by quotes or backslashes, themselves protected so that they are not stripped by the first
+level parser. This is often used to build composite variables from other ones, but sometimes using a
+format string with multiple fields may be more convenient. See examples below.
+
+Example:
+
+```text
+tcp-request session set-var(sess.src) src
+tcp-request session set-var(sess.dn)  ssl_c_s_dn
+tcp-request session set-var(txn.sig) str(),concat(<ip=,sess.ip,>),concat(<dn=,sess.dn,>)
+tcp-request session set-var(txn.ipport) "str(),concat('addr=(',sess.ip),concat(',',sess.port,')')"
+tcp-request session set-var-fmt(txn.ipport) "addr=(%[sess.ip],%[sess.port])"  ## does the same
+http-request set-header x-hap-sig %[var(txn.sig)]
+```
+
+<a id="entry-7-3-1-cpl"></a>
+
+**`cpl`**
+
+```haproxy
+cpl
+```
+
+Takes the input value of type signed integer, applies a ones-complement (flips all bits) and returns
+the result as an signed integer.
+
+<a id="entry-7-3-1-crc32"></a>
+
+**`crc32([<avalanche>])`**
+
+```haproxy
+crc32([<avalanche>])
+```
+
+Hashes a binary input sample into an unsigned 32-bit quantity using the CRC32 hash function.
+Optionally, it is possible to apply a full avalanche hash function to the output if the optional
+`<avalanche>` argument equals 1. This converter uses the same functions as used by the various
+hash-based load balancing algorithms, so it will provide exactly the same results. It is provided
+for compatibility with other software which want a CRC32 to be computed on some input keys, so it
+follows the most common implementation as found in Ethernet, Gzip, PNG, etc... It is slower than the
+other algorithms but may provide a better or at least less predictable distribution. It must not be
+used for security purposes as a 32-bit hash is trivial to break. See also "djb2", "sdbm", "wt6",
+"crc32c" and the "hash-type" directive.
+
+<a id="entry-7-3-1-crc32c"></a>
+
+**`crc32c([<avalanche>])`**
+
+```haproxy
+crc32c([<avalanche>])
+```
+
+Hashes a binary input sample into an unsigned 32-bit quantity using the CRC32C hash function.
+Optionally, it is possible to apply a full avalanche hash function to the output if the optional
+`<avalanche>` argument equals 1. This converter uses the same functions as described in RFC4960,
+Appendix B [8]. It is provided for compatibility with other software which want a CRC32C to be
+computed on some input keys. It is slower than the other algorithms and it must not be used for
+security purposes as a 32-bit hash is trivial to break. See also "djb2", "sdbm", "wt6", "crc32" and
+the "hash-type" directive.
+
+<a id="entry-7-3-1-cut-crlf"></a>
+
+**`cut_crlf`**
+
+```haproxy
+cut_crlf
+```
+
+Cuts the string representation of the input sample on the first carriage return
+('&#92;r') or newline ('&#92;n') character found. Only
+the string length is updated.
+
+<a id="entry-7-3-1-da-csv-conv"></a>
+
+**`da-csv-conv(<prop>[,<prop>*])`**
+
+```haproxy
+da-csv-conv(<prop>[,<prop>*])
+```
+
+Asks the DeviceAtlas converter to identify the User Agent string passed on input, and to emit a
+string made of the concatenation of the properties enumerated in argument, delimited by the
+separator defined by the global keyword "deviceatlas-property-separator", or by default the pipe
+character ('\|'). There's a limit of 12 different properties imposed by the HAProxy configuration
+language.
+
+Example:
+
+```text
+frontend www
+  bind *:8881
+  default_backend servers
+  http-request set-header X-DeviceAtlas-Data %[req.fhdr(User-Agent),da-csv(primaryHardwareType,osName,osVersion,browserName,browserVersion,browserRenderingEngine)]
+```
+
+<a id="entry-7-3-1-date"></a>
+
+**`date`**
+
+```haproxy
+date
+```
+
+This converter is used to convert a date from an HTTP header. It can be an IMF date, an ASCTIME date
+or a RFC850 date. It will output an UNIX timestamp.
+
+Example:
+
+```text
+http-request return lf-string "%[str('Sun, 06 Nov 1994 08:49:37 GMT'),date]\n" content-type text/plain
+```
+
+<a id="entry-7-3-1-debug"></a>
+
+**`debug([<prefix][,<destination>])`**
+
+```haproxy
+debug([<prefix][,<destination>])
+```
+
+This converter is used as debug tool. It takes a capture of the input sample and sends it to event
+sink `<destination>`, which may designate a ring buffer such as "buf0", as well as "stdout", or
+"stderr". Available sinks may be checked at run time by issuing "show events" on the CLI. When not
+specified, the output will be "buf0", which may be consulted via the CLI's "show events" command. An
+optional prefix `<prefix>` may be passed to help distinguish outputs from multiple expressions. It
+will then appear before the colon in the output message. The input sample is passed as-is on the
+output, so that it is safe to insert the debug converter anywhere in a chain, even with
+non-printable sample types.
+
+Example:
+
+```text
+tcp-request connection track-sc0 src,debug(track-sc)
+```
+
+<a id="entry-7-3-1-digest"></a>
+
+**`digest(<algorithm>)`**
+
+```haproxy
+digest(<algorithm>)
+```
+
+Converts a binary input sample to a message digest. The result is a binary sample. The `<algorithm>`
+must be an OpenSSL message digest name (e.g. sha256).
+
+Please note that this converter is only available when HAProxy has been compiled with USE_OPENSSL.
+
+<a id="entry-7-3-1-div"></a>
+
+**`div(<value>)`**
+
+```haproxy
+div(<value>)
+```
+
+Divides the input value of type signed integer by `<value>`, and returns the result as an signed
+integer. If `<value>` is null, the largest unsigned integer is returned (typically 2^63-1).
+`<value>` can be a numeric value or a variable name. See [section 2.8](/haproxy/configuration-basics/#section-2-8) about variables for details.
+
+<a id="entry-7-3-1-djb2"></a>
+
+**`djb2([<avalanche>])`**
+
+```haproxy
+djb2([<avalanche>])
+```
+
+Hashes a binary input sample into an unsigned 32-bit quantity using the DJB2 hash function.
+Optionally, it is possible to apply a full avalanche hash function to the output if the optional
+`<avalanche>` argument equals 1. This converter uses the same functions as used by the various
+hash-based load balancing algorithms, so it will provide exactly the same results. It is mostly
+intended for debugging, but can be used as a stick-table entry to collect rough statistics. It must
+not be used for security purposes as a 32-bit hash is trivial to break. See also "crc32", "sdbm",
+"wt6", "crc32c", and the "hash-type" directive.
+
+<a id="entry-7-3-1-eth-data"></a>
+
+**`eth.data`**
+
+```haproxy
+eth.data
+```
+
+This is used with an input sample representing a binary Ethernet frame, as returned by
+"fc_saved_syn" combined with the "tcp-ss" bind option set to "2". It skips all the Ethernet header
+including possible VLANs and returns a block of binary data starting at the layer 3 protocol
+(usually IPv4 or IPv6). See also "fc_saved_syn" and "tcp-ss".
+
+<a id="entry-7-3-1-eth-dst"></a>
+
+**`eth.dst`**
+
+```haproxy
+eth.dst
+```
+
+This is used with an input sample representing a binary Ethernet frame, as returned by
+"fc_saved_syn" combined with the "tcp-ss" bind option set to "2". It returns the 6 bytes of the
+Ethernet header corresponding to the destination address of the frame, as a binary block. See also
+"fc_saved_syn" and "tcp-ss".
+
+<a id="entry-7-3-1-eth-hdr"></a>
+
+**`eth.hdr`**
+
+```haproxy
+eth.hdr
+```
+
+This is used with an input sample representing a binary Ethernet frame, as returned by
+"fc_saved_syn" combined with the "tcp-ss" bind option set to "2". It trims anything past the
+Ethernet header but keeps possible VLANs, and returns this header as a block of binary data. See
+also "fc_saved_syn" and "tcp-ss".
+
+<a id="entry-7-3-1-eth-proto"></a>
+
+**`eth.proto`**
+
+```haproxy
+eth.proto
+```
+
+This is used with an input sample representing a binary Ethernet frame, as returned by
+"fc_saved_syn" combined with the "tcp-ss" bind option set to "2". It returns the protocol number
+(also known as EtherType) found in a Ethernet header after any optional VLAN as an integer value. It
+should normally be either 0x800 for IPv4 or 0x86DD for IPv6. See also "fc_saved_syn" and "tcp-ss".
+
+<a id="entry-7-3-1-eth-src"></a>
+
+**`eth.src`**
+
+```haproxy
+eth.src
+```
+
+This is used with an input sample representing a binary Ethernet frame, as returned by
+"fc_saved_syn" combined with the "tcp-ss" bind option set to "2". It returns the 6 bytes of the
+Ethernet header corresponding to the source address of the frame, as a binary block. See also
+"fc_saved_syn" and "tcp-ss".
+
+<a id="entry-7-3-1-eth-vlan"></a>
+
+**`eth.vlan`**
+
+```haproxy
+eth.vlan
+```
+
+This is used with an input sample representing a binary Ethernet frame, as returned by
+"fc_saved_syn" combined with the "tcp-ss" bind option set to "2". It returns the last VLAN ID found
+in a Ethernet header as an integer value. See also "fc_saved_syn" and "tcp-ss".
+
+<a id="entry-7-3-1-even"></a>
+
+**`even`**
+
+```haproxy
+even
+```
+
+Returns a boolean TRUE if the input value of type signed integer is even otherwise returns FALSE. It
+is functionally equivalent to "not,and(1),bool".
+
+<a id="entry-7-3-1-field"></a>
+
+**`field(<index>,<delimiters>[,<count>])`**
+
+```haproxy
+field(<index>,<delimiters>[,<count>])
+```
+
+Extracts the substring at the given index counting from the beginning (positive index) or from the
+end (negative index) considering given delimiters from an input string. Indexes start at 1 or -1 and
+delimiters are a string formatted list of chars. Optionally you can specify `<count>` of fields to
+extract (default: 1). Value of 0 indicates extraction of all remaining fields.
+
+Example:
+
+```text
+str(f1_f2_f3__f5),field(4,_)    # <empty>
+str(f1_f2_f3__f5),field(5,_)    # f5
+str(f1_f2_f3__f5),field(2,_,0)  # f2_f3__f5
+str(f1_f2_f3__f5),field(2,_,2)  # f2_f3
+str(f1_f2_f3__f5),field(-2,_,3) # f2_f3_
+str(f1_f2_f3__f5),field(-3,_,0) # f1_f2_f3
+```
+
+<a id="entry-7-3-1-fe-exists"></a>
+
+**`fe_exists`**
+
+```haproxy
+fe_exists
+```
+
+Takes a frontend name as input value and returns a boolean TRUE if the said frontend with that name
+exists in the current configuration, otherwise returns FALSE. Can be used in places where checking
+the existence of a frontend from a dynamic name is valuable, like map lookups or answering to an
+external check.
+
+Example:
+
+```text
+http-request deny unless { var(txn.fe_name),fe_exists }
+```
+
+<a id="entry-7-3-1-fix-is-valid"></a>
+
+**`fix_is_valid`**
+
+```haproxy
+fix_is_valid
+```
+
+Parses a binary payload and performs sanity checks regarding FIX (Financial Information eXchange):
+
+- checks that all tag IDs and values are not empty and the tags IDs are well numeric
+- checks the BeginString tag is the first tag with a valid FIX version
+- checks the BodyLength tag is the second one with the right body length
+- checks the MsgType tag is the third tag.
+- checks that last tag in the message is the CheckSum tag with a valid checksum
+
+Due to current HAProxy design, only the first message sent by the client and the server can be
+parsed.
+
+This converter returns a boolean, true if the payload contains a valid FIX message, false if not.
+
+See also the fix_tag_value converter.
+
+Example:
+
+```text
+tcp-request inspect-delay 10s
+tcp-request content reject unless { req.payload(0,0),fix_is_valid }
+```
+
+<a id="entry-7-3-1-fix-tag-value"></a>
+
+**`fix_tag_value(<tag>)`**
+
+```haproxy
+fix_tag_value(<tag>)
+```
+
+Parses a FIX (Financial Information eXchange) message and extracts the value from the tag `<tag>`.
+`<tag>` can be a string or an integer pointing to the desired tag. Any integer value is accepted,
+but only the following strings are translated into their integer equivalent: BeginString,
+BodyLength, MsgType, SenderCompID, TargetCompID, CheckSum. More tag names can be easily added.
+
+Due to current HAProxy design, only the first message sent by the client and the server can be
+parsed. No message validation is performed by this converter. It is highly recommended to validate
+the message first using fix_is_valid converter.
+
+See also the fix_is_valid converter.
+
+Example:
+
+```shell
+tcp-request inspect-delay 10s
+tcp-request content reject unless { req.payload(0,0),fix_is_valid }
+# MsgType tag ID is 35, so both lines below will return the same content
+tcp-request content set-var(txn.foo) req.payload(0,0),fix_tag_value(35)
+tcp-request content set-var(txn.bar) req.payload(0,0),fix_tag_value(MsgType)
+```
+
+<a id="entry-7-3-1-has-ctl"></a>
+
+**`has_ctl([mask])`**
+
+```haproxy
+has_ctl([mask])
+```
+
+Checks the input binary sample for control characters as defined by the mask argument. The mask is a
+33-bit number (either decimal or hexadecimal prefixed by "0x"), which has one bit set for each
+character to be detected in the 0x00 to 0x1F range, and bit 32 set to match the DEL character
+(0x7F). When no mask is specified, the converter will use value 0x1FFFFFDFF, matching all control
+characters except TAB (0x09), which is commonly used in HTTP headers. The special mask "any"
+corresponds to 0x1FFFFFFFF which will match all control characters, TAB included. The special mask
+"http" corresponds to 0x2401 and will only cause the control characterss forbidden in HTTP header
+values to be matched, which are CR (0x0D), LF (0x0A) and NUL (0x00).
+
+Examples:
+
+```shell
+# reject presence of DEL, CR, LF, NUL characters in the referer header
+http-request deny if { req.fhdr(referer),has_ctl(0x100002401) }
+# reject presence of any control char but tab in any HTTP header value
+http-request deny if { req.hdr(),has_ctl }
+```
+
+<a id="entry-7-3-1-hex"></a>
+
+**`hex`**
+
+```haproxy
+hex
+```
+
+Converts a binary input sample to a hex string containing two hex digits per input byte. It is used
+to log or transfer hex dumps of some binary input data in a way that can be reliably transferred
+(e.g. an SSL ID can be copied in a header).
+
+<a id="entry-7-3-1-hex2i"></a>
+
+**`hex2i`**
+
+```haproxy
+hex2i
+```
+
+Converts a hex string containing two hex digits per input byte to an integer. If the input value
+contains a character which is not a hexadecimal digit, the converter fails and returns nothing,
+which makes it possible to differentiate an invalid input from a valid zero.
+
+<a id="entry-7-3-1-hmac"></a>
+
+**`hmac(<algorithm>,<key>)`**
+
+```haproxy
+hmac(<algorithm>,<key>)
+```
+
+Converts a binary input sample to a message authentication code with the given key. The result is a
+binary sample. The `<algorithm>` must be one of the registered OpenSSL message digest names (e.g.
+sha256). The `<key>` parameter must be base64 encoded and can either be a string or a variable.
+
+Please note that this converter is only available when HAProxy has been compiled with USE_OPENSSL.
+
+<a id="entry-7-3-1-host-only"></a>
+
+**`host_only`**
+
+```haproxy
+host_only
+```
+
+Converts a string which contains a Host header value and removes its port. The input must respect
+the format of the host header value (rfc9110#section-7.2). It will support that kind of input:
+hostname, hostname:80, 127.0.0.1, 127.0.0.1:80, [::1], [::1]:80.
+
+This converter also sets the string in lowercase.
+
+See also: "port_only" converter which will return the port.
+
+<a id="entry-7-3-1-htonl"></a>
+
+**`htonl`**
+
+```haproxy
+htonl
+```
+
+Converts the input integer value to its 32-bit binary representation in the network byte order.
+Because sample fetches own signed 64-bit integer, when this converter is used, the input integer
+value is first casted to an unsigned 32-bit integer.
+
+<a id="entry-7-3-1-http-date"></a>
+
+**`http_date([<offset[,<unit>]])`**
+
+```haproxy
+http_date([<offset[,<unit>]])
+```
+
+Converts an integer supposed to contain a date since epoch to a string representing this date in a
+format suitable for use in HTTP header fields. If an offset value is specified, then it is added to
+the date before the conversion is operated. This is particularly useful to emit Date header fields,
+Expires values in responses when combined with a positive offset, or Last-Modified values when the
+offset is negative. If a unit value is specified, then consider the timestamp as either "s" for
+seconds (default behavior), "ms" for milliseconds, or "us" for microseconds since epoch. Offset is
+assumed to have the same unit as input timestamp.
+
+<a id="entry-7-3-1-iif"></a>
+
+**`iif(<true>,<false>)`**
+
+```haproxy
+iif(<true>,<false>)
+```
+
+Returns the `<true>` string if the input value is true. Returns the `<false>` string otherwise.
+
+Example:
+
+```text
+http-request set-header x-forwarded-proto %[ssl_fc,iif(https,http)]
+```
+
+<a id="entry-7-3-1-in-table"></a>
+
+**`in_table([<table>])`**
+
+```haproxy
+in_table([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, a boolean false is returned. Otherwise a boolean
+true is returned. This can be used to verify the presence of a certain key in a table tracking some
+elements (e.g. whether or not a source IP address or an Authorization header was already seen).
+
+<a id="entry-7-3-1-ip-data"></a>
+
+**`ip.data`**
+
+```haproxy
+ip.data
+```
+
+This is used with an input sample representing a binary Ethernet frame, as returned by
+"fc_saved_syn" combined with the "tcp-ss" bind option set to "1", or with the output of "eth.data".
+It skips the IP header and any optional options or extensions, and returns a block of binary data
+starting at the transport protocol (usually TCP or UDP). See also "fc_saved_syn", "tcp-ss", and
+"eth.data".
+
+<a id="entry-7-3-1-ip-df"></a>
+
+**`ip.df`**
+
+```haproxy
+ip.df
+```
+
+This is used with an input sample representing a binary Ethernet frame, as returned by
+"fc_saved_syn" combined with the "tcp-ss" bind option set to "1", or with the output of "eth.data".
+It returns integer value 1 if the DF (don't fragment) flag is set in the IP header, 0 otherwise.
+IPv6 does not have a DF flag, and doesn't fragment by default so it always returns 1. See also
+"fc_saved_syn", "tcp-ss", and "eth.data".
+
+<a id="entry-7-3-1-ip-dst"></a>
+
+**`ip.dst`**
+
+```haproxy
+ip.dst
+```
+
+This is used with an input sample representing a binary Ethernet frame, as returned by
+"fc_saved_syn" combined with the "tcp-ss" bind option set to "1", or with the output of "eth.data".
+It returns the IPv4 or IPv6 destination address from the IPv4/v6 header. See also "fc_saved_syn",
+"tcp-ss", and "eth.data".
+
+<a id="entry-7-3-1-ip-fp"></a>
+
+**`ip.fp([<mode>])`**
+
+```haproxy
+ip.fp([<mode>])
+```
+
+This is used with an input sample representing a binary Ethernet frame, as returned by
+"fc_saved_syn" combined with the "tcp-ss" bind option set to "1", or with the output of "eth.data".
+It inspects various parts of the IP header and the TCP header to construct sort of a fingerprint of
+invariant parts that can be used to distinguish between multiple apparently identical hosts. The
+real-world use case is to refine the identification of misbehaving hosts between a shared IP address
+to avoid blocking legitimate users when only one is misbehaving and needs to be blocked. The
+converter builds a 8-byte minimum binary block based on the input. The bytes of the fingerprint are
+arranged like this: - byte 0: IP TOS field (see ip.tos) - byte 1: - bit 7: IPv6 (1) / IPv4 (0) - bit
+6: ip.df - bit 5..4: 0:ip.ttl\<=32; 1:ip.ttl\<=64; 2:ip.ttl\<=128; 3:ip.ttl\<=255 - bit 3: IP
+options present (1) / absent (0) - bit 2: TCP data present (1) / absent (0) - bit 1: TCP.flags has
+CWR set (1) / cleared (0) - bit 0: TCP.flags has ECE set (1) / cleared (0) - byte 2: - bits 7..4:
+TCP header length in 4-byte words - bits 3..0: TCP window scaling + 1 (1..15) / 0 (no WS
+advertised) - byte 3..4: tcp.win - byte 5..6: tcp.options.mss, or zero if absent - byte 7: 1 bit per
+present TCP option, with options 2 to 8 being mapped to bits 0..6 respectively, and bit 7 indicating
+the presence of any option from 9 to 255.
+
+The `<mode>` argument permits to append more information to the fingerprint. By default, when the
+`<mode>` argument is not set or is zero, the fingerprint is solely made of the 8 bytes described
+above. If `<mode>` is specified as another value, it then corresponds to the sum of the following
+values, and the respective components will be concatenated to the fingerprint, in the order below: -
+1: the received TTL value is appended to the fingerprint (1 byte) - 2: the list of TCP option kinds,
+as returned by "tcp.options_list", made of 0 to 40 extra bytes, is appended to the fingerprint - 4:
+the source IP address is appended to the fingerprint, which adds 4 bytes for IPv4 and 16 for IPv6.
+
+Example: make a 13..25 bytes fingerprint using the base FP, the TTL and the source address (1+4=5):
+
+    frontend test
+        mode http
+        bind :4445 tcp-ss 1
+        tcp-request connection set-var(sess.syn) fc_saved_syn
+        http-request return status 200 content-type text/plain lf-string &#92;
+              "src=%[var(sess.syn),ip.src] fp=%[var(sess.syn),ip.fp(5),hex]&#92;n"
+
+See also "fc_saved_syn", "tcp-ss", "eth.data", "ip.df", "ip.ttl", "tcp.win", "tcp.options.mss", and
+"tcp.options_list".
+
+<a id="entry-7-3-1-ip-hdr"></a>
+
+**`ip.hdr`**
+
+```haproxy
+ip.hdr
+```
+
+This is used with an input sample representing a binary Ethernet frame, as returned by
+"fc_saved_syn" combined with the "tcp-ss" bind option set to "1", or with the output of "eth.data".
+It returns a block of binary data starting with the IP header and stopping after the last option or
+extension, and before the transport protocol header. See also "fc_saved_syn", "tcp-ss", and
+"eth.data".
+
+<a id="entry-7-3-1-ip-proto"></a>
+
+**`ip.proto`**
+
+```haproxy
+ip.proto
+```
+
+This is used with an input sample representing a binary Ethernet frame, as returned by
+"fc_saved_syn" combined with the "tcp-ss" bind option set to "1", or with the output of "eth.data".
+It returns the transport protocol number, usually 6 for TCP or 17 for UDP. See also "fc_saved_syn",
+"tcp-ss", and "eth.data".
+
+<a id="entry-7-3-1-ip-src"></a>
+
+**`ip.src`**
+
+```haproxy
+ip.src
+```
+
+This is used with an input sample representing a binary Ethernet frame, as returned by
+"fc_saved_syn" combined with the "tcp-ss" bind option set to "1", or with the output of "eth.data".
+It returns the IPv4 or IPv6 source address from the IPv4/v6 header. See also "fc_saved_syn",
+"tcp-ss", and "eth.data".
+
+<a id="entry-7-3-1-ip-tos"></a>
+
+**`ip.tos`**
+
+```haproxy
+ip.tos
+```
+
+This is used with an input sample representing a binary Ethernet frame, as returned by
+"fc_saved_syn" combined with the "tcp-ss" bind option set to "1", or with the output of "eth.data".
+It returns an integer corresponding to the value of the type-of-service (TOS) field in the IPv4
+header or traffic class (TC) field in the IPv6 header. Note that in the modern internet, this field
+most often contains a DSCP (Differentiated Services Codepoint) value in the 6 upper bits and the two
+lower are either not used, or used by IP ECN. Please refer to RFC2474 and RFC8436 for DSCP values,
+and RFC3168 for IP ECN fields. See also "fc_saved_syn", "tcp-ss", and "eth.data".
+
+<a id="entry-7-3-1-ip-ttl"></a>
+
+**`ip.ttl`**
+
+```haproxy
+ip.ttl
+```
+
+This is used with an input sample representing a binary Ethernet frame, as returned by
+"fc_saved_syn" combined with the "tcp-ss" bind option set to "1", or with the output of "eth.data".
+This returns an integer corresponding to the TTL (Time To Live) or HL (Hop Limit) field in the
+IPv4/IPv6 header. This value is usually preset to a fixed value and decremented by each router that
+the packet crosses. It can help infer how far a client connects from when the initial value is
+known. Note that most modern operating systems start with an initial value of 64. See also
+"fc_saved_syn", "tcp-ss", and "eth.data".
+
+<a id="entry-7-3-1-ip-ver"></a>
+
+**`ip.ver`**
+
+```haproxy
+ip.ver
+```
+
+This is used with an input sample representing a binary Ethernet frame, as returned by
+"fc_saved_syn" combined with the "tcp-ss" bind option set to "1", or with the output of "eth.data".
+This returns the IP version from the IP header, normally either 4 or 6. Note that this doesn't check
+whether the protocol number in the upper layer Ethernet frame matches, but since this is expected to
+be used with valid packets, it is expected that the operating system has already verified this. See
+also "fc_saved_syn", "tcp-ss", and "eth.data".
+
+<a id="entry-7-3-1-ipmask"></a>
+
+**`ipmask(<mask4>[,<mask6>])`**
+
+```haproxy
+ipmask(<mask4>[,<mask6>])
+```
+
+Apply a mask to an IP address, and use the result for lookups and storage. This can be used to make
+all hosts within a certain mask to share the same table entries and as such use the same server. The
+mask4 can be passed in dotted form (e.g. 255.255.255.0) or in CIDR form (e.g. 24). The mask6 can be
+passed in quadruplet form (e.g. ffff:ffff::) or in CIDR form (e.g. 64). If no mask6 is given IPv6
+addresses will fail to convert for backwards compatibility reasons.
+
+<a id="entry-7-3-1-json"></a>
+
+**`json([<input-code>])`**
+
+```haproxy
+json([<input-code>])
+```
+
+Escapes the input string and produces an ASCII output string ready to use as a JSON string. The
+converter tries to decode the input string according to the `<input-code>` parameter. It can be
+"ascii", "utf8", "utf8s", "utf8p" or "utf8ps". The "ascii" decoder never fails. The "utf8" decoder
+detects 3 types of errors:
+
+- bad UTF-8 sequence (lone continuation byte, bad number of continuation bytes, ...)
+- invalid range (the decoded value is within a UTF-8 prohibited range),
+- code overlong (the value is encoded with more bytes than necessary).
+
+The UTF-8 JSON encoding can produce a "too long value" error when the UTF-8 character is greater
+than 0xffff because the JSON string escape specification only authorizes 4 hex digits for the value
+encoding. The UTF-8 decoder exists in 4 variants designated by a combination of two suffix letters:
+"p" for "permissive" and "s" for "silently ignore". The behaviors of the decoders are:
+
+- "ascii" : never fails;
+- "utf8" : fails on any detected errors;
+- "utf8s" : never fails, but removes characters corresponding to errors;
+- "utf8p" : accepts and fixes the overlong errors, but fails on any other error;
+- "utf8ps": never fails, accepts and fixes the overlong errors, but removes characters corresponding
+  to the other errors.
+
+This converter is particularly useful for building properly escaped JSON for logging to servers
+which consume JSON-formatted traffic logs.
+
+Example:
+
+```text
+capture request header Host len 15
+capture request header user-agent len 150
+log-format '{"ip":"%[src]","user-agent":"%[capture.req.hdr(1),json(utf8s)]"}'
+```
+
+Input request from client 127.0.0.1:
+
+```text
+GET / HTTP/1.0
+User-Agent: Very "Ugly" UA 1/2
+```
+
+Output log:
+
+```text
+{"ip":"127.0.0.1","user-agent":"Very \"Ugly\" UA 1\/2"}
+```
+
+<a id="entry-7-3-1-json-query"></a>
+
+**`json_query(<json_path>[,<output_type>])`**
+
+```haproxy
+json_query(<json_path>[,<output_type>])
+```
+
+The json_query converter supports the JSON types string, boolean, number and array. Floating point
+numbers will be returned as a string. By specifying the output_type 'int' the value will be
+converted to an Integer. Arrays will be returned as string, starting and ending with a square
+brackets. The content is a CSV. Depending on the data type, the array values might be quoted. If the
+array values are complex types, the string contains the complete json representation of each value
+separated by a comma. Example result for a roles query to a JWT:
+
+```text
+["manage-account","manage-account-links","view-profile"]
+```
+
+If conversion is not possible the json_query converter fails.
+
+`<json_path>` must be a valid JSON Path string as defined in
+<https://datatracker.ietf.org/doc/draft-ietf-jsonpath-base/>
+
+Note: depending on the context and the underlying implementation, extraction of duplicate JSON keys
+is undefined and might return the first, last, or any other occurrence of the same key from the
+input content, and if key names are passed encoded, they might not always be matched. In short, this
+converter is not suitable for content sanitization.
+
+Example:
+
+```shell
+# get a integer value from the request body
+# "{"integer":4}" => 5
+http-request set-var(txn.pay_int) req.body,json_query('$.integer','int'),add(1)
+
+# get a key with '.' in the name
+# {"my.key":"myvalue"} => myvalue
+http-request set-var(txn.pay_mykey) req.body,json_query('$.my\\.key')
+
+# {"boolean-false":false} => 0
+http-request set-var(txn.pay_boolean_false) req.body,json_query('$.boolean-false')
+
+# get the value of the key 'iss' from a JWT Bearer token
+http-request set-var(txn.token_payload) req.hdr(Authorization),word(2,.),ub64dec,json_query('$.iss')
+```
+
+<a id="entry-7-3-1-jwt-decrypt-cert"></a>
+
+**`jwt_decrypt_cert(<cert>)`**
+
+```haproxy
+jwt_decrypt_cert(<cert>)
+```
+
+Performs a signature validation of a JSON Web Token following the JSON Web Encryption format (see
+RFC 7516) given in input and return its content decrypted thanks to the certificate provided. The
+`<cert>` parameter must be a path to an already loaded certificate (that can be dumped via the "dump
+ssl cert" CLI command). The certificate must have its "jwt" option explicitly set to "on" (see "jwt"
+crt-list option). It can be provided directly or via a variable. The only tokens managed yet are the
+ones using the Compact Serialization format (five dot-separated base64-url encoded strings).
+
+This converter can be used for tokens that have an algorithm ("alg" field of the JOSE header) among
+the following: RSA-OAEP, RSA-OAEP-256, ECDH-ES, ECDH-ES+A128KW, ECDH-ES+A192KW or ECDH-ES+A256KW.
+The RSA1_5 algorithm is implemented but disabled by default following what is suggested in [section
+3.2](https://www.rfc-editor.org/rfc/rfc8725#section-3.2) of RFC 8725. It can be reenabled if needed thanks to 'jwt.decrypt_alg_list' global option.
+
+The supported algorithms and encryption algorithms ("alg" and "enc" fields of the JOSE header
+respectively) can be modified thanks to the 'jwt.decrypt_alg_list' and 'jwt.decrypt_enc_list' global
+options.
+
+The JWE token must be provided base64url-encoded and the output will be provided "raw". If an error
+happens during token parsing, signature verification or content decryption, an empty string will be
+returned.
+
+Example:
+
+```shell
+# Get a JWT from the authorization header, put its decrypted content in an
+# HTTP header
+http-request set-var(txn.bearer) http_auth_bearer
+http-request set-header X-Decrypted %[var(txn.bearer),jwt_decrypt_cert("/foo/bar.pem")]
+```
+
+<a id="entry-7-3-1-jwt-decrypt-jwk"></a>
+
+**`jwt_decrypt_jwk(<jwk>)`**
+
+```haproxy
+jwt_decrypt_jwk(<jwk>)
+```
+
+Performs a signature validation of a JSON Web Token following the JSON Web Encryption format (see
+RFC 7516) given in input and return its content decrypted thanks to the provided JSON Web Key
+(RFC7517). The `<jwk>` parameter must be a valid JWK of type 'oct', 'EC' or 'RSA' ('kty' field of
+the JSON key) that can be provided either as a string or via a variable.
+
+The only tokens managed yet are the ones using the Compact Serialization format (five dot-separated
+base64-url encoded strings).
+
+This converter can be used to decode token that have a symmetric-type algorithm ("alg" field of the
+JOSE header) among the following: A128KW, A192KW, A256KW, A128GCMKW, A192GCMKW, A256GCMKW, dir. In
+this case, we expect the provided JWK to be of the 'oct' type.
+
+This converter also manages tokens that have an algorithm ("alg" field of the JOSE header) in the
+RSA family (RSA-OAEP or RSA-OAEP-256) when provided an 'RSA' JWK, or in the ECDH family (ECDH-ES,
+ECDH-ES+A128KW, ECDH-ES+A192KW or ECDH-ES+A256KW) when provided an 'EC' JWK. The RSA1_5 algorithm is
+implemented but disabled by default following what is suggested in [section 3.2](https://www.rfc-editor.org/rfc/rfc8725#section-3.2) of RFC 8725. It can
+be reenabled if needed thanks to 'jwt.decrypt_alg_list' global option.
+
+Please note that the A128KW and A192KW algorithms are not available on AWS-LC so the A128KW, A192KW,
+ECDH-ES+A128KW and ECDH-ES+A192KW algorithms won't work.
+
+The supported algorithms and encryption algorithms ("alg" and "enc" fields of the JOSE header
+respectively) can be modified thanks to the 'jwt.decrypt_alg_list' and 'jwt.decrypt_enc_list' global
+options.
+
+The JWE token must be provided base64url-encoded and the output will be provided "raw". If an error
+happens during token parsing, signature verification or content decryption, an empty string will be
+returned.
+
+Because of the way quotes, commas and double quotes are treated in the configuration, the contents
+of the JWK must be properly escaped for this converter to work properly (see [section 2.2](/haproxy/configuration-basics/#section-2-2) for more
+information).
+
+Example:
+
+```shell
+ # Get a JWT from the authorization header, put its decrypted content in an
+ # HTTP header
+ http-request set-var(txn.bearer) http_auth_bearer
+ http-request set-header X-Decrypted %[var(txn.bearer),jwt_decrypt_jwk(\'{\"kty\":\"oct\",\"k\":\"wAsgsg\"}\')
+
+# or via a variable
+ http-request set-var(txn.bearer) http_auth_bearer
+ http-request set-var(txn.jwk) str(\'{\"kty\":\"oct\",\"k\":\"Q-NFLlghQ\"}\')
+ http-request set-header X-Decrypted %[var(txn.bearer),jwt_decrypt_jwk(txn.jwk)
+```
+
+<a id="entry-7-3-1-jwt-decrypt-secret"></a>
+
+**`jwt_decrypt_secret(<secret>)`**
+
+```haproxy
+jwt_decrypt_secret(<secret>)
+```
+
+Performs a signature validation of a JSON Web Token following the JSON Web Encryption format (see
+RFC 7516) given in input and return its content decrypted thanks to the base64-encoded secret
+provided. The secret can be given as a string or via a variable. The only tokens managed yet are the
+ones using the Compact Serialization format (five dot-separated base64-url encoded strings).
+
+This converter can be used for tokens that have an algorithm ("alg" field of the JOSE header) among
+the following: A128KW, A192KW, A256KW, A128GCMKW, A192GCMKW, A256GCMKW, dir. Please note that the
+A128KW and A192KW algorithms are not available on AWS-LC and decryption will not work.
+
+The JWE token must be provided base64url-encoded and the output will be provided "raw". If an error
+happens during token parsing, signature verification or content decryption, an empty string will be
+returned.
+
+Example:
+
+```shell
+# Get a JWT from the authorization header, put its decrypted content in an
+# HTTP header
+http-request set-var(txn.bearer) http_auth_bearer
+http-request set-header X-Decrypted %[var(txn.bearer),jwt_decrypt_secret("GawgguFyGrWKav7AX4VKUg")]
+```
+
+<a id="entry-7-3-1-jwt-header-query"></a>
+
+**`jwt_header_query([<json_path>[,<output_type>]])`**
+
+```haproxy
+jwt_header_query([<json_path>[,<output_type>]])
+```
+
+When given a JSON Web Token (JWT) in input, either returns the decoded header part of the token (the
+first base64-url encoded part of the JWT) if no parameter is given, or performs a json_query on the
+decoded header part of the token. See "json_query" converter for details about the accepted
+json_path and output_type parameters. This converter can be used with tokens that are either JWS or
+JWE tokens as long as they are in the Compact Serialization format.
+
+Please note that this converter is only available when HAProxy has been compiled with USE_OPENSSL.
+
+<a id="entry-7-3-1-jwt-payload-query"></a>
+
+**`jwt_payload_query([<json_path>[,<output_type>]])`**
+
+```haproxy
+jwt_payload_query([<json_path>[,<output_type>]])
+```
+
+When given a JSON Web Token (JWT) of the JSON Web Signed (JWS) format in input, either returns the
+decoded payload part of the token (the second base64-url encoded part of the JWT) if no parameter is
+given, or performs a json_query on the decoded payload part of the token. See "json_query" converter
+for details about the accepted json_path and output_type parameters.
+
+Please note that this converter is only available when HAProxy has been compiled with USE_OPENSSL.
+
+jwt_verify(`<alg>`,`<key>`)
+
+Performs a signature verification for the JSON Web Token (JWT) given in input by using the `<alg>`
+algorithm and the `<key>` parameter. For now, only JWS tokens using the Compact Serialization format
+can be processed (three dot-separated base64-url encoded strings). This converter only verifies the
+signature of the token and does not perform a full JWT validation as specified in [section 7.2](https://www.rfc-editor.org/rfc/rfc7519#section-7.2) of
+RFC7519. We do not ensure that the header and payload contents are fully valid JSONs once decoded
+for instance, and no checks are performed regarding their respective contents.
+
+- `<alg>` can be either a string or a variable name (See also "set-var") that holds the name of the
+  algorithm used to verify.
+
+  Algorithms mentioned in [section 3.1](https://www.rfc-editor.org/rfc/rfc7518#section-3.1) of RFC7518 are managed:
+
+```text
+   +--------------+---------------------------------------------------------+
+   | "alg" Param  | Digital Signature or MAC Algorithm                      |
+   | Value        |                                                         |
+   +--------------+---------------------------------------------------------+
+   | HS256        | HMAC using SHA-256                                      |
+   | HS384        | HMAC using SHA-384                                      |
+   | HS512        | HMAC using SHA-512                                      |
+   | RS256        | RSASSA-PKCS1-v1_5 using SHA-256                         |
+   | RS384        | RSASSA-PKCS1-v1_5 using SHA-384                         |
+   | RS512        | RSASSA-PKCS1-v1_5 using SHA-512                         |
+   | ES256        | ECDSA using P-256 and SHA-256                           |
+   | ES384        | ECDSA using P-384 and SHA-384                           |
+   | ES512        | ECDSA using P-521 and SHA-512                           |
+   | PS256        | RSASSA-PSS using SHA-256 and MGF1 with SHA-256          |
+   | PS384        | RSASSA-PSS using SHA-384 and MGF1 with SHA-384          |
+   | PS512        | RSASSA-PSS using SHA-512 and MGF1 with SHA-512          |
+   | none         | No digital signature or MAC performed (see note below)  |
+   +--------------+---------------------------------------------------------+
+```
+
+Please note that the "none" algorithm is not allowed by default to follow the recommendations in
+RFC8725 [section 3.2](https://www.rfc-editor.org/rfc/rfc8725#section-3.2). Set global option 'jwt.allow_none_alg' to explicitely allow it.
+
+- `<key>` can be either a string or a variable name (See also "set-var") that holds a secret or a
+  public key path.
+
+  Secrets are only applicable when using HMAC algorithms.
+
+  Public keys must be in either the PKCS#1 format (for RSA keys, starting with BEGIN RSA PUBLIC KEY)
+  or SPKI format (Subject Public Key Info, starting with BEGIN PUBLIC KEY). Public keys must be
+  available during the configuration parsing and cannot be updated or loaded at runtime. See
+  "jwt_verify_cert" converter for JWT token validation based on full-on PEM certificates.
+
+  All the public keys that might be used to verify JWTs must be known during init in order to be
+  added into a dedicated cache so that no disk access is required during runtime.
+
+Returns 1 in case of verification success, 0 in case of verification failure and a strictly negative
+value for any other error. Because of all those non-null error return values, the result of this
+converter should never be converted to a boolean. See below for a full list of the possible return
+values.
+
+The possible return values are the following:
+
+```text
+  +----+----------------------------------------------------------------------+
+  | ID | message                                                              |
+  +----+----------------------------------------------------------------------+
+  |  1 | "Verification success"                                               |
+  |  0 | "Verification failure"                                               |
+  | -1 | "Unknown algorithm (not mentioned in RFC7518)"                       |
+  | -2 | "Unmanaged algorithm"                                                |
+  | -3 | "Invalid token"                                                      |
+  | -4 | "Out of memory"                                                      |
+  | -5 | "Unknown pubkey/certificate"                                         |
+  | -6 | "Internal error"                                                     |
+  +----+----------------------------------------------------------------------+
+```
+
+Please note that this converter is only available when HAProxy has been compiled with USE_OPENSSL.
+
+Example:
+
+```shell
+# Get a JWT from the authorization header, extract the "alg" field of its
+# JOSE header and use a public key to verify a signature
+http-request set-var(txn.bearer) http_auth_bearer
+http-request set-var(txn.jwt_alg) var(txn.bearer),jwt_header_query('$.alg')
+http-request deny unless { var(txn.jwt_alg) -m str "RS256" }
+http-request deny unless { var(txn.bearer),jwt_verify(txn.jwt_alg,"/path/to/pubkey.pem") 1 }
+```
+
+jwt_verify_cert(`<alg>`,`<cert>`)
+
+Performs a signature verification for the JSON Web Token (JWT) given in input by using the `<alg>`
+algorithm and the `<cert>` parameter. For now, only JWS tokens using the Compact Serialization
+format can be processed (three dot-separated base64-url encoded strings). This converter only
+verifies the signature of the token and does not perform a full JWT validation as specified in
+[section 7.2](https://www.rfc-editor.org/rfc/rfc7519#section-7.2) of RFC7519. We do not ensure that the header and payload contents are fully valid JSONs
+once decoded for instance, and no checks are performed regarding their respective contents.
+
+- `<alg>` can be either a string or a variable name (See also "set-var") that holds the name of the
+  algorithm used to verify. Unlike the "jwt_verify" converter, this converter only expects a
+  certificate as second parameter so it should not be used for tokens using HMAC algorithms.
+
+  Algorithms mentioned in [section 3.1](https://www.rfc-editor.org/rfc/rfc7518#section-3.1) of RFC7518 are managed (apart from HMAC ones):
+
+```text
+   +--------------+---------------------------------------------------------+
+   | "alg" Param  | Digital Signature or MAC Algorithm                      |
+   | Value        |                                                         |
+   +--------------+---------------------------------------------------------+
+   | RS256        | RSASSA-PKCS1-v1_5 using SHA-256                         |
+   | RS384        | RSASSA-PKCS1-v1_5 using SHA-384                         |
+   | RS512        | RSASSA-PKCS1-v1_5 using SHA-512                         |
+   | ES256        | ECDSA using P-256 and SHA-256                           |
+   | ES384        | ECDSA using P-384 and SHA-384                           |
+   | ES512        | ECDSA using P-521 and SHA-512                           |
+   | PS256        | RSASSA-PSS using SHA-256 and MGF1 with SHA-256          |
+   | PS384        | RSASSA-PSS using SHA-384 and MGF1 with SHA-384          |
+   | PS512        | RSASSA-PSS using SHA-512 and MGF1 with SHA-512          |
+   | none         | No digital signature or MAC performed                   |
+   +--------------+---------------------------------------------------------+
+```
+
+- `<key>` can be either a string or a variable name (See also "set-var") that holds a certificate
+  path.
+
+  Certificates must be standard PEM certificates (starting with BEGIN CERTIFICATE). Their path can
+  be passed directly to the converter or referenced via a variable. If a variable is used, the
+  corresponding certificates can either be declared in a crt-store or dynamically loaded via the
+  stats socket. When a path is given directly, if the corresponding certificate was not loaded yet
+  in the internal certificate store, it will be loaded during configuration parsing and it thus must
+  already exist otherwise an error will be raised.
+
+  Only certificates that are explicitly defined as usable for JWT validation can be used. See "jwt"
+  crt-store option.
+
+  It is possible to update certificates dynamically and add new certificates using the stats socket.
+  See also "set ssl cert" and "new ssl cert" in the management guide.
+
+Returns 1 in case of verification success, 0 in case of verification failure and a strictly negative
+value for any other error. Because of all those non-null error return values, the result of this
+converter should never be converted to a boolean. See below for a full list of the possible return
+values.
+
+The possible return values are the following:
+
+```text
+  +----+----------------------------------------------------------------------+
+  | ID | message                                                              |
+  +----+----------------------------------------------------------------------+
+  |  1 | "Verification success"                                               |
+  |  0 | "Verification failure"                                               |
+  | -1 | "Unknown algorithm (not mentioned in RFC7518)"                       |
+  | -2 | "Unmanaged algorithm"                                                |
+  | -3 | "Invalid token"                                                      |
+  | -4 | "Out of memory"                                                      |
+  | -5 | "Unknown pubkey/certificate"                                         |
+  | -6 | "Internal error"                                                     |
+  | -7 | "Unavailable certificate" (see "jwt")                                |
+  +----+----------------------------------------------------------------------+
+```
+
+Please note that this converter is only available when HAProxy has been compiled with USE_OPENSSL.
+
+Example:
+
+```shell
+# Get a JWT from the authorization header, extract the "alg" field of its
+# JOSE header and use a public certificate to verify a signature
+http-request set-var(txn.bearer) http_auth_bearer
+http-request set-var(txn.jwt_alg) var(txn.bearer),jwt_header_query('$.alg')
+http-request deny unless { var(txn.jwt_alg) -m str "RS256" }
+http-request deny unless { var(txn.bearer),jwt_verify_cert(txn.jwt_alg,"/path/to/cert.pem") 1 }
+```
+
+<a id="entry-7-3-1-language"></a>
+
+**`language(<value>[,<default>])`**
+
+```haproxy
+language(<value>[,<default>])
+```
+
+Returns the value with the highest q-factor from a list as extracted from the "accept-language"
+header using "req.fhdr". Values with no q-factor have a q-factor of 1. Values with a q-factor of 0
+are dropped. Only values which belong to the list of semi-colon delimited `<values>` will be
+considered. The argument `<value>` syntax is "lang[;lang[;lang[;...]]]". If no value matches
+the given list and a default value is provided, it is returned. Note that language names may have a
+variant after a dash ('-'). If this variant is present in the list, it will be matched, but if it is
+not, only the base language is checked. The match is case-sensitive, and the output string is always
+one of those provided in arguments. The ordering of arguments is meaningless, only the ordering of
+the values in the request counts, as the first value among multiple sharing the same q-factor is
+used.
+
+Example:
+
+```shell
+# this configuration switches to the backend matching a
+# given language based on the request:
+
+acl es req.fhdr(accept-language),language(es;fr;en) -m str es
+acl fr req.fhdr(accept-language),language(es;fr;en) -m str fr
+acl en req.fhdr(accept-language),language(es;fr;en) -m str en
+use_backend spanish if es
+use_backend french  if fr
+use_backend english if en
+default_backend choose_your_language
+```
+
+<a id="entry-7-3-1-length"></a>
+
+**`length`**
+
+```haproxy
+length
+```
+
+Get the length of the string. This can only be placed after a string sample fetch function or after
+a transformation keyword returning a string type. The result is of type integer.
+
+<a id="entry-7-3-1-lower"></a>
+
+**`lower`**
+
+```haproxy
+lower
+```
+
+Convert a string sample to lower case. This can only be placed after a string sample fetch function
+or after a transformation keyword returning a string type. The result is of type string.
+
+<a id="entry-7-3-1-ltime"></a>
+
+**`ltime(<format>[,<offset>])`**
+
+```haproxy
+ltime(<format>[,<offset>])
+```
+
+Converts an integer supposed to contain a date since epoch to a string representing this date in
+local time using a format defined by the `<format>` string using strftime(3). The purpose is to
+allow any date format to be used in logs. An optional `<offset>` in seconds may be applied to the
+input date (positive or negative). See the strftime() man page for the format supported by your
+operating system. See also the utime converter.
+
+Example:
+
+```shell
+# Emit two colons, one with the local time and another with ip:port
+# e.g.  20140710162350 127.0.0.1:57325
+log-format %[date,ltime(%Y%m%d%H%M%S)]\ %ci:%cp
+```
+
+<a id="entry-7-3-1-ltrim"></a>
+
+**`ltrim(<chars>)`**
+
+```haproxy
+ltrim(<chars>)
+```
+
+Skips any characters from `<chars>` from the beginning of the string representation of the input
+sample.
+
+<a id="entry-7-3-1-map"></a>
+
+**`map(<map_name>[,<default_value>])`**
+
+```haproxy
+map(<map_name>[,<default_value>])
+map_<match_type>(<map_name>[,<default_value>])
+map_<match_type>_<output_type>(<map_name>[,<default_value>])
+```
+
+Search the input value from `<map_name>` using the `<match_type>` matching method, and return the
+associated value converted to the type `<output_type>`. If the input value cannot be found in the
+`<map_name>`, the converter returns the `<default_value>`. If the `<default_value>` is not set, the
+converter fails and acts as if no input value could be fetched. If the `<match_type>` is not set, it
+defaults to "str". Likewise, if the `<output_type>` is not set, it defaults to "str". For
+convenience, the "map" keyword is an alias for "map_str" and maps a string to another string.
+`<map_name>` must follow the format described in 2.7. about name format for maps and ACLs
+
+It is important to avoid overlapping between the keys: IP addresses and strings are stored in trees,
+so the first of the finest match will be used. Other keys are stored in lists, so the first matching
+occurrence will be used.
+
+The following array contains the list of all map functions available sorted by input type, match
+type and output type.
+
+```text
+  input type | match method | output type str | output type int | output type ip | output type key
+  -----------+--------------+-----------------+-----------------+----------------+----------------
+    str      | str          | map_str         | map_str_int     | map_str_ip     | map_str_key
+  -----------+--------------+-----------------+-----------------+----------------+----------------
+    str      | beg          | map_beg         | map_beg_int     | map_beg_ip     | map_beg_key
+  -----------+--------------+-----------------+-----------------+----------------+----------------
+    str      | sub          | map_sub         | map_sub_int     | map_sub_ip     | map_sub_key
+  -----------+--------------+-----------------+-----------------+----------------+----------------
+    str      | dir          | map_dir         | map_dir_int     | map_dir_ip     | map_dir_key
+  -----------+--------------+-----------------+-----------------+----------------+----------------
+    str      | dom          | map_dom         | map_dom_int     | map_dom_ip     | map_dom_key
+  -----------+--------------+-----------------+-----------------+----------------+----------------
+    str      | end          | map_end         | map_end_int     | map_end_ip     | map_end_key
+  -----------+--------------+-----------------+-----------------+----------------+----------------
+    str      | reg          | map_reg         | map_reg_int     | map_reg_ip     | map_reg_key
+  -----------+--------------+-----------------+-----------------+----------------+----------------
+    str      | reg          | map_regm        | map_reg_int     | map_reg_ip     | map_reg_key
+  -----------+--------------+-----------------+-----------------+----------------+----------------
+    int      | int          | map_int         | map_int_int     | map_int_ip     | map_int_key
+  -----------+--------------+-----------------+-----------------+----------------+----------------
+    ip       | ip           | map_ip          | map_ip_int      | map_ip_ip      | map_ip_key
+  -----------+--------------+-----------------+-----------------+----------------+----------------
+```
+
+The special map called "map_regm" expect matching zone in the regular expression and modify the
+output replacing back reference (like "&#92;1") by the corresponding match
+text.
+
+Output type "key" means that it is the matched entry's key (as found in the map file) that will be
+returned as a string instead of the value. Note that optional `<default_value>` argument is not
+supported when "key" output type is used.
+
+Files referenced by `<map_name>` contains one key + value per line. Lines which start with '#' are
+ignored, just like empty lines. Leading tabs and spaces are stripped. The key is then the first
+"word" (series of non-space/tabs characters), and the value is what follows this series of space/tab
+till the end of the line excluding trailing spaces/tabs.
+
+Example:
+
+```text
+     # this is a comment and is ignored
+        2.22.246.0/23    United Kingdom      \n
+     <-><-----------><--><------------><---->
+      |       |       |         |        `- trailing spaces ignored
+      |       |       |         `---------- value
+      |       |       `-------------------- middle spaces ignored
+      |       `---------------------------- key
+      `------------------------------------ leading spaces ignored
+```
+
+<a id="entry-7-3-1-mod"></a>
+
+**`mod(<value>)`**
+
+```haproxy
+mod(<value>)
+```
+
+Divides the input value of type signed integer by `<value>`, and returns the remainder as an signed
+integer. If `<value>` is null, then zero is returned. `<value>` can be a numeric value or a variable
+name. See [section 2.8](/haproxy/configuration-basics/#section-2-8) about variables for details.
+
+<a id="entry-7-3-1-mqtt-field-value"></a>
+
+**`mqtt_field_value(<packettype>,<fieldname_or_property_ID>)`**
+
+```haproxy
+mqtt_field_value(<packettype>,<fieldname_or_property_ID>)
+```
+
+Returns value of `<fieldname>` found in input MQTT payload of type `<packettype>`. `<packettype>`
+can be either a string (case insensitive matching) or a numeric value corresponding to the type of
+packet we're supposed to extract data from. Supported string and integers can be found here:
+<https://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718021>
+<https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901022>
+
+`<fieldname>` depends on `<packettype>` and can be any of the following below. (note that
+`<fieldname>` matching is case insensitive). `<property id>` can only be found in MQTT v5.0 streams.
+check this table: <https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html#_Toc3901029>
+
+- CONNECT (or 1): flags, protocol_name, protocol_version, client_identifier, will_topic,
+  will_payload, username, password, keepalive OR any property ID as a numeric value (for MQTT v5.0
+  packets only):
+
+```text
+17: Session Expiry Interval
+33: Receive Maximum
+39: Maximum Packet Size
+34: Topic Alias Maximum
+25: Request Response Information
+23: Request Problem Information
+21: Authentication Method
+22: Authentication Data
+18: Will Delay Interval
+ 1: Payload Format Indicator
+ 2: Message Expiry Interval
+ 3: Content Type
+ 8: Response Topic
+ 9: Correlation Data
+```
+
+Not supported yet:
+
+```text
+38: User Property
+```
+
+- CONNACK (or 2): flags, protocol_version, reason_code OR any property ID as a numeric value (for
+  MQTT v5.0 packets only):
+
+```text
+17: Session Expiry Interval
+33: Receive Maximum
+36: Maximum QoS
+37: Retain Available
+39: Maximum Packet Size
+18: Assigned Client Identifier
+34: Topic Alias Maximum
+31: Reason String
+40; Wildcard Subscription Available
+41: Subscription Identifiers Available
+42: Shared Subscription Available
+19: Server Keep Alive
+26: Response Information
+28: Server Reference
+21: Authentication Method
+22: Authentication Data
+```
+
+Not supported yet:
+
+```text
+38: User Property
+```
+
+Due to current HAProxy design, only the first message sent by the client and the server can be
+parsed. Thus this converter can extract data only from CONNECT and CONNACK packet types. CONNECT is
+the first message sent by the client and CONNACK is the first response sent by the server.
+
+Example:
+
+```shell
+acl data_in_buffer req.len ge 4
+tcp-request content set-var(txn.username) \
+        req.payload(0,0),mqtt_field_value(connect,protocol_name) \
+        if data_in_buffer
+# do the same as above
+tcp-request content set-var(txn.username) \
+        req.payload(0,0),mqtt_field_value(1,protocol_name) \
+        if data_in_buffer
+```
+
+<a id="entry-7-3-1-mqtt-is-valid"></a>
+
+**`mqtt_is_valid`**
+
+```haproxy
+mqtt_is_valid
+```
+
+Checks that the binary input is a valid MQTT packet. It returns a boolean.
+
+Due to current HAProxy design, only the first message sent by the client and the server can be
+parsed. Thus this converter can extract data only from CONNECT and CONNACK packet types. CONNECT is
+the first message sent by the client and CONNACK is the first response sent by the server.
+
+Only MQTT 3.1, 3.1.1 and 5.0 are supported.
+
+Example:
+
+```text
+acl data_in_buffer req.len ge 4
+tcp-request content reject unless { req.payload(0,0),mqtt_is_valid }
+```
+
+<a id="entry-7-3-1-ms-ltime"></a>
+
+**`ms_ltime(<format>[,<offset>])`**
+
+```haproxy
+ms_ltime(<format>[,<offset>])
+```
+
+This works like "ltime" but takes an input in milliseconds. It also supports the %N conversion
+specifier inspired by date(1). Converts an integer supposed to contain a date since epoch to a
+string representing this date in local time using a format defined by the `<format>` string using
+strftime(3). The purpose is to allow any date format to be used in logs. An optional `<offset>` in
+milliseconds may be applied to the input date (positive or negative). See the strftime() man page
+for the format supported by your operating system.
+
+The %N conversion specifier allows you to output the nanoseconds part of the date, precision is
+limited since the input is milliseconds. (000000000..999000000). %N can take a width argument
+between % and N. It is useful to display milliseconds (%3N) or microseconds (%6N). The default and
+maximum width is 9 (%N = %9N).
+
+See also the utime converter for UTC as well as "ltime" and "us_ltime" converters.
+
+Example:
+
+```shell
+# Emit 3 colons, the local time, the timezone and another with ip:port
+# e.g. 2023/07/24/11:53:02.196 +0200 127.0.0.1:41530
+log-format %[accept_date(ms),ms_ltime("%Y/%m/%d/%H:%M:%S.%3N %z")]\ %ci:%cp
+```
+
+<a id="entry-7-3-1-ms-utime"></a>
+
+**`ms_utime(<format>[,<offset>])`**
+
+```haproxy
+ms_utime(<format>[,<offset>])
+```
+
+This works like "utime" but takes an input in milliseconds. It also supports the %N conversion
+specifier inspired by date(1). Converts an integer supposed to contain a date since epoch to a
+string representing this date in UTC time using a format defined by the `<format>` string using
+strftime(3). The purpose is to allow any date format to be used in logs. An optional `<offset>` in
+milliseconds may be applied to the input date (positive or negative). See the strftime() man page
+for the format supported by your operating system.
+
+The %N conversion specifier allows you to output the nanoseconds part of the date, precision is
+limited since the input is milliseconds. (000000000..999000000). %N can take a width argument
+between % and N. It is useful to display milliseconds (%3N) or microseconds (%6N). The default and
+maximum width is 9 (%N = %9N).
+
+See also the ltime converter for local as well as "utime" and "us_utime" converters.
+
+Example:
+
+```shell
+# Emit 3 colons, the UTC time, the timezone and another with ip:port
+# e.g. 2023/07/24/09:53:02.196 +0000 127.0.0.1:41530
+log-format %[accept_date(ms),ms_utime("%Y/%m/%d/%H:%M:%S.%3N %z")]\ %ci:%cp
+```
+
+<a id="entry-7-3-1-mul"></a>
+
+**`mul(<value>)`**
+
+```haproxy
+mul(<value>)
+```
+
+Multiplies the input value of type signed integer by `<value>`, and returns the product as an signed
+integer. In case of overflow, the largest possible value for the sign is returned so that the
+operation doesn't wrap around. `<value>` can be a numeric value or a variable name. See [section 2.8](/haproxy/configuration-basics/#section-2-8)
+about variables for details.
+
+<a id="entry-7-3-1-nbsrv"></a>
+
+**`nbsrv`**
+
+```haproxy
+nbsrv
+```
+
+Takes an input value of type string, interprets it as a backend name and returns the number of
+usable servers in that backend. Can be used in places where we want to look up a backend from a
+dynamic name, like a result of a map lookup.
+
+<a id="entry-7-3-1-neg"></a>
+
+**`neg`**
+
+```haproxy
+neg
+```
+
+Takes the input value of type signed integer, computes the opposite value, and returns the remainder
+as an signed integer. 0 is identity. This operator is provided for reversed subtracts: in order to
+subtract the input from a constant, simply perform a "neg,add(value)".
+
+<a id="entry-7-3-1-not"></a>
+
+**`not`**
+
+```haproxy
+not
+```
+
+Returns a boolean FALSE if the input value of type signed integer is non-null, otherwise returns
+TRUE. Used in conjunction with and(), it can be used to report true/false for bit testing on input
+values (e.g. verify the absence of a flag).
+
+<a id="entry-7-3-1-odd"></a>
+
+**`odd`**
+
+```haproxy
+odd
+```
+
+Returns a boolean TRUE if the input value of type signed integer is odd otherwise returns FALSE. It
+is functionally equivalent to "and(1),bool".
+
+<a id="entry-7-3-1-or"></a>
+
+**`or(<value>)`**
+
+```haproxy
+or(<value>)
+```
+
+Performs a bitwise "OR" between `<value>` and the input value of type signed integer, and returns
+the result as an signed integer. `<value>` can be a numeric value or a variable name. See [section
+2.8](/haproxy/configuration-basics/#section-2-8) about variables for details.
+
+<a id="entry-7-3-1-param"></a>
+
+**`param(<name>[,<delim>])`**
+
+```haproxy
+param(<name>[,<delim>])
+```
+
+This extracts the first occurrence of the parameter `<name>` in the input string where parameters
+are delimited by `<delim>`, which defaults to "&", and the name and value of the parameter are
+separated by a "=". If there is no "=" and value before the end of the parameter segment, it is
+treated as equivalent to a value of an empty string.
+
+This can be useful for extracting parameters from a query string, or possibly a
+x-www-form-urlencoded body. In particular, `query,param(<name>)` can be used as an alternative to
+`urlp(<name>)` which only uses "&" as a delimiter, whereas "urlp" also uses "?" and ";".
+
+Note that this converter doesn't do anything special with url encoded characters. If you want to
+decode the value, you can use the url_dec converter on the output. If the name of the parameter in
+the input might contain encoded characters, you'll probably want do normalize the input before
+calling "param". This can be done using "http-request normalize-uri", in particular the
+percent-decode-unreserved and percent-to-uppercase options.
+
+Example:
+
+```text
+str(a=b&c=d&a=r),param(a)   # b
+str(a&b=c),param(a)         # ""
+str(a=&b&c=a),param(b)      # ""
+str(a=1;b=2;c=4),param(b,;) # 2
+query,param(redirect_uri),urldec()
+```
+
+<a id="entry-7-3-1-port-only"></a>
+
+**`port_only`**
+
+```haproxy
+port_only
+```
+
+Converts a string which contains a Host header value into an integer by returning its port. The
+input must respect the format of the host header value (rfc9110#section-7.2). It will support that
+kind of input: hostname, hostname:80, 127.0.0.1, 127.0.0.1:80, [::1], [::1]:80.
+
+If no port were provided in the input, it will return 0.
+
+See also: "host_only" converter which will return the host.
+
+<a id="entry-7-3-1-protobuf"></a>
+
+**`protobuf(<field_number>[,<field_type>])`**
+
+```haproxy
+protobuf(<field_number>[,<field_type>])
+```
+
+This extracts the protocol buffers message field in raw mode of an input binary sample
+representation of a protocol buffer message with `<field_number>` as field number (dotted notation)
+if `<field_type>` is not present, or as an integer sample if this field is present (see also
+"ungrpc" below). The list of the authorized types is the following one: "int32", "int64", "uint32",
+"uint64", "sint32", "sint64", "bool", "enum" for the "varint" wire type 0 "fixed64", "sfixed64",
+"double" for the 64bit wire type 1, "fixed32", "sfixed32", "float" for the wire type 5. Note that
+"string" is considered as a length-delimited type, so it does not require any `<field_type>`
+argument to be extracted. More information may be found here about the protocol buffers message
+field types: <https://developers.google.com/protocol-buffers/docs/encoding>
+
+<a id="entry-7-3-1-regsub"></a>
+
+**`regsub(<regex>,<subst>[,<flags>])`**
+
+```haproxy
+regsub(<regex>,<subst>[,<flags>])
+```
+
+Applies a regex-based substitution to the input string. It does the same operation as the well-known
+"sed" utility with "s/`<regex>`/`<subst>`/". By default it will replace in the input string the
+first occurrence of the largest part matching the regular expression `<regex>` with the substitution
+string `<subst>`. It is possible to replace all occurrences instead by adding the flag "g" in the
+third argument `<flags>`. It is also possible to make the regex case insensitive by adding the flag
+"i" in `<flags>`. Since `<flags>` is a string, it is made up from the concatenation of all desired
+flags. Thus if both "i" and "g" are desired, using "gi" or "ig" will have the same effect. The first
+use of this converter is to replace certain characters or sequence of characters with other ones.
+
+It is highly recommended to enclose the regex part using protected quotes to improve clarity and
+never have a closing parenthesis from the regex mixed up with the parenthesis from the function.
+Just like in Bourne shell, the first level of quotes is processed when delimiting word groups on the
+line, a second level is usable for argument. It is recommended to use single quotes outside since
+these ones do not try to resolve backslashes nor dollar signs.
+
+Examples:
+
+```shell
+# de-duplicate "/" in header "x-path".
+# input:  x-path: /////a///b/c/xzxyz/
+# output: x-path: /a/b/c/xzxyz/
+http-request set-header x-path "%[hdr(x-path),regsub('/+','/','g')]"
+
+# copy query string to x-query and drop all leading '?', ';' and '&'
+http-request set-header x-query "%[query,regsub([?;&]*,'')]"
+
+# capture groups and backreferences
+# both lines do the same.
+http-request redirect location %[url,'regsub("(foo|bar)([0-9]+)?","\2\1",i)']
+http-request redirect location %[url,regsub(\"(foo|bar)([0-9]+)?\",\"\2\1\",i)]
+```
+
+<a id="entry-7-3-1-reverse"></a>
+
+**`reverse`**
+
+```haproxy
+reverse
+```
+
+Reverses the input string byte by byte.
+
+This converter is encoding-agnostic and reverses bytes, not characters; it is not suitable for
+reversing human text encoded as UTF-8.
+
+This can turn suffix lookups on the original string into prefix lookups on the reversed string,
+allowing the use of indexed prefix matchers such as "map_beg" on large maps.
+
+Examples:
+
+```shell
+"example.com" -> "moc.elpmaxe"
+"ab cd" -> "dc ba"
+
+# Given a map file where each key contains a reversed hostname:
+#   moc.elpmaxe.ppa app1
+#   moc.elpmaxe.bd  dbcluster
+# Pick a backend based on the domain suffix of the Host header:
+use_backend %[req.hdr(host),lower,reverse,map_beg(/etc/haproxy/hosts.map,default)]
+```
+
+<a id="entry-7-3-1-reverse-dom"></a>
+
+**`reverse_dom`**
+
+```haproxy
+reverse_dom
+```
+
+Converts a string containing an FQDN-like hostname into its reversed-label form. A single trailing
+dot on the input is ignored. Empty labels cause the converter to fail.
+
+This converter does not lowercase its input and does not strip any port. It is meant to be combined
+with existing converters such as "lower" or "host_only" when needed.
+
+The trailing-dot policy is intentionally left to the caller. This allows callers to decide whether
+they want to match the apex too or only subdomains.
+
+The reversed-label form is useful for large domain maps because it turns domain suffix lookups into
+prefix lookups, allowing the use of indexed prefix matchers such as "map_beg".
+
+Examples:
+
+```shell
+"example.com" -> "com.example"
+"mail.example.com" -> "com.example.mail"
+"example.com." -> "com.example"
+
+# match only subdomains of example.net, not the apex
+acl example_net_sub req.hdr(Host),host_only,reverse_dom -m beg net.example.
+
+# match only the apex
+acl example_net_apex req.hdr(Host),host_only,reverse_dom -i net.example
+
+# exact-or-subdomain prefix lookup using an explicit dotted form
+http-request set-var(txn.rev_host) req.hdr(Host),host_only,reverse_dom,concat(.)
+use_backend %[var(txn.rev_host),map_beg(/etc/haproxy/domains.map)]
+```
+
+<a id="entry-7-3-1-rfc7239-field"></a>
+
+**`rfc7239_field(<field>)`**
+
+```haproxy
+rfc7239_field(<field>)
+```
+
+Extracts a single field/parameter from RFC 7239 compliant header value input.
+
+Supported fields are: - proto: either 'http' or 'https' - host: http compliant host - for: RFC7239
+node - by: RFC7239 node
+
+More info here:
+
+```text
+https://www.rfc-editor.org/rfc/rfc7239.html#section-6
+```
+
+Example:
+
+```shell
+# extract host field from forwarded header and store it in req.fhost var
+http-request set-var(req.fhost) req.hdr(forwarded),rfc7239_field(host)
+#input: "proto=https;host=\"haproxy.org:80\""
+#  output: "haproxy.org:80"
+
+# extract for field from forwarded header and store it in req.ffor var
+http-request set-var(req.ffor) req.hdr(forwarded),rfc7239_field(for)
+#input: "proto=https;host=\"haproxy.org:80\";for=\"127.0.0.1:9999\""
+#  output: "127.0.0.1:9999"
+```
+
+<a id="entry-7-3-1-rfc7239-is-valid"></a>
+
+**`rfc7239_is_valid`**
+
+```haproxy
+rfc7239_is_valid
+```
+
+Returns true if input header is RFC 7239 compliant header value and false otherwise.
+
+Example:
+
+```shell
+acl valid req.hdr(forwarded),rfc7239_is_valid
+#input: "for=127.0.0.1;proto=http"
+#  output: TRUE
+#input: "proto=custom"
+#  output: FALSE
+```
+
+<a id="entry-7-3-1-rfc7239-n2nn"></a>
+
+**`rfc7239_n2nn`**
+
+```haproxy
+rfc7239_n2nn
+```
+
+Converts RFC7239 node (provided by 'for' or 'by' 7239 header fields) into its corresponding nodename
+final form: - ipv4 address - ipv6 address - 'unknown' - '\_obfs' identifier
+
+Example:
+
+```shell
+# extract 'for' field from forwarded header, extract nodename from
+# resulting node identifier and store the result in req.fnn
+http-request set-var(req.fnn) req.hdr(forwarded),rfc7239_field(for),rfc7239_n2nn
+#input: "127.0.0.1:9999"
+#  output: 127.0.0.1 (ipv4)
+#input: "[ab:cd:ff:ff:ff:ff:ff:ff]:9998"
+#  output: ab:cd:ff:ff:ff:ff:ff:ff (ipv6)
+#input: "_name:_port"
+#  output: "_name" (string)
+```
+
+<a id="entry-7-3-1-rfc7239-n2np"></a>
+
+**`rfc7239_n2np`**
+
+```haproxy
+rfc7239_n2np
+```
+
+Converts RFC7239 node (provided by 'for' or 'by' 7239 header fields) into its corresponding nodeport
+final form: - unsigned integer - '\_obfs' identifier
+
+Example:
+
+```shell
+# extract 'by' field from forwarded header, extract node port from
+# resulting node identifier and store the result in req.fnp
+http-request set-var(req.fnp) req.hdr(forwarded),rfc7239_field(by),rfc7239_n2np
+#input: "127.0.0.1:9999"
+#  output: 9999 (integer)
+#input: "[ab:cd:ff:ff:ff:ff:ff:ff]:9998"
+#  output: 9998 (integer)
+#input: "_name:_port"
+#  output: "_port" (string)
+```
+
+<a id="entry-7-3-1-rfc7239-nn"></a>
+
+**`rfc7239_nn`**
+
+```haproxy
+rfc7239_nn
+```
+
+Converts provided address / string input into RFC7239-compliant node name. It may be used to
+manually build 'for' or 'by' 7239 header fields.
+
+When provided input is string, it will be automatically prefixed with '\_' char to represent
+obfuscated identifier. String must comply with RFC7239 charset. If string is empty, it will be
+converter to "unknown" identifier.
+
+Example:
+
+```shell
+#input: ipv6(ab:cd:ff:ff:ff:ff:ff:ff)
+#  output: "[ab:cd:ff:ff:ff:ff:ff:ff]"
+#input: str(test)
+#  output: "_test"
+#input: str()
+#  output: "unknown"
+```
+
+See also: "rfc7239_np"
+
+<a id="entry-7-3-1-rfc7239-np"></a>
+
+**`rfc7239_np`**
+
+```haproxy
+rfc7239_np
+```
+
+Converts provided unsigned integer / string input into RFC7239-compliant node port. It may be used
+to manually build 'for' or 'by' 7239 header fields.
+
+When provided input is string, it will be automatically prefixed with '\_' char to represent
+obfuscated identifier. String must comply with RFC7239 charset and cannot be empty.
+
+Example:
+
+```shell
+#input: int(12)
+#  output: "12"
+#input: str(test)
+#  output: "_test"
+
+# build 'for' forwarded header field
+http-request set-var-fmt(txn.test) "for=\"%[ipv6(::1),rfc7239_nn]:%[int(8080),rfc7239_np]\";"
+#  output: "for=\"[::1]:8080\";"
+
+# build RFC-compliant 7239 header:
+http-request set-var-fmt(txn.forwarded) "for=\"%[ipv6(::1),rfc7239_nn]:%[str(8888),rfc7239_np]\";host=\"haproxy.org\";proto=http"
+# check RFC-compliancy:
+http-request set-var(txn.test) "var(txn.forwarded),debug(test,stderr),rfc7239_is_valid,debug(test,stderr)"
+#  stderr output:
+#    [debug] test: type=str <for="[::1]:_8888";host="haproxy.org";proto=http>
+#    [debug] test: type=bool <1>
+```
+
+See also: "rfc7239_nn"
+
+<a id="entry-7-3-1-rtrim"></a>
+
+**`rtrim(<chars>)`**
+
+```haproxy
+rtrim(<chars>)
+```
+
+Skips any characters from `<chars>` from the end of the string representation of the input sample.
+
+<a id="entry-7-3-1-sdbm"></a>
+
+**`sdbm([<avalanche>])`**
+
+```haproxy
+sdbm([<avalanche>])
+```
+
+Hashes a binary input sample into an unsigned 32-bit quantity using the SDBM hash function.
+Optionally, it is possible to apply a full avalanche hash function to the output if the optional
+`<avalanche>` argument equals 1. This converter uses the same functions as used by the various
+hash-based load balancing algorithms, so it will provide exactly the same results. It is mostly
+intended for debugging, but can be used as a stick-table entry to collect rough statistics. It must
+not be used for security purposes as a 32-bit hash is trivial to break. See also "crc32", "djb2",
+"wt6", "crc32c", and the "hash-type" directive.
+
+<a id="entry-7-3-1-secure-memcmp"></a>
+
+**`secure_memcmp(<var>)`**
+
+```haproxy
+secure_memcmp(<var>)
+```
+
+Compares the contents of `<var>` with the input value. Both values are treated as a binary string.
+Returns a boolean indicating whether both binary strings match.
+
+If both binary strings have the same length then the comparison will be performed in constant time.
+
+Please note that this converter is only available when HAProxy has been compiled with USE_OPENSSL.
+
+Example:
+
+```shell
+http-request set-var(txn.token) hdr(token)
+# Check whether the token sent by the client matches the secret token
+# value, without leaking the contents using a timing attack.
+acl token_given str(my_secret_token),secure_memcmp(txn.token)
+```
+
+<a id="entry-7-3-1-set-var"></a>
+
+**`set-var(<var>[,<cond>...])`**
+
+```haproxy
+set-var(<var>[,<cond>...])
+```
+
+Sets a variable with the input content and returns the content on the output as-is if all of the
+specified conditions are true (see below for a list of possible conditions). The variable keeps the
+value and the associated input type. See [section 2.8](/haproxy/configuration-basics/#section-2-8) about variables for details.
+
+You can pass at most four conditions to the converter among the following possible conditions:
+
+- "ifexists"/"ifnotexists":
+
+```text
+Checks if the variable already existed before the current set-var call.
+A variable is usually created through a successful set-var call.
+Note that variables of scope "proc" are created during configuration
+parsing so the "ifexists" condition will always be true for them.
+```
+
+- "ifempty"/"ifnotempty":
+
+```text
+Checks if the input is empty or not.
+Scalar types are never empty so the ifempty condition will be false for
+them regardless of the input's contents (integers, booleans, IPs ...).
+```
+
+- "ifset"/"ifnotset":
+
+```text
+Checks if the variable was previously set or not, or if unset-var was
+called on the variable.
+A variable that does not exist yet is considered as not set. A "proc"
+variable can exist while not being set since they are created during
+configuration parsing.
+```
+
+- "ifgt"/"iflt":
+
+```text
+Checks if the content of the variable is "greater than" or "less than"
+the input. This check can only be performed if both the input and
+the variable are of type integer. Otherwise, the check is considered as
+true by default.
+```
+
+<a id="entry-7-3-1-sha1"></a>
+
+**`sha1`**
+
+```haproxy
+sha1
+```
+
+Converts a binary input sample to a SHA-1 digest. The result is a binary sample with length of 20
+bytes.
+
+<a id="entry-7-3-1-sha2"></a>
+
+**`sha2([<bits>])`**
+
+```haproxy
+sha2([<bits>])
+```
+
+Converts a binary input sample to a digest in the SHA-2 family. The result is a binary sample with
+length of `<bits>`/8 bytes.
+
+Valid values for `<bits>` are 224, 256, 384, 512, each corresponding to SHA-`<bits>`. The default
+value is 256.
+
+Please note that this converter is only available when HAProxy has been compiled with USE_OPENSSL.
+
+<a id="entry-7-3-1-srv-is-up"></a>
+
+**`srv_is_up`**
+
+```haproxy
+srv_is_up
+```
+
+Takes an input value of type string, either a server name or `<backend>`/`<server>` format and
+returns true when the designated server is currently UP. Can be used in places where we want to look
+up a server status from a dynamic name, like a cookie value (e.g. req.cook(SRVID),srv_is_up) and
+then make a decision to direct a request elsewhere. Before using this, please keep in mind that
+using this converter on uncontrolled data might allow an external observer to query the state of any
+server in the whole configuration, which might possibly not be acceptable in some environments.
+
+<a id="entry-7-3-1-srv-queue"></a>
+
+**`srv_queue`**
+
+```haproxy
+srv_queue
+```
+
+Takes an input value of type string, either a server name or `<backend>`/`<server>` format and
+returns the number of queued streams on that server. Can be used in places where we want to look up
+queued streams from a dynamic name, like a cookie value (e.g. req.cook(SRVID),srv_queue) and then
+make a decision to break persistence or direct a request elsewhere. Before using this, please keep
+in mind that using this converter on uncontrolled data might allow an external observer to query the
+state of any server in the whole configuration, which might possibly not be acceptable in some
+environments.
+
+<a id="entry-7-3-1-strcmp"></a>
+
+**`strcmp(<var>)`**
+
+```haproxy
+strcmp(<var>)
+```
+
+Compares the contents of `<var>` with the input value of type string. Returns the result as a signed
+integer compatible with strcmp(3): 0 if both strings are identical. A value less than 0 if the left
+string is lexicographically smaller than the right string or if the left string is shorter. A value
+greater than 0 otherwise (right string greater than left string or the right string is shorter).
+
+See also the secure_memcmp converter if you need to compare two binary strings in constant time.
+
+Example:
+
+```shell
+http-request set-var(txn.host) hdr(host)
+# Check whether the client is attempting domain fronting.
+acl ssl_sni_http_host_match ssl_fc_sni,strcmp(txn.host) eq 0
+
+```
+
+<a id="entry-7-3-1-sub"></a>
+
+**`sub(<value>)`**
+
+```haproxy
+sub(<value>)
+```
+
+Subtracts `<value>` from the input value of type signed integer, and returns the result as an signed
+integer. Note: in order to subtract the input from a constant, simply perform a "neg,add(value)".
+`<value>` can be a numeric value or a variable name. See [section 2.8](/haproxy/configuration-basics/#section-2-8) about variables for details.
+
+<a id="entry-7-3-1-table-bytes-in-rate"></a>
+
+**`table_bytes_in_rate([<table>])`**
+
+```haproxy
+table_bytes_in_rate([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the average client-to-server bytes rate associated with the input sample in the
+designated table, measured in amount of bytes over the period configured in the table. See also the
+sc_bytes_in_rate sample fetch keyword.
+
+<a id="entry-7-3-1-table-bytes-out-rate"></a>
+
+**`table_bytes_out_rate([<table>])`**
+
+```haproxy
+table_bytes_out_rate([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the average server-to-client bytes rate associated with the input sample in the
+designated table, measured in amount of bytes over the period configured in the table. See also the
+sc_bytes_out_rate sample fetch keyword.
+
+<a id="entry-7-3-1-table-clr-gpc"></a>
+
+**`table_clr_gpc(<idx>[,<table>])`**
+
+```haproxy
+table_clr_gpc(<idx>[,<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. Clears the General Purpose Counter at the index `<idx>` of the gpc array and returns
+its previous value. `<idx>` is an integer between 0 and 99. If the entry is not found, an entry is
+created and 0 is returned. This converter applies only to the 'gpc' array data_type (and not to the
+legacy 'gpc0' nor 'gpc1' data_types). See also the sc_clr_gpc sample fetch keyword.
+
+<a id="entry-7-3-1-table-clr-gpc0"></a>
+
+**`table_clr_gpc0([<table>])`**
+
+```haproxy
+table_clr_gpc0([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. Clears the first General Purpose Counter '0' and returns its previous value. If the
+entry is not found, an entry is created and 0 is returned. This is typically used as a second ACL in
+an expression in order to mark a connection when a first ACL was verified:
+
+Example:
+
+```shell
+# block if 5 consecutive requests continue to come faster than 10 sess
+# per second, and reset the counter as soon as the traffic slows down.
+acl abuse src_http_req_rate gt 10
+acl kill  src,table_inc_gpc0 gt 5
+acl save  src,table_clr_gpc0 ge 0
+tcp-request connection accept if !abuse save
+tcp-request connection reject if abuse kill
+```
+
+See also the sc_clr_gpc0 sample fetch keyword.
+
+<a id="entry-7-3-1-table-clr-gpc1"></a>
+
+**`table_clr_gpc1([<table>])`**
+
+```haproxy
+table_clr_gpc1([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. Clears the first General Purpose Counter '1' and returns its previous value. If the
+entry is not found, an entry is created and 0 is returned. This is typically used as a second ACL in
+an expression in order to mark a connection when a first ACL was verified. See also the sc_clr_gpc1
+sample fetch keyword.
+
+<a id="entry-7-3-1-table-conn-cnt"></a>
+
+**`table_conn_cnt([<table>])`**
+
+```haproxy
+table_conn_cnt([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the cumulative number of incoming connections associated with the input sample in
+the designated table. See also the sc_conn_cnt sample fetch keyword.
+
+<a id="entry-7-3-1-table-conn-cur"></a>
+
+**`table_conn_cur([<table>])`**
+
+```haproxy
+table_conn_cur([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the current amount of concurrent tracked connections associated with the input
+sample in the designated table. See also the sc_conn_cur sample fetch keyword.
+
+<a id="entry-7-3-1-table-conn-rate"></a>
+
+**`table_conn_rate([<table>])`**
+
+```haproxy
+table_conn_rate([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the average incoming connection rate associated with the input sample in the
+designated table. See also the sc_conn_rate sample fetch keyword.
+
+<a id="entry-7-3-1-table-expire"></a>
+
+**`table_expire([<table>[,<default_value>]])`**
+
+```haproxy
+table_expire([<table>[,<default_value>]])
+```
+
+Uses the input sample to perform a look up in in the current proxy's stick-table or in the
+designated stick-table. If the key is not found in the table, the converter fails except if
+`<default_value>` is set: this makes the converter succeed and return `<default_value>`. If the key
+is found the converter returns the key expiration delay associated with the input sample in the
+designated table. See also the table_idle sample fetch keyword.
+
+<a id="entry-7-3-1-table-glitch-cnt"></a>
+
+**`table_glitch_cnt([<table>])`**
+
+```haproxy
+table_glitch_cnt([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the cumulative number of front connection glitches associated with the input
+sample in the designated table. See also the sc_glitch_cnt sample fetch keyword and fc_glitches for
+the value measured on the current front connection.
+
+<a id="entry-7-3-1-table-glitch-rate"></a>
+
+**`table_glitch_rate([<table>])`**
+
+```haproxy
+table_glitch_rate([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the average front connection glitch rate associated with the input sample in the
+designated table. See also the sc_glitch_rate sample fetch keyword.
+
+<a id="entry-7-3-1-table-gpc"></a>
+
+**`table_gpc(<idx>[,<table>])`**
+
+```haproxy
+table_gpc(<idx>[,<table>])
+```
+
+Uses the input sample to perform a lookup in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the current value of the General Purpose Counter at the index `<idx>` of the array
+associated to the input sample in the designated `<table>`. `<idx>` is an integer between 0 and 99.
+If there is no GPC stored at this index, it also returns the integer value 0. This applies only to
+the 'gpc' array data_type (and not to the legacy 'gpc0' nor 'gpc1' data_types). See also the
+sc_get_gpc sample fetch keyword.
+
+<a id="entry-7-3-1-table-gpc0"></a>
+
+**`table_gpc0([<table>])`**
+
+```haproxy
+table_gpc0([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the current value of the first general purpose counter associated with the input
+sample in the designated table. See also the sc_get_gpc0 sample fetch keyword.
+
+<a id="entry-7-3-1-table-gpc0-rate"></a>
+
+**`table_gpc0_rate([<table>])`**
+
+```haproxy
+table_gpc0_rate([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the frequency which the gpc0 counter was incremented over the configured period in
+the table, associated with the input sample in the designated table. See also the sc_get_gpc0_rate
+sample fetch keyword.
+
+<a id="entry-7-3-1-table-gpc1"></a>
+
+**`table_gpc1([<table>])`**
+
+```haproxy
+table_gpc1([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the current value of the second general purpose counter associated with the input
+sample in the designated table. See also the sc_get_gpc1 sample fetch keyword.
+
+<a id="entry-7-3-1-table-gpc1-rate"></a>
+
+**`table_gpc1_rate([<table>])`**
+
+```haproxy
+table_gpc1_rate([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the frequency which the gpc1 counter was incremented over the configured period in
+the table, associated with the input sample in the designated table. See also the sc_get_gpc1_rate
+sample fetch keyword.
+
+<a id="entry-7-3-1-table-gpc-rate"></a>
+
+**`table_gpc_rate(<idx>[,<table>])`**
+
+```haproxy
+table_gpc_rate(<idx>[,<table>])
+```
+
+Uses the input sample to perform a lookup in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the frequency which the Global Purpose Counter at index `<idx>` of the array
+(associated to the input sample in the designated stick-table `<table>`) was incremented over the
+configured period. `<idx>` is an integer between 0 and 99. If there is no gpc_rate stored at this
+index, it also returns the integer value 0. This applies only to the 'gpc_rate' array data_type (and
+not to the legacy 'gpc0_rate' nor 'gpc1_rate' data_types). See also the sc_gpc_rate sample fetch
+keyword.
+
+<a id="entry-7-3-1-table-gpt"></a>
+
+**`table_gpt(<idx>[,<table>])`**
+
+```haproxy
+table_gpt(<idx>[,<table>])
+```
+
+Uses the input sample to perform a lookup in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the current value of the general purpose tag at the index `<idx>` of the array
+associated to the input sample in the designated `<table>`. `<idx>` is an integer between 0 and 99.
+If there is no GPT stored at this index, it also returns the integer value 0. This applies only to
+the 'gpt' array data_type (and not on the legacy 'gpt0' data-type). See also the sc_get_gpt sample
+fetch keyword.
+
+<a id="entry-7-3-1-table-gpt0"></a>
+
+**`table_gpt0([<table>])`**
+
+```haproxy
+table_gpt0([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the current value of the first general purpose tag associated with the input
+sample in the designated table. See also the sc_get_gpt0 sample fetch keyword.
+
+<a id="entry-7-3-1-table-http-err-cnt"></a>
+
+**`table_http_err_cnt([<table>])`**
+
+```haproxy
+table_http_err_cnt([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the cumulative number of HTTP errors associated with the input sample in the
+designated table. See also the sc_http_err_cnt sample fetch keyword.
+
+<a id="entry-7-3-1-table-http-err-rate"></a>
+
+**`table_http_err_rate([<table>])`**
+
+```haproxy
+table_http_err_rate([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+average rate of HTTP errors associated with the input sample in the designated table, measured in
+amount of errors over the period configured in the table. See also the sc_http_err_rate sample fetch
+keyword.
+
+<a id="entry-7-3-1-table-http-fail-cnt"></a>
+
+**`table_http_fail_cnt([<table>])`**
+
+```haproxy
+table_http_fail_cnt([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the cumulative number of HTTP failures associated with the input sample in the
+designated table. See also the sc_http_fail_cnt sample fetch keyword.
+
+<a id="entry-7-3-1-table-http-fail-rate"></a>
+
+**`table_http_fail_rate([<table>])`**
+
+```haproxy
+table_http_fail_rate([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+average rate of HTTP failures associated with the input sample in the designated table, measured in
+amount of failures over the period configured in the table. See also the sc_http_fail_rate sample
+fetch keyword.
+
+<a id="entry-7-3-1-table-http-req-cnt"></a>
+
+**`table_http_req_cnt([<table>])`**
+
+```haproxy
+table_http_req_cnt([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the cumulative number of HTTP requests associated with the input sample in the
+designated table. See also the sc_http_req_cnt sample fetch keyword.
+
+<a id="entry-7-3-1-table-http-req-rate"></a>
+
+**`table_http_req_rate([<table>])`**
+
+```haproxy
+table_http_req_rate([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+average rate of HTTP requests associated with the input sample in the designated table, measured in
+amount of requests over the period configured in the table. See also the sc_http_req_rate sample
+fetch keyword.
+
+<a id="entry-7-3-1-table-idle"></a>
+
+**`table_idle([<table>[,<default_value>]])`**
+
+```haproxy
+table_idle([<table>[,<default_value>]])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, the converter fails except if `<default_value>`
+is set: this makes the converter succeed and return `<default_value>`. If the key is found the
+converter returns the time the key entry associated with the input sample in the designated table
+remained idle since the last time it was updated. See also the table_expire sample fetch keyword.
+
+<a id="entry-7-3-1-table-inc-gpc"></a>
+
+**`table_inc_gpc(<idx>[,<table>])`**
+
+```haproxy
+table_inc_gpc(<idx>[,<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. Increments the General Purpose Counter at index `<idx>` of the array and returns its
+new value. `<idx>` is an integer between 0 and 99. If the entry is not found, an entry is created
+and 1 is returned. This converter applies only to the 'gpc' array data_type (and not to the legacy
+'gpc0' nor 'gpc1' data_types). See also sc_inc_gpc.
+
+<a id="entry-7-3-1-table-inc-gpc0"></a>
+
+**`table_inc_gpc0([<table>])`**
+
+```haproxy
+table_inc_gpc0([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. Increments the General Purpose Counter '0' and returns its new value. If the entry is
+not found, an entry is created and 1 is returned. See also sc0/sc2/sc2_inc_gpc0. This is typically
+used as a second ACL in an expression in order to mark a connection when a first ACL was verified:
+
+Example:
+
+```text
+acl abuse src,table_req_rate gt 10
+acl kill  src,table_inc_gpc0 gt 0
+tcp-request connection reject if abuse kill
+```
+
+<a id="entry-7-3-1-table-inc-gpc1"></a>
+
+**`table_inc_gpc1([<table>])`**
+
+```haproxy
+table_inc_gpc1([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. Increments the General Purpose Counter '1' and returns its new value. If the entry is
+not found, an entry is created and 1 is returned. See also sc0/sc2/sc2_inc_gpc1. This is typically
+used as a second ACL in an expression in order to mark a connection when a first ACL was verified.
+
+<a id="entry-7-3-1-table-kbytes-in"></a>
+
+**`table_kbytes_in([<table>])`**
+
+```haproxy
+table_kbytes_in([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the cumulative number of client-to-server data associated with the input sample in
+the designated table, measured in kilobytes. The test is currently performed on 32-bit integers,
+which limits values to 4 terabytes. See also the sc_kbytes_in sample fetch keyword.
+
+<a id="entry-7-3-1-table-kbytes-out"></a>
+
+**`table_kbytes_out([<table>])`**
+
+```haproxy
+table_kbytes_out([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the cumulative number of server-to-client data associated with the input sample in
+the designated table, measured in kilobytes. The test is currently performed on 32-bit integers,
+which limits values to 4 terabytes. See also the sc_kbytes_out sample fetch keyword.
+
+<a id="entry-7-3-1-table-server-id"></a>
+
+**`table_server_id([<table>])`**
+
+```haproxy
+table_server_id([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the server ID associated with the input sample in the designated table. A server
+ID is associated to a sample by a "stick" rule when a connection to a server succeeds. A server ID
+zero means that no server is associated with this key.
+
+<a id="entry-7-3-1-table-sess-cnt"></a>
+
+**`table_sess_cnt([<table>])`**
+
+```haproxy
+table_sess_cnt([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the cumulative number of incoming sessions associated with the input sample in the
+designated table. Note that a session here refers to an incoming connection being accepted by the
+"tcp-request connection" rulesets. See also the sc_sess_cnt sample fetch keyword.
+
+<a id="entry-7-3-1-table-sess-rate"></a>
+
+**`table_sess_rate([<table>])`**
+
+```haproxy
+table_sess_rate([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the average incoming session rate associated with the input sample in the
+designated table. Note that a session here refers to an incoming connection being accepted by the
+"tcp-request connection" rulesets. See also the sc_sess_rate sample fetch keyword.
+
+<a id="entry-7-3-1-table-trackers"></a>
+
+**`table_trackers([<table>])`**
+
+```haproxy
+table_trackers([<table>])
+```
+
+Uses the input sample to perform a look up in the current proxy's stick-table or in the designated
+stick-table. If the key is not found in the table, integer value zero is returned. Otherwise the
+converter returns the current amount of concurrent connections tracking the same key as the input
+sample in the designated table. It differs from table_conn_cur in that it does not rely on any
+stored information but on the table's reference count (the "use" value which is returned by "show
+table" on the CLI). This may sometimes be more suited for layer7 tracking. It can be used to tell a
+server how many concurrent connections there are from a given address for example. See also the
+sc_trackers sample fetch keyword.
+
+<a id="entry-7-3-1-tcp-dst"></a>
+
+**`tcp.dst`**
+
+```haproxy
+tcp.dst
+```
+
+This is used with an input sample representing a binary TCP header, as returned by "ip.data". It
+returns an integer representing the destination port present in the TCP header. See also
+"fc_saved_syn", "tcp-ss", and "ip.data".
+
+<a id="entry-7-3-1-tcp-flags"></a>
+
+**`tcp.flags`**
+
+```haproxy
+tcp.flags
+```
+
+This is used with an input sample representing a binary TCP header, as returned by "ip.data". It
+returns an integer representing the TCP flags from this TCP header. All 8 flags from FIN to CWR are
+retrieved. Each flag may be tested using the "and()" converter. Please refer to RFC9293 for the
+value of each flag. See also "fc_saved_syn", "tcp-ss", and "ip.data".
+
+<a id="entry-7-3-1-tcp-options-mss"></a>
+
+**`tcp.options.mss`**
+
+```haproxy
+tcp.options.mss
+```
+
+This is used with an input sample representing a binary TCP header, as returned by "ip.data". It
+looks for a TCP option of kind "MSS", and if found, it returns an integer value corresponding to the
+advertised value in that option, otherwise zero. The MSS is the Maximum Segment Size and indicates
+the largest segment the peer may receive, in bytes. See also "fc_saved_syn", "tcp-ss", and
+"ip.data".
+
+<a id="entry-7-3-1-tcp-options-sack"></a>
+
+**`tcp.options.sack`**
+
+```haproxy
+tcp.options.sack
+```
+
+This is used with an input sample representing a binary TCP header, as returned by "ip.data". It
+looks for a TCP option of kind "Sack-Permitted", and if found, returns 1, otherwise zero. See also
+"fc_saved_syn", "tcp-ss", and "ip.data".
+
+<a id="entry-7-3-1-tcp-options-tsopt"></a>
+
+**`tcp.options.tsopt`**
+
+```haproxy
+tcp.options.tsopt
+```
+
+This is used with an input sample representing a binary TCP header, as returned by "ip.data". It
+looks for a TCP option of kind "Timestamp", and if found, returns 1, otherwise zero. See also
+"fc_saved_syn", "tcp-ss", and "ip.data".
+
+<a id="entry-7-3-1-tcp-options-tsval"></a>
+
+**`tcp.options.tsval`**
+
+```haproxy
+tcp.options.tsval
+```
+
+This is used with an input sample representing a binary TCP header, as returned by "ip.data". It
+looks for a TCP option of kind "Timestamp", and if found, returns the timestamp value emitted by the
+peer, otherwise does not return anything. Note that timestamps are 32-bit unsigned values with no
+particular unit that only the peer decides on, and timestamps are expected to be independent between
+different connections. See also "fc_saved_syn", "tcp-ss", and "ip.data".
+
+<a id="entry-7-3-1-tcp-options-wscale"></a>
+
+**`tcp.options.wscale`**
+
+```haproxy
+tcp.options.wscale
+```
+
+This is used with an input sample representing a binary TCP header, as returned by "ip.data". It
+looks for a TCP option of kind "Window Scale", and if found, returns the window scaling value
+emitted by the peer, otherwise zero. Note that values are not expected to be beyond 14 though no
+technical limitation prevents them from being sent. In order to detect if the window scale option
+was used, please use "tcp.options.wsopt". See also "tcp-ss", "fc_saved_syn", "ip.data", and
+"tcp.options.wsopt".
+
+<a id="entry-7-3-1-tcp-options-wsopt"></a>
+
+**`tcp.options.wsopt`**
+
+```haproxy
+tcp.options.wsopt
+```
+
+This is used with an input sample representing a binary TCP header, as returned by "ip.data". It
+looks for a TCP option of kind "Window Scale", and if found, returns 1 otherwise 0. See also
+"fc_saved_syn", "tcp-ss", "ip.data" "tcp.options.wscale".
+
+<a id="entry-7-3-1-tcp-options-list"></a>
+
+**`tcp.options_list`**
+
+```haproxy
+tcp.options_list
+```
+
+This is used with an input sample representing a binary TCP header, as returned by "ip.data". It
+builds a binary sequence of all TCP option kinds in the same order as they appear in the TCP header.
+It can produce from 0 to 60 bytes (in the worst case). The End-of-options is not emitted. See also
+"fc_saved_syn", "tcp-ss", and "ip.data".
+
+<a id="entry-7-3-1-tcp-seq"></a>
+
+**`tcp.seq`**
+
+```haproxy
+tcp.seq
+```
+
+This is used with an input sample representing a binary TCP header, as returned by "ip.data". It
+returns an integer representing the sequence number used by the peer in the TCP header. Sequence
+numbers are 32-bit unsigned values. See also "fc_saved_syn", "tcp-ss", and "ip.data".
+
+<a id="entry-7-3-1-tcp-src"></a>
+
+**`tcp.src`**
+
+```haproxy
+tcp.src
+```
+
+This is used with an input sample representing a binary TCP header, as returned by "ip.data". It
+returns an integer representing the source port present in the TCP header. See also "fc_saved_syn",
+"tcp-ss", and "ip.data".
+
+<a id="entry-7-3-1-tcp-win"></a>
+
+**`tcp.win`**
+
+```haproxy
+tcp.win
+```
+
+This is used with an input sample representing a binary TCP header, as returned by "ip.data". It
+returns an integer representing the window size advertised by the peer in the TCP header. The value
+is provided as-is, as a 16-bit unsigned quantity, without applying the window scaling factor. See
+also "fc_saved_syn", "tcp-ss", and "ip.data".
+
+<a id="entry-7-3-1-ub64dec"></a>
+
+**`ub64dec`**
+
+```haproxy
+ub64dec
+```
+
+This converter is the base64url variant of b64dec converter. base64url encoding is the "URL and
+Filename Safe Alphabet" variant of base64 encoding. It is also the encoding used in JWT (JSON Web
+Token) standard.
+
+Example:
+
+```shell
+# Decoding a JWT payload:
+http-request set-var(txn.token_payload) req.hdr(Authorization),word(2,.),ub64dec
+```
+
+<a id="entry-7-3-1-ub64enc"></a>
+
+**`ub64enc`**
+
+```haproxy
+ub64enc
+```
+
+This converter is the base64url variant of base64 converter.
+
+<a id="entry-7-3-1-ungrpc"></a>
+
+**`ungrpc(<field_number>[,<field_type>])`**
+
+```haproxy
+ungrpc(<field_number>[,<field_type>])
+```
+
+This extracts the protocol buffers message field in raw mode of an input binary sample
+representation of a gRPC message with `<field_number>` as field number (dotted notation) if
+`<field_type>` is not present, or as an integer sample if this field is present. The list of the
+authorized types is the following one: "int32", "int64", "uint32", "uint64", "sint32", "sint64",
+"bool", "enum" for the "varint" wire type 0 "fixed64", "sfixed64", "double" for the 64bit wire type
+1, "fixed32", "sfixed32", "float" for the wire type 5. Note that "string" is considered as a
+length-delimited type, so it does not require any `<field_type>` argument to be extracted. More
+information may be found here about the protocol buffers message field types:
+<https://developers.google.com/protocol-buffers/docs/encoding>
+
+Example:
+
+```text
+// with such a protocol buffer .proto file content adapted from
+// https://github.com/grpc/grpc/blob/master/examples/protos/route_guide.proto
+
+message Point {
+  int32 latitude = 1;
+  int32 longitude = 2;
+}
+
+message PPoint {
+  Point point = 59;
+}
+
+message Rectangle {
+  // One corner of the rectangle.
+  PPoint lo = 48;
+  // The other corner of the rectangle.
+  PPoint hi = 49;
+}
+```
+
+let's say a body request is made of a "Rectangle" object value (two PPoint protocol buffers
+messages), the four protocol buffers fields could be extracted with these "ungrpc" directives:
+
+```text
+req.body,ungrpc(48.59.1,int32) # "latitude" of "lo" first PPoint
+req.body,ungrpc(48.59.2,int32) # "longitude" of "lo" first PPoint
+req.body,ungrpc(49.59.1,int32) # "latitude" of "hi" second PPoint
+req.body,ungrpc(49.59.2,int32) # "longitude" of "hi" second PPoint
+```
+
+We could also extract the intermediary 48.59 field as a binary sample as follows:
+
+```text
+req.body,ungrpc(48.59)
+```
+
+As a gRPC message is always made of a gRPC header followed by protocol buffers messages, in the
+previous example the "latitude" of "lo" first PPoint could be extracted with these equivalent
+directives:
+
+```text
+req.body,ungrpc(48.59),protobuf(1,int32)
+req.body,ungrpc(48),protobuf(59.1,int32)
+req.body,ungrpc(48),protobuf(59),protobuf(1,int32)
+```
+
+Note that the first convert must be "ungrpc", the remaining ones must be "protobuf" and only the
+last one may have or not a second argument to interpret the previous binary sample.
+
+<a id="entry-7-3-1-unset-var"></a>
+
+**`unset-var(<var>)`**
+
+```haproxy
+unset-var(<var>)
+```
+
+Unsets a variable if the input content is defined. The name of the variable starts with an
+indication about its scope. See [section 2.8](/haproxy/configuration-basics/#section-2-8) about variables for details.
+
+<a id="entry-7-3-1-upper"></a>
+
+**`upper`**
+
+```haproxy
+upper
+```
+
+Convert a string sample to upper case. This can only be placed after a string sample fetch function
+or after a transformation keyword returning a string type. The result is of type string.
+
+<a id="entry-7-3-1-url-dec"></a>
+
+**`url_dec([<in_form>])`**
+
+```haproxy
+url_dec([<in_form>])
+```
+
+Takes an url-encoded string provided as input and returns the decoded version as output. The input
+and the output are of type string. If the `<in_form>` argument is set to a non-zero integer value,
+the input string is assumed to be part of a form or query string and the '+' character will be
+turned into a space (' '). Otherwise this will only happen after a question mark indicating a query
+string ('?').
+
+<a id="entry-7-3-1-url-enc"></a>
+
+**`url_enc([<enc_type>])`**
+
+```haproxy
+url_enc([<enc_type>])
+```
+
+Takes a string provided as input and returns the encoded version as output. The input and the output
+are of type string. By default the type of encoding is meant for `query` type. There is no other
+type supported for now but the optional argument is here for future changes.
+
+<a id="entry-7-3-1-us-ltime"></a>
+
+**`us_ltime(<format>[,<offset>])`**
+
+```haproxy
+us_ltime(<format>[,<offset>])
+```
+
+This works like "ltime" but takes an input in microseconds. It also supports the %N conversion
+specifier inspired by date(1). Converts an integer supposed to contain a date since epoch to a
+string representing this date in local time using a format defined by the `<format>` string using
+strftime(3). The purpose is to allow any date format to be used in logs. An optional `<offset>` in
+microseconds may be applied to the input date (positive or negative). See the strftime() man page
+for the format supported by your operating system.
+
+The %N conversion specifier allows you to output the nanoseconds part of the date, precision is
+limited since the input is microseconds. (000000000..999999000). %N can take a width argument
+between % and N. It is useful to display milliseconds (%3N) or microseconds (%6N). The default and
+maximum width is 9 (%N = %9N).
+
+See also the "utime" converter for UTC as well as "ltime" and "ms_ltime" converters.
+
+Example:
+
+```shell
+# Emit 3 colons, the local time, the timezone and another with ip:port
+# e.g. 2023/07/24/09:53:02.196234 +0000 127.0.0.1:41530
+log-format %[accept_date(us),us_ltime("%Y/%m/%d/%H:%M:%S.%6N %z")]\ %ci:%cp
+```
+
+<a id="entry-7-3-1-us-utime"></a>
+
+**`us_utime(<format>[,<offset>])`**
+
+```haproxy
+us_utime(<format>[,<offset>])
+```
+
+This works like "utime" but takes an input in microseconds. It also supports the %N conversion
+specifier inspired by date(1). Converts an integer supposed to contain a date since epoch to a
+string representing this date in UTC time using a format defined by the `<format>` string using
+strftime(3). The purpose is to allow any date format to be used in logs. An optional `<offset>` in
+microseconds may be applied to the input date (positive or negative). See the strftime() man page
+for the format supported by your operating system.
+
+The %N conversion specifier allows you to output the nanoseconds part of the date, precision is
+limited since the input is microseconds. (000000000..999999000). %N can take a width argument
+between % and N. It is useful to display milliseconds (%3N) or microseconds (%6N). The default and
+maximum width is 9 (%N = %9N).
+
+See also the "ltime" converter for local as well as "utime" and "ms_utime" converters.
+
+Example:
+
+```shell
+# Emit 3 colons, the UTC time, the timezone and another with ip:port
+# e.g. 2023/07/24/09:53:02.196234 +0000 127.0.0.1:41530
+log-format %[accept_date(us),us_utime("%Y/%m/%d/%H:%M:%S.%6N %z")]\ %ci:%cp
+```
+
+<a id="entry-7-3-1-utime"></a>
+
+**`utime(<format>[,<offset>])`**
+
+```haproxy
+utime(<format>[,<offset>])
+```
+
+Converts an integer supposed to contain a date since epoch to a string representing this date in UTC
+time using a format defined by the `<format>` string using strftime(3). The purpose is to allow any
+date format to be used in logs. An optional `<offset>` in seconds may be applied to the input date
+(positive or negative). See the strftime() man page for the format supported by your operating
+system. See also the "ltime" converter as well as "ms_utime" and "us_utime".
+
+Example:
+
+```shell
+# Emit two colons, one with the UTC time and another with ip:port
+# e.g.  20140710162350 127.0.0.1:57325
+log-format %[date,utime(%Y%m%d%H%M%S)]\ %ci:%cp
+```
+
+<a id="entry-7-3-1-when"></a>
+
+**`when(<condition>[,<args>...])`**
+
+```haproxy
+when(<condition>[,<args>...])
+```
+
+Evaluates the condition and when true, passes the input sample as-is to the output, otherwise return
+nothing. This is designed specifically to produce some rarely needed data that should only be
+emitted under certain conditions, such as debugging information when an error is met.
+
+The condition is made of a keyword among the list below, optionally preceded by an exclamation mark
+('!') to negate it, and optionally suffixed by some arguments specific to that condition:
+
+    - "error" returns true when an error was encountered during the processing
+      of the request or stream. It uses the same rules as "dontlog-normal"
+      (e.g. a successful redispatch counts as an error).
+
+    - "forwarded" returns true when the request was forwarded to a backend
+      server
+
+    - "normal" returns true when no error happened (this is equivalent to
+      "!error").
+
+    - "processed" returns true when the request was either forwarded to a
+      backend server, or processed by an applet.
+
+    - "stopping" returns true if the process is currently stopping when the
+      rule is evaluated
+
+    - "toapplet" returns true when the request was processed by an applet.
+
+    - "acl" returns true when the ACL designated by the next argument evaluates
+      to true. Note that the ACL is evaluated inline by the converter, so that
+      what it refers to must be valid in that context. A particular use case
+      consists in evaluating if the total transfer time is too long or not
+      before deciding to log detauls from abnormally long transfers.
+
+Note that the content is evaluated in any case, so doing this does not avoid the generation of that
+information. It's only meant to avoid producing that information.
+
+An example would be to add backend stream debugging information in the logs only when an error was
+encountered during processing, or logging extra information when stopping, etc.
+
+Example:
+
+```shell
+# log "dbg={-}" when fine, or "dbg={... debug info ...}" on error:
+log-format "$HAPROXY_HTTP_LOG_FMT dbg={%[bs.debug_str,when(!normal)]}"
+
+Here, the "dbg" field in the log will only contain an dash ('-') to
+indicate a missing content when the rule is not validated, and will emit a
+whole debugging block when it is.
+```
+
+Example
+
+```haproxy
+# log "dbg={-}" when fine, or "dbg={... debug info ...}" on slow transfers
+acl slow_xfer res.timer.data ge 10000   # more than 10s is slow
+log-format "$HAPROXY_HTTP_LOG_FMT                                         \
+            fsdbg={%[fs.debug_str,when(acl,slow_xfer)]}                   \
+            bsdbg={%[bs.debug_str,when(acl,slow_xfer)]}"
+```
+
+Example
+
+```haproxy
+# only emit the backend src/port when a real connection was issued:
+log-format "$HAPROXY_HTTP_LOG_FMT \
+           src=[%[bc_src,when(forwarded)]:%[bc_src_port,when(forwarded)]]"
+```
+
+Since it kills the evaluation of the expression when it is not true, it is also possible to use it
+to stop a subsequent converter from being called. This may for example be used to call the debug()
+converter only upon error, to log an element only when absolutely necessary.
+
+Example:
+
+```shell
+# emit the whole response headers list to stderr only on error and only
+# when the output is a connection. We abuse a dummy variable here.
+http-after-response set-var(res.test) \
+              res.hdrs,when(error),when(forwarded),debug(hdrs,stderr)
+```
+
+See also: debug converter
+
+<a id="entry-7-3-1-word"></a>
+
+**`word(<index>,<delimiters>[,<count>])`**
+
+```haproxy
+word(<index>,<delimiters>[,<count>])
+```
+
+Extracts the nth word counting from the beginning (positive index) or from the end (negative index)
+considering given delimiters from an input string. Indexes start at 1 or -1 and delimiters are a
+string formatted list of chars. Empty words are skipped. This means that delimiters at the start or
+end of the input string are ignored and consecutive delimiters within the input string are
+considered to be a single delimiter. Optionally you can specify `<count>` of words to extract
+(default: 1). Value of 0 indicates extraction of all remaining words.
+
+Example:
+
+```text
+str(f1_f2_f3__f5),word(4,_)    # f5
+str(f1_f2_f3__f5),word(5,_)    # <not found>
+str(f1_f2_f3__f5),word(2,_,0)  # f2_f3__f5
+str(f1_f2_f3__f5),word(3,_,2)  # f3__f5
+str(f1_f2_f3__f5),word(-2,_,3) # f1_f2_f3
+str(f1_f2_f3__f5),word(-3,_,0) # f1_f2
+str(/f1/f2/f3/f4),word(1,/)    # f1
+str(/f1////f2/f3/f4),word(1,/) # f2
+```
+
+<a id="entry-7-3-1-wt6"></a>
+
+**`wt6([<avalanche>])`**
+
+```haproxy
+wt6([<avalanche>])
+```
+
+Hashes a binary input sample into an unsigned 32-bit quantity using the WT6 hash function.
+Optionally, it is possible to apply a full avalanche hash function to the output if the optional
+`<avalanche>` argument equals 1. This converter uses the same functions as used by the various
+hash-based load balancing algorithms, so it will provide exactly the same results. It is mostly
+intended for debugging, but can be used as a stick-table entry to collect rough statistics. It must
+not be used for security purposes as a 32-bit hash is trivial to break. See also "crc32", "djb2",
+"sdbm", "crc32c", and the "hash-type" directive.
+
+<a id="entry-7-3-1-x509-v-err-str"></a>
+
+**`x509_v_err_str`**
+
+```haproxy
+x509_v_err_str
+```
+
+Convert a numerical value to its corresponding X509_V_ERR constant name. It is useful in ACL in
+order to have a configuration which works with multiple version of OpenSSL since some codes might
+change when changing version.
+
+When the corresponding constant name was not found, outputs the numerical value as a string.
+
+The list of constant provided by OpenSSL can be found at
+<https://www.openssl.org/docs/manmaster/man3/X509_STORE_CTX_get_error.html#ERROR-CODES> Be careful
+to read the page for the right version of OpenSSL.
+
+Example:
+
+```text
+bind :443 ssl crt common.pem ca-file ca-auth.crt verify optional crt-ignore-err X509_V_ERR_CERT_REVOKED,X509_V_ERR_CERT_HAS_EXPIRED
+
+acl cert_expired ssl_c_verify,x509_v_err_str -m str X509_V_ERR_CERT_HAS_EXPIRED
+acl cert_revoked ssl_c_verify,x509_v_err_str -m str X509_V_ERR_CERT_REVOKED
+acl cert_ok      ssl_c_verify,x509_v_err_str -m str X509_V_OK
+
+http-response add-header X-SSL Ok if cert_ok
+http-response add-header X-SSL Expired if cert_expired
+http-response add-header X-SSL Revoked if cert_revoked
+
+http-response add-header X-SSL-verify %[ssl_c_verify,x509_v_err_str]
+```
+
+<a id="entry-7-3-1-xor"></a>
+
+**`xor(<value>)`**
+
+```haproxy
+xor(<value>)
+```
+
+Performs a bitwise "XOR" (exclusive OR) between `<value>` and the input value of type signed
+integer, and returns the result as an signed integer. `<value>` can be a numeric value or a variable
+name. See [section 2.8](/haproxy/configuration-basics/#section-2-8) about variables for details.
+
+<a id="entry-7-3-1-xxh3"></a>
+
+**`xxh3([<seed>])`**
+
+```haproxy
+xxh3([<seed>])
+```
+
+Hashes a binary input sample into a signed 64-bit quantity using the XXH3 64-bit variant of the
+XXhash hash function. This hash supports a seed which defaults to zero but a different value maybe
+passed as the `<seed>` argument. This hash is known to be very good and very fast so it can be used
+to hash URLs and/or URL parameters for use as stick-table keys to collect statistics with a low
+collision rate, though care must be taken as the algorithm is not considered as cryptographically
+secure.
+
+<a id="entry-7-3-1-xxh32"></a>
+
+**`xxh32([<seed>])`**
+
+```haproxy
+xxh32([<seed>])
+```
+
+Hashes a binary input sample into an unsigned 32-bit quantity using the 32-bit variant of the XXHash
+hash function. This hash supports a seed which defaults to zero but a different value maybe passed
+as the `<seed>` argument. This hash is known to be very good and very fast so it can be used to hash
+URLs and/or URL parameters for use as stick-table keys to collect statistics with a low collision
+rate, though care must be taken as the algorithm is not considered as cryptographically secure.
+
+<a id="entry-7-3-1-xxh64"></a>
+
+**`xxh64([<seed>])`**
+
+```haproxy
+xxh64([<seed>])
+```
+
+Hashes a binary input sample into a signed 64-bit quantity using the 64-bit variant of the XXHash
+hash function. This hash supports a seed which defaults to zero but a different value maybe passed
+as the `<seed>` argument. This hash is known to be very good and very fast so it can be used to hash
+URLs and/or URL parameters for use as stick-table keys to collect statistics with a low collision
+rate, though care must be taken as the algorithm is not considered as cryptographically secure.
+
+### 7.3.2. Fetching samples from internal states {#section-7-3-2}
+
+A first set of sample fetch methods applies to internal information which does not even relate to
+any client information. These ones are sometimes used with "monitor fail" directives to report an
+internal status to external watchers. The sample fetch methods described in this section are usable
+anywhere.
+
+Summary of sample fetch methods in this section and their respective types:
+
+```text
+  keyword                                          output type
+-------------------------------------------------+-------------
+acl([!]<name>[,...])                               boolean
+act_conn                                           integer
+always_false                                       boolean
+always_true                                        boolean
+avg_queue([<backend>])                             integer
+be_conn([<backend>])                               integer
+be_conn_free([<backend>])                          integer
+be_sess_rate([<backend>])                          integer
+bin(<hex>)                                         bin
+bool(<bool>)                                       bool
+connslots([<backend>])                             integer
+cpu_calls                                          integer
+cpu_ns_avg                                         integer
+cpu_ns_tot                                         integer
+date([<offset>[,<unit>]])                          integer
+date_us                                            integer
+env(<name>)                                        string
+fe_conn([<frontend>])                              integer
+fe_req_rate([<frontend>])                          integer
+fe_sess_rate([<frontend>])                         integer
+hostname                                           string
+int(<integer>)                                     signed
+ipv4(<ipv4>)                                       ipv4
+ipv6(<ipv6>)                                       ipv6
+last_entity                                        string
+last_rule_file                                     string
+last_rule_line                                     integer
+lat_ns_avg                                         integer
+lat_ns_tot                                         integer
+meth(<method>)                                     method
+nbsrv([<backend>])                                 integer
+pid                                                integer
+prio_class                                         integer
+prio_offset                                        integer
+proc                                               integer
+queue([<backend>])                                 integer
+quic_enabled                                       boolean
+rand([<range>])                                    integer
+srv_conn([<backend>/]<server>)                     integer
+srv_conn_free([<backend>/]<server>)                integer
+srv_is_up([<backend>/]<server>)                    boolean
+srv_iweight([<backend>/]<server>)                  integer
+srv_queue([<backend>/]<server>)                    integer
+srv_sess_rate([<backend>/]<server>)                integer
+srv_uweight([<backend>/]<server>)                  integer
+srv_weight([<backend>/]<server>)                   integer
+stopping                                           boolean
+str(<string>)                                      string
+table_avl([<table>])                               integer
+table_cnt([<table>])                               integer
+term_events                                        string
+thread                                             integer
+txn.id32                                           integer
+txn.sess_term_state                                string
+uptime                                             integer
+uuid([<version>])                                  string
+var(<var-name>[,<default>])                        undefined
+wait_end                                           boolean
+waiting_entity                                     string
+-------------------------------------------------+-------------
+```
+
+Detailed list:
+
+<a id="entry-7-3-2-acl-boolean"></a>
+
+**`acl([!]<name>[,...]): boolean`**
+
+```haproxy
+acl([!]<name>[,...]): boolean
+```
+
+Returns true if the evaluation of all the named ACL(s) is true, otherwise returns false. Up to 12
+ACLs may be provided, each delimited by comma. Each named ACL may be prefixed with a "!" to invert
+the result. If any evaluation produces an error then the sample also returns an error. Note that
+HAProxy does not perform any validation checks on the referenced ACLs, such as whether an ACL which
+uses a http request sample is used in response context. This behavior may be changed in the future.
+
+act_conn: integer Returns the total number of active concurrent connections on the process.
+
+always_false: boolean Always returns the boolean "false" value. It may be used with ACLs as a
+temporary replacement for another one when adjusting configurations.
+
+always_true: boolean Always returns the boolean "true" value. It may be used with ACLs as a
+temporary replacement for another one when adjusting configurations.
+
+<a id="entry-7-3-2-avg-queue-integer"></a>
+
+**`avg_queue([<backend>]): integer`**
+
+```haproxy
+avg_queue([<backend>]): integer
+```
+
+Returns the total number of queued connections of the designated backend divided by the number of
+active servers. The current backend is used if no backend is specified. This is very similar to
+"queue" except that the size of the farm is considered, in order to give a more accurate measurement
+of the time it may take for a new connection to be processed. The main usage is with ACL to return a
+sorry page to new users when it becomes certain they will get a degraded service, or to pass to the
+backend servers in a header so that they decide to work in degraded mode or to disable some
+functions to speed up the processing a bit. Note that in the event there would not be any active
+server anymore, twice the number of queued connections would be considered as the measured value.
+This is a fair estimate, as we expect one server to get back soon anyway, but we still prefer to
+send new traffic to another backend if in better shape. See also the "queue", "be_conn", and
+"be_sess_rate" sample fetches.
+
+<a id="entry-7-3-2-be-conn-integer"></a>
+
+**`be_conn([<backend>]): integer`**
+
+```haproxy
+be_conn([<backend>]): integer
+```
+
+Applies to the number of currently established connections on the backend, possibly including the
+connection being evaluated. If no backend name is specified, the current one is used. But it is also
+possible to check another backend. It can be used to use a specific farm when the nominal one is
+full. See also the "fe_conn", "queue", "be_conn_free", and "be_sess_rate" criteria.
+
+<a id="entry-7-3-2-be-conn-free-integer"></a>
+
+**`be_conn_free([<backend>]): integer`**
+
+```haproxy
+be_conn_free([<backend>]): integer
+```
+
+Returns an integer value corresponding to the number of available connections across available
+servers in the backend. Queue slots are not included. Backup servers are also not included, unless
+all other servers are down. If no backend name is specified, the current one is used. But it is also
+possible to check another backend. It can be used to use a specific farm when the nominal one is
+full. See also the "be_conn", "connslots", and "srv_conn_free" criteria.
+
+OTHER CAVEATS AND NOTES: if any of the server maxconn, or maxqueue is 0 (meaning unlimited), then
+this fetch clearly does not make sense, in which case the value returned will be -1.
+
+<a id="entry-7-3-2-be-sess-rate-integer"></a>
+
+**`be_sess_rate([<backend>]): integer`**
+
+```haproxy
+be_sess_rate([<backend>]): integer
+```
+
+Returns an integer value corresponding to the sessions creation rate on the backend, in number of
+new sessions per second. This is used with ACLs to switch to an alternate backend when an expensive
+or fragile one reaches too high a session rate, or to limit abuse of service (e.g. prevent sucking
+of an online dictionary). It can also be useful to add this element to logs using a log-format
+directive.
+
+Example:
+
+```shell
+# Redirect to an error page if the dictionary is requested too often
+backend dynamic
+    mode http
+    acl being_scanned be_sess_rate gt 100
+    redirect location /denied.html if being_scanned
+```
+
+<a id="entry-7-3-2-bin-bin"></a>
+
+**`bin(<hex>): bin`**
+
+```haproxy
+bin(<hex>): bin
+```
+
+Returns a binary chain. The input is the hexadecimal representation of the string.
+
+<a id="entry-7-3-2-bool-bool"></a>
+
+**`bool(<bool>): bool`**
+
+```haproxy
+bool(<bool>): bool
+```
+
+Returns a boolean value. `<bool>` can be 'true', 'false', '1' or '0'. 'false' and '0' are the same.
+'true' and '1' are the same.
+
+<a id="entry-7-3-2-connslots-integer"></a>
+
+**`connslots([<backend>]): integer`**
+
+```haproxy
+connslots([<backend>]): integer
+```
+
+Returns an integer value corresponding to the number of connection slots still available in the
+backend, by totaling the maximum amount of connections on all servers and the maximum queue size.
+This is probably only used with ACLs.
+
+The basic idea here is to be able to measure the number of connection "slots" still available
+(connection + queue), so that anything beyond that (intended usage; see "use_backend" keyword) can
+be redirected to a different backend.
+
+'connslots' = number of available server connection slots, + number of available server queue slots.
+
+Note that while "fe_conn" may be used, "connslots" comes in especially useful when you have a case
+of traffic going to one single ip, splitting into multiple backends (perhaps using ACLs to do
+name-based load balancing) and you want to be able to differentiate between different backends, and
+their available "connslots". Also, whereas "nbsrv" only measures servers that are actually *down*,
+this fetch is more fine-grained and looks into the number of available connection slots as well. See
+also "queue" and "avg_queue".
+
+OTHER CAVEATS AND NOTES: at this point in time, the code does not take care of dynamic connections.
+Also, if any of the server maxconn, or maxqueue is 0, then this fetch clearly does not make sense,
+in which case the value returned will be -1.
+
+cpu_calls: integer Returns the number of calls to the task processing the stream or current request
+since it was allocated. This number is reset for each new request on the same connections in case of
+HTTP keep-alive. This value should usually be low and stable (around 2 calls for a typically simple
+request) but may become high if some processing (compression, caching or analysis) is performed.
+This is purely for performance monitoring purposes.
+
+cpu_ns_avg: integer Returns the average number of nanoseconds spent in each call to the task
+processing the stream or current request. This number is reset for each new request on the same
+connections in case of HTTP keep-alive. This value indicates the overall cost of processing the
+request or the connection for each call. There is no good nor bad value but the time spent in a call
+automatically causes latency for other processing (see lat_ns_avg below), and may affect other
+connection's apparent response time. Certain operations like compression, complex regex matching or
+heavy Lua operations may directly affect this value, and having it in the logs will make it easier
+to spot the faulty processing that needs to be fixed to recover decent performance. Note: this value
+is exactly cpu_ns_tot divided by cpu_calls.
+
+cpu_ns_tot: integer Returns the total number of nanoseconds spent in each call to the task
+processing the stream or current request. This number is reset for each new request on the same
+connections in case of HTTP keep-alive. This value indicates the overall cost of processing the
+request or the connection for each call. There is no good nor bad value but the time spent in a call
+automatically causes latency for other processing (see lat_ns_avg below), induces CPU costs on the
+machine, and may affect other connection's apparent response time. Certain operations like
+compression, complex regex matching or heavy Lua operations may directly affect this value, and
+having it in the logs will make it easier to spot the faulty processing that needs to be fixed to
+recover decent performance. The value may be artificially high due to a high cpu_calls count, for
+example when processing many HTTP chunks, and for this reason it is often preferred to log
+cpu_ns_avg instead.
+
+cpu_usage_grp: integer Returns the measured CPU usage over the last polling loop, between 0 and 100,
+averaged over all threads of the current thread group. This can be used for troubleshooting and for
+logging. The measure is extremely volatile but will remain accurate for sustained loads as each
+thread measures it over a few tens to hundreds of requests.
+
+cpu_usage_proc: integer Returns the measured CPU usage over the last polling loop, between 0 and
+100, averaged over all running threads. This can be used for troubleshooting and for logging. The
+measure is extremely volatile but will remain accurate for sustained loads as each thread measures
+it over a few tens to hundreds of requests. This is 100 minus the value reported in the idle ratio
+in the stats page and in "show info".
+
+cpu_usage_thr: integer Returns the measured CPU usage over the last polling loop, between 0 and 100,
+for the calling thread. This can be used for troubleshooting and for logging. The measure is
+extremely volatile but will remain accurate for sustained loads as it is measured over a few tens to
+hundreds of requests. This is the same value as used to decide to enable connection killing on too
+high glitches, or to disable compression. See also "tune.glitches.kill.cpu-usage" and
+"maxcompcpuusage".
+
+<a id="entry-7-3-2-date-integer"></a>
+
+**`date([<offset>[,<unit>]]): integer`**
+
+```haproxy
+date([<offset>[,<unit>]]): integer
+```
+
+Returns the current date as the epoch (number of seconds since 01/01/1970).
+
+If an offset value is specified, then it is added to the current date before returning the value.
+This is particularly useful to compute relative dates, as both positive and negative offsets are
+allowed. It is useful combined with the http_date converter.
+
+`<unit>` is facultative, and can be set to "s" for seconds (default behavior), "ms" for milliseconds
+or "us" for microseconds. If unit is set, return value is an integer reflecting either seconds,
+milliseconds or microseconds since epoch, plus offset. It is useful when a time resolution of less
+than a second is needed.
+
+Example:
+
+```shell
+# set an expires header to now+1 hour in every response
+http-response set-header Expires %[date(3600),http_date]
+
+# set an expires header to now+1 hour in every response, with
+# millisecond granularity
+http-response set-header Expires %[date(3600000,ms),http_date(0,ms)]
+```
+
+date_us: integer Return the microseconds part of the date (the "second" part is returned by date
+sample). This sample is coherent with the date sample as it is comes from the same timeval
+structure.
+
+<a id="entry-7-3-2-env-string"></a>
+
+**`env(<name>): string`**
+
+```haproxy
+env(<name>): string
+```
+
+Returns a string containing the value of environment variable `<name>`. As a reminder, environment
+variables are per-process and are sampled when the process starts. This can be useful to pass some
+information to a next hop server, or with ACLs to take specific action when the process is started a
+certain way.
+
+Examples:
+
+```shell
+# Pass the Via header to next hop with the local hostname in it
+http-request add-header Via 1.1\ %[env(HOSTNAME)]
+
+# reject cookie-less requests when the STOP environment variable is set
+http-request deny if !{ req.cook(SESSIONID) -m found } { env(STOP) -m found }
+```
+
+<a id="entry-7-3-2-fe-conn-integer"></a>
+
+**`fe_conn([<frontend>]): integer`**
+
+```haproxy
+fe_conn([<frontend>]): integer
+```
+
+Returns the number of currently established connections on the frontend, possibly including the
+connection being evaluated. If no frontend name is specified, the current one is used. But it is
+also possible to check another frontend. It can be used to return a sorry page before hard-blocking,
+or to use a specific backend to drain new requests when the farm is considered full. This is mostly
+used with ACLs but can also be used to pass some statistics to servers in HTTP headers. See also the
+"dst_conn", "be_conn", "fe_sess_rate" fetches.
+
+<a id="entry-7-3-2-fe-req-rate-integer"></a>
+
+**`fe_req_rate([<frontend>]): integer`**
+
+```haproxy
+fe_req_rate([<frontend>]): integer
+```
+
+Returns an integer value corresponding to the number of HTTP requests per second sent to a frontend.
+This number can differ from "fe_sess_rate" in situations where client-side keep-alive is enabled.
+
+<a id="entry-7-3-2-fe-sess-rate-integer"></a>
+
+**`fe_sess_rate([<frontend>]): integer`**
+
+```haproxy
+fe_sess_rate([<frontend>]): integer
+```
+
+Returns an integer value corresponding to the sessions creation rate on the frontend, in number of
+new sessions per second. This is used with ACLs to limit the incoming session rate to an acceptable
+range in order to prevent abuse of service at the earliest moment, for example when combined with
+other layer 4 ACLs in order to force the clients to wait a bit for the rate to go down below the
+limit. It can also be useful to add this element to logs using a log-format directive. See also the
+"rate-limit sessions" directive for use in frontends.
+
+Example:
+
+```shell
+# This frontend limits incoming mails to 10/s with a max of 100
+# concurrent connections. We accept any connection below 10/s, and
+# force excess clients to wait for 100 ms. Since clients are limited to
+# 100 max, there cannot be more than 10 incoming mails per second.
+frontend mail
+    bind :25
+    mode tcp
+    maxconn 100
+    acl too_fast fe_sess_rate ge 10
+    tcp-request inspect-delay 100ms
+    tcp-request content accept if ! too_fast
+    tcp-request content accept if WAIT_END
+```
+
+hostname: string Returns the system hostname.
+
+<a id="entry-7-3-2-int-signed-integer"></a>
+
+**`int(<integer>): signed integer`**
+
+```haproxy
+int(<integer>): signed integer
+```
+
+Returns a signed integer.
+
+<a id="entry-7-3-2-ipv4-ipv4"></a>
+
+**`ipv4(<ipv4>): ipv4`**
+
+```haproxy
+ipv4(<ipv4>): ipv4
+```
+
+Returns an ipv4.
+
+<a id="entry-7-3-2-ipv6-ipv6"></a>
+
+**`ipv6(<ipv6>): ipv6`**
+
+```haproxy
+ipv6(<ipv6>): ipv6
+```
+
+Returns an ipv6.
+
+last_entity: string This returns the identity of the last entity that was evaluated during stream
+analysis. It may be the final rule that matched or the filter that interrupted the processing.
+
+A final rule is one that terminates the evaluation of the rule set (like an "accept", "deny" or
+"redirect"). This works for TCP request and response rules acting on the "content" rulesets, and on
+HTTP rules from "http-request", "http-response" and "http-after-response" rule sets. The legacy
+"redirect" rulesets are not supported (such information is not stored there), and neither
+"tcp-request connection" nor "tcp-request session" rulesets are supported because the information is
+stored at the stream level and streams do not exist during these rules. In that case, the returned
+value is equivalent to "last_rule_file:last_rule_line". See also "last_rule_file", "last_rule_line".
+
+For a filter, its identifier is returned as defined by the developers. If this identifier is not
+defined, an hexadecimal value is returned corresponding to an unique internal identifier.
+
+The main purpose of this function is to be able to report in logs the last entity that interrupted a
+processing, in order to help debugging issues. The information returned on entities may changed in
+time and must not be used for something else than debugging.
+
+Example:
+
+```shell
+# Log the last entity, if any, and only if an error is reported
+log-format "$HAPROXY_HTTP_LOG_FMT %{Q}[last_entity,when(error)]
+```
+
+last_rule_file: string This returns the name of the configuration file containing the last final
+rule that was matched during stream analysis. A final rule is one that terminates the evaluation of
+the rule set (like an "accept", "deny" or "redirect"). This works for TCP request and response rules
+acting on the "content" rulesets, and on HTTP rules from "http-request", "http-response" and
+"http-after-response" rule sets. The legacy "redirect" rulesets are not supported (such information
+is not stored there), and neither "tcp-request connection" nor "tcp-request session" rulesets are
+supported because the information is stored at the stream level and streams do not exist during
+these rules. The main purpose of this function is to be able to report in logs where was the rule
+that gave the final verdict, in order to help figure why a request was denied for example. See also
+"last_rule_line".
+
+last_rule_line: integer This returns the line number in the configuration file where is located the
+last final rule that was matched during stream analysis. A final rule is one that terminates the
+evaluation of the rule set (like an "accept", "deny" or "redirect"). This works for TCP request and
+response rules acting on the "content" rulesets, and on HTTP rules from "http-request",
+"http-response" and "http-after-response" rule sets. The legacy "redirect" rulesets are not
+supported (such information is not stored there), and neither "tcp-request connection" nor
+"tcp-request session" rulesets are supported because the information is stored at the stream level
+and streams do not exist during these rules. The main purpose of this function is to be able to
+report in logs where was the rule that gave the final verdict, in order to help figure why a request
+was denied for example. See also "last_rule_file".
+
+lat_ns_avg: integer Returns the average number of nanoseconds spent between the moment the task
+handling the stream is woken up and the moment it is effectively called. This number is reset for
+each new request on the same connections in case of HTTP keep-alive. This value indicates the
+overall latency inflicted to the current request by all other requests being processed in parallel,
+and is a direct indicator of perceived performance due to noisy neighbours. In order to keep the
+value low, it is possible to reduce the scheduler's run queue depth using "tune.runqueue-depth", to
+reduce the number of concurrent events processed at once using "tune.maxpollevents", to decrease the
+stream's nice value using the "nice" option on the "bind" lines or in the frontend, to enable low
+latency scheduling using "tune.sched.low-latency", or to look for other heavy requests in logs
+(those exhibiting large values of "cpu_ns_avg"), whose processing needs to be adjusted or fixed.
+Compression of large buffers could be a culprit, like heavy regex or long lists of regex. Note: this
+value is exactly lat_ns_tot divided by cpu_calls.
+
+lat_ns_tot: integer Returns the total number of nanoseconds spent between the moment the task
+handling the stream is woken up and the moment it is effectively called. This number is reset for
+each new request on the same connections in case of HTTP keep-alive. This value indicates the
+overall latency inflicted to the current request by all other requests being processed in parallel,
+and is a direct indicator of perceived performance due to noisy neighbours. In order to keep the
+value low, it is possible to reduce the scheduler's run queue depth using "tune.runqueue-depth", to
+reduce the number of concurrent events processed at once using "tune.maxpollevents", to decrease the
+stream's nice value using the "nice" option on the "bind" lines or in the frontend, to enable low
+latency scheduling using "tune.sched.low-latency", or to look for other heavy requests in logs
+(those exhibiting large values of "cpu_ns_avg"), whose processing needs to be adjusted or fixed.
+Compression of large buffers could be a culprit, like heavy regex or long lists of regex. Note:
+while it may intuitively seem that the total latency adds to a transfer time, it is almost never
+true because while a task waits for the CPU, network buffers continue to fill up and the next call
+will process more at once. The value may be artificially high due to a high cpu_calls count, for
+example when processing many HTTP chunks, and for this reason it is often preferred to log
+lat_ns_avg instead, which is a more relevant performance indicator.
+
+<a id="entry-7-3-2-meth-method"></a>
+
+**`meth(<method>): method`**
+
+```haproxy
+meth(<method>): method
+```
+
+Returns a method.
+
+<a id="entry-7-3-2-nbsrv-integer"></a>
+
+**`nbsrv([<backend>]): integer`**
+
+```haproxy
+nbsrv([<backend>]): integer
+```
+
+Returns an integer value corresponding to the number of usable servers of either the current backend
+or the named backend. This is mostly used with ACLs but can also be useful when added to logs. This
+is normally used to switch to an alternate backend when the number of servers is too low to to
+handle some load. It is useful to report a failure when combined with "monitor fail".
+
+pid: integer Return the PID of the current process. In most cases this is the PID of the worker
+process.
+
+prio_class: integer Returns the priority class of the current stream for http mode or connection for
+tcp mode. The value will be that set by the last call to "http-request set-priority-class" or
+"tcp-request content set-priority-class".
+
+prio_offset: integer Returns the priority offset of the current stream for http mode or connection
+for tcp mode. The value will be that set by the last call to "http-request set-priority-offset" or
+"tcp-request content set-priority-offset".
+
+proc: integer Always returns value 1 (historically it would return the calling process number).
+
+<a id="entry-7-3-2-queue-integer"></a>
+
+**`queue([<backend>]): integer`**
+
+```haproxy
+queue([<backend>]): integer
+```
+
+Returns the total number of queued connections of the designated backend, including all the
+connections in server queues. If no backend name is specified, the current one is used, but it is
+also possible to check another one. This is useful with ACLs or to pass statistics to backend
+servers. This can be used to take actions when queuing goes above a known level, generally
+indicating a surge of traffic or a massive slowdown on the servers. One possible action could be to
+reject new users but still accept old ones. See also the "avg_queue", "be_conn", and "be_sess_rate"
+fetches.
+
+quic_enabled: boolean Return true when the support for QUIC transport protocol was compiled and if
+QUIC listeners are not disabled by "tune.quic.listen" global option. See also "tune.quic.listen"
+global option.
+
+<a id="entry-7-3-2-rand-integer"></a>
+
+**`rand([<range>]): integer`**
+
+```haproxy
+rand([<range>]): integer
+```
+
+Returns a random integer value within a range of `<range>` possible values, starting at zero. If the
+range is not specified, it defaults to 2^32, which gives numbers between 0 and 4294967295. It can be
+useful to pass some values needed to take some routing decisions for example, or just for debugging
+purposes. This random must not be used for security purposes.
+
+<a id="entry-7-3-2-srv-conn-integer"></a>
+
+**`srv_conn([<backend>/]<server>): integer`**
+
+```haproxy
+srv_conn([<backend>/]<server>): integer
+```
+
+Returns an integer value corresponding to the number of currently established connections on the
+designated server, possibly including the connection being evaluated. If `<backend>` is omitted,
+then the server is looked up in the current backend. It can be used to use a specific farm when one
+server is full, or to inform the server about our view of the number of active connections with it.
+See also the "fe_conn", "be_conn", "queue", and "srv_conn_free" fetch methods.
+
+<a id="entry-7-3-2-srv-conn-free-integer"></a>
+
+**`srv_conn_free([<backend>/]<server>): integer`**
+
+```haproxy
+srv_conn_free([<backend>/]<server>): integer
+```
+
+Returns an integer value corresponding to the number of available connections on the designated
+server, possibly including the connection being evaluated. The value does not include queue slots.
+If `<backend>` is omitted, then the server is looked up in the current backend. It can be used to
+use a specific farm when one server is full, or to inform the server about our view of the number of
+active connections with it. See also the "be_conn_free" and "srv_conn" fetch methods.
+
+OTHER CAVEATS AND NOTES: If the server maxconn is 0, then this fetch clearly does not make sense, in
+which case the value returned will be -1.
+
+<a id="entry-7-3-2-srv-is-up-boolean"></a>
+
+**`srv_is_up([<backend>/]<server>): boolean`**
+
+```haproxy
+srv_is_up([<backend>/]<server>): boolean
+```
+
+Returns true when the designated server is UP, and false when it is either DOWN or in maintenance
+mode. If `<backend>` is omitted, then the server is looked up in the current backend. It is mainly
+used to take action based on an external status reported via a health check (e.g. a geographical
+site's availability). Another possible use which is more of a hack consists in using dummy servers
+as boolean variables that can be enabled or disabled from the CLI, so that rules depending on those
+ACLs can be tweaked in realtime.
+
+<a id="entry-7-3-2-srv-iweight-integer"></a>
+
+**`srv_iweight([<backend>/]<server>): integer`**
+
+```haproxy
+srv_iweight([<backend>/]<server>): integer
+```
+
+Returns an integer corresponding to the server's initial weight. If `<backend>` is omitted, then the
+server is looked up in the current backend. See also "srv_weight" and "srv_uweight".
+
+<a id="entry-7-3-2-srv-queue-integer"></a>
+
+**`srv_queue([<backend>/]<server>): integer`**
+
+```haproxy
+srv_queue([<backend>/]<server>): integer
+```
+
+Returns an integer value corresponding to the number of connections currently pending in the
+designated server's queue. If `<backend>` is omitted, then the server is looked up in the current
+backend. It can sometimes be used together with the "use-server" directive to force to use a known
+faster server when it is not much loaded. See also the "srv_conn", "avg_queue" and "queue" sample
+fetch methods.
+
+<a id="entry-7-3-2-srv-sess-rate-integer"></a>
+
+**`srv_sess_rate([<backend>/]<server>): integer`**
+
+```haproxy
+srv_sess_rate([<backend>/]<server>): integer
+```
+
+Returns an integer corresponding to the sessions creation rate on the designated server, in number
+of new sessions per second. If `<backend>` is omitted, then the server is looked up in the current
+backend. This is mostly used with ACLs but can make sense with logs too. This is used to switch to
+an alternate backend when an expensive or fragile one reaches too high a session rate, or to limit
+abuse of service (e.g. prevent latent requests from overloading servers).
+
+Example:
+
+```shell
+# Redirect to a separate back
+acl srv1_full srv_sess_rate(be1/srv1) gt 50
+acl srv2_full srv_sess_rate(be1/srv2) gt 50
+use_backend be2 if srv1_full or srv2_full
+```
+
+<a id="entry-7-3-2-srv-uweight-integer"></a>
+
+**`srv_uweight([<backend>/]<server>): integer`**
+
+```haproxy
+srv_uweight([<backend>/]<server>): integer
+```
+
+Returns an integer corresponding to the user visible server's weight. If `<backend>` is omitted,
+then the server is looked up in the current backend. See also "srv_weight" and "srv_iweight".
+
+<a id="entry-7-3-2-srv-weight-integer"></a>
+
+**`srv_weight([<backend>/]<server>): integer`**
+
+```haproxy
+srv_weight([<backend>/]<server>): integer
+```
+
+Returns an integer corresponding to the current (or effective) server's weight. If `<backend>` is
+omitted, then the server is looked up in the current backend. See also "srv_iweight" and
+"srv_uweight".
+
+stopping: boolean Returns TRUE if the process calling the function is currently stopping. This can
+be useful for logging, or for relaxing certain checks or helping close certain connections upon
+graceful shutdown.
+
+<a id="entry-7-3-2-str-string"></a>
+
+**`str(<string>): string`**
+
+```haproxy
+str(<string>): string
+```
+
+Returns a string.
+
+<a id="entry-7-3-2-table-avl-integer"></a>
+
+**`table_avl([<table>]): integer`**
+
+```haproxy
+table_avl([<table>]): integer
+```
+
+Returns the total number of available entries in the current proxy's stick-table or in the
+designated stick-table. See also "table_cnt".
+
+<a id="entry-7-3-2-table-cnt-integer"></a>
+
+**`table_cnt([<table>]): integer`**
+
+```haproxy
+table_cnt([<table>]): integer
+```
+
+Returns the total number of entries currently in use in the current proxy's stick-table or in the
+designated stick-table. See also "table_conn_cnt" and table_avl for other entry counting methods.
+
+term_events: string Returns all known termination events for all entities attached a stream, on
+client and server sides. A tuple of seven elements is returned with following info:
+
+    - the termination events of the frontend connection
+    - the termination events of the frontend mux connection
+    - the termination events of the frontend stream endpoint descriptor
+      (the mux stream or the applet)
+    - the termination events of the stream
+    - the termination events of the backend stream endpoint descriptor
+      (the mux stream or the applet)
+    - the termination events of the backend mux connection
+    - the termination events of the backend connection
+
+At each level, the first four events are reported. An empty string is returned if no event was
+reported yet for a specific level. If termination events are not supported, a "-" is returned.
+
+It must only be used for debugging purpose. The exact format is not documented because it may evolve
+depending on developers requirements.
+
+tgroup: integer Returns an integer value corresponding to the position of the thread group calling
+the function, between 0 and (global.thread-groups - 1). This is useful for logging and debugging
+purposes.
+
+thread: integer Returns an integer value corresponding to the position of the thread calling the
+function, between 0 and (global.nbthread-1). This is useful for logging and debugging purposes.
+
+txn.id32: integer Returns the internal transaction ID. It is a 32bits integer. So, in absolute, its
+value is not unique, transaction IDs may wrap. The wrapping period depends on the request rate. In
+practice, it should not be an issue. For a true unique ID, see "unique-id-format" directive.
+
+txn.sess_term_state: string Returns the TCP or HTTP stream termination state, as reported in the
+log. It is a 2-characters string, The final stream state followed by the event which caused its to
+terminate. See [section 8.5](/haproxy/configuration-logging/#section-8-5) about stream state at disconnection for the list of possible events. The
+current value at time the sample fetch is evaluated is returned. It is subject to change. Except
+used with ACLs in "http-after-response" rule sets or in log messages, it will always be "--".
+
+Example:
+
+```shell
+# Return a 429-Too-Many-Requests if stream timed out in queue
+http-after-response set-status 429 if { txn.sess_term_state  "sQ" }
+```
+
+uptime: integer Returns the uptime of the current HAProxy worker in seconds.
+
+<a id="entry-7-3-2-uuid-string"></a>
+
+**`uuid([<version>]): string`**
+
+```haproxy
+uuid([<version>]): string
+```
+
+Returns a UUID following the RFC 9562 standard. If the version is not specified, a UUID version 4
+(fully random) is returned.
+
+Versions 4 and 7 are supported.
+
+<a id="entry-7-3-2-var-undefined"></a>
+
+**`var(<var-name>[,<default>]): undefined`**
+
+```haproxy
+var(<var-name>[,<default>]): undefined
+```
+
+Returns a variable with the stored type. If the variable is not set, the sample fetch fails, unless
+a default value is provided, in which case it will return it as a string. Empty strings are
+permitted. See [section 2.8](/haproxy/configuration-basics/#section-2-8) about variables for details.
+
+<a id="entry-7-3-2-dump-all-vars-string"></a>
+
+**`dump_all_vars([<scope>][,<prefix>][,<delimiter>]): string`**
+
+```haproxy
+dump_all_vars([<scope>][,<prefix>][,<delimiter>]): string
+```
+
+Returns a list of all variables in the specified scope, optionally filtered by name prefix and with
+a customizable delimiter.
+
+Output format: var1=value1`<delim>`var2=value2`<delim>`...
+
+Value encoding by type:
+
+- Strings: quoted and escaped (", &#92;, &#92;r,
+  &#92;n, &#92;b, &#92;0) Example:
+  txn.name="John &#92;"Doe&#92;""
+- Binary: hex-encoded with 'x' prefix, unquoted Example: txn.data=x48656c6c6f
+- Integers: unquoted decimal Example: txn.count=42
+- Booleans: unquoted "true" or "false" Example: txn.active=true
+- Addresses: unquoted IP address string Example: txn.client=192.168.1.1
+- HTTP Methods: quoted string Example: req.method="GET"
+
+Arguments:
+
+- `<scope>` (optional): sess, txn, req, res, or proc. If omitted, all these scopes are visited in
+  the same order as presented here.
+
+- `<prefix>` (optional): filters variables whose names start with the specified prefix (after
+  removing the scope prefix). Performance note: When using prefix filtering, all variables in the
+  scope are still visited. This should not be used with configurations involving thousands of
+  variables.
+
+- `<delimiter>` (optional): string to separate variables. Defaults to ", " (comma-space). Can be
+  customized to any string. As a reminder, in order to pass commas or spaces in a function argument,
+  they need to be enclosed in simple or double quotes (if the expression itself is already within
+  quotes, use the other ones).
+
+Return value:
+
+- On success: string containing all matching variables
+- On failure: empty (sample fetch fails) if output buffer is too small. The function will not
+  truncate output; it fails completely to avoid partial data.
+
+This is particularly useful for debugging, logging, or exporting variable states.
+
+Examples:
+
+```shell
+# Dump all transaction variables
+http-request return string %[dump_all_vars(txn)]
+
+# Dump only variables starting with "user"
+http-request set-header X-User-Vars "%[dump_all_vars(txn,user)]"
+
+# Dump all process variables
+http-request return string %[dump_all_vars(proc)]
+
+# Custom delimiter (semicolon)
+http-request set-header X-Vars "%[dump_all_vars(txn,,; )]"
+
+# Force the default delimiter (comma space)
+http-request set-header X-Vars "%[dump_all_vars(txn,,', ')]"
+
+# Prefix filter with custom delimiter
+http-request set-header X-Session "%[dump_all_vars(sess,user,|)]"
+
+```
+
+wait_end: boolean This fetch either returns true when the inspection period is over, or does not
+fetch. It is only used in ACLs, in conjunction with content analysis to avoid returning a wrong
+verdict early. It may also be used to delay some actions, such as a delayed reject for some special
+addresses. Since it either stops the rules evaluation or immediately returns true, it is recommended
+to use this acl as the last one in a rule. Please note that the default ACL "WAIT_END" is always
+usable without prior declaration. This test was designed to be used with TCP request content
+inspection.
+
+Examples:
+
+```shell
+# delay every incoming request by 2 seconds
+tcp-request inspect-delay 2s
+tcp-request content accept if WAIT_END
+
+# don't immediately tell bad guys they are rejected
+tcp-request inspect-delay 10s
+acl goodguys src 10.0.0.0/24
+acl badguys  src 10.0.1.0/24
+tcp-request content accept if goodguys
+tcp-request content reject if badguys WAIT_END
+tcp-request content reject
+```
+
+waiting_entity: string This returns the identity of the entity that was waiting to continue its
+processing when an error or a timeout was encountered. It may be the a rule or a filter for
+instance. However, this list is not exhaustive and the format of all possible entities is not
+forcefully documented.
+
+When the entity is a rule, its location is returned. It is the configuration file containing the
+rule followed by the line where the rule is defined in this file, separated by a colon.
+
+For a filter, its identifier is returned as defined by the developers. If this identifier is not
+defined, an hexadecimal value is returned corresponding to an unique internal identifier.
+
+The main purpose of this function is to be able to report in logs the entity blocking the stream
+analysis when an error or a timeout was encountered, interrupting this processing, in order to help
+debugging issues. The information returned on entities may changed in time and must not be used for
+something else than debugging.
+
+Example:
+
+```shell
+# Log the waiting entity, if any, and only if an error is reported
+log-format "$HAPROXY_HTTP_LOG_FMT %{Q}[waiting_entity,when(error)]
+```
+
+### 7.3.3. Fetching samples at Layer 4 {#section-7-3-3}
+
+The layer 4 usually describes just the transport layer which in HAProxy is closest to the
+connection, where no content is yet made available. The fetch methods described here are usable as
+low as the "tcp-request connection" rule sets unless they require some future information. Those
+generally include TCP/IP addresses and ports, as well as elements from stick-tables related to the
+incoming connection. For retrieving a value from a sticky counters, the counter number can be
+explicitly set as 0, 1, or 2 using the pre-defined "sc0\_", "sc1\_", or "sc2\_" prefix. These three
+pre-defined prefixes can only be used if the global "tune.stick-counters" value does not exceed 3,
+otherwise the counter number can be specified as the first integer argument when using the "sc\_"
+prefix starting from "sc_0" to "sc_N" where N is (tune.stick-counters-1). An optional table may be
+specified with the "sc\*" form, in which case the currently tracked key will be looked up into this
+alternate table instead of the table currently being tracked.
+
+Summary of sample fetch methods in this section and their respective types:
+
+```text
+  keyword                                          output type
+-------------------------------------------------+-------------
+accept_date([<unit>])                              integer
+bc.timer.connect                                   integer
+bc_be_queue                                        integer
+bc_dst                                             ip
+bc_dst_port                                        integer
+bc_err                                             integer
+bc_err_name                                        string
+bc_err_str                                         string
+bc_glitches                                        integer
+bc_http_major                                      integer
+bc_nb_streams                                      integer
+bc_reused                                          boolean
+bc_rtt(<unit>)                                     integer
+bc_rttvar(<unit>)                                  integer
+bc_settings_streams_limit                          integer
+bc_src                                             ip
+bc_src_port                                        integer
+bc_srv_queue                                       integer
+be_id                                              integer
+be_name                                            string
+be_connect_timeout                                 integer
+be_queue_timeout                                   integer
+be_server_timeout                                  integer
+be_tarpit_timeout                                  integer
+be_tunnel_timeout                                  integer
+bytes_in                                           integer
+bytes_out                                          integer
+cur_connect_timeout                                integer
+cur_client_timeout                                 integer
+cur_queue_timeout                                  integer
+cur_server_timeout                                 integer
+cur_tarpit_timeout                                 integer
+cur_tunnel_timeout                                 integer
+dst                                                ip
+dst_conn                                           integer
+dst_is_local                                       boolean
+dst_port                                           integer
+fc.timer.handshake                                 integer
+fc.timer.total                                     integer
+fc_dst                                             ip
+fc_dst_is_local                                    boolean
+fc_dst_port                                        integer
+fc_err                                             integer
+fc_err_name                                        string
+fc_err_str                                         string
+fc_fackets                                         integer
+fc_glitches                                        integer
+fc_http_major                                      integer
+fc_lost                                            integer
+fc_nb_streams                                      integer
+fc_pp_authority                                    string
+fc_pp_tlv(<id>)                                    string
+fc_pp_unique_id                                    string
+fc_rcvd_proxy                                      boolean
+fc_reordering                                      integer
+fc_retrans                                         integer
+fc_rtt(<unit>)                                     integer
+fc_rttvar(<unit>)                                  integer
+fc_sacked                                          integer
+fc_saved_syn                                       binary
+fc_settings_streams_limit                          integer
+fc_src                                             ip
+fc_src_is_local                                    boolean
+fc_src_port                                        integer
+fc_unacked                                         integer
+fe_tarpit_timeout                                  integer
+fe_client_timeout                                  integer
+fe_defbe                                           string
+fe_id                                              integer
+fe_name                                            string
+req.bytes_in                                       integer
+req.bytes_out                                      integer
+res.bytes_in                                       integer
+res.bytes_out                                      integer
+res.timer.data                                     integer
+sc0_bytes_in_rate([<table>])                       integer
+sc0_bytes_out_rate([<table>])                      integer
+sc0_clr_gpc0([<table>])                            integer
+sc0_clr_gpc1([<table>])                            integer
+sc0_conn_cnt([<table>])                            integer
+sc0_conn_cur([<table>])                            integer
+sc0_conn_rate([<table>])                           integer
+sc0_get_gpc0([<table>])                            integer
+sc0_get_gpc1([<table>])                            integer
+sc0_get_gpt0([<table>])                            integer
+sc0_glitch_cnt([<table>])                          integer
+sc0_glitch_rate([<table>])                         integer
+sc0_gpc0_rate([<table>])                           integer
+sc0_gpc1_rate([<table>])                           integer
+sc0_http_err_cnt([<table>])                        integer
+sc0_http_err_rate([<table>])                       integer
+sc0_http_fail_cnt([<table>])                       integer
+sc0_http_fail_rate([<table>])                      integer
+sc0_http_req_cnt([<table>])                        integer
+sc0_http_req_rate([<table>])                       integer
+sc0_inc_gpc0([<table>])                            integer
+sc0_inc_gpc1([<table>])                            integer
+sc0_kbytes_in([<table>])                           integer
+sc0_kbytes_out([<table>])                          integer
+sc0_key                                            any
+sc0_sess_cnt([<table>])                            integer
+sc0_sess_rate([<table>])                           integer
+sc0_tracked([<table>])                             boolean
+sc0_trackers([<table>])                            integer
+sc1_bytes_in_rate([<table>])                       integer
+sc1_bytes_out_rate([<table>])                      integer
+sc1_clr_gpc0([<table>])                            integer
+sc1_clr_gpc1([<table>])                            integer
+sc1_conn_cnt([<table>])                            integer
+sc1_conn_cur([<table>])                            integer
+sc1_conn_rate([<table>])                           integer
+sc1_get_gpc0([<table>])                            integer
+sc1_get_gpc1([<table>])                            integer
+sc1_get_gpt0([<table>])                            integer
+sc1_glitch_cnt([<table>])                          integer
+sc1_glitch_rate([<table>])                         integer
+sc1_gpc0_rate([<table>])                           integer
+sc1_gpc1_rate([<table>])                           integer
+sc1_http_err_cnt([<table>])                        integer
+sc1_http_err_rate([<table>])                       integer
+sc1_http_fail_cnt([<table>])                       integer
+sc1_http_fail_rate([<table>])                      integer
+sc1_http_req_cnt([<table>])                        integer
+sc1_http_req_rate([<table>])                       integer
+sc1_inc_gpc0([<table>])                            integer
+sc1_inc_gpc1([<table>])                            integer
+sc1_kbytes_in([<table>])                           integer
+sc1_kbytes_out([<table>])                          integer
+sc1_key                                            any
+sc1_sess_cnt([<table>])                            integer
+sc1_sess_rate([<table>])                           integer
+sc1_tracked([<table>])                             boolean
+sc1_trackers([<table>])                            integer
+sc2_bytes_in_rate([<table>])                       integer
+sc2_bytes_out_rate([<table>])                      integer
+sc2_clr_gpc0([<table>])                            integer
+sc2_clr_gpc1([<table>])                            integer
+sc2_conn_cnt([<table>])                            integer
+sc2_conn_cur([<table>])                            integer
+sc2_conn_rate([<table>])                           integer
+sc2_get_gpc0([<table>])                            integer
+sc2_get_gpc1([<table>])                            integer
+sc2_get_gpt0([<table>])                            integer
+sc2_glitch_cnt([<table>])                          integer
+sc2_glitch_rate([<table>])                         integer
+sc2_gpc0_rate([<table>])                           integer
+sc2_gpc1_rate([<table>])                           integer
+sc2_http_err_cnt([<table>])                        integer
+sc2_http_err_rate([<table>])                       integer
+sc2_http_fail_cnt([<table>])                       integer
+sc2_http_fail_rate([<table>])                      integer
+sc2_http_req_cnt([<table>])                        integer
+sc2_http_req_rate([<table>])                       integer
+sc2_inc_gpc0([<table>])                            integer
+sc2_inc_gpc1([<table>])                            integer
+sc2_kbytes_in([<table>])                           integer
+sc2_kbytes_out([<table>])                          integer
+sc2_key                                            any
+sc2_sess_cnt([<table>])                            integer
+sc2_sess_rate([<table>])                           integer
+sc2_tracked([<table>])                             boolean
+sc2_trackers([<table>])                            integer
+sc_bytes_in_rate(<ctr>[,<table>])                  integer
+sc_bytes_out_rate(<ctr>[,<table>])                 integer
+sc_clr_gpc(<idx>,<ctr>[,<table>])                  integer
+sc_clr_gpc0(<ctr>[,<table>])                       integer
+sc_clr_gpc1(<ctr>[,<table>])                       integer
+sc_conn_cnt(<ctr>[,<table>])                       integer
+sc_conn_cur(<ctr>[,<table>])                       integer
+sc_conn_rate(<ctr>[,<table>])                      integer
+sc_get_gpc(<idx>,<ctr>[,<table>])                  integer
+sc_get_gpc0(<ctr>[,<table>])                       integer
+sc_get_gpc1(<ctr>[,<table>])                       integer
+sc_get_gpt(<idx>,<ctr>[,<table>])                  integer
+sc_get_gpt0(<ctr>[,<table>])                       integer
+sc_glitch_cnt(<ctr>[,<table>])                     integer
+sc_glitch_rate(<ctr>[,<table>])                    integer
+sc_gpc0_rate(<ctr>[,<table>])                      integer
+sc_gpc1_rate(<ctr>[,<table>])                      integer
+sc_gpc_rate(<idx>,<ctr>[,<table>])                 integer
+sc_http_err_cnt(<ctr>[,<table>])                   integer
+sc_http_err_rate(<ctr>[,<table>])                  integer
+sc_http_fail_cnt(<ctr>[,<table>])                  integer
+sc_http_fail_rate(<ctr>[,<table>])                 integer
+sc_http_req_cnt(<ctr>[,<table>])                   integer
+sc_http_req_rate(<ctr>[,<table>])                  integer
+sc_inc_gpc(<idx>,<ctr>[,<table>])                  integer
+sc_inc_gpc0(<ctr>[,<table>])                       integer
+sc_inc_gpc1(<ctr>[,<table>])                       integer
+sc_kbytes_in(<ctr>[,<table>])                      integer
+sc_kbytes_out(<ctr>[,<table>])                     integer
+sc_key(<ctr>)                                      any
+sc_sess_cnt(<ctr>[,<table>])                       integer
+sc_sess_rate(<ctr>[,<table>])                      integer
+sc_tracked(<ctr>[,<table>])                        boolean
+sc_trackers(<ctr>[,<table>])                       integer
+so_id                                              integer
+so_name                                            string
+src                                                ip
+src_bytes_in_rate([<table>])                       integer
+src_bytes_out_rate([<table>])                      integer
+src_clr_gpc(<idx>[,<table>])                       integer
+src_clr_gpc0([<table>])                            integer
+src_clr_gpc1([<table>])                            integer
+src_conn_cnt([<table>])                            integer
+src_conn_cur([<table>])                            integer
+src_conn_rate([<table>])                           integer
+src_get_gpc(<idx>[,<table>])                       integer
+src_get_gpc0([<table>])                            integer
+src_get_gpc1([<table>])                            integer
+src_get_gpt(<idx>[,<table>])                       integer
+src_get_gpt0([<table>])                            integer
+src_glitch_cnt([<table>])                          integer
+src_glitch_rate([<table>])                         integer
+src_gpc0_rate([<table>])                           integer
+src_gpc1_rate([<table>])                           integer
+src_gpc_rate(<idx>[,<table>])                      integer
+src_http_err_cnt([<table>])                        integer
+src_http_err_rate([<table>])                       integer
+src_http_fail_cnt([<table>])                       integer
+src_http_fail_rate([<table>])                      integer
+src_http_req_cnt([<table>])                        integer
+src_http_req_rate([<table>])                       integer
+src_inc_gpc(<idx>[,<table>])                       integer
+src_inc_gpc0([<table>])                            integer
+src_inc_gpc1([<table>])                            integer
+src_is_local                                       boolean
+src_kbytes_in([<table>])                           integer
+src_kbytes_out([<table>])                          integer
+src_port                                           integer
+src_sess_cnt([<table>])                            integer
+src_sess_rate([<table>])                           integer
+src_updt_conn_cnt([<table>])                       integer
+srv_id                                             integer
+srv_name                                           string
+txn.conn_retries                                   integer
+txn.redispatched                                   boolean
+-------------------------------------------------+-------------
+```
+
+Detailed list:
+
+<a id="entry-7-3-3-accept-date-integer"></a>
+
+**`accept_date([<unit>]): integer`**
+
+```haproxy
+accept_date([<unit>]): integer
+```
+
+This is the exact date when the connection was received by HAProxy (which might be very slightly
+different from the date observed on the network if there was some queuing in the system's backlog).
+This is usually the same date which may appear in any upstream firewall's log. When used in HTTP
+mode, the accept_date field will be reset to the first moment the connection is ready to receive a
+new request (end of previous response for HTTP/1, immediately after previous request for HTTP/2).
+
+Returns a value in number of seconds since epoch.
+
+`<unit>` is facultative, and can be set to "s" for seconds (default behavior), "ms" for milliseconds
+or "us" for microseconds. If unit is set, return value is an integer reflecting either seconds,
+milliseconds or microseconds since epoch. It is useful when a time resolution of less than a second
+is needed.
+
+bc.timer.connect: integer Total time to establish the TCP connection to the server. This is the
+equivalent of %Tc in the log-format. This is reported in milliseconds (ms). For more information see
+[Section 8.4](/haproxy/configuration-logging/#section-8-4) "Timing events"
+
+bc_be_queue: integer Number of streams de-queued while waiting for a connection slot on the target
+backend. This is the equivalent of %bq in the log-format.
+
+bc_dst: ip This is the destination ip address of the connection on the server side, which is the
+server address HAProxy connected to. It is of type IP and works on both IPv4 and IPv6 tables. On
+IPv6 tables, IPv4 address is mapped to its IPv6 equivalent, according to RFC 4291.
+
+bc_dst_port: integer Returns an integer value corresponding to the destination TCP port of the
+connection on the server side, which is the port HAProxy connected to.
+
+bc_err: integer Returns the ID of the error that might have occurred on the current backend
+connection. See the "fc_err_str" fetch for a full list of error codes and their corresponding error
+message.
+
+bc_err_name: string Returns the internal error name describing what problem happened on the backend
+connection, resulting in a connection failure. This string is made of a single word and is empty
+when no error is present. It corresponds to the "name" column in the table presented in the
+"fc_err_str" keyword.
+
+bc_err_str: string Returns an error message describing what problem happened on the current backend
+connection, resulting in a connection failure. See the "fc_err_str" fetch for a full list of error
+codes and their corresponding error message.
+
+bc_glitches: integer Returns the number of protocol glitches counted on the backend connection.
+These generally cover protocol violations as well as small anomalies that generally indicate a bogus
+or misbehaving server that may cause trouble in the infrastructure (e.g. cause connections to be
+aborted early, inducing frequent TLS renegotiations). These may also be caused by too large
+responses that cannot fit into a single buffer, explaining HTTP 502 errors. Ideally this number
+should remain zero, though it's generally fine if it remains very low compared to the total number
+of requests. These values should normally not be considered as alarming (especially small ones),
+though a sudden jump may indicate an anomaly somewhere. Not all protocol multiplexers measure this
+metric and the only way to get more details about the events is to enable traces to capture all
+exchanges.
+
+bc_http_major: integer Returns the backend connection's HTTP major version encoding, which may be 1
+for HTTP/0.9 to HTTP/1.1 or 2 for HTTP/2. Note, this is based on the on-wire encoding and not the
+version present in the request header.
+
+bc_nb_streams: integer Returns the number of streams opened on the backend connection.
+
+bc_reused: boolean Returns true if the transfer was performed via a reused backend connection.
+
+<a id="entry-7-3-3-bc-rtt-integer"></a>
+
+**`bc_rtt(<unit>): integer`**
+
+```haproxy
+bc_rtt(<unit>): integer
+```
+
+Returns the Round Trip Time (RTT) measured by the kernel for the backend connection. `<unit>` is
+facultative, by default the unit is milliseconds. `<unit>` can be set to "ms" for milliseconds or
+"us" for microseconds. If the server connection is not established, if the connection is not TCP or
+if the operating system does not support TCP_INFO, for example Linux kernels before 2.4, the sample
+fetch fails.
+
+<a id="entry-7-3-3-bc-rttvar-integer"></a>
+
+**`bc_rttvar(<unit>): integer`**
+
+```haproxy
+bc_rttvar(<unit>): integer
+```
+
+Returns the Round Trip Time (RTT) variance measured by the kernel for the backend connection.
+`<unit>` is facultative, by default the unit is milliseconds. `<unit>` can be set to "ms" for
+milliseconds or "us" for microseconds. If the server connection is not established, if the
+connection is not TCP or if the operating system does not support TCP_INFO, for example Linux
+kernels before 2.4, the sample fetch fails.
+
+bc_settings_streams_limit: integer Returns the maximum number of streams allowed on the backend
+connection. For TCP and HTTP/1.1 connections, it is always 1. For other protocols, it depends on the
+settings negotiated with the server.
+
+bc_src: ip This is the source ip address of the connection on the server side, which is the server
+address HAProxy connected from. It is of type IP and works on both IPv4 and IPv6 tables. On IPv6
+tables, IPv4 addresses are mapped to their IPv6 equivalent, according to RFC 4291.
+
+bc_src_port: integer Returns an integer value corresponding to the TCP source port of the connection
+on the server side, which is the port HAProxy connected from.
+
+bc_srv_queue: integer Number of streams de-queued while waiting for a connection slot on the target
+server. This is the equivalent of %sq in the log-format.
+
+be_id: integer Returns an integer containing the current backend's id. It can be used in frontends
+with responses to check which backend processed the request. If used in a frontend and no backend
+was used, it returns the current frontend's id. It can also be used in a tcp-check or an http-check
+ruleset.
+
+be_connect_timeout: integer Returns the configuration value in millisecond for the connect timeout
+of the current backend. This timeout can be overwritten by a "set-timeout" rule. See also the
+"cur_connect_timeout".
+
+be_name: string Returns a string containing the current backend's name. It can be used in frontends
+with responses to check which backend processed the request. If used in a frontend and no backend
+was used, it returns the current frontend's name. It can also be used in a tcp-check or an
+http-check ruleset.
+
+be_queue_timeout: integer Returns the configuration value in millisecond for the queue timeout of
+the current backend. This timeout can be overwritten by a "set-timeout" rule. See also the
+"cur_queue_timeout".
+
+be_server_timeout: integer Returns the configuration value in millisecond for the server timeout of
+the current backend. This timeout can be overwritten by a "set-timeout" rule. See also the
+"cur_server_timeout".
+
+be_tarpit_timeout: integer Returns the configuration value in millisecond for the queue timeout of
+the current backend. This timeout can be overwritten by a "set-timeout" rule. See also the
+"cur_tarpit_timeout".
+
+be_tunnel_timeout: integer Returns the configuration value in millisecond for the tunnel timeout of
+the current backend. This timeout can be overwritten by a "set-timeout" rule. See also the
+"cur_tunnel_timeout".
+
+bytes_in: integer See "req.bytes_in".
+
+bytes_out: integer See "res.bytes_in".
+
+cur_connect_timeout: integer Returns the currently applied connect timeout in millisecond for the
+stream. In the default case, this will be equal to be_connect_timeout unless a "set-timeout" rule
+has been applied. See also "be_connect_timeout".
+
+cur_client_timeout: integer Returns the currently applied client timeout in millisecond for the
+stream. In the default case, this will be equal to fe_client_timeout unless a "set-timeout" rule has
+been applied. See also "fe_client_timeout".
+
+cur_queue_timeout: integer Returns the currently applied queue timeout in millisecond for the
+stream. In the default case, this will be equal to be_queue_timeout unless a "set-timeout" rule has
+been applied. See also "be_queue_timeout".
+
+cur_server_timeout: integer Returns the currently applied server timeout in millisecond for the
+stream. In the default case, this will be equal to be_server_timeout unless a "set-timeout" rule has
+been applied. See also "be_server_timeout".
+
+cur_tarpit_timeout: integer Returns the currently applied tarpit timeout in millisecond for the
+stream. In the default case, this will be equal to fe_tarpit_timeout/be_tarpit_timeout unless a
+"set-timeout" rule has been applied. See also "fe_tarpit_timeout" and "be_tarpit_timeout".
+
+cur_tunnel_timeout: integer Returns the currently applied tunnel timeout in millisecond for the
+stream. In the default case, this will be equal to be_tunnel_timeout unless a "set-timeout" rule has
+been applied. See also "be_tunnel_timeout".
+
+dst: ip This is the destination IP address of the connection on the client side, which is the
+address the client connected to. Any tcp/http rules may alter this address. It can be useful when
+running in transparent mode. It is of type IP and works on both IPv4 and IPv6 tables. On IPv6
+tables, IPv4 address is mapped to its IPv6 equivalent, according to RFC 4291. When the incoming
+connection passed through address translation or redirection involving connection tracking, the
+original destination address before the redirection will be reported. On Linux systems, the source
+and destination may seldom appear reversed if the nf_conntrack_tcp_loose sysctl is set, because a
+late response may reopen a timed out connection and switch what is believed to be the source and the
+destination.
+
+dst_conn: integer Returns an integer value corresponding to the number of currently established
+connections on the same socket including the one being evaluated. It is normally used with ACLs but
+can as well be used to pass the information to servers in an HTTP header or in logs. It can be used
+to either return a sorry page before hard-blocking, or to use a specific backend to drain new
+requests when the socket is considered saturated. This offers the ability to assign different limits
+to different listening ports or addresses. See also the "fe_conn" and "be_conn" fetches.
+
+dst_is_local: boolean Returns true if the destination address of the incoming connection is local to
+the system, or false if the address doesn't exist on the system, meaning that it was intercepted in
+transparent mode. It can be useful to apply certain rules by default to forwarded traffic and other
+rules to the traffic targeting the real address of the machine. For example the stats page could be
+delivered only on this address, or SSH access could be locally redirected. Please note that the
+check involves a few system calls, so it's better to do it only once per connection.
+
+dst_port: integer Returns an integer value corresponding to the destination TCP port of the
+connection on the client side, which is the port the client connected to. Any tcp/http rules may
+alter this address. This might be used when running in transparent mode, when assigning dynamic
+ports to some clients for a whole application session, to stick all users to a same server, or to
+pass the destination port information to a server using an HTTP header.
+
+fc.timer.handshake: integer Total time to accept tcp connection and execute handshakes for low level
+protocols. Currently, these protocols are proxy-protocol and SSL. This is the equivalent of %Th in
+the log-format. This is reported in milliseconds (ms). For more information see [Section 8.4](/haproxy/configuration-logging/#section-8-4) "Timing
+events"
+
+fc.timer.total: integer Total stream duration time, between the moment the proxy accepted it and the
+moment both ends were closed. This is the equivalent of %Tt in the log-format. This is reported in
+milliseconds (ms). For more information see [Section 8.4](/haproxy/configuration-logging/#section-8-4) "Timing events"
+
+fc_dst: ip This is the original destination IP address of the connection on the client side. Only
+"tcp-request connection" rules may alter this address. See "dst" for details.
+
+fc_dst_is_local: boolean Returns true if the original destination address of the incoming connection
+is local to the system, or false if the address doesn't exist on the system. See "dst_is_local" for
+details.
+
+fc_dst_port: integer Returns an integer value corresponding to the original destination TCP port of
+the connection on the client side. Only "tcp-request connection" rules may alter this address. See
+"dst-port" for details.
+
+fc_err: integer Returns the ID of the error that might have occurred on the current connection. Any
+strictly positive value of this fetch indicates that the connection did not succeed and would result
+in an error log being output (as described in [section 8.2.5](/haproxy/configuration-logging/#section-8-2-5)). See the "fc_err_str" fetch for a full
+list of error codes and their corresponding error message.
+
+fc_err_name: string Returns the internal error name describing what problem happened on the frontend
+connection, resulting in a connection failure. This string is made of a single word and is empty
+when no error is present. It corresponds to the "name" column in the table presented in the
+"fc_err_str" keyword.
+
+fc_err_str: string Returns an error message describing what problem happened on the current
+connection, resulting in a connection failure. This string corresponds to the "message" part of the
+error log format (see [section 8.2.5](/haproxy/configuration-logging/#section-8-2-5)). See below for a full list of error codes and their
+corresponding error messages:
+
+```text
+  +----+------------------+-------------------------------------------------------------------------+
+  | ID | name             | message                                                                 |
+  +----+------------------+-------------------------------------------------------------------------+
+  | 0  | -                | "Success"                                                               |
+  | 1  | CONF_FDLIM       | "Reached configured maxconn value"                                      |
+  | 2  | PROC_FDLIM       | "Too many sockets on the process"                                       |
+  | 3  | SYS_FDLIM        | "Too many sockets on the system"                                        |
+  | 4  | SYS_MEMLIM       | "Out of system buffers"                                                 |
+  | 5  | NOPROTO          | "Protocol or address family not supported"                              |
+  | 6  | SOCK_ERR         | "General socket error"                                                  |
+  | 7  | PORT_RANGE       | "Source port range exhausted"                                           |
+  | 8  | CANT_BIND        | "Can't bind to source address"                                          |
+  | 9  | FREE_PORTS       | "Out of local source ports on the system"                               |
+  | 10 | ADDR_INUSE       | "Local source address already in use"                                   |
+  | 11 | PRX_EMPTY        | "Connection closed while waiting for PROXY protocol header"             |
+  | 12 | PRX_ABORT        | "Connection error while waiting for PROXY protocol header"              |
+  | 13 | PRX_TIMEOUT      | "Timeout while waiting for PROXY protocol header"                       |
+  | 14 | PRX_TRUNCATED    | "Truncated PROXY protocol header received"                              |
+  | 15 | PRX_NOT_HDR      | "Received something which does not look like a PROXY protocol header"   |
+  | 16 | PRX_BAD_HDR      | "Received an invalid PROXY protocol header"                             |
+  | 17 | PRX_BAD_PROTO    | "Received an unhandled protocol in the PROXY protocol header"           |
+  | 18 | CIP_EMPTY        | "Connection closed while waiting for NetScaler Client IP header"        |
+  | 19 | CIP_ABORT        | "Connection error while waiting for NetScaler Client IP header"         |
+  | 20 | CIP_TIMEOUT      | "Timeout while waiting for a NetScaler Client IP header"                |
+  | 21 | CIP_TRUNCATED    | "Truncated NetScaler Client IP header received"                         |
+  | 22 | CIP_BAD_MAGIC    | "Received an invalid NetScaler Client IP magic number"                  |
+  | 23 | CIP_BAD_PROTO    | "Received an unhandled protocol in the NetScaler Client IP header"      |
+  | 24 | SSL_EMPTY        | "Connection closed during SSL handshake"                                |
+  | 25 | SSL_ABORT        | "Connection error during SSL handshake"                                 |
+  | 26 | SSL_TIMEOUT      | "Timeout during SSL handshake"                                          |
+  | 27 | SSL_TOO_MANY     | "Too many SSL connections"                                              |
+  | 28 | SSL_NO_MEM       | "Out of memory when initializing an SSL connection"                     |
+  | 29 | SSL_RENEG        | "Rejected a client-initiated SSL renegotiation attempt"                 |
+  | 30 | SSL_CA_FAIL      | "SSL client CA chain cannot be verified"                                |
+  | 31 | SSL_CRT_FAIL     | "SSL client certificate not trusted"                                    |
+  | 32 | SSL_MISMATCH     | "Server presented an SSL certificate different from the configured one" |
+  | 33 | SSL_MISMATCH_SNI | "Server presented an SSL certificate different from the expected one"   |
+  | 34 | SSL_HANDSHAKE    | "SSL handshake failure"                                                 |
+  | 35 | SSL_HANDSHAKE_HB | "SSL handshake failure after heartbeat"                                 |
+  | 36 | SSL_KILLED_HB    | "Stopped a TLSv1 heartbeat attack (CVE-2014-0160)"                      |
+  | 37 | SSL_NO_TARGET    | "Attempt to use SSL on an unknown target (internal error)"              |
+  | 38 | SSL_EARLY_FAILED | "Server refused early data"                                             |
+  | 39 | SOCKS4_SEND      | "SOCKS4 Proxy write error during handshake"                             |
+  | 40 | SOCKS4_RECV      | "SOCKS4 Proxy read error during handshake"                              |
+  | 41 | SOCKS4_DENY      | "SOCKS4 Proxy deny the request"                                         |
+  | 42 | SOCKS4_ABORT     | "SOCKS4 Proxy handshake aborted by server"                              |
+  | 43 | SSL_FATAL        | "SSL fatal error"                                                       |
+  | 44 | REVERSE          | "Reverse connect failure"                                               |
+  | 45 | POLLERR          | "Poller reported POLLERR"                                               |
+  | 46 | EREFUSED         | "ECONNREFUSED returned by OS"                                           |
+  | 47 | ERESET           | "ECONNRESET returned by OS"                                             |
+  | 48 | EUNREACH         | "ENETUNREACH returned by OS"                                            |
+  | 49 | ENOMEM           | "ENOMEM returned by OS"                                                 |
+  | 50 | EBADF            | "EBADF returned by OS"                                                  |
+  | 51 | EFAULT           | "EFAULT returned by OS"                                                 |
+  | 52 | EINVAL           | "EINVAL returned by OS"                                                 |
+  | 53 | ENCONN           | "ENCONN returned by OS"                                                 |
+  | 54 | ENSOCK           | "ENSOCK returned by OS"                                                 |
+  | 55 | ENOBUFS          | "ENOBUFS returned by OS"                                                |
+  | 56 | EPIPE            | "EPIPE returned by OS"                                                  |
+  +----+------------------+-------------------------------------------------------------------------+
+```
+
+fc_fackets: integer Returns the fack counter measured by the kernel for the client connection. If
+the server connection is not established, if the connection is not TCP or if the operating system
+does not support TCP_INFO, for example Linux kernels before 2.4, the sample fetch fails.
+
+fc_glitches: integer Returns the number of protocol glitches counted on the frontend connection.
+These generally cover protocol violations as well as small anomalies that generally indicate a bogus
+or misbehaving client that may cause trouble in the infrastructure, such as excess of errors in the
+logs, or many connections being aborted early, inducing frequent TLS renegotiations. These may also
+be caused by too large requests that cannot fit into a single buffer, explaining HTTP 400 errors.
+Ideally this number should remain zero, though it may be possible that some browsers playing with
+the protocol boundaries trigger it once in a while. These values should normally not be considered
+as alarming (especially small ones), though a sudden jump may indicate an anomaly somewhere. Large
+values (i.e. hundreds to thousands per connection, or as many as the requests) may indicate a
+purposely built client that is trying to fingerprint or attack the protocol stack. Not all protocol
+multiplexers measure this metric, and the only way to get more details about the events is to enable
+traces to capture all exchanges.
+
+fc_http_major: integer Reports the front connection's HTTP major version encoding, which may be 1
+for HTTP/0.9 to HTTP/1.1 or 2 for HTTP/2. Note, this is based on the on-wire encoding and not on the
+version present in the request header.
+
+fc_lost: integer If the connection is not TCP, nor QUIC, the sample fetch fails. For QUIC, returns
+the number of lost QUIC packets by the client connection. For TCP, returns the lost counter measured
+by the kernel for the client connection. If the server connection is not established, or if the
+operating system does not support TCP_INFO, for example Linux kernels before 2.4, the sample fetch
+fails.
+
+fc_nb_streams: integer Returns the number of streams opened on the frontend connection.
+
+fc_pp_authority: string Returns the first authority TLV sent by the client in the PROXY protocol
+header, if any.
+
+<a id="entry-7-3-3-fc-pp-tlv-string"></a>
+
+**`fc_pp_tlv(<id>): string`**
+
+```haproxy
+fc_pp_tlv(<id>): string
+```
+
+Returns the TLV value for the given TLV ID. The ID must either be a numeric value between 0 and 255
+or one of the following supported symbolic names that correspond to the TLV constant suffixes in the
+PPv2 spec: "ALPN": PP2_TYPE_ALPN, "AUTHORITY": PP2_TYPE_AUTHORITY, "CRC32": PP2_TYPE_CRC32C,
+"NETNS": PP2_TYPE_NETNS, "NOOP: PP2_TYPE_NOOP", "SSL": PP2_TYPE_SSL, "SSL_CIPHER":
+PP2_SUBTYPE_SSL_CIPHER, "SSL_CN": PP2_SUBTYPE_SSL_CN, "SSL_KEY_ALG": PP2_SUBTYPE_SSL_KEY_ALG,
+"SSL_SIG_ALG": PP2_SUBTYPE_SSL_SIG_ALG, "SSL_VERSION": PP2_SUBTYPE_SSL_VERSION, "UNIQUE_ID":
+PP2_TYPE_UNIQUE_ID.
+
+The received value must be smaller or equal to 1024 bytes. This is done to prevent potential DoS
+attacks. Values smaller or equal to 256 bytes will be able to be memory pooled. Therefore, try to
+restrict the length of sent values to 256 bytes for optimal performance.
+
+Note that unlike fc_pp_authority and fc_pp_unique_id, fc_pp_tlv is able to iterate over all
+occurrences of a requested TLV in case there are duplicate TLV IDs. The order of iteration matches
+the position in the PROXY protocol header. However, relying on duplicates should mostly be avoided
+as TLVs are typically assumed to be unique. Generally, finding duplicated TLV IDs indicates an error
+on the sender side of the PROXY protocol header.
+
+fc_pp_unique_id: string Returns the first unique ID TLV sent by the client in the PROXY protocol
+header, if any.
+
+fc_rcvd_proxy: boolean Returns true if the client initiated the connection with a PROXY protocol
+header.
+
+fc_reordering: integer If the connection is not TCP, nor QUIC, the sample fetch fails. For QUIC,
+return the number of QUIC reordered packets for the client connection. For TCP, returns the
+reordering counter measured by the kernel for the client connection. If the server connection is not
+established, or if the operating system does not support TCP_INFO, for example Linux kernels before
+2.4, the sample fetch fails.
+
+fc_retrans: integer Returns the retransmits counter measured by the kernel for the client
+connection. If the server connection is not established, if the connection is not TCP or if the
+operating system does not support TCP_INFO, for example Linux kernels before 2.4, the sample fetch
+fails.
+
+<a id="entry-7-3-3-fc-rtt-integer"></a>
+
+**`fc_rtt(<unit>): integer`**
+
+```haproxy
+fc_rtt(<unit>): integer
+```
+
+If the connection is not TCP, nor QUIC, the sample fetch fails. For QUIC, returns Smoothed Round
+Trip Time for the client connection. For TCP, returns the Round Trip Time (RTT) measured by the
+kernel for the client connection. `<unit>` is facultative, by default the unit is milliseconds.
+`<unit>` can be set to "ms" for milliseconds or "us" for microseconds. If the server connection is
+not established, or if the operating system does not support TCP_INFO, for example Linux kernels
+before 2.4, the sample fetch fails.
+
+<a id="entry-7-3-3-fc-rttvar-integer"></a>
+
+**`fc_rttvar(<unit>): integer`**
+
+```haproxy
+fc_rttvar(<unit>): integer
+```
+
+If the connection is not TCP, nor QUIC, the sample fetch fails. For QUIC, returns Smoothed Round
+Trip Time variance for the client connection. For TCP, returns the Round Trip Time (RTT) variance
+measured by the kernel for the client connection. `<unit>` is facultative, by default the unit is
+milliseconds. `<unit>` can be set to "ms" for milliseconds or "us" for microseconds. If the server
+connection is not established, or if the operating system does not support TCP_INFO, for example
+Linux kernels before 2.4, the sample fetch fails.
+
+fc_sacked: integer Returns the sacked counter measured by the kernel for the client connection. If
+the server connection is not established, if the connection is not TCP or if the operating system
+does not support TCP_INFO, for example Linux kernels before 2.4, the sample fetch fails.
+
+fc_saved_syn: binary Returns a copy of the saved SYN packet that was preserved by the system during
+the incoming connection setup. This requires that the "tcp-ss" option was present on the "bind"
+line, and a Linux kernel 4.3 minimum. When "tcp-ss" is set to 1, only the IP and TCP headers are
+present. When "tcp-ss" is set to 2, then the Ethernet header is also present before the IP header,
+and may be used to control or log source MAC address or VLANs for example. Note that there is no
+guarantee that a SYN will be saved. For example, if SYN cookies are used, the SYN packet is not
+preserved and the connection is established on the matching ACK packet. In addition, the system
+doesn't guarantee to preserve the copy beyond the first read. As such it is strongly recommended to
+copy it into a variable in scope "sess" from a "tcp-request connection" rule and only use that
+variable for further manipulations. It is worth noting that on the loopback interface a dummy
+14-byte ethernet header is constructed by the system where both the source and destination addresses
+are zero, and only the protocol is set. It is convenient to convert such samples to hexadecimal
+using the "hex" converter during debugging. Example (fields manually separated and commented below):
+
+```shell
+frontend test
+    mode http
+    bind :::4445 tcp-ss 2
+    tcp-request connection set-var(sess.syn) fc_saved_syn
+    http-request return status 200 content-type text/plain \
+                 lf-string "%[var(sess.syn),hex]\n"
+
+$ curl '0:4445'
+000000000000 000000000000 0800 \  # MAC_DST MAC_SRC PROTO=IPv4
+4500003C0A65400040063255       \  # IPv4 header, proto=6 (TCP)
+7F000001 7F000001              \  # IP_SRC=127.0.0.1 IP_DST=127.0.0.1
+E1F2 115D 01AF4E3E 00000000    \  # TCP_SPORT=57842 TCP_DPORT=4445, SEQ
+A0 02 FFD7 FE300000            \  # OPT_LEN=20 TCP_FLAGS=SYN WIN=65495
+0204FFD70402080A01C2A71A0000000001030307 # MSS=65495, TS, SACK, WSCALE 7
+
+$ curl '[::1]:4445'
+000000000000 000000000000 86DD   \ # MAC_DST MAC_SRC PROTO=IPv6
+6008018F00280640                 \ # IPv6 header, proto=6 (TCP)
+00000000000000000000000000000001 \ # SRC=::1
+00000000000000000000000000000001 \ # DST=::1
+9758 115D B5511F5D 00000000      \ # TCP_SPORT=38744 TCP_DPORT=4445, SEQ
+A0 02 FFC4 00300000              \  # OPT_LEN=20 TCP_FLAGS=SYN WIN=65476
+0204FFC40402080A9C231D680000000001030307 # MSS=65476, TS, SACK, WSCALE 7
+```
+
+The "bytes()" converter helps extract specific fields from the packet. The be2dec() also permits to
+read chunks and emit them in integer form. For more accurate extraction, please refer to the
+"eth.XXX" converters.
+
+Example with IPv4 input:
+
+```shell
+frontend test
+    mode http
+    bind :4445 tcp-ss 2
+    tcp-request connection set-var(sess.syn) fc_saved_syn
+    http-request return status 200 content-type text/plain lf-string \
+                 "mac_dst=%[var(sess.syn),eth.dst,hex] \
+                  mac_src=%[var(sess.syn),eth.src,hex] \
+                  proto=%[var(sess.syn),eth.proto,bytes(6),be2hex(,2)] \
+                  ipv4h=%[var(sess.syn),eth.data,bytes(0,12),hex] \
+                  ipv4_src=%[var(sess.syn),eth.data,ip.src] \
+                  ipv4_dst=%[var(sess.syn),eth.data,ip.dst] \
+                  tcp_spt=%[var(sess.syn),eth.data,ip.data,tcp.src] \
+                  tcp_dpt=%[var(sess.syn),eth.data,ip.data,tcp.dst] \
+                  tcp_win=%[var(sess.syn),eth.data,ip.data,tcp.win] \
+                  tcp_opt=%[var(sess.syn),eth.data,ip.data,bytes(20),hex]\n"
+
+$ curl '0:4445'
+mac_dst=000000000000 mac_src=000000000000 proto=0800 \
+ipv4h=4500003CC9B7400040067302 ipv4_src=127.0.0.1 ipv4_dst=127.0.0.1 \
+tcp_spt=43970 tcp_dpt=4445 tcp_win=65495 \
+tcp_opt=0204FFD70402080A01DC0D410000000001030307
+```
+
+See also the "set-var" action, the "be2dec", "bytes", "hex", "eth.XXX", "ip.XXX", and "tcp.XXX"
+converters.
+
+fc_settings_streams_limit: integer Returns the maximum number of streams allowed on the frontend
+connection. For TCP and HTTP/1.1 connections, it is always 1. For other protocols, it depends on the
+settings negotiated with the client.
+
+fc_src: ip This is the original source IP address of the connection on the client side Only
+"tcp-request connection" rules may alter this address. See "src" for details.
+
+fc_src_is_local: boolean Returns true if the source address of incoming connection is local to the
+system, or false if the address doesn't exist on the system. See "src_is_local" for details.
+
+fc_src_port: integer Returns an integer value corresponding to the TCP source port of the connection
+on the client side. Only "tcp-request connection" rules may alter this address. See "src-port" for
+details.
+
+fc_unacked: integer Returns the unacked counter measured by the kernel for the client connection. If
+the server connection is not established, if the connection is not TCP or if the operating system
+does not support TCP_INFO, for example Linux kernels before 2.4, the sample fetch fails.
+
+fe_client_timeout: integer Returns the configuration value in millisecond for the client timeout of
+the current frontend. This timeout can be overwritten by a "set-timeout" rule.
+
+fe_defbe: string Returns a string containing the frontend's default backend name. It can be used in
+frontends to check which backend will handle requests by default.
+
+fe_id: integer Returns an integer containing the current frontend's id. It can be used in backends
+to check from which frontend it was called, or to stick all users coming via a same frontend to the
+same server.
+
+fe_name: string Returns a string containing the current frontend's name. It can be used in backends
+to check from which frontend it was called, or to stick all users coming via a same frontend to the
+same server.
+
+fe_tarpit_timeout: integer Returns the configuration value in millisecond for the tarpit timeout of
+the current frontend. This timeout can be overwritten by a "set-timeout" rule.
+
+req.bytes_in: integer This returns the number of bytes received from the client. The value
+corresponds to what was received by HAProxy, including some headers and some internal encoding
+overhead. Request compression does not affect the value reported here.
+
+req.bytes_out: integer This returns the number of bytes sent to the server. The value corresponds to
+what was sent by HAProxy, including some headers and some internal encoding overhead. Request
+compression affects the value reported here.
+
+res.bytes_in: integer This returns the number of bytes received from the server. The value
+corresponds to what was received by HAProxy, including some headers and some internal encoding
+overhead. Response compression does not affect the value reported here.
+
+res.bytes_out: integer This returns the number of bytes sent to the client. The value corresponds to
+what was sent by HAProxy, including some headers and some internal encoding overhead. Response
+compression affects the value reported here.
+
+res.timer.data: integer this is the total transfer time of the response payload till the last byte
+sent to the client. In HTTP it starts after the last response header (after Tr). This is the
+equivalent of %Td in the log-format and is reported in milliseconds (ms). For more information see
+[Section 8.4](/haproxy/configuration-logging/#section-8-4) "Timing events"
+
+<a id="entry-7-3-3-sc-bytes-in-rate-integer"></a>
+
+**`sc_bytes_in_rate(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_bytes_in_rate(<ctr>[,<table>]): integer
+sc0_bytes_in_rate([<table>]): integer
+sc1_bytes_in_rate([<table>]): integer
+sc2_bytes_in_rate([<table>]): integer
+```
+
+Returns the average client-to-server bytes rate from the currently tracked counters, measured in
+amount of bytes over the period configured in the table. See also "table_bytes_in_rate".
+
+<a id="entry-7-3-3-sc-bytes-out-rate-integer"></a>
+
+**`sc_bytes_out_rate(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_bytes_out_rate(<ctr>[,<table>]): integer
+sc0_bytes_out_rate([<table>]): integer
+sc1_bytes_out_rate([<table>]): integer
+sc2_bytes_out_rate([<table>]): integer
+```
+
+Returns the average server-to-client bytes rate from the currently tracked counters, measured in
+amount of bytes over the period configured in the table. See also "table_bytes_out_rate".
+
+<a id="entry-7-3-3-sc-clr-gpc-integer"></a>
+
+**`sc_clr_gpc(<idx>,<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_clr_gpc(<idx>,<ctr>[,<table>]): integer
+```
+
+Clears the General Purpose Counter at the index `<idx>` of the array associated to the designated
+tracked counter of ID `<ctr>` from current proxy's stick table or from the designated stick-table
+`<table>`, and returns its previous value. `<idx>` is an integer between 0 and 99 and `<ctr>` an
+integer between 0 and 2. Before the first invocation, the stored value is zero, so first invocation
+will always return zero. This fetch applies only to the 'gpc' array data_type (and not to the legacy
+'gpc0' nor 'gpc1' data_types).
+
+<a id="entry-7-3-3-sc-clr-gpc0-integer"></a>
+
+**`sc_clr_gpc0(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_clr_gpc0(<ctr>[,<table>]): integer
+sc0_clr_gpc0([<table>]): integer
+sc1_clr_gpc0([<table>]): integer
+sc2_clr_gpc0([<table>]): integer
+```
+
+Clears the first General Purpose Counter associated to the currently tracked counters, and returns
+its previous value. Before the first invocation, the stored value is zero, so first invocation will
+always return zero. This is typically used as a second ACL in an expression in order to mark a
+connection when a first ACL was verified:
+
+Example:
+
+```shell
+# block if 5 consecutive requests continue to come faster than 10 sess
+# per second, and reset the counter as soon as the traffic slows down.
+acl abuse sc0_http_req_rate gt 10
+acl kill  sc0_inc_gpc0 gt 5
+acl save  sc0_clr_gpc0 ge 0
+tcp-request connection accept if !abuse save
+tcp-request connection reject if abuse kill
+```
+
+<a id="entry-7-3-3-sc-clr-gpc1-integer"></a>
+
+**`sc_clr_gpc1(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_clr_gpc1(<ctr>[,<table>]): integer
+sc0_clr_gpc1([<table>]): integer
+sc1_clr_gpc1([<table>]): integer
+sc2_clr_gpc1([<table>]): integer
+```
+
+Clears the second General Purpose Counter associated to the currently tracked counters, and returns
+its previous value. Before the first invocation, the stored value is zero, so first invocation will
+always return zero. This is typically used as a second ACL in an expression in order to mark a
+connection when a first ACL was verified.
+
+<a id="entry-7-3-3-sc-conn-cnt-integer"></a>
+
+**`sc_conn_cnt(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_conn_cnt(<ctr>[,<table>]): integer
+sc0_conn_cnt([<table>]): integer
+sc1_conn_cnt([<table>]): integer
+sc2_conn_cnt([<table>]): integer
+```
+
+Returns the cumulative number of incoming connections from currently tracked counters. See also
+"table_conn_cnt".
+
+<a id="entry-7-3-3-sc-conn-cur-integer"></a>
+
+**`sc_conn_cur(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_conn_cur(<ctr>[,<table>]): integer
+sc0_conn_cur([<table>]): integer
+sc1_conn_cur([<table>]): integer
+sc2_conn_cur([<table>]): integer
+```
+
+Returns the current amount of concurrent connections tracking the same tracked counters. This number
+is automatically incremented when tracking begins and decremented when tracking stops. See also
+"table_conn_cur".
+
+<a id="entry-7-3-3-sc-conn-rate-integer"></a>
+
+**`sc_conn_rate(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_conn_rate(<ctr>[,<table>]): integer
+sc0_conn_rate([<table>]): integer
+sc1_conn_rate([<table>]): integer
+sc2_conn_rate([<table>]): integer
+```
+
+Returns the average connection rate from the currently tracked counters, measured in amount of
+connections over the period configured in the table. See also "table_conn_rate".
+
+<a id="entry-7-3-3-sc-get-gpc-integer"></a>
+
+**`sc_get_gpc(<idx>,<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_get_gpc(<idx>,<ctr>[,<table>]): integer
+```
+
+Returns the value of the General Purpose Counter at the index `<idx>` in the GPC array and
+associated to the currently tracked counter of ID `<ctr>` from the current proxy's stick-table or
+from the designated stick-table `<table>`. `<idx>` is an integer between 0 and 99 and `<ctr>` an
+integer between 0 and 2. If there is not gpc stored at this index, zero is returned. This fetch
+applies only to the 'gpc' array data_type (and not to the legacy 'gpc0' nor 'gpc1' data_types). See
+also "table_gpc" and "sc_inc_gpc".
+
+<a id="entry-7-3-3-sc-get-gpc0-integer"></a>
+
+**`sc_get_gpc0(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_get_gpc0(<ctr>[,<table>]): integer
+sc0_get_gpc0([<table>]): integer
+sc1_get_gpc0([<table>]): integer
+sc2_get_gpc0([<table>]): integer
+```
+
+Returns the value of the first General Purpose Counter associated to the currently tracked counters.
+See also "table_gpc0" and sc/sc0/sc1/sc2_inc_gpc0.
+
+<a id="entry-7-3-3-sc-get-gpc1-integer"></a>
+
+**`sc_get_gpc1(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_get_gpc1(<ctr>[,<table>]): integer
+sc0_get_gpc1([<table>]): integer
+sc1_get_gpc1([<table>]): integer
+sc2_get_gpc1([<table>]): integer
+```
+
+Returns the value of the second General Purpose Counter associated to the currently tracked
+counters. See also "table_gpc1" and sc/sc0/sc1/sc2_inc_gpc1.
+
+<a id="entry-7-3-3-sc-get-gpt-integer"></a>
+
+**`sc_get_gpt(<idx>,<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_get_gpt(<idx>,<ctr>[,<table>]): integer
+```
+
+Returns the value of the first General Purpose Tag at the index `<idx>` of the array associated to
+the tracked counter of ID `<ctr>` and from the current proxy's sitck-table or the designated
+stick-table `<table>`. `<idx>` is an integer between 0 and 99 and `<ctr>` an integer between 0 and
+2. If there is no GPT stored at this index, zero is returned. This fetch applies only to the 'gpt'
+array data_type (and not on the legacy 'gpt0' data-type). See also "table_gpt".
+
+<a id="entry-7-3-3-sc-get-gpt0-integer"></a>
+
+**`sc_get_gpt0(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_get_gpt0(<ctr>[,<table>]): integer
+sc0_get_gpt0([<table>]): integer
+sc1_get_gpt0([<table>]): integer
+sc2_get_gpt0([<table>]): integer
+```
+
+Returns the value of the first General Purpose Tag associated to the currently tracked counters. See
+also "table_gpt0".
+
+<a id="entry-7-3-3-sc-glitch-cnt-integer"></a>
+
+**`sc_glitch_cnt(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_glitch_cnt(<ctr>[,<table>]): integer
+sc0_glitch_cnt([<table>]): integer
+sc1_glitch_cnt([<table>]): integer
+sc2_glitch_cnt([<table>]): integer
+```
+
+Returns the cumulative number of front connection glitches that were observed on connections
+associated with the currently tracked counters. Usually these result in requests or connections to
+be aborted so the returned value will often correspond to past connections. There is no good nor bad
+value, but a poor quality client may occasionally cause a few glitches per connection, while a very
+bogus or malevolent client may quickly cause thousands of events to be added on a connection. See
+also fc_glitches for the number affecting the current connection, src_glitch_cnt to look them up per
+source, and sc_glitch_rate for the event rate measurements.
+
+<a id="entry-7-3-3-sc-glitch-rate-integer"></a>
+
+**`sc_glitch_rate(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_glitch_rate(<ctr>[,<table>]): integer
+sc0_glitch_rate([<table>]): integer
+sc1_glitch_rate([<table>]): integer
+sc2_glitch_rate([<table>]): integer
+```
+
+Returns the average rate at which front connection glitches were observed for the currently tracked
+counters, measured in amount of events over the period configured in the table. Usually these
+glitches result in requests or connections to be aborted so the returned value will often be related
+to past connections. There is no good nor bad value, but a poor quality client may occasionally
+cause a few glitches per connection, hence a low rate is generally expected. However, a very bogus
+or malevolent client may quickly cause thousands of events to be added per connection, and maintain
+a high rate here. See also "table_glitch_rate" and "sc_glitch_cnt".
+
+<a id="entry-7-3-3-sc-gpc-rate-integer"></a>
+
+**`sc_gpc_rate(<idx>,<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_gpc_rate(<idx>,<ctr>[,<table>]): integer
+```
+
+Returns the average increment rate of the General Purpose Counter at the index `<idx>` of the array
+associated to the tracked counter of ID `<ctr>` from the current proxy's table or from the
+designated stick-table `<table>`. It reports the frequency which the gpc counter was incremented
+over the configured period. `<idx>` is an integer between 0 and 99 and `<ctr>` an integer between 0
+and 2. Note that the 'gpc_rate' counter array must be stored in the stick-table for a value to be
+returned, as 'gpc' only holds the event count. This fetch applies only to the 'gpc_rate' array
+data_type (and not to the legacy 'gpc0_rate' nor 'gpc1_rate' data_types). See also "table_gpc_rate",
+"sc_get_gpc", and "sc_inc_gpc".
+
+<a id="entry-7-3-3-sc-gpc0-rate-integer"></a>
+
+**`sc_gpc0_rate(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_gpc0_rate(<ctr>[,<table>]): integer
+sc0_gpc0_rate([<table>]): integer
+sc1_gpc0_rate([<table>]): integer
+sc2_gpc0_rate([<table>]): integer
+```
+
+Returns the average increment rate of the first General Purpose Counter associated to the currently
+tracked counters. It reports the frequency which the gpc0 counter was incremented over the
+configured period. See also src_gpc0_rate, sc/sc0/sc1/sc2_get_gpc0, and sc/sc0/sc1/sc2_inc_gpc0.
+Note that the "gpc0_rate" counter must be stored in the stick-table for a value to be returned, as
+"gpc0" only holds the event count.
+
+<a id="entry-7-3-3-sc-gpc1-rate-integer"></a>
+
+**`sc_gpc1_rate(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_gpc1_rate(<ctr>[,<table>]): integer
+sc0_gpc1_rate([<table>]): integer
+sc1_gpc1_rate([<table>]): integer
+sc2_gpc1_rate([<table>]): integer
+```
+
+Returns the average increment rate of the second General Purpose Counter associated to the currently
+tracked counters. It reports the frequency which the gpc1 counter was incremented over the
+configured period. See also src_gpc1_rate, sc/sc0/sc1/sc2_get_gpc1, and sc/sc0/sc1/sc2_inc_gpc1.
+Note that the "gpc1_rate" counter must be stored in the stick-table for a value to be returned, as
+"gpc1" only holds the event count.
+
+<a id="entry-7-3-3-sc-http-err-cnt-integer"></a>
+
+**`sc_http_err_cnt(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_http_err_cnt(<ctr>[,<table>]): integer
+sc0_http_err_cnt([<table>]): integer
+sc1_http_err_cnt([<table>]): integer
+sc2_http_err_cnt([<table>]): integer
+```
+
+Returns the cumulative number of HTTP errors from the currently tracked counters. This includes the
+both request errors and 4xx error responses. See also "table_http_err_cnt".
+
+<a id="entry-7-3-3-sc-http-err-rate-integer"></a>
+
+**`sc_http_err_rate(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_http_err_rate(<ctr>[,<table>]): integer
+sc0_http_err_rate([<table>]): integer
+sc1_http_err_rate([<table>]): integer
+sc2_http_err_rate([<table>]): integer
+```
+
+Returns the average rate of HTTP errors from the currently tracked counters, measured in amount of
+errors over the period configured in the table. This includes the both request errors and 4xx error
+responses. See also src_http_err_rate.
+
+<a id="entry-7-3-3-sc-http-fail-cnt-integer"></a>
+
+**`sc_http_fail_cnt(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_http_fail_cnt(<ctr>[,<table>]): integer
+sc0_http_fail_cnt([<table>]): integer
+sc1_http_fail_cnt([<table>]): integer
+sc2_http_fail_cnt([<table>]): integer
+```
+
+Returns the cumulative number of HTTP response failures from the currently tracked counters. This
+includes the both response errors and 5xx status codes other than 501 and 505. See also
+"table_http_fail_cnt".
+
+<a id="entry-7-3-3-sc-http-fail-rate-integer"></a>
+
+**`sc_http_fail_rate(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_http_fail_rate(<ctr>[,<table>]): integer
+sc0_http_fail_rate([<table>]): integer
+sc1_http_fail_rate([<table>]): integer
+sc2_http_fail_rate([<table>]): integer
+```
+
+Returns the average rate of HTTP response failures from the currently tracked counters, measured in
+amount of failures over the period configured in the table. This includes the both response errors
+and 5xx status codes other than 501 and 505. See also "table_http_fail_rate".
+
+<a id="entry-7-3-3-sc-http-req-cnt-integer"></a>
+
+**`sc_http_req_cnt(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_http_req_cnt(<ctr>[,<table>]): integer
+sc0_http_req_cnt([<table>]): integer
+sc1_http_req_cnt([<table>]): integer
+sc2_http_req_cnt([<table>]): integer
+```
+
+Returns the cumulative number of HTTP requests from the currently tracked counters. This includes
+every started request, valid or not. See also src_http_req_cnt.
+
+<a id="entry-7-3-3-sc-http-req-rate-integer"></a>
+
+**`sc_http_req_rate(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_http_req_rate(<ctr>[,<table>]): integer
+sc0_http_req_rate([<table>]): integer
+sc1_http_req_rate([<table>]): integer
+sc2_http_req_rate([<table>]): integer
+```
+
+Returns the average rate of HTTP requests from the currently tracked counters, measured in amount of
+requests over the period configured in the table. This includes every started request, valid or not.
+See also src_http_req_rate.
+
+<a id="entry-7-3-3-sc-inc-gpc-integer"></a>
+
+**`sc_inc_gpc(<idx>,<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_inc_gpc(<idx>,<ctr>[,<table>]): integer
+```
+
+Increments the General Purpose Counter at the index `<idx>` of the array associated to the
+designated tracked counter of ID `<ctr>` from current proxy's stick table or from the designated
+stick-table `<table>`, and returns its new value. `<idx>` is an integer between 0 and 99 and `<ctr>`
+an integer between 0 and 2. Before the first invocation, the stored value is zero, so first
+invocation will increase it to 1 and will return 1. This fetch applies only to the 'gpc' array
+data_type (and not to the legacy 'gpc0' nor 'gpc1' data_types).
+
+<a id="entry-7-3-3-sc-inc-gpc0-integer"></a>
+
+**`sc_inc_gpc0(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_inc_gpc0(<ctr>[,<table>]): integer
+sc0_inc_gpc0([<table>]): integer
+sc1_inc_gpc0([<table>]): integer
+sc2_inc_gpc0([<table>]): integer
+```
+
+Increments the first General Purpose Counter associated to the currently tracked counters, and
+returns its new value. Before the first invocation, the stored value is zero, so first invocation
+will increase it to 1 and will return 1. This is typically used as a second ACL in an expression in
+order to mark a connection when a first ACL was verified:
+
+Example:
+
+```text
+acl abuse sc0_http_req_rate gt 10
+acl kill  sc0_inc_gpc0 gt 0
+tcp-request connection reject if abuse kill
+```
+
+<a id="entry-7-3-3-sc-inc-gpc1-integer"></a>
+
+**`sc_inc_gpc1(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_inc_gpc1(<ctr>[,<table>]): integer
+sc0_inc_gpc1([<table>]): integer
+sc1_inc_gpc1([<table>]): integer
+sc2_inc_gpc1([<table>]): integer
+```
+
+Increments the second General Purpose Counter associated to the currently tracked counters, and
+returns its new value. Before the first invocation, the stored value is zero, so first invocation
+will increase it to 1 and will return 1. This is typically used as a second ACL in an expression in
+order to mark a connection when a first ACL was verified.
+
+<a id="entry-7-3-3-sc-kbytes-in-integer"></a>
+
+**`sc_kbytes_in(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_kbytes_in(<ctr>[,<table>]): integer
+sc0_kbytes_in([<table>]): integer
+sc1_kbytes_in([<table>]): integer
+sc2_kbytes_in([<table>]): integer
+```
+
+Returns the total amount of client-to-server data from the currently tracked counters, measured in
+kilobytes. The test is currently performed on 32-bit integers, which limits values to 4 terabytes.
+See also "table_kbytes_in".
+
+<a id="entry-7-3-3-sc-kbytes-out-integer"></a>
+
+**`sc_kbytes_out(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_kbytes_out(<ctr>[,<table>]): integer
+sc0_kbytes_out([<table>]): integer
+sc1_kbytes_out([<table>]): integer
+sc2_kbytes_out([<table>]): integer
+```
+
+Returns the total amount of server-to-client data from the currently tracked counters, measured in
+kilobytes. The test is currently performed on 32-bit integers, which limits values to 4 terabytes.
+See also "table_kbytes_out".
+
+sc_key(`<ctr>`): any sc0_key: any sc1_key: any sc2_key: any Returns the key used to match the
+currently tracked counter.
+
+<a id="entry-7-3-3-sc-sess-cnt-integer"></a>
+
+**`sc_sess_cnt(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_sess_cnt(<ctr>[,<table>]): integer
+sc0_sess_cnt([<table>]): integer
+sc1_sess_cnt([<table>]): integer
+sc2_sess_cnt([<table>]): integer
+```
+
+Returns the cumulative number of incoming connections that were transformed into sessions, which
+means that they were accepted by a "tcp-request connection" rule, from the currently tracked
+counters. A backend may count more sessions than connections because each connection could result in
+many backend sessions if some HTTP keep-alive is performed over the connection with the client. See
+also "table_sess_cnt".
+
+<a id="entry-7-3-3-sc-sess-rate-integer"></a>
+
+**`sc_sess_rate(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_sess_rate(<ctr>[,<table>]): integer
+sc0_sess_rate([<table>]): integer
+sc1_sess_rate([<table>]): integer
+sc2_sess_rate([<table>]): integer
+```
+
+Returns the average session rate from the currently tracked counters, measured in amount of sessions
+over the period configured in the table. A session is a connection that got past the early
+"tcp-request connection" rules. A backend may count more sessions than connections because each
+connection could result in many backend sessions if some HTTP keep-alive is performed over the
+connection with the client. See also "table_sess_rate".
+
+<a id="entry-7-3-3-sc-tracked-boolean"></a>
+
+**`sc_tracked(<ctr>[,<table>]): boolean`**
+
+```haproxy
+sc_tracked(<ctr>[,<table>]): boolean
+sc0_tracked([<table>]): boolean
+sc1_tracked([<table>]): boolean
+sc2_tracked([<table>]): boolean
+```
+
+Returns true if the designated session counter is currently being tracked by the current session.
+This can be useful when deciding whether or not we want to set some values in a header passed to the
+server.
+
+<a id="entry-7-3-3-sc-trackers-integer"></a>
+
+**`sc_trackers(<ctr>[,<table>]): integer`**
+
+```haproxy
+sc_trackers(<ctr>[,<table>]): integer
+sc0_trackers([<table>]): integer
+sc1_trackers([<table>]): integer
+sc2_trackers([<table>]): integer
+```
+
+Returns the current amount of concurrent connections tracking the same tracked counters. This number
+is automatically incremented when tracking begins and decremented when tracking stops. It differs
+from sc0_conn_cur in that it does not rely on any stored information but on the table's reference
+count (the "use" value which is returned by "show table" on the CLI). This may sometimes be more
+suited for layer7 tracking. It can be used to tell a server how many concurrent connections there
+are from a given address for example.
+
+so_id: integer Returns an integer containing the current listening socket's id. It is useful in
+frontends involving many "bind" lines, or to stick all users coming via a same socket to the same
+server.
+
+so_name: string Returns a string containing the current listening socket's name, as defined with
+name on a "bind" line. It can serve the same purposes as so_id but with strings instead of integers.
+
+src: ip This is the source IP address of the client of the session. Any tcp/http rules may alter
+this address. It is of type IP and works on both IPv4 and IPv6 tables. On IPv6 tables, IPv4
+addresses are mapped to their IPv6 equivalent, according to RFC 4291. Note that it is the TCP-level
+source address which is used, and not the address of a client behind a proxy. However if the
+"accept-proxy" or "accept-netscaler-cip" bind directive is used, it can be the address of a client
+behind another PROXY-protocol compatible component for all rule sets except "tcp-request connection"
+which sees the real address. When the incoming connection passed through address translation or
+redirection involving connection tracking, the original destination address before the redirection
+will be reported. On Linux systems, the source and destination may seldom appear reversed if the
+nf_conntrack_tcp_loose sysctl is set, because a late response may reopen a timed out connection and
+switch what is believed to be the source and the destination.
+
+Example:
+
+```shell
+# add an HTTP header in requests with the originating address' country
+http-request set-header X-Country %[src,map_ip(geoip.lst)]
+```
+
+<a id="entry-7-3-3-src-bytes-in-rate-integer"></a>
+
+**`src_bytes_in_rate([<table>]): integer`**
+
+```haproxy
+src_bytes_in_rate([<table>]): integer
+```
+
+Same as "table_bytes_in_rate" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_bytes_in_rate([`<table>`])
+
+<a id="entry-7-3-3-src-bytes-out-rate-integer"></a>
+
+**`src_bytes_out_rate([<table>]): integer`**
+
+```haproxy
+src_bytes_out_rate([<table>]): integer
+```
+
+Same as "table_bytes_out_rate" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_bytes_out_rate([`<table>`])
+
+<a id="entry-7-3-3-src-clr-gpc-integer"></a>
+
+**`src_clr_gpc(<idx>[,<table>]): integer`**
+
+```haproxy
+src_clr_gpc(<idx>[,<table>]): integer
+```
+
+Same as "table_clr_gpc" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_clr_gpc(`<idx>`[,`<table>`])
+
+<a id="entry-7-3-3-src-clr-gpc0-integer"></a>
+
+**`src_clr_gpc0([<table>]): integer`**
+
+```haproxy
+src_clr_gpc0([<table>]): integer
+```
+
+Same as "table_clr_gpc0" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_clr_gpc0([`<table>`])
+
+<a id="entry-7-3-3-src-clr-gpc1-integer"></a>
+
+**`src_clr_gpc1([<table>]): integer`**
+
+```haproxy
+src_clr_gpc1([<table>]): integer
+```
+
+Same as "table_clr_gpc1" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_clr_gpc1([`<table>`])
+
+<a id="entry-7-3-3-src-conn-cnt-integer"></a>
+
+**`src_conn_cnt([<table>]): integer`**
+
+```haproxy
+src_conn_cnt([<table>]): integer
+```
+
+Same as "table_conn_cnt" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_conn_cnt([`<table>`])
+
+<a id="entry-7-3-3-src-conn-cur-integer"></a>
+
+**`src_conn_cur([<table>]): integer`**
+
+```haproxy
+src_conn_cur([<table>]): integer
+```
+
+Same as "table_conn_cur" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_conn_cur([`<table>`])
+
+<a id="entry-7-3-3-src-conn-rate-integer"></a>
+
+**`src_conn_rate([<table>]): integer`**
+
+```haproxy
+src_conn_rate([<table>]): integer
+```
+
+Same as "table_conn_rate" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_conn_rate([`<table>`])
+
+<a id="entry-7-3-3-src-get-gpc-integer"></a>
+
+**`src_get_gpc(<idx>[,<table>]): integer`**
+
+```haproxy
+src_get_gpc(<idx>[,<table>]): integer
+```
+
+Same as "table_gpc" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_gpc(`<idx>`[,`<table>`])
+
+<a id="entry-7-3-3-src-get-gpc0-integer"></a>
+
+**`src_get_gpc0([<table>]): integer`**
+
+```haproxy
+src_get_gpc0([<table>]): integer
+```
+
+Same as "table_gpc0" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_gpc0([`<table>`])
+
+<a id="entry-7-3-3-src-get-gpc1-integer"></a>
+
+**`src_get_gpc1([<table>]): integer`**
+
+```haproxy
+src_get_gpc1([<table>]): integer
+```
+
+Same as "table_gpc1" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_gpc1([`<table>`])
+
+<a id="entry-7-3-3-src-get-gpt-integer"></a>
+
+**`src_get_gpt(<idx>[,<table>]): integer`**
+
+```haproxy
+src_get_gpt(<idx>[,<table>]): integer
+```
+
+Same as "table_gpt" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_gpt(`<idx>`[,`<table>`])
+
+<a id="entry-7-3-3-src-get-gpt0-integer"></a>
+
+**`src_get_gpt0([<table>]): integer`**
+
+```haproxy
+src_get_gpt0([<table>]): integer
+```
+
+Same as "table_gpt0" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_gpt0([`<table>`])
+
+<a id="entry-7-3-3-src-glitch-cnt-integer"></a>
+
+**`src_glitch_cnt([<table>]): integer`**
+
+```haproxy
+src_glitch_cnt([<table>]): integer
+```
+
+Same as "table_glitch_cnt" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_glitch_cnt([`<table>`])
+
+<a id="entry-7-3-3-src-glitch-rate-integer"></a>
+
+**`src_glitch_rate([<table>]): integer`**
+
+```haproxy
+src_glitch_rate([<table>]): integer
+```
+
+Same as "table_glitch_rate" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_glitch_rate([`<table>`])
+
+<a id="entry-7-3-3-src-gpc-rate-integer"></a>
+
+**`src_gpc_rate(<idx>[,<table>]): integer`**
+
+```haproxy
+src_gpc_rate(<idx>[,<table>]): integer
+```
+
+Same as "table_gpc_rate" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_gpc_rate(`<idx>`[,`<table>`])
+
+<a id="entry-7-3-3-src-gpc0-rate-integer"></a>
+
+**`src_gpc0_rate([<table>]): integer`**
+
+```haproxy
+src_gpc0_rate([<table>]): integer
+```
+
+Same as "table_gpc0_rate" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_gpc0_rate([`<table>`])
+
+<a id="entry-7-3-3-src-gpc1-rate-integer"></a>
+
+**`src_gpc1_rate([<table>]): integer`**
+
+```haproxy
+src_gpc1_rate([<table>]): integer
+```
+
+Same as "table_gpc1_rate" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_gpc1_rate([`<table>`])
+
+<a id="entry-7-3-3-src-http-err-cnt-integer"></a>
+
+**`src_http_err_cnt([<table>]): integer`**
+
+```haproxy
+src_http_err_cnt([<table>]): integer
+```
+
+Same as "table_http_err_cnt" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_http_err_cnt([`<table>`])
+
+<a id="entry-7-3-3-src-http-err-rate-integer"></a>
+
+**`src_http_err_rate([<table>]): integer`**
+
+```haproxy
+src_http_err_rate([<table>]): integer
+```
+
+Same as "table_http_err_rate" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_http_err_rate([`<table>`])
+
+<a id="entry-7-3-3-src-http-fail-cnt-integer"></a>
+
+**`src_http_fail_cnt([<table>]): integer`**
+
+```haproxy
+src_http_fail_cnt([<table>]): integer
+```
+
+Same as "table_http_fail_cnt" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_http_fail_cnt([`<table>`])
+
+<a id="entry-7-3-3-src-http-fail-rate-integer"></a>
+
+**`src_http_fail_rate([<table>]): integer`**
+
+```haproxy
+src_http_fail_rate([<table>]): integer
+```
+
+Same as "table_http_fail_rate" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_http_fail_rate([`<table>`])
+
+<a id="entry-7-3-3-src-http-req-cnt-integer"></a>
+
+**`src_http_req_cnt([<table>]): integer`**
+
+```haproxy
+src_http_req_cnt([<table>]): integer
+```
+
+Same as "table_http_req_cnt" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_http_req_cnt([`<table>`])
+
+<a id="entry-7-3-3-src-http-req-rate-integer"></a>
+
+**`src_http_req_rate([<table>]): integer`**
+
+```haproxy
+src_http_req_rate([<table>]): integer
+```
+
+Same as "table_http_req_rate" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_http_req_rate([`<table>`])
+
+<a id="entry-7-3-3-src-inc-gpc-integer"></a>
+
+**`src_inc_gpc(<idx>[,<table>]): integer`**
+
+```haproxy
+src_inc_gpc(<idx>[,<table>]): integer
+```
+
+Same as "src_inc_gpc" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_inc_gpc(`<idx>`[,`<table>`])
+
+<a id="entry-7-3-3-src-inc-gpc0-integer"></a>
+
+**`src_inc_gpc0([<table>]): integer`**
+
+```haproxy
+src_inc_gpc0([<table>]): integer
+```
+
+Same as "src_inc_gpc0" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_inc_gpc0([`<table>`])
+
+<a id="entry-7-3-3-src-inc-gpc1-integer"></a>
+
+**`src_inc_gpc1([<table>]): integer`**
+
+```haproxy
+src_inc_gpc1([<table>]): integer
+```
+
+Same as "src_inc_gpc1" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_inc_gpc1([`<table>`])
+
+src_is_local: boolean Returns true if the source address of the incoming connection is local to the
+system, or false if the address doesn't exist on the system, meaning that it comes from a remote
+machine. Note that UNIX addresses are considered local. It can be useful to apply certain access
+restrictions based on where the client comes from (e.g. require auth or https for remote machines).
+Please note that the check involves a few system calls, so it's better to do it only once per
+connection.
+
+<a id="entry-7-3-3-src-kbytes-in-integer"></a>
+
+**`src_kbytes_in([<table>]): integer`**
+
+```haproxy
+src_kbytes_in([<table>]): integer
+```
+
+Same as "table_kbytes_in" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_kbytes_in([`<table>`])
+
+<a id="entry-7-3-3-src-kbytes-out-integer"></a>
+
+**`src_kbytes_out([<table>]): integer`**
+
+```haproxy
+src_kbytes_out([<table>]): integer
+```
+
+Same as "table_kbytes_out" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_kbytes_out([`<table>`])
+
+src_port: integer Returns an integer value corresponding to the TCP source port of the connection on
+the client side, which is the port the client connected from. Any tcp/http rules may alter this
+address. Usage of this function is very limited as modern protocols do not care much about source
+ports nowadays.
+
+<a id="entry-7-3-3-src-sess-cnt-integer"></a>
+
+**`src_sess_cnt([<table>]): integer`**
+
+```haproxy
+src_sess_cnt([<table>]): integer
+```
+
+Same as "table_sess_cnt" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_sess_cnt([`<table>`])
+
+<a id="entry-7-3-3-src-sess-rate-integer"></a>
+
+**`src_sess_rate([<table>]): integer`**
+
+```haproxy
+src_sess_rate([<table>]): integer
+```
+
+Same as "table_sess_rate" converter with key set to the incoming connection's source address.
+
+Equivalent to: src,table_sess_rate([`<table>`])
+
+<a id="entry-7-3-3-src-updt-conn-cnt-integer"></a>
+
+**`src_updt_conn_cnt([<table>]): integer`**
+
+```haproxy
+src_updt_conn_cnt([<table>]): integer
+```
+
+Creates or updates the entry associated to the incoming connection's source address in the current
+proxy's stick-table or in the designated stick-table. This table must be configured to store the
+"conn_cnt" data type, otherwise the match will be ignored. The current count is incremented by one,
+and the expiration timer refreshed. The updated count is returned, so this match can't return zero.
+This was used to reject service abusers based on their source address. Note: it is recommended to
+use the more complete "track-sc\*" actions in "tcp-request" rules instead.
+
+Example:
+
+```shell
+# This frontend limits incoming SSH connections to 3 per 10 second for
+# each source address, and rejects excess connections until a 10 second
+# silence is observed. At most 20 addresses are tracked.
+listen ssh
+    bind :22
+    mode tcp
+    maxconn 100
+    stick-table type ip size 20 expire 10s store conn_cnt
+    tcp-request content reject if { src_updt_conn_cnt gt 3 }
+    server local 127.0.0.1:22
+```
+
+srv_id: integer Returns an integer containing the server's id when processing the response. While
+it's almost only used with ACLs, it may be used for logging or debugging. It can also be used in a
+tcp-check or an http-check ruleset.
+
+srv_name: string Returns a string containing the server's name when processing the response. While
+it's almost only used with ACLs, it may be used for logging or debugging. It can also be used in a
+tcp-check or an http-check ruleset.
+
+txn.conn_retries: integer Returns the the number of connection retries experienced by this stream
+when trying to connect to the server. This value is subject to change while the connection is not
+fully established. For HTTP connections, the value may be affected by L7 retries.
+
+txn.redispatched: boolean Returns true if the connection has experienced redispatch upon retry
+according to "option redispatch" configuration. This value is subject to change while the connection
+is not fully established. For HTTP connections, the value may be affected by L7 retries.
+
+### 7.3.4. Fetching samples at Layer 5 {#section-7-3-4}
+
+The layer 5 usually describes just the session layer which in HAProxy is closest to the session once
+all the connection handshakes are finished, but when no content is yet made available. The fetch
+methods described here are usable as low as the "tcp-request content" rule sets unless they require
+some future information. Those generally include the results of SSL negotiations.
+
+Summary of sample fetch methods in this section and their respective types:
+
+```text
+  keyword                                          output type
+-------------------------------------------------+-------------
+51d.all(<prop>[,<prop>*])                          string
+bs.aborted                                         boolean
+bs.debug_str([<bitmap>])                           string
+bs.id                                              integer
+bs.rst_code                                        integer
+fs.aborted                                         boolean
+fs.debug_str([<bitmap>])                           string
+fs.id                                              integer
+fs.rst_code                                        integer
+ssl_bc                                             boolean
+ssl_bc_alg_keysize                                 integer
+ssl_bc_alpn                                        string
+ssl_bc_cipher                                      string
+ssl_bc_client_early_traffic_secret                 string
+ssl_bc_client_handshake_traffic_secret             string
+ssl_bc_client_random                               binary
+ssl_bc_client_traffic_secret_0                     string
+ssl_bc_curve                                       string
+ssl_bc_early_exporter_secret                       string
+ssl_bc_err                                         integer
+ssl_bc_err_str                                     string
+ssl_bc_exporter_secret                             string
+ssl_bc_is_resumed                                  boolean
+ssl_bc_npn                                         string
+ssl_bc_protocol                                    string
+ssl_bc_server_handshake_traffic_secret             string
+ssl_bc_server_random                               binary
+ssl_bc_server_traffic_secret_0                     string
+ssl_bc_session_id                                  binary
+ssl_bc_session_key                                 binary
+ssl_bc_sni                                         string
+ssl_bc_unique_id                                   binary
+ssl_bc_use_keysize                                 integer
+ssl_c_ca_err                                       integer
+ssl_c_ca_err_depth                                 integer
+ssl_c_chain_der                                    binary
+ssl_c_der                                          binary
+ssl_c_err                                          integer
+ssl_c_i_dn([<entry>[,<occ>[,<format>]]])           string
+ssl_c_key_alg                                      string
+ssl_c_notafter                                     string
+ssl_c_notbefore                                    string
+ssl_c_r_dn([<entry>[,<occ>[,<format>]]])           string
+ssl_c_s_dn([<entry>[,<occ>[,<format>]]])           string
+ssl_c_san                                          string
+ssl_c_serial                                       binary
+ssl_c_sha1                                         binary
+ssl_c_sig_alg                                      string
+ssl_c_used                                         boolean
+ssl_c_verify                                       integer
+ssl_c_version                                      integer
+ssl_f_der                                          binary
+ssl_f_i_dn([<entry>[,<occ>[,<format>]]])           string
+ssl_f_key_alg                                      string
+ssl_f_notafter                                     string
+ssl_f_notbefore                                    string
+ssl_f_s_dn([<entry>[,<occ>[,<format>]]])           string
+ssl_f_serial                                       binary
+ssl_f_sha1                                         binary
+ssl_f_sig_alg                                      string
+ssl_f_version                                      integer
+ssl_fc                                             boolean
+ssl_fc_alg_keysize                                 integer
+ssl_fc_alpn                                        string
+ssl_fc_cipher                                      string
+ssl_fc_cipherlist_bin([<filter_option>])           binary
+ssl_fc_cipherlist_hex([<filter_option>])           string
+ssl_fc_cipherlist_str([<filter_option>])           string
+ssl_fc_cipherlist_xxh                              integer
+ssl_fc_client_early_traffic_secret                 string
+ssl_fc_client_handshake_traffic_secret             string
+ssl_fc_client_random                               binary
+ssl_fc_client_traffic_secret_0                     string
+ssl_fc_crtname                                     string
+ssl_fc_curve                                       string
+ssl_fc_early_exporter_secret                       string
+ssl_fc_ecformats_bin                               binary
+ssl_fc_eclist_bin([<filter_option>])               binary
+ssl_fc_err                                         integer
+ssl_fc_err_str                                     string
+ssl_fc_exporter_secret                             string
+ssl_fc_extlist_bin([<filter_option>])              binary
+ssl_fc_has_crt                                     boolean
+ssl_fc_has_early                                   boolean
+ssl_fc_has_sni                                     boolean
+ssl_fc_is_resumed                                  boolean
+ssl_fc_npn                                         string
+ssl_fc_protocol                                    string
+ssl_fc_protocol_hello_id                           integer
+ssl_fc_server_handshake_traffic_secret             string
+ssl_fc_server_random                               binary
+ssl_fc_server_traffic_secret_0                     string
+ssl_fc_session_id                                  binary
+ssl_fc_session_key                                 binary
+ssl_fc_sigalgs_bin([<filter_option>])              binary
+ssl_fc_sni                                         string
+ssl_fc_supported_versions_bin([<filter_option>])   binary
+ssl_fc_unique_id                                   binary
+ssl_fc_use_keysize                                 integer
+ssl_s_chain_der                                    binary
+ssl_s_der                                          binary
+ssl_s_i_dn([<entry>[,<occ>[,<format>]]])           string
+ssl_s_key_alg                                      string
+ssl_s_notafter                                     string
+ssl_s_notbefore                                    string
+ssl_s_s_dn([<entry>[,<occ>[,<format>]]])           string
+ssl_s_serial                                       binary
+ssl_s_sha1                                         binary
+ssl_s_sig_alg                                      string
+ssl_s_version                                      integer
+txn.timer.user                                     integer
+-------------------------------------------------+-------------
+```
+
+Detailed list:
+
+<a id="entry-7-3-4-51d-all-string"></a>
+
+**`51d.all(<prop>[,<prop>*]): string`**
+
+```haproxy
+51d.all(<prop>[,<prop>*]): string
+```
+
+Returns values for the properties requested as a string, where values are separated by the delimiter
+specified with "51degrees-property-separator". The device is identified using all the important HTTP
+headers from the request. The function can be passed up to five property names, and if a property
+name can't be found, the value "NoData" is returned.
+
+Example:
+
+```shell
+# Here the header "X-51D-DeviceTypeMobileTablet" is added to the request
+# containing the three properties requested using all relevant headers from
+# the request.
+frontend http-in
+  bind *:8081
+  default_backend servers
+  http-request set-header X-51D-DeviceTypeMobileTablet \
+    %[51d.all(DeviceType,IsMobile,IsTablet)]
+```
+
+bs.aborted: boolean Returns true is an abort was received from the server for the current stream.
+Otherwise false is returned.
+
+<a id="entry-7-3-4-bs-debug-str-string"></a>
+
+**`bs.debug_str([<bitmap>]): string`**
+
+```haproxy
+bs.debug_str([<bitmap>]): string
+```
+
+This function is meant to be used by developers during certain complex troubleshooting sessions. It
+extracts some internal states from the lower layers of the backend stream and connection, and
+arranges them as a string, generally in the form of a series of "name=value" delimited with spaces.
+The `<bitmap>` optional argument indicates what layer(s) to extract information from, and is an
+arithmetic OR (or a sum) of the following values: - socket layer: 16 - connection layer: 8 -
+transport layer (e.g. SSL): 4 - mux connection: 2 - mux stream: 1
+
+These values might change across versions. The default value of zero is special and enables all
+layers. Please do not rely on the output of this function for long-term production monitoring. It is
+meant to evolve even within a stable branch, as the needs for increased details arise. One use
+typical use case is to concatenate these information at the very end of a log-format, along with
+fs.debug_str(). Example:
+
+```text
+log-format "$HAPROXY_HTTP_LOG_FMT fs=<%[fs.debug_str]> bs=<%[bs.debug_str]>"
+```
+
+bs.id: integer Returns the multiplexer's stream ID on the server side. It is the multiplexer's
+responsibility to return the appropriate information.
+
+bs.rst_code: integer Returns the reset code received from the server for the current stream. The
+code of the H2 RST_STREAM frame or the QUIC STOP_SENDING frame received from the server is returned.
+The sample fetch fails if no abort was received or if the server stream is not an H2/QUIC stream.
+
+fs.aborted: boolean Returns true is an abort was received from the client for the current stream.
+Otherwise false is returned.
+
+<a id="entry-7-3-4-fs-debug-str-string"></a>
+
+**`fs.debug_str([<bitmap>]): string`**
+
+```haproxy
+fs.debug_str([<bitmap>]): string
+```
+
+This function is meant to be used by developers during certain complex troubleshooting sessions. It
+extracts some internal states from the lower layers of the frontend stream and connection, and
+arranges them as a string, generally in the form of a series of "name=value" delimited with spaces.
+The `<bitmap>` optional argument indicates what layer(s) to extract information from, and is an
+arithmetic OR (or a sum) of the following values: - socket layer: 16 - connection layer: 8 -
+transport layer (e.g. SSL): 4 - mux connection: 2 - mux stream: 1
+
+These values might change across versions. The default value of zero is special and enables all
+layers. Please do not rely on the output of this function for long-term production monitoring. It is
+meant to evolve even within a stable branch, as the needs for increased details arise. One use
+typical use case is to concatenate these information at the very end of a log-format, along with
+bs.debug_str(). Example:
+
+```text
+log-format "$HAPROXY_HTTP_LOG_FMT fs=<%[fs.debug_str]> bs=<%[bs.debug_str]>"
+```
+
+fs.id: integer Returns the multiplexer's stream ID on the client side. It is the multiplexer's
+responsibility to return the appropriate information. For instance, on a raw TCP, 0 is always
+returned because there is no stream.
+
+fs.rst_code: integer Returns the reset code received from the client for the current stream. The
+code of the H2 RST_STREAM frame or the QUIC STOP_SENDING frame received from the client is returned.
+The sample fetch fails if no abort was received or if the client stream is not an H2/QUIC stream.
+
+ssl_bc: boolean Returns true when the back connection was made via an SSL/TLS transport layer and is
+locally deciphered. This means the outgoing connection was made to a server with the "ssl" option.
+It can be used in a tcp-check or an http-check ruleset.
+
+ssl_bc_alg_keysize: integer Returns the symmetric cipher key size supported in bits when the
+outgoing connection was made over an SSL/TLS transport layer. It can be used in a tcp-check or an
+http-check ruleset.
+
+ssl_bc_alpn: string This extracts the Application Layer Protocol Negotiation field from an outgoing
+connection made via a TLS transport layer. The result is a string containing the protocol name
+negotiated with the server. The SSL library must have been built with support for TLS extensions
+enabled (check haproxy -vv). Note that the TLS ALPN extension is not advertised unless the "alpn"
+keyword on the "server" line specifies a protocol list. Also, nothing forces the server to pick a
+protocol from this list, any other one may be requested. The TLS ALPN extension is meant to replace
+the TLS NPN extension. See also "ssl_bc_npn". It can be used in a tcp-check or an http-check
+ruleset.
+
+ssl_bc_cipher: string Returns the name of the used cipher when the outgoing connection was made over
+an SSL/TLS transport layer. It can be used in a tcp-check or an http-check ruleset.
+
+ssl_bc_client_early_traffic_secret: string Return the CLIENT_EARLY_TRAFFIC_SECRET as an hexadecimal
+string for the back connection when the outgoing connection was made over a TLS 1.3 transport layer.
+Require OpenSSL \>= 1.1.1. This is one of the keys dumped by the OpenSSL keylog callback to generate
+the SSLKEYLOGFILE. The SSL Key logging must be activated with "tune.ssl.keylog on" in the global
+section. See also "tune.ssl.keylog"
+
+ssl_bc_client_handshake_traffic_secret: string Return the CLIENT_HANDSHAKE_TRAFFIC_SECRET as an
+hexadecimal string for the bacl connection when the outgoing connection was made over a TLS 1.3
+transport layer. Require OpenSSL \>= 1.1.1. This is one of the keys dumped by the OpenSSL keylog
+callback to generate the SSLKEYLOGFILE. The SSL Key logging must be activated with "tune.ssl.keylog
+on" in the global section. See also "tune.ssl.keylog"
+
+ssl_bc_client_random: binary Returns the client random of the back connection when the incoming
+connection was made over an SSL/TLS transport layer. It is useful to to decrypt traffic sent using
+ephemeral ciphers. This requires OpenSSL \>= 1.1.0, or BoringSSL. It can be used in a tcp-check or
+an http-check ruleset.
+
+ssl_bc_client_traffic_secret_0: string Return the CLIENT_TRAFFIC_SECRET_0 as an hexadecimal string
+for the back connection when the outgoing connection was made over a TLS 1.3 transport layer.
+Require OpenSSL \>= 1.1.1. This is one of the keys dumped by the OpenSSL keylog callback to generate
+the SSLKEYLOGFILE. The SSL Key logging must be activated with "tune.ssl.keylog on" in the global
+section. See also "tune.ssl.keylog"
+
+ssl_bc_curve: string Returns the name of the curve used in the key agreement when the outgoing
+connection was made over an SSL/TLS transport layer. This requires OpenSSL \>= 3.0.0 or AWS-LC \>=
+1.57.0.
+
+ssl_bc_early_exporter_secret: string Return the EARLY_EXPORTER_SECRET as an hexadecimal string for
+the back connection when the outgoing connection was made over an TLS 1.3 transport layer. Require
+OpenSSL \>= 1.1.1. This is one of the keys dumped by the OpenSSL keylog callback to generate the
+SSLKEYLOGFILE. The SSL Key logging must be activated with "tune.ssl.keylog on" in the global
+section. See also "tune.ssl.keylog"
+
+ssl_bc_err: integer When the outgoing connection was made over an SSL/TLS transport layer, returns
+the ID of the last error of the first error stack raised on the backend side. It can raise handshake
+errors as well as other read or write errors occurring during the connection's lifetime. In order to
+get a text description of this error code, you can either use the "ssl_bc_err_str" sample fetch or
+use the "openssl errstr" command (which takes an error code in hexadecimal representation as
+parameter). Please refer to your SSL library's documentation to find the exhaustive list of error
+codes.
+
+ssl_bc_err_str: string When the outgoing connection was made over an SSL/TLS transport layer,
+returns a string representation of the last error of the first error stack that was raised on the
+connection from the backend's perspective. See also "ssl_fc_err".
+
+ssl_bc_exporter_secret: string Return the EXPORTER_SECRET as an hexadecimal string for the back
+connection when the outgoing connection was made over a TLS 1.3 transport layer. Require OpenSSL \>=
+1.1.1. This is one of the keys dumped by the OpenSSL keylog callback to generate the SSLKEYLOGFILE.
+The SSL Key logging must be activated with "tune.ssl.keylog on" in the global section. See also
+"tune.ssl.keylog"
+
+ssl_bc_is_resumed: boolean Returns true when the back connection was made over an SSL/TLS transport
+layer and the newly created SSL session was resumed using a cached session or a TLS ticket. It can
+be used in a tcp-check or an http-check ruleset.
+
+ssl_bc_npn: string This extracts the Next Protocol Negotiation field from an outgoing connection
+made via a TLS transport layer. The result is a string containing the protocol name negotiated with
+the server . The SSL library must have been built with support for TLS extensions enabled (check
+haproxy -vv). Note that the TLS NPN extension is not advertised unless the "npn" keyword on the
+"server" line specifies a protocol list. Also, nothing forces the server to pick a protocol from
+this list, any other one may be used. Please note that the TLS NPN extension was replaced with ALPN.
+It can be used in a tcp-check or an http-check ruleset.
+
+ssl_bc_protocol: string Returns the name of the used protocol when the outgoing connection was made
+over an SSL/TLS transport layer. It can be used in a tcp-check or an http-check ruleset.
+
+ssl_bc_server_handshake_traffic_secret: string Return the SERVER_HANDSHAKE_TRAFFIC_SECRET as an
+hexadecimal string for the back connection when the outgoing connection was made over a TLS 1.3
+transport layer. Require OpenSSL \>= 1.1.1. This is one of the keys dumped by the OpenSSL keylog
+callback to generate the SSLKEYLOGFILE. The SSL Key logging must be activated with "tune.ssl.keylog
+on" in the global section. See also "tune.ssl.keylog"
+
+ssl_bc_server_random: binary Returns the server random of the back connection when the incoming
+connection was made over an SSL/TLS transport layer. It is useful to to decrypt traffic sent using
+ephemeral ciphers. This requires OpenSSL \>= 1.1.0, or BoringSSL. It can be used in a tcp-check or
+an http-check ruleset.
+
+ssl_bc_server_traffic_secret_0: string Return the SERVER_TRAFFIC_SECRET_0 as an hexadecimal string
+for the back connection when the outgoing connection was made over an TLS 1.3 transport layer.
+Require OpenSSL \>= 1.1.1. This is one of the keys dumped by the OpenSSL keylog callback to generate
+the SSLKEYLOGFILE. The SSL Key logging must be activated with "tune.ssl.keylog on" in the global
+section. See also "tune.ssl.keylog"
+
+ssl_bc_session_id: binary Returns the SSL ID of the back connection when the outgoing connection was
+made over an SSL/TLS transport layer. It is useful to log if we want to know if session was reused
+or not. It can be used in a tcp-check or an http-check ruleset.
+
+ssl_bc_session_key: binary Returns the SSL session master key of the back connection when the
+outgoing connection was made over an SSL/TLS transport layer. It is useful to decrypt traffic sent
+using ephemeral ciphers. This requires OpenSSL \>= 1.1.0, or BoringSSL. It can be used in a
+tcp-check or an http-check ruleset.
+
+ssl_bc_sni: string This retrieves the Server Name Indication TLS extension (SNI) field that was used
+on the connection to the server. The result (when present) typically is a string matching the HTTPS
+host name (253 chars or less). The main use case is for logging and debugging purposes (e.g. figure
+what SNI was used when the connection was established to match it against what the server has seen).
+
+ssl_bc_unique_id: binary When the outgoing connection was made over an SSL/TLS transport layer,
+returns the TLS unique ID as defined in RFC5929 [section 3](https://www.rfc-editor.org/rfc/rfc5929#section-3). The unique id can be encoded to base64
+using the converter: "ssl_bc_unique_id,base64". It can be used in a tcp-check or an http-check
+ruleset.
+
+ssl_bc_use_keysize: integer Returns the symmetric cipher key size used in bits when the outgoing
+connection was made over an SSL/TLS transport layer. It can be used in a tcp-check or an http-check
+ruleset.
+
+ssl_c_ca_err: integer When the incoming connection was made over an SSL/TLS transport layer, returns
+the ID of the first error detected during verification of the client certificate at depth \> 0, or 0
+if no error was encountered during this verification process. Please refer to your SSL library's
+documentation to find the exhaustive list of error codes.
+
+ssl_c_ca_err_depth: integer When the incoming connection was made over an SSL/TLS transport layer,
+returns the depth in the CA chain of the first error detected during the verification of the client
+certificate. If no error is encountered, 0 is returned.
+
+ssl_c_chain_der: binary Returns the DER formatted chain certificate presented by the client when the
+incoming connection was made over an SSL/TLS transport layer. When used for an ACL, the value(s) to
+match against can be passed in hexadecimal form. One can parse the result with any lib accepting
+ASN.1 DER data. It currently does not support resumed sessions.
+
+ssl_c_der: binary Returns the DER formatted certificate presented by the client when the incoming
+connection was made over an SSL/TLS transport layer. When used for an ACL, the value(s) to match
+against can be passed in hexadecimal form.
+
+ssl_c_err: integer When the incoming connection was made over an SSL/TLS transport layer, returns
+the ID of the first error detected during verification at depth 0, or 0 if no error was encountered
+during this verification process. Please refer to your SSL library's documentation to find the
+exhaustive list of error codes.
+
+<a id="entry-7-3-4-ssl-c-i-dn-string"></a>
+
+**`ssl_c_i_dn([<entry>[,<occ>[,<format>]]]): string`**
+
+```haproxy
+ssl_c_i_dn([<entry>[,<occ>[,<format>]]]): string
+```
+
+When the incoming connection was made over an SSL/TLS transport layer, returns the full
+distinguished name of the issuer of the certificate presented by the client when no `<entry>` is
+specified, or the value of the first given entry found from the beginning of the DN. If a
+positive/negative occurrence number is specified as the optional second argument, it returns the
+value of the nth given entry value from the beginning/end of the DN. For instance,
+"ssl_c_i_dn(OU,2)" the second organization unit, and "ssl_c_i_dn(CN)" retrieves the common name. The
+`<format>` parameter allows you to receive the DN suitable for consumption by different protocols.
+Currently supported is rfc2253 for LDAP v3. If you'd like to modify the format only you can specify
+an empty string and zero for the first two parameters. Example: ssl_c_i_dn(,0,rfc2253) If the
+requested entry's ASN.1 value (or, when no `<entry>` is specified, any entry in the DN) contains an
+embedded NUL byte followed by other data, it is considered malformed and no data is returned.
+
+ssl_c_key_alg: string Returns the name of the algorithm used to generate the key of the certificate
+presented by the client when the incoming connection was made over an SSL/TLS transport layer.
+
+ssl_c_notafter: string Returns the end date presented by the client as a formatted string
+YYMMDDhhmmss[Z] when the incoming connection was made over an SSL/TLS transport layer.
+
+ssl_c_notbefore: string Returns the start date presented by the client as a formatted string
+YYMMDDhhmmss[Z] when the incoming connection was made over an SSL/TLS transport layer.
+
+<a id="entry-7-3-4-ssl-c-r-dn-string"></a>
+
+**`ssl_c_r_dn([<entry>[,<occ>[,<format>]]]): string`**
+
+```haproxy
+ssl_c_r_dn([<entry>[,<occ>[,<format>]]]): string
+```
+
+When the incoming connection was made over an SSL/TLS transport layer, and is successfully validated
+with the configured ca-file, returns the full distinguished name of the root CA of the certificate
+presented by the client when no `<entry>` is specified, or the value of the first given entry found
+from the beginning of the DN. If a positive/negative occurrence number is specified as the optional
+second argument, it returns the value of the nth given entry value from the beginning/end of the DN.
+For instance, "ssl_c_r_dn(OU,2)" the second organization unit, and "ssl_c_r_dn(CN)" retrieves the
+common name. The `<format>` parameter allows you to receive the DN suitable for consumption by
+different protocols. Currently supported is rfc2253 for LDAP v3. If you'd like to modify the format
+only you can specify an empty string and zero for the first two parameters. Example:
+ssl_c_r_dn(,0,rfc2253) If the requested entry's ASN.1 value (or, when no `<entry>` is specified, any
+entry in the DN) contains an embedded NUL byte followed by other data, it is considered malformed
+and no data is returned.
+
+<a id="entry-7-3-4-ssl-c-s-dn-string"></a>
+
+**`ssl_c_s_dn([<entry>[,<occ>[,<format>]]]): string`**
+
+```haproxy
+ssl_c_s_dn([<entry>[,<occ>[,<format>]]]): string
+```
+
+When the incoming connection was made over an SSL/TLS transport layer, returns the full
+distinguished name of the subject of the certificate presented by the client when no `<entry>` is
+specified, or the value of the first given entry found from the beginning of the DN. If a
+positive/negative occurrence number is specified as the optional second argument, it returns the
+value of the nth given entry value from the beginning/end of the DN. For instance,
+"ssl_c_s_dn(OU,2)" the second organization unit, and "ssl_c_s_dn(CN)" retrieves the common name. The
+`<format>` parameter allows you to receive the DN suitable for consumption by different protocols.
+Currently supported is rfc2253 for LDAP v3. If you'd like to modify the format only you can specify
+an empty string and zero for the first two parameters. Example: ssl_c_s_dn(,0,rfc2253) If the
+requested entry's ASN.1 value (or, when no `<entry>` is specified, any entry in the DN) contains an
+embedded NUL byte followed by other data, it is considered malformed and no data is returned.
+
+ssl_c_san: string When the incoming connection was made over an SSL/TLS transport layer, and was
+provided with a client certificate. Returns a string of comma separated Subject Alt Name fields
+contained into the provided certificate.
+
+This can be used to inspect the client certificate.
+
+Example:
+
+```text
+acl is_valid_client_cert ssl_c_used && ! ssl_c_verify
+http-request set-header X-SSL-Client-SAN %[ssl_c_san] if is_valid_client_cert
+```
+
+will results in:
+
+```text
+X-SSL-Client-SAN: IP Address:127.0.0.1, IP Address:127.0.0.2, IP Address:127.0.0.3, URI:http://docs.haproxy.org/2.7/, DNS:ca.tests.haproxy.com
+
+```
+
+ssl_c_serial: binary Returns the serial of the certificate presented by the client when the incoming
+connection was made over an SSL/TLS transport layer. When used for an ACL, the value(s) to match
+against can be passed in hexadecimal form.
+
+ssl_c_sha1: binary Returns the SHA-1 fingerprint of the certificate presented by the client when the
+incoming connection was made over an SSL/TLS transport layer. This can be used to stick a client to
+a server, or to pass this information to a server. Note that the output is binary, so if you want to
+pass that signature to the server, you need to encode it in hex or base64, such as in the example
+below:
+
+Example:
+
+```text
+http-request set-header X-SSL-Client-SHA1 %[ssl_c_sha1,hex]
+```
+
+ssl_c_sig_alg: string Returns the name of the algorithm used to sign the certificate presented by
+the client when the incoming connection was made over an SSL/TLS transport layer.
+
+ssl_c_used: boolean Returns true if current SSL session uses a client certificate even if current
+connection uses SSL session resumption. See also "ssl_fc_has_crt".
+
+ssl_c_verify: integer Returns the verify result error ID when the incoming connection was made over
+an SSL/TLS transport layer, otherwise zero if no error is encountered. Please refer to your SSL
+library's documentation for an exhaustive list of error codes.
+
+ssl_c_version: integer Returns the version of the certificate presented by the client when the
+incoming connection was made over an SSL/TLS transport layer.
+
+ssl_f_der: binary Returns the DER formatted certificate presented by the frontend when the incoming
+connection was made over an SSL/TLS transport layer. When used for an ACL, the value(s) to match
+against can be passed in hexadecimal form.
+
+<a id="entry-7-3-4-ssl-f-i-dn-string"></a>
+
+**`ssl_f_i_dn([<entry>[,<occ>[,<format>]]]): string`**
+
+```haproxy
+ssl_f_i_dn([<entry>[,<occ>[,<format>]]]): string
+```
+
+When the incoming connection was made over an SSL/TLS transport layer, returns the full
+distinguished name of the issuer of the certificate presented by the frontend when no `<entry>` is
+specified, or the value of the first given entry found from the beginning of the DN. If a
+positive/negative occurrence number is specified as the optional second argument, it returns the
+value of the nth given entry value from the beginning/end of the DN. For instance,
+"ssl_f_i_dn(OU,2)" the second organization unit, and "ssl_f_i_dn(CN)" retrieves the common name. The
+`<format>` parameter allows you to receive the DN suitable for consumption by different protocols.
+Currently supported is rfc2253 for LDAP v3. If you'd like to modify the format only you can specify
+an empty string and zero for the first two parameters. Example: ssl_f_i_dn(,0,rfc2253) If the
+requested entry's ASN.1 value (or, when no `<entry>` is specified, any entry in the DN) contains an
+embedded NUL byte followed by other data, it is considered malformed and no data is returned.
+
+ssl_f_key_alg: string Returns the name of the algorithm used to generate the key of the certificate
+presented by the frontend when the incoming connection was made over an SSL/TLS transport layer.
+
+ssl_f_notafter: string Returns the end date presented by the frontend as a formatted string
+YYMMDDhhmmss[Z] when the incoming connection was made over an SSL/TLS transport layer.
+
+ssl_f_notbefore: string Returns the start date presented by the frontend as a formatted string
+YYMMDDhhmmss[Z] when the incoming connection was made over an SSL/TLS transport layer.
+
+<a id="entry-7-3-4-ssl-f-s-dn-string"></a>
+
+**`ssl_f_s_dn([<entry>[,<occ>[,<format>]]]): string`**
+
+```haproxy
+ssl_f_s_dn([<entry>[,<occ>[,<format>]]]): string
+```
+
+When the incoming connection was made over an SSL/TLS transport layer, returns the full
+distinguished name of the subject of the certificate presented by the frontend when no `<entry>` is
+specified, or the value of the first given entry found from the beginning of the DN. If a
+positive/negative occurrence number is specified as the optional second argument, it returns the
+value of the nth given entry value from the beginning/end of the DN. For instance,
+"ssl_f_s_dn(OU,2)" the second organization unit, and "ssl_f_s_dn(CN)" retrieves the common name. The
+`<format>` parameter allows you to receive the DN suitable for consumption by different protocols.
+Currently supported is rfc2253 for LDAP v3. If you'd like to modify the format only you can specify
+an empty string and zero for the first two parameters. Example: ssl_f_s_dn(,0,rfc2253) If the
+requested entry's ASN.1 value (or, when no `<entry>` is specified, any entry in the DN) contains an
+embedded NUL byte followed by other data, it is considered malformed and no data is returned.
+
+ssl_f_serial: binary Returns the serial of the certificate presented by the frontend when the
+incoming connection was made over an SSL/TLS transport layer. When used for an ACL, the value(s) to
+match against can be passed in hexadecimal form.
+
+ssl_f_sha1: binary Returns the SHA-1 fingerprint of the certificate presented by the frontend when
+the incoming connection was made over an SSL/TLS transport layer. This can be used to know which
+certificate was chosen using SNI.
+
+ssl_f_sig_alg: string Returns the name of the algorithm used to sign the certificate presented by
+the frontend when the incoming connection was made over an SSL/TLS transport layer.
+
+ssl_f_version: integer Returns the version of the certificate presented by the frontend when the
+incoming connection was made over an SSL/TLS transport layer.
+
+ssl_fc: boolean Returns true when the front connection was made via an SSL/TLS transport layer and
+is locally deciphered. This means it has matched a socket declared with a "bind" line having the
+"ssl" option.
+
+Example:
+
+```shell
+# This passes "X-Proto: https" to servers when client connects over SSL
+listen http-https
+    bind :80
+    bind :443 ssl crt /etc/haproxy.pem
+    http-request add-header X-Proto https if { ssl_fc }
+```
+
+ssl_fc_alg_keysize: integer Returns the symmetric cipher key size supported in bits when the
+incoming connection was made over an SSL/TLS transport layer.
+
+ssl_fc_alpn: string This extracts the Application Layer Protocol Negotiation field from an incoming
+connection made via a TLS transport layer and locally deciphered by HAProxy. The result is a string
+containing the protocol name advertised by the client. The SSL library must have been built with
+support for TLS extensions enabled (check haproxy -vv). Note that the TLS ALPN extension is not
+advertised unless the "alpn" keyword on the "bind" line specifies a protocol list. Also, nothing
+forces the client to pick a protocol from this list, any other one may be requested. The TLS ALPN
+extension is meant to replace the TLS NPN extension. See also "ssl_fc_npn".
+
+ssl_fc_cipher: string Returns the name of the used cipher when the incoming connection was made over
+an SSL/TLS transport layer.
+
+<a id="entry-7-3-4-ssl-fc-cipherlist-bin-binary"></a>
+
+**`ssl_fc_cipherlist_bin([<filter_option>]): binary`**
+
+```haproxy
+ssl_fc_cipherlist_bin([<filter_option>]): binary
+```
+
+Returns the binary form of the client hello cipher list. The maximum returned value length is
+limited by the shared capture buffer size controlled by "tune.ssl.capture-buffer-size" setting.
+Setting `<filter_option>` allows to filter returned data. Accepted values:
+
+```text
+0: return the full list of ciphers (default)
+1: exclude GREASE (RFC8701) values from the output
+```
+
+Example:
+
+```text
+http-request set-header X-SSL-JA3 %[ssl_fc_protocol_hello_id],\
+    %[ssl_fc_cipherlist_bin(1),be2dec(-,2)],\
+    %[ssl_fc_extlist_bin(1),be2dec(-,2)],\
+    %[ssl_fc_eclist_bin(1),be2dec(-,2)],\
+    %[ssl_fc_ecformats_bin,be2dec(-,1)]
+acl is_malware req.fhdr(x-ssl-ja3),digest(md5),hex \
+    -f /path/to/file/with/malware-ja3.lst
+http-request set-header X-Malware True if is_malware
+http-request set-header X-Malware False if !is_malware
+```
+
+<a id="entry-7-3-4-ssl-fc-cipherlist-hex-string"></a>
+
+**`ssl_fc_cipherlist_hex([<filter_option>]): string`**
+
+```haproxy
+ssl_fc_cipherlist_hex([<filter_option>]): string
+```
+
+Returns the binary form of the client hello cipher list encoded as hexadecimal. The maximum returned
+value length is limited by the shared capture buffer size controlled by
+"tune.ssl.capture-buffer-size" setting. Setting `<filter_option>` allows to filter returned data.
+Accepted values:
+
+```text
+0: return the full list of ciphers (default)
+1: exclude GREASE (RFC8701) values from the output
+```
+
+<a id="entry-7-3-4-ssl-fc-cipherlist-str-string"></a>
+
+**`ssl_fc_cipherlist_str([<filter_option>]): string`**
+
+```haproxy
+ssl_fc_cipherlist_str([<filter_option>]): string
+```
+
+Returns the decoded text form of the client hello cipher list. The maximum returned value length is
+limited by the shared capture buffer size controlled by "tune.ssl.capture-buffer-size" setting.
+Setting `<filter_option>` allows to filter returned data. Accepted values:
+
+```text
+0: return the full list of ciphers (default)
+1: exclude GREASE (RFC8701) values from the output
+```
+
+Note that this sample-fetch is only available with OpenSSL \>= 1.0.2. If the function is not
+enabled, this sample-fetch returns the hash like "ssl_fc_cipherlist_xxh".
+
+ssl_fc_cipherlist_xxh: integer Returns a xxh64 of the cipher list. This hash can return only if the
+value "tune.ssl.capture-buffer-size" is set greater than 0, however the hash take into account all
+the data of the cipher list.
+
+ssl_fc_client_early_traffic_secret: string Return the CLIENT_EARLY_TRAFFIC_SECRET as an hexadecimal
+string for the front connection when the incoming connection was made over a TLS 1.3 transport
+layer. Require OpenSSL \>= 1.1.1. This is one of the keys dumped by the OpenSSL keylog callback to
+generate the SSLKEYLOGFILE. The SSL Key logging must be activated with "tune.ssl.keylog on" in the
+global section. See also "tune.ssl.keylog"
+
+ssl_fc_client_handshake_traffic_secret: string Return the CLIENT_HANDSHAKE_TRAFFIC_SECRET as an
+hexadecimal string for the front connection when the incoming connection was made over a TLS 1.3
+transport layer. Require OpenSSL \>= 1.1.1. This is one of the keys dumped by the OpenSSL keylog
+callback to generate the SSLKEYLOGFILE. The SSL Key logging must be activated with "tune.ssl.keylog
+on" in the global section. See also "tune.ssl.keylog"
+
+ssl_fc_client_random: binary Returns the client random of the front connection when the incoming
+connection was made over an SSL/TLS transport layer. It is useful to to decrypt traffic sent using
+ephemeral ciphers. This requires OpenSSL \>= 1.1.0, or BoringSSL.
+
+ssl_fc_client_traffic_secret_0: string Return the CLIENT_TRAFFIC_SECRET_0 as an hexadecimal string
+for the front connection when the incoming connection was made over a TLS 1.3 transport layer.
+Require OpenSSL \>= 1.1.1. This is one of the keys dumped by the OpenSSL keylog callback to generate
+the SSLKEYLOGFILE. The SSL Key logging must be activated with "tune.ssl.keylog on" in the global
+section. See also "tune.ssl.keylog"
+
+ssl_fc_crtname: string Returns the name of the certificate that was selected for the incoming
+SSL/TLS connection. This is the name as it appears in "show ssl cert": it may be the filename with
+its relative or absolute path, or an alias, depending on how the certificate was declared in the
+configuration.
+
+Example:
+
+```text
+crt-store example
+    load crt "example.com.pem"
+
+frontend www
+    bind *:443 ssl crt "@example/example.com.pem"
+    acl match_certificate ssl_fc_crtname -m beg -i "@example/"
+    http-request set-header X-Cert-Name %[ssl_fc_crtname] if match_certificate
+```
+
+ssl_fc_curve: string Returns the name of the curve used in the key agreement when the incoming
+connection was made over an SSL/TLS transport layer. This requires OpenSSL \>= 3.0.0.
+
+ssl_fc_early_rcvd: boolean Returns true if early data were seen over that connection, regardless of
+the fact that the handshake has since completed. It has no practical use case for traffic
+processing, however it's about the only way to "see" that a client used 0-RTT to send early data,
+and is sometimes useful when debugging, since the only other alternatives are network traffic
+captures or logging the front connection's flags and matching them in the code. It may also be
+useful to get statistics on clients' capabilities. See also "ssl_fc_has_early".
+
+ssl_fc_early_exporter_secret: string Return the EARLY_EXPORTER_SECRET as an hexadecimal string for
+the front connection when the incoming connection was made over an TLS 1.3 transport layer. Require
+OpenSSL \>= 1.1.1. This is one of the keys dumped by the OpenSSL keylog callback to generate the
+SSLKEYLOGFILE. The SSL Key logging must be activated with "tune.ssl.keylog on" in the global
+section. See also "tune.ssl.keylog"
+
+ssl_fc_ecformats_bin: binary Return the binary form of the client hello supported elliptic curve
+point formats. The maximum returned value length is limited by the shared capture buffer size
+controlled by "tune.ssl.capture-buffer-size" setting.
+
+Example:
+
+```text
+http-request set-header X-SSL-JA3 %[ssl_fc_protocol_hello_id],\
+    %[ssl_fc_cipherlist_bin(1),be2dec(-,2)],\
+    %[ssl_fc_extlist_bin(1),be2dec(-,2)],\
+    %[ssl_fc_eclist_bin(1),be2dec(-,2)],\
+    %[ssl_fc_ecformats_bin,be2dec(-,1)]
+acl is_malware req.fhdr(x-ssl-ja3),digest(md5),hex \
+    -f /path/to/file/with/malware-ja3.lst
+http-request set-header X-Malware True if is_malware
+http-request set-header X-Malware False if !is_malware
+```
+
+<a id="entry-7-3-4-ssl-fc-eclist-bin-binary"></a>
+
+**`ssl_fc_eclist_bin([<filter_option>]): binary`**
+
+```haproxy
+ssl_fc_eclist_bin([<filter_option>]): binary
+```
+
+Returns the binary form of the client hello supported elliptic curves. The maximum returned value
+length is limited by the shared capture buffer size controlled by "tune.ssl.capture-buffer-size"
+setting. Setting `<filter_option>` allows to filter returned data. Accepted values:
+
+```text
+0: return the full list of supported elliptic curves (default)
+1: exclude GREASE (RFC8701) values from the output
+```
+
+Example:
+
+```text
+http-request set-header X-SSL-JA3 %[ssl_fc_protocol_hello_id],\
+    %[ssl_fc_cipherlist_bin(1),be2dec(-,2)],\
+    %[ssl_fc_extlist_bin(1),be2dec(-,2)],\
+    %[ssl_fc_eclist_bin(1),be2dec(-,2)],\
+    %[ssl_fc_ecformats_bin,be2dec(-,1)]
+acl is_malware req.fhdr(x-ssl-ja3),digest(md5),hex \
+    -f /path/to/file/with/malware-ja3.lst
+http-request set-header X-Malware True if is_malware
+http-request set-header X-Malware False if !is_malware
+```
+
+ssl_fc_err: integer When the incoming connection was made over an SSL/TLS transport layer, returns
+the ID of the last error of the first error stack raised on the frontend side, or 0 if no error was
+encountered. It can be used to identify handshake related errors other than verify ones (such as
+cipher mismatch), as well as other read or write errors occurring during the connection's lifetime.
+Any error happening during the client's certificate verification process will not be raised through
+this fetch but via the existing "ssl_c_err", "ssl_c_ca_err" and "ssl_c_ca_err_depth" fetches. In
+order to get a text description of this error code, you can either use the "ssl_fc_err_str" sample
+fetch or use the "openssl errstr" command (which takes an error code in hexadecimal representation
+as parameter). Please refer to your SSL library's documentation to find the exhaustive list of error
+codes.
+
+ssl_fc_err_str: string When the incoming connection was made over an SSL/TLS transport layer,
+returns a string representation of the last error of the first error stack that was raised on the
+frontend side. Any error happening during the client's certificate verification process will not be
+raised through this fetch. See also "ssl_fc_err".
+
+ssl_fc_exporter_secret: string Return the EXPORTER_SECRET as an hexadecimal string for the front
+connection when the incoming connection was made over a TLS 1.3 transport layer. Require OpenSSL \>=
+1.1.1. This is one of the keys dumped by the OpenSSL keylog callback to generate the SSLKEYLOGFILE.
+The SSL Key logging must be activated with "tune.ssl.keylog on" in the global section. See also
+"tune.ssl.keylog"
+
+<a id="entry-7-3-4-ssl-fc-extlist-bin-binary"></a>
+
+**`ssl_fc_extlist_bin([<filter_option>]): binary`**
+
+```haproxy
+ssl_fc_extlist_bin([<filter_option>]): binary
+```
+
+Returns the binary form of the client hello extension list. The maximum returned value length is
+limited by the shared capture buffer size controlled by "tune.ssl.capture-buffer-size" setting.
+Setting `<filter_option>` allows to filter returned data. Accepted values:
+
+```text
+0: return the full list of extensions (default)
+1: exclude GREASE (RFC8701) values from the output
+```
+
+Example:
+
+```text
+http-request set-header X-SSL-JA3 %[ssl_fc_protocol_hello_id],\
+    %[ssl_fc_cipherlist_bin(1),be2dec(-,2)],\
+    %[ssl_fc_extlist_bin(1),be2dec(-,2)],\
+    %[ssl_fc_eclist_bin(1),be2dec(-,2)],\
+    %[ssl_fc_ecformats_bin,be2dec(-,1)]
+acl is_malware req.fhdr(x-ssl-ja3),digest(md5),hex \
+    -f /path/to/file/with/malware-ja3.lst
+http-request set-header X-Malware True if is_malware
+http-request set-header X-Malware False if !is_malware
+```
+
+ssl_fc_has_crt: boolean Returns true if a client certificate is present in an incoming connection
+over SSL/TLS transport layer. Useful if 'verify' statement is set to 'optional'. Note: on SSL
+session resumption with Session ID or TLS ticket, client certificate is not present in the current
+connection but may be retrieved from the cache or the ticket. So prefer "ssl_c_used" if you want to
+check if current SSL session uses a client certificate.
+
+ssl_fc_has_early: boolean Returns true if early data were sent, and the handshake didn't complete
+yet. As it has security implications, it is useful to be able to refuse those, or wait until the
+handshake completes (via the "wait-for-handshake" action). See also "ssl_fc_early_rcvd".
+
+ssl_fc_has_sni: boolean This checks for the presence of a Server Name Indication TLS extension (SNI)
+in an incoming connection was made over an SSL/TLS transport layer. Returns true when the incoming
+connection presents a TLS SNI field. This requires that the SSL library is built with support for
+TLS extensions enabled (check haproxy -vv).
+
+ssl_fc_is_resumed: boolean Returns true if the SSL/TLS session has been resumed through the use of
+SSL session cache or TLS tickets on an incoming connection over an SSL/TLS transport layer.
+
+ssl_fc_npn: string This extracts the Next Protocol Negotiation field from an incoming connection
+made via a TLS transport layer and locally deciphered by HAProxy. The result is a string containing
+the protocol name advertised by the client. The SSL library must have been built with support for
+TLS extensions enabled (check haproxy -vv). Note that the TLS NPN extension is not advertised unless
+the "npn" keyword on the "bind" line specifies a protocol list. Also, nothing forces the client to
+pick a protocol from this list, any other one may be requested. Please note that the TLS NPN
+extension was replaced with ALPN.
+
+ssl_fc_protocol: string Returns the name of the used protocol when the incoming connection was made
+over an SSL/TLS transport layer.
+
+ssl_fc_protocol_hello_id: integer The version of the TLS protocol by which the client wishes to
+communicate during the session as indicated in client hello message. This value can return only if
+the value "tune.ssl.capture-buffer-size" is set greater than 0.
+
+Example:
+
+```text
+http-request set-header X-SSL-JA3 %[ssl_fc_protocol_hello_id],\
+    %[ssl_fc_cipherlist_bin(1),be2dec(-,2)],\
+    %[ssl_fc_extlist_bin(1),be2dec(-,2)],\
+    %[ssl_fc_eclist_bin(1),be2dec(-,2)],\
+    %[ssl_fc_ecformats_bin,be2dec(-,1)]
+acl is_malware req.fhdr(x-ssl-ja3),digest(md5),hex \
+    -f /path/to/file/with/malware-ja3.lst
+http-request set-header X-Malware True if is_malware
+http-request set-header X-Malware False if !is_malware
+```
+
+ssl_fc_server_handshake_traffic_secret: string Return the SERVER_HANDSHAKE_TRAFFIC_SECRET as an
+hexadecimal string for the front connection when the incoming connection was made over a TLS 1.3
+transport layer. Require OpenSSL \>= 1.1.1. This is one of the keys dumped by the OpenSSL keylog
+callback to generate the SSLKEYLOGFILE. The SSL Key logging must be activated with "tune.ssl.keylog
+on" in the global section. See also "tune.ssl.keylog"
+
+ssl_fc_server_random: binary Returns the server random of the front connection when the incoming
+connection was made over an SSL/TLS transport layer. It is useful to to decrypt traffic sent using
+ephemeral ciphers. This requires OpenSSL \>= 1.1.0, or BoringSSL.
+
+ssl_fc_server_traffic_secret_0: string Return the SERVER_TRAFFIC_SECRET_0 as an hexadecimal string
+for the front connection when the incoming connection was made over an TLS 1.3 transport layer.
+Require OpenSSL \>= 1.1.1. This is one of the keys dumped by the OpenSSL keylog callback to generate
+the SSLKEYLOGFILE. The SSL Key logging must be activated with "tune.ssl.keylog on" in the global
+section. See also "tune.ssl.keylog"
+
+ssl_fc_session_id: binary Returns the SSL ID of the front connection when the incoming connection
+was made over an SSL/TLS transport layer. It is useful to stick a given client to a server. It is
+important to note that some browsers refresh their session ID every few minutes.
+
+ssl_fc_session_key: binary Returns the SSL session master key of the front connection when the
+incoming connection was made over an SSL/TLS transport layer. It is useful to decrypt traffic sent
+using ephemeral ciphers. This requires OpenSSL \>= 1.1.0, or BoringSSL.
+
+<a id="entry-7-3-4-ssl-fc-sigalgs-bin-binary"></a>
+
+**`ssl_fc_sigalgs_bin([<filter_option>]): binary`**
+
+```haproxy
+ssl_fc_sigalgs_bin([<filter_option>]): binary
+```
+
+Returns the content of the signatures_algorithms (13) TLS extension presented during the Client
+Hello. It provides a binary list of 2-bytes algorithms defined in the TLS RFC:
+<https://datatracker.ietf.org/doc/html/rfc8446#section-4.2.3>.
+
+This value can return only if the value "tune.ssl.capture-buffer-size" is set greater than 0.
+Setting `<filter_option>` allows to filter returned data. Accepted values: 0: return the full list
+of ciphers (default) 1: exclude GREASE (RFC8701) values from the output
+
+ssl_fc_sni: string This extracts the Server Name Indication TLS extension (SNI) field from an
+incoming connection made via an SSL/TLS transport layer and locally deciphered by HAProxy. The
+result (when present) typically is a string matching the HTTPS host name (253 chars or less). The
+SSL library must have been built with support for TLS extensions enabled (check haproxy -vv).
+
+This fetch is different from "req.ssl_sni" above in that it applies to the connection being
+deciphered by HAProxy and not to SSL contents being blindly forwarded. See also "ssl_fc_sni_end" and
+"ssl_fc_sni_reg" below. This requires that the SSL library is built with support for TLS extensions
+enabled (check haproxy -vv).
+
+CAUTION! Except under very specific conditions, it is normally not correct to use this field as a
+substitute for the HTTP "Host" header field. For example, when forwarding an HTTPS connection to a
+server, the SNI field must be set from the HTTP Host header field using "req.hdr(host)" and not from
+the front SNI value. The reason is that SNI is solely used to select the certificate the server side
+will present, and that clients are then allowed to send requests with different Host values as long
+as they match the names in the certificate. As such, "ssl_fc_sni" should normally not be used as an
+argument to the "sni" server keyword, unless the backend works in TCP mode.
+
+ACL derivatives:
+
+```text
+ssl_fc_sni_end: suffix match
+ssl_fc_sni_reg: regex match
+```
+
+<a id="entry-7-3-4-ssl-fc-supported-versions-bin-binary"></a>
+
+**`ssl_fc_supported_versions_bin([<filter_option>]): binary`**
+
+```haproxy
+ssl_fc_supported_versions_bin([<filter_option>]): binary
+```
+
+Returns the content of the supported_versions (43) TLS extension presented during the Client Hello.
+It provides a binary list of 2-bytes versions. TLSv1.3 (0x0304), TLSv1.2 (0x0303).
+
+This value can return only if the value "tune.ssl.capture-buffer-size" is set greater than 0.
+Setting `<filter_option>` allows to filter returned data. Accepted values: 0: return the full list
+of ciphers (default) 1: exclude GREASE (RFC8701) values from the output
+
+ssl_fc_unique_id: binary When the incoming connection was made over an SSL/TLS transport layer,
+returns the TLS unique ID as defined in RFC5929 [section 3](https://www.rfc-editor.org/rfc/rfc5929#section-3). The unique id can be encoded to base64
+using the converter: "ssl_fc_unique_id,base64".
+
+ssl_fc_use_keysize: integer Returns the symmetric cipher key size used in bits when the incoming
+connection was made over an SSL/TLS transport layer.
+
+ssl_s_chain_der: binary Returns the DER formatted chain certificate presented by the server when the
+outgoing connection was made over an SSL/TLS transport layer. When used for an ACL, the value(s) to
+match against can be passed in hexadecimal form. One can parse the result with any lib accepting
+ASN.1 DER data. It currently does not support resumed sessions.
+
+ssl_s_der: binary Returns the DER formatted certificate presented by the server when the outgoing
+connection was made over an SSL/TLS transport layer. When used for an ACL, the value(s) to match
+against can be passed in hexadecimal form.
+
+<a id="entry-7-3-4-ssl-s-i-dn-string"></a>
+
+**`ssl_s_i_dn([<entry>[,<occ>[,<format>]]]): string`**
+
+```haproxy
+ssl_s_i_dn([<entry>[,<occ>[,<format>]]]): string
+```
+
+When the outgoing connection was made over an SSL/TLS transport layer, returns the full
+distinguished name of the issuer of the certificate presented by the server when no `<entry>` is
+specified, or the value of the first given entry found from the beginning of the DN. If a
+positive/negative occurrence number is specified as the optional second argument, it returns the
+value of the nth given entry value from the beginning/end of the DN. For instance,
+"ssl_s_i_dn(OU,2)" the second organization unit, and "ssl_s_i_dn(CN)" retrieves the common name. The
+`<format>` parameter allows you to receive the DN suitable for consumption by different protocols.
+Currently supported is rfc2253 for LDAP v3. If you'd like to modify the format only you can specify
+an empty string and zero for the first two parameters. Example: ssl_s_i_dn(,0,rfc2253) If the
+requested entry's ASN.1 value (or, when no `<entry>` is specified, any entry in the DN) contains an
+embedded NUL byte followed by other data, it is considered malformed and no data is returned.
+
+ssl_s_key_alg: string Returns the name of the algorithm used to generate the key of the certificate
+presented by the server when the outgoing connection was made over an SSL/TLS transport layer.
+
+ssl_s_notafter: string Returns the end date presented by the server as a formatted string
+YYMMDDhhmmss[Z] when the outgoing connection was made over an SSL/TLS transport layer.
+
+ssl_s_notbefore: string Returns the start date presented by the server as a formatted string
+YYMMDDhhmmss[Z] when the outgoing connection was made over an SSL/TLS transport layer.
+
+<a id="entry-7-3-4-ssl-s-s-dn-string"></a>
+
+**`ssl_s_s_dn([<entry>[,<occ>[,<format>]]]): string`**
+
+```haproxy
+ssl_s_s_dn([<entry>[,<occ>[,<format>]]]): string
+```
+
+When the outgoing connection was made over an SSL/TLS transport layer, returns the full
+distinguished name of the subject of the certificate presented by the server when no `<entry>` is
+specified, or the value of the first given entry found from the beginning of the DN. If a
+positive/negative occurrence number is specified as the optional second argument, it returns the
+value of the nth given entry value from the beginning/end of the DN. For instance,
+"ssl_s_s_dn(OU,2)" the second organization unit, and "ssl_s_s_dn(CN)" retrieves the common name. The
+`<format>` parameter allows you to receive the DN suitable for consumption by different protocols.
+Currently supported is rfc2253 for LDAP v3. If you'd like to modify the format only you can specify
+an empty string and zero for the first two parameters. Example: ssl_s_s_dn(,0,rfc2253) If the
+requested entry's ASN.1 value (or, when no `<entry>` is specified, any entry in the DN) contains an
+embedded NUL byte followed by other data, it is considered malformed and no data is returned.
+
+ssl_s_serial: binary Returns the serial of the certificate presented by the server when the outgoing
+connection was made over an SSL/TLS transport layer. When used for an ACL, the value(s) to match
+against can be passed in hexadecimal form.
+
+ssl_s_sha1: binary Returns the SHA-1 fingerprint of the certificate presented by the server when the
+outgoing connection was made over an SSL/TLS transport layer. This can be used to know which
+certificate was chosen using SNI.
+
+ssl_s_sig_alg: string Returns the name of the algorithm used to sign the certificate presented by
+the server when the outgoing connection was made over an SSL/TLS transport layer.
+
+ssl_s_version: integer Returns the version of the certificate presented by the server when the
+outgoing connection was made over an SSL/TLS transport layer.
+
+txn.timer.user: integer Total estimated time as seen from client, between the moment the proxy
+accepted it and the moment both ends were closed, without idle time. This is the equivalent of %Tu
+in the log-format and is reported in milliseconds (ms). For more details see [Section 8.4](/haproxy/configuration-logging/#section-8-4) "Timing
+events"
+
+### 7.3.5. Fetching samples from buffer contents (Layer 6) {#section-7-3-5}
+
+Fetching samples from buffer contents is a bit different from the previous sample fetches above
+because the sampled data are ephemeral. These data can only be used when they're available and will
+be lost when they're forwarded. For this reason, samples fetched from buffer contents during a
+request cannot be used in a response for example. Even while the data are being fetched, they can
+change. Sometimes it is necessary to set some delays or combine multiple sample fetch methods to
+ensure that the expected data are complete and usable, for example through TCP request content
+inspection. Please see the "tcp-request content" keyword for more detailed information on the
+subject.
+
+Warning: Following sample fetches are ignored if used from HTTP proxies. They only deal with raw
+contents found in the buffers. On their side, HTTP proxies use structured content. Thus raw
+representation of these data are meaningless. A warning is emitted if an ACL relies on one of the
+following sample fetches. But it is not possible to detect all invalid usage (for instance inside a
+Custom log format or a sample expression). So be careful.
+
+Summary of sample fetch methods in this section and their respective types:
+
+```text
+  keyword                                             output type
+----------------------------------------------------+-------------
+distcc_body(<token>[,<occ>])                          binary
+distcc_param(<token>[,<occ>])                         integer
+payload(<offset>,<length>)                            binary
+payload_lv(<offset1>,<length>[,<offset2>])            binary
+rdp_cookie([<name>])                                  string
+rdp_cookie_cnt([name])                                integer
+rep_ssl_hello_type                                    integer
+req.len                                               integer
+req.payload(<offset>,<length>)                        binary
+req.payload_lv(<offset1>,<length>[,<offset2>])        binary
+req.proto_http                                        boolean
+req.rdp_cookie([<name>])                              string
+req.rdp_cookie_cnt([name])                            integer
+req.ssl_alpn                                          string
+req.ssl_cipherlist                                    binary
+req.ssl_ec_ext                                        boolean
+req.ssl_hello_type                                    integer
+req.ssl_keyshare_groups                               binary
+req.ssl_sigalgs                                       binary
+req.ssl_sni                                           string
+req.ssl_st_ext                                        integer
+req.ssl_supported_groups                              binary
+req.ssl_ver                                           integer
+req_len                                               integer
+req_proto_http                                        boolean
+req_ssl_hello_type                                    integer
+req_ssl_sni                                           string
+req_ssl_ver                                           integer
+res.len                                               integer
+res.payload(<offset>,<length>)                        binary
+res.payload_lv(<offset1>,<length>[,<offset2>])        binary
+res.ssl_hello_type                                    integer
+----------------------------------------------------+-------------
+```
+
+Detailed list:
+
+<a id="entry-7-3-5-distcc-body-binary"></a>
+
+**`distcc_body(<token>[,<occ>]): binary`**
+
+```haproxy
+distcc_body(<token>[,<occ>]): binary
+```
+
+Parses a distcc message and returns the body associated to occurrence \#`<occ>` of the token
+`<token>`. Occurrences start at 1, and when unspecified, any may match though in practice only the
+first one is checked for now. This can be used to extract file names or arguments in files built
+using distcc through HAProxy. Please refer to distcc's protocol documentation for the complete list
+of supported tokens.
+
+<a id="entry-7-3-5-distcc-param-integer"></a>
+
+**`distcc_param(<token>[,<occ>]): integer`**
+
+```haproxy
+distcc_param(<token>[,<occ>]): integer
+```
+
+Parses a distcc message and returns the parameter associated to occurrence \#`<occ>` of the token
+`<token>`. Occurrences start at 1, and when unspecified, any may match though in practice only the
+first one is checked for now. This can be used to extract certain information such as the protocol
+version, the file size or the argument in files built using distcc through HAProxy. Another use case
+consists in waiting for the start of the preprocessed file contents before connecting to the server
+to avoid keeping idle connections. Please refer to distcc's protocol documentation for the complete
+list of supported tokens.
+
+Example:
+
+```shell
+# wait up to 20s for the pre-processed file to be uploaded
+tcp-request inspect-delay 20s
+tcp-request content accept if { distcc_param(DOTI) -m found }
+# send large files to the big farm
+use_backend big_farm if { distcc_param(DOTI) gt 1000000 }
+```
+
+<a id="entry-7-3-5-payload-binary"></a>
+
+**`payload(<offset>,<length>): binary (deprecated)`**
+
+```haproxy
+payload(<offset>,<length>): binary (deprecated)
+```
+
+This is an alias for "req.payload" when used in the context of a request (e.g. "stick on", "stick
+match"), and for "res.payload" when used in the context of a response such as in "stick store
+response".
+
+<a id="entry-7-3-5-payload-lv-binary"></a>
+
+**`payload_lv(<offset1>,<length>[,<offset2>]): binary (deprecated)`**
+
+```haproxy
+payload_lv(<offset1>,<length>[,<offset2>]): binary (deprecated)
+```
+
+This is an alias for "req.payload_lv" when used in the context of a request (e.g. "stick on", "stick
+match"), and for "res.payload_lv" when used in the context of a response such as in "stick store
+response".
+
+req.len: integer req_len: integer (deprecated) Returns an integer value corresponding to the number
+of bytes present in the request buffer. This is mostly used in ACL. It is important to understand
+that this test does not return false as long as the buffer is changing. This means that a check with
+equality to zero will almost always immediately match at the beginning of the session, while a test
+for more data will wait for that data to come in and return false only when HAProxy is certain that
+no more data will come in. This test was designed to be used with TCP request content inspection.
+
+<a id="entry-7-3-5-req-payload-binary"></a>
+
+**`req.payload(<offset>,<length>): binary`**
+
+```haproxy
+req.payload(<offset>,<length>): binary
+```
+
+This extracts a binary block of `<length>` bytes and starting at byte `<offset>` in the request
+buffer. As a special case, if the `<length>` argument is zero, the the whole buffer from `<offset>`
+to the end is extracted. This can be used with ACLs in order to check for the presence of some
+content in a buffer at any location.
+
+ACL derivatives:
+
+```text
+req.payload(<offset>,<length>): hex binary match
+```
+
+<a id="entry-7-3-5-req-payload-lv-binary"></a>
+
+**`req.payload_lv(<offset1>,<length>[,<offset2>]): binary`**
+
+```haproxy
+req.payload_lv(<offset1>,<length>[,<offset2>]): binary
+```
+
+This extracts a binary block whose size is specified at `<offset1>` for `<length>` bytes, and which
+starts at `<offset2>` if specified or just after the length in the request buffer. The `<offset2>`
+parameter also supports relative offsets if prepended with a '+' or '-' sign.
+
+ACL derivatives:
+
+```text
+req.payload_lv(<offset1>,<length>[,<offset2>]): hex binary match
+```
+
+Example: please consult the example from the "stick store-response" keyword.
+
+req.proto_http: boolean req_proto_http: boolean (deprecated) Returns true when data in the request
+buffer look like HTTP and correctly parses as such. It is the same parser as the common HTTP request
+parser which is used so there should be no surprises. The test does not match until the request is
+complete, failed or timed out. This test may be used to report the protocol in TCP logs, but the
+biggest use is to block TCP request analysis until a complete HTTP request is present in the buffer,
+for example to track a header.
+
+Example:
+
+```shell
+# track request counts per "base" (concatenation of Host+URL)
+tcp-request inspect-delay 10s
+tcp-request content reject if !HTTP
+tcp-request content track-sc0 base table req-rate
+```
+
+<a id="entry-7-3-5-req-rdp-cookie-string"></a>
+
+**`req.rdp_cookie([<name>]): string`**
+
+```haproxy
+req.rdp_cookie([<name>]): string
+rdp_cookie([<name>]): string (deprecated)
+```
+
+When the request buffer looks like the RDP protocol, extracts the RDP cookie `<name>`, or any cookie
+if unspecified. The parser only checks for the first cookie, as illustrated in the RDP protocol
+specification. The cookie name is case insensitive. Generally the "MSTS" cookie name will be used,
+as it can contain the user name of the client connecting to the server if properly configured on the
+client. The "MSTSHASH" cookie is often used as well for session stickiness to servers.
+
+This differs from "balance rdp-cookie" in that any balancing algorithm may be used and thus the
+distribution of clients to backend servers is not linked to a hash of the RDP cookie. It is
+envisaged that using a balancing algorithm such as "balance roundrobin" or "balance leastconn" will
+lead to a more even distribution of clients to backend servers than the hash used by "balance
+rdp-cookie".
+
+ACL derivatives:
+
+```text
+req.rdp_cookie([<name>]): exact string match
+```
+
+Example:
+
+```text
+listen tse-farm
+    bind 0.0.0.0:3389
+    # wait up to 5s for an RDP cookie in the request
+    tcp-request inspect-delay 5s
+    tcp-request content accept if RDP_COOKIE
+    # apply RDP cookie persistence
+    persist rdp-cookie
+    # Persist based on the mstshash cookie
+    # This is only useful makes sense if
+    # balance rdp-cookie is not used
+    stick-table type string size 204800
+    stick on req.rdp_cookie(mstshash)
+    server srv1 1.1.1.1:3389
+    server srv1 1.1.1.2:3389
+```
+
+See also: "balance rdp-cookie", "persist rdp-cookie", "tcp-request" and the "req.rdp_cookie" ACL.
+
+<a id="entry-7-3-5-req-rdp-cookie-cnt-integer"></a>
+
+**`req.rdp_cookie_cnt([name]): integer`**
+
+```haproxy
+req.rdp_cookie_cnt([name]): integer
+rdp_cookie_cnt([name]): integer (deprecated)
+```
+
+Tries to parse the request buffer as RDP protocol, then returns an integer corresponding to the
+number of RDP cookies found. If an optional cookie name is passed, only cookies matching this name
+are considered. This is mostly used in ACL.
+
+ACL derivatives:
+
+```text
+req.rdp_cookie_cnt([<name>]): integer match
+```
+
+req.ssl_alpn: string Returns a string containing the values of the Application-Layer Protocol
+Negotiation (ALPN) TLS extension (RFC7301), sent by the client within the SSL ClientHello message.
+Note that this only applies to raw contents found in the request buffer and not to the contents
+deciphered via an SSL data layer, so this will not work with "bind" lines having the "ssl" option.
+This is useful in ACL to make a routing decision based upon the ALPN preferences of a TLS client,
+like in the example below. See also "ssl_fc_alpn". This fetch only analyzes the first ClientHello
+message found in the request buffer, see the "req.ssl_sni" keyword documentation for more details
+about the implications of this limitation (HelloRetryRequest, Renegotiation, Encrypted Client
+Hello).
+
+Examples:
+
+```shell
+# Wait for a client hello for at most 5 seconds
+tcp-request inspect-delay 5s
+tcp-request content accept if { req.ssl_hello_type 1 }
+use_backend bk_acme if { req.ssl_alpn acme-tls/1 }
+default_backend bk_default
+```
+
+<a id="entry-7-3-5-req-ssl-cipherlist-binary"></a>
+
+**`req.ssl_cipherlist binary`**
+
+```haproxy
+req.ssl_cipherlist binary
+```
+
+Returns the binary form of the list of symmetric cipher options supported by the client as reported
+in the contents of a TLS ClientHello. Note that this only applies to raw contents found in the
+request buffer and not to contents deciphered via an SSL data layer, so this will not work with
+"bind" lines having the "ssl" option. Refer to "ssl_fc_cipherlist_bin" which is the SSL bind
+equivalent that can be used when the "ssl" option is specified. This fetch only analyzes the first
+ClientHello message found in the request buffer, see the "req.ssl_sni" keyword documentation for
+more details about the implications of this limitation (HelloRetryRequest, Renegotiation, Encrypted
+Client Hello).
+
+Examples:
+
+```shell
+# Wait for a client hello for at most 5 seconds
+tcp-request inspect-delay 5s
+tcp-request content accept if { req.ssl_hello_type 1 }
+use-server fe3 if { req.ssl_cipherlist,be2hex(:,2),lower -m sub 1302:009f }
+server fe3  ${htst_fe3_addr}:${htst_fe3_port}
+```
+
+req.ssl_ec_ext: boolean Returns a boolean identifying if client sent the Supported Elliptic Curves
+Extension as defined in RFC4492, [section 5.1](https://www.rfc-editor.org/rfc/rfc4492#section-5.1). within the SSL ClientHello message. This can be used
+to present ECC compatible clients with EC certificate and to use RSA for all others, on the same IP
+address. Note that this only applies to raw contents found in the request buffer and not to contents
+deciphered via an SSL data layer, so this will not work with "bind" lines having the "ssl" option.
+This fetch only analyzes the first ClientHello message found in the request buffer, see the
+"req.ssl_sni" keyword documentation for more details about the implications of this limitation
+(HelloRetryRequest, Renegotiation, Encrypted Client Hello).
+
+req.ssl_hello_type: integer req_ssl_hello_type: integer (deprecated) Returns an integer value
+containing the type of the SSL hello message found in the request buffer if the buffer contains data
+that parse as a complete SSL (v3 or superior) client hello message. Note that this only applies to
+raw contents found in the request buffer and not to contents deciphered via an SSL data layer, so
+this will not work with "bind" lines having the "ssl" option. This is mostly used in ACL to detect
+presence of an SSL hello message that is supposed to contain an SSL session ID usable for
+stickiness. This fetch only analyzes the first ClientHello message found in the request buffer, see
+the "req.ssl_sni" keyword documentation for more details about the implications of this limitation
+(HelloRetryRequest, Renegotiation, Encrypted Client Hello).
+
+<a id="entry-7-3-5-req-ssl-keyshare-groups-binary"></a>
+
+**`req.ssl_keyshare_groups binary`**
+
+```haproxy
+req.ssl_keyshare_groups binary
+```
+
+Return the binary format of the list of cryptographic parameters for key exchange supported by the
+client as reported in the TLS ClientHello. In TLS v1.3, keyshare is part of the ClientHello message
+and is the final client hello extension. Note that this only applies to raw contents found in the
+request buffer and not to contents deciphered via an SSL data layer, so this will not work with
+"bind" lines having the "ssl" option. This fetch only analyzes the first ClientHello message found
+in the request buffer, see the "req.ssl_sni" keyword documentation for more details about the
+implications of this limitation (HelloRetryRequest, Renegotiation, Encrypted Client Hello).
+
+Examples:
+
+```shell
+# Wait for a client hello for at most 5 seconds
+tcp-request inspect-delay 5s
+tcp-request content accept if { req.ssl_hello_type 1 }
+use-server fe3 if { req.ssl_keyshare_groups,be2hex(:,2),lower -m sub 001d  }
+server fe3  ${htst_fe3_addr}:${htst_fe3_port}
+```
+
+<a id="entry-7-3-5-req-ssl-sigalgs-binary"></a>
+
+**`req.ssl_sigalgs binary`**
+
+```haproxy
+req.ssl_sigalgs binary
+```
+
+Returns the binary form of the list of signature algorithms supported by the client as reported in
+the TLS ClientHello. This is available as a client hello extension. Note that this only applies to
+raw contents found in the request buffer and not to contents deciphered via an SSL data layer, so
+this will not work with "bind" lines having the "ssl" option. Refer to "ssl_fc_sigalgs_bin" which is
+the SSL bind equivalent that can be used when the "ssl" option is specified. This fetch only
+analyzes the first ClientHello message found in the request buffer, see the "req.ssl_sni" keyword
+documentation for more details about the implications of this limitation (HelloRetryRequest,
+Renegotiation, Encrypted Client Hello).
+
+Examples:
+
+```shell
+# Wait for a client hello for at most 5 seconds
+tcp-request inspect-delay 5s
+tcp-request content accept if { req.ssl_hello_type 1 }
+use-server fe4 if { req.ssl_sigalgs,be2hex(:,2),lower -m sub 0403:0805 }
+server fe4  ${htst_fe4_addr}:${htst_fe4_port}
+```
+
+req.ssl_sni: string req_ssl_sni: string (deprecated) Returns a string containing the value of the
+Server Name TLS extension sent by a client in a TLS stream passing through the request buffer if the
+buffer contains data that parse as a complete SSL (v3 or superior) client hello message. Note that
+this only applies to raw contents found in the request buffer and not to contents deciphered via an
+SSL data layer, so this will not work with "bind" lines having the "ssl" option. This will only work
+for actual implicit TLS based protocols like HTTPS (443), IMAPS (993), SMTPS (465), however it will
+not work for explicit TLS based protocols, like SMTP (25/587) or IMAP (143). SNI normally contains
+the name of the host the client tries to connect to (for recent browsers). This test was designed to
+be used with TCP request content inspection. If content switching is needed, it is recommended to
+first wait for a complete client hello (type 1), like in the example below. See also "ssl_fc_sni".
+Beware that, for the reasons detailed below (HelloRetryRequest, Renegotiation, Encrypted Client
+Hello), the value returned by this fetch is not reliable enough to be used alone for allowing or
+denying access to certain hosts.
+
+This fetch only parses the first ClientHello message found in the request buffer. If the client
+sends several ClientHello messages within the same TCP stream, for instance because the server
+requested a HelloRetryRequest (HRR) as part of TLS 1.3, or because the client initiates a TLS
+renegotiation (which sends a new ClientHello later in the same TCP stream, possibly carrying a
+different SNI), only the SNI carried by that very first ClientHello will be returned, the content of
+any subsequent ClientHello will be ignored.
+
+When Encrypted Client Hello (ECH) is used, the ClientHello seen on the wire is only the "Outer"
+ClientHello, which embeds the real, encrypted "Inner" ClientHello. The SNI extracted by this fetch
+in that case is the one from the Outer ClientHello, which is a decoy SNI and not the actual host the
+client intends to reach. This fetch is currently not able to decrypt nor analyze the Inner
+ClientHello, so it must not be relied upon to make routing or access control decisions when ECH is
+in use.
+
+ACL derivatives:
+
+```text
+req.ssl_sni: exact string match
+```
+
+Examples:
+
+```shell
+# Wait for a client hello for at most 5 seconds
+tcp-request inspect-delay 5s
+tcp-request content accept if { req.ssl_hello_type 1 }
+use_backend bk_allow if { req.ssl_sni -f allowed_sites }
+default_backend bk_sorry_page
+```
+
+req.ssl_st_ext: integer Returns 0 if the client didn't send a SessionTicket TLS Extension (RFC5077)
+Returns 1 if the client sent SessionTicket TLS Extension Returns 2 if the client also sent non-zero
+length TLS SessionTicket Note that this only applies to raw contents found in the request buffer and
+not to contents deciphered via an SSL data layer, so this will not work with "bind" lines having the
+"ssl" option. This can for example be used to detect whether the client sent a SessionTicket or not
+and stick it accordingly, if no SessionTicket then stick on SessionID or don't stick as there's no
+server side state is there when SessionTickets are in use. This fetch only analyzes the first
+ClientHello message found in the request buffer, see the "req.ssl_sni" keyword documentation for
+more details about the implications of this limitation (HelloRetryRequest, Renegotiation, Encrypted
+Client Hello).
+
+<a id="entry-7-3-5-req-ssl-supported-groups-binary"></a>
+
+**`req.ssl_supported_groups binary`**
+
+```haproxy
+req.ssl_supported_groups binary
+```
+
+Returns the binary form of the list of supported groups supported by the client as reported in the
+TLS ClientHello and used for key exchange which can include both elliptic curve and non-EC key
+exchange. Note that this only applies to raw contents found in the request buffer and not to
+contents deciphered via an SSL data layer, so this will not work with "bind" lines having the "ssl"
+option. Refer to "ssl_fc_eclist_bin" which is the SSL bind equivalent that can be used when the
+"ssl" option is specified. This fetch only analyzes the first ClientHello message found in the
+request buffer, see the "req.ssl_sni" keyword documentation for more details about the implications
+of this limitation (HelloRetryRequest, Renegotiation, Encrypted Client Hello).
+
+Examples:
+
+```shell
+# Wait for a client hello for at most 5 seconds
+tcp-request inspect-delay 5s
+tcp-request content accept if { req.ssl_hello_type 1 }
+use-server fe3 if { req.ssl_supported_groups, be2hex(:,2),lower -m sub 0017 }
+server fe3  ${htst_fe3_addr}:${htst_fe3_port}
+```
+
+req.ssl_ver: integer req_ssl_ver: integer (deprecated) Returns an integer value containing the
+version of the SSL/TLS protocol of a stream present in the request buffer. Both SSLv2 hello messages
+and SSLv3 messages are supported. TLSv1 is announced as SSL version 3.1. The value is composed of
+the major version multiplied by 65536, added to the minor version. Note that this only applies to
+raw contents found in the request buffer and not to contents deciphered via an SSL data layer, so
+this will not work with "bind" lines having the "ssl" option. The ACL version of the test matches
+against a decimal notation in the form MAJOR.MINOR (e.g. 3.1). This fetch is mostly used in ACL.
+This fetch only analyzes the first ClientHello message found in the request buffer, see the
+"req.ssl_sni" keyword documentation for more details about the implications of this limitation
+(HelloRetryRequest, Renegotiation, Encrypted Client Hello).
+
+ACL derivatives:
+
+```text
+req.ssl_ver: decimal match
+```
+
+res.len: integer Returns an integer value corresponding to the number of bytes present in the
+response buffer. This is mostly used in ACL. It is important to understand that this test does not
+return false as long as the buffer is changing. This means that a check with equality to zero will
+almost always immediately match at the beginning of the stream, while a test for more data will wait
+for that data to come in and return false only when HAProxy is certain that no more data will come
+in. This test was designed to be used with TCP response content inspection. But it may also be used
+in tcp-check based expect rules.
+
+<a id="entry-7-3-5-res-payload-binary"></a>
+
+**`res.payload(<offset>,<length>): binary`**
+
+```haproxy
+res.payload(<offset>,<length>): binary
+```
+
+This extracts a binary block of `<length>` bytes and starting at byte `<offset>` in the response
+buffer. As a special case, if the `<length>` argument is zero, the whole buffer from `<offset>` to
+the end is extracted. This can be used with ACLs in order to check for the presence of some content
+in a buffer at any location. It may also be used in tcp-check based expect rules.
+
+<a id="entry-7-3-5-res-payload-lv-binary"></a>
+
+**`res.payload_lv(<offset1>,<length>[,<offset2>]): binary`**
+
+```haproxy
+res.payload_lv(<offset1>,<length>[,<offset2>]): binary
+```
+
+This extracts a binary block whose size is specified at `<offset1>` for `<length>` bytes, and which
+starts at `<offset2>` if specified or just after the length in the response buffer. The `<offset2>`
+parameter also supports relative offsets if prepended with a '+' or '-' sign. It may also be used in
+tcp-check based expect rules.
+
+Example: please consult the example from the "stick store-response" keyword.
+
+res.ssl_hello_type: integer rep_ssl_hello_type: integer (deprecated) Returns an integer value
+containing the type of the SSL hello message found in the response buffer if the buffer contains
+data that parses as a complete SSL (v3 or superior) hello message. Note that this only applies to
+raw contents found in the response buffer and not to contents deciphered via an SSL data layer, so
+this will not work with "server" lines having the "ssl" option. This is mostly used in ACL to detect
+presence of an SSL hello message that is supposed to contain an SSL session ID usable for
+stickiness.
+
+### 7.3.6. Fetching HTTP samples (Layer 7) {#section-7-3-6}
+
+It is possible to fetch samples from HTTP contents, requests and responses. This application layer
+is also called layer 7. It is only possible to fetch the data in this section when a full HTTP
+request or response has been parsed from its respective request or response buffer. This is always
+the case with all HTTP specific rules and for sections running with "mode http". When using TCP
+content inspection, it may be necessary to support an inspection delay in order to let the request
+or response come in first. These fetches may require a bit more CPU resources than the layer 4 ones,
+but not much since the request and response are indexed.
+
+Note: Regarding HTTP processing from the tcp-request content rules, everything will work as expected
+from an HTTP proxy. However, from a TCP proxy, without an HTTP upgrade, it will only work for HTTP/1
+content. For HTTP/2 content, only the preface is visible. Thus, it is only possible to rely to
+"req.proto_http", "req.ver" and eventually "method" sample fetches. All other L7 sample fetches will
+fail. After an HTTP upgrade, they will work in the same manner than from an HTTP proxy.
+
+Summary of sample fetch methods in this section and their respective types:
+
+```text
+  keyword                                          output type
+-------------------------------------------------+-------------
+base                                               string
+base32                                             integer
+base32+src                                         binary
+baseq                                              string
+capture.req.hdr(<idx>)                             string
+capture.req.method                                 string
+capture.req.uri                                    string
+capture.req.ver                                    string
+capture.res.hdr(<idx>)                             string
+capture.res.ver                                    string
+cook([<name>])                                     string
+cook_cnt([<name>])                                 integer
+cook_val([<name>])                                 integer
+cookie([<name>])                                   string
+hdr([<name>[,<occ>]])                              string
+hdr_cnt([<header>])                                integer
+hdr_ip([<name>[,<occ>]])                           ip
+hdr_val([<name>[,<occ>]])                          integer
+http_auth(<userlist>)                              boolean
+http_auth_bearer([<header>])                       string
+http_auth_group(<userlist>)                        string
+http_auth_pass                                     string
+http_auth_type                                     string
+http_auth_user                                     string
+http_first_req                                     boolean
+method                                             integer
+path                                               string
+pathq                                              string
+query([<options>])                                 string
+req.body                                           binary
+req.body_len                                       integer
+req.body_param([<name>[,i]])                       string
+req.body_size                                      integer
+req.cook([<name>])                                 string
+req.cook_cnt([<name>])                             integer
+req.cook_names([<delim>])                          string
+req.cook_val([<name>])                             integer
+req.fhdr(<name>[,<occ>])                           string
+req.fhdr_cnt([<name>])                             integer
+req.hdr([<name>[,<occ>]])                          string
+req.hdr_cnt([<name>])                              integer
+req.hdr_ip([<name>[,<occ>]])                       ip
+req.hdr_names([<delim>])                           string
+req.hdr_val([<name>[,<occ>]])                      integer
+req.hdrs                                           string
+req.hdrs_bin                                       binary
+req.timer.hdr                                      integer
+req.timer.idle                                     integer
+req.timer.queue                                    integer
+req.timer.tq                                       integer
+req.ver                                            string
+req_ver                                            string
+request_date([<unit>])                             integer
+res.body                                           binary
+res.body_len                                       integer
+res.body_size                                      integer
+res.cache_hit                                      boolean
+res.cache_name                                     string
+res.comp                                           boolean
+res.comp_algo                                      string
+res.cook([<name>])                                 string
+res.cook_cnt([<name>])                             integer
+res.cook_names([<delim>])                          string
+res.cook_val([<name>])                             integer
+res.fhdr([<name>[,<occ>]])                         string
+res.fhdr_cnt([<name>])                             integer
+res.hdr([<name>[,<occ>]])                          string
+res.hdr_cnt([<name>])                              integer
+res.hdr_ip([<name>[,<occ>]])                       ip
+res.hdr_names([<delim>])                           string
+res.hdr_val([<name>[,<occ>]])                      integer
+res.hdrs                                           string
+res.hdrs_bin                                       binary
+res.timer.hdr                                      integer
+res.ver                                            string
+resp_ver                                           string
+scook([<name>])                                    string
+scook_cnt([<name>])                                integer
+scook_val([<name>])                                integer
+server_status                                      integer
+set-cookie([<name>])                               string
+shdr([<name>[,<occ>]])                             string
+shdr_cnt([<name>])                                 integer
+shdr_ip([<name>[,<occ>]])                          ip
+shdr_val([<name>[,<occ>]])                         integer
+status                                             integer
+txn.status                                         integer
+txn.timer.total                                    integer
+unique-id                                          string
+url                                                string
+url32                                              integer
+url32+src                                          binary
+url_ip                                             ip
+url_param([<name>[,<delim>[,i]]])                  string
+url_port                                           integer
+urlp([<name>[,<delim>[,i]]])                       string
+urlp_val([<name>[,<delim>[,i]]])                   integer
+-------------------------------------------------+-------------
+```
+
+Detailed list:
+
+base: string This returns the concatenation of the first Host header and the path part of the
+request, which starts at the first slash and ends before the question mark. It can be useful in
+virtual hosted environments to detect URL abuses as well as to improve shared caches efficiency.
+Using this with a limited size stick table also allows one to collect statistics about most commonly
+requested objects by host/path. With ACLs it can allow simple content switching rules involving the
+host and the path at the same time, such as
+"[www.example.com/favicon.ico](http://www.example.com/favicon.ico)". See also "path" and "uri".
+
+ACL derivatives:
+
+```text
+base    : exact string match
+base_beg: prefix match
+base_dir: subdir match
+base_dom: domain match
+base_end: suffix match
+base_len: length match
+base_reg: regex match
+base_sub: substring match
+```
+
+Note: ACL derivatives must not be used followed by a converter or in ACLs with a "-m" pattern
+matching method.
+
+base32: integer This returns a 32-bit hash of the value returned by the "base" fetch method above.
+This is useful to track per-URL activity on high traffic sites without having to store all URLs.
+Instead a shorter hash is stored, saving a lot of memory. The output type is an unsigned integer.
+The hash function used is SDBM with full avalanche on the output. Technically, base32 is exactly
+equal to "base,sdbm(1)".
+
+base32+src: binary This returns the concatenation of the base32 fetch above and the src fetch below.
+The resulting type is of type binary, with a size of 8 or 20 bytes depending on the source address
+family. This can be used to track per-IP, per-URL counters.
+
+baseq: string This returns the concatenation of the first Host header and the path part of the
+request with the query-string, which starts at the first slash. Using this instead of "base" allows
+one to properly identify the target resource, for statistics or caching use cases. See also "path",
+"pathq" and "base".
+
+<a id="entry-7-3-6-capture-req-hdr-string"></a>
+
+**`capture.req.hdr(<idx>): string`**
+
+```haproxy
+capture.req.hdr(<idx>): string
+```
+
+This extracts the content of the header captured by the "capture request header", idx is the
+position of the capture keyword in the configuration. The first entry is an index of 0. See also:
+"capture request header".
+
+capture.req.method: string This extracts the METHOD of an HTTP request. It can be used in both
+request and response. Unlike "method", it can be used in both request and response because it's
+allocated.
+
+capture.req.uri: string This extracts the request's URI, which starts at the first slash and ends
+before the first space in the request (without the host part). Unlike "path" and "url", it can be
+used in both request and response because it's allocated.
+
+capture.req.ver: string This extracts the request's HTTP version and returns it with the format
+"HTTP/`<major>`.`<minor>`". It can be used in both request, response, and logs because it relies on
+a persistent information. If the request version is not valid, this sample fetch fails.
+
+<a id="entry-7-3-6-capture-res-hdr-string"></a>
+
+**`capture.res.hdr(<idx>): string`**
+
+```haproxy
+capture.res.hdr(<idx>): string
+```
+
+This extracts the content of the header captured by the "capture response header", idx is the
+position of the capture keyword in the configuration. The first entry is an index of 0. See also:
+"capture response header"
+
+capture.res.ver: string This extracts the response's HTTP version and returns it with the format
+"HTTP/`<major>`.`<minor>`". It can be used in logs because it relies on a persistent information. If
+the response version is not valid, this sample fetch fails.
+
+<a id="entry-7-3-6-cookie-string"></a>
+
+**`cookie([<name>]): string (deprecated)`**
+
+```haproxy
+cookie([<name>]): string (deprecated)
+```
+
+This extracts the last occurrence of the cookie name `<name>` on a "Cookie" header line from the
+request, or a "Set-Cookie" header from the response, and returns its value as a string. A typical
+use is to get multiple clients sharing a same profile use the same server. This can be similar to
+what "appsession" did with the "request-learn" statement, but with support for multi-peer
+synchronization and state keeping across restarts. If no name is specified, the first cookie value
+is returned. This fetch should not be used anymore and should be replaced by req.cook() or
+res.cook() instead as it ambiguously uses the direction based on the context where it is used.
+
+<a id="entry-7-3-6-hdr-string"></a>
+
+**`hdr([<name>[,<occ>]]): string`**
+
+```haproxy
+hdr([<name>[,<occ>]]): string
+```
+
+This is equivalent to req.hdr() when used on requests, and to res.hdr() when used on responses.
+Please refer to these respective fetches for more details. In case of doubt about the fetch
+direction, please use the explicit ones. Note that contrary to the hdr() sample fetch method, the
+hdr\_\* ACL keywords unambiguously apply to the request headers.
+
+<a id="entry-7-3-6-http-auth-boolean"></a>
+
+**`http_auth(<userlist>): boolean`**
+
+```haproxy
+http_auth(<userlist>): boolean
+```
+
+Returns a boolean indicating whether the authentication data received from the client match a
+username & password stored in the specified userlist. This fetch function is not really useful
+outside of ACLs. Currently only http basic auth is supported.
+
+<a id="entry-7-3-6-http-auth-bearer-string"></a>
+
+**`http_auth_bearer([<header>]): string`**
+
+```haproxy
+http_auth_bearer([<header>]): string
+```
+
+Returns the client-provided token found in the authorization data when the Bearer scheme is used (to
+send JSON Web Tokens for instance). No check is performed on the data sent by the client. If a
+specific `<header>` is supplied, it will parse this header instead of the Authorization one.
+
+<a id="entry-7-3-6-http-auth-group-string"></a>
+
+**`http_auth_group(<userlist>): string`**
+
+```haproxy
+http_auth_group(<userlist>): string
+```
+
+Returns a string corresponding to the user name found in the authentication data received from the
+client if both the user name and password are valid according to the specified userlist. The main
+purpose is to use it in ACLs where it is then checked whether the user belongs to any group within a
+list. This fetch function is not really useful outside of ACLs. Currently only http basic auth is
+supported.
+
+ACL derivatives:
+
+```text
+http_auth_group(<userlist>): group ...
+Returns true when the user extracted from the request and whose password is
+valid according to the specified userlist belongs to at least one of the
+groups.
+```
+
+http_auth_pass: string Returns the user's password found in the authentication data received from
+the client, as supplied in the Authorization header. Not checks are performed by this sample fetch.
+Only Basic authentication is supported.
+
+http_auth_type: string Returns the authentication method found in the authentication data received
+from the client, as supplied in the Authorization header. Not checks are performed by this sample
+fetch. Only Basic authentication is supported.
+
+http_auth_user: string Returns the user name found in the authentication data received from the
+client, as supplied in the Authorization header. Not checks are performed by this sample fetch. Only
+Basic authentication is supported.
+
+http_first_req: boolean Returns true when the request being processed is the first one of the
+connection. This can be used to add or remove headers that may be missing from some requests when a
+request is not the first one, or to help grouping requests in the logs.
+
+method: integer + string Returns an integer value corresponding to the method in the HTTP request.
+For example, "GET" equals 1 (check sources to establish the matching). Value 9 means "other method"
+and may be converted to a string extracted from the stream. This should not be used directly as a
+sample, this is only meant to be used from ACLs, which transparently convert methods from patterns
+to these integer + string values. Some predefined ACL already check for most common methods.
+
+ACL derivatives:
+
+```text
+method: case insensitive method match
+```
+
+Example:
+
+```shell
+# only accept GET and HEAD requests
+acl valid_method method GET HEAD
+http-request deny if ! valid_method
+```
+
+path: string This extracts the request's URL path, which starts at the first slash and ends before
+the question mark (without the host part). A typical use is with prefetch-capable caches, and with
+portals which need to aggregate multiple information from databases and keep them in caches. Note
+that with outgoing caches, it would be wiser to use "url" instead. With ACLs, it's typically used to
+match exact file names (e.g. "/login.php"), or directory parts using the derivative forms. See also
+the "url" and "base" fetch methods. Please note that any fragment reference in the URI ('#' after
+the path) is strictly forbidden by the HTTP standard and will be rejected. However, if the frontend
+receiving the request has "option accept-unsafe-violations-in-http-request", then this fragment part
+will be accepted and will also appear in the path.
+
+ACL derivatives:
+
+```text
+path    : exact string match
+path_beg: prefix match
+path_dir: subdir match
+path_dom: domain match
+path_end: suffix match
+path_len: length match
+path_reg: regex match
+path_sub: substring match
+```
+
+Note: ACL derivatives must not be used followed by a converter or in ACLs with a "-m" pattern
+matching method.
+
+pathq: string This extracts the request's URL path with the query-string, which starts at the first
+slash. This sample fetch is pretty handy to always retrieve a relative URI, excluding the scheme and
+the authority part, if any. Indeed, while it is the common representation for an HTTP/1.1 request
+target, in HTTP/2, an absolute URI is often used. This sample fetch will return the same result in
+both cases. Please note that any fragment reference in the URI ('#' after the path) is strictly
+forbidden by the HTTP standard and will be rejected. However, if the frontend receiving the request
+has "option accept-unsafe-violations-in-http-request", then this fragment part will be accepted and
+will also appear in the path.
+
+<a id="entry-7-3-6-query-string"></a>
+
+**`query([<options>]): string`**
+
+```haproxy
+query([<options>]): string
+```
+
+This extracts the request's query string, which starts after the first question mark. If no question
+mark is present, this fetch returns nothing. If a question mark is present but nothing follows, it
+returns an empty string. This means it's possible to easily know whether a query string is present
+using the "found" matching method. This fetch is the complement of "path" which stops before the
+question mark and of "query_string", which include the question mark.
+
+An optional parameter may be used to customize the return value. Following options are supported:
+
+    - with_qm: Include the question mark at the beginning ot the query string,
+                if not empty.
+
+req.body: binary This returns the HTTP request's available body as a block of data. It is
+recommended to use "option http-buffer-request" to be sure to wait, as much as possible, for the
+request's body.
+
+req.body_len: integer This returns the length of the HTTP request's available body in bytes. It may
+be lower than the advertised length if the body is larger than the buffer. It is recommended to use
+"option http-buffer-request" to be sure to wait, as much as possible, for the request's body.
+
+<a id="entry-7-3-6-req-body-param-string"></a>
+
+**`req.body_param([<name>[,i]]): string`**
+
+```haproxy
+req.body_param([<name>[,i]]): string
+```
+
+This fetch assumes that the body of the POST request is url-encoded. The user can check if the
+"content-type" contains the value "application/x-www-form-urlencoded". This extracts the first
+occurrence of the parameter `<name>` in the body, which ends before '&'. The parameter name is
+case-sensitive, unless "i" is added as a second argument. If no name is given, any parameter will
+match, and the first one will be returned. The result is a string corresponding to the value of the
+parameter `<name>` as presented in the request body (no URL decoding is performed). Note that the
+ACL version of this fetch iterates over multiple parameters and will iteratively report all
+parameters values if no name is given.
+
+req.body_size: integer This returns the advertised length of the HTTP request's body in bytes. It
+will represent the advertised Content-Length header, or the size of the available data in case of
+chunked encoding.
+
+<a id="entry-7-3-6-req-cook-string"></a>
+
+**`req.cook([<name>]): string`**
+
+```haproxy
+req.cook([<name>]): string
+cook([<name>]): string (deprecated)
+```
+
+This extracts the last occurrence of the cookie name `<name>` on a "Cookie" header line from the
+request, and returns its value as string. If no name is specified, the first cookie value is
+returned. When used with ACLs, all matching cookies are evaluated. Spaces around the name and the
+value are ignored as requested by the Cookie header specification (RFC6265). The cookie name is
+case-sensitive. Empty cookies are valid, so an empty cookie may very well return an empty value if
+it is present. Use the "found" match to detect presence. Use the res.cook() variant for response
+cookies sent by the server.
+
+ACL derivatives:
+
+```text
+req.cook([<name>])    : exact string match
+req.cook_beg([<name>]): prefix match
+req.cook_dir([<name>]): subdir match
+req.cook_dom([<name>]): domain match
+req.cook_end([<name>]): suffix match
+req.cook_len([<name>]): length match
+req.cook_reg([<name>]): regex match
+req.cook_sub([<name>]): substring match
+```
+
+Note: ACL derivatives must not be used followed by a converter or in ACLs with a "-m" pattern
+matching method.
+
+<a id="entry-7-3-6-req-cook-cnt-integer"></a>
+
+**`req.cook_cnt([<name>]): integer`**
+
+```haproxy
+req.cook_cnt([<name>]): integer
+cook_cnt([<name>]): integer (deprecated)
+```
+
+Returns an integer value representing the number of occurrences of the cookie `<name>` in the
+request, or all cookies if `<name>` is not specified.
+
+<a id="entry-7-3-6-req-cook-names-string"></a>
+
+**`req.cook_names([<delim>]): string`**
+
+```haproxy
+req.cook_names([<delim>]): string
+```
+
+This builds a string made from the concatenation of all cookie names as they appear in the request
+(Cookie header) when the rule is evaluated. The default delimiter is the comma (',') but it may be
+overridden as an optional argument `<delim>`. In this case, only the first character of `<delim>` is
+considered.
+
+<a id="entry-7-3-6-req-cook-val-integer"></a>
+
+**`req.cook_val([<name>]): integer`**
+
+```haproxy
+req.cook_val([<name>]): integer
+cook_val([<name>]): integer (deprecated)
+```
+
+This extracts the last occurrence of the cookie name `<name>` on a "Cookie" header line from the
+request, and converts its value to an integer which is returned. If no name is specified, the first
+cookie value is returned. When used in ACLs, all matching names are iterated over until a value
+matches.
+
+<a id="entry-7-3-6-req-fhdr-string"></a>
+
+**`req.fhdr(<name>[,<occ>]): string`**
+
+```haproxy
+req.fhdr(<name>[,<occ>]): string
+```
+
+This returns the full value of the last occurrence of header `<name>` in an HTTP request. It differs
+from req.hdr() in that any commas present in the value are returned and are not used as delimiters.
+This is sometimes useful with headers such as User-Agent.
+
+When used from an ACL, all occurrences are iterated over until a match is found.
+
+Optionally, a specific occurrence might be specified as a position number. Positive values indicate
+a position from the first occurrence, with 1 being the first one. Negative values indicate positions
+relative to the last one, with -1 being the last one.
+
+<a id="entry-7-3-6-req-fhdr-cnt-integer"></a>
+
+**`req.fhdr_cnt([<name>]): integer`**
+
+```haproxy
+req.fhdr_cnt([<name>]): integer
+```
+
+Returns an integer value representing the number of occurrences of request header field name
+`<name>`, or the total number of header fields if `<name>` is not specified. Like req.fhdr() it
+differs from res.hdr_cnt() by not splitting headers at commas.
+
+<a id="entry-7-3-6-req-hdr-string"></a>
+
+**`req.hdr([<name>[,<occ>]]): string`**
+
+```haproxy
+req.hdr([<name>[,<occ>]]): string
+```
+
+This returns the last comma-separated value of the header `<name>` in an HTTP request. The fetch
+considers any comma as a delimiter for distinct values. This is useful if you need to process
+headers that are defined to be a list of values, such as Accept, or X-Forwarded-For. If full-line
+headers are desired instead, use req.fhdr(). Please carefully check RFC 7231 to know how certain
+headers are supposed to be parsed. Also, some of them are case insensitive (e.g. Connection).
+
+When used from an ACL, all occurrences are iterated over until a match is found.
+
+Optionally, a specific occurrence might be specified as a position number. Positive values indicate
+a position from the first occurrence, with 1 being the first one. Negative values indicate positions
+relative to the last one, with -1 being the last one.
+
+A typical use is with the X-Forwarded-For header once converted to IP, associated with an IP
+stick-table.
+
+ACL derivatives:
+
+```text
+hdr([<name>[,<occ>]])    : exact string match
+hdr_beg([<name>[,<occ>]]): prefix match
+hdr_dir([<name>[,<occ>]]): subdir match
+hdr_dom([<name>[,<occ>]]): domain match
+hdr_end([<name>[,<occ>]]): suffix match
+hdr_len([<name>[,<occ>]]): length match
+hdr_reg([<name>[,<occ>]]): regex match
+hdr_sub([<name>[,<occ>]]): substring match
+```
+
+Note: ACL derivatives must not be used followed by a converter or in ACLs with a "-m" pattern
+matching method.
+
+<a id="entry-7-3-6-req-hdr-cnt-integer"></a>
+
+**`req.hdr_cnt([<name>]): integer`**
+
+```haproxy
+req.hdr_cnt([<name>]): integer
+hdr_cnt([<header>]): integer (deprecated)
+```
+
+Returns an integer value representing the number of occurrences of request header field name
+`<name>`, or the total number of header field values if `<name>` is not specified. Like req.hdr() it
+counts each comma separated part of the header's value. If counting of full-line headers is desired,
+then req.fhdr_cnt() should be used instead.
+
+With ACLs, it can be used to detect presence, absence or abuse of a specific header, as well as to
+block request smuggling attacks by rejecting requests which contain more than one of certain
+headers.
+
+Refer to req.hdr() for more information on header matching.
+
+<a id="entry-7-3-6-req-hdr-ip-ip"></a>
+
+**`req.hdr_ip([<name>[,<occ>]]): ip`**
+
+```haproxy
+req.hdr_ip([<name>[,<occ>]]): ip
+hdr_ip([<name>[,<occ>]]): ip (deprecated)
+```
+
+This extracts the last occurrence of header `<name>` in an HTTP request, converts it to an IPv4 or
+IPv6 address and returns this address. When used with ACLs, all occurrences are checked, and if
+`<name>` is omitted, every value of every header is checked. The parser strictly adheres to the
+format described in RFC7239, with the extension that IPv4 addresses may optionally be followed by a
+colon (':') and a valid decimal port number (0 to 65535), which will be silently dropped. All other
+forms will not match and will cause the address to be ignored.
+
+The `<occ>` parameter is processed as with req.hdr().
+
+A typical use is with the X-Forwarded-For and X-Client-IP headers.
+
+<a id="entry-7-3-6-req-hdr-names-string"></a>
+
+**`req.hdr_names([<delim>]): string`**
+
+```haproxy
+req.hdr_names([<delim>]): string
+```
+
+This builds a string made from the concatenation of all header names as they appear in the request
+when the rule is evaluated. The default delimiter is the comma (',') but it may be overridden as an
+optional argument `<delim>`. In this case, only the first character of `<delim>` is considered.
+
+<a id="entry-7-3-6-req-hdr-val-integer"></a>
+
+**`req.hdr_val([<name>[,<occ>]]): integer`**
+
+```haproxy
+req.hdr_val([<name>[,<occ>]]): integer
+hdr_val([<name>[,<occ>]]): integer (deprecated)
+```
+
+This extracts the last occurrence of header `<name>` in an HTTP request, and converts it to an
+integer value. When used with ACLs, all occurrences are checked, and if `<name>` is omitted, every
+value of every header is checked.
+
+The `<occ>` parameter is processed as with req.hdr().
+
+A typical use is with the X-Forwarded-For header.
+
+req.hdrs: string Returns the current request headers as string including the last empty line
+separating headers from the request body. The last empty line can be used to detect a truncated
+header block. This sample fetch is useful for some SPOE headers analyzers and for advanced logging.
+
+req.hdrs_bin: binary Returns the current request headers contained in preparsed binary form. This is
+useful for offloading some processing with SPOE. Each string is described by a length followed by
+the number of bytes indicated in the length. The length is represented using the variable integer
+encoding detailed in the SPOE documentation. The end of the list is marked by a couple of empty
+header names and values (length of 0 for both).
+
+\*(``` <str:header-name>``<str:header-value> ```)``` <empty string>``<empty string> ```
+
+int: refer to the SPOE documentation for the encoding str: ``` <int:length>``<bytes> ```
+
+req.timer.hdr: integer Total time to get the client request (HTTP mode only). It's the time elapsed
+between the first bytes received and the moment the proxy received the empty line marking the end of
+the HTTP headers. This is reported in milliseconds (ms) and is equivalent to %TR in log-format. See
+[section 8.4](/haproxy/configuration-logging/#section-8-4) "Timing events" for more details.
+
+req.timer.idle: integer This is the idle time before the HTTP request (HTTP mode only). This timer
+counts between the end of the handshakes and the first byte of the HTTP request. This is reported in
+milliseconds and is equivalent to %Ti in log-format. See [section 8.4](/haproxy/configuration-logging/#section-8-4) "Timing events" for more
+details.
+
+req.timer.queue: integer Total time spent in the queues waiting for a connection slot. This is
+reported in milliseconds and is equivalent to %Tw in log-format. See [section 8.4](/haproxy/configuration-logging/#section-8-4) "Timing events" for
+more details.
+
+req.timer.tq: integer total time to get the client request from the accept date or since the
+emission of the last byte of the previous response. This is reported in milliseconds and is
+equivalent to %Tq in log-format. See [section 8.4](/haproxy/configuration-logging/#section-8-4) "Timing events" for more details.
+
+req.ver: string req_ver: string (deprecated) Returns the version string from the HTTP request, with
+the format "`<major>`.`<minor>`". This can be useful for ACL. Some predefined ACL already check for
+common versions. It can be used in both request, response, and logs because it relies on a
+persistent information. If the request version is not valid, this sample fetch fails.
+
+Common values are "1.0", "1.1", "2.0" or "3.0".
+
+ACL derivatives:
+
+```text
+req.ver: exact string match
+```
+
+<a id="entry-7-3-6-request-date-integer"></a>
+
+**`request_date([<unit>]): integer`**
+
+```haproxy
+request_date([<unit>]): integer
+```
+
+This is the exact date when the first byte of the HTTP request was received by HAProxy (log-format
+alias %tr). This is computed from accept_date + handshake time (%Th) + idle time (%Ti).
+
+Returns a value in number of seconds since epoch.
+
+`<unit>` is facultative, and can be set to "s" for seconds (default behavior), "ms" for milliseconds
+or "us" for microseconds. If unit is set, return value is an integer reflecting either seconds,
+milliseconds or microseconds since epoch. It is useful when a time resolution of less than a second
+is needed.
+
+res.body: binary This returns the HTTP response's available body as a block of data. Unlike the
+request side, there is no directive to wait for the response's body. This sample fetch is really
+useful (and usable) in the health-check context.
+
+It may be used in tcp-check based expect rules.
+
+res.body_len: integer This returns the length of the HTTP response available body in bytes. Unlike
+the request side, there is no directive to wait for the response's body. This sample fetch is really
+useful (and usable) in the health-check context.
+
+It may be used in tcp-check based expect rules.
+
+res.body_size: integer This returns the advertised length of the HTTP response body in bytes. It
+will represent the advertised Content-Length header, or the size of the available data in case of
+chunked encoding. Unlike the request side, there is no directive to wait for the response body. This
+sample fetch is really useful (and usable) in the health-check context.
+
+It may be used in tcp-check based expect rules.
+
+res.cache_hit: boolean Returns the boolean "true" value if the response has been built out of an
+HTTP cache entry, otherwise returns boolean "false".
+
+res.cache_name: string Returns a string containing the name of the HTTP cache that was used to build
+the HTTP response if res.cache_hit is true, otherwise returns an empty string.
+
+res.comp: boolean Returns the boolean "true" value if the response has been compressed by HAProxy,
+otherwise returns boolean "false". This may be used to add information in the logs.
+
+res.comp_algo: string Returns a string containing the name of the algorithm used if the response was
+compressed by HAProxy, for example: "deflate". This may be used to add some information in the logs.
+
+<a id="entry-7-3-6-res-cook-string"></a>
+
+**`res.cook([<name>]): string`**
+
+```haproxy
+res.cook([<name>]): string
+scook([<name>]): string (deprecated)
+```
+
+This extracts the last occurrence of the cookie name `<name>` on a "Set-Cookie" header line from the
+response, and returns its value as string. If no name is specified, the first cookie value is
+returned.
+
+It may be used in tcp-check based expect rules.
+
+ACL derivatives:
+
+```text
+res.scook([<name>]: exact string match
+```
+
+<a id="entry-7-3-6-res-cook-cnt-integer"></a>
+
+**`res.cook_cnt([<name>]): integer`**
+
+```haproxy
+res.cook_cnt([<name>]): integer
+scook_cnt([<name>]): integer (deprecated)
+```
+
+Returns an integer value representing the number of occurrences of the cookie `<name>` in the
+response, or all cookies if `<name>` is not specified. This is mostly useful when combined with ACLs
+to detect suspicious responses.
+
+It may be used in tcp-check based expect rules.
+
+<a id="entry-7-3-6-res-cook-names-string"></a>
+
+**`res.cook_names([<delim>]): string`**
+
+```haproxy
+res.cook_names([<delim>]): string
+```
+
+This builds a string made from the concatenation of all cookie names as they appear in the response
+(Set-Cookie headers) when the rule is evaluated. The default delimiter is the comma (',') but it may
+be overridden as an optional argument `<delim>`. In this case, only the first character of `<delim>`
+is considered.
+
+It may be used in tcp-check based expect rules.
+
+<a id="entry-7-3-6-res-cook-val-integer"></a>
+
+**`res.cook_val([<name>]): integer`**
+
+```haproxy
+res.cook_val([<name>]): integer
+scook_val([<name>]): integer (deprecated)
+```
+
+This extracts the last occurrence of the cookie name `<name>` on a "Set-Cookie" header line from the
+response, and converts its value to an integer which is returned. If no name is specified, the first
+cookie value is returned.
+
+It may be used in tcp-check based expect rules.
+
+<a id="entry-7-3-6-res-fhdr-string"></a>
+
+**`res.fhdr([<name>[,<occ>]]): string`**
+
+```haproxy
+res.fhdr([<name>[,<occ>]]): string
+```
+
+This fetch works like the req.fhdr() fetch with the difference that it acts on the headers within an
+HTTP response.
+
+Like req.fhdr() the res.fhdr() fetch returns full values. If the header is defined to be a list you
+should use res.hdr().
+
+This fetch is sometimes useful with headers such as Date or Expires.
+
+It may be used in tcp-check based expect rules.
+
+<a id="entry-7-3-6-res-fhdr-cnt-integer"></a>
+
+**`res.fhdr_cnt([<name>]): integer`**
+
+```haproxy
+res.fhdr_cnt([<name>]): integer
+```
+
+This fetch works like the req.fhdr_cnt() fetch with the difference that it acts on the headers
+within an HTTP response.
+
+Like req.fhdr_cnt() the res.fhdr_cnt() fetch acts on full values. If the header is defined to be a
+list you should use res.hdr_cnt().
+
+It may be used in tcp-check based expect rules.
+
+<a id="entry-7-3-6-res-hdr-string"></a>
+
+**`res.hdr([<name>[,<occ>]]): string`**
+
+```haproxy
+res.hdr([<name>[,<occ>]]): string
+shdr([<name>[,<occ>]]): string (deprecated)
+```
+
+This fetch works like the req.hdr() fetch with the difference that it acts on the headers within an
+HTTP response.
+
+Like req.hdr() the res.hdr() fetch considers the comma to be a delimiter. If this is not desired
+res.fhdr() should be used.
+
+It may be used in tcp-check based expect rules.
+
+ACL derivatives:
+
+```text
+res.hdr([<name>[,<occ>]])    : exact string match
+res.hdr_beg([<name>[,<occ>]]): prefix match
+res.hdr_dir([<name>[,<occ>]]): subdir match
+res.hdr_dom([<name>[,<occ>]]): domain match
+res.hdr_end([<name>[,<occ>]]): suffix match
+res.hdr_len([<name>[,<occ>]]): length match
+res.hdr_reg([<name>[,<occ>]]): regex match
+res.hdr_sub([<name>[,<occ>]]): substring match
+```
+
+Note: ACL derivatives must not be used followed by a converter or in ACLs with a "-m" pattern
+matching method.
+
+<a id="entry-7-3-6-res-hdr-cnt-integer"></a>
+
+**`res.hdr_cnt([<name>]): integer`**
+
+```haproxy
+res.hdr_cnt([<name>]): integer
+shdr_cnt([<name>]): integer (deprecated)
+```
+
+This fetch works like the req.hdr_cnt() fetch with the difference that it acts on the headers within
+an HTTP response.
+
+Like req.hdr_cnt() the res.hdr_cnt() fetch considers the comma to be a delimiter. If this is not
+desired res.fhdr_cnt() should be used.
+
+It may be used in tcp-check based expect rules.
+
+<a id="entry-7-3-6-res-hdr-ip-ip"></a>
+
+**`res.hdr_ip([<name>[,<occ>]]): ip`**
+
+```haproxy
+res.hdr_ip([<name>[,<occ>]]): ip
+shdr_ip([<name>[,<occ>]]): ip (deprecated)
+```
+
+This fetch works like the req.hdr_ip() fetch with the difference that it acts on the headers within
+an HTTP response.
+
+This can be useful to learn some data into a stick table.
+
+It may be used in tcp-check based expect rules.
+
+<a id="entry-7-3-6-res-hdr-names-string"></a>
+
+**`res.hdr_names([<delim>]): string`**
+
+```haproxy
+res.hdr_names([<delim>]): string
+```
+
+This builds a string made from the concatenation of all header names as they appear in the response
+when the rule is evaluated. The default delimiter is the comma (',') but it may be overridden as an
+optional argument `<delim>`. In this case, only the first character of `<delim>` is considered.
+
+It may be used in tcp-check based expect rules.
+
+<a id="entry-7-3-6-res-hdr-val-integer"></a>
+
+**`res.hdr_val([<name>[,<occ>]]): integer`**
+
+```haproxy
+res.hdr_val([<name>[,<occ>]]): integer
+shdr_val([<name>[,<occ>]]): integer (deprecated)
+```
+
+This fetch works like the req.hdr_val() fetch with the difference that it acts on the headers within
+an HTTP response.
+
+This can be useful to learn some data into a stick table.
+
+It may be used in tcp-check based expect rules.
+
+res.hdrs: string Returns the current response headers as string including the last empty line
+separating headers from the request body. The last empty line can be used to detect a truncated
+header block. This sample fetch is useful for some SPOE headers analyzers and for advanced logging.
+
+It may also be used in tcp-check based expect rules.
+
+res.hdrs_bin: binary Returns the current response headers contained in preparsed binary form. This
+is useful for offloading some processing with SPOE. It may be used in tcp-check based expect rules.
+Each string is described by a length followed by the number of bytes indicated in the length. The
+length is represented using the variable integer encoding detailed in the SPOE documentation. The
+end of the list is marked by a couple of empty header names and values (length of 0 for both).
+
+\*(``` <str:header-name>``<str:header-value> ```)``` <empty string>``<empty string> ```
+
+int: refer to the SPOE documentation for the encoding str: ``` <int:length>``<bytes> ```
+
+res.timer.hdr: integer It's the time elapsed between the moment the TCP connection was established
+to the server and the moment the server sent its complete response headers. This is reported in
+milliseconds and is equivalent to %Tr in log-format. See [section 8.4](/haproxy/configuration-logging/#section-8-4) "Timing events" for more
+details.
+
+res.ver: string resp_ver: string (deprecated) Returns the version string from the HTTP response,
+with the format "`<major>`.`<minor>`". This can be useful for logs, but is mostly there for ACL. If
+the response version is not valid, this sample fetch fails.
+
+It may be used in tcp-check based expect rules.
+
+ACL derivatives:
+
+```text
+resp.ver: exact string match
+```
+
+server_status: integer Return an integer containing the HTTP status code as received from the
+server. If no response was received from the server, the sample fetch fails.
+
+<a id="entry-7-3-6-set-cookie-string"></a>
+
+**`set-cookie([<name>]): string (deprecated)`**
+
+```haproxy
+set-cookie([<name>]): string (deprecated)
+```
+
+This extracts the last occurrence of the cookie name `<name>` on a "Set-Cookie" header line from the
+response and uses the corresponding value to match. This can be comparable to what "appsession" did
+with default options, but with support for multi-peer synchronization and state keeping across
+restarts.
+
+This fetch function is deprecated and has been superseded by the "res.cook" fetch. This keyword will
+disappear soon.
+
+status: integer Returns an integer containing the HTTP status code in the HTTP response, for
+example, 302. It is mostly used within ACLs and integer ranges, for example, to remove any Location
+header if the response is not a 3xx. It will be the status code received by the client if it is not
+changed, via a 'set-status' action for instance.
+
+It may be used in tcp-check based expect rules.
+
+txn.status: integer Return an integer containing the HTTP status code of the transaction, as
+reported in the log.
+
+txn.timer.total: integer Total active time for the HTTP request, between the moment the proxy
+received the first byte of the request header and the emission of the last byte of the response
+body. This is the equivalent of %Ta in the log-format and is reported in milliseconds (ms). For more
+information see [Section 8.4](/haproxy/configuration-logging/#section-8-4) "Timing events"
+
+unique-id: string Returns the unique-id attached to the request. The directive "unique-id-format"
+must be set. If it is not set, the unique-id sample fetch fails. Note that the unique-id is usually
+used with HTTP requests, however this sample fetch can be used with other protocols. Obviously, if
+it is used with other protocols than HTTP, the unique-id-format directive must not contain HTTP
+parts. See: unique-id-format and unique-id-header
+
+url: string This extracts the request's URL as presented in the request. A typical use is with
+prefetch-capable caches, and with portals which need to aggregate multiple information from
+databases and keep them in caches. With ACLs, using "path" is preferred over using "url", because
+clients may send a full URL as is normally done with proxies. The only real use is to match "\*"
+which does not match in "path", and for which there is already a predefined ACL. See also "path" and
+"base". Please note that any fragment reference in the URI ('#' after the path) is strictly
+forbidden by the HTTP standard and will be rejected. However, if the frontend receiving the request
+has "option accept-unsafe-violations-in-http-request", then this fragment part will be accepted and
+will also appear in the url.
+
+ACL derivatives:
+
+```text
+url    : exact string match
+url_beg: prefix match
+url_dir: subdir match
+url_dom: domain match
+url_end: suffix match
+url_len: length match
+url_reg: regex match
+url_sub: substring match
+```
+
+Note: ACL derivatives must not be used followed by a converter or in ACLs with a "-m" pattern
+matching method.
+
+url32: integer This returns a 32-bit hash of the value obtained by concatenating the first Host
+header and the whole URL including parameters (not only the path part of the request, as in the
+"base32" fetch above). This is useful to track per-URL activity. A shorter hash is stored, saving a
+lot of memory. The output type is an unsigned integer.
+
+url32+src: binary This returns the concatenation of the "url32" fetch and the "src" fetch. The
+resulting type is of type binary, with a size of 8 or 20 bytes depending on the source address
+family. This can be used to track per-IP, per-URL counters.
+
+url_ip: ip This extracts the IP address from the request's URL when the host part is presented as an
+IP address. The fetch fails when the host part is a name, as no resolution is performed. Its use is
+very limited. For instance, a monitoring system might use this field as an alternative for the
+source IP in order to test what path a given source address would follow, or to force an entry in a
+table for a given source address. It may be used in combination with 'http-request set-dst' to
+emulate the older 'option http_proxy'.
+
+url_port: integer This extracts the port part from the request's URL. Note that if the port is not
+specified in the request, port 80 is assumed. As for "url_ip", this only works when the authority of
+the URL is presented as an address, the fetch fails when it is a host name since no resolution is
+performed here.
+
+<a id="entry-7-3-6-urlp-string"></a>
+
+**`urlp([<name>[,<delim>[,i]]]): string`**
+
+```haproxy
+urlp([<name>[,<delim>[,i]]]): string
+url_param([<name>[,<delim>[,i]]]): string
+```
+
+This extracts the first occurrence of the parameter `<name>` in the query string, which begins after
+either '?' or `<delim>`, and which ends before '&', ';' or `<delim>`. The parameter name is
+case-sensitive, unless"i" is added as a third argument. If no name is given, any parameter will
+match, and the first one will be returned. The result is a string corresponding to the value of the
+parameter `<name>` as presented in the request (no URL decoding is performed). This can be used for
+session stickiness based on a client ID, to extract an application cookie passed as a URL parameter,
+or in ACLs to apply some checks. Note that the ACL version of this fetch iterates over multiple
+parameters and will iteratively report all parameters values if no name is given
+
+ACL derivatives:
+
+```text
+urlp(<name>[,<delim>])    : exact string match
+urlp_beg(<name>[,<delim>]): prefix match
+urlp_dir(<name>[,<delim>]): subdir match
+urlp_dom(<name>[,<delim>]): domain match
+urlp_end(<name>[,<delim>]): suffix match
+urlp_len(<name>[,<delim>]): length match
+urlp_reg(<name>[,<delim>]): regex match
+urlp_sub(<name>[,<delim>]): substring match
+```
+
+Note: ACL derivatives must not be used followed by a converter or in ACLs with a "-m" pattern
+matching method.
+
+Example:
+
+```shell
+# match http://example.com/foo?PHPSESSIONID=some_id
+stick on urlp(PHPSESSIONID)
+# match http://example.com/foo;JSESSIONID=some_id
+stick on urlp(JSESSIONID,;)
+```
+
+<a id="entry-7-3-6-urlp-val-integer"></a>
+
+**`urlp_val([<name>[,<delim>[,i]]]): integer`**
+
+```haproxy
+urlp_val([<name>[,<delim>[,i]]]): integer
+```
+
+See "urlp" above. This one extracts the URL parameter `<name>` in the request and converts it to an
+integer value. This can be used for session stickiness based on a user ID for example, or with ACLs
+to match a page number or price.
+
+### 7.3.7. Fetching samples for developers {#section-7-3-7}
+
+This set of sample fetch methods is reserved to developers and must never be used on a production
+environment, except on developer demand, for debugging purposes. Moreover, no special care will be
+taken on backwards compatibility. There is no warranty the following sample fetches will never
+change, be renamed or simply removed. So be really careful if you should use one of them. To avoid
+any ambiguity, these sample fetches are placed in the dedicated scope "internal", for instance
+"internal.strm.is_htx".
+
+Summary of sample fetch methods in this section and their respective types:
+
+```text
+  keyword                                          output type
+-------------------------------------------------+-------------
+internal.htx.data                                  integer
+internal.htx.free                                  integer
+internal.htx.free_data                             integer
+internal.htx.has_eom                               boolean
+internal.htx.nbblks                                integer
+internal.htx.size                                  integer
+internal.htx.used                                  integer
+internal.htx_blk.size(<idx>)                       integer
+internal.htx_blk.type(<idx>)                       string
+internal.htx_blk.data(<idx>)                       binary
+internal.htx_blk.hdrname(<idx>)                    string
+internal.htx_blk.hdrval(<idx>)                     string
+internal.htx_blk.start_line(<idx>)                 string
+internal.strm.is_htx                               boolean
+-------------------------------------------------+-------------
+```
+
+Detailed list:
+
+internal.htx.data: integer Returns the size in bytes used by data in the HTX message associated to a
+channel. The channel is chosen depending on the sample direction.
+
+internal.htx.free: integer Returns the free space (size - used) in bytes in the HTX message
+associated to a channel. The channel is chosen depending on the sample direction.
+
+internal.htx.free_data: integer Returns the free space for the data in bytes in the HTX message
+associated to a channel. The channel is chosen depending on the sample direction.
+
+internal.htx.has_eom: boolean Returns true if the HTX message associated to a channel contains the
+end-of-message flag (EOM). Otherwise, it returns false. The channel is chosen depending on the
+sample direction.
+
+internal.htx.nbblks: integer Returns the number of blocks present in the HTX message associated to a
+channel. The channel is chosen depending on the sample direction.
+
+internal.htx.size: integer Returns the total size in bytes of the HTX message associated to a
+channel. The channel is chosen depending on the sample direction.
+
+internal.htx.used: integer Returns the total size used in bytes (data + metadata) in the HTX message
+associated to a channel. The channel is chosen depending on the sample direction.
+
+<a id="entry-7-3-7-internal-htx-blk-size-integer"></a>
+
+**`internal.htx_blk.size(<idx>): integer`**
+
+```haproxy
+internal.htx_blk.size(<idx>): integer
+```
+
+Returns the size of the block at the position `<idx>` in the HTX message associated to a channel or
+0 if it does not exist. The channel is chosen depending on the sample direction. `<idx>` may be any
+positive integer or one of the special value: \* head : The oldest inserted block \* tail : The
+newest inserted block \* first: The first block where to (re)start the analysis
+
+<a id="entry-7-3-7-internal-htx-blk-type-string"></a>
+
+**`internal.htx_blk.type(<idx>): string`**
+
+```haproxy
+internal.htx_blk.type(<idx>): string
+```
+
+Returns the type of the block at the position `<idx>` in the HTX message associated to a channel or
+"HTX_BLK_UNUSED" if it does not exist. The channel is chosen depending on the sample direction.
+`<idx>` may be any positive integer or one of the special value: \* head : The oldest inserted block
+\* tail : The newest inserted block \* first: The first block where to (re)start the analysis
+
+<a id="entry-7-3-7-internal-htx-blk-data-binary"></a>
+
+**`internal.htx_blk.data(<idx>): binary`**
+
+```haproxy
+internal.htx_blk.data(<idx>): binary
+```
+
+Returns the value of the DATA block at the position `<idx>` in the HTX message associated to a
+channel or an empty string if it does not exist or if it is not a DATA block. The channel is chosen
+depending on the sample direction. `<idx>` may be any positive integer or one of the special value:
+
+    * head : The oldest inserted block
+    * tail : The newest inserted block
+    * first: The first block where to (re)start the analysis
+
+<a id="entry-7-3-7-internal-htx-blk-hdrname-string"></a>
+
+**`internal.htx_blk.hdrname(<idx>): string`**
+
+```haproxy
+internal.htx_blk.hdrname(<idx>): string
+```
+
+Returns the header name of the HEADER block at the position `<idx>` in the HTX message associated to
+a channel or an empty string if it does not exist or if it is not an HEADER block. The channel is
+chosen depending on the sample direction. `<idx>` may be any positive integer or one of the special
+value:
+
+    * head : The oldest inserted block
+    * tail : The newest inserted block
+    * first: The first block where to (re)start the analysis
+
+<a id="entry-7-3-7-internal-htx-blk-hdrval-string"></a>
+
+**`internal.htx_blk.hdrval(<idx>): string`**
+
+```haproxy
+internal.htx_blk.hdrval(<idx>): string
+```
+
+Returns the header value of the HEADER block at the position `<idx>` in the HTX message associated
+to a channel or an empty string if it does not exist or if it is not an HEADER block. The channel is
+chosen depending on the sample direction. `<idx>` may be any positive integer or one of the special
+value:
+
+    * head : The oldest inserted block
+    * tail : The newest inserted block
+    * first: The first block where to (re)start the analysis
+
+<a id="entry-7-3-7-internal-htx-blk-start-line-string"></a>
+
+**`internal.htx_blk.start_line(<idx>): string`**
+
+```haproxy
+internal.htx_blk.start_line(<idx>): string
+```
+
+Returns the value of the REQ_SL or RES_SL block at the position `<idx>` in the HTX message
+associated to a channel or an empty string if it does not exist or if it is not a SL block. The
+channel is chosen depending on the sample direction. `<idx>` may be any positive integer or one of
+the special value:
+
+    * head : The oldest inserted block
+    * tail : The newest inserted block
+    * first: The first block where to (re)start the analysis
+
+internal.strm.is_htx: boolean Returns true if the current stream is an HTX stream. It means the data
+in the channels buffers are stored using the internal HTX representation. Otherwise, it returns
+false.
+
+## 7.4. Pre-defined ACLs {#section-7-4}
+
+Some predefined ACLs are hard-coded so that they do not have to be declared in every frontend which
+needs them. They all have their names in upper case in order to avoid confusion. Their equivalence
+is provided below.
+
+```text
+ACL name          Equivalent to                Usage
+---------------+----------------------------------+------------------------------------------------------
+FALSE            always_false                       never match
+HTTP             req.proto_http                     match if request protocol is valid HTTP
+HTTP_1.0         req.ver 1.0                        match if HTTP request version is 1.0
+HTTP_1.1         req.ver 1.1                        match if HTTP request version is 1.1
+HTTP_2.0         req.ver 2.0                        match if HTTP request version is 2.0
+HTTP_3.0         req.ver 3.0                        match if HTTP request version is 3.0
+HTTP_CONTENT     req.hdr_val(content-length) gt 0   match an existing content-length in the HTTP request
+HTTP_URL_ABS     url_reg ^[^/:]*://                 match absolute URL with scheme
+HTTP_URL_SLASH   url_beg /                          match URL beginning with "/"
+HTTP_URL_STAR    url     *                          match URL equal to "*"
+LOCALHOST        src 127.0.0.1/8::1                match connection from local host
+METH_CONNECT     method  CONNECT                    match HTTP CONNECT method
+METH_DELETE      method  DELETE                     match HTTP DELETE method
+METH_GET         method  GET HEAD                   match HTTP GET or HEAD method
+METH_HEAD        method  HEAD                       match HTTP HEAD method
+METH_OPTIONS     method  OPTIONS                    match HTTP OPTIONS method
+METH_POST        method  POST                       match HTTP POST method
+METH_PUT         method  PUT                        match HTTP PUT method
+METH_TRACE       method  TRACE                      match HTTP TRACE method
+RDP_COOKIE       req.rdp_cookie_cnt gt 0            match presence of an RDP cookie in the request buffer
+REQ_CONTENT      req.len gt 0                       match data in the request buffer
+TRUE             always_true                        always match
+WAIT_END         wait_end                           wait for end of content analysis
+---------------+----------------------------------+------------------------------------------------------
+```

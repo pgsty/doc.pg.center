@@ -29,12 +29,12 @@ doc.pg.center повторно публикует документацию, на
 
 | Компонент | Исходная работа | Зафиксированная версия | Лицензия | Сохранённое уведомление |
 |---|---|---|---|---|
-| [Patroni](/ru/docs/patroni/) | [Документация Patroni](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/ru/docs/pgbackrest/) | [Документация pgBackRest](https://pgbackrest.org/) | v2.59.3 | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/ru/docs/pgbouncer/) | [Документация PgBouncer](https://www.pgbouncer.org/) | v1.26.0 | [ISC](https://opensource.org/license/isc-license-txt) | [Исходный `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
-| [pgBadger](/ru/docs/pgbadger/) | [Документация pgBadger](https://pgbadger.darold.net/) | v13.2, коммит `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/ru/docs/haproxy/) | [Руководства HAProxy 3.4](https://docs.haproxy.org/3.4/) | снимок документации 3.4.6-66, коммит `16acce1`; стабильный выпуск v3.4.6 | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/ru/docs/etcd/) | [Документация etcd v3.7](https://etcd.io/docs/v3.7/) | v3.7, коммит `d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Исходный `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [Patroni](/ru/patroni/) | [Документация Patroni](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
+| [pgBackRest](/ru/pgbackrest/) | [Документация pgBackRest](https://pgbackrest.org/) | v2.59.3 | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [PgBouncer](/ru/pgbouncer/) | [Документация PgBouncer](https://www.pgbouncer.org/) | v1.26.0 | [ISC](https://opensource.org/license/isc-license-txt) | [Исходный `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
+| [pgBadger](/ru/pgbadger/) | [Документация pgBadger](https://pgbadger.darold.net/) | v13.2, коммит `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
+| [HAProxy](/ru/haproxy/) | [Руководства HAProxy 3.4](https://docs.haproxy.org/3.4/) | снимок документации 3.4.6-66, коммит `16acce1`; стабильный выпуск v3.4.6 | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [etcd](/ru/etcd/) | [Документация etcd v3.7](https://etcd.io/docs/v3.7/) | v3.7, коммит `d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Исходный `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 Каждый сборник **адаптирован**, а не зеркально скопирован. Заголовки, якоря, перекрёстные ссылки,
 сигнатуры кода, группировка страниц и навигация переработаны для этого издания; исходный текст при
@@ -89,7 +89,7 @@ doc.pg.center повторно публикует документацию, на
 > ресурсы создаваемых отчётов также содержат компоненты под лицензиями MIT, GPL-2.0 и SIL Open Font
 > License 1.1. Полный перечень исходных ресурсов сохранён в файле
 > [`/third_party/pgbadger/THIRD-PARTY-LICENSES`](/third_party/pgbadger/THIRD-PARTY-LICENSES).
-> Опубликованные здесь [примеры отчётов](/ru/docs/pgbadger/sample-reports/) являются историческими
+> Опубликованные здесь [примеры отчётов](/ru/pgbadger/sample-reports/) являются историческими
 > сгенерированными материалами и сохраняют исходные встроенные уведомления.
 
 ## HAProxy {#haproxy}

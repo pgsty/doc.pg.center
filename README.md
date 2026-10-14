@@ -16,6 +16,12 @@ Hugo Extended and the OINK theme, and maintained by PGSTY.
 Every collection is available in English, Simplified Chinese, French, Japanese,
 German, and Russian. English is the source for the other five editions.
 
+Each component lives directly under `content/<component>/` and uses the `docs`
+layout. Its URL starts with the component name, for example `/patroni/` or
+`/pgbouncer/config/`. Translations prepend their language code, for example
+`/zh/patroni/` or `/fr/pgbouncer/config/`. The homepage lists all six collections;
+there is no `/docs/` index or URL prefix.
+
 ## Develop
 
 Install Hugo Extended, Go, Python 3, and Node.js. CI uses Hugo 0.165.0 and Go 1.27.0.

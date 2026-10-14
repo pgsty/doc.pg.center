@@ -57,7 +57,7 @@ def main() -> int:
 
     sources = [path for path in files if english_path(path) == path]
     groups = {
-        name: [path for path in sources if path.is_relative_to(CONTENT / "docs" / name)]
+        name: [path for path in sources if path.is_relative_to(CONTENT / name)]
         for name in COMPONENTS
     }
     component_sources = [path for group in groups.values() for path in group]

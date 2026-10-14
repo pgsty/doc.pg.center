@@ -1,0 +1,134 @@
+---
+title: "7. CPU Usage"
+linkTitle: "7. CPU"
+weight: 310
+description: "Threading, CPU affinity, saturation, profiling, and performance behavior"
+icon: fa-solid fa-microchip
+module: [HAPROXY]
+categories: [Task]
+aliases:
+  - /haproxy/management/cpu/
+upstream_link: "https://docs.haproxy.org/3.4/management.html"
+upstream_name: "HAProxy 3.4 Management Guide"
+upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 7"
+---
+
+> [!WARNING]
+> Version note: this chapter retains historical multiprocess guidance. Since HAProxy 2.5, `nbproc`
+> and `bind process` are no longer supported. For this edition, configure threads with `nbthread`,
+> `thread-groups` and `cpu-map` in the [global settings](/haproxy/global/#section-3-1).
+
+HAProxy normally spends most of its time in the system and a smaller part in userland. A finely
+tuned 3.5 GHz CPU can sustain a rate about 80000 end-to-end connection setups and closes per second
+at 100% CPU on a single core. When one core is saturated, typical figures are:
+
+- 95% system, 5% user for long TCP connections or large HTTP objects
+- 85% system and 15% user for short TCP connections or small HTTP objects in close mode
+- 70% system and 30% user for small HTTP objects in keep-alive mode
+
+The amount of rules processing and regular expressions will increase the user land part. The
+presence of firewall rules, connection tracking, complex routing tables in the system will instead
+increase the system part.
+
+On most systems, the CPU time observed during network transfers can be cut in 4 parts:
+
+- the interrupt part, which concerns all the processing performed upon I/O receipt, before the
+  target process is even known. Typically Rx packets are accounted for in interrupt. On some systems
+  such as Linux where interrupt processing may be deferred to a dedicated thread, it can appear as
+  softirq, and the thread is called ksoftirqd/0 (for CPU 0). The CPU taking care of this load is
+  generally defined by the hardware settings, though in the case of softirq it is often possible to
+  remap the processing to another CPU. This interrupt part will often be perceived as parasitic
+  since it's not associated with any process, but it actually is some processing being done to
+  prepare the work for the process.
+
+- the system part, which concerns all the processing done using kernel code called from userland.
+  System calls are accounted as system for example. All synchronously delivered Tx packets will be
+  accounted for as system time. If some packets have to be deferred due to queues filling up, they
+  may then be processed in interrupt context later (eg: upon receipt of an ACK opening a TCP
+  window).
+
+- the user part, which exclusively runs application code in userland. HAProxy runs exclusively in
+  this part, though it makes heavy use of system calls. Rules processing, regular expressions,
+  compression, encryption all add to the user portion of CPU consumption.
+
+- the idle part, which is what the CPU does when there is nothing to do. For example HAProxy waits
+  for an incoming connection, or waits for some data to leave, meaning the system is waiting for an
+  ACK from the client to push these data.
+
+In practice regarding HAProxy's activity, it is in general reasonably accurate (but totally inexact)
+to consider that interrupt/softirq are caused by Rx processing in kernel drivers, that user-land is
+caused by layer 7 processing in HAProxy, and that system time is caused by network processing on the
+Tx path.
+
+Since HAProxy runs around an event loop, it waits for new events using poll() (or any alternative)
+and processes all these events as fast as possible before going back to poll() waiting for new
+events. It measures the time spent waiting in poll() compared to the time spent doing processing
+events. The ratio of polling time vs total time is called the "idle" time, it's the amount of time
+spent waiting for something to happen. This ratio is reported in the stats page on the "idle" line,
+or "Idle_pct" on the CLI. When it's close to 100%, it means the load is extremely low. When it's
+close to 0%, it means that there is constantly some activity. While it cannot be very accurate on an
+overloaded system due to other processes possibly preempting the CPU from the haproxy process, it
+still provides a good estimate about how HAProxy considers it is working: if the load is low and the
+idle ratio is low as well, it may indicate that HAProxy has a lot of work to do, possibly due to
+very expensive rules that have to be processed. Conversely, if HAProxy indicates the idle is close
+to 100% while things are slow, it means that it cannot do anything to speed things up because it is
+already waiting for incoming data to process. In the example below, haproxy is completely idle:
+
+```shell
+$ echo "show info" | socat - /var/run/haproxy.sock | grep ^Idle
+Idle_pct: 100
+```
+
+When the idle ratio starts to become very low, it is important to tune the system and place
+processes and interrupts correctly to save the most possible CPU resources for all tasks. If a
+firewall is present, it may be worth trying to disable it or to tune it to ensure it is not
+responsible for a large part of the performance limitation. It's worth noting that unloading a
+stateful firewall generally reduces both the amount of interrupt/softirq and of system usage since
+such firewalls act both on the Rx and the Tx paths. On Linux, unloading the nf_conntrack and
+ip_conntrack modules will show whether there is anything to gain. If so, then the module runs with
+default settings and you'll have to figure how to tune it for better performance. In general this
+consists in considerably increasing the hash table size. On FreeBSD, "pfctl -d" will disable the
+"pf" firewall and its stateful engine at the same time.
+
+If it is observed that a lot of time is spent in interrupt/softirq, it is important to ensure that
+they don't run on the same CPU. Most systems tend to pin the tasks on the CPU where they receive the
+network traffic because for certain workloads it improves things. But with heavily network-bound
+workloads it is the opposite as the haproxy process will have to fight against its kernel
+counterpart. Pinning haproxy to one CPU core and the interrupts to another one, all sharing the same
+L3 cache tends to sensibly increase network performance because in practice the amount of work for
+haproxy and the network stack are quite close, so they can almost fill an entire CPU each. On Linux
+this is done using taskset (for haproxy) or using cpu-map (from the haproxy config), and the
+interrupts are assigned under /proc/irq. Many network interfaces support multiple queues and
+multiple interrupts. In general it helps to spread them across a small number of CPU cores provided
+they all share the same L3 cache. Please always stop irq_balance which always does the worst
+possible thing on such workloads.
+
+For CPU-bound workloads consisting in a lot of SSL traffic or a lot of compression, it may be worth
+using multiple processes dedicated to certain tasks, though there is no universal rule here and
+experimentation will have to be performed.
+
+In order to increase the CPU capacity, it is possible to make HAProxy run as several processes,
+using the "nbproc" directive in the global section. There are some limitations though:
+
+- health checks are run per process, so the target servers will get as many checks as there are
+  running processes;
+- maxconn values and queues are per-process so the correct value must be set to avoid overloading
+  the servers;
+- outgoing connections should avoid using port ranges to avoid conflicts
+- stick-tables are per process and are not shared between processes;
+- each peers section may only run on a single process at a time;
+- the CLI operations will only act on a single process at a time.
+
+With this in mind, it appears that the easiest setup often consists in having one first layer
+running on multiple processes and in charge for the heavy processing, passing the traffic to a
+second layer running in a single process. This mechanism is suited to SSL and compression which are
+the two CPU-heavy features. Instances can easily be chained over UNIX sockets (which are cheaper
+than TCP sockets and which do not waste ports), and the proxy protocol which is useful to pass
+client information to the next stage. When doing so, it is generally a good idea to bind all the
+single-process tasks to process number 1 and extra tasks to next processes, as this will make it
+easier to generate similar configurations for different machines.
+
+On Linux versions 3.9 and above, running HAProxy in multi-process mode is much more efficient when
+each process uses a distinct listening socket on the same IP:port; this will make the kernel evenly
+distribute the load across all processes instead of waking them all up. Please check the "process"
+option of the "bind" keyword lines in the configuration manual for more information.

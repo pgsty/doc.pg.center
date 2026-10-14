@@ -24,14 +24,21 @@ def main() -> int:
     pages = {path: path.read_text(encoding="utf-8") for path in CONTENT.rglob("*.md")}
     sources = [path for path in pages if english_path(path) == path]
     registry = (PROJECT / "data/upstreams.yaml").read_text(encoding="utf-8")
+    if (CONTENT / "docs").exists():
+        errors.append("Documentation must live in top-level component sections, not content/docs")
     for component in COMPONENTS:
         if not re.search(rf"^{component}:$", registry, re.M):
             errors.append(f"Missing upstream registry entry: {component}")
         for language in LANGUAGES:
             suffix = ".md" if language == "en" else f".{language}.md"
-            index = CONTENT / "docs" / component / ("_index" + suffix)
+            index = CONTENT / component / ("_index" + suffix)
             if f"upstream_source: {component}" not in pages.get(index, ""):
                 errors.append(f"Missing component attribution: {index.relative_to(PROJECT)}")
+            front = pages.get(index, "").split("\n---\n", 1)[0]
+            if not re.search(r"^type: docs$", front, re.M):
+                errors.append(f"Missing docs layout: {index.relative_to(PROJECT)}")
+            if not re.search(r"^sidebar_root_for: self$", front, re.M):
+                errors.append(f"Missing independent sidebar: {index.relative_to(PROJECT)}")
 
     for path, text in pages.items():
         source = english_path(path)
@@ -40,10 +47,10 @@ def main() -> int:
         if not text.startswith("---\n") or "\n---\n" not in text:
             errors.append(f"Missing YAML front matter: {path.relative_to(PROJECT)}")
         relative = path.relative_to(CONTENT).parts
-        if len(relative) < 3 or relative[0] != "docs":
+        if len(relative) < 2:
             continue
-        if relative[1] not in COMPONENTS:
-            errors.append(f"Unregistered documentation component: {relative[1]}")
+        if relative[0] not in COMPONENTS:
+            errors.append(f"Unregistered documentation component: {relative[0]}")
         front = text.split("\n---\n", 1)[0]
         link = re.search(r"^upstream_link:\s*(.+)$", front, re.M)
         original = re.search(r"^upstream_link:\s*(.+)$", pages.get(source, "").split("\n---\n", 1)[0], re.M)

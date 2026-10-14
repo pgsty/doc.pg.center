@@ -1,0 +1,93 @@
+---
+title: "4. Stopping and Restarting HAProxy"
+linkTitle: "4. Stop & Restart"
+weight: 280
+description: "Signals, soft stops, reloads, and master-worker restarts"
+icon: fa-solid fa-rotate
+module: [HAPROXY]
+categories: [Task]
+aliases:
+  - /haproxy/management/stopping-and-restarting/
+upstream_link: "https://docs.haproxy.org/3.4/management.html"
+upstream_name: "HAProxy 3.4 Management Guide"
+upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 4"
+---
+
+HAProxy supports a graceful and a hard stop. The hard stop is simple, when the SIGTERM signal is
+sent to the haproxy process, it immediately quits and all established connections are closed. The
+graceful stop is triggered when the SIGUSR1 signal is sent to the haproxy process. It consists in
+only unbinding from listening ports, but continue to process existing connections until they close.
+Once the last connection is closed, the process leaves.
+
+The hard stop method is used for the "stop" or "restart" actions of the service management script.
+The graceful stop is used for the "reload" action which tries to seamlessly reload a new
+configuration in a new process.
+
+Both of these signals may be sent by the new haproxy process itself during a reload or restart, so
+that they are sent at the latest possible moment and only if absolutely required. This is what is
+performed by the "-st" (hard) and "-sf" (graceful) options respectively.
+
+In master-worker mode, it is not needed to start a new haproxy process in order to reload the
+configuration. The master process reacts to the SIGUSR2 signal by reexecuting itself with the -sf
+parameter followed by the PIDs of the workers. The master will then parse the configuration file and
+fork new workers.
+
+To understand better how these signals are used, it is important to understand the whole restart
+mechanism.
+
+First, an existing haproxy process is running. The administrator uses a system specific command such
+as "/etc/init.d/haproxy reload" to indicate they want to take the new configuration file into
+effect. What happens then is the following. First, the service script (/etc/init.d/haproxy or
+equivalent) will verify that the configuration file parses correctly using "haproxy -c". After that
+it will try to start haproxy with this configuration file, using "-st" or "-sf".
+
+Then HAProxy tries to bind to all listening ports. If some fatal errors happen (eg: address not
+present on the system, permission denied), the process quits with an error. If a socket binding
+fails because a port is already in use, then the process will first send a SIGTTOU signal to all the
+pids specified in the "-st" or "-sf" pid list. This is what is called the "pause" signal. It
+instructs all existing haproxy processes to temporarily stop listening to their ports so that the
+new process can try to bind again. During this time, the old process continues to process existing
+connections. If the binding still fails (because for example a port is shared with another daemon),
+then the new process sends a SIGTTIN signal to the old processes to instruct them to resume
+operations just as if nothing happened. The old processes will then restart listening to the ports
+and continue to accept connections. Note that this mechanism is system dependent and some operating
+systems may not support it in multi-process mode.
+
+If the new process manages to bind correctly to all ports, then it sends either the SIGTERM (hard
+stop in case of "-st") or the SIGUSR1 (graceful stop in case of "-sf") to all processes to notify
+them that it is now in charge of operations and that the old processes will have to leave, either
+immediately or once they have finished their job.
+
+It is important to note that during this timeframe, there are two small windows of a few
+milliseconds each where it is possible that a few connection failures will be noticed during high
+loads. Typically observed failure rates are around 1 failure during a reload operation every 10000
+new connections per second, which means that a heavily loaded site running at 30000 new connections
+per second may see about 3 failed connection upon every reload. The two situations where this
+happens are:
+
+- if the new process fails to bind due to the presence of the old process, it will first have to go
+  through the SIGTTOU+SIGTTIN sequence, which typically lasts about one millisecond for a few tens
+  of frontends, and during which some ports will not be bound to the old process and not yet bound
+  to the new one. HAProxy works around this on systems that support the SO_REUSEPORT socket options,
+  as it allows the new process to bind without first asking the old one to unbind. Most BSD systems
+  have been supporting this almost forever. Linux has been supporting this in version 2.0 and
+  dropped it around 2.2, but some patches were floating around by then. It was reintroduced in
+  kernel 3.9, so if you are observing a connection failure rate above the one mentioned above,
+  please ensure that your kernel is 3.9 or newer, or that relevant patches were backported to your
+  kernel (less likely).
+
+- when the old processes close the listening ports, the kernel may not always redistribute any
+  pending connection that was remaining in the socket's backlog. Under high loads, a SYN packet may
+  happen just before the socket is closed, and will lead to an RST packet being sent to the client.
+  In some critical environments where even one drop is not acceptable, these ones are sometimes
+  dealt with using firewall rules to block SYN packets during the reload, forcing the client to
+  retransmit. This is totally system-dependent, as some systems might be able to visit other
+  listening queues and avoid this RST. A second case concerns the ACK from the client on a local
+  socket that was in SYN_RECV state just before the close. This ACK will lead to an RST packet while
+  the haproxy process is still not aware of it. This one is harder to get rid of, though the
+  firewall filtering rules mentioned above will work well if applied one second or so before
+  restarting the process.
+
+For the vast majority of users, such drops will never ever happen since they don't have enough load
+to trigger the race conditions. And for most high traffic users, the failure rate is still fairly
+within the noise margin provided that at least SO_REUSEPORT is properly supported on their systems.

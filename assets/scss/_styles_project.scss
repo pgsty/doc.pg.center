@@ -472,7 +472,7 @@
 // The theme already scrolls these tables; minimum column widths prevent
 // bucket names and field descriptions from collapsing into vertical text.
 @media screen and (max-width: 767.98px) {
-  .td-shell-article:has(.td-breadcrumbs a[href='/ja/docs/etcd/']) .td-content > table {
+  .td-shell-article:has(.td-breadcrumbs a[href='/ja/etcd/']) .td-content > table {
     th,
     td {
       min-width: 10rem;

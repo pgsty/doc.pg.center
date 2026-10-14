@@ -28,14 +28,14 @@ const original = upstream.create(documents, lunr, 30);
 
 for (const query of ['Восстановление', 'ВОССТАНОВЛЕНИЕ', 'резервное копирование']) {
   assert(engine.query(query).some(
-    ({ doc }) => doc.ref.startsWith('/ru/docs/pgbackrest/'),
+    ({ doc }) => doc.ref.startsWith('/ru/pgbackrest/'),
   ), `Russian pgBackRest results missing for ${query}`);
 }
 for (const [query, route] of [
-  ['статистика', '/ru/docs/haproxy/statistics-and-monitoring/'],
-  ['СТАТИСТИКА', '/ru/docs/haproxy/statistics-and-monitoring/'],
-  ['ведение журнала', '/ru/docs/haproxy/configuration-logging/'],
-  ['HAProxy', '/ru/docs/haproxy/'],
+  ['статистика', '/ru/haproxy/statistics-and-monitoring/'],
+  ['СТАТИСТИКА', '/ru/haproxy/statistics-and-monitoring/'],
+  ['ведение журнала', '/ru/haproxy/configuration-logging/'],
+  ['HAProxy', '/ru/haproxy/'],
 ]) {
   assert(engine.query(query).some(({ doc }) => doc.ref === route),
     `HAProxy search result ${route} missing for ${query}`);

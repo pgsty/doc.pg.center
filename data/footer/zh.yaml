@@ -5,12 +5,12 @@ brand:
 columns:
   - title: 组件文档
     links:
-      - { label: Patroni, url: /docs/patroni/ }
-      - { label: pgBackRest, url: /docs/pgbackrest/ }
-      - { label: PgBouncer, url: /docs/pgbouncer/ }
-      - { label: pgBadger, url: /docs/pgbadger/ }
-      - { label: HAProxy, url: /docs/haproxy/ }
-      - { label: etcd, url: /docs/etcd/ }
+      - { label: Patroni, url: /patroni/ }
+      - { label: pgBackRest, url: /pgbackrest/ }
+      - { label: PgBouncer, url: /pgbouncer/ }
+      - { label: pgBadger, url: /pgbadger/ }
+      - { label: HAProxy, url: /haproxy/ }
+      - { label: etcd, url: /etcd/ }
   - title: 上游项目
     links:
       - { label: Patroni, url: https://github.com/patroni/patroni, external: true }

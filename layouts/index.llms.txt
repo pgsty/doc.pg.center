@@ -1,4 +1,3 @@
-{{- $config := partial "shell/config.html" . -}}
 {{- $homeMarkdownURL := .Site.Home.Permalink -}}
 {{ with .Site.Home.OutputFormats.Get "markdown" -}}
   {{ $homeMarkdownURL = .Permalink -}}
@@ -61,26 +60,18 @@ that agent-docs tooling applies to llms.txt entries. */ -}}
 
 {{/* Documentation ----------------------------------------------------- */ -}}
 
-{{/* The docs root is whatever params.ui.docs_section names, not a literal
-"docs": shell/config.html is the single resolver for it. Every documentation
-page is listed, not only the sections, because an index that stops at the
-section level tells an agent nothing about what the site actually documents. */ -}}
-{{ with .Site.GetPage (printf "/%s" $config.docsSection) -}}
-  {{ $pages := .RegularPagesRecursive -}}
-  {{ if or $pages .Sections -}}
-    {{ "\n" -}}
+{{/* Each component is an independent top-level docs section. Follow the same
+reading order as its sidebar, including nested section indexes. */ -}}
+{{ $roots := where .Site.Home.Sections.ByWeight "Type" "docs" -}}
+{{ with $roots -}}
+  {{ "\n" -}}
 
-    ## Documentation index
+  ## Documentation index
 
-    {{- "\n\n" -}}
-    {{ range .Sections -}}
-      {{ template "llms-entry" (dict "page" . "depth" 0) -}}
-      {{ range .RegularPagesRecursive -}}
-        {{ template "llms-entry" (dict "page" . "depth" 1) -}}
-      {{ end -}}
-    {{ end -}}
-    {{ range .RegularPages -}}
-      {{ template "llms-entry" (dict "page" . "depth" 0) -}}
+  {{- "\n\n" -}}
+  {{ range $root := . -}}
+    {{ range partial "shell/nav-flatten.html" (dict "page" $root "root" $root) -}}
+      {{ template "llms-entry" (dict "page" . "depth" (cond (eq . $root) 0 1)) -}}
     {{ end -}}
   {{ end -}}
 {{ end -}}
