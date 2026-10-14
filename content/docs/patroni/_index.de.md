@@ -46,8 +46,8 @@ Beim Betrieb mit `vm.overcommit_memory=2` (für PostgreSQL empfohlen) empfehlen 
 
 Zusätzlich können Sie folgende Patroni-Konfigurationsparameter anpassen:
 
-- `thread_stack_size` - Stackgröße der von Patroni gestarteten Threads. Ein niedrigerer Wert verringert den Speicherbedarf des Patroni-Prozesses. Patroni setzt standardmäßig `512kB`. Erhöhen Sie `thread_stack_size`, wenn Patroni aufgrund von Stackproblemen abstürzt; andernfalls reicht der Standardwert aus.
-- `thread_pool_size` - Größe des Threadpools, den Patroni für asynchrone Aufgaben und die REST API-Kommunikation mit anderen Mitgliedern bei der Wahl des führenden Knotens oder bei Failsafe-Prüfungen verwendet. Der Standardwert ist `5` und reicht für Cluster mit drei Knoten aus.
+- `thread_stack_size` - Stackgröße der von Patroni gestarteten Threads. Ein niedrigerer Wert verringert den Speicherbedarf des Patroni-Prozesses. Der von Patroni vorgegebene Standardwert ist `512kB`. Erhöhen Sie `thread_stack_size`, wenn Patroni aufgrund von Stackproblemen abstürzt; andernfalls reicht der Standardwert aus.
+- `thread_pool_size` - Größe des Threadpools, den Patroni für asynchrone Aufgaben und die REST API-Kommunikation mit anderen Mitgliedern bei der Leader-Wahl oder bei Failsafe-Prüfungen verwendet. Der Standardwert ist `5` und reicht für Cluster mit drei Knoten aus.
 - `restapi.thread_pool_size` - Größe des Threadpools zur Bearbeitung von REST API-Anfragen. Der Standardwert ist `5` und erlaubt bis zu fünf parallele REST API-Anfragen. Anfragen mit SQL-Abfragen werden jedoch praktisch nacheinander verarbeitet, da nur eine Datenbankverbindung verwendet wird. Eine Erhöhung dieses Wertes bringt daher üblicherweise keinen Vorteil.
 
 --------
@@ -62,4 +62,4 @@ Derzeit unterstützte PostgreSQL-Versionen: 9.3 bis 18.
 
 **Hinweis für Kubernetes-Anwender**: Patroni kann direkt auf Kubernetes laufen. Lesen Sie dazu das Kapitel [Kubernetes](/de/docs/patroni/kubernetes#kubernetes) der Patroni-Dokumentation.
 
-<img src="/img/docs/patroni/patroni-logo.png" width="128" height="128" alt="image" />
+<img src="/img/docs/patroni/patroni-logo.png" width="128" height="128" alt="Bild" />

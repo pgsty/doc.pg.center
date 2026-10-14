@@ -1,5 +1,5 @@
 ---
-title: "HAProxy 3.4.4 Documentation"
+title: "HAProxy 3.4.6-66 Documentation"
 linkTitle: HAProxy
 weight: 50
 description: "Complete English Markdown edition of the HAProxy 3.4 Starter, Configuration, and Management manuals"
@@ -26,6 +26,11 @@ cascade:
 balancing, and application traffic management. This component contains the complete English text of
 the three core HAProxy 3.4 manuals, reorganized as one flat Markdown reading sequence for OINK.
 
+This edition follows the official English maintenance-branch manuals at snapshot
+`3.4.6-66`. The latest stable release is `3.4.6` (`v3.4.6`);
+the snapshot includes documentation changes made after that release. Its exact source is
+commit [`16acce1dac1d`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=16acce1dac1dcf1ad5d654204af3a5d45d0e3de8).
+
 ## Choose a manual {#choose-a-manual}
 
 - [Starter Guide](/docs/haproxy/load-balancing/) — 9 topics on load-balancing concepts, HAProxy architecture, features, sizing, releases, and ecosystem.
@@ -38,8 +43,8 @@ the three core HAProxy 3.4 manuals, reorganized as one flat Markdown reading seq
 | Manual | Upstream source | Local organization |
 | --- | ---: | ---: |
 | Starter Guide | 1,695 lines | 9 flat topic pages |
-| Configuration Manual | 33,148 lines | 12 flat chapter pages |
-| Management Guide | 5,285 lines | 13 flat chapter pages |
+| Configuration Manual | 33,216 lines | 12 flat chapter pages |
+| Management Guide | 5,305 lines | 13 flat chapter pages |
 
 All 34 reading pages live directly under the HAProxy component root. Three non-linking divider
 placeholders separate the manuals in the sidebar without adding directory levels or pager stops.

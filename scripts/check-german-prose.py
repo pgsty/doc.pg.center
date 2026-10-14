@@ -26,6 +26,7 @@ import sys
 import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
+from translation_fences import prose_for_lint
 
 PROJECT = Path(__file__).resolve().parent.parent
 CONTENT = PROJECT / "content"
@@ -447,6 +448,11 @@ SQL_LITERAL_RE = re.compile(
     r"^(?:ALTER|BEGIN|CALL|COMMIT|COPY|CREATE|DELETE|DROP|GRANT|INSERT|"
     r"REINDEX|REVOKE|ROLLBACK|SELECT|SET|SHOW|TRUNCATE|UPDATE|VACUUM)\b"
 )
+PGBOUNCER_QUOTED_DIAGNOSTICS = (
+    "unclean server",
+    "client disconnect while server was not ready",
+    "client disconnect before everything was sent to the server",
+)
 
 
 @dataclass(frozen=True)
@@ -470,6 +476,7 @@ class LanguageEvidence:
 class SourceProfile:
     lines: frozenset[str]
     legal_lines: frozenset[str]
+    indented_literals: frozenset[str] = frozenset()
 
 
 @dataclass(frozen=True)
@@ -766,6 +773,7 @@ def source_profile(path: Path) -> SourceProfile:
     if not english.is_file():
         return SourceProfile(frozenset(), frozenset())
     document = english.read_text(encoding="utf-8")
+    document = prose_for_lint(english, document)
     candidates = candidate_lines(document)
     lines = {
         normalize_visible(candidate.visible)
@@ -794,10 +802,37 @@ def source_profile(path: Path) -> SourceProfile:
         previous = candidate.line
     keep_legal_paragraph()
 
-    return SourceProfile(frozenset(lines), frozenset(legal_lines))
+    # Reviewed indented command/output blocks in the Citus guide, including
+    # English program prompts and explanatory code comments. Match unchanged
+    # source lines, not target line numbers or arbitrary indented prose.
+    indented_literals: set[str] = set()
+    if english == CONTENT / "docs" / "patroni" / "citus.md":
+        source_lines = document.splitlines()
+        for start, end in ((57, 68), (72, 87), (97, 140), (144, 157), (171, 184), (194, 199)):
+            indented_literals.update(
+                line for line in source_lines[start - 1:end]
+                if line.startswith("    ")
+            )
+    return SourceProfile(frozenset(lines), frozenset(legal_lines), frozenset(indented_literals))
+
+
+def mask_pgbouncer_quoted_diagnostics(path: Path, document: str) -> str:
+    """Exclude only three complete original messages on the PgBouncer page."""
+    if path.resolve() != CONTENT / "docs/pgbouncer/changelog.de.md":
+        return document
+    for literal in PGBOUNCER_QUOTED_DIAGNOSTICS:
+        pattern = '"' + r"[ \t\r\n]+".join(map(re.escape, literal.split())) + '"'
+        # A diagnostic may wrap across Markdown lines. Keep line numbers and
+        # all surrounding explanations, including any untranslated prose.
+        document = re.sub(
+            pattern, lambda match: re.sub(r"[^\r\n]", " ", match.group()), document
+        )
+    return document
 
 
 def assess(candidate: Candidate, path: Path, source: SourceProfile) -> str | None:
+    if candidate.raw in source.indented_literals:
+        return None
     if is_literal_line(candidate):
         return None
     normalized = normalize_visible(candidate.visible)
@@ -915,7 +950,10 @@ def main() -> int:
         try:
             document = path.read_text(encoding="utf-8")
             profile = source_profile(path)
-        except (OSError, UnicodeError) as exc:
+            source = path.with_name(path.name.removesuffix(".de.md") + ".md")
+            document = prose_for_lint(source, document)
+            document = mask_pgbouncer_quoted_diagnostics(path, document)
+        except (OSError, UnicodeError, ValueError) as exc:
             print(f"error: {display_path(path)}: {exc}", file=sys.stderr)
             return 2
         for candidate in candidate_lines(document):

@@ -1,0 +1,142 @@
+{
+  "source": "content/docs/haproxy/filters.md",
+  "language": "fr",
+  "fences": [
+    {
+      "index": 1,
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"TRACE\"",
+        "\"max-fwd\""
+      ],
+      "protected_lines": [],
+      "source_sha256": "3fefe71538ee52f953d92091c208f5668ffd9fa72f7a912c235d76e4ca88f74f",
+      "target_sha256": "035fd40a531c4246caacd3ddf7d4762ffaea250a13a312817a3ceb33644c26ae",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 2,
+      "classification": "argument-description",
+      "protected_literals": [],
+      "protected_lines": [],
+      "source_sha256": "eb11433cd9d9d300fd41f1646da0cce6f2887481fa0a435547db1bc505bfdd16",
+      "target_sha256": "1c9771348b37e3a896bae2b00e7944d6986db1134fab157e960818ec1191ac2e",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 3,
+      "classification": "argument-description",
+      "protected_literals": [],
+      "protected_lines": [],
+      "source_sha256": "3e7fec06ee6cb900894f53175bb0c05ad8d02422619dd7624631d3cff5d8be2d",
+      "target_sha256": "fd68ceb6e2d5abae0037cf6708e8b98f6b3502c5df19e3d20d75ad6ac1799ac6",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 4,
+      "classification": "argument-description",
+      "protected_literals": [
+        "fcgi-app"
+      ],
+      "protected_lines": [],
+      "source_sha256": "0e111b83ae62ea6d1602bf0f8cd3dfb02507dd6d2b6b387930ec46f89bc3202b",
+      "target_sha256": "cbdbbc0eacd4dd811dcf445cd80168bcae369863004cd961f4ccd873a2771a4e",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 5,
+      "classification": "argument-description",
+      "protected_literals": [
+        "OpenTracing",
+        "'ot-filter'"
+      ],
+      "protected_lines": [],
+      "source_sha256": "2831c4bc944708f999d8545ac11980dc86755663277d88c96d42ea8571a95c97",
+      "target_sha256": "92a5e89befe4c461217a8185f5cc7c9fc06da35b18478101fdd0ab9f49919b47",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 8,
+      "classification": "argument-description",
+      "protected_literals": [
+        "'set-bandwidth-limit'",
+        "HAProxy",
+        "stick-table"
+      ],
+      "protected_lines": [],
+      "source_sha256": "554d61b0bbb320ea79bcc1f9f56a6e97eae42b708c5710a61735a351a59a0a08",
+      "target_sha256": "8188270e969a9d6a24b6b825b7a2b50e05019a6c034773e003efb749c261a647",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    }
+  ],
+  "literal_blocks": [
+    {
+      "lines": [
+        28,
+        28
+      ],
+      "classification": "configuration",
+      "source_sha256": "87202bf824d6efc44b59d76e363f61774c7d2bd435872071e5b7060322f3e12a"
+    },
+    {
+      "lines": [
+        61,
+        61
+      ],
+      "classification": "configuration",
+      "source_sha256": "35d5f69eec7940be017a65fddb929c7639dcd3232590d5e722f697f55f16f91c"
+    },
+    {
+      "lines": [
+        66,
+        66
+      ],
+      "classification": "configuration",
+      "source_sha256": "6a6172109a71ff8a70f0907cbc93ed8e912dc7303a773a3e715c8b2ca1915928"
+    },
+    {
+      "lines": [
+        90,
+        90
+      ],
+      "classification": "configuration",
+      "source_sha256": "42652cc32395b5afd8f50d7ed6b7d04598a76af4f4781b6b56e2b13667c90c75"
+    },
+    {
+      "lines": [
+        121,
+        121
+      ],
+      "classification": "configuration",
+      "source_sha256": "6a69f01fe99c4df0e1c870b0236a3cdefdde1d017363aca6ca412ee8c338bb96"
+    },
+    {
+      "lines": [
+        142,
+        142
+      ],
+      "classification": "configuration",
+      "source_sha256": "e4a377580339d7017341e17d41fb01934d7b45c6ed85d2dff68f11121fa49074"
+    },
+    {
+      "lines": [
+        173,
+        173
+      ],
+      "classification": "configuration",
+      "source_sha256": "a8aec9903a8a6aa99832e8ce5a34c344343080f02ddf83c8795e2a3932c7661f"
+    }
+  ],
+  "literal_snippets": [
+    {
+      "text": "filter compression",
+      "classification": "configuration",
+      "source_sha256": "28862d446eb13cf860babdd46696a1b422785ddc2a0053ef4c2cded2ce9f7983"
+    },
+    {
+      "text": "haproxy -vv",
+      "classification": "command",
+      "source_sha256": "2716d04c4bf72b601d4dbe5c210734e2038e30ee073096e8feac043df0880949"
+    }
+  ]
+}

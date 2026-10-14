@@ -1,0 +1,13 @@
+{
+  "fences": [],
+  "source": "content/docs/haproxy/stopping-and-restarting.md",
+  "language": "zh",
+  "source_sha256": "23ea530b4f922b37b91fbfa8a34cfeeaeb626c959d72f25e5ff14d909130ed4f",
+  "target_sha256": "b93822c022be50f02373fc186b2b9c017bcc802932240c8827f7af219f6045a9",
+  "review_scope": "Complete identified explanatory-fence inventory reviewed separately from structural/numeric technical screening and selective manual prose review. No claim of full independent sentence-by-sentence review of all prose.",
+  "literal_blocks": [],
+  "literal_formatting_revalidation": {
+    "method": "Exact reviewed predecessor hashes and current source/target literal equality; remove obsolete protection only with proven default-protected exact fenced replacement.",
+    "events": []
+  }
+}

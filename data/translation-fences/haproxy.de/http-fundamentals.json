@@ -1,0 +1,210 @@
+{
+  "source": "content/docs/haproxy/http-fundamentals.md",
+  "language": "de",
+  "fences": [
+    {
+      "index": 4,
+      "classification": "table-labels",
+      "source_sha256": "74c679c1d560aff6b4321f7b03e720b5427a96ef16d09dcae962a48dbc06ccd8",
+      "target_sha256": "1583199450de13563935f2c241c5b340104c94bf8cf0009ed443d03f9764561e",
+      "protected_literals": [],
+      "protected_lines": [
+        "   1     GET /serv/login.php?lang=en&profile=2 HTTP/1.1",
+        "   2     Host: www.mydomain.com",
+        "   3     User-agent: my small browser",
+        "   4     Accept: image/jpeg, image/gif",
+        "   5     Accept: image/png"
+      ],
+      "revalidation_history": [
+        {
+          "index": 4,
+          "source_sha256": "74c679c1d560aff6b4321f7b03e720b5427a96ef16d09dcae962a48dbc06ccd8",
+          "target_sha256": "1583199450de13563935f2c241c5b340104c94bf8cf0009ed443d03f9764561e"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 5,
+      "classification": "mixed-explanation",
+      "source_sha256": "713fe0e1c2c70c515ce93ae5f5bf17f7b249627858531511fd8ed7c2b7c41124",
+      "target_sha256": "ab16c77ca5017f198e610cef8c85ea7bfee8663ba03c7979ef2d7c520c9e76c5",
+      "protected_literals": [
+        "URL"
+      ],
+      "protected_lines": [
+        "  /serv/login.php?lang=en&profile=2"
+      ],
+      "revalidation_history": [
+        {
+          "index": 5,
+          "source_sha256": "713fe0e1c2c70c515ce93ae5f5bf17f7b249627858531511fd8ed7c2b7c41124",
+          "target_sha256": "ab16c77ca5017f198e610cef8c85ea7bfee8663ba03c7979ef2d7c520c9e76c5"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 6,
+      "classification": "mixed-explanation",
+      "source_sha256": "1b218adb01fd0ce9a994577d87ca888eaf3eaf29109f828cbc37e7428b80162b",
+      "target_sha256": "e7b92b826d46f4408d0d550d1862dcf0fa0cb0a541315c7678bd7166f169d2b4",
+      "protected_literals": [
+        "URI",
+        "HTTP/1.1",
+        "'://'",
+        "':'",
+        "'/'"
+      ],
+      "protected_lines": [
+        "  http://192.168.0.12:8080/serv/login.php?lang=en&profile=2"
+      ],
+      "revalidation_history": [
+        {
+          "index": 6,
+          "source_sha256": "1b218adb01fd0ce9a994577d87ca888eaf3eaf29109f828cbc37e7428b80162b",
+          "target_sha256": "e7b92b826d46f4408d0d550d1862dcf0fa0cb0a541315c7678bd7166f169d2b4"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 7,
+      "classification": "argument-description",
+      "source_sha256": "2f095112ef580f455b799eaf08262c9554da045c531db9aa4ff1dca6fb1ac1c8",
+      "target_sha256": "c83f7aeca5f54d4c962730595ff45f368926778f73b7097954ed81b837296547",
+      "protected_literals": [
+        "RFC7231",
+        "HAProxy",
+        "LWS",
+        "HTTP"
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 7,
+          "source_sha256": "2f095112ef580f455b799eaf08262c9554da045c531db9aa4ff1dca6fb1ac1c8",
+          "target_sha256": "c83f7aeca5f54d4c962730595ff45f368926778f73b7097954ed81b837296547"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 8,
+      "classification": "table-labels",
+      "source_sha256": "270dc83f96bd7216708515c65613312b5f6070a70bc25e3fad21cba5e1f31772",
+      "target_sha256": "4b8381e1ba60eebcaa5c437bf7aefe8d840da8669e4e9e4b033658856d67277b",
+      "protected_literals": [],
+      "protected_lines": [
+        "   1     HTTP/1.1 200 OK",
+        "   2     Content-length: 350",
+        "   3     Content-Type: text/html"
+      ],
+      "revalidation_history": [
+        {
+          "index": 8,
+          "source_sha256": "270dc83f96bd7216708515c65613312b5f6070a70bc25e3fad21cba5e1f31772",
+          "target_sha256": "4b8381e1ba60eebcaa5c437bf7aefe8d840da8669e4e9e4b033658856d67277b"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 9,
+      "classification": "table-labels",
+      "source_sha256": "f41b23ea4856c18e1c9be7bdd0d649a894746d7c0f46325edea5669f32b3b038",
+      "target_sha256": "1c15b4badf0e3966df3a598b7beb31479c784b8801d1e5dad27f1c725cd12b6f",
+      "protected_literals": [
+        "\"http-request deny\"",
+        "HTTP/1.0",
+        "GET/HEAD/DELETE",
+        "\"h1-accept-payload-with-any-method\"",
+        "HAProxy",
+        "\"http-response deny\"",
+        "\"monitor fail\""
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 9,
+          "source_sha256": "f41b23ea4856c18e1c9be7bdd0d649a894746d7c0f46325edea5669f32b3b038",
+          "target_sha256": "1c15b4badf0e3966df3a598b7beb31479c784b8801d1e5dad27f1c725cd12b6f"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    }
+  ],
+  "literal_blocks": [],
+  "source_formatting_revalidation": {
+    "method": "Exact reviewed predecessor source/target SHA mapping and byte-for-byte literal-fence witnesses; only documented source errata and markup-only restoration accepted.",
+    "fences": [
+      {
+        "prior": {
+          "index": 4,
+          "source_sha256": "74c679c1d560aff6b4321f7b03e720b5427a96ef16d09dcae962a48dbc06ccd8",
+          "target_sha256": "1583199450de13563935f2c241c5b340104c94bf8cf0009ed443d03f9764561e"
+        },
+        "index": 4,
+        "source_sha256": "74c679c1d560aff6b4321f7b03e720b5427a96ef16d09dcae962a48dbc06ccd8",
+        "target_sha256": "1583199450de13563935f2c241c5b340104c94bf8cf0009ed443d03f9764561e",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 5,
+          "source_sha256": "713fe0e1c2c70c515ce93ae5f5bf17f7b249627858531511fd8ed7c2b7c41124",
+          "target_sha256": "ab16c77ca5017f198e610cef8c85ea7bfee8663ba03c7979ef2d7c520c9e76c5"
+        },
+        "index": 5,
+        "source_sha256": "713fe0e1c2c70c515ce93ae5f5bf17f7b249627858531511fd8ed7c2b7c41124",
+        "target_sha256": "ab16c77ca5017f198e610cef8c85ea7bfee8663ba03c7979ef2d7c520c9e76c5",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 6,
+          "source_sha256": "1b218adb01fd0ce9a994577d87ca888eaf3eaf29109f828cbc37e7428b80162b",
+          "target_sha256": "e7b92b826d46f4408d0d550d1862dcf0fa0cb0a541315c7678bd7166f169d2b4"
+        },
+        "index": 6,
+        "source_sha256": "1b218adb01fd0ce9a994577d87ca888eaf3eaf29109f828cbc37e7428b80162b",
+        "target_sha256": "e7b92b826d46f4408d0d550d1862dcf0fa0cb0a541315c7678bd7166f169d2b4",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 7,
+          "source_sha256": "2f095112ef580f455b799eaf08262c9554da045c531db9aa4ff1dca6fb1ac1c8",
+          "target_sha256": "c83f7aeca5f54d4c962730595ff45f368926778f73b7097954ed81b837296547"
+        },
+        "index": 7,
+        "source_sha256": "2f095112ef580f455b799eaf08262c9554da045c531db9aa4ff1dca6fb1ac1c8",
+        "target_sha256": "c83f7aeca5f54d4c962730595ff45f368926778f73b7097954ed81b837296547",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 8,
+          "source_sha256": "270dc83f96bd7216708515c65613312b5f6070a70bc25e3fad21cba5e1f31772",
+          "target_sha256": "4b8381e1ba60eebcaa5c437bf7aefe8d840da8669e4e9e4b033658856d67277b"
+        },
+        "index": 8,
+        "source_sha256": "270dc83f96bd7216708515c65613312b5f6070a70bc25e3fad21cba5e1f31772",
+        "target_sha256": "4b8381e1ba60eebcaa5c437bf7aefe8d840da8669e4e9e4b033658856d67277b",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 9,
+          "source_sha256": "f41b23ea4856c18e1c9be7bdd0d649a894746d7c0f46325edea5669f32b3b038",
+          "target_sha256": "1c15b4badf0e3966df3a598b7beb31479c784b8801d1e5dad27f1c725cd12b6f"
+        },
+        "index": 9,
+        "source_sha256": "f41b23ea4856c18e1c9be7bdd0d649a894746d7c0f46325edea5669f32b3b038",
+        "target_sha256": "1c15b4badf0e3966df3a598b7beb31479c784b8801d1e5dad27f1c725cd12b6f",
+        "reason": "unchanged exact reviewed English fence"
+      }
+    ],
+    "literal_blocks": []
+  }
+}

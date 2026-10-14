@@ -1,0 +1,91 @@
+{
+  "source": "content/docs/haproxy/fastcgi.md",
+  "language": "zh",
+  "fences": [
+    {
+      "index": 16,
+      "source_sha256": "95eacdc82fb297c1ce34bb9ca8383e72ced56f680eac57cc72dc20d396f4f10c",
+      "target_sha256": "218c60e74eae2038b8294f45d9212cda34bb8b41a4862df56bee537520511312",
+      "classification": "argument-description",
+      "protected_literals": [
+        "<name>"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 16,
+          "source_sha256": "95eacdc82fb297c1ce34bb9ca8383e72ced56f680eac57cc72dc20d396f4f10c",
+          "target_sha256": "218c60e74eae2038b8294f45d9212cda34bb8b41a4862df56bee537520511312"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 18,
+      "source_sha256": "841a07f00740f9d1a107175d22eeee60ab24ef79128d5d4b50f22e968df323d4",
+      "target_sha256": "1963c2397be34a7ad00e029fed94935ccf6e46203722b02c061301e3cd248ca0",
+      "classification": "table-labels",
+      "protected_literals": [
+        "\"HAProxy\"",
+        "\"Host\"",
+        "\"on\"",
+        "\"path-info\"",
+        "AUTH_TYPE",
+        "BASIC",
+        "CGI",
+        "CGI/1.1",
+        "CONTENT_LENGTH",
+        "CONTENT_TYPE",
+        "DOCUMENT_ROOT",
+        "GATEWAY_INTERFACE",
+        "HAProxy",
+        "HTTPS",
+        "PATH_INFO",
+        "PATH_TRANSLATED",
+        "QUERY_STRING",
+        "REMOTE_ADDR",
+        "REMOTE_USER",
+        "REQUEST_METHOD",
+        "REQUEST_URI",
+        "SCRIPT_FILENAME",
+        "SCRIPT_NAME",
+        "SERVER_NAME",
+        "SERVER_PORT",
+        "SERVER_PROTOCOL",
+        "SERVER_SOFTWARE",
+        "TCP",
+        "URI"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 18,
+          "source_sha256": "841a07f00740f9d1a107175d22eeee60ab24ef79128d5d4b50f22e968df323d4",
+          "target_sha256": "1963c2397be34a7ad00e029fed94935ccf6e46203722b02c061301e3cd248ca0"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    }
+  ],
+  "literal_blocks": [],
+  "literal_snippets": [],
+  "source_sha256": "6a1c965966e9a0bc39b02237ef4757b4a77fc93e8bf1cec097ce3f7d607b5af7",
+  "target_sha256": "d1a1cb91a6a2daee4a04aa89760c11b8dfa37ec47514e9b39966db0eb6dcecf5",
+  "review_scope": "Complete identified explanatory-fence inventory reviewed separately from structural/numeric technical screening and selective manual prose review. No claim of full independent sentence-by-sentence review of all prose.",
+  "literal_formatting_revalidation": {
+    "method": "Exact reviewed predecessor hashes and current source/target literal equality; remove obsolete protection only with proven default-protected exact fenced replacement.",
+    "events": [
+      {
+        "row": 1,
+        "action": "old unfenced-code protection replaced by default byte-for-byte fence protection",
+        "old_sha256": "abe3670fab018c72382e07c899e1f84151196c91aa83dc0fb411325e7701bd4b",
+        "source_snapshot": "/tmp/doc-pg-center-haproxy-review-20261013/baseline/content/docs/haproxy/fastcgi.md",
+        "current_verbatim_fences": [
+          17
+        ]
+      }
+    ]
+  }
+}

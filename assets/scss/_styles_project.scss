@@ -394,6 +394,58 @@
   margin-inline-start: auto;
 }
 
+// Keep source-authored HTML tables readable within the Japanese etcd pages.
+// The theme already scrolls these tables; minimum column widths prevent
+// bucket names and field descriptions from collapsing into vertical text.
+@media screen and (max-width: 767.98px) {
+  .td-shell-article:has(.td-breadcrumbs a[href='/ja/docs/etcd/']) .td-content > table {
+    th,
+    td {
+      min-width: 10rem;
+    }
+
+    th:last-child,
+    td:last-child {
+      min-width: 18rem;
+    }
+  }
+}
+
+// The etcd protobuf references keep API identifiers readable at every screen width.
+// The theme's existing, keyboard-focusable table region handles horizontal scroll.
+@media screen {
+  .td-content:has(> #service-auth-apietcdserverpbrpcproto,
+    > #service-lock-serveretcdserverapiv3lockv3lockpbv3lockproto) {
+    .td-table-scroll table {
+      min-width: 48rem;
+      table-layout: auto;
+    }
+
+    // Descriptions are the last RPC column but the middle message column.
+    // Keep prose wrapping in either layout while preserving whole identifiers.
+    th, td {
+      overflow-wrap: normal;
+      word-break: normal;
+    }
+
+    th:first-child, td:first-child {
+      white-space: nowrap;
+    }
+
+    @media (max-width: 767.98px) {
+      .td-table-scroll table {
+        min-width: 0;
+      }
+
+      // RPC tables have four columns; message tables put descriptions second.
+      th:nth-child(4), td:nth-child(4),
+      th:nth-child(2):nth-last-child(2), td:nth-child(2):nth-last-child(2) {
+        min-width: 20rem;
+      }
+    }
+  }
+}
+
 @media (max-width: 767.98px) {
   .pgsql-hero .td-landing-hero__title {
     font-size: clamp(2.25rem, 11vw, 3.25rem);

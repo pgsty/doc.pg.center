@@ -14,6 +14,8 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 from translation_sources import describe_sources, read_source
+from translation_fences import translated_inline_labels, validate_fences, validate_literal_blocks
+from patroni_parity import reviewed_delta as patroni_reviewed_delta
 
 
 PROJECT = Path(__file__).resolve().parent.parent
@@ -69,7 +71,7 @@ SHARED_ASSET_EXTENSIONS = frozenset(
         ".zip",
     }
 )
-INTERNAL_HOSTS = frozenset({"pig.center", "www.pig.center"})
+INTERNAL_HOSTS = frozenset({"doc.pg.center", "www.doc.pg.center"})
 
 FENCE_OPEN_RE = re.compile(r"^ {0,3}(`{3,}|~{3,})(?:[^\r\n]*)$")
 ATX_HEADING_RE = re.compile(r"^ {0,3}(#{1,6})(?:[ \t]+|$)(.*)$")
@@ -98,6 +100,10 @@ HTML_URL_ATTRIBUTE_RE = re.compile(
     flags=re.IGNORECASE | re.DOTALL,
 )
 NUMBER_RE = re.compile(r"\d+(?:[.,]\d+)*")
+NARROW_GROUPED_INTEGER_RE = re.compile(
+    r"(?<![\w.,+\-\u202f])[+-]?[0-9]{1,3}(?:\u202f[0-9]{3})+"
+    r"(?![\w+\-\u202f]|[.,][0-9])"
+)
 VERSION_RE = re.compile(
     r"(?<![A-Za-z0-9_])[vV]?\d+(?:\.\d+)+"
     r"(?:[-+](?=[a-z0-9])[A-Za-z0-9][A-Za-z0-9.-]*)?"
@@ -116,7 +122,7 @@ UPPERCASE_SINGLE_LETTER_COMPOUND_RE = re.compile(
 )
 # These abbreviations may naturally be expanded in German prose.  All other
 # uppercase technical tokens present in English must still occur in German.
-UPPERCASE_LITERAL_EXCEPTIONS = frozenset({"FAQ", "MANUALLY", "OS", "UNIX"})
+UPPERCASE_LITERAL_EXCEPTIONS = frozenset({"FAQ", "F.A.Q.", "MANUALLY", "OS", "UNIX", "MUST", "SHOULD", "MAY"})
 RAW_HTML_HEADING_TAG_RE = re.compile(
     r"</?(?:a|abbr|b|blockquote|br|code|dd|details|div|dl|dt|em|h[1-6]|hr|i|img|kbd|li|ol|p|pre|span|strong|sub|summary|sup|table|tbody|td|th|thead|tr|ul)\b[^>]*>",
     flags=re.IGNORECASE,
@@ -244,8 +250,25 @@ def heading_rows(body: str) -> list[Heading]:
             rows.append(Heading(len(atx.group(1)), title, anchor, index + 1))
             index += 1
             continue
-        if index + 1 < len(lines) and line.strip():
-            setext = SETEXT_UNDERLINE_RE.match(lines[index + 1])
+        # Setext underlines apply to paragraph text, not to another block.
+        # In particular, a release separator after a link definition or list
+        # item remains a thematic break; Goldmark does not render a heading.
+        paragraph_line = (
+            bool(line.strip())
+            and not line.startswith(("    ", "\t"))
+            and not REFERENCE_DEFINITION_RE.fullmatch(line)
+            and not FOOTNOTE_DEFINITION_RE.match(line)
+            and not THEMATIC_BREAK_RE.fullmatch(line)
+            and not re.match(r"^ {0,3}>", line)
+        )
+        if index + 1 < len(lines) and paragraph_line:
+            underline = lines[index + 1]
+            setext = SETEXT_UNDERLINE_RE.match(underline)
+            list_marker = re.match(r"^ {0,3}(?:[-+*]|\d{1,9}[.)])[ \t]+", line)
+            if list_marker and len(underline) - len(underline.lstrip(" ")) < list_marker.end():
+                # An outdented rule ends the list; an indented underline can
+                # still form a legitimate heading inside the list item.
+                setext = None
             if setext:
                 title, anchor = heading_parts(line)
                 level = 1 if setext.group(1).startswith("=") else 2
@@ -323,7 +346,7 @@ def rendered_page(source: Path, rendered_root: Path) -> Path:
         route = source_relative.parent
     else:
         route = source_relative.with_suffix("")
-    return rendered_root.joinpath(*route.parts, "index.html")
+    return rendered_root.joinpath(*(part.lower() for part in route.parts), "index.html")
 
 
 def rendered_heading_ids(
@@ -463,7 +486,8 @@ def normalize_german_target(target: str) -> str:
     parsed = urlsplit(raw)
     path = parsed.path
     match = re.match(r"^/de/([^/]+)(?=/|$)", path, flags=re.IGNORECASE)
-    if match and match.group(1).casefold() in LOCALIZED_ROUTES:
+    patroni_alias = match and match.group(1).casefold() == 'patroni' and url_path(raw)[1]
+    if match and (match.group(1).casefold() in LOCALIZED_ROUTES or patroni_alias):
         path = path[3:]
         normalized = parsed._replace(path=path).geturl()
     else:
@@ -480,7 +504,7 @@ def localized_shared_asset(target: str) -> bool:
     path, internal = url_path(target)
     if not internal or not is_shared_asset(target):
         return False
-    match = re.match(r"^/de/([^/]+)(?=/|$)", path, flags=re.IGNORECASE)
+    match = re.match(r"^/de/(?:docs/)?([^/]+)(?=/|$)", path, flags=re.IGNORECASE)
     return bool(match and match.group(1).casefold() in COMPONENTS)
 
 
@@ -488,7 +512,7 @@ def unlocalized_document_route(target: str) -> bool:
     path, internal = url_path(target)
     if not internal or is_shared_asset(target):
         return False
-    match = re.match(r"^/([^/]+)(?=/|$)", path)
+    match = re.match(r"^/(?:docs/)?([^/]+)(?=/|$)", path)
     return bool(match and match.group(1).casefold() in COMPONENTS)
 
 
@@ -595,6 +619,62 @@ def uppercase_technical_literals(body: str) -> set[str]:
     prose = HTML_TAG_RE.sub("", prose)
     prose = RAW_URL_RE.sub("", prose)
     prose = re.sub(r"\{[^{}]*#[^{}]+\}", "", prose)
+    # Warning labels are translatable prose, not protocol/API abbreviations.
+    # Match the actual label syntax, so NOTE or TABLESPACES elsewhere remains
+    # protected, as do any technical tokens following the label.
+    prose = re.sub(
+        r"\*\*(?:NOTE TO PACKAGERS|IMPORTANT NOTE|"
+        r"IMPORTANT BUG FIX FOR TABLESPACES|NOTE:?|CAUTION:?)\*\*:?(?=\s|$)",
+        "", prose,
+    )
+    prose = re.sub(r"(?m)^\s*(?:>\s*)?(?:NOTE|CAUTION|WARNING|IMPORTANT):\s*$", "", prose)
+    prose = prose.replace("**DROP IT**", "")
+    # Clock suffixes are localized as morgens/abends, while bare AM/PM tokens
+    # remain protected. Numeric equality is checked separately.
+    prose = re.sub(r"\b(\d{1,2}:\d{2})\s+(?:AM|PM)\b", r"\1", prose)
+    prose = re.sub(r"(?m)^(\s*\|)\s*TOTAL\s*(?=\|)", r"\1", prose)
+    # Emphasized ordinary words in the failsafe explanation are translatable.
+    # ALL outside these phrases (for example a SQL keyword) remains protected.
+    prose = re.sub(r"\bMUST(?= the current primary)", "", prose)
+    prose = re.sub(r"\bALL(?= other (?:cluster )?members)", "", prose)
+    prose = re.sub(r"\*\*MUST\*\*(?= disable any other sources)", "", prose)
+    prose = re.sub(r"\bAKA(?=\s+\))", "", prose)
+    # PgBouncer's release notes emphasize an ordinary adjective here.
+    # A standalone VERY in SQL, output, or another context stays protected.
+    prose = re.sub(r"\bVERY(?= outdated\b)", "", prose)
+    # These historical PgBouncer phrases use ordinary emphasis, warning
+    # labels, or database abbreviations, not API/SQL identifiers. Limit each
+    # exception to its prose context; the same tokens elsewhere are checked.
+    prose = re.sub(r"(?m)^(\s*\*\s+)\[SECURITY\](?=\s+Remove invalid assignment)", r"\1", prose)
+    prose = re.sub(r"\bSNAFU(?=: c-ares versions)", "", prose)
+    prose = re.sub(r"\bDBs(?= that are paused\.)", "", prose)
+    prose = re.sub(r"(?<=seems )OK(?=\.)", "", prose)
+    prose = re.sub(r"(?<=packet boundary )ASAP(?=\.)", "", prose)
+    # etcd emphasizes exclusivity in ordinary sentences. Keep ONLY protected
+    # outside these grammatical uses, including SQL such as SELECT ONLY.
+    prose = re.sub(r"\bONLY(?= (?:be )?used for\b)", "", prose)
+    prose = re.sub(r"(?<=for testing )ONLY(?=!)", "", prose)
+    prose = re.sub(r"(?<=CRC takes in consideration )ALL(?= records\b)", "", prose)
+    # HAProxy prose emphasizes these ordinary quantifiers/conjunctions. Match
+    # their complete context; bare logic operators and enum values stay exact.
+    prose = re.sub(r"(?<=when )ALL(?= health checks (?:fail|succeed)\b)", "", prose)
+    prose = re.sub(r"(?<=keepalive )OR(?= any property ID\b)", "", prose)
+    prose = re.sub(r"(?<=reason_code )OR(?= any property ID\b)", "", prose)
+    prose = re.sub(r"(?m)^(- a )METHOD(?= : GET$)", r"\1", prose)
+    prose = prose.replace("OTHER CAVEATS AND NOTES:", "")
+    prose = re.sub(r"(?m)^NOTE:(?= Don't forget to set the \"protection\" rules to ensure HAProxy)", "", prose)
+    prose = re.sub(r"(?<=\()IE(?= a Host header\))", "", prose)
+    prose = re.sub(r"(?m)^IMPORTANT NOTE:(?= historically in HTTP/1\.x, the vast majority of requests sent by browsers use the)", "", prose)
+    prose = re.sub(r"CAUTION!(?= Except under very specific conditions, it is normally not correct to use this field as a)", "", prose)
+    prose = re.sub(r"THIS MUST NOT BE USED FOR (?=HTTPS\b)", "", prose)
+    prose = re.sub(r"(?<=strongly recommended )NOT(?= to use this option, unless absolutely needed)", "", prose)
+    prose = re.sub(r"(?<=If the variable exists, it is )NOT(?=\s+overwritten\.)", "", prose)
+    prose = re.sub(r"(?<=this option does )NOT(?= make HAProxy present the client's IP to\s+the server when establishing the connection\.)", "", prose)
+    prose = re.sub(r"(?m)^WARNING:(?= there are stability and security implications in using this feature\.)", "", prose)
+    prose = re.sub(
+        r"(The information present in this ring are structured and are )NOT(?= directly readable using a text\s+editor\b)",
+        r"\1", prose,
+    )
 
     literals = {
         canonical_uppercase_literal(value)
@@ -640,12 +720,28 @@ def normalized_reference_definitions(body: str) -> list[tuple[str, str, str]]:
 
 
 def reference_link_signature(body: str) -> list[str]:
-    """Return effective IDs for both full ``[text][id]`` and collapsed links."""
+    """Return effective IDs for full, collapsed, and defined shortcut links.
+
+    A translated shortcut needs an explicit ID (``[deutscher Text][English]``).
+    Counting only full/collapsed links would incorrectly flag that required
+    localization as an added reference, while overlooking lost shortcuts.
+    """
     _, prose = parse_fenced_blocks(body)
     prose = prose_without_comments_and_shortcodes(prose)
+    definitions = {
+        match.group(1).casefold()
+        for match in REFERENCE_DEFINITION_RE.finditer(prose)
+    }
+    prose = REFERENCE_DEFINITION_RE.sub("", prose)
+    prose = INLINE_CODE_RE.sub("`CODE`", prose)
+    references = re.compile(
+        r"!?\[([^\]\n]*)\]\[([^\]\n]*)\]"
+        r"|!?\[([^\]\n]+)\](?![\[(:])"
+    )
     return [
-        (match.group(2) or match.group(1)).casefold()
-        for match in REFERENCE_LINK_RE.finditer(prose)
+        (match.group(2) or match.group(1) or match.group(3)).casefold()
+        for match in references.finditer(prose)
+        if match.group(3) is None or match.group(3).casefold() in definitions
     ]
 
 
@@ -658,7 +754,12 @@ def normalized_html_tags(prose: str) -> list[str]:
         return f"{match.group(1)}={quote}{target}{quote}"
 
     return [
-        HTML_URL_ATTRIBUTE_RE.sub(normalize_attributes, tag)
+        re.sub(
+            r"\b(alt|title)\s*=\s*([\"'])(.*?)\2",
+            lambda match: f"{match.group(1)}={match.group(2)}TRANSLATABLE{match.group(2)}",
+            HTML_URL_ATTRIBUTE_RE.sub(normalize_attributes, tag),
+            flags=re.IGNORECASE | re.DOTALL,
+        )
         for tag in HTML_TAG_RE.findall(prose)
     ]
 
@@ -670,6 +771,19 @@ def number_facts(front: str, body: str) -> Counter[str]:
     value = front + "\n" + body
     value = re.sub(r"\{[^{}]*#[^{}]+\}", "", value)
     value = re.sub(r"&#(?:x[0-9A-Fa-f]+|\d+);", "", value)
+    # German typography may group complete integers with a narrow no-break
+    # space. Match only full three-digit groups; decimals, versions, identifiers
+    # and malformed groups must retain their original numeric tokens.
+    value = NARROW_GROUPED_INTEGER_RE.sub(
+        lambda match: match.group().replace("\u202f", ","), value
+    )
+    # This exact ACME sentence uses "3rd party" as the lexical concept
+    # Drittanbieter, not a numeric fact. Other ordinals and all operational
+    # values, including the adjacent renewal formula/intervals, stay checked.
+    value = re.sub(
+        r"(?<=dataplaneAPI or another )3rd(?= party tool to talk to a DNS provider API\.)",
+        "", value,
+    )
     return Counter(NUMBER_RE.findall(value))
 
 
@@ -725,7 +839,8 @@ def validate_pair(
         ):
             errors.append(f"{label}: non-translatable front matter {key!r} changed")
 
-    compare(f"{label}: fenced code or literal output changed", en_fences, de_fences, errors)
+    validate_fences(source, en_fences, de_fences, errors)
+    validate_literal_blocks(source, german, errors)
 
     en_comments = COMMENT_RE.findall(en_prose)
     de_comments = COMMENT_RE.findall(de_prose)
@@ -748,12 +863,17 @@ def validate_pair(
         errors,
     )
 
-    compare(
-        f"{label}: inline code literals changed",
-        Counter(INLINE_CODE_RE.findall(en_markup)),
-        Counter(INLINE_CODE_RE.findall(de_markup)),
-        errors,
-    )
+    en_inline = translated_inline_labels(source, Counter(INLINE_CODE_RE.findall(en_markup)))
+    # This backtick span names a prose concept, not a query/API literal.
+    # Require its reviewed German translation only on this exact source page;
+    # every other inline span, including Revision and API fields, stays exact.
+    if label == "content/docs/etcd/learning/api.md":
+        count = en_inline.pop("`time travel query`", 0)
+        if count:
+            en_inline["`Zeitreiseabfrage`"] += count
+    de_inline = Counter(INLINE_CODE_RE.findall(de_markup))
+    if not patroni_reviewed_delta(source, english, german, 'de', 'inline_literal_variant', en_inline, de_inline):
+        compare(f"{label}: inline code literals changed", en_inline, de_inline, errors)
     compare(
         f"{label}: footnote references changed",
         Counter(FOOTNOTE_RE.findall(en_markup)),
@@ -858,13 +978,15 @@ def validate_pair(
     )
     if bare_component_routes:
         errors.append(
-            f"{label}: German document links must use /de/<component>/ routes: "
+            f"{label}: German document links must use /de/docs/<component>/ routes: "
             f"{bare_component_routes[:12]!r}"
         )
 
     en_numbers = number_facts(en_front, en_body)
     de_numbers = number_facts(de_front, de_body)
-    if en_numbers != de_numbers:
+    if en_numbers != de_numbers and not patroni_reviewed_delta(
+        source, english, german, 'de', 'numeric_variant', en_numbers, de_numbers
+    ):
         errors.append(
             f"{label}: numeric facts changed ({counter_delta(en_numbers, de_numbers)})"
         )
@@ -883,6 +1005,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--exclude-component", choices=COMPONENTS, action="append", default=[],
         help="skip pair comparisons handled by a component-specific gate; retain global coverage checks",
+    )
+    parser.add_argument(
+        "--component", choices=COMPONENTS, action="append",
+        help="limit validation to this component (repeatable); require all its pages unless --allow-partial",
     )
     parser.add_argument(
         "--current-source", action="store_true",
@@ -919,18 +1045,21 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     errors: list[str] = []
-    all_markdown = sorted(CONTENT.rglob("*.md"))
+    roots = [CONTENT / "docs" / name for name in args.component] if args.component else [CONTENT]
+    all_markdown = sorted({path for root in roots for path in root.rglob("*.md")})
     sources = [path for path in all_markdown if is_english_source(path)]
     german_pages = {path for path in all_markdown if path.name.endswith(".de.md")}
     expected_german = {german_target(source) for source in sources}
 
-    if len(sources) != EXPECTED_ENGLISH_PAGES:
+    if not sources:
+        errors.append("no English source pages found in the selected scope")
+    if not args.component and len(sources) != EXPECTED_ENGLISH_PAGES:
         errors.append(
             f"expected {EXPECTED_ENGLISH_PAGES} English source pages, found {len(sources)}"
         )
-    if not args.allow_partial and len(german_pages) != EXPECTED_ENGLISH_PAGES:
+    if not args.allow_partial and len(german_pages) != len(sources):
         errors.append(
-            f"expected {EXPECTED_ENGLISH_PAGES} German pages, found {len(german_pages)}"
+            f"expected {len(sources)} German pages, found {len(german_pages)}"
         )
 
     if not args.allow_partial:

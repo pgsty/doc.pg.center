@@ -1,8 +1,8 @@
 ---
-title: "HA-Multi-Datacenter"
+title: "Hochverfügbarkeit über mehrere Rechenzentren"
 weight: 170
 icon: fa-solid fa-globe
-description: "Mehrfach-Datacenter-Haushaltspolitiken mit Patroni-Replikation."
+description: "Hochverfügbarkeitsarchitekturen mit Patroni-Replikation über mehrere Rechenzentren."
 module: [PATRONI]
 categories: [Konzept]
 aliases: [/patroni/ha_multi_dc/]
@@ -10,51 +10,53 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/ha_multi_dc.html"
 ---
 
 <a id="ha_multi_dc"></a>
-Die Hochverfügbarkeit eines PostgreSQL-Clusters, der in mehreren Rechenzentren bereitgestellt wird, basiert auf Replikation, die synchron oder asynchron erfolgen kann (siehe [Replikationsmodi](/de/docs/patroni/replication_modes#replication_modes)).
+Die Hochverfügbarkeit eines PostgreSQL-Clusters über mehrere Rechenzentren basiert auf synchroner oder asynchroner Replikation (siehe [Replikationsmodi](/de/docs/patroni/replication_modes#replication_modes)).
 
-In beiden Fällen ist es wichtig, die folgenden Konzepte klar zu verstehen:
+In beiden Fällen sind folgende Grundsätze wichtig:
 
-- PostgreSQL kann nur als primärer oder sekundärer Knoten betrieben werden, wenn es den Schlüssel besitzt und diesen aktualisieren kann.
-- Sie sollten eine ungerade Anzahl von etcd-, ZooKeeper- oder Consul-Knoten betreiben: 3 oder 5!
+- Postgres kann nur dann als Primärserver oder Standby-Leader laufen, wenn es den Leader-Schlüssel besitzt und aktualisieren kann.
+- Die Anzahl der etcd-, ZooKeeper- oder Consul-Knoten sollte ungerade sein: 3 oder 5!
 
 --------
 
-## Synchrones Replikation {#synchronous-replication}
-Um einen mehrere Rechenzentrum (DC) umfassenden Cluster zu haben, der automatisch einen Ausfall einer Zone tolerieren kann, sind mindestens 3 erforderlich.
+## Synchrone Replikation {#synchronous-replication}
 
-Das Architekturdiagramm hätte folgende Gestalt:
+Ein Cluster über mehrere Rechenzentren (DC), der den Ausfall einer Zone automatisch verkraften soll, benötigt mindestens 3 Zonen.
+
+Das Architekturdiagramm sieht folgendermaßen aus:
 
 ![Bild](/img/docs/patroni/multi-dc-synchronous-replication.png)
 
-Sie müssen einen Cluster aus etcd, ZooKeeper oder Consul über verschiedene Rechenzentrum (DC) hinweg bereitstellen, wobei mindestens 3 Knoten erforderlich sind, jeweils ein Knoten pro Zone.
+Ein Cluster aus etcd, ZooKeeper oder Consul muss über die verschiedenen Rechenzentren verteilt werden, mit mindestens 3 Knoten und jeweils einem Knoten pro Zone.
 
-Bezüglich PostgreSQL müssen Sie mindestens 2 Knoten in unterschiedlichen Rechenzentrum (DC) bereitstellen. Anschließend müssen Sie `synchronous_mode: true` in der globalen [dynamic configuration](/de/docs/patroni/config/dynamic#dynamic) festlegen.
+Für Postgres müssen mindestens 2 Knoten in unterschiedlichen Rechenzentren bereitgestellt werden. Anschließend muss `synchronous_mode: true` in der globalen [dynamischen Konfiguration](/de/docs/patroni/config/dynamic#dynamic) gesetzt werden.
 
-Dies aktiviert die synchrone Replikation, und der Primärknoten wählt einen der Knoten als synchron aus.
+Dies aktiviert synchrone Replikation; der Primärserver wählt einen der Knoten als synchronen Knoten aus.
 
 --------
 
 ## Asynchrone Replikation {#asynchronous-replication}
-Mit nur zwei Datenzentren ist es besser, zwei unabhängige etcd-Clustern zu haben und einen Patroni [Standby-Cluster](/de/docs/patroni/standby_cluster#standby_cluster) im zweiten Datenzentrum auszuführen. Falls das erste Standort down geht, kann der [standby_cluster](/de/docs/patroni/standby_cluster#standby_cluster) MANUALLY promoviert werden.
 
-Das Architekturdiagramm wäre folgendes:
+Bei nur zwei Rechenzentren ist es besser, zwei unabhängige etcd-Cluster zu betreiben und im zweiten Rechenzentrum einen Patroni-[Standby-Cluster](/de/docs/patroni/standby_cluster#standby_cluster) einzurichten. Fällt der erste Standort aus, kann der [standby_cluster](/de/docs/patroni/standby_cluster#standby_cluster) MANUELL hochgestuft werden.
+
+Das Architekturdiagramm sieht folgendermaßen aus:
 
 ![Bild](/img/docs/patroni/multi-dc-asynchronous-replication.png)
 
-Automatische Erhöhung des Status ist nicht möglich, da DC2 niemals in der Lage sein wird, den Zustand von DC1 zu ermitteln.
+Eine automatische Hochstufung ist nicht möglich, da DC2 den Zustand von DC1 niemals sicher bestimmen kann.
 
-Sie sollten `pg_ctl promote` in diesem Szenario nicht verwenden, Sie müssen die gesunde Clusterkonfiguration manuell erhöhen, indem Sie den [standby_cluster](/de/docs/patroni/standby_cluster#standby_cluster) Abschnitt aus der [dynamischen Konfiguration](/de/docs/patroni/config/dynamic#dynamic) entfernen.
+In diesem Szenario sollte `pg_ctl promote` nicht verwendet werden. Stattdessen muss der funktionsfähige Cluster „manuell hochgestuft“ werden, indem der Abschnitt [standby_cluster](/de/docs/patroni/standby_cluster#standby_cluster) aus der [dynamischen Konfiguration](/de/docs/patroni/config/dynamic#dynamic) entfernt wird.
 
 > [!WARNING]
-> Wenn das Quellcluster noch aktiv läuft und Sie den Standby-Cluster erhöhen, erzeugen Sie eine Split-Brain-Situation.
+> Läuft der Quellcluster noch und wird der Standby-Cluster hochgestuft, entsteht eine Split-Brain-Situation.
 
-In der Regel gibt es nur zwei Möglichkeiten, um zur "ursprünglichen" Situation zurückzukehren:
+Um zum „ursprünglichen“ Zustand zurückzukehren, gibt es nur zwei Möglichkeiten:
 
-- Fügen Sie den standby_cluster-Abschnitt wieder hinzu, um `pg_rewind` auszulösen; jedoch muss `pg_rewind` ordnungsgemäß funktionieren, dass der Cluster mit `data page checksums` initialisiert werden muss (die `--data-checksums`-Option für `initdb`), und/oder `wal_log_hints` auf `on` gesetzt werden muss, aber es besteht immer noch die Möglichkeit, dass `pg_rewind` aufgrund anderer Faktoren fehlschlägt.
-- Erstellen Sie den Standby-Cluster von Grund auf neu.
+- Den Abschnitt standby_cluster wieder hinzufügen. Dies löst `pg_rewind` aus. Damit `pg_rewind` ordnungsgemäß funktioniert, muss der Cluster mit `data page checksums` (Option `--data-checksums` für `initdb`) initialisiert worden sein und/oder `wal_log_hints` muss auf `on` gesetzt sein. Dennoch kann `pg_rewind` aus anderen Gründen fehlschlagen.
+- Den Standby-Cluster vollständig neu aufbauen.
 
-Bevor Sie den Standby-Cluster erhöhen, müssen Sie sicherstellen, dass das Quellcluster heruntergefahren ist (STONITH). Wenn DC1 wiederherstellt, muss das Cluster in einen Standby-Cluster umgewandelt werden.
+Vor der Hochstufung des Standby-Clusters muss manuell sichergestellt werden, dass der Quellcluster heruntergefahren ist (STONITH). Sobald DC1 wieder verfügbar ist, muss dessen Cluster in einen Standby-Cluster umgewandelt werden.
 
-Bevor Sie dies jedoch tun, können Sie die Datenbank manuell überprüfen und alle Änderungen extrahieren, die zwischen dem Zeitpunkt festgestellt wurden, an dem die Verbindung zwischen DC1 und DC2 nicht mehr funktioniert, und dem Zeitpunkt, an dem Sie den Cluster in DC1 manuell gestoppt haben, stattgefunden haben.
+Zuvor kann die Datenbank manuell untersucht werden, um alle Änderungen zu extrahieren, die zwischen dem Ausfall der Netzwerkverbindung von DC1 zu DC2 und dem manuellen Stoppen des Clusters in DC1 erfolgt sind.
 
-Nachdem Sie diese Änderungen extrahiert haben, können Sie diese auch manuell auf den Cluster in DC2 anwenden.
+Die extrahierten Änderungen können anschließend auch manuell auf den Cluster in DC2 angewendet werden.

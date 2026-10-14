@@ -237,7 +237,7 @@ def main() -> int:
             if not en or not de:
                 continue
             require(de.language == "de-DE", f"{localized}: unexpected HTML language {de.language!r}")
-            require(de.canonical == "https://pig.center" + localized and not de.redirect, f"{localized}: incorrect canonical or fallback redirect")
+            require(de.canonical == "https://doc.pg.center" + localized and not de.redirect, f"{localized}: incorrect canonical or fallback redirect")
             require(de.sidebar == ["/de" + value for value in en.sidebar], f"{localized}: sidebar order or language differs from English")
             require(len(de.sidebar) == len(sources) and set(de.sidebar) == expected_routes, f"{localized}: sidebar omits or duplicates component pages")
             require(de.pager == {key: "/de" + value for key, value in en.pager.items()}, f"{localized}: previous/next destinations differ from English")
@@ -273,14 +273,14 @@ def main() -> int:
                 markdown_outputs[localized] = markdown_text
                 de_body = parity.split_front_matter(source.with_suffix(".de.md").read_text())[1].strip()
                 require(de_body in markdown_text, f"{localized}: Markdown omits or changes current German body")
-                entry = "Source: https://pig.center" + localized + "index.md\n================\n\n" + markdown_text
+                entry = "Source: https://doc.pg.center" + localized + "index.md\n================\n\n" + markdown_text
                 require(bundle_text.count(entry) == 1, f"{localized}: LLMS omits, duplicates or changes the complete Markdown page")
             front = parity.split_front_matter(source.read_text())[0]
             aliases = parity.front_matter_blocks(front).get("aliases", "")
             for alias in re.findall(r"/[A-Za-z0-9_./-]+", aliases):
                 old = at("/de" + alias)
                 if old:
-                    require(old.canonical == old.redirect == "https://pig.center" + localized, f"{alias}: German legacy alias target differs")
+                    require(old.canonical == old.redirect == "https://doc.pg.center" + localized, f"{alias}: German legacy alias target differs")
         for locale in ("", "de/"):
             path = root / locale / "navigation.json"
             require(path.is_file(), f"missing {path}")
@@ -290,7 +290,7 @@ def main() -> int:
             require([node["id"] for node in de_nodes] == [node["id"] for node in en_nodes], "navigation.json order or page set differs")
             require({urlsplit(node["url"]).path for node in de_nodes} == expected_routes, "navigation.json German routes incomplete")
             require(all(node["markdown"] == node["url"] + "index.md" for node in de_nodes), "navigation.json Markdown destinations differ")
-            require(all(node["url"] == "https://pig.center/de" + node["id"] for node in de_nodes), "navigation.json node IDs point to a different page")
+            require(all(node["url"] == "https://doc.pg.center/de" + node["id"] for node in de_nodes), "navigation.json node IDs point to a different page")
         indexes = list(root.glob("offline-search-index.de.*.json"))
         require(len(indexes) == 1, "expected exactly one German search index")
         if len(indexes) == 1:

@@ -3,6 +3,7 @@ title: "pgBadger 13.2 中文文档"
 linkTitle: pgBadger
 weight: 40
 description: "快速分析 PostgreSQL 与 PgBouncer 日志，生成完整且可独立浏览的报告"
+search_keywords: [csvlog, jsonlog, logplex, stderr, syslog]
 icon: fa-solid fa-otter
 type: docs
 outputs: [HTML, RSS, print, markdown, LLMSFULL]
@@ -46,7 +47,7 @@ PostgreSQL 报告覆盖：
 - 按严重级别和类别汇总的错误与事件；
 - 按数据库、用户、客户端、应用与语句类型展示的分布。
 
-分析 PgBouncer 日志时，还会生成吞吐量、平均查询耗时、并发会话、连接与会话分布、保留连接池使用情况，以及高频错误/事件报告。
+分析 PgBouncer 日志时，还会生成吞吐量、平均查询耗时、并发会话、连接与会话分布、备用连接池使用情况，以及高频错误/事件报告。
 
 ## 文档阅读顺序 {#documentation-map}
 

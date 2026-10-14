@@ -1,7 +1,7 @@
 ---
 title: "YAML Configuration Settings"
 linkTitle: "YAML Config"
-weight: 10
+weight: 20
 icon: fa-solid fa-code
 description: "Complete reference for Patroni YAML configuration options and sections."
 module: [PATRONI]
@@ -18,7 +18,7 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/yaml_configuration.html
 
 - **thread_pool_size**: size of thread pool used by Patroni to execute asynchronous tasks and communicate via REST API with other members during leader race or failsafe checks. Minimal value is `5`, default value is `5`.
 - **thread_stack_size**: specifies the stack size to be used for threads started by Patroni. Value must be aligned by `64kB`. Minimal value is `64kB`, default value (set by Patroni) is `512kB`.
-- **name**: the name of the host. Must be unique for the cluster. The value `__patroni_strict_sync_replica_placeholder__` is reserved for internal use by Patroni and cannot be used as a node name.
+- **name**: the name of the host. Must be unique for the cluster.
 - **namespace**: path within the configuration store where Patroni will keep information about the cluster. Default value: "/service"
 - **scope**: cluster name
 
@@ -71,7 +71,7 @@ log:
 > Once Patroni has initialized the cluster for the first time and settings have been stored in the DCS, all future changes to the `bootstrap.dcs` section of the YAML configuration will not take any effect! If you want to change them please use either [patronictl_edit_config](/docs/patroni/patronictl#patronictl_edit_config) or the Patroni [REST API](/docs/patroni/rest_api#rest_api).
 
 - **bootstrap**:
-  - **dcs**: This section will be written into <span class="title-ref">/\<namespace\>/\<scope\>/config</span> of the given configuration store after initializing the new cluster. The global dynamic configuration for the cluster. You can put any of the parameters described in the [Dynamic Configuration settings](/docs/patroni/config/dynamic#dynamic) under `bootstrap.dcs` and after Patroni has initialized (bootstrapped) the new cluster, it will write this section into <span class="title-ref">/\<namespace\>/\<scope\>/config</span> of the configuration store.
+  - **dcs**: This section will be written into `/<namespace>/<scope>/config` of the given configuration store after initializing the new cluster. The global dynamic configuration for the cluster. You can put any of the parameters described in the [Dynamic Configuration settings](/docs/patroni/config/dynamic#dynamic) under `bootstrap.dcs` and after Patroni has initialized (bootstrapped) the new cluster, it will write this section into `/<namespace>/<scope>/config` of the configuration store.
 
   - **method**: custom script to use for bootstrapping this cluster.
 
@@ -144,8 +144,8 @@ Most of the parameters are optional, but you have to specify one of the **host**
 - **use_proxies**: If this parameter is set to true, Patroni will consider **hosts** as a list of proxies and will not perform a topology discovery of etcd cluster.
 - **url**: url for the etcd.
 - **proxy**: proxy url for the etcd. If you are connecting to the etcd using proxy, use this parameter instead of **url**.
-- **srv**: Domain to search the SRV record(s) for cluster autodiscovery. Patroni will try to query these SRV service names for specified domain (in that order until first success): `_etcd-client-ssl`, `_etcd-client`, `_etcd-ssl`, `_etcd`, `_etcd-server-ssl`, `_etcd-server`. If SRV records for `_etcd-server-ssl` or `_etcd-server` are retrieved then ETCD peer protocol is used do query ETCD for available members. Otherwise hosts from SRV records will be used.
-- **srv_suffix**: Configures a suffix to the SRV name that is queried during discovery. Use this flag to differentiate between multiple etcd clusters under the same domain. Works only with conjunction with **srv**. For example, if `srv_suffix: foo` and `srv: example.org` are set, the following DNS SRV query is made:`_etcd-client-ssl-foo._tcp.example.com` (and so on for every possible ETCD SRV service name).
+- **srv**: Domain to search the SRV record(s) for cluster autodiscovery. Patroni will try to query these SRV service names for specified domain (in that order until first success): `_etcd-client-ssl`, `_etcd-client`, `_etcd-ssl`, `_etcd`, `_etcd-server-ssl`, `_etcd-server`. If SRV records for `_etcd-server-ssl` or `_etcd-server` are retrieved then ETCD peer protocol is used to query ETCD for available members. Otherwise hosts from SRV records will be used.
+- **srv_suffix**: Configures a suffix to the SRV name that is queried during discovery. Use this flag to differentiate between multiple etcd clusters under the same domain. Works only with conjunction with **srv**. For example, if `srv_suffix: foo` and `srv: example.org` are set, the following DNS SRV query is made:`_etcd-client-ssl-foo._tcp.example.org` (and so on for every possible ETCD SRV service name).
 - **protocol**: (optional) http or https, if not specified http is used. If the **url** or **proxy** is specified - will take protocol from them.
 - **username**: (optional) username for etcd authentication.
 - **password**: (optional) password for etcd authentication.
@@ -332,7 +332,7 @@ If you want that Patroni works with Etcd cluster via protocol version 3, you nee
 
     - **pg_ctl**: (optional) Custom name for `pg_ctl` binary.
     - **initdb**: (optional) Custom name for `initdb` binary.
-    - **pgcontroldata**: (optional) Custom name for `pg_controldata` binary.
+    - **pg_controldata**: (optional) Custom name for `pg_controldata` binary.
     - **pg_basebackup**: (optional) Custom name for `pg_basebackup` binary.
     - **postgres**: (optional) Custom name for `postgres` binary.
     - **pg_isready**: (optional) Custom name for `pg_isready` binary.
@@ -403,8 +403,8 @@ If you want that Patroni works with Etcd cluster via protocol version 3, you nee
 
 - **restapi**:
   - **thread_pool_size**: size of thread pool used by Patroni to process REST API requests. Minimal value is `5`, default value is `5`.
-  - **connect_address**: IP address (or hostname) and port, to access the Patroni's [REST API](/docs/patroni/rest_api#rest_api). All the members of the cluster must be able to connect to this address, so unless the Patroni setup is intended for a demo inside the localhost, this address must be a non "localhost" or loopback address (ie: "localhost" or "127.0.0.1"). It can serve as an endpoint for HTTP health checks (read below about the "listen" REST API parameter), and also for user queries (either directly or via the REST API), as well as for the health checks done by the cluster members during leader elections (for example, to determine whether the leader is still running, or if there is a node which has a WAL position that is ahead of the one doing the query; etc.) The connect_address is put in the member key in DCS, making it possible to translate the member name into the address to connect to its REST API.
-  - **listen**: IP address (or hostname) and port that Patroni will listen to for the REST API - to provide also the same health checks and cluster messaging between the participating nodes, as described above. to provide health-check information for HAProxy (or any other load balancer capable of doing a HTTP "OPTION" or "GET" checks).
+  - **connect_address**: IP address (or hostname) and port, to access the Patroni's [REST API](/docs/patroni/rest_api#rest_api). All cluster members must be able to reach this address. Unless Patroni is used only for a local demo, use a network address rather than "localhost" or a loopback address such as "127.0.0.1". It can serve as an endpoint for HTTP health checks (read below about the "listen" REST API parameter), and also for user queries (either directly or via the REST API), as well as for the health checks done by the cluster members during leader elections (for example, to determine whether the leader is still running, or if there is a node which has a WAL position that is ahead of the one doing the query; etc.) The connect_address is put in the member key in DCS, making it possible to translate the member name into the address to connect to its REST API.
+  - **listen**: IP address (or hostname) and port that Patroni will listen to for the REST API - to provide also the same health checks and cluster messaging between the participating nodes, as described above. to provide health-check information for HAProxy (or any other load balancer capable of doing a HTTP "OPTIONS" or "GET" checks).
   - **authentication**: (optional)
     - **username**: Basic-auth username to protect unsafe REST API endpoints.
     - **password**: Basic-auth password to protect unsafe REST API endpoints.
@@ -491,7 +491,7 @@ Warning
 - **noloadbalance**: `true` or `false`. If set to `true` the node will return HTTP Status Code 503 for the `GET /replica` REST API health-check and therefore will be excluded from the load-balancing. Defaults to `false`.
 - **replicatefrom**: The name of another replica to replicate from. Used to support cascading replication.
 - **nosync**: `true` or `false`. If set to `true` the node will never be selected as a synchronous replica.
-- **sync_priority**: integer, controls the priority this node should have during synchronous replica selection when [synchronous_mode](/docs/patroni/replication_modes#synchronous_mode) is set to `on`. Nodes with higher priority will be preferred over lower-priority nodes. If the `sync_priority` is 0 or negative - such node is not allowed to be written to `synchronous_standby_names` PostgreSQL parameter (similar to `nosync: true`). Keep in mind, that this parameter has the opposite meaning to `sync_priority` value reported in `pg_stat_replication` view.
+- **sync_priority**: integer, controls the priority this node should have during synchronous replica selection when [synchronous_mode](/docs/patroni/replication_modes#synchronous_mode) is set to `on`. Nodes with higher priority will be preferred over lower-priority nodes. If the `sync_priority` is 0 or negative - such node is not allowed to be written to `synchronous_standby_names` PostgreSQL parameter (similar to `nosync: true`). This parameter orders priorities in the reverse direction to the `sync_priority` column in the `pg_stat_replication` view.
 - **nofailover**: `true` or `false`, controls whether this node is allowed to participate in the leader race and become a leader. Defaults to `false`, meaning this node <span id="can">can</span>\_ participate in leader races.
 - **failover_priority**: integer, controls the priority this node should have during failover. Nodes with higher priority will be preferred over lower-priority nodes if they received/replayed the same amount of WAL. However, nodes with higher values of receive/replay LSN are preferred regardless of their priority. If the `failover_priority` is 0 or negative - such node is not allowed to participate in the leader race and to become a leader (similar to `nofailover: true`). Known limitation: `failover_priority` currently doesn't work with [quorum-based synchronous replication](/docs/patroni/replication_modes#quorum_mode).
 - **nostream**: `true` or `false`. If set to `true` the node will not use replication protocol to stream WAL. It will rely instead on archive recovery (if `restore_command` is configured) and `pg_wal`/`pg_xlog` polling. It also disables copying and synchronization of permanent logical replication slots on the node itself and all its cascading replicas. Setting this tag on primary node has no effect.

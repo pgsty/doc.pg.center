@@ -3,6 +3,7 @@ title: "Licence et crédits"
 linkTitle: "Licence"
 weight: 110
 description: "Conditions de licence PostgreSQL, auteur et composants tiers intégrés"
+search_keywords: []
 icon: fa-solid fa-scale-balanced
 module: [PGBADGER]
 categories: [Référence]
@@ -44,8 +45,4 @@ Les ressources du rapport généré ont leurs propres mentions, notamment :
 | police Font Awesome | SIL Open Font License 1.1 |
 | CSS Font Awesome | MIT |
 
-La capture source locale conserve l'intégralité du `resources/LICENSE` d'origine. Les rapports d'exemple intégrés sont des artefacts historiques et conservent leurs notices et versions de ressources d'origine.
-
-## Capture de documentation {#documentation-snapshot}
-
-Cette édition pig.center réorganise la documentation d'origine en pages Hugo, ajoute une navigation et des aides à la lecture en chinois, et conserve intégralement le texte d'aide des commandes et le journal des modifications là où la fidélité est essentielle. La documentation source du projet pgBadger reste soumise à la Licence PostgreSQL ; les noms d'origine du projet, l'auteur et les liens vers les sources d'origine sont conservés.
+Le fichier `resources/LICENSE` précise les licences des ressources. Les rapports d’exemple incluent les mentions de licence de leurs composants.

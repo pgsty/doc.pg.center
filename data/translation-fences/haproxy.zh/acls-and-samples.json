@@ -1,0 +1,2537 @@
+{
+  "source": "content/docs/haproxy/acls-and-samples.md",
+  "language": "zh",
+  "fences": [
+    {
+      "index": 2,
+      "source_sha256": "421fd8900ef886ffef090a801f3e90ee9efb7db9fe9feb134a0d73082d57735c",
+      "target_sha256": "7dfabc47c7605fa7e97fe461f19186be8ee07c0b651b9d0b4778afcefb5d1b8b",
+      "classification": "table-labels",
+      "protected_literals": [
+        "\"-m\"",
+        "integer"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 2,
+          "source_sha256": "421fd8900ef886ffef090a801f3e90ee9efb7db9fe9feb134a0d73082d57735c",
+          "target_sha256": "7dfabc47c7605fa7e97fe461f19186be8ee07c0b651b9d0b4778afcefb5d1b8b"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 3,
+      "source_sha256": "dcfa8ae8472512e02aef5c1074517e91b1d80114f9504b20f0802f6ec24757a0",
+      "target_sha256": "194d2a4a44304e6c0b8544b1a310036ed4d832189d8947e9630536e7c7e3ab65",
+      "classification": "argument-description",
+      "protected_literals": [
+        "--:",
+        "-M:",
+        "-f:",
+        "-i:",
+        "-m:",
+        "-n:",
+        "-u:",
+        "ACL",
+        "DNS"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 3,
+          "source_sha256": "dcfa8ae8472512e02aef5c1074517e91b1d80114f9504b20f0802f6ec24757a0",
+          "target_sha256": "194d2a4a44304e6c0b8544b1a310036ed4d832189d8947e9630536e7c7e3ab65"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 9,
+      "source_sha256": "28cf1cdc38541faa17e7eed5cde6eac6eae7260a801b468c803c9302b059060b",
+      "target_sha256": "88011a014a4e5c758f93e36ee059eb53d90df68fb774c68760ad5aa55c99b820",
+      "classification": "table-labels",
+      "protected_literals": [
+        "IP"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 9,
+          "source_sha256": "28cf1cdc38541faa17e7eed5cde6eac6eae7260a801b468c803c9302b059060b",
+          "target_sha256": "88011a014a4e5c758f93e36ee059eb53d90df68fb774c68760ad5aa55c99b820"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 10,
+      "source_sha256": "f638a22887944d6ff1af01b2137d5424fbba3d9cc7e24bba2ee7cbde761e7541",
+      "target_sha256": "e2a6a3340d7d53923432cb2b6bc4e225d26e1659a4da5ce40830f8ea0a2a3c5c",
+      "classification": "argument-description",
+      "protected_literals": [
+        "eq:",
+        "ge:",
+        "gt:",
+        "le:",
+        "lt:"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 10,
+          "source_sha256": "f638a22887944d6ff1af01b2137d5424fbba3d9cc7e24bba2ee7cbde761e7541",
+          "target_sha256": "e2a6a3340d7d53923432cb2b6bc4e225d26e1659a4da5ce40830f8ea0a2a3c5c"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 15,
+      "source_sha256": "15dc6a26f2d70710b5d6b0443a44266ec0808af4a6fca32789cce27292fa8735",
+      "target_sha256": "25a3e2dd02a2c5c444a8034dc6c1eb7f8166afe477f778dc99f7ca6d7228a3c1",
+      "classification": "table-labels",
+      "protected_literals": [],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 15,
+          "source_sha256": "15dc6a26f2d70710b5d6b0443a44266ec0808af4a6fca32789cce27292fa8735",
+          "target_sha256": "25a3e2dd02a2c5c444a8034dc6c1eb7f8166afe477f778dc99f7ca6d7228a3c1"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 20,
+      "source_sha256": "9c51d0b5c91cf4ca77036227ebfd465dedb4ceb59c123106899439c1eec56b63",
+      "target_sha256": "d825ba6a73a9ac2e19fccc87817a4c62a0aa219c686d9238adc05ca8e909ec3f",
+      "classification": "mixed-explanation",
+      "protected_literals": [
+        "METH_POST"
+      ],
+      "protected_lines": [
+        "    acl missing_cl req.hdr_cnt(Content-length) eq 0",
+        "    http-request deny if METH_POST missing_cl",
+        "    http-request deny if METH_POST { req.hdr_cnt(Content-length) eq 0 }"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 19,
+          "source_sha256": "9c51d0b5c91cf4ca77036227ebfd465dedb4ceb59c123106899439c1eec56b63",
+          "target_sha256": "d825ba6a73a9ac2e19fccc87817a4c62a0aa219c686d9238adc05ca8e909ec3f"
+        },
+        {
+          "index": 19,
+          "source_sha256": "9c51d0b5c91cf4ca77036227ebfd465dedb4ceb59c123106899439c1eec56b63",
+          "target_sha256": "d825ba6a73a9ac2e19fccc87817a4c62a0aa219c686d9238adc05ca8e909ec3f",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 21,
+      "source_sha256": "a89feecbadb9ef93146b71c41b971cb4193852f97e7e405fd25280b9867b009d",
+      "target_sha256": "4aa6d8ded57ea451a90f34ca6ec4e879bdf9f550d4d172abca01520e76bdd7ae",
+      "classification": "table-labels",
+      "protected_literals": [],
+      "protected_lines": [
+        "     acl site_dead nbsrv(dynamic) lt 2",
+        "     acl site_dead nbsrv(static)  lt 2",
+        "     monitor fail  if site_dead",
+        "     monitor fail if { nbsrv(dynamic) lt 2 } || { nbsrv(static) lt 2 }"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 20,
+          "source_sha256": "a89feecbadb9ef93146b71c41b971cb4193852f97e7e405fd25280b9867b009d",
+          "target_sha256": "4aa6d8ded57ea451a90f34ca6ec4e879bdf9f550d4d172abca01520e76bdd7ae"
+        },
+        {
+          "index": 20,
+          "source_sha256": "a89feecbadb9ef93146b71c41b971cb4193852f97e7e405fd25280b9867b009d",
+          "target_sha256": "4aa6d8ded57ea451a90f34ca6ec4e879bdf9f550d4d172abca01520e76bdd7ae",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 22,
+      "source_sha256": "159ae83dbebf1eb76f045fec313a0065d687721ac6ae6eb901903813b03d4e8e",
+      "target_sha256": "7be2f12dcdf305135812ab864d1e6c1041fcab8aebaee21489b897a11cf8154a",
+      "classification": "table-labels",
+      "protected_literals": [
+        "<aad>",
+        "<cert>",
+        "<jwk>",
+        "<secret>",
+        "integer",
+        "set-var",
+        "unset-var"
+      ],
+      "protected_lines": [
+        "51d.single(prop[,prop*])                           string       string",
+        "add(value)                                         integer      integer",
+        "add_item(delim[,var[,suff]])                       string       string",
+        "aes_cbc_dec(bits,nonce,key[,<aad>])                binary       binary",
+        "aes_cbc_enc(bits,nonce,key[,<aad>])                binary       binary",
+        "aes_gcm_dec(bits,nonce,key,aead_tag[,aad])         binary       binary",
+        "aes_gcm_enc(bits,nonce,key,aead_tag[,aad])         binary       binary",
+        "and(value)                                         integer      integer",
+        "b64dec                                             string       binary",
+        "base2                                              binary       string",
+        "base64                                             binary       string",
+        "be2dec(separator,chunk_size[,truncate])            binary       string",
+        "le2dec(separator,chunk_size[,truncate])            binary       string",
+        "be2hex([separator[,chunk_size[,truncate]]])        binary       string",
+        "bool                                               integer      boolean",
+        "bytes(offset[,length])                             binary       binary",
+        "capture-req(id)                                    string       string",
+        "capture-res(id)                                    string       string",
+        "concat([start[,var[,end]]])                        string       string",
+        "cpl                                                integer      integer",
+        "crc32([avalanche])                                 binary       integer",
+        "crc32c([avalanche])                                binary       integer",
+        "cut_crlf                                           string       string",
+        "da-csv-conv(prop[,prop*])                          string       string",
+        "date                                               string       integer",
+        "debug([prefix][,destination])                       any          same",
+        "digest(algorithm)                                  binary       binary",
+        "div(value)                                         integer      integer",
+        "djb2([avalanche])                                  binary       integer",
+        "eth.data                                           binary       binary",
+        "eth.dst                                            binary       binary",
+        "eth.hdr                                            binary       binary",
+        "eth.proto                                          binary       integer",
+        "eth.src                                            binary       binary",
+        "eth.vlan                                           binary       integer",
+        "even                                               integer      boolean",
+        "fe_exists                                          string       boolean",
+        "field(index,delimiters[,count])                    string       string",
+        "fix_is_valid                                       binary       boolean",
+        "fix_tag_value(tag)                                 binary       binary",
+        "has_ctl([mask])                                    binary       boolean",
+        "hex                                                binary       string",
+        "hex2i                                              binary       integer",
+        "hmac(algorithm,key)                                binary       binary",
+        "host_only                                          string       string",
+        "htonl                                              integer      integer",
+        "http_date([offset[,unit]])                         integer      string",
+        "iif(true,false)                                    boolean      string",
+        "in_table([table])                                  any          boolean",
+        "ip.data                                            binary       binary",
+        "ip.df                                              binary       integer",
+        "ip.dst                                             binary       address",
+        "ip.fp                                              binary       binary",
+        "ip.hdr                                             binary       binary",
+        "ip.proto                                           binary       integer",
+        "ip.src                                             binary       address",
+        "ip.tos                                             binary       integer",
+        "ip.ttl                                             binary       integer",
+        "ip.ver                                             binary       integer",
+        "ipmask(mask4[,mask6])                              address      address",
+        "json([input-code])                                 string       string",
+        "json_query(json_path[,output_type])                string       _outtype_",
+        "jwt_decrypt_jwk(<jwk>)                             string       binary",
+        "jwt_decrypt_cert(<cert>)                           string       binary",
+        "jwt_decrypt_secret(<secret>)                       string       binary",
+        "jwt_header_query([json_path[,output_type]])        string       string",
+        "jwt_payload_query([json_path[,output_type]])       string       string",
+        "jwt_verify(alg,key)                                string       integer",
+        "jwt_verify_cert(alg,cert)                          string       integer",
+        "language(value[,default])                          string       string",
+        "length                                             string       integer",
+        "lower                                              string       string",
+        "ltime(format[,offset])                             integer      string",
+        "ltrim(chars)                                       string       string",
+        "map(map_name[,default_value])                      string       string",
+        "map_match(map_name[,default_value])                _match_      string",
+        "map_match_output(map_name[,default_value])         _match_      _output_",
+        "mod(value)                                         integer      integer",
+        "mqtt_field_value(pkt_type,fieldname_or_prop_ID)    binary       binary",
+        "mqtt_is_valid                                      binary       boolean",
+        "ms_ltime(format[,offset])                          integer      string",
+        "ms_utime(format[,offset])                          integer      string",
+        "mul(value)                                         integer      integer",
+        "nbsrv                                              string       integer",
+        "neg                                                integer      integer",
+        "not                                                integer      boolean",
+        "odd                                                integer      boolean",
+        "or(value)                                          integer      integer",
+        "param(name[,delim])                                string       string",
+        "port_only                                          string       integer",
+        "protobuf(field_number[,field_type])                binary       binary",
+        "regsub(regex,subst[,flags])                        string       string",
+        "reverse                                            string       string",
+        "reverse_dom                                        string       string",
+        "rfc7239_field(field)                               string       string",
+        "rfc7239_is_valid                                   string       boolean",
+        "rfc7239_n2nn                                       string       address / str",
+        "rfc7239_n2np                                       string       integer / str",
+        "rfc7239_nn                                         address/str  string",
+        "rfc7239_np                                         integer/str  string",
+        "rtrim(chars)                                       string       string",
+        "sdbm([avalanche])                                  binary       integer",
+        "secure_memcmp(var)                                 string       boolean",
+        "set-var(var[,cond...])                              any          same",
+        "sha1                                               binary       binary",
+        "sha2([bits])                                       binary       binary",
+        "srv_is_up                                          string       boolean",
+        "srv_queue                                          string       integer",
+        "strcmp(var)                                        string       boolean",
+        "sub(value)                                         integer      integer",
+        "table_bytes_in_rate([table])                       any          integer",
+        "table_bytes_out_rate([table])                      any          integer",
+        "table_clr_gpc(idx[,table])                         any          integer",
+        "table_clr_gpc0([table])                            any          integer",
+        "table_clr_gpc1([table])                            any          integer",
+        "table_conn_cnt([table])                            any          integer",
+        "table_conn_cur([table])                            any          integer",
+        "table_conn_rate([table])                           any          integer",
+        "table_expire([table[,default_value]])              any          integer",
+        "table_glitch_cnt([table])                          any          integer",
+        "table_glitch_rate([table])                         any          integer",
+        "table_gpc(idx[,table])                             any          integer",
+        "table_gpc0([table])                                any          integer",
+        "table_gpc0_rate([table])                           any          integer",
+        "table_gpc1([table])                                any          integer",
+        "table_gpc1_rate([table])                           any          integer",
+        "table_gpc_rate(idx[,table])                        any          integer",
+        "table_gpt(idx[,table])                             any          integer",
+        "table_gpt0([table])                                any          integer",
+        "table_http_err_cnt([table])                        any          integer",
+        "table_http_err_rate([table])                       any          integer",
+        "table_http_fail_cnt([table])                       any          integer",
+        "table_http_fail_rate([table])                      any          integer",
+        "table_http_req_cnt([table])                        any          integer",
+        "table_http_req_rate([table])                       any          integer",
+        "table_idle([table[,default_value]])                any          integer",
+        "table_inc_gpc(idx[,table])                         any          integer",
+        "table_inc_gpc0([table])                            any          integer",
+        "table_inc_gpc1([table])                            any          integer",
+        "table_kbytes_in([table])                           any          integer",
+        "table_kbytes_out([table])                          any          integer",
+        "table_server_id([table])                           any          integer",
+        "table_sess_cnt([table])                            any          integer",
+        "table_sess_rate([table])                           any          integer",
+        "table_trackers([table])                            any          integer",
+        "tcp.dst                                            binary       integer",
+        "tcp.flags                                          binary       integer",
+        "tcp.options.mss                                    binary       integer",
+        "tcp.options.sack                                   binary       integer",
+        "tcp.options.tsopt                                  binary       integer",
+        "tcp.options.tsval                                  binary       integer",
+        "tcp.options.wscale                                 binary       integer",
+        "tcp.options.wsopt                                  binary       integer",
+        "tcp.options_list                                   binary       binary",
+        "tcp.seq                                            binary       integer",
+        "tcp.src                                            binary       integer",
+        "tcp.win                                            binary       integer",
+        "ub64dec                                            string       string",
+        "ub64enc                                            string       string",
+        "ungrpc(field_number[,field_type])                  binary       binary / int",
+        "unset-var(var)                                      any          same",
+        "upper                                              string       string",
+        "url_dec([in_form])                                 string       string",
+        "url_enc([enc_type])                                string       string",
+        "us_ltime(format[,offset])                          integer      string",
+        "us_utime(format[,offset])                          integer      string",
+        "utime(format[,offset])                             integer      string",
+        "when(condition)                                     any          same",
+        "word(index,delimiters[,count])                     string       string",
+        "wt6([avalanche])                                   binary       integer",
+        "x509_v_err_str                                     integer      string",
+        "xor(value)                                         integer      integer",
+        "xxh3([seed])                                       binary       integer",
+        "xxh32([seed])                                      binary       integer",
+        "xxh64([seed])                                      binary       integer"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 21,
+          "source_sha256": "159ae83dbebf1eb76f045fec313a0065d687721ac6ae6eb901903813b03d4e8e",
+          "target_sha256": "93f2c49d64faf7e8f5669b30da9b24693134d13f847fda84b7b255225bbc6c5d"
+        },
+        {
+          "index": 21,
+          "source_sha256": "159ae83dbebf1eb76f045fec313a0065d687721ac6ae6eb901903813b03d4e8e",
+          "target_sha256": "93f2c49d64faf7e8f5669b30da9b24693134d13f847fda84b7b255225bbc6c5d",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Expanded prose review: six repeated column headers translated; all configuration identifiers, sample types and protected data rows preserved exactly."
+    },
+    {
+      "index": 118,
+      "source_sha256": "2d20161dfbaa7bae16a6b61c28bc2a831a21c4eee06006959399ed7244e7fb59",
+      "target_sha256": "03818d703184e7620c57a396ec46dfd446a305b0961ec14ac447834948e10a0b",
+      "classification": "table-labels",
+      "protected_literals": [
+        "\"alg\"",
+        "ECDSA",
+        "ES256",
+        "ES384",
+        "ES512",
+        "HMAC",
+        "HS256",
+        "HS384",
+        "HS512",
+        "MAC",
+        "MGF1",
+        "P-256",
+        "P-384",
+        "P-521",
+        "PS256",
+        "PS384",
+        "PS512",
+        "RS256",
+        "RS384",
+        "RS512",
+        "RSASSA-PKCS1-",
+        "RSASSA-PSS",
+        "SHA-256",
+        "SHA-384",
+        "SHA-512"
+      ],
+      "protected_lines": [],
+      "review": "Fresh bilingual review: none algorithm table row now points to the translated default-rejection / explicit jwt.allow_none_alg note. All algorithms and cryptographic identifiers preserved.",
+      "revalidation_history": [
+        {
+          "index": 117,
+          "source_sha256": "db036a1a82fdfb364369c867c46f2248c7691219d25111918aa2b20dc6c62a98",
+          "target_sha256": "11e2981e92402213d4da5fd9267f0c1f145490b223d6729550f574165fc30a99"
+        },
+        {
+          "index": 117,
+          "source_sha256": "db036a1a82fdfb364369c867c46f2248c7691219d25111918aa2b20dc6c62a98",
+          "target_sha256": "11e2981e92402213d4da5fd9267f0c1f145490b223d6729550f574165fc30a99",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        },
+        {
+          "index": 118,
+          "source_sha256": "db036a1a82fdfb364369c867c46f2248c7691219d25111918aa2b20dc6c62a98",
+          "target_sha256": "11e2981e92402213d4da5fd9267f0c1f145490b223d6729550f574165fc30a99",
+          "reason": "Fresh bilingual review: none algorithm table row now points to the translated default-rejection / explicit jwt.allow_none_alg note. All algorithms and cryptographic identifiers preserved."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 119,
+      "source_sha256": "0c0883f96682c4e6ddae3fa072ef8458392c0631d13d41f1cd0479f2b5b530fe",
+      "target_sha256": "149585449627903a50b00f10bfa088998eda3b8339e10cfc549b9c3c7b22101a",
+      "classification": "table-labels",
+      "protected_literals": [
+        "\"Internal error\"",
+        "\"Invalid token\"",
+        "\"Out of memory\"",
+        "\"Unknown algorithm (not mentioned in RFC7518)\"",
+        "\"Unknown pubkey/certificate\"",
+        "\"Unmanaged algorithm\"",
+        "\"Verification failure\"",
+        "\"Verification success\"",
+        "ID"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 118,
+          "source_sha256": "0c0883f96682c4e6ddae3fa072ef8458392c0631d13d41f1cd0479f2b5b530fe",
+          "target_sha256": "149585449627903a50b00f10bfa088998eda3b8339e10cfc549b9c3c7b22101a"
+        },
+        {
+          "index": 118,
+          "source_sha256": "0c0883f96682c4e6ddae3fa072ef8458392c0631d13d41f1cd0479f2b5b530fe",
+          "target_sha256": "149585449627903a50b00f10bfa088998eda3b8339e10cfc549b9c3c7b22101a",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 121,
+      "source_sha256": "5592badf5c20b0ba16da80e83123fc316ddd43c30f30c8d5ea34a898c226f962",
+      "target_sha256": "e75812ebc723f77c033120585707b956804215e5eba007556aad97fff48d5532",
+      "classification": "table-labels",
+      "protected_literals": [
+        "\"alg\"",
+        "ECDSA",
+        "ES256",
+        "ES384",
+        "ES512",
+        "MAC",
+        "MGF1",
+        "P-256",
+        "P-384",
+        "P-521",
+        "PS256",
+        "PS384",
+        "PS512",
+        "RS256",
+        "RS384",
+        "RS512",
+        "RSASSA-PKCS1-",
+        "RSASSA-PSS",
+        "SHA-256",
+        "SHA-384",
+        "SHA-512"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 120,
+          "source_sha256": "5592badf5c20b0ba16da80e83123fc316ddd43c30f30c8d5ea34a898c226f962",
+          "target_sha256": "e75812ebc723f77c033120585707b956804215e5eba007556aad97fff48d5532"
+        },
+        {
+          "index": 120,
+          "source_sha256": "5592badf5c20b0ba16da80e83123fc316ddd43c30f30c8d5ea34a898c226f962",
+          "target_sha256": "e75812ebc723f77c033120585707b956804215e5eba007556aad97fff48d5532",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 122,
+      "source_sha256": "c4d507b19886c006f174a325ca86d3db0c262a2202ce8d7f27f3eaf4df9313c0",
+      "target_sha256": "58a1f5f3fef0224c29ddcd54b72f5b01c9d52cb30cc8eb6b73f5f2edaaab7a48",
+      "classification": "table-labels",
+      "protected_literals": [
+        "\"Internal error\"",
+        "\"Invalid token\"",
+        "\"Out of memory\"",
+        "\"Unavailable certificate\"",
+        "\"Unknown algorithm (not mentioned in RFC7518)\"",
+        "\"Unknown pubkey/certificate\"",
+        "\"Unmanaged algorithm\"",
+        "\"Verification failure\"",
+        "\"Verification success\"",
+        "\"jwt\"",
+        "ID"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 121,
+          "source_sha256": "c4d507b19886c006f174a325ca86d3db0c262a2202ce8d7f27f3eaf4df9313c0",
+          "target_sha256": "58a1f5f3fef0224c29ddcd54b72f5b01c9d52cb30cc8eb6b73f5f2edaaab7a48"
+        },
+        {
+          "index": 121,
+          "source_sha256": "c4d507b19886c006f174a325ca86d3db0c262a2202ce8d7f27f3eaf4df9313c0",
+          "target_sha256": "58a1f5f3fef0224c29ddcd54b72f5b01c9d52cb30cc8eb6b73f5f2edaaab7a48",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 132,
+      "source_sha256": "15c18c01ad76c95660be6fd8ee9462975a5fa829c538b5229d32dc5363b650a2",
+      "target_sha256": "7359402fde4ed16d7c23d76418f174abdbe436edb0dcf11b3e92bdbb617307f3",
+      "classification": "table-labels",
+      "protected_literals": [],
+      "protected_lines": [
+        "    str      | str          | map_str         | map_str_int     | map_str_ip     | map_str_key",
+        "    str      | beg          | map_beg         | map_beg_int     | map_beg_ip     | map_beg_key",
+        "    str      | sub          | map_sub         | map_sub_int     | map_sub_ip     | map_sub_key",
+        "    str      | dir          | map_dir         | map_dir_int     | map_dir_ip     | map_dir_key",
+        "    str      | dom          | map_dom         | map_dom_int     | map_dom_ip     | map_dom_key",
+        "    str      | end          | map_end         | map_end_int     | map_end_ip     | map_end_key",
+        "    str      | reg          | map_reg         | map_reg_int     | map_reg_ip     | map_reg_key",
+        "    str      | reg          | map_regm        | map_reg_int     | map_reg_ip     | map_reg_key",
+        "    int      | int          | map_int         | map_int_int     | map_int_ip     | map_int_key",
+        "    ip       | ip           | map_ip          | map_ip_int      | map_ip_ip      | map_ip_key"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "reviewed_correction": {
+        "reason": "Separately code-confirmed upstream defect fixed in source and target, see additional-source-fixes.json",
+        "prior_target_sha256": "26b8c65661b8bf02307995473fe45eb39a8f34fb399f835e1cc9dfbe73feacf5"
+      },
+      "revalidation_history": [
+        {
+          "index": 131,
+          "source_sha256": "cd99c70824f6f9b4b4c12879f3731ff50dba67304839e0f098ec9d5f7db95ac5",
+          "target_sha256": "7359402fde4ed16d7c23d76418f174abdbe436edb0dcf11b3e92bdbb617307f3"
+        },
+        {
+          "index": 131,
+          "source_sha256": "15c18c01ad76c95660be6fd8ee9462975a5fa829c538b5229d32dc5363b650a2",
+          "target_sha256": "7359402fde4ed16d7c23d76418f174abdbe436edb0dcf11b3e92bdbb617307f3",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; separately code-reviewed beg converter table keywords. No broad review waiver."
+    },
+    {
+      "index": 133,
+      "source_sha256": "7f826b6edbe88745c806614afbc8e530d343ee880d607ea074c45de704e395ee",
+      "target_sha256": "b2fe0a3e571e23ee4b63b215b68340fd44c39d8904b5e4868b534a5830ad378c",
+      "classification": "table-labels",
+      "protected_literals": [],
+      "protected_lines": [
+        "     # this is a comment and is ignored",
+        "        2.22.246.0/23    United Kingdom      \\n",
+        "     <-><-----------><--><------------><---->"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 132,
+          "source_sha256": "7f826b6edbe88745c806614afbc8e530d343ee880d607ea074c45de704e395ee",
+          "target_sha256": "b2fe0a3e571e23ee4b63b215b68340fd44c39d8904b5e4868b534a5830ad378c"
+        },
+        {
+          "index": 132,
+          "source_sha256": "7f826b6edbe88745c806614afbc8e530d343ee880d607ea074c45de704e395ee",
+          "target_sha256": "b2fe0a3e571e23ee4b63b215b68340fd44c39d8904b5e4868b534a5830ad378c",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 181,
+      "source_sha256": "9774e48ec38faa728791ced68a2225f1dd942c55100d3038e0d1a9959e0e122c",
+      "target_sha256": "fc9d8aaad28fa665a798f2fd6a80323b80a224df8d611491d10ec99a496e87d7",
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"ifexists\"",
+        "\"proc\"",
+        "set-var"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 180,
+          "source_sha256": "9774e48ec38faa728791ced68a2225f1dd942c55100d3038e0d1a9959e0e122c",
+          "target_sha256": "fc9d8aaad28fa665a798f2fd6a80323b80a224df8d611491d10ec99a496e87d7"
+        },
+        {
+          "index": 180,
+          "source_sha256": "9774e48ec38faa728791ced68a2225f1dd942c55100d3038e0d1a9959e0e122c",
+          "target_sha256": "fc9d8aaad28fa665a798f2fd6a80323b80a224df8d611491d10ec99a496e87d7",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 182,
+      "source_sha256": "1f3eba891a6156a4d914dad6ef3b867672eafd074e9710acef22511a2a4b4ffe",
+      "target_sha256": "aab3850078b400255cee9a5a38fb5ea90f57e3ad159a241c9dfa9b1df8e0f6d3",
+      "classification": "argument-description",
+      "protected_literals": [
+        "IPs",
+        "ifempty"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 181,
+          "source_sha256": "1f3eba891a6156a4d914dad6ef3b867672eafd074e9710acef22511a2a4b4ffe",
+          "target_sha256": "aab3850078b400255cee9a5a38fb5ea90f57e3ad159a241c9dfa9b1df8e0f6d3"
+        },
+        {
+          "index": 181,
+          "source_sha256": "1f3eba891a6156a4d914dad6ef3b867672eafd074e9710acef22511a2a4b4ffe",
+          "target_sha256": "aab3850078b400255cee9a5a38fb5ea90f57e3ad159a241c9dfa9b1df8e0f6d3",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 183,
+      "source_sha256": "66b732b24c66bf9f11400da4670dd00f61c78cb330dadf660156a9e0fe51df82",
+      "target_sha256": "dfe21c6fc4dcc65abbec02c1ca0321edc0bc276abd369b91ebe9505048734e5d",
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"proc\"",
+        "set-var",
+        "unset-var"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 182,
+          "source_sha256": "66b732b24c66bf9f11400da4670dd00f61c78cb330dadf660156a9e0fe51df82",
+          "target_sha256": "dfe21c6fc4dcc65abbec02c1ca0321edc0bc276abd369b91ebe9505048734e5d"
+        },
+        {
+          "index": 182,
+          "source_sha256": "66b732b24c66bf9f11400da4670dd00f61c78cb330dadf660156a9e0fe51df82",
+          "target_sha256": "dfe21c6fc4dcc65abbec02c1ca0321edc0bc276abd369b91ebe9505048734e5d",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 184,
+      "source_sha256": "79b17ea1b0cfd60f6b4f45898cad2a8f48bad24f3226c2fbaf8d43bdb9ea65b0",
+      "target_sha256": "16b409f2b4c881a79b969676bb4cbe4609d4690edc4badbd691cbafe35f15591",
+      "classification": "argument-description",
+      "protected_literals": [
+        "integer"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 183,
+          "source_sha256": "79b17ea1b0cfd60f6b4f45898cad2a8f48bad24f3226c2fbaf8d43bdb9ea65b0",
+          "target_sha256": "16b409f2b4c881a79b969676bb4cbe4609d4690edc4badbd691cbafe35f15591"
+        },
+        {
+          "index": 183,
+          "source_sha256": "79b17ea1b0cfd60f6b4f45898cad2a8f48bad24f3226c2fbaf8d43bdb9ea65b0",
+          "target_sha256": "16b409f2b4c881a79b969676bb4cbe4609d4690edc4badbd691cbafe35f15591",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 260,
+      "source_sha256": "c49a9334d2e667aabd931dc475ab9855dfa25b79dc639808bbf67816bb41c4c1",
+      "target_sha256": "e6485a0c237b767c74cff975740aa154c3d20c7fbfc0cf86df8b5cb1a920be8d",
+      "classification": "mixed-explanation",
+      "protected_literals": [
+        "\"$HAPROXY_HTTP_LOG_FMT dbg={%[bs.debug_str,when(!normal)]}\"",
+        "\"dbg\"",
+        "\"dbg={-}\"",
+        "\"dbg={... debug info ...}\""
+      ],
+      "protected_lines": [
+        "# log \"dbg={-}\" when fine, or \"dbg={... debug info ...}\" on error:",
+        "log-format \"$HAPROXY_HTTP_LOG_FMT dbg={%[bs.debug_str,when(!normal)]}\""
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 259,
+          "source_sha256": "c49a9334d2e667aabd931dc475ab9855dfa25b79dc639808bbf67816bb41c4c1",
+          "target_sha256": "e6485a0c237b767c74cff975740aa154c3d20c7fbfc0cf86df8b5cb1a920be8d"
+        },
+        {
+          "index": 259,
+          "source_sha256": "c49a9334d2e667aabd931dc475ab9855dfa25b79dc639808bbf67816bb41c4c1",
+          "target_sha256": "e6485a0c237b767c74cff975740aa154c3d20c7fbfc0cf86df8b5cb1a920be8d",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 273,
+      "source_sha256": "f595de6ec3ef5eb5e877a75134f84612b0b39ea2e36d27a233553872c263b003",
+      "target_sha256": "c1cb677ab4ccf5a88ed5447dfe1c91298545ea7c3e87c4a82b0753c4d3be25e8",
+      "classification": "table-labels",
+      "protected_literals": [
+        "<backend>",
+        "<bool>",
+        "<default>",
+        "<frontend>",
+        "<hex>",
+        "<integer>",
+        "<ipv4>",
+        "<ipv6>",
+        "<method>",
+        "<name>",
+        "<offset>",
+        "<range>",
+        "<server>",
+        "<string>",
+        "<table>",
+        "<unit>",
+        "<var-name>",
+        "<version>",
+        "integer"
+      ],
+      "protected_lines": [
+        "acl([!]<name>[,...])                               boolean",
+        "act_conn                                           integer",
+        "always_false                                       boolean",
+        "always_true                                        boolean",
+        "avg_queue([<backend>])                             integer",
+        "be_conn([<backend>])                               integer",
+        "be_conn_free([<backend>])                          integer",
+        "be_sess_rate([<backend>])                          integer",
+        "bin(<hex>)                                         bin",
+        "bool(<bool>)                                       bool",
+        "connslots([<backend>])                             integer",
+        "cpu_calls                                          integer",
+        "cpu_ns_avg                                         integer",
+        "cpu_ns_tot                                         integer",
+        "date([<offset>[,<unit>]])                          integer",
+        "date_us                                            integer",
+        "env(<name>)                                        string",
+        "fe_conn([<frontend>])                              integer",
+        "fe_req_rate([<frontend>])                          integer",
+        "fe_sess_rate([<frontend>])                         integer",
+        "hostname                                           string",
+        "int(<integer>)                                     signed",
+        "ipv4(<ipv4>)                                       ipv4",
+        "ipv6(<ipv6>)                                       ipv6",
+        "last_entity                                        string",
+        "last_rule_file                                     string",
+        "last_rule_line                                     integer",
+        "lat_ns_avg                                         integer",
+        "lat_ns_tot                                         integer",
+        "meth(<method>)                                     method",
+        "nbsrv([<backend>])                                 integer",
+        "pid                                                integer",
+        "prio_class                                         integer",
+        "prio_offset                                        integer",
+        "proc                                               integer",
+        "queue([<backend>])                                 integer",
+        "quic_enabled                                       boolean",
+        "rand([<range>])                                    integer",
+        "srv_conn([<backend>/]<server>)                     integer",
+        "srv_conn_free([<backend>/]<server>)                integer",
+        "srv_is_up([<backend>/]<server>)                    boolean",
+        "srv_iweight([<backend>/]<server>)                  integer",
+        "srv_queue([<backend>/]<server>)                    integer",
+        "srv_sess_rate([<backend>/]<server>)                integer",
+        "srv_uweight([<backend>/]<server>)                  integer",
+        "srv_weight([<backend>/]<server>)                   integer",
+        "stopping                                           boolean",
+        "str(<string>)                                      string",
+        "table_avl([<table>])                               integer",
+        "table_cnt([<table>])                               integer",
+        "term_events                                        string",
+        "thread                                             integer",
+        "txn.id32                                           integer",
+        "txn.sess_term_state                                string",
+        "uptime                                             integer",
+        "uuid([<version>])                                  string",
+        "var(<var-name>[,<default>])                        undefined",
+        "wait_end                                           boolean",
+        "waiting_entity                                     string"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 270,
+          "source_sha256": "f595de6ec3ef5eb5e877a75134f84612b0b39ea2e36d27a233553872c263b003",
+          "target_sha256": "c1cb677ab4ccf5a88ed5447dfe1c91298545ea7c3e87c4a82b0753c4d3be25e8"
+        },
+        {
+          "index": 272,
+          "source_sha256": "f595de6ec3ef5eb5e877a75134f84612b0b39ea2e36d27a233553872c263b003",
+          "target_sha256": "c1cb677ab4ccf5a88ed5447dfe1c91298545ea7c3e87c4a82b0753c4d3be25e8",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 318,
+      "source_sha256": "b832af91c95ae87aebeea5181db3edb8ae3fa937e2b46bd22eb82c66c449b459",
+      "target_sha256": "3e5501952a84ce6b749bc31822cf77f06a28baaf9c22945685159eeb385f29e5",
+      "classification": "table-labels",
+      "protected_literals": [
+        "<ctr>",
+        "<id>",
+        "<idx>",
+        "<table>",
+        "<unit>",
+        "integer"
+      ],
+      "protected_lines": [
+        "accept_date([<unit>])                              integer",
+        "bc.timer.connect                                   integer",
+        "bc_be_queue                                        integer",
+        "bc_dst                                             ip",
+        "bc_dst_port                                        integer",
+        "bc_err                                             integer",
+        "bc_err_name                                        string",
+        "bc_err_str                                         string",
+        "bc_glitches                                        integer",
+        "bc_http_major                                      integer",
+        "bc_nb_streams                                      integer",
+        "bc_reused                                          boolean",
+        "bc_rtt(<unit>)                                     integer",
+        "bc_rttvar(<unit>)                                  integer",
+        "bc_settings_streams_limit                          integer",
+        "bc_src                                             ip",
+        "bc_src_port                                        integer",
+        "bc_srv_queue                                       integer",
+        "be_id                                              integer",
+        "be_name                                            string",
+        "be_connect_timeout                                 integer",
+        "be_queue_timeout                                   integer",
+        "be_server_timeout                                  integer",
+        "be_tarpit_timeout                                  integer",
+        "be_tunnel_timeout                                  integer",
+        "bytes_in                                           integer",
+        "bytes_out                                          integer",
+        "cur_connect_timeout                                integer",
+        "cur_client_timeout                                 integer",
+        "cur_queue_timeout                                  integer",
+        "cur_server_timeout                                 integer",
+        "cur_tarpit_timeout                                 integer",
+        "cur_tunnel_timeout                                 integer",
+        "dst                                                ip",
+        "dst_conn                                           integer",
+        "dst_is_local                                       boolean",
+        "dst_port                                           integer",
+        "fc.timer.handshake                                 integer",
+        "fc.timer.total                                     integer",
+        "fc_dst                                             ip",
+        "fc_dst_is_local                                    boolean",
+        "fc_dst_port                                        integer",
+        "fc_err                                             integer",
+        "fc_err_name                                        string",
+        "fc_err_str                                         string",
+        "fc_fackets                                         integer",
+        "fc_glitches                                        integer",
+        "fc_http_major                                      integer",
+        "fc_lost                                            integer",
+        "fc_nb_streams                                      integer",
+        "fc_pp_authority                                    string",
+        "fc_pp_tlv(<id>)                                    string",
+        "fc_pp_unique_id                                    string",
+        "fc_rcvd_proxy                                      boolean",
+        "fc_reordering                                      integer",
+        "fc_retrans                                         integer",
+        "fc_rtt(<unit>)                                     integer",
+        "fc_rttvar(<unit>)                                  integer",
+        "fc_sacked                                          integer",
+        "fc_saved_syn                                       binary",
+        "fc_settings_streams_limit                          integer",
+        "fc_src                                             ip",
+        "fc_src_is_local                                    boolean",
+        "fc_src_port                                        integer",
+        "fc_unacked                                         integer",
+        "fe_tarpit_timeout                                  integer",
+        "fe_client_timeout                                  integer",
+        "fe_defbe                                           string",
+        "fe_id                                              integer",
+        "fe_name                                            string",
+        "req.bytes_in                                       integer",
+        "req.bytes_out                                      integer",
+        "res.bytes_in                                       integer",
+        "res.bytes_out                                      integer",
+        "res.timer.data                                     integer",
+        "sc0_bytes_in_rate([<table>])                       integer",
+        "sc0_bytes_out_rate([<table>])                      integer",
+        "sc0_clr_gpc0([<table>])                            integer",
+        "sc0_clr_gpc1([<table>])                            integer",
+        "sc0_conn_cnt([<table>])                            integer",
+        "sc0_conn_cur([<table>])                            integer",
+        "sc0_conn_rate([<table>])                           integer",
+        "sc0_get_gpc0([<table>])                            integer",
+        "sc0_get_gpc1([<table>])                            integer",
+        "sc0_get_gpt0([<table>])                            integer",
+        "sc0_glitch_cnt([<table>])                          integer",
+        "sc0_glitch_rate([<table>])                         integer",
+        "sc0_gpc0_rate([<table>])                           integer",
+        "sc0_gpc1_rate([<table>])                           integer",
+        "sc0_http_err_cnt([<table>])                        integer",
+        "sc0_http_err_rate([<table>])                       integer",
+        "sc0_http_fail_cnt([<table>])                       integer",
+        "sc0_http_fail_rate([<table>])                      integer",
+        "sc0_http_req_cnt([<table>])                        integer",
+        "sc0_http_req_rate([<table>])                       integer",
+        "sc0_inc_gpc0([<table>])                            integer",
+        "sc0_inc_gpc1([<table>])                            integer",
+        "sc0_kbytes_in([<table>])                           integer",
+        "sc0_kbytes_out([<table>])                          integer",
+        "sc0_key                                            any",
+        "sc0_sess_cnt([<table>])                            integer",
+        "sc0_sess_rate([<table>])                           integer",
+        "sc0_tracked([<table>])                             boolean",
+        "sc0_trackers([<table>])                            integer",
+        "sc1_bytes_in_rate([<table>])                       integer",
+        "sc1_bytes_out_rate([<table>])                      integer",
+        "sc1_clr_gpc0([<table>])                            integer",
+        "sc1_clr_gpc1([<table>])                            integer",
+        "sc1_conn_cnt([<table>])                            integer",
+        "sc1_conn_cur([<table>])                            integer",
+        "sc1_conn_rate([<table>])                           integer",
+        "sc1_get_gpc0([<table>])                            integer",
+        "sc1_get_gpc1([<table>])                            integer",
+        "sc1_get_gpt0([<table>])                            integer",
+        "sc1_glitch_cnt([<table>])                          integer",
+        "sc1_glitch_rate([<table>])                         integer",
+        "sc1_gpc0_rate([<table>])                           integer",
+        "sc1_gpc1_rate([<table>])                           integer",
+        "sc1_http_err_cnt([<table>])                        integer",
+        "sc1_http_err_rate([<table>])                       integer",
+        "sc1_http_fail_cnt([<table>])                       integer",
+        "sc1_http_fail_rate([<table>])                      integer",
+        "sc1_http_req_cnt([<table>])                        integer",
+        "sc1_http_req_rate([<table>])                       integer",
+        "sc1_inc_gpc0([<table>])                            integer",
+        "sc1_inc_gpc1([<table>])                            integer",
+        "sc1_kbytes_in([<table>])                           integer",
+        "sc1_kbytes_out([<table>])                          integer",
+        "sc1_key                                            any",
+        "sc1_sess_cnt([<table>])                            integer",
+        "sc1_sess_rate([<table>])                           integer",
+        "sc1_tracked([<table>])                             boolean",
+        "sc1_trackers([<table>])                            integer",
+        "sc2_bytes_in_rate([<table>])                       integer",
+        "sc2_bytes_out_rate([<table>])                      integer",
+        "sc2_clr_gpc0([<table>])                            integer",
+        "sc2_clr_gpc1([<table>])                            integer",
+        "sc2_conn_cnt([<table>])                            integer",
+        "sc2_conn_cur([<table>])                            integer",
+        "sc2_conn_rate([<table>])                           integer",
+        "sc2_get_gpc0([<table>])                            integer",
+        "sc2_get_gpc1([<table>])                            integer",
+        "sc2_get_gpt0([<table>])                            integer",
+        "sc2_glitch_cnt([<table>])                          integer",
+        "sc2_glitch_rate([<table>])                         integer",
+        "sc2_gpc0_rate([<table>])                           integer",
+        "sc2_gpc1_rate([<table>])                           integer",
+        "sc2_http_err_cnt([<table>])                        integer",
+        "sc2_http_err_rate([<table>])                       integer",
+        "sc2_http_fail_cnt([<table>])                       integer",
+        "sc2_http_fail_rate([<table>])                      integer",
+        "sc2_http_req_cnt([<table>])                        integer",
+        "sc2_http_req_rate([<table>])                       integer",
+        "sc2_inc_gpc0([<table>])                            integer",
+        "sc2_inc_gpc1([<table>])                            integer",
+        "sc2_kbytes_in([<table>])                           integer",
+        "sc2_kbytes_out([<table>])                          integer",
+        "sc2_key                                            any",
+        "sc2_sess_cnt([<table>])                            integer",
+        "sc2_sess_rate([<table>])                           integer",
+        "sc2_tracked([<table>])                             boolean",
+        "sc2_trackers([<table>])                            integer",
+        "sc_bytes_in_rate(<ctr>[,<table>])                  integer",
+        "sc_bytes_out_rate(<ctr>[,<table>])                 integer",
+        "sc_clr_gpc(<idx>,<ctr>[,<table>])                  integer",
+        "sc_clr_gpc0(<ctr>[,<table>])                       integer",
+        "sc_clr_gpc1(<ctr>[,<table>])                       integer",
+        "sc_conn_cnt(<ctr>[,<table>])                       integer",
+        "sc_conn_cur(<ctr>[,<table>])                       integer",
+        "sc_conn_rate(<ctr>[,<table>])                      integer",
+        "sc_get_gpc(<idx>,<ctr>[,<table>])                  integer",
+        "sc_get_gpc0(<ctr>[,<table>])                       integer",
+        "sc_get_gpc1(<ctr>[,<table>])                       integer",
+        "sc_get_gpt(<idx>,<ctr>[,<table>])                  integer",
+        "sc_get_gpt0(<ctr>[,<table>])                       integer",
+        "sc_glitch_cnt(<ctr>[,<table>])                     integer",
+        "sc_glitch_rate(<ctr>[,<table>])                    integer",
+        "sc_gpc0_rate(<ctr>[,<table>])                      integer",
+        "sc_gpc1_rate(<ctr>[,<table>])                      integer",
+        "sc_gpc_rate(<idx>,<ctr>[,<table>])                 integer",
+        "sc_http_err_cnt(<ctr>[,<table>])                   integer",
+        "sc_http_err_rate(<ctr>[,<table>])                  integer",
+        "sc_http_fail_cnt(<ctr>[,<table>])                  integer",
+        "sc_http_fail_rate(<ctr>[,<table>])                 integer",
+        "sc_http_req_cnt(<ctr>[,<table>])                   integer",
+        "sc_http_req_rate(<ctr>[,<table>])                  integer",
+        "sc_inc_gpc(<idx>,<ctr>[,<table>])                  integer",
+        "sc_inc_gpc0(<ctr>[,<table>])                       integer",
+        "sc_inc_gpc1(<ctr>[,<table>])                       integer",
+        "sc_kbytes_in(<ctr>[,<table>])                      integer",
+        "sc_kbytes_out(<ctr>[,<table>])                     integer",
+        "sc_key(<ctr>)                                      any",
+        "sc_sess_cnt(<ctr>[,<table>])                       integer",
+        "sc_sess_rate(<ctr>[,<table>])                      integer",
+        "sc_tracked(<ctr>[,<table>])                        boolean",
+        "sc_trackers(<ctr>[,<table>])                       integer",
+        "so_id                                              integer",
+        "so_name                                            string",
+        "src                                                ip",
+        "src_bytes_in_rate([<table>])                       integer",
+        "src_bytes_out_rate([<table>])                      integer",
+        "src_clr_gpc(<idx>[,<table>])                       integer",
+        "src_clr_gpc0([<table>])                            integer",
+        "src_clr_gpc1([<table>])                            integer",
+        "src_conn_cnt([<table>])                            integer",
+        "src_conn_cur([<table>])                            integer",
+        "src_conn_rate([<table>])                           integer",
+        "src_get_gpc(<idx>[,<table>])                       integer",
+        "src_get_gpc0([<table>])                            integer",
+        "src_get_gpc1([<table>])                            integer",
+        "src_get_gpt(<idx>[,<table>])                       integer",
+        "src_get_gpt0([<table>])                            integer",
+        "src_glitch_cnt([<table>])                          integer",
+        "src_glitch_rate([<table>])                         integer",
+        "src_gpc0_rate([<table>])                           integer",
+        "src_gpc1_rate([<table>])                           integer",
+        "src_gpc_rate(<idx>[,<table>])                      integer",
+        "src_http_err_cnt([<table>])                        integer",
+        "src_http_err_rate([<table>])                       integer",
+        "src_http_fail_cnt([<table>])                       integer",
+        "src_http_fail_rate([<table>])                      integer",
+        "src_http_req_cnt([<table>])                        integer",
+        "src_http_req_rate([<table>])                       integer",
+        "src_inc_gpc(<idx>[,<table>])                       integer",
+        "src_inc_gpc0([<table>])                            integer",
+        "src_inc_gpc1([<table>])                            integer",
+        "src_is_local                                       boolean",
+        "src_kbytes_in([<table>])                           integer",
+        "src_kbytes_out([<table>])                          integer",
+        "src_port                                           integer",
+        "src_sess_cnt([<table>])                            integer",
+        "src_sess_rate([<table>])                           integer",
+        "src_updt_conn_cnt([<table>])                       integer",
+        "srv_id                                             integer",
+        "srv_name                                           string",
+        "txn.conn_retries                                   integer",
+        "txn.redispatched                                   boolean"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 315,
+          "source_sha256": "b832af91c95ae87aebeea5181db3edb8ae3fa937e2b46bd22eb82c66c449b459",
+          "target_sha256": "3e5501952a84ce6b749bc31822cf77f06a28baaf9c22945685159eeb385f29e5"
+        },
+        {
+          "index": 317,
+          "source_sha256": "b832af91c95ae87aebeea5181db3edb8ae3fa937e2b46bd22eb82c66c449b459",
+          "target_sha256": "3e5501952a84ce6b749bc31822cf77f06a28baaf9c22945685159eeb385f29e5",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 322,
+      "source_sha256": "a3bdc3534705ef56b3ae5a3f22563ffaf84fbd264aac5973211214e820c002dc",
+      "target_sha256": "a758f142b3f4e60134c5ce196afa67a0d0b4f104ce1f387e92df7d78d96e0af8",
+      "classification": "table-labels",
+      "protected_literals": [
+        "\"Attempt to use SSL on an unknown target (internal error)\"",
+        "\"Can't bind to source address\"",
+        "\"Connection closed during SSL handshake\"",
+        "\"Connection closed while waiting for NetScaler Client IP header\"",
+        "\"Connection closed while waiting for PROXY protocol header\"",
+        "\"Connection error during SSL handshake\"",
+        "\"Connection error while waiting for NetScaler Client IP header\"",
+        "\"Connection error while waiting for PROXY protocol header\"",
+        "\"EBADF returned by OS\"",
+        "\"ECONNREFUSED returned by OS\"",
+        "\"ECONNRESET returned by OS\"",
+        "\"EFAULT returned by OS\"",
+        "\"EINVAL returned by OS\"",
+        "\"ENCONN returned by OS\"",
+        "\"ENETUNREACH returned by OS\"",
+        "\"ENOBUFS returned by OS\"",
+        "\"ENOMEM returned by OS\"",
+        "\"ENSOCK returned by OS\"",
+        "\"EPIPE returned by OS\"",
+        "\"General socket error\"",
+        "\"Local source address already in use\"",
+        "\"Out of local source ports on the system\"",
+        "\"Out of memory when initializing an SSL connection\"",
+        "\"Out of system buffers\"",
+        "\"Poller reported POLLERR\"",
+        "\"Protocol or address family not supported\"",
+        "\"Reached configured maxconn value\"",
+        "\"Received an invalid NetScaler Client IP magic number\"",
+        "\"Received an invalid PROXY protocol header\"",
+        "\"Received an unhandled protocol in the NetScaler Client IP header\"",
+        "\"Received an unhandled protocol in the PROXY protocol header\"",
+        "\"Received something which does not look like a PROXY protocol header\"",
+        "\"Rejected a client-initiated SSL renegotiation attempt\"",
+        "\"Reverse connect failure\"",
+        "\"SOCKS4 Proxy deny the request\"",
+        "\"SOCKS4 Proxy handshake aborted by server\"",
+        "\"SOCKS4 Proxy read error during handshake\"",
+        "\"SOCKS4 Proxy write error during handshake\"",
+        "\"SSL client CA chain cannot be verified\"",
+        "\"SSL client certificate not trusted\"",
+        "\"SSL fatal error\"",
+        "\"SSL handshake failure after heartbeat\"",
+        "\"SSL handshake failure\"",
+        "\"Server presented an SSL certificate different from the configured one\"",
+        "\"Server presented an SSL certificate different from the expected one\"",
+        "\"Server refused early data\"",
+        "\"Source port range exhausted\"",
+        "\"Stopped a TLSv1 heartbeat attack (CVE-2014-0160)\"",
+        "\"Success\"",
+        "\"Timeout during SSL handshake\"",
+        "\"Timeout while waiting for PROXY protocol header\"",
+        "\"Timeout while waiting for a NetScaler Client IP header\"",
+        "\"Too many SSL connections\"",
+        "\"Too many sockets on the process\"",
+        "\"Too many sockets on the system\"",
+        "\"Truncated NetScaler Client IP header received\"",
+        "\"Truncated PROXY protocol header received\"",
+        "ADDR_INUSE",
+        "CANT_BIND",
+        "CIP_ABORT",
+        "CIP_BAD_MAGIC",
+        "CIP_BAD_PROTO",
+        "CIP_EMPTY",
+        "CIP_TIMEOUT",
+        "CIP_TRUNCATED",
+        "CONF_FDLIM",
+        "EBADF",
+        "EFAULT",
+        "EINVAL",
+        "ENCONN",
+        "ENOBUFS",
+        "ENOMEM",
+        "ENSOCK",
+        "EPIPE",
+        "EREFUSED",
+        "ERESET",
+        "EUNREACH",
+        "FREE_PORTS",
+        "ID",
+        "NOPROTO",
+        "POLLERR",
+        "PORT_RANGE",
+        "PROC_FDLIM",
+        "PRX_ABORT",
+        "PRX_BAD_HDR",
+        "PRX_BAD_PROTO",
+        "PRX_EMPTY",
+        "PRX_NOT_HDR",
+        "PRX_TIMEOUT",
+        "PRX_TRUNCATED",
+        "REVERSE",
+        "SOCKS4_ABORT",
+        "SOCKS4_DENY",
+        "SOCKS4_RECV",
+        "SOCKS4_SEND",
+        "SOCK_ERR",
+        "SSL_ABORT",
+        "SSL_CA_FAIL",
+        "SSL_CRT_FAIL",
+        "SSL_EARLY_FAILED",
+        "SSL_EMPTY",
+        "SSL_FATAL",
+        "SSL_HANDSHAKE",
+        "SSL_HANDSHAKE_HB",
+        "SSL_KILLED_HB",
+        "SSL_MISMATCH",
+        "SSL_MISMATCH_SNI",
+        "SSL_NO_MEM",
+        "SSL_NO_TARGET",
+        "SSL_RENEG",
+        "SSL_TIMEOUT",
+        "SSL_TOO_MANY",
+        "SYS_FDLIM",
+        "SYS_MEMLIM"
+      ],
+      "protected_lines": [
+        "  | 0  | -                | \"Success\"                                                               |",
+        "  | 1  | CONF_FDLIM       | \"Reached configured maxconn value\"                                      |",
+        "  | 2  | PROC_FDLIM       | \"Too many sockets on the process\"                                       |",
+        "  | 3  | SYS_FDLIM        | \"Too many sockets on the system\"                                        |",
+        "  | 4  | SYS_MEMLIM       | \"Out of system buffers\"                                                 |",
+        "  | 5  | NOPROTO          | \"Protocol or address family not supported\"                              |",
+        "  | 6  | SOCK_ERR         | \"General socket error\"                                                  |",
+        "  | 7  | PORT_RANGE       | \"Source port range exhausted\"                                           |",
+        "  | 8  | CANT_BIND        | \"Can't bind to source address\"                                          |",
+        "  | 9  | FREE_PORTS       | \"Out of local source ports on the system\"                               |",
+        "  | 10 | ADDR_INUSE       | \"Local source address already in use\"                                   |",
+        "  | 11 | PRX_EMPTY        | \"Connection closed while waiting for PROXY protocol header\"             |",
+        "  | 12 | PRX_ABORT        | \"Connection error while waiting for PROXY protocol header\"              |",
+        "  | 13 | PRX_TIMEOUT      | \"Timeout while waiting for PROXY protocol header\"                       |",
+        "  | 14 | PRX_TRUNCATED    | \"Truncated PROXY protocol header received\"                              |",
+        "  | 15 | PRX_NOT_HDR      | \"Received something which does not look like a PROXY protocol header\"   |",
+        "  | 16 | PRX_BAD_HDR      | \"Received an invalid PROXY protocol header\"                             |",
+        "  | 17 | PRX_BAD_PROTO    | \"Received an unhandled protocol in the PROXY protocol header\"           |",
+        "  | 18 | CIP_EMPTY        | \"Connection closed while waiting for NetScaler Client IP header\"        |",
+        "  | 19 | CIP_ABORT        | \"Connection error while waiting for NetScaler Client IP header\"         |",
+        "  | 20 | CIP_TIMEOUT      | \"Timeout while waiting for a NetScaler Client IP header\"                |",
+        "  | 21 | CIP_TRUNCATED    | \"Truncated NetScaler Client IP header received\"                         |",
+        "  | 22 | CIP_BAD_MAGIC    | \"Received an invalid NetScaler Client IP magic number\"                  |",
+        "  | 23 | CIP_BAD_PROTO    | \"Received an unhandled protocol in the NetScaler Client IP header\"      |",
+        "  | 24 | SSL_EMPTY        | \"Connection closed during SSL handshake\"                                |",
+        "  | 25 | SSL_ABORT        | \"Connection error during SSL handshake\"                                 |",
+        "  | 26 | SSL_TIMEOUT      | \"Timeout during SSL handshake\"                                          |",
+        "  | 27 | SSL_TOO_MANY     | \"Too many SSL connections\"                                              |",
+        "  | 28 | SSL_NO_MEM       | \"Out of memory when initializing an SSL connection\"                     |",
+        "  | 29 | SSL_RENEG        | \"Rejected a client-initiated SSL renegotiation attempt\"                 |",
+        "  | 30 | SSL_CA_FAIL      | \"SSL client CA chain cannot be verified\"                                |",
+        "  | 31 | SSL_CRT_FAIL     | \"SSL client certificate not trusted\"                                    |",
+        "  | 32 | SSL_MISMATCH     | \"Server presented an SSL certificate different from the configured one\" |",
+        "  | 33 | SSL_MISMATCH_SNI | \"Server presented an SSL certificate different from the expected one\"   |",
+        "  | 34 | SSL_HANDSHAKE    | \"SSL handshake failure\"                                                 |",
+        "  | 35 | SSL_HANDSHAKE_HB | \"SSL handshake failure after heartbeat\"                                 |",
+        "  | 36 | SSL_KILLED_HB    | \"Stopped a TLSv1 heartbeat attack (CVE-2014-0160)\"                      |",
+        "  | 37 | SSL_NO_TARGET    | \"Attempt to use SSL on an unknown target (internal error)\"              |",
+        "  | 38 | SSL_EARLY_FAILED | \"Server refused early data\"                                             |",
+        "  | 39 | SOCKS4_SEND      | \"SOCKS4 Proxy write error during handshake\"                             |",
+        "  | 40 | SOCKS4_RECV      | \"SOCKS4 Proxy read error during handshake\"                              |",
+        "  | 41 | SOCKS4_DENY      | \"SOCKS4 Proxy deny the request\"                                         |",
+        "  | 42 | SOCKS4_ABORT     | \"SOCKS4 Proxy handshake aborted by server\"                              |",
+        "  | 43 | SSL_FATAL        | \"SSL fatal error\"                                                       |",
+        "  | 44 | REVERSE          | \"Reverse connect failure\"                                               |",
+        "  | 45 | POLLERR          | \"Poller reported POLLERR\"                                               |",
+        "  | 46 | EREFUSED         | \"ECONNREFUSED returned by OS\"                                           |",
+        "  | 47 | ERESET           | \"ECONNRESET returned by OS\"                                             |",
+        "  | 48 | EUNREACH         | \"ENETUNREACH returned by OS\"                                            |",
+        "  | 49 | ENOMEM           | \"ENOMEM returned by OS\"                                                 |",
+        "  | 50 | EBADF            | \"EBADF returned by OS\"                                                  |",
+        "  | 51 | EFAULT           | \"EFAULT returned by OS\"                                                 |",
+        "  | 52 | EINVAL           | \"EINVAL returned by OS\"                                                 |",
+        "  | 53 | ENCONN           | \"ENCONN returned by OS\"                                                 |",
+        "  | 54 | ENSOCK           | \"ENSOCK returned by OS\"                                                 |",
+        "  | 55 | ENOBUFS          | \"ENOBUFS returned by OS\"                                                |",
+        "  | 56 | EPIPE            | \"EPIPE returned by OS\"                                                  |"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 319,
+          "source_sha256": "a3bdc3534705ef56b3ae5a3f22563ffaf84fbd264aac5973211214e820c002dc",
+          "target_sha256": "a758f142b3f4e60134c5ce196afa67a0d0b4f104ce1f387e92df7d78d96e0af8"
+        },
+        {
+          "index": 321,
+          "source_sha256": "a3bdc3534705ef56b3ae5a3f22563ffaf84fbd264aac5973211214e820c002dc",
+          "target_sha256": "a758f142b3f4e60134c5ce196afa67a0d0b4f104ce1f387e92df7d78d96e0af8",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 397,
+      "source_sha256": "3df68f1098fb19f320507a06aeea656f46d5de92a960cb1db541e5c953a179e2",
+      "target_sha256": "fa70e7666379272c904e8583d917bb6492adb81e609ba46cc73995fd96bd771d",
+      "classification": "table-labels",
+      "protected_literals": [
+        "<bitmap>",
+        "<entry>",
+        "<filter_option>",
+        "<format>",
+        "<occ>",
+        "<prop>",
+        "integer"
+      ],
+      "protected_lines": [
+        "51d.all(<prop>[,<prop>*])                          string",
+        "bs.aborted                                         boolean",
+        "bs.debug_str([<bitmap>])                           string",
+        "bs.id                                              integer",
+        "bs.rst_code                                        integer",
+        "fs.aborted                                         boolean",
+        "fs.debug_str([<bitmap>])                           string",
+        "fs.id                                              integer",
+        "fs.rst_code                                        integer",
+        "ssl_bc                                             boolean",
+        "ssl_bc_alg_keysize                                 integer",
+        "ssl_bc_alpn                                        string",
+        "ssl_bc_cipher                                      string",
+        "ssl_bc_client_early_traffic_secret                 string",
+        "ssl_bc_client_handshake_traffic_secret             string",
+        "ssl_bc_client_random                               binary",
+        "ssl_bc_client_traffic_secret_0                     string",
+        "ssl_bc_curve                                       string",
+        "ssl_bc_early_exporter_secret                       string",
+        "ssl_bc_err                                         integer",
+        "ssl_bc_err_str                                     string",
+        "ssl_bc_exporter_secret                             string",
+        "ssl_bc_is_resumed                                  boolean",
+        "ssl_bc_npn                                         string",
+        "ssl_bc_protocol                                    string",
+        "ssl_bc_server_handshake_traffic_secret             string",
+        "ssl_bc_server_random                               binary",
+        "ssl_bc_server_traffic_secret_0                     string",
+        "ssl_bc_session_id                                  binary",
+        "ssl_bc_session_key                                 binary",
+        "ssl_bc_sni                                         string",
+        "ssl_bc_unique_id                                   binary",
+        "ssl_bc_use_keysize                                 integer",
+        "ssl_c_ca_err                                       integer",
+        "ssl_c_ca_err_depth                                 integer",
+        "ssl_c_chain_der                                    binary",
+        "ssl_c_der                                          binary",
+        "ssl_c_err                                          integer",
+        "ssl_c_i_dn([<entry>[,<occ>[,<format>]]])           string",
+        "ssl_c_key_alg                                      string",
+        "ssl_c_notafter                                     string",
+        "ssl_c_notbefore                                    string",
+        "ssl_c_r_dn([<entry>[,<occ>[,<format>]]])           string",
+        "ssl_c_s_dn([<entry>[,<occ>[,<format>]]])           string",
+        "ssl_c_san                                          string",
+        "ssl_c_serial                                       binary",
+        "ssl_c_sha1                                         binary",
+        "ssl_c_sig_alg                                      string",
+        "ssl_c_used                                         boolean",
+        "ssl_c_verify                                       integer",
+        "ssl_c_version                                      integer",
+        "ssl_f_der                                          binary",
+        "ssl_f_i_dn([<entry>[,<occ>[,<format>]]])           string",
+        "ssl_f_key_alg                                      string",
+        "ssl_f_notafter                                     string",
+        "ssl_f_notbefore                                    string",
+        "ssl_f_s_dn([<entry>[,<occ>[,<format>]]])           string",
+        "ssl_f_serial                                       binary",
+        "ssl_f_sha1                                         binary",
+        "ssl_f_sig_alg                                      string",
+        "ssl_f_version                                      integer",
+        "ssl_fc                                             boolean",
+        "ssl_fc_alg_keysize                                 integer",
+        "ssl_fc_alpn                                        string",
+        "ssl_fc_cipher                                      string",
+        "ssl_fc_cipherlist_bin([<filter_option>])           binary",
+        "ssl_fc_cipherlist_hex([<filter_option>])           string",
+        "ssl_fc_cipherlist_str([<filter_option>])           string",
+        "ssl_fc_cipherlist_xxh                              integer",
+        "ssl_fc_client_early_traffic_secret                 string",
+        "ssl_fc_client_handshake_traffic_secret             string",
+        "ssl_fc_client_random                               binary",
+        "ssl_fc_client_traffic_secret_0                     string",
+        "ssl_fc_crtname                                     string",
+        "ssl_fc_curve                                       string",
+        "ssl_fc_early_exporter_secret                       string",
+        "ssl_fc_ecformats_bin                               binary",
+        "ssl_fc_eclist_bin([<filter_option>])               binary",
+        "ssl_fc_err                                         integer",
+        "ssl_fc_err_str                                     string",
+        "ssl_fc_exporter_secret                             string",
+        "ssl_fc_extlist_bin([<filter_option>])              binary",
+        "ssl_fc_has_crt                                     boolean",
+        "ssl_fc_has_early                                   boolean",
+        "ssl_fc_has_sni                                     boolean",
+        "ssl_fc_is_resumed                                  boolean",
+        "ssl_fc_npn                                         string",
+        "ssl_fc_protocol                                    string",
+        "ssl_fc_protocol_hello_id                           integer",
+        "ssl_fc_server_handshake_traffic_secret             string",
+        "ssl_fc_server_random                               binary",
+        "ssl_fc_server_traffic_secret_0                     string",
+        "ssl_fc_session_id                                  binary",
+        "ssl_fc_session_key                                 binary",
+        "ssl_fc_sigalgs_bin([<filter_option>])              binary",
+        "ssl_fc_sni                                         string",
+        "ssl_fc_supported_versions_bin([<filter_option>])   binary",
+        "ssl_fc_unique_id                                   binary",
+        "ssl_fc_use_keysize                                 integer",
+        "ssl_s_chain_der                                    binary",
+        "ssl_s_der                                          binary",
+        "ssl_s_i_dn([<entry>[,<occ>[,<format>]]])           string",
+        "ssl_s_key_alg                                      string",
+        "ssl_s_notafter                                     string",
+        "ssl_s_notbefore                                    string",
+        "ssl_s_s_dn([<entry>[,<occ>[,<format>]]])           string",
+        "ssl_s_serial                                       binary",
+        "ssl_s_sha1                                         binary",
+        "ssl_s_sig_alg                                      string",
+        "ssl_s_version                                      integer",
+        "txn.timer.user                                     integer"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 394,
+          "source_sha256": "3df68f1098fb19f320507a06aeea656f46d5de92a960cb1db541e5c953a179e2",
+          "target_sha256": "fa70e7666379272c904e8583d917bb6492adb81e609ba46cc73995fd96bd771d"
+        },
+        {
+          "index": 396,
+          "source_sha256": "3df68f1098fb19f320507a06aeea656f46d5de92a960cb1db541e5c953a179e2",
+          "target_sha256": "fa70e7666379272c904e8583d917bb6492adb81e609ba46cc73995fd96bd771d",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 414,
+      "source_sha256": "a3b1afac617f07a2f065662a3344a3240ed550dde03f68a82b5e982e9a93a4e6",
+      "target_sha256": "4327a30b0c69b3d6d8bc4e382507ec8dd32c73e0e4822bf8189d62ef0023545c",
+      "classification": "argument-description",
+      "protected_literals": [
+        "GREASE",
+        "RFC8701"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 411,
+          "source_sha256": "a3b1afac617f07a2f065662a3344a3240ed550dde03f68a82b5e982e9a93a4e6",
+          "target_sha256": "4327a30b0c69b3d6d8bc4e382507ec8dd32c73e0e4822bf8189d62ef0023545c"
+        },
+        {
+          "index": 413,
+          "source_sha256": "a3b1afac617f07a2f065662a3344a3240ed550dde03f68a82b5e982e9a93a4e6",
+          "target_sha256": "4327a30b0c69b3d6d8bc4e382507ec8dd32c73e0e4822bf8189d62ef0023545c",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 417,
+      "source_sha256": "a3b1afac617f07a2f065662a3344a3240ed550dde03f68a82b5e982e9a93a4e6",
+      "target_sha256": "4327a30b0c69b3d6d8bc4e382507ec8dd32c73e0e4822bf8189d62ef0023545c",
+      "classification": "argument-description",
+      "protected_literals": [
+        "GREASE",
+        "RFC8701"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 414,
+          "source_sha256": "a3b1afac617f07a2f065662a3344a3240ed550dde03f68a82b5e982e9a93a4e6",
+          "target_sha256": "4327a30b0c69b3d6d8bc4e382507ec8dd32c73e0e4822bf8189d62ef0023545c"
+        },
+        {
+          "index": 416,
+          "source_sha256": "a3b1afac617f07a2f065662a3344a3240ed550dde03f68a82b5e982e9a93a4e6",
+          "target_sha256": "4327a30b0c69b3d6d8bc4e382507ec8dd32c73e0e4822bf8189d62ef0023545c",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 419,
+      "source_sha256": "a3b1afac617f07a2f065662a3344a3240ed550dde03f68a82b5e982e9a93a4e6",
+      "target_sha256": "4327a30b0c69b3d6d8bc4e382507ec8dd32c73e0e4822bf8189d62ef0023545c",
+      "classification": "argument-description",
+      "protected_literals": [
+        "GREASE",
+        "RFC8701"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 416,
+          "source_sha256": "a3b1afac617f07a2f065662a3344a3240ed550dde03f68a82b5e982e9a93a4e6",
+          "target_sha256": "4327a30b0c69b3d6d8bc4e382507ec8dd32c73e0e4822bf8189d62ef0023545c"
+        },
+        {
+          "index": 418,
+          "source_sha256": "a3b1afac617f07a2f065662a3344a3240ed550dde03f68a82b5e982e9a93a4e6",
+          "target_sha256": "4327a30b0c69b3d6d8bc4e382507ec8dd32c73e0e4822bf8189d62ef0023545c",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 423,
+      "source_sha256": "61a6afabd8ea38f71db4f96ff93ac05c8be70cfe0308d1387056974c18b2c4f6",
+      "target_sha256": "446291647bb33cc4198565f8cb8ad5434040559caf2c3e6c08331d6c8290ce05",
+      "classification": "argument-description",
+      "protected_literals": [
+        "GREASE",
+        "RFC8701"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 420,
+          "source_sha256": "61a6afabd8ea38f71db4f96ff93ac05c8be70cfe0308d1387056974c18b2c4f6",
+          "target_sha256": "446291647bb33cc4198565f8cb8ad5434040559caf2c3e6c08331d6c8290ce05"
+        },
+        {
+          "index": 422,
+          "source_sha256": "61a6afabd8ea38f71db4f96ff93ac05c8be70cfe0308d1387056974c18b2c4f6",
+          "target_sha256": "446291647bb33cc4198565f8cb8ad5434040559caf2c3e6c08331d6c8290ce05",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 426,
+      "source_sha256": "4d88d03abff9836370a5da397e6bc7e0d24e91620b1a1a196699764dd5feef57",
+      "target_sha256": "dc45db3775a648afda6d602a308bcb33119efdea3bbd949bd5ebad7fe68d8a8a",
+      "classification": "argument-description",
+      "protected_literals": [
+        "GREASE",
+        "RFC8701"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 423,
+          "source_sha256": "4d88d03abff9836370a5da397e6bc7e0d24e91620b1a1a196699764dd5feef57",
+          "target_sha256": "dc45db3775a648afda6d602a308bcb33119efdea3bbd949bd5ebad7fe68d8a8a"
+        },
+        {
+          "index": 425,
+          "source_sha256": "4d88d03abff9836370a5da397e6bc7e0d24e91620b1a1a196699764dd5feef57",
+          "target_sha256": "dc45db3775a648afda6d602a308bcb33119efdea3bbd949bd5ebad7fe68d8a8a",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 430,
+      "source_sha256": "0cc9c1eb26fbcff9a4ef358516b3787ca53e09a171d182c91ba1a30d84ff92ae",
+      "target_sha256": "5002489e5cecc208fd81e99a77055c719e56fc541f1dfda1a26f5edc562ff7e8",
+      "classification": "argument-description",
+      "protected_literals": [
+        "ssl_fc_sni_end:",
+        "ssl_fc_sni_reg:"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 427,
+          "source_sha256": "0cc9c1eb26fbcff9a4ef358516b3787ca53e09a171d182c91ba1a30d84ff92ae",
+          "target_sha256": "5002489e5cecc208fd81e99a77055c719e56fc541f1dfda1a26f5edc562ff7e8"
+        },
+        {
+          "index": 429,
+          "source_sha256": "0cc9c1eb26fbcff9a4ef358516b3787ca53e09a171d182c91ba1a30d84ff92ae",
+          "target_sha256": "5002489e5cecc208fd81e99a77055c719e56fc541f1dfda1a26f5edc562ff7e8",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 434,
+      "source_sha256": "375d723378f9015befa1af0755eacc577b340efe987e9b788be97b4916d8e3cd",
+      "target_sha256": "03d29b7e8e312f3c613184ced43adf084c76f7ccb57c604edda7ac980ff3ca4f",
+      "classification": "table-labels",
+      "protected_literals": [
+        "<length>",
+        "<name>",
+        "<occ>",
+        "<offset1>",
+        "<offset2>",
+        "<offset>",
+        "<token>",
+        "integer"
+      ],
+      "protected_lines": [
+        "distcc_body(<token>[,<occ>])                          binary",
+        "distcc_param(<token>[,<occ>])                         integer",
+        "payload(<offset>,<length>)                            binary",
+        "payload_lv(<offset1>,<length>[,<offset2>])            binary",
+        "rdp_cookie([<name>])                                  string",
+        "rdp_cookie_cnt([name])                                integer",
+        "rep_ssl_hello_type                                    integer",
+        "req.len                                               integer",
+        "req.payload(<offset>,<length>)                        binary",
+        "req.payload_lv(<offset1>,<length>[,<offset2>])        binary",
+        "req.proto_http                                        boolean",
+        "req.rdp_cookie([<name>])                              string",
+        "req.rdp_cookie_cnt([name])                            integer",
+        "req.ssl_alpn                                          string",
+        "req.ssl_cipherlist                                    binary",
+        "req.ssl_ec_ext                                        boolean",
+        "req.ssl_hello_type                                    integer",
+        "req.ssl_keyshare_groups                               binary",
+        "req.ssl_sigalgs                                       binary",
+        "req.ssl_sni                                           string",
+        "req.ssl_st_ext                                        integer",
+        "req.ssl_supported_groups                              binary",
+        "req.ssl_ver                                           integer",
+        "req_len                                               integer",
+        "req_proto_http                                        boolean",
+        "req_ssl_hello_type                                    integer",
+        "req_ssl_sni                                           string",
+        "req_ssl_ver                                           integer",
+        "res.len                                               integer",
+        "res.payload(<offset>,<length>)                        binary",
+        "res.payload_lv(<offset1>,<length>[,<offset2>])        binary",
+        "res.ssl_hello_type                                    integer"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 431,
+          "source_sha256": "375d723378f9015befa1af0755eacc577b340efe987e9b788be97b4916d8e3cd",
+          "target_sha256": "03d29b7e8e312f3c613184ced43adf084c76f7ccb57c604edda7ac980ff3ca4f"
+        },
+        {
+          "index": 433,
+          "source_sha256": "375d723378f9015befa1af0755eacc577b340efe987e9b788be97b4916d8e3cd",
+          "target_sha256": "03d29b7e8e312f3c613184ced43adf084c76f7ccb57c604edda7ac980ff3ca4f",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 441,
+      "source_sha256": "08a284bac61108fd7cb0f4f9986cd1fb094c35eb2c9cf46253307a7ec5d6ef05",
+      "target_sha256": "5afe271b69162e94b3ca5d754b022834ec3662e24f0b4e1a4ccc6675a667ed4b",
+      "classification": "argument-description",
+      "protected_literals": [
+        "<length>",
+        "<offset>",
+        "req.payload(<offset>,<length>):"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 438,
+          "source_sha256": "08a284bac61108fd7cb0f4f9986cd1fb094c35eb2c9cf46253307a7ec5d6ef05",
+          "target_sha256": "5afe271b69162e94b3ca5d754b022834ec3662e24f0b4e1a4ccc6675a667ed4b"
+        },
+        {
+          "index": 440,
+          "source_sha256": "08a284bac61108fd7cb0f4f9986cd1fb094c35eb2c9cf46253307a7ec5d6ef05",
+          "target_sha256": "5afe271b69162e94b3ca5d754b022834ec3662e24f0b4e1a4ccc6675a667ed4b",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 443,
+      "source_sha256": "20e41f3c4d5c8c6aebfdd2ace0d2fe05670f9b2bdc6b0b95c451ea53f8954ab7",
+      "target_sha256": "746213da2b480e76947f47829250ecd51e49573a3f44ce65f6292f972ddeda60",
+      "classification": "argument-description",
+      "protected_literals": [
+        "<length>",
+        "<offset1>",
+        "<offset2>",
+        "req.payload_lv(<offset1>,<length>[,<offset2>]):"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 440,
+          "source_sha256": "20e41f3c4d5c8c6aebfdd2ace0d2fe05670f9b2bdc6b0b95c451ea53f8954ab7",
+          "target_sha256": "746213da2b480e76947f47829250ecd51e49573a3f44ce65f6292f972ddeda60"
+        },
+        {
+          "index": 442,
+          "source_sha256": "20e41f3c4d5c8c6aebfdd2ace0d2fe05670f9b2bdc6b0b95c451ea53f8954ab7",
+          "target_sha256": "746213da2b480e76947f47829250ecd51e49573a3f44ce65f6292f972ddeda60",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 446,
+      "source_sha256": "5c18ee1f55d713d60d5b1398c7ce4361ba2e3bb2fc97faa8a160e27e7ee76434",
+      "target_sha256": "4aca732ccd2444e6eb505e95b9e21f069355cd085058a414b5423c5e2f84a905",
+      "classification": "argument-description",
+      "protected_literals": [
+        "<name>",
+        "req.rdp_cookie([<name>]):"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 443,
+          "source_sha256": "5c18ee1f55d713d60d5b1398c7ce4361ba2e3bb2fc97faa8a160e27e7ee76434",
+          "target_sha256": "4aca732ccd2444e6eb505e95b9e21f069355cd085058a414b5423c5e2f84a905"
+        },
+        {
+          "index": 445,
+          "source_sha256": "5c18ee1f55d713d60d5b1398c7ce4361ba2e3bb2fc97faa8a160e27e7ee76434",
+          "target_sha256": "4aca732ccd2444e6eb505e95b9e21f069355cd085058a414b5423c5e2f84a905",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 449,
+      "source_sha256": "9b233b2dc588f598ed4205f99d16b4ebcbedb3ffb9f9d49f5794e60f14571fe6",
+      "target_sha256": "b4b1e1f8472f1cf040ef33c8fc88a104f53a50521dfcb71bc9abaf223a8d5ee5",
+      "classification": "argument-description",
+      "protected_literals": [
+        "<name>",
+        "req.rdp_cookie_cnt([<name>]):"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 446,
+          "source_sha256": "9b233b2dc588f598ed4205f99d16b4ebcbedb3ffb9f9d49f5794e60f14571fe6",
+          "target_sha256": "b4b1e1f8472f1cf040ef33c8fc88a104f53a50521dfcb71bc9abaf223a8d5ee5"
+        },
+        {
+          "index": 448,
+          "source_sha256": "9b233b2dc588f598ed4205f99d16b4ebcbedb3ffb9f9d49f5794e60f14571fe6",
+          "target_sha256": "b4b1e1f8472f1cf040ef33c8fc88a104f53a50521dfcb71bc9abaf223a8d5ee5",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 457,
+      "source_sha256": "fb7ee0a32c9c6cbf605995cc2bd7d8a332d0e9f7888fab540b89ad9b815ca70f",
+      "target_sha256": "23316faa9cda60c085bd92b90bf56a360f733c0da667ecfd1da6b75ef8e74613",
+      "classification": "argument-description",
+      "protected_literals": [
+        "req.ssl_sni:"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 454,
+          "source_sha256": "fb7ee0a32c9c6cbf605995cc2bd7d8a332d0e9f7888fab540b89ad9b815ca70f",
+          "target_sha256": "23316faa9cda60c085bd92b90bf56a360f733c0da667ecfd1da6b75ef8e74613"
+        },
+        {
+          "index": 456,
+          "source_sha256": "fb7ee0a32c9c6cbf605995cc2bd7d8a332d0e9f7888fab540b89ad9b815ca70f",
+          "target_sha256": "23316faa9cda60c085bd92b90bf56a360f733c0da667ecfd1da6b75ef8e74613",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 461,
+      "source_sha256": "85b990bb14915a80b0d0fa514ad42f6d29757f625291c40a80d8543fd27d4899",
+      "target_sha256": "446273e2f74bef301e78d35e2aafe77ef4af403657dcb32f0b19cee999559365",
+      "classification": "argument-description",
+      "protected_literals": [
+        "req.ssl_ver:"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 458,
+          "source_sha256": "85b990bb14915a80b0d0fa514ad42f6d29757f625291c40a80d8543fd27d4899",
+          "target_sha256": "446273e2f74bef301e78d35e2aafe77ef4af403657dcb32f0b19cee999559365"
+        },
+        {
+          "index": 460,
+          "source_sha256": "85b990bb14915a80b0d0fa514ad42f6d29757f625291c40a80d8543fd27d4899",
+          "target_sha256": "446273e2f74bef301e78d35e2aafe77ef4af403657dcb32f0b19cee999559365",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 464,
+      "source_sha256": "917ba5f12891f3bbb65e1f5edbdebcc25bf927b941a4c769156b083d8b7bcee6",
+      "target_sha256": "b98733f221a5640f8e071b8155c04463ff9bef92ffa48da01e0911b4bf7ee212",
+      "classification": "table-labels",
+      "protected_literals": [
+        "<delim>",
+        "<header>",
+        "<idx>",
+        "<name>",
+        "<occ>",
+        "<options>",
+        "<unit>",
+        "<userlist>",
+        "integer"
+      ],
+      "protected_lines": [
+        "base                                               string",
+        "base32                                             integer",
+        "base32+src                                         binary",
+        "baseq                                              string",
+        "capture.req.hdr(<idx>)                             string",
+        "capture.req.method                                 string",
+        "capture.req.uri                                    string",
+        "capture.req.ver                                    string",
+        "capture.res.hdr(<idx>)                             string",
+        "capture.res.ver                                    string",
+        "cook([<name>])                                     string",
+        "cook_cnt([<name>])                                 integer",
+        "cook_val([<name>])                                 integer",
+        "cookie([<name>])                                   string",
+        "hdr([<name>[,<occ>]])                              string",
+        "hdr_cnt([<header>])                                integer",
+        "hdr_ip([<name>[,<occ>]])                           ip",
+        "hdr_val([<name>[,<occ>]])                          integer",
+        "http_auth(<userlist>)                              boolean",
+        "http_auth_bearer([<header>])                       string",
+        "http_auth_group(<userlist>)                        string",
+        "http_auth_pass                                     string",
+        "http_auth_type                                     string",
+        "http_auth_user                                     string",
+        "http_first_req                                     boolean",
+        "method                                             integer",
+        "path                                               string",
+        "pathq                                              string",
+        "query([<options>])                                 string",
+        "req.body                                           binary",
+        "req.body_len                                       integer",
+        "req.body_param([<name>[,i]])                       string",
+        "req.body_size                                      integer",
+        "req.cook([<name>])                                 string",
+        "req.cook_cnt([<name>])                             integer",
+        "req.cook_names([<delim>])                          string",
+        "req.cook_val([<name>])                             integer",
+        "req.fhdr(<name>[,<occ>])                           string",
+        "req.fhdr_cnt([<name>])                             integer",
+        "req.hdr([<name>[,<occ>]])                          string",
+        "req.hdr_cnt([<name>])                              integer",
+        "req.hdr_ip([<name>[,<occ>]])                       ip",
+        "req.hdr_names([<delim>])                           string",
+        "req.hdr_val([<name>[,<occ>]])                      integer",
+        "req.hdrs                                           string",
+        "req.hdrs_bin                                       binary",
+        "req.timer.hdr                                      integer",
+        "req.timer.idle                                     integer",
+        "req.timer.queue                                    integer",
+        "req.timer.tq                                       integer",
+        "req.ver                                            string",
+        "req_ver                                            string",
+        "request_date([<unit>])                             integer",
+        "res.body                                           binary",
+        "res.body_len                                       integer",
+        "res.body_size                                      integer",
+        "res.cache_hit                                      boolean",
+        "res.cache_name                                     string",
+        "res.comp                                           boolean",
+        "res.comp_algo                                      string",
+        "res.cook([<name>])                                 string",
+        "res.cook_cnt([<name>])                             integer",
+        "res.cook_names([<delim>])                          string",
+        "res.cook_val([<name>])                             integer",
+        "res.fhdr([<name>[,<occ>]])                         string",
+        "res.fhdr_cnt([<name>])                             integer",
+        "res.hdr([<name>[,<occ>]])                          string",
+        "res.hdr_cnt([<name>])                              integer",
+        "res.hdr_ip([<name>[,<occ>]])                       ip",
+        "res.hdr_names([<delim>])                           string",
+        "res.hdr_val([<name>[,<occ>]])                      integer",
+        "res.hdrs                                           string",
+        "res.hdrs_bin                                       binary",
+        "res.timer.hdr                                      integer",
+        "res.ver                                            string",
+        "resp_ver                                           string",
+        "scook([<name>])                                    string",
+        "scook_cnt([<name>])                                integer",
+        "scook_val([<name>])                                integer",
+        "server_status                                      integer",
+        "set-cookie([<name>])                               string",
+        "shdr([<name>[,<occ>]])                             string",
+        "shdr_cnt([<name>])                                 integer",
+        "shdr_ip([<name>[,<occ>]])                          ip",
+        "shdr_val([<name>[,<occ>]])                         integer",
+        "status                                             integer",
+        "txn.status                                         integer",
+        "txn.timer.total                                    integer",
+        "unique-id                                          string",
+        "url                                                string",
+        "url32                                              integer",
+        "url32+src                                          binary",
+        "url_ip                                             ip",
+        "url_param([<name>[,<delim>[,i]]])                  string",
+        "url_port                                           integer",
+        "urlp([<name>[,<delim>[,i]]])                       string",
+        "urlp_val([<name>[,<delim>[,i]]])                   integer"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 461,
+          "source_sha256": "917ba5f12891f3bbb65e1f5edbdebcc25bf927b941a4c769156b083d8b7bcee6",
+          "target_sha256": "b98733f221a5640f8e071b8155c04463ff9bef92ffa48da01e0911b4bf7ee212"
+        },
+        {
+          "index": 463,
+          "source_sha256": "917ba5f12891f3bbb65e1f5edbdebcc25bf927b941a4c769156b083d8b7bcee6",
+          "target_sha256": "b98733f221a5640f8e071b8155c04463ff9bef92ffa48da01e0911b4bf7ee212",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 465,
+      "source_sha256": "3ddaeb6d681c9beea2394e7ecddf7c7d7c7eeadadf9e9aae261665070a999cfd",
+      "target_sha256": "da94c2ff1eea8982a8bfea988fb1cea8a975b2e89c497e2ef6191fc43eddfef7",
+      "classification": "argument-description",
+      "protected_literals": [
+        "base    :",
+        "base_beg:",
+        "base_dir:",
+        "base_dom:",
+        "base_end:",
+        "base_len:",
+        "base_reg:",
+        "base_sub:"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 462,
+          "source_sha256": "3ddaeb6d681c9beea2394e7ecddf7c7d7c7eeadadf9e9aae261665070a999cfd",
+          "target_sha256": "da94c2ff1eea8982a8bfea988fb1cea8a975b2e89c497e2ef6191fc43eddfef7"
+        },
+        {
+          "index": 464,
+          "source_sha256": "3ddaeb6d681c9beea2394e7ecddf7c7d7c7eeadadf9e9aae261665070a999cfd",
+          "target_sha256": "da94c2ff1eea8982a8bfea988fb1cea8a975b2e89c497e2ef6191fc43eddfef7",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 473,
+      "source_sha256": "75ae25916eae11b8d3a00a6b71c4e59c265c35671ebdd6a40e1e53c9e4db9ff7",
+      "target_sha256": "0c47bce902ca8aa5ca67da9af4a9d1e6b21d1a0d67580383ed7a725cb18c5cec",
+      "classification": "mixed-explanation",
+      "protected_literals": [
+        "<userlist>"
+      ],
+      "protected_lines": [
+        "http_auth_group(<userlist>): group ..."
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 470,
+          "source_sha256": "75ae25916eae11b8d3a00a6b71c4e59c265c35671ebdd6a40e1e53c9e4db9ff7",
+          "target_sha256": "0c47bce902ca8aa5ca67da9af4a9d1e6b21d1a0d67580383ed7a725cb18c5cec"
+        },
+        {
+          "index": 472,
+          "source_sha256": "75ae25916eae11b8d3a00a6b71c4e59c265c35671ebdd6a40e1e53c9e4db9ff7",
+          "target_sha256": "0c47bce902ca8aa5ca67da9af4a9d1e6b21d1a0d67580383ed7a725cb18c5cec",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 474,
+      "source_sha256": "f2adacc75190bf1370fa6dac3e9d722d98dc677c9be26ed7cf13017faefb1401",
+      "target_sha256": "10e5abb4b62bef31acc8e0706e7e4a9791ef7ac2a1da4b946b41f53411f98c56",
+      "classification": "argument-description",
+      "protected_literals": [
+        "method:"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 471,
+          "source_sha256": "f2adacc75190bf1370fa6dac3e9d722d98dc677c9be26ed7cf13017faefb1401",
+          "target_sha256": "10e5abb4b62bef31acc8e0706e7e4a9791ef7ac2a1da4b946b41f53411f98c56"
+        },
+        {
+          "index": 473,
+          "source_sha256": "f2adacc75190bf1370fa6dac3e9d722d98dc677c9be26ed7cf13017faefb1401",
+          "target_sha256": "10e5abb4b62bef31acc8e0706e7e4a9791ef7ac2a1da4b946b41f53411f98c56",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 476,
+      "source_sha256": "510d6781f8db7710d8d865b3297f2aebb23c6e35b73ef935ab62f0eba5b5c7d5",
+      "target_sha256": "73fed7752cb20a6dedb095cacd940cda552c42a424e920e0220b503f93de056a",
+      "classification": "argument-description",
+      "protected_literals": [
+        "path    :",
+        "path_beg:",
+        "path_dir:",
+        "path_dom:",
+        "path_end:",
+        "path_len:",
+        "path_reg:",
+        "path_sub:"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 473,
+          "source_sha256": "510d6781f8db7710d8d865b3297f2aebb23c6e35b73ef935ab62f0eba5b5c7d5",
+          "target_sha256": "73fed7752cb20a6dedb095cacd940cda552c42a424e920e0220b503f93de056a"
+        },
+        {
+          "index": 475,
+          "source_sha256": "510d6781f8db7710d8d865b3297f2aebb23c6e35b73ef935ab62f0eba5b5c7d5",
+          "target_sha256": "73fed7752cb20a6dedb095cacd940cda552c42a424e920e0220b503f93de056a",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 480,
+      "source_sha256": "359a32dbbeae50164295c3bbda1ed36e3fdf286d922e072c7278588507635f8c",
+      "target_sha256": "c0217d378958fc930cbb6917f4b55291c6a0d48ae5c4e25e070dd2f8d195096f",
+      "classification": "argument-description",
+      "protected_literals": [
+        "<name>",
+        "req.cook([<name>])    :",
+        "req.cook_beg([<name>]):",
+        "req.cook_dir([<name>]):",
+        "req.cook_dom([<name>]):",
+        "req.cook_end([<name>]):",
+        "req.cook_len([<name>]):",
+        "req.cook_reg([<name>]):",
+        "req.cook_sub([<name>]):"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 477,
+          "source_sha256": "359a32dbbeae50164295c3bbda1ed36e3fdf286d922e072c7278588507635f8c",
+          "target_sha256": "c0217d378958fc930cbb6917f4b55291c6a0d48ae5c4e25e070dd2f8d195096f"
+        },
+        {
+          "index": 479,
+          "source_sha256": "359a32dbbeae50164295c3bbda1ed36e3fdf286d922e072c7278588507635f8c",
+          "target_sha256": "c0217d378958fc930cbb6917f4b55291c6a0d48ae5c4e25e070dd2f8d195096f",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 487,
+      "source_sha256": "6811b4d394f48fcaa6b892f0521586c618c6d71c00a60f2c087911bd503d9245",
+      "target_sha256": "ce1f4a58932b1f5b0850e257d9202ec4098603a343112aeb2bc7aa70fbdc82d5",
+      "classification": "argument-description",
+      "protected_literals": [
+        "<name>",
+        "<occ>",
+        "hdr([<name>[,<occ>]])    :",
+        "hdr_beg([<name>[,<occ>]]):",
+        "hdr_dir([<name>[,<occ>]]):",
+        "hdr_dom([<name>[,<occ>]]):",
+        "hdr_end([<name>[,<occ>]]):",
+        "hdr_len([<name>[,<occ>]]):",
+        "hdr_reg([<name>[,<occ>]]):",
+        "hdr_sub([<name>[,<occ>]]):"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 484,
+          "source_sha256": "6811b4d394f48fcaa6b892f0521586c618c6d71c00a60f2c087911bd503d9245",
+          "target_sha256": "ce1f4a58932b1f5b0850e257d9202ec4098603a343112aeb2bc7aa70fbdc82d5"
+        },
+        {
+          "index": 486,
+          "source_sha256": "6811b4d394f48fcaa6b892f0521586c618c6d71c00a60f2c087911bd503d9245",
+          "target_sha256": "ce1f4a58932b1f5b0850e257d9202ec4098603a343112aeb2bc7aa70fbdc82d5",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 492,
+      "source_sha256": "bb18ee0e0aef85ac8ab48a3f1ec55f5df7faed540ab5f9a147462a430cd7b190",
+      "target_sha256": "d0ee3b104a7e8a7e84f8a70cafeaaa7f338c2e611635f29d64163b3f1d8e5a90",
+      "classification": "argument-description",
+      "protected_literals": [
+        "req.ver:"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 489,
+          "source_sha256": "bb18ee0e0aef85ac8ab48a3f1ec55f5df7faed540ab5f9a147462a430cd7b190",
+          "target_sha256": "d0ee3b104a7e8a7e84f8a70cafeaaa7f338c2e611635f29d64163b3f1d8e5a90"
+        },
+        {
+          "index": 491,
+          "source_sha256": "bb18ee0e0aef85ac8ab48a3f1ec55f5df7faed540ab5f9a147462a430cd7b190",
+          "target_sha256": "d0ee3b104a7e8a7e84f8a70cafeaaa7f338c2e611635f29d64163b3f1d8e5a90",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 495,
+      "source_sha256": "474de0f7ab575979c562e7215a986800a6087642f8fc2ee273e9d798fe857062",
+      "target_sha256": "228c58b92d3439da091c4f637c88e6401f8d3bd01b6b75c53f70001eecff7d61",
+      "classification": "argument-description",
+      "protected_literals": [
+        "<name>",
+        "res.scook([<name>]:"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 492,
+          "source_sha256": "474de0f7ab575979c562e7215a986800a6087642f8fc2ee273e9d798fe857062",
+          "target_sha256": "228c58b92d3439da091c4f637c88e6401f8d3bd01b6b75c53f70001eecff7d61"
+        },
+        {
+          "index": 494,
+          "source_sha256": "474de0f7ab575979c562e7215a986800a6087642f8fc2ee273e9d798fe857062",
+          "target_sha256": "228c58b92d3439da091c4f637c88e6401f8d3bd01b6b75c53f70001eecff7d61",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 502,
+      "source_sha256": "273364a0fcacc80bf07ee040750a8fb144fa5404dbbc869da67b46c15ac4ab0e",
+      "target_sha256": "0983b55167501798d59306fb9353f709c5c355a653408cbe8b4b5ea2f67e33b3",
+      "classification": "argument-description",
+      "protected_literals": [
+        "<name>",
+        "<occ>",
+        "res.hdr([<name>[,<occ>]])    :",
+        "res.hdr_beg([<name>[,<occ>]]):",
+        "res.hdr_dir([<name>[,<occ>]]):",
+        "res.hdr_dom([<name>[,<occ>]]):",
+        "res.hdr_end([<name>[,<occ>]]):",
+        "res.hdr_len([<name>[,<occ>]]):",
+        "res.hdr_reg([<name>[,<occ>]]):",
+        "res.hdr_sub([<name>[,<occ>]]):"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 499,
+          "source_sha256": "273364a0fcacc80bf07ee040750a8fb144fa5404dbbc869da67b46c15ac4ab0e",
+          "target_sha256": "0983b55167501798d59306fb9353f709c5c355a653408cbe8b4b5ea2f67e33b3"
+        },
+        {
+          "index": 501,
+          "source_sha256": "273364a0fcacc80bf07ee040750a8fb144fa5404dbbc869da67b46c15ac4ab0e",
+          "target_sha256": "0983b55167501798d59306fb9353f709c5c355a653408cbe8b4b5ea2f67e33b3",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 507,
+      "source_sha256": "8b149e5bde407a34a26bb1f719e7b461b9ab775ccadc624d6effd2cfbe87a3bf",
+      "target_sha256": "6ec6a09e2f4007df9fa3f155bd708c995b2b6398dab4ce96acb519157d73844b",
+      "classification": "argument-description",
+      "protected_literals": [
+        "resp.ver:"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 504,
+          "source_sha256": "8b149e5bde407a34a26bb1f719e7b461b9ab775ccadc624d6effd2cfbe87a3bf",
+          "target_sha256": "6ec6a09e2f4007df9fa3f155bd708c995b2b6398dab4ce96acb519157d73844b"
+        },
+        {
+          "index": 506,
+          "source_sha256": "8b149e5bde407a34a26bb1f719e7b461b9ab775ccadc624d6effd2cfbe87a3bf",
+          "target_sha256": "6ec6a09e2f4007df9fa3f155bd708c995b2b6398dab4ce96acb519157d73844b",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 509,
+      "source_sha256": "71343a0a0ec90ea5768c94696761e65b7a7458db5aea3424759fac99b5b6347b",
+      "target_sha256": "cae5eef4a5aa3ff8c68fc4d578931e0245807ca3e6f284e72e87596ddccb22e7",
+      "classification": "argument-description",
+      "protected_literals": [
+        "url    :",
+        "url_beg:",
+        "url_dir:",
+        "url_dom:",
+        "url_end:",
+        "url_len:",
+        "url_reg:",
+        "url_sub:"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 506,
+          "source_sha256": "71343a0a0ec90ea5768c94696761e65b7a7458db5aea3424759fac99b5b6347b",
+          "target_sha256": "cae5eef4a5aa3ff8c68fc4d578931e0245807ca3e6f284e72e87596ddccb22e7"
+        },
+        {
+          "index": 508,
+          "source_sha256": "71343a0a0ec90ea5768c94696761e65b7a7458db5aea3424759fac99b5b6347b",
+          "target_sha256": "cae5eef4a5aa3ff8c68fc4d578931e0245807ca3e6f284e72e87596ddccb22e7",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 511,
+      "source_sha256": "075c461d252cd6e30eff9000524f9839446b591c75d9ef4aefc847a107534608",
+      "target_sha256": "9b7646cab6f2cc03686cdfa86f8b41d473bee805448e7295e9920de68bd1af41",
+      "classification": "argument-description",
+      "protected_literals": [
+        "<delim>",
+        "<name>",
+        "urlp(<name>[,<delim>])    :",
+        "urlp_beg(<name>[,<delim>]):",
+        "urlp_dir(<name>[,<delim>]):",
+        "urlp_dom(<name>[,<delim>]):",
+        "urlp_end(<name>[,<delim>]):",
+        "urlp_len(<name>[,<delim>]):",
+        "urlp_reg(<name>[,<delim>]):",
+        "urlp_sub(<name>[,<delim>]):"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 508,
+          "source_sha256": "075c461d252cd6e30eff9000524f9839446b591c75d9ef4aefc847a107534608",
+          "target_sha256": "9b7646cab6f2cc03686cdfa86f8b41d473bee805448e7295e9920de68bd1af41"
+        },
+        {
+          "index": 510,
+          "source_sha256": "075c461d252cd6e30eff9000524f9839446b591c75d9ef4aefc847a107534608",
+          "target_sha256": "9b7646cab6f2cc03686cdfa86f8b41d473bee805448e7295e9920de68bd1af41",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 514,
+      "source_sha256": "1cf13d6b288b6dace4d54f73d775f8e21623697002c416f867fc36b36c078ab4",
+      "target_sha256": "550072fd7013ec1874cdd3acde6355f7f0cda75338102adbd0fd34f76139474b",
+      "classification": "table-labels",
+      "protected_literals": [
+        "<idx>",
+        "integer"
+      ],
+      "protected_lines": [
+        "internal.htx.data                                  integer",
+        "internal.htx.free                                  integer",
+        "internal.htx.free_data                             integer",
+        "internal.htx.has_eom                               boolean",
+        "internal.htx.nbblks                                integer",
+        "internal.htx.size                                  integer",
+        "internal.htx.used                                  integer",
+        "internal.htx_blk.size(<idx>)                       integer",
+        "internal.htx_blk.type(<idx>)                       string",
+        "internal.htx_blk.data(<idx>)                       binary",
+        "internal.htx_blk.hdrname(<idx>)                    string",
+        "internal.htx_blk.hdrval(<idx>)                     string",
+        "internal.htx_blk.start_line(<idx>)                 string",
+        "internal.strm.is_htx                               boolean"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 511,
+          "source_sha256": "1cf13d6b288b6dace4d54f73d775f8e21623697002c416f867fc36b36c078ab4",
+          "target_sha256": "550072fd7013ec1874cdd3acde6355f7f0cda75338102adbd0fd34f76139474b"
+        },
+        {
+          "index": 513,
+          "source_sha256": "1cf13d6b288b6dace4d54f73d775f8e21623697002c416f867fc36b36c078ab4",
+          "target_sha256": "550072fd7013ec1874cdd3acde6355f7f0cda75338102adbd0fd34f76139474b",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 521,
+      "source_sha256": "d161acfa57d73d0052c15952831c414c7f0e44bf17d0670231e32fdce7fcc61d",
+      "target_sha256": "eb417ddcea82cca0ce28e61b100530013ca06660979f5ec2c22833cd2c170cb3",
+      "classification": "table-labels",
+      "protected_literals": [
+        "\"*\"",
+        "\"/\"",
+        "ACL",
+        "CONNECT",
+        "DELETE",
+        "FALSE",
+        "FALSE            always_false                       ",
+        "GET",
+        "HEAD",
+        "HTTP",
+        "HTTP             req.proto_http                     ",
+        "HTTP_1",
+        "HTTP_1.0         req.ver 1.0                        ",
+        "HTTP_1.1         req.ver 1.1                        ",
+        "HTTP_2",
+        "HTTP_2.0         req.ver 2.0                        ",
+        "HTTP_3",
+        "HTTP_3.0         req.ver 3.0                        ",
+        "HTTP_CONTENT",
+        "HTTP_CONTENT     req.hdr_val(content-length) gt 0   ",
+        "HTTP_URL_ABS",
+        "HTTP_URL_ABS     url_reg ^[^/:]*://                 ",
+        "HTTP_URL_SLASH",
+        "HTTP_URL_SLASH   url_beg /                          ",
+        "HTTP_URL_STAR",
+        "HTTP_URL_STAR    url     *                          ",
+        "LOCALHOST",
+        "LOCALHOST        src 127.0.0.1/8::1                ",
+        "METH_CONNECT",
+        "METH_CONNECT     method  CONNECT                    ",
+        "METH_DELETE",
+        "METH_DELETE      method  DELETE                     ",
+        "METH_GET",
+        "METH_GET         method  GET HEAD                   ",
+        "METH_HEAD",
+        "METH_HEAD        method  HEAD                       ",
+        "METH_OPTIONS",
+        "METH_OPTIONS     method  OPTIONS                    ",
+        "METH_POST",
+        "METH_POST        method  POST                       ",
+        "METH_PUT",
+        "METH_PUT         method  PUT                        ",
+        "METH_TRACE",
+        "METH_TRACE       method  TRACE                      ",
+        "OPTIONS",
+        "POST",
+        "PUT",
+        "RDP",
+        "RDP_COOKIE",
+        "RDP_COOKIE       req.rdp_cookie_cnt gt 0            ",
+        "REQ_CONTENT",
+        "REQ_CONTENT      req.len gt 0                       ",
+        "TRACE",
+        "TRUE",
+        "TRUE             always_true                        ",
+        "URL",
+        "WAIT_END",
+        "WAIT_END         wait_end                           "
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "reviewed_whitespace_cleanup": {
+        "prior_target_sha256": "cf93f001ce68d2b4d2323c50dae00d7fc25ab62a813d8219b87482c3a35674fb",
+        "method": "Only trailing spaces removed from translated table/diagram caption; every non-whitespace character and data line unchanged."
+      },
+      "revalidation_history": [
+        {
+          "index": 518,
+          "source_sha256": "d161acfa57d73d0052c15952831c414c7f0e44bf17d0670231e32fdce7fcc61d",
+          "target_sha256": "eb417ddcea82cca0ce28e61b100530013ca06660979f5ec2c22833cd2c170cb3"
+        },
+        {
+          "index": 520,
+          "source_sha256": "d161acfa57d73d0052c15952831c414c7f0e44bf17d0670231e32fdce7fcc61d",
+          "target_sha256": "eb417ddcea82cca0ce28e61b100530013ca06660979f5ec2c22833cd2c170cb3",
+          "reason": "Exact source and pre-repair target hashes retained after root inserted pinned four-line missing_cl code fence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    }
+  ],
+  "literal_blocks": [
+    {
+      "lines": [
+        1766,
+        1771
+      ],
+      "start_column": 1,
+      "classification": "configuration",
+      "source_sha256": "e659371c620da8ac159bcb8d9fa4a710e6e35e7095044cc427b1a339c92faadd",
+      "revalidation_history": [
+        {
+          "lines": [
+            1722,
+            1727
+          ],
+          "start_column": 1,
+          "source_sha256": "f5ba14b6f6746433aa84ed74e3fae6d54c6fd8575c09b9e416abd1e2a44f9c1e"
+        },
+        {
+          "lines": [
+            1722,
+            1727
+          ],
+          "start_column": 1,
+          "source_sha256": "e659371c620da8ac159bcb8d9fa4a710e6e35e7095044cc427b1a339c92faadd",
+          "reason": "Exact literal relocated after root inserted three extra source lines."
+        },
+        {
+          "lines": [
+            1725,
+            1730
+          ],
+          "start_column": 1,
+          "source_sha256": "e659371c620da8ac159bcb8d9fa4a710e6e35e7095044cc427b1a339c92faadd",
+          "reason": "3.4.6-66 upgrade: exact witnessed unfenced code/output relocated without changes."
+        }
+      ],
+      "revalidation": "Exact reviewed snippet and source/target occurrence counts retained; line/column positions changed. Separately reviewed bind:4445 -> bind :4445 command separator repair matches pinned syntax."
+    }
+  ],
+  "literal_snippets": [],
+  "source_sha256": "7739ca9b311c4a143ca472f9043cae7e349d19da061c2b93165464beb3ad24fb",
+  "target_sha256": "c7663b70f9f96a5c2ea57e83b39c8bf77220df4b73c883cab4178ac35560ab3e",
+  "review_scope": "Complete identified explanatory-fence inventory reviewed separately from structural/numeric technical screening and selective manual prose review. No claim of full independent sentence-by-sentence review of all prose.",
+  "literal_formatting_revalidation": {
+    "method": "Exact reviewed predecessor hashes and current source/target literal equality; remove obsolete protection only with proven default-protected exact fenced replacement.",
+    "events": [
+      {
+        "row": 1,
+        "action": "exact literal range rebased",
+        "source_sha256": "f622033f6add527e11447d214a5597be7242363d54cff47a201cdb65b3b122b5",
+        "lines": [
+          493,
+          495
+        ],
+        "start_column": 1
+      },
+      {
+        "row": 2,
+        "action": "exact literal range rebased",
+        "source_sha256": "f5ba14b6f6746433aa84ed74e3fae6d54c6fd8575c09b9e416abd1e2a44f9c1e",
+        "lines": [
+          1722,
+          1727
+        ],
+        "start_column": 1
+      },
+      {
+        "row": 3,
+        "action": "old unfenced-code protection replaced by default byte-for-byte fence protection",
+        "old_sha256": "bba75aec286edf0a1100a2fd189117a93d985fd06c6ce19e3211d584a65a3150",
+        "source_snapshot": "/tmp/doc-pg-center-haproxy-review-20261013/baseline/content/docs/haproxy/acls-and-samples.md",
+        "current_verbatim_fences": [
+          260
+        ]
+      },
+      {
+        "row": 4,
+        "action": "old unfenced-code protection replaced by default byte-for-byte fence protection",
+        "old_sha256": "8a647be802182fe63a1424882cfa6319a2058e7d58e1d1f3bc6f7e4dfec2b38f",
+        "source_snapshot": "/tmp/doc-pg-center-haproxy-review-20261013/baseline/content/docs/haproxy/acls-and-samples.md",
+        "current_verbatim_fences": [
+          261
+        ]
+      }
+    ]
+  }
+}

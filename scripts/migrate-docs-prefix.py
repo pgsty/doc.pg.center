@@ -29,7 +29,7 @@ ALIAS_RE = re.compile(r"^aliases:.*(?:\n[ \t]+-[^\n]*)*\n", re.MULTILINE)
 
 def prefix_url(url: str) -> str:
     parsed = urlsplit(url)
-    if parsed.netloc and parsed.netloc not in {"pig.center", "www.pig.center"}:
+    if parsed.netloc and parsed.netloc not in {"doc.pg.center", "www.doc.pg.center"}:
         return url
     if parsed.scheme and parsed.scheme not in {"http", "https"}:
         return url

@@ -1,0 +1,13 @@
+{
+  "source": "content/docs/patroni/config/_index.md",
+  "language": "ru",
+  "fences": [],
+  "literal_snippets": [
+    {
+      "classification": "configuration",
+      "text": "#FIXME",
+      "source_sha256": "87335c49a877d747060e6959faae193e26b2ec08cb6864f4d1a5631648b0c5fb",
+      "reason": "Upstream sample-config placeholder literal (#FIXME) faithfully mirrored in the Russian translation; registered so the placeholder lint does not flag it."
+    }
+  ]
+}

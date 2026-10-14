@@ -76,6 +76,11 @@ def load_base_translator() -> ModuleType:
 
 
 BASE = load_base_translator()
+ROUTES_SPEC = importlib.util.spec_from_file_location(
+    "_russian_route_values", Path(__file__).with_name("russian_routes.py")
+)
+ROUTES = importlib.util.module_from_spec(ROUTES_SPEC)
+ROUTES_SPEC.loader.exec_module(ROUTES)
 Cache = BASE.Cache
 HEADING_RE = BASE.HEADING_RE
 FENCE_RE = BASE.FENCE_RE
@@ -1090,17 +1095,9 @@ def translate_body(
 def localize_internal_links(document: str) -> str:
     """Prefix Russian documentation routes without changing shared assets."""
 
+    if document.startswith("---\n") and (end := document.find("\n---\n", 4)) >= 0:
+        return document[:end + 5] + localize_internal_links(document[end + 5:])
     route_names = tuple(f"docs/{name}" for name in SUPPORTED_COMPONENTS) + ("attribution", "search")
-    routes = "|".join(re.escape(route) for route in route_names)
-    pattern = re.compile(
-        rf"(?<![A-Za-z0-9_:/])/(?P<route>{routes})(?P<tail>/|(?=[#?)\"']))"
-    )
-    asset_re = re.compile(
-        rf"/ru/(?P<route>{routes})/(?P<asset>[^\s)>'\"]+\."
-        r"(?:png|jpe?g|gif|webp|avif|svg|ico|pdf|zip|tar|gz|json|txt|csv|"
-        r"ya?ml|toml|ini|conf))",
-        flags=re.IGNORECASE,
-    )
     lines = document.splitlines(keepends=True)
     indented_flags = [False] * len(lines)
     index = 0
@@ -1152,12 +1149,14 @@ def localize_internal_links(document: str) -> str:
             if "-->" not in line:
                 in_comment = True
             continue
-        lower = line.lower()
-        if in_pre or "<pre" in lower:
+        markup = inline_literal_re.sub("", line)
+        opens_pre = bool(re.search(r"<pre(?=[\s>])", markup, flags=re.IGNORECASE))
+        closes_pre = bool(re.search(r"</pre\s*>", markup, flags=re.IGNORECASE))
+        if in_pre or opens_pre:
             output.append(line)
-            if "</pre>" in lower:
+            if closes_pre:
                 in_pre = False
-            elif "<pre" in lower:
+            elif opens_pre:
                 in_pre = True
             continue
         if indented_flags[index]:
@@ -1165,13 +1164,9 @@ def localize_internal_links(document: str) -> str:
             continue
         parts = inline_literal_re.split(line)
         for part_index in range(0, len(parts), 2):
-            parts[part_index] = pattern.sub(
-                lambda match: f'/ru/{match.group("route")}{match.group("tail")}',
-                parts[part_index],
-            )
-            parts[part_index] = asset_re.sub(
-                lambda match: f'/{match.group("route")}/{match.group("asset")}',
-                parts[part_index],
+            parts[part_index] = ROUTES.transform_route_text(
+                parts[part_index], route_names, localize=True,
+                preserve_assets=True, allow_site_absolute=False,
             )
         output.append("".join(parts))
     return "".join(output)
@@ -1180,17 +1175,10 @@ def localize_internal_links(document: str) -> str:
 def normalize_localized_routes(document: str) -> str:
     """Reverse localized routes for source/target structural comparison."""
 
-    routes = "|".join(
-        re.escape(route) for route in tuple(f"docs/{name}" for name in SUPPORTED_COMPONENTS) + ("attribution", "search")
-    )
-    pattern = re.compile(rf"/ru/(?P<route>{routes})(?=/|[#?)\"'])")
-    # Reuse the same literal-awareness as localization by temporarily swapping
-    # the forward route marker for a sentinel that the localizer cannot match.
-    sentinel = "\ue100RU_ROUTE\ue101"
-    protected = pattern.sub(lambda match: sentinel + match.group("route"), document)
-    # The sentinel replacement above is intentionally global; restore routes
-    # inside literals before normalizing prose so code remains byte-for-byte.
-    lines = protected.splitlines(keepends=True)
+    if document.startswith("---\n") and (end := document.find("\n---\n", 4)) >= 0:
+        return document[:end + 5] + normalize_localized_routes(document[end + 5:])
+    route_names = tuple(f"docs/{name}" for name in SUPPORTED_COMPONENTS) + ("attribution", "search")
+    lines = document.splitlines(keepends=True)
     original_lines = document.splitlines(keepends=True)
     output: list[str] = []
     fence_marker = ""
@@ -1204,7 +1192,8 @@ def normalize_localized_routes(document: str) -> str:
     index = 0
     while index < len(lines):
         previous_blank = index == 0 or not lines[index - 1].strip()
-        if not previous_blank or not lines[index].startswith(("    ", "\t")):
+        nested_list = re.match(r"^\s*(?:[-+*]|\d{1,3}[.)])\s+", lines[index])
+        if not previous_blank or not lines[index].startswith(("    ", "\t")) or nested_list:
             index += 1
             continue
         while index < len(lines) and (
@@ -1234,12 +1223,14 @@ def normalize_localized_routes(document: str) -> str:
             if "-->" not in original:
                 in_comment = True
             continue
-        lower = original.lower()
-        if in_pre or "<pre" in lower:
+        markup = inline_literal_re.sub("", original)
+        opens_pre = bool(re.search(r"<pre(?=[\s>])", markup, flags=re.IGNORECASE))
+        closes_pre = bool(re.search(r"</pre\s*>", markup, flags=re.IGNORECASE))
+        if in_pre or opens_pre:
             output.append(original)
-            if "</pre>" in lower:
+            if closes_pre:
                 in_pre = False
-            elif "<pre" in lower:
+            elif opens_pre:
                 in_pre = True
             continue
         if indented_flags[index]:
@@ -1252,9 +1243,11 @@ def normalize_localized_routes(document: str) -> str:
             original_parts = inline_literal_re.split(original)
             if part_index < len(original_parts):
                 parts[part_index] = original_parts[part_index]
-        output.append(
-            "".join(parts).replace(sentinel, "/")
-        )
+        for part_index in range(0, len(parts), 2):
+            parts[part_index] = ROUTES.transform_route_text(
+                parts[part_index], route_names, allow_site_absolute=False,
+            )
+        output.append("".join(parts))
     return "".join(output)
 
 

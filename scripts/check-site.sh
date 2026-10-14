@@ -4,7 +4,7 @@ set -euo pipefail
 project_dir=$(cd "$(dirname "$0")/.." && pwd)
 content_dir="$project_dir/content"
 docs_dir="$content_dir/docs"
-build_dir=$(mktemp -d "${TMPDIR:-/tmp}/pig-center-check.XXXXXX")
+build_dir=$(mktemp -d "${TMPDIR:-/tmp}/doc-pg-center-check.XXXXXX")
 trap 'rm -rf "$build_dir"' EXIT
 export PYTHONPYCACHEPREFIX="$build_dir/python-cache"
 
@@ -47,31 +47,39 @@ test "$legacy_french_count" -eq "$legacy_complete_expected"
 test "$english_count" -eq "$total_complete_expected"
 test "$chinese_count" -eq "$total_complete_expected"
 test "$french_count" -eq "$total_complete_expected"
-test "$japanese_count" -eq 192
-test "$german_count" -eq 161
-test "$russian_count" -eq 210
+test "$japanese_count" -eq 215
+test "$german_count" -eq 215
+test "$russian_count" -eq "$total_complete_expected"
 test "$(find "$docs_dir/pgbouncer" -type f -name '*.ja.md' | wc -l | tr -d ' ')" -eq 9
-test "$(find "$docs_dir/pgbouncer" -type f -name '*.de.md' | wc -l | tr -d ' ')" -eq 9
+test "$(find "$docs_dir/pgbackrest" -type f -name '*.ja.md' | wc -l | tr -d ' ')" -eq 29
+test "$(find "$docs_dir/pgbackrest" -type f -name '*.de.md' | wc -l | tr -d ' ')" -eq 29
 test "$(find "$docs_dir/pgbadger" -type f -name '*.de.md' | wc -l | tr -d ' ')" -eq 16
+test "$(find "$docs_dir/pgbouncer" -type f -name '*.de.md' | wc -l | tr -d ' ')" -eq 9
+test "$(find "$docs_dir/patroni" -type f -name '*.de.md' | wc -l | tr -d ' ')" -eq 24
 test "$(find "$docs_dir/patroni" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -eq 24
+test "$(find "$docs_dir/pgbackrest" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -eq 29
 test "$(find "$docs_dir/pgbouncer" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -eq 9
 test "$(find "$docs_dir/pgbadger" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -eq 16
 test "$(find "$docs_dir/etcd" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -eq 99
-for language in ja de ru; do
-  test "$(find "$docs_dir/pgbackrest" -type f -name "*.$language.md" | wc -l | tr -d ' ')" -eq 29
-done
+test "$(find "$docs_dir/etcd" -type f -name '*.de.md' | wc -l | tr -d ' ')" -eq "$etcd_markdown_expected"
 test "$haproxy_count" -eq "$haproxy_expected"
 test "$haproxy_chinese_count" -eq "$haproxy_expected"
 test "$haproxy_french_count" -eq "$haproxy_expected"
+test "$(find "$docs_dir/haproxy" -type f -name '*.ja.md' | wc -l | tr -d ' ')" -eq "$haproxy_expected"
+test "$(find "$docs_dir/haproxy" -type f -name '*.de.md' | wc -l | tr -d ' ')" -eq "$haproxy_expected"
+test "$(find "$docs_dir/haproxy" -type f -name '*.ru.md' | wc -l | tr -d ' ')" -eq "$haproxy_expected"
 test "$haproxy_divider_count" -eq 3
 test "$haproxy_chinese_divider_count" -eq 3
 test "$haproxy_french_divider_count" -eq 3
+test "$(find "$docs_dir/haproxy" -maxdepth 1 -type f -name '_div_*.ja.md' | wc -l | tr -d ' ')" -eq 3
+test "$(find "$docs_dir/haproxy" -maxdepth 1 -type f -name '_div_*.de.md' | wc -l | tr -d ' ')" -eq 3
+test "$(find "$docs_dir/haproxy" -maxdepth 1 -type f -name '_div_*.ru.md' | wc -l | tr -d ' ')" -eq 3
+test "$(find "$docs_dir/haproxy" -maxdepth 1 -type f -name '*.ru.md' ! -name '_div_*.ru.md' | wc -l | tr -d ' ')" -eq 35
 test "$haproxy_reading_count" -eq 34
 test "$etcd_markdown_count" -eq "$etcd_markdown_expected"
 test "$etcd_chinese_count" -eq "$etcd_markdown_expected"
 test "$etcd_french_count" -eq "$etcd_markdown_expected"
 test "$(find "$docs_dir/etcd" -type f -name '*.ja.md' | wc -l | tr -d ' ')" -eq "$etcd_markdown_expected"
-test "$(find "$docs_dir/etcd" -type f -name '*.de.md' | wc -l | tr -d ' ')" -eq "$etcd_markdown_expected"
 test "$etcd_asset_count" -eq "$etcd_asset_expected"
 test "$haproxy_weights" = "$(seq 10 10 370)"
 test -d "$docs_dir"
@@ -198,9 +206,9 @@ fi
 
 grep -Eq '^require github\.com/pgsty/oink v1\.2\.0$' "$project_dir/go.mod"
 
-test "$(cat "$project_dir/static/CNAME")" = 'pig.center'
-grep -Fxq 'baseURL: https://pig.center/' "$project_dir/hugo.yaml"
-grep -Fxq '  productionURL: https://pig.center' "$project_dir/hugo.yaml"
+test "$(cat "$project_dir/static/CNAME")" = 'doc.pg.center'
+grep -Fxq 'baseURL: https://doc.pg.center/' "$project_dir/hugo.yaml"
+grep -Fxq '  productionURL: https://doc.pg.center' "$project_dir/hugo.yaml"
 grep -Fq 'title: "Patroni 4.1.5 Documentation"' "$docs_dir/patroni/_index.md"
 grep -Fq 'title: "Patroni 4.1.5 中文文档"' "$docs_dir/patroni/_index.zh.md"
 grep -Fq 'title: "pgBackRest 2.59.3 Documentation"' "$docs_dir/pgbackrest/_index.md"
@@ -209,45 +217,65 @@ grep -Fq 'title: "PgBouncer 1.26.0 Documentation"' "$docs_dir/pgbouncer/_index.m
 grep -Fq 'title: "PgBouncer 1.26.0 中文文档"' "$docs_dir/pgbouncer/_index.zh.md"
 grep -Fq 'title: "pgBadger 13.2 Documentation"' "$docs_dir/pgbadger/_index.md"
 grep -Fq 'title: "pgBadger 13.2 中文文档"' "$docs_dir/pgbadger/_index.zh.md"
-grep -Fq 'title: "HAProxy 3.4.4 Documentation"' "$docs_dir/haproxy/_index.md"
-grep -Fq 'title: "HAProxy 3.4.4 中文文档"' "$docs_dir/haproxy/_index.zh.md"
+grep -Fq 'title: "HAProxy 3.4.6-66 Documentation"' "$docs_dir/haproxy/_index.md"
+grep -Fq 'title: "HAProxy 3.4.6-66 中文文档"' "$docs_dir/haproxy/_index.zh.md"
 grep -Fq 'title: "etcd 3.7 Documentation"' "$docs_dir/etcd/_index.md"
 grep -Fq 'title: "etcd 3.7 中文文档"' "$docs_dir/etcd/_index.zh.md"
 
 python3 "$project_dir/scripts/check-bilingual-parity.py"
-python3 -B "$project_dir/scripts/test-pgbouncer-parity.py"
-python3 -B "$project_dir/scripts/check-pgbouncer.py"
-
-python3 -B "$project_dir/scripts/test-pgbackrest.py"
-python3 -B "$project_dir/scripts/test-pgbackrest-ja.py"
-python3 -B "$project_dir/scripts/test-pgbackrest-ja-print.py"
-python3 -B "$project_dir/scripts/check-pgbackrest.py"
+python3 "$project_dir/scripts/test-patroni.py"
+python3 "$project_dir/scripts/check-patroni.py"
+python3 "$project_dir/scripts/test-pgbouncer-parity.py"
+python3 "$project_dir/scripts/check-pgbouncer.py"
+python3 "$project_dir/scripts/test-pgbackrest.py"
+python3 "$project_dir/scripts/check-pgbackrest.py"
+python3 "$project_dir/scripts/generate-pgbadger-reference.py" --check
+python3 "$project_dir/scripts/test-pgbadger.py"
+python3 "$project_dir/scripts/check-pgbadger.py"
 
 HUGO_RESOURCEDIR="$build_dir/resources" \
   hugo --source "$project_dir" --destination "$build_dir/public" --cacheDir "${HUGO_CACHEDIR:-$build_dir/cache}" --gc --minify --cleanDestinationDir --printPathWarnings --printI18nWarnings --panicOnWarning
 
-python3 "$project_dir/scripts/test-etcd.py"
-python3 "$project_dir/scripts/check-etcd.py" --rendered-dir "$build_dir/public"
+PGBOUNCER_RENDERED_DIR="$build_dir/public" python3 "$project_dir/scripts/test-pgbouncer-parity.py"
+python3 "$project_dir/scripts/check-patroni.py" --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/check-pgbouncer.py" --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/check-pgbackrest.py" --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/check-pgbadger.py" --rendered-dir "$build_dir/public"
+node "$project_dir/scripts/test-pgbackrest-search.cjs" "$build_dir/public"
+python3 "$project_dir/scripts/check-russian-parity.py" --component pgbouncer --current-source --strict --rendered-dir "$build_dir/public"
+TRANSLATION_RENDERED_DIR="$build_dir/public" \
+  python3 "$project_dir/scripts/check-component-translations.py" haproxy etcd
+python3 "$project_dir/scripts/test-haproxy-ru-parity.py"
+python3 "$project_dir/scripts/check-russian-parity.py" --component haproxy --current-source --strict --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/test-haproxy-ja.py"
+python3 "$project_dir/scripts/check-haproxy-ja.py" --require-review
+python3 "$project_dir/scripts/check-haproxy-ja-rendered.py" "$build_dir/public"
+python3 "$project_dir/scripts/check-german-parity.py" --allow-partial --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/check-german-parity.py" --component patroni --current-source --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/check-german-parity.py" --component pgbouncer --component pgbadger --current-source --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/check-german-parity.py" --component pgbackrest --current-source --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/check-german-parity.py" --component etcd --current-source --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/check-german-parity.py" --component haproxy --current-source --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/test-german-parity.py"
+python3 "$project_dir/scripts/test-haproxy-de-rendered.py"
+python3 "$project_dir/scripts/check-haproxy-de-rendered.py" --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/check-haproxy.py" --rendered-dir "$build_dir/public"
 python3 "$project_dir/scripts/test-etcd-german.py"
 python3 "$project_dir/scripts/check-etcd-german.py" --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/test-etcd.py"
+python3 "$project_dir/scripts/check-etcd.py" --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/check-russian-parity.py" --component etcd --current-source --strict --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/check-pgbackrest-de.py" --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/check-german-prose.py"
+python3 "$project_dir/scripts/check-russian-parity.py" --allow-partial
 python3 "$project_dir/scripts/check-japanese-parity.py" --component etcd --rendered-dir "$build_dir/public"
 python3 "$project_dir/scripts/check-etcd-ja-rendered.py" --rendered-dir "$build_dir/public"
 python3 "$project_dir/scripts/test-etcd-ja.py" --rendered-dir "$build_dir/public"
-
-PGBOUNCER_RENDERED_DIR="$build_dir/public" python3 -B "$project_dir/scripts/test-pgbouncer-parity.py"
-python3 -B "$project_dir/scripts/check-pgbouncer.py" --rendered-dir "$build_dir/public"
-
-python3 -B "$project_dir/scripts/check-pgbackrest.py" --rendered-dir "$build_dir/public"
-node "$project_dir/scripts/test-pgbackrest-search.cjs" "$build_dir/public"
-python3 -B "$project_dir/scripts/check-pgbackrest-ja.py" --rendered-dir "$build_dir/public"
-python3 -B "$project_dir/scripts/check-pgbackrest-de.py" --rendered-dir "$build_dir/public"
-
-TRANSLATION_RENDERED_DIR="$build_dir/public" \
-  python3 "$project_dir/scripts/check-component-translations.py" haproxy etcd
-# PgBouncer and pgBackRest have complete current-source gates above.
-python3 "$project_dir/scripts/check-german-parity.py" --allow-partial --rendered-dir "$build_dir/public" --exclude-component pgbouncer --exclude-component pgbackrest
-python3 "$project_dir/scripts/check-german-prose.py"
-python3 "$project_dir/scripts/check-russian-parity.py" --allow-partial
+python3 "$project_dir/scripts/test-pgbackrest-ja.py"
+python3 "$project_dir/scripts/test-pgbackrest-ja-print.py"
+python3 "$project_dir/scripts/check-pgbackrest-ja.py" --rendered-dir "$build_dir/public"
+python3 "$project_dir/scripts/check-russian-parity.py" --component pgbackrest --current-source --strict --rendered-dir "$build_dir/public"
+node "$project_dir/scripts/check-russian-search.cjs" "$build_dir/public"
 
 for page in \
   index.html \
@@ -274,6 +302,11 @@ for page in \
   docs/pgbackrest/index.html \
   zh/docs/pgbackrest/index.html \
   fr/docs/pgbackrest/index.html \
+  ru/docs/pgbackrest/index.html \
+  ru/docs/pgbackrest/configuration/index.html \
+  ru/docs/pgbackrest/user-guide/index.html \
+  ru/docs/pgbackrest/user-guide-rhel/index.html \
+  ru/docs/pgbackrest/release/index.html \
   docs/pgbouncer/index.html \
   zh/docs/pgbouncer/index.html \
   fr/docs/pgbouncer/index.html \
@@ -282,11 +315,23 @@ for page in \
   ru/docs/pgbouncer/index.html \
   ja/docs/pgbouncer/usage/index.html \
   de/docs/pgbouncer/usage/index.html \
+  de/docs/pgbouncer/config/index.html \
+  de/docs/pgbouncer/config/index.md \
+  de/docs/pgbouncer/changelog/index.html \
+  de/docs/pgbouncer/changelog/index.md \
   ru/docs/pgbouncer/usage/index.html \
   docs/pgbadger/index.html \
   zh/docs/pgbadger/index.html \
   fr/docs/pgbadger/index.html \
   de/docs/pgbadger/index.html \
+  de/docs/pgbackrest/index.html \
+  de/docs/pgbackrest/user-guide/index.html \
+  de/docs/pgbackrest/user-guide-rhel/index.html \
+  de/docs/pgbackrest/configuration/index.html \
+  de/docs/pgbackrest/release/index.html \
+  de/docs/pgbackrest/index.md \
+  de/docs/pgbackrest/llms-full.txt \
+  de/_print/docs/pgbackrest/index.html \
   ru/docs/pgbadger/index.html \
   de/docs/pgbadger/command-line/index.html \
   ru/docs/pgbadger/command-line/index.html \
@@ -339,6 +384,14 @@ for page in \
   fr/docs/patroni/index.md \
   ru/docs/patroni/index.md \
   de/docs/patroni/security/index.html \
+  de/docs/patroni/index.html \
+  de/docs/patroni/config/yaml/index.html \
+  de/docs/patroni/patronictl/index.html \
+  de/docs/patroni/rest_api/index.html \
+  de/docs/patroni/releases/index.html \
+  de/docs/patroni/index.md \
+  de/docs/patroni/llms-full.txt \
+  de/_print/docs/patroni/index.html \
   ru/docs/patroni/security/index.html \
   de/docs/haproxy/prerequisites/index.html \
   _print/docs/patroni/index.html \
@@ -363,6 +416,7 @@ for page in \
   de/_print/docs/pgbouncer/index.html \
   de/_print/docs/pgbadger/index.html \
   ru/_print/docs/patroni/index.html \
+  ru/_print/docs/pgbackrest/index.html \
   ru/_print/docs/pgbouncer/index.html \
   ru/_print/docs/pgbadger/index.html \
   ru/_print/docs/etcd/index.html \
@@ -392,7 +446,7 @@ for page in \
   third_party/haproxy/GPL-2.0 \
   img/docs/pgbadger/logo.png \
   img/slonik.svg \
-  images/og.png \
+  images/og-doc-pg-center.png \
   CNAME \
   favicon.ico \
   zh/llms.txt \
@@ -413,6 +467,7 @@ for page in \
   ru/docs/patroni/llms-full.txt \
   docs/pgbackrest/llms-full.txt \
   zh/docs/pgbackrest/llms-full.txt \
+  ru/docs/pgbackrest/llms-full.txt \
   docs/pgbouncer/llms-full.txt \
   zh/docs/pgbouncer/llms-full.txt \
   fr/docs/pgbouncer/llms-full.txt \
@@ -458,7 +513,7 @@ expected_roots = {
     "zh": complete_roots,
     "fr": complete_roots,
     "ja": complete_roots,
-    "de": {"/docs/patroni/", "/docs/pgbouncer/", "/docs/pgbadger/", "/docs/haproxy/", "/docs/etcd/"},
+    "de": complete_roots,
     "ru": complete_roots,
 }
 for filename, language in zip(sys.argv[1:], expected_roots):
@@ -473,9 +528,9 @@ PY
 for language_root in "" zh/ fr/ ja/ de/ ru/; do
   grep -Fq 'navigation.json' "$build_dir/public/${language_root}llms.txt"
 done
-grep -Fq 'Source: https://pig.center/docs/patroni/index.md' "$build_dir/public/docs/patroni/llms-full.txt"
-grep -Fq 'Source: https://pig.center/zh/docs/patroni/index.md' "$build_dir/public/zh/docs/patroni/llms-full.txt"
-grep -Fq 'Source: https://pig.center/fr/docs/patroni/index.md' "$build_dir/public/fr/docs/patroni/llms-full.txt"
+grep -Fq 'Source: https://doc.pg.center/docs/patroni/index.md' "$build_dir/public/docs/patroni/llms-full.txt"
+grep -Fq 'Source: https://doc.pg.center/zh/docs/patroni/index.md' "$build_dir/public/zh/docs/patroni/llms-full.txt"
+grep -Fq 'Source: https://doc.pg.center/fr/docs/patroni/index.md' "$build_dir/public/fr/docs/patroni/llms-full.txt"
 grep -Fq 'td-shell-backlinks' "$build_dir/public/docs/patroni/config/index.html"
 grep -Fq 'td-shell-backlinks' "$build_dir/public/zh/docs/patroni/config/index.html"
 grep -Fq 'Backlinks:' "$build_dir/public/docs/patroni/config/index.md"
@@ -513,30 +568,64 @@ def has_link(items: list[dict[str, str]], href: str, fallback: str = "") -> bool
     )
 
 
-for language in ("en", "zh", "fr"):
+for language in ("en", "zh", "fr", "ja", "de", "ru"):
     _, items = home(language)
     assert not any("data-fallback-language" in item for item in items), language
-
-for language in ("ja", "de", "ru"):
-    text, items = home(language)
-    assert "pgsql-link-fallback" in text, language
-    assert any(item.get("data-fallback-language") == "en" for item in items), language
 
 _, ja = home("ja")
 assert has_link(ja, "/ja/docs/pgbouncer/")
 assert has_link(ja, "/ja/docs/patroni/")
+assert has_link(ja, "/ja/docs/haproxy/")
+assert has_link(ja, "/ja/docs/haproxy/proxies/")
+assert has_link(ja, "/ja/docs/haproxy/acls-and-samples/")
+assert not any("/docs/haproxy/" in item.get("href", "") and item.get("data-fallback-language") for item in ja)
+assert has_link(ja, "/ja/docs/etcd/")
+assert has_link(ja, "/ja/docs/etcd/op-guide/configuration/")
+assert has_link(ja, "/ja/docs/etcd/learning/api/")
+assert has_link(ja, "/ja/docs/etcd/upgrades/upgrade_3_7/")
+assert not any("/docs/etcd/" in item.get("href", "") and item.get("data-fallback-language") for item in ja)
 assert has_link(ja, "/ja/docs/pgbackrest/user-guide/")
+assert has_link(ja, "/ja/docs/pgbackrest/configuration/")
+assert not any("/docs/pgbackrest/" in item.get("href", "") and item.get("data-fallback-language") for item in ja)
 
 _, de = home("de")
+assert has_link(de, "/de/docs/haproxy/")
+assert has_link(de, "/de/docs/haproxy/proxies/")
+assert has_link(de, "/de/docs/haproxy/acls-and-samples/")
+assert has_link(de, "/de/docs/haproxy/statistics-and-monitoring/")
+assert not any("/docs/haproxy/" in item.get("href", "") and item.get("data-fallback-language") for item in de)
+assert has_link(de, "/de/docs/pgbouncer/")
+assert has_link(de, "/de/docs/pgbouncer/config/")
+assert not any(
+    any(f"/docs/{component}/" in item.get("href", "") for component in ("pgbouncer", "pgbadger"))
+    and item.get("data-fallback-language")
+    for item in de
+)
 assert has_link(de, "/de/docs/pgbadger/")
 assert has_link(de, "/de/docs/patroni/")
+assert has_link(de, "/de/docs/patroni/patronictl/")
+assert has_link(de, "/de/docs/patroni/config/")
+assert not any("/docs/patroni/" in item.get("href", "") and item.get("data-fallback-language") for item in de)
 assert has_link(de, "/de/docs/pgbackrest/")
+assert has_link(de, "/de/docs/pgbackrest/user-guide/")
+assert not any("/docs/pgbackrest/" in item.get("href", "") and item.get("data-fallback-language") for item in de)
+assert has_link(de, "/de/docs/etcd/")
+assert has_link(de, "/de/docs/etcd/op-guide/configuration/")
+assert has_link(de, "/de/docs/etcd/learning/api/")
+assert has_link(de, "/de/docs/etcd/upgrades/upgrade_3_7/")
+assert not any("/docs/etcd/" in item.get("href", "") and item.get("data-fallback-language") for item in de)
 
 _, ru = home("ru")
 assert has_link(ru, "/ru/docs/etcd/")
 assert has_link(ru, "/ru/docs/patroni/")
+assert has_link(ru, "/ru/docs/pgbackrest/")
+assert has_link(ru, "/ru/docs/pgbackrest/user-guide/")
+assert has_link(ru, "/ru/docs/pgbackrest/configuration/")
 assert has_link(ru, "/ru/docs/haproxy/")
-assert has_link(ru, "/docs/haproxy/proxies/", "en")
+assert has_link(ru, "/ru/docs/haproxy/proxies/")
+assert has_link(ru, "/ru/docs/haproxy/acls-and-samples/")
+assert has_link(ru, "/ru/docs/haproxy/statistics-and-monitoring/")
+assert not any("/docs/haproxy/" in item.get("href", "") and item.get("data-fallback-language") for item in ru)
 PY
 
 while IFS= read -r source_file; do
@@ -620,8 +709,7 @@ for source_file in \
   sources/pgbadger/upstream/README.md \
   sources/pgbadger/upstream/ChangeLog \
   sources/pgbadger/upstream/LICENSE \
-  sources/pgbadger/upstream/RESOURCE-LICENSES \
-  sources/pgbadger/pgbadger-a1ad95a035a0c2d246fe632eb1c361d4bde0ddae.tar.gz; do
+  sources/pgbadger/upstream/RESOURCE-LICENSES; do
   test -s "$project_dir/$source_file"
 done
 
@@ -640,16 +728,16 @@ done
 
 (cd "$project_dir/sources/pgbadger" && shasum -a 256 -c SHA256SUMS >/dev/null)
 (cd "$project_dir/sources/haproxy" && shasum -a 256 -c SHA256SUMS >/dev/null)
-test "$(tr -d '\r\n' < "$project_dir/sources/haproxy/upstream/VERSION")" = '3.4.4'
+test "$(tr -d '\r\n' < "$project_dir/sources/haproxy/upstream/VERSION")" = '3.4.6'
 grep -Fq 'HAProxy Starter Guide' "$project_dir/sources/haproxy/upstream/intro.txt"
 grep -Fq 'Configuration Manual' "$project_dir/sources/haproxy/upstream/configuration.txt"
 grep -Fq 'HAProxy Management Guide' "$project_dir/sources/haproxy/upstream/management.txt"
 cmp "$project_dir/sources/haproxy/upstream/LICENSE" "$project_dir/static/third_party/haproxy/LICENSE"
 cmp "$project_dir/sources/haproxy/upstream/GPL-2.0" "$project_dir/static/third_party/haproxy/GPL-2.0"
 
-grep -q 'https://pig.center/images/og.png' "$build_dir/public/index.html"
-grep -q 'https://pig.center/images/og.png' "$build_dir/public/zh/index.html"
-if grep -q '/images/og.png' "$build_dir/public/docs/patroni/index.html"; then
+grep -q 'https://doc.pg.center/images/og-doc-pg-center.png' "$build_dir/public/index.html"
+grep -q 'https://doc.pg.center/images/og-doc-pg-center.png' "$build_dir/public/zh/index.html"
+if grep -q '/images/og-doc-pg-center.png' "$build_dir/public/docs/patroni/index.html"; then
   echo 'A detail page inherited the homepage social image' >&2
   exit 1
 fi

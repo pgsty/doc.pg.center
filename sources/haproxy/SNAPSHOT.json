@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "branch": "3.4",
+  "stable_release": "3.4.6",
+  "stable_tag": "v3.4.6",
+  "stable_tag_commit": "56332c50b5291cfbbfd440d958adc988fbf87e2f",
+  "release_date": "2026-09-28",
+  "documentation_version": "3.4.6-66",
+  "documentation_ref": "v3.4.6-66-g16acce1dac1d",
+  "documentation_commit": "16acce1dac1dcf1ad5d654204af3a5d45d0e3de8",
+  "documentation_commit_time": "2026-10-12T15:51:02+02:00",
+  "official_documents": [
+    "https://docs.haproxy.org/3.4/intro.html",
+    "https://docs.haproxy.org/3.4/configuration.html",
+    "https://docs.haproxy.org/3.4/management.html"
+  ],
+  "official_conversion_date": "2026-10-12",
+  "checked_at": "2026-10-14T00:42:52.801265+00:00",
+  "observed_branch_head": "b6c8fd279985905cfe377b7cf2029e1b1bd3ad9f",
+  "documentation_identical_to_observed_head": true,
+  "previous_edition": "3.4.4",
+  "previous_commit": "7f03ae65c28605152c7a1a9ba7d9d0bcfb50f8b0",
+  "files": [
+    {
+      "path": "doc/intro.txt",
+      "file": "intro.txt",
+      "bytes": 90517,
+      "lines": 1695,
+      "sha256": "48c138f6c57e0328abe1cf0595453cb83e1542940ad5a7c8dd4ae4e03f8585d0"
+    },
+    {
+      "path": "doc/configuration.txt",
+      "file": "configuration.txt",
+      "bytes": 1676080,
+      "lines": 33216,
+      "sha256": "e7b6c9c919d2a2710409e2538a469b56a2c383db3738bb27d626a813314a209e"
+    },
+    {
+      "path": "doc/management.txt",
+      "file": "management.txt",
+      "bytes": 280294,
+      "lines": 5305,
+      "sha256": "ad377db9c62e740c76acbf4ae506dc12795b16378519d15db1347242ba95a85b"
+    },
+    {
+      "path": "LICENSE",
+      "file": "LICENSE",
+      "bytes": 2029,
+      "lines": 37,
+      "sha256": "0717ca51fceaa25ac9e5ccc62e0c727dcf27796057201fb5fded56a25ff6ca28"
+    },
+    {
+      "path": "doc/gpl.txt",
+      "file": "GPL-2.0",
+      "bytes": 17990,
+      "lines": 340,
+      "sha256": "ddb9db7630752f8fdc6898f7c99a99eaeeac5213627ecb093df9c82f56175dc7"
+    },
+    {
+      "path": "VERSION",
+      "file": "VERSION",
+      "bytes": 6,
+      "lines": 1,
+      "sha256": "47079b3096eb33e5b9f085d86e52250b7a876f134be3fae5d2328584f67af6b1"
+    },
+    {
+      "path": "VERDATE",
+      "file": "VERDATE",
+      "bytes": 24,
+      "lines": 2,
+      "sha256": "4dd98c4e5564b6e27fd751ad2768b353ce1d6179f6ff5c4782859492e6fa7067"
+    }
+  ]
+}

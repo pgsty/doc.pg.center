@@ -418,7 +418,7 @@ Released 2025-02-20
 
 - Cancel long-running jobs on Patroni stop and remove data directory on replica bootstrap failure (Alexander Kukushkin)
 
-  Previously, Patroni could be doing replica bootstrap, while `pg_basebackup` / `wal-g` / `pgBackRest` / `barman` or similar keep running.
+  Previously, Patroni could stop during replica bootstrap while `pg_basebackup` / `wal-g` / `pgBackRest` / `barman` or similar tools kept running.
 
 - Properly handle cluster names with a slash in `patronictl edit-config` (Antoni Mur)
 
@@ -443,7 +443,7 @@ Released 2025-02-20
 
 **Improvements**
 
-- Improve error on am empty or non-dictionary configuration file (Julian)
+- Improve error on an empty or non-dictionary configuration file (Julian)
 
   Throw a more explicit exception when validating if Patroni configuration file contains a valid `Mapping` object.
 
@@ -693,7 +693,7 @@ Released 2024-06-17
 Released 2024-04-04
 
 > [!WARNING]
-> All older Partoni versions are not compatible with `ydiff>=1.3`.
+> All older Patroni versions are not compatible with `ydiff>=1.3`.
 >
 > There are the following options available to "fix" the problem:
 >
@@ -785,7 +785,7 @@ Released 2024-01-17
 
 - Create Citus database and extension idempotently (Alexander Kukushkin, Zhao Junwang)
 
-  It will allow to create them in the `post_bootstrap` script in case if there is a need to add some more dependencies to the Citus database.
+  It will allow to create them in the `post_bootstrap` script if there is a need to add some more dependencies to the Citus database.
 
 - Don't filter our contradictory `nofailover` tag (Polina Bungina)
 
@@ -999,7 +999,7 @@ Released 2023-09-20
 
 - Don't rely on `pg_stat_wal_receiver` when deciding on `pg_rewind` (Alexander Kukushkin)
 
-  It could happen that `received_tli` reported by `pg_stat_wal_receiver` is ahead of the actual replayed timeline, while the timeline reported by `DENTIFY_SYSTEM` via replication connection is always correct.
+  It could happen that `received_tli` reported by `pg_stat_wal_receiver` is ahead of the actual replayed timeline, while the timeline reported by `IDENTIFY_SYSTEM` via replication connection is always correct.
 
 --------
 
@@ -1056,7 +1056,7 @@ Released 2023-08-03
 
 - Fixed "on switchover" shutdown checks (Polina Bungina)
 
-  It was possible that specified candidate is still streaming and didn't received shut down checking but the leader key was removed because some other nodes were healthy.
+  It was possible that the specified candidate was still streaming and had not received the shutdown checkpoint, but the leader key was removed because some other nodes were healthy.
 
 - Fixed "is primary" check (Alexander Kukushkin)
 
@@ -1072,7 +1072,7 @@ Released 2023-08-03
 
 - Fixed bug in Etcd v3 implementation (Alexander Kukushkin)
 
-  Invalidate internal KV cache if key update performed using `create_revision`/`mod_revision` field due to revision mismatch.
+  Invalidate internal KV cache if a key update using the `create_revision`/`mod_revision` field fails due to a revision mismatch.
 
 - Fixed behaviour of replicas in standby cluster in pause (Alexander Kukushkin)
 
@@ -1152,7 +1152,7 @@ Released 2023-06-22
 
 - Added support for custom Postgres binary names (Israel Barth Rubio, Polina Bungina)
 
-  When using a custom Postgres distribution it may be the case that the Postgres binaries are compiled with different names other than the ones used by the community Postgres distribution. Custom binary names could be configured using `postgresql.bin_name.*` and `PATRONI_POSTGRESQL_BIN_*` environment variables.
+  When using a custom Postgres distribution it may be the case that the Postgres binaries are compiled with different names other than the ones used by the community Postgres distribution. Custom binary names could be configured using `postgresql.bin_name.*` configuration settings and `PATRONI_POSTGRESQL_BIN_*` environment variables.
 
 **Improvements**
 
@@ -1403,7 +1403,7 @@ This version enhances compatibility with PostgreSQL 15 and declares Etcd v3 supp
 
 - Improve liveness probe (Alexander Kukushkin)
 
-  The liveness problem will start failing if the heartbeat loop is running longer than `ttl` on the primary or `2\*ttl` on the replica. That will allow us to use it as an alternative for [watchdog](/docs/patroni/watchdog#watchdog) on Kubernetes.
+  The liveness problem will start failing if the heartbeat loop is running longer than `ttl` on the primary or `2*ttl` on the replica. That will allow us to use it as an alternative for [watchdog](/docs/patroni/watchdog#watchdog) on Kubernetes.
 
 - Make sure only sync node tries to grab the lock when switchover (Alexander Kukushkin, Polina Bungina)
 
@@ -1421,7 +1421,7 @@ This version enhances compatibility with PostgreSQL 15 and declares Etcd v3 supp
 
   Not doing it resulted in `unexpected eof while reading` errors with OpenSSL 3.0.
 
-- Compatibility with `prettytable\>=2.2.0` (Alexander Kukushkin)
+- Compatibility with `prettytable>=2.2.0` (Alexander Kukushkin)
 
   Due to the internal API changes the cluster name header was shown on the incorrect line.
 
@@ -1605,7 +1605,7 @@ Released 2021-12-03
 
 - Compatibility with `psycopg>=3.0` (Alexander Kukushkin)
 
-  By default `psycopg2` is preferred. `psycopg\>=3.0` will be used only if `psycopg2` is not available or its version is too old.
+  By default `psycopg2` is preferred. `psycopg>=3.0` will be used only if `psycopg2` is not available or its version is too old.
 
 - Add `dcs_last_seen` field to the REST API (Michael Banck)
 
@@ -1669,7 +1669,7 @@ Released 2021-12-03
 
 - Skip temporary replication slots while doing slot management (Alexander Kukushkin)
 
-  Starting from v10 `pg_basebackup` creates a temporary replication slot for WAL streaming and Patroni was trying to drop it because the slot name looks unknown. In order to fix it, we skip all temporary slots when querying `pg_stat_replication_slots` view.
+  Starting from v10 `pg_basebackup` creates a temporary replication slot for WAL streaming and Patroni was trying to drop it because the slot name looks unknown. In order to fix it, we skip all temporary slots when querying `pg_replication_slots` view.
 
 - Ensure `pg_replication_slot_advance()` doesn't timeout (Alexander Kukushkin)
 
@@ -1825,7 +1825,7 @@ This version adds compatibility with PostgreSQL v14, makes logical replication s
 
 - Explicitly request the version of Etcd v3 cluster when it is known that we are connecting via proxy (Alexander Kukushkin)
 
-  Patroni is working with Etcd v3 cluster via gPRC-gateway and it depending on the cluster version different endpoints (`/v3`, `/v3beta`, or `/v3alpha`) must be used. The version was resolved only together with the cluster topology, but since the latter was never done when connecting via proxy.
+  Patroni is working with Etcd v3 cluster via gRPC-gateway and it depending on the cluster version different endpoints (`/v3`, `/v3beta`, or `/v3alpha`) must be used. The version was resolved only together with the cluster topology, but since the latter was never done when connecting via proxy.
 
 --------
 
@@ -1905,7 +1905,7 @@ Released 2021-02-22
 
 - Fixed an issues with pg_rewind in the standby cluster (Alexander Kukushkin)
 
-  If the superuser name is different from Postgres, the `pg_rewind` in the standby cluster was failing because the connection string didn't contain the database name.
+  If the superuser name is different from `postgres`, the `pg_rewind` in the standby cluster was failing because the connection string didn't contain the database name.
 
 - Exit only if authentication with Etcd v3 explicitly failed (Alexander Kukushkin)
 
@@ -2005,7 +2005,7 @@ This version enhances compatibility with PostgreSQL 13, adds support of multiple
 
   This makes it possible to run Patroni without 3rd party dependencies, like Etcd, Consul, or Zookeeper. For HA you will have to run either three Patroni nodes or two nodes with Patroni and one node with `patroni_raft_controller`. For more information please check the [documentation](/docs/patroni/config/yaml#raft_settings).
 
-- \[BETA\] Implemented support for Etcd v3 protocol via gPRC-gateway (Alexander Kukushkin)
+- \[BETA\] Implemented support for Etcd v3 protocol via gRPC-gateway (Alexander Kukushkin)
 
   Etcd 3.0 was released more than four years ago and Etcd 3.4 has v2 disabled by default. There are also chances that v2 will be completely removed from Etcd, therefore we implemented support of Etcd v3 in Patroni. In order to start using it you have to explicitly create the `etcd3` section is the Patroni configuration file.
 
@@ -2540,7 +2540,7 @@ Released 2019-11-15
 
 - Disable `synchronous_commit` when granting execute permissions to the `pg_rewind` user (kremius)
 
-  If the bootstrap is done with `synchronous_mode_strict: true` the `GRANT EXECUTE` statement was waiting indefinitely due to the non-synchronous nodes being available.
+  If the bootstrap is done with `synchronous_mode_strict: true` the `GRANT EXECUTE` statement was waiting indefinitely because no synchronous standby nodes were available.
 
 - Fix memory leak on python 3.7 (Alexander Kukushkin)
 
@@ -2608,7 +2608,7 @@ This version adds compatibility with PostgreSQL 12, makes is possible to run pg_
 
 - Added `/health` endpoint (Wilfried Roset)
 
-  It will return an HTTP status code only if PostgreSQL is running
+  It will return HTTP status code 200 only if PostgreSQL is running
 
 - Added `/read-only` and `/read-write` endpoints (Julien Riou)
 
@@ -2708,7 +2708,7 @@ Released 2019-08-03
 
   Due to the lock being held DCS slowness was affecting the REST API health checks causing false positives.
 
-- Improve cleaning of PGDATA when `pg_wal`/\`pg_xlog\` is a symlink (Julien Tachoires)
+- Improve cleaning of PGDATA when `pg_wal`/`pg_xlog` is a symlink (Julien Tachoires)
 
   In this case Patroni will explicitly remove files from the target directory.
 
@@ -2934,7 +2934,7 @@ This version enables Patroni HA cluster to operate in a standby mode, introduces
 
 - Fix bug in strict synchronous replication (Alexander Kukushkin)
 
-  When running with `synchronous_mode_strict: true`, in some cases Patroni puts `\*` into the `synchronous_standby_names`, changing the sync state for most of the replication connections to `potential`. Previously, Patroni couldn't pick a synchronous candidate under such curcuimstances, as it only considered those with the state `async`.
+  When running with `synchronous_mode_strict: true`, in some cases Patroni puts `*` into the `synchronous_standby_names`, changing the sync state for most of the replication connections to `potential`. Previously, Patroni couldn't pick a synchronous candidate under such curcuimstances, as it only considered those with the state `async`.
 
 --------
 
@@ -3072,13 +3072,13 @@ Released 2018-05-22
 
 - Added check for empty subsets (Cody Coons)
 
-  Kubernetes 1.10.0+ started returning `Endpoints.subsets` set to `None` instead of `\[\]`.
+  Kubernetes 1.10.0+ started returning `Endpoints.subsets` set to `None` instead of `[]`.
 
 **Bootstrap improvements**
 
 - Make deleting recovery.conf optional (Brad Nicholson)
 
-  If <span class="title-ref">bootstrap.\<custom_bootstrap_method_name\>.keep_existing_recovery_conf</span> is defined and set to `True`, Patroni will not remove the existing `recovery.conf` file. This is useful when bootstrapping from a backup with tools like pgBackRest that generate the appropriate `recovery.conf` for you.
+  If `bootstrap.<custom_bootstrap_method_name>.keep_existing_recovery_conf` is defined and set to `True`, Patroni will not remove the existing `recovery.conf` file. This is useful when bootstrapping from a backup with tools like pgBackRest that generate the appropriate `recovery.conf` for you.
 
 - Allow options to the basebackup built-in method (Oleksii Kliukin)
 
@@ -3094,7 +3094,7 @@ Released 2018-03-05
 
 - Make log level configurable from environment variables (Andy Newton, Keyvan Hedayati)
 
-  `PATRONI_LOGLEVEL` - sets the general logging level `PATRONI_REQUESTS_LOGLEVEL` - sets the logging level for all HTTP requests e.g. Kubernetes API calls See <span class="title-ref">the docs for Python logging \<https://docs.python.org/3.6/library/logging.html#levels\></span> to get the names of possible log levels
+  `PATRONI_LOGLEVEL` - sets the general logging level `PATRONI_REQUESTS_LOGLEVEL` - sets the logging level for all HTTP requests e.g. Kubernetes API calls See [Python logging documentation](https://docs.python.org/3.6/library/logging.html#levels) to get the names of possible log levels
 
 **Stability improvements and bug fixes**
 
@@ -3134,7 +3134,7 @@ Released 2018-01-30
 
 - Avoid calling pg_controldata during bootstrap (Alexander Kukushkin)
 
-  During initdb or custom bootstrap there is a time window when pgdata is not empty but pg_controldata has not been written yet. In such case pg_controldata call was failing with error messages.
+  During initdb or custom bootstrap there is a time window when pgdata is not empty but pg_control has not been written yet. In such case pg_controldata call was failing with error messages.
 
 - Handle exceptions raised from psutil (Alexander Kukushkin)
 
@@ -3180,7 +3180,7 @@ This version adds support for using Kubernetes as a DCS, allowing to run Patroni
 
 **Upgrade notice**
 
-Installing Patroni via pip will no longer bring in dependencies for (such as libraries for Etcd, Zookeper, Consul or Kubernetes, or support for AWS). In order to enable them one need to list them in pip install command explicitly, for instance `pip install patroni\[etcd,kubernetes\]`.
+Installing Patroni via pip will no longer bring in dependencies for (such as libraries for Etcd, Zookeper, Consul or Kubernetes, or support for AWS). In order to enable them one need to list them in pip install command explicitly, for instance `pip install 'patroni[etcd,kubernetes]'`.
 
 **Kubernetes support**
 
@@ -3494,7 +3494,7 @@ There are no known compatibility issues with the new version of Patroni. Configu
 
 Released 2016-12-13
 
-This version introduces significant improvements over the handling of synchronous replication, makes the startup process and failover more reliable, adds PostgreSQL 9.6 support and fixes plenty of bugs. In addition, the documentation, including these release notes, has been moved to </patroni>.
+This version introduces significant improvements over the handling of synchronous replication, makes the startup process and failover more reliable, adds PostgreSQL 9.6 support and fixes plenty of bugs. In addition, the documentation, including these release notes, has been moved to [https://patroni.readthedocs.io](https://patroni.readthedocs.io).
 
 **Synchronous replication**
 
@@ -3524,9 +3524,9 @@ This version introduces significant improvements over the handling of synchronou
 
   Previously the replicas were always watching the leader key (sleeping until the timeout or the leader key changes). With this change, they only watch when the replica's PostgreSQL is in the `running` state and not when it is stopped/starting or restarting PostgreSQL.
 
-- Avoid running into race conditions when handling SIGCHILD as a PID 1. (Alexander Kukushkin)
+- Avoid running into race conditions when handling SIGCHLD as a PID 1. (Alexander Kukushkin)
 
-  Previously a race condition could occur when running inside the Docker containers, since the same process inside Patroni both spawned new processes and handled SIGCHILD from them. This change uses fork/execs for Patroni and leaves the original PID 1 process responsible for handling signals from children.
+  Previously a race condition could occur when running inside the Docker containers, since the same process inside Patroni both spawned new processes and handled SIGCHLD from them. This change uses fork/execs for Patroni and leaves the original PID 1 process responsible for handling signals from children.
 
 - Fix WAL-E restore. (Oleksii Kliukin)
 
@@ -3556,7 +3556,7 @@ This version introduces significant improvements over the handling of synchronou
 
 - Add `post_init` configuration option on bootstrap. (Alejandro Martínez)
 
-  Patroni will call the script argument of this option right after running `initdb` and starting up PostgreSQL for a new cluster. The script receives a connection URL with `superuser` and sets `PGPASSFILE` to point to the `.pgpass` file containing the password. If the script fails, Patroni initialization fails as well. It is useful for adding new users or creating extensions in the new cluster.
+  Patroni will call the script argument of this option right after running `initdb` and starting up PostgreSQL for a new cluster. The script receives a connection URL with `superuser`. When a password is provided, Patroni sets `PGPASSFILE` to point to the `.pgpass` file containing the password. If the script fails, Patroni initialization fails as well. It is useful for adding new users or creating extensions in the new cluster.
 
 - Implement PostgreSQL 9.6 support. (Alexander Kukushkin)
 
@@ -3568,7 +3568,7 @@ This version introduces significant improvements over the handling of synchronou
 
 - Improve README, adding the Helm chart and links to release notes. (Lauri Apple)
 
-- Move Patroni documentation to `Read the Docs`. The up-to-date documentation is available at </patroni>. (Oleksii Kliukin)
+- Move Patroni documentation to `Read the Docs`. The up-to-date documentation is available at [https://patroni.readthedocs.io](https://patroni.readthedocs.io). (Oleksii Kliukin)
 
   Makes the documentation easily viewable from different devices (including smartphones) and searchable.
 
@@ -3604,7 +3604,7 @@ In addition, patronictl supports new [pause](/docs/patroni/pause#pause) and `res
 
 - Add scheduled restarts (Oleksii Kliukin)
 
-  It is now possible to schedule a restart in the future. Only one scheduled restart per node is supported. It is possible to clear the scheduled restart if it is not needed anymore. A combination of scheduled and conditional restarts is supported, making it possible, for instance, to scheduled minor PostgreSQL upgrades in the night, restarting only the instances that are running the outdated minor version without adding postgres-specific logic to administration scripts.
+  It is now possible to schedule a restart in the future. Only one scheduled restart per node is supported. It is possible to clear the scheduled restart if it is not needed anymore. A combination of scheduled and conditional restarts is supported, making it possible, for instance, to schedule minor PostgreSQL upgrades in the night, restarting only the instances that are running the outdated minor version without adding postgres-specific logic to administration scripts.
 
 - Add support for conditional and scheduled restarts to patronictl (Murat Kabilov).
 
@@ -3628,7 +3628,7 @@ In addition, patronictl supports new [pause](/docs/patroni/pause#pause) and `res
 
 - Return information about streaming replicas via the API (Feike Steenbergen)
 
-Previously, there was no reliable way to query Patroni about PostgreSQL instances that fail to stream changes (for instance, due to connection issues). This change exposes the contents of pg_stat_replication via the /patroni endpoint.
+  Previously, there was no reliable way to query Patroni about PostgreSQL instances that fail to stream changes (for instance, due to connection issues). This change exposes the contents of pg_stat_replication via the /patroni endpoint.
 
 - Add patronictl scaffold command (Oleksii Kliukin)
 
@@ -3690,7 +3690,7 @@ When upgrading from v0.90 or below, always upgrade all replicas before the maste
 
   See the [Patroni configuration](/docs/patroni/config#config) for the details on which parameters can be changed and the order of processing difference configuration sources.
 
-  The configuration file format *has changed* since the v0.90. Patroni is still compatible with the old configuration files, but in order to take advantage of the bootstrap parameters one needs to change it. Users are encourage to update them by referring to the [dynamic configuration documentation page](/docs/patroni/config/dynamic#dynamic).
+  The configuration file format *has changed* since the v0.90. Patroni is still compatible with the old configuration files, but in order to take advantage of the bootstrap parameters one needs to change it. Users are encouraged to update them by referring to the [dynamic configuration documentation page](/docs/patroni/config/dynamic#dynamic).
 
 **More flexible configuration**\*
 
@@ -3746,7 +3746,7 @@ When upgrading from v0.90 or below, always upgrade all replicas before the maste
 
 - Sample haproxy templates for confd (Alexander Kukushkin)
 
-  Generates and dynamically changes haproxy configuration from the patroni state in the DCS using confide
+  Generates and dynamically changes haproxy configuration from the patroni state in the DCS using confd
 
 - Improve and restructure the documentation to make it more friendly to the new users (Lauri Apple)
 
@@ -3856,7 +3856,7 @@ This release adds support for *cascading replication* and simplifies Patroni man
 
 - Improve Zookeeper support in patronictl (Oleksandr Shulgin)
 
-- Migrate to python-etcd 0.43 (Alexander Kukushkin)
+- Migrate to python-etcd 0.4.3 (Alexander Kukushkin)
 
 **Configuration**
 

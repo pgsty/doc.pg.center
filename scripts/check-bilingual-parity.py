@@ -9,8 +9,8 @@ from pathlib import Path
 
 
 ANCHOR_RE = re.compile(r'<a id="([^"]+)"></a>')
-VERSION_RE = re.compile(r"^## Version (.+)$", re.MULTILINE)
-PATRONICTL_RE = re.compile(r"^### (patronictl .+)$", re.MULTILINE)
+VERSION_RE = re.compile(r"^## (?:Version|版本) (.+?)(?: \{#[^}]+\})?$", re.MULTILINE)
+PATRONICTL_RE = re.compile(r"^### (patronictl .+?)(?: \{#[^}]+\})?$", re.MULTILINE)
 METRIC_RE = re.compile(r"^# (?:HELP|TYPE) patroni_.+$", re.MULTILINE)
 UPSTREAM_RE = re.compile(r'^upstream_link: "(.*)"$', re.MULTILINE)
 

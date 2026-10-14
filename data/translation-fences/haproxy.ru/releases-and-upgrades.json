@@ -1,0 +1,51 @@
+{
+  "source": "content/docs/haproxy/releases-and-upgrades.md",
+  "language": "ru",
+  "fences": [],
+  "indented_prose": [
+    {
+      "source_sha256": "c7a69ef7ff9ff012b388466b95b5e605722fb6adc136cf32fa1b1aaea5b01d57",
+      "target_sha256": "91489ba23afbc184e574263a9f076dc1e07a598d6933191e9d8f3cd887cd1f5c",
+      "reason": "Version identification explanation; actual haproxy -v output remains unchanged.",
+      "protected_literals": [],
+      "protected_lines": []
+    },
+    {
+      "source_sha256": "6f1d7d92a87a39563ce8940a13e75104a20cc44805b8870a809f21c4c44ff1a6",
+      "target_sha256": "8cb5d50ed78965b6af979baeef8b8826b4695a67ae0f66bde8561e9809b3a856",
+      "reason": "Nightly snapshot identification explanation; actual version/date output remains unchanged.",
+      "protected_literals": [],
+      "protected_lines": []
+    },
+    {
+      "source_sha256": "2db8506cd819f8da8c749c206269db115efbb62679435eb91194b4f6facb0f85",
+      "target_sha256": "de73aee95a58c9d823bf252dd1a45e7be3aec0d1066c828aa646a98df7b438b6",
+      "reason": "Vendor package explanation; the following output and placeholders remain unchanged.",
+      "protected_literals": [
+        "HAProxy",
+        "Enterprise",
+        "HA",
+        "Proxy"
+      ],
+      "protected_lines": []
+    },
+    {
+      "source_sha256": "714e1e8d02497bfe35c51d969c7b3ed924e579ad322c867f8cb8e98286c0d318",
+      "target_sha256": "200ca9c816633b5105b440b549dc173d6da99be351b3cdfa717737679c863868",
+      "reason": "Historical version-name and support-status explanation; HA, Proxy, URL and Status remain literal.",
+      "protected_literals": [
+        "HA",
+        "Proxy",
+        "URL",
+        "Status"
+      ],
+      "protected_lines": []
+    }
+  ],
+  "literal_blocks": [],
+  "source_formatting_revalidation": {
+    "method": "Exact reviewed predecessor source/target SHA mapping and byte-for-byte literal-fence witnesses; only documented source errata and markup-only restoration accepted.",
+    "fences": [],
+    "literal_blocks": []
+  }
+}

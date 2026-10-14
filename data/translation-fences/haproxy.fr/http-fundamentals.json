@@ -1,0 +1,97 @@
+{
+  "source": "content/docs/haproxy/http-fundamentals.md",
+  "language": "fr",
+  "fences": [
+    {
+      "index": 4,
+      "classification": "table-labels",
+      "protected_literals": [],
+      "protected_lines": [
+        "   1     GET /serv/login.php?lang=en&profile=2 HTTP/1.1",
+        "   2     Host: www.mydomain.com",
+        "   3     User-agent: my small browser",
+        "   4     Accept: image/jpeg, image/gif",
+        "   5     Accept: image/png"
+      ],
+      "source_sha256": "74c679c1d560aff6b4321f7b03e720b5427a96ef16d09dcae962a48dbc06ccd8",
+      "target_sha256": "90c338b83ef36b759a891e88e762941d44ffc7b44d2942e3c156e4fc5100addc",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 5,
+      "classification": "mixed-explanation",
+      "protected_literals": [
+        "URL"
+      ],
+      "protected_lines": [
+        "  /serv/login.php?lang=en&profile=2"
+      ],
+      "source_sha256": "713fe0e1c2c70c515ce93ae5f5bf17f7b249627858531511fd8ed7c2b7c41124",
+      "target_sha256": "6831b7d8ae993a74c697209f997b9c7f1dd1db43f6fe56897f57d606b3a4d6f7",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 6,
+      "classification": "mixed-explanation",
+      "protected_literals": [
+        "URI",
+        "HTTP/1.1",
+        "'://'",
+        "':'",
+        "'/'"
+      ],
+      "protected_lines": [
+        "  http://192.168.0.12:8080/serv/login.php?lang=en&profile=2"
+      ],
+      "source_sha256": "1b218adb01fd0ce9a994577d87ca888eaf3eaf29109f828cbc37e7428b80162b",
+      "target_sha256": "a7c5bfe460d41ce97b51097225921184dfb4f132d8c923861f277e9503224d9e",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 7,
+      "classification": "argument-description",
+      "protected_literals": [
+        "RFC7231",
+        "HAProxy",
+        "LWS",
+        "HTTP"
+      ],
+      "protected_lines": [],
+      "source_sha256": "2f095112ef580f455b799eaf08262c9554da045c531db9aa4ff1dca6fb1ac1c8",
+      "target_sha256": "efec0abe02c76a54265d7eb13f0f6f39c41f78d9c162416b7d5f83274d03b8ae",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 8,
+      "classification": "table-labels",
+      "protected_literals": [],
+      "protected_lines": [
+        "   1     HTTP/1.1 200 OK",
+        "   2     Content-length: 350",
+        "   3     Content-Type: text/html"
+      ],
+      "source_sha256": "270dc83f96bd7216708515c65613312b5f6070a70bc25e3fad21cba5e1f31772",
+      "target_sha256": "69f330beadfcd9d07c223bf690ffcd041f61573fe97dc5c4d18ea20f93f991d9",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 9,
+      "classification": "table-labels",
+      "protected_literals": [
+        "\"http-request deny\"",
+        "HTTP/1.0",
+        "GET/HEAD/DELETE",
+        "\"h1-accept-payload-with-any-method\"",
+        "HAProxy",
+        "\"http-response deny\"",
+        "\"monitor fail\""
+      ],
+      "protected_lines": [],
+      "source_sha256": "f41b23ea4856c18e1c9be7bdd0d649a894746d7c0f46325edea5669f32b3b038",
+      "target_sha256": "b30648fd9763abf4b5f41d3a037061c2a8c3c2fadab8dbad00cd861447bf9e1e",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    }
+  ],
+  "literal_blocks": [],
+  "literal_snippets": []
+}

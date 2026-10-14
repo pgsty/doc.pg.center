@@ -1,0 +1,97 @@
+{
+  "source": "content/docs/pgbadger/releases/11.md",
+  "language": "ru",
+  "fences": [],
+  "literal_snippets": [
+    {
+      "text": "\"(total sessions time - total queries time) / number of sessions\"",
+      "classification": "program-output",
+      "source_sha256": "d06d5fa7dbd2939f278fb4f9f9497c1db7c1bc8d3155f0d100659eae6d418309"
+    },
+    {
+      "text": "ssh://192.168.1.100:2222//var/log/postgresql-11.log",
+      "classification": "command",
+      "source_sha256": "58319bd4e21df1a9a5f6b0e4f8550433f909bbac40e4f819693aa0c6488ea296"
+    },
+    {
+      "text": "File::Spec->tmpdir() || '/tmp'",
+      "classification": "command",
+      "source_sha256": "604aa201930339d954364d35924f8cb5e632c474bfc4bd07eb8d153bbb4f1fca"
+    },
+    {
+      "text": "pgbadger -I -O \"/out-dir/data\" --noreport /var/log/postgresql*.log",
+      "classification": "command",
+      "source_sha256": "d5d1623ce96051f6ee580d2ff664c01723db824bd59f29bff141b7b8eae9d9a4"
+    },
+    {
+      "text": "pgbadger -I -l \"/out-dir/data/LAST_PARSED\" -H \"/out-dir/reports\" /out-dir/data/2020/02/19/*.bin",
+      "classification": "command",
+      "source_sha256": "d7aa195e4e46d8c7b8f2a79aa5bbd89137eda8d4bc391bee101ed6652a003a96"
+    },
+    {
+      "text": "http://explain.depesz.com/?is_public=0&is_anon=0&plan=",
+      "classification": "command",
+      "source_sha256": "d12f159a8e32feb439b770299ea289f9bb612719e269467734e82dc830527680"
+    },
+    {
+      "text": "pgbadger -f stderr --command 'cat /var/log/postgresql.log'",
+      "classification": "command",
+      "source_sha256": "cddf022fbd0a17055c59a9b655c94a824f05acb0898202ba8081b14c7f8ed3cc"
+    },
+    {
+      "text": "pgbadger -f csv --command 'psql dbname -c \"COPY jrn_log TO STDOUT (FORMAT CSV)\"'",
+      "classification": "command",
+      "source_sha256": "fc3379df5409313ac08955235780814c3d238f9e0ef175133ef89b48c4bc635d"
+    },
+    {
+      "text": "Total query duration: 6m16s",
+      "classification": "program-output",
+      "source_sha256": "8ecaccf9dd0e9ebbc2598cd88f1f9606a9c255eb5a403ee643135dc8bf53ca80"
+    },
+    {
+      "text": "Prepare/parse total duration: 45s564ms",
+      "classification": "program-output",
+      "source_sha256": "0858aa05012c55849821d9ce52524a5f697b3d10982c153a7de7dffee26d6949"
+    },
+    {
+      "text": "Bind total duration: 4m46s",
+      "classification": "program-output",
+      "source_sha256": "4d2b979406921233f48b591f3f6d2046a2d825b8b931165b4294bf55c44009cc"
+    },
+    {
+      "text": "Execute total duration: 44s71m",
+      "classification": "program-output",
+      "source_sha256": "cc904d37734118324a8b99e7cf673794eb9dbdad16c6ab1b633aacfd08c6374c"
+    },
+    {
+      "text": "heroku logs -p postgres | pgbadger -f logplex -o heroku.html -",
+      "classification": "command",
+      "source_sha256": "2107424245cb166658a4d6ee423a8acc1952d85998903050cfda9c304dcc2fd4"
+    },
+    {
+      "text": "pgbadger heroku.log",
+      "classification": "command",
+      "source_sha256": "5c7f51bcfd2adc1953da2b0806a65312fa48286d4d947e34bfc7e21503ec245c"
+    },
+    {
+      "text": "database = %d connection_source = %r sql_error_code = %e",
+      "classification": "configuration",
+      "source_sha256": "82f8d24015d1b5bac47e6d519e25ad15f321f2f0dfccffa370b59383fa790b4b"
+    },
+    {
+      "text": "sql_error_code = %e",
+      "classification": "configuration",
+      "source_sha256": "1d44b9be804d9511b93c0a00048e76c6a0ea89ee5b919f2560cf0344ffe14944"
+    },
+    {
+      "text": "pgbadger --p 'base = %d source = %r sql_state = %e' heroku.log",
+      "classification": "command",
+      "source_sha256": "451be288ccdf88c5dfad721349a343875282a03990a04513894d83600b1b6d6c"
+    },
+    {
+      "text": "\"database ... must be vacuumed within ... transactions\".",
+      "classification": "program-output",
+      "source_sha256": "e5f0d02a9c911cf7f71eeefffc93b13908e26dfa79c94164d4e711f4c385dc3d"
+    }
+  ]
+}

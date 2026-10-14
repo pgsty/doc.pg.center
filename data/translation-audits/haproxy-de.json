@@ -1,0 +1,2144 @@
+{
+  "schema": 1,
+  "status": "complete-with-out-of-scope-gate-failures",
+  "component": "haproxy",
+  "language": "de",
+  "reviewed_at": "2026-10-13T05:20:53.907620+00:00",
+  "source": {
+    "version": "3.4.6-66",
+    "upstream_ref": "v3.4.6-66-g16acce1dac1d",
+    "upstream_commit": "16acce1dac1dcf1ad5d654204af3a5d45d0e3de8",
+    "initial_head": "7c479f7147cfbe83855888c771e28cec980d34ef",
+    "all_38_source_fingerprints_unchanged": false,
+    "latest_release": "3.4.6",
+    "latest_release_tag": "v3.4.6"
+  },
+  "coverage": {
+    "published_pages": 35,
+    "published_targets": 35,
+    "divider_targets": 3,
+    "all_pairs": 38,
+    "missing_pages": 0,
+    "orphan_pages": 0,
+    "initial_published_targets": 2,
+    "initial_page_percent": 5.714285714285714,
+    "final_page_percent": 100,
+    "english_body_chars": 2094813,
+    "initial_paired_english_body_chars": 2238,
+    "initial_weighted_body_scope_percent": 0.10683531179155371,
+    "final_weighted_body_scope_percent": 100,
+    "note": "Page pairing and English body weights measure corresponding page scope, not sentence-level translation rate. Separate complete semantic review is recorded for every published body.",
+    "placeholders": 0,
+    "unexplained_english_prose": 0,
+    "unprocessed_current_source_differences": 0
+  },
+  "changes": {
+    "added_published_pages": [
+      "content/docs/haproxy/acls-and-samples.de.md",
+      "content/docs/haproxy/advanced-features.de.md",
+      "content/docs/haproxy/architecture.de.md",
+      "content/docs/haproxy/basic-features.de.md",
+      "content/docs/haproxy/bind-and-server-options.de.md",
+      "content/docs/haproxy/cache.de.md",
+      "content/docs/haproxy/configuration-basics.de.md",
+      "content/docs/haproxy/configuration-logging.de.md",
+      "content/docs/haproxy/configuration-management.de.md",
+      "content/docs/haproxy/cpu.de.md",
+      "content/docs/haproxy/debugging-and-performance.de.md",
+      "content/docs/haproxy/ecosystem.de.md",
+      "content/docs/haproxy/fastcgi.de.md",
+      "content/docs/haproxy/file-descriptors.de.md",
+      "content/docs/haproxy/filters.de.md",
+      "content/docs/haproxy/global.de.md",
+      "content/docs/haproxy/http-fundamentals.de.md",
+      "content/docs/haproxy/load-balancing.de.md",
+      "content/docs/haproxy/management-architecture.de.md",
+      "content/docs/haproxy/management-logging.de.md",
+      "content/docs/haproxy/memory.de.md",
+      "content/docs/haproxy/other-sections.de.md",
+      "content/docs/haproxy/proxies.de.md",
+      "content/docs/haproxy/releases-and-upgrades.de.md",
+      "content/docs/haproxy/resources.de.md",
+      "content/docs/haproxy/security.de.md",
+      "content/docs/haproxy/sizing.de.md",
+      "content/docs/haproxy/standard-features.de.md",
+      "content/docs/haproxy/starting.de.md",
+      "content/docs/haproxy/statistics-and-monitoring.de.md",
+      "content/docs/haproxy/stick-tables-and-peers.de.md",
+      "content/docs/haproxy/stopping-and-restarting.de.md",
+      "content/docs/haproxy/traps.de.md"
+    ],
+    "corrected_existing_pages": [
+      "content/docs/haproxy/_index.de.md"
+    ],
+    "existing_pages_reviewed_unchanged": [
+      "content/docs/haproxy/prerequisites.de.md"
+    ],
+    "added_dividers": [
+      "content/docs/haproxy/_div_configuration.de.md",
+      "content/docs/haproxy/_div_intro.de.md",
+      "content/docs/haproxy/_div_management.de.md"
+    ]
+  },
+  "pages": [
+    {
+      "source": "content/docs/haproxy/_div_configuration.md",
+      "target": "content/docs/haproxy/_div_configuration.de.md",
+      "kind": "sidebar-divider",
+      "change": "navigation-added",
+      "source_sha256": "861a9b99357f7e9ba28415c54e1443f13da88201c7078447d7a20d0451ea1ca8",
+      "target_sha256": "7af503032c263a06867150f56c574df874d8b9d5362b77407cdc0665f4d1fc34",
+      "english_body_chars": 1,
+      "semantic_review": {
+        "method": "Separate English/German navigation metadata comparison; no prose body.",
+        "review": "Localized title/linkTitle, kept weight, divider flag, no-render build and empty upstream_link; final rendered sidebar checked separately.",
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0
+    },
+    {
+      "source": "content/docs/haproxy/_div_intro.md",
+      "target": "content/docs/haproxy/_div_intro.de.md",
+      "kind": "sidebar-divider",
+      "change": "navigation-added",
+      "source_sha256": "10b14b6dfee1e38cf2cf7b365f614ac94cbf93f6aeae8b4bf5e458c0386bd1da",
+      "target_sha256": "54d5ec9d6dc9858f44493dd3dde57549157e4cf0c869697c65288f6811a21160",
+      "english_body_chars": 1,
+      "semantic_review": {
+        "method": "Separate English/German navigation metadata comparison; no prose body.",
+        "review": "Localized title/linkTitle, kept weight, divider flag, no-render build and empty upstream_link; final rendered sidebar checked separately.",
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0
+    },
+    {
+      "source": "content/docs/haproxy/_div_management.md",
+      "target": "content/docs/haproxy/_div_management.de.md",
+      "kind": "sidebar-divider",
+      "change": "navigation-added",
+      "source_sha256": "8c03b6727cb383522ddaff6d3bd2814dff000e2b4adbf188ad3b30b1688ea960",
+      "target_sha256": "7626ca1953bfb4d4e5c3fdefe8b8e278a09ba127ccee47a20bc84504032ce475",
+      "english_body_chars": 1,
+      "semantic_review": {
+        "method": "Separate English/German navigation metadata comparison; no prose body.",
+        "review": "Localized title/linkTitle, kept weight, divider flag, no-render build and empty upstream_link; final rendered sidebar checked separately.",
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0
+    },
+    {
+      "source": "content/docs/haproxy/_index.md",
+      "target": "content/docs/haproxy/_index.de.md",
+      "kind": "published-page",
+      "change": "corrected-existing",
+      "source_sha256": "28a147bc1cdc58b223ddce1fa07fadb4856e85ea0237097e2ef6bf2f55990abb",
+      "target_sha256": "8e4020a30f986c80f66e7adf4fe6b577102ea932e3c0f2cdc081c2b39e5488a9",
+      "english_body_chars": 1675,
+      "semantic_review": {
+        "review": "Separate complete English/German comparison of metadata, introduction, three manual cards, line/page counts, flat reading sequence, license links and companion-edition sentence. German edition wording localized by explicit user instruction.",
+        "findings_and_corrections": [
+          "Changed English-edition description and introduction to complete German translation; retained all factual scope, source counts, anchors and technical metadata.",
+          "Retained previously reviewed Reverse-Proxy, Runtime-CLI and Fehlerbehebung terminology."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "28a147bc1cdc58b223ddce1fa07fadb4856e85ea0237097e2ef6bf2f55990abb",
+        "target_sha256": "8e4020a30f986c80f66e7adf4fe6b577102ea932e3c0f2cdc081c2b39e5488a9"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/acls-and-samples.md",
+      "target": "content/docs/haproxy/acls-and-samples.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "7739ca9b311c4a143ca472f9043cae7e349d19da061c2b93165464beb3ad24fb",
+      "target_sha256": "932594e30d67ef83bac023792e6756d2e017f54fc2454382b1c99425da8b3ba3",
+      "english_body_chars": 435061,
+      "semantic_review": {
+        "source": "content/docs/haproxy/acls-and-samples.md",
+        "target": "content/docs/haproxy/acls-and-samples.de.md",
+        "source_sha256": "233e220b44da2677c1f1875b8c7d4f41af1138fe9f133f9a821623e15006e6f9",
+        "target_sha256": "94f0929137543625cdd1510b65ad351f4eede3630852a5911b8481d08ff92bde",
+        "source_body_chars": 435060,
+        "reviewed_chunks": 57,
+        "translated_explanatory_fences": 51,
+        "unchanged_literal_fences": 467,
+        "literal_blocks": 4,
+        "completed_at": "2026-10-13T12:35:16.063852",
+        "head": "7c479f7147cfbe83855888c771e28cec980d34ef",
+        "reviewed_scope": "Complete body from introduction through7.1,7.2,7.3.1–7.3.7 and7.4, no omitted fetch/converter entries",
+        "semantic_review": "57 contiguous source-matched fragments, all prose manually compared; separate second review of51 explanatory fences and metadata against final output",
+        "strict_fragment_errors": 0,
+        "current_source_pair_parity_errors": 0,
+        "prose_lint_findings": 0,
+        "additional_residual_seven_word_findings": 0,
+        "legal_english_exceptions": [
+          "Original commands/configuration/output/logs and source comments inside467 literal fences remain byte-identical.",
+          "Protocol/message/property/field names, method signatures and type/deprecation labels inside protected code, API arguments, environment variables, paths, URLs, error messages and formal product/protocol names remain exact.",
+          "JWT verification and SSL error-table message strings remain original, with German column headings; MQTT protocol property names remain original.",
+          "4 registered raw configuration snippets stay exact, including comment bytes; two Example prefixes outside protected suffixes are translated Beispiel."
+        ],
+        "generation_limitations": [
+          "Ollama drafts required manual correction; placeholder, acronym, numeric and line-wrap/list-marker failures were not accepted as translations.",
+          "The independent model audit once returned0 issues despite actual semantic defects; it was stopped and was not used for acceptance.",
+          "Final tail generation session19675/PID26047 was deliberately stopped only after reviewed artifacts replaced its pending work; observed exit143 and saved handle."
+        ],
+        "evidence_files": [
+          "manual-review-ledger.json",
+          "fence-and-metadata-second-review.json",
+          "all-fragments-validation.json",
+          "parity-errors.json",
+          "prose-final.log",
+          "residual-english-ngram.json",
+          "handle.json"
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 51,
+      "unfenced_literal_blocks": 4,
+      "literal_snippets": 0,
+      "rendered_explanation_review": {
+        "status": "passed",
+        "separate_source_rendered_comparison": true,
+        "registry": "data/translation-fences/haproxy.de/acls-and-samples.json",
+        "reviewed_blocks": 7,
+        "notes": [
+          "All seven logging conditions retain their true/false criteria; redispatch counts as an error, inline ACL context and long-transfer example are fully conveyed.",
+          "All seven termination-event layers retain frontend/backend order and the mux-stream/applet qualification.",
+          "with_qm includes the question mark only when the query string is nonempty.",
+          "head/tail/first remain field names; oldest/newest and analysis restart roles are retained.",
+          "head/tail/first remain field names; oldest/newest and analysis restart roles are retained (second repeated list).",
+          "head/tail/first remain field names; oldest/newest and analysis restart roles are retained (third repeated list).",
+          "head/tail/first remain field names; oldest/newest and analysis restart roles are retained (fourth repeated list)."
+        ]
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "7739ca9b311c4a143ca472f9043cae7e349d19da061c2b93165464beb3ad24fb",
+        "target_sha256": "932594e30d67ef83bac023792e6756d2e017f54fc2454382b1c99425da8b3ba3"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/advanced-features.md",
+      "target": "content/docs/haproxy/advanced-features.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "613f6a960f1e12fd852db798c3c3681bef532a9932f71f794da3a7bd9f68800b",
+      "target_sha256": "136442f1bf550d7a008367b8f67c531a450dde11e4de4372012ce2406c6b5815",
+      "english_body_chars": 9156,
+      "semantic_review": {
+        "source_sha256": "df3c6dc47e16d8826ff2ba6e4e42fd0d78b8020389f652af03b94b39d13abd06",
+        "target_sha256": "22bfe3c4d06c2c8893696c4bd5a8b3beba63bf188f2482cd23547caf9d180222",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared all advanced feature descriptions, CLI tooling, resource capabilities, Lua and tracing; no omitted list entries or changed conditions."
+        ],
+        "source_issues_preserved": [],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "613f6a960f1e12fd852db798c3c3681bef532a9932f71f794da3a7bd9f68800b",
+        "target_sha256": "136442f1bf550d7a008367b8f67c531a450dde11e4de4372012ce2406c6b5815"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/architecture.md",
+      "target": "content/docs/haproxy/architecture.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "78e802de12cbee137599c304a6ba1e7196d1bbc33a44bce1472b7cdc09b5ff39",
+      "target_sha256": "26291eb47d8672ea1a122651507b05002c4815341c89cb5258c8bdb87ea2c55e",
+      "english_body_chars": 11035,
+      "semantic_review": {
+        "source_sha256": "41a70d25023c38fb8a87e3d287c725a3254482162ad97c71d4bb2c640947f814",
+        "target_sha256": "06af3fe7f8d0bea0baa4dc00c3db569fcfd7ba400d50f7db94bbb51be5372c64",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared all capabilities, exclusions, performance ratios, startup behavior and nine processing stages. Removed an added qualification that had narrowed the original startup/runtime-failure claim."
+        ],
+        "source_issues_preserved": [
+          "The broad no-runtime-failures claim and packet/UDP limitations are preserved as stated by the pinned English source."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "78e802de12cbee137599c304a6ba1e7196d1bbc33a44bce1472b7cdc09b5ff39",
+        "target_sha256": "26291eb47d8672ea1a122651507b05002c4815341c89cb5258c8bdb87ea2c55e"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/basic-features.md",
+      "target": "content/docs/haproxy/basic-features.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "e7343f1cbdbfb2e943deb231cfa24800c2d18b91587eac1f0f312d0a2bbc1814",
+      "target_sha256": "f7d8c88e8c481be72169ea471ce194371b79c2c9bb114967d8bf013a51702708",
+      "english_body_chars": 16787,
+      "semantic_review": {
+        "source_sha256": "afef71c0974104f4fa75aedd634b545e508ec28d013455d0051f6a23b9dcbb3b",
+        "target_sha256": "7a76e137917fb145aa0dff74af7e17921f11fb3603626fb3fa8ad88bcb641a3e",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared all eight sections with the source including proxy boundaries, TLS authentication directions, checking hysteresis, health-check conditions, algorithm descriptions, persistence, logging and statistics. Restored the exclusive imperative for IP redundancy protocols instead of weakening it to a preference."
+        ],
+        "source_issues_preserved": [
+          "Feature descriptions and historical protocol/library claims remain those of the pinned English source."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "e7343f1cbdbfb2e943deb231cfa24800c2d18b91587eac1f0f312d0a2bbc1814",
+        "target_sha256": "f7d8c88e8c481be72169ea471ce194371b79c2c9bb114967d8bf013a51702708"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/bind-and-server-options.md",
+      "target": "content/docs/haproxy/bind-and-server-options.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "ab2e67b363405b6a7b8f3427febba545b6f48b626717ffe7d4a21093150f81c2",
+      "target_sha256": "f016d472385c02132e27cc5fc527a29d332420532dc4714b86e7a093d1cc239a",
+      "english_body_chars": 174811,
+      "semantic_review": {
+        "page": "bind-and-server-options",
+        "source_sha256": "603a1547c149ad5bf59a7513af4a20722c07ab57f4125d1cc8d1fbebe9d64173",
+        "target_sha256": "bd32d9c9fc4fe00bff2f2dc72adb5163f7a0ee5bc1d76fa2bd55124365784347",
+        "target_path": "/Users/vonng/pgsty/doc.pg.center/content/docs/haproxy/bind-and-server-options.de.md",
+        "body_chunks_translated_and_separately_reviewed": 21,
+        "total_body_chunks": 21,
+        "explanation_fences_translated_and_separately_reviewed": 8,
+        "final_parity_current_source": "PASS (inferred IDs in completed-pages-parity-handoff.json; parent does rendered-English check)",
+        "prose_lint": "PASS",
+        "staging": "not staged or committed",
+        "status": "passed"
+      },
+      "explanatory_fences": 8,
+      "unfenced_literal_blocks": 1,
+      "literal_snippets": 0,
+      "rendered_explanation_review": {
+        "status": "passed",
+        "separate_source_rendered_comparison": true,
+        "registry": "data/translation-fences/haproxy.de/bind-and-server-options.json",
+        "reviewed_blocks": 1,
+        "notes": [
+          "All six DNS statuses and both argument descriptions retain timing, valid-action restriction, dynamic-server exclusion, SRV-only obsolete handling and millisecond default."
+        ]
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "ab2e67b363405b6a7b8f3427febba545b6f48b626717ffe7d4a21093150f81c2",
+        "target_sha256": "f016d472385c02132e27cc5fc527a29d332420532dc4714b86e7a093d1cc239a"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/cache.md",
+      "target": "content/docs/haproxy/cache.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "cb2a14a28aef8306198e20145d8ff2af0bef97a5ded224c8837b06c0443108a8",
+      "target_sha256": "21142746dddd561d4ce62b6357d1032928f0313e83bef698dbcedd10de141773",
+      "english_body_chars": 5780,
+      "semantic_review": {
+        "source_sha256": "8d4766f4e531b0277ef735f7487cd78c2b6b6b1cbe515d448d8e240c5bd5fc53",
+        "target_sha256": "d7e5d20376c4ba9e5c2a594a0e073b0147344cc0ecf6f6243a369627aaac1f10",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Separate full-page source/target comparison completed after drafting; all ten exclusion conditions, expiration precedence, limits/defaults and secondary-key behavior checked.",
+          "All seven configuration/example fences remain byte-identical. German ordinal 256. preserves the 256th cache-size fraction."
+        ],
+        "source_issues_preserved": [
+          "The source labels its section 9.3 filters link as Unix Socket commands; the original destination is preserved with the German route prefix."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "cb2a14a28aef8306198e20145d8ff2af0bef97a5ded224c8837b06c0443108a8",
+        "target_sha256": "21142746dddd561d4ce62b6357d1032928f0313e83bef698dbcedd10de141773"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/configuration-basics.md",
+      "target": "content/docs/haproxy/configuration-basics.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "d0ca9b4db35f9a6f5fff6f090967847935b9f7b80d0440d14a912d3725036e25",
+      "target_sha256": "efa599e804782ab6b2e97ad9d4a7ddb371628503254b786b87458d14165200ae",
+      "english_body_chars": 51658,
+      "semantic_review": {
+        "page": "configuration-basics",
+        "source_sha256": "0c1a6c01baa12684d5870afa52700c65e5c1a062a19c2df58ef53b5b61e094d2",
+        "target_sha256": "abcdf2fe79c840a0d5961894d001051d1ecb6832f18275f83676716067772647",
+        "body_review": "All 7 chunks independently compared against source after draft; see private manual-review-ledger.",
+        "fence_review": {
+          "reviewed_translated_fences": 14,
+          "unchanged_fences": 22,
+          "unfenced_configuration_blocks": 7,
+          "notes": [
+            "All 7 grammar rules compared, without omission or requirement weakening.",
+            "Escape sequences, control-code values and quoting matrix cells identical; German labels checked.",
+            "ASCII diagram connectors and expression operands checked against source.",
+            "The importer split the hash-character explanation from the quoting table into a haproxy fence; translated its human label with an exact page-specific mapping. Actual code comments in all examples remain unchanged."
+          ]
+        },
+        "source_issues_preserved": [
+          "tcp6@ aliases stream+ipv4@ and udp6@ aliases dgram+ipv4@ in current English.",
+          "The prose says four variable categories but lists three; current source wording preserved.",
+          "Cross-reference 9.3 Unix Sockets commands currently targets filters; source destination preserved."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 14,
+      "unfenced_literal_blocks": 7,
+      "literal_snippets": 0,
+      "rendered_explanation_review": {
+        "status": "passed",
+        "separate_source_rendered_comparison": true,
+        "registry": "data/translation-fences/haproxy.de/configuration-basics.json",
+        "reviewed_blocks": 1,
+        "notes": [
+          "macOS sendmsg(2) warning retains the known unreliability and possible connection rejection, without upgrading possibility to certainty."
+        ]
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "d0ca9b4db35f9a6f5fff6f090967847935b9f7b80d0440d14a912d3725036e25",
+        "target_sha256": "efa599e804782ab6b2e97ad9d4a7ddb371628503254b786b87458d14165200ae"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/configuration-logging.md",
+      "target": "content/docs/haproxy/configuration-logging.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "b0bb70f5458db04d938a60da8df2fd600825a7da877bad0281b4bec6f6b039b3",
+      "target_sha256": "96c855e12aa704de8d0f712601f56ad597f9f81d2423f8c2715f00078b674819",
+      "english_body_chars": 112176,
+      "semantic_review": {
+        "source_sha256": "f4ce401c2fd5badef25aac5f612e844321eb2d553d2a6f604949e638b5cb1927",
+        "target_sha256": "27b889098bbcc3c2217a93d712cc7f2f25cd22f48c86f555a844a77311b7e615",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "All 15 chunks compared in a separate source/target pass. Corrected queue-condition reversal, retries versus attempts, strict severity threshold above notice, omitted duration and accept() literal, malformed type placeholders, and TLS/stream terminology. Reviewed every timer, termination flag and persistence combination, all escape and encoding rules and logging examples. Translated 10 explanatory fences and preserved 20 literal fences plus 12 unfenced literal blocks."
+        ],
+        "source_issues_preserved": [
+          "Historical 3/6/12-second TCP retransmission explanation is retained. The PC example recommends increasing global maxconn after reaching a socket limit; preserved verbatim in meaning. Historical log examples retain inconsistent status flags and the malformed method row in the alias table."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 10,
+      "unfenced_literal_blocks": 12,
+      "literal_snippets": 0,
+      "rendered_explanation_review": {
+        "status": "passed",
+        "separate_source_rendered_comparison": true,
+        "registry": "data/translation-fences/haproxy.de/configuration-logging.json",
+        "reviewed_blocks": 6,
+        "notes": [
+          "R/H/S/L legend retains HTTP-only, SSL-only and logging-only restrictions; only descriptions are localized.",
+          "-1 exclusion, nonnegative Ta, %Ta alias and txn.timer.total fetch are retained.",
+          "-1 exclusion, additional TCP Ti/Tq/Tr exclusions, nonnegative Tt, HTTP Th+Ti+Ta identity and alias/fetch names are retained.",
+          "All 26 termination flags retain case and order. Individually compared cause, stage, timeout, HTTP return codes, security-filter branches, error concealment, chunk limit and recovery caveats.",
+          "Both log records are byte exact. The German commentary retains 6.5s/147 ms, normal flags, nine preceding requests and 1230 ms queued wait.",
+          "All five log records are byte exact. Separately compared logasap timing, PH-- proxy responsibility, self-abort versus timeout, no server traffic, TCP timeout, attempts/retries, no redispatch and all connection counts."
+        ]
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "b0bb70f5458db04d938a60da8df2fd600825a7da877bad0281b4bec6f6b039b3",
+        "target_sha256": "96c855e12aa704de8d0f712601f56ad597f9f81d2423f8c2715f00078b674819"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/configuration-management.md",
+      "target": "content/docs/haproxy/configuration-management.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "d1f30a0eb732962b2b59b69da54655d714680c4144c729ce4cc5670c9078cc16",
+      "target_sha256": "77a25db6bd188480e3d79b2b41bb9d4729f1e0f728e57af8f7c648325d255ee7",
+      "english_body_chars": 2152,
+      "semantic_review": {
+        "source_sha256": "d478b15d0a684df31cb2343abe7ea303947250db40141b8c8efb3baa4d17b5b6",
+        "target_sha256": "e4aa54d20fb26d21461c8fa82419abe5f3abf561b21a592c8dc52a1e8248cad4",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Checked all environment syntax delimiters, version 1.5 versus 1.6 and the double-quoted argument exception.",
+          "Complete configuration example and credentials/variables in it remain byte-identical. No semantic corrections needed."
+        ],
+        "source_issues_preserved": [],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "d1f30a0eb732962b2b59b69da54655d714680c4144c729ce4cc5670c9078cc16",
+        "target_sha256": "77a25db6bd188480e3d79b2b41bb9d4729f1e0f728e57af8f7c648325d255ee7"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/cpu.md",
+      "target": "content/docs/haproxy/cpu.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "400e00056896ce744139a39c424e269af94c892320ddf13a9451c99df0906ce1",
+      "target_sha256": "81702233e9a9c66e3208008d38579cb35c29deb4df9796dfe3cd79220f6135eb",
+      "english_body_chars": 8280,
+      "semantic_review": {
+        "source_sha256": "c15ce5cde601e629319ab59be06f1aed20d90845d7bad07540251f057bc9410d",
+        "target_sha256": "3548664d87be1914c3f6d7a36780e08cb7f4160629b9dda49fce56d9ca896713",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared all utilization percentages, rate/clock values, four CPU time categories, Rx/Tx attribution and idle interpretation.",
+          "Checked thread/core/cache affinity, firewall diagnostics, all multi-process limitations and process binding advice. No semantic corrections needed."
+        ],
+        "source_issues_preserved": [
+          "The approved source still discusses nbproc and process-based scaling; translation preserves that source instead of introducing a different version behavior."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "400e00056896ce744139a39c424e269af94c892320ddf13a9451c99df0906ce1",
+        "target_sha256": "81702233e9a9c66e3208008d38579cb35c29deb4df9796dfe3cd79220f6135eb"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/debugging-and-performance.md",
+      "target": "content/docs/haproxy/debugging-and-performance.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "e6c81101044dca0c0789df1b00d0c0a434313ef73f28d8f2f9a4bcf3d00861db",
+      "target_sha256": "2b83dbb67ef5f77fd7d051eaa76be2e97f1cb1817bad968704da117f6f8e2b15",
+      "english_body_chars": 8599,
+      "semantic_review": {
+        "source_sha256": "c31cdf51b27d9892107f6abf73046028e30091063251003510a6930c87b3ebd9",
+        "target_sha256": "9d6c8641ead723ba5ac5568dccd6403bdecb05ce3992ab392398233ddae3505e",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared debug timing before modifications, malformed HTTP captures, memory poisoning cases and production caution.",
+          "Checked strace/tcpdump ordering and options, ACK/congestion/Nagle cases, virtualization comparison, SACK caveat and Rx-Ovr/Rx-Drp/Tx-Drp distinctions. No semantic corrections needed."
+        ],
+        "source_issues_preserved": [
+          "The source describes Nagle as delaying empty packets; wording is preserved rather than silently rewritten."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "e6c81101044dca0c0789df1b00d0c0a434313ef73f28d8f2f9a4bcf3d00861db",
+        "target_sha256": "2b83dbb67ef5f77fd7d051eaa76be2e97f1cb1817bad968704da117f6f8e2b15"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/ecosystem.md",
+      "target": "content/docs/haproxy/ecosystem.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "749165d4eb17208d1dad6f4a878d57a52def405397617841ef3a41211fd61365",
+      "target_sha256": "e11df62aaae9730ad00cea0d1b90609326400080bdf6acb2a3ba0b10466db445",
+      "english_body_chars": 5995,
+      "semantic_review": {
+        "source_sha256": "7d7b5b56616458c3643dfd9da1cdf87df400d0184a5b17c843b137483908ad78",
+        "target_sha256": "26263580799135a0e4095c4082efb9dacd01e07818ca7fa3d322bf717a140313",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared Apache, NGINX, Varnish, LVS, Pound and Pen roles and limitations, cache freshness and complementary deployment claims. No changes required."
+        ],
+        "source_issues_preserved": [],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "749165d4eb17208d1dad6f4a878d57a52def405397617841ef3a41211fd61365",
+        "target_sha256": "e11df62aaae9730ad00cea0d1b90609326400080bdf6acb2a3ba0b10466db445"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/fastcgi.md",
+      "target": "content/docs/haproxy/fastcgi.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "6a1c965966e9a0bc39b02237ef4757b4a77fc93e8bf1cec097ce3f7d607b5af7",
+      "target_sha256": "7d51101cc1ae9ed4e7f555012098f3fa426422e1d9164c2df6b9d7f840928837",
+      "english_body_chars": 18021,
+      "semantic_review": {
+        "source": "content/docs/haproxy/fastcgi.md",
+        "target": "content/docs/haproxy/fastcgi.de.md",
+        "source_sha256": "894455a284eaa567f81afbc91aa7d8e4e40d7259a2cfcff51dc96a77952665c8",
+        "target_sha256": "dd150a659d8357c844efb36ec66d6c04fc4a576bfc56eef707cd042a201503c3",
+        "head": "7c479f7147cfbe83855888c771e28cec980d34ef",
+        "reviewed_at": "2026-10-13T12:41:16.270600",
+        "source_body_chars": 18020,
+        "complete_scope": "10.1–10.3, including all configuration directives,19 default parameters and every limitation",
+        "method": "Manual full translation, followed by a separate read of all44 original/translated prose-heading-list paragraph pairs, both explanatory fences and final metadata. No model draft used. All4 supplied source fragments concatenate exactly to current English body.",
+        "checks": {
+          "current_source_pair_parity_errors": [],
+          "prose_lint_findings": 0,
+          "literal_fences_unchanged": 15,
+          "explanatory_fences_translated": 2,
+          "unfenced_configuration_blocks_preserved": 1
+        },
+        "review_points": [
+          "FastCGI2.1 introduction, responder role and per-backend application limit",
+          "Private ACL visibility plus predefined ACL exception",
+          "Mandatory document root and optional index/path-info behavior",
+          "First regex capture mandatory; second optional; URL-decoded newline/null rejection only when regex defined",
+          "Default get-values disabled, keep-conn enabled, max-reqs1 and mpxs-conns disabled; fetched variables override settings; per-connection versus application-wide limits",
+          "set-param declaration order and empty-value ignore; header processing before routing and HTX buffer contention",
+          "19 default parameter definitions, including known body length, optional parameters, path concatenation and client-side destination address/port",
+          "One-pass FCGI_PARAM encoding bounded by buffer, with no reserve required"
+        ],
+        "fences_second_review": [
+          {
+            "index": 16,
+            "source_sha256": "95eacdc82fb297c1ce34bb9ca8383e72ced56f680eac57cc72dc20d396f4f10c",
+            "target_sha256": "5b0eba71f91ebdcafdde4f06d3950349055c71294867c271197f45a46e92beb4",
+            "complete_original_comparison": true
+          },
+          {
+            "index": 17,
+            "source_sha256": "841a07f00740f9d1a107175d22eeee60ab24ef79128d5d4b50f22e968df323d4",
+            "target_sha256": "4fc321ec3bc29aef64db7b3b583c67f2e786bde8c083ea362bd1add7852f7b24",
+            "complete_original_comparison": true
+          }
+        ],
+        "metadata": {
+          "source_sha256": "7bb2514328b29eef83104c446ed717dfe0586f16406199a3d02aa4a70e576435",
+          "target_sha256": "20e9ce6741cfcea2aed04595da6ef7d646627f679922db2eff2966c311391d06",
+          "translated_fields": [
+            "title",
+            "description",
+            "categories"
+          ],
+          "linkTitle": "10. FastCGI (numeric prefix and protocol name already language-neutral)",
+          "non_translatable_fields_preserved": true
+        },
+        "preserved_source_issues": [
+          "Unfenced configuration example lines269–282 retains original flattened lines, escaped stars and the truncated bind token exactly.",
+          "Source uses the singular protocol record identifier FCGI_PARAM in its final limitation; retained exactly."
+        ],
+        "legal_english_exceptions": [
+          "Copyable syntax/configuration and original code comments in15 fences plus raw example remain byte-identical.",
+          "FastCGI, Responder, protocol/parameter/header names and quoted values are technical literals; no English explanatory sentence remains."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 2,
+      "unfenced_literal_blocks": 1,
+      "literal_snippets": 0,
+      "rendered_explanation_review": {
+        "status": "passed",
+        "separate_source_rendered_comparison": true,
+        "registry": "data/translation-fences/haproxy.de/fastcgi.json",
+        "reviewed_blocks": 1,
+        "notes": [
+          "FCGI_MAX_REQS remains simultaneous request capacity; FCGI_MPXS_CONNS retains 0 for no multiplexing and 1 otherwise."
+        ]
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "6a1c965966e9a0bc39b02237ef4757b4a77fc93e8bf1cec097ce3f7d607b5af7",
+        "target_sha256": "7d51101cc1ae9ed4e7f555012098f3fa426422e1d9164c2df6b9d7f840928837"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/file-descriptors.md",
+      "target": "content/docs/haproxy/file-descriptors.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "8bc8fe5af01a23c9bc9348f24b11dc1f291d4a7248fd0606259e484bd1026113",
+      "target_sha256": "8b2af7e4fca61628cb0672af39ba421889023d5f534a35d29329f509a34a2e58",
+      "english_body_chars": 6345,
+      "semantic_review": {
+        "source_sha256": "5d205deee73ec80238f355e759323a17e4eda4c625d6fc95f2983a16cb9e2ffb",
+        "target_sha256": "91bb1e095c59ef01b62ccd71995ea5d373f7ceaf6f2fc64ff4af09c866b6c034",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared each limit and every number, including 1024/500/1048576 and Linux kernel version condition.",
+          "Retained must/should distinction, root/user warnings and EMFILE versus ENFILE remedies.",
+          "Changed recommendation wording to preserve original important-to-remove force without weakening or strengthening it."
+        ],
+        "source_issues_preserved": [],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "8bc8fe5af01a23c9bc9348f24b11dc1f291d4a7248fd0606259e484bd1026113",
+        "target_sha256": "8b2af7e4fca61628cb0672af39ba421889023d5f534a35d29329f509a34a2e58"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/filters.md",
+      "target": "content/docs/haproxy/filters.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "ca378ab69ab7881d7c2d54900efb218687fe10474aa33bb8b475128223d16a02",
+      "target_sha256": "5829a0d076578f512c7479fb0dc0575525ac9434c9f9ffbecdd43d14c6a49050",
+      "english_body_chars": 14952,
+      "semantic_review": {
+        "source_sha256": "e75b99ef1d813363c62fcbd9c740f6970d46cf3743da8a6637e24521e8fd6984",
+        "target_sha256": "d802f159f0b21c1adc235915df282004dd458fe1d8aceeb50c4b49edc9b97391",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "All prose and six explanatory argument fences compared in a separate English/German pass; implicit/explicit ordering, SPOE variables, tracing options and bandwidth semantics checked.",
+          "Two literal fences, eight bare declarations and two snippets remain exact; original code comments are unchanged."
+        ],
+        "source_issues_preserved": [
+          "OpenTracing deprecation prose uses future tense for 3.3 in the 3.4.4 baseline; retained.",
+          "Trace prose mentions random-parsing and quiet although neither appears in the displayed declaration; retained."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 6,
+      "unfenced_literal_blocks": 8,
+      "literal_snippets": 2,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "ca378ab69ab7881d7c2d54900efb218687fe10474aa33bb8b475128223d16a02",
+        "target_sha256": "5829a0d076578f512c7479fb0dc0575525ac9434c9f9ffbecdd43d14c6a49050"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/global.md",
+      "target": "content/docs/haproxy/global.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "8a5d2b06ee0043243d00173e0a767f90225117689fa65ca27d329b3d3feb649d",
+      "target_sha256": "9618cf7c3bfa194cedc64a4901dcd2b30f4d8fbc59c91fe87a7773b38f4e5b68",
+      "english_body_chars": 248822,
+      "semantic_review": {
+        "page": "global",
+        "source_sha256": "0f06088e5e411995c69da512ba2ce120289155052b28c191afee5d766e9679fd",
+        "target_sha256": "93ab42644ffcf4eeeb19685a4521f186df46971364bde3b5fb00b5f11eb7ad14",
+        "target_path": "/Users/vonng/pgsty/doc.pg.center/content/docs/haproxy/global.de.md",
+        "body_chunks_translated_and_separately_reviewed": 31,
+        "total_body_chunks": 31,
+        "explanation_fences_translated_and_separately_reviewed": 8,
+        "final_parity_current_source": "PASS (inferred IDs in completed-pages-parity-handoff.json; parent does rendered-English check)",
+        "prose_lint": "PASS",
+        "staging": "not staged or committed",
+        "status": "passed",
+        "final_whitespace_review": {
+          "before_sha256": "93ab42644ffcf4eeeb19685a4521f186df46971364bde3b5fb00b5f11eb7ad14",
+          "after_sha256": "3ac348efe4c8feb1ec307abbe040950e39783f44c379b44f43a0ba355cdc91d9",
+          "review": "Removed exactly one extra empty EOF line; all non-whitespace text and protected blocks unchanged. Separate semantic review retained."
+        }
+      },
+      "explanatory_fences": 8,
+      "unfenced_literal_blocks": 1,
+      "literal_snippets": 2,
+      "rendered_explanation_review": {
+        "status": "passed",
+        "separate_source_rendered_comparison": true,
+        "registry": "data/translation-fences/haproxy.de/global.json",
+        "reviewed_blocks": 3,
+        "notes": [
+          "config/parent/origin retain all directory choices, last-slash handling, per-file update, parent .. fallback and mandatory origin path; packaging examples are complete.",
+          "All three Lua memory-pressure remedies retain optional optimization, GC tuning/manual cycles and tune.lua.burst-timeout increase, with the exact Lua documentation URL.",
+          "All three no-logging conditions retain off, non-proxy/no-global-logger and proxy/no-attached-logger alternatives."
+        ]
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "8a5d2b06ee0043243d00173e0a767f90225117689fa65ca27d329b3d3feb649d",
+        "target_sha256": "9618cf7c3bfa194cedc64a4901dcd2b30f4d8fbc59c91fe87a7773b38f4e5b68"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/http-fundamentals.md",
+      "target": "content/docs/haproxy/http-fundamentals.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "274a62d2d8a2b35d89788c2cdf6fe3db339d8411c6ada3e232557b1225dadc34",
+      "target_sha256": "a216e6b0dbe85c3d933bfc41fc80034f2e5dc2562a316dfcdef7a8efc612970b",
+      "english_body_chars": 22337,
+      "semantic_review": {
+        "source_sha256": "689dc56ec37b80541c787399432fcdf479b43faf83508f95b107c1a38b36e16b",
+        "target_sha256": "21ca343a53df743b23022a9e9062948bb97a3fe158545b59a25375cf15392bb6",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Three full chunks and all six explanatory fences separately compared; all connection modes, terminology, URI forms, header rules, response conditions and status codes checked.",
+          "Actual HTTP messages, protocol trace sequences, URI examples, reason phrases and technical expressions remain exact."
+        ],
+        "source_issues_preserved": [
+          "Introduction states that the document has no examples despite examples later; retained.",
+          "Header prose describes comma folding as common in Cookie; retained.",
+          "Broad 3xx class description says no content follows; retained."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 6,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "274a62d2d8a2b35d89788c2cdf6fe3db339d8411c6ada3e232557b1225dadc34",
+        "target_sha256": "a216e6b0dbe85c3d933bfc41fc80034f2e5dc2562a316dfcdef7a8efc612970b"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/load-balancing.md",
+      "target": "content/docs/haproxy/load-balancing.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "33008271e246c402b5f7c4074b38f96c9f232927236927c8a681d0c13ca17526",
+      "target_sha256": "3e8efda401023ed976ec1f982a40a66e9ea3b982ccd009c5e108706ca63a2ae4",
+      "english_body_chars": 11805,
+      "semantic_review": {
+        "source_sha256": "d4d170a71412f07a934481c8c9a9bc6cd068f923187dae5733eaa7e2e931886e",
+        "target_sha256": "553b4ff19a59e431aa16fbfe3edd7c45ccbcb651d25618f4ec080a4f90055830",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared the entire introductory explanation, packet/session technologies, return-path requirements, checks, persistence and logging. Changed the final troubleshooting instruction back to the source emphasis on importance instead of imposing a new mandatory rule."
+        ],
+        "source_issues_preserved": [],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "33008271e246c402b5f7c4074b38f96c9f232927236927c8a681d0c13ca17526",
+        "target_sha256": "3e8efda401023ed976ec1f982a40a66e9ea3b982ccd009c5e108706ca63a2ae4"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/management-architecture.md",
+      "target": "content/docs/haproxy/management-architecture.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "bfea4e22c46ea342ff24866c633922d83eccc48d2a60663488b2e18a1ca13638",
+      "target_sha256": "57910d2784f2f20424ed802b24e6c75846d133896ca31e5e02262f321fbf1a07",
+      "english_body_chars": 4234,
+      "semantic_review": {
+        "source_sha256": "3b108afd9994b75939c6f038837a9baea2d5aa69c4e632e3dd2fce33772b9775",
+        "target_sha256": "62d65d043feb0f3ae59864adf1310a29254d77aa70fb21a16f26548be6d27b1f",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared full event/thread scheduling explanation, chroot effects, one-second clock correction and TCP-versus-router behavior.",
+          "strace output, netstat command and unfenced netstat output remain exact. No corrections needed."
+        ],
+        "source_issues_preserved": [],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 1,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "bfea4e22c46ea342ff24866c633922d83eccc48d2a60663488b2e18a1ca13638",
+        "target_sha256": "57910d2784f2f20424ed802b24e6c75846d133896ca31e5e02262f321fbf1a07"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/management-logging.md",
+      "target": "content/docs/haproxy/management-logging.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "c3a890980f1556d24787cd0f887a14fa355678fb88782ac49950189dabd518de",
+      "target_sha256": "31a7792cb1fa876393c83ebb823f03e2f21a5fc06333cb0764e13751390a6967",
+      "english_body_chars": 4808,
+      "semantic_review": {
+        "source_sha256": "d2cf2681fb9fffc34b45ef969ed95752eb638e268d5c2f9b83a14ad104246b16",
+        "target_sha256": "e75cfa1b43e2a023c7daf2f2c806472a107e9b32794f78179a43de7ab0e76900",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared UDP/Unix-socket warnings, all three syslog daemon recipes and ordered troubleshooting tests.",
+          "Checked confidentiality must-not requirement, frontend/backend logging responsibilities and 1–2 GB/s halog claim. No corrections needed."
+        ],
+        "source_issues_preserved": [],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "c3a890980f1556d24787cd0f887a14fa355678fb88782ac49950189dabd518de",
+        "target_sha256": "31a7792cb1fa876393c83ebb823f03e2f21a5fc06333cb0764e13751390a6967"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/memory.md",
+      "target": "content/docs/haproxy/memory.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "f16a30f4c16028cfab89cc46a16851734d436a64b06a4ca99190758609b8bc26",
+      "target_sha256": "aa671b900ef624fa8ff391f2b4da33e70b325c7c64205c56a1da834226c733dd",
+      "english_body_chars": 4791,
+      "semantic_review": {
+        "source_sha256": "6fb41f27826dce39b75ef0169d04ffdf90577f8ce69c9f031e675d1f8734eed7",
+        "target_sha256": "61757b2dbd5c475670509122201e0b91a615480d7a1b76b70f87a626e2fec460",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Checked pool LIFO/cache locality, object rounding, allocated versus used, memory limits and SIGQUIT.",
+          "Removed invented causal connection about memory-limit reliability; clarified flushing after every connection release on graceful reload."
+        ],
+        "source_issues_preserved": [],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "f16a30f4c16028cfab89cc46a16851734d436a64b06a4ca99190758609b8bc26",
+        "target_sha256": "aa671b900ef624fa8ff391f2b4da33e70b325c7c64205c56a1da834226c733dd"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/other-sections.md",
+      "target": "content/docs/haproxy/other-sections.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "1303a04284e0f17bc55ae980451b9eae7a8e26eb9abce4b35744afc6f5c57d31",
+      "target_sha256": "40c2a58ea772638be21fd84ab5bdd29eae5eefa03607e1445f0bc21c92e4fce2",
+      "english_body_chars": 53386,
+      "semantic_review": {
+        "method": "Inherited reviewed chunks 1/7/8/9; repaired recovered chunk2 and translated 3–6, followed by a distinct full paragraph comparison. Nine explanatory fences reviewed separately.",
+        "reviewed_chunks": 9,
+        "explanatory_fences_reviewed": 9,
+        "chunk_reviews": [
+          {
+            "chunk": 1,
+            "source_sha256": "bdc59f03282fb49cfa5666aff1d69e72d93eb6e1737b8042d271039540d5e324",
+            "target_sha256": "6b4e2644ad9962447376708f3bde4a4f86775607d2461090ca109de7dcf93fa4",
+            "review": "Compared every paragraph. Fixed quoting/escaping sentence, salt/hash mistranslation, several grammatical errors and must/should strength; retained CPU warning and all password algorithms.",
+            "method": "independent full paragraph-by-paragraph English/German comparison"
+          },
+          {
+            "chunk": 2,
+            "source_sha256": "8f659b0235549eff312084668d501cd08f8852f91b28f7870c86bd4ac6bc0bc4",
+            "target_sha256": "31a0420867c320d9b7c29cca7a2f8369e4f7135f40d4cb5a199c6920fd8d9d8a",
+            "method": "separate full paragraph-by-paragraph English/German comparison after translation",
+            "review": "Separate full English/German paragraph comparison of the recovered draft completed. Corrected HTTP-Fehlercode gender/case, malformed section-4 link label, Ringpuffer terminology, misleading RAM mapping wording, .bak rotation and file ownership wording, and all three stability/security hazards. Corrected barely readable from kaum lesbar to gerade noch lesbar; translated natural-language WARNING/NOT as WARNUNG/NICHT without altering technical abbreviations. Preserved mode 0600, double ring storage requirement, 10-second default, above-4-second handshake advice and literal examples.",
+            "reviewer": "cx4 takeover agent /root/other_sections"
+          },
+          {
+            "chunk": 3,
+            "source_sha256": "8196eccf6f46ec57ac255db37bb81e677fe33a3d9c2d81a989c4056bd221d571",
+            "target_sha256": "fc405e20989332366376802015a67e02a8a6548367281df161fddfe408787660",
+            "method": "separate full paragraph-by-paragraph English/German comparison after translation",
+            "review": "Separate full English/German paragraph comparison completed. All truncation/timeout conditions, BUFSIZE default, slowest-ring-server blocking consequences, one-ring-per-log-server recommendation, IPv4/IPv6 address requirements, framing mode names and facility/timestamp exceptions compared. Removed an extra sollte from the proper-way instruction and clarified Listen-Backlog wording. No missing sentences or altered defaults.",
+            "reviewer": "cx4 takeover agent /root/other_sections"
+          },
+          {
+            "chunk": 4,
+            "source_sha256": "3d64c05bab739bf7121fb05ff0e63ccf8224c6ede2572cbb3d7fad47ac7e4a67",
+            "target_sha256": "678a27f5e5252b6b8b01a8af08bc0aff309ca2e7cb4a34530fe28115e6c42f17",
+            "method": "separate full paragraph-by-paragraph English/German comparison after translation",
+            "review": "Separate full English/German paragraph comparison completed, including all four unfenced indented host-strategy descriptions. replace/fill/keep/append branches, fill default, localhost/- fallback, UNIX/ABNS keep fallback, format-raw should strength, certificate definition order and mandatory PEM contents preserved. Verified absolute-path precedence and global crt-base/key-base exclusions. No semantic omissions found.",
+            "reviewer": "cx4 takeover agent /root/other_sections"
+          },
+          {
+            "chunk": 5,
+            "source_sha256": "103815bdf3fe7bd43620bac74ce298ebb68996d89b7cc97362ee0305d3134935",
+            "target_sha256": "da5084c9d99ba3c37393ad6423fc52420e417fab6b3845b3b2a1d2f13cf2ffbf",
+            "method": "separate full paragraph-by-paragraph English/German comparison after translation",
+            "review": "Separate full English/German paragraph comparison completed. ACME temporary key scope, CN/domain/IP-SAN lists, alias prefix, key overwrite, DER/PEM formats, RFC6962 signed-timestamp requirements, signature non-verification and both OCSP-setting conflict cases compared. Preserved hourly/5-minute update limits, init/no-response exception, now+5m, Next Update field, all OCSP log fields and intentionally repeated HTTP-error log explanation. No missing conditions or reversed update directions found.",
+            "reviewer": "cx4 takeover agent /root/other_sections"
+          },
+          {
+            "chunk": 6,
+            "source_sha256": "118ad51c5353a276da295805ff1b8f941c70f1fd3f4d4f0acee287af8cd93ac2",
+            "target_sha256": "82d4469630a8a9c26d6ef37efb2ec2f440adb518798d3b157fcf8a88a80143fe",
+            "method": "separate full paragraph-by-paragraph English/German comparison after translation",
+            "review": "Separate full English/German paragraph comparison completed. Fixed Let's Encrypt brand spelling and translated might-want advice as kann es sinnvoll sein rather than sollte. Compared IPv6 routing, issuer/error-message checks, JWT deletion restriction, dummy RSA/ECDSA generation and defaults, ACME experimental gate, challenge-tool requirements, off-process certificate dump, account-file lifecycle and DNS variables. Exact ACME inline explanation labels are applied separately from the already independently reviewed explanation fences. Preserved the source's imprecise notAfter comparison verbatim in direction/formula, 7-day fallback and 12-hour scheduler interval. Source 3rd party means Drittanbieter, not a numerical fact, so naturally translated as Drittanbieterwerkzeug under the exact-context numeric exception. Repaired mismatched prose quote after ECDSA and acme renew while preserving their literal values.",
+            "reviewer": "cx4 takeover agent /root/other_sections"
+          },
+          {
+            "chunk": 7,
+            "source_sha256": "c1f50780c64a8363cbfc2f5b4137b70be779d4a0e9f1e2a1033b9534ee5a19d9",
+            "target_sha256": "04411d403729ed0220abab87ac4e897419006ef54c263fd11163527be869a0ed",
+            "method": "independent full paragraph-by-paragraph English/German comparison",
+            "review": "All ACME bit counts, challenge type constraints, static TXT semantics, readiness order cli/delay/dns, defaults, opportunistic bypass and fallback, resolver caching, timeout start/abort, key defaults, map lifecycle and profiles compared; no semantic omissions or direction changes found."
+          },
+          {
+            "chunk": 8,
+            "source_sha256": "5fc7c138848c55d71f0d578b3c72248fb4c3e8f0a18b68ba5ac92abc71c2000e",
+            "target_sha256": "141a3dc36f7e746d6ebbf52cd478a1e460ea900065ea1e2e4c2cfefe9e4397e4",
+            "review": "Compared all ACME profiles, DNS tool parameters, key rotation/cache, EAB file encoding and whitespace semantics, global health checks. Translated conjunction and repaired source missing closing quote in final See also list.",
+            "method": "independent full paragraph-by-paragraph English/German comparison"
+          },
+          {
+            "chunk": 9,
+            "source_sha256": "9cdbd962557ad65abd894236523fff6e00f644fd3307f6e799e42ab150f5f21d",
+            "target_sha256": "fe1b91967121d6404d6af90fe4eb92afe1ef78e9f509894a67b51de5aebde8ae",
+            "review": "Compared complete TCP rule paragraph; syntax/code remain identical.",
+            "method": "independent full paragraph-by-paragraph English/German comparison"
+          }
+        ],
+        "final_assembly": {
+          "source_sha256": "72b8aeb738d3b46b801a475145639a8a7eb56085dd36683a6a2a83c5ed4c5635",
+          "target_sha256": "4791c01b95485859d3393f27a8a6204c4cb300e61f4c56a9a0910dc6eac1ebaf",
+          "translated_reviewed_prose_groups": 9,
+          "translated_reviewed_explanatory_fences": 9,
+          "byte_identical_literal_fences": 90,
+          "unfenced_literal_records": 7,
+          "source_version": "3.4.4",
+          "upstream_ref": "v3.4.4, chapter 12",
+          "source_revision": "7c479f7147cfbe83855888c771e28cec980d34ef",
+          "reviewed_at": "2026-10-13T05:07:49.380838+00:00",
+          "metadata_review": "title, linkTitle, description and category translated; all source/version, aliases, weight, icon and module metadata unchanged",
+          "literal_review": "Unfenced crt-store/acme syntax, crt-store keyword list, haproxy.cfg/haproxy.list file labels and global health-check type list are exact technical literals. The indented option-host descriptions are explanatory prose and are fully translated, not registered as literals.",
+          "assembly_review": "All three misimported ACME prose labels translated in inline headings and fences with exact PROSE_LABELS mappings; every reviewed fence and chunk source/target hash checked; component links localized to /de/docs/haproxy/.",
+          "current_source_pair_validation": "pass (using final exact manifest; production-rendered check delegated to root)",
+          "source_issues": [
+            "Log-format fence21 labels both local and raw as default; both source statements retained.",
+            "Source notAfter scheduler sentence is imprecise; no software-behavior assumption substituted for its formula/direction.",
+            "Source ECDSA and acme renew quotations are mismatched; German prose quotation repaired, technical values unchanged.",
+            "Source final See also omits closing quote after option ldap-check; inherited reviewed chunk8 repairs prose quote/conjunction, keywords unchanged.",
+            "Certificate-storage source links management-guide section 9.3 to /docs/haproxy/filters/#section-9-3; German preserves that exact logical link under /de."
+          ],
+          "legal_english_exceptions": [
+            "Configuration keywords and their syntax, API fields/values, placeholders, protocol names, standard names Certificate Transparency and Signed Certificate Timestamp List",
+            "Byte-identical copyable configuration/commands/output/logs and inline comments, including OCSP error/status text",
+            "Source metadata, URLs and generator attribution comment"
+          ],
+          "actual_repository_validation": {
+            "pair_validation": "pass using repository manifest and current_source=True",
+            "prose_command": "python3 scripts/check-german-prose.py content/docs/haproxy/other-sections.de.md",
+            "prose_exit_code": 0
+          }
+        },
+        "status": "passed"
+      },
+      "explanatory_fences": 9,
+      "unfenced_literal_blocks": 7,
+      "literal_snippets": 0,
+      "rendered_explanation_review": {
+        "status": "passed",
+        "separate_source_rendered_comparison": true,
+        "registry": "data/translation-fences/haproxy.de/other-sections.json",
+        "reviewed_blocks": 1,
+        "notes": [
+          "Compared all existing/missing-hostname branches for replace/fill/keep/append. fill stays default; localhost/rfc3164, -/rfc5424 and comma+sender-IP semantics remain exact."
+        ]
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "1303a04284e0f17bc55ae980451b9eae7a8e26eb9abce4b35744afc6f5c57d31",
+        "target_sha256": "40c2a58ea772638be21fd84ab5bdd29eae5eefa03607e1445f0bc21c92e4fce2"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/prerequisites.md",
+      "target": "content/docs/haproxy/prerequisites.de.md",
+      "kind": "published-page",
+      "change": "reviewed-existing-unchanged",
+      "source_sha256": "54750549d94e63151763890ed2ad8ce4a8769292104e757c4f66163fa0ac335d",
+      "target_sha256": "8731c7cd734be89ab73c9e36ba173d0e2c573f3f0fa7893ddcbaed8d427fa7ff",
+      "english_body_chars": 563,
+      "semantic_review": {
+        "source_sha256": "048edf7113418951cd5da507fa2d9a25d87d8ca3c9cfa98c31b8f082cfc3b401",
+        "target_sha256": "f20f96fbd0db22dca04c04fb1339ca98c49dfb305c68a5f58c8cb1db68fe4681",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Existing German fully compared against both source paragraphs, metadata, link target and protected configuration.txt label. Translation is adequate; retained without edits."
+        ],
+        "source_issues_preserved": [],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "54750549d94e63151763890ed2ad8ce4a8769292104e757c4f66163fa0ac335d",
+        "target_sha256": "8731c7cd734be89ab73c9e36ba173d0e2c573f3f0fa7893ddcbaed8d427fa7ff"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/proxies.md",
+      "target": "content/docs/haproxy/proxies.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "d1b0bb9a721cbbf80e9aa3eb410881a29539172a4fbe6ee6c4167035c962d0d2",
+      "target_sha256": "c9d85c15fc2b72b97d29d51adec6a0aac85feccc2518aebcc49fcc1d5f7d5b34",
+      "english_body_chars": 542918,
+      "semantic_review": {
+        "source": "/Users/vonng/pgsty/doc.pg.center/content/docs/haproxy/proxies.md",
+        "source_sha256": "80a68489f3b68c0d23b8b25642dd50573bc473789250088e9bddc6b0ddb2d1b3",
+        "target": "/Users/vonng/pgsty/doc.pg.center/content/docs/haproxy/proxies.de.md",
+        "target_sha256": "d8d5ded8087b3cfc7d7d631c16d24dd4a9369e649111f86a26fe0e6bab30809c",
+        "target_bytes": 595819,
+        "independent_reviewed_prose_groups": 51,
+        "independently_reviewed_explanatory_fences": 128,
+        "byte_identical_other_fences": 394,
+        "unfenced_literal_blocks_registered": 24,
+        "supplementary_previously_bypassed_prose_groups_translated": 6,
+        "supplementary_review": [
+          {
+            "source": "Then one can run:",
+            "target": "Anschließend kann Folgendes ausgeführt werden:",
+            "source_sha256": "1c1c7854cab028dba9d51bf8087dad052dfc039714c3a86388e05523ba17ebfd",
+            "target_sha256": "ebea3353aec7de7222ce9817c52ff3472e0046b117c1323d1d2381f56a1f48ed",
+            "review": "Independent source comparison: same counting order, whitelist behavior, rejection condition and duration; all technical paths and protocol names preserved."
+          },
+          {
+            "source": "Content of the file /tmp/server_state would be like this:",
+            "target": "Der Inhalt der Datei /tmp/server_state sähe dann etwa so aus:",
+            "source_sha256": "a309394b13d0ba8b5af22aed85fe36d8902ec5178f2242653bb8c877914b702a",
+            "target_sha256": "b2d82417f2aba7205d4fdafdadc7e1c0e98dbe0503a0e5ca1ed08f314655fcd1",
+            "review": "Independent source comparison: same counting order, whitelist behavior, rejection condition and duration; all technical paths and protocol names preserved."
+          },
+          {
+            "source": "Example: accept all connections from white-listed hosts, count all other connections and reject too\nfast ones. This results in abusive ones being blocked as long as they don't slow down.",
+            "target": "Beispiel: Alle Verbindungen von Hosts auf der Positivliste annehmen, alle anderen Verbindungen zählen und zu schnell eintreffende ablehnen. Dadurch bleiben missbräuchliche Quellen blockiert, solange sie ihre Rate nicht verringern.",
+            "source_sha256": "dc201dc0772ed5c70d035157b78e1e686b6fb1630c1dd50f5079600bcdc21f27",
+            "target_sha256": "105e3a35ab7d0b0549c0fc27d4f216166c8f2a3ea319c9af3e533915a1998d25",
+            "review": "Independent source comparison: same counting order, whitelist behavior, rejection condition and duration; all technical paths and protocol names preserved."
+          },
+          {
+            "source": "Example: enable the PROXY protocol for traffic coming from all known proxies.",
+            "target": "Beispiel: Das PROXY-Protokoll für Datenverkehr von allen bekannten Proxys aktivieren.",
+            "source_sha256": "36a7b4bcb9f953e0d716f1a3ddcb4ced23b8229365e8f3e81795e6d307d89c7b",
+            "target_sha256": "51009b0c78bcf27c42304c7963513f7cf37ada3ddb941be8fbc5d1e2a5660f10",
+            "review": "Independent source comparison: same counting order, whitelist behavior, rejection condition and duration; all technical paths and protocol names preserved."
+          },
+          {
+            "source": "Example: accept all sessions from white-listed hosts, reject too fast sessions without counting\nthem, and track accepted sessions. This results in session rate being capped from abusive sources.",
+            "target": "Beispiel: Alle Sitzungen von Hosts auf der Positivliste annehmen, zu schnell eintreffende Sitzungen ablehnen, ohne sie zu zählen, und angenommene Sitzungen verfolgen. Dadurch wird die Sitzungsrate missbräuchlicher Quellen begrenzt.",
+            "source_sha256": "3eaced2be0f455e378c471cec3c3a04da16b07f51dec04c0e6e62f1b64618696",
+            "target_sha256": "6687cfd330eeb79c8ad502b67039e8a9dba3e00b8479ea6ad967304479944d7e",
+            "review": "Independent source comparison: same counting order, whitelist behavior, rejection condition and duration; all technical paths and protocol names preserved."
+          },
+          {
+            "source": "Example: accept all sessions from white-listed hosts, count all other sessions and reject too fast\nones. This results in abusive ones being blocked as long as they don't slow down.",
+            "target": "Beispiel: Alle Sitzungen von Hosts auf der Positivliste annehmen, alle anderen Sitzungen zählen und zu schnell eintreffende ablehnen. Dadurch bleiben missbräuchliche Quellen blockiert, solange sie ihre Rate nicht verringern.",
+            "source_sha256": "19d07bc73d370c28d0edc190f4983573f3db946193cc9cd8b0a67ac00e5803ee",
+            "target_sha256": "629184323fe9c9f4dcb6671600607eb66ccdac485885a942b9016facb2b9a595",
+            "review": "Independent source comparison: same counting order, whitelist behavior, rejection condition and duration; all technical paths and protocol names preserved."
+          }
+        ],
+        "registry": "/Users/vonng/pgsty/doc.pg.center/data/translation-fences/haproxy.de/proxies.json",
+        "legal_english_exceptions": [
+          "Technical keyword and protocol names, field names and quoted API values",
+          "Copyable configuration, commands, code, output and literal inline comments",
+          "HTTP status reason phrases preserved as protocol values",
+          "Source metadata, comments and links required by the translation guide"
+        ],
+        "source_issues": [
+          "Source double negation not not enabled in batch15 interpreted as intended not enabled; root previously informed.",
+          "Source RCFs typo and 401 Forbidden wording retained as supplied; source unchanged."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 128,
+      "unfenced_literal_blocks": 24,
+      "literal_snippets": 0,
+      "rendered_explanation_review": {
+        "status": "passed",
+        "separate_source_rendered_comparison": true,
+        "registry": "data/translation-fences/haproxy.de/proxies.json",
+        "reviewed_blocks": 14,
+        "notes": [
+          "Backend mode is an explanatory table heading, not a configuration directive; Backend-Modus conveys it.",
+          "All seven POST hashing limitations retain binary body uncertainty, max_wait/buffer/default, unsupported encodings/100-continue, first-chunk rule, response-code limits and optional check_post scan termination.",
+          "always remains default; maxconn saturation skip/fallback and maxqueue nonzero/full-queue requirement retain all conjunctions and exemptions.",
+          "All six externally visible variables retain field names, port/unix distinction, backend/server slash order, node fallback, usable-only farm weight and connection/queue counts.",
+          "Compared never/safe/aggressive/always independently: first-request isolation, retry safety, h2/fcgi stream reservation/release, minimum one prior reuse, rare-failure tradeoff and keep-alive warning all retained.",
+          "Server weight is inherited unless changed between the old and new configuration; duplicated source has is grammatical noise only.",
+          "Backend abort attempt, already-served half-close propagation and server decision are retained; HTTP backends remain the default scope.",
+          "Each H1/H2 relaxation retains its scope, dropped versus accepted headers, URI codepoint exclusions, CONNECT/Host checks, HTTP/0.9, RTSP and WebSocket validation exception.",
+          "All seven response relaxations retain H1-only scope, 3-digit/16-bit condition, discarded versus accepted header behavior, empty/duplicate chunked values and WebSocket exception.",
+          "Both server-close exceptions retain connection authentication versus request authentication and relative connection-establishment cost.",
+          "All three tcp-check combinations retain connection-only/banner/hello exchange results, QUIT rationale, content-rule matching, protocol examples and multiple send/expect capability.",
+          "Both transparent source-address modes retain double-state tracking risk, 64k limit differences, firewall log mismatch and differing-port tracking benefit.",
+          "desc remains optional; omitted value uses the global-section description automatically.",
+          "set-path retains query/scheme/authority, replaces pathless * with fmt and preserves the directory-prepend example plus both cross-reference directives."
+        ]
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "d1b0bb9a721cbbf80e9aa3eb410881a29539172a4fbe6ee6c4167035c962d0d2",
+        "target_sha256": "c9d85c15fc2b72b97d29d51adec6a0aac85feccc2518aebcc49fcc1d5f7d5b34"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/releases-and-upgrades.md",
+      "target": "content/docs/haproxy/releases-and-upgrades.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "3ff22c35d2ffe7aa684555c4070ef97c7e8c868a3ea0c504349eff06ebf23364",
+      "target_sha256": "3cb9d97e60acc85661f70f423b888fa5b02d14aa0901069d78d074463338e330",
+      "english_body_chars": 6962,
+      "semantic_review": {
+        "source_sha256": "a28d27e1817da33e924a40485421cc31af925f7bd9686140a6261619ac979940",
+        "target_sha256": "773736e4ede3ecde4d143d4b5ae5bf48e909e9b1fd28bab4dd44679314c6fccd",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared release branches, upgrade and rollback conditions, package provenance, example version outputs and maintenance policy. Restored best-option wording in the commercial package paragraph without softening the source claim."
+        ],
+        "source_issues_preserved": [
+          "Release policy and historical version examples follow the pinned English source."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "rendered_explanation_review": {
+        "status": "passed",
+        "separate_source_rendered_comparison": true,
+        "registry": "data/translation-fences/haproxy.de/releases-and-upgrades.json",
+        "reviewed_blocks": 4,
+        "notes": [
+          "Stable version and unchanged stable-package explanation is preserved across its original pre/prose boundary; the neighboring version output remains unchanged.",
+          "Nightly stable snapshot retains hexadecimal version suffix and snapshot date rather than original release date, across the original pre/prose boundary.",
+          "System-specific patch set and Enterprise suffix example are preserved across the original pre/prose boundary; no output is localized.",
+          "Historical pre-2.4 HA-Proxy spelling and adjusted examples, relaxed script matching, newer project URL, >=2.1 Status production safety/until date and known-bug link are retained."
+        ]
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "3ff22c35d2ffe7aa684555c4070ef97c7e8c868a3ea0c504349eff06ebf23364",
+        "target_sha256": "3cb9d97e60acc85661f70f423b888fa5b02d14aa0901069d78d074463338e330"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/resources.md",
+      "target": "content/docs/haproxy/resources.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "40d749cc1e279bfd04707ae1af33be291c1a44245c456fd97d09fb9ffe36bb65",
+      "target_sha256": "5a791bf8fb76ca1b3d6da2f1b4666f302771a33183bd3a6db83f3fa1687cb2f2",
+      "english_body_chars": 4168,
+      "semantic_review": {
+        "source_sha256": "a39185daca2aae283fe40b3b150beb2358c31aa992822595b4de1a64da0cf382",
+        "target_sha256": "288e4cddf8b3d902d00c0ae4b13e6f91b9e6404634354cdb06e342a04a6500e0",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared each of the seven upstream-document descriptions, public support channels, privacy cautions and issue-report conditions.",
+          "Checked edition 3.4.4/tag/source commit, license links and German component links. No corrections needed."
+        ],
+        "source_issues_preserved": [],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "40d749cc1e279bfd04707ae1af33be291c1a44245c456fd97d09fb9ffe36bb65",
+        "target_sha256": "5a791bf8fb76ca1b3d6da2f1b4666f302771a33183bd3a6db83f3fa1687cb2f2"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/security.md",
+      "target": "content/docs/haproxy/security.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "81b0efa7c6992b2ab2fed87a76f547bb2940d2683c9d9cf2ba5b5e2a39c64cc4",
+      "target_sha256": "96cf61ad0eda06a197036699c1633f1f9d498587b9329991683e4b83a22a4823",
+      "english_body_chars": 5553,
+      "semantic_review": {
+        "source_sha256": "4380c9effccc24426c3d7d839f1fc9005c3c84dff89132756ec38d4951038f88",
+        "target_sha256": "56f95dc40ce8e7ae8c08ccd8f6bd27034505e0e244f00c320e27113bd41d6011",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared start-as-root versus run-as-root privileges and chroot permission requirements.",
+          "Removed an unintended requirement that most uses need root; restored the original coverage claim.",
+          "Replaced Warnmeldung with ALERT-Meldung and removed extra must wording for user rechecking.",
+          "Checked v2.9/v3.1 capability behavior, Permitted/Effective sets, syscall failure conditions and diagnostics."
+        ],
+        "source_issues_preserved": [
+          "Current English describes cap_net_bind_service as binding to an interface; the approved source wording was preserved.",
+          "The access-control sentence says nobody may access it; German expresses the intended nobody else, consistent with its immediately preceding authorized user/group condition."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 1,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "81b0efa7c6992b2ab2fed87a76f547bb2940d2683c9d9cf2ba5b5e2a39c64cc4",
+        "target_sha256": "96cf61ad0eda06a197036699c1633f1f9d498587b9329991683e4b83a22a4823"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/sizing.md",
+      "target": "content/docs/haproxy/sizing.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "2f1ea449ce623ac34e52aa5df1668275164eb74686e97ab3bb3e91b7cfb5a30e",
+      "target_sha256": "84d040d83111af5878b5d6e3c285110f0c363e020b7cee747b98f2663937e996",
+      "english_body_chars": 5445,
+      "semantic_review": {
+        "source_sha256": "2371a76de988cd195efd7182cf75081d02d9cb638f9559d0c46e1bebfd23da37",
+        "target_sha256": "c56ec2e05df8fd6e4a8ff240fbd386323be96c7b1f12b2ee3c22916fe5560c48",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared complete source and target, including workload-dependent limits, benchmark dates, rates, units, hardware caveats and sizing recommendations. No missing conditions or protected literal changes."
+        ],
+        "source_issues_preserved": [
+          "Historical hardware and throughput examples follow the pinned English source."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "2f1ea449ce623ac34e52aa5df1668275164eb74686e97ab3bb3e91b7cfb5a30e",
+        "target_sha256": "84d040d83111af5878b5d6e3c285110f0c363e020b7cee747b98f2663937e996"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/standard-features.md",
+      "target": "content/docs/haproxy/standard-features.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "a967ef5deb808690d8118776d56b53b5a0095fdec83bd7c511d1eeec1850cb52",
+      "target_sha256": "86cb5436778c1483a0aa2df4c70ad9bef8feb811ed8753cfa32d2b16b83549d3",
+      "english_body_chars": 17091,
+      "semantic_review": {
+        "source_sha256": "f261b1f30e91c3d6b596a6720de3442d7c235582af84891ca6d8db299bfc0d21",
+        "target_sha256": "8c6a3aeaf590927019e5eb06100d40a7f843149af412e1e2bd8a37a9f1a32ea2",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared all eight sections including converter sources, map updates, ACL short-circuiting, backend routing, persistence keys, rewrite/redirect distinctions and server protection. Clarified that a request is forwarded only once fully received; the earlier German could be misread as merely sending it in full."
+        ],
+        "source_issues_preserved": [
+          "Stick-table key counts and other limits remain as given in the pinned introductory source."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "a967ef5deb808690d8118776d56b53b5a0095fdec83bd7c511d1eeec1850cb52",
+        "target_sha256": "86cb5436778c1483a0aa2df4c70ad9bef8feb811ed8753cfa32d2b16b83549d3"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/starting.md",
+      "target": "content/docs/haproxy/starting.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "4d156469b2e2c7423fffe20a49a3254a80e41644b938ed636ef5257ea1e5eec1",
+      "target_sha256": "3cf6d3e6beb377c6644b47e17530ec42f269bfdf122bc0e7aa84549224e406e9",
+      "english_body_chars": 32500,
+      "semantic_review": {
+        "source_sha256": "7360727a84c840e79631efab9c1294c85beb0b405104a061a4f4767c9c82f165",
+        "target_sha256": "2a9069af76a89e6609e87f8eefd1dc498a8eda37e1afd7e1a63317b258b3d245",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared the complete command-line reference and examples, including every switch, precedence, start/reload sequencing, exit codes, memory debugging, safety warnings, library reports and polling. Clarified that debug settings do not need adjustment unless a developer suggests it. All 15 explanatory fences are translated and independently compared; actual commands and program output remain exact."
+        ],
+        "source_issues_preserved": [
+          "The source explains the literal date 2015/10/08 as August 8, 2015; this inconsistency is preserved, not silently repaired in the translation. Historical OpenSSL, PCRE, Lua, and build examples likewise remain unchanged."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 15,
+      "unfenced_literal_blocks": 6,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "4d156469b2e2c7423fffe20a49a3254a80e41644b938ed636ef5257ea1e5eec1",
+        "target_sha256": "3cf6d3e6beb377c6644b47e17530ec42f269bfdf122bc0e7aa84549224e406e9"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/statistics-and-monitoring.md",
+      "target": "content/docs/haproxy/statistics-and-monitoring.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "268b4823a7ccaf34f788d977d5b509346eb657a3c845e888c775907464972c26",
+      "target_sha256": "bea96921879f48c23141300d2f040eb0c584441d01de2b5cb0f22a13676b0054",
+      "english_body_chars": 201867,
+      "semantic_review": {
+        "method": "All 25 contiguous chunks separately reread against English after translation; inherited 1–4 plus cx4 review of 5–25. All 14 explanatory fences have a separate exact bilingual review.",
+        "reviewed_chunks": 25,
+        "explanatory_fences_reviewed": 14,
+        "metadata_review": "Separate direct comparison of all source metadata; Runtime-CLI terminology aligned with TRANSLATION_DE.md; original chapter prefix and all technical metadata unchanged.",
+        "assembly_corrections": [
+          "Restored source aliases after an overbroad initial localization call; final localization applies to body links only."
+        ],
+        "chunk_reviews": [
+          {
+            "chunk": 1,
+            "source_sha256": "f70475678675c28d8c3579695aba30166bd6c65a3d2157bdf6695c055202f85c",
+            "reviewed_target_sha256": "ef7add4c6e0b34d379de36d29901fbe2fef0c26239ddafa7a249960c2a0e5796",
+            "review": "Separate full English/German review of statistics domains, HTTP proxy-only output, CSV quoting/doubled quotes, static field ordering and delimiter, and L/F/B/S applicability labels."
+          },
+          {
+            "chunk": 2,
+            "source_sha256": "a2be5d3aa26c5f678e0c837b0daab7c893d6bee3be2b2e7350cb68c98b29e2ab",
+            "reviewed_target_sha256": "a2be5d3aa26c5f678e0c837b0daab7c893d6bee3be2b2e7350cb68c98b29e2ab",
+            "review": "This whole fragment is explanation fence 1, independently translated and fully reviewed in stat_fields.py plus fence-manual-review.json. Body staging retains exact English fence for fragment invariants; final integration replaces all 118 field descriptions with the reviewed German table."
+          },
+          {
+            "chunk": 3,
+            "source_sha256": "4addf699c6c41f36ef7f45f23d948a48df1370d2e45d537a30f202587cc3ac0e",
+            "reviewed_target_sha256": "518589e278d7ab290be4d05e794ab704d639ff32611cc240d6a807126302b67b",
+            "review": "Full separate comparison of CSV nondeterministic fields, typed output columns, four metadata characters and signed/unsigned/string parsing; explanation fences 2–5 were independently translated and reviewed earlier and are replaced in final integration."
+          },
+          {
+            "chunk": 4,
+            "source_sha256": "8f2bf96172c23ba12f2748c998f23b67ada3ae9a32189247728be2a41c40053e",
+            "reviewed_target_sha256": "955b421939b4dff368f52539f2680dbd7eedc4aa6235dc7e396ca2fe29fc9af4",
+            "review": "Full separate English/German comparison of typed string parsing, socket operation modes and prompt transitions, uptime (corrected misleading zeitgesteuert to Laufzeitanzeige), payload delimiters/limits including terminator, process-local stats, CLI privilege requirements, and CA/cert/CRL abort semantics. Annotated master CLI transcript receives separate fence translation."
+          },
+          {
+            "chunk": 5,
+            "source_sha256": "dccfeb402999cce5aec890cf14618fe0ae4f949f555dff8e10cf8535b34ab6d4",
+            "reviewed_target_sha256": "5298274d5643fb748a895b8024177b4fdded0a8ccf1f4e219202a5f981542b22",
+            "review": "Separate full English/German paragraph-by-paragraph comparison after draft creation: ACME renewal prerequisite and all seven status columns, UTC/ISO8601 and 0d conditions; ACL version allocation/commit visibility and shared-map restriction; dynamic backend mode inheritance/publication/admin requirement; add-map payload line/key/value rules; dynamic server name uniqueness, dynamic LB, none/FQDN, manual reload persistence, tracking limitation, separately enabling health/agent checks and disable-agent-before-maintenance ordering; ca-file buffer/reset behavior. Corrected u-limit reference to a direct impersonal reference without added normative force. Current-source add-map ACL-related wording was retained rather than silently corrected.",
+            "review_method": "separate full English/German source comparison performed after drafting; fixes reread; structural/prose scripts are supplementary"
+          },
+          {
+            "chunk": 6,
+            "source_sha256": "4b018395aca2c9c742006eb2391951ab93ad64f68367554d8e428d62257fcb5b",
+            "reviewed_target_sha256": "c49042f475d8457c8ad0de051bbfc1f1d806b98313aa2a137bcd9fcfbda49e3b",
+            "review": "Separate full English/German comparison: crt-list/directory behavior, single-line payload versus SSL filters, add-new-cert prerequisites, ECH address formats/OpenSSL/USE_ECH=1/experimental restriction, JWT ongoing-transaction exclusion; clear counters versus clear counters all (maximums/accumulated values/permissions); current-version defaults and shared references; clear-table all-entries path, session-tracked deletion retry, six eq/ne/le/ge/lt operators, 64-bit comparison, key types, ptr/0xffff and array index. All notes and explanatory list lines reviewed; no semantic revision required.",
+            "review_method": "separate full English/German source comparison performed after drafting; fixes reread; structural/prose scripts are supplementary"
+          },
+          {
+            "chunk": 7,
+            "source_sha256": "3a68860f3d1ec08bdc0dbae191347b7987e6a1bfa4169140db82a3bcaf2092b2",
+            "reviewed_target_sha256": "38ba9ecb50434952d46f3ad4fd83a2a67bec3d492345c6288ed44ea5656ca974",
+            "review": "Separate full English/German comparison: commit ACL/map curr_ver+1..next_ver bounds, atomic visibility, older-version deletion, empty commit, and ACL/map shared-name distinction; existing versus new CA/cert/CRL stores, Used/Unused status, SSL context rebuilds and retained original contexts on failure, transaction destruction, crt-list/directory activation; debug-counter filters/actions/default non-zero selection and forward-format warning; debug-dev expert/admin/DEBUG_DEV restriction and crash/security warnings; del-acl reference/shared-map behavior. Corrected descriptive output tuple to retain literal file:line. No conditions or warning strength removed.",
+            "review_method": "separate full English/German source comparison performed after drafting; fixes reread; structural/prose scripts are supplementary"
+          },
+          {
+            "chunk": 8,
+            "source_sha256": "4bd0386860981b8a4cde46b01d9c2ed948e44999428c807b86a749ab03a5a9b1",
+            "reviewed_target_sha256": "9c8b3d17b2e6cba1b2c354248009ba4249be897a43d898253a33cc4ceffbdc58",
+            "review": "Separate full English/German comparison: del-backend TCP/HTTP, unpublish-before-removal, all-server-removal and zero-attached-stream conditions, config/dispatch/transparent/stick-table/previous-QUIC exclusions and wait helper; deletion unused CA/CRL/cert/JWT and direct-config exclusions; crt-list SNI deletion and line selector; ECH experimental prerequisites; del-server three requirements, failure on any unmet requirement and active/idle closure helper; auxiliary-agent disable prevents new checks, ignores weight/drain results of already started checks, leaves other processing unchanged; frontend reversible port release and non-Linux warning; health disabled/unvalidated UP unless agent forces DOWN; maintenance propagated to trackers. Revised unpublished wording for natural German; source del-map final shared-ACL sentence retained.",
+            "review_method": "separate full English/German source comparison performed after drafting; fixes reread; structural/prose scripts are supplementary"
+          },
+          {
+            "chunk": 9,
+            "source_sha256": "395d12753168c85c6424839920364ece5df19c46a7e234f3c83019ae9585098f",
+            "reviewed_target_sha256": "a840e6782fff3afc97c3ce6f23f669038e6375bbf6095087c966e8796b3989e3",
+            "review": "Separate full English/German comparison: MAINT/MAINT(via) tracker states; PEM output private-key/leaf/chain order, asterisk transaction selection and CLI-versus-filesystem purpose; counters-preload file; echo; agent/frontend/health/server resumption and occupied-port/OS exclusions; session-local experimental toggle, current connection only, prefix advice, unstable/breaking-change warning; expert-mode crash warning/admin-only privilege-drop reset; get-map matching/output conditions and every indented field explanation (tree/list, case, match, return, type); process-wide var proc. constraint; get-weight current versus configured initial values and numeric-ID selection. Revised get-map identifier grammar and localized referenced Stats-file heading to Statistikdatei in coordination with chunk25 owner. Explanatory fence77 remains original staging pending prior-reviewed fence integration.",
+            "review_method": "separate full English/German source comparison performed after drafting; fixes reread; structural/prose scripts are supplementary"
+          },
+          {
+            "chunk": 10,
+            "source_sha256": "baac6be766c7f359c636b2e12f9358d1a7becdc9fa4a7f7701ed09a978e0a18e",
+            "reviewed_target_sha256": "03527dae23c905f257c4b853850870f784abe0bb015eb47a2b75467c044ca501",
+            "review": "Separate full English/German comparison: expert HTTP client, default resolver from /etc/resolv.conf, /etc/hosts/local-DNS limitation and --htx; empty CA/cert/CRL creation and should-level command combinations; prepare ACL/map version response literal, unsigned 32-bit wraparound, cleanup and shared-map restriction; prompt five options, two-state no-option cycle, closure versus interactive behavior, exact prompt and unavailable master non-interactive mode; publish permissions; anon session/global/random/custom-key selection, 24-bit consistency/collision argument and never-share recommendation; dynamic-cookie key breaks sessions; global key 0..4294967295/0-disabled/admin; map key/ref update; maxconn frontend/server/global ranges, pending-connection acceptance versus threshold delay, zero restores original global setting. No semantic revision required.",
+            "review_method": "separate full English/German source comparison performed after drafting; fixes reread; structural/prose scripts are supplementary"
+          },
+          {
+            "chunk": 11,
+            "source_sha256": "4c1f7b3fd9c281ae4c66fe8c683c72057da83c7db5e1e4caf5ebf587d2c65df0",
+            "reviewed_target_sha256": "fb5438cdcd26119f853e98803dcb6354a3afff0724fb969fde996245ac5e6345",
+            "review": "Separate full English/German comparison: CPU/memory subsystem profiling, manual on reset, linux-glibc and USE_MEMORY_PROFILING, next off/auto-to-on transition and recommended off/on commit for no-lock; connection/session/SSL and compression rates, null-disabled behavior, frontend scope/immediate effects, kilobytes input versus bytes CompressBpsRateLim, pre-handshake stack protection; server IP/port mapping requires health-check port; agent/check address and state propagation, agent string alignment; ready/maint/drain traffic/health/persistence distinctions; weight equivalence and runtime DNS prerequisites; deprecated server SSL toggle plain text and unchanged health path; current-session severity output. Corrected deprecated-command alternative to a direct instruction (removed unsupported sollte), clarified runtime as modifying resolver, and clarified severity field format. Command syntax containing (deprecated) remains an exact protected inline literal; adjoining German explicitly states veraltet.",
+            "review_method": "separate full English/German source comparison performed after drafting; fixes reread; structural/prose scripts are supplementary"
+          },
+          {
+            "chunk": 12,
+            "source_sha256": "41b493402448b5ece4a22326c5a02ce956af7ee6fe492fa2e68a08173809924c",
+            "reviewed_target_sha256": "b88bec1b70ae8ce26c6ee388d303146b6c1e7ee47feb626826a5ff8530fcefe7",
+            "review": "Separate full English/German comparison: temporary CA/cert/CRL transactions, no transaction creation, same-filename replacement/update distinctions, mandatory commits, frontend/backend applicability and certificate sidecars; cautious CLI injection and empty-line terminator/sanitizing recommendation; ECH key replacement, full bind selector/OpenSSL/USE_ECH=1/experimental prerequisites; OCSP DER/base64 and BoringSSL exclusion; TLS rolling-key last/penultimate/oldest ordering, numeric id/file selector and source 48/80 bits unchanged; set-table inserted-versus-existing, gpc0/source IP, multiple data_types, pointer and array forms; CLI timeout seconds; var name/proc., internal fetches/converters, space escaping, permissions/experimental requirement. Exact unfenced ECH command/output retained. Explanatory fence123 remains original staging pending prior-reviewed fence integration. No semantic revision required.",
+            "review_method": "separate full English/German source comparison performed after drafting; fixes reread; structural/prose scripts are supplementary"
+          },
+          {
+            "chunk": 13,
+            "source_sha256": "f9d2047c2dda070e1b1c671e7a6b2fc5b8693814096b8ee230f1f28df1ac3ed3",
+            "reviewed_target_sha256": "3f76d3327004bcf48da2c30ac931b4bbae12f8831d7ed855341efc8ee6e942ca",
+            "review": "Separate full English/German comparison: absolute 0..256 versus positive relative/capped256 weights, static farm 0/100%-or-initial restriction, immediate versus algorithm-delayed use, temporary zero/re-enable100%, admin and numeric selectors; show-ACL current version versus @ver filtering, missing-version empty result, patterns versus ACLs, shared maps and entry_cnt including being-added entries; anon state/key; CLI privilege only decreases and drops expert/experimental modes; unpublish content-rule skipping while health stays active; show-activity 32-bit wrap, twice-called use, reset, thread ordering and sum/average, 0/-1/single-column bracket rules; CLI socket three fields/types/levels/process list; all11 numbered cache explanations; developer output intentionally undocumented/unreliable/not for scripts, boot/core/reload comparisons and anonymization. Corrected ACL capitalization and backend exclusion/inhaltsabhängige Weiterleitung phrasing. Preserved exact raw cache output and numeric sentence wrapping at 256 to avoid changing the source marker signature.",
+            "review_method": "separate full English/German source comparison performed after drafting; fixes reread; structural/prose scripts are supplementary"
+          },
+          {
+            "chunk": 14,
+            "source_sha256": "e9f075cb899e40cb950c5e8657d66ab1e382efdcbdf84b90345d0a44cf8345cb",
+            "reviewed_target_sha256": "fb5ae4e4494e9a60cb0268fd581f9df66599c3033c8e03a1f05323d543fcf50d",
+            "review": "Separate full English/German comparison: show-env all/single/missing-variable, name=value and operator/admin requirements; error iid/proxy/-1/request/response filters, captured violation fields and exact escaped bytes9/10/13/27, hex NN, prefix0/width79/continuation+; events buffer type, -w wait and input-discard/closure termination, -n end-seek, -wn/-nw combination, LF10/0x0A versus NUL0/-0; FD/tgid wildcard forms, tgid parsed-but-ignored, per-argument inversion reset, all selectable fd-type aliases, uppercase/lowercase flags and all state/event/cache/owner fields, durable-tool parsing prohibition and suspicious! marker. Translated descriptive flag meanings while retaining literal flag letters and linger_risk; divided long output description into clear sentences and changed hangup gloss to Verbindungsende to avoid implying an abort.",
+            "review_method": "separate full English/German source comparison performed after drafting; fixes reread; structural/prose scripts are supplementary"
+          },
+          {
+            "chunk": 15,
+            "source_sha256": "f0652774ee29a3766ebdf77e89cfd901dcee4ba0cd3cf9b2ccd5863755aa2736",
+            "reviewed_target_sha256": "2afcbcb6cae511c07c79022019eb7b445a96d53fe25974203e4fd20d9e2ab182",
+            "review": "Separate full English/German comparison: show-info typed/json/default/float format, contiguous single-object output and unspecified evolving float fields, exact sprintf(%f), four columns with field-position/name/process-number and stable-position holes, tags/type/value purpose, desc only typed/default, process-ID aggregation; JSON schema/no whitespace and both effective repeated examples retained; shared libraries address/size/path, ASLR/core-use startup capture and permission/format caveats; show-map versions/reference IDs/pattern/sample/shared ACL/entry_cnt; peers all/filtered/dict/- cache size and hostA/B/C connectivity/data direction. Corrected field-type enumeration grammar. Both raw repeated JSON commands and unfenced peers command/output retained byte-identical.",
+            "review_method": "separate full English/German source comparison performed after drafting; fixes reread; structural/prose scripts are supplementary"
+          },
+          {
+            "chunk": 16,
+            "source_sha256": "b26f70b1614bd39a27c7ed8cc47f44d7a3d794159e5e0ef05099b84297f277d5",
+            "reviewed_target_sha256": "36c1a8d8b0657d23a39aa8e0e3131805f4a954ee77608b0a296e1c3c9b8c2efe",
+            "review": "Separate post-draft full English/German paragraph comparison: Memory-pool status, all sort modes and descending size/usage order, used-only entries, first-n and prefix filtering, filtered total; profiling status/tasks/memory, output limits and sorting/aggregation, developer-only purpose; resolver scope; QUIC privileges/verbosity/filter options; server connection state and per-thread columns.",
+            "findings_and_corrections": [
+              "Corrected profiling change command from plural to singular to match the source.",
+              "Replaced ambiguous inactive connection wording with unused connection wording for idle."
+            ],
+            "source_issues": []
+          },
+          {
+            "chunk": 17,
+            "source_sha256": "3be07dda65a65afbac40b10ad8592eec4436f9b90748ef323b4ee819dbe019d0",
+            "reviewed_target_sha256": "14d95428ae7b72f41f03ccdc4e18ab8290003569309a7fdad245e5f5bb7355ee",
+            "review": "Separate post-draft full English/German paragraph comparison: Idle purge interval and strict total > need_est condition; lack of consistency within a concurrent snapshot; server-state version 1 and hash-prefixed headers/comments; show sess active-stream dump, privilege levels, slow-link warning, pre-command cutoff and disappearing streams.",
+            "findings_and_corrections": [
+              "Restored avoid as a direct instruction instead of should to retain warning strength.",
+              "Corrected quickly recycled connections from reuse to rapid renewal.",
+              "Made idle connections explicitly unused."
+            ],
+            "source_issues": []
+          },
+          {
+            "chunk": 18,
+            "source_sha256": "04e90b03adb443382811ad716deb5fa3912125931c4f4e7b560adb40e867bad5",
+            "reviewed_target_sha256": "66fd823e34dd20b12abe732270deb7f3e6e242c7814cd64ad11fe38f786722db",
+            "review": "Separate post-draft full English/German paragraph comparison: Short versus extended stream formats, pointer identifier, around 20 lines and developer-only instability; every show sess filter including captured URI and suspicious criteria; show stat domains, CSV/typed/JSON, all IDs and bitmask values, -1 sentinels; contiguous single-object output, up versus no-maint distinctions; four colon columns, all field positions/types/metadata, optional desc only for typed, and multiprocess aggregation.",
+            "findings_and_corrections": [
+              "Restored the invariant shall-not-change for field positions with darf sich nicht rather than soll sich nicht.",
+              "Kept English spelled two as German zwei rather than introducing new digit tokens."
+            ],
+            "source_issues": [
+              "The current English calls the first column a series of 5 elements, then describes six; both claims remain as in current source.",
+              "The duplicated words The second element The second element are a source typo; German preserves the information once."
+            ]
+          },
+          {
+            "chunk": 19,
+            "source_sha256": "c2aee45a8bfa85e5dac87f599b14fd48fccda5eb7d6d070403241d9dfc478bbf",
+            "reviewed_target_sha256": "a6fa9e1636b085866722188a69571ef20cdc465f9d7991d2bbfea81eb0c92c56",
+            "review": "Separate post-draft full English/German paragraph comparison: JSON schema and both repeated whitespace/pretty-printer paragraphs and commands; CA/cert/CRL Used/Unused gating, uncommitted transaction marker and escape, with/without index details and 1-based indexing, invalid index empty output; committed/ongoing OCSP certificate suffix behavior and ID equivalence; crt-list directory/file dump, -n utility and non-loadable output.",
+            "findings_and_corrections": [
+              "Changed completed transaction wording to committed/festgeschrieben to exclude abort/completion ambiguity."
+            ],
+            "source_issues": []
+          },
+          {
+            "chunk": 20,
+            "source_sha256": "c4262b248d69e96cd0b7d78d71fa09f1a5e5cd98a178c052d2a1c5ff00942fef",
+            "reviewed_target_sha256": "257a03cce56a8d8b00781105ed790f9c08269c80a5b1c0b47f8402c4ddbadeca",
+            "review": "Separate post-draft full English/German paragraph comparison: ECH bind selector syntax and name fallback, age resets on start/reload/restart, mandatory USE_ECH=1 and ECH-compatible OpenSSL, experimental CLI restriction; JWT certificate eligibility; OCSP ID/path and text/base64 output, issuer hashes; OCSP update schedule/history/counters/status and ascending Next Update sorting; OpenSSL v3-only providers; SNI frontend scope, only-expired -A filter, time offset units, 30d example and frontend/file:linenum field.",
+            "findings_and_corrections": [],
+            "source_issues": []
+          },
+          {
+            "chunk": 21,
+            "source_sha256": "b090d3240b229674f5821aa31d5975d901cca20941f9bd6058f76580e2e20ba2",
+            "reviewed_target_sha256": "9cec56e0a021cd0c7d1c892d3d230d430a2093d15c535999485e0318649ad5d5",
+            "review": "Separate post-draft full English/German paragraph comparison: SNI CN/SAN/filter alternatives, explicit default-crt versus implicit first certificate without strict-sni, wildcard and negative filters, all algorithms and X509 dates; startup log buffer per worker versus latest attempt on master; all Stick Table general fields and source zero/IP description; data filter type obligation, 64-bit comparator, all six operators, build maximum 4, exclusive key types, ptr address, array syntax, time-varying rates, IP extraction/firewall use, shard else 0; task snapshot, mono-thread uncertainty, exclusive access and monitoring abuse warning.",
+            "findings_and_corrections": [
+              "Restored the explicit only restriction on supported key types.",
+              "Made wildcard a pattern with a placeholder instead of an unspecified placeholder."
+            ],
+            "source_issues": []
+          },
+          {
+            "chunk": 22,
+            "source_sha256": "657fa44fb48a2b870411e0fafbebecac9465b9cbdebb460cc94ce032f217ee78",
+            "reviewed_target_sha256": "6e444fcd4a92bbe5de2adcf09b7f4696ac891833ec5589f08b4120f30de21223",
+            "review": "Separate post-draft full English/German paragraph comparison: Per-thread dumps with/without USE_THREAD_DUMP=1, marker meanings, compulsory reporting/restart and deadlock versus single-thread error; unstable debug format; TLS ticket references and wildcard behavior; JSON schema validation; trace status/events/action independence; current process version; frontend deletion, irreversible enable prohibition and admin level; stream shutdown and K logging, server streams and idle/maintenance exception; trace menu, emergency trace 0, source subcommands, event matching OR, all toggles and source following without state mutation including meta-source all.",
+            "findings_and_corrections": [
+              "Changed single-digit status wording to single-character status.",
+              "Made the backend idle state explicitly Leerlauf."
+            ],
+            "source_issues": [
+              "The source wording process needs is not fully functional is an editorial typo; German preserves the failure and required restart."
+            ]
+          },
+          {
+            "chunk": 23,
+            "source_sha256": "8b4c89327851e7673a3162732c1e558eb76cb381d37fb39f893fea609744bce9",
+            "reviewed_target_sha256": "324ffc07475533d7eeedb296da1f24a6763f2c41cb68697c9c61feaba1bef32e",
+            "review": "Separate post-draft full English/German paragraph comparison: Five trace levels, highly recommended user-only default and developer-instructed elevation, configuring events first, meta-source all; lock criteria, first event focus, stop boundary, extra maximum 4 and immediate tracking restart; pause/start/stop states, enable/disable signs, now/none/any, all detailed sequence-capture conditions; sinks including none still processing and lock-on, optional ring buffers, instant destination change and possible loss; verbosity quiet/default, optional decoders, opportunistic behavior and first level above quiet.",
+            "findings_and_corrections": [
+              "Restored source should for decoder depth with sollte.",
+              "Removed an implicit availability interpretation by preserving the opportunistic decoding concept."
+            ],
+            "source_issues": [
+              "The source has strace in a tracing explanation; German renders the intended Trace without adding a separate strace tool."
+            ]
+          },
+          {
+            "chunk": 24,
+            "source_sha256": "eb375861b5a8dec48ba1cfd9267d48f289a49817dafac3528b6320d1d4ed66f1",
+            "reviewed_target_sha256": "2e13df7d1a6ef26fc0c6eca80bd99e2d9be3053208d3d30bec66f83a7b86409d",
+            "review": "Separate post-draft full English/German paragraph comparison: OCSP request first AIA URI only, stored-response requirement, successful insertion and stdout contents; wait condition success/unrecoverable failure/whole delay, both removability states/errors, maintenance and no connections, parallel removal, millisecond default and all suffix units, socat close timeout and -h argument positions; master-only -S configuration and bind arguments; @/PID/current versus leaving process access; per-command wrapper and persistent context, semicolon behavior, both macOS reliability warnings; own-session limitations and @@ complete bidirectional handoff, waiting before new commands, interactive no-command session exit and inherited prompt mode; expert-mode master and e flag.",
+            "findings_and_corrections": [
+              "Clarified that quit leaves the worker CLI session instead of terminating the worker process.",
+              "Aligned the idle-connection condition to unused connections and made millisecond-unit prose grammatical.",
+              "Rendered unrecoverable condition failure as endgültig fehlschlägt without weakening the terminal state."
+            ],
+            "source_issues": []
+          },
+          {
+            "chunk": 25,
+            "source_sha256": "e76969953ff1e17c1de10519e22d5f2eff828eaba9eceac5746f595790f52494",
+            "reviewed_target_sha256": "365b45666fba34365be6b89aa9a9db52d9fc2c2399c089f58ffe01e83673b550",
+            "review": "Separate post-draft full English/German paragraph comparison: experimental/expert/debug flags and master/worker behavior; hard reload -st versus ordered -sf, immediate closure; prompt context and failed-reload previous configuration state; -USR2 reload operator/admin condition, synchronous returned status after parsing/fork, default socat 0.5s versus no ncat timeout, USE_SHM_OPEN=1 logs and CLI connection closure; ignored commands after reload; proc example 5 and 3 reloads, FDs/IPC and unstable output; mandatory SHM compilation, latest startup or reload including failure, reload log equivalence; stats-file non-null metric counters, proxy-only object kinds, non-empty matching GUID/type guarantee despite other differences, format compatibility across adjacent stable branches and optional older-version load configuration.",
+            "findings_and_corrections": [
+              "Localized the Stats-file heading to Statistikdatei (Stats-file) and coordinated the section label with the chunks 5–15 translator.",
+              "Made the type/GUID preload guarantee explicit and improved German wording of version-dependent debug stability."
+            ],
+            "source_issues": [
+              "The source calls -sf stop-stop; German conveys geordnetes Anhalten for the same -sf flag, keeping flags and immediate-versus-ordered behavior unchanged."
+            ]
+          }
+        ],
+        "status": "passed",
+        "final_whitespace_review": {
+          "before_sha256": "3205827b09e19b210fb278701cf5f71f73ebe0b06583dcc61184ab5f4207acd1",
+          "after_sha256": "09fdb3f0a65284b7c6541c09fb0d8ee107701360a31c060717626e50a7fc64be",
+          "review": "Removed exactly one extra empty EOF line; all non-whitespace text and protected blocks unchanged. Separate semantic review retained."
+        }
+      },
+      "explanatory_fences": 14,
+      "unfenced_literal_blocks": 1,
+      "literal_snippets": 0,
+      "rendered_explanation_review": {
+        "status": "passed",
+        "separate_source_rendered_comparison": true,
+        "registry": "data/translation-fences/haproxy.de/statistics-and-monitoring.json",
+        "reviewed_blocks": 10,
+        "notes": [
+          "All six eq/ne/le/ge/lt/gt operators retain their exact equal/not-equal/inclusive/strict comparisons.",
+          "index type tree/list, case sensitivity and matched-pattern return useful for regexes retain all field/value names.",
+          "All four map result/type descriptions retain no-map/no-return, string value, cannot-display conversion failure and sample type.",
+          "sid remains the server ID; -1 dumps everything from the selected proxy, not all proxies.",
+          "All six repeated eq/ne/le/ge/lt/gt operators retain exact inclusive/strict boundaries.",
+          "Per-event toggling retains none/any all-events behavior, optional +, disabling -/!, source-specific events and immediate complete event-none disablement.",
+          "Developer-only escalation recommendation, events-before-level order, unfiltered dump concern and all meta-source scope retain their original strength.",
+          "Up to four criteria, HTTP/2 stream locking, replacing other criteria, immediately ending existing tracking and permanent nothing disablement are retained.",
+          "pause/start/stop retain distinct waiting/restart/manual-enable behavior. Both start-now/stop-now and subtle-event/lock-on sequence examples are complete through the final anomaly.",
+          "Compared quiet/default/declared levels: decoder availability, low impact, opportunistic call, maximum available accuracy and first-above-quiet default all retained."
+        ]
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "268b4823a7ccaf34f788d977d5b509346eb657a3c845e888c775907464972c26",
+        "target_sha256": "bea96921879f48c23141300d2f040eb0c584441d01de2b5cb0f22a13676b0054"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/stick-tables-and-peers.md",
+      "target": "content/docs/haproxy/stick-tables-and-peers.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "ce82dcade06e3ab1acb5f39c954558966c12b86c09902fb0a6853e1f80167fa1",
+      "target_sha256": "00390c25e882be3d11c2a281a13cdb315ece4233f9cacc04750219a3e3b4923f",
+      "english_body_chars": 36198,
+      "semantic_review": {
+        "source_sha256": "e7d91c6a92d4173e82671c6b4cf061cdf9d24d087b704cd5b66d0a49d525f5da",
+        "target_sha256": "b92532e366383235234e2499cf7912641931836a590c7eab9a0c1ec46e549dbb",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Five complete source/target chunks separately reviewed; reload/startup learning, conn_cur semantics, every metric, expiration, peer update behavior and namespace distinction checked.",
+          "Translated and separately reread two explanatory fences; thirteen actual fences and three bare declarations remain exact."
+        ],
+        "source_issues_preserved": [
+          "bytes_in_cnt/bytes_out_cnt list 4 bytes but describe 64-bit values; preserved.",
+          "bytes_in_rate/bytes_out_rate recommend singular byte_in_cnt/byte_out_cnt; preserved.",
+          "gpc_rate array description uses gpt(100) and gpc(1), and references gpc0/gpc1 fetches; preserved."
+        ],
+        "status": "passed"
+      },
+      "explanatory_fences": 2,
+      "unfenced_literal_blocks": 3,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "ce82dcade06e3ab1acb5f39c954558966c12b86c09902fb0a6853e1f80167fa1",
+        "target_sha256": "00390c25e882be3d11c2a281a13cdb315ece4233f9cacc04750219a3e3b4923f"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/stopping-and-restarting.md",
+      "target": "content/docs/haproxy/stopping-and-restarting.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "23ea530b4f922b37b91fbfa8a34cfeeaeb626c959d72f25e5ff14d909130ed4f",
+      "target_sha256": "ca32c2c1f9823f0b689e91d5fcc687350b02af99dfefb4cced0d65ccb5a97f92",
+      "english_body_chars": 5979,
+      "semantic_review": {
+        "source_sha256": "460cd56cdc2045b9f1602893135f1d6e45f156097a2c29ac1df2885bed113b28",
+        "target_sha256": "67255b3f0c4f11df4456117727343df7bbc655cdc40c6abf4ca1499a2b148771",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared SIGTERM/SIGUSR1/SIGUSR2 and -st/-sf roles, full reload sequence and fallback restoration.",
+          "Checked both connection-loss windows, 1/10000 versus 3/30000 rates, SO_REUSEPORT kernel versions, SYN versus ACK race and firewall timing. No corrections needed."
+        ],
+        "source_issues_preserved": [],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "23ea530b4f922b37b91fbfa8a34cfeeaeb626c959d72f25e5ff14d909130ed4f",
+        "target_sha256": "ca32c2c1f9823f0b689e91d5fcc687350b02af99dfefb4cced0d65ccb5a97f92"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/traps.md",
+      "target": "content/docs/haproxy/traps.de.md",
+      "kind": "published-page",
+      "change": "added",
+      "source_sha256": "0a1518176d089b6f2f21be7139fb2dc1ef77af51d00f01fb29c4f7c397bd98dc",
+      "target_sha256": "751c46d0b3e0116bd2b608cfe227d995e8a12f6f9dcd4472175eebc2decb1a5f",
+      "english_body_chars": 2903,
+      "semantic_review": {
+        "source_sha256": "3a9f01348fecb66cea9a54d71bb4a33370aa7eb2d2b2c452c31e818a656bf970",
+        "target_sha256": "ed31b23149a7f7170e66b0cce98b91f0847692a569eb22d122918b04f67bf383",
+        "review": "Separate full English/German body comparison after the initial translation; scope includes metadata, explanations and literal exceptions.",
+        "findings_and_corrections": [
+          "Compared all four operational traps: virtual IP bind timing, multi-process source-port collisions, SO_REUSEPORT stale process and ACL reload loss.",
+          "Checked recommended mitigations, restart caveat and difference between retries masking errors and fixing them. No corrections needed."
+        ],
+        "source_issues_preserved": [],
+        "status": "passed"
+      },
+      "explanatory_fences": 0,
+      "unfenced_literal_blocks": 0,
+      "literal_snippets": 0,
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "0a1518176d089b6f2f21be7139fb2dc1ef77af51d00f01fb29c4f7c397bd98dc",
+        "target_sha256": "751c46d0b3e0116bd2b608cfe227d995e8a12f6f9dcd4472175eebc2decb1a5f"
+      }
+    }
+  ],
+  "source_issues_preserved": [
+    {
+      "page": "architecture",
+      "issue": "The broad no-runtime-failures claim and packet/UDP limitations are preserved as stated by the pinned English source."
+    },
+    {
+      "page": "basic-features",
+      "issue": "Feature descriptions and historical protocol/library claims remain those of the pinned English source."
+    },
+    {
+      "page": "cache",
+      "issue": "The source labels its section 9.3 filters link as Unix Socket commands; the original destination is preserved with the German route prefix."
+    },
+    {
+      "page": "configuration-basics",
+      "issue": "tcp6@ aliases stream+ipv4@ and udp6@ aliases dgram+ipv4@ in current English."
+    },
+    {
+      "page": "configuration-basics",
+      "issue": "The prose says four variable categories but lists three; current source wording preserved."
+    },
+    {
+      "page": "configuration-basics",
+      "issue": "Cross-reference 9.3 Unix Sockets commands currently targets filters; source destination preserved."
+    },
+    {
+      "page": "configuration-logging",
+      "issue": "Historical 3/6/12-second TCP retransmission explanation is retained. The PC example recommends increasing global maxconn after reaching a socket limit; preserved verbatim in meaning. Historical log examples retain inconsistent status flags and the malformed method row in the alias table."
+    },
+    {
+      "page": "cpu",
+      "issue": "The approved source still discusses nbproc and process-based scaling; translation preserves that source instead of introducing a different version behavior."
+    },
+    {
+      "page": "debugging-and-performance",
+      "issue": "The source describes Nagle as delaying empty packets; wording is preserved rather than silently rewritten."
+    },
+    {
+      "page": "fastcgi",
+      "issue": "Unfenced configuration example lines269–282 retains original flattened lines, escaped stars and the truncated bind token exactly."
+    },
+    {
+      "page": "fastcgi",
+      "issue": "Source uses the singular protocol record identifier FCGI_PARAM in its final limitation; retained exactly."
+    },
+    {
+      "page": "filters",
+      "issue": "OpenTracing deprecation prose uses future tense for 3.3 in the 3.4.4 baseline; retained."
+    },
+    {
+      "page": "filters",
+      "issue": "Trace prose mentions random-parsing and quiet although neither appears in the displayed declaration; retained."
+    },
+    {
+      "page": "http-fundamentals",
+      "issue": "Introduction states that the document has no examples despite examples later; retained."
+    },
+    {
+      "page": "http-fundamentals",
+      "issue": "Header prose describes comma folding as common in Cookie; retained."
+    },
+    {
+      "page": "http-fundamentals",
+      "issue": "Broad 3xx class description says no content follows; retained."
+    },
+    {
+      "page": "other-sections",
+      "issue": "Log-format fence21 labels both local and raw as default; both source statements retained."
+    },
+    {
+      "page": "other-sections",
+      "issue": "Source notAfter scheduler sentence is imprecise; no software-behavior assumption substituted for its formula/direction."
+    },
+    {
+      "page": "other-sections",
+      "issue": "Source ECDSA and acme renew quotations are mismatched; German prose quotation repaired, technical values unchanged."
+    },
+    {
+      "page": "other-sections",
+      "issue": "Source final See also omits closing quote after option ldap-check; inherited reviewed chunk8 repairs prose quote/conjunction, keywords unchanged."
+    },
+    {
+      "page": "other-sections",
+      "issue": "Certificate-storage source links management-guide section 9.3 to /docs/haproxy/filters/#section-9-3; German preserves that exact logical link under /de."
+    },
+    {
+      "page": "proxies",
+      "issue": "Source not not enabled was reviewed as the intended not enabled; source RCFs typo and 401 Forbidden preserved as supplied."
+    },
+    {
+      "page": "releases-and-upgrades",
+      "issue": "Release policy and historical version examples follow the pinned English source."
+    },
+    {
+      "page": "security",
+      "issue": "Current English describes cap_net_bind_service as binding to an interface; the approved source wording was preserved."
+    },
+    {
+      "page": "security",
+      "issue": "The access-control sentence says nobody may access it; German expresses the intended nobody else, consistent with its immediately preceding authorized user/group condition."
+    },
+    {
+      "page": "sizing",
+      "issue": "Historical hardware and throughput examples follow the pinned English source."
+    },
+    {
+      "page": "standard-features",
+      "issue": "Stick-table key counts and other limits remain as given in the pinned introductory source."
+    },
+    {
+      "page": "starting",
+      "issue": "The source explains the literal date 2015/10/08 as August 8, 2015; this inconsistency is preserved, not silently repaired in the translation. Historical OpenSSL, PCRE, Lua, and build examples likewise remain unchanged."
+    },
+    {
+      "page": "statistics-and-monitoring",
+      "chunk": 5,
+      "topic": "add map",
+      "issue": "Current English references current ACL version, prepare acl, show acl and clear acl for add-map semantics; faithfully retained, no upstream change attempted."
+    },
+    {
+      "page": "statistics-and-monitoring",
+      "chunk": 8,
+      "topic": "del map",
+      "issue": "Shared-ACL sentence repeats deleted in the map in current English; faithfully retained."
+    },
+    {
+      "page": "statistics-and-monitoring",
+      "chunk": 12,
+      "topic": "set ssl cert",
+      "issue": "Current English spells certificate sidecar .oscp; literal retained."
+    },
+    {
+      "page": "statistics-and-monitoring",
+      "chunk": 12,
+      "topic": "set ssl tls-key",
+      "issue": "Current English specifies 48 or80 bits alongside openssl rand80; literal digits/unit retained, no source correction attempted."
+    },
+    {
+      "page": "statistics-and-monitoring",
+      "chunk": 15,
+      "topic": "JSON display",
+      "issue": "Current English repeats the no-whitespace paragraph and command example twice; both repeats retained."
+    },
+    {
+      "page": "statistics-and-monitoring",
+      "chunk": 18,
+      "issue": "The current English calls the first column a series of 5 elements, then describes six; both claims remain as in current source."
+    },
+    {
+      "page": "statistics-and-monitoring",
+      "chunk": 18,
+      "issue": "The duplicated words The second element The second element are a source typo; German preserves the information once."
+    },
+    {
+      "page": "statistics-and-monitoring",
+      "chunk": 22,
+      "issue": "The source wording process needs is not fully functional is an editorial typo; German preserves the failure and required restart."
+    },
+    {
+      "page": "statistics-and-monitoring",
+      "chunk": 23,
+      "issue": "The source has strace in a tracing explanation; German renders the intended Trace without adding a separate strace tool."
+    },
+    {
+      "page": "statistics-and-monitoring",
+      "chunk": 25,
+      "issue": "The source calls -sf stop-stop; German conveys geordnetes Anhalten for the same -sf flag, keeping flags and immediate-versus-ordered behavior unchanged."
+    },
+    {
+      "page": "stick-tables-and-peers",
+      "issue": "bytes_in_cnt/bytes_out_cnt list 4 bytes but describe 64-bit values; preserved."
+    },
+    {
+      "page": "stick-tables-and-peers",
+      "issue": "bytes_in_rate/bytes_out_rate recommend singular byte_in_cnt/byte_out_cnt; preserved."
+    },
+    {
+      "page": "stick-tables-and-peers",
+      "issue": "gpc_rate array description uses gpt(100) and gpc(1), and references gpc0/gpc1 fetches; preserved."
+    },
+    {
+      "page": "bind-and-server-options",
+      "issue": "The id prose uses id % 268435356, whereas the hash-key explanation uses id % 268435456. Both source values are preserved exactly.",
+      "source_lines": [
+        2398,
+        2465
+      ],
+      "anchor": "entry-5-2-id"
+    },
+    {
+      "page": "bind-and-server-options",
+      "issue": "Source says health checks cannot provide SNI although check-sni is documented elsewhere. Claim is translated faithfully; no upstream correction invented.",
+      "source_lines": [
+        4038
+      ],
+      "anchor": "entry-5-2-verifyhost"
+    },
+    {
+      "page": "bind-and-server-options",
+      "issue": "The send-proxy-v2-ssl-cn description names send-proxy-v2-ssl in its first sentence. Source identifier retained.",
+      "source_lines": [
+        3655
+      ],
+      "anchor": "entry-5-2-send-proxy-v2-ssl-cn"
+    },
+    {
+      "page": "global",
+      "issue": "ACME renewal condition wording about notAfter past curtime + (notAfter - notBefore) / 12 is ambiguous. Formula, seven-day fallback and twelve-hour scheduler interval retained.",
+      "source_lines": [
+        458,
+        459
+      ],
+      "anchor": "entry-3-1-acme"
+    },
+    {
+      "page": "global",
+      "issue": "HTTP/1 glitch-threshold descriptions mention advertising a GOAWAY for a future stream at 75%, seemingly copied from HTTP/2. HTTP/1, GOAWAY and threshold are preserved.",
+      "source_lines": [
+        3499,
+        3521
+      ],
+      "anchor": "entry-3-2-tune-h1-be-glitches-threshold / entry-3-2-tune-h1-fe-glitches-threshold"
+    },
+    {
+      "page": "global",
+      "issue": "Outgoing receive-buffer description mixes streams uploading, sharing buffers among downloading payloads, and improving upload performance. Individual directions translated as given.",
+      "source_lines": [
+        3636,
+        3637
+      ],
+      "anchor": "entry-3-2-tune-h2-be-rxbuf"
+    },
+    {
+      "page": "global",
+      "issue": "Source repeats tune.sndbuf.client twice instead of a client/server pair. Repetition preserved exactly.",
+      "source_lines": [
+        4394,
+        4395
+      ],
+      "anchor": "entry-3-2-tune-notsent-lowat-client"
+    },
+    {
+      "page": "global",
+      "issue": "Send-buffer description says buffering received data. This source direction is preserved rather than silently corrected.",
+      "source_lines": [
+        5176
+      ],
+      "anchor": "entry-3-2-tune-sndbuf-client"
+    },
+    {
+      "page": "global",
+      "issue": "Importer marks an environment-variable description table as shell (fence297). Natural descriptions translated, exact variable column protected; narrow root helper support already added.",
+      "source_lines": [
+        5346
+      ],
+      "anchor": "entry-3-2-tune-ssl-keylog"
+    }
+  ],
+  "legitimate_english_exceptions": [
+    "Copyable command/configuration/code, source comments, protocol values, output, logs and error messages stay byte-identical.",
+    "Directive names, API/field names, placeholders, metrics, environment variables, filenames, URLs, protocol/product names and quoted literal values remain exact.",
+    "Licence/legal text and upstream/generator metadata remain original; German surrounding prose and all explanation fences are translated.",
+    "Exact imported explanation labels and mixed tables are documented in the German fence registry; unregistered fences have no translation exemption.",
+    "The exact ACME phrase 3rd party tool is the lexical concept Drittanbieterwerkzeug, not a numerical assertion; every actual number and all other ordinal contexts remain checked.",
+    "All 48 rendered indented explanation differences have a separate English/German review and exact registry entries; this does not exempt any unregistered rendered pre block or actual code/log/output."
+  ],
+  "completed_at": "2026-10-13T05:55:18.718682+00:00",
+  "semantic_review_conclusion": {
+    "published_bodies": 35,
+    "navigation_dividers": 3,
+    "status": "passed",
+    "method": "Adopted exact checkpoint reviews for the 32 already separately reviewed bodies; separately completed/reviewed all remaining statistics (25/25 chunks), other-sections (9/9 groups) and index edition wording. In-scope source/target hashes are exact. EOF-only global normalization is explicitly documented without altering its semantic signoff. All 48 rendered indented explanation pairs received an additional individual source/rendered comparison.",
+    "scope": "All metadata, headings, prose, explanatory fences/tables/lists/notes, conditions, negation, normative force, numbers/units/defaults/deprecations/warnings and operational ordering. Actual copyable code/configuration/comments/logs/output and legal originals stay protected."
+  },
+  "supplemental_publication_review": {
+    "reviewed_at": "2026-10-13T13:00:45.168556+00:00",
+    "status": "target-errata-applied-awaiting-shared-English-integration",
+    "scope": "Five objectively confirmed shared upstream errata; Russian cache condition clarification. New targeted review only; existing complete semantic review retained.",
+    "pages": [
+      {
+        "page": "haproxy/configuration-basics.md",
+        "target": "content/docs/haproxy/configuration-basics.de.md",
+        "prior_target_sha256": "fd25121cece1ae25af0d32c2e7b67ab3eadf61a6d52e193e29265f14a45fe7db",
+        "target_sha256": "abcdf2fe79c840a0d5961894d001051d1ecb6832f18275f83676716067772647",
+        "reviewed_changed_sections": [
+          "section-2-9-3"
+        ],
+        "all_executable_fences_unchanged": true,
+        "review_method": "Separate manual comparison of every changed sentence against the pinned upstream manual and exact-version code; original full-page semantic review retained as predecessor evidence.",
+        "corrections": [
+          "tcp6 alias stream+ipv6@; udp6 alias dgram+ipv6@; exact-version src/tools.c sets AF_INET6 for both prefixes."
+        ]
+      },
+      {
+        "page": "haproxy/security.md",
+        "target": "content/docs/haproxy/security.de.md",
+        "prior_target_sha256": "75ad0d296a4ae6333864c3ec4c10e51cbdd023811bb48c456de7aa9b6a37203a",
+        "target_sha256": "56f95dc40ce8e7ae8c08ccd8f6bd27034505e0e244f00c320e27113bd41d6011",
+        "reviewed_changed_sections": [
+          "section-13-1"
+        ],
+        "all_executable_fences_unchanged": true,
+        "review_method": "Separate manual comparison of every changed sentence against the pinned upstream manual and exact-version code; original full-page semantic review retained as predecessor evidence.",
+        "corrections": [
+          "cap_net_bind_service binds privileged ports; exact-version Configuration Manual setcap entry confirms."
+        ]
+      },
+      {
+        "page": "haproxy/statistics-and-monitoring.md",
+        "target": "content/docs/haproxy/statistics-and-monitoring.de.md",
+        "prior_target_sha256": "09fdb3f0a65284b7c6541c09fb0d8ee107701360a31c060717626e50a7fc64be",
+        "target_sha256": "cce57c1e7a5fd159b1953f4f47e22b42748cf6c241f8ca81b36e66208d3c3d70",
+        "reviewed_changed_sections": [
+          "entry-9-3-set-ssl-cert",
+          "entry-9-3-set-ssl-tls-key"
+        ],
+        "all_executable_fences_unchanged": true,
+        "review_method": "Separate manual comparison of every changed sentence against the pinned upstream manual and exact-version code; original full-page semantic review retained as predecessor evidence.",
+        "corrections": [
+          "TLS ticket key length 48 or 80 bytes, confirmed by packed tls_sess_key_128/256 and CLI decoded-size validation.",
+          "Certificate sidecar .oscp -> .ocsp, confirmed by src/ssl_ckch.c filename suffix."
+        ]
+      },
+      {
+        "page": "haproxy/starting.md",
+        "target": "content/docs/haproxy/starting.de.md",
+        "prior_target_sha256": "f0300dccdee7e2489e60781209c3ce1c00be6dc523c967cdbcb731994c038650",
+        "target_sha256": "2a9069af76a89e6609e87f8eefd1dc498a8eda37e1afd7e1a63317b258b3d245",
+        "reviewed_changed_sections": [
+          "entry-3-the-release-date"
+        ],
+        "all_executable_fences_unchanged": true,
+        "review_method": "Separate manual comparison of every changed sentence against the pinned upstream manual and exact-version code; original full-page semantic review retained as predecessor evidence.",
+        "corrections": [
+          "2015/10/08 in declared year/month/day notation is October 8, 2015. Diagnostic output date bytes retained."
+        ]
+      }
+    ],
+    "historical_anomaly_policy": "Prior source-anomaly entries describe the predecessor state; the corrections in this supplemental review supersede those exact entries."
+  },
+  "upstream_version_history": [
+    {
+      "source": {
+        "version": "3.4.4",
+        "upstream_ref": "v3.4.4",
+        "upstream_commit": "7f03ae65c28605152c7a1a9ba7d9d0bcfb50f8b0",
+        "initial_head": "7c479f7147cfbe83855888c771e28cec980d34ef",
+        "all_38_source_fingerprints_unchanged": true
+      },
+      "version": null,
+      "upstream_commit": null
+    }
+  ],
+  "current_upstream_upgrade_review": {
+    "status": "passed",
+    "scope": "Eight source body pages / 60 source-target changed sections in three locales; metadata synchronization across all35 published pages; unchanged full predecessor reviews preserved."
+  },
+  "current_source_coverage": {
+    "published_page_pairs": 35,
+    "all_page_pairs": 38,
+    "english_body_chars": 2104709
+  }
+}

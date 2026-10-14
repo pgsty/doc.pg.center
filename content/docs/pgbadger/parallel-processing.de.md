@@ -3,6 +3,7 @@ title: "Parallelverarbeitung"
 linkTitle: "Parallelverarbeitung"
 weight: 50
 description: "Zwischen der abschnittsweisen Parallelverarbeitung einer einzelnen Protokolldatei und der parallelen Verarbeitung vieler Protokolle wählen"
+search_keywords: [--Jobs, --jobs, --tempdir, Jobs, jobs, tempdir]
 icon: fa-solid fa-gauge-high
 module: [PGBADGER]
 categories: [Aufgabe]
@@ -27,13 +28,13 @@ $ pgbadger -j 8 /var/log/postgresql/postgresql.log
 Der Algorithmus des Originalprojekts teilt jede Datei in `N` Bytebereiche auf, startet für jeden Bereich einen eigenen Parser, schreibt temporäre Binärstatistiken und führt diese anschließend zum endgültigen Bericht zusammen.
 
 ```text
-for each log file
-    divide the file into N chunks
-    find each chunk's start and end offsets
-    fork N parsers at those offsets
-    write one temporary binary statistics file per parser
-wait for the workers
-merge the binary files and build the report
+für jede Protokolldatei
+    die Datei in N Abschnitte aufteilen
+    Anfangs- und Endposition jedes Abschnitts bestimmen
+    an diesen Positionen N Parserprozesse starten
+    pro Parser eine temporäre Binärdatei mit Statistiken schreiben
+auf die Worker warten
+die Binärdateien zusammenführen und den Bericht erstellen
 ```
 
 Da Protokolleinträge und mehrzeilige Anweisungen nicht genau an Byte-Offsets ausgerichtet sind, können an den Abschnittsgrenzen bis zu etwa `N` Abfragen pro Datei abgeschnitten, ausgelassen oder — häufiger — doppelt gezählt werden. Verwenden Sie diesen Modus für aggregierte Analysen sehr großer Dateien, nicht für Abläufe, die eine forensisch exakte Zählung jedes Protokolleintrags erfordern.

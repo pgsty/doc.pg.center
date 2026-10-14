@@ -1,0 +1,69 @@
+{
+  "source": "content/docs/haproxy/management-architecture.md",
+  "language": "zh",
+  "fences": [],
+  "literal_blocks": [
+    {
+      "lines": [
+        77,
+        79
+      ],
+      "classification": "program-output",
+      "source_sha256": "68c4752ecf9785a3548deb4bb87eada9553a43d4ea2ed5de3e98a6b11a421c10",
+      "revalidation_history": [
+        {
+          "lines": [
+            77,
+            79
+          ],
+          "start_column": 1,
+          "source_sha256": "68c4752ecf9785a3548deb4bb87eada9553a43d4ea2ed5de3e98a6b11a421c10"
+        },
+        {
+          "lines": [
+            77,
+            79
+          ],
+          "start_column": 1,
+          "source_sha256": "68c4752ecf9785a3548deb4bb87eada9553a43d4ea2ed5de3e98a6b11a421c10"
+        }
+      ],
+      "revalidation": "Exact reviewed snippet and source/target occurrence counts retained; line/column positions changed.",
+      "start_column": 1
+    }
+  ],
+  "source_formatting_revalidation": {
+    "method": "Exact reviewed predecessor source/target SHA mapping and byte-for-byte literal-fence witnesses; only documented source errata and markup-only restoration accepted.",
+    "fences": [],
+    "literal_blocks": [
+      {
+        "row": 1,
+        "action": "exact literal range rebased",
+        "source_sha256": "68c4752ecf9785a3548deb4bb87eada9553a43d4ea2ed5de3e98a6b11a421c10",
+        "lines": [
+          77,
+          79
+        ],
+        "start_column": 1
+      }
+    ]
+  },
+  "source_sha256": "bfea4e22c46ea342ff24866c633922d83eccc48d2a60663488b2e18a1ca13638",
+  "target_sha256": "e189e2bdf6e3eb8f92f087e8e81dad3ee7629dd14f62590a302cbea35f95e874",
+  "review_scope": "Complete identified explanatory-fence inventory reviewed separately from structural/numeric technical screening and selective manual prose review. No claim of full independent sentence-by-sentence review of all prose.",
+  "literal_formatting_revalidation": {
+    "method": "Exact reviewed predecessor hashes and current source/target literal equality; remove obsolete protection only with proven default-protected exact fenced replacement.",
+    "events": [
+      {
+        "row": 1,
+        "action": "exact literal range rebased",
+        "source_sha256": "68c4752ecf9785a3548deb4bb87eada9553a43d4ea2ed5de3e98a6b11a421c10",
+        "lines": [
+          77,
+          79
+        ],
+        "start_column": 1
+      }
+    ]
+  }
+}

@@ -130,7 +130,7 @@ Also the following Patroni configuration options **can be changed only dynamical
 
 Upon changing these options, Patroni will read the relevant section of the configuration stored in DCS and change its run-time values.
 
-Patroni nodes are dumping the state of the DCS options to disk upon for every change of the configuration into the file `patroni.dynamic.json` located in the Postgres data directory. Only the leader is allowed to restore these options from the on-disk dump if these are completely absent from the DCS or if they are invalid.
+Patroni nodes save the DCS configuration to disk after every configuration change, in the file `patroni.dynamic.json` located in the Postgres data directory. Only the leader is allowed to restore these options from the on-disk dump if these are completely absent from the DCS or if they are invalid.
 
 <a id="validate_generate_config"></a>
 
@@ -158,11 +158,11 @@ Generate a sample Patroni configuration file in `yaml` format. Parameter values 
 
 Some default values are defined based on the local setup:
 
-> - **postgresql.listen**: the IP address returned by `gethostname` call for the current machine's hostname and the standard `5432` port.
-> - **postgresql.connect_address**: the IP address returned by `gethostname` call for the current machine's hostname and the standard `5432` port.
+> - **postgresql.listen**: the IP address resolved by `getaddrinfo` from the current machine's hostname returned by `gethostname` and the standard `5432` port.
+> - **postgresql.connect_address**: the IP address resolved by `getaddrinfo` from the current machine's hostname returned by `gethostname` and the standard `5432` port.
 > - **postgresql.authentication.rewind**: is only defined if the PostgreSQL version can be defined from the binary and the version is 11 or later.
-> - **restapi.listen**: IP address returned by `gethostname` call for the current machine's hostname and the standard `8008` port.
-> - **restapi.connect_address**: IP address returned by `gethostname` call for the current machine's hostname and the standard `8008` port.
+> - **restapi.listen**: IP address resolved by `getaddrinfo` from the current machine's hostname returned by `gethostname` and the standard `8008` port.
+> - **restapi.connect_address**: IP address resolved by `getaddrinfo` from the current machine's hostname returned by `gethostname` and the standard `8008` port.
 
 #### Parameters
 
@@ -184,22 +184,22 @@ All the non-internal GUCs defined in the source Postgres instance, independently
 
 > - **scope**: `cluster_name` GUC value;
 > - **postgresql.listen**: `listen_addresses` and `port` GUC values;
-> - **postgresql.datadir**: `data_directory` GUC value;
+> - **postgresql.data_dir**: `data_directory` GUC value;
 > - **postgresql.parameters**: `archive_command`, `restore_command`, `archive_cleanup_command`, `recovery_end_command`, `ssl_passphrase_command`, `hba_file`, `ident_file`, `config_file` GUC values;
 > - **bootstrap.dcs**: all other gathered PostgreSQL GUCs.
 
-If `scope`, `postgresql.listen` or `postgresql.datadir` is not set from the Postgres GUCs, the respective [Environment configuration](/docs/patroni/config/env#env) value is used.
+If `scope`, `postgresql.listen` or `postgresql.data_dir` is not set from the Postgres GUCs, the respective [Environment configuration](/docs/patroni/config/env#env) value is used.
 
 Other rules applied for the values definition:
 
 > - **name**: `PATRONI_NAME` environment variable value if set, otherwise the current machine's hostname.
 > - **postgresql.bin_dir**: path to the Postgres binaries gathered from the running instance.
-> - **postgresql.connect_address**: the IP address returned by `gethostname` call for the current machine's hostname and the port used for the instance connection or the `port` GUC value.
+> - **postgresql.connect_address**: the IP address resolved by `getaddrinfo` from the current machine's hostname returned by `gethostname` and the port used for the instance connection or the `port` GUC value.
 > - **postgresql.authentication.superuser**: the configuration used for the instance connection;
 > - **postgresql.pg_hba**: the lines gathered from the source instance's `hba_file`.
 > - **postgresql.pg_ident**: the lines gathered from the source instance's `ident_file`.
-> - **restapi.listen**: IP address returned by `gethostname` call for the current machine's hostname and the standard `8008` port.
-> - **restapi.connect_address**: IP address returned by `gethostname` call for the current machine's hostname and the standard `8008` port.
+> - **restapi.listen**: IP address resolved by `getaddrinfo` from the current machine's hostname returned by `gethostname` and the standard `8008` port.
+> - **restapi.connect_address**: IP address resolved by `getaddrinfo` from the current machine's hostname returned by `gethostname` and the standard `8008` port.
 
 Other parameters defined using [Environment configuration](/docs/patroni/config/env#env) are also included into the configuration.
 
@@ -224,7 +224,7 @@ Validate the given Patroni configuration and print the information about the fai
 #### Parameters
 
 `configfile`  
-Full path to the configuration file to check. If not given or file does not exist, will try to read from the `PATRONI_CONFIG_VARIABLE` environment variable or, if not set, from the [Patroni environment variables](/docs/patroni/config/env#env).
+Full path to the configuration file to check. If not given or file does not exist, will try to read from the `PATRONI_CONFIGURATION` environment variable or, if not set, from the [Patroni environment variables](/docs/patroni/config/env#env).
 
 `--ignore-listen-port | -i`  
 Optional flag to ignore bind failures for `listen` ports that are already in use when validating the `configfile`.

@@ -3,6 +3,8 @@ title: "Command-Line Reference"
 linkTitle: "Command Line"
 weight: 30
 description: "Complete pgBadger command syntax, options, remote input, return codes, and examples"
+search_keywords: [--Jobs, --anonymize, --appname, --average, --begin, --charset, --command, --csv-separator, --day-report, --dbclient, --dbname, --dbuser, --disable-autovacuum, --disable-checkpoint, --disable-connection, --disable-error, --disable-hourly, --disable-lock, --disable-query, --disable-session, --disable-temporary, --disable-type, --dns-resolv, --dump-all-queries, --dump-raw-csv, --enable-checksum, --end, --exclude-appname, --exclude-client, --exclude-db, --exclude-file, --exclude-line, --exclude-query, --exclude-time, --exclude-user, --explain-url, --explode, --extension, --extra-files, --format, --help, --histo-average, --histogram-query, --histogram-session, --html-outdir, --ident, --include-file, --include-pid, --include-query, --include-session, --include-time, --incremental, --iso-week-number, --jobs, --journalctl, --keep-comments, --last-parsed, --log-duration, --log-timezone, --logfile-list, --maxlength, --month-report, --no-fork, --no-multiline, --no-prettify, --no-process-info, --no-progressbar, --no-week, --nocomment, --noexplain, --nograph, --noreport, --normalized-only, --outdir, --outfile, --pgbouncer-only, --pid-dir, --pid-file, --pie-limit, --prefix, --prettify-json, --query-numbering, --quiet, --rebuild, --remote-host, --retention, --sample, --select-only, --ssh-identity, --ssh-option, --ssh-port, --ssh-program, --ssh-sudo, --ssh-timeout, --ssh-user, --start-monday, --tempdir, --timezone, --title, --top, --verbose, --version, --watch-mode, --wide-char, --zcat, JSON::XS, Jobs, all, anonymize, appname, autovacuum, average, begin, char, charset, checkpoint, checksum, client, command, comments, connection, csv, csv-separator, csvlog, day, day-report, db, dbclient, dbname, dbuser, dir, disable, disable-autovacuum, disable-checkpoint, disable-connection, disable-error, disable-hourly, disable-lock, disable-query, disable-session, disable-temporary, disable-type, dns, dns-resolv, dump, dump-all-queries, dump-raw-csv, duration, enable, enable-checksum, end, error, exclude, exclude-appname, exclude-client, exclude-db, exclude-file, exclude-line, exclude-query, exclude-time, exclude-user, explain, explain-url, explode, extension, extra, extra-files, file, files, fork, format, help, histo, histo-average, histogram, histogram-query, histogram-session, host, hourly, html, html-outdir, ident, identity, include, include-file, include-pid, include-query, include-session, include-time, incremental, info, iso, iso-week-number, jobs, journalctl, json, jsonlog, keep, keep-comments, last, last-parsed, limit, line, list, lock, log, log-duration, log-timezone, log_duration, log_line_prefix, log_statement, logfile, logfile-list, logplex, maxlength, mode, monday, month, month-report, multiline, no, no-fork, no-multiline, no-prettify, no-process-info, no-progressbar, no-week, nocomment, noexplain, nograph, noreport, normalized, normalized-only, number, numbering, only, option, outdir, outfile, parsed, pgbouncer, pgbouncer-only, pid, pid-dir, pid-file, pie, pie-limit, port, prefix, prettify, prettify-json, process, program, progressbar, queries, query, query-numbering, quiet, raw, rebuild, redshift, remote, remote-host, report, resolv, retention, sample, select, select-only, separator, session, ssh, ssh-identity, ssh-option, ssh-port, ssh-program, ssh-sudo, ssh-timeout, ssh-user, start, start-monday, stderr, sudo, syslog, tempdir, temporary, time, timeout, timezone, title, top, type, url, user, verbose, version, watch, watch-mode, week, wide, wide-char, zcat]
+search_boost: 8
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [Reference]
@@ -10,8 +12,6 @@ aliases: [/pgbadger/command-line/]
 upstream_link: "https://github.com/darold/pgbadger/tree/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
 upstream_name: "pgBadger README.md"
 ---
-
-This page preserves the command reference generated from the pinned upstream source. Option names and help text remain verbatim so they can be compared directly with `pgbadger --help`.
 
 ## Usage and options {#usage-and-options}
 
@@ -124,6 +124,7 @@ Options:
                          The value can be an integer, ex.: 2, or a float,
                          ex.: 2.5.
 --anonymize            : obscure all literals in queries, useful to hide
+                         confidential data.
 --charset              : used to set the HTML charset to be used.
                          Default: utf-8.
 --command CMD          : command to execute to retrieve log entries on
@@ -134,7 +135,6 @@ Options:
                          Requires incremental output directories and the
                          presence of all necessary binary data files
 --disable-autovacuum   : do not generate autovacuum report.
-                         confidential data.
 --disable-checkpoint   : do not generate checkpoint/restartpoint report.
 --disable-connection   : do not generate connection report.
 --disable-error        : do not generate error report.
@@ -253,6 +253,8 @@ some additional options to fully control the ssh connection.
 --ssh-user username      connection login name. Defaults to running user.
 ```
 
+`--ssh-sudo` prefixes remote file-listing and log-reading commands with `sudo`. The remote SSH user must be able to run those commands through `sudo` without an interactive prompt.
+
 Log file to parse can also be specified using an URI, supported protocols are
 http[s] and [s]ftp. The curl command will be used to download the file, and the
 file will be parsed during download. The ssh protocol is also supported and will
@@ -336,6 +338,8 @@ use pgBadger as follow to exclude these periods from the report:
 pgbadger --exclude-time "2013-09-.* (23|13):.*" postgresql.log
 ```
 
+This expression excludes each entire matching hour, including time outside the half-hour dump. Narrow the minute pattern if only the dump interval should be excluded.
+
 This will help avoid having COPY statements, as generated by pg_dump, on top of
 the list of slowest queries. You can also use --exclude-appname "pg_dump" to
 solve this problem in a simpler way.
@@ -383,7 +387,7 @@ pgbadger -f rds -o rds_out.html rds.log
 
 Each CloudSQL Postgresql log is a fairly normal PostgreSQL log, but encapsulated
 in JSON format. It is autodetected by pgBadger but in case you need to force
-the log format use \`jsonlog\`:
+the log format use `jsonlog`:
 
 ```text
 pgbadger -f jsonlog -o cloudsql_out.html cloudsql.log
@@ -401,7 +405,7 @@ pgbadger -f jsonlog -o cnpg_out.html cnpg.log
 To create a cumulative report over a month use command:
 
 ```text
-pgbadger --month-report 2919-05 /path/to/incremental/reports/
+pgbadger --month-report 2019-05 /path/to/incremental/reports/
 ```
 
 this will add a link to the month name into the calendar view in

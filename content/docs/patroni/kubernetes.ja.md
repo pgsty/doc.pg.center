@@ -60,12 +60,12 @@ PatroniのKubernetes用の[設定](/ja/docs/patroni/config/yaml#kubernetes_setti
 >   tmp_role: primary
 > ```
 
-3. 独自のロールラベルを追加します（たとえば、`kubernetes.leader_label_value=primary`を設定します）。Podを再起動すると、Patroniによって次の新しいラベルが設定されます。
+3. 独自のロールラベルを追加します（たとえば、`kubernetes.leader_label_value=leader`を設定します）。Podを再起動すると、Patroniによって次の新しいラベルが設定されます。
 
 > ```yaml
 > labels:
 >   cluster-name: foo
->   role: primary
+>   role: leader
 >   tmp_role: primary
 > ```
 
@@ -74,7 +74,7 @@ PatroniのKubernetes用の[設定](/ja/docs/patroni/config/yaml#kubernetes_setti
 > ```yaml
 > selector:
 >   cluster-name: foo
->   role: primary
+>   role: leader
 > ```
 
 5. 最後に、構成から一時的なラベルを削除し、すべてのPodを更新します。
@@ -82,14 +82,14 @@ PatroniのKubernetes用の[設定](/ja/docs/patroni/config/yaml#kubernetes_setti
 > ```yaml
 > labels:
 >   cluster-name: foo
->   role: primary
+>   role: leader
 > ```
 
 --------
 
 ## 例 {#examples}
 
-- Patroniリポジトリの[kubernetes](https://github.com/patroni/patroni/tree/master/kubernetes)フォルダーには、PatroniのKubernetes構成をテストするためのDockerイメージとKubernetesマニフェストの例が含まれています。現在の状態では、権限の問題によりPersistentVolumesを使用できないことに注意してください。
+- Patroniリポジトリの[kubernetes](https://github.com/patroni/patroni/tree/master/kubernetes)フォルダーには、PatroniのKubernetesセットアップをテストするためのDockerイメージとKubernetesマニフェストの例が含まれています。現在の状態では、権限の問題によりPersistentVolumesを使用できないことに注意してください。
 - Persistent Volumesを使用できる、すべての機能を備えたDockerイメージは、[Spiloプロジェクト](https://github.com/zalando/spilo)にあります。
 - Kubernetesで実行するPatroniを構成したSpiloイメージをデプロイするための[Helmチャート](https://github.com/kubernetes/charts/tree/master/incubator/patroni)もあります。
 - PatroniとSpiloを使用してデータベースクラスターを大規模に運用する場合は、[postgres-operator](https://github.com/zalando/postgres-operator)プロジェクトを参照してください。Spiloクラスターを管理するためのOperatorパターンを実装しています。

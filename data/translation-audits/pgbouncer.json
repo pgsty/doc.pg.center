@@ -27,281 +27,6 @@
     "Original program diagnostics are protected verbatim; only Markdown escapes/line wrapping are normalized.",
     "Chinese prose heading IDs retain the established localized scheme; internal links and fragments are checked in the build."
   ],
-  "old_review_reconciliation": {
-    "records": [
-      "tmp/review/pgbouncer/de.md",
-      "tmp/review/pgbouncer/fr.md",
-      "tmp/review/pgbouncer/ja.md",
-      "tmp/review/pgbouncer/ru.md",
-      "tmp/review/pgbouncer/zh.md"
-    ],
-    "reported_groups": 29,
-    "confirmed_and_fixed": 28,
-    "not_confirmed": 1,
-    "issues": [
-      {
-        "key": "windows-needs",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/usage.md",
-        "line": 139,
-        "summary": "need → needs，补 service 冠词",
-        "evidence": "官方1.26 usage.md 原句语法问题",
-        "old_records": "de:1; fr/ja重复"
-      },
-      {
-        "key": "assignment-was",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/usage.md",
-        "line": 249,
-        "summary": "as → was",
-        "evidence": "SHOW STATS avg_server_assignment_count 定义",
-        "old_records": "de:2; fr/ja重复"
-      },
-      {
-        "key": "pool-override-punctuation",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/usage.md",
-        "line": 582,
-        "summary": "修复 pool_size./reserve_pool_size. 多余句号，并合并真实空字符串修正",
-        "evidence": "官方1.26 src/admin.c:401-416",
-        "old_records": "de:3; fr/ja重复"
-      },
-      {
-        "key": "databases-section",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/config.md",
-        "line": 119,
-        "summary": "三处 [database] → [databases]",
-        "evidence": "官方1.26 src/main.c 的 sect_name=\"databases\"；doc/config.md 实际节标题",
-        "old_records": "de:4; fr/ja/ru重复"
-      },
-      {
-        "key": "server-allow-fixme",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/config.md",
-        "line": 676,
-        "summary": "allow FIXME 按源码改为先请求TLS、拒绝后回退明文、不验证服务端证书",
-        "evidence": "官方1.26 src/server.c:726-733,764-773；src/sbuf.c:1242-1250",
-        "old_records": "de:5; fr/ja/ru重复"
-      },
-      {
-        "key": "cancellation-grammar",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/config.md",
-        "line": 1092,
-        "summary": "cancellations requests及it originated语病修正，明确转发给原查询所在进程",
-        "evidence": "官方1.26 peers行为及doc/config.md原句",
-        "old_records": "de:6; fr重复"
-      },
-      {
-        "key": "config-management-grammar",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/config.md",
-        "line": 1109,
-        "summary": "修复 to config management easy 与残句 Because",
-        "evidence": "官方1.26 doc/config.md 该段说明自身peer配置被忽略但允许复用配置",
-        "old_records": "de:7; fr/ja重复"
-      },
-      {
-        "key": "peer-server-is",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/config.md",
-        "line": 1134,
-        "summary": "补缺失的 is",
-        "evidence": "官方1.26 doc/config.md 原句语法问题",
-        "old_records": "de:8"
-      },
-      {
-        "key": "defaults-spelling",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/changelog.md",
-        "line": 253,
-        "summary": "defaultls → defaults",
-        "evidence": "官方1.26 NEWS.md 1.24.0 #1144 原文拼写",
-        "old_records": "de:9; fr/ja/ru重复"
-      },
-      {
-        "key": "implementations-spelling",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/changelog.md",
-        "line": 167,
-        "summary": "implementatinos → implementations",
-        "evidence": "官方1.26 NEWS.md 1.25.0 #1384 原文拼写",
-        "old_records": "de:10; fr/ja/ru重复"
-      },
-      {
-        "key": "coverity-name",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/changelog.md",
-        "line": 1311,
-        "summary": "Coverty → Coverity",
-        "evidence": "官方1.26 NEWS.md 1.10.x 其他条目正确拼写为Coverity",
-        "old_records": "de:11; fr/ja/ru重复"
-      },
-      {
-        "key": "regsvr32-command",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/changelog.md",
-        "line": 1715,
-        "summary": "历史示例 regsrv32 → regsvr32，六语言同步",
-        "evidence": "官方1.26 README.md Running on Windows 同一命令为regsvr32",
-        "old_records": "de:12; fr/ja重复"
-      },
-      {
-        "key": "show-code-spans",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/changelog.md",
-        "line": 640,
-        "summary": "1.18 SHOW代码跨度/空格修复",
-        "evidence": "官方1.26 NEWS.md #782语义及真实管理命令",
-        "old_records": "de:13; fr/ru重复"
-      },
-      {
-        "key": "either-singular",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/faq.md",
-        "line": 43,
-        "summary": "Either LVS or HAProxy seem → seems，保持二选一语义",
-        "evidence": "FAQ原句语法",
-        "old_records": "de:14"
-      },
-      {
-        "key": "future-articles",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/usage.md",
-        "line": 548,
-        "summary": "a future clients/servers → future clients/servers",
-        "evidence": "官方1.26 usage.md free_clients/free_servers 描述",
-        "old_records": "fr:1; ja重复"
-      },
-      {
-        "key": "assignment-period",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/usage.md",
-        "line": 205,
-        "summary": "Total times补number of及句末句点",
-        "evidence": "官方1.26 usage.md total_server_assignment_count 描述",
-        "old_records": "fr:2; ja重复"
-      },
-      {
-        "key": "scram-hashing",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/config.md",
-        "line": 301,
-        "summary": "SCRAM encrypting → hashing",
-        "evidence": "官方1.26 src/common/scram-common.c:50-73执行迭代HMAC哈希",
-        "old_records": "fr:3"
-      },
-      {
-        "key": "md5-hashing",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/config.md",
-        "line": 316,
-        "summary": "MD5-encrypted → MD5-hashed",
-        "evidence": "官方1.26 doc/config.md Authentication file format 的MD5-hashed及md5公式",
-        "old_records": "fr:3"
-      },
-      {
-        "key": "tracking-spacing",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/config.md",
-        "line": 199,
-        "summary": "track_extra_parameters Note去重复空格",
-        "evidence": "原文排版，不改技术内容",
-        "old_records": "fr:4"
-      },
-      {
-        "key": "shrinkage-spelling",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/changelog.md",
-        "line": 1524,
-        "summary": "shringage → shrinkage",
-        "evidence": "官方1.26 NEWS.md 1.4.1原文拼写",
-        "old_records": "fr:5; ja/ru重复"
-      },
-      {
-        "key": "more-than",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/changelog.md",
-        "line": 1725,
-        "summary": "more that → more than",
-        "evidence": "官方1.26 NEWS.md 1.3原文语法",
-        "old_records": "fr:5; ja/ru重复"
-      },
-      {
-        "key": "send-grammar",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/changelog.md",
-        "line": 1977,
-        "summary": "1.0.7损坏句子重写为send阻塞期间发送多个包触发断言；不改变修复逻辑说明",
-        "evidence": "官方1.26 NEWS.md 1.0.7同一历史条目",
-        "old_records": "fr:5"
-      },
-      {
-        "key": "upgrade-period",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/faq.md",
-        "line": 131,
-        "summary": "升级章节链接后补句点",
-        "evidence": "FAQ排版",
-        "old_records": "fr:6; ja:3"
-      },
-      {
-        "key": "kill-client-comma",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/usage.md",
-        "line": 800,
-        "summary": "去主语谓语间多余逗号",
-        "evidence": "usage.md KILL_CLIENT描述",
-        "old_records": "ja:1"
-      },
-      {
-        "key": "to-use",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/changelog.md",
-        "line": 152,
-        "summary": "to using → to use",
-        "evidence": "官方1.26 NEWS.md 1.25.0 #1359原句语法",
-        "old_records": "ja:2; ru重复"
-      },
-      {
-        "key": "guaranteed-spelling",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/changelog.md",
-        "line": 1182,
-        "summary": "guarateed → guaranteed",
-        "evidence": "官方1.26 NEWS.md 1.7原句拼写",
-        "old_records": "ja:2; ru重复"
-      },
-      {
-        "key": "its-possessive",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/changelog.md",
-        "line": 1184,
-        "summary": "it's own → its own",
-        "evidence": "官方1.26 NEWS.md 1.7原句语法",
-        "old_records": "ru:1"
-      },
-      {
-        "key": "reserve-pool-setting",
-        "status": "fixed",
-        "file": "content/docs/pgbouncer/changelog.md",
-        "line": 791,
-        "summary": "res_pool_size → reserve_pool_size",
-        "evidence": "官方1.16 src/main.c:266公开配置键；res_pool_size为内部变量",
-        "old_records": "zh:1; de/fr/ja/ru重复"
-      },
-      {
-        "key": "query-timeout-direction",
-        "status": "not-a-defect",
-        "file": "content/docs/pgbouncer/config.md",
-        "line": 739,
-        "summary": "方向疑问不成立：服务器 statement_timeout 应略小于 PgBouncer query_timeout，先由数据库取消，后者仅兜底网络异常；中文已明确“略小于此值”，保持原文。",
-        "evidence": "官方1.26 doc/config.md query_timeout 段与 PgBouncer超时用途",
-        "old_records": "zh:2"
-      }
-    ]
-  },
   "additional_source_corrections": [
     {
       "key": "logfile-needs",
@@ -455,7 +180,7 @@
       "source": "content/docs/pgbouncer/changelog.md",
       "translation": "content/docs/pgbouncer/changelog.zh.md",
       "language": "zh",
-      "source_sha256": "5f014867bc817b6eefe0254a187f2375956f103bc692df5b27f171c682c9cf25",
+      "source_sha256": "71c28bd83a63362188737cdfe706727df6cffe56cf522e7660171a9f2a66d262",
       "translation_sha256": "727991129bfa7156b268f1bf255b1563dcdee5978109c1f5805eeeef784eab79",
       "semantic_review": "pass",
       "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
@@ -490,7 +215,7 @@
       "source": "content/docs/pgbouncer/changelog.md",
       "translation": "content/docs/pgbouncer/changelog.fr.md",
       "language": "fr",
-      "source_sha256": "5f014867bc817b6eefe0254a187f2375956f103bc692df5b27f171c682c9cf25",
+      "source_sha256": "71c28bd83a63362188737cdfe706727df6cffe56cf522e7660171a9f2a66d262",
       "translation_sha256": "fa1ba5d4a225023e8fc69bcd43e9750b2aca5d1baa948e89105f3de7f351557f",
       "semantic_review": "pass",
       "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
@@ -516,7 +241,7 @@
       "source": "content/docs/pgbouncer/changelog.md",
       "translation": "content/docs/pgbouncer/changelog.ja.md",
       "language": "ja",
-      "source_sha256": "5f014867bc817b6eefe0254a187f2375956f103bc692df5b27f171c682c9cf25",
+      "source_sha256": "71c28bd83a63362188737cdfe706727df6cffe56cf522e7660171a9f2a66d262",
       "translation_sha256": "8ada7c56b237b7f842d5be2d0c10bbcff25d0e57884e06c4200d0237893d6ae4",
       "semantic_review": "pass",
       "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
@@ -554,11 +279,11 @@
       "source": "content/docs/pgbouncer/changelog.md",
       "translation": "content/docs/pgbouncer/changelog.de.md",
       "language": "de",
-      "source_sha256": "5f014867bc817b6eefe0254a187f2375956f103bc692df5b27f171c682c9cf25",
-      "translation_sha256": "603efe74b67955efb09e064a949ab273e83e40889a48dc742616cd5aa94360a3",
+      "source_sha256": "71c28bd83a63362188737cdfe706727df6cffe56cf522e7660171a9f2a66d262",
+      "translation_sha256": "2f6e614751790d26e83f51a6f1fe436e3f393119b26be49cc0bb1d06f198a382",
       "semantic_review": "pass",
       "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
-      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation.",
+      "independent_review": "Cross-language review of all changed technical passages and original diagnostics; EN/ZH source errata verified against tagged implementation. On 2026-10-14, the 1.16 cleanup paragraph was independently reread against current English: the three original diagnostic messages and the open-transaction condition match; only code-span markers were aligned with the source quotation marks.",
       "protected_diagnostics": [
         "password is SCRAM secret but client authentication did not provide SCRAM keys",
         "FATAL in function client_proto(): bad client state: 6/7",
@@ -580,7 +305,7 @@
       "source": "content/docs/pgbouncer/changelog.md",
       "translation": "content/docs/pgbouncer/changelog.ru.md",
       "language": "ru",
-      "source_sha256": "5f014867bc817b6eefe0254a187f2375956f103bc692df5b27f171c682c9cf25",
+      "source_sha256": "71c28bd83a63362188737cdfe706727df6cffe56cf522e7660171a9f2a66d262",
       "translation_sha256": "aed810c399636203b9093c3df9a8c0e57668a9739e29cd3308c78decaa2c91f6",
       "semantic_review": "pass",
       "review": "Full current-English technical prose and terminology review; 1.26 changes and implementation-backed errata verified. Historical changelog checked in full for structure, versions, issue links, numbers and diagnostics, with targeted semantic review.",
@@ -1043,129 +768,57 @@
       "protected_diagnostics": []
     }
   ],
-  "validation": {
-    "status": "passed",
-    "source_pairs": 45,
-    "rendered_pages": 54,
-    "regression_tests": {
-      "passed": 9,
-      "skipped_in_final_run": 0
-    },
-    "make_check": {
-      "exit_code": 0,
-      "module": "github.com/pgsty/oink v1.2.0",
-      "note": "Full make check executed using the warmed module cache; no checks skipped or disabled."
-    },
-    "rendered_outputs": {
-      "en": {
-        "pages": 9,
-        "print_blocks": 2122
-      },
-      "zh": {
-        "pages": 9,
-        "print_blocks": 2122
-      },
-      "fr": {
-        "pages": 9,
-        "print_blocks": 2121
-      },
-      "ja": {
-        "pages": 9,
-        "print_blocks": 2120
-      },
-      "de": {
-        "pages": 9,
-        "print_blocks": 2122
-      },
-      "ru": {
-        "pages": 9,
-        "print_blocks": 2085
-      }
-    },
-    "local_links": {
-      "html_documents": 3217,
-      "status": "passed"
-    },
-    "routes": {
-      "documentation_pages": 1272,
-      "legacy_aliases": 1734,
-      "status": "passed"
-    },
-    "browser": {
-      "status": "passed",
-      "widths": [
-        1440,
-        390
-      ],
-      "page_visits": 108,
-      "interactive_searches": 12,
-      "same_page_language_switches": "passed in all five translated editions at both widths",
-      "document_overflow": "none",
-      "console_page_errors": "none"
-    },
-    "independent_review": "All source errata verified; DE/FR and JA/RU changes cross-reviewed; acceptance checker independently reviewed and all three discovered guard gaps fixed with regression tests.",
-    "commands": [
-      "python3 scripts/check-pgbouncer.py --rendered-dir <production-build>",
-      "PGBOUNCER_RENDERED_DIR=<production-build> python3 scripts/test-pgbouncer-parity.py",
-      "make check",
-      "PLAYWRIGHT_MODULE=<external/playwright> CHROME_EXECUTABLE=<external/chrome> node scripts/check-pgbouncer-browser.cjs <local-preview-url> <external-report-dir>"
-    ],
-    "shared_worktree_additional_commands": [
-      "python3 scripts/check-russian-parity.py --component pgbouncer --current-source --strict --rendered-dir <production-build>",
-      "python3 scripts/check-german-parity.py --component pgbouncer --current-source --rendered-dir <production-build>"
-    ],
-    "scope_note": "The earlier whole-worktree validation below includes parallel translation work. The scoped_commit_validation section records acceptance of HEAD plus only the PgBouncer commit candidate. Its helper is self-contained; the German utility gains only explicit component exclusion for pair comparisons, and the link utility is unchanged."
-  },
-  "delivery": {
-    "local": "accepted and ready for source delivery",
-    "git": "Scoped PgBouncer-only local source commit; no unrelated component changes included.",
-    "public": "Publication explicitly deferred by the user; no push or deploy.",
-    "remote_main": "8e61c3d0a39814f340ce8d7782b7cdc754cca862",
-    "local_head": "646aa4318c1276fc7d9a49c4f217a2eff0ff26e0",
-    "note": "Shared documents and site checks contain only PgBouncer changes relative to the committed baseline. Other component work remains in the working tree. Build/browser artifacts stay outside Git.",
-    "previously_pending_local_commits": 11
-  },
   "completed_at": "2026-10-13T16:59:54.301332+08:00",
-  "scoped_commit_validation": {
-    "status": "passed",
-    "base_head": "646aa4318c1276fc7d9a49c4f217a2eff0ff26e0",
-    "scope": "Isolated checkout of the existing committed baseline plus only the PgBouncer documentation, validation scripts and review records; no parallel component work included.",
-    "changed_files": 64,
-    "source_pairs": 45,
-    "rendered_pages": 54,
-    "make_check": {
-      "exit_code": 0,
-      "hugo": "0.166.0+extended+withdeploy",
-      "module": "github.com/pgsty/oink v1.2.0",
-      "cache": "Warm Hugo module cache; no network downloads or generated artifacts included in Git."
-    },
-    "regression_tests": {
-      "passed": 9,
-      "skipped_in_final_rendered_run": 0
-    },
-    "routes": {
-      "documentation_pages": 958,
-      "legacy_aliases": 1286,
-      "status": "passed"
-    },
-    "local_links": {
-      "html_documents": 2438,
-      "status": "passed"
-    },
-    "browser": {
-      "status": "passed",
-      "widths": [
-        1440,
-        390
+  "publication_addenda": [
+    {
+      "date": "2026-10-14",
+      "file": "content/docs/pgbouncer/changelog.md",
+      "scope": "Make 27 existing English rendered heading IDs explicit; heading text, visible output, examples and translations unchanged",
+      "previous_source_sha256": "5f014867bc817b6eefe0254a187f2375956f103bc692df5b27f171c682c9cf25",
+      "source_sha256": "71c28bd83a63362188737cdfe706727df6cffe56cf522e7660171a9f2a66d262",
+      "heading_ids": [
+        "pgbouncer-126x",
+        "pgbouncer-125x",
+        "pgbouncer-124x",
+        "pgbouncer-123x",
+        "pgbouncer-122x",
+        "pgbouncer-121x",
+        "pgbouncer-120x",
+        "pgbouncer-119x",
+        "pgbouncer-118x",
+        "pgbouncer-117x",
+        "pgbouncer-116x",
+        "pgbouncer-115x",
+        "pgbouncer-114x",
+        "pgbouncer-113x",
+        "pgbouncer-112x",
+        "pgbouncer-111x",
+        "pgbouncer-110x",
+        "pgbouncer-19x",
+        "pgbouncer-18x",
+        "pgbouncer-17x",
+        "pgbouncer-16x",
+        "pgbouncer-15x",
+        "pgbouncer-14x",
+        "pgbouncer-13x",
+        "pgbouncer-12x",
+        "pgbouncer-11x",
+        "pgbouncer-10x"
       ],
-      "page_visits": 108,
-      "interactive_searches": 12,
-      "same_page_language_switches": "all five translated editions at both widths",
-      "document_overflow": "none",
-      "console_page_errors": "none"
+      "verified_against": "Actual pre-edit production HTML heading IDs"
     },
-    "legacy_german_gate": "Retains global source/page coverage, missing-page and orphan checks; PgBouncer pair comparisons are explicitly delegated to the preceding complete PgBouncer source/rendered gate. The other 31 existing German pairs and prose in all 40 German files pass.",
-    "independent_review": "Standalone helper dependency and protection-boundary review passed. Commit scope, shared-file hunks, UTF-8 text types, metadata paths and exact source fingerprints independently checked.",
-    "publication": "Deferred by explicit user instruction; no push or deployment."
-  }
+    {
+      "date": "2026-10-14",
+      "file": "content/docs/pgbouncer/changelog.de.md",
+      "scope": "Align Markdown quoting of three unchanged 1.16 diagnostic messages with English",
+      "previous_translation_sha256": "603efe74b67955efb09e064a949ab273e83e40889a48dc742616cd5aa94360a3",
+      "translation_sha256": "2f6e614751790d26e83f51a6f1fe436e3f393119b26be49cc0bb1d06f198a382",
+      "independent_review": "Reread the complete 1.16 cleanup paragraph against current English; all three diagnostic strings and the open-transaction condition match. Reversing exactly three quotation-marker substitutions reproduces the previously audited whole-file SHA-256.",
+      "protected_diagnostics": [
+        "unclean server",
+        "client disconnect while server was not ready",
+        "client disconnect before everything was sent to the server"
+      ]
+    }
+  ]
 }

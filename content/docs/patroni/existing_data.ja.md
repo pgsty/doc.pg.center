@@ -19,7 +19,7 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/existing_data.html"
 
 ## 手順 {#procedure}
 
-既存のPostgresクラスターをPatroni管理のクラスターに移行する手順の概要を以下に示します。既存クラスターのすべてのノードが稼働中であり、移行中にPostgresの設定を変更する予定が*ない*ことを前提とします。
+既存のPostgresクラスターをPatroni管理のクラスターに移行する手順の概要を以下に示します。既存クラスターのすべてのノードが稼働中であり、移行中にPostgresの設定を変更する予定が*ない*ことを前提とします。手順は次のとおりです。
 
 1. Patroni設定の[authentication](/ja/docs/patroni/config/yaml#postgresql_settings)セクションの説明に従い、Postgresユーザーを作成します。以下のコードブロックにユーザー作成用のSQLコマンド例を示します。ユーザー名とパスワードを環境に合わせて置き換えてください。必要なユーザーがすでに存在する場合は、この手順を省略できます。
 
@@ -53,7 +53,7 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/existing_data.html"
     1.  スタンバイノードを直ちに再起動します。
     2.  プライマリーノードの再起動をメンテナンス時間帯に予約します。
 
-4. 手順`1.2.`で永続スロットを設定した場合、Patroniが作成したスロットの`restart_lsn`が対応するメンバーの元のスロットの`restart_lsn`に追いついたら、[patronictl edit-config cluster-name](/ja/docs/patroni/patronictl#patronictl_edit_config_parameters)コマンドでそれらを`slots`設定から削除してください。`slots`設定から削除することで、元のスロットが不要になった際にPatroniがクラスターから削除できるようになります。以下は2つのスロットの`restart_lsn`を確認し、比較するクエリーの例です。
+4. 手順`2.2.`で永続スロットを設定した場合、Patroniが作成したスロットの`restart_lsn`が対応するメンバーの元のスロットの`restart_lsn`に追いついたら、[patronictl edit-config cluster-name](/ja/docs/patroni/patronictl#patronictl_edit_config_parameters)コマンドでそれらを`slots`設定から削除してください。`slots`設定から削除することで、元のスロットが不要になった際にPatroniがクラスターから削除できるようになります。以下は2つのスロットの`restart_lsn`を確認し、比較するクエリーの例です。
 
     ``` sql
     -- Assume original_slot_for_member_x is the name of the slot in your original
@@ -73,12 +73,12 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/existing_data.html"
 
 ## PostgreSQLのメジャーバージョンアップグレード {#major-upgrade-of-postgresql-version}
 
-現在、メジャーアップグレードを実行できる唯一の方法は次のとおりです。
+`pg_upgrade`を使用してメジャーアップグレードを実行する手順は次のとおりです。
 
 1. Patroniを停止します。
 2. プライマリーノードでPostgreSQLのバイナリを更新し、[pg_upgrade](https://www.postgresql.org/docs/current/pgupgrade.html)を実行します。
 3. patroni.ymlを更新します。
-4. DCSからinitializeキーを削除するか、クラスターの状態全体をDCSから削除します。後者は[patronictl remove cluster-name](/ja/docs/patroni/patronictl#patronictl_remove_parameters)を実行することで実施できます。pg_upgradeはinitdbを実行し、新しいPostgreSQLシステム識別子を持つデータベースを作成するため、この処理が必要です。
+4. DCSからinitializeキーを削除するか、クラスターの状態全体をDCSから削除します。後者は[patronictl remove cluster-name](/ja/docs/patroni/patronictl#patronictl_remove_parameters)を実行することで実施できます。新しいPostgreSQLクラスターはinitdbで初期化され、新しいPostgreSQLシステム識別子を持つため、この処理が必要です。
 5. 前の手順でクラスターの状態を削除した場合は、古いデータディレクトリのpatroni.dynamic.jsonを新しいディレクトリにコピーするとよいでしょう。以前に設定したPostgreSQLパラメーターの一部を保持できます。
 6. プライマリーノードでPatroniを起動します。
 7. スタンバイノードでPostgreSQLのバイナリとpatroni.ymlを更新し、data_dirを消去します。

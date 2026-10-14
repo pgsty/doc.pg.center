@@ -1,0 +1,193 @@
+{
+  "source": "content/docs/haproxy/other-sections.md",
+  "language": "fr",
+  "fences": [
+    {
+      "index": 15,
+      "classification": "argument-description",
+      "protected_literals": [
+        "\".http\"",
+        "HTML",
+        "HTTP"
+      ],
+      "protected_lines": [],
+      "source_sha256": "49cbe9627b3b3072e99f69e50465ed5208b8aa3bb745ec426275e9d92871379a",
+      "target_sha256": "95aff9d39769aa41f7b9f6bff930f9c10c4c4a8d034061d4d622133c72480b1c",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 21,
+      "classification": "argument-description",
+      "protected_literals": [
+        "\n  iso ",
+        "\n  local ",
+        "\n  raw ",
+        "\n  rfc3164 ",
+        "\n  rfc5424 ",
+        "\n  short ",
+        "\n  timed ",
+        "\n priority ",
+        "\"log-send-hostname\"",
+        "ISO",
+        "PID",
+        "RFC3164",
+        "RFC5424",
+        "https://tools.ietf.org/html/rfc3164",
+        "https://tools.ietf.org/html/rfc5424",
+        "stdout/stderr"
+      ],
+      "protected_lines": [],
+      "source_sha256": "88b3d81765a35229686effda2221331603418279a786037eac83bb17e5f333f6",
+      "target_sha256": "5d20cd4c06b106fef293672d14f38289e3a8ef9ce0c31729b1111adde471eeec",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 26,
+      "classification": "argument-description",
+      "protected_literals": [],
+      "protected_lines": [],
+      "source_sha256": "c94ad44e8315f3adaf305f57df114d0a511d3b68a43bdfba35f5f20c266af3e7",
+      "target_sha256": "a71304d9eb1faaa79b9b9e5ddefc768895cc2f134f4592f446af8afd509d8c1c",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 28,
+      "classification": "argument-description",
+      "protected_literals": [],
+      "protected_lines": [],
+      "source_sha256": "c94ad44e8315f3adaf305f57df114d0a511d3b68a43bdfba35f5f20c266af3e7",
+      "target_sha256": "a71304d9eb1faaa79b9b9e5ddefc768895cc2f134f4592f446af8afd509d8c1c",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 66,
+      "classification": "explanation-label",
+      "protected_literals": [
+        "dns-01",
+        "dns-persist-01",
+        "http-01"
+      ],
+      "protected_lines": [],
+      "source_sha256": "9fef3b9ef9653526c199912bc765692de6453cd53872bb46d3dbdc4a0ba91a6c",
+      "target_sha256": "158579d5609a25e3cd72867cfcd3107ac416694cc20d29d8e6d1a2bd25e10428",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 67,
+      "classification": "explanation-label",
+      "protected_literals": [],
+      "protected_lines": [],
+      "source_sha256": "b939573293e65b02ec1861d60310b88e37b883170bc09837484b8b1a92b0aaa1",
+      "target_sha256": "f123cf6bceec438b1114b2dc8843d0fa927889b75af34957f18c27b5b062c8e1",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 68,
+      "classification": "explanation-label",
+      "protected_literals": [],
+      "protected_lines": [],
+      "source_sha256": "190933c697095bcc864891c747a576b5f0e174318ecda8daa725124e3a65abf3",
+      "target_sha256": "4fd98f53e9df7c6b0415ade3aece83cd50627ef9a2a08bf82f702547ac764705",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 76,
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"_acme-challenge.<domain>\"",
+        "\"_validation-persist.<domain>\"",
+        "\"acme challenge_ready <crt> domain <domain>\"",
+        "\"default\"",
+        "\"dns\"",
+        "\"dns-delay\"",
+        "ACME",
+        "CLI",
+        "DNS",
+        "TXT",
+        "cli  -",
+        "delay -",
+        "dns  -",
+        "dns-01",
+        "dns-persist-01",
+        "none -"
+      ],
+      "protected_lines": [],
+      "source_sha256": "6e6a502f0220fc48de31580ef42ed30446e9aebb674a89bf29150e83fc1d0474",
+      "target_sha256": "5df063cd4ccb6283f2c9be07e8e85b33d59416762d5a61f081caf77e3f38d176",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 83,
+      "classification": "argument-description",
+      "protected_literals": [
+        "DNS",
+        "delay     -",
+        "dns       -",
+        "dns+delay -"
+      ],
+      "protected_lines": [],
+      "source_sha256": "38164e02f40565fb3824b7032e3579a94bf17808a3c21c411b767d1cb384f7a4",
+      "target_sha256": "9e0d4abefb1d47dde436d7a5c69a472e9275aca5175867b96aaf3623fce1c2c7",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    }
+  ],
+  "literal_blocks": [
+    {
+      "lines": [
+        691,
+        691
+      ],
+      "source_sha256": "d4c313aa66d2bcb0968e9e3a88469c9cd08c6bed03d2e3b0f98d8029d7278290",
+      "classification": "configuration"
+    },
+    {
+      "lines": [
+        701,
+        703
+      ],
+      "source_sha256": "f3900ed4a793f2eb21a2e0ccf25d64caa467f632e5c3d194554d57c45ea6b8a7",
+      "classification": "configuration"
+    },
+    {
+      "lines": [
+        910,
+        910
+      ],
+      "source_sha256": "22c6e5e458c085ab6951750284e14d891aae61a12f8f4872d77bdc9c1689d4da",
+      "classification": "configuration"
+    },
+    {
+      "lines": [
+        917,
+        917
+      ],
+      "source_sha256": "66b8983f0050b592529ef1bf39c3128a185338abd3539a2368a0b9d7a74cdc1d",
+      "classification": "configuration"
+    },
+    {
+      "lines": [
+        910,
+        910
+      ],
+      "source_sha256": "22c6e5e458c085ab6951750284e14d891aae61a12f8f4872d77bdc9c1689d4da",
+      "classification": "configuration"
+    },
+    {
+      "lines": [
+        1054,
+        1054
+      ],
+      "source_sha256": "994a295825c08de119ee96111dfd42ad53ec19dd5104ad3797677ac2f5eb0b53",
+      "classification": "configuration"
+    },
+    {
+      "lines": [
+        1520,
+        1528
+      ],
+      "source_sha256": "abc0a62b2054066c57a49edb755bf8193a8f2777db3d718b643e6f00977ce47e",
+      "classification": "configuration"
+    }
+  ],
+  "literal_snippets": []
+}

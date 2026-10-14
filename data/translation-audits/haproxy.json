@@ -1,0 +1,1998 @@
+{
+  "schema_version": 1,
+  "component": "haproxy",
+  "edition": "3.4.6-66",
+  "status": "complete-local-current-snapshot-acceptance",
+  "reviewed_at": "2026-10-13T15:34:49.687489+00:00",
+  "upstream_commit": "16acce1dac1dcf1ad5d654204af3a5d45d0e3de8",
+  "coverage": {
+    "published_pages_per_language": 35,
+    "locales": [
+      "en",
+      "zh",
+      "fr",
+      "ja",
+      "de",
+      "ru"
+    ],
+    "navigation_dividers_per_language": 3,
+    "translation_pairs": 190,
+    "english_body_changed_pages": 8
+  },
+  "source_policy": "Current official English 3.4 maintenance snapshot 3.4.6-66, pinned to commit 16acce1. Latest stable release is 3.4.6. Original input snapshots/checksums match this commit; explicitly verified editorial corrections are retained.",
+  "semantic_scope": "All newly added, modified and removed English sections are translated and independently compared in all five target languages. Unchanged content retains the exact prior review provenance and scope; no claim of a fresh complete reread of unchanged ZH/FR prose.",
+  "pairs": [
+    {
+      "source": "content/docs/haproxy/_div_configuration.md",
+      "target": "content/docs/haproxy/_div_configuration.zh.md",
+      "language": "zh",
+      "source_sha256": "861a9b99357f7e9ba28415c54e1443f13da88201c7078447d7a20d0451ea1ca8",
+      "target_sha256": "bdcc63f144b535461ccaa11bd7bed9b815d8710301ece209e80f00ff5a4a2523",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/_div_configuration.md",
+      "target": "content/docs/haproxy/_div_configuration.fr.md",
+      "language": "fr",
+      "source_sha256": "861a9b99357f7e9ba28415c54e1443f13da88201c7078447d7a20d0451ea1ca8",
+      "target_sha256": "eced9ca5e3ee4f2144624f90efc10b65a2ed076bb27f334a4d83e666303d8cfd",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/_div_configuration.md",
+      "target": "content/docs/haproxy/_div_configuration.ja.md",
+      "language": "ja",
+      "source_sha256": "861a9b99357f7e9ba28415c54e1443f13da88201c7078447d7a20d0451ea1ca8",
+      "target_sha256": "afcaf12a7fdc76258e99fc7331e75dd64c116386997d967cb6ab5b149407315c",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/_div_configuration.md",
+      "target": "content/docs/haproxy/_div_configuration.de.md",
+      "language": "de",
+      "source_sha256": "861a9b99357f7e9ba28415c54e1443f13da88201c7078447d7a20d0451ea1ca8",
+      "target_sha256": "7af503032c263a06867150f56c574df874d8b9d5362b77407cdc0665f4d1fc34",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/_div_configuration.md",
+      "target": "content/docs/haproxy/_div_configuration.ru.md",
+      "language": "ru",
+      "source_sha256": "861a9b99357f7e9ba28415c54e1443f13da88201c7078447d7a20d0451ea1ca8",
+      "target_sha256": "9a12febdfcf7662b6671914f504a2e210d489c603962b7e0064668d69e727c48",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/_div_intro.md",
+      "target": "content/docs/haproxy/_div_intro.zh.md",
+      "language": "zh",
+      "source_sha256": "10b14b6dfee1e38cf2cf7b365f614ac94cbf93f6aeae8b4bf5e458c0386bd1da",
+      "target_sha256": "ce6a90ae85dd11793e6f71d7784cb00303eba9291292fdc0c5ccdc48f24f1117",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/_div_intro.md",
+      "target": "content/docs/haproxy/_div_intro.fr.md",
+      "language": "fr",
+      "source_sha256": "10b14b6dfee1e38cf2cf7b365f614ac94cbf93f6aeae8b4bf5e458c0386bd1da",
+      "target_sha256": "e07da99b2795f1aa72699738de1042f667bc83277f63ac8286e860a979b35f51",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/_div_intro.md",
+      "target": "content/docs/haproxy/_div_intro.ja.md",
+      "language": "ja",
+      "source_sha256": "10b14b6dfee1e38cf2cf7b365f614ac94cbf93f6aeae8b4bf5e458c0386bd1da",
+      "target_sha256": "ff8ebda2c46330b7be3b606d81caaf8183fac7872d97bd28f1135c4f7e4b1d2f",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/_div_intro.md",
+      "target": "content/docs/haproxy/_div_intro.de.md",
+      "language": "de",
+      "source_sha256": "10b14b6dfee1e38cf2cf7b365f614ac94cbf93f6aeae8b4bf5e458c0386bd1da",
+      "target_sha256": "54d5ec9d6dc9858f44493dd3dde57549157e4cf0c869697c65288f6811a21160",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/_div_intro.md",
+      "target": "content/docs/haproxy/_div_intro.ru.md",
+      "language": "ru",
+      "source_sha256": "10b14b6dfee1e38cf2cf7b365f614ac94cbf93f6aeae8b4bf5e458c0386bd1da",
+      "target_sha256": "2645f8a45355155bccef150d973b51c0da33ce626626e6f3ba9af1b7eed0de8b",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/_div_management.md",
+      "target": "content/docs/haproxy/_div_management.zh.md",
+      "language": "zh",
+      "source_sha256": "8c03b6727cb383522ddaff6d3bd2814dff000e2b4adbf188ad3b30b1688ea960",
+      "target_sha256": "1292a991a9d422963024ace85b498340b607fdbdde30aa9f47948496b7b81ebb",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/_div_management.md",
+      "target": "content/docs/haproxy/_div_management.fr.md",
+      "language": "fr",
+      "source_sha256": "8c03b6727cb383522ddaff6d3bd2814dff000e2b4adbf188ad3b30b1688ea960",
+      "target_sha256": "b638630d12d33eb5a69c50af0e0ace9168c7f845f0c3e6b70e1d1d170a70e7c4",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/_div_management.md",
+      "target": "content/docs/haproxy/_div_management.ja.md",
+      "language": "ja",
+      "source_sha256": "8c03b6727cb383522ddaff6d3bd2814dff000e2b4adbf188ad3b30b1688ea960",
+      "target_sha256": "9ebeb5a76fa1a6c9f7855c23552cb538a5d40dded3bd3dfea6e726bc3b0d7a95",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/_div_management.md",
+      "target": "content/docs/haproxy/_div_management.de.md",
+      "language": "de",
+      "source_sha256": "8c03b6727cb383522ddaff6d3bd2814dff000e2b4adbf188ad3b30b1688ea960",
+      "target_sha256": "7626ca1953bfb4d4e5c3fdefe8b8e278a09ba127ccee47a20bc84504032ce475",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/_div_management.md",
+      "target": "content/docs/haproxy/_div_management.ru.md",
+      "language": "ru",
+      "source_sha256": "8c03b6727cb383522ddaff6d3bd2814dff000e2b4adbf188ad3b30b1688ea960",
+      "target_sha256": "a701d348a73f7ad9aed4de9c499391b73e4991a33034caf8032f079827374f53",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/_index.md",
+      "target": "content/docs/haproxy/_index.zh.md",
+      "language": "zh",
+      "source_sha256": "28a147bc1cdc58b223ddce1fa07fadb4856e85ea0237097e2ef6bf2f55990abb",
+      "target_sha256": "fb6b7f35184f5506498038f37f948cb9a85b532e9dfff432fb6497daa43323c4",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/_index.md",
+      "target": "content/docs/haproxy/_index.fr.md",
+      "language": "fr",
+      "source_sha256": "28a147bc1cdc58b223ddce1fa07fadb4856e85ea0237097e2ef6bf2f55990abb",
+      "target_sha256": "f444f4c321a552700dced189e3311e58903e410a8e8c8e9e9f7436d2b2734547",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/_index.md",
+      "target": "content/docs/haproxy/_index.ja.md",
+      "language": "ja",
+      "source_sha256": "28a147bc1cdc58b223ddce1fa07fadb4856e85ea0237097e2ef6bf2f55990abb",
+      "target_sha256": "492d3b2b38dd9505a9e4aeecd4feed9da6c618ec5bd4581bbc2b097f819d836d",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/_index.md",
+      "target": "content/docs/haproxy/_index.de.md",
+      "language": "de",
+      "source_sha256": "28a147bc1cdc58b223ddce1fa07fadb4856e85ea0237097e2ef6bf2f55990abb",
+      "target_sha256": "8e4020a30f986c80f66e7adf4fe6b577102ea932e3c0f2cdc081c2b39e5488a9",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/_index.md",
+      "target": "content/docs/haproxy/_index.ru.md",
+      "language": "ru",
+      "source_sha256": "28a147bc1cdc58b223ddce1fa07fadb4856e85ea0237097e2ef6bf2f55990abb",
+      "target_sha256": "fa818d6b8380171668b8a0583154d7bb1329e45805056fb7c4c8a9d47ce37f66",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/acls-and-samples.md",
+      "target": "content/docs/haproxy/acls-and-samples.zh.md",
+      "language": "zh",
+      "source_sha256": "7739ca9b311c4a143ca472f9043cae7e349d19da061c2b93165464beb3ad24fb",
+      "target_sha256": "cf4f4e4fa1dfcf9cc2d81e4405a1174b37d4895c2dbfff1f2d93bc64d25383a1",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope.",
+      "revalidation_review": {
+        "reviewed_at": "2026-10-14T00:51:44.297366+00:00",
+        "scope": "Corrected two deprecated alias identifiers to req_ssl_hello_type and req_ssl_ver; kept primary dotted names and canonical integer return types. Explanatory prose and literal fences unchanged.",
+        "previous_target_sha256": "c7663b70f9f96a5c2ea57e83b39c8bf77220df4b73c883cab4178ac35560ab3e",
+        "target_sha256": "cf4f4e4fa1dfcf9cc2d81e4405a1174b37d4895c2dbfff1f2d93bc64d25383a1"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/acls-and-samples.md",
+      "target": "content/docs/haproxy/acls-and-samples.fr.md",
+      "language": "fr",
+      "source_sha256": "7739ca9b311c4a143ca472f9043cae7e349d19da061c2b93165464beb3ad24fb",
+      "target_sha256": "4a3060fda61a7683d995ee66e2403b4a2677670761bbf40ea56fdee150272d01",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope.",
+      "revalidation_review": {
+        "reviewed_at": "2026-10-14T00:51:44.295411+00:00",
+        "scope": "Restored 184 exact English return-type identifiers in unfenced sample signatures and deprecated aliases: 80 integer, 81 string, 20 binary and 3 boolean. Explanatory French prose and fenced literals unchanged.",
+        "previous_target_sha256": "53befd3cef32fa9f543fa2720af260b3479e5a48ac23cfcfb057f2bcfed897b1",
+        "target_sha256": "4a3060fda61a7683d995ee66e2403b4a2677670761bbf40ea56fdee150272d01"
+      },
+      "revalidation_review_history": [
+        {
+          "reviewed_at": "2026-10-14T00:48:04.760575+00:00",
+          "scope": "Restored 179 exact English return-type identifiers in unfenced sample signatures: 78 integer, 78 string, 20 binary and 3 boolean. Explanatory French prose and fenced literals unchanged.",
+          "previous_target_sha256": "2caa1f2ce4502430d45f2562a196a447aaf31fc983f44c6676832ca0982b0e2c",
+          "target_sha256": "53befd3cef32fa9f543fa2720af260b3479e5a48ac23cfcfb057f2bcfed897b1"
+        }
+      ]
+    },
+    {
+      "source": "content/docs/haproxy/acls-and-samples.md",
+      "target": "content/docs/haproxy/acls-and-samples.ja.md",
+      "language": "ja",
+      "source_sha256": "7739ca9b311c4a143ca472f9043cae7e349d19da061c2b93165464beb3ad24fb",
+      "target_sha256": "a39bc65f133441ecd8c3a026c84c11bd2f8bc089a5b59de341b1a45bbd26bd3e",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/acls-and-samples.md",
+      "target": "content/docs/haproxy/acls-and-samples.de.md",
+      "language": "de",
+      "source_sha256": "7739ca9b311c4a143ca472f9043cae7e349d19da061c2b93165464beb3ad24fb",
+      "target_sha256": "932594e30d67ef83bac023792e6756d2e017f54fc2454382b1c99425da8b3ba3",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/acls-and-samples.md",
+      "target": "content/docs/haproxy/acls-and-samples.ru.md",
+      "language": "ru",
+      "source_sha256": "7739ca9b311c4a143ca472f9043cae7e349d19da061c2b93165464beb3ad24fb",
+      "target_sha256": "64c2ee56520101b960522ee747a06bb441bb25d3455108bb1c54391179ada5ee",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/advanced-features.md",
+      "target": "content/docs/haproxy/advanced-features.zh.md",
+      "language": "zh",
+      "source_sha256": "613f6a960f1e12fd852db798c3c3681bef532a9932f71f794da3a7bd9f68800b",
+      "target_sha256": "66b9d710553b918586a1c13d90fdaf2875d2c54b5f4cf6926b2c8d85b0ca548c",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/advanced-features.md",
+      "target": "content/docs/haproxy/advanced-features.fr.md",
+      "language": "fr",
+      "source_sha256": "613f6a960f1e12fd852db798c3c3681bef532a9932f71f794da3a7bd9f68800b",
+      "target_sha256": "0fdd4c278f8d0fabca55c482a48d8da6e8c49a1ed6fee6447ce89341a05eb883",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/advanced-features.md",
+      "target": "content/docs/haproxy/advanced-features.ja.md",
+      "language": "ja",
+      "source_sha256": "613f6a960f1e12fd852db798c3c3681bef532a9932f71f794da3a7bd9f68800b",
+      "target_sha256": "167e103e452ae197dd7c4dac2cb8ab04bf549e12685a7f4102d16bc6438a3397",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/advanced-features.md",
+      "target": "content/docs/haproxy/advanced-features.de.md",
+      "language": "de",
+      "source_sha256": "613f6a960f1e12fd852db798c3c3681bef532a9932f71f794da3a7bd9f68800b",
+      "target_sha256": "136442f1bf550d7a008367b8f67c531a450dde11e4de4372012ce2406c6b5815",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/advanced-features.md",
+      "target": "content/docs/haproxy/advanced-features.ru.md",
+      "language": "ru",
+      "source_sha256": "613f6a960f1e12fd852db798c3c3681bef532a9932f71f794da3a7bd9f68800b",
+      "target_sha256": "f0e92be26e847233204207e2121043150bc95150af5033867e180d63d18d5270",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/architecture.md",
+      "target": "content/docs/haproxy/architecture.zh.md",
+      "language": "zh",
+      "source_sha256": "78e802de12cbee137599c304a6ba1e7196d1bbc33a44bce1472b7cdc09b5ff39",
+      "target_sha256": "0df33413f88e9f12fb8ea767e79d31625f6e614bce8848122abdc1a42571a4e0",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/architecture.md",
+      "target": "content/docs/haproxy/architecture.fr.md",
+      "language": "fr",
+      "source_sha256": "78e802de12cbee137599c304a6ba1e7196d1bbc33a44bce1472b7cdc09b5ff39",
+      "target_sha256": "eaf8155f0cbb10f815c4a5824800a3b2c8595ae2e32595b7c938f7c208ee5c63",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/architecture.md",
+      "target": "content/docs/haproxy/architecture.ja.md",
+      "language": "ja",
+      "source_sha256": "78e802de12cbee137599c304a6ba1e7196d1bbc33a44bce1472b7cdc09b5ff39",
+      "target_sha256": "37f1ccae67b845eda80a7011109d17bebad717f0eaaebe7171565805bf1b8a63",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/architecture.md",
+      "target": "content/docs/haproxy/architecture.de.md",
+      "language": "de",
+      "source_sha256": "78e802de12cbee137599c304a6ba1e7196d1bbc33a44bce1472b7cdc09b5ff39",
+      "target_sha256": "26291eb47d8672ea1a122651507b05002c4815341c89cb5258c8bdb87ea2c55e",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/architecture.md",
+      "target": "content/docs/haproxy/architecture.ru.md",
+      "language": "ru",
+      "source_sha256": "78e802de12cbee137599c304a6ba1e7196d1bbc33a44bce1472b7cdc09b5ff39",
+      "target_sha256": "8e7eed44052c1c663213411ff11b26658c46add5aab7e33dcd7f8fe0aa537d76",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/basic-features.md",
+      "target": "content/docs/haproxy/basic-features.zh.md",
+      "language": "zh",
+      "source_sha256": "e7343f1cbdbfb2e943deb231cfa24800c2d18b91587eac1f0f312d0a2bbc1814",
+      "target_sha256": "8c7f76c5a4d952795b042bc2732cda4c931a9c39a036cdb411069ce88ce4beaf",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/basic-features.md",
+      "target": "content/docs/haproxy/basic-features.fr.md",
+      "language": "fr",
+      "source_sha256": "e7343f1cbdbfb2e943deb231cfa24800c2d18b91587eac1f0f312d0a2bbc1814",
+      "target_sha256": "0eae62fe25855efad43815e8cd0c425939c463b8c75cf21c550f524f091af5ed",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/basic-features.md",
+      "target": "content/docs/haproxy/basic-features.ja.md",
+      "language": "ja",
+      "source_sha256": "e7343f1cbdbfb2e943deb231cfa24800c2d18b91587eac1f0f312d0a2bbc1814",
+      "target_sha256": "c5fc43a2257ac745442c7a1f657d4358a36110610cd92a685c1c7fc81ecbd569",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/basic-features.md",
+      "target": "content/docs/haproxy/basic-features.de.md",
+      "language": "de",
+      "source_sha256": "e7343f1cbdbfb2e943deb231cfa24800c2d18b91587eac1f0f312d0a2bbc1814",
+      "target_sha256": "f7d8c88e8c481be72169ea471ce194371b79c2c9bb114967d8bf013a51702708",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/basic-features.md",
+      "target": "content/docs/haproxy/basic-features.ru.md",
+      "language": "ru",
+      "source_sha256": "e7343f1cbdbfb2e943deb231cfa24800c2d18b91587eac1f0f312d0a2bbc1814",
+      "target_sha256": "a2c7bfa64b6f2ecbca17112321e447d603894fbd6e510dd31ab736e1dd25ccdc",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/bind-and-server-options.md",
+      "target": "content/docs/haproxy/bind-and-server-options.zh.md",
+      "language": "zh",
+      "source_sha256": "ab2e67b363405b6a7b8f3427febba545b6f48b626717ffe7d4a21093150f81c2",
+      "target_sha256": "2bca07e0d9c42b4ece8986086482a2a2095fdfa0cb3575f5897ac2bd7cd7dfd2",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/bind-and-server-options.md",
+      "target": "content/docs/haproxy/bind-and-server-options.fr.md",
+      "language": "fr",
+      "source_sha256": "ab2e67b363405b6a7b8f3427febba545b6f48b626717ffe7d4a21093150f81c2",
+      "target_sha256": "ff3995df699d63853251d3fcf8f97d76c4063d561ed23bdace4b1cd88032e696",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/bind-and-server-options.md",
+      "target": "content/docs/haproxy/bind-and-server-options.ja.md",
+      "language": "ja",
+      "source_sha256": "ab2e67b363405b6a7b8f3427febba545b6f48b626717ffe7d4a21093150f81c2",
+      "target_sha256": "18ad15c921e076ccc53dfc321b48ce8f24ae7a395371eec753090df5ca5e5c66",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/bind-and-server-options.md",
+      "target": "content/docs/haproxy/bind-and-server-options.de.md",
+      "language": "de",
+      "source_sha256": "ab2e67b363405b6a7b8f3427febba545b6f48b626717ffe7d4a21093150f81c2",
+      "target_sha256": "f016d472385c02132e27cc5fc527a29d332420532dc4714b86e7a093d1cc239a",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/bind-and-server-options.md",
+      "target": "content/docs/haproxy/bind-and-server-options.ru.md",
+      "language": "ru",
+      "source_sha256": "ab2e67b363405b6a7b8f3427febba545b6f48b626717ffe7d4a21093150f81c2",
+      "target_sha256": "caa46be855f38c960a45110b53ba35839e0e5f64a39310aba57a1b0ae4e5dbf0",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/cache.md",
+      "target": "content/docs/haproxy/cache.zh.md",
+      "language": "zh",
+      "source_sha256": "cb2a14a28aef8306198e20145d8ff2af0bef97a5ded224c8837b06c0443108a8",
+      "target_sha256": "3f3ee60a00f500997276b5e34af26b4407847cebe6345d0f9425dd2ec1721fba",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/cache.md",
+      "target": "content/docs/haproxy/cache.fr.md",
+      "language": "fr",
+      "source_sha256": "cb2a14a28aef8306198e20145d8ff2af0bef97a5ded224c8837b06c0443108a8",
+      "target_sha256": "b8998f74e7deee599195fa163548bc4fb750c0f0417cf71d67cd2eae0d214a90",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/cache.md",
+      "target": "content/docs/haproxy/cache.ja.md",
+      "language": "ja",
+      "source_sha256": "cb2a14a28aef8306198e20145d8ff2af0bef97a5ded224c8837b06c0443108a8",
+      "target_sha256": "e0581f186fea4679cf56fa1ad54d139ba1100bdc56f485db2e0b1fc263388d10",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/cache.md",
+      "target": "content/docs/haproxy/cache.de.md",
+      "language": "de",
+      "source_sha256": "cb2a14a28aef8306198e20145d8ff2af0bef97a5ded224c8837b06c0443108a8",
+      "target_sha256": "21142746dddd561d4ce62b6357d1032928f0313e83bef698dbcedd10de141773",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/cache.md",
+      "target": "content/docs/haproxy/cache.ru.md",
+      "language": "ru",
+      "source_sha256": "cb2a14a28aef8306198e20145d8ff2af0bef97a5ded224c8837b06c0443108a8",
+      "target_sha256": "8532d3326e6cce6aff9eed3029d00e546385ec5a9cc4e1b3db28d402b1ed75a1",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/configuration-basics.md",
+      "target": "content/docs/haproxy/configuration-basics.zh.md",
+      "language": "zh",
+      "source_sha256": "d0ca9b4db35f9a6f5fff6f090967847935b9f7b80d0440d14a912d3725036e25",
+      "target_sha256": "174d3f282ba3bcc75ea309ff59feeb1c0391a174abd679606b2d9877e0fcfe8d",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/configuration-basics.md",
+      "target": "content/docs/haproxy/configuration-basics.fr.md",
+      "language": "fr",
+      "source_sha256": "d0ca9b4db35f9a6f5fff6f090967847935b9f7b80d0440d14a912d3725036e25",
+      "target_sha256": "6b761793f9aa18ee267071512707fc25612dd025df01e282600b69d109004051",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/configuration-basics.md",
+      "target": "content/docs/haproxy/configuration-basics.ja.md",
+      "language": "ja",
+      "source_sha256": "d0ca9b4db35f9a6f5fff6f090967847935b9f7b80d0440d14a912d3725036e25",
+      "target_sha256": "0e6af3cb2fa22814a6ef7341e325b4cfb23fd7f14b68dc3b216d9f501ff4e2c4",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/configuration-basics.md",
+      "target": "content/docs/haproxy/configuration-basics.de.md",
+      "language": "de",
+      "source_sha256": "d0ca9b4db35f9a6f5fff6f090967847935b9f7b80d0440d14a912d3725036e25",
+      "target_sha256": "efa599e804782ab6b2e97ad9d4a7ddb371628503254b786b87458d14165200ae",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/configuration-basics.md",
+      "target": "content/docs/haproxy/configuration-basics.ru.md",
+      "language": "ru",
+      "source_sha256": "d0ca9b4db35f9a6f5fff6f090967847935b9f7b80d0440d14a912d3725036e25",
+      "target_sha256": "74d170ed960048b8667641a5e1e40e6fc8fcd4576308ffe0cf4770caf37044ab",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/configuration-logging.md",
+      "target": "content/docs/haproxy/configuration-logging.zh.md",
+      "language": "zh",
+      "source_sha256": "b0bb70f5458db04d938a60da8df2fd600825a7da877bad0281b4bec6f6b039b3",
+      "target_sha256": "94cc3b607ac5de0f5121c2edd2df51203b20323264e8533566e37ac68b7ae4e8",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/configuration-logging.md",
+      "target": "content/docs/haproxy/configuration-logging.fr.md",
+      "language": "fr",
+      "source_sha256": "b0bb70f5458db04d938a60da8df2fd600825a7da877bad0281b4bec6f6b039b3",
+      "target_sha256": "85e5eb13a065257dbe7070adb8ff8de5d752f639a88863e5a1d284e725158e3c",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/configuration-logging.md",
+      "target": "content/docs/haproxy/configuration-logging.ja.md",
+      "language": "ja",
+      "source_sha256": "b0bb70f5458db04d938a60da8df2fd600825a7da877bad0281b4bec6f6b039b3",
+      "target_sha256": "ebbbcc005ca8581294e968697624f5dc87e5b6018fea851857aa2b7480494589",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/configuration-logging.md",
+      "target": "content/docs/haproxy/configuration-logging.de.md",
+      "language": "de",
+      "source_sha256": "b0bb70f5458db04d938a60da8df2fd600825a7da877bad0281b4bec6f6b039b3",
+      "target_sha256": "96c855e12aa704de8d0f712601f56ad597f9f81d2423f8c2715f00078b674819",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/configuration-logging.md",
+      "target": "content/docs/haproxy/configuration-logging.ru.md",
+      "language": "ru",
+      "source_sha256": "b0bb70f5458db04d938a60da8df2fd600825a7da877bad0281b4bec6f6b039b3",
+      "target_sha256": "a1daa6448a3652286dac9e9bbfcf3f7ceecaf2ac398fa35aebcbb72bd2fbc4b1",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/configuration-management.md",
+      "target": "content/docs/haproxy/configuration-management.zh.md",
+      "language": "zh",
+      "source_sha256": "d1f30a0eb732962b2b59b69da54655d714680c4144c729ce4cc5670c9078cc16",
+      "target_sha256": "697afc8962fe4833d4d72a96a891f1c0eec86fc2730b436f696d5f770cd8aae1",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/configuration-management.md",
+      "target": "content/docs/haproxy/configuration-management.fr.md",
+      "language": "fr",
+      "source_sha256": "d1f30a0eb732962b2b59b69da54655d714680c4144c729ce4cc5670c9078cc16",
+      "target_sha256": "94b894985fc85566ad047db40c46641be40e625abb8e9fb204b910ef9424e682",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/configuration-management.md",
+      "target": "content/docs/haproxy/configuration-management.ja.md",
+      "language": "ja",
+      "source_sha256": "d1f30a0eb732962b2b59b69da54655d714680c4144c729ce4cc5670c9078cc16",
+      "target_sha256": "fd3598a9bf983cf50b9a68e8d5c59bf4013e4cbb6d9e816980a772d714b6b996",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/configuration-management.md",
+      "target": "content/docs/haproxy/configuration-management.de.md",
+      "language": "de",
+      "source_sha256": "d1f30a0eb732962b2b59b69da54655d714680c4144c729ce4cc5670c9078cc16",
+      "target_sha256": "77a25db6bd188480e3d79b2b41bb9d4729f1e0f728e57af8f7c648325d255ee7",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/configuration-management.md",
+      "target": "content/docs/haproxy/configuration-management.ru.md",
+      "language": "ru",
+      "source_sha256": "d1f30a0eb732962b2b59b69da54655d714680c4144c729ce4cc5670c9078cc16",
+      "target_sha256": "8685fe135e367d3226f950dda1f656dbcb5bdb720d703b1077c5712462458eb7",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/cpu.md",
+      "target": "content/docs/haproxy/cpu.zh.md",
+      "language": "zh",
+      "source_sha256": "400e00056896ce744139a39c424e269af94c892320ddf13a9451c99df0906ce1",
+      "target_sha256": "6d44c8dbae56053b51fdc515ed6a723cef6cb8b6ef455118138fdef35c6bc80b",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/cpu.md",
+      "target": "content/docs/haproxy/cpu.fr.md",
+      "language": "fr",
+      "source_sha256": "400e00056896ce744139a39c424e269af94c892320ddf13a9451c99df0906ce1",
+      "target_sha256": "320fd5e04060ad13a740e1ba7db5aa09632b459f9d5a96fc3b84094f309a9074",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/cpu.md",
+      "target": "content/docs/haproxy/cpu.ja.md",
+      "language": "ja",
+      "source_sha256": "400e00056896ce744139a39c424e269af94c892320ddf13a9451c99df0906ce1",
+      "target_sha256": "19e69345249081e3f2d378c2e7221ac8fae3aa84e09fa15939e08db9e28042ee",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/cpu.md",
+      "target": "content/docs/haproxy/cpu.de.md",
+      "language": "de",
+      "source_sha256": "400e00056896ce744139a39c424e269af94c892320ddf13a9451c99df0906ce1",
+      "target_sha256": "81702233e9a9c66e3208008d38579cb35c29deb4df9796dfe3cd79220f6135eb",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/cpu.md",
+      "target": "content/docs/haproxy/cpu.ru.md",
+      "language": "ru",
+      "source_sha256": "400e00056896ce744139a39c424e269af94c892320ddf13a9451c99df0906ce1",
+      "target_sha256": "fe347e4ce511b79d60e7ced2d459bc8f8633420ebbd48500094b71a24f82d676",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/debugging-and-performance.md",
+      "target": "content/docs/haproxy/debugging-and-performance.zh.md",
+      "language": "zh",
+      "source_sha256": "e6c81101044dca0c0789df1b00d0c0a434313ef73f28d8f2f9a4bcf3d00861db",
+      "target_sha256": "8a3b6e15ce34cf881ba271ea2eab08a261d3622984b55d96a91e3a7f73babfeb",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/debugging-and-performance.md",
+      "target": "content/docs/haproxy/debugging-and-performance.fr.md",
+      "language": "fr",
+      "source_sha256": "e6c81101044dca0c0789df1b00d0c0a434313ef73f28d8f2f9a4bcf3d00861db",
+      "target_sha256": "ecf402203e5943a694f1879ac85beaa4ad0ca21c9e4cdb23935e586da1df8d99",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/debugging-and-performance.md",
+      "target": "content/docs/haproxy/debugging-and-performance.ja.md",
+      "language": "ja",
+      "source_sha256": "e6c81101044dca0c0789df1b00d0c0a434313ef73f28d8f2f9a4bcf3d00861db",
+      "target_sha256": "13916755c0937691bc5a08a6923df1c71cf357ae6026616014545505f7ac5700",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/debugging-and-performance.md",
+      "target": "content/docs/haproxy/debugging-and-performance.de.md",
+      "language": "de",
+      "source_sha256": "e6c81101044dca0c0789df1b00d0c0a434313ef73f28d8f2f9a4bcf3d00861db",
+      "target_sha256": "2b83dbb67ef5f77fd7d051eaa76be2e97f1cb1817bad968704da117f6f8e2b15",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/debugging-and-performance.md",
+      "target": "content/docs/haproxy/debugging-and-performance.ru.md",
+      "language": "ru",
+      "source_sha256": "e6c81101044dca0c0789df1b00d0c0a434313ef73f28d8f2f9a4bcf3d00861db",
+      "target_sha256": "d0333c5086152e82d703234f2782efacefd152e1a5eb91f1234e73cbccc6a5c2",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/ecosystem.md",
+      "target": "content/docs/haproxy/ecosystem.zh.md",
+      "language": "zh",
+      "source_sha256": "749165d4eb17208d1dad6f4a878d57a52def405397617841ef3a41211fd61365",
+      "target_sha256": "f8badae5100c80846fc4263ceaebf16e6a4cd9a76012e0d9a08184934aed2b3e",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/ecosystem.md",
+      "target": "content/docs/haproxy/ecosystem.fr.md",
+      "language": "fr",
+      "source_sha256": "749165d4eb17208d1dad6f4a878d57a52def405397617841ef3a41211fd61365",
+      "target_sha256": "8df78177701bc3fb334a52a124f6e057e363733e0b89bc7e8ffd7b1e75695b0d",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/ecosystem.md",
+      "target": "content/docs/haproxy/ecosystem.ja.md",
+      "language": "ja",
+      "source_sha256": "749165d4eb17208d1dad6f4a878d57a52def405397617841ef3a41211fd61365",
+      "target_sha256": "a41fb334bbe3504b1a217339a1fbb8b7020e0171644a6ecda5bcb89ed237dab3",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/ecosystem.md",
+      "target": "content/docs/haproxy/ecosystem.de.md",
+      "language": "de",
+      "source_sha256": "749165d4eb17208d1dad6f4a878d57a52def405397617841ef3a41211fd61365",
+      "target_sha256": "e11df62aaae9730ad00cea0d1b90609326400080bdf6acb2a3ba0b10466db445",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/ecosystem.md",
+      "target": "content/docs/haproxy/ecosystem.ru.md",
+      "language": "ru",
+      "source_sha256": "749165d4eb17208d1dad6f4a878d57a52def405397617841ef3a41211fd61365",
+      "target_sha256": "d85cd276ba86408086a81a97dcc32816ec00b6cb8ace0329541e1d3e703269f1",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/fastcgi.md",
+      "target": "content/docs/haproxy/fastcgi.zh.md",
+      "language": "zh",
+      "source_sha256": "6a1c965966e9a0bc39b02237ef4757b4a77fc93e8bf1cec097ce3f7d607b5af7",
+      "target_sha256": "d1a1cb91a6a2daee4a04aa89760c11b8dfa37ec47514e9b39966db0eb6dcecf5",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/fastcgi.md",
+      "target": "content/docs/haproxy/fastcgi.fr.md",
+      "language": "fr",
+      "source_sha256": "6a1c965966e9a0bc39b02237ef4757b4a77fc93e8bf1cec097ce3f7d607b5af7",
+      "target_sha256": "51a271a86d9f02871a7c5fbd48327c734e1b133c4986e39ee7ec859c86087f92",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/fastcgi.md",
+      "target": "content/docs/haproxy/fastcgi.ja.md",
+      "language": "ja",
+      "source_sha256": "6a1c965966e9a0bc39b02237ef4757b4a77fc93e8bf1cec097ce3f7d607b5af7",
+      "target_sha256": "a878cebf27e7ecf903297fb2e609f6ca160b8c671447188b1d4c6afc66f98cc7",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/fastcgi.md",
+      "target": "content/docs/haproxy/fastcgi.de.md",
+      "language": "de",
+      "source_sha256": "6a1c965966e9a0bc39b02237ef4757b4a77fc93e8bf1cec097ce3f7d607b5af7",
+      "target_sha256": "7d51101cc1ae9ed4e7f555012098f3fa426422e1d9164c2df6b9d7f840928837",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/fastcgi.md",
+      "target": "content/docs/haproxy/fastcgi.ru.md",
+      "language": "ru",
+      "source_sha256": "6a1c965966e9a0bc39b02237ef4757b4a77fc93e8bf1cec097ce3f7d607b5af7",
+      "target_sha256": "842b7db830aa3067bfdd712031bac64b010fa4fe355368fb800a14dda621d97f",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/file-descriptors.md",
+      "target": "content/docs/haproxy/file-descriptors.zh.md",
+      "language": "zh",
+      "source_sha256": "8bc8fe5af01a23c9bc9348f24b11dc1f291d4a7248fd0606259e484bd1026113",
+      "target_sha256": "81aab022d48c2362b12d633a20b534011363ea2ca1e52c5c186121906fd9e097",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/file-descriptors.md",
+      "target": "content/docs/haproxy/file-descriptors.fr.md",
+      "language": "fr",
+      "source_sha256": "8bc8fe5af01a23c9bc9348f24b11dc1f291d4a7248fd0606259e484bd1026113",
+      "target_sha256": "b3597de3296d0f5629eee204664c4709ba4459131b3318767d0c366aeb37785e",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/file-descriptors.md",
+      "target": "content/docs/haproxy/file-descriptors.ja.md",
+      "language": "ja",
+      "source_sha256": "8bc8fe5af01a23c9bc9348f24b11dc1f291d4a7248fd0606259e484bd1026113",
+      "target_sha256": "7fd40a051890e15d9f47826341217da80d6b0a032ceb7587db01f600cd51b3c0",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/file-descriptors.md",
+      "target": "content/docs/haproxy/file-descriptors.de.md",
+      "language": "de",
+      "source_sha256": "8bc8fe5af01a23c9bc9348f24b11dc1f291d4a7248fd0606259e484bd1026113",
+      "target_sha256": "8b2af7e4fca61628cb0672af39ba421889023d5f534a35d29329f509a34a2e58",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/file-descriptors.md",
+      "target": "content/docs/haproxy/file-descriptors.ru.md",
+      "language": "ru",
+      "source_sha256": "8bc8fe5af01a23c9bc9348f24b11dc1f291d4a7248fd0606259e484bd1026113",
+      "target_sha256": "1260e67a5a78cf9e08e58062408eede3e4e1bfdf9d42b102603c04d3f86af0e2",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/filters.md",
+      "target": "content/docs/haproxy/filters.zh.md",
+      "language": "zh",
+      "source_sha256": "ca378ab69ab7881d7c2d54900efb218687fe10474aa33bb8b475128223d16a02",
+      "target_sha256": "eb9e13dc4232ed7471500101054296feda89904ad45f5d40eb928efbc4999951",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/filters.md",
+      "target": "content/docs/haproxy/filters.fr.md",
+      "language": "fr",
+      "source_sha256": "ca378ab69ab7881d7c2d54900efb218687fe10474aa33bb8b475128223d16a02",
+      "target_sha256": "7c9300e99452afc3d9ad88c50a5c3f1fb4605412d6d0af3aa3cf1f3bd5dabe40",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/filters.md",
+      "target": "content/docs/haproxy/filters.ja.md",
+      "language": "ja",
+      "source_sha256": "ca378ab69ab7881d7c2d54900efb218687fe10474aa33bb8b475128223d16a02",
+      "target_sha256": "8bd0211efcca5a0c7fd0a5539f862b0cb126fed46840313755d4ec0bd0dd5e7a",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/filters.md",
+      "target": "content/docs/haproxy/filters.de.md",
+      "language": "de",
+      "source_sha256": "ca378ab69ab7881d7c2d54900efb218687fe10474aa33bb8b475128223d16a02",
+      "target_sha256": "5829a0d076578f512c7479fb0dc0575525ac9434c9f9ffbecdd43d14c6a49050",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/filters.md",
+      "target": "content/docs/haproxy/filters.ru.md",
+      "language": "ru",
+      "source_sha256": "ca378ab69ab7881d7c2d54900efb218687fe10474aa33bb8b475128223d16a02",
+      "target_sha256": "9d50c096bc6d5983c04cbd3fbf7b8715ab33e1870043e9ed131bfefc7d4b4b95",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/global.md",
+      "target": "content/docs/haproxy/global.zh.md",
+      "language": "zh",
+      "source_sha256": "8a5d2b06ee0043243d00173e0a767f90225117689fa65ca27d329b3d3feb649d",
+      "target_sha256": "5c26c53ee277bbf592b5215345073f7b90deb9b1d39933f824369175878fb0b9",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/global.md",
+      "target": "content/docs/haproxy/global.fr.md",
+      "language": "fr",
+      "source_sha256": "8a5d2b06ee0043243d00173e0a767f90225117689fa65ca27d329b3d3feb649d",
+      "target_sha256": "f49784719667e7d9182e0fa3987f713fc90021f437b33227102f21f4e41bc502",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope.",
+      "revalidation_review": {
+        "reviewed_at": "2026-10-14T00:44:06.676301+00:00",
+        "scope": "tune.bufsize recommendation to reduce global maxconn by the same factor; French obligation corrected to recommendation without changing the numeric rule.",
+        "previous_target_sha256": "95eafd142d4ebce6d771b8cc1ae7f2f6337c74f719868f09824c5a71e5994b51",
+        "target_sha256": "f49784719667e7d9182e0fa3987f713fc90021f437b33227102f21f4e41bc502"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/global.md",
+      "target": "content/docs/haproxy/global.ja.md",
+      "language": "ja",
+      "source_sha256": "8a5d2b06ee0043243d00173e0a767f90225117689fa65ca27d329b3d3feb649d",
+      "target_sha256": "ce98a8061e7593e45d43f306fc8daeb696aa241ad95d10760883c3b754f67e06",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/global.md",
+      "target": "content/docs/haproxy/global.de.md",
+      "language": "de",
+      "source_sha256": "8a5d2b06ee0043243d00173e0a767f90225117689fa65ca27d329b3d3feb649d",
+      "target_sha256": "9618cf7c3bfa194cedc64a4901dcd2b30f4d8fbc59c91fe87a7773b38f4e5b68",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/global.md",
+      "target": "content/docs/haproxy/global.ru.md",
+      "language": "ru",
+      "source_sha256": "8a5d2b06ee0043243d00173e0a767f90225117689fa65ca27d329b3d3feb649d",
+      "target_sha256": "fe6294d7fcd62d36b272ed5421ffa7ebeaf6cbd819d2bd51e0c5eb54e8106782",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/http-fundamentals.md",
+      "target": "content/docs/haproxy/http-fundamentals.zh.md",
+      "language": "zh",
+      "source_sha256": "274a62d2d8a2b35d89788c2cdf6fe3db339d8411c6ada3e232557b1225dadc34",
+      "target_sha256": "efa6316208583d16177dcea53e65e17d33abf19e50a378746f36b0029a6b6a15",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/http-fundamentals.md",
+      "target": "content/docs/haproxy/http-fundamentals.fr.md",
+      "language": "fr",
+      "source_sha256": "274a62d2d8a2b35d89788c2cdf6fe3db339d8411c6ada3e232557b1225dadc34",
+      "target_sha256": "dfeff6358171942aec203144c8741817d45de51e7c5273508548234eca6fc1bf",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/http-fundamentals.md",
+      "target": "content/docs/haproxy/http-fundamentals.ja.md",
+      "language": "ja",
+      "source_sha256": "274a62d2d8a2b35d89788c2cdf6fe3db339d8411c6ada3e232557b1225dadc34",
+      "target_sha256": "47c0b3f96e2aab058037e6c0dff45adab684a0c1be5ee8e8ce21ca0b6b152df1",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/http-fundamentals.md",
+      "target": "content/docs/haproxy/http-fundamentals.de.md",
+      "language": "de",
+      "source_sha256": "274a62d2d8a2b35d89788c2cdf6fe3db339d8411c6ada3e232557b1225dadc34",
+      "target_sha256": "a216e6b0dbe85c3d933bfc41fc80034f2e5dc2562a316dfcdef7a8efc612970b",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/http-fundamentals.md",
+      "target": "content/docs/haproxy/http-fundamentals.ru.md",
+      "language": "ru",
+      "source_sha256": "274a62d2d8a2b35d89788c2cdf6fe3db339d8411c6ada3e232557b1225dadc34",
+      "target_sha256": "bf7d2b170b95b033f38507f751ab0d5a531c62ddf2bd4d1e374ea493eb09968e",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/load-balancing.md",
+      "target": "content/docs/haproxy/load-balancing.zh.md",
+      "language": "zh",
+      "source_sha256": "33008271e246c402b5f7c4074b38f96c9f232927236927c8a681d0c13ca17526",
+      "target_sha256": "e21e13f187f9d49a66f9b597d6919c59d4991ee2d721732c3acea9d224583fc8",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/load-balancing.md",
+      "target": "content/docs/haproxy/load-balancing.fr.md",
+      "language": "fr",
+      "source_sha256": "33008271e246c402b5f7c4074b38f96c9f232927236927c8a681d0c13ca17526",
+      "target_sha256": "c953441e2c6dd65736fa98171ccdf724790965578da2849b39f0e814133c8fdd",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/load-balancing.md",
+      "target": "content/docs/haproxy/load-balancing.ja.md",
+      "language": "ja",
+      "source_sha256": "33008271e246c402b5f7c4074b38f96c9f232927236927c8a681d0c13ca17526",
+      "target_sha256": "7f6c0e4f13a3bcd81b8f269a2b50278224118416ee9307413597d9b4632e1e34",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/load-balancing.md",
+      "target": "content/docs/haproxy/load-balancing.de.md",
+      "language": "de",
+      "source_sha256": "33008271e246c402b5f7c4074b38f96c9f232927236927c8a681d0c13ca17526",
+      "target_sha256": "3e8efda401023ed976ec1f982a40a66e9ea3b982ccd009c5e108706ca63a2ae4",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/load-balancing.md",
+      "target": "content/docs/haproxy/load-balancing.ru.md",
+      "language": "ru",
+      "source_sha256": "33008271e246c402b5f7c4074b38f96c9f232927236927c8a681d0c13ca17526",
+      "target_sha256": "34f8ceed6c07acb6f49d705695245ffa63e65b9acb40f5cfb88da8400bd765cd",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/management-architecture.md",
+      "target": "content/docs/haproxy/management-architecture.zh.md",
+      "language": "zh",
+      "source_sha256": "bfea4e22c46ea342ff24866c633922d83eccc48d2a60663488b2e18a1ca13638",
+      "target_sha256": "e189e2bdf6e3eb8f92f087e8e81dad3ee7629dd14f62590a302cbea35f95e874",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/management-architecture.md",
+      "target": "content/docs/haproxy/management-architecture.fr.md",
+      "language": "fr",
+      "source_sha256": "bfea4e22c46ea342ff24866c633922d83eccc48d2a60663488b2e18a1ca13638",
+      "target_sha256": "a83c12bb36b23cfdf228b73e4c6194445597b9389ba4dab626b1b7f312dc84bc",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/management-architecture.md",
+      "target": "content/docs/haproxy/management-architecture.ja.md",
+      "language": "ja",
+      "source_sha256": "bfea4e22c46ea342ff24866c633922d83eccc48d2a60663488b2e18a1ca13638",
+      "target_sha256": "21d1f2c5d047eb94f468f727c194b12f8f0ac576810ceeb54049bca981129357",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/management-architecture.md",
+      "target": "content/docs/haproxy/management-architecture.de.md",
+      "language": "de",
+      "source_sha256": "bfea4e22c46ea342ff24866c633922d83eccc48d2a60663488b2e18a1ca13638",
+      "target_sha256": "57910d2784f2f20424ed802b24e6c75846d133896ca31e5e02262f321fbf1a07",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/management-architecture.md",
+      "target": "content/docs/haproxy/management-architecture.ru.md",
+      "language": "ru",
+      "source_sha256": "bfea4e22c46ea342ff24866c633922d83eccc48d2a60663488b2e18a1ca13638",
+      "target_sha256": "916f33925f2852d2543d957a43d00deb4e6e11d5e580522349625b3d1e15f820",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/management-logging.md",
+      "target": "content/docs/haproxy/management-logging.zh.md",
+      "language": "zh",
+      "source_sha256": "c3a890980f1556d24787cd0f887a14fa355678fb88782ac49950189dabd518de",
+      "target_sha256": "b5c948f32693ab40a15a33f52dc419c8d92beea650d631813754dbdd97227756",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/management-logging.md",
+      "target": "content/docs/haproxy/management-logging.fr.md",
+      "language": "fr",
+      "source_sha256": "c3a890980f1556d24787cd0f887a14fa355678fb88782ac49950189dabd518de",
+      "target_sha256": "5dd57c2a155c7496588bc716ad7776e1889021b4dd158015f2097962019c4812",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/management-logging.md",
+      "target": "content/docs/haproxy/management-logging.ja.md",
+      "language": "ja",
+      "source_sha256": "c3a890980f1556d24787cd0f887a14fa355678fb88782ac49950189dabd518de",
+      "target_sha256": "b8821098921ac5250c3d5778241174d2c5014d12ab5cff8568d4fcbb8012ecaa",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/management-logging.md",
+      "target": "content/docs/haproxy/management-logging.de.md",
+      "language": "de",
+      "source_sha256": "c3a890980f1556d24787cd0f887a14fa355678fb88782ac49950189dabd518de",
+      "target_sha256": "31a7792cb1fa876393c83ebb823f03e2f21a5fc06333cb0764e13751390a6967",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/management-logging.md",
+      "target": "content/docs/haproxy/management-logging.ru.md",
+      "language": "ru",
+      "source_sha256": "c3a890980f1556d24787cd0f887a14fa355678fb88782ac49950189dabd518de",
+      "target_sha256": "41ced8ebe9a8fb0ea3c8c31ac3da19ddd53302a625b51ce3b978cd89fd32cc19",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/memory.md",
+      "target": "content/docs/haproxy/memory.zh.md",
+      "language": "zh",
+      "source_sha256": "f16a30f4c16028cfab89cc46a16851734d436a64b06a4ca99190758609b8bc26",
+      "target_sha256": "3cb947147809e77aa6c20fbf18800a99370ae1a8648940080664876983cbe42c",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/memory.md",
+      "target": "content/docs/haproxy/memory.fr.md",
+      "language": "fr",
+      "source_sha256": "f16a30f4c16028cfab89cc46a16851734d436a64b06a4ca99190758609b8bc26",
+      "target_sha256": "897b2aa37c6b159054a2f0e902000765592519dd0627d53409ecac4f1016a697",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/memory.md",
+      "target": "content/docs/haproxy/memory.ja.md",
+      "language": "ja",
+      "source_sha256": "f16a30f4c16028cfab89cc46a16851734d436a64b06a4ca99190758609b8bc26",
+      "target_sha256": "bff154cc53363ecbb91fd90cde8f6e54d4c06b7fd58679cfafe4f44e3c7d709f",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/memory.md",
+      "target": "content/docs/haproxy/memory.de.md",
+      "language": "de",
+      "source_sha256": "f16a30f4c16028cfab89cc46a16851734d436a64b06a4ca99190758609b8bc26",
+      "target_sha256": "aa671b900ef624fa8ff391f2b4da33e70b325c7c64205c56a1da834226c733dd",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/memory.md",
+      "target": "content/docs/haproxy/memory.ru.md",
+      "language": "ru",
+      "source_sha256": "f16a30f4c16028cfab89cc46a16851734d436a64b06a4ca99190758609b8bc26",
+      "target_sha256": "2e2700d7b5524b5888f73ac9e3e05ef750a5653d8d754c4c0edecbe938066780",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/other-sections.md",
+      "target": "content/docs/haproxy/other-sections.zh.md",
+      "language": "zh",
+      "source_sha256": "1303a04284e0f17bc55ae980451b9eae7a8e26eb9abce4b35744afc6f5c57d31",
+      "target_sha256": "fbee6f600dbb552201512615c9ab1908ccd3e7f06264c69db33d5f0a47c4311d",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/other-sections.md",
+      "target": "content/docs/haproxy/other-sections.fr.md",
+      "language": "fr",
+      "source_sha256": "1303a04284e0f17bc55ae980451b9eae7a8e26eb9abce4b35744afc6f5c57d31",
+      "target_sha256": "48253e21a45a3cd0777699a3c452a4ce23008e77dc849e6fdd534625a06ec116",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/other-sections.md",
+      "target": "content/docs/haproxy/other-sections.ja.md",
+      "language": "ja",
+      "source_sha256": "1303a04284e0f17bc55ae980451b9eae7a8e26eb9abce4b35744afc6f5c57d31",
+      "target_sha256": "dfed88b3c7fdd639b6054e8952175bca6b5b01d467130834334b321beb16098b",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/other-sections.md",
+      "target": "content/docs/haproxy/other-sections.de.md",
+      "language": "de",
+      "source_sha256": "1303a04284e0f17bc55ae980451b9eae7a8e26eb9abce4b35744afc6f5c57d31",
+      "target_sha256": "40c2a58ea772638be21fd84ab5bdd29eae5eefa03607e1445f0bc21c92e4fce2",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/other-sections.md",
+      "target": "content/docs/haproxy/other-sections.ru.md",
+      "language": "ru",
+      "source_sha256": "1303a04284e0f17bc55ae980451b9eae7a8e26eb9abce4b35744afc6f5c57d31",
+      "target_sha256": "66e0cea7ff5a834284a9022af5104bd36bf3e514a06e6ce97788dbcc07e2f4a3",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/prerequisites.md",
+      "target": "content/docs/haproxy/prerequisites.zh.md",
+      "language": "zh",
+      "source_sha256": "54750549d94e63151763890ed2ad8ce4a8769292104e757c4f66163fa0ac335d",
+      "target_sha256": "581fac429a0408ef92d58e2dc971d1a9e577b72171738c09d8eb6359a21ebfe9",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/prerequisites.md",
+      "target": "content/docs/haproxy/prerequisites.fr.md",
+      "language": "fr",
+      "source_sha256": "54750549d94e63151763890ed2ad8ce4a8769292104e757c4f66163fa0ac335d",
+      "target_sha256": "1a395a2919a10bcf490074650f5c4ebf0ab3073a3e229ab3d03ecf41b0fedf1b",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/prerequisites.md",
+      "target": "content/docs/haproxy/prerequisites.ja.md",
+      "language": "ja",
+      "source_sha256": "54750549d94e63151763890ed2ad8ce4a8769292104e757c4f66163fa0ac335d",
+      "target_sha256": "38fcc5013097e28be4f64c202c7734bf2505f9179c5cd1d93e48fae936c714c5",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/prerequisites.md",
+      "target": "content/docs/haproxy/prerequisites.de.md",
+      "language": "de",
+      "source_sha256": "54750549d94e63151763890ed2ad8ce4a8769292104e757c4f66163fa0ac335d",
+      "target_sha256": "8731c7cd734be89ab73c9e36ba173d0e2c573f3f0fa7893ddcbaed8d427fa7ff",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/prerequisites.md",
+      "target": "content/docs/haproxy/prerequisites.ru.md",
+      "language": "ru",
+      "source_sha256": "54750549d94e63151763890ed2ad8ce4a8769292104e757c4f66163fa0ac335d",
+      "target_sha256": "b71a545b9e184b98ade367e736efc83fd3df9094bba05fc872fa18f2536a5949",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/proxies.md",
+      "target": "content/docs/haproxy/proxies.zh.md",
+      "language": "zh",
+      "source_sha256": "d1b0bb9a721cbbf80e9aa3eb410881a29539172a4fbe6ee6c4167035c962d0d2",
+      "target_sha256": "204db4dfad83ed97fe8680047ac1a0f047e5dabc33b0bc685b189f9c42ea119e",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/proxies.md",
+      "target": "content/docs/haproxy/proxies.fr.md",
+      "language": "fr",
+      "source_sha256": "d1b0bb9a721cbbf80e9aa3eb410881a29539172a4fbe6ee6c4167035c962d0d2",
+      "target_sha256": "04ed44ce83c8d0edb0d0315c8e61d9006c28164d2122e74d707712e20df9eaab",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/proxies.md",
+      "target": "content/docs/haproxy/proxies.ja.md",
+      "language": "ja",
+      "source_sha256": "d1b0bb9a721cbbf80e9aa3eb410881a29539172a4fbe6ee6c4167035c962d0d2",
+      "target_sha256": "7f09ac7816c67e97a3b469c371fce8dfd48671e037fdb5b7c4c0ef50afb887c3",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/proxies.md",
+      "target": "content/docs/haproxy/proxies.de.md",
+      "language": "de",
+      "source_sha256": "d1b0bb9a721cbbf80e9aa3eb410881a29539172a4fbe6ee6c4167035c962d0d2",
+      "target_sha256": "c9d85c15fc2b72b97d29d51adec6a0aac85feccc2518aebcc49fcc1d5f7d5b34",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/proxies.md",
+      "target": "content/docs/haproxy/proxies.ru.md",
+      "language": "ru",
+      "source_sha256": "d1b0bb9a721cbbf80e9aa3eb410881a29539172a4fbe6ee6c4167035c962d0d2",
+      "target_sha256": "dca934e3b8ef2ebcc1b53325a49211cc4ddf05156ecc25f99b89b3851d2dcb82",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/releases-and-upgrades.md",
+      "target": "content/docs/haproxy/releases-and-upgrades.zh.md",
+      "language": "zh",
+      "source_sha256": "3ff22c35d2ffe7aa684555c4070ef97c7e8c868a3ea0c504349eff06ebf23364",
+      "target_sha256": "a67be6e957ab13586eeec3d7302716c9e4efae8d62efa47c99264320714d4862",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/releases-and-upgrades.md",
+      "target": "content/docs/haproxy/releases-and-upgrades.fr.md",
+      "language": "fr",
+      "source_sha256": "3ff22c35d2ffe7aa684555c4070ef97c7e8c868a3ea0c504349eff06ebf23364",
+      "target_sha256": "cf827b38ca65a2d2d51d1ed4685b124492f84dced8b46a7d7888a52cb0d44139",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/releases-and-upgrades.md",
+      "target": "content/docs/haproxy/releases-and-upgrades.ja.md",
+      "language": "ja",
+      "source_sha256": "3ff22c35d2ffe7aa684555c4070ef97c7e8c868a3ea0c504349eff06ebf23364",
+      "target_sha256": "1737493dfeb9435a11657729227440f6d50756f8f81d2e52f41777e0d39e4bd9",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/releases-and-upgrades.md",
+      "target": "content/docs/haproxy/releases-and-upgrades.de.md",
+      "language": "de",
+      "source_sha256": "3ff22c35d2ffe7aa684555c4070ef97c7e8c868a3ea0c504349eff06ebf23364",
+      "target_sha256": "3cb9d97e60acc85661f70f423b888fa5b02d14aa0901069d78d074463338e330",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/releases-and-upgrades.md",
+      "target": "content/docs/haproxy/releases-and-upgrades.ru.md",
+      "language": "ru",
+      "source_sha256": "3ff22c35d2ffe7aa684555c4070ef97c7e8c868a3ea0c504349eff06ebf23364",
+      "target_sha256": "91222300c6013bdc3f1e1a0abe46caad81c36770c54cc9d210bf2751e69c90dd",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/resources.md",
+      "target": "content/docs/haproxy/resources.zh.md",
+      "language": "zh",
+      "source_sha256": "40d749cc1e279bfd04707ae1af33be291c1a44245c456fd97d09fb9ffe36bb65",
+      "target_sha256": "7acbce9c5fafc342f17200e6788c6b3cb760e64c90421ac1d7524808bdf74916",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/resources.md",
+      "target": "content/docs/haproxy/resources.fr.md",
+      "language": "fr",
+      "source_sha256": "40d749cc1e279bfd04707ae1af33be291c1a44245c456fd97d09fb9ffe36bb65",
+      "target_sha256": "8f3a93916fe6cdd3b2eb02f468f0964148abcd57324bceebe234e4a5d8a81ee4",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/resources.md",
+      "target": "content/docs/haproxy/resources.ja.md",
+      "language": "ja",
+      "source_sha256": "40d749cc1e279bfd04707ae1af33be291c1a44245c456fd97d09fb9ffe36bb65",
+      "target_sha256": "98ca0eb4d313f082efc4d7a305a24397be3c3669a61bdadbf4c1a7b94491ade6",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/resources.md",
+      "target": "content/docs/haproxy/resources.de.md",
+      "language": "de",
+      "source_sha256": "40d749cc1e279bfd04707ae1af33be291c1a44245c456fd97d09fb9ffe36bb65",
+      "target_sha256": "5a791bf8fb76ca1b3d6da2f1b4666f302771a33183bd3a6db83f3fa1687cb2f2",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/resources.md",
+      "target": "content/docs/haproxy/resources.ru.md",
+      "language": "ru",
+      "source_sha256": "40d749cc1e279bfd04707ae1af33be291c1a44245c456fd97d09fb9ffe36bb65",
+      "target_sha256": "c0f927a40b883041afd8753d4fee6b4b521b20c0dced079112000d5bc2b540ce",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/security.md",
+      "target": "content/docs/haproxy/security.zh.md",
+      "language": "zh",
+      "source_sha256": "81b0efa7c6992b2ab2fed87a76f547bb2940d2683c9d9cf2ba5b5e2a39c64cc4",
+      "target_sha256": "c23444b7ac1f0ef8bfef2ad5e080c10020f9ae712b7f69b1f501ae55bf84d2c8",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/security.md",
+      "target": "content/docs/haproxy/security.fr.md",
+      "language": "fr",
+      "source_sha256": "81b0efa7c6992b2ab2fed87a76f547bb2940d2683c9d9cf2ba5b5e2a39c64cc4",
+      "target_sha256": "c03f9f205b06f4e810f61354d04147d7f5eb19bbd69b7781e5710920a339ec8d",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/security.md",
+      "target": "content/docs/haproxy/security.ja.md",
+      "language": "ja",
+      "source_sha256": "81b0efa7c6992b2ab2fed87a76f547bb2940d2683c9d9cf2ba5b5e2a39c64cc4",
+      "target_sha256": "fc1d0e1f39e08691cb3679a4fc90114cfab2075c2a0c6ae751ad724d52311052",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/security.md",
+      "target": "content/docs/haproxy/security.de.md",
+      "language": "de",
+      "source_sha256": "81b0efa7c6992b2ab2fed87a76f547bb2940d2683c9d9cf2ba5b5e2a39c64cc4",
+      "target_sha256": "96cf61ad0eda06a197036699c1633f1f9d498587b9329991683e4b83a22a4823",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/security.md",
+      "target": "content/docs/haproxy/security.ru.md",
+      "language": "ru",
+      "source_sha256": "81b0efa7c6992b2ab2fed87a76f547bb2940d2683c9d9cf2ba5b5e2a39c64cc4",
+      "target_sha256": "82ecf5b356e0be2565eb26c9ca83e41c10d2606bb7fab66263316962e21cc0e2",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/sizing.md",
+      "target": "content/docs/haproxy/sizing.zh.md",
+      "language": "zh",
+      "source_sha256": "2f1ea449ce623ac34e52aa5df1668275164eb74686e97ab3bb3e91b7cfb5a30e",
+      "target_sha256": "eefec122e35b44177d95ebb9145c0f7c69edc39ee1464e54936afef0288ad064",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/sizing.md",
+      "target": "content/docs/haproxy/sizing.fr.md",
+      "language": "fr",
+      "source_sha256": "2f1ea449ce623ac34e52aa5df1668275164eb74686e97ab3bb3e91b7cfb5a30e",
+      "target_sha256": "25eea660435d7fe33bf35bedd65e60ecdd87c0b80014cdd9b6d7aee5c865eed7",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/sizing.md",
+      "target": "content/docs/haproxy/sizing.ja.md",
+      "language": "ja",
+      "source_sha256": "2f1ea449ce623ac34e52aa5df1668275164eb74686e97ab3bb3e91b7cfb5a30e",
+      "target_sha256": "f27a33433943fe9fa20d3814301071f6c7a70455f3563c6ce891499ab5897b1a",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/sizing.md",
+      "target": "content/docs/haproxy/sizing.de.md",
+      "language": "de",
+      "source_sha256": "2f1ea449ce623ac34e52aa5df1668275164eb74686e97ab3bb3e91b7cfb5a30e",
+      "target_sha256": "84d040d83111af5878b5d6e3c285110f0c363e020b7cee747b98f2663937e996",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/sizing.md",
+      "target": "content/docs/haproxy/sizing.ru.md",
+      "language": "ru",
+      "source_sha256": "2f1ea449ce623ac34e52aa5df1668275164eb74686e97ab3bb3e91b7cfb5a30e",
+      "target_sha256": "1dadf353aa275a4e4a0441b824959b0bd2a4c91650816a43cd72fb6b54af1896",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/standard-features.md",
+      "target": "content/docs/haproxy/standard-features.zh.md",
+      "language": "zh",
+      "source_sha256": "a967ef5deb808690d8118776d56b53b5a0095fdec83bd7c511d1eeec1850cb52",
+      "target_sha256": "79bfa2bbd00c06bc3fe4132930fdbe02ad5e9e174c7bd28443d64fa6c7a9e96e",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/standard-features.md",
+      "target": "content/docs/haproxy/standard-features.fr.md",
+      "language": "fr",
+      "source_sha256": "a967ef5deb808690d8118776d56b53b5a0095fdec83bd7c511d1eeec1850cb52",
+      "target_sha256": "6bd08691a5dd25b5e083695eee0b976610cb09c7484c23a17565626b1c957718",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/standard-features.md",
+      "target": "content/docs/haproxy/standard-features.ja.md",
+      "language": "ja",
+      "source_sha256": "a967ef5deb808690d8118776d56b53b5a0095fdec83bd7c511d1eeec1850cb52",
+      "target_sha256": "20fa05383969527f5472864b1f4a1f62b3450573f8f070650df2d028f09410aa",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/standard-features.md",
+      "target": "content/docs/haproxy/standard-features.de.md",
+      "language": "de",
+      "source_sha256": "a967ef5deb808690d8118776d56b53b5a0095fdec83bd7c511d1eeec1850cb52",
+      "target_sha256": "86cb5436778c1483a0aa2df4c70ad9bef8feb811ed8753cfa32d2b16b83549d3",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/standard-features.md",
+      "target": "content/docs/haproxy/standard-features.ru.md",
+      "language": "ru",
+      "source_sha256": "a967ef5deb808690d8118776d56b53b5a0095fdec83bd7c511d1eeec1850cb52",
+      "target_sha256": "797d29b8ab6125a46c85fdd8edc018ec8ccbc7511f9685bbb8a2621379df2d90",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/starting.md",
+      "target": "content/docs/haproxy/starting.zh.md",
+      "language": "zh",
+      "source_sha256": "4d156469b2e2c7423fffe20a49a3254a80e41644b938ed636ef5257ea1e5eec1",
+      "target_sha256": "257e7b0847a63292fd1ac14e107154f07da343686ecbd54fa9cead371e99b829",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/starting.md",
+      "target": "content/docs/haproxy/starting.fr.md",
+      "language": "fr",
+      "source_sha256": "4d156469b2e2c7423fffe20a49a3254a80e41644b938ed636ef5257ea1e5eec1",
+      "target_sha256": "22da3416a594626fcebe31d2348fb2ba5d2f636d80b563a1eead334a12e7cbca",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/starting.md",
+      "target": "content/docs/haproxy/starting.ja.md",
+      "language": "ja",
+      "source_sha256": "4d156469b2e2c7423fffe20a49a3254a80e41644b938ed636ef5257ea1e5eec1",
+      "target_sha256": "f30935b71bef681dc5964f3799da9160fddd076c0bd66118194049816195d888",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/starting.md",
+      "target": "content/docs/haproxy/starting.de.md",
+      "language": "de",
+      "source_sha256": "4d156469b2e2c7423fffe20a49a3254a80e41644b938ed636ef5257ea1e5eec1",
+      "target_sha256": "3cf6d3e6beb377c6644b47e17530ec42f269bfdf122bc0e7aa84549224e406e9",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/starting.md",
+      "target": "content/docs/haproxy/starting.ru.md",
+      "language": "ru",
+      "source_sha256": "4d156469b2e2c7423fffe20a49a3254a80e41644b938ed636ef5257ea1e5eec1",
+      "target_sha256": "d913c538bbf0b6a037752cc6d11eb21fd2ef0673431e59b3bc34174783b5ef05",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/statistics-and-monitoring.md",
+      "target": "content/docs/haproxy/statistics-and-monitoring.zh.md",
+      "language": "zh",
+      "source_sha256": "268b4823a7ccaf34f788d977d5b509346eb657a3c845e888c775907464972c26",
+      "target_sha256": "c4690f4e6f6d5e6b2340e322e97a6ce2a8ff1e0b1449c62d57b4550f4b292ce5",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/statistics-and-monitoring.md",
+      "target": "content/docs/haproxy/statistics-and-monitoring.fr.md",
+      "language": "fr",
+      "source_sha256": "268b4823a7ccaf34f788d977d5b509346eb657a3c845e888c775907464972c26",
+      "target_sha256": "d78f008ccc8eb994876e7ef6e9b218780d4533aac9e227bc011c3943f51b562c",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/statistics-and-monitoring.md",
+      "target": "content/docs/haproxy/statistics-and-monitoring.ja.md",
+      "language": "ja",
+      "source_sha256": "268b4823a7ccaf34f788d977d5b509346eb657a3c845e888c775907464972c26",
+      "target_sha256": "6f329987f7a7c02221c899bbe93cfefb6b7f999a3cf56e67abb88f3ad31c2ff7",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/statistics-and-monitoring.md",
+      "target": "content/docs/haproxy/statistics-and-monitoring.de.md",
+      "language": "de",
+      "source_sha256": "268b4823a7ccaf34f788d977d5b509346eb657a3c845e888c775907464972c26",
+      "target_sha256": "bea96921879f48c23141300d2f040eb0c584441d01de2b5cb0f22a13676b0054",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/statistics-and-monitoring.md",
+      "target": "content/docs/haproxy/statistics-and-monitoring.ru.md",
+      "language": "ru",
+      "source_sha256": "268b4823a7ccaf34f788d977d5b509346eb657a3c845e888c775907464972c26",
+      "target_sha256": "397d1e8bf35fc6c9812c57c6d18ffea0a0931bccbdaa6bee47b48daddfb0721d",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "All new, modified and removed English groups independently checked; unchanged prose retains the previously stated review scope."
+    },
+    {
+      "source": "content/docs/haproxy/stick-tables-and-peers.md",
+      "target": "content/docs/haproxy/stick-tables-and-peers.zh.md",
+      "language": "zh",
+      "source_sha256": "ce82dcade06e3ab1acb5f39c954558966c12b86c09902fb0a6853e1f80167fa1",
+      "target_sha256": "d9777291f3daba827d4d8b1452575d30ebad44aaa8cc7311a45de0196604aa83",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/stick-tables-and-peers.md",
+      "target": "content/docs/haproxy/stick-tables-and-peers.fr.md",
+      "language": "fr",
+      "source_sha256": "ce82dcade06e3ab1acb5f39c954558966c12b86c09902fb0a6853e1f80167fa1",
+      "target_sha256": "ada7d089b7f22a42f2bba1dba5929abc538f5a758d24b8d6465e24ee3e864640",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/stick-tables-and-peers.md",
+      "target": "content/docs/haproxy/stick-tables-and-peers.ja.md",
+      "language": "ja",
+      "source_sha256": "ce82dcade06e3ab1acb5f39c954558966c12b86c09902fb0a6853e1f80167fa1",
+      "target_sha256": "d80d2eacc9a60d07071dee89d3a460d759b0c86c7a7f4614133f317d76047bc1",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/stick-tables-and-peers.md",
+      "target": "content/docs/haproxy/stick-tables-and-peers.de.md",
+      "language": "de",
+      "source_sha256": "ce82dcade06e3ab1acb5f39c954558966c12b86c09902fb0a6853e1f80167fa1",
+      "target_sha256": "00390c25e882be3d11c2a281a13cdb315ece4233f9cacc04750219a3e3b4923f",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/stick-tables-and-peers.md",
+      "target": "content/docs/haproxy/stick-tables-and-peers.ru.md",
+      "language": "ru",
+      "source_sha256": "ce82dcade06e3ab1acb5f39c954558966c12b86c09902fb0a6853e1f80167fa1",
+      "target_sha256": "81a3b6ad0eeb80646893b9949554675d8368f54d31440a56742e9af634d68b4c",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/stopping-and-restarting.md",
+      "target": "content/docs/haproxy/stopping-and-restarting.zh.md",
+      "language": "zh",
+      "source_sha256": "23ea530b4f922b37b91fbfa8a34cfeeaeb626c959d72f25e5ff14d909130ed4f",
+      "target_sha256": "b93822c022be50f02373fc186b2b9c017bcc802932240c8827f7af219f6045a9",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/stopping-and-restarting.md",
+      "target": "content/docs/haproxy/stopping-and-restarting.fr.md",
+      "language": "fr",
+      "source_sha256": "23ea530b4f922b37b91fbfa8a34cfeeaeb626c959d72f25e5ff14d909130ed4f",
+      "target_sha256": "222e750675ef9d0f2c3e6a8cf6465a9b9702b70fb2d227018a4302d3886eff9f",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/stopping-and-restarting.md",
+      "target": "content/docs/haproxy/stopping-and-restarting.ja.md",
+      "language": "ja",
+      "source_sha256": "23ea530b4f922b37b91fbfa8a34cfeeaeb626c959d72f25e5ff14d909130ed4f",
+      "target_sha256": "862816625090d7f2214d5d43bd55ea81daff63a98706cc6cbdec54270501fd0d",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/stopping-and-restarting.md",
+      "target": "content/docs/haproxy/stopping-and-restarting.de.md",
+      "language": "de",
+      "source_sha256": "23ea530b4f922b37b91fbfa8a34cfeeaeb626c959d72f25e5ff14d909130ed4f",
+      "target_sha256": "ca32c2c1f9823f0b689e91d5fcc687350b02af99dfefb4cced0d65ccb5a97f92",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/stopping-and-restarting.md",
+      "target": "content/docs/haproxy/stopping-and-restarting.ru.md",
+      "language": "ru",
+      "source_sha256": "23ea530b4f922b37b91fbfa8a34cfeeaeb626c959d72f25e5ff14d909130ed4f",
+      "target_sha256": "aaf592e78768fb31bccbf08368de210b7f10db356b1474a33e3a5cdb7d1e1623",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/traps.md",
+      "target": "content/docs/haproxy/traps.zh.md",
+      "language": "zh",
+      "source_sha256": "0a1518176d089b6f2f21be7139fb2dc1ef77af51d00f01fb29c4f7c397bd98dc",
+      "target_sha256": "ff4da0be62e3729ac53960d599321ccb91420902c27a7bc80613fd71eb83f786",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/traps.md",
+      "target": "content/docs/haproxy/traps.fr.md",
+      "language": "fr",
+      "source_sha256": "0a1518176d089b6f2f21be7139fb2dc1ef77af51d00f01fb29c4f7c397bd98dc",
+      "target_sha256": "3d141befe3ddfe6f22eb1d9a16078667a77ac952488194669d240c9d977cfae1",
+      "review_scope": "All protected/structural/numeric inventories, every explanatory fence, focused semantic review of existing prose; not a new sentence-by-sentence review of all prose.",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/traps.md",
+      "target": "content/docs/haproxy/traps.ja.md",
+      "language": "ja",
+      "source_sha256": "0a1518176d089b6f2f21be7139fb2dc1ef77af51d00f01fb29c4f7c397bd98dc",
+      "target_sha256": "f2d7b0f3e379ed0aceefa7bb17c01a5d1918e815abb3f7b0664b82906f3334f7",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/traps.md",
+      "target": "content/docs/haproxy/traps.de.md",
+      "language": "de",
+      "source_sha256": "0a1518176d089b6f2f21be7139fb2dc1ef77af51d00f01fb29c4f7c397bd98dc",
+      "target_sha256": "751c46d0b3e0116bd2b608cfe227d995e8a12f6f9dcd4472175eebc2decb1a5f",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    },
+    {
+      "source": "content/docs/haproxy/traps.md",
+      "target": "content/docs/haproxy/traps.ru.md",
+      "language": "ru",
+      "source_sha256": "0a1518176d089b6f2f21be7139fb2dc1ef77af51d00f01fb29c4f7c397bd98dc",
+      "target_sha256": "5f742f119b08e48dc3d6cdc7cc6a426680f245982b4db7b1dc91f68d5bc0b5cc",
+      "review_scope": "Existing full review plus current reviewed editorial deltas",
+      "documentation_version": "3.4.6-66",
+      "upgrade_review_scope": "Only source-provenance front matter changed; existing body review retained."
+    }
+  ],
+  "issues_resolved": [
+    "Chinese semantic errors in -V quiet-mode cancellation, file-descriptor caps, section ordering, timer/glitch descriptions and TLS name verification.",
+    "French semantic/terminology errors in PFS, swap, ticket lifetime, unsigned counters, retries/timeouts, cache eligibility and CPU comparisons.",
+    "Untranslated Chinese/French explanatory fences; Chinese supplementary unfenced/indented descriptions and short labels (72 units on 4 pages).",
+    "Cross-manual and RFC links routed to the wrong same-numbered local chapters.",
+    "Pinned-source errata in IPv6 aliases, privileged-port capability, socket access, date, OCSP spelling, ticket key units, counter widths, rate arrays, map methods, server-ID hashing and health-check SNI.",
+    "Obsolete multiprocess guidance explicitly marked for this edition.",
+    "Copyable examples restored: FastCGI, SMTP, redirects, ACLs, peers, bandwidth-filter usage, socket-stats alternatives, conditionals and numbered log layouts.",
+    "Generator preserves code-fence languages and directive colon spacing.",
+    "Publication gates expose translated explanation fences and indented prose to English screening while protecting literal code/output.",
+    "Independent source HTML witness and ordered literal checks reject simultaneous HTML/print paragraph, heading and code omissions."
+  ],
+  "review_boundaries": [
+    "Automated parity, numeric/literal/signature preservation and English screening support the recorded semantic review scope. Current review covers selected version deltas, security/default/limit/CLI/logging semantics and the corrected French/Chinese passages; unchanged prior review provenance is retained. This is not a new sentence-by-sentence reread of every unchanged paragraph.",
+    "The documentation edition is 3.4.6-66 at commit 16acce1dac1dcf1ad5d654204af3a5d45d0e3de8; the latest stable package release is 3.4.6. The three raw manuals at the current maintenance-branch head were independently downloaded and hash-compared.",
+    "Source, generated outputs and browser acceptance are local. Git delivery and live deployment require separate verification."
+  ],
+  "completed_at": "2026-10-14T01:04:36.763245+00:00",
+  "stable_release": "3.4.6",
+  "stable_tag": "v3.4.6",
+  "upstream_ref": "v3.4.6-66-g16acce1dac1d",
+  "update_started_at": "2026-10-13T15:11:22.172628+00:00",
+  "upgrade_summary": {
+    "from": "3.4.4",
+    "to": "3.4.6-66",
+    "stable_release": "3.4.6",
+    "changed_published_file_refs_per_locale": 35,
+    "changed_body_pages_per_locale": 8,
+    "changed_section_groups_per_locale": 20,
+    "withdrawn_directives": [
+      "filter-sequence"
+    ],
+    "new_option": "jwt.allow_none_alg",
+    "runtime_behavior_checks": [
+      "JWT none rejected by default and accepted with explicit opt-in",
+      "hex2i invalid input yields no sample instead of zero",
+      "url_ip and url_port fail on host names without resolution",
+      "JSON +utf8 preserves valid multibyte sequences",
+      "show events -s sanitizes bytes without changing byte length"
+    ],
+    "independent_semantic_delta_reviews": [
+      "zh-fr-independent-delta-review.json",
+      "zh/cross-review/semantic-review.json",
+      "zh/cross-review/fr-semantic-review.json"
+    ]
+  }
+}

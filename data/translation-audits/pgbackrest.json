@@ -37,7 +37,7 @@
     "published_routes": 174
   },
   "review_scopes": {
-    "prior_full_review_plus_delta": "Earlier full bilingual review in pgbackrest-ja/de/ru.json, rechecked against preserved output bodies; later wording changes and all six-language source corrections inspected, plus new full technical and rendered checks.",
+    "prior_full_review_plus_delta": "Prior complete Japanese, German and Russian bilingual reviews, rechecked against preserved output bodies; later wording changes and all six-language source corrections inspected, plus new full technical and rendered checks.",
     "full_technical_and_targeted_semantic": "All 29 bodies checked for aligned prose-unit coverage, code, metadata, headings, numerical facts and protected literals; semantic review concentrated on PITR, backup dependencies/retention, exclusions, encryption, SFTP, delta behavior, transferred data, FAQs and anomalies. This is not a new independent line-by-line review of every historical release sentence.",
     "stable_release_delta": "Full bilingual review of all added security/release paragraphs in five translations, exact security script from pinned XML, both guide caches matched before updating, review of metrics and metadata. All prior PITR, terminology, option-name and historical-warning corrections retained."
   },
@@ -107,124 +107,6 @@
     "technical_variants": "Only two reviewed Chinese wording variants; neither changes a command, value or example.",
     "stable_release_delta": "Only the new upstream security-check script and verified stable-tag guide examples change protected blocks; other command/configuration examples retain the reviewed baseline.",
     "security_check_sha256": "6589a3d180c75756c206691cf323d0dde8c0af8e10f8110a5da8f80f45b305cd"
-  },
-  "validation": {
-    "source": "145 current-English translation pairs, exact review fingerprints, technical values/literals, code and localized destinations passed.",
-    "preservation": {
-      "unchanged_other_documents": 138,
-      "guide_exact_reproduction": 12,
-      "old_news_preserved": 6,
-      "older_release_history_preserved": 6,
-      "coverage_table_matches_stable_xml": true
-    },
-    "rendered": {
-      "pairs": 145,
-      "outputs": {
-        "en": {
-          "pages": 29,
-          "print_blocks": 10030
-        },
-        "zh": {
-          "pages": 29,
-          "print_blocks": 10030
-        },
-        "fr": {
-          "pages": 29,
-          "print_blocks": 10108
-        },
-        "ja": {
-          "pages": 29,
-          "print_blocks": 10030
-        },
-        "de": {
-          "pages": 29,
-          "print_blocks": 10030
-        },
-        "ru": {
-          "pages": 29,
-          "print_blocks": 10030
-        }
-      },
-      "errors": []
-    },
-    "build": {
-      "hugo": "v0.166.0+extended+withdeploy",
-      "result": "Production builds passed with --panicOnWarning; all caches and outputs outside the repository."
-    },
-    "regression_tests": {
-      "shared_gate_and_importer": 12,
-      "japanese_source_gate": 9,
-      "japanese_print_gate": 7,
-      "python_total": 28,
-      "search": "Real Lunr: six localized security queries and uppercase variants, Russian recovery queries, identical Latin/CJK results compared with the published OINK module."
-    },
-    "language_specific_gates": {
-      "de": "29/29 source and rendered checks passed using shared reviewed technical fingerprints and independent German output checks.",
-      "ja": "29/29 current source and all rendered outputs passed.",
-      "ru": "Shared 29/29 current-source and rendered checks plus the existing Russian source gate passed."
-    },
-    "browser": {
-      "tool": "Codex in-app browser via cua_repl",
-      "viewports": [
-        {
-          "width": 1440,
-          "height": 1000
-        },
-        {
-          "width": 390,
-          "height": 844
-        }
-      ],
-      "route_visits": 348,
-      "layout_or_loading_issues": [],
-      "security_search": {
-        "queries": {
-          "en": "Weak Encryption",
-          "zh": "弱加密",
-          "fr": "Sous-clés",
-          "ja": "脆弱",
-          "de": "Unterschlüssel",
-          "ru": "Слабые"
-        },
-        "passed": 12
-      },
-      "desktop_same_page_language_switches": 6,
-      "mobile_drawer_release_security_anchor_checks": 6,
-      "visual_samples": [
-        "German security advisory desktop",
-        "French security advisory mobile",
-        "English 2.59.3 release notes mobile",
-        "Chinese versioned root"
-      ],
-      "limits": "DOM layout checks cover every route at both widths; screenshots are representative. The final search-only asset change was followed by real six-language searches at both sizes. Wrapped links were also activated using the keyboard."
-    },
-    "site_wide": {
-      "command": "make check",
-      "result": "passed",
-      "scope": "Isolated candidate built from 7d661e58d40e67ad3d4069f779cd9a749c55efa6 plus this component, scoped shared metadata/check integration and the required Cyrillic search override. Unrelated dirty work is excluded.",
-      "documentation_pages": 1033,
-      "legacy_aliases": 1361,
-      "html_files_checked_for_internal_links": 2590
-    },
-    "diff_check": "Scoped git diff --check passed",
-    "evidence_sha256": {
-      "candidate-check-final.log": "36acb32ac1a125684bbdd84cf8a138193350ebe983ded81bb6e34be322a0ce3a",
-      "candidate-build.log": "a1d7f9d036bcb9371048039c94339fa8f7cc4af85c1159fc9e1e29851eb3ecfa",
-      "browser-report.json": "4560bda84d5866151f2b40a2e0fa4f71e6d13775404ab4c4092186f770093862",
-      "preservation.json": "2d6a01359872dc78aacb3a9827c34bb2186916b14cfdb4143d9432f2a234d609",
-      "examples-receipt.json": "4a95642f0c6d4317892ecdddfe0191509d54a37f251ac6637fda6b8b985d19aa"
-    },
-    "final_staging": {
-      "changed_files": 174,
-      "candidate_source_files_checked": 198,
-      "largest_file_bytes": 284636,
-      "binary_or_generated_files": 0
-    }
-  },
-  "delivery": {
-    "scope": "Accepted source-only Git change; see the commit containing this record. Public deployment is a separate delivery stage.",
-    "push": false,
-    "deployment": false
   },
   "pages": [
     {
@@ -1306,11 +1188,6 @@
       "delta_review_scope": "stable_release_delta"
     }
   ],
-  "publication_readiness": {
-    "pgbackrest": "Ready as a clearly versioned 2.59.2 documentation snapshot after the recorded fixes and checks.",
-    "site_wide": "Not certified: make check stops at the separate PgBouncer German changelog inline-literal check; that component was not changed by this task.",
-    "production": "Not deployed or publicly verified in this task."
-  },
   "changed_document_counts": {
     "de": 7,
     "ja": 6,
@@ -1339,12 +1216,5 @@
       }
     },
     "method": "scripts/sync-pgbackrest-examples.py; full command identity and output matching against both stable-tag caches; commands were not executed. Distribution HTML output placeholders were not imported."
-  },
-  "prior_acceptance": {
-    "version": "2.59.2",
-    "status": "component-accepted-local",
-    "review_date": "2026-10-13",
-    "preserved_findings": 7,
-    "note": "Earlier browser and rendered results described the 2.59.2 snapshot. Current results below supersede them."
   }
 }

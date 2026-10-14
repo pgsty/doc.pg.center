@@ -3,7 +3,7 @@
                           Configuration Manual
                          ----------------------
                               version 3.4
-                              2026/08/27
+                              2026/09/28
 
 
 This document covers the configuration language as implemented in the version
@@ -1791,6 +1791,7 @@ The following keywords are supported in the "global" section :
    - insecure-fork-wanted
    - insecure-setuid-wanted
    - issuers-chain-path
+   - jwt.allow_none_alg
    - jwt.decrypt_alg_list
    - jwt.decrypt_enc_list
    - key-base
@@ -2906,6 +2907,12 @@ issuers-chain-path <dir>
 
   The OCSP features are able to use the completed chain when no .issuer was
   used, or no chain was provided in the PEM.
+
+jwt.allow_none_alg
+  Allow JWT signed token with the "none" algorithm in the 'jwt_verify'
+  converter. They will always be considered valid when this option is set. By
+  default unsigned tokens are rejected since they are considered unsafe (see
+  RFC8725 section 3.1).
 
 jwt.decrypt_alg_list <list>
   Set the list of algorithms allowed in the jwt_decrypt_XXX converters. JWT
@@ -4214,12 +4221,14 @@ tune.bufsize <size>
   statistics, and values larger than default size will increase memory usage,
   possibly causing the system to run out of memory. At least the global maxconn
   parameter should be decreased by the same factor as this one is increased. In
-  addition, use of HTTP/2 mandates that this value must be 16384 or more. If an
+  addition, use of HTTP/2 mandates that this value must be 16384 or more. The
+  value must also be below 256 MB (268435456 bytes). If the header block of an
   HTTP request is larger than (tune.bufsize - tune.maxrewrite), HAProxy will
-  return HTTP 400 (Bad Request) error. Similarly if an HTTP response is larger
-  than this size, HAProxy will return HTTP 502 (Bad Gateway). Note that the
-  value set using this parameter will automatically be rounded up to the next
-  multiple of 8 on 32-bit machines and 16 on 64-bit machines.
+  return an HTTP 400 (Bad Request) error. Similarly if the header block of an
+  HTTP response is larger than this size, HAProxy will return an HTTP 502 (Bad
+  Gateway) error. Note that the value set using this parameter will
+  automatically be rounded up to the next multiple of 8 on 32-bit machines and
+  16 on 64-bit machines. See also: tune.bufsize.large, tune.bufsize.small.
 
 tune.bufsize.large <size>
   Sets the size in bytes for large buffers. By defaults, support for large
@@ -4227,7 +4236,7 @@ tune.bufsize.large <size>
 
   These buffers are designed to be used in some specific contexts where more
   data must be bufferized without changing the size of regular buffers. The
-  large buffers are not implicitly used.
+  large buffers are not implicitly used. See also: tune.bufsize.
 
   Note that when large buffers are configured, three special large buffers will
   be allocated for each threads during startup for internal usage.
@@ -4242,7 +4251,7 @@ tune.bufsize.small <size>
 
   For the moment, it is automatically used only by HTTP/3 protocol to emit the
   response headers. Otherwise, small buffers support can be enabled for
-  specific proxies via the "use-small-buffers" option.
+  specific proxies via the "use-small-buffers" option. See also: tune.bufsize.
 
   See also: option use-small-buffers
 
@@ -6191,7 +6200,6 @@ external-check path                       X          -         X         X
 force-persist                             -          -         X         X
 force-be-switch                           -          X         X         -
 filter                                    -          X         X         X
-filter-sequence                           -          X         X         X
 fullconn                                  X          -         X         X
 guid                                      -          X         X         X
 hash-balance-factor                       X          -         X         X
@@ -8102,41 +8110,8 @@ filter <name> [param*]
 
         server srv1 192.168.0.1:80
 
-  See also : section 9., "filter-sequence"
+  See also : section 9.
 
-filter-sequence { request | response } <filter_list>
-
-  Specifies in which order filters declared on the proxy should be
-  executed.
-
-  May be used in the following contexts: tcp, http
-
-  May be used in sections:    defaults | frontend | listen | backend
-                                 no    |    yes   |   yes  |   yes
-
-  Comma-separated list of filter names (<filter_list>) to specify in which
-  order filters declared on the proxy should be executed, for request
-  or response path, respectively.
-
-  When filter-sequence is not specified for a given path (ie: request vs
-  response), the order in which filters are declared on the proxy is used.
-
-  If filter-sequence omits some filters that were declared on the proxy,
-  they will not be executed. This is an effective way of temporarily
-  disabling a filter without removing it from the configuration.
-
-  Example:
-     global
-        lua-load my-filter.lua # defines custom "lua.my-filter"
-     frontend myfront
-        filter comp-req
-        filter comp-res
-        filter lua.my-filter
-
-        filter-sequence request lua.my-filter,comp-req
-        filter-sequence response lua.my-filter,comp-res
-
-  See also : "filter"
 
 fullconn <conns>
   Specify at what backend load the servers will reach their maxconn
@@ -10184,6 +10159,10 @@ no option checkcache
     - those with a 'Cache-control: no-cache="set-cookie"' header
     - those with a 'Cache-control: no-cache="set-cookie,' header
       (allowing other fields after set-cookie)
+    - those which carry neither freshness information ("Cache-control" with a
+      "max-age" or an "s-maxage", or an "Expires" header) nor a validator (an
+      "ETag" or a "Last-Modified" header), since such a response is not
+      stored by a compliant cache.
 
   If a response doesn't respect these requirements, then it will be blocked
   just as if it was from an "http-response deny" rule, with an "HTTP 502 bad
@@ -15719,8 +15698,11 @@ capture <sample> [ len <length> | id <id> ]
   sample fetch methods to feed it into headers or anything. The length should
   be limited given that this size will be allocated for each capture during the
   whole stream life. Note that the length is only usable with "http-request"
-  rules. Please check section 7.3 (Fetching samples), "capture request header"
-  and "capture response header" for more information.
+  rules. Such a slot only exists in the section which declares it, so when this
+  rule is placed in a "listen" section which is also used as the backend of
+  another frontend, it is ignored for the streams coming from that frontend.
+  Please check section 7.3 (Fetching samples), "capture request header" and
+  "capture response header" for more information.
 
   If the keyword "id" is used instead of "len", the action tries to store the
   captured string in a previously declared capture slot. This is useful to run
@@ -21148,6 +21130,56 @@ Some sample fetch methods have deprecated aliases that are used to maintain
 compatibility with existing configurations. They are then explicitly marked as
 deprecated and should not be used in new setups.
 
+Samples are typed. A sample's type determines how it may be matched against
+patterns, which converters may be applied to it, and how it is converted when
+another type is expected. The following types are used:
+
+  - boolean: a true or false value, as returned by the fetch methods which
+    only report a condition. Such samples are matched without any "-m" option.
+    An integer is considered true when it is not zero, and a string is first
+    parsed as an integer.
+
+  - integer: a signed 64-bit integer, that is a value between -2^63 and 2^63-1
+    (-9223372036854775808 and 9223372036854775807). When a string is cast to an
+    integer, the conversion stops at the first non-digit character that is not
+    the leading sign character ('+' or '-'). The value formed by the digits
+    read is used, which is zero if there was none, but empty strings fail to
+    convert. Values which do not fit are bound to the smallest or the largest
+    representable integer.
+
+  - IPv4 address and IPv6 address: these are two distinct types, even though
+    most places which accept one also accept the other and are simply
+    documented as taking an address. An IPv4 address may be cast to an
+    integer, which gives the 32-bit value of the address, and to an IPv6
+    address, which gives its IPv4-mapped form ("::ffff:a.b.c.d"). The reverse
+    casts are more limited: an IPv6 address has no integer form at all, and it
+    only converts to an IPv4 address if it is an IPv4-mapped, IPv4-compatible
+    or 6to4 address.
+
+  - string: a series of bytes stopping at the first NUL character (0x00), which
+    is not part of the string (use the binary type if an embedded NUL character
+    is needed). No encoding is inferred: haproxy does not try to interpret
+    these bytes as characters, and whether they represent text at all, in which
+    charset, and how they are rendered, solely depends on what the string is
+    used for. Casting a binary sample to a string therefore silently drops
+    everything from the first NUL character on, whether the cast is explicit or
+    implicit.
+
+  - binary: a block of bytes whose length is known, each byte being able to
+    take any value from 0 to 255, NUL included. This is what the fetch methods
+    extracting raw data return, such as a request body or the contents of a
+    binary protocol. Such a sample cannot be cast to a boolean, an integer nor
+    an address, and must either be matched as a binary block using "-m bin"
+    (see section 7.1.5) or be turned into a printable form first, for instance
+    using the "hex" converter. The opposite cast is free, since a string is
+    always a valid binary block.
+
+  - method: an HTTP method. The methods known to haproxy are represented by
+    an identifier, the others keep their original string.
+
+The converters table below also uses "any" to designate the converters which
+accept any input type.
+
 The ACL derivatives are also indicated when available, with their respective
 matching methods. These ones all have a well defined default pattern matching
 method, so it is never necessary (though allowed) to pass the "-m" option to
@@ -21849,7 +21881,9 @@ hex
 
 hex2i
   Converts a hex string containing two hex digits per input byte to an
-  integer. If the input value cannot be converted, then zero is returned.
+  integer. If the input value contains a character which is not a
+  hexadecimal digit, the converter fails and returns nothing, which makes it
+  possible to differentiate an invalid input from a valid zero.
 
 hmac(<algorithm>,<key>)
   Converts a binary input sample to a message authentication code with the given
@@ -22281,8 +22315,12 @@ jwt_verify(<alg>,<key>)
    | PS256        | RSASSA-PSS using SHA-256 and MGF1 with SHA-256          |
    | PS384        | RSASSA-PSS using SHA-384 and MGF1 with SHA-384          |
    | PS512        | RSASSA-PSS using SHA-512 and MGF1 with SHA-512          |
-   | none         | No digital signature or MAC performed                   |
+   | none         | No digital signature or MAC performed (see note below)  |
    +--------------+---------------------------------------------------------+
+
+   Please note that the "none" algorithm is not allowed by default to follow
+   the recommendations in RFC8725 section 3.2. Set global option
+   'jwt.allow_none_alg' to explicitely allow it.
 
   - <key> can be either a string or a variable name (See also "set-var") that
     holds a secret or a public key path.
@@ -28398,7 +28436,8 @@ url32+src : binary
 
 url_ip : ip
   This extracts the IP address from the request's URL when the host part is
-  presented as an IP address. Its use is very limited. For instance, a
+  presented as an IP address. The fetch fails when the host part is a name,
+  as no resolution is performed. Its use is very limited. For instance, a
   monitoring system might use this field as an alternative for the source IP in
   order to test what path a given source address would follow, or to force an
   entry in a table for a given source address. It may be used in combination
@@ -28406,7 +28445,9 @@ url_ip : ip
 
 url_port : integer
   This extracts the port part from the request's URL. Note that if the port is
-  not specified in the request, port 80 is assumed..
+  not specified in the request, port 80 is assumed. As for "url_ip", this only
+  works when the authority of the URL is presented as an address, the fetch
+  fails when it is a host name since no resolution is performed here.
 
 urlp([<name>[,<delim>[,i]]]) : string
 url_param([<name>[,<delim>[,i]]]) : string
@@ -29476,6 +29517,24 @@ Supported item flags are (may be enabled/disabled from item's arguments):
           Incomplete numerical values (e.g.: '%B' when logasap is used),
           which are normally prefixed with '+' without encoding, will be
           encoded as-is. Also, '+E' option will be ignored.
+          As described in section 8.6, characters outside the 32..126 range
+          are escaped one byte at a time, using the JSON escape sequences,
+          so that the output remains pure printable ASCII whatever the
+          input. This includes valid UTF-8 sequences, meaning that non-ASCII
+          text will appear as its individual bytes once decoded (e.g.
+          U+00E9, encoded as 0xC3 0xA9, is logged as "\u00C3\u00A9"). See
+          "utf8" below to preserve such text.
+  * utf8: combined with "json", permits to let valid multi-byte UTF-8 sequences
+          pass unescaped. The C1 control characters (U+0080 to U+009F) are
+          still escaped, represented by their code point. Invalid sequences are
+          escaped one byte at a time so that the output always remains valid
+          UTF-8. Note that since valid UTF-8 is emitted as-is, a client may use
+          some special characters to alter the rendering of a log line on a
+          terminal or in a log viewer, such as direction changes, zero-width
+          characters, or line and paragraph separators. Thus it is recommended
+          to only use it for contents coming from trusted sources, or when logs
+          are not meant to be displayed on a terminal. It has no effect without
+          "json".
   * cbor: automatically encode value in CBOR format
           (when set globally, only named logformat items are considered)
           By default, cbor encoded data is represented in HEX form so
@@ -29496,6 +29555,7 @@ Supported item flags are (may be enabled/disabled from item's arguments):
     log-format-sd %{+Q,+E}o\ [exampleSDID@1234\ header=%[capture.req.hdr(0)]]
 
     log-format "%{+json}o %(request)r %(custom_expr)[str(custom)]"
+    log-format "%{+json,+utf8}o %(request)r %(custom_expr)[str(custom)]"
     log-format "%{+cbor}o %(request)r %(custom_expr)[str(custom)]"
 
 Please refer to the table below for currently defined aliases :
@@ -30469,6 +30529,14 @@ being escaped are comprised between 32 and 126 (inclusive). Obviously, the
 escape character '#' itself is also encoded to avoid any ambiguity ("#23"). It
 is the same for the character '"' which becomes "#22", as well as '{', '|' and
 '}' when logging headers.
+
+This does not apply to the cbor encoding, which already uses either safe hex
+digits, or properly delimited binary blocks that will not be sent to a terminal
+but will be consumed by a CBOR parser.
+
+The json encoding uses the JSON escape sequences instead, and the +utf8 option
+also lets valid multi-byte UTF-8 sequences pass as-is (see the "utf8" flag in
+section 8.2.6).
 
 Note that the space character (' ') is not encoded in headers, which can cause
 issues for tools relying on space count to locate fields. A typical header

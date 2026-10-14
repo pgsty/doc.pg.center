@@ -1,0 +1,455 @@
+{
+  "source": "content/docs/haproxy/configuration-basics.md",
+  "language": "ru",
+  "fences": [
+    {
+      "index": 1,
+      "classification": "argument-description",
+      "source_sha256": "133f7a718d105906bd1bc4869b73669aaddfbbc3a10325ce7f33c0fd5040ca03",
+      "target_sha256": "00ac33eb21a36b5c5646fa9fc3d52a3deff235f1c868e8d63009f727678549b4",
+      "protected_literals": [
+        "\"#\""
+      ],
+      "protected_lines": [],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 1,
+          "source_sha256": "133f7a718d105906bd1bc4869b73669aaddfbbc3a10325ce7f33c0fd5040ca03",
+          "target_sha256": "00ac33eb21a36b5c5646fa9fc3d52a3deff235f1c868e8d63009f727678549b4"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 5,
+      "classification": "argument-description",
+      "source_sha256": "b1bdea796fdee72f23d7c46fbb40871f7073485441b48f264f5c2d692ca8787c",
+      "target_sha256": "c384d29eb4e9c0f46041b76bfa2133a703218477344d9b539e23ce2a7da4ee03",
+      "protected_literals": [
+        "\\ ",
+        "\\#",
+        "\\\\",
+        "\\'",
+        "\\\""
+      ],
+      "protected_lines": [],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 5,
+          "source_sha256": "b1bdea796fdee72f23d7c46fbb40871f7073485441b48f264f5c2d692ca8787c",
+          "target_sha256": "c384d29eb4e9c0f46041b76bfa2133a703218477344d9b539e23ce2a7da4ee03"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 6,
+      "classification": "argument-description",
+      "source_sha256": "99752f707c160e16863f41751f6b6ddfa3c89b7a6bfb9f921b042e5290bed4dc",
+      "target_sha256": "5c78e7ec41d99d1199cd4f216a3d37d94f4d7b5dff875bb0dc1aa925dcf247a8",
+      "protected_literals": [
+        "\\n",
+        "\\r",
+        "\\t",
+        "\\xNN",
+        "\\x0a",
+        "\\x0d",
+        "\\x09",
+        "LF",
+        "CR",
+        "ASCII",
+        "NN"
+      ],
+      "protected_lines": [],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 6,
+          "source_sha256": "99752f707c160e16863f41751f6b6ddfa3c89b7a6bfb9f921b042e5290bed4dc",
+          "target_sha256": "5c78e7ec41d99d1199cd4f216a3d37d94f4d7b5dff875bb0dc1aa925dcf247a8"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 7,
+      "classification": "argument-description",
+      "source_sha256": "700978f3bc89091272664539ba926a2c35d07a92acf087109462c74f5f413e54",
+      "target_sha256": "09bad25ace1db80d1893d528d4af52c61384e6d5e63dd87a72f025705f94c9b9",
+      "protected_literals": [
+        "'"
+      ],
+      "protected_lines": [],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 7,
+          "source_sha256": "700978f3bc89091272664539ba926a2c35d07a92acf087109462c74f5f413e54",
+          "target_sha256": "09bad25ace1db80d1893d528d4af52c61384e6d5e63dd87a72f025705f94c9b9"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 8,
+      "classification": "explanation-label",
+      "source_sha256": "16c68cb5f06f56ae6f89f75f11723c312c4c80ce5a14d04a6620f4c6b171fe20",
+      "target_sha256": "f821b26eb0e8c6a8e5de7d59d7b1ae6aa05fbc52408da6638b6e4b15a383d16e",
+      "protected_literals": [
+        "#"
+      ],
+      "protected_lines": [],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 8,
+          "source_sha256": "16c68cb5f06f56ae6f89f75f11723c312c4c80ce5a14d04a6620f4c6b171fe20",
+          "target_sha256": "f821b26eb0e8c6a8e5de7d59d7b1ae6aa05fbc52408da6638b6e4b15a383d16e"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 9,
+      "classification": "table-labels",
+      "source_sha256": "b04a6dd66c7634f7659d8eba67e0e56ab3b596637888940d449f2a483f553a39",
+      "target_sha256": "31e7dcd0357a0918d8016c725162e7ba614be22958d3713b74965de1e9aeee5c",
+      "protected_literals": [],
+      "protected_lines": [
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    <TAB>    |  \\<TAB>, \\x09 |  \"<TAB>\", \"\\<TAB>\", \"\\x09\"  |  '<TAB>'",
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    <LF>     |  \\n, \\x0a     |  \"\\n\", \"\\x0a\"               |",
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    <CR>     |  \\r, \\x0d     |  \"\\r\", \"\\x0d\"               |",
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    <SPC>    |  \\<SPC>, \\x20 |  \"<SPC>\", \"\\<SPC>\", \"\\x20\"  |  '<SPC>'",
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    \"        |  \\\", \\x22     |  \"\\\"\", \"\\x22\"               |  '\"'",
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    #        |  \\#, \\x23     |  \"#\", \"\\#\", \"\\x23\"          |  '#'",
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    $        |  $, \\$, \\x24  |  \"\\$\", \"\\x24\"               |  '$'",
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    '        |  \\', \\x27     |  \"'\", \"\\'\", \"\\x27\"          |",
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    \\        |  \\\\, \\x5c     |  \"\\\\\", \"\\x5c\"               |  '\\'",
+        "  -----------+---------------+-----------------------------+-----------------"
+      ],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 9,
+          "source_sha256": "b04a6dd66c7634f7659d8eba67e0e56ab3b596637888940d449f2a483f553a39",
+          "target_sha256": "31e7dcd0357a0918d8016c725162e7ba614be22958d3713b74965de1e9aeee5c"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 14,
+      "classification": "mixed-explanation",
+      "source_sha256": "8d2274ba271726bb171cf179f0cff91ff37974322e6766b1af8bd846d7075f20",
+      "target_sha256": "0b4f91983c95294bf958f894fd89aae90261934aea51af20c83a905fe7443a84",
+      "protected_literals": [],
+      "protected_lines": [
+        "    http-request set-path %[path,regsub((foo|bar),blah,g)]",
+        "                                       |--------|--------|",
+        "                        arg1=(foo|bar _/        /"
+      ],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 14,
+          "source_sha256": "8d2274ba271726bb171cf179f0cff91ff37974322e6766b1af8bd846d7075f20",
+          "target_sha256": "0b4f91983c95294bf958f894fd89aae90261934aea51af20c83a905fe7443a84"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 18,
+      "classification": "mixed-explanation",
+      "source_sha256": "98e4a9362a56bbe7e7b02eb18d243a2ff2fd430dbdb40e2f075dc05d08f3379a",
+      "target_sha256": "901cf77335dd90194c8cf801363554421926773f3b4c80ae76f35771c5f25200",
+      "protected_literals": [
+        "\" regsub\""
+      ],
+      "protected_lines": [
+        "    http-request set-path '%[path, regsub(\"(foo|bar)\", blah, g)]'",
+        "    ------------ --------  --------------------------------------",
+        "       word1       word2    word3=%[path, regsub(\"(foo|bar)\", blah, g)]",
+        "                                        |--------|---------||-----|--|",
+        "                                    arg1=(foo|bar) _/         /   /",
+        "                                     arg2=\" blah\" ___________/   /",
+        "                                        arg3=\" g\" ______________/"
+      ],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 18,
+          "source_sha256": "98e4a9362a56bbe7e7b02eb18d243a2ff2fd430dbdb40e2f075dc05d08f3379a",
+          "target_sha256": "901cf77335dd90194c8cf801363554421926773f3b4c80ae76f35771c5f25200"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 22,
+      "classification": "table-labels",
+      "source_sha256": "18020897bc02f9e193e287bdba3bccc89eb49bfcdb38ee75c70f91cc42c975ac",
+      "target_sha256": "20731a43e6d2e796329319bc290b69bfa02faaa2311503385a75afd3e5335d36",
+      "protected_literals": [],
+      "protected_lines": [
+        "  +---------------------------+---------+------------+-----------+",
+        "  |                           +---------+------------+-----------+",
+        "  |                           |  M | W  |   M  |  W  |  M  |  W  |",
+        "  +---------------------------+----+----+------+-----+-----+-----+",
+        "  | HAPROXY_STARTUP_VERSION   |  X | X  |      |     |  X  |  X  |",
+        "  | HAPROXY_BRANCH            |  X | X  |      |     |  X  |  X  |",
+        "  | HAPROXY_CFGFILES          |    |    |      |     |  X  |  X  |",
+        "  | HAPROXY_MWORKER           |    |    |      |     |  X  |  X  |",
+        "  | HAPROXY_CLI               |    |    |      |     |     |  X  |",
+        "  | HAPROXY_MASTER_CLI        |    |    |      |     |  X  |     |",
+        "  | HAPROXY_LOCALPEER         |    | X  |      |     |     |  X  |",
+        "  | HAPROXY_HTTP_LOG_FMT      |    | X  |      |  X  |     |     |",
+        "  | HAPROXY_HTTP_CLF_LOG_FMT  |    | X  |      |  X  |     |     |",
+        "  | HAPROXY_HTTPS_LOG_FMT     |    | X  |      |  X  |     |     |",
+        "  | HAPROXY_TCP_LOG_FMT       |    | X  |      |  X  |     |     |",
+        "  | HAPROXY_TCP_CLF_LOG_FMT   |    | X  |      |  X  |     |     |",
+        "  | HAPROXY_KEYLOG_FC_LOG_FMT |    | X  |      |  X  |     |     |",
+        "  | HAPROXY_KEYLOG_BC_LOG_FMT |    | X  |      |  X  |     |     |",
+        "  +---------------------------+----+----+------+-----+-----+-----+"
+      ],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 22,
+          "source_sha256": "18020897bc02f9e193e287bdba3bccc89eb49bfcdb38ee75c70f91cc42c975ac",
+          "target_sha256": "20731a43e6d2e796329319bc290b69bfa02faaa2311503385a75afd3e5335d36"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 28,
+      "classification": "mixed-explanation",
+      "source_sha256": "7dead05a0ea694c0e392a0601347cef7beb6d5ede0967e7718ac1d81cd42938c",
+      "target_sha256": "473a8af441156e1e377b1fde77e500d9ed995b681190ba1f27f5bb7ada7a2945",
+      "protected_literals": [
+        "\" 1\"",
+        "\"0\"",
+        "\"streq\"",
+        "\".if\""
+      ],
+      "protected_lines": [
+        "   .if streq(0, 1)",
+        "  |---|-----|-|--|"
+      ],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 28,
+          "source_sha256": "7dead05a0ea694c0e392a0601347cef7beb6d5ede0967e7718ac1d81cd42938c",
+          "target_sha256": "473a8af441156e1e377b1fde77e500d9ed995b681190ba1f27f5bb7ada7a2945"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    }
+  ],
+  "literal_blocks": [],
+  "indented_prose": [
+    {
+      "source_sha256": "a9a58bd32b4f879f76be0baeabca5e80904e1193ed87a73da8ab5c4e77426f27",
+      "target_sha256": "821d62a579c76e20e8b9acfe9394be3a922331686dd3d8b4b020613f48fb0e52",
+      "reason": "Explanatory warning about socketpair behavior on macOS, not command output.",
+      "protected_literals": [
+        "macOS",
+        "sendmsg(2)"
+      ],
+      "protected_lines": []
+    }
+  ],
+  "source_formatting_revalidation": {
+    "method": "Exact reviewed predecessor source/target SHA mapping and byte-for-byte literal-fence witnesses; only documented source errata and markup-only restoration accepted.",
+    "fences": [
+      {
+        "prior": {
+          "index": 1,
+          "source_sha256": "133f7a718d105906bd1bc4869b73669aaddfbbc3a10325ce7f33c0fd5040ca03",
+          "target_sha256": "00ac33eb21a36b5c5646fa9fc3d52a3deff235f1c868e8d63009f727678549b4"
+        },
+        "index": 1,
+        "source_sha256": "133f7a718d105906bd1bc4869b73669aaddfbbc3a10325ce7f33c0fd5040ca03",
+        "target_sha256": "00ac33eb21a36b5c5646fa9fc3d52a3deff235f1c868e8d63009f727678549b4",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 5,
+          "source_sha256": "b1bdea796fdee72f23d7c46fbb40871f7073485441b48f264f5c2d692ca8787c",
+          "target_sha256": "c384d29eb4e9c0f46041b76bfa2133a703218477344d9b539e23ce2a7da4ee03"
+        },
+        "index": 5,
+        "source_sha256": "b1bdea796fdee72f23d7c46fbb40871f7073485441b48f264f5c2d692ca8787c",
+        "target_sha256": "c384d29eb4e9c0f46041b76bfa2133a703218477344d9b539e23ce2a7da4ee03",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 6,
+          "source_sha256": "99752f707c160e16863f41751f6b6ddfa3c89b7a6bfb9f921b042e5290bed4dc",
+          "target_sha256": "5c78e7ec41d99d1199cd4f216a3d37d94f4d7b5dff875bb0dc1aa925dcf247a8"
+        },
+        "index": 6,
+        "source_sha256": "99752f707c160e16863f41751f6b6ddfa3c89b7a6bfb9f921b042e5290bed4dc",
+        "target_sha256": "5c78e7ec41d99d1199cd4f216a3d37d94f4d7b5dff875bb0dc1aa925dcf247a8",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 7,
+          "source_sha256": "700978f3bc89091272664539ba926a2c35d07a92acf087109462c74f5f413e54",
+          "target_sha256": "09bad25ace1db80d1893d528d4af52c61384e6d5e63dd87a72f025705f94c9b9"
+        },
+        "index": 7,
+        "source_sha256": "700978f3bc89091272664539ba926a2c35d07a92acf087109462c74f5f413e54",
+        "target_sha256": "09bad25ace1db80d1893d528d4af52c61384e6d5e63dd87a72f025705f94c9b9",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 8,
+          "source_sha256": "16c68cb5f06f56ae6f89f75f11723c312c4c80ce5a14d04a6620f4c6b171fe20",
+          "target_sha256": "f821b26eb0e8c6a8e5de7d59d7b1ae6aa05fbc52408da6638b6e4b15a383d16e"
+        },
+        "index": 8,
+        "source_sha256": "16c68cb5f06f56ae6f89f75f11723c312c4c80ce5a14d04a6620f4c6b171fe20",
+        "target_sha256": "f821b26eb0e8c6a8e5de7d59d7b1ae6aa05fbc52408da6638b6e4b15a383d16e",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 9,
+          "source_sha256": "b04a6dd66c7634f7659d8eba67e0e56ab3b596637888940d449f2a483f553a39",
+          "target_sha256": "31e7dcd0357a0918d8016c725162e7ba614be22958d3713b74965de1e9aeee5c"
+        },
+        "index": 9,
+        "source_sha256": "b04a6dd66c7634f7659d8eba67e0e56ab3b596637888940d449f2a483f553a39",
+        "target_sha256": "31e7dcd0357a0918d8016c725162e7ba614be22958d3713b74965de1e9aeee5c",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 14,
+          "source_sha256": "8d2274ba271726bb171cf179f0cff91ff37974322e6766b1af8bd846d7075f20",
+          "target_sha256": "0b4f91983c95294bf958f894fd89aae90261934aea51af20c83a905fe7443a84"
+        },
+        "index": 14,
+        "source_sha256": "8d2274ba271726bb171cf179f0cff91ff37974322e6766b1af8bd846d7075f20",
+        "target_sha256": "0b4f91983c95294bf958f894fd89aae90261934aea51af20c83a905fe7443a84",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 18,
+          "source_sha256": "98e4a9362a56bbe7e7b02eb18d243a2ff2fd430dbdb40e2f075dc05d08f3379a",
+          "target_sha256": "901cf77335dd90194c8cf801363554421926773f3b4c80ae76f35771c5f25200"
+        },
+        "index": 18,
+        "source_sha256": "98e4a9362a56bbe7e7b02eb18d243a2ff2fd430dbdb40e2f075dc05d08f3379a",
+        "target_sha256": "901cf77335dd90194c8cf801363554421926773f3b4c80ae76f35771c5f25200",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 22,
+          "source_sha256": "18020897bc02f9e193e287bdba3bccc89eb49bfcdb38ee75c70f91cc42c975ac",
+          "target_sha256": "20731a43e6d2e796329319bc290b69bfa02faaa2311503385a75afd3e5335d36"
+        },
+        "index": 22,
+        "source_sha256": "18020897bc02f9e193e287bdba3bccc89eb49bfcdb38ee75c70f91cc42c975ac",
+        "target_sha256": "20731a43e6d2e796329319bc290b69bfa02faaa2311503385a75afd3e5335d36",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 28,
+          "source_sha256": "7dead05a0ea694c0e392a0601347cef7beb6d5ede0967e7718ac1d81cd42938c",
+          "target_sha256": "473a8af441156e1e377b1fde77e500d9ed995b681190ba1f27f5bb7ada7a2945"
+        },
+        "index": 28,
+        "source_sha256": "7dead05a0ea694c0e392a0601347cef7beb6d5ede0967e7718ac1d81cd42938c",
+        "target_sha256": "473a8af441156e1e377b1fde77e500d9ed995b681190ba1f27f5bb7ada7a2945",
+        "reason": "unchanged exact reviewed English fence"
+      }
+    ],
+    "literal_blocks": [
+      {
+        "row": 1,
+        "action": "old unfenced-code protection replaced by default byte-for-byte fence protection",
+        "old_sha256": "59e4d3a5905f936e3ac2d7286f4c34982bfc24a220caa8d2fbdbda050a346546",
+        "source_snapshot": "/tmp/doc-pg-center-haproxy-review-20261013/baseline/content/docs/haproxy/configuration-basics.md",
+        "current_verbatim_fences": [
+          31
+        ]
+      },
+      {
+        "row": 2,
+        "action": "old unfenced-code protection replaced by default byte-for-byte fence protection",
+        "old_sha256": "869781616562acc897994729ec3c7b17a953da92310005e3aa407d26bceaf8c6",
+        "source_snapshot": "/tmp/doc-pg-center-haproxy-review-20261013/baseline/content/docs/haproxy/configuration-basics.md",
+        "current_verbatim_fences": [
+          32
+        ]
+      },
+      {
+        "row": 3,
+        "action": "old unfenced-code protection replaced by default byte-for-byte fence protection",
+        "old_sha256": "7a75e051a23a72b0ca1e517385938f28af56346f904bd89a452e4f98e2f141bb",
+        "source_snapshot": "/tmp/doc-pg-center-haproxy-review-20261013/baseline/content/docs/haproxy/configuration-basics.md",
+        "current_verbatim_fences": [
+          33
+        ]
+      },
+      {
+        "row": 4,
+        "action": "old unfenced-code protection replaced by default byte-for-byte fence protection",
+        "old_sha256": "fbc0dae5c223ac2732a6641838b7c7e54ded336d87fc25f61372e1465fe62746",
+        "source_snapshot": "/tmp/doc-pg-center-haproxy-review-20261013/baseline/content/docs/haproxy/configuration-basics.md",
+        "current_verbatim_fences": [
+          33
+        ]
+      },
+      {
+        "row": 5,
+        "action": "old unfenced-code protection replaced by default byte-for-byte fence protection",
+        "old_sha256": "7ea11864851ba5750255aaf2a114fdd4cac24183d8a1454405140cbde85c0274",
+        "source_snapshot": "/tmp/doc-pg-center-haproxy-review-20261013/baseline/content/docs/haproxy/configuration-basics.md",
+        "current_verbatim_fences": [
+          33
+        ]
+      },
+      {
+        "row": 6,
+        "action": "old unfenced-code protection replaced by default byte-for-byte fence protection",
+        "old_sha256": "a484eab243ea03f809cb6b110696a506a9a6f251a7aed3a5f1828c239e6dd553",
+        "source_snapshot": "/tmp/doc-pg-center-haproxy-review-20261013/baseline/content/docs/haproxy/configuration-basics.md",
+        "current_verbatim_fences": [
+          33
+        ]
+      },
+      {
+        "row": 7,
+        "action": "old unfenced-code protection replaced by default byte-for-byte fence protection",
+        "old_sha256": "2b9a78ab50191e3c11be0c94d32b744f9f935460f8cada2aebce9843744ed1d0",
+        "source_snapshot": "/tmp/doc-pg-center-haproxy-review-20261013/baseline/content/docs/haproxy/configuration-basics.md",
+        "current_verbatim_fences": [
+          33
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "source": "content/docs/pgbadger/releases/10.md",
+  "language": "fr",
+  "fences": [],
+  "literal_snippets": [
+    {
+      "text": "pgbadger -o out.html -o out.json /log/pgsql-11.log",
+      "classification": "command",
+      "source_sha256": "a1516057993248dddf345aafa45d40ce6377dffbd71f944a8d4d395af1f1b25b"
+    },
+    {
+      "text": "pgbadger -o out.txt -o out.html -o - -x json /log/pgsql-11.log",
+      "classification": "command",
+      "source_sha256": "f0ee49f790e83d38148356081c20bda937e8eded100da161aefffab386cd387c"
+    },
+    {
+      "text": "ssh://localhost/postgresql-10-main.log",
+      "classification": "command",
+      "source_sha256": "45e1d08e9488326b753db428ad4a3503e5fc26fc119b001f208c70e0de332a90"
+    },
+    {
+      "text": "http://localhost/postgresql-10-main.log.gz",
+      "classification": "command",
+      "source_sha256": "36e5f6c3e823a2dec5bd1e700a397eab7b811b3af5827259117b94942d995fdf"
+    },
+    {
+      "text": "ftp://localhost/postgresql-10-main.log",
+      "classification": "command",
+      "source_sha256": "047cafb442613b1a4d0c8b41bc8e0045860a29184857e87d43d5ba8ef7d0ec21"
+    },
+    {
+      "text": "http://localhost/postgresql-10-main.log:stderr",
+      "classification": "command",
+      "source_sha256": "89a48e39935f0469dabbbff70c768468e1de2635e541990977888b2c3706c4c9"
+    },
+    {
+      "text": "/usr/bin/pgbadger http://www.mydom.com/postgresql-10.log",
+      "classification": "command",
+      "source_sha256": "7f0cad91c916b1e8094b2d217dcf980693be093ffc2f1db738866dcaa24f9e23"
+    }
+  ]
+}

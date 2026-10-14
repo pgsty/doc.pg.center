@@ -1,0 +1,17 @@
+{
+  "source": "content/docs/pgbadger/releases/13.md",
+  "language": "de",
+  "fences": [],
+  "literal_snippets": [
+    {
+      "text": "0,1,5,10,25,50,100,500,1000,10000",
+      "classification": "command",
+      "source_sha256": "5ef8d5bad68e4adae12ef22051ffbbe954914dac59b351bb1f92f664efefe643"
+    },
+    {
+      "text": "0,500,1000,30000,60000,600000,1800000,3600000,28800000",
+      "classification": "command",
+      "source_sha256": "97ae2ba2d992e53eddb87929b3a606cb09897ef6dc295de068c146f8f90d2fec"
+    }
+  ]
+}

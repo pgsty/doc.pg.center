@@ -1,0 +1,42 @@
+{
+  "source": "content/docs/haproxy/management-architecture.md",
+  "language": "de",
+  "fences": [],
+  "literal_blocks": [
+    {
+      "lines": [
+        77,
+        79
+      ],
+      "classification": "program-output",
+      "source_sha256": "68c4752ecf9785a3548deb4bb87eada9553a43d4ea2ed5de3e98a6b11a421c10",
+      "revalidation_history": [
+        {
+          "lines": [
+            77,
+            79
+          ],
+          "start_column": 1,
+          "source_sha256": "68c4752ecf9785a3548deb4bb87eada9553a43d4ea2ed5de3e98a6b11a421c10"
+        }
+      ],
+      "revalidation": "Exact reviewed snippet and source/target occurrence counts retained; line/column positions changed."
+    }
+  ],
+  "source_formatting_revalidation": {
+    "method": "Exact reviewed predecessor source/target SHA mapping and byte-for-byte literal-fence witnesses; only documented source errata and markup-only restoration accepted.",
+    "fences": [],
+    "literal_blocks": [
+      {
+        "row": 1,
+        "action": "exact literal range rebased",
+        "source_sha256": "68c4752ecf9785a3548deb4bb87eada9553a43d4ea2ed5de3e98a6b11a421c10",
+        "lines": [
+          77,
+          79
+        ],
+        "start_column": 1
+      }
+    ]
+  }
+}

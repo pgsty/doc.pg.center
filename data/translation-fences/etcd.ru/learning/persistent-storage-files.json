@@ -1,0 +1,19 @@
+{
+  "source": "content/docs/etcd/learning/persistent-storage-files.md",
+  "language": "ru",
+  "fences": [],
+  "literal_snippets": [
+    {
+      "classification": "source-code",
+      "text": "<!-- TODO: etcdserver/api/snap/snapshotter.go:148 -->",
+      "source_sha256": "7b2d924cc666659bee71ee29a3bf84379c59878e5df20872e3afb3b1a8496c17",
+      "reason": "Upstream etcd-website developer note pointing at the source location (snapshotter.go load loop), imported inside the HTML storage table. It is not an unfinished Russian translation; the HTML-comment parity check requires it verbatim, so register it as protected source-code material."
+    },
+    {
+      "classification": "source-code",
+      "text": "<!-- TODO: etcdserver/server.go:428 -->",
+      "source_sha256": "fe653249d06c0f6deef12902b3c38f56d0e5dc85cf351a2f30a0457a6682889d",
+      "reason": "Upstream etcd-website developer note pointing at the source location (server.go startup path), imported inside the HTML storage table. It is not an unfinished Russian translation; the HTML-comment parity check requires it verbatim, so register it as protected source-code material."
+    }
+  ]
+}

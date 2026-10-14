@@ -780,9 +780,9 @@ Dies ist eine Wartungsversion mit einer Sicherheitskorrektur.
   * Cirrus CI wird jetzt statt Travis CI
     [verwendet](https://cirrus-ci.com/github/pgbouncer/pgbouncer).
   * Wie üblich wurden viele Tests hinzugefügt.
-  * Die Protokollmeldung `unclean server` etwas präzisiert. Sie lautet jetzt
-    `client disconnect while server was not ready` oder
-    `client disconnect before everything was sent to the server`. Erstere kann auftreten,
+  * Die Protokollmeldung "unclean server" etwas präzisiert. Sie lautet jetzt
+    "client disconnect while server was not ready" oder
+    "client disconnect before everything was sent to the server". Erstere kann auftreten,
     wenn die Clientverbindung geschlossen wird, während auf dem Server ein Transaktionsblock
     offen ist. Dies hatte einige Benutzer verwirrt.
   * "pgbouncer" kann nicht mehr als Datenbankname verwendet werden. Dieser Name ist für

@@ -53,7 +53,7 @@ def route(source):
 
 def normalize(value):
     parsed = urlsplit(value)
-    if parsed.netloc and parsed.netloc not in {'pig.center', 'www.pig.center'}:
+    if parsed.netloc and parsed.netloc not in {'doc.pg.center', 'www.doc.pg.center'}:
         return value
     path = re.sub(r'^/(?:zh|fr|ja|de|ru)(?=/(?:docs|search|attribution)(?:/|$))', '', parsed.path)
     return urlunsplit((parsed.scheme, parsed.netloc, path, parsed.query, parsed.fragment))
@@ -284,7 +284,7 @@ def rendered_errors(build, sources):
             front, body = P.split_front_matter(target.read_text())
             page = build / url.lstrip('/') / 'index.html'; pages.append(page)
             doc = P.RenderedContent(page); docs[node['id']] = doc; en = english[node['id']]
-            require(doc.canonical == ['https://pig.center' + url], url + ': canonical')
+            require(doc.canonical == ['https://doc.pg.center' + url], url + ': canonical')
             require(doc.html_languages == [locale], url + ': HTML language')
             require(([h for h, _ in doc.headings] == [h for h, _ in en.headings]) if language == 'zh' else doc.headings == en.headings, url + ': headings/anchors')
             require(doc.code == en.code, url + ': rendered code/output')
@@ -292,7 +292,7 @@ def rendered_errors(build, sources):
             require(doc.pager == [(direction, local + href) for direction, href in en.pager], url + ': pager order/locale')
             for other, other_locale in LANGUAGES.items():
                 alternate = ('' if other == 'en' else '/' + other) + node['id']
-                require(doc.alternates.get(other_locale) == 'https://pig.center' + alternate, url + ': alternate ' + other)
+                require(doc.alternates.get(other_locale) == 'https://doc.pg.center' + alternate, url + ': alternate ' + other)
                 if other != language: require(alternate in doc.languages, url + ': switch ' + other)
             markdown = (build / url.lstrip('/') / 'index.md').read_text()
             require(body.strip() in markdown, url + ': incomplete Markdown body')
@@ -301,7 +301,7 @@ def rendered_errors(build, sources):
             if node['id'] == PREFIX + 'configuration/':
                 for parameter in ('repo-retention-full', 'archive-push-queue-max', 'repo-s3-key'):
                     require(parameter in search.get(url, {}).get('headings', ''), url + ': searchable parameter ' + parameter)
-            require(node['url'] == 'https://pig.center' + url and node['markdown'] == node['url'] + 'index.md', url + ': navigation output URL')
+            require(node['url'] == 'https://doc.pg.center' + url and node['markdown'] == node['url'] + 'index.md', url + ': navigation output URL')
             for alias in P.front_aliases(front):
                 redirected = P.RenderedContent(build / (local + alias).lstrip('/') / 'index.html')
                 require(redirected.canonical == doc.canonical and redirected.refresh == doc.canonical, url + ': alias ' + alias)
@@ -322,7 +322,7 @@ def rendered_errors(build, sources):
                     translated[value] += count
                 require(links(sb, source) == translated, route(source) + ': Chinese link points to a different source section')
         llms = P.llms_entries((build / (local + PREFIX).lstrip('/') / 'llms-full.txt').read_text())
-        expected = [('https://pig.center' + local + n['id'] + 'index.md', (build / (local + n['id']).lstrip('/') / 'index.md').read_text().strip()) for n in nodes]
+        expected = [('https://doc.pg.center' + local + n['id'] + 'index.md', (build / (local + n['id']).lstrip('/') / 'index.md').read_text().strip()) for n in nodes]
         require(llms == expected, language + ': complete LLMS bodies/order')
         printing = build / local.lstrip('/') / '_print/docs/pgbackrest/index.html'; pages.append(printing)
         sections = P.content_sections(P.read_document(printing))

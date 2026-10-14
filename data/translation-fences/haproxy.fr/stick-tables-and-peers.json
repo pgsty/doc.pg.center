@@ -1,0 +1,73 @@
+{
+  "source": "content/docs/haproxy/stick-tables-and-peers.md",
+  "language": "fr",
+  "fences": [
+    {
+      "index": 7,
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"default-server\"",
+        "\"server\""
+      ],
+      "protected_lines": [],
+      "source_sha256": "1b782f1ec5f452bf08170a017d5e8bd541772b2aa8f93582a269599ff32acff7",
+      "target_sha256": "97d5eb37c286109834bc6b078de1345fc089e89bdb1b31e80f46aaeec1784921",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 12,
+      "classification": "mixed-explanation",
+      "protected_literals": [],
+      "protected_lines": [
+        " # The old way.",
+        " peers mypeers",
+        "     peer haproxy1 192.168.0.1:1024",
+        "     peer haproxy2 192.168.0.2:1024",
+        "     peer haproxy3 10.2.0.1:1024",
+        " backend mybackend",
+        "     mode tcp",
+        "     balance roundrobin",
+        "     stick-table type ip size 20k peers mypeers",
+        "     stick on src",
+        "     server srv1 192.168.0.30:80",
+        "     server srv2 192.168.0.31:80",
+        "  peers mypeers",
+        "     bind 192.168.0.1:1024 ssl crt mycerts/pem",
+        "     default-server ssl verify none",
+        "     server haproxy1 #local peer",
+        "     server haproxy2 192.168.0.2:1024",
+        "     server haproxy3 10.2.0.1:1024"
+      ],
+      "source_sha256": "9280a95628f3f157d72af2fdd2bdffa30c3765b145b8222ff2ecdda1ff70ffd1",
+      "target_sha256": "6d88e4ce800e5e305c14d7ff36b4efd71a0a8aa4e5735d4366761f5d90d1190f",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    }
+  ],
+  "literal_blocks": [
+    {
+      "lines": [
+        68,
+        70
+      ],
+      "classification": "configuration",
+      "source_sha256": "c828413aadeff957c8a399e6c657858b62d1de159e26160b65226661670fec99"
+    },
+    {
+      "lines": [
+        74,
+        75
+      ],
+      "classification": "configuration",
+      "source_sha256": "b12d04d2b456b3ef7e94bfc4a683ce370ab1c4a2b9fa690865fa99da2886b09d"
+    },
+    {
+      "lines": [
+        581,
+        582
+      ],
+      "classification": "configuration",
+      "source_sha256": "a0e4dd9962b516ad193cc74fec609657060edde2b31427900ab69d053fb66ac7"
+    }
+  ],
+  "literal_snippets": []
+}

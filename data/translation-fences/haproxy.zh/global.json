@@ -1,0 +1,252 @@
+{
+  "source": "content/docs/haproxy/global.md",
+  "language": "zh",
+  "fences": [
+    {
+      "index": 14,
+      "source_sha256": "5ebe304d39b85125c65222c78ad6a593ddf82ad9e76c8fb0a1ae077f87e31b6e",
+      "target_sha256": "4cc8dbc2266272505d1ef8b7729043a4a0aebcb95f16a7e087dabb2fe217761d",
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"infinite\""
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 14,
+          "source_sha256": "5ebe304d39b85125c65222c78ad6a593ddf82ad9e76c8fb0a1ae077f87e31b6e",
+          "target_sha256": "4cc8dbc2266272505d1ef8b7729043a4a0aebcb95f16a7e087dabb2fe217761d"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 38,
+      "source_sha256": "9596f03fed92cd26382b5a406bbbf0546f8085f2e643e6e7c980d86b1016ceec",
+      "target_sha256": "5a4c3e98ed1a6fe7cc2abcd3da284c23baa901f5c2f57fd65d94a686846631ca",
+      "classification": "argument-description",
+      "protected_literals": [],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 38,
+          "source_sha256": "9596f03fed92cd26382b5a406bbbf0546f8085f2e643e6e7c980d86b1016ceec",
+          "target_sha256": "5a4c3e98ed1a6fe7cc2abcd3da284c23baa901f5c2f57fd65d94a686846631ca"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 49,
+      "source_sha256": "96a91e99be666ea75ea11645e59bc9aa74af6b87865f444a00c00020c5c9ec00",
+      "target_sha256": "82da13525c0935de27b93d21621b18434828c05ac59cf1263bac3ca16a792423",
+      "classification": "argument-description",
+      "protected_literals": [],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 49,
+          "source_sha256": "96a91e99be666ea75ea11645e59bc9aa74af6b87865f444a00c00020c5c9ec00",
+          "target_sha256": "82da13525c0935de27b93d21621b18434828c05ac59cf1263bac3ca16a792423"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 201,
+      "source_sha256": "2bfefedb65e9df5a8d071e23ff46b9e75329b74cb3a90252db95081efae01af4",
+      "target_sha256": "7338773257f280e171af3ee4c2854222eaebd824b4046f4354417cd9c496c206",
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"auto\"",
+        "\"ignore\"",
+        "\"rq-load\"",
+        "\"tune.runqueue-depth\""
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 200,
+          "source_sha256": "2bfefedb65e9df5a8d071e23ff46b9e75329b74cb3a90252db95081efae01af4",
+          "target_sha256": "7338773257f280e171af3ee4c2854222eaebd824b4046f4354417cd9c496c206"
+        },
+        {
+          "index": 200,
+          "source_sha256": "2bfefedb65e9df5a8d071e23ff46b9e75329b74cb3a90252db95081efae01af4",
+          "target_sha256": "7338773257f280e171af3ee4c2854222eaebd824b4046f4354417cd9c496c206",
+          "reason": "3.4.6-66 source upgrade: unchanged exact bilingual explanation relocated by monotonic source-fence sequence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 202,
+      "source_sha256": "88276232f602b5177e1e994e123310db0e1a5ba2d90916cb706834c9fbcecc55",
+      "target_sha256": "27c52c28f25e67d562ac858822bebd405efaa042bea6f464492d112280b01c29",
+      "classification": "argument-description",
+      "protected_literals": [],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 201,
+          "source_sha256": "88276232f602b5177e1e994e123310db0e1a5ba2d90916cb706834c9fbcecc55",
+          "target_sha256": "27c52c28f25e67d562ac858822bebd405efaa042bea6f464492d112280b01c29"
+        },
+        {
+          "index": 201,
+          "source_sha256": "88276232f602b5177e1e994e123310db0e1a5ba2d90916cb706834c9fbcecc55",
+          "target_sha256": "27c52c28f25e67d562ac858822bebd405efaa042bea6f464492d112280b01c29",
+          "reason": "3.4.6-66 source upgrade: unchanged exact bilingual explanation relocated by monotonic source-fence sequence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 296,
+      "source_sha256": "18aa70fbef42ceaf67e6c2cb5468bcc804a822250dcf66ab219953ecc8ac6b70",
+      "target_sha256": "98d3c455f76acc984c492aa19799133d8d03a2146de9c356c64048c0b969439b",
+      "classification": "table-labels",
+      "protected_literals": [],
+      "protected_lines": [
+        "  --------------------------------|-----------------------------------------",
+        "  CLIENT_EARLY_TRAFFIC_SECRET     |  %[ssl_xx_client_early_traffic_secret]",
+        "  CLIENT_HANDSHAKE_TRAFFIC_SECRET |  %[ssl_xx_client_handshake_traffic_secret]",
+        "  SERVER_HANDSHAKE_TRAFFIC_SECRET |  %[ssl_xx_server_handshake_traffic_secret]",
+        "  CLIENT_TRAFFIC_SECRET_0         |  %[ssl_xx_client_traffic_secret_0]",
+        "  SERVER_TRAFFIC_SECRET_0         |  %[ssl_xx_server_traffic_secret_0]",
+        "  EXPORTER_SECRET                 |  %[ssl_xx_exporter_secret]",
+        "  EARLY_EXPORTER_SECRET           |  %[ssl_xx_early_exporter_secret]"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 295,
+          "source_sha256": "18aa70fbef42ceaf67e6c2cb5468bcc804a822250dcf66ab219953ecc8ac6b70",
+          "target_sha256": "98d3c455f76acc984c492aa19799133d8d03a2146de9c356c64048c0b969439b"
+        },
+        {
+          "index": 295,
+          "source_sha256": "18aa70fbef42ceaf67e6c2cb5468bcc804a822250dcf66ab219953ecc8ac6b70",
+          "target_sha256": "98d3c455f76acc984c492aa19799133d8d03a2146de9c356c64048c0b969439b",
+          "reason": "3.4.6-66 source upgrade: unchanged exact bilingual explanation relocated by monotonic source-fence sequence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 298,
+      "source_sha256": "f10156fccf95c60e896224ab009951a77e3b7cfaa4020ce0e09e8353d8f8f91e",
+      "target_sha256": "7e621d1e6dee5f4f98008aa951198247f3aae84d47810d12daca3d85ee854010",
+      "classification": "table-labels",
+      "protected_literals": [
+        "$HAPROXY_KEYLOG_BC_LOG_FMT",
+        "$HAPROXY_KEYLOG_FC_LOG_FMT"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 297,
+          "source_sha256": "f10156fccf95c60e896224ab009951a77e3b7cfaa4020ce0e09e8353d8f8f91e",
+          "target_sha256": "7e621d1e6dee5f4f98008aa951198247f3aae84d47810d12daca3d85ee854010"
+        },
+        {
+          "index": 297,
+          "source_sha256": "f10156fccf95c60e896224ab009951a77e3b7cfaa4020ce0e09e8353d8f8f91e",
+          "target_sha256": "7e621d1e6dee5f4f98008aa951198247f3aae84d47810d12daca3d85ee854010",
+          "reason": "3.4.6-66 source upgrade: unchanged exact bilingual explanation relocated by monotonic source-fence sequence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 324,
+      "source_sha256": "c94ad44e8315f3adaf305f57df114d0a511d3b68a43bdfba35f5f20c266af3e7",
+      "target_sha256": "b1cb5f57fbd9b23fae948aa6e3dcb7c3f24f94acf61fe5cd7501f3a59e4ff289",
+      "classification": "argument-description",
+      "protected_literals": [],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 323,
+          "source_sha256": "c94ad44e8315f3adaf305f57df114d0a511d3b68a43bdfba35f5f20c266af3e7",
+          "target_sha256": "b1cb5f57fbd9b23fae948aa6e3dcb7c3f24f94acf61fe5cd7501f3a59e4ff289"
+        },
+        {
+          "index": 323,
+          "source_sha256": "c94ad44e8315f3adaf305f57df114d0a511d3b68a43bdfba35f5f20c266af3e7",
+          "target_sha256": "b1cb5f57fbd9b23fae948aa6e3dcb7c3f24f94acf61fe5cd7501f3a59e4ff289",
+          "reason": "3.4.6-66 source upgrade: unchanged exact bilingual explanation relocated by monotonic source-fence sequence."
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    }
+  ],
+  "literal_blocks": [
+    {
+      "lines": [
+        1559,
+        1559
+      ],
+      "classification": "source-code",
+      "source_sha256": "9738765186b1d1881879e390e8a294d7002fdad22fbc7b87c5ed2d2eced44821",
+      "revalidation_history": [
+        {
+          "lines": [
+            1546,
+            1546
+          ],
+          "start_column": 1,
+          "source_sha256": "9738765186b1d1881879e390e8a294d7002fdad22fbc7b87c5ed2d2eced44821"
+        },
+        {
+          "lines": [
+            1546,
+            1546
+          ],
+          "start_column": 1,
+          "source_sha256": "9738765186b1d1881879e390e8a294d7002fdad22fbc7b87c5ed2d2eced44821",
+          "reason": "3.4.6-66 upgrade: exact witnessed unfenced code/output relocated without changes."
+        }
+      ],
+      "revalidation": "Exact reviewed snippet and source/target occurrence counts retained; line/column positions changed.",
+      "start_column": 1
+    }
+  ],
+  "literal_snippets": [
+    {
+      "text": "h1-accept-payload-with-any-method",
+      "classification": "configuration",
+      "source_sha256": "db65a660f07bbc43c55f259a9d0a76e81e4d221fa404bf270a80d8861c0ce279"
+    },
+    {
+      "text": "h1-do-not-close-on-insecure-transfer-encoding",
+      "classification": "configuration",
+      "source_sha256": "1ecbf778b7559e3c6ebc5b50cda24edb30439b681cc88bec42395a38b36f421d"
+    }
+  ],
+  "source_sha256": "8a5d2b06ee0043243d00173e0a767f90225117689fa65ca27d329b3d3feb649d",
+  "target_sha256": "5c26c53ee277bbf592b5215345073f7b90deb9b1d39933f824369175878fb0b9",
+  "review_scope": "Complete identified explanatory-fence inventory reviewed separately from structural/numeric technical screening and selective manual prose review. No claim of full independent sentence-by-sentence review of all prose.",
+  "literal_formatting_revalidation": {
+    "method": "Exact reviewed predecessor hashes and current source/target literal equality; remove obsolete protection only with proven default-protected exact fenced replacement.",
+    "events": [
+      {
+        "row": 1,
+        "action": "exact literal range rebased",
+        "source_sha256": "9738765186b1d1881879e390e8a294d7002fdad22fbc7b87c5ed2d2eced44821",
+        "lines": [
+          1546,
+          1546
+        ],
+        "start_column": 1
+      }
+    ]
+  }
+}

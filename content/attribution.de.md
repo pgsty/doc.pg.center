@@ -11,7 +11,7 @@ translation_notice: false
 outputs: [HTML, markdown]
 ---
 
-pig.center veröffentlicht Dokumentationen von sechs Upstream-Projekten erneut. Jede
+doc.pg.center veröffentlicht Dokumentationen von sechs Upstream-Projekten erneut. Jede
 Dokumentationsseite endet mit einer einzeiligen Quellenangabe. Sie nennt das
 Werk, auf dem die Seite basiert, dessen Urheberrechtsinhaber und Lizenz und
 verweist auf den zugehörigen Abschnitt dieser Seite.
@@ -21,12 +21,7 @@ Inhalte wann aus welcher festgeschriebenen Revision unter welcher Lizenz
 importiert wurden und wo der vollständige Upstream-Hinweis aufbewahrt wird.
 
 > [!NOTE]
-> Die deutsche Ausgabe enthält die vollständige pgBadger-Sammlung sowie bereits
-> übersetzte Seiten aus Patroni, PgBouncer, HAProxy und etcd. Für pgBackRest und
-> noch fehlende Einzelseiten führen die Links zur entsprechenden englischen Seite.
-
-> [!NOTE]
-> pig.center ist ein unabhängiges Dokumentationsprojekt der Community. Es ist mit
+> doc.pg.center ist ein unabhängiges Dokumentationsprojekt der Community. Es ist mit
 > keinem der unten aufgeführten Projekte und auch nicht mit der PostgreSQL Global
 > Development Group verbunden, wird von diesen nicht unterstützt und ist keine
 > offizielle Veröffentlichung dieser Organisationen.
@@ -36,10 +31,10 @@ importiert wurden und wo der vollständige Upstream-Hinweis aufbewahrt wird.
 | Komponente | Ursprungswerk | Festgeschriebener Stand | Lizenz | Hinterlegter Hinweis |
 |---|---|---|---|---|
 | [Patroni](/de/docs/patroni/) | [Patroni-Dokumentation](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/de/docs/pgbackrest/) | [pgBackRest-Dokumentation](https://pgbackrest.org/) | v2.59.3 (alle sechs Sprachen) | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/de/docs/pgbouncer/) | [PgBouncer-Dokumentation](https://www.pgbouncer.org/) | v1.26.0 (alle sechs Sprachen) | [ISC](https://opensource.org/license/isc-license-txt) | [Upstream `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
+| [pgBackRest](/de/docs/pgbackrest/) | [pgBackRest-Dokumentation](https://pgbackrest.org/) | v2.59.3 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [PgBouncer](/de/docs/pgbouncer/) | [PgBouncer-Dokumentation](https://www.pgbouncer.org/) | v1.26.0 | [ISC](https://opensource.org/license/isc-license-txt) | [Upstream `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/de/docs/pgbadger/) | [pgBadger-Dokumentation](https://pgbadger.darold.net/) | v13.2, Commit `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/de/docs/haproxy/) | [HAProxy-3.4-Handbücher](https://docs.haproxy.org/3.4/) | v3.4.4, Commit `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [HAProxy](/de/docs/haproxy/) | [HAProxy-3.4-Handbücher](https://docs.haproxy.org/3.4/) | Dokumentationsstand 3.4.6-66, Commit `16acce1`; stabile Version v3.4.6 | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/de/docs/etcd/) | [etcd-v3.7-Dokumentation](https://etcd.io/docs/v3.7/) | v3.7, Commit `d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Upstream `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 Jede Sammlung ist **bearbeitet**, nicht gespiegelt. Überschriften, Anker,
@@ -51,8 +46,7 @@ dieser Website für die gerade gelesene Seite.
 ## Patroni {#patroni}
 
 Am 2026-08-15 aus der [Patroni-Dokumentation](https://patroni.readthedocs.io/en/latest/)
-für **v4.1.5** importiert; parallel dazu wurde eine vereinfachte chinesische
-Übersetzung erstellt.
+für **v4.1.5** importiert.
 
 Copyright (c) 2025 für Patroni: Compose, Zalando SE und Patroni Contributors.
 Patroni wird unter der [MIT License](https://opensource.org/license/mit)
@@ -62,10 +56,8 @@ aufbewahrt.
 
 ## pgBackRest {#pgbackrest}
 
-Am 2026-08-15 von der [pgBackRest-Dokumentationswebsite](https://pgbackrest.org/) importiert.
-Die englische und die vereinfachte chinesische Ausgabe wurden am 2026-10-04 auf **v2.59.2** aktualisiert.
-Stand 2026-10-13 entsprechen alle sechs Sprachausgaben dem Stand **v2.59.3**. Die Prüfung vor der Veröffentlichung korrigiert veraltete Hinweise zur Backup-Auswahl bei PITR sowie einen abgeschnittenen historischen Warnhinweis anhand der Implementierung und der XML-Quelle der entsprechenden Upstream-Version; siehe `data/translation-audits/pgbackrest.json`.
-Eine deutsche pgBackRest-Ausgabe liegt derzeit noch nicht vor.
+Am 2026-08-15 von der [pgBackRest-Dokumentationswebsite](https://pgbackrest.org/) importiert
+und am 2026-10-13 auf **v2.59.3** aktualisiert.
 
 Copyright (c) 2015-2026 für pgBackRest: The PostgreSQL Global Development Group
 und David Steele. pgBackRest wird unter der
@@ -76,22 +68,9 @@ aufbewahrt.
 
 ## PgBouncer {#pgbouncer}
 
-Am 2026-08-15 aus der
-[PgBouncer-Dokumentationswebsite](https://www.pgbouncer.org/) für **v1.25.2**
-importiert; parallel dazu wurde eine vereinfachte chinesische Übersetzung
-erstellt.
-
-Die englische und die vereinfachte chinesische Ausgabe wurden am 2026-10-04 auf
-[**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0)
-aktualisiert. Als Grundlage dienten die redaktionell geprüften Handbücher von
-`pigsty.io` beziehungsweise `pigsty.cc`.
-
-Am 2026-10-13 wurden alle sechs Sprachausgaben mit dem aktuellen englischen
-Handbuch für **v1.26.0** synchronisiert. Die Referenzbeschreibungen wurden mit
-der Implementierung dieser Version abgeglichen. Lokale Korrekturen beheben
-Sach-, Rechtschreib- und Grammatikfehler der Upstream-Dokumentation. Die
-ursprünglichen Diagnosemeldungen bleiben unverändert erhalten, und jede
-Übersetzung wurde Seite für Seite geprüft.
+Am 2026-08-15 von der [PgBouncer-Dokumentationswebsite](https://www.pgbouncer.org/)
+für **v1.25.2** importiert und am 2026-10-13 auf
+[**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0) aktualisiert.
 
 Copyright (c) 2007-2009 für PgBouncer: Marko Kreen und Skype Technologies OÜ.
 PgBouncer wird unter der
@@ -125,11 +104,14 @@ Site-Repository unter `sources/pgbadger/upstream/LICENSE` aufbewahrt.
 
 ## HAProxy {#haproxy}
 
-Am 2026-08-16 aus dem offiziellen Wartungsrepository von HAProxy 3.4 importiert
-und am 2026-08-30 aktualisiert: Tag `v3.4.4`, Commit
-[`7f03ae65c286`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=7f03ae65c28605152c7a1a9ba7d9d0bcfb50f8b0).
-Der englische Text basiert auf den vollständigen Handbüchern `doc/intro.txt`,
-`doc/configuration.txt` und `doc/management.txt` mit insgesamt 40,128 Zeilen,
+Am 2026-08-16 importiert, am 2026-08-30 aktualisiert und am 2026-10-13 auf den
+offiziellen englischen Dokumentationsstand `3.4.6-66` des
+HAProxy-3.4-Wartungszweigs aktualisiert, Commit
+[`16acce1dac1d`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=16acce1dac1dcf1ad5d654204af3a5d45d0e3de8).
+Die neueste stabile Version ist `3.4.6` (Tag `v3.4.6`); der Dokumentationsstand
+enthält Änderungen am Wartungszweig, die nach dieser Version vorgenommen wurden.
+Der englische Text stammt aus den vollständigen Handbüchern `doc/intro.txt`,
+`doc/configuration.txt` und `doc/management.txt` mit insgesamt 40,216 Zeilen,
 die in 34 Leseseiten neu gegliedert wurden.
 
 Copyright 2000-2026 für HAProxy: Willy Tarreau. HAProxy wird unter der
@@ -160,10 +142,7 @@ aufbewahrt.
 
 ## Diese Website {#site}
 
-Die eigens für pig.center verfassten Texte — Orientierungsseiten, die vollständigen
-chinesischen und französischen Ausgaben, die bereits veröffentlichten japanischen,
-deutschen und russischen Übersetzungen, redaktionelle Hinweise und die lokalisierten
-Startseiten — werden unter
+Die eigens für doc.pg.center verfassten Texte werden unter
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) veröffentlicht, sofern
 für eine Seite nicht stattdessen eine oben genannte Upstream-Lizenz gilt.
 
@@ -183,4 +162,4 @@ lizenzierten Hugo-Theme. Die Modulquellen enthalten eigene Hinweise zum
 Upstream-Projekt und zu gebündelten Abhängigkeiten.
 
 Korrekturen an den Quellenangaben auf dieser Seite sind über das
-[Repository der Website](https://github.com/pgsty/pig.center/issues) willkommen.
+[Repository der Website](https://github.com/pgsty/doc.pg.center/issues) willkommen.

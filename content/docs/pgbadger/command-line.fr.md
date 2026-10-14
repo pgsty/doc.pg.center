@@ -3,6 +3,8 @@ title: "Référence en ligne de commande"
 linkTitle: "Ligne de commande"
 weight: 30
 description: "Syntaxe complète de la commande pgBadger, options, entrée distante, codes de retour et exemples"
+search_keywords: [--Jobs, --anonymize, --appname, --average, --begin, --charset, --command, --csv-separator, --day-report, --dbclient, --dbname, --dbuser, --disable-autovacuum, --disable-checkpoint, --disable-connection, --disable-error, --disable-hourly, --disable-lock, --disable-query, --disable-session, --disable-temporary, --disable-type, --dns-resolv, --dump-all-queries, --dump-raw-csv, --enable-checksum, --end, --exclude-appname, --exclude-client, --exclude-db, --exclude-file, --exclude-line, --exclude-query, --exclude-time, --exclude-user, --explain-url, --explode, --extension, --extra-files, --format, --help, --histo-average, --histogram-query, --histogram-session, --html-outdir, --ident, --include-file, --include-pid, --include-query, --include-session, --include-time, --incremental, --iso-week-number, --jobs, --journalctl, --keep-comments, --last-parsed, --log-duration, --log-timezone, --logfile-list, --maxlength, --month-report, --no-fork, --no-multiline, --no-prettify, --no-process-info, --no-progressbar, --no-week, --nocomment, --noexplain, --nograph, --noreport, --normalized-only, --outdir, --outfile, --pgbouncer-only, --pid-dir, --pid-file, --pie-limit, --prefix, --prettify-json, --query-numbering, --quiet, --rebuild, --remote-host, --retention, --sample, --select-only, --ssh-identity, --ssh-option, --ssh-port, --ssh-program, --ssh-sudo, --ssh-timeout, --ssh-user, --start-monday, --tempdir, --timezone, --title, --top, --verbose, --version, --watch-mode, --wide-char, --zcat, JSON::XS, Jobs, all, anonymize, appname, autovacuum, average, begin, char, charset, checkpoint, checksum, client, command, comments, connection, csv, csv-separator, csvlog, day, day-report, db, dbclient, dbname, dbuser, dir, disable, disable-autovacuum, disable-checkpoint, disable-connection, disable-error, disable-hourly, disable-lock, disable-query, disable-session, disable-temporary, disable-type, dns, dns-resolv, dump, dump-all-queries, dump-raw-csv, duration, enable, enable-checksum, end, error, exclude, exclude-appname, exclude-client, exclude-db, exclude-file, exclude-line, exclude-query, exclude-time, exclude-user, explain, explain-url, explode, extension, extra, extra-files, file, files, fork, format, help, histo, histo-average, histogram, histogram-query, histogram-session, host, hourly, html, html-outdir, ident, identity, include, include-file, include-pid, include-query, include-session, include-time, incremental, info, iso, iso-week-number, jobs, journalctl, json, jsonlog, keep, keep-comments, last, last-parsed, limit, line, list, lock, log, log-duration, log-timezone, log_duration, log_line_prefix, log_statement, logfile, logfile-list, logplex, maxlength, mode, monday, month, month-report, multiline, no, no-fork, no-multiline, no-prettify, no-process-info, no-progressbar, no-week, nocomment, noexplain, nograph, noreport, normalized, normalized-only, number, numbering, only, option, outdir, outfile, parsed, pgbouncer, pgbouncer-only, pid, pid-dir, pid-file, pie, pie-limit, port, prefix, prettify, prettify-json, process, program, progressbar, queries, query, query-numbering, quiet, raw, rebuild, redshift, remote, remote-host, report, resolv, retention, sample, select, select-only, separator, session, ssh, ssh-identity, ssh-option, ssh-port, ssh-program, ssh-sudo, ssh-timeout, ssh-user, start, start-monday, stderr, sudo, syslog, tempdir, temporary, time, timeout, timezone, title, top, type, url, user, verbose, version, watch, watch-mode, week, wide, wide-char, zcat]
+search_boost: 8
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [Référence]
@@ -11,257 +13,258 @@ upstream_link: "https://github.com/darold/pgbadger/tree/a1ad95a035a0c2d246fe632e
 upstream_name: "pgBadger README.md"
 ---
 
-Cette page conserve la référence de commande générée à partir de la source verrouillée du projet amont. Les noms d'option et le texte d'aide restent tels quels afin de pouvoir être comparés directement avec `pgbadger --help`.
-
 ## Utilisation et options {#usage-and-options}
 
 Utilisation : pgbadger [options] logfile [...]
 
 ```text
-PostgreSQL log analyzer with fully detailed reports and graphs.
+Analyseur de journaux PostgreSQL avec rapports et graphiques détaillés.
 ```
 
 Arguments :
 
 ```text
-logfile can be a single log file, a list of files, or a shell command
-returning a list of files. If you want to pass log content from stdin
-use - as filename. Note that input from stdin will not work with csvlog.
+logfile peut désigner un fichier journal, une liste de fichiers ou une commande
+shell qui renvoie une liste de fichiers. Pour lire le contenu sur stdin,
+utilisez - comme nom de fichier. L’entrée sur stdin ne fonctionne pas avec csvlog.
 ```
 
 Options :
 
 ```text
--a | --average minutes : number of minutes to build the average graphs of
-                         queries and connections. Default 5 minutes.
--A | --histo-average min: number of minutes to build the histogram graphs
-                         of queries. Default 60 minutes.
--b | --begin datetime  : start date/time for the data to be parsed in log
-                         (either a timestamp or a time)
--c | --dbclient host   : only report on entries for the given client host.
--C | --nocomment       : remove comments like /* ... */ from queries.
--d | --dbname database : only report on entries for the given database.
--D | --dns-resolv      : client ip addresses are replaced by their DNS name.
-                         Be warned that this can really slow down pgBadger.
--e | --end datetime    : end date/time for the data to be parsed in log
-                         (either a timestamp or a time)
--E | --explode         : explode the main report by generating one report
-                         per database. Global information not related to a
-                         database is added to the postgres database report.
--f | --format logtype  : possible values: syslog, syslog2, stderr, jsonlog,
-                         csv, pgbouncer, logplex, rds and redshift. Use this
-                         option when pgBadger is not able to detect the log
-                         format.
--G | --nograph         : disable graphs on HTML output. Enabled by default.
--h | --help            : show this message and exit.
--H | --html-outdir path: path to directory where HTML report must be written
-                         in incremental mode, binary files stay on directory
-                         defined with -O, --outdir option.
--i | --ident name      : programname used as syslog ident. Default: postgres
--I | --incremental     : use incremental mode, reports will be generated by
-                         days in a separate directory, --outdir must be set.
--j | --jobs number     : number of jobs to run at same time for a single log
-                         file. Run as single by default or when working with
-                         csvlog format.
--J | --Jobs number     : number of log files to parse in parallel. Process
-                         one file at a time by default.
--l | --last-parsed file: allow incremental log parsing by registering the
-                         last datetime and line parsed. Useful if you want
-                         to watch errors since last run or if you want one
-                         report per day with a log rotated each week.
--L | --logfile-list file:file containing a list of log files to parse.
--m | --maxlength size  : maximum length of a query, it will be restricted to
-                         the given size. Default truncate size is 100000.
--M | --no-multiline    : do not collect multiline statements to avoid garbage
-                         especially on errors that generate a huge report.
--N | --appname name    : only report on entries for given application name
--o | --outfile filename: define the filename for the output. Default depends
-                         on the output format: out.html, out.txt, out.bin,
-                         or out.json. This option can be used multiple times
-                         to output several formats. To use json output, the
-                         Perl module JSON::XS must be installed, to dump
-                         output to stdout, use - as filename.
--O | --outdir path     : directory where out files must be saved.
--p | --prefix string   : the value of your custom log_line_prefix as
-                         defined in your postgresql.conf. Only use it if you
-                         aren't using one of the standard prefixes specified
-                         in the pgBadger documentation, such as if your
-                         prefix includes additional variables like client IP
-                         or application name. MUST contain escape sequences
-                         for time (%t, %m or %n) and processes (%p or %c).
-                         See examples below.
--P | --no-prettify     : disable SQL queries prettify formatter.
--q | --quiet           : don't print anything to stdout, not even a progress
-                         bar.
--Q | --query-numbering : add numbering of queries to the output when using
-                         options --dump-all-queries or --normalized-only.
--r | --remote-host ip  : set the host where to execute the cat command on
-                         remote log file to parse the file locally.
--R | --retention N     : number of weeks to keep in incremental mode. Defaults
-                         to 0, disabled. Used to set the number of weeks to
-                         keep in output directory. Older weeks and days
-                         directories are automatically removed.
--s | --sample number   : number of query samples to store. Default: 3.
--S | --select-only     : only report SELECT queries.
--t | --top number      : number of queries to store/display. Default: 20.
--T | --title string    : change title of the HTML page report.
--u | --dbuser username : only report on entries for the given user.
--U | --exclude-user username : exclude entries for the specified user from
-                         report. Can be used multiple time.
--v | --verbose         : enable verbose or debug mode. Disabled by default.
--V | --version         : show pgBadger version and exit.
--w | --watch-mode      : only report errors just like logwatch could do.
--W | --wide-char       : encode html output of queries into UTF8 to avoid
-                         Perl message "Wide character in print".
--x | --extension       : output format. Values: text, html, bin or json.
-                         Default: html
--X | --extra-files     : in incremental mode allow pgBadger to write CSS and
-                         JS files in the output directory as separate files.
--z | --zcat exec_path  : set the full path to the zcat program. Use it if
-                         zcat, bzcat or unzip is not in your path.
--Z | --timezone +/-XX  : Set the number of hours from GMT of the timezone.
-                         Use this to adjust date/time in JavaScript graphs.
-                         The value can be an integer, ex.: 2, or a float,
-                         ex.: 2.5.
---anonymize            : obscure all literals in queries, useful to hide
---charset              : used to set the HTML charset to be used.
-                         Default: utf-8.
---command CMD          : command to execute to retrieve log entries on
-                         stdin. pgBadger will open a pipe to the command
-                         and parse log entries generated by the command.
---csv-separator        : used to set the CSV field separator, default: ,
---day-report YYYY-MM-DD: create an HTML report over the specified day.
-                         Requires incremental output directories and the
-                         presence of all necessary binary data files
---disable-autovacuum   : do not generate autovacuum report.
-                         confidential data.
---disable-checkpoint   : do not generate checkpoint/restartpoint report.
---disable-connection   : do not generate connection report.
---disable-error        : do not generate error report.
---disable-hourly       : do not generate hourly report.
---disable-lock         : do not generate lock report.
---disable-query        : do not generate query reports (slowest, most
-                         frequent, queries by users, by database, ...).
---disable-session      : do not generate session report.
---disable-temporary    : do not generate temporary report.
---disable-type         : do not generate report of queries by type, database
-                         or user.
---dump-all-queries     : dump all queries found in the log file replacing
-                         bind parameters included in the queries at their
-                         respective placeholders positions.
---dump-raw-csv         : parse the log and dump the information into CSV
-                         format. No further processing is done, no report.
---enable-checksum      : used to add an md5 sum under each query report.
---exclude-appname name : exclude entries for the specified application name
-                         from report.  Example: "pg_dump".  Can be used
-                         multiple times.
---exclude-client name  : exclude log entries for the specified client ip.
-                         Can be used multiple times.
---exclude-db name      : exclude entries for the specified database from
-                         report. Example: "postgres". Can be used multiple
-                         times.
---exclude-file filename: path of the file that contains each regex to use
-                         to exclude queries from the report. One regex per
-                         line.
---exclude-line regex   : exclude any log entry that will match the given
-                         regex. Can be used multiple times.
---exclude-query regex  : any query matching the given regex will be excluded
-                         from the report. For example: "^(VACUUM|COMMIT)"
-                         You can use this option multiple times.
---exclude-time  regex  : any timestamp matching the given regex will be
-                         excluded from the report. Example: "2013-04-12 .*"
-                         You can use this option multiple times.
---explain-url URL      : use it to override the url of the graphical explain
-                         tool. Default: https://explain.depesz.com/
---histogram-query VAL  : use custom inbound for query times histogram.
-                        Default inbound in milliseconds:
-                     0,1,5,10,25,50,100,500,1000,10000
---histogram-session VAL: use custom inbound for session times histogram.
-                        Default inbound in milliseconds:
-                     0,500,1000,30000,60000,600000,1800000,3600000,28800000
---include-file filename: path of the file that contains each regex to the
-                         queries to include from the report. One regex per
-                         line.
---include-query regex  : any query that does not match the given regex will
-                         be excluded from the report. You can use this
-                         option multiple times. For example: "(tbl1|tbl2)".
---include-pid PID      : only report events related to the session pid (%p).
-                         Can be used multiple time.
---include-session ID   : only report events related to the session id (%c).
-                         Can be used multiple time.
---include-time  regex  : only timestamps matching the given regex will be
-                         included in the report. Example: "2013-04-12 .*"
-                         You can use this option multiple times.
---iso-week-number      : in incremental mode, calendar weeks start on
-                         Monday and respect the ISO 8601 week number, range
-                         01 to 53, where week 1 is the first week that has
-                         at least 4 days in the new year.
---keep-comments        : do not remove comments from normalized queries. It
-                         can be useful if you want to distinguish between
-                         same normalized queries.
---journalctl command   : command to use to replace PostgreSQL logfile by
-                         a call to journalctl. Basically it might be:
-                            journalctl -u postgresql-9.5
---log-duration         : force pgBadger to associate log entries generated
-                         by both log_duration = on and log_statement = 'all'
---log-timezone +/-XX   : Set the number of hours from GMT of the timezone
-                         that must be used to adjust date/time read from
-                         log file before beeing parsed. Using this option
-                         makes log search with a date/time more difficult.
-                         The value can be an integer, ex.: 2, or a float,
-                         ex.: 2.5.
---month-report YYYY-MM : create a cumulative HTML report over the specified
-                         month. Requires incremental output directories and
-                         the presence of all necessary binary data files
---noexplain            : do not process lines generated by auto_explain.
---no-fork              : do not fork any process, for debugging purpose.
---no-process-info      : disable changing process title to help identify
-                         pgbadger process, some system do not support it.
---no-progressbar       : disable progressbar.
---noreport             : no reports will be created in incremental mode.
---no-week              : inform pgbadger to not build weekly reports in
-                         incremental mode. Useful if it takes too much time.
---normalized-only      : only dump all normalized queries to out.txt
---pgbouncer-only       : only show PgBouncer-related menus in the header.
---pid-dir path         : set the path where the pid file must be stored.
-                         Default /tmp
---pid-file file        : set the name of the pid file to manage concurrent
-                         execution of pgBadger. Default: pgbadger.pid
---pie-limit num        : pie data lower than num% will show a sum instead.
---prettify-json        : use it if you want json output to be prettified.
---rebuild              : used to rebuild all html reports in incremental
-                         output directories where there's binary data files.
---start-monday         : in incremental mode, calendar weeks start on
-                         Sunday. Use this option to start on a Monday.
---tempdir DIR          : set directory where temporary files will be written
-                         Default: File::Spec->tmpdir() || '/tmp'
+-a | --average minutes : nombre de minutes par intervalle des graphiques de
+                         moyenne des requêtes et des connexions. Valeur par défaut : 5 minutes.
+-A | --histo-average min: nombre de minutes par intervalle des histogrammes
+                         de requêtes. Valeur par défaut : 60 minutes.
+-b | --begin datetime  : date/heure de début des données à analyser dans le
+                         journal (horodatage ou heure).
+-c | --dbclient host   : ne rapporter que les entrées de l’hôte client
+                         indiqué.
+-C | --nocomment       : supprimer des requêtes les commentaires tels que
+                         /* ... */.
+-d | --dbname database : ne rapporter que les entrées de la base de données
+                         indiquée.
+-D | --dns-resolv      : remplacer les adresses IP clientes par leur nom
+                         DNS. Attention, cela peut fortement ralentir pgBadger.
+-e | --end datetime    : date/heure de fin des données à analyser dans le
+                         journal (horodatage ou heure).
+-E | --explode         : scinder le rapport principal en un rapport par base
+                         de données. Les informations globales sans lien avec une base de données
+                         sont ajoutées au rapport de la base postgres.
+-f | --format logtype  : valeurs possibles : syslog, syslog2, stderr,
+                         jsonlog, csv, pgbouncer, logplex, rds et redshift. À utiliser si pgBadger
+                         ne détecte pas le format du journal.
+-G | --nograph         : désactiver les graphiques dans la sortie HTML. Les
+                         graphiques sont activés par défaut.
+-h | --help            : afficher cette aide puis quitter.
+-H | --html-outdir path: répertoire des rapports HTML en mode incrémentiel.
+                         Les fichiers binaires restent dans le répertoire défini par -O, --outdir.
+-i | --ident name      : nom du programme utilisé comme identifiant syslog.
+                         Valeur par défaut : postgres.
+-I | --incremental     : activer le mode incrémentiel ; les rapports
+                         quotidiens sont générés dans des répertoires séparés. --outdir doit être
+                         défini.
+-j | --jobs number     : nombre de tâches simultanées pour un seul fichier
+                         journal. Une seule tâche par défaut ou avec le format csvlog.
+-J | --Jobs number     : nombre de fichiers journaux à analyser en
+                         parallèle. Un seul fichier à la fois par défaut.
+-l | --last-parsed file: permettre l’analyse incrémentielle en enregistrant
+                         la dernière date/heure et la dernière ligne analysées. Utile pour examiner
+                         les erreurs depuis la dernière exécution ou produire un rapport quotidien
+                         sur un journal à rotation hebdomadaire.
+-L | --logfile-list file: fichier contenant la liste des journaux à
+                         analyser.
+-m | --maxlength size  : longueur maximale d’une requête ; les requêtes plus
+                         longues sont tronquées. Valeur par défaut : 100000.
+-M | --no-multiline    : ne pas collecter les instructions multilignes afin
+                         d’éviter du contenu parasite, notamment les erreurs qui produisent un
+                         rapport énorme.
+-N | --appname name    : ne rapporter que les entrées de l’application
+                         indiquée.
+-o | --outfile filename: nom du fichier de sortie. Selon le format :
+                         out.html, out.txt, out.bin ou out.json par défaut. Peut être répété pour
+                         produire plusieurs formats. JSON nécessite le module Perl JSON::XS.
+                         Utiliser - comme nom de fichier pour écrire sur stdout.
+-O | --outdir path     : répertoire où enregistrer les fichiers de sortie.
+-p | --prefix string   : valeur exacte de log_line_prefix dans
+                         postgresql.conf. À utiliser uniquement si le préfixe diffère des formes
+                         standard documentées, par exemple avec des champs supplémentaires d’IP
+                         cliente ou d’application. DOIT contenir les séquences temporelles (%t, %m
+                         ou %n) et de processus (%p ou %c). Voir les exemples ci-dessous.
+-P | --no-prettify     : désactiver la mise en forme des requêtes SQL.
+-q | --quiet           : ne rien écrire sur stdout, pas même une barre de
+                         progression.
+-Q | --query-numbering : numéroter les requêtes avec --dump-all-queries ou
+                         --normalized-only.
+-r | --remote-host ip  : hôte où exécuter cat sur le journal distant afin de
+                         l’analyser localement.
+-R | --retention N     : nombre de semaines à conserver en mode
+                         incrémentiel. Valeur par défaut : 0, désactivé. Les anciens répertoires de
+                         semaines et de jours sont supprimés automatiquement du répertoire de
+                         sortie.
+-s | --sample number   : nombre d’exemples de requêtes à conserver. Valeur
+                         par défaut : 3.
+-S | --select-only     : ne rapporter que les requêtes SELECT.
+-t | --top number      : nombre de requêtes à conserver/afficher. Valeur par
+                         défaut : 20.
+-T | --title string    : modifier le titre de la page HTML du rapport.
+-u | --dbuser username : ne rapporter que les entrées de l’utilisateur
+                         indiqué.
+-U | --exclude-user username : exclure du rapport les entrées de
+                         l’utilisateur indiqué. Peut être répété.
+-v | --verbose         : activer le mode détaillé ou de débogage. Désactivé
+                         par défaut.
+-V | --version         : afficher la version de pgBadger puis quitter.
+-w | --watch-mode      : ne rapporter que les erreurs, comme logwatch.
+-W | --wide-char       : encoder les requêtes de la sortie HTML en UTF8 pour
+                         éviter le message Perl "Wide character in print".
+-x | --extension       : format de sortie : text, html, bin ou json. Valeur
+                         par défaut : html.
+-X | --extra-files     : en mode incrémentiel, écrire CSS et JS dans des
+                         fichiers séparés du répertoire de sortie.
+-z | --zcat exec_path  : chemin complet du programme zcat. À utiliser si
+                         zcat, bzcat ou unzip n’est pas dans votre PATH.
+-Z | --timezone +/-XX  : décalage horaire par rapport à GMT pour ajuster les
+                         dates/heures des graphiques JavaScript. Entier, par exemple 2, ou nombre
+                         décimal, par exemple 2.5.
+--anonymize            : masquer tous les littéraux des requêtes afin de
+                         cacher les données confidentielles.
+--charset              : jeu de caractères HTML à utiliser. Valeur par
+                         défaut : utf-8.
+--command CMD          : commande qui fournit les entrées de journal sur
+                         stdin. pgBadger ouvre un tube vers cette commande et analyse les entrées
+                         qu’elle produit.
+--csv-separator        : séparateur de champs CSV. Valeur par défaut : ,
+--day-report YYYY-MM-DD: générer un rapport HTML pour le jour indiqué.
+                         Nécessite les répertoires de sortie incrémentielle et tous les fichiers de
+                         données binaires requis.
+--disable-autovacuum   : ne pas générer le rapport d’autovacuum.
+--disable-checkpoint   : ne pas générer le rapport de
+                         checkpoint/restartpoint.
+--disable-connection   : ne pas générer le rapport de connexions.
+--disable-error        : ne pas générer le rapport d’erreurs.
+--disable-hourly       : ne pas générer le rapport horaire.
+--disable-lock         : ne pas générer le rapport de verrous.
+--disable-query        : ne pas générer les rapports de requêtes (les plus
+                         lentes, les plus fréquentes, par utilisateur, par base de données, etc.).
+--disable-session      : ne pas générer le rapport de sessions.
+--disable-temporary    : ne pas générer le rapport de fichiers temporaires.
+--disable-type         : ne pas générer le rapport des requêtes par type,
+                         base de données ou utilisateur.
+--dump-all-queries     : émettre toutes les requêtes du journal après avoir
+                         remplacé les paramètres liés à leur position respective.
+--dump-raw-csv         : analyser le journal et exporter les informations au
+                         format CSV. Aucun autre traitement ni rapport.
+--enable-checksum      : ajouter une somme md5 sous chaque rapport de
+                         requête.
+--exclude-appname name : exclure du rapport les entrées de l’application
+                         indiquée, par exemple "pg_dump". Peut être répété.
+--exclude-client name  : exclure les entrées de l’adresse IP cliente
+                         indiquée. Peut être répété.
+--exclude-db name      : exclure du rapport les entrées de la base de
+                         données indiquée, par exemple "postgres". Peut être répété.
+--exclude-file filename: fichier contenant les expressions régulières des
+                         requêtes à exclure du rapport. Une expression par ligne.
+--exclude-line regex   : exclure les entrées de journal correspondant à
+                         l’expression régulière. Peut être répété.
+--exclude-query regex  : exclure les requêtes correspondant à l’expression
+                         régulière, par exemple "^(VACUUM|COMMIT)". Peut être répété.
+--exclude-time  regex  : exclure les horodatages correspondant à
+                         l’expression régulière, par exemple "2013-04-12 .*". Peut être répété.
+--explain-url URL      : remplacer l’URL de l’outil graphique EXPLAIN.
+                         Valeur par défaut : https://explain.depesz.com/
+--histogram-query VAL  : utiliser des bornes personnalisées pour
+                         l’histogramme des durées de requête. Bornes par défaut en millisecondes :
+                         0,1,5,10,25,50,100,500,1000,10000
+--histogram-session VAL: utiliser des bornes personnalisées pour
+                         l’histogramme des durées de session. Bornes par défaut en millisecondes :
+                         0,500,1000,30000,60000,600000,1800000,3600000,28800000
+--include-file filename: fichier contenant les expressions régulières des
+                         requêtes à inclure dans le rapport. Une expression par ligne.
+--include-query regex  : exclure les requêtes qui ne correspondent pas à
+                         l’expression régulière. Peut être répété, par exemple "(tbl1|tbl2)".
+--include-pid PID      : ne rapporter que les événements liés au PID de
+                         session (%p). Peut être répété.
+--include-session ID   : ne rapporter que les événements liés à
+                         l’identifiant de session (%c). Peut être répété.
+--include-time  regex  : inclure uniquement les horodatages correspondant à
+                         l’expression régulière, par exemple "2013-04-12 .*". Peut être répété.
+--iso-week-number      : en mode incrémentiel, faire commencer les semaines
+                         le lundi selon ISO 8601, numérotées de 01 à 53. La semaine 1 est la
+                         première contenant au moins 4 jours de la nouvelle année.
+--keep-comments        : conserver les commentaires dans les requêtes
+                         normalisées, afin de distinguer des requêtes ayant la même forme
+                         normalisée.
+--journalctl command   : remplacer le fichier journal PostgreSQL par un
+                         appel à journalctl, par exemple :
+                         journalctl -u postgresql-9.5
+--log-duration         : forcer pgBadger à associer les entrées produites
+                         par log_duration = on et log_statement = 'all'.
+--log-timezone +/-XX   : décalage horaire par rapport à GMT pour ajuster les
+                         dates/heures du journal avant analyse. Cela complique les recherches par
+                         date/heure. Entier, par exemple 2, ou nombre décimal, par exemple 2.5.
+--month-report YYYY-MM : générer un rapport HTML cumulatif pour le mois
+                         indiqué. Nécessite les répertoires de sortie incrémentielle et tous les
+                         fichiers de données binaires requis.
+--noexplain            : ne pas traiter les lignes générées par
+                         auto_explain.
+--no-fork              : ne créer aucun processus fils, à des fins de
+                         débogage.
+--no-process-info      : ne pas modifier le titre du processus pour
+                         identifier pgBadger, car certains systèmes ne le prennent pas en charge.
+--no-progressbar       : désactiver la barre de progression.
+--noreport             : ne générer aucun rapport en mode incrémentiel.
+--no-week              : ne pas générer les rapports hebdomadaires en mode
+                         incrémentiel, s’ils prennent trop de temps.
+--normalized-only      : émettre uniquement les requêtes normalisées dans
+                         out.txt.
+--pgbouncer-only       : afficher uniquement les menus liés à PgBouncer dans
+                         l’en-tête.
+--pid-dir path         : répertoire où stocker le fichier PID. Valeur par
+                         défaut : /tmp
+--pid-file file        : nom du fichier PID qui contrôle les exécutions
+                         simultanées de pgBadger. Valeur par défaut : pgbadger.pid
+--pie-limit num        : regrouper en une somme les portions de camembert
+                         inférieures à num%.
+--prettify-json        : mettre en forme la sortie JSON pour améliorer sa
+                         lisibilité.
+--rebuild              : reconstruire tous les rapports HTML des répertoires
+                         de sortie incrémentielle contenant des données binaires.
+--start-monday         : en mode incrémentiel, les semaines commencent par
+                         défaut le dimanche. Cette option les fait commencer le lundi.
+--tempdir DIR          : répertoire des fichiers temporaires. Valeur par
+                         défaut : File::Spec->tmpdir() || '/tmp'
 ```
 
 pgBadger est capable d'analyser un fichier journal distant en utilisant une connexion SSH sans mot de passe.
 Utilisez -r ou --remote-host pour définir l'adresse IP ou le nom d'hôte du serveur. Il existe également plusieurs options supplémentaires pour contrôler entièrement la connexion SSH.
 
 ```text
---ssh-identity file      path to the identity file to use.
---ssh-option  options    list of -o options to use for the ssh connection.
-                         Options always used:
-                             -o ConnectTimeout=$ssh_timeout
-                             -o PreferredAuthentications=hostbased,publickey
---ssh-port port          ssh port to use for the connection. Default: 22.
---ssh-program ssh        path to the ssh program to use. Default: ssh.
---ssh-timeout second     timeout to ssh connection failure. Default: 10 sec.
---ssh-user username      connection login name. Defaults to running user.
+--ssh-identity file      chemin du fichier d’identité à utiliser.
+--ssh-option  options    liste des options -o de la connexion SSH. Options
+                         toujours utilisées :
+                         -o ConnectTimeout=$ssh_timeout
+                         -o PreferredAuthentications=hostbased,publickey
+--ssh-port port          port SSH de la connexion. Valeur par défaut : 22.
+--ssh-program ssh        chemin du programme SSH. Valeur par défaut : ssh.
+--ssh-timeout second     délai d’échec de connexion SSH. Valeur par défaut : 10
+                         secondes.
+--ssh-user username      nom de connexion. Par défaut : utilisateur qui exécute
+                         pgBadger.
 ```
+
+L’option `--ssh-sudo` préfixe par `sudo` les commandes distantes qui listent et lisent les fichiers journaux. L’utilisateur SSH distant doit pouvoir exécuter ces commandes avec `sudo` sans invite interactive.
 
 Le fichier journal à analyser peut également être spécifié à l’aide d’un URI. Les protocoles pris en charge sont http[s] et [s]ftp. La commande curl sera utilisée pour télécharger le fichier, qui sera analysé pendant le téléchargement. Le protocole ssh est également pris en charge et utilisera la commande ssh, de la même manière qu’avec un hôte distant. Voir les exemples ci-dessous.
 
 Codes de retour :
 
 ```text
-0: on success
-1: die on error
-2: if it has been interrupted using ctr+c for example
-3: the pid file already exists or can not be created
-4: no log file was given at command line
+0: succès
+1: arrêt sur erreur
+2: interruption, par exemple avec Ctrl+C
+3: le fichier PID existe déjà ou ne peut pas être créé
+4: aucun fichier journal fourni en ligne de commande
 ```
 
 Exemples :
@@ -273,12 +276,12 @@ pgbadger /var/log/postgresql/postgresql-2012-05-*
 pgbadger --exclude-query="^(COPY|COMMIT)" /var/log/postgresql.log
 pgbadger -b "2012-06-25 10:56:11" -e "2012-06-25 10:59:11" /var/log/postgresql.log
 cat /var/log/postgres.log | pgbadger -
-# Log line prefix with stderr log output
+# Préfixe de ligne pour une sortie de journal stderr
 pgbadger --prefix '%t [%p]: user=%u,db=%d,client=%h' /pglog/postgresql-2012-08-21*
 pgbadger --prefix '%m %u@%d %p %r %a : ' /pglog/postgresql.log
-# Log line prefix with syslog log output
+# Préfixe de ligne pour une sortie de journal syslog
 pgbadger --prefix 'user=%u,db=%d,client=%h,appname=%a' /pglog/postgresql-2012-08-21*
-# Use my 8 CPUs to parse my 10GB file faster, much faster
+# Utiliser 8 CPU pour analyser plus rapidement un fichier de 10GB
 pgbadger -j 8 /pglog/postgresql-10.1-main.log
 ```
 
@@ -330,6 +333,8 @@ Si vous disposez d’un pg_dump à 23:00 et à 13:00 chaque jour pendant une dem
 pgbadger --exclude-time "2013-09-.* (23|13):.*" postgresql.log
 ```
 
+Cette expression exclut chaque heure correspondante en entier, y compris le temps en dehors de la demi-heure de sauvegarde. Restreignez le motif des minutes si seule la période de sauvegarde doit être exclue.
+
 Cela permettra d'éviter d'avoir des instructions COPY, générées par pg_dump, en tête de la liste des requêtes les plus lentes. Vous pouvez également utiliser --exclude-appname "pg_dump" pour résoudre ce problème de manière plus simple.
 
 Vous pouvez également analyser la sortie de journalctl comme si elle était un fichier journal :
@@ -370,7 +375,7 @@ pgBadger peut détecter automatiquement les journaux PostgreSQL RDS et CloudWatc
 pgbadger -f rds -o rds_out.html rds.log
 ```
 
-Chaque journal CloudSQL PostgreSQL est un journal PostgreSQL relativement classique, mais encapsulé au format JSON. Il est détecté automatiquement par pgBadger, mais en cas de besoin, forcez le format de journalisation en utilisant \`jsonlog\` :
+Chaque journal CloudSQL PostgreSQL est un journal PostgreSQL relativement classique, mais encapsulé au format JSON. Il est détecté automatiquement par pgBadger, mais en cas de besoin, forcez le format de journalisation en utilisant `jsonlog` :
 
 ```text
 pgbadger -f jsonlog -o cloudsql_out.html cloudsql.log
@@ -387,7 +392,7 @@ pgbadger -f jsonlog -o cnpg_out.html cnpg.log
 Pour créer un rapport cumulatif sur une période d’un mois, utilisez la commande :
 
 ```text
-pgbadger --month-report 2919-05 /path/to/incremental/reports/
+pgbadger --month-report 2019-05 /path/to/incremental/reports/
 ```
 
 Cela ajoutera un lien vers le nom du mois dans la vue calendrier des rapports incrémentiels pour consulter le rapport du mois de mai 2019.

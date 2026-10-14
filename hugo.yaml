@@ -1,4 +1,4 @@
-baseURL: https://pig.center/
+baseURL: https://doc.pg.center/
 title: PIG.CENTER
 enableRobotsTXT: true
 enableGitInfo: true
@@ -308,7 +308,7 @@ languages:
             description: PostgreSQL-Hochverfügbarkeit und automatisches Failover
         - identifier: pgbackrest
           name: pgBackRest
-          url: https://pig.center/docs/pgbackrest/
+          pageRef: /docs/pgbackrest
           weight: 20
           params:
             icon: fa-solid fa-couch
@@ -406,13 +406,13 @@ languages:
 
 params:
   logo: favicon-512x512.png
-  productionURL: https://pig.center
-  github_repo: https://github.com/pgsty/pig.center
+  productionURL: https://doc.pg.center
+  github_repo: https://github.com/pgsty/doc.pg.center
   github_branch: main
   description: Practical documentation for the PostgreSQL community stack.
   version: v1
   copyright:
-    authors: '[PostgreSQL Community Components](https://pig.center/)'
+    authors: '[PostgreSQL Community Components](https://doc.pg.center/)'
     from_year: 2026
     to_year: present
   footer_center_info: 'Built with [OINK](https://oink.pgsty.com/)'
@@ -433,10 +433,10 @@ params:
     enable: true
     type: giscus
     giscus:
-      repo: pgsty/pig.center
-      repoId: R_kgDOT5P-Ag
+      repo: pgsty/doc.pg.center
+      repoId: R_kgDOVIp3PA
       category: Announcements
-      categoryId: DIC_kwDOT5P-As4DD3wq
+      categoryId: DIC_kwDOVIp3PM4DIXzY
       mapping: pathname
       strict: 1
       reactionsEnabled: 1
@@ -450,7 +450,7 @@ params:
     typography: technical
     theme_color: '#336791'
     quick_links: [patroni, pgbackrest, pgbouncer, pgbadger, haproxy, etcd]
-    translation_notice: en
+    translation_notice: false
     section_index: cards
     backlinks: true
     dark_mode: true

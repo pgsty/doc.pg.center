@@ -13,9 +13,37 @@ translations live beside them and use the suffix `.de.md`; section indexes use
 - Preserve product names, protocol names, commands, configuration keywords,
   API/RPC/message/field names, environment variables, filenames, paths, URLs,
   metrics, log fields, placeholders, and established abbreviations exactly.
-- Keep copyable commands, configuration, source code, protocol messages,
-  program output, logs, and error messages byte-for-byte identical. Explanatory
-  comments inside code fences also remain unchanged so examples stay copyable.
+- Keep fenced and indented code blocks byte-for-byte identical, including
+  copyable commands, configuration, source code, protocol messages, program
+  output, logs, diagnostics, errors, and comments, except for the registered
+  pgBadger and HAProxy explanatory blocks below.
+- Only in independently reviewed, registered explanatory `text` fences under
+  `content/docs/pgbadger/`, translate parameter help, return-code descriptions,
+  natural-language steps in algorithm pseudocode, directory descriptions, and
+  their explanatory example comments. Preserve real CLI signatures, options,
+  allowed values, defaults, commands, SQL, configuration, regexes, diagnostics,
+  verbatim legal text, personal names, numbers, and formulas exactly. This
+  exception does not permit translating comments in actual code.
+- Record each exception in `data/translation-fences/pgbadger.de/` with exact
+  source and translation SHA-256 hashes (`source_sha256`, `target_sha256`),
+  protected literals (`protected_literals`), and actual command or output lines
+  (`protected_lines`). An independent reviewer must verify semantics and
+  literals. Unregistered fences or changed hashes remain byte-for-byte
+  protected; the `text` label alone is not an exemption.
+- In HAProxy fenced or indented blocks, translate only argument descriptions,
+  table labels and natural-language explanations registered in
+  `data/translation-fences/haproxy.de/`. Record exact hashes, classification,
+  independent review conclusions, protected literals and protected lines.
+  Actual configuration, commands, source code, protocol messages, output,
+  diagnostics and code comments remain byte-for-byte identical, including in
+  mixed blocks. Unregistered blocks or changed hashes are not exempt.
+- Preserve return-type identifiers `integer`, `boolean`, `bool`, `string`,
+  `binary` and `ip` in HAProxy sample signatures and deprecated alias declarations.
+  Translate natural-language type descriptions in the explanatory prose.
+- Reader-facing prose contains only information relevant to using the product.
+  Do not add translation policies, translator notes, statements that a page
+  retains the original text, or narratives of editorial corrections. Preserve
+  attribution data and original legal text.
 - Keep upstream source, version, commit, aliases, weight, icon, module, and
   licensing metadata unchanged. Do not translate verbatim licence text.
 - Preserve every explicit English anchor exactly. When an English heading has
@@ -61,6 +89,9 @@ translations live beside them and use the suffix `.de.md`; section indexes use
 | distributed configuration store (DCS) | verteilter Konfigurationsspeicher (DCS) |
 | connection pool / pooling | Verbindungspool / Verbindungs-Pooling |
 | backup / restore / recovery | Backup / Wiederherstellung / Recovery |
+| full / differential / incremental backup | vollständiges / differenzielles / inkrementelles Backup |
+| stanza / repository | Stanza / Repository (Plural: Stanzas / Repositorys) |
+| retention / retention period | Aufbewahrung / Aufbewahrungsdauer |
 | archive / write-ahead log | Archiv / Write-Ahead-Log |
 | point-in-time recovery | Point-in-Time-Recovery |
 | primary / standby / replica | Primärserver / Standby / Replikat |
@@ -117,6 +148,11 @@ term in this table remain unchanged when they are literals, for example
 - German and English pages preserve `upstream_link`, explicit anchors, fenced
   code blocks, shortcodes, images, reference definitions, internal link
   destinations, HTML tags, list nesting, table shape, and numeric facts.
+- Code blocks match byte-for-byte except for the independently reviewed
+  pgBadger and HAProxy explanatory blocks registered with exact hashes and protected
+  literals above; actual code and its comments remain protected. Reader-facing
+  prose contains no translation policies, translator notes, or editorial
+  process narratives.
 - German pages contain no untranslated English prose except protected literals,
   names, code, output, logs, errors, and verbatim legal text.
 - After source validation, run a production Hugo build and verify German routes,

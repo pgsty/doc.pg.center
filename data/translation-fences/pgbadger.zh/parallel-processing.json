@@ -1,0 +1,12 @@
+{
+  "source": "content/docs/pgbadger/parallel-processing.md",
+  "language": "zh",
+  "fences": [
+    {
+      "index": 2,
+      "classification": "mixed-explanation",
+      "source_sha256": "5b2a9cb39083d815d17a2a36b7b988dc4fd92260f075216988795194518df276",
+      "target_sha256": "f987544df37b5d43e0dd05926fb4ea2f99580dbd2dd401f4b0380c74c2f981ac"
+    }
+  ]
+}

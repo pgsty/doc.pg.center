@@ -1,0 +1,178 @@
+{
+  "source": "content/docs/haproxy/stick-tables-and-peers.md",
+  "language": "de",
+  "fences": [
+    {
+      "index": 7,
+      "classification": "argument-description",
+      "source_sha256": "1b782f1ec5f452bf08170a017d5e8bd541772b2aa8f93582a269599ff32acff7",
+      "target_sha256": "665eeaadb4825fe52a0b11bbb5600da313277424aaf4348186d5f3c57d33411f",
+      "protected_literals": [
+        "\"default-server\"",
+        "\"server\""
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 7,
+          "source_sha256": "1b782f1ec5f452bf08170a017d5e8bd541772b2aa8f93582a269599ff32acff7",
+          "target_sha256": "665eeaadb4825fe52a0b11bbb5600da313277424aaf4348186d5f3c57d33411f"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 12,
+      "classification": "mixed-explanation",
+      "source_sha256": "9280a95628f3f157d72af2fdd2bdffa30c3765b145b8222ff2ecdda1ff70ffd1",
+      "target_sha256": "3168466993789bae0540f68301e0a39bd24f7c6d60a75334abc1b75dc8379e8a",
+      "protected_literals": [],
+      "protected_lines": [
+        " # The old way.",
+        " peers mypeers",
+        "     peer haproxy1 192.168.0.1:1024",
+        "     peer haproxy2 192.168.0.2:1024",
+        "     peer haproxy3 10.2.0.1:1024",
+        " backend mybackend",
+        "     mode tcp",
+        "     balance roundrobin",
+        "     stick-table type ip size 20k peers mypeers",
+        "     stick on src",
+        "     server srv1 192.168.0.30:80",
+        "     server srv2 192.168.0.31:80",
+        "  peers mypeers",
+        "     bind 192.168.0.1:1024 ssl crt mycerts/pem",
+        "     default-server ssl verify none",
+        "     server haproxy1 #local peer",
+        "     server haproxy2 192.168.0.2:1024",
+        "     server haproxy3 10.2.0.1:1024"
+      ],
+      "revalidation_history": [
+        {
+          "index": 12,
+          "source_sha256": "9280a95628f3f157d72af2fdd2bdffa30c3765b145b8222ff2ecdda1ff70ffd1",
+          "target_sha256": "3168466993789bae0540f68301e0a39bd24f7c6d60a75334abc1b75dc8379e8a"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    }
+  ],
+  "literal_blocks": [
+    {
+      "lines": [
+        68,
+        70
+      ],
+      "classification": "configuration",
+      "source_sha256": "c828413aadeff957c8a399e6c657858b62d1de159e26160b65226661670fec99",
+      "revalidation_history": [
+        {
+          "lines": [
+            68,
+            70
+          ],
+          "start_column": 1,
+          "source_sha256": "c828413aadeff957c8a399e6c657858b62d1de159e26160b65226661670fec99"
+        }
+      ],
+      "revalidation": "Exact reviewed snippet and source/target occurrence counts retained; line/column positions changed."
+    },
+    {
+      "lines": [
+        74,
+        75
+      ],
+      "classification": "configuration",
+      "source_sha256": "b12d04d2b456b3ef7e94bfc4a683ce370ab1c4a2b9fa690865fa99da2886b09d",
+      "revalidation_history": [
+        {
+          "lines": [
+            74,
+            75
+          ],
+          "start_column": 1,
+          "source_sha256": "b12d04d2b456b3ef7e94bfc4a683ce370ab1c4a2b9fa690865fa99da2886b09d"
+        }
+      ],
+      "revalidation": "Exact reviewed snippet and source/target occurrence counts retained; line/column positions changed."
+    },
+    {
+      "lines": [
+        581,
+        582
+      ],
+      "classification": "configuration",
+      "source_sha256": "a0e4dd9962b516ad193cc74fec609657060edde2b31427900ab69d053fb66ac7",
+      "revalidation_history": [
+        {
+          "lines": [
+            580,
+            581
+          ],
+          "start_column": 1,
+          "source_sha256": "a0e4dd9962b516ad193cc74fec609657060edde2b31427900ab69d053fb66ac7"
+        }
+      ],
+      "revalidation": "Exact reviewed snippet and source/target occurrence counts retained; line/column positions changed."
+    }
+  ],
+  "source_formatting_revalidation": {
+    "method": "Exact reviewed predecessor source/target SHA mapping and byte-for-byte literal-fence witnesses; only documented source errata and markup-only restoration accepted.",
+    "fences": [
+      {
+        "prior": {
+          "index": 7,
+          "source_sha256": "1b782f1ec5f452bf08170a017d5e8bd541772b2aa8f93582a269599ff32acff7",
+          "target_sha256": "665eeaadb4825fe52a0b11bbb5600da313277424aaf4348186d5f3c57d33411f"
+        },
+        "index": 7,
+        "source_sha256": "1b782f1ec5f452bf08170a017d5e8bd541772b2aa8f93582a269599ff32acff7",
+        "target_sha256": "665eeaadb4825fe52a0b11bbb5600da313277424aaf4348186d5f3c57d33411f",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 12,
+          "source_sha256": "9280a95628f3f157d72af2fdd2bdffa30c3765b145b8222ff2ecdda1ff70ffd1",
+          "target_sha256": "3168466993789bae0540f68301e0a39bd24f7c6d60a75334abc1b75dc8379e8a"
+        },
+        "index": 12,
+        "source_sha256": "9280a95628f3f157d72af2fdd2bdffa30c3765b145b8222ff2ecdda1ff70ffd1",
+        "target_sha256": "3168466993789bae0540f68301e0a39bd24f7c6d60a75334abc1b75dc8379e8a",
+        "reason": "unchanged exact reviewed English fence"
+      }
+    ],
+    "literal_blocks": [
+      {
+        "row": 1,
+        "action": "exact literal range rebased",
+        "source_sha256": "c828413aadeff957c8a399e6c657858b62d1de159e26160b65226661670fec99",
+        "lines": [
+          68,
+          70
+        ],
+        "start_column": 1
+      },
+      {
+        "row": 2,
+        "action": "exact literal range rebased",
+        "source_sha256": "b12d04d2b456b3ef7e94bfc4a683ce370ab1c4a2b9fa690865fa99da2886b09d",
+        "lines": [
+          74,
+          75
+        ],
+        "start_column": 1
+      },
+      {
+        "row": 3,
+        "action": "exact literal range rebased",
+        "source_sha256": "a0e4dd9962b516ad193cc74fec609657060edde2b31427900ab69d053fb66ac7",
+        "lines": [
+          581,
+          582
+        ],
+        "start_column": 1
+      }
+    ]
+  }
+}

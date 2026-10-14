@@ -1,0 +1,268 @@
+{
+  "source": "content/docs/haproxy/configuration-basics.md",
+  "language": "fr",
+  "fences": [
+    {
+      "index": 1,
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"#\""
+      ],
+      "protected_lines": [],
+      "source_sha256": "133f7a718d105906bd1bc4869b73669aaddfbbc3a10325ce7f33c0fd5040ca03",
+      "target_sha256": "2a79ce90f86efe8cabef3da033398c468b00d7210535ba709abc271280303379",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 5,
+      "classification": "argument-description",
+      "protected_literals": [
+        "\\#",
+        "\\\\",
+        "\\'",
+        "\\\""
+      ],
+      "protected_lines": [],
+      "source_sha256": "b1bdea796fdee72f23d7c46fbb40871f7073485441b48f264f5c2d692ca8787c",
+      "target_sha256": "76163d3fc3865c2b988fe4179a9501821c7039f0ab42e77abcfe175335a4ef53",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 6,
+      "classification": "argument-description",
+      "protected_literals": [
+        "\\n",
+        "\\r",
+        "\\t",
+        "\\xNN",
+        "\\x0a",
+        "\\x0d",
+        "\\x09",
+        "ASCII",
+        "LF",
+        "CR",
+        "NN"
+      ],
+      "protected_lines": [],
+      "source_sha256": "99752f707c160e16863f41751f6b6ddfa3c89b7a6bfb9f921b042e5290bed4dc",
+      "target_sha256": "c32b4860e139694d4d9138a8b929fe826205b1cfce88ef54779f9e4a48e37b9e",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 7,
+      "classification": "argument-description",
+      "protected_literals": [
+        "'"
+      ],
+      "protected_lines": [],
+      "source_sha256": "700978f3bc89091272664539ba926a2c35d07a92acf087109462c74f5f413e54",
+      "target_sha256": "45117da9214e21010f66dec2a92ab9cd8727f3d5738e2a3be82f0b86fc491663",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 8,
+      "classification": "explanation-label",
+      "protected_literals": [
+        "#"
+      ],
+      "protected_lines": [],
+      "source_sha256": "16c68cb5f06f56ae6f89f75f11723c312c4c80ce5a14d04a6620f4c6b171fe20",
+      "target_sha256": "e25c74ae189b73555876c7822be7dc4739333e2b61086a2b9333656584c21287",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 9,
+      "classification": "table-labels",
+      "protected_literals": [],
+      "protected_lines": [
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    <TAB>    |  \\<TAB>, \\x09 |  \"<TAB>\", \"\\<TAB>\", \"\\x09\"  |  '<TAB>'",
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    <LF>     |  \\n, \\x0a     |  \"\\n\", \"\\x0a\"               |",
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    <CR>     |  \\r, \\x0d     |  \"\\r\", \"\\x0d\"               |",
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    <SPC>    |  \\<SPC>, \\x20 |  \"<SPC>\", \"\\<SPC>\", \"\\x20\"  |  '<SPC>'",
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    \"        |  \\\", \\x22     |  \"\\\"\", \"\\x22\"               |  '\"'",
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    #        |  \\#, \\x23     |  \"#\", \"\\#\", \"\\x23\"          |  '#'",
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    $        |  $, \\$, \\x24  |  \"\\$\", \"\\x24\"               |  '$'",
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    '        |  \\', \\x27     |  \"'\", \"\\'\", \"\\x27\"          |",
+        "  -----------+---------------+-----------------------------+-----------------",
+        "    \\        |  \\\\, \\x5c     |  \"\\\\\", \"\\x5c\"               |  '\\'",
+        "  -----------+---------------+-----------------------------+-----------------"
+      ],
+      "source_sha256": "b04a6dd66c7634f7659d8eba67e0e56ab3b596637888940d449f2a483f553a39",
+      "target_sha256": "3b55c9b2970fe0385a9f0718c8a090a94117124027d40e4d586d653faade1407",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 13,
+      "classification": "table-labels",
+      "source_sha256": "91bc1a4c349bb64250a0d1b7e9f96b7da3f4d8b10d67d2c010ca90f4e4c90be6",
+      "target_sha256": "91bc1a4c349bb64250a0d1b7e9f96b7da3f4d8b10d67d2c010ca90f4e4c90be6",
+      "protected_lines": [
+        "    http-request set-path %[path,regsub((foo|bar),blah,g)]",
+        "                                       |---------|----|-|",
+        "                                 arg1 _/         /    /",
+        "                                 arg2 __________/    /",
+        "                                 arg3 ______________/"
+      ],
+      "protected_literals": [],
+      "review": "French bilingual classification: technical diagram and equations retained exactly. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 14,
+      "classification": "table-labels",
+      "protected_literals": [],
+      "protected_lines": [
+        "    http-request set-path %[path,regsub((foo|bar),blah,g)]",
+        "                                       |--------|--------|",
+        "                        arg1=(foo|bar _/        /"
+      ],
+      "source_sha256": "8d2274ba271726bb171cf179f0cff91ff37974322e6766b1af8bd846d7075f20",
+      "target_sha256": "a68133e3eadfbcb2769fcccda5f6b9bbd580b3c14495ebe2daea9b046621d45b",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 15,
+      "classification": "table-labels",
+      "protected_literals": [
+        "%[path,regsub(\"(foo|bar)\",blah,g)]",
+        "%[path,regsub((foo|bar),blah,g)]"
+      ],
+      "protected_lines": [
+        "http-request set-path %[path,regsub(\"(foo|bar)\",blah,g)]",
+        "------------ -------- ----------------------------------"
+      ],
+      "source_sha256": "7a5dfd1e3445f208841ed0d07787ebd7635cf5a6dffb8508d60a3e60067e9ff6",
+      "target_sha256": "a9e98507ec9fa8c8b0cc8415e9c00e57df4948d51081c1b4224c8db302bfb86c",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 16,
+      "classification": "table-labels",
+      "protected_literals": [
+        "%[path,regsub(\\\"(foo|bar)\\\",blah,g)]",
+        "%[path,regsub(\"(foo|bar)\",blah,g)]"
+      ],
+      "protected_lines": [
+        "    http-request set-path %[path,regsub(\\\"(foo|bar)\\\",blah,g)]",
+        "    ------------ -------- ------------------------------------",
+        "                                                |---------||----|-|",
+        "                                arg1=(foo|bar) _/          /    /",
+        "                                    arg2=blah  ___________/    /",
+        "                                        arg3=g _______________/"
+      ],
+      "source_sha256": "dd23dc7e3896bd34b0316b72f186c5ce37bec996ee7921f5f85a3ba43c710dd4",
+      "target_sha256": "3a696eeffa64f06af8c57b6ea80df11f6e877b5145173387e5f025e17275efa9",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 17,
+      "classification": "table-labels",
+      "protected_literals": [
+        "%[path,regsub(\"(foo|bar)\",blah,g)]"
+      ],
+      "protected_lines": [
+        "    http-request set-path '%[path,regsub(\"(foo|bar)\",blah,g)]'",
+        "    ------------ --------  ----------------------------------",
+        "                                                |---------||----|-|",
+        "                                arg1=(foo|bar) _/          /    /",
+        "                                          arg2 ___________/    /",
+        "                                          arg3 _______________/"
+      ],
+      "source_sha256": "b04d3c18d241dd60c24df4c816438b2a77afadb5a37108e655f0563bc00da92f",
+      "target_sha256": "197d23d641e03557301b71364645bf9a4b13b28336d53089772e6363103d1e9b",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 18,
+      "classification": "table-labels",
+      "protected_literals": [
+        "%[path, regsub(\"(foo|bar)\", blah, g)]",
+        "\" regsub\""
+      ],
+      "protected_lines": [
+        "    http-request set-path '%[path, regsub(\"(foo|bar)\", blah, g)]'",
+        "    ------------ --------  --------------------------------------",
+        "                                        |--------|---------||-----|--|",
+        "                                    arg1=(foo|bar) _/         /   /",
+        "                                     arg2=\" blah\" ___________/   /",
+        "                                        arg3=\" g\" ______________/"
+      ],
+      "source_sha256": "98e4a9362a56bbe7e7b02eb18d243a2ff2fd430dbdb40e2f075dc05d08f3379a",
+      "target_sha256": "8a4fd52bd9dc6f83749c29121a351a8259563f2d3504f792bb6e4440d2322ab4",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 19,
+      "classification": "table-labels",
+      "protected_literals": [
+        "%[path,regsub(\"^/(here)(/|$)\",\"my/\\1\",g)]"
+      ],
+      "protected_lines": [
+        "    http-request set-path '%[path,regsub(\"^/(here)(/|$)\",\"my/\\1\",g)]'",
+        "    ------------ --------  -----------------------------------------",
+        "                                                |-------------| |-----||-|",
+        "                              arg1=(here)(/|$) _/               /      /",
+        "                                    arg2=my/\\1 ________________/      /",
+        "                                          arg3 ______________________/"
+      ],
+      "source_sha256": "aecf65a82c1ca4ba04d973edc88244123ea32a25e84d68991f2a5e3966249a19",
+      "target_sha256": "a21c042203badcd5aeaaa8d3d7592a4c9afad40199fb1dca61b53ae3f7c4d13d",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 22,
+      "classification": "table-labels",
+      "protected_literals": [],
+      "protected_lines": [
+        "  +---------------------------+---------+------------+-----------+",
+        "  |                           +---------+------------+-----------+",
+        "  |                           |  M | W  |   M  |  W  |  M  |  W  |",
+        "  +---------------------------+----+----+------+-----+-----+-----+",
+        "  | HAPROXY_STARTUP_VERSION   |  X | X  |      |     |  X  |  X  |",
+        "  | HAPROXY_BRANCH            |  X | X  |      |     |  X  |  X  |",
+        "  | HAPROXY_CFGFILES          |    |    |      |     |  X  |  X  |",
+        "  | HAPROXY_MWORKER           |    |    |      |     |  X  |  X  |",
+        "  | HAPROXY_CLI               |    |    |      |     |     |  X  |",
+        "  | HAPROXY_MASTER_CLI        |    |    |      |     |  X  |     |",
+        "  | HAPROXY_LOCALPEER         |    | X  |      |     |     |  X  |",
+        "  | HAPROXY_HTTP_LOG_FMT      |    | X  |      |  X  |     |     |",
+        "  | HAPROXY_HTTP_CLF_LOG_FMT  |    | X  |      |  X  |     |     |",
+        "  | HAPROXY_HTTPS_LOG_FMT     |    | X  |      |  X  |     |     |",
+        "  | HAPROXY_TCP_LOG_FMT       |    | X  |      |  X  |     |     |",
+        "  | HAPROXY_TCP_CLF_LOG_FMT   |    | X  |      |  X  |     |     |",
+        "  | HAPROXY_KEYLOG_FC_LOG_FMT |    | X  |      |  X  |     |     |",
+        "  | HAPROXY_KEYLOG_BC_LOG_FMT |    | X  |      |  X  |     |     |",
+        "  +---------------------------+----+----+------+-----+-----+-----+"
+      ],
+      "source_sha256": "18020897bc02f9e193e287bdba3bccc89eb49bfcdb38ee75c70f91cc42c975ac",
+      "target_sha256": "cf7c76b092d3ba98d045b84b4261b78ddd10778f7ae063d2ecfa24c8eaf84823",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 28,
+      "classification": "table-labels",
+      "protected_literals": [
+        "\" 1\"",
+        "\"0\"",
+        "\"streq\"",
+        "\".if\""
+      ],
+      "protected_lines": [
+        "   .if streq(0, 1)",
+        "  |---|-----|-|--|"
+      ],
+      "source_sha256": "7dead05a0ea694c0e392a0601347cef7beb6d5ede0967e7718ac1d81cd42938c",
+      "target_sha256": "f0aecdef98bf4fedce0c7e3175d3921be549bbb3b922cfedfcf9eccf86929ebf",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    }
+  ],
+  "literal_blocks": [],
+  "literal_snippets": []
+}

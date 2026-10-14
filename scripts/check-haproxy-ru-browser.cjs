@@ -1,0 +1,181 @@
+#!/usr/bin/env node
+'use strict';
+
+// Serve the production build locally before running this check. Playwright
+// and its isolated Chromium runtime live outside the source repository.
+// Usage: PLAYWRIGHT_MODULE=/path/to/playwright node scripts/check-haproxy-ru-browser.cjs BASE_URL OUTPUT_DIR
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+
+const base = (process.argv[2] || '').replace(/\/$/, '');
+const output = process.argv[3];
+// A non-default count is useful for an explicitly incomplete preflight build.
+const expectedCount = Number(process.argv[4] || 35);
+assert(base && output, 'usage: BASE_URL OUTPUT_DIR [EXPECTED_PAGES=35]');
+fs.mkdirSync(output, { recursive: true });
+const report = { base, expectedCount, viewports: [], errors: [], status: 'running' };
+const prefix = '/ru/docs/haproxy/';
+const representative = new Set([
+  prefix, prefix + 'acls-and-samples/', prefix + 'global/', prefix + 'proxies/',
+  prefix + 'configuration-logging/', prefix + 'statistics-and-monitoring/',
+  prefix + 'bind-and-server-options/',
+]);
+function* walk(node) {
+  yield node;
+  for (const child of node.children || []) yield* walk(child);
+}
+async function visibleClick(page, selector) {
+  const all = page.locator(selector);
+  for (let i = 0; i < await all.count(); i++) {
+    if (await all.nth(i).isVisible()) { await all.nth(i).click(); return; }
+  }
+  throw new Error('No visible control: ' + selector);
+}
+async function visibleHover(page, selector) {
+  const all = page.locator(selector);
+  for (let i = 0; i < await all.count(); i++) {
+    if (await all.nth(i).isVisible()) { await all.nth(i).hover(); return; }
+  }
+  throw new Error('No visible control: ' + selector);
+}
+async function run() {
+  const browser = await chromium.launch({ headless: true });
+  try {
+    for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844 }]) {
+      // Deterministic sequential jumps also exercise the site's reduced-motion
+      // mode, without interrupting an in-progress smooth scroll with the next.
+      const context = await browser.newContext({ viewport, reducedMotion: 'reduce' });
+      const page = await context.newPage();
+      const evidence = { viewport, reducedMotion: 'reduce', pages: [], search: [], consoleErrors: [], requestFailures: [], omittedThirdPartyRequests: [] };
+      report.viewports.push(evidence);
+      // Local acceptance does not contact the deployed analytics/comment
+      // services. Record this explicit boundary; all site assets still load.
+      await page.route(/https:\/\/(?:giscus\.app|(?:www\.)?google-analytics\.com|www\.googletagmanager\.com)\//, async (route) => {
+        evidence.omittedThirdPartyRequests.push(route.request().url());
+        await route.fulfill({ status: 204, body: '' });
+      });
+      page.on('pageerror', (error) => evidence.consoleErrors.push(String(error)));
+      page.on('console', (message) => {
+        if (message.type() === 'error') evidence.consoleErrors.push(message.text());
+      });
+      page.on('requestfailed', (request) => evidence.requestFailures.push({
+        url: request.url(), error: request.failure()?.errorText,
+      }));
+      page.on('response', (response) => {
+        if (response.status() >= 400) evidence.requestFailures.push({
+          url: response.url(), status: response.status(),
+        });
+      });
+      await page.goto(base + prefix, { waitUntil: 'networkidle' });
+      const navigation = await (await context.request.get(base + '/ru/navigation.json')).json();
+      const nodes = [...walk(navigation.root)].filter((node) => node.id?.startsWith('/docs/haproxy/'));
+      assert.equal(nodes.length, expectedCount, 'production navigation must contain the complete logical page set');
+      const routes = nodes.map((node) => new URL(node.url).pathname);
+      assert.equal(new Set(routes).size, expectedCount, 'duplicate production navigation routes');
+      for (const [index, route] of routes.entries()) {
+        const response = await page.goto(base + route, { waitUntil: 'networkidle' });
+        assert.equal(response.status(), 200, route);
+        await page.locator('.td-content h1').waitFor({ state: 'visible' });
+        await page.evaluate(() => document.fonts.ready);
+        const snapshot = await page.evaluate(() => ({
+          title: document.title,
+          language: document.documentElement.lang,
+          canonical: document.querySelector('link[rel=canonical]')?.href,
+          sidebar: [...document.querySelectorAll('#td-section-nav .td-shell-tree__link')].map((el) => new URL(el.href).pathname),
+          pager: [...document.querySelectorAll('.td-pager a')].map((el) => new URL(el.href).pathname),
+          fallbacks: [...document.querySelectorAll('[data-fallback-language]')].map((el) => el.getAttribute('href')),
+          englishSwitch: [...document.querySelectorAll('.td-language-selector__item')].some((el) => new URL(el.href).pathname === location.pathname.replace(/^\/ru/, '')),
+          width: document.documentElement.scrollWidth,
+          viewport: innerWidth,
+          contentCharacters: document.querySelector('.td-content')?.textContent.length,
+          anchors: [...document.querySelectorAll('.td-content h2[id], .td-content h3[id]')].map((el) => el.id),
+          brokenImages: [...document.querySelectorAll('img')].filter((el) => el.complete && !el.naturalWidth).map((el) => el.src),
+        }));
+        assert.equal(snapshot.language, 'ru-RU', route);
+        assert.match(snapshot.title, /[А-Яа-яЁё]/, route);
+        assert.equal(snapshot.canonical, 'https://doc.pg.center' + route, route);
+        assert.deepEqual(snapshot.sidebar, routes, 'sidebar order: ' + route);
+        const expectedPager = [routes[index - 1], routes[index + 1]].filter(Boolean);
+        assert.deepEqual(snapshot.pager, expectedPager, 'adjacent pager routes: ' + route);
+        if (expectedCount === 35) {
+          assert(!snapshot.fallbacks.some((value) => value?.includes('/docs/haproxy/')), 'HAProxy fallback: ' + route);
+        }
+        assert(snapshot.englishSwitch, 'English switch: ' + route);
+        assert(snapshot.width <= snapshot.viewport + 1, 'document overflow: ' + route);
+        assert(snapshot.contentCharacters > 100, 'empty content: ' + route);
+        assert.deepEqual(snapshot.brokenImages, [], 'broken images: ' + route);
+        if (representative.has(route)) {
+          if (viewport.width < 768) {
+            assert.equal(await page.locator('html').getAttribute('data-td-shell-drawer'), null);
+            await visibleClick(page, '[data-td-shell-drawer-open]');
+            await page.waitForFunction(() => document.documentElement.getAttribute('data-td-shell-drawer') === 'open');
+            await visibleClick(page, 'button[data-td-shell-drawer-close]');
+            await page.waitForFunction(() => !document.documentElement.hasAttribute('data-td-shell-drawer'));
+          }
+          await page.screenshot({ path: path.join(output, `${viewport.width}-${route.split('/').filter(Boolean).pop()}.png`) });
+          // Open the actual menu and navigate to the same English page, then
+          // use its language menu to return to Russian at both widths.
+          const englishRoute = route.replace(/^\/ru/, '');
+          await visibleHover(page, '.td-language-selector__trigger');
+          await visibleClick(page, '.td-language-selector__item[hreflang="en-US"]');
+          await page.waitForURL((url) => url.pathname === englishRoute, { waitUntil: 'networkidle' });
+          assert.equal(await page.locator('html').getAttribute('lang'), 'en-US', route);
+          await visibleHover(page, '.td-language-selector__trigger');
+          await visibleClick(page, '.td-language-selector__item[hreflang="ru-RU"]');
+          await page.waitForURL((url) => url.pathname === route, { waitUntil: 'networkidle' });
+          assert.equal(await page.locator('html').getAttribute('lang'), 'ru-RU', route);
+          await page.evaluate(() => document.fonts.ready);
+          snapshot.languageSwitchJourney = { english: englishRoute, russian: route };
+          // Exercise both ends of a long page using its stable English IDs.
+          const anchors = [...new Set([snapshot.anchors[0], snapshot.anchors.at(-1)])].filter(Boolean);
+          for (const anchor of anchors) {
+            // A same-document native hash jump avoids a full reload while
+            // fonts are laying out the long page a second time.
+            await page.evaluate((id) => { location.hash = id; }, anchor);
+            await page.waitForFunction((id) => {
+              const box = document.getElementById(id)?.getBoundingClientRect();
+              return box && box.bottom > 0 && box.top < innerHeight;
+            }, anchor);
+          }
+          snapshot.testedAnchors = anchors;
+        }
+        evidence.pages.push({ route, ...snapshot });
+      }
+      // Test real interactive search, then activate a Russian result.
+      for (const [query, wanted] of [['статистика', prefix + 'statistics-and-monitoring/'], ['HAProxy', prefix]]) {
+        const target = nodes.find((node) => new URL(node.url).pathname === wanted);
+        if (!target) continue;
+        await page.goto(base + prefix, { waitUntil: 'networkidle' });
+        await visibleClick(page, '[data-td-shell-search-open]');
+        await page.locator('.td-shell-search__input').fill(query);
+        const title = evidence.pages.find((entry) => entry.route === wanted).title.replace(/\s*\|.*$/, '');
+        const exactTitle = new RegExp('^' + title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$');
+        const row = page.locator('.td-shell-search__item').filter({
+          has: page.locator('.td-shell-search__item-title').filter({ hasText: exactTitle }),
+        }).first();
+        await row.waitFor({ state: 'visible' });
+        const text = await row.innerText();
+        await row.click();
+        await page.waitForURL((url) => url.pathname === wanted, { waitUntil: 'domcontentloaded' });
+        evidence.search.push({ query, route: wanted, resultText: text });
+      }
+      assert.deepEqual(evidence.consoleErrors, [], 'browser console errors');
+      assert.deepEqual(evidence.requestFailures, [], 'browser request errors');
+      await context.close();
+      console.log(`Validated ${viewport.width}x${viewport.height}: ${evidence.pages.length} pages, sidebar, pager, language controls, anchors and interactive search.`);
+    }
+    report.status = expectedCount === 35 ? 'passed' : 'incomplete-preflight-passed';
+  } finally {
+    await browser.close();
+  }
+}
+run().catch((error) => {
+  report.status = 'failed';
+  report.errors.push(String(error.stack || error));
+  console.error(error);
+  process.exitCode = 1;
+}).finally(() => {
+  fs.writeFileSync(path.join(output, 'browser-report.json'), JSON.stringify(report, null, 2) + '\n');
+});

@@ -1,0 +1,1005 @@
+{
+  "source": "content/docs/haproxy/statistics-and-monitoring.md",
+  "language": "de",
+  "fences": [
+    {
+      "index": 1,
+      "source_sha256": "a2be5d3aa26c5f678e0c837b0daab7c893d6bee3be2b2e7350cb68c98b29e2ab",
+      "target_sha256": "d1da505111da7df2d98ad7502ce3c85a6bdf78712a15d4e9fd1ba665d54f38e8",
+      "classification": "argument-description",
+      "protected_literals": [
+        "       INI     ->",
+        "       L4CON   ->",
+        "       L4OK    ->",
+        "       L4TOUT  ->",
+        "       L6OK    ->",
+        "       L6RSP   ->",
+        "       L6TOUT  ->",
+        "       L7OK    ->",
+        "       L7OKC   ->",
+        "       L7RSP   ->",
+        "       L7STS   ->",
+        "       L7TOUT  ->",
+        "       SOCKERR ->",
+        "       UNK     ->",
+        " 0. pxname [LFBS]:",
+        " 1. svname [LFBS]:",
+        " 2. qcur [..BS]:",
+        " 3. qmax [..BS]:",
+        " 4. scur [LFBS]:",
+        " 5. smax [LFBS]:",
+        " 6. slim [LFBS]:",
+        " 7. stot [LFBS]:",
+        " 8. bin [LFBS]:",
+        " 9. bout [LFBS]:",
+        "\"* \"",
+        "\"* L7OK\"",
+        "\"Connection refused\"",
+        "\"No route to host\"",
+        "\"down\"",
+        "\"fail\"",
+        "\"fall\"",
+        "\"option checkcache\"",
+        "\"rise\"",
+        "\"stop\"",
+        "\"tcp-request connection\"",
+        "\"tcp-request session\"",
+        "\"unix\"",
+        "\"up\"",
+        "(0=frontend, 1=backend, 2=server, 3=socket/listener)",
+        "(monitor, stats)",
+        "(tcp, http, health, unknown)",
+        "10. dreq [LFB.]:",
+        "100. agg_server_status [..B.]:",
+        "101. agg_server_status_check [..B.]:",
+        "102. agg_check_status [..B.]:",
+        "103. srid [...S]:",
+        "104. sess_other [.F..]:",
+        "105. h1_sess [.F..]:",
+        "106. h2_sess [.F..]:",
+        "107. h3_sess [.F..]:",
+        "108. req_other [.F..]:",
+        "109. h1req [.F..]:",
+        "11. dresp [LFBS]:",
+        "110. h2req [.F..]:",
+        "111. h3req [.F..]:",
+        "112. proto [L...]:",
+        "113. priv_idle_cur [...S]:",
+        "114. reqbin [LFBS]:",
+        "115. reqbout [LFBS]:",
+        "116. resbin [LFBS]:",
+        "117. resbout [LFBS]:",
+        "12. ereq [LF..]:",
+        "13. econ [..BS]:",
+        "14. eresp [..BS]:",
+        "15. wretr [..BS]:",
+        "16. wredis [..BS]:",
+        "17. status [LFBS]:",
+        "18. weight [..BS]:",
+        "19. act [..BS]:",
+        "20. bck [..BS]:",
+        "21. chkfail [...S]:",
+        "22. chkdown [..BS]:",
+        "23. lastchg [..BS]:",
+        "24. downtime [..BS]:",
+        "25. qlimit [...S]:",
+        "26. pid [LFBS]:",
+        "27. iid [LFBS]:",
+        "28. sid [L..S]:",
+        "29. throttle [...S]:",
+        "30. lbtot [..BS]:",
+        "31. tracked [...S]:",
+        "32. type [LFBS]:",
+        "33. rate [.FBS]:",
+        "34. rate_lim [.F..]:",
+        "35. rate_max [.FBS]:",
+        "36. check_status [...S]:",
+        "37. check_code [...S]:",
+        "38. check_duration [...S]:",
+        "39. hrsp_1xx [.FBS]:",
+        "40. hrsp_2xx [.FBS]:",
+        "41. hrsp_3xx [.FBS]:",
+        "42. hrsp_4xx [.FBS]:",
+        "43. hrsp_5xx [.FBS]:",
+        "44. hrsp_other [.FBS]:",
+        "45. hanafail [...S]:",
+        "46. req_rate [.F..]:",
+        "47. req_rate_max [.F..]:",
+        "48. req_tot [.FB.]:",
+        "49. cli_abrt [..BS]:",
+        "50. srv_abrt [..BS]:",
+        "51. comp_in [.FB.]:",
+        "52. comp_out [.FB.]:",
+        "53. comp_byp [.FB.]:",
+        "54. comp_rsp [.FB.]:",
+        "55. lastsess [..BS]:",
+        "56. last_chk [...S]:",
+        "57. last_agt [...S]:",
+        "58. qtime [..BS]:",
+        "59. ctime [..BS]:",
+        "60. rtime [..BS]:",
+        "61. ttime [..BS]:",
+        "62. agent_status [...S]:",
+        "63. agent_code [...S]:",
+        "64. agent_duration [...S]:",
+        "65. check_desc [...S]:",
+        "66. agent_desc [...S]:",
+        "67. check_rise [...S]:",
+        "68. check_fall [...S]:",
+        "69. check_health [...S]:",
+        "70. agent_rise [...S]:",
+        "71. agent_fall [...S]:",
+        "72. agent_health [...S]:",
+        "73. addr [L..S]:",
+        "74: cookie [..BS]:",
+        "75: mode [LFBS]:",
+        "76: algo [..B.]:",
+        "77: conn_rate [.F..]:",
+        "78: conn_rate_max [.F..]:",
+        "79: conn_tot [.F..]:",
+        "80: intercepted [.FB.]:",
+        "81: dcon [LF..]:",
+        "82: dses [LF..]:",
+        "83: wrew [LFBS]:",
+        "84: connect [..BS]:",
+        "85: reuse [..BS]:",
+        "86: cache_lookups [.FB.]:",
+        "87: cache_hits [.FB.]:",
+        "88: srv_icur [...S]:",
+        "89: src_ilim [...S]:",
+        "90. qtime_max [..BS]:",
+        "91. ctime_max [..BS]:",
+        "92. rtime_max [..BS]:",
+        "93. ttime_max [..BS]:",
+        "94. eint [LFBS]:",
+        "95. idle_conn_cur [...S]:",
+        "96. safe_conn_cur [...S]:",
+        "97. used_conn_cur [...S]:",
+        "98. need_conn_est [...S]:",
+        "99. uweight [..BS]:",
+        "UP->DOWN",
+        "UP/DOWN/NOLB/MAINT/MAINT(via)/MAINT(resolution)",
+        "UP<->DOWN",
+        "address:port",
+        "rise+fall-1"
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 1,
+          "source_sha256": "a2be5d3aa26c5f678e0c837b0daab7c893d6bee3be2b2e7350cb68c98b29e2ab",
+          "target_sha256": "d1da505111da7df2d98ad7502ce3c85a6bdf78712a15d4e9fd1ba665d54f38e8"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 2,
+      "source_sha256": "e47e28dfaaf284ea89a5a89a27c82403a3eede6cf7a86a45702e5d07cefe63d3",
+      "target_sha256": "f9ea42e8eea538bc824bfa9b3c091a8dec18740af9b502b193c66057fb2dffc4",
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"DOWN\"",
+        "\"UP\"",
+        "C   ",
+        "K   ",
+        "M   ",
+        "P   ",
+        "S   "
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 2,
+          "source_sha256": "e47e28dfaaf284ea89a5a89a27c82403a3eede6cf7a86a45702e5d07cefe63d3",
+          "target_sha256": "f9ea42e8eea538bc824bfa9b3c091a8dec18740af9b502b193c66057fb2dffc4"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 3,
+      "source_sha256": "2a2d31f073443878a048ebaaf4984e6dd8e908b0770261b8ad0f7358a6dd86f8",
+      "target_sha256": "686d71fa71fdbb7e9be07e04d1f91e3e2f0ace8896b27085ade24146259192f0",
+      "classification": "argument-description",
+      "protected_literals": [
+        "A   ",
+        "C   ",
+        "D   ",
+        "G   ",
+        "L   ",
+        "M   ",
+        "N   ",
+        "O   ",
+        "R   ",
+        "T   ",
+        "a   ",
+        "m   "
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 3,
+          "source_sha256": "2a2d31f073443878a048ebaaf4984e6dd8e908b0770261b8ad0f7358a6dd86f8",
+          "target_sha256": "686d71fa71fdbb7e9be07e04d1f91e3e2f0ace8896b27085ade24146259192f0"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 4,
+      "source_sha256": "a2628a9095d7bfb689e1b4eb01350bf0ed0f5f05c54dbd17fa09f77172ede656",
+      "target_sha256": "b717d8cb5a732676a5b84ff3ccb3f758e5c384dd4c2db9047d8b889ce6ff2043",
+      "classification": "argument-description",
+      "protected_literals": [
+        "C   ",
+        "P   ",
+        "S   ",
+        "s   "
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 4,
+          "source_sha256": "a2628a9095d7bfb689e1b4eb01350bf0ed0f5f05c54dbd17fa09f77172ede656",
+          "target_sha256": "b717d8cb5a732676a5b84ff3ccb3f758e5c384dd4c2db9047d8b889ce6ff2043"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 5,
+      "source_sha256": "ce12df4cba389f45c6fcdc96aad2c715c1f00faee1f57f0cd6c22161be02bef6",
+      "target_sha256": "19ebca05031a4d8eda335e7a30053c9445a4afd3b9fc5e76464e7cae202a5491",
+      "classification": "argument-description",
+      "protected_literals": [
+        "P   ",
+        "V   "
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 5,
+          "source_sha256": "ce12df4cba389f45c6fcdc96aad2c715c1f00faee1f57f0cd6c22161be02bef6",
+          "target_sha256": "19ebca05031a4d8eda335e7a30053c9445a4afd3b9fc5e76464e7cae202a5491"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 12,
+      "source_sha256": "1162b56259405b555a4ae7e15747fd9de63b83b5fed67c2191b9d91c3ebd1916",
+      "target_sha256": "5fb08ab938c7c4cec66e446e4489024f4ab4ce3e1ff77b79d1b4d60ca5ef2f9b",
+      "classification": "mixed-explanation",
+      "protected_literals": [
+        "[0:00:00:58] master> @!11955     <--",
+        "[0:00:01:03] 11955> @!11942      <--",
+        "[0:00:02:17] 11942> @            <--"
+      ],
+      "protected_lines": [
+        "master> prompt timed",
+        "[0:00:00:50] master> show proc",
+        "(...)",
+        "[0:00:01:10] master>"
+      ],
+      "revalidation_history": [
+        {
+          "index": 12,
+          "source_sha256": "1162b56259405b555a4ae7e15747fd9de63b83b5fed67c2191b9d91c3ebd1916",
+          "target_sha256": "5fb08ab938c7c4cec66e446e4489024f4ab4ce3e1ff77b79d1b4d60ca5ef2f9b"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 77,
+      "source_sha256": "66ad6884990e11d71af3cc28c5ef703015cdb426b1ca73946ac40fe2aa812bee",
+      "target_sha256": "6bef62930b6c48680f2123d40dd809815cf02ca13b7b91647059c194643f2a60",
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"beg\"",
+        "\"bin\"",
+        "\"bool\"",
+        "\"dir\"",
+        "\"dom\"",
+        "\"end\"",
+        "\"found\"",
+        "\"int\"",
+        "\"ip\"",
+        "\"len\"",
+        "\"match\"",
+        "\"no-match\"",
+        "\"reg\"",
+        "\"str\"",
+        "\"sub\""
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 77,
+          "source_sha256": "66ad6884990e11d71af3cc28c5ef703015cdb426b1ca73946ac40fe2aa812bee",
+          "target_sha256": "6bef62930b6c48680f2123d40dd809815cf02ca13b7b91647059c194643f2a60"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 123,
+      "source_sha256": "0045ce98b212b0f1e82d4bb63f9915cc3696e2b293cc1b589ae4ed56b07768ed",
+      "target_sha256": "13c75bebe8b6fd16ca5c7117e3cf2b324229be140c3b66df31b0e445f9e4dc78",
+      "classification": "mixed-explanation",
+      "protected_literals": [],
+      "protected_lines": [
+        "openssl ocsp -issuer issuer.pem -cert server.pem \\",
+        "             -host ocsp.issuer.com:80 -respout resp.der",
+        "echo \"set ssl ocsp-response $(base64 -w 10000 resp.der)\" | \\",
+        "             socat stdio /var/run/haproxy.stat",
+        "echo -e \"set ssl ocsp-response <<\\n$(base64 resp.der)\\n\" | \\",
+        "             socat stdio /var/run/haproxy.stat"
+      ],
+      "revalidation_history": [
+        {
+          "index": 123,
+          "source_sha256": "0045ce98b212b0f1e82d4bb63f9915cc3696e2b293cc1b589ae4ed56b07768ed",
+          "target_sha256": "13c75bebe8b6fd16ca5c7117e3cf2b324229be140c3b66df31b0e445f9e4dc78"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 145,
+      "classification": "mixed-explanation",
+      "source_sha256": "5383b4df56fade6274befda7fe78443d3c8bf700e600abe00882c411c53836a5",
+      "target_sha256": "ae134b59850c200aac2dd04e3d8be83bc3b3959fa97a6d9214a7f56d385d3cf1",
+      "protected_lines": [
+        "    $ echo \"show errors -1 response\" | socat stdio /tmp/sock1",
+        ">>> [04/Mar/2009:15:46:56.081] backend http-in (#2): invalid response",
+        "      src 127.0.0.1, session #54, frontend fe-eth0 (#1), server s2 (#1)",
+        "      response length 213 bytes, error at position 23:",
+        "",
+        "      00000  HTTP/1.0 200 OK\\r\\n",
+        "      00017  header/bizarre:blah\\r\\n",
+        "      00038  Location: blah\\r\\n",
+        "      00054  Long-line: this is a very long line which should b",
+        "      00104+ e broken into multiple lines on the output buffer,",
+        "      00154+  otherwise it would be too large to print in a ter",
+        "      00204+ minal\\r\\n",
+        "      00211  \\r\\n",
+        ""
+      ],
+      "protected_literals": [
+        "\"http-in\"",
+        "ID",
+        "s2",
+        "\"session\"",
+        "fe-eth0",
+        "'/'",
+        "\"header/bizarre\"",
+        "HTTP"
+      ],
+      "review": "Separate source/translation comparison of the exact explanatory suffix only. All executable command lines, source comments, diagnostic bytes and output remain exact; no code-wide waiver.",
+      "revalidation_history": [
+        {
+          "index": 145,
+          "source_sha256": "5383b4df56fade6274befda7fe78443d3c8bf700e600abe00882c411c53836a5",
+          "target_sha256": "ae134b59850c200aac2dd04e3d8be83bc3b3959fa97a6d9214a7f56d385d3cf1"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 161,
+      "source_sha256": "070a1cdc12e906fd91671a7b017526aa72e217c0de1b8286327046179651d9ad",
+      "target_sha256": "9d6703c9398156a9f923fd6dac51a25e3011523f783f8d27cfd1285ce16bb6b2",
+      "classification": "argument-description",
+      "protected_literals": [
+        "any_err:",
+        "cname:",
+        "cname_error:",
+        "invalid:",
+        "nx:",
+        "other:",
+        "outdated:",
+        "refused:",
+        "sent:",
+        "timeout:",
+        "too_big:",
+        "update:",
+        "valid:"
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 161,
+          "source_sha256": "070a1cdc12e906fd91671a7b017526aa72e217c0de1b8286327046179651d9ad",
+          "target_sha256": "9d6703c9398156a9f923fd6dac51a25e3011523f783f8d27cfd1285ce16bb6b2"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 164,
+      "source_sha256": "10ec8f217c43e5599ec7ec5c7bc85c7c30a2c7b49dc5082cd39e1bc9f26ba5df",
+      "target_sha256": "a64941f283ecc2da8a2ece5de097dd7d931c8f99d3bf6226090b6f7cce3b02f5",
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"safe\"",
+        "\"unsafe\"",
+        "'/'",
+        "-                     ",
+        "addr                  ",
+        "bkid/svid             ",
+        "bkname/svname         ",
+        "idle_cur              ",
+        "idle_lim              ",
+        "idle_per_thr[NB]      ",
+        "idle_sess             ",
+        "need_est              ",
+        "port                  ",
+        "purge_delay           ",
+        "safe_nb               ",
+        "served                ",
+        "unsafe_nb             ",
+        "used_cur              ",
+        "used_max              "
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 164,
+          "source_sha256": "10ec8f217c43e5599ec7ec5c7bc85c7c30a2c7b49dc5082cd39e1bc9f26ba5df",
+          "target_sha256": "a64941f283ecc2da8a2ece5de097dd7d931c8f99d3bf6226090b6f7cce3b02f5"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 166,
+      "source_sha256": "280e1811a921d8a796d986092889ab3a148395645a13d8b23eeca93b38016314",
+      "target_sha256": "460bb50df1a7fffc229c6d1e84a5be707bb2a69a793abc9b32d69de8fe5497ab",
+      "classification": "argument-description",
+      "protected_literals": [
+        "                                 0 = CHK_RES_UNKNOWN",
+        "                                 0 = SRV_ST_STOPPED",
+        "                                 0x01 = CHK_ST_INPROGRESS",
+        "                                 0x01 = SRV_ADMF_FMAINT",
+        "                                 0x02 = CHK_ST_CONFIGURED",
+        "                                 0x02 = SRV_ADMF_IMAINT",
+        "                                 0x04 = CHK_ST_ENABLED",
+        "                                 0x04 = SRV_ADMF_CMAINT",
+        "                                 0x08 = CHK_ST_PAUSED",
+        "                                 0x08 = SRV_ADMF_FDRAIN",
+        "                                 0x10 = CHK_ST_AGENT",
+        "                                 0x10 = SRV_ADMF_IDRAIN",
+        "                                 0x20 = SRV_ADMF_RMAINT",
+        "                                 0x40 = SRV_ADMF_HMAINT",
+        "                                 1 = CHK_RES_NEUTRAL",
+        "                                 1 = SRV_ST_STARTING",
+        "                                 2 = CHK_RES_FAILED",
+        "                                 2 = SRV_ST_RUNNING",
+        "                                 3 = CHK_RES_PASSED",
+        "                                 3 = SRV_ST_STOPPING",
+        "                                 4 = CHK_RES_CONDPASS",
+        "  be_id:                       ",
+        "  be_name:                     ",
+        "  bk_f_forced_id:              ",
+        "  srv_addr:                    ",
+        "  srv_admin_state:             ",
+        "  srv_agent_addr:              ",
+        "  srv_agent_port:              ",
+        "  srv_agent_state:             ",
+        "  srv_check_addr:              ",
+        "  srv_check_health:            ",
+        "  srv_check_port:              ",
+        "  srv_check_result:            ",
+        "  srv_check_state:             ",
+        "  srv_check_status:            ",
+        "  srv_f_forced_id:             ",
+        "  srv_fqdn:                    ",
+        "  srv_id:                      ",
+        "  srv_iweight:                 ",
+        "  srv_name:                    ",
+        "  srv_op_state:                ",
+        "  srv_port:                    ",
+        "  srv_time_since_last_change:  ",
+        "  srv_use_ssl:                 ",
+        "  srv_uweight:                 ",
+        "  srvrecord:                   ",
+        "\"srv_check_state\"",
+        "ENABLED/PAUSED/...",
+        "FAILED/PASSED/...",
+        "MAINT/DRAIN/...",
+        "UP/DOWN/..."
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 166,
+          "source_sha256": "280e1811a921d8a796d986092889ab3a148395645a13d8b23eeca93b38016314",
+          "target_sha256": "460bb50df1a7fffc229c6d1e84a5be707bb2a69a793abc9b32d69de8fe5497ab"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 190,
+      "source_sha256": "547b314d6a84f7002ce54d4ffc20925d6a45a7c37e188f7f2b9a9d2546e182ee",
+      "target_sha256": "b53a483e0d7f6c8071717ab59e5809464a915dcc3496922f756fe8743c808850",
+      "classification": "table-labels",
+      "protected_literals": [],
+      "protected_lines": [
+        "  +----+-------------------------------------+",
+        "  +----+-------------------------------------+",
+        "  |  0 | \"Unknown\"                           |",
+        "  |  1 | \"Update successful\"                 |",
+        "  |  2 | \"HTTP error\"                        |",
+        "  |  3 | \"Missing \\\"ocsp-response\\\" header\"  |",
+        "  |  4 | \"OCSP response check failure\"       |",
+        "  |  5 | \"Error during insertion\"            |",
+        "  +----+-------------------------------------+"
+      ],
+      "revalidation_history": [
+        {
+          "index": 190,
+          "source_sha256": "547b314d6a84f7002ce54d4ffc20925d6a45a7c37e188f7f2b9a9d2546e182ee",
+          "target_sha256": "b53a483e0d7f6c8071717ab59e5809464a915dcc3496922f756fe8743c808850"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 201,
+      "classification": "mixed-explanation",
+      "source_sha256": "e21580692cda42d9625fd63670628f05d519dba756869fbaebd52e9405e16ba7",
+      "target_sha256": "2587e3eb52ecf444dc840c58bbd245e357fec6ebc7998a6b5601d3812a3bd779",
+      "protected_lines": [
+        "$ echo \"show table http_proxy data.gpc0 gt 0\" \\",
+        "  | socat stdio /tmp/sock1 \\",
+        "  | fgrep 'key=' | cut -d' ' -f2 | cut -d= -f2 > abusers-ip.txt"
+      ],
+      "protected_literals": [
+        " | awk '/key/{ print a[split($2,a,\"=\")]; }' )"
+      ],
+      "review": "Separate source/translation comparison of the exact explanatory suffix only. All executable command lines, source comments, diagnostic bytes and output remain exact; no code-wide waiver.",
+      "revalidation_history": [
+        {
+          "index": 201,
+          "source_sha256": "e21580692cda42d9625fd63670628f05d519dba756869fbaebd52e9405e16ba7",
+          "target_sha256": "2587e3eb52ecf444dc840c58bbd245e357fec6ebc7998a6b5601d3812a3bd779"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 217,
+      "source_sha256": "cf4189e0f64877b438038b1f52d5704f6405a99c09d12d4b0de8d0f059691996",
+      "target_sha256": "1a14c35fa85da6a4ce2d2e0df85aa4d77df0e26ae1d1c974d04ebd21a6eebfc8",
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"breaking out of this loop\"",
+        "\"proto\"",
+        "\"state\"",
+        "\"user\"",
+        "data       ",
+        "developer  ",
+        "proto      ",
+        "state      ",
+        "user       "
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 217,
+          "source_sha256": "cf4189e0f64877b438038b1f52d5704f6405a99c09d12d4b0de8d0f059691996",
+          "target_sha256": "1a14c35fa85da6a4ce2d2e0df85aa4d77df0e26ae1d1c974d04ebd21a6eebfc8"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 218,
+      "source_sha256": "87e5dfeaca478df2722c94178e82876155d242a77fb191eac5603b6ffee6e01f",
+      "target_sha256": "bb6d80b9a3e61b58df66930ecdc7898240912eb235c385786421b36a484ddc93",
+      "classification": "argument-description",
+      "protected_literals": [
+        "backend      ",
+        "connection   ",
+        "frontend     ",
+        "listener     ",
+        "nothing      ",
+        "server       ",
+        "session      ",
+        "thread       "
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 218,
+          "source_sha256": "87e5dfeaca478df2722c94178e82876155d242a77fb191eac5603b6ffee6e01f",
+          "target_sha256": "bb6d80b9a3e61b58df66930ecdc7898240912eb235c385786421b36a484ddc93"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    }
+  ],
+  "literal_blocks": [
+    {
+      "lines": [
+        2209,
+        2213
+      ],
+      "classification": "program-output",
+      "source_sha256": "b779df2968020158e76178ab78bb78f21eec273a9813d523172607584d3f5828",
+      "revalidation_history": [
+        {
+          "lines": [
+            2209,
+            2213
+          ],
+          "start_column": 1,
+          "source_sha256": "b779df2968020158e76178ab78bb78f21eec273a9813d523172607584d3f5828"
+        }
+      ],
+      "revalidation": "Exact reviewed snippet and source/target occurrence counts retained; line/column positions changed."
+    }
+  ],
+  "rendered_explanations": [
+    {
+      "index": 38,
+      "classification": "table-labels",
+      "source_sha256": "283561bf0316208c1279975fcaa4707961aefade9629c15cbdc2ae191bb42046",
+      "target_sha256": "a8cbc4537b6daad362ff035cf7a76a2e2968b6b6b974c03130e0618ac14ce9c3",
+      "protected_literals": [
+        "eq:",
+        "ge:",
+        "gt:",
+        "le:",
+        "lt:",
+        "ne:"
+      ],
+      "protected_lines": [],
+      "protected_prefixes": [],
+      "review": "All six eq/ne/le/ge/lt/gt operators retain their exact equal/not-equal/inclusive/strict comparisons.",
+      "reviewer": "cx4 takeover integration; separate source/rendered comparison"
+    },
+    {
+      "index": 79,
+      "classification": "argument-description",
+      "source_sha256": "8121917ca88a2ba90790c77079dab128315845089ecfe992363b620ff9a053ac",
+      "target_sha256": "ecb55304ece019448aca1164af20f858aa3489800d1919e633d572f95b55957f",
+      "protected_literals": [
+        "\"`<entry>`\"",
+        "\"case-insensitive\"",
+        "\"case-sensitive\"",
+        "\"list\"",
+        "\"tree\"",
+        "`<case>`",
+        "`<entry matched>`",
+        "`<index type>`"
+      ],
+      "protected_lines": [],
+      "protected_prefixes": [],
+      "review": "index type tree/list, case sensitivity and matched-pattern return useful for regexes retain all field/value names.",
+      "reviewer": "cx4 takeover integration; separate source/rendered comparison"
+    },
+    {
+      "index": 80,
+      "classification": "argument-description",
+      "source_sha256": "3b02bd9dad55177c2c3c66a9c74c7751a3cf3b88e93d9bd7d81f83d0ecce8988",
+      "target_sha256": "2e4b23095c3f44a2f02660f870726f87a4dc176f6b02773e9e9a4972aef6f3b1",
+      "protected_literals": [
+        "\"`<type>`\"",
+        "\"`<value>`\"",
+        "\"map\"",
+        "return=cannot-display:",
+        "return=nothing:"
+      ],
+      "protected_lines": [],
+      "protected_prefixes": [],
+      "review": "All four map result/type descriptions retain no-map/no-return, string value, cannot-display conversion failure and sample type.",
+      "reviewer": "cx4 takeover integration; separate source/rendered comparison"
+    },
+    {
+      "index": 175,
+      "classification": "argument-description",
+      "source_sha256": "5accdcd934f45732090149f598ec3798a756274c8aaa7cf69c11fb9b0a9b431f",
+      "target_sha256": "7c881f937d3ef2f982901b8d3ae9eb9d6d64d1c48c177c95035c671dd3709bfb",
+      "protected_literals": [
+        "`<sid>`"
+      ],
+      "protected_lines": [],
+      "protected_prefixes": [],
+      "review": "sid remains the server ID; -1 dumps everything from the selected proxy, not all proxies.",
+      "reviewer": "cx4 takeover integration; separate source/rendered comparison"
+    },
+    {
+      "index": 205,
+      "classification": "table-labels",
+      "source_sha256": "283561bf0316208c1279975fcaa4707961aefade9629c15cbdc2ae191bb42046",
+      "target_sha256": "1f730751c67db9703dfdd4f43c3f59385c5367472150a42a3c5a0f141dba3317",
+      "protected_literals": [
+        "eq:",
+        "ge:",
+        "gt:",
+        "le:",
+        "lt:",
+        "ne:"
+      ],
+      "protected_lines": [],
+      "protected_prefixes": [],
+      "review": "All six repeated eq/ne/le/ge/lt/gt operators retain exact inclusive/strict boundaries.",
+      "reviewer": "cx4 takeover integration; separate source/rendered comparison"
+    },
+    {
+      "index": 222,
+      "classification": "mixed-explanation",
+      "source_sha256": "4ce8ac81b4eb32ca169dbc0b799acda90ee97fff01b1c3cea29d9a59bdc78e98",
+      "target_sha256": "438d563d7b81071e408c3f90b0c936f3101297188c45329b4c90d5c91cd22a0f",
+      "protected_literals": [
+        "\"any\"",
+        "\"event none\"",
+        "\"none\"",
+        "'!'",
+        "'+'",
+        "'-'"
+      ],
+      "protected_lines": [],
+      "protected_prefixes": [],
+      "review": "Per-event toggling retains none/any all-events behavior, optional +, disabling -/!, source-specific events and immediate complete event-none disablement.",
+      "reviewer": "cx4 takeover integration; separate source/rendered comparison"
+    },
+    {
+      "index": 225,
+      "classification": "mixed-explanation",
+      "source_sha256": "29621e671bf4efba83f9d6dd52c3efb7a18cf1a0426823a88e2b2e9a9e81d224",
+      "target_sha256": "552a9e3dfa3a617094803002c0d5b782f2cb2f2fa596b691e9b635129d8fd22f",
+      "protected_literals": [
+        "\"all\"",
+        "\"user\""
+      ],
+      "protected_lines": [],
+      "protected_prefixes": [],
+      "review": "Developer-only escalation recommendation, events-before-level order, unfiltered dump concern and all meta-source scope retain their original strength.",
+      "reviewer": "cx4 takeover integration; separate source/rendered comparison"
+    },
+    {
+      "index": 227,
+      "classification": "mixed-explanation",
+      "source_sha256": "39e7575675dc439a0ff7e8fdec11d9702dbd70aba212b20a301d8bac15ecfc4c",
+      "target_sha256": "f6e569e5fcc92d7e38c984803e3a3a03970394a9289a02ac6694fdd302cf6fb5",
+      "protected_literals": [
+        "\"nothing\"",
+        "H2",
+        "HTTP/2"
+      ],
+      "protected_lines": [],
+      "protected_prefixes": [],
+      "review": "Up to four criteria, HTTP/2 stream locking, replacing other criteria, immediately ending existing tracking and permanent nothing disablement are retained.",
+      "reviewer": "cx4 takeover integration; separate source/rendered comparison"
+    },
+    {
+      "index": 228,
+      "classification": "mixed-explanation",
+      "source_sha256": "16a01a596305ec84df60a038dace671f783febb048f2ab6d9d674a02a77928cd",
+      "target_sha256": "50599eddc89c14edf519a0637cdcbf4c9b87ae0ea02f88e1040592823329d1ff",
+      "protected_literals": [
+        "\"pause\"",
+        "\"start now\"",
+        "\"start\"",
+        "\"stop now\"",
+        "\"stop\""
+      ],
+      "protected_lines": [],
+      "protected_prefixes": [],
+      "review": "pause/start/stop retain distinct waiting/restart/manual-enable behavior. Both start-now/stop-now and subtle-event/lock-on sequence examples are complete through the final anomaly.",
+      "reviewer": "cx4 takeover integration; separate source/rendered comparison"
+    },
+    {
+      "index": 229,
+      "classification": "mixed-explanation",
+      "source_sha256": "1303f00633a9dda55bd015517411558688d79e45e9e51cdbecba1ac37aecde0c",
+      "target_sha256": "456e820d063a23dfe5bfb338588076c34d590e54bb40d8a0c0dd162dbceffde5",
+      "protected_literals": [
+        "\"default\"",
+        "\"quiet\""
+      ],
+      "protected_lines": [],
+      "protected_prefixes": [],
+      "review": "Compared quiet/default/declared levels: decoder availability, low impact, opportunistic call, maximum available accuracy and first-above-quiet default all retained.",
+      "reviewer": "cx4 takeover integration; separate source/rendered comparison"
+    }
+  ],
+  "source_formatting_revalidation": {
+    "method": "Exact reviewed predecessor source/target SHA mapping and byte-for-byte literal-fence witnesses; only documented source errata and markup-only restoration accepted.",
+    "fences": [
+      {
+        "prior": {
+          "index": 1,
+          "source_sha256": "a2be5d3aa26c5f678e0c837b0daab7c893d6bee3be2b2e7350cb68c98b29e2ab",
+          "target_sha256": "d1da505111da7df2d98ad7502ce3c85a6bdf78712a15d4e9fd1ba665d54f38e8"
+        },
+        "index": 1,
+        "source_sha256": "a2be5d3aa26c5f678e0c837b0daab7c893d6bee3be2b2e7350cb68c98b29e2ab",
+        "target_sha256": "d1da505111da7df2d98ad7502ce3c85a6bdf78712a15d4e9fd1ba665d54f38e8",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 2,
+          "source_sha256": "e47e28dfaaf284ea89a5a89a27c82403a3eede6cf7a86a45702e5d07cefe63d3",
+          "target_sha256": "f9ea42e8eea538bc824bfa9b3c091a8dec18740af9b502b193c66057fb2dffc4"
+        },
+        "index": 2,
+        "source_sha256": "e47e28dfaaf284ea89a5a89a27c82403a3eede6cf7a86a45702e5d07cefe63d3",
+        "target_sha256": "f9ea42e8eea538bc824bfa9b3c091a8dec18740af9b502b193c66057fb2dffc4",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 3,
+          "source_sha256": "2a2d31f073443878a048ebaaf4984e6dd8e908b0770261b8ad0f7358a6dd86f8",
+          "target_sha256": "686d71fa71fdbb7e9be07e04d1f91e3e2f0ace8896b27085ade24146259192f0"
+        },
+        "index": 3,
+        "source_sha256": "2a2d31f073443878a048ebaaf4984e6dd8e908b0770261b8ad0f7358a6dd86f8",
+        "target_sha256": "686d71fa71fdbb7e9be07e04d1f91e3e2f0ace8896b27085ade24146259192f0",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 4,
+          "source_sha256": "a2628a9095d7bfb689e1b4eb01350bf0ed0f5f05c54dbd17fa09f77172ede656",
+          "target_sha256": "b717d8cb5a732676a5b84ff3ccb3f758e5c384dd4c2db9047d8b889ce6ff2043"
+        },
+        "index": 4,
+        "source_sha256": "a2628a9095d7bfb689e1b4eb01350bf0ed0f5f05c54dbd17fa09f77172ede656",
+        "target_sha256": "b717d8cb5a732676a5b84ff3ccb3f758e5c384dd4c2db9047d8b889ce6ff2043",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 5,
+          "source_sha256": "ce12df4cba389f45c6fcdc96aad2c715c1f00faee1f57f0cd6c22161be02bef6",
+          "target_sha256": "19ebca05031a4d8eda335e7a30053c9445a4afd3b9fc5e76464e7cae202a5491"
+        },
+        "index": 5,
+        "source_sha256": "ce12df4cba389f45c6fcdc96aad2c715c1f00faee1f57f0cd6c22161be02bef6",
+        "target_sha256": "19ebca05031a4d8eda335e7a30053c9445a4afd3b9fc5e76464e7cae202a5491",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 12,
+          "source_sha256": "1162b56259405b555a4ae7e15747fd9de63b83b5fed67c2191b9d91c3ebd1916",
+          "target_sha256": "5fb08ab938c7c4cec66e446e4489024f4ab4ce3e1ff77b79d1b4d60ca5ef2f9b"
+        },
+        "index": 12,
+        "source_sha256": "1162b56259405b555a4ae7e15747fd9de63b83b5fed67c2191b9d91c3ebd1916",
+        "target_sha256": "5fb08ab938c7c4cec66e446e4489024f4ab4ce3e1ff77b79d1b4d60ca5ef2f9b",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 77,
+          "source_sha256": "66ad6884990e11d71af3cc28c5ef703015cdb426b1ca73946ac40fe2aa812bee",
+          "target_sha256": "6bef62930b6c48680f2123d40dd809815cf02ca13b7b91647059c194643f2a60"
+        },
+        "index": 77,
+        "source_sha256": "66ad6884990e11d71af3cc28c5ef703015cdb426b1ca73946ac40fe2aa812bee",
+        "target_sha256": "6bef62930b6c48680f2123d40dd809815cf02ca13b7b91647059c194643f2a60",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 123,
+          "source_sha256": "0045ce98b212b0f1e82d4bb63f9915cc3696e2b293cc1b589ae4ed56b07768ed",
+          "target_sha256": "13c75bebe8b6fd16ca5c7117e3cf2b324229be140c3b66df31b0e445f9e4dc78"
+        },
+        "index": 123,
+        "source_sha256": "0045ce98b212b0f1e82d4bb63f9915cc3696e2b293cc1b589ae4ed56b07768ed",
+        "target_sha256": "13c75bebe8b6fd16ca5c7117e3cf2b324229be140c3b66df31b0e445f9e4dc78",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 145,
+          "source_sha256": "5383b4df56fade6274befda7fe78443d3c8bf700e600abe00882c411c53836a5",
+          "target_sha256": "ae134b59850c200aac2dd04e3d8be83bc3b3959fa97a6d9214a7f56d385d3cf1"
+        },
+        "index": 145,
+        "source_sha256": "5383b4df56fade6274befda7fe78443d3c8bf700e600abe00882c411c53836a5",
+        "target_sha256": "ae134b59850c200aac2dd04e3d8be83bc3b3959fa97a6d9214a7f56d385d3cf1",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 161,
+          "source_sha256": "070a1cdc12e906fd91671a7b017526aa72e217c0de1b8286327046179651d9ad",
+          "target_sha256": "9d6703c9398156a9f923fd6dac51a25e3011523f783f8d27cfd1285ce16bb6b2"
+        },
+        "index": 161,
+        "source_sha256": "070a1cdc12e906fd91671a7b017526aa72e217c0de1b8286327046179651d9ad",
+        "target_sha256": "9d6703c9398156a9f923fd6dac51a25e3011523f783f8d27cfd1285ce16bb6b2",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 164,
+          "source_sha256": "10ec8f217c43e5599ec7ec5c7bc85c7c30a2c7b49dc5082cd39e1bc9f26ba5df",
+          "target_sha256": "a64941f283ecc2da8a2ece5de097dd7d931c8f99d3bf6226090b6f7cce3b02f5"
+        },
+        "index": 164,
+        "source_sha256": "10ec8f217c43e5599ec7ec5c7bc85c7c30a2c7b49dc5082cd39e1bc9f26ba5df",
+        "target_sha256": "a64941f283ecc2da8a2ece5de097dd7d931c8f99d3bf6226090b6f7cce3b02f5",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 166,
+          "source_sha256": "280e1811a921d8a796d986092889ab3a148395645a13d8b23eeca93b38016314",
+          "target_sha256": "460bb50df1a7fffc229c6d1e84a5be707bb2a69a793abc9b32d69de8fe5497ab"
+        },
+        "index": 166,
+        "source_sha256": "280e1811a921d8a796d986092889ab3a148395645a13d8b23eeca93b38016314",
+        "target_sha256": "460bb50df1a7fffc229c6d1e84a5be707bb2a69a793abc9b32d69de8fe5497ab",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 190,
+          "source_sha256": "547b314d6a84f7002ce54d4ffc20925d6a45a7c37e188f7f2b9a9d2546e182ee",
+          "target_sha256": "b53a483e0d7f6c8071717ab59e5809464a915dcc3496922f756fe8743c808850"
+        },
+        "index": 190,
+        "source_sha256": "547b314d6a84f7002ce54d4ffc20925d6a45a7c37e188f7f2b9a9d2546e182ee",
+        "target_sha256": "b53a483e0d7f6c8071717ab59e5809464a915dcc3496922f756fe8743c808850",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 201,
+          "source_sha256": "e21580692cda42d9625fd63670628f05d519dba756869fbaebd52e9405e16ba7",
+          "target_sha256": "2587e3eb52ecf444dc840c58bbd245e357fec6ebc7998a6b5601d3812a3bd779"
+        },
+        "index": 201,
+        "source_sha256": "e21580692cda42d9625fd63670628f05d519dba756869fbaebd52e9405e16ba7",
+        "target_sha256": "2587e3eb52ecf444dc840c58bbd245e357fec6ebc7998a6b5601d3812a3bd779",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 217,
+          "source_sha256": "cf4189e0f64877b438038b1f52d5704f6405a99c09d12d4b0de8d0f059691996",
+          "target_sha256": "1a14c35fa85da6a4ce2d2e0df85aa4d77df0e26ae1d1c974d04ebd21a6eebfc8"
+        },
+        "index": 217,
+        "source_sha256": "cf4189e0f64877b438038b1f52d5704f6405a99c09d12d4b0de8d0f059691996",
+        "target_sha256": "1a14c35fa85da6a4ce2d2e0df85aa4d77df0e26ae1d1c974d04ebd21a6eebfc8",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 218,
+          "source_sha256": "87e5dfeaca478df2722c94178e82876155d242a77fb191eac5603b6ffee6e01f",
+          "target_sha256": "bb6d80b9a3e61b58df66930ecdc7898240912eb235c385786421b36a484ddc93"
+        },
+        "index": 218,
+        "source_sha256": "87e5dfeaca478df2722c94178e82876155d242a77fb191eac5603b6ffee6e01f",
+        "target_sha256": "bb6d80b9a3e61b58df66930ecdc7898240912eb235c385786421b36a484ddc93",
+        "reason": "unchanged exact reviewed English fence"
+      }
+    ],
+    "literal_blocks": [
+      {
+        "row": 1,
+        "action": "exact literal range rebased",
+        "source_sha256": "b779df2968020158e76178ab78bb78f21eec273a9813d523172607584d3f5828",
+        "lines": [
+          2209,
+          2213
+        ],
+        "start_column": 1
+      }
+    ]
+  }
+}

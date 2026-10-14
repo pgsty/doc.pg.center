@@ -172,7 +172,7 @@ def check(build):
         en = Page(build / url.lstrip('/') / 'index.html')
         de = Page(build / 'de' / url.lstrip('/') / 'index.html')
         if en.headings != de.headings: errors.append(url + ': rendered heading order/IDs changed')
-        if de.canonical != ['https://pig.center/de' + url]: errors.append(url + ': wrong canonical')
+        if de.canonical != ['https://doc.pg.center/de' + url]: errors.append(url + ': wrong canonical')
         if de.language != ['de-DE']: errors.append(url + ': wrong HTML language')
         old = Page(build / 'de' / url.removeprefix('/docs/') / 'index.html')
         if old.canonical != de.canonical or old.refresh != de.canonical:
@@ -198,7 +198,7 @@ def check(build):
         }
         markdown = (build / 'de' / url.lstrip('/') / 'index.md').read_text(encoding='utf-8')
         if body not in markdown: errors.append(url + ': incomplete Markdown body')
-        if 'Source: https://pig.center/de' + url + 'index.md' not in llms or body not in llms:
+        if 'Source: https://doc.pg.center/de' + url + 'index.md' not in llms or body not in llms:
             errors.append(url + ': incomplete LLMS body/source')
         print_ids.update(h.anchor for h in parity.heading_rows(body))
     printed = Page(build / 'de/_print/docs/pgbackrest/index.html')
@@ -216,7 +216,7 @@ def check(build):
         errors.append('navigation.json order/coverage differs')
     errors.extend(print_structure(build, sources, [node['id'] for node in de_nodes]))
     for node in de_nodes:
-        if node['url'] != 'https://pig.center/de' + node['id'] or node['markdown'] != node['url'] + 'index.md':
+        if node['url'] != 'https://doc.pg.center/de' + node['id'] or node['markdown'] != node['url'] + 'index.md':
             errors.append('navigation.json wrong locale/output: ' + node['id'])
     home = Page(build / 'de/index.html')
     if len(home.index_sources) != 1:

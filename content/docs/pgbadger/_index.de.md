@@ -3,6 +3,7 @@ title: "Dokumentation zu pgBadger 13.2"
 linkTitle: pgBadger
 weight: 40
 description: "Schnelle Analyse von PostgreSQL- und PgBouncer-Protokollen mit detaillierten, in sich geschlossenen Berichten"
+search_keywords: [csvlog, jsonlog, logplex, stderr, syslog]
 icon: fa-solid fa-otter
 type: docs
 outputs: [HTML, RSS, print, markdown, LLMSFULL]

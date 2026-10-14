@@ -20,13 +20,13 @@ PatroniはPostgreSQLのストリーミングレプリケーションを使用し
 
 失われる可能性があるトランザクション量は、`maximum_lag_on_failover`パラメーターで制御します。プライマリーのトランザクションログ位置をリアルタイムには取得しないため、フェイルオーバー時に失われるデータ量の実際の最悪値は、`maximum_lag_on_failover`バイトのトランザクションログに、直近の`ttl`秒間（平均では`loop_wait`/2秒間）に書き込まれた量を加えたものです。ただし、通常の定常状態でのレプリケーション遅延は1秒を大幅に下回ります。
 
-デフォルトでは、Patroniはリーダー選出時にレプリカの現在のタイムラインを考慮しません。これは状況によっては望ましくない動作です。`check_timeline`を`true`に設定すると、以前のプライマリーと同じタイムラインにないノードが新しいリーダーになることを防げます。
+デフォルトでは、Patroniはリーダー選出時にレプリカの現在のタイムラインを考慮しません。これは状況によっては望ましくない動作です。`check_timeline`を`true`に設定すると、タイムラインがクラスターで最後に確認されたものより古いノードや、タイムラインを特定できないノードが新しいリーダーになることを防げます。
 
 --------
 
 ## PostgreSQLの同期レプリケーション {#postgresql-synchronous-replication}
 
-Patroniでは、Postgresの[同期レプリケーション](http://www.postgresql.org/docs/current/static/warm-standby.html#SYNCHRONOUS-REPLICATION)を使用できます。同期レプリケーションでは、接続元のクライアントに成功を返す前に、書き込みがセカンダリーに保存されたことを確認し、クラスター全体の整合性を確保します。その代償として、書き込みのレイテンシーが増加し、スループットが低下します。このスループットはネットワーク性能に全面的に依存します。
+Patroniでは、Postgresの[同期レプリケーション](http://www.postgresql.org/docs/current/static/warm-standby.html#SYNCHRONOUS-REPLICATION)を使用できます。同期レプリケーションでは、接続元のクライアントに成功を返す前に、書き込みがセカンダリーに保存されたことを確認し、クラスター全体の整合性を確保します。その代償として、書き込みのレイテンシーが増加し、スループットが低下します。このスループットはネットワーク性能の影響を受けます。
 
 ホスティング型のデータセンター環境（AWS、Rackspaceなど、または自分で制御できないネットワーク）では、同期レプリケーションにより書き込み性能の変動が大幅に増加します。リーダーからフォロワーに到達できなくなると、リーダーは実質的に読み取り専用になります。
 
@@ -51,36 +51,13 @@ PostgreSQLの同期レプリケーションを使用しても、あらゆる状�
 
 [synchronous_mode](/ja/docs/patroni/replication_modes#synchronous_mode)を有効にしても、あらゆる状況で複数ノードにコミットが永続化されることを保証するわけではありません。適切なスタンバイが利用できない場合も、プライマリーは書き込みを受け付けますが、そのレプリケーションは保証しません。このモードでプライマリーが故障すると、スタンバイは昇格しません。以前のプライマリーのホストが復帰すると、管理者が手動フェイルオーバーを行っていない限り、自動的に昇格します。この動作により、2ノードのクラスターでも同期モードを使用できます。
 
-[synchronous_mode](/ja/docs/patroni/replication_modes#synchronous_mode)が有効な状態でスタンバイがクラッシュすると、Patroniの次の処理サイクルでプライマリーを単独動作モードへ切り替えるまで、コミットはブロックされます。書き込みの遅延は最悪で`ttl`秒、平均で`loop_wait`/2秒です。スタンバイを手動で停止または再起動する場合は、コミット処理が中断されません。PostgreSQLの停止を開始する前に、スタンバイは同期スタンバイの役割から自身を外すようプライマリーに通知します。
+[synchronous_mode](/ja/docs/patroni/replication_modes#synchronous_mode)が有効で厳密モードが無効な状態で、唯一の同期スタンバイがクラッシュすると、Patroniの次の処理サイクルでプライマリーを単独動作モードへ切り替えるまで、コミットはブロックされます。書き込みの遅延は最悪で`ttl`秒、平均で`loop_wait`/2秒です。スタンバイを手動で停止または再起動する場合は、コミット処理が中断されません。PostgreSQLの停止を開始する前に、スタンバイは同期スタンバイの役割から自身を外すようプライマリーに通知します。
 
-各書き込みが少なくとも2つのノードに永続保存されることを必ず保証する必要がある場合は、[synchronous_mode](/ja/docs/patroni/replication_modes#synchronous_mode)に加えて`synchronous_mode_strict`を有効にしてください。このパラメーターは、同期スタンバイの候補が存在しない場合にPatroniがプライマリーの同期レプリケーションを無効にすることを防ぎます。Postgresのトランザクションが明示的に`synchronous_commit`を無効にしない限り、少なくとも1つの同期レプリカが起動するまで、すべてのクライアントの書き込み要求をブロックします。
+各書き込みが少なくとも2つのノードに永続保存されることを必ず保証する必要がある場合は、[synchronous_mode](/ja/docs/patroni/replication_modes#synchronous_mode)に加えて`synchronous_mode_strict`を有効にしてください。このパラメーターは、同期スタンバイの候補が存在しない場合にPatroniがプライマリーの同期レプリケーションを無効にすることを防ぎます。同期コミットは同期レプリカが利用可能になるまでブロックされます。`synchronous_commit`が`off`または`local`のトランザクションは、この待機を回避します。
 
-`synchronous_mode_strict`が有効で、最小レプリケーション係数を満たすアクティブなレプリケーション接続がない場合、Patroniは`synchronous_standby_names`を次のように決定します。
+優先順位に基づく同期モード（`synchronous_mode: on`）で厳密モードが有効であり、適切な同期スタンバイが利用できない場合、Patroni 4.1.5は`synchronous_standby_names`を`*`に設定し、警告`"No standbys available!"`を出力します。これにより、コミットは同期スタンバイを待ち続けます。このワイルドカードは、確認応答の送信元を`/sync`に以前記録されていたメンバー名に限定しません。
 
-1. **最後に確認された同期ノードがDCSの`/sync`キーに存在する場合**：Patroniは、そこに保存されているノードを`synchronous_standby_names`に設定するか、その設定を維持します。たとえば、`/sync`に`leader=node1, sync_standby=node2,node3`があり、両スタンバイがストリーミングを停止しても、Patroniは次の設定を引き続き使用します。
-
-    ```ini
-    synchronous_standby_names = 'node2,node3'
-    ```
-
-    これらは、最新のコミットを受信したことが最後に確認されたノードです。そのうち少なくとも1つが再接続するまで、コミットはブロックされます。
-
-2. **非同期ノードへ手動フェイルオーバーした場合**：たとえば`patronictl failover --force`により、`/sync`キーに含まれていなかったノードが昇格すると、`synchronous_standby_names`には以前のプライマリーが設定されます。最新のコミット済みデータを保持していると保証できるのは、以前のプライマリーだけだからです。
-
-3. **`/sync`キーが空の場合**：たとえば、厳密モードを有効にした直後や、クラスターを新規にブートストラップしてレプリカがまだない場合です。Patroniは次の値を設定します。
-
-    ```ini
-    synchronous_standby_names = '__patroni_strict_sync_replica_placeholder__'
-    ```
-
-    これは実際のノード名とは一致しない組み込みの特殊値です。適格なレプリカがプライマリーからストリーミングを開始するまで、すべての書き込みをブロックします。このプレースホルダーは従来の`*`ワイルドカードを置き換えます。従来のワイルドカードでは、適格でないノードが誤って同期要件を満たす可能性がありました。
-
-> [!WARNING]
-> `__patroni_strict_sync_replica_placeholder__`はPatroniが予約している値であり、`patroni.yaml`でPatroniノードの`name`として**使用してはいけません**。この名前を設定すると、Patroniは起動を拒否します。
-
-厳密モードが有効になると、Patroniはログに警告`"No active replication connections and synchronous_mode_strict is requested. Commits will be delayed."`を出力します。この警告はHAループの反復ごとではなく、有効化イベントごとに1回だけ出力されます。
-
-`nosync`タグをtrueに設定すると、そのスタンバイが同期スタンバイになることを防げます。低速なネットワーク経由で接続されており、同期スタンバイになると性能が低下するスタンバイには、この設定を推奨します。`nostream`タグをtrueに設定しても同じ効果があります。
+`nosync`タグをtrueに設定すると、Patroniはそのスタンバイを同期スタンバイの選択対象から除外します。低速なネットワーク経由で接続されており、同期スタンバイになると性能が低下するスタンバイには、この設定を推奨します。`nostream`タグをtrueに設定しても同じ効果があります。
 
 同期モードは、`patronictl edit-config`コマンドまたはPatroniのRESTインターフェースで有効・無効を切り替えられます。手順は[動的設定](/ja/docs/patroni/config/dynamic#dynamic)を参照してください。
 
@@ -90,7 +67,7 @@ PostgreSQLの同期レプリケーションを使用しても、あらゆる状�
 
 ## 同期レプリケーション係数 {#synchronous-replication-factor}
 
-Patroniは`synchronous_node_count`パラメーターで同期スタンバイデータベースの数を管理します。デフォルトは`1`です。[synchronous_mode](/ja/docs/patroni/replication_modes#synchronous_mode)が`off`の場合、このパラメーターは効果を持ちません。有効な場合は、Patroniが`synchronous_node_count`に基づいて同期スタンバイデータベースの正確な数を管理し、メンバーの参加・離脱に合わせてDCSの状態とPostgreSQLの`synchronous_standby_names`を調整します。適格なノード数を超える値を設定すると、Patroniが自動的に値を引き下げます。
+Patroniは`synchronous_node_count`パラメーターで同期スタンバイデータベースの数を管理します。デフォルトは`1`です。[synchronous_mode](/ja/docs/patroni/replication_modes#synchronous_mode)が`off`の場合、このパラメーターは効果を持ちません。有効な場合は、Patroniが`synchronous_node_count`に基づいて同期スタンバイデータベースの正確な数を管理し、メンバーの参加・離脱に合わせてDCSの状態とPostgreSQLの`synchronous_standby_names`を調整します。適格なノードが不足している場合、Patroniが使用する同期スタンバイは要求された数より少なくなることがあります。ただし、厳密なクォーラムモードでは、コミットは設定された数のスタンバイからの確認応答を待ち続けます。
 
 --------
 
@@ -110,7 +87,7 @@ Patroniは`synchronous_node_count`パラメーターで同期スタンバイデ�
 - DCSの`/sync`キーに同期スタンバイとして公開されている限り、そのノードはPostgreSQLでも同期スタンバイに設定されていなければなりません。
 - リーダーでも現在の同期スタンバイでもないノードは、自動的に自身を昇格させることができません。
 
-Patroniは、`synchronous_node_count`パラメーターに基づき、1つ以上の同期スタンバイノードだけを`synchronous_standby_names`に設定します。
+同期スタンバイの集合が空でない場合、Patroniは`synchronous_node_count`に基づき、1つ以上の同期スタンバイノードを`synchronous_standby_names`に設定します。
 
 PatroniはHAループの反復ごとに同期スタンバイの選択を見直します。現在の同期スタンバイが接続されており、同期状態の解除を要求していなければ、その選択を維持します。それ以外の場合は、同期可能なクラスターメンバーのうち、レプリケーションが最も先に進んでいるものを選びます。
 
@@ -159,7 +136,7 @@ PatroniはHAループの反復ごとに、ノードの可用性と要求され�
 
 `synchronous_node_count`、`maximum_lag_on_syncnode`、`synchronous_mode_strict`などの他のパラメーターは、`synchronous_mode=on`の場合と同様に機能します。
 
-`synchronous_mode_strict`を使用するクォーラムコミットモードでアクティブなレプリカがない場合、Patroniは`/sync`に記録された最後の投票ノードを保持し、`synchronous_standby_names`を`ANY N (<last known voters>)`に設定します。`/sync`キーに投票ノードが保存されていない場合は、`ANY 1 (__patroni_strict_sync_replica_placeholder__)`を設定します。
+クォーラムコミットモードで同期スタンバイの集合が空であり、厳密モードで`N`台のスタンバイからの確認応答が必要な場合、Patroni 4.1.5は`synchronous_standby_names`を`ANY N (*)`に設定します。
 
 ### 例: {#example-1}
 

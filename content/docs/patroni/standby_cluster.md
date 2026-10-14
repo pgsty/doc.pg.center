@@ -10,7 +10,7 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/standby_cluster.html"
 ---
 
 <a id="standby_cluster"></a>
-Patroni also support running cascading replication to a remote datacenter (region) using a feature that is called "standby cluster". This type of clusters has:
+Patroni also supports running cascading replication to a remote datacenter (region) using a feature that is called "standby cluster". This type of clusters has:
 
 - "standby leader", that behaves pretty much like a regular cluster leader, except it replicates from a remote node.
 - cascade replicas, that are replicating from standby leader.

@@ -74,7 +74,7 @@ SHARED_ASSET_EXTENSIONS = frozenset(
         ".zip",
     }
 )
-INTERNAL_HOSTS = frozenset({"pig.center", "www.pig.center"})
+INTERNAL_HOSTS = frozenset({"doc.pg.center", "www.doc.pg.center"})
 
 FENCE_OPEN_RE = re.compile(r"^ {0,3}(`{3,}|~{3,})(?:[^\r\n]*)$")
 ATX_HEADING_RE = re.compile(r"^ {0,3}(#{1,6})(?:[ \t]+|$)(.*)$")

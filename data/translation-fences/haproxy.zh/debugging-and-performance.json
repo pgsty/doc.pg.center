@@ -1,0 +1,13 @@
+{
+  "fences": [],
+  "source": "content/docs/haproxy/debugging-and-performance.md",
+  "language": "zh",
+  "source_sha256": "e6c81101044dca0c0789df1b00d0c0a434313ef73f28d8f2f9a4bcf3d00861db",
+  "target_sha256": "8a3b6e15ce34cf881ba271ea2eab08a261d3622984b55d96a91e3a7f73babfeb",
+  "review_scope": "Complete identified explanatory-fence inventory reviewed separately from structural/numeric technical screening and selective manual prose review. No claim of full independent sentence-by-sentence review of all prose.",
+  "literal_blocks": [],
+  "literal_formatting_revalidation": {
+    "method": "Exact reviewed predecessor hashes and current source/target literal equality; remove obsolete protection only with proven default-protected exact fenced replacement.",
+    "events": []
+  }
+}

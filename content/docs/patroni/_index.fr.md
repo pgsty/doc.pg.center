@@ -19,14 +19,14 @@ cascade:
   module: [PATRONI]
 ---
 
-> [!AVERTISSEMENT]
-> Exécution de Patroni sur des systèmes à mémoire limitée avec Python 3.11+
+> [!WARNING]
+> Exécution de Patroni sur des **systèmes à mémoire limitée avec Python 3.11+**
 
 Si vous exécutez Patroni sur un système avec des limites de mémoire strictes, par exemple avec `vm.overcommit_memory=2` (recommandé pour PostgreSQL), et utilisez Python 3.11 ou une version ultérieure, vous pouvez observer un comportement inattendu :
 
-- Patroni est en état sain
+- Patroni semble sain
 - PostgreSQL continue de s'exécuter
-- L'API REST de Patroni devient inopérante
+- L'**API REST de Patroni devient inopérante**
 - Le système d'exploitation indique que Patroni écoute sur le port de l'API REST
 - Les journaux de Patroni semblent normaux ; cependant, les messages suivants peuvent apparaître une fois : `Exception ignored in thread started by: <object repr() failed>`, `MemoryError`
 - Les journaux du noyau peuvent contenir des messages tels que `not enough memory for the allocation`
@@ -47,7 +47,7 @@ Lors de l'exécution avec `vm.overcommit_memory=2` (recommandé pour PostgreSQL)
 En outre, vous pouvez ajuster les paramètres de configuration suivants de Patroni :
 
 - `thread_stack_size` - taille de la pile utilisée par les threads lancés par Patroni. Réduire cette valeur diminue l'utilisation mémoire du processus Patroni. La valeur par défaut définie par Patroni est `512kB`. Augmentez `thread_stack_size` si Patroni subit des plantages liés à la pile ; sinon, la valeur par défaut est suffisante.
-- `thread_pool_size` - taille du pool de threads utilisé par Patroni pour les tâches asynchrones et la communication API REST avec les autres membres lors des courses au leader ou des vérifications en mode d'urgence. La valeur par défaut est `5`, qui est suffisante pour les clusters à trois nœuds.
+- `thread_pool_size` - taille du pool de threads utilisé par Patroni pour les tâches asynchrones et la communication API REST avec les autres membres lors de la course au leader ou des vérifications failsafe. La valeur par défaut est `5`, ce qui est suffisant pour les clusters à trois nœuds.
 - `restapi.thread_pool_size` - taille du pool de threads utilisé pour traiter les requêtes API REST. La valeur par défaut est `5`, permettant jusqu'à cinq requêtes API REST en parallèle. Notez que les requêtes impliquant des requêtes SQL sont effectivement sérialisées, car une seule connexion à la base de données est utilisée, aussi l'augmentation de cette valeur ne procure généralement aucun avantage.
 
 --------

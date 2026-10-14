@@ -10,36 +10,36 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/security.html"
 ---
 
 <a id="security"></a>
-Patroni クラスターには、不正アクセスから保護すべき2つのインターフェースがあります。1つは分散型構成ストレージ（DCS）、もう1つは Patroni REST API です。
+Patroniクラスターには、不正アクセスから保護すべき2つのインターフェースがあります。1つは分散型構成ストレージ（DCS）、もう1つはPatroni REST APIです。
 
 --------
 
-## DCS の保護 {#protecting-dcs}
+## DCSの保護 {#protecting-dcs}
 
-Patroni と [patronictl](/ja/docs/patroni/patronictl#patronictl) は、DCS に対してデータの格納および取得を行います。
+Patroniと[patronictl](/ja/docs/patroni/patronictl#patronictl)は、DCSに対してデータの格納および取得を行います。
 
-DCS には機密情報は含まれていませんが、Patroni/PostgreSQL の設定の一部を変更できるため、最初に保護すべきは DCS 自体です。
+DCSに機密情報が含まれていない場合でも、Patroni/PostgreSQLの構成の一部を変更できるため、最初に保護すべきはDCS自体です。
 
-保護の詳細は使用する DCS の種類によって異なります。サポートされている DCS の種類における認証および暗号化パラメータ (tokens/basic-auth/client 証明書) は、[settings](/ja/docs/patroni/config/yaml#yaml) で説明されています。
+保護の詳細は使用するDCSの種類によって異なります。サポートされているDCSの種類における認証および暗号化パラメータ（トークン／基本認証／クライアント証明書）は、[設定](/ja/docs/patroni/config/yaml#yaml)で説明されています。
 
-一般的な推奨事項として、すべての DCS 通信で TLS を有効にする必要があります。
+一般的な推奨は、すべてのDCS通信でTLSを有効にすることです。
 
 --------
 
-## REST API の保護 {#protecting-the-rest-api}
+## REST APIの保護 {#protecting-the-rest-api}
 
-REST API の保護はより複雑な作業です。
+REST APIの保護はより複雑な作業です。
 
-Patroni の REST API は、リーダー競合中に Patroni 自身が使用し、[patronictl](/ja/docs/patroni/patronictl#patronictl) が failovers/switchovers/reinitialize/restarts/reloads を実行するために使用し、HAProxy またはその他のロードバランサが HTTP ヘルスチェックを実行するために使用され、もちろんモニタリングにも利用できます。
+PatroniのREST APIは、リーダー選出の実行中にPatroni自身が使用し、[patronictl](/ja/docs/patroni/patronictl#patronictl)がフェイルオーバー／スイッチオーバー／再初期化／再起動／リロードを実行するために使用し、HAProxyまたはその他のロードバランサーがHTTPヘルスチェックを実行するために使用され、もちろんモニタリングにも利用できます。
 
-セキュリティの観点から、REST API には安全な（`GET` リクエスト、情報の取得のみ）と安全でない（`PUT`、`POST`、`PATCH` および `DELETE` リクエスト、ノードの状態の変更）エンドポイントが含まれます。
+セキュリティの観点から、REST APIには安全な（`GET`リクエスト、情報の取得のみ）と安全でない（`PUT`、`POST`、`PATCH`および`DELETE`リクエスト、ノードの状態の変更）エンドポイントが含まれます。
 
-非安全エンドポイントは、`restapi.authentication.username` および `restapi.authentication.password` パラメータを設定することで HTTP basic-auth で保護できます。安全エンドポイントを TLS を有効化せずに保護する方法はありません。
+安全でないエンドポイントは、`restapi.authentication.username`および`restapi.authentication.password`パラメータを設定することでHTTP basic-authで保護できます。安全なエンドポイントをTLSを有効化せずに保護する方法はありません。
 
-REST API 用の TLS を有効にし、PKI を構成した場合、すべてのエンドポイントで API サーバーと API クライアントの相互認証が可能になります。
+REST API用のTLSを有効にし、PKIを構築した場合、すべてのエンドポイントでAPIサーバーとAPIクライアントの相互認証が可能になります。
 
-`restapi` セクションのパラメータにより、サーバーへの TLS クライアント認証が可能になります。`verify_client` パラメータの値に応じて、API サーバーは安全な API 呼び出しと安全でない API 呼び出しの両方 (`verify_client: required`)、または安全でない API 呼び出しのみ (`verify_client: optional`)、あるいは API 呼び出しのいずれにも認証を要求しません (`verify_client: none`)。
+`restapi`セクションのパラメータにより、サーバーへのTLSクライアント認証が可能になります。`verify_client`パラメータの値に応じて、APIサーバーがクライアント証明書の検証成功を要求する対象は、安全なAPI呼び出しと安全でないAPI呼び出しの両方（`verify_client: required`）、安全でないAPI呼び出しのみ（`verify_client: optional`）、あるいはどのAPI呼び出しでもない（`verify_client: none`）のいずれかです。
 
-`ctl` セクションのパラメータにより、TLS サーバー認証がクライアント（[patronictl](/ja/docs/patroni/patronictl#patronictl)）に対して有効になります。このツールは Patroni と同じ設定を使用します。`insecure: true` を設定することで、クライアントによるサーバー証明書の検証を無効化できます。TLS クライアントパラメータの詳細については、[settings](/ja/docs/patroni/config/yaml#patronictl_settings) を参照してください。
+`ctl`セクションのパラメータにより、クライアント（Patroniと同じ構成を使用する[patronictl](/ja/docs/patroni/patronictl#patronictl)）がTLSサーバーを認証できます。`insecure: true`を設定することで、クライアントによるサーバー証明書の検証を無効化できます。TLSクライアントパラメータの詳細については、[設定](/ja/docs/patroni/config/yaml#patronictl_settings)を参照してください。
 
-PostgreSQL データベース本体に対する不正アクセスからの保護は、本ドキュメントの範囲外であり、<https://www.postgresql.org/docs/current/client-authentication.html> で説明されています。
+PostgreSQLデータベース本体に対する不正アクセスからの保護は、本ドキュメントの範囲外であり、<https://www.postgresql.org/docs/current/client-authentication.html>で説明されています。

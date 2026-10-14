@@ -80,7 +80,7 @@ async function checkLocale(browser, language, htmlLanguage, viewport) {
         tableCount:document.querySelectorAll('.td-content table').length,
       }));
       assert.equal(info.language, htmlLanguage, route);
-      assert.equal(info.canonical, 'https://pig.center' + route, route);
+      assert.equal(info.canonical, 'https://doc.pg.center' + route, route);
       assert(info.width <= info.viewport + 1, 'page overflow ' + route);
       assert.deepEqual(info.sidebar, routes, 'sidebar ' + route);
       assert.deepEqual(info.pager, [routes[index - 1], routes[index + 1]].filter(Boolean), 'pager ' + route);

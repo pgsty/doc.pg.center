@@ -1,0 +1,119 @@
+{
+  "source": "content/docs/haproxy/global.md",
+  "language": "fr",
+  "fences": [
+    {
+      "index": 14,
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"infinite\""
+      ],
+      "protected_lines": [],
+      "source_sha256": "5ebe304d39b85125c65222c78ad6a593ddf82ad9e76c8fb0a1ae077f87e31b6e",
+      "target_sha256": "71a7e3fc002e7c001ee4bf573b97cf8890c2194e1749de2d53a60c4acf220f45",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 38,
+      "classification": "argument-description",
+      "protected_literals": [],
+      "protected_lines": [],
+      "source_sha256": "9596f03fed92cd26382b5a406bbbf0546f8085f2e643e6e7c980d86b1016ceec",
+      "target_sha256": "9e424e75c1489dad696e6d3e40e5a9d2c6656fc379669d8a094492edae3be40b",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 49,
+      "classification": "argument-description",
+      "protected_literals": [],
+      "protected_lines": [],
+      "source_sha256": "96a91e99be666ea75ea11645e59bc9aa74af6b87865f444a00c00020c5c9ec00",
+      "target_sha256": "74edd79322d80fb384750a33b0076bb76ff973621a3ef7f56eb1efc1cf68c8bc",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 201,
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"auto\"",
+        "\"ignore\"",
+        "\"rq-load\"",
+        "\"tune.runqueue-depth\""
+      ],
+      "protected_lines": [],
+      "source_sha256": "2bfefedb65e9df5a8d071e23ff46b9e75329b74cb3a90252db95081efae01af4",
+      "target_sha256": "db5719222d4d89591c72fac256db1bccb2df3db36e3fd1442163976928435040",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 202,
+      "classification": "argument-description",
+      "protected_literals": [],
+      "protected_lines": [],
+      "source_sha256": "88276232f602b5177e1e994e123310db0e1a5ba2d90916cb706834c9fbcecc55",
+      "target_sha256": "024d7ada1bdfe4b84283abf0f5a8fe04b5de78c4308a358b21dc6438dad35f9b",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 296,
+      "classification": "table-labels",
+      "protected_literals": [],
+      "protected_lines": [
+        "  --------------------------------|-----------------------------------------",
+        "  CLIENT_EARLY_TRAFFIC_SECRET     |  %[ssl_xx_client_early_traffic_secret]",
+        "  CLIENT_HANDSHAKE_TRAFFIC_SECRET |  %[ssl_xx_client_handshake_traffic_secret]",
+        "  SERVER_HANDSHAKE_TRAFFIC_SECRET |  %[ssl_xx_server_handshake_traffic_secret]",
+        "  CLIENT_TRAFFIC_SECRET_0         |  %[ssl_xx_client_traffic_secret_0]",
+        "  SERVER_TRAFFIC_SECRET_0         |  %[ssl_xx_server_traffic_secret_0]",
+        "  EXPORTER_SECRET                 |  %[ssl_xx_exporter_secret]",
+        "  EARLY_EXPORTER_SECRET           |  %[ssl_xx_early_exporter_secret]"
+      ],
+      "source_sha256": "18aa70fbef42ceaf67e6c2cb5468bcc804a822250dcf66ab219953ecc8ac6b70",
+      "target_sha256": "ab95281ca164b404caae3cae5e85902cb6af70d2b5adb7d9d8db8930314cff36",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 298,
+      "classification": "table-labels",
+      "protected_literals": [
+        "$HAPROXY_KEYLOG_BC_LOG_FMT",
+        "$HAPROXY_KEYLOG_FC_LOG_FMT"
+      ],
+      "protected_lines": [],
+      "source_sha256": "f10156fccf95c60e896224ab009951a77e3b7cfaa4020ce0e09e8353d8f8f91e",
+      "target_sha256": "a46eb78e30250ac37e9b5d5b67ee1c752d62badb5bf64a35f425a3922e9dcf44",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 324,
+      "classification": "argument-description",
+      "protected_literals": [],
+      "protected_lines": [],
+      "source_sha256": "c94ad44e8315f3adaf305f57df114d0a511d3b68a43bdfba35f5f20c266af3e7",
+      "target_sha256": "a71304d9eb1faaa79b9b9e5ddefc768895cc2f134f4592f446af8afd509d8c1c",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    }
+  ],
+  "literal_blocks": [
+    {
+      "lines": [
+        1559,
+        1559
+      ],
+      "classification": "source-code",
+      "source_sha256": "9738765186b1d1881879e390e8a294d7002fdad22fbc7b87c5ed2d2eced44821"
+    }
+  ],
+  "literal_snippets": [
+    {
+      "text": "h1-accept-payload-with-any-method",
+      "classification": "configuration",
+      "source_sha256": "db65a660f07bbc43c55f259a9d0a76e81e4d221fa404bf270a80d8861c0ce279"
+    },
+    {
+      "text": "h1-do-not-close-on-insecure-transfer-encoding",
+      "classification": "configuration",
+      "source_sha256": "1ecbf778b7559e3c6ebc5b50cda24edb30439b681cc88bec42395a38b36f421d"
+    }
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "source": "content/docs/haproxy/filters.md",
+  "language": "ru",
+  "fences": [
+    {
+      "index": 1,
+      "classification": "argument-description",
+      "source_sha256": "3fefe71538ee52f953d92091c208f5668ffd9fa72f7a912c235d76e4ca88f74f",
+      "target_sha256": "93e76c7af35b95ee7a89a25d68e44005f7f63efa99dde6eb20985bbd0596c947",
+      "protected_literals": [
+        "TRACE",
+        "max-fwd"
+      ],
+      "protected_lines": [],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 1,
+          "source_sha256": "3fefe71538ee52f953d92091c208f5668ffd9fa72f7a912c235d76e4ca88f74f",
+          "target_sha256": "93e76c7af35b95ee7a89a25d68e44005f7f63efa99dde6eb20985bbd0596c947"
+        },
+        {
+          "index": 1,
+          "source_sha256": "3fefe71538ee52f953d92091c208f5668ffd9fa72f7a912c235d76e4ca88f74f",
+          "target_sha256": "93e76c7af35b95ee7a89a25d68e44005f7f63efa99dde6eb20985bbd0596c947"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 2,
+      "classification": "argument-description",
+      "source_sha256": "eb11433cd9d9d300fd41f1646da0cce6f2887481fa0a435547db1bc505bfdd16",
+      "target_sha256": "d5b0f0a8be5836b146c055e14643d77e7243bc29c17326be3e3c8e1054d0b585",
+      "protected_literals": [],
+      "protected_lines": [],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 2,
+          "source_sha256": "eb11433cd9d9d300fd41f1646da0cce6f2887481fa0a435547db1bc505bfdd16",
+          "target_sha256": "d5b0f0a8be5836b146c055e14643d77e7243bc29c17326be3e3c8e1054d0b585"
+        },
+        {
+          "index": 2,
+          "source_sha256": "eb11433cd9d9d300fd41f1646da0cce6f2887481fa0a435547db1bc505bfdd16",
+          "target_sha256": "d5b0f0a8be5836b146c055e14643d77e7243bc29c17326be3e3c8e1054d0b585"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 3,
+      "classification": "argument-description",
+      "source_sha256": "3e7fec06ee6cb900894f53175bb0c05ad8d02422619dd7624631d3cff5d8be2d",
+      "target_sha256": "1a68d10afbc76e645d991686d7f31edb47ba95af4c0198b14f05c41ed89742b2",
+      "protected_literals": [
+        "cache"
+      ],
+      "protected_lines": [],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 3,
+          "source_sha256": "3e7fec06ee6cb900894f53175bb0c05ad8d02422619dd7624631d3cff5d8be2d",
+          "target_sha256": "1a68d10afbc76e645d991686d7f31edb47ba95af4c0198b14f05c41ed89742b2"
+        },
+        {
+          "index": 3,
+          "source_sha256": "3e7fec06ee6cb900894f53175bb0c05ad8d02422619dd7624631d3cff5d8be2d",
+          "target_sha256": "1a68d10afbc76e645d991686d7f31edb47ba95af4c0198b14f05c41ed89742b2"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 4,
+      "classification": "argument-description",
+      "source_sha256": "0e111b83ae62ea6d1602bf0f8cd3dfb02507dd6d2b6b387930ec46f89bc3202b",
+      "target_sha256": "96d8f46a0cf2a2c59d5813122076f1e91b9b44352593c8aaafe45da5905c6ebe",
+      "protected_literals": [
+        "fcgi-app"
+      ],
+      "protected_lines": [],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 4,
+          "source_sha256": "0e111b83ae62ea6d1602bf0f8cd3dfb02507dd6d2b6b387930ec46f89bc3202b",
+          "target_sha256": "96d8f46a0cf2a2c59d5813122076f1e91b9b44352593c8aaafe45da5905c6ebe"
+        },
+        {
+          "index": 4,
+          "source_sha256": "0e111b83ae62ea6d1602bf0f8cd3dfb02507dd6d2b6b387930ec46f89bc3202b",
+          "target_sha256": "96d8f46a0cf2a2c59d5813122076f1e91b9b44352593c8aaafe45da5905c6ebe"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 5,
+      "classification": "argument-description",
+      "source_sha256": "2831c4bc944708f999d8545ac11980dc86755663277d88c96d42ea8571a95c97",
+      "target_sha256": "862e254c8d0862aed3c42cb4061213fac5a08f7b56e22fb1e98630c9f6bca811",
+      "protected_literals": [
+        "OpenTracing",
+        "ot-filter"
+      ],
+      "protected_lines": [],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 5,
+          "source_sha256": "2831c4bc944708f999d8545ac11980dc86755663277d88c96d42ea8571a95c97",
+          "target_sha256": "862e254c8d0862aed3c42cb4061213fac5a08f7b56e22fb1e98630c9f6bca811"
+        },
+        {
+          "index": 5,
+          "source_sha256": "2831c4bc944708f999d8545ac11980dc86755663277d88c96d42ea8571a95c97",
+          "target_sha256": "862e254c8d0862aed3c42cb4061213fac5a08f7b56e22fb1e98630c9f6bca811"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 8,
+      "classification": "argument-description",
+      "source_sha256": "554d61b0bbb320ea79bcc1f9f56a6e97eae42b708c5710a61735a351a59a0a08",
+      "target_sha256": "a789f3702b7bb0f66ca872144b86eb6abd25c5b95ec3fc274d4567399a45348a",
+      "protected_literals": [
+        "set-bandwidth-limit",
+        "HAProxy",
+        "stick-table"
+      ],
+      "protected_lines": [],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 7,
+          "source_sha256": "554d61b0bbb320ea79bcc1f9f56a6e97eae42b708c5710a61735a351a59a0a08",
+          "target_sha256": "a789f3702b7bb0f66ca872144b86eb6abd25c5b95ec3fc274d4567399a45348a"
+        },
+        {
+          "index": 7,
+          "source_sha256": "554d61b0bbb320ea79bcc1f9f56a6e97eae42b708c5710a61735a351a59a0a08",
+          "target_sha256": "a789f3702b7bb0f66ca872144b86eb6abd25c5b95ec3fc274d4567399a45348a"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    }
+  ],
+  "literal_blocks": [],
+  "source_formatting_revalidation": {
+    "method": "Exact reviewed predecessor source/target SHA mapping and byte-for-byte literal-fence witnesses; only documented source errata and markup-only restoration accepted.",
+    "fences": [
+      {
+        "prior": {
+          "index": 1,
+          "source_sha256": "3fefe71538ee52f953d92091c208f5668ffd9fa72f7a912c235d76e4ca88f74f",
+          "target_sha256": "93e76c7af35b95ee7a89a25d68e44005f7f63efa99dde6eb20985bbd0596c947"
+        },
+        "index": 1,
+        "source_sha256": "3fefe71538ee52f953d92091c208f5668ffd9fa72f7a912c235d76e4ca88f74f",
+        "target_sha256": "93e76c7af35b95ee7a89a25d68e44005f7f63efa99dde6eb20985bbd0596c947",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 2,
+          "source_sha256": "eb11433cd9d9d300fd41f1646da0cce6f2887481fa0a435547db1bc505bfdd16",
+          "target_sha256": "d5b0f0a8be5836b146c055e14643d77e7243bc29c17326be3e3c8e1054d0b585"
+        },
+        "index": 2,
+        "source_sha256": "eb11433cd9d9d300fd41f1646da0cce6f2887481fa0a435547db1bc505bfdd16",
+        "target_sha256": "d5b0f0a8be5836b146c055e14643d77e7243bc29c17326be3e3c8e1054d0b585",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 3,
+          "source_sha256": "3e7fec06ee6cb900894f53175bb0c05ad8d02422619dd7624631d3cff5d8be2d",
+          "target_sha256": "1a68d10afbc76e645d991686d7f31edb47ba95af4c0198b14f05c41ed89742b2"
+        },
+        "index": 3,
+        "source_sha256": "3e7fec06ee6cb900894f53175bb0c05ad8d02422619dd7624631d3cff5d8be2d",
+        "target_sha256": "1a68d10afbc76e645d991686d7f31edb47ba95af4c0198b14f05c41ed89742b2",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 4,
+          "source_sha256": "0e111b83ae62ea6d1602bf0f8cd3dfb02507dd6d2b6b387930ec46f89bc3202b",
+          "target_sha256": "96d8f46a0cf2a2c59d5813122076f1e91b9b44352593c8aaafe45da5905c6ebe"
+        },
+        "index": 4,
+        "source_sha256": "0e111b83ae62ea6d1602bf0f8cd3dfb02507dd6d2b6b387930ec46f89bc3202b",
+        "target_sha256": "96d8f46a0cf2a2c59d5813122076f1e91b9b44352593c8aaafe45da5905c6ebe",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 5,
+          "source_sha256": "2831c4bc944708f999d8545ac11980dc86755663277d88c96d42ea8571a95c97",
+          "target_sha256": "862e254c8d0862aed3c42cb4061213fac5a08f7b56e22fb1e98630c9f6bca811"
+        },
+        "index": 5,
+        "source_sha256": "2831c4bc944708f999d8545ac11980dc86755663277d88c96d42ea8571a95c97",
+        "target_sha256": "862e254c8d0862aed3c42cb4061213fac5a08f7b56e22fb1e98630c9f6bca811",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 7,
+          "source_sha256": "554d61b0bbb320ea79bcc1f9f56a6e97eae42b708c5710a61735a351a59a0a08",
+          "target_sha256": "a789f3702b7bb0f66ca872144b86eb6abd25c5b95ec3fc274d4567399a45348a"
+        },
+        "index": 7,
+        "source_sha256": "554d61b0bbb320ea79bcc1f9f56a6e97eae42b708c5710a61735a351a59a0a08",
+        "target_sha256": "a789f3702b7bb0f66ca872144b86eb6abd25c5b95ec3fc274d4567399a45348a",
+        "reason": "unchanged exact reviewed English fence"
+      }
+    ],
+    "literal_blocks": []
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "source": "content/docs/pgbadger/sample-reports.md",
+  "language": "ja",
+  "fences": [
+    {
+      "index": 1,
+      "classification": "mixed-explanation",
+      "source_sha256": "727c946c07dd4c7070ec8a11408ddc2ae60bf906a8866c361c30d7f3db738478",
+      "target_sha256": "ecf7194a042fdf4eeb7481e7bc789fb416e2c6e99cc384fa045eb7163dd5ea07",
+      "reason": "Reviewed Japanese/Russian translation of explanatory text; executable lines and CLI signatures remain protected.",
+      "protected_lines": [
+        "report/",
+        "├── index.html",
+        "├── 2012/",
+        "│   ├── week-49/index.html",
+        "│   ├── week-50/index.html",
+        "│   └── 12/06 … 12/index.html",
+        "└── 11/",
+        "    ├── pgbadger.min.css",
+        "    ├── pgbadger.min.js"
+      ]
+    }
+  ]
+}

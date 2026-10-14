@@ -10,13 +10,13 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/rest_api.html"
 ---
 
 <a id="rest_api"></a>
-Patroni には豊富な REST API があり、リーダー レース中に Patroni 自体によって使用されたり、failovers/switchovers/reinitialize/restarts/reloads を実行するために [patronictl](/ja/docs/patroni/patronictl#patronictl) ツールによって使用されたり、HTTP ヘルス チェックを実行するために HAProxy またはその他の種類のロード バランサーによって使用されたり、もちろん監視にも使用できます。以下に、Patroni REST API エンドポイントのリストを示します。
+Patroni には豊富な REST API があり、リーダー競合中に Patroni 自身によって使用されたり、フェイルオーバー/スイッチオーバー/再初期化/再起動/リロードを実行するために [patronictl](/ja/docs/patroni/patronictl#patronictl) ツールによって使用されたり、HTTP ヘルスチェックを実行するために HAProxy またはその他の種類のロードバランサーによって使用されたり、もちろん監視にも使用できます。以下に、Patroni REST API エンドポイントのリストを示します。
 
 --------
 
 ## ヘルスチェックエンドポイント {#health-check-endpoints}
 
-すべてのヘルス チェック `GET` リクエストに対して、Patroni は、ノードのステータスと HTTP ステータス コードを含む JSON ドキュメントを返します。 JSON ドキュメントが必要ない場合、または必要ない場合は、`GET` の代わりに `HEAD` メソッドまたは `OPTIONS` メソッドの使用を検討してください。
+すべてのヘルスチェック `GET` リクエストに対して、Patroni はノードのステータスを含む JSON ドキュメントを、HTTP ステータスコードとともに返します。JSON ドキュメントを望まない場合や必要がない場合は、`GET` の代わりに `HEAD` メソッドまたは `OPTIONS` メソッドの使用を検討してください。
 
 - Patroni REST API に対する次のリクエストは、Patroni ノードがリーダー ロック付きのプライマリーとして実行されている場合にのみ、HTTP ステータス コード **200** を返します。
 
@@ -26,13 +26,13 @@ Patroni には豊富な REST API があり、リーダー レース中に Patron
 
 - `GET /standby-leader`: Patroni ノードが [スタンバイクラスタ](/ja/docs/patroni/standby_cluster#standby_cluster) のリーダーとして実行されている場合にのみ、HTTP ステータス コード **200** を返します。
 
-- `GET /leader`: Patroni ノードにリーダー ロックがある場合、HTTP ステータス コード **200** を返します。前の 2 つのエンドポイントとの主な違いは、PostgreSQL が `primary` として実行されているか、`standby_leader` として実行されているかが考慮されていないことです。
+- `GET /leader`: Patroni ノードがリーダーロックを保持している場合、HTTP ステータスコード **200** を返します。`GET /primary` や `GET /standby-leader` とは異なり、PostgreSQL が `primary` または `standby_leader` として実行されているかどうかは判定条件に含まれません。
 
 - `GET /replica`: レプリカのヘルスチェックエンドポイント。 Patroni ノードが `running` 状態にあり、ロールが `replica` で、`noloadbalance` タグが設定されていない場合にのみ、HTTP ステータス コード **200** を返します。
 
 - `GET /replica?replication_state=<required state>`: レプリカ チェック エンドポイント。 `replica` からのチェックに加えて、レプリケーションの状態が必要な状態と一致するかどうかもチェックします。主に `replication_state=streaming` で使用し、アーカイブ リカバリでまだ追いついていないレプリカを除外するのに役立ちます。
 
-- `GET /replica?lag=<max-lag>`: レプリカ チェック エンドポイント。 `replica` からのチェックに加えて、レプリケーションの遅延もチェックし、指定された値を下回っている場合にのみステータス コード **200** を返します。 DCS のキー cluster.last_leader_operation は、パフォーマンス上の理由から、リーダー wal の位置とレプリカのレイテンシの計算に使用されます。 max-lag はバイト (整数) または人間が判読できる値で指定できます。 16kB、64MB、1GB。
+- `GET /replica?lag=<max-lag>`: レプリカ チェック エンドポイント。 `replica` からのチェックに加えて、レプリケーションの遅延もチェックし、指定された値を下回っている場合にのみステータス コード **200** を返します。 DCS のキー cluster.last_leader_operation は、パフォーマンス上の理由から、リーダー wal の位置とレプリカのレイテンシの計算に使用されます。 max-lag はバイト (整数) または人間が読み取り可能な値 (例: 16kB、64MB、1GB) で指定できます。
 
   - `GET /replica?lag=1048576`
   - `GET /replica?lag=1024kB`
@@ -41,7 +41,7 @@ Patroni には豊富な REST API があり、リーダー レース中に Patron
 
 - `GET /replica?tag_key1=value1&tag_key2=value2`: レプリカ チェック エンドポイント。さらに、ユーザー定義タグ `key1` および `key2` と、yaml 構成管理の **tags** セクション内のそれぞれの値もチェックされます。タグがインスタンスに対して定義されていない場合、または yaml 設定内の値がクエリー値と一致しない場合は、HTTP ステータス コード 503 が返されます。
 
-次のリクエストでは、リーダーまたはスタンバイ リーダーのステータスをチェックしているため、Patroni はユーザー定義のタグを適用せず、無視されます。
+  次のリクエストでは、リーダーまたはスタンバイリーダーのステータスをチェックしているため、Patroni はユーザー定義のタグを一切適用せず、それらは無視されます。
 
   - `GET /?tag_key1=value1&tag_key2=value2`
   - `GET /leader?tag_key1=value1&tag_key2=value2`
@@ -62,7 +62,7 @@ Patroni には豊富な REST API があり、リーダー レース中に Patron
 
 - `GET /asynchronous` または `GET /async`: Patroni ノードが非同期スタンバイとして実行されている場合にのみ、HTTP ステータス コード **200** を返します。
 
-- `GET /asynchronous?lag=<max-lag>` または `GET /async?lag=<max-lag>`: 非同期スタンバイ チェック エンドポイント。 `asynchronous` または `async` からのチェックに加えて、レプリケーションの遅延もチェックし、指定された値を下回っている場合にのみステータス コード **200** を返します。 DCS のキー cluster.last_leader_operation は、パフォーマンス上の理由から、リーダー wal の位置とレプリカのレイテンシの計算に使用されます。 max-lag はバイト (整数) または人間が判読できる値で指定できます。 16kB、64MB、1GB。
+- `GET /asynchronous?lag=<max-lag>` または `GET /async?lag=<max-lag>`: 非同期スタンバイ チェック エンドポイント。 `asynchronous` または `async` からのチェックに加えて、レプリケーションの遅延もチェックし、指定された値を下回っている場合にのみステータス コード **200** を返します。 DCS のキー cluster.last_leader_operation は、パフォーマンス上の理由から、リーダー wal の位置とレプリカのレイテンシの計算に使用されます。 max-lag はバイト (整数) または人間が読み取り可能な値 (例: 16kB、64MB、1GB) で指定できます。
 
   - `GET /async?lag=1048576`
   - `GET /async?lag=1024kB`
@@ -71,13 +71,13 @@ Patroni には豊富な REST API があり、リーダー レース中に Patron
 
 - `GET /health`: PostgreSQL が稼働している場合にのみ、HTTP ステータス コード **200** を返します。
 
-- `GET /liveness`: Patroni ハートビート ループが適切に実行されている場合は HTTP ステータス コード **200** を返し、最後の実行がプライマリーで `ttl` 秒以上前である場合、またはレプリカで `2*ttl` を超えている場合は **503** を返します。 `livenessProbe` に使用できます。
+- `GET /liveness`: Patroni ハートビートループが適切に実行されている場合は HTTP ステータスコード **200** を返し、最後の実行が、プライマリーでは `ttl` 秒より前、レプリカでは `2*ttl` 秒より前である場合は **503** を返します。`livenessProbe` に使用できます。
 
-- `GET /readiness?lag=<max-lag>&mode=apply|write`: Patroni ノードがリーダーとして実行されている場合、または PostgreSQL が稼働中でレプリケートしており、リーダーからそれほど離れていない場合は、HTTP ステータス コード **200** を返します。 lag パラメーターは、スタンバイがどれだけ遅れを許容できるかを設定します。デフォルトは `maximum_lag_on_failover` です。ラグはバイト単位、または人間が判読できる値 (16kB、64MB、1GB など) で指定できます。 Mode は、WAL を再生 (適用) する必要があるか、受信するだけ (書き込み) する必要があるかを設定します。デフォルトは適用です。
+- `GET /readiness?lag=<max-lag>&mode=apply|write`: Patroni ノードがリーダーとして実行されている場合、または PostgreSQL が稼働中でレプリケートしており、リーダーからそれほど離れていない場合は、HTTP ステータス コード **200** を返します。 lag パラメーターは、スタンバイがどれだけ遅れを許容できるかを設定します。デフォルトは `maximum_lag_on_failover` です。ラグはバイト単位、または人間が判読できる値 (16kB、64MB、1GB など) で指定できます。 `mode` は、WAL を再生する必要があるか (`apply`)、受信するだけでよいか (`write`) を設定します。デフォルトは `apply` です。
 
-Kubernetes `readinessProbe` として使用すると、新しく開始されたポッドがリーダーに追いついた場合にのみ準備が完了するようになります。これを PodDisruptionBudget と組み合わせると、ノードのローリング再起動中にリーダーが早期に終了するのを防ぐことができます。また、レプリケーションに対応できないレプリカが読み取り専用トラフィックを処理しないようにします。リーダー選挙 (OpenShift) に ​​Kubernetes エンドポイントを使用できない場合、エンドポイントは `readinessProbe` に使用できます。
+Kubernetes `readinessProbe` として使用すると、新しく開始されたポッドがリーダーに追いついた場合にのみ準備が完了するようになります。これを PodDisruptionBudget と組み合わせると、ノードのローリング再起動中にリーダーが早期に終了するのを防ぐことができます。また、レプリケーションに対応できないレプリカが読み取り専用トラフィックを処理しないようにします。Kubernetes のエンドポイントをリーダー選出に使用できない場合 (OpenShift) は、このエンドポイントを `readinessProbe` に使用できます。
 
-`liveness` エンドポイントは非常に軽量であり、SQL は実行されません。プローブは、リーダー キーの有効期限が切れる頃に失敗し始めるように構成する必要があります。デフォルト値 `ttl` (`30s`) を使用すると、プローブの例は次のようになります。
+`liveness` エンドポイントは非常に軽量であり、SQL は実行されません。プローブは、リーダー キーの有効期限が切れる頃に失敗し始めるように構成することを推奨します。デフォルト値 `ttl` (`30s`) を使用すると、プローブの例は次のようになります。
 
 ```yaml
 readinessProbe:
@@ -381,23 +381,23 @@ patroni_failover_priority{scope="batman",name="patroni1"} 1
 
 `patroni_postgres_state` メトリックは、現在の PostgreSQL インスタンスの状態を数値で表します。これは、時間の経過に伴う状態変化を追跡する必要があるシステムの監視と警告に役立ちます。数値は、`PostgresqlState.get_metrics_description()` 静的メソッドを使用して生成されます。
 
-|値 |州名 |説明 |
+|値 |状態名 |説明 |
 |------|----------------------|----------------------|
-| 0 | initdb |新しいクラスターを初期化しています |
-| 1 | initdb_failed |新しいクラスターの初期化に失敗しました |
-| 2 |カスタムブートストラップ |カスタム ブートストラップ スクリプトの実行 |
-| 3 |カスタムブートストラップ失敗 |カスタム ブートストラップ スクリプトが失敗しました |
-| 4 |レプリカの作成 |プライマリーからレプリカを作成 |
-| 5 |実行中 | PostgreSQL は正常に実行されています。 |
-| 6 |開始 | PostgreSQL が起動中です |
-| 7 |ブートストラップ_開始中 |カスタムブートストラップ後に開始 |
-| 8 |開始失敗 | PostgreSQL の開始に失敗しました |
-| 9 |再起動 | PostgreSQL が再起動中です |
-| 10 |再起動失敗 | PostgreSQL の再起動に失敗しました |
-| 11 |停止 | PostgreSQL は停止しています |
-| 12 |停止しました | PostgreSQL は停止しています |
-| 13 |停止失敗 | PostgreSQL 停止に失敗しました |
-| 14 |クラッシュした | PostgreSQL がクラッシュしました |
+| 0 | initdb | 新しいクラスターを初期化しています |
+| 1 | initdb_failed | 新しいクラスターの初期化に失敗しました |
+| 2 | custom_bootstrap | カスタムブートストラップスクリプトを実行中 |
+| 3 | custom_bootstrap_failed | カスタムブートストラップスクリプトが失敗しました |
+| 4 | creating_replica | プライマリーからレプリカを作成中 |
+| 5 | running | PostgreSQL は正常に実行されています |
+| 6 | starting | PostgreSQL が起動中です |
+| 7 | bootstrap_starting | カスタムブートストラップ後の起動中 |
+| 8 | start_failed | PostgreSQL の起動に失敗しました |
+| 9 | restarting | PostgreSQL が再起動中です |
+| 10 | restart_failed | PostgreSQL の再起動に失敗しました |
+| 11 | stopping | PostgreSQL が停止処理中です |
+| 12 | stopped | PostgreSQL は停止しています |
+| 13 | stop_failed | PostgreSQL の停止に失敗しました |
+| 14 | crashed | PostgreSQL がクラッシュしました |
 
 PostgreSQL 状態値
 
@@ -542,12 +542,11 @@ $ curl -s -XPATCH -d \
 
 上記の REST API 呼び出しは、既存の構成にパッチを適用し、新しい構成を返します。
 
-ノードがこの構成を処理したことを確認してみましょう。まず、5 秒ごとにログ行の出力を開始する必要があります (loop_wait=5)。 "max_connections" の変更には再起動が必要なため、"pending_restart" フラグを公開する必要があります。
+ノードがこの構成を処理したことを確認してみましょう。まず、5 秒ごとにログ行の出力を開始するはずです (loop_wait=5)。 "max_connections" の変更には再起動が必要なため、"pending_restart" フラグが表示されるはずです。
 
 ``` bash
 $ curl -s http://localhost:8008/patroni | jq .
 {
-  "database_system_identifier": "6287881213849985952",
   "postmaster_start_time": "2024-08-28 19:39:26.352526+00:00",
   "xlog": {
     "location": 2197818976
@@ -636,7 +635,7 @@ $ curl -s -XPUT -d \
 
 `/switchover` エンドポイントは、クラスターが正常な場合 (リーダーがある場合) にのみ機能します。また、特定の時間にスイッチオーバーをスケジュールすることもできます。
 
-`/switchover` エンドポイントを呼び出す場合、`/failover` エンドポイントとは異なり、候補を指定できますが、必須ではありません。候補者が指定されていない場合、リーダーが退任した後、クラスターの適格なすべてのノードがリーダー レースに参加します。
+`/switchover` エンドポイントを呼び出す場合、`/failover` エンドポイントとは異なり、候補を指定できますが、必須ではありません。候補が指定されていない場合、リーダーが退任した後、クラスターの適格なすべてのノードがリーダー競合に参加します。
 
 `POST` リクエストの JSON 本文で、`leader` フィールドを指定する必要があります。 `candidate` フィールドと `scheduled_at` フィールドはオプションであり、特定の時間にスイッチオーバーをスケジュールするために使用できます。
 
@@ -644,7 +643,7 @@ $ curl -s -XPUT -d \
 
 `DELETE /switchover` を使用して、現在スケジュールされているスイッチオーバーを削除できます。
 
-**例:** 正常なスタンバイへのスイッチオーバーを実行します
+**例:** 任意の正常なスタンバイへのスイッチオーバーを実行します
 
 ``` bash
 $ curl -s http://localhost:8008/switchover -XPOST -d '{"leader":"postgresql1"}'
@@ -659,7 +658,7 @@ $ curl -s http://localhost:8008/switchover -XPOST -d \
 Successfully switched over to "postgresql2"
 ```
 
-**例:** は、特定の時間にリーダーからクラスター内の他の正常なスタンバイへのスイッチオーバーをスケジュールします。
+**例:** 特定の時刻に、リーダーからクラスター内の他の任意の正常なスタンバイへのスイッチオーバーをスケジュールします。
 
 ``` bash
 $ curl -s http://localhost:8008/switchover -XPOST -d \
@@ -681,17 +680,17 @@ Successfully failed over to "postgresql1"
 ```
 
 > [!WARNING]
-> このエンドポイントを使用する場合は、[十分注意してください](/ja/docs/patroni/rest_api#failover_healthcheck) を使用します。これにより、特定の状況でデータ損失が発生する可能性があります。ほとんどの場合、[スイッチオーバーエンドポイント](/ja/docs/patroni/rest_api#switchover_api) は管理者のニーズを満たします。
+> このエンドポイントの使用には[十分な注意](/ja/docs/patroni/rest_api#failover_healthcheck)を払ってください。状況によってはデータ損失が発生する可能性があります。ほとんどの場合、[スイッチオーバーエンドポイント](/ja/docs/patroni/rest_api#switchover_api) で管理者のニーズが満たされます。
 
 `POST /switchover` エンドポイントと `POST /failover` エンドポイントは、それぞれ [patronictl_switchover](/ja/docs/patroni/patronictl#patronictl_switchover) と [patronictl_failover](/ja/docs/patroni/patronictl#patronictl_failover) によって使用されます。
 
 `DELETE /switchover` は [patronictl flush cluster-name switchover](/ja/docs/patroni/patronictl#patronictl_flush_parameters) によって使用されます。
 
-|                              |フェイルオーバー |切り替え |
+|                              |フェイルオーバー |スイッチオーバー |
 |----------------------------|----------|-------------------------------------|
-|引出線の指定が必要です |いいえ |はい |
-|候補を指定する必要があります |はい |いいえ |
-|一時停止中でも実行可能 |はい |はい (特定の候補者のみ) |
+|リーダーの指定が必要 |いいえ |はい |
+|候補の指定が必要 |はい |いいえ |
+|一時停止中でも実行可能 |はい |はい (特定の候補のみ) |
 |スケジュール可能 |いいえ |はい (一時停止中でない場合) |
 
 フェイルオーバー/スイッチオーバーの比較
@@ -700,32 +699,36 @@ Successfully failed over to "postgresql1"
 
 ### 健全なスタンバイ {#healthy-standby}
 
-スイッチオーバー中にリーダー レースに参加できるようにするため、またはフェイルオーバー/スイッチオーバーの候補としてリーダーになるために、クラスターのメンバーが合格する必要があるチェックがいくつかあります。
+スイッチオーバー時にリーダー競合に参加するため、またはフェイルオーバー/スイッチオーバーの候補としてリーダーになるために、クラスターのメンバーが満たす必要があるチェックがいくつかあります。
 
-- Patroni API 経由でアクセス可能です。
-- には `nofailover` タグが `true` に設定されていません。
-- ウォッチドッグが完全に機能します (構成で必要な場合)。
-- 正常なクラスターでのスイッチオーバーまたは自動フェイルオーバーの場合は、最大レプリケーション ラグ (`maximum_lag_on_failover` [構成パラメータ](/ja/docs/patroni/config/dynamic#dynamic)) を超えません。
-- 正常なクラスターでのスイッチオーバーまたは自動フェイルオーバーの場合、`check_timeline` [構成パラメータ](/ja/docs/patroni/config/dynamic#dynamic) が `true` に設定されている場合は、クラスターのタイムラインよりも小さいタイムライン番号を設定しないでください。
-- [同期モード](/ja/docs/patroni/replication_modes#synchronous_mode) の :
-  - スイッチオーバーの場合 (候補がある場合とない場合の両方): `/sync` キー メンバーにリストされます。
-  - 正常なクラスターと異常なクラスターの両方でのフェイルオーバーの場合、このチェックは省略されます。
+- Patroni API 経由でアクセス可能であること。
+- `nofailover` タグが `true` に設定されていないこと。
+- ウォッチドッグが完全に機能していること (構成で必要とされる場合)。
+- 正常なクラスターでのスイッチオーバーまたは自動フェイルオーバーの場合、最大レプリケーションラグ (`maximum_lag_on_failover` [構成パラメータ](/ja/docs/patroni/config/dynamic#dynamic)) を超えていないこと。
+- 正常なクラスターでのスイッチオーバーまたは自動フェイルオーバーの場合、`check_timeline` [構成パラメータ](/ja/docs/patroni/config/dynamic#dynamic) が `true` に設定されているときは、タイムライン番号がクラスターのタイムラインより小さくないこと。
+- [同期モード](/ja/docs/patroni/replication_modes#synchronous_mode)の場合:
+  - スイッチオーバーの場合 (候補を指定する場合としない場合の両方): `/sync` キーのメンバーにリストされていること。
+  - 正常なクラスターと異常なクラスターのいずれでのフェイルオーバーの場合も、このチェックは省略されます。
 
 > [!WARNING]
-> リーダーのないクラスターで手動フェイルオーバーが行われる場合、候補者は次の場合でも昇格できます。 - 同期モードが有効な場合、候補者は `/sync` キー メンバーに含まれていません。 - その遅延が、許容される最大レプリケ​​ーション遅延を超えています。 - 最後の既知のクラスター タイムラインよりも小さいタイムライン番号が付いています。
+> リーダーのいないクラスターで手動フェイルオーバーを行う場合、候補は以下の場合でも昇格が許可されます。
+>
+> - 同期モードが有効なときに `/sync` キーのメンバーに含まれていない場合。
+> - レプリケーションラグが許容される最大値を超えている場合。
+> - タイムライン番号が最後に判明しているクラスタータイムラインより小さい場合。
 
 <a id="restart_endpoint"></a>
 
 --------
 
-## エンドポイントを再起動します {#restart-endpoint}
+## 再起動エンドポイント {#restart-endpoint}
 
 - `POST /restart`: `POST /restart` 呼び出しを実行すると、特定のノードで Postgres を再起動できます。 `POST` リクエストの JSON 本体では、オプションでいくつかの再起動条件を指定できます。
   - **restart_pending**: ブール値、`true` に設定すると、Patroni は、PostgreSQL 構成にいくつかの変更を適用するために、再起動が保留中の場合にのみ PostgreSQL を再起動します。
   - **role**: ノードの現在のロールが POST リクエストのロールと一致する場合にのみ再起動を実行します。
   - **postgres_version**: postgres の現在のバージョンが POST リクエストで指定されたバージョンよりも小さい場合にのみ再起動を実行します。
   - **timeout**: PostgreSQL が接続の受け入れを開始するまで待機する必要がある時間。 `primary_start_timeout` をオーバーライドします。
-  - **schedule**: タイムゾーン付きのタイムスタンプ。将来のどこかで再起動をスケジュールします。
+  - **schedule**: タイムゾーン付きタイムスタンプ。将来の任意の時点に再起動をスケジュールします。
 - `DELETE /restart`: スケジュールされた再起動を削除します
 
 `POST /restart` エンドポイントと `DELETE /restart` エンドポイントは、それぞれ [patronictl_restart](/ja/docs/patroni/patronictl#patronictl_restart) と [patronictl flush cluster-name restart](/ja/docs/patroni/patronictl#patronictl_flush_parameters) によって使用されます。
@@ -734,7 +737,7 @@ Successfully failed over to "postgresql1"
 
 --------
 
-## エンドポイントのリロード {#reload-endpoint}
+## リロードエンドポイント {#reload-endpoint}
 
 `POST /reload` 呼び出しは、Patroni に構成ファイルを再読み込みして適用するように命令します。これは、`SIGHUP` シグナルを Patroni プロセスに送信するのと同じです。再起動が必要な Postgres パラメーターの一部 (**shared_buffers** など) を変更した場合でも、`POST /restart` エンドポイントを呼び出すか、[patronictl_restart](/ja/docs/patroni/patronictl#patronictl_restart) を使用して、明示的に Postgres の再起動を行う必要があります。
 
@@ -742,7 +745,7 @@ Successfully failed over to "postgresql1"
 
 --------
 
-## エンドポイントを再初期化する {#reinitialize-endpoint}
+## 再初期化エンドポイント {#reinitialize-endpoint}
 
 `POST /reinitialize`: 指定されたノード上の PostgreSQL データ ディレクトリを再初期化します。レプリカ上でのみ実行が許可されます。呼び出されると、データ ディレクトリが削除され、`pg_basebackup` または代替の [レプリカ作成方法](/ja/docs/patroni/replica_bootstrap#custom_replica_creation) が開始されます。
 

@@ -27,7 +27,7 @@ brew install postgresql etcd haproxy libyaml python
 
 ## Psycopg {#psycopg}
 
-À compter de [psycopg2-2.8](https://www.psycopg.org/articles/2019/04/04/psycopg-28-released/), la version binaire de psycopg2 ne sera plus installée par défaut. Son installation à partir du code source nécessite un compilateur C ainsi que les paquets de développement postgres+python. Étant donné qu’environnement Python ne permet pas de spécifier la dépendance comme `psycopg2 OR psycopg2-binary`, vous devrez déterminer vous-même la méthode d’installation.
+À compter de [psycopg2-2.8](https://www.psycopg.org/articles/2019/04/04/psycopg-28-released/), la version binaire de psycopg2 ne sera plus installée par défaut. Son installation à partir du code source nécessite un compilateur C ainsi que les paquets de développement postgres+python. Étant donné que l’écosystème Python ne permet pas de spécifier la dépendance comme `psycopg2 OR psycopg2-binary`, vous devrez déterminer vous-même la méthode d’installation.
 
 Plusieurs options sont disponibles :
 
@@ -38,13 +38,13 @@ sudo apt-get install python3-psycopg2  # install psycopg2 module on Debian/Ubunt
 sudo yum install python3-psycopg2      # install psycopg2 on RedHat/Fedora/CentOS
 ```
 
-2.  Indiquez `psycopg`, `psycopg2` ou `psycopg2-binary` dans la [liste des dépendances](/fr/docs/patroni/installation#extras) lors de l'installation de Patroni avec pip.
+2.  Spécifiez l’un des éléments `psycopg3`, `psycopg2` ou `psycopg2-binary` dans la [liste des dépendances](/fr/docs/patroni/installation#extras) lors de l'installation de Patroni avec pip.
 
 <a id="extras"></a>
 
 --------
 
-## Installation générale de pip {#general-installation-for-pip}
+## Installation avec pip {#general-installation-for-pip}
 
 Patroni peut être installé avec pip :
 
@@ -54,43 +54,43 @@ pip install patroni[dependencies]
 
 où `dependencies` peut être vide ou composé d’un ou plusieurs des éléments suivants :
 
-etcd ou etcd3
+etcd ou etcd3  
 module `python-etcd` afin d'utiliser etcd comme magasin de configuration distribué (DCS)
 
-consul
+consul  
 module `py-consul` afin d'utiliser Consul comme DCS
 
-zookeeper
+zookeeper  
 module `kazoo` afin d'utiliser Zookeeper comme DCS
 
-exhibitor
+exhibitor  
 module `kazoo` afin d'utiliser Exhibitor comme DCS (mêmes dépendances que pour Zookeeper)
 
-kubernetes
+kubernetes  
 [kubernetes](/fr/docs/patroni/kubernetes#kubernetes) module afin d'utiliser Kubernetes comme DCS dans Patroni
 
-raft
+raft  
 module `pysyncobj` afin d'utiliser l'implémentation Python de Raft comme DCS
 
-aws
+aws  
 `boto3` afin d'utiliser les rappels AWS
 
-jsonlogger
-module `python-json-logger` afin d'activer la journalisation [logging](/fr/docs/patroni/config/yaml#log_settings) au format JSON
+jsonlogger  
+module `python-json-logger` afin d'activer la [journalisation](/fr/docs/patroni/config/yaml#log_settings) au format JSON
 
-systemd
+systemd  
 `systemd-python` afin d'utiliser l'intégration sd_notify
 
-tous
+all  
 tous les précédents (à l’exception de la famille psycopg)
 
-psycopg3
-module `psycopg\[binary\]\>=3.0.0`
+psycopg3  
+module `psycopg[binary]>=3.0.0`
 
-psycopg2
-module `psycopg2\>=2.5.4`
+psycopg2  
+module `psycopg2>=2.5.4`
 
-psycopg2-binary
+psycopg2-binary  
 module `psycopg2-binary`
 
 Par exemple, la commande permettant d’installer Patroni avec psycopg3, les dépendances pour etcd en tant que DCS, et les rappels AWS est :
@@ -99,7 +99,7 @@ Par exemple, la commande permettant d’installer Patroni avec psycopg3, les dé
 pip install patroni[psycopg3,etcd3,aws]
 ```
 
-Notez que les outils externes appelés lors de la création d'une réplique ou dans des scripts d'amorçage personnalisés (par exemple WAL-E) doivent être installés indépendamment de Patroni.
+Notez que les outils externes appelés lors de la création d'une réplique ou dans des scripts d'amorçage personnalisés (par exemple WAL-E) devraient être installés indépendamment de Patroni.
 
 <a id="package_installation"></a>
 
@@ -109,7 +109,7 @@ Notez que les outils externes appelés lors de la création d'une réplique ou d
 
 Les paquets Patroni peuvent être disponibles pour votre système d'exploitation, produits par la communauté Postgres pour :
 
-- RHEL, Rocky Linux, AlmaLinux ;
+- RHEL, RockyLinux, AlmaLinux ;
 - Debian et Ubuntu ;
 - SUSE Enterprise Linux.
 
@@ -117,7 +117,7 @@ Vous pouvez également trouver des paquets pour les dépendances directes de Pat
 
 Pour plus d'informations, consultez la documentation du dépôt [PGDG](https://www.postgresql.org/download/linux/).
 
-Si vous utilisez un système d'exploitation dérivé de RedHat Enterprise Linux, vous devrez peut-être également installer des paquets provenant du dépôt [EPEL repository](https://docs.fedoraproject.org/en-US/epel/).
+Si vous utilisez un système d'exploitation dérivé de RedHat Enterprise Linux, vous devrez peut-être également recourir à des paquets provenant d'EPEL ; consultez la documentation du [dépôt EPEL](https://docs.fedoraproject.org/en-US/epel/).
 
 Une fois que vous avez installé le dépôt PGDG pour votre système d'exploitation, vous pouvez installer Patroni.
 
@@ -154,7 +154,7 @@ Vous pouvez remplacer la version de RHEL par `8` dans le dépôt afin de créer 
 
 Vous devrez peut-être activer les référentiels SUSE PackageHub pour certaines dépendances. Voir la documentation de [SUSE PackageHub](https://packagehub.suse.com/how-to-use/).
 
-Pour SLES 15 avec le dépôt PGDG installé, consultez [ci-dessus](/fr/docs/patroni/installation#package_installation) pour installer Patroni avec :
+Pour SLES 15, avec le dépôt PGDG installé (voir [ci-dessus](/fr/docs/patroni/installation#package_installation)), vous pouvez installer Patroni avec :
 
 ```bash
 zypper install patroni patroni-etcd
@@ -184,16 +184,16 @@ patronictl pause --wait
 Ensuite, sur chaque nœud du cluster, effectuez la mise à jour du paquet nécessaire pour votre système d'exploitation :
 
 ```bash
-apt-get update && apt-get install patroni patroni-etcd
+apt-get update && apt-get install patroni
 ```
 
-Redémarrez le processus daemon Patroni sur chaque nœud :
+Redémarrez le démon Patroni sur chaque nœud :
 
 ```bash
 systemctl restart patroni
 ```
 
-Enfin, reprenez la surveillance de Postgres avec Patroni afin de sortir le serveur du mode maintenance :
+Enfin, reprenez la surveillance de Postgres avec Patroni afin de sortir le cluster du mode maintenance :
 
 ```bash
 patronictl resume --wait

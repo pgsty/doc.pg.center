@@ -222,10 +222,42 @@ def german_post_ollama(model: str, prompt: str, *, timeout: int = 600) -> str:
 
 
 def normalize_german_output(value: str) -> str:
+    # Formatting repairs must never touch copyable examples or inline literals.
+    # In particular, `[ EXPERIMENTAL ]` inside a signature is not a link label.
+    protected: list[str] = []
+
+    def hide(text: str) -> str:
+        protected.append(text)
+        return f"\x00german-literal-{len(protected) - 1}\x00"
+
+    lines = value.splitlines(keepends=True)
+    visible: list[str] = []
+    block: list[str] = []
+    marker = ""
+    for line in lines:
+        opening = re.match(r"^ {0,3}(`{3,}|~{3,})", line)
+        if marker:
+            block.append(line)
+            if re.fullmatch(
+                r" {0,3}" + re.escape(marker[0]) + "{" + str(len(marker))
+                + r",}[ \t]*(?:\n|$)", line
+            ):
+                visible.append(hide("".join(block)))
+                marker = ""
+                block = []
+        elif opening:
+            marker = opening.group(1)
+            block = [line]
+        else:
+            visible.append(line)
+    if block:
+        visible.append(hide("".join(block)))
+    value = "".join(visible)
+    value = re.sub(r"<!--.*?-->", lambda match: hide(match.group()), value, flags=re.S)
+    value = re.sub(r"(`+)(?!`)(.+?)(?<!`)\1(?!`)", lambda match: hide(match.group()), value, flags=re.S)
     value = value.replace("\u00a0", " ")
-    value = re.sub(r"(!?)\[\s+(?=[^]\n]+\])", r"\1[", value)
+    value = re.sub(r"(!?)\[\s+(?=[^]\n]+\](?:\(|\[))", r"\1[", value)
     value = re.sub(r"\s+\](?=(?:\(|\[))", "]", value)
-    value = re.sub(r"(?<!`)``([^`\n]+)``(?!`)", r"`\1`", value)
 
     def move_heading_anchor(match: re.Match[str]) -> str:
         title = f"{match.group('before')} {match.group('after')}".strip()
@@ -239,6 +271,8 @@ def normalize_german_output(value: str) -> str:
         value,
     )
     value = re.sub(r"[ \t]+\n", "\n", value)
+    for index, literal in enumerate(protected):
+        value = value.replace(f"\x00german-literal-{index}\x00", literal)
     return value
 
 
@@ -465,15 +499,12 @@ def validate_german_fragment_structure(source: str, translated: str) -> None:
     if source_is_quote != target_is_quote:
         raise ValueError("blockquote structure changed")
 
-    number_re = re.compile(
-        r"(?<![A-Za-z0-9_])(?:"
-        r"[vV]?\d+(?:[.,]\d+)+(?:[-+](?=[a-z0-9])[A-Za-z0-9.-]*[A-Za-z0-9])?"
-        r"|\d+"
-        r")"
-        r"(?![A-Za-z0-9_])"
-    )
-    source_numbers = Counter(number_re.findall(source))
-    target_numbers = Counter(number_re.findall(translated))
+    # Use the final page gate's numeric lexer, including values adjoining
+    # units or ordinal suffixes: "32bits" -> "32 Bit", "256th" -> "256.".
+    # Word-boundary matching silently missed the English numbers in both
+    # cases. Versions and exact code literals have separate checks.
+    source_numbers = german_checker.number_facts("", source)
+    target_numbers = german_checker.number_facts("", translated)
     if source_numbers != target_numbers:
         raise ValueError(
             "numeric literals changed "
@@ -481,14 +512,13 @@ def validate_german_fragment_structure(source: str, translated: str) -> None:
             f"translated={list(target_numbers.elements())!r}"
         )
 
-    acronym_re = re.compile(r"\b[A-Z][A-Z0-9_]{1,}\b")
-    ignored_acronyms = {"FAQ", "MANUALLY", "OS", "UNIX"}
-    source_acronyms = {
-        value for value in acronym_re.findall(source) if value not in ignored_acronyms
-    }
-    target_acronyms = {
-        value for value in acronym_re.findall(translated) if value not in ignored_acronyms
-    }
+    if german_checker.version_facts("", source) != german_checker.version_facts("", translated):
+        raise ValueError("version literals changed")
+
+    # Use the same context-aware rule as the final page gate. Literal spans and
+    # code blocks have their own exact checks; ordinary emphasis is translated.
+    source_acronyms = german_checker.uppercase_technical_literals(source)
+    target_acronyms = german_checker.uppercase_technical_literals(translated)
     missing_acronyms = source_acronyms - target_acronyms
     if missing_acronyms:
         raise ValueError(
@@ -884,7 +914,10 @@ class GermanProtector(base.Protector):
         self.values.append(value)
         return token
 
-    def restore(self, text: str) -> str:
+    def restore(self, text: str, *, protected_source: str | None = None) -> str:
+        # Match the shared translator's interface while retaining the strict
+        # occurrence checks for German placeholders below.
+        del protected_source
         for index, value in enumerate(self.values):
             token = self.external_marker(index)
             count = text.count(token)
@@ -929,6 +962,7 @@ class GermanProtector(base.Protector):
 
 base.CACHE_SCHEMA_VERSION = "de-10"
 base.MANUAL_TRANSLATIONS = legal_passthroughs()
+base.glossary_entries = lambda _component: GLOSSARY
 base.CATEGORY_MAP = CATEGORY_MAP
 base.TRANSLATABLE_META = TRANSLATABLE_META
 base.system_prompt = german_system_prompt
@@ -973,14 +1007,14 @@ def normalized_reference_definitions(body: str) -> list[str]:
     for line in body.splitlines():
         if not base.REFERENCE_DEF_RE.match(line):
             continue
-        definitions.append(re.sub(r"/de/(?=(?:" + "|".join(COMPONENTS) + r")/)", "/", line))
+        definitions.append(re.sub(r"/de/(?=docs/|attribution/|search/)", "/", line))
     return definitions
 
 
 def markdown_destinations(body: str) -> Counter[str]:
     destinations: list[str] = []
     for target in re.findall(r"!?\[[^\]]*\]\(([^)\n]+)\)", body):
-        target = re.sub(r"^/de/(?=(?:" + "|".join(COMPONENTS) + r"|attribution|search)/)", "/", target)
+        target = german_checker.normalize_german_target(target)
         destinations.append(target)
     return Counter(destinations)
 

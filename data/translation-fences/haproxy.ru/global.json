@@ -1,0 +1,585 @@
+{
+  "source": "content/docs/haproxy/global.md",
+  "language": "ru",
+  "fences": [
+    {
+      "index": 14,
+      "classification": "argument-description",
+      "source_sha256": "5ebe304d39b85125c65222c78ad6a593ddf82ad9e76c8fb0a1ae077f87e31b6e",
+      "target_sha256": "016b948e118f354f278e43ebf33e7679a35cf250e6296dab5dd9ba07bbdcb143",
+      "reason": "Переведено полное пояснение аргумента или условия; проверены область действия, отрицания, значения по умолчанию, порядок действий и числовые факты.",
+      "protected_literals": [
+        "\"infinite\"",
+        "<time>"
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 14,
+          "source_sha256": "5ebe304d39b85125c65222c78ad6a593ddf82ad9e76c8fb0a1ae077f87e31b6e",
+          "target_sha256": "016b948e118f354f278e43ebf33e7679a35cf250e6296dab5dd9ba07bbdcb143"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 38,
+      "classification": "argument-description",
+      "source_sha256": "9596f03fed92cd26382b5a406bbbf0546f8085f2e643e6e7c980d86b1016ceec",
+      "target_sha256": "f8fcaeb80090fde2e92cc68f44c6fdf620cdce23bbd248bf4625ce4f66812974",
+      "reason": "Переведено полное пояснение аргумента или условия; проверены область действия, отрицания, значения по умолчанию, порядок действий и числовые факты.",
+      "protected_literals": [
+        "<time>",
+        "SIGUSR1"
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 38,
+          "source_sha256": "9596f03fed92cd26382b5a406bbbf0546f8085f2e643e6e7c980d86b1016ceec",
+          "target_sha256": "f8fcaeb80090fde2e92cc68f44c6fdf620cdce23bbd248bf4625ce4f66812974"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 49,
+      "classification": "argument-description",
+      "source_sha256": "96a91e99be666ea75ea11645e59bc9aa74af6b87865f444a00c00020c5c9ec00",
+      "target_sha256": "b59cbb51df1c101d2c0320659561753781a9a619c3dfae8a894fafaf3e1f9694",
+      "reason": "Переведено полное пояснение аргумента или условия; проверены область действия, отрицания, значения по умолчанию, порядок действий и числовые факты.",
+      "protected_literals": [
+        "<time>",
+        "SIGUSR1"
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 49,
+          "source_sha256": "96a91e99be666ea75ea11645e59bc9aa74af6b87865f444a00c00020c5c9ec00",
+          "target_sha256": "b59cbb51df1c101d2c0320659561753781a9a619c3dfae8a894fafaf3e1f9694"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 201,
+      "classification": "argument-description",
+      "source_sha256": "2bfefedb65e9df5a8d071e23ff46b9e75329b74cb3a90252db95081efae01af4",
+      "target_sha256": "36f9dd04a82f563fd73c7180806eebf18f3bdc13c60a2a551b663ab95c9f53df",
+      "reason": "Переведено полное пояснение аргумента или условия; проверены область действия, отрицания, значения по умолчанию, порядок действий и числовые факты.",
+      "protected_literals": [
+        "\"auto\"",
+        "\"ignore\"",
+        "\"rq-load\"",
+        "\"tune.runqueue-depth\""
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 200,
+          "source_sha256": "2bfefedb65e9df5a8d071e23ff46b9e75329b74cb3a90252db95081efae01af4",
+          "target_sha256": "36f9dd04a82f563fd73c7180806eebf18f3bdc13c60a2a551b663ab95c9f53df"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver.",
+      "upgrade_history": [
+        {
+          "index": 200,
+          "source_sha256": "2bfefedb65e9df5a8d071e23ff46b9e75329b74cb3a90252db95081efae01af4",
+          "target_sha256": "36f9dd04a82f563fd73c7180806eebf18f3bdc13c60a2a551b663ab95c9f53df"
+        }
+      ],
+      "upgrade_review": "Official 3.4.6-66 source diff and translated counterpart separately compared. All unchanged prose, literals and prior full review retained; exact changed table note or withdrawn keyword row reviewed."
+    },
+    {
+      "index": 202,
+      "classification": "argument-description",
+      "source_sha256": "88276232f602b5177e1e994e123310db0e1a5ba2d90916cb706834c9fbcecc55",
+      "target_sha256": "0c7dfba4d929c7d91259ae40963dc2a44c95ab38e364331606f0eaea6e21e99c",
+      "reason": "Переведено полное пояснение аргумента или условия; проверены область действия, отрицания, значения по умолчанию, порядок действий и числовые факты.",
+      "protected_literals": [
+        "rq-load"
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 201,
+          "source_sha256": "88276232f602b5177e1e994e123310db0e1a5ba2d90916cb706834c9fbcecc55",
+          "target_sha256": "0c7dfba4d929c7d91259ae40963dc2a44c95ab38e364331606f0eaea6e21e99c"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver.",
+      "upgrade_history": [
+        {
+          "index": 201,
+          "source_sha256": "88276232f602b5177e1e994e123310db0e1a5ba2d90916cb706834c9fbcecc55",
+          "target_sha256": "0c7dfba4d929c7d91259ae40963dc2a44c95ab38e364331606f0eaea6e21e99c"
+        }
+      ],
+      "upgrade_review": "Official 3.4.6-66 source diff and translated counterpart separately compared. All unchanged prose, literals and prior full review retained; exact changed table note or withdrawn keyword row reviewed."
+    },
+    {
+      "index": 296,
+      "classification": "table-labels",
+      "source_sha256": "18aa70fbef42ceaf67e6c2cb5468bcc804a822250dcf66ab219953ecc8ac6b70",
+      "target_sha256": "f376e5212540b081a7d71472523fbedfa38b3d92b4b438cf84d83ab72d364582",
+      "reason": "Переведены только заголовки столбцов; метки SSLKEYLOGFILE и выражения извлечения образцов сохранены.",
+      "protected_literals": [
+        "SSLKEYLOGFILE"
+      ],
+      "protected_lines": [
+        "  --------------------------------|-----------------------------------------",
+        "  CLIENT_EARLY_TRAFFIC_SECRET     |  %[ssl_xx_client_early_traffic_secret]",
+        "  CLIENT_HANDSHAKE_TRAFFIC_SECRET |  %[ssl_xx_client_handshake_traffic_secret]",
+        "  CLIENT_TRAFFIC_SECRET_0         |  %[ssl_xx_client_traffic_secret_0]",
+        "  EARLY_EXPORTER_SECRET           |  %[ssl_xx_early_exporter_secret]",
+        "  EXPORTER_SECRET                 |  %[ssl_xx_exporter_secret]",
+        "  SERVER_HANDSHAKE_TRAFFIC_SECRET |  %[ssl_xx_server_handshake_traffic_secret]",
+        "  SERVER_TRAFFIC_SECRET_0         |  %[ssl_xx_server_traffic_secret_0]"
+      ],
+      "revalidation_history": [
+        {
+          "index": 295,
+          "source_sha256": "18aa70fbef42ceaf67e6c2cb5468bcc804a822250dcf66ab219953ecc8ac6b70",
+          "target_sha256": "f376e5212540b081a7d71472523fbedfa38b3d92b4b438cf84d83ab72d364582"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver.",
+      "upgrade_history": [
+        {
+          "index": 295,
+          "source_sha256": "18aa70fbef42ceaf67e6c2cb5468bcc804a822250dcf66ab219953ecc8ac6b70",
+          "target_sha256": "f376e5212540b081a7d71472523fbedfa38b3d92b4b438cf84d83ab72d364582"
+        }
+      ],
+      "upgrade_review": "Official 3.4.6-66 source diff and translated counterpart separately compared. All unchanged prose, literals and prior full review retained; exact changed table note or withdrawn keyword row reviewed."
+    },
+    {
+      "index": 298,
+      "classification": "table-labels",
+      "source_sha256": "f10156fccf95c60e896224ab009951a77e3b7cfaa4020ce0e09e8353d8f8f91e",
+      "target_sha256": "a0313ed5021923927fd5bbe7b4bf6d312ca2b3261673200d0dc698f489afb751",
+      "reason": "Переведены полные описания переменных формата ключей соединения: фронтенд со стороны клиента, бэкенд со стороны сервера; это таблица пояснений, не команды оболочки. Имена переменных сохранены побайтно.",
+      "protected_literals": [
+        "$HAPROXY_KEYLOG_FC_LOG_FMT",
+        "$HAPROXY_KEYLOG_BC_LOG_FMT"
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 297,
+          "source_sha256": "f10156fccf95c60e896224ab009951a77e3b7cfaa4020ce0e09e8353d8f8f91e",
+          "target_sha256": "a0313ed5021923927fd5bbe7b4bf6d312ca2b3261673200d0dc698f489afb751"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver.",
+      "upgrade_history": [
+        {
+          "index": 297,
+          "source_sha256": "f10156fccf95c60e896224ab009951a77e3b7cfaa4020ce0e09e8353d8f8f91e",
+          "target_sha256": "a0313ed5021923927fd5bbe7b4bf6d312ca2b3261673200d0dc698f489afb751"
+        }
+      ],
+      "upgrade_review": "Official 3.4.6-66 source diff and translated counterpart separately compared. All unchanged prose, literals and prior full review retained; exact changed table note or withdrawn keyword row reviewed."
+    },
+    {
+      "index": 324,
+      "classification": "argument-description",
+      "source_sha256": "c94ad44e8315f3adaf305f57df114d0a511d3b68a43bdfba35f5f20c266af3e7",
+      "target_sha256": "55da4189bd47a7239b648044da0d58a377c26aab7f5f1bb617f43528d7275fa6",
+      "reason": "Переведено полное пояснение аргумента или условия; проверены область действия, отрицания, значения по умолчанию, порядок действий и числовые факты.",
+      "protected_literals": [
+        "<timeout>"
+      ],
+      "protected_lines": [],
+      "revalidation_history": [
+        {
+          "index": 323,
+          "source_sha256": "c94ad44e8315f3adaf305f57df114d0a511d3b68a43bdfba35f5f20c266af3e7",
+          "target_sha256": "55da4189bd47a7239b648044da0d58a377c26aab7f5f1bb617f43528d7275fa6"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver.",
+      "upgrade_history": [
+        {
+          "index": 323,
+          "source_sha256": "c94ad44e8315f3adaf305f57df114d0a511d3b68a43bdfba35f5f20c266af3e7",
+          "target_sha256": "55da4189bd47a7239b648044da0d58a377c26aab7f5f1bb617f43528d7275fa6"
+        }
+      ],
+      "upgrade_review": "Official 3.4.6-66 source diff and translated counterpart separately compared. All unchanged prose, literals and prior full review retained; exact changed table note or withdrawn keyword row reviewed."
+    }
+  ],
+  "literal_snippets": [
+    {
+      "classification": "source-code",
+      "text": "local args = table.pack(...)",
+      "source_sha256": "68033bca9e83c82447add2ab4d323f6d99992af0c3f5a6387c58b9e94ba91fad",
+      "reason": "Reviewed unfenced Lua source, arithmetic expression, or formal HTTP response text; surrounding explanation is translated.",
+      "target_sha256": "68033bca9e83c82447add2ab4d323f6d99992af0c3f5a6387c58b9e94ba91fad",
+      "source_occurrences": 1,
+      "target_occurrences": 1
+    },
+    {
+      "classification": "source-code",
+      "text": "curtime + (notAfter - notBefore) / 12",
+      "source_sha256": "88c3c59fd448bb11b463bf98f4b5f5e3ec5240508ebb6cebacbd7e7f403c6778",
+      "reason": "Reviewed unfenced Lua source, arithmetic expression, or formal HTTP response text; surrounding explanation is translated.",
+      "target_sha256": "88c3c59fd448bb11b463bf98f4b5f5e3ec5240508ebb6cebacbd7e7f403c6778",
+      "source_occurrences": 1,
+      "target_occurrences": 1
+    },
+    {
+      "classification": "program-output",
+      "text": "413 Payload Too Large",
+      "source_sha256": "5fbb7e3dbac1bb5ccdf2b4666d48b2d46fae9269ab94a9035f05b7cc7118788e",
+      "reason": "Reviewed unfenced Lua source, arithmetic expression, or formal HTTP response text; surrounding explanation is translated.",
+      "target_sha256": "5fbb7e3dbac1bb5ccdf2b4666d48b2d46fae9269ab94a9035f05b7cc7118788e",
+      "source_occurrences": 1,
+      "target_occurrences": 1
+    },
+    {
+      "classification": "configuration",
+      "text": "nbthread\\>1",
+      "source_sha256": "37951f5158838207ea861e54dba92b0fcd7bdc86b701498c65848190086ba804",
+      "target_sha256": "37951f5158838207ea861e54dba92b0fcd7bdc86b701498c65848190086ba804",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated.",
+      "literal_kind": "configuration-syntax"
+    },
+    {
+      "classification": "configuration",
+      "text": "unix-bind [ prefix `<prefix>` ] [ mode `<mode>` ] [ user `<user>` ] [ uid `<uid>` ] [ group\n`<group>` ] [ gid `<gid>` ]",
+      "source_sha256": "3a0a67387535c65cfdc28fffa8132885f3a601c50df362d3f1381009e4d6b9ad",
+      "target_sha256": "3a0a67387535c65cfdc28fffa8132885f3a601c50df362d3f1381009e4d6b9ad",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated.",
+      "literal_kind": "configuration-syntax"
+    },
+    {
+      "classification": "configuration",
+      "text": "bind :8443 ssl crt example.pem",
+      "source_sha256": "11af1bebbd690a3241070e25541b58a4d66d6dd1ba7023a691b44a0abf9d2a82",
+      "target_sha256": "593cc27e53d414fb6ae050a4fa80d6ed6452ed5b2f4639b9879d6d7bfef34606",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated.",
+      "literal_kind": "configuration-syntax",
+      "prior_reviewed_snippet": {
+        "classification": "configuration",
+        "text": "bind:8443 ssl crt example.pem",
+        "source_sha256": "593cc27e53d414fb6ae050a4fa80d6ed6452ed5b2f4639b9879d6d7bfef34606",
+        "target_sha256": "593cc27e53d414fb6ae050a4fa80d6ed6452ed5b2f4639b9879d6d7bfef34606",
+        "source_occurrences": 1,
+        "target_occurrences": 1,
+        "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated.",
+        "literal_kind": "configuration-syntax"
+      },
+      "supplemental_review": "Exact bind command separator restored from source syntax; all certificate arguments and source/target multiplicity retained."
+    },
+    {
+      "classification": "configuration",
+      "text": "- rq-load { `<number>` \\| auto \\| ignore }:",
+      "source_sha256": "35010ff072d607cb1c57820a1fe68a3dfa0afcfe56da0e362eb351bd7ada49e5",
+      "target_sha256": "35010ff072d607cb1c57820a1fe68a3dfa0afcfe56da0e362eb351bd7ada49e5",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated.",
+      "literal_kind": "configuration-syntax"
+    },
+    {
+      "classification": "configuration",
+      "text": "- min `<number>`:",
+      "source_sha256": "935ee41bd4e7d711768899a0be4896531a1b1d5782d6557660b32f1c3dfae276",
+      "target_sha256": "935ee41bd4e7d711768899a0be4896531a1b1d5782d6557660b32f1c3dfae276",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated.",
+      "literal_kind": "configuration-syntax"
+    },
+    {
+      "classification": "source-code",
+      "text": "MAX(500, 10000 / nbthread)",
+      "source_sha256": "565fd3f103284167880e20c5c89089f3e9f7d6b950c729a4b4077c9165252c70",
+      "target_sha256": "565fd3f103284167880e20c5c89089f3e9f7d6b950c729a4b4077c9165252c70",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated.",
+      "literal_kind": "arithmetic-expression"
+    },
+    {
+      "classification": "source-code",
+      "text": "2^30 ~=\n1.07",
+      "source_sha256": "68b354330a567ab7a7bfc65a418bfd12a3549d35089a95f2e0eed6cc1523ae8e",
+      "target_sha256": "68b354330a567ab7a7bfc65a418bfd12a3549d35089a95f2e0eed6cc1523ae8e",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated.",
+      "literal_kind": "arithmetic-expression"
+    },
+    {
+      "classification": "source-code",
+      "text": "2^60",
+      "source_sha256": "44f2639f1ef2194c93d35c37cf09e71e6437db36798e53f7eba71e47886c67e1",
+      "target_sha256": "44f2639f1ef2194c93d35c37cf09e71e6437db36798e53f7eba71e47886c67e1",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated.",
+      "literal_kind": "arithmetic-expression"
+    },
+    {
+      "classification": "source-code",
+      "text": "(max-total-streams +\nmax-concurrent-streams)",
+      "source_sha256": "32d6806ca7fef72b534e4828ac830c8629afa99220a44c18760d785685e96612",
+      "target_sha256": "32d6806ca7fef72b534e4828ac830c8629afa99220a44c18760d785685e96612",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated.",
+      "literal_kind": "arithmetic-expression"
+    },
+    {
+      "classification": "configuration",
+      "text": "capture cookie xxx\nlen yyy",
+      "source_sha256": "539246822765b770651e5a0a828e931f0b9e29a18eaeaae09ac732537f0a5a1a",
+      "target_sha256": "539246822765b770651e5a0a828e931f0b9e29a18eaeaae09ac732537f0a5a1a",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated.",
+      "literal_kind": "configuration-syntax"
+    },
+    {
+      "classification": "program-output",
+      "text": "400 Bad\nRequest",
+      "source_sha256": "9fa472f72ef04e76dd5a70051c70b72d684ef9f0a41a491d95dfbce2d35909f8",
+      "target_sha256": "9fa472f72ef04e76dd5a70051c70b72d684ef9f0a41a491d95dfbce2d35909f8",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated."
+    },
+    {
+      "classification": "program-output",
+      "text": "502 Bad Gateway",
+      "source_sha256": "930cb379321f6ce3cdaf5db7d4348290945e3702b0a04cd04622e9138dc31289",
+      "target_sha256": "930cb379321f6ce3cdaf5db7d4348290945e3702b0a04cd04622e9138dc31289",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated."
+    },
+    {
+      "classification": "program-output",
+      "text": "HTTP 400 (Bad Request)",
+      "source_sha256": "839da9839dc407de6b4768fc470d704139640a6562485a1bc0b7f8d36e3ce862",
+      "target_sha256": "839da9839dc407de6b4768fc470d704139640a6562485a1bc0b7f8d36e3ce862",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated."
+    },
+    {
+      "classification": "program-output",
+      "text": "HTTP 502 (Bad\nGateway)",
+      "source_sha256": "1e768b477f1f8c94c0d5858abeede33fb821a842a23d987c7e21f967f27ae050",
+      "target_sha256": "1e768b477f1f8c94c0d5858abeede33fb821a842a23d987c7e21f967f27ae050",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated."
+    },
+    {
+      "classification": "configuration",
+      "text": "\"CLIENT_RANDOM %[ssl_fc_client_random,hex] %[ssl_fc_session_key,hex]\"",
+      "source_sha256": "7c24b52609cf05e2f00aba7022457c0f882af8b5063e1f2b8cca0ad06468f4c7",
+      "target_sha256": "7c24b52609cf05e2f00aba7022457c0f882af8b5063e1f2b8cca0ad06468f4c7",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated.",
+      "literal_kind": "configuration-syntax"
+    },
+    {
+      "classification": "configuration",
+      "text": "%[ssl_fc_client_random,hex]",
+      "source_sha256": "178b1fff1f85e14c13682e4cedbe21f05a3726089c4421fc4e4120e45963d3fc",
+      "target_sha256": "178b1fff1f85e14c13682e4cedbe21f05a3726089c4421fc4e4120e45963d3fc",
+      "source_occurrences": 2,
+      "target_occurrences": 2,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated.",
+      "literal_kind": "configuration-syntax"
+    },
+    {
+      "classification": "configuration",
+      "text": "quic-socket\nlistener",
+      "source_sha256": "e8d4eb74337269f5e89a06ffeadfe0923ccf7068814095504d1eecd8812f758b",
+      "target_sha256": "e8d4eb74337269f5e89a06ffeadfe0923ccf7068814095504d1eecd8812f758b",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated.",
+      "literal_kind": "configuration-syntax"
+    },
+    {
+      "classification": "configuration",
+      "text": "client hello",
+      "source_sha256": "7d7ac68cda27900bfe8a65b484324f785b751689220e410e1cabac23e09c93ec",
+      "target_sha256": "7d7ac68cda27900bfe8a65b484324f785b751689220e410e1cabac23e09c93ec",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated.",
+      "literal_kind": "protocol-message-name"
+    },
+    {
+      "classification": "configuration",
+      "text": "reverse http",
+      "source_sha256": "3c746d024ae767ae630f68b3aa0531e64f06bcc4addd3fea781d37c98dd41179",
+      "target_sha256": "3c746d024ae767ae630f68b3aa0531e64f06bcc4addd3fea781d37c98dd41179",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated.",
+      "literal_kind": "protocol-name"
+    },
+    {
+      "classification": "source-code",
+      "text": "     local args = table.pack(...)\n\n",
+      "source_sha256": "05f609eefc8d7026a0b5a529f05057c390c476c974702a9cff7c9c336fc49912",
+      "target_sha256": "05f609eefc8d7026a0b5a529f05057c390c476c974702a9cff7c9c336fc49912",
+      "source_occurrences": 1,
+      "target_occurrences": 1,
+      "reason": "Separate full current-English/Russian comparison: protected unmarked syntax, expression, protocol name or program output retained exactly; surrounding prose translated."
+    }
+  ],
+  "indented_prose": [
+    {
+      "source_sha256": "06ede300dd6a0e1c3c8095e1d08ee91671060faa8f36bda08d3e53a7336283fb",
+      "target_sha256": "831d9c65ff1346b115adf063b2a8741fede3955b6e555dd521fe34ae4c744e76",
+      "reason": "Three default-path mode descriptions are natural explanations rendered as one indented pre block; config dirname/last-slash/current-dir logic, per-config-file directory update, parent .. behavior and origin mandatory designated path/different-prefix relocation all fully compared.",
+      "protected_literals": [
+        "\"config\"",
+        "\"parent\"",
+        "\"origin\"",
+        "'/'",
+        "\"..\"",
+        "\"config/\"",
+        "\"certs/\"",
+        "\"maps/\"",
+        "Lua",
+        "HAProxy"
+      ],
+      "protected_lines": []
+    },
+    {
+      "source_sha256": "88c8147ebf8c963b9a97fe9d893462c35a24809ad620649389772cba2e02ac2a",
+      "target_sha256": "437ea119aa7fab2c75f1ac1a552667092caae5e44bb961d2ac63f75263a12a03",
+      "reason": "Three Lua burst-timeout troubleshooting suggestions: script memory-footprint optimization, GC parameter tuning and explicit/manual GC cycles with exact manual URL, and increasing burst timeout all fully compared. These are advice prose, not commands.",
+      "protected_literals": [
+        "GC",
+        "https://www.lua.org/manual/5.4/manual.html#pdf-collectgarbage",
+        "tune.lua.burst-timeout"
+      ],
+      "protected_lines": []
+    },
+    {
+      "source_sha256": "2fd5d1837ff8851513f33aba4dad0c72125ca9e29cc7def58b76e9387fef1ac1",
+      "target_sha256": "891479d875c45f9a7c3a2b79f4b3320fbc64ca9570ccbbd4c3a3469bda0cdb9f",
+      "reason": "Three Lua logger disabling conditions are explanatory prose: explicit off, non-proxy context without global logger, and proxy context without attached logger. Both absence negations and contextual conjunctions fully compared.",
+      "protected_literals": [
+        "tune.lua.log.loggers",
+        "'off'"
+      ],
+      "protected_lines": []
+    }
+  ],
+  "literal_blocks": [],
+  "source_formatting_revalidation": {
+    "method": "Exact reviewed predecessor source/target SHA mapping and byte-for-byte literal-fence witnesses; only documented source errata and markup-only restoration accepted.",
+    "fences": [
+      {
+        "prior": {
+          "index": 14,
+          "source_sha256": "5ebe304d39b85125c65222c78ad6a593ddf82ad9e76c8fb0a1ae077f87e31b6e",
+          "target_sha256": "016b948e118f354f278e43ebf33e7679a35cf250e6296dab5dd9ba07bbdcb143"
+        },
+        "index": 14,
+        "source_sha256": "5ebe304d39b85125c65222c78ad6a593ddf82ad9e76c8fb0a1ae077f87e31b6e",
+        "target_sha256": "016b948e118f354f278e43ebf33e7679a35cf250e6296dab5dd9ba07bbdcb143",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 38,
+          "source_sha256": "9596f03fed92cd26382b5a406bbbf0546f8085f2e643e6e7c980d86b1016ceec",
+          "target_sha256": "f8fcaeb80090fde2e92cc68f44c6fdf620cdce23bbd248bf4625ce4f66812974"
+        },
+        "index": 38,
+        "source_sha256": "9596f03fed92cd26382b5a406bbbf0546f8085f2e643e6e7c980d86b1016ceec",
+        "target_sha256": "f8fcaeb80090fde2e92cc68f44c6fdf620cdce23bbd248bf4625ce4f66812974",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 49,
+          "source_sha256": "96a91e99be666ea75ea11645e59bc9aa74af6b87865f444a00c00020c5c9ec00",
+          "target_sha256": "b59cbb51df1c101d2c0320659561753781a9a619c3dfae8a894fafaf3e1f9694"
+        },
+        "index": 49,
+        "source_sha256": "96a91e99be666ea75ea11645e59bc9aa74af6b87865f444a00c00020c5c9ec00",
+        "target_sha256": "b59cbb51df1c101d2c0320659561753781a9a619c3dfae8a894fafaf3e1f9694",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 200,
+          "source_sha256": "2bfefedb65e9df5a8d071e23ff46b9e75329b74cb3a90252db95081efae01af4",
+          "target_sha256": "36f9dd04a82f563fd73c7180806eebf18f3bdc13c60a2a551b663ab95c9f53df"
+        },
+        "index": 200,
+        "source_sha256": "2bfefedb65e9df5a8d071e23ff46b9e75329b74cb3a90252db95081efae01af4",
+        "target_sha256": "36f9dd04a82f563fd73c7180806eebf18f3bdc13c60a2a551b663ab95c9f53df",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 201,
+          "source_sha256": "88276232f602b5177e1e994e123310db0e1a5ba2d90916cb706834c9fbcecc55",
+          "target_sha256": "0c7dfba4d929c7d91259ae40963dc2a44c95ab38e364331606f0eaea6e21e99c"
+        },
+        "index": 201,
+        "source_sha256": "88276232f602b5177e1e994e123310db0e1a5ba2d90916cb706834c9fbcecc55",
+        "target_sha256": "0c7dfba4d929c7d91259ae40963dc2a44c95ab38e364331606f0eaea6e21e99c",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 295,
+          "source_sha256": "18aa70fbef42ceaf67e6c2cb5468bcc804a822250dcf66ab219953ecc8ac6b70",
+          "target_sha256": "f376e5212540b081a7d71472523fbedfa38b3d92b4b438cf84d83ab72d364582"
+        },
+        "index": 295,
+        "source_sha256": "18aa70fbef42ceaf67e6c2cb5468bcc804a822250dcf66ab219953ecc8ac6b70",
+        "target_sha256": "f376e5212540b081a7d71472523fbedfa38b3d92b4b438cf84d83ab72d364582",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 297,
+          "source_sha256": "f10156fccf95c60e896224ab009951a77e3b7cfaa4020ce0e09e8353d8f8f91e",
+          "target_sha256": "a0313ed5021923927fd5bbe7b4bf6d312ca2b3261673200d0dc698f489afb751"
+        },
+        "index": 297,
+        "source_sha256": "f10156fccf95c60e896224ab009951a77e3b7cfaa4020ce0e09e8353d8f8f91e",
+        "target_sha256": "a0313ed5021923927fd5bbe7b4bf6d312ca2b3261673200d0dc698f489afb751",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 323,
+          "source_sha256": "c94ad44e8315f3adaf305f57df114d0a511d3b68a43bdfba35f5f20c266af3e7",
+          "target_sha256": "55da4189bd47a7239b648044da0d58a377c26aab7f5f1bb617f43528d7275fa6"
+        },
+        "index": 323,
+        "source_sha256": "c94ad44e8315f3adaf305f57df114d0a511d3b68a43bdfba35f5f20c266af3e7",
+        "target_sha256": "55da4189bd47a7239b648044da0d58a377c26aab7f5f1bb617f43528d7275fa6",
+        "reason": "unchanged exact reviewed English fence"
+      }
+    ],
+    "literal_blocks": []
+  }
+}

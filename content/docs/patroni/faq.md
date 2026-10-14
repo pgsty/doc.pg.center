@@ -34,7 +34,7 @@ If Postgres nodes do not exist yet, it takes care of bootstrapping the primary a
 
 Besides the above, Patroni also has self-healing capabilities. In other words, if a primary node fails, Patroni will not only fail over to a replica, but also attempt to rejoin the former primary as a replica of the new primary. Similarly, if a replica fails, Patroni will attempt to rejoin that replica.
 
-That is way we call Patroni as a "template for HA solutions". It goes further than just managing physical replication: it manages Postgres as a whole.
+That is why we call Patroni a "template for HA solutions". It goes further than just managing physical replication: it manages Postgres as a whole.
 
 --------
 
@@ -48,14 +48,14 @@ Information about a Patroni cluster is stored in the DCS under a path prefixed w
 As long as you do not have conflicting namespace and scope across different Patroni clusters, you should be able to use the same DCS cluster to store information from multiple Patroni clusters.
 
 What occurs if I attempt to use the same combination of `namespace` and `scope` for different Patroni clusters that point to the same DCS cluster?  
-The second Patroni cluster that attempts to use the same `namespace` and `scope` will not be able to manage Postgres because it will find information related with that same combination in the DCS, but with an incompatible Postgres system identifier. The mismatch on the system identifier causes Patroni to abort the management of the second cluster, as it assumes that refers to a different cluster and that the user has misconfigured Patroni.
+If the second cluster has a different Postgres system identifier, Patroni detects incompatible data under that DCS path. Outside pause mode, it exits instead of managing the second cluster, because it assumes that the stored state belongs to a different cluster and that Patroni was misconfigured.
 
 Make sure to use different `namespace` / `scope` when dealing with different Patroni clusters that share the same DCS cluster.
 
 What occurs if I lose my DCS cluster?  
 The DCS is used to store basically status and the dynamic configuration of the Patroni cluster.
 
-They very first consequence is that all the Patroni clusters that rely on that DCS will go to read-only mode -- unless [dcs_failsafe_mode](/docs/patroni/dcs_failsafe_mode#dcs_failsafe_mode) is enabled.
+The very first consequence is that all the Patroni clusters that rely on that DCS will go to read-only mode -- unless [dcs_failsafe_mode](/docs/patroni/dcs_failsafe_mode#dcs_failsafe_mode) is enabled.
 
 What should I do if I lose my DCS cluster?  
 There are three possible outcomes upon losing your DCS cluster:
@@ -141,7 +141,7 @@ You need to change the configuration in the DCS. That is accomplished either thr
 - A `PATCH` request to [config_endpoint](/docs/patroni/rest_api#config_endpoint).
 
 How can I change my local configuration?  
-You need to change the configuration file of the corresponding Patroni member and signal the Patroni agent with `SIHGUP`. You can do that using either of these approaches:
+You need to change the configuration file of the corresponding Patroni member and signal the Patroni agent with `SIGHUP`. You can do that using either of these approaches:
 
 - Send a `POST` request to the REST API [reload_endpoint](/docs/patroni/rest_api#reload_endpoint); or
 
@@ -193,7 +193,7 @@ Be aware that information stored by the API version 2 is not manageable by API v
 We recommend that you configure `etcd3` instead of `etcd` because:
 
 - API version 2 is disabled by default from Etcd v3.4 onward;
-- API version 2 will be completely removed on Etcd v3.6.
+- API version 2 was completely removed in etcd v3.6.
 
 I have `use_slots` enabled in my Patroni configuration, but when a cluster member goes offline for some time, the replication slot used by that member is dropped on the upstream node. What can I do to avoid that issue?  
 There are two options:
@@ -203,13 +203,13 @@ There are two options:
 
 Since Patroni `3.2.0` it is now possible to have member slots as permanent slots managed by Patroni.
 
-Patroni will create the permanent physical slots on all nodes, and make sure to not remove the slots, as well as to advance the slots' LSN on all nodes according to the LSN that has been consumed by the member.
+On PostgreSQL 11 or newer, Patroni will create the permanent physical slots on all nodes, and make sure to not remove the slots, as well as to advance the slots' LSN on all nodes according to the LSN that has been consumed by the member.
 
 Later, if you decide to remove the corresponding member, it's **your responsibility** to adjust the permanent slots configuration, otherwise Patroni will keep the slots around forever.
 
 **Note:** on Patroni older than `3.2.0` you could still have member slots configured as permanent physical slots, however they would be managed only on the current leader. That is, in case of failover/switchover these slots would be created on the new leader, but that wouldn't guarantee that it had all WAL segments for the absent node.
 
-**Note:** even with Patroni `3.2.0` there might be a small race condition. In the very beginning, when the slot is created on the replica it could be ahead of the same slot on the leader and in case if nobody is consuming the slot there is still a chance that some files could be missing after failover. With that in mind, it is recommended that you configure continuous archiving, which makes it possible to restore required WALs or perform PITR.
+**Note:** even with Patroni `3.2.0` there might be a small race condition. In the very beginning, when the slot is created on the replica it could be ahead of the same slot on the leader and if nobody is consuming the slot there is still a chance that some files could be missing after failover. With that in mind, it is recommended that you configure continuous archiving, which makes it possible to restore required WALs or perform PITR.
 
 What is the difference between `loop_wait`, `retry_timeout` and `ttl`?  
 Patroni performs what we call a HA cycle from time to time. On each HA cycle it takes care of performing a series of checks on the cluster to determine its healthiness, and depending on the status it may take actions, like failing over to a standby.
@@ -244,7 +244,7 @@ In any case we recommend that you manage all the Postgres configuration through 
 Can I restart Postgres nodes directly?  
 No, you should **not** attempt to manage Postgres directly!
 
-Any attempt of bouncing the Postgres server without Patroni can lead your cluster to face failovers.
+Restarting the Postgres server outside Patroni can trigger a failover.
 
 If you need to manage the Postgres server, do that through the ways exposed by Patroni.
 
@@ -263,7 +263,7 @@ With that in mind you **MUST** disable any other sources that could manage the P
 ## Concepts and requirements
 
 Which are the applications that make part of Patroni?  
-Patroni basically ships a couple applications:
+Patroni basically ships a couple of applications:
 
 - `patroni`: This is the Patroni agent, which takes care of managing a Postgres node;
 - [patronictl](/docs/patroni/patronictl#patronictl): This is a command-line utility used to interact with a Patroni cluster (perform switchovers, restarts, changes in the configuration, etc.). Please find more information in [patronictl](/docs/patroni/patronictl#patronictl).
@@ -343,6 +343,6 @@ How can I monitor my Patroni cluster?
 Patroni exposes a couple handy endpoints in its [rest_api](/docs/patroni/rest_api#rest_api):
 
 - `/metrics`: exposes monitoring metrics in a format that can be consumed by Prometheus;
-- `/patroni`: exposes the status of the cluster in a JSON format. The information shown here is very similar to what is shown by the `/metrics` endpoint.
+- `/patroni`: exposes the status of the local Patroni/Postgres node in JSON format. The information shown here is very similar to what is shown by the `/metrics` endpoint.
 
 You can use those endpoints to implement monitoring checks.

@@ -2,7 +2,8 @@
 title: "版本历史"
 linkTitle: "版本历史"
 weight: 90
-description: "根据上游 ChangeLog 规范整理的 pgBadger 9.x 至 13.x 完整变更历史"
+description: "pgBadger 9.x 至 13.x 的版本历史"
+search_keywords: []
 icon: fa-solid fa-clock-rotate-left
 module: [PGBADGER]
 categories: [参考]
@@ -11,7 +12,9 @@ upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632e
 upstream_name: "pgBadger ChangeLog"
 ---
 
-官网把版本新闻直接堆放在首页，内容停留在 12.4，并且误把 11.1–11.3 用互相冲突的日期重复渲染了一次。本站以固定上游 `ChangeLog` 为规范记录，只去除这些重复展示，同时补入后续 13.x 版本。每个系列均保留完整条目，并按从新到旧排序。
+pgBadger 9.x–13.x 的版本历史，按主要版本系列分组，每个系列按从新到旧排序。
+
+这些条目描述的是各版本发布时的行为。历史默认值、配置名称和升级指引可能与 13.2 不同；实际运行设置请以当前命令行参考和 PostgreSQL 日志配置指南为准。
 
 | 系列 | 收录版本 | 首末发布日期 | 页面 |
 |---|---|---|---|
@@ -21,5 +24,5 @@ upstream_name: "pgBadger ChangeLog"
 | 10.x | 10.0–10.3 | 2018-09-09 – 2019-02-14 | [阅读 10.x](/zh/docs/pgbadger/releases/10/) |
 | 9.x | 9.0–9.2 | 2016-09-02 – 2017-07-27 | [阅读 9.x](/zh/docs/pgbadger/releases/9/) |
 
-可下载归档与附件请访问 [GitHub Releases](https://github.com/darold/pgbadger/releases)。本节日期描述的是上游源码历史，不是本站文档快照的下载时间。
+发行归档与附件请访问 [GitHub Releases](https://github.com/darold/pgbadger/releases)。
 

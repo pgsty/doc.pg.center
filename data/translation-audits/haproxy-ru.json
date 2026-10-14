@@ -1,0 +1,1687 @@
+{
+  "schema_version": 1,
+  "component": "haproxy",
+  "language": "ru",
+  "english_version": "3.4.4",
+  "upstream_commit": "16acce1dac1dcf1ad5d654204af3a5d45d0e3de8",
+  "starting_head": "7c479f7147cfbe83855888c771e28cec980d34ef",
+  "completed_semantic_review_at": "2026-10-13T06:13:39.378121+00:00",
+  "status": "complete",
+  "source_policy": "All38 original current-English SHA256 fingerprints preserved. No English source upgrade, Git staging/commit/push or deployment performed.",
+  "coverage": {
+    "published_pages_before": 30,
+    "published_pages_at_cx7_takeover": 32,
+    "published_pages_after": 35,
+    "published_pages_total": 35,
+    "navigation_dividers": 3,
+    "source_pairs_after": 38,
+    "source_pairs_total": 38,
+    "page_percent_before": 85.71428571428571,
+    "page_percent_after": 100.0,
+    "english_body_chars": 2094778,
+    "body_weighted_before_percent": 26.443804546352883,
+    "body_weighted_takeover_percent": 41.43541702271076,
+    "body_weighted_after_percent": 100.0,
+    "meaning": "Source-body weighted scope uses each current-English page body. Independent semantic review and production acceptance are separate evidence, not inferred from file presence."
+  },
+  "page_lists": {
+    "added": [
+      "acls-and-samples",
+      "configuration-logging",
+      "global",
+      "proxies",
+      "statistics-and-monitoring"
+    ],
+    "corrected_existing": [
+      "_index",
+      "stopping-and-restarting",
+      "ecosystem",
+      "releases-and-upgrades",
+      "load-balancing",
+      "basic-features",
+      "standard-features",
+      "filters",
+      "fastcgi",
+      "http-fundamentals",
+      "configuration-basics",
+      "stick-tables-and-peers",
+      "starting",
+      "other-sections",
+      "bind-and-server-options"
+    ],
+    "reviewed_unchanged": [
+      "prerequisites",
+      "traps",
+      "configuration-management",
+      "management-architecture",
+      "management-logging",
+      "memory",
+      "resources",
+      "security",
+      "sizing",
+      "cpu",
+      "file-descriptors",
+      "cache",
+      "advanced-features",
+      "debugging-and-performance",
+      "architecture"
+    ],
+    "reviewed_unchanged_dividers": [
+      "_div_intro",
+      "_div_configuration",
+      "_div_management"
+    ]
+  },
+  "semantic_conclusion": "Every required explanatory body and localized display field reviewed against current English. Every added/changed body had independent review or a separate complete second comparison. Cache generation/queue progress and script success are not semantic evidence; exact final source/target hash witnesses are retained outside Git.",
+  "legal_english_exceptions": [
+    "Executable code/configuration, command comments inside protected examples, actual program output and diagnostics, paths/URLs, argument placeholders, formal API/sample/metric signatures and protocol/header names remain literal.",
+    "Proper product/protocol names and standardized identifiers remain Latin; English technical terms explicitly explained in Russian may remain in parentheses.",
+    "All un-commented explanatory prose, table labels and argument descriptions are translated. Exact explanation-fence, indented-explanation and embedded-code manifests enforce the boundary without exempting arbitrary code.",
+    "A genuine same-page theme translation-source notice may cite the English original, alongside actual same-page language switches and alternate metadata. Ordinary English body links and forged notice attributes are rejected."
+  ],
+  "source_anomalies_retained": [
+    {
+      "scope": "predecessor full-page reviews",
+      "fact": "configuration-basics: tcp6/udp6 equivalent ipv4@ aliases in source retained."
+    },
+    {
+      "scope": "predecessor full-page reviews",
+      "fact": "starting: source 2015/10/08 interpretation as August 8 retained."
+    },
+    {
+      "scope": "predecessor full-page reviews",
+      "fact": "stick tables: bytes_*_cnt [4 bytes] paired with 64-bit text; gpc_rate text gpt(100) retained."
+    },
+    {
+      "scope": "predecessor full-page reviews",
+      "fact": "Some source management 9.3 links resolve to filters/SPOE; exact original destinations retained."
+    },
+    {
+      "scope": "predecessor full-page reviews",
+      "fact": "other-sections: ring local/raw both declared defaults; ACME renewal formula exact retained."
+    },
+    {
+      "scope": "predecessor full-page reviews",
+      "fact": "bind-and-server-options: prose id % 268435356 vs hash-key fence id % 268435456; verifyhost health-check/SNI inconsistency retained."
+    },
+    {
+      "scope": "predecessor full-page reviews",
+      "fact": "ACL/global: div largest unsigned 2^63-1, neg remainder, JWE signature wording and unusual RFC link destinations retained; detailed evidence in ACL handoff."
+    },
+    {
+      "scope": "predecessor full-page reviews",
+      "fact": "proxies action del-map source repeats two one-argument statements; parent draft preserves both."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "div",
+      "fact": "The source calls 2^63-1 the largest unsigned integer. Retained without correction."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "neg",
+      "fact": "The source says remainder for arithmetic negation. Retained without correction."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "JWE converters",
+      "fact": "The source uses signature-verification wording for JWE processing. Retained without changing cryptographic claims."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "strcmp",
+      "fact": "Source parenthetical signed comparison explanation is contradictory; polarity/parenthetical retained."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "be_tarpit_timeout",
+      "fact": "Source explanation calls it queue timeout. Retained."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "src",
+      "fact": "Source says original destination address when discussing source address after NAT. Retained."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "fc_*",
+      "fact": "Some client-side TCP metrics say server connection not established. Retained."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "table_inc_gpc",
+      "fact": "Source sc0/sc2/sc2 references and duplicated gpc0/gpc1 names retained exactly."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "src_inc_gpc / src_gpc1_rate",
+      "fact": "Source self-reference and second rate reference to src_gpc0_rate retained."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "connslots / nbsrv",
+      "fact": "Source refers to servers actually DOWN; adjacent nbsrv describes usable servers. Original distinction retained."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "ssl_bc_client_random / ssl_bc_server_random",
+      "fact": "Backconnection fetch explanation says incoming SSL connection; source wording retained."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "res.hdrs",
+      "fact": "Source response-header final empty line says request body. Retained."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "req.fhdr_cnt",
+      "fact": "Source comparison names res.hdr_cnt(), retained."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "req.ssl_keyshare_groups",
+      "fact": "Source categorically says TLSv1.3 keyshare must be the final ClientHello extension. Retained."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "req.ssl_sigalgs / ssl_fc_sigalgs",
+      "fact": "Source says full cipher list in signature-algorithm context and spells signatures_algorithms. Retained."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "srv_sess_rate",
+      "fact": "Source example calls them latent requests; rendered literally as латентных запросов."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "RFC section links",
+      "fact": "Upstream importer mapped RFC section labels to HAProxy internal chapter routes, including RFC5929 section 3 → global/. Same logical destination and anchor retained with Russian route prefix."
+    },
+    {
+      "page": "acls-and-samples",
+      "entry": "SPOE binary encoding",
+      "fact": "Source mixed triple/double backtick runs around typed byte grammar are unusual. Exact technical grammar preserved."
+    },
+    {
+      "page": "global",
+      "fact": "HTTP/1 glitch sections describe future-stream GOAWAY; kept as English source."
+    },
+    {
+      "page": "global",
+      "fact": "tune.h2.be.rxbuf text mixes outgoing receive buffer with uploading/downloading/upload-performance; original directions kept."
+    },
+    {
+      "page": "global",
+      "fact": "tune.listener shards text declares shards default1 and later by-group; both kept."
+    },
+    {
+      "page": "global",
+      "fact": "tune.notsent-lowat description repeats tune.sndbuf.client twice; kept."
+    },
+    {
+      "page": "global",
+      "fact": "tune.sndbuf client/server description says received data despite send buffers; kept."
+    },
+    {
+      "page": "global",
+      "fact": "tune.quic.listen disable description paired with default on; kept."
+    },
+    {
+      "page": "global",
+      "fact": "Lua GC source says deduce; translated determine rather than silently changing to deduct."
+    },
+    {
+      "page": "global",
+      "fact": "Legacy multiprocess descriptions, TLS OpenSSL1.1.1-only wording and Linux2.6/Java7 historical constraints retained; not upgraded."
+    },
+    {
+      "page": "global",
+      "fact": "Source e.g, typographical abbreviation localized; local collector normalized this exact prose form only, no public checker altered."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 506,
+      "source_sha256": "e4ab225b61c20c2c3460266dc2ac64fb86274eac7bd8e02dd81925c3ce6e3046",
+      "fact": "404s is the English plural of HTTP status404, not a404-second duration; only the grammatical plural is translated, numeric status404 remains exact."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 662,
+      "source_sha256": "920e5dc45e8d7a7d029cd81f352ffd3919ed9c6c14330c7eb314f0494289ce11",
+      "fact": "Source says there are only2 arguments before naming global/local/none forms; kept original statement."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 694,
+      "source_sha256": "2b3f81fe0ee66a74ae54780c54da6c6a11af5df864b54f4a651e8545cdc37e3e",
+      "fact": "Source says non-blocking calls are ignored for file-descriptor output to a file; retained source claim. PIPE_BUF512/4096 are atomic-write limits, not minimum log-message lengths."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 755,
+      "source_sha256": "67253c65e467d194977ac3849f9347aeb58a078dd1d5e3e97a7d4bf6c6ed505b",
+      "fact": "Source says responses following401 remain on the same server and may queue; retained responses rather than substituting requests."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 793,
+      "source_sha256": "3a57e6b5c04dac5acb91e9119e900a062a66f7044afdc4f842398d3516f0aa73",
+      "fact": "Source claim that HTTP2 clients are encouraged to send only absolute URIs retained."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 815,
+      "source_sha256": "a2ebe61fb8e638ef96ccecdeef3f7beaabf1a9e7cc986729ddaaa70b9e420e55",
+      "fact": "Source misspells RFC as RCF; retains RCF."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 858,
+      "source_sha256": "f667b699381014de7ece452ae9b30851e5439c63c9e81a9f9dadec8457f3008d",
+      "fact": "Source Cache-control example has an unclosed quotation and explicit newline; original bytes retained."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 877,
+      "source_sha256": "9db970f60add199e94d8089216c567f77a73e95db329d25c70a7f08952dcea9f",
+      "fact": "Source double negative not-not-enabled-by-default retained as logical affirmation по умолчанию он не выключен; conflicts with adjacent performance/default narrative, listed for upstream followup."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 915,
+      "source_sha256": "54d1ee98d8bd0670151ebbcc374e4184669003208f756ad7110eaf4914dd11b7",
+      "fact": "Source header spells x-forward-for rather than x-forwarded-for; original spelling retained."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 998,
+      "source_sha256": "36d826f3f31ae1cbd3a5b9f3307c25769547f2d82ba8cd2636107d323cc5fcac",
+      "fact": "Source says fast static server of cache; no invented or conjunction is added."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 1158,
+      "source_sha256": "3f37d35dc819157910a485f38b03991b891c4107b61ea2b4d8d525a2dc535c70",
+      "fact": "Optional network argument source says matching source addresses although later prose1161 describes destination matching; both source claims retained."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 1161,
+      "source_sha256": "afd08fe381b612106f27fd8e9ea421fbd3b62414384d164c20be83a68a16e4ed",
+      "fact": "Source optional-network prose describes matching destination addresses despite earlier argument1158 saying source; retained source wording."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 1177,
+      "source_sha256": "4fab5af662d6e7357845b63607880368c68c73df1b5c16a9d0d54562f5ac2cc4",
+      "fact": "PostgreSQL health-check text source references mysql-check; retained upstream mismatch."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 1184,
+      "source_sha256": "a794016915da3b9298965296cb7cf79344197cf2f5a36d7e70be28f58a440675",
+      "fact": "Source describes static-rr as deterministic; retained source description."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 1232,
+      "source_sha256": "e368c74330c10e2d9f101407fe0e4cb9c5703baabade997cc0ffef7e2d7470d7",
+      "fact": "Source historical Linux2.6.25/2.6.29 implementation claims retained without updating English version."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 1420,
+      "source_sha256": "0d5bf6a2e10b8917fe8abc7ccb16e5d66e402d04f98ca06a92a7a2f7d2ea4484",
+      "fact": "Exact named HTTP reason/status phrases retained, including source500 Server Error; these are wire/sample technical values rather than untranslated narrative."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 1531,
+      "source_sha256": "36b1ab14dab38a96c9129a2bf0f21272309a3fb06d173b1d5e8fbb81d33cc026",
+      "fact": "Source401 Forbidden phrase retained despite protocol oddity; source real typo is understood as realm within Russian explanation while actual realm syntax remains unchanged."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 1735,
+      "source_sha256": "88f94d7d5ebb202be6e007e9f38bef5554fffc25eac1f470e1120655c6d4df43",
+      "fact": "Source binary-lf<hexfmt> explanation refers to<fmt>; source placeholders retained."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 1736,
+      "source_sha256": "b83abc1925745b2ccac55250567297dd00b1a4633f746bf30780fea4e7f78a68",
+      "fact": "Source NUL limitation has tension with adjacent rbinary description; retained as written."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 1987,
+      "source_sha256": "30e0ecd0638a86f8c231056f97abd0332344a4e48d53f7fe14affb78f4acf2dd",
+      "fact": "Source recommends option transparent while other source sections deprecate it; retained source cross-section contradiction."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 2089,
+      "source_sha256": "ae618ea77dfbf9601849e14f972fffdf08081b98bb0a11ce18b35aa65e199067",
+      "fact": "MAP-deletion source contains two separate one-argument statements, first<key fmt> then file name; retained both rather than correcting upstream ambiguity."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 2112,
+      "source_sha256": "b430f215340fea0fc24a961576a0aa56d5aa31eb24ab646e532cece86846f47d",
+      "fact": "NetScaler Client IP insertion paragraph itself refers to accepting PROXY protocol; retained original source fact."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 2117,
+      "source_sha256": "76768ef24b7b211635bd79012626835119859d8cb426e4c43a951221249a06c6",
+      "fact": "Current English still calls HAProxy2.4 preview; historical source claim retained."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 2163,
+      "source_sha256": "fe189536048d59fdc14db2949cad47e66ac7a4a1b5a5928164ed10226b96e85f",
+      "fact": "URI parameter sorting input/output-only example contains no translatable narrative; entire3-line source exactly retained and hash-pinned."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 2189,
+      "source_sha256": "577bb6dd21a4b28f5f7670740b6a0e0a61a535d07e1ca8d8f4b6d258b7c1a0d8",
+      "fact": "Source HTTP2 clients should send absolute-URI claim retained; replaced incorrect Russian authority wording with URI component authority."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 2217,
+      "source_sha256": "a796049a952e486b7ab92f033d1ede918a0f55de49b1d86540d5948dc069cc2c",
+      "fact": "GPT stores32-bit integer yet source says expected boolean; retained source claim."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 2221,
+      "source_sha256": "990d0aa417effbc6fac1dcd3f96ccd105aa6aca2c5bcf5e7e4566bdc1b1a64fe",
+      "fact": "GPT stores32-bit integer yet source says expected boolean; retained source claim."
+    },
+    {
+      "page": "proxies",
+      "fragment_id": 2267,
+      "source_sha256": "b536b53e2cc0f6a04d0aa29c3c6dd22a26b18ef89d2c067640544d17a941e74c",
+      "fact": "Source description says disabling health checks although action changes log level; kept source wording."
+    }
+  ],
+  "pages": [
+    {
+      "source": "content/docs/haproxy/_div_configuration.md",
+      "target": "content/docs/haproxy/_div_configuration.ru.md",
+      "source_sha256": "861a9b99357f7e9ba28415c54e1443f13da88201c7078447d7a20d0451ea1ca8",
+      "target_sha256": "9a12febdfcf7662b6671914f504a2e210d489c603962b7e0064668d69e727c48",
+      "english_body_chars": 0,
+      "target_bytes": 227,
+      "change": "divider",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "localized configuration divider, immutable metadata exact"
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "_div_configuration"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/_div_intro.md",
+      "target": "content/docs/haproxy/_div_intro.ru.md",
+      "source_sha256": "10b14b6dfee1e38cf2cf7b365f614ac94cbf93f6aeae8b4bf5e458c0386bd1da",
+      "target_sha256": "2645f8a45355155bccef150d973b51c0da33ce626626e6f3ba9af1b7eed0de8b",
+      "english_body_chars": 0,
+      "target_bytes": 222,
+      "change": "divider",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "localized starter divider, immutable metadata exact"
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "_div_intro"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/_div_management.md",
+      "target": "content/docs/haproxy/_div_management.ru.md",
+      "source_sha256": "8c03b6727cb383522ddaff6d3bd2814dff000e2b4adbf188ad3b30b1688ea960",
+      "target_sha256": "a701d348a73f7ad9aed4de9c499391b73e4991a33034caf8032f079827374f53",
+      "english_body_chars": 0,
+      "target_bytes": 219,
+      "change": "divider",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "localized management divider, immutable metadata exact"
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "_div_management"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/_index.md",
+      "target": "content/docs/haproxy/_index.ru.md",
+      "source_sha256": "28a147bc1cdc58b223ddce1fa07fadb4856e85ea0237097e2ef6bf2f55990abb",
+      "target_sha256": "fa818d6b8380171668b8a0583154d7bb1329e45805056fb7c4c8a9d47ce37f66",
+      "english_body_chars": 1674,
+      "target_bytes": 3822,
+      "change": "corrected",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full source comparison, current edition coverage description and all 34 reading pages updated; stale English-fallback claims removed. All three long pages are now translated and reviewed; full edition coverage is fulfilled.",
+        "separate_review": "complete",
+        "separate_review_note": "Separate current-English comparison of all changed prose and any translated explanatory fences/indented passages; technical literals and examples retained."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "_index"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "28a147bc1cdc58b223ddce1fa07fadb4856e85ea0237097e2ef6bf2f55990abb",
+        "target_sha256": "fa818d6b8380171668b8a0583154d7bb1329e45805056fb7c4c8a9d47ce37f66"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/acls-and-samples.md",
+      "target": "content/docs/haproxy/acls-and-samples.ru.md",
+      "source_sha256": "7739ca9b311c4a143ca472f9043cae7e349d19da061c2b93165464beb3ad24fb",
+      "target_sha256": "64c2ee56520101b960522ee747a06bb441bb25d3455108bb1c54391179ada5ee",
+      "english_body_chars": 435060,
+      "target_bytes": 656237,
+      "change": "added",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Reuse accepted current-hash reviews; new direct translations and generated drafts underwent a separate full EN/RU comparison or a separate independent review request. Accepted review evidence is bound to each final effective target fragment. Final assembled-language and unregistered-fence scan completed.",
+        "reviewer": "cx7 acls-and-samples translation/review ownership",
+        "separate_review": "complete",
+        "note": "Complete meaningful prose translated and reviewed. Scope, units, defaults, numeric facts, polarity, failure/empty/zero behavior, request/response direction, TLS/certificate conditions and all technical literals verified. Source contradictions remain source-faithful and are listed for later upstream correction. All 984 final fragment hashes and 51 explanatory fences accepted; 467 technical fences unchanged. Actual production also prompted a separate full comparison of 7 indented explanation occurrences (4 unique exact pairs); registered by exact parent/source/target hashes."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/acl-global/cx7-acl-completion.json",
+        "sha256": "bf89774bbc4fce815ea7a1697e706cfc7fdd8d36d5b531346c333d379f575523"
+      },
+      "explanation_and_literal_manifest": {
+        "path": "data/translation-fences/haproxy.ru/acls-and-samples.json",
+        "sha256": "8cff60f79a9d8d70a222fbec48fb2b3a810399fd111e37eb54d9849be3e2349e"
+      },
+      "additional_indented_review": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/acl-global/cx7-final-indented-semantic-review.json",
+        "sha256": "876ce4099c17ade914c42d016cdb2e7f09bdfe56c41b3f5dc7558799cc3a5571",
+        "bytes": 14988
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "7739ca9b311c4a143ca472f9043cae7e349d19da061c2b93165464beb3ad24fb",
+        "target_sha256": "64c2ee56520101b960522ee747a06bb441bb25d3455108bb1c54391179ada5ee"
+      },
+      "manifest_reference_history": [
+        {
+          "path": "data/translation-fences/haproxy.ru/acls-and-samples.json",
+          "sha256": "4618ccab4620e34daa5331fc575b801e92c5533d23222c9b9c9cc866b30eff1e"
+        },
+        {
+          "path": "data/translation-fences/haproxy.ru/acls-and-samples.json",
+          "sha256": "4d8d40bbfb8d674eed0c1034dcb15ad73d16a9cbf52a2ef63cd47610f1ce8004"
+        }
+      ]
+    },
+    {
+      "source": "content/docs/haproxy/advanced-features.md",
+      "target": "content/docs/haproxy/advanced-features.ru.md",
+      "source_sha256": "613f6a960f1e12fd852db798c3c3681bef532a9932f71f794da3a7bd9f68800b",
+      "target_sha256": "f0e92be26e847233204207e2121043150bc95150af5033867e180d63d18d5270",
+      "english_body_chars": 9155,
+      "target_bytes": 16431,
+      "change": "unchanged",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison of all 21 blocks; availability and lifecycle, CLI functions, platform distinctions, clock compensation, Lua and trace coverage preserved."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "advanced-features"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "613f6a960f1e12fd852db798c3c3681bef532a9932f71f794da3a7bd9f68800b",
+        "target_sha256": "f0e92be26e847233204207e2121043150bc95150af5033867e180d63d18d5270"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/architecture.md",
+      "target": "content/docs/haproxy/architecture.ru.md",
+      "source_sha256": "78e802de12cbee137599c304a6ba1e7196d1bbc33a44bce1472b7cdc09b5ff39",
+      "target_sha256": "8e7eed44052c1c663213411ff11b26658c46add5aab7e33dcd7f8fe0aa537d76",
+      "english_body_chars": 11034,
+      "target_bytes": 20489,
+      "change": "unchanged",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison of all 42 blocks; product/process spelling, capabilities and boundaries, threading, all nine request-processing steps and resource restrictions preserved."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "architecture"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "78e802de12cbee137599c304a6ba1e7196d1bbc33a44bce1472b7cdc09b5ff39",
+        "target_sha256": "8e7eed44052c1c663213411ff11b26658c46add5aab7e33dcd7f8fe0aa537d76"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/basic-features.md",
+      "target": "content/docs/haproxy/basic-features.ru.md",
+      "source_sha256": "e7343f1cbdbfb2e943deb231cfa24800c2d18b91587eac1f0f312d0a2bbc1814",
+      "target_sha256": "a2c7bfa64b6f2ecbca17112321e447d603894fbd6e510dd31ab736e1dd25ccdc",
+      "english_body_chars": 16786,
+      "target_bytes": 30280,
+      "change": "corrected",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison of all 83 blocks; restored only/most normative and quantity qualifiers, corrected least-recently-used Russian wording, clarified continuously operating device phrasing; defaults/scope/features otherwise preserved.",
+        "separate_review": "complete",
+        "separate_review_note": "Separate current-English comparison of all changed prose and any translated explanatory fences/indented passages; technical literals and examples retained."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "basic-features"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "e7343f1cbdbfb2e943deb231cfa24800c2d18b91587eac1f0f312d0a2bbc1814",
+        "target_sha256": "a2c7bfa64b6f2ecbca17112321e447d603894fbd6e510dd31ab736e1dd25ccdc"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/bind-and-server-options.md",
+      "target": "content/docs/haproxy/bind-and-server-options.ru.md",
+      "source_sha256": "ab2e67b363405b6a7b8f3427febba545b6f48b626717ffe7d4a21093150f81c2",
+      "target_sha256": "caa46be855f38c960a45110b53ba35839e0e5f64a39310aba57a1b0ae4e5dbf0",
+      "english_body_chars": 174810,
+      "target_bytes": 282386,
+      "change": "corrected",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source first-pass comparison",
+        "note": "All 216 sections: every bind/server/default-server/DNS option; corrected must/should, source/destination, state up/down, persistence, TLS/cipher/renegotiation, ALPN, SNI verification and hold periods. Eight explanation fences, one indented description translated; unfenced copyable examples restored and protected.",
+        "separate_review": "complete",
+        "separate_review_note": "Separate full comparison of every changed paragraph across all 216 sections, all 8 explanatory fences and the DNS indented description. Corrected maxconn/agent-inter grammar and pool-low-conn probability; aligned interval table and preserved exact cat command."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "bind-and-server-options"
+      },
+      "explanation_and_literal_manifest": {
+        "path": "data/translation-fences/haproxy.ru/bind-and-server-options.json",
+        "sha256": "4a4b469f6276871c718387d74cacabbaaa5addf88d60c1a778e6360e7ee94186"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "ab2e67b363405b6a7b8f3427febba545b6f48b626717ffe7d4a21093150f81c2",
+        "target_sha256": "caa46be855f38c960a45110b53ba35839e0e5f64a39310aba57a1b0ae4e5dbf0"
+      },
+      "manifest_reference_history": [
+        {
+          "path": "data/translation-fences/haproxy.ru/bind-and-server-options.json",
+          "sha256": "b70328bac0f7116178fb29a9eedef9191988472f537d0293969235955a599782"
+        }
+      ]
+    },
+    {
+      "source": "content/docs/haproxy/cache.md",
+      "target": "content/docs/haproxy/cache.ru.md",
+      "source_sha256": "cb2a14a28aef8306198e20145d8ff2af0bef97a5ded224c8837b06c0443108a8",
+      "target_sha256": "8532d3326e6cce6aff9eed3029d00e546385ec5a9cc4e1b3db28d402b1ed75a1",
+      "english_body_chars": 5779,
+      "target_bytes": 9273,
+      "change": "unchanged",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison of all 42 blocks; exclusion conditions, priorities/defaults/limits, vary behavior and cache-use dependency preserved. Source section-9-3 URL points to filters; English baseline link retained."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "cache"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "cb2a14a28aef8306198e20145d8ff2af0bef97a5ded224c8837b06c0443108a8",
+        "target_sha256": "8532d3326e6cce6aff9eed3029d00e546385ec5a9cc4e1b3db28d402b1ed75a1"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/configuration-basics.md",
+      "target": "content/docs/haproxy/configuration-basics.ru.md",
+      "source_sha256": "d0ca9b4db35f9a6f5fff6f090967847935b9f7b80d0440d14a912d3725036e25",
+      "target_sha256": "74d170ed960048b8667641a5e1e40e6fc8fcd4576308ffe0cf4770caf37044ab",
+      "english_body_chars": 51657,
+      "target_bytes": 81692,
+      "change": "corrected",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source first-pass comparison",
+        "note": "All 14 sections: escaping direction, quoting layers, variables/CLI/master-worker, conditions/directives, socket address families. Restored 7 unfenced .if examples and registered macOS explanation; current-source unusual ipv4 aliases retained.",
+        "separate_review": "complete",
+        "separate_review_note": "Separate full bilingual review of every changed paragraph across 14 sections, 10 translated fences, macOS indented warning and restored .if examples; checked quoting/escaping layers, master/worker table and preserved source protocol aliases. Corrected should-not obligation strength and other-session/stream wording."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "configuration-basics"
+      },
+      "explanation_and_literal_manifest": {
+        "path": "data/translation-fences/haproxy.ru/configuration-basics.json",
+        "sha256": "d234e493abce94593caad1f6d2a99b5d5fed2fc1f4625666762b39f5672956a8"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "d0ca9b4db35f9a6f5fff6f090967847935b9f7b80d0440d14a912d3725036e25",
+        "target_sha256": "74d170ed960048b8667641a5e1e40e6fc8fcd4576308ffe0cf4770caf37044ab"
+      },
+      "manifest_reference_history": [
+        {
+          "path": "data/translation-fences/haproxy.ru/configuration-basics.json",
+          "sha256": "aadb4e00bf49ec233357862dd00be09ae40ff26e92df1fb2a25976af979a934b"
+        }
+      ]
+    },
+    {
+      "source": "content/docs/haproxy/configuration-logging.md",
+      "target": "content/docs/haproxy/configuration-logging.ru.md",
+      "source_sha256": "b0bb70f5458db04d938a60da8df2fd600825a7da877bad0281b4bec6f6b039b3",
+      "target_sha256": "a1daa6448a3652286dac9e9bbfcf3f7ceecaf2ac398fa35aebcbb72bd2fbc4b1",
+      "english_body_chars": 112175,
+      "target_bytes": 165237,
+      "change": "added",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Complete direct translation plus independent full English/Russian semantic review; accepted predecessor results reused with unchanged exact final source/target hashes.",
+        "reviewer": "logging_stats_ru, hash verified by cx7 root",
+        "separate_review": "complete",
+        "note": "All 13 complete review fragments, 10 explanatory fences and 5 indented explanations translated/reviewed; 21 literal snippets and all real code/output preserved."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/logging-stats/PAUSED_HANDOFF.json",
+        "sha256": "a2416fd7e034965088b8a3bfec1c23f3a472c6008a31d2f8d290eaf68a0ff99d",
+        "entry": "configuration-logging"
+      },
+      "explanation_and_literal_manifest": {
+        "path": "data/translation-fences/haproxy.ru/configuration-logging.json",
+        "sha256": "21b9c4cbc74b2b3e06c654ac4fb2f0e8a9201952de167eb14fbf6eed9a0308b0"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "b0bb70f5458db04d938a60da8df2fd600825a7da877bad0281b4bec6f6b039b3",
+        "target_sha256": "a1daa6448a3652286dac9e9bbfcf3f7ceecaf2ac398fa35aebcbb72bd2fbc4b1"
+      },
+      "manifest_reference_history": [
+        {
+          "path": "data/translation-fences/haproxy.ru/configuration-logging.json",
+          "sha256": "ff073a80ee785c07c993e0c74bb19f305f6d4b03b3a416bd1ceb549f5b627ded"
+        }
+      ]
+    },
+    {
+      "source": "content/docs/haproxy/configuration-management.md",
+      "target": "content/docs/haproxy/configuration-management.ru.md",
+      "source_sha256": "d1f30a0eb732962b2b59b69da54655d714680c4144c729ce4cc5670c9078cc16",
+      "target_sha256": "8685fe135e367d3226f950dda1f656dbcb5bdb720d703b1077c5712462458eb7",
+      "english_body_chars": 2151,
+      "target_bytes": 3931,
+      "change": "unchanged",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison: 1.5/1.6 version distinction, double quote exception for addresses, source syntax preserved"
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "configuration-management"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "d1f30a0eb732962b2b59b69da54655d714680c4144c729ce4cc5670c9078cc16",
+        "target_sha256": "8685fe135e367d3226f950dda1f656dbcb5bdb720d703b1077c5712462458eb7"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/cpu.md",
+      "target": "content/docs/haproxy/cpu.ru.md",
+      "source_sha256": "400e00056896ce744139a39c424e269af94c892320ddf13a9451c99df0906ce1",
+      "target_sha256": "fe347e4ce511b79d60e7ced2d459bc8f8633420ebbd48500094b71a24f82d676",
+      "english_body_chars": 8279,
+      "target_bytes": 15170,
+      "change": "unchanged",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison of all 17 prose blocks; CPU accounting, idle ratio, process limits and affinity caveats preserved."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "cpu"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "400e00056896ce744139a39c424e269af94c892320ddf13a9451c99df0906ce1",
+        "target_sha256": "fe347e4ce511b79d60e7ced2d459bc8f8633420ebbd48500094b71a24f82d676"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/debugging-and-performance.md",
+      "target": "content/docs/haproxy/debugging-and-performance.ru.md",
+      "source_sha256": "e6c81101044dca0c0789df1b00d0c0a434313ef73f28d8f2f9a4bcf3d00861db",
+      "target_sha256": "d0333c5086152e82d703234f2782efacefd152e1a5eb91f1234e73cbccc6a5c2",
+      "english_body_chars": 8598,
+      "target_bytes": 14208,
+      "change": "unchanged",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison of all 9 blocks; safe flags, memory poisoning conditions, diagnostic operation order and Nagle/ACK/SACK distinctions preserved."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "debugging-and-performance"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "e6c81101044dca0c0789df1b00d0c0a434313ef73f28d8f2f9a4bcf3d00861db",
+        "target_sha256": "d0333c5086152e82d703234f2782efacefd152e1a5eb91f1234e73cbccc6a5c2"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/ecosystem.md",
+      "target": "content/docs/haproxy/ecosystem.ru.md",
+      "source_sha256": "749165d4eb17208d1dad6f4a878d57a52def405397617841ef3a41211fd61365",
+      "target_sha256": "d85cd276ba86408086a81a97dcc32816ec00b6cb8ace0329541e1d3e703269f1",
+      "english_body_chars": 5994,
+      "target_bytes": 10834,
+      "change": "corrected",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison of all 15 blocks; restored can in NGINX cache benefit, preserved cache-duration caution and alternative-product limitations.",
+        "separate_review": "complete",
+        "separate_review_note": "Separate current-English comparison of all changed prose and any translated explanatory fences/indented passages; technical literals and examples retained."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "ecosystem"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "749165d4eb17208d1dad6f4a878d57a52def405397617841ef3a41211fd61365",
+        "target_sha256": "d85cd276ba86408086a81a97dcc32816ec00b6cb8ace0329541e1d3e703269f1"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/fastcgi.md",
+      "target": "content/docs/haproxy/fastcgi.ru.md",
+      "source_sha256": "6a1c965966e9a0bc39b02237ef4757b4a77fc93e8bf1cec097ce3f7d607b5af7",
+      "target_sha256": "842b7db830aa3067bfdd712031bac64b010fa4fe355368fb800a14dda621d97f",
+      "english_body_chars": 18020,
+      "target_bytes": 25879,
+      "change": "corrected",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source first-pass comparison",
+        "note": "All 19 sections: FastCGI keep-conn/multiplexing, FCGI_MAX_REQS/MPXS, load and authorization behavior, all 19 table rows and argument fences translated.",
+        "separate_review": "complete",
+        "separate_review_note": "Separate current-English comparison of all changed prose and any translated explanatory fences/indented passages; technical literals and examples retained."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "fastcgi"
+      },
+      "explanation_and_literal_manifest": {
+        "path": "data/translation-fences/haproxy.ru/fastcgi.json",
+        "sha256": "08d1253d358fa0676390509e11de9dbfac9d4a0a4f9f0c99186863502e2ef8a3"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "6a1c965966e9a0bc39b02237ef4757b4a77fc93e8bf1cec097ce3f7d607b5af7",
+        "target_sha256": "842b7db830aa3067bfdd712031bac64b010fa4fe355368fb800a14dda621d97f"
+      },
+      "manifest_reference_history": [
+        {
+          "path": "data/translation-fences/haproxy.ru/fastcgi.json",
+          "sha256": "b502acc19e17d856787e4cc8070292b97b1f3320182b6800bad46de20b5dd5de"
+        }
+      ]
+    },
+    {
+      "source": "content/docs/haproxy/file-descriptors.md",
+      "target": "content/docs/haproxy/file-descriptors.ru.md",
+      "source_sha256": "8bc8fe5af01a23c9bc9348f24b11dc1f291d4a7248fd0606259e484bd1026113",
+      "target_sha256": "1260e67a5a78cf9e08e58062408eede3e4e1bfdf9d42b102603c04d3f86af0e2",
+      "english_body_chars": 6344,
+      "target_bytes": 12285,
+      "change": "unchanged",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison of all 9 blocks; 1024/500 estimates, root limits, select/poll/epoll, ENFILE versus EMFILE, boot/crontab warning preserved."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "file-descriptors"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "8bc8fe5af01a23c9bc9348f24b11dc1f291d4a7248fd0606259e484bd1026113",
+        "target_sha256": "1260e67a5a78cf9e08e58062408eede3e4e1bfdf9d42b102603c04d3f86af0e2"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/filters.md",
+      "target": "content/docs/haproxy/filters.ru.md",
+      "source_sha256": "ca378ab69ab7881d7c2d54900efb218687fe10474aa33bb8b475128223d16a02",
+      "target_sha256": "9d50c096bc6d5983c04cbd3fbf7b8715ab33e1870043e9ed131bfefc7d4b4b95",
+      "english_body_chars": 14951,
+      "target_bytes": 24476,
+      "change": "corrected",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source first-pass comparison",
+        "note": "All 8 sections: compression mandatory requirement, protocol selection, cache/spoe filters; 6 explanation fences translated, actual URL/configuration unchanged.",
+        "separate_review": "complete",
+        "separate_review_note": "Separate current-English comparison of all changed prose and any translated explanatory fences/indented passages; technical literals and examples retained."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "filters"
+      },
+      "explanation_and_literal_manifest": {
+        "path": "data/translation-fences/haproxy.ru/filters.json",
+        "sha256": "efa6693d9f2756a872c1ee4b4fc30141eb1983000323231989970b06c3319bfe"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "ca378ab69ab7881d7c2d54900efb218687fe10474aa33bb8b475128223d16a02",
+        "target_sha256": "9d50c096bc6d5983c04cbd3fbf7b8715ab33e1870043e9ed131bfefc7d4b4b95"
+      },
+      "manifest_reference_history": [
+        {
+          "path": "data/translation-fences/haproxy.ru/filters.json",
+          "sha256": "2149d73e7f6567042b615e59bc2ae40a9046066e2c1989beaa6dbdc53e3036d8"
+        }
+      ]
+    },
+    {
+      "source": "content/docs/haproxy/global.md",
+      "target": "content/docs/haproxy/global.ru.md",
+      "source_sha256": "8a5d2b06ee0043243d00173e0a767f90225117689fa65ca27d329b3d3feb649d",
+      "target_sha256": "fe6294d7fcd62d36b272ed5421ffa7ebeaf6cbd819d2bd51e0c5eb54e8106782",
+      "english_body_chars": 248821,
+      "target_bytes": 387348,
+      "change": "added",
+      "semantic_review": {
+        "status": "complete",
+        "method": "All 359 direct drafts read again in a separate full EN/RU comparison after saving; old 30 worker drafts also fully compared. All 526 final cache source/target hashes matched independent or separate-second-pass review. Assembly only localizes documentation routes and inserts source heading IDs. Page-level final SHA fingerprints recorded after these deterministic routing operations and explanation fence application.",
+        "reviewer": "cx7 global translation/review ownership",
+        "separate_review": "complete",
+        "note": "All 526 unique final fragments and 8 explanation fences translated/reviewed. Request/response direction, defaults, restrictions, modalities, numbers and protected technical literals checked; 315 code/output/syntax fences unchanged; source contradictions retained. All 3 actual rendered indented explanations separately compared in full; source, target and final manifest hashes bound to those reviews."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/global-cx7/global-cx7-completion.json",
+        "sha256": "4bc626ab1f84254c3105d83b995e2665dad4032c87388edca496723a8b914752"
+      },
+      "explanation_and_literal_manifest": {
+        "path": "data/translation-fences/haproxy.ru/global.json",
+        "sha256": "bca7241ddef8b399e24df48508e18732d1b6555d58c360fee192dbe4498634d9"
+      },
+      "additional_indented_review": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/global-cx7/global-indented-explanations-final-review.json",
+        "sha256": "16608b2363715f75e4cbdf7c0ff0f364ceedc6f4ac8d7e3178179f9d37cac648",
+        "bytes": 10011
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "8a5d2b06ee0043243d00173e0a767f90225117689fa65ca27d329b3d3feb649d",
+        "target_sha256": "fe6294d7fcd62d36b272ed5421ffa7ebeaf6cbd819d2bd51e0c5eb54e8106782"
+      },
+      "manifest_reference_history": [
+        {
+          "path": "data/translation-fences/haproxy.ru/global.json",
+          "sha256": "bfdea3d02ebecba3b8c000f56e1073e56cd129869d259e0cef8dd46a5893f245"
+        },
+        {
+          "path": "data/translation-fences/haproxy.ru/global.json",
+          "sha256": "e5c504e0aa2fcd9249a3b4488b809b0c905b7d87185f2a081a669a5834da815c"
+        }
+      ]
+    },
+    {
+      "source": "content/docs/haproxy/http-fundamentals.md",
+      "target": "content/docs/haproxy/http-fundamentals.ru.md",
+      "source_sha256": "274a62d2d8a2b35d89788c2cdf6fe3db339d8411c6ada3e232557b1225dadc34",
+      "target_sha256": "bf7d2b170b95b033f38507f751ab0d5a531c62ddf2bd4d1e374ea493eb09968e",
+      "english_body_chars": 22336,
+      "target_bytes": 36318,
+      "change": "corrected",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source first-pass comparison",
+        "note": "All 9 sections: request/response structure, methods, URI grammar, whitespace, status-code classes. Mixed diagrams and explanatory fences localized while actual protocol examples remain unchanged.",
+        "separate_review": "complete",
+        "separate_review_note": "Separate current-English comparison of all changed prose and any translated explanatory fences/indented passages; technical literals and examples retained."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "http-fundamentals"
+      },
+      "explanation_and_literal_manifest": {
+        "path": "data/translation-fences/haproxy.ru/http-fundamentals.json",
+        "sha256": "f38c422c9017773fc413003487141ecb12f2670795f26204b9ba5a64a37d3e90"
+      },
+      "manifest_reference_history": [
+        {
+          "path": "data/translation-fences/haproxy.ru/http-fundamentals.json",
+          "sha256": "c6753ce83a08cc082befb3d42d74fdc2fccb4d95a492a1d6805cff6db9299886"
+        }
+      ],
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "274a62d2d8a2b35d89788c2cdf6fe3db339d8411c6ada3e232557b1225dadc34",
+        "target_sha256": "bf7d2b170b95b033f38507f751ab0d5a531c62ddf2bd4d1e374ea493eb09968e"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/load-balancing.md",
+      "target": "content/docs/haproxy/load-balancing.ru.md",
+      "source_sha256": "33008271e246c402b5f7c4074b38f96c9f232927236927c8a681d0c13ca17526",
+      "target_sha256": "34f8ceed6c07acb6f49d705695245ffa63e65b9acb40f5cfb88da8400bd765cd",
+      "english_body_chars": 11804,
+      "target_bytes": 21430,
+      "change": "corrected",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison of all 22 blocks; restored parts-of-solutions qualification; L4/L7 packet/session distinction, DSR constraints, health checks and persistence mechanisms preserved.",
+        "separate_review": "complete",
+        "separate_review_note": "Separate current-English comparison of all changed prose and any translated explanatory fences/indented passages; technical literals and examples retained."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "load-balancing"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "33008271e246c402b5f7c4074b38f96c9f232927236927c8a681d0c13ca17526",
+        "target_sha256": "34f8ceed6c07acb6f49d705695245ffa63e65b9acb40f5cfb88da8400bd765cd"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/management-architecture.md",
+      "target": "content/docs/haproxy/management-architecture.ru.md",
+      "source_sha256": "bfea4e22c46ea342ff24866c633922d83eccc48d2a60663488b2e18a1ca13638",
+      "target_sha256": "916f33925f2852d2543d957a43d00deb4e6e11d5e580522349625b3d1e15f820",
+      "english_body_chars": 4233,
+      "target_bytes": 7931,
+      "change": "unchanged",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison: chroot, stateless process, event clock, TCP model all retained; netstat output is a legitimate English exception"
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "management-architecture"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "bfea4e22c46ea342ff24866c633922d83eccc48d2a60663488b2e18a1ca13638",
+        "target_sha256": "916f33925f2852d2543d957a43d00deb4e6e11d5e580522349625b3d1e15f820"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/management-logging.md",
+      "target": "content/docs/haproxy/management-logging.ru.md",
+      "source_sha256": "c3a890980f1556d24787cd0f887a14fa355678fb88782ac49950189dabd518de",
+      "target_sha256": "41ced8ebe9a8fb0ea3c8c31ac3da19ddd53302a625b51ce3b978cd89fd32cc19",
+      "english_body_chars": 4807,
+      "target_bytes": 8891,
+      "change": "unchanged",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison: UNIX socket reload warning, syslog setup and troubleshooting order, confidential log separation all preserved"
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "management-logging"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "c3a890980f1556d24787cd0f887a14fa355678fb88782ac49950189dabd518de",
+        "target_sha256": "41ced8ebe9a8fb0ea3c8c31ac3da19ddd53302a625b51ce3b978cd89fd32cc19"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/memory.md",
+      "target": "content/docs/haproxy/memory.ru.md",
+      "source_sha256": "f16a30f4c16028cfab89cc46a16851734d436a64b06a4ca99190758609b8bc26",
+      "target_sha256": "2e2700d7b5524b5888f73ac9e3e05ef750a5653d8d754c4c0edecbe938066780",
+      "english_body_chars": 4790,
+      "target_bytes": 7185,
+      "change": "unchanged",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison: pooled object release versus freeing memory, rounding up, per-process limit, SIGQUIT, graceful reload preserved"
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "memory"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "f16a30f4c16028cfab89cc46a16851734d436a64b06a4ca99190758609b8bc26",
+        "target_sha256": "2e2700d7b5524b5888f73ac9e3e05ef750a5653d8d754c4c0edecbe938066780"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/other-sections.md",
+      "target": "content/docs/haproxy/other-sections.ru.md",
+      "source_sha256": "1303a04284e0f17bc55ae980451b9eae7a8e26eb9abce4b35744afc6f5c57d31",
+      "target_sha256": "66e0cea7ff5a834284a9022af5104bd36bf3e514a06e6ce97788dbcc07e2f4a3",
+      "english_body_chars": 53385,
+      "target_bytes": 77617,
+      "change": "corrected",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source first-pass comparison",
+        "note": "All 83 sections: user lists, mailers, ring formats, certificates/OCSP, ACME DNS readiness and renewal; exact error, script, API spellings restored; all 6 explanation fences and 3 labels localized.",
+        "separate_review": "complete",
+        "separate_review_note": "Separate full current-English comparison of all changed prose across 83 sections, 9 explanatory fences and indented hostname-mode definitions. Reviewed OCSP update limits/log errors, ACME DNS readiness/retry order and certificate scope; corrected EAB credentials and whitespace semantics."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "other-sections"
+      },
+      "explanation_and_literal_manifest": {
+        "path": "data/translation-fences/haproxy.ru/other-sections.json",
+        "sha256": "68e6dd8fb52f65eadd5040636e0bcb6ff5c6f69957a32cabb8d8f848832905c6"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "1303a04284e0f17bc55ae980451b9eae7a8e26eb9abce4b35744afc6f5c57d31",
+        "target_sha256": "66e0cea7ff5a834284a9022af5104bd36bf3e514a06e6ce97788dbcc07e2f4a3"
+      },
+      "manifest_reference_history": [
+        {
+          "path": "data/translation-fences/haproxy.ru/other-sections.json",
+          "sha256": "5a38bbae63dfdeb34508cb8b2108fc0431ea907a6a521a106b6583526471ec8e"
+        }
+      ]
+    },
+    {
+      "source": "content/docs/haproxy/prerequisites.md",
+      "target": "content/docs/haproxy/prerequisites.ru.md",
+      "source_sha256": "54750549d94e63151763890ed2ad8ce4a8769292104e757c4f66163fa0ac335d",
+      "target_sha256": "b71a545b9e184b98ade367e736efc83fd3df9094bba05fc872fa18f2536a5949",
+      "english_body_chars": 562,
+      "target_bytes": 1650,
+      "change": "unchanged",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison: configuration is excluded, prerequisite operator knowledge intact"
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "prerequisites"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "54750549d94e63151763890ed2ad8ce4a8769292104e757c4f66163fa0ac335d",
+        "target_sha256": "b71a545b9e184b98ade367e736efc83fd3df9094bba05fc872fa18f2536a5949"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/proxies.md",
+      "target": "content/docs/haproxy/proxies.ru.md",
+      "source_sha256": "d1b0bb9a721cbbf80e9aa3eb410881a29539172a4fbe6ee6c4167035c962d0d2",
+      "target_sha256": "dca934e3b8ef2ebcc1b53325a49211cc4ddf05156ecc25f99b89b3851d2dcb82",
+      "english_body_chars": 542917,
+      "target_bytes": 814314,
+      "change": "added",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Every current English/Russian pair was fully compared by an independent reviewer or in a separate full-source second pass. Reused qualified checkpoint records remain hash-matched; newly merged direct/optional-model text was independently compared. All substantive revisions were saved, reread in full and bound to final hashes. Code-only fragments instead received semantic purpose classification and exact byte preservation. A full independent sweep also read every originally unregistered technical fence, found and reviewed the2 narrative lines in243, and paired all393 remaining fences against final delivered bytes.",
+        "reviewer": "cx7 proxies translation/review ownership",
+        "separate_review": "complete",
+        "note": "Complete narrative translation without omissions/additions to constraints, negation, operational order, defaults, scope, recommendation strength or numeric/technical facts. All known odd/upstream contradictory facts remain as current English3.4.4 states; they are recorded for upstream followup. Sample=образец, converter=преобразователь, stick table=таблица привязок and native frontend/backend roles were checked while literal configuration keywords remain immutable. No unexplained narrative English remains."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/proxies/cx7-proxies-completion.json",
+        "sha256": "7f64ec0e9335999c34f12ffeea0574747084e7eadc2640670f4a98d576e24135"
+      },
+      "explanation_and_literal_manifest": {
+        "path": "data/translation-fences/haproxy.ru/proxies.json",
+        "sha256": "1fe23c3fd3c2db62f04ea28ca96e8f60eeb0965039b10ce7876e4c0261eb38bf"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "d1b0bb9a721cbbf80e9aa3eb410881a29539172a4fbe6ee6c4167035c962d0d2",
+        "target_sha256": "dca934e3b8ef2ebcc1b53325a49211cc4ddf05156ecc25f99b89b3851d2dcb82"
+      },
+      "manifest_reference_history": [
+        {
+          "path": "data/translation-fences/haproxy.ru/proxies.json",
+          "sha256": "f03966bd4713915a31421aa9b2a10c1da190a7ff2805dd616ecfd144ef6bc405"
+        },
+        {
+          "path": "data/translation-fences/haproxy.ru/proxies.json",
+          "sha256": "acdf04295ad736d1424d8d5fdc549e632cc1c03728f993d51da0415d734a7e7f"
+        }
+      ]
+    },
+    {
+      "source": "content/docs/haproxy/releases-and-upgrades.md",
+      "target": "content/docs/haproxy/releases-and-upgrades.ru.md",
+      "source_sha256": "3ff22c35d2ffe7aa684555c4070ef97c7e8c868a3ea0c504349eff06ebf23364",
+      "target_sha256": "91222300c6013bdc3f1e1a0abe46caad81c36770c54cc9d210bf2751e69c90dd",
+      "english_body_chars": 6961,
+      "target_bytes": 12259,
+      "change": "corrected",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison of all 22 blocks; translated skipped indented version-identification and Status explanations, retained all command output and protected names. Hash-reviewed indented prose registered.",
+        "separate_review": "complete",
+        "separate_review_note": "Separate current-English comparison of all changed prose and any translated explanatory fences/indented passages; technical literals and examples retained."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "releases-and-upgrades"
+      },
+      "explanation_and_literal_manifest": {
+        "path": "data/translation-fences/haproxy.ru/releases-and-upgrades.json",
+        "sha256": "fadae021d9d154fa436456e1e079a625a10c414e7991612d547ce9c49986dd44"
+      },
+      "manifest_reference_history": [
+        {
+          "path": "data/translation-fences/haproxy.ru/releases-and-upgrades.json",
+          "sha256": "1153945971953807202719ae211ea5c4c21b3e8295e5e34f027366dacc69d513"
+        }
+      ],
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "3ff22c35d2ffe7aa684555c4070ef97c7e8c868a3ea0c504349eff06ebf23364",
+        "target_sha256": "91222300c6013bdc3f1e1a0abe46caad81c36770c54cc9d210bf2751e69c90dd"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/resources.md",
+      "target": "content/docs/haproxy/resources.ru.md",
+      "source_sha256": "40d749cc1e279bfd04707ae1af33be291c1a44245c456fd97d09fb9ffe36bb65",
+      "target_sha256": "c0f927a40b883041afd8753d4fee6b4b521b20c0dced079112000d5bc2b540ce",
+      "english_body_chars": 4167,
+      "target_bytes": 8027,
+      "change": "unchanged",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison: manuals and contact instructions, privacy/security cautions, source commit and GPL attribution preserved"
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "resources"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "40d749cc1e279bfd04707ae1af33be291c1a44245c456fd97d09fb9ffe36bb65",
+        "target_sha256": "c0f927a40b883041afd8753d4fee6b4b521b20c0dced079112000d5bc2b540ce"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/security.md",
+      "target": "content/docs/haproxy/security.ru.md",
+      "source_sha256": "81b0efa7c6992b2ab2fed87a76f547bb2940d2683c9d9cf2ba5b5e2a39c64cc4",
+      "target_sha256": "82ecf5b356e0be2565eb26c9ca83e41c10d2606bb7fab66263316962e21cc0e2",
+      "english_body_chars": 5552,
+      "target_bytes": 10373,
+      "change": "unchanged",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison: startup versus runtime privilege distinction, setcap Permitted/Effective condition and failure path preserved; baseline capability descriptions retained exactly"
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "security"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "81b0efa7c6992b2ab2fed87a76f547bb2940d2683c9d9cf2ba5b5e2a39c64cc4",
+        "target_sha256": "82ecf5b356e0be2565eb26c9ca83e41c10d2606bb7fab66263316962e21cc0e2"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/sizing.md",
+      "target": "content/docs/haproxy/sizing.ru.md",
+      "source_sha256": "2f1ea449ce623ac34e52aa5df1668275164eb74686e97ab3bb3e91b7cfb5a30e",
+      "target_sha256": "1dadf353aa275a4e4a0441b824959b0bd2a4c91650816a43cd72fb6b54af1896",
+      "english_body_chars": 5444,
+      "target_bytes": 10896,
+      "change": "unchanged",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison: all benchmark units/rates, modes, test environment, relative costs/scaling and rules of thumb retained"
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "sizing"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "2f1ea449ce623ac34e52aa5df1668275164eb74686e97ab3bb3e91b7cfb5a30e",
+        "target_sha256": "1dadf353aa275a4e4a0441b824959b0bd2a4c91650816a43cd72fb6b54af1896"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/standard-features.md",
+      "target": "content/docs/haproxy/standard-features.ru.md",
+      "source_sha256": "a967ef5deb808690d8118776d56b53b5a0095fdec83bd7c511d1eeec1850cb52",
+      "target_sha256": "797d29b8ab6125a46c85fdd8edc018ec8ccbc7511f9685bbb8a2621379df2d90",
+      "english_body_chars": 17090,
+      "target_bytes": 28981,
+      "change": "corrected",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison of all 63 blocks; restored may depend qualifier; extraction/conversion, short-circuit ACLs, source numerical limits, stick-table replication and security conditions preserved.",
+        "separate_review": "complete",
+        "separate_review_note": "Separate current-English comparison of all changed prose and any translated explanatory fences/indented passages; technical literals and examples retained."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "standard-features"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "a967ef5deb808690d8118776d56b53b5a0095fdec83bd7c511d1eeec1850cb52",
+        "target_sha256": "797d29b8ab6125a46c85fdd8edc018ec8ccbc7511f9685bbb8a2621379df2d90"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/starting.md",
+      "target": "content/docs/haproxy/starting.ru.md",
+      "source_sha256": "4d156469b2e2c7423fffe20a49a3254a80e41644b938ed636ef5257ea1e5eec1",
+      "target_sha256": "d913c538bbf0b6a037752cc6d11eb21fd2ef0673431e59b3bc34174783b5ef05",
+      "english_body_chars": 32499,
+      "target_bytes": 52711,
+      "change": "corrected",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source first-pass comparison",
+        "note": "All 52 sections: all memory-debug flags restored, TLS/version output literal, build labels localized, privileges/limits/order and opt-in debug behavior reviewed.",
+        "separate_review": "complete",
+        "separate_review_note": "Separate full current-English comparison of changed startup prose, all 15 explanatory fences, memory-debug switches and preserved outputs; maintained source date inconsistency for separate follow-up."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "starting"
+      },
+      "explanation_and_literal_manifest": {
+        "path": "data/translation-fences/haproxy.ru/starting.json",
+        "sha256": "fd30862ba0d176a5f787f548f78fbd4bd435e389c48b8544028eb4b290d90a44"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "4d156469b2e2c7423fffe20a49a3254a80e41644b938ed636ef5257ea1e5eec1",
+        "target_sha256": "d913c538bbf0b6a037752cc6d11eb21fd2ef0673431e59b3bc34174783b5ef05"
+      },
+      "manifest_reference_history": [
+        {
+          "path": "data/translation-fences/haproxy.ru/starting.json",
+          "sha256": "00d4a226c245c43abf97c2d2008367b35d813b14e288950aa362537013a7114a"
+        },
+        {
+          "path": "data/translation-fences/haproxy.ru/starting.json",
+          "sha256": "b20c96416193bfd921c14a3bdd9d4b124ff29679ef99fa3b50cfd9be820e62e5"
+        }
+      ]
+    },
+    {
+      "source": "content/docs/haproxy/statistics-and-monitoring.md",
+      "target": "content/docs/haproxy/statistics-and-monitoring.ru.md",
+      "source_sha256": "268b4823a7ccaf34f788d977d5b509346eb657a3c845e888c775907464972c26",
+      "target_sha256": "397d1e8bf35fc6c9812c57c6d18ffea0a0931bccbdaa6bee47b48daddfb0721d",
+      "english_body_chars": 201866,
+      "target_bytes": 305826,
+      "change": "added",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Complete direct translation plus independent full English/Russian semantic review; accepted predecessor results reused with unchanged exact final source/target hashes.",
+        "reviewer": "logging_stats_ru, hash verified by cx7 root",
+        "separate_review": "complete",
+        "note": "All 23 complete review fragments, 13 explanatory fences and 9 indented explanations translated/reviewed; 12 literal snippets and all real code/output preserved."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/logging-stats/PAUSED_HANDOFF.json",
+        "sha256": "a2416fd7e034965088b8a3bfec1c23f3a472c6008a31d2f8d290eaf68a0ff99d",
+        "entry": "statistics-and-monitoring"
+      },
+      "explanation_and_literal_manifest": {
+        "path": "data/translation-fences/haproxy.ru/statistics-and-monitoring.json",
+        "sha256": "40a9734e2dcc29cf5d46e65ceccd516b35160efe6d4ad71795a6b18ab58a0b14"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "268b4823a7ccaf34f788d977d5b509346eb657a3c845e888c775907464972c26",
+        "target_sha256": "397d1e8bf35fc6c9812c57c6d18ffea0a0931bccbdaa6bee47b48daddfb0721d"
+      },
+      "manifest_reference_history": [
+        {
+          "path": "data/translation-fences/haproxy.ru/statistics-and-monitoring.json",
+          "sha256": "0457a4c19de09cabd0302f3a3e144d5c2c2bb5c0dbb6407c211c85852132034a"
+        }
+      ]
+    },
+    {
+      "source": "content/docs/haproxy/stick-tables-and-peers.md",
+      "target": "content/docs/haproxy/stick-tables-and-peers.ru.md",
+      "source_sha256": "ce82dcade06e3ab1acb5f39c954558966c12b86c09902fb0a6853e1f80167fa1",
+      "target_sha256": "81a3b6ad0eeb80646893b9949554675d8368f54d31440a56742e9af634d68b4c",
+      "english_body_chars": 36197,
+      "target_bytes": 58063,
+      "change": "corrected",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source first-pass comparison",
+        "note": "All 13 sections: table type/len, expire refresh, recv-only/srvkey/store, gpc/gpt/rate semantics, peer reference direction; source counter-size inconsistency retained.",
+        "separate_review": "complete",
+        "separate_review_note": "Separate full bilingual comparison of all changed paragraphs across 13 sections, including every changed type/counter, all 53 table-definition paragraphs, peers scope and 2 explanation fences. Corrected IPv4/IPv6 capitalization and compression/count wording; retained source 4-byte/64-bit and gpt(100) discrepancies."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "stick-tables-and-peers"
+      },
+      "explanation_and_literal_manifest": {
+        "path": "data/translation-fences/haproxy.ru/stick-tables-and-peers.json",
+        "sha256": "6372678d51ec23c9e4fb27a30e74852ec5fab819e670dee653d00a3be3791ed2"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "ce82dcade06e3ab1acb5f39c954558966c12b86c09902fb0a6853e1f80167fa1",
+        "target_sha256": "81a3b6ad0eeb80646893b9949554675d8368f54d31440a56742e9af634d68b4c"
+      },
+      "manifest_reference_history": [
+        {
+          "path": "data/translation-fences/haproxy.ru/stick-tables-and-peers.json",
+          "sha256": "f07396fe955cc14aabb2d7100b8137f4327f2de2be872fdf24e6a68f9b4783f8"
+        }
+      ]
+    },
+    {
+      "source": "content/docs/haproxy/stopping-and-restarting.md",
+      "target": "content/docs/haproxy/stopping-and-restarting.ru.md",
+      "source_sha256": "23ea530b4f922b37b91fbfa8a34cfeeaeb626c959d72f25e5ff14d909130ed4f",
+      "target_sha256": "aaf592e78768fb31bccbf08368de210b7f10db356b1474a33e3a5cdb7d1e1623",
+      "english_body_chars": 5978,
+      "target_bytes": 11200,
+      "change": "corrected",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison of all 12 blocks; corrected almost forever to temporal already very long; signal ordering, bind rollback, failure rates and SO_REUSEPORT conditions preserved.",
+        "separate_review": "complete",
+        "separate_review_note": "Separate current-English comparison of all changed prose and any translated explanatory fences/indented passages; technical literals and examples retained."
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "stopping-and-restarting"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "23ea530b4f922b37b91fbfa8a34cfeeaeb626c959d72f25e5ff14d909130ed4f",
+        "target_sha256": "aaf592e78768fb31bccbf08368de210b7f10db356b1474a33e3a5cdb7d1e1623"
+      }
+    },
+    {
+      "source": "content/docs/haproxy/traps.md",
+      "target": "content/docs/haproxy/traps.ru.md",
+      "source_sha256": "0a1518176d089b6f2f21be7139fb2dc1ef77af51d00f01fb29c4f7c397bd98dc",
+      "target_sha256": "5f742f119b08e48dc3d6cdc7cc6a426680f245982b4db7b1dc91f68d5bc0b5cc",
+      "english_body_chars": 2902,
+      "target_bytes": 5636,
+      "change": "unchanged",
+      "semantic_review": {
+        "status": "complete",
+        "method": "Full independent current-English/Russian comparison of the existing complete page.",
+        "reviewer": "root source-by-source comparison",
+        "note": "full bilingual comparison: nonlocal bind, port collision retries, stale process detection and volatile ACL changes intact"
+      },
+      "evidence": {
+        "path": "/Users/vonng/.local/share/codex-handoffs/doc-pg-center-haproxy-ru-20261013/existing-review.json",
+        "sha256": "e7236b739829ebb8b5464d4710e08ca0e87a35c6df199e164263946bc7d21469",
+        "entry": "traps"
+      },
+      "publication_delta_review": {
+        "status": "passed",
+        "method": "Official 3.4.6-66 upgrade: non-translatable metadata synchronized; each of the eight body-page changes separately translated and reread against current English. Complete unchanged predecessor content review retained; no new full-body review claim.",
+        "source_sha256": "0a1518176d089b6f2f21be7139fb2dc1ef77af51d00f01fb29c4f7c397bd98dc",
+        "target_sha256": "5f742f119b08e48dc3d6cdc7cc6a426680f245982b4db7b1dc91f68d5bc0b5cc"
+      }
+    }
+  ],
+  "reproduce": [
+    "python3 scripts/report-coverage.py",
+    "python3 scripts/test-haproxy-ru-parity.py",
+    "HUGO_CACHEDIR=<outside-cache> HUGO_RESOURCEDIR=<outside-resources> hugo --destination <outside-production> --gc --minify --cleanDestinationDir --printPathWarnings --printI18nWarnings --panicOnWarning",
+    "python3 scripts/check-russian-parity.py --component haproxy --current-source --strict --rendered-dir <outside-production> --report <outside-report.json>",
+    "PLAYWRIGHT_MODULE=<outside-playwright> node scripts/check-haproxy-ru-browser.cjs http://127.0.0.1:<port> <outside-browser-evidence>",
+    "python3 scripts/check-russian-parity.py --allow-partial --current-source",
+    "git diff --check",
+    "make check"
+  ],
+  "completed_at": "2026-10-13T06:44:48.770339+00:00",
+  "supplemental_publication_review": {
+    "reviewed_at": "2026-10-13T13:00:45.168556+00:00",
+    "status": "target-errata-applied-awaiting-shared-English-integration",
+    "scope": "Five objectively confirmed shared upstream errata; Russian cache condition clarification. New targeted review only; existing complete semantic review retained.",
+    "pages": [
+      {
+        "page": "haproxy/configuration-basics.md",
+        "target": "content/docs/haproxy/configuration-basics.ru.md",
+        "prior_target_sha256": "f60faadb76e4dcd8d9de181d4aa6a5d27fad01ff67b04fe97041818fb315ec74",
+        "target_sha256": "f5d2f7b84f768d81f1f8b66800b09d1bb4164e1a83a78761ef887b9a6e98f6b9",
+        "reviewed_changed_sections": [
+          "section-2-9-3"
+        ],
+        "all_executable_fences_unchanged": true,
+        "review_method": "Separate manual comparison of every changed sentence against the pinned upstream manual and exact-version code; original full-page semantic review retained as predecessor evidence.",
+        "corrections": [
+          "tcp6 alias stream+ipv6@; udp6 alias dgram+ipv6@; exact-version src/tools.c sets AF_INET6 for both prefixes."
+        ]
+      },
+      {
+        "page": "haproxy/security.md",
+        "target": "content/docs/haproxy/security.ru.md",
+        "prior_target_sha256": "1adcb95908c3a19efcbedd5128ed42d4a3e07c3505fc9ead0d661e39d5a1174f",
+        "target_sha256": "3d96042971e688fbc97e7ec01c6385c93d6f827860fb345ed65f060b71ea3569",
+        "reviewed_changed_sections": [
+          "section-13-1"
+        ],
+        "all_executable_fences_unchanged": true,
+        "review_method": "Separate manual comparison of every changed sentence against the pinned upstream manual and exact-version code; original full-page semantic review retained as predecessor evidence.",
+        "corrections": [
+          "cap_net_bind_service binds privileged ports; exact-version Configuration Manual setcap entry confirms."
+        ]
+      },
+      {
+        "page": "haproxy/statistics-and-monitoring.md",
+        "target": "content/docs/haproxy/statistics-and-monitoring.ru.md",
+        "prior_target_sha256": "ad8d0fefc88f9b05fa32f039f7719f73e256393e258e7fc38891dcd1cf519435",
+        "target_sha256": "d7a3275b6cad10ef17cd031cf3fd5217efb328177be115b0f9bb247ec72215de",
+        "reviewed_changed_sections": [
+          "entry-9-3-set-ssl-cert",
+          "entry-9-3-set-ssl-tls-key"
+        ],
+        "all_executable_fences_unchanged": true,
+        "review_method": "Separate manual comparison of every changed sentence against the pinned upstream manual and exact-version code; original full-page semantic review retained as predecessor evidence.",
+        "corrections": [
+          "TLS ticket key length 48 or 80 bytes, confirmed by packed tls_sess_key_128/256 and CLI decoded-size validation.",
+          "Certificate sidecar .oscp -> .ocsp, confirmed by src/ssl_ckch.c filename suffix."
+        ]
+      },
+      {
+        "page": "haproxy/starting.md",
+        "target": "content/docs/haproxy/starting.ru.md",
+        "prior_target_sha256": "6eaba115f4743f90d47d2c8b575c8276b46e9e56942e8bcbf60508509d1be0a2",
+        "target_sha256": "f3abf1137c37ffdfd1215979181c633988fd963a20ecc2f58dcd06a334654b69",
+        "reviewed_changed_sections": [
+          "entry-3-the-release-date"
+        ],
+        "all_executable_fences_unchanged": true,
+        "review_method": "Separate manual comparison of every changed sentence against the pinned upstream manual and exact-version code; original full-page semantic review retained as predecessor evidence.",
+        "corrections": [
+          "2015/10/08 in declared year/month/day notation is October 8, 2015. Diagnostic output date bytes retained."
+        ]
+      },
+      {
+        "page": "haproxy/cache.md",
+        "target": "content/docs/haproxy/cache.ru.md",
+        "prior_target_sha256": "d2b3a9916d152c77c2eaaed58efdbc85ca71ec5998b6f04d92302b64db6da05f",
+        "target_sha256": "34cff6ffdd9ffd8229d689283ef63f96b1e586008b96bf452bad618ad181b1d6",
+        "reviewed_changed_sections": [
+          "section-6-1"
+        ],
+        "all_executable_fences_unchanged": true,
+        "review_method": "Separate manual comparison of every changed sentence against the pinned upstream manual and exact-version code; original full-page semantic review retained as predecessor evidence.",
+        "corrections": [
+          "Clarify absence of BOTH explicit expiry and validator using ни ... ни; cache inclusion/exclusion semantics unchanged."
+        ]
+      }
+    ],
+    "historical_anomaly_policy": "Prior source-anomaly entries describe the predecessor state; the corrections in this supplemental review supersede those exact entries."
+  },
+  "upstream_version_history": [
+    {
+      "source": null,
+      "version": null,
+      "upstream_commit": "7f03ae65c28605152c7a1a9ba7d9d0bcfb50f8b0"
+    }
+  ],
+  "current_upstream_upgrade_review": {
+    "status": "passed",
+    "scope": "Eight source body pages / 60 source-target changed sections in three locales; metadata synchronization across all35 published pages; unchanged full predecessor reviews preserved."
+  },
+  "current_source_coverage": {
+    "published_page_pairs": 35,
+    "all_page_pairs": 38,
+    "english_body_chars": 2104709
+  }
+}

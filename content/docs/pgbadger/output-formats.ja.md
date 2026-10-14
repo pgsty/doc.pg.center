@@ -3,6 +3,7 @@ title: "出力形式"
 linkTitle: "出力形式"
 weight: 70
 description: "HTML、テキスト、バイナリ、JSON、生のCSVから出力形式を選び、中間ファイルを統合します"
+search_keywords: [--anonymize, --csv-separator, --dump-all-queries, --dump-raw-csv, --extension, --extra-files, --last-parsed, --normalized-only, --outfile, --prettify-json, --query-numbering, JSON::XS, all, anonymize, csv, csv-separator, dump, dump-all-queries, dump-raw-csv, extension, extra, extra-files, files, json, last, last-parsed, normalized, normalized-only, numbering, only, outfile, parsed, prettify, prettify-json, queries, query, query-numbering, raw, separator]
 icon: fa-solid fa-file-export
 module: [PGBADGER]
 categories: [リファレンス]
@@ -81,7 +82,7 @@ $ pgbadger -o report.json postgresql.log
 コマンドリファレンスでは、専用のエクスポート機能も提供されています。
 
 - `--dump-raw-csv`はログを解析し、レポートを生成せずに行単位のCSVを書き出します。
-- `--csv-separator`は生のCSVの区切り文字を変更します。
+- `--csv-separator`は生のCSVの区切り文字を変更します。13.2のデフォルトはカンマです。
 - `--dump-all-queries`はバインドパラメーターを置換した後のすべてのクエリーを出力します。
 - `--normalized-only`は正規化したクエリーを書き出します。
 - `--query-numbering`はクエリーのテキスト出力に番号を付けます。

@@ -1,0 +1,407 @@
+{
+  "source": "content/docs/haproxy/bind-and-server-options.md",
+  "language": "ru",
+  "fences": [
+    {
+      "index": 23,
+      "classification": "argument-description",
+      "source_sha256": "e26db69ea29d18881d38166e483f509874864bac3b03e9e3f4078b12b23cbe05",
+      "target_sha256": "780eec1bff6c6ce2ec90205cb2f1b44f818d08da2b8f9aa77921d9869e48eca2",
+      "protected_literals": [
+        "CLI",
+        "crt-store",
+        "crt-list",
+        "\"ssl-load-extra-files\"",
+        ".rsa",
+        ".ecdsa",
+        ".dsa"
+      ],
+      "protected_lines": [],
+      "review": "Translated against current English; structural checks preserve protected literals. Separate full semantic review is recorded in the component review ledger.",
+      "revalidation_history": [
+        {
+          "index": 23,
+          "source_sha256": "e26db69ea29d18881d38166e483f509874864bac3b03e9e3f4078b12b23cbe05",
+          "target_sha256": "780eec1bff6c6ce2ec90205cb2f1b44f818d08da2b8f9aa77921d9869e48eca2"
+        },
+        {
+          "index": 23,
+          "source_sha256": "e26db69ea29d18881d38166e483f509874864bac3b03e9e3f4078b12b23cbe05",
+          "target_sha256": "780eec1bff6c6ce2ec90205cb2f1b44f818d08da2b8f9aa77921d9869e48eca2"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 24,
+      "classification": "argument-description",
+      "source_sha256": "10a2b6c06285e9727ca3066dd651819867554ffc33a0d5400f08dd6442dd3b92",
+      "target_sha256": "c98fe8086907721a220dff71c43c4db4d50bdb43b2ac6bb42b5180dc8faa347e",
+      "protected_literals": [],
+      "protected_lines": [
+        " - allow-0rtt",
+        " - alpn",
+        " - ca-file",
+        " - ca-verify-file",
+        " - ciphers",
+        " - ciphersuites",
+        " - client-sigalgs",
+        " - crl-file",
+        " - curves",
+        " - ecdhe",
+        " - no-alpn",
+        " - no-ca-names",
+        " - npn",
+        " - sigalgs",
+        " - ssl-min-ver",
+        " - ssl-max-ver",
+        " - verify",
+        " - crt",
+        " - key",
+        " - ocsp",
+        " - issuer",
+        " - sctl",
+        " - ocsp-update"
+      ],
+      "review": "Translated against current English; structural checks preserve protected literals. Separate full semantic review is recorded in the component review ledger.",
+      "revalidation_history": [
+        {
+          "index": 24,
+          "source_sha256": "10a2b6c06285e9727ca3066dd651819867554ffc33a0d5400f08dd6442dd3b92",
+          "target_sha256": "c98fe8086907721a220dff71c43c4db4d50bdb43b2ac6bb42b5180dc8faa347e"
+        },
+        {
+          "index": 24,
+          "source_sha256": "10a2b6c06285e9727ca3066dd651819867554ffc33a0d5400f08dd6442dd3b92",
+          "target_sha256": "c98fe8086907721a220dff71c43c4db4d50bdb43b2ac6bb42b5180dc8faa347e"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 25,
+      "classification": "argument-description",
+      "source_sha256": "9704f96e3109be3aaca2edf1afffa5d064c9a61ff634b43a072a449061c86dea",
+      "target_sha256": "1f05a118b2b6a79bc647b7978b9cc925e65f7fcc4f9d73890f8c2a1f2058e5ca",
+      "protected_literals": [
+        "crt-list",
+        "CN",
+        "SAN",
+        "'!'",
+        "'*'",
+        "'strict-sni'",
+        "\"show ssl sni\"",
+        "(RSA,ECDSA,DSA)"
+      ],
+      "protected_lines": [],
+      "review": "Translated against current English; structural checks preserve protected literals. Separate full semantic review is recorded in the component review ledger.",
+      "revalidation_history": [
+        {
+          "index": 25,
+          "source_sha256": "9704f96e3109be3aaca2edf1afffa5d064c9a61ff634b43a072a449061c86dea",
+          "target_sha256": "1f05a118b2b6a79bc647b7978b9cc925e65f7fcc4f9d73890f8c2a1f2058e5ca"
+        },
+        {
+          "index": 25,
+          "source_sha256": "9704f96e3109be3aaca2edf1afffa5d064c9a61ff634b43a072a449061c86dea",
+          "target_sha256": "1f05a118b2b6a79bc647b7978b9cc925e65f7fcc4f9d73890f8c2a1f2058e5ca"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 138,
+      "classification": "argument-description",
+      "source_sha256": "f2f770a4b70da08293500c8b02db5e03802c9d29cbcdfa602ead3a54e416819b",
+      "target_sha256": "48b28d326f57a8bd092d86928f561ab22e7c416db06d1863031f3e05f7def688",
+      "protected_literals": [
+        "  id ",
+        "id32",
+        "  guid ",
+        "  addr ",
+        "addr-port",
+        "\"id\"",
+        "\"hash-key\"",
+        "(id % 1048576)"
+      ],
+      "protected_lines": [],
+      "review": "Translated against current English; structural checks preserve protected literals. Separate full semantic review is recorded in the component review ledger.",
+      "prior_target_review_sha256": "9a6f95336d3d086e667e661b532e7b089cb5795aeb62dcfebafd012fb79b77c1",
+      "supplemental_review": "Seven confirmed exact-version source errata reviewed independently against pinned code; changed map-prefix keyword row or ID hash arithmetic only. Shared source hash refreshed by root after integration.",
+      "revalidation_history": [
+        {
+          "index": 138,
+          "source_sha256": "556f8a71826e510b7d8a1830a64a8048170bd0d0e9bddd2bb967b36998a2540b",
+          "target_sha256": "48b28d326f57a8bd092d86928f561ab22e7c416db06d1863031f3e05f7def688"
+        },
+        {
+          "index": 138,
+          "source_sha256": "f2f770a4b70da08293500c8b02db5e03802c9d29cbcdfa602ead3a54e416819b",
+          "target_sha256": "48b28d326f57a8bd092d86928f561ab22e7c416db06d1863031f3e05f7def688"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 140,
+      "classification": "argument-description",
+      "source_sha256": "288b8c8fcc2df6d9f79a80f303d4d6d48d5804f8e1f80629eb60086294ee5ff0",
+      "target_sha256": "d922fea2f083271592050c6f5b4b99a265a7a6ff3379710021f4dcf847e7a276",
+      "protected_literals": [],
+      "protected_lines": [],
+      "review": "Translated against current English; structural checks preserve protected literals. Separate full semantic review is recorded in the component review ledger.",
+      "revalidation_history": [
+        {
+          "index": 140,
+          "source_sha256": "288b8c8fcc2df6d9f79a80f303d4d6d48d5804f8e1f80629eb60086294ee5ff0",
+          "target_sha256": "d922fea2f083271592050c6f5b4b99a265a7a6ff3379710021f4dcf847e7a276"
+        },
+        {
+          "index": 140,
+          "source_sha256": "288b8c8fcc2df6d9f79a80f303d4d6d48d5804f8e1f80629eb60086294ee5ff0",
+          "target_sha256": "d922fea2f083271592050c6f5b4b99a265a7a6ff3379710021f4dcf847e7a276"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 147,
+      "classification": "table-labels",
+      "source_sha256": "a529fd72ddfbb4decece816ea6c5e939d80fe87255a007e09512a94b541fa955",
+      "target_sha256": "5c22bd0566a044331e456ad86bb0982f6ef8f2524967d81c6b8556a0016d07df",
+      "protected_literals": [
+        "UP",
+        "DOWN",
+        "\"inter\"",
+        "\"fastinter\"",
+        "\"downinter\"",
+        "\"fall\"",
+        "\"rise\""
+      ],
+      "protected_lines": [],
+      "review": "Translated against current English; structural checks preserve protected literals. Separate full semantic review is recorded in the component review ledger.",
+      "revalidation_history": [
+        {
+          "index": 147,
+          "source_sha256": "a529fd72ddfbb4decece816ea6c5e939d80fe87255a007e09512a94b541fa955",
+          "target_sha256": "5c22bd0566a044331e456ad86bb0982f6ef8f2524967d81c6b8556a0016d07df"
+        },
+        {
+          "index": 147,
+          "source_sha256": "a529fd72ddfbb4decece816ea6c5e939d80fe87255a007e09512a94b541fa955",
+          "target_sha256": "5c22bd0566a044331e456ad86bb0982f6ef8f2524967d81c6b8556a0016d07df"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 234,
+      "classification": "argument-description",
+      "source_sha256": "c14f0def1f94527418b21c441fe5e1e231240d461023b452cb85dc316426bf32",
+      "target_sha256": "7ae42f04230cb467a71dfcf598d262454655702e378a8ebf5285c0363b7633b3",
+      "protected_literals": [
+        "HAProxy",
+        "libc",
+        "/etc/resolv.conf",
+        "DNS"
+      ],
+      "protected_lines": [],
+      "review": "Translated against current English; structural checks preserve protected literals. Separate full semantic review is recorded in the component review ledger.",
+      "revalidation_history": [
+        {
+          "index": 233,
+          "source_sha256": "c14f0def1f94527418b21c441fe5e1e231240d461023b452cb85dc316426bf32",
+          "target_sha256": "7ae42f04230cb467a71dfcf598d262454655702e378a8ebf5285c0363b7633b3"
+        },
+        {
+          "index": 233,
+          "source_sha256": "c14f0def1f94527418b21c441fe5e1e231240d461023b452cb85dc316426bf32",
+          "target_sha256": "7ae42f04230cb467a71dfcf598d262454655702e378a8ebf5285c0363b7633b3"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 235,
+      "classification": "argument-description",
+      "source_sha256": "21efd332b1b83ff50dec353e89eeeb996c81c278324678d471aac5dcb12de3e0",
+      "target_sha256": "fc549d582d59a4aab8e36eb755da36ee91af40ac07ef40b8087d4476836c1e6f",
+      "protected_literals": [
+        "HAProxy",
+        "DNS",
+        "AAAA",
+        "SRV"
+      ],
+      "protected_lines": [],
+      "review": "Translated against current English; structural checks preserve protected literals. Separate full semantic review is recorded in the component review ledger.",
+      "revalidation_history": [
+        {
+          "index": 234,
+          "source_sha256": "21efd332b1b83ff50dec353e89eeeb996c81c278324678d471aac5dcb12de3e0",
+          "target_sha256": "fc549d582d59a4aab8e36eb755da36ee91af40ac07ef40b8087d4476836c1e6f"
+        },
+        {
+          "index": 234,
+          "source_sha256": "21efd332b1b83ff50dec353e89eeeb996c81c278324678d471aac5dcb12de3e0",
+          "target_sha256": "fc549d582d59a4aab8e36eb755da36ee91af40ac07ef40b8087d4476836c1e6f"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    }
+  ],
+  "indented_prose": [
+    {
+      "source_sha256": "a45bc3e582243529a9c42231a91eb8fbeb9009f0abd8536f73a1e27eb500be7f",
+      "target_sha256": "3342e74835918c8f39cb93f92a95e0eda7c56fdc47809e195b1a838643919b3c",
+      "reason": "DNS hold status and period descriptions; all past-time conditions, defaults and distinct valid/obsolete behaviors reviewed.",
+      "protected_literals": [
+        "`<status>`",
+        "`<period>`",
+        "NXDOMAIN",
+        "REFUSED",
+        "\"timeout retry\"",
+        "\"http-request do-resolve\"",
+        "\"tcp-request content do-resolve\"",
+        "DNS",
+        "SRV",
+        "HAProxy"
+      ],
+      "protected_lines": []
+    }
+  ],
+  "literal_snippets": [
+    {
+      "text": "server srv1 192.168.1.1:80 redir <http://image1.mydomain.com> check",
+      "source_sha256": "676802dbd04e45ac673f9ef3431c8f76d77e83379ca51591b5535358eacc3131",
+      "classification": "configuration",
+      "review": "Unfenced copyable syntax and example comments remain byte-for-byte."
+    },
+    {
+      "text": "server srv1 192.168.1.1:80 send-proxy-v2 set-proxy-v2-tlv-fmt(0x20) %[fc_pp_tlv(0x20)]",
+      "source_sha256": "19ed4abfc5d347121f5fd062d7437bce05c5f2eb6b081e46ff25fe1a39ab1026",
+      "classification": "configuration",
+      "review": "Unfenced copyable syntax and example comments remain byte-for-byte."
+    },
+    {
+      "text": "openssl rand\n80 \\| openssl base64 -A \\| xargs echo",
+      "source_sha256": "fb41b5a446d11275424c0ea52ef5064421df53b0c15a4f11766a54368566030c",
+      "classification": "command",
+      "review": "Unfenced copyable syntax and example comments remain byte-for-byte."
+    },
+    {
+      "text": "cat cert.pem key.pem \\>\ncombined.pem",
+      "source_sha256": "2037ee100906f9f226e06775c43575764c3942bec32ff4109f457ae8a22a7de0",
+      "classification": "command",
+      "review": "Exact copyable command retained and separately checked against current source."
+    }
+  ],
+  "literal_blocks": [],
+  "source_formatting_revalidation": {
+    "method": "Exact reviewed predecessor source/target SHA mapping and byte-for-byte literal-fence witnesses; only documented source errata and markup-only restoration accepted.",
+    "fences": [
+      {
+        "prior": {
+          "index": 23,
+          "source_sha256": "e26db69ea29d18881d38166e483f509874864bac3b03e9e3f4078b12b23cbe05",
+          "target_sha256": "780eec1bff6c6ce2ec90205cb2f1b44f818d08da2b8f9aa77921d9869e48eca2"
+        },
+        "index": 23,
+        "source_sha256": "e26db69ea29d18881d38166e483f509874864bac3b03e9e3f4078b12b23cbe05",
+        "target_sha256": "780eec1bff6c6ce2ec90205cb2f1b44f818d08da2b8f9aa77921d9869e48eca2",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 24,
+          "source_sha256": "10a2b6c06285e9727ca3066dd651819867554ffc33a0d5400f08dd6442dd3b92",
+          "target_sha256": "c98fe8086907721a220dff71c43c4db4d50bdb43b2ac6bb42b5180dc8faa347e"
+        },
+        "index": 24,
+        "source_sha256": "10a2b6c06285e9727ca3066dd651819867554ffc33a0d5400f08dd6442dd3b92",
+        "target_sha256": "c98fe8086907721a220dff71c43c4db4d50bdb43b2ac6bb42b5180dc8faa347e",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 25,
+          "source_sha256": "9704f96e3109be3aaca2edf1afffa5d064c9a61ff634b43a072a449061c86dea",
+          "target_sha256": "1f05a118b2b6a79bc647b7978b9cc925e65f7fcc4f9d73890f8c2a1f2058e5ca"
+        },
+        "index": 25,
+        "source_sha256": "9704f96e3109be3aaca2edf1afffa5d064c9a61ff634b43a072a449061c86dea",
+        "target_sha256": "1f05a118b2b6a79bc647b7978b9cc925e65f7fcc4f9d73890f8c2a1f2058e5ca",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 138,
+          "source_sha256": "556f8a71826e510b7d8a1830a64a8048170bd0d0e9bddd2bb967b36998a2540b",
+          "target_sha256": "48b28d326f57a8bd092d86928f561ab22e7c416db06d1863031f3e05f7def688"
+        },
+        "index": 138,
+        "source_sha256": "f2f770a4b70da08293500c8b02db5e03802c9d29cbcdfa602ead3a54e416819b",
+        "target_sha256": "48b28d326f57a8bd092d86928f561ab22e7c416db06d1863031f3e05f7def688",
+        "reason": "separately code-reviewed ID hash correction:20bits/mod1048576"
+      },
+      {
+        "prior": {
+          "index": 140,
+          "source_sha256": "288b8c8fcc2df6d9f79a80f303d4d6d48d5804f8e1f80629eb60086294ee5ff0",
+          "target_sha256": "d922fea2f083271592050c6f5b4b99a265a7a6ff3379710021f4dcf847e7a276"
+        },
+        "index": 140,
+        "source_sha256": "288b8c8fcc2df6d9f79a80f303d4d6d48d5804f8e1f80629eb60086294ee5ff0",
+        "target_sha256": "d922fea2f083271592050c6f5b4b99a265a7a6ff3379710021f4dcf847e7a276",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 147,
+          "source_sha256": "a529fd72ddfbb4decece816ea6c5e939d80fe87255a007e09512a94b541fa955",
+          "target_sha256": "5c22bd0566a044331e456ad86bb0982f6ef8f2524967d81c6b8556a0016d07df"
+        },
+        "index": 147,
+        "source_sha256": "a529fd72ddfbb4decece816ea6c5e939d80fe87255a007e09512a94b541fa955",
+        "target_sha256": "5c22bd0566a044331e456ad86bb0982f6ef8f2524967d81c6b8556a0016d07df",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 233,
+          "source_sha256": "c14f0def1f94527418b21c441fe5e1e231240d461023b452cb85dc316426bf32",
+          "target_sha256": "7ae42f04230cb467a71dfcf598d262454655702e378a8ebf5285c0363b7633b3"
+        },
+        "index": 233,
+        "source_sha256": "c14f0def1f94527418b21c441fe5e1e231240d461023b452cb85dc316426bf32",
+        "target_sha256": "7ae42f04230cb467a71dfcf598d262454655702e378a8ebf5285c0363b7633b3",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 234,
+          "source_sha256": "21efd332b1b83ff50dec353e89eeeb996c81c278324678d471aac5dcb12de3e0",
+          "target_sha256": "fc549d582d59a4aab8e36eb755da36ee91af40ac07ef40b8087d4476836c1e6f"
+        },
+        "index": 234,
+        "source_sha256": "21efd332b1b83ff50dec353e89eeeb996c81c278324678d471aac5dcb12de3e0",
+        "target_sha256": "fc549d582d59a4aab8e36eb755da36ee91af40ac07ef40b8087d4476836c1e6f",
+        "reason": "unchanged exact reviewed English fence"
+      }
+    ],
+    "literal_blocks": []
+  },
+  "superseded_literal_snippets": [
+    {
+      "prior": {
+        "text": "peers mypeers shards 3 peer A 127.0.0.1:40001 \\# local peer without shard value (0 internally) peer\nB 127.0.0.1:40002 shard 1 peer C 127.0.0.1:40003 shard 2 peer D 127.0.0.1:40004 shard 3",
+        "source_sha256": "5769363d432515d86b4eff6b63a6384805ede8bd9627979f942dbe52e1fd69f8",
+        "classification": "configuration",
+        "review": "Unfenced copyable syntax and example comments remain byte-for-byte."
+      },
+      "current_verbatim_fence": 211,
+      "source_sha256": "9471293fd6efdc68ca9956fbd5a590684046f653d712fd8b264567d95134f752",
+      "target_sha256": "9471293fd6efdc68ca9956fbd5a590684046f653d712fd8b264567d95134f752",
+      "reason": "Old joined usage/example snippet migrated to exact source-target default-verbatim fence."
+    }
+  ]
+}

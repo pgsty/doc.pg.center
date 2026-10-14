@@ -230,7 +230,7 @@ def validate(record, rendered=None):
         require(len(nav) == 99 and {urlsplit(n['url']).path for n in nav} == routes,
                 lang + ': navigation page set differs')
         for node in nav:
-            require(node['url'] == 'https://pig.center' + prefix(lang) + node['id']
+            require(node['url'] == 'https://doc.pg.center' + prefix(lang) + node['id']
                     and node['markdown'] == node['url'] + 'index.md', lang + ': navigation destination differs')
         for source in srcs:
             target = source if lang == 'en' else source.with_suffix('.' + lang + '.md')
@@ -241,7 +241,7 @@ def validate(record, rendered=None):
                 continue
             doc, content = docs
             require(doc.language == html_language, route + ': HTML language differs')
-            require(doc.canonical == 'https://pig.center' + route and not doc.redirect,
+            require(doc.canonical == 'https://doc.pg.center' + route and not doc.redirect,
                     route + ': canonical/fallback differs')
             require(len(doc.sidebar) == 99 and set(doc.sidebar) == routes, route + ': sidebar page set differs')
             require(doc.sidebar == [urlsplit(n['url']).path for n in nav], route + ': sidebar/navigation order differs')
@@ -273,12 +273,12 @@ def validate(record, rendered=None):
                 text = markdown.read_text().strip()
                 require(generic.split_front_matter(target.read_text())[1].strip() in text,
                         route + ': Markdown body truncated/changed')
-                entry = 'Source: https://pig.center' + route + 'index.md\n================\n\n' + text
+                entry = 'Source: https://doc.pg.center' + route + 'index.md\n================\n\n' + text
                 require(bundle.count(entry) == 1, route + ': LLMS body omitted/duplicated/changed')
             for alias in re.findall(r'/[A-Za-z0-9_./-]+', parity.front_matter_blocks(generic.split_front_matter(target.read_text())[0]).get('aliases', '')):
                 alias_doc = document(prefix(lang) + alias)
                 if alias_doc:
-                    require(alias_doc[0].canonical == alias_doc[0].redirect == 'https://pig.center' + route,
+                    require(alias_doc[0].canonical == alias_doc[0].redirect == 'https://doc.pg.center' + route,
                             route + ': legacy redirect differs')
         if lang != 'en':
             print_errors, _ = printing.check_print(root, srcs, PROJECT / 'content',

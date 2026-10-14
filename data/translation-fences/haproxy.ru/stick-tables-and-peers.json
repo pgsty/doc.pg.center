@@ -1,0 +1,92 @@
+{
+  "source": "content/docs/haproxy/stick-tables-and-peers.md",
+  "language": "ru",
+  "fences": [
+    {
+      "index": 7,
+      "classification": "argument-description",
+      "source_sha256": "1b782f1ec5f452bf08170a017d5e8bd541772b2aa8f93582a269599ff32acff7",
+      "target_sha256": "028abc3d4ac37f31d97edeae4fc5bd885e99464d30d7478d2eafff1b128861ac",
+      "protected_literals": [
+        "\"default-server\"",
+        "peers",
+        "\"server\""
+      ],
+      "protected_lines": [],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 7,
+          "source_sha256": "1b782f1ec5f452bf08170a017d5e8bd541772b2aa8f93582a269599ff32acff7",
+          "target_sha256": "028abc3d4ac37f31d97edeae4fc5bd885e99464d30d7478d2eafff1b128861ac"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 12,
+      "classification": "mixed-explanation",
+      "source_sha256": "9280a95628f3f157d72af2fdd2bdffa30c3765b145b8222ff2ecdda1ff70ffd1",
+      "target_sha256": "182e586aa58e169dc12d80a14b1f924a14d02d830a13e3859af040d0c9eb8659",
+      "protected_literals": [],
+      "protected_lines": [
+        " # The old way.",
+        " peers mypeers",
+        "     peer haproxy1 192.168.0.1:1024",
+        "     peer haproxy2 192.168.0.2:1024",
+        "     peer haproxy3 10.2.0.1:1024",
+        " backend mybackend",
+        "     mode tcp",
+        "     balance roundrobin",
+        "     stick-table type ip size 20k peers mypeers",
+        "     stick on src",
+        "     server srv1 192.168.0.30:80",
+        "     server srv2 192.168.0.31:80",
+        "  peers mypeers",
+        "     bind 192.168.0.1:1024 ssl crt mycerts/pem",
+        "     default-server ssl verify none",
+        "     server haproxy1 #local peer",
+        "     server haproxy2 192.168.0.2:1024",
+        "     server haproxy3 10.2.0.1:1024"
+      ],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 12,
+          "source_sha256": "9280a95628f3f157d72af2fdd2bdffa30c3765b145b8222ff2ecdda1ff70ffd1",
+          "target_sha256": "182e586aa58e169dc12d80a14b1f924a14d02d830a13e3859af040d0c9eb8659"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    }
+  ],
+  "literal_blocks": [],
+  "source_formatting_revalidation": {
+    "method": "Exact reviewed predecessor source/target SHA mapping and byte-for-byte literal-fence witnesses; only documented source errata and markup-only restoration accepted.",
+    "fences": [
+      {
+        "prior": {
+          "index": 7,
+          "source_sha256": "1b782f1ec5f452bf08170a017d5e8bd541772b2aa8f93582a269599ff32acff7",
+          "target_sha256": "028abc3d4ac37f31d97edeae4fc5bd885e99464d30d7478d2eafff1b128861ac"
+        },
+        "index": 7,
+        "source_sha256": "1b782f1ec5f452bf08170a017d5e8bd541772b2aa8f93582a269599ff32acff7",
+        "target_sha256": "028abc3d4ac37f31d97edeae4fc5bd885e99464d30d7478d2eafff1b128861ac",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 12,
+          "source_sha256": "9280a95628f3f157d72af2fdd2bdffa30c3765b145b8222ff2ecdda1ff70ffd1",
+          "target_sha256": "182e586aa58e169dc12d80a14b1f924a14d02d830a13e3859af040d0c9eb8659"
+        },
+        "index": 12,
+        "source_sha256": "9280a95628f3f157d72af2fdd2bdffa30c3765b145b8222ff2ecdda1ff70ffd1",
+        "target_sha256": "182e586aa58e169dc12d80a14b1f924a14d02d830a13e3859af040d0c9eb8659",
+        "reason": "unchanged exact reviewed English fence"
+      }
+    ],
+    "literal_blocks": []
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "content/docs/pgbadger/command-line.zh.md": {
+    "source": "content/docs/pgbadger/command-line.md",
+    "source_body_sha256": "ba42acf101f92cb0f40a11032f149a1d3d35626ab25c327e21f126e39f193367",
+    "target_body_sha256": "a9ae5827037d52a51b55a02c0f3bcb4ff3f032b39fc5681d775a0f6f029fea26",
+    "missing": {},
+    "extra": {
+      "5": 1
+    },
+    "reason": "May is expressed as 5月."
+  },
+  "content/docs/pgbadger/command-line.ja.md": {
+    "source": "content/docs/pgbadger/command-line.md",
+    "source_body_sha256": "ba42acf101f92cb0f40a11032f149a1d3d35626ab25c327e21f126e39f193367",
+    "target_body_sha256": "8d81f3bb680b0a34a73c5ed5406c9d1020d6f35f70b8bae5668087356c99e038",
+    "missing": {},
+    "extra": {
+      "5": 1,
+      "1": 2,
+      "30": 2
+    },
+    "reason": "May to 5月; a month to 1か月; entire matching hour to 1時間; half-hour twice to 30分."
+  },
+  "content/docs/pgbadger/download.ja.md": {
+    "source": "content/docs/pgbadger/download.md",
+    "source_body_sha256": "9ebe746eb3a7c93e39a2b538f589dd66756ceeb1c9adc2d9d2e9f08601659909",
+    "target_body_sha256": "fb28eadb70822bb73bc7fc3c48a17fdcc86c9c74e3c82498a4c377d849bfd010",
+    "missing": {},
+    "extra": {
+      "1": 1
+    },
+    "reason": "One custom decompressor command is expressed with the digit 1."
+  },
+  "content/docs/pgbadger/incremental-reports.ja.md": {
+    "source": "content/docs/pgbadger/incremental-reports.md",
+    "source_body_sha256": "f9e99e145d084f4980e7f0a04baeb3047f9713965f1c883c68089b3603118737",
+    "target_body_sha256": "23ade1e16434aaa502981fa04f4f44442970ac3204ffa628e93ec100d7820309",
+    "missing": {},
+    "extra": {
+      "1": 2
+    },
+    "reason": "Per day and per week are expressed as 1日 and 1週間."
+  },
+  "content/docs/pgbadger/output-formats.ja.md": {
+    "source": "content/docs/pgbadger/output-formats.md",
+    "source_body_sha256": "d1aba6821e994697c8633cea8d864ca046f3765c65bb570982db9f20569e158f",
+    "target_body_sha256": "05d7f3dad5455b49b32f0d8911ad859f4ea8bb70f0d417cba4db52e16b869952",
+    "missing": {},
+    "extra": {
+      "1": 5
+    },
+    "reason": "Five one/single/per-hour expressions use the digit 1."
+  },
+  "content/docs/pgbadger/parallel-processing.ja.md": {
+    "source": "content/docs/pgbadger/parallel-processing.md",
+    "source_body_sha256": "d859f6fc5ba9b9a723eb03a1b89adb4bd6a4159b71a4b8d0683fa3b73f48479d",
+    "target_body_sha256": "4790b56cbf1a529d7521bbd1ef5733c21730facc464bac64fff42b01163a3373",
+    "missing": {},
+    "extra": {
+      "2": 2,
+      "1": 2,
+      "200": 1
+    },
+    "reason": "Two modes and two algorithms use 2; one log and one benchmark file use 1; Two hundred uses 200."
+  },
+  "content/docs/pgbadger/postgresql-logging.ja.md": {
+    "source": "content/docs/pgbadger/postgresql-logging.md",
+    "source_body_sha256": "2d10d7ba8045c63253293d9acf1cd4129923125871a2abe4ae5749b156e51af4",
+    "target_body_sha256": "842bcfd58795f242094710e29449b739df08db865a39063d1f18975f3f8a0e1e",
+    "missing": {},
+    "extra": {
+      "3": 1
+    },
+    "reason": "All three settings uses the digit 3."
+  },
+  "content/docs/pgbadger/releases/10.ja.md": {
+    "source": "content/docs/pgbadger/releases/10.md",
+    "source_body_sha256": "1dbf725bf556b116c0318097828311dc6075d74b5196dc132d624810b3a01edb",
+    "target_body_sha256": "ecd145072208f2d89ea867f6e5ffb43a75672637896f63d5215b0a89022f8dc7",
+    "missing": {},
+    "extra": {
+      "3": 1,
+      "1": 5,
+      "2": 5
+    },
+    "reason": "Three months uses 3; five one/single expressions use 1; five two/twice expressions use 2."
+  },
+  "content/docs/pgbadger/releases/11.zh.md": {
+    "source": "content/docs/pgbadger/releases/11.md",
+    "source_body_sha256": "5a475176a04872af17e10799a0c2eeb70b691ca43e8b41f9402a730d62a11955",
+    "target_body_sha256": "626e1a74304bbbfb9664ce1d4c5dcd9303235f3376b33a17e7d01ccec26b3be6",
+    "missing": {
+      "4": 1,
+      "2": 1
+    },
+    "extra": {},
+    "reason": "4 random digits is expressed as 四位随机数; 2 bytes as 双字节. pl2bat.bat is preserved."
+  },
+  "content/docs/pgbadger/releases/11.ja.md": {
+    "source": "content/docs/pgbadger/releases/11.md",
+    "source_body_sha256": "5a475176a04872af17e10799a0c2eeb70b691ca43e8b41f9402a730d62a11955",
+    "target_body_sha256": "7b508efa65157d0920c5ae2fe92010ae7e476e0ae56ae69b0c052d3ccab83b96",
+    "missing": {},
+    "extra": {
+      "3": 3,
+      "2": 3,
+      "7": 1,
+      "5": 1,
+      "1": 4,
+      "6": 1,
+      "4": 3
+    },
+    "reason": "Month counts and one/two/second expressions are written with Arabic digits, with facts unchanged."
+  },
+  "content/docs/pgbadger/releases/11.ru.md": {
+    "source": "content/docs/pgbadger/releases/11.md",
+    "source_body_sha256": "5a475176a04872af17e10799a0c2eeb70b691ca43e8b41f9402a730d62a11955",
+    "target_body_sha256": "4da03b7a42df19d07687673f36642ca194ded043af417cc62fda30becc206b54",
+    "missing": {
+      "2": 1
+    },
+    "extra": {},
+    "reason": "2-byte Windows EOL is expressed as двухбайтовом EOL."
+  },
+  "content/docs/pgbadger/releases/12.ja.md": {
+    "source": "content/docs/pgbadger/releases/12.md",
+    "source_body_sha256": "5e8a9a3219f5db720ec9a252ce4f05e2dd32f39e1e0f766c13954a8f20e004ea",
+    "target_body_sha256": "fd6f7bb783fd9e97c853d4098824ac1257b9c1637dc2c0d8c87031a71d17f7b9",
+    "missing": {},
+    "extra": {
+      "1": 1,
+      "2": 1,
+      "5": 1,
+      "6": 1,
+      "30": 1
+    },
+    "reason": "Two new features, not even one file handle, month counts, and half-hour use Arabic digits."
+  },
+  "content/docs/pgbadger/releases/13.ja.md": {
+    "source": "content/docs/pgbadger/releases/13.md",
+    "source_body_sha256": "3dbc25aa0b38a5842cc8b9d7ca41739a9084315f98df6bc165c6bde7a2931963",
+    "target_body_sha256": "b219a1b43111fb0f9caffcd4dc71edef497974697635ce217cb3f17b79dfb9ba",
+    "missing": {},
+    "extra": {
+      "2": 2,
+      "3": 1
+    },
+    "reason": "Two options, three LOG messages and double behavior use Arabic digits."
+  },
+  "content/docs/pgbadger/releases/9.ja.md": {
+    "source": "content/docs/pgbadger/releases/9.md",
+    "source_body_sha256": "50b2f57710b0f956080de5f7eedeb2108d2da7f988e5407d16cde25950859614",
+    "target_body_sha256": "d1e422354d28aecbcfda5d7732806fb201d284a55322a49e7a226e5ede0d862a",
+    "missing": {},
+    "extra": {
+      "1": 1
+    },
+    "reason": "Single last comma uses the digit 1."
+  },
+  "content/docs/pgbadger/sample-reports.zh.md": {
+    "source": "content/docs/pgbadger/sample-reports.md",
+    "source_body_sha256": "3c58eebdd98717c6ef34fcb1709045a1a61d6f62ec083e7ff673edca8630c413",
+    "target_body_sha256": "2b619f4fc21a01f3ef07b37b06c3a50d861ccd697321f77ac0b9db523859038c",
+    "missing": {},
+    "extra": {
+      "5": 1
+    },
+    "reason": "May is expressed as 5月."
+  },
+  "content/docs/pgbadger/sample-reports.ja.md": {
+    "source": "content/docs/pgbadger/sample-reports.md",
+    "source_body_sha256": "3c58eebdd98717c6ef34fcb1709045a1a61d6f62ec083e7ff673edca8630c413",
+    "target_body_sha256": "32e60c9ee3741718ec69acf6b4c170c5b881cc935714d922f515357d7d2664fa",
+    "missing": {},
+    "extra": {
+      "5": 1,
+      "2": 1,
+      "7": 1
+    },
+    "reason": "May uses 5; two weekly and seven daily reports use 2 and 7."
+  }
+}

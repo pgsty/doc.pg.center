@@ -13,6 +13,8 @@ from decimal import Decimal
 from html.parser import HTMLParser
 from pathlib import Path
 
+from translation_fences import prose_for_lint, translated_inline_labels, validate_fences, validate_literal_blocks
+
 
 PROJECT = Path(__file__).resolve().parent.parent
 CONTENT = PROJECT / "content" / "docs"
@@ -89,11 +91,11 @@ def html_comments(body: str) -> list[str]:
     return re.findall(r"<!--.*?-->", body, flags=re.DOTALL)
 
 
-def normalize_localized_target(value: str, component: str) -> str:
-    return value.replace(f"/zh/docs/{component}/", f"/docs/{component}/")
+def normalize_localized_target(value: str, component: str, language: str = "zh") -> str:
+    return value.replace(f"/{language}/docs/{component}/", f"/docs/{component}/")
 
 
-def link_targets(body: str, component: str, *, normalize: bool = True) -> list[str]:
+def link_targets(body: str, component: str, *, normalize: bool = True, language: str = "zh") -> list[str]:
     _, prose = parse_fenced_blocks(body)
     targets: list[str] = []
     targets.extend(re.findall(r"(?<=[^!])\]\(([^)\n]+)\)", " " + prose))
@@ -101,7 +103,7 @@ def link_targets(body: str, component: str, *, normalize: bool = True) -> list[s
     targets.extend(value for _, value in REFERENCE_DEF_RE.findall(prose))
     targets.extend(re.findall(r'\b(?:href|src|link)=["\']([^"\']+)["\']', prose))
     if normalize:
-        return [normalize_localized_target(value, component) for value in targets]
+        return [normalize_localized_target(value, component, language) for value in targets]
     return targets
 
 
@@ -246,7 +248,7 @@ def rendered_heading_ids(source: Path, expected_levels: list[int] | None = None)
     return [value for _, value in rendered]
 
 
-def residual_english(body: str, *, include_indented: bool = False) -> list[tuple[int, str]]:
+def residual_english(body: str, *, include_indented: bool = False, language: str = "zh") -> list[tuple[int, str]]:
     _, prose = parse_fenced_blocks(body)
     prose = re.sub(r"<!--.*?-->", "", prose, flags=re.DOTALL)
     prose = re.sub(r"<pre\b.*?</pre>", "", prose, flags=re.DOTALL | re.IGNORECASE)
@@ -267,12 +269,21 @@ def residual_english(body: str, *, include_indented: bool = False) -> list[tuple
         stripped = re.sub(r"</?[A-Za-z][^>]*>", "", stripped)
         stripped = re.sub(r"\{\{[%<].*?[>%]\}\}", "", stripped)
         stripped = re.sub(r"\{#[^}]+\}", "", stripped)
+        if language == "fr":
+            # Quoted short keyword labels such as "for" and "by" are literal
+            # HAProxy syntax. Retain long quoted sentences for the prose lint.
+            stripped = re.sub(
+                r'"[^"\n]+"|«[^»\n]+»|(?<!\w)\x27[^\x27\n]+\x27(?!\w)',
+                lambda m: "" if len(ENGLISH_WORD_RE.findall(m.group(0))) < 8 else m.group(0),
+                stripped,
+            )
         words = ENGLISH_WORD_RE.findall(stripped.lower())
         function_words = sum(word in ENGLISH_FUNCTION_WORDS for word in words)
+        french_words = sum(word in {"le", "la", "les", "un", "une", "des", "du", "dans", "pour", "avec", "est", "sont", "ce", "cette", "ces", "lorsque", "quand", "pas", "aucun", "permet", "doit", "peut", "par", "que"} for word in words)
         han = len(re.findall(r"[\u3400-\u9fff]", stripped))
         # Eight lowercase words with several grammatical words is almost always
         # untranslated prose, while API signatures and keyword matrices do not match.
-        if len(words) >= 8 and function_words >= 3 and han < len(words):
+        if len(words) >= 8 and function_words >= 3 and han < len(words) and (language != "fr" or function_words > french_words):
             problems.append((number, line[:240]))
     return problems
 
@@ -530,7 +541,7 @@ def normalize_numbers(value: str) -> Counter[str]:
     return Counter(tokens)
 
 
-def validate_pair(source: Path, target: Path, errors: list[str]) -> None:
+def validate_pair(source: Path, target: Path, errors: list[str], language: str = "zh") -> None:
     label = str(source.relative_to(PROJECT))
     try:
         english = source.read_text(encoding="utf-8")
@@ -547,7 +558,10 @@ def validate_pair(source: Path, target: Path, errors: list[str]) -> None:
         if front_value(en_front, key) != front_value(zh_front, key):
             errors.append(f"{label}: front matter {key} changed")
 
-    if en_blocks != zh_blocks:
+    if source.parent.name == "haproxy":
+        validate_fences(source, en_blocks, zh_blocks, errors, language=language)
+        validate_literal_blocks(source, chinese, errors, language=language)
+    elif en_blocks != zh_blocks:
         errors.append(f"{label}: fenced code or literal output changed")
     if html_comments(en_body) != html_comments(zh_body):
         errors.append(f"{label}: HTML comments changed")
@@ -576,18 +590,19 @@ def validate_pair(source: Path, target: Path, errors: list[str]) -> None:
         for literal in INLINE_CODE_RE.findall(en_prose)
         if re.search(r"[A-Za-z0-9_/.-]", literal.strip("`"))
     ]
-    missing_inline = Counter(source_inline) - Counter(INLINE_CODE_RE.findall(zh_prose))
+    expected_inline = translated_inline_labels(source, Counter(source_inline), language)
+    missing_inline = expected_inline - Counter(INLINE_CODE_RE.findall(zh_prose))
     if missing_inline:
         errors.append(f"{label}: inline code literals missing: {list(missing_inline.elements())[:12]}")
 
     component = source.relative_to(CONTENT).parts[0]
-    if link_targets(en_body, component) != link_targets(zh_body, component):
+    if link_targets(en_body, component) != link_targets(zh_body, component, language=language):
         errors.append(f"{label}: link or asset targets changed")
     localized_assets = [
         target
-        for target in link_targets(zh_body, component, normalize=False)
+        for target in link_targets(zh_body, component, normalize=False, language=language)
         if re.match(
-            rf"^/zh/docs/{re.escape(component)}/.*\.(?:png|gif|svg|json|txt)(?:[?#].*)?$",
+            rf"^/{language}/docs/{re.escape(component)}/.*\.(?:png|gif|svg|json|txt)(?:[?#].*)?$",
             target,
             flags=re.IGNORECASE,
         )
@@ -614,7 +629,8 @@ def validate_pair(source: Path, target: Path, errors: list[str]) -> None:
         if expected_ids != actual_ids:
             errors.append(f"{label}: translated heading anchors do not preserve English IDs")
 
-    residual = residual_english(zh_body, include_indented=component == "etcd")
+    lint_body = prose_for_lint(source, zh_body, language) if component == "haproxy" else zh_body
+    residual = residual_english(lint_body, include_indented=True, language=language)
     for line_number, excerpt in residual[:8]:
         errors.append(f"{label}:{line_number}: probable untranslated prose: {excerpt}")
     if len(residual) > 8:
@@ -631,16 +647,17 @@ def validate_pair(source: Path, target: Path, errors: list[str]) -> None:
             "身份验证", "您",
         ),
     }
-    for phrase in forbidden[component]:
+    for phrase in forbidden[component] if language == "zh" else ():
         if phrase in chinese:
             errors.append(f"{label}: forbidden inconsistent term {phrase!r}")
-    if component == "etcd" and re.search(r"学习者(?!成员)", chinese):
+    if component == "etcd" and language == "zh" and re.search(r"学习者(?!成员)", chinese):
         errors.append(f"{label}: learner must be translated as '学习者成员'")
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("components", nargs="*", choices=COMPONENTS, default=list(COMPONENTS))
+    parser.add_argument("--language", choices=("zh", "fr"), default="zh")
     return parser.parse_args()
 
 
@@ -654,12 +671,12 @@ def main() -> int:
             for path in (CONTENT / component).rglob("*.md")
             if not path.name.endswith((".zh.md", ".fr.md", ".ja.md", ".de.md", ".ru.md"))
         ):
-            target = source.with_name(source.stem + ".zh.md")
+            target = source.with_name(source.stem + f".{args.language}.md")
             if not target.is_file():
                 errors.append(f"missing translation: {target.relative_to(PROJECT)}")
                 continue
             pair_count += 1
-            validate_pair(source, target, errors)
+            validate_pair(source, target, errors, language=args.language)
 
     if errors:
         print("Component translation validation failed:", file=sys.stderr)
@@ -668,7 +685,7 @@ def main() -> int:
         if len(errors) > 300:
             print(f"- ... {len(errors) - 300} more", file=sys.stderr)
         return 1
-    print(f"Validated {pair_count} HAProxy/etcd translation pairs.")
+    print(f"Validated {pair_count} {args.language} translation pairs ({', '.join(args.components)}).")
     return 0
 
 

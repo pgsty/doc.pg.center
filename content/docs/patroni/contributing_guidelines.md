@@ -34,7 +34,7 @@ Before reporting a bug please make sure to **reproduce it with the latest Patron
 Requirements for running behave tests:
 
 1.  PostgreSQL packages including [contrib](https://www.postgresql.org/docs/current/contrib.html) modules need to be installed.
-2.  PostgreSQL binaries must be available in your `PATH`. You may need to add them to the path with something like `PATH=/usr/lib/postgresql/11/bin:\$PATH python -m behave`.
+2.  PostgreSQL binaries must be available in your `PATH`. You may need to add them to the path with something like `PATH=/usr/lib/postgresql/11/bin:$PATH python -m behave`.
 3.  If you'd like to test with external DCSs (e.g., Etcd, Consul, and Zookeeper) you'll need the packages installed and respective services running and accepting unencrypted/unprotected connections on localhost and default port. In the case of Etcd or Consul, the behave test suite could start them up if binaries are available in the `PATH`.
 
 Install dependencies:
@@ -75,15 +75,15 @@ DCS=raft python -m behave
 To run tox tests you only need to install one dependency (other than Python)
 
 ``` bash
-pip install tox>=4
+pip install "tox>=4"
 ```
 
-If you wish to run `behave` tests then you also need docker installed.
+If you wish to run the Docker-based `behave` tests then you also need Docker installed.
 
 Tox configuration in `tox.ini` has "environments" to run the following tasks:
 
 - lint: Python code lint with `flake8`
-- test: unit tests for all available python interpreters with `pytest`, generates XML reports or HTML reports if a TTY is detected
+- test: unit tests for all available python interpreters with `pytest`, generates HTML reports if a TTY is detected, otherwise XML reports
 - dep: detect package dependency conflicts using `pipdeptree`
 - type: static type checking with `pyright`
 - black: code formatting with `black`
@@ -101,13 +101,13 @@ To run the default env list; dep, lint, test, and docs, just run:
 tox
 ```
 
-The `test` envs can be run with the label \`test\`:
+The `test` envs can be run with the label `test`:
 
 ``` bash
 tox -m test
 ```
 
-The `behave` docker tests can be run with the label \`behave\`:
+The `behave` docker tests can be run with the label `behave`:
 
 ``` bash
 tox -m behave
@@ -141,6 +141,9 @@ py310-type-win
 py310-behave-etcd-lin
 py310-behave-etcd-win
 py310-behave-etcd-mac
+py310-behave-etcd3-lin
+py310-behave-etcd3-win
+py310-behave-etcd3-mac
 ```
 
 You can list all configured combinations of environments with tox (\>=v4) like so
@@ -157,7 +160,7 @@ OPEN_CMD=: tox -m docs
 
 ### Behave tests
 
-Behave tests with `-m behave` will build docker images based on PG_MAJOR version 11 through 16 and then run all behave tests. This can take quite a long time to run so you might want to limit the scope to a select version of Postgres or to a specific feature set or steps.
+Behave tests with `-m behave` will build docker images based on PG_MAJOR version 12 through 18 and then run all behave tests. This can take quite a long time to run so you might want to limit the scope to a select version of Postgres or to a specific feature set or steps.
 
 To specify the version of postgres include the full name of the dependent image build env that you want and then the behave env name. For instance if you want Postgres 14 use:
 

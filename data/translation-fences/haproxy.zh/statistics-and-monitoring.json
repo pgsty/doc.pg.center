@@ -1,0 +1,716 @@
+{
+  "source": "content/docs/haproxy/statistics-and-monitoring.md",
+  "language": "zh",
+  "fences": [
+    {
+      "index": 1,
+      "source_sha256": "a2be5d3aa26c5f678e0c837b0daab7c893d6bee3be2b2e7350cb68c98b29e2ab",
+      "target_sha256": "e8d14ee5153c666402e20deec93ad817e3c92498c5fe162a125ca23b702b053c",
+      "classification": "argument-description",
+      "protected_literals": [
+        "       INI     ->",
+        "       L4CON   ->",
+        "       L4OK    ->",
+        "       L4TOUT  ->",
+        "       L6OK    ->",
+        "       L6RSP   ->",
+        "       L6TOUT  ->",
+        "       L7OK    ->",
+        "       L7OKC   ->",
+        "       L7RSP   ->",
+        "       L7STS   ->",
+        "       L7TOUT  ->",
+        "       SOCKERR ->",
+        "       UNK     ->",
+        " 0. pxname [LFBS]:",
+        " 1. svname [LFBS]:",
+        " 2. qcur [..BS]:",
+        " 3. qmax [..BS]:",
+        " 4. scur [LFBS]:",
+        " 5. smax [LFBS]:",
+        " 6. slim [LFBS]:",
+        " 7. stot [LFBS]:",
+        " 8. bin [LFBS]:",
+        " 9. bout [LFBS]:",
+        "\"* \"",
+        "\"* L7OK\"",
+        "\"Connection refused\"",
+        "\"No route to host\"",
+        "\"down\"",
+        "\"fail\"",
+        "\"fall\"",
+        "\"option checkcache\"",
+        "\"rise\"",
+        "\"stop\"",
+        "\"tcp-request connection\"",
+        "\"tcp-request session\"",
+        "\"unix\"",
+        "\"up\"",
+        "(0=frontend, 1=backend, 2=server, 3=socket/listener)",
+        "(monitor, stats)",
+        "(tcp, http, health, unknown)",
+        "10. dreq [LFB.]:",
+        "100. agg_server_status [..B.]:",
+        "101. agg_server_status_check [..B.]:",
+        "102. agg_check_status [..B.]:",
+        "103. srid [...S]:",
+        "104. sess_other [.F..]:",
+        "105. h1_sess [.F..]:",
+        "106. h2_sess [.F..]:",
+        "107. h3_sess [.F..]:",
+        "108. req_other [.F..]:",
+        "109. h1req [.F..]:",
+        "11. dresp [LFBS]:",
+        "110. h2req [.F..]:",
+        "111. h3req [.F..]:",
+        "112. proto [L...]:",
+        "113. priv_idle_cur [...S]:",
+        "114. reqbin [LFBS]:",
+        "115. reqbout [LFBS]:",
+        "116. resbin [LFBS]:",
+        "117. resbout [LFBS]:",
+        "12. ereq [LF..]:",
+        "13. econ [..BS]:",
+        "14. eresp [..BS]:",
+        "15. wretr [..BS]:",
+        "16. wredis [..BS]:",
+        "17. status [LFBS]:",
+        "18. weight [..BS]:",
+        "19. act [..BS]:",
+        "20. bck [..BS]:",
+        "21. chkfail [...S]:",
+        "22. chkdown [..BS]:",
+        "23. lastchg [..BS]:",
+        "24. downtime [..BS]:",
+        "25. qlimit [...S]:",
+        "26. pid [LFBS]:",
+        "27. iid [LFBS]:",
+        "28. sid [L..S]:",
+        "29. throttle [...S]:",
+        "30. lbtot [..BS]:",
+        "31. tracked [...S]:",
+        "32. type [LFBS]:",
+        "33. rate [.FBS]:",
+        "34. rate_lim [.F..]:",
+        "35. rate_max [.FBS]:",
+        "36. check_status [...S]:",
+        "37. check_code [...S]:",
+        "38. check_duration [...S]:",
+        "39. hrsp_1xx [.FBS]:",
+        "40. hrsp_2xx [.FBS]:",
+        "41. hrsp_3xx [.FBS]:",
+        "42. hrsp_4xx [.FBS]:",
+        "43. hrsp_5xx [.FBS]:",
+        "44. hrsp_other [.FBS]:",
+        "45. hanafail [...S]:",
+        "46. req_rate [.F..]:",
+        "47. req_rate_max [.F..]:",
+        "48. req_tot [.FB.]:",
+        "49. cli_abrt [..BS]:",
+        "50. srv_abrt [..BS]:",
+        "51. comp_in [.FB.]:",
+        "52. comp_out [.FB.]:",
+        "53. comp_byp [.FB.]:",
+        "54. comp_rsp [.FB.]:",
+        "55. lastsess [..BS]:",
+        "56. last_chk [...S]:",
+        "57. last_agt [...S]:",
+        "58. qtime [..BS]:",
+        "59. ctime [..BS]:",
+        "60. rtime [..BS]:",
+        "61. ttime [..BS]:",
+        "62. agent_status [...S]:",
+        "63. agent_code [...S]:",
+        "64. agent_duration [...S]:",
+        "65. check_desc [...S]:",
+        "66. agent_desc [...S]:",
+        "67. check_rise [...S]:",
+        "68. check_fall [...S]:",
+        "69. check_health [...S]:",
+        "70. agent_rise [...S]:",
+        "71. agent_fall [...S]:",
+        "72. agent_health [...S]:",
+        "73. addr [L..S]:",
+        "74: cookie [..BS]:",
+        "75: mode [LFBS]:",
+        "76: algo [..B.]:",
+        "77: conn_rate [.F..]:",
+        "78: conn_rate_max [.F..]:",
+        "79: conn_tot [.F..]:",
+        "80: intercepted [.FB.]:",
+        "81: dcon [LF..]:",
+        "82: dses [LF..]:",
+        "83: wrew [LFBS]:",
+        "84: connect [..BS]:",
+        "85: reuse [..BS]:",
+        "86: cache_lookups [.FB.]:",
+        "87: cache_hits [.FB.]:",
+        "88: srv_icur [...S]:",
+        "89: src_ilim [...S]:",
+        "90. qtime_max [..BS]:",
+        "91. ctime_max [..BS]:",
+        "92. rtime_max [..BS]:",
+        "93. ttime_max [..BS]:",
+        "94. eint [LFBS]:",
+        "95. idle_conn_cur [...S]:",
+        "96. safe_conn_cur [...S]:",
+        "97. used_conn_cur [...S]:",
+        "98. need_conn_est [...S]:",
+        "99. uweight [..BS]:",
+        "UP->DOWN",
+        "UP/DOWN/NOLB/MAINT/MAINT(via)/MAINT(resolution)",
+        "UP<->DOWN",
+        "address:port",
+        "rise+fall-1"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 1,
+          "source_sha256": "a2be5d3aa26c5f678e0c837b0daab7c893d6bee3be2b2e7350cb68c98b29e2ab",
+          "target_sha256": "e8d14ee5153c666402e20deec93ad817e3c92498c5fe162a125ca23b702b053c"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 2,
+      "source_sha256": "e47e28dfaaf284ea89a5a89a27c82403a3eede6cf7a86a45702e5d07cefe63d3",
+      "target_sha256": "f7dfe592ddc9adf15819b29fc3cfb0275998bf86afda71c0e909ab776e0ae1b1",
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"DOWN\"",
+        "\"UP\"",
+        "C   ",
+        "K   ",
+        "M   ",
+        "P   ",
+        "S   "
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 2,
+          "source_sha256": "e47e28dfaaf284ea89a5a89a27c82403a3eede6cf7a86a45702e5d07cefe63d3",
+          "target_sha256": "f7dfe592ddc9adf15819b29fc3cfb0275998bf86afda71c0e909ab776e0ae1b1"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 3,
+      "source_sha256": "2a2d31f073443878a048ebaaf4984e6dd8e908b0770261b8ad0f7358a6dd86f8",
+      "target_sha256": "fc2f683f266b4f83dca0584884957373e74fd187745d35240e0af6bb32513238",
+      "classification": "argument-description",
+      "protected_literals": [
+        "A   ",
+        "C   ",
+        "D   ",
+        "G   ",
+        "L   ",
+        "M   ",
+        "N   ",
+        "O   ",
+        "R   ",
+        "T   ",
+        "a   ",
+        "m   "
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 3,
+          "source_sha256": "2a2d31f073443878a048ebaaf4984e6dd8e908b0770261b8ad0f7358a6dd86f8",
+          "target_sha256": "fc2f683f266b4f83dca0584884957373e74fd187745d35240e0af6bb32513238"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 4,
+      "source_sha256": "a2628a9095d7bfb689e1b4eb01350bf0ed0f5f05c54dbd17fa09f77172ede656",
+      "target_sha256": "46e7f317a42d6bb99178030e92cf8f554b810a2c14e7a10b3db7a3f70d9dc5dc",
+      "classification": "argument-description",
+      "protected_literals": [
+        "C   ",
+        "P   ",
+        "S   ",
+        "s   "
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 4,
+          "source_sha256": "a2628a9095d7bfb689e1b4eb01350bf0ed0f5f05c54dbd17fa09f77172ede656",
+          "target_sha256": "46e7f317a42d6bb99178030e92cf8f554b810a2c14e7a10b3db7a3f70d9dc5dc"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 5,
+      "source_sha256": "ce12df4cba389f45c6fcdc96aad2c715c1f00faee1f57f0cd6c22161be02bef6",
+      "target_sha256": "1abe0e029f32c0b4567a18be82c00e092554defe5b0e356a093062705c363d28",
+      "classification": "argument-description",
+      "protected_literals": [
+        "P   ",
+        "V   "
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 5,
+          "source_sha256": "ce12df4cba389f45c6fcdc96aad2c715c1f00faee1f57f0cd6c22161be02bef6",
+          "target_sha256": "1abe0e029f32c0b4567a18be82c00e092554defe5b0e356a093062705c363d28"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 12,
+      "source_sha256": "1162b56259405b555a4ae7e15747fd9de63b83b5fed67c2191b9d91c3ebd1916",
+      "target_sha256": "bf7861b738e9d73e51b6f8ac541251aa05bc74d0e3e5fa83418c383fecf208b0",
+      "classification": "mixed-explanation",
+      "protected_literals": [
+        "[0:00:00:58] master> @!11955     <--",
+        "[0:00:01:03] 11955> @!11942      <--",
+        "[0:00:02:17] 11942> @            <--"
+      ],
+      "protected_lines": [
+        "master> prompt timed",
+        "[0:00:00:50] master> show proc",
+        "(...)",
+        "[0:00:01:10] master>"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 12,
+          "source_sha256": "1162b56259405b555a4ae7e15747fd9de63b83b5fed67c2191b9d91c3ebd1916",
+          "target_sha256": "bf7861b738e9d73e51b6f8ac541251aa05bc74d0e3e5fa83418c383fecf208b0"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 77,
+      "source_sha256": "66ad6884990e11d71af3cc28c5ef703015cdb426b1ca73946ac40fe2aa812bee",
+      "target_sha256": "e62ebe5da0367b73b9686c5ae97e4469a4b93aaa14f406b7898ea489a82b4286",
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"beg\"",
+        "\"bin\"",
+        "\"bool\"",
+        "\"dir\"",
+        "\"dom\"",
+        "\"end\"",
+        "\"found\"",
+        "\"int\"",
+        "\"ip\"",
+        "\"len\"",
+        "\"match\"",
+        "\"no-match\"",
+        "\"reg\"",
+        "\"str\"",
+        "\"sub\""
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 77,
+          "source_sha256": "66ad6884990e11d71af3cc28c5ef703015cdb426b1ca73946ac40fe2aa812bee",
+          "target_sha256": "e62ebe5da0367b73b9686c5ae97e4469a4b93aaa14f406b7898ea489a82b4286"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 113,
+      "classification": "explanation-label",
+      "source_sha256": "bf658f86ae773bc6bda8b0e123ba559c2c66a68688671901b7922a6d5faa28a6",
+      "target_sha256": "326a8294aa8ab0d387be7997a1449dacfe74ca3b7cb00aaa963467c7f16ebc24",
+      "protected_lines": [],
+      "protected_literals": [
+        "set server <backend>/<server> ssl [ on | off ]"
+      ],
+      "review": "Source-target semantic review of translatable narrative only; full code/output protected verbatim.",
+      "revalidation_history": [
+        {
+          "index": 113,
+          "source_sha256": "bf658f86ae773bc6bda8b0e123ba559c2c66a68688671901b7922a6d5faa28a6",
+          "target_sha256": "326a8294aa8ab0d387be7997a1449dacfe74ca3b7cb00aaa963467c7f16ebc24"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 123,
+      "source_sha256": "0045ce98b212b0f1e82d4bb63f9915cc3696e2b293cc1b589ae4ed56b07768ed",
+      "target_sha256": "b328d54a02ac9bcd745f45a526d6d80da24a9486c86856684c7ace41d83074df",
+      "classification": "mixed-explanation",
+      "protected_literals": [],
+      "protected_lines": [
+        "openssl ocsp -issuer issuer.pem -cert server.pem \\",
+        "             -host ocsp.issuer.com:80 -respout resp.der",
+        "echo \"set ssl ocsp-response $(base64 -w 10000 resp.der)\" | \\",
+        "             socat stdio /var/run/haproxy.stat",
+        "echo -e \"set ssl ocsp-response <<\\n$(base64 resp.der)\\n\" | \\",
+        "             socat stdio /var/run/haproxy.stat"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 123,
+          "source_sha256": "0045ce98b212b0f1e82d4bb63f9915cc3696e2b293cc1b589ae4ed56b07768ed",
+          "target_sha256": "b328d54a02ac9bcd745f45a526d6d80da24a9486c86856684c7ace41d83074df"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 145,
+      "classification": "mixed-explanation",
+      "source_sha256": "5383b4df56fade6274befda7fe78443d3c8bf700e600abe00882c411c53836a5",
+      "target_sha256": "f3ac35dc67b18ddc80b648ac2116a7ae5578ea9fd9b8d3be52f0a08548118f21",
+      "protected_lines": [
+        "    $ echo \"show errors -1 response\" | socat stdio /tmp/sock1",
+        ">>> [04/Mar/2009:15:46:56.081] backend http-in (#2): invalid response",
+        "      src 127.0.0.1, session #54, frontend fe-eth0 (#1), server s2 (#1)",
+        "      response length 213 bytes, error at position 23:",
+        "      00000  HTTP/1.0 200 OK\\r\\n",
+        "      00017  header/bizarre:blah\\r\\n",
+        "      00038  Location: blah\\r\\n",
+        "      00054  Long-line: this is a very long line which should b",
+        "      00104+ e broken into multiple lines on the output buffer,",
+        "      00154+  otherwise it would be too large to print in a ter",
+        "      00204+ minal\\r\\n",
+        "      00211  \\r\\n"
+      ],
+      "protected_literals": [
+        "\"http-in\"",
+        "\"session\"",
+        "\"header/bizarre\"",
+        "ID",
+        "s2",
+        "fe-eth0",
+        "HTTP"
+      ],
+      "review": "Source-target semantic review of translatable narrative only; full code/output protected verbatim.",
+      "revalidation_history": [
+        {
+          "index": 145,
+          "source_sha256": "5383b4df56fade6274befda7fe78443d3c8bf700e600abe00882c411c53836a5",
+          "target_sha256": "f3ac35dc67b18ddc80b648ac2116a7ae5578ea9fd9b8d3be52f0a08548118f21"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 161,
+      "source_sha256": "070a1cdc12e906fd91671a7b017526aa72e217c0de1b8286327046179651d9ad",
+      "target_sha256": "1002d06b99023a4e532600bd8fd8e5535f0262188d3f4da95a2522356d129f68",
+      "classification": "argument-description",
+      "protected_literals": [
+        "any_err:",
+        "cname:",
+        "cname_error:",
+        "invalid:",
+        "nx:",
+        "other:",
+        "outdated:",
+        "refused:",
+        "sent:",
+        "timeout:",
+        "too_big:",
+        "update:",
+        "valid:"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 161,
+          "source_sha256": "070a1cdc12e906fd91671a7b017526aa72e217c0de1b8286327046179651d9ad",
+          "target_sha256": "1002d06b99023a4e532600bd8fd8e5535f0262188d3f4da95a2522356d129f68"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 164,
+      "source_sha256": "10ec8f217c43e5599ec7ec5c7bc85c7c30a2c7b49dc5082cd39e1bc9f26ba5df",
+      "target_sha256": "eb050379a5d754508410d7e790ae2e2ba648aabd8120d09c26edb3c27c925de3",
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"safe\"",
+        "\"unsafe\"",
+        "'/'",
+        "-                     ",
+        "addr                  ",
+        "bkid/svid             ",
+        "bkname/svname         ",
+        "idle_cur              ",
+        "idle_lim              ",
+        "idle_per_thr[NB]      ",
+        "idle_sess             ",
+        "need_est              ",
+        "port                  ",
+        "purge_delay           ",
+        "safe_nb               ",
+        "served                ",
+        "unsafe_nb             ",
+        "used_cur              ",
+        "used_max              "
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 164,
+          "source_sha256": "10ec8f217c43e5599ec7ec5c7bc85c7c30a2c7b49dc5082cd39e1bc9f26ba5df",
+          "target_sha256": "eb050379a5d754508410d7e790ae2e2ba648aabd8120d09c26edb3c27c925de3"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 166,
+      "source_sha256": "280e1811a921d8a796d986092889ab3a148395645a13d8b23eeca93b38016314",
+      "target_sha256": "b34e87848200e56b14b2106d5525dc5dbc3d8b8aa389f028770a0e0a472e2c83",
+      "classification": "argument-description",
+      "protected_literals": [
+        "                                 0 = CHK_RES_UNKNOWN",
+        "                                 0 = SRV_ST_STOPPED",
+        "                                 0x01 = CHK_ST_INPROGRESS",
+        "                                 0x01 = SRV_ADMF_FMAINT",
+        "                                 0x02 = CHK_ST_CONFIGURED",
+        "                                 0x02 = SRV_ADMF_IMAINT",
+        "                                 0x04 = CHK_ST_ENABLED",
+        "                                 0x04 = SRV_ADMF_CMAINT",
+        "                                 0x08 = CHK_ST_PAUSED",
+        "                                 0x08 = SRV_ADMF_FDRAIN",
+        "                                 0x10 = CHK_ST_AGENT",
+        "                                 0x10 = SRV_ADMF_IDRAIN",
+        "                                 0x20 = SRV_ADMF_RMAINT",
+        "                                 0x40 = SRV_ADMF_HMAINT",
+        "                                 1 = CHK_RES_NEUTRAL",
+        "                                 1 = SRV_ST_STARTING",
+        "                                 2 = CHK_RES_FAILED",
+        "                                 2 = SRV_ST_RUNNING",
+        "                                 3 = CHK_RES_PASSED",
+        "                                 3 = SRV_ST_STOPPING",
+        "                                 4 = CHK_RES_CONDPASS",
+        "  be_id:                       ",
+        "  be_name:                     ",
+        "  bk_f_forced_id:              ",
+        "  srv_addr:                    ",
+        "  srv_admin_state:             ",
+        "  srv_agent_addr:              ",
+        "  srv_agent_port:              ",
+        "  srv_agent_state:             ",
+        "  srv_check_addr:              ",
+        "  srv_check_health:            ",
+        "  srv_check_port:              ",
+        "  srv_check_result:            ",
+        "  srv_check_state:             ",
+        "  srv_check_status:            ",
+        "  srv_f_forced_id:             ",
+        "  srv_fqdn:                    ",
+        "  srv_id:                      ",
+        "  srv_iweight:                 ",
+        "  srv_name:                    ",
+        "  srv_op_state:                ",
+        "  srv_port:                    ",
+        "  srv_time_since_last_change:  ",
+        "  srv_use_ssl:                 ",
+        "  srv_uweight:                 ",
+        "  srvrecord:                   ",
+        "\"srv_check_state\"",
+        "ENABLED/PAUSED/...",
+        "FAILED/PASSED/...",
+        "MAINT/DRAIN/...",
+        "UP/DOWN/..."
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 166,
+          "source_sha256": "280e1811a921d8a796d986092889ab3a148395645a13d8b23eeca93b38016314",
+          "target_sha256": "b34e87848200e56b14b2106d5525dc5dbc3d8b8aa389f028770a0e0a472e2c83"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 170,
+      "classification": "table-labels",
+      "source_sha256": "03d6cc6176b830b515e7858e5b078d10f2a79c3ad24349024fe568c29bc726b1",
+      "target_sha256": "b7f7d14732bb19bd7ea1b725d7f0e4a1e085e261c73fc6cb1288ebfe95fd3463",
+      "protected_lines": [],
+      "protected_literals": [
+        "1 + 2     = 3   ->",
+        "1 + 2 + 4 = 7   ->"
+      ],
+      "review": "Source-target semantic review of translatable narrative only; full code/output protected verbatim.",
+      "revalidation_history": [
+        {
+          "index": 170,
+          "source_sha256": "03d6cc6176b830b515e7858e5b078d10f2a79c3ad24349024fe568c29bc726b1",
+          "target_sha256": "b7f7d14732bb19bd7ea1b725d7f0e4a1e085e261c73fc6cb1288ebfe95fd3463"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 190,
+      "source_sha256": "547b314d6a84f7002ce54d4ffc20925d6a45a7c37e188f7f2b9a9d2546e182ee",
+      "target_sha256": "7845979fe40ff0ffb0d032a740c276d45c53ba372a6c0cb7896d7b957f939544",
+      "classification": "table-labels",
+      "protected_literals": [],
+      "protected_lines": [
+        "  +----+-------------------------------------+",
+        "  +----+-------------------------------------+",
+        "  |  0 | \"Unknown\"                           |",
+        "  |  1 | \"Update successful\"                 |",
+        "  |  2 | \"HTTP error\"                        |",
+        "  |  3 | \"Missing \\\"ocsp-response\\\" header\"  |",
+        "  |  4 | \"OCSP response check failure\"       |",
+        "  |  5 | \"Error during insertion\"            |",
+        "  +----+-------------------------------------+"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 190,
+          "source_sha256": "547b314d6a84f7002ce54d4ffc20925d6a45a7c37e188f7f2b9a9d2546e182ee",
+          "target_sha256": "7845979fe40ff0ffb0d032a740c276d45c53ba372a6c0cb7896d7b957f939544"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 201,
+      "classification": "mixed-explanation",
+      "source_sha256": "e21580692cda42d9625fd63670628f05d519dba756869fbaebd52e9405e16ba7",
+      "target_sha256": "6dfbee5e07a21fc43feff8f53d2222468e47c0cf673b777b941ea274dcb876a9",
+      "protected_lines": [
+        "$ echo \"show table http_proxy data.gpc0 gt 0\" \\",
+        "  | socat stdio /tmp/sock1 \\",
+        "  | fgrep 'key=' | cut -d' ' -f2 | cut -d= -f2 > abusers-ip.txt"
+      ],
+      "protected_literals": [
+        " | awk '/key/{ print a[split($2,a,\"=\")]; }' )"
+      ],
+      "review": "Separate source/translation comparison of the exact explanatory suffix only. All executable command lines, source comments, diagnostic bytes and output remain exact; no code-wide waiver.",
+      "revalidation_history": [
+        {
+          "index": 201,
+          "source_sha256": "e21580692cda42d9625fd63670628f05d519dba756869fbaebd52e9405e16ba7",
+          "target_sha256": "6dfbee5e07a21fc43feff8f53d2222468e47c0cf673b777b941ea274dcb876a9"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 217,
+      "source_sha256": "cf4189e0f64877b438038b1f52d5704f6405a99c09d12d4b0de8d0f059691996",
+      "target_sha256": "58a79903412ff2484891bc90e213c315276041381363fccb2a833b255bf603d3",
+      "classification": "argument-description",
+      "protected_literals": [
+        "\"breaking out of this loop\"",
+        "\"proto\"",
+        "\"state\"",
+        "\"user\"",
+        "data       ",
+        "developer  ",
+        "proto      ",
+        "state      ",
+        "user       "
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 217,
+          "source_sha256": "cf4189e0f64877b438038b1f52d5704f6405a99c09d12d4b0de8d0f059691996",
+          "target_sha256": "58a79903412ff2484891bc90e213c315276041381363fccb2a833b255bf603d3"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 218,
+      "source_sha256": "87e5dfeaca478df2722c94178e82876155d242a77fb191eac5603b6ffee6e01f",
+      "target_sha256": "4e03764140e86e9b55f1ed4e93a81c8fdfd7332ec22c32f7ddc941da6884e1f6",
+      "classification": "argument-description",
+      "protected_literals": [
+        "backend      ",
+        "connection   ",
+        "frontend     ",
+        "listener     ",
+        "nothing      ",
+        "server       ",
+        "session      ",
+        "thread       "
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 218,
+          "source_sha256": "87e5dfeaca478df2722c94178e82876155d242a77fb191eac5603b6ffee6e01f",
+          "target_sha256": "4e03764140e86e9b55f1ed4e93a81c8fdfd7332ec22c32f7ddc941da6884e1f6"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    }
+  ],
+  "literal_blocks": [
+    {
+      "lines": [
+        2209,
+        2213
+      ],
+      "classification": "program-output",
+      "source_sha256": "b779df2968020158e76178ab78bb78f21eec273a9813d523172607584d3f5828",
+      "revalidation_history": [
+        {
+          "lines": [
+            2209,
+            2213
+          ],
+          "start_column": 1,
+          "source_sha256": "b779df2968020158e76178ab78bb78f21eec273a9813d523172607584d3f5828"
+        }
+      ],
+      "revalidation": "Exact reviewed snippet and source/target occurrence counts retained; line/column positions changed.",
+      "start_column": 1
+    }
+  ],
+  "literal_snippets": [],
+  "source_sha256": "268b4823a7ccaf34f788d977d5b509346eb657a3c845e888c775907464972c26",
+  "target_sha256": "c4690f4e6f6d5e6b2340e322e97a6ce2a8ff1e0b1449c62d57b4550f4b292ce5",
+  "review_scope": "Complete identified explanatory-fence inventory reviewed separately from structural/numeric technical screening and selective manual prose review. No claim of full independent sentence-by-sentence review of all prose.",
+  "literal_formatting_revalidation": {
+    "method": "Exact reviewed predecessor hashes and current source/target literal equality; remove obsolete protection only with proven default-protected exact fenced replacement.",
+    "events": [
+      {
+        "row": 1,
+        "action": "exact literal range rebased",
+        "source_sha256": "b779df2968020158e76178ab78bb78f21eec273a9813d523172607584d3f5828",
+        "lines": [
+          2209,
+          2213
+        ],
+        "start_column": 1
+      }
+    ]
+  }
+}

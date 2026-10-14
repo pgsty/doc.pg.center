@@ -11,55 +11,43 @@ translation_notice: false
 outputs: [HTML, markdown]
 ---
 
-pig.centerは、6つのアップストリームプロジェクトが作成したドキュメントを再公開しています。各ドキュメントページの末尾には、原著作物、著作権者、ライセンス、およびこのページの該当セクションへのリンクを記載した1行の帰属表示があります。
+doc.pg.centerは、6つのアップストリームプロジェクトが作成したドキュメントを再公開しています。各ドキュメントページの末尾には、原著作物、著作権者、ライセンス、およびこのページの該当セクションへのリンクを記載した1行の帰属表示があります。
 
 このページはその記録です。何を、いつ、どの固定リビジョンから、どのライセンスのもとでインポートしたか、また完全なアップストリームの通知をどこに保存しているかを示します。
 
 > [!NOTE]
-> 英語、簡体字中国語、フランス語は、6つのドキュメント集をすべて収録しています。日本語、ドイツ語、ロシア語では完成した翻訳を公開しています。未翻訳のページへのリンクは、対応する英語ページに切り替わります。
-
-> [!NOTE]
-> pig.centerは独立したコミュニティドキュメントプロジェクトです。以下の各プロジェクトやPostgreSQL Global Development Groupとの提携や承認を示すものではなく、それらの公式出版物でもありません。
+> doc.pg.centerは独立したコミュニティドキュメントプロジェクトです。以下の各プロジェクトやPostgreSQL Global Development Groupとの提携や承認を示すものではなく、それらの公式出版物でもありません。
 
 ## 概要 {#summary}
 
 | コンポーネント | アップストリームの著作物 | 固定バージョン | ライセンス | 保存されている通知 |
 |---|---|---|---|---|
 | [Patroni](/ja/docs/patroni/) | [Patroniドキュメント](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [アップストリームの`LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/ja/docs/pgbackrest/) | [pgBackRestドキュメント](https://pgbackrest.org/) | v2.59.3 (全6言語) | [MIT](https://opensource.org/license/mit) | [アップストリームの`LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/ja/docs/pgbouncer/) | [PgBouncerドキュメント](https://www.pgbouncer.org/) | v1.26.0（全6言語） | [ISC](https://opensource.org/license/isc-license-txt) | [アップストリームの`COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
+| [pgBackRest](/ja/docs/pgbackrest/) | [pgBackRestドキュメント](https://pgbackrest.org/) | v2.59.3 | [MIT](https://opensource.org/license/mit) | [アップストリームの`LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [PgBouncer](/ja/docs/pgbouncer/) | [PgBouncerドキュメント](https://www.pgbouncer.org/) | v1.26.0 | [ISC](https://opensource.org/license/isc-license-txt) | [アップストリームの`COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/ja/docs/pgbadger/) | [pgBadgerドキュメント](https://pgbadger.darold.net/) | v13.2、コミット`a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/ja/docs/haproxy/) | [HAProxy 3.4マニュアル](https://docs.haproxy.org/3.4/) | v3.4.4、コミット`7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [HAProxy](/ja/docs/haproxy/) | [HAProxy 3.4マニュアル](https://docs.haproxy.org/3.4/) | ドキュメントスナップショット3.4.6-66、コミット`16acce1`、安定版3.4.6 | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/ja/docs/etcd/) | [etcd v3.7ドキュメント](https://etcd.io/docs/v3.7/) | v3.7、コミット`d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [アップストリームの`LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 各ドキュメント集は単なるミラーではなく、**編集を加えたもの**です。見出し、アンカー、相互リンク、コードシグネチャ、ページの分類、ナビゲーションをこの版に合わせて再構成し、アップストリームの本文自体は保持しています。ページ末尾の帰属表示にその旨を記載し、閲覧中のページのサイト内変更履歴へリンクしています。
 
 ## Patroni {#patroni}
 
-2026-08-15に、**v4.1.5**の[Patroniドキュメント](https://patroni.readthedocs.io/en/latest/)からインポートし、簡体字中国語訳も同時に作成しました。
+2026-08-15に、**v4.1.5**の[Patroniドキュメント](https://patroni.readthedocs.io/en/latest/)からインポートしました。
 
 Patroniの著作権表示はcopyright (c) 2025 Compose, Zalando SE, Patroni Contributorsです。[MIT License](https://opensource.org/license/mit)のもとで配布されています。完全なライセンス本文は[アップストリーム](https://github.com/patroni/patroni/blob/master/LICENSE)に保存されています。
 
 ## pgBackRest {#pgbackrest}
 
-2026-08-15に[pgBackRestドキュメントサイト](https://pgbackrest.org/)からインポートしました。
-英語版と簡体字中国語版は2026-10-04に**v2.59.2**へ更新しました。
-2026-10-13時点で、全6言語版を**v2.59.3**に統一しました。公開前の検証では、該当する上流バージョンの実装とXMLに基づき、古いPITRバックアップ選択の説明と途中で切れていた過去の警告を修正しました。詳細は `data/translation-audits/pgbackrest.json` を参照してください。
+2026-08-15に[pgBackRestドキュメントサイト](https://pgbackrest.org/)からインポートし、
+2026-10-13に**v2.59.3**へ更新しました。
 
 pgBackRestの著作権表示はcopyright (c) 2015-2026 The PostgreSQL Global Development Group and David Steeleです。[MIT License](https://opensource.org/license/mit)のもとで配布されています。完全なライセンス本文は[アップストリーム](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE)に保存されています。
 
 ## PgBouncer {#pgbouncer}
 
-2026-08-15に、**v1.25.2**の[PgBouncerドキュメントサイト](https://www.pgbouncer.org/)からインポートし、簡体字中国語訳も同時に作成しました。
-
-英語版と簡体字中国語版は2026-10-04に
-[**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0)へ更新しました。
-それぞれ`pigsty.io`と`pigsty.cc`の校正済みマニュアルを使用しています。
-
-2026-10-13に、全6言語版を**v1.26.0**の現行英語マニュアルに同期しました。
-リファレンスの説明をこのリリースの実装と照合し、アップストリーム文書の事実誤認、
-スペルミス、文法上の誤りをこのサイトで修正しました。元の診断メッセージは一字一句
-そのまま保持し、各翻訳についてページ単位のレビューを実施しました。
+2026-08-15に、**v1.25.2**の[PgBouncerドキュメントサイト](https://www.pgbouncer.org/)からインポートし、
+2026-10-13に[**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0)へ更新しました。
 
 PgBouncerの著作権表示はcopyright (c) 2007-2009 Marko Kreen, Skype Technologies OÜです。[ISC License](https://opensource.org/license/isc-license-txt)のもとで配布されています。完全なライセンス本文は[アップストリーム](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT)に保存されています。
 
@@ -75,7 +63,7 @@ pgBadgerの著作権表示はcopyright (c) 2012-2026 Gilles Daroldです。[Post
 
 ## HAProxy {#haproxy}
 
-2026-08-16に公式HAProxy 3.4保守リポジトリからインポートし、2026-08-30にタグ`v3.4.4`、コミット[`7f03ae65c286`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=7f03ae65c28605152c7a1a9ba7d9d0bcfb50f8b0)へ更新しました。英語本文は、合計40,128行の`doc/intro.txt`、`doc/configuration.txt`、`doc/management.txt`の全マニュアルを基に、34の閲覧用ページに再構成しています。
+2026-08-16にインポートし、2026-10-13に公式HAProxy 3.4メンテナンスリポジトリのドキュメントスナップショット`3.4.6-66`、コミット[`16acce1dac1d`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=16acce1dac1dcf1ad5d654204af3a5d45d0e3de8)へ更新しました。最新の安定版リリースは3.4.6、タグ`v3.4.6`です。このスナップショットには、リリース後のマニュアルの変更も含まれます。英語本文は、完全な`doc/intro.txt`、`doc/configuration.txt`、`doc/management.txt`から作成しています。それぞれ1,695行、33,216行、5,305行、合計40,216行を、本文34ページに再構成しています。
 
 HAProxyの著作権表示はcopyright 2000-2026 Willy Tarreauです。[GNU General Public License version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)のもとで配布されています。HAProxy自身によるライセンスの説明、OpenSSL例外、および完全なGPLv2本文を、[`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE)と[`/third_party/haproxy/GPL-2.0`](/third_party/haproxy/GPL-2.0)で公開しています。
 
@@ -90,10 +78,10 @@ etcdドキュメントの著作権表示はcopyright 2013-present etcd Authors�
 
 ## このサイト {#site}
 
-pig.centerのために新たに作成した文章（案内ページ、簡体字中国語・フランス語の完全版、公開済みの日本語・ドイツ語・ロシア語訳、編集上の注記、ランディングページ）は、上記のアップストリームライセンスがそのページに適用される場合を除き、[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)のもとで公開しています。
+doc.pg.centerのために新たに作成した文章は、上記のアップストリームライセンスがそのページに適用される場合を除き、[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)のもとで公開しています。
 
 ホームページに表示されるPostgreSQLの象（Slonik）はPostgreSQLプロジェクト自身のマークです。[postgresql.orgのウェブサイトリポジトリ](https://git.postgresql.org/gitweb/?p=pgweb.git)から取得し、PostgreSQLを示すために[PostgreSQLの商標およびロゴポリシー](https://www.postgresql.org/about/policies/trademarks/)に従って改変せずに再公開しています。このマークはPostgreSQL Community Association of Canadaのものであり、ここでの使用は承認を意味しません。
 
 このサイトは、[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)のもとで公開されているHugoテーマ、[OINK](https://oink.pgsty.com/) v1.2.0で構築されています。テーマ自身と同梱依存関係の通知は、モジュールのソースに含まれています。
 
-このページの帰属表示に関する修正は、[サイトリポジトリ](https://github.com/pgsty/pig.center/issues)へお寄せください。
+このページの帰属表示に関する修正は、[サイトリポジトリ](https://github.com/pgsty/doc.pg.center/issues)へお寄せください。

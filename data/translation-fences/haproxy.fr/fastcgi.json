@@ -1,0 +1,58 @@
+{
+  "source": "content/docs/haproxy/fastcgi.md",
+  "language": "fr",
+  "fences": [
+    {
+      "index": 16,
+      "classification": "argument-description",
+      "protected_literals": [
+        "<name>"
+      ],
+      "protected_lines": [],
+      "source_sha256": "95eacdc82fb297c1ce34bb9ca8383e72ced56f680eac57cc72dc20d396f4f10c",
+      "target_sha256": "00d7a4d06918af0f12cfecc68dd955b3d3af137897c029dc883bc858e7ace7d1",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    },
+    {
+      "index": 18,
+      "classification": "table-labels",
+      "protected_literals": [
+        "\"HAProxy\"",
+        "\"Host\"",
+        "\"on\"",
+        "\"path-info\"",
+        "AUTH_TYPE",
+        "BASIC",
+        "CGI",
+        "CGI/1.1",
+        "CONTENT_LENGTH",
+        "CONTENT_TYPE",
+        "DOCUMENT_ROOT",
+        "GATEWAY_INTERFACE",
+        "HAProxy",
+        "HTTPS",
+        "PATH_INFO",
+        "PATH_TRANSLATED",
+        "QUERY_STRING",
+        "REMOTE_ADDR",
+        "REMOTE_USER",
+        "REQUEST_METHOD",
+        "REQUEST_URI",
+        "SCRIPT_FILENAME",
+        "SCRIPT_NAME",
+        "SERVER_NAME",
+        "SERVER_PORT",
+        "SERVER_PROTOCOL",
+        "SERVER_SOFTWARE",
+        "TCP",
+        "URI"
+      ],
+      "protected_lines": [],
+      "source_sha256": "841a07f00740f9d1a107175d22eeee60ab24ef79128d5d4b50f22e968df323d4",
+      "target_sha256": "3c5e3f840dce61b7b3a69811e580e516e4fb8205182adc3473a15debff673924",
+      "review": "French bilingual semantic review: explanation translated; technical tokens, numeric literals and protected code/output retained. Final current-source rebase: protected code/output and approved errata checked."
+    }
+  ],
+  "literal_blocks": [],
+  "literal_snippets": []
+}

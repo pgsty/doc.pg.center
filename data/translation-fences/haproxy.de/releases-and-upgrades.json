@@ -1,0 +1,61 @@
+{
+  "source": "content/docs/haproxy/releases-and-upgrades.md",
+  "language": "de",
+  "fences": [],
+  "rendered_explanations": [
+    {
+      "index": 2,
+      "classification": "mixed-explanation",
+      "source_sha256": "2601b930b6d9a64e0a32da1d55811cec966fb2529bef7e613ba7487aa2a13086",
+      "target_sha256": "392d6680ccf945f481ab10f1f967d670a4b4d3d8c028582330c3487d5703b69c",
+      "protected_literals": [],
+      "protected_lines": [],
+      "protected_prefixes": [],
+      "review": "Stable version and unchanged stable-package explanation is preserved across its original pre/prose boundary; the neighboring version output remains unchanged.",
+      "reviewer": "cx4 takeover integration; separate source/rendered comparison"
+    },
+    {
+      "index": 4,
+      "classification": "mixed-explanation",
+      "source_sha256": "5102671e145eced8ac8f374e7c7c5e28177a8b38ca9ba8b62a8f0bffebbe92f6",
+      "target_sha256": "1dbeb80666b4c93de7d99976e20ce1486041e5b2bcc279b0908b9b1b057d9672",
+      "protected_literals": [],
+      "protected_lines": [],
+      "protected_prefixes": [],
+      "review": "Nightly stable snapshot retains hexadecimal version suffix and snapshot date rather than original release date, across the original pre/prose boundary.",
+      "reviewer": "cx4 takeover integration; separate source/rendered comparison"
+    },
+    {
+      "index": 6,
+      "classification": "mixed-explanation",
+      "source_sha256": "3b961f4a0b071b96c719fa8d86faf75df39763f8e61acd6296e12358e9b90884",
+      "target_sha256": "a342710694d3356512992ed32d0ce0a656531ca05b72de24f2eb8a185fe52a8c",
+      "protected_literals": [],
+      "protected_lines": [],
+      "protected_prefixes": [],
+      "review": "System-specific patch set and Enterprise suffix example are preserved across the original pre/prose boundary; no output is localized.",
+      "reviewer": "cx4 takeover integration; separate source/rendered comparison"
+    },
+    {
+      "index": 8,
+      "classification": "mixed-explanation",
+      "source_sha256": "7f48782f6b2bed0f5ecb0acdbda8fd775f99b5cb96e03a44f9ed71bcc462f725",
+      "target_sha256": "f91a6df9c6fee38984c4af0db3d09452368a6a5fa424bbae21a1d5ea4294c216",
+      "protected_literals": [
+        "\"HA\"",
+        "\"Proxy\"",
+        "\"Status\""
+      ],
+      "protected_lines": [],
+      "protected_prefixes": [],
+      "review": "Historical pre-2.4 HA-Proxy spelling and adjusted examples, relaxed script matching, newer project URL, >=2.1 Status production safety/until date and known-bug link are retained.",
+      "reviewer": "cx4 takeover integration; separate source/rendered comparison"
+    }
+  ],
+  "literal_blocks": [],
+  "source_formatting_revalidation": {
+    "method": "Exact reviewed predecessor source/target SHA mapping and byte-for-byte literal-fence witnesses; only documented source errata and markup-only restoration accepted.",
+    "fences": [],
+    "literal_blocks": []
+  }
+}

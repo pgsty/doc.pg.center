@@ -9,9 +9,6 @@ aliases: [/patroni/patronictl/]
 upstream_link: "https://patroni.readthedocs.io/en/latest/patronictl.html"
 ---
 
-<a id="patronictl_version_description"></a>
-<a id="patronictl_version_parameters"></a>
-<a id="patronictl_version_examples"></a>
 <a id="patronictl"></a>
 Patroni предоставляет интерфейс командной строки [patronictl](/ru/docs/patroni/patronictl#patronictl), предназначенный главным образом для взаимодействия с REST API Patroni и DCS. Он упрощает операции с кластером и удобен как людям, так и сценариям.
 
@@ -37,8 +34,8 @@ Patroni предоставляет интерфейс командной стр�
 - Mac OS X (POSIX): `~/.patroni`
 - Unix: `~/.config/patroni`
 - Unix (POSIX): `~/.patroni`
-- Windows (roaming): `C:\Users\<user>\AppData\Roaming\patroni`
-- Windows (not roaming): `C:\Users\<user>\AppData\Local\patroni`
+- Windows (с перемещаемым профилем): `C:\Users\<user>\AppData\Roaming\patroni`
+- Windows (без перемещаемого профиля): `C:\Users\<user>\AppData\Local\patroni`
 
 Поведение можно переопределить одним из способов:
 
@@ -134,7 +131,7 @@ demote-cluster
 
 `--restore-command`: команда восстановления записей WAL с удалённого первичного сервера.
 
-`--primary-slot-name`: имя слота репликации на удалённом узле.
+`--primary-slot-name`: имя слота репликации на удалённом узле, используемого для репликации.
 
 `--force`: флаг пропуска подтверждений при понижении кластера.
 
@@ -277,7 +274,7 @@ edit-config
 `-p` / `--pg`  
 Задать указанному динамическому параметру Postgres указанное значение.
 
-Это сокращение для `--s` / `--set`, где к `CONFIG` добавляется префикс `postgresql.parameters.`.
+Это сокращение для `-s` / `--set`, где к `CONFIG` добавляется префикс `postgresql.parameters.`.
 
 `PG_CONFIG` — имя задаваемого параметра Postgres.
 
@@ -361,7 +358,11 @@ postgresql:
 Configuration changed
 ```
 
+<a id="patronictl_failover"></a>
+
 ### patronictl failover {#patronictl-failover}
+
+<a id="patronictl_failover_synopsis"></a>
 
 #### Синтаксис {#synopsis-3}
 
@@ -372,6 +373,8 @@ failover
   --candidate CANDIDATE_NAME
   [ --force ]
 ```
+
+<a id="patronictl_failover_description"></a>
 
 #### Описание {#description-3}
 
@@ -390,7 +393,7 @@ failover
 > [!WARNING]
 > Аварийное переключение может привести к потере данных в зависимости от отставания повышаемой реплики от первичного сервера.
 
-<a id="patronictl_failover"></a>
+<a id="patronictl_failover_parameters"></a>
 
 #### Параметры {#parameters-3}
 
@@ -413,7 +416,7 @@ failover
 
 Полезно для сценариев.
 
-<a id="patronictl_failover_synopsis"></a>
+<a id="patronictl_failover_examples"></a>
 
 #### Примеры {#examples-3}
 
@@ -439,11 +442,11 @@ Current cluster topology
 +-------------+----------------+---------+---------+----+-------------+---------+------------+---------+
 ```
 
-<a id="patronictl_failover_description"></a>
+<a id="patronictl_flush"></a>
 
 ### patronictl flush {#patronictl-flush}
 
-<a id="patronictl_failover_parameters"></a>
+<a id="patronictl_flush_synopsis"></a>
 
 #### Синтаксис {#synopsis-4}
 
@@ -457,13 +460,13 @@ flush
   [ --force ]
 ```
 
-<a id="patronictl_failover_examples"></a>
+<a id="patronictl_flush_description"></a>
 
 #### Описание {#description-4}
 
 `patronictl flush` удаляет запланированные события, если они есть.
 
-<a id="patronictl_flush"></a>
+<a id="patronictl_flush_parameters"></a>
 
 #### Параметры {#parameters-4}
 
@@ -509,7 +512,7 @@ flush
 
 Полезно для сценариев.
 
-<a id="patronictl_flush_synopsis"></a>
+<a id="patronictl_flush_examples"></a>
 
 #### Примеры {#examples-4}
 
@@ -550,11 +553,11 @@ Success: flush scheduled restart for member postgresql0
 Success: flush scheduled restart for member postgresql1
 ```
 
-<a id="patronictl_flush_description"></a>
+<a id="patronictl_history"></a>
 
 ### patronictl history {#patronictl-history}
 
-<a id="patronictl_flush_parameters"></a>
+<a id="patronictl_history_synopsis"></a>
 
 #### Синтаксис {#synopsis-5}
 
@@ -565,7 +568,7 @@ history
   [ { -f | --format } { pretty | tsv | json | yaml } ]
 ```
 
-<a id="patronictl_flush_examples"></a>
+<a id="patronictl_history_description"></a>
 
 #### Описание {#description-5}
 
@@ -588,7 +591,7 @@ LSN Postgres, на котором произошло событие.
 `New Leader`  
 Участник Patroni, повышенный во время события.
 
-<a id="patronictl_history"></a>
+<a id="patronictl_history_parameters"></a>
 
 #### Параметры {#parameters-5}
 
@@ -616,12 +619,7 @@ LSN Postgres, на котором произошло событие.
 
 По умолчанию используется `pretty`.
 
-`--force`  
-Флаг пропуска подтверждений при удалении событий.
-
-Полезно для сценариев.
-
-<a id="patronictl_history_synopsis"></a>
+<a id="patronictl_history_examples"></a>
 
 #### Примеры {#examples-5}
 
@@ -665,11 +663,11 @@ $ patronictl -c postgres0.yml history batman -f yaml
   Timestamp: '2023-09-12T11:53:09.620136+00:00'
 ```
 
-<a id="patronictl_history_description"></a>
+<a id="patronictl_list"></a>
 
 ### patronictl list {#patronictl-list}
 
-<a id="patronictl_history_parameters"></a>
+<a id="patronictl_list_synopsis"></a>
 
 #### Синтаксис {#synopsis-6}
 
@@ -683,7 +681,7 @@ list
   [ { -W | { -w | --watch } TIME } ]
 ```
 
-<a id="patronictl_history_examples"></a>
+<a id="patronictl_list_description"></a>
 
 #### Описание {#description-6}
 
@@ -716,7 +714,7 @@ list
 Примеры возможных состояний:
 
 - `running`: Postgres запущен и работает;
-- `streaming`: участник является репликой, и Postgres передаёт WAL потоком с первичного узла;
+- `streaming`: участник является репликой, и Postgres получает WAL по потоковой репликации от первичного узла;
 - `in archive recovery`: участник является репликой, и Postgres получает WAL из архива;
 - `stopped`: Postgres остановлен;
 - `crashed`: Postgres аварийно завершился.
@@ -760,7 +758,7 @@ list
 > [!NOTE]
 > Показывается как атрибут участника.
 >
-> Shown if:
+> Показывается, если:
 >
 > - При выводе в формате `pretty` или `tsv` с включённым расширенным выводом; либо
 > - Если узлу требуется перезапуск.
@@ -771,7 +769,7 @@ list
 > [!NOTE]
 > Показывается как атрибут участника.
 >
-> Shown if:
+> Показывается, если:
 >
 > - При выводе в формате `pretty` или `tsv` с включённым расширенным выводом; либо
 > - Если у узла есть запланированный перезапуск.
@@ -782,7 +780,7 @@ list
 > [!NOTE]
 > Показывается как атрибут участника.
 >
-> Shown if:
+> Показывается, если:
 >
 > - При выводе в формате `pretty` или `tsv` с включённым расширенным выводом; либо
 > - Если у узла есть пользовательские теги или теги по умолчанию с нестандартными значениями.
@@ -804,7 +802,7 @@ list
 > >
 > > Только если кластер на паузе и формат вывода — `pretty`.
 
-<a id="patronictl_list"></a>
+<a id="patronictl_list_parameters"></a>
 
 #### Параметры {#parameters-6}
 
@@ -830,14 +828,14 @@ list
 Вывести временную метку перед сведениями о кластере и участниках.
 
 `-f` / `--format`  
-Способ форматирования списка событий в выводе.
+Способ форматирования списка участников кластера в выводе.
 
 Допустимые форматы:
 
-- `pretty`: выводит историю как форматированную таблицу; либо
+- `pretty`: выводит участников кластера как форматированную таблицу; либо
 - `tsv`: выводит табличные сведения со столбцами, разделёнными `\t`; либо
-- `json`: выводит историю в формате JSON; либо
-- `yaml`: выводит историю в формате YAML.
+- `json`: выводит участников кластера в формате JSON; либо
+- `yaml`: выводит участников кластера в формате YAML.
 
 По умолчанию используется `pretty`.
 
@@ -849,7 +847,7 @@ list
 
 `TIME` — интервал между обновлениями в секундах.
 
-<a id="patronictl_list_synopsis"></a>
+<a id="patronictl_list_examples"></a>
 
 #### Примеры {#examples-6}
 
@@ -912,11 +910,11 @@ $ patronictl -c postgres0.yml list batman -f yaml -t
   TL: 5
 ```
 
-<a id="patronictl_list_description"></a>
+<a id="patronictl_pause"></a>
 
 ### patronictl pause {#patronictl-pause}
 
-<a id="patronictl_list_parameters"></a>
+<a id="patronictl_pause_synopsis"></a>
 
 #### Синтаксис {#synopsis-7}
 
@@ -927,13 +925,13 @@ pause
   [ --wait ]
 ```
 
-<a id="patronictl_list_examples"></a>
+<a id="patronictl_pause_description"></a>
 
 #### Описание {#description-7}
 
 `patronictl pause` временно переводит кластер Patroni в режим обслуживания и отключает автоматическое переключение при отказе.
 
-<a id="patronictl_pause"></a>
+<a id="patronictl_pause_parameters"></a>
 
 #### Параметры {#parameters-7}
 
@@ -952,7 +950,7 @@ pause
 `--wait`  
 Перед возвратом управления вызывающей стороне дождаться паузы всех участников Patroni.
 
-<a id="patronictl_pause_synopsis"></a>
+<a id="patronictl_pause_examples"></a>
 
 #### Примеры {#examples-7}
 
@@ -1008,11 +1006,11 @@ promote-cluster
 $ patronictl -c postgres0.yml promote-cluster batman --force
 ```
 
-<a id="patronictl_pause_description"></a>
+<a id="patronictl_query"></a>
 
 ### patronictl query {#patronictl-query}
 
-<a id="patronictl_pause_parameters"></a>
+<a id="patronictl_query_synopsis"></a>
 
 #### Синтаксис {#synopsis-9}
 
@@ -1030,13 +1028,13 @@ query
   [ { -W | { -w | --watch } TIME } ]
 ```
 
-<a id="patronictl_pause_examples"></a>
+<a id="patronictl_query_description"></a>
 
 #### Описание {#description-9}
 
 `patronictl query` выполняет команду или сценарий SQL на участнике кластера Patroni.
 
-<a id="patronictl_query"></a>
+<a id="patronictl_query_parameters"></a>
 
 #### Параметры {#parameters-9}
 
@@ -1115,7 +1113,7 @@ query
 
 `TIME` — интервал между повторами в секундах.
 
-<a id="patronictl_query_synopsis"></a>
+<a id="patronictl_query_examples"></a>
 
 #### Примеры {#examples-9}
 
@@ -1181,11 +1179,11 @@ port
 5433
 ```
 
-<a id="patronictl_query_description"></a>
+<a id="patronictl_reinit"></a>
 
 ### patronictl reinit {#patronictl-reinit}
 
-<a id="patronictl_query_parameters"></a>
+<a id="patronictl_reinit_synopsis"></a>
 
 #### Синтаксис {#synopsis-10}
 
@@ -1199,13 +1197,13 @@ reinit
   [ --from-leader ]
 ```
 
-<a id="patronictl_query_examples"></a>
+<a id="patronictl_reinit_description"></a>
 
 #### Описание {#description-10}
 
 `patronictl reinit` перестраивает резервный экземпляр Postgres под управлением участника-реплики кластера Patroni.
 
-<a id="patronictl_reinit"></a>
+<a id="patronictl_reinit_parameters"></a>
 
 #### Параметры {#parameters-10}
 
@@ -1228,12 +1226,12 @@ reinit
 `--force`  
 Флаг пропуска подтверждений при перестроении резервных экземпляров Postgres.
 
+Полезно для сценариев.
+
 `--from-leader`  
 Флаг получения basebackup непосредственно с лидера.
 
-Полезно для сценариев.
-
-<a id="patronictl_reinit_synopsis"></a>
+<a id="patronictl_reinit_examples"></a>
 
 #### Примеры {#examples-10}
 
@@ -1282,11 +1280,11 @@ $ patronictl -c postgres0.yml reinit batman postgresql2 --from-leader
 Success: reinitialize for member postgresql2
 ```
 
-<a id="patronictl_reinit_description"></a>
+<a id="patronictl_reload"></a>
 
 ### patronictl reload {#patronictl-reload}
 
-<a id="patronictl_reinit_parameters"></a>
+<a id="patronictl_reload_synopsis"></a>
 
 #### Синтаксис {#synopsis-11}
 
@@ -1299,7 +1297,7 @@ reload
   [ --force ]
 ```
 
-<a id="patronictl_reinit_examples"></a>
+<a id="patronictl_reload_description"></a>
 
 #### Описание {#description-11}
 
@@ -1307,7 +1305,7 @@ reload
 
 Она также запускает `pg_ctl reload` на управляемом экземпляре Postgres, даже если ничего не изменилось.
 
-<a id="patronictl_reload"></a>
+<a id="patronictl_reload_parameters"></a>
 
 #### Параметры {#parameters-11}
 
@@ -1341,7 +1339,7 @@ reload
 
 Полезно для сценариев.
 
-<a id="patronictl_reload_synopsis"></a>
+<a id="patronictl_reload_examples"></a>
 
 #### Примеры {#examples-11}
 
@@ -1361,11 +1359,11 @@ Reload request received for member postgresql1 and will be processed within 10 s
 Reload request received for member postgresql2 and will be processed within 10 seconds
 ```
 
-<a id="patronictl_reload_description"></a>
+<a id="patronictl_remove"></a>
 
 ### patronictl remove {#patronictl-remove}
 
-<a id="patronictl_reload_parameters"></a>
+<a id="patronictl_remove_synopsis"></a>
 
 #### Синтаксис {#synopsis-12}
 
@@ -1376,7 +1374,7 @@ remove
   [ { -f | --format } { pretty | tsv | json | yaml } ]
 ```
 
-<a id="patronictl_reload_examples"></a>
+<a id="patronictl_remove_description"></a>
 
 #### Описание {#description-12}
 
@@ -1387,7 +1385,7 @@ remove
 > [!WARNING]
 > Операция уничтожает сведения о кластере Patroni в DCS.
 
-<a id="patronictl_remove"></a>
+<a id="patronictl_remove_parameters"></a>
 
 #### Параметры {#parameters-12}
 
@@ -1411,7 +1409,7 @@ remove
 
 По умолчанию используется `pretty`.
 
-<a id="patronictl_remove_synopsis"></a>
+<a id="patronictl_remove_examples"></a>
 
 #### Примеры {#examples-12}
 
@@ -1431,11 +1429,11 @@ You are about to remove all information in DCS for batman, please type: "Yes I a
 This cluster currently is healthy. Please specify the leader name to continue: postgresql0
 ```
 
-<a id="patronictl_remove_description"></a>
+<a id="patronictl_restart"></a>
 
 ### patronictl restart {#patronictl-restart}
 
-<a id="patronictl_remove_parameters"></a>
+<a id="patronictl_restart_synopsis"></a>
 
 #### Синтаксис {#synopsis-13}
 
@@ -1453,7 +1451,7 @@ restart
   [ --force ]
 ```
 
-<a id="patronictl_remove_examples"></a>
+<a id="patronictl_restart_description"></a>
 
 #### Описание {#description-13}
 
@@ -1461,7 +1459,7 @@ restart
 
 Перезапуск можно выполнить немедленно или запланировать.
 
-<a id="patronictl_restart"></a>
+<a id="patronictl_restart_parameters"></a>
 
 #### Параметры {#parameters-13}
 
@@ -1510,7 +1508,7 @@ restart
 
 Полезно для сценариев.
 
-<a id="patronictl_restart_synopsis"></a>
+<a id="patronictl_restart_examples"></a>
 
 #### Примеры {#examples-13}
 
@@ -1560,11 +1558,11 @@ Success: restart scheduled on member postgresql1
 Success: restart scheduled on member postgresql2
 ```
 
-<a id="patronictl_restart_description"></a>
+<a id="patronictl_resume"></a>
 
 ### patronictl resume {#patronictl-resume}
 
-<a id="patronictl_restart_parameters"></a>
+<a id="patronictl_resume_synopsis"></a>
 
 #### Синтаксис {#synopsis-14}
 
@@ -1575,13 +1573,13 @@ resume
   [ --wait ]
 ```
 
-<a id="patronictl_restart_examples"></a>
+<a id="patronictl_resume_description"></a>
 
 #### Описание {#description-14}
 
 `patronictl resume` выводит кластер Patroni из режима обслуживания и снова включает автоматическое переключение при отказе.
 
-<a id="patronictl_resume"></a>
+<a id="patronictl_resume_parameters"></a>
 
 #### Параметры {#parameters-14}
 
@@ -1600,7 +1598,7 @@ resume
 `--wait`  
 Перед возвратом управления вызывающей стороне дождаться снятия паузы со всех участников Patroni.
 
-<a id="patronictl_resume_synopsis"></a>
+<a id="patronictl_resume_examples"></a>
 
 #### Примеры {#examples-14}
 
@@ -1612,11 +1610,11 @@ $ patronictl -c postgres0.yml resume batman --wait
 Success: cluster management is resumed
 ```
 
-<a id="patronictl_resume_description"></a>
+<a id="patronictl_show_config"></a>
 
 ### patronictl show-config {#patronictl-show-config}
 
-<a id="patronictl_resume_parameters"></a>
+<a id="patronictl_show_config_synopsis"></a>
 
 #### Синтаксис {#synopsis-15}
 
@@ -1626,13 +1624,13 @@ show-config
   [ --group CITUS_GROUP ]
 ```
 
-<a id="patronictl_resume_examples"></a>
+<a id="patronictl_show_config_description"></a>
 
 #### Описание {#description-15}
 
 `patronictl show-config` показывает динамическую конфигурацию кластера, хранящуюся в DCS.
 
-<a id="patronictl_show_config"></a>
+<a id="patronictl_show_config_parameters"></a>
 
 #### Параметры {#parameters-15}
 
@@ -1648,7 +1646,7 @@ show-config
 
 Если не задано, [patronictl](/ru/docs/patroni/patronictl#patronictl) попытается получить значение из `citus.group`, если оно существует.
 
-<a id="patronictl_show_config_synopsis"></a>
+<a id="patronictl_show_config_examples"></a>
 
 #### Примеры {#examples-15}
 
@@ -1668,11 +1666,11 @@ retry_timeout: 10
 ttl: 30
 ```
 
-<a id="patronictl_show_config_description"></a>
+<a id="patronictl_switchover"></a>
 
 ### patronictl switchover {#patronictl-switchover}
 
-<a id="patronictl_show_config_parameters"></a>
+<a id="patronictl_switchover_synopsis"></a>
 
 #### Синтаксис {#synopsis-16}
 
@@ -1685,7 +1683,7 @@ switchover
   [ --force ]
 ```
 
-<a id="patronictl_show_config_examples"></a>
+<a id="patronictl_switchover_description"></a>
 
 #### Описание {#description-16}
 
@@ -1699,7 +1697,7 @@ switchover
 > [!NOTE]
 > Для неисправного кластера может лучше подойти `patronictl failover`.
 
-<a id="patronictl_switchover"></a>
+<a id="patronictl_switchover_parameters"></a>
 
 #### Параметры {#parameters-16}
 
@@ -1716,7 +1714,7 @@ switchover
 `--leader` / `--primary`  
 Указать лидера, который будет понижен при переключении.
 
-`LEADER_NAME` должно совпадать с именем текущего лидера кластера.
+`LEADER_NAME` следует задавать равным имени текущего лидера кластера.
 
 `--candidate`  
 Узел, повышаемый при переключении до роли первичного сервера.
@@ -1733,7 +1731,7 @@ switchover
 
 Полезно для сценариев.
 
-<a id="patronictl_switchover_synopsis"></a>
+<a id="patronictl_switchover_examples"></a>
 
 #### Примеры {#examples-16}
 
@@ -1784,11 +1782,11 @@ Switchover scheduled at: 2023-09-13T18:00:00-03:00
                     to: postgresql2
 ```
 
-<a id="patronictl_switchover_description"></a>
+<a id="patronictl_topology"></a>
 
 ### patronictl topology {#patronictl-topology}
 
-<a id="patronictl_switchover_parameters"></a>
+<a id="patronictl_topology_synopsis"></a>
 
 #### Синтаксис {#synopsis-17}
 
@@ -1799,7 +1797,7 @@ topology
   [ { -W | { -w | --watch } TIME } ]
 ```
 
-<a id="patronictl_switchover_examples"></a>
+<a id="patronictl_topology_description"></a>
 
 #### Описание {#description-17}
 
@@ -1844,7 +1842,7 @@ topology
 Примеры возможных состояний:
 
 - `running`: Postgres запущен и работает;
-- `streaming`: участник является репликой, и Postgres передаёт WAL потоком с первичного узла;
+- `streaming`: участник является репликой, и Postgres получает WAL по потоковой репликации от первичного узла;
 - `in archive recovery`: участник является репликой, и Postgres получает WAL из архива;
 - `stopped`: Postgres остановлен;
 - `crashed`: Postgres аварийно завершился.
@@ -1915,7 +1913,7 @@ topology
 > >
 > > Показывается только при паузе кластера.
 
-<a id="patronictl_topology"></a>
+<a id="patronictl_topology_parameters"></a>
 
 #### Параметры {#parameters-17}
 
@@ -1937,7 +1935,7 @@ topology
 
 `TIME` — интервал между обновлениями в секундах.
 
-<a id="patronictl_topology_synopsis"></a>
+<a id="patronictl_topology_examples"></a>
 
 #### Примеры {#examples-17}
 
@@ -1954,11 +1952,11 @@ $ patronictl -c postgres0.yml topology batman
 +---------------+----------------+---------+-----------+----+-------------+-----+------------+-----+
 ```
 
-<a id="patronictl_topology_description"></a>
+<a id="patronictl_version"></a>
 
 ### patronictl version {#patronictl-version}
 
-<a id="patronictl_topology_parameters"></a>
+<a id="patronictl_version_synopsis"></a>
 
 #### Синтаксис {#synopsis-18}
 
@@ -1969,13 +1967,13 @@ version
   [ --group CITUS_GROUP ]
 ```
 
-<a id="patronictl_topology_examples"></a>
+<a id="patronictl_version_description"></a>
 
 #### Описание {#description-18}
 
 `patronictl version` получает версию приложения [patronictl](/ru/docs/patroni/patronictl#patronictl). Кроме того, вывод может содержать версии кластеров Patroni и их участников.
 
-<a id="patronictl_version"></a>
+<a id="patronictl_version_parameters"></a>
 
 #### Параметры {#parameters-18}
 
@@ -1990,7 +1988,7 @@ version
 
 `CITUS_GROUP` — идентификатор группы Citus.
 
-<a id="patronictl_version_synopsis"></a>
+<a id="patronictl_version_examples"></a>
 
 #### Примеры {#examples-18}
 

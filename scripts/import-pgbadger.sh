@@ -6,7 +6,8 @@ snapshot_dir="$project_dir/sources/pgbadger"
 example_dir="$project_dir/static/third_party/pgbadger/examples"
 logo_dir="$project_dir/static/img/docs/pgbadger"
 upstream_commit=a1ad95a035a0c2d246fe632eb1c361d4bde0ddae
-work_dir=$(mktemp -d "${TMPDIR:-/tmp}/pig-center-pgbadger.XXXXXX")
+upstream_archive_sha256=4c708efdcea2c5953c35d064be7a29fe4da23467c9accfef7f7a82da5fc6dc4c
+work_dir=$(mktemp -d "${TMPDIR:-/tmp}/doc-pg-center-pgbadger.XXXXXX")
 
 trap 'rm -rf "$work_dir"' EXIT
 
@@ -112,6 +113,7 @@ archive="$work_dir/pgbadger-$upstream_commit.tar.gz"
 curl "${curl_args[@]}" \
   "https://codeload.github.com/darold/pgbadger/tar.gz/$upstream_commit" \
   --output "$archive"
+printf '%s  %s\n' "$upstream_archive_sha256" "$archive" | shasum -a 256 -c - >/dev/null
 tar -xzf "$archive" -C "$work_dir"
 upstream_dir="$work_dir/pgbadger-$upstream_commit"
 
@@ -120,7 +122,6 @@ cp "$work_dir/site/documentation.html" "$snapshot_dir/site/documentation.html"
 cp "$work_dir/site/sitemap.xml" "$snapshot_dir/site/sitemap.xml"
 cp "$work_dir/site/logo_pgbadger.png" "$snapshot_dir/site/logo_pgbadger.png"
 cp "$work_dir/site/rsc/"* "$snapshot_dir/site/rsc/"
-cp "$archive" "$snapshot_dir/pgbadger-$upstream_commit.tar.gz"
 
 cp "$upstream_dir/README.md" "$snapshot_dir/upstream/README.md"
 cp "$upstream_dir/ChangeLog" "$snapshot_dir/upstream/ChangeLog"

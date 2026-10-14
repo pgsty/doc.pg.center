@@ -2,7 +2,8 @@
 title: "Release History"
 linkTitle: "Release History"
 weight: 90
-description: "Complete pgBadger 9.x through 13.x change history, normalized from the upstream ChangeLog"
+description: "pgBadger 9.x through 13.x release history"
+search_keywords: []
 icon: fa-solid fa-clock-rotate-left
 module: [PGBADGER]
 categories: [Reference]
@@ -11,7 +12,9 @@ upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632e
 upstream_name: "pgBadger ChangeLog"
 ---
 
-The official website publishes release news inline on its home page. That page stops at 12.4 and accidentally repeats 11.1–11.3 with conflicting dates. This edition uses the pinned upstream `ChangeLog` as the canonical record, removes only those duplicate renderings, and adds the later 13.x releases. Entries are preserved in full and ordered newest first within each series.
+pgBadger 9.x–13.x release history, grouped by major series and ordered newest first.
+
+These entries describe behavior at the time of each release. Historical defaults, configuration names, and upgrade instructions may differ from 13.2; use the current command-line reference and PostgreSQL logging guide for operational settings.
 
 | Series | Versions included | First–last release | Page |
 |---|---|---|---|
@@ -21,5 +24,5 @@ The official website publishes release news inline on its home page. That page s
 | 10.x | 10.0–10.3 | 2018-09-09 – 2019-02-14 | [Read 10.x](/docs/pgbadger/releases/10/) |
 | 9.x | 9.0–9.2 | 2016-09-02 – 2017-07-27 | [Read 9.x](/docs/pgbadger/releases/9/) |
 
-For downloadable archives and assets, use [GitHub Releases](https://github.com/darold/pgbadger/releases). Release dates in this section describe upstream source history; they are not the download time of this documentation snapshot.
+For release archives and assets, use [GitHub Releases](https://github.com/darold/pgbadger/releases).
 

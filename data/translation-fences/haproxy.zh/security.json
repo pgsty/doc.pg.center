@@ -1,0 +1,69 @@
+{
+  "source": "content/docs/haproxy/security.md",
+  "language": "zh",
+  "fences": [],
+  "literal_blocks": [
+    {
+      "lines": [
+        123,
+        127
+      ],
+      "classification": "program-output",
+      "source_sha256": "001ad59f20e295f21d5c989d907d07a5d9d7e7583b71b7235d93711d4d1673c6",
+      "revalidation_history": [
+        {
+          "lines": [
+            123,
+            127
+          ],
+          "start_column": 1,
+          "source_sha256": "001ad59f20e295f21d5c989d907d07a5d9d7e7583b71b7235d93711d4d1673c6"
+        },
+        {
+          "lines": [
+            123,
+            127
+          ],
+          "start_column": 1,
+          "source_sha256": "001ad59f20e295f21d5c989d907d07a5d9d7e7583b71b7235d93711d4d1673c6"
+        }
+      ],
+      "revalidation": "Exact reviewed snippet and source/target occurrence counts retained; line/column positions changed.",
+      "start_column": 1
+    }
+  ],
+  "source_formatting_revalidation": {
+    "method": "Exact reviewed predecessor source/target SHA mapping and byte-for-byte literal-fence witnesses; only documented source errata and markup-only restoration accepted.",
+    "fences": [],
+    "literal_blocks": [
+      {
+        "row": 1,
+        "action": "exact literal range rebased",
+        "source_sha256": "001ad59f20e295f21d5c989d907d07a5d9d7e7583b71b7235d93711d4d1673c6",
+        "lines": [
+          123,
+          127
+        ],
+        "start_column": 1
+      }
+    ]
+  },
+  "source_sha256": "81b0efa7c6992b2ab2fed87a76f547bb2940d2683c9d9cf2ba5b5e2a39c64cc4",
+  "target_sha256": "c23444b7ac1f0ef8bfef2ad5e080c10020f9ae712b7f69b1f501ae55bf84d2c8",
+  "review_scope": "Complete identified explanatory-fence inventory reviewed separately from structural/numeric technical screening and selective manual prose review. No claim of full independent sentence-by-sentence review of all prose.",
+  "literal_formatting_revalidation": {
+    "method": "Exact reviewed predecessor hashes and current source/target literal equality; remove obsolete protection only with proven default-protected exact fenced replacement.",
+    "events": [
+      {
+        "row": 1,
+        "action": "exact literal range rebased",
+        "source_sha256": "001ad59f20e295f21d5c989d907d07a5d9d7e7583b71b7235d93711d4d1673c6",
+        "lines": [
+          123,
+          127
+        ],
+        "start_column": 1
+      }
+    ]
+  }
+}

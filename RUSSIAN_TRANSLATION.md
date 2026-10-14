@@ -27,7 +27,35 @@ The initial Russian edition covers all six component collections:
 ## Structure and literals that must not change
 
 - Keep fenced code blocks and indented code blocks byte-for-byte, including
-  comments, prompts, output, logs, diagnostic messages, and error text.
+  comments, prompts, output, logs, diagnostic messages, and error text, except
+  for the registered pgBadger and HAProxy explanatory blocks below.
+- Only in independently reviewed, registered explanatory `text` fences under
+  `content/docs/pgbadger/`, translate parameter help, return-code descriptions,
+  natural-language steps in algorithm pseudocode, directory descriptions, and
+  their explanatory example comments. Preserve real CLI signatures, options,
+  allowed values, defaults, commands, SQL, configuration, regexes, diagnostics,
+  verbatim legal text, personal names, numbers, and formulas exactly. This
+  exception does not permit translating comments in actual code.
+- Record each exception in `data/translation-fences/pgbadger.ru/` with exact
+  source and translation SHA-256 hashes (`source_sha256`, `target_sha256`),
+  protected literals (`protected_literals`), and actual command or output lines
+  (`protected_lines`). An independent reviewer must verify semantics and
+  literals. Unregistered fences or changed hashes remain byte-for-byte
+  protected; the `text` label alone is not an exemption.
+- In HAProxy fenced or indented blocks, translate only argument descriptions,
+  table labels and natural-language explanations registered in
+  `data/translation-fences/haproxy.ru/`. Record exact hashes, classification,
+  independent review conclusions, protected literals and protected lines.
+  Actual configuration, commands, source code, protocol messages, output,
+  diagnostics and code comments remain byte-for-byte identical, including in
+  mixed blocks. Unregistered blocks or changed hashes are not exempt.
+- Preserve return-type identifiers `integer`, `boolean`, `bool`, `string`,
+  `binary` and `ip` in HAProxy sample signatures and deprecated alias declarations.
+  Translate natural-language type descriptions in the explanatory prose.
+- Reader-facing prose contains only information relevant to using the product.
+  Do not add translation policies, translator notes, statements that a page
+  retains the original text, or narratives of editorial corrections. Preserve
+  attribution data and original legal text.
 - Keep inline code, commands, command options, configuration keys and values,
   API/RPC/message/field names, environment variables, metric names, log-field
   names, file names, paths, placeholders, and protocol identifiers unchanged.
@@ -277,7 +305,12 @@ official names.
   copied.
 - Fenced and indented code, comments, legal notices, explicit anchors,
   shortcodes, footnote identifiers, external URLs, protected literals, and
-  immutable front matter match the English source exactly.
+  immutable front matter match the English source exactly. Only the pgBadger
+  and HAProxy explanatory blocks independently reviewed and registered with exact
+  hashes and protected literals above may differ; actual code and its comments
+  remain protected.
+- Reader-facing prose contains no translation policies, translator notes, or
+  editorial process narratives.
 - Heading levels, list nesting, blockquote/admonition structure, table shape,
   numbers, versions, and units remain structurally equivalent.
 - Russian pages contain no untranslated English prose except protected

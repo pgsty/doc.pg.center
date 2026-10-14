@@ -20,13 +20,13 @@ In asynchronous mode the cluster is allowed to lose some committed transactions 
 
 The amount of transactions that can be lost is controlled via `maximum_lag_on_failover` parameter. Because the primary transaction log position is not sampled in real time, in reality the amount of lost data on failover is worst case bounded by `maximum_lag_on_failover` bytes of transaction log plus the amount that is written in the last `ttl` seconds (`loop_wait`/2 seconds in the average case). However typical steady state replication delay is well under a second.
 
-By default, when running leader elections, Patroni does not take into account the current timeline of replicas, what in some cases could be undesirable behavior. You can prevent the node not having the same timeline as a former primary become the new leader by changing the value of `check_timeline` parameter to `true`.
+By default, when running leader elections, Patroni does not take into account the current timeline of replicas, what in some cases could be undesirable behavior. Setting `check_timeline` to `true` prevents a node whose timeline is older than the cluster’s last known timeline, or cannot be determined, from becoming the new leader.
 
 --------
 
 ## PostgreSQL synchronous replication
 
-You can use Postgres's [synchronous replication](http://www.postgresql.org/docs/current/static/warm-standby.html#SYNCHRONOUS-REPLICATION) with Patroni. Synchronous replication ensures consistency across a cluster by confirming that writes are written to a secondary before returning to the connecting client with a success. The cost of synchronous replication: increased latency and reduced throughput on writes. This throughput will be entirely based on network performance.
+You can use Postgres's [synchronous replication](http://www.postgresql.org/docs/current/static/warm-standby.html#SYNCHRONOUS-REPLICATION) with Patroni. Synchronous replication ensures consistency across a cluster by confirming that writes are written to a secondary before returning to the connecting client with a success. The cost of synchronous replication: increased latency and reduced throughput on writes. This throughput is affected by network performance.
 
 In hosted datacenter environments (like AWS, Rackspace, or any network you do not control), synchronous replication significantly increases the variability of write performance. If followers become inaccessible from the leader, the leader effectively becomes read-only.
 
@@ -51,46 +51,23 @@ For use cases where losing committed transactions is not permissible you can tur
 
 Turning on [synchronous_mode](/docs/patroni/replication_modes#synchronous_mode) does not guarantee multi node durability of commits under all circumstances. When no suitable standby is available, primary server will still accept writes, but does not guarantee their replication. When the primary fails in this mode no standby will be promoted. When the host that used to be the primary comes back it will get promoted automatically, unless system administrator performed a manual failover. This behavior makes synchronous mode usable with 2 node clusters.
 
-When [synchronous_mode](/docs/patroni/replication_modes#synchronous_mode) is on and a standby crashes, commits will block until next iteration of Patroni runs and switches the primary to standalone mode (worst case delay for writes `ttl` seconds, average case `loop_wait`/2 seconds). Manually shutting down or restarting a standby will not cause a commit service interruption. Standby will signal the primary to release itself from synchronous standby duties before PostgreSQL shutdown is initiated.
+When [synchronous_mode](/docs/patroni/replication_modes#synchronous_mode) is on, strict mode is disabled, and the only synchronous standby crashes, commits will block until next iteration of Patroni runs and switches the primary to standalone mode (worst case delay for writes `ttl` seconds, average case `loop_wait`/2 seconds). Manually shutting down or restarting a standby will not cause a commit service interruption. Standby will signal the primary to release itself from synchronous standby duties before PostgreSQL shutdown is initiated.
 
-When it is absolutely necessary to guarantee that each write is stored durably on at least two nodes, enable `synchronous_mode_strict` in addition to the [synchronous_mode](/docs/patroni/replication_modes#synchronous_mode). This parameter prevents Patroni from disabling synchronous replication on the primary when no synchronous standby candidates are available unless the Postgres transaction explicitly turns off `synchronous_commit`, blocking all client write requests until at least one synchronous replica comes up.
+When it is absolutely necessary to guarantee that each write is stored durably on at least two nodes, enable `synchronous_mode_strict` in addition to the [synchronous_mode](/docs/patroni/replication_modes#synchronous_mode). This parameter prevents Patroni from disabling synchronous replication on the primary when no synchronous standby candidates are available. Synchronous commits block until a synchronous replica is available; transactions using `synchronous_commit` values of `off` or `local` bypass this wait.
 
-When `synchronous_mode_strict` is enabled and no active replication connections satisfy the minimum replication factor, Patroni determines the value of `synchronous_standby_names` as follows:
+In priority-based synchronous mode (`synchronous_mode: on`), when strict mode is enabled and no suitable synchronous standby is available, Patroni 4.1.5 sets `synchronous_standby_names` to `*` and emits the warning `"No standbys available!"`. This keeps commits waiting for a synchronous standby. The wildcard does not restrict acknowledgements to the member names previously recorded in `/sync`.
 
-1.  **Last known sync nodes are available in the `/sync` key in DCS**: Patroni sets or keeps `synchronous_standby_names` to the nodes stored there. For example, if `/sync` contains `leader=node1, sync_standby=node2,node3` and both standbys stop streaming, Patroni will continue using:
-
-    ```ini
-    synchronous_standby_names = 'node2,node3'
-    ```
-
-    These nodes are the last ones known to have received the latest commit. Commits will block until at least one of them reconnects.
-
-2.  **Manual failover to an asynchronous node**: when a node that was not in the `/sync` key is promoted, for example via `patronictl failover --force`, it sets `synchronous_standby_names` to the former primary, because the former primary is the only node guaranteed to have the latest committed data.
-
-3.  **The `/sync` key is empty**: for example, strict mode was just enabled or the cluster was freshly bootstrapped with no replicas yet. Patroni sets:
-
-    ```ini
-    synchronous_standby_names = '__patroni_strict_sync_replica_placeholder__'
-    ```
-
-    This is a built-in sentinel value that does not match any real node name, causing all writes to block until an eligible replica starts streaming from the primary. The placeholder replaces the former `*` wildcard, which could inadvertently allow an unqualified node to satisfy the sync requirement.
-
-> [!WARNING]
-> The value `__patroni_strict_sync_replica_placeholder__` is reserved by Patroni and **must not** be used as the `name` of a Patroni node in `patroni.yaml`. Patroni will refuse to start if this name is configured.
-
-When strict mode is active, Patroni emits a log warning: `"No active replication connections and synchronous_mode_strict is requested. Commits will be delayed."` This warning is emitted once per activation event, not on every HA loop iteration.
-
-You can ensure that a standby never becomes the synchronous standby by setting `nosync` tag to true. This is recommended to set for standbys that are behind slow network connections and would cause performance degradation when becoming a synchronous standby. Setting tag `nostream` to true will also have the same effect.
+Patroni excludes a standby from its synchronous standby selection when the `nosync` tag is set to true. This is recommended to set for standbys that are behind slow network connections and would cause performance degradation when becoming a synchronous standby. Setting tag `nostream` to true will also have the same effect.
 
 Synchronous mode can be switched on and off using `patronictl edit-config` command or via Patroni REST interface. See [dynamic configuration](/docs/patroni/config/dynamic#dynamic) for instructions.
 
-Note: Because of the way synchronous replication is implemented in PostgreSQL it is still possible to lose transactions even when using `synchronous_mode_strict`. If the PostgreSQL backend is cancelled while waiting to acknowledge replication (as a result of packet cancellation due to client timeout or backend failure) transaction changes become visible for other backends. Such changes are not yet replicated and may be lost in case of standby promotion.
+Note: Because of the way synchronous replication is implemented in PostgreSQL it is still possible to lose transactions even when using `synchronous_mode_strict`. If the PostgreSQL backend is cancelled while waiting to acknowledge replication (for example, by a cancellation request after a client timeout, or by a backend failure), transaction changes become visible for other backends. Such changes are not yet replicated and may be lost in case of standby promotion.
 
 --------
 
 ## Synchronous Replication Factor
 
-The parameter `synchronous_node_count` is used by Patroni to manage the number of synchronous standby databases. It is set to `1` by default. It has no effect when [synchronous_mode](/docs/patroni/replication_modes#synchronous_mode) is set to `off`. When enabled, Patroni manages the precise number of synchronous standby databases based on parameter `synchronous_node_count` and adjusts the state in DCS & `synchronous_standby_names` in PostgreSQL as members join and leave. If the parameter is set to a value higher than the number of eligible nodes it will be automatically reduced by Patroni.
+The parameter `synchronous_node_count` is used by Patroni to manage the number of synchronous standby databases. It is set to `1` by default. It has no effect when [synchronous_mode](/docs/patroni/replication_modes#synchronous_mode) is set to `off`. When enabled, Patroni manages the precise number of synchronous standby databases based on parameter `synchronous_node_count` and adjusts the state in DCS & `synchronous_standby_names` in PostgreSQL as members join and leave. Patroni can use fewer synchronous standbys than requested when fewer eligible nodes are available; in strict quorum mode, however, commits still wait for the configured number of standby acknowledgements.
 
 --------
 
@@ -110,7 +87,7 @@ When in synchronous mode Patroni maintains synchronization state in the DCS (`/s
 - A node must be set as the synchronous standby in PostgreSQL as long as it is published as the synchronous standby in the `/sync` key in DCS..
 - A node that is not the leader or current synchronous standby is not allowed to promote itself automatically.
 
-Patroni will only assign one or more synchronous standby nodes based on `synchronous_node_count` parameter to `synchronous_standby_names`.
+For a nonempty synchronous standby set, Patroni assigns one or more synchronous standby nodes to `synchronous_standby_names`, based on `synchronous_node_count`.
 
 On each HA loop iteration Patroni re-evaluates synchronous standby nodes choice. If the current list of synchronous standby nodes are connected and has not requested its synchronous status to be removed it remains picked. Otherwise the cluster members available for sync that are furthest ahead in replication are picked.
 
@@ -159,7 +136,7 @@ The quorum-based synchronous mode could be enabled by setting [synchronous_mode]
 
 Other parameters, like `synchronous_node_count`, `maximum_lag_on_syncnode`, and `synchronous_mode_strict` continue to work the same way as with `synchronous_mode=on`.
 
-In quorum commit mode with `synchronous_mode_strict`, when no active replicas are available, Patroni sets `synchronous_standby_names` to `ANY N (<last known voters>)`, preserving the last known quorum voters from `/sync`, or to `ANY 1 (__patroni_strict_sync_replica_placeholder__)` when no voters are stored in the `/sync` key.
+In quorum commit mode, when the synchronous standby set is empty and strict mode requires `N` standby acknowledgements, Patroni 4.1.5 sets `synchronous_standby_names` to `ANY N (*)`.
 
 ### Example:
 

@@ -1,0 +1,16 @@
+{
+  "source": "content/docs/pgbadger/parallel-processing.md",
+  "language": "fr",
+  "fences": [
+    {
+      "index": 2,
+      "classification": "argument-description",
+      "source_sha256": "5b2a9cb39083d815d17a2a36b7b988dc4fd92260f075216988795194518df276",
+      "target_sha256": "17cb025a63cf70b29b20cd5ccb3d1380d80ad77914dba92fae3d2de32806ecf9",
+      "protected_literals": [
+        "N"
+      ],
+      "protected_lines": []
+    }
+  ]
+}

@@ -262,7 +262,7 @@ def compare_pair(source,target,build):
     ja=rendered(build/'ja'/url.lstrip('/')/'index.html')
     if len(en.headings)!=len(headings(S.split_front_matter(source.read_text())[1])): errors.append('English rendered heading count differs from source')
     if en.headings!=ja.headings: errors.append('rendered heading IDs or order differ')
-    if ja.canonical!=['https://pig.center/ja'+url]: errors.append('incorrect Japanese canonical')
+    if ja.canonical!=['https://doc.pg.center/ja'+url]: errors.append('incorrect Japanese canonical')
     if ja.languages!=['ja-JP']: errors.append('incorrect rendered html language')
     old=rendered(build/'ja'/url.removeprefix('/docs/')/'index.html')
     if old.canonical!=ja.canonical or old.refresh!=ja.canonical: errors.append('incorrect legacy alias redirect')
@@ -317,13 +317,13 @@ def component_outputs(build, sources):
     if [n['id'] for n in nodes(eroot)]!=[n['id'] for n in nodes(jroot)]: errors.append('navigation.json component order/coverage differs')
     if len(list(nodes(jroot)))!=len(sources): errors.append('navigation.json does not include every page')
     for node in nodes(jroot):
-        if node['url']!='https://pig.center/ja'+node['id']: errors.append('navigation.json contains incorrect locale URL: '+node['id'])
+        if node['url']!='https://doc.pg.center/ja'+node['id']: errors.append('navigation.json contains incorrect locale URL: '+node['id'])
     llms=(build/'ja/docs/pgbackrest/llms-full.txt').read_text()
     printed=rendered(build/'ja/_print/docs/pgbackrest/index.html')
     expected_ids=Counter()
     for source in sources:
         body=S.split_front_matter(local_target(source).read_text())[1]
-        if 'Source: https://pig.center/ja'+route(source)+'index.md' not in llms: errors.append('LLMS source missing: '+route(source))
+        if 'Source: https://doc.pg.center/ja'+route(source)+'index.md' not in llms: errors.append('LLMS source missing: '+route(source))
         if body.strip() not in llms: errors.append('LLMS body incomplete: '+route(source))
         expected_ids.update(anchor for _,anchor in headings(body))
     actual_ids=Counter(anchor.split('--',1)[1] for _,anchor in printed.headings if '--' in anchor)

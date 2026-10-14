@@ -1,0 +1,13 @@
+{
+  "fences": [],
+  "source": "content/docs/haproxy/_div_intro.md",
+  "language": "zh",
+  "source_sha256": "10b14b6dfee1e38cf2cf7b365f614ac94cbf93f6aeae8b4bf5e458c0386bd1da",
+  "target_sha256": "ce6a90ae85dd11793e6f71d7784cb00303eba9291292fdc0c5ccdc48f24f1117",
+  "review_scope": "Complete identified explanatory-fence inventory reviewed separately from structural/numeric technical screening and selective manual prose review. No claim of full independent sentence-by-sentence review of all prose.",
+  "literal_blocks": [],
+  "literal_formatting_revalidation": {
+    "method": "Exact reviewed predecessor hashes and current source/target literal equality; remove obsolete protection only with proven default-protected exact fenced replacement.",
+    "events": []
+  }
+}

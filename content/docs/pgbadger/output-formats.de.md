@@ -3,6 +3,7 @@ title: "Ausgabeformate"
 linkTitle: "Ausgabeformate"
 weight: 70
 description: "HTML, Text, Binärdaten, JSON oder Roh-CSV als Ausgabeformat wählen und Zwischendateien zusammenführen"
+search_keywords: [--anonymize, --csv-separator, --dump-all-queries, --dump-raw-csv, --extension, --extra-files, --last-parsed, --normalized-only, --outfile, --prettify-json, --query-numbering, JSON::XS, all, anonymize, csv, csv-separator, dump, dump-all-queries, dump-raw-csv, extension, extra, extra-files, files, json, last, last-parsed, normalized, normalized-only, numbering, only, outfile, parsed, prettify, prettify-json, queries, query, query-numbering, raw, separator]
 icon: fa-solid fa-file-export
 module: [PGBADGER]
 categories: [Referenz]
@@ -81,7 +82,7 @@ Installieren Sie zunächst `JSON::XS`. Fügen Sie `--prettify-json` hinzu, um di
 Die Befehlsreferenz bietet außerdem spezialisierte Exporte:
 
 - `--dump-raw-csv` analysiert das Protokoll und schreibt zeilenorientierte CSV-Dateien, ohne einen Bericht zu erstellen;
-- `--csv-separator` ändert das Trennzeichen für die Roh-CSV-Datei;
+- `--csv-separator` ändert das Trennzeichen für die Roh-CSV-Datei; Version 13.2 verwendet standardmäßig ein Komma;
 - `--dump-all-queries` gibt jede Abfrage nach dem Ersetzen der Bind-Parameter aus;
 - `--normalized-only` schreibt normalisierte Abfragen;
 - `--query-numbering` nummeriert die Abfragen in der Textausgabe.

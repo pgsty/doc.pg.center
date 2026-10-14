@@ -1,0 +1,14 @@
+{
+  "source": "content/docs/pgbadger/parallel-processing.md",
+  "language": "ru",
+  "fences": [
+    {
+      "index": 2,
+      "classification": "mixed-explanation",
+      "source_sha256": "5b2a9cb39083d815d17a2a36b7b988dc4fd92260f075216988795194518df276",
+      "target_sha256": "2d4d7f06acaceac61d67dc3af3ccf17162c20ad52690c571820128997982bb3e",
+      "reason": "Reviewed Japanese/Russian translation of explanatory text; executable lines and CLI signatures remain protected.",
+      "protected_lines": []
+    }
+  ]
+}

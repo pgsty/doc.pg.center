@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import re
+import json
 import shutil
 import subprocess
 import tempfile
@@ -14,9 +15,12 @@ from pathlib import Path
 PROJECT = Path(__file__).resolve().parent.parent
 SOURCE_ROOT = PROJECT / "sources" / "haproxy" / "upstream"
 CONTENT = PROJECT / "content" / "docs" / "haproxy"
-UPSTREAM_VERSION = "3.4.4"
-UPSTREAM_TAG = f"v{UPSTREAM_VERSION}"
-UPSTREAM_COMMIT = "7f03ae65c28605152c7a1a9ba7d9d0bcfb50f8b0"
+SNAPSHOT = json.loads((PROJECT / "sources/haproxy/SNAPSHOT.json").read_text())
+UPSTREAM_RELEASE = SNAPSHOT["stable_release"]
+UPSTREAM_VERSION = SNAPSHOT["documentation_version"]
+UPSTREAM_TAG = SNAPSHOT["stable_tag"]
+UPSTREAM_COMMIT = SNAPSHOT["documentation_commit"]
+UPSTREAM_REF = SNAPSHOT["documentation_ref"]
 DOCS_BASE = "https://docs.haproxy.org/3.4"
 SOURCE_BASE = "https://git.haproxy.org/?p=haproxy-3.4.git;a=blob"
 BACKSLASH_TOKEN = "HAPROXYBACKSLASHPLACEHOLDER"
@@ -476,6 +480,77 @@ def preprocess_indented_blocks(text: str) -> str:
     return "\n".join(output)
 
 
+def preprocess_reviewed_examples(text: str) -> str:
+    """Protect identified examples whose introductory line has no final colon."""
+    leads = (
+        "limit the connection rate on SMTP", "move the login URL only to HTTPS",
+        "send redirects for request for articles", "redirect all HTTP traffic to HTTPS",
+        "append 'www.' prefix", "permanently redirect only old URLs",
+    )
+    lines = text.splitlines(); output = []; index = 0; fenced = False
+    while index < len(lines):
+        line = lines[index]
+        if line.lstrip().startswith("```"):
+            fenced = not fenced
+        if fenced or not line.strip().startswith("Example"):
+            output.append(line); index += 1; continue
+        cursor = index + 1
+        while cursor < len(lines) and not lines[cursor].strip(): cursor += 1
+        if cursor == len(lines): output.append(line); index += 1; continue
+        first = lines[cursor].lstrip()
+        selected = any(lead in line for lead in leads) or first.startswith((
+            '# log "dbg={-}" when fine, or "dbg={... debug info ...}" on slow transfers',
+            '# only emit the backend src/port when a real connection was issued:',
+        ))
+        base = len(line) - len(line.lstrip())
+        if not selected: output.append(line); index += 1; continue
+        end = cursor
+        while end < len(lines) and (not lines[end].strip() or len(lines[end])-len(lines[end].lstrip()) > base): end += 1
+        block = lines[cursor:end]
+        while block and not block[-1].strip(): block.pop()
+        indent = min(len(x)-len(x.lstrip()) for x in block if x.strip())
+        output.extend([line, "", "```haproxy", *[x[indent:] if x.strip() else "" for x in block], "```", ""])
+        index = end
+    text = "\n".join(output)
+    # This example ends its introduction with "!" rather than a colon. The
+    # generic importer otherwise joins its four directives and escapes ||.
+    acl_example = (
+        "   acl missing_cl req.hdr_cnt(Content-length) eq 0\n"
+        "   http-request deny if HTTP_URL_STAR !METH_OPTIONS || METH_POST missing_cl\n"
+        "   http-request deny if METH_GET HTTP_CONTENT\n"
+        "   http-request deny unless METH_GET or METH_POST or METH_OPTIONS"
+    )
+    text = outside_fences(text, lambda segment: segment.replace(
+        acl_example, "```haproxy\n" + "\n".join(line[3:] for line in acl_example.splitlines()) + "\n```"
+    ))
+    # These pinned layouts contain independent directives or usage alternatives.
+    # Keep their original boundaries instead of letting Pandoc join the lines.
+    literal_layouts = (
+        "  peers mypeers\n"
+        "       shards 3\n"
+        "       peer A 127.0.0.1:40001 # local peer without shard value (0 internally)\n"
+        "       peer B 127.0.0.1:40002 shard 1\n"
+        "       peer C 127.0.0.1:40003 shard 2\n"
+        "       peer D 127.0.0.1:40004 shard 3",
+        "filter bwlim-in  <name> default-limit <size> default-period <time> [min-size <sz>]\n"
+        "filter bwlim-out <name> default-limit <size> default-period <time> [min-size <sz>]\n"
+        "filter bwlim-in  <name> limit <size> key <pattern> [table <table>] [min-size <sz>]\n"
+        "filter bwlim-out <name> limit <size> key <pattern> [table <table>] [min-size <sz>]",
+        "option socket-stats\nno option socket-stats",
+    )
+    for literal in literal_layouts:
+        lines = literal.splitlines()
+        indent = min(len(line) - len(line.lstrip()) for line in lines)
+        replacement = "```haproxy\n" + "\n".join(line[indent:] for line in lines) + "\n```"
+        text = outside_fences(text, lambda segment: segment.replace(literal, replacement))
+    # These numbered rows are literal log field layouts, not flowing prose.
+    return outside_fences(text, lambda segment: re.sub(
+        r"(?m)^( +Field +Format[^\n]*\n)((?: +[^\n]+\n)+)",
+        lambda m: m.group(1) + "\n```text\n" + "\n".join(x[2:] if x.startswith("  ") else x for x in m.group(2).splitlines()) + "\n```\n",
+        segment,
+    ))
+
+
 def preprocess_hash_examples(text: str) -> str:
     """Fence the few column-zero configuration examples that begin with a comment."""
     lines = text.splitlines()
@@ -597,7 +672,32 @@ def pandoc_normalize(text: str) -> str:
         capture_output=True,
         check=True,
     ).stdout.strip()
-    return re.sub(r"(?m)^``` (haproxy|shell|text)$", r"```\1", result)
+    # Pandoc 3.11's GFM writer drops info strings. Preserve the languages
+    # supplied by the importer rather than silently losing code classifications.
+    def fence_languages(document: str) -> list[str]:
+        languages, opened = [], False
+        for line in document.splitlines():
+            match = re.match(r"^\s*```\s*(.*)$", line)
+            if match:
+                if not opened:
+                    languages.append(match.group(1).strip())
+                opened = not opened
+        if opened:
+            raise ValueError("unterminated generated code fence")
+        return languages
+
+    languages = fence_languages(text)
+    if len(fence_languages(result)) != len(languages):
+        raise ValueError("Pandoc changed the generated code-fence count")
+    lines, opened, index = [], False, 0
+    for line in result.splitlines():
+        if re.match(r"^```", line):
+            if not opened:
+                line = "```" + languages[index]
+                index += 1
+            opened = not opened
+        lines.append(line)
+    return "\n".join(lines)
 
 
 def outside_fences(text: str, transform) -> str:
@@ -669,17 +769,28 @@ def rewrite_links(text: str, manual: str) -> str:
         for source_name, link in manual_links.items():
             segment = re.sub(rf"(?<![\w`]){re.escape(source_name)}(?![\w`])", link, segment)
 
-        config_reference = re.compile(
-            r"(?i)\b(section\s+)(\d+(?:\.\d+)*)(\s+of\s+the\s+configuration\s+manual)"
+        manual_reference = re.compile(
+            r'(?i)\b(section\s+)(\d+(?:\.\d+)*)(\s+(?:"[^"]+"\s+)?of\s+(?:the\s+)?(configuration|management)\s+(?:manual|guide))'
         )
 
-        def replace_config(match: re.Match[str]) -> str:
-            route = SECTION_ROUTES["configuration"].get(match.group(2))
+        def replace_manual(match: re.Match[str]) -> str:
+            route = SECTION_ROUTES[match.group(4).lower()].get(match.group(2))
             if not route:
                 return match.group(0)
             return f"[{match.group(1)}{match.group(2)}]({route}){match.group(3)}"
 
-        segment = config_reference.sub(replace_config, segment)
+        segment = manual_reference.sub(replace_manual, segment)
+        # RFC section numbers are not chapters of the surrounding HAProxy manual.
+        segment = re.sub(
+            r'(?i)(RFC\s*(\d+)\s*,?\s*)(section\s+)(\d+(?:\.\d+)*)',
+            lambda m: f'{m.group(1)}[{m.group(3)}{m.group(4)}](https://www.rfc-editor.org/rfc/rfc{m.group(2)}#section-{m.group(4)})',
+            segment,
+        )
+        segment = re.sub(
+            r'(?i)(?<!\[)(section\s+)(\d+(?:\.\d+)*)(\s+of\s+(?:the\s+)?RFC\s*(\d+))',
+            lambda m: f'[{m.group(1)}{m.group(2)}](https://www.rfc-editor.org/rfc/rfc{m.group(4)}#section-{m.group(2)}){m.group(3)}',
+            segment,
+        )
         local_reference = re.compile(r"(?i)(?<!\[)\b(section\s+)(\d+(?:\.\d+)*)")
 
         def replace_local(match: re.Match[str]) -> str:
@@ -693,12 +804,90 @@ def rewrite_links(text: str, manual: str) -> str:
     return outside_fences(text, transform)
 
 
+def editorial_corrections(text: str, manual: str, section_number: str) -> str:
+    """Apply evidenced errata without modifying the pinned upstream snapshot."""
+    if manual == "configuration" and section_number == "2.4":
+        start = text.index("   # 1. HAPROXY_MWORKER")
+        end = text.index("Four other directives", start)
+        examples = re.split(r"(?m)(?=^   # [123]\. )", text[start:end].rstrip())
+        rendered = []
+        for example in examples:
+            if not example.strip(): continue
+            lines = [line[3:] if line.startswith("   ") else line for line in example.rstrip().splitlines()]
+            rendered.append("```haproxy\n" + "\n".join(lines) + "\n```")
+        text = text[:start] + "\n\n".join(rendered) + "\n\n" + text[end:]
+    if manual == "configuration" and section_number == "2.9.3":
+        for prefix, alias in (("tcp6", "stream"), ("udp6", "dgram")):
+            text = re.sub(
+                rf"('{prefix}@[^\n]*(?:\n(?!\n).*)*)",
+                lambda m: m.group(0).replace(f"{alias}+ipv4@", f"{alias}+ipv6@"),
+                text,
+            )
+    if manual == "configuration" and section_number == "4.2":
+        text = re.sub(r"(so it is not\s+)not enabled by default", r"\1enabled by default", text)
+    if manual == "configuration" and section_number == "3.2":
+        text = re.sub(
+            r"(?ms)(^tune\.h1\.(?:be|fe)\.glitches-threshold <number>\n)(.*?)(?=^\S|\Z)",
+            lambda m: m.group(1) + m.group(2).replace("advertising a GOAWAY for a future stream", 'advertising "Connection: close" where applicable'),
+            text,
+        )
+    if manual == "configuration" and section_number == "5.2":
+        text = re.sub(r"only(\s+)the(\s+)28", r"only\1the\g<2>20", text)
+        text = text.replace("268435456", "1048576").replace("268435356", "1048576")
+        text = re.sub(r"for\s+health checks \(which cannot provide an SNI value\)", "for health checks when no SNI value is provided", text)
+    if manual == "configuration" and section_number == "7.3.1":
+        text = re.sub(r"(?m)^(.*\| beg .*\|.*?)$", lambda m: m.group(0).replace("map_end_ip", "map_beg_ip").replace("map_end_key", "map_beg_key"), text)
+    if manual == "configuration" and section_number == "7.3.3":
+        text = text.replace("src_gpcA_rate", "src_gpc1_rate")
+    if manual == "configuration" and section_number == "11.1":
+        text = text.replace("bytes_in_cnt [4 bytes]", "bytes_in_cnt [8 bytes]").replace("bytes_out_cnt [4 bytes]", "bytes_out_cnt [8 bytes]")
+        text = text.replace("byte_in_cnt", "bytes_in_cnt").replace("byte_out_cnt", "bytes_out_cnt")
+        text = re.sub(
+            r"(?ms)(^  - gpc_rate\(.*?)(?=^  - |\Z)",
+            lambda m: m.group(0).replace("gpt(100)", "gpc_rate(100,<period>)").replace("gpc(1)", "gpc_rate(1,<period>)").replace("storage of gpc0", "storage of gpc0_rate").replace("gpc99,", "gpc99_rate,").replace("counter gpc0.", "counter rate gpc0_rate."),
+            text,
+        )
+    if manual == "management":
+        if section_number == "3":
+            text = text.replace("August 8th, 2015", "October 8th, 2015")
+        elif section_number == "9.3":
+            text = text.replace(".oscp", ".ocsp")
+            text = re.sub(r"(48\s+or 80) bits TLS ticket key", r"\1 bytes TLS ticket key", text)
+        elif section_number == "13.1":
+            text = text.replace("cap_net_bind_service: binding socket to a specific network interface", "cap_net_bind_service: binding socket to a privileged port")
+        elif section_number == "13":
+            text = text.replace("so that nobody may access it", "so that nobody else may access it")
+        elif section_number == "7":
+            text = (
+                '> [!WARNING]\n'
+                '> Version note: this chapter retains historical multiprocess guidance. '
+                'Since HAProxy 2.5, `nbproc` and `bind process` are no longer supported. '
+                'For this edition, configure threads with `nbthread`, `thread-groups` and '
+                '`cpu-map` in the [global settings](/docs/haproxy/global/#section-3-1).\n\n'
+                + text
+            )
+    # This upstream example has no introductory colon, so the generic
+    # indented-example recognizer otherwise flattens its configuration lines.
+    if manual == "configuration" and section_number == "10.1.3":
+        lines = text.strip("\n").splitlines()
+        lines = [line[2:] if line.startswith("  ") else line for line in lines]
+        # The pinned source contains an incomplete second bind directive.
+        # Omit it; the complete port-80 listener already serves this example.
+        lines = [line for line in lines if line.strip() != "bind *:"]
+        text = "```haproxy\n" + "\n".join(lines) + "\n```\n"
+    return text
+
+
 def normalize_body(text: str, manual: str, section_number: str = "") -> str:
+    text = editorial_corrections(text, manual, section_number)
     text = re.sub(r"(?<=[A-Za-z])-\n\s*(?=[a-z])", "-", text)
-    text = text.replace(" :", ":").replace(" ;", ";")
+    # Normalize prose punctuation without turning a valid "bind :25" into
+    # the invalid directive name "bind:25".
+    text = re.sub(r"(?<!bind) :", ":", text).replace(" ;", ";")
     if manual == "management" and section_number == "3":
         text = preprocess_management_startup(text)
     text = preprocess_ascii_tables(text)
+    text = preprocess_reviewed_examples(text)
     if section_number and reference_section(manual, section_number):
         text = preprocess_reference_entries(text, section_number)
     text = preprocess_hash_examples(text)
@@ -768,7 +957,7 @@ module: [HAPROXY]
 categories: [{page.category}]
 {aliases_yaml(page_aliases(manual, page))}upstream_link: "{DOCS_BASE}/{manual}.html"
 upstream_name: "HAProxy 3.4 {MANUAL_NAMES[manual]}"
-upstream_ref: "{UPSTREAM_TAG}, {section_label(page.section_numbers)}"
+upstream_ref: "{UPSTREAM_REF}, {section_label(page.section_numbers)}"
 ---'''
 
 
@@ -808,7 +997,8 @@ def render_intro_page(page: Page, sections: dict[str, Section], introduction: st
 
 ## Edition provenance {{#edition-provenance}}
 
-- **Edition:** HAProxy {UPSTREAM_VERSION}, tag `{UPSTREAM_TAG}`
+- **Edition:** HAProxy {UPSTREAM_VERSION}, maintenance-branch documentation snapshot
+- **Latest stable release:** HAProxy {UPSTREAM_RELEASE}, tag `{UPSTREAM_TAG}`
 - **Source commit:** [`{UPSTREAM_COMMIT[:12]}`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h={UPSTREAM_COMMIT})
 - **Rendered upstream set:** [docs.haproxy.org/3.4/]({DOCS_BASE}/)
 - **Local license copies:** [HAProxy license notice](/third_party/haproxy/LICENSE) and [GPLv2](/third_party/haproxy/GPL-2.0)
@@ -856,6 +1046,7 @@ def render_chapter_page(
 
 
 def render_root_index() -> str:
+    line_counts = {name: len((SOURCE_ROOT / (name + ".txt")).read_text().splitlines()) for name in MANUAL_PAGES}
     return f'''---
 title: "HAProxy {UPSTREAM_VERSION} Documentation"
 linkTitle: HAProxy
@@ -884,6 +1075,11 @@ cascade:
 balancing, and application traffic management. This component contains the complete English text of
 the three core HAProxy 3.4 manuals, reorganized as one flat Markdown reading sequence for OINK.
 
+This edition follows the official English maintenance-branch manuals at snapshot
+`{UPSTREAM_VERSION}`. The latest stable release is `{UPSTREAM_RELEASE}` (`{UPSTREAM_TAG}`);
+the snapshot includes documentation changes made after that release. Its exact source is
+commit [`{UPSTREAM_COMMIT[:12]}`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h={UPSTREAM_COMMIT}).
+
 ## Choose a manual {{#choose-a-manual}}
 
 - [Starter Guide]({MANUAL_PATHS['intro']}) — 9 topics on load-balancing concepts, HAProxy architecture, features, sizing, releases, and ecosystem.
@@ -895,9 +1091,9 @@ the three core HAProxy 3.4 manuals, reorganized as one flat Markdown reading seq
 
 | Manual | Upstream source | Local organization |
 | --- | ---: | ---: |
-| Starter Guide | 1,695 lines | 9 flat topic pages |
-| Configuration Manual | 33,148 lines | 12 flat chapter pages |
-| Management Guide | 5,285 lines | 13 flat chapter pages |
+| Starter Guide | {line_counts['intro']:,} lines | 9 flat topic pages |
+| Configuration Manual | {line_counts['configuration']:,} lines | 12 flat chapter pages |
+| Management Guide | {line_counts['management']:,} lines | 13 flat chapter pages |
 
 All 34 reading pages live directly under the HAProxy component root. Three non-linking divider
 placeholders separate the manuals in the sidebar without adding directory levels or pager stops.
@@ -1020,7 +1216,7 @@ def main() -> None:
 
     total = 1 + len(DIVIDER_WEIGHTS) + sum(len(pages) for pages in MANUAL_PAGES.values())
     print(
-        f"Generated {total} flat HAProxy Markdown files from {UPSTREAM_TAG}: "
+        f"Generated {total} flat HAProxy Markdown files from {UPSTREAM_VERSION} ({UPSTREAM_REF}): "
         f"3 sidebar dividers, 9 intro topics, {len(CONFIGURATION_CHAPTERS)} configuration chapters, "
         f"and {len(MANAGEMENT_CHAPTERS)} management chapters."
     )

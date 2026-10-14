@@ -1,0 +1,27 @@
+{
+  "source": "content/docs/pgbadger/releases/9.md",
+  "language": "ja",
+  "fences": [],
+  "literal_snippets": [
+    {
+      "text": "db => qr/(?:db|database)=([^,]*)/;",
+      "classification": "configuration",
+      "source_sha256": "2d148e69ff9d22e85b859313b610a54e55b8d90667bfa41fb461efa1d9952fad"
+    },
+    {
+      "text": "user => qr/(?:user|usr)=([^,]*)/;",
+      "classification": "configuration",
+      "source_sha256": "1cd1cc4968136eb5a73565f7de1ac9a9a3107116d552606b1b679924ce9d6e4f"
+    },
+    {
+      "text": "client => qr/(?:client|remote|ip|host)=([^,]*)/;",
+      "classification": "configuration",
+      "source_sha256": "bd19d5e5ac33612b45d071e86a54769a8975c5922c216fcd647b4eb6a422f39f"
+    },
+    {
+      "text": "appname => qr/(?:app|application)=([^,]*)/;",
+      "classification": "configuration",
+      "source_sha256": "6cb4a0746eb8966b0dd24221045bca118358f6b6b15017a12907b04463e7c4ae"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "source": "content/docs/haproxy/security.md",
+  "language": "fr",
+  "fences": [],
+  "literal_blocks": [
+    {
+      "lines": [
+        123,
+        127
+      ],
+      "classification": "program-output",
+      "source_sha256": "001ad59f20e295f21d5c989d907d07a5d9d7e7583b71b7235d93711d4d1673c6"
+    }
+  ],
+  "literal_snippets": []
+}

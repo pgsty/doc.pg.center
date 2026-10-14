@@ -52,9 +52,9 @@ cascade:
 
 --------
 
-Patroni — шаблон для решений высокой доступности (HA) PostgreSQL на Python. Для максимальной применимости Patroni поддерживает различные распределённые хранилища конфигурации, такие как [ZooKeeper](https://zookeeper.apache.org/), [etcd](https://github.com/coreos/etcd), [Consul](https://github.com/hashicorp/consul) и [Kubernetes](https://kubernetes.io). Он будет полезен инженерам баз данных, администраторам баз данных, инженерам DevOps и SRE, которым необходимо быстро развернуть PostgreSQL высокой доступности в центрах обработки данных или где-либо ещё.
+Patroni — шаблон для решений высокой доступности (HA) PostgreSQL на Python. Для максимальной применимости Patroni поддерживает различные распределённые хранилища конфигурации, такие как [ZooKeeper](https://zookeeper.apache.org/), [etcd](https://github.com/coreos/etcd), [Consul](https://github.com/hashicorp/consul) и [Kubernetes](https://kubernetes.io). Надеемся, он будет полезен инженерам баз данных, администраторам баз данных, инженерам DevOps и SRE, которые хотят быстро развернуть PostgreSQL высокой доступности в центрах обработки данных — или где-либо ещё.
 
-Мы называем Patroni «шаблоном», потому что это далеко не универсальная или готовая к работе система репликации. У неё есть свои особенности. Используйте её осмотрительно. Существует множество способов обеспечить высокую доступность PostgreSQL; их список приведён в [документации PostgreSQL](https://wiki.postgresql.org/wiki/Replication,_Clustering,_and_Connection_Pooling).
+Мы называем Patroni «шаблоном», потому что это далеко не универсальная или готовая к работе система репликации. У неё будут свои подводные камни. Используйте её осмотрительно. Существует множество способов обеспечить высокую доступность PostgreSQL; их список приведён в [документации PostgreSQL](https://wiki.postgresql.org/wiki/Replication,_Clustering,_and_Connection_Pooling).
 
 Поддерживаемые в настоящее время версии PostgreSQL: от 9.3 до 18.
 

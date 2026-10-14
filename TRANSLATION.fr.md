@@ -1,7 +1,7 @@
 # Norme de traduction française
 
 Ce document définit la base terminologique et stylistique des pages françaises de
-pig.center. L'anglais est la source de vérité. Une traduction française est placée à
+doc.pg.center. L'anglais est la source de vérité. Une traduction française est placée à
 côté de sa source et porte le suffixe `.fr.md`.
 
 ## Périmètre et structure
@@ -13,8 +13,40 @@ côté de sa source et porte le suffixe `.fr.md`.
   métriques, noms de fichiers, chemins, URL, versions et espaces réservés.
 - Ne pas traduire les commandes, configurations, sources, sorties, journaux et
   messages d'erreur copiables, ni le texte des licences.
-- Préserver exactement les blocs de code, shortcodes, notes de bas de page, balises
-  HTML, définitions de référence, ancres explicites et nombres.
+- Préserver les blocs de code clôturés ou indentés octet pour octet, y compris
+  leurs commentaires, sauf les exceptions pgBadger et HAProxy enregistrées ci-dessous. Préserver
+  exactement les shortcodes, notes de bas de page, balises HTML, définitions de
+  référence, ancres explicites et nombres.
+- Uniquement dans les blocs explicatifs `text` de `content/docs/pgbadger/`
+  enregistrés et revus indépendamment, traduire l'aide des paramètres, les
+  explications des codes de retour, les étapes en langue naturelle du pseudocode
+  algorithmique, les descriptions de répertoires et leurs commentaires
+  explicatifs d'exemples. Conserver exactement les signatures CLI réelles,
+  options, valeurs autorisées, valeurs par défaut, commandes, SQL, configurations,
+  expressions régulières, diagnostics, textes juridiques, noms de personnes,
+  nombres et formules. Cette exception ne permet pas de traduire les
+  commentaires du code réel.
+- Enregistrer chaque exception dans `data/translation-fences/pgbadger.fr/` avec
+  les SHA-256 exacts du bloc source et traduit (`source_sha256`, `target_sha256`),
+  les littéraux protégés (`protected_literals`) et les lignes de commande ou de
+  sortie réelles (`protected_lines`). Un réviseur indépendant doit vérifier le
+  sens et les littéraux. Un bloc non enregistré ou dont le hachage a changé reste
+  protégé octet pour octet ; l'étiquette `text` seule ne constitue pas une exception.
+- Dans les blocs HAProxy clôturés ou indentés, traduire uniquement les descriptions
+  d'arguments, libellés de tableaux et explications en langue naturelle enregistrés
+  dans `data/translation-fences/haproxy.fr/`. Enregistrer les hachages exacts, la
+  classification, la conclusion de revue indépendante et les littéraux et lignes
+  protégés. Les configurations, commandes, sources, messages de protocole, sorties,
+  diagnostics et commentaires du code réel restent identiques octet pour octet,
+  y compris dans les blocs mixtes. Un bloc non enregistré ou modifié n'est pas exempté.
+- Conserver les identifiants de type `integer`, `boolean`, `bool`, `string`, `binary`
+  et `ip` dans les signatures d'échantillons HAProxy et leurs anciens alias.
+  Traduire normalement les descriptions de types dans le texte explicatif.
+- Le texte destiné aux lecteurs ne contient que des informations utiles à
+  l'utilisation du produit. Ne pas y ajouter de politique de traduction, de
+  notes du traducteur, de mention « cette page conserve le texte original » ou de
+  récit du processus de correction éditoriale. Conserver les données
+  d'attribution et les textes juridiques originaux.
 - Ajouter aux titres traduits l'identifiant rendu par le titre anglais lorsqu'aucune
   ancre explicite n'existe, afin de conserver les liens profonds entre langues.
 - Préfixer les liens vers une page traduite par `/fr/`. Les images et autres actifs
@@ -168,5 +200,10 @@ côté de sa source et porte le suffixe `.fr.md`.
 
 Chaque page anglaise doit posséder exactement une page française au même chemin
 logique. Les métadonnées de routage, liens amont, ancres, blocs de code, shortcodes,
-actifs et références doivent rester structurellement identiques. La validation se
+actifs et références doivent rester structurellement identiques. Les blocs de code
+restent identiques octet pour octet, sauf les blocs explicatifs pgBadger et HAProxy
+dont les hachages et littéraux exacts sont enregistrés et revus indépendamment
+selon les règles ci-dessus ; le code réel et ses commentaires restent protégés.
+Vérifier aussi l'absence de politique de traduction, de notes du traducteur et de
+récit du travail éditorial dans le texte destiné aux lecteurs. La validation se
 termine par une construction Hugo de production et un contrôle des liens internes.

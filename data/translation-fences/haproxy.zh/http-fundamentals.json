@@ -1,0 +1,152 @@
+{
+  "source": "content/docs/haproxy/http-fundamentals.md",
+  "language": "zh",
+  "fences": [
+    {
+      "index": 4,
+      "classification": "table-labels",
+      "source_sha256": "74c679c1d560aff6b4321f7b03e720b5427a96ef16d09dcae962a48dbc06ccd8",
+      "target_sha256": "74eb83d4ff647cfdb4206a15a200524119afc9859895a332318f2fe45b40fa8d",
+      "protected_literals": [],
+      "protected_lines": [
+        "   1     GET /serv/login.php?lang=en&profile=2 HTTP/1.1",
+        "   2     Host: www.mydomain.com",
+        "   3     User-agent: my small browser",
+        "   4     Accept: image/jpeg, image/gif",
+        "   5     Accept: image/png"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 4,
+          "source_sha256": "74c679c1d560aff6b4321f7b03e720b5427a96ef16d09dcae962a48dbc06ccd8",
+          "target_sha256": "74eb83d4ff647cfdb4206a15a200524119afc9859895a332318f2fe45b40fa8d"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 5,
+      "classification": "mixed-explanation",
+      "source_sha256": "713fe0e1c2c70c515ce93ae5f5bf17f7b249627858531511fd8ed7c2b7c41124",
+      "target_sha256": "39fbe048b3f63442cb9372cbde7eb901d0884eefb104974f93eebdbba81c2886",
+      "protected_literals": [
+        "URL"
+      ],
+      "protected_lines": [
+        "  /serv/login.php?lang=en&profile=2"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 5,
+          "source_sha256": "713fe0e1c2c70c515ce93ae5f5bf17f7b249627858531511fd8ed7c2b7c41124",
+          "target_sha256": "39fbe048b3f63442cb9372cbde7eb901d0884eefb104974f93eebdbba81c2886"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 6,
+      "classification": "mixed-explanation",
+      "source_sha256": "1b218adb01fd0ce9a994577d87ca888eaf3eaf29109f828cbc37e7428b80162b",
+      "target_sha256": "056d0ff96265a3f992712884cfd1d09735a3a89e4c4c4b14f7fe5552fe800dd7",
+      "protected_literals": [
+        "URI",
+        "HTTP/1.1",
+        "'://'",
+        "':'",
+        "'/'"
+      ],
+      "protected_lines": [
+        "  http://192.168.0.12:8080/serv/login.php?lang=en&profile=2"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 6,
+          "source_sha256": "1b218adb01fd0ce9a994577d87ca888eaf3eaf29109f828cbc37e7428b80162b",
+          "target_sha256": "056d0ff96265a3f992712884cfd1d09735a3a89e4c4c4b14f7fe5552fe800dd7"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 7,
+      "classification": "argument-description",
+      "source_sha256": "2f095112ef580f455b799eaf08262c9554da045c531db9aa4ff1dca6fb1ac1c8",
+      "target_sha256": "1e4d30ab1dcfadc7e6c2304143399a62c480bdfbd1bfe2beee7332ddbb38e289",
+      "protected_literals": [
+        "RFC7231",
+        "HAProxy",
+        "LWS",
+        "HTTP"
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 7,
+          "source_sha256": "2f095112ef580f455b799eaf08262c9554da045c531db9aa4ff1dca6fb1ac1c8",
+          "target_sha256": "1e4d30ab1dcfadc7e6c2304143399a62c480bdfbd1bfe2beee7332ddbb38e289"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 8,
+      "classification": "table-labels",
+      "source_sha256": "270dc83f96bd7216708515c65613312b5f6070a70bc25e3fad21cba5e1f31772",
+      "target_sha256": "e712af87a0115dbda03a561cbbc550dd7d46fc1087bd8aecbc284831b9cbd50b",
+      "protected_literals": [],
+      "protected_lines": [
+        "   1     HTTP/1.1 200 OK",
+        "   2     Content-length: 350",
+        "   3     Content-Type: text/html"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 8,
+          "source_sha256": "270dc83f96bd7216708515c65613312b5f6070a70bc25e3fad21cba5e1f31772",
+          "target_sha256": "e712af87a0115dbda03a561cbbc550dd7d46fc1087bd8aecbc284831b9cbd50b"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 9,
+      "classification": "table-labels",
+      "source_sha256": "f41b23ea4856c18e1c9be7bdd0d649a894746d7c0f46325edea5669f32b3b038",
+      "target_sha256": "0ae06cb0e69632af3de07a2b9632282b0a63fa21cafb906821d52833470054de",
+      "protected_literals": [
+        "\"http-request deny\"",
+        "HTTP/1.0",
+        "GET/HEAD/DELETE",
+        "\"h1-accept-payload-with-any-method\"",
+        "HAProxy",
+        "\"http-response deny\"",
+        "\"monitor fail\""
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 9,
+          "source_sha256": "f41b23ea4856c18e1c9be7bdd0d649a894746d7c0f46325edea5669f32b3b038",
+          "target_sha256": "0ae06cb0e69632af3de07a2b9632282b0a63fa21cafb906821d52833470054de"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    }
+  ],
+  "literal_blocks": [],
+  "literal_snippets": [],
+  "source_sha256": "274a62d2d8a2b35d89788c2cdf6fe3db339d8411c6ada3e232557b1225dadc34",
+  "target_sha256": "efa6316208583d16177dcea53e65e17d33abf19e50a378746f36b0029a6b6a15",
+  "review_scope": "Complete identified explanatory-fence inventory reviewed separately from structural/numeric technical screening and selective manual prose review. No claim of full independent sentence-by-sentence review of all prose.",
+  "literal_formatting_revalidation": {
+    "method": "Exact reviewed predecessor hashes and current source/target literal equality; remove obsolete protection only with proven default-protected exact fenced replacement.",
+    "events": []
+  }
+}

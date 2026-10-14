@@ -3,6 +3,7 @@ title: "Загрузка и установка"
 linkTitle: "Загрузка и установка"
 weight: 20
 description: "Официальные выпуски, пакеты, требования и установка из исходного кода"
+search_keywords: [--content-size, --help, --robot, --version, --zcat, JSON::XS, Text::CSV_XS, content, content-size, help, robot, size, version, zcat, zstdcat]
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [Руководство]
@@ -21,7 +22,7 @@ upstream_ref: "site snapshot of 2026-08-15"
 | Пакет Debian/Ubuntu | Дистрибутивы Linux на базе APT | [Репозиторий PostgreSQL Apt](https://wiki.postgresql.org/wiki/Apt) |
 | Разрабатываемый исходный код | Текущий код, ещё не вошедший в выпуск | [darold/pgbadger](https://github.com/darold/pgbadger) |
 
-Снимок документации на этом сайте основан на дереве исходного кода версии 13.2. Перед загрузкой всегда проверяйте страницу выпусков: локальный снимок намеренно зафиксирован, тогда как исходный проект продолжает выпускать новые версии.
+В примерах установки используется pgBadger 13.2. Перед загрузкой проверьте нужную версию на странице выпусков.
 
 ## Требования {#requirements}
 
@@ -51,6 +52,8 @@ $ sudo yum install perl-JSON-XS
 ```
 
 Параметр `--zcat` позволяет переопределить путь к программе распаковки. Если указать одну пользовательскую команду, смешивать разные форматы сжатия в одном запуске будет нельзя.
+
+Утилита `xz` должна поддерживать `--robot`, чтобы pgBadger мог читать метаданные архива. Сжимайте журналы lz4 с параметром `--content-size`, чтобы pgBadger мог определить их несжатый размер.
 
 ## Установка из официального архива {#install-from-tarball}
 

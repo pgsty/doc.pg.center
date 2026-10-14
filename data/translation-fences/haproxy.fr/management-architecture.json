@@ -1,0 +1,16 @@
+{
+  "source": "content/docs/haproxy/management-architecture.md",
+  "language": "fr",
+  "fences": [],
+  "literal_blocks": [
+    {
+      "lines": [
+        77,
+        79
+      ],
+      "classification": "program-output",
+      "source_sha256": "68c4752ecf9785a3548deb4bb87eada9553a43d4ea2ed5de3e98a6b11a421c10"
+    }
+  ],
+  "literal_snippets": []
+}

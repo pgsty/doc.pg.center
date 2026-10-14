@@ -2,7 +2,7 @@
 title: "API REST Patroni"
 weight: 40
 icon: fa-solid fa-book
-description: "Référence des points d'extrémité de l'API REST de Patroni et de leurs comportements opérationnels."
+description: "Référence des points de terminaison de l'API REST de Patroni et de leurs comportements opérationnels."
 module: [PATRONI]
 categories: [Référence]
 aliases: [/patroni/rest_api/]
@@ -10,7 +10,7 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/rest_api.html"
 ---
 
 <a id="rest_api"></a>
-Patroni dispose d'une API REST riche, utilisée par Patroni lui-même lors de la course au leader, par l'outil [patronictl](/fr/docs/patroni/patronictl#patronictl) afin d'effectuer des basculements, des basculements planifiés, des réinitialisations, des redémarrages ou des rechargements, par HAProxy ou tout autre équilibreur de charge pour effectuer des vérifications de santé HTTP, et bien entendu également utilisée pour la surveillance. Ci-dessous figure la liste des points d'accès de l'API REST de Patroni.
+Patroni dispose d'une API REST riche, utilisée par Patroni lui-même lors de la course au leader, par l'outil [patronictl](/fr/docs/patroni/patronictl#patronictl) afin d'effectuer des basculements, des basculements planifiés, des réinitialisations, des redémarrages ou des rechargements, par HAProxy ou tout autre équilibreur de charge pour effectuer des vérifications de santé HTTP, et bien entendu également utilisée pour la surveillance. Ci-dessous figure la liste des points de terminaison de l'API REST de Patroni.
 
 --------
 
@@ -26,22 +26,22 @@ Pour toutes les requêtes de vérification de santé `GET`, Patroni renvoie un d
 
 - `GET /standby-leader` : renvoie le code d’état HTTP **200** uniquement lorsque le nœud Patroni est en cours d’exécution en tant que leader dans un [cluster de secours](/fr/docs/patroni/standby_cluster#standby_cluster).
 
-- `GET /leader` : renvoie le code d’état HTTP **200** lorsque le nœud Patroni détient le verrou leader. La différence principale avec les deux précédents points d’accès est qu’elle ne tient pas compte de l’état d’exécution de PostgreSQL en tant que `primary` ou `standby_leader`.
+- `GET /leader` : renvoie le code d’état HTTP **200** lorsque le nœud Patroni détient le verrou leader. Contrairement à `GET /primary` et à `GET /standby-leader`, cette vérification ne dépend pas du fait que PostgreSQL s’exécute en tant que `primary` ou `standby_leader`.
 
 - `GET /replica` : point de terminaison de vérification de santé de la réplique. Il renvoie le code d’état HTTP **200** uniquement lorsque le nœud Patroni est dans l’état `running`, que son rôle est `replica` et que l’étiquette `noloadbalance` n’est pas définie.
 
-- `GET /replica?replication_state=<required state>` : point de contrôle de réplique. En plus des vérifications effectuées par `replica`, il vérifie également que l'état de réplication correspond à celui requis. Principalement utile avec `replication_state=streaming`, afin d'exclure les répliques encore en cours de synchronisation pendant une récupération archivée.
+- `GET /replica?replication_state=<required state>` : point de contrôle de réplique. En plus des vérifications effectuées par `replica`, il vérifie également que l'état de réplication correspond à celui requis. Principalement utile avec `replication_state=streaming`, afin d'exclure les répliques encore en cours de rattrapage lors d'une récupération depuis les archives.
 
-- `GET /replica?lag=<max-lag>` : point de contrôle de réplique. En plus des vérifications effectuées par `replica`, il vérifie également le délai de réplication et renvoie le code d’état **200** uniquement lorsque ce délai est inférieur à la valeur spécifiée. La clé cluster.last_leader_operation provenant du DCS est utilisée pour la position WAL du leader et le calcul du délai sur la réplique, pour des raisons de performance. max-lag peut être spécifié en octets (entier) ou sous forme lisible par l’humain, par exemple 16kB, 64MB, 1GB.
+- `GET /replica?lag=<max-lag>` : point de contrôle de réplique. En plus des vérifications effectuées par `replica`, il vérifie également le retard de réplication et renvoie le code d’état **200** uniquement lorsque ce retard est inférieur à la valeur spécifiée. La clé cluster.last_leader_operation provenant du DCS est utilisée pour la position WAL du leader et le calcul du retard sur la réplique, pour des raisons de performance. max-lag peut être spécifié en octets (entier) ou sous forme lisible par l’humain, par exemple 16kB, 64MB, 1GB.
 
   - `GET /replica?lag=1048576`
   - `GET /replica?lag=1024kB`
   - `GET /replica?lag=10MB`
   - `GET /replica?lag=1GB`
 
-- `GET /replica?tag_key1=value1&tag_key2=value2` : point de contrôle de réplique. En outre, il vérifie également les balises définies par l'utilisateur `key1` et `key2` ainsi que leurs valeurs respectives dans la section **tags** de la configuration YAML. Si une balise n'est pas définie pour une instance, ou si la valeur dans la configuration YAML ne correspond pas à la valeur demandée, le service renvoie le code d'état HTTP 503.
+- `GET /replica?tag_key1=value1&tag_key2=value2` : point de contrôle de réplique. En outre, il vérifie également les étiquettes définies par l'utilisateur `key1` et `key2` ainsi que leurs valeurs respectives dans la section **tags** de la configuration YAML. Si une étiquette n'est pas définie pour une instance, ou si la valeur dans la configuration YAML ne correspond pas à la valeur demandée, le code d'état HTTP 503 est renvoyé.
 
-Dans les requêtes suivantes, comme nous vérifions l'état de leader ou de standby-leader, Patroni ne prend pas en compte les étiquettes définies par l'utilisateur, qui seront ignorées.
+  Dans les requêtes suivantes, comme nous vérifions l'état de leader ou de standby-leader, Patroni ne prend pas en compte les étiquettes définies par l'utilisateur, qui seront ignorées.
 
   - `GET /?tag_key1=value1&tag_key2=value2`
   - `GET /leader?tag_key1=value1&tag_key2=value2`
@@ -50,19 +50,19 @@ Dans les requêtes suivantes, comme nous vérifions l'état de leader ou de stan
   - `GET /standby_leader?tag_key1=value1&tag_key2=value2`
   - `GET /standby-leader?tag_key1=value1&tag_key2=value2`
 
-- `GET /read-only` : comme le point d'accès précédent, mais inclut également le primaire.
+- `GET /read-only` : comme le point de terminaison précédent, mais inclut également le primaire.
 
-- `GET /synchronous` ou `GET /sync` : renvoie le code d’état HTTP **200** uniquement lorsque le nœud Patroni fonctionne en réplica synchrone.
+- `GET /synchronous` ou `GET /sync` : renvoie le code d’état HTTP **200** uniquement lorsque le nœud Patroni fonctionne en réplique synchrone.
 
-- `GET /read-only-sync` : comme le point d'accès précédent, mais inclut également le primaire.
+- `GET /read-only-sync` : comme le point de terminaison précédent, mais inclut également le primaire.
 
 - `GET /quorum` : renvoie le code d'état HTTP **200** uniquement lorsque ce nœud Patroni est répertorié comme nœud de quorum dans `synchronous_standby_names` sur le primaire.
 
-- `GET /read-only-quorum` : comme le point d'accès précédent, mais inclut également le primaire.
+- `GET /read-only-quorum` : comme le point de terminaison précédent, mais inclut également le primaire.
 
-- `GET /asynchronous` ou `GET /async` : renvoie le code d’état HTTP **200** uniquement lorsque le nœud Patroni fonctionne en réplica asynchrone.
+- `GET /asynchronous` ou `GET /async` : renvoie le code d’état HTTP **200** uniquement lorsque le nœud Patroni fonctionne en réplique asynchrone.
 
-- `GET /asynchronous?lag=<max-lag>` ou `GET /async?lag=<max-lag>` : point de contrôle de basculement asynchrone. En plus des vérifications provenant de `asynchronous` ou `async`, il vérifie également le délai de réplication et renvoie le code d’état **200** uniquement lorsque ce délai est inférieur à la valeur spécifiée. La clé cluster.last_leader_operation provenant du DCS est utilisée pour la position WAL du leader et le calcul du délai sur la réplique, pour des raisons de performance. max-lag peut être spécifié en octets (entier) ou sous forme lisible par l’humain, par exemple 16kB, 64MB, 1GB.
+- `GET /asynchronous?lag=<max-lag>` ou `GET /async?lag=<max-lag>` : point de contrôle de réplique asynchrone. En plus des vérifications effectuées par `asynchronous` ou `async`, il vérifie également le retard de réplication et renvoie le code d’état **200** uniquement lorsque ce retard est inférieur à la valeur spécifiée. La clé cluster.last_leader_operation provenant du DCS est utilisée pour la position WAL du leader et le calcul du retard sur la réplique, pour des raisons de performance. max-lag peut être spécifié en octets (entier) ou sous forme lisible par l’humain, par exemple 16kB, 64MB, 1GB.
 
   - `GET /async?lag=1048576`
   - `GET /async?lag=1024kB`
@@ -73,11 +73,11 @@ Dans les requêtes suivantes, comme nous vérifions l'état de leader ou de stan
 
 - `GET /liveness` : renvoie le code d'état HTTP **200** si la boucle de battement de cœur Patroni fonctionne correctement, et **503** si la dernière exécution remonte à plus de `ttl` secondes sur le serveur primaire ou à plus de `2*ttl` secondes sur la réplique. Peut être utilisé pour `livenessProbe`.
 
-- `GET /readiness?lag=<max-lag>&mode=apply|write` : renvoie le code d’état HTTP **200** lorsque le nœud Patroni fonctionne en tant que leader ou lorsque PostgreSQL est actif, en réplication et pas trop en retard par rapport au leader. Le paramètre lag définit la marge maximale de retard autorisée pour une instance de secours, avec une valeur par défaut de `maximum_lag_on_failover`. Le retard peut être spécifié en octets ou en valeurs lisibles par l’humain, par exemple 16kB, 64MB ou 1GB. Le paramètre mode indique si le WAL doit être appliqué (rejoué) ou simplement reçu (écrit). La valeur par défaut est apply.
+- `GET /readiness?lag=<max-lag>&mode=apply|write` : renvoie le code d’état HTTP **200** lorsque le nœud Patroni fonctionne en tant que leader ou lorsque PostgreSQL est actif, en réplication et pas trop en retard par rapport au leader. Le paramètre lag définit le retard maximal autorisé pour une réplique, avec une valeur par défaut de `maximum_lag_on_failover`. Le retard peut être spécifié en octets ou en valeurs lisibles par l’humain, par exemple 16kB, 64MB ou 1GB. Le paramètre mode indique si le WAL doit être rejoué (apply) ou simplement reçu (write). La valeur par défaut est apply.
 
-Lorsqu’il est utilisé comme Kubernetes `readinessProbe`, il garantit que les nouveaux pods démarrés ne deviennent prêts qu’après avoir rattrapé le leader. Cela, combiné à un PodDisruptionBudget, protège contre une terminaison prématurée du leader lors d’un redémarrage progressif des nœuds. Il garantit également que les répliques incapables de suivre la réplication ne traitent pas le trafic en lecture seule. Ce point d’accès peut être utilisé pour `readinessProbe` lorsque l’utilisation des endpoints Kubernetes pour les élections de leader n’est pas possible (OpenShift).
+Lorsqu’il est utilisé comme Kubernetes `readinessProbe`, il garantit que les nouveaux pods démarrés ne deviennent prêts qu’après avoir rattrapé le leader. Cela, combiné à un PodDisruptionBudget, protège contre une terminaison prématurée du leader lors d’un redémarrage progressif des nœuds. Il garantit également que les répliques incapables de suivre la réplication ne traitent pas le trafic en lecture seule. Ce point de terminaison peut être utilisé pour `readinessProbe` lorsque l’utilisation des endpoints Kubernetes pour les élections de leader n’est pas possible (OpenShift).
 
-Le point d'entrée `liveness` est très léger et n'exécute aucune requête SQL. Les sondes doivent être configurées de manière à commencer à échouer environ au moment où la clé leader expire. Avec la valeur par défaut de `ttl`, qui est `30s`, les sondes devraient ressembler à l'exemple suivant :
+Le point de terminaison `liveness` est très léger et n'exécute aucune requête SQL. Les sondes devraient être configurées de manière à commencer à échouer environ au moment où la clé leader expire. Avec la valeur par défaut de `ttl`, qui est `30s`, les sondes devraient ressembler à l'exemple suivant :
 
 ```yaml
 readinessProbe:
@@ -106,7 +106,7 @@ livenessProbe:
 
 ## Point de terminaison de surveillance {#monitoring-endpoint}
 
-Le `GET /patroni` est utilisé par Patroni lors de la course au leader. Il peut également être utilisé par votre système de surveillance. Le document JSON produit par cette extension a la même structure que le JSON produit par les points d'entrée de vérification de santé.
+Le `GET /patroni` est utilisé par Patroni lors de la course au leader. Il peut également être utilisé par votre système de surveillance. Le document JSON produit par ce point de terminaison a la même structure que le JSON produit par les points de terminaison de vérification de santé.
 
 **Exemple** : un cluster sain
 
@@ -200,7 +200,7 @@ $ curl -s http://localhost:8008/patroni  | jq .
 }
 ```
 
-**Exemple :** Un cluster déverrouillé avec le mode de sécurité du [DCS](/fr/docs/patroni/dcs_failsafe_mode#dcs_failsafe_mode) activé
+**Exemple :** Un cluster déverrouillé avec le [mode failsafe du DCS](/fr/docs/patroni/dcs_failsafe_mode#dcs_failsafe_mode) activé
 
 ``` bash
 $ curl -s http://localhost:8008/patroni  | jq .
@@ -291,7 +291,7 @@ $ curl -s http://localhost:8008/patroni  | jq .
 }
 ```
 
-Récupérez les métriques Patroni au format Prometheus via l'endpoint `GET /metrics`.
+Récupérez les métriques Patroni au format Prometheus via le point de terminaison `GET /metrics`.
 
 ``` bash
 $ curl http://localhost:8008/metrics
@@ -402,13 +402,13 @@ La métrique `patroni_postgres_state` fournit une représentation numérique de 
 Valeurs d'état de PostgreSQL
 
 > [!NOTE]
-> Ces valeurs numériques sont fixes et ne changeront jamais afin de préserver la compatibilité ascendante avec les systèmes de surveillance existants. Si de nouveaux états sont ajoutés à l’avenir, ils seront affectés à de nouvelles valeurs numériques sans modifier les valeurs existantes.
+> Ces valeurs numériques sont fixes et ne changeront jamais afin de préserver la rétrocompatibilité avec les systèmes de surveillance existants. Si de nouveaux états sont ajoutés à l’avenir, ils seront affectés à de nouvelles valeurs numériques sans modifier les valeurs existantes.
 
 --------
 
 ## Points de terminaison d'état du cluster {#cluster-status-endpoints}
 
-- L’endpoint `GET /cluster` génère un document JSON décrivant la topologie et l’état actuels du cluster :
+- Le point de terminaison `GET /cluster` génère un document JSON décrivant la topologie et l’état actuels du cluster :
 
 ``` bash
 $ curl -s http://localhost:8008/cluster | jq .
@@ -454,7 +454,7 @@ $ curl -s http://localhost:8008/cluster | jq .
 }
 ```
 
--  Le point d'accès `GET /history` fournit une vue sur l'historique des basculements ou des basculements planifiés du cluster. Le format est très similaire au contenu des fichiers d'historique dans le répertoire `pg_wal`. La seule différence réside dans le champ horodatage, qui indique quand la nouvelle ligne temporelle a été créée.
+-  Le point de terminaison `GET /history` fournit une vue sur l'historique des basculements planifiés ou des basculements du cluster. Le format est très similaire au contenu des fichiers d'historique dans le répertoire `pg_wal`. La seule différence réside dans le champ horodatage, qui indique quand la nouvelle timeline a été créée.
 
 ``` bash
 $ curl -s http://localhost:8008/history | jq .
@@ -490,7 +490,7 @@ $ curl -s http://localhost:8008/history | jq .
 
 --------
 
-## Point d'entrée de configuration {#config-endpoint}
+## Point de terminaison de configuration {#config-endpoint}
 
 `GET /config` : Obtenir la version actuelle de la configuration dynamique :
 
@@ -542,12 +542,11 @@ $ curl -s -XPATCH -d \
 
 L'appel d'API REST ci-dessus met à jour la configuration existante et renvoie la configuration mise à jour.
 
-Vérifions que le nœud a bien appliqué cette configuration. Tout d'abord, il doit commencer à imprimer des lignes de journalisation toutes les 5 secondes (loop_wait=5). Le changement de "max_connections" nécessite un redémarrage, donc le drapeau "pending_restart" doit être exposé :
+Vérifions que le nœud a bien appliqué cette configuration. Tout d'abord, il devrait commencer à afficher des lignes de journal toutes les 5 secondes (loop_wait=5). Le changement de "max_connections" nécessite un redémarrage, donc le drapeau "pending_restart" devrait être affiché :
 
 ``` bash
 $ curl -s http://localhost:8008/patroni | jq .
 {
-  "database_system_identifier": "6287881213849985952",
   "postmaster_start_time": "2024-08-28 19:39:26.352526+00:00",
   "xlog": {
     "location": 2197818976
@@ -575,7 +574,7 @@ $ curl -s http://localhost:8008/patroni | jq .
 
 Suppression des paramètres :
 
-Si vous souhaitez supprimer (réinitialiser) un paramètre, appliquez une mise à jour avec `null` :
+Si vous souhaitez supprimer (réinitialiser) un paramètre, il suffit d'envoyer un PATCH avec la valeur `null` :
 
 ``` bash
 $ curl -s -XPATCH -d \
@@ -602,7 +601,7 @@ $ curl -s -XPATCH -d \
 
 L'appel ci-dessus retire `postgresql.parameters.max_connections` de la configuration dynamique.
 
-`PUT /config` : Il est également possible d'effectuer la réécriture complète d'une configuration dynamique existante sans condition :
+`PUT /config` : Il est également possible d'effectuer la réécriture complète d'une configuration dynamique existante de manière inconditionnelle :
 
 ``` bash
 $ curl -s -XPUT -d \
@@ -632,19 +631,19 @@ $ curl -s -XPUT -d \
 
 <a id="switchover_api"></a>
 
-### basculement planifié {#switchover}
+### Basculement planifié {#switchover}
 
-Le point de terminaison `/switchover` ne fonctionne que lorsque le cluster est sain (un leader est présent). Il permet également de planifier un basculement planifié à une heure donnée.
+Le point de terminaison `/switchover` ne fonctionne que lorsque le cluster est sain (un leader est présent). Il permet également de planifier l'exécution d'un basculement planifié à une heure donnée.
 
-Lors de l'appel de l'endpoint `/switchover`, un candidat peut être spécifié mais n'est pas obligatoire, contrairement à l'endpoint `/failover`. Si aucun candidat n'est fourni, tous les nœuds du cluster éligibles participeront à la course au leader après le départ du leader.
+Lors de l'appel du point de terminaison `/switchover`, un candidat peut être spécifié mais n'est pas obligatoire, contrairement au point de terminaison `/failover`. Si aucun candidat n'est fourni, tous les nœuds éligibles du cluster participeront à la course au leader après la rétrogradation du leader.
 
-Dans le corps JSON de la requête `POST`, vous devez spécifier le champ `leader`. Les champs `candidate` et `scheduled_at` sont facultatifs et peuvent être utilisés pour planifier un basculement à une heure précise.
+Dans le corps JSON de la requête `POST`, vous devez spécifier le champ `leader`. Les champs `candidate` et `scheduled_at` sont facultatifs et peuvent être utilisés pour planifier l'exécution d'un basculement planifié à une heure précise.
 
 Selon la situation, les requêtes peuvent renvoyer des codes d’état HTTP et des corps différents. Le code d’état **200** est retourné lorsque le basculement planifié ou le basculement s’est terminé avec succès. Si le basculement planifié a été correctement planifié, Patroni renvoie le code d’état HTTP **202**. En cas d’erreur, un code d’état d’erreur (l’un des codes **400**, **412** ou **503**) est retourné, accompagné de détails dans le corps de la réponse.
 
 `DELETE /switchover` peut être utilisé pour supprimer le basculement planifié actuellement prévu.
 
-**Exemple :** effectuer un basculement planifié vers une station de secours saine
+**Exemple :** effectuer un basculement planifié vers n'importe quelle réplique saine
 
 ``` bash
 $ curl -s http://localhost:8008/switchover -XPOST -d '{"leader":"postgresql1"}'
@@ -659,7 +658,7 @@ $ curl -s http://localhost:8008/switchover -XPOST -d \
 Successfully switched over to "postgresql2"
 ```
 
-**Exemple :** planifier un basculement planifié du leader vers un autre nœud de secours sain du cluster à une heure précise.
+**Exemple :** planifier un basculement planifié du leader vers n'importe quelle autre réplique saine du cluster à une heure précise.
 
 ``` bash
 $ curl -s http://localhost:8008/switchover -XPOST -d \
@@ -667,9 +666,9 @@ $ curl -s http://localhost:8008/switchover -XPOST -d \
 Switchover scheduled
 ```
 
-### basculement {#failover}
+### Basculement {#failover}
 
-Le point de terminaison `/failover` peut être utilisé pour effectuer un basculement manuel lorsque aucun nœud sain n'est disponible (par exemple, vers un réplica asynchrone si tous les réplicas synchrones ne sont pas suffisamment sains pour être promus). Toutefois, il n'existe aucune obligation pour un cluster de ne pas avoir de leader : le basculement peut également être exécuté sur un cluster sain.
+Le point de terminaison `/failover` peut être utilisé pour effectuer un basculement manuel lorsque aucun nœud sain n'est disponible (par exemple, vers une réplique asynchrone si toutes les répliques synchrones ne sont pas suffisamment sains pour être promus). Toutefois, il n'existe aucune obligation pour un cluster de ne pas avoir de leader : le basculement peut également être exécuté sur un cluster sain.
 
 Dans le corps JSON de la requête `POST`, vous devez spécifier le champ `candidate`. Si le champ `leader` est spécifié, un basculement planifié est déclenché à la place.
 
@@ -680,14 +679,14 @@ $ curl -s http://localhost:8008/failover -XPOST -d '{"candidate":"postgresql1"}'
 Successfully failed over to "postgresql1"
 ```
 
-> [!AVERTISSEMENT]
-> [Faites preuve de prudence](/fr/docs/patroni/rest_api#failover_healthcheck) lors de l'utilisation de cette API, car cela peut entraîner une perte de données dans certaines situations. Dans la plupart des cas, [l'endpoint de basculement planifié](/fr/docs/patroni/rest_api#switchover_api) répond aux besoins de l'administrateur.
+> [!WARNING]
+> [Soyez très prudent](/fr/docs/patroni/rest_api#failover_healthcheck) lors de l'utilisation de ce point de terminaison, car cela peut entraîner une perte de données dans certaines situations. Dans la plupart des cas, [le point de terminaison de basculement planifié](/fr/docs/patroni/rest_api#switchover_api) répond aux besoins de l'administrateur.
 
 Les points de terminaison `POST /switchover` et `POST /failover` sont utilisés par [patronictl_switchover](/fr/docs/patroni/patronictl#patronictl_switchover) et [patronictl_failover](/fr/docs/patroni/patronictl#patronictl_failover) respectivement.
 
-`DELETE /switchover` est utilisé par [patronictl flush cluster-name basculement planifié](/fr/docs/patroni/patronictl#patronictl_flush_parameters).
+`DELETE /switchover` est utilisé par [patronictl flush cluster-name switchover](/fr/docs/patroni/patronictl#patronictl_flush_parameters).
 
-|                              | Basculer | Basculer planifié                  |
+|                              | Basculement | Basculement planifié                  |
 |------------------------------|----------|------------------------------------|
 | Nécessite un leader spécifié | non      | oui                                |
 | Nécessite un candidat spécifié | oui    | non                                |
@@ -698,27 +697,31 @@ Comparaison entre basculement et basculement planifié
 
 <a id="failover_healthcheck"></a>
 
-### Standby sain {#healthy-standby}
+### Réplique de secours saine {#healthy-standby}
 
-Plusieurs vérifications doivent être effectuées par un membre d’un cluster afin de pouvoir participer à la course au rôle de leader lors d’un basculement planifié ou de devenir leader en tant que candidat au basculement ou au basculement planifié :
+Un membre d’un cluster devrait satisfaire plusieurs critères afin de pouvoir participer à la course au rôle de leader lors d’un basculement planifié ou de devenir leader en tant que candidat au basculement ou au basculement planifié :
 
-- -  être accessible via l'API Patroni ;
-- -  ne pas avoir l'étiquette `nofailover` définie sur `true` ;
-- -  avoir le watchdog entièrement fonctionnel (si requis par la configuration) ;
-- -  en cas de basculement planifié dans un cluster sain ou de basculement automatique, ne pas dépasser le décalage maximal de réplication (`maximum_lag_on_failover` [paramètre de configuration](/fr/docs/patroni/config/dynamic#dynamic)) ;
-- -  en cas de basculement planifié dans un cluster sain ou de basculement automatique, ne pas avoir un numéro de timeline inférieur à celui du cluster si `check_timeline` [paramètre de configuration](/fr/docs/patroni/config/dynamic#dynamic) est défini sur `true` ;
-- -  en mode [synchrone](/fr/docs/patroni/replication_modes#synchronous_mode) :
-  -   -  En cas de basculement planifié (avec ou sans candidat) : être inclus dans la liste des membres `/sync` ;
-  -   -  En cas de basculement dans des clusters sains ou défaillants, cette vérification est omise.
+- être accessible via l'API Patroni ;
+- ne pas avoir l'étiquette `nofailover` définie sur `true` ;
+- avoir le watchdog entièrement fonctionnel (si requis par la configuration) ;
+- en cas de basculement planifié dans un cluster sain ou de basculement automatique, ne pas dépasser le retard maximal de réplication (`maximum_lag_on_failover` [paramètre de configuration](/fr/docs/patroni/config/dynamic#dynamic)) ;
+- en cas de basculement planifié dans un cluster sain ou de basculement automatique, ne pas avoir un numéro de timeline inférieur à celui du cluster si `check_timeline` [paramètre de configuration](/fr/docs/patroni/config/dynamic#dynamic) est défini sur `true` ;
+- en mode [synchrone](/fr/docs/patroni/replication_modes#synchronous_mode) :
+  - En cas de basculement planifié (avec ou sans candidat) : être listé parmi les membres de la clé `/sync` ;
+  - En cas de basculement dans des clusters sains ou défaillants, cette vérification est omise.
 
-> [!AVERTISSEMENT]
-> En cas de basculement manuel dans un cluster sans leader, un candidat peut être promu même si :   - il n'est pas membre du `/sync` lorsque le mode synchrone est activé ;   - son retard dépasse le retard maximal de réplication autorisé ;   - son numéro de timeline est inférieur au dernier numéro de timeline connu du cluster.
+> [!WARNING]
+> En cas de basculement manuel dans un cluster sans leader, un candidat sera autorisé à être promu même si :
+>
+> - il ne figure pas parmi les membres de la clé `/sync` lorsque le mode synchrone est activé ;
+> - son retard dépasse le retard maximal de réplication autorisé ;
+> - son numéro de timeline est inférieur au dernier numéro de timeline connu du cluster.
 
 <a id="restart_endpoint"></a>
 
 --------
 
-## Point d'arrêt de redémarrage {#restart-endpoint}
+## Point de terminaison de redémarrage {#restart-endpoint}
 
 - `POST /restart` : Vous pouvez redémarrer Postgres sur le nœud spécifique en effectuant l'appel `POST /restart`. Dans le corps JSON de la requête `POST`, il est possible de spécifier de manière optionnelle certaines conditions de redémarrage :
   - **restart_pending** : booléen, si défini à `true`, Patroni redémarrera PostgreSQL uniquement lorsque le redémarrage est en attente afin d'appliquer certaines modifications de configuration de PostgreSQL.
@@ -736,15 +739,15 @@ Les points de terminaison `POST /restart` et `DELETE /restart` sont utilisés pa
 
 ## Point de terminaison de rechargement {#reload-endpoint}
 
-L'appel `POST /reload` ordonne à Patroni de relire et d'appliquer le fichier de configuration. Cela équivaut à envoyer le signal `SIGHUP` au processus Patroni. Si vous avez modifié certains paramètres de Postgres nécessitant un redémarrage (comme **shared_buffers**), vous devez toujours effectuer explicitement le redémarrage de Postgres en appelant l'endpoint `POST /restart` ou à l'aide de [patronictl restart](/fr/docs/patroni/patronictl#patronictl_restart).
+L'appel `POST /reload` ordonne à Patroni de relire et d'appliquer le fichier de configuration. Cela équivaut à envoyer le signal `SIGHUP` au processus Patroni. Si vous avez modifié certains paramètres de Postgres nécessitant un redémarrage (comme **shared_buffers**), vous devez toujours effectuer explicitement le redémarrage de Postgres en appelant le point de terminaison `POST /restart` ou à l'aide de [patronictl_restart](/fr/docs/patroni/patronictl#patronictl_restart).
 
-Le point de terminaison reload est utilisé par [patronictl_reload](/fr/docs/patroni/patronictl#patronictl_reload).
+Le point de terminaison de rechargement est utilisé par [patronictl_reload](/fr/docs/patroni/patronictl#patronictl_reload).
 
 --------
 
-## Réinitialiser le point de terminaison {#reinitialize-endpoint}
+## Point de terminaison de réinitialisation {#reinitialize-endpoint}
 
-`POST /reinitialize` : réinitialiser le répertoire de données PostgreSQL sur le nœud spécifié. Cette opération ne peut être exécutée qu'aux répliques. Une fois appelée, elle supprime le répertoire de données et déclenche `pg_basebackup` ou une autre méthode alternative de création de réplique [replica creation method](/fr/docs/patroni/replica_bootstrap#custom_replica_creation).
+`POST /reinitialize` : réinitialiser le répertoire de données PostgreSQL sur le nœud spécifié. Cette opération n'est autorisée que sur les répliques. Une fois appelée, elle supprime le répertoire de données et démarre `pg_basebackup` ou une autre [méthode de création de réplique](/fr/docs/patroni/replica_bootstrap#custom_replica_creation).
 
 L'appel peut échouer si Patroni est en boucle de récupération (redémarrage) d'une instance Postgres défaillante. Pour contourner ce problème, il est possible de spécifier `{"force":true}` dans le corps de la requête.
 

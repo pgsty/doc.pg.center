@@ -47,7 +47,7 @@ def sha256(path):
 
 def normalize(value):
     parsed = urlsplit(value)
-    if parsed.netloc and parsed.netloc not in {"pig.center", "www.pig.center"}:
+    if parsed.netloc and parsed.netloc not in {"doc.pg.center", "www.doc.pg.center"}:
         return value
     path = re.sub(r"^/(?:zh|fr|ja|de|ru)(?=/(?:docs|search|attribution)(?:/|$))", "", parsed.path)
     return urlunsplit((parsed.scheme, parsed.netloc, path, parsed.query, parsed.fragment))
@@ -85,7 +85,7 @@ def link_signature(body, source, language):
     if language == "zh":
         def local_fragment(value):
             parsed = urlsplit(value)
-            local = (not parsed.netloc or parsed.netloc in {"pig.center", "www.pig.center"}) and parsed.scheme in {"", "http", "https"}
+            local = (not parsed.netloc or parsed.netloc in {"doc.pg.center", "www.doc.pg.center"}) and parsed.scheme in {"", "http", "https"}
             return urlunsplit((*parsed[:4], "")) if local and (not parsed.path or parsed.path.startswith(PREFIX)) else value
         values = [local_fragment(value) for value in values]
     # Footnotes may be defined next to their translated paragraph rather than
@@ -129,6 +129,19 @@ def technical_errors(source, target, row):
         errors.append(f"{label}: additional numeric facts have no review explanation")
     diagnostics = row.get("protected_diagnostics", [])
     errors.extend(f"{label}: {error}" for error in R.diagnostic_errors(eb, tb, diagnostics))
+    if source == ROOT / "changelog.md" and language == "de":
+        # These original program messages use quotes rather than code spans.
+        # Compare whole quoted messages so an added suffix cannot pass the
+        # existing substring-count check; Markdown line wrapping is allowed.
+        for literal in (
+            "unclean server",
+            "client disconnect while server was not ready",
+            "client disconnect before everything was sent to the server",
+        ):
+            pattern = '"' + r"[ \t\r\n]+".join(map(re.escape, literal.split())) + '"'
+            expected = len(re.findall(pattern, eb))
+            if not expected or len(re.findall(pattern, tb)) != expected:
+                errors.append(f"{label}: original diagnostic changed (quoted message): {literal!r}")
     errors.extend(f"{label}: {error}" for error in R.placeholder_errors(eb, tb, diagnostics))
     return errors
 
@@ -236,7 +249,7 @@ def rendered_errors(build, sources):
             path = build / route.lstrip("/") / "index.html"
             pages.append(path)
             doc, english = R.RenderedContent(path), R.RenderedContent(build / node["id"].lstrip("/") / "index.html")
-            require(doc.canonical == ["https://pig.center" + route], label + ": canonical")
+            require(doc.canonical == ["https://doc.pg.center" + route], label + ": canonical")
             require(doc.html_languages == [locale], label + ": HTML language")
             require(([h for h, _ in doc.headings] == [h for h, _ in english.headings]) if language == "zh"
                     else doc.headings == english.headings, label + ": headings/required anchors")
@@ -245,7 +258,7 @@ def rendered_errors(build, sources):
             require([(d, normalize(p)) for d, p in doc.pager] == english.pager, label + ": pager")
             for other, other_locale in LANGUAGES.items():
                 alternate = ("" if other == "en" else "/" + other) + node["id"]
-                require(doc.alternates.get(other_locale) == "https://pig.center" + alternate, label + ": alternate " + other)
+                require(doc.alternates.get(other_locale) == "https://doc.pg.center" + alternate, label + ": alternate " + other)
                 if other != language:
                     require(alternate in doc.languages, label + ": language switch " + other)
             markdown = (build / route.lstrip("/") / "index.md").read_text(encoding="utf-8")
@@ -259,7 +272,7 @@ def rendered_errors(build, sources):
                 redirected = R.RenderedContent(build / (local + alias).lstrip("/") / "index.html")
                 require(redirected.canonical == doc.canonical and redirected.refresh == doc.canonical, label + ": alias " + alias)
         llms = R.llms_entries((build / (local + PREFIX).lstrip("/") / "llms-full.txt").read_text(encoding="utf-8"))
-        expected = [("https://pig.center" + local + n["id"] + "index.md",
+        expected = [("https://doc.pg.center" + local + n["id"] + "index.md",
                      (build / (local + n["id"]).lstrip("/") / "index.md").read_text(encoding="utf-8").strip()) for n in nodes]
         require(llms == expected, language + ": complete LLMS bodies/order")
         printing = build / local.lstrip("/") / "_print/docs/pgbouncer/index.html"

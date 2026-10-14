@@ -1,0 +1,1576 @@
+{
+  "schema_version": 1,
+  "component": "patroni",
+  "audit_date": "2026-10-14",
+  "status": "complete",
+  "scope": {
+    "english_pages": 24,
+    "translation_pairs": 120,
+    "languages": [
+      "zh",
+      "fr",
+      "ja",
+      "de",
+      "ru"
+    ]
+  },
+  "source_policy": "Current working-tree English, with independently verified source corrections synchronized into all five translations; no historical source pin.",
+  "review_method": "Complete independent semantic comparison of every current English prose paragraph, explanatory list/table/parameter entry, translatable metadata, heading, link/image label and all 71 release versions with zh/fr/ja/de/ru; executable examples independently compared byte-for-byte. Current tagged primary evidence decides consequential English corrections. Automated checks supplement semantic reading.",
+  "review_references": [
+    "tmp/review/patroni/reports/Patroni 多语言 语义终审.md",
+    "tmp/review/patroni/editorial-followup-20261014.md"
+  ],
+  "pages": {
+    "_index.md": {
+      "source_sha256": "ce34a3837300a6c891f4538ef075373d276d5d80b566c779b3704e692bcecdaf",
+      "translations": {
+        "zh": {
+          "translation_sha256": "21cba6078f2913dae55d9710392f0d3c5a83c12eb60b12dc8b1f6bb6fad05d42",
+          "numeric_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "4.1.5": 1
+              }
+            },
+            "reason": "The translated page title and introduction both identify Patroni 4.1.5; English repeats it once less."
+          },
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "95c8718e267db5c5cd56235d84dd305f842558f87b092e125f867781930afe2f",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "9dc5d29ed7d8f4a50d741c3477f5701fa717b298257b6084ddf68ddb8c12a56b",
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "c6b5ed710a7ec4fdbd48f090ad918b183ae0bf7729ab90407770b58f341e59aa",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "7a6ffe02dd988bf4535cc57e41054f1e32591a5b216358d8b6b8d17186655676",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "guides"
+    },
+    "citus.md": {
+      "source_sha256": "a2b218a76a3c0e5987ef7b54623ae7bcb8c9a8b2484d2f477cb08dc8b2565fac",
+      "translations": {
+        "zh": {
+          "translation_sha256": "6bba7ff4ff301e7ec420e85287066acd6fa6647ba09c7baf5c201710c36507a9",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "eb1d9f0ac8d410cc82a810d31ab134fe55092eda1b14c4b7f8a6c891edd9c427",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "22cc04942d5b3a694156da5c0283c6ebbcc8a0ff79f8d31fb86932c310e99dc7",
+          "numeric_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "1": 2,
+                "2": 3
+              }
+            },
+            "reason": "Japanese uses Arabic digits for English spelled counts or articles (one/single/a, two, three, once, twice and ordinals). The complete current delta was inspected; command arguments, versions, defaults and units stay unchanged."
+          },
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "cbde56bd8b0ec08871dab521a0834efe4e14b3c00297bf52349ec2d12ce3b618",
+          "semantic_review": "complete",
+          "inline_literal_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "`patronictl pause`": 1,
+                "`patronictl switchover`": 2,
+                "`patronictl remove`": 1,
+                "`patronictl list`": 1,
+                "`patronictl restart`": 1
+              }
+            },
+            "reason": "Six explicit patronictl CLI spellings replace raw cross-reference labels with readable code-formatted command labels; destinations and command meanings are unchanged."
+          }
+        },
+        "ru": {
+          "translation_sha256": "e9a1ede0ce3f2bc0ce1b50513dff90abd5acf9eb9ad80be3c6a912c37e329d92",
+          "semantic_review": "complete",
+          "inline_literal_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "`patronictl pause`": 1,
+                "`patronictl switchover`": 2,
+                "`patronictl remove`": 1,
+                "`patronictl list`": 1,
+                "`patronictl restart`": 1
+              }
+            },
+            "reason": "Six explicit patronictl CLI spellings replace raw cross-reference labels with readable code-formatted command labels; destinations and command meanings are unchanged."
+          }
+        }
+      },
+      "semantic_review_group": "guides"
+    },
+    "config/_index.md": {
+      "source_sha256": "6f908a462fd6749790129d765ef194181cff88b3cf825817c8e2ced355d9ab31",
+      "translations": {
+        "zh": {
+          "translation_sha256": "f4e78eace2f3368d0725498c1692ed48412b7d445fc69c2b950750f38079b202",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "99852ced5d6991b40b62dbc45ab35fe8b8800d73b85a0a6792febdaea7a19bf4",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "a5d8ac0fd3b3171fe388cd109ab95254f0bccab49d91e661f902ec4902761886",
+          "numeric_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "1": 1
+              }
+            },
+            "reason": "Japanese 1 represents English one by one in sorted YAML file loading; no technical value changed."
+          },
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "43c1f30998995a9e25881ab63f48805e2ef767c2ffb9005a289ed1750e87e45a",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "d406c35919682cafa0d123f567d20aa86159b48804bc78fb7fcb22fd690185c8",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "operations"
+    },
+    "config/dynamic.md": {
+      "source_sha256": "5f470c292235a99f9db9a6cf4956b7d62b273edf32d5331ba9d148704cc640b5",
+      "translations": {
+        "zh": {
+          "translation_sha256": "8dde4fa955d44e45ca64aba93dc6bf64cc00b16c2fb454a224fb0a89ff9ca290",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "a7d4739b1e6fe9a3553eae0bf8776cfe4769000d5532b563eac557939440e520",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "65307b203be36ea60a914f0b7653a6aaf447dabf3d7782d73c679b7b9d969270",
+          "numeric_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "1": 1,
+                "2": 1,
+                "0": 1
+              }
+            },
+            "reason": "Japanese 1 represents one synchronous replica, 2 represents receiving messages a second time, and 0 represents spelled-out zero in primary_start_timeout."
+          },
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "c794071a92a2fc0a3f1822edef6b7f5c3c530f86bb56bf7b08fdc6137961b0a6",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "73a5a52846f5f7f0dc01b7607087718dcc74143b3fbed5dd9af624b5c14638b4",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "operations"
+    },
+    "config/env.md": {
+      "source_sha256": "8d1f1ba36b2ce064bc872e83776f3701ea492a396bca11cd1b8b2ddf89503dc2",
+      "translations": {
+        "zh": {
+          "translation_sha256": "1e25382c6f1aca0ef0d25f7b3585a271f37e673ebfcea301aceca90986f1d8a3",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "41d630d17cce29ca1af4852572d2beb583dbae044cf46c7e30813b9b226352c2",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "34b4004019635be8c2d5a856d414281ea77eb50d951dadd483d74a9b52cb77aa",
+          "numeric_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "2": 1,
+                "1": 6,
+                "3": 1
+              }
+            },
+            "reason": "Japanese digits represent two-step logging, one supported database, one or more CA certificates, each single dictionary/permission value, and one-third of the Raft election timeout. All defaults and units remain identical."
+          },
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "f300d417b89b34ee1359bdc52382b2c23d3a68ec90480298b3c3e92d64824588",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "c8167373699ce02679dd3838abd1a79fd4b17d7197c2f7d4367c3a9fbd33e088",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "operations"
+    },
+    "config/yaml.md": {
+      "source_sha256": "190c955682069dd064beaeab056477dd75840cf41b663d0d3d9ce69a048cea62",
+      "translations": {
+        "zh": {
+          "translation_sha256": "009e0ec6a406c56f1fc85458a5c40d695d2140bfa53baba1d91f38e486f703ea",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "4fdffb923478d5ab6d9e85c0d3abee2869168dcbf504941cc2a53ba5d7852b44",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "f25b0f7d5235a2deccc06e495f472bb2d35e727bd99ff470a624e51fbe7f3e37",
+          "numeric_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "2": 2,
+                "1": 10,
+                "3": 2
+              }
+            },
+            "reason": "Japanese digits represent the English two-step logger, single values and commands, one or more CA certificates, two-node/third-node Raft FAQ, and one-third election timeout. All numeric parameter constraints remain identical."
+          },
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "1e9d71bca1ee50407899f08a088a605d861cbb505c91a1469193678e383763dd",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "3f036e2a1a94c92148fed1a277eaca84ce63e97cc21cc3ec9dec2e086c6afc70",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "operations"
+    },
+    "contributing_guidelines.md": {
+      "source_sha256": "ba19d05d163b6db4c17e787e216e200df5afe1b02067a73d9a0fe02e950bacfb",
+      "translations": {
+        "zh": {
+          "translation_sha256": "93de1f86395f846cefbb57fad56c1c7de36a09cdac089b078249c522b5a404c5",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "6f0ea0056b2af9b1429fe89aa10091b8a1960e7211db3903c403379dc5656280",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "3ecc2f2e9f0fef37943a3727fa0ee578687388805235b4b54d215bce69f802ad",
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "38880dbcecc73812f0c3fb2e80c5158c37bafe55d625e6c21279a5aa5d6db7f6",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "acc10965448eb2c64b83f2f748d720937886bc7041337564819527882d42b62c",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "guides"
+    },
+    "dcs_failsafe_mode.md": {
+      "source_sha256": "02dbee6ee7f4381391b54fcefc4db09d582ac57ff22efb5a1feba0d003821837",
+      "translations": {
+        "zh": {
+          "translation_sha256": "c8db766ec97b3b157d5c8c48ef943e274a6f92031e3d7a2dc9fa6568ee33cff5",
+          "numeric_variant": {
+            "delta": {
+              "missing": {
+                "8": 1
+              },
+              "added": {}
+            },
+            "reason": "K8s is expanded to Kubernetes, removing the digit 8 in the product abbreviation."
+          },
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "0a8ed696551a219a89d7fca264cffc88986a133f0d386b14494c626a9c69ad13",
+          "numeric_variant": {
+            "delta": {
+              "missing": {
+                "8": 1
+              },
+              "added": {}
+            },
+            "reason": "K8s is expanded to Kubernetes, removing the digit 8 in the product abbreviation."
+          },
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "dfc1343776dacb4d9ed16bc22ff9dfbb5e7f8bb5bc802323208aecf8f0f132be",
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "ed5102691c7f0386d84b0691ef4587cf922e88d067a5f76cc82abf9c11388f93",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "de66ce2b391f77f43f12bcfca15fa925048423634cf855013129552ab780ae1f",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "guides"
+    },
+    "existing_data.md": {
+      "source_sha256": "2f66ecd5773ef825e2eb713d332eb30f5bebaa90aa539a2cdb24cb23af370d37",
+      "translations": {
+        "zh": {
+          "translation_sha256": "caa40c88b11f539a9221059149092f41ee281991dec688d900c97245f2a94f07",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "d1ae66c3f28958e4349deb0b65d7dc1ee220a146bf2ff68d17e2b030dfaaedf2",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "3aa81e6d20f2b3e0371738c860efff1325b5b01d6fe20e45b3d354173cdd43ce",
+          "numeric_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "1": 1,
+                "2": 1
+              }
+            },
+            "reason": "Japanese uses Arabic digits for English spelled counts or articles (one/single/a, two, three, once, twice and ordinals). The complete current delta was inspected; command arguments, versions, defaults and units stay unchanged."
+          },
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "591538f6b2929ea052083976d13fc86038f5339ce976c70a985a895559b07313",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "3e52e894d479c1b62537c517551c78acbf3b84813a577b46949c534ddfdd9f03",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "guides"
+    },
+    "faq.md": {
+      "source_sha256": "19b820e0b3034e61890ebad46ff0753ffa699a3a664c9079da4402a347b3aa1b",
+      "translations": {
+        "zh": {
+          "translation_sha256": "ce23c8feb1df6bdfad0c52d64d339c2df46a5a31ed7a193fd26745ea38f48857",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "1210f5c66c169f7d904dead8dc39d06a9790dcfb2d43fda8a659a7dad477985d",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "831a41e56f0c7790eb4929292dae2e368b9c988384342df83defc26a60f76794",
+          "numeric_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "2": 5,
+                "3": 1,
+                "1": 2
+              }
+            },
+            "reason": "Arabic digits express English two/multiple/single and ordinal counts. The additional 2 is the explicit two bundled applications in the current FAQ. PostgreSQL 11+ was synchronized in EN/JA and is not an exception."
+          },
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "bc00b8881c027a476a95f24dd6323cfd2060aa64c60114f9db19f6bf1ec96826",
+          "semantic_review": "complete",
+          "inline_literal_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "`patronictl list`": 5,
+                "`patronictl edit-config`": 1,
+                "`patronictl reload`": 2,
+                "`patronictl pause`": 1,
+                "`patronictl restart`": 1
+              }
+            },
+            "reason": "Ten explicit patronictl CLI labels are code-formatted instead of the source raw cross-reference labels; all underlying commands/destinations remain the same."
+          }
+        },
+        "ru": {
+          "translation_sha256": "845e947a203235db0dad3e73eff97f0de9f85ec4e9621649594b20646bc07578",
+          "semantic_review": "complete",
+          "inline_literal_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "`namespace`": 1,
+                "`scope`": 1,
+                "`patronictl list`": 5,
+                "`patronictl edit-config`": 1,
+                "`patronictl reload`": 2,
+                "`patronictl pause`": 1,
+                "`patronictl restart`": 1
+              }
+            },
+            "reason": "Ten actual patronictl CLI labels replace raw cross-reference labels, and the existing namespace/scope prose names gain one pair of backticks; no value or destination changed."
+          }
+        }
+      },
+      "semantic_review_group": "guides"
+    },
+    "ha_multi_dc.md": {
+      "source_sha256": "41a80cdad57f979883ccc7e396377fa08eea9e0b27806ba281e94ab274f3b713",
+      "translations": {
+        "zh": {
+          "translation_sha256": "1a1db4cc1f33ec7e60236ebeb5a1b79147b6d89c968cdd133685d00befe36318",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "efd7b3e40fc3862198a40f06e08924c24041fd86643f61ed45cc03d2708b8daa",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "7c2441569c6e83dc68bf8a877ad342507595d41aac03f234e6f55b752f48f6f7",
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "d0ebb292b69168146bb943b2d0fb3c8b1aab761d76e80954957ecaccf7b35055",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "1da3e66459b5d412b8dcf04c3e87f35e1702688591ae2611053fb761985e513e",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "guides"
+    },
+    "installation.md": {
+      "source_sha256": "910814ef9c887fb6fd57fa4a374ec41a65a7bc25eb333eac9ce3b8e868870079",
+      "translations": {
+        "zh": {
+          "translation_sha256": "cf06488d4abc59866cd0eb71aa83e66654b1f9d5562c14f1726d48493d19a523",
+          "numeric_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "8": 1
+              }
+            },
+            "reason": "Chinese explicitly says RHEL 8 and repeats the same replacement value 8 in the explanation. The pgdg-rhel8-extras repository name and RHEL version are unchanged."
+          },
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "98522d51b461e81f862bff6cdede2f92d5f617c7ce5a7f504135e8fd19251295",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "1c27eca44d91d8bcfbb51a0b6b753d91564153d3e5a6f4e2727f19a075020fe2",
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "039eabf08f5060d4b45d736da64b31922b40d474d9462c988d84ff8fe118b113",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "0962d9597c94e630a874ff37d04dbb509ab464a573e52a8302afcf8d4ac2dcf7",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "guides"
+    },
+    "kubernetes.md": {
+      "source_sha256": "857e7f62b10241e4478b982f8f6e62ba879ba326ebc428abb2aa20ba642cf5b2",
+      "translations": {
+        "zh": {
+          "translation_sha256": "94fffb1ada6587aefc44c378888399f923d4ed9c9537a43c2fba19eb57ffb74e",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "2e63a187a3ebbfbd0a73a1946f7895513b6e91f90212f2066d670ba53ba520ee",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "aeff5b7a7dc7f90b4a282aa3cba07623726074454d7a86f1fc1c3fa63eb4e1c3",
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "e87169afa6a63f425fa66bef9d844a49f2a537174fa673edce54d30132a09262",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "6094e0ba9f6b6b8bc96375ce4e6ac396a045beec1175139819c4be9020fe0b99",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "guides"
+    },
+    "patronictl.md": {
+      "source_sha256": "ec5af143cdad7fec941486822c448c89e85ee6f1eb49512b18d75fcab9960032",
+      "translations": {
+        "zh": {
+          "translation_sha256": "633804d952634875642b11573014b148ece399d98ee85e2f1d2dac8a60a73019",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "fa4917e16e41da270f5a4a8c47728de0cc4469dad77414c11dc31932772161ad",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "b489fcaa6c0cd2fd59b0a7be2a5d3d6018403d9685afe54198d3f38e406b8cbd",
+          "numeric_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "1": 7
+              }
+            },
+            "reason": "Japanese 1 represents choose one, at least one option, one member, one selected member, one option per configuration, one or more reload members, and one random restart member."
+          },
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "1093014c265faed79288d9fab5635660038aa0bcbd8268e6e46b497c31c3f974",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "2cd23c7491cb67b6d49b9797c5cfdb4888b11efbac7518e1e9db32c68395ada5",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "operations"
+    },
+    "pause.md": {
+      "source_sha256": "a41f6ca75dca16f6f09be321c57b21b262b8f7c88bcf91cb46125251956cfdbf",
+      "translations": {
+        "zh": {
+          "translation_sha256": "a89f6ff9cbb4f5b24e3d0e6a070864897222a5d561caec533cb851ec6e02fe7a",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "cf11281112790c73a7753826d9e0f454d8531bad6c35614b7270002eb7afacd7",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "983268b513018ded2a6d5cfaa9f9b972a2236ea6ee229b488e1739ed70aaa6d4",
+          "numeric_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "1": 1
+              }
+            },
+            "reason": "Japanese uses Arabic digits for English spelled counts or articles (one/single/a, two, three, once, twice and ordinals). The complete current delta was inspected; command arguments, versions, defaults and units stay unchanged."
+          },
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "4a061c374dc84c17f7f0a99fbc7545783bfd5caadfe025e34e259f6d7a054e6f",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "2c371ddab442f1820188235a232b359febd719e9a85d8e910e20aff96a5eb08f",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "guides"
+    },
+    "readme.md": {
+      "source_sha256": "fe83f81f2c8943ca891dde7f66a643ce8d9f026bcfb380eab3e6ef25e68e01c8",
+      "translations": {
+        "zh": {
+          "translation_sha256": "f4abdec9a33d8ffef9a8f0938cd58dfd672e5e3f7769e430f4eb962f90ac2c80",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "189190d9d8b7fe2b79d801759907753387357af246e99b4ed5ab4ebb81a9de35",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "ac607027be768f89c67bcc894e8c90fa637740ed8bbf8e49c66743bf59912082",
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "d1a58ed5da8b75ae88e6e4f2b99c9a775569a7211772e235a97433be87b5eb91",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "5c0ce949594c61be2e0a3888279ff0889a116e13627f5ede1fa591b2368e0c47",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "guides"
+    },
+    "releases.md": {
+      "source_sha256": "9edbcdab6951d952771d6e0ab3253a2e1d973a4e2c851a3a59f032fd49a8f67f",
+      "translations": {
+        "zh": {
+          "translation_sha256": "5d2b932067eaa95ae2ce95135362396045f9059189e7906785db86f75d6279cd",
+          "numeric_variant": {
+            "delta": {
+              "missing": {
+                "2": 2,
+                "3": 1
+              },
+              "added": {}
+            },
+            "reason": "English 2-node and 2-digits are written as double-node and two-digit in Chinese; 3rd party is translated as third-party. Versions and thresholds are preserved."
+          },
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "3d14ed47a31986083b5f8c96b794672566f9246073dfcf511ec0f06362dc81ab",
+          "numeric_variant": {
+            "delta": {
+              "missing": {
+                "2": 2,
+                "1": 1,
+                "3": 1,
+                "8": 7
+              },
+              "added": {}
+            },
+            "reason": "The 2-node and 2-digits counts are spelled deux; one count is spelled un; 3rd party becomes tierces. K8s/k8s is expanded to Kubernetes in seven occurrences. Versions and thresholds are preserved."
+          },
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "e9519e37b88bff5fd2de2c5ba9cff846baf31e473d3408f8e8b93c49c9a566f3",
+          "numeric_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "2": 12,
+                "1": 27,
+                "3": 2,
+                "4": 1,
+                "5": 1
+              }
+            },
+            "reason": "Japanese uses Arabic digits for English spelled counts or articles (one/single/a, two, three, once, twice and ordinals). The complete current delta was inspected; command arguments, versions, defaults and units stay unchanged."
+          },
+          "semantic_review": "complete",
+          "semantic_review_addendum": {
+            "original_review_sha256": "ed346d3ef9ea4756430ee2f32b41b61b960e756c565d44deefe4ef42f4f02f8e",
+            "final_sha256": "169d8e5e47501d7721ea632f5a34bf631991210377a294f96539fd968afda755",
+            "versions": [
+              "3.1.0",
+              "0.90",
+              "0.80"
+            ],
+            "reviewed_spans": 3,
+            "evidence_sha256": "249835cad4ba89a0809434c1ceaf46ea8807b67e9d9a66cd1d08478103e887c4",
+            "reason": "Move each contributor attribution from a component name to the end of the complete change title, preserving all operational words, names, examples, URLs, values and list ownership."
+          }
+        },
+        "de": {
+          "translation_sha256": "9acac4da4a45429ebbe9c400055df95c12241d87f8a761efa6aec9a7a73d5141",
+          "semantic_review": "complete",
+          "numeric_variant": {
+            "delta": {
+              "missing": {
+                "3": 1
+              },
+              "added": {}
+            },
+            "reason": "In release 2.0.0, English 3rd party is the lexical German Drittanbieter. This ordinal is not a node count, version, threshold or default; the adjacent three/two/one-node requirements retain the same meaning."
+          }
+        },
+        "ru": {
+          "translation_sha256": "c24c91123d10b3bad694b518c8a9f996b31ebba7175d809d87ff092e5a9a0e50",
+          "numeric_variant": {
+            "delta": {
+              "missing": {
+                "3": 1
+              },
+              "added": {}
+            },
+            "reason": "English 3rd party is translated as third-party rather than a numeric ordinal."
+          },
+          "semantic_review": "complete",
+          "inline_literal_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "`replay_lsn`": 1
+              }
+            },
+            "reason": "Release 4.0.6 repeats replay_lsn explicitly where English uses the pronoun it. The reviewed relation and comparison direction are unchanged."
+          }
+        }
+      },
+      "semantic_review_group": "releases",
+      "link_review_addendum": {
+        "date": "2026-10-14",
+        "scope": "Version 1.2 documentation migration introduction and Documentation improvements entry; two links in each of English and zh/fr/ja/de/ru, 12 links total. No surrounding prose, commands, parameters, contributor attributions or other release entries changed.",
+        "evidence": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/docs/releases.rst",
+        "upstream_target": "https://patroni.readthedocs.io",
+        "replaced_local_targets": {
+          "en": "/patroni",
+          "zh": "/zh/patroni",
+          "fr": "/fr/patroni",
+          "ja": "/ja/patroni",
+          "de": "/de/patroni",
+          "ru": "/ru/patroni"
+        },
+        "reason": "Both official source links point to Patroni Read the Docs. Restore the original complete URL as both label and destination instead of the broken local /patroni routes, preserving the historical migration meaning.",
+        "previous_source_sha256": "08436e70c4258be20a757e716e68946fd5250a0f62dcd5969571bda385e22a3a",
+        "previous_translation_sha256": {
+          "zh": "16eb9c5286dc0388a3c7ae093b9221acc4a17c1ca10644ea034eeb4b4837ca49",
+          "fr": "b9308a95598e5883d47c4826b41b4dd8ea06800424ae9e5e887ac60c1d8ec8bc",
+          "ja": "169d8e5e47501d7721ea632f5a34bf631991210377a294f96539fd968afda755",
+          "de": "1600ef05087c3d1705216d08f616d6db091a13fb9ccd2efcddcd74004b79bef5",
+          "ru": "72d4e307c42cc3077bbcca32e25d460edbc95d141534cbaf665e5df1654bd636"
+        }
+      }
+    },
+    "replica_bootstrap.md": {
+      "source_sha256": "55199cf584d9309195c3daca1d7a73d5c589f10fd40d9add8fc5d3c426df7ba2",
+      "translations": {
+        "zh": {
+          "translation_sha256": "25a9813b25632f69f4b7d63b51f14f983dd9825fc515faf7fe6092f5bfe4058e",
+          "numeric_variant": {
+            "delta": {
+              "missing": {
+                "2": 1
+              },
+              "added": {}
+            },
+            "reason": "English 2 examples is written as two examples in Chinese."
+          },
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "53891bb4e1eb540f9226742201c3ad01ed2ec0a8954d586129a5e9c77defb137",
+          "numeric_variant": {
+            "delta": {
+              "missing": {
+                "2": 1
+              },
+              "added": {}
+            },
+            "reason": "English 2 examples is written as deux exemples."
+          },
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "6be7116b975c519382ae1bb5af659e9056123f8220dc2df99cee7cf8cb836f8e",
+          "numeric_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "2": 3,
+                "1": 2
+              }
+            },
+            "reason": "Arabic 2/1 express English two examples, one custom method/source and second-cluster explanation. Removal of two numbered drawbacks followed the synchronized bootstrap source correction; PG15+ appears identically in EN/JA."
+          },
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "221c95ed72976ef3c625a000d3d89cc0f712f00c87989c37fd5b2d577a4c1195",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "953d94096d3b0dd7c1e3b4f9d5e6ed372c6041e59dbcf74ad48592dd67c17c80",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "guides"
+    },
+    "replication_modes.md": {
+      "source_sha256": "50353d5371e59838d0ee62e9cae5638bb49f353b149891acbc6ed1da7a7cbc63",
+      "translations": {
+        "zh": {
+          "translation_sha256": "05b6f86a4baa04f37cd20fb06ebd04d667bff323a6f01e7151c8ea5fb335a3cd",
+          "numeric_variant": {
+            "delta": {
+              "missing": {
+                "2": 1
+              },
+              "added": {}
+            },
+            "reason": "English 2 node clusters is written as two-node clusters in Chinese."
+          },
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "1c58ea4a06d5e2a432c2820bbce38e3d9efa390ff067f3eb20a2e4b8c46a9d46",
+          "numeric_variant": {
+            "delta": {
+              "missing": {
+                "2": 1
+              },
+              "added": {}
+            },
+            "reason": "English 2 node clusters is written as clusters à deux nœuds."
+          },
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "92793e19d9e1f6682a41e2ca742b290bfb56a497d96566e4398a1e5f9d7eff3a",
+          "numeric_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "1": 6,
+                "2": 2,
+                "3": 2
+              }
+            },
+            "reason": "Arabic 1/2/3 express English single/one, two/three nodes and named ordinal/count examples. Removed one-replica/last-voter/once-only warning counts belonged to the rejected strict-mode claims, removed in all languages. Defaults, 4.1.5 and quorum syntax stay equal."
+          },
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "44ad569f8fde48d4c85cb0b429d31388eaa6a41075cbdcb60941560b48650a45",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "2129369769f60c423e81552ec2c5d1cac213a7ebd774904eb7acc8e86c1740c6",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "guides"
+    },
+    "rest_api.md": {
+      "source_sha256": "16ac51c761e0b437ced80016f19f2ecbe495ef0c65513e1dc67ebaa7344cc834",
+      "translations": {
+        "zh": {
+          "translation_sha256": "16937539a5c68e71fa1c5107ea359eed25c6da863757217fe7b322415773fd2e",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "41aeffd367ae1506a0ddfbeaf3f1c9192fc9a4431d3be480a69a3331cd9ea5b1",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "d9380ac534d73ab102169a032f08421b94c5b6dc01b4e468351163d0a0cf1d09",
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "9e4ab5d1ca5f579e980eb75c7922c0d3c4b7735c38854ce81b6969ba84944e09",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "75008c74e6de551ae58e092cb6dd024ac578a85e027ee18b1cfd48bfe345dd62",
+          "semantic_review": "complete",
+          "inline_literal_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "`lag`": 1,
+                "`mode`": 1
+              }
+            },
+            "reason": "One additional backtick pair each formats the existing lag and mode parameter names in explanatory prose; endpoint/query syntax and values remain identical."
+          }
+        }
+      },
+      "semantic_review_group": "operations"
+    },
+    "security.md": {
+      "source_sha256": "c67d716ded6b54a332df25532b9a28a2fd484af3ff238fa44b80e8c87eb04f88",
+      "translations": {
+        "zh": {
+          "translation_sha256": "daced09fa73da3c1c853cd15cbd2fa88b91a390cc174edbe8e5cf9b736dc2177",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "d1fe5dd4c22d7c13f570572d7604794961b5ec3daddb221fd01962fa95878c05",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "094d0bc1107188eccec688d1bf9c6cc49532d886f65b2501bd3f5262040174d3",
+          "numeric_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "2": 1,
+                "1": 2
+              }
+            },
+            "reason": "Japanese uses Arabic digits for English spelled counts or articles (one/single/a, two, three, once, twice and ordinals). The complete current delta was inspected; command arguments, versions, defaults and units stay unchanged."
+          },
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "078cb8db6f1c8aef90288b3e4089452de360625c890df413862d2f65ccc7e99f",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "3793c5018b2abb15ca6d9cac7565a22f43815a56b189f7e014f5173c7d202de1",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "guides"
+    },
+    "standby_cluster.md": {
+      "source_sha256": "d87fdaf029a21f97bc8c9935b294d15d68c03f93651600ae670f3e6678868f8f",
+      "translations": {
+        "zh": {
+          "translation_sha256": "a0379aab786c8e29f94c4f4928c826e48c1a0eb819714e625f8702bba50787db",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "6587e74669df3537af1d39f7635296857ed4d2d386faeccd7afecb927883e528",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "86723e53327a658a8f8755c85b27083d8c0e9ddc5a78801312c95cb5e1eddcef",
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "0b66e839216fd9e529388cfa22449fa9f28fbc10213ce916543a076fdd5b4428",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "545153c355308c8c3979e046ab1b1e3eaac238b85a6b46c7b15cbdc59fbbd1e3",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "guides"
+    },
+    "tools_integration.md": {
+      "source_sha256": "e65b67bdbc03064654b9162e5c9eaf25a89d91c7597c2ccf19bfe1657d582693",
+      "translations": {
+        "zh": {
+          "translation_sha256": "abf787675af4309788465fb39c5f488f6b9baeee956018df367e0d8824fad12f",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "cace46517c8a0baa7daab0ad3289f8595e81c9b4c968041c0c8fb5fd62a8e7de",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "1816a33a0054d74299aae4f0437a0f5bb1fc6bb50fde1a476775de05bbc38c7d",
+          "numeric_variant": {
+            "delta": {
+              "missing": {},
+              "added": {
+                "2": 1
+              }
+            },
+            "reason": "Japanese uses Arabic digits for English spelled counts or articles (one/single/a, two, three, once, twice and ordinals). The complete current delta was inspected; command arguments, versions, defaults and units stay unchanged."
+          },
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "7cc1903637688c588961892e60b4679a2e4f3085a1a031a0c19beae10e340980",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "ade1ccb3a4086e2f674e0e98336bee6b6c980ac9460decc581c9d4a2c39f52b5",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "guides"
+    },
+    "watchdog.md": {
+      "source_sha256": "8b3df770fbf540c02a99d91042817a161076f6258a743e5111883fc971c423c8",
+      "translations": {
+        "zh": {
+          "translation_sha256": "b2926ea774f274b69042dc69285c69b2c409fabed4ce52aa7808c66c404e9c98",
+          "semantic_review": "complete"
+        },
+        "fr": {
+          "translation_sha256": "34d25906bdb49642f71836fd3eabba221ea9c40a10a4c0a7c2f1470af2bde45b",
+          "semantic_review": "complete"
+        },
+        "ja": {
+          "translation_sha256": "aecc2cd0534ee6b4a135de233e92dee3310a30ed235ce9acb78911bdf04733d7",
+          "semantic_review": "complete"
+        },
+        "de": {
+          "translation_sha256": "450adaf7f5e2454e6d21846a091d3eb68985f812a7f3b31e20c28ab2a96f156d",
+          "semantic_review": "complete"
+        },
+        "ru": {
+          "translation_sha256": "45e4392676a8056ca890ef1193f4cf9e2cfa8015bea41d7aba41dd0c53a4d3b2",
+          "semantic_review": "complete"
+        }
+      },
+      "semantic_review_group": "guides"
+    }
+  },
+  "upstream_findings": [
+    {
+      "issue": "history --force documentation was copied from flush",
+      "resolution": "Removed unsupported parameter from EN/FR/JA/DE/RU; ZH already omitted it.",
+      "evidence": "https://github.com/patroni/patroni/blob/v4.1.5/patroni/ctl.py"
+    },
+    {
+      "issue": "PATRONI_CONFIG_VARIABLE is a Python constant, not the environment variable name",
+      "resolution": "Use PATRONI_CONFIGURATION in all six config pages. PATRONI_CONFIG_FILE was not substituted.",
+      "evidence": "https://github.com/patroni/patroni/blob/v4.1.5/patroni/config.py"
+    },
+    {
+      "issue": "standby_leader_label_value default primary was suspected to be wrong",
+      "resolution": "Confirmed as correct in the implementation; retained.",
+      "evidence": "https://github.com/patroni/patroni/blob/v4.1.5/patroni/dcs/kubernetes.py"
+    },
+    {
+      "issue": "duplicate database_system_identifier in one REST API response example",
+      "resolution": "Removed the stale first identifier in all six copies; retained the current identifier."
+    },
+    {
+      "issue": "wrong CLI deep-link destinations",
+      "resolution": "Relocated all 95 existing command/subsection IDs to their corresponding headings in every language; ID sets retained."
+    },
+    {
+      "issue": "source spelling, inline escaping and reference defects",
+      "resolution": "Corrected SIHGUP, DENTIFY_SYSTEM, --s, migration step 1.2, malformed Citus major-upgrade reference and inline copyable literals in all six languages."
+    },
+    {
+      "issue": "HTML title-ref escaping around /<namespace>/<scope>/config",
+      "resolution": "Use a correct inline-code DCS path in all six YAML pages; Chinese still folds the repeated explanation into a pronoun."
+    },
+    {
+      "issue": "config child pages shared weights, so Hugo used translated titles to reorder the navigation",
+      "resolution": "Use distinct weights 10/20/30 for dynamic/YAML/environment in all six languages, preserving the original English sequence."
+    }
+  ],
+  "semantic_review": {
+    "status": "complete",
+    "english_logical_pages": 24,
+    "translation_pairs": 120,
+    "reviewed_files": 144,
+    "languages": [
+      "zh",
+      "fr",
+      "ja",
+      "de",
+      "ru"
+    ],
+    "groups": {
+      "operations": {
+        "logical_pages": 6,
+        "translation_pairs": 30,
+        "pages": [
+          "config/_index.md",
+          "config/dynamic.md",
+          "config/env.md",
+          "config/yaml.md",
+          "patronictl.md",
+          "rest_api.md"
+        ],
+        "note": "tmp/review/patroni/research_notes/Patroni 多语言 语义终审/operations.json",
+        "note_sha256": "a8d3a27ba023d39e416250dc5d1352f624426f8dcda376a83c876b8a7c2612e4"
+      },
+      "guides": {
+        "logical_pages": 17,
+        "translation_pairs": 85,
+        "pages": [
+          "_index.md",
+          "citus.md",
+          "contributing_guidelines.md",
+          "dcs_failsafe_mode.md",
+          "existing_data.md",
+          "faq.md",
+          "ha_multi_dc.md",
+          "installation.md",
+          "kubernetes.md",
+          "pause.md",
+          "readme.md",
+          "replica_bootstrap.md",
+          "replication_modes.md",
+          "security.md",
+          "standby_cluster.md",
+          "tools_integration.md",
+          "watchdog.md"
+        ],
+        "note": "tmp/review/patroni/research_notes/Patroni 多语言 语义终审/guides.json",
+        "note_sha256": "112d33a1181632bab554bf242e256534f865fd779435d5f5111280a7f84d6904"
+      },
+      "releases": {
+        "logical_pages": 1,
+        "translation_pairs": 5,
+        "pages": [
+          "releases.md"
+        ],
+        "note": "tmp/review/patroni/research_notes/Patroni 多语言 语义终审/releases.json",
+        "note_sha256": "598c7eb327c57fd67423d156a3653eb73bb61b5dd007c3708fc6ffc2325ac21b"
+      }
+    },
+    "release_versions": {
+      "count": 71,
+      "range": [
+        "4.1.5",
+        "0.80"
+      ],
+      "versions": [
+        "4.1.5",
+        "4.1.4",
+        "4.1.3",
+        "4.1.2",
+        "4.1.1",
+        "4.1.0",
+        "4.0.7",
+        "4.0.6",
+        "4.0.5",
+        "4.0.4",
+        "4.0.3",
+        "4.0.2",
+        "4.0.1",
+        "4.0.0",
+        "3.3.2",
+        "3.3.1",
+        "3.3.0",
+        "3.2.2",
+        "3.2.1",
+        "3.2.0",
+        "3.1.2",
+        "3.1.1",
+        "3.1.0",
+        "3.0.4",
+        "3.0.3",
+        "3.0.2",
+        "3.0.1",
+        "3.0.0",
+        "2.1.7",
+        "2.1.6",
+        "2.1.5",
+        "2.1.4",
+        "2.1.3",
+        "2.1.2",
+        "2.1.1",
+        "2.1.0",
+        "2.0.2",
+        "2.0.1",
+        "2.0.0",
+        "1.6.5",
+        "1.6.4",
+        "1.6.3",
+        "1.6.2",
+        "1.6.1",
+        "1.6.0",
+        "1.5.6",
+        "1.5.5",
+        "1.5.4",
+        "1.5.3",
+        "1.5.2",
+        "1.5.1",
+        "1.5.0",
+        "1.4.6",
+        "1.4.5",
+        "1.4.4",
+        "1.4.3",
+        "1.4.2",
+        "1.4.1",
+        "1.4",
+        "1.3.6",
+        "1.3.5",
+        "1.3.4",
+        "1.3.3",
+        "1.3.2",
+        "1.3.1",
+        "1.3",
+        "1.2",
+        "1.1",
+        "1.0",
+        "0.90",
+        "0.80"
+      ],
+      "ownership_signature_sha256": [
+        "2718723222595ac4e0910fc7a6ea8dcda76496f4781183e8fc283c1dc01df981",
+        "466298023851d9964dde33705b7f169a3b09bf6da7461747003cd1258c362a2e",
+        "be7896f65f915867a23f436e70aed8bc63571f2a57bf32f6d692544435c79b4e",
+        "3b5cafb050a47c6b12fcc5456f158eda75383b19e7afca58431c4bc75e26e3d5",
+        "08d07157a25973aa1b20409d4a8d6634178e90920b55136ed8e3d9abf306274c",
+        "8b752ba0526c5a7b96cccaa0b62fcbc268da47793af5163ed4a1977301dbb752",
+        "c1b6771246a7618fe2f32d66c7f82e05700dab83071d1f908b9aea928fae2d78",
+        "b3ddabe3c8557e83556a321241c07686df183ce70879a4c7e98f588e78eab789",
+        "bc7c82e7e0ae41efaa534dd6a9fc6f74e628b0f4fe17bdb8878691a4def4a339",
+        "9d471116ee6a79828118d6af1932c867a8f65de4cb18256be36064684ff7f7c2",
+        "f1fa3bae9234f4726d33e6a0553f9688dab5415fb6b3fe418e7968cc8992b088",
+        "433d495df4e268f33fc8402fde93d5c2e60af709f3f94fe680692d421a7af0fd",
+        "a564ed69a006b5565e2be82b6c97d367468ee7bcecebb9d95f1e6758199dd442",
+        "c141ae2bb8800c5543d5450f3c2f725abe325aee9f241eb8c4768f0e3beec52d",
+        "d347773060491c6eb6f93dfac8937cb356aa33606821d320e2a6664983db4366",
+        "dca725e9a65bd826fe23430fa496ffe5ecabf26183f1916a64bfe6e4cea631c2",
+        "c4092efd380c4f2a4e3be1fa12cff51c0204cd1b4ce20aee875f617b52d93745",
+        "bb83c07205c97f27c7968351127c19323644dfd02882687a0dc11b8928cfc8ed",
+        "53fd29eeb575226a9ba6fee10840fe6ef40a7845a8e362f5e52376e1779be286",
+        "d991df28c1dfca8b3ba969eda20b4ac0ad4c9ec048c7f5bb603b18422a73448d",
+        "89f68ae7ad96fc3b3217c72a1fff5ec97ea8c9a169f29b0f9469a7ad0dff9ba6",
+        "b3ddabe3c8557e83556a321241c07686df183ce70879a4c7e98f588e78eab789",
+        "69745c5c2aef905f82f134aec48ddfc0034f9ac91f6ee8acce1b0e022160834a",
+        "ee9d3a5278d7c5b7a5fe912bb6dfc9b469cb58e5f0b60dd9f30bdcb1dd04c134",
+        "9f14846a96b52d1a31bb7855e95d6ba1b2f0baf0904b9fc3502d5034441517d3",
+        "5ce346523bc826658cca71ca0e8709091ba7da850b8895f7b1764ac0a2df9e3a",
+        "a564ed69a006b5565e2be82b6c97d367468ee7bcecebb9d95f1e6758199dd442",
+        "2a15347a8d80d0321c59cbe342d93a79dc83318f1de456f355e7136463d89790",
+        "a564ed69a006b5565e2be82b6c97d367468ee7bcecebb9d95f1e6758199dd442",
+        "f318781abe780b0934cb54d07b18b6336ac612def6bc65cb03ca280cd9bef5c9",
+        "1867759b224441ccca290244fdf0f6ffbb2ca7873a562e4fb257cc4a8a05e9e0",
+        "32f2cdddf86f32901cb340d00f051e9e0bc0fb680d92e98b848446a6505a14a2",
+        "dbca79e77ba1368135e5971b4b081c1c9a660f5be0a67c45ecb4dfdebb39d346",
+        "4a9955774a504a68b6a4a05635c1cea2bd166ef0af82e1a069cd4d412a0ea3fc",
+        "7ebe1464a28b0bf477e9607884eb6d17b6eab2d69d7f7b38ebb730976c89ddaa",
+        "a80985e456e52ed7820211ea9b7f202404e0b49fdefba2d2017200da4e5292da",
+        "9f75d44716c879825bcd9ee2b59a92b7f6d99d7a79aec59c1bbf7adf61bec9a2",
+        "b74f4cc68de12ae93cb0b1ee8b3544bdcbbb5c04cbf630fe0a0262df20cea891",
+        "724d833ec6b4be845db8842888d7cfeddb4b0af9f67b55cdb7b02e43786048e7",
+        "01158293f1f7a4ca1568f689b5c76fba6b58ba30cff75d5e780ccee49e6a3932",
+        "6a09e889fbbec2941b82bb8ef20f2d623fc20afedd935330e4ef103734019945",
+        "7293bad8f156fb036cb661b2f15e9659735ed5ef82794738f41197fa9293a1e6",
+        "d0133c38ab5918fcdea9e50af63fce30d3f851dd029d39bed68838e7e8f599de",
+        "920498204b7778924ead08b4b68cc7ff6d5f3fe4fa3fef0b80e16729ee93e8f6",
+        "b70df8c6fa784c96157d8868512a30a470c131aaab2191f3db84fdeca093b458",
+        "3807d1b582a2d36cab9f57a91b20b49dc2614c55c614f83ec0126e69d746d663",
+        "ef50bfd3c2e44f8ebdcb7024e7088609c517d376e6e00872cf6493644b2cb79e",
+        "1952fb66952fc53b2a3e3942e18d164d73e67fd6a4b527f1c71b6292ec550a85",
+        "d347773060491c6eb6f93dfac8937cb356aa33606821d320e2a6664983db4366",
+        "7293bad8f156fb036cb661b2f15e9659735ed5ef82794738f41197fa9293a1e6",
+        "082bd7296ffa6cc6062bf533c4196c1f17eda6d086c3e0f6a48e5f71afbfe2fa",
+        "307703e4575878a77d2227e8418f042bbab55d1e37e748984094a363d1286900",
+        "e1b6d3948cb219cc5a7aaa92c30e29d5d68c715a265177f7cc590393512871f9",
+        "4f33bdf90a0acfad228a920d90ec966f1d8c4305e8229445168d17817eb54bba",
+        "2133c8bd2c76eb634e355c77247b223b8916877b0be011b5cf106142f8e3b9c4",
+        "dca725e9a65bd826fe23430fa496ffe5ecabf26183f1916a64bfe6e4cea631c2",
+        "86ab97cddf33c0b361d0e3288b36223ce23f36ad7164628bfab15ccf48b04c37",
+        "7293bad8f156fb036cb661b2f15e9659735ed5ef82794738f41197fa9293a1e6",
+        "7edf64dd9f4ef06d040814f1096eb85e52078e35dee55ebe4bbb3adf69f57a34",
+        "12f6e270e4020e5a277268f532f40d6107ce21890d90d6457130e69d770fa9d5",
+        "cdf44e916704c2c2ee0e287769ab8573db2b2ba91b895825f1964bdb0f3c554e",
+        "d76fbf51fe9e6bc5faf125bb2ef5ece10937d306e8cc7d59cb6ea8174b9abe58",
+        "72523d1019b10bdb62cb3704fb026d10345608101cb082e7939eb150b3022201",
+        "c8426048c5c40d477159ebedd21a0d9fd193671530222061023901da2565236a",
+        "c8426048c5c40d477159ebedd21a0d9fd193671530222061023901da2565236a",
+        "1ada8bc44b4bdb1c4b71ad837ec5956e0163c1829c3438ef13501ab68b47ff6b",
+        "ffbc72ce183435e6e744ce339cd95f70dd9474539d500f3d5271a66e54606484",
+        "1420de9c1c3e74aea3b9017e8def5bacce2d6cf5cd514bd88def73842c17046a",
+        "8724cad651b2fa9ee9cb91301b893777c83b8f9354a76f36437beadf868be3ff",
+        "88b83d9b755495d2891ac69b2a63edcb564a8512a3dc57fb90054413306ce4ab",
+        "ad6af747c9533f08837ca28f2e37db8820135c592b390df7bd270118e763f04b"
+      ]
+    },
+    "scope": "All prose and explanatory entries; repeated identical executable examples verified mechanically. This is an AI-assisted complete semantic review.",
+    "native_speaker_endorsement": false,
+    "runtime_examples_executed": false,
+    "supersedes_focused_review": "tmp/review/patroni/independent-review.md",
+    "integration_addendum": {
+      "files": 1,
+      "title_attributions": 3,
+      "unchanged_reviewed_files": 143
+    }
+  },
+  "independent_source_evidence": {
+    "operations": [
+      {
+        "id": "EN-1",
+        "pages": [
+          "config/_index"
+        ],
+        "languages": "en,zh,fr,ja,de,ru",
+        "status": "resolved",
+        "resolution": "Corrected nonexistent postgresql.datadir to postgresql.data_dir in generated configuration and fallback descriptions.",
+        "source": "https://github.com/patroni/patroni/blob/v4.1.5/patroni/config_generator.py#L354-L356"
+      },
+      {
+        "id": "EN-2",
+        "pages": [
+          "config/_index"
+        ],
+        "languages": "en,zh,fr,ja,de,ru",
+        "status": "resolved",
+        "resolution": "Corrected IP resolution attribution: gethostname returns the host name; getaddrinfo resolves it. All seven address descriptions synchronized.",
+        "source": "https://github.com/patroni/patroni/blob/v4.1.5/patroni/config_generator.py#L44-L60"
+      },
+      {
+        "id": "EN-3",
+        "pages": [
+          "config/env",
+          "config/yaml"
+        ],
+        "languages": "en,zh,fr,ja,de,ru",
+        "status": "resolved",
+        "resolution": "Corrected SRV example query suffix to example.org, matching the configured domain.",
+        "source": "https://github.com/patroni/patroni/blob/v4.1.5/patroni/dcs/etcd.py#L367-L377"
+      },
+      {
+        "id": "EN-4",
+        "pages": [
+          "config/yaml"
+        ],
+        "languages": "en,zh,fr,ja,de,ru",
+        "status": "resolved",
+        "resolution": "Corrected binary override key pgcontroldata to pg_controldata; pgcommand uses the binary command name as the bin_name lookup key.",
+        "source": "https://github.com/patroni/patroni/blob/v4.1.5/patroni/postgresql/__init__.py#L284-L295"
+      },
+      {
+        "id": "EN-5",
+        "pages": [
+          "config/yaml"
+        ],
+        "languages": "en,fr,ja,de,ru; zh already correct",
+        "status": "resolved",
+        "resolution": "Corrected HTTP OPTION to OPTIONS for health checks. Chinese already used the supported method and remains synchronized.",
+        "source": "https://github.com/patroni/patroni/blob/v4.1.5/patroni/api.py#L417-L424"
+      },
+      {
+        "id": "EN-6",
+        "pages": [
+          "patronictl"
+        ],
+        "languages": "en,zh,fr,ja,de,ru",
+        "status": "resolved",
+        "resolution": "Corrected list --format descriptions copied from history: the output describes cluster members, not event history.",
+        "source": "https://github.com/patroni/patroni/blob/v4.1.5/patroni/ctl.py#L1698-L1729"
+      },
+      {
+        "id": "EN-7",
+        "pages": [
+          "config/dynamic"
+        ],
+        "languages": "en,zh,fr,ja,de,ru",
+        "status": "resolved",
+        "resolution": "Replaced unsupported strict-mode last-voter retention and reserved-placeholder behavior with exact v4.1.5 wildcard behavior, explicitly scoped to priority-based synchronous_mode: on.",
+        "source": "https://github.com/patroni/patroni/blob/v4.1.5/patroni/ha.py#L963-L970"
+      },
+      {
+        "id": "EN-8",
+        "pages": [
+          "config/env",
+          "config/yaml"
+        ],
+        "languages": "en,zh,fr,ja,de,ru",
+        "status": "resolved",
+        "resolution": "Removed unsupported reserved-name restriction for PATRONI_NAME and YAML name. Exact v4.1.5 schema accepts name as str; tagged ENV/YAML documentation only requires cluster uniqueness.",
+        "source": "https://github.com/patroni/patroni/blob/v4.1.5/patroni/validator.py#L1005-L1012"
+      }
+    ],
+    "guides": [
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/docs/citus.rst",
+        "sha256": "596467e906fff5c2aacf8d8a7aaae54ba04859a911f715519afaad28d93387a3"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/docs/dynamic_configuration.rst",
+        "sha256": "722c04cdf52c11c33bdfee35e5209699128fe14a085eee3d35599d3228af8f42"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/docs/installation.rst",
+        "sha256": "911a2f507ed45f9950d8e0df842ac6520ffe7628e0ad6197bd4af763a4667852"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/docs/kubernetes.rst",
+        "sha256": "f12c05c9e8f6a3d638614958378504e9f231af13d59c6a280d71000a6b3faf34"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/docs/replica_bootstrap.rst",
+        "sha256": "64f39022894755cb645783337127e4d66e615f3817c6cd08f487a001ff3c5963"
+      },
+      {
+        "url": "https://apt.postgresql.org/pub/repos/apt/pool/main/p/patroni/patroni_4.1.5-2.pgdg13+1.dsc",
+        "sha256": "a93f1c82f7a5ece134ec5138148eeaaeb3628852b3e2a381a901734c8256d098"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/patroni/api.py",
+        "sha256": "f55951a2ab4957bccf22bdeb8bdf5253f1edb93f2008cb81b03e9ff6ce37b2a9"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/patroni/config.py",
+        "sha256": "e8edb91f9491b27e91acc44928be55ec9985e3a6834727a3aa6521ddbc284df0"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/patroni/ctl.py",
+        "sha256": "d9135e25d1a61ae2425765ebb24fc36e889606306cbc50092c0d5dc77b14f020"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/patroni/dcs/kubernetes.py",
+        "sha256": "111f775088c0089d6651763663d34433b577a2cb6511692bad3a4354ff2ec87f"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/patroni/ha.py",
+        "sha256": "a7e8792ca28b92c538e10a01d15efea183b1116b1784ccac1588e39bc6713ba7"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/patroni/postgresql/bootstrap.py",
+        "sha256": "b927a5fb4448fd1fbcc604c6eee94264d56caa77cf2f3259a664b57666abda89"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/patroni/postgresql/cancellable.py",
+        "sha256": "824224ffd34d28c24ad149e88db827027babc9d62dae716eec47176b24438a56"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/patroni/postgresql/mpp/citus.py",
+        "sha256": "3d1bfc6fdfcb5b0fd15db9f7f6344b6437b2bffe070a13a3cc0d38abe0668836"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/patroni/postgresql/slots.py",
+        "sha256": "a6272511d5a9cd0ba5e5ef802d4a645ac9b98e5bed621dfa25ee4efa413df0d1"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/patroni/postgresql/sync.py",
+        "sha256": "f8c530fe8278fe9947fb9863e7938b6dd172b01a1fd90cbd7bcf316e8f2562d9"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/postgres0.yml",
+        "sha256": "5f59c7fbfb61a7134c96dcd29cb82e56d8714adcaa3f0cfabe78a80baaf519cc"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/setup.py",
+        "sha256": "da3a21186b57e128bc50106fd99c55fa51f55405c2617d641b1450a15d085128"
+      },
+      {
+        "url": "https://api.github.com/repos/patroni/patroni/git/ref/tags/v4.1.5",
+        "sha256": "263dc0d41b0ab07531be4a0b390b87cdc6eecf0a5eebcdb01f0190f6abab88c9"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/patroni/patroni/v4.1.5/tox.ini",
+        "sha256": "444f047eebb8f25a2514e8b1a8b2e1fd36acac8f94ad115997f874fee3e132c7"
+      }
+    ],
+    "releases": [
+      {
+        "version": "4.0.5",
+        "decision": "Patroni could stop during replica bootstrap while tools kept running.",
+        "source": "https://raw.githubusercontent.com/patroni/patroni/v4.0.5/patroni/ha.py",
+        "locator": "shutdown(), line 2064 AsyncExecutor.cancel(); compare v4.0.4 shutdown()",
+        "comparison": "https://raw.githubusercontent.com/patroni/patroni/v4.0.4/patroni/ha.py"
+      },
+      {
+        "version": "3.1.0",
+        "decision": "Shutdown checkpoint receipt, rather than shut down checking.",
+        "source": "https://raw.githubusercontent.com/patroni/patroni/v3.1.0/patroni/ha.py",
+        "locator": "_on_shutdown(), lines 1678-1686"
+      },
+      {
+        "version": "3.1.0",
+        "decision": "Revision-mismatch cache invalidation applies when the update fails.",
+        "source": "https://raw.githubusercontent.com/patroni/patroni/v3.1.0/patroni/dcs/etcd3.py",
+        "locator": "txn(), lines 572-579"
+      },
+      {
+        "version": "3.0.3",
+        "decision": "postgresql.bin_name.* are configuration settings; PATRONI_POSTGRESQL_BIN_* are environment variables.",
+        "source": "https://raw.githubusercontent.com/patroni/patroni/v3.0.3/patroni/postgresql/__init__.py",
+        "locator": "pgcommand(), lines 215-225"
+      },
+      {
+        "version": "2.1.2",
+        "decision": "The actual queried view is pg_replication_slots, with temporary slots excluded.",
+        "source": "https://raw.githubusercontent.com/patroni/patroni/v2.1.2/patroni/postgresql/slots.py",
+        "locator": "load_replication_slots(), lines 72-79"
+      },
+      {
+        "version": "2.0.2",
+        "decision": "The database/user literal is lowercase postgres.",
+        "source": "https://raw.githubusercontent.com/patroni/patroni/v2.0.2/patroni/postgresql/__init__.py",
+        "locator": "default database, line 60; Rewind._conn_kwargs lines 152-155",
+        "comparison": "https://raw.githubusercontent.com/patroni/patroni/v2.0.2/patroni/postgresql/rewind.py"
+      },
+      {
+        "version": "2.1.0 and 2.0.0",
+        "decision": "gPRC is a protocol-name typo; use gRPC.",
+        "source": "/Users/vonng/pgsty/doc.pg.center/content/docs/patroni/config/env.md:104",
+        "locator": "current authoritative English gRPC-gateway description",
+        "comparison": "/Users/vonng/pgsty/doc.pg.center/content/docs/patroni/config/yaml.md:163"
+      },
+      {
+        "version": "1.6.1",
+        "decision": "The strict-mode GRANT stall is due to no synchronous standbys being available.",
+        "source": "https://raw.githubusercontent.com/patroni/patroni/v1.6.1/patroni/ha.py",
+        "locator": "strict mode picked=None uses wildcard, lines 384-386; bootstrap GRANT uses local synchronous_commit lines 307-312",
+        "comparison": "https://raw.githubusercontent.com/patroni/patroni/v1.6.1/patroni/postgresql/bootstrap.py"
+      },
+      {
+        "version": "1.6.0",
+        "decision": "/health returns status 200 only if PostgreSQL is running; the status number was omitted.",
+        "source": "https://raw.githubusercontent.com/patroni/patroni/v1.6.0/patroni/api.py",
+        "locator": "health branch, lines 105-106"
+      },
+      {
+        "version": "1.4.2",
+        "decision": "Initialization writes pg_control, not the pg_controldata executable.",
+        "source": "https://raw.githubusercontent.com/patroni/patroni/v1.4.2/patroni/postgresql.py",
+        "locator": "controldata(), lines 1054-1067; PostgreSQL10 get_controlfile() reads global/pg_control, lines 47-62",
+        "comparison": "https://raw.githubusercontent.com/postgres/postgres/REL_10_STABLE/src/common/controldata_utils.c"
+      },
+      {
+        "version": "1.2",
+        "decision": "The child-process signal is SIGCHLD.",
+        "source": "https://raw.githubusercontent.com/patroni/patroni/v1.2.3/patroni/__init__.py",
+        "locator": "signal.signal(signal.SIGCHLD, ...), line 175; earliest retained v1.2.x tag"
+      },
+      {
+        "version": "1.2",
+        "decision": "Patroni prepares PGPASSFILE before post_init when a password is provided.",
+        "source": "https://raw.githubusercontent.com/patroni/patroni/v1.2.3/patroni/postgresql.py",
+        "locator": "run_bootstrap_post_init(), lines 400-417; write_pgpass(), lines 429-438"
+      },
+      {
+        "version": "1.2",
+        "decision": "The site-adapted </patroni> path was a closing HTML tag. Replace it with a visible Markdown link, preserving /patroni and localizing the route.",
+        "source": "current releases.md blocks 2 and 39; CommonMark and Goldmark rendered HTML",
+        "locator": "new root-link destination is /patroni in EN and /{locale}/patroni in localized editions"
+      },
+      {
+        "version": "1.0",
+        "decision": "The HAProxy configuration tool is confd, not confide; four translations already had the right name.",
+        "source": "https://raw.githubusercontent.com/patroni/patroni/v1.2.3/extras/confd/conf.d/haproxy.toml",
+        "locator": "tagged confd template; current EN preceding bullet already identifies confd"
+      },
+      {
+        "version": "0.80",
+        "decision": "Historical python-etcd dependency is 0.4.3, not 0.43.",
+        "source": "https://raw.githubusercontent.com/patroni/patroni/v0.80/requirements.txt",
+        "locator": "line 6: python-etcd==0.4.3"
+      },
+      {
+        "version": "1.1",
+        "decision": "Attach the streaming-replica API explanation to its bullet in all six editions.",
+        "source": "current and baseline releases.md block 25",
+        "locator": "CommonMark and Goldmark list ownership demonstrate baseline detached paragraph"
+      }
+    ],
+    "rejected_source_suspicion": {
+      "issue": "standby_leader_label_value default primary",
+      "decision": "Matches exact v4.1.5 implementation; no source defect.",
+      "source": "https://github.com/patroni/patroni/blob/v4.1.5/patroni/dcs/kubernetes.py"
+    }
+  },
+  "incremental_reviews": [
+    {
+      "date": "2026-10-14",
+      "scope": "English copy edits, synchronized endpoint semantics/reinit advice, literal and link rendering, terminology and numeric spacing; concurrent upstream-link addendum preserved",
+      "source_pages": [
+        "citus.md",
+        "config/_index.md",
+        "config/env.md",
+        "config/yaml.md",
+        "dcs_failsafe_mode.md",
+        "faq.md",
+        "ha_multi_dc.md",
+        "installation.md",
+        "kubernetes.md",
+        "patronictl.md",
+        "pause.md",
+        "releases.md",
+        "rest_api.md",
+        "standby_cluster.md"
+      ],
+      "reviewed_changed_files": 29,
+      "record": "tmp/review/patroni/editorial-followup-20261014.md",
+      "executable_examples": "All 144 files unchanged from the pre-edit baseline"
+    }
+  ]
+}

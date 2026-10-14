@@ -1,0 +1,113 @@
+{
+  "source": "content/docs/haproxy/fastcgi.md",
+  "language": "ru",
+  "fences": [
+    {
+      "index": 16,
+      "classification": "argument-description",
+      "source_sha256": "95eacdc82fb297c1ce34bb9ca8383e72ced56f680eac57cc72dc20d396f4f10c",
+      "target_sha256": "5a7225d3f907da83c295284fcad59788aa6eacd671072b492d57388216936736",
+      "protected_literals": [
+        "FastCGI"
+      ],
+      "protected_lines": [],
+      "review": "Complete English/Russian comparison; all descriptions, conditions, units and normative force reviewed separately after translation.",
+      "revalidation_history": [
+        {
+          "index": 16,
+          "source_sha256": "95eacdc82fb297c1ce34bb9ca8383e72ced56f680eac57cc72dc20d396f4f10c",
+          "target_sha256": "5a7225d3f907da83c295284fcad59788aa6eacd671072b492d57388216936736"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 18,
+      "classification": "table-labels",
+      "source_sha256": "841a07f00740f9d1a107175d22eeee60ab24ef79128d5d4b50f22e968df323d4",
+      "target_sha256": "ca28f860a6cd24820cd33e699090a7f416556f002a394703bebcb19d9bc26f3c",
+      "protected_literals": [
+        "AUTH_TYPE",
+        "CONTENT_LENGTH",
+        "CONTENT_TYPE",
+        "DOCUMENT_ROOT",
+        "GATEWAY_INTERFACE",
+        "PATH_INFO",
+        "PATH_TRANSLATED",
+        "QUERY_STRING",
+        "REMOTE_ADDR",
+        "REMOTE_USER",
+        "REQUEST_METHOD",
+        "REQUEST_URI",
+        "SCRIPT_FILENAME",
+        "SCRIPT_NAME",
+        "SERVER_NAME",
+        "SERVER_PORT",
+        "SERVER_PROTOCOL",
+        "SERVER_SOFTWARE",
+        "HTTPS",
+        "HAProxy",
+        "BASIC",
+        "CGI",
+        "FastCGI",
+        "CGI/1.1",
+        "URI",
+        "path-info",
+        "Host",
+        "TCP",
+        "\"on\""
+      ],
+      "protected_lines": [],
+      "review": "Translated against current English; structural checks preserve protected literals. Separate full semantic review is recorded in the component review ledger.",
+      "revalidation_history": [
+        {
+          "index": 17,
+          "source_sha256": "841a07f00740f9d1a107175d22eeee60ab24ef79128d5d4b50f22e968df323d4",
+          "target_sha256": "ca28f860a6cd24820cd33e699090a7f416556f002a394703bebcb19d9bc26f3c"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    }
+  ],
+  "indented_prose": [
+    {
+      "source_sha256": "e1091eee8ff69d5f7acccd056ed0164c5ab429dab15cd895699d1286aa4a79fc",
+      "target_sha256": "6ec77e227fb0705ebd1dcdeab93e96d8d5ab9d15d4158daa4b02eec6349a68a9",
+      "reason": "FastCGI connection-variable descriptions, not program output; variable names and both numeric values unchanged.",
+      "protected_literals": [
+        "FCGI_MAX_REQS",
+        "FCGI_MPXS_CONNS"
+      ],
+      "protected_lines": []
+    }
+  ],
+  "literal_blocks": [],
+  "source_formatting_revalidation": {
+    "method": "Exact reviewed predecessor source/target SHA mapping and byte-for-byte literal-fence witnesses; only documented source errata and markup-only restoration accepted.",
+    "fences": [
+      {
+        "prior": {
+          "index": 16,
+          "source_sha256": "95eacdc82fb297c1ce34bb9ca8383e72ced56f680eac57cc72dc20d396f4f10c",
+          "target_sha256": "5a7225d3f907da83c295284fcad59788aa6eacd671072b492d57388216936736"
+        },
+        "index": 16,
+        "source_sha256": "95eacdc82fb297c1ce34bb9ca8383e72ced56f680eac57cc72dc20d396f4f10c",
+        "target_sha256": "5a7225d3f907da83c295284fcad59788aa6eacd671072b492d57388216936736",
+        "reason": "unchanged exact reviewed English fence"
+      },
+      {
+        "prior": {
+          "index": 17,
+          "source_sha256": "841a07f00740f9d1a107175d22eeee60ab24ef79128d5d4b50f22e968df323d4",
+          "target_sha256": "ca28f860a6cd24820cd33e699090a7f416556f002a394703bebcb19d9bc26f3c"
+        },
+        "index": 18,
+        "source_sha256": "841a07f00740f9d1a107175d22eeee60ab24ef79128d5d4b50f22e968df323d4",
+        "target_sha256": "ca28f860a6cd24820cd33e699090a7f416556f002a394703bebcb19d9bc26f3c",
+        "reason": "unchanged exact reviewed English fence"
+      }
+    ],
+    "literal_blocks": []
+  }
+}

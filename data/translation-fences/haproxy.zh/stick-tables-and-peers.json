@@ -1,0 +1,163 @@
+{
+  "source": "content/docs/haproxy/stick-tables-and-peers.md",
+  "language": "zh",
+  "fences": [
+    {
+      "index": 7,
+      "classification": "argument-description",
+      "source_sha256": "1b782f1ec5f452bf08170a017d5e8bd541772b2aa8f93582a269599ff32acff7",
+      "target_sha256": "f968359b75328e8d877ab15ac57e72663e2aa67c05068df23a75af26113f7cf8",
+      "protected_literals": [
+        "\"default-server\"",
+        "\"server\""
+      ],
+      "protected_lines": [],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 7,
+          "source_sha256": "1b782f1ec5f452bf08170a017d5e8bd541772b2aa8f93582a269599ff32acff7",
+          "target_sha256": "f968359b75328e8d877ab15ac57e72663e2aa67c05068df23a75af26113f7cf8"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    },
+    {
+      "index": 12,
+      "classification": "mixed-explanation",
+      "source_sha256": "9280a95628f3f157d72af2fdd2bdffa30c3765b145b8222ff2ecdda1ff70ffd1",
+      "target_sha256": "099f4c6a4b9ebcc5bd45a6585d2e247a68aea3dd2c1c9d96709bbd767e0ce850",
+      "protected_literals": [],
+      "protected_lines": [
+        " # The old way.",
+        " peers mypeers",
+        "     peer haproxy1 192.168.0.1:1024",
+        "     peer haproxy2 192.168.0.2:1024",
+        "     peer haproxy3 10.2.0.1:1024",
+        " backend mybackend",
+        "     mode tcp",
+        "     balance roundrobin",
+        "     stick-table type ip size 20k peers mypeers",
+        "     stick on src",
+        "     server srv1 192.168.0.30:80",
+        "     server srv2 192.168.0.31:80",
+        "  peers mypeers",
+        "     bind 192.168.0.1:1024 ssl crt mycerts/pem",
+        "     default-server ssl verify none",
+        "     server haproxy1 #local peer",
+        "     server haproxy2 192.168.0.2:1024",
+        "     server haproxy3 10.2.0.1:1024"
+      ],
+      "review": "Full English explanation translated and semantically compared; protected technical literals and copyable code/output unchanged.",
+      "revalidation_history": [
+        {
+          "index": 12,
+          "source_sha256": "9280a95628f3f157d72af2fdd2bdffa30c3765b145b8222ff2ecdda1ff70ffd1",
+          "target_sha256": "099f4c6a4b9ebcc5bd45a6585d2e247a68aea3dd2c1c9d96709bbd767e0ce850"
+        }
+      ],
+      "revalidation": "Source/target content witnessed by exact snapshot hashes; unchanged exact reviewed English fence. No broad review waiver."
+    }
+  ],
+  "literal_blocks": [
+    {
+      "lines": [
+        68,
+        70
+      ],
+      "classification": "configuration",
+      "source_sha256": "c828413aadeff957c8a399e6c657858b62d1de159e26160b65226661670fec99",
+      "revalidation_history": [
+        {
+          "lines": [
+            68,
+            70
+          ],
+          "start_column": 1,
+          "source_sha256": "c828413aadeff957c8a399e6c657858b62d1de159e26160b65226661670fec99"
+        }
+      ],
+      "revalidation": "Exact reviewed snippet and source/target occurrence counts retained; line/column positions changed.",
+      "start_column": 1
+    },
+    {
+      "lines": [
+        74,
+        75
+      ],
+      "classification": "configuration",
+      "source_sha256": "b12d04d2b456b3ef7e94bfc4a683ce370ab1c4a2b9fa690865fa99da2886b09d",
+      "revalidation_history": [
+        {
+          "lines": [
+            74,
+            75
+          ],
+          "start_column": 1,
+          "source_sha256": "b12d04d2b456b3ef7e94bfc4a683ce370ab1c4a2b9fa690865fa99da2886b09d"
+        }
+      ],
+      "revalidation": "Exact reviewed snippet and source/target occurrence counts retained; line/column positions changed.",
+      "start_column": 1
+    },
+    {
+      "lines": [
+        581,
+        582
+      ],
+      "classification": "configuration",
+      "source_sha256": "a0e4dd9962b516ad193cc74fec609657060edde2b31427900ab69d053fb66ac7",
+      "revalidation_history": [
+        {
+          "lines": [
+            580,
+            581
+          ],
+          "start_column": 1,
+          "source_sha256": "a0e4dd9962b516ad193cc74fec609657060edde2b31427900ab69d053fb66ac7"
+        }
+      ],
+      "revalidation": "Exact reviewed snippet and source/target occurrence counts retained; line/column positions changed.",
+      "start_column": 1
+    }
+  ],
+  "literal_snippets": [],
+  "source_sha256": "ce82dcade06e3ab1acb5f39c954558966c12b86c09902fb0a6853e1f80167fa1",
+  "target_sha256": "d9777291f3daba827d4d8b1452575d30ebad44aaa8cc7311a45de0196604aa83",
+  "review_scope": "Complete identified explanatory-fence inventory reviewed separately from structural/numeric technical screening and selective manual prose review. No claim of full independent sentence-by-sentence review of all prose.",
+  "literal_formatting_revalidation": {
+    "method": "Exact reviewed predecessor hashes and current source/target literal equality; remove obsolete protection only with proven default-protected exact fenced replacement.",
+    "events": [
+      {
+        "row": 1,
+        "action": "exact literal range rebased",
+        "source_sha256": "c828413aadeff957c8a399e6c657858b62d1de159e26160b65226661670fec99",
+        "lines": [
+          68,
+          70
+        ],
+        "start_column": 1
+      },
+      {
+        "row": 2,
+        "action": "exact literal range rebased",
+        "source_sha256": "b12d04d2b456b3ef7e94bfc4a683ce370ab1c4a2b9fa690865fa99da2886b09d",
+        "lines": [
+          74,
+          75
+        ],
+        "start_column": 1
+      },
+      {
+        "row": 3,
+        "action": "exact literal range rebased",
+        "source_sha256": "a0e4dd9962b516ad193cc74fec609657060edde2b31427900ab69d053fb66ac7",
+        "lines": [
+          581,
+          582
+        ],
+        "start_column": 1
+      }
+    ]
+  }
+}

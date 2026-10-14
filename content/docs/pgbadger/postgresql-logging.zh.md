@@ -3,6 +3,7 @@ title: "PostgreSQL 日志配置"
 linkTitle: "PostgreSQL 日志"
 weight: 40
 description: "为 pgBadger 配置查询日志、log_line_prefix、消息语言与运行统计"
+search_keywords: [--prefix, lc_messages, log_autovacuum_min_duration, log_checkpoints, log_connections, log_disconnections, log_duration, log_error_verbosity, log_line_prefix, log_lock_waits, log_min_duration_statement, log_statement, log_temp_files, prefix, stderr, syslog]
 icon: fa-solid fa-database
 module: [PGBADGER]
 categories: [任务]

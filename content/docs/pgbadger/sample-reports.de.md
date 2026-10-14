@@ -2,7 +2,8 @@
 title: "Beispielberichte"
 linkTitle: "Beispielberichte"
 weight: 80
-description: "Vollständige, auf Fehler beschränkte und inkrementelle pgBadger-Berichte aus dem lokalen Website-Snapshot öffnen"
+description: "Vollständige, auf Fehler beschränkte und inkrementelle pgBadger-Berichte öffnen"
+search_keywords: [--anonymize, anonymize]
 icon: fa-solid fa-chart-column
 module: [PGBADGER]
 categories: [Referenz]
@@ -12,7 +13,7 @@ upstream_name: "pgBadger website"
 upstream_ref: "site snapshot of 2026-08-15"
 ---
 
-Die Beispielberichte wurden im Mai 2022 mit pgBadger 11.8 erzeugt. Die Originalbeispiele sind lokal auf dieser Website eingebunden. Daher bleiben Berichtsnavigation, Diagramme, Stylesheets und Skripte verfügbar, ohne auf den Server des Originalprojekts zugreifen zu müssen.
+Die Beispielberichte wurden im Mai 2022 mit pgBadger 11.8 erzeugt. Berichtsnavigation, Diagramme, Stylesheets und Skripte sind offline verfügbar.
 
 | Beispiel | Was es zeigt | Lokale Kopie |
 |---|---|---|
@@ -28,7 +29,7 @@ Die Daten dienen ausschließlich Demonstrationszwecken und stellen keinen aktuel
 
 ## Hierarchie inkrementeller Berichte {#incremental-hierarchy}
 
-Das inkrementelle Beispiel bewahrt die vollständige Linkstruktur:
+Verzeichnisstruktur der inkrementellen Berichte:
 
 ```text
 report/
@@ -40,10 +41,10 @@ report/
 └── 11/
     ├── pgbadger.min.css
     ├── pgbadger.min.js
-    └── bundled chart and UI assets
+    └── mitgelieferte Diagramm- und Oberflächenressourcen
 ```
 
-Der oberste Index verweist auf zwei wöchentliche und sieben tägliche Berichte. Alle relativen Links wurden beibehalten. Wenn Sie nur `index.html` verschieben, wird das Beispiel daher unbrauchbar; bewahren Sie den vollständigen Verzeichnisbaum zusammen auf.
+Der oberste Index verweist auf zwei wöchentliche und sieben tägliche Berichte. Wenn Sie nur `index.html` verschieben, funktionieren die Links nicht mehr; bewahren Sie den vollständigen Verzeichnisbaum zusammen auf.
 
 ## Sicherheit und Datenschutz {#security-and-privacy}
 

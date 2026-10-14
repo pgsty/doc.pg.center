@@ -161,9 +161,9 @@ def main():
             continue
         page = load(html_path)
         english = load(root / route(source).lstrip("/") / "index.html")
-        check(page.canonical == ["https://pig.center" + destination], f"{label}: canonical route")
-        check(page.alternates.get("en-US") == "https://pig.center" + route(source), f"{label}: English language alternate")
-        check(english.alternates.get("ja-JP") == "https://pig.center" + destination, f"{label}: Japanese language alternate")
+        check(page.canonical == ["https://doc.pg.center" + destination], f"{label}: canonical route")
+        check(page.alternates.get("en-US") == "https://doc.pg.center" + route(source), f"{label}: English language alternate")
+        check(english.alternates.get("ja-JP") == "https://doc.pg.center" + destination, f"{label}: Japanese language alternate")
         check(page.headings == english.headings, f"{label}: rendered headings/anchors")
         check(not [key for key, n in Counter(page.ids).items() if n > 1], f"{label}: duplicate rendered IDs")
         check(page.sidebar == ja_order, f"{label}: sidebar differs from Japanese navigation order")
@@ -182,12 +182,12 @@ def main():
         match = re.search(r"^aliases:\s*\[([^]]*)\]", front, re.M)
         for alias in match[1].split(",") if match else []:
             legacy = root / "ja" / alias.strip(' \"\x27/').lower() / "index.html"
-            check(legacy.is_file() and "https://pig.center" + destination in legacy.read_text(),
+            check(legacy.is_file() and "https://doc.pg.center" + destination in legacy.read_text(),
                   f"{label}: legacy alias {alias}")
         for link in page.links:
             href = link.get("href", "")
             parsed = urlsplit(href)
-            if parsed.netloc and parsed.netloc != "pig.center":
+            if parsed.netloc and parsed.netloc != "doc.pg.center":
                 continue
             check(not (link.get("data-fallback-language") and "/docs/etcd/" in parsed.path),
                   f"{label}: English fallback remains: {href}")

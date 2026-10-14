@@ -1,0 +1,24 @@
+{
+  "source": "content/docs/pgbadger/sample-reports.md",
+  "language": "de",
+  "fences": [
+    {
+      "index": 1,
+      "classification": "mixed-explanation",
+      "source_sha256": "727c946c07dd4c7070ec8a11408ddc2ae60bf906a8866c361c30d7f3db738478",
+      "target_sha256": "841950e2622424229201c3a42e37e6db8be2957267837c20711bbaed19899c5a",
+      "protected_literals": [],
+      "protected_lines": [
+        "report/",
+        "├── index.html",
+        "├── 2012/",
+        "│   ├── week-49/index.html",
+        "│   ├── week-50/index.html",
+        "│   └── 12/06 … 12/index.html",
+        "└── 11/",
+        "    ├── pgbadger.min.css",
+        "    ├── pgbadger.min.js"
+      ]
+    }
+  ]
+}

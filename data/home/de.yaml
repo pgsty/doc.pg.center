@@ -24,7 +24,7 @@ components:
   class: pgsql-components
   eyebrow: Dokumentationsbereich auswählen
   title: Sechs Komponenten. Sechs direkte Einstiege.
-  text: Die deutsche Ausgabe enthält die vollständige pgBadger-Sammlung sowie übersetzte Seiten aus Patroni, PgBouncer, HAProxy und etcd. Fehlende Übersetzungen führen automatisch zur englischen Seite und sind mit EN gekennzeichnet.
+  text: Die deutsche Ausgabe enthält vollständige Dokumentationssammlungen für Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy und etcd.
   columns: 3
   link_label: Dokumentation lesen
   items:
@@ -90,8 +90,8 @@ capabilities:
       url: /docs/pgbackrest/
       motto: Zuverlässige Backups, Archivierung, Wiederherstellung und Point-in-Time-Recovery
       bullets:
-        - Vollständige, differentielle, inkrementelle und blockbasierte Sicherungen.
-        - Verwaltet Repositories, Aufbewahrung und WAL-Archivierung.
+        - Vollständige, differenzielle, inkrementelle und blockbasierte Backups.
+        - Verwaltet Repositorys, Aufbewahrung und WAL-Archivierung.
         - Dokumentiert geführte Bereitstellungen und jeden Befehl.
       value: Beginnen Sie mit dem Leitfaden für Ihr Betriebssystem und halten Sie Konfiguration und Befehle griffbereit.
       visual:
@@ -143,7 +143,7 @@ capabilities:
         aria_label: Schnellzugriffe auf die pgBadger-Dokumentation
         items:
           - { icon: fa-solid fa-download, title: Download, url: /docs/pgbadger/download/ }
-          - { icon: fa-solid fa-terminal, title: Kommandozeile, url: /docs/pgbadger/command-line/ }
+          - { icon: fa-solid fa-terminal, title: Befehlszeile, url: /docs/pgbadger/command-line/ }
           - { icon: fa-solid fa-file-lines, title: PostgreSQL-Protokollierung, url: /docs/pgbadger/postgresql-logging/ }
           - { icon: fa-solid fa-calendar-days, title: Inkrementelle Berichte, url: /docs/pgbadger/incremental-reports/ }
           - { icon: fa-solid fa-file-export, title: Ausgabeformate, url: /docs/pgbadger/output-formats/ }
@@ -202,8 +202,8 @@ faq:
     - question: Wo soll ich anfangen?
       answer: Wählen Sie die Komponente, die zu Ihrer aktuellen Aufgabe passt. Jede Karte öffnet einen eigenständigen Dokumentationsbereich; der ausführliche Abschnitt oben verweist direkt auf die am häufigsten genutzten Seiten.
       open: true
-    - question: Ist pig.center eine offizielle PostgreSQL-Website?
-      answer: Nein. pig.center ist ein unabhängiges Dokumentationsprojekt der Community. Es verweist auf die jeweiligen Upstream-Projekte und bewahrt Produktnamen und technischen Kontext.
+    - question: Ist doc.pg.center eine offizielle PostgreSQL-Website?
+      answer: Nein. doc.pg.center ist ein unabhängiges Dokumentationsprojekt der Community. Es verweist auf die jeweiligen Upstream-Projekte und bewahrt Produktnamen und technischen Kontext.
     - question: Was geschieht bei noch nicht übersetzten Seiten?
       answer: Ist eine deutsche Seite vorhanden, öffnet der Link diese direkt. Andernfalls führt er zur entsprechenden englischen Seite und trägt die Kennzeichnung EN; die Sprachauswahl bleibt auf jeder Seite verfügbar.
     - question: Wie werden die Upstream-Dokumentationen gekennzeichnet?

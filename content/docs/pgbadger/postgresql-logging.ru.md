@@ -3,6 +3,7 @@ title: "Настройка журналирования PostgreSQL"
 linkTitle: "Журналирование PostgreSQL"
 weight: 40
 description: "Настройка журналирования запросов, log_line_prefix, локали и вспомогательной статистики для pgBadger"
+search_keywords: [--prefix, lc_messages, log_autovacuum_min_duration, log_checkpoints, log_connections, log_disconnections, log_duration, log_error_verbosity, log_line_prefix, log_lock_waits, log_min_duration_statement, log_statement, log_temp_files, prefix, stderr, syslog]
 icon: fa-solid fa-database
 module: [PGBADGER]
 categories: [Задача]

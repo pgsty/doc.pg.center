@@ -3,6 +3,7 @@ title: "並列処理"
 linkTitle: "並列処理"
 weight: 50
 description: "単一ログを分割する並列処理と、複数ログを単位とする並列処理を使い分けます"
+search_keywords: [--Jobs, --jobs, --tempdir, Jobs, jobs, tempdir]
 icon: fa-solid fa-gauge-high
 module: [PGBADGER]
 categories: [タスク]
@@ -27,13 +28,13 @@ $ pgbadger -j 8 /var/log/postgresql/postgresql.log
 アップストリームのアルゴリズムは、各ファイルを`N`個のバイト範囲に分割し、範囲ごとにパーサーをフォークして一時的なバイナリ統計を書き出した後、その統計を最終レポートに統合します。
 
 ```text
-for each log file
-    divide the file into N chunks
-    find each chunk's start and end offsets
-    fork N parsers at those offsets
-    write one temporary binary statistics file per parser
-wait for the workers
-merge the binary files and build the report
+ログファイルごとに
+    ファイルをN個の範囲に分割する
+    各範囲の開始・終了オフセットを求める
+    それらのオフセットでN個のパーサーをフォークする
+    パーサーごとに一時バイナリ統計ファイルを書き出す
+ワーカーの終了を待つ
+バイナリファイルを統合し、レポートを生成する
 ```
 
 ログレコードや複数行のステートメントはバイトオフセットと完全には一致しないため、分割境界では、ファイルごとに最大でおよそ`N`個のクエリーが途中で切れたり、欠落したり、より一般的には二重に数えられたりする場合があります。このモードは非常に大きなファイルの集計分析に使用し、すべてのレコードを厳密に数える必要がある調査には使用しないでください。

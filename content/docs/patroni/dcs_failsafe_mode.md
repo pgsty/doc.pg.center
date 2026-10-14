@@ -43,7 +43,7 @@ We introduce a new special option, the `failsafe_mode`. It could be enabled only
 - The current leader maintains the `/failsafe` key.
 - The member is allowed to participate in the leader race and become the new leader only if it is present in the `/failsafe` key.
 - If the cluster consists of a single node the `/failsafe` key will contain a single member.
-- In the case of DCS "outage" the existing primary connects to all members presented in the `/failsafe` key via the `POST /failsafe` REST API and may continue to run as the primary if all replicas acknowledge it.
+- In the case of DCS "outage" the existing primary connects to all members listed in the `/failsafe` key via the `POST /failsafe` REST API and may continue to run as the primary if all replicas acknowledge it.
 - If one of the members doesn't respond, the primary is demoted.
 - Replicas are using incoming `POST /failsafe` REST API requests as an indicator that the primary is still alive. This information is cached for `ttl` seconds.
 

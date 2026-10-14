@@ -1,7 +1,7 @@
 ---
 title: "YAML 構成設定"
 linkTitle: "YAML 構成"
-weight: 10
+weight: 20
 icon: fa-solid fa-code
 description: "Patroni YAML 構成オプションとセクションの完全なリファレンス。"
 module: [PATRONI]
@@ -18,8 +18,8 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/yaml_configuration.html
 
 - **thread_pool_size**: リーダー競合またはフェールセーフ チェック中に、非同期タスクを実行し、REST API を介して他のメンバーと通信するために Patroni によって使用されるスレッド プールのサイズ。最小値は `5`、デフォルト値は `5` です。
 - **thread_stack_size**: Patroni によって開始されるスレッドに使用されるスタック サイズを指定します。値は `64kB` によってアライメントされる必要があります。最小値は `64kB` 、デフォルト値 (Patroni によって設定) は `512kB` です。
-- **name**: ホストの名前。クラスター内で一意である必要があります。値 `__patroni_strict_sync_replica_placeholder__` は、Patroni による内部使用のために予約されており、ノード名として使用することはできません。
-- **namespace**: Patroni がクラスターに関する情報を保持する構成ストア内のパス。デフォルト値: 「/service」
+- **name**: ホストの名前。クラスター内で一意である必要があります。
+- **namespace**: Patroni がクラスターに関する情報を保持する構成ストア内のパス。デフォルト値: "/service"
 - **scope**: クラスター名
 
 <a id="log_settings"></a>
@@ -30,12 +30,12 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/yaml_configuration.html
 
 - **type**: ログの形式を設定します。 **plain** または **json** のいずれかになります。 **json** 形式を使用するには、[jsonlogger](/ja/docs/patroni/installation#extras) がインストールされている必要があります。デフォルト値は **plain** です。
 - **level**: 一般的なログ レベルを設定します。デフォルト値は **INFO** です ([Python ロギングのドキュメント](https://docs.python.org/3.6/library/logging.html#levels) を参照)
-- **traceback_level**: トレースバックが表示されるレベルを設定します。デフォルト値は **ERROR** です。 **DEBUG** を有効にした場合にのみトレースバックを表示したい場合は、**DEBUG** に設定します。
-- **format**: ログのフォーマット文字列を設定します。ログ タイプが **plain** の場合、ログ形式は文字列である必要があります。使用可能な属性については、[LogRecord 属性](https://docs.python.org/3.6/library/logging.html#logrecord-attributes) を参照してください。ログ タイプが **json** の場合、ログ形式は文字列に加えてリストにすることもできます。各リスト項目は LogRecord 属性に対応する必要があります。フィールド名のみが必要であり、**%(** と **)** は省略する必要があることに注意してください。別のキー名でログ フィールドを出力する場合は、辞書キーがログ フィールドで、値がログに出力するフィールドの名前である辞書を使用します。デフォルト値は **%(asctime)s %(レベル名)s: %(メッセージ)s** です。
+- **traceback_level**: トレースバックが表示されるレベルを設定します。デフォルト値は **ERROR** です。 **log.level=DEBUG** を有効にした場合にのみトレースバックを表示したい場合は、**DEBUG** に設定します。
+- **format**: ログのフォーマット文字列を設定します。ログ タイプが **plain** の場合、ログ形式は文字列で指定することを推奨します。使用可能な属性については、[LogRecord 属性](https://docs.python.org/3.6/library/logging.html#logrecord-attributes) を参照してください。ログ タイプが **json** の場合、ログ形式は文字列に加えてリストにすることもできます。各リスト項目は LogRecord 属性に対応させることを推奨します。フィールド名のみが必要であり、**%(** と **)** は省略する必要があることに注意してください。別のキー名でログ フィールドを出力する場合は、辞書キーがログ フィールドで、値がログに出力するフィールドの名前である辞書を使用します。デフォルト値は **%(asctime)s %(levelname)s: %(message)s** です。
 - **dateformat**: 日時フォーマット文字列を設定します。 ([formatTime() ドキュメント](https://docs.python.org/3.6/library/logging.html#logging.Formatter.formatTime) を参照)
 - **static_fields**: ログにフィールドを追加します。このオプションは、ログ タイプが **json** に設定されている場合にのみ使用できます。
 - **max_queue_size**: Patroni は 2 段階のロギングを使用しています。ログ レコードはメモリ内のキューに書き込まれ、キューからログ レコードを取得して stderr またはファイルに書き込む別のスレッドがあります。内部キューの最大サイズはデフォルトで **1000** レコードによって制限されており、過去 1 時間 20 分までのログを保持するには十分なサイズです。
-- **dir**: アプリケーション ログを書き込むディレクトリ。ディレクトリは存在し、Patroni を実行するユーザーによって書き込み可能である必要があります。この値を設定すると、アプリケーションはデフォルトで 4 25MB ログを保持します。これらの保持値は、`file_num` および `file_size` を使用して調整できます (以下を参照)。
+- **dir**: アプリケーション ログを書き込むディレクトリ。ディレクトリは存在し、Patroni を実行するユーザーによって書き込み可能である必要があります。この値を設定すると、アプリケーションはデフォルトで 25MB のログを 4 個保持します。これらの保持値は、`file_num` および `file_size` を使用して調整できます (以下を参照)。
 - **mode**: ログ ファイルのアクセス許可 (`0644` など)。指定しない場合、権限は現在の umask 値に基づいて設定されます。
 - **file_num**: 保持するアプリケーション ログの数。
 - **file_size**: ログ ローリングをトリガーする patroni.log ファイルのサイズ (バイト単位)。
@@ -65,13 +65,13 @@ log:
 
 --------
 
-## Bootstrap 構成 {#bootstrap-configuration}
+## ブートストラップ構成 {#bootstrap-configuration}
 
 > [!NOTE]
 > Patroni が初めてクラスターを初期化し、設定が DCS に保存されると、YAML 構成の `bootstrap.dcs` セクションに対する今後の変更はすべて反映されなくなります。変更したい場合は、[patronictl_edit_config](/ja/docs/patroni/patronictl#patronictl_edit_config) または Patroni [REST API](/ja/docs/patroni/rest_api#rest_api) を使用してください。
 
 - **bootstrap**:
-  - **dcs**: このセクションは、新しいクラスターの初期化後に、指定された構成ストアの <span class="title-ref">/\<namespace\>/\<scope\>/config</span> に書き込まれます。クラスターのグローバル動的構成。 [動的構成設定](/ja/docs/patroni/config/dynamic#dynamic) で説明されているパラメーターのいずれかを `bootstrap.dcs` の下に置くことができ、Patroni が新しいクラスターを初期化 (ブートストラップ) した後、このセクションが構成ストアの <span class="title-ref">/\<namespace\>/\<scope\>/config</span> に書き込まれます。
+  - **dcs**: このセクションは、新しいクラスターの初期化後に、指定された構成ストアの `/<namespace>/<scope>/config` に書き込まれます。クラスターのグローバル動的構成。 [動的構成設定](/ja/docs/patroni/config/dynamic#dynamic) で説明されているパラメーターのいずれかを `bootstrap.dcs` の下に置くことができ、Patroni が新しいクラスターを初期化 (ブートストラップ) した後、このセクションが構成ストアの `/<namespace>/<scope>/config` に書き込まれます。
 
   - **method**: このクラスターのブートストラップに使用するカスタム スクリプト。
 
@@ -79,9 +79,9 @@ log:
 
   - **initdb**: (オプション) initdb に渡されるオプションをリストします。
 
-    - **- データチェックサム**: 9.3 で pg_rewind が必要な場合は有効にする必要があります。
-    - **- エンコーディング: UTF8**: 新しいデータベースのデフォルトのエンコード。
-    - **- ロケール: UTF8**: 新しいデータベースのデフォルトのロケール。
+    - **- data-checksums**: 9.3 で pg_rewind が必要な場合は有効にする必要があります。
+    - **- encoding: UTF8**: 新しいデータベースのデフォルトのエンコード。
+    - **- locale: UTF8**: 新しいデータベースのデフォルトのロケール。
 
   - **post_bootstrap** または **post_init**: クラスターの初期化後に実行される追加のスクリプト。スクリプトは、接続文字列 URL (ユーザー名としてクラスター スーパーユーザーを含む) を受け取ります。 PGPASSFILE 変数は、pgpass ファイルの場所に設定されます。
 
@@ -89,12 +89,12 @@ log:
 
 --------
 
-## シタス {#citus}
+## Citus {#citus}
 
-Patroni と [Citus](https://docs.citusdata.com) の統合を有効にします。構成されている場合、Patroni はコーディネーターへの Citus ワーカー ノードの登録を処理します。 Citus サポート [ここで](/ja/docs/patroni/citus#citus) の詳細については、こちらをご覧ください。
+Patroni と [Citus](https://docs.citusdata.com) の統合を有効にします。構成されている場合、Patroni はコーディネーターへの Citus ワーカー ノードの登録を処理します。 Citus サポートの詳細については、[こちら](/ja/docs/patroni/citus#citus) を参照してください。
 
 - **group**: Citus グループ ID、整数。コーディネーターには `0` を使用し、ワーカーには `1`、`2` などを使用します。
-- **database**: [柑橘類](/ja/docs/patroni/citus#citus) 拡張機能を作成するデータベース。コーディネーターとすべてのワーカーで同じである必要があります。現在サポートされているデータベースは 1 つだけです。
+- **database**: [citus](/ja/docs/patroni/citus#citus) 拡張機能を作成するデータベース。コーディネーターとすべてのワーカーで同じである必要があります。現在サポートされているデータベースは 1 つだけです。
 
 <a id="consul_settings"></a>
 
@@ -114,12 +114,12 @@ Patroni と [Citus](https://docs.citusdata.com) の統合を有効にします�
 - **cert**: (オプション) クライアント証明書を含むファイル。
 - **key**: (オプション) クライアント キーを含むファイル。キーが **cert** の一部である場合は空にすることができます。
 - **dc**: (オプション) 通信するデータセンター。デフォルトでは、ホストのデータセンターが使用されます。
-- **consistency**: (オプション) consul 整合性モードを選択します。可能な値は `default`、`consistent`、または `stale` です (詳細については [領事 API リファレンス](https://www.consul.io/api/features/consistency.html/) を参照)
+- **consistency**: (オプション) consul 整合性モードを選択します。可能な値は `default`、`consistent`、または `stale` です (詳細については [consul API リファレンス](https://www.consul.io/api/features/consistency.html/) を参照)
 - **checks**: (オプション) セッションに使用される Consul ヘルス チェックのリスト。デフォルトでは、空のリストが使用されます。
-- **register_service**: (オプション) スコープ パラメーターと、ノードのロールに応じたタグ マスター、プライマリー、レプリカ、またはスタンバイ リーダーによって定義された名前でサービスを登録するかどうか。デフォルトは **false** です。
+- **register_service**: (オプション) scope パラメーターで定義された名前と、ノードのロールに応じたタグ (master、primary、replica、または standby-leader) でサービスを登録するかどうか。デフォルトは **false** です。
 - **service_tags**: (オプション) ロール (`primary`/`replica`/`standby-leader`) とは別に Consul サービスに追加する追加の静的タグ。デフォルトでは、空のリストが使用されます。
-- **service_check_interval**: (オプション) 登録された URL に対してヘルス チェックを実行する頻度。デフォルトは「5s」です。
-- **service_check_tls_server_name**: (オプション) TLS 経由で接続するときに SNI ホストをオーバーライドします。[領事エージェントチェック API リファレンス](https://www.consul.io/api-docs/agent/check#tlsservername) も参照してください。
+- **service_check_interval**: (オプション) 登録された URL に対してヘルス チェックを実行する頻度。デフォルトは '5s' です。
+- **service_check_tls_server_name**: (オプション) TLS 経由で接続するときに SNI ホストをオーバーライドします。[consul エージェントチェック API リファレンス](https://www.consul.io/api-docs/agent/check#tlsservername) も参照してください。
 
 `token` には、次の ACL 権限が必要です。
 
@@ -135,7 +135,7 @@ Patroni と [Citus](https://docs.citusdata.com) の統合を有効にします�
 
 --------
 
-## など {#etcd}
+## Etcd {#etcd}
 
 ほとんどのパラメーターはオプションですが、**host**、**hosts**、**url**、**proxy**、または **srv** のいずれかを指定する必要があります。
 
@@ -145,7 +145,7 @@ Patroni と [Citus](https://docs.citusdata.com) の統合を有効にします�
 - **url**: etcd の URL。
 - **proxy**: etcd のプロキシ URL。プロキシを使用して etcd に接続している場合は、**url** の代わりにこのパラメーターを使用します。
 - **srv**: クラスター自動検出のために SRV レコードを検索するドメイン。 Patroni は、指定されたドメインの SRV サービス名 (最初に成功するまでこの順序で) のクエリーを試行します: `_etcd-client-ssl`、`_etcd-client`、`_etcd-ssl`、`_etcd`、`_etcd-server-ssl`、`_etcd-server`。 `_etcd-server-ssl` または `_etcd-server` の SRV レコードが取得された場合、ETCD ピア プロトコルが使用され、利用可能なメンバーについて ETCD がクエリーされます。それ以外の場合は、SRV レコードのホストが使用されます。
-- **srv_suffix**: 検出中にクエリーされる SRV 名のサフィックスを構成します。このフラグを使用して、同じドメイン内の複数の etcd クラスターを区別します。 **srv** と組み合わせた場合にのみ機能します。たとえば、`srv_suffix: foo` と `srv: example.org` が設定されている場合、DNS SRV クエリーが作成されます:`_etcd-client-ssl-foo._tcp.example.com` (考えられるすべての ETCD SRV サービス名に対して同様)。
+- **srv_suffix**: 検出中にクエリーされる SRV 名のサフィックスを構成します。このフラグを使用して、同じドメイン内の複数の etcd クラスターを区別します。 **srv** と組み合わせた場合にのみ機能します。たとえば、`srv_suffix: foo` と `srv: example.org` が設定されている場合、DNS SRV クエリーが作成されます:`_etcd-client-ssl-foo._tcp.example.org` (考えられるすべての ETCD SRV サービス名に対して同様)。
 - **protocol**: (オプション) http または https (指定しない場合は http が使用されます)。 **url** または **proxy** が指定されている場合は、それらからプロトコルを取得します。
 - **username**: (オプション) etcd 認証用のユーザー名。
 - **password**: (オプション) etcd 認証用のパスワード。
@@ -181,11 +181,11 @@ Patroni をプロトコル バージョン 3 経由で etcd クラスターと�
 
 --------
 
-## 出展者 {#exhibitor}
+## Exhibitor {#exhibitor}
 
-- **hosts**: エキシビター (ZooKeeper) ノードの初期リスト (形式: 「host1、host2、etc...」)。このリストは、エキシビター (ZooKeeper) クラスター トポロジが変更されるたびに自動的に更新されます。
-- **poll_interval**: ZooKeeper およびエキシビター ノードのリストをエキシビターから更新する頻度。
-- **port**: エキシビターポート。
+- **hosts**: Exhibitor (ZooKeeper) ノードの初期リスト (形式: 「host1、host2、etc...」)。このリストは、Exhibitor (ZooKeeper) クラスター トポロジが変更されるたびに自動的に更新されます。
+- **poll_interval**: ZooKeeper および Exhibitor ノードのリストを Exhibitor から更新する頻度。
+- **port**: Exhibitor ポート。
 
 <a id="kubernetes_settings"></a>
 
@@ -198,7 +198,7 @@ Patroni をプロトコル バージョン 3 経由で etcd クラスターと�
 - **labels**: `{label1: value1, label2: value2}` 形式のラベル。これらのラベルは、現在のクラスターに関連付けられている既存のオブジェクト (ポッドとエンドポイントまたは ConfigMaps) を検索するために使用されます。また、Patroni は、作成するすべてのオブジェクト (エンドポイントまたは ConfigMap) にそれらを設定します。
 - **scope_label**: (オプション) クラスター名を含むラベルの名前。デフォルト値は `cluster-name` です。
 - **bootstrap_labels**: (オプション) `{label1: value1, label2: value2}` 形式のラベル。これらのラベルは、Patroni ポッドの状態が `initializing new cluster`、`running custom bootstrap script`、`starting after custom bootstrap`、または `creating replica` のいずれかである場合にそのポッドに割り当てられます。
-- **role_label**: (オプション) ロールを含むラベルの名前 (`primary`、`replica`、またはその他のカスタム値)。 Patroni は、実行されるポッドにこのラベルを設定します。デフォルト値は `role` です。
+- **role_label**: (オプション) ロールを含むラベルの名前 (`primary`、`replica`、またはその他のカスタム値)。 Patroni は、自身が実行されているポッドにこのラベルを設定します。デフォルト値は `role` です。
 - **leader_label_value**: (オプション) Postgres ロールが `primary` の場合のポッド ラベルの値。デフォルト値は `primary` です。
 - **follower_label_value**: (オプション) Postgres ロールが `replica` の場合のポッド ラベルの値。デフォルト値は `replica` です。
 - **standby_leader_label_value**: (オプション) Postgres ロールが `standby_leader` の場合のポッド ラベルの値。デフォルト値は `primary` です。
@@ -232,18 +232,18 @@ Patroni をプロトコル バージョン 3 経由で etcd クラスターと�
 - **leader_fallback_timeout**: (オプション) 過半数からの応答がないリーダーがフォロワー状態に戻るまでの秒数。 `append_entries_period` より大きくなければなりません。デフォルト： `30.0`。
 
 > [!NOTE]
-> これらのタイムアウト パラメーターは、デフォルトの pysyncobj タイムアウトが長すぎる高遅延ネットワークに役立ちます。次の制約を満たす必要があります: `min_timeout` > 3 * `append_entries_period`、`max_timeout` > `min_timeout`、`connection_timeout` >= `max_timeout`、および `leader_fallback_timeout` > `append_entries_period`。 Patroni は起動時にこれらを検証し、違反している場合は起動を拒否します。これらの値は実行時に変更できないため、再起動が必要です。
+> これらのタイムアウト パラメーターは、デフォルトの pysyncobj タイムアウトが厳しすぎる高遅延ネットワークで役立ちます。次の制約を満たす必要があります: `min_timeout` > 3 * `append_entries_period`、`max_timeout` > `min_timeout`、`connection_timeout` >= `max_timeout`、および `leader_fallback_timeout` > `append_entries_period`。 Patroni は起動時にこれらを検証し、違反している場合は起動を拒否します。これらの値は実行時に変更できないため、再起動が必要です。
 >
 > [!WARNING]
-> これらのノブは、pysyncobj の選択と接続のタイムアウトを緩和するだけです。 Patroni が Raft 操作に適用するコマンドごとの期限は延長されません。各 Raft コマンド (リーダー ロックのリフレッシュ、クラスター状態の書き込み) は依然として `retry_timeout` (デフォルト `10`) 内で完了する必要があります。遅延が非常に長いリンク (ラウンドトリップ時間がおよそ数秒を超える場合) では、`connection_timeout` が RTT を大きく上回っていても、1 つのコマンドが `retry_timeout` を超える可能性があるため、DCS は到達不能であるように見え、プライマリーが降格される可能性があります。このようなリンクでは、`loop_wait + 2 * retry_timeout <= ttl` を維持しながら、それに応じて `retry_timeout` および `ttl` も発生させる必要があります。
+> これらの設定は、pysyncobj の選挙と接続のタイムアウトを緩和するだけです。 Patroni が Raft 操作に適用するコマンドごとの期限は延長されません。各 Raft コマンド (リーダー ロックのリフレッシュ、クラスター状態の書き込み) は依然として `retry_timeout` (デフォルト `10`) 内で完了する必要があります。遅延が非常に長いリンク (ラウンドトリップ時間がおよそ数秒を超える場合) では、`connection_timeout` が RTT を大きく上回っていても、1 つのコマンドが `retry_timeout` を超える可能性があるため、DCS は到達不能であるように見え、プライマリーが降格される可能性があります。このようなリンクでは、`loop_wait + 2 * retry_timeout <= ttl` を維持しながら、それに応じて `retry_timeout` と `ttl` も引き上げる必要があります。
 
-Raft 実装に関する短い FAQ
+  Raft 実装に関する短い FAQ
 
   - Q: コンセンサスを提供するすべてのノードをリストするにはどうすればよいですか?
 
     A: `syncobj_admin -conn host:port -status` ここで、host:port はクラスター ノードの 1 つのアドレスです。
 
-  - Q: コンセンサスの一部であったノードがなくなったため、同じ IP を他のノードに再利用できません。このノードをコンセンサスから削除するにはどうすればよいですか?
+  - Q: コンセンサスの一部であったノードが離脱し、その IP を他のノードに再利用できません。このノードをコンセンサスから削除するにはどうすればよいですか?
 
     A: `syncobj_admin -conn host:port -remove host2:port2` ここで、`host2:port2` はコンセンサスから削除するノードのアドレスです。
 
@@ -257,7 +257,7 @@ Raft 実装に関する短い FAQ
 
   - Q: Patroni と PostgreSQL は 2 つのノードでのみ実行できますか?
 
-    A: はい、3 番目のノードでは `patroni_raft_controller` を実行できます (Patroni と PostgreSQL は使用しません)。このような設定では、プライマリーに影響を与えることなく、一時的に 1 つのノードを失う可能性があります。
+    A: はい、3 番目のノードでは `patroni_raft_controller` を実行できます (Patroni と PostgreSQL は使用しません)。このような設定では、1 つのノードが一時的に失われても、プライマリーには影響しません。
 
 <a id="postgresql_settings"></a>
 
@@ -276,8 +276,8 @@ Raft 実装に関する短い FAQ
       - **sslpassword**: （任意）[sslpassword](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLPASSWORD)接続パラメーターに対応し、`sslkey`で指定した秘密鍵のパスワードを指定します。
       - **sslcert**: (オプション) [sslcert](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCERT) 接続パラメータにマップされ、クライアント証明書の場所を指定します。
       - **sslrootcert**: （任意）[sslrootcert](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLROOTCERT)接続パラメーターに対応します。クライアントがサーバー証明書の検証に使用する、1つ以上の認証局（CA）の証明書を含むファイルの場所を指定します。
-      - **sslcrl**: (optional) maps to the [sslcrl](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRL) connection parameter, which specifies the location of a file containing a certificate revocation list.クライアントは、このリストに存在する証明書を持つサーバーへの接続を拒否します。
-      - **sslcrldir**: (optional) maps to the [sslcrldir](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRLDIR) connection parameter, which specifies the location of a directory with files containing a certificate revocation list.クライアントは、このリストに存在する証明書を持つサーバーへの接続を拒否します。
+      - **sslcrl**: (オプション) [sslcrl](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRL) 接続パラメータにマップされ、失効証明書リストを含むファイルの場所を指定します。クライアントは、このリストに存在する証明書を持つサーバーへの接続を拒否します。
+      - **sslcrldir**: (オプション) [sslcrldir](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRLDIR) 接続パラメータにマップされ、失効証明書リストを含むファイルのあるディレクトリの場所を指定します。クライアントは、このリストに存在する証明書を持つサーバーへの接続を拒否します。
       - **sslnegotiation**: （任意）[sslnegotiation](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLNEGOTIATION)接続パラメーターに対応し、SSLを使用する場合に、サーバーとのSSL暗号化のネゴシエーション方法を制御します。
       - **gssencmode**: （任意）[gssencmode](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-GSSENCMODE)接続パラメーターに対応します。サーバーと安全なGSS TCP/IP接続をネゴシエートするかどうか、またその優先順位を決定します。
       - **channel_binding**: (オプション) [channel_binding](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-CHANNEL-BINDING) 接続パラメータにマップされ、クライアントによるチャネル バインディングの使用を制御します。
@@ -289,8 +289,8 @@ Raft 実装に関する短い FAQ
       - **sslpassword**: （任意）[sslpassword](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLPASSWORD)接続パラメーターに対応し、`sslkey`で指定した秘密鍵のパスワードを指定します。
       - **sslcert**: (オプション) [sslcert](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCERT) 接続パラメータにマップされ、クライアント証明書の場所を指定します。
       - **sslrootcert**: （任意）[sslrootcert](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLROOTCERT)接続パラメーターに対応します。クライアントがサーバー証明書の検証に使用する、1つ以上の認証局（CA）の証明書を含むファイルの場所を指定します。
-      - **sslcrl**: (optional) maps to the [sslcrl](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRL) connection parameter, which specifies the location of a file containing a certificate revocation list.クライアントは、このリストに存在する証明書を持つサーバーへの接続を拒否します。
-      - **sslcrldir**: (optional) maps to the [sslcrldir](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRLDIR) connection parameter, which specifies the location of a directory with files containing a certificate revocation list.クライアントは、このリストに存在する証明書を持つサーバーへの接続を拒否します。
+      - **sslcrl**: (オプション) [sslcrl](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRL) 接続パラメータにマップされ、失効証明書リストを含むファイルの場所を指定します。クライアントは、このリストに存在する証明書を持つサーバーへの接続を拒否します。
+      - **sslcrldir**: (オプション) [sslcrldir](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRLDIR) 接続パラメータにマップされ、失効証明書リストを含むファイルのあるディレクトリの場所を指定します。クライアントは、このリストに存在する証明書を持つサーバーへの接続を拒否します。
       - **sslnegotiation**: （任意）[sslnegotiation](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLNEGOTIATION)接続パラメーターに対応し、SSLを使用する場合に、サーバーとのSSL暗号化のネゴシエーション方法を制御します。
       - **gssencmode**: （任意）[gssencmode](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-GSSENCMODE)接続パラメーターに対応します。サーバーと安全なGSS TCP/IP接続をネゴシエートするかどうか、またその優先順位を決定します。
       - **channel_binding**: (オプション) [channel_binding](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-CHANNEL-BINDING) 接続パラメータにマップされ、クライアントによるチャネル バインディングの使用を制御します。
@@ -302,8 +302,8 @@ Raft 実装に関する短い FAQ
       - **sslpassword**: （任意）[sslpassword](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLPASSWORD)接続パラメーターに対応し、`sslkey`で指定した秘密鍵のパスワードを指定します。
       - **sslcert**: (オプション) [sslcert](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCERT) 接続パラメータにマップされ、クライアント証明書の場所を指定します。
       - **sslrootcert**: （任意）[sslrootcert](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLROOTCERT)接続パラメーターに対応します。クライアントがサーバー証明書の検証に使用する、1つ以上の認証局（CA）の証明書を含むファイルの場所を指定します。
-      - **sslcrl**: (optional) maps to the [sslcrl](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRL) connection parameter, which specifies the location of a file containing a certificate revocation list.クライアントは、このリストに存在する証明書を持つサーバーへの接続を拒否します。
-      - **sslcrldir**: (optional) maps to the [sslcrldir](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRLDIR) connection parameter, which specifies the location of a directory with files containing a certificate revocation list.クライアントは、このリストに存在する証明書を持つサーバーへの接続を拒否します。
+      - **sslcrl**: (オプション) [sslcrl](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRL) 接続パラメータにマップされ、失効証明書リストを含むファイルの場所を指定します。クライアントは、このリストに存在する証明書を持つサーバーへの接続を拒否します。
+      - **sslcrldir**: (オプション) [sslcrldir](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLCRLDIR) 接続パラメータにマップされ、失効証明書リストを含むファイルのあるディレクトリの場所を指定します。クライアントは、このリストに存在する証明書を持つサーバーへの接続を拒否します。
       - **sslnegotiation**: （任意）[sslnegotiation](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLNEGOTIATION)接続パラメーターに対応し、SSLを使用する場合に、サーバーとのSSL暗号化のネゴシエーション方法を制御します。
       - **gssencmode**: （任意）[gssencmode](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-GSSENCMODE)接続パラメーターに対応します。サーバーと安全なGSS TCP/IP接続をネゴシエートするかどうか、またその優先順位を決定します。
       - **channel_binding**: (オプション) [channel_binding](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-CHANNEL-BINDING) 接続パラメーターにマップされ、クライアントによるチャネル バインディングの使用を制御します。
@@ -322,7 +322,7 @@ Raft 実装に関する短い FAQ
 
   - **create_replica_methods**: Patroni ノードを新しいレプリカに変換するための作成メソッドの順序付きリスト。 "basebackup" がデフォルトのメソッドです。他のメソッドはスクリプトを参照すると想定され、それぞれが独自の構成アイテムとして構成されます。詳細については、[カスタム レプリカの作成方法のドキュメント](/ja/docs/patroni/replica_bootstrap#custom_replica_creation) を参照してください。
 
-  - **data_dir**: Postgres データ ディレクトリの場所。[既存の](/ja/docs/patroni/existing_data#existing_data)、または Patroni によって初期化されます。
+  - **data_dir**: Postgres データ ディレクトリの場所。[既存](/ja/docs/patroni/existing_data#existing_data) のもの、または Patroni によって初期化されるものです。
 
   - **config_dir**: Postgres 構成ディレクトリの場所。デフォルトはデータ ディレクトリです。 Patroni によって書き込み可能である必要があります。
 
@@ -332,7 +332,7 @@ Raft 実装に関する短い FAQ
 
     - **pg_ctl**: (オプション) `pg_ctl` バイナリのカスタム名。
     - **initdb**: (オプション) `initdb` バイナリのカスタム名。
-    - **pgcontroldata**: (オプション) `pg_controldata` バイナリのカスタム名。
+    - **pg_controldata**: (オプション) `pg_controldata` バイナリのカスタム名。
     - **pg_basebackup**: (オプション) `pg_basebackup` バイナリのカスタム名。
     - **postgres**: (オプション) `postgres` バイナリのカスタム名。
     - **pg_isready**: (オプション) `pg_isready` バイナリのカスタム名。
@@ -351,31 +351,31 @@ Raft 実装に関する短い FAQ
   - **custom_conf** : `postgresql.base.conf` の代わりに使用される、オプションのカスタム `postgresql.conf` ファイルへのパス。ファイルはすべてのクラスター ノードに存在し、PostgreSQL によって読み取り可能であり、実際の `postgresql.conf` 上の場所からインクルードされる必要があります。 Patroni は、このファイルの変更を監視したり、バックアップしたりしないことに注意してください。ただし、その設定は Patroni 独自の構成機能によってオーバーライドできます。詳細については、[動的構成](/ja/docs/patroni/config#config) を参照してください。
 
   - **parameters**: `{ssl: "on", ssl_cert_file: "cert_file"}` 形式の Postgres の構成パラメーター (GUC)。
-  - **parameters_primary**: (オプション) プライマリーのロール固有のパラメーターをオーバーライドします。これらの値は、ベースの **parameters** とマージされ、上書きされます。
-  - **parameters_replica**: (オプション) レプリカのロール固有のパラメーターをオーバーライドします。これらの値は、ベースの **parameters** とマージされ、上書きされます。
-  - **parameters_standby_leader**: (オプション)standby_leader のロール固有のパラメーターをオーバーライドします。これらの値は、ベースの **parameters** とマージされ、上書きされます。
+  - **parameters_primary**: (オプション) プライマリーのロール固有のパラメーターをオーバーライドします。これらの値は、ベースの **parameters** にマージされ、同じパラメーターのベース値を上書きします。
+  - **parameters_replica**: (オプション) レプリカのロール固有のパラメーターをオーバーライドします。これらの値は、ベースの **parameters** にマージされ、同じパラメーターのベース値を上書きします。
+  - **parameters_standby_leader**: (オプション) standby_leader のロール固有のパラメーターをオーバーライドします。これらの値は、ベースの **parameters** にマージされ、同じパラメーターのベース値を上書きします。
 
   - **pg_hba**: Patroni が `pg_hba.conf` を生成するために使用する行のリスト。 `hba_file` PostgreSQL パラメータがデフォルト以外の値に設定されている場合、Patroni はこのパラメータを無視します。このパラメータを [動的構成](/ja/docs/patroni/config/dynamic#dynamic) と組み合わせると、`pg_hba.conf` の管理が簡素化されます。
 
-    - **- host すべて すべて 0.0.0.0/0 md5**
-    - **- ホスト レプリケーション レプリケーター 127.0.0.1/32 md5**: レプリケーションには次のような行が必要です。
+    - **- host all all 0.0.0.0/0 md5**
+    - **- host replication replicator 127.0.0.1/32 md5**: レプリケーションにはこのような行が必要です。
   - **pg_hba_primary**: (オプション) プライマリーのロール固有の pg_hba エントリ。これらは **pg_hba** を完全に置き換えます (マージなし)。定義されていない場合は、**pg_hba** が使用されます。
   - **pg_hba_replica**: (オプション) レプリカのロール固有の pg_hba エントリ。これらは **pg_hba** を完全に置き換えます (マージなし)。定義されていない場合は、**pg_hba** が使用されます。
-  - **pg_hba_standby_leader**: (オプション)standby_leader のロール固有の pg_hba エントリ。これらは **pg_hba** を完全に置き換えます (マージなし)。定義されていない場合は、**pg_hba** が使用されます。
+  - **pg_hba_standby_leader**: (オプション) standby_leader のロール固有の pg_hba エントリ。これらは **pg_hba** を完全に置き換えます (マージなし)。定義されていない場合は、**pg_hba** が使用されます。
 
   - **pg_ident**: Patroni が `pg_ident.conf` を生成するために使用する行のリスト。 `ident_file` PostgreSQL パラメータがデフォルト以外の値に設定されている場合、Patroni はこのパラメータを無視します。このパラメータを [動的構成](/ja/docs/patroni/config/dynamic#dynamic) と組み合わせると、`pg_ident.conf` の管理が簡素化されます。
 
-    - **- マップ名1 システム名1 pguser1**
-    - **- マップ名1 システム名2 pguser2**
+    - **- mapname1 systemname1 pguser1**
+    - **- mapname1 systemname2 pguser2**
   - **pg_ident_primary**: (オプション) プライマリーのロール固有の pg_ident エントリ。これらは **pg_ident** を完全に置き換えます (マージなし)。定義されていない場合は、**pg_ident** が使用されます。
   - **pg_ident_replica**: (オプション) レプリカのロール固有の pg_ident エントリ。これらは **pg_ident** を完全に置き換えます (マージなし)。定義されていない場合は、**pg_ident** が使用されます。
-  - **pg_ident_standby_leader**: (オプション)standby_leader のロール固有の pg_ident エントリ。これらは **pg_ident** を完全に置き換えます (マージなし)。定義されていない場合は、**pg_ident** が使用されます。
+  - **pg_ident_standby_leader**: (オプション) standby_leader のロール固有の pg_ident エントリ。これらは **pg_ident** を完全に置き換えます (マージなし)。定義されていない場合は、**pg_ident** が使用されます。
 
   - **pg_ctl_timeout**: `start`、`stop`、または `restart` を実行するときに pg_ctl が待機する時間。デフォルト値は 60 秒です。
 
-  - **use_pg_rewind**: 前のリーダーがレプリカとしてクラスターに参加するときに、元のリーダーで pg_rewind を使用してみます。クラスターは `data page checksums` (`initdb` の `--data-checksums` オプション) で初期化するか、`wal_log_hints` を `on` に設定する必要があります。そうしないと、`pg_rewind` は機能しません。
+  - **use_pg_rewind**: 以前のリーダーがレプリカとしてクラスターに参加するときに、そのノードで pg_rewind の使用を試みます。クラスターは `data page checksums` (`initdb` の `--data-checksums` オプション) で初期化するか、`wal_log_hints` を `on` に設定する必要があります。そうしないと、`pg_rewind` は機能しません。
 
-  - **rewind**: (オプション) `pg_rewind` コマンドに渡すカスタム オプション。文字列のリストまたは単一のキーと値の辞書として指定できます。許可されないオプションには、`target-pgdata`、`source-pgdata`、`source-server`、`write-recovery-conf`、`dry-run`、`restore-target-wal`、`config-file`、`no-ensure-shutdown`、`version`、`help` があります。使用例:
+  - **rewind**: (オプション) `pg_rewind` コマンドに渡すカスタム オプション。文字列および/または単一のキーと値を持つ辞書のリストとして指定できます。許可されないオプションには、`target-pgdata`、`source-pgdata`、`source-server`、`write-recovery-conf`、`dry-run`、`restore-target-wal`、`config-file`、`no-ensure-shutdown`、`version`、`help` があります。使用例:
 
     ```yaml
     postgresql:
@@ -385,11 +385,11 @@ Raft 実装に関する短い FAQ
         - sync-method: fsync
     ```
 
-  - **remove_data_directory_on_rewind_failure**: このオプションが有効な場合、Patroni は PostgreSQL データ ディレクトリを削除し、レプリカを再作成します。そうでなければ、新しいリーダーに従おうとするでしょう。デフォルト値は **false** です。
+  - **remove_data_directory_on_rewind_failure**: このオプションが有効な場合、Patroni は PostgreSQL データ ディレクトリを削除し、レプリカを再作成します。そうでない場合、新しいリーダーに追従しようとします。デフォルト値は **false** です。
 
-  - **remove_data_directory_on_diverged_timelines**: Patroni は、タイムラインが分岐し、以前のプライマリーが新しいプライマリーからストリーミングを開始できないことを認識した場合、PostgreSQL データ ディレクトリを削除し、レプリカを再作成します。このオプションは、`pg_rewind` が使用できない場合に役立ちます。 PostgreSQL でタイムラインの相違チェックを実行している間、v10 および古い Patroni はレプリケーション資格情報を使用して "postgres" データベースに接続しようとします。したがって、そのようなアクセスは pg_hba.conf で許可される必要があります。デフォルト値は **false** です。
+  - **remove_data_directory_on_diverged_timelines**: Patroni は、タイムラインが分岐し、以前のプライマリーが新しいプライマリーからストリーミングを開始できないことを認識した場合、PostgreSQL データ ディレクトリを削除し、レプリカを再作成します。このオプションは、`pg_rewind` が使用できない場合に役立ちます。 PostgreSQL v10 以前でタイムライン分岐チェックを実行する際、Patroni はレプリケーション資格情報を使用して "postgres" データベースへの接続を試みます。したがって、そのようなアクセスは pg_hba.conf で許可される必要があります。デフォルト値は **false** です。
 
-  - **replica_method**:basebackup 以外の create_replica_method ごとに、同じ名前の構成セクションを追加します。少なくとも、実行される実際のスクリプトへのフルパスを含む "command" を含める必要があります。他の構成パラメータは、「パラメータ=値」の形式でスクリプトに渡されます。
+  - **replica_method**: basebackup 以外の create_replica_methods の各メソッドについて、同じ名前の構成セクションを追加します。少なくとも、実行される実際のスクリプトへのフルパスを含む "command" を含める必要があります。他の構成パラメータは、"parameter=value"の形式でスクリプトに渡されます。
 
   - **pre_promote**: フェイルオーバー中にリーダー ロックを取得した後、レプリカを昇格する前に実行するフェンシング スクリプト。スクリプトがゼロ以外のコードで終了した場合、Patroni はレプリカを昇格させず、リーダー キーを DCS から削除します。
 
@@ -403,8 +403,8 @@ Raft 実装に関する短い FAQ
 
 - **restapi**:
   - **thread_pool_size**: REST API リクエストを処理するために Patroni によって使用されるスレッド プールのサイズ。最小値は `5`、デフォルト値は `5` です。
-  - **connect_address**: Patroni の [REST API](/ja/docs/patroni/rest_api#rest_api) にアクセスするための IP アドレス (またはホスト名) とポート。クラスターのすべてのメンバーがこのアドレスに接続できる必要があるため、Patroni セットアップがローカルホスト内のデモを目的としている場合を除き、このアドレスは非 "localhost" またはループバック アドレス (つまり、"localhost" または "127.0.0.1") である必要があります。これは、HTTP ヘルス チェック ("listen" REST API パラメーターについては以下を参照してください) のエンドポイントとして機能し、ユーザー クエリー (直接または REST API 経由) や、リーダーの選出中にクラスター メンバーによって実行されるヘルス チェック (たとえば、リーダーがまだ実行されているかどうか、またはエラーが発生したノードがあるかどうかを判断するため) のエンドポイントとしても機能します。クエリーを実行する位置よりも前の WAL 位置など) connect_address が DCS のメンバー キーに入れられ、メンバー名をアドレスに変換して REST API に接続できるようになります。
-  - **listen**: Patroni が REST API をリッスンする IP アドレス (またはホスト名) とポート - 前述のように、参加ノード間で同じヘルス チェックとクラスター メッセージングも提供します。 HAProxy (または HTTP "OPTION" または "GET" チェックを実行できるその他のロード バランサー) のヘルスチェック情報を提供します。
+  - **connect_address**: Patroni の [REST API](/ja/docs/patroni/rest_api#rest_api) にアクセスするための IP アドレス (またはホスト名) とポート。クラスターのすべてのメンバーがこのアドレスに接続できる必要があるため、Patroni セットアップがローカルホスト内のデモを目的としている場合を除き、このアドレスには "localhost" やループバック アドレス (たとえば "127.0.0.1") を使用してはなりません。これは、HTTP ヘルス チェック ("listen" REST API パラメーターについては以下を参照してください) のエンドポイントとして機能し、ユーザー クエリー (直接または REST API 経由) や、リーダーの選出中にクラスター メンバーによって実行されるヘルス チェック (たとえば、リーダーがまだ実行されているかどうか、クエリーを実行しているノードよりも先の WAL 位置を持つノードが存在するかどうか、などを判断するため) のエンドポイントとしても機能します。connect_address は DCS のメンバー キーに入れられ、メンバー名をその REST API に接続するためのアドレスに変換できるようになります。
+  - **listen**: Patroni が REST API をリッスンする IP アドレス (またはホスト名) とポート - 前述のように、参加ノード間で同じヘルス チェックとクラスター メッセージングも提供します。 HAProxy (または HTTP "OPTIONS" または "GET" チェックを実行できるその他のロード バランサー) のヘルスチェック情報を提供します。
   - **authentication**: (オプション)
     - **username**: 安全でない REST API エンドポイントを保護するための Basic 認証ユーザー名。
     - **password**: 安全でないREST APIエンドポイントを保護するBasic認証のパスワード。
@@ -420,9 +420,9 @@ Raft 実装に関する短い FAQ
   - **https_extra_headers**: （任意）TLSが有効な場合に、REST APIサーバーがHTTP応答に追加情報を含めるためのHTTPSヘッダー。`http_extra_headers`に設定した追加情報も含まれます。
   - **request_queue_size**: （任意）Patroni REST APIが使用するTCPソケットの要求キューサイズを設定します。キューが満杯になると、それ以降の要求は「Connection denied」エラーになります。デフォルトは5です。
   - **server_tokens**: （任意）HTTPの`Server`ヘッダーの値を設定します。
-    - `Minimal`: ヘッダーには Patroni バージョンのみが含まれます。 `Patroni/4.0.0`。
-    - `ProductOnly`: ヘッダーには製品名のみが含まれます。 `Patroni`。
-    - `Original` (デフォルト): ヘッダーは元の動作を公開し、BaseHTTP および Python のバージョンを表示します。 `BaseHTTP/0.6 Python/3.12.3`。
+    - `Minimal`: ヘッダーには Patroni バージョンのみが含まれます (例: `Patroni/4.0.0`)。
+    - `ProductOnly`: ヘッダーには製品名のみが含まれます (例: `Patroni`)。
+    - `Original` (デフォルト): ヘッダーは元の動作を公開し、BaseHTTP および Python のバージョンを表示します (例: `BaseHTTP/0.6 Python/3.12.3`)。
 
 次に、**http_extra_headers** と **https_extra_headers** の両方の例を示します。
 
@@ -453,7 +453,7 @@ restapi:
 </div>
 
 - `restapi.connect_address` は、特定の Patroni クラスターのすべてのノードからアクセス可能である必要があります。内部的には、Patroni がリーダー レース中にこれを使用して、レプリケーション ラグが最小限のノードを見つけます。
-- クライアント証明書の検証を有効にした場合 (`restapi.verify_client` が `required` に設定されている場合)、**しなければならない** は `ctl.certfile`、`ctl.keyfile`、`ctl.keyfile_password` で **有効なクライアント証明書** も提供します。指定しない場合、Patroni は正しく動作しません。
+- クライアント証明書の検証を有効にした場合 (`restapi.verify_client` が `required` に設定されている場合)、`ctl.certfile`、`ctl.keyfile`、`ctl.keyfile_password` で**有効なクライアント証明書**を提供することが**必須**です。指定しない場合、Patroni は正しく動作しません。
 
 </div>
 
@@ -468,7 +468,7 @@ restapi:
     - **username**: 保護された REST API エンドポイントにアクセスするための基本認証ユーザー名。指定されない場合、[patronictl](/ja/docs/patroni/patronictl#patronictl) は REST API "username" パラメーターに指定された値を使用します。
     - **password**: 保護された REST API エンドポイントにアクセスするための基本認証パスワード。指定されない場合、[patronictl](/ja/docs/patroni/patronictl#patronictl) は REST API "password" パラメーターに指定された値を使用します。
   - **insecure**: SSL 証明書を検証せずに、REST API への接続を許可します。
-  - **cacert**: REST API SSL 証明書の検証中に使用する、CA_BUNDLE ファイルまたはディレクトリを含む信頼できる CA の証明書を含むファイルを指定します。指定されない場合、[patronictl](/ja/docs/patroni/patronictl#patronictl) は REST API "cafile" パラメーターに指定された値を使用します。
+  - **cacert**: REST API SSL 証明書の検証中に使用する、信頼できる CA の証明書を含む CA_BUNDLE ファイルまたはディレクトリを指定します。指定されない場合、[patronictl](/ja/docs/patroni/patronictl#patronictl) は REST API "cafile" パラメーターに指定された値を使用します。
   - **certfile**: クライアント証明書を含むファイルを PEM 形式で指定します。
   - **keyfile**: クライアント秘密鍵を含むファイルを PEM 形式で指定します。
   - **keyfile_password**: クライアントのキーファイルを復号化するためのパスワードを指定します。
@@ -477,7 +477,7 @@ restapi:
 
 ## ウォッチドッグ {#watchdog}
 
-- **mode**: `off`、`automatic`、または `required`。 `off` ウォッチドッグが無効になっている場合。 `automatic` の場合、ウォッチドッグが使用可能な場合は使用されますが、使用できない場合は無視されます。 `required` の場合、ウォッチドッグを正常に有効にできない限り、ノードはリーダーになりません。
+- **mode**: `off`、`automatic`、または `required`。 `off` の場合、ウォッチドッグは無効になります。 `automatic` の場合、ウォッチドッグが使用可能な場合は使用されますが、使用できない場合は無視されます。 `required` の場合、ウォッチドッグを正常に有効にできない限り、ノードはリーダーになりません。
 - **device**: ウォッチドッグ デバイスへのパス。デフォルトは `/dev/watchdog` です。
 - **safety_margin**: ウォッチドッグのトリガーとリーダー キーの有効期限の間の安全マージンの秒数。
 
@@ -487,12 +487,12 @@ restapi:
 
 ## タグ {#tags}
 
-- **clonefrom**: `true` または `false`。 `true` に設定すると、他のノードはブートストラップにこのノードの使用を優先する可能性があります (`pg_basebackup` から取得します)。 `clonefrom` タグが `true` に設定されているノードが複数ある場合、ブートストラップ元のノードがランダムに選択されます。デフォルト値は `false` です。
+- **clonefrom**: `true` または `false`。 `true` に設定すると、他のノードはブートストラップにこのノードの使用を優先する可能性があります (このノードから `pg_basebackup` で取得します)。 `clonefrom` タグが `true` に設定されているノードが複数ある場合、ブートストラップ元のノードがランダムに選択されます。デフォルト値は `false` です。
 - **noloadbalance**: `true` または `false`。 `true` に設定すると、ノードは `GET /replica` REST API ヘルスチェックに対して HTTP ステータス コード 503 を返すため、ロード バランシングから除外されます。デフォルトは `false` です。
 - **replicatefrom**: 複製元の別のレプリカの名前。カスケード レプリケーションをサポートするために使用されます。
 - **nosync**: `true` または `false`。 `true` に設定すると、ノードは同期レプリカとして選択されなくなります。
 - **sync_priority**: 整数。[synchronous_mode](/ja/docs/patroni/replication_modes#synchronous_mode) が `on` に設定されている場合に、同期レプリカの選択中にこのノードが持つべき優先順位を制御します。優先順位の高いノードは、優先順位の低いノードよりも優先されます。 `sync_priority` が 0 または負の場合、そのようなノードは `synchronous_standby_names` PostgreSQL パラメーターに書き込むことができません (`nosync: true` と同様)。このパラメータは、`pg_stat_replication` ビューで報告される `sync_priority` 値とは逆の意味をもつことに注意してください。
-- **nofailover**: `true` または `false` は、このノードがリーダー レースに参加してリーダーになることを許可するかどうかを制御します。デフォルトは `false` で、このノード <span id="can">can</span>\_ がリーダー レースに参加できることを意味します。
+- **nofailover**: `true` または `false` は、このノードがリーダー レースに参加してリーダーになることを許可するかどうかを制御します。デフォルトは `false` で、このノード <span id="can">は</span>リーダー レースに参加できることを意味します。
 - **failover_priority**: 整数。フェイルオーバー中にこのノードが持つべき優先順位を制御します。同じ量の WAL を受信/再生した場合、優先順位の高いノードが優先順位の低いノードよりも優先されます。ただし、優先度に関係なく、受信/再生 LSN の値が高いノードが優先されます。 `failover_priority` が 0 または負の場合、そのようなノードはリーダー レースに参加したり、リーダーになることは許可されません (`nofailover: true` と同様)。既知の制限: `failover_priority` は現在、[クォーラムベースの同期レプリケーション](/ja/docs/patroni/replication_modes#quorum_mode) では動作しません。
 - **nostream**: `true` または `false`。 `true` に設定すると、ノードは WAL をストリーミングするためにレプリケーション プロトコルを使用しません。代わりに、アーカイブのリカバリ (`restore_command` が構成されている場合) と `pg_wal`/`pg_xlog` ポーリングに依存します。また、ノード自体とそのすべてのカスケード レプリカ上の永続的な論理レプリケーション スロットのコピーと同期も無効になります。このタグをプライマリー ノードに設定しても効果はありません。
 

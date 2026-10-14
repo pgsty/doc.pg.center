@@ -25,7 +25,7 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/faq.html"
 
 Patroni, напротив, опирается на состояние в DCS. Для Patroni DCS служит источником истины при выборе действий.
 
-Отдельный кластер DCS усложняет архитектуру, но снижает вероятность расщепления кластера Postgres.
+Отдельный кластер DCS может привести к разрастанию архитектуры, но такой подход также снижает вероятность расщепления кластера Postgres.
 
 Чем Patroni отличается от других решений HA в управлении Postgres?  
 Patroni управляет не только высокой доступностью кластера Postgres, но и самим Postgres.
@@ -48,14 +48,14 @@ Patroni управляет не только высокой доступност
 Пока сочетания `namespace` и `scope` разных кластеров Patroni не конфликтуют, один кластер DCS может хранить сведения о нескольких кластерах Patroni.
 
 Что произойдёт при использовании одного сочетания `namespace` и `scope` разными кластерами Patroni, подключёнными к одному DCS?  
-Второй кластер Patroni не сможет управлять Postgres: в DCS уже будут сведения с тем же сочетанием, но несовместимым системным идентификатором Postgres. Из-за несовпадения Patroni прекращает управление вторым кластером, считая его другим кластером и конфигурацию пользователя ошибочной.
+Если у второго кластера другой системный идентификатор Postgres, Patroni обнаруживает несовместимые данные по этому пути DCS. Вне режима паузы Patroni завершает работу вместо управления вторым кластером, поскольку считает, что сохранённое состояние относится к другому кластеру и конфигурация Patroni ошибочна.
 
 Для разных кластеров Patroni с общим DCS обязательно используйте разные `namespace` / `scope`.
 
 Что произойдёт при потере кластера DCS?  
 DCS в основном хранит состояние и динамическую конфигурацию кластера Patroni.
 
-Первое последствие: все зависящие от этого DCS кластеры Patroni переходят в режим только для чтения, если не включён [dcs_failsafe_mode](/ru/docs/patroni/dcs_failsafe_mode#dcs_failsafe_mode).
+Первое последствие: все зависящие от этого DCS кластеры Patroni переходят в режим только для чтения, если не включён [режим безопасности при отказе DCS](/ru/docs/patroni/dcs_failsafe_mode#dcs_failsafe_mode).
 
 Что делать при потере кластера DCS?  
 Возможны три исхода:
@@ -71,7 +71,7 @@ DCS перестанет отвечать, и Patroni понизит текущ�
 
 Помните: при действиях с кластером Patroni опирается на состояние DCS.
 
-Ситуацию можно смягчить с помощью [dcs_failsafe_mode](/ru/docs/patroni/dcs_failsafe_mode#dcs_failsafe_mode).
+Ситуацию можно смягчить с помощью [режима безопасности при отказе DCS](/ru/docs/patroni/dcs_failsafe_mode#dcs_failsafe_mode).
 
 --------
 
@@ -84,15 +84,15 @@ DCS перестанет отвечать, и Patroni понизит текущ�
 
 Однако [patronictl](/ru/docs/patroni/patronictl#patronictl) является клиентом и может запускаться на удалённых машинах. Достаточно настроить ему доступ к DCS и REST API участников Patroni.
 
-Почему сведения об одном участнике Patroni исчезли из вывода команды [patronictl_list](/ru/docs/patroni/patronictl#patronictl_list)?  
-Вывод [patronictl_list](/ru/docs/patroni/patronictl#patronictl_list) основан на содержимом DCS.
+Почему сведения об одном участнике Patroni исчезли из вывода команды [`patronictl list`](/ru/docs/patroni/patronictl#patronictl_list)?  
+Вывод [`patronictl list`](/ru/docs/patroni/patronictl#patronictl_list) основан на содержимом DCS.
 
 Если сведения об участнике исчезли из DCS, вероятнее всего агент Patroni на этом узле больше не работает или не может связаться с DCS.
 
-Поскольку участник не обновляет сведения, они в итоге истекают в DCS, и участник больше не показывается в выводе [patronictl_list](/ru/docs/patroni/patronictl#patronictl_list).
+Поскольку участник не обновляет сведения, они в итоге истекают в DCS, и участник больше не показывается в выводе [`patronictl list`](/ru/docs/patroni/patronictl#patronictl_list).
 
-Почему сведения об одном участнике Patroni в выводе команды [patronictl_list](/ru/docs/patroni/patronictl#patronictl_list) неактуальны?  
-Вывод [patronictl_list](/ru/docs/patroni/patronictl#patronictl_list) основан на содержимом DCS.
+Почему сведения об одном участнике Patroni в выводе команды [`patronictl list`](/ru/docs/patroni/patronictl#patronictl_list) неактуальны?  
+Вывод [`patronictl list`](/ru/docs/patroni/patronictl#patronictl_list) основан на содержимом DCS.
 
 По умолчанию Patroni обновляет эти сведения примерно каждые `loop_wait` секунд. Даже при нормальной работе данные в DCS могут «задерживаться» до `loop_wait` секунд.
 
@@ -125,7 +125,7 @@ DCS перестанет отвечать, и Patroni понизит текущ�
 
 Команды `patroni --generate-sample-config` и `patroni --generate-config` создают соответственно пример конфигурации Patroni и конфигурацию на основе существующего экземпляра Postgres.
 
-Подробнее см. [generate_sample_config](/ru/docs/patroni/config#generate_sample_config) и [generate_config](/ru/docs/patroni/config#generate_config).
+Подробнее см. [создание примера конфигурации](/ru/docs/patroni/config#generate_sample_config) и [создание конфигурации](/ru/docs/patroni/config#generate_config).
 
 Я изменил параметры в `bootstrap.dcs`, но Patroni не применяет их к участникам. В чём проблема?  
 Значения `bootstrap.dcs` используются только при начальной инициализации нового кластера и записываются в DCS во время неё.
@@ -137,22 +137,22 @@ DCS перестанет отвечать, и Patroni понизит текущ�
 Как изменить динамическую конфигурацию?  
 Нужно изменить конфигурацию в DCS одним из способов:
 
-- [patronictl_edit_config](/ru/docs/patroni/patronictl#patronictl_edit_config); либо
-- запрос `PATCH` к [config_endpoint](/ru/docs/patroni/rest_api#config_endpoint).
+- [`patronictl edit-config`](/ru/docs/patroni/patronictl#patronictl_edit_config); либо
+- запрос `PATCH` к [конечной точке конфигурации](/ru/docs/patroni/rest_api#config_endpoint).
 
 Как изменить локальную конфигурацию?  
-Измените файл конфигурации соответствующего участника Patroni и отправьте агенту Patroni сигнал `SIHGUP`. Это можно сделать одним из способов:
+Измените файл конфигурации соответствующего участника Patroni и отправьте агенту Patroni сигнал `SIGHUP`. Это можно сделать одним из способов:
 
-- отправить запрос `POST` к REST API [reload_endpoint](/ru/docs/patroni/rest_api#reload_endpoint); либо
+- отправить запрос `POST` к [конечной точке перезагрузки конфигурации](/ru/docs/patroni/rest_api#reload_endpoint) REST API; либо
 
-- выполнить [patronictl_reload](/ru/docs/patroni/patronictl#patronictl_reload); либо
+- выполнить [`patronictl reload`](/ru/docs/patroni/patronictl#patronictl_reload); либо
 
 - локально отправить процессу Patroni сигнал `SIGHUP`:
 
   > - Если Patroni запущен через systemd, используйте `systemctl reload PATRONI_UNIT.service`, где `PATRONI_UNIT` — имя службы Patroni; либо
   > - Если Patroni запущен иначе, найдите процесс `patroni` и выполните `kill -s HUP PID`, где `PID` — идентификатор процесса `patroni`.
 
-**Примечание:** в некоторых случаях перезагрузка через [patronictl_reload](/ru/docs/patroni/patronictl#patronictl_reload) может не сработать:
+**Примечание:** в некоторых случаях перезагрузка через [`patronictl reload`](/ru/docs/patroni/patronictl#patronictl_reload) может не сработать:
 
 - Истёкшие сертификаты REST API: проблему можно смягчить параметром `-k` команды [patronictl](/ru/docs/patroni/patronictl#patronictl);
 - Неверные учётные данные: например, когда в файле конфигурации изменены учётные данные `restapi` или `ctl`, а один файл используется для Patroni и [patronictl](/ru/docs/patroni/patronictl#patronictl).
@@ -162,7 +162,7 @@ Patroni читает конфигурацию окружения только п
 
 Поэтому после изменения конфигурации окружения соответствующий агент Patroni необходимо перезапустить.
 
-Не допустите переключения при отказе в кластере. Возможно, пригодится [patronictl_pause](/ru/docs/patroni/patronictl#patronictl_pause).
+Не допустите переключения при отказе в кластере. Возможно, пригодится [`patronictl pause`](/ru/docs/patroni/patronictl#patronictl_pause).
 
 Как сократить повторяющиеся строки сигналов активности в журнале при нормальной работе?
 
@@ -180,10 +180,10 @@ Patroni отметит затронутых участников флагом `p
 
 Время и способ перезапуска участников определяет пользователь. Доступны следующие варианты:
 
-- [patronictl_restart](/ru/docs/patroni/patronictl#patronictl_restart); либо
-- запрос `POST` к [restart_endpoint](/ru/docs/patroni/rest_api#restart_endpoint).
+- [`patronictl restart`](/ru/docs/patroni/patronictl#patronictl_restart); либо
+- запрос `POST` к [конечной точке перезапуска](/ru/docs/patroni/rest_api#restart_endpoint).
 
-**Примечание:** некоторые GUC Postgres требуют особого порядка перезапуска узлов. Подробнее см. [shared_memory_gucs](/ru/docs/patroni/config#shared_memory_gucs).
+**Примечание:** некоторые GUC Postgres требуют особого порядка перезапуска узлов. Подробнее см. [параметры разделяемой памяти](/ru/docs/patroni/config#shared_memory_gucs).
 
 Чем различаются `etcd` и `etcd3` в конфигурации Patroni?  
 `etcd` использует API версии 2 `etcd`, а `etcd3` — API версии 3 `etcd`.
@@ -192,8 +192,8 @@ Patroni отметит затронутых участников флагом `p
 
 Рекомендуется настраивать `etcd3` вместо `etcd`, поскольку:
 
-- API версии 2 по умолчанию отключён начиная с Etcd v3.4;
-- API версии 2 будет полностью удалён в Etcd v3.6.
+- API версии 2 по умолчанию отключён начиная с etcd v3.4;
+- API версии 2 был полностью удалён в etcd v3.6.
 
 В конфигурации Patroni включён `use_slots`, но когда участник некоторое время находится вне сети, его слот репликации удаляется на вышестоящем узле. Как этого избежать?  
 Доступны два варианта:
@@ -203,11 +203,11 @@ Patroni отметит затронутых участников флагом `p
 
 Начиная с Patroni `3.2.0` слоты участников могут быть постоянными слотами под управлением Patroni.
 
-Patroni создаёт постоянные физические слоты на всех узлах, не удаляет их и продвигает LSN слотов на всех узлах в соответствии с LSN, использованным участником.
+В PostgreSQL 11 и новее Patroni создаёт постоянные физические слоты на всех узлах, не удаляет их и продвигает LSN слотов на всех узлах в соответствии с LSN, использованным участником.
 
 Если позднее соответствующий участник удаляется, **пользователь обязан** скорректировать конфигурацию постоянных слотов, иначе Patroni сохранит их навсегда.
 
-**Примечание:** в версиях Patroni старше `3.2.0` слоты участников также можно настроить как постоянные физические, но управляются они только на текущем лидере. При аварийном или плановом переключении слоты создаются на новом лидере без гарантии, что у него есть все сегменты WAL для отсутствующего узла.
+**Примечание:** в версиях Patroni до `3.2.0` слоты участников также можно настроить как постоянные физические, но управляются они только на текущем лидере. При аварийном или плановом переключении слоты создаются на новом лидере без гарантии, что у него есть все сегменты WAL для отсутствующего узла.
 
 **Примечание:** даже в Patroni `3.2.0` возможна небольшая гонка. Сразу после создания слот на реплике может опережать тот же слот лидера, а если слот никто не использует, после переключения часть файлов может отсутствовать. Поэтому рекомендуется настроить непрерывное архивирование, позволяющее восстановить необходимые WAL или выполнить PITR.
 
@@ -237,7 +237,7 @@ Patroni периодически выполняет так называемый 
 - определить `postgresql.custom_conf`, используемый вместо `postgresql.base.conf`, и управлять им извне; либо
 - изменять GUC с помощью `ALTER SYSTEM` / `ALTER DATABASE` / `ALTER USER`.
 
-Подробнее см. раздел [important_configuration_rules](/ru/docs/patroni/config#important_configuration_rules).
+Подробнее см. раздел [важные правила конфигурации](/ru/docs/patroni/config#important_configuration_rules).
 
 В любом случае рекомендуется управлять всей конфигурацией Postgres через Patroni. Это централизует управление и упрощает отладку Patroni.
 
@@ -251,12 +251,12 @@ Patroni периодически выполняет так называемый 
 Может ли Patroni принять управление существующим кластером Postgres?  
 Да.
 
-Подробные инструкции приведены в [existing_data](/ru/docs/patroni/existing_data#existing_data).
+Подробные инструкции приведены в разделе [Принятие управления существующими данными](/ru/docs/patroni/existing_data#existing_data).
 
 Как Patroni управляет Postgres?  
 Patroni запускает и останавливает Postgres, выполняя двоичные файлы Postgres, такие как `pg_ctl` и `postgres`.
 
-Поэтому **ОБЯЗАТЕЛЬНО** отключите все другие средства управления кластерами Postgres, например модули systemd вроде `postgresql.service`. Только Patroni должен запускать, останавливать и повышать экземпляры Postgres в кластере. Иначе возможно расщепление: например, если первичный узел отказал, включённый модуль `postgresql.service` может снова запустить Postgres и вызвать расщепление.
+Поэтому **ОБЯЗАТЕЛЬНО** отключите все другие средства управления кластерами Postgres, например службы systemd вроде `postgresql.service`. Только Patroni должен запускать, останавливать и повышать экземпляры Postgres в кластере. Иначе возможно расщепление: например, если первичный узел отказал, включённая служба `postgresql.service` может снова запустить Postgres и вызвать расщепление.
 
 --------
 
@@ -277,7 +277,7 @@ Patroni поставляет два основных приложения:
 
 **Примечание:** резервный кластер ничего не знает об исходном кластере, с которого реплицируется. Он может использовать `restore_command` вместо потоковой передачи WAL и совершенно независимый кластер DCS.
 
-Подробнее см. [standby_cluster](/ru/docs/patroni/standby_cluster#standby_cluster).
+Подробнее см. [резервный кластер](/ru/docs/patroni/standby_cluster#standby_cluster).
 
 Что такое `leader` в Patroni?  
 `leader` в Patroni — своего рода координатор кластера.
@@ -292,7 +292,7 @@ Patroni поставляет два основных приложения:
 Помните: Patroni отделён от DCS.
 
 Что означает [пауза](/ru/docs/patroni/pause#pause) в Patroni?  
-Пауза — операция Patroni, позволяющая пользователю временно ослабить управление Postgres.
+Пауза — операция Patroni, позволяющая пользователю попросить Patroni отступить от управления Postgres.
 
 Это особенно полезно при обслуживании кластера, когда нужно предотвратить решения Patroni, связанные с HA, например переключение на резервный сервер при остановке первичного.
 
@@ -333,16 +333,16 @@ Patroni хранит состояние кластера в DCS, включая 
 
 Пользовательские методы обычно полезны для восстановления копий, созданных инструментами наподобие pgBackRest или Barman.
 
-Подробнее см. [custom_bootstrap](/ru/docs/patroni/replica_bootstrap#custom_bootstrap) и [custom_replica_creation](/ru/docs/patroni/replica_bootstrap#custom_replica_creation).
+Подробнее см. [пользовательскую начальную инициализацию](/ru/docs/patroni/replica_bootstrap#custom_bootstrap) и [пользовательское создание реплик](/ru/docs/patroni/replica_bootstrap#custom_replica_creation).
 
 --------
 
 ## Мониторинг {#monitoring}
 
 Как отслеживать кластер Patroni?  
-Patroni предоставляет несколько удобных конечных точек в [rest_api](/ru/docs/patroni/rest_api#rest_api):
+Patroni предоставляет несколько удобных конечных точек в [REST API](/ru/docs/patroni/rest_api#rest_api):
 
 - `/metrics`: предоставляет метрики мониторинга в формате для Prometheus;
-- `/patroni`: предоставляет состояние кластера в формате JSON. Сведения очень похожи на вывод конечной точки `/metrics`.
+- `/patroni`: предоставляет состояние локального узла Patroni/Postgres в формате JSON. Сведения очень похожи на вывод конечной точки `/metrics`.
 
 Эти конечные точки можно использовать для проверок мониторинга.

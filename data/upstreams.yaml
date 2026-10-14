@@ -31,7 +31,7 @@ pgbouncer:
   copyright: Copyright (c) 2007-2009 Marko Kreen, Skype Technologies OÜ
   license: ISC
   notice: /attribution/#pgbouncer
-  ref: v1.25.2
+  ref: v1.26.0
   modified: true
 
 pgbadger:
@@ -47,7 +47,7 @@ haproxy:
   copyright: Copyright 2000-2026 Willy Tarreau
   license: GPL-2.0-only
   notice: /attribution/#haproxy
-  ref: v3.4.4
+  ref: 3.4.6-66, commit 16acce1
   modified: true
 
 etcd:

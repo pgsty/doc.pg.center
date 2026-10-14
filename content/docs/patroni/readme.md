@@ -49,6 +49,8 @@ Patroni/PostgreSQL nodes are decoupled from DCS nodes (except when Patroni imple
 
 The following section assumes Patroni repository as being cloned from <https://github.com/patroni/patroni>. Namely, you will need example configuration files `postgres0.yml` and `postgres1.yml`. If you installed Patroni with pip, you can obtain those files from the git repository and replace `./patroni.py` below with `patroni` command.
 
+The commands below use the etcd v2 API and require an etcd version supporting `--enable-v2`, such as etcd 3.5. For etcd 3.6 or newer, use Patroni’s `etcd3` configuration instead, because [etcd 3.6 removed support for the v2 API](https://etcd.io/docs/v3.6/upgrades/upgrade_3_6/).
+
 To get started, do the following from different terminals: :
 
     > etcd --data-dir=data/etcd --enable-v2=true
@@ -81,7 +83,7 @@ Go [here](/docs/patroni/config/env#env) for comprehensive information about conf
 
 ## Replication Choices
 
-Patroni uses Postgres' streaming replication, which is asynchronous by default. Patroni's asynchronous replication configuration allows for `maximum_lag_on_failover` settings. This setting ensures failover will not occur if a follower is more than a certain number of bytes behind the leader. This setting should be increased or decreased based on business requirements. It's also possible to use synchronous replication for better durability guarantees. See [replication modes documentation](/docs/patroni/replication_modes#replication_modes) for details.
+Patroni uses Postgres' streaming replication, which is asynchronous by default. Patroni's asynchronous replication configuration allows for `maximum_lag_on_failover` settings. This setting prevents a follower from being promoted during failover if it is more than the configured number of bytes behind the leader. This setting should be increased or decreased based on business requirements. It's also possible to use synchronous replication for better durability guarantees. See [replication modes documentation](/docs/patroni/replication_modes#replication_modes) for details.
 
 --------
 
@@ -106,4 +108,4 @@ That said, here are some pieces of your infrastructure you should be sure to tes
 - Any cgroup limitation (likely to be related to the above)
 - `kill -9` of any postgres process (except postmaster!). This is a decent simulation of a segfault.
 
-One thing that you should not do is run `kill -9` on a postmaster process. This is because doing so does not mimic any real life scenario. If you are concerned your infrastructure is insecure and an attacker could run `kill -9`, no amount of HA process is going to fix that. The attacker will simply kill the process again, or cause chaos in another way.
+One thing that you should not do is run `kill -9` on a postmaster process. This is because killing the process alone does not reproduce the underlying conditions of resource exhaustion or other infrastructure failures. If you are concerned your infrastructure is insecure and an attacker could run `kill -9`, no amount of HA process is going to fix that. The attacker will simply kill the process again, or cause chaos in another way.
