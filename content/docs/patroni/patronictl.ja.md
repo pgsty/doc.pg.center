@@ -9,9 +9,6 @@ aliases: [/patroni/patronictl/]
 upstream_link: "https://patroni.readthedocs.io/en/latest/patronictl.html"
 ---
 
-<a id="patronictl_version_description"></a>
-<a id="patronictl_version_parameters"></a>
-<a id="patronictl_version_examples"></a>
 <a id="patronictl"></a>
 Patroni には [patronictl](/ja/docs/patroni/patronictl#patronictl) という名前のコマンドライン インターフェイスがあり、これは基本的に Patroni の REST API および DCS と対話するために使用されます。これは、クラスター内での操作の実行を容易にすることを目的としており、人間またはスクリプトで簡単に使用できます。
 
@@ -64,7 +61,7 @@ Patroni には [patronictl](/ja/docs/patroni/patronictl#patronictl) という名
 
 この引数は、[patronictl](/ja/docs/patroni/patronictl#patronictl) 構成から DCS および `namespace` 設定をオーバーライドするか、構成に欠落している場合に定義するために使用できます。
 
-値は `DCS://HOST:PORT/NAMESPACE` の形式である必要があります。 `etcd3://localhost:2379/service` は、`service` 名前空間に格納されている Patroni クラスターを使用して、`localhost` 上で実行されている etcd v3 に接続します。引数の値に欠落している部分は、構成に存在する値またはそのデフォルトに置き換えられます。
+値は `DCS://HOST:PORT/NAMESPACE` の形式である必要があります。たとえば、`localhost` 上で実行されている etcd v3 に、Patroni クラスターが `service` 名前空間に格納された状態で接続するには、`etcd3://localhost:2379/service` を指定します。引数の値に欠落している部分は、構成に存在する値またはそのデフォルトに置き換えられます。
 
 `-k` / `--insecure` REST API サーバー SSL 証明書の検証をバイパスするフラグ。
 
@@ -80,9 +77,9 @@ patronictl [ { -c | --config-file } CONFIG_FILE ]
 > [!NOTE]
 > これは概要の構文です。
 >
-> - 角括弧内のオプションはオプションです。
+> - 角括弧内のオプションは省略可能です。
 > - 中括弧内のオプションは、「セットの 1 つを選択する」操作を表します。
-> - Options と `[, ... ]` は複数回指定できます。
+> - `[, ... ]` が付いたオプションは複数回指定できます。
 > - 大文字で書かれたものは、値を与える必要があるリテラルを表します。
 >
 > 次のサブセクションで [patronictl](/ja/docs/patroni/patronictl#patronictl) サブコマンドを説明するときに、これと同じ構文を使用します。また、以下のサブセクションでサブコマンドを説明する場合、コマンドの概要は、上記の概要の `SUBCOMMAND` を置き換えるものと見なす必要があります。
@@ -95,7 +92,7 @@ patronictl [ { -c | --config-file } CONFIG_FILE ]
 
 <a id="patronictl_demote_cluster_synopsis"></a>
 
-#### あらすじ {#synopsis}
+#### 書式 {#synopsis}
 
 ```text
 demote-cluster
@@ -111,9 +108,9 @@ demote-cluster
 
 #### 説明 {#description}
 
-`patronictl demote-cluster` は、通常の Patroni クラスターを [スタンバイクラスタ](/ja/docs/patroni/standby_cluster#standby_cluster) に変換します。
+`patronictl demote-cluster` は、通常の Patroni クラスターを [スタンバイ クラスター](/ja/docs/patroni/standby_cluster#standby_cluster) に変換します。
 
-このコマンドは、提供されたリモート プライマリー接続オプションから構築された `standby_cluster` セクションを使用して動的構成にパッチを適用し、リーダーがスタンバイ リーダーとして実行されるまで待機します。 `--force` が使用されていない限り、構成を変更する前に現在のクラスター トポロジを出力し、確認を求めます。
+このコマンドは、提供されたリモート プライマリー接続オプションから構築された `standby_cluster` セクションを使用して動的構成にパッチを適用し、リーダーがスタンバイ リーダーとして実行されるまで待機します。 構成を変更する前に現在のクラスター トポロジを出力します。 `--force` が使用されていない場合は確認を求めます。
 
 `--host`、`--port`、または `--restore-command` の少なくとも 1 つを指定する必要があります。
 
@@ -153,7 +150,7 @@ $ patronictl -c postgres0.yml demote-cluster batman --host 192.0.2.10 --port 543
 
 <a id="patronictl_dsn_synopsis"></a>
 
-#### あらすじ {#synopsis-1}
+#### 書式 {#synopsis-1}
 
 ```text
 dsn
@@ -221,7 +218,7 @@ host=127.0.0.1 port=5433
 
 <a id="patronictl_edit_config_synopsis"></a>
 
-#### あらすじ {#synopsis-2}
+#### 書式 {#synopsis-2}
 
 ```text
 edit-config
@@ -261,13 +258,13 @@ edit-config
 
 `-s` / `--set` 指定された動的構成オプションを指定された値で設定します。
 
-`CONFIG` は、 YAML ツリー内の動的構成パスの名前であり、レベルは `.` で結合されます。
+`CONFIG` は、YAML ツリー内の動的構成パスの名前であり、レベルは `.` で結合されます。
 
 `VALUE` は `CONFIG` の値です。 `null` の場合、`CONFIG` は動的構成から削除されます。
 
 `-p` / `--pg` 指定された動的 Postgres 構成オプションを指定された値で設定します。
 
-これは本質的に、`--s` / `--set` の短縮形であり、`CONFIG` に `postgresql.parameters.` が付加されています。
+これは本質的に、`-s` / `--set` の短縮形であり、`CONFIG` の先頭に `postgresql.parameters.` が付加されます。
 
 `PG_CONFIG` は、設定する Postgres 構成の名前です。
 
@@ -348,9 +345,13 @@ postgresql:
 Configuration changed
 ```
 
+<a id="patronictl_failover"></a>
+
 ### patronictl failover {#patronictl-failover}
 
-#### あらすじ {#synopsis-3}
+<a id="patronictl_failover_synopsis"></a>
+
+#### 書式 {#synopsis-3}
 
 ```text
 failover
@@ -359,6 +360,8 @@ failover
   --candidate CANDIDATE_NAME
   [ --force ]
 ```
+
+<a id="patronictl_failover_description"></a>
 
 #### 説明 {#description-3}
 
@@ -377,7 +380,7 @@ failover
 > [!WARNING]
 > フェイルオーバーをトリガーすると、プロモートされたレプリカがプライマリーと比較してどの程度最新であるかによって、データ損失が発生する可能性があります。
 
-<a id="patronictl_failover"></a>
+<a id="patronictl_failover_parameters"></a>
 
 #### パラメータ {#parameters-3}
 
@@ -397,7 +400,7 @@ failover
 
 スクリプトに便利です。
 
-<a id="patronictl_failover_synopsis"></a>
+<a id="patronictl_failover_examples"></a>
 
 #### 例 {#examples-3}
 
@@ -423,13 +426,13 @@ Current cluster topology
 +-------------+----------------+---------+---------+----+-------------+---------+------------+---------+
 ```
 
-<a id="patronictl_failover_description"></a>
+<a id="patronictl_flush"></a>
 
 ### patronictl flush {#patronictl-flush}
 
-<a id="patronictl_failover_parameters"></a>
+<a id="patronictl_flush_synopsis"></a>
 
-#### あらすじ {#synopsis-4}
+#### 書式 {#synopsis-4}
 
 ```text
 flush
@@ -441,13 +444,13 @@ flush
   [ --force ]
 ```
 
-<a id="patronictl_failover_examples"></a>
+<a id="patronictl_flush_description"></a>
 
 #### 説明 {#description-4}
 
 `patronictl flush` は、スケジュールされたイベントがあればそれを破棄します。
 
-<a id="patronictl_flush"></a>
+<a id="patronictl_flush_parameters"></a>
 
 #### パラメータ {#parameters-4}
 
@@ -486,7 +489,7 @@ flush
 
 スクリプトに便利です。
 
-<a id="patronictl_flush_synopsis"></a>
+<a id="patronictl_flush_examples"></a>
 
 #### 例 {#examples-4}
 
@@ -527,13 +530,13 @@ Success: flush scheduled restart for member postgresql0
 Success: flush scheduled restart for member postgresql1
 ```
 
-<a id="patronictl_flush_description"></a>
+<a id="patronictl_history"></a>
 
 ### patronictl history {#patronictl-history}
 
-<a id="patronictl_flush_parameters"></a>
+<a id="patronictl_history_synopsis"></a>
 
-#### あらすじ {#synopsis-5}
+#### 書式 {#synopsis-5}
 
 ```text
 history
@@ -542,7 +545,7 @@ history
   [ { -f | --format } { pretty | tsv | json | yaml } ]
 ```
 
-<a id="patronictl_flush_examples"></a>
+<a id="patronictl_history_description"></a>
 
 #### 説明 {#description-5}
 
@@ -550,17 +553,17 @@ history
 
 出力には次の情報が含まれます。
 
-`TL` Postgres イベントが発生したタイムライン。
+`TL` イベントが発生した時点の Postgres タイムライン。
 
-`LSN` Postgres LSN イベントが発生した場所。
+`LSN` イベントが発生した時点の Postgres LSN。
 
 `Reason` Postgres `.history` ファイルから取得された理由。
 
 `Timestamp` イベントが発生した時刻。
 
-`New Leader` Patroni イベント中に昇格したメンバー。
+`New Leader` イベント中に昇格した Patroni メンバー。
 
-<a id="patronictl_history"></a>
+<a id="patronictl_history_parameters"></a>
 
 #### パラメータ {#parameters-5}
 
@@ -585,11 +588,7 @@ history
 
 デフォルトは `pretty` です。
 
-`--force` フラッシュの実行時に確認プロンプトをスキップするためのフラグ。
-
-スクリプトに便利です。
-
-<a id="patronictl_history_synopsis"></a>
+<a id="patronictl_history_examples"></a>
 
 #### 例 {#examples-5}
 
@@ -633,13 +632,13 @@ $ patronictl -c postgres0.yml history batman -f yaml
   Timestamp: '2023-09-12T11:53:09.620136+00:00'
 ```
 
-<a id="patronictl_history_description"></a>
+<a id="patronictl_list"></a>
 
 ### patronictl list {#patronictl-list}
 
-<a id="patronictl_history_parameters"></a>
+<a id="patronictl_list_synopsis"></a>
 
-#### あらすじ {#synopsis-6}
+#### 書式 {#synopsis-6}
 
 ```text
 list
@@ -651,7 +650,7 @@ list
   [ { -W | { -w | --watch } TIME } ]
 ```
 
-<a id="patronictl_history_examples"></a>
+<a id="patronictl_list_description"></a>
 
 #### 説明 {#description-6}
 
@@ -678,9 +677,9 @@ list
 
 考えられる状態の例をいくつか示します。
 
-- `running`: Postgres が現在稼働しているかどうか。
-- `streaming`: レプリカと Postgres が現在プライマリー ノードから WAL をストリーミングしている場合。
-- `in archive recovery`: レプリカと Postgres が現在アーカイブから WAL をフェッチしているかどうか。
+- `running`: Postgres が現在稼働している場合。
+- `streaming`: レプリカであり、Postgres が現在プライマリー ノードから WAL をストリーミングしている場合。
+- `in archive recovery`: レプリカであり、Postgres が現在アーカイブから WAL をフェッチしている場合。
 - `stopped`: Postgres がシャットダウンされていた場合。
 - `crashed`: Postgres がクラッシュした場合。
 
@@ -688,11 +687,11 @@ list
 
 `Receive LSN` メンバーのストリーミング レプリケーションによって受信され、ディスクに同期された最後の先行書き込みログの場所 (`pg_catalog.pg_last_(xlog|wal)_receive_(location|lsn)()`)。
 
-`Receive Lag` メンバーの `Receive LSN` 位置と MB 内のその上流との間のレプリケーション ラグ。
+`Receive Lag` メンバーの `Receive LSN` 位置とその上流との間のレプリケーション ラグ (MB 単位)。
 
 `Replay LSN` メンバーのリカバリ中に再生された最後の先行書き込みログの場所 (`pg_catalog.pg_last_(xlog|wal)_replay_(location|lsn)()`)。
 
-`Replay Lag` メンバーの `Replay LSN` 位置と MB 内のその上流との間のレプリケーション ラグ。
+`Replay Lag` メンバーの `Replay LSN` 位置とその上流との間のレプリケーション ラグ (MB 単位)。
 
 それに加えて、次の情報が出力に含まれる場合があります。
 
@@ -717,7 +716,7 @@ list
 >
 > 次の場合に表示されます。
 >
-> - `pretty` または `tsv` 形式で拡張出力を有効にして印刷します。または
+> - `pretty` または `tsv` 形式で出力し、拡張出力が有効な場合。または
 > - ノードの再起動が必要な場合。
 
 `Scheduled restart` Patroni メンバーによって管理される Postgres インスタンスの再起動がスケジュールされたタイムスタンプ。空の値は、メンバーにスケジュールされた再起動がないことを示します。
@@ -727,7 +726,7 @@ list
 >
 > 次の場合に表示されます。
 >
-> - `pretty` または `tsv` 形式で拡張出力を有効にして印刷します。または
+> - `pretty` または `tsv` 形式で出力し、拡張出力が有効な場合。または
 > - ノードにスケジュールされた再起動がある場合。
 
 `Tags` Patroni メンバーに設定されたタグが含まれます。空の値は、タグが設定されていないか、タグがデフォルト値で設定されていることを示します。
@@ -737,8 +736,8 @@ list
 >
 > 次の場合に表示されます。
 >
-> - `pretty` または `tsv` 形式で拡張出力を有効にして印刷します。または
-> - If ノードにカスタム タグ、またはデフォルト以外の値を持つデフォルト タグがある場合。
+> - `pretty` または `tsv` 形式で出力し、拡張出力が有効な場合。または
+> - ノードにカスタム タグ、またはデフォルト以外の値を持つデフォルト タグがある場合。
 
 `Scheduled switchover` Patroni クラスターのスイッチオーバーがスケジュールされている場合のタイムスタンプ。
 
@@ -751,9 +750,12 @@ list
 
 > クラスター監視が現在一時停止されている場合。
 >
-> > [!NOTE] > テーブルのフッターに表示されます。 > > クラスターが一時停止されており、出力形式が `pretty` の場合にのみ表示されます。
+> > [!NOTE]
+> > テーブルのフッターに表示されます。
+> >
+> > クラスターが一時停止されており、出力形式が `pretty` の場合にのみ表示されます。
 
-<a id="patronictl_list"></a>
+<a id="patronictl_list_parameters"></a>
 
 #### パラメータ {#parameters-6}
 
@@ -774,14 +776,14 @@ list
 
 `-t` / `--timestamp` クラスターとそのメンバーに関する情報を出力する前にタイムスタンプを出力します。
 
-`-f` / `--format` 出力内のイベントのリストをフォーマットする方法。
+`-f` / `--format` 出力内のクラスターメンバーのリストをフォーマットする方法。
 
 形式は次のいずれかになります。
 
-- `pretty`: 履歴を美しいテーブルとして出力します。または
-- `tsv`: `\t` で区切られた列を含む表形式の情報として履歴を出力します。または
-- `json`: 履歴を JSON 形式で出力します。または
-- `yaml`: YAML 形式で履歴を出力します。
+- `pretty`: クラスターメンバーを美しいテーブルとして出力します。または
+- `tsv`: `\t` で区切られた列を含む表形式の情報としてクラスターメンバーを出力します。または
+- `json`: クラスターメンバーを JSON 形式で出力します。または
+- `yaml`: YAML 形式でクラスターメンバーを出力します。
 
 デフォルトは `pretty` です。
 
@@ -791,11 +793,11 @@ list
 
 `TIME` は、更新間の間隔 (秒単位) です。
 
-<a id="patronictl_list_synopsis"></a>
+<a id="patronictl_list_examples"></a>
 
 #### 例 {#examples-6}
 
-クラスターに関する情報をきれいな形式で表示します。
+クラスターに関する情報を`pretty` 形式で表示します。
 
 ``` bash
 $ patronictl -c postgres0.yml list batman
@@ -808,7 +810,7 @@ $ patronictl -c postgres0.yml list batman
 +-------------+----------------+---------+-----------+----+-------------+-----+------------+-----+
 ```
 
-拡張列を使用して、クラスターに関する情報をわかりやすい形式で表示します。
+拡張列を使用して、クラスターに関する情報を `pretty` 形式で表示します。
 
 ``` bash
 $ patronictl -c postgres0.yml list batman -e
@@ -854,13 +856,13 @@ $ patronictl -c postgres0.yml list batman -f yaml -t
   TL: 5
 ```
 
-<a id="patronictl_list_description"></a>
+<a id="patronictl_pause"></a>
 
 ### patronictl pause {#patronictl-pause}
 
-<a id="patronictl_list_parameters"></a>
+<a id="patronictl_pause_synopsis"></a>
 
-#### あらすじ {#synopsis-7}
+#### 書式 {#synopsis-7}
 
 ```text
 pause
@@ -869,13 +871,13 @@ pause
   [ --wait ]
 ```
 
-<a id="patronictl_list_examples"></a>
+<a id="patronictl_pause_description"></a>
 
 #### 説明 {#description-7}
 
 `patronictl pause` は、Patroni クラスターを一時的にメンテナンス モードにし、自動フェイルオーバーを無効にします。
 
-<a id="patronictl_pause"></a>
+<a id="patronictl_pause_parameters"></a>
 
 #### パラメータ {#parameters-7}
 
@@ -891,7 +893,7 @@ pause
 
 `--wait` すべての Patroni メンバーが一時停止されるまで待ってから、呼び出し元に制御を返します。
 
-<a id="patronictl_pause_synopsis"></a>
+<a id="patronictl_pause_examples"></a>
 
 #### 例 {#examples-7}
 
@@ -909,7 +911,7 @@ Success: cluster management is paused
 
 <a id="patronictl_promote_cluster_synopsis"></a>
 
-#### あらすじ {#synopsis-8}
+#### 書式 {#synopsis-8}
 
 ```text
 promote-cluster
@@ -923,7 +925,7 @@ promote-cluster
 
 `patronictl promote-cluster` は、スタンバイ クラスターを通常の Patroni クラスターに変換します。
 
-このコマンドは、動的構成から `standby_cluster` セクションを削除し、リーダーがプライマリーとして実行されるまで待機します。 `--force` が使用されていない限り、構成を変更する前に現在のクラスター トポロジを出力し、確認を求めます。
+このコマンドは、動的構成から `standby_cluster` セクションを削除し、リーダーがプライマリーとして実行されるまで待機します。 構成を変更する前に現在のクラスター トポロジを出力します。 `--force` が使用されていない場合は確認を求めます。
 
 <a id="patronictl_promote_cluster_parameters"></a>
 
@@ -947,13 +949,13 @@ promote-cluster
 $ patronictl -c postgres0.yml promote-cluster batman --force
 ```
 
-<a id="patronictl_pause_description"></a>
+<a id="patronictl_query"></a>
 
 ### patronictl query {#patronictl-query}
 
-<a id="patronictl_pause_parameters"></a>
+<a id="patronictl_query_synopsis"></a>
 
-#### あらすじ {#synopsis-9}
+#### 書式 {#synopsis-9}
 
 ```text
 query
@@ -969,13 +971,13 @@ query
   [ { -W | { -w | --watch } TIME } ]
 ```
 
-<a id="patronictl_pause_examples"></a>
+<a id="patronictl_query_description"></a>
 
 #### 説明 {#description-9}
 
 `patronictl query` は、Patroni クラスターのメンバーに対して SQL コマンドまたはスクリプトを実行します。
 
-<a id="patronictl_query"></a>
+<a id="patronictl_query_parameters"></a>
 
 #### パラメータ {#parameters-9}
 
@@ -1041,7 +1043,7 @@ Patroni は `libpq` を使用するため、代わりに `~/.pgpass` ファイ�
 
 `TIME` は、再実行の間隔 (秒単位) です。
 
-<a id="patronictl_query_synopsis"></a>
+<a id="patronictl_query_examples"></a>
 
 #### 例 {#examples-9}
 
@@ -1107,13 +1109,13 @@ port
 5433
 ```
 
-<a id="patronictl_query_description"></a>
+<a id="patronictl_reinit"></a>
 
 ### patronictl reinit {#patronictl-reinit}
 
-<a id="patronictl_query_parameters"></a>
+<a id="patronictl_reinit_synopsis"></a>
 
-#### あらすじ {#synopsis-10}
+#### 書式 {#synopsis-10}
 
 ```text
 reinit
@@ -1125,13 +1127,13 @@ reinit
   [ --from-leader ]
 ```
 
-<a id="patronictl_query_examples"></a>
+<a id="patronictl_reinit_description"></a>
 
 #### 説明 {#description-10}
 
 `patronictl reinit` は、Patroni クラスターのレプリカ メンバーによって管理される Postgres スタンバイ インスタンスを再構築します。
 
-<a id="patronictl_reinit"></a>
+<a id="patronictl_reinit_parameters"></a>
 
 #### パラメータ {#parameters-10}
 
@@ -1149,11 +1151,11 @@ reinit
 
 `--force` Postgres スタンバイ インスタンスを再構築するときに確認プロンプトをスキップするためのフラグ。
 
-`--from-leader` リーダーからベースバックアップを直接取得するためのフラグ。
-
 スクリプトに便利です。
 
-<a id="patronictl_reinit_synopsis"></a>
+`--from-leader` リーダーからベースバックアップを直接取得するためのフラグ。
+
+<a id="patronictl_reinit_examples"></a>
 
 #### 例 {#examples-10}
 
@@ -1202,13 +1204,13 @@ $ patronictl -c postgres0.yml reinit batman postgresql2 --from-leader
 Success: reinitialize for member postgresql2
 ```
 
-<a id="patronictl_reinit_description"></a>
+<a id="patronictl_reload"></a>
 
 ### patronictl reload {#patronictl-reload}
 
-<a id="patronictl_reinit_parameters"></a>
+<a id="patronictl_reload_synopsis"></a>
 
-#### あらすじ {#synopsis-11}
+#### 書式 {#synopsis-11}
 
 ```text
 reload
@@ -1219,7 +1221,7 @@ reload
   [ --force ]
 ```
 
-<a id="patronictl_reinit_examples"></a>
+<a id="patronictl_reload_description"></a>
 
 #### 説明 {#description-11}
 
@@ -1227,7 +1229,7 @@ reload
 
 また、何も変更されていない場合でも、管理対象の Postgres インスタンスで `pg_ctl reload` がトリガーされます。
 
-<a id="patronictl_reload"></a>
+<a id="patronictl_reload_parameters"></a>
 
 #### パラメータ {#parameters-11}
 
@@ -1256,7 +1258,7 @@ reload
 
 スクリプトに便利です。
 
-<a id="patronictl_reload_synopsis"></a>
+<a id="patronictl_reload_examples"></a>
 
 #### 例 {#examples-11}
 
@@ -1276,13 +1278,13 @@ Reload request received for member postgresql1 and will be processed within 10 s
 Reload request received for member postgresql2 and will be processed within 10 seconds
 ```
 
-<a id="patronictl_reload_description"></a>
+<a id="patronictl_remove"></a>
 
 ### patronictl remove {#patronictl-remove}
 
-<a id="patronictl_reload_parameters"></a>
+<a id="patronictl_remove_synopsis"></a>
 
-#### あらすじ {#synopsis-12}
+#### 書式 {#synopsis-12}
 
 ```text
 remove
@@ -1291,7 +1293,7 @@ remove
   [ { -f | --format } { pretty | tsv | json | yaml } ]
 ```
 
-<a id="patronictl_reload_examples"></a>
+<a id="patronictl_remove_description"></a>
 
 #### 説明 {#description-12}
 
@@ -1302,7 +1304,7 @@ remove
 > [!WARNING]
 > この操作は、DCS から Patroni クラスターの情報を破棄します。
 
-<a id="patronictl_remove"></a>
+<a id="patronictl_remove_parameters"></a>
 
 #### パラメータ {#parameters-12}
 
@@ -1323,7 +1325,7 @@ remove
 
 デフォルトは `pretty` です。
 
-<a id="patronictl_remove_synopsis"></a>
+<a id="patronictl_remove_examples"></a>
 
 #### 例 {#examples-12}
 
@@ -1343,13 +1345,13 @@ You are about to remove all information in DCS for batman, please type: "Yes I a
 This cluster currently is healthy. Please specify the leader name to continue: postgresql0
 ```
 
-<a id="patronictl_remove_description"></a>
+<a id="patronictl_restart"></a>
 
 ### patronictl restart {#patronictl-restart}
 
-<a id="patronictl_remove_parameters"></a>
+<a id="patronictl_restart_synopsis"></a>
 
-#### あらすじ {#synopsis-13}
+#### 書式 {#synopsis-13}
 
 ```text
 restart
@@ -1365,7 +1367,7 @@ restart
   [ --force ]
 ```
 
-<a id="patronictl_remove_examples"></a>
+<a id="patronictl_restart_description"></a>
 
 #### 説明 {#description-13}
 
@@ -1373,7 +1375,7 @@ restart
 
 再起動はすぐに実行することも、後で実行するようにスケジュールすることもできます。
 
-<a id="patronictl_restart"></a>
+<a id="patronictl_restart_parameters"></a>
 
 #### パラメータ {#parameters-13}
 
@@ -1414,7 +1416,7 @@ restart
 
 スクリプトに便利です。
 
-<a id="patronictl_restart_synopsis"></a>
+<a id="patronictl_restart_examples"></a>
 
 #### 例 {#examples-13}
 
@@ -1464,13 +1466,13 @@ Success: restart scheduled on member postgresql1
 Success: restart scheduled on member postgresql2
 ```
 
-<a id="patronictl_restart_description"></a>
+<a id="patronictl_resume"></a>
 
 ### patronictl resume {#patronictl-resume}
 
-<a id="patronictl_restart_parameters"></a>
+<a id="patronictl_resume_synopsis"></a>
 
-#### あらすじ {#synopsis-14}
+#### 書式 {#synopsis-14}
 
 ```text
 resume
@@ -1479,13 +1481,13 @@ resume
   [ --wait ]
 ```
 
-<a id="patronictl_restart_examples"></a>
+<a id="patronictl_resume_description"></a>
 
 #### 説明 {#description-14}
 
 `patronictl resume` は、Patroni クラスターのメンテナンス モードを解除し、自動フェイルオーバーを再度有効にします。
 
-<a id="patronictl_resume"></a>
+<a id="patronictl_resume_parameters"></a>
 
 #### パラメータ {#parameters-14}
 
@@ -1501,7 +1503,7 @@ resume
 
 `--wait` すべての Patroni メンバーの一時停止が解除されるまで待ってから、呼び出し元に制御を返します。
 
-<a id="patronictl_resume_synopsis"></a>
+<a id="patronictl_resume_examples"></a>
 
 #### 例 {#examples-14}
 
@@ -1513,13 +1515,13 @@ $ patronictl -c postgres0.yml resume batman --wait
 Success: cluster management is resumed
 ```
 
-<a id="patronictl_resume_description"></a>
+<a id="patronictl_show_config"></a>
 
 ### patronictl show-config {#patronictl-show-config}
 
-<a id="patronictl_resume_parameters"></a>
+<a id="patronictl_show_config_synopsis"></a>
 
-#### あらすじ {#synopsis-15}
+#### 書式 {#synopsis-15}
 
 ```text
 show-config
@@ -1527,13 +1529,13 @@ show-config
   [ --group CITUS_GROUP ]
 ```
 
-<a id="patronictl_resume_examples"></a>
+<a id="patronictl_show_config_description"></a>
 
 #### 説明 {#description-15}
 
 `patronictl show-config` は、DCS に保存されているクラスターの動的構成を示します。
 
-<a id="patronictl_show_config"></a>
+<a id="patronictl_show_config_parameters"></a>
 
 #### パラメータ {#parameters-15}
 
@@ -1547,7 +1549,7 @@ show-config
 
 指定しない場合、[patronictl](/ja/docs/patroni/patronictl#patronictl) は、`citus.group` 構成が存在する場合は、そこからそれを取得しようとします。
 
-<a id="patronictl_show_config_synopsis"></a>
+<a id="patronictl_show_config_examples"></a>
 
 #### 例 {#examples-15}
 
@@ -1567,13 +1569,13 @@ retry_timeout: 10
 ttl: 30
 ```
 
-<a id="patronictl_show_config_description"></a>
+<a id="patronictl_switchover"></a>
 
 ### patronictl switchover {#patronictl-switchover}
 
-<a id="patronictl_show_config_parameters"></a>
+<a id="patronictl_switchover_synopsis"></a>
 
-#### あらすじ {#synopsis-16}
+#### 書式 {#synopsis-16}
 
 ```text
 switchover
@@ -1584,7 +1586,7 @@ switchover
   [ --force ]
 ```
 
-<a id="patronictl_show_config_examples"></a>
+<a id="patronictl_switchover_description"></a>
 
 #### 説明 {#description-16}
 
@@ -1598,7 +1600,7 @@ switchover
 > [!NOTE]
 > クラスターが正常でない場合は、代わりに `patronictl failover` に興味があるかもしれません。
 
-<a id="patronictl_switchover"></a>
+<a id="patronictl_switchover_parameters"></a>
 
 #### パラメータ {#parameters-16}
 
@@ -1610,9 +1612,9 @@ switchover
 
 `CITUS_GROUP` は、Citus グループの ID です。
 
-`--leader` / `--primary` 切り替え時に降格されるリーダーを示します。
+`--leader` / `--primary` スイッチオーバー時に降格されるリーダーを示します。
 
-`LEADER_NAME` は、クラスター内の現在のリーダーの名前と一致する必要があります。
+`LEADER_NAME` は、クラスター内の現在のリーダーの名前と一致させるべきです。
 
 `--candidate` スイッチオーバー時に昇格され、プライマリーの役割を担うノード。
 
@@ -1626,11 +1628,11 @@ switchover
 
 スクリプトに便利です。
 
-<a id="patronictl_switchover_synopsis"></a>
+<a id="patronictl_switchover_examples"></a>
 
 #### 例 {#examples-16}
 
-ノード `postgresql2` で切り替えます。
+ノード `postgresql2` にスイッチオーバーします。
 
 ``` bash
 $ patronictl -c postgres0.yml switchover batman --leader postgresql0 --candidate postgresql2 --force
@@ -1677,13 +1679,13 @@ Switchover scheduled at: 2023-09-13T18:00:00-03:00
                     to: postgresql2
 ```
 
-<a id="patronictl_switchover_description"></a>
+<a id="patronictl_topology"></a>
 
 ### patronictl topology {#patronictl-topology}
 
-<a id="patronictl_switchover_parameters"></a>
+<a id="patronictl_topology_synopsis"></a>
 
-#### あらすじ {#synopsis-17}
+#### 書式 {#synopsis-17}
 
 ```text
 topology
@@ -1692,7 +1694,7 @@ topology
   [ { -W | { -w | --watch } TIME } ]
 ```
 
-<a id="patronictl_switchover_examples"></a>
+<a id="patronictl_topology_description"></a>
 
 #### 説明 {#description-17}
 
@@ -1730,9 +1732,9 @@ topology
 
 考えられる状態の例をいくつか示します。
 
-- `running`: Postgres が現在稼働しているかどうか。
-- `streaming`: レプリカと Postgres が現在プライマリー ノードから WAL をストリーミングしている場合。
-- `in archive recovery`: レプリカと Postgres が現在アーカイブから WAL をフェッチしているかどうか。
+- `running`: Postgres が現在稼働している場合。
+- `streaming`: レプリカであり、Postgres が現在プライマリー ノードから WAL をストリーミングしている場合。
+- `in archive recovery`: レプリカであり、Postgres が現在アーカイブから WAL をフェッチしている場合。
 - `stopped`: Postgres がシャットダウンされていた場合。
 - `crashed`: Postgres がクラッシュした場合。
 
@@ -1740,11 +1742,11 @@ topology
 
 `Receive LSN` メンバーのストリーミング レプリケーションによって受信され、ディスクに同期された最後の先行書き込みログの場所 (`pg_catalog.pg_last_(xlog|wal)_receive_(location|lsn)()`)。
 
-`Receive Lag` メンバーの `Receive LSN` 位置と MB 内のその上流との間のレプリケーション ラグ。
+`Receive Lag` メンバーの `Receive LSN` 位置とその上流との間のレプリケーション ラグ (MB 単位)。
 
 `Replay LSN` メンバーのリカバリ中に再生された最後の先行書き込みログの場所 (`pg_catalog.pg_last_(xlog|wal)_replay_(location|lsn)()`)。
 
-`Replay Lag` メンバーの `Replay LSN` 位置と MB 内のその上流との間のレプリケーション ラグ。
+`Replay Lag` メンバーの `Replay LSN` 位置とその上流との間のレプリケーション ラグ (MB 単位)。
 
 それに加えて、次の情報が出力に含まれる場合があります。
 
@@ -1787,9 +1789,12 @@ topology
 
 > クラスター監視が現在一時停止されている場合。
 >
-> > [!NOTE] > テーブルのフッターに表示されます。 > > クラスターが一時停止されている場合にのみ表示されます。
+> > [!NOTE]
+> > テーブルのフッターに表示されます。
+> >
+> > クラスターが一時停止されている場合にのみ表示されます。
 
-<a id="patronictl_topology"></a>
+<a id="patronictl_topology_parameters"></a>
 
 #### パラメータ {#parameters-17}
 
@@ -1807,11 +1812,11 @@ topology
 
 `TIME` は、更新間の間隔 (秒単位) です。
 
-<a id="patronictl_topology_synopsis"></a>
+<a id="patronictl_topology_examples"></a>
 
 #### 例 {#examples-17}
 
-クラスターのトポロジを表示します `batman` -- `postgresql1` と `postgresql2` は `postgresql0` からレプリケートされています。
+クラスター `batman` のトポロジを表示します -- `postgresql1` と `postgresql2` は `postgresql0` からレプリケートされています。
 
 ``` bash
 $ patronictl -c postgres0.yml topology batman
@@ -1824,13 +1829,13 @@ $ patronictl -c postgres0.yml topology batman
 +---------------+----------------+---------+-----------+----+-------------+-----+------------+-----+
 ```
 
-<a id="patronictl_topology_description"></a>
+<a id="patronictl_version"></a>
 
 ### patronictl version {#patronictl-version}
 
-<a id="patronictl_topology_parameters"></a>
+<a id="patronictl_version_synopsis"></a>
 
-#### あらすじ {#synopsis-18}
+#### 書式 {#synopsis-18}
 
 ```text
 version
@@ -1839,13 +1844,13 @@ version
   [ --group CITUS_GROUP ]
 ```
 
-<a id="patronictl_topology_examples"></a>
+<a id="patronictl_version_description"></a>
 
 #### 説明 {#description-18}
 
 `patronictl version` は、[patronictl](/ja/docs/patroni/patronictl#patronictl) アプリケーションのバージョンを取得します。それに加えて、Patroni クラスターとそのメンバーに関するバージョン情報も含まれる場合があります。
 
-<a id="patronictl_version"></a>
+<a id="patronictl_version_parameters"></a>
 
 #### パラメータ {#parameters-18}
 
@@ -1853,11 +1858,11 @@ version
 
 `MEMBER_NAME` Patroni クラスターのメンバーの名前。
 
-`--group` 指定された Citus グループを持つ Patroni クラスターを考えてみましょう。
+`--group` 指定された Citus グループを持つ Patroni クラスターを対象とします。
 
 `CITUS_GROUP` は、Citus グループの ID です。
 
-<a id="patronictl_version_synopsis"></a>
+<a id="patronictl_version_examples"></a>
 
 #### 例 {#examples-18}
 

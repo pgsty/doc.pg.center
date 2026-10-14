@@ -3,6 +3,7 @@ title: "Download und Installation"
 linkTitle: "Download & Installation"
 weight: 20
 description: "Offizielle Releases, Pakete, Anforderungen und Installation aus dem Quellcode"
+search_keywords: [--content-size, --help, --robot, --version, --zcat, JSON::XS, Text::CSV_XS, content, content-size, help, robot, size, version, zcat, zstdcat]
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [Tutorial]
@@ -21,7 +22,7 @@ upstream_ref: "site snapshot of 2026-08-15"
 | Debian/Ubuntu-Paket | APT-basierte Linux-Distributionen | [PostgreSQL Apt Repository](https://wiki.postgresql.org/wiki/Apt) |
 | Entwicklungsquelle | Aktueller, noch nicht veröffentlichter Code | [darold/pgbadger](https://github.com/darold/pgbadger) |
 
-Der Dokumentations-Snapshot auf dieser Website basiert auf dem Quellcode der Version 13.2. Prüfen Sie vor dem Herunterladen stets die Releaseseite: Der lokale Snapshot ist bewusst fixiert, während das Originalprojekt weiterhin neue Versionen veröffentlicht.
+Die Installationsbeispiele verwenden pgBadger 13.2. Prüfen Sie die Releaseseite, bevor Sie eine Version auswählen.
 
 ## Anforderungen {#requirements}
 
@@ -51,6 +52,8 @@ $ sudo yum install perl-JSON-XS
 ```
 
 Verwenden Sie `--zcat`, um den Pfad zum Dekomprimierungsprogramm zu überschreiben. Wenn Sie einen benutzerdefinierten Befehl angeben, können Sie innerhalb desselben Aufrufs keine unterschiedlichen Komprimierungsformate mischen.
+
+Das Hilfsprogramm `xz` muss `--robot` unterstützen, damit pgBadger die Archivmetadaten lesen kann. Komprimieren Sie lz4-Protokolle mit `--content-size`, damit pgBadger ihre unkomprimierte Größe bestimmen kann.
 
 ## Aus einem offiziellen Tarball installieren {#install-from-tarball}
 

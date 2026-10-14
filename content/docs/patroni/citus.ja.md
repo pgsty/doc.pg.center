@@ -10,7 +10,7 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/citus.html"
 ---
 
 <a id="citus"></a>
-Patroniを使用すると、[マルチノードCitus](https://docs.citusdata.com/en/stable/installation/multi_node.html)クラスターを非常に簡単に構築できます。
+Patroniを使用すると、[マルチノードCitus](https://docs.citusdata.com/en/stable/installation/multi_node.html)クラスターを極めて簡単にデプロイできます。
 
 --------
 
@@ -18,10 +18,10 @@ Patroniを使用すると、[マルチノードCitus](https://docs.citusdata.com
 
 必要なのは、次の簡単なルールに従うことだけです。
 
-1. PostgreSQLのデータベース拡張[Citus](https://github.com/citusdata/citus)を、すべてのノードで使用できるようにしてください。サポートされる最低バージョンはCitus 10.0ですが、ワーカーの透過的なスイッチオーバーと再起動の利点をすべて活用するには、Citus 11.2以降を推奨します。
+1. PostgreSQLのデータベース拡張[Citus](https://github.com/citusdata/citus)は、すべてのノードで利用可能になっている必要があります。絶対的な最小サポートバージョンはCitus 10.0ですが、ワーカーの透過的なスイッチオーバーと再起動の利点をすべて活用するには、Citus 11.2以降の使用を推奨します。
 2. クラスター名（`scope`）は、すべてのCitusノードで同じにする必要があります。
-3. コーディネーターとすべてのワーカーノードで同じスーパーユーザーの認証情報を使用し、`pg_hba.conf`で全ノード間のスーパーユーザーアクセスを許可してください。
-4. ワーカーノードからコーディネーターへの[REST API](/ja/docs/patroni/config/yaml#restapi_settings)アクセスを許可する必要があります。たとえば認証情報は同じにし、クライアント証明書を設定している場合は、コーディネーターがワーカーノードの証明書を受け入れる必要があります。
+3. スーパーユーザーの認証情報は、コーディネーターとすべてのワーカーノードで同じである必要があります。また、`pg_hba.conf`では、全ノード間のスーパーユーザーアクセスを許可しておくべきです。
+4. ワーカーノードからコーディネーターへの[REST API](/ja/docs/patroni/config/yaml#restapi_settings)アクセスは許可しておくべきです。たとえば認証情報は同じにし、クライアント証明書を設定している場合は、コーディネーターがワーカーノードの証明書を受け入れなければなりません。
 5. `patroni.yaml`に次のセクションを追加します。
 
 ```yaml
@@ -32,11 +32,11 @@ citus:
 
 後はPatroniを起動するだけで、残りの処理を実行します。
 
-0. `bootstrap.dcs.synchronous_mode`を明示的に別の値に設定していなければ、Patroniは[quorum](/ja/docs/patroni/replication_modes#quorum_mode)に設定します。
+0. `bootstrap.dcs.synchronous_mode`が他の値に明示的に設定されていない場合、Patroniはこれを[quorum](/ja/docs/patroni/replication_modes#quorum_mode)に設定します。
 1. [citus](/ja/docs/patroni/citus#citus)拡張を`shared_preload_libraries`に自動的に追加します。
-2. グローバルな[動的設定](/ja/docs/patroni/config/dynamic#dynamic)で`max_prepared_transactions`を明示的に設定していなければ、Patroniは`2*max_connections`に設定します。
+2. グローバルな[動的設定](/ja/docs/patroni/config/dynamic#dynamic)で`max_prepared_transactions`が明示的に設定されていない場合、Patroniは自動的にこれを`2*max_connections`に設定します。
 3. `citus.local_hostname`のGUC値を、`localhost`からPatroniがローカルのPostgreSQLインスタンスへの接続に使用する値へ変更します。PostgreSQLが`localhost`でリッスンしていない場合があるため、別の値が必要になることがあります。
-4. `citus.database`を自動的に作成し、続いて`CREATE EXTENSION citus`を実行します。
+4. `citus.database`で指定したデータベースを自動的に作成し、続いて`CREATE EXTENSION citus`を実行します。
 5. ノード間の通信を可能にするため、現在のスーパーユーザーの[認証情報](/ja/docs/patroni/config/yaml#postgresql_settings)を`pg_dist_authinfo`テーブルに追加します。後からスーパーユーザーのusername/password/sslcert/sslkeyを変更する場合は、この情報の更新も忘れないでください。
 6. コーディネーターのプライマリーノードは、ワーカーのプライマリーノードを自動検出し、`citus_add_node()`関数で`pg_dist_node`テーブルに追加します。
 7. コーディネーターまたはワーカーのクラスターでフェイルオーバーやスイッチオーバーが発生した場合も、Patroniが`pg_dist_node`を維持します。
@@ -50,9 +50,9 @@ citus:
 このため、`patroni.yaml`に[citus](/ja/docs/patroni/citus#citus)セクションがある場合、[patronictl](/ja/docs/patroni/patronictl#patronictl)の動作には通常と比べて2つの主な違いがあります。
 
 1. `list`と`topology`は、デフォルトでCitus構成全体のメンバー（コーディネーターとワーカー）を出力します。新しい`Group`列に、所属するCitusグループが表示されます。
-2. すべての[patronictl](/ja/docs/patroni/patronictl#patronictl)コマンドに、新しい`--group`オプションが追加されます。一部のコマンドでは、グループのデフォルト値を`patroni.yaml`から取得する場合があります。たとえば[patronictl_pause](/ja/docs/patroni/patronictl#patronictl_pause)は、デフォルトで[citus](/ja/docs/patroni/citus#citus)セクションの`group`に対してメンテナンスモードを有効にします。一方、[patronictl_switchover](/ja/docs/patroni/patronictl#patronictl_switchover)や[patronictl_remove](/ja/docs/patroni/patronictl#patronictl_remove)などでは、グループを明示的に指定する必要があります。
+2. すべての[patronictl](/ja/docs/patroni/patronictl#patronictl)コマンドに、新しい`--group`オプションが追加されます。一部のコマンドでは、グループのデフォルト値を`patroni.yaml`から取得する場合があります。たとえば[`patronictl pause`](/ja/docs/patroni/patronictl#patronictl_pause)は、デフォルトで[citus](/ja/docs/patroni/citus#citus)セクションの`group`に対してメンテナンスモードを有効にします。一方、[`patronictl switchover`](/ja/docs/patroni/patronictl#patronictl_switchover)や[`patronictl remove`](/ja/docs/patroni/patronictl#patronictl_remove)などでは、グループを明示的に指定する必要があります。
 
-Citusクラスターでの[patronictl_list](/ja/docs/patroni/patronictl#patronictl_list)の出力例：
+Citusクラスターでの[`patronictl list`](/ja/docs/patroni/patronictl#patronictl_list)の出力例：
 
     postgres@coord1:~$ patronictl list demo
     + Citus cluster: demo ----------+----------------+---------+----+-------------+-----+------------+-----+
@@ -90,9 +90,9 @@ Citusクラスターでの[patronictl_list](/ja/docs/patroni/patronictl#patronic
 
 ## Citusワーカーのスイッチオーバー {#citus-worker-switchover}
 
-Citusワーカーノードのスイッチオーバーを調整して実行する場合、Citusでは、アプリケーションからほぼ透過的に切り替えることができます。アプリケーションはコーディネーターに接続し、そこからワーカーノードへ接続するため、ワーカーノード上のシャードに対するSQLトラフィックを、Citusでコーディネーター上に[一時停止](/ja/docs/patroni/pause#pause)できます。そのトラフィックをコーディネーターに保持している間にスイッチオーバーを行い、新しいプライマリーのワーカーノードが読み書きのクエリーを受け付ける準備を終え次第、トラフィックを再開します。
+Citusワーカーノードのスイッチオーバーを調整して実行する場合、Citusでは、アプリケーションからほぼ透過的に切り替えることができます。アプリケーションはコーディネーターに接続し、そこからワーカーノードへ接続するため、ワーカーノード上のシャードに対するSQLトラフィックを、Citusでコーディネーター上に一時停止できます。そのトラフィックをコーディネーターに保持している間にスイッチオーバーを行い、新しいプライマリーのワーカーノードが読み書きのクエリーを受け付ける準備を終え次第、トラフィックを再開します。
 
-ワーカークラスターでの[patronictl_switchover](/ja/docs/patroni/patronictl#patronictl_switchover)の例：
+ワーカークラスターでの[`patronictl switchover`](/ja/docs/patroni/patronictl#patronictl_switchover)の例：
 
     postgres@coord1:~$ patronictl switchover demo
     + Citus cluster: demo ----------+----------------+---------+----+-------------+-----+------------+-----+
@@ -200,8 +200,7 @@ Kubernetesは階層構造をサポートしないため、Patroniが作成する
 
 つまり、命名パターンは`${scope}-${citus.group}-${type}`です。
 
-Patroniは[ラベルセレクター](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors)を使用してすべてのKubernetesオブジェクトを検出します。そのため、PatroniとCitusを実行するすべてのPodとEndpoints/ConfigMapsには同様のラベルを付け、Patroniがそれらを使用するようにKubernetesの[設定](/ja/docs/patroni/config/yaml#kubernetes_settings)または`environment variables
-<kubernetes_environment>`で指定する必要があります。
+Patroniは[ラベルセレクター](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors)を使用してすべてのKubernetesオブジェクトを検出します。そのため、PatroniとCitusを実行するすべてのPodとEndpoints/ConfigMapsには共通のラベルセレクターに一致するラベルを付け、Patroniがそれらを使用するようにKubernetesの[設定](/ja/docs/patroni/config/yaml#kubernetes_settings)または[環境変数](/ja/docs/patroni/config/env#kubernetes_environment)で指定する必要があります。
 
 Podの環境変数を使用したPatroni設定の例を2つ示します。
 
@@ -311,6 +310,6 @@ Citusに対応したPatroniをKubernetesにデプロイする完全な例は、P
 
 ## CitusのアップグレードとPostgreSQLのメジャーアップグレード {#citus-upgrades-and-postgresql-major-upgrades}
 
-まず、[ドキュメント](https://docs.citusdata.com/en/latest/admin_guide/upgrading_citus.html)でCitusのバージョンアップグレードについて確認してください。手順に小さな違いが1つあります。アップグレード時にPostgreSQLを再起動するには、`systemctl restart`の代わりに[patronictl_restart](/ja/docs/patroni/patronictl#patronictl_restart)を使用する必要があります。
+まず、[ドキュメント](https://docs.citusdata.com/en/latest/admin_guide/upgrading_citus.html)でCitusのバージョンアップグレードについて確認してください。手順に小さな違いが1つあります。アップグレード時にPostgreSQLを再起動するには、`systemctl restart`の代わりに[`patronictl restart`](/ja/docs/patroni/patronictl#patronictl_restart)を使用する必要があります。
 
-Citusを使用したPostgreSQLのメジャーアップグレードは、もう少し複雑です。Citusのメジャーアップグレードのドキュメントと、Patroniの`PostgreSQL major upgrade<major_upgrade>`のドキュメントにある手法を組み合わせる必要があります。Citusクラスターは多数のPatroniクラスター（コーディネーターとワーカー）で構成されており、それぞれを個別にアップグレードする必要がある点に注意してください。
+Citusを使用したPostgreSQLのメジャーアップグレードは、もう少し複雑です。Citusのメジャーアップグレードのドキュメントと、Patroniの[PostgreSQLのメジャーバージョンアップグレード](/ja/docs/patroni/existing_data#major_upgrade)のドキュメントにある手法を組み合わせる必要があります。Citusクラスターは多数のPatroniクラスター（コーディネーターとワーカー）で構成されており、それぞれを個別にアップグレードする必要がある点に注意してください。

@@ -3,6 +3,7 @@ title: "增量报告"
 linkTitle: "增量报告"
 weight: 60
 description: "生成每日与每周报告，控制保留期，重建输出并添加月度汇总"
+search_keywords: [--day-report, --explode, --extra-files, --incremental, --iso-week-number, --last-parsed, --month-report, --no-week, --noreport, --outdir, --rebuild, --retention, --start-monday, day, day-report, explode, extra, extra-files, files, incremental, iso, iso-week-number, last, last-parsed, monday, month, month-report, no, no-week, noreport, number, outdir, parsed, rebuild, report, retention, start, start-monday, week]
 icon: fa-solid fa-calendar-days
 module: [PGBADGER]
 categories: [任务]

@@ -3,6 +3,7 @@ title: "Parallel Processing"
 linkTitle: "Parallel Processing"
 weight: 50
 description: "Choose between parallel chunks of one log and parallel processing of many logs"
+search_keywords: [--Jobs, --jobs, --tempdir, Jobs, jobs, tempdir]
 icon: fa-solid fa-gauge-high
 module: [PGBADGER]
 categories: [Task]

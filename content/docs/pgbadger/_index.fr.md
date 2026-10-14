@@ -1,8 +1,9 @@
 ---
-title: "pgBadger 13.2 Documentation"
+title: "Documentation de pgBadger 13.2"
 linkTitle: pgBadger
 weight: 40
 description: "Analyse rapide des journaux PostgreSQL et PgBouncer avec des rapports détaillés et autonomes"
+search_keywords: [csvlog, jsonlog, logplex, stderr, syslog]
 icon: fa-solid fa-otter
 type: docs
 outputs: [HTML, RSS, print, markdown, LLMSFULL]
@@ -27,7 +28,7 @@ cascade:
 
 pgBadger est conçu pour les gros volumes de journaux et une utilisation opérationnelle :
 
-- un programme Perl, sans dépendance obligatoire à des modules Perl non essentiels ;
+- un seul programme Perl, sans module obligatoire en dehors de la bibliothèque standard de Perl ;
 - détection automatique de `stderr`, `syslog`, `csvlog`, `jsonlog`, RDS, Cloud SQL, logplex, Redshift et PgBouncer en entrée ;
 - lecture directe de fichiers locaux, de l'entrée standard, de fichiers distants via SSH, ainsi que d'URL HTTP, FTP ou SFTP ;
 - entrée compressée avec gzip, bzip2, lz4, xz, zip ou zstd ;
@@ -46,7 +47,7 @@ L'ensemble de rapports PostgreSQL couvre :
 - erreurs et événements par gravité et catégorie ;
 - distributions par base de données, utilisateur, client, application et type de requête.
 
-L'entrée PgBouncer ajoute des rapports sur le débit, la durée moyenne des requêtes, le nombre de sessions simultanées, la répartition des connexions et des sessions, l'utilisation du pool réservé, ainsi que des rapports fréquents sur les erreurs et événements.
+L'entrée PgBouncer ajoute des rapports sur le débit, la durée moyenne des requêtes, le nombre de sessions simultanées, la répartition des connexions et des sessions, l'utilisation du pool réservé, ainsi que des rapports sur les erreurs et événements les plus fréquents.
 
 ## Plan de la documentation {#documentation-map}
 
@@ -55,12 +56,12 @@ Lisez le manuel dans cet ordre, ou utilisez la barre latérale pour accéder dir
 1. [Téléchargez et installez](/fr/docs/pgbadger/download/) pgBadger et ses modules optionnels.
 2. Consultez la référence complète [de la ligne de commande](/fr/docs/pgbadger/command-line/).
 3. Configurez [la journalisation de PostgreSQL](/fr/docs/pgbadger/postgresql-logging/) avec un préfixe analysable.
-4. Choisissez le mode [traitement parallèle](/fr/docs/pgbadger/parallel-processing/) adapté.
+4. Choisissez le mode de [traitement parallèle](/fr/docs/pgbadger/parallel-processing/) adapté.
 5. Générez des [rapports incrémentiels](/fr/docs/pgbadger/incremental-reports/) de manière sécurisée.
 6. Sélectionnez un [format de sortie](/fr/docs/pgbadger/output-formats/) et examinez les [exemples locaux](/fr/docs/pgbadger/sample-reports/).
 7. Suivez l'[historique des versions](/fr/docs/pgbadger/releases/), le [support](/fr/docs/pgbadger/support/) et la [licence](/fr/docs/pgbadger/license/).
 
-## Liens en amont {#upstream-links}
+## Liens vers le projet amont {#upstream-links}
 
 - [Site web du projet](https://pgbadger.darold.net/)
 - [Code source](https://github.com/darold/pgbadger)

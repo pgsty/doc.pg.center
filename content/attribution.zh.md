@@ -11,17 +11,13 @@ translation_notice: false
 outputs: [HTML, markdown]
 ---
 
-pig.center 转载并整理了六个上游项目撰写的文档。每一个文档页面的末尾都有一行署名，指明该页改编自哪份作品、
+doc.pg.center 转载并整理了六个上游项目撰写的文档。每一个文档页面的末尾都有一行署名，指明该页改编自哪份作品、
 版权归属于谁、依据什么协议授权，并链接回本页对应的小节。
 
 本页就是那份记录：说明每份材料从哪里、在什么时间、从哪个固定版本导入，依据什么协议，以及完整的上游声明保存在何处。
 
 > [!NOTE]
-> 英文、简体中文与法文完整覆盖六套文档；日文、德文与俄文发布已经完成的译文，
-> 尚无译文的链接会回退到对应英文页面。
-
-> [!NOTE]
-> pig.center 是独立的社区文档项目，与下列任何项目均无隶属关系，也未获得其背书，
+> doc.pg.center 是独立的社区文档项目，与下列任何项目均无隶属关系，也未获得其背书，
 > 不是它们的官方出版物，也不代表 PostgreSQL 全球开发组。
 
 ## 总览 {#summary}
@@ -29,10 +25,10 @@ pig.center 转载并整理了六个上游项目撰写的文档。每一个文档
 | 组件 | 上游作品 | 固定版本 | 授权协议 | 保留的完整声明 |
 |---|---|---|---|---|
 | [Patroni](/zh/docs/patroni/) | [Patroni 文档](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [上游 `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/zh/docs/pgbackrest/) | [pgBackRest 文档](https://pgbackrest.org/) | v2.59.3 (全部六种语言) | [MIT](https://opensource.org/license/mit) | [上游 `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/zh/docs/pgbouncer/) | [PgBouncer 文档](https://www.pgbouncer.org/) | v1.26.0（全部六种语言） | [ISC](https://opensource.org/license/isc-license-txt) | [上游 `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
+| [pgBackRest](/zh/docs/pgbackrest/) | [pgBackRest 文档](https://pgbackrest.org/) | v2.59.3 | [MIT](https://opensource.org/license/mit) | [上游 `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [PgBouncer](/zh/docs/pgbouncer/) | [PgBouncer 文档](https://www.pgbouncer.org/) | v1.26.0 | [ISC](https://opensource.org/license/isc-license-txt) | [上游 `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/zh/docs/pgbadger/) | [pgBadger 文档](https://pgbadger.darold.net/) | v13.2，提交 `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/zh/docs/haproxy/) | [HAProxy 3.4 手册](https://docs.haproxy.org/3.4/) | v3.4.4，提交 `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [HAProxy](/zh/docs/haproxy/) | [HAProxy 3.4 手册](https://docs.haproxy.org/3.4/) | 3.4.6-66 文档快照（稳定版 3.4.6），提交 `16acce1` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/zh/docs/etcd/) | [etcd v3.7 文档](https://etcd.io/docs/v3.7/) | v3.7，提交 `d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [上游 `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 所有文档集都是**改编**而非镜像：标题、锚点、交叉链接、代码签名、页面分组与导航结构都为本站重新组织，
@@ -40,7 +36,7 @@ pig.center 转载并整理了六个上游项目撰写的文档。每一个文档
 
 ## Patroni {#patroni}
 
-于 2026-08-15 从 [Patroni 文档](https://patroni.readthedocs.io/en/latest/) **v4.1.5** 导入，并同时准备了简体中文译本。
+于 2026-08-15 从 [Patroni 文档](https://patroni.readthedocs.io/en/latest/) **v4.1.5** 导入。
 
 Patroni 版权归 Compose、Zalando SE 与 Patroni Contributors 所有（Copyright (c) 2025），
 依 [MIT 协议](https://opensource.org/license/mit)授权。
@@ -48,8 +44,8 @@ Patroni 版权归 Compose、Zalando SE 与 Patroni Contributors 所有（Copyrig
 
 ## pgBackRest {#pgbackrest}
 
-于 2026-08-15 从 [pgBackRest 文档站](https://pgbackrest.org/) 导入。
-英文和简体中文文档于 2026-10-04 刷新到 **v2.59.2**。截至 2026-10-13，全部六种语言均已对齐 **v2.59.3** 基线。本次发布核验依据对应版本的上游实现和 XML，修正了过时的 PITR 备份选择说明和一段被截断的历史警告；详见 `data/translation-audits/pgbackrest.json`。
+于 2026-08-15 从 [pgBackRest 文档站](https://pgbackrest.org/) 导入，
+并于 2026-10-13 更新至 **v2.59.3**。
 
 pgBackRest 版权归 The PostgreSQL Global Development Group 与 David Steele 所有（Copyright (c) 2015-2026），
 依 [MIT 协议](https://opensource.org/license/mit)授权。
@@ -57,11 +53,8 @@ pgBackRest 版权归 The PostgreSQL Global Development Group 与 David Steele �
 
 ## PgBouncer {#pgbouncer}
 
-于 2026-08-15 从 [PgBouncer 文档站](https://www.pgbouncer.org/) **v1.25.2** 导入，并同时准备了简体中文译本。
-
-英文与简体中文版本于 2026-10-04 更新至 [**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0)，分别同步自 `pigsty.io` 与 `pigsty.cc` 中已校对的文档。
-
-2026-10-13，全部六种语言的文档均已与当前 **v1.26.0** 英文手册同步。参考说明已对照该版本的实现核验，并在本站修正了上游的事实错误、拼写和语法问题。原始诊断消息逐字保留，各语言译文均已完成逐页审校。
+于 2026-08-15 从 [PgBouncer 文档站](https://www.pgbouncer.org/) **v1.25.2** 导入，
+并于 2026-10-13 更新至 [**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0)。
 
 PgBouncer 版权归 Marko Kreen 与 Skype Technologies OÜ 所有（Copyright (c) 2007-2009），
 依 [ISC 协议](https://opensource.org/license/isc-license-txt)授权。
@@ -89,11 +82,12 @@ pgBadger 版权归 Gilles Darold 所有（Copyright (c) 2012-2026），
 
 ## HAProxy {#haproxy}
 
-于 2026-08-16 从 HAProxy 3.4 官方维护仓库导入，并于 2026-08-30 刷新到 `v3.4.4`
-标签、提交
-[`7f03ae65c286`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=7f03ae65c28605152c7a1a9ba7d9d0bcfb50f8b0)。
-英文正文取自完整的 `doc/intro.txt`、`doc/configuration.txt` 与 `doc/management.txt` 三份手册
-（共 40,128 行），重新组织为 34 个阅读页面。
+于 2026-08-16 从 HAProxy 3.4 官方维护仓库导入，并于 2026-10-13 更新至与官方英文手册一致的
+`3.4.6-66` 维护分支文档快照，固定提交为
+[`16acce1dac1d`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=16acce1dac1dcf1ad5d654204af3a5d45d0e3de8)。
+最新稳定版另列为 `3.4.6`（标签 `v3.4.6`）；文档快照包含该稳定版发布之后的变更。
+英文正文取自完整的 `doc/intro.txt`、`doc/configuration.txt` 与 `doc/management.txt` 三份手册，
+分别为 1,695、33,216 与 5,305 行，共 40,216 行，重新组织为 34 个阅读页面。
 
 HAProxy 版权归 Willy Tarreau 所有（Copyright 2000-2026），
 依 [GNU 通用公共许可证第 2 版](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)授权。
@@ -118,8 +112,7 @@ etcd 文档版权归 etcd Authors 所有（Copyright 2013-present）。其正文
 
 ## 本站 {#site}
 
-为 pig.center 原创撰写的内容——导览页面、完整的简体中文与法文版本、已经发布的日文、
-德文与俄文译文、编辑说明与各语言首页——依
+为 doc.pg.center 原创撰写的内容依
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 发布；
 若某页面适用上述上游协议，则以上游协议为准。
 
@@ -134,4 +127,4 @@ etcd 文档版权归 etcd Authors 所有（Copyright 2013-present）。其正文
 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) 授权，
 其自身的上游与内置依赖声明随模块源码一并提供。
 
-如果发现本页任何归属信息有误，欢迎通过[站点仓库](https://github.com/pgsty/pig.center/issues)提出。
+如果发现本页任何归属信息有误，欢迎通过[站点仓库](https://github.com/pgsty/doc.pg.center/issues)提出。

@@ -90,7 +90,7 @@ If we add the `--group` option, the output will change to:
 
 ## Citus worker switchover
 
-When a switchover is orchestrated for a Citus worker node, Citus offers the opportunity to make the switchover close to transparent for an application. Because the application connects to the coordinator, which in turn connects to the worker nodes, then it is possible with Citus to [pause](/docs/patroni/pause#pause) the SQL traffic on the coordinator for the shards hosted on a worker node. The switchover then happens while the traffic is kept on the coordinator, and resumes as soon as a new primary worker node is ready to accept read-write queries.
+When a switchover is orchestrated for a Citus worker node, Citus offers the opportunity to make the switchover close to transparent for an application. Because the application connects to the coordinator, which in turn connects to the worker nodes, then it is possible with Citus to pause the SQL traffic on the coordinator for the shards hosted on a worker node. The switchover then happens while the traffic is kept on the coordinator, and resumes as soon as a new primary worker node is ready to accept read-write queries.
 
 An example of [patronictl_switchover](/docs/patroni/patronictl#patronictl_switchover) on the worker cluster:
 
@@ -200,8 +200,7 @@ Since Kubernetes doesn't support hierarchical structures we had to include the c
 
 I.e., the naming pattern is: `${scope}-${citus.group}-${type}`.
 
-All Kubernetes objects are discovered by Patroni using the [label selector](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors), therefore all Pods with Patroni&Citus and Endpoints/ConfigMaps must have similar labels, and Patroni must be configured to use them using Kubernetes [settings](/docs/patroni/config/yaml#kubernetes_settings) or `environment variables
-<kubernetes_environment>`.
+All Kubernetes objects are discovered by Patroni using the [label selector](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors), therefore all Pods with Patroni&Citus and Endpoints/ConfigMaps must have labels matching the common label selector, and Patroni must be configured to use them using Kubernetes [settings](/docs/patroni/config/yaml#kubernetes_settings) or [environment variables](/docs/patroni/config/env#kubernetes_environment).
 
 A couple of examples of Patroni configuration using Pods environment variables:
 
@@ -287,7 +286,7 @@ spec:
       value: "2"
 ```
 
-As you may noticed, both examples have `citus-group` label set. This label allows Patroni to identify object as belonging to a certain Citus group. In addition to that, there is also `PATRONI_CITUS_GROUP` environment variable, which has the same value as the `citus-group` label. When Patroni creates new Kubernetes objects ConfigMaps or Endpoints, it automatically puts the `citus-group: ${env.PATRONI_CITUS_GROUP}` label on them:
+As you may have noticed, both examples have `citus-group` label set. This label allows Patroni to identify object as belonging to a certain Citus group. In addition to that, there is also `PATRONI_CITUS_GROUP` environment variable, which has the same value as the `citus-group` label. When Patroni creates new Kubernetes objects ConfigMaps or Endpoints, it automatically puts the `citus-group: ${env.PATRONI_CITUS_GROUP}` label on them:
 
 ```yaml
 apiVersion: v1
@@ -313,4 +312,4 @@ There are two important files for you:
 
 First, please read about upgrading Citus version in the [documentation](https://docs.citusdata.com/en/latest/admin_guide/upgrading_citus.html). There is one minor change in the process. When executing upgrade, you have to use [patronictl_restart](/docs/patroni/patronictl#patronictl_restart) instead of `systemctl restart` to restart PostgreSQL.
 
-The PostgreSQL major upgrade with Citus is a bit more complex. You will have to combine techniques used in the Citus documentation about major upgrades and Patroni documentation about `PostgreSQL major upgrade<major_upgrade>`. Please keep in mind that Citus cluster consists of many Patroni clusters (coordinator and workers) and they all have to be upgraded independently.
+The PostgreSQL major upgrade with Citus is a bit more complex. You will have to combine techniques used in the Citus documentation about major upgrades and Patroni documentation about [PostgreSQL major upgrade](/docs/patroni/existing_data#major_upgrade). Please keep in mind that Citus cluster consists of many Patroni clusters (coordinator and workers) and they all have to be upgraded independently.

@@ -3,6 +3,7 @@ title: "支持与贡献"
 linkTitle: "支持"
 weight: 100
 description: "报告缺陷、提出功能需求、贡献补丁并寻找 PostgreSQL 专业支持"
+search_keywords: [--help, help]
 icon: fa-solid fa-life-ring
 module: [PGBADGER]
 categories: [任务]

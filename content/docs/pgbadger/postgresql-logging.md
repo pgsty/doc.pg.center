@@ -3,6 +3,7 @@ title: "PostgreSQL Logging Configuration"
 linkTitle: "PostgreSQL Logging"
 weight: 40
 description: "Configure query logging, log_line_prefix, locale, and supporting statistics for pgBadger"
+search_keywords: [--prefix, lc_messages, log_autovacuum_min_duration, log_checkpoints, log_connections, log_disconnections, log_duration, log_error_verbosity, log_line_prefix, log_lock_waits, log_min_duration_statement, log_statement, log_temp_files, prefix, stderr, syslog]
 icon: fa-solid fa-database
 module: [PGBADGER]
 categories: [Task]

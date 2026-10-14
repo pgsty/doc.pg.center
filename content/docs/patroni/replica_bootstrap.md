@@ -34,7 +34,7 @@ bootstrap:
             restore_command: <method_specific_restore_command>
 ```
 
-Each bootstrap method must define at least a `name` and a `command`. A special `initdb` method is available to trigger the default behavior, in which case `method` parameter can be omitted altogether. The `command` can be specified using either an absolute path, or the one relative to the `patroni` command location. In addition to the fixed parameters defined in the configuration files, Patroni supplies two cluster-specific ones:
+Each custom bootstrap method must be named by the `method` setting and define a `command` in the section bearing that name. A special `initdb` method is available to trigger the default behavior, in which case `method` parameter can be omitted altogether. The `command` can use an absolute path, a path relative to Patroni’s working directory, or a command name available in `PATH`. In addition to the fixed parameters defined in the configuration files, Patroni supplies two cluster-specific ones:
 
 `--scope`  
 Name of the cluster to be bootstrapped
@@ -63,8 +63,8 @@ bootstrap:
 
 Makes the configured `command` to be called additionally with `--arg1=value1 --arg2=value2` command-line arguments.
 
-> > [!NOTE]
-> > Bootstrap methods are neither chained, nor fallen-back to the default one in case the primary one fails
+> [!NOTE]
+> Bootstrap methods are neither chained, nor fallen-back to the default one in case the primary one fails
 
 As an example, you are able to bootstrap a fresh Patroni cluster from a Barman backup with a configuration like this:
 
@@ -87,7 +87,7 @@ bootstrap:
 
 ## Building replicas
 
-Patroni uses tried and proven `pg_basebackup` in order to create new replicas. One downside of it is that it requires a running leader node. Another one is the lack of 'on-the-fly' compression for the backup data and no built-in cleanup for outdated backup files. Some people prefer other backup solutions, such as `WAL-E`, `pgBackRest`, `Barman` and others, or simply roll their own scripts. In order to accommodate all those use-cases Patroni supports running custom scripts to clone a new replica. Those are configured in the `postgresql` configuration block:
+Patroni uses tried and proven `pg_basebackup` in order to create new replicas. It requires a running source PostgreSQL instance and does not provide built-in cleanup for outdated backup files. Some people prefer other backup solutions, such as `WAL-E`, `pgBackRest`, `Barman` and others, or simply roll their own scripts. In order to accommodate all those use-cases Patroni supports running custom scripts to clone a new replica. Those are configured in the `postgresql` configuration block:
 
 ```yaml
 postgresql:
@@ -163,13 +163,13 @@ Always 'replica'
 `--connstring`  
 Connection string to connect to the cluster member to clone from (primary or other replica). The user in the connection string can execute SQL and replication protocol commands.
 
-A special `no_leader` parameter, if defined, allows Patroni to call the replica creation method even if there is no running leader or replicas. In that case, an empty string will be passed in a connection string. This is useful for restoring the formerly running cluster from the binary backup.
+A special `no_leader` parameter, when enabled, allows Patroni to call the replica creation method even if there is no running leader or replicas. In that case, an empty string will be passed in a connection string. This is useful for restoring the formerly running cluster from the binary backup.
 
-A special `keep_data` parameter, if defined, will instruct Patroni to not clean PGDATA folder before calling restore.
+A special `keep_data` parameter, when enabled, will instruct Patroni to not clean PGDATA folder before calling restore.
 
-A special `no_params` parameter, if defined, restricts passing parameters to custom command.
+A special `no_params` parameter, when enabled, disables the automatic addition of cluster-specific parameters to the custom command. User-defined parameters are still passed.
 
-A `basebackup` method is a special case: it will be used if `create_replica_methods` is empty, although it is possible to list it explicitly among the `create_replica_methods` methods. This method initializes a new replica with the `pg_basebackup`, the base backup is taken from the leader unless there are replicas with `clonefrom` tag, in which case one of such replicas will be used as the origin for pg_basebackup. It works without any configuration; however, it is possible to specify a `basebackup` configuration section. Same rules as with the other method configuration apply, namely, only long (with --) options should be specified there. Not all parameters make sense, if you override a connection string or provide an option to created tar-ed or compressed base backups, patroni won't be able to make a replica out of it. There is no validation performed on the names or values of the parameters passed to the `basebackup` section. Also note that in case symlinks are used for the WAL folder it is up to the user to specify the correct `--waldir` path as an option, so that after replica buildup or re-initialization the symlink would persist. This option is supported only since v10 though.
+A `basebackup` method is a special case: it will be used if `create_replica_methods` is empty, although it is possible to list it explicitly among the `create_replica_methods` methods. This method initializes a new replica with the `pg_basebackup`, the base backup is taken from the leader unless there are replicas with `clonefrom` tag, in which case one of such replicas will be used as the origin for pg_basebackup. It works without any configuration; however, it is possible to specify a `basebackup` configuration section. Same rules as with the other method configuration apply, namely, only long (with --) options should be specified there. Patroni does not accept connection overrides or options that produce tar-format or client-compressed backups. On PostgreSQL 15 and newer, server-side compression is supported with `compress: server-gzip` or `compress: server-zstd`. Patroni filters out options it controls and compression settings other than server-side compression, but does not perform complete validation of all option names and values. Also note that in case symlinks are used for the WAL folder it is up to the user to specify the correct `--waldir` path as an option, so that after replica buildup or re-initialization the symlink would persist. This option is supported only since v10 though.
 
 You can specify basebackup parameters as either a map (key-value pairs) or a list of elements, where each element could be either a key-value pair or a single key (for options that does not receive any values, for instance, `--verbose`). Consider those 2 examples:
 

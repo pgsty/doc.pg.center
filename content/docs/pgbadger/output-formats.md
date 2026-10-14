@@ -3,6 +3,7 @@ title: "Output Formats"
 linkTitle: "Output Formats"
 weight: 70
 description: "Choose HTML, text, binary, JSON, or raw CSV output and combine intermediate files"
+search_keywords: [--anonymize, --csv-separator, --dump-all-queries, --dump-raw-csv, --extension, --extra-files, --last-parsed, --normalized-only, --outfile, --prettify-json, --query-numbering, JSON::XS, all, anonymize, csv, csv-separator, dump, dump-all-queries, dump-raw-csv, extension, extra, extra-files, files, json, last, last-parsed, normalized, normalized-only, numbering, only, outfile, parsed, prettify, prettify-json, queries, query, query-numbering, raw, separator]
 icon: fa-solid fa-file-export
 module: [PGBADGER]
 categories: [Reference]
@@ -81,7 +82,7 @@ Install `JSON::XS` first. Add `--prettify-json` for readability when file size a
 The command reference also provides specialized exports:
 
 - `--dump-raw-csv` parses the log and writes row-oriented CSV without building a report;
-- `--csv-separator` changes the raw CSV delimiter;
+- `--csv-separator` changes the raw CSV delimiter, which defaults to a comma in 13.2;
 - `--dump-all-queries` emits every query after replacing bind parameters;
 - `--normalized-only` writes normalized queries;
 - `--query-numbering` numbers query-oriented text output.

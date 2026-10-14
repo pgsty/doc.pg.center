@@ -43,7 +43,7 @@ The architecture diagram would be the following:
 
 ![image](/img/docs/patroni/multi-dc-asynchronous-replication.png)
 
-Automatic promotion is not possible, because DC2 will never able to figure out the state of DC1.
+Automatic promotion is not possible, because DC2 will never be able to figure out the state of DC1.
 
 You should not use `pg_ctl promote` in this scenario, you need "manually promote" the healthy cluster by removing [standby_cluster](/docs/patroni/standby_cluster#standby_cluster) section from the [dynamic configuration](/docs/patroni/config/dynamic#dynamic).
 

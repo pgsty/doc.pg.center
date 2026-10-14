@@ -2,7 +2,8 @@
 title: "サンプルレポート"
 linkTitle: "サンプルレポート"
 weight: 80
-description: "ローカルサイトのスナップショットから、完全版、エラーのみ、増分のpgBadgerレポートを開きます"
+description: "完全なpgBadgerレポート、エラーのみのレポート、増分レポートを開きます"
+search_keywords: [--anonymize, anonymize]
 icon: fa-solid fa-chart-column
 module: [PGBADGER]
 categories: [リファレンス]
@@ -12,7 +13,7 @@ upstream_name: "pgBadger website"
 upstream_ref: "site snapshot of 2026-08-15"
 ---
 
-サンプルの内容は2022年5月にpgBadger 11.8で生成されました。元のサンプルをこのサイトとともに保存しているため、アップストリームサーバーに接続せずにレポートのナビゲーション、グラフ、スタイル、スクリプトを利用できます。
+サンプルの内容は2022年5月にpgBadger 11.8で生成されました。レポートのナビゲーション、グラフ、スタイル、スクリプトはオフラインで利用できます。
 
 | サンプル | 紹介する内容 | ローカルコピー |
 |---|---|---|
@@ -40,7 +41,7 @@ report/
 └── 11/
     ├── pgbadger.min.css
     ├── pgbadger.min.js
-    └── bundled chart and UI assets
+    └── 同梱のグラフとUIのアセット
 ```
 
 最上位の目次は2つの週次レポートと7つの日次レポートにリンクしています。相対リンクをすべて保持しているため、`index.html`だけを移動するとサンプルが壊れます。ディレクトリツリー全体をまとめて保持してください。

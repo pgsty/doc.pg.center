@@ -34,7 +34,7 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/contributing_guidelines
 behaveテストを実行するための要件：
 
 1. [contrib](https://www.postgresql.org/docs/current/contrib.html)モジュールを含むPostgreSQLパッケージをインストールする必要があります。
-2. PostgreSQLのバイナリーを`PATH`から利用できなければなりません。`PATH=/usr/lib/postgresql/11/bin:\$PATH python -m behave`などの方法でパスに追加する必要がある場合があります。
+2. PostgreSQLのバイナリーを`PATH`から利用できなければなりません。`PATH=/usr/lib/postgresql/11/bin:$PATH python -m behave`などの方法でパスに追加する必要がある場合があります。
 3. 外部DCS（etcd、Consul、Zookeeperなど）を使用してテストする場合は、パッケージをインストールし、それぞれのサービスを起動して、localhostのデフォルトポートで暗号化も保護もされていない接続を受け付ける必要があります。etcdやConsulでは、バイナリーが`PATH`から利用できれば、behaveテストスイートがサービスを起動できます。
 
 依存関係をインストールします。
@@ -75,15 +75,15 @@ DCS=raft python -m behave
 toxのテストを実行するためにインストールが必要な依存関係は、Pythonを除けば一つだけです。
 
 ``` bash
-pip install tox>=4
+pip install "tox>=4"
 ```
 
-`behave`テストを実行する場合は、Dockerもインストールする必要があります。
+Dockerを使用する`behave`テストを実行する場合は、Dockerもインストールする必要があります。
 
 `tox.ini`のTox構成には、次のタスクを実行するための「環境」があります。
 
 - lint: `flake8`によるPythonコードのlint
-- test: `pytest`による、利用可能なすべてのPythonインタープリターの単体テスト。XMLレポートを生成し、TTYを検出した場合はHTMLレポートを生成する
+- test: `pytest`による、利用可能なすべてのPythonインタープリターの単体テスト。TTYを検出した場合はHTMLレポートを、それ以外はXMLレポートを生成する
 - dep: `pipdeptree`によるパッケージ依存関係の競合の検出
 - type: `pyright`による静的な型チェック
 - black: `black`によるコード整形
@@ -101,13 +101,13 @@ pip install tox>=4
 tox
 ```
 
-`test`環境は、ラベル\`test\`で実行できます。
+`test`環境は、ラベル`test`で実行できます。
 
 ``` bash
 tox -m test
 ```
 
-Dockerでの`behave`テストは、ラベル\`behave\`で実行できます。
+Dockerでの`behave`テストは、ラベル`behave`で実行できます。
 
 ``` bash
 tox -m behave
@@ -141,6 +141,9 @@ py310-type-win
 py310-behave-etcd-lin
 py310-behave-etcd-win
 py310-behave-etcd-mac
+py310-behave-etcd3-lin
+py310-behave-etcd3-win
+py310-behave-etcd3-mac
 ```
 
 tox（\>=v4）では、次のようにして構成済みのすべての環境の組み合わせを一覧表示できます。
@@ -157,7 +160,7 @@ OPEN_CMD=: tox -m docs
 
 ### Behaveテスト {#behave-tests}
 
-`-m behave`によるBehaveテストでは、PG_MAJORバージョン11から16に基づくDockerイメージをビルドしてから、すべてのbehaveテストを実行します。実行にかなりの時間がかかる場合があるため、対象を特定のPostgresバージョンや、特定の機能群、ステップに限定したい場合もあります。
+`-m behave`によるBehaveテストでは、PG_MAJORバージョン12から18に基づくDockerイメージをビルドしてから、すべてのbehaveテストを実行します。実行にかなりの時間がかかる場合があるため、対象を特定のPostgresバージョンや、特定の機能群、ステップに限定したい場合もあります。
 
 Postgresのバージョンを指定するには、依存するイメージのビルド環境の完全な名前を指定し、その後にbehave環境名を指定します。たとえば、Postgres 14を使用する場合は次のようにします。
 

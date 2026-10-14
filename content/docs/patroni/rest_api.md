@@ -26,7 +26,7 @@ For all health check `GET` requests Patroni returns a JSON document with the sta
 
 - `GET /standby-leader`: returns HTTP status code **200** only when the Patroni node is running as the leader in a [standby cluster](/docs/patroni/standby_cluster#standby_cluster).
 
-- `GET /leader`: returns HTTP status code **200** when the Patroni node has the leader lock. The major difference from the two previous endpoints is that it doesn't take into account whether PostgreSQL is running as the `primary` or the `standby_leader`.
+- `GET /leader`: returns HTTP status code **200** when the Patroni node has the leader lock. Unlike `GET /primary` and `GET /standby-leader`, this check does not depend on whether PostgreSQL is running as the `primary` or the `standby_leader`.
 
 - `GET /replica`: replica health check endpoint. It returns HTTP status code **200** only when the Patroni node is in the state `running`, the role is `replica` and `noloadbalance` tag is not set.
 
@@ -39,7 +39,7 @@ For all health check `GET` requests Patroni returns a JSON document with the sta
   - `GET /replica?lag=10MB`
   - `GET /replica?lag=1GB`
 
-- `GET /replica?tag_key1=value1&tag_key2=value2`: replica check endpoint. In addition, It will also check for user defined tags `key1` and `key2` and their respective values in the **tags** section of the yaml configuration management. If the tag isn't defined for an instance, or if the value in the yaml configuration doesn't match the querying value, it will return HTTP Status Code 503.
+- `GET /replica?tag_key1=value1&tag_key2=value2`: replica check endpoint. It also checks for user defined tags `key1` and `key2` and their respective values in the **tags** section of the yaml configuration management. If the tag isn't defined for an instance, or if the value in the yaml configuration doesn't match the querying value, it will return HTTP Status Code 503.
 
   In the following requests, since we are checking for the leader or standby-leader status, Patroni doesn't apply any of the user defined tags and they will be ignored.
 
@@ -547,7 +547,6 @@ Let's check that the node processed this configuration. First of all it should s
 ``` bash
 $ curl -s http://localhost:8008/patroni | jq .
 {
-  "database_system_identifier": "6287881213849985952",
   "postmaster_start_time": "2024-08-28 19:39:26.352526+00:00",
   "xlog": {
     "location": 2197818976
@@ -712,7 +711,11 @@ There are a couple of checks that a member of a cluster should pass to be able t
   - For a failover in both healthy and unhealthy clusters, this check is omitted.
 
 > [!WARNING]
-> In case of a manual failover in a cluster without a leader, a candidate will be allowed to promote even if: - it is not in the `/sync` key members when synchronous mode is enabled; - its lag exceeds the maximum replication lag allowed; - it has the timeline number smaller than the last known cluster timeline.
+> In case of a manual failover in a cluster without a leader, a candidate will be allowed to promote even if:
+>
+> - it is not in the `/sync` key members when synchronous mode is enabled;
+> - its lag exceeds the maximum replication lag allowed;
+> - it has the timeline number smaller than the last known cluster timeline.
 
 <a id="restart_endpoint"></a>
 

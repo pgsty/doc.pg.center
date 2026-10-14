@@ -2,7 +2,8 @@
 title: "Rapports d'exemple"
 linkTitle: "Rapports d'exemple"
 weight: 80
-description: "Ouvrir des rapports complets, erreur uniquement et incrémentaux pgBadger à partir de l'instantané du site local"
+description: "Consulter les rapports pgBadger complets, incrémentaux et limités aux erreurs"
+search_keywords: [--anonymize, anonymize]
 icon: fa-solid fa-chart-column
 module: [PGBADGER]
 categories: [Référence]
@@ -12,7 +13,7 @@ upstream_name: "pgBadger website"
 upstream_ref: "site snapshot of 2026-08-15"
 ---
 
-Le contenu d'exemple a été généré par pgBadger 11.8 en mai 2022. Les exemples originaux sont stockés avec ce site, de sorte que la navigation dans le rapport, les graphiques, les styles et les scripts restent disponibles sans avoir à interroger le serveur d'origine.
+Le contenu d'exemple a été généré par pgBadger 11.8 en mai 2022. La navigation dans les rapports, les graphiques, les styles et les scripts sont disponibles hors ligne.
 
 | Exemple | Ce qu'il illustre | Copie locale |
 |---|---|---|
@@ -26,9 +27,9 @@ Le rapport complet est un document HTML autonome. Utilisez la navigation en haut
 
 Les données constituent un exemple de démonstration, non une référence de benchmark actuelle. Les valeurs, les versions de PostgreSQL et l'interface utilisateur pgBadger intégrée reflètent la date de génération du rapport.
 
-## Hiérarchie incrémentale {#incremental-hierarchy}
+## Hiérarchie incrémentielle {#incremental-hierarchy}
 
-L'exemple incrémental préserve la structure de lien complète :
+Arborescence des rapports incrémentiels :
 
 ```text
 report/
@@ -40,14 +41,14 @@ report/
 └── 11/
     ├── pgbadger.min.css
     ├── pgbadger.min.js
-    └── bundled chart and UI assets
+    └── ressources graphiques et d’interface intégrées
 ```
 
-L'index principal pointe vers deux rapports hebdomadaires et sept rapports quotidiens. Tous les liens relatifs ont été conservés, donc déplacer uniquement `index.html` romprait l'exemple ; conservez l'arborescence complète.
+L'index principal pointe vers deux rapports hebdomadaires et sept rapports quotidiens. Déplacer uniquement `index.html` romprait les liens ; conservez l'arborescence complète.
 
 ## Sécurité et vie privée {#security-and-privacy}
 
-Les rapports réels peuvent exposer du texte SQL, des valeurs liées, des noms de base de données et d'utilisateurs, des noms d'applications, des adresses clientes, des détails d'erreurs et des modèles de charge. Avant de publier un rapport :
+Les rapports réels peuvent exposer du texte SQL, des valeurs liées, des noms de base de données et d'utilisateurs, des noms d'applications, des adresses clientes, des détails d'erreurs et des profils de charge. Avant de publier un rapport :
 
 - utilisez `--anonymize` lorsque les littéraux ne sont pas nécessaires ;
 - appliquez les filtres d'inclusion/exclusion avant la génération du rapport ;

@@ -38,7 +38,7 @@ sudo apt-get install python3-psycopg2  # install psycopg2 module on Debian/Ubunt
 sudo yum install python3-psycopg2      # install psycopg2 on RedHat/Fedora/CentOS
 ```
 
-2.  При установке Patroni через pip указать `psycopg`, `psycopg2` или `psycopg2-binary` в [списке зависимостей](/ru/docs/patroni/installation#extras).
+2.  При установке Patroni через pip указать `psycopg3`, `psycopg2` или `psycopg2-binary` в [списке зависимостей](/ru/docs/patroni/installation#extras).
 
 <a id="extras"></a>
 
@@ -85,10 +85,10 @@ all
 всё перечисленное выше, кроме семейства psycopg
 
 psycopg3  
-модуль `psycopg\[binary\]\>=3.0.0`
+модуль `psycopg[binary]>=3.0.0`
 
 psycopg2  
-модуль `psycopg2\>=2.5.4`
+модуль `psycopg2>=2.5.4`
 
 psycopg2-binary  
 модуль `psycopg2-binary`
@@ -140,7 +140,7 @@ apt-get install patroni
 dnf install patroni patroni-etcd
 ```
 
-Если производный дистрибутив RedHat не предоставляет пакеты, etcd можно установить из PGDG. На узлах DCS выполните:
+Если производный дистрибутив RedHat не предоставляет пакеты, etcd можно установить из PGDG. На узлах, где будет размещаться DCS, выполните:
 
 ```bash
 dnf install 'dnf-command(config-manager)'
@@ -184,7 +184,7 @@ patronictl pause --wait
 Затем на каждом узле кластера обновите пакеты способом, предусмотренным вашей ОС:
 
 ```bash
-apt-get update && apt-get install patroni patroni-etcd
+apt-get update && apt-get install patroni
 ```
 
 Перезапустите процесс демона Patroni на каждом узле:

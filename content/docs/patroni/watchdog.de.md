@@ -2,7 +2,7 @@
 title: "Watchdog-Unterstützung"
 weight: 90
 icon: fa-solid fa-dog
-description: "Watchdog-Integration und Fencing-Betrachtungen für Patroni-Clustereinstellungen."
+description: "Watchdog-Integration und Hinweise zum Fencing für Patroni-Cluster."
 module: [PATRONI]
 categories: [Konzept]
 aliases: [/patroni/watchdog/]
@@ -11,28 +11,29 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/watchdog.html"
 
 <a id="watchdog"></a>
 
-Das gleichzeitige Ausführen mehrerer PostgreSQL-Server als primäre Server kann zu Datenverlusten aufgrund von unterschiedlichen Zeitlinien führen. Diese Situation wird auch als "Split-Brain"-Problem bezeichnet. Um das Split-Brain-Problem zu vermeiden, muss Patroni sicherstellen, dass PostgreSQL keine Transaktionsbestätigungen akzeptiert, nachdem der Schlüssel für den primären Server in der DCS abgelaufen ist. Unter normalen Umständen versucht Patroni, dies durch das Stoppen von PostgreSQL zu erreichen, falls der Update-Vorgang für den primären Schlüssel aus irgendeinem Grund fehlschlägt. Dies kann jedoch aus verschiedenen Gründen fehlschlagen:
+Laufen mehrere PostgreSQL-Server gleichzeitig als Primärserver, können durch auseinanderlaufende Zeitleisten Transaktionen verloren gehen. Diese Situation wird auch als Split-Brain bezeichnet. Um sie zu vermeiden, muss Patroni sicherstellen, dass PostgreSQL nach Ablauf des Leader-Schlüssels im DCS keine Transaktions-Commits mehr annimmt. Unter normalen Umständen versucht Patroni dies zu erreichen, indem es PostgreSQL stoppt, sobald die Aktualisierung der Leader-Sperre aus irgendeinem Grund fehlschlägt. Dies kann jedoch aus verschiedenen Gründen scheitern:
 
-- Patroni ist aufgrund eines Fehlers, eines Zustands mit unzureichendem Arbeitsspeicher oder durch versehentliches Abschalten durch einen Systemadministrator abgestürzt.
-- Das Herunterfahren von PostgreSQL ist zu langsam.
-- Patroni kann aufgrund hoher Systemlast, durch den Hypervisor pausierte VM oder anderer Infrastrukturprobleme nicht ausgeführt werden.
+- Patroni ist aufgrund eines Fehlers oder Speichermangels abgestürzt oder wurde versehentlich von einem Systemadministrator beendet.
+- PostgreSQL fährt zu langsam herunter.
+- Patroni kommt wegen hoher Systemlast, einer vom Hypervisor pausierten VM oder anderer Infrastrukturprobleme nicht zur Ausführung.
 
-Um ein korrektes Verhalten unter diesen Bedingungen zu gewährleisten, unterstützt Patroni Überwachungsgeräte. Überwachungsgeräte sind Software- oder Hardware-Mechanismen, die das gesamte System zurücksetzen, wenn sie innerhalb eines bestimmten Zeitrahmens kein "Keepalive"-Heartbeat erhalten. Dies bietet eine zusätzliche Schutzschicht, falls die üblichen Patroni-Split-Brain-Schutzmechanismen ausfallen.
+Um auch unter diesen Bedingungen korrektes Verhalten zu gewährleisten, unterstützt Patroni Watchdog-Geräte. Dies sind Software- oder Hardwaremechanismen, die das gesamte System zurücksetzen, wenn innerhalb eines bestimmten Zeitraums kein Keepalive-Heartbeat eintrifft. Sie bieten eine zusätzliche Absicherung, falls die üblichen Split-Brain-Schutzmechanismen von Patroni versagen.
 
-Patroni wird versuchen, den Watchdog vor der Beförderung von PostgreSQL zum Primärserver zu aktivieren. Falls die Aktivierung des Watchdogs fehlschlägt und der Watchdog-Modus `required` ist, wird der Knoten ablehnen, Leader zu werden. Bei der Entscheidung, an der Leader-Wahl teilzunehmen, wird Patroni auch überprüfen, ob die Watchdog-Konfiguration es zulassen würde, Leader zu werden. Nach der Demotion von PostgreSQL (z.B. aufgrund eines manuellen Failovers) wird Patroni den Watchdog erneut deaktivieren. Der Watchdog wird auch während der pausierten Zustands von Patroni deaktiviert.
+Patroni versucht, den Watchdog vor der Hochstufung von PostgreSQL zum Primärserver zu aktivieren. Schlägt dies fehl und steht der Watchdog-Modus auf `required`, verweigert der Knoten die Leader-Rolle. Auch bei der Entscheidung über die Teilnahme an einer Leader-Wahl prüft Patroni, ob die Watchdog-Konfiguration die Leader-Rolle überhaupt zulässt. Nach der Herabstufung von PostgreSQL (etwa bei einem manuellen Failover) deaktiviert Patroni den Watchdog wieder. Ebenso wird der Watchdog deaktiviert, während Patroni pausiert ist.
 
-Standardmäßig wird Patroni den Watchdog so einrichten, dass er 5 Sekunden vor TTL abläuft. Mit der standardmäßigen Konfiguration von `loop_wait=10` und `ttl=30` erhält der HA-Loop mindestens 15 Sekunden (`ttl` - `safety_margin` - `loop_wait`) zur Abschließung, bevor der Systemzustand durch eine zwingende Neustart verloren geht. Standardmäßig wird der Zugriff auf das DCS nach 10 Sekunden ablaufen. Dies bedeutet, dass wenn das DCS nicht verfügbar ist, z.B. aufgrund von Netzwerkproblemen, Patroni und PostgreSQL mindestens 5 Sekunden (`ttl` - `safety_margin` - `loop_wait` - `retry_timeout`) haben, um in einen Zustand zu gelangen, in dem alle Clientverbindungen beendet sind.
+Standardmäßig stellt Patroni den Watchdog so ein, dass er 5 Sekunden vor Ablauf der TTL auslöst. Mit den Standardwerten `loop_wait=10` und `ttl=30` hat die HA-Schleife dadurch mindestens 15 Sekunden (`ttl` - `safety_margin` - `loop_wait`) Zeit zum Abschluss, bevor das System zwangsweise zurückgesetzt wird. Für DCS-Zugriffe ist standardmäßig eine Zeitüberschreitung von 10 Sekunden konfiguriert. Ist der DCS beispielsweise wegen Netzwerkproblemen nicht verfügbar, bleiben Patroni und PostgreSQL damit mindestens 5 Sekunden (`ttl` - `safety_margin` - `loop_wait` - `retry_timeout`), um alle Clientverbindungen zu beenden.
 
-Der Sicherheitsabstand ist die Zeit, die Patroni für den Zeitraum zwischen dem Aktualisieren des Leiterschlüssels und dem Senden von "Keepalive"-Signalen reserviert. Patroni wird versuchen, sofort nach der Bestätigung des Aktualisierens des Leiterschlüssels ein "Keepalive"-Signal zu senden. Wenn der Patroni-Prozess über einen längeren Zeitraum genau zum richtigen Zeitpunkt angehalten wird, kann das "Keepalive"-Signal verzögert werden, ohne dass der "Watchdog" ausgelöst wird. Dies führt zu einem Zeitraum, in dem der "Watchdog" nicht ausgelöst wird, bevor der Leiterschlüssel abläuft, wodurch die Garantie ungültig wird. Um sicherzustellen, dass der "Watchdog" unter allen Umständen ausgelöst wird, sollten Sie den "Watchdog" so konfigurieren, dass er nach der Hälfte der TTL-Zeit abläuft, indem Sie `safety_margin` auf -1 setzen, um die "Watchdog"-Timeout-Zeit auf `ttl // 2` zu setzen. Wenn Sie diese Garantie benötigen, sollten Sie möglicherweise `ttl` erhöhen und/oder `loop_wait` und `retry_timeout` verringern.
+Der Sicherheitsabstand ist die Zeit, die Patroni zwischen der Aktualisierung des Leader-Schlüssels und dem Keepalive für den Watchdog reserviert. Patroni versucht, unmittelbar nach Bestätigung der Aktualisierung des Leader-Schlüssels ein Keepalive zu senden. Wird der Patroni-Prozess genau im entscheidenden Moment längere Zeit angehalten, kann sich das Keepalive um mehr als den Sicherheitsabstand verzögern, ohne den Watchdog auszulösen. Dadurch entsteht ein Zeitfenster, in dem der Watchdog nicht vor Ablauf des Leader-Schlüssels auslöst und die Garantie somit nicht mehr gilt. Damit der Watchdog unter allen Umständen sicher auslöst, `safety_margin` auf -1 setzen. Dadurch beträgt die Watchdog-Frist `ttl // 2`, also die Hälfte der TTL. Wird diese Garantie benötigt, sollte wahrscheinlich `ttl` erhöht und/oder `loop_wait` sowie `retry_timeout` verringert werden.
 
-Derzeit werden "Watchdogs" ausschließlich über die Linux-Watchdog-Geräte-Schnittstelle unterstützt.
+Derzeit werden Watchdogs nur über die Linux-Watchdog-Geräteschnittstelle unterstützt.
 
 --------
 
-## Einrichtung eines Software-Überwachers unter Linux {#setting-up-software-watchdog-on-linux}
-Die Standard-Patroni-Konfiguration versucht, `/dev/watchdog` unter Linux zu verwenden, falls dies für Patroni zugänglich ist. Für die meisten Anwendungsfälle ist die Verwendung eines Software-Überwachers, der in den Linux-Kernel integriert ist, ausreichend sicher.
+## Software-Watchdog unter Linux einrichten {#setting-up-software-watchdog-on-linux}
 
-Um den Software-Überwacher zu aktivieren, führen Sie die folgenden Befehle als Root aus, bevor Sie Patroni starten:
+Die Standardkonfiguration von Patroni versucht unter Linux, `/dev/watchdog` zu verwenden, sofern Patroni darauf zugreifen kann. Für die meisten Anwendungsfälle ist der im Linux-Kernel enthaltene Software-Watchdog ausreichend sicher.
+
+Zum Aktivieren des Software-Watchdogs vor dem Start von Patroni folgende Befehle als root ausführen:
 
 ``` bash
 modprobe softdog
@@ -40,6 +41,6 @@ modprobe softdog
 chown postgres /dev/watchdog
 ```
 
-Für Tests kann es hilfreich sein, das Neustarten zu deaktivieren, indem man `soft_noboot=1` zur Befehlszeile von modprobe hinzufügt. In diesem Fall protokolliert der Watchdog lediglich eine Zeile im Kernel-Ring-Puffer, die über `dmesg` sichtbar ist.
+Für Tests kann es hilfreich sein, Neustarts durch das zusätzliche Argument `soft_noboot=1` in der modprobe-Befehlszeile zu deaktivieren. Dann schreibt der Watchdog lediglich eine über `dmesg` sichtbare Zeile in den Kernel-Ringpuffer.
 
-Patroni protokolliert Informationen über den Watchdog, wenn dieser erfolgreich aktiviert wurde.
+Nach erfolgreicher Aktivierung protokolliert Patroni Informationen über den Watchdog.

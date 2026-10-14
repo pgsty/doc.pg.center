@@ -38,7 +38,7 @@ sudo apt-get install python3-psycopg2  # install psycopg2 module on Debian/Ubunt
 sudo yum install python3-psycopg2      # install psycopg2 on RedHat/Fedora/CentOS
 ```
 
-2.  Specify one of `psycopg`, `psycopg2`, or `psycopg2-binary` in the [list of dependencies](/docs/patroni/installation#extras) when installing Patroni with pip.
+2.  Specify one of `psycopg3`, `psycopg2`, or `psycopg2-binary` in the [list of dependencies](/docs/patroni/installation#extras) when installing Patroni with pip.
 
 <a id="extras"></a>
 
@@ -85,10 +85,10 @@ all
 all of the above (except psycopg family)
 
 psycopg3  
-`psycopg\[binary\]\>=3.0.0` module
+`psycopg[binary]>=3.0.0` module
 
 psycopg2  
-`psycopg2\>=2.5.4` module
+`psycopg2>=2.5.4` module
 
 psycopg2-binary  
 `psycopg2-binary` module
@@ -184,7 +184,7 @@ patronictl pause --wait
 Then on each node in the cluster, perform the package upgrade required for your OS:
 
 ```bash
-apt-get update && apt-get install patroni patroni-etcd
+apt-get update && apt-get install patroni
 ```
 
 Restart the patroni daemon process on each node:
@@ -199,4 +199,4 @@ Then finally resume monitoring of Postgres with patroni to take it out of mainte
 patronictl resume --wait
 ```
 
-The cluster will now be full operational with the new version of Patroni.
+The cluster will now be fully operational with the new version of Patroni.

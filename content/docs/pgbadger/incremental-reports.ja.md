@@ -3,6 +3,7 @@ title: "増分レポート"
 linkTitle: "増分レポート"
 weight: 60
 description: "日次・週次レポートの生成、保持期間の管理、出力の再生成、月次集計の追加を行います"
+search_keywords: [--day-report, --explode, --extra-files, --incremental, --iso-week-number, --last-parsed, --month-report, --no-week, --noreport, --outdir, --rebuild, --retention, --start-monday, day, day-report, explode, extra, extra-files, files, incremental, iso, iso-week-number, last, last-parsed, monday, month, month-report, no, no-week, noreport, number, outdir, parsed, rebuild, report, retention, start, start-monday, week]
 icon: fa-solid fa-calendar-days
 module: [PGBADGER]
 categories: [タスク]

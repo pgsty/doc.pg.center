@@ -3,6 +3,7 @@ title: "PostgreSQLのログ設定"
 linkTitle: "PostgreSQLのログ"
 weight: 40
 description: "pgBadger用にクエリーログ、log_line_prefix、ロケール、関連する統計を設定します"
+search_keywords: [--prefix, lc_messages, log_autovacuum_min_duration, log_checkpoints, log_connections, log_disconnections, log_duration, log_error_verbosity, log_line_prefix, log_lock_waits, log_min_duration_statement, log_statement, log_temp_files, prefix, stderr, syslog]
 icon: fa-solid fa-database
 module: [PGBADGER]
 categories: [タスク]

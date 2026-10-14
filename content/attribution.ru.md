@@ -11,7 +11,7 @@ translation_notice: false
 outputs: [HTML, markdown]
 ---
 
-pig.center повторно публикует документацию, написанную шестью исходными проектами. В конце каждой
+doc.pg.center повторно публикует документацию, написанную шестью исходными проектами. В конце каждой
 страницы документации приведена строка атрибуции: из какой работы она получена, кому принадлежат
 авторские права, по какой лицензии распространяется и в каком разделе этой страницы приведены
 соответствующие сведения.
@@ -21,12 +21,7 @@ pig.center повторно публикует документацию, нап�
 уведомление исходного проекта.
 
 > [!NOTE]
-> Русская версия полностью охватывает Patroni, PgBouncer, pgBadger и etcd. Для pgBackRest,
-> HAProxy и отдельных ещё не переведённых маршрутов ссылки открывают соответствующую английскую
-> страницу.
-
-> [!NOTE]
-> pig.center — независимый проект документации сообщества. Он не связан ни с одним из перечисленных
+> doc.pg.center — независимый проект документации сообщества. Он не связан ни с одним из перечисленных
 > ниже проектов и с PostgreSQL Global Development Group, не одобрен ими и не является их официальным
 > изданием.
 
@@ -35,10 +30,10 @@ pig.center повторно публикует документацию, нап�
 | Компонент | Исходная работа | Зафиксированная версия | Лицензия | Сохранённое уведомление |
 |---|---|---|---|---|
 | [Patroni](/ru/docs/patroni/) | [Документация Patroni](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/ru/docs/pgbackrest/) | [Документация pgBackRest](https://pgbackrest.org/) | v2.59.3 (все шесть языков) | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/ru/docs/pgbouncer/) | [Документация PgBouncer](https://www.pgbouncer.org/) | v1.26.0 (все шесть языков) | [ISC](https://opensource.org/license/isc-license-txt) | [Исходный `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
+| [pgBackRest](/ru/docs/pgbackrest/) | [Документация pgBackRest](https://pgbackrest.org/) | v2.59.3 | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [PgBouncer](/ru/docs/pgbouncer/) | [Документация PgBouncer](https://www.pgbouncer.org/) | v1.26.0 | [ISC](https://opensource.org/license/isc-license-txt) | [Исходный `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
 | [pgBadger](/ru/docs/pgbadger/) | [Документация pgBadger](https://pgbadger.darold.net/) | v13.2, коммит `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/ru/docs/haproxy/) | [Руководства HAProxy 3.4](https://docs.haproxy.org/3.4/) | v3.4.4, коммит `7f03ae6` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [HAProxy](/ru/docs/haproxy/) | [Руководства HAProxy 3.4](https://docs.haproxy.org/3.4/) | снимок документации 3.4.6-66, коммит `16acce1`; стабильный выпуск v3.4.6 | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/ru/docs/etcd/) | [Документация etcd v3.7](https://etcd.io/docs/v3.7/) | v3.7, коммит `d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Исходный `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 Каждый сборник **адаптирован**, а не зеркально скопирован. Заголовки, якоря, перекрёстные ссылки,
@@ -49,7 +44,7 @@ pig.center повторно публикует документацию, нап�
 ## Patroni {#patroni}
 
 Импортировано 2026-08-15 из [документации Patroni](https://patroni.readthedocs.io/en/latest/)
-версии **v4.1.5**; переводы на упрощённый китайский и русский языки поддерживаются параллельно.
+версии **v4.1.5**.
 
 Авторские права на Patroni принадлежат Compose, Zalando SE и Patroni Contributors
 (copyright (c) 2025). Материалы распространяются по [лицензии MIT](https://opensource.org/license/mit).
@@ -57,9 +52,8 @@ pig.center повторно публикует документацию, нап�
 
 ## pgBackRest {#pgbackrest}
 
-Импортировано 2026-08-15 с [сайта документации pgBackRest](https://pgbackrest.org/).
-Английская версия и версия на упрощённом китайском обновлены 2026-10-04 до **v2.59.2**.
-По состоянию на 2026-10-13 все шесть языковых версий приведены к базовой версии **v2.59.3**. При проверке перед публикацией устаревшие инструкции по выбору резервной копии для PITR и обрезанное историческое предупреждение исправлены по реализации и XML соответствующей версии исходного проекта; см. `data/translation-audits/pgbackrest.json`.
+Импортировано 2026-08-15 с [сайта документации pgBackRest](https://pgbackrest.org/)
+и обновлено 2026-10-13 до **v2.59.3**.
 
 Авторские права на pgBackRest принадлежат The PostgreSQL Global Development Group и David Steele
 (copyright (c) 2015-2026). Материалы распространяются по
@@ -69,17 +63,8 @@ pig.center повторно публикует документацию, нап�
 ## PgBouncer {#pgbouncer}
 
 Импортировано 2026-08-15 из [документации PgBouncer](https://www.pgbouncer.org/) версии
-**v1.25.2**; перевод на упрощённый китайский язык подготовлен параллельно.
-
-Английская версия и версия на упрощённом китайском обновлены 2026-10-04 до
-[**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0)
-на основе вычитанных руководств из `pigsty.io` и `pigsty.cc` соответственно.
-
-2026-10-13 все шесть языковых версий были синхронизированы с актуальным английским
-руководством для **v1.26.0**. Справочные описания сверены с реализацией выпуска;
-локальные исправления устраняют фактические, орфографические и грамматические ошибки
-исходной документации. Исходные диагностические сообщения сохранены дословно,
-а каждый перевод прошёл постраничную проверку.
+**v1.25.2** и обновлено 2026-10-13 до
+[**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0).
 
 Авторские права на PgBouncer принадлежат Marko Kreen и Skype Technologies OÜ
 (copyright (c) 2007-2009). Материалы распространяются по
@@ -109,12 +94,14 @@ pig.center повторно публикует документацию, нап�
 
 ## HAProxy {#haproxy}
 
-Импортировано 2026-08-16 и обновлено 2026-08-30 из официального репозитория сопровождения HAProxy
-3.4 на теге `v3.4.4`, коммите
-[`7f03ae65c286`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=7f03ae65c28605152c7a1a9ba7d9d0bcfb50f8b0).
-Английский текст получен из полных руководств `doc/intro.txt`, `doc/configuration.txt` и
-`doc/management.txt` — всего 40 128 строк — и реорганизован в 34 страницы для последовательного
-чтения.
+Импортировано 2026-08-16, обновлено 2026-08-30 и приведено 2026-10-13
+к официальному английскому снимку документации `3.4.6-66` ветки
+сопровождения HAProxy 3.4, коммит
+[`16acce1dac1d`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=16acce1dac1dcf1ad5d654204af3a5d45d0e3de8).
+Последний стабильный выпуск — `3.4.6` (тег `v3.4.6`); снимок документации включает
+изменения в ветке сопровождения, внесённые после этого выпуска.
+Английский текст получен из полных руководств `doc/intro.txt`, `doc/configuration.txt`
+и `doc/management.txt` — всего 40,216 строк — и реорганизован в 34 страницы для чтения.
 
 Авторские права на HAProxy принадлежат Willy Tarreau (copyright 2000-2026). Материалы
 распространяются по [GNU General Public License version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
@@ -140,9 +127,7 @@ pig.center повторно публикует документацию, нап�
 
 ## Этот сайт {#site}
 
-Оригинальные материалы, написанные для pig.center, — обзорные страницы, полные версии на упрощённом
-китайском и французском языках, опубликованные переводы на японский, немецкий и русский языки,
-редакторские примечания и локализованные главные страницы — публикуются по
+Оригинальные материалы, написанные для doc.pg.center, публикуются по
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), кроме страниц, к которым применима одна
 из указанных выше исходных лицензий.
 
@@ -158,4 +143,4 @@ pig.center повторно публикует документацию, нап�
 исходных материалах и встроенных зависимостях входят в исходный код модуля.
 
 Сообщить об ошибке в сведениях об атрибуции можно через
-[репозиторий сайта](https://github.com/pgsty/pig.center/issues).
+[репозиторий сайта](https://github.com/pgsty/doc.pg.center/issues).

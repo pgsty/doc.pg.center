@@ -2,7 +2,8 @@
 title: "报告示例"
 linkTitle: "报告示例"
 weight: 80
-description: "从本地站点快照打开完整、仅错误与增量 pgBadger 报告"
+description: "打开完整、仅错误与增量 pgBadger 报告"
+search_keywords: [--anonymize, anonymize]
 icon: fa-solid fa-chart-column
 module: [PGBADGER]
 categories: [参考]
@@ -12,7 +13,7 @@ upstream_name: "pgBadger website"
 upstream_ref: "site snapshot of 2026-08-15"
 ---
 
-示例内容由 pgBadger 11.8 于 2022 年 5 月生成。原始示例已与本站一起保存，因此即使无法访问上游服务器，也能继续使用报告导航、图表、样式与脚本。
+示例内容由 pgBadger 11.8 于 2022 年 5 月生成。报告导航、图表、样式与脚本均可离线使用。
 
 | 示例 | 展示内容 | 本地副本 |
 |---|---|---|
@@ -40,10 +41,10 @@ report/
 └── 11/
     ├── pgbadger.min.css
     ├── pgbadger.min.js
-    └── bundled chart and UI assets
+    └── 随附的图表与界面资源
 ```
 
-顶层索引链接到两份周报和七份日报。所有相对链接均已保留，因此只移动 `index.html` 会破坏示例；应始终保持完整目录树。
+顶层索引链接到两份周报和七份日报。只移动 `index.html` 会破坏相对链接；应始终保持完整目录树。
 
 ## 安全与隐私 {#security-and-privacy}
 

@@ -3,6 +3,7 @@ title: "Formats de sortie"
 linkTitle: "Formats de sortie"
 weight: 70
 description: "Choisissez une sortie HTML, texte, binaire, JSON ou CSV brut et combinez les fichiers intermédiaires"
+search_keywords: [--anonymize, --csv-separator, --dump-all-queries, --dump-raw-csv, --extension, --extra-files, --last-parsed, --normalized-only, --outfile, --prettify-json, --query-numbering, JSON::XS, all, anonymize, csv, csv-separator, dump, dump-all-queries, dump-raw-csv, extension, extra, extra-files, files, json, last, last-parsed, normalized, normalized-only, numbering, only, outfile, parsed, prettify, prettify-json, queries, query, query-numbering, raw, separator]
 icon: fa-solid fa-file-export
 module: [PGBADGER]
 categories: [Référence]
@@ -15,8 +16,8 @@ pgBadger sélectionne la sortie en fonction de l'extension du nom de fichier ou 
 
 | Format | Extension typique | Meilleur usage |
 |---|---|---|
-| HTML | `.html` | rapport interactif, lisible par l’humain avec graphiques |
-| Texte | `.txt` | consultation en terminal et sortie archivée brute |
+| HTML | `.html` | rapport interactif avec graphiques, destiné à la lecture humaine |
+| Texte | `.txt` | consultation dans un terminal et archivage en texte brut |
 | Binaire | `.bin` | statistiques intermédiaires fusionnables et reconstructions de rapport |
 | JSON | `.json` | intégration avec d’autres logiciels ; nécessite `JSON::XS` |
 | CSV brut | fichier de sortie choisi | extraction orientée ligne avec `--dump-raw-csv` |
@@ -31,7 +32,7 @@ $ pgbadger postgresql.log -o report.html
 
 HTML intègre normalement les scripts, styles, polices et données de rapport nécessaires à la visualisation autonome. `-X` / `--extra-files` déplace les ressources JavaScript et CSS partagées hors des rapports incrémentiels ; conservez ces ressources à côté de l’arborescence HTML.
 
-Générer du texte explicitement :
+Spécifiez explicitement une sortie texte :
 
 ```console
 $ pgbadger -x text -o report.txt postgresql.log
@@ -64,11 +65,11 @@ $ pgbadger -o day1/hour03.bin postgresql-2026-08-15_03.log
 $ pgbadger -o day1.html day1/*.bin
 ```
 
-Gardez les fichiers binaires provenant de versions compatibles de pgBadger ensemble. Consultez les notes de version pour la compatibilité des formats incrémentaux avant de mettre à jour un répertoire de rapports à long terme.
+Gardez les fichiers binaires provenant de versions compatibles de pgBadger ensemble. Consultez les notes de version pour la compatibilité des formats incrémentiels avant de mettre à jour un répertoire de rapports à long terme.
 
 ## JSON {#json-format}
 
-La sortie JSON est destinée aux consommateurs programmables, tels que les pipelines de surveillance ou de rapport :
+La sortie JSON est destinée aux programmes qui traitent les données, tels que les chaînes de supervision ou de génération de rapports :
 
 ```console
 $ pgbadger -o report.json postgresql.log
@@ -81,7 +82,7 @@ Installez `JSON::XS` en premier. Ajoutez `--prettify-json` pour améliorer la li
 La référence de commande fournit également des exports spécialisés :
 
 - `--dump-raw-csv` analyse le journal et écrit un fichier CSV orienté ligne sans générer de rapport ;
-- `--csv-separator` change le délimiteur du CSV brut ;
+- `--csv-separator` change le délimiteur du CSV brut ; la version 13.2 utilise la virgule par défaut ;
 - `--dump-all-queries` émet chaque requête après avoir remplacé les paramètres liés ;
 - `--normalized-only` écrit les requêtes normalisées ;
 - `--query-numbering` numérote la sortie texte orientée requête.

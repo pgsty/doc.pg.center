@@ -3,6 +3,7 @@ title: "Support and Contributing"
 linkTitle: "Support"
 weight: 100
 description: "Report bugs, request features, contribute patches, and find professional PostgreSQL support"
+search_keywords: [--help, help]
 icon: fa-solid fa-life-ring
 module: [PGBADGER]
 categories: [Task]

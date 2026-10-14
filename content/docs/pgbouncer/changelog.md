@@ -11,7 +11,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
 
 --------
 
-## PgBouncer 1.26.x
+## PgBouncer 1.26.x {#pgbouncer-126x}
 
 **2026-09-23  -  PgBouncer 1.26.0  -  "Ignore all previous search_path"**
 
@@ -107,7 +107,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
 
 --------
 
-## PgBouncer 1.25.x
+## PgBouncer 1.25.x {#pgbouncer-125x}
 
 **2026-05-08  -  PgBouncer 1.25.2  -  "Human touch with fresh twist in title race full of uncertainties"**
 
@@ -196,7 +196,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
 
 --------
 
-## PgBouncer 1.24.x
+## PgBouncer 1.24.x {#pgbouncer-124x}
 
 **2025-04-16  -  PgBouncer 1.24.1  -  "CVE-2025-2291 VALID UNTIL yesterday"**
 
@@ -306,7 +306,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
 
 --------
 
-## PgBouncer 1.23.x
+## PgBouncer 1.23.x {#pgbouncer-123x}
 
 **2024-08-02  -  PgBouncer 1.23.1  -  "Everything is put back in order"**
 
@@ -375,7 +375,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
 
 --------
 
-## PgBouncer 1.22.x
+## PgBouncer 1.22.x {#pgbouncer-122x}
 
 **2024-03-04  -  PgBouncer 1.22.1  -  "It's summer in Bangalore"**
 
@@ -420,7 +420,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
 
 --------
 
-## PgBouncer 1.21.x
+## PgBouncer 1.21.x {#pgbouncer-121x}
 
 **2023-10-16  -  PgBouncer 1.21.0  -  "The one with prepared statements"**
 
@@ -490,7 +490,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
 
 --------
 
-## PgBouncer 1.20.x
+## PgBouncer 1.20.x {#pgbouncer-120x}
 
 **2023-08-09  -  PgBouncer 1.20.1  -  "Optional options"**
 
@@ -561,7 +561,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
 
 --------
 
-## PgBouncer 1.19.x
+## PgBouncer 1.19.x {#pgbouncer-119x}
 
 **2023-05-31  -  PgBouncer 1.19.1  -  "Sunny Spring"**
 
@@ -630,7 +630,7 @@ This is a minor release that fixes a few recently introduced bugs:
 
 --------
 
-## PgBouncer 1.18.x
+## PgBouncer 1.18.x {#pgbouncer-118x}
 
 **2022-12-12  -  PgBouncer 1.18.0  -  "No real mystery"**
 
@@ -665,7 +665,7 @@ This is a minor release that fixes a few recently introduced bugs:
 
 --------
 
-## PgBouncer 1.17.x
+## PgBouncer 1.17.x {#pgbouncer-117x}
 
 **2022-03-23  -  PgBouncer 1.17.0  -  "A line has been drawn"**
 
@@ -734,7 +734,7 @@ This is a minor release that fixes a few recently introduced bugs:
 
 --------
 
-## PgBouncer 1.16.x
+## PgBouncer 1.16.x {#pgbouncer-116x}
 
 **2021-11-11  -  PgBouncer 1.16.1  -  "Test of depth against quiet efficiency"**
 
@@ -813,7 +813,7 @@ This is a minor release with a security fix.
 
 --------
 
-## PgBouncer 1.15.x
+## PgBouncer 1.15.x {#pgbouncer-115x}
 
 **2020-11-19  -  PgBouncer 1.15.0  -  "Ich hab noch einen Koffer in Berlin"**
 
@@ -863,7 +863,7 @@ This is a minor release with a security fix.
 
 --------
 
-## PgBouncer 1.14.x
+## PgBouncer 1.14.x {#pgbouncer-114x}
 
 **2020-06-11  -  PgBouncer 1.14.0  -  "La ritrovata magia"**
 
@@ -883,7 +883,7 @@ This is a minor release with a security fix.
 
 --------
 
-## PgBouncer 1.13.x
+## PgBouncer 1.13.x {#pgbouncer-113x}
 
 **2020-04-27  -  PgBouncer 1.13.0  -  "My favourite game"**
 
@@ -916,7 +916,7 @@ This is a minor release with a security fix.
 
 --------
 
-## PgBouncer 1.12.x
+## PgBouncer 1.12.x {#pgbouncer-112x}
 
 **2019-10-17  -  PgBouncer 1.12.0  -  "It's about learning and getting better"**
 
@@ -963,7 +963,7 @@ This release contains a variety of minor enhancements and fixes.
 
 --------
 
-## PgBouncer 1.11.x
+## PgBouncer 1.11.x {#pgbouncer-111x}
 
 **2019-08-27  -  PgBouncer 1.11.0  -  "Instinct for Greatness"**
 
@@ -995,7 +995,7 @@ This release contains a variety of minor enhancements and fixes.
 
 --------
 
-## PgBouncer 1.10.x
+## PgBouncer 1.10.x {#pgbouncer-110x}
 
 **2019-07-01  -  PgBouncer 1.10.0  -  "Afraid of the World"**
 
@@ -1030,7 +1030,7 @@ This release contains a variety of minor enhancements and fixes.
 
 --------
 
-## PgBouncer 1.9.x
+## PgBouncer 1.9.x {#pgbouncer-19x}
 
 **2018-08-13  -  PgBouncer 1.9.0  -  "Chaos Survival"**
 
@@ -1060,7 +1060,7 @@ This release contains a variety of minor enhancements and fixes.
 
 --------
 
-## PgBouncer 1.8.x
+## PgBouncer 1.8.x {#pgbouncer-18x}
 
 **2017-12-20  -  PgBouncer 1.8.1  -  "Ground-and-pound Mentality"**
 
@@ -1095,7 +1095,7 @@ This release contains a variety of minor enhancements and fixes.
 
 --------
 
-## PgBouncer 1.7.x
+## PgBouncer 1.7.x {#pgbouncer-17x}
 
 **2016-02-26  -  PgBouncer 1.7.2  -  "Finally Airborne"**
 
@@ -1191,7 +1191,7 @@ instead expected 20-30k.  Something to keep an eye on when using TLS.
 
 --------
 
-## PgBouncer 1.6.x
+## PgBouncer 1.6.x {#pgbouncer-16x}
 
 **2015-09-03  -  PgBouncer 1.6.1  -  "Studio Audience Approves"**
 
@@ -1315,7 +1315,7 @@ instead expected 20-30k.  Something to keep an eye on when using TLS.
 
 --------
 
-## PgBouncer 1.5.x
+## PgBouncer 1.5.x {#pgbouncer-15x}
 
 **2015-04-09  -  PgBouncer 1.5.5  -  "Play Dead To Win"**
 
@@ -1454,7 +1454,7 @@ GNU Make 3.81+ is required for building.
 
 --------
 
-## PgBouncer 1.4.x
+## PgBouncer 1.4.x {#pgbouncer-14x}
 
 **2011-06-16  -  PgBouncer 1.4.2  -  "Strike-First Algorithm"**
 
@@ -1583,7 +1583,7 @@ Affected OS-es: \*BSD, Solaris, Win32.
 
 --------
 
-## PgBouncer 1.3.x
+## PgBouncer 1.3.x {#pgbouncer-13x}
 
 **2010-09-09  -  PgBouncer 1.3.4  -  "Bouncer is always right"**
 
@@ -1767,7 +1767,7 @@ Affected OS-es: \*BSD, Solaris, Win32.
 
 --------
 
-## PgBouncer 1.2.x
+## PgBouncer 1.2.x {#pgbouncer-12x}
 
 **2008-08-08  -  PgBouncer 1.2.3  -  "Carefully Selected Bytes"**
 
@@ -1892,7 +1892,7 @@ Older libevent versions crash with new restart code.
 
 --------
 
-## PgBouncer 1.1.x
+## PgBouncer 1.1.x {#pgbouncer-11x}
 
 **2007-12-10  -  PgBouncer 1.1.2  -  "The Hammer"**
 
@@ -1960,7 +1960,7 @@ Older libevent versions crash with new restart code.
 
 --------
 
-## PgBouncer 1.0.x
+## PgBouncer 1.0.x {#pgbouncer-10x}
 
 **2007-06-18  -  PgBouncer 1.0.8  -  "Undead Shovel Jutsu"**
 

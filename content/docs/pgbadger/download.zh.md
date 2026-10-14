@@ -3,6 +3,7 @@ title: "下载与安装"
 linkTitle: "下载与安装"
 weight: 20
 description: "官方发布、系统软件包、运行要求与源码安装方法"
+search_keywords: [--content-size, --help, --robot, --version, --zcat, JSON::XS, Text::CSV_XS, content, content-size, help, robot, size, version, zcat, zstdcat]
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [教程]
@@ -21,7 +22,7 @@ upstream_ref: "site snapshot of 2026-08-15"
 | Debian/Ubuntu 软件包 | 基于 APT 的 Linux 发行版 | [PostgreSQL Apt 仓库](https://wiki.postgresql.org/wiki/Apt) |
 | 开发源码 | 尚未正式发布的最新代码 | [darold/pgbadger](https://github.com/darold/pgbadger) |
 
-本站文档快照基于 13.2 源码树。下载前始终应查看发布页面：本地快照为了可复现而固定，上游版本仍会继续更新。
+安装示例使用 pgBadger 13.2。下载前请查看发布页面，选择所需版本。
 
 ## 运行要求 {#requirements}
 
@@ -51,6 +52,8 @@ $ sudo yum install perl-JSON-XS
 ```
 
 可通过 `--zcat` 指定解压程序路径。显式指定一个自定义命令后，同一次调用将不能再混合处理多种压缩格式。
+
+`xz` 工具必须支持 `--robot`，以便 pgBadger 读取归档元数据。压缩 lz4 日志时请使用 `--content-size`，使 pgBadger 能确定解压后的文件大小。
 
 ## 从官方归档安装 {#install-from-tarball}
 

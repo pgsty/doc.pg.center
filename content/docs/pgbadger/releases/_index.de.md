@@ -2,7 +2,8 @@
 title: "Versionsgeschichte"
 linkTitle: "Versionsgeschichte"
 weight: 90
-description: "Vollständige Versionshinweise von pgBadger 9.x bis 13.x, normalisiert aus dem ursprünglichen Änderungsprotokoll"
+description: "Versionsgeschichte von pgBadger 9.x bis 13.x"
+search_keywords: []
 icon: fa-solid fa-clock-rotate-left
 module: [PGBADGER]
 categories: [Referenz]
@@ -11,7 +12,9 @@ upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632e
 upstream_name: "pgBadger ChangeLog"
 ---
 
-Die offizielle Website veröffentlicht Versionshinweise direkt auf ihrer Startseite. Diese Seite endet bei 12.4 und wiederholt versehentlich die Versionen 11.1–11.3 mit widersprüchlichen Datumsangaben. Diese Ausgabe verwendet den fixierten `ChangeLog` des Originalprojekts als maßgebliche Quelle, entfernt ausschließlich diese doppelten Einträge und ergänzt die späteren Versionen der Reihe 13.x. Alle Einträge bleiben vollständig erhalten und sind innerhalb jeder Reihe von der neuesten zur ältesten Version geordnet.
+Versionsgeschichte von pgBadger 9.x bis 13.x, nach Hauptversion gruppiert und von der neuesten zur ältesten Version geordnet.
+
+Ältere Versionen können andere Standardwerte oder Upgrade-Verfahren verwenden. Für die Konfiguration von Version 13.2 verwenden Sie die Befehlszeilenreferenz und den Leitfaden zur PostgreSQL-Protokollierung.
 
 | Reihe | Enthaltene Versionen | Erste bis letzte Veröffentlichung | Seite |
 |---|---|---|---|
@@ -21,4 +24,4 @@ Die offizielle Website veröffentlicht Versionshinweise direkt auf ihrer Startse
 | 10.x | 10.0–10.3 | 2018-09-09 – 2019-02-14 | [10.x lesen](/de/docs/pgbadger/releases/10/) |
 | 9.x | 9.0–9.2 | 2016-09-02 – 2017-07-27 | [9.x lesen](/de/docs/pgbadger/releases/9/) |
 
-Herunterladbare Archive und weitere Ressourcen finden Sie unter [GitHub Releases](https://github.com/darold/pgbadger/releases). Die in diesem Abschnitt genannten Veröffentlichungsdaten beschreiben die Versionsgeschichte des Originalprojekts; sie entsprechen nicht dem Downloadzeitpunkt dieses Dokumentations-Snapshots.
+Archive und weitere Downloads finden Sie unter [GitHub Releases](https://github.com/darold/pgbadger/releases).

@@ -3,6 +3,7 @@ title: "ライセンスとクレジット"
 linkTitle: "ライセンス"
 weight: 110
 description: "PostgreSQLのライセンス条項、著作者、およびバンドルされているサードパーティコンポーネント"
+search_keywords: []
 icon: fa-solid fa-scale-balanced
 module: [PGBADGER]
 categories: [リファレンス]
@@ -27,9 +28,9 @@ Darold SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 
 - pgBadgerは、Gilles Daroldによるオリジナル作品です。
 - pgBadgerロゴは、Damien Cazeilsによるオリジナルの作品です。
-- pgBadger v4.xのデザインは、「Art is code」会社から提供されました。
+- pgBadger v4.xのデザインは、「Art is code」社が制作しました。
 - このウェブサイトはGilles Daroldの作品です。
-- 貢献者は、アップストリームのChangeLog全体にクレジットされます。
+- 貢献者の名前は、アップストリームのChangeLog各所に記載されています。
 
 ## 埋め込みリソースとレポートリソース {#third-party-resources}
 
@@ -44,9 +45,4 @@ Darold SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 | Font Awesomeフォント | SIL Open Font License 1.1 |
 | Font Awesome CSS | MIT |
 
-ローカルソーススナップショットには、完全なアップストリーム `resources/LICENSE`が保持されます。バンドルされたサンプルレポートは過去に生成された成果物であり、元の埋め込み通知とリソースのバージョンが保持されます。
-
-## ドキュメントのスナップショット {#documentation-snapshot}
-
-このpig.center版では、アップストリームのドキュメントがHugoページに再編成され、ナビゲーションと中国語での読解支援が追加され、忠実度が重要な場合には正確なコマンドヘルプとChangeLogテキストが保存されます。pgBadgerのソースドキュメントはPostgreSQLライセンスの下に残ります。元のプロジェクト名、作成者、アップストリームリンクは保持されます。
-
+リソースのライセンス条項全文は`resources/LICENSE`にあります。サンプルレポートには、生成時の著作権通知とリソースのバージョンが含まれます。

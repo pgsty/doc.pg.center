@@ -3,6 +3,7 @@ title: "Форматы вывода"
 linkTitle: "Форматы вывода"
 weight: 70
 description: "Выбор вывода HTML, текста, двоичных данных, JSON или необработанного CSV и объединение промежуточных файлов"
+search_keywords: [--anonymize, --csv-separator, --dump-all-queries, --dump-raw-csv, --extension, --extra-files, --last-parsed, --normalized-only, --outfile, --prettify-json, --query-numbering, JSON::XS, all, anonymize, csv, csv-separator, dump, dump-all-queries, dump-raw-csv, extension, extra, extra-files, files, json, last, last-parsed, normalized, normalized-only, numbering, only, outfile, parsed, prettify, prettify-json, queries, query, query-numbering, raw, separator]
 icon: fa-solid fa-file-export
 module: [PGBADGER]
 categories: [Справочник]
@@ -81,7 +82,7 @@ $ pgbadger -o report.json postgresql.log
 Справочник команд также описывает специализированные способы экспорта:
 
 - `--dump-raw-csv` разбирает журнал и записывает построчный CSV без построения отчёта;
-- `--csv-separator` меняет разделитель необработанного CSV;
+- `--csv-separator` меняет разделитель необработанного CSV; в 13.2 по умолчанию используется запятая;
 - `--dump-all-queries` выводит каждый запрос после подстановки параметров привязки;
 - `--normalized-only` записывает нормализованные запросы;
 - `--query-numbering` нумерует текстовый вывод, ориентированный на запросы.

@@ -3,6 +3,7 @@ title: "Инкрементальные отчёты"
 linkTitle: "Инкрементальные отчёты"
 weight: 60
 description: "Создание ежедневных и еженедельных отчётов, управление хранением, пересборка вывода и добавление месячных сводок"
+search_keywords: [--day-report, --explode, --extra-files, --incremental, --iso-week-number, --last-parsed, --month-report, --no-week, --noreport, --outdir, --rebuild, --retention, --start-monday, day, day-report, explode, extra, extra-files, files, incremental, iso, iso-week-number, last, last-parsed, monday, month, month-report, no, no-week, noreport, number, outdir, parsed, rebuild, report, retention, start, start-monday, week]
 icon: fa-solid fa-calendar-days
 module: [PGBADGER]
 categories: [Задача]

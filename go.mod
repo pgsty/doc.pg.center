@@ -1,4 +1,4 @@
-module github.com/pgsty/pig.center
+module github.com/pgsty/doc.pg.center
 
 go 1.27.0
 

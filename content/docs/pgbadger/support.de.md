@@ -3,6 +3,7 @@ title: "Support und Mitwirkung"
 linkTitle: "Support"
 weight: 100
 description: "Fehler melden, Funktionswünsche einreichen, Patches beisteuern und professionellen PostgreSQL-Support finden"
+search_keywords: [--help, help]
 icon: fa-solid fa-life-ring
 module: [PGBADGER]
 categories: [Aufgabe]

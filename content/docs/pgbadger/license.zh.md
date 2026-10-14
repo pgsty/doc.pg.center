@@ -3,6 +3,7 @@ title: "许可证与致谢"
 linkTitle: "许可证"
 weight: 110
 description: "PostgreSQL License 条款、作者信息与内嵌第三方组件"
+search_keywords: []
 icon: fa-solid fa-scale-balanced
 module: [PGBADGER]
 categories: [参考]
@@ -13,7 +14,7 @@ upstream_name: "pgBadger LICENSE"
 
 pgBadger 是以 PostgreSQL License 发布的自由开源软件。只要保留版权与许可证声明，就可以免费使用、复制、修改与分发。
 
-## PostgreSQL License 原文 {#postgresql-license}
+## PostgreSQL License {#postgresql-license}
 
 Copyright (c) 2012-2026, Gilles Darold
 
@@ -22,8 +23,6 @@ Permission to use, copy, modify, and distribute this software and its documentat
 IN NO EVENT SHALL Darold BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS, ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF Darold HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 Darold SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE SOFTWARE PROVIDED HEREUNDER IS ON AN “AS IS” BASIS, AND Darold HAS NO OBLIGATIONS TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
-
-以上保留英文许可证原文，以免翻译改变法律含义。
 
 ## 作者与设计致谢 {#credits}
 
@@ -46,9 +45,5 @@ pgBadger 内嵌了修改版 `SQL::Beautify` Perl 模块，版权 © 2009 Jonas K
 | Font Awesome 字体 | SIL Open Font License 1.1 |
 | Font Awesome CSS | MIT |
 
-本地源码快照保留了完整上游 `resources/LICENSE`。随站点打包的报告示例是历史生成物，也保留原有的内嵌声明与资源版本。
-
-## 文档快照说明 {#documentation-snapshot}
-
-本站把上游文档重新组织成 Hugo 页面，增加了导航与中文阅读辅助；命令帮助和 ChangeLog 等需要逐字核对的内容仍保留原文。pgBadger 源码文档继续遵循 PostgreSQL License，项目名称、作者信息与上游链接均予以保留。
+第三方资源的授权声明见 `resources/LICENSE`。报告示例包含各自的版权声明与资源版本。
 

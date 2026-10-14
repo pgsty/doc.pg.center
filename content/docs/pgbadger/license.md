@@ -3,6 +3,7 @@ title: "License and Credits"
 linkTitle: "License"
 weight: 110
 description: "PostgreSQL License terms, authorship, and bundled third-party components"
+search_keywords: []
 icon: fa-solid fa-scale-balanced
 module: [PGBADGER]
 categories: [Reference]
@@ -44,9 +45,5 @@ Generated-report resources have their own notices, including:
 | Font Awesome font | SIL Open Font License 1.1 |
 | Font Awesome CSS | MIT |
 
-The local source snapshot retains the complete upstream `resources/LICENSE`. The bundled example reports are historical generated artifacts and retain their original embedded notices and resource versions.
-
-## Documentation snapshot {#documentation-snapshot}
-
-This pig.center edition reorganizes the upstream documentation into Hugo pages, adds navigation and Chinese reading aids, and preserves exact command help and ChangeLog text where fidelity matters. The pgBadger source documentation remains under the PostgreSQL License; original project names, authorship, and upstream links are retained.
+Third-party license notices are listed in `resources/LICENSE`. The example reports include their own copyright notices and resource versions.
 

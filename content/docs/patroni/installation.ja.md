@@ -38,7 +38,7 @@ sudo apt-get install python3-psycopg2  # install psycopg2 module on Debian/Ubunt
 sudo yum install python3-psycopg2      # install psycopg2 on RedHat/Fedora/CentOS
 ```
 
-2. pipでPatroniをインストールするときに、[依存関係の一覧](/ja/docs/patroni/installation#extras)に`psycopg`、`psycopg2`、`psycopg2-binary`のいずれかを指定する。
+2. pipでPatroniをインストールするときに、[依存関係の一覧](/ja/docs/patroni/installation#extras)に`psycopg3`、`psycopg2`、`psycopg2-binary`のいずれかを指定する。
 
 <a id="extras"></a>
 
@@ -85,10 +85,10 @@ all
 上記のすべて（psycopg系を除く）
 
 psycopg3  
-`psycopg\[binary\]\>=3.0.0`モジュール
+`psycopg[binary]>=3.0.0`モジュール
 
 psycopg2  
-`psycopg2\>=2.5.4`モジュール
+`psycopg2>=2.5.4`モジュール
 
 psycopg2-binary  
 `psycopg2-binary`モジュール
@@ -184,7 +184,7 @@ patronictl pause --wait
 次に、クラスターの各ノードでOSに応じたパッケージのアップグレードを実行します。
 
 ```bash
-apt-get update && apt-get install patroni patroni-etcd
+apt-get update && apt-get install patroni
 ```
 
 各ノードでPatroniデーモンのプロセスを再起動します。

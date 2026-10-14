@@ -11,7 +11,7 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/kubernetes.html"
 ---
 
 <a id="kubernetes"></a>
-Patroni can use Kubernetes objects in order to store the state of the cluster and manage the leader key. That makes it capable of operating Postgres in Kubernetes environment without any consistency store, namely, one doesn't need to run an extra Etcd deployment. There are two different type of Kubernetes objects Patroni can use to store the leader and the configuration keys, they are configured with the `kubernetes.use_endpoints` or `PATRONI_KUBERNETES_USE_ENDPOINTS` environment variable.
+Patroni can use Kubernetes objects in order to store the state of the cluster and manage the leader key. That makes it capable of operating Postgres in Kubernetes environment without any consistency store, namely, one doesn't need to run an extra Etcd deployment. There are two different types of Kubernetes objects Patroni can use to store the leader and the configuration keys, the object type is selected with the `kubernetes.use_endpoints` configuration option or the `PATRONI_KUBERNETES_USE_ENDPOINTS` environment variable.
 
 --------
 
@@ -60,12 +60,12 @@ Note that if you migrate from default role labels to custom ones, you can reduce
 >   tmp_role: primary
 > ```
 
-3.  Add your custom role label (e.g., set `kubernetes.leader_label_value=primary`). Once pods are restarted they will get following new labels set by Patroni:
+3.  Add your custom role label (e.g., set `kubernetes.leader_label_value=leader`). Once pods are restarted they will get following new labels set by Patroni:
 
 > ```yaml
 > labels:
 >   cluster-name: foo
->   role: primary
+>   role: leader
 >   tmp_role: primary
 > ```
 
@@ -74,7 +74,7 @@ Note that if you migrate from default role labels to custom ones, you can reduce
 > ```yaml
 > selector:
 >   cluster-name: foo
->   role: primary
+>   role: leader
 > ```
 
 5.  Finally, remove the temporary label from your configuration and update all pods.
@@ -82,7 +82,7 @@ Note that if you migrate from default role labels to custom ones, you can reduce
 > ```yaml
 > labels:
 >   cluster-name: foo
->   role: primary
+>   role: leader
 > ```
 
 --------

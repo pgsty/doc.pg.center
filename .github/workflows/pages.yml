@@ -1,4 +1,4 @@
-name: Build and Deploy pig.center
+name: Build and Deploy doc.pg.center
 
 on:
   push:
@@ -73,7 +73,7 @@ jobs:
           HUGO_ENV: production
         run: |
           hugo --cleanDestinationDir --gc --minify --panicOnWarning \
-            --printPathWarnings --baseURL "${{ steps.pages.outputs.base_url }}/"
+            --printPathWarnings
 
       - name: Upload Pages artifact
         if: github.ref == 'refs/heads/main'

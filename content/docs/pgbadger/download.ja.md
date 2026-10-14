@@ -3,6 +3,7 @@ title: "ダウンロードとインストール"
 linkTitle: "ダウンロードとインストール"
 weight: 20
 description: "公式リリース、パッケージ、要件、ソースからのインストール"
+search_keywords: [--content-size, --help, --robot, --version, --zcat, JSON::XS, Text::CSV_XS, content, content-size, help, robot, size, version, zcat, zstdcat]
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [チュートリアル]
@@ -21,7 +22,7 @@ upstream_ref: "site snapshot of 2026-08-15"
 | Debian/Ubuntuパッケージ | APTを使用するLinuxディストリビューション | [PostgreSQL Apt Repository](https://wiki.postgresql.org/wiki/Apt) |
 | 開発用ソース | 未リリースの最新コード | [darold/pgbadger](https://github.com/darold/pgbadger) |
 
-このサイトのドキュメントスナップショットは、13.2のソースツリーに基づいています。ダウンロード前に必ずリリースページを確認してください。ローカルのスナップショットは意図的に固定されていますが、アップストリームのリリースは引き続き更新されます。
+以下のインストール例ではpgBadger 13.2を使用します。ダウンロード前にリリースページで利用するバージョンを確認してください。
 
 ## 要件 {#requirements}
 
@@ -51,6 +52,8 @@ $ sudo yum install perl-JSON-XS
 ```
 
 展開プログラムのパスを変更するには、`--zcat`を使用します。独自のコマンドを1つ指定すると、同じ実行内で異なる圧縮形式を混在させることはできなくなります。
+
+pgBadgerがアーカイブのメタデータを読み取れるよう、`xz`ユーティリティーは`--robot`に対応している必要があります。lz4ログは`--content-size`を指定して圧縮してください。これにより、pgBadgerが非圧縮時のサイズを判断できます。
 
 ## 公式tarballからインストールする {#install-from-tarball}
 

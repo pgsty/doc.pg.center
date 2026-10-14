@@ -3,6 +3,7 @@ title: "Lizenz und Urhebernachweise"
 linkTitle: "Lizenz"
 weight: 110
 description: "Bedingungen der PostgreSQL-Lizenz, Urheberschaft und eingebundene Drittanbieterkomponenten"
+search_keywords: []
 icon: fa-solid fa-scale-balanced
 module: [PGBADGER]
 categories: [Referenz]
@@ -44,8 +45,4 @@ Für Ressourcen in erzeugten Berichten gelten eigene Lizenzhinweise, darunter:
 | Schriftart von Font Awesome | SIL Open Font License 1.1 |
 | Font Awesome CSS | MIT |
 
-Der lokale Quellcode-Snapshot enthält weiterhin die vollständige Datei `resources/LICENSE` des Originalprojekts. Die mitgelieferten Beispielberichte sind historisch erzeugte Artefakte und enthalten unverändert ihre ursprünglichen Hinweise und Ressourcenversionen.
-
-## Dokumentations-Snapshot {#documentation-snapshot}
-
-Diese Ausgabe auf pig.center gliedert die Originaldokumentation in Hugo-Seiten, ergänzt Navigation und Lesehilfen für die chinesische Fassung und übernimmt die Befehlszeilenhilfe sowie den ChangeLog dort wortgetreu, wo höchste Genauigkeit erforderlich ist. Die Quelldokumentation von pgBadger bleibt unter der PostgreSQL-Lizenz; die ursprünglichen Projektnamen, Urheberangaben und Links zum Originalprojekt bleiben erhalten.
+Die Datei `resources/LICENSE` enthält die Lizenzen der Ressourcen. Die Beispielberichte enthalten die Lizenzhinweise ihrer Komponenten.

@@ -3,6 +3,7 @@ title: "输出格式"
 linkTitle: "输出格式"
 weight: 70
 description: "选择 HTML、文本、二进制、JSON 或原始 CSV 输出，并合并中间数据文件"
+search_keywords: [--anonymize, --csv-separator, --dump-all-queries, --dump-raw-csv, --extension, --extra-files, --last-parsed, --normalized-only, --outfile, --prettify-json, --query-numbering, JSON::XS, all, anonymize, csv, csv-separator, dump, dump-all-queries, dump-raw-csv, extension, extra, extra-files, files, json, last, last-parsed, normalized, normalized-only, numbering, only, outfile, parsed, prettify, prettify-json, queries, query, query-numbering, raw, separator]
 icon: fa-solid fa-file-export
 module: [PGBADGER]
 categories: [参考]
@@ -81,7 +82,7 @@ $ pgbadger -o report.json postgresql.log
 命令参考还提供以下专用导出模式：
 
 - `--dump-raw-csv` 解析日志并输出逐行 CSV，不再生成报告；
-- `--csv-separator` 修改原始 CSV 分隔符；
+- `--csv-separator` 修改原始 CSV 分隔符；13.2 默认使用逗号（`,`）；
 - `--dump-all-queries` 在替换绑定参数后输出所有查询；
 - `--normalized-only` 输出归一化查询；
 - `--query-numbering` 为查询类文本输出编号。
