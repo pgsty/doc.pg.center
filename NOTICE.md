@@ -42,7 +42,7 @@ repository; published license texts remain in `static/third_party/`.
 
 ## Theme and artwork
 
-The site uses OINK 1.2.0 as a pinned Hugo module. OINK is licensed under Apache
+The site uses OINK 1.3.0 as a pinned Hugo module. OINK is licensed under Apache
 License 2.0 and carries its upstream and bundled-dependency notices in the module.
 
 The PostgreSQL elephant (Slonik) at `static/img/slonik.svg` and

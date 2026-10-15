@@ -29,7 +29,7 @@ there is no `/docs/` index or URL prefix.
 
 ## Develop
 
-Install Hugo Extended, Go, Python 3, and Node.js. CI uses Hugo 0.165.0 and Go 1.27.0.
+Install Hugo Extended, Go, Python 3, and Node.js. CI uses Hugo 0.166.0 and Go 1.27.0.
 The theme is pinned in `go.mod`; no local theme checkout is required.
 The local checkout is `~/www/doc.pg.center`.
 
@@ -41,7 +41,10 @@ make build    # Generate the production site in public/
 
 `make check` uses an external temporary directory and removes it when finished.
 `make dev` uses `~/pgsty/oink` for theme development. Override the theme path with
-`make dev OINK_DIR=/path/to/oink`.
+`make dev OINK_LOCAL=/path/to/oink PORT=1314` (`OINK_DIR` remains supported).
+Use Hugo Extended 0.166.0 for the current local theme. Development bypasses
+OINK vendor files; both workspaces remain disabled. Production targets clear
+inherited local replacements and keep the module pin.
 Run `python3 scripts/report-coverage.py` to see the current page coverage.
 
 See [AGENTS.md](AGENTS.md) for the repository layout and maintenance workflow:
@@ -57,7 +60,7 @@ production branch. GitHub Actions validates changes; **Cloudflare Pages** will
 build and publish the site through its GitHub integration.
 
 Configure the Cloudflare Pages project with the repository root, build command
-`make build`, and output directory `public`. Set `HUGO_VERSION=0.165.0`,
+`make build`, and output directory `public`. Set `HUGO_VERSION=0.166.0`,
 `GO_VERSION=1.27.0`, `GOWORK=off`, and `HUGO_MODULE_WORKSPACE=off`; leave
 `HUGO_MODULE_REPLACEMENTS` unset. Add `doc.pg.center` as the custom domain.
 The source configuration keeps that domain as the canonical production URL.
