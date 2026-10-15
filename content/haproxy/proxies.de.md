@@ -8040,7 +8040,7 @@ Es wird außerdem empfohlen, Informationen, die *nicht* vom Inhalt auf Schicht 7
 
 In einem TCP-Proxy lassen sich mit "tcp-request content"-Regeln problemlos Inhalte auf Schicht 7 abgleichen. HTTP-spezifische ACL-Abgleiche können den Pufferinhalt vorläufig parsen, bevor sie die benötigten Daten extrahieren. Lässt sich der gepufferte Inhalt nicht als gültige HTTP-Nachricht parsen, passt die ACL nicht. Dabei wird genau derselbe Parser wie bei der übrigen HTTP-Verarbeitung verwendet, sodass keine Gefahr abweichender Interpretation besteht. In einem HTTP-Frontend oder HTTP-Backend ist garantiert, dass die HTTP-Inhalte bereits bei der ersten Auswertung der Regel verfügbar sind: Das HTTP-Parsen erfolgt früh in der Verbindungsverarbeitung auf Sitzungsebene. Für solche Proxys sind "http-request"-Regeln jedoch wesentlich naheliegender und werden empfohlen.
 
-Auch das Verfolgen von layer7-Informationen ist möglich, sofern sie bei der Verarbeitung der Regel vorliegen. Sind die zu verfolgenden Daten noch nicht verfügbar, kann die Regelverarbeitung bis zum Ablauf der Prüfwartezeit warten.
+Auch das Verfolgen von Schicht-7-Informationen ist möglich, sofern sie bei der Verarbeitung der Regel vorliegen. Sind die zu verfolgenden Daten noch nicht verfügbar, kann die Regelverarbeitung bis zum Ablauf der Prüfwartezeit warten.
 
 Beispiel:
 

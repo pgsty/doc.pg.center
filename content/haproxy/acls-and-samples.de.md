@@ -4655,9 +4655,9 @@ fc_src_is_local: boolean Gibt true zurück, wenn die Quelladresse der eingehende
 
 fc_src_port: integer Gibt einen Ganzzahlwert zurück, der dem TCP-Quellport der Verbindung auf der Client-Seite entspricht. Nur Regeln vom Typ "tcp-request connection" können diese Adresse ändern. Weitere Details siehe "src-port".
 
-fc_unacked: integer Gibt den vom Kernel für die Client-Verbindung gemessenen unacked-Zähler zurück. Wenn die Server-Verbindung nicht hergestellt ist, wenn die Verbindung kein TCP ist oder wenn das Betriebssystem TCP_INFO nicht unterstützt, beispielsweise Linux-Kerne vor 2.4, schlägt der Sample-Abruf fehl.
+fc_unacked: integer Gibt den vom Kernel für die Client-Verbindung gemessenen unacked-Zähler zurück. Wenn die Server-Verbindung nicht hergestellt ist, wenn die Verbindung kein TCP ist oder wenn das Betriebssystem TCP_INFO nicht unterstützt, beispielsweise Linux-Kernels vor 2.4, schlägt der Sample-Abruf fehl.
 
-fe_client_timeout: integer Gibt den Konfigurationswert in Millisekunden für den Client-Timeout des aktuellen Frontends zurück. Dieser Timeout kann durch eine "set-timeout"-Regel überschrieben werden.
+fe_client_timeout: integer Gibt den Konfigurationswert in Millisekunden für die Zeitüberschreitung für den Client des aktuellen Frontends zurück. Diese Zeitüberschreitung kann durch eine Regel "set-timeout" überschrieben werden.
 
 fe_defbe: string Gibt eine Zeichenkette zurück, die den Namen des Standard-Backends des Frontends enthält. Sie kann in Frontends verwendet werden, um zu überprüfen, welches Backend Anfragen standardmäßig behandelt.
 
@@ -4665,7 +4665,7 @@ fe_id: integer Gibt einen Ganzzahlwert zurück, der die ID des aktuellen Fronten
 
 fe_name: string Gibt eine Zeichenkette zurück, die den Namen des aktuellen Frontends enthält. Sie kann in Backends verwendet werden, um zu überprüfen, von welchem Frontend aus aufgerufen wurde, oder um alle Benutzer, die über dasselbe Frontend kommen, an denselben Server zu binden.
 
-fe_tarpit_timeout: integer Gibt den Konfigurationswert in Millisekunden für den Tarpit-Timeout des aktuellen Frontends zurück. Dieser Timeout kann durch eine "set-timeout"-Regel überschrieben werden.
+fe_tarpit_timeout: integer Gibt den Konfigurationswert in Millisekunden für die Zeitüberschreitung für die Tarpit des aktuellen Frontends zurück. Diese Zeitüberschreitung kann durch eine Regel "set-timeout" überschrieben werden.
 
 req.bytes_in: integer Gibt die Anzahl der vom Client empfangenen Bytes zurück. Der Wert entspricht dem, was von HAProxy empfangen wurde, einschließlich einiger Header und eines gewissen internen Kodierungsaufwands. Anfragekompression beeinflusst den hier gemeldeten Wert nicht.
 
@@ -4886,7 +4886,7 @@ Gibt die durchschnittliche Rate zurück, mit der Störungen der Frontend-Verbind
 sc_gpc_rate(<idx>,<ctr>[,<table>]): integer
 ```
 
-Gibt die durchschnittliche Erhöhungsrate des Allzweckzählers am Index `<idx>` des Arrays zurück, das dem verfolgten Zähler mit der ID `<ctr>` in der Tabelle des aktuellen Proxys oder in der angegebenen Stick Table `<table>` zugeordnet ist. Gibt die Häufigkeit an, mit der der Zähler gpc über den konfigurierten Zeitraum erhöht wurde. `<idx>` ist eine Ganzzahl zwischen 0 und 99 und `<ctr>` eine Ganzzahl zwischen 0 und 2. Das Zählerarray 'gpc_rate' muss in der Stick Table gespeichert sein, damit ein Wert zurückgegeben wird, da 'gpc' nur die Ereignisanzahl enthält. Dieser Abruf gilt nur für den Array-data_type 'gpc_rate', nicht für die älteren data_types 'gpc0_rate' oder 'gpc1_rate'. Siehe auch "table_gpc_rate", "sc_get_gpc" und "sc_inc_gpc".
+Gibt die durchschnittliche Inkrementrate des Allzweckzählers am Index `<idx>` des Arrays zurück, das dem verfolgten Zähler mit der ID `<ctr>` in der Tabelle des aktuellen Proxys oder in der angegebenen Stick Table `<table>` zugeordnet ist. Gibt die Häufigkeit an, mit der der Zähler gpc über den konfigurierten Zeitraum erhöht wurde. `<idx>` ist eine Ganzzahl zwischen 0 und 99 und `<ctr>` eine Ganzzahl zwischen 0 und 2. Das Zählerarray 'gpc_rate' muss in der Stick Table gespeichert sein, damit ein Wert zurückgegeben wird, da 'gpc' nur die Ereignisanzahl enthält. Dieser Abruf gilt nur für den Array-data_type 'gpc_rate', nicht für die älteren data_types 'gpc0_rate' oder 'gpc1_rate'. Siehe auch "table_gpc_rate", "sc_get_gpc" und "sc_inc_gpc".
 
 <a id="entry-7-3-3-sc-gpc0-rate-integer"></a>
 
