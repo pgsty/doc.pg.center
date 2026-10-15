@@ -5849,7 +5849,7 @@ log-format "$HAPROXY_HTTP_LOG_FMT fs=<%[fs.debug_str]> bs=<%[bs.debug_str]>"
 
 fs.id: integer 返回客户端侧多路复用器的流 ID。由多路复用器负责返回适当的信息。例如，在原始 TCP 上，始终返回 0，因为不存在流。
 
-fs.rst_code: integer 返回客户端在当前流中接收到的重置码。返回客户端发送的 H2 RST_STREAM 帧或 QUIC STOP_SENDING 帧的重置码。若未接收到中止事件，或客户端流非 H2/QUIC 流，则样本提取失败。
+fs.rst_code: integer 返回从客户端接收到的当前流的重置码。返回客户端发送的 H2 RST_STREAM 帧或 QUIC STOP_SENDING 帧的重置码。若未接收到中止事件，或客户端流非 H2/QUIC 流，则样本提取失败。
 
 ssl_bc: boolean 当后端连接通过 SSL/TLS 传输层建立并已在本地解密时返回 true。这意味着出站连接是向启用了“ssl”选项的服务器发起的。该字段可用于 tcp-check 或 http-check 规则集。
 
@@ -5857,7 +5857,7 @@ ssl_bc_alg_keysize: integer
 返回在通过 SSL/TLS 传输层建立出站连接时所支持的对称加密算法密钥长度（单位：位）。该字段可在 tcp-check 或 http-check 规则集中使用。
 
 ssl_bc_alpn: string
-此字段用于从通过 TLS 传输层建立的出站连接中提取应用层协议协商（ALPN）字段。结果为一个字符串，包含与服务器协商确定的协议名称。SSL 库必须在编译时启用了对 TLS 扩展的支持（请检查 HAProxy -vv）。请注意，除非在 "server" 行上使用 "alpn" 关键字指定了协议列表，否则不会通告 TLS ALPN 扩展。此外，服务器并不强制必须从该列表中选择协议，也可能请求其他协议。TLS ALPN 扩展旨在取代 TLS NPN 扩展。参见 "ssl_bc_npn"。该字段可用于 tcp-check 或 http-check 规则集中。
+此字段用于从通过 TLS 传输层建立的出站连接中提取应用层协议协商（ALPN）字段。结果为一个字符串，包含与服务器协商确定的协议名称。SSL 库必须在编译时启用了对 TLS 扩展的支持（请检查 haproxy -vv）。请注意，除非在 "server" 行上使用 "alpn" 关键字指定了协议列表，否则不会通告 TLS ALPN 扩展。此外，服务器并不强制必须从该列表中选择协议，也可能请求其他协议。TLS ALPN 扩展旨在取代 TLS NPN 扩展。参见 "ssl_bc_npn"。该字段可用于 tcp-check 或 http-check 规则集中。
 
 ssl_bc_cipher: string
 当出站连接通过 SSL/TLS 传输层建立时，返回所使用的加密套件名称。可在 tcp-check 或 http-check 规则集中使用。
@@ -5899,7 +5899,7 @@ ssl_bc_is_resumed: boolean
 当后端连接通过 SSL/TLS 传输层建立，且新创建的 SSL 会话是通过缓存的会话或 TLS 票据恢复时，返回 true。该字段可用于 tcp-check 或 http-check 规则集。
 
 ssl_bc_npn: string
-此字段用于从通过 TLS 传输层建立的出站连接中提取“下一协议协商”（Next Protocol Negotiation）字段。结果为一个字符串，包含与服务器协商确定的协议名称。SSL 库必须在编译时启用了对 TLS 扩展的支持（请检查 HAProxy -vv）。请注意，除非在 "server" 行中通过 "npn" 关键字指定了协议列表，否则不会通告 TLS NPN 扩展。此外，服务器并不强制必须从该列表中选择协议，也可能使用其他协议。请注意，TLS NPN 扩展已被 ALPN 取代。该字段可在 tcp-check 或 http-check 规则集中使用。
+此字段用于从通过 TLS 传输层建立的出站连接中提取“下一协议协商”（Next Protocol Negotiation）字段。结果为一个字符串，包含与服务器协商确定的协议名称。SSL 库必须在编译时启用了对 TLS 扩展的支持（请检查 haproxy -vv）。请注意，除非在 "server" 行中通过 "npn" 关键字指定了协议列表，否则不会通告 TLS NPN 扩展。此外，服务器并不强制必须从该列表中选择协议，也可能使用其他协议。请注意，TLS NPN 扩展已被 ALPN 取代。该字段可在 tcp-check 或 http-check 规则集中使用。
 
 ssl_bc_protocol: string
 返回通过 SSL/TLS 传输层建立出站连接时所使用的协议名称。可在 tcp-check 或 http-check 规则集中使用。
@@ -6039,7 +6039,7 @@ ssl_f_notafter: string
 返回前端以格式化字符串形式呈现的证书有效期截止日期，格式为 YYMMDDhhmmss[Z]，该日期对应于当前连接通过 SSL/TLS 传输层建立时的前端所呈现的证书有效期。
 
 ssl_f_notbefore: string
-返回前端以格式化字符串形式呈现的起始日期，格式为 YYMMDDhhmmss[Z]，表示通过 SSL/TLS 传输层建立入站连接时的时间。
+返回前端所呈现证书的有效期起始日期，以 YYMMDDhhmmss[Z] 格式化字符串表示，当前入站连接通过 SSL/TLS 传输层建立时可用。
 
 <a id="entry-7-3-4-ssl-f-s-dn-string"></a>
 
@@ -6079,7 +6079,7 @@ ssl_fc_alg_keysize: integer
 返回在通过 SSL/TLS 传输层建立的入站连接中，所支持的对称加密算法密钥长度（以比特为单位）。
 
 ssl_fc_alpn: string
-此字段用于从通过 TLS 传输层建立且由 HAProxy 本地解密的入站连接中提取应用层协议协商（ALPN）字段。结果为一个字符串，包含客户端通告的协议名称。SSL 库必须在启用 TLS 扩展支持的情况下编译（请检查 HAProxy -vv）。请注意，除非“bind”行上的“alpn”关键字指定了协议列表，否则不会通告 TLS ALPN 扩展。此外，客户端并不强制必须从该列表中选择协议，也可能请求其他协议。TLS ALPN 扩展旨在取代 TLS NPN 扩展。参见 "ssl_fc_npn"。
+此字段用于从通过 TLS 传输层建立且由 HAProxy 本地解密的入站连接中提取应用层协议协商（ALPN）字段。结果为一个字符串，包含客户端通告的协议名称。SSL 库必须在启用 TLS 扩展支持的情况下编译（请检查 haproxy -vv）。请注意，除非“bind”行上的“alpn”关键字指定了协议列表，否则不会通告 TLS ALPN 扩展。此外，客户端并不强制必须从该列表中选择协议，也可能请求其他协议。TLS ALPN 扩展旨在取代 TLS NPN 扩展。参见 "ssl_fc_npn"。
 
 ssl_fc_cipher: string
 返回通过 SSL/TLS 传输层建立的入站连接所使用的加密套件名称。
@@ -6282,13 +6282,13 @@ ssl_fc_has_crt: boolean 当通过 SSL/TLS 传输层的入站连接中存在客�
 ssl_fc_has_early: boolean 若已发送早期数据且握手尚未完成，则返回 true。由于存在安全风险，建议能够拒绝此类请求，或通过“wait-for-handshake”动作等待握手完成后再处理。参见 "ssl_fc_early_rcvd"。
 
 ssl_fc_has_sni: boolean
-此检查用于判断通过 SSL/TLS 传输层建立的入站连接中是否包含服务器名称指示 TLS 扩展（SNI）。当入站连接包含 TLS SNI 字段时，返回 true。此功能要求 SSL 库在编译时启用了对 TLS 扩展的支持（请检查 HAProxy -vv）。
+此检查用于判断通过 SSL/TLS 传输层建立的入站连接中是否包含服务器名称指示 TLS 扩展（SNI）。当入站连接包含 TLS SNI 字段时，返回 true。此功能要求 SSL 库在编译时启用了对 TLS 扩展的支持（请检查 haproxy -vv）。
 
 ssl_fc_is_resumed: boolean
 返回值为 true，表示通过 SSL 会话缓存或 TLS 票据，在基于 SSL/TLS 传输层的入站连接上成功恢复了 SSL/TLS 会话。
 
 ssl_fc_npn: string
-此字段从通过 TLS 传输层建立且由 HAProxy 本地解密的入站连接中提取“下一协议协商”（Next Protocol Negotiation）字段。结果为一个字符串，包含客户端通告的协议名称。SSL 库必须在启用 TLS 扩展支持的情况下编译（请检查 HAProxy -vv）。请注意，除非“bind”行上的“npn”关键字指定了协议列表，否则不会通告 TLS NPN 扩展。此外，客户端并不强制必须从该列表中选择协议，也可能请求其他协议。请注意，TLS NPN 扩展已被 ALPN 取代。
+此字段从通过 TLS 传输层建立且由 HAProxy 本地解密的入站连接中提取“下一协议协商”（Next Protocol Negotiation）字段。结果为一个字符串，包含客户端通告的协议名称。SSL 库必须在启用 TLS 扩展支持的情况下编译（请检查 haproxy -vv）。请注意，除非“bind”行上的“npn”关键字指定了协议列表，否则不会通告 TLS NPN 扩展。此外，客户端并不强制必须从该列表中选择协议，也可能请求其他协议。请注意，TLS NPN 扩展已被 ALPN 取代。
 
 ssl_fc_protocol: string 返回通过 SSL/TLS 传输层建立的入站连接所使用的协议名称。
 
@@ -6343,9 +6343,9 @@ ssl_fc_sigalgs_bin([<filter_option>]): binary
 设置 `<filter_option>` 可用于过滤返回的数据。可接受的值：0：返回完整的密码套件列表（默认）；1：从输出中排除 GREASE（RFC8701）值。
 
 ssl_fc_sni: string
-此字段用于从通过 SSL/TLS 传输层建立且由 HAProxy 本地解密的入站连接中提取 Server Name Indication TLS 扩展（SNI）字段。当存在时，结果通常为一个匹配 HTTPS 主机名的字符串（长度不超过 253 个字符）。SSL 库必须在编译时启用 TLS 扩展支持（请检查 HAProxy -vv）。
+此字段用于从通过 SSL/TLS 传输层建立且由 HAProxy 本地解密的入站连接中提取 Server Name Indication TLS 扩展（SNI）字段。当存在时，结果通常为一个匹配 HTTPS 主机名的字符串（长度不超过 253 个字符）。SSL 库必须在编译时启用 TLS 扩展支持（请检查 haproxy -vv）。
 
-此样本提取与上方的 "req.ssl_sni" 不同之处在于，它作用于 HAProxy 正在解密的连接，而非仅盲目转发的 SSL 内容。另请参见下方的 "ssl_fc_sni_end" 和 "ssl_fc_sni_reg"。此功能要求 SSL 库在构建时启用了 TLS 扩展支持（请检查 HAProxy -vv）。
+此样本提取与上方的 "req.ssl_sni" 不同之处在于，它作用于 HAProxy 正在解密的连接，而非仅盲目转发的 SSL 内容。另请参见下方的 "ssl_fc_sni_end" 和 "ssl_fc_sni_reg"。此功能要求 SSL 库在构建时启用了 TLS 扩展支持（请检查 haproxy -vv）。
 
 请注意！除非在非常特定的条件下，通常不应将此字段用作 HTTP “Host” 头字段的替代。例如，当将 HTTPS 连接转发至服务器时，SNI 字段必须使用 "req.hdr(host)" 从 HTTP Host 头字段获取，而非从前端 SNI 值获取。原因在于，SNI 仅用于选择服务器端将呈现的证书，客户端随后可发送与证书中名称匹配但 Host 值不同的请求。因此，"ssl_fc_sni" 通常不应作为 "sni" 服务器关键字的参数使用，除非后端以 TCP 模式运行。
 
@@ -6425,7 +6425,7 @@ ssl_s_version: integer
 
 txn.timer.user: integer 客户端视角下估算的总时间，指代理接收请求的时刻至两端连接关闭时刻之间的实际耗时，不包含空闲时间。该值等效于日志格式中的 %Tu，单位为毫秒（ms）。详细信息请参见 [第 8.4 节](/zh/haproxy/configuration-logging/#section-8-4) “时间事件”
 
-### 7.3.5. 从缓冲区内容获取样本（层 6） {#section-7-3-5}
+### 7.3.5. 从缓冲区内容获取样本（第 6 层） {#section-7-3-5}
 
 从缓冲区内容中提取样本的方式与上述其他样本提取方式略有不同，因为所采样的数据是瞬时的。这些数据仅在可用时才能使用，一旦转发便会丢失。因此，例如在请求过程中从缓冲区内容中提取的样本无法用于响应中。即使在数据提取过程中，其内容也可能发生变化。在某些情况下，有必要设置一定的延迟或结合多种样本提取方法，以确保所期望的数据完整且可用，例如通过 TCP 请求内容检查。有关该主题的更详细信息，请参阅“tcp-request content”关键字。
 
@@ -6632,7 +6632,7 @@ req.rdp_cookie_cnt([<name>]): 整数匹配
 
 req.ssl_alpn: string 返回一个字符串，其中包含客户端在 SSL ClientHello 消息中发送的 Application-Layer Protocol Negotiation（ALPN）TLS 扩展（RFC7301）的值。
 请注意，此字段仅适用于请求缓冲区中原始获取的内容，不适用于通过 SSL 数据层解密后的内容，因此在使用 "ssl" 选项的 "bind" 语句中无法生效。
-此字段可用于 ACL 中，根据 TLS 客户端的 ALPN 优先级做出路由决策，如以下示例所示。另见 "ssl_fc_alpn"。此样本提取 只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
+此字段可用于 ACL 中，根据 TLS 客户端的 ALPN 优先级做出路由决策，如以下示例所示。另见 "ssl_fc_alpn"。此样本提取只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
 
 示例：
 
@@ -6652,7 +6652,7 @@ default_backend bk_default
 req.ssl_cipherlist binary
 ```
 
-返回客户端在 TLS ClientHello 内容中报告的支持的对称加密算法列表的二进制形式。请注意，此功能仅适用于请求缓冲区中原始内容，不适用于通过 SSL 数据层解密后的内容，因此在使用了 "ssl" 选项的 "bind" 语句中无法生效。请参考 "ssl_fc_cipherlist_bin"，该选项为 SSL 绑定的等效配置，可在指定 "ssl" 选项时使用。此样本提取 只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
+返回客户端在 TLS ClientHello 内容中报告的支持的对称加密算法列表的二进制形式。请注意，此功能仅适用于请求缓冲区中原始内容，不适用于通过 SSL 数据层解密后的内容，因此在使用了 "ssl" 选项的 "bind" 语句中无法生效。请参考 "ssl_fc_cipherlist_bin"，该选项为 SSL 绑定的等效配置，可在指定 "ssl" 选项时使用。此样本提取只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
 
 示例：
 
@@ -6665,11 +6665,11 @@ server fe3  ${htst_fe3_addr}:${htst_fe3_port}
 ```
 
 req.ssl_ec_ext: boolean
-返回一个布尔值，标识客户端是否在 SSL ClientHello 消息中发送了 RFC4492 [第 5.1 节](https://www.rfc-editor.org/rfc/rfc4492#section-5.1) 定义的支持椭圆曲线扩展。该字段可用于在同一 IP 地址上，向支持 ECC 的客户端提供 EC 证书，而对其他客户端使用 RSA。请注意，此功能仅适用于请求缓冲区中的原始内容，不适用于通过 SSL 数据层解密后的内容，因此在使用了 "ssl" 选项的 "bind" 语句中无法生效。此样本提取 只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
+返回一个布尔值，标识客户端是否在 SSL ClientHello 消息中发送了 RFC4492 [第 5.1 节](https://www.rfc-editor.org/rfc/rfc4492#section-5.1) 定义的支持椭圆曲线扩展。该字段可用于在同一 IP 地址上，向支持 ECC 的客户端提供 EC 证书，而对其他客户端使用 RSA。请注意，此功能仅适用于请求缓冲区中的原始内容，不适用于通过 SSL 数据层解密后的内容，因此在使用了 "ssl" 选项的 "bind" 语句中无法生效。此样本提取只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
 
 req.ssl_hello_type: integer
 req_ssl_hello_type: integer（已弃用）
-返回一个整数值，表示在请求缓冲区中找到的 SSL 握手消息的类型。若缓冲区包含可解析为完整 SSL（v3 或更高版本）客户端握手消息的数据，则返回该类型值。请注意，此功能仅适用于请求缓冲区中的原始内容，不适用于通过 SSL 数据层解密后的内容，因此在使用“ssl”选项的“bind”行中无法生效。该功能主要用于 ACL 中检测预期包含可用于会话粘性的 SSL 会话 ID 的 SSL 握手消息。此样本提取 只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
+返回一个整数值，表示在请求缓冲区中找到的 SSL 握手消息的类型。若缓冲区包含可解析为完整 SSL（v3 或更高版本）客户端握手消息的数据，则返回该类型值。请注意，此功能仅适用于请求缓冲区中的原始内容，不适用于通过 SSL 数据层解密后的内容，因此在使用“ssl”选项的“bind”行中无法生效。该功能主要用于 ACL 中检测预期包含可用于会话粘性的 SSL 会话 ID 的 SSL 握手消息。此样本提取只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
 
 <a id="entry-7-3-5-req-ssl-keyshare-groups-binary"></a>
 
@@ -6679,7 +6679,7 @@ req_ssl_hello_type: integer（已弃用）
 req.ssl_keyshare_groups binary
 ```
 
-返回客户端在 TLS ClientHello 消息中报告的支持密钥交换的加密参数列表的二进制格式。在 TLS v1.3 中，keyshare 是 ClientHello 消息的一部分，也是客户端 Hello 消息的最后一个扩展。请注意，此功能仅适用于请求缓冲区中原始获取的内容，不适用于通过 SSL 数据层解密的内容，因此在使用带有 "ssl" 选项的 "bind" 语句时无法生效。此样本提取 只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
+返回客户端在 TLS ClientHello 消息中报告的支持密钥交换的加密参数列表的二进制格式。在 TLS v1.3 中，keyshare 是 ClientHello 消息的一部分，也是客户端 Hello 消息的最后一个扩展。请注意，此功能仅适用于请求缓冲区中原始获取的内容，不适用于通过 SSL 数据层解密的内容，因此在使用带有 "ssl" 选项的 "bind" 语句时无法生效。此样本提取只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
 
 示例：
 
@@ -6699,7 +6699,7 @@ server fe3  ${htst_fe3_addr}:${htst_fe3_port}
 req.ssl_sigalgs binary
 ```
 
-返回客户端在 TLS ClientHello 中报告的支持的签名算法列表的二进制形式。此信息作为客户端问候扩展可用。请注意，此功能仅适用于请求缓冲区中原始内容，不适用于通过 SSL 数据层解密的内容，因此在使用带有 "ssl" 选项的 "bind" 语句时无法生效。请参考 "ssl_fc_sigalgs_bin"，该配置项是当指定 "ssl" 选项时可使用的 SSL 绑定等效项。此样本提取 只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
+返回客户端在 TLS ClientHello 中报告的支持的签名算法列表的二进制形式。此信息作为客户端问候扩展可用。请注意，此功能仅适用于请求缓冲区中原始内容，不适用于通过 SSL 数据层解密的内容，因此在使用带有 "ssl" 选项的 "bind" 语句时无法生效。请参考 "ssl_fc_sigalgs_bin"，该配置项是当指定 "ssl" 选项时可使用的 SSL 绑定等效项。此样本提取只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
 
 示例：
 
@@ -6712,11 +6712,11 @@ server fe4  ${htst_fe4_addr}:${htst_fe4_port}
 ```
 
 req.ssl_sni: string req_ssl_sni: string（已弃用）
-返回一个字符串，其中包含客户端在通过请求缓冲区的 TLS 流中发送的 Server Name TLS 扩展值。该值仅在缓冲区包含可解析为完整 SSL（v3 或更高版本）客户端 Hello 消息的数据时有效。请注意，此功能仅适用于请求缓冲区中的原始内容，不适用于通过 SSL 数据层解密后的内容，因此在使用了 "ssl" 选项的 "bind" 语句中无法生效。该功能仅适用于 HTTPS（443）、IMAPS（993）、SMTPS（465）等实际基于隐式 TLS 的协议，不适用于 SMTP（25/587）或 IMAP（143）等显式 TLS 协议。SNI 通常包含客户端尝试连接的主机名称（针对较新浏览器）。该测试专为 TCP 请求内容检查设计。若需内容切换，建议首先等待完整的客户端 Hello 消息（类型 1），如以下示例所示。另见 "ssl_fc_sni"。请注意，由于下述 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 等因素，该样本提取 返回的值不够可靠，不能单独用于允许或拒绝对特定主机的访问。
+返回一个字符串，其中包含客户端在通过请求缓冲区的 TLS 流中发送的 Server Name TLS 扩展值。该值仅在缓冲区包含可解析为完整 SSL（v3 或更高版本）客户端 Hello 消息的数据时有效。请注意，此功能仅适用于请求缓冲区中的原始内容，不适用于通过 SSL 数据层解密后的内容，因此在使用了 "ssl" 选项的 "bind" 语句中无法生效。该功能仅适用于 HTTPS（443）、IMAPS（993）、SMTPS（465）等实际基于隐式 TLS 的协议，不适用于 SMTP（25/587）或 IMAP（143）等显式 TLS 协议。SNI 通常包含客户端尝试连接的主机名称（针对较新浏览器）。该测试专为 TCP 请求内容检查设计。若需内容切换，建议首先等待完整的客户端 Hello 消息（类型 1），如以下示例所示。另见 "ssl_fc_sni"。请注意，由于下述 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 等因素，该样本提取返回的值不够可靠，不能单独用于允许或拒绝对特定主机的访问。
 
-此样本提取 只解析请求缓冲区中找到的第一个 ClientHello 消息。如果客户端在同一 TCP 流中发送多个 ClientHello，例如服务器在 TLS 1.3 中请求了 HelloRetryRequest（HRR），或客户端发起 TLS 重新协商（稍后在同一 TCP 流中发送新的 ClientHello，且其中可能包含不同的 SNI），则只返回第一个 ClientHello 中携带的 SNI，后续 ClientHello 的内容都会被忽略。
+此样本提取只解析请求缓冲区中找到的第一个 ClientHello 消息。如果客户端在同一 TCP 流中发送多个 ClientHello，例如服务器在 TLS 1.3 中请求了 HelloRetryRequest（HRR），或客户端发起 TLS 重新协商（稍后在同一 TCP 流中发送新的 ClientHello，且其中可能包含不同的 SNI），则只返回第一个 ClientHello 中携带的 SNI，后续 ClientHello 的内容都会被忽略。
 
-使用 Encrypted Client Hello（ECH）时，网络上可见的 ClientHello 只是“外层”ClientHello，其中嵌入了真实且加密的“内层”ClientHello。此时，该样本提取 提取的是外层 ClientHello 中作为诱饵的 SNI，而不是客户端实际要访问的主机。当前该样本提取 无法解密或分析内层 ClientHello，因此使用 ECH 时不得依赖它做出路由或访问控制决策。
+使用 Encrypted Client Hello（ECH）时，网络上可见的 ClientHello 只是“外层”ClientHello，其中嵌入了真实且加密的“内层”ClientHello。此时，该样本提取提取的是外层 ClientHello 中作为诱饵的 SNI，而不是客户端实际要访问的主机。当前该样本提取无法解密或分析内层 ClientHello，因此使用 ECH 时不得依赖它做出路由或访问控制决策。
 
 ACL 衍生规则：
 
@@ -6740,7 +6740,7 @@ req.ssl_st_ext: integer
 返回 2 表示客户端还发送了非零长度的 TLS SessionTicket
 
 请注意，此字段仅适用于请求缓冲区中原始内容的检测，不适用于通过 SSL 数据层解密后的内容，因此在使用了 "ssl" 选项的 "bind" 配置行中无法生效。
-例如，可利用此字段检测客户端是否发送了 SessionTicket，并据此进行粘性会话处理：若未发送 SessionTicket，则使用 SessionID 进行粘性会话，或不进行粘性会话，因为使用 SessionTicket 时服务器端无状态。此样本提取 只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
+例如，可利用此字段检测客户端是否发送了 SessionTicket，并据此进行粘性会话处理：若未发送 SessionTicket，则使用 SessionID 进行粘性会话，或不进行粘性会话，因为使用 SessionTicket 时服务器端无状态。此样本提取只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
 
 <a id="entry-7-3-5-req-ssl-supported-groups-binary"></a>
 
@@ -6750,7 +6750,7 @@ req.ssl_st_ext: integer
 req.ssl_supported_groups binary
 ```
 
-返回客户端在 TLS ClientHello 中报告并用于密钥交换的支持组列表的二进制形式，该列表可包含椭圆曲线和非椭圆曲线密钥交换。请注意，此功能仅适用于请求缓冲区中原始内容，不适用于通过 SSL 数据层解密的内容，因此在使用了 "ssl" 选项的 "bind" 语句中无法生效。请参考 "ssl_fc_eclist_bin"，其为指定 "ssl" 选项时可用的 SSL 绑定等效项。此样本提取 只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
+返回客户端在 TLS ClientHello 中报告并用于密钥交换的支持组列表的二进制形式，该列表可包含椭圆曲线和非椭圆曲线密钥交换。请注意，此功能仅适用于请求缓冲区中原始内容，不适用于通过 SSL 数据层解密的内容，因此在使用了 "ssl" 选项的 "bind" 语句中无法生效。请参考 "ssl_fc_eclist_bin"，其为指定 "ssl" 选项时可用的 SSL 绑定等效项。此样本提取只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
 
 示例：
 
@@ -6764,7 +6764,7 @@ server fe3  ${htst_fe3_addr}:${htst_fe3_port}
 
 req.ssl_ver: integer
 req_ssl_ver: integer（已弃用）
-返回一个整数值，表示请求缓冲区中流的 SSL/TLS 协议版本。支持 SSLv2 Hello 消息和 SSLv3 消息。TLSv1 被标识为 SSL 版本 3.1。该值由主版本号乘以 65536 后加上次版本号构成。请注意，此功能仅适用于请求缓冲区中的原始内容，不适用于通过 SSL 数据层解密后的内容，因此在使用 "ssl" 选项的 "bind" 行中无法生效。ACL 版本的测试匹配格式为十进制表示的 MAJOR.MINOR（例如 3.1）。该样本提取主要用于 ACL。此样本提取 只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
+返回一个整数值，表示请求缓冲区中流的 SSL/TLS 协议版本。支持 SSLv2 Hello 消息和 SSLv3 消息。TLSv1 被标识为 SSL 版本 3.1。该值由主版本号乘以 65536 后加上次版本号构成。请注意，此功能仅适用于请求缓冲区中的原始内容，不适用于通过 SSL 数据层解密后的内容，因此在使用 "ssl" 选项的 "bind" 行中无法生效。ACL 版本的测试匹配格式为十进制表示的 MAJOR.MINOR（例如 3.1）。该样本提取主要用于 ACL。此样本提取只分析请求缓冲区中找到的第一个 ClientHello 消息；有关 HelloRetryRequest、TLS 重新协商和 Encrypted Client Hello 所造成影响的详情，请参阅 `req.ssl_sni` 关键字文档。
 
 ACL 衍生规则：
 
@@ -6805,7 +6805,7 @@ rep_ssl_hello_type: integer（已弃用）
 
 可以在 HTTP 内容、请求和响应中获取样本。此应用层也称为第 7 层。只有在已从相应的请求或响应缓冲区完整解析出 HTTP 请求或响应后，才能在此段中获取数据。所有 HTTP 特定规则以及以 "mode http" 运行的段均始终满足此条件。在使用 TCP 内容检查时，可能需要支持检查延迟，以确保请求或响应先到达。此类样本提取所需的 CPU 资源可能略多于第 4 层操作，但差异不大，因为请求和响应已建立索引。
 
-请注意：关于 tcp-request 内容规则中的 HTTP 处理，从 HTTP 代理角度看，所有功能均可按预期工作。但从 TCP 代理角度看，若未进行 HTTP 升级，则仅支持 HTTP/1 内容。对于 HTTP/2 内容，仅能访问前缀部分。因此，仅可依赖 "req.proto_http"、"req.ver" 以及可选的 "method" 样本提取。其他所有 L7 样本提取将失败。HTTP 升级完成后，其行为将与从 HTTP 代理中获取时相同。
+请注意：关于 tcp-request 内容规则中的 HTTP 处理，从 HTTP 代理角度看，所有功能均可按预期工作。但从 TCP 代理角度看，若未进行 HTTP 升级，则仅支持 HTTP/1 内容。对于 HTTP/2 内容，仅能访问连接前言（preface）。因此，仅可依赖 "req.proto_http"、"req.ver" 以及可选的 "method" 样本提取。其他所有 L7 样本提取将失败。HTTP 升级完成后，其行为将与从 HTTP 代理中获取时相同。
 
 本节中各类样本提取方法及其对应类型的摘要：
 
@@ -7082,7 +7082,7 @@ path_sub: 子串匹配
 请注意：ACL 衍生规则不得在后续使用转换器，或在采用“-m”模式匹配方法的 ACL 中使用。
 
 pathq: string
-该样本提取从第一个斜杠开始获取请求的 URL 路径及查询字符串。此样本提取方式非常实用，可始终获取相对 URI，排除协议和权威部分（如存在）。实际上，尽管 HTTP/1.1 请求目标通常采用此种形式，但在 HTTP/2 中常使用绝对 URI。此样本提取在两种情况下均返回相同结果。请注意，URI 中的片段引用（路径后的 '#'）严格违反 HTTP 标准，将被拒绝。然而，若接收请求的前端配置了 "option accept-unsafe-violations-in-http-request"，则该片段部分将被接受，并包含在路径中。
+该样本提取从第一个斜杠开始获取请求的 URL 路径及查询字符串。此样本提取方式非常实用，可始终获取相对 URI，排除 scheme 和 authority 部分（如存在）。实际上，尽管 HTTP/1.1 请求目标通常采用此种形式，但在 HTTP/2 中常使用绝对 URI。此样本提取在两种情况下均返回相同结果。请注意，URI 中的片段引用（路径后的 '#'）严格违反 HTTP 标准，将被拒绝。然而，若接收请求的前端配置了 "option accept-unsafe-violations-in-http-request"，则该片段部分将被接受，并包含在路径中。
 
 <a id="entry-7-3-6-query-string"></a>
 
@@ -7293,7 +7293,7 @@ req.hdrs_bin: binary 以预解析的二进制形式返回当前请求头。此�
 
 int：编码方式请参阅 SPOE 文档；str：``` <int:length>`` <bytes> ```
 
-req.timer.hdr: integer 客户端请求的总耗时（仅限 HTTP 模式）。该值表示从接收到首个字节到代理收到标记 HTTP 头结束的空行之间的时间间隔。单位为毫秒（ms），等效于日志格式中的 %TR。详见 [第 8.4 节](/zh/haproxy/configuration-logging/#section-8-4) “定时事件”。
+req.timer.hdr: integer 客户端请求的总耗时（仅限 HTTP 模式）。该值表示从接收到首个字节到代理收到标记 HTTP 头结束的空行之间的时间间隔。单位为毫秒（ms），等效于日志格式中的 %TR。详见 [第 8.4 节](/zh/haproxy/configuration-logging/#section-8-4) “时间事件”。
 
 req.timer.idle: integer 该值表示 HTTP 请求的空闲时间（仅限 HTTP 模式）。此计时器统计握手完成与首个 HTTP 请求字节到达之间的时长。单位为毫秒，等效于日志格式中的 %Ti。详见 [第 8.4 节](/zh/haproxy/configuration-logging/#section-8-4) “时间事件”。
 
