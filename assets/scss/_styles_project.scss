@@ -134,10 +134,43 @@
   -webkit-text-fill-color: currentColor;
 }
 
+// Keep the site name visible when the theme switches navigation to icons.
+.td-site-header .td-nav-title {
+  display: inline;
+  white-space: nowrap;
+}
+
 .td-site-header .td-nav-logo {
   width: 28px;
   height: 30px;
   object-fit: contain;
+}
+
+// Keep the top-level menu compact at every width; drawer links keep their names.
+.td-site-header .td-nav-menu-zone .nav-link {
+  flex: 0 0 44px;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  justify-content: center;
+  gap: 0;
+  padding: 0;
+  font-size: 1.125rem;
+
+  .td-navbar-entry__label,
+  .td-navbar-entry__external {
+    display: none;
+  }
+
+  &.active {
+    background: var(--td-brand-elev);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--td-accent-hover);
+    outline-offset: 2px;
+  }
 }
 
 .td-shell-sidebar__brand > img:first-child {
@@ -187,7 +220,6 @@
   }
 
   .td-site-header .td-nav-title {
-    display: inline;
     font-size: 0.95rem;
   }
 

@@ -27,6 +27,7 @@
   data-td-navbar-level="{{ $level }}" data-td-navbar-kind="{{ $kind }}"
   {{- if and (eq $level 0) (not $external) }} data-td-navbar-route{{ end }}
   aria-label="{{ $entry.Name | plainify }}"
+  {{- if eq $region "desktop" }} title="{{ $entry.Name | plainify }}"{{ end }}
   data-td-navbar-region="{{ $region }}" data-td-navbar-label="{{ $entry.Name | plainify }}"
   data-td-navbar-external="{{ if $external }}true{{ else }}false{{ end }}"{{ if $fallback }} hreflang="{{ $target.language }}" data-fallback-language="{{ $target.language }}"{{ end }}{{ if $current }} aria-current="page"{{ end }}{{ with .controls }} aria-controls="{{ . }}" aria-expanded="false"{{ end }}{{ if $newTab }} target="_blank" rel="noopener noreferrer"{{ end }}>
   <i class="{{ partial "menu-icon.html" $entry }}" aria-hidden="true"></i>
