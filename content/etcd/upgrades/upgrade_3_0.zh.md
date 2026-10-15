@@ -44,7 +44,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 
 如果所有成员均已升级至 v3.0，则集群将升级至 v3.0，从该完成状态回退**不可行**。然而，若任一成员仍为 v2.3，则集群及其操作仍处于“v2.3”状态，此时可从该混合集群状态恢复至所有成员均使用 v2.3 etcd 二进制文件。
 
-请备份所有 etcd 成员的数据目录 [，以便在集群完成升级后仍可执行降级操作](https://etcd.io/docs/v2.3/admin_guide#backing-up-the-datastore)。
+请[备份所有 etcd 成员的数据目录](https://etcd.io/docs/v2.3/admin_guide#backing-up-the-datastore)，以便在集群完成升级后仍可执行降级操作。
 
 ### 升级流程 {#upgrade-procedure}
 

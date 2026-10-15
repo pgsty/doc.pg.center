@@ -439,7 +439,7 @@ ccfg := clientv3.Config{
 
 在升级 etcd 之前，请务必在预发环境中测试依赖 etcd 的服务，再将升级部署到生产环境。
 
-升级前，请对 etcd 数据执行 [备份 etcd 数据](/zh/etcd/op-guide/maintenance/#snapshot-backup)。若升级过程中出现异常，可使用此备份将系统 [降级](#downgrade)至现有 etcd 版本。请注意，`snapshot` 命令仅备份 v3 数据。如需备份 v2 数据，请参阅 [备份 v2 数据存储](https://etcd.io/docs/v2.3/admin_guide/#backing-up-the-datastore)。
+升级前，请[备份 etcd 数据](/zh/etcd/op-guide/maintenance/#snapshot-backup)。若升级过程中出现异常，可使用此备份将系统 [降级](#downgrade)至现有 etcd 版本。请注意，`snapshot` 命令仅备份 v3 数据。如需备份 v2 数据，请参阅 [备份 v2 数据存储](https://etcd.io/docs/v2.3/admin_guide/#backing-up-the-datastore)。
 
 #### 混合版本 {#mixed-versions}
 
