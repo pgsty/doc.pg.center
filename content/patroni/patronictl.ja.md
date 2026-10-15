@@ -21,7 +21,7 @@ Patroni には [patronictl](/ja/patroni/patronictl#patronictl) という名前�
 
 - **ctl**: Patroni REST API に対して認証する方法、およびサーバー ID を検証する方法。詳細については、[ctl設定](/ja/patroni/config/yaml#patronictl_settings) を参照してください。
 - **restapi**: Patroni REST API に対して認証する方法、およびサーバー ID を検証する方法。 `ctl` 構成が十分でない場合にのみ使用されます。 [patronictl](/ja/patroni/patronictl#patronictl) は、主に `restapi.authentication` セクション (`ctl.authentication` が欠落している場合) と `restapi.cafile` 設定 (`ctl.cacert` が欠落している場合) に関係します。詳細については、[REST API 設定](/ja/patroni/config/yaml#restapi_settings) を参照してください。
-- DCS (例: **etcd**): Patroni によって使用される DCS に接続して認証する方法。
+- DCS (例： **etcd**): Patroni によって使用される DCS に接続して認証する方法。
 
 これらの構成オプションは、環境変数または構成ファイルから取得できます。 [環境構成の設定](/ja/patroni/config/env#env) または [YAML 構成設定](/ja/patroni/config/yaml#yaml) の上記のセクションを探して、環境変数または構成ファイルを通じてそれらのオプションを設定する方法を理解してください。
 
@@ -366,7 +366,7 @@ failover
 
 `patronictl failover` は、クラスター内で手動フェイルオーバーを実行します。
 
-これは、クラスターが正常でない場合に使用するように設計されています。例:
+これは、クラスターが正常でない場合に使用するように設計されています。例：
 
 - リーダーはいません。または
 - 同期クラスターでは使用できる同期スタンバイはありません。
@@ -665,7 +665,7 @@ list
 
 `Role` メンバーの現在の役割。
 
-次のいずれかになります:
+次のいずれかになります：
 
 - `Leader`: 通常の Patroni クラスターの現在のリーダー。または
 - `Standby Leader`: Patroni スタンバイ クラスターの現在のリーダー。または
@@ -1591,7 +1591,7 @@ switchover
 
 `patronictl switchover` はクラスター内でスイッチオーバーを実行します。
 
-これは、クラスターが正常な場合に使用されるように設計されています。例:
+これは、クラスターが正常な場合に使用されるように設計されています。例：
 
 - リーダーがいます。
 - 同期クラスターでは使用可能な同期スタンバイがあります。
@@ -1720,7 +1720,7 @@ topology
 
 `Role` メンバーの現在の役割。
 
-次のいずれかになります:
+次のいずれかになります：
 
 - `Leader`: 通常の Patroni クラスターの現在のリーダー。または
 - `Standby Leader`: Patroni スタンバイ クラスターの現在のリーダー。または

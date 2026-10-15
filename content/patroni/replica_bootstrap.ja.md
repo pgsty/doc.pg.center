@@ -18,7 +18,7 @@ Patroni を使用すると、新しいレプリカの作成をカスタマイズ
 
 ## ブートストラップ {#bootstrap}
 
-PostgreSQL は、新しいクラスターを初期化するための `initdb` コマンドを提供し、 Patroni はデフォルトでそれを呼び出します。場合によっては、特に既存のクラスターのコピーとして新しいクラスターを作成する場合、組み込みメソッドをカスタム アクションに置き換える必要があります。 Patroni は、新しいクラスターをブートストラップするためのユーザー定義スクリプトの実行をサポートし、クラスターの名前とデータ ディレクトリへのパスなど、いくつかの必要な引数を指定します。これは、Patroni 構成の `bootstrap` セクションで構成されます。たとえば:
+PostgreSQL は、新しいクラスターを初期化するための `initdb` コマンドを提供し、 Patroni はデフォルトでそれを呼び出します。場合によっては、特に既存のクラスターのコピーとして新しいクラスターを作成する場合、組み込みメソッドをカスタム アクションに置き換える必要があります。 Patroni は、新しいクラスターをブートストラップするためのユーザー定義スクリプトの実行をサポートし、クラスターの名前とデータ ディレクトリへのパスなど、いくつかの必要な引数を指定します。これは、Patroni 構成の `bootstrap` セクションで構成されます。たとえば：
 
 ```yaml
 bootstrap:
@@ -49,7 +49,7 @@ bootstrap:
 
 `keep_existing_recovery_conf` が定義され、`True` に設定されている場合、Patroni は既存の `recovery.conf` ファイルが存在する場合は削除しません (PostgreSQL \<= 11)。同様に、その場合、Patroni は、既存の `recovery.signal` または `standby.signal` が存在する場合は削除しません。また、構成されたリカバリ設定 (PostgreSQL \>= 12) をオーバーライドすることもありません。これは、適切なリカバリ構成を生成する pgBackRest などのツールを使用してバックアップからブートストラップする場合に便利です。
 
-それに加えて、カスタム ブートストラップ メソッド設定で指定された追加のキーと値のペアは、引数として `--name=value` 形式で `command` に渡されます。たとえば:
+それに加えて、カスタム ブートストラップ メソッド設定で指定された追加のキーと値のペアは、引数として `--name=value` 形式で `command` に渡されます。たとえば：
 
 ```yaml
 bootstrap:
@@ -99,7 +99,7 @@ postgresql:
         no_leader: 1
 ```
 
-例: wal_e
+例： wal_e
 
 ```yaml
 postgresql:
@@ -115,7 +115,7 @@ postgresql:
         max-rate: '100M'
 ```
 
-例: pgbackrest
+例： pgbackrest
 
 ```yaml
 postgresql:
@@ -130,7 +130,7 @@ postgresql:
         max-rate: '100M'
 ```
 
-例: Barman
+例： Barman
 
 ```yaml
 postgresql:

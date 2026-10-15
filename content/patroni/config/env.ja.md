@@ -16,11 +16,11 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/ENVIRONMENT.html"
 
 ## グローバル/ユニバーサル {#globaluniversal}
 
-- **PATRONI_CONFIGURATION**: [PATRONI_CONFIGURATION](/ja/patroni/config#config) 環境変数を介して Patroni の構成全体を設定できます。この場合、他の環境変数は一切考慮されません!
+- **PATRONI_CONFIGURATION**: [PATRONI_CONFIGURATION](/ja/patroni/config#config) 環境変数を介して Patroni の構成全体を設定できます。この場合、他の環境変数は一切考慮されません！
 - **PATRONI_THREAD_POOL_SIZE**: リーダー競合またはフェールセーフ チェック中に、非同期タスクを実行し、REST API を介して他のメンバーと通信するために Patroni によって使用されるスレッド プールのサイズ。最小値は `5`、デフォルト値は `5` です。
 - **PATRONI_THREAD_STACK_SIZE**: Patroni によって開始されるスレッドに使用されるスタック サイズを指定します。値は `64kB` によってアライメントされる必要があります。最小値は `64kB` 、デフォルト値 (Patroni によって設定) は `512kB` です。
 - **PATRONI_NAME**: Patroni の現在のインスタンスが実行されているノードの名前。クラスター内で一意である必要があります。
-- **PATRONI_NAMESPACE**: Patroni がクラスターに関する情報を保持する構成ストア内のパス。デフォルト値: 「/service」
+- **PATRONI_NAMESPACE**: Patroni がクラスターに関する情報を保持する構成ストア内のパス。デフォルト値： 「/service」
 - **PATRONI_SCOPE**: クラスター名
 - **PG_MALLOC_ARENA_MAX**: `postmaster` プロセスの `MALLOC_ARENA_MAX` 環境変数のカスタム値。設定されていない場合、`postmaster` は `MALLOC_ARENA_MAX` 値を継承します。
 
@@ -58,8 +58,8 @@ Patroni と [Citus](https://docs.citusdata.com) の統合を有効にします�
 
 ## Consul {#consul}
 
-- **PATRONI_CONSUL_HOST**: Consul ローカル エージェントのホスト:ポート。
-- **PATRONI_CONSUL_URL**: Consul ローカル エージェントの URL (形式: http(s)://host:port)
+- **PATRONI_CONSUL_HOST**: Consul ローカル エージェントのホスト：ポート。
+- **PATRONI_CONSUL_URL**: Consul ローカル エージェントの URL (形式： http(s)://host:port)
 - **PATRONI_CONSUL_PORT**: (オプション) Consul ポート
 - **PATRONI_CONSUL_SCHEME**: (オプション) **http** または **https**、デフォルトは **http**
 - **PATRONI_CONSUL_TOKEN**: (オプション) ACL トークン
@@ -80,13 +80,13 @@ Patroni と [Citus](https://docs.citusdata.com) の統合を有効にします�
 ## Etcd {#etcd}
 
 - **PATRONI_ETCD_PROXY**: etcd のプロキシ URL。プロキシを使用して etcd に接続している場合は、**PATRONI_ETCD_URL** の代わりにこのパラメータを使用します。
-- **PATRONI_ETCD_URL**: etcd の URL、形式: http(s)://(username:password@)host:port
+- **PATRONI_ETCD_URL**: etcd の URL、形式： http(s)://(username:password@)host:port
 - **PATRONI_ETCD_HOSTS**: 'host1:port1'、'host2:port2' などの形式の etcd エンドポイントのリスト
 - **PATRONI_ETCD_USE_PROXIES**: このパラメーターが true に設定されている場合、Patroni は **hosts** をプロキシのリストとして考慮し、etcd クラスターのトポロジ検出を実行せず、**hosts** の固定リストに固執します。
 - **PATRONI_ETCD_PROTOCOL**: http または https (指定しない場合は http が使用されます)。 **url** または **proxy** が指定されている場合は、それらからプロトコルを取得します。
-- **PATRONI_ETCD_HOST**: etcd エンドポイントのホスト:ポート。
-- **PATRONI_ETCD_SRV**: クラスター自動検出のために SRV レコードを検索するドメイン。 Patroni は、指定されたドメインの SRV サービス名 (最初に成功するまでこの順序で) のクエリーを試行します: `_etcd-client-ssl`、`_etcd-client`、`_etcd-ssl`、`_etcd`、`_etcd-server-ssl`、`_etcd-server`。 `_etcd-server-ssl` または `_etcd-server` の SRV レコードが取得された場合、ETCD ピア プロトコルが使用され、利用可能なメンバーについて ETCD がクエリーされます。それ以外の場合は、SRV レコードのホストが使用されます。
-- **PATRONI_ETCD_SRV_SUFFIX**: 検出中にクエリーされる SRV 名のサフィックスを構成します。このフラグを使用して、同じドメイン内の複数の etcd クラスターを区別します。 **PATRONI_ETCD_SRV** と組み合わせた場合にのみ機能します。たとえば、`PATRONI_ETCD_SRV_SUFFIX=foo` と `PATRONI_ETCD_SRV=example.org` が設定されている場合、DNS SRV クエリーが作成されます:`_etcd-client-ssl-foo._tcp.example.org` (考えられるすべての ETCD SRV サービス名に対して同様)。
+- **PATRONI_ETCD_HOST**: etcd エンドポイントのホスト：ポート。
+- **PATRONI_ETCD_SRV**: クラスター自動検出のために SRV レコードを検索するドメイン。 Patroni は、指定されたドメインの SRV サービス名 (最初に成功するまでこの順序で) のクエリーを試行します： `_etcd-client-ssl`、`_etcd-client`、`_etcd-ssl`、`_etcd`、`_etcd-server-ssl`、`_etcd-server`。 `_etcd-server-ssl` または `_etcd-server` の SRV レコードが取得された場合、ETCD ピア プロトコルが使用され、利用可能なメンバーについて ETCD がクエリーされます。それ以外の場合は、SRV レコードのホストが使用されます。
+- **PATRONI_ETCD_SRV_SUFFIX**: 検出中にクエリーされる SRV 名のサフィックスを構成します。このフラグを使用して、同じドメイン内の複数の etcd クラスターを区別します。 **PATRONI_ETCD_SRV** と組み合わせた場合にのみ機能します。たとえば、`PATRONI_ETCD_SRV_SUFFIX=foo` と `PATRONI_ETCD_SRV=example.org` が設定されている場合、DNS SRV クエリーが作成されます：`_etcd-client-ssl-foo._tcp.example.org` (考えられるすべての ETCD SRV サービス名に対して同様)。
 - **PATRONI_ETCD_USERNAME**: etcd 認証用のユーザー名。
 - **PATRONI_ETCD_PASSWORD**: etcd 認証用のパスワード。
 - **PATRONI_ETCD_CACERT**: CA 証明書。存在する場合、検証が有効になります。
@@ -97,7 +97,7 @@ Patroni と [Citus](https://docs.citusdata.com) の統合を有効にします�
 
 ## Etcdv3 {#etcdv3}
 
-Etcdv3 の環境名は etcd の場合と似ており、変数名に `ETCD` の代わりに `ETCD3` を使用する必要があるだけです。例: `PATRONI_ETCD3_HOST`、`PATRONI_ETCD3_CACERT` など。
+Etcdv3 の環境名は etcd の場合と似ており、変数名に `ETCD` の代わりに `ETCD3` を使用する必要があるだけです。例： `PATRONI_ETCD3_HOST`、`PATRONI_ETCD3_CACERT` など。
 
 > [!WARNING]
 > プロトコル バージョン 2 で作成されたキーは、プロトコル バージョン 3 では表示されず、その逆も同様であるため、Patroni 構成を更新するだけでは etcd から Etcdv3 に切り替えることはできません。さらに、Patroni は etcd の gRPC ゲートウェイ (プロキシ) を使用して V3 API と通信します。これは、TLS 共通名認証が不可能であることを意味します。
@@ -106,7 +106,7 @@ Etcdv3 の環境名は etcd の場合と似ており、変数名に `ETCD` の�
 
 ## ZooKeeper {#zookeeper}
 
-- **PATRONI_ZOOKEEPER_HOSTS**: ZooKeeper クラスター メンバーのカンマ区切りリスト: "'host1:port1','host2:port2','etc...'"。各要素を引用符で囲むことが重要です。
+- **PATRONI_ZOOKEEPER_HOSTS**: ZooKeeper クラスター メンバーのカンマ区切りリスト： "'host1:port1','host2:port2','etc...'"。各要素を引用符で囲むことが重要です。
 - **PATRONI_ZOOKEEPER_USE_SSL**: (オプション) SSL が使用されているかどうか。デフォルトは `false` です。 `false` に設定すると、SSL 固有のパラメーターはすべて無視されます。
 - **PATRONI_ZOOKEEPER_CACERT**: (オプション) CA 証明書。存在する場合、検証が有効になります。
 - **PATRONI_ZOOKEEPER_CERT**: (オプション) クライアント証明書を含むファイル。
@@ -123,7 +123,7 @@ Etcdv3 の環境名は etcd の場合と似ており、変数名に `ETCD` の�
 
 ## Exhibitor {#exhibitor}
 
-- **PATRONI_EXHIBITOR_HOSTS**: Exhibitor (ZooKeeper) ノードの初期リスト (形式: 'host1,host2,etc...')。このリストは、Exhibitor (ZooKeeper) クラスターのトポロジーが変更されるたびに自動的に更新されます。
+- **PATRONI_EXHIBITOR_HOSTS**: Exhibitor (ZooKeeper) ノードの初期リスト (形式： 'host1,host2,etc...')。このリストは、Exhibitor (ZooKeeper) クラスターのトポロジーが変更されるたびに自動的に更新されます。
 - **PATRONI_EXHIBITOR_PORT**: Exhibitor ポート。
 
 <a id="kubernetes_environment"></a>
@@ -171,7 +171,7 @@ Etcdv3 の環境名は etcd の場合と似ており、変数名に `ETCD` の�
 
 ## PostgreSQL {#postgresql}
 
-- **PATRONI_POSTGRESQL_LISTEN**: Postgres がリッスンする IP アドレス + ポート。ポートコンポーネントが最後のアドレスの後ろにコロンで追加されている限り、カンマで区切られた複数のアドレスが許可されます (例: `listen: 127.0.0.1,127.0.0.2:5432`)。 Patroni は、このリストの最初のアドレスを使用して、PostgreSQL ノードへのローカル接続を確立します。
+- **PATRONI_POSTGRESQL_LISTEN**: Postgres がリッスンする IP アドレス + ポート。ポートコンポーネントが最後のアドレスの後ろにコロンで追加されている限り、カンマで区切られた複数のアドレスが許可されます (例： `listen: 127.0.0.1,127.0.0.2:5432`)。 Patroni は、このリストの最初のアドレスを使用して、PostgreSQL ノードへのローカル接続を確立します。
 - **PATRONI_POSTGRESQL_CONNECT_ADDRESS**: IP アドレス + 他のノードおよびアプリケーションから Postgres にアクセスできるポート。
 - **PATRONI_POSTGRESQL_PROXY_ADDRESS**: IP アドレス + Postgres の隣で実行されている接続プール (pgbouncer など) にアクセスできるポート。この値は、DCS のメンバー キーに `proxy_url` として書き込まれ、サービス検出に使用または役立つ可能性があります。
 - **PATRONI_POSTGRESQL_DATA_DIR**: Postgres データ ディレクトリの場所。既存であるか、Patroni によって初期化されます。
@@ -242,7 +242,7 @@ Etcdv3 の環境名は etcd の場合と似ており、変数名に `ETCD` の�
 - **PATRONI_RESTAPI_HTTP_EXTRA_HEADERS**: （任意）REST APIサーバーがHTTP応答に追加情報を含めるためのHTTPヘッダー。
 - **PATRONI_RESTAPI_HTTPS_EXTRA_HEADERS**: (オプション) HTTPS ヘッダーは、TLS が有効な場合に REST API サーバーが HTTP 応答とともに追加情報を渡せるようにします。これにより、`http_extra_headers` で設定された追加情報も渡されます。
 - **PATRONI_RESTAPI_REQUEST_QUEUE_SIZE**: (オプション): Patroni REST API が使用する TCP ソケットのリクエストキューサイズを設定します。キューがいっぱいになると、それ以降のリクエストでは "Connection denied" エラーが発生します。デフォルト値は 5 です。
-- **PATRONI_RESTAPI_SERVER_TOKENS**: (オプション) `Server` HTTP ヘッダーの値を構成します。`Original` (デフォルト) は元の動作を公開し、BaseHTTP および Python のバージョンを表示します (例: `BaseHTTP/0.6 Python/3.12.3`)。`Minimal`: ヘッダーには Patroni のバージョンのみが含まれます (例: `Patroni/4.0.0`)。`ProductOnly`: ヘッダーには製品名のみが含まれます (例: `Patroni`)。
+- **PATRONI_RESTAPI_SERVER_TOKENS**: (オプション) `Server` HTTP ヘッダーの値を構成します。`Original` (デフォルト) は元の動作を公開し、BaseHTTP および Python のバージョンを表示します (例： `BaseHTTP/0.6 Python/3.12.3`)。`Minimal`: ヘッダーには Patroni のバージョンのみが含まれます (例： `Patroni/4.0.0`)。`ProductOnly`: ヘッダーには製品名のみが含まれます (例： `Patroni`)。
 
 <div class="warning">
 

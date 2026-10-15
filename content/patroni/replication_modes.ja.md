@@ -90,7 +90,7 @@ Patroniは`synchronous_node_count`パラメーターで同期スタンバイデ�
 
 PatroniはHAループの反復ごとに同期スタンバイの選択を見直します。現在の同期スタンバイが接続されており、同期状態の解除を要求していなければ、その選択を維持します。それ以外の場合は、同期可能なクラスターメンバーのうち、レプリケーションが最も先に進んでいるものを選びます。
 
-### 例: {#example}
+### 例： {#example}
 
 #### DCSの`/config`キー {#config-key-in-dcs}
 
@@ -137,7 +137,7 @@ PatroniはHAループの反復ごとに、ノードの可用性と要求され�
 
 クォーラムコミットモードで同期スタンバイの集合が空であり、厳密モードで`N`台のスタンバイからの確認応答が必要な場合、Patroni 4.1.5は`synchronous_standby_names`を`ANY N (*)`に設定します。
 
-### 例: {#example-1}
+### 例： {#example-1}
 
 #### DCSの`/config`キー {#config-key-in-dcs-1}
 

@@ -12,7 +12,7 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/patroni_configuration.h
 <a id="config"></a>
 Patroni 構成には 3 タイプがあります。
 
-- グローバル [動的構成](/ja/patroni/config/dynamic#dynamic)。   これらのオプションは DCS (分散構成ストア) に保存され、すべてのクラスター ノードに適用されます。動的構成は、[patronictl_edit_config](/ja/patroni/patronictl#patronictl_edit_config) ツールまたは Patroni [REST API](/ja/patroni/rest_api#rest_api) を使用していつでも設定できます。変更されたオプションがスタートアップ コンフィギュレーションの一部ではない場合、オプションはすべてのノードに非同期的に (次のウェイクアップ サイクル時に) 適用され、その後リロードされます。構成を適用するためにノードの再起動が必要な場合 (コンテキストが postmaster で、値が変更された [PostgreSQL パラメータ](https://www.postgresql.org/docs/current/view-pg-settings.html) の場合)、これを示す特別なフラグ `pending_restart` が members.data JSON に設定されます。さらに、ノードのステータスは `"restart_pending": true` を表示することでこれを示します。
+- グローバル [動的構成](/ja/patroni/config/dynamic#dynamic)。   これらのオプションは DCS (分散構成ストア) に保存され、すべてのクラスター ノードに適用されます。動的構成は、[patronictl_edit_config](/ja/patroni/patronictl#patronictl_edit_config) ツールまたは Patroni [REST API](/ja/patroni/rest_api#rest_api) を使用していつでも設定できます。変更されたオプションがスタートアップ構成の一部ではない場合、オプションはすべてのノードに非同期的に (次のウェイクアップ サイクル時に) 適用され、その後リロードされます。構成を適用するためにノードの再起動が必要な場合 (コンテキストが postmaster で、値が変更された [PostgreSQL パラメータ](https://www.postgresql.org/docs/current/view-pg-settings.html) の場合)、これを示す特別なフラグ `pending_restart` が members.data JSON に設定されます。さらに、ノードのステータスは `"restart_pending": true` を表示することでこれを示します。
 
 - ローカル [設定ファイル](/ja/patroni/config/yaml#yaml) (patroni.yml)。   これらのオプションは構成ファイルで定義され、動的構成より優先されます。 `patroni.yml` は、SIGHUP を Patroni プロセスに送信するか、`POST /reload` REST-API リクエストを実行するか、[patronictl_reload](/ja/patroni/patronictl#patronictl_reload) を実行することで、実行時に (Patroni を再起動せずに) 変更および再ロードできます。ローカル構成は、単一の YAML ファイルまたはディレクトリのいずれかになります。ディレクトリの場合、そのディレクトリ内のすべての YAML ファイルがソートされた順序で 1 つずつロードされます。キーが複数のファイルで定義されている場合、最後のファイル内のキーが優先されます。
 
@@ -32,7 +32,7 @@ PostgreSQL パラメーターの一部は、**プライマリーとレプリカ�
 - **max_locks_per_transaction**: デフォルト値 64、最小値 32
 - **max_worker_processes**: デフォルト値 8、最小値 2
 - **max_prepared_transactions**: デフォルト値 0、最小値 0
-- **wal_level**: デフォルト値 hot_standby、受け入れられる値: hot_standby、replica、logical
+- **wal_level**: デフォルト値 hot_standby、受け入れられる値： hot_standby、replica、logical
 - **track_commit_timestamp**: デフォルト値はオフです
 
 以下のパラメータの場合、PostgreSQL はプライマリーとすべてのレプリカ間で同じ値を必要としません。ただし、レプリカがいつでもプライマリーになる可能性を考慮すると、これらのパラメーターを異なる値に設定することはあまり意味がありません。したがって、**Patroni は、これらの値の設定を** [動的構成](/ja/patroni/config/dynamic#dynamic) **に制限しています**。
@@ -98,12 +98,12 @@ PostgreSQL には、使用される共有メモリのサイズを決定するい
 
 ただし、これらの設定は共有メモリを管理するため、ノードを再起動するときは特に注意する必要があります。
 
-- これらの設定のいずれかの値を**増加**させたい場合:
+- これらの設定のいずれかの値を**増加**させたい場合：
 
   > 1.  最初にすべてのスタンバイを再起動します
   > 2.  その後プライマリーを再起動します
 
-- これらの設定のいずれかの値を**減少**させたい場合:
+- これらの設定のいずれかの値を**減少**させたい場合：
 
   > 1.  最初にプライマリーを再起動します
   > 2.  その後、すべてのスタンバイを再起動します
@@ -114,7 +114,7 @@ PostgreSQL には、使用される共有メモリのサイズを決定するい
 
 ### Patroni 構成パラメータ {#patroni-configuration-parameters}
 
-また、次の Patroni 構成オプションは**動的にのみ変更可能**です:
+また、次の Patroni 構成オプションは**動的にのみ変更可能**です：
 
 - **ttl**: 30
 - **loop_wait**: 10
@@ -137,7 +137,7 @@ Patroni ノードは、構成が変更されるたびに、DCS オプション�
 Patroni は、Patroni [ローカル構成](/ja/patroni/config/yaml#yaml) の生成と検証のためのコマンドライン インターフェイスを提供します。 `patroni` 実行可能ファイルを使用すると、次のことが可能になります。
 
 - サンプルのローカル Patroni 構成を作成します。
-- ローカルで実行されている PostgreSQL インスタンスの Patroni 構成ファイルを作成します (例: [Patroni の統合](/ja/patroni/existing_data#existing_data) の準備ステップとして)。
+- ローカルで実行されている PostgreSQL インスタンスの Patroni 構成ファイルを作成します (例： [Patroni の統合](/ja/patroni/existing_data#existing_data) の準備ステップとして)。
 - 指定された Patroni 構成ファイルを検証します。
 
 <a id="generate_sample_config"></a>
@@ -176,11 +176,11 @@ patroni --generate-config [--dsn DSN] [configfile]
 
 ローカルで実行されている PostgreSQL インスタンス用に Patroni 構成を `yaml` 形式で生成します。提供された DSN (優先されます) または PostgreSQL [環境変数](https://www.postgresql.org/docs/current/libpq-envars.html) のいずれかが PostgreSQL 接続に使用されます。パスワードが指定されていない場合は、プロンプトから入力する必要があります。
 
-ソース Postgres インスタンスで定義されたすべての非内部 GUC は、構成ファイル、postmaster コマンドライン、または環境変数のいずれで設定されたものであるかにかかわらず、次の Patroni 構成パラメーターのソースとして使用されます:
+ソース Postgres インスタンスで定義されたすべての非内部 GUC は、構成ファイル、postmaster コマンドライン、または環境変数のいずれで設定されたものであるかにかかわらず、次の Patroni 構成パラメーターのソースとして使用されます：
 
-> - **scope**: `cluster_name` GUC 値;
+> - **scope**: `cluster_name` GUC 値；
 > - **postgresql.listen**: `listen_addresses` および `port` GUC 値。
-> - **postgresql.data_dir**: `data_directory` GUC 値;
+> - **postgresql.data_dir**: `data_directory` GUC 値；
 > - **postgresql.parameters**: `archive_command`、`restore_command`、`archive_cleanup_command`、`recovery_end_command`、`ssl_passphrase_command`、`hba_file`、`ident_file`、`config_file` GUC 値。
 > - **bootstrap.dcs**: 収集された他のすべての PostgreSQL GUC。
 

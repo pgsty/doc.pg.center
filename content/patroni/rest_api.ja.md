@@ -31,7 +31,7 @@ Patroni には豊富な REST API があり、リーダー競合中に Patroni �
 
 - `GET /replica?replication_state=<required state>`: レプリカ チェック エンドポイント。 `replica` からのチェックに加えて、レプリケーションの状態が必要な状態と一致するかどうかもチェックします。主に `replication_state=streaming` で使用し、アーカイブ リカバリでまだ追いついていないレプリカを除外するのに役立ちます。
 
-- `GET /replica?lag=<max-lag>`: レプリカ チェック エンドポイント。 `replica` からのチェックに加えて、レプリケーションの遅延もチェックし、指定された値を下回っている場合にのみステータス コード **200** を返します。 DCS のキー cluster.last_leader_operation は、パフォーマンス上の理由から、リーダー wal の位置とレプリカのレイテンシの計算に使用されます。 max-lag はバイト (整数) または人間が読み取り可能な値 (例: 16kB、64MB、1GB) で指定できます。
+- `GET /replica?lag=<max-lag>`: レプリカ チェック エンドポイント。 `replica` からのチェックに加えて、レプリケーションの遅延もチェックし、指定された値を下回っている場合にのみステータス コード **200** を返します。 DCS のキー cluster.last_leader_operation は、パフォーマンス上の理由から、リーダー wal の位置とレプリカのレイテンシの計算に使用されます。 max-lag はバイト (整数) または人間が読み取り可能な値 (例： 16kB、64MB、1GB) で指定できます。
 
   - `GET /replica?lag=1048576`
   - `GET /replica?lag=1024kB`
@@ -61,7 +61,7 @@ Patroni には豊富な REST API があり、リーダー競合中に Patroni �
 
 - `GET /asynchronous` または `GET /async`: Patroni ノードが非同期スタンバイとして実行されている場合にのみ、HTTP ステータス コード **200** を返します。
 
-- `GET /asynchronous?lag=<max-lag>` または `GET /async?lag=<max-lag>`: 非同期スタンバイ チェック エンドポイント。 `asynchronous` または `async` からのチェックに加えて、レプリケーションの遅延もチェックし、指定された値を下回っている場合にのみステータス コード **200** を返します。 DCS のキー cluster.last_leader_operation は、パフォーマンス上の理由から、リーダー wal の位置とレプリカのレイテンシの計算に使用されます。 max-lag はバイト (整数) または人間が読み取り可能な値 (例: 16kB、64MB、1GB) で指定できます。
+- `GET /asynchronous?lag=<max-lag>` または `GET /async?lag=<max-lag>`: 非同期スタンバイ チェック エンドポイント。 `asynchronous` または `async` からのチェックに加えて、レプリケーションの遅延もチェックし、指定された値を下回っている場合にのみステータス コード **200** を返します。 DCS のキー cluster.last_leader_operation は、パフォーマンス上の理由から、リーダー wal の位置とレプリカのレイテンシの計算に使用されます。 max-lag はバイト (整数) または人間が読み取り可能な値 (例： 16kB、64MB、1GB) で指定できます。
 
   - `GET /async?lag=1048576`
   - `GET /async?lag=1024kB`
@@ -571,7 +571,7 @@ $ curl -s http://localhost:8008/patroni | jq .
 }
 ```
 
-パラメータの削除:
+パラメータの削除：
 
 一部の設定を削除 (リセット) したい場合は、`null` を使用してパッチを適用するだけです。
 
@@ -705,7 +705,7 @@ Successfully failed over to "postgresql1"
 - ウォッチドッグが完全に機能していること (構成で必要とされる場合)。
 - 正常なクラスターでのスイッチオーバーまたは自動フェイルオーバーの場合、最大レプリケーションラグ (`maximum_lag_on_failover` [構成パラメータ](/ja/patroni/config/dynamic#dynamic)) を超えていないこと。
 - 正常なクラスターでのスイッチオーバーまたは自動フェイルオーバーの場合、`check_timeline` [構成パラメータ](/ja/patroni/config/dynamic#dynamic) が `true` に設定されているときは、タイムライン番号がクラスターのタイムラインより小さくないこと。
-- [同期モード](/ja/patroni/replication_modes#synchronous_mode)の場合:
+- [同期モード](/ja/patroni/replication_modes#synchronous_mode)の場合：
   - スイッチオーバーの場合 (候補を指定する場合としない場合の両方): `/sync` キーのメンバーにリストされていること。
   - 正常なクラスターと異常なクラスターのいずれでのフェイルオーバーの場合も、このチェックは省略されます。
 

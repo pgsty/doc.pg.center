@@ -492,7 +492,7 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/releases.html"
 
   `pgaudit` 拡張機能が有効になっている場合、Patroni は作成時に `superuser`、`replication`、および `rewind` のパスワードをログに記録していました。
 
-- 混合セットアップの問題を修正しました: プライマリーが Patroni v4 より前、レプリカが v4+ (Alexander Kukushkin)
+- 混合セットアップの問題を修正しました： プライマリーが Patroni v4 より前、レプリカが v4+ (Alexander Kukushkin)
 
   リーダー上で実行されている Patroni バージョンが 4.0.0 より前の場合は、`/status` キーからメンバーのスロット位置を取得しようとするのではなく、`/members` キーから抽出された `xlog_location` を使用します。そうしないと、レプリカ上で WAL が蓄積されていました。
 
@@ -860,7 +860,7 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/releases.html"
 
 - `loop_wait + 2*retry_timeout <= ttl` ルールを強制し、可能な最小値をハードコードします (Alexander Kukushkin)
 
-  最小値: `loop_wait=2`、`retry_timeout=3`、`ttl=20`。値が小さい場合、またはルールに違反している場合は、値が調整され、警告が Patroni ログに書き込まれます。
+  最小値： `loop_wait=2`、`retry_timeout=3`、`ttl=20`。値が小さい場合、またはルールに違反している場合は、値が調整され、警告が Patroni ログに書き込まれます。
 
 **新機能**
 
@@ -1464,7 +1464,7 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/releases.html"
 
 - 典型的な Debian/Ubuntu システムでの `pg_rewind` の動作を改善しました (Gunnar "Nick" Bluth)
 
-  `postgresql.conf` をデータ ディレクトリの外に保持する Postgres セットアップ (例: Ubuntu/Debian パッケージ) では、`pg_rewind --restore-target-wal` は `restore_command` の値を把握できません。
+  `postgresql.conf` をデータ ディレクトリの外に保持する Postgres セットアップ (例： Ubuntu/Debian パッケージ) では、`pg_rewind --restore-target-wal` は `restore_command` の値を把握できません。
 
 - Consul サービス チェックで `TLSServerName` の設定を許可する (Michael Gmelin)
 
@@ -1638,7 +1638,7 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/releases.html"
 
 - `wal_keep_size` に変換するときに `wal_keep_segments` を int にキャストする (Jorge Solórzano)
 
-  `wal_keep_segments` をグローバル [動的構成](/ja/patroni/config/dynamic#dynamic) の文字列として指定することができますが、Python は動的に型付けされた言語であるため、文字列は単純に乗算されます。例: `wal_keep_segments: "100"` は `100100100100100100100100100100100100100100100100MB` に変換されました。
+  `wal_keep_segments` をグローバル [動的構成](/ja/patroni/config/dynamic#dynamic) の文字列として指定することができますが、Python は動的に型付けされた言語であるため、文字列は単純に乗算されます。例： `wal_keep_segments: "100"` は `100100100100100100100100100100100100100100100100MB` に変換されました。
 
 - 同期レプリケーションが有効な場合、同期ノードのみにスイッチオーバーを許可します。 (Alexander Kukushkin)
 
@@ -2397,7 +2397,7 @@ $ patronictl list
 
 - すべての http リクエストに `user-agent` http ヘッダーを設定します (Alexander Kukushkin)
 
-  Patroni は、http プロトコルを介して Consul、etcd、および Kubernetes API と通信しています。特別に作成された `user-agent` (例: `Patroni/1.6.2 Python/3.6.8 Linux`) を使用すると、デバッグや監視に役立つ場合があります。
+  Patroni は、http プロトコルを介して Consul、etcd、および Kubernetes API と通信しています。特別に作成された `user-agent` (例： `Patroni/1.6.2 Python/3.6.8 Linux`) を使用すると、デバッグや監視に役立つ場合があります。
 
 - 例外トレースバックのログレベルを設定できるようにしました。 (Igor Yanchenko)
 
@@ -2663,7 +2663,7 @@ $ patronictl list
 
 - カスタム ブートストラップ中に `pg_hba.conf` でローカルホストへの信頼をオープンします (Alexander Kukushkin)
 
-  以前は unix_socket に対してのみ開かれていたため、多くのエラーが発生していました: `FATAL:  no pg_hba.conf entry for replication connection from host "127.0.0.1", user "replicator"`
+  以前は unix_socket に対してのみ開かれていたため、多くのエラーが発生していました： `FATAL:  no pg_hba.conf entry for replication connection from host "127.0.0.1", user "replicator"`
 
 - 前のリーダーが先行している場合でも、同期ノードは健全であるとみなします (Alexander Kukushkin)
 
@@ -3033,7 +3033,7 @@ $ patronictl list
 
 - Postgres パラメータ名を大文字と小文字を区別しないように扱います。 (Alexander Kukushkin)
 
-  Postgres パラメーターのほとんどには snake_case 名が付いていますが、この規則には DateStyle、IntervalStyle、TimeZone の 3 つの例外があります。 Postgres は、これらのパラメーターが異なる大文字・小文字で記述されている場合 (例: timezone = 'some/tzn') でも受け入れます。ただし、Patroni は、pg_settings でこれらのパラメーター名の大文字と小文字を区別しない一致を見つけることができず、結果としてそのようなパラメーターを無視しました。
+  Postgres パラメーターのほとんどには snake_case 名が付いていますが、この規則には DateStyle、IntervalStyle、TimeZone の 3 つの例外があります。 Postgres は、これらのパラメーターが異なる大文字・小文字で記述されている場合 (例： timezone = 'some/tzn') でも受け入れます。ただし、Patroni は、pg_settings でこれらのパラメーター名の大文字と小文字を区別しない一致を見つけることができず、結果としてそのようなパラメーターを無視しました。
 
 - 実行中のpostgresにアタッチし、クラスターが初期化されていない場合、開始を中止します。 (Alexander Kukushkin)
 
@@ -3093,7 +3093,7 @@ $ patronictl list
 
 - ログ レベルを環境変数から設定できるようにしました (Andy Newton、Keyvan Hedayati)
 
-  `PATRONI_LOGLEVEL` - 一般的なログ レベルを設定します。 `PATRONI_REQUESTS_LOGLEVEL` - すべての HTTP リクエスト (例: Kubernetes API 呼び出し) のログ レベルを設定します。可能なログ レベルの名前を取得するには、[Python ロギングのドキュメント](https://docs.python.org/3.6/library/logging.html#levels) のドキュメントを参照してください。
+  `PATRONI_LOGLEVEL` - 一般的なログ レベルを設定します。 `PATRONI_REQUESTS_LOGLEVEL` - すべての HTTP リクエスト (例： Kubernetes API 呼び出し) のログ レベルを設定します。可能なログ レベルの名前を取得するには、[Python ロギングのドキュメント](https://docs.python.org/3.6/library/logging.html#levels) のドキュメントを参照してください。
 
 **安定性の向上とバグ修正**
 

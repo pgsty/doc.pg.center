@@ -18,7 +18,7 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/yaml_configuration.html
 - **thread_pool_size**: リーダー競合またはフェールセーフ チェック中に、非同期タスクを実行し、REST API を介して他のメンバーと通信するために Patroni によって使用されるスレッド プールのサイズ。最小値は `5`、デフォルト値は `5` です。
 - **thread_stack_size**: Patroni によって開始されるスレッドに使用されるスタック サイズを指定します。値は `64kB` によってアライメントされる必要があります。最小値は `64kB` 、デフォルト値 (Patroni によって設定) は `512kB` です。
 - **name**: ホストの名前。クラスター内で一意である必要があります。
-- **namespace**: Patroni がクラスターに関する情報を保持する構成ストア内のパス。デフォルト値: "/service"
+- **namespace**: Patroni がクラスターに関する情報を保持する構成ストア内のパス。デフォルト値： "/service"
 - **scope**: クラスター名
 
 <a id="log_settings"></a>
@@ -103,8 +103,8 @@ Patroni と [Citus](https://docs.citusdata.com) の統合を有効にします�
 
 ほとんどのパラメーターはオプションですが、**host** または **url** のいずれかを指定する必要があります。
 
-- **host**: Consul ローカル エージェントのホスト:ポート。
-- **url**: Consul ローカル エージェントの URL (形式: http(s)://host:port)。
+- **host**: Consul ローカル エージェントのホスト：ポート。
+- **url**: Consul ローカル エージェントの URL (形式： http(s)://host:port)。
 - **port**: (オプション) Consul ポート。
 - **scheme**: (オプション) **http** または **https**、デフォルトは **http** です。
 - **token**: (オプション) ACL トークン。
@@ -138,13 +138,13 @@ Patroni と [Citus](https://docs.citusdata.com) の統合を有効にします�
 
 ほとんどのパラメーターはオプションですが、**host**、**hosts**、**url**、**proxy**、または **srv** のいずれかを指定する必要があります。
 
-- **host**: etcd エンドポイントのホスト:ポート。
+- **host**: etcd エンドポイントのホスト：ポート。
 - **hosts**: host1:port1、host2:port2 などの形式の etcd エンドポイントのリスト。カンマ区切りの文字列または実際の yaml リストの可能性があります。
 - **use_proxies**: このパラメータが true に設定されている場合、Patroni は **hosts** をプロキシのリストと見なし、etcd クラスターのトポロジ検出を実行しません。
 - **url**: etcd の URL。
 - **proxy**: etcd のプロキシ URL。プロキシを使用して etcd に接続している場合は、**url** の代わりにこのパラメーターを使用します。
-- **srv**: クラスター自動検出のために SRV レコードを検索するドメイン。 Patroni は、指定されたドメインの SRV サービス名 (最初に成功するまでこの順序で) のクエリーを試行します: `_etcd-client-ssl`、`_etcd-client`、`_etcd-ssl`、`_etcd`、`_etcd-server-ssl`、`_etcd-server`。 `_etcd-server-ssl` または `_etcd-server` の SRV レコードが取得された場合、ETCD ピア プロトコルが使用され、利用可能なメンバーについて ETCD がクエリーされます。それ以外の場合は、SRV レコードのホストが使用されます。
-- **srv_suffix**: 検出中にクエリーされる SRV 名のサフィックスを構成します。このフラグを使用して、同じドメイン内の複数の etcd クラスターを区別します。 **srv** と組み合わせた場合にのみ機能します。たとえば、`srv_suffix: foo` と `srv: example.org` が設定されている場合、DNS SRV クエリーが作成されます:`_etcd-client-ssl-foo._tcp.example.org` (考えられるすべての ETCD SRV サービス名に対して同様)。
+- **srv**: クラスター自動検出のために SRV レコードを検索するドメイン。 Patroni は、指定されたドメインの SRV サービス名 (最初に成功するまでこの順序で) のクエリーを試行します： `_etcd-client-ssl`、`_etcd-client`、`_etcd-ssl`、`_etcd`、`_etcd-server-ssl`、`_etcd-server`。 `_etcd-server-ssl` または `_etcd-server` の SRV レコードが取得された場合、ETCD ピア プロトコルが使用され、利用可能なメンバーについて ETCD がクエリーされます。それ以外の場合は、SRV レコードのホストが使用されます。
+- **srv_suffix**: 検出中にクエリーされる SRV 名のサフィックスを構成します。このフラグを使用して、同じドメイン内の複数の etcd クラスターを区別します。 **srv** と組み合わせた場合にのみ機能します。たとえば、`srv_suffix: foo` と `srv: example.org` が設定されている場合、DNS SRV クエリーが作成されます：`_etcd-client-ssl-foo._tcp.example.org` (考えられるすべての ETCD SRV サービス名に対して同様)。
 - **protocol**: (オプション) http または https (指定しない場合は http が使用されます)。 **url** または **proxy** が指定されている場合は、それらからプロトコルを取得します。
 - **username**: (オプション) etcd 認証用のユーザー名。
 - **password**: (オプション) etcd 認証用のパスワード。
@@ -165,7 +165,7 @@ Patroni をプロトコル バージョン 3 経由で etcd クラスターと�
 
 ## ZooKeeper {#zookeeper}
 
-- **hosts**: ZooKeeper クラスター メンバーのリスト (形式: \['host1:port1', 'host2:port2', 'etc...'\])。
+- **hosts**: ZooKeeper クラスター メンバーのリスト (形式： \['host1:port1', 'host2:port2', 'etc...'\])。
 - **use_ssl**: (オプション) SSL が使用されているかどうか。デフォルトは `false` です。 `false` に設定すると、SSL 固有のパラメーターはすべて無視されます。
 - **cacert**: (オプション) CA 証明書。存在する場合、検証が有効になります。
 - **cert**: (オプション) クライアント証明書を含むファイル。
@@ -182,7 +182,7 @@ Patroni をプロトコル バージョン 3 経由で etcd クラスターと�
 
 ## Exhibitor {#exhibitor}
 
-- **hosts**: Exhibitor (ZooKeeper) ノードの初期リスト (形式: 「host1、host2、etc...」)。このリストは、Exhibitor (ZooKeeper) クラスター トポロジが変更されるたびに自動的に更新されます。
+- **hosts**: Exhibitor (ZooKeeper) ノードの初期リスト (形式： 「host1、host2、etc...」)。このリストは、Exhibitor (ZooKeeper) クラスター トポロジが変更されるたびに自動的に更新されます。
 - **poll_interval**: ZooKeeper および Exhibitor ノードのリストを Exhibitor から更新する頻度。
 - **port**: Exhibitor ポート。
 
@@ -218,7 +218,7 @@ Patroni をプロトコル バージョン 3 経由で etcd クラスターと�
 
 - **bind_addr**: (オプション) Raft 接続をリッスンする `ip:port`。指定しない場合は、`self_addr` が使用されます。
 
-- **partner_addrs**: クラスター内の他の Patroni ノードのリスト (形式: \['ip1:port', 'ip2:port', 'etc...'\])
+- **partner_addrs**: クラスター内の他の Patroni ノードのリスト (形式： \['ip1:port', 'ip2:port', 'etc...'\])
 
 - **data_dir**: Raft ログとスナップショットを保存するディレクトリ。指定しない場合は、現在の作業ディレクトリが使用されます。
 
@@ -231,30 +231,30 @@ Patroni をプロトコル バージョン 3 経由で etcd クラスターと�
 - **leader_fallback_timeout**: (オプション) 過半数からの応答がないリーダーがフォロワー状態に戻るまでの秒数。 `append_entries_period` より大きくなければなりません。デフォルト： `30.0`。
 
 > [!NOTE]
-> これらのタイムアウト パラメーターは、デフォルトの pysyncobj タイムアウトが厳しすぎる高遅延ネットワークで役立ちます。次の制約を満たす必要があります: `min_timeout` > 3 * `append_entries_period`、`max_timeout` > `min_timeout`、`connection_timeout` >= `max_timeout`、および `leader_fallback_timeout` > `append_entries_period`。 Patroni は起動時にこれらを検証し、違反している場合は起動を拒否します。これらの値は実行時に変更できないため、再起動が必要です。
+> これらのタイムアウト パラメーターは、デフォルトの pysyncobj タイムアウトが厳しすぎる高遅延ネットワークで役立ちます。次の制約を満たす必要があります： `min_timeout` > 3 * `append_entries_period`、`max_timeout` > `min_timeout`、`connection_timeout` >= `max_timeout`、および `leader_fallback_timeout` > `append_entries_period`。 Patroni は起動時にこれらを検証し、違反している場合は起動を拒否します。これらの値は実行時に変更できないため、再起動が必要です。
 >
 > [!WARNING]
 > これらの設定は、pysyncobj の選挙と接続のタイムアウトを緩和するだけです。 Patroni が Raft 操作に適用するコマンドごとの期限は延長されません。各 Raft コマンド (リーダー ロックのリフレッシュ、クラスター状態の書き込み) は依然として `retry_timeout` (デフォルト `10`) 内で完了する必要があります。遅延が非常に長いリンク (ラウンドトリップ時間がおよそ数秒を超える場合) では、`connection_timeout` が RTT を大きく上回っていても、1 つのコマンドが `retry_timeout` を超える可能性があるため、DCS は到達不能であるように見え、プライマリーが降格される可能性があります。このようなリンクでは、`loop_wait + 2 * retry_timeout <= ttl` を維持しながら、それに応じて `retry_timeout` と `ttl` も引き上げる必要があります。
 
   Raft 実装に関する短い FAQ
 
-  - Q: コンセンサスを提供するすべてのノードをリストするにはどうすればよいですか?
+  - Q: コンセンサスを提供するすべてのノードをリストするにはどうすればよいですか？
 
     A: `syncobj_admin -conn host:port -status` ここで、host:port はクラスター ノードの 1 つのアドレスです。
 
-  - Q: コンセンサスの一部であったノードが離脱し、その IP を他のノードに再利用できません。このノードをコンセンサスから削除するにはどうすればよいですか?
+  - Q: コンセンサスの一部であったノードが離脱し、その IP を他のノードに再利用できません。このノードをコンセンサスから削除するにはどうすればよいですか？
 
     A: `syncobj_admin -conn host:port -remove host2:port2` ここで、`host2:port2` はコンセンサスから削除するノードのアドレスです。
 
-  - Q: `syncobj_admin` ユーティリティはどこで入手できますか?
+  - Q: `syncobj_admin` ユーティリティはどこで入手できますか？
 
     A: Patroni 依存関係である `pysyncobj` モジュール (Python RAFT 実装) と一緒にインストールされます。
 
-  - Q: コンセンサスに追加せずに Patroni ノードを実行することは可能ですか?
+  - Q: コンセンサスに追加せずに Patroni ノードを実行することは可能ですか？
 
     A: はい、Patroni 構成から `raft.self_addr` をコメントアウトするか削除してください。
 
-  - Q: Patroni と PostgreSQL は 2 つのノードでのみ実行できますか?
+  - Q: Patroni と PostgreSQL は 2 つのノードでのみ実行できますか？
 
     A: はい、3 番目のノードでは `patroni_raft_controller` を実行できます (Patroni と PostgreSQL は使用しません)。このような設定では、1 つのノードが一時的に失われても、プライマリーには影響しません。
 
@@ -337,7 +337,7 @@ Patroni をプロトコル バージョン 3 経由で etcd クラスターと�
     - **pg_isready**: (オプション) `pg_isready` バイナリのカスタム名。
     - **pg_rewind**: (オプション) `pg_rewind` バイナリのカスタム名。
 
-  - **listen**: Postgres がリッスンする IP アドレス + ポート。ストリーミング レプリケーションを使用している場合は、クラスター内の他のノードからアクセスできる必要があります。ポートコンポーネントが最後のアドレスの後ろにコロンで追加されている限り、カンマで区切られた複数のアドレスが許可されます (例: `listen: 127.0.0.1,127.0.0.2:5432`)。 Patroni は、このリストの最初のアドレスを使用して、PostgreSQL ノードへのローカル接続を確立します。
+  - **listen**: Postgres がリッスンする IP アドレス + ポート。ストリーミング レプリケーションを使用している場合は、クラスター内の他のノードからアクセスできる必要があります。ポートコンポーネントが最後のアドレスの後ろにコロンで追加されている限り、カンマで区切られた複数のアドレスが許可されます (例： `listen: 127.0.0.1,127.0.0.2:5432`)。 Patroni は、このリストの最初のアドレスを使用して、PostgreSQL ノードへのローカル接続を確立します。
 
   - **use_unix_socket**: Patroni がクラスターへの接続に Unix ソケットの使用を優先することを指定します。デフォルト値は `false` です。 `unix_socket_directories` が定義されている場合、Patroni はその中の最初の適切な値を使用してクラスターに接続し、適切なものがない場合は tcp にフォールバックします。 `postgresql.parameters` で `unix_socket_directories` が指定されていない場合、Patroni はデフォルト値を使用する必要があると想定し、接続パラメーターから `host` を省略します。
 
@@ -374,7 +374,7 @@ Patroni をプロトコル バージョン 3 経由で etcd クラスターと�
 
   - **use_pg_rewind**: 以前のリーダーがレプリカとしてクラスターに参加するときに、そのノードで pg_rewind の使用を試みます。クラスターは `data page checksums` (`initdb` の `--data-checksums` オプション) で初期化するか、`wal_log_hints` を `on` に設定する必要があります。そうしないと、`pg_rewind` は機能しません。
 
-  - **rewind**: (オプション) `pg_rewind` コマンドに渡すカスタム オプション。文字列および/または単一のキーと値を持つ辞書のリストとして指定できます。許可されないオプションには、`target-pgdata`、`source-pgdata`、`source-server`、`write-recovery-conf`、`dry-run`、`restore-target-wal`、`config-file`、`no-ensure-shutdown`、`version`、`help` があります。使用例:
+  - **rewind**: (オプション) `pg_rewind` コマンドに渡すカスタム オプション。文字列および/または単一のキーと値を持つ辞書のリストとして指定できます。許可されないオプションには、`target-pgdata`、`source-pgdata`、`source-server`、`write-recovery-conf`、`dry-run`、`restore-target-wal`、`config-file`、`no-ensure-shutdown`、`version`、`help` があります。使用例：
 
     ```yaml
     postgresql:
@@ -492,7 +492,7 @@ restapi:
 - **nosync**: `true` または `false`。 `true` に設定すると、ノードは同期レプリカとして選択されなくなります。
 - **sync_priority**: 整数。[synchronous_mode](/ja/patroni/replication_modes#synchronous_mode) が `on` に設定されている場合に、同期レプリカの選択中にこのノードが持つべき優先順位を制御します。優先順位の高いノードは、優先順位の低いノードよりも優先されます。 `sync_priority` が 0 または負の場合、そのようなノードは `synchronous_standby_names` PostgreSQL パラメーターに書き込むことができません (`nosync: true` と同様)。このパラメータは、`pg_stat_replication` ビューで報告される `sync_priority` 値とは逆の意味をもつことに注意してください。
 - **nofailover**: `true` または `false` は、このノードがリーダー レースに参加してリーダーになることを許可するかどうかを制御します。デフォルトは `false` で、このノード <span id="can">は</span>リーダー レースに参加できることを意味します。
-- **failover_priority**: 整数。フェイルオーバー中にこのノードが持つべき優先順位を制御します。同じ量の WAL を受信/再生した場合、優先順位の高いノードが優先順位の低いノードよりも優先されます。ただし、優先度に関係なく、受信/再生 LSN の値が高いノードが優先されます。 `failover_priority` が 0 または負の場合、そのようなノードはリーダー レースに参加したり、リーダーになることは許可されません (`nofailover: true` と同様)。既知の制限: `failover_priority` は現在、[クォーラムベースの同期レプリケーション](/ja/patroni/replication_modes#quorum_mode) では動作しません。
+- **failover_priority**: 整数。フェイルオーバー中にこのノードが持つべき優先順位を制御します。同じ量の WAL を受信/再生した場合、優先順位の高いノードが優先順位の低いノードよりも優先されます。ただし、優先度に関係なく、受信/再生 LSN の値が高いノードが優先されます。 `failover_priority` が 0 または負の場合、そのようなノードはリーダー レースに参加したり、リーダーになることは許可されません (`nofailover: true` と同様)。既知の制限： `failover_priority` は現在、[クォーラムベースの同期レプリケーション](/ja/patroni/replication_modes#quorum_mode) では動作しません。
 - **nostream**: `true` または `false`。 `true` に設定すると、ノードは WAL をストリーミングするためにレプリケーション プロトコルを使用しません。代わりに、アーカイブのリカバリ (`restore_command` が構成されている場合) と `pg_wal`/`pg_xlog` ポーリングに依存します。また、ノード自体とそのすべてのカスケード レプリカ上の永続的な論理レプリケーション スロットのコピーと同期も無効になります。このタグをプライマリー ノードに設定しても効果はありません。
 
 > [!WARNING]
