@@ -24,7 +24,7 @@ Diese Spiegelung dokumentiert v2.59.3. Neuere Versionen sind in der [Versionsges
 
 ### v2.59.3 – Versionshinweise {#v2593-release-notes}
 
-*Fehler bei der Erzeugung von Verschlüsselungsunterschlüsseln*
+*Fehler bei schwachen Verschlüsselungsunterschlüsseln*
 
 *Veröffentlicht am 4. Oktober 2026*
 
