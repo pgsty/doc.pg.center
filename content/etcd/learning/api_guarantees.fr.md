@@ -92,7 +92,7 @@ etcd fournit [un mécanisme de bail][lease]. Le cas d'utilisation principal d'un
 
 Une opération etcd est considérée comme terminée lorsqu'elle est validée par consensus, et donc « exécutée » — stockée de manière permanente — par le moteur de stockage etcd. Le client sait qu'une opération est terminée lorsqu'il reçoit une réponse du serveur etcd. Notez que le client peut ignorer l'état d'une opération si la requête expire, ou s'il y a une interruption réseau entre le client et le membre etcd. etcd peut également annuler des opérations lors d'une élection de leader. etcd ne renvoie pas de réponses `abort` aux requêtes en cours des clients dans cet événement.
 
-### révision {#revision}
+### Révision {#revision}
 
 Une opération etcd qui modifie le magasin clé-valeur se voit attribuer une révision unique strictement croissante. Une opération transactionnelle peut modifier le magasin clé-valeur plusieurs fois, mais une seule révision lui est attribuée. L'attribut révision d'une paire clé-valeur modifiée par l'opération a la même valeur que la révision de l'opération. La révision peut être utilisée comme horloge logique pour le magasin clé-valeur. Une paire clé-valeur ayant une révision plus élevée est modifiée après une paire clé-valeur ayant une révision plus faible. Deux paires clé-valeur ayant la même révision sont modifiées par une opération « simultanément ».
 

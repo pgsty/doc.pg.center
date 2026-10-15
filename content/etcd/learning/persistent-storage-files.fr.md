@@ -446,7 +446,7 @@ Il existe 2 déclencheurs contrôlant la création de ces fichiers :
 
 * Un nouveau fichier est créé toutes les --snapshot-count= propositions appliquées environ (10 000 par défaut dans v3.7.0). Cette valeur est approximative : les propositions peuvent arriver par lots, la création d'un instantané n'est envisagée qu'à la fin du lot et le processus est finalement planifié de manière asynchrone.
   Le nom de l'option (--snapshot-count) est assez trompeur : elle contrôle la [différence de valeur d’index](https://github.com/etcd-io/etcd/blob/ad5b30297a43daeb5ce7311fa606ce4c1f16618f/server/etcdserver/server.go#L1266) entre le dernier index d’instantané et le dernier index de proposition appliquée.
-* Raft demande à la réplique de restaurer à partir de l'instantané. Pendant qu'une réplique reçoit l'instantané via le message msgSnap, il le sauvegarde également (de manière légère) dans le journal WAL. Cela garantit que dans la queue du journal WAL se trouve toujours un instantané valide suivi d'entrées. Cela supprime ainsi tout risque de discontinuité dans les journaux WAL.
+* Raft demande à la réplique de restaurer à partir de l'instantané. Pendant qu'une réplique reçoit l'instantané via le message msgSnap, elle le sauvegarde également (de manière légère) dans le journal WAL. Cela garantit que dans la queue du journal WAL se trouve toujours un instantané valide suivi d'entrées. Cela supprime ainsi tout risque de discontinuité dans les journaux WAL.
 
 Actuellement, les fichiers sont approximativement [^3] associés 1 à 1 aux entrées Snapshot des journaux WAL. Avec le décommissionnement du store v2, nous prévoyons que les fichiers ne seront plus écrits du tout (optionnel : 3.5.x, obligatoire : 3.6.x).
 

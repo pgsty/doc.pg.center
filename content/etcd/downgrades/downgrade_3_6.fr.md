@@ -120,7 +120,7 @@ Pour garantir une rétrogradation progressive sans incident, le cluster en cours
 
 #### Préparation {#preparation}
 
-Avant de rétrograder etcd, testez toujours les services dépendants d’etcd dans un environnement de préproduction avant de déployer la mise à jour vers l’environnement de production.
+Avant de rétrograder etcd, testez toujours les services dépendants d’etcd dans un environnement de préproduction avant de déployer la rétrogradation vers l’environnement de production.
 
 Avant de commencer, [téléchargez l'instantané de sauvegarde](/fr/etcd/op-guide/maintenance/#snapshot-backup). Si une erreur survient lors de la rétrogradation, il sera possible d'utiliser cette sauvegarde pour [annuler](#rollback) la mise à jour et revenir à la version existante d'etcd.
 
