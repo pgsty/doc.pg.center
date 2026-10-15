@@ -57,7 +57,7 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/patroni_configuration.h
 
 На всякий случай параметры из приведённых выше списков записываются в `postgresql.conf` и передаются в виде списка аргументов в `postgres`, что придаёт им наибольший приоритет (за исключением `wal_keep_segments` и `wal_keep_size`), даже выше, чем у [ALTER SYSTEM](https://www.postgresql.org/docs/current/static/sql-altersystem.html)
 
-Существуют также некоторые параметры, такие как **postgresql.listen**, **postgresql.data_dir**, которые **можно задать только локально**, т. е. в [файле конфигурации](/ru/patroni/config/yaml#yaml) Patroni или с помощью переменной [конфигурации окружения](/ru/patroni/config/env#env). В большинстве случаев локальная конфигурация переопределяет динамическую конфигурацию.
+Существуют также некоторые параметры, такие как **postgresql.listen**, **postgresql.data_dir**, которые **можно задать только локально**, т. е. в [файле конфигурации](/ru/patroni/config/yaml#yaml) Patroni или с помощью переменной [конфигурации среды](/ru/patroni/config/env#env). В большинстве случаев локальная конфигурация переопределяет динамическую конфигурацию.
 
 При применении параметров локальной или динамической конфигурации выполняются следующие действия:
 
