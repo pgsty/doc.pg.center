@@ -269,5 +269,5 @@ upstream_link: "https://www.pgbouncer.org/downloads/"
 
 以下专用构建可能提供比发行版仓库更新的版本：
 
-- RPM：[**yum.postgresql.org**](https://yum.postgresql.org/)
-- Deb：[**apt.postgresql.org**](https://apt.postgresql.org/)
+- RPM：[yum.postgresql.org](https://yum.postgresql.org/)
+- Deb：[apt.postgresql.org](https://apt.postgresql.org/)
