@@ -32,8 +32,8 @@ pgBackRestのリリース番号は、メジャーとマイナーの2つの部分
 
 **バグ修正:**
 
-- 暗号化された情報ファイルとマニフェストの読み込み時にチェックサムエラーが発生する可能性がある問題を修正。 (*修正: j0uinim。レビュー: David Steele。*)
-- 脆弱な暗号化サブキーやソルトが生成される可能性がある問題を修正。 (*修正: j0uinim。レビュー: David Steele, Stefan Fercot, Douglas J Hunley。*)
+- 暗号化された情報ファイルとマニフェストの読み込み時にチェックサムエラーが発生する可能性がある問題を修正。 (*修正： j0uinim。レビュー： David Steele。*)
+- 脆弱な暗号化サブキーやソルトが生成される可能性がある問題を修正。 (*修正： j0uinim。レビュー： David Steele, Stefan Fercot, Douglas J Hunley。*)
 
 
 --------

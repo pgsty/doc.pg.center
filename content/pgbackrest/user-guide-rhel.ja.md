@@ -3022,7 +3022,7 @@ tls-server-key-file=/etc/pgbackrest/cert/server.key
 
 primary_conninfoにパスワードを設定することもできますが、`.pgpass`ファイルのほうが柔軟かつ安全です。
 
-pg-standby **⇒** `.pgpass`ファイルにレプリケーションのパスワードを設定する。
+pg-standby **⇒** `.pgpass`ファイルにレプリケーションのパスワードを設定する
 
 ```bash
 sudo -u postgres sh -c 'echo \
