@@ -505,7 +505,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
 
 **2023-07-20  -  PgBouncer 1.20.0  -  „Hier gehört ein lustiger Name hin“**
 
-- Abkündigungen
+- Veraltete Funktionen
   * Die Option für Online-Neustarts gilt jetzt als veraltet. Diese Funktion wurde in den letzten
     Jahren kaum gepflegt. Sie hat mehrere bekannte Probleme, und neu hinzugefügte Funktionen
     unterstützen sie häufig nicht. Heute wird für Online-Neustarts die Verwendung der Funktionen
