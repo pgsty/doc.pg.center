@@ -10,7 +10,6 @@ upstream_link: "https://patroni.readthedocs.io/en/latest/contributing_guidelines
 ---
 
 <a id="contributing_guidelines"></a>
-<a id="chatting"></a>
 
 --------
 

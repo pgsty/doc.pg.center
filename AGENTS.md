@@ -107,7 +107,7 @@ Git; `public/`, `resources/`, and local caches are ignored.
   documentation links, which must stay in the reader's selected language.
 - Hosting and deployment: **Cloudflare Pages**, connected to the GitHub repository.
 - Cloudflare build command: `make build`; output: `public`; root: the repository root.
-- Set `HUGO_VERSION=0.165.0` and `GO_VERSION=1.27.0` in Cloudflare, matching CI.
+- Set `HUGO_VERSION=0.166.0` and `GO_VERSION=1.27.0` in Cloudflare, matching CI.
   Set `GOWORK=off` and `HUGO_MODULE_WORKSPACE=off`. Apply the same toolchain
   settings to preview builds; leave `HUGO_MODULE_REPLACEMENTS` unset.
 - Google Analytics 4: `G-D9E4B60JWX`, shared with `pg.center`. Keep the ID in

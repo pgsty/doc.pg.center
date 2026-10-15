@@ -20,7 +20,7 @@ defaults:
 
 env:
   GO_VERSION: 1.27.0
-  HUGO_VERSION: 0.165.0
+  HUGO_VERSION: 0.166.0
   GOWORK: off
   HUGO_MODULE_WORKSPACE: off
 
