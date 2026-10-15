@@ -88,13 +88,13 @@ Sorti le 2026-05-05
 
 - Gérer correctement l'erreur etcd mal étiquetée (Ants Aasma)
 
-  Les versions actuelles d’etcd génèrent une erreur `Unknown` lorsque le leader etcd est perdu pendant la mise à jour de la durée de location. Patroni va désormais remplacer le code d’erreur signalé par `Unavailable`.
+  Les versions actuelles d’etcd génèrent une erreur `Unknown` lorsque le leader etcd est perdu pendant la mise à jour du bail. Patroni va désormais remplacer le code d’erreur signalé par `Unavailable`.
 
 **Correctifs de bogues**
 
 - Utilisez la version binaire lorsque le fichier `PG_VERSION` n'existe pas (Polina Bungina)
 
-  Dans certains cas, par exemple lors de l'utilisation d'un amorçage personnalisé, le fichier `PG_VERSION` peut ne pas être présent dans le répertoire de données. Dans ce cas, Patroni traitait la version comme 0.0, ce qui provoquait des problèmes avec certaines logiques spécifiques à la version. Avec cette correction, Patroni tentera d'obtenir la version à partir de la binaire dans de tels cas.
+  Dans certains cas, par exemple lors de l'utilisation d'un amorçage personnalisé, le fichier `PG_VERSION` peut ne pas être présent dans le répertoire de données. Dans ce cas, Patroni traitait la version comme 0.0, ce qui provoquait des problèmes avec certaines logiques spécifiques à la version. Avec cette correction, Patroni tentera d'obtenir la version à partir du binaire dans de tels cas.
 
 - Réorganisation de l'initialisation du logger pour éviter la perte des premiers messages de journal (Alexander Kukushkin)
 
@@ -244,7 +244,7 @@ Sortie le 2025-09-23
 
 - Ajouter un attribut facultatif `cluster_type` aux slots de réplication permanents (Michael Banck)
 
-  Cela vous permet de définir si une slot de réplication permanente particulière doit toujours être créée, ou uniquement sur un cluster primaire ou un cluster de secours.
+  Cela vous permet de définir si un slot de réplication permanente particulier doit toujours être créé, ou uniquement sur un cluster primaire ou un cluster de secours.
 
 - Rendre le header du serveur HTTP configurable (David Grierson)
 
@@ -438,7 +438,7 @@ Sorti le 2025-02-20
 - Corriger quelques bogues dans la machine à états du quorum (Alexander Kukushkin)
 
   - Lorsqu’il s’agit d’évaluer la présence de nœuds sains pour une course au rôle de leader, il est nécessaire de prendre en compte les exigences de quorum avant de procéder à la rétrogradation. En l’absence de cette prise en compte, l’ancien leader pourrait se retrouver en récupération entouré de nœuds asynchrones.
-  - `QuorumStateResolver` ne gérant pas correctement le cas où un nœud réplique se connecte puis se déconnecte rapidement.
+  - `QuorumStateResolver` ne gérait pas correctement le cas où un nœud réplique se connecte puis se déconnecte rapidement.
 
 **Améliorations**
 
@@ -657,7 +657,7 @@ Publié le 2024-07-11
 
 - Corriger la condition de course entre l'avancement du slot logique et la copie (Alexander Kukushkin)
 
-  En raison de ce bogue, il était possible qu'une slot de réplication logique invalidée soit copiée lors d'un redémarrage de PostgreSQL à plusieurs reprises.
+  En raison de ce bogue, il était possible qu'un slot de réplication logique invalidé soit copié lors d'un redémarrage de PostgreSQL à plusieurs reprises.
 
 --------
 
@@ -790,7 +790,7 @@ Sorti le 2024-01-17
 
   La configuration `{nofailover: false, failover_priority: 0}` définie sur un nœud ne lui a pas permis de participer à la course, ce qui devrait être le cas, car le tag `nofailover` doit avoir la priorité.
 
-- Corrigé le problème lié au gel avec PyInstaller (Sophia Ruan)
+- Corrigé les problèmes liés aux exécutables figés (frozen) de PyInstaller (Sophia Ruan)
 
   Le `freeze_support()` a été appelé après `argparse`, ce qui a empêché Patroni de démarrer PostgreSQL.
 
@@ -986,7 +986,7 @@ Sorti le 2023-09-20
 
 - Ne pas démarrer PostgreSQL arrêté en mode pause (Alexander Kukushkin)
 
-  En raison d'une condition de course, Patroni supposait à tort que le standby devait être redémarré car certains paramètres de récupération (`primary_conninfo` ou similaires) avaient été modifiés.
+  En raison d'une condition de course, Patroni supposait à tort que le nœud de secours devait être redémarré car certains paramètres de récupération (`primary_conninfo` ou similaires) avaient été modifiés.
 
 - Correctif d'un bogue dans la commande `patronictl query` (Israel Barth Rubio)
 
@@ -998,7 +998,7 @@ Sorti le 2023-09-20
 
 - Ne comptez pas sur `pg_stat_wal_receiver` pour déterminer `pg_rewind` (Alexander Kukushkin)
 
-  Il se peut que le timeline rapporté par `received_tli` depuis `pg_stat_wal_receiver` soit en avance par rapport au timeline réellement rejoué, tandis que le timeline rapporté par `IDENTIFY_SYSTEM` via la connexion de réplication est toujours correct.
+  Il se peut que la timeline rapportée par `received_tli` depuis `pg_stat_wal_receiver` soit en avance par rapport à la timeline réellement rejouée, tandis que la timeline rapportée par `IDENTIFY_SYSTEM` via la connexion de réplication est toujours correct.
 
 --------
 
@@ -1017,7 +1017,7 @@ Sorti le 2023-08-03
 
 **Nouvelles fonctionnalités**
 
-- Rendre le libellé du rôle du Pod configurables (Waynerv)
+- Rendre le libellé du rôle du Pod configurable (Waynerv)
 
   Les valeurs peuvent être personnalisées à l’aide des paramètres `kubernetes.leader_label_value`, `kubernetes.follower_label_value` et `kubernetes.standby_leader_label_value`. Cette fonctionnalité sera particulièrement utile lorsque nous modifierons le rôle `master` en `primary`. Vous trouverez davantage d’informations sur cette fonctionnalité et les étapes de migration [ici](/fr/patroni/kubernetes#kubernetes_role_values).
 
@@ -1033,7 +1033,7 @@ Sorti le 2023-08-03
 
 - Éviter les mises à jour inutiles de la clé `/status` (Alexander Kukushkin)
 
-  Lorsqu’aucune slot logique permanente n’est présente, Patroni mettait à jour `/status` à chaque boucle de battement de cœur, même lorsque le LSN sur le primaire ne progressait pas.
+  Lorsqu’aucun slot logique permanent n’est présent, Patroni mettait à jour `/status` à chaque boucle de battement de cœur, même lorsque le LSN sur le primaire ne progressait pas.
 
 - Interdire à un primaire obsolète de remporter la course au leader (Alexander Kukushkin)
 
@@ -1093,7 +1093,7 @@ Publié le 2023-07-13
 
 - Messages d'erreur améliorés avec etcd v3 (Alexander Kukushkin)
 
-  Lorsque le cluster etcd v3 n'est pas accessible, Patroni signale qu'il ne parvient pas à accéder aux points d'entrée `/v2`.
+  Lorsque le cluster etcd v3 n'est pas accessible, Patroni signale qu'il ne parvient pas à accéder aux points de terminaison `/v2`.
 
 - Utilisez la lecture en quorum dans [patronictl](/fr/patroni/patronictl#patronictl) si cela est possible (Alexander Kukushkin)
 
@@ -1668,7 +1668,7 @@ Sorti le 2021-12-03
 
 - Ignorer les slots de réplication temporaires lors de la gestion des slots (Alexander Kukushkin)
 
-  À compter de la version 10, `pg_basebackup` crée une slot de réplication temporaire pour le streaming WAL, et Patroni tentait de la supprimer car le nom de la slot semblait inconnu. Pour résoudre ce problème, nous ignorons toutes les slots temporaires lors de la requête de la vue `pg_replication_slots`.
+  À compter de la version 10, `pg_basebackup` crée un slot de réplication temporaire pour le streaming WAL, et Patroni tentait de la supprimer car le nom du slot semblait inconnu. Pour résoudre ce problème, nous ignorons tous les slots temporaires lors de la requête de la vue `pg_replication_slots`.
 
 - Assurez-vous que `pg_replication_slot_advance()` ne dépasse pas son délai d’exécution (Alexander Kukushkin)
 
@@ -2074,7 +2074,7 @@ Cette version améliore la compatibilité avec PostgreSQL 13, ajoute le support 
 
 - Supprimer le module python [kubernetes](/fr/patroni/kubernetes#kubernetes) (Alexander Kukushkin)
 
-  Le client Python officiel pour Kubernetes contient une grande quantité de code généré automatiquement et est donc très lourd. Patroni n'utilise qu'une petite partie des points d'entrée de l'API Kubernetes, et la mise en œuvre de leur prise en charge n'a pas été difficile.
+  Le client Python officiel pour Kubernetes contient une grande quantité de code généré automatiquement et est donc très lourd. Patroni n'utilise qu'une petite partie des points de terminaison de l'API Kubernetes, et la mise en œuvre de leur prise en charge n'a pas été difficile.
 
 - Permettre de contourner le service [kubernetes](/fr/patroni/kubernetes#kubernetes) (Alexander Kukushkin)
 
@@ -2293,7 +2293,7 @@ $ patronictl list
 
   Dans certains cas, cela peut entraîner la conservation de l'adresse IP virtuelle sur l'ancien nœud primaire. Ce comportement régressif a été introduit à partir de la version 1.4.5.
 
-- Réinitialiser l'état de rembobinage si PostgreSQL a été démarré après un pg_rewind réussi (Alexander Kukushkin)
+- Réinitialiser l'état du rewind si PostgreSQL a été démarré après un pg_rewind réussi (Alexander Kukushkin)
 
   En raison de ce bogue, Patroni démarrait PostgreSQL, arrêté manuellement, en mode pause.
 
@@ -2487,7 +2487,7 @@ Sorti le 2019-11-15
 
 - Supprimez uniquement les variables d'environnement préfixées par `PATRONI_` au démarrage de Postgres (Cody Coons)
 
-  Il résouda plusieurs problèmes liés à l'exécution de différents wrappers de données étrangères.
+  Il résoudra plusieurs problèmes liés à l'exécution de différents wrappers de données étrangères.
 
 **Améliorations de stabilité**
 
@@ -2741,7 +2741,7 @@ Cette version introduit la possibilité de réinitialisation automatique de l’
 
   Il aide à détecter les répliques obsolètes. En outre, `Host` inclura « :{port} » si la valeur du port n'est pas celle par défaut ou s'il y a plus d'un membre en cours d'exécution sur le même hôte.
 
-- Créez un service sans tête associé au point d'extrémité \$SCOPE-config (Alexander Kukushkin)
+- Créez un service sans tête associé au point de terminaison \$SCOPE-config (Alexander Kukushkin)
 
   Le point de terminaison « config » conserve les informations relatives à la configuration Patroni et PostgreSQL au niveau du cluster, au fichier d'historique, et surtout, il contient la clé `initialize`. Lorsqu'un nœud maître Kubernetes est redémarré ou mis à jour, les points de terminaison sans service sont supprimés. Le service sans adresse IP (headless) empêche cette suppression.
 
@@ -3001,7 +3001,7 @@ Sorti le 2018-08-03
 
 - Répondre avec un statut 200 à la vérification de santé du maître uniquement si update_lock a réussi (Alexander Kukushkin)
 
-  Empêcher Patroni de s'auto-déclarer maître sur l'ancien maître (dégradé) si le DCS est partitionné.
+  Empêcher Patroni de s'auto-déclarer maître sur l'ancien maître (rétrogradé) si le DCS est partitionné.
 
 - Corriger la compatibilité avec le nouveau module consul (Alexander Kukushkin)
 
