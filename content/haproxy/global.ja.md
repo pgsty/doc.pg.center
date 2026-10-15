@@ -442,7 +442,7 @@ ACMEスケジューラーはHAProxyの起動時に開始されます。証明書
 
 デフォルト値は "auto" です。
 
-関連項目: acme
+関連項目： acme
 
 <a id="entry-3-1-ca-base"></a>
 
@@ -478,7 +478,7 @@ close-spread-time <time>
 
 ソフト停止時に、アイドル接続とアクティブな接続の切断を分散させる時間枠を定義します。SIGUSR1を受信し、猶予期間があればその終了後、このオプションが未設定なら、アイドル接続はすべて一度に切断されます。アクティブなHTTPまたはHTTP2接続は、次のリクエストを受信した後、HTTPレスポンスに "Connection: close" 行を追加するか、HTTP2の場合はGOAWAYフレームを送信して終了します。このオプションを設定すると、接続の切断は指定した `<time>` にわたって分散されます。close-spread-timeを "infinite" に設定すると、ソフト停止時のアクティブな接続の切断が無効になります。HTTPレスポンスに "Connection: close" ヘッダー（HTTP2ではGOAWAY）が追加されなくなり、アイドル接続はタイムアウトに達したときにだけ切断されます（設定で指定した各種タイムアウトに基づきます）。
 
-引数:
+引数：
 
 ```text
 <time>  ソフトストップ処理中の接続終了を分散させる時間枠です
@@ -488,7 +488,7 @@ close-spread-time <time>
 
 "hard-stop-after" オプションを使用する場合は、プロセスが停止する前にすべての接続が正常に終了できるよう、この設定値を "hard-stop-after" の値より小さくすることを推奨します。
 
-関連項目: grace, hard-stop-after, idle-close-on-response
+関連項目： grace, hard-stop-after, idle-close-on-response
 
 <a id="entry-3-1-cluster-secret"></a>
 
@@ -524,7 +524,7 @@ all | odd | even | number[-[number]]
 
 グループの範囲指定は、歴史的な理由からサポートされています。現在では、番号だけを指定するとスレッドグループを表し、thread-groupsを使用していない場合は1でなければなりません。また、スレッドグループを使用せずにスレッドの範囲や番号を指定する場合は、その前に "1/" を付ける必要があります。なお、"1" は "1/all" と完全に同じ意味で、グループ内のすべてのスレッドを表します。
 
-例:
+例：
 
 ```shell
 cpu-map 1/all 0-3 # bind all threads of the first group on the
@@ -628,7 +628,7 @@ cpu-policy <policy> [threads-per-core 1 | auto]
 
 任意のキーワード "threads-per-core" を追加できます。指定できる値は "1" と "auto" の2つです。1に設定すると、コアのハードウェアスレッド数にかかわらず、コアごとに1つのスレッドだけを作成します。autoに設定すると、ハードウェアスレッドごとに1つのスレッドを作成します。アフィニティーが未指定でthreads-per-core 1を使用する場合、デフォルトのアフィニティーはper-coreになります。
 
-関連項目: "cpu-map", "cpu-set", "nbthread"
+関連項目： "cpu-map", "cpu-set", "nbthread"
 
 <a id="entry-3-1-cpu-set"></a>
 
@@ -638,7 +638,7 @@ cpu-policy <policy> [threads-per-core 1 | auto]
 cpu-set <directive>...
 ```
 
-実行するCPUの集合を記号的に記述できます。このディレクティブは次のキーワードをサポートします。- reset: サービスマネージャーや "taskset" コマンドなどから継承した既存の制限をすべて解除します。- drop-cpu `<set>`: この集合に含まれるCPUにはバインドしません。- only-cpu `<set>`: この集合に含まれないCPUにはバインドしません。- drop-node `<set>`: このNUMAノードに属するCPUにはバインドしません。- only-node `<set>`: このNUMAノードに属さないCPUにはバインドしません。- drop-cluster `<set>`: このハードウェアクラスター番号のCPUにはバインドしません。- only-cluster `<set>`: ほかのハードウェアクラスター番号のCPUにはバインドしません。- drop-core `<set>`: このハードウェアコア番号のCPUにはバインドしません。- only-core `<set>`: ほかのハードウェアコア番号のCPUにはバインドしません。- drop-thread `<set>`: このハードウェアスレッド番号のCPUにはバインドしません。- only-thread `<set>`: ほかのハードウェアスレッド番号のCPUにはバインドしません。関連項目: "cpu-policy"
+実行するCPUの集合を記号的に記述できます。このディレクティブは次のキーワードをサポートします。- reset: サービスマネージャーや "taskset" コマンドなどから継承した既存の制限をすべて解除します。- drop-cpu `<set>`: この集合に含まれるCPUにはバインドしません。- only-cpu `<set>`: この集合に含まれないCPUにはバインドしません。- drop-node `<set>`: このNUMAノードに属するCPUにはバインドしません。- only-node `<set>`: このNUMAノードに属さないCPUにはバインドしません。- drop-cluster `<set>`: このハードウェアクラスター番号のCPUにはバインドしません。- only-cluster `<set>`: ほかのハードウェアクラスター番号のCPUにはバインドしません。- drop-core `<set>`: このハードウェアコア番号のCPUにはバインドしません。- only-core `<set>`: ほかのハードウェアコア番号のCPUにはバインドしません。- drop-thread `<set>`: このハードウェアスレッド番号のCPUにはバインドしません。- only-thread `<set>`: ほかのハードウェアスレッド番号のCPUにはバインドしません。関連項目： "cpu-policy"
 
 <a id="entry-3-1-crt-base"></a>
 
@@ -742,7 +742,7 @@ dns-accept-family <family>[,...]
 
 デフォルトでは、DNSリゾルバーはIPv4とIPv6の両方のアドレスを受け入れます。server行の "resolve-prefer" キーワードや "do-resolve" アクションのfamily引数で優先度を変えられますが、これは優先度にすぎず、もう一方のファミリーしかない場合にその使用を禁止するものではありません。デュアルスタックを使用できない環境では、到達不能なIPv6だけのDNSレコードに遭遇すると、次のリクエストまで機能し続けた可能性のある従来のIPv4レコードが置き換えられるため、大きな問題を引き起こすことがあります。グローバルオプション "dns-accept-family" では、一方（または両方）のアドレスファミリーだけを使用するよう強制できます。引数は次の単語をコンマで区切った一覧です。- "ipv4": IPv4アドレス（"A" レコード）を問い合わせ、受け入れます。- "ipv6": IPv6アドレス（"AAAA" レコード）を問い合わせ、受け入れます。- "auto": IPv4を使用し、IPv6については、システムにそのデフォルトゲートウェイがあれば使用します。最後の確認結果は30秒間キャッシュされます。
 
-一方のファミリーだけを使用する場合、もう一方のファミリーについてリゾルバーにリクエストを送信せず、そのファミリーの応答はすべて無視します。3.3以降のデフォルト値は "auto" で、IPv6でルーティングできることを確認できた場合にだけ両方のファミリーを有効にし、それ以外の場合はIPv4だけを使用します。関連項目: "resolve-prefer", "do-resolve"
+一方のファミリーだけを使用する場合、もう一方のファミリーについてリゾルバーにリクエストを送信せず、そのファミリーの応答はすべて無視します。3.3以降のデフォルト値は "auto" で、IPv6でルーティングできることを確認できた場合にだけ両方のファミリーを有効にし、それ以外の場合はIPv4だけを使用します。関連項目： "resolve-prefer", "do-resolve"
 
 <a id="entry-3-1-expose-deprecated-directives"></a>
 
@@ -790,7 +790,7 @@ global
     fd-hard-limit 50000
 ```
 
-関連項目: ulimit-n, maxconn
+関連項目： ulimit-n, maxconn
 
 <a id="entry-3-1-gid"></a>
 
@@ -812,7 +812,7 @@ grace <time>
 
 SIGUSR1から実際のソフト停止までの遅延時間を定義します。
 
-引数:
+引数：
 
 ```text
 <time>  SIGUSR1シグナルを受信してからソフトストップ処理に進むまでに
@@ -821,7 +821,7 @@ SIGUSR1から実際のソフト停止までの遅延時間を定義します。
 
 これは、haproxyプロセスを停止する必要がある一方、リスナーのバインドを解除する前に、外部コンポーネントが状態を検出する必要のある従来の環境との互換性のために使用します。内部の "stopping" 変数（"stopping" サンプル取得関数が報告する変数）をtrueにしますが、遅延時間が経過するまで、リスナーはそれまでどおり接続の受け入れを続けます。その後、通常のソフト停止を実行します。リロードされるプロセスで使用してはなりません。古いプロセスがバインドを解除できなくなり、新しいプロセスの起動を妨げたり、ほかの問題を引き起こしたりする可能性があるためです。
 
-例:
+例：
 
 ```shell
 global
@@ -836,7 +836,7 @@ frontend ext-check
 
 より柔軟で長期的にも使える方法として、オーケストレーションシステムがCLIからグローバル変数を設定し、その変数を外部チェックへの応答に使用して、一定時間後にSIGUSR1シグナルを送信することが考えられます。
 
-例:
+例：
 
 ```shell
 # Returns 200 OK until proc.stopping is set to non-zero. May be done
@@ -848,7 +848,7 @@ frontend ext-check
   monitor fail if { var(proc.stopping) -m int gt 0 }
 ```
 
-関連項目: hard-stop-after, monitor
+関連項目： hard-stop-after, monitor
 
 <a id="entry-3-1-group"></a>
 
@@ -900,7 +900,7 @@ RFC7230が規定するとおり、ヘッダー名は大文字・小文字を区�
 
 リクエストやレスポンスを正しく処理できないアプリケーションでは、修正が済むまでの間、送信されるヘッダー名を調整するこのような回避策を、一時的に使用する必要があるかもしれません。このような回避策を必要とするアプリケーションは、コンテンツスマグリング攻撃に対して脆弱である可能性があり、必ず修正しなければなりません。
 
-例:
+例：
 
 ```text
 global
@@ -943,7 +943,7 @@ hard-stop-after <time>
 
 正常なソフト停止に許容する最大時間を定義します。
 
-引数:
+引数：
 
 ```text
 <time>  SIGUSR1シグナルによるソフトストップを受信した後、
@@ -952,14 +952,14 @@ hard-stop-after <time>
 
 ソフト停止中に接続が開いたままでも、インスタンスが確実に終了するようにするために使用できます（たとえば、tcpモードのプロキシに長いタイムアウトを設定している場合）。TCPモードとHTTPモードの両方に適用されます。
 
-例:
+例：
 
 ```text
 global
   hard-stop-after 30s
 ```
 
-関連項目: grace
+関連項目： grace
 
 <a id="entry-3-1-harden-reject-privileged-ports-tcp"></a>
 
@@ -984,7 +984,7 @@ http-err-codes [+-]<range>[,...] [...]
 
 範囲を '+' も '-' も付けずに指定すると、既存の範囲を新しい範囲に置き換えます。'+' で始まる範囲は、指定した範囲も含むように既存の範囲を拡張します。指定する範囲は、既存の範囲と重なっていてもいなくてもかまいません。'-' で始まる範囲は、既存の範囲から指定した範囲を取り除きます。範囲は100から599までの数値で表し、必要に応じて、その後に "-" と、最初の数値以上の別の数値を指定して、範囲の上限を表します。同じ追加・削除・置換操作について、複数の範囲をコンマで区切れます。
 
-例:
+例：
 
 ```text
 http-err-codes 400,402-444,446-480,490   # sets exactly these codes
@@ -1055,7 +1055,7 @@ jwt.decrypt_alg_list <list>
 
 jwt_decrypt_XXXコンバーターで許可するアルゴリズムの一覧を設定します。未サポートまたは無効なアルゴリズムを使用するJWTトークンは、決して復号されません。指定するアルゴリズムは、RFC7518の[4.1節](https://www.rfc-editor.org/rfc/rfc7518#section-4.1)と同じ形式で、コロンで区切らなければなりません。特別な名前 "ALL" を使用すると、サポートされるすべてのアルゴリズムを有効にできます（完全な一覧は "jwt_decrypt_jwk" コンバーターを参照してください）。アルゴリズム名に '!' を追加すると、明示的に無効にできます。"ALL" を指定しない限り、このオプションを使用すると、指定した一覧に明記されていないアルゴリズムはすべて無効になります。
 
-例:
+例：
 
 ```shell
 # Enable all algorithms but the "ECDH-ES" one
@@ -1075,7 +1075,7 @@ jwt.decrypt_enc_list <list>
 
 jwt_decrypt_XXXコンバーターで許可する暗号化アルゴリズムの一覧を設定します。未サポートまたは無効な暗号化アルゴリズムを使用するJWTトークンは、決して復号されません。指定するアルゴリズムは、RFC7518の[5.1節](https://www.rfc-editor.org/rfc/rfc7518#section-5.1)と同じ形式で、コロンで区切らなければなりません。特別な名前 "ALL" を使用すると、サポートされるすべてのアルゴリズムを有効にできます（完全な一覧は "jwt_decrypt_jwk" コンバーターを参照してください）。アルゴリズム名に '!' を追加すると、明示的に無効にできます。"ALL" を指定しない限り、このオプションを使用すると、指定した一覧に明記されていないアルゴリズムはすべて無効になります。
 
-例:
+例：
 
 ```shell
 # Enable only AES GCM encrypting algorithms
@@ -1187,7 +1187,7 @@ lua-prepend-path <string> [<type>]
 
 Luaのパスは、`require` 関数がライブラリのソースファイルを探す方法を指定するパターンを、セミコロンで区切った一覧です。パターン内の疑問符 (?) は、モジュール名に置き換えられます。パスは左から右へ評価します。したがって、後から先頭に追加したパスほど、先に調べられます。
 
-たとえば、次のパスを指定した場合:
+たとえば、次のパスを指定した場合：
 
 ```text
 lua-prepend-path /usr/share/haproxy-lua/?/init.lua
@@ -1424,7 +1424,7 @@ set-var <var-name> <expr>
 
 プロセス全体の変数 '`<var-name>`' を、サンプル式 `<expr>` を評価した結果に設定します。変数 '`<var-name>`' は、'proc.' プレフィックスを使うプロセス全体の変数でなければなりません。TCPルールやHTTPルールの 'set-var' アクションと同じように動作しますが、式は設定の解析時に評価され、変数はただちに設定されます。式で使用できるサンプル取得関数とコンバーターは、通常は 'int(value)' や 'str(value)' など、内部データを使用するものだけです。すでに確保された変数も参照できます。これらの変数は、その後、通常のルールセットから読み取ったり変更したりできます。
 
-例:
+例：
 
 ```text
 global
@@ -1443,7 +1443,7 @@ set-var-fmt <var-name> <fmt>
 
 プロセス全体の変数 '`<var-name>`' を、ログ形式 `<fmt>` を評価して得られた文字列に設定します。変数 '`<var-name>`' は、'proc.' プレフィックスを使うプロセス全体の変数でなければなりません。TCPルールやHTTPルールの 'set-var-fmt' アクションと同じように動作しますが、式は設定の解析時に評価され、変数はただちに設定されます。式で使用できるサンプル取得関数とコンバーターは、通常は 'int(value)' や 'str(value)' など、内部データを使用するものだけです。すでに確保された変数も参照できます。これらの変数は、その後、通常のルールセットから読み取ったり変更したりできます。カスタムログ形式の構文については、[8.2.6節](/ja/haproxy/configuration-logging/#section-8-2-6)を参照してください。
 
-例:
+例：
 
 ```text
 global
@@ -1461,7 +1461,7 @@ setcap <name>[,<name>...]
 
 root以外のユーザー (uid \> 0) として起動・実行する場合、またはuid 0 (root) で起動してからroot以外のユーザーに切り替える場合に、保持しなければならないケーパビリティーの一覧を設定します。デフォルトでは、uidを切り替えるとすべての権限を失います。しかし、透過プロキシで別のアドレスを送信元としてサーバーに接続する場合や、1024未満のポートにバインドする場合、たとえば "tune.quic.fe.sock-per-conn default-on" を使用する場合には、一部の権限が必要になることが多く、全体をuid 0で実行する構成になってしまいます。ケーパビリティーの設定は、必要なものだけを保持するため、通常はより安全な代替手段です。この機能はOSに依存し、ビルド時にUSE_LINUX_CAP=1を設定したLinuxでのみ有効です。サポートするケーパビリティーの一覧もOSに依存し、無効な名前や空の名前を渡したときのエラーメッセージに列挙されます。複数のケーパビリティーをコンマで区切って指定できます。よく使われるものでは、"cap_net_raw" は別のアドレスへの透過的なバインドを許可し、"cap_net_bind_service" は特権ポートへのバインドを許可してQUICで使用できます。同じroot以外のユーザーでプロセスを起動・実行する場合は、このキーワードに加えて、setcapでhaproxyバイナリーファイルに必要なケーパビリティーを設定することを推奨します。haproxyバイナリーのケーパビリティー設定については、管理ガイドの13.1章「Linuxケーパビリティーのサポート」を参照してください。
 
-例:
+例：
 
 ```text
 global
@@ -1533,7 +1533,7 @@ TLSv1.3がサポートする暗号スイートは、次の5つだけです。
 
 詳細は "bind" キーワードを参照してください。
 
-例:
+例：
 
 ```text
 global
@@ -1571,7 +1571,7 @@ ssl-default-bind-options [<option>]...
 
 この設定は、OpenSSLのサポートを組み込んでビルドした場合にのみ使用できます。すべての "bind" 行に強制するデフォルトのssl-optionsを設定します。使用できるオプションは、"bind" キーワードを参照してください。
 
-例:
+例：
 
 ```text
 global
@@ -1712,7 +1712,7 @@ ssl-provider-path <path>
 ssl-load-extra-del-ext
 ```
 
-HAProxyが追加のSSLファイルを検索する方法を設定できます。デフォルトでは、HAProxyはファイル名に新しい拡張子を追加します（例: "foobar.crt" に対して "foobar.crt.key" を読み込みます）。このオプションを有効にすると、新しい拡張子を追加する前に既存の拡張子を削除します（例: "foobar.crt" に対して "foobar.key" を読み込みます）。
+HAProxyが追加のSSLファイルを検索する方法を設定できます。デフォルトでは、HAProxyはファイル名に新しい拡張子を追加します（例： "foobar.crt" に対して "foobar.crt.key" を読み込みます）。このオプションを有効にすると、新しい拡張子を追加する前に既存の拡張子を削除します（例： "foobar.crt" に対して "foobar.key" を読み込みます）。
 
 このオプションが機能するには、crtファイルの拡張子が ".crt" でなければなりません。
 
@@ -1742,7 +1742,7 @@ HAProxy 2.3以降では、バンドルを同じOpenSSL証明書ストアに読�
 
 これらのPEMファイルを、HAProxyが認識する 「証明書バンドル」にまとめるには、次の命名規則に従わなければなりません。バンドルに含めるすべてのPEMファイルは同じベース名を持ち、鍵の種類を示す接尾辞を付ける必要があります。現在サポートする接尾辞は、rsa、dsa、ecdsaの3つです。たとえば、[www.example.com](http://www.example.com)にRSAファイルとECDSAファイルの2つのPEMファイルがある場合、名前は "example.pem.rsa" と "example.pem.ecdsa" にしなければなりません。ファイル名の最初の部分は任意で、接尾辞だけが重要です。このバンドルをHAProxyに読み込むには、ベース名だけを指定します。
 
-例: bind :8443 ssl crt example.pem
+例： bind :8443 ssl crt example.pem
 
 接尾辞はHAProxyに渡さない点に注意してください。これによって、HAProxyに証明書バンドルを探すよう指示します。
 
@@ -1764,7 +1764,7 @@ CLIでは、バンドルは別々のファイルとして扱われ、コミッ�
 
 デフォルトの動作は "all" です。
 
-例:
+例：
 
 ```text
 ssl-load-extra-files bundle sctl
@@ -1772,7 +1772,7 @@ ssl-load-extra-files sctl ocsp issuer
 ssl-load-extra-files none
 ```
 
-関連項目: "crt"、bindオプションについての[5.1節](/ja/haproxy/bind-and-server-options/#section-5-1)、serverオプションについての[5.2節](/ja/haproxy/bind-and-server-options/#section-5-2)。
+関連項目： "crt"、bindオプションについての[5.1節](/ja/haproxy/bind-and-server-options/#section-5-1)、serverオプションについての[5.2節](/ja/haproxy/bind-and-server-options/#section-5-2)。
 
 <a id="entry-3-1-ssl-security-level"></a>
 
@@ -1888,7 +1888,7 @@ setrlimitが失敗したとき、起動時にプロセスを失敗させます�
 thread-group <group> [<thread-range>...]
 ```
 
-この設定は、スレッドのサポートを組み込んでビルドした場合にのみ使用できます。スレッドグループ `<group>` を構成するスレッドの一覧を列挙します。スレッド番号とグループ番号は1から始まります。スレッド範囲は、スレッド番号を個別に指定するか、下限と上限をダッシュ '-' で区切って指定します（例: "1-16"）。未割り当てのスレッドは、未割り当てのスレッドグループに自動的に割り当てられます。このディレクティブで定義したスレッドグループには、定義したスレッド以外は決して追加されません。同じグループを複数回定義すると、新しい定義で以前の定義を上書きします。"nbthread" と "thread-groups" も参照してください。
+この設定は、スレッドのサポートを組み込んでビルドした場合にのみ使用できます。スレッドグループ `<group>` を構成するスレッドの一覧を列挙します。スレッド番号とグループ番号は1から始まります。スレッド範囲は、スレッド番号を個別に指定するか、下限と上限をダッシュ '-' で区切って指定します（例： "1-16"）。未割り当てのスレッドは、未割り当てのスレッドグループに自動的に割り当てられます。このディレクティブで定義したスレッドグループには、定義したスレッド以外は決して追加されません。同じグループを複数回定義すると、新しい定義で以前の定義を上書きします。"nbthread" と "thread-groups" も参照してください。
 
 <a id="entry-3-1-thread-groups"></a>
 
@@ -1932,7 +1932,7 @@ ulimit-n <number>
 
 この自動リソース計算には、動的サーバーを含めない点に注意してください。多数の動的サーバーを使用する場合は、この値を手動で指定する必要があるかもしれません。
 
-関連項目: fd-hard-limit、maxconn
+関連項目： fd-hard-limit、maxconn
 
 unix-bind [ prefix `<prefix>` ] [ mode `<mode>` ] [ user `<user>` ] [ uid `<uid>` ] [ group
 `<group>` ] [ gid `<gid>` ]
@@ -2110,7 +2110,7 @@ maxconn <number>
 
 プロセスごとの同時接続数の上限を `<number>` に設定します。コマンドライン引数 "-n" と同等です。コマンドライン引数 "-n" で指定した値は、globalセクションのmaxconnより優先されます。HAProxyプロセスは、コンパイル時変数SYSTEM_MAXCONNを指定してコンパイルすることもでき、その場合は、これをシステムのmaxconnの上限として使用します。このSYSTEM_MAXCONNの制限も、コマンドライン引数 "-n" で実行時に回避できます。maxconnに達すると、プロキシは接続の受け付けを停止します。プロセスのファイルディスクリプター数のソフトリミット（"ulimit -n" コマンドで取得できます）は、指定したmaxconnに応じて自動調整します。"ulimit-n" も参照してください。注意： 一部のプラットフォームでは、"select" ポーラーは1024を超えるファイルディスクリプターを確実に扱うことができません。プラットフォームがselectだけに対応し、起動時に "select FAILED" と表示する場合は、動作するまでmaxconnを下げる必要があります（通常は500を少し下回る値です）。maxconnを設定しない場合は、"ulimit -nH" コマンドが示す現在のファイルディスクリプター数の制限を基に、自動計算します（ハードリミットとソフトリミットの大きい方を使用します）。その自動計算値は、"fd-hard-limit" と、コマンドラインオプション "-m" で強制した場合のメモリー制限によって、さらに小さくなることがあります。自動計算値は、バッファーサイズ、圧縮用に割り当てるメモリー、SSLキャッシュのサイズ、SSLを使用するかどうか、および関連するmaxsslconn（これも自動計算できます）にも依存します。
 
-関連項目: fd-hard-limit、ulimit-n
+関連項目： fd-hard-limit、ulimit-n
 
 <a id="entry-3-2-maxconnrate"></a>
 
@@ -2304,7 +2304,7 @@ spread-checks <0..50, in percent>
 ssl-engine <name> [algo <comma-separated list of algorithms>]
 ```
 
-OpenSSLエンジンを `<name>` に設定します。`<name>` に指定できる値の一覧は、"openssl engine" コマンドで取得できます。この文は複数回使用でき、その場合は複数の暗号エンジンを有効にします。サポートしていないエンジンを参照すると、HAProxyは起動できません。最近のプロセッサーでは、多くのエンジンが、純粋なソフトウェア処理よりもHTTPSの性能を低下させる点に注意してください。オプションのコマンド "algo" は、OpenSSL関数ENGINE_set_default_string()を使って、ENGINEが提供するデフォルトのアルゴリズムを設定します。"ALL" を指定すると、すべての暗号処理にそのエンジンを使用します。algoの一覧を指定しない場合も、"ALL" を使用します。異なるアルゴリズムをコンマで区切って指定でき、RSA、DSA、DH、EC、RAND、CIPHERS、DIGESTS、PKEY、PKEY_CRYPTO、PKEY_ASN1などを含められます。これは、opensslの設定ファイルと同じ形式です: <https://www.openssl.org/docs/man1.0.2/apps/config.html>
+OpenSSLエンジンを `<name>` に設定します。`<name>` に指定できる値の一覧は、"openssl engine" コマンドで取得できます。この文は複数回使用でき、その場合は複数の暗号エンジンを有効にします。サポートしていないエンジンを参照すると、HAProxyは起動できません。最近のプロセッサーでは、多くのエンジンが、純粋なソフトウェア処理よりもHTTPSの性能を低下させる点に注意してください。オプションのコマンド "algo" は、OpenSSL関数ENGINE_set_default_string()を使って、ENGINEが提供するデフォルトのアルゴリズムを設定します。"ALL" を指定すると、すべての暗号処理にそのエンジンを使用します。algoの一覧を指定しない場合も、"ALL" を使用します。異なるアルゴリズムをコンマで区切って指定でき、RSA、DSA、DH、EC、RAND、CIPHERS、DIGESTS、PKEY、PKEY_CRYPTO、PKEY_ASN1などを含められます。これは、opensslの設定ファイルと同じ形式です： <https://www.openssl.org/docs/man1.0.2/apps/config.html>
 
 HAProxyバージョン2.6では、デフォルトのビルドでエンジンのサポートを無効にしました。このオプションは、対応するサポートを組み込んでHAProxyをビルドした場合にのみ使用できます。ssl-engineが必要な場合は、USE_ENGINE=1フラグを指定してHAProxyを再ビルドできます。
 
@@ -2328,7 +2328,7 @@ tune.applet.zero-copy-forwarding { on | off }
 
 アプレットで、データのゼロコピー転送を有効 ('on') または無効 ('off') にします。デフォルトで有効です。
 
-関連項目: tune.disable-zero-copy-forwarding。
+関連項目： tune.disable-zero-copy-forwarding。
 
 <a id="entry-3-2-tune-buffers-limit"></a>
 
@@ -2358,7 +2358,7 @@ tune.buffers.reserve <number>
 tune.bufsize <size>
 ```
 
-バッファーのサイズをバイト単位で設定します。小さな値にすると、同じRAM容量でより多くのストリームを共存させられます。大きな値にすると、非常に大きなCookieを使う一部のアプリケーションが動作できるようになります。デフォルト値は16384で、ビルド時に変更できます。この値は、デフォルトから変更しないことを強く推奨します。値が非常に小さいと、統計など一部のサービスが動作しなくなり、デフォルトより大きいと、メモリー使用量が増え、システムがメモリー不足に陥る可能性があります。少なくとも、この値を増やした倍率に応じて、globalのmaxconnを同じ倍率で減らすべきです。また、HTTP/2を使用するには、この値が16384以上でなければなりません。さらに、256 MB（268435456 バイト）未満でなければなりません。HTTPリクエストのヘッダーブロックが (tune.bufsize - tune.maxrewrite) より大きい場合、HAProxyはHTTP 400 (Bad Request) エラーを返します。同様に、HTTPレスポンスのヘッダーブロックがこのサイズより大きい場合は、HTTP 502 (Bad Gateway) を返します。このパラメーターで指定した値は、32ビットマシンでは8の倍数、64ビットマシンでは16の倍数へ、自動的に切り上げる点に注意してください。関連項目: tune.bufsize.large、tune.bufsize.small。
+バッファーのサイズをバイト単位で設定します。小さな値にすると、同じRAM容量でより多くのストリームを共存させられます。大きな値にすると、非常に大きなCookieを使う一部のアプリケーションが動作できるようになります。デフォルト値は16384で、ビルド時に変更できます。この値は、デフォルトから変更しないことを強く推奨します。値が非常に小さいと、統計など一部のサービスが動作しなくなり、デフォルトより大きいと、メモリー使用量が増え、システムがメモリー不足に陥る可能性があります。少なくとも、この値を増やした倍率に応じて、globalのmaxconnを同じ倍率で減らすべきです。また、HTTP/2を使用するには、この値が16384以上でなければなりません。さらに、256 MB（268435456 バイト）未満でなければなりません。HTTPリクエストのヘッダーブロックが (tune.bufsize - tune.maxrewrite) より大きい場合、HAProxyはHTTP 400 (Bad Request) エラーを返します。同様に、HTTPレスポンスのヘッダーブロックがこのサイズより大きい場合は、HTTP 502 (Bad Gateway) を返します。このパラメーターで指定した値は、32ビットマシンでは8の倍数、64ビットマシンでは16の倍数へ、自動的に切り上げる点に注意してください。関連項目： tune.bufsize.large、tune.bufsize.small。
 
 <a id="entry-3-2-tune-bufsize-large"></a>
 
@@ -2370,7 +2370,7 @@ tune.bufsize.large <size>
 
 大きなバッファーのサイズをバイト単位で設定します。デフォルトでは、大きなバッファーのサポートは無効で、この値を設定して明示的に有効にしなければなりません。
 
-これらのバッファーは、通常のバッファーサイズを変更せずに、より多くのデータをバッファーに保持する必要がある、特定の状況向けに設計されています。大きなバッファーが暗黙的に使用されることはありません。関連項目: tune.bufsize。
+これらのバッファーは、通常のバッファーサイズを変更せずに、より多くのデータをバッファーに保持する必要がある、特定の状況向けに設計されています。大きなバッファーが暗黙的に使用されることはありません。関連項目： tune.bufsize。
 
 大きなバッファーを設定すると、起動時にスレッドごとに、内部処理用の特別な大きなバッファーを3つ割り当てる点に注意してください。
 
@@ -2386,9 +2386,9 @@ tune.bufsize.small <size>
 
 これらのバッファーは、メモリー消費が限られ、通常サイズのバッファーを割り当てる必要はなさそうな、特定の状況向けに設計されています。ただし、小さなバッファーでは足りない場合は、自動的に再割り当てし、標準サイズのバッファーに切り替えます。
 
-現時点で自動的に使用するのは、レスポンスヘッダーを送信するHTTP/3プロトコルだけです。それ以外では、"use-small-buffers" オプションで、特定のプロキシに対して小さなバッファーのサポートを有効にできます。関連項目: tune.bufsize。
+現時点で自動的に使用するのは、レスポンスヘッダーを送信するHTTP/3プロトコルだけです。それ以外では、"use-small-buffers" オプションで、特定のプロキシに対して小さなバッファーのサポートを有効にできます。関連項目： tune.bufsize。
 
-関連項目: option use-small-buffers
+関連項目： option use-small-buffers
 
 <a id="entry-3-2-tune-cli-max-payload-size"></a>
 
@@ -2448,7 +2448,7 @@ tune.disable-zero-copy-forwarding
 
 データのゼロコピー転送を全体で無効にします。ゼロコピー転送は、チャネルのバッファーを使用しないことで、データの高速転送を最適化する仕組みです。このディレクティブで、その最適化を無効にできます。カーネルTCPスプライシングもすべて無効にする点に注意してください。
 
-関連項目: tune.pt.zero-copy-forwarding、tune.applet.zero-copy-forwarding、tune.h1.zero-copy-fwd-recv、tune.h1.zero-copy-fwd-send、tune.h2.zero-copy-fwd-send、tune.quic.zero-copy-fwd-send
+関連項目： tune.pt.zero-copy-forwarding、tune.applet.zero-copy-forwarding、tune.h1.zero-copy-fwd-recv、tune.h1.zero-copy-fwd-send、tune.h2.zero-copy-fwd-send、tune.quic.zero-copy-fwd-send
 
 <a id="entry-3-2-tune-epoll-mask-events"></a>
 
@@ -2460,9 +2460,9 @@ tune.epoll.mask-events <event[,...]>
 
 HAProxyの歴史の中で、Linuxカーネルのepollの仕組みの不具合による、複雑な問題がいくつか発生しました。通常は非常にまれで、報告者の環境以外では再現せず、epollを無効にしてpollへ切り替えることでしか回避できない場合があります。これは、高性能を求める環境では満足できる方法ではありません。問題は毎回、ごく特定の、まれなイベントの種類にだけ影響するため、それらをマスクできれば、より受け入れやすい回避策になる可能性があります。このオプションは、一部のまれなイベントを警告せずに無視し、入力イベント（種類を特定しない着信イベントを通知するもの）に置き換えることで、それを可能にします。その結果、一部の場所で高速なエラー処理経路を避け、通常の経路だけを使用します。カーネルの不具合を診断または回避するために専門家から指示された場合を除き、決して使用すべきではありません。
 
-このオプションは、マスクするイベントを表す単語をコンマで区切った一覧を、1つの引数として受け取ります。現在サポートするイベントは次のとおりです: - "err": EPOLLERRイベントをマスクします - "hup": EPOLLHUPイベントをマスクします - "rdhup": EPOLLRDHUPイベントをマスクします
+このオプションは、マスクするイベントを表す単語をコンマで区切った一覧を、1つの引数として受け取ります。現在サポートするイベントは次のとおりです： - "err": EPOLLERRイベントをマスクします - "hup": EPOLLHUPイベントをマスクします - "rdhup": EPOLLRDHUPイベントをマスクします
 
-例:
+例：
 
 ```shell
 # mask all non-traffic epoll events:
@@ -2519,7 +2519,7 @@ tune.h1.be.glitches-threshold <number>
 
 HTTP/1バックエンド接続の不具合数のしきい値を設定し、しきい値に達した後は接続を自動的に強制終了します。不正に動作する接続に対して、明示的なルールを書かずに自動的に強制終了できます。デフォルト値はゼロで、しきい値を設定しないことを意味し、どのイベントも接続の切断を引き起こしません。典型的なイベントには、形式が不正でも "accept-unsafe-violations-in-http-response" によって受け入れたヘッダーがあります。ゼロ以外を指定するなら、多少の不具合があるサーバーに影響を与えずに効果を得られるよう、数百または数千程度にすべきでしょう。"tune.glitches.kill.cpu-usage" を使い、CPU使用率が一定の水準を超えたときだけ接続を強制終了することもできます。設定したしきい値の75%で、接続をクローズモードに切り替え、該当する場合は"Connection: close"を通知し、穏やかな切断を試みる点に注意してください。これによって、多少の不具合がある接続は、進行中の転送を中断する危険を冒さずに、しばらくすると使用されなくなります。
 
-関連項目: tune.h1.fe.glitches-threshold、bc_glitches、tune.glitches.kill.cpu-usage
+関連項目： tune.h1.fe.glitches-threshold、bc_glitches、tune.glitches.kill.cpu-usage
 
 <a id="entry-3-2-tune-h1-fe-glitches-threshold"></a>
 
@@ -2531,7 +2531,7 @@ tune.h1.fe.glitches-threshold <number>
 
 HTTP/1フロントエンド接続の不具合数のしきい値を設定し、しきい値に達した後は接続を自動的に強制終了します。不正に動作する接続に対して、明示的なルールを書かずに自動的に強制終了できます。デフォルト値はゼロで、しきい値を設定しないことを意味し、どのイベントも接続の切断を引き起こしません。典型的なイベントには、形式が不正でも "accept-unsafe-violations-in-http-request" によって受け入れたヘッダーがあります。ゼロ以外を指定するなら、多少の不具合があるクライアントに影響を与えずに効果を得られるよう、数百または数千程度にすべきでしょう。"tune.glitches.kill.cpu-usage" を使い、CPU使用率が一定の水準を超えたときだけ接続を強制終了することもできます。設定したしきい値の75%で、接続をクローズモードに切り替え、該当する場合は"Connection: close"を通知し、穏やかな切断を試みる点に注意してください。これによって、仕様に多少違反するクライアントも、新しい接続を確立して影響なく動作を続ける機会を得られます。進行中の転送を中断する危険がある、強制的な切断を引き起こさずに済みます。
 
-関連項目: tune.h1.be.glitches-threshold、fc_glitches、tune.glitches.kill.cpu-usage
+関連項目： tune.h1.be.glitches-threshold、fc_glitches、tune.glitches.kill.cpu-usage
 
 <a id="entry-3-2-tune-h1-zero-copy-fwd-recv"></a>
 
@@ -2543,7 +2543,7 @@ tune.h1.zero-copy-fwd-recv { on | off }
 
 H1マルチプレクサーで、データのゼロコピー受信を有効 ('on') または無効 ('off') にします。デフォルトで有効です。
 
-関連項目: tune.disable-zero-copy-forwarding、tune.h1.zero-copy-fwd-send
+関連項目： tune.disable-zero-copy-forwarding、tune.h1.zero-copy-fwd-send
 
 <a id="entry-3-2-tune-h1-zero-copy-fwd-send"></a>
 
@@ -2555,7 +2555,7 @@ tune.h1.zero-copy-fwd-send { on | off }
 
 H1マルチプレクサーで、データのゼロコピー送信を有効 ('on') または無効 ('off') にします。デフォルトで有効です。
 
-関連項目: tune.disable-zero-copy-forwarding、tune.h1.zero-copy-fwd-recv
+関連項目： tune.disable-zero-copy-forwarding、tune.h1.zero-copy-fwd-recv
 
 <a id="entry-3-2-tune-h2-be-glitches-threshold"></a>
 
@@ -2567,7 +2567,7 @@ tune.h2.be.glitches-threshold <number>
 
 バックエンド接続の不具合数のしきい値を設定し、そこに達した接続を自動的に強制終了します。不正に動作する接続に対して、明示的なルールを書かずに自動的に強制終了できます。デフォルト値はゼロで、しきい値を設定しないことを意味し、どのイベントも接続の切断を引き起こしません。一部のH2サーバーは、長く続く接続で時折、少数の不具合を起こす場合があります。そのため、ゼロ以外を指定するなら、多少の不具合があるサーバーに影響を与えずに効果を得られるよう、数百または数千程度にすべきでしょう。"tune.glitches.kill.cpu-usage" を使い、CPU使用率が一定の水準を超えたときだけ接続を強制終了することもできます。設定したしきい値の75%で、将来のストリームに対するGOAWAYを通知し、穏やかな切断を試みる点に注意してください。これによって、多少の不具合がある接続は、進行中の転送を中断する危険を冒さずに、しばらくすると使用されなくなります。
 
-関連項目: tune.h2.fe.glitches-threshold、bc_glitches、tune.glitches.kill.cpu-usage
+関連項目： tune.h2.fe.glitches-threshold、bc_glitches、tune.glitches.kill.cpu-usage
 
 <a id="entry-3-2-tune-h2-be-initial-window-size"></a>
 
@@ -2579,7 +2579,7 @@ tune.h2.be.initial-window-size <number>
 
 送信接続のHTTP/2初期ウィンドウサイズを設定します。これは、サーバーがHAProxyからの確認応答を待たずに応答できるバイト数です。この設定は、ヘッダーには影響せず、ペイロードの内容にだけ影響します。指定しない場合は、tune.h2.initial-window-sizeで設定した共通のデフォルト値を適用します。この値を少し増やすと、クライアント間で不公平が生じる代わりに、ダウンロードを高速化したり、サーバーのCPU使用量を減らしたりできる場合があります。不公平を生じさせないtune.h2.be.rxbufを、代わりに使用する方が適切です。この設定は、リソース使用量には影響しません。
 
-関連項目: tune.h2.initial-window-size。
+関連項目： tune.h2.initial-window-size。
 
 <a id="entry-3-2-tune-h2-be-max-concurrent-streams"></a>
 
@@ -2611,7 +2611,7 @@ tune.h2.be.rxbuf <size>
 
 送信接続のHTTP/2受信バッファーサイズを、バイト単位で設定します。サイズはtune.bufsizeの倍数へ切り上げ、データをアップロードするすべてのストリームで共有します（HEADERSフレームとDATAフレームの両方が対象です）。どの場合も、各ストリームには必ず1つのバッファーを与え、未使用バッファーの7/8を、ペイロードをダウンロードするストリーム間で共有します。これによって、アップロード性能を大幅に改善し、http-reuseが "always" のとき、複数のクライアントで共有するバックエンド接続の先頭ブロッキング (HoL) を回避できます。通知するストリームごとのウィンドウは、空き領域を反映して自動調整するため、実際にはtune.h2.be.initial-window-sizeを変更する必要はないはずです。すべてのストリームを処理するのに必要なサイズより小さい値を設定した場合は、その最小サイズを使用します。デフォルト値は約1600kです（各16kBのバッファーを持つ100ストリーム）。
 
-関連項目: tune.h2.be.initial-window-size、tune.h2.fe.rxbuf、http-reuse。
+関連項目： tune.h2.be.initial-window-size、tune.h2.fe.rxbuf、http-reuse。
 
 <a id="entry-3-2-tune-h2-fe-glitches-threshold"></a>
 
@@ -2623,7 +2623,7 @@ tune.h2.fe.glitches-threshold <number>
 
 フロントエンド接続の不具合数のしきい値を設定し、そこに達した接続を自動的に強制終了します。不正に動作する接続に対して、明示的なルールを書かずに自動的に強制終了できます。デフォルト値はゼロで、しきい値を設定しないことを意味し、どのイベントも接続の切断を引き起こしません。一部のH2クライアントは、長く続く接続で時折、少数の不具合を起こす場合があります。そのため、ゼロ以外を指定するなら、多少の不具合があるクライアントに影響を与えずに効果を得られるよう、数百または数千程度にすべきでしょう。"tune.glitches.kill.cpu-usage" を使い、CPU使用率が一定の水準を超えたときだけ接続を強制終了することもできます。設定したしきい値の75%で、将来のストリームに対するGOAWAYを通知し、穏やかな切断を試みる点に注意してください。これによって、仕様に多少違反するクライアントも、新しい接続を確立して影響なく動作を続ける機会を得られます。進行中の転送を中断する危険がある、強制的な切断を引き起こさずに済みます。
 
-関連項目: tune.h2.be.glitches-threshold、fc_glitches、tune.glitches.kill.cpu-usage
+関連項目： tune.h2.be.glitches-threshold、fc_glitches、tune.glitches.kill.cpu-usage
 
 <a id="entry-3-2-tune-h2-fe-initial-window-size"></a>
 
@@ -2635,7 +2635,7 @@ tune.h2.fe.initial-window-size <number>
 
 受信接続のHTTP/2初期ウィンドウサイズを設定します。これは、クライアントがHAProxyからの確認応答を待たずにアップロードできるバイト数です。この設定は、ヘッダーには影響せず、ペイロードの内容（POSTリクエストの本文）にだけ影響します。指定しない場合は、tune.h2.initial-window-sizeで設定した共通のデフォルト値を適用します。この値を増やすと、アップロードを高速化できる場合があります。デフォルト値はtune.bufsize (16384) と等しく、pingの往復時間が100ミリ秒ならストリームごとに少なくとも1.25 Mbps、1ミリ秒なら125 Mbpsの帯域幅を実現できます。リソース使用量には影響しません。大きすぎる値を使用すると、大容量のアップロードと並行してページにアクセスする際に、クライアントの応答性が低下する可能性があります。不公平を生じさせないtune.h2.fe.rxbufを、代わりに使用する方が適切です。
 
-関連項目: tune.h2.initial-window-size。
+関連項目： tune.h2.initial-window-size。
 
 <a id="entry-3-2-tune-h2-fe-max-concurrent-streams"></a>
 
@@ -2670,7 +2670,7 @@ rq-loadを使用する場合に、通知する同時実行数の最小値を設�
 最小値およびデフォルト値は1ですが、5から15の値を設定すると利用者の操作感を改善できます。
 ```
 
-例:
+例：
 
 ```text
 tune.h2.fe.max-concurrent-streams 100 rq-load auto min 15
@@ -2720,7 +2720,7 @@ tune.h2.fe.rxbuf <size>
 
 受信接続のHTTP/2受信バッファーサイズを、バイト単位で設定します。サイズはtune.bufsizeの倍数へ切り上げ、データをアップロードするすべてのストリームで共有します（HEADERSフレームとDATAフレームの両方が対象です）。どの場合も、各ストリームには必ず1つのバッファーを与え、未使用バッファーの7/8を、ペイロードをアップロードするストリーム間で共有することで、アップロード性能を大幅に改善できます。通知するストリームごとのウィンドウは、空き領域を反映して自動調整するため、実際にはtune.h2.fe.initial-window-sizeを変更する必要はないはずです。すべてのストリームを処理するのに必要なサイズより小さい値を設定した場合は、その最小サイズを使用します。デフォルト値の1600k（各16kBのバッファーを持つ100ストリーム）では、RTTが100msのクライアントに対して、約130 Mbpsのアップロード速度を実現できます。
 
-関連項目: tune.h2.fe.initial-window-size、tune.h2.be.rxbuf。
+関連項目： tune.h2.fe.initial-window-size、tune.h2.be.rxbuf。
 
 <a id="entry-3-2-tune-h2-header-table-size"></a>
 
@@ -2782,7 +2782,7 @@ tune.h2.zero-copy-fwd-send { on | off }
 
 H2マルチプレクサーで、データのゼロコピー送信を有効 ('on') または無効 ('off') にします。デフォルトで有効です。
 
-関連項目: tune.disable-zero-copy-forwarding
+関連項目： tune.disable-zero-copy-forwarding
 
 <a id="entry-3-2-tune-http-cookielen"></a>
 
@@ -2961,9 +2961,9 @@ Luaの状態を初期化するときに読み込む、Lua標準ライブラリ�
 
 baseとcoroutineライブラリは、この設定に関係なく常に読み込みます。baseはHAProxyが依存するLuaの基本関数を提供し、coroutineは、HAProxyがcoroutine.create()を独自の安全な実装で上書きするために必要です。
 
-この設定に関係なく、HAProxyではfork()と新しいスレッドの作成を、すでにデフォルトで禁止しています。再び有効にできるのは、globalの "insecure-fork-wanted" ディレクティブだけです。読み込むライブラリを制限すると、Luaスクリプトにさらす攻撃対象をさらに減らせます。具体的には: - "os" を除くと、os.execute()とos.exit()を防ぎます - "io" を除くと、io.open()とio.popen()を防ぎます - "package" を除くと、require()によるネイティブCモジュールの読み込みを防ぎます - "debug" を除くと、debug.getupvalue()、debug.getmetatable()、debug.sethook()によるHAProxy内部の調査を防ぎます
+この設定に関係なく、HAProxyではfork()と新しいスレッドの作成を、すでにデフォルトで禁止しています。再び有効にできるのは、globalの "insecure-fork-wanted" ディレクティブだけです。読み込むライブラリを制限すると、Luaスクリプトにさらす攻撃対象をさらに減らせます。具体的には： - "os" を除くと、os.execute()とos.exit()を防ぎます - "io" を除くと、io.open()とio.popen()を防ぎます - "package" を除くと、require()によるネイティブCモジュールの読み込みを防ぎます - "debug" を除くと、debug.getupvalue()、debug.getmetatable()、debug.sethook()によるHAProxy内部の調査を防ぎます
 
-例:
+例：
 
 ```text
 tune.lua.openlibs none                    # only base + coroutine
@@ -3143,7 +3143,7 @@ tune.pt.zero-copy-forwarding { on | off }
 
 パススルー・マルチプレクサーで、データのゼロコピー転送を有効 ('on') または無効 ('off') にします。使用するには、カーネルのスプライシングも設定する必要があります。デフォルトで有効です。
 
-関連項目: tune.disable-zero-copy-forwarding、option splice-auto、option splice-request、option splice-response
+関連項目： tune.disable-zero-copy-forwarding、option splice-auto、option splice-request、option splice-response
 
 <a id="entry-3-2-tune-quic-be-cc-cubic-min-losses"></a>
 
@@ -3294,7 +3294,7 @@ tune.quic.fe.sec.glitches-threshold <number>
 
 フロントエンド側またはバックエンド側の接続ごとに、異常の回数のしきい値を設定します。このしきい値に達すると、接続を自動的に終了します。これにより、明示的なルールを書かずに、不正な動作をする接続を自動的に終了できます。デフォルト値はゼロです。しきい値を設定しないことを意味し、どのイベントでも接続を閉じません。QUICクライアントによっては、長時間維持した接続で、ときどき少数の異常を引き起こすことがあります。そのため、多少の不具合があるクライアントに影響を与えずに効果を得るには、ゼロ以外の値を設定する場合、数百や数千程度にすべきでしょう。"tune.glitches.kill.cpu-usage" を使用すると、CPU使用率が一定の水準を超えた場合にのみ、接続を終了することもできます。
 
-関連項目: fc_glitches、tune.glitches.kill.cpu-usage
+関連項目： fc_glitches、tune.glitches.kill.cpu-usage
 
 <a id="entry-3-2-tune-quic-frontend-glitches-threshold"></a>
 
@@ -3371,7 +3371,7 @@ tune.quic.fe.stream.data-ratio <0..100, in percent>
 
 多数のアップロード用ストリームを並行して使用し、ストリーム間の不公平が問題になっているアプリケーションでは、この比率を下げて、公平性を高め、ストリームごとの帯域幅を減らすことが、適切な場合があります。
 
-関連項目: "tune.quic.be.stream.rxbuf"、"tune.quic.fe.stream.rxbuf"、"tune.quic.be.stream.max-concurrent"、"tune.quic.fe.stream.max-concurrent"
+関連項目： "tune.quic.be.stream.rxbuf"、"tune.quic.fe.stream.rxbuf"、"tune.quic.be.stream.max-concurrent"、"tune.quic.fe.stream.max-concurrent"
 
 <a id="entry-3-2-tune-quic-frontend-stream-data-ratio"></a>
 
@@ -3398,7 +3398,7 @@ tune.quic.fe.stream.max-concurrent <number>
 
 バックエンド側では、単一の接続で多重化する同時リクエスト数を制限するため、HAProxyがローカルで適用します。ピアのフロー制御によって、さらに制限される場合があります。サイトの応答性を高めるため、開くバックエンド接続数が増えることと引き換えに、デフォルト値の100を下げる必要がある場合があります。フロントエンド側と同様、この設定は受信バッファリング能力にも直接影響しますが、こちらではHTTPのダウンロード能力を制限します。主に "tune.bufsize" より大きいHTTPレスポンスを扱う場合は、QUICストリームのrxbuf設定を増やせます。
 
-関連項目: "tune.quic.be.stream.rxbuf"、"tune.quic.fe.stream.rxbuf"、"tune.quic.be.stream.data-ratio"、"tune.quic.fe.stream.data-ratio"
+関連項目： "tune.quic.be.stream.rxbuf"、"tune.quic.fe.stream.rxbuf"、"tune.quic.be.stream.data-ratio"、"tune.quic.fe.stream.data-ratio"
 
 <a id="entry-3-2-tune-quic-fe-stream-max-total"></a>
 
@@ -3439,7 +3439,7 @@ tune.quic.fe.stream.rxbuf <size>
 
 デフォルト値は0です。max-concurrentとbufsizeの積から、自動的に生成しなければならないことを意味します。たとえば、バックエンドのアプリケーションが、遅延の大きなネットワークで大量のアップロードを行う場合は、増やせます。
 
-関連項目: "tune.quic.be.stream.max-concurrent"、"tune.quic.fe.stream.max-concurrent"、"tune.quic.be.stream.data-ratio"、"tune.quic.fe.stream.data-ratio"
+関連項目： "tune.quic.be.stream.max-concurrent"、"tune.quic.fe.stream.max-concurrent"、"tune.quic.be.stream.data-ratio"、"tune.quic.fe.stream.data-ratio"
 
 <a id="entry-3-2-tune-quic-frontend-max-data-size"></a>
 
@@ -3539,7 +3539,7 @@ tune.quic.zero-copy-fwd-send { on | off }
 
 QUICマルチプレクサーで、データのゼロコピー送信を有効 ('on') または無効 ('off') にします。デフォルトで有効です。
 
-関連項目: tune.disable-zero-copy-forwarding
+関連項目： tune.disable-zero-copy-forwarding
 
 <a id="entry-3-2-tune-renice-runtime"></a>
 
@@ -3551,7 +3551,7 @@ tune.renice.runtime <number>
 
 この設定オプションは、-20から19までの値を受け付けます。man 2 setpriorityに記載された、スケジューリング優先度を適用します。設定の解析後に適用するため、ワーカーまたは単独で動作するプロセスだけが、この優先度を適用します。通常は、設定の解析を行うプロセス（tune.renice.startup）より、高い優先度になるように設定します。
 
-関連項目: tune.renice.startup
+関連項目： tune.renice.startup
 
 <a id="entry-3-2-tune-renice-startup"></a>
 
@@ -3563,7 +3563,7 @@ tune.renice.startup <number>
 
 この設定オプションは、-20から19までの値を受け付けます。man 2 setpriorityに記載された、スケジューリング優先度を適用します。残りの設定を適用する前に、この優先度を適用するため、設定の解析時に優先度を下げたい場合に役立ちます。設定の解析前に、単独で動作するプロセスまたはワーカーに適用します。設定を解析した後は、tune.renice.runtimeを使用していなければ、以前の優先度に戻します。
 
-関連項目: tune.renice.runtime
+関連項目： tune.renice.runtime
 
 <a id="entry-3-2-tune-rcvbuf-backend"></a>
 
@@ -3929,7 +3929,7 @@ force-cfg-parser-pause <timeout>
 
 `<timeout>` は、デフォルトではミリ秒単位で指定する、タイムアウト値です。ただし、この文書の冒頭で説明したように、数値に単位を付けると、ほかの単位でも指定できます。
 
-例:
+例：
 
 ```text
 global
@@ -4067,7 +4067,7 @@ httpclient.timeout.connect <timeout>
 
 httpclientの接続試行について、デフォルトの最大待ち時間を設定します。
 
-引数:
+引数：
 
 ```text
 <timeout> タイムアウト値です。デフォルトの単位はミリ秒ですが、

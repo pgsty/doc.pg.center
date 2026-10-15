@@ -638,7 +638,7 @@ backend mylog-hash
 
     - 場合によっては、"check_post"を指定すると、メッセージ本文の内容全体を走査しようとする可能性があります。通常、線形空白または制御文字が見つかると、URLパラメーターリストと思われる部分の終わりを示すため、走査は終了します。SGML型のメッセージ本文では、おそらく問題になりません。
 
-関連項目: "dispatch", "cookie", "transparent", "hash-type"
+関連項目： "dispatch", "cookie", "transparent", "hash-type"
 
 <a id="entry-4-2-be-unpublished"></a>
 
@@ -652,13 +652,13 @@ be-unpublished
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
 
 実際には、他のプロキシが現在のプロキシを参照するuse_backendおよびdefault_backendルールは無視され、次のコンテンツスイッチングルールが評価されます。ただし、"force-be-switch"ルールを用いることでこれをバイパスできます。
 
 この状態は無効状態に似ていますが、いくつかの違いがあります。まず、非公開バックエンドは完全に初期化され、サーバーのヘルスチェックもアクティブなままです。最後に、CLI上の"publish backend"コマンドにより、バックエンドを公開することができます。管理マニュアルを参照してください。
 
-関連項目: "force-be-switch"
+関連項目： "force-be-switch"
 
 <a id="entry-4-2-bind"></a>
 
@@ -673,7 +673,7 @@ bind /<path> [, ...] [param*]
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
 
 引数：
 
@@ -792,7 +792,7 @@ listen h3_quic_proxy
     bind quic4@10.0.0.1:8888 ssl crt /etc/mycrt
 ```
 
-注意： Linuxの抽象名前空間ソケットに関して、"abns"HAProxyソケットはsun_pathの全長をアドレス長として使用します。他のプログラム（例: socat）はデフォルトで文字列長のみを使用します。socatの抽象ソケット定義に",unix-tightsocklen=0"オプションを渡すことでHAProxyと互換性を持たせることができます。または、"abnsz"HAProxyソケットファミリを使用してください。
+注意： Linuxの抽象名前空間ソケットに関して、"abns"HAProxyソケットはsun_pathの全長をアドレス長として使用します。他のプログラム（例： socat）はデフォルトで文字列長のみを使用します。socatの抽象ソケット定義に",unix-tightsocklen=0"オプションを渡すことでHAProxyと互換性を持たせることができます。または、"abnsz"HAProxyソケットファミリを使用してください。
 
 "source"、"option forwardfor"、"unix-bind"、PROXYプロトコルのドキュメント、およびbindオプションについて説明する[セクション5](/ja/haproxy/bind-and-server-options/)も参照してください。
 
@@ -806,9 +806,9 @@ capture cookie <name> len <length>
 
 リクエストおよびレスポンスの両方でCookieをキャプチャし、ログに記録します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
 
 引数：
 
@@ -847,9 +847,9 @@ capture request header <name> len <length>
 
 指定されたリクエストヘッダーの最後の出現をキャプチャし、ログに記録します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
 
 引数：
 
@@ -889,9 +889,9 @@ capture response header <name> len <length>
 
 指定したレスポンスヘッダーの最後の出現箇所をキャプチャし、ログに記録します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
 
 引数：
 
@@ -1009,9 +1009,9 @@ compression type <mime type> ...
 
 HTTP圧縮を有効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -1067,7 +1067,7 @@ compression algo gzip
 compression type text/html text/plain
 ```
 
-関連項目: "compression offload"、"compression direction"、"compression minsize-req"および"compression minsize-res"
+関連項目： "compression offload"、"compression direction"、"compression minsize-req"および"compression minsize-res"
 
 <a id="entry-4-2-compression-minsize-req"></a>
 
@@ -1080,9 +1080,9 @@ compression minsize-res <size>
 
 圧縮を適用するペイロードの最小サイズをバイト単位で設定します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 このサイズ未満のペイロードは圧縮されず、圧縮の効果が大きくないデータに対する不要なCPUオーバーヘッドを回避します。"minsize-req"はリクエストに、"minsize-res"はレスポンスに適用されます。デフォルト値は0です。
 
@@ -1096,9 +1096,9 @@ compression offload
 
 HAProxyを圧縮オフローダーとしてのみ動作させます。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 可
 
 "offload"設定によりHAProxyはAccept-Encodingヘッダーを削除し、バックエンドサーバーがレスポンスを圧縮しないようにします。すべての圧縮処理がHAProxyの配置されている一か所に集中するため、この設定を使わないことを強く推奨します。ただし、一部の配置構成では、無効にできない不具合のあるHTTP圧縮実装を持つゲートウェイの前段にHAProxyが配置される場合があります。その場合、HAProxyでゲートウェイが無効なペイロードを出力するのを防げます。設定でヘッダーを単に削除しても機能しません。ヘッダーの解析より前に適用され、HAProxy自身の圧縮を妨げるためです。このような状況では、"offload"設定を使用することを推奨します。
 
@@ -1118,7 +1118,7 @@ HAProxyがリクエストとレスポンスの両方を圧縮できるように�
 
 このディレクティブは、従来の"filter compression"が有効な場合にのみ関係があります。明示的なcomp-reqとcomp-resフィルターでは、圧縮方向の指定が冗長になるためです。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 参照："compression type"、"compression algo"、"compression offload"。
 
@@ -1135,7 +1135,7 @@ cookie <name> [ rewrite | insert | prefix ] [ indirect ] [ nocache ]
 
 バックエンドでCookieに基づく接続先の固定を有効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 不可 \| 可 \| 可
 
@@ -1309,7 +1309,7 @@ declare capture [ request | response ] len <length>
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
 
 引数：
 
@@ -1398,7 +1398,7 @@ listen、フロントエンド、またはバックエンドの説明を記述�
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 可
 
 引数：文字列
 
@@ -1416,7 +1416,7 @@ disabled
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -1438,7 +1438,7 @@ dispatch <address>:<port>   (deprecated)
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
 
 引数：
 
@@ -1482,7 +1482,7 @@ dynamic-cookie-key <string>
 
 バックエンドの動的Cookieの秘密鍵を設定します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 不可 \| 可 \| 可
 
@@ -1502,7 +1502,7 @@ enabled
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -1520,9 +1520,9 @@ errorfile <code> <file>
 
 HAProxyが生成するエラーの代わりにファイルの内容を返します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -1567,9 +1567,9 @@ errorfiles <name> [<code> ...]
 
 `<name>` http-errorsセクションで定義されたエラーファイルのすべて、または一部をインポートします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -1604,9 +1604,9 @@ errorloc302 <code> <url>
 
 HAProxyが生成するエラーの代わりに、URLへのHTTPリダイレクトを返します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -1640,9 +1640,9 @@ errorloc303 <code> <url>
 
 HAProxyが生成するエラーの代わりに、URLへのHTTPリダイレクトを返します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -1678,7 +1678,7 @@ email-alert from <emailaddr>
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -1703,7 +1703,7 @@ email-alert level <level>
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -1738,7 +1738,7 @@ email-alert mailers <mailersect>
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -1762,7 +1762,7 @@ mailersとの通信に使用する宛先ホスト名アドレスを宣言しま�
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -1788,7 +1788,7 @@ email-alert to <emailaddr>
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -1832,7 +1832,7 @@ force-persist { if | unless } <condition>
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
 
 デフォルトでは、リクエストはダウン状態のサーバーに配信されません。"option persist"を使用すると強制的に配信できますが、これは無条件に作用し、"option redispatch"が設定されている場合は有効なサーバーへ再振り分けされます。そのため、メンテナンス作業のために人為的にダウン状態とされたサーバーへ一部のリクエストを強制的に届ける方法は、ほとんどありません。
 
@@ -1958,7 +1958,7 @@ force-be-switch { if | unless } <condition>
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
 
 参照："be-unpublished"、"disabled"。
 
@@ -1974,7 +1974,7 @@ filter <name> [param*]
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -2006,7 +2006,7 @@ listen
   server srv1 192.168.0.1:80
 ```
 
-関連項目: [セクション9](/ja/haproxy/filters/)。
+関連項目： [セクション9](/ja/haproxy/filters/)。
 
 <a id="entry-4-2-fullconn"></a>
 
@@ -2059,7 +2059,7 @@ guid <string>
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 可
 
 `<string>`は、すべてのHAProxy設定において、オブジェクトの種類にかかわらず一意でなければなりません。ユーザーが命名ポリシーを選択できるよう、形式は指定されていません。唯一の制限は長さで、127文字を超えることはできません。すべての英数字および'.'、':'、'-'、'\_'の各文字が有効です。関連項目："shm-stats-file"。
 
@@ -2103,7 +2103,7 @@ hash-preserve-affinity { always | maxconn | maxqueue }
 
 サーバーが飽和状態またはキューが満杯の状態にあるときに、ハッシュ負荷分散を使用してストリームをサーバーに割り当てる方法を指定します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 不可 \| 可 \| 可
 
@@ -2217,7 +2217,7 @@ http-after-response <action> <options...> [ { if | unless } <condition> ]
 
 すべてのレイヤー7レスポンス（サーバー、アプレット/サービス、内部レスポンス）のアクセス制御です。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可(!) \| 可 \| 可 \| 可
 
@@ -2717,9 +2717,9 @@ http-error status <code> [content-type <type>]
 
 HAProxyが生成するエラーの代わりに使用するカスタムエラーメッセージを定義します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -2788,7 +2788,7 @@ http-request <action> [options...] [ { if | unless } <condition> ]
 
 レイヤー7リクエストのアクセス制御です。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可(!) \| 可 \| 可 \| 可
 
@@ -2851,7 +2851,7 @@ http-response <action> <options...> [ { if | unless } <condition> ]
 
 レイヤー7レスポンスのアクセス制御です。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可(!) \| 可 \| 可 \| 可
 
@@ -2897,7 +2897,7 @@ http-reuse { never | safe | aggressive | always }
 
 アイドル状態のHTTP接続をリクエスト間でどのように共有できるかを宣言します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 不可 \| 可 \| 可
 
@@ -2949,7 +2949,7 @@ http-send-name-header [<header>]
 
 リクエストにサーバー名を追加します。`<header>`で指定されたヘッダー文字列を使用します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 不可 \| 可 \| 可
 
@@ -2975,7 +2975,7 @@ id <value>
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -2993,7 +2993,7 @@ ignore-persist { if | unless } <condition>
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
 
 デフォルトでは、Cookieによる接続先の固定を有効にしている場合、そのCookieを含むすべてのリクエストは無条件で同じ接続先を使用します（対象のサーバーが正常に稼働していることが前提です）。
 
@@ -3119,7 +3119,7 @@ no log
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 プレフィックス：
 
@@ -3389,7 +3389,7 @@ log-tag <string>
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 syslogヘッダーのtagフィールドを、この文字列に設定します。デフォルトではglobalセクションのlog-tagを使用し、設定されていなければコマンドラインから起動したプログラム名（通常は"HAProxy"）を使用します。同じホスト上の複数プロセスや、同じプロセス内の顧客ごとのインスタンスを区別する際に役立つ場合があります。バックエンドでは、サーバーの稼働状態やダウン状態への変化に関するログにこのタグを使用します。たとえば、defaultsセクションで収容する顧客に対応したlog-tagを設定し、その顧客のすべてのフロントエンドとバックエンドを続けて記述した後、新しいdefaultsセクションで別の顧客の設定を始めると便利です。グローバルの"log-tag"ディレクティブも参照してください。
 
@@ -3403,7 +3403,7 @@ max-keep-alive-queue <value>
 
 keep-alive接続を維持するサーバーキューの最大サイズを設定します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 不可 \| 可 \| 可
 
@@ -3518,9 +3518,9 @@ monitor fail { if | unless } <condition>
 
 監視用HTTPリクエストに失敗を報告する条件を追加します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
 
 引数：
 
@@ -3560,7 +3560,7 @@ monitor-uri <uri>
 
 外部コンポーネントの監視リクエストが使用するURIを捕捉します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 不可
 
@@ -3601,7 +3601,7 @@ no option abortonclose
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -3657,7 +3657,7 @@ no option accept-unsafe-violations-in-http-request
 
 HTTPリクエスト解析の制約緩和を有効または無効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 不可
 
@@ -3703,7 +3703,7 @@ no option accept-unsafe-violations-in-http-response
 
 HTTPレスポンス解析の制約緩和を有効または無効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 不可 \| 可 \| 可
 
@@ -3771,7 +3771,7 @@ no option checkcache
 
 すべてのサーバーレスポンスを解析し、キャッシュ可能なCookieを含むレスポンスを遮断します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 不可 \| 可 \| 可
 
@@ -3848,7 +3848,7 @@ no option disable-h2-upgrade
 
 HTTP/1.xクライアント接続からの暗黙的なHTTP/2へのアップグレードを有効または無効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 不可
 
@@ -3941,7 +3941,7 @@ no option forwarded
 
 サーバーに送信するリクエストへのrfc 7239 forwardedヘッダーの挿入を有効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 不可 \| 可 \| 可
 
@@ -4047,9 +4047,9 @@ option forwardfor [ except <network> ] [ header <name> ] [ if-none ]
 
 サーバーに送信するリクエストへのX-Forwarded-Forヘッダーの挿入を有効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -4097,7 +4097,7 @@ no option h1-case-adjust-bogus-client
 
 仕様に準拠しないクライアントに送信するHTTP/1ヘッダーの大文字・小文字の調整を有効または無効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 不可
 
@@ -4124,7 +4124,7 @@ no option h1-case-adjust-bogus-server
 
 仕様に準拠しないサーバーに送信するHTTP/1ヘッダーの大文字・小文字の調整を有効または無効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 不可 \| 可 \| 可
 
@@ -4151,9 +4151,9 @@ no option http-buffer-request
 
 処理を進める前にHTTPリクエスト本文全体を待つ機能を有効または無効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -4172,7 +4172,7 @@ no option http-drop-request-trailers
 
 サーバーへの送信時に、リクエストからHTTPトレーラーを削除します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 不可 \| 不可 \| 可
 
@@ -4197,7 +4197,7 @@ no option http-drop-response-trailers
 
 クライアントへの送信時に、レスポンスからHTTPトレーラーを削除します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 不可
 
@@ -4220,7 +4220,7 @@ no option http-ignore-probes
 
 データのない接続とリクエストのタイムアウトのログ記録を有効または無効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 不可
 
@@ -4245,9 +4245,9 @@ no option http-keep-alive
 
 HTTP/1.x接続で、クライアントからサーバーまでのHTTP keep-aliveを有効または無効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -4279,9 +4279,9 @@ no option http-no-delay
 
 HTTPでは性能よりも対話の遅延を低く抑えることを優先するよう、システムに指示します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -4302,7 +4302,7 @@ no option http-pretend-keepalive
 
 サーバーへのHTTP/1.x接続で、HAProxyがkeepaliveを通知するかどうかを定義します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 不可 \| 可 \| 可
 
@@ -4330,9 +4330,9 @@ option http-restrict-req-hdr-names { preserve | delete | reject }
 
 "[a-zA-Z0-9-]"以外の文字を含むHTTPリクエストヘッダー名に対するHAProxyの方針を設定します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -4363,9 +4363,9 @@ no option http-server-close
 
 サーバー側のHTTP/1.x接続のクローズを有効または無効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -4390,7 +4390,7 @@ no option http-use-proxy-header
 
 Connectionの代わりに、非標準のProxy-Connectionヘッダーを使用します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 不可
 
@@ -4464,7 +4464,7 @@ backend https_relay
     server apache1 192.168.1.1:443 check port 80
 ```
 
-関連項目: "option ssl-hello-chk"、"option smtpchk"、"option mysql-check"、"option pgsql-check"、"http-check"、およびserverオプションの"check"、"port"、"inter"を参照してください。
+関連項目： "option ssl-hello-chk"、"option smtpchk"、"option mysql-check"、"option pgsql-check"、"http-check"、およびserverオプションの"check"、"port"、"inter"を参照してください。
 
 <a id="entry-4-2-option-httpclose"></a>
 
@@ -4477,9 +4477,9 @@ no option httpclose
 
 HTTP/1.x接続のクローズを有効または無効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -4505,7 +4505,7 @@ option httplog [ clf ]
 
 HTTPリクエスト、ストリームの状態、タイマーのログ記録を有効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 不可
 
@@ -4535,7 +4535,7 @@ option httpslog
 
 HTTPSリクエスト、ストリームの状態、タイマーのログ記録を有効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 不可
 
@@ -4556,7 +4556,7 @@ no option idle-close-on-response
 
 ソフトストップの進行中は、アイドル状態のフロントエンド接続を閉じないようにします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 不可
 
@@ -4583,7 +4583,7 @@ no option independent-streams
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -4648,7 +4648,7 @@ no option log-health-checks
 
 ヘルスチェックに起因しない状態の変更（CLIでの有効化や無効化など）は、このオプションでは意図的にログに記録しません。
 
-関連項目: "option httpchk"、"option ldap-check"、"option mysql-check"、"option pgsql-check"、"option redis-check"、"option smtpchk"、"option tcp-check"、"log"、およびログについて説明する[8節](/ja/haproxy/configuration-logging/)を参照してください。
+関連項目： "option httpchk"、"option ldap-check"、"option mysql-check"、"option pgsql-check"、"option redis-check"、"option smtpchk"、"option tcp-check"、"log"、およびログについて説明する[8節](/ja/haproxy/configuration-logging/)を参照してください。
 
 <a id="entry-4-2-option-log-separate-errors"></a>
 
@@ -4771,7 +4771,7 @@ no option nolinger
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -4797,9 +4797,9 @@ option originalto [ except <network> ] [ header <name> ]
 
 サーバーに送信するリクエストへのX-Original-Toヘッダーの挿入を有効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -5054,7 +5054,7 @@ no option splice-auto
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -5085,7 +5085,7 @@ no option splice-request
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -5116,7 +5116,7 @@ no option splice-response
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -5231,7 +5231,7 @@ tcp-checkのsend/expectシーケンスを使用してヘルスチェックを実
 
 このヘルスチェック方式は、"tcp-check"コマンドの一覧と組み合わせて、送信と期待値の確認からなるヘルスチェックのシーケンスに対応するためのものです。
 
-TCPチェックは現在、4種類の動作モードをサポートします。- "tcp-check"ディレクティブがない場合: ヘルスチェックは接続試行だけを行います。これが引き続きデフォルトのモードです。
+TCPチェックは現在、4種類の動作モードをサポートします。- "tcp-check"ディレクティブがない場合： ヘルスチェックは接続試行だけを行います。これが引き続きデフォルトのモードです。
 
     - "tcp-check send"または"tcp-check send-binary"だけが指定されている場合:
       接続の開始とともに文字列を送信するために使用します。
@@ -5361,7 +5361,7 @@ option tcpka
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -5519,7 +5519,7 @@ quic-initial <action> [ { if | unless } <condition> ]
 
 受信したQUIC Initialパケットに対して、アクションを実行します。"tcp-request connection"とは異なり、接続を構成する要素の生成や、SSLハンドシェイクの開始と完了より前に実行するため、接続試行を拒否する場合に効率的です。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可(!) \| 可 \| 可 \| 不可
 
@@ -5591,9 +5591,9 @@ redirect scheme   <sch> [code <code>] <option> [{if | unless} <condition>]
 
 if/unlessによる条件の一致または不一致に応じて、HTTPリダイレクトを返します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 可
 
 ifでは条件に一致した場合、unlessでは一致しない場合に、HTTPリクエストに対してリダイレクトのレスポンスを返します。条件を指定しなければ、無条件にリダイレクトします。
 
@@ -5678,7 +5678,7 @@ ifでは条件に一致した場合、unlessでは一致しない場合に、HTT
 
 ```
 
-例: ログインURLだけをHTTPSに移します。
+例： ログインURLだけをHTTPSに移します。
 
 ```haproxy
 acl clear      dst_port  80
@@ -5697,7 +5697,7 @@ redirect location / clear-cookie USERID=       if logout
 
 
 
-例: '/'のない記事へのリクエストにリダイレクトを返します。
+例： '/'のない記事へのリクエストにリダイレクトを返します。
 
 ```haproxy
 acl missing_slash path_reg ^/article/[^/]*$
@@ -5712,7 +5712,7 @@ redirect scheme https if !{ ssl_fc }
 ```
 
 
-例: すべてのホストのうち、接頭辞'www.'が付いていないものにそれを追加します。
+例： すべてのホストのうち、接頭辞'www.'が付いていないものにそれを追加します。
 
 ```haproxy
 http-request redirect code 301 location      \
@@ -5721,7 +5721,7 @@ http-request redirect code 301 location      \
 ```
 
 
-例: 古いURLだけを新しいURLへ恒久的にリダイレクトします。
+例： 古いURLだけを新しいURLへ恒久的にリダイレクトします。
 
 ```haproxy
 http-request redirect code 301 location               \
@@ -5853,7 +5853,7 @@ server <name> <address>[:[port]] [param*]
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
 
 引数：
 
@@ -5919,7 +5919,7 @@ server www1_dc1 "${LAN_DC1}.101:80"
 server www1_dc2 "${LAN_DC2}.101:80"
 ```
 
-注意： Linuxの抽象名前空間ソケットに関して、"abns"HAProxyソケットはsun_pathの全長をアドレス長として使用します。他のプログラム（例: socat）はデフォルトで文字列長のみを使用します。socatの抽象ソケット定義に",unix-tightsocklen=0"オプションを渡すことでHAProxyと互換性を持たせることができます。または、"abnsz"HAProxyソケットファミリを使用してください。
+注意： Linuxの抽象名前空間ソケットに関して、"abns"HAProxyソケットはsun_pathの全長をアドレス長として使用します。他のプログラム（例： socat）はデフォルトで文字列長のみを使用します。socatの抽象ソケット定義に",unix-tightsocklen=0"オプションを渡すことでHAProxyと互換性を持たせることができます。または、"abnsz"HAProxyソケットファミリを使用してください。
 
 "default-server"、"http-send-name-header"、およびserverオプションに関する[セクション5](/ja/haproxy/bind-and-server-options/)も参照してください。
 
@@ -5935,7 +5935,7 @@ server-state-file-name [ { use-backend-name | <file> } ]
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
 
 これは、"load-server-state-from-file"ディレクティブが"local"に設定されている場合にのみ適用されます。`<file>`が指定されていない場合、"use-backend-name"が使用されている場合、またはこのディレクティブが設定されていない場合は、バックエンド名を使用します。`<file>`がスラッシュ'/'で始まる場合は絶対パスと見なします。それ以外の場合は、globalディレクティブ"server-state-base"に`<file>`を連結します。
 
@@ -5961,7 +5961,7 @@ server-template <prefix> <num | range> <fqdn>[:<port>] [params*]
 
 使用可能なコンテキスト：tcp, http, log
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
 
 引数：
 
@@ -6124,7 +6124,7 @@ backend transparent_http
     source 0.0.0.0 usesrc hdr_ip(x-forwarded-for,-1)
 ```
 
-関連項目: [5節](/ja/haproxy/bind-and-server-options/)のサーバーオプション"source"、[www.balabit.com](http://www.balabit.com)のLinuxカーネル用Tproxyパッチ、"bind"キーワードを参照してください。
+関連項目： [5節](/ja/haproxy/bind-and-server-options/)のサーバーオプション"source"、[www.balabit.com](http://www.balabit.com)のLinuxカーネル用Tproxyパッチ、"bind"キーワードを参照してください。
 
 <a id="entry-4-2-srvtcpka-cnt"></a>
 
@@ -6214,9 +6214,9 @@ stats admin { if | unless } <cond>
 
 if/unlessによる条件の一致または不一致に応じて、統計の管理者レベルを有効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 可
 
 このステートメントは、if/unlessによる条件の一致または不一致に応じて、統計の管理者レベルを有効にします。
 
@@ -6263,7 +6263,7 @@ backend stats_auth
     stats admin if AUTH_ADMIN
 ```
 
-関連項目: "stats enable"、"stats auth"、"stats http-request"、"stats scope"、userlistsについては[12.2節](/ja/haproxy/other-sections/#section-12-2)、ACLの使用については[7節](/ja/haproxy/acls-and-samples/)を参照してください。
+関連項目： "stats enable"、"stats auth"、"stats http-request"、"stats scope"、userlistsについては[12.2節](/ja/haproxy/other-sections/#section-12-2)、ACLの使用については[7節](/ja/haproxy/acls-and-samples/)を参照してください。
 
 <a id="entry-4-2-ssl-f-use"></a>
 
@@ -6277,7 +6277,7 @@ ssl-f-use [<sslbindconf> ...]*
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
 
 引数：
 
@@ -6344,9 +6344,9 @@ stats auth <user>:<passwd>
 
 認証付きの統計を有効にし、アカウントにアクセスを許可します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -6397,9 +6397,9 @@ stats enable
 
 デフォルト設定で統計の報告を有効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -6440,9 +6440,9 @@ stats hide-version
 
 統計を有効にし、HAProxyのバージョン表示を隠します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -6484,9 +6484,9 @@ stats http-request { allow | deny | auth [realm <realm>] }
 
 統計のアクセス制御です。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
 
 "http-request"と同様に、これらのオプションを使うと統計へのアクセスを細かく制御できます。各オプションの後にはif/unlessとACLを指定できます。最初に条件が一致したオプション（または条件のないオプション）で評価を終了します。"deny"では403エラーを返し、"allow"では通常の処理を行い、"auth"では401/407エラーコードを返すため、クライアントにはユーザー名とパスワードの入力が求められるはずです。
 
@@ -6504,9 +6504,9 @@ stats realm <realm>
 
 統計を有効にし、認証レルムを設定します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -6556,9 +6556,9 @@ stats refresh <delay>
 
 自動更新付きの統計を有効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -6607,9 +6607,9 @@ stats scope { <name> | "." }
 
 統計を有効にし、アクセス範囲を制限します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -6656,9 +6656,9 @@ stats show-desc [ <desc> ]
 
 統計ページでの説明の表示を有効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
     `<desc>`    表示する説明です。省略可能です。指定しない場合は、
               globalセクションの説明を自動的に使用します。
@@ -6690,9 +6690,9 @@ stats show-legends
 
 統計ページでの追加情報の表示を有効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -6712,9 +6712,9 @@ stats show-modules
 
 統計ページでの追加統計モジュールの表示を有効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -6734,9 +6734,9 @@ stats show-node [ <name> ]
 
 統計ページでのホスト名の表示を有効にします。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -6772,9 +6772,9 @@ stats show-version
 
 統計を有効にし、HAProxyのバージョンを表示します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：なし
 
@@ -6792,9 +6792,9 @@ stats uri <prefix>
 
 統計を有効にし、アクセス用のURIプレフィックスを定義します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -6847,7 +6847,7 @@ stick match <pattern> [table <table>] [{if | unless} <cond>]
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
 
 引数：
 
@@ -6897,7 +6897,7 @@ backend smtp
     server s2 192.168.1.1:25
 ```
 
-関連項目: "stick-table"、"stick on"、スティックテーブルについては[11節](/ja/haproxy/stick-tables-and-peers/)、ACLとサンプル取得については[7節](/ja/haproxy/acls-and-samples/)を参照してください。
+関連項目： "stick-table"、"stick on"、スティックテーブルについては[11節](/ja/haproxy/stick-tables-and-peers/)、ACLとサンプル取得については[7節](/ja/haproxy/acls-and-samples/)を参照してください。
 
 <a id="entry-4-2-stick-on"></a>
 
@@ -6911,7 +6911,7 @@ stick on <pattern> [table <table>] [{if | unless} <condition>]
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
 
 注意： この形式は、同じ引数を指定した"stick match"の後に"stick store-request"を置くことと完全に同じです。詳細は両方のキーワードを参照してください。保守しやすい設定を書くための便宜として提供しているだけです。
 
@@ -6959,7 +6959,7 @@ stick store-request <pattern> [table <table>] [{if | unless} <condition>]
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
 
 引数：
 
@@ -7009,7 +7009,7 @@ backend smtp
     server s2 192.168.1.1:25
 ```
 
-関連項目: "stick-table"、"stick on"、スティックテーブルについては[11節](/ja/haproxy/stick-tables-and-peers/)、ACLとサンプル取得については[7節](/ja/haproxy/acls-and-samples/)を参照してください。
+関連項目： "stick-table"、"stick on"、スティックテーブルについては[11節](/ja/haproxy/stick-tables-and-peers/)、ACLとサンプル取得については[7節](/ja/haproxy/acls-and-samples/)を参照してください。
 
 <a id="entry-4-2-stick-store-response"></a>
 
@@ -7023,7 +7023,7 @@ stick store-response <pattern> [table <table>] [{if | unless} <condition>]
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
 
 引数：
 
@@ -7085,7 +7085,7 @@ backend https
     server s2 192.168.1.1:443
 ```
 
-関連項目: "stick-table"、"stick on"、スティックテーブルについては[11節](/ja/haproxy/stick-tables-and-peers/)、ACLとパターン抽出については[7節](/ja/haproxy/acls-and-samples/)を参照してください。
+関連項目： "stick-table"、"stick on"、スティックテーブルについては[11節](/ja/haproxy/stick-tables-and-peers/)、ACLとパターン抽出については[7節](/ja/haproxy/acls-and-samples/)を参照してください。
 
 <a id="entry-4-2-stick-table-type"></a>
 
@@ -7099,7 +7099,7 @@ stick-table type <type> size <size> [expire <expire>] [args...]
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 可
 
 スティックテーブルを宣言して設定するために使用します。詳細とサポートされる引数の一覧は、[11.1節](/ja/haproxy/stick-tables-and-peers/#section-11-1)を参照してください。必須なのは型とサイズだけです。
 
@@ -7543,13 +7543,13 @@ tcp-request connection <action> <options...> [ { if | unless } <condition> ]
 
 "if/unless"条件は省略可能です。アクションに条件が設定されていなければ、無条件に実行します。これは"track-sc\*"アクションや、既定のアクションを拒否に変更する場合などに便利です。
 
-例: 許可リスト内のホストからの接続をすべて受け入れ、頻度が高すぎる接続は数えずに拒否し、受け入れた接続を追跡します。その結果、不正利用を行う送信元からの接続レートに上限が設けられます。
+例： 許可リスト内のホストからの接続をすべて受け入れ、頻度が高すぎる接続は数えずに拒否し、受け入れた接続を追跡します。その結果、不正利用を行う送信元からの接続レートに上限が設けられます。
 
         tcp-request connection accept if { src -f /etc/haproxy/whitelist.lst }
         tcp-request connection reject if { src_conn_rate gt 10 }
         tcp-request connection track-sc0 src
 
-例: 許可リスト内のホストからの接続をすべて受け入れ、それ以外の接続を数え、頻度が高すぎるものを拒否します。その結果、不正利用に当たる接続は、頻度を下げない限りブロックされます。
+例： 許可リスト内のホストからの接続をすべて受け入れ、それ以外の接続を数え、頻度が高すぎるものを拒否します。その結果、不正利用に当たる接続は、頻度を下げない限りブロックされます。
 
         tcp-request connection accept if { src -f /etc/haproxy/whitelist.lst }
         tcp-request connection track-sc0 src
@@ -7769,18 +7769,18 @@ tcp-request session <action> [{if | unless} <condition>]
 
 "if/unless"条件は省略可能です。アクションに条件が設定されていなければ、無条件に実行します。これは"track-sc\*"アクションや、既定のアクションを拒否に変更する場合などに便利です。
 
-例: 既定では元の送信元アドレスを追跡し、ローカルプロキシからの接続については、PROXYプロトコルのヘッダーで通知されたアドレスを追跡します。最初の接続レベルのルールは、これらの接続に対してPROXYプロトコルの受信を有効にします。二番目のルールは、必要に応じてデコードした後に、保持すると決めたアドレスを追跡します。
+例： 既定では元の送信元アドレスを追跡し、ローカルプロキシからの接続については、PROXYプロトコルのヘッダーで通知されたアドレスを追跡します。最初の接続レベルのルールは、これらの接続に対してPROXYプロトコルの受信を有効にします。二番目のルールは、必要に応じてデコードした後に、保持すると決めたアドレスを追跡します。
 
         tcp-request connection expect-proxy layer4 if { src -f proxies.lst }
         tcp-request session track-sc0 src
 
-例: 許可リスト内のホストからのセッションをすべて受け入れ、頻度が高すぎるセッションは数えずに拒否し、受け入れたセッションを追跡します。その結果、不正利用を行う送信元からのセッションレートに上限が設けられます。
+例： 許可リスト内のホストからのセッションをすべて受け入れ、頻度が高すぎるセッションは数えずに拒否し、受け入れたセッションを追跡します。その結果、不正利用を行う送信元からのセッションレートに上限が設けられます。
 
         tcp-request session accept if { src -f /etc/haproxy/whitelist.lst }
         tcp-request session reject if { src_sess_rate gt 10 }
         tcp-request session track-sc0 src
 
-例: 許可リスト内のホストからのセッションをすべて受け入れ、それ以外のセッションを数え、頻度が高すぎるものを拒否します。その結果、不正利用に当たるセッションは、頻度を下げない限りブロックされます。
+例： 許可リスト内のホストからのセッションをすべて受け入れ、それ以外のセッションを数え、頻度が高すぎるものを拒否します。その結果、不正利用に当たるセッションは、頻度を下げない限りブロックされます。
 
         tcp-request session accept if { src -f /etc/haproxy/whitelist.lst }
         tcp-request session track-sc0 src
@@ -8015,9 +8015,9 @@ timeout http-keep-alive <timeout>
 
 新しいHTTPリクエストの到着を待つ最大許容時間を設定します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -8056,9 +8056,9 @@ timeout http-request <timeout>
 
 完全なHTTPリクエストを待つ最大許容時間を設定します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -8178,9 +8178,9 @@ timeout tarpit <timeout>
 
 tarpitされた接続を維持する時間を設定します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -8278,7 +8278,7 @@ unique-id-format <fmt>
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 可
 
 引数：
 
@@ -8316,7 +8316,7 @@ unique-id-header <name>
 
 HTTPリクエストに一意のIDヘッダーを追加します。
 
-使用可能なコンテキスト: http
+使用可能なコンテキスト： http
 
 使用可能なセクション：defaults \| frontend \| listen \| backend 可 \| 可 \| 可 \| 不可
 
@@ -8353,7 +8353,7 @@ if/unlessによるACL条件の一致または不一致に応じて、特定の�
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 可 \| 可 \| 不可
 
 引数：
 
@@ -8391,7 +8391,7 @@ use-fcgi-app <name>
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
 
 引数：
 
@@ -8414,7 +8414,7 @@ if/unlessで指定したACL条件の一致または不一致が成立する場�
 
 使用可能なコンテキスト：tcp, http
 
-使用可能なセクション: defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
+使用可能なセクション： defaults \| frontend \| listen \| backend 不可 \| 不可 \| 可 \| 可
 
 引数：
 
