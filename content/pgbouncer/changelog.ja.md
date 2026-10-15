@@ -914,7 +914,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
 **2015-09-03  -  PgBouncer 1.6.1  -  "Studio Audience Approves"**
 
 - 機能
-  * 新しい設定: `server_reset_query_always`。設定すると、
+  * 新しい設定： `server_reset_query_always`。設定すると、
       セッション以外のプールでの `server_reset_query` の使用を無効化します。
       PgBouncer ではプールごとの pool_mode を導入しましたが、
       セッションプールとトランザクションプールは同じリセットクエリを使用すべきではありません。
@@ -931,7 +931,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
 
   * handle_auth_response で NoticeResponse をスキップするようにしました。そうしないと、サーバー側の詳細なログレベルがログイン失敗を引き起こします。
 
-  * 管理コンソール: auth_type=any の場合に `auth_user` を設定するようにしました。そうしないと、ログ出力がクラッシュする可能性があります（#67）。
+  * 管理コンソール： auth_type=any の場合に `auth_user` を設定するようにしました。そうしないと、ログ出力がクラッシュする可能性があります（#67）。
 
   * OpenBSD、Solaris、OSX での各種ポータビリティ修正。
 
@@ -960,7 +960,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
   * 新規接続を防止するための DISABLE/ENABLE コマンドを追加します。
     (William Grant)
 
-  * 新しいDNSバックエンド: c-ares。すべての有用な機能をサポートする唯一のDNSバックエンドです: /etc/hostsのリフレッシュ、SOA照会、大容量の応答（TCP/EDNS+UDP経由）、IPv6。現在は推奨されるバックエンドであり、将来的には**唯一**のバックエンドになる可能性が高く、不十分なライブラリの多数をサポートする意義がないためです。
+  * 新しいDNSバックエンド： c-ares。すべての有用な機能をサポートする唯一のDNSバックエンドです： /etc/hostsのリフレッシュ、SOA照会、大容量の応答（TCP/EDNS+UDP経由）、IPv6。現在は推奨されるバックエンドであり、将来的には**唯一**のバックエンドになる可能性が高く、不十分なライブラリの多数をサポートする意義がないためです。
 
     SNAFU: c-ares バージョン 1.10 以下では、IPv6 を有効にした状態で CNAME サポートが破損するバグがあります。（既に上流で修正済み。） 一時的な対策として、c-ares 1.10 以下では IPv4 のみを使用します。したがって、PgBouncer は c-ares >1.10（まだリリースされていない）が公開されてからしばらく経った後にのみ、他のバックエンドを廃止します。
 
@@ -980,7 +980,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
 
   * log: IPv6 アドレスを [] で囲む
   * log: サーバーへの接続時、ローカルIPアドレスとポートを表示
-  * win32: 長い引数には GNU スタイルを使用: --foo
+  * win32: 長い引数には GNU スタイルを使用： --foo
   * ホスト名に数値を許可し、常に inet_pton でパースを試行する
   * deallocate_all() の修正についての FAQ
   * 例の設定ファイルに誤ったキーワードを修正
@@ -1054,7 +1054,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
 - 修正
 
   * AntiMake：パス名の操作に $(relpath) および $(abspath) を使用していたが、ソースツリーのパスにシンボリックリンクが含まれる場合にビルドが失敗していた。コードは現在、平文の文字列のみを扱うように変更された。
-  * 管理コンソール: SET コマンドで空文字列の値を設定できるようになりました。
+  * 管理コンソール： SET コマンドで空文字列の値を設定できるようになりました。
   * config.txt：タイムアウトは浮動小数点数で設定可能であることを示す。
       これは 1.4 で導入された、あまり知られていない機能である。
 
@@ -1067,7 +1067,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEW
 **2012-04-17  -  PgBouncer 1.5.1  -  "Abort, Retry, Ignore?"**
 
 - 機能
-  * UNIXソケットの権限を調整するためのパラメータ:
+  * UNIXソケットの権限を調整するためのパラメータ：
     unix_socket_mode=0777, unix_socket_group=''.
 - 修正事項
   * サーバー側変数に空文字列を許可する — これは "application_name" が正しく動作するために必要であり、サーバー側のデフォルト値を持たない唯一のパラメーターだからである。
@@ -1094,7 +1094,7 @@ GNU Make 3.81 以上が必要です。
     (Petr Jelinek)
   * DNS ゾーンシリアルに基づくホスト名の無効化。オプション dns_zone_check_period が設定されている場合、すべての DNS ゾーンに対して SOA を照会し、シリアルが変更された時点ですべてのホスト名を照会します。これは、接続の無効化を確定的に実行するため必要です。なぜなら、照会が行われない状態では、照会時の無効化は無意味だからです。新しい UDNS バックエンドでのみ動作します。
   * DNS キャッシュを確認するための新しい SHOW DNS_HOSTS および SHOW DNS_ZONES コマンドを追加。
-  * 新しいパラメータ: min_pool_size - ロードがなければ接続をすべて切断しないようにする
+  * 新しいパラメータ： min_pool_size - ロードがなければ接続をすべて切断しないようにする
     (Filip Rembiałkowski)
   * idle_in_transaction_timeout - トランザクションが長時間アイドル状態になると終了する。
     デフォルトでは設定されない。
@@ -1147,7 +1147,7 @@ GNU Make 3.81 以上が必要です。
   * IPv6 アドレスのリスニング/接続をサポートします。
     (Hannu Krosing)
   * 'listen_addr' に複数のリッスンアドレスを指定可能。それぞれに対して getaddrinfo() が呼び出されるため、名前も使用できます。
-  * 管理コンソール: クライアントに 'server_version' を送信して PgBouncer のバージョンを通知します。
+  * 管理コンソール： クライアントに 'server_version' を送信して PgBouncer のバージョンを通知します。
 
 - 重要な修正
 
@@ -1214,7 +1214,7 @@ GNU Make 3.81 以上が必要です。
 
     --enable-evdns を configure に指定すると、libevent の evdns がバックエンドとして使用されます。デフォルトでは使用されません。これは libevent 1.3/1.4 にバグのある実装が含まれているためです。libevent 2.0 の evdns だけが問題ないとされています。
 
-  * 新しい設定変数: syslog_ident は、syslog の名前を調整するために使用します。
+  * 新しい設定変数： syslog_ident は、syslog の名前を調整するために使用します。
 
   * `application_name` 起動パラメータに対する適切なサポート。
 
@@ -1222,9 +1222,9 @@ GNU Make 3.81 以上が必要です。
 
   * Solaris 互換性の修正 (Hubert Depesz Lubaczewski)
 
-  * 新しい設定変数: disable_pqexec。非常に厳格な環境では、この設定で Simple Query Protocol を無効化できます。これには、Extended Query Protocol のみを使用するアプリケーションが必要です。
+  * 新しい設定変数： disable_pqexec。非常に厳格な環境では、この設定で Simple Query Protocol を無効化できます。これには、Extended Query Protocol のみを使用するアプリケーションが必要です。
 
-  * Postgres互換性: スタートアップパケット内のデータベース名が空の場合、ユーザー名をデータベース名として使用する。
+  * Postgres互換性： スタートアップパケット内のデータベース名が空の場合、ユーザー名をデータベース名として使用する。
 
 - 修正
 
@@ -1254,7 +1254,7 @@ GNU Make 3.81 以上が必要です。
 **2010-05-10  -  PgBouncer 1.3.3  -  "NSFW"**
 
 - 改善
-  * listen(2) の引数を設定可能にする: listen_backlog。これは、システムの最大許容値が設定可能な OS で有用です。
+  * listen(2) の引数を設定可能にする： listen_backlog。これは、システムの最大許容値が設定可能な OS で有用です。
   * ログイン失敗の原因となったユーザー名やデータベース名を明示するように、切断メッセージを改善します。
 - 修正内容
   * 高速失敗（fast-fail）時の再起動ロジックを再構成しました。以前のロジックは、恒久的に壊れたデータベースやユーザーの場合、ログインしたいクライアントがいなくても再試行しようとするため厄介でした。
@@ -1342,7 +1342,7 @@ GNU Make 3.81 以上が必要です。
 
   * 設定ファイル内のデータベース名は、標準SQLの識別子クォートを使用して引用できるようになり、データベース名に非標準文字を含められるようになりました。
 
-  * 新しい設定項目: 'reserve_pool_size' および 'reserve_pool_timeout'。
+  * 新しい設定項目： 'reserve_pool_size' および 'reserve_pool_timeout'。
       クライアントが 'reserve_pool_timeout' 秒以上待機している場合、'reserve_pool_size' はプールに追加可能な接続数を指定します。また、'reserve_pool' 接続変数でプールごとに設定することもできます。
 
   * ソケット1つで費やされる時間を制限するための新しい設定 'sbuf_loopcnt'。
@@ -1428,7 +1428,7 @@ PgBouncer 1.2 では、libevent バージョン 1.3b 以降が必要です。
 
   * 新しい設定変数 'ignore_startup_parameters' を導入し、起動パケット内の追加パラメータを許可または無視できるようにしました。デフォルトでは 'database' と 'user' のみが許可され、それ以外のパラメータはエラーを発生させます。これは、過剰に積極的な JDBC が起動パケット内で 'extra_float_digits=2' を無条件に設定しようとする場合に耐えられるようにするためです。
 
-  * syslog へのログ出力: syslog=0/1 および syslog_facility=daemon/user/local0 の新パラメータ。
+  * syslog へのログ出力： syslog=0/1 および syslog_facility=daemon/user/local0 の新パラメータ。
 
   * より安全なオンライン再起動 (-R)
 
@@ -1516,8 +1516,8 @@ PgBouncer 1.2 では、libevent バージョン 1.3b 以降が必要です。
     - host= でカスタム Unix ソケットの場所を受け付ける
     - クォートされた値を許可: password=' asd''foo'
 
-  * 新しい設定変数: server_reset_query。接続の解放直後に送信されます
-  * 新しい設定変数: サーバーの接続割り当て方式を LIFO と RR の間で切り替えるための server_round_robin。
+  * 新しい設定変数： server_reset_query。接続の解放直後に送信されます
+  * 新しい設定変数： サーバーの接続割り当て方式を LIFO と RR の間で切り替えるための server_round_robin。
   * アイドル状態の接続に送信されたキャンセルパケットは、接続を切断しなくなりました。
   * psql からの ^C によるキャンセルが SUSPEND / PAUSE でも機能するようになりました。
   * 起動時に FD 制限を出力する。
@@ -1588,8 +1588,8 @@ PgBouncer 1.2 では、libevent バージョン 1.3b 以降が必要です。
   * Assert() がトリガーされたときにコアを生成する。
 
 - 新機能
-  * 新しい設定変数: log_connections、log_disconnections、log_pooler_errors は、ログ出力を有効または無効にするために使用します。
-  * 設定変数: client_login_timeout
+  * 新しい設定変数： log_connections、log_disconnections、log_pooler_errors は、ログ出力を有効または無効にするために使用します。
+  * 設定変数： client_login_timeout
       ログインフェーズで、SUSPEND ひいてはオンライン再起動を停滞させる可能性のある無応答の接続を切断します。
 
 **2007-03-28  -  PgBouncer 1.0.2  -  "Supersonic Spoon"**

@@ -1,5 +1,5 @@
 ---
-title: "設定: pgbouncer.ini"
+title: "設定： pgbouncer.ini"
 linkTitle: "設定"
 weight: 20
 description: "PgBouncer 設定ファイル (pgbouncer.ini) リファレンス"
@@ -178,7 +178,7 @@ max_client_conn + (max pool_size * total databases)
 
 ### track_extra_parameters {#track_extra_parameters}
 
-デフォルトでは、PgBouncer は、Postgres がクライアントに報告し、かつクライアントが変更できるすべてのパラメータを追跡します:
+デフォルトでは、PgBouncer は、Postgres がクライアントに報告し、かつクライアントが変更できるすべてのパラメータを追跡します：
 
 - `application_name`
 - `client_encoding`
@@ -193,11 +193,11 @@ max_client_conn + (max pool_size * total databases)
 
 他のパラメータを追跡対象にするには、ここに指定します。これにより、PgBouncer はそれらのパラメータをクライアント変数キャッシュに保持し、クライアントがアクティブになるたびにサーバーで復元する必要があることを認識します。
 
-複数の値を指定する必要がある場合は、カンマ区切りのリストを使用してください（例: `some_extension.setting, other_extension.setting`）
+複数の値を指定する必要がある場合は、カンマ区切りのリストを使用してください（例： `some_extension.setting, other_extension.setting`）
 
 注意： 多くのパラメータはこの方法では完全には追跡できません。PgBouncer が `SET` による変更を知ることができるのは、Postgres がクライアントに報告するパラメータのみです。Postgres には [クライアントに報告するパラメータの公式リスト](https://www.postgresql.org/docs/current/protocol-flow.html#PROTOCOL-ASYNC) があります。ただし、Postgres 拡張機能はこのリストを変更できます。拡張機能は独自のパラメータを追加して報告することができ、また、Postgres が報告していない既存のパラメータを報告し始めることもできます。特に、Citus 12.0 以降では Postgres が `search_path` も報告するようになります。また、デフォルトで追跡されるパラメータの一部も、より新しい Postgres バージョンでのみ報告されます。`default_transaction_read_only` は Postgres 14 以降、`scram_iterations` は Postgres 16 以降、`search_path` は Postgres 18 以降です。
 
-Postgres が報告しない追跡対象パラメータ（例: Postgres 18 より前のバージョンでの `search_path`）について、PgBouncer が知っているのは、クライアントがスタートアップパケット（またはスタートアップパラメータ `options`）内で指定した値のみです。この値は、クライアントがアクティブになるたびにサーバー接続に適用され、それを指定しなかったクライアントに対してはパラメータがデフォルト値にリセットされます。接続後に `SET` で行われた変更は、このようなパラメータについては追跡されないため、`server_reset_query_always` を使用しない限り、その変更はサーバー接続を共有する他のクライアントに漏出します。
+Postgres が報告しない追跡対象パラメータ（例： Postgres 18 より前のバージョンでの `search_path`）について、PgBouncer が知っているのは、クライアントがスタートアップパケット（またはスタートアップパラメータ `options`）内で指定した値のみです。この値は、クライアントがアクティブになるたびにサーバー接続に適用され、それを指定しなかったクライアントに対してはパラメータがデフォルト値にリセットされます。接続後に `SET` で行われた変更は、このようなパラメータについては追跡されないため、`server_reset_query_always` を使用しない限り、その変更はサーバー接続を共有する他のクライアントに漏出します。
 
 Postgres プロトコルでは、パラメータ設定を、スタートアップパケット内のパラメータとして直接指定するか、[`options` スタートアップパケット][options-startup] 内に含める形式で指定できます。両方の方法で指定されたパラメータは `track_extra_parameters` でサポートされています。ただし、`options` 自体を `track_extra_parameters` に含めることはできません。`options` に含まれるパラメータのみを含めることができます。
 
@@ -207,7 +207,7 @@ Postgres プロトコルでは、パラメータ設定を、スタートアッ�
 
 デフォルトでは、PgBouncer は起動パケット内で、追跡を維持できるパラメータのみを許可します（リストについては `track_extra_parameters` を参照）。それ以外のパラメータはすべてエラーを発生させます。他のパラメータを許可するには、ここに指定します。これにより、PgBouncer はそれらのパラメータが管理者によって管理されていることを認識し、無視できるようになります。
 
-複数の値を指定する必要がある場合は、カンマ区切りのリストを使用してください（例: `options,extra_float_digits`）
+複数の値を指定する必要がある場合は、カンマ区切りのリストを使用してください（例： `options,extra_float_digits`）
 
 Postgres プロトコルでは、パラメータ設定を、起動パケット内のパラメータとして直接指定するか、[`options` 起動パケット][options-startup] 内に含める方法で指定できます。これらの両方の方法で指定されたパラメータは、`ignore_startup_parameters` でサポートされています。さらに、`options` 自体を `ignore_startup_parameters` に含めることも可能です。この場合、`options` 内に含まれる未知のパラメータはすべて無視されます。
 
@@ -265,7 +265,7 @@ PgBouncer は、クライアントがプリペアドステートメントとし�
 
 この設定の実際の値は、1 つのサーバー接続上で LRU キャッシュに保持されるプリペアドステートメントの数を制御します。この設定を 0 に設定すると、トランザクションおよびステートメントプーリングのプリペアドステートメントサポートが無効になります。最高のパフォーマンスを得るには、アプリケーションで頻繁に使用されるプリペアドステートメントの数よりもこの設定値を大きくするようにしてください。この値が高くなるほど、PostgreSQL サーバー上の各 PgBouncer 接続のメモリ使用量が大きくなることに注意してください。これは、その接続上でより多くのクエリを準備したまま保持するためです。また、PgBouncer 自身のメモリ使用量も増加します。これは、クエリ文字列を追跡する必要が生じるためです。
 
-ただし、PgBouncer のメモリ使用量への影響はそれほど大きくありません:
+ただし、PgBouncer のメモリ使用量への影響はそれほど大きくありません：
 - 各一意のクエリはグローバルクエリキャッシュに一度だけ格納されます。
 - 各クライアント接続はパケットを再書き込みするためにバッファを保持します。このバッファのサイズは、`pkt_buf` の最大 4 倍です。ただし、この上限に達することは通常ありません。これは、プリペアドステートメント内のクエリが `pkt_buf` の 2 から 4 倍のサイズである場合にのみ発生します。
 
@@ -392,7 +392,7 @@ syslog にログを送信する際の名前。
 
 ### syslog_facility {#syslog_facility}
 
-ログをsyslogに送信する施設を指定します。可能な値: `auth`, `authpriv`, `daemon`, `user`, `local0-7`。
+ログをsyslogに送信する施設を指定します。可能な値： `auth`, `authpriv`, `daemon`, `user`, `local0-7`。
 
 デフォルト： `daemon`
 
@@ -460,7 +460,7 @@ syslog にログを送信する際の名前。
 
 `server_reset_query` をすべてのプーリングモードで実行すべきかどうか。この設定がオフ（デフォルト）の場合、`server_reset_query` はセッションプーリングモードのプールでのみ実行されます。トランザクションプーリングモードの接続にはリセットクエリの実行が必要ありません。
 
-この設定は、セッション機能を使用するアプリケーションをトランザクションプール方式の PgBouncer を介して動作させる際の不具合な設定を回避するためのものです。これにより、非決定的な障害を決定的な障害に変更します。クライアントは各トランザクションの後に常に状態を失います。
+この設定は、セッション機能を使用するアプリケーションをトランザクションプール方式の PgBouncer 経由で動作させる、壊れた構成に対処するための回避策です。これにより、非決定的な障害を決定的な障害に変更します。クライアントは各トランザクションの後に常に状態を失います。
 
 デフォルト： 0
 
@@ -623,7 +623,7 @@ TLS 設定を変更すると、セキュリティ上の理由から自動的に 
 
 ### client_tls_protocols {#client_tls_protocols}
 
-許可される TLS プロトコルバージョン。許可される値: `tlsv1.0`, `tlsv1.1`, `tlsv1.2`, `tlsv1.3`。ショートカット: `all` (tlsv1.0,tlsv1.1,tlsv1.2,tlsv1.3), `secure` (tlsv1.2,tlsv1.3)。
+許可される TLS プロトコルバージョン。許可される値： `tlsv1.0`, `tlsv1.1`, `tlsv1.2`, `tlsv1.3`。ショートカット： `all` (tlsv1.0,tlsv1.1,tlsv1.2,tlsv1.3), `secure` (tlsv1.2,tlsv1.3)。
 
 デフォルト： `secure`
 
@@ -656,7 +656,7 @@ TLS バージョン 1.3 以上の接続にのみ影響します。バージョ�
 
 ECDH キー交換に使用する楕円曲線名。
 
-許容される値: `none` (DH は無効化), `auto` (256 ビット ECDH), 曲線名
+許容される値： `none` (DH は無効化), `auto` (256 ビット ECDH), 曲線名
 
 デフォルト： `auto`
 
@@ -664,7 +664,7 @@ ECDH キー交換に使用する楕円曲線名。
 
 DHE キー交換タイプ。
 
-許容される値: `none` (DH は無効化), `auto` (2048 ビット DH), `legacy` (1024 ビット DH)
+許容される値： `none` (DH は無効化), `auto` (2048 ビット DH), `legacy` (1024 ビット DH)
 
 デフォルト： `auto`
 
@@ -699,7 +699,7 @@ PgBouncer が PostgreSQL サーバーに対して認証するための秘密鍵�
 
 ### server_tls_protocols {#server_tls_protocols}
 
-許可される TLS プロトコルバージョン。許可される値: `tlsv1.0`, `tlsv1.1`, `tlsv1.2`, `tlsv1.3`。ショートカット: `all` (tlsv1.0,tlsv1.1,tlsv1.2,tlsv1.3), `secure` (tlsv1.2,tlsv1.3), `legacy` (all)。
+許可される TLS プロトコルバージョン。許可される値： `tlsv1.0`, `tlsv1.1`, `tlsv1.2`, `tlsv1.3`。ショートカット： `all` (tlsv1.0,tlsv1.1,tlsv1.2,tlsv1.3), `secure` (tlsv1.2,tlsv1.3), `legacy` (all)。
 
 デフォルト： `secure`
 
@@ -868,7 +868,7 @@ Linux では、システムのデフォルト値は `tcp_keepidle=7200`、`tcp_k
 dbname = connection string
 ```
 
-キーはデータベース名として、値は接続文字列として扱われます。接続文字列は、以下で説明する接続パラメータの key=value 形式のペアで構成され、libpq と似ていますが、実際の libpq は使用せず、利用可能な機能のセットも異なります。例:
+キーはデータベース名として、値は接続文字列として扱われます。接続文字列は、以下で説明する接続パラメータの key=value 形式のペアで構成され、libpq と似ていますが、実際の libpq は使用せず、利用可能な機能のセットも異なります。例：
 
 ```ini
 foodb = host=host1.example.com port=5432
@@ -909,7 +909,7 @@ bar = host=foo dbname=bar
 
 コンマ区切りのホスト名またはアドレスのリストを指定できます。この場合、接続はラウンドロビン方式で行われます。（ホストリストにDNSで複数のアドレスに解決されるホスト名が含まれる場合、ラウンドロビンの動作は独立して行われます。これは実装依存であり、変更される可能性があります。）リスト内のすべてのホストは常に利用可能でなければなりません。到達不能なホストをスキップする仕組みや、リストから利用可能なホストのみを選択する仕組みは存在しません。（これは libpq のホストリストとは異なります。）また、これは新規接続の宛先選択にのみ影響することに注意してください。既に確立されたサーバー接続へのクライアントの割り当て方法については、`server_round_robin` の設定を参照してください。
 
-例:
+例：
 
 ```text
 host=localhost
@@ -933,7 +933,7 @@ host=192.168.0.1,192.168.0.2,192.168.0.3
 
 ### password {#password}
 
-ここでパスワードが指定されない場合、上記で指定されたユーザーに対して `auth_file` から取得したパスワードが使用されます。動的なパスワード検出方法（例: `auth_query`）は現在サポートされていません。
+ここでパスワードが指定されない場合、上記で指定されたユーザーに対して `auth_file` から取得したパスワードが使用されます。動的なパスワード検出方法（例： `auth_query`）は現在サポートされていません。
 
 ### auth_user {#auth_user-1}
 
@@ -1081,7 +1081,7 @@ user1 = pool_mode=session
 
 ### max_user_client_connections {#max_user_client_connections-1}
 
-クライアント接続数のユーザーごとの上限を設定します。これは `max_client_conn` 設定のユーザー版 です。
+クライアント接続数のユーザーごとの上限を設定します。これは `max_client_conn` 設定のユーザー版です。
 
 --------
 
@@ -1099,7 +1099,7 @@ PgBouncer プロセスは、すべての PgBouncer プロセスの設定ファ�
 peer_id = connection string
 ```
 
-接続パラメータのキーとして `peer_id` を使用し、値として接続文字列を指定します。接続文字列は、以下で説明する key=value 形式のパラメータペアで構成され、libpq と似ていますが、実際の libpq は使用せず、利用可能な機能のセットも異なります。例:
+接続パラメータのキーとして `peer_id` を使用し、値として接続文字列を指定します。接続文字列は、以下で説明する key=value 形式のパラメータペアで構成され、libpq と似ていますが、実際の libpq は使用せず、利用可能な機能のセットも異なります。例：
 
 ```ini
 1 = host=host1.example.com
@@ -1116,7 +1116,7 @@ peer_id = connection string
 
 値が `/` で始まる場合、ファイルシステム名前空間内の Unix ソケットが使用されます。値が `@` で始まる場合、抽象名前空間内の Unix ソケットが使用されます。
 
-例:
+例：
 
 ```text
 host=localhost
@@ -1169,7 +1169,7 @@ PostgreSQL MD5-ハッシュ化パスワード形式：
 
 したがって、パスワード `1234` を持つユーザー `admin` の MD5 ハッシュ化パスワードは `md545f2603610af569b6155c45067268c6b` になります。
 
-PostgreSQL SCRAM シークレット形式:
+PostgreSQL SCRAM シークレット形式：
 
 ```text
 SCRAM-SHA-256$<iterations>:<salt>$<storedkey>:<serverkey>
@@ -1197,7 +1197,7 @@ SCRAM シークレットは、クライアント認証も SCRAM を使用する�
 
 したがって、SCRAM シークレットが管理対象のサーバーに格納された後は、それを再取得することは不可能であるため、PgBouncer が同じ SCRAM シークレットを使用するように設定することが難しくなります。ただし、以下のテクニックを用いることで、両方の側で SCRAM シークレットを設定および使用することは可能です。
 
-任意のパスワードに対して SCRAM シークレットを生成するには、シークレットを出力できるツールを使用します。たとえば `psql --echo-hidden` とコマンド `\password` を使用すると、サーバーに送信する前にシークレットを管理コンソールに出力できます。
+任意のパスワードに対して SCRAM シークレットを生成するには、シークレットを出力できるツールを使用します。たとえば `psql --echo-hidden` とコマンド `\password` を使用すると、サーバーに送信する前にシークレットをコンソール（端末）に出力できます。
 
 ```bash
 $ psql --echo-hidden <connection_string>
@@ -1221,11 +1221,11 @@ HBA ファイルの場所は設定 `auth_hba_file` で指定されます。こ�
 
 このファイルは、PostgreSQL の `pg_hba.conf` ファイルの形式に従います（<https://www.postgresql.org/docs/current/auth-pg-hba-conf.html> を参照）。
 
-* サポートされるレコードタイプ: `local`、`host`、`hostssl`、`hostnossl`。
-* データベースフィールド: `all`、`replication`、`sameuser`、`@file`、複数の名前をサポートします。非対応: `samerole`、`samegroup`。
-* ユーザー名フィールド: `all`、`@file`、複数の名前をサポートします。サポートしない: `+groupname`。
-* アドレスフィールド: `all`、IPv4、IPv6 をサポートします。サポートしない: `samehost`、`samenet`、DNS名、ドメインプレフィックス。
-* 認証方法フィールド: PgBouncer の `auth_type` でサポートされる方法に加え、`peer` と `reject` もサポートされますが、`any` と `pam` はグローバルでのみ動作します。
+* サポートされるレコードタイプ： `local`、`host`、`hostssl`、`hostnossl`。
+* データベースフィールド： `all`、`replication`、`sameuser`、`@file`、複数の名前をサポートします。非対応： `samerole`、`samegroup`。
+* ユーザー名フィールド： `all`、`@file`、複数の名前をサポートします。サポートしない： `+groupname`。
+* アドレスフィールド： `all`、IPv4、IPv6 をサポートします。サポートしない： `samehost`、`samenet`、DNS名、ドメインプレフィックス。
+* 認証方法フィールド： PgBouncer の `auth_type` でサポートされる方法に加え、`peer` と `reject` もサポートされますが、`any` と `pam` はグローバルでのみ動作します。
 * ユーザー名マップ (`map=`) パラメータは、`auth_type` が `cert` または `peer` の場合にのみサポートされています。
 
 --------
@@ -1239,13 +1239,13 @@ ident マップファイルの場所は設定 `auth_ident_file` で指定され�
 * サポートされる行は、形式 `map-name system-username database-username` のみです。
 * ファイルやディレクトリのインクルードはサポートされていません。
 * システムユーザー名フィールド：正規表現はサポートされていません。
-* データベースユーザー名フィールド: `all` または単一の Postgres ユーザー名をサポートします。サポートされない: `+groupname`、正規表現。
+* データベースユーザー名フィールド： `all` または単一の Postgres ユーザー名をサポートします。サポートされない： `+groupname`、正規表現。
 
 --------
 
 ## 例 {#examples}
 
-小さな設定例:
+小さな設定例：
 
 ```ini
 [databases]
@@ -1263,7 +1263,7 @@ admin_users = someuser
 stats_users = stat_collector
 ```
 
-データベースの例:
+データベースの例：
 
 ```ini
 [databases]
@@ -1316,7 +1316,7 @@ unix_socket_dir=/tmp/pgbouncer1
 peer_id=1
 ```
 
-2 番目のプロセスの設定:
+2 番目のプロセスの設定：
 
 ```ini
 [databases]

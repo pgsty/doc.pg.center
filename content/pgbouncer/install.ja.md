@@ -109,7 +109,7 @@ Autoconf ビルドでは、`configure` を実行する前にヘッダーファ�
 `configure` に 1 つ以上のコマンドラインオプションを指定できます。
 利用可能なオプションおよび設定をカスタマイズする環境変数を確認するには、`./configure --help` を実行してください。
 
-Git からの Autoconf ビルドに追加で必要なパッケージ: autoconf, automake, libtool, pandoc
+Git からの Autoconf ビルドに追加で必要なパッケージ： autoconf, automake, libtool, pandoc
 
 Meson ビルドでは、チェックアウトから直接ビルドできます。
 man ページをビルドするには pandoc が必要です：
@@ -144,7 +144,7 @@ MinGW でビルドするには、通常の Autoconf ビルドを行います：
 	$ meson setup build
 	$ meson compile -C build
 
-Autoconf を使って Unix からクロスコンパイルする場合:
+Autoconf を使って Unix からクロスコンパイルする場合：
 
 	$ ./configure --host=i586-mingw32msvc
 
