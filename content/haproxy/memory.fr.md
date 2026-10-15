@@ -17,7 +17,7 @@ HAProxy utilise une gestion mémoire basée sur des pools, simple et rapide. Ét
 
 Par défaut, le focus étant mis sur les performances, chaque objet libéré est remis dans le pool d’où il provient, et les objets alloués ne sont jamais libérés, car ils sont censés être réutilisés très bientôt.
 
-Depuis la CLI, il est possible de vérifier l'utilisation de la mémoire dans les pools grâce à la commande « show pools » :
+Depuis la CLI, il est possible de vérifier l’utilisation de la mémoire dans les pools grâce à la commande « show pools » :
 
 ```shell
 > show pools
@@ -44,10 +44,10 @@ Dumping pools usage. Use SIGQUIT to flush them.
 Total: 19 pools, 42296 bytes allocated, 34266 used.
 ```
 
-Le nom du pool n'est qu'indicatif : il correspond au nom du premier type d'objet utilisant ce pool. La taille entre parenthèses est la taille des objets dans ce pool. Les tailles d'objets sont toujours arrondies par excès au multiple de 16 octets le plus proche. Le nombre d'objets actuellement alloués et le nombre équivalent d'octets sont indiqués afin de faciliter l'identification du pool responsable de la plus forte utilisation mémoire. Le nombre d'objets actuellement en cours d'utilisation est également indiqué dans le champ « used ». La différence entre « allocated » et « used » correspond aux objets qui ont été libérés et sont disponibles pour une utilisation immédiate. L'adresse en fin de ligne est l'adresse du pool, et le nombre suivant est l'indice du pool lorsqu'il existe, ou est indiqué comme -1 si aucun indice n'a été attribué.
+Le nom du pool n’est qu’indicatif : il correspond au nom du premier type d’objet utilisant ce pool. La taille entre parenthèses est la taille des objets dans ce pool. Les tailles d’objets sont toujours arrondies par excès au multiple de 16 octets le plus proche. Le nombre d’objets actuellement alloués et le nombre équivalent d’octets sont indiqués afin de faciliter l’identification du pool responsable de la plus forte utilisation mémoire. Le nombre d’objets actuellement en cours d’utilisation est également indiqué dans le champ « used ». La différence entre « allocated » et « used » correspond aux objets qui ont été libérés et sont disponibles pour une utilisation immédiate. L’adresse en fin de ligne est l’adresse du pool, et le nombre suivant est l’indice du pool lorsqu’il existe, ou est indiqué comme -1 si aucun indice n’a été attribué.
 
-Il est possible de limiter la quantité de mémoire allouée par processus à l'aide de l'option en ligne de commande "-m", suivie d'un nombre de mégaoctets. Cette limite s'applique à l'ensemble de l'espace adressable du processus, ce qui inclut la mémoire utilisée par certaines bibliothèques ainsi que la pile, mais constitue une limite fiable lors de la construction d'un système à ressources contraintes. Elle fonctionne de la même manière que "ulimit -v" sur les systèmes qui la supportent, ou "ulimit -d" sur les autres.
+Il est possible de limiter la quantité de mémoire allouée par processus à l’aide de l’option en ligne de commande "-m", suivie d’un nombre de mégaoctets. Cette limite s’applique à l’ensemble de l’espace adressable du processus, ce qui inclut la mémoire utilisée par certaines bibliothèques ainsi que la pile, mais constitue une limite fiable lors de la construction d’un système à ressources contraintes. Elle fonctionne de la même manière que "ulimit -v" sur les systèmes qui la supportent, ou "ulimit -d" sur les autres.
 
-Si une allocation mémoire échoue en raison d'un dépassement de la limite mémoire ou du fait que le système ne dispose pas de suffisamment de mémoire, HAProxy commencera d'abord par libérer tous les objets disponibles de tous les pools avant de tenter une nouvelle allocation mémoire. Ce mécanisme de libération de la mémoire inutilisée peut être déclenché en envoyant le signal SIGQUIT au processus HAProxy.
+Si une allocation mémoire échoue en raison d’un dépassement de la limite mémoire ou du fait que le système ne dispose pas de suffisamment de mémoire, HAProxy commencera d’abord par libérer tous les objets disponibles de tous les pools avant de tenter une nouvelle allocation mémoire. Ce mécanisme de libération de la mémoire inutilisée peut être déclenché en envoyant le signal SIGQUIT au processus HAProxy.
 
 Pendant une opération de rechargement, le processus basculé en état d’arrêt progressif effectue également automatiquement certains vidages après avoir libéré chaque connexion, afin de libérer toute la mémoire possible et de la préserver pour le nouveau processus.

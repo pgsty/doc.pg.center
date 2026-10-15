@@ -62,7 +62,7 @@ Le mode effectif appliqué à une connexion passant par un frontal et un backend
 
 Il est possible de chaîner un frontend TCP à un backend HTTP. Cette configuration est sans intérêt si seule la circulation HTTP est traitée. Toutefois, elle peut être utilisée pour gérer plusieurs protocoles au sein du même frontend. Dans ce cas, la connexion client est d'abord traitée comme une connexion TCP brute avant d'être mise à niveau vers HTTP. Avant la mise à niveau, les traitements de contenu sont effectués sur des données brutes. Une fois la mise à niveau effectuée, les données sont analysées et stockées à l’aide d’une représentation interne appelée HTX, et il n’est plus possible de s’appuyer sur la représentation brute. Il n’existe aucun moyen de revenir en arrière.
 
-Il existe deux types de mises à jour : les mises à jour in situ et les mises à jour destructrices. La première implique une mise à jour TCP vers HTTP/1. Dans HTTP/1, le traitement des requêtes est sérialisé, de sorte que le flux applicatif peut être préservé. La seconde implique une mise à jour TCP vers HTTP/2. Étant donné qu'il s'agit d'un protocole multiplexé, le flux applicatif ne peut être associé à aucun flux HTTP/2 et est donc détruit. De nouveaux flux applicatifs sont ensuite créés lorsque HAProxy reçoit de nouveaux flux HTTP/2 au niveau inférieur, dans le multiplexeur H2. Il est important de comprendre cette différence, car elle change radicalement la manière de traiter les données. Lorsqu'une mise à jour HTTP/1 est effectuée, les traitements appliqués sur les données brutes ne sont ni perdus ni réexécutés, tandis qu'en cas de mise à jour HTTP/2, les flux applicatifs sont distincts et toutes les règles frontales sont systématiquement évaluées sur chacun. Comme indiqué, le premier flux, le flux TCP, est détruit, mais uniquement après l'évaluation des règles frontales.
+Il existe deux types de mise à niveau : les mises à niveau in situ et les mises à niveau destructrices. La première implique une mise à niveau TCP vers HTTP/1. Dans HTTP/1, le traitement des requêtes est sérialisé, de sorte que le flux applicatif peut être préservé. La seconde implique une mise à niveau TCP vers HTTP/2. Étant donné qu'il s'agit d'un protocole multiplexé, le flux applicatif ne peut être associé à aucun flux HTTP/2 et est donc détruit. De nouveaux flux applicatifs sont ensuite créés lorsque HAProxy reçoit de nouveaux flux HTTP/2 au niveau inférieur, dans le multiplexeur H2. Il est important de comprendre cette différence, car elle change radicalement la manière de traiter les données. Lorsqu'une mise à niveau HTTP/1 est effectuée, les traitements appliqués sur les données brutes ne sont ni perdus ni réexécutés, tandis qu'en cas de mise à niveau HTTP/2, les flux applicatifs sont distincts et toutes les règles frontales sont systématiquement évaluées sur chacun. Comme indiqué, le premier flux, le flux TCP, est détruit, mais uniquement après l'évaluation des règles frontales.
 
 Il existe un autre point important à comprendre lorsqu’un traitement HTTP est effectué à partir d’un proxy TCP.
 Bien que HAProxy soit capable d’analyser HTTP/1 en temps réel à l’aide des règles tcp-request, il n’est pas possible pour
@@ -590,7 +590,7 @@ L'algorithme de répartition de charge d'un backend est défini sur « random »
 
 Avec les schémas d'authentification qui exigent la même connexion, comme NTLM, les algorithmes basés sur l'URI ne doivent pas être utilisés, car ils entraîneraient la redirection des requêtes ultérieures vers des serveurs backend différents, rompant ainsi les hypothèses non valides sur lesquelles repose NTLM.
 
-TCP/HTTP Exemples :
+Exemples TCP/HTTP :
 
 ```text
 balance roundrobin
@@ -828,7 +828,7 @@ Arguments :
           La chaîne est tronquée à droite si elle dépasse <length>.
 ```
 
-Seul le premier cookie est capturé. Les en-têtes de requête « cookie » et les en-têtes de réponse « set-cookie » sont surveillés. Cela est particulièrement utile pour détecter des bugs applicatifs provoquant une chevauchement ou un vol de session entre utilisateurs, car les cookies de l'utilisateur ne peuvent généralement changer que sur une page de connexion.
+Seul le premier cookie est capturé. Les en-têtes de requête « cookie » et les en-têtes de réponse « set-cookie » sont surveillés. Cela est particulièrement utile pour détecter des bugs applicatifs provoquant un chevauchement ou un vol de session entre utilisateurs, car les cookies de l'utilisateur ne peuvent généralement changer que sur une page de connexion.
 
 Lorsqu'un cookie n'est pas fourni par le client, la colonne de journal associée indique « - ». Lorsqu'une requête ne provoque pas l'attribution d'un cookie par le serveur, un « - » est indiqué dans la colonne de réponse.
 
@@ -840,7 +840,7 @@ Exemple :
 capture cookie ASPSESSION len 32
 ```
 
-Voir également : « capture request header », « capture response header » ainsi que la section [8](/fr/haproxy/configuration-logging/) concernant la journalisation.
+Voir également : « capture request header », « capture response header » ainsi que la [section 8](/fr/haproxy/configuration-logging/) concernant la journalisation.
 
 <a id="entry-4-2-capture-request-header"></a>
 
@@ -1387,7 +1387,7 @@ Voir également : "use_backend"
 description <string>
 ```
 
-Décrire un écouteur, un frontal ou un backend.
+Décrire une section listen, un frontal ou un backend.
 
 Peut être utilisé dans les contextes suivants : tcp, http, log
 
@@ -2596,7 +2596,7 @@ body-lf <fmt>  ajoute le corps HTTP défini par le format de journal personnalis
 
 En plus de la ligne de requête définie par la directive « option httpchk », cette méthode est la façon valide d’ajouter des en-têtes et éventuellement un corps à la requête envoyée lors des contrôles d’état HTTP. Si un corps est défini, l’en-tête « Content-Length » associé est automatiquement ajouté. Par conséquent, cet en-tête ou l’en-tête « Transfer-encoding » ne devrait pas être présent dans la requête fournie par « http-check send ». S’ils sont présents, ils seront ignorés. La méthode ancienne consistant à ajouter des en-têtes après la chaîne de version sur la ligne « option httpchk » est désormais obsolète.
 
-De plus, « http-check send » ne prend pas en charge la persistance de connexion HTTP. Gardez à l'esprit qu'un en-tête « Connection: close » sera automatiquement ajouté, sauf si un en-tête Connection a déjà été configuré via une entrée hdr.
+De plus, « http-check send » ne prend pas en charge le keep-alive HTTP. Gardez à l'esprit qu'un en-tête « Connection: close » sera automatiquement ajouté, sauf si un en-tête Connection a déjà été configuré via une entrée hdr.
 
 Notez que l’en-tête Host et l’autorité de requête, lorsqu’ils sont tous deux définis, sont automatiquement synchronisés. Cela signifie que, lorsque la requête HTTP est envoyée, l’insertion d’un en-tête Host entraîne une mise à jour correspondante de l’autorité de requête. Par conséquent, ne vous étonnez pas si la valeur de l’en-tête Host remplace l’autorité de requête configurée.
 
@@ -2781,7 +2781,7 @@ Cette directive peut être utilisée à la place de « errorfile » pour défini
 
 Les fichiers sont lus en même temps que la configuration et conservés en mémoire. Pour cette raison, les erreurs sont toujours renvoyées, même lorsque le processus est chrooté, et aucune modification de fichier n'est prise en compte pendant l'exécution du processus.
 
-Note : les erreurs 400/408/500 émises en phase précoce de l'analyse de la requête sont gérées par le multiplexeur à un niveau inférieur. Aucune mise en forme personnalisée n'est prise en charge à ce niveau. Seules les messages d'erreur statiques, définis avec la directive « errorfile », sont prises en charge. Toutefois, cette limitation n'existe que pendant l'analyse des en-têtes de la requête ou entre deux transactions.
+Note : les erreurs 400/408/500 émises en phase précoce de l'analyse de la requête sont gérées par le multiplexeur à un niveau inférieur. Aucune mise en forme personnalisée n'est prise en charge à ce niveau. Seuls les messages d'erreur statiques, définis avec la directive « errorfile », sont prises en charge. Toutefois, cette limitation n'existe que pendant l'analyse des en-têtes de la requête ou entre deux transactions.
 
 Voir aussi : « errorfile », « errorfiles », « errorloc », « errorloc302 », « errorloc303 » et [section 12.4](/fr/haproxy/other-sections/#section-12-4) concernant les erreurs HTTP.
 
@@ -8957,7 +8957,7 @@ expect-proxy layer4
 Utilisable dans : QUIC Ini\| TCP RqCon\| RqSes\| RqCnt\| RsCnt\| HTTP Req\| Res\| Aft - \| X \| - \| - \| -
 \| - \| - \| -
 
-Cela configure la connexion côté client pour recevoir une en-tête PROXY avant toute lecture sur la socket. Cela équivaut à placer le mot-clé « accept-proxy » dans la ligne « bind », sauf que l'utilisation d'une règle TCP permet d'accepter le protocole PROXY uniquement pour certaines plages d'adresses IP en utilisant une ACL. Cela est pratique lorsque le trafic provenant d'hôtes publics traverse plusieurs couches de répartiteurs de charge.
+Cela configure la connexion côté client pour recevoir un en-tête PROXY avant toute lecture sur la socket. Cela équivaut à placer le mot-clé « accept-proxy » dans la ligne « bind », sauf que l'utilisation d'une règle TCP permet d'accepter le protocole PROXY uniquement pour certaines plages d'adresses IP en utilisant une ACL. Cela est pratique lorsque le trafic provenant d'hôtes publics traverse plusieurs couches de répartiteurs de charge.
 
 <a id="entry-4-4-normalize-uri"></a>
 
@@ -9118,7 +9118,7 @@ redirect <rule>
 Utilisable dans : QUIC Ini\| TCP RqCon\| RqSes\| RqCnt\| RsCnt\| HTTP Req\| Res\| Aft - \| - \| - \| - \| -
 \| X \| X \| -
 
-Cela effectue une redirection HTTP basée sur une règle de redirection. Il s'agit exactement de la même chose que l'instruction « redirect », sauf qu'elle insère une règle de redirection traitée au milieu des autres règles « http-request » ou « http-response », et que ces règles utilisent le format de journalisation personnalisé. Pour les réponses, seule le type de redirection « location » est autorisé. En outre, lorsqu'une redirection est effectuée pendant une réponse, la transmission depuis le serveur vers HAProxy est interrompue, de sorte qu'aucun contenu ne peut être transféré au client. Cela peut entraîner la fermeture de certaines connexions sur HTTP/1.. Cette action est définitive, c'est-à-dire qu'aucune règle supplémentaire du même jeu de règles n'est évaluée pour la section courante. Voir le mot-clé « redirect » pour la syntaxe de la règle.
+Cela effectue une redirection HTTP basée sur une règle de redirection. Il s'agit exactement de la même chose que l'instruction « redirect », sauf qu'elle insère une règle de redirection traitée au milieu des autres règles « http-request » ou « http-response », et que ces règles utilisent le format de journalisation personnalisé. Pour les réponses, seule le type de redirection « location » est autorisé. En outre, lorsqu'une redirection est effectuée pendant une réponse, la transmission depuis le serveur vers HAProxy est interrompue, de sorte qu'aucun contenu ne peut être transféré au client. Cela peut entraîner la fermeture de certaines connexions sur HTTP/1. Cette action est définitive, c'est-à-dire qu'aucune règle supplémentaire du même jeu de règles n'est évaluée pour la section courante. Voir le mot-clé « redirect » pour la syntaxe de la règle.
 
 <a id="entry-4-4-reject"></a>
 
@@ -9256,7 +9256,7 @@ La partie URI peut contenir un schéma, une autorité ou une chaîne de requête
 
 Il convient de noter que les expressions régulières peuvent être plus coûteuses à évaluer que certaines ACL, si bien qu’une substitution rare peut bénéficier d’une condition afin d’éviter toute évaluation si elle ne correspond pas.
 
-NOTE IMPORTANTE : historiquement, dans HTTP/1.x, la grande majorité des requêtes envoyées par les navigateurs utilisent la « forme origin », qui diffère de la « forme absolue » en ce qu’elles ne contiennent ni schéma ni autorité dans la partie URI. La forme absolue est principalement utilisée pour les requêtes envoyées aux proxies, celles créées manuellement et certaines émises par des applications spécifiques. En conséquence, « replace-uri » fonctionne généralement correctement dans HTTP/1.x avec des règles commençant par un « / ». Toutefois, dans HTTP/2, les clients sont encouragés à envoyer uniquement des URI absolus, similaires à ceux utilisés par les clients HTTP/1 pour communiquer avec les proxies. Dans ce cas, des règles partielles de « replace-uri » peuvent échouer dans HTTP/2 alors qu’elles fonctionnent dans HTTP/1.. Soit les règles doivent être adaptées pour éventuellement correspondre à un schéma et une autorité, soit il faut utiliser « replace-path ».
+NOTE IMPORTANTE : historiquement, dans HTTP/1.x, la grande majorité des requêtes envoyées par les navigateurs utilisent la « forme origin », qui diffère de la « forme absolue » en ce qu’elles ne contiennent ni schéma ni autorité dans la partie URI. La forme absolue est principalement utilisée pour les requêtes envoyées aux proxies, celles créées manuellement et certaines émises par des applications spécifiques. En conséquence, « replace-uri » fonctionne généralement correctement dans HTTP/1.x avec des règles commençant par un « / ». Toutefois, dans HTTP/2, les clients sont encouragés à envoyer uniquement des URI absolus, similaires à ceux utilisés par les clients HTTP/1 pour communiquer avec les proxies. Dans ce cas, des règles partielles de « replace-uri » peuvent échouer dans HTTP/2 alors qu’elles fonctionnent dans HTTP/1. Soit les règles doivent être adaptées pour éventuellement correspondre à un schéma et une autorité, soit il faut utiliser « replace-path ».
 
 Exemple :
 
@@ -9542,7 +9542,7 @@ set-dst <expr>
 Utilisable dans : QUIC Ini\| TCP RqCon\| RqSes\| RqCnt\| RsCnt\| HTTP Req\| Res\| Aft - \| X \| X \| X \| -
 \| X \| - \| -
 
-Cela permet de définir l'adresse IP de destination avec la valeur de l'expression spécifiée. Utile lorsque un proxy placé devant HAProxy modifie l'adresse IP de destination, mais fournit l'IP correcte dans un en-tête HTTP ; ou lorsque vous souhaitez masquer l'IP pour des raisons de confidentialité. Si vous souhaitez vous connecter au nouvel address/port, utilisez « 0.0.0.0:0 » comme adresse de serveur dans le backend.
+Cela permet de définir l'adresse IP de destination avec la valeur de l'expression spécifiée. Utile lorsque un proxy placé devant HAProxy modifie l'adresse IP de destination, mais fournit l'IP correcte dans un en-tête HTTP ; ou lorsque vous souhaitez masquer l'IP pour des raisons de confidentialité. Si vous souhaitez vous connecter à la nouvelle adresse/port, utilisez « 0.0.0.0:0 » comme adresse de serveur dans le backend.
 
 Arguments :
 

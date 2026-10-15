@@ -33,7 +33,7 @@ Les échantillons peuvent être récupérés à partir de diverses sources :
 - la session client SSL : protocole, version, algorithme, chiffre, taille de clé, identifiant de session, tous les champs du certificat client et serveur, numéro de série du certificat, SNI, ALPN, NPN, prise en charge par le client de certaines extensions ;
 
 - contenu des tampons de requête et de réponse : charge utile arbitraire à l'offset/longueur, longueur des données, RDP
-  cookie, décodage du type SSL hello, décodage du SNI TLS;
+  cookie, décodage du type SSL hello, décodage du SNI TLS ;
 
 - HTTP (requête et réponse) : méthode, URI, chemin, arguments de chaîne de requête, code d’état, en-têtes, valeurs d’en-tête positionnelles, cookies, captures, authentification, éléments du corps ;
 
@@ -41,7 +41,7 @@ Un échantillon peut ensuite passer par un certain nombre d'opérateurs appelés
 
 - opérateurs arithmétiques et logiques : ils permettent d'effectuer des calculs avancés sur les données d'entrée, tels que le calcul de rapports, de pourcentages ou simplement la conversion d'une unité à une autre ;
 
-- Les masques d'adresse IP sont utiles lorsque certaines adresses doivent être regroupées par réseaux plus grands ;
+- les masques d'adresse IP sont utiles lorsque certaines adresses doivent être regroupées par réseaux plus grands ;
 
 - représentation des données : décodage URL, base64, hexadécimal, chaînes JSON, hachage ;
 
@@ -118,11 +118,11 @@ Pour ce faire, HAProxy prend en charge diverses possibilités de réécriture et
 
 - réécriture d'URL et d'en-têtes basée sur des expressions régulières dans les requêtes et les réponses. Les expressions régulières sont l'outil le plus couramment utilisé pour modifier les valeurs d'en-tête, car elles sont faciles à manipuler et bien comprises ;
 
-- Les en-têtes peuvent également être ajoutés, supprimés ou remplacés selon des chaînes formatées, afin de transmettre des informations (par exemple, l'algorithme et le chiffre TLS côté client) ;
+- les en-têtes peuvent également être ajoutés, supprimés ou remplacés selon des chaînes formatées, afin de transmettre des informations (par exemple, l'algorithme et le chiffre TLS côté client) ;
 
-- Les redirections HTTP peuvent utiliser n'importe quel code 3xx vers une URI relative, absolue ou entièrement dynamique (chaîne formatée) ;
+- les redirections HTTP peuvent utiliser n'importe quel code 3xx vers une URI relative, absolue ou entièrement dynamique (chaîne formatée) ;
 
-- Les redirections HTTP prennent également en charge certaines options supplémentaires, telles que la définition ou la suppression d'un cookie spécifique, la suppression de la chaîne de requête, l'ajout d'une barre oblique si elle est manquante, etc. ;
+- les redirections HTTP prennent également en charge certaines options supplémentaires, telles que la définition ou la suppression d'un cookie spécifique, la suppression de la chaîne de requête, l'ajout d'une barre oblique si elle est manquante, etc. ;
 
 - une puissante directive « return » permet de personnaliser chaque partie d'une réponse, comme le statut, les en-têtes ou le corps, en utilisant des contenus dynamiques ou même des fichiers modèles.
 
