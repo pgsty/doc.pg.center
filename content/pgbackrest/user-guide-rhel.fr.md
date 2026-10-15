@@ -3540,7 +3540,7 @@ Le répertoire de stockage temporaire contient l'état actuel de l'archivage des
 
 IMPORTANT :
 
-Dans l’implémentation originale de l’archivage asynchrone, les segments WAL étaient copiés dans le répertoire tampon avant compression et transfert. La nouvelle implémentation copie directement les segments WAL depuis le répertoire `pg_xlog`. Si l’archivage asynchrone était utilisé dans la version 1.12 ou antérieure, lisez attentivement les notes de publication de la version 1.13 avant de procéder à la mise à jour.
+Dans l’implémentation originale de l’archivage asynchrone, les segments WAL étaient copiés dans le répertoire de spool avant compression et transfert. La nouvelle implémentation copie directement les segments WAL depuis le répertoire `pg_xlog`. Si l’archivage asynchrone était utilisé dans la version 1.12 ou antérieure, lisez attentivement les notes de publication de la version 1.13 avant de procéder à la mise à jour.
 
 Le fichier `[stanza]-archive-push-async.log` peut être utilisé pour surveiller l'activité du processus asynchrone. Une bonne manière de tester cela consiste à envoyer rapidement un nombre important de segments WAL.
 
@@ -3716,7 +3716,7 @@ tls-server-cert-file=/etc/pgbackrest/cert/server.crt
 tls-server-key-file=/etc/pgbackrest/cert/server.key
 ```
 
-La base primaire comme la base standby sont nécessaires pour effectuer la sauvegarde, bien que l'immense majorité des fichiers soient copiés depuis le standby afin de réduire la charge du primaire. Les hôtes de base de données peuvent être configurés dans n'importe quel ordre ; pgBackRest détermine automatiquement lequel est primaire et lequel est standby.
+La base primaire comme la base de secours sont nécessaires pour effectuer la sauvegarde, bien que l'immense majorité des fichiers soient copiés depuis le serveur de secours afin de réduire la charge du primaire. Les hôtes de base de données peuvent être configurés dans n'importe quel ordre ; pgBackRest détermine automatiquement lequel est primaire et lequel est le serveur de secours.
 
 dépôt **⇒** Effectuer une sauvegarde du cluster de démonstration depuis pg2
 

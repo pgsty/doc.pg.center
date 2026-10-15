@@ -9,7 +9,7 @@ categories: [Référence]
 upstream_link: "https://pgbackrest.org/command.html#command-stanza-upgrade"
 ---
 
-Immédiatement après la mise à niveau de PostgreSQL vers une nouvelle version majeure, le `pg-path` de toutes les configurations pgBackRest doit être défini sur le nouvel emplacement de la base de données, puis la commande `stanza-upgrade` doit être exécutée. Si plusieurs dépôts sont configurés sur l'hôte, le stanza sera mis à niveau sur chacun. Si la base de données est hors ligne, utilisez l'option `--no-online`.
+Immédiatement après la mise à niveau de PostgreSQL vers une nouvelle version majeure, le `pg-path` de toutes les configurations pgBackRest doit être défini sur le nouvel emplacement de la base de données, puis la commande `stanza-upgrade` doit être exécutée. Si plusieurs dépôts sont configurés sur l'hôte, la stanza sera mise à niveau sur chacun. Si la base de données est hors ligne, utilisez l'option `--no-online`.
 
 ## Options de commande {#command-options}
 
@@ -124,7 +124,7 @@ allowed: [100ms, 7d]
 example: --db-timeout=600
 ```
 
-### Option d'expiration I/O (`--io-timeout`) {#io-timeout-option---io-timeout}
+### Option de délai d'attente d'E/S (`--io-timeout`) {#io-timeout-option---io-timeout}
 
 Délai d'attente des E/S.
 
@@ -210,7 +210,7 @@ Il est tentant de nommer la stanza en fonction du cluster principal, mais un nom
 example: --stanza=main
 ```
 
-### Option de nombre de connexions Keep Alive (`--tcp-keep-alive-count`) {#keep-alive-count-option---tcp-keep-alive-count}
+### Option de nombre de messages Keep Alive (`--tcp-keep-alive-count`) {#keep-alive-count-option---tcp-keep-alive-count}
 
 Nombre de maintien de connexion.
 
@@ -249,7 +249,7 @@ allowed: [1, 900]
 example: --tcp-keep-alive-interval=30
 ```
 
-### Suites de chiffrement TLSv1.2 Option (`--tls-cipher-12`) {#tlsv12-cipher-suites-option---tls-cipher-12}
+### Option Suites de chiffrement TLSv1.2 (`--tls-cipher-12`) {#tlsv12-cipher-suites-option---tls-cipher-12}
 
 Suites de chiffrement TLSv1.2 autorisées.
 
@@ -263,7 +263,7 @@ Les suites de chiffrement acceptées peuvent être ajustées si nécessaire. L'e
 example: --tls-cipher-12=HIGH:MEDIUM:+3DES:!aNULL
 ```
 
-### Suites de chiffrement TLSv1.3 Option (`--tls-cipher-13`) {#tlsv13-cipher-suites-option---tls-cipher-13}
+### Option Suites de chiffrement TLSv1.3 (`--tls-cipher-13`) {#tlsv13-cipher-suites-option---tls-cipher-13}
 
 Suites de chiffrement TLSv1.3 autorisées.
 
@@ -446,7 +446,7 @@ default: none
 example: --repo1-cipher-type=aes-256-cbc
 ```
 
-### Option de bac de dépôt GCS (`--repo-gcs-bucket`) {#gcs-repository-bucket-option---repo-gcs-bucket}
+### Option de bucket du dépôt GCS (`--repo-gcs-bucket`) {#gcs-repository-bucket-option---repo-gcs-bucket}
 
 Bucket du dépôt GCS.
 
@@ -462,7 +462,7 @@ example: --repo1-gcs-bucket=/pg-backup
 
 Point de terminaison du dépôt GCS.
 
-Point d'accès utilisé pour se connecter au service de stockage. Peut être mis à jour pour utiliser un serveur local GCS ou un point d'accès alternatif.
+Point de terminaison utilisé pour se connecter au service de stockage. Peut être mis à jour pour utiliser un serveur local GCS ou un point de terminaison alternatif.
 
 ```yaml
 default: storage.googleapis.com
@@ -654,7 +654,7 @@ default: /var/lib/pgbackrest
 example: --repo1-path=/backup/db/backrest
 ```
 
-### Option de bac de dépôt S3 (`--repo-s3-bucket`) {#s3-repository-bucket-option---repo-s3-bucket}
+### Option de bucket du dépôt S3 (`--repo-s3-bucket`) {#s3-repository-bucket-option---repo-s3-bucket}
 
 Bucket du dépôt S3.
 
@@ -752,7 +752,7 @@ example: --repo1-s3-role=authrole
 
 Service de signature S3.
 
-Le service de signature S3 utilisé dans l'authentification SigV4. La valeur par défaut est `s3` pour les points d'accès S3 standards. À définir sur `s3-outposts` lors de l'utilisation d'un point d'accès S3 Outposts.
+Le service de signature S3 utilisé dans l'authentification SigV4. La valeur par défaut est `s3` pour les points de terminaison S3 standards. À définir sur `s3-outposts` lors de l'utilisation d'un point de terminaison S3 Outposts.
 
 ```yaml
 default: s3
@@ -777,7 +777,7 @@ Style d'URI S3.
 Les styles d'URI suivants sont pris en charge :
 
 - `host` - Se connecter à l'hôte `bucket.endpoint`.
-- `path` - Se connecter à l'hôte `endpoint` et préfixer les URI par le répertoire.
+- `path` - Se connecter à l'hôte `endpoint` et préfixer les URI par le bucket.
 
 ```yaml
 default: host

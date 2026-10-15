@@ -161,7 +161,7 @@ default: CFGOPTDEF_CONFIG_PATH
 example: --config-path=/conf/pgbackrest
 ```
 
-### Option d'expiration I/O (`--io-timeout`) {#io-timeout-option---io-timeout}
+### Option de délai d'attente d'E/S (`--io-timeout`) {#io-timeout-option---io-timeout}
 
 Délai d'attente d'E/S.
 
@@ -224,7 +224,7 @@ default: y
 example: --no-sck-keep-alive
 ```
 
-### Option de nombre de connexions Keep Alive (`--tcp-keep-alive-count`) {#keep-alive-count-option---tcp-keep-alive-count}
+### Option de nombre de messages Keep Alive (`--tcp-keep-alive-count`) {#keep-alive-count-option---tcp-keep-alive-count}
 
 Nombre de maintien de connexion.
 
@@ -263,7 +263,7 @@ allowed: [1, 900]
 example: --tcp-keep-alive-interval=30
 ```
 
-### Suites de chiffrement TLSv1.2 Option (`--tls-cipher-12`) {#tlsv12-cipher-suites-option---tls-cipher-12}
+### Option Suites de chiffrement TLSv1.2 (`--tls-cipher-12`) {#tlsv12-cipher-suites-option---tls-cipher-12}
 
 Suites de chiffrement TLSv1.2 autorisées.
 
@@ -277,7 +277,7 @@ Les suites de chiffrement acceptées peuvent être ajustées si nécessaire. L'e
 example: --tls-cipher-12=HIGH:MEDIUM:+3DES:!aNULL
 ```
 
-### Suites de chiffrement TLSv1.3 Option (`--tls-cipher-13`) {#tlsv13-cipher-suites-option---tls-cipher-13}
+### Option Suites de chiffrement TLSv1.3 (`--tls-cipher-13`) {#tlsv13-cipher-suites-option---tls-cipher-13}
 
 Suites de chiffrement TLSv1.3 autorisées.
 
@@ -457,7 +457,7 @@ default: none
 example: --repo1-cipher-type=aes-256-cbc
 ```
 
-### Option de bac de dépôt GCS (`--repo-gcs-bucket`) {#gcs-repository-bucket-option---repo-gcs-bucket}
+### Option de bucket du dépôt GCS (`--repo-gcs-bucket`) {#gcs-repository-bucket-option---repo-gcs-bucket}
 
 Bucket du dépôt GCS.
 
@@ -473,7 +473,7 @@ example: --repo1-gcs-bucket=/pg-backup
 
 Point de terminaison du dépôt GCS.
 
-Point d'accès utilisé pour se connecter au service de stockage. Peut être mis à jour pour utiliser un serveur local GCS ou un point d'accès alternatif.
+Point de terminaison utilisé pour se connecter au service de stockage. Peut être mis à jour pour utiliser un serveur local GCS ou un point de terminaison alternatif.
 
 ```yaml
 default: storage.googleapis.com
@@ -521,7 +521,7 @@ Nom obsolète : backup-host
 
 ### Option du fichier de l'autorité de certification hôte du dépôt (`--repo-host-ca-file`) {#repository-host-certificate-authority-file-option---repo-host-ca-file}
 
-Fichier de l'autorité de certification du serveur de dépôt.
+Fichier de l'autorité de certification de l'hôte du dépôt.
 
 Utilisez un fichier CA autre que celui par défaut du système pour vous connecter à l'hôte du dépôt.
 
@@ -531,7 +531,7 @@ example: --repo1-host-ca-file=/etc/pki/tls/certs/ca-bundle.crt
 
 ### Option Chemin de l'autorité de certification du dépôt (`--repo-host-ca-path`) {#repository-host-certificate-authority-path-option---repo-host-ca-path}
 
-Chemin de l'autorité de certification du serveur de dépôt.
+Chemin de l'autorité de certification de l'hôte du dépôt.
 
 Utilisez un chemin de certificat d'autorité (CA) autre que celui par défaut du système pour établir la connexion avec l'hôte du dépôt.
 
@@ -564,7 +564,7 @@ Nom obsolète : backup-cmd
 
 ### Option de configuration de l'hôte du dépôt (`--repo-host-config`) {#repository-host-configuration-option---repo-host-config}
 
-Fichier de configuration du serveur de dépôt pgBackRest.
+Fichier de configuration de l'hôte du dépôt pgBackRest.
 
 Spécifie l'emplacement du fichier de configuration sur l'hôte du dépôt. Cette option est nécessaire uniquement si le fichier de configuration de l'hôte du dépôt se trouve dans un emplacement différent du fichier de configuration local.
 
@@ -588,7 +588,7 @@ example: --repo1-host-config-include-path=/conf/pgbackrest/conf.d
 
 ### Chemin de configuration de l'hôte du dépôt (`--repo-host-config-path`) {#repository-host-configuration-path-option---repo-host-config-path}
 
-Chemin de configuration du serveur de dépôt pgBackRest.
+Chemin de configuration de l'hôte du dépôt pgBackRest.
 
 Définit l'emplacement du chemin de configuration sur l'hôte du dépôt. Cette option est nécessaire uniquement si le chemin de configuration de l'hôte du dépôt est différent du chemin de configuration local.
 
@@ -665,7 +665,7 @@ default: /var/lib/pgbackrest
 example: --repo1-path=/backup/db/backrest
 ```
 
-### Option de bac de dépôt S3 (`--repo-s3-bucket`) {#s3-repository-bucket-option---repo-s3-bucket}
+### Option de bucket du dépôt S3 (`--repo-s3-bucket`) {#s3-repository-bucket-option---repo-s3-bucket}
 
 Bucket du dépôt S3.
 
@@ -763,7 +763,7 @@ example: --repo1-s3-role=authrole
 
 Service de signature S3.
 
-Le service de signature S3 utilisé dans l'authentification SigV4. La valeur par défaut est `s3` pour les points d'accès S3 standards. À définir sur `s3-outposts` lors de l'utilisation d'un point d'accès S3 Outposts.
+Le service de signature S3 utilisé dans l'authentification SigV4. La valeur par défaut est `s3` pour les points de terminaison S3 standards. À définir sur `s3-outposts` lors de l'utilisation d'un point de terminaison S3 Outposts.
 
 ```yaml
 default: s3
@@ -998,7 +998,7 @@ Noms obsolètes : repo-azure-verify-tls, repo-s3-verify-ssl, repo-s3-verify-tls
 
 Heure cible pour le dépôt.
 
-Le temps cible définit l'instant auquel les commandes lisent un dépôt sur un stockage versionné. Cela permet à la commande de lire le dépôt tel qu'il était à un instant donné, afin de récupérer des données supprimées ou corrompues par une erreur utilisateur ou un logiciel malveillant.
+L'heure cible définit l'instant auquel les commandes lisent un dépôt sur un stockage versionné. Cela permet à la commande de lire le dépôt tel qu'il était à un instant donné, afin de récupérer des données supprimées ou corrompues par une erreur utilisateur ou un logiciel malveillant.
 
 Le stockage versionné est pris en charge par S3, GCS et Azure, mais il est généralement désactivé par défaut. En plus d’activer le versioning, il peut être utile d’activer le verrouillage d’objets pour S3 et la suppression réversible pour GCS ou Azure.
 
@@ -1023,7 +1023,7 @@ Les types de dépôt suivants sont pris en charge :
 - `s3` - AWS Simple Storage Service
 - `sftp` - Protocole de transfert de fichiers sécurisé
 
-Lorsqu’un montage NFS est utilisé comme dépôt `posix`, les mêmes règles s’appliquent à pgBackRest qu’indiquées dans la documentation PostgreSQL : [Création d’un cluster de base de données - Systèmes de fichiers](https://www.postgresql.org/docs/current/creating-cluster.html#CREATING-CLUSTER-FILESYSTEM).
+Lorsqu’un montage NFS est utilisé comme dépôt `posix`, les mêmes règles s’appliquent à pgBackRest que celles indiquées dans la documentation PostgreSQL : [Création d’un cluster de base de données - Systèmes de fichiers](https://www.postgresql.org/docs/current/creating-cluster.html#CREATING-CLUSTER-FILESYSTEM).
 
 ```yaml
 default: posix

@@ -33,7 +33,7 @@ Voir [Introduction à la configuration](/fr/pgbackrest/configuration/#introducti
 | [**`archive-push`**](/fr/pgbackrest/command/archive-push/)     | Accepter les segments WAL provenant de PostgreSQL et les envoyer vers les dépôts configurés.           |
 | [**`backup`**](/fr/pgbackrest/command/backup/)                 | Créer des sauvegardes vers le dépôt cible (par défaut, le dépôt de priorité la plus élevée).      |
 | [**`check`**](/fr/pgbackrest/command/check/)                   | Valider la configuration des sauvegardes/archives d’un stanza et l’état de santé de l’archivage du WAL.                  |
-| [**`expire`**](/fr/pgbackrest/command/expire/)                 | Expire les sauvegardes et les WAL archivés selon les politiques de rétention configurées.                 |
+| [**`expire`**](/fr/pgbackrest/command/expire/)                 | Expirer les sauvegardes et les WAL archivés selon les politiques de rétention configurées.                 |
 | [**`help`**](/fr/pgbackrest/command/help/)                     | Afficher l’aide des commandes et options au niveau général, de la commande ou de l’option.                      |
 | [**`info`**](/fr/pgbackrest/command/info/)                     | Afficher l’état/métadonnées d’un stanza et des sauvegardes au format texte ou JSON.                       |
 | [**`repo-get`**](/fr/pgbackrest/command/repo-get/)             | Lire les fichiers du dépôt (comme `cat`) pour l’administration, l’investigation et les tests.      |

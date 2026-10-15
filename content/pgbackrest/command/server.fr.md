@@ -141,7 +141,7 @@ default: CFGOPTDEF_CONFIG_PATH
 example: --config-path=/conf/pgbackrest
 ```
 
-### Option d'expiration I/O (`--io-timeout`) {#io-timeout-option---io-timeout}
+### Option de délai d'attente d'E/S (`--io-timeout`) {#io-timeout-option---io-timeout}
 
 Délai d'attente d'E/S.
 
@@ -191,7 +191,7 @@ default: y
 example: --no-sck-keep-alive
 ```
 
-### Option de nombre de connexions Keep Alive (`--tcp-keep-alive-count`) {#keep-alive-count-option---tcp-keep-alive-count}
+### Option de nombre de messages Keep Alive (`--tcp-keep-alive-count`) {#keep-alive-count-option---tcp-keep-alive-count}
 
 Nombre de maintien de connexion.
 
@@ -230,7 +230,7 @@ allowed: [1, 900]
 example: --tcp-keep-alive-interval=30
 ```
 
-### Suites de chiffrement TLSv1.2 Option (`--tls-cipher-12`) {#tlsv12-cipher-suites-option---tls-cipher-12}
+### Option Suites de chiffrement TLSv1.2 (`--tls-cipher-12`) {#tlsv12-cipher-suites-option---tls-cipher-12}
 
 Suites de chiffrement TLSv1.2 autorisées.
 
@@ -244,7 +244,7 @@ Les suites de chiffrement acceptées peuvent être ajustées si nécessaire. L'e
 example: --tls-cipher-12=HIGH:MEDIUM:+3DES:!aNULL
 ```
 
-### Suites de chiffrement TLSv1.3 Option (`--tls-cipher-13`) {#tlsv13-cipher-suites-option---tls-cipher-13}
+### Option Suites de chiffrement TLSv1.3 (`--tls-cipher-13`) {#tlsv13-cipher-suites-option---tls-cipher-13}
 
 Suites de chiffrement TLSv1.3 autorisées.
 
