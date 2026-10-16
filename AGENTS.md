@@ -19,21 +19,22 @@ in all other languages. The local checkout is `~/www/doc.pg.center`.
 ## Documentation and languages
 
 Every collection is available in **English (`en`), Simplified Chinese (`zh`),
-French (`fr`), Japanese (`ja`), German (`de`), and Russian (`ru`)**.
+French (`fr`), Japanese (`ja`), German (`de`), Russian (`ru`), Arabic (`ar`), and
+Spanish (`es`)**.
 
 | Component | Documentation scope | Languages |
 | --- | --- | --- |
-| Patroni | PostgreSQL high availability, configuration, administration, and APIs | en, zh, fr, ja, de, ru |
-| pgBackRest | Backup, recovery, archiving, commands, and configuration | en, zh, fr, ja, de, ru |
-| PgBouncer | Connection pooling, installation, configuration, and administration | en, zh, fr, ja, de, ru |
-| pgBadger | Log analysis, command reference, sample reports, and release history | en, zh, fr, ja, de, ru |
-| HAProxy | Starter, Configuration, and Management manuals | en, zh, fr, ja, de, ru |
-| etcd | Operations, APIs, development, internals, and upgrades | en, zh, fr, ja, de, ru |
+| Patroni | PostgreSQL high availability, configuration, administration, and APIs | en, zh, fr, ja, de, ru, ar, es |
+| pgBackRest | Backup, recovery, archiving, commands, and configuration | en, zh, fr, ja, de, ru, ar, es |
+| PgBouncer | Connection pooling, installation, configuration, and administration | en, zh, fr, ja, de, ru, ar, es |
+| pgBadger | Log analysis, command reference, sample reports, and release history | en, zh, fr, ja, de, ru, ar, es |
+| HAProxy | Starter, Configuration, and Management manuals | en, zh, fr, ja, de, ru, ar, es |
+| etcd | Operations, APIs, development, internals, and upgrades | en, zh, fr, ja, de, ru, ar, es |
 
 English is the source language. Files without a language suffix are English;
-translations use the same path with `.zh.md`, `.fr.md`, `.ja.md`, `.de.md`, or
-`.ru.md`. For example, `content/pgbouncer/config.md` is the source for
-`content/pgbouncer/config.fr.md`. Each component is a top-level section with
+translations use the same path with `.zh.md`, `.fr.md`, `.ja.md`, `.de.md`,
+`.ru.md`, `.ar.md`, or `.es.md`. For example, `content/pgbouncer/config.md` is the
+source for `content/pgbouncer/config.fr.md`. Each component is a top-level section with
 the `docs` content type. English URLs start with the component name, such as
 `/patroni/`; translations prepend the language code, such as `/fr/patroni/`.
 There is no `/docs/` section or index. Internal links, aliases, and generated
@@ -65,14 +66,14 @@ translation scratch files, review logs, and build output outside the source tree
    warnings, and release notes. Preserve useful local corrections and stable
    anchors; update aliases when a URL changes. Finish and review the English diff
    before translating it.
-3. **Update all five translations from the English diff.** Synchronize Chinese,
-   French, Japanese, German, and Russian, including existing pages, additions,
-   and removals. Use consistent terminology and natural prose. Keep commands,
+3. **Update all seven translations from the English diff.** Synchronize Chinese,
+   French, Japanese, German, Russian, Arabic, and Spanish, including existing
+   pages, additions, and removals. Use consistent terminology and natural prose. Keep commands,
    configuration keys, API identifiers, code, and actual program output exact.
    Translate explanatory prose without changing its meaning.
 4. **Update shared metadata.** Record the selected upstream revision and relevant
    checksums in `data/upstreams.yaml`. Keep page attribution, version labels,
-   navigation, `NOTICE.md`, and all six attribution pages consistent. Retain
+   navigation, `NOTICE.md`, and all eight attribution pages consistent. Retain
    upstream copyright and license notices.
 5. **Validate the complete change.** Run `make check` and inspect the affected
    pages in a local preview, including language switching, search, navigation,
@@ -87,7 +88,7 @@ Use Hugo **Extended**, Go, Python 3, and Node.js. CI pins Hugo and Go in
 
 ```sh
 make check                    # Build and validate in an external temporary directory
-make serve                    # Preview with the pinned theme at http://localhost:1313
+make serve                    # Production preview at http://localhost:1313
 make build                    # Build the production site into public/
 python3 scripts/report-coverage.py
 ```

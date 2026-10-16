@@ -1,7 +1,7 @@
 brand:
   name: PG.CENTER
   tagline: "Component documentation for [pg.center](https://pg.center/)."
-  slogan: "Six tools. Six languages. One place to read."
+  slogan: "Six tools. Eight languages. One place to read."
 columns:
   - title: Documentation
     links:

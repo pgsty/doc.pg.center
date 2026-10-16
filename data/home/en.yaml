@@ -16,7 +16,7 @@ hero:
     - words:
         - { text: "Component documentation" }
   lead: "Guides and references for the tools that keep PostgreSQL running."
-  note: "Six components, six languages. Part of [pg.center](https://pg.center/)."
+  note: "Six components, eight languages. Part of [pg.center](https://pg.center/)."
   note_icon: fa-solid fa-book-open
   links_label: Component documentation
   orbit:
@@ -26,7 +26,7 @@ components:
   class: pgsql-components
   eyebrow: "Documentation"
   title: "Find the right manual"
-  text: "Every collection is available in English, Simplified Chinese, French, Japanese, German, and Russian."
+  text: "Every collection is available in English, Simplified Chinese, French, Japanese, German, Russian, Arabic, and Spanish."
   columns: 3
   link_label: Read the docs
   items:
@@ -207,6 +207,6 @@ faq:
     - question: Is PG.CENTER an official PostgreSQL website?
       answer: "No. This is the component documentation section of [PG.CENTER](https://pg.center/), maintained by PGSTY. This independent community edition links to the original projects and preserves their attribution and licences."
     - question: "Which languages are available?"
-      answer: "All six collections are available in English, Simplified Chinese, French, Japanese, German, and Russian. Use the language selector to open the same page in another language."
+      answer: "All six collections are available in English, Simplified Chinese, French, Japanese, German, Russian, Arabic, and Spanish. Use the language selector to open the same page in another language."
     - question: How is the upstream documentation credited?
       answer: Every page ends with one line naming the work it is adapted from, its copyright holder, its licence, and a link to this site's change history for that page. The [attribution page](/attribution/) collects the pinned revisions, licences, and retained notices for all six collections.

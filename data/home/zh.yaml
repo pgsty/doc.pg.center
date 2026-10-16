@@ -16,7 +16,7 @@ hero:
     - words:
         - { text: "生态组件文档" }
   lead: "查阅 PostgreSQL 生产运维工具的使用指南与参考手册。"
-  note: "六个组件，六种语言。本站是 [pg.center](https://pg.center/zh/) 的文档子站。"
+  note: "六个组件，八种语言。本站是 [pg.center](https://pg.center/zh/) 的文档子站。"
   note_icon: fa-solid fa-book-open
   links_label: 组件文档
   orbit:
@@ -26,7 +26,7 @@ components:
   class: pgsql-components
   eyebrow: "组件文档"
   title: "选择你需要的文档"
-  text: "所有组件文档均提供英文、简体中文、法文、日文、德文和俄文版本。"
+  text: "所有组件文档均提供英文、简体中文、法文、日文、德文、俄文、阿拉伯文和西班牙文版本。"
   columns: 3
   link_label: 阅读文档
   items:
@@ -207,6 +207,6 @@ faq:
     - question: PG.CENTER 是 PostgreSQL 官方网站吗？
       answer: "不是。这是 [PG.CENTER](https://pg.center/zh/) 的组件文档，由 PGSTY 维护。这是独立的社区整理与翻译版本，保留各上游项目的链接、署名与授权声明。"
     - question: "提供哪些语言版本？"
-      answer: "六套文档均提供英文、简体中文、法文、日文、德文和俄文版本。使用页面上的语言选择器，可以打开同一页面的其他语言版本。"
+      answer: "六套文档均提供英文、简体中文、法文、日文、德文、俄文、阿拉伯文和西班牙文版本。使用页面上的语言选择器，可以打开同一页面的其他语言版本。"
     - question: 上游文档的归属如何标注？
       answer: 每个页面末尾都有一行署名，指明该页改编自哪份作品、版权归属、授权协议，以及本站中该页面的修改历史链接。[归属与授权页面](/zh/attribution/)汇总了六套文档集的固定版本、授权协议与完整声明。

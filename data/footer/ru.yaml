@@ -1,7 +1,7 @@
 brand:
   name: PG.CENTER
   tagline: "Документация компонентов от [pg.center](https://pg.center/)."
-  slogan: "Шесть инструментов. Шесть языков. Один справочник."
+  slogan: "Шесть инструментов. Восемь языков. Один справочник."
 columns:
   - title: Документация
     links:

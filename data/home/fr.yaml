@@ -16,7 +16,7 @@ hero:
     - words:
         - { text: "Documentation des composants" }
   lead: "Guides et références pour les outils qui accompagnent PostgreSQL en production."
-  note: "Six composants, six langues. Un site de [pg.center](https://pg.center/)."
+  note: "Six composants, huit langues. Un site de [pg.center](https://pg.center/)."
   note_icon: fa-solid fa-book-open
   links_label: Documentation des composants
   orbit:
@@ -26,7 +26,7 @@ components:
   class: pgsql-components
   eyebrow: "Documentation"
   title: "Trouvez le bon manuel"
-  text: "Chaque collection est disponible en anglais, chinois simplifié, français, japonais, allemand et russe."
+  text: "Chaque collection est disponible en anglais, chinois simplifié, français, japonais, allemand, russe, arabe et espagnol."
   columns: 3
   link_label: Lire la documentation
   items:
@@ -207,6 +207,6 @@ faq:
     - question: PG.CENTER est-il un site PostgreSQL officiel ?
       answer: "Non. Ce site rassemble la documentation des composants de [PG.CENTER](https://pg.center/), maintenue par PGSTY. Cette édition communautaire indépendante renvoie aux projets d’origine et conserve leurs mentions d’attribution et leurs licences."
     - question: "Quelles langues sont disponibles ?"
-      answer: "Les six collections sont disponibles en anglais, chinois simplifié, français, japonais, allemand et russe. Le sélecteur de langue permet de consulter la même page dans une autre langue."
+      answer: "Les six collections sont disponibles en anglais, chinois simplifié, français, japonais, allemand, russe, arabe et espagnol. Le sélecteur de langue permet de consulter la même page dans une autre langue."
     - question: Comment les sources amont sont-elles créditées ?
       answer: Chaque page se termine par une ligne indiquant l'œuvre adaptée, son titulaire de droits, sa licence et un lien vers l'historique des modifications de cette page. La [page d'attribution](/fr/attribution/) rassemble les révisions épinglées, licences et mentions conservées pour les six collections.

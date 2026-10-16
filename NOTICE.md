@@ -35,7 +35,7 @@ The linked historical sample reports retain their original scripts and notices.
 
 Official source locations, pinned revisions, and available checksums are recorded
 in `data/upstreams.yaml`. Each manual page identifies its source through
-`upstream_link`. Full attribution is maintained in the six localized
+`upstream_link`. Full attribution is maintained in the eight localized
 `content/attribution*.md` pages and published at
 <https://doc.pg.center/attribution/>. Upstream downloads are kept outside the
 repository; published license texts remain in `static/third_party/`.

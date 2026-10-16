@@ -16,7 +16,7 @@ hero:
     - words:
         - { text: "Komponenten-Dokumentation" }
   lead: "Anleitungen und Referenzen für die Werkzeuge rund um PostgreSQL im Produktivbetrieb."
-  note: "Sechs Komponenten, sechs Sprachen. Ein Angebot von [pg.center](https://pg.center/)."
+  note: "Sechs Komponenten, acht Sprachen. Ein Angebot von [pg.center](https://pg.center/)."
   note_icon: fa-solid fa-book-open
   links_label: Komponentendokumentation
   orbit:
@@ -26,7 +26,7 @@ components:
   class: pgsql-components
   eyebrow: "Dokumentation"
   title: "Das passende Handbuch finden"
-  text: "Alle Sammlungen sind auf Englisch, vereinfachtem Chinesisch, Französisch, Japanisch, Deutsch und Russisch verfügbar."
+  text: "Alle Sammlungen sind auf Englisch, vereinfachtem Chinesisch, Französisch, Japanisch, Deutsch, Russisch, Arabisch und Spanisch verfügbar."
   columns: 3
   link_label: Dokumentation lesen
   items:
@@ -207,6 +207,6 @@ faq:
     - question: Ist PG.CENTER eine offizielle PostgreSQL-Website?
       answer: "Nein. Diese Website enthält die von PGSTY gepflegte Komponenten-Dokumentation von [PG.CENTER](https://pg.center/). Diese unabhängige Community-Ausgabe verlinkt die Originalprojekte und bewahrt deren Quellenangaben und Lizenzen."
     - question: "Welche Sprachen sind verfügbar?"
-      answer: "Alle sechs Sammlungen sind auf Englisch, vereinfachtem Chinesisch, Französisch, Japanisch, Deutsch und Russisch verfügbar. Über die Sprachauswahl öffnen Sie dieselbe Seite in einer anderen Sprache."
+      answer: "Alle sechs Sammlungen sind auf Englisch, vereinfachtem Chinesisch, Französisch, Japanisch, Deutsch, Russisch, Arabisch und Spanisch verfügbar. Über die Sprachauswahl öffnen Sie dieselbe Seite in einer anderen Sprache."
     - question: Wie werden die Upstream-Dokumentationen gekennzeichnet?
-      answer: Jede Seite endet mit einer Zeile, die das zugrunde liegende Werk, den Urheberrechtsinhaber und die Lizenz nennt sowie auf den Änderungsverlauf dieser Seite verweist. Die [Seite zu Quellenangaben](/attribution/) bündelt die festgeschriebenen Revisionen, Lizenzen und beibehaltenen Hinweise für alle sechs Sammlungen.
+      answer: Jede Seite endet mit einer Zeile, die das zugrunde liegende Werk, den Urheberrechtsinhaber und die Lizenz nennt sowie auf den Änderungsverlauf dieser Seite verweist. Die [Seite zu Quellenangaben](/de/attribution/) bündelt die festgeschriebenen Revisionen, Lizenzen und beibehaltenen Hinweise für alle sechs Sammlungen.
