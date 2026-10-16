@@ -13,8 +13,8 @@ from xml.etree import ElementTree
 
 PROJECT = Path(__file__).resolve().parent.parent
 COMPONENTS = ("patroni", "pgbackrest", "pgbouncer", "pgbadger", "haproxy", "etcd")
-LOCALES = ("en", "zh", "fr", "ja", "de", "ru")
-REMOVED_DOCS_ROUTE = re.compile(r"^/(?:(?:zh|fr|ja|de|ru)/)?(?:_print/)?docs(?:/|$)")
+LOCALES = ("en", "zh", "fr", "ja", "de", "ru", "ar", "es")
+REMOVED_DOCS_ROUTE = re.compile(r"^/(?:(?:zh|fr|ja|de|ru|ar|es)/)?(?:_print/)?docs(?:/|$)")
 
 
 class Head(HTMLParser):

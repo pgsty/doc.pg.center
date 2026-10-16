@@ -22,7 +22,7 @@ import struct
 import sys
 
 project, public = map(Path, sys.argv[1:])
-languages = ("en", "zh", "fr", "ja", "de", "ru")
+languages = ("en", "zh", "fr", "ja", "de", "ru", "ar", "es")
 components = ("patroni", "pgbackrest", "pgbouncer", "pgbadger", "haproxy", "etcd")
 
 class HeadAndLinks(HTMLParser):
@@ -133,4 +133,4 @@ python3 "$project_dir/scripts/check-docs-routes.py" "$build_dir/public"
 python3 "$project_dir/scripts/check-local-links.py" "$build_dir/public"
 node "$project_dir/scripts/check-russian-search.cjs" "$build_dir/public"
 node "$project_dir/scripts/test-pgbackrest-search.cjs" "$build_dir/public"
-printf 'Site checks passed for all six languages.\n'
+printf 'Site checks passed for all eight languages.\n'

@@ -21,6 +21,7 @@ const upstream = require(path.join(moduleDir, 'assets/js/search-engine.js'));
 const queries = {
   en: 'Weak Encryption', zh: '弱加密', fr: 'Sous-clés',
   ja: '脆弱', de: 'Unterschlüssel', ru: 'Слабые',
+  ar: 'مفاتيح فرعية', es: 'Subclaves',
 };
 for (const [lang, query] of Object.entries(queries)) {
   const files = fs.readdirSync(publicDir).filter(
@@ -35,12 +36,15 @@ for (const [lang, query] of Object.entries(queries)) {
     assert(engine.query(term).some(({ doc }) => doc.ref === route),
       `${lang} security announcement missing for ${term}`);
   }
-  if (lang === 'ru') {
+  if (lang === 'ru' || lang === 'ar') {
     assert(!original.query(query).some(({ doc }) => doc.ref === route),
-      'upstream Cyrillic regression must be reproduced');
-    for (const term of ['Восстановление', 'резервное копирование']) {
-      assert(engine.query(term).some(({ doc }) => doc.ref.startsWith('/ru/pgbackrest/')),
-        `Russian technical search missing for ${term}`);
+      `${lang} upstream regression must be reproduced`);
+    const technical = lang === 'ru'
+      ? [['Восстановление', 'резервное копирование'], '/ru/pgbackrest/']
+      : [['النسخ الاحتياطي', 'الاسترداد'], `/${lang}/pgbackrest/`];
+    for (const term of technical[0]) {
+      assert(engine.query(term).some(({ doc }) => doc.ref.startsWith(technical[1])),
+        `${lang} technical search missing for ${term}`);
     }
   } else {
     assert.deepEqual(engine.query(query), original.query(query),
@@ -51,4 +55,4 @@ for (const [lang, query] of Object.entries(queries)) {
       `${lang}: Latin search changed for ${term}`);
   }
 }
-console.log('Validated six-language security-announcement search, Cyrillic recovery queries, and unchanged Latin/CJK results.');
+console.log('Validated eight-language security-announcement search, Cyrillic/Arabic recovery queries, and unchanged Latin/CJK results.');

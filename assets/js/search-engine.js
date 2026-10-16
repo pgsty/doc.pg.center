@@ -1,7 +1,8 @@
 /**
  * search-engine.js — deterministic page search for the Command Palette.
- * Local override of OINK v1.2.0 (Apache-2.0): include Cyrillic in the
- * substring search path because the default English Lunr pipeline trims it.
+ * Local override of OINK v1.2.0 (Apache-2.0): include Cyrillic and Arabic in
+ * the substring search path because the default English Lunr pipeline trims
+ * them.
  *
  * The index builder is injected so this module can be unit-tested without a
  * DOM. Both Latin/Lunr and CJK substring paths apply keywords and the same
@@ -12,6 +13,7 @@
 
   var CJK = /[぀-ヿ㐀-䶿一-鿿豈-﫿]/;
   var CYRILLIC = /[\u0400-\u052f]/;
+  var ARABIC = /[\u0600-\u06ff]/;
 
   function number(value, fallback) {
     var parsed = Number(value);
@@ -167,7 +169,7 @@
 
     return {
       query: function (query) {
-        return CJK.test(query) || CYRILLIC.test(query)
+        return CJK.test(query) || CYRILLIC.test(query) || ARABIC.test(query)
           ? queryCjk(query)
           : queryLatin(query);
       },
@@ -178,6 +180,7 @@
 
   window.OinkSearchEngine = {
     CJK: CJK,
+    ARABIC: ARABIC,
     compare: compare,
     group: group,
     lexical: lexical,

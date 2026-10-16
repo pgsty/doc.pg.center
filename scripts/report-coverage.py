@@ -8,7 +8,7 @@ import sys
 
 
 CONTENT = Path(__file__).resolve().parent.parent / "content"
-LANGUAGES = ("en", "zh", "fr", "ja", "de", "ru")
+LANGUAGES = ("en", "zh", "fr", "ja", "de", "ru", "ar", "es")
 COMPONENTS = {
     "patroni": "Patroni",
     "pgbackrest": "pgBackRest",
@@ -64,8 +64,8 @@ def main() -> int:
     component_set = set(component_sources)
     site_sources = [path for path in sources if path not in component_set]
 
-    print("| Collection | EN | ZH | FR | JA | DE | RU |")
-    print("| --- | ---: | ---: | ---: | ---: | ---: | ---: |")
+    print("| Collection | EN | ZH | FR | JA | DE | RU | AR | ES |")
+    print("| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |")
     for name, label in COMPONENTS.items():
         print(row(label, groups[name]))
     print(row("**Component total**", component_sources))

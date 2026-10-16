@@ -14,7 +14,7 @@ from urllib.parse import unquote, urlsplit
 INTERNAL_HOSTS = {"doc.pg.center", "www.doc.pg.center"}
 SKIP_SCHEMES = {"data", "javascript", "mailto", "tel"}
 REMOVED_DOCS_ROUTE = re.compile(
-    r"^(?:(?:zh|fr|ja|de|ru)/)?(?:_print/)?docs(?:/|$)"
+    r"^(?:(?:zh|fr|ja|de|ru|ar|es)/)?(?:_print/)?docs(?:/|$)"
 )
 
 

@@ -521,6 +521,17 @@
   margin-inline-start: auto;
 }
 
+// Isolate inline commands and formulas so leading flags and punctuation
+// retain their source order. Block examples already use the theme's LTR layout.
+[dir='rtl'] .td-content :not(pre) > code,
+[dir='rtl'] .td-content bdi[dir='ltr'] {
+  display: inline-block;
+  max-width: 100%;
+  direction: ltr;
+  unicode-bidi: isolate;
+  overflow-wrap: anywhere;
+}
+
 // Keep source-authored HTML tables readable within the Japanese etcd pages.
 // The theme already scrolls these tables; minimum column widths prevent
 // bucket names and field descriptions from collapsing into vertical text.

@@ -7,7 +7,7 @@ import sys
 
 PROJECT = Path(__file__).resolve().parent.parent
 CONTENT = PROJECT / "content"
-LANGUAGES = ("en", "zh", "fr", "ja", "de", "ru")
+LANGUAGES = ("en", "zh", "fr", "ja", "de", "ru", "ar", "es")
 COMPONENTS = ("patroni", "pgbackrest", "pgbouncer", "pgbadger", "haproxy", "etcd")
 
 
@@ -67,7 +67,7 @@ def main() -> int:
         print("\n".join(errors), file=sys.stderr)
         return 1
     published = sum(not path.name.startswith("_div_") for path in pages)
-    print(f"Validated {published} publishable source pages across six languages and six component collections.")
+    print(f"Validated {published} publishable source pages across eight languages and six component collections.")
     return 0
 
 

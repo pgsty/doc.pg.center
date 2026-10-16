@@ -36,7 +36,7 @@ languages:
     weight: 1
     title: PG.CENTER
     params:
-      description: "The pg.center documentation site for Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy, and etcd, in six languages."
+      description: "The pg.center documentation site for Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy, and etcd, in eight languages."
       ui:
         command_palette:
           commands:
@@ -107,7 +107,7 @@ languages:
     hasCJKLanguage: true
     params:
       footer_center_info: "由 [OINK](https://oink.pgsty.com/zh/) 构建"
-      description: "pg.center 的组件文档站，提供 Patroni、pgBackRest、PgBouncer、pgBadger、HAProxy 和 etcd 的六种语言手册。"
+      description: "pg.center 的组件文档站，提供 Patroni、pgBackRest、PgBouncer、pgBadger、HAProxy 和 etcd 的八种语言手册。"
       time_format_default: 2006年1月2日
       ui:
         share: [weibo, x, telegram, linkedin, email, copy]
@@ -179,7 +179,7 @@ languages:
     title: PG.CENTER
     params:
       footer_center_info: "Propulsé par [OINK](https://oink.pgsty.com/)"
-      description: "Le site documentaire de pg.center pour Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy et etcd, en six langues."
+      description: "Le site documentaire de pg.center pour Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy et etcd, en huit langues."
       ui:
         share: [x, bluesky, linkedin, telegram, email, copy]
         command_palette:
@@ -251,7 +251,7 @@ languages:
     hasCJKLanguage: true
     params:
       footer_center_info: "[OINK](https://oink.pgsty.com/) で構築"
-      description: "Patroni、pgBackRest、PgBouncer、pgBadger、HAProxy、etcd のマニュアルを6言語で提供する pg.center のドキュメントサイト。"
+      description: "Patroni、pgBackRest、PgBouncer、pgBadger、HAProxy、etcd のマニュアルを8言語で提供する pg.center のドキュメントサイト。"
       time_format_default: 2006年1月2日
       ui:
         share: [x, linkedin, telegram, email, copy]
@@ -323,7 +323,7 @@ languages:
     title: PG.CENTER
     params:
       footer_center_info: "Erstellt mit [OINK](https://oink.pgsty.com/)"
-      description: "Die Dokumentationsseite von pg.center für Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy und etcd in sechs Sprachen."
+      description: "Die Dokumentationsseite von pg.center für Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy und etcd in acht Sprachen."
       ui:
         command_palette:
           commands:
@@ -393,7 +393,7 @@ languages:
     title: PG.CENTER
     params:
       footer_center_info: "Создано с помощью [OINK](https://oink.pgsty.com/)"
-      description: "Документация pg.center по Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy и etcd на шести языках."
+      description: "Документация pg.center по Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy и etcd на восьми языках."
       time_format_default: 2 January 2006 г.
       ui:
         command_palette:
@@ -457,12 +457,155 @@ languages:
             icon: fa-solid fa-gear
             description: Эксплуатация распределённого хранилища ключ-значение и его API
 
+  ar:
+    label: العربية
+    locale: ar
+    direction: rtl
+    weight: 7
+    title: PG.CENTER
+    params:
+      footer_center_info: "مبني بواسطة [OINK](https://oink.pgsty.com/)"
+      description: "موقع توثيق pg.center لأدوات Patroni وpgBackRest وPgBouncer وpgBadger وHAProxy وetcd، بثماني لغات."
+      ui:
+        share: [x, linkedin, telegram, email, copy]
+        command_palette:
+          commands:
+            - id: attribution
+              title: الإسناد والتراخيص
+              description: المصادر والمراجعات المثبّتة والتراخيص لكل مجموعة توثيق
+              url: /ar/attribution/
+              icon: fa-solid fa-copyright
+              keywords: ['ترخيص', 'حقوق النشر', 'المصدر', 'الأصل', 'الإسناد', 'إشعار']
+    menus:
+      main:
+        - identifier: home
+          name: الرئيسية
+          url: https://pg.center/
+          weight: 1
+          params:
+            icon: fa-solid fa-house
+            description: توثيق PostgreSQL وموارد منظومته
+            new_tab: false
+        - identifier: patroni
+          name: Patroni
+          pageRef: /patroni
+          weight: 10
+          params:
+            icon: fa-solid fa-heart-pulse
+            description: التوافر العالي لـ PostgreSQL وتجاوز الأعطال التلقائي
+        - identifier: pgbackrest
+          name: pgBackRest
+          pageRef: /pgbackrest
+          weight: 20
+          params:
+            icon: fa-solid fa-couch
+            description: نسخ احتياطي موثوق واستعادة وإدارة للأرشيف
+        - identifier: pgbouncer
+          name: PgBouncer
+          pageRef: /pgbouncer
+          weight: 30
+          params:
+            icon: fa-solid fa-arrows-turn-to-dots
+            description: مجمّع اتصالات خفيف لـ PostgreSQL
+        - identifier: pgbadger
+          name: pgBadger
+          pageRef: /pgbadger
+          weight: 40
+          params:
+            icon: fa-solid fa-otter
+            description: تحليل سريع لسجلات PostgreSQL وPgBouncer
+        - identifier: haproxy
+          name: HAProxy
+          pageRef: /haproxy
+          weight: 50
+          params:
+            icon: fa-solid fa-network-wired
+            description: أدلة HAProxy 3.4 الكاملة
+        - identifier: etcd
+          name: etcd
+          pageRef: /etcd
+          weight: 60
+          params:
+            icon: fa-solid fa-gear
+            description: تشغيل etcd 3.7 وواجهاته البرمجية وبنيته الداخلية
+
+  es:
+    label: Español
+    locale: es-ES
+    weight: 8
+    title: PG.CENTER
+    params:
+      footer_center_info: "Construido con [OINK](https://oink.pgsty.com/)"
+      description: "El sitio de documentación de pg.center para Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy y etcd, en ocho idiomas."
+      ui:
+        share: [x, bluesky, linkedin, telegram, email, copy]
+        command_palette:
+          commands:
+            - id: attribution
+              title: Atribución y licencias
+              description: Fuentes, revisiones fijadas y licencias de cada colección
+              url: /es/attribution/
+              icon: fa-solid fa-copyright
+              keywords: [licencia, copyright, fuente, origen, atribución, aviso]
+    menus:
+      main:
+        - identifier: home
+          name: Inicio
+          url: https://pg.center/
+          weight: 1
+          params:
+            icon: fa-solid fa-house
+            description: Documentación y recursos de PostgreSQL
+            new_tab: false
+        - identifier: patroni
+          name: Patroni
+          pageRef: /patroni
+          weight: 10
+          params:
+            icon: fa-solid fa-heart-pulse
+            description: Alta disponibilidad de PostgreSQL y conmutación por error automática
+        - identifier: pgbackrest
+          name: pgBackRest
+          pageRef: /pgbackrest
+          weight: 20
+          params:
+            icon: fa-solid fa-couch
+            description: Copias de seguridad, restauración y archivado fiables
+        - identifier: pgbouncer
+          name: PgBouncer
+          pageRef: /pgbouncer
+          weight: 30
+          params:
+            icon: fa-solid fa-arrows-turn-to-dots
+            description: Pool de conexiones ligero para PostgreSQL
+        - identifier: pgbadger
+          name: pgBadger
+          pageRef: /pgbadger
+          weight: 40
+          params:
+            icon: fa-solid fa-otter
+            description: Análisis rápido de registros de PostgreSQL y PgBouncer
+        - identifier: haproxy
+          name: HAProxy
+          pageRef: /haproxy
+          weight: 50
+          params:
+            icon: fa-solid fa-network-wired
+            description: Manuales completos de HAProxy 3.4
+        - identifier: etcd
+          name: etcd
+          pageRef: /etcd
+          weight: 60
+          params:
+            icon: fa-solid fa-gear
+            description: Operación, API y funcionamiento interno de etcd 3.7
+
 params:
   logo: img/slonik.svg
   productionURL: https://doc.pg.center
   github_repo: https://github.com/pgsty/doc.pg.center
   github_branch: main
-  description: The component documentation site of pg.center, in six languages.
+  description: The component documentation site of pg.center, in eight languages.
   version: v1
   copyright:
     authors: '[PG.CENTER](https://pg.center/)'
