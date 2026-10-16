@@ -1,0 +1,37 @@
+brand:
+  name: PG.CENTER
+  tagline: "Documentación de componentes de [pg.center](https://pg.center/)."
+  slogan: "Seis herramientas. Ocho idiomas. Un solo lugar para consultar."
+columns:
+  - title: Documentación
+    links:
+      - { label: Patroni, url: /patroni/ }
+      - { label: pgBackRest, url: /pgbackrest/ }
+      - { label: PgBouncer, url: /pgbouncer/ }
+      - { label: pgBadger, url: /pgbadger/ }
+      - { label: HAProxy, url: /haproxy/ }
+      - { label: etcd, url: /etcd/ }
+  - title: Proyecto original
+    links:
+      - { label: Patroni, url: https://github.com/patroni/patroni, external: true }
+      - { label: pgBackRest, url: https://pgbackrest.org/, external: true }
+      - { label: PgBouncer, url: https://www.pgbouncer.org/, external: true }
+      - { label: pgBadger, url: https://pgbadger.darold.net/, external: true }
+      - { label: HAProxy, url: https://www.haproxy.org/, external: true }
+      - { label: etcd, url: https://etcd.io/, external: true }
+  - title: PG.CENTER
+    links:
+      - { label: "Sitio principal", url: "https://pg.center/", external: true }
+      - { label: "Manuales de PostgreSQL", url: "https://pg.center/docs/", external: true }
+      - { label: "Referencia y wiki", url: "https://pg.center/wiki/", external: true }
+      - { label: "Extensiones", url: "https://pg.center/ext/", external: true }
+      - { label: "Ecosistema", url: "https://pg.center/ecosystem/", external: true }
+      - { label: "Documentación de PostgreSQL en chino", url: "https://pgsql.cc/docs/", external: true }
+  - title: "Proyecto"
+    links:
+      - { label: "Fuentes y licencias", url: "/attribution/" }
+      - { label: "Repositorio en GitHub", url: "https://github.com/pgsty/doc.pg.center", external: true }
+      - { label: "Informar de un problema", url: "https://github.com/pgsty/doc.pg.center/issues", external: true }
+      - { label: Pigsty, url: "https://pigsty.io/", external: true }
+      - { label: PGSTY, url: "https://pgsty.com/", external: true }
+      - { label: OINK, url: "https://oink.pgsty.com/", external: true }
