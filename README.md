@@ -31,6 +31,8 @@ there is no `/docs/` index or URL prefix.
 ## Develop
 
 Install Hugo Extended, Go, Python 3, and Node.js. CI uses Hugo 0.166.0 and Go 1.27.0.
+CI sets `HUGO_MEMORYLIMIT=4` so shared build resources stay cached during the
+eight-language build.
 The theme is pinned in `go.mod`; no local theme checkout is required.
 The local checkout is `~/www/doc.pg.center`.
 
