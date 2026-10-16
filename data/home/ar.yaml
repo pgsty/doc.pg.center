@@ -1,0 +1,212 @@
+sections:
+  - key: hero
+    partial: pgsql/hero-orbit.html
+  - type: cards
+    key: components
+  - key: capabilities
+    partial: pgsql/capabilities.html
+  - faq
+
+hero:
+  class: pgsql-hero pgsql-hero--fit-title
+  eyebrow: "PG.CENTER / توثيق المكوّنات"
+  title_lines:
+    - words:
+        - { mark: P, color: blue, text: ostgreSQL }
+    - words:
+        - { text: "توثيق المكوّنات" }
+  lead: "أدلة ومراجع للأدوات التي تُبقي PostgreSQL يعمل في الإنتاج."
+  note: "ستة مكوّنات، ثماني لغات. جزء من [pg.center](https://pg.center/)."
+  note_icon: fa-solid fa-book-open
+  links_label: توثيق المكوّنات
+  orbit:
+    center_image: img/slonik.svg
+
+components:
+  class: pgsql-components
+  eyebrow: "التوثيق"
+  title: "اعثر على الدليل المناسب"
+  text: "تتوفر كل مجموعة توثيق بالإنجليزية والصينية المبسطة والفرنسية واليابانية والألمانية والروسية والعربية والإسبانية."
+  columns: 3
+  link_label: اقرأ التوثيق
+  items:
+    - title: Patroni
+      meta: التوافر العالي
+      icon: fa-solid fa-heart-pulse
+      desc: شغّل عناقيد PostgreSQL بتوافق موزّع وتجاوز تلقائي للأعطال.
+      url: /patroni/
+    - title: pgBackRest
+      meta: النسخ الاحتياطي والاستعادة
+      icon: fa-solid fa-couch
+      desc: صمّم مسارات موثوقة للنسخ الاحتياطي والاستعادة والأرشفة والاستعادة إلى نقطة زمنية.
+      url: /pgbackrest/
+    - title: PgBouncer
+      meta: تجميع الاتصالات
+      icon: fa-solid fa-arrows-turn-to-dots
+      desc: اخفض كلفة الاتصالات بتجميع على مستوى الجلسة والمعاملة والعبارة.
+      url: /pgbouncer/
+    - title: pgBadger
+      meta: تحليل السجلات
+      icon: fa-solid fa-otter
+      desc: حوّل سجلات PostgreSQL وPgBouncer إلى تقارير عن الاستعلامات وحِمل العمل والأخطاء.
+      url: /pgbadger/
+    - title: HAProxy
+      meta: موازنة الحمل
+      icon: fa-solid fa-network-wired
+      desc: "اقرأ أدلة HAProxy 3.4 الكاملة: البدء والإعداد والإدارة."
+      url: /haproxy/
+    - title: etcd
+      meta: التوافق والتنسيق
+      icon: fa-solid fa-gear
+      desc: شغّل مخزن مفاتيح–قيم متّسق بقوة، مع واجهاته البرمجية ونموذج Raft وبنيته الداخلية.
+      url: /etcd/
+
+capabilities:
+  eyebrow: أدلة المكوّنات
+  title: ما يفعله كل مكوّن — ومن أين تبدأ
+  text: اقرأ المقدمة الموجزة، ثم استخدم الفهرس المرتبط بجانبها للانتقال مباشرة إلى الدليل.
+  items:
+    - ref: 01 / التوافر العالي
+      title: Patroni
+      url: /patroni/
+      motto: قالب جاهز للتوافر العالي في PostgreSQL
+      bullets:
+        - يدير انتخاب القائد وحالة العنقود عبر DCS.
+        - يؤتمت تجاوز الأعطال، مع ضوابط للتغييرات المخطط لها.
+        - يغطي الأجهزة المادية والأجهزة الافتراضية وKubernetes ومراكز البيانات المتعددة.
+      value: ابدأ بالتثبيت والإعداد، ثم انتقل إلى الواجهات التشغيلية.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: اختصارات توثيق Patroni
+        items:
+          - { icon: fa-solid fa-download, title: التثبيت, url: /patroni/installation/ }
+          - { icon: fa-solid fa-sliders, title: الإعداد, url: /patroni/config/ }
+          - { icon: fa-solid fa-terminal, title: patronictl, url: /patroni/patronictl/ }
+          - { icon: fa-solid fa-plug, title: REST API, url: /patroni/rest_api/ }
+          - { icon: fa-solid fa-arrows-rotate, title: أوضاع النسخ المتماثل, url: /patroni/replication_modes/ }
+          - { icon: fa-solid fa-circle-question, title: الأسئلة الشائعة, url: /patroni/faq/ }
+    - ref: 02 / النسخ الاحتياطي والاستعادة
+      title: pgBackRest
+      url: /pgbackrest/
+      motto: نسخ احتياطي وأرشفة واستعادة واستعادة إلى نقطة زمنية موثوقة
+      bullets:
+        - نسخ احتياطية كاملة وتفاضلية وتزايدية وعلى مستوى الكتل.
+        - يدير المستودعات والاحتفاظ وأرشفة WAL.
+        - يوثّق عمليات النشر الموجّهة وكل أمر.
+      value: ابدأ بدليل نظام تشغيلك، ثم أبقِ الإعداد والأوامر في متناول اليد.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: اختصارات توثيق pgBackRest
+        items:
+          - { icon: fa-solid fa-route, title: دليل المستخدم, url: /pgbackrest/user-guide/ }
+          - { icon: fa-brands fa-redhat, title: دليل RHEL, url: /pgbackrest/user-guide-rhel/ }
+          - { icon: fa-solid fa-sliders, title: الإعداد, url: /pgbackrest/configuration/ }
+          - { icon: fa-solid fa-terminal, title: الأوامر, url: /pgbackrest/command/ }
+          - { icon: fa-solid fa-tags, title: الإصدارات, url: /pgbackrest/release/ }
+          - { icon: fa-solid fa-circle-question, title: الأسئلة الشائعة, url: /pgbackrest/faq/ }
+    - ref: 03 / تجميع الاتصالات
+      title: PgBouncer
+      url: /pgbouncer/
+      motto: مجمّع اتصالات خفيف لـ PostgreSQL
+      bullets:
+        - يعيد استخدام الاتصالات لخفض كلفة بدء العمليات الخلفية.
+        - يوفر تجميعًا على مستوى الجلسة والمعاملة والعبارة.
+        - يغطي المصادقة والتوجيه والحدود ووحدة التحكم الإدارية.
+      value: اقرأ أولًا نموذج التجميع، ثم ثبّت واضبط الإعدادات وفق حِمل عملك.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: اختصارات توثيق PgBouncer
+        items:
+          - { icon: fa-solid fa-list-check, title: المزايا, url: /pgbouncer/features/ }
+          - { icon: fa-solid fa-download, title: التنزيل, url: /pgbouncer/download/ }
+          - { icon: fa-solid fa-wrench, title: التثبيت, url: /pgbouncer/install/ }
+          - { icon: fa-solid fa-terminal, title: الاستخدام, url: /pgbouncer/usage/ }
+          - { icon: fa-solid fa-sliders, title: الإعداد, url: /pgbouncer/config/ }
+          - { icon: fa-solid fa-circle-question, title: الأسئلة الشائعة, url: /pgbouncer/faq/ }
+    - ref: 04 / تحليل السجلات
+      title: pgBadger
+      url: /pgbadger/
+      motto: تحليل سريع لسجلات PostgreSQL وPgBouncer
+      bullets:
+        - يحلّل سجلات PostgreSQL وPgBouncer في صيغ عديدة.
+        - يُصدر تقارير عن الاستعلامات البطيئة والأخطاء والأقفال ونشاط vacuum.
+        - يولّد مخرجات HTML وJSON ونصية وCSV مكتفية ذاتيًا.
+      value: اضبط التسجيل أولًا، ثم اختر بين التشغيل لمرة واحدة أو المتوازي أو التزايدي.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: اختصارات توثيق pgBadger
+        items:
+          - { icon: fa-solid fa-download, title: التنزيل, url: /pgbadger/download/ }
+          - { icon: fa-solid fa-terminal, title: سطر الأوامر, url: /pgbadger/command-line/ }
+          - { icon: fa-solid fa-file-lines, title: تسجيل PostgreSQL, url: /pgbadger/postgresql-logging/ }
+          - { icon: fa-solid fa-calendar-days, title: التقارير التزايدية, url: /pgbadger/incremental-reports/ }
+          - { icon: fa-solid fa-file-export, title: صيغ المخرجات, url: /pgbadger/output-formats/ }
+          - { icon: fa-solid fa-chart-column, title: تقارير نموذجية, url: /pgbadger/sample-reports/ }
+          - { icon: fa-solid fa-tags, title: الإصدارات, url: /pgbadger/releases/ }
+          - { icon: fa-solid fa-life-ring, title: الدعم, url: /pgbadger/support/ }
+    - ref: 05 / موازنة الحمل
+      title: HAProxy
+      url: /haproxy/
+      motto: إدارة سريعة وموثوقة لحركة TCP وHTTP
+      bullets:
+        - دليل البدء الكامل للإصدار 3.4 في تسعة موضوعات مركّزة.
+        - دليل الإعداد في فصوله الاثني عشر الأصلية.
+        - دليل الإدارة في ثلاثة عشر فصلًا تشغيليًا.
+      value: تعرّف على البنية، وابحث عن كل كلمة مفتاحية، وشغّل HAProxy.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: اختصارات توثيق HAProxy
+        items:
+          - { icon: fa-solid fa-compass, title: دليل البدء, url: /haproxy/load-balancing/ }
+          - { icon: fa-solid fa-file-code, title: دليل الإعداد, url: /haproxy/http-fundamentals/ }
+          - { icon: fa-solid fa-right-left, title: توجيهات الوكيل, url: /haproxy/proxies/ }
+          - { icon: fa-solid fa-filter, title: قوائم ACL والعيّنات, url: /haproxy/acls-and-samples/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: دليل الإدارة, url: /haproxy/prerequisites/ }
+          - { icon: fa-solid fa-chart-line, title: واجهة CLI أثناء التشغيل والإحصاءات, url: /haproxy/statistics-and-monitoring/ }
+          - { icon: fa-solid fa-bug, title: التنقيح, url: /haproxy/debugging-and-performance/ }
+          - { icon: fa-solid fa-shield-halved, title: الأمان, url: /haproxy/security/ }
+    - ref: 06 / التوافق والتنسيق
+      title: etcd
+      url: /etcd/
+      motto: مخزن مفاتيح–قيم موزّع متّسق بقوة
+      bullets:
+        - واجهة مفاتيح–قيم متينة مبنية على خوارزمية Raft.
+        - يغطي الإعداد والأمان والصيانة والضبط.
+        - يوثّق واجهات العميل البرمجية والترقيات والتصميم الداخلي.
+      value: ابدأ بالدليل السريع، ثم انتقل إلى دليل التشغيل ومرجع الواجهة البرمجية v3.
+      visual:
+        type: components
+        compact: true
+        columns: 2
+        aria_label: اختصارات توثيق etcd
+        items:
+          - { icon: fa-solid fa-bolt, title: الدليل السريع, url: /etcd/quickstart/ }
+          - { icon: fa-solid fa-download, title: التثبيت, url: /etcd/install/ }
+          - { icon: fa-solid fa-sliders, title: الإعداد, url: /etcd/op-guide/configuration/ }
+          - { icon: fa-solid fa-screwdriver-wrench, title: الصيانة, url: /etcd/op-guide/maintenance/ }
+          - { icon: fa-solid fa-code, title: الواجهة البرمجية, url: /etcd/learning/api/ }
+          - { icon: fa-solid fa-arrow-up-right-dots, title: الترقية إلى 3.7, url: /etcd/upgrades/upgrade_3_7/ }
+
+faq:
+  eyebrow: الأسئلة الشائعة
+  title: بعض الإجابات المفيدة
+  items:
+    - question: من أين أبدأ؟
+      answer: اختر المكوّن الذي يناسب مهمتك الحالية. تفتح كل بطاقة جذر توثيق مستقلًا، ويصل القسم التفصيلي أعلاه مباشرة إلى الصفحات الأكثر استخدامًا فيه.
+      open: true
+    - question: هل PG.CENTER موقع رسمي لـ PostgreSQL؟
+      answer: "لا. هذا قسم توثيق المكوّنات في [PG.CENTER](https://pg.center/) وتحافظ عليه PGSTY. هذه النسخة المجتمعية المستقلة تربط بالمشاريع الأصلية وتحفظ إسنادها وتراخيصها."
+    - question: "ما اللغات المتوفرة؟"
+      answer: "تتوفر المجموعات الست بالإنجليزية والصينية المبسطة والفرنسية واليابانية والألمانية والروسية والعربية والإسبانية. استخدم مبدّل اللغة لفتح الصفحة نفسها بلغة أخرى."
+    - question: كيف يُسند الفضل إلى التوثيق الأصلي؟
+      answer: تنتهي كل صفحة بسطر يذكر العمل المُعدَّل منه، وصاحب حقوقه، وترخيصه، ورابطًا إلى سجل تغييرات تلك الصفحة في هذا الموقع. تجمع [صفحة الإسناد](/ar/attribution/) المراجعات المثبّتة والتراخيص والإشعارات المحفوظة للمجموعات الست.
