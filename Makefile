@@ -13,7 +13,7 @@ export HUGO_MODULE_WORKSPACE = off
 build:
 	env -u HUGO_MODULE_REPLACEMENTS $(HUGO) --environment production \
 		--destination "$(DESTINATION)" --gc --minify --cleanDestinationDir \
-		--printPathWarnings --panicOnWarning --noBuildLock
+		--printPathWarnings --noBuildLock
 
 dev: theme-local
 	HUGO_MODULE_REPLACEMENTS='github.com/pgsty/oink -> $(abspath $(OINK_LOCAL))' \

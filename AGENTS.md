@@ -1,5 +1,12 @@
 # Repository Guide
 
+## OINK build baseline
+
+As of 2026-10-18, this site uses OINK v1.3.2 and Hugo Extended 0.168.0.
+Keep CI and local builds on this baseline. Do not enable `--panicOnWarning`
+or `HUGO_PANICONWARNING`; keep warnings visible and review them. The upstream
+LibSass deprecation warning is accepted. No external Sass compiler is required.
+
 ## Purpose
 
 This repository contains the source for the **PG.CENTER** component documentation
@@ -108,7 +115,7 @@ Git; `public/`, `resources/`, and local caches are ignored.
   documentation links, which must stay in the reader's selected language.
 - Hosting and deployment: **Cloudflare Pages**, connected to the GitHub repository.
 - Cloudflare build command: `make build`; output: `public`; root: the repository root.
-- Set `HUGO_VERSION=0.166.0` and `GO_VERSION=1.27.0` in Cloudflare, matching CI.
+- Set `HUGO_VERSION=0.168.0` and `GO_VERSION=1.27.2` in Cloudflare. CI pins Hugo Extended 0.168.0 and follows stable Go releases; no external Sass is required.
   Set `GOWORK=off` and `HUGO_MODULE_WORKSPACE=off`. Apply the same toolchain
   settings to preview builds; leave `HUGO_MODULE_REPLACEMENTS` unset.
 - Google Analytics 4: `G-D9E4B60JWX`, shared with `pg.center`. Keep the ID in

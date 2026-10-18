@@ -19,8 +19,8 @@ defaults:
     shell: bash
 
 env:
-  GO_VERSION: 1.27.0
-  HUGO_VERSION: 0.166.0
+  GO_VERSION: stable
+  HUGO_VERSION: "0.168.0"
   # Keep shared assets cached through all eight language builds. Eviction at
   # the runner's default limit can republish them and trigger path warnings.
   HUGO_MEMORYLIMIT: "4"
