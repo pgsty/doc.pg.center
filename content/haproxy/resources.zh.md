@@ -10,7 +10,7 @@ aliases:
   - /haproxy/intro/resources/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapters 1 and 5"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapters 1 and 5"
 ---
 
 ## 1. 可用文档 {#section-1}
@@ -49,8 +49,8 @@ HAProxy 的完整文档由以下文件组成。请先查阅与问题相关的文
 
 ## 版本来源 {#edition-provenance}
 
-- **版本：** HAProxy 3.4.6-66，维护分支文档快照
-- **最新稳定版：** HAProxy 3.4.6，标签 `v3.4.6`
-- **源提交：** [`16acce1dac1d`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=16acce1dac1dcf1ad5d654204af3a5d45d0e3de8)
+- **版本：** HAProxy 3.4.7-57，维护分支文档快照
+- **最新稳定版：** HAProxy 3.4.7，标签 `v3.4.7`
+- **源提交：** [`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3)
 - **上游渲染文档：** [docs.haproxy.org/3.4/](https://docs.haproxy.org/3.4/)
 - **本地许可副本：** [HAProxy 许可声明](/third_party/haproxy/LICENSE)与 [GPLv2](/third_party/haproxy/GPL-2.0)

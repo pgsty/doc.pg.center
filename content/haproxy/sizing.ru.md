@@ -10,7 +10,7 @@ aliases:
   - /haproxy/intro/sizing/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 3.6"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3.6"
 ---
 
 Типичные показатели использования CPU: в режиме TCP или HTTP с закрытием соединений на HAProxy приходится 15% времени обработки, а на ядро — 85%; в режиме постоянных соединений HTTP на HAProxy приходится около 30%, а на ядро — 70%. Это означает, что операционная система и её настройка сильно влияют на общую производительность.

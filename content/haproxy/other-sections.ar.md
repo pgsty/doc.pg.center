@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/other-sections/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 12"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 12"
 ---
 
 الأقسام الموضحة أدناه أقل شيوعًا في الاستخدام، وعادةً لا تدعم سوى عدد قليل من المعاملات. لا توجد أي علاقة ضمنية بين أي منها. تبدأ جميعها باستخدام كلمة مفتاحية واحدة. لا يُسمح بأي منها قبل قسم "global". قد يكون دعم بعضها مشروطًا بخيارات البناء (مثل أي شيء متعلق بـ SSL).

@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/filters/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 9"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 9"
 ---
 
 Ниже перечислены официально поддерживаемые фильтры и принимаемые ими параметры. В зависимости от параметров сборки некоторые фильтры могут быть недоступны. Список доступных фильтров выводится командой haproxy -vv.

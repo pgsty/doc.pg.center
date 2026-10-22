@@ -11,7 +11,7 @@ aliases:
   - /haproxy/intro/architecture/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, sections 3–3.2"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, sections 3–3.2"
 ---
 
 製品を指す場合は"HAProxy"、実行可能プログラム、ソフトウェアパッケージ、プロセスを指す場合は"haproxy"と表記します。ただし、実際にはどちらの表記も両方の意味でよく使われ、H-A-Proxyと発音します。ごく初期には、"haproxy"は"high availability proxy"の略で、名前も2語に分けて書かれていましたが、現在は単に"HAProxy"という名前です。

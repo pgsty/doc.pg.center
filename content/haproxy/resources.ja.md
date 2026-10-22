@@ -10,7 +10,7 @@ aliases:
   - /haproxy/intro/resources/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapters 1 and 5"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapters 1 and 5"
 ---
 
 ## 1. 利用可能なドキュメント {#section-1}
@@ -47,8 +47,8 @@ HAProxyのドキュメント一式は、次の文書に収録されています�
 
 ## この版の出典 {#edition-provenance}
 
-- **バージョン：** HAProxy 3.4.6-66、メンテナンスブランチのドキュメントスナップショット
-- **最新の安定版リリース：** HAProxy 3.4.6、タグ `v3.4.6`
-- **ソースコミット：** [`16acce1dac1d`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=16acce1dac1dcf1ad5d654204af3a5d45d0e3de8)
+- **バージョン：** HAProxy 3.4.7-57、メンテナンスブランチのドキュメントスナップショット
+- **最新の安定版リリース：** HAProxy 3.4.7、タグ `v3.4.7`
+- **ソースコミット：** [`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3)
 - **アップストリームの公開版：** [docs.haproxy.org/3.4/](https://docs.haproxy.org/3.4/)
 - **このサイトに保存したライセンス：** [HAProxyのライセンス通知](/third_party/haproxy/LICENSE)と[GPLv2](/third_party/haproxy/GPL-2.0)

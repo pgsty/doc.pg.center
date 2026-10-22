@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/logging/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 8"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 8"
 ---
 
 HAProxyはファイルシステムにアクセスしないため、ログの記録には常にsyslogサーバーを使用します。通常はUDPでログサーバーに送信します。デフォルトのポートは514です。ローカルのsyslogデーモンが動作する127.0.0.1を指定することが多いものの、ネットワーク経由で中央サーバーにログを集約する使い方もあります。特にアクティブ/アクティブ構成でログを到着順に統合したい場合、中央サーバーに集約する利点があります。UNIXソケットでローカルのsyslogデーモンに送信することもできますが、まったく推奨しません。haproxyの実行中にsyslogサーバーが再起動するとソケットが置き換えられ、以後のログが失われるためです。HAProxyはchroot jail内に隔離されているので、新しいソケットに再接続できません。また、UNIXソケットのログバッファは非常に小さく、ごく軽い負荷でもメッセージが失われる事例が運用現場で確認されています。ただし、テスト用途なら使える場合があります。

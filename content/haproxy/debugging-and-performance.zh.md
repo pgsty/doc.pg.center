@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/debugging-and-performance/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 12"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 12"
 ---
 
 当 HAProxy 以 “-d” 选项启动时，它将以前台模式运行，并为每个事件打印一行输出，例如入站连接、连接结束，以及所见的每个请求或响应头行。此调试输出在内容被处理前发出，因此不会考虑本地修改。主要用途是无需运行网络嗅探器即可查看请求和响应。当多个连接并行处理时，输出可读性会降低，但 examples/ 目录中的 “debug2ansi” 和 “debug2html” 脚本通过对输出着色，在此能提供很大帮助。

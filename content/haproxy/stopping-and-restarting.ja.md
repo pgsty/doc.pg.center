@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/stopping-and-restarting/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 4"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 4"
 ---
 
 HAProxyはグレースフル停止と強制停止をサポートしています。強制停止は単純で、haproxyプロセスにSIGTERMシグナルを送ると即座に終了し、確立済みの接続はすべて閉じられます。グレースフル停止は、haproxyプロセスにSIGUSR1シグナルを送ると開始されます。リッスンポートのバインドだけを解除し、既存の接続が閉じられるまで処理を続けます。最後の接続が閉じられると、プロセスが終了します。

@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/memory/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 6"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 6"
 ---
 
 HAProxy verwendet eine einfache und schnelle Speicherverwaltung mit Pools. Da nur wenige verschiedene Objekttypen benötigt werden, ist es wesentlich effizienter, neue Objekte aus einem Pool mit Objekten passender Größe zu entnehmen, als für jede Größe malloc() aufzurufen. Die Pools sind als Stapel nach dem LIFO-Prinzip organisiert. Neu zugeteilte Objekte stammen daher aus den zuletzt zurückgegebenen Objekten, die noch in den CPU-Caches liegen. Pools ähnlicher Größe werden zusammengelegt, um die Speicherfragmentierung zu begrenzen.

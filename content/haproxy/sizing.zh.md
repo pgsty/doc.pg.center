@@ -10,7 +10,7 @@ aliases:
   - /haproxy/intro/sizing/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 3.6"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3.6"
 ---
 
 典型 CPU 使用率数据显示，在 TCP 或 HTTP 关闭模式下，HAProxy 占用约 15% 的处理时间，内核占用约 85%；在 HTTP 持久连接模式下，HAProxy 占用约 30%，内核占用约 70%。这表明操作系统及其调优对整体性能有显著影响。

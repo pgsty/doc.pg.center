@@ -10,7 +10,7 @@ aliases:
   - /haproxy/intro/sizing/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 3.6"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3.6"
 ---
 
 一般的なCPU使用率を見ると、TCPモードまたはHTTP closeモードでは、処理時間の15% をHAProxyが、85% をカーネルが使用します。HTTP keep-aliveモードでは、HAProxyが約30%、カーネルが約70% を使用します。つまり、オペレーティングシステムとそのチューニングは、全体の性能に大きく影響します。

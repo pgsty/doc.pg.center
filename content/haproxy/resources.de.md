@@ -10,7 +10,7 @@ aliases:
   - /haproxy/intro/resources/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapters 1 and 5"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapters 1 and 5"
 ---
 
 ## 1. Verfügbare Dokumentation {#section-1}
@@ -56,8 +56,8 @@ Bei einem vermuteten Sicherheitsproblem ist die Datei doc/security.txt zu beacht
 
 ## Herkunft dieser Ausgabe {#edition-provenance}
 
-- **Ausgabe:** HAProxy 3.4.6-66, Dokumentationsstand des Wartungszweigs
-- **Neueste stabile Version:** HAProxy 3.4.6, Tag `v3.4.6`
-- **Quell-Commit:** [`16acce1dac1d`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=16acce1dac1dcf1ad5d654204af3a5d45d0e3de8)
+- **Ausgabe:** HAProxy 3.4.7-57, Dokumentationsstand des Wartungszweigs
+- **Neueste stabile Version:** HAProxy 3.4.7, Tag `v3.4.7`
+- **Quell-Commit:** [`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3)
 - **Gerenderte Upstream-Handbücher:** [docs.haproxy.org/3.4/](https://docs.haproxy.org/3.4/)
 - **Lokale Lizenzkopien:** [HAProxy-Lizenzhinweis](/third_party/haproxy/LICENSE) und [GPLv2](/third_party/haproxy/GPL-2.0)

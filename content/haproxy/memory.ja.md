@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/memory/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 6"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 6"
 ---
 
 HAProxyは、単純で高速なプール方式のメモリ管理を使用します。扱うオブジェクトの種類が少ないため、サイズごとにmalloc()を呼び出すより、適切なサイズのオブジェクトを持つプールから取得するほうがはるかに効率的です。プールはスタック、つまりLIFOとして構成されます。このため、新たに割り当てるオブジェクトには、解放されたばかりでCPUキャッシュにまだ残っているものを使用します。メモリの断片化を抑えるため、サイズが近いプールは統合されます。

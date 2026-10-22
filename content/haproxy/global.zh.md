@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/global/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 3"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
 ---
 
 “global” 段中的参数为进程级配置，通常与操作系统相关。这些参数通常只需一次性设置，一旦配置正确便无需再修改。部分参数在命令行中也有对应选项。
@@ -1683,6 +1683,8 @@ ssl-dh-param-file <file>
 
 当编译时启用了 OpenSSL 支持时，此设置才可用。它用于设置在使用临时 Diffie-Hellman（DHE）密钥交换进行 SSL/TLS 握手时的默认 DH 参数，适用于所有未显式定义自身参数的 "bind" 语句。若在 bind 证书文件中发现了自定义 DH 参数，则该设置将被覆盖。如果既未通过 ssl-dh-param-file 指定自定义 DH 参数，也未在证书文件中直接设置，除非设置了 tune.ssl.default-dh-param，否则将不会使用 DHE 密码套件。在后一种情况下，将使用指定大小的预定义 DH 参数。自定义参数被认为更加安全，因此建议使用。可通过 OpenSSL 命令 "openssl dhparam `<size>`" 生成自定义 DH 参数，其中 size 至少应为 2048，因为 1024 位的 DH 参数已不再被视为安全。
 
+兼容性：OpenSSL >= 1.1.1。不支持 AWS-LC。
+
 <a id="entry-3-1-ssl-passphrase-cmd"></a>
 
 **`ssl-passphrase-cmd <cmd> <args> ...`**
@@ -1703,6 +1705,8 @@ ssl-propquery <query>
 
 当编译时启用了 OpenSSL 支持且 OpenSSL 版本不低于 3.0 时，此设置才可用。它允许定义一个默认属性字符串，用于在获取算法时指定提供者。其行为与 OpenSSL propquery 选项相同，语法也一致（详见 <https://www.openssl.org/docs/man3.0/man7/property.html>）。例如，若已加载两个提供者（foo 提供者和默认提供者），则使用 propquery "?provider=foo" 可默认选择由 foo 提供者提供的算法实现，若未找到则回退至默认提供者的实现。
 
+兼容性：OpenSSL >= 3.0.0。不支持 AWS-LC。
+
 <a id="entry-3-1-ssl-provider"></a>
 
 **`ssl-provider <name>`**
@@ -1719,6 +1723,8 @@ OpenSSL 提供者的默认搜索路径可在执行 "openssl version -a" 命令�
 
 另请参见 "ssl-propquery" 和 "ssl-provider-path"。
 
+兼容性：OpenSSL >= 3.0.0。不支持 AWS-LC。
+
 <a id="entry-3-1-ssl-provider-path"></a>
 
 **`ssl-provider-path <path>`**
@@ -1728,6 +1734,8 @@ ssl-provider-path <path>
 ```
 
 此设置仅在编译时启用了 OpenSSL 支持且 OpenSSL 版本不低于 3.0 时可用。它允许指定 OpenSSL 用于查找提供者时的搜索路径。其行为与 OPENSSL_MODULES 环境变量相同。该路径将用于后续所有 'ssl-provider' 选项，直至定义新的 'ssl-provider-path' 为止。参见 "ssl-provider"。
+
+兼容性：OpenSSL >= 3.0.0。不支持 AWS-LC。
 
 <a id="entry-3-1-ssl-load-extra-del-ext"></a>
 
@@ -1812,6 +1820,8 @@ ssl-security-level <number>
 默认值取决于所用 OpenSSL 版本、发行版以及库的编译方式。
 
 该指令要求至少使用 OpenSSL 1.1.1 版本。
+
+兼容性：OpenSSL >= 1.1.1。不支持 AWS-LC。
 
 <a id="entry-3-1-ssl-server-verify"></a>
 
@@ -2335,6 +2345,8 @@ ssl-engine <name> [algo <comma-separated list of algorithms>]
 
 HAProxy 版本 2.6 已禁用默认构建中对引擎的支持。此选项仅在 HAProxy 编译时启用了相关支持后才可用。如需使用 ssl-engine，可使用 USE_ENGINE=1 标志重新编译 HAProxy。
 
+兼容性：OpenSSL >= 1.1.1。不支持 AWS-LC。
+
 <a id="entry-3-2-ssl-mode-async"></a>
 
 **`ssl-mode-async`**
@@ -2344,6 +2356,8 @@ ssl-mode-async
 ```
 
 向 SSL 上下文添加 SSL_MODE_ASYNC 模式。若使用支持异步的 SSL 引擎，此模式可启用异步 TLS I/O 操作。当前实现支持最多 32 个引擎。OpenSSL 的 ASYNC API 不支持移动读/写缓冲区，且与 HAProxy 的缓冲区管理机制不兼容。因此，异步模式在读/写操作中被禁用（仅在初始连接和重新协商握手阶段启用）。
+
+兼容性：OpenSSL >= 1.1.1。不支持 AWS-LC。
 
 <a id="entry-3-2-tune-applet-zero-copy-forwarding"></a>
 
@@ -3731,6 +3745,8 @@ tune.ssl.default-dh-param <number>
 ```
 
 设置在使用 DHE 密钥交换时生成临时 Diffie-Hellman 密钥所用的 Diffie-Hellman 参数的最大尺寸。最终尺寸将尝试匹配服务器 RSA（或 DSA）密钥的尺寸（例如，2048 位 RSA 密钥对应 2048 位临时 DH 密钥），但不会超过此最大值。仅允许 1024 或更高数值。较高数值会增加 CPU 负载，且大于 1024 位的值不被 Java 7 及更早客户端支持。若通过证书文件直接提供静态 Diffie-Hellman 参数，或使用 ssl-dh-param-file 参数指定，则此值不生效。若未定义 default-dh-param 且未设置 ssl-dh-param-file，且给定前端的服务器 PEM 文件未指定其自身的 DH 参数，则该前端将无法使用 DHE 密码套件。
+
+兼容性：OpenSSL >= 1.1.1。不支持 AWS-LC。
 
 <a id="entry-3-2-tune-ssl-force-private-cache"></a>
 

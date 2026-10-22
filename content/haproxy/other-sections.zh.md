@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/other-sections/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 12"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 12"
 ---
 
 下述配置段较少使用，通常仅支持少量参数。它们之间不存在隐式关联。所有段均通过单一关键字启动。在 "global" 段之前禁止出现任何此类段。部分段的支持可能受构建选项限制（例如与 SSL 相关的任何功能）。

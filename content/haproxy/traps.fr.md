@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/traps/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 11"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 11"
 ---
 
 Parfois, une personne signale que, après un redémarrage du système, le service HAProxy n’est pas démarré, et qu’une fois lancé manuellement, il fonctionne correctement. La plupart de ces utilisateurs exécutent un mécanisme d’adresse IP en cluster, comme keepalived, afin d’attribuer l’adresse IP du service uniquement au nœud principal, et alors qu’il fonctionnait auparavant lorsqu’ils liaient HAProxy à l’adresse 0.0.0.0, il a cessé de fonctionner après avoir lié celui-ci à l’adresse IP virtuelle. Ce qui se produit ici, c’est que, lors du démarrage du service, l’adresse IP virtuelle n’est pas encore détenue par le nœud local, si bien que lorsque HAProxy tente de se lier à cette adresse, le système la rejette car elle n’est pas une adresse locale. La solution ne consiste pas à retarder le démarrage du service HAProxy (car cela ne résisterait pas à un redémarrage), mais plutôt à configurer correctement le système afin de permettre la liaison à des adresses non locales. Cela peut être facilement réalisé sous Linux en définissant le paramètre sysctl net.ipv4.ip_nonlocal_bind à 1. Cette configuration est également nécessaire pour intercepter de manière transparente le trafic IP qui traverse HAProxy pour une adresse cible spécifique.

@@ -10,14 +10,16 @@ aliases:
   - /haproxy/configuration/acls-and-samples/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 7"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 7"
 ---
 
 HAProxy est capable d'extraire des données des flux de requêtes ou de réponses, des informations client ou serveur, des tables, des informations environnementales, etc. L'opération d'extraction de ces données est appelée « récupération d'un échantillon ». Une fois récupérés, ces échantillons peuvent être utilisés à diverses fins, par exemple comme clé dans une table de persistance, mais les usages les plus courants consistent à les comparer à des données constantes prédéfinies appelées modèles.
 
 ## 7.1. Notions de base sur les ACL {#section-7-1}
 
-Les listes de contrôle d'accès (ACL) consistent à déclarer une méthode nommée permettant de comparer une information quelconque à une liste de modèles prédéfinis. Elles doivent être considérées comme pratiquement équivalentes aux fonctions dans la plupart des langages de programmation, dans la mesure où leur déclaration les rend disponibles pour être appelées ultérieurement lorsqu'elles sont nécessaires. Leur évaluation ne retourne qu'une correspondance ou un manque de correspondance, ce qui est comparable aux valeurs booléennes dans de nombreux langages de programmation. Contrairement aux fonctions dans les langages de programmation, les ACL peuvent être surchargées autant de fois que nécessaire afin de définir des méthodes de correspondance supplémentaires pour le même nom. Dans ce cas, toutes seront évaluées dans l'ordre de leur déclaration jusqu'à ce qu'une correspondance soit trouvée.
+Les listes de contrôle d'accès (ACL) consistent à déclarer une méthode nommée permettant de comparer une information quelconque à une liste de modèles prédéfinis. Elles doivent être considérées comme pratiquement équivalentes aux fonctions dans la plupart des langages de programmation, dans la mesure où leur déclaration les rend disponibles pour être appelées ultérieurement lorsqu'elles sont nécessaires. Leur évaluation ne retourne qu'une correspondance ou un manque de correspondance, ce qui est comparable aux valeurs booléennes dans de nombreux langages de programmation. Contrairement aux fonctions dans les langages de programmation, les ACL peuvent être surchargées autant de fois que nécessaire afin de définir des méthodes de correspondance supplémentaires pour le même nom. Dans ce cas, toutes seront évaluées dans l'ordre de leur déclaration jusqu'à ce qu'une correspondance soit trouvée. Autrement dit, plusieurs déclarations portant le même nom d'ACL sont combinées par un OU logique (OR).
+
+Chaque ligne de déclaration ACL ne doit contenir qu'un seul mot-clé de correspondance ACL, suivi d'une ou de plusieurs valeurs de modèle. Il est interdit d'utiliser plusieurs mots-clés de correspondance et de les combiner avec des opérateurs logiques or/and sur une même ligne de déclaration ACL.
 
 L'utilisation des listes de contrôle d'accès (ACL) offre une solution souple pour effectuer un commutage de contenu et, plus généralement, prendre des décisions fondées sur le contenu extrait de la requête, de la réponse ou d'un état environnemental. Le principe est simple :
 
@@ -5895,6 +5897,8 @@ ssl_bc_is_resumed : boolean Retourne true lorsque la connexion vers le serveur b
 
 ssl_bc_npn : string Cette option extrait le champ Next Protocol Negotiation d'une connexion sortante effectuée via une couche transport TLS. Le résultat est une chaîne contenant le nom du protocole négocié avec le serveur. La bibliothèque SSL doit avoir été compilée avec le support des extensions TLS activé (vérifiez haproxy -vv). Notez que l'extension TLS NPN n'est pas annoncée à moins que le mot-clé "npn" sur la ligne "server" ne spécifie une liste de protocoles. De plus, rien ne force le serveur à choisir un protocole parmi cette liste ; un autre protocole peut être utilisé. Veuillez noter que l'extension TLS NPN a été remplacée par ALPN. Cette option peut être utilisée dans un ensemble de règles tcp-check ou http-check.
 
+Compatibilité : OpenSSL >= 1.0.1. Non pris en charge avec AWS-LC.
+
 ssl_bc_protocol : string Retourne le nom du protocole utilisé lors de la connexion sortante établie sur une couche transport SSL/TLS. Peut être utilisé dans un ensemble de règles tcp-check ou http-check.
 
 ssl_bc_server_handshake_traffic_secret : string
@@ -6266,6 +6270,8 @@ ssl_fc_has_sni : boolean Cette option vérifie la présence d'une extension TLS 
 ssl_fc_is_resumed : boolean Retourne true si la session SSL/TLS a été rétablie grâce à l'utilisation du cache de session SSL ou des tickets TLS sur une connexion entrante via une couche de transport SSL/TLS.
 
 ssl_fc_npn : string Cette directive extrait le champ Next Protocol Negotiation d'une connexion entrante effectuée via une couche transport TLS et déchiffrée localement par HAProxy. Le résultat est une chaîne contenant le nom du protocole annoncé par le client. La bibliothèque SSL doit avoir été compilée avec le support des extensions TLS activé (vérifiez haproxy -vv). Notez que l'extension TLS NPN n'est pas annoncée à moins que le mot-clé "npn" dans la ligne "bind" ne spécifie une liste de protocoles. En outre, rien n'oblige le client à choisir un protocole parmi cette liste ; un autre protocole peut être demandé. Veuillez noter que l'extension TLS NPN a été remplacée par ALPN.
+
+Compatibilité : OpenSSL >= 1.0.1. Non pris en charge avec AWS-LC.
 
 ssl_fc_protocol : string Retourne le nom du protocole utilisé lorsque la connexion entrante a été établie sur une couche transport SSL/TLS.
 

@@ -1,5 +1,5 @@
 ---
-title: "HAProxy 3.4.6-66 中文文档"
+title: "HAProxy 3.4.7-57 中文文档"
 linkTitle: HAProxy
 weight: 50
 description: "HAProxy 3.4 入门、配置与管理三套完整手册的简体中文译本"
@@ -21,9 +21,9 @@ cascade:
 
 **HAProxy** 是一款免费、快速、可靠的反向代理，适用于高可用、TCP 与 HTTP 负载均衡及应用流量管理。本组件收录三套 HAProxy 3.4 核心手册的完整中文译文，并将其重新编排为适合 OINK 阅读器的 Markdown 扁平阅读顺序。
 
-本版对齐官方英文维护分支手册的 `3.4.6-66` 快照。最新稳定版为 `3.4.6`（`v3.4.6`）；
+本版对齐官方英文维护分支手册的 `3.4.7-57` 快照。最新稳定版为 `3.4.7`（`v3.4.7`）；
 该快照包含稳定版发布之后的文档变更，源文件固定于提交
-[`16acce1dac1d`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=16acce1dac1dcf1ad5d654204af3a5d45d0e3de8)。
+[`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3)。
 
 ## 选择手册 {#choose-a-manual}
 
@@ -37,7 +37,7 @@ cascade:
 | 手册 | 上游篇幅 | 本站编排 |
 | --- | ---: | ---: |
 | 入门指南 | 1,695 行 | 9 个扁平主题页 |
-| 配置手册 | 33,216 行 | 12 个扁平章节页 |
+| 配置手册 | 33,246 行 | 12 个扁平章节页 |
 | 管理指南 | 5,305 行 | 13 个扁平章节页 |
 
 全部 34 个阅读页面均直接位于 HAProxy 组件根目录下。侧边栏使用三个不可点击的分组占位页分隔三套手册，不增加目录层级，也不占用前后翻页节点。

@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/debugging-and-performance/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 12"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 12"
 ---
 
 HAProxyを"-d"オプションで起動すると、フォアグラウンドで動作し、着信接続や接続の終了などのイベントごと、および受信したリクエスト・レスポンスのヘッダー行ごとに1行を出力します。このデバッグ出力は内容を処理する前に生成されるため、ローカルでの変更は反映されません。主な用途は、ネットワークスニファーを使わずにリクエストとレスポンスを表示することです。複数の接続を並列に処理すると出力は読みにくくなりますが、examples/ディレクトリにある"debug2ansi"と"debug2html"スクリプトで色分けすると、かなり読みやすくなります。

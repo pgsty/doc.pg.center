@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/logging/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 8"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 8"
 ---
 
 Eine der Stärken von HAProxy sind seine präzisen Protokolle. Sie bieten vermutlich die detailliertesten Informationen, die bei einem solchen Produkt verfügbar sind. Das ist bei der Fehlerbehebung in komplexen Umgebungen sehr wichtig. Zu den standardmäßig protokollierten Angaben gehören Client-Ports, Zeitmessungen der TCP/HTTP-Zustände, der genaue Stream-Zustand und die genaue Ursache bei der Beendigung, Angaben zu Entscheidungen über die Weiterleitung an einen Server und natürlich die Möglichkeit, beliebige Header zu erfassen.

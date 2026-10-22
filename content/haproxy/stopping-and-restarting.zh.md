@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/stopping-and-restarting/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 4"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 4"
 ---
 
 HAProxy 支持优雅停止和强制停止。强制停止操作简单：当向 HAProxy 进程发送 SIGTERM 信号时，进程立即退出，所有已建立的连接将被关闭。优雅停止通过向 HAProxy 进程发送 SIGUSR1 信号触发，其操作仅包括解除对监听端口的绑定，但会继续处理现有连接，直至所有连接关闭。当最后一个连接关闭后，进程退出。

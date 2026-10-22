@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/security/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 13"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 13"
 ---
 
 HAProxy est conçu pour s'exécuter avec des privilèges très limités. La méthode standard consiste à l'isoler dans une prison chroot et à supprimer ses privilèges pour qu'il s'exécute en tant qu'utilisateur non root, sans aucun droit à l'intérieur de cette prison, afin qu'en cas de découverte d'une vulnérabilité future, sa compromission n'affecte pas le reste du système.

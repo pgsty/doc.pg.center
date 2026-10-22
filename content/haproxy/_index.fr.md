@@ -1,5 +1,5 @@
 ---
-title: "Documentation HAProxy 3.4.6-66"
+title: "Documentation HAProxy 3.4.7-57"
 linkTitle: HAProxy
 weight: 50
 description: "Édition Markdown complète en français des manuels HAProxy 3.4 : Démarrage, Configuration et Gestion"
@@ -21,7 +21,7 @@ cascade:
 
 **HAProxy** est un proxy inverse gratuit, rapide et fiable pour la haute disponibilité, la répartition de charge TCP et HTTP, ainsi que la gestion du trafic applicatif. Ce composant propose la traduction française intégrale des trois manuels principaux de HAProxy 3.4, réorganisés en une séquence de pages Markdown destinée à OINK.
 
-Cette édition suit les manuels anglais officiels de la branche de maintenance à l’instantané `3.4.6-66`. La dernière version stable est `3.4.6` (`v3.4.6`). L’instantané comprend des modifications de documentation postérieures à cette version. Sa source exacte est le commit [`16acce1dac1d`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=16acce1dac1dcf1ad5d654204af3a5d45d0e3de8).
+Cette édition suit les manuels anglais officiels de la branche de maintenance à l’instantané `3.4.7-57`. La dernière version stable est `3.4.7` (`v3.4.7`). L’instantané comprend des modifications de documentation postérieures à cette version. Sa source exacte est le commit [`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3).
 
 ## Choisissez un manuel {#choose-a-manual}
 
@@ -35,7 +35,7 @@ Cette édition suit les manuels anglais officiels de la branche de maintenance �
 | Manuel | Source amont | Organisation locale |
 | --- | ---: | ---: |
 | Guide de démarrage | 1 695 lignes | 9 pages plates de sujets |
-| Manuel de configuration | 33 216 lignes | 12 pages plates de chapitres |
+| Manuel de configuration | 33 246 lignes | 12 pages plates de chapitres |
 | Guide de gestion | 5 305 lignes | 13 pages plates de chapitres |
 
 Les 34 pages de lecture sont directement situées sous la racine du composant HAProxy. Trois espaces réservés séparateurs non liés divisent les manuels dans la barre latérale sans ajouter de niveaux de répertoire ni d'arrêts de pagination.

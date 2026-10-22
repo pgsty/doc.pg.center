@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/memory/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 6"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 6"
 ---
 
 HAProxy 采用简单、快速的池式内存管理。由于 HAProxy 只使用少量不同的对象类型，从已经包含适当大小对象的内存池中获取新对象，远比针对每种大小分别调用 malloc() 高效。内存池按栈或 LIFO 方式组织，新分配的对象会优先取自刚刚释放、仍在 CPU 缓存中的对象。大小相近的内存池会合并，以减少内存碎片。

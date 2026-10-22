@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/stopping-and-restarting/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 4"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 4"
 ---
 
 HAProxy поддерживает плавную и жёсткую остановку. Жёсткая остановка проста: при отправке процессу haproxy сигнала SIGTERM он немедленно завершается, а все установленные соединения закрываются. Плавная остановка запускается сигналом SIGUSR1, отправленным процессу haproxy. При этом процесс лишь освобождает прослушиваемые порты, продолжая обрабатывать существующие соединения до их закрытия. После закрытия последнего соединения процесс завершается.

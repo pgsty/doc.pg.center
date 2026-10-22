@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/acls-and-samples/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 7"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 7"
 ---
 
 HAProxy es capaz de extraer datos de los flujos de solicitudes o respuestas, de la información del
@@ -29,7 +29,9 @@ necesiten. Su evaluación solo devuelve una coincidencia o una no coincidencia, 
 a los booleanos en muchos lenguajes de programación. Al contrario que las funciones en los lenguajes
 de programación, las ACL pueden sobrecargarse tantas veces como se necesite para definir métodos de
 coincidencia adicionales para el mismo nombre. En este caso, todas se evaluarán en su orden de
-declaración hasta que una coincida.
+declaración hasta que una coincida. En otras palabras, las declaraciones que comparten el mismo nombre de ACL se combinan mediante un OR lógico.
+
+Cada línea de declaración de ACL debe contener una sola palabra clave de coincidencia de ACL, seguida de uno o varios valores de patrón. No se permite usar varias palabras clave de coincidencia y combinarlas mediante operadores lógicos or/and en una misma línea de declaración de ACL.
 
 El uso de ACL proporciona una solución flexible para realizar conmutación de contenido y, en
 general, para tomar decisiones basadas en el contenido extraído de la solicitud, la respuesta o
@@ -7605,6 +7607,8 @@ Además, nada obliga al servidor a escoger un protocolo de esta lista; puede usa
 Ten en cuenta que la extensión TLS NPN fue reemplazada por ALPN. Puede usarse en un conjunto de
 reglas tcp-check o http-check.
 
+Compatibilidad: OpenSSL >= 1.0.1. No compatible con AWS-LC.
+
 ssl_bc_protocol: string Devuelve el nombre del protocolo usado cuando la conexión saliente se
 realizó sobre una capa de transporte SSL/TLS. Puede usarse en un conjunto de reglas tcp-check o
 http-check.
@@ -8160,6 +8164,8 @@ cuenta que la extensión TLS NPN no se anuncia salvo que la palabra clave "npn" 
 especifique una lista de protocolos. Además, nada obliga al cliente a escoger un protocolo de esta
 lista; puede solicitarse cualquier otro. Ten en cuenta que la extensión TLS NPN fue reemplazada
 por ALPN.
+
+Compatibilidad: OpenSSL >= 1.0.1. No compatible con AWS-LC.
 
 ssl_fc_protocol: string Devuelve el nombre del protocolo usado cuando la conexión entrante se
 realizó sobre una capa de transporte SSL/TLS.

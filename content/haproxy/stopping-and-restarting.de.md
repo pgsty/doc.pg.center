@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/stopping-and-restarting/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 4"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 4"
 ---
 
 HAProxy unterstützt ein geordnetes und ein sofortiges Stoppen. Beim sofortigen Stoppen genügt das Signal SIGTERM an den haproxy-Prozess: Er beendet sich unmittelbar und schließt alle bestehenden Verbindungen. Das geordnete Stoppen wird durch SIGUSR1 ausgelöst. Dabei gibt HAProxy nur die lauschenden Ports frei und verarbeitet die bestehenden Verbindungen weiter, bis sie geschlossen werden. Sobald die letzte Verbindung geschlossen ist, beendet sich der Prozess.

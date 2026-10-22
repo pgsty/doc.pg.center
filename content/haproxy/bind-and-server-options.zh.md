@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/bind-and-server-options/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 5"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
 ---
 
 “bind”、“server” 和 “default-server” 关键字支持多种设置，具体取决于构建选项以及 HAProxy 所基于的系统。这些设置通常由一个单词组成，有时后接一个值，与 “bind” 或 “server” 语句位于同一行。所有这些选项均在本节中描述。
@@ -800,6 +800,8 @@ npn <protocols>
 ```
 
 启用 NPN TLS 扩展，并在 NPN 基础上通告指定的协议列表作为支持的协议。协议列表由逗号分隔的协议名称组成，例如：http/1.1,http/1.0（不带引号）。此功能要求 SSL 库在编译时启用了 TLS 扩展支持（请通过 haproxy -vv 检查）。请注意，NPN 扩展已被 ALPN 扩展取代（参见 "alpn" 关键字），但 ALPN 仅在 OpenSSL 1.0.2 及以上版本中可用。若需在较旧版本的 OpenSSL 上使用 HTTP/2，NPN 仍可使用，因为截至本文撰写时，大多数客户端仍支持该功能。尽管可以同时启用 NPN 和 ALPN，但通常仅用于测试目的，实际并无必要。
+
+兼容性：OpenSSL >= 1.0.1。不支持 AWS-LC。
 
 <a id="entry-5-1-prefer-client-ciphers"></a>
 
@@ -2297,6 +2299,8 @@ npn <protocols>
 可用于以下上下文：tcp、http
 
 启用 NPN TLS 扩展，并在 NPN 基础上通告指定的协议列表作为支持协议。协议列表由逗号分隔的协议名称组成，例如：http/1.1,http/1.0（不带引号）。此功能要求 SSL 库在编译时启用了 TLS 扩展支持（请通过 haproxy -vv 检查）。请注意，NPN 扩展已被 ALPN 扩展取代（参见 "alpn" 关键字），但 ALPN 仅在 OpenSSL 1.0.2 及以上版本中可用。
+
+兼容性：OpenSSL >= 1.0.1。不支持 AWS-LC。
 
 <a id="entry-5-2-observe"></a>
 

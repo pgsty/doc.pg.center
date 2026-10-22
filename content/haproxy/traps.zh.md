@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/traps/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 11"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 11"
 ---
 
 有时会有人报告：系统重启后 HAProxy 服务没有启动，但手动启动又能正常工作。这通常出现在使用 keepalived 等集群 IP 地址机制、只把服务 IP 分配给主节点的环境中。HAProxy 绑定 0.0.0.0 时一切正常，改为绑定虚拟 IP 后却无法启动。原因是服务启动时，本地节点尚未持有该虚拟 IP；HAProxy 尝试绑定时，系统会因其不是本地 IP 地址而拒绝操作。正确的解决办法不是推迟 HAProxy 服务启动——这无法应对服务重启——而是把系统配置为允许绑定非本地地址。在 Linux 上，将 net.ipv4.ip_nonlocal_bind sysctl 设为 1 即可。如果需要透明截获经 HAProxy 转发到特定目标地址的 IP 流量，也必须启用此设置。

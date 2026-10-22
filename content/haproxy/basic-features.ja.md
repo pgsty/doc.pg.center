@@ -10,7 +10,7 @@ aliases:
   - /haproxy/intro/basic-features/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, sections 3.3–3.3.8"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, sections 3.3–3.3.8"
 ---
 
 このセクションでは、HAProxyが実装する機能をいくつか紹介します。現代のロードバランサーなら一般に備えていることが期待されるものもあれば、HAProxyのアーキテクチャーから直接得られる利点もあります。より高度な機能は、次のセクションで詳しく説明します。

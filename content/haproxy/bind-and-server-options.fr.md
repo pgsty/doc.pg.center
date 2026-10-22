@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/bind-and-server-options/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 5"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
 ---
 
 Les mots-clés « bind », « server » et « default-server » prennent en charge un certain nombre de paramètres, selon certaines options de compilation et le système sur lequel HAProxy a été compilé. Ces paramètres sont généralement composés d’un mot, parfois suivi d’une valeur, écrits sur la même ligne que la directive « bind » ou « server ». Tous ces paramètres sont décrits dans cette section.
@@ -819,6 +819,8 @@ npn <protocols>
 
 Cela active l'extension TLS NPN et annonce la liste de protocoles spécifiée comme prise en charge au-dessus de NPN. La liste de protocoles est constituée d'une liste séparée par des virgules de noms de protocoles, par exemple :
 "http/1.1,http/1.0" (sans guillemets). Cela nécessite que la bibliothèque SSL soit compilée avec le support des extensions TLS activé (vérifiez avec haproxy -vv). Notez que l'extension NPN a été remplacée par l'extension ALPN (voir le mot-clé « alpn »), bien que celle-ci ne soit disponible qu'à partir d'OpenSSL 1.0.2. Si HTTP/2 est requis sur une version plus ancienne d'OpenSSL, NPN peut encore être utilisé, la plupart des clients le supportant encore au moment de la rédaction de ce document. Il est possible d'activer à la fois NPN et ALPN, bien que cela n'ait probablement pas de sens en dehors d'un contexte de test.
+
+Compatibilité : OpenSSL >= 1.0.1. Non pris en charge avec AWS-LC.
 
 <a id="entry-5-1-prefer-client-ciphers"></a>
 
@@ -2325,6 +2327,8 @@ Peut être utilisé dans les contextes suivants : tcp, http
 
 Cela active l'extension TLS NPN et annonce la liste de protocoles spécifiée comme prise en charge au-dessus de NPN. La liste de protocoles est constituée d'une liste séparée par des virgules de noms de protocoles, par exemple :
 "http/1.1,http/1.0" (sans guillemets). Cela nécessite que la bibliothèque SSL soit compilée avec le support des extensions TLS activé (vérifiez avec haproxy -vv). Notez que l'extension NPN a été remplacée par l'extension ALPN (voir le mot-clé « alpn »), bien que celle-ci ne soit disponible qu'à partir d'OpenSSL 1.0.2.
+
+Compatibilité : OpenSSL >= 1.0.1. Non pris en charge avec AWS-LC.
 
 <a id="entry-5-2-observe"></a>
 

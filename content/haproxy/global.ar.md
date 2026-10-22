@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/global/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 3"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
 ---
 
 المعاملات في قسم «global» تنطبق على العملية بأكملها وكثيرًا ما تكون خاصة بنظام التشغيل. تُضبط عمومًا
@@ -2214,6 +2214,8 @@ ssl-dh-param-file <file>
 «openssl dhparam `<size>`»، حيث يجب أن يكون الحجم 2048 على الأقل، إذ لا ينبغي اعتبار معاملات
 DH بحجم 1024-بت آمنة بعد الآن.
 
+التوافق: `OpenSSL >= 1.1.1`. غير مدعوم مع `AWS-LC`.
+
 <a id="entry-3-1-ssl-passphrase-cmd"></a>
 
 **`ssl-passphrase-cmd <cmd> <args> ...`**
@@ -2245,6 +2247,8 @@ ssl-propquery <query>
 الخوارزميات التي يوفرها الموفر foo افتراضيًا، والرجوع إلى تنفيذ الموفر الافتراضي إن لم
 يُوجد.
 
+التوافق: `OpenSSL >= 3.0.0`. غير مدعوم مع `AWS-LC`.
+
 <a id="entry-3-1-ssl-provider"></a>
 
 **`ssl-provider <name>`**
@@ -2269,6 +2273,8 @@ OpenSSL بتعريف الموفرات الواجب تحميلها مباشرةً
 
 انظر أيضًا «ssl-propquery» و«ssl-provider-path».
 
+التوافق: `OpenSSL >= 3.0.0`. غير مدعوم مع `AWS-LC`.
+
 <a id="entry-3-1-ssl-provider-path"></a>
 
 **`ssl-provider-path <path>`**
@@ -2281,6 +2287,8 @@ ssl-provider-path <path>
 3.0 على الأقل. يسمح بتحديد مسار البحث الذي سيستخدمه OpenSSL للبحث عن الموفرات. يعمل بالطريقة
 نفسها التي يعمل بها متغير البيئة OPENSSL_MODULES. سيُستخدم لأي خيار 'ssl-provider' لاحق أو إلى
 أن يُعرَّف 'ssl-provider-path' جديد. انظر أيضًا «ssl-provider».
+
+التوافق: `OpenSSL >= 3.0.0`. غير مدعوم مع `AWS-LC`.
 
 <a id="entry-3-1-ssl-load-extra-del-ext"></a>
 
@@ -2388,6 +2396,8 @@ ssl-security-level <number>
 تعتمد القيمة الافتراضية على إصدار OpenSSL لديك والتوزيعة وكيف جُمِّعت المكتبة.
 
 يتطلب هذا التوجيه OpenSSL 1.1.1 على الأقل.
+
+التوافق: `OpenSSL >= 1.1.1`. غير مدعوم مع `AWS-LC`.
 
 <a id="entry-3-1-ssl-server-verify"></a>
 
@@ -3104,6 +3114,8 @@ PKEY_ASN1. هذا هو التنسيق نفسه الذي يستخدمه ملف إ
 يكون HAProxy مبنيًا بدعم له. وفي حالة الحاجة إلى ssl-engine يمكن إعادة بناء HAProxy
 بالعلامة USE_ENGINE=1.
 
+التوافق: `OpenSSL >= 1.1.1`. غير مدعوم مع `AWS-LC`.
+
 <a id="entry-3-2-ssl-mode-async"></a>
 
 **`ssl-mode-async`**
@@ -3117,6 +3129,8 @@ ssl-mode-async
 تدعم Openssl ASYNC API نقل مخازن القراءة/الكتابة وهي غير متوافقة مع إدارة المخازن المؤقتة
 لدى HAProxy. لذا فإن الوضع غير المتزامن معطل في عمليات القراءة/الكتابة (لا يفعل إلا أثناء
 المصافحات الأولية ومصافحات إعادة التفاوض).
+
+التوافق: `OpenSSL >= 1.1.1`. غير مدعوم مع `AWS-LC`.
 
 <a id="entry-3-2-tune-applet-zero-copy-forwarding"></a>
 
@@ -5107,6 +5121,8 @@ Diffie-Hellman الثابتة إما مباشرة في ملف الشهادة أ�
 إذا لم يكن هناك default-dh-param ولا ssl-dh-param-file معرفين، وإذا لم يحدد ملف PEM
 الخاص بخادم واجهة أمامية معينة معاملات DH الخاصة به، فستكون خوارزميات تشفير DHE غير
 متاحة لهذه الواجهة الأمامية.
+
+التوافق: `OpenSSL >= 1.1.1`. غير مدعوم مع `AWS-LC`.
 
 <a id="entry-3-2-tune-ssl-force-private-cache"></a>
 

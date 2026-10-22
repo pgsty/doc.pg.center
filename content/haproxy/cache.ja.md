@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/cache/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 6"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 6"
 ---
 
 HAProxyは、faviconやcssなどの小さなオブジェクトを対象とするキャッシュを提供します。RAM上で動作する、最小限の保守で済む簡素なキャッシュです。

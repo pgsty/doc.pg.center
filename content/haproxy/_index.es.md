@@ -1,5 +1,5 @@
 ---
-title: "Documentación de HAProxy 3.4.6-66"
+title: "Documentación de HAProxy 3.4.7-57"
 linkTitle: HAProxy
 weight: 50
 description: "Edición Markdown completa en español de las guías de inicio, configuración y gestión de HAProxy 3.4"
@@ -23,10 +23,10 @@ cascade:
 HTTP, y la gestión del tráfico de aplicaciones. Este componente contiene la traducción completa al español de
 los tres manuales principales de HAProxy 3.4, reorganizada como una secuencia de lectura plana en Markdown para OINK.
 
-Esta edición sigue los manuales oficiales en inglés de la rama de mantenimiento en la instantánea `3.4.6-66`.
-La última versión estable es `3.4.6` (`v3.4.6`); la instantánea incluye cambios de documentación realizados
+Esta edición sigue los manuales oficiales en inglés de la rama de mantenimiento en la instantánea `3.4.7-57`.
+La última versión estable es `3.4.7` (`v3.4.7`); la instantánea incluye cambios de documentación realizados
 después de esa versión. Su fuente exacta es el commit
-[`16acce1dac1d`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=16acce1dac1dcf1ad5d654204af3a5d45d0e3de8).
+[`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3).
 
 ## Elige un manual {#choose-a-manual}
 
@@ -40,7 +40,7 @@ después de esa versión. Su fuente exacta es el commit
 | Manual | Fuente upstream | Organización local |
 | --- | ---: | ---: |
 | Guía de inicio | 1,695 líneas | 9 páginas planas de temas |
-| Manual de configuración | 33,216 líneas | 12 páginas planas de capítulos |
+| Manual de configuración | 33,246 líneas | 12 páginas planas de capítulos |
 | Guía de gestión | 5,305 líneas | 13 páginas planas de capítulos |
 
 Las 34 páginas de lectura se encuentran directamente bajo la raíz del componente HAProxy. Tres marcadores divisores

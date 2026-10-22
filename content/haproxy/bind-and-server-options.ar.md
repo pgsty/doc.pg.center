@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/bind-and-server-options/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 5"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
 ---
 
 تدعم الكلمات المفتاحية "bind" و "server" و "default-server" عددًا من الإعدادات اعتمادًا على بعض خيارات
@@ -1024,6 +1024,8 @@ SSL مع تفعيل دعم امتدادات TLS (تحقق بـ haproxy -vv). ل�
 الكلمة المفتاحية "alpn")، إلا أن الأخير لا يتوفر إلا بدءًا من OpenSSL 1.0.2. إذا رُغب في HTTP/2 على
 إصدار أقدم من OpenSSL، فقد يظل استخدام NPN ممكنًا لأن معظم العملاء ما زالوا يدعمونه وقت كتابة هذا.
 يمكن تفعيل NPN و ALPN معًا رغم أنه لا معنى لذلك على الأرجح خارج نطاق الاختبار.
+
+التوافق: `OpenSSL >= 1.0.1`. غير مدعوم مع `AWS-LC`.
 
 <a id="entry-5-1-prefer-client-ciphers"></a>
 
@@ -2951,6 +2953,8 @@ NPN. تتكون قائمة البروتوكولات من قائمة أسماء �
 تمكين دعم امتدادات TLS (تحقق بـ haproxy -vv). لاحظ أن امتداد NPN قد استُبدل
 بامتداد ALPN (انظر الكلمة المفتاحية "alpn")، رغم أن الأخير متاح فقط بدءًا من OpenSSL
 1.0.2.
+
+التوافق: `OpenSSL >= 1.0.1`. غير مدعوم مع `AWS-LC`.
 
 <a id="entry-5-2-observe"></a>
 

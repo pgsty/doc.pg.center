@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/global/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 3"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
 ---
 
 Parameter im Abschnitt "global" gelten für den gesamten Prozess und sind häufig vom Betriebssystem
@@ -1956,6 +1956,8 @@ ssl-dh-param-file <file>
 
 Diese Einstellung ist nur verfügbar, wenn die Unterstützung für OpenSSL einkompiliert wurde. Sie legt für alle "bind"-Zeilen ohne eigene ausdrückliche Definition die standardmäßigen DH-Parameter fest, die beim SSL/TLS-Handshake mit ephemerem Diffie-Hellman-Schlüsselaustausch (DHE) verwendet werden. Benutzerdefinierte DH-Parameter in einer bind-Zertifikatsdatei haben, sofern vorhanden, Vorrang. Wenn weder mit ssl-dh-param-file noch direkt in der Zertifikatsdatei benutzerdefinierte DH-Parameter angegeben sind, werden keine DHE-Verschlüsselungsverfahren verwendet, es sei denn, tune.ssl.default-dh-param ist gesetzt. Im letzteren Fall werden vordefinierte DH-Parameter der angegebenen Größe verwendet. Benutzerdefinierte Parameter gelten als sicherer, daher wird ihre Verwendung empfohlen. Sie können mit dem OpenSSL-Befehl "openssl dhparam `<size>`" erzeugt werden. Dabei sollte die Größe mindestens 2048 betragen, da DH-Parameter mit 1024 Bit nicht mehr als sicher gelten sollten.
 
+Kompatibilität: OpenSSL >= 1.1.1. Mit AWS-LC nicht unterstützt.
+
 <a id="entry-3-1-ssl-passphrase-cmd"></a>
 
 **`ssl-passphrase-cmd <cmd> <args> ...`**
@@ -1976,6 +1978,8 @@ ssl-propquery <query>
 
 Diese Einstellung ist nur verfügbar, wenn die Unterstützung für OpenSSL einkompiliert wurde und die OpenSSL-Version mindestens 3.0 ist. Sie ermöglicht die Definition einer standardmäßigen Eigenschaftszeichenfolge, die beim Abrufen von Algorithmen aus Providern verwendet wird. Sie verhält sich wie die openssl-Option propquery und verwendet dieselbe Syntax (beschrieben unter <https://www.openssl.org/docs/man3.0/man7/property.html>). Wenn beispielsweise zwei Provider geladen sind, foo und der Standardprovider, ermöglicht die propquery "?provider=foo", standardmäßig die vom Provider foo bereitgestellten Algorithmusimplementierungen auszuwählen und auf die des Standardproviders zurückzugreifen, wenn sie nicht gefunden wurden.
 
+Kompatibilität: OpenSSL >= 3.0.0. Mit AWS-LC nicht unterstützt.
+
 <a id="entry-3-1-ssl-provider"></a>
 
 **`ssl-provider <name>`**
@@ -1992,6 +1996,8 @@ Der Standardsuchpfad für OpenSSL-Provider ist in der Ausgabe des Befehls "opens
 
 Siehe auch "ssl-propquery" und "ssl-provider-path".
 
+Kompatibilität: OpenSSL >= 3.0.0. Mit AWS-LC nicht unterstützt.
+
 <a id="entry-3-1-ssl-provider-path"></a>
 
 **`ssl-provider-path <path>`**
@@ -2001,6 +2007,8 @@ ssl-provider-path <path>
 ```
 
 Diese Einstellung ist nur verfügbar, wenn die Unterstützung für OpenSSL einkompiliert wurde und die OpenSSL-Version mindestens 3.0 ist. Sie ermöglicht die Angabe des Suchpfads, den OpenSSL bei der Suche nach Providern verwenden soll. Sie verhält sich wie die Umgebungsvariable OPENSSL_MODULES. Sie gilt für alle folgenden 'ssl-provider'-Optionen, bis ein neuer 'ssl-provider-path' definiert wird. Siehe auch "ssl-provider".
+
+Kompatibilität: OpenSSL >= 3.0.0. Mit AWS-LC nicht unterstützt.
 
 <a id="entry-3-1-ssl-load-extra-del-ext"></a>
 
@@ -2085,6 +2093,8 @@ Diese Direktive ermöglicht die Auswahl der OpenSSL-Sicherheitsstufe, wie unter 
 Der Standardwert hängt von Ihrer OpenSSL-Version, der Distribution und davon ab, wie die Bibliothek kompiliert wurde.
 
 Diese Direktive erfordert mindestens OpenSSL 1.1.1.
+
+Kompatibilität: OpenSSL >= 1.1.1. Mit AWS-LC nicht unterstützt.
 
 <a id="entry-3-1-ssl-server-verify"></a>
 
@@ -2607,6 +2617,8 @@ Setzt die OpenSSL-Engine auf `<name>`. Eine Liste gültiger Werte für `<name>` 
 
 Mit HAProxy Version 2.6 wurde die Engine-Unterstützung im Standard-Build deaktiviert. Diese Option ist nur verfügbar, wenn HAProxy mit entsprechender Unterstützung erstellt wurde. Falls ssl-engine benötigt wird, kann HAProxy mit dem Flag USE_ENGINE=1 neu kompiliert werden.
 
+Kompatibilität: OpenSSL >= 1.1.1. Mit AWS-LC nicht unterstützt.
+
 <a id="entry-3-2-ssl-mode-async"></a>
 
 **`ssl-mode-async`**
@@ -2616,6 +2628,8 @@ ssl-mode-async
 ```
 
 Fügt dem SSL-Kontext den Modus SSL_MODE_ASYNC hinzu. Dies ermöglicht asynchrone TLS-I/O-Operationen, wenn SSL-Engines mit entsprechender Unterstützung verwendet werden. Die aktuelle Implementierung unterstützt maximal 32 Engines. Die Openssl-ASYNC-API unterstützt keine verschiebbaren Lese-/Schreibpuffer und ist nicht mit der Pufferverwaltung von HAProxy vereinbar. Daher ist der asynchrone Modus für Lese-/Schreiboperationen deaktiviert (er ist nur während des anfänglichen Handshakes und bei Handshakes zur Neuverhandlung aktiviert).
+
+Kompatibilität: OpenSSL >= 1.1.1. Mit AWS-LC nicht unterstützt.
 
 <a id="entry-3-2-tune-applet-zero-copy-forwarding"></a>
 
@@ -4009,6 +4023,8 @@ tune.ssl.default-dh-param <number>
 ```
 
 Legt die maximale Größe der Diffie-Hellman-Parameter fest, die beim DHE-Schlüsselaustausch zur Erzeugung des ephemeren beziehungsweise temporären Diffie-Hellman-Schlüssels verwendet werden. Für die endgültige Größe wird versucht, die Größe des RSA- oder DSA-Schlüssels des Servers zu übernehmen (z. B. einen temporären DH-Schlüssel mit 2048 Bit für einen RSA-Schlüssel mit 2048 Bit), ohne jedoch diesen Höchstwert zu überschreiten. Es sind nur Werte ab 1024 erlaubt. Höhere Werte erhöhen die CPU-Last; Werte über 1024 Bit werden von Java 7 und älteren Clients nicht unterstützt. Dieser Wert wird nicht verwendet, wenn statische Diffie-Hellman-Parameter entweder direkt in der Zertifikatsdatei oder über ssl-dh-param-file bereitgestellt werden. Sind weder default-dh-param noch ssl-dh-param-file definiert und enthält die PEM-Datei des Servers für ein bestimmtes Frontend keine eigenen DH-Parameter, stehen DHE-Verschlüsselungsverfahren für dieses Frontend nicht zur Verfügung.
+
+Kompatibilität: OpenSSL >= 1.1.1. Mit AWS-LC nicht unterstützt.
 
 <a id="entry-3-2-tune-ssl-force-private-cache"></a>
 

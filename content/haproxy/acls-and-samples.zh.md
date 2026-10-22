@@ -10,14 +10,16 @@ aliases:
   - /haproxy/configuration/acls-and-samples/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 7"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 7"
 ---
 
 HAProxy 可从请求或响应流、客户端或服务器信息、表格、环境信息等来源提取数据。提取此类数据的动作称为获取样本。获取后，这些样本可用于多种用途，例如作为粘性表的键，但最常见的用法是将其与称为模式的预定义常量数据进行匹配。
 
 ## 7.1. ACL 基础 {#section-7-1}
 
-访问控制列表（ACL）用于声明一种命名的匹配方法，以将任意信息与预先定义的模式列表进行比较。ACL 可视为大多数编程语言中函数的实际等价物，其声明使得该方法可在后续需要时被调用。ACL 的评估结果仅返回匹配或不匹配，这与许多编程语言中的布尔值类似。与编程语言中的函数不同，ACL 可以针对同一名称多次重载，以定义额外的匹配方法。在此情况下，所有 ACL 将按声明顺序依次评估，直到其中一个匹配为止。
+访问控制列表（ACL）用于声明一种命名的匹配方法，以将任意信息与预先定义的模式列表进行比较。ACL 可视为大多数编程语言中函数的实际等价物，其声明使得该方法可在后续需要时被调用。ACL 的评估结果仅返回匹配或不匹配，这与许多编程语言中的布尔值类似。与编程语言中的函数不同，ACL 可以针对同一名称多次重载，以定义额外的匹配方法。在此情况下，所有 ACL 将按声明顺序依次评估，直到其中一个匹配为止。换言之，同名 ACL 的多个声明在逻辑上按 OR（或）组合。
+
+每行 ACL 声明必须且只能包含一个 ACL 匹配关键字，其后跟随一个或多个模式值。不得在同一行 ACL 声明中使用多个匹配关键字，并通过逻辑 or/and 运算符将它们组合。
 
 ACL 的使用提供了一种灵活的解决方案，用于执行内容切换，或基于从请求、响应或任何环境状态中提取的内容做出决策。其原理十分简单：
 
@@ -5901,6 +5903,8 @@ ssl_bc_is_resumed: boolean
 ssl_bc_npn: string
 此字段用于从通过 TLS 传输层建立的出站连接中提取“下一协议协商”（Next Protocol Negotiation）字段。结果为一个字符串，包含与服务器协商确定的协议名称。SSL 库必须在编译时启用了对 TLS 扩展的支持（请检查 haproxy -vv）。请注意，除非在 "server" 行中通过 "npn" 关键字指定了协议列表，否则不会通告 TLS NPN 扩展。此外，服务器并不强制必须从该列表中选择协议，也可能使用其他协议。请注意，TLS NPN 扩展已被 ALPN 取代。该字段可在 tcp-check 或 http-check 规则集中使用。
 
+兼容性：OpenSSL >= 1.0.1。不支持 AWS-LC。
+
 ssl_bc_protocol: string
 返回通过 SSL/TLS 传输层建立出站连接时所使用的协议名称。可在 tcp-check 或 http-check 规则集中使用。
 
@@ -6289,6 +6293,8 @@ ssl_fc_is_resumed: boolean
 
 ssl_fc_npn: string
 此字段从通过 TLS 传输层建立且由 HAProxy 本地解密的入站连接中提取“下一协议协商”（Next Protocol Negotiation）字段。结果为一个字符串，包含客户端通告的协议名称。SSL 库必须在启用 TLS 扩展支持的情况下编译（请检查 haproxy -vv）。请注意，除非“bind”行上的“npn”关键字指定了协议列表，否则不会通告 TLS NPN 扩展。此外，客户端并不强制必须从该列表中选择协议，也可能请求其他协议。请注意，TLS NPN 扩展已被 ALPN 取代。
+
+兼容性：OpenSSL >= 1.0.1。不支持 AWS-LC。
 
 ssl_fc_protocol: string 返回通过 SSL/TLS 传输层建立的入站连接所使用的协议名称。
 

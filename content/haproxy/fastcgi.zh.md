@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/fastcgi/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 10"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 10"
 ---
 
 HAProxy 可以向 Responder FastCGI 应用发送 HTTP 请求。此功能自 HAProxy 2.1 版本起引入。为此，必须将服务器配置为使用 FastCGI 协议（在服务器行中使用关键字 "proto fcgi"），且后端管理这些服务器时，必须配置并使用一个 FastCGI 应用（在代理段中使用关键字 "use-fcgi-app"）。可以定义多个 FastCGI 应用，但每个后端在同一时间只能使用其中一个。

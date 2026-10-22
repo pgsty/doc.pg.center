@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/stick-tables-and-peers/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 11"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 11"
 ---
 
 Les tables de persistance dans HAProxy sont un mécanisme qui permet d'associer un certain nombre d'informations et de métriques à une clé d'un type donné, pendant une durée déterminée après la dernière mise à jour. Cela peut être vu comme une ligne à plusieurs colonnes dans un tableau, où le numéro de ligne est défini par la valeur de la clé, et chaque colonne représente un critère distinct.

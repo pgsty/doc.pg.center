@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/debugging-and-performance/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 12"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 12"
 ---
 
 Mit der Option "-d" bleibt HAProxy im Vordergrund und gibt für jedes Ereignis eine Zeile aus, etwa für eine eingehende oder beendete Verbindung sowie für jede erkannte Headerzeile einer Anfrage oder Antwort. Diese Diagnoseausgabe entsteht vor der Verarbeitung des Inhalts und berücksichtigt deshalb keine lokalen Änderungen. Sie dient hauptsächlich dazu, Anfragen und Antworten ohne Netzwerkmitschnitt anzuzeigen. Bei mehreren parallelen Verbindungen ist die Ausgabe schwerer lesbar. Die Skripte "debug2ansi" und "debug2html" im Verzeichnis examples/ helfen dann durch farbliche Hervorhebung.

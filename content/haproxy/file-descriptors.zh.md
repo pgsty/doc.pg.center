@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/file-descriptors/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 5"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
 ---
 
 为确保所有传入连接均能成功处理，HAProxy 在加载时会计算进程生命周期内所需的文件描述符总数。常规 Unix 进程默认被授予 1024 个文件描述符，特权进程可自行提升该限制。这是以 root 身份启动 HAProxy 并由其自行调整限制的原因之一。默认的 1024 个文件描述符大致可支持约 500 个并发连接的处理。该计算基于全局 maxconn 参数，该参数限制每个进程的总连接数，同时考虑监听器数量、启用健康检查的服务器数量、代理检查（agent check）、对等节点、日志记录器以及可能的其他技术需求。对该数值的粗略估算方法为：将 maxconn 值翻倍，并额外增加数十个，即可得到所需的文件描述符近似数量。

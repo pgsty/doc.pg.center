@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/architecture/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 2"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 2"
 ---
 
 HAProxy 是一个多线程、事件驱动、非阻塞的守护进程。它使用事件多路复用机制调度所有活动，而不依赖系统在多项活动之间切换调度。大多数情况下，HAProxy 只运行一个进程，因此在系统上执行 "ps aux" 时通常只会看到一个 "haproxy" 进程；平滑重载期间是例外，此时旧进程会与新进程并行完成剩余工作。因此，使用 strace 始终可以轻松跟踪其活动。为随可用处理器数量扩展，HAProxy 默认会为每个允许其运行的处理器启动一个工作线程。除非另有明确配置，传入流量会分布到所有这些线程，每个线程运行相同的事件循环。HAProxy 将线程间依赖严格控制在最低水平，以力求实现近乎线性的扩展能力。这也意味着每条连接只由一个线程处理。因此，要充分利用全部处理能力，连接数至少应与线程数相当；实际环境几乎总能满足这一条件。

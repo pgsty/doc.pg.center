@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/architecture/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 2"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 2"
 ---
 
 HAProxy est un démon multithreadé, basé sur des événements et non bloquant. Cela signifie qu’il utilise la multiplexion d’événements pour planifier toutes ses activités, plutôt que de dépendre du système pour planifier entre plusieurs activités. La plupart du temps, il s’exécute sous la forme d’un seul processus, de sorte que la sortie de la commande « ps aux » sur un système ne répertorie qu’un seul processus « HAProxy », sauf lorsqu’un rechargement doux est en cours et qu’un processus plus ancien termine son travail en parallèle du nouveau. Il est donc toujours facile de suivre son activité à l’aide de l’outil strace. Pour s’adapter au nombre de processeurs disponibles, HAProxy démarre, par défaut, un thread worker par processeur sur lequel il est autorisé à s’exécuter. À moins d’être configuré autrement, le trafic entrant est réparti entre tous ces threads, chacun exécutant la même boucle d’événements. Une grande attention est portée à limiter les dépendances entre threads au strict minimum, afin de tenter d’obtenir une scalabilité quasi linéaire. Cela a certaines conséquences, notamment le fait qu’une connexion donnée soit servie par un seul thread. Ainsi, pour utiliser toute la capacité de traitement disponible, il faut disposer d’au moins autant de connexions que de threads, ce qui est presque toujours le cas.

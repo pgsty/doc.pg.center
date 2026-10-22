@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/logging/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 8"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 8"
 ---
 
 Für die Protokollierung verwendet HAProxy immer einen syslog-Server, da er nicht auf das Dateisystem zugreift. Üblicherweise sendet er Protokollmeldungen über UDP an den Protokollserver, standardmäßig auf Port 514. Sehr häufig ist dafür 127.0.0.1 eingestellt, wo der lokale syslog-Daemon läuft. Ebenso können Meldungen über das Netzwerk an einen zentralen Server gesendet werden. Dieser bietet besonders im Aktiv/Aktiv-Betrieb Vorteile, wenn die Meldungen in ihrer Eingangsreihenfolge zusammengeführt werden sollen. HAProxy kann Protokollmeldungen auch über einen UNIX-Socket an den lokalen syslog-Daemon senden. Davon wird jedoch ausdrücklich abgeraten: Wird der syslog-Server neu gestartet, während haproxy läuft, wird der Socket ersetzt und neue Protokollmeldungen gehen verloren. Da HAProxy in einer chroot-Umgebung isoliert ist, kann er keine Verbindung zum neuen Socket herstellen. Im praktischen Betrieb wurde zudem beobachtet, dass die Protokollpuffer bei UNIX-Sockets sehr klein sind und selbst unter sehr geringer Last Meldungen verloren gehen. Für Tests kann dieses Verfahren dennoch ausreichen.

@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/bind-and-server-options/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 5"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
 ---
 
 Die Schlüsselwörter "bind", "server" und "default-server" unterstützen je nach Build-Optionen und der Systemumgebung, auf der HAProxy gebaut wurde, eine Reihe von Einstellungen. Diese Einstellungen bestehen in der Regel aus einem Wort, gegebenenfalls gefolgt von einem Wert, und werden in derselben Zeile wie die "bind"- oder "server"-Zeile angegeben. Alle diese Optionen werden in diesem Abschnitt beschrieben.
@@ -944,6 +944,8 @@ allerdings erst ab OpenSSL 1.0.2 verfügbar ist. Wird HTTP/2 mit einer älteren 
 gewünscht, kann weiterhin NPN verwendet werden, da die meisten Clients es zum Zeitpunkt der
 Erstellung dieses Textes noch unterstützen. NPN und ALPN lassen sich auch gemeinsam aktivieren,
 was außerhalb von Tests jedoch vermutlich nicht sinnvoll ist.
+
+Kompatibilität: OpenSSL >= 1.0.1. Mit AWS-LC nicht unterstützt.
 
 <a id="entry-5-1-prefer-client-ciphers"></a>
 
@@ -3004,6 +3006,8 @@ npn <protocols>
 Kann in folgenden Kontexten verwendet werden: tcp, http
 
 Dies aktiviert die NPN-TLS-Erweiterung und bietet die angegebene Protokollliste über NPN als unterstützt an. Die Protokollliste besteht aus einer durch Kommas getrennten Liste von Protokollnamen, beispielsweise: "http/1.1,http/1.0" (ohne Anführungszeichen). Dies erfordert, dass die SSL-Bibliothek mit aktivierter Unterstützung für TLS-Erweiterungen gebaut wurde (überprüfen Sie mit haproxy -vv). Beachten Sie, dass die NPN-Erweiterung durch die ALPN-Erweiterung ersetzt wurde (siehe das Schlüsselwort "alpn"), diese ist jedoch erst ab OpenSSL 1.0.2 verfügbar.
+
+Kompatibilität: OpenSSL >= 1.0.1. Mit AWS-LC nicht unterstützt.
 
 <a id="entry-5-2-observe"></a>
 

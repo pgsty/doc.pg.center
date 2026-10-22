@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/fastcgi/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 10"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 10"
 ---
 
 HAProxy est capable d'envoyer des requêtes HTTP vers des applications FastCGI Responder. Cette fonctionnalité a été ajoutée à HAProxy 2.1. Pour cela, les serveurs doivent être configurés pour utiliser le protocole FastCGI (en utilisant le mot-clé « proto fcgi » dans la ligne du serveur) et une application FastCGI doit être configurée et utilisée par le backend gérant ces serveurs (en utilisant le mot-clé « use-fcgi-app » dans la section proxy). Plusieurs applications FastCGI peuvent être définies, mais une seule peut être utilisée à la fois par un backend.

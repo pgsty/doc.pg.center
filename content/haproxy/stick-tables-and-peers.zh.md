@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/stick-tables-and-peers/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 11"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 11"
 ---
 
 在 HAProxy 中，粘性表是一种机制，允许将一定数量的信息和指标与特定类型的键关联，并在最后一次更新后持续一定时间。这可视为表格中的一行多列数据，其中行号由键值决定，各列代表不同的衡量标准。

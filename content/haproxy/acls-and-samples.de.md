@@ -10,13 +10,15 @@ aliases:
   - /haproxy/configuration/acls-and-samples/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 7"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 7"
 ---
 
 HAProxy ist in der Lage, Daten aus Anfrage- oder Antwortströmen, aus Client- oder Serverinformationen, aus Tabellen, Umgebungsdaten usw. zu extrahieren. Der Vorgang, solche Daten zu extrahieren, wird als Sample-Abruf bezeichnet. Nach dem Abruf können diese Samples für verschiedene Zwecke verwendet werden, beispielsweise als Schlüssel einer Stick Table. Am häufigsten werden sie jedoch mit vordefinierten konstanten Daten, sogenannten Mustern, verglichen.
 
 ## 7.1. ACL-Grundlagen {#section-7-1}
-Mit Zugriffskontrolllisten (ACL) wird eine benannte Methode deklariert, die beliebige Informationen mit einer Liste vordefinierter Muster vergleicht. Sie sollten als praktisch gleichwertig mit Funktionen in den meisten Programmiersprachen betrachtet werden: Durch die Deklaration stehen sie bereit und können später bei Bedarf aufgerufen werden. Ihre Auswertung ergibt lediglich eine Übereinstimmung oder Nichtübereinstimmung, was vergleichbar mit booleschen Werten in vielen Programmiersprachen ist. Im Gegensatz zu Funktionen in Programmiersprachen können ACLs beliebig oft überladen werden, um zusätzliche Übereinstimmungsmethoden für denselben Namen zu definieren. In diesem Fall werden sie alle in der Deklarationsreihenfolge ausgewertet, bis eine Übereinstimmung vorliegt.
+Mit Zugriffskontrolllisten (ACL) wird eine benannte Methode deklariert, die beliebige Informationen mit einer Liste vordefinierter Muster vergleicht. Sie sollten als praktisch gleichwertig mit Funktionen in den meisten Programmiersprachen betrachtet werden: Durch die Deklaration stehen sie bereit und können später bei Bedarf aufgerufen werden. Ihre Auswertung ergibt lediglich eine Übereinstimmung oder Nichtübereinstimmung, was vergleichbar mit booleschen Werten in vielen Programmiersprachen ist. Im Gegensatz zu Funktionen in Programmiersprachen können ACLs beliebig oft überladen werden, um zusätzliche Übereinstimmungsmethoden für denselben Namen zu definieren. In diesem Fall werden sie alle in der Deklarationsreihenfolge ausgewertet, bis eine Übereinstimmung vorliegt. Mit anderen Worten: Mehrere Deklarationen desselben ACL-Namens werden logisch durch OR verknüpft.
+
+Jede ACL-Deklarationszeile darf nur ein einziges Schlüsselwort für den ACL-Musterabgleich enthalten, gefolgt von einem oder mehreren Musterwerten. Es ist nicht zulässig, in einer ACL-Deklarationszeile mehrere solcher Schlüsselwörter zu verwenden und sie mit logischen or/and-Operatoren zu verknüpfen.
 
 ACLs bieten eine flexible Lösung, um anhand von Inhalten zwischen Zielen umzuschalten und allgemein Entscheidungen auf Grundlage von Daten aus der Anfrage, der Antwort oder dem Umgebungsstatus zu treffen. Das Prinzip ist einfach:
 
@@ -5762,6 +5764,8 @@ ssl_bc_is_resumed: boolean Gibt true zurück, wenn die Backend-Verbindung über 
 
 ssl_bc_npn: string Extrahiert das Feld Next Protocol Negotiation aus einer ausgehenden Verbindung über eine TLS-Transportschicht. Das Ergebnis ist eine Zeichenkette mit dem mit dem Server ausgehandelten Protokollnamen. Die SSL-Bibliothek muss mit aktivierter Unterstützung für TLS-Erweiterungen gebaut worden sein (mit haproxy -vv prüfen). Die TLS-Erweiterung NPN wird nur angekündigt, wenn das Schlüsselwort "npn" in der "server"-Zeile eine Protokollliste festlegt. Der Server ist außerdem nicht gezwungen, ein Protokoll aus dieser Liste zu wählen; jedes andere kann ebenfalls verwendet werden. Die TLS-Erweiterung NPN wurde durch ALPN ersetzt. Kann in einem tcp-check- oder http-check-Regelsatz verwendet werden.
 
+Kompatibilität: OpenSSL >= 1.0.1. Mit AWS-LC nicht unterstützt.
+
 ssl_bc_protocol: string Gibt den Namen des verwendeten Protokolls zurück, wenn die ausgehende Verbindung über eine SSL/TLS-Transportschicht hergestellt wurde. Kann in einem tcp-check- oder http-check-Regelsatz verwendet werden.
 
 ssl_bc_server_handshake_traffic_secret: string Gibt SERVER_HANDSHAKE_TRAFFIC_SECRET als hexadezimale Zeichenkette für die Backend-Verbindung zurück, wenn die ausgehende Verbindung über eine TLS-1.3-Transportschicht hergestellt wurde. Erfordert OpenSSL \>= 1.1.1. Dies ist einer der Schlüssel, die der OpenSSL-Keylog-Callback zur Erzeugung der SSLKEYLOGFILE ausgibt. Die SSL-Schlüsselprotokollierung muss mit "tune.ssl.keylog on" im Abschnitt global aktiviert werden. Siehe auch "tune.ssl.keylog".
@@ -6096,6 +6100,8 @@ ssl_fc_has_sni: boolean Prüft, ob in einer über eine SSL/TLS-Transportschicht 
 ssl_fc_is_resumed: boolean Gibt true zurück, wenn die SSL/TLS-Sitzung einer eingehenden Verbindung über eine SSL/TLS-Transportschicht mithilfe des SSL-Sitzungscaches oder von TLS-Tickets wiederaufgenommen wurde.
 
 ssl_fc_npn: string Extrahiert das Feld Next Protocol Negotiation aus einer eingehenden Verbindung über eine TLS-Transportschicht, die HAProxy lokal entschlüsselt. Das Ergebnis ist eine Zeichenkette mit dem vom Client angekündigten Protokollnamen. Die SSL-Bibliothek muss mit aktivierter Unterstützung für TLS-Erweiterungen gebaut worden sein (mit haproxy -vv prüfen). Die TLS-Erweiterung NPN wird nur angekündigt, wenn das Schlüsselwort "npn" in der "bind"-Zeile eine Protokollliste festlegt. Der Client ist außerdem nicht gezwungen, ein Protokoll aus dieser Liste zu wählen; ein beliebiges anderes kann angefordert werden. Die TLS-Erweiterung NPN wurde durch ALPN ersetzt.
+
+Kompatibilität: OpenSSL >= 1.0.1. Mit AWS-LC nicht unterstützt.
 
 ssl_fc_protocol: string Gibt den Namen des verwendeten Protokolls zurück, wenn die eingehende Verbindung über eine SSL/TLS-Transportschicht hergestellt wurde.
 

@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/configuration-management/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 10"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 10"
 ---
 
 Il est très courant que deux nœuds HAProxy constituant un cluster partagent exactement la même configuration, à l’exception de quelques adresses. Au lieu de devoir maintenir une configuration dupliquée pour chaque nœud, ce qui entraînera inévitablement une divergence, il est possible d’inclure des variables d’environnement dans la configuration. Ainsi, plusieurs configurations peuvent partager exactement le même fichier, en ne modifiant que quelques variables d’environnement système. Cette fonctionnalité a été introduite à partir de la version 1.5, où seules les adresses pouvaient inclure des variables d’environnement, et la version 1.6 va plus loin en permettant l’utilisation de variables d’environnement partout. La syntaxe est identique à celle du shell UNIX : une variable commence par un signe dollar ('$'), suivi d'une accolade ouvrante ('{'), puis le nom de la variable, terminé par une accolade fermante ('}'). À l’exception des adresses, les variables d’environnement ne sont interprétées que dans les arguments entourés de guillemets doubles (ce qui était nécessaire pour ne pas rompre les configurations existantes utilisant des expressions régulières impliquant le symbole dollar).

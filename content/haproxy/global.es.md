@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/global/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 3"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
 ---
 
 Los parámetros de la sección "global" se aplican a todo el proceso y a menudo son específicos del
@@ -2368,6 +2368,8 @@ personalizados son más seguros y por tanto se recomienda su uso. Los parámetro
 pueden generarse usando el comando de OpenSSL "openssl dhparam `<size>`", donde el tamaño debe ser
 al menos 2048, ya que los parámetros DH de 1024 bits ya no deberían considerarse seguros.
 
+Compatibilidad: OpenSSL >= 1.1.1. No compatible con AWS-LC.
+
 <a id="entry-3-1-ssl-passphrase-cmd"></a>
 
 **`ssl-passphrase-cmd <cmd> <args> ...`**
@@ -2403,6 +2405,8 @@ cargados, el foo y el predeterminado, el propquery "?provider=foo" permite elegi
 implementaciones de algoritmos proporcionadas por el proveedor foo, y recurrir a la del proveedor
 predeterminado si no se encontró.
 
+Compatibilidad: OpenSSL >= 3.0.0. No compatible con AWS-LC.
+
 <a id="entry-3-1-ssl-provider"></a>
 
 **`ssl-provider <name>`**
@@ -2429,6 +2433,8 @@ variable de entorno OPENSSL_MODULES, que toma el directorio donde puede encontra
 
 Ver también "ssl-propquery" y "ssl-provider-path".
 
+Compatibilidad: OpenSSL >= 3.0.0. No compatible con AWS-LC.
+
 <a id="entry-3-1-ssl-provider-path"></a>
 
 **`ssl-provider-path <path>`**
@@ -2442,6 +2448,8 @@ OpenSSL es al menos 3.0. Permite especificar la ruta de búsqueda que usará Ope
 proveedores. Se comporta igual que la variable de entorno OPENSSL_MODULES. Se usará para cualquier
 opción 'ssl-provider' posterior o hasta que se defina un nuevo 'ssl-provider-path'. Ver también
 "ssl-provider".
+
+Compatibilidad: OpenSSL >= 3.0.0. No compatible con AWS-LC.
 
 <a id="entry-3-1-ssl-load-extra-del-ext"></a>
 
@@ -2565,6 +2573,8 @@ El valor por defecto depende de tu versión de OpenSSL, de la distribución y de
 la biblioteca.
 
 Esta directiva requiere al menos OpenSSL 1.1.1.
+
+Compatibilidad: OpenSSL >= 1.1.1. No compatible con AWS-LC.
 
 <a id="entry-3-1-ssl-server-verify"></a>
 
@@ -3329,6 +3339,8 @@ La versión 2.6 de HAProxy desactivó el soporte de motores en la compilación p
 opción solo está disponible cuando HAProxy se ha compilado con soporte para ello. En caso de que
 ssl-engine sea necesario, HAProxy puede recompilarse con el flag USE_ENGINE=1.
 
+Compatibilidad: OpenSSL >= 1.1.1. No compatible con AWS-LC.
+
 <a id="entry-3-2-ssl-mode-async"></a>
 
 **`ssl-mode-async`**
@@ -3342,6 +3354,8 @@ usan motores SSL con capacidad asíncrona. La implementación actual admite un m
 La API ASYNC de Openssl no soporta mover buffers de lectura/escritura y no se ajusta a la gestión
 de buffers de HAProxy. Por ello el modo asíncrono está desactivado en las operaciones de
 lectura/escritura (solo se activa durante los handshakes iniciales y de renegociación).
+
+Compatibilidad: OpenSSL >= 1.1.1. No compatible con AWS-LC.
 
 <a id="entry-3-2-tune-applet-zero-copy-forwarding"></a>
 
@@ -5482,6 +5496,8 @@ suministran parámetros Diffie-Hellman estáticos, bien directamente en el archi
 usando el parámetro ssl-dh-param-file. Si no hay definido ni un default-dh-param ni un
 ssl-dh-param-file, y si el archivo PEM del servidor de un frontend dado no especifica sus propios
 parámetros DH, entonces los cifrados DHE no estarán disponibles para ese frontend.
+
+Compatibilidad: OpenSSL >= 1.1.1. No compatible con AWS-LC.
 
 <a id="entry-3-2-tune-ssl-force-private-cache"></a>
 

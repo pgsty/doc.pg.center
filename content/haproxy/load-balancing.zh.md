@@ -11,7 +11,7 @@ aliases:
   - /haproxy/intro/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 2"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 2"
 ---
 
 本文旨在向所有尚未了解 HAProxy 的用户以及希望重新认识该软件（尤其是熟悉旧版本的用户）提供入门引导。本文主要目的在于为用户提供所有要素，以判断 HAProxy 是否就是他们在寻找的产品。高级用户可能在此发现某些解决方案的片段，仅因此前未意识到某项新功能的存在。此外，本文还提供了部分容量规划信息，说明了产品的生命周期，并对部分功能重叠的产品进行了对比。

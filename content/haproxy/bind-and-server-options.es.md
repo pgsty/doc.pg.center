@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/bind-and-server-options/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 5"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
 ---
 
 Las palabras clave "bind", "server" y "default-server" soportan cierto número de parámetros según
@@ -1134,6 +1134,8 @@ extensión NPN ha sido sustituida por la extensión ALPN (ver la palabra clave "
 anterior, NPN puede seguir usándose, ya que la mayoría de los clientes aún la soportan al momento de
 escribir esto. Es posible habilitar tanto NPN como ALPN, aunque probablemente no tenga sentido fuera
 de pruebas.
+
+Compatibilidad: OpenSSL >= 1.0.1. No compatible con AWS-LC.
 
 <a id="entry-5-1-prefer-client-ciphers"></a>
 
@@ -3260,6 +3262,8 @@ comas, por ejemplo: "http/1.1,http/1.0" (sin comillas). Esto requiere que la bib
 haya compilado con el soporte de extensiones TLS activado (compruébalo con haproxy -vv). Ten en
 cuenta que la extensión NPN ha sido sustituida por la extensión ALPN (consulta la palabra clave
 «alpn»), aunque esta última solo está disponible a partir de OpenSSL 1.0.2.
+
+Compatibilidad: OpenSSL >= 1.0.1. No compatible con AWS-LC.
 
 <a id="entry-5-2-observe"></a>
 

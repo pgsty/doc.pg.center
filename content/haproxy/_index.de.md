@@ -1,5 +1,5 @@
 ---
-title: "HAProxy 3.4.6-66 Dokumentation"
+title: "HAProxy 3.4.7-57 Dokumentation"
 linkTitle: HAProxy
 weight: 50
 description: "Vollständige deutsche Markdown-Ausgabe der HAProxy-3.4-Handbücher für Einstieg, Konfiguration und Verwaltung."
@@ -21,7 +21,7 @@ cascade:
 
 **HAProxy** ist ein freier, schneller und zuverlässiger Reverse-Proxy für Hochverfügbarkeit, TCP- und HTTP-Lastverteilung sowie die Verwaltung des Anwendungsverkehrs. Diese Sammlung enthält die vollständige deutsche Übersetzung der drei grundlegenden HAProxy-3.4-Handbücher, neu gegliedert als eine flache Markdown-Lesefolge für OINK.
 
-Diese Ausgabe folgt den offiziellen englischen Handbüchern des Wartungszweigs zum Stand `3.4.6-66`. Die neueste stabile Version ist `3.4.6` (`v3.4.6`); der Dokumentationsstand enthält Änderungen nach dieser Veröffentlichung. Die genaue Quelle ist Commit [`16acce1dac1d`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=16acce1dac1dcf1ad5d654204af3a5d45d0e3de8).
+Diese Ausgabe folgt den offiziellen englischen Handbüchern des Wartungszweigs zum Stand `3.4.7-57`. Die neueste stabile Version ist `3.4.7` (`v3.4.7`); der Dokumentationsstand enthält Änderungen nach dieser Veröffentlichung. Die genaue Quelle ist Commit [`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3).
 
 ## Handbuch auswählen {#choose-a-manual}
 
@@ -35,7 +35,7 @@ Diese Ausgabe folgt den offiziellen englischen Handbüchern des Wartungszweigs z
 | Handbuch | Originalquelle | Lokale Gliederung |
 | --- | ---: | ---: |
 | Einsteigerhandbuch | 1,695 Zeilen | 9 flache Themenseiten |
-| Konfigurationshandbuch | 33,216 Zeilen | 12 flache Kapitelseiten |
+| Konfigurationshandbuch | 33,246 Zeilen | 12 flache Kapitelseiten |
 | Verwaltungshandbuch | 5,305 Zeilen | 13 flache Kapitelseiten |
 
 Alle 34 Leseseiten liegen direkt im HAProxy-Dokumentationsverzeichnis. Drei nicht verlinkte Trennelemente gliedern die Handbücher in der Seitenleiste, ohne zusätzliche Verzeichnisebenen oder Einträge in der Seitennavigation einzuführen.

@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/fastcgi/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 10"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 10"
 ---
 
 HAProxyは、Responder型のFastCGIアプリケーションへHTTPリクエストを送れます。この機能はHAProxy 2.1で追加されました。使うには、サーバーでFastCGIプロトコルを使うよう設定し（server行の"proto fcgi"キーワード）、そのサーバーを管理するバックエンドでFastCGIアプリケーションを設定して使用しなければなりません（proxyセクションの"use-fcgi-app"キーワード）。複数のFastCGIアプリケーションを定義できますが、一つのバックエンドが同時に使えるのは一つだけです。

@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/security/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 13"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 13"
 ---
 
 HAProxyは、非常に限られた権限で動作するよう設計されています。標準的な使用方法は、chroot jailに隔離したうえで、jail内で何の権限も持たない非rootユーザーに権限を落とすことです。これにより、将来脆弱性が発見されても、侵害がシステムの他の部分に影響しないようにします。

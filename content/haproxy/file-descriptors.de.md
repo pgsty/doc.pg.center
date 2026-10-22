@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/file-descriptors/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 5"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
 ---
 
 Damit alle eingehenden Verbindungen erfolgreich bedient werden können, berechnet HAProxy beim Laden die Gesamtzahl der Dateideskriptoren, die der Prozess während seiner Laufzeit benötigt. Ein gewöhnlicher Unix-Prozess erhält standardmäßig meist 1024 Dateideskriptoren; ein privilegierter Prozess kann diese Grenze selbst erhöhen. Dies ist ein Grund, HAProxy als root zu starten und die Grenze von ihm anpassen zu lassen. Die Standardgrenze von 1024 Dateideskriptoren reicht ungefähr für 500 gleichzeitige Verbindungen. In die Berechnung gehen der globale Parameter maxconn, der die Gesamtzahl der Verbindungen pro Prozess begrenzt, die Anzahl der Listener, die Server mit aktiviertem Health Check, Agent-Checks, Peers, Protokollziele sowie gegebenenfalls weitere technische Anforderungen ein. Als grobe Schätzung lässt sich maxconn verdoppeln und um einige Dutzend ergänzen.

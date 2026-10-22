@@ -11,7 +11,7 @@ aliases:
   - /haproxy/management/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 1"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 1"
 ---
 
 本文介绍如何启动、停止、管理 HAProxy 及排查其故障，也会说明一些已知限制和应避免的陷阱。本文不涉及 HAProxy 的配置方法；相关内容请参阅 [`configuration.txt`](/zh/haproxy/http-fundamentals/)。

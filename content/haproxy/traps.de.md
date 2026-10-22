@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/traps/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 11"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 11"
 ---
 
 Gelegentlich wird berichtet, dass der haproxy-Dienst nach einem Systemneustart nicht gestartet wurde, sich aber von Hand problemlos starten lässt. Meist wird dabei eine Lösung wie keepalived eingesetzt, die die Dienst-IP-Adresse nur dem Master-Knoten eines Clusters zuweist. Solange haproxy an 0.0.0.0 gebunden war, funktionierte dies; nach der Bindung an die virtuelle IP-Adresse nicht mehr. Beim Dienststart gehört die virtuelle IP-Adresse noch nicht zum lokalen Knoten. Wenn HAProxy sich daran binden möchte, lehnt das System dies ab, weil es keine lokale IP-Adresse ist. Die Lösung besteht nicht darin, den Start des haproxy-Dienstes zu verzögern, da dies bei einem Neustart nicht zuverlässig funktionieren würde. Stattdessen muss das System so konfiguriert werden, dass es die Bindung an nicht lokale Adressen erlaubt. Unter Linux lässt sich dies einfach erreichen, indem der sysctl-Parameter net.ipv4.ip_nonlocal_bind auf 1 gesetzt wird. Das ist auch nötig, um den IP-Datenverkehr, der HAProxy für eine bestimmte Zieladresse durchläuft, transparent abzufangen.

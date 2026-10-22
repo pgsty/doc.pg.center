@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/global/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 3"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
 ---
 
 Les paramètres de la section « global » sont applicables à l'ensemble du processus et souvent spécifiques au système d'exploitation. Ils sont généralement définis une fois pour toutes et n'exigent pas de modification une fois correctement configurés. Certains d'entre eux ont des équivalents en ligne de commande.
@@ -1675,6 +1675,8 @@ ssl-dh-param-file <file>
 
 Ce paramètre n'est disponible que si le support OpenSSL a été intégré. Il définit les paramètres DH par défaut utilisés lors de l'échange de clés Diffie-Hellman éphémère (DHE) pendant la négociation SSL/TLS, pour toutes les lignes "bind" qui ne définissent pas explicitement leurs propres paramètres. Il sera remplacé par des paramètres DH personnalisés trouvés dans un fichier de certificat si présent. Si des paramètres DH personnalisés ne sont pas spécifiés, ni par l'option ssl-dh-param-file, ni en les définissant directement dans le fichier de certificat, les chiffrements DHE ne seront pas utilisés, sauf si tune.ssl.default-dh-param est défini. Dans ce dernier cas, des paramètres DH prédéfinis de la taille spécifiée seront utilisés. L'utilisation de paramètres DH personnalisés est recommandée, car ils sont connus pour être plus sécurisés. Les paramètres DH personnalisés peuvent être générés à l'aide de la commande OpenSSL « openssl dhparam `<size>` », où la taille doit être d'au moins 2048, car les paramètres DH de 1024 bits ne doivent plus être considérés comme sécurisés.
 
+Compatibilité : OpenSSL >= 1.1.1. Non pris en charge avec AWS-LC.
+
 <a id="entry-3-1-ssl-passphrase-cmd"></a>
 
 **`ssl-passphrase-cmd <cmd> <args> ...`**
@@ -1695,6 +1697,8 @@ ssl-propquery <query>
 
 Ce paramètre n'est disponible que lorsque le support OpenSSL a été intégré et que la version d'OpenSSL est au moins 3.0. Il permet de définir une chaîne de propriétés par défaut utilisée lors de la récupération des algorithmes dans les fournisseurs. Il se comporte de la même manière que l'option openssl propquery et suit la même syntaxe (décrite dans <https://www.openssl.org/docs/man3.0/man7/property.html>). Par exemple, si deux fournisseurs sont chargés, celui nommé foo et le fournisseur par défaut, la chaîne propquery "?provider=foo" permet de sélectionner par défaut les implémentations d'algorithmes fournies par le fournisseur foo, et de revenir à celles du fournisseur par défaut en cas d'absence.
 
+Compatibilité : OpenSSL >= 3.0.0. Non pris en charge avec AWS-LC.
+
 <a id="entry-3-1-ssl-provider"></a>
 
 **`ssl-provider <name>`**
@@ -1711,6 +1715,8 @@ Le chemin de recherche par défaut du fournisseur OpenSSL est indiqué dans la s
 
 Voir également « ssl-propquery » et « ssl-provider-path ».
 
+Compatibilité : OpenSSL >= 3.0.0. Non pris en charge avec AWS-LC.
+
 <a id="entry-3-1-ssl-provider-path"></a>
 
 **`ssl-provider-path <path>`**
@@ -1720,6 +1726,8 @@ ssl-provider-path <path>
 ```
 
 Ce paramètre n'est disponible que lorsque le support OpenSSL a été intégré et que la version d'OpenSSL est au moins 3.0. Il permet de spécifier le chemin de recherche utilisé par OpenSSL pour localiser les fournisseurs. Il se comporte de la même manière que la variable d'environnement OPENSSL_MODULES. Il sera utilisé pour toute option 'ssl-provider' ultérieure, jusqu'à ce qu'une nouvelle option 'ssl-provider-path' soit définie. Voir également « ssl-provider ».
+
+Compatibilité : OpenSSL >= 3.0.0. Non pris en charge avec AWS-LC.
 
 <a id="entry-3-1-ssl-load-extra-del-ext"></a>
 
@@ -1804,6 +1812,8 @@ Cette directive permet de choisir le niveau de sécurité OpenSSL tel qu'il est 
 La valeur par défaut dépend de votre version d'OpenSSL, de votre distribution et de la manière dont la bibliothèque a été compilée.
 
 Cette directive nécessite au moins OpenSSL 1.1.1.
+
+Compatibilité : OpenSSL >= 1.1.1. Non pris en charge avec AWS-LC.
 
 <a id="entry-3-1-ssl-server-verify"></a>
 
@@ -2326,6 +2336,8 @@ Définit le moteur OpenSSL à `<name>`. La liste des valeurs valides pour `<name
 
 HAProxy version 2.6 a désactivé la prise en charge des moteurs dans la version par défaut. Cette option n'est disponible que si HAProxy a été compilé avec cette fonctionnalité. Si le moteur ssl est requis, HAProxy peut être recompilé avec le drapeau USE_ENGINE=1.
 
+Compatibilité : OpenSSL >= 1.1.1. Non pris en charge avec AWS-LC.
+
 <a id="entry-3-2-ssl-mode-async"></a>
 
 **`ssl-mode-async`**
@@ -2335,6 +2347,8 @@ ssl-mode-async
 ```
 
 Ajoute le mode SSL_MODE_ASYNC au contexte SSL. Cela active les opérations TLS asynchrones I/O si des moteurs SSL capables de traitement asynchrone sont utilisés. L'implémentation actuelle prend en charge un maximum de 32 moteurs. L'API ASYNC d'OpenSSL ne prend pas en charge le déplacement des tampons read/write et n'est pas conforme à la gestion des tampons de HAProxy. Par conséquent, le mode asynchrone est désactivé pour les opérations read/write (il n'est activé que lors des échanges d'initialisation et de renégociation).
+
+Compatibilité : OpenSSL >= 1.1.1. Non pris en charge avec AWS-LC.
 
 <a id="entry-3-2-tune-applet-zero-copy-forwarding"></a>
 
@@ -3729,6 +3743,8 @@ tune.ssl.default-dh-param <number>
 ```
 
 Définit la taille maximale des paramètres de Diffie-Hellman utilisés pour générer la clé Diffie-Hellman éphémère/temporaire en cas d'échange de clés DHE. La taille finale tentera de correspondre à la taille de la clé RSA (ou DSA) du serveur (par exemple, une clé DH temporaire de 2048 bits pour une clé RSA de 2048 bits), mais ne dépassera pas cette valeur maximale. Seules les valeurs égales ou supérieures à 1024 sont autorisées. Des valeurs plus élevées augmenteront la charge CPU, et les valeurs supérieures à 1024 bits ne sont pas prises en charge par les clients Java 7 et antérieurs. Cette valeur n'est pas utilisée si des paramètres de Diffie-Hellman statiques sont fournis directement dans le fichier de certificat ou à l'aide de la directive ssl-dh-param-file. Si ni default-dh-param ni ssl-dh-param-file n'est défini, et si le fichier PEM du serveur d'un frontal donné ne spécifie pas ses propres paramètres DH, alors les chiffres DHE seront indisponibles pour ce frontal.
+
+Compatibilité : OpenSSL >= 1.1.1. Non pris en charge avec AWS-LC.
 
 <a id="entry-3-2-tune-ssl-force-private-cache"></a>
 

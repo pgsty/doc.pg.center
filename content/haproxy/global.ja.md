@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/global/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 3"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
 ---
 
 "global" セクションのパラメーターはプロセス全体に適用され、多くはOSに依存します。通常は最初にまとめて設定し、正しく設定できれば変更する必要はありません。一部には対応するコマンドラインオプションがあります。
@@ -1658,6 +1658,8 @@ ssl-dh-param-file <file>
 
 この設定は、OpenSSLのサポートを組み込んでビルドした場合にのみ使用できます。独自の指定を明示していないすべての "bind" 行について、一時的なDiffie-Hellman (DHE) 鍵交換を使用するSSL/TLSハンドシェイクで使う、デフォルトのDHパラメーターを設定します。bindの証明書ファイルにカスタムDHパラメーターがあれば、それが優先されます。ssl-dh-param-fileでも証明書ファイルへの直接指定でもカスタムDHパラメーターを指定していない場合、tune.ssl.default-dh-paramを設定しない限り、DHE暗号は使用されません。後者を設定した場合は、指定したサイズの定義済みDHパラメーターを使用します。カスタムパラメーターの方が安全であることが知られているため、その使用を推奨します。OpenSSLコマンド "openssl dhparam `<size>`" でカスタムDHパラメーターを生成できます。1024ビットのDHパラメーターはもはや安全とは見なせないため、サイズは少なくとも2048にすることを推奨します。
 
+互換性: OpenSSL >= 1.1.1。AWS-LCではサポートされません。
+
 <a id="entry-3-1-ssl-passphrase-cmd"></a>
 
 **`ssl-passphrase-cmd <cmd> <args> ...`**
@@ -1678,6 +1680,8 @@ ssl-propquery <query>
 
 この設定は、OpenSSLのサポートを組み込んでビルドし、OpenSSLのバージョンが少なくとも3.0である場合にのみ使用できます。プロバイダーからアルゴリズムを取得するときに使用する、デフォルトのプロパティ文字列を定義できます。opensslのpropqueryオプションと同じように動作し、同じ構文に従います（<https://www.openssl.org/docs/man3.0/man7/property.html> を参照してください）。たとえば、fooとdefaultの両プロバイダーを読み込んでいる場合、propquery "?provider=foo" を指定すると、デフォルトでfooプロバイダーのアルゴリズム実装を選び、見つからなければdefaultプロバイダーの実装にフォールバックします。
 
+互換性: OpenSSL >= 3.0.0。AWS-LCではサポートされません。
+
 <a id="entry-3-1-ssl-provider"></a>
 
 **`ssl-provider <name>`**
@@ -1694,6 +1698,8 @@ OpenSSLプロバイダーのデフォルトの検索パスは、"openssl version
 
 "ssl-propquery" と "ssl-provider-path" も参照してください。
 
+互換性: OpenSSL >= 3.0.0。AWS-LCではサポートされません。
+
 <a id="entry-3-1-ssl-provider-path"></a>
 
 **`ssl-provider-path <path>`**
@@ -1703,6 +1709,8 @@ ssl-provider-path <path>
 ```
 
 この設定は、OpenSSLのサポートを組み込んでビルドし、OpenSSLのバージョンが少なくとも3.0である場合にのみ使用できます。OpenSSLがプロバイダーを探す際の検索パスを指定できます。環境変数OPENSSL_MODULESと同じように動作します。後続の 'ssl-provider' オプションに対して、新しい 'ssl-provider-path' を定義するまで使用されます。"ssl-provider" も参照してください。
+
+互換性: OpenSSL >= 3.0.0。AWS-LCではサポートされません。
 
 <a id="entry-3-1-ssl-load-extra-del-ext"></a>
 
@@ -1787,6 +1795,8 @@ ssl-security-level <number>
 デフォルト値は、OpenSSLのバージョン、ディストリビューション、およびライブラリのコンパイル方法によって異なります。
 
 このディレクティブには、少なくともOpenSSL 1.1.1が必要です。
+
+互換性: OpenSSL >= 1.1.1。AWS-LCではサポートされません。
 
 <a id="entry-3-1-ssl-server-verify"></a>
 
@@ -2308,6 +2318,8 @@ OpenSSLエンジンを `<name>` に設定します。`<name>` に指定できる
 
 HAProxyバージョン2.6では、デフォルトのビルドでエンジンのサポートを無効にしました。このオプションは、対応するサポートを組み込んでHAProxyをビルドした場合にのみ使用できます。ssl-engineが必要な場合は、USE_ENGINE=1フラグを指定してHAProxyを再ビルドできます。
 
+互換性: OpenSSL >= 1.1.1。AWS-LCではサポートされません。
+
 <a id="entry-3-2-ssl-mode-async"></a>
 
 **`ssl-mode-async`**
@@ -2317,6 +2329,8 @@ ssl-mode-async
 ```
 
 SSLコンテキストにSSL_MODE_ASYNCモードを追加します。非同期処理に対応するSSLエンジンを使用する場合、非同期TLS I/O操作を有効にします。現在の実装は、最大32エンジンをサポートします。OpenSSLのASYNC APIは、読み取り/書き込みバッファーの移動をサポートせず、HAProxyのバッファー管理と互換性がありません。そのため、読み取り/書き込み操作では非同期モードを無効にします（有効になるのは、初回と再ネゴシエーションのハンドシェイク中だけです）。
+
+互換性: OpenSSL >= 1.1.1。AWS-LCではサポートされません。
 
 <a id="entry-3-2-tune-applet-zero-copy-forwarding"></a>
 
@@ -3699,6 +3713,8 @@ tune.ssl.default-dh-param <number>
 ```
 
 DHE鍵交換で、一時的なDiffie-Hellman鍵を生成するために使用する、Diffie-Hellmanパラメーターの最大サイズを設定します。最終的なサイズは、サーバーのRSA（またはDSA）鍵のサイズに合わせようとしますが（たとえば、2048ビットのRSA鍵に対して、2048ビットの一時DH鍵）、この最大値は超えません。1024以上の値だけを指定できます。大きな値はCPU負荷を増やし、1024ビットを超える値には、Java 7以前のクライアントが対応していません。静的なDiffie-Hellmanパラメーターを、証明書ファイル内に直接指定するか、ssl-dh-param-fileパラメーターで指定した場合、この値は使用しません。default-dh-paramとssl-dh-param-fileのどちらも定義せず、対象のフロントエンドのサーバーPEMファイルにも、独自のDHパラメーターを指定しなければ、そのフロントエンドではDHE暗号を使用できません。
+
+互換性: OpenSSL >= 1.1.1。AWS-LCではサポートされません。
 
 <a id="entry-3-2-tune-ssl-force-private-cache"></a>
 

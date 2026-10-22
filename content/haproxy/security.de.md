@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/security/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 13"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 13"
 ---
 
 HAProxy ist für den Betrieb mit stark eingeschränkten Berechtigungen ausgelegt. Üblicherweise wird er in einer chroot-Umgebung isoliert und wechselt zu einem Benutzer ohne root-Rechte, der innerhalb dieser Umgebung keinerlei Berechtigungen hat. Sollte künftig eine Schwachstelle entdeckt werden, würde eine Kompromittierung damit nicht den Rest des Systems betreffen.

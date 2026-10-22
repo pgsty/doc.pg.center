@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/file-descriptors/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 5"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
 ---
 
 Afin de garantir que toutes les connexions entrantes soient correctement servies, HAProxy calcule au moment du chargement le nombre total de descripteurs de fichiers nécessaires durant la durée de vie du processus. Un processus Unix classique reçoit généralement 1024 descripteurs de fichiers par défaut, et un processus privilégié peut augmenter lui-même cette limite. C’est une des raisons de lancer HAProxy en tant que root et de lui permettre d’ajuster cette limite. La limite par défaut de 1024 descripteurs de fichiers permet approximativement 500 connexions simultanées. Ce calcul repose sur le paramètre global maxconn, qui limite le nombre total de connexions par processus, le nombre d’écouteurs, le nombre de serveurs ayant un contrôle d’état activé, les contrôles d’agent, les pairs, les enregistreurs et éventuellement quelques autres exigences techniques. Une estimation simple de ce nombre consiste à doubler la valeur de maxconn et à ajouter quelques dizaines pour obtenir une approximation du nombre de descripteurs de fichiers nécessaires.

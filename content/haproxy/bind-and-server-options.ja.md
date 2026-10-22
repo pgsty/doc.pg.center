@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/bind-and-server-options/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 5"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
 ---
 
 "bind"、"server"、"default-server"キーワードは、ビルドオプションやHAProxyをビルドしたシステムに応じた各種設定をサポートします。各設定は通常、単語一つと、その後に続く場合がある値で構成され、"bind"行または"server"行と同じ行に記述します。このセクションでは、これらのオプションをすべて説明します。
@@ -812,6 +812,8 @@ npn <protocols>
 ```
 
 TLSのNPN拡張を有効にし、指定したプロトコルリストを、NPNで選択できる上位プロトコルとして通知します。リストはプロトコル名をカンマで区切ったもので、たとえば"http/1.1,http/1.0"（引用符なし）です。SSLライブラリーを、TLS拡張のサポートを有効にしてビルドしている必要があります（haproxy -vvで確認できます）。NPN拡張はALPN拡張に置き換えられています（"alpn"キーワードを参照）が、ALPNはOpenSSL 1.0.2以降でしか使用できません。古いバージョンのOpenSSLでHTTP/2を使いたい場合、執筆時点ではほとんどのクライアントがNPNを引き続きサポートしているため、NPNを使用できる可能性があります。NPNとALPNの両方を有効にすることもできますが、試験以外での意味はおそらくありません。
+
+互換性: OpenSSL >= 1.0.1。AWS-LCではサポートされません。
 
 <a id="entry-5-1-prefer-client-ciphers"></a>
 
@@ -2305,6 +2307,8 @@ npn <protocols>
 使用可能なコンテキスト：tcp, http
 
 TLSのNPN拡張を有効にし、指定したプロトコルリストを、NPNで選択できる上位プロトコルとして通知します。リストはプロトコル名をカンマで区切ったもので、たとえば"http/1.1,http/1.0"（引用符なし）です。SSLライブラリーを、TLS拡張のサポートを有効にしてビルドしている必要があります（haproxy -vvで確認できます）。NPN拡張はALPN拡張に置き換えられています（"alpn"キーワードを参照）が、ALPNはOpenSSL 1.0.2以降でしか使用できません。
+
+互換性: OpenSSL >= 1.0.1。AWS-LCではサポートされません。
 
 <a id="entry-5-2-observe"></a>
 

@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/configuration-management/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 10"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 10"
 ---
 
 组成集群的两个 HAProxy 节点通常使用完全相同的配置，只有少数地址不同。与其为每个节点分别维护一份最终必然产生差异的重复配置，不如在配置中引用环境变量。这样，多个配置实例便可共用同一个文件，只需在系统级环境变量中保留少量差异。此功能始于 1.5 版，当时只有地址可以包含环境变量；1.6 版进一步支持在所有位置使用环境变量。其语法与 UNIX shell 相同：变量以美元符号（'\$'）开头，后接左花括号（'{'）、变量名和右花括号（'}'）。除地址外，环境变量只在双引号包围的参数中解析；这是为了避免破坏使用含美元符号正则表达式的现有配置。

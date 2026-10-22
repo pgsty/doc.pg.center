@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/debugging-and-performance/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 12"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 12"
 ---
 
 Lorsque HAProxy est lancé avec l'option "-d", il reste en premier plan et affiche une ligne par événement, tel qu'une connexion entrante, la fin d'une connexion, ou chaque ligne d'en-tête de requête ou de réponse observée. Cette sortie de débogage est émise avant le traitement des contenus, elle ne tient donc pas compte des modifications locales. Son usage principal consiste à afficher les requêtes et réponses sans avoir à exécuter un analyseur réseau. La lecture de la sortie devient moins aisée lorsque plusieurs connexions sont gérées en parallèle, mais les scripts "debug2ansi" et "debug2html" présents dans le répertoire examples/ aident certainement dans ce cas en colorant la sortie.

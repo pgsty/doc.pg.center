@@ -10,7 +10,7 @@ aliases:
   - /haproxy/intro/basic-features/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, sections 3.3–3.3.8"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, sections 3.3–3.3.8"
 ---
 
 本节将列举 HAProxy 实现的若干功能，其中部分功能是现代负载均衡器普遍具备的特性，另一些则是 HAProxy 架构带来的直接优势。更高级的功能将在下一节中详细说明。

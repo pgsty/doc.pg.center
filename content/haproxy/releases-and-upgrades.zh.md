@@ -10,7 +10,7 @@ aliases:
   - /haproxy/intro/releases-and-upgrades/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 3.7"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3.7"
 ---
 
 HAProxy 是一个采用 GPLv2 许可证的开源项目，这意味着只要在请求时提供源代码，任何人都可以自由分发该软件，尤其是当进行了任何修改时。

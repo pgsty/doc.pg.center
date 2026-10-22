@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/traps/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 11"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 11"
 ---
 
 システムの再起動後にhaproxyサービスが起動せず、手動で起動すると動く、という報告をときどき受けます。多くの場合、keepalivedなどのクラスターIPアドレス管理機構を使い、マスターノードだけにサービスのIPアドレスを割り当てています。haproxyを0.0.0.0にバインドしていたときは動作していたものが、仮想IPアドレスにバインドするように変更すると動かなくなります。これは、サービスの起動時点ではローカルノードが仮想IPアドレスをまだ所有しておらず、HAProxyがそのアドレスにバインドしようとすると、ローカルのIPアドレスではないためシステムが拒否することが原因です。解決策はhaproxyサービスの起動を遅らせることではありません。それでは再起動に対応できません。ローカルに存在しないアドレスへのバインドを許可するよう、システムを正しく設定します。Linuxでは、net.ipv4.ip_nonlocal_bind sysctlを1に設定するだけです。この設定は、特定の宛先アドレスに向けてHAProxyを通過するIPトラフィックを透過的に捕捉する場合にも必要です。

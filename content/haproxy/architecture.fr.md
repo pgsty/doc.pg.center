@@ -11,7 +11,7 @@ aliases:
   - /haproxy/intro/architecture/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, sections 3–3.2"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, sections 3–3.2"
 ---
 
 La graphie « HAProxy » désigne le produit, tandis que « haproxy » désigne le programme exécutable, le paquet logiciel ou un processus. Les deux graphies sont toutefois couramment employées indifféremment pour les deux usages et se prononcent H-A-Proxy. À l'origine, « haproxy » signifiait « high availability proxy » et le nom s'écrivait en deux mots distincts ; aujourd'hui, il ne signifie plus rien d'autre que « HAProxy ».

@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/logging/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 8"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 8"
 ---
 
 HAProxy 的强项之一无疑在于其精确的日志。它可能提供了此类产品中可用的最详尽的信息级别，这对排查复杂环境中的问题至关重要。日志中提供的标准信息包括客户端端口、TCP/HTTP 状态定时器、流在终止时的精确状态以及精确的终止原因，关于将流量导向服务器的决策信息，当然还包括捕获任意头字段的能力。

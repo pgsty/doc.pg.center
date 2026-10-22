@@ -10,7 +10,7 @@ aliases:
   - /haproxy/intro/ecosystem/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, sections 4–4.4"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, sections 4–4.4"
 ---
 
 HAProxy 与以下列出的某些产品集成良好，因此尽管这些产品与 HAProxy 无直接关联，仍在此提及。

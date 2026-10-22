@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/configuration-management/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 10"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 10"
 ---
 
 Häufig verwenden zwei HAProxy-Knoten eines Clusters bis auf wenige Adressen genau dieselbe Konfiguration. Statt für jeden Knoten eine eigene Kopie zu pflegen, die zwangsläufig irgendwann abweicht, lassen sich Umgebungsvariablen in die Konfiguration einbinden. So können mehrere Konfigurationen dieselbe Datei verwenden und sich nur in wenigen systemweiten Umgebungsvariablen unterscheiden. Diese Möglichkeit wurde in Version 1.5 eingeführt, zunächst nur für Adressen. Version 1.6 unterstützt Umgebungsvariablen an beliebigen Stellen. Die Syntax entspricht der UNIX-Shell: Eine Variable beginnt mit einem Dollarzeichen ('\$'), gefolgt von einer öffnenden geschweiften Klammer ('{'), dem Variablennamen und einer schließenden geschweiften Klammer ('}'). Außer in Adressen werden Umgebungsvariablen nur in Argumenten ausgewertet, die in doppelten Anführungszeichen stehen. Diese Einschränkung war nötig, damit bestehende Konfigurationen mit regulären Ausdrücken, die ein Dollarzeichen enthalten, weiterhin funktionieren.

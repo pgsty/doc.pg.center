@@ -11,7 +11,7 @@ aliases:
   - /haproxy/intro/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 2"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 2"
 ---
 
 Ce document présente HAProxy à l'intention de tous ceux qui ne le connaissent pas, ainsi que de ceux qui souhaitent le redécouvrir après avoir utilisé des versions antérieures. Son objectif principal est de fournir à l'utilisateur toutes les informations nécessaires pour décider si HAProxy correspond ou non à ses besoins. Les utilisateurs avancés pourront y trouver des éléments de solutions à certaines idées qu'ils avaient eues, simplement parce qu'ils n'avaient pas connaissance d'une nouvelle fonctionnalité en particulier. Des indications de dimensionnement sont également fournies, le cycle de vie du produit est expliqué, ainsi que des comparaisons avec des produits partiellement similaires.

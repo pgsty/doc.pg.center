@@ -11,7 +11,7 @@ aliases:
   - /haproxy/intro/architecture/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, sections 3–3.2"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, sections 3–3.2"
 ---
 
 “HAProxy” 用于指代产品，而 “haproxy” 用于指代可执行程序、软件包或进程。然而，两者常被互换使用，且均发音为 H-A-Proxy。早期，“haproxy” 曾代表“高可用性代理”（high availability proxy），名称以两个独立单词书写，但如今其含义已仅限于“HAProxy”。

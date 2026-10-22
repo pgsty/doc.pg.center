@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/logging/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 8"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 8"
 ---
 
 对于日志记录，HAProxy 始终依赖 syslog 服务器，因为它不执行任何文件系统访问。标准用法是通过 UDP 将日志发送至日志服务器（默认端口为 514）。通常情况下，该配置会指向 127.0.0.1，即本地 syslog 守护进程运行的位置，但也常通过网络将日志发送至集中式服务器。在主动-主动场景中，集中式服务器尤其具有优势，可确保日志按到达顺序合并。HAProxy 也可使用 Unix 套接字将日志发送至本地 syslog 守护进程，但强烈不建议使用，因为当 syslog 服务器重启而 haproxy 仍在运行时，套接字将被替换，新日志将丢失。由于 HAProxy 将被隔离在 chroot 环境中，它将无法重新连接至新的套接字。现场观察表明，Unix 套接字使用的日志缓冲区非常小，即使在极轻负载下也可能导致消息丢失。不过，这在测试环境中可以接受。

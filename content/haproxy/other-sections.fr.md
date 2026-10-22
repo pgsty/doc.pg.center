@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/other-sections/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 12"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 12"
 ---
 
 Les sections décrites ci-dessous sont moins couramment utilisées et ne prennent généralement en charge qu'un petit nombre de paramètres. Il n'existe aucune relation implicite entre elles. Elles commencent toutes par un mot-clé unique. Aucune d'entre elles n'est autorisée avant une section « global ». Le support de certaines d'entre elles peut être conditionné par des options de compilation (par exemple, tout ce qui est lié au SSL).
