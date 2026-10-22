@@ -7,7 +7,7 @@ search_keywords: [--Jobs, --jobs, --tempdir, Jobs, jobs, tempdir]
 icon: fa-solid fa-gauge-high
 module: [PGBADGER]
 categories: [任务]
-upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -69,7 +69,7 @@ $ pgbadger -J 8 /var/log/postgresql/postgresql-*.log
 ## 限制与临时文件 {#limits-and-temporary-files}
 
 - `-j` 不能用于压缩或 CSV 输入，并且依赖进程 fork，因此不适用于 Windows。
-- 上游远程输入路径不支持远程 CSV 解析。
+- 对于非 CSV 格式的远程日志，使用 `-J` 按整文件处理；`-j` 的单文件分块要求输入位于本地且支持定位读取。CSV 日志可以通过 SSH 读取；在本手册所述的 13.2 之后的开发快照中，监视模式（`-w`）会使用 `awk` 在远程主机上过滤 CSV 记录，同时保留多行字段。参见[远程输入选项](/zh/pgbadger/command-line/)。
 - 并行分析会在指定临时目录中创建形如 `tmp_pgbadgerXXXX.bin` 的文件；默认使用系统临时目录。
 - pgBadger 运行期间不要清理这些文件。可用 `--tempdir` 把它们放到容量充足的存储上。
 - 从较小的工作进程数开始，观察 CPU、读取吞吐量、临时空间占用与总耗时后再调大。

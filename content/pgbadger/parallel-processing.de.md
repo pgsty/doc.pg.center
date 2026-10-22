@@ -7,7 +7,7 @@ search_keywords: [--Jobs, --jobs, --tempdir, Jobs, jobs, tempdir]
 icon: fa-solid fa-gauge-high
 module: [PGBADGER]
 categories: [Aufgabe]
-upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -69,7 +69,7 @@ In der Praxis empfiehlt sich `-j` für wenige große Dateien und `-J` für viele
 ## Einschränkungen und temporäre Dateien {#limits-and-temporary-files}
 
 - `-j` ist für komprimierte oder CSV-Eingabedaten nicht verfügbar und setzt das Forken von Prozessen voraus; daher steht dieser Modus unter Windows nicht zur Verfügung.
-- Bei entfernten Eingaben unterstützt das Originalprojekt keine Verarbeitung von CSV-Dateien.
+- Verwenden Sie für entfernte Protokolle, die nicht im CSV-Format vorliegen, die Verarbeitung ganzer Dateien mit `-J`; die Aufteilung einer einzelnen Datei mit `-j` erfordert lokale Eingaben mit wahlfreiem Lesezugriff. CSV-Protokolle können über SSH gelesen werden. Im hier dokumentierten Entwicklungssnapshot nach Version 13.2 filtert der Überwachungsmodus (`-w`) CSV-Datensätze auf dem entfernten Host mit `awk`, wobei mehrzeilige Felder erhalten bleiben. Siehe die [Optionen für entfernte Eingaben](/de/pgbadger/command-line/).
 - Die parallele Analyse erstellt im ausgewählten temporären Verzeichnis Dateien mit Namen wie `tmp_pgbadgerXXXX.bin` (standardmäßig im temporären Systemverzeichnis).
 - Löschen Sie diese Dateien nicht, während pgBadger läuft. Verwenden Sie `--tempdir`, um sie auf einem Speichermedium mit ausreichender Kapazität abzulegen.
 - Beginnen Sie mit einer moderaten Anzahl von Workern und überwachen Sie CPU-Auslastung, Lesedurchsatz, Verbrauch an temporärem Speicherplatz und Laufzeit.

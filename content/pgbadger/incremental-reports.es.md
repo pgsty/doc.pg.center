@@ -7,7 +7,7 @@ search_keywords: [--day-report, --explode, --extra-files, --incremental, --iso-w
 icon: fa-solid fa-calendar-days
 module: [PGBADGER]
 categories: [Tarea]
-upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -52,6 +52,18 @@ $ pgbadger -X -I -O /var/www/pg_reports postgresql.log.1
 ```
 
 Todos los informes y su directorio de recursos versionado deben moverse juntos.
+
+## Informes por base de datos {#per-database-reports}
+
+Con `-E` / `--explode`, los informes de cada base de datos se almacenan en un subdirectorio del directorio de salida que lleva el nombre de la base de datos. En la instantánea de desarrollo posterior a 13.2 documentada aquí, los nombres de bases de datos que no son seguros como rutas se codifican con porcentajes: `/`, `\`, `%` y los caracteres de control; un punto inicial; los nombres puramente numéricos; y los nombres de archivos que pgBadger escribe en el directorio de salida, como `LAST_PARSED`. Los nombres habituales de bases de datos no cambian.
+
+Por ejemplo, la base de datos `2025` usa el directorio `%32025`, y la base de datos `../foo` usa `%2E.%2Ffoo`. Como estos nombres de directorio contienen signos de porcentaje, cada `%` debe escribirse como `%25` en la URL del informe:
+
+```text
+https://myserver/pg_reports/%2532025/index.html
+```
+
+pgBadger muestra una advertencia con el directorio y la ruta de la URL cuando crea uno de estos directorios por primera vez. En las ejecuciones posteriores, el mensaje solo aparece en el modo de depuración, para evitar mensajes repetidos en los trabajos incrementales programados.
 
 ## Reconstruye informes existentes {#rebuild}
 

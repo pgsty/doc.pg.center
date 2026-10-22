@@ -7,11 +7,13 @@ search_keywords: []
 icon: fa-solid fa-clock-rotate-left
 module: [PGBADGER]
 categories: [Referenz]
-upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/ChangeLog"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/ChangeLog"
 upstream_name: "pgBadger ChangeLog"
 ---
 
 Versionsgeschichte von pgBadger 9.x bis 13.x, nach Hauptversion gruppiert und von der neuesten zur ältesten Version geordnet.
+
+Die hier aufgeführte neueste stabile Version ist 13.2, veröffentlicht am 2025-12-29. Die übrigen Teile dieses Handbuchs behandeln auch den unveröffentlichten Entwicklungssnapshot `f373ac6`. Die folgenden historischen Versionshinweise enden bei der stabilen Version 13.2.
 
 Ältere Versionen können andere Standardwerte oder Upgrade-Verfahren verwenden. Für die Konfiguration von Version 13.2 verwenden Sie die Befehlszeilenreferenz und den Leitfaden zur PostgreSQL-Protokollierung.
 

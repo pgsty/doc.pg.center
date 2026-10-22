@@ -7,9 +7,8 @@ search_keywords: [--content-size, --help, --robot, --version, --zcat, JSON::XS, 
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [教程]
-upstream_link: "https://pgbadger.darold.net/#download"
-upstream_name: "pgBadger website"
-upstream_ref: "site snapshot of 2026-08-15"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_name: "pgBadger README.md"
 ---
 
 ## 选择分发渠道 {#distribution-channels}
@@ -21,7 +20,7 @@ upstream_ref: "site snapshot of 2026-08-15"
 | Debian/Ubuntu 软件包 | 基于 APT 的 Linux 发行版 | [PostgreSQL Apt 仓库](https://wiki.postgresql.org/wiki/Apt) |
 | 开发源码 | 尚未正式发布的最新代码 | [darold/pgbadger](https://github.com/darold/pgbadger) |
 
-安装示例使用 pgBadger 13.2。下载前请查看发布页面，选择所需版本。
+截至 2026-10-23 核验的最新稳定版为 [pgBadger 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2)，发布于 2025-12-29。下方的发布归档示例安装的就是这个版本。本手册也涵盖尚未发布的开发快照；要复现其中的新行为，请使用下方固定到指定提交的检出命令。
 
 ## 运行要求 {#requirements}
 
@@ -83,13 +82,14 @@ $ sudo make install
 ```console
 $ git clone https://github.com/darold/pgbadger.git
 $ cd pgbadger
+$ git checkout --detach f373ac678c756f66a785c5ab4773d1f05f468d67
 $ perl Makefile.PL
 $ make
 $ make test
 $ sudo make install
 ```
 
-开发分支可能包含尚未进入正式版本说明的改动。生产打包应优先使用带标签的发布归档，以保证可复现性。
+此检出对应本手册所述的未发布开发快照：[`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67)，提交于 2026-10-21（UTC）。它晚于稳定版 13.2，但不是新的稳定版本。开发代码可能包含尚未写入版本说明的改动；生产打包应优先使用带标签的发布归档。
 
 ## 验证安装 {#verify-installation}
 

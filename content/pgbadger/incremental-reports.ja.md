@@ -7,7 +7,7 @@ search_keywords: [--day-report, --explode, --extra-files, --incremental, --iso-w
 icon: fa-solid fa-calendar-days
 module: [PGBADGER]
 categories: [タスク]
-upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -52,6 +52,18 @@ $ pgbadger -X -I -O /var/www/pg_reports postgresql.log.1
 ```
 
 すべてのレポートと、バージョン別のリソースディレクトリを一緒に移動する必要があります。
+
+## データベース別レポート {#per-database-reports}
+
+`-E` / `--explode`を使用すると、各データベースのレポートは、出力ディレクトリ内のデータベース名を付けたサブディレクトリに保存されます。ここで説明している13.2より後の開発スナップショットでは、パスとしてそのまま使用できないデータベース名にパーセントエンコーディングを適用します。対象は、`/`、`\`、`%`、制御文字、先頭のドット、数字のみの名前、および`LAST_PARSED`などpgBadgerが出力ディレクトリに書き込むファイルの名前です。通常のデータベース名は変更されません。
+
+たとえば、データベース`2025`にはディレクトリ`%32025`を、データベース`../foo`には`%2E.%2Ffoo`を使用します。これらのディレクトリ名にはパーセント記号が含まれるため、レポートのURLでは各`%`を`%25`と記述する必要があります。
+
+```text
+https://myserver/pg_reports/%2532025/index.html
+```
+
+pgBadgerはこのようなディレクトリを初めて作成するときに、ディレクトリとURLパスを含む警告を出力します。次回以降の実行では、このメッセージはデバッグモードでのみ表示されるため、定期的な増分ジョブで繰り返し出力されることはありません。
 
 ## 既存レポートを再生成する {#rebuild}
 

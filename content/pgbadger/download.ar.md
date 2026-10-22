@@ -7,9 +7,8 @@ search_keywords: [--content-size, --help, --robot, --version, --zcat, JSON::XS, 
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [درس تعليمي]
-upstream_link: "https://pgbadger.darold.net/#download"
-upstream_name: "pgBadger website"
-upstream_ref: "site snapshot of 2026-08-15"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_name: "pgBadger README.md"
 ---
 
 ## اختر قناة التوزيع {#distribution-channels}
@@ -21,7 +20,7 @@ upstream_ref: "site snapshot of 2026-08-15"
 | حزمة Debian/Ubuntu | توزيعات Linux المعتمدة على APT | [مستودع PostgreSQL لـ Apt](https://wiki.postgresql.org/wiki/Apt) |
 | المصدر التطويري | الكود الحالي غير المُصدر بعد | [darold/pgbadger](https://github.com/darold/pgbadger) |
 
-تستخدم أمثلة التثبيت pgBadger 13.2. راجع صفحة الإصدارات قبل اختيار إصدار معين.
+أحدث إصدار مستقر جرى التحقق منه في 2026-10-23 هو [pgBadger 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2)، الصادر في 2025-12-29. يثبّت المثال أدناه، الذي يستخدم أرشيف الإصدار، هذه النسخة. يغطي هذا الدليل أيضًا لقطة تطوير غير منشورة؛ استخدم أمر الانتقال إلى الالتزام المحدد أدناه لإعادة إنتاج سلوكها الأحدث.
 
 ## المتطلبات {#requirements}
 
@@ -83,13 +82,14 @@ $ sudo make install
 ```console
 $ git clone https://github.com/darold/pgbadger.git
 $ cd pgbadger
+$ git checkout --detach f373ac678c756f66a785c5ab4773d1f05f468d67
 $ perl Makefile.PL
 $ make
 $ make test
 $ sudo make install
 ```
 
-قد يحتوي الكود التطويري على تغييرات لم تشملها ملاحظات الإصدار بعد. فضِّل أرشيفًا موسومًا بوسم إصدار للحصول على تغليف إنتاجي قابل للتكرار.
+تطابق نسخة الكود هذه لقطة التطوير غير المنشورة الموثقة هنا: [`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67)، التي سُجّل التزامها في 2026-10-21 (UTC). وهي أحدث من الإصدار المستقر 13.2، لكنها ليست إصدارًا مستقرًا جديدًا. قد يحتوي الكود التطويري على تغييرات لم تشملها ملاحظات الإصدار بعد؛ فضِّل أرشيفًا موسومًا بوسم إصدار عند إعداد حزم لبيئة الإنتاج.
 
 ## التحقق من التثبيت {#verify-installation}
 

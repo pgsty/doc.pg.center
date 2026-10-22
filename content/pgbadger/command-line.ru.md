@@ -8,7 +8,7 @@ search_boost: 8
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [Справочник]
-upstream_link: "https://github.com/darold/pgbadger/tree/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -86,6 +86,7 @@ logfile — один файл журнала, список файлов или �
 -v | --verbose         : Включить подробный или отладочный режим. По умолчанию отключён.
 -V | --version         : Показать версию pgBadger и завершить работу.
 -w | --watch-mode      : Включать в отчёт только ошибки, подобно logwatch.
+                         Данные, читаемые по SSH, фильтруются на удалённом узле.
 -W | --wide-char       : Кодировать HTML-вывод запросов в UTF8, чтобы избежать сообщения Perl
                          «Wide character in print».
 -x | --extension       : Формат вывода: text, html, bin или json. По умолчанию html.
@@ -184,6 +185,8 @@ logfile — один файл журнала, список файлов или �
 pgBadger может разбирать удалённый файл журнала через SSH-соединение без пароля.
 Укажите IP-адрес или имя узла с помощью -r либо --remote-host. Для полного
 управления SSH-соединением предусмотрены дополнительные параметры.
+
+В режиме наблюдения (`-w`) файлы журналов, читаемые по SSH, фильтруются на удалённом узле до передачи. Записи CSV фильтруются с помощью `awk`, причём многострочные поля сохраняются. Это поведение относится к описанному здесь снимку разработки, созданному после выпуска 13.2.
 
 ```text
 --ssh-identity file      Путь к файлу ключа аутентификации.

@@ -8,7 +8,7 @@ search_boost: 8
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [Referencia]
-upstream_link: "https://github.com/darold/pgbadger/tree/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -134,6 +134,7 @@ Opciones:
 -V | --version         : mostrar la versión de pgBadger y salir.
 -w | --watch-mode      : informar solo de los errores, tal como podría
                          hacerlo logwatch.
+                         Las entradas SSH se filtran en el host remoto.
 -W | --wide-char       : codificar en UTF8 la salida HTML de las consultas
                          para evitar el mensaje de Perl
                          "Wide character in print".
@@ -292,6 +293,8 @@ Opciones:
 pgBadger puede analizar un archivo de registro remoto mediante una conexión ssh sin
 contraseña. Usa -r o --remote-host para indicar la dirección IP o el nombre de host.
 También hay algunas opciones adicionales para controlar por completo la conexión ssh.
+
+En el modo de vigilancia (`-w`), los archivos de registro leídos por SSH se filtran en el host remoto antes de transferirse. Los registros CSV se filtran con `awk`, conservando los campos multilínea. Este comportamiento forma parte de la instantánea de desarrollo posterior a 13.2 documentada aquí.
 
 ```text
 --ssh-identity file      ruta del archivo de identidad que se va a usar.

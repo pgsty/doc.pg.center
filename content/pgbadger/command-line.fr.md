@@ -8,7 +8,7 @@ search_boost: 8
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [Référence]
-upstream_link: "https://github.com/darold/pgbadger/tree/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -115,6 +115,7 @@ Options :
                          par défaut.
 -V | --version         : afficher la version de pgBadger puis quitter.
 -w | --watch-mode      : ne rapporter que les erreurs, comme logwatch.
+                         Les entrées SSH sont filtrées sur l’hôte distant.
 -W | --wide-char       : encoder les requêtes de la sortie HTML en UTF8 pour
                          éviter le message Perl "Wide character in print".
 -x | --extension       : format de sortie : text, html, bin ou json. Valeur
@@ -237,6 +238,8 @@ Options :
 
 pgBadger est capable d'analyser un fichier journal distant en utilisant une connexion SSH sans mot de passe.
 Utilisez -r ou --remote-host pour définir l'adresse IP ou le nom d'hôte du serveur. Il existe également plusieurs options supplémentaires pour contrôler entièrement la connexion SSH.
+
+En mode de surveillance (`-w`), les fichiers journaux lus par SSH sont filtrés sur l’hôte distant avant leur transfert. Les enregistrements CSV sont filtrés avec `awk`, en préservant les champs multilignes. Ce comportement fait partie de l’instantané de développement postérieur à la version 13.2 documenté ici.
 
 ```text
 --ssh-identity file      chemin du fichier d’identité à utiliser.

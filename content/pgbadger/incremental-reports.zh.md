@@ -7,7 +7,7 @@ search_keywords: [--day-report, --explode, --extra-files, --incremental, --iso-w
 icon: fa-solid fa-calendar-days
 module: [PGBADGER]
 categories: [任务]
-upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -52,6 +52,18 @@ $ pgbadger -X -I -O /var/www/pg_reports postgresql.log.1
 ```
 
 移动报告时，必须把所有 HTML 与对应版本的资源目录一起移动。
+
+## 分数据库报告 {#per-database-reports}
+
+使用 `-E` / `--explode` 时，每个数据库的报告会存放在输出目录下以数据库名命名的子目录中。在本手册所述的 13.2 之后的开发快照中，不适合直接用作路径的数据库名会进行百分号编码，包括含有 `/`、`\`、`%` 或控制字符的名称、以点开头的名称、纯数字名称，以及与 pgBadger 在输出目录中写入的文件同名的名称，例如 `LAST_PARSED`。普通数据库名保持不变。
+
+例如，数据库 `2025` 使用目录 `%32025`，数据库 `../foo` 使用 `%2E.%2Ffoo`。由于这些目录名含有百分号，报告 URL 中的每个 `%` 都必须写成 `%25`：
+
+```text
+https://myserver/pg_reports/%2532025/index.html
+```
+
+pgBadger 首次创建这类目录时，会输出包含目录和 URL 路径的警告。后续运行时，该消息只在调试模式下显示，以免定时增量任务反复输出提示。
 
 ## 重建已有报告 {#rebuild}
 

@@ -7,7 +7,7 @@ search_keywords: [--Jobs, --jobs, --tempdir, Jobs, jobs, tempdir]
 icon: fa-solid fa-gauge-high
 module: [PGBADGER]
 categories: [タスク]
-upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -69,7 +69,7 @@ $ pgbadger -J 8 /var/log/postgresql/postgresql-*.log
 ## 制限と一時ファイル {#limits-and-temporary-files}
 
 - `-j`は圧縮入力やCSV入力には使用できません。また、プロセスのフォークに依存するため、Windows向けのモードではありません。
-- アップストリームのリモート入力機能では、リモートCSVの解析はサポートされていません。
+- CSV以外のリモートログには、`-J`によるファイル単位の処理を使用してください。`-j`による単一ファイルの分割には、シーク可能なローカル入力が必要です。CSVログはSSH経由で読み取れます。ここで説明している13.2より後の開発スナップショットでは、監視モード（`-w`）がリモートホスト上で`awk`を使ってCSVレコードをフィルタリングし、複数行にわたるフィールドを保持します。[リモート入力オプション](/ja/pgbadger/command-line/)を参照してください。
 - 並列解析では、選択した一時ディレクトリ（デフォルトではシステムの一時ディレクトリ）に`tmp_pgbadgerXXXX.bin`のような名前の一時ファイルを作成します。
 - pgBadgerの実行中はこれらのファイルを削除しないでください。`--tempdir`を使用して、十分な容量のあるストレージに配置します。
 - 最初は控えめなワーカー数で開始し、CPU、読み取りスループット、一時領域の使用量、経過時間を監視してください。

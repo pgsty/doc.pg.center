@@ -7,11 +7,13 @@ search_keywords: []
 icon: fa-solid fa-clock-rotate-left
 module: [PGBADGER]
 categories: [مرجع]
-upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/ChangeLog"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/ChangeLog"
 upstream_name: "pgBadger ChangeLog"
 ---
 
 سجل إصدارات pgBadger من 9.x إلى 13.x، مجمّعة حسب السلاسل الرئيسية ومرتبة من الأحدث إلى الأقدم.
+
+أحدث إصدار مستقر مدرج هنا هو 13.2، الصادر في 2025-12-29. تغطي الأجزاء الأخرى من هذا الدليل أيضًا لقطة التطوير غير المنشورة `f373ac6`. تنتهي ملاحظات الإصدارات التاريخية أدناه عند الإصدار المستقر 13.2.
 
 تصف هذه المدخلات السلوك وقت كل إصدار. قد تختلف القيم الافتراضية التاريخية وأسماء الإعدادات وتعليمات الترقية عنها في 13.2؛ استخدم مرجع سطر الأوامر الحالي ودليل تسجيل سجلات PostgreSQL للإعدادات التشغيلية.
 

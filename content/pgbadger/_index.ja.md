@@ -1,5 +1,5 @@
 ---
-title: "pgBadger 13.2ドキュメント"
+title: "pgBadger 13.2開発スナップショットのドキュメント"
 linkTitle: "pgBadger"
 weight: 40
 description: "PostgreSQLとPgBouncerのログを高速に解析し、詳細で自己完結型のレポートを生成します"
@@ -13,12 +13,16 @@ module: [PGBADGER]
 categories: [概念]
 aliases: [/pgbadger/documentation/]
 upstream_source: pgbadger
-upstream_link: "https://github.com/darold/pgbadger"
+upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
+upstream_link: "https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67"
 cascade:
   upstream_source: pgbadger
+  upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
   type: docs
   module: [PGBADGER]
 ---
+
+このマニュアルは、[未リリースの開発スナップショット`f373ac6`](https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67)に基づいています。このコミットは2026-10-21（UTC）のもので、2025-12-29にリリースされた[安定版13.2](https://github.com/darold/pgbadger/releases/tag/v13.2)より後のものです。このスナップショットで説明する機能には、監視モードでのリモート側のフィルタリングや、エンコードされたデータベース別レポートディレクトリなどがあり、これらは13.2のリリースtarballには含まれません。
 
 ![pgBadgerロゴ](/img/pgbadger/logo.png "pgBadger")
 

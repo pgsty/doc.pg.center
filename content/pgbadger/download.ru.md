@@ -7,9 +7,8 @@ search_keywords: [--content-size, --help, --robot, --version, --zcat, JSON::XS, 
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [Руководство]
-upstream_link: "https://pgbadger.darold.net/#download"
-upstream_name: "pgBadger website"
-upstream_ref: "site snapshot of 2026-08-15"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_name: "pgBadger README.md"
 ---
 
 ## Выбор канала распространения {#distribution-channels}
@@ -21,7 +20,7 @@ upstream_ref: "site snapshot of 2026-08-15"
 | Пакет Debian/Ubuntu | Дистрибутивы Linux на базе APT | [Репозиторий PostgreSQL Apt](https://wiki.postgresql.org/wiki/Apt) |
 | Разрабатываемый исходный код | Текущий код, ещё не вошедший в выпуск | [darold/pgbadger](https://github.com/darold/pgbadger) |
 
-В примерах установки используется pgBadger 13.2. Перед загрузкой проверьте нужную версию на странице выпусков.
+Последняя стабильная версия, проверенная на 2026-10-23, — [pgBadger 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2), выпущенная 2025-12-29. Приведённый ниже пример установки из архива выпуска устанавливает эту версию. Руководство также охватывает неопубликованный снимок разработки; чтобы воспроизвести его новое поведение, используйте приведённые ниже команды с переходом на фиксированный коммит.
 
 ## Требования {#requirements}
 
@@ -83,13 +82,14 @@ $ sudo make install
 ```console
 $ git clone https://github.com/darold/pgbadger.git
 $ cd pgbadger
+$ git checkout --detach f373ac678c756f66a785c5ab4773d1f05f468d67
 $ perl Makefile.PL
 $ make
 $ make test
 $ sudo make install
 ```
 
-Разрабатываемый код может содержать изменения, ещё не описанные в примечаниях к выпуску. Для воспроизводимой сборки производственного пакета предпочтительнее архив с тегом версии.
+Полученный код соответствует описанному здесь неопубликованному снимку разработки: [`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67), коммит от 2026-10-21 (UTC). Он новее стабильной версии 13.2 и не является новым стабильным выпуском. Разрабатываемый код может содержать изменения, ещё не описанные в примечаниях к выпуску; для сборки пакетов для производственной среды предпочтительнее архив с тегом версии.
 
 ## Проверка установки {#verify-installation}
 

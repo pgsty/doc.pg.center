@@ -7,7 +7,7 @@ search_keywords: [--anonymize, --csv-separator, --dump-all-queries, --dump-raw-c
 icon: fa-solid fa-file-export
 module: [PGBADGER]
 categories: [Справочник]
-upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 

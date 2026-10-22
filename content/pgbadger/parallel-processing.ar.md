@@ -7,7 +7,7 @@ search_keywords: [--Jobs, --jobs, --tempdir, Jobs, jobs, tempdir]
 icon: fa-solid fa-gauge-high
 module: [PGBADGER]
 categories: [مهمة]
-upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -69,7 +69,7 @@ $ pgbadger -J 8 /var/log/postgresql/postgresql-*.log
 ## القيود والملفات المؤقتة {#limits-and-temporary-files}
 
 - لا يتوفر `-j` للمدخلات المضغوطة أو بصيغة CSV ويعتمد على اشتقاق العمليات (fork)، ولذلك فهو ليس وضعًا يعمل على Windows.
-- تحليل ملفات CSV البعيدة غير مدعوم عبر مسار المدخلات البعيدة في المشروع الأصلي.
+- للسجلات البعيدة التي ليست بصيغة CSV، استخدم معالجة الملف كاملًا بواسطة `-J`؛ فتقسيم ملف واحد إلى أجزاء باستخدام `-j` يتطلب مدخلات محلية تدعم تغيير موضع القراءة. يمكن قراءة سجلات CSV عبر SSH؛ وفي لقطة التطوير الموثقة هنا واللاحقة للإصدار 13.2، يصفّي وضع المراقبة (`-w`) سجلات CSV على المضيف البعيد باستخدام `awk` مع الحفاظ على الحقول متعددة الأسطر. راجع [خيارات المدخلات البعيدة](/ar/pgbadger/command-line/).
 - ينشئ التحليل المتوازي ملفات مؤقتة بأسماء مثل `tmp_pgbadgerXXXX.bin` داخل دليل الملفات المؤقتة المحدد (وهو افتراضيًا دليل الملفات المؤقتة للنظام).
 - لا تحذف هذه الملفات أثناء تشغيل pgBadger. استخدم `--tempdir` لوضعها على وحدة تخزين بسعة كافية.
 - ابدأ بعدد متواضع من العمليات العاملة وراقب المعالج ومعدل القراءة واستهلاك المساحة المؤقتة والوقت المنقضي.

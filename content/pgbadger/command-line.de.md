@@ -8,7 +8,7 @@ search_boost: 8
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [Referenz]
-upstream_link: "https://github.com/darold/pgbadger/tree/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -111,6 +111,7 @@ Optionen:
                          Standardmäßig deaktiviert.
 -V | --version         : pgBadger-Version anzeigen und beenden.
 -w | --watch-mode      : Nur Fehler auswerten, ähnlich wie logwatch.
+                         SSH-Eingaben werden auf dem entfernten Host gefiltert.
 -W | --wide-char       : Abfragen in der HTML-Ausgabe als UTF8 kodieren, um
                          die Perl-Meldung "Wide character in print" zu vermeiden.
 -x | --extension       : Ausgabeformat: text, html, bin oder json. Standard:
@@ -227,6 +228,8 @@ pgBadger kann eine entfernte Protokolldatei über eine passwortlose
 SSH-Verbindung parsen. Verwenden Sie -r oder --remote-host, um die IP-Adresse
 oder den Hostnamen des Zielsystems festzulegen. Weitere Optionen erlauben die
 vollständige Steuerung der SSH-Verbindung.
+
+Im Überwachungsmodus (`-w`) werden über SSH gelesene Protokolldateien vor der Übertragung auf dem entfernten Host gefiltert. CSV-Datensätze werden mit `awk` gefiltert, wobei mehrzeilige Felder erhalten bleiben. Dieses Verhalten ist Teil des hier dokumentierten Entwicklungssnapshots nach Version 13.2.
 
 ```text
 --ssh-identity file      Pfad zur zu verwendenden Identitätsdatei.

@@ -7,9 +7,8 @@ search_keywords: [--content-size, --help, --robot, --version, --zcat, JSON::XS, 
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [Tutoriel]
-upstream_link: "https://pgbadger.darold.net/#download"
-upstream_name: "pgBadger website"
-upstream_ref: "site snapshot of 2026-08-15"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_name: "pgBadger README.md"
 ---
 
 ## Choisissez un canal de distribution {#distribution-channels}
@@ -21,7 +20,7 @@ upstream_ref: "site snapshot of 2026-08-15"
 | Paquet Debian/Ubuntu | Distributions Linux basées sur APT | [PostgreSQL Apt Repository](https://wiki.postgresql.org/wiki/Apt) |
 | Code source de développement | Code actuel non encore publié | [darold/pgbadger](https://github.com/darold/pgbadger) |
 
-Les exemples d’installation utilisent pgBadger 13.2. Consultez la page des versions avant de choisir une version.
+La dernière version stable vérifiée le 2026-10-23 est [pgBadger 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2), publiée le 2025-12-29. L’exemple d’installation à partir d’une archive ci-dessous installe cette version. Ce manuel couvre également un instantané de développement non publié ; utilisez le checkout fixé à un commit ci-dessous pour reproduire ses nouveaux comportements.
 
 ## Conditions requises {#requirements}
 
@@ -83,13 +82,14 @@ $ sudo make install
 ```console
 $ git clone https://github.com/darold/pgbadger.git
 $ cd pgbadger
+$ git checkout --detach f373ac678c756f66a785c5ab4773d1f05f468d67
 $ perl Makefile.PL
 $ make
 $ make test
 $ sudo make install
 ```
 
-Le code en développement peut contenir des modifications non encore documentées dans les notes de version. Privilégiez une archive associée à une version publiée pour produire des paquets reproductibles en production.
+Ce checkout correspond à l’instantané de développement non publié documenté ici : [`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67), dont le commit date du 2026-10-21 (UTC). Il est postérieur à la version stable 13.2 et ne constitue pas une nouvelle version stable. Le code en développement peut contenir des modifications non encore documentées dans les notes de version ; privilégiez une archive associée à une version publiée pour produire des paquets de production.
 
 ## Vérifier l'installation {#verify-installation}
 

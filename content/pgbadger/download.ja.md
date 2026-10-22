@@ -7,9 +7,8 @@ search_keywords: [--content-size, --help, --robot, --version, --zcat, JSON::XS, 
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [チュートリアル]
-upstream_link: "https://pgbadger.darold.net/#download"
-upstream_name: "pgBadger website"
-upstream_ref: "site snapshot of 2026-08-15"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_name: "pgBadger README.md"
 ---
 
 ## 配布経路を選ぶ {#distribution-channels}
@@ -21,7 +20,7 @@ upstream_ref: "site snapshot of 2026-08-15"
 | Debian/Ubuntuパッケージ | APTを使用するLinuxディストリビューション | [PostgreSQL Apt Repository](https://wiki.postgresql.org/wiki/Apt) |
 | 開発用ソース | 未リリースの最新コード | [darold/pgbadger](https://github.com/darold/pgbadger) |
 
-以下のインストール例ではpgBadger 13.2を使用します。ダウンロード前にリリースページで利用するバージョンを確認してください。
+2026-10-23時点で確認した最新の安定版は、2025-12-29にリリースされた[pgBadger 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2)です。以下のリリースtarballを使う例では、このバージョンをインストールします。このマニュアルは未リリースの開発スナップショットも対象にしています。新しい動作を再現するには、以下の特定コミットに固定したチェックアウトを使用してください。
 
 ## 要件 {#requirements}
 
@@ -83,13 +82,14 @@ $ sudo make install
 ```console
 $ git clone https://github.com/darold/pgbadger.git
 $ cd pgbadger
+$ git checkout --detach f373ac678c756f66a785c5ab4773d1f05f468d67
 $ perl Makefile.PL
 $ make
 $ make test
 $ sudo make install
 ```
 
-開発版のコードには、リリースノートにまだ記載されていない変更が含まれる場合があります。本番環境向けのパッケージを再現可能に作成するには、タグ付きのアーカイブを使用してください。
+このチェックアウトは、ここで説明している未リリースの開発スナップショット[`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67)に対応します。コミット日時は2026-10-21（UTC）です。安定版13.2より新しいものですが、新たな安定版ではありません。開発版のコードには、リリースノートにまだ記載されていない変更が含まれる場合があります。本番環境向けのパッケージ作成には、タグ付きのアーカイブを優先してください。
 
 ## インストールを確認する {#verify-installation}
 

@@ -1,5 +1,5 @@
 ---
-title: "Документация pgBadger 13.2"
+title: "Документация снимка разработки pgBadger 13.2"
 linkTitle: pgBadger
 weight: 40
 description: "Быстрый анализ журналов PostgreSQL и PgBouncer с подробными автономными отчётами"
@@ -13,12 +13,16 @@ module: [PGBADGER]
 categories: [Концепция]
 aliases: [/pgbadger/documentation/]
 upstream_source: pgbadger
-upstream_link: "https://github.com/darold/pgbadger"
+upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
+upstream_link: "https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67"
 cascade:
   upstream_source: pgbadger
+  upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
   type: docs
   module: [PGBADGER]
 ---
+
+Это руководство соответствует [неопубликованному снимку разработки `f373ac6`](https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67), зафиксированному коммитом от 2026-10-21 (UTC), после выхода [стабильной версии 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2) от 2025-12-29. Описанные для этого снимка возможности, включая удалённую фильтрацию в режиме наблюдения и кодирование имён каталогов отчётов по базам данных, не входят в архив выпуска 13.2.
 
 ![Логотип pgBadger](/img/pgbadger/logo.png "pgBadger")
 

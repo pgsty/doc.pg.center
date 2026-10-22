@@ -7,7 +7,7 @@ search_keywords: [--day-report, --explode, --extra-files, --incremental, --iso-w
 icon: fa-solid fa-calendar-days
 module: [PGBADGER]
 categories: [Aufgabe]
-upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -52,6 +52,18 @@ $ pgbadger -X -I -O /var/www/pg_reports postgresql.log.1
 ```
 
 Alle Berichte und das zugehörige versionierte Ressourcenverzeichnis müssen gemeinsam verschoben werden.
+
+## Berichte pro Datenbank {#per-database-reports}
+
+Mit `-E` / `--explode` werden die Berichte jeder Datenbank in einem nach ihr benannten Unterverzeichnis des Ausgabeverzeichnisses gespeichert. Im hier dokumentierten Entwicklungssnapshot nach Version 13.2 werden Datenbanknamen, die sich nicht unverändert als Pfade eignen, prozentkodiert: `/`, `\`, `%` und Steuerzeichen; ein führender Punkt; rein numerische Namen sowie Namen von Dateien, die pgBadger in das Ausgabeverzeichnis schreibt, etwa `LAST_PARSED`. Gewöhnliche Datenbanknamen bleiben unverändert.
+
+Beispielsweise verwendet die Datenbank `2025` das Verzeichnis `%32025` und die Datenbank `../foo` das Verzeichnis `%2E.%2Ffoo`. Da diese Verzeichnisnamen Prozentzeichen enthalten, muss jedes `%` in der Berichts-URL als `%25` geschrieben werden:
+
+```text
+https://myserver/pg_reports/%2532025/index.html
+```
+
+Wenn pgBadger ein solches Verzeichnis erstmals erstellt, gibt es eine Warnung mit dem Verzeichnis und dem URL-Pfad aus. Bei späteren Ausführungen erscheint die Meldung nur im Debug-Modus, damit geplante inkrementelle Aufträge keine wiederholten Meldungen erzeugen.
 
 ## Vorhandene Berichte neu erstellen {#rebuild}
 

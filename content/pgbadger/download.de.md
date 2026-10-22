@@ -7,9 +7,8 @@ search_keywords: [--content-size, --help, --robot, --version, --zcat, JSON::XS, 
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [Tutorial]
-upstream_link: "https://pgbadger.darold.net/#download"
-upstream_name: "pgBadger website"
-upstream_ref: "site snapshot of 2026-08-15"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_name: "pgBadger README.md"
 ---
 
 ## Verteilungskanal auswählen {#distribution-channels}
@@ -21,7 +20,7 @@ upstream_ref: "site snapshot of 2026-08-15"
 | Debian/Ubuntu-Paket | APT-basierte Linux-Distributionen | [PostgreSQL Apt Repository](https://wiki.postgresql.org/wiki/Apt) |
 | Entwicklungsquelle | Aktueller, noch nicht veröffentlichter Code | [darold/pgbadger](https://github.com/darold/pgbadger) |
 
-Die Installationsbeispiele verwenden pgBadger 13.2. Prüfen Sie die Releaseseite, bevor Sie eine Version auswählen.
+Die am 2026-10-23 überprüfte neueste stabile Version ist [pgBadger 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2), veröffentlicht am 2025-12-29. Das folgende Beispiel zur Installation aus dem Release-Tarball installiert diese Version. Dieses Handbuch behandelt auch einen unveröffentlichten Entwicklungssnapshot; verwenden Sie den unten auf einen bestimmten Commit festgelegten Checkout, um dessen neueres Verhalten zu reproduzieren.
 
 ## Anforderungen {#requirements}
 
@@ -83,13 +82,14 @@ $ sudo make install
 ```console
 $ git clone https://github.com/darold/pgbadger.git
 $ cd pgbadger
+$ git checkout --detach f373ac678c756f66a785c5ab4773d1f05f468d67
 $ perl Makefile.PL
 $ make
 $ make test
 $ sudo make install
 ```
 
-Der Entwicklungsstand kann Änderungen enthalten, die noch nicht in den Versionshinweisen dokumentiert sind. Verwenden Sie für reproduzierbare Produktionspakete vorzugsweise ein mit einem Versions-Tag versehenes Archiv.
+Dieser Checkout entspricht dem hier dokumentierten unveröffentlichten Entwicklungssnapshot: [`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67), dessen Commit vom 2026-10-21 (UTC) stammt. Er ist neuer als die stabile Version 13.2 und stellt keine neue stabile Version dar. Der Entwicklungsstand kann Änderungen enthalten, die noch nicht in den Versionshinweisen dokumentiert sind; verwenden Sie für Produktionspakete vorzugsweise ein mit einem Versions-Tag versehenes Archiv.
 
 ## Installation überprüfen {#verify-installation}
 

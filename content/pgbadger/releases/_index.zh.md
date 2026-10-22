@@ -7,11 +7,13 @@ search_keywords: []
 icon: fa-solid fa-clock-rotate-left
 module: [PGBADGER]
 categories: [参考]
-upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/ChangeLog"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/ChangeLog"
 upstream_name: "pgBadger ChangeLog"
 ---
 
 pgBadger 9.x–13.x 的版本历史，按主要版本系列分组，每个系列按从新到旧排序。
+
+此处列出的最新稳定版为 13.2，发布于 2025-12-29。本手册的其他部分也涵盖尚未发布的开发快照 `f373ac6`。下方的历史版本说明截至稳定版 13.2。
 
 这些条目描述的是各版本发布时的行为。历史默认值、配置名称和升级指引可能与 13.2 不同；实际运行设置请以当前命令行参考和 PostgreSQL 日志配置指南为准。
 

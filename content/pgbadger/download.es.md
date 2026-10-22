@@ -7,9 +7,8 @@ search_keywords: [--content-size, --help, --robot, --version, --zcat, JSON::XS, 
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [Tutorial]
-upstream_link: "https://pgbadger.darold.net/#download"
-upstream_name: "pgBadger website"
-upstream_ref: "site snapshot of 2026-08-15"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_name: "pgBadger README.md"
 ---
 
 ## Elige un canal de distribución {#distribution-channels}
@@ -21,7 +20,7 @@ upstream_ref: "site snapshot of 2026-08-15"
 | Paquete Debian/Ubuntu | Distribuciones Linux basadas en APT | [PostgreSQL Apt Repository](https://wiki.postgresql.org/wiki/Apt) |
 | Código fuente de desarrollo | Código actual aún no publicado | [darold/pgbadger](https://github.com/darold/pgbadger) |
 
-Los ejemplos de instalación usan pgBadger 13.2. Consulta la página de versiones antes de elegir una.
+La última versión estable comprobada el 2026-10-23 es [pgBadger 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2), publicada el 2025-12-29. El ejemplo siguiente, que usa el archivo de la versión, instala esa versión. Este manual también cubre una instantánea de desarrollo no publicada; usa el checkout fijado a un commit que aparece más abajo para reproducir sus nuevos comportamientos.
 
 ## Requisitos {#requirements}
 
@@ -83,13 +82,14 @@ $ sudo make install
 ```console
 $ git clone https://github.com/darold/pgbadger.git
 $ cd pgbadger
+$ git checkout --detach f373ac678c756f66a785c5ab4773d1f05f468d67
 $ perl Makefile.PL
 $ make
 $ make test
 $ sudo make install
 ```
 
-El código de desarrollo puede contener cambios aún no cubiertos por una nota de versión. Prefiere un archivo de una versión etiquetada para producir paquetes reproducibles en producción.
+Este checkout corresponde a la instantánea de desarrollo no publicada documentada aquí: [`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67), cuyo commit se realizó el 2026-10-21 (UTC). Es posterior a la versión estable 13.2 y no es una nueva versión estable. El código de desarrollo puede contener cambios aún no cubiertos por las notas de la versión; prefiere un archivo de una versión etiquetada para preparar paquetes de producción.
 
 ## Verifica la instalación {#verify-installation}
 

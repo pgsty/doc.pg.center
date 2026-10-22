@@ -7,7 +7,7 @@ search_keywords: [--prefix, lc_messages, log_autovacuum_min_duration, log_checkp
 icon: fa-solid fa-database
 module: [PGBADGER]
 categories: [Tarea]
-upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 

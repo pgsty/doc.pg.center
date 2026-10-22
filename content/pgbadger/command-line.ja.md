@@ -8,7 +8,7 @@ search_boost: 8
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [リファレンス]
-upstream_link: "https://github.com/darold/pgbadger/tree/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -84,6 +84,7 @@ logfileには、単一のログファイル、複数のファイル、または�
 -v | --verbose         : 詳細・デバッグモードを有効にします。デフォルトでは無効です。
 -V | --version         : pgBadgerのバージョンを表示して終了します。
 -w | --watch-mode      : logwatchのようにエラーだけをレポートします。
+                         SSH入力はリモートホスト側でフィルタリングされます。
 -W | --wide-char       : クエリーのHTML出力をUTF8にエンコードし、Perlの「Wide character in print」メッセージを防
                          ぎます。
 -x | --extension       : 出力形式。text、html、bin、jsonを指定できます。デフォルトはhtml。
@@ -164,6 +165,8 @@ logfileには、単一のログファイル、複数のファイル、または�
 ```
 
 pgBadgerは、パスワードなしのSSH接続でリモートログファイルを解析できます。-rまたは --remote-host でホストのIPアドレスまたはホスト名を指定します。SSH接続を細かく制御する追加オプションもあります。
+
+監視モード（`-w`）では、SSH経由で読み取るログファイルは転送前にリモートホスト側でフィルタリングされます。CSVレコードは`awk`でフィルタリングされ、複数行にわたるフィールドは保持されます。この動作は、ここで説明している13.2より後の開発スナップショットに含まれます。
 
 ```text
 --ssh-identity file      使用する認証鍵ファイルのパス。

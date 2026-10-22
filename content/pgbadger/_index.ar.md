@@ -1,5 +1,5 @@
 ---
-title: "توثيق pgBadger 13.2"
+title: "توثيق لقطة التطوير لـ pgBadger 13.2"
 linkTitle: pgBadger
 weight: 40
 description: "تحليل سريع لسجلات PostgreSQL وPgBouncer مع تقارير مفصلة مكتفية ذاتيًا"
@@ -13,12 +13,16 @@ module: [PGBADGER]
 categories: [مفهوم]
 aliases: [/pgbadger/documentation/]
 upstream_source: pgbadger
-upstream_link: "https://github.com/darold/pgbadger"
+upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
+upstream_link: "https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67"
 cascade:
   upstream_source: pgbadger
+  upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
   type: docs
   module: [PGBADGER]
 ---
+
+يتبع هذا الدليل [لقطة التطوير غير المنشورة `f373ac6`](https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67)، التي سُجّل التزامها في 2026-10-21 (UTC)، بعد [الإصدار المستقر 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2) الصادر في 2025-12-29. الميزات الموصوفة لهذه اللقطة، ومنها التصفية على المضيف البعيد في وضع المراقبة وترميز أسماء أدلة التقارير الخاصة بكل قاعدة بيانات، ليست جزءًا من أرشيف الإصدار 13.2.
 
 ![شعار pgBadger](/img/pgbadger/logo.png "pgBadger")
 
