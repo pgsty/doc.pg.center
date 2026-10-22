@@ -727,7 +727,7 @@ This mirror covers v2.60.0. See the [upstream release history](https://pgbackres
   Pull request [#2642](https://github.com/pgbackrest/pgbackrest/pull/2642); Commit [`5e14692`](https://github.com/pgbackrest/pgbackrest/commit/5e14692588b9fd8a566c9a1795c866ba2e83eebd)
 - Fix defaults in command-line help. (*Reviewed by David Christensen, Chris Bandy.*)
 
-  When an option has more than one default, e.g. `repo-storage-upload-chunk-size` with an S3 and an Azure repository, the option list shows `` and the help for the option lists each default. Defaults are not shown for options that are not valid in the current configuration.
+  When an option has more than one default, e.g. `repo-storage-upload-chunk-size` with an S3 and an Azure repository, the option list shows `<multi>` and the help for the option lists each default. Defaults are not shown for options that are not valid in the current configuration.
 
   Pull request [#2625](https://github.com/pgbackrest/pgbackrest/pull/2625); Commit [`8737cad`](https://github.com/pgbackrest/pgbackrest/commit/8737cad566974c37529595715ecdc06571420752)
 
@@ -1006,7 +1006,7 @@ This mirror covers v2.60.0. See the [upstream release history](https://pgbackres
   Issue [#2428](https://github.com/pgbackrest/pgbackrest/issues/2428); Pull request [#2429](https://github.com/pgbackrest/pgbackrest/pull/2429); Commit [`95a4b9e`](https://github.com/pgbackrest/pgbackrest/commit/95a4b9e10a3f7a26ebaae22fc6abd79cee14189a)
 - Correctly display current values for indexed options in help. (*Reviewed by David Christensen.*)
 
-  The current value shown for an indexed option was always the value for the first index, e.g. `pg1-path`. The option help now lists the value for each index, and the option list shows `` when there is more than one.
+  The current value shown for an indexed option was always the value for the first index, e.g. `pg1-path`. The option help now lists the value for each index, and the option list shows `<multi>` when there is more than one.
 
   Pull request [#2453](https://github.com/pgbackrest/pgbackrest/pull/2453); Commit [`b3ca2e3`](https://github.com/pgbackrest/pgbackrest/commit/b3ca2e34823b28862d999f87c4d7346707952a5b)
 - Save `backup.info` only when contents have changed. (*Reviewed by Stefan Fercot.*)
