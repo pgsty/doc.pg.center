@@ -1,5 +1,5 @@
 ---
-title: "توثيق PgBouncer 1.26.0"
+title: "توثيق PgBouncer 1.26.1"
 linkTitle: PgBouncer
 weight: 30
 description: >
@@ -12,16 +12,16 @@ sidebar_root_link_self: true
 module: [PGBOUNCER]
 categories: [مفهوم]
 upstream_source: pgbouncer
-upstream_ref: v1.26.0
+upstream_ref: v1.26.1
 upstream_link: "https://www.pgbouncer.org/"
 cascade:
   upstream_source: pgbouncer
-  upstream_ref: v1.26.0
+  upstream_ref: v1.26.1
   type: docs
   module: [PGBOUNCER]
 ---
 
-يستند هذا الدليل إلى [PgBouncer 1.26.0](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0)، الصادر في 2026-09-23. راجع [ملاحظات الإصدار](/ar/pgbouncer/changelog/#pgbouncer-126x) للاطلاع على التغييرات عن الإصدارات السابقة.
+يستند هذا الدليل إلى [PgBouncer 1.26.1](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_1)، الصادر في 2026-10-14. راجع [ملاحظات الإصدار](/ar/pgbouncer/changelog/#pgbouncer-126x) للاطلاع على التغييرات عن الإصدارات السابقة.
 
 **pgbouncer** هو مجمِّع اتصالات لـ PostgreSQL. يمكن ربط أي تطبيق
 هدف بـ **pgbouncer** وكأنه خادم PostgreSQL،

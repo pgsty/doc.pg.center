@@ -6,7 +6,7 @@ description: "PgBouncer 設定ファイル (pgbouncer.ini) リファレンス"
 icon: fa-solid fa-code
 module: [PGBOUNCER]
 categories: [リファレンス]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/doc/config.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/doc/config.md"
 ---
 
 --------
@@ -210,6 +210,8 @@ Postgres プロトコルでは、パラメータ設定を、スタートアッ�
 複数の値を指定する必要がある場合は、カンマ区切りのリストを使用してください（例： `options,extra_float_digits`）
 
 Postgres プロトコルでは、パラメータ設定を、起動パケット内のパラメータとして直接指定するか、[`options` 起動パケット][options-startup] 内に含める方法で指定できます。これらの両方の方法で指定されたパラメータは、`ignore_startup_parameters` でサポートされています。さらに、`options` 自体を `ignore_startup_parameters` に含めることも可能です。この場合、`options` 内に含まれる未知のパラメータはすべて無視されます。
+
+ここに明示的に列挙したパラメータは、通常なら PgBouncer が追跡する場合でも無視されます。これにより、デフォルトで追跡されるパラメータの追跡を無効にできます。たとえば、PostgreSQL 18 より前のバージョンでは、PostgreSQL が `search_path` の変更を報告しないため、このパラメータに利用できます。`options` 自体を含めても、`options` 内の追跡対象パラメータが無視されることはありません。
 
 [options-startup]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-OPTIONS
 
@@ -432,7 +434,7 @@ syslog にログを送信する際の名前。
 
 ### admin_users {#admin_users}
 
-コンソールへの接続とすべてのコマンドの実行を許可されるデータベースユーザーのカンマ区切りリスト。`auth_type=any` の場合でも、このリストが管理者権限を取得するユーザーを決定します。その他のユーザーは statistics ユーザーとしてログインできます。[1.26.0 のコンソールアクセスチェック](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/src/admin.c#L1572-L1609)を参照してください。
+コンソールへの接続とすべてのコマンドの実行を許可されるデータベースユーザーのカンマ区切りリスト。`auth_type=any` の場合でも、このリストが管理者権限を取得するユーザーを決定します。その他のユーザーは statistics ユーザーとしてログインできます。[1.26.1 のコンソールアクセスチェック](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/src/admin.c#L1572-L1609)を参照してください。
 
 デフォルト： 空
 
@@ -746,7 +748,7 @@ TLS バージョン 1.3 以上の接続にのみ影響します。バージョ�
 
 この設定は、応答しないサーバーが接続を占有するのを防ぐために使用されます。また、サーバーがダウンしている場合や、何らかの理由で接続を拒否している場合にも役立ちます。
 
-この設定は、データベースごとおよびユーザーごとに構成することもできます。優先順位は、ユーザー、次にデータベース、次にグローバルです。選択されたレベルで明示的に 0 を指定すると、このタイムアウトは無効になります。[1.26.0 のタイムアウト選択コード](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/src/janitor.c#L328-L336)を参照してください。
+この設定は、データベースごとおよびユーザーごとに構成することもできます。優先順位は、ユーザー、次にデータベース、次にグローバルです。選択されたレベルで明示的に 0 を指定すると、このタイムアウトは無効になります。[1.26.1 のタイムアウト選択コード](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/src/janitor.c#L328-L336)を参照してください。
 
 デフォルト： 120.0
 

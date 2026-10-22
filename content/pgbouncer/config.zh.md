@@ -6,7 +6,7 @@ description: "PgBouncer 配置文件（pgbouncer.ini）参考"
 icon: fa-solid fa-code
 module: [PGBOUNCER]
 categories: [参考]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/doc/config.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/doc/config.md"
 ---
 
 --------
@@ -210,6 +210,8 @@ Postgres 协议支持通过两种方式指定参数设置：直接作为启动�
 若需指定多个值，请使用逗号分隔的列表（例如 `options,extra_float_digits`）。
 
 Postgres 协议支持通过两种方式指定参数设置：直接作为启动包中的参数，或在 [`options` 启动包][options-startup] 中指定。这两种方式指定的参数均受 `ignore_startup_parameters` 支持。甚至可以将 `options` 本身包含在 `ignore_startup_parameters` 中，这样 `options` 中包含的所有未知参数都会被忽略。
+
+在此处显式列出的参数，即使原本会被 PgBouncer 跟踪，也会被忽略。可用此设置停止跟踪默认被跟踪的参数，例如 PostgreSQL 18 之前版本中的 `search_path`，因为这些版本不会上报该参数的变化。列出 `options` 本身不会使其中被跟踪的参数被忽略。
 
 [options-startup]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-OPTIONS
 
@@ -431,7 +433,7 @@ auth_ldap_options = ldapurl="ldap://127.0.0.1:12345/dc=example,dc=net?uid?sub"
 
 ### admin_users
 
-允许连接并在控制台执行所有命令的数据库用户（逗号分隔列表）。当 `auth_type=any` 时，此列表仍决定哪些用户获得管理员权限；其他用户可作为统计用户登录。详见 [1.26.0 控制台访问检查](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/src/admin.c#L1572-L1609)。
+允许连接并在控制台执行所有命令的数据库用户（逗号分隔列表）。当 `auth_type=any` 时，此列表仍决定哪些用户获得管理员权限；其他用户可作为统计用户登录。详见 [1.26.1 控制台访问检查](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/src/admin.c#L1572-L1609)。
 
 默认值：空
 
@@ -745,7 +747,7 @@ PgBouncer 用于向 PostgreSQL 服务器进行认证的私钥。
 
 此设置用于防止无响应的服务器占用连接。在服务器宕机或因任何原因拒绝连接时也有帮助。
 
-此设置也可在数据库级和用户级配置，优先级依次为用户、数据库、全局。实际选用的配置层级若显式设为 0，则禁用此超时。详见 [1.26.0 超时选择逻辑](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/src/janitor.c#L328-L336)。
+此设置也可在数据库级和用户级配置，优先级依次为用户、数据库、全局。实际选用的配置层级若显式设为 0，则禁用此超时。详见 [1.26.1 超时选择逻辑](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/src/janitor.c#L328-L336)。
 
 默认值：120.0
 

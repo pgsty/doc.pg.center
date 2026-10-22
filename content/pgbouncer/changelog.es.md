@@ -5,12 +5,21 @@ description: "Historial de versiones y notas de publicación de PgBouncer"
 icon: fa-solid fa-scroll
 module: [PGBOUNCER]
 categories: [Referencia]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEWS.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/NEWS.md"
 ---
 
 --------
 
 ## PgBouncer 1.26.x {#pgbouncer-126x}
+
+**2026-10-14  -  PgBouncer 1.26.1  -  « Iniciar solo una vez »**
+
+- Seguridad
+    * Corrección de CVE-2026-107350: PgBouncer desde 1.17.0 hasta 1.26.0 procesaba un segundo StartupMessage enviado durante la autenticación SCRAM cuando el cliente se conectaba a una base de datos inexistente. Un atacante que conociera la contraseña de un usuario incluido en `auth_file` podía aprovecharlo para iniciar sesión como cualquier otro usuario que se autenticara mediante SCRAM, incluidos los administradores y los superusuarios del servidor PostgreSQL. Esto requiere que ambos usuarios utilicen autenticación SCRAM. El usuario suplantado puede proceder tanto de `auth_file` como de `auth_query`.
+    * Corrección de CVE-2026-107349: un cliente no autenticado podía hacer que PgBouncer desde 1.20.0 hasta 1.26.0 entrara en un bucle infinito en un núcleo de CPU y dejara de atender a todos los clientes, enviando un parámetro de arranque `options` que contuviera un nombre de opción vacío, como `-c=`. Esto solo puede explotarse cuando `ignore_startup_parameters` no está vacío y no contiene `options`.
+    * Corrección de CVE-2026-107348: un desbordamiento de enteros en la lógica de crecimiento del búfer de paquetes de PgBouncer desde 1.21.0 hasta 1.26.0 podía hacer que PgBouncer quedara bloqueado en un bucle infinito cuando un cliente enviaba una cabecera de paquete que declarara una longitud superior a 2^31. Esto solo puede explotarse cuando `max_packet_size` se establece en 2147483649 o más; el valor predeterminado de 2147483647 no se ve afectado. Desde 1.23.0, el error puede alcanzarse antes de la autenticación. Es la misma clase de error que CVE-2026-6668, pero en una implementación de búfer diferente.
+- Correcciones
+    * `ignore_startup_parameters` ahora tiene prioridad sobre los parámetros rastreados. Desde 1.26.0, `search_path` se rastrea de forma predeterminada, lo que hacía que `ignore_startup_parameters = search_path` dejara de tener efecto sin avisar. Desde esa publicación se han notificado varios errores relacionados con el seguimiento del parámetro `search_path`. Estos errores se corregirán en una versión posterior. Añadir `search_path` a `ignore_startup_parameters` ahora restaura el comportamiento de 1.25, que consistía en ignorarlo. (error introducido en 1.26.0)
 
 **2026-09-23  -  PgBouncer 1.26.0  -  « Ignora todos los search_path anteriores »**
 

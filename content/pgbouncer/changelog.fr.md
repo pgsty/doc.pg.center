@@ -5,12 +5,21 @@ description: "Historique des versions et notes de publication de PgBouncer"
 icon: fa-solid fa-scroll
 module: [PGBOUNCER]
 categories: [Référence]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEWS.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/NEWS.md"
 ---
 
 --------
 
 ## PgBouncer 1.26.x {#pgbouncer-126x}
+
+**2026-10-14  -  PgBouncer 1.26.1  -  « Ne démarrer qu'une fois »**
+
+- Sécurité
+    * Correctif CVE-2026-107350 : PgBouncer 1.17.0 à 1.26.0 traitait un second StartupMessage envoyé pendant l'authentification SCRAM lorsque le client se connectait à une base de données inexistante. Un attaquant connaissant le mot de passe d'un utilisateur figurant dans `auth_file` pouvait exploiter ce comportement pour se connecter sous l'identité de tout autre utilisateur s'authentifiant avec SCRAM, y compris les administrateurs et les superutilisateurs du serveur PostgreSQL. Cela nécessite que les deux utilisateurs emploient l'authentification SCRAM. L'utilisateur dont l'identité est usurpée peut provenir de `auth_file` ou de `auth_query`.
+    * Correctif CVE-2026-107349 : Un client non authentifié pouvait faire tourner PgBouncer 1.20.0 à 1.26.0 indéfiniment sur un cœur de processeur, l'empêchant ainsi de servir tous les clients, en envoyant un paramètre de démarrage `options` contenant un nom d'option vide tel que `-c=`. Cette faille n'est exploitable que si `ignore_startup_parameters` n'est pas vide et ne contient pas `options`.
+    * Correctif CVE-2026-107348 : Un dépassement d'entier dans la logique de croissance du tampon de paquets de PgBouncer 1.21.0 à 1.26.0 pouvait bloquer PgBouncer dans une boucle infinie lorsqu'un client envoyait un en-tête de paquet déclarant une longueur supérieure à 2^31. Cette faille n'est exploitable que si `max_packet_size` est défini à 2147483649 ou plus ; la valeur par défaut de 2147483647 n'est pas affectée. Depuis la version 1.23.0, elle peut être déclenchée avant l'authentification. Il s'agit de la même catégorie de bogue que CVE-2026-6668, mais dans une autre implémentation de tampon.
+- Correctifs
+    * Donner à `ignore_startup_parameters` la priorité sur les paramètres suivis. Depuis la version 1.26.0, `search_path` est suivi par défaut, ce qui rendait `ignore_startup_parameters = search_path` silencieusement inopérant. Depuis cette publication, plusieurs bogues liés au suivi du paramètre `search_path` ont été signalés. Ils seront corrigés dans une version ultérieure. Ajouter `search_path` à `ignore_startup_parameters` rétablit désormais le comportement de la version 1.25, qui consistait à l'ignorer. (bogue introduit dans la version 1.26.0)
 
 **2026-09-23  -  PgBouncer 1.26.0  -  « Ignorer tous les search_path précédents »**
 

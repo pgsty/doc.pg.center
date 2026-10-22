@@ -6,7 +6,7 @@ description: "Инструкции по компиляции и установк
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBOUNCER]
 categories: [Руководство]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/README.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/README.md"
 ---
 
 --------
@@ -129,7 +129,7 @@ c-ares — наиболее функциональная реализация, �
 При сборке Autoconf перед запуском `configure` необходимо создать файлы
 заголовков и конфигурации:
 
-	$ git clone --branch pgbouncer_1_26_0 https://github.com/pgbouncer/pgbouncer.git
+	$ git clone --branch pgbouncer_1_26_1 https://github.com/pgbouncer/pgbouncer.git
 	$ cd pgbouncer
 	$ ./autogen.sh
 	$ ./configure
@@ -160,7 +160,7 @@ libtool, pandoc
 
 Порядок запуска тестов приведён в [файле `README.md` каталога тестов][1].
 
-[1]: https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/test/README.md
+[1]: https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/test/README.md
 
 --------
 

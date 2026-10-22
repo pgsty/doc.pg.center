@@ -6,7 +6,7 @@ description: "Справочник по файлу конфигурации PgBo
 icon: fa-solid fa-code
 module: [PGBOUNCER]
 categories: [Справочник]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/doc/config.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/doc/config.md"
 ---
 
 --------
@@ -291,6 +291,8 @@ Postgres 18.
 поддерживает оба способа. Можно даже включить сам `options` в
 `ignore_startup_parameters`, в результате чего все неизвестные параметры внутри
 `options` будут игнорироваться.
+
+Явно перечисленные здесь параметры игнорируются, даже если иначе PgBouncer отслеживал бы их. Это позволяет отключить отслеживание параметров, отслеживаемых по умолчанию, например `search_path` в версиях PostgreSQL до 18, в которых PostgreSQL не сообщает об изменениях этого параметра. Добавление `options` не приводит к игнорированию отслеживаемых параметров внутри `options`.
 
 [options-startup]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-OPTIONS
 
@@ -600,7 +602,7 @@ Facility для отправки журналов в syslog. Возможные 
 и выполнять все команды в консоли. При `auth_type=any` этот список по-прежнему
 определяет, кто получает права администратора; остальные пользователи могут
 входить как пользователи статистики. См. [проверки доступа к консоли в версии
-1.26.0](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/src/admin.c#L1572-L1609).
+1.26.1](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/src/admin.c#L1572-L1609).
 
 По умолчанию: пусто
 
@@ -990,7 +992,7 @@ PgBouncer может получать зоны DNS из имён узлов — 
 пользователя. Приоритет следующий: пользователь, затем база данных, затем
 глобальное значение. Явное значение 0 на выбранном уровне отключает этот
 тайм-аут. См. [код выбора тайм-аута в версии
-1.26.0](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/src/janitor.c#L328-L336).
+1.26.1](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/src/janitor.c#L328-L336).
 
 По умолчанию: 120.0
 

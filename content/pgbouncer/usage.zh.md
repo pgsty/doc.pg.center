@@ -6,7 +6,7 @@ description: "PgBouncer 命令行用法与管理控制台"
 icon: fa-solid fa-bell-concierge
 module: [PGBOUNCER]
 categories: [任务]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/doc/usage.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/doc/usage.md"
 ---
 
 --------

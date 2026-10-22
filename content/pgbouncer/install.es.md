@@ -6,7 +6,7 @@ description: "Instrucciones de compilación e instalación de PgBouncer"
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBOUNCER]
 categories: [Tutorial]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/README.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/README.md"
 ---
 
 --------
@@ -129,7 +129,7 @@ usas systemd 253 o posterior), así como la activación por socket. Consulta
 La compilación con Autoconf requiere que generes los archivos de cabecera y de
 configuración antes de poder ejecutar `configure`:
 
-	$ git clone --branch pgbouncer_1_26_0 https://github.com/pgbouncer/pgbouncer.git
+	$ git clone --branch pgbouncer_1_26_1 https://github.com/pgbouncer/pgbouncer.git
 	$ cd pgbouncer
 	$ ./autogen.sh
 	$ ./configure
@@ -160,7 +160,7 @@ Ejecuta `meson configure build` para listar las opciones `-D` disponibles.
 Consulta el archivo [`README.md` del directorio de pruebas][1] para saber cómo
 ejecutar las pruebas.
 
-[1]: https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/test/README.md
+[1]: https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/test/README.md
 
 --------
 

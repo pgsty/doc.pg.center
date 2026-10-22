@@ -6,7 +6,7 @@ description: "PgBouncer 编译与安装说明"
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBOUNCER]
 categories: [教程]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/README.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/README.md"
 ---
 
 --------
@@ -98,7 +98,7 @@ systemd 支持允许使用 `Type=notify`（若使用 systemd 253 或更高版本
 
 使用 Autoconf 构建时，需要在运行 `configure` 之前先生成头文件和配置文件：
 
-	$ git clone --branch pgbouncer_1_26_0 https://github.com/pgbouncer/pgbouncer.git
+	$ git clone --branch pgbouncer_1_26_1 https://github.com/pgbouncer/pgbouncer.git
 	$ cd pgbouncer
 	$ ./autogen.sh
 	$ ./configure
@@ -123,7 +123,7 @@ Meson 可直接从检出的源码构建；构建 man 手册需要 pandoc：
 
 如需了解如何运行测试，请参阅 [**测试目录中的 `README.md` 文件**][1]。
 
-[1]: https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/test/README.md
+[1]: https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/test/README.md
 
 --------
 

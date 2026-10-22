@@ -6,7 +6,7 @@ description: "مرجع ملف إعداد PgBouncer (pgbouncer.ini)"
 icon: fa-solid fa-code
 module: [PGBOUNCER]
 categories: [مرجع]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/doc/config.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/doc/config.md"
 ---
 
 --------
@@ -211,6 +211,8 @@ max_client_conn + (max pool_size * total databases)
 إذا احتجت إلى تحديد قيم متعددة، فاستخدم قائمة مفصولة بفواصل (مثل `options,extra_float_digits`)
 
 يتيح بروتوكول Postgres تحديد إعدادات المعاملات، إما مباشرةً كمعامل في حزمة بدء التشغيل أو داخل [حزمة بدء التشغيل `options`][options-startup]. المعاملات المحددة بكلتا الطريقتين مدعومة من `ignore_startup_parameters`. بل يمكن تضمين `options` نفسه في `ignore_startup_parameters`، مما يؤدي إلى تجاهل أي معاملات غير معروفة متضمنة داخل `options`.
+
+تُتجاهَل المعاملات المُدرَجة هنا صراحةً حتى لو كان PgBouncer سيتتبّعها لولا ذلك. يمكن استخدام هذا لتعطيل تتبّع المعاملات المتتبَّعة افتراضيًا، مثل `search_path` في إصدارات PostgreSQL السابقة للإصدار 18، حيث لا يُبلِّغ PostgreSQL عن التغييرات التي تطرأ عليه. ولا يؤدي تضمين `options` إلى تجاهل المعاملات المتتبَّعة داخل `options`.
 
 [options-startup]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-OPTIONS
 
@@ -432,7 +434,7 @@ auth_ldap_options = ldapurl="ldap://127.0.0.1:12345/dc=example,dc=net?uid?sub"
 
 ### admin_users {#admin_users}
 
-قائمة مفصولة بفواصل لمستخدمي قاعدة البيانات الذين يُسمح لهم بالاتصال وتشغيل جميع الأوامر على وحدة التحكم. مع `auth_type=any`، تحدد هذه القائمة أيضًا من يتلقى صلاحيات المشرف؛ ويمكن لبقية المستخدمين تسجيل الدخول كمستخدمي إحصاءات. راجع [فحوصات الوصول إلى وحدة التحكم في 1.26.0](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/src/admin.c#L1572-L1609).
+قائمة مفصولة بفواصل لمستخدمي قاعدة البيانات الذين يُسمح لهم بالاتصال وتشغيل جميع الأوامر على وحدة التحكم. مع `auth_type=any`، تحدد هذه القائمة أيضًا من يتلقى صلاحيات المشرف؛ ويمكن لبقية المستخدمين تسجيل الدخول كمستخدمي إحصاءات. راجع [فحوصات الوصول إلى وحدة التحكم في 1.26.1](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/src/admin.c#L1572-L1609).
 
 الافتراضي: فارغ
 
@@ -746,7 +748,7 @@ auth_ldap_options = ldapurl="ldap://127.0.0.1:12345/dc=example,dc=net?uid?sub"
 
 يُستخدم هذا الإعداد لمنع الخوادم غير المستجيبة من التهام الاتصالات. كما يساعد أيضًا عندما يكون الخادم متوقفًا أو يرفض الاتصالات لأي سبب.
 
-يمكن أيضًا تهيئة هذا الإعداد لكل قاعدة بيانات ولكل مستخدم. الأسبقية للمستخدم، ثم قاعدة البيانات، ثم الإعداد العام. وتعطّل القيمة 0 الصريحة عند المستوى المحدد هذه المهلة. راجع [شيفرة اختيار المهلة في 1.26.0](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/src/janitor.c#L328-L336).
+يمكن أيضًا تهيئة هذا الإعداد لكل قاعدة بيانات ولكل مستخدم. الأسبقية للمستخدم، ثم قاعدة البيانات، ثم الإعداد العام. وتعطّل القيمة 0 الصريحة عند المستوى المحدد هذه المهلة. راجع [شيفرة اختيار المهلة في 1.26.1](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/src/janitor.c#L328-L336).
 
 الافتراضي: 120.0
 

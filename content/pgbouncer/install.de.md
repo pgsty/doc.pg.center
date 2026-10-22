@@ -6,7 +6,7 @@ description: "Anleitung zum Kompilieren und Installieren von PgBouncer"
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBOUNCER]
 categories: [Tutorial]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/README.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/README.md"
 ---
 
 --------
@@ -116,7 +116,7 @@ Die systemd-Unterstützung ermöglicht die Verwendung von `Type=notify` (oder `T
 Beim Autoconf-Build müssen die Header- und Konfigurationsdateien generiert
 werden, bevor `configure` ausgeführt werden kann:
 
-	$ git clone --branch pgbouncer_1_26_0 https://github.com/pgbouncer/pgbouncer.git
+	$ git clone --branch pgbouncer_1_26_1 https://github.com/pgbouncer/pgbouncer.git
 	$ cd pgbouncer
 	$ ./autogen.sh
 	$ ./configure
@@ -143,7 +143,7 @@ Mit `meson configure build` lassen sich die verfügbaren `-D`-Optionen auflisten
 
 Weitere Informationen zum Ausführen der Tests finden Sie in der Datei [`README.md` im Testverzeichnis][1].
 
-[1]: https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/test/README.md
+[1]: https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/test/README.md
 
 --------
 

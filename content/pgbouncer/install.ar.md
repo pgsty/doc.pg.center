@@ -6,7 +6,7 @@ description: "تعليمات بناء PgBouncer وتثبيته"
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBOUNCER]
 categories: [درس تعليمي]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/README.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/README.md"
 ---
 
 --------
@@ -125,7 +125,7 @@ systemd 253 أو أحدث) بالإضافة إلى تفعيل المقابس (so
 يتطلب البناء بـ Autoconf أن تولّد ملفات الترويسة والإعداد
 قبل أن تتمكن من تشغيل `configure`:
 
-	$ git clone --branch pgbouncer_1_26_0 https://github.com/pgbouncer/pgbouncer.git
+	$ git clone --branch pgbouncer_1_26_1 https://github.com/pgbouncer/pgbouncer.git
 	$ cd pgbouncer
 	$ ./autogen.sh
 	$ ./configure
@@ -155,7 +155,7 @@ automake, libtool, pandoc
 
 راجع [ملف `README.md` في دليل الاختبار][1] لمعرفة كيفية تشغيل الاختبارات.
 
-[1]: https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/test/README.md
+[1]: https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/test/README.md
 
 --------
 

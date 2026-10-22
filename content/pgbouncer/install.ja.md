@@ -6,7 +6,7 @@ description: "PgBouncer のコンパイルとインストール手順"
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBOUNCER]
 categories: [チュートリアル]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/README.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/README.md"
 ---
 
 --------
@@ -98,7 +98,7 @@ systemd サポートでは、`Type=notify`（systemd 253 以降を使用して�
 
 Autoconf ビルドでは、`configure` を実行する前にヘッダーファイルおよび設定ファイルを生成する必要があります：
 
-	$ git clone --branch pgbouncer_1_26_0 https://github.com/pgbouncer/pgbouncer.git
+	$ git clone --branch pgbouncer_1_26_1 https://github.com/pgbouncer/pgbouncer.git
 	$ cd pgbouncer
 	$ ./autogen.sh
 	$ ./configure
@@ -126,7 +126,7 @@ man ページをビルドするには pandoc が必要です：
 
 テストディレクトリ内の [`README.md` ファイル][1] を参照して、テストの実行方法を確認してください。
 
-[1]: https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/test/README.md
+[1]: https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/test/README.md
 
 --------
 

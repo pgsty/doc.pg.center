@@ -5,12 +5,21 @@ description: "PgBouncer のバージョン履歴とリリースノート"
 icon: fa-solid fa-scroll
 module: [PGBOUNCER]
 categories: [リファレンス]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/NEWS.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/NEWS.md"
 ---
 
 --------
 
 ## PgBouncer 1.26.x {#pgbouncer-126x}
+
+**2026-10-14  -  PgBouncer 1.26.1  -  「起動は一度だけ」**
+
+- セキュリティ
+    * CVE-2026-107350 の修正：PgBouncer 1.17.0 から 1.26.0 では、クライアントが存在しないデータベースに接続した場合、SCRAM 認証中に送信された 2 番目の StartupMessage を処理していました。`auth_file` に記載されたユーザーのパスワードを知っている攻撃者は、この問題を利用して、管理者やバックエンドのスーパーユーザーを含む、SCRAM で認証する任意の別のユーザーとしてログインできました。これには、両方のユーザーが SCRAM 認証を使用している必要があります。なりすましの対象となるユーザーは、`auth_file` と `auth_query` のどちらに由来していても該当します。
+    * CVE-2026-107349 の修正：認証されていないクライアントは、`-c=` のような空のオプション名を含む起動パラメータ `options` を送信することで、PgBouncer 1.20.0 から 1.26.0 を 1 つの CPU コア上で無限ループさせ、すべてのクライアントへの対応を停止させることができました。この問題を悪用できるのは、`ignore_startup_parameters` が空でなく、かつ `options` を含まない場合に限られます。
+    * CVE-2026-107348 の修正：PgBouncer 1.21.0 から 1.26.0 のパケットバッファ拡張ロジックに整数オーバーフローがあり、クライアントが 2^31 を超える長さを宣言するパケットヘッダーを送信すると、PgBouncer が無限ループでハングする可能性がありました。この問題を悪用できるのは、`max_packet_size` が 2147483649 以上に設定されている場合に限られ、デフォルト値の 2147483647 は影響を受けません。1.23.0 以降では認証前に到達可能です。これは CVE-2026-6668 と同種のバグですが、別のバッファ実装に存在します。
+- 修正
+    * `ignore_startup_parameters` を追跡対象のパラメータより優先するようにしました。1.26.0 以降では `search_path` がデフォルトで追跡されるため、`ignore_startup_parameters = search_path` が何の通知もなく無効になっていました。このリリース以降、`search_path` パラメータの追跡に関するさまざまなバグが報告されています。これらは今後のリリースで修正される予定です。`search_path` を `ignore_startup_parameters` に追加すると、これを無視する 1.25 の動作を復元できるようになりました。（バグは 1.26.0 で導入）
 
 **2026-09-23  -  PgBouncer 1.26.0  -  「これまでのすべての search_path を無視」**
 

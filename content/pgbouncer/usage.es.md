@@ -6,7 +6,7 @@ description: "Uso de la línea de comandos de PgBouncer y consola de administrac
 icon: fa-solid fa-bell-concierge
 module: [PGBOUNCER]
 categories: [Tarea]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/doc/usage.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/doc/usage.md"
 ---
 
 --------

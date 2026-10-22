@@ -1,5 +1,5 @@
 ---
-title: "PgBouncer 1.26.0 ドキュメント"
+title: "PgBouncer 1.26.1 ドキュメント"
 linkTitle: PgBouncer
 weight: 30
 description: >
@@ -12,16 +12,16 @@ sidebar_root_link_self: true
 module: [PGBOUNCER]
 categories: [概念]
 upstream_source: pgbouncer
-upstream_ref: v1.26.0
+upstream_ref: v1.26.1
 upstream_link: "https://www.pgbouncer.org/"
 cascade:
   upstream_source: pgbouncer
-  upstream_ref: v1.26.0
+  upstream_ref: v1.26.1
   type: docs
   module: [PGBOUNCER]
 ---
 
-本マニュアルは、2026-09-23 にリリースされた [PgBouncer 1.26.0](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0) に基づいています。以前のバージョンからの変更点については、[リリースノート](/ja/pgbouncer/changelog/#pgbouncer-126x)を参照してください。
+本マニュアルは、2026-10-14 にリリースされた [PgBouncer 1.26.1](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_1) に基づいています。以前のバージョンからの変更点については、[リリースノート](/ja/pgbouncer/changelog/#pgbouncer-126x)を参照してください。
 
 **pgbouncer** は PostgreSQL のコネクションプーラーです。任意の対象アプリケーションは、PostgreSQL サーバーと同じように **pgbouncer** に接続できます。**pgbouncer** は、実際のサーバーへの接続を作成するか、既存の接続を再利用します。
 

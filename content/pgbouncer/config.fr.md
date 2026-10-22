@@ -6,7 +6,7 @@ description: "Fichier de configuration PgBouncer (pgbouncer.ini) – Référence
 icon: fa-solid fa-code
 module: [PGBOUNCER]
 categories: [Référence]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/doc/config.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/doc/config.md"
 ---
 
 --------
@@ -210,6 +210,8 @@ Par défaut, PgBouncer autorise uniquement les paramètres qu'il peut suivre dan
 Si vous devez spécifier plusieurs valeurs, utilisez une liste séparée par des virgules (par exemple, `options,extra_float_digits`)
 
 Le protocole Postgres permet de spécifier des paramètres, soit directement comme paramètre dans le paquet de démarrage, soit à l'intérieur du paquet de démarrage [`options`][options-startup]. Les paramètres spécifiés par l'une ou l'autre de ces méthodes sont pris en charge par `ignore_startup_parameters`. Il est même possible d'inclure `options` lui-même dans `ignore_startup_parameters`, auquel cas tout paramètre inconnu contenu dans `options` est ignoré.
+
+Les paramètres explicitement répertoriés ici sont ignorés même si PgBouncer les suivrait autrement. Cela permet de désactiver le suivi de paramètres suivis par défaut, par exemple `search_path` dans les versions de PostgreSQL antérieures à 18, où PostgreSQL ne signale pas les modifications de ce paramètre. Inclure `options` ne conduit pas à ignorer les paramètres suivis contenus dans `options`.
 
 [options-startup]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-OPTIONS
 
@@ -431,7 +433,7 @@ Par défaut : 0
 
 ### admin_users {#admin_users}
 
-Liste séparée par des virgules d'utilisateurs de base de données autorisés à se connecter et à exécuter toutes les commandes sur la console d'administration. Avec `auth_type=any`, cette liste détermine toujours qui reçoit les privilèges d'administrateur ; les autres utilisateurs peuvent se connecter en tant qu'utilisateurs de statistiques. Voir les [contrôles d'accès à la console de la version 1.26.0](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/src/admin.c#L1572-L1609).
+Liste séparée par des virgules d'utilisateurs de base de données autorisés à se connecter et à exécuter toutes les commandes sur la console d'administration. Avec `auth_type=any`, cette liste détermine toujours qui reçoit les privilèges d'administrateur ; les autres utilisateurs peuvent se connecter en tant qu'utilisateurs de statistiques. Voir les [contrôles d'accès à la console de la version 1.26.1](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/src/admin.c#L1572-L1609).
 
 Par défaut : vide
 
@@ -745,7 +747,7 @@ Temps maximal autorisé aux requêtes pour attendre leur exécution. Si la requ�
 
 Ce paramètre est utilisé pour empêcher des serveurs ne répondant plus de s'accaparer des connexions. Il est également utile lorsque le serveur est hors service ou refuse les connexions pour quelque raison que ce soit.
 
-Ce paramètre peut également être configuré par base de données et par utilisateur. La précédence est : utilisateur, puis base de données, puis global. Une valeur 0 explicite au niveau sélectionné désactive ce délai d'expiration. Voir le [code de sélection du délai de la version 1.26.0](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/src/janitor.c#L328-L336).
+Ce paramètre peut également être configuré par base de données et par utilisateur. La précédence est : utilisateur, puis base de données, puis global. Une valeur 0 explicite au niveau sélectionné désactive ce délai d'expiration. Voir le [code de sélection du délai de la version 1.26.1](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/src/janitor.c#L328-L336).
 
 Par défaut : 120.0
 

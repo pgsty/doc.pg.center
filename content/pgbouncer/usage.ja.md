@@ -6,7 +6,7 @@ description: "PgBouncer コマンドライン使用法および管理コンソ�
 icon: fa-solid fa-bell-concierge
 module: [PGBOUNCER]
 categories: [タスク]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/doc/usage.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/doc/usage.md"
 ---
 
 --------
