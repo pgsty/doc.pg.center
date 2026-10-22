@@ -29,6 +29,19 @@ pgBackRestは、保持数または保持期間という保持種別に基づい�
 example: --archive-expire-before=000000010000000000000010
 ```
 
+### 無効なページチェックサムでエラーにするオプション (`--checksum-page-error`) {#error-on-invalid-page-checksums-option---checksum-page-error}
+
+無効なページチェックサムでエラーにします。
+
+有効にすると、保持対象の最も古いバックアップにチェックサムエラーが含まれる場合、`expire`コマンドは変更を加える前にエラーを報告して終了します。無効にすると、`expire`は処理を続け、保持される最も古いバックアップにチェックサムエラーがあれば警告を出力します。
+
+`--set`を使用すると、このオプションが有効でも`expire`は処理を続けます。保持される最も古いバックアップにチェックサムエラーがあれば警告を出力します。
+
+```yaml
+default: y
+example: --no-checksum-page-error
+```
+
 ### 最古バックアップ削除オプション（`--oldest`） {#oldest-option---oldest}
 
 削除可能な最も古いバックアップセットを期限切れにします。
@@ -437,7 +450,7 @@ example: --repo1-azure-container=pg-backup
 
 Azureリポジトリのキー種別です。
 
-認可には次の種別をサポートします。
+次の認証方式をサポートします。
 
 - `shared` - 共有キー
 - `sas` - 共有アクセス署名
@@ -505,13 +518,18 @@ example: --repo1-gcs-endpoint=localhost
 
 GCSリポジトリのキー種別です。
 
-認可には次の種別をサポートします。
+次の認証方式をサポートします。
 
 - `auto` - インスタンスのサービスアカウントを使用して認可します。
 - `service` - ローカルに保存したキーでサービスアカウントを使用します。
 - `token` - `fakegcs`などを使用するローカルテスト用です。
+- `web-id` - Workload Identity Federationを使用して認証します。
 
 `repo-gcs-key-type=service`の場合、認証トークンの更新時に認証情報を再読み込みします。
+
+`repo-gcs-key-type=web-id`の場合、`repo-gcs-key`には外部アカウントの認証情報ファイルを指定する必要があります。認証トークンの更新時にWebアイデンティティトークンが再読み込みされます。
+
+`service_account_impersonation_url`はサポートしません。`credential_source.file`のみをサポートし、`credential_source.format`を指定する場合、型は`text`である必要があります。
 
 ```yaml
 default: service
@@ -707,7 +725,13 @@ example: --repo1-retention-archive=2
 
 WALの保持に使用するバックアップの種類です。
 
-`full`に設定すると、pgBackRestは`repo-retention-archive`で定義した数のフルバックアップに対応するアーカイブログを保持します。`diff`（差分）に設定すると、`repo-retention-archive`で定義した数のフルバックアップと差分バックアップに対応するアーカイブログを保持します。つまり、最後に取得したバックアップがフルバックアップであれば、repo-retentionの計算では差分バックアップとして数えます。`incr`（増分）に設定すると、`repo-retention-archive`で定義した数のフルバックアップ、差分バックアップ、増分バックアップに対応するアーカイブログを保持します。この設定はデフォルトから変更しないことを推奨します。デフォルトでは、フルバックアップの期限切れに伴ってのみWALを期限切れにします。
+次のバックアップ種別をサポートします。
+
+- `full` - pgBackRestは`repo-retention-archive`で定義した数のフルバックアップに対応するアーカイブログを保持します。
+- `diff` - （差分）`repo-retention-archive`で定義した数のフルバックアップと差分バックアップに対応するアーカイブログを保持します。つまり、最後に取得したバックアップがフルバックアップであれば、repo-retentionの計算では差分バックアップとして数えます。
+- `incr` - （増分）`repo-retention-archive`で定義した数のフルバックアップ、差分バックアップ、増分バックアップに対応するアーカイブログを保持します。
+
+この設定はデフォルトから変更しないことを推奨します。デフォルトでは、フルバックアップの期限切れに伴ってのみWALを期限切れにします。
 
 ```yaml
 default: full
@@ -750,9 +774,10 @@ example: --repo1-retention-full=2
 
 `repo-retention-full`設定が、保持する期間（日数）とフルバックアップの数のどちらを表すかを決定します。
 
-`time`に設定すると、`repo-retention-full`以上の日数が経過したバックアップが少なくともほかに1つ存在する場合に、`repo-retention-full`より古いフルバックアップをリポジトリから削除します。たとえば、`repo-retention-full`が30（日）で、25日前と35日前の2つのフルバックアップがある場合、どちらも期限切れにはなりません。35日前のバックアップを期限切れにすると25日前のバックアップだけが残り、古いバックアップを期限切れにする前に少なくとも30日前のバックアップを1つ確保するという30日間の保持ポリシーに違反するためです。`repo-retention-archive-type`と`repo-retention-archive`を明示的に設定していない限り、残っている最も古いフルバックアップより前のアーカイブ済みWALは自動的に期限切れになります。
+次の保持種別をサポートします。
 
-`count`に設定すると、`repo-retention-full`を超えるフルバックアップを期限切れにします。たとえば、`repo-retention-full`が`4`で、5つ目のフルバックアップが完了すると、数を4に保つために最も古いフルバックアップを期限切れにします。
+- `time` - `repo-retention-full`以上の日数が経過したバックアップが少なくともほかに1つ存在する場合に、`repo-retention-full`より古いフルバックアップをリポジトリから削除します。たとえば、`repo-retention-full`が30（日）で、25日前と35日前の2つのフルバックアップがある場合、どちらも期限切れにはなりません。35日前のバックアップを期限切れにすると25日前のバックアップだけが残り、古いバックアップを期限切れにする前に少なくとも30日前のバックアップを1つ確保するという30日間の保持ポリシーに違反するためです。`repo-retention-archive-type`と`repo-retention-archive`を明示的に設定していない限り、残っている最も古いフルバックアップより前のアーカイブ済みWALは自動的に期限切れになります。
+- `count` - `repo-retention-full`を超えるフルバックアップを期限切れにします。たとえば、`repo-retention-full`が`4`で、5つ目のフルバックアップが完了すると、数を4に保つために最も古いフルバックアップを期限切れにします。
 
 保持の計算に含めるには、バックアップが正常に完了している必要があります。たとえば、`repo-retention-full-type`が`count`で、`repo-retention-full`が`2`の場合、最も古いバックアップを期限切れにするには、完了したフルバックアップが3つ必要です。
 
@@ -804,7 +829,7 @@ example: --repo1-s3-endpoint=s3.amazonaws.com
 
 S3リポジトリのキー種別です。
 
-次の種別をサポートします。
+次の認証方式をサポートします。
 
 - `shared` - 共有キー
 - `auto` - 一時認証情報を自動取得
@@ -946,7 +971,7 @@ example: --repo1-sftp-host-key-check-type=accept-new
 
 SFTPリポジトリのホストキーハッシュ種別です。
 
-SFTPリポジトリのホストキーハッシュ種別です。SSHの開始時に、リモートシステムのホストキーのダイジェスト計算に使用するハッシュ種別を指定します。新しいバージョンの`libssh2`は、md5とsha1に加えて`sha256`もサポートします。
+SSHの開始時に、リモートシステムのホストキーのダイジェスト計算に使用するハッシュ種別を指定します。指定可能な値は`md5`、`sha1`、`sha256`ですが、`sha256`は新しいバージョンの`libssh2`でのみサポートされます。
 
 ```yaml
 example: --repo1-sftp-host-key-hash-type=sha256
@@ -1053,6 +1078,32 @@ example: --repo1-storage-port=9000
 ```
 
 非推奨の名前：repo-azure-port, repo-s3-port
+
+### リポジトリストレージのプリフェッチオプション (`--repo-storage-prefetch`) {#repository-storage-prefetch-option---repo-storage-prefetch}
+
+リポジトリストレージのプリフェッチです。
+
+S3などのオブジェクトストアから読み取る際に、先行して発行するリクエスト数を指定します。真の並行処理ではありませんが、リクエストの送信に伴う遅延を減らします。
+
+最初の読み取りはプリフェッチできないため、読み取りごとの未完了リクエスト数はプリフェッチ数より1つ多くなります。
+
+```yaml
+default: 3
+allowed: [0, 1024]
+example: --repo1-storage-prefetch=7
+```
+
+### リポジトリストレージの読み飛ばしオプション (`--repo-storage-read-over`) {#repository-storage-read-over-option---repo-storage-read-over}
+
+リポジトリストレージの読み飛ばしです。
+
+バンドルには、すでに存在するファイルなど、リストア時に不要なデータが含まれる場合があります。このオプションは、新しい読み取りリクエストをオブジェクトストアに送らず、読み取りを続けて不要なデータを読み飛ばします。新しい読み取りリクエストの遅延は、進行中の読み取りを続ける場合より大きいため、通常はこちらの方が高速です。ほとんどのストレージクラスで費用も抑えられます。
+
+```yaml
+default: 64KiB
+allowed: [0B, 1MiB]
+example: --repo1-storage-read-over=128KiB
+```
 
 ### リポジトリストレージタグオプション（`--repo-storage-tag`） {#repository-storage-tag-option---repo-storage-tag}
 

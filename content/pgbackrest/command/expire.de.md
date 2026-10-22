@@ -29,6 +29,19 @@ Diese Option ist vor allem für reine Archiv-Repositorys ohne Backups vorgesehen
 example: --archive-expire-before=000000010000000000000010
 ```
 
+### Option für Fehler bei ungültigen Seitenprüfsummen (`--checksum-page-error`) {#error-on-invalid-page-checksums-option---checksum-page-error}
+
+Bei ungültigen Seitenprüfsummen einen Fehler melden.
+
+Ist diese Option aktiviert und würde das älteste beibehaltene Backup Prüfsummenfehler enthalten, wird der Befehl `expire` vor jeder Änderung mit einem Fehler beendet. Ist die Option deaktiviert, fährt `expire` fort und gibt eine Warnung aus, falls das älteste beibehaltene Backup Prüfsummenfehler enthält.
+
+Bei Verwendung von `--set` fährt `expire` auch dann fort, wenn diese Option aktiviert ist. Enthält das älteste beibehaltene Backup Prüfsummenfehler, wird eine Warnung ausgegeben.
+
+```yaml
+default: y
+example: --no-checksum-page-error
+```
+
 ### Option zum Entfernen des ältesten Backup-Satzes (`--oldest`) {#oldest-option---oldest}
 
 Den ältesten entfernbaren Backup-Satz entfernen.
@@ -437,7 +450,7 @@ example: --repo1-azure-container=pg-backup
 
 Azure-Repository-Schlüsseltyp.
 
-Folgende Typen werden für die Autorisierung unterstützt:
+Die folgenden Autorisierungsarten werden unterstützt:
 
 - `shared` - Gemeinsamer Schlüssel
 - `sas` - Signatur für gemeinsamen Zugriff
@@ -505,13 +518,18 @@ example: --repo1-gcs-endpoint=localhost
 
 GCS-Repository-Schlüsseltyp.
 
-Folgende Typen werden für die Autorisierung unterstützt:
+Die folgenden Autorisierungsarten werden unterstützt:
 
 - `auto` - Autorisierung mithilfe des Dienstkontos der Instanz.
 - `service` - Dienstkonto anhand eines lokal gespeicherten Schlüssels.
 - `token` - Für lokale Tests, z. B. `fakegcs`.
+- `web-id` - Autorisierung über Workload Identity Federation.
 
 Wenn `repo-gcs-key-type=service` ist, werden die Anmeldeinformationen erneut geladen, wenn das Authentifizierungstoken erneuert wird.
+
+Bei `repo-gcs-key-type=web-id` muss `repo-gcs-key` eine Datei mit Anmeldedaten für ein externes Konto angeben. Das Web-Identity-Token wird bei der Erneuerung des Authentifizierungstokens neu geladen.
+
+`service_account_impersonation_url` wird nicht unterstützt. Nur `credential_source.file` wird unterstützt; wenn `credential_source.format` angegeben ist, muss der Typ `text` sein.
 
 ```yaml
 default: service
@@ -707,7 +725,13 @@ Veralteter Name: retention-archive
 
 Backup-Typ für die WAL-Aufbewahrung.
 
-Bei `full` bewahrt pgBackRest Archivprotokolle für die durch `repo-retention-archive` festgelegte Anzahl vollständiger Backups auf. Bei `diff` (differenziell) werden sie für die durch `repo-retention-archive` festgelegte Anzahl vollständiger und differenzieller Backups aufbewahrt. War das letzte Backup vollständig, wird es für repo-retention also als differenzielles Backup gezählt. Bei `incr` (inkrementell) bewahrt pgBackRest Archivprotokolle für die durch `repo-retention-archive` festgelegte Anzahl vollständiger, differenzieller und inkrementeller Backups auf. Es wird empfohlen, die Standardeinstellung beizubehalten, bei der WAL nur zusammen mit vollständigen Backups entfernt wird.
+Die folgenden Backup-Typen werden unterstützt:
+
+- `full` - pgBackRest bewahrt Archivprotokolle für die durch `repo-retention-archive` festgelegte Anzahl vollständiger Backups auf.
+- `diff` - (differenziell) Archivprotokolle werden für die durch `repo-retention-archive` festgelegte Anzahl vollständiger und differenzieller Backups aufbewahrt. War das letzte Backup vollständig, wird es für repo-retention also als differenzielles Backup gezählt.
+- `incr` - (inkrementell) pgBackRest bewahrt Archivprotokolle für die durch `repo-retention-archive` festgelegte Anzahl vollständiger, differenzieller und inkrementeller Backups auf.
+
+Es wird empfohlen, die Standardeinstellung beizubehalten, bei der WAL nur zusammen mit vollständigen Backups entfernt wird.
 
 ```yaml
 default: full
@@ -750,9 +774,10 @@ Art der Aufbewahrung vollständiger Backups.
 
 Bestimmt, ob `repo-retention-full` einen Zeitraum in Tagen oder die Anzahl der aufzubewahrenden vollständigen Backups angibt.
 
-Bei `time` werden vollständige Backups, die älter als `repo-retention-full` sind, aus dem Repository entfernt, wenn mindestens ein weiteres Backup vorhanden ist, dessen Alter mindestens dem Wert von `repo-retention-full` entspricht. Steht beispielsweise `repo-retention-full` auf 30 Tage und gibt es 2 vollständige Backups, eines 25 Tage und eines 35 Tage alt, wird keines entfernt. Würde das 35 Tage alte Backup entfernt, bliebe nur das 25 Tage alte übrig. Dies würde die Aufbewahrungsregel von 30 Tagen verletzen: Es muss mindestens ein 30 Tage altes Backup vorhanden sein, bevor ein älteres entfernt werden kann. Archiviertes WAL, das älter als das älteste verbleibende vollständige Backup ist, wird automatisch entfernt, sofern `repo-retention-archive-type` und `repo-retention-archive` nicht ausdrücklich gesetzt sind.
+Die folgenden Aufbewahrungsarten werden unterstützt:
 
-Bei `count` werden vollständige Backups entfernt, die über die durch `repo-retention-full` festgelegte Anzahl hinausgehen. Steht beispielsweise `repo-retention-full` auf `4` und wird ein fünftes vollständiges Backup abgeschlossen, wird das älteste entfernt, sodass die Anzahl bei 4 bleibt.
+- `time` - Vollständige Backups, die älter als `repo-retention-full` sind, werden aus dem Repository entfernt, wenn mindestens ein weiteres Backup vorhanden ist, dessen Alter mindestens dem Wert von `repo-retention-full` entspricht. Steht beispielsweise `repo-retention-full` auf 30 Tage und gibt es 2 vollständige Backups, eines 25 Tage und eines 35 Tage alt, wird keines entfernt. Würde das 35 Tage alte Backup entfernt, bliebe nur das 25 Tage alte übrig. Dies würde die Aufbewahrungsregel von 30 Tagen verletzen: Es muss mindestens ein 30 Tage altes Backup vorhanden sein, bevor ein älteres entfernt werden kann. Archiviertes WAL, das älter als das älteste verbleibende vollständige Backup ist, wird automatisch entfernt, sofern `repo-retention-archive-type` und `repo-retention-archive` nicht ausdrücklich gesetzt sind.
+- `count` - Vollständige Backups werden entfernt, die über die durch `repo-retention-full` festgelegte Anzahl hinausgehen. Steht beispielsweise `repo-retention-full` auf `4` und wird ein fünftes vollständiges Backup abgeschlossen, wird das älteste entfernt, sodass die Anzahl bei 4 bleibt.
 
 Ein Backup muss erfolgreich abgeschlossen sein, bevor es für die Aufbewahrung zählt. Steht beispielsweise `repo-retention-full-type` auf `count` und `repo-retention-full` auf `2`, müssen 3 abgeschlossene vollständige Backups vorhanden sein, bevor das älteste entfernt wird.
 
@@ -804,7 +829,7 @@ example: --repo1-s3-endpoint=s3.amazonaws.com
 
 S3-Schlüsseltyp des Repositorys.
 
-Die folgenden Typen werden unterstützt:
+Die folgenden Autorisierungsarten werden unterstützt:
 
 - `shared` - Gemeinsame Schlüssel
 - `auto` - Temporäre Anmeldeinformationen automatisch abrufen
@@ -946,7 +971,7 @@ example: --repo1-sftp-host-key-check-type=accept-new
 
 Hash-Typ des SFTP-Hostschlüssels für das Repository.
 
-Hash-Typ des SFTP-Hostschlüssels für das Repository. Legt den Hash-Typ fest, mit dem beim SSH-Verbindungsaufbau der Hashwert des Hostschlüssels des entfernten Systems berechnet wird. Neuere Versionen von `libssh2` unterstützen neben md5 und sha1 auch `sha256`.
+Legt den Hash-Typ fest, mit dem beim SSH-Verbindungsaufbau der Hashwert des Hostschlüssels des entfernten Systems berechnet wird. Zulässige Werte sind `md5`, `sha1` und `sha256`, wobei `sha256` nur von neueren Versionen von `libssh2` unterstützt wird.
 
 ```yaml
 example: --repo1-sftp-host-key-hash-type=sha256
@@ -1053,6 +1078,32 @@ example: --repo1-storage-port=9000
 ```
 
 Veraltete Namen: repo-azure-port, repo-s3-port
+
+### Option für das Vorabladen aus dem Repository-Speicher (`--repo-storage-prefetch`) {#repository-storage-prefetch-option---repo-storage-prefetch}
+
+Vorabladen aus dem Repository-Speicher.
+
+Bestimmt die Anzahl der vorab gesendeten Anfragen beim Lesen aus Objektspeichern wie S3. Dies ist keine echte Nebenläufigkeit, verringert aber die Latenz beim Senden der Anfragen.
+
+Die Anzahl offener Anfragen pro Lesevorgang ist um eins höher als der Vorabladewert, da die erste Leseanfrage nicht vorab gesendet werden kann.
+
+```yaml
+default: 3
+allowed: [0, 1024]
+example: --repo1-storage-prefetch=7
+```
+
+### Option zum Überlesen im Repository-Speicher (`--repo-storage-read-over`) {#repository-storage-read-over-option---repo-storage-read-over}
+
+Überlesen im Repository-Speicher.
+
+Bundles können Daten enthalten, die bei der Wiederherstellung nicht benötigt werden, etwa bereits vorhandene Dateien. Diese Option überspringt unnötige Daten durch fortgesetztes Lesen, ohne eine neue Leseanfrage an den Objektspeicher zu senden. Das ist in der Regel schneller, da eine neue Leseanfrage eine höhere Latenz verursacht als das Fortsetzen eines laufenden Lesevorgangs. Für die meisten Speicherklassen ist es auch kostengünstiger.
+
+```yaml
+default: 64KiB
+allowed: [0B, 1MiB]
+example: --repo1-storage-read-over=128KiB
+```
 
 ### Option für Tags im Repository-Speicher (`--repo-storage-tag`) {#repository-storage-tag-option---repo-storage-tag}
 

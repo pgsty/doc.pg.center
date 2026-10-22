@@ -29,6 +29,19 @@ Esta opción está destinada principalmente a repositorios de solo archivado don
 example: --archive-expire-before=000000010000000000000010
 ```
 
+### Opción de error ante sumas de comprobación de páginas no válidas (`--checksum-page-error`) {#error-on-invalid-page-checksums-option---checksum-page-error}
+
+Notificar un error ante sumas de comprobación de páginas no válidas.
+
+Si está activada y la copia más antigua que se conservaría contiene errores en las sumas de comprobación, la orden `expire` termina con un error antes de realizar cualquier cambio. Si está desactivada, `expire` continúa y emite una advertencia si la copia más antigua conservada contiene esos errores.
+
+Si se utiliza `--set`, `expire` continúa aunque esta opción esté activada. Se emite una advertencia si la copia más antigua conservada contiene errores en las sumas de comprobación.
+
+```yaml
+default: y
+example: --no-checksum-page-error
+```
+
 ### Opción de la más antigua (`--oldest`) {#oldest-option---oldest}
 
 Expira el conjunto de copia de seguridad elegible más antiguo.
@@ -437,7 +450,7 @@ example: --repo1-azure-container=pg-backup
 
 Tipo de clave del repositorio de Azure.
 
-Se soportan los siguientes tipos para la autorización:
+Se admiten los siguientes tipos de autorización:
 
 - `shared` - Clave compartida
 - `sas` - Firma de acceso compartido
@@ -505,13 +518,18 @@ example: --repo1-gcs-endpoint=localhost
 
 Tipo de clave del repositorio de GCS.
 
-Se soportan los siguientes tipos para la autorización:
+Se admiten los siguientes tipos de autorización:
 
 - `auto` - Autorizar usando la cuenta de servicio de la instancia.
 - `service` - Cuenta de servicio desde una clave almacenada localmente.
 - `token` - Para pruebas locales, p. ej., `fakegcs`.
+- `web-id` - Autorización mediante Workload Identity Federation.
 
 Cuando `repo-gcs-key-type=service`, las credenciales se recargarán cuando se renueve el token de autenticación.
+
+Cuando `repo-gcs-key-type=web-id`, la opción `repo-gcs-key` debe indicar un archivo de credenciales de una cuenta externa. El token de identidad web se vuelve a cargar al renovar el token de autenticación.
+
+No se admite `service_account_impersonation_url`. Solo se admite `credential_source.file` y, si se especifica `credential_source.format`, el tipo debe ser `text`.
 
 ```yaml
 default: service
@@ -707,7 +725,13 @@ Nombre obsoleto: retention-archive
 
 Tipo de copia de seguridad para la retención de WAL.
 
-Si se establece en `full`, pgBackRest conservará los registros del archivado para el número de copias completas definido por `repo-retention-archive`. Si se establece en `diff` (diferencial), pgBackRest conservará los registros del archivado para el número de copias completas y diferenciales definido por `repo-retention-archive`, lo que significa que si la última copia de seguridad realizada fue completa, contará como diferencial a efectos de la retención del repositorio. Si se establece en `incr` (incremental), pgBackRest conservará los registros del archivado para el número de copias completas, diferenciales e incrementales definido por `repo-retention-archive`. Se recomienda no cambiar este ajuste del valor predeterminado, que solo expirará WAL junto con la expiración de copias completas.
+Se admiten los siguientes tipos de copia de seguridad:
+
+- `full` - pgBackRest conservará los registros del archivado para el número de copias completas definido por `repo-retention-archive`.
+- `diff` - (diferencial) pgBackRest conservará los registros del archivado para el número de copias completas y diferenciales definido por `repo-retention-archive`, lo que significa que si la última copia de seguridad realizada fue completa, contará como diferencial a efectos de la retención del repositorio.
+- `incr` - (incremental) pgBackRest conservará los registros del archivado para el número de copias completas, diferenciales e incrementales definido por `repo-retention-archive`.
+
+Se recomienda no cambiar este ajuste del valor predeterminado, que solo expirará WAL junto con la expiración de copias completas.
 
 ```yaml
 default: full
@@ -750,9 +774,10 @@ Tipo de retención de las copias completas.
 
 Determina si el ajuste `repo-retention-full` representa un periodo de tiempo (días) o un recuento de copias completas a conservar.
 
-Si se establece en `time`, las copias completas más antiguas que `repo-retention-full` se eliminarán del repositorio si existe al menos otra copia de seguridad cuya antigüedad sea igual o superior al ajuste `repo-retention-full`. Por ejemplo, si `repo-retention-full` es 30 (días) y hay 2 copias completas: una de 25 días y otra de 35 días, no se expirará ninguna copia completa porque expirar la copia de 35 días dejaría solo la copia de 25 días, lo que violaría la política de retención de 30 días de tener al menos una copia de 30 días antes de que pueda expirar una más antigua. El WAL archivado más antiguo que la copia completa más antigua que permanezca se expirará automáticamente a menos que `repo-retention-archive-type` y `repo-retention-archive` estén explícitamente establecidos.
+Se admiten los siguientes tipos de retención:
 
-Si se establece en `count`, las copias completas que excedan `repo-retention-full` se expirarán. Por ejemplo, si `repo-retention-full` es `4` y se completa una quinta copia completa, la copia completa más antigua se expirará para mantener el recuento en 4.
+- `time` - las copias completas más antiguas que `repo-retention-full` se eliminarán del repositorio si hay al menos otra copia de seguridad que sea igual o mayor que el ajuste `repo-retention-full`. Por ejemplo, si `repo-retention-full` es 30 (días) y hay 2 copias completas: una de 25 días y otra de 35 días, ninguna copia completa expirará, porque expirar la copia de 35 días dejaría solo la copia de 25 días, lo que violaría la política de retención de 30 días de tener al menos una copia de 30 días antes de que una más antigua pueda expirar. El WAL archivado más antiguo que la copia completa más antigua restante expirará automáticamente, a menos que `repo-retention-archive-type` y `repo-retention-archive` se establezcan explícitamente.
+- `count` - las copias completas que excedan `repo-retention-full` expirarán. Por ejemplo, si `repo-retention-full` es `4` y se completa una quinta copia completa, la copia completa más antigua expirará para mantener el recuento en 4.
 
 Ten en cuenta que una copia de seguridad debe completarse exitosamente antes de que se considere para la retención. Por ejemplo, si `repo-retention-full-type` es `count` y `repo-retention-full` es `2`, debe haber 3 copias completas completadas antes de que la más antigua se expire.
 
@@ -804,7 +829,7 @@ example: --repo1-s3-endpoint=s3.amazonaws.com
 
 Tipo de clave del repositorio de S3.
 
-Se soportan los siguientes tipos:
+Se admiten los siguientes tipos de autorización:
 
 - `shared` - Claves compartidas
 - `auto` - Obtener automáticamente credenciales temporales
@@ -946,7 +971,7 @@ example: --repo1-sftp-host-key-check-type=accept-new
 
 Tipo de hash de clave de host del repositorio SFTP.
 
-Tipo de hash de clave de host del repositorio SFTP. Declara el tipo de hash que se utilizará para calcular el resumen de la clave de host del sistema remoto al iniciar SSH. Las versiones más recientes de `libssh2` soportan `sha256` además de md5 y sha1.
+Declara el tipo de hash que se usa para calcular el resumen de la clave de host del sistema remoto al iniciar SSH. Los valores permitidos son `md5`, `sha1` y `sha256`, aunque solo las versiones más recientes de `libssh2` admiten `sha256`.
 
 ```yaml
 example: --repo1-sftp-host-key-hash-type=sha256
@@ -1053,6 +1078,32 @@ example: --repo1-storage-port=9000
 ```
 
 Nombres obsoletos: repo-azure-port, repo-s3-port
+
+### Opción de lectura anticipada del almacenamiento del repositorio (`--repo-storage-prefetch`) {#repository-storage-prefetch-option---repo-storage-prefetch}
+
+Lectura anticipada del almacenamiento del repositorio.
+
+Determina el número de solicitudes que se envían por adelantado al leer de almacenes de objetos, como S3. No es concurrencia real, pero reduce la latencia asociada al envío de solicitudes.
+
+El número de solicitudes abiertas por lectura es uno mayor que el valor de lectura anticipada, ya que la lectura inicial no puede anticiparse.
+
+```yaml
+default: 3
+allowed: [0, 1024]
+example: --repo1-storage-prefetch=7
+```
+
+### Opción de lectura continua sobre datos innecesarios del almacenamiento del repositorio (`--repo-storage-read-over`) {#repository-storage-read-over-option---repo-storage-read-over}
+
+Lectura continua sobre datos innecesarios del almacenamiento del repositorio.
+
+Los paquetes pueden contener datos que no se necesitan durante la restauración, por ejemplo archivos que ya existen. Esta opción omite esos datos continuando la lectura, sin iniciar una nueva solicitud al almacén de objetos. Suele ser más rápido, ya que la latencia de las nuevas solicitudes de lectura es mayor que la de continuar una lectura en curso. También es menos costoso para la mayoría de las clases de almacenamiento.
+
+```yaml
+default: 64KiB
+allowed: [0B, 1MiB]
+example: --repo1-storage-read-over=128KiB
+```
 
 ### Opción de etiqueta de almacenamiento del repositorio (`--repo-storage-tag`) {#repository-storage-tag-option---repo-storage-tag}
 

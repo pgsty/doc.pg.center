@@ -248,7 +248,7 @@ Valider les sommes de contrôle des pages de données.
 
 Active la validation de toutes les sommes de contrôle des pages de données lors de la sauvegarde d'un cluster. Cette option est activée automatiquement lorsque les sommes de contrôle des pages de données sont activées sur le cluster.
 
-Les échecs de validation de la somme de contrôle n'interrompent pas une sauvegarde. En revanche, des avertissements sont émis dans le journal (et sur la console avec les paramètres par défaut) et la liste des pages invalides est stockée dans le manifeste de sauvegarde.
+Par défaut, les échecs de validation des sommes de contrôle n'interrompent pas une sauvegarde : des avertissements sont émis dans le journal (et sur la console avec les paramètres par défaut), et la liste des pages invalides est enregistrée dans le manifeste de sauvegarde. Définissez `checksum-page-error=y` pour interrompre la sauvegarde à la place.
 
 ```text
 example: checksum-page=n
@@ -865,7 +865,7 @@ example: repo1-azure-key=T+9+aov82qNhrcXSNGZCzm9mjd4d75/oxxOr6r1JVpgTLA==
 
 Type de clé du dépôt Azure.
 
-Les types suivants sont pris en charge pour l'autorisation :
+Les types d'autorisation suivants sont pris en charge :
 
 - `shared` - Clé partagée
 - `sas` - Signature d'accès partagé
@@ -1005,7 +1005,7 @@ example: repo1-gcs-endpoint=localhost
 
 Clé du dépôt GCS.
 
-Un jeton ou un fichier de clé de service, selon l'option `repo-gcs-key-type`.
+Un jeton, un fichier de clé de service ou un fichier d'identifiants de compte externe, selon l'option `repo-gcs-key-type`.
 
 ```text
 example: repo1-gcs-key=/etc/pgbackrest/gcs-key.json
@@ -1015,13 +1015,18 @@ example: repo1-gcs-key=/etc/pgbackrest/gcs-key.json
 
 Type de clé du dépôt GCS.
 
-Les types suivants sont pris en charge pour l'autorisation :
+Les types d'autorisation suivants sont pris en charge :
 
 - `auto` - Autoriser à l'aide du compte de service de l'instance.
 - `service` - Compte de service à partir d'une clé stockée localement.
 - `token` - À utiliser pour les tests locaux, par exemple `fakegcs`.
+- `web-id` - Autorisation à l'aide de Workload Identity Federation.
 
 Lorsque `repo-gcs-key-type=service`, les identifiants seront rechargés lorsque le jeton d'authentification sera renouvelé.
+
+Lorsque `repo-gcs-key-type=web-id`, l'option `repo-gcs-key` doit désigner un fichier d'identifiants de compte externe ; le jeton d'identité Web est rechargé lors du renouvellement du jeton d'authentification.
+
+`service_account_impersonation_url` n'est pas pris en charge. Seul `credential_source.file` est pris en charge et, si `credential_source.format` est spécifié, son type doit être `text`.
 
 ```text
 default: service
@@ -1234,7 +1239,13 @@ Nom obsolète : retention-archive
 
 Type de sauvegarde pour la rétention de WAL.
 
-Si défini sur `full`, pgBackRest conservera les journaux d'archive pendant le nombre de sauvegardes complètes défini par `repo-retention-archive`. Si défini sur `diff` (différentiel), pgBackRest conservera les journaux d'archive pendant le nombre de sauvegardes complètes et différentielles défini par `repo-retention-archive`, ce qui signifie qu'une sauvegarde complète prise en dernier sera comptée comme une sauvegarde différentielle pour l'application de la rétention du dépôt. Si défini sur `incr` (incrémentielle), pgBackRest conservera les journaux d'archive pendant le nombre de sauvegardes complètes, différentielles et incrémentielles défini par `repo-retention-archive`. Il est recommandé de ne pas modifier cette option par rapport à sa valeur par défaut, qui n'expire les WAL que conjointement à l'expiration des sauvegardes complètes.
+Les types de sauvegarde suivants sont pris en charge :
+
+- `full` - pgBackRest conservera les journaux d'archive pendant le nombre de sauvegardes complètes défini par `repo-retention-archive`.
+- `diff` - (différentiel) pgBackRest conservera les journaux d'archive pendant le nombre de sauvegardes complètes et différentielles défini par `repo-retention-archive`, ce qui signifie qu'une sauvegarde complète prise en dernier sera comptée comme une sauvegarde différentielle pour l'application de la rétention du dépôt.
+- `incr` - (incrémentielle) pgBackRest conservera les journaux d'archive pendant le nombre de sauvegardes complètes, différentielles et incrémentielles défini par `repo-retention-archive`.
+
+Il est recommandé de ne pas modifier cette option par rapport à sa valeur par défaut, qui n'expire les WAL que conjointement à l'expiration des sauvegardes complètes.
 
 ```text
 default: full
@@ -1277,9 +1288,10 @@ Type de rétention pour les sauvegardes complètes.
 
 Détermine si le paramètre `repo-retention-full` représente une période de temps (en jours) ou un nombre de sauvegardes complètes à conserver.
 
-Si la valeur est définie à `time`, les sauvegardes complètes dont l'âge dépasse `repo-retention-full` seront supprimées du dépôt si au moins une autre sauvegarde a un âge supérieur ou égal au nombre de jours défini par `repo-retention-full`. Par exemple, si `repo-retention-full` est égal à 30 (jours) et qu'il existe 2 sauvegardes complètes : l'une âgée de 25 jours et l'autre de 35 jours, aucune sauvegarde complète ne sera expirée, car la suppression de la sauvegarde âgée de 35 jours laisserait uniquement la sauvegarde âgée de 25 jours, ce qui violerait la politique de rétention de 30 jours exigeant qu'au moins une sauvegarde ait au moins 30 jours d'âge avant qu'une sauvegarde plus ancienne ne puisse être expirée. Les archives WAL plus anciennes que la plus ancienne sauvegarde complète restante seront automatiquement expirées, sauf si `repo-retention-archive-type` et `repo-retention-archive` sont explicitement définis.
+Les types de rétention suivants sont pris en charge :
 
-Si la valeur est définie à `count`, les sauvegardes complètes dont le nombre dépasse `repo-retention-full` seront supprimées. Par exemple, si `repo-retention-full` est égal à `4` et qu'une cinquième sauvegarde complète est effectuée, la sauvegarde complète la plus ancienne sera supprimée afin de maintenir le nombre à 4.
+- `time` - les sauvegardes complètes dont l'âge dépasse `repo-retention-full` seront supprimées du dépôt si au moins une autre sauvegarde a un âge supérieur ou égal au nombre de jours défini par `repo-retention-full`. Par exemple, si `repo-retention-full` est égal à 30 (jours) et qu'il existe 2 sauvegardes complètes : l'une âgée de 25 jours et l'autre de 35 jours, aucune sauvegarde complète ne sera expirée, car la suppression de la sauvegarde âgée de 35 jours laisserait uniquement la sauvegarde âgée de 25 jours, ce qui violerait la politique de rétention de 30 jours exigeant qu'au moins une sauvegarde ait au moins 30 jours d'âge avant qu'une sauvegarde plus ancienne ne puisse être expirée. Les archives WAL plus anciennes que la plus ancienne sauvegarde complète restante seront automatiquement expirées, sauf si `repo-retention-archive-type` et `repo-retention-archive` sont explicitement définis.
+- `count` - les sauvegardes complètes dont le nombre dépasse `repo-retention-full` seront supprimées. Par exemple, si `repo-retention-full` est égal à `4` et qu'une cinquième sauvegarde complète est effectuée, la sauvegarde complète la plus ancienne sera supprimée afin de maintenir le nombre à 4.
 
 Notez qu'une sauvegarde ne sera prise en compte pour la rétention qu'après avoir été correctement terminée. Par exemple, si `repo-retention-full-type` est `count` et `repo-retention-full` est `2`, il doit y avoir 3 sauvegardes complètes avant que la plus ancienne ne soit supprimée.
 
@@ -1351,7 +1363,7 @@ example: repo1-s3-key-secret=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 
 Type de clé pour le dépôt S3.
 
-Les types suivants sont pris en charge :
+Les types d'autorisation suivants sont pris en charge :
 
 - `shared` - Clés partagées
 - `auto` - Récupérer automatiquement les identifiants temporaires
@@ -1515,7 +1527,7 @@ example: repo1-sftp-host-key-check-type=accept-new
 
 Type de hachage de la clé d'hôte du dépôt SFTP.
 
-Type de hachage de la clé hôte du dépôt SFTP. Déclare le type de hachage à utiliser pour calculer le hachage de la clé hôte du système distant au démarrage SSH. Les versions plus récentes de `libssh2` prennent en charge `sha256` en plus de md5 et sha1.
+Définit le type de hachage utilisé pour calculer l'empreinte de la clé hôte du système distant au démarrage de SSH. Les valeurs autorisées sont `md5`, `sha1` et `sha256`, mais seules les versions récentes de `libssh2` prennent en charge `sha256`.
 
 ```text
 example: repo1-sftp-host-key-hash-type=sha256
@@ -1632,6 +1644,32 @@ example: repo1-storage-port=9000
 ```
 
 Noms obsolètes : repo-azure-port, repo-s3-port
+
+### Option de prélecture du stockage du dépôt (`--repo-storage-prefetch`) {#repository-storage-prefetch-option---repo-storage-prefetch}
+
+Prélecture du stockage du dépôt.
+
+Détermine le nombre de requêtes à anticiper lors de la lecture depuis un stockage objet, tel que S3. Il ne s'agit pas d'une véritable exécution concurrente, mais cela réduit la latence liée à l'envoi des requêtes.
+
+Le nombre de requêtes ouvertes par lecture est supérieur d'une unité à la valeur de prélecture, car la lecture initiale ne peut pas être anticipée.
+
+```text
+default: 3
+allowed: [0, 1024]
+example: repo1-storage-prefetch=7
+```
+
+### Option de lecture au-delà des données utiles du stockage du dépôt (`--repo-storage-read-over`) {#repository-storage-read-over-option---repo-storage-read-over}
+
+Lecture au-delà des données utiles du stockage du dépôt.
+
+Les bundles peuvent contenir des données inutiles à la restauration, par exemple des fichiers déjà présents. Cette option permet de passer ces données en poursuivant la lecture, sans lancer une nouvelle requête de lecture sur le stockage objet. C'est généralement plus rapide, car la latence d'une nouvelle requête de lecture est supérieure à celle de la poursuite d'une lecture en cours. C'est également moins coûteux pour la plupart des classes de stockage.
+
+```text
+default: 64KiB
+allowed: [0B, 1MiB]
+example: repo1-storage-read-over=128KiB
+```
 
 ### Option d'étiquette de stockage du dépôt (`--repo-storage-tag`) {#repository-storage-tag-option---repo-storage-tag}
 

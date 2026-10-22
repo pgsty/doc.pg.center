@@ -1,5 +1,5 @@
 ---
-title: "Documentation de pgBackRest 2.59.3"
+title: "Documentation de pgBackRest 2.60.0"
 linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
@@ -11,11 +11,11 @@ description: "Sauvegarde et restauration fiable de PostgreSQL — documentation 
 module: [PGBACKREST]
 categories: [Concept]
 upstream_source: pgbackrest
-upstream_ref: v2.59.3
+upstream_ref: v2.60.0
 upstream_link: "https://pgbackrest.org/"
 cascade:
   upstream_source: pgbackrest
-  upstream_ref: v2.59.3
+  upstream_ref: v2.60.0
   type: docs
   module: [PGBACKREST]
 ---
@@ -26,9 +26,11 @@ cascade:
 
 pgBackRest est une solution fiable de sauvegarde et de restauration pour PostgreSQL, qui s'adapte sans heurt aux plus grandes bases de données et charges de travail.
 
-Ce miroir de documentation couvre pgBackRest [v2.59.3](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.3). Les notes de version se trouvent sur la page [Notes de version](/fr/pgbackrest/release/).
+Ce miroir de documentation couvre pgBackRest [v2.60.0](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.0). Les notes de version se trouvent sur la page [Notes de version](/fr/pgbackrest/release/).
 
-La version 2.59.3 corrige la génération possible de sous-clés de chiffrement et de sels faibles. La mise à niveau ne remplace pas les sous-clés faibles existantes d’une stanza ; consultez [Sous-clés de chiffrement et sels faibles](/fr/pgbackrest/news/#weak-encryption) pour les vérifications et les mesures correctives.
+La version 2.60.0 ajoute la gestion configurable des erreurs de sommes de contrôle de pages, la prélecture depuis les stockages objet et GCS Workload Identity Federation. Par défaut, `restore` et `expire` s'arrêtent désormais en cas de sommes de contrôle de pages invalides ; consultez les [notes de version 2.60.0](/fr/pgbackrest/release/#v2600-release-notes).
+
+La version 2.59.3 a corrigé la génération possible de sous-clés de chiffrement et de sels faibles. La mise à niveau ne remplace pas les sous-clés faibles existantes d’une stanza ; consultez [Sous-clés de chiffrement et sels faibles](/fr/pgbackrest/news/#weak-encryption) pour les vérifications et les mesures correctives.
 
 Merci de nous donner une étoile sur [GitHub](https://github.com/pgbackrest/pgbackrest) si vous appréciez pgBackRest !
 
@@ -36,6 +38,8 @@ Merci de nous donner une étoile sur [GitHub](https://github.com/pgbackrest/pgba
 --------
 
 ## Actualités {#news}
+
+**18 octobre 2026** - [pgBackRest 2.60.0 publié](/fr/pgbackrest/news/#release-2-60-0)
 
 **4 octobre 2026** - [Sous-clés de chiffrement et sels faibles](/fr/pgbackrest/news/#weak-encryption)
 
@@ -77,6 +81,11 @@ Un protocole personnalisé permet à pgBackRest de réaliser des sauvegardes, de
 La possibilité de plusieurs dépôts permet, par exemple, d’avoir un dépôt local avec une rétention réduite pour des restaurations rapides et un dépôt distant avec une rétention plus longue pour assurer la redondance et l’accès à travers l’entreprise.
 
 
+### Sauvegarde depuis un serveur secondaire {#backup-from-standby}
+
+Les sauvegardes peuvent être effectuées depuis un serveur secondaire pour réduire la charge du serveur primaire. Seuls les quelques fichiers qui ne sont pas répliqués sont copiés depuis le primaire.
+
+
 ### Sauvegardes complètes, différentielles et incrémentielles (au niveau fichier ou bloc) {#full-differential--incremental-backups-at-file-or-block-level}
 
 Les sauvegardes complètes, différentielles et incrémentielles sont prises en charge. pgBackRest n'est pas sujet aux problèmes de résolution temporelle de `rsync`, ce qui rend les sauvegardes différentielles et incrémentielles sûres sans nécessiter de calculer la somme de contrôle de chaque fichier. Les sauvegardes au niveau du bloc économisent de l'espace en ne copiant que les parties des fichiers qui ont changé.
@@ -100,7 +109,7 @@ Toutes les opérations utilisent fsync au niveau des fichiers et des répertoire
 
 Si les sommes de contrôle des pages sont activées, pgBackRest vérifiera les sommes de contrôle de chaque fichier copié lors d'une sauvegarde. Toutes les sommes de contrôle des pages sont vérifiées lors d'une sauvegarde complète, et les sommes de contrôle des fichiers modifiés sont vérifiées lors des sauvegardes différentielles et incrémentielles.
 
-Les échecs de validation n'interrompent pas le processus de sauvegarde, mais des avertissements précisant exactement quelles pages ont échoué sont affichés sur la console et dans le fichier de journal.
+Par défaut, les échecs de validation n'interrompent pas le processus de sauvegarde, mais des avertissements précisant exactement quelles pages ont échoué sont affichés sur la console et dans le fichier journal. Par défaut, restore signale une erreur si la sauvegarde contient des sommes de contrôle de pages invalides, et expire ne laisse pas une telle sauvegarde devenir la plus ancienne sauvegarde conservée.
 
 Cette fonctionnalité permet de détecter précocement les corruptions au niveau de la page, avant que les sauvegardes contenant des copies valides des données n'aient expiré.
 
@@ -115,6 +124,11 @@ Une sauvegarde interrompue peut être reprise à l’endroit où elle a été in
 Les calculs de compression et de somme de contrôle sont effectués en flux pendant que les fichiers sont copiés vers le dépôt, que le dépôt soit local ou distant.
 
 Si le dépôt est hébergé sur un hôte de dépôt, la compression est effectuée sur l'hôte PostgreSQL et les fichiers sont transmis au format compressé, puis stockés directement sur l'hôte de dépôt. Lorsque la compression est désactivée, un niveau de compression inférieur est utilisé afin d'utiliser efficacement la bande passante disponible tout en minimisant la charge CPU.
+
+
+### Regroupement de fichiers {#file-bundling}
+
+Les petits fichiers sont regroupés en bundles dans le dépôt afin de créer moins de fichiers pendant la sauvegarde. Cette technique est particulièrement efficace sur les stockages objet.
 
 
 ### Restauration delta {#delta-restore}
@@ -140,9 +154,9 @@ Les espaces de table sont entièrement pris en charge, et lors d'une restauratio
 Les liens de fichiers et de répertoires sont pris en charge pour tout fichier ou répertoire du cluster PostgreSQL. Lors d'une restauration, il est possible de restaurer tous les liens à leurs emplacements d'origine, de rediriger certains ou tous les liens, ou de restaurer certains ou tous les liens en tant que fichiers ou répertoires normaux dans le répertoire du cluster.
 
 
-### Prise en charge des magasins d’objets compatibles S3, Azure et GCS {#s3-azure-and-gcs-compatible-object-store-support}
+### Prise en charge de S3, Azure, GCS et SFTP {#s3-azure-and-gcs-compatible-object-store-support}
 
-Les dépôts pgBackRest peuvent être situés dans des magasins d'objets compatibles S3, Azure ou GCS afin de permettre une capacité et une rétention pratiquement illimitées.
+Les dépôts pgBackRest peuvent être situés dans des magasins d'objets compatibles S3, Azure ou GCS afin de permettre une capacité et une rétention pratiquement illimitées. Les dépôts peuvent également être stockés sur un serveur SFTP. Dans les environnements cloud, les identifiants du stockage objet peuvent être récupérés automatiquement au moyen de diverses méthodes d'authentification.
 
 
 ### Chiffrement {#encryption}

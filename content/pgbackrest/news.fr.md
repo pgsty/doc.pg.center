@@ -11,6 +11,49 @@ upstream_link: "https://pgbackrest.org/news.html"
 
 --------
 
+## pgBackRest 2.60.0 publié {#release-2-60-0}
+
+**18 octobre 2026**
+
+La communauté pgBackRest est heureuse d'annoncer la sortie de [pgBackRest](https://pgbackrest.org) 2.60.0, la dernière version de la solution fiable, facile à utiliser, de sauvegarde et de restauration, pouvant s'adapter sans heurt aux plus grandes bases de données et charges de travail.
+
+pgBackRest prend en charge un ensemble complet de fonctionnalités pour gérer votre infrastructure de sauvegarde et de récupération, notamment : sauvegarde/restauration en parallèle, sauvegardes complètes/différentielles/sauvegardes incrémentielles, sauvegarde incrémentielle par bloc, plusieurs dépôts, restauration par delta, archivage asynchrone en parallèle, protection contre les logiciels malveillants/rançongiciels, sommes de contrôle par fichier, sommes de contrôle par page (lorsqu’activées) validées pendant la sauvegarde, plusieurs types de compression, chiffrement, reprise partielle/échouée de sauvegarde, sauvegarde depuis un serveur secondaire, prise en charge des espaces de table et des liens, prise en charge de S3/Azure/GCS/SFTP, expiration des sauvegardes, opérations locales/distantes via SSH ou TLS, configuration flexible, et bien plus encore.
+
+pgBackRest peut être installé à partir du [dépôt Yum PostgreSQL](https://yum.postgresql.org) ou du [dépôt APT PostgreSQL](https://apt.postgresql.org) ; des paquets sont également disponibles pour de nombreuses autres distributions. Le code source peut être téléchargé depuis [versions](/fr/pgbackrest/release/).
+
+### Principales nouveautés et améliorations {#release-2-60-0-feature}
+
+- Ajout de l'option checksum-page-error pour signaler une erreur en cas de sommes de contrôle de pages invalides (Andrew Pogrebnoi)
+- Prise en charge de GCS Workload Identity Federation (Adol Rodriguez)
+- Prélecture de plusieurs fichiers ou plages depuis les stockages objet (David Steele)
+- Réduction des requêtes de maintien de connexion aux processus distants (David Steele)
+- Nouvelle tentative pour les sous-requêtes de lots Azure absentes de la réponse (David Steele)
+- Réduction des vérifications de manifestes lors de la reconstruction de backup.info (David Steele)
+- Prise en charge de la compilation sur illumos (Kalevi Kolttonen)
+- Prise en charge d'OpenSSL 4 (David Steele)
+- Modernisation du site web (David Steele, Jan Wieremjewicz)
+
+Consultez les [notes de version 2.60.0](/fr/pgbackrest/release/#v2600-release-notes) pour les autres fonctionnalités et améliorations.
+
+### Remarques importantes {#release-2-60-0-note}
+
+- La commande restore signale désormais une erreur et s'arrête si un fichier restauré contient une somme de contrôle de page invalide. Le cluster reste alors incomplet et ne peut pas démarrer ; la restauration doit donc être relancée. La commande expire refuse désormais d'expirer les sauvegardes si la plus ancienne sauvegarde qui serait conservée contient des erreurs de sommes de contrôle, ce qui empêche également l'expiration des archives de ce dépôt. Définissez checksum-page-error=n pour émettre des avertissements plutôt que des erreurs.
+- La compilation depuis une extraction Git nécessite PyYAML à la place de libyaml. L'archive tar de distribution contient le code généré et ne nécessite ni l'un ni l'autre.
+- PostgreSQL 19rc1 est pris en charge à partir de v2.59.2, y compris par cette version.
+
+### Liens {#release-2-60-0-link}
+
+- [Site web](/fr/pgbackrest/)
+- [Guides utilisateur](/fr/pgbackrest/user-guide/)
+- [Notes de version](/fr/pgbackrest/release/)
+
+### Parrainage {#release-2-60-0-sponsorship}
+
+Cette version a été rendue possible grâce au généreux parrainage de [AWS](https://aws.amazon.com), [Supabase](https://supabase.com), [pgEdge](https://pgedge.com), [Tiger Data](https://tigerdata.com), [Percona](https://percona.com), [Eon](https://eon.io), [Xata](https://xata.io), [Dalibo](https://dalibo.com), et [Data Egret](https://dataegret.com/).
+
+
+--------
+
 ## Sous-clés de chiffrement et sels faibles {#weak-encryption}
 
 **4 octobre 2026**

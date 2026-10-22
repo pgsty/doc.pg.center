@@ -444,7 +444,7 @@ example: --repo1-azure-container=pg-backup
 
 Azure-Repository-Schlüsseltyp.
 
-Folgende Typen werden für die Autorisierung unterstützt:
+Die folgenden Autorisierungsarten werden unterstützt:
 
 - `shared` - Gemeinsamer Schlüssel
 - `sas` - Signatur für gemeinsamen Zugriff
@@ -512,13 +512,18 @@ example: --repo1-gcs-endpoint=localhost
 
 GCS-Repository-Schlüsseltyp.
 
-Folgende Typen werden für die Autorisierung unterstützt:
+Die folgenden Autorisierungsarten werden unterstützt:
 
 - `auto` - Autorisierung mithilfe des Dienstkontos der Instanz.
 - `service` - Dienstkonto anhand eines lokal gespeicherten Schlüssels.
 - `token` - Für lokale Tests, z. B. `fakegcs`.
+- `web-id` - Autorisierung über Workload Identity Federation.
 
 Wenn `repo-gcs-key-type=service` ist, werden die Anmeldeinformationen erneut geladen, wenn das Authentifizierungstoken erneuert wird.
+
+Bei `repo-gcs-key-type=web-id` muss `repo-gcs-key` eine Datei mit Anmeldedaten für ein externes Konto angeben. Das Web-Identity-Token wird bei der Erneuerung des Authentifizierungstokens neu geladen.
+
+`service_account_impersonation_url` wird nicht unterstützt. Nur `credential_source.file` wird unterstützt; wenn `credential_source.format` angegeben ist, muss der Typ `text` sein.
 
 ```yaml
 default: service
@@ -721,7 +726,7 @@ example: --repo1-s3-endpoint=s3.amazonaws.com
 
 S3-Schlüsseltyp des Repositorys.
 
-Die folgenden Typen werden unterstützt:
+Die folgenden Autorisierungsarten werden unterstützt:
 
 - `shared` - Gemeinsame Schlüssel
 - `auto` - Temporäre Anmeldeinformationen automatisch abrufen
@@ -863,7 +868,7 @@ example: --repo1-sftp-host-key-check-type=accept-new
 
 Hash-Typ des SFTP-Hostschlüssels für das Repository.
 
-Hash-Typ des SFTP-Hostschlüssels für das Repository. Legt den Hash-Typ fest, mit dem beim SSH-Verbindungsaufbau der Hashwert des Hostschlüssels des entfernten Systems berechnet wird. Neuere Versionen von `libssh2` unterstützen neben md5 und sha1 auch `sha256`.
+Legt den Hash-Typ fest, mit dem beim SSH-Verbindungsaufbau der Hashwert des Hostschlüssels des entfernten Systems berechnet wird. Zulässige Werte sind `md5`, `sha1` und `sha256`, wobei `sha256` nur von neueren Versionen von `libssh2` unterstützt wird.
 
 ```yaml
 example: --repo1-sftp-host-key-hash-type=sha256
@@ -970,6 +975,32 @@ example: --repo1-storage-port=9000
 ```
 
 Veraltete Namen: repo-azure-port, repo-s3-port
+
+### Option für das Vorabladen aus dem Repository-Speicher (`--repo-storage-prefetch`) {#repository-storage-prefetch-option---repo-storage-prefetch}
+
+Vorabladen aus dem Repository-Speicher.
+
+Bestimmt die Anzahl der vorab gesendeten Anfragen beim Lesen aus Objektspeichern wie S3. Dies ist keine echte Nebenläufigkeit, verringert aber die Latenz beim Senden der Anfragen.
+
+Die Anzahl offener Anfragen pro Lesevorgang ist um eins höher als der Vorabladewert, da die erste Leseanfrage nicht vorab gesendet werden kann.
+
+```yaml
+default: 3
+allowed: [0, 1024]
+example: --repo1-storage-prefetch=7
+```
+
+### Option zum Überlesen im Repository-Speicher (`--repo-storage-read-over`) {#repository-storage-read-over-option---repo-storage-read-over}
+
+Überlesen im Repository-Speicher.
+
+Bundles können Daten enthalten, die bei der Wiederherstellung nicht benötigt werden, etwa bereits vorhandene Dateien. Diese Option überspringt unnötige Daten durch fortgesetztes Lesen, ohne eine neue Leseanfrage an den Objektspeicher zu senden. Das ist in der Regel schneller, da eine neue Leseanfrage eine höhere Latenz verursacht als das Fortsetzen eines laufenden Lesevorgangs. Für die meisten Speicherklassen ist es auch kostengünstiger.
+
+```yaml
+default: 64KiB
+allowed: [0B, 1MiB]
+example: --repo1-storage-read-over=128KiB
+```
 
 ### Option für Tags im Repository-Speicher (`--repo-storage-tag`) {#repository-storage-tag-option---repo-storage-tag}
 

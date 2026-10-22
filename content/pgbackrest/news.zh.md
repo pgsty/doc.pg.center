@@ -11,6 +11,49 @@ upstream_link: "https://pgbackrest.org/news.html"
 
 --------
 
+## pgBackRest 2.60.0 正式发布 {#release-2-60-0}
+
+**2026 年 10 月 18 日**
+
+pgBackRest 社区很高兴地宣布 [pgBackRest](https://pgbackrest.org) 2.60.0 正式发布。pgBackRest 是一款可靠、易用的备份与恢复解决方案，可无缝扩展以应对超大规模数据库和工作负载。
+
+pgBackRest 为管理备份与恢复基础设施提供了丰富而强大的功能，包括：并行备份与恢复、全量/差异/增量备份、块级增量备份、多仓库、delta 恢复、并行异步归档、恶意软件/勒索软件防护、逐文件校验和、备份期间验证页面校验和（启用时）、多种压缩类型、加密、部分备份/失败备份续传、从备库执行备份、表空间与链接支持、S3/Azure/GCS/SFTP 支持、备份过期、本地或通过 SSH/TLS 进行远程操作、灵活配置，以及更多功能。
+
+pgBackRest 可从 [PostgreSQL Yum 仓库](https://yum.postgresql.org) 或 [PostgreSQL APT 仓库](https://apt.postgresql.org) 安装，许多其他发行版也提供相应软件包。源码可从 [版本发布](/zh/pgbackrest/release/) 页面下载。
+
+### 主要新功能与改进 {#release-2-60-0-feature}
+
+- 新增 checksum-page-error 选项，在页面校验和无效时报错 (Andrew Pogrebnoi)
+- 支持 GCS 工作负载身份联合 (Adol Rodriguez)
+- 从对象存储预取多个文件/范围的读取请求 (David Steele)
+- 减少发送给远程进程的保活请求 (David Steele)
+- 重试 Azure 响应中缺失的批处理子请求 (David Steele)
+- 减少重建 backup.info 时的清单检查 (David Steele)
+- 支持在 illumos 上构建 (Kalevi Kolttonen)
+- 支持 OpenSSL 4 (David Steele)
+- 更新网站设计 (David Steele, Jan Wieremjewicz)
+
+更多功能与改进请参阅 [2.60.0 版本说明](/zh/pgbackrest/release/#v2600-release-notes)。
+
+### 重要提示 {#release-2-60-0-note}
+
+- restore 命令现在会在任一恢复文件包含无效页面校验和时报错并停止，此时集群不完整、无法启动，必须重新执行恢复。如果保留的最旧备份将包含校验和错误，expire 命令现在会拒绝执行过期操作，该仓库中的归档也因此无法过期。设置 checksum-page-error=n 可改为仅发出警告。
+- 从 Git 检出目录构建时需要 PyYAML，不再需要 libyaml。发行版 tar 包包含生成的代码，两者均不需要。
+- v2.59.2 及后续版本（包括本版本）支持 PostgreSQL 19rc1。
+
+### 相关链接 {#release-2-60-0-link}
+
+- [网站](/zh/pgbackrest/)
+- [用户指南](/zh/pgbackrest/user-guide/)
+- [版本说明](/zh/pgbackrest/release/)
+
+### 赞助 {#release-2-60-0-sponsorship}
+
+感谢 [AWS](https://aws.amazon.com)、[Supabase](https://supabase.com)、[pgEdge](https://pgedge.com)、[Tiger Data](https://tigerdata.com)、[Percona](https://percona.com)、[Eon](https://eon.io)、[Xata](https://xata.io)、[Dalibo](https://dalibo.com) 和 [Data Egret](https://dataegret.com/) 的慷慨赞助，使本次发布成为可能。
+
+
+--------
+
 ## 弱加密子密钥和盐值 {#weak-encryption}
 
 **2026 年 10 月 4 日**

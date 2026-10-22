@@ -1,5 +1,5 @@
 ---
-title: "pgBackRest 2.59.3 Dokumentation"
+title: "pgBackRest 2.60.0 Dokumentation"
 linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
@@ -11,11 +11,11 @@ description: "Zuverlässige Backups und Wiederherstellung für PostgreSQL — Do
 module: [PGBACKREST]
 categories: [Konzept]
 upstream_source: pgbackrest
-upstream_ref: v2.59.3
+upstream_ref: v2.60.0
 upstream_link: "https://pgbackrest.org/"
 cascade:
   upstream_source: pgbackrest
-  upstream_ref: v2.59.3
+  upstream_ref: v2.60.0
   type: docs
   module: [PGBACKREST]
 ---
@@ -26,9 +26,11 @@ cascade:
 
 pgBackRest ist eine zuverlässige Lösung für Backups und Wiederherstellung mit PostgreSQL, die sich nahtlos bis zu den größten Datenbanken und Arbeitslasten skalieren lässt.
 
-Diese Dokumentationskopie behandelt pgBackRest [v2.59.3](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.3). Versionshinweise stehen auf der Seite [Versionen](/de/pgbackrest/release/).
+Diese Dokumentationskopie behandelt pgBackRest [v2.60.0](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.0). Versionshinweise stehen auf der Seite [Versionen](/de/pgbackrest/release/).
 
-Version 2.59.3 behebt die mögliche Erzeugung schwacher Verschlüsselungsunterschlüssel und Salts. Ein Upgrade ersetzt vorhandene schwache Unterschlüssel einer Stanza nicht; Prüfungen und Abhilfemaßnahmen finden Sie unter [Schwache Unterschlüssel und Salts bei der Verschlüsselung](/de/pgbackrest/news/#weak-encryption).
+Version 2.60.0 ergänzt eine konfigurierbare Behandlung von Seitenprüfsummenfehlern, das Vorabladen aus Objektspeichern und GCS Workload Identity Federation. `restore` und `expire` halten bei ungültigen Seitenprüfsummen jetzt standardmäßig an; siehe die [Versionshinweise zu 2.60.0](/de/pgbackrest/release/#v2600-release-notes).
+
+Version 2.59.3 behob die mögliche Erzeugung schwacher Verschlüsselungsunterschlüssel und Salts. Ein Upgrade ersetzt vorhandene schwache Unterschlüssel einer Stanza nicht; Prüfungen und Abhilfemaßnahmen finden Sie unter [Schwache Unterschlüssel und Salts bei der Verschlüsselung](/de/pgbackrest/news/#weak-encryption).
 
 Wenn Ihnen pgBackRest gefällt, geben Sie uns einen Stern auf [GitHub](https://github.com/pgbackrest/pgbackrest)!
 
@@ -36,6 +38,8 @@ Wenn Ihnen pgBackRest gefällt, geben Sie uns einen Stern auf [GitHub](https://g
 --------
 
 ## Neuigkeiten {#news}
+
+**18. Oktober 2026** - [pgBackRest 2.60.0 veröffentlicht](/de/pgbackrest/news/#release-2-60-0)
 
 **4. Oktober 2026** - [Schwache Unterschlüssel und Salts bei der Verschlüsselung](/de/pgbackrest/news/#weak-encryption)
 
@@ -77,6 +81,11 @@ Ein eigenes Protokoll ermöglicht pgBackRest Backups, Wiederherstellung und Arch
 Mehrere Repositorys ermöglichen beispielsweise ein lokales Repository mit kurzer Aufbewahrungsdauer für schnelle Wiederherstellungen und ein entferntes Repository mit längerer Aufbewahrungsdauer für Redundanz und unternehmensweiten Zugriff.
 
 
+### Backups vom Standby {#backup-from-standby}
+
+Backups können von einem Standby erstellt werden, um den Primärserver zu entlasten. Nur die wenigen nicht replizierten Dateien werden vom Primärserver kopiert.
+
+
 ### Vollständige, differenzielle und inkrementelle Backups (auf Datei- oder Blockebene) {#full-differential--incremental-backups-at-file-or-block-level}
 
 Vollständige, differenzielle und inkrementelle Backups werden unterstützt. pgBackRest ist nicht von den Problemen mit der Zeitauflösung von `rsync` betroffen. Differenzielle und inkrementelle Backups sind daher sicher, ohne dass für jede Datei eine Prüfsumme berechnet werden muss. Backups auf Blockebene sparen Speicherplatz, indem nur geänderte Teile von Dateien kopiert werden.
@@ -100,7 +109,7 @@ Alle Operationen verwenden fsync auf Datei- und Verzeichnisebene, um die Dauerha
 
 Wenn Seitenprüfsummen aktiviert sind, prüft pgBackRest die Prüfsummen jeder Datei, die während eines Backups kopiert wird. Bei einem vollständigen Backup werden alle Seitenprüfsummen geprüft, bei differenziellen und inkrementellen Backups die Prüfsummen in geänderten Dateien.
 
-Fehlgeschlagene Prüfungen halten das Backup nicht an. Stattdessen werden Warnungen auf der Konsole und im Dateiprotokoll ausgegeben, die genau angeben, welche Seiten die Prüfung nicht bestanden haben.
+Standardmäßig halten fehlgeschlagene Prüfungen das Backup nicht an. Stattdessen werden Warnungen auf der Konsole und im Dateiprotokoll ausgegeben, die genau angeben, welche Seiten die Prüfung nicht bestanden haben. Standardmäßig meldet restore einen Fehler, wenn das Backup ungültige Seitenprüfsummen enthält, und expire lässt ein solches Backup nicht als ältestes Backup zurück.
 
 Diese Funktion ermöglicht es, Beschädigungen auf Seitenebene frühzeitig zu erkennen, bevor Backups mit gültigen Kopien der Daten abgelaufen sind.
 
@@ -115,6 +124,11 @@ Ein unterbrochenes Backup kann an der Stelle fortgesetzt werden, an der es angeh
 Komprimierung und Prüfsummenberechnung erfolgen im Datenstrom, während Dateien in das Repository kopiert werden, unabhängig davon, ob sich das Repository lokal oder auf einem entfernten Host befindet.
 
 Liegt das Repository auf einem Repository-Host, erfolgt die Komprimierung auf dem PostgreSQL-Host. Die Dateien werden komprimiert übertragen und auf dem Repository-Host lediglich gespeichert. Bei deaktivierter Komprimierung wird für die Übertragung eine niedrige Komprimierungsstufe verwendet, um die verfügbare Bandbreite effizient zu nutzen und gleichzeitig den CPU-Aufwand zu minimieren.
+
+
+### Bündelung von Dateien {#file-bundling}
+
+Kleine Dateien werden im Repository zu Bundles zusammengefasst, sodass beim Backup weniger Dateien erstellt werden. Dies ist besonders bei Objektspeichern wirksam.
 
 
 ### Delta-Wiederherstellung {#delta-restore}
@@ -140,9 +154,9 @@ Tablespaces werden vollständig unterstützt und können bei der Wiederherstellu
 Verknüpfungen werden für jede Datei und jedes Verzeichnis im PostgreSQL-Cluster unterstützt. Bei der Wiederherstellung können alle Verknüpfungen an ihren ursprünglichen Speicherorten wiederhergestellt, einige oder alle Verknüpfungen neu zugeordnet oder einige oder alle Verknüpfungen als normale Dateien oder Verzeichnisse im Clusterverzeichnis wiederhergestellt werden.
 
 
-### Unterstützung für S3-, Azure- und GCS-kompatible Objektspeicher {#s3-azure-and-gcs-compatible-object-store-support}
+### Unterstützung für S3, Azure, GCS und SFTP {#s3-azure-and-gcs-compatible-object-store-support}
 
-pgBackRest-Repositorys können in S3-, Azure- und GCS-kompatiblen Objektspeichern liegen und damit praktisch unbegrenzte Kapazität und Aufbewahrung ermöglichen.
+pgBackRest-Repositorys können in S3-, Azure- und GCS-kompatiblen Objektspeichern liegen und damit praktisch unbegrenzte Kapazität und Aufbewahrung ermöglichen. Repositorys können auch auf einem SFTP-Server gespeichert werden. In Cloud-Umgebungen lassen sich die Zugangsdaten für Objektspeicher über verschiedene Authentifizierungsverfahren automatisch abrufen.
 
 
 ### Verschlüsselung {#encryption}

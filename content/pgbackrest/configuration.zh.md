@@ -248,7 +248,7 @@ example: backup-standby=y
 
 指示 pgBackRest 在备份集群时验证所有数据页面的校验和。当集群启用了数据页面校验和时，此选项会自动启用。
 
-校验和验证失败不会中止备份，而是会在日志中（以及使用默认设置时在控制台中）输出警告，并将无效页面列表存储在备份的清单文件（manifest）中。
+默认情况下，校验和验证失败不会中止备份，而是在日志中（默认也在控制台）输出警告，并将无效页面列表记录到备份的清单文件（manifest）中。设置 `checksum-page-error=y` 可改为终止备份。
 
 ```text
 example: checksum-page=n
@@ -1005,7 +1005,7 @@ example: repo1-gcs-endpoint=localhost
 
 GCS 仓库密钥。
 
-根据 `repo-gcs-key-type` 选项的设置，此选项为令牌或服务密钥文件。
+根据 `repo-gcs-key-type` 选项的设置，此选项为令牌、服务密钥文件或外部账户凭据文件。
 
 ```text
 example: repo1-gcs-key=/etc/pgbackrest/gcs-key.json
@@ -1020,8 +1020,13 @@ GCS 仓库密钥类型。
 - `auto` - 使用实例服务账户授权。
 - `service` - 使用本地存储的服务账户密钥。
 - `token` - 用于本地测试，例如 `fakegcs`。
+- `web-id` - 使用工作负载身份联合（Workload Identity Federation）进行授权。
 
 当 `repo-gcs-key-type=service` 时，身份验证令牌续期时将重新加载凭据。
+
+当 `repo-gcs-key-type=web-id` 时，`repo-gcs-key` 选项必须指定外部账户凭据文件；每次续期身份验证令牌时，都会重新加载 Web 身份令牌。
+
+不支持 `service_account_impersonation_url`。仅支持 `credential_source.file`，且指定 `credential_source.format` 时，其类型必须为 `text`。
 
 ```text
 default: service
@@ -1234,7 +1239,13 @@ example: repo1-retention-archive=2
 
 WAL 归档保留所依据的备份类型。
 
-若设置为 `full`，pgBackRest 将为 `repo-retention-archive` 定义的全量备份数量保留归档日志。若设置为 `diff`（差异），pgBackRest 将为 `repo-retention-archive` 定义的全量备份和差异备份数量保留归档日志，即若最近一次备份是全量备份，则在计算 repo-retention 时将其视为差异备份。若设置为 `incr`（增量），pgBackRest 将为 `repo-retention-archive` 定义的全量、差异和增量备份数量保留归档日志。建议保留此设置的默认值——默认行为仅在全量备份过期时才清理 WAL。
+支持以下备份类型：
+
+- `full` - pgBackRest 将为 `repo-retention-archive` 定义的全量备份数量保留归档日志。
+- `diff` - （差异）pgBackRest 将为 `repo-retention-archive` 定义的全量备份和差异备份数量保留归档日志，即若最近一次备份是全量备份，则在计算 repo-retention 时将其视为差异备份。
+- `incr` - （增量）pgBackRest 将为 `repo-retention-archive` 定义的全量、差异和增量备份数量保留归档日志。
+
+建议保留此设置的默认值——默认行为仅在全量备份过期时才清理 WAL。
 
 ```text
 default: full
@@ -1277,9 +1288,10 @@ example: repo1-retention-full=2
 
 确定 `repo-retention-full` 设置表示时间周期（天数）还是要保留的全量备份数量。
 
-若设置为 `time`，则年龄超过 `repo-retention-full` 天的全量备份会从仓库中删除，前提是至少还存在另一个年龄达到或超过 `repo-retention-full` 天的备份。例如，若 `repo-retention-full` 为 30（天），且有 2 个全量备份，分别创建于 25 天前和 35 天前，则两者均不会过期：删除 35 天前的备份后只剩 25 天前的备份，这会违反 30 天保留策略，即必须至少保留一个年龄达到 30 天的备份，才能删除更旧的备份。早于所保留的最旧全量备份的归档 WAL 会自动过期，除非显式设置了 `repo-retention-archive-type` 和 `repo-retention-archive`。
+支持以下保留类型：
 
-若设置为 `count`，则超过 `repo-retention-full` 数量的全量备份将过期。例如，若 `repo-retention-full` 为 `4`，完成第五个全量备份后，最旧的全量备份将过期，使数量保持在 4 个。
+- `time` - 年龄超过 `repo-retention-full` 天的全量备份会从仓库中删除，前提是至少还存在另一个年龄达到或超过 `repo-retention-full` 天的备份。例如，若 `repo-retention-full` 为 30（天），且有 2 个全量备份，分别创建于 25 天前和 35 天前，则两者均不会过期：删除 35 天前的备份后只剩 25 天前的备份，这会违反 30 天保留策略，即必须至少保留一个年龄达到 30 天的备份，才能删除更旧的备份。早于所保留的最旧全量备份的归档 WAL 会自动过期，除非显式设置了 `repo-retention-archive-type` 和 `repo-retention-archive`。
+- `count` - 超过 `repo-retention-full` 数量的全量备份将过期。例如，若 `repo-retention-full` 为 `4`，完成第五个全量备份后，最旧的全量备份将过期，使数量保持在 4 个。
 
 注意，备份必须成功完成后才会纳入保留计算。例如，若 `repo-retention-full-type` 为 `count` 且 `repo-retention-full` 为 `2`，则必须有 3 个完整的全量备份，最旧的才会过期。
 
@@ -1351,7 +1363,7 @@ example: repo1-s3-key-secret=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 
 S3 仓库密钥类型。
 
-支持以下类型：
+支持以下授权类型：
 
 - `shared` - 共享密钥
 - `auto` - 自动获取临时凭据
@@ -1515,7 +1527,7 @@ example: repo1-sftp-host-key-check-type=accept-new
 
 SFTP 仓库主机密钥哈希类型。
 
-声明在 SSH 启动时用于计算远程系统主机密钥摘要的哈希类型。较新版本的 `libssh2` 除 md5 和 sha1 外，还支持 `sha256`。
+声明在 SSH 启动时用于计算远程系统主机密钥摘要的哈希类型。允许值为 `md5`、`sha1` 和 `sha256`，其中 `sha256` 仅受较新版本的 `libssh2` 支持。
 
 ```text
 example: repo1-sftp-host-key-hash-type=sha256
@@ -1632,6 +1644,32 @@ example: repo1-storage-port=9000
 ```
 
 已弃用名称：`repo-azure-port`、`repo-s3-port`
+
+### 仓库存储预取选项 (`--repo-storage-prefetch`) {#repository-storage-prefetch-option---repo-storage-prefetch}
+
+仓库存储预取。
+
+确定从对象存储（如 S3）读取时预取的请求数量。这并非真正的并发，但能减少提交请求带来的延迟。
+
+每次读取时，未完成的请求数会比预取数多一个，因为初始读取无法预取。
+
+```text
+default: 3
+allowed: [0, 1024]
+example: repo1-storage-prefetch=7
+```
+
+### 仓库存储连续读取跳过选项 (`--repo-storage-read-over`) {#repository-storage-read-over-option---repo-storage-read-over}
+
+仓库存储连续读取跳过。
+
+文件包可能包含恢复时不需要的数据，例如已存在的文件。此选项通过继续读取并丢弃不需要的数据来跳过它们，无需向对象存储发起新的读取请求。由于新读取请求的延迟高于继续已有读取，这通常更快。对于大多数存储类别，这也能降低费用。
+
+```text
+default: 64KiB
+allowed: [0B, 1MiB]
+example: repo1-storage-read-over=128KiB
+```
 
 ### 仓库存储标签选项（`--repo-storage-tag`）
 

@@ -380,7 +380,7 @@ example: --repo1-azure-container=pg-backup
 
 Tipo de clave del repositorio de Azure.
 
-Se soportan los siguientes tipos para la autorización:
+Se admiten los siguientes tipos de autorización:
 
 - `shared` - Clave compartida
 - `sas` - Firma de acceso compartido
@@ -448,13 +448,18 @@ example: --repo1-gcs-endpoint=localhost
 
 Tipo de clave del repositorio de GCS.
 
-Se soportan los siguientes tipos para la autorización:
+Se admiten los siguientes tipos de autorización:
 
 - `auto` - Autorizar usando la cuenta de servicio de la instancia.
 - `service` - Cuenta de servicio desde una clave almacenada localmente.
 - `token` - Para pruebas locales, p. ej., `fakegcs`.
+- `web-id` - Autorización mediante Workload Identity Federation.
 
 Cuando `repo-gcs-key-type=service`, las credenciales se recargarán cuando se renueve el token de autenticación.
+
+Cuando `repo-gcs-key-type=web-id`, la opción `repo-gcs-key` debe indicar un archivo de credenciales de una cuenta externa. El token de identidad web se vuelve a cargar al renovar el token de autenticación.
+
+No se admite `service_account_impersonation_url`. Solo se admite `credential_source.file` y, si se especifica `credential_source.format`, el tipo debe ser `text`.
 
 ```yaml
 default: service
@@ -657,7 +662,7 @@ example: --repo1-s3-endpoint=s3.amazonaws.com
 
 Tipo de clave del repositorio de S3.
 
-Se soportan los siguientes tipos:
+Se admiten los siguientes tipos de autorización:
 
 - `shared` - Claves compartidas
 - `auto` - Obtener automáticamente credenciales temporales
@@ -799,7 +804,7 @@ example: --repo1-sftp-host-key-check-type=accept-new
 
 Tipo de hash de clave de host del repositorio SFTP.
 
-Tipo de hash de clave de host del repositorio SFTP. Declara el tipo de hash que se utilizará para calcular el resumen de la clave de host del sistema remoto al iniciar SSH. Las versiones más recientes de `libssh2` soportan `sha256` además de md5 y sha1.
+Declara el tipo de hash que se usa para calcular el resumen de la clave de host del sistema remoto al iniciar SSH. Los valores permitidos son `md5`, `sha1` y `sha256`, aunque solo las versiones más recientes de `libssh2` admiten `sha256`.
 
 ```yaml
 example: --repo1-sftp-host-key-hash-type=sha256
@@ -906,6 +911,32 @@ example: --repo1-storage-port=9000
 ```
 
 Nombres obsoletos: repo-azure-port, repo-s3-port
+
+### Opción de lectura anticipada del almacenamiento del repositorio (`--repo-storage-prefetch`) {#repository-storage-prefetch-option---repo-storage-prefetch}
+
+Lectura anticipada del almacenamiento del repositorio.
+
+Determina el número de solicitudes que se envían por adelantado al leer de almacenes de objetos, como S3. No es concurrencia real, pero reduce la latencia asociada al envío de solicitudes.
+
+El número de solicitudes abiertas por lectura es uno mayor que el valor de lectura anticipada, ya que la lectura inicial no puede anticiparse.
+
+```yaml
+default: 3
+allowed: [0, 1024]
+example: --repo1-storage-prefetch=7
+```
+
+### Opción de lectura continua sobre datos innecesarios del almacenamiento del repositorio (`--repo-storage-read-over`) {#repository-storage-read-over-option---repo-storage-read-over}
+
+Lectura continua sobre datos innecesarios del almacenamiento del repositorio.
+
+Los paquetes pueden contener datos que no se necesitan durante la restauración, por ejemplo archivos que ya existen. Esta opción omite esos datos continuando la lectura, sin iniciar una nueva solicitud al almacén de objetos. Suele ser más rápido, ya que la latencia de las nuevas solicitudes de lectura es mayor que la de continuar una lectura en curso. También es menos costoso para la mayoría de las clases de almacenamiento.
+
+```yaml
+default: 64KiB
+allowed: [0B, 1MiB]
+example: --repo1-storage-read-over=128KiB
+```
 
 ### Opción de etiqueta de almacenamiento del repositorio (`--repo-storage-tag`) {#repository-storage-tag-option---repo-storage-tag}
 

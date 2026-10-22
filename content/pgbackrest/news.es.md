@@ -11,6 +11,49 @@ upstream_link: "https://pgbackrest.org/news.html"
 
 --------
 
+## Publicación de pgBackRest 2.60.0 {#release-2-60-0}
+
+**18 de octubre de 2026**
+
+La comunidad de pgBackRest se complace en anunciar la publicación de [pgBackRest](https://pgbackrest.org) 2.60.0, la versión más reciente de la solución de copia de seguridad y restauración, fiable y fácil de usar, que escala sin problemas hasta las bases de datos y cargas de trabajo más grandes.
+
+pgBackRest admite un sólido conjunto de funcionalidades para gestionar tu infraestructura de copias de seguridad y recuperación, entre ellas: copia de seguridad/restauración en paralelo, copias de seguridad completas/diferenciales/incrementales, copia de seguridad incremental a nivel de bloque, múltiples repositorios, restauración delta, archivado asíncrono en paralelo, protección contra malware/ransomware, sumas de control por archivo, sumas de control de páginas (cuando están habilitadas) validadas durante la copia de seguridad, múltiples tipos de compresión, cifrado, reanudación de copias de seguridad parciales/fallidas, copia de seguridad desde un servidor en espera, soporte de tablespaces y enlaces, soporte de S3/Azure/GCS/SFTP, expiración de copias de seguridad, operación local/remota mediante SSH o TLS, configuración flexible y mucho más.
+
+pgBackRest se puede instalar desde el [repositorio Yum de PostgreSQL](https://yum.postgresql.org) o el [repositorio APT de PostgreSQL](https://apt.postgresql.org), y también hay paquetes disponibles para muchas otras distribuciones. El código fuente se puede descargar desde [versiones](/es/pgbackrest/release/).
+
+### Principales novedades y mejoras {#release-2-60-0-feature}
+
+- Añadida la opción checksum-page-error para notificar un error ante sumas de control de páginas no válidas (Andrew Pogrebnoi)
+- Soporte de GCS Workload Identity Federation (Adol Rodriguez)
+- Lectura anticipada de múltiples archivos o rangos de almacenes de objetos (David Steele)
+- Reducción de las solicitudes de mantenimiento de conexión a procesos remotos (David Steele)
+- Reintento de subsolicitudes de lotes de Azure ausentes en la respuesta (David Steele)
+- Reducción de las comprobaciones de manifiestos al reconstruir backup.info (David Steele)
+- Soporte de compilación en illumos (Kalevi Kolttonen)
+- Soporte de OpenSSL 4 (David Steele)
+- Modernización del sitio web (David Steele, Jan Wieremjewicz)
+
+Consulta las [notas de la versión 2.60.0](/es/pgbackrest/release/#v2600-release-notes) para ver otras funcionalidades y mejoras.
+
+### Notas importantes {#release-2-60-0-note}
+
+- Ahora la orden restore notifica un error y se detiene si algún archivo restaurado contiene una suma de control de página no válida. Esto deja el clúster incompleto e incapaz de iniciarse, por lo que hay que repetir la restauración. La orden expire ahora rechaza la expiración si la copia más antigua que se conservaría contiene errores de sumas de control, lo que también impide la expiración del archivado de ese repositorio. Establece checksum-page-error=n para emitir advertencias en lugar de errores.
+- La compilación desde una copia de trabajo de Git requiere PyYAML en lugar de libyaml. El archivo tar de distribución incluye el código generado y no requiere ninguna de las dos bibliotecas.
+- PostgreSQL 19rc1 está soportado por v2.59.2 y posteriores, incluida esta versión.
+
+### Enlaces {#release-2-60-0-link}
+
+- [Sitio web](/es/pgbackrest/)
+- [Guías de usuario](/es/pgbackrest/user-guide/)
+- [Notas de la versión](/es/pgbackrest/release/)
+
+### Patrocinio {#release-2-60-0-sponsorship}
+
+Esta versión fue posible gracias al generoso patrocinio de [AWS](https://aws.amazon.com), [Supabase](https://supabase.com), [pgEdge](https://pgedge.com), [Tiger Data](https://tigerdata.com), [Percona](https://percona.com), [Eon](https://eon.io), [Xata](https://xata.io), [Dalibo](https://dalibo.com) y [Data Egret](https://dataegret.com/).
+
+
+--------
+
 ## Subclaves y sales de cifrado débiles {#weak-encryption}
 
 **4 de octubre de 2026**

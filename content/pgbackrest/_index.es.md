@@ -1,5 +1,5 @@
 ---
-title: "Documentación de pgBackRest 2.59.3"
+title: "Documentación de pgBackRest 2.60.0"
 linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
@@ -11,11 +11,11 @@ description: "Copias de seguridad y restauración fiables para PostgreSQL — do
 module: [PGBACKREST]
 categories: [Concepto]
 upstream_source: pgbackrest
-upstream_ref: v2.59.3
+upstream_ref: v2.60.0
 upstream_link: "https://pgbackrest.org/"
 cascade:
   upstream_source: pgbackrest
-  upstream_ref: v2.59.3
+  upstream_ref: v2.60.0
   type: docs
   module: [PGBACKREST]
 ---
@@ -26,9 +26,11 @@ cascade:
 
 pgBackRest es una solución fiable de copia de seguridad y restauración para PostgreSQL que escala sin problemas hasta las bases de datos y cargas de trabajo más grandes.
 
-Este espejo de la documentación cubre pgBackRest [v2.59.3](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.59.3). Las notas de la versión están en la página de [versiones](/es/pgbackrest/release/).
+Este espejo de la documentación cubre pgBackRest [v2.60.0](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.0). Las notas de la versión están en la página de [versiones](/es/pgbackrest/release/).
 
-La versión 2.59.3 corrige posibles subclaves de cifrado débiles y sales. La actualización no reemplaza las subclaves de stanza débiles existentes; consulta [Subclaves y sales de cifrado débiles](/es/pgbackrest/news/#weak-encryption) para las comprobaciones y la remediación.
+La versión 2.60.0 añade un tratamiento configurable de los errores de sumas de control de páginas, la lectura anticipada de almacenes de objetos y GCS Workload Identity Federation. Ahora `restore` y `expire` se detienen de forma predeterminada ante sumas de control de páginas no válidas; consulta las [notas de la versión 2.60.0](/es/pgbackrest/release/#v2600-release-notes).
+
+La versión 2.59.3 corrigió posibles subclaves de cifrado débiles y sales. La actualización no reemplaza las subclaves de stanza débiles existentes; consulta [Subclaves y sales de cifrado débiles](/es/pgbackrest/news/#weak-encryption) para las comprobaciones y la remediación.
 
 ¡Danos una estrella en [GitHub](https://github.com/pgbackrest/pgbackrest) si te gusta pgBackRest!
 
@@ -36,6 +38,8 @@ La versión 2.59.3 corrige posibles subclaves de cifrado débiles y sales. La ac
 --------
 
 ## Novedades {#news}
+
+**18 de octubre de 2026** - [Publicación de pgBackRest 2.60.0](/es/pgbackrest/news/#release-2-60-0)
 
 **4 de octubre de 2026** - [Subclaves y sales de cifrado débiles](/es/pgbackrest/news/#weak-encryption)
 
@@ -77,6 +81,11 @@ Un protocolo personalizado permite a pgBackRest hacer copias de seguridad, resta
 Los múltiples repositorios permiten, por ejemplo, un repositorio local con una retención mínima para restauraciones rápidas y un repositorio remoto con una retención más larga para redundancia y acceso en toda la empresa.
 
 
+### Copia de seguridad desde un servidor en espera {#backup-from-standby}
+
+Las copias de seguridad pueden realizarse desde un servidor en espera para reducir la carga del primario. Solo se copian del primario los pocos archivos que no se replican.
+
+
 ### Copias de seguridad completas, diferenciales e incrementales (a nivel de archivo o de bloque) {#full-differential--incremental-backups-at-file-or-block-level}
 
 Se admiten copias de seguridad completas, diferenciales e incrementales. pgBackRest no es susceptible a los problemas de resolución de tiempo de `rsync`, lo que hace que las copias de seguridad diferenciales e incrementales sean seguras sin necesidad de calcular la suma de control de cada archivo. Las copias de seguridad a nivel de bloque ahorran espacio al copiar solo las partes de los archivos que han cambiado.
@@ -100,7 +109,7 @@ Todas las operaciones utilizan fsync a nivel de archivo y de directorio para gar
 
 Si las sumas de control de páginas están habilitadas, pgBackRest validará las sumas de control de cada archivo que se copie durante una copia de seguridad. Todas las sumas de control de páginas se validan durante una copia de seguridad completa y las sumas de control de los archivos que han cambiado se validan durante las copias de seguridad diferenciales e incrementales.
 
-Los fallos de validación no detienen el proceso de copia de seguridad, pero se emiten a la consola y al archivo de registro advertencias con detalles de exactamente qué páginas han fallado la validación.
+De forma predeterminada, los fallos de validación no detienen la copia de seguridad, sino que se emiten advertencias a la consola y al archivo de registro con detalles de las páginas que han fallado. De forma predeterminada, restore notifica un error si la copia contiene sumas de control de páginas no válidas, y expire no permite que una copia con esos errores quede como la copia más antigua conservada.
 
 Esta funcionalidad permite detectar temprano la corrupción a nivel de página, antes de que expiren las copias de seguridad que contienen copias válidas de los datos.
 
@@ -115,6 +124,11 @@ Una copia de seguridad interrumpida puede reanudarse desde el punto donde se det
 Los cálculos de compresión y de sumas de control se realizan en streaming mientras los archivos se copian al repositorio, ya sea que el repositorio esté ubicado local o remotamente.
 
 Si el repositorio está en un host de repositorio, la compresión se realiza en el host de PostgreSQL y los archivos se transmiten en formato comprimido y simplemente se almacenan en el host del repositorio. Cuando la compresión está deshabilitada se utiliza un nivel inferior de compresión para hacer un uso eficiente del ancho de banda disponible manteniendo el coste de CPU al mínimo.
+
+
+### Agrupación de archivos {#file-bundling}
+
+Los archivos pequeños se agrupan en paquetes en el repositorio para crear menos archivos durante la copia de seguridad. Esto resulta especialmente eficaz en los almacenes de objetos.
 
 
 ### Restauración delta {#delta-restore}
@@ -140,9 +154,9 @@ Los tablespaces son totalmente compatibles y, al restaurar, los tablespaces pued
 Los enlaces de archivos y directorios son compatibles para cualquier archivo o directorio del clúster de PostgreSQL. Al restaurar, es posible restaurar todos los enlaces a sus ubicaciones originales, remapear algunos o todos los enlaces, o restaurar algunos o todos los enlaces como archivos o directorios normales dentro del directorio del clúster.
 
 
-### Soporte de almacenes de objetos compatibles con S3, Azure y GCS {#s3-azure-and-gcs-compatible-object-store-support}
+### Soporte de S3, Azure, GCS y SFTP {#s3-azure-and-gcs-compatible-object-store-support}
 
-Los repositorios de pgBackRest pueden ubicarse en almacenes de objetos compatibles con S3, Azure y GCS para permitir una capacidad y retención prácticamente ilimitadas.
+Los repositorios de pgBackRest pueden ubicarse en almacenes de objetos compatibles con S3, Azure y GCS para permitir una capacidad y retención prácticamente ilimitadas. Los repositorios también pueden almacenarse en un servidor SFTP. En entornos de nube, las credenciales del almacén de objetos pueden obtenerse automáticamente mediante diversos métodos de autenticación.
 
 
 ### Cifrado {#encryption}

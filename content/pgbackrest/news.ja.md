@@ -11,6 +11,49 @@ upstream_link: "https://pgbackrest.org/news.html"
 
 --------
 
+## pgBackRest 2.60.0リリース {#release-2-60-0}
+
+**2026年10月18日**
+
+pgBackRestコミュニティは、[pgBackRest](https://pgbackrest.org) 2.60.0のリリースをお知らせします。信頼性が高く使いやすいバックアップおよびリストアソリューションの最新版で、最大規模のデータベースやワークロードにもシームレスに対応できます。
+
+pgBackRestは、バックアップとリカバリーの基盤を管理するための充実した機能を備えています。並列バックアップ／リストア、フル／差分／増分バックアップ、ブロック増分バックアップ、複数リポジトリ、差分リストア、並列非同期アーカイブ、マルウェア／ランサムウェア対策、ファイル単位のチェックサム、バックアップ時のページチェックサム検証（有効な場合）、複数の圧縮形式、暗号化、途中まで実行したバックアップや失敗したバックアップの再開、スタンバイからのバックアップ、テーブルスペースとリンク、S3／Azure／GCS／SFTP、バックアップの期限切れ処理、SSHまたはTLSによるローカル／リモート操作、柔軟な設定などに対応しています。
+
+pgBackRestは[PostgreSQL Yum Repository](https://yum.postgresql.org)または[PostgreSQL APT Repository](https://apt.postgresql.org)からインストールできます。他の多くのディストリビューション向けにもパッケージが提供されています。ソースコードは[リリース](/ja/pgbackrest/release/)からダウンロードできます。
+
+### 主な新機能と改善 {#release-2-60-0-feature}
+
+- ページチェックサムが無効な場合にエラーにするchecksum-page-errorオプションを追加 (Andrew Pogrebnoi)
+- GCS Workload Identity Federationをサポート (Adol Rodriguez)
+- オブジェクトストアからの複数ファイル／範囲の読み取りをプリフェッチ (David Steele)
+- リモートプロセスへのキープアライブリクエストを削減 (David Steele)
+- Azureの応答に含まれないバッチのサブリクエストを再試行 (David Steele)
+- backup.infoの再構築時に行うマニフェストの検査を削減 (David Steele)
+- illumosでのビルドをサポート (Kalevi Kolttonen)
+- OpenSSL 4をサポート (David Steele)
+- ウェブサイトを刷新 (David Steele, Jan Wieremjewicz)
+
+その他の機能と改善については、[2.60.0リリースノート](/ja/pgbackrest/release/#v2600-release-notes)を参照してください。
+
+### 重要な注意事項 {#release-2-60-0-note}
+
+- restoreコマンドは、復元したファイルに無効なページチェックサムがあるとエラーを報告して停止するようになりました。その場合、クラスターは不完全な状態で起動できないため、リストアを再実行する必要があります。expireコマンドは、保持対象の最も古いバックアップにチェックサムエラーが含まれる場合、期限切れ処理を拒否するようになりました。この場合、同じリポジトリ内のアーカイブも期限切れにできません。エラーではなく警告にするには、checksum-page-error=nを設定してください。
+- Gitチェックアウトからのビルドには、libyamlの代わりにPyYAMLが必要です。配布用tarアーカイブには生成済みコードが含まれ、どちらも不要です。
+- このリリースを含むv2.59.2以降では、PostgreSQL 19rc1をサポートしています。
+
+### リンク {#release-2-60-0-link}
+
+- [ウェブサイト](/ja/pgbackrest/)
+- [ユーザーガイド](/ja/pgbackrest/user-guide/)
+- [リリースノート](/ja/pgbackrest/release/)
+
+### スポンサー {#release-2-60-0-sponsorship}
+
+このリリースは、[AWS](https://aws.amazon.com)、[Supabase](https://supabase.com)、[pgEdge](https://pgedge.com)、[Tiger Data](https://tigerdata.com)、[Percona](https://percona.com)、[Eon](https://eon.io)、[Xata](https://xata.io)、[Dalibo](https://dalibo.com)、[Data Egret](https://dataegret.com/)の寛大なスポンサー支援により実現しました。
+
+
+--------
+
 ## 脆弱な暗号化サブキーとソルト {#weak-encryption}
 
 **2026年10月4日**

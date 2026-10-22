@@ -444,7 +444,7 @@ example: --repo1-azure-container=pg-backup
 
 Type de clé du dépôt Azure.
 
-Les types suivants sont pris en charge pour l'autorisation :
+Les types d'autorisation suivants sont pris en charge :
 
 - `shared` - Clé partagée
 - `sas` - Signature d'accès partagé
@@ -512,13 +512,18 @@ example: --repo1-gcs-endpoint=localhost
 
 Type de clé du dépôt GCS.
 
-Les types suivants sont pris en charge pour l'autorisation :
+Les types d'autorisation suivants sont pris en charge :
 
 - `auto` - Autoriser à l'aide du compte de service de l'instance.
 - `service` - Compte de service à partir d'une clé stockée localement.
 - `token` - À utiliser pour les tests locaux, par exemple `fakegcs`.
+- `web-id` - Autorisation à l'aide de Workload Identity Federation.
 
 Lorsque `repo-gcs-key-type=service`, les identifiants seront rechargés lorsque le jeton d'authentification sera renouvelé.
+
+Lorsque `repo-gcs-key-type=web-id`, l'option `repo-gcs-key` doit désigner un fichier d'identifiants de compte externe ; le jeton d'identité Web est rechargé lors du renouvellement du jeton d'authentification.
+
+`service_account_impersonation_url` n'est pas pris en charge. Seul `credential_source.file` est pris en charge et, si `credential_source.format` est spécifié, son type doit être `text`.
 
 ```yaml
 default: service
@@ -721,7 +726,7 @@ example: --repo1-s3-endpoint=s3.amazonaws.com
 
 Type de clé pour le dépôt S3.
 
-Les types suivants sont pris en charge :
+Les types d'autorisation suivants sont pris en charge :
 
 - `shared` - Clés partagées
 - `auto` - Récupérer automatiquement les identifiants temporaires
@@ -863,7 +868,7 @@ example: --repo1-sftp-host-key-check-type=accept-new
 
 Type de hachage de la clé d'hôte du dépôt SFTP.
 
-Type de hachage de la clé hôte du dépôt SFTP. Déclare le type de hachage à utiliser pour calculer le hachage de la clé hôte du système distant au démarrage SSH. Les versions plus récentes de `libssh2` prennent en charge `sha256` en plus de md5 et sha1.
+Définit le type de hachage utilisé pour calculer l'empreinte de la clé hôte du système distant au démarrage de SSH. Les valeurs autorisées sont `md5`, `sha1` et `sha256`, mais seules les versions récentes de `libssh2` prennent en charge `sha256`.
 
 ```yaml
 example: --repo1-sftp-host-key-hash-type=sha256
@@ -970,6 +975,32 @@ example: --repo1-storage-port=9000
 ```
 
 Noms obsolètes : repo-azure-port, repo-s3-port
+
+### Option de prélecture du stockage du dépôt (`--repo-storage-prefetch`) {#repository-storage-prefetch-option---repo-storage-prefetch}
+
+Prélecture du stockage du dépôt.
+
+Détermine le nombre de requêtes à anticiper lors de la lecture depuis un stockage objet, tel que S3. Il ne s'agit pas d'une véritable exécution concurrente, mais cela réduit la latence liée à l'envoi des requêtes.
+
+Le nombre de requêtes ouvertes par lecture est supérieur d'une unité à la valeur de prélecture, car la lecture initiale ne peut pas être anticipée.
+
+```yaml
+default: 3
+allowed: [0, 1024]
+example: --repo1-storage-prefetch=7
+```
+
+### Option de lecture au-delà des données utiles du stockage du dépôt (`--repo-storage-read-over`) {#repository-storage-read-over-option---repo-storage-read-over}
+
+Lecture au-delà des données utiles du stockage du dépôt.
+
+Les bundles peuvent contenir des données inutiles à la restauration, par exemple des fichiers déjà présents. Cette option permet de passer ces données en poursuivant la lecture, sans lancer une nouvelle requête de lecture sur le stockage objet. C'est généralement plus rapide, car la latence d'une nouvelle requête de lecture est supérieure à celle de la poursuite d'une lecture en cours. C'est également moins coûteux pour la plupart des classes de stockage.
+
+```yaml
+default: 64KiB
+allowed: [0B, 1MiB]
+example: --repo1-storage-read-over=128KiB
+```
 
 ### Option d'étiquette de stockage du dépôt (`--repo-storage-tag`) {#repository-storage-tag-option---repo-storage-tag}
 
