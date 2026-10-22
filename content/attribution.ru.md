@@ -30,10 +30,10 @@ PG.CENTER повторно публикует документацию, напи
 | Компонент | Исходная работа | Зафиксированная версия | Лицензия | Сохранённое уведомление |
 |---|---|---|---|---|
 | [Patroni](/ru/patroni/) | [Документация Patroni](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/ru/pgbackrest/) | [Документация pgBackRest](https://pgbackrest.org/) | v2.59.3 | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/ru/pgbouncer/) | [Документация PgBouncer](https://www.pgbouncer.org/) | v1.26.0 | [ISC](https://opensource.org/license/isc-license-txt) | [Исходный `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
-| [pgBadger](/ru/pgbadger/) | [Документация pgBadger](https://pgbadger.darold.net/) | v13.2, коммит `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/ru/haproxy/) | [Руководства HAProxy 3.4](https://docs.haproxy.org/3.4/) | снимок документации 3.4.6-66, коммит `16acce1`; стабильный выпуск v3.4.6 | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [pgBackRest](/ru/pgbackrest/) | [Документация pgBackRest](https://pgbackrest.org/) | v2.60.0 | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [PgBouncer](/ru/pgbouncer/) | [Документация PgBouncer](https://www.pgbouncer.org/) | v1.26.1 | [ISC](https://opensource.org/license/isc-license-txt) | [Исходный `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/COPYRIGHT) |
+| [pgBadger](/ru/pgbadger/) | [Документация pgBadger](https://pgbadger.darold.net/) | v13.2, снимок разработки, коммит `f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
+| [HAProxy](/ru/haproxy/) | [Руководства HAProxy 3.4](https://docs.haproxy.org/3.4/) | снимок документации 3.4.7-57, коммит `0faeaed`; стабильный выпуск v3.4.7 | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/ru/etcd/) | [Документация etcd v3.7](https://etcd.io/docs/v3.7/) | v3.7, коммит `d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Исходный `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 Каждый сборник **адаптирован**, а не зеркально скопирован. Заголовки, якоря, перекрёстные ссылки,
@@ -52,8 +52,7 @@ PG.CENTER повторно публикует документацию, напи
 
 ## pgBackRest {#pgbackrest}
 
-Импортировано 2026-08-15 с [сайта документации pgBackRest](https://pgbackrest.org/)
-и обновлено 2026-10-13 до **v2.59.3**.
+Импортировано 2026-08-15 с [сайта документации pgBackRest](https://pgbackrest.org/) и обновлено 2026-10-23 до **v2.60.0**, тег `release/2.60.0`, коммит [`2e1c4f2`](https://github.com/pgbackrest/pgbackrest/commit/2e1c4f2ba727c45a0a23d4b326905088dc15b1a1).
 
 Авторские права на pgBackRest принадлежат The PostgreSQL Global Development Group и David Steele
 (copyright (c) 2015-2026). Материалы распространяются по
@@ -63,20 +62,18 @@ PG.CENTER повторно публикует документацию, напи
 ## PgBouncer {#pgbouncer}
 
 Импортировано 2026-08-15 из [документации PgBouncer](https://www.pgbouncer.org/) версии
-**v1.25.2** и обновлено 2026-10-13 до
-[**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0).
+**v1.25.2** и обновлено 2026-10-23 до
+[**v1.26.1**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_1).
 
 Авторские права на PgBouncer принадлежат Marko Kreen и Skype Technologies OÜ
 (copyright (c) 2007-2009). Материалы распространяются по
 [лицензии ISC](https://opensource.org/license/isc-license-txt). Полный текст лицензии сохранён в
-[исходном проекте](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT).
+[исходном проекте](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/COPYRIGHT).
 
 ## pgBadger {#pgbadger}
 
-Импортировано 2026-08-15 с <https://pgbadger.darold.net/> и из репозитория
-[`darold/pgbadger`](https://github.com/darold/pgbadger) на коммите
-[`a1ad95a`](https://github.com/darold/pgbadger/commit/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae),
-когда последней опубликованной версией была v13.2.
+Импортировано 2026-08-15 с <https://pgbadger.darold.net/> и из [`darold/pgbadger`](https://github.com/darold/pgbadger), обновлено 2026-10-23 до коммита [`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67).
+Это снимок документации разрабатываемой версии после последнего опубликованного выпуска v13.2, а не новый стабильный выпуск. Исторические выдержки с сайта и примеры отчётов сохраняют собственные источники.
 
 Авторские права на pgBadger принадлежат Gilles Darold (copyright (c) 2012-2026). Материалы
 распространяются по [лицензии PostgreSQL](https://opensource.org/license/postgresql). Полный текст
@@ -94,14 +91,14 @@ PG.CENTER повторно публикует документацию, напи
 
 ## HAProxy {#haproxy}
 
-Импортировано 2026-08-16, обновлено 2026-08-30 и приведено 2026-10-13
-к официальному английскому снимку документации `3.4.6-66` ветки
+Импортировано 2026-08-16, обновлено 2026-08-30 и приведено 2026-10-23
+к официальному английскому снимку документации `3.4.7-57` ветки
 сопровождения HAProxy 3.4, коммит
-[`16acce1dac1d`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=16acce1dac1dcf1ad5d654204af3a5d45d0e3de8).
-Последний стабильный выпуск — `3.4.6` (тег `v3.4.6`); снимок документации включает
+[`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3).
+Последний стабильный выпуск — `3.4.7` (тег `v3.4.7`); снимок документации включает
 изменения в ветке сопровождения, внесённые после этого выпуска.
 Английский текст получен из полных руководств `doc/intro.txt`, `doc/configuration.txt`
-и `doc/management.txt` — всего 40,216 строк — и реорганизован в 34 страницы для чтения.
+и `doc/management.txt` — всего 40,246 строк — и реорганизован в 34 страницы для чтения.
 
 Авторские права на HAProxy принадлежат Willy Tarreau (copyright 2000-2026). Материалы
 распространяются по [GNU General Public License version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).

@@ -26,10 +26,10 @@ outputs: [HTML, markdown]
 | المكوّن | العمل الأصلي | المراجعة المثبّتة | الترخيص | الإشعار المحفوظ |
 |---|---|---|---|---|
 | [Patroni](/ar/patroni/) | [توثيق Patroni](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [`LICENSE` الأصلي](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/ar/pgbackrest/) | [توثيق pgBackRest](https://pgbackrest.org/) | v2.59.3 | [MIT](https://opensource.org/license/mit) | [`LICENSE` الأصلي](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/ar/pgbouncer/) | [توثيق PgBouncer](https://www.pgbouncer.org/) | v1.26.0 | [ISC](https://opensource.org/license/isc-license-txt) | [`COPYRIGHT` الأصلي](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
-| [pgBadger](/ar/pgbadger/) | [توثيق pgBadger](https://pgbadger.darold.net/) | v13.2، الالتزام `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/ar/haproxy/) | [أدلة HAProxy 3.4](https://docs.haproxy.org/3.4/) | 3.4.6-66؛ المستقرة v3.4.6، الالتزام `16acce1` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [pgBackRest](/ar/pgbackrest/) | [توثيق pgBackRest](https://pgbackrest.org/) | v2.60.0 | [MIT](https://opensource.org/license/mit) | [`LICENSE` الأصلي](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [PgBouncer](/ar/pgbouncer/) | [توثيق PgBouncer](https://www.pgbouncer.org/) | v1.26.1 | [ISC](https://opensource.org/license/isc-license-txt) | [`COPYRIGHT` الأصلي](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/COPYRIGHT) |
+| [pgBadger](/ar/pgbadger/) | [توثيق pgBadger](https://pgbadger.darold.net/) | v13.2، لقطة تطوير، الالتزام `f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
+| [HAProxy](/ar/haproxy/) | [أدلة HAProxy 3.4](https://docs.haproxy.org/3.4/) | 3.4.7-57؛ المستقرة v3.4.7، الالتزام `0faeaed` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/ar/etcd/) | [توثيق etcd v3.7](https://etcd.io/docs/v3.7/) | v3.7، الالتزام `d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [`LICENSE` الأصلي](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 كل مجموعة **مُعدَّلة** لا منسوخة حرفيًا. أُعيدت صياغة العناوين والمراسي والوصلات
@@ -48,8 +48,7 @@ outputs: [HTML, markdown]
 
 ## pgBackRest {#pgbackrest}
 
-استُورد في 2026-08-15 من [موقع توثيق pgBackRest](https://pgbackrest.org/) وحُدِّث في
-2026-10-13 إلى **v2.59.3**.
+استُورد في 2026-08-15 من [موقع توثيق pgBackRest](https://pgbackrest.org/)، وحُدِّث في 2026-10-23 إلى **v2.60.0**، بالوسم `release/2.60.0` والالتزام [`2e1c4f2`](https://github.com/pgbackrest/pgbackrest/commit/2e1c4f2ba727c45a0a23d4b326905088dc15b1a1).
 
 حقوق نشر pgBackRest (c) 2015-2026 محفوظة لـ The PostgreSQL Global Development Group
 وDavid Steele، ويوزَّع بموجب [رخصة MIT](https://opensource.org/license/mit). يُحفظ النص
@@ -58,19 +57,17 @@ outputs: [HTML, markdown]
 ## PgBouncer {#pgbouncer}
 
 استُورد في 2026-08-15 من [موقع توثيق PgBouncer](https://www.pgbouncer.org/) للإصدار
-**v1.25.2** وحُدِّث في 2026-10-13 إلى
-[**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0).
+**v1.25.2** وحُدِّث في 2026-10-23 إلى
+[**v1.26.1**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_1).
 
 حقوق نشر PgBouncer (c) 2007-2009 محفوظة لـ Marko Kreen وSkype Technologies OÜ، ويوزَّع
 بموجب [رخصة ISC](https://opensource.org/license/isc-license-txt). يُحفظ النص الكامل
-للرخصة [في المشروع الأصلي](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT).
+للرخصة [في المشروع الأصلي](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/COPYRIGHT).
 
 ## pgBadger {#pgbadger}
 
-استُورد في 2026-08-15 من <https://pgbadger.darold.net/> ومن
-[`darold/pgbadger`](https://github.com/darold/pgbadger) عند الالتزام
-[`a1ad95a`](https://github.com/darold/pgbadger/commit/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae)،
-وكان آخر إصدار منشور حينها هو v13.2.
+استُورد في 2026-08-15 من <https://pgbadger.darold.net/> ومن [`darold/pgbadger`](https://github.com/darold/pgbadger)، وحُدِّث في 2026-10-23 إلى الالتزام [`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67).
+هذه لقطة من توثيق التطوير بعد أحدث إصدار منشور، v13.2، وليست إصدارًا مستقرًا جديدًا. وتحتفظ مقتطفات الموقع التاريخية ونماذج التقارير بمصادرها الخاصة.
 
 حقوق نشر pgBadger (c) 2012-2026 محفوظة لـ Gilles Darold، ويوزَّع بموجب
 [رخصة PostgreSQL](https://opensource.org/license/postgresql). يُحفظ النص الكامل للرخصة
@@ -88,13 +85,13 @@ outputs: [HTML, markdown]
 
 ## HAProxy {#haproxy}
 
-استُورد في 2026-08-16، وحُدِّث في 2026-08-30، وجُدِّد في 2026-10-13 بلقطة الصيانة
-الرسمية الإنجليزية لـ HAProxy 3.4 رقم `3.4.6-66`، الالتزام
-[`16acce1dac1d`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=16acce1dac1dcf1ad5d654204af3a5d45d0e3de8).
-أحدث إصدار مستقر هو `3.4.6` (الوسم `v3.4.6`)؛ وتشمل لقطة التوثيق تغييرات فرع الصيانة
+استُورد في 2026-08-16، وحُدِّث في 2026-08-30، وجُدِّد في 2026-10-23 بلقطة الصيانة
+الرسمية الإنجليزية لـ HAProxy 3.4 رقم `3.4.7-57`، الالتزام
+[`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3).
+أحدث إصدار مستقر هو `3.4.7` (الوسم `v3.4.7`)؛ وتشمل لقطة التوثيق تغييرات فرع الصيانة
 اللاحقة لذلك الإصدار.
 النثر الإنجليزي مشتق من أدلة `doc/intro.txt` و`doc/configuration.txt` و
-`doc/management.txt` الكاملة — 40,216 سطرًا إجمالًا — أُعيد تنظيمها في 34 صفحة قراءة.
+`doc/management.txt` الكاملة — 40,246 سطرًا إجمالًا — أُعيد تنظيمها في 34 صفحة قراءة.
 
 حقوق نشر HAProxy 2000-2026 محفوظة لـ Willy Tarreau، ويوزَّع بموجب
 [رخصة GNU العمومية الإصدار 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
