@@ -28,10 +28,10 @@ which licence, and where the complete upstream notice is retained.
 | Component | Upstream work | Pinned at | Licence | Retained notice |
 |---|---|---|---|---|
 | [Patroni](/patroni/) | [Patroni documentation](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/pgbackrest/) | [pgBackRest documentation](https://pgbackrest.org/) | v2.59.3 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
-| [PgBouncer](/pgbouncer/) | [PgBouncer documentation](https://www.pgbouncer.org/) | v1.26.0 | [ISC](https://opensource.org/license/isc-license-txt) | [Upstream `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT) |
-| [pgBadger](/pgbadger/) | [pgBadger documentation](https://pgbadger.darold.net/) | v13.2, commit `a1ad95a` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/haproxy/) | [HAProxy 3.4 manuals](https://docs.haproxy.org/3.4/) | 3.4.6-66; stable v3.4.6, commit `16acce1` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [pgBackRest](/pgbackrest/) | [pgBackRest documentation](https://pgbackrest.org/) | v2.60.0 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [PgBouncer](/pgbouncer/) | [PgBouncer documentation](https://www.pgbouncer.org/) | v1.26.1 | [ISC](https://opensource.org/license/isc-license-txt) | [Upstream `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/COPYRIGHT) |
+| [pgBadger](/pgbadger/) | [pgBadger documentation](https://pgbadger.darold.net/) | v13.2 development snapshot, commit `f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
+| [HAProxy](/haproxy/) | [HAProxy 3.4 manuals](https://docs.haproxy.org/3.4/) | 3.4.7-57; stable v3.4.7, commit `0faeaed` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/etcd/) | [etcd v3.7 documentation](https://etcd.io/docs/v3.7/) | v3.7, commit `d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Upstream `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 Every collection is **adapted**, not mirrored. Headings, anchors, cross-links, code signatures,
@@ -51,7 +51,8 @@ the [MIT License](https://opensource.org/license/mit). The complete licence text
 ## pgBackRest {#pgbackrest}
 
 Imported on 2026-08-15 from the [pgBackRest documentation site](https://pgbackrest.org/)
-and refreshed on 2026-10-13 to **v2.59.3**.
+and refreshed on 2026-10-23 to **v2.60.0**, tag `release/2.60.0`, commit
+[`2e1c4f2`](https://github.com/pgbackrest/pgbackrest/commit/2e1c4f2ba727c45a0a23d4b326905088dc15b1a1).
 
 pgBackRest is copyright (c) 2015-2026 The PostgreSQL Global Development Group and David Steele,
 and is distributed under the [MIT License](https://opensource.org/license/mit). The complete
@@ -60,19 +61,20 @@ licence text is retained [upstream](https://github.com/pgbackrest/pgbackrest/blo
 ## PgBouncer {#pgbouncer}
 
 Imported on 2026-08-15 from the [PgBouncer documentation site](https://www.pgbouncer.org/)
-for **v1.25.2** and refreshed on 2026-10-13 to
-[**v1.26.0**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_0).
+for **v1.25.2** and refreshed on 2026-10-23 to
+[**v1.26.1**](https://github.com/pgbouncer/pgbouncer/releases/tag/pgbouncer_1_26_1).
 
 PgBouncer is copyright (c) 2007-2009 Marko Kreen, Skype Technologies OÜ, and is distributed under
 the [ISC License](https://opensource.org/license/isc-license-txt). The complete licence text is
-retained [upstream](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/COPYRIGHT).
+retained [upstream](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/COPYRIGHT).
 
 ## pgBadger {#pgbadger}
 
 Imported on 2026-08-15 from <https://pgbadger.darold.net/> and from
-[`darold/pgbadger`](https://github.com/darold/pgbadger) at commit
-[`a1ad95a`](https://github.com/darold/pgbadger/commit/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae),
-whose latest published release at the time was v13.2.
+[`darold/pgbadger`](https://github.com/darold/pgbadger), and refreshed on 2026-10-23 at commit
+[`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67).
+This is a development documentation snapshot after the latest published release, v13.2; it is
+not a new stable release. Historical website excerpts and sample reports retain their own sources.
 
 pgBadger is copyright (c) 2012-2026 Gilles Darold and is distributed under the
 [PostgreSQL License](https://opensource.org/license/postgresql). The complete licence text is
@@ -91,12 +93,12 @@ retained beside the offline examples as
 ## HAProxy {#haproxy}
 
 Imported on 2026-08-16, refreshed on 2026-08-30, and updated on
-2026-10-13 with the official English HAProxy 3.4 maintenance snapshot `3.4.6-66`, commit
-[`16acce1dac1d`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=16acce1dac1dcf1ad5d654204af3a5d45d0e3de8).
-The latest stable release is `3.4.6` (tag `v3.4.6`); the documentation snapshot includes
+2026-10-23 with the official English HAProxy 3.4 maintenance snapshot `3.4.7-57`, commit
+[`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3).
+The latest stable release is `3.4.7` (tag `v3.4.7`); the documentation snapshot includes
 maintenance-branch changes made after that release.
 The English prose is derived from the complete `doc/intro.txt`, `doc/configuration.txt`, and
-`doc/management.txt` manuals — 40,216 lines in total — reorganized into 34 reading pages.
+`doc/management.txt` manuals — 40,246 lines in total — reorganized into 34 reading pages.
 
 HAProxy is copyright 2000-2026 Willy Tarreau and is distributed under the
 [GNU General Public License version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).

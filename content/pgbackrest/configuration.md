@@ -248,7 +248,7 @@ Validate data page checksums.
 
 Directs pgBackRest to validate all data page checksums while backing up a cluster. This option is automatically enabled when data page checksums are enabled on the cluster.
 
-Failures in checksum validation will not abort a backup. Rather, warnings will be emitted in the log (and to the console with default settings) and the list of invalid pages will be stored in the backup manifest.
+By default, failures in checksum validation will not abort a backup. Set `checksum-page-error=y` to terminate the backup instead. Rather, warnings will be emitted in the log (and to the console with default settings) and the list of invalid pages will be stored in the backup manifest.
 
 ```text
 example: checksum-page=n
@@ -865,7 +865,7 @@ example: repo1-azure-key=T+9+aov82qNhrcXSNGZCzm9mjd4d75/oxxOr6r1JVpgTLA==
 
 Azure repository key type.
 
-The following types are supported for authorization:
+The following authorization types are supported:
 
 - `shared` - Shared key
 - `sas` - Shared access signature
@@ -1005,7 +1005,7 @@ example: repo1-gcs-endpoint=localhost
 
 GCS repository key.
 
-A token or service key file depending on the `repo-gcs-key-type` option.
+A token, service key file, or external account credential file depending on the `repo-gcs-key-type` option.
 
 ```text
 example: repo1-gcs-key=/etc/pgbackrest/gcs-key.json
@@ -1015,13 +1015,18 @@ example: repo1-gcs-key=/etc/pgbackrest/gcs-key.json
 
 GCS repository key type.
 
-The following types are supported for authorization:
+The following authorization types are supported:
 
 - `auto` - Authorize using the instance service account.
 - `service` - Service account from locally stored key.
 - `token` - For local testing, e.g. `fakegcs`.
+- `web-id` - Authorize using Workload Identity Federation.
 
 When `repo-gcs-key-type=service` the credentials will be reloaded when the authentication token is renewed.
+
+When `repo-gcs-key-type=web-id` the `repo-gcs-key` option must contain an external account credential file and the web identity token will be reloaded when the authentication token is renewed.
+
+`service_account_impersonation_url` is not supported. Only `credential_source.file` is supported and when `credential_source.format` is specified the type must be `text`.
 
 ```text
 default: service
@@ -1234,7 +1239,13 @@ Deprecated Name: retention-archive
 
 Backup type for WAL retention.
 
-If set to `full` pgBackRest will keep archive logs for the number of full backups defined by `repo-retention-archive`. If set to `diff` (differential) pgBackRest will keep archive logs for the number of full and differential backups defined by `repo-retention-archive`, meaning if the last backup taken was a full backup, it will be counted as a differential for the purpose of repo-retention. If set to `incr` (incremental) pgBackRest will keep archive logs for the number of full, differential, and incremental backups defined by `repo-retention-archive`. It is recommended that this setting not be changed from the default which will only expire WAL in conjunction with expiring full backups.
+The following backup types are supported:
+
+- `full` - pgBackRest will keep archive logs for the number of full backups defined by `repo-retention-archive`.
+- `diff` - (differential) pgBackRest will keep archive logs for the number of full and differential backups defined by `repo-retention-archive`, meaning if the last backup taken was a full backup, it will be counted as a differential for the purpose of repo-retention.
+- `incr` - (incremental) pgBackRest will keep archive logs for the number of full, differential, and incremental backups defined by `repo-retention-archive`.
+
+It is recommended that this setting not be changed from the default which will only expire WAL in conjunction with expiring full backups.
 
 ```text
 default: full
@@ -1277,9 +1288,10 @@ Retention type for full backups.
 
 Determines whether the `repo-retention-full` setting represents a time period (days) or count of full backups to keep.
 
-If set to `time` then full backups older than `repo-retention-full` will be removed from the repository if there is at least one other backup that is equal to or greater than the `repo-retention-full` setting. For example, if `repo-retention-full` is 30 (days) and there are 2 full backups: one 25 days old and one 35 days old, no full backups will be expired because expiring the 35 day old backup would leave only the 25 day old backup, which would violate the 30 day retention policy of having at least one backup 30 days old before an older one can be expired. Archived WAL older than the oldest full backup remaining will be automatically expired unless `repo-retention-archive-type` and `repo-retention-archive` are explicitly set.
+The following retention types are supported:
 
-If set to `count` then full backups that exceed `repo-retention-full` will be expired. For example, if `repo-retention-full` is `4` and a fifth full backup is completed, then the oldest full backup will be expired to keep the count at 4.
+- `time` - full backups older than `repo-retention-full` will be removed from the repository if there is at least one other backup that is equal to or greater than the `repo-retention-full` setting. For example, if `repo-retention-full` is 30 (days) and there are 2 full backups: one 25 days old and one 35 days old, no full backups will be expired because expiring the 35 day old backup would leave only the 25 day old backup, which would violate the 30 day retention policy of having at least one backup 30 days old before an older one can be expired. Archived WAL older than the oldest full backup remaining will be automatically expired unless `repo-retention-archive-type` and `repo-retention-archive` are explicitly set.
+- `count` - full backups that exceed `repo-retention-full` will be expired. For example, if `repo-retention-full` is `4` and a fifth full backup is completed, then the oldest full backup will be expired to keep the count at 4.
 
 Note that a backup must be successfully completed before it will be considered for retention. For example, if `repo-retention-full-type` is `count` and `repo-retention-full` is `2`, then there must be 3 complete full backups before the oldest will be expired.
 
@@ -1351,7 +1363,7 @@ example: repo1-s3-key-secret=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 
 S3 repository key type.
 
-The following types are supported:
+The following authorization types are supported:
 
 - `shared` - Shared keys
 - `auto` - Automatically retrieve temporary credentials
@@ -1515,7 +1527,7 @@ example: repo1-sftp-host-key-check-type=accept-new
 
 SFTP repository host key hash type.
 
-SFTP repository host key hash type. Declares the hash type to be used to compute the digest of the remote system's host key on SSH startup. Newer versions of `libssh2` support `sha256` in addition to md5 and sha1.
+SFTP repository host key hash type. Declares the hash type to be used to compute the digest of the remote system's host key on SSH startup. Allowed values are `md5`, `sha1`, and `sha256`, though `sha256` is only supported by newer versions of `libssh2`.
 
 ```text
 example: repo1-sftp-host-key-hash-type=sha256
@@ -1632,6 +1644,32 @@ example: repo1-storage-port=9000
 ```
 
 Deprecated Names: repo-azure-port, repo-s3-port
+
+### Repository Storage Prefetch Option (`--repo-storage-prefetch`)
+
+Repository storage prefetch.
+
+Determines the number of requests to prefetch when reading from object stores, e.g. S3. This is not true concurrency but it reduces the latency involved in submitting requests.
+
+Note that the number of open requests per read will be one greater than prefetch, since the initial read cannot be prefetched.
+
+```text
+default: 3
+allowed: [0, 1024]
+example: repo1-storage-prefetch=7
+```
+
+### Repository Storage Read Over Option (`--repo-storage-read-over`)
+
+Repository storage read over.
+
+Bundles may contain data that is not needed during restore, for example files that already exist. This option skips over unneeded data without starting a new read request on object stores. This is generally faster since the latency on new read requests is higher than continuing a read already in progress. It is also less expensive for most storage classes.
+
+```text
+default: 64KiB
+allowed: [0B, 1MiB]
+example: repo1-storage-read-over=128KiB
+```
 
 ### Repository Storage Tag Option (`--repo-storage-tag`)
 

@@ -6,7 +6,7 @@ description: "PgBouncer compilation and installation instructions"
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBOUNCER]
 categories: [Tutorial]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/README.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/README.md"
 ---
 
 --------
@@ -126,7 +126,7 @@ using systemd 253 or later) as well as socket activation.  See
 The Autoconf build requires that you generate the header and configuration
 files before you can run `configure`:
 
-	$ git clone --branch pgbouncer_1_26_0 https://github.com/pgbouncer/pgbouncer.git
+	$ git clone --branch pgbouncer_1_26_1 https://github.com/pgbouncer/pgbouncer.git
 	$ cd pgbouncer
 	$ ./autogen.sh
 	$ ./configure
@@ -156,7 +156,7 @@ Run `meson configure build` to list the available `-D` options.
 
 See the [`README.md` file in the test directory][1] on how to run the tests.
 
-[1]: https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/test/README.md
+[1]: https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/test/README.md
 
 --------
 

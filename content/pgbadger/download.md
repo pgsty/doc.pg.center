@@ -7,9 +7,8 @@ search_keywords: [--content-size, --help, --robot, --version, --zcat, JSON::XS, 
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [Tutorial]
-upstream_link: "https://pgbadger.darold.net/#download"
-upstream_name: "pgBadger website"
-upstream_ref: "site snapshot of 2026-08-15"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_name: "pgBadger README.md"
 ---
 
 ## Choose a distribution channel {#distribution-channels}
@@ -21,7 +20,7 @@ upstream_ref: "site snapshot of 2026-08-15"
 | Debian/Ubuntu package | APT-based Linux distributions | [PostgreSQL Apt Repository](https://wiki.postgresql.org/wiki/Apt) |
 | Development source | Current unreleased code | [darold/pgbadger](https://github.com/darold/pgbadger) |
 
-The installation examples use pgBadger 13.2. Check the release page before choosing a version.
+The latest stable release checked on 2026-10-23 is [pgBadger 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2), released on 2025-12-29. The release-tarball example below installs that version. This manual also covers an unreleased development snapshot; use the pinned checkout below to reproduce its newer behavior.
 
 ## Requirements {#requirements}
 
@@ -83,13 +82,14 @@ $ sudo make install
 ```console
 $ git clone https://github.com/darold/pgbadger.git
 $ cd pgbadger
+$ git checkout --detach f373ac678c756f66a785c5ab4773d1f05f468d67
 $ perl Makefile.PL
 $ make
 $ make test
 $ sudo make install
 ```
 
-Development code may contain changes not yet covered by a release note. Prefer a tagged archive for reproducible production packaging.
+This checkout matches the unreleased development snapshot documented here: [`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67), committed on 2026-10-21 (UTC). It is newer than stable 13.2 and is not a new stable release. Development code may contain changes not yet covered by a release note; prefer a tagged archive for production packaging.
 
 ## Verify the installation {#verify-installation}
 

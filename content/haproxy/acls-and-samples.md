@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/acls-and-samples/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 7"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 7"
 ---
 
 HAProxy is capable of extracting data from request or response streams, from client or server
@@ -27,7 +27,12 @@ in most programming languages, in that their declaration makes them available to
 when needed. Their evaluation only returns a match or a mismatch, which is comparable to booleans in
 many programming languages. Contrary to functions in programming languages, ACLs may be overloaded
 as many times as needed in order to define additional matching methods for the same name. In this
-case they will all be evaluated in their declaration order until one matches.
+case they will all be evaluated in their declaration order until one matches. In other words,
+multiple declarations of the same ACL name are logically combined by OR.
+
+Each ACL declaration line must only contain a single ACL matching keyword, followed by one or
+multiple pattern values. It's not allowed to use multiple matching keywords and combine them by
+logical or/and operators in an ACL declaration line.
 
 The use of ACLs provides a flexible solution to perform content switching and generally to take
 decisions based on content extracted from the request, the response or any environmental status. The
@@ -7359,6 +7364,8 @@ haproxy -vv). Note that the TLS NPN extension is not advertised unless the "npn"
 this list, any other one may be used. Please note that the TLS NPN extension was replaced with ALPN.
 It can be used in a tcp-check or an http-check ruleset.
 
+Compatibility: OpenSSL >= 1.0.1. Not supported with AWS-LC.
+
 ssl_bc_protocol: string Returns the name of the used protocol when the outgoing connection was made
 over an SSL/TLS transport layer. It can be used in a tcp-check or an http-check ruleset.
 
@@ -7894,6 +7901,8 @@ TLS extensions enabled (check haproxy -vv). Note that the TLS NPN extension is n
 the "npn" keyword on the "bind" line specifies a protocol list. Also, nothing forces the client to
 pick a protocol from this list, any other one may be requested. Please note that the TLS NPN
 extension was replaced with ALPN.
+
+Compatibility: OpenSSL >= 1.0.1. Not supported with AWS-LC.
 
 ssl_fc_protocol: string Returns the name of the used protocol when the incoming connection was made
 over an SSL/TLS transport layer.

@@ -10,7 +10,7 @@ aliases:
   - /haproxy/intro/resources/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapters 1 and 5"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapters 1 and 5"
 ---
 
 ## 1. Available documentation {#section-1}
@@ -75,8 +75,8 @@ described above.
 
 ## Edition provenance {#edition-provenance}
 
-- **Edition:** HAProxy 3.4.6-66, maintenance-branch documentation snapshot
-- **Latest stable release:** HAProxy 3.4.6, tag `v3.4.6`
-- **Source commit:** [`16acce1dac1d`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=16acce1dac1dcf1ad5d654204af3a5d45d0e3de8)
+- **Edition:** HAProxy 3.4.7-57, maintenance-branch documentation snapshot
+- **Latest stable release:** HAProxy 3.4.7, tag `v3.4.7`
+- **Source commit:** [`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3)
 - **Rendered upstream set:** [docs.haproxy.org/3.4/](https://docs.haproxy.org/3.4/)
 - **Local license copies:** [HAProxy license notice](/third_party/haproxy/LICENSE) and [GPLv2](/third_party/haproxy/GPL-2.0)

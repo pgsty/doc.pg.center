@@ -495,7 +495,7 @@ example: --repo1-azure-container=pg-backup
 
 Azure repository key type.
 
-The following types are supported for authorization:
+The following authorization types are supported:
 
 - `shared` - Shared key
 - `sas` - Shared access signature
@@ -563,13 +563,18 @@ example: --repo1-gcs-endpoint=localhost
 
 GCS repository key type.
 
-The following types are supported for authorization:
+The following authorization types are supported:
 
 - `auto` - Authorize using the instance service account.
 - `service` - Service account from locally stored key.
 - `token` - For local testing, e.g. `fakegcs`.
+- `web-id` - Authorize using Workload Identity Federation.
 
 When `repo-gcs-key-type=service` the credentials will be reloaded when the authentication token is renewed.
+
+When `repo-gcs-key-type=web-id` the `repo-gcs-key` option must contain an external account credential file and the web identity token will be reloaded when the authentication token is renewed.
+
+`service_account_impersonation_url` is not supported. Only `credential_source.file` is supported and when `credential_source.format` is specified the type must be `text`.
 
 ```yaml
 default: service
@@ -772,7 +777,7 @@ example: --repo1-s3-endpoint=s3.amazonaws.com
 
 S3 repository key type.
 
-The following types are supported:
+The following authorization types are supported:
 
 - `shared` - Shared keys
 - `auto` - Automatically retrieve temporary credentials
@@ -914,7 +919,7 @@ example: --repo1-sftp-host-key-check-type=accept-new
 
 SFTP repository host key hash type.
 
-SFTP repository host key hash type. Declares the hash type to be used to compute the digest of the remote system's host key on SSH startup. Newer versions of `libssh2` support `sha256` in addition to md5 and sha1.
+SFTP repository host key hash type. Declares the hash type to be used to compute the digest of the remote system's host key on SSH startup. Allowed values are `md5`, `sha1`, and `sha256`, though `sha256` is only supported by newer versions of `libssh2`.
 
 ```yaml
 example: --repo1-sftp-host-key-hash-type=sha256
@@ -1021,6 +1026,32 @@ example: --repo1-storage-port=9000
 ```
 
 Deprecated Names: repo-azure-port, repo-s3-port
+
+### Repository Storage Prefetch Option (`--repo-storage-prefetch`)
+
+Repository storage prefetch.
+
+Determines the number of requests to prefetch when reading from object stores, e.g. S3. This is not true concurrency but it reduces the latency involved in submitting requests.
+
+Note that the number of open requests per read will be one greater than prefetch, since the initial read cannot be prefetched.
+
+```yaml
+default: 3
+allowed: [0, 1024]
+example: --repo1-storage-prefetch=7
+```
+
+### Repository Storage Read Over Option (`--repo-storage-read-over`)
+
+Repository storage read over.
+
+Bundles may contain data that is not needed during restore, for example files that already exist. This option skips over unneeded data without starting a new read request on object stores. This is generally faster since the latency on new read requests is higher than continuing a read already in progress. It is also less expensive for most storage classes.
+
+```yaml
+default: 64KiB
+allowed: [0B, 1MiB]
+example: --repo1-storage-read-over=128KiB
+```
 
 ### Repository Storage Tag Option (`--repo-storage-tag`)
 

@@ -6,7 +6,7 @@ description: "PgBouncer configuration file (pgbouncer.ini) reference"
 icon: fa-solid fa-code
 module: [PGBOUNCER]
 categories: [Reference]
-upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/doc/config.md"
+upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/doc/config.md"
 ---
 
 --------
@@ -210,6 +210,8 @@ By default, PgBouncer allows only parameters it can keep track of in startup pac
 If you need to specify multiple values, use a comma-separated list (e.g. `options,extra_float_digits`)
 
 The Postgres protocol allows specifying parameter settings, both directly as a parameter in the startup packet, or inside the [`options` startup packet][options-startup]. Parameters specified using both of these methods are supported by `ignore_startup_parameters`. It's even possible to include `options` itself in `ignore_startup_parameters`, which results in any unknown parameters contained inside `options` to be ignored.
+
+Parameters that are explicitly listed here are ignored even if PgBouncer would otherwise track them. This can be used to opt out of tracking parameters that are tracked by default, e.g. `search_path` on PostgreSQL versions before 18, where PostgreSQL does not report changes to it. Including `options` does not cause tracked parameters inside `options` to be ignored.
 
 [options-startup]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-OPTIONS
 
@@ -431,7 +433,7 @@ Default: 0
 
 ### admin_users
 
-Comma-separated list of database users that are allowed to connect and run all commands on the console. With `auth_type=any`, this list still determines who receives administrator privileges; other users can log in as statistics users. See the [1.26.0 console access checks](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/src/admin.c#L1572-L1609).
+Comma-separated list of database users that are allowed to connect and run all commands on the console. With `auth_type=any`, this list still determines who receives administrator privileges; other users can log in as statistics users. See the [1.26.1 console access checks](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/src/admin.c#L1572-L1609).
 
 Default: empty
 
@@ -745,7 +747,7 @@ Maximum time queries are allowed to spend waiting for execution. If the query is
 
 This setting is used to prevent unresponsive servers from grabbing up connections. It also helps when the server is down or rejects connections for any reason.
 
-This setting can also be configured per database and per user. The precedence is user, then database, then global. An explicit 0 at the selected level disables this timeout. See the [1.26.0 timeout selection code](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_0/src/janitor.c#L328-L336).
+This setting can also be configured per database and per user. The precedence is user, then database, then global. An explicit 0 at the selected level disables this timeout. See the [1.26.1 timeout selection code](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/src/janitor.c#L328-L336).
 
 Default: 120.0
 

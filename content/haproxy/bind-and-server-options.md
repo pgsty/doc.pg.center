@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/bind-and-server-options/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.6-66-g16acce1dac1d, chapter 5"
+upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
 ---
 
 The "bind", "server" and "default-server" keywords support a number of settings depending on some
@@ -1104,6 +1104,8 @@ the ALPN extension (see the "alpn" keyword), though this one is only available s
 1.0.2. If HTTP/2 is desired on an older version of OpenSSL, NPN might still be used as most clients
 still support it at the time of writing this. It is possible to enable both NPN and ALPN though it
 probably doesn't make any sense out of testing.
+
+Compatibility: OpenSSL >= 1.0.1. Not supported with AWS-LC.
 
 <a id="entry-5-1-prefer-client-ciphers"></a>
 
@@ -3144,6 +3146,8 @@ NPN. The protocol list consists in a comma-delimited list of protocol names, for
 TLS extensions enabled (check with haproxy -vv). Note that the NPN extension has been replaced with
 the ALPN extension (see the "alpn" keyword), though this one is only available starting with OpenSSL
 1.0.2.
+
+Compatibility: OpenSSL >= 1.0.1. Not supported with AWS-LC.
 
 <a id="entry-5-2-observe"></a>
 

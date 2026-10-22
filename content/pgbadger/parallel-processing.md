@@ -7,7 +7,7 @@ search_keywords: [--Jobs, --jobs, --tempdir, Jobs, jobs, tempdir]
 icon: fa-solid fa-gauge-high
 module: [PGBADGER]
 categories: [Task]
-upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -69,7 +69,7 @@ The practical default is `-j` for a few large files and `-J` for many small file
 ## Limits and temporary files {#limits-and-temporary-files}
 
 - `-j` is not available for compressed or CSV input and relies on process forking, so it is not a Windows mode.
-- Remote CSV parsing is not supported by the upstream remote-input path.
+- For non-CSV remote logs, use whole-file processing with `-J`; single-file chunking with `-j` requires local, seekable input. CSV logs can be read over SSH; in the documented development snapshot after 13.2, watch mode (`-w`) filters CSV records on the remote host with `awk` while preserving multiline fields. See the [remote-input options](/pgbadger/command-line/).
 - Parallel analysis creates temporary files named like `tmp_pgbadgerXXXX.bin` under the selected temporary directory (by default the system temporary directory).
 - Do not clean those files while pgBadger is running. Use `--tempdir` to place them on storage with sufficient capacity.
 - Start with a modest worker count and watch CPU, read throughput, temporary-space consumption, and elapsed time.

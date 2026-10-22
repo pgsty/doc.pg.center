@@ -7,11 +7,13 @@ search_keywords: []
 icon: fa-solid fa-clock-rotate-left
 module: [PGBADGER]
 categories: [Reference]
-upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/ChangeLog"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/ChangeLog"
 upstream_name: "pgBadger ChangeLog"
 ---
 
 pgBadger 9.x–13.x release history, grouped by major series and ordered newest first.
+
+The latest stable release listed here is 13.2, released on 2025-12-29. The rest of this manual also covers the unreleased development snapshot `f373ac6`. The historical release notes below end at stable 13.2.
 
 These entries describe behavior at the time of each release. Historical defaults, configuration names, and upgrade instructions may differ from 13.2; use the current command-line reference and PostgreSQL logging guide for operational settings.
 

@@ -25,55 +25,58 @@ pgbackrest:
   name: pgBackRest documentation
   repository: https://github.com/pgbackrest/pgbackrest
   documentation: https://pgbackrest.org/
-  source_ref: release/2.59.3
-  source_commit: 46cdca625a73403cad4774d97354a1fac1e91e51
-  archive_url: https://github.com/pgbackrest/pgbackrest/releases/download/release/2.59.3/pgbackrest-2.59.3.tar.gz
-  archive_sha256: 14037901db002e5536a948bf9f0fc0ff6cde31f4e675d3e9b46f129071bf2e5f
+  source_ref: release/2.60.0
+  source_commit: 2e1c4f2ba727c45a0a23d4b326905088dc15b1a1
+  archive_url: https://github.com/pgbackrest/pgbackrest/releases/download/release/2.60.0/pgbackrest-2.60.0.tar.gz
+  archive_sha256: 6d3ee1b5defdadc85228969b4be804096f5e65e54707bb95c7c4c4ce41f5d007
   copyright: Copyright (c) 2015-2026 The PostgreSQL Global Development Group and David Steele
   license: MIT
   notice: /attribution/#pgbackrest
-  ref: v2.59.3
+  ref: v2.60.0
   modified: true
 
 pgbouncer:
   name: PgBouncer documentation
   repository: https://github.com/pgbouncer/pgbouncer
   documentation: https://www.pgbouncer.org/
-  source_ref: pgbouncer_1_26_0
+  source_ref: pgbouncer_1_26_1
+  source_commit: f03e9bf263d7ccd5d1d152a61811bf3258dd6b87
+  archive_url: https://www.pgbouncer.org/downloads/files/1.26.1/pgbouncer-1.26.1.tar.gz
+  archive_sha256: 00886a2994b4844cd37110970df777772cfc42a74c400522c82fba509a3f42d9
   copyright: Copyright (c) 2007-2009 Marko Kreen, Skype Technologies OÜ
   license: ISC
   notice: /attribution/#pgbouncer
-  ref: v1.26.0
+  ref: v1.26.1
   modified: true
 
 pgbadger:
   name: pgBadger documentation
   repository: https://github.com/darold/pgbadger
   documentation: https://pgbadger.darold.net/
-  source_commit: a1ad95a035a0c2d246fe632eb1c361d4bde0ddae
-  archive_url: https://codeload.github.com/darold/pgbadger/tar.gz/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae
-  archive_sha256: 4c708efdcea2c5953c35d064be7a29fe4da23467c9accfef7f7a82da5fc6dc4c
+  source_commit: f373ac678c756f66a785c5ab4773d1f05f468d67
+  archive_url: https://codeload.github.com/darold/pgbadger/tar.gz/f373ac678c756f66a785c5ab4773d1f05f468d67
+  archive_sha256: 5901704e9eec2add3523cf479492b7d1d3ef9237aac4a5a7d6ec1447ed6fa86e
   copyright: Copyright (c) 2012-2026 Gilles Darold
   license: PostgreSQL
   notice: /attribution/#pgbadger
-  ref: v13.2, commit a1ad95a
+  ref: v13.2 development snapshot, commit f373ac6
   modified: true
 
 haproxy:
   name: HAProxy 3.4 documentation
   repository: https://git.haproxy.org/?p=haproxy-3.4.git
   documentation: https://docs.haproxy.org/3.4/
-  source_ref: v3.4.6-66-g16acce1dac1d
-  source_commit: 16acce1dac1dcf1ad5d654204af3a5d45d0e3de8
-  stable_release: 3.4.6
+  source_ref: v3.4.7-57-g0faeaeda6cdb
+  source_commit: 0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3
+  stable_release: 3.4.7
   source_sha256:
     doc/intro.txt: 48c138f6c57e0328abe1cf0595453cb83e1542940ad5a7c8dd4ae4e03f8585d0
-    doc/configuration.txt: e7b6c9c919d2a2710409e2538a469b56a2c383db3738bb27d626a813314a209e
+    doc/configuration.txt: 2adc7ef76dde6b65568a04a18f35ed8608b73e5e2621d4efe48a72a1cd301d80
     doc/management.txt: ad377db9c62e740c76acbf4ae506dc12795b16378519d15db1347242ba95a85b
   copyright: Copyright 2000-2026 Willy Tarreau
   license: GPL-2.0-only
   notice: /attribution/#haproxy
-  ref: 3.4.6-66, commit 16acce1
+  ref: 3.4.7-57, commit 0faeaed
   modified: true
 
 etcd:

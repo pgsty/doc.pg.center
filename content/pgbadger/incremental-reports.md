@@ -7,7 +7,7 @@ search_keywords: [--day-report, --explode, --extra-files, --incremental, --iso-w
 icon: fa-solid fa-calendar-days
 module: [PGBADGER]
 categories: [Task]
-upstream_link: "https://github.com/darold/pgbadger/blob/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -52,6 +52,18 @@ $ pgbadger -X -I -O /var/www/pg_reports postgresql.log.1
 ```
 
 All reports and their versioned resource directory must be moved together.
+
+## Per-database reports {#per-database-reports}
+
+With `-E` / `--explode`, each database's reports are stored in a subdirectory of the output directory named after the database. In the documented development snapshot after 13.2, database names that are unsafe as paths are percent-encoded: `/`, `\`, `%`, and control characters; a leading dot; purely numeric names; and names of files that pgBadger writes in the output directory, such as `LAST_PARSED`. Ordinary database names are unchanged.
+
+For example, database `2025` uses directory `%32025`, and database `../foo` uses `%2E.%2Ffoo`. Because these directory names contain percent signs, each `%` must be written as `%25` in the report URL:
+
+```text
+https://myserver/pg_reports/%2532025/index.html
+```
+
+pgBadger prints a warning containing the directory and URL path when it first creates such a directory. On subsequent runs, the message appears only in debug mode, keeping scheduled incremental jobs quiet.
 
 ## Rebuild existing reports {#rebuild}
 

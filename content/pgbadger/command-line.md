@@ -8,7 +8,7 @@ search_boost: 8
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [Reference]
-upstream_link: "https://github.com/darold/pgbadger/tree/a1ad95a035a0c2d246fe632eb1c361d4bde0ddae/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -110,6 +110,7 @@ Options:
 -v | --verbose         : enable verbose or debug mode. Disabled by default.
 -V | --version         : show pgBadger version and exit.
 -w | --watch-mode      : only report errors just like logwatch could do.
+                         SSH inputs are filtered on the remote host.
 -W | --wide-char       : encode html output of queries into UTF8 to avoid
                          Perl message "Wide character in print".
 -x | --extension       : output format. Values: text, html, bin or json.
@@ -239,6 +240,8 @@ Options:
 pgBadger is able to parse a remote log file using a passwordless ssh connection.
 Use -r or --remote-host to set the host IP address or hostname. There are also
 some additional options to fully control the ssh connection.
+
+In watch mode (`-w`), SSH log files are filtered on the remote host before being transferred. CSV records are filtered with `awk`, and multiline fields are preserved. This behavior is part of the documented development snapshot after 13.2.
 
 ```text
 --ssh-identity file      path to the identity file to use.
