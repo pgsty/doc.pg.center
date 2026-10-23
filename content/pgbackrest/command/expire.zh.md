@@ -29,7 +29,7 @@ pgBackRest 基于保留策略对全量备份进行轮换，策略可按数量或
 example: --archive-expire-before=000000010000000000000010
 ```
 
-### 页面校验和无效时报错选项 (`--checksum-page-error`) {#error-on-invalid-page-checksums-option---checksum-page-error}
+### 页面校验和无效时报错选项（`--checksum-page-error`） {#error-on-invalid-page-checksums-option---checksum-page-error}
 
 页面校验和无效时报错。
 
@@ -1079,7 +1079,7 @@ example: --repo1-storage-port=9000
 
 已弃用名称：repo-azure-port、repo-s3-port
 
-### 仓库存储预取选项 (`--repo-storage-prefetch`) {#repository-storage-prefetch-option---repo-storage-prefetch}
+### 仓库存储预取选项（`--repo-storage-prefetch`） {#repository-storage-prefetch-option---repo-storage-prefetch}
 
 仓库存储预取。
 
@@ -1093,7 +1093,7 @@ allowed: [0, 1024]
 example: --repo1-storage-prefetch=7
 ```
 
-### 仓库存储连续读取跳过选项 (`--repo-storage-read-over`) {#repository-storage-read-over-option---repo-storage-read-over}
+### 仓库存储连续读取跳过选项（`--repo-storage-read-over`） {#repository-storage-read-over-option---repo-storage-read-over}
 
 仓库存储连续读取跳过。
 

@@ -37,17 +37,17 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **新功能：**
 
-- 新增 `checksum-page-error` 选项，在页面校验和无效时报错。 (*贡献：Andrew Pogrebnoi. 审核：Douglas J Hunley, David Steele, Greg Sabino Mullane, Stefan Fercot. 建议：Greg Sabino Mullane.*)
+- 新增 `checksum-page-error` 选项，在页面校验和无效时报错。（*贡献：Andrew Pogrebnoi. 审核：Douglas J Hunley, David Steele, Greg Sabino Mullane, Stefan Fercot. 建议：Greg Sabino Mullane.*）
 
   此选项适用于 `backup`、`restore` 和 `expire` 命令。`backup` 命令默认仍对每个出错文件发出警告，并新增了备份结束时的校验和警告总数统计。`restore` 和 `expire` 命令默认报错。此前，`restore` 命令完全不会报告无效页面校验和。
 
   议题 [#2687](https://github.com/pgbackrest/pgbackrest/issues/2687); 拉取请求 [#2833](https://github.com/pgbackrest/pgbackrest/pull/2833); 提交 [`d7f54b2`](https://github.com/pgbackrest/pgbackrest/commit/d7f54b2245c8a9467e9a811c65626fe77739376b)
-- 支持 GCS 工作负载身份联合（Workload Identity Federation）。 (*贡献：Adol Rodriguez. 审核：Douglas J Hunley, David Steele.*)
+- 支持 GCS 工作负载身份联合（Workload Identity Federation）。（*贡献：Adol Rodriguez. 审核：Douglas J Hunley, David Steele.*）
 
   设置 `repo-gcs-key-type=web-id`，并将 `repo-gcs-key` 设为外部账户凭据文件，例如通过 `gcloud iam workload-identity-pools create-cred-config` 生成的文件。Web 身份令牌可直接换取访问令牌，无需服务账户密钥。每次交换都会重新加载令牌文件，以获取轮换后的令牌，例如 Kubernetes 投射的服务账户令牌。不支持服务账户模拟。
 
   议题 [#2838](https://github.com/pgbackrest/pgbackrest/issues/2838); 拉取请求 [#2839](https://github.com/pgbackrest/pgbackrest/pull/2839); 提交 [`1d217e6`](https://github.com/pgbackrest/pgbackrest/commit/1d217e626301118ae2c1e7be39a6a4affa86e501)
-- 从对象存储预取多个文件或范围的读取请求。 (*审核：Andrew Pogrebnoi, Douglas J Hunley.*)
+- 从对象存储预取多个文件或范围的读取请求。（*审核：Andrew Pogrebnoi, Douglas J Hunley.*）
 
   请求会在当前读取之前排入队列，使后续请求在读取过程中推进；文件间较小的间隙则通过连续读取跳过，无需另发请求。`Restore` 用它读取文件包和块级增量映射，`backup` 用它读取前一次备份的块级增量映射。`repo-storage-prefetch`（默认 3）设置预先排队的请求数量，`repo-storage-read-over`（默认 64KiB）设置可连续读取跳过的最大间隙。
 
@@ -57,49 +57,49 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **改进：**
 
-- 减少发送给远程进程的保活请求。 (*审核：Douglas J Hunley.*)
+- 减少发送给远程进程的保活请求。（*审核：Douglas J Hunley.*）
 
-  此前，`archive-push` 和 `backup` 每完成一个任务，都会向所有远端发送保活请求，即使刚刚才向其发送过请求。现在，仅在 30 秒内未向某个远端发送过请求时，才会发送保活请求。
+  此前，`archive-push` 和 `backup` 每完成一个任务，都会向所有远程进程发送保活请求，即使刚刚才向其发送过请求。现在，仅在 30 秒内未向某个远程进程发送过请求时，才会发送保活请求。
 
   提交 [`f652261`](https://github.com/pgbackrest/pgbackrest/commit/f652261d32a4ffba98e7da26a41ef4ef1cd08da3)
-- 重试 Azure 响应中缺失的批处理子请求。 (*审核：Douglas J Hunley.*)
+- 重试 Azure 响应中缺失的批处理子请求。（*审核：Douglas J Hunley.*）
 
   Azure 批量删除失败时，可能仅为整个批次返回一个响应。没有响应的子请求此前会被视为已完成，导致每批只删除一个文件，命令却报告成功。现在会重试没有响应的子请求。
 
   议题 [#2840](https://github.com/pgbackrest/pgbackrest/issues/2840); 拉取请求 [#2849](https://github.com/pgbackrest/pgbackrest/pull/2849); 提交 [`567a245`](https://github.com/pgbackrest/pgbackrest/commit/567a2451244e0e7a4c54e41880fac1a007b49930)
-- 减少重建 `backup.info` 时的清单检查。 (*审核：Douglas J Hunley. 建议：todeb.*)
+- 减少重建 `backup.info` 时的清单检查。（*审核：Douglas J Hunley. 建议：todeb.*）
 
   当仓库列表表明备份路径不存在，或某个差异/增量备份所属的全量备份集不在 `backup.info` 中时，`backup`、`expire` 和 `annotate` 命令不再检查是否存在 `backup.manifest`。每次检查都要发出请求，因此在对象存储上检查不存在的清单会产生 404 日志。
 
   议题 [#2769](https://github.com/pgbackrest/pgbackrest/issues/2769); 拉取请求 [#2825](https://github.com/pgbackrest/pgbackrest/pull/2825); 提交 [`0d3c340`](https://github.com/pgbackrest/pgbackrest/commit/0d3c340087bfb97263c29a8fd681cf079071236b)
-- 使用原始大小判断文件是否应打包。 (*审核：Douglas J Hunley.*)
+- 使用原始大小判断文件是否应打包。（*审核：Douglas J Hunley.*）
 
   此前依据前一次备份中块级增量文件的大小决定是否打包，因此已经增长到超过 `repo-bundle-limit` 的文件仍可能存入文件包。现在改用文件的当前大小。
 
   拉取请求 [#2843](https://github.com/pgbackrest/pgbackrest/pull/2843); 提交 [`340d58b`](https://github.com/pgbackrest/pgbackrest/commit/340d58bb49d6c88a002a0d23830fd37be155cc21)
-- 为备份期间的块映射读取错误添加上下文。 (*审核：Stefan Fercot, Douglas J Hunley.*)
+- 为备份期间的块映射读取错误添加上下文。（*审核：Stefan Fercot, Douglas J Hunley.*）
 
   读取前一次备份的块映射出错时，现在会报告文件、仓库路径、偏移量和映射大小。如果读取的字节数少于预期，会明确报告这一情况，不再将其报告为解析错误。
 
   [`bc91688`](https://github.com/pgbackrest/pgbackrest/commit/bc91688c4cf18fa6a36ec65441784533d5e6bdd5) 为备份期间的块映射读取错误添加上下文。; 议题 [#2489](https://github.com/pgbackrest/pgbackrest/issues/2489); 议题 [#2829](https://github.com/pgbackrest/pgbackrest/issues/2829); 拉取请求 [#2830](https://github.com/pgbackrest/pgbackrest/pull/2830)
 
   [`f46bfaf`](https://github.com/pgbackrest/pgbackrest/commit/f46bfafdd53dd0031a320fa95b08568263901ff3) 修正块级增量映射错误信息中的选项名。
-- 在备份开始标签中将 `current_timestamp` 显式转换为 `text`。 (*贡献：Tiago Corcelli de Oliveira. 审核：David Steele.*)
+- 在备份开始标签中将 `current_timestamp` 显式转换为 `text`。（*贡献：Tiago Corcelli de Oliveira. 审核：David Steele.*）
 
   用户定义的 `timestamptz` 到 `text` 隐式转换曾导致备份失败，并报错 "operator is not unique: unknown || timestamp with time zone"。标签文本保持不变。
 
   议题 [#2873](https://github.com/pgbackrest/pgbackrest/issues/2873); 提交 [`86936e1`](https://github.com/pgbackrest/pgbackrest/commit/86936e1fa60b10b7592eaac09283c4bb5991265d)
-- 支持在 illumos 上构建。 (*贡献：Kalevi Kolttonen. 审核：Douglas J Hunley, David Steele.*)
+- 支持在 illumos 上构建。（*贡献：Kalevi Kolttonen. 审核：Douglas J Hunley, David Steele.*）
 
   CI 新增了 OmniOS 任务。Solaris 也可能可用，但尚未测试。
 
   拉取请求 [#2870](https://github.com/pgbackrest/pgbackrest/pull/2870); 提交 [`ad72e58`](https://github.com/pgbackrest/pgbackrest/commit/ad72e5815f3cf9c0c6170dcbe04ef9c41762d3d9)
-- 支持 OpenSSL 4。 (*审核：Douglas J Hunley.*)
+- 支持 OpenSSL 4。（*审核：Douglas J Hunley.*）
 
   由于 `X509_get_subject_name()` 现在返回 `const` 名称对象，使用 OpenSSL 4 构建曾会失败。
 
   提交 [`a729ac8`](https://github.com/pgbackrest/pgbackrest/commit/a729ac881f48225622151841e80146f7a3a4bce6)
-- 修复 clang 构建。 (*审核：Douglas J Hunley.*)
+- 修复 clang 构建。（*审核：Douglas J Hunley.*）
 
   在 Linux 上，gcc 将 `libbacktrace.a` 安装到 clang 也会搜索的位置，却将 `backtrace.h` 安装到仅 gcc 能找到的位置。clang 构建因此会找到库，却编译失败。现在只有找到头文件时才使用该库。同时修复了调试构建中被 clang 报告为窄化转换的返回类型。
 
@@ -116,7 +116,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **文档改进：**
 
-- 更新网站设计。特别感谢 Jan 设计了构思巧妙又诙谐的标志。 (*贡献：David Steele, Jan Wieremjewicz. 审核：Steve Atkins, Kai Wagner, Douglas J Hunley, Nikolaos Stamatopoulos, Matt Hudson, Stefan Fercot.*)
+- 更新网站设计。特别感谢 Jan 设计了构思巧妙又诙谐的标志。（*贡献：David Steele, Jan Wieremjewicz. 审核：Steve Atkins, Kai Wagner, Douglas J Hunley, Nikolaos Stamatopoulos, Matt Hudson, Stefan Fercot.*）
 
   网站采用了新的设计，提供浅色、深色主题，并适配手机布局。有目录的页面会在正文旁显示目录，标出当前阅读的章节。命令和配置文件可以通过按钮复制，配置文件会标记各节修改的行，发行说明还可展开查看详细信息。
 
@@ -209,7 +209,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
   CI 使用 libFuzzer、AddressSanitizer 和 UndefinedBehaviorSanitizer 对这些读取器进行模糊测试。测试发现了处理无效输入时的多处缺陷，例如信息文件或对象存储响应中嵌套过深的 JSON 数组可能导致内存上下文栈溢出。
 
   提交 [`4c65010`](https://github.com/pgbackrest/pgbackrest/commit/4c65010e7d28ea68571732fb275d91266a97ad80)
-- 允许使用 Debian 上 adduser 会拒绝的测试用户名。 (*贡献：Stefan Fercot. 审核：David Steele.*)
+- 允许使用 Debian 上 adduser 会拒绝的测试用户名。（*贡献：Stefan Fercot. 审核：David Steele.*）
 
   测试容器使用与宿主机用户相同的用户名构建。Debian 的 `adduser` 会拒绝包含句点的名称，例如 `first.last`，因此这些用户在基于 Debian 的镜像上构建容器时会失败。
 
@@ -226,16 +226,16 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 *发布于 2026 年 10 月 4 日*
 
-**重要说明**: 旧版本在访问系统随机数据出错时，可能生成弱加密子密钥和盐值。详情请参阅[弱加密子密钥和盐值](/zh/pgbackrest/news/#weak-encryption)。
+**重要说明**：旧版本在访问系统随机数据出错时，可能生成弱加密子密钥和盐值。详情请参阅[弱加密子密钥和盐值](/zh/pgbackrest/news/#weak-encryption)。
 
 **缺陷修复:**
 
-- 修复加载加密的信息文件和清单文件时可能出现校验和错误的问题。 (*由 j0uinim 修复，David Steele 审核。*)
+- 修复加载加密的信息文件和清单文件时可能出现校验和错误的问题。（*由 j0uinim 修复，David Steele 审核。*）
+
   较大的加密信息文件或清单文件在加载时可能丢失最后几行，导致校验和验证失败。只有这些行能够容纳在最后一个加密块中才会发生，因此实际出现的可能性较低。
 
   议题 [#2866](https://github.com/pgbackrest/pgbackrest/issues/2866); 拉取请求 [#2868](https://github.com/pgbackrest/pgbackrest/pull/2868); 提交 [`2def063`](https://github.com/pgbackrest/pgbackrest/commit/2def063e06c6f0b7e137309c7ed0d7631a42f6cf)
-- 修复可能生成弱加密子密钥或盐值的问题。 (*由 j0uinim 修复，David Steele, Stefan Fercot, Douglas J Hunley 审核。*)
-
+- 修复可能生成弱加密子密钥或盐值的问题。（*由 j0uinim 修复，David Steele, Stefan Fercot, Douglas J Hunley 审核。*）
 
   当 OpenSSL 无法从操作系统获取随机数据时，此前会忽略失败，使用非随机的内存数据生成子密钥和盐值。现在会报告错误。
 
@@ -250,23 +250,27 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **漏洞修复：**
 
 - 修复备份期间文件被截断为零长度时产生空块映射的问题。（*由 Douglas J Hunley 审核，JPCOSTA78 报告。*）
+
   如果块级增量文件大于 `repo-bundle-limit`，且在备份期间被 PostgreSQL 截断为零长度，就会被存储成不含任何块的块映射。在下一次全量备份之前，之后引用该文件的每次备份都会因 "unexpected eof" 而失败。
 
   议题 [#2829](https://github.com/pgbackrest/pgbackrest/issues/2829); 拉取请求 [#2842](https://github.com/pgbackrest/pgbackrest/pull/2842); 提交 [`572d163`](https://github.com/pgbackrest/pgbackrest/commit/572d1631026d5f10915634592b547f3439b7a291)
 - 向驱动传入过滤器时，禁用读取重试。（*由 Douglas J Hunley 审核，megamaced 报告。*）
+
   通过仓库主机访问对象存储中的仓库时，重试读取会导致崩溃。客户端不再重试此类读取；仓库主机仍会重试从对象存储读取。
 
   议题 [#2845](https://github.com/pgbackrest/pgbackrest/issues/2845); 拉取请求 [#2846](https://github.com/pgbackrest/pgbackrest/pull/2846); 提交 [`c6eca28`](https://github.com/pgbackrest/pgbackrest/commit/c6eca28ff8e551bd2e76f0c91b1a70ddee60b35e)
 - 修复 S3 对象版本列表的分页问题。（*由 Douglas J Hunley、guruguruguru 审核，guruguruguru 报告。*）
+
   使用 `repo-target-time` 按目标时间读取仓库时，如果某个前缀下列出的版本超过一千个，就会因 "unable to find child 'NextContinuationToken'" 而失败。
 
   议题 [#2854](https://github.com/pgbackrest/pgbackrest/issues/2854); 拉取请求 [#2855](https://github.com/pgbackrest/pgbackrest/pull/2855); 提交 [`6f0490d`](https://github.com/pgbackrest/pgbackrest/commit/6f0490dd29f0c756e6766fd9be023805540815fc)
-- 使用 `SAS` 认证时设置 Azure 版本请求头。 (*审核：Douglas J Hunley. 报告：Florian Helmberger.*)
+- 使用 `SAS` 认证时设置 Azure 版本请求头。（*审核：Douglas J Hunley. 报告：Florian Helmberger.*）
 
   批量删除要求包含版本请求头，因此使用 `SAS` 认证时，所有批次都会被拒绝。该拒绝被误认为单个文件失败，每个批次中的其余文件都未删除，`expire` 却报告成功，导致过期备份和 WAL 留在仓库中。
 
   议题 [#2840](https://github.com/pgbackrest/pgbackrest/issues/2840); 拉取请求 [#2848](https://github.com/pgbackrest/pgbackrest/pull/2848); 提交 [`ea3293b`](https://github.com/pgbackrest/pgbackrest/commit/ea3293be75c86b5e6c9ca4158b5ebe2a3224f76f)
 - 修复异步 `archive-push` 遇到零长度备份历史文件时停滞的问题。（*由 Andrew Kroh 修复，David Steele、Douglas J Hunley 审核。*）
+
   零长度的备份历史文件（例如在从存储快照复制的集群中）会使每次异步 `archive-push` 运行失败，导致没有任何 WAL 被归档。现在会根据第一个就绪 WAL 段的大小，将 `archive-push-batch-size` 换算为段数。
 
   议题 [#2856](https://github.com/pgbackrest/pgbackrest/issues/2856); 拉取请求 [#2857](https://github.com/pgbackrest/pgbackrest/pull/2857); 提交 [`12b1b3c`](https://github.com/pgbackrest/pgbackrest/commit/12b1b3cf58caee7b04ed788eee221726f5caa155)
@@ -293,10 +297,12 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **漏洞修复：**
 
 - 修复分块缓冲区小于输入缓冲区时发生挂起的问题。（*由 Andrew Pogrebnoi、Douglas J Hunley 审核，crajac66 报告。*）
+
   向 S3、GCS 或 Azure 分段上传时，如果分段缓冲区小于输入缓冲区（例如上传过程中分段大小增大后），就可能陷入无限循环。现在始终确保分段缓冲区足以容纳输入缓冲区。
 
   议题 [#2818](https://github.com/pgbackrest/pgbackrest/issues/2818); 拉取请求 [#2819](https://github.com/pgbackrest/pgbackrest/pull/2819); 提交 [`a53e470`](https://github.com/pgbackrest/pgbackrest/commit/a53e470eca258c2db088af55be307403c8f43b7a)
 - 新备份标签仅与其所属的全量备份集比较。（*由 Douglas J Hunley 审核，Anton Glushakov 报告。*）
+
   某些对象存储在前缀下的所有对象都被删除后，仍会列出该前缀，例如启用对象锁定的 MinIO 或 SeaweedFS，因此已经删除的全量备份仍可能出现在仓库列表中。之后的每次差异和增量备份都会因 "new backup label ... is not later than latest backup label ..." 而失败。现在，新标签只与所属全量备份集中的备份比较。
 
   议题 [#2792](https://github.com/pgbackrest/pgbackrest/issues/2792); 拉取请求 [#2824](https://github.com/pgbackrest/pgbackrest/pull/2824); 提交 [`d01f77e`](https://github.com/pgbackrest/pgbackrest/commit/d01f77e8237f5d008bb7782c18ced12cd6d1971a)
@@ -317,11 +323,11 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档改进：**
 
 - 说明使用 `repo-s3-uri-style=path` 时，S3 存储桶名称可以包含点号。
+
   设置 `repo-s3-uri-style=path` 后，存储桶名称是路径的一部分，而非主机名的一部分，因此桶名称中的句点不会导致证书主机名不匹配。
 
   提交 [`bbdc4b9`](https://github.com/pgbackrest/pgbackrest/commit/bbdc4b9217a0e66f6a01c05f4edc04282cffb3fc)
 - 从用户指南中移除显式的 `hot_standby` 配置。
-
 
   从 PostgreSQL 10 起，`hot_standby` 默认启用。快速入门现在说明：如果不启用它，备库不会接受只读连接。
 
@@ -338,18 +344,22 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **漏洞修复：**
 
 - 修复 `expire` 删除另一台主机上正在进行的备份的问题。（*由 Douglas J Hunley 审核，Dmitrii 报告。*）
+
   备份只有完成后才会加入 `backup.info`，因此在一台主机备份期间，若另一台主机运行 `expire`（例如主库备份时在备库运行 `expire`），正在进行的备份可能被删除。过期处理现在不会删除仍在进行或可续传的最新备份。
 
   议题 [#2622](https://github.com/pgbackrest/pgbackrest/issues/2622); 拉取请求 [#2797](https://github.com/pgbackrest/pgbackrest/pull/2797); 提交 [`aa0e215`](https://github.com/pgbackrest/pgbackrest/commit/aa0e215019f50f92a8f0c97f907affc1d3bf86c4)
 - 修复 WAL 文件出错时未执行 `archive-push-queue-max` 限制的问题。（*由 Stefan Fercot 审核，vut12 报告。*）
+
   在异步模式下，此前根据尚未推送的 WAL 计算队列大小。如果某个 WAL 文件反复出错，后续 WAL 虽已推送、不再计入队列，却仍留在 `pg_wal` 中，因此永远无法达到队列上限，`pg_wal` 可能占满磁盘。现在与同步模式一样，队列大小按 PostgreSQL 正在等待归档的全部 WAL 计算。
 
   议题 [#2629](https://github.com/pgbackrest/pgbackrest/issues/2629); 拉取请求 [#2799](https://github.com/pgbackrest/pgbackrest/pull/2799); 提交 [`7fe3636`](https://github.com/pgbackrest/pgbackrest/commit/7fe363658639bbc2f70e53496fa6da4acb9e481e)
 - 修复跨时间线切换恢复期间异步 `archive-get` 失败的问题。（*由 Douglas J Hunley 审核，Jimmy Yih 报告。*）
+
   两个异步进程可能竞争归档锁，未获取锁的进程在获取所需 WAL 段前便退出。启动它的 `archive-get` 随后等待 `archive-timeout`，并对实际存在的 WAL 段返回错误，可能导致恢复提前结束，尤其是在切换时间线时。现在，如果负责获取该段的异步进程未运行，会直接获取该段。
 
   议题 [#2423](https://github.com/pgbackrest/pgbackrest/issues/2423); 拉取请求 [#2806](https://github.com/pgbackrest/pgbackrest/pull/2806); 提交 [`baed942`](https://github.com/pgbackrest/pgbackrest/commit/baed942af0d61fcf3c2cb1f7d1bf1d6fe5bb6df9)
 - 修复错误模块中潜在的缓冲区越界问题。（*由 Christophe Pettus 修复，David Steele 审核。*）
+
   堆栈跟踪过长、超出缓冲区时，此前不会正确终止字符串，可能导致越界读取；错误信息过长时，在追加系统错误信息时也可能写出缓冲区边界。两种情况都需要异常长的信息才会触发。
 
   [`7fd8bc8`](https://github.com/pgbackrest/pgbackrest/commit/7fd8bc89a15cb039111aa85fd37f9dc68f7c4d6d) 修复错误模块中潜在的缓冲区越界问题。
@@ -358,6 +368,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
   [`3a71dc8`](https://github.com/pgbackrest/pgbackrest/commit/3a71dc839a89b83f592c1d5813c068bcded1b6bc) 防止超长信息导致错误缓冲区越界写入。
 - 修复并行协议客户端释放后使用的问题。（*由 Douglas J Hunley 审核，Georgy Shelkovy 报告。*）
+
   没有剩余任务的客户端被释放后，仍留在客户端列表中，后续调用会再次释放它。在 debug 或 trace 日志级别下，这会读取已释放内存并可能崩溃，例如设置 `log-level-file=trace` 的并行备份。
 
   议题 [#2754](https://github.com/pgbackrest/pgbackrest/issues/2754); 拉取请求 [#2804](https://github.com/pgbackrest/pgbackrest/pull/2804); 提交 [`31432ed`](https://github.com/pgbackrest/pgbackrest/commit/31432ed3977302b5e183f2b592d85afb521b4f55)
@@ -374,7 +385,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **新功能：**
 
-- 支持 PostgreSQL 19beta1/beta2。 (*审核：Stefan Fercot.*)
+- 支持 PostgreSQL 19beta1/beta2。（*审核：Stefan Fercot.*）
 
   新增 PostgreSQL 19beta1/beta2 支持。PostgreSQL 19 可以在线启用和禁用页面校验和，这两种操作进行期间不会验证页面校验和。
 
@@ -382,16 +393,19 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
   [`2777395`](https://github.com/pgbackrest/pgbackrest/commit/2777395dacc35aec51572d3e75c621725e2f9d9c) 支持 PostgreSQL 19beta2。
 - 新增 `archive-expire-before` 选项，用于清理 WAL 归档。（*由 Stefan Fercot 贡献，David Steele 审核。*）
+
   `expire` 的 `archive-expire-before` 选项可从归档中删除指定 WAL 段之前的 WAL，但绝不会删除保留备份所需的 WAL。它可以通过 `archive_cleanup_command`，从备库的重启点开始清理归档，替代不了解保留策略的 `pg_archivecleanup`。
 
   [`6cd692b`](https://github.com/pgbackrest/pgbackrest/commit/6cd692b1b321faf544ee3a9b1f503fd48007d7c7) 将 WAL 过期处理提取到 expireArchiveId()。
 
   [`4945139`](https://github.com/pgbackrest/pgbackrest/commit/4945139392c21f197f2e307abc3c89b5548cef8d) 添加 archive-expire-before 选项以清理 WAL 归档。; 拉取请求 [#2801](https://github.com/pgbackrest/pgbackrest/pull/2801)
 - 为 Azure 存储添加批量删除功能。（*由 Douglas J Hunley、Crispy 审核。*）
+
   文件删除改用 Azure Blob Batch API，每个请求最多删除 256 个文件，不再为每个文件单独发出请求。这可加快 `expire` 等从仓库删除文件的命令。
 
   拉取请求 [#2786](https://github.com/pgbackrest/pgbackrest/pull/2786); 提交 [`ffa325b`](https://github.com/pgbackrest/pgbackrest/commit/ffa325b8a44c1e9e44dc038bbcc8aece6f312a90)
 - 添加对 S3 Outposts 的支持。（*由 Shiva Kumar Ambigi 贡献，David Steele、Roberto Mello 审核。*）
+
   使用 S3 Outposts 端点时，设置 `repo-s3-service=s3-outposts`。该选项设置请求签名所用的服务名称，默认值为 `s3`。
 
   拉取请求 [#2762](https://github.com/pgbackrest/pgbackrest/pull/2762); 提交 [`6c51800`](https://github.com/pgbackrest/pgbackrest/commit/6c518001c24ad2405eaf750d358f69703322a221)
@@ -409,76 +423,94 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 服务器断开空闲连接后，重新建立 SFTP 存储连接。（*由 Stefan Fercot 审核，mustafa0x、tisserat 建议。*）
+
   SFTP 服务器和防火墙可能断开空闲一段时间的连接，例如备份复制阶段的仓库读取连接，导致下次使用时出现套接字错误。现在会重新建立已断开的连接，并重试一次操作。
 
   [`d72bea9`](https://github.com/pgbackrest/pgbackrest/commit/d72bea9fe7c3975fc6832a51b0b0c1c041c467d2) 在 SFTP 读写对象中从存储对象获取 libssh2 会话。
 
   [`a31febf`](https://github.com/pgbackrest/pgbackrest/commit/a31febfbd9ba639589fe57e4083ae9358b1306a4) 服务器断开空闲连接后，重新连接 SFTP 存储。; 议题 [#2739](https://github.com/pgbackrest/pgbackrest/issues/2739); 议题 [#2772](https://github.com/pgbackrest/pgbackrest/issues/2772); 拉取请求 [#2793](https://github.com/pgbackrest/pgbackrest/pull/2793)
 - 添加用户/组缓存，加快清单构建速度。（*由 Gunnar Lindholm 贡献，David Steele 审核。*）
+
   通过远程名称服务（如 sssd 或 LDAP）查询用户和组名时，每次查询都需往返通信，在有数百万文件的集群上成为构建清单的主要耗时。现在会缓存用户和组名。
 
   拉取请求 [#2773](https://github.com/pgbackrest/pgbackrest/pull/2773); 提交 [`1e6d23f`](https://github.com/pgbackrest/pgbackrest/commit/1e6d23fea72ac9c599f8b62a2e0a3de02d0d08d0)
 - 在 `info` 命令输出中添加各仓库的备份进度。（*由 Will Morland 贡献，David Steele、Stefan Fercot 审核。*）
+
   同时向多个仓库执行备份时，`info` 命令现在会分别报告各仓库的进度及总体进度。JSON 输出为每个备份锁增加了 `repo` 数组。
 
   议题 [#2736](https://github.com/pgbackrest/pgbackrest/issues/2736); 拉取请求 [#2740](https://github.com/pgbackrest/pgbackrest/pull/2740); 提交 [`77312b3`](https://github.com/pgbackrest/pgbackrest/commit/77312b33ba913132b33401d862c2e354f323c786)
 - 为 `verify` 命令添加 `backup.info` 检查。（*由 Denis Garsh 贡献，David Steele、Douglas J Hunley 审核。*）
+
   当仓库中的备份不在 `backup.info` 中，或 `backup.info` 中的备份在仓库中缺失时，`verify` 命令现在会发出警告。缺失的备份会被报告为清单缺失。
 
   议题 [#2723](https://github.com/pgbackrest/pgbackrest/issues/2723); 拉取请求 [#2752](https://github.com/pgbackrest/pgbackrest/pull/2752); 提交 [`7f82fb6`](https://github.com/pgbackrest/pgbackrest/commit/7f82fb6635c1e3e9dd285d53076e9aee3fbf1ca2)
 - 允许配置 S3 STS 端点。（*由 Simon Gratton 贡献，David Steele 审核。*）
+
   配合 `repo-s3-key-type=web-id`，可设置 `repo-s3-sts-host` 使用区域 STS 端点，例如 `sts.eu-central-2.amazonaws.com`。需要显式启用的 AWS 区域不接受全球端点签发的凭据，但全球端点仍是默认值。
 
   议题 [#2791](https://github.com/pgbackrest/pgbackrest/issues/2791); 拉取请求 [#2798](https://github.com/pgbackrest/pgbackrest/pull/2798); 提交 [`11f5582`](https://github.com/pgbackrest/pgbackrest/commit/11f5582dfe696187cab1f15d08f649a5117730b3)
 - 新增 `archive-push-batch-size`，用于限制每次异步运行推送的 WAL 数据量。（*由 Stefan Fercot 审核。*）
+
   在异步模式下，`archive-push-queue-max` 仅在每次运行开始时检查，因此处理大量积压 WAL 时，队列可能远超上限。`archive-push-batch-size`（默认 16GiB）限制每次运行推送的 WAL 数量，使队列更早得到再次检查。
 
   拉取请求 [#2803](https://github.com/pgbackrest/pgbackrest/pull/2803); 提交 [`34a035f`](https://github.com/pgbackrest/pgbackrest/commit/34a035f4d62f06822c1f60f72a605762cc1ad79c)
 - 异步 `archive-push` 遇到第一个错误时退出。（*由 Stefan Fercot 审核，Lardière Sébastien 建议。*）
+
   仓库不可用时，异步进程此前会不断尝试每个就绪 WAL 段，单次运行可能长到尚未再次检查 `archive-push-queue-max`，`pg_wal` 就已占满磁盘。现在发生第一个错误后，等待进行中的任务完成便退出。
 
   议题 [#1848](https://github.com/pgbackrest/pgbackrest/issues/1848); 拉取请求 [#2802](https://github.com/pgbackrest/pgbackrest/pull/2802); 提交 [`a0c1435`](https://github.com/pgbackrest/pgbackrest/commit/a0c14359392e283d88f72e7f9f815d9e78ddfb10)
 - 加固 HTTP 分块响应解析。（*由 Shubham 贡献，David Steele 审核。*）
+
   现在接受分块扩展和尾部字段，对 `transfer-encoding` 进行不区分大小写的比较，并拒绝同时包含 `transfer-encoding` 和 `content-length` 的响应。
 
   拉取请求 [#2785](https://github.com/pgbackrest/pgbackrest/pull/2785); 提交 [`34bba82`](https://github.com/pgbackrest/pgbackrest/commit/34bba828c6ba97579d65c2199c02d94bf31257a5)
 - 未启用 `allow-root` 时，由 root 用户运行命令将报错。（*由 Douglas J Hunley 审核。*）
+
   以 root 身份运行 `restore` 以外的命令，可能在仓库中创建 PostgreSQL 用户无法访问的文件，例如 `backup.info`。除 `restore` 外，所有命令默认禁用 `allow-root`，远程主机也会执行这项检查。
 
   议题 [#1693](https://github.com/pgbackrest/pgbackrest/issues/1693); 拉取请求 [#2812](https://github.com/pgbackrest/pgbackrest/pull/2812); 提交 [`0daf53d`](https://github.com/pgbackrest/pgbackrest/commit/0daf53da03fb179b5771b6aaa559f9e0cc5842bb)
 - 构建清单时减少二分查找次数。（*由 Gunnar Lindholm 贡献，David Steele 审核。*）
+
   构建差异或增量备份清单时，此前会为每个文件搜索前一份清单三次。现在仅搜索一次，可为有数百万文件的集群节省数百万次搜索。
 
   拉取请求 [#2774](https://github.com/pgbackrest/pgbackrest/pull/2774); 提交 [`f1ef629`](https://github.com/pgbackrest/pgbackrest/commit/f1ef62956adabf305a7e959477ea1bb668fd8d65)
 - 提升块级增量 delta 恢复期间的文件定位性能。（*由 David Christensen、Douglas J Hunley 审核。*）
+
   块级增量 delta 恢复此前每写一个块，都要定位文件并刷新写缓冲区，而块通常只有 8KiB。现在会跟踪文件位置，仅在必要时定位和刷新。
 
   拉取请求 [#2732](https://github.com/pgbackrest/pgbackrest/pull/2732); 提交 [`b908d5e`](https://github.com/pgbackrest/pgbackrest/commit/b908d5e2c5b37ef968f19e2c40a1001e19e5b87f)
 - 按顺序将备份文件打包，不再扫描以寻找更合适的文件组合。（*由 Stefan Fercot 审核。*）
+
   此前，如果加入某个文件会使文件包超过 `repo-bundle-size`，就会跳过它，转而加入队列后方较小的文件。现在按顺序添加文件，达到 `repo-bundle-size` 后关闭文件包，因此包大小可能超过该阈值，超出量最多为 `repo-bundle-limit`。
 
   拉取请求 [#2794](https://github.com/pgbackrest/pgbackrest/pull/2794); 提交 [`253dbc3`](https://github.com/pgbackrest/pgbackrest/commit/253dbc3f03e5581c98bb97b252dc77b8defd3693)
 - 查询未能完成时报告底层错误。（*由 Andrew Pogrebnoi 审核，Marco Fontana 建议。*）
+
   查询返回第一个结果后连接丢失时（例如负载较高时），此前只会报告笼统的 "NULL result required to complete request"。现在会报告 PostgreSQL 返回的错误，并提示可能是连接丢失，或 `idle_session_timeout`、`idle_in_transaction_session_timeout` 设置过于激进。
 
   议题 [#2789](https://github.com/pgbackrest/pgbackrest/issues/2789); 拉取请求 [#2790](https://github.com/pgbackrest/pgbackrest/pull/2790); 提交 [`23e966c`](https://github.com/pgbackrest/pgbackrest/commit/23e966cd8f17a8cd446b04901d0ae66ebf4118ee)
 - S3 凭据请求失败时报告实际错误。（*由 Douglas J Hunley 审核，Mitchell Grice 建议。*）
+
   AWS 对 `web-id` 或 `pod-id` 凭据请求返回错误时，此前会报告响应解析失败。现在会报告 AWS 返回的错误，并在记录请求日志时隐藏令牌。
 
   议题 [#1997](https://github.com/pgbackrest/pgbackrest/issues/1997); 拉取请求 [#2808](https://github.com/pgbackrest/pgbackrest/pull/2808); 提交 [`b0c57c2`](https://github.com/pgbackrest/pgbackrest/commit/b0c57c280d727e743b72a6d86e2c3e413307e44b)
 - 将 `archive-push` 的 `spool-path` 错误报告到 PostgreSQL 日志。（*由 Douglas J Hunley 审核，Don Seiler 建议。*）
+
   无法创建异步 spool 路径时（例如权限不足），错误无法写入 spool，`archive-push` 只会因笼统的超时而失败，并提示查看异步日志。现在在启动异步进程之前创建 spool 路径，使错误能出现在 PostgreSQL 日志中。
 
   议题 [#1408](https://github.com/pgbackrest/pgbackrest/issues/1408); 拉取请求 [#2810](https://github.com/pgbackrest/pgbackrest/pull/2810); 提交 [`7b0159c`](https://github.com/pgbackrest/pgbackrest/commit/7b0159c7dfd69763b63b1385fd564c18a4a5c1bc)
 - 遇到不受支持的版本时，提示 pgBackRest 可能版本过旧。
+
   pgBackRest 无法识别 PostgreSQL 版本时（例如恢复主机上的旧版 pgBackRest 读取新版集群的备份），错误现在会提示可能需要更新所有主机上的 pgBackRest。版本号会以用户可读的形式报告，例如 13，而非 130000。
 
   提交 [`d4f697e`](https://github.com/pgbackrest/pgbackrest/commit/d4f697ebce705f9439798f970103fd38f829dfff)
 - 添加 systemd 通知集成。（*由 Andrew Jackson 贡献，David Steele 审核。*）
+
   使用 `libsystemd` 构建时，`server` 命令会像 PostgreSQL 和 PgBouncer 一样，在准备接受连接和停止时通知 systemd。
 
   议题 [#2757](https://github.com/pgbackrest/pgbackrest/issues/2757); 拉取请求 [#2760](https://github.com/pgbackrest/pgbackrest/pull/2760); 提交 [`742fff1`](https://github.com/pgbackrest/pgbackrest/commit/742fff174a3f5baaed932afa284334ca2aa1be82)
 - 在 meson 编译器探测中抑制 `unused parameter` 错误。（*由 Jörg Plate 贡献，David Steele 审核。*）
+
   meson 的编译器探测代码声明了未使用的 `main()` 参数；当未使用参数警告被视为错误时，会导致探测失败。
 
   议题 [#2724](https://github.com/pgbackrest/pgbackrest/issues/2724); 提交 [`d4465bd`](https://github.com/pgbackrest/pgbackrest/commit/d4465bd6f78d6d58d18ebedbe8f63b55d0ae2508)
@@ -489,18 +521,22 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档改进：**
 
 - 将 `repo-*` 命令的 `stanza` 选项设为内部选项。（*由 Stefan Fercot 审核。*）
+
   `stanza` 选项对 `repo-*` 命令仅在使用未公开的存储路径常量时有效，此前文档却让人误以为它具有实际并不存在的作用。现在不再为这些命令列出该选项，其行为保持不变。
 
   议题 [#2735](https://github.com/pgbackrest/pgbackrest/issues/2735); 提交 [`3e9eabd`](https://github.com/pgbackrest/pgbackrest/commit/3e9eabd8a5551cdaeb6bc78a52f000eaf239defb)
 - 说明 `info` 会从全局配置节读取加密设置。（*由 Stefan Fercot 审核，Ron Johnson 建议。*）
+
   不指定 `stanza` 运行 `info` 时，只会从全局配置节读取加密设置。因此，若加密设置配置在 stanza 节中，就必须指定 `stanza`。
 
   议题 [#1407](https://github.com/pgbackrest/pgbackrest/issues/1407); 拉取请求 [#2805](https://github.com/pgbackrest/pgbackrest/pull/2805); 提交 [`2137bda`](https://github.com/pgbackrest/pgbackrest/commit/2137bda1a5a1ad890d0137feffe8491102041af3)
 - 说明 `expire-auto` 使用 `backup` 命令的配置。（*由 Stefan Fercot 审核，Lardière Sébastien 建议。*）
+
   备份后的自动过期处理使用 `backup` 命令的配置，因此仅为 `expire` 命令设置的选项不会生效。如果需要单独的配置，应禁用 `expire-auto` 并另行运行 `expire`。
 
   议题 [#1874](https://github.com/pgbackrest/pgbackrest/issues/1874); 拉取请求 [#2807](https://github.com/pgbackrest/pgbackrest/pull/2807); 提交 [`cf847f9`](https://github.com/pgbackrest/pgbackrest/commit/cf847f94cd7ab6517ec1abb30075fb53dc75d5f8)
 - 说明使用专用用户时需要调整 logrotate 的 `su` 指令。（*由 Douglas J Hunley 审核，lkanbus 建议。*）
+
   软件包可能安装以 `postgres` 用户轮转日志的 logrotate 配置。如果仓库和日志归专用用户所有，必须将 `su` 指令改为该用户，否则轮转会因权限错误而失败。
 
   议题 [#2737](https://github.com/pgbackrest/pgbackrest/issues/2737); 拉取请求 [#2809](https://github.com/pgbackrest/pgbackrest/pull/2809); 提交 [`bde2c50`](https://github.com/pgbackrest/pgbackrest/commit/bde2c509c923fbe2844c10b0f95c55973378d2ae)
@@ -513,7 +549,6 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **测试套件改进：**
 
 - 修复 CI 容器中的 Alpine 用户组冲突。（*由 Artur Zakirov 贡献，David Steele 审核。*）
-
 
   重命名测试组时，现在会处理含有成员的组条目；仅在 Alpine 组尚不存在时才创建它。
 
@@ -538,22 +573,27 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **新功能：**
 
 - 为 S3、GCS 和 Azure 添加 HTTP 支持。（*由 Will Morland 贡献，David Steele 审核。*）
+
   对象存储端点现在可以使用 `http://` 前缀，以不启用 TLS 的方式连接。未指定协议时仍使用 HTTPS。
 
   议题 [#2340](https://github.com/pgbackrest/pgbackrest/issues/2340); 拉取请求 [#2703](https://github.com/pgbackrest/pgbackrest/pull/2703); 提交 [`2398dd4`](https://github.com/pgbackrest/pgbackrest/commit/2398dd4d432d312b3641e9fbbcbe0487ad43112d)
 - 允许直接过期最旧的全量备份，不受当前保留策略限制。（*由 Stefan Fercot 贡献，David Steele 审核，Ron Johnson 建议。*）
+
   `expire` 的 `--oldest` 选项会忽略保留设置，使最旧的全量备份及依赖它的备份过期，例如可在仓库空间不足时使用。早于剩余最旧全量备份的 WAL 也会过期。
 
   议题 [#2666](https://github.com/pgbackrest/pgbackrest/issues/2666); 拉取请求 [#2709](https://github.com/pgbackrest/pgbackrest/pull/2709); 提交 [`bf2b276`](https://github.com/pgbackrest/pgbackrest/commit/bf2b276dc011464b13039630870934fd42ca473c)
 - 支持 Azure 托管标识（managed identities）。（*由 Moiz Ibrar、Matthew Mols 贡献，David Steele 审核。*）
+
   设置 `repo-azure-key-type=auto` 可通过托管身份自动获取凭据，无需手动配置。凭据会在过期之前刷新。
 
   议题 [#2023](https://github.com/pgbackrest/pgbackrest/issues/2023); 拉取请求 [#2712](https://github.com/pgbackrest/pgbackrest/pull/2712); 提交 [`38f14d7`](https://github.com/pgbackrest/pgbackrest/commit/38f14d73b6a62d06e1ead7942e49a2bb2ae90dab)
 - ***实验性*** 支持 S3 EKS Pod 身份认证。（*由 Pierre BOUTELOUP 贡献，David Steele 审核。*）
+
   设置 `repo-s3-key-type=pod-id` 可通过 EKS Pod 身份自动获取凭据，无需手动配置。凭据会在过期之前刷新。
 
   议题 [#2718](https://github.com/pgbackrest/pgbackrest/issues/2718); 拉取请求 [#2719](https://github.com/pgbackrest/pgbackrest/pull/2719); 提交 [`79544f6`](https://github.com/pgbackrest/pgbackrest/commit/79544f64a3ce198f4685f923739def997fcafbce)
 - 允许配置 TLS 密码套件。（*由 Gunnar "Nick" Bluth 贡献，David Steele 审核。*）
+
   使用 `tls-cipher-12` 设置 TLS 1.2 的密码套件，使用 `tls-cipher-13` 设置 TLS 1.3 的密码套件，例如用于满足合规要求。这些密码套件设置适用于进程建立的所有连接。
 
   [`fbc607a`](https://github.com/pgbackrest/pgbackrest/commit/fbc607a48b1fb4ae65c9f2691c44453f02aef2b8) 允许配置 TLS 密码套件。; 议题 [#2697](https://github.com/pgbackrest/pgbackrest/issues/2697); 拉取请求 [#2700](https://github.com/pgbackrest/pgbackrest/pull/2700)
@@ -568,22 +608,27 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 使用 path-style URI 时，允许 S3 桶名中包含点号。（*由 Joakim Hindersson 贡献，David Steele 审核。*）
+
   桶名称中的句点仅在主机式 URI 中会导致证书主机名不匹配，因此现在允许在 `repo-s3-uri-style=path` 下使用。大多数自建 S3 服务采用路径式 URI。
 
   拉取请求 [#2713](https://github.com/pgbackrest/pgbackrest/pull/2713); 提交 [`3fdb4a1`](https://github.com/pgbackrest/pgbackrest/commit/3fdb4a1ea00b442aca5fc714818d293d57490386)
 - 除非禁用验证，否则要求 TLS >= 1.2。（*由 Douglas J Hunley、Gunnar "Nick" Bluth 审核。*）
+
   TLS 1.0 和 1.1 自 2021 年起已被弃用。pgBackRest 主机之间的连接始终启用验证。如果通过 `repo-storage-verify-tls` 禁用对象存储的验证（例如使用自签名证书时），则允许所有协议版本。
 
   拉取请求 [#2720](https://github.com/pgbackrest/pgbackrest/pull/2720); 提交 [`5b4b20a`](https://github.com/pgbackrest/pgbackrest/commit/5b4b20a8d7d17c2bffe106595310853e3f3a9604)
 - 针对大文件上传，动态调整 S3/GCS/Azure 的分块大小。（*由 Douglas J Hunley 审核，Timothée Peignier 建议。*）
+
   上传的分段数量有限，因此使用默认的 `repo-storage-upload-chunk-size` 时，S3、GCS 和 Azure 可上传的最大文件分别为 50GiB、40GiB 和 200GiB。现在分段大小会在上传过程中增长，因此 S3 和 GCS 可上传最大 5TiB 的文件，Azure 可上传最大 45TiB 的文件。
 
   议题 [#2679](https://github.com/pgbackrest/pgbackrest/issues/2679); 拉取请求 [#2701](https://github.com/pgbackrest/pgbackrest/pull/2701); 提交 [`86554fa`](https://github.com/pgbackrest/pgbackrest/commit/86554faa707292855c2776a0c70b5e212b1e3945)
 - 针对小文件，优化 S3/GCS/Azure 的分块大小。（*由 Douglas J Hunley 审核。*）
+
   此前打开文件时就会分配整个分段缓冲区，尽管许多文件比一个分段还小。现在缓冲区随数据到达逐渐增长，可减少上传小文件时的内存占用。
 
   拉取请求 [#2705](https://github.com/pgbackrest/pgbackrest/pull/2705); 提交 [`28bfa20`](https://github.com/pgbackrest/pgbackrest/commit/28bfa20ba3b860f72ba7ab6c018e37ada99e2109)
 - 移除对 PostgreSQL `9.5` 的支持。（*由 Douglas J Hunley 审核。*）
+
   按照支持五个已结束生命周期的 PostgreSQL 版本的策略，不再支持 PostgreSQL 9.5。
 
   拉取请求 [#2692](https://github.com/pgbackrest/pgbackrest/pull/2692); 提交 [`5171e8b`](https://github.com/pgbackrest/pgbackrest/commit/5171e8bde31b9711c9c5b4ccc5170b61c5235548)
@@ -596,11 +641,11 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档改进：**
 
 - 从用户指南中移除显式的 `max_wal_senders`/`wal_level` 配置说明。（*由 Jamie Nguyen 建议。*）
+
   从 PostgreSQL 10 起，`max_wal_senders` 和 `wal_level` 的默认值已符合用户指南的要求。
 
   议题 [#2699](https://github.com/pgbackrest/pgbackrest/issues/2699); 提交 [`bce97d3`](https://github.com/pgbackrest/pgbackrest/commit/bce97d3ea80675b8eab3dbf692e8bc8f077f30c7)
 - 阐明 bundling（包捆绑）在大块大小文件系统上的优势。（*由 Ron Johnson 建议。*）
-
 
   在块较大的文件系统上，每个小文件都会占用一整个块，因此文件打包可节省空间。
 
@@ -615,6 +660,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **漏洞修复：**
 
 - 解除 HTTP/TLS/socket 超时的嵌套处理。（*由 David Christensen 审核。*）
+
   套接字连接失败后，TLS 和 HTTP 层也会重复重试，导致在 `io-timeout` 默认为 60 秒时，连接竟需九分钟才超时。现在每一层仅重试自身的失败。
 
   议题 [#2654](https://github.com/pgbackrest/pgbackrest/issues/2654); 拉取请求 [#2662](https://github.com/pgbackrest/pgbackrest/pull/2662); 提交 [`9c7f064`](https://github.com/pgbackrest/pgbackrest/commit/9c7f0648648e651d82918e5dbfc3d511abee3298)
@@ -641,7 +687,6 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 - 为 HTTP 408 和 429 错误添加重试机制。（*由 David Christensen 审核。*）
 
-
   现在会重试 HTTP 408（Request Timeout）和 429（Too Many Requests）错误。429 错误在 Cloudflare R2 上较为常见。
 
   拉取请求 [#2661](https://github.com/pgbackrest/pgbackrest/pull/2661); 提交 [`8733900`](https://github.com/pgbackrest/pgbackrest/commit/87339004e59c03d2a03a6ceb8426202346849c37)
@@ -663,6 +708,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **新功能：**
 
 - 在 `info` 命令输出中添加恢复进度信息。（*由 Denis Garsh、Maxim Michkov 贡献，David Steele 审核。*）
+
   `restore` 命令现在会记录进度，由 `info` 命令与备份进度一起报告。`stop` 命令也不再终止恢复。
 
   议题 [#2546](https://github.com/pgbackrest/pgbackrest/issues/2546); 拉取请求 [#2652](https://github.com/pgbackrest/pgbackrest/pull/2652); 提交 [`8cdd9ce`](https://github.com/pgbackrest/pgbackrest/commit/8cdd9ce1c4ab6cca508932a41a3013374d7547ef)
@@ -675,6 +721,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 在对象存储上重试失败的读取操作。（*由 David Christensen 审核。*）
+
   从对象存储读取开始后发生错误，此前会视为致命错误，可能导致恢复等代价较高的任务重新开始。现在会从中断位置重试失败的读取。
 
   拉取请求 [#2642](https://github.com/pgbackrest/pgbackrest/pull/2642); 提交 [`5e14692`](https://github.com/pgbackrest/pgbackrest/commit/5e14692588b9fd8a566c9a1795c866ba2e83eebd)
@@ -687,11 +734,11 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档改进：**
 
 - 在适当情况下，以列表形式描述离散选项值。（*由 Anton Kurochkin 贡献，David Steele 审核。*）
+
   `verify` 和 `version` 命令的 `output` 等选项值，现在与其他选项一样以列表形式说明。
 
   拉取请求 [#2638](https://github.com/pgbackrest/pgbackrest/pull/2638); 提交 [`2e76e9f`](https://github.com/pgbackrest/pgbackrest/commit/2e76e9fc699d22286f6bf05fddc271d8fa22523e)
 - 修复 `archive-mode` 选项帮助输出中"小于"的描述。（*由 Anton Kurochkin 贡献，David Steele 审核。*）
-
 
   拉取请求 [#2633](https://github.com/pgbackrest/pgbackrest/pull/2633); 提交 [`cb67322`](https://github.com/pgbackrest/pgbackrest/commit/cb673225e90604a8865ce30c188d15661f945e5e)
 
@@ -704,11 +751,11 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **漏洞修复：**
 
 - 回滚"仅在需要时才在 S3 上计算 content-md5"的变更。（*由 David Christensen 审核，Frank Brendel 报告。*）
+
   启用对象锁定后，S3 要求上传请求包含 `content-md5` 或 `x-amz-content-*` 校验和，而 Scality 不接受替代校验和，导致上传失败。现在重新为所有带有内容的请求计算 `content-md5`。
 
   议题 [#2613](https://github.com/pgbackrest/pgbackrest/issues/2613); 拉取请求 [#2615](https://github.com/pgbackrest/pgbackrest/pull/2615); 提交 [`8bbb982`](https://github.com/pgbackrest/pgbackrest/commit/8bbb98243566bfa052f6aacfd1bd3a6acd770e40)
 - 修复选项键的下界检查。（*由 David Christensen、Wolfgang Walther 审核，Wolfgang Walther 报告。*）
-
 
   索引为 0 的选项（例如 `pg0-path`）此前会导致段错误，现在会报告错误。
 
@@ -722,16 +769,18 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **漏洞修复：**
 
-- 修复在非默认仓库上进行块级增量恢复的问题。 (*审核：David Christensen. 测试：Aleksander Łukasz. 报告：Aleksander Łukasz.*)
+- 修复在非默认仓库上进行块级增量恢复的问题。（*审核：David Christensen. 测试：Aleksander Łukasz. 报告：Aleksander Łukasz.*）
 
   待恢复备份使用块级增量、且不在编号最小的仓库中时，恢复却会从编号最小的仓库读取部分块级增量数据。显式设置 `repo` 可以绕过该问题。
 
   议题 [#2577](https://github.com/pgbackrest/pgbackrest/issues/2577); 拉取请求 [#2579](https://github.com/pgbackrest/pgbackrest/pull/2579); 提交 [`5d2c67c`](https://github.com/pgbackrest/pgbackrest/commit/5d2c67c3c6975ea3ed08c7425f6e410ae378913f)
 - 对于 PostgreSQL < 12，不再设置 `recovery_target_timeline=current`。（*由 Stefan Fercot 审核。*）
+
   在 PostgreSQL 12 之前，虽然 `current` 是默认值，但显式将 `recovery_target_timeline` 设为 `current` 时，其行为却与 `latest` 相同。对于这些版本，设置为 `current` 时，现在不再将此设置写入 `recovery.conf`。
 
   拉取请求 [#2533](https://github.com/pgbackrest/pgbackrest/pull/2533); 提交 [`6fbb28f`](https://github.com/pgbackrest/pgbackrest/commit/6fbb28fa2d615576be78376c7f539921f6b8bc6a)
 - 修复归档范围过期的日志记录问题。（*由 Stefan Fercot 审核，Aleš Zelený 报告。*）
+
   此前将最后一个删除的归档路径记录为范围起点，因此日志显示的过期文件数量远少于实际数量。
 
   议题 [#2543](https://github.com/pgbackrest/pgbackrest/issues/2543); 拉取请求 [#2554](https://github.com/pgbackrest/pgbackrest/pull/2554); 提交 [`47f050f`](https://github.com/pgbackrest/pgbackrest/commit/47f050f8fd816e57326d881f4253d8a13c0f8da6)
@@ -744,24 +793,28 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **新功能：**
 
 - 支持验证恢复目标时间线。（*由 Stefan Fercot 审核。*）
+
   如果备份无法沿目标时间线恢复（例如备份是在备库提升且新时间线已分叉之后创建的），此前只有在恢复启动时才会失败，并返回难以理解的 PostgreSQL 错误。现在在开始恢复之前，就会根据历史文件检查时间线。
 
   拉取请求 [#2534](https://github.com/pgbackrest/pgbackrest/pull/2534); 提交 [`922e9f0`](https://github.com/pgbackrest/pgbackrest/commit/922e9f0775c39b64e009251a6bec8ef9b83c190f)
 - 允许对指定备份执行验证。（*由 Maxim Michkov 贡献，David Steele 审核。*）
+
   `verify` 的 `--set` 选项仅验证指定备份，以及使其保持一致所需的 WAL。
 
   议题 [#2419](https://github.com/pgbackrest/pgbackrest/issues/2419); 拉取请求 [#2544](https://github.com/pgbackrest/pgbackrest/pull/2544); 提交 [`e4def88`](https://github.com/pgbackrest/pgbackrest/commit/e4def8845eb5c3fe9fb8cc44d9f64766cfb348c2)
 - 新增对 S3/GCS 请求方付费（requester pays）的支持。（*由 Timothée Peignier 贡献，David Steele 审核。*）
+
   设置 `repo-s3-requester-pays` 或 `repo-gcs-user-project` 可由请求者承担费用，而非桶所有者，例如让托管服务向客户开放其备份的访问权限。
 
   [`4db0263`](https://github.com/pgbackrest/pgbackrest/commit/4db0263fd63274a8168eb4de17b320d2f86251a2) 支持 S3 请求者付费。; 拉取请求 [#2560](https://github.com/pgbackrest/pgbackrest/pull/2560)
 
   [`814bf48`](https://github.com/pgbackrest/pgbackrest/commit/814bf487c3955e877d226faaa22324d3c79863b2) 支持 GCS 请求者付费。; 拉取请求 [#2557](https://github.com/pgbackrest/pgbackrest/pull/2557)
 - 支持 PostgreSQL 18。（*由 Stefan Fercot 审核。*）
+
   本版本发布时，PostgreSQL 18 尚未推出 beta 版，因此最初的支持属于实验性质。直到 PostgreSQL 18.0，均未出现影响 pgBackRest 的变更。
 
   拉取请求 [#2603](https://github.com/pgbackrest/pgbackrest/pull/2603); 提交 [`565d2e0`](https://github.com/pgbackrest/pgbackrest/commit/565d2e0c47cd21df890a40b3a94a8c865bed76d9)
-- 允许通过抽象域套接字（abstract domain sockets）连接 PostgreSQL。 (*测试：Chris Bandy. 建议：Chris Bandy.*)
+- 允许通过抽象域套接字（abstract domain sockets）连接 PostgreSQL。（*测试：Chris Bandy. 建议：Chris Bandy.*）
 
   `pg-socket-path` 不再必须是绝对路径，因此可以指定抽象域套接字。无效路径由 libpq 报告。
 
@@ -775,32 +828,38 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 允许 `backup` 命令在远程仓库上运行。（*由 Stefan Fercot 审核。*）
+
   `backup` 命令现在可以在仓库位于远程的主机上运行，使备份的执行位置更加灵活。
 
   [`4a94b6b`](https://github.com/pgbackrest/pgbackrest/commit/4a94b6bef9108ab775c0070571a1fb7dd8883eeb) 重构协议辅助模块。
 
   [`931435c`](https://github.com/pgbackrest/pgbackrest/commit/931435c0177ded2189903385d520d5c8819c4f5e) 允许 backup 命令操作远程仓库。; 拉取请求 [#2512](https://github.com/pgbackrest/pgbackrest/pull/2512)
 - 使用 lz4 进行协议压缩。（*由 Stefan Fercot 审核。*）
+
   在协议压缩所用的低压缩级别下，lz4 比 gz 快得多，压缩率却相近。设置 `compress-level-network=0` 不再禁用协议压缩。
 
   [`0577b03`](https://github.com/pgbackrest/pgbackrest/commit/0577b0301689bc19d49c4081cc652971de5da8cf) 使用 lz4 进行协议压缩。; 拉取请求 [#2488](https://github.com/pgbackrest/pgbackrest/pull/2488)
 
   [`5c8296d`](https://github.com/pgbackrest/pgbackrest/commit/5c8296df066564be35d3936610ebff1c332f38da) 移除文档中关于禁用网络压缩的说明。
 - 仅在需要时才在 S3 上计算 `content-md5`。（*由 David Christensen 审核。*）
+
   为减少上传文件时的 CPU 开销，`content-md5` 请求头改为仅对必须使用它的批量删除请求计算。此变更已在 v2.55.1 中回退。
 
   拉取请求 [#2592](https://github.com/pgbackrest/pgbackrest/pull/2592); 提交 [`20bfd14`](https://github.com/pgbackrest/pgbackrest/commit/20bfd14b73ad6d75b6fb1169565b18dcfa183c9b)
 - 多键选项的值被覆盖时，发出警告。（*由 David Christensen、Stefan Fercot 审核。*）
+
   对于键值对选项（例如 `recovery-option`），重复指定键时，此前会静默覆盖其值。现在会记录警告。
 
   议题 [#2591](https://github.com/pgbackrest/pgbackrest/issues/2591); 拉取请求 [#2594](https://github.com/pgbackrest/pgbackrest/pull/2594); 提交 [`cab4d6f`](https://github.com/pgbackrest/pgbackrest/commit/cab4d6fd5c775d6e1a9cd9889d825eee667b5322)
 - 为已过期归档路径添加详细日志记录。（*由 Stefan Fercot 贡献，David Steele 审核。*）
+
   删除大量归档文件时，看起来可能像卡住。现在会以 detail 级别记录进度信息。
 
   [`4dcfa9e`](https://github.com/pgbackrest/pgbackrest/commit/4dcfa9ef59c5e75c6c0ee83390c64b9a3d4af1fc) 为 expire 测试添加 detail 级别日志。
 
   [`2155a12`](https://github.com/pgbackrest/pgbackrest/commit/2155a12a3d861645de5618518350f90962fbc26d) 为过期归档路径添加 detail 级别日志。; 议题 [#2543](https://github.com/pgbackrest/pgbackrest/issues/2543); 拉取请求 [#2559](https://github.com/pgbackrest/pgbackrest/pull/2559)
 - 移除对 PostgreSQL `9.4` 的支持。（*由 Stefan Fercot 审核。*）
+
   按照支持五个已结束生命周期的 PostgreSQL 版本的策略，不再支持 PostgreSQL 9.4。仍可对 9.4 集群的备份执行过期处理。
 
   拉取请求 [#2472](https://github.com/pgbackrest/pgbackrest/pull/2472); 提交 [`48f511d`](https://github.com/pgbackrest/pgbackrest/commit/48f511dad339ef9357e00f7bd8e2bf4b7c800dd4)
@@ -813,35 +872,42 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档改进：**
 
 - 修复为多个 stanza 指定 `tls-server-auth` 时的文档说明。（*由 David Christensen、Stefan Fercot 审核，Terry MacAndrew 建议。*）
+
   `tls-server-auth` 的多个 stanza 应以逗号分隔列表指定。此前文档误写为重复指定该选项。
 
   议题 [#2591](https://github.com/pgbackrest/pgbackrest/issues/2591); 拉取请求 [#2595](https://github.com/pgbackrest/pgbackrest/pull/2595); 提交 [`53a45d2`](https://github.com/pgbackrest/pgbackrest/commit/53a45d25c3e60e5067010b2676f5d6216638fbe3)
 - 阐明增量备份的过期机制。（*由 Stefan Fercot 审核。*）
+
   此前文档让人误以为增量备份按数量过期。现在说明了增量备份的过期方式，以及在差异备份保留策略中，全量备份也计作差异备份。
 
   拉取请求 [#2601](https://github.com/pgbackrest/pgbackrest/pull/2601); 提交 [`8bdba74`](https://github.com/pgbackrest/pgbackrest/commit/8bdba747981e8805a9bf355050f70cdf19e9babc)
 - 阐明本地与远程 pgBackRest 版本须保持一致的要求。（*由 Greg Clough 贡献，David Steele 审核。*）
+
   议题 [#2540](https://github.com/pgbackrest/pgbackrest/issues/2540); 拉取请求 [#2541](https://github.com/pgbackrest/pgbackrest/pull/2541); 提交 [`82299eb`](https://github.com/pgbackrest/pgbackrest/commit/82299eb4cd997524eeddef170ad99669ed6651cf)
 - 新增关于导出自包含集群的常见问题解答。（*由 Stefan Fercot 贡献，David Steele 审核。*）
+
   FAQ 说明了如何使用 `--archive-copy` 创建备份，再通过 `--type=none` 恢复，以导出可独立使用的集群。
 
   拉取请求 [#2605](https://github.com/pgbackrest/pgbackrest/pull/2605); 提交 [`9386920`](https://github.com/pgbackrest/pgbackrest/commit/9386920b79971347c6c57589190bf09b591d8b4d)
 - 补充 `--tablespace-map-all` 关于表空间创建的注意事项。（*由 Stefan Fercot、Christophe Courtois 审核，Christophe Courtois 建议。*）
+
   备份开始后新建的表空间不在清单中，因此 `tablespace-map-all` 无法映射它。
 
   拉取请求 [#2538](https://github.com/pgbackrest/pgbackrest/pull/2538); 提交 [`e625ed8`](https://github.com/pgbackrest/pgbackrest/commit/e625ed8be2228cb99c3801f9d1776909a2201c5a)
 - 阐明 `--repo-retention-full-type` 的行为。（*由 Antoine Beaupré 审核，Antoine Beaupré 建议。*）
+
   议题 [#2562](https://github.com/pgbackrest/pgbackrest/issues/2562); 拉取请求 [#2583](https://github.com/pgbackrest/pgbackrest/pull/2583); 提交 [`84eb9a7`](https://github.com/pgbackrest/pgbackrest/commit/84eb9a742dcf75f071e011946263dedaa985099e)
 - 将对象存储的 `--process-max` 建议改为使用 `--repo-bundle`。（*由 Stefan Fercot 审核。*）
+
   在对象存储上，`repo-bundle` 通过减少创建的文件数量，大幅缩短创建文件的耗时，其效果远大于 `process-max`。
 
   拉取请求 [#2542](https://github.com/pgbackrest/pgbackrest/pull/2542); 提交 [`aa7210a`](https://github.com/pgbackrest/pgbackrest/commit/aa7210a1830825e0a3e6b6740937357341127a6f)
 - 将 `unix_socket_directory` 更新为 `unix_socket_directories`。（*由 hyunkyu han 贡献，David Steele 审核。*）
+
   `unix_socket_directory` 从 PostgreSQL 9.2 起已无效，因此文档仅保留 `unix_socket_directories`。
 
   议题 [#2589](https://github.com/pgbackrest/pgbackrest/issues/2589); 提交 [`b28ae98`](https://github.com/pgbackrest/pgbackrest/commit/b28ae98cec7ae7e881e6476c1cba1ba7e1abc358)
 - 建议不要将 `spool-path` 置于 `pg_xlog`/`pg_wal` 目录内。（*由 Martín Marqués、Don Seiler 审核，Martín Marqués 建议。*）
-
 
   将 spool 路径放在 `pg_xlog` 或 `pg_wal` 内，可能给 `pg_rewind` 等 PostgreSQL 工具带来问题。
 
@@ -865,7 +931,6 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 - 阐明多个配置文件的行为方式。（*由 Paul Bierly 审核，Paul Bierly 建议。*）
 
-
   每个配置文件必须独立有效，因此在某个文件中设置选项时，必须在该文件中声明所属配置节。文档还说明：不支持引号，键和值两端的空白会被去除，重复的配置节会合并。
 
   提交 [`5da2df4`](https://github.com/pgbackrest/pgbackrest/commit/5da2df4a933f04d5fb9a3b6c7c59529f3afa805b)
@@ -888,7 +953,6 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 - 稳定集成测试中的异步归档功能。（*由 Viktor Kurilko 贡献，David Steele 审核。*）
 
-
   某个集成测试遗留运行的异步 `archive-get`，可能将错误写入下一个测试的队列，导致其恢复失败。
 
   议题 [#2463](https://github.com/pgbackrest/pgbackrest/issues/2463); 拉取请求 [#2481](https://github.com/pgbackrest/pgbackrest/pull/2481); 提交 [`b90ce9e`](https://github.com/pgbackrest/pgbackrest/commit/b90ce9eb8c7cd9e9b131477a377249a3d3fda181)
@@ -903,7 +967,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **漏洞修复：**
 
-- 修复大型数据集上的 PostgreSQL 查询性能问题。 (*修复：Thibault Vincent, David Steele. 审核：David Christensen. 测试：Antoine Millet. 报告：Antoine Millet.*)
+- 修复大型数据集上的 PostgreSQL 查询性能问题。（*修复：Thibault Vincent, David Steele. 审核：David Christensen. 测试：Antoine Millet. 报告：Antoine Millet.*）
 
   查询超时逻辑延迟了读取查询结果，导致返回大量结果的查询耗时可能达到 `db-timeout`。现在会在结果可用后立即读取。
 
@@ -918,6 +982,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **新功能：**
 
 - 允许在版本化存储（versioned storage）上的仓库中按目标时间点读取数据。（*由 Stefan Fercot、David Christensen 审核。*）
+
   `archive-get`、`info`、`repo-get`、`repo-ls`、`restore` 和 `verify` 命令可以读取启用版本管理的 Azure、GCS 或 S3 存储中，仓库在 `repo-target-time` 时刻的状态。即使仓库被意外或恶意删除、损坏，也能据此恢复。
 
   拉取请求 [#2404](https://github.com/pgbackrest/pgbackrest/pull/2404); 提交 [`b19134d`](https://github.com/pgbackrest/pgbackrest/commit/b19134dccd5d0dab87b5d45b443f481df00370b1)
@@ -930,22 +995,27 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 在 `info` 命令文本输出中汇总备份引用列表。（*由 Stefan Fercot 贡献，David Steele 审核。*）
+
   备份引用列表可能很长，因此 `info` 命令的文本输出现在会对其进行汇总。指定 `--set` 时仍显示完整列表。
 
   拉取请求 [#2399](https://github.com/pgbackrest/pgbackrest/pull/2399); 提交 [`b306f83`](https://github.com/pgbackrest/pgbackrest/commit/b306f83493cc859ad15c8f175fc6db2321b79340)
 - 每次 S3 认证时刷新 web-id 令牌。（*由 Brent Graveland 贡献，David Steele 审核。*）
+
   `AWS_WEB_IDENTITY_TOKEN_FILE` 指定的令牌文件此前仅在启动时读取一次，因此令牌可能在长时间操作期间过期。现在每次认证都会读取令牌。
 
   议题 [#2428](https://github.com/pgbackrest/pgbackrest/issues/2428); 拉取请求 [#2429](https://github.com/pgbackrest/pgbackrest/pull/2429); 提交 [`95a4b9e`](https://github.com/pgbackrest/pgbackrest/commit/95a4b9e10a3f7a26ebaae22fc6abd79cee14189a)
 - 在帮助信息中正确显示索引选项的当前值。（*由 David Christensen 审核。*）
+
   索引选项显示的当前值此前始终是第一个索引的值，例如 `pg1-path`。选项帮助现在会列出每个索引的值；如果有多个值，选项列表会显示 `<multi>`。
 
   拉取请求 [#2453](https://github.com/pgbackrest/pgbackrest/pull/2453); 提交 [`b3ca2e3`](https://github.com/pgbackrest/pgbackrest/commit/b3ca2e34823b28862d999f87c4d7346707952a5b)
 - 仅在内容发生变化时才保存 `backup.info`。（*由 Stefan Fercot 审核。*）
+
   即使 `backup.info` 未发生变化，`expire` 此前也会保存它。减少保存次数还使版本化存储上的目标时间更容易选择。
 
   拉取请求 [#2403](https://github.com/pgbackrest/pgbackrest/pull/2403); 提交 [`b454b9e`](https://github.com/pgbackrest/pgbackrest/commit/b454b9e403526b1f352df964d9206c27d2397df3)
 - 移除恢复过程中并行读取文件的数量限制。（*由 David Christensen 审核。*）
+
   此前协议一次只能在远端读写一个文件，因此恢复也只能逐个读取仓库文件。现在协议命令可以复用同一连接交错执行，使恢复能够同时读取多个文件，例如一个文件包及其中某个文件的块级增量数据。
 
   [`df8cbc9`](https://github.com/pgbackrest/pgbackrest/commit/df8cbc91c348bc2f746767c87ac5626460fb6f39) 协议命令多路复用。; 拉取请求 [#2108](https://github.com/pgbackrest/pgbackrest/pull/2108)
@@ -968,11 +1038,11 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档改进：**
 
 - 阐明 `data_directory` 的来源。（*由 Stefan Fercot 贡献，David Steele 审核，Matthias 建议。*）
+
   `pg-path` 应与 PostgreSQL 报告的 `data_directory` 一致，该值可能不同于 `postgresql.conf` 中的设置。
 
   议题 [#2464](https://github.com/pgbackrest/pgbackrest/issues/2464); 拉取请求 [#2467](https://github.com/pgbackrest/pgbackrest/pull/2467); 提交 [`9ba2db0`](https://github.com/pgbackrest/pgbackrest/commit/9ba2db017348d304f96ce89592fc01f29197e136)
 - 优化摘要（summary）是否使用小写的判断逻辑。（*由 Daniel Westermann 建议。*）
-
 
   文档中以专有名称或缩写（例如 PostgreSQL）开头的摘要，不再被转换为小写。
 
@@ -987,10 +1057,12 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **漏洞修复：**
 
 - 修复以 root 用户运行 `restore` 时的权限问题。（*由 Stefan Fercot 审核，Will M. 报告。*）
+
   以 root 运行 `restore` 时，`pg_control` 的所有者会被设为 root。如果基础路径不存在，以 root 执行恢复也会失败。
 
   议题 [#2407](https://github.com/pgbackrest/pgbackrest/issues/2407); 拉取请求 [#2416](https://github.com/pgbackrest/pgbackrest/pull/2416); 提交 [`7bd8da4`](https://github.com/pgbackrest/pgbackrest/commit/7bd8da4eecb0ce1461854414b727606a5e884edf)
 - 修复延迟连接报错时的段错误。（*由 David Christensen 审核，Anton Glushakov 报告。*）
+
   如果连接错误延迟到后续等待时才被报告，就可能导致段错误。
 
   议题 [#2420](https://github.com/pgbackrest/pgbackrest/issues/2420); 拉取请求 [#2422](https://github.com/pgbackrest/pgbackrest/pull/2422); 提交 [`377ba06`](https://github.com/pgbackrest/pgbackrest/commit/377ba062ac81867dca6197265688deb0111ae81a)
@@ -1003,7 +1075,6 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 支持 PostgreSQL 17。
-
 
   PostgreSQL 17beta3 更改了控制文件和 WAL 格式，这在 beta 版中并不常见。
 
@@ -1028,6 +1099,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **新功能：**
 
 - 允许在不同仓库上并发执行备份。（*由 Reid Thompson、Stefan Fercot 审核。*）
+
   锁现在按 stanza 和仓库划分，不再仅按 stanza 划分，因此同一 stanza 的备份可以同时在不同仓库运行。PostgreSQL <= 9.5 不支持这种方式。
 
   [`270dce4`](https://github.com/pgbackrest/pgbackrest/commit/270dce41b6fff0d0ad0769b0ea5df0011140f0b9) 重构锁模块。; 拉取请求 [#2371](https://github.com/pgbackrest/pgbackrest/pull/2371)
@@ -1044,10 +1116,12 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 将 `log-level-stderr` 选项默认值设为 `off`。（*由 Greg Sabino Mullane、Stefan Fercot 审核。*）
+
   收集日志时如果仅重定向 stdout，写入 stderr 的警告和错误往往会丢失。显式设置的 `log-level-stderr` 不受影响。
 
   拉取请求 [#2379](https://github.com/pgbackrest/pgbackrest/pull/2379); 提交 [`7d54073`](https://github.com/pgbackrest/pgbackrest/commit/7d540730941994d3cb630c695e9f672e047d8e7f)
 - 允许 PostgreSQL <= 10 使用非默认 WAL 段大小。（*由 Viktor Kurilko 贡献，David Steele 审核。*）
+
   PostgreSQL <= 10 可以在构建时使用不同的 WAL 段大小，Greenplum 等分支则通过 `initdb` 设置。
 
   拉取请求 [#2303](https://github.com/pgbackrest/pgbackrest/pull/2303); 提交 [`4ac3b82`](https://github.com/pgbackrest/pgbackrest/commit/4ac3b82c99ff3bd48d2cc74651a47ce072ac0022)
@@ -1069,7 +1143,6 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 - 阐明 `archive-push` 多仓库模式的行为。（*由 Stefan Fercot 审核。*）
 
-
   某个仓库发生故障时，除非启用 `archive-async`，否则 `archive-push` 无法继续向其他仓库推送。
 
   拉取请求 [#2398](https://github.com/pgbackrest/pgbackrest/pull/2398); 提交 [`ec3e387`](https://github.com/pgbackrest/pgbackrest/commit/ec3e387bb73826c30b32bf0221acb2d56f23f1c5)
@@ -1083,7 +1156,6 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **漏洞修复：**
 
 - 修复副本上的文件大于主库对应文件时出现的问题。（*由 Stefan Fercot 审核，Nicolas Lassimonne 报告。*）
-
 
   使用块级增量从备库备份时，如果某个文件在主库和备库上的大小不同，下一次差异或增量备份会存储主库上的大小。再下一次备份就会因 "repo size must be > 0" 而失败。
 
@@ -1102,10 +1174,12 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **新功能：**
 
 - 新增 GCS 批量删除支持。（*由 Reid Thompson 审核。*）
+
   文件改为通过批量请求删除，不再为每个文件单独发出请求，可加快 `expire` 等从仓库删除文件的命令。
 
   拉取请求 [#2326](https://github.com/pgbackrest/pgbackrest/pull/2326); 提交 [`76bcb74`](https://github.com/pgbackrest/pgbackrest/commit/76bcb740b66f64804dbbf5a2a6be6407f9cec376)
 - 支持 S3 `SSE-C` 加密。（*由 Tim Jones 审核，Tim Jones 建议。*）
+
   设置 `repo-s3-sse-customer-key` 可让 S3 在数据传输完成后，用提供的密钥加密数据。这不如通过 `repo-cipher-type` 在传输前加密安全。
 
   议题 [#2279](https://github.com/pgbackrest/pgbackrest/issues/2279); 拉取请求 [#2282](https://github.com/pgbackrest/pgbackrest/pull/2282); 提交 [`57731b6`](https://github.com/pgbackrest/pgbackrest/commit/57731b6cd261c732041aacc094429ab02ca13418)
@@ -1118,10 +1192,12 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 允许在 meson 构建中显式禁用可选依赖项。（*由 Michael Schout 贡献，David Steele 审核。*）
+
   即使相应库已安装，meson 构建也可以禁用可选功能，以满足 FreeBSD 等平台的要求。默认情况下，找到库便启用相应功能。
 
   拉取请求 [#2321](https://github.com/pgbackrest/pgbackrest/pull/2321); 提交 [`7b95fd3`](https://github.com/pgbackrest/pgbackrest/commit/7b95fd3bd29346e7325aa161bfee45efd71e22eb)
 - 在 meson 构建中动态查找 python。（*由 Michael Schout 贡献，David Steele 审核。*）
+
   meson 构建现在会查找 Python 安装，而非要求 PATH 中必须存在 `python3` 可执行文件，例如只安装了 `python3.9` 时也能构建。meson 最低版本现在为 0.47。
 
   [`55e9969`](https://github.com/pgbackrest/pgbackrest/commit/55e996912aa57d39ea21f5dc905b7acabe93b0f8) 将 meson 最低版本提高到 0.47。
@@ -1135,7 +1211,6 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 - 更新 `start`/`stop` 文档，以反映实际功能。（*由 Stefan Fercot 审核。*）
 
-
   议题 [#2325](https://github.com/pgbackrest/pgbackrest/issues/2325); 议题 [#2334](https://github.com/pgbackrest/pgbackrest/issues/2334); 拉取请求 [#2352](https://github.com/pgbackrest/pgbackrest/pull/2352); 提交 [`b6ac11b`](https://github.com/pgbackrest/pgbackrest/commit/b6ac11beec920fe978994c0d018c380477199ca8)
 
 ### v2.51 版本说明
@@ -1147,10 +1222,12 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **漏洞修复：**
 
 - 跳过块级增量 delta 恢复中的零长度文件。（*由 Sebastian Krause、René Højbjerg Larsen 审核，Sebastian Krause 报告。*）
+
   已存在的零长度文件会使块级增量 delta 恢复在块校验和过滤器中失败。由于这些文件没有可复用的内容，现在会跳过它们。
 
   议题 [#2271](https://github.com/pgbackrest/pgbackrest/issues/2271); 拉取请求 [#2272](https://github.com/pgbackrest/pgbackrest/pull/2272); 提交 [`f7a7ab1`](https://github.com/pgbackrest/pgbackrest/commit/f7a7ab16c9652179945717ebf9b68af3aa8a0b0e)
 - 修复存储列表中的性能回归问题。（*由 Stephen Frost 审核，Maksym Boguk 报告。*）
+
   列出路径时，此前会请求每个文件的详细信息，在对象存储等场景下可能很慢。现在只请求列表所需的信息。
 
   议题 [#2275](https://github.com/pgbackrest/pgbackrest/issues/2275); 拉取请求 [#2276](https://github.com/pgbackrest/pgbackrest/pull/2276); 提交 [`e00bfe2`](https://github.com/pgbackrest/pgbackrest/commit/e00bfe2d2c3f124b2883e3c2d169a2ce506a1e98)
@@ -1161,36 +1238,44 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 改进双栈连接（dual stack）支持。（*由 Stephen Frost 审核，Timothée Peignier 建议。*）
+
   主机名解析出多个地址（例如 IPv4 和 IPv6）时，会遵循 RFC 8305 的“Happy Eyeballs”方式：给前一个地址合理的连接时间后，就尝试下一个地址。不失败也未连接成功的尝试，不再耗尽全部可用时间。
 
   议题 [#2154](https://github.com/pgbackrest/pgbackrest/issues/2154); 拉取请求 [#2235](https://github.com/pgbackrest/pgbackrest/pull/2235); 提交 [`7448fde`](https://github.com/pgbackrest/pgbackrest/commit/7448fde157c6d22f57b90c0cef11957b0aadf4b3)
 - 将 meson 作为主要构建系统。（*由 Stephen Frost 审核。*）
+
   测试和文档构建现在使用 meson 构建系统。模块外不使用的函数现在会隐藏，可减小二进制文件体积。
 
   [`e3d9df3`](https://github.com/pgbackrest/pgbackrest/commit/e3d9df3ae9669ee5749b970d59f8afeb20fd3d9d) 将 meson 设为主要构建系统。; 拉取请求 [#2264](https://github.com/pgbackrest/pgbackrest/pull/2264)
 
   [`f287178`](https://github.com/pgbackrest/pgbackrest/commit/f287178b705cc90aa887d66c932e2a223029649b) 将函数和变量的可见性设为隐藏。; 拉取请求 [#2265](https://github.com/pgbackrest/pgbackrest/pull/2265)
 - 在非 delta 增量备份期间检测未发生变化的文件。（*由 Stephen Frost 审核。*）
+
   执行不启用 delta 的差异或增量备份时，如果文件可容纳于单个缓冲区，或它是块级增量文件，就会与前一次备份中的文件比较；若未改变，则仅引用它，不再重新存储。
 
   拉取请求 [#2257](https://github.com/pgbackrest/pgbackrest/pull/2257); 提交 [`9d91d1b`](https://github.com/pgbackrest/pgbackrest/commit/9d91d1b2f817b543fc8d970af56d1442c325ed7c)
 - 防止因移除 `backup_label` 而导致无效恢复。（*由 Stephen Frost 审核。*）
+
   如果从已恢复的集群中删除 `backup_label`，PostgreSQL 会使用 `pg_control` 中的检查点执行崩溃恢复，几乎总会导致集群损坏。恢复现在会将 `pg_control` 中的检查点设为无效，使后续恢复报错，而非造成损坏。`pg_controldata` 会将该检查点显示为 `0/DEAD`。
 
   拉取请求 [#2232](https://github.com/pgbackrest/pgbackrest/pull/2232); 提交 [`e634fd8`](https://github.com/pgbackrest/pgbackrest/commit/e634fd85cedc1ae3aef7c4fa2556d7d73d05cb8a)
 - 改进 `archive-push` 的 WAL 段队列处理。（*由 Stephen Frost 审核。*）
+
   此前会读取队列中每个 WAL 段的大小来计算队列大小。现在统一使用第一个段的大小。
 
   拉取请求 [#2277](https://github.com/pgbackrest/pgbackrest/pull/2277); 提交 [`cf17515`](https://github.com/pgbackrest/pgbackrest/commit/cf17515e409440eecfb04bf7186790d8baa8ab12)
 - 将恢复继续（resume）功能限制为全量备份。（*由 Stephen Frost、Stefan Fercot 审核。*）
+
   启用 delta 的差异和增量备份无法正确续传，且自前一次备份后发生变化的文件，在续传前很可能再次改变。现在仅允许全量备份续传。
 
   拉取请求 [#2268](https://github.com/pgbackrest/pgbackrest/pull/2268); 提交 [`dddcbcd`](https://github.com/pgbackrest/pgbackrest/commit/dddcbcd8e9a1cae578b0cc5bb2d1aa768330f3c5)
 - 更新块级增量备份的恢复继续功能。（*由 Stephen Frost 审核。*）
+
   续传此前会移除块级增量文件，因此虽然能够工作，却会重新复制所有这些文件。现在续传时会保留块级增量文件。
 
   拉取请求 [#2296](https://github.com/pgbackrest/pgbackrest/pull/2296); 提交 [`ff47450`](https://github.com/pgbackrest/pgbackrest/commit/ff47450402fde5ebc64a08d31791551bee52200e)
 - 支持使用 `--version` 和 `--help` 查看版本和帮助信息。（*由 Greg Sabino Mullane 审核，Greg Sabino Mullane 建议。*）
+
   `--version` 和 `--help` 现在与大多数程序的行为一致。查看特定命令或选项的帮助时，请使用 `help`。
 
   拉取请求 [#2263](https://github.com/pgbackrest/pgbackrest/pull/2263); 提交 [`68db307`](https://github.com/pgbackrest/pgbackrest/commit/68db3075d7ac4a48377967ad54e45b95b9ee6c61)
@@ -1204,7 +1289,6 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 - 更新对 `recovery.conf` 的引用说明。（*由 Stefan Fercot 审核，Stephen Frost 建议。*）
 
-
   提到 `recovery.conf` 的地方现在也包含新版 PostgreSQL 使用的 `postgresql.auto.conf`。
 
   拉取请求 [#2281](https://github.com/pgbackrest/pgbackrest/pull/2281); 提交 [`6835178`](https://github.com/pgbackrest/pgbackrest/commit/68351785f6816a23526900db595557cf6e3a0056)
@@ -1217,7 +1301,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **漏洞修复：**
 
-- 修复块级增量恢复中的短读（short read）问题。 (*审核：Stephen Frost. 测试：Brent Graveland. 报告：Adol Rodriguez, Brent Graveland.*)
+- 修复块级增量恢复中的短读（short read）问题。（*审核：Stephen Frost. 测试：Brent Graveland. 报告：Adol Rodriguez, Brent Graveland.*）
 
   压缩超级块的末尾可能带有标记数据结束的字节，虽然解压本身不需要这些字节。根据缓冲区与数据的对齐方式，这些字节可能未被读取，导致恢复失败。
 
@@ -1231,14 +1315,17 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 在块级增量 delta 恢复期间保留部分文件。（*由 Stephen Frost 审核。*）
+
   小于预期的文件此前不会在块级增量 delta 恢复中保留，尽管其数据块可以复用，例如重试失败的恢复，或覆盖较小文件进行恢复时。
 
   拉取请求 [#2254](https://github.com/pgbackrest/pgbackrest/pull/2254); 提交 [`a42614e`](https://github.com/pgbackrest/pgbackrest/commit/a42614e8f3a9e6871c16331f01c2cd765ab181aa)
 - 新增对备用编译时页面大小的支持。（*由 Viktor Kurilko 贡献，David Steele 审核。*）
+
   PostgreSQL 可以使用不同的页面大小构建，例如 4096，Greenplum 等分支便采用这种方式。
 
   拉取请求 [#2197](https://github.com/pgbackrest/pgbackrest/pull/2197); 提交 [`89d5278`](https://github.com/pgbackrest/pgbackrest/commit/89d5278b74ab0d880345575d7ac4c239cd1fce54)
 - 使用 bundling 时，跳过备份期间被截断的文件。（*由 Georgy Shelkovy 贡献，David Steele 审核。*）
+
   文件分配到文件包后，如果被截断为零长度，此前仍会存入包中，在调试构建中触发断言失败。现在会跳过这些文件。
 
   [`02eea55`](https://github.com/pgbackrest/pgbackrest/commit/02eea555c7169e99892fdbc8ce7cc1ee59f50509) 文件打包时跳过备份期间被截断的文件。; 拉取请求 [#2227](https://github.com/pgbackrest/pgbackrest/pull/2227)
@@ -1251,7 +1338,6 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
   [`337da35`](https://github.com/pgbackrest/pgbackrest/commit/337da35ab278e058ec4cdffeb4319f1a1e2cb0df) 添加测试，展示打包文件在备份期间被截断时的行为。
 - 改进 SFTP 存储错误信息。（*由 Reid Thompson 贡献，David Steele 审核。*）
-
 
   拉取请求 [#2249](https://github.com/pgbackrest/pgbackrest/pull/2249); 提交 [`7c17eec`](https://github.com/pgbackrest/pgbackrest/commit/7c17eec3db455d3e8e660f4f8247b6975517648f)
 
@@ -1266,6 +1352,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **漏洞修复：**
 
 - 修复重试机制的回归问题。（*由 Stephen Frost 审核，Norman Adkins、Tanel Suurhans、Jordan English、Timothée Peignier 报告。*）
+
   v2.48 移除了操作耗尽整个超时时间后的一次重试，导致超时直接变成错误，例如等待对象存储套接字可写时。现在即使超时已到，也会再重试两次。
 
   [`3c116e1`](https://github.com/pgbackrest/pgbackrest/commit/3c116e1829a0df62aaf50ce241c63d829eb438e0) 移除未使用的头文件。
@@ -1288,6 +1375,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档新功能：**
 
 - 记录维护者选项。（*由 Stefan Fercot 审核。*）
+
   维护者选项现在有独立的文档章节，说明使用注意事项，`pg-version-force` 也不再是内部选项。
 
   拉取请求 [#2202](https://github.com/pgbackrest/pgbackrest/pull/2202); 提交 [`21c8c8a`](https://github.com/pgbackrest/pgbackrest/commit/21c8c8a66cb06eba714bfa41bed7239af3d14f08)
@@ -1301,7 +1389,6 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 - 允许在未安装 `libssh2` 的情况下运行 `config/load` 单元测试。（*由 Reid Thompson 贡献，David Steele 审核，Wu Ning 建议。*）
 
-
   议题 [#2193](https://github.com/pgbackrest/pgbackrest/issues/2193); 拉取请求 [#2194](https://github.com/pgbackrest/pgbackrest/pull/2194); 提交 [`e2b734e`](https://github.com/pgbackrest/pgbackrest/commit/e2b734eff97e3fac32895b799cc32126013aae27)
 
 ### v2.48 版本说明
@@ -1312,7 +1399,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **漏洞修复：**
 
-- 修复在没有块列表的情况下恢复块级增量备份的问题。 (*审核：Stephen Frost. 测试：Burak Yurdakul. 报告：Burak Yurdakul.*)
+- 修复在没有块列表的情况下恢复块级增量备份的问题。（*审核：Stephen Frost. 测试：Burak Yurdakul. 报告：Burak Yurdakul.*）
 
   文件时间戳改变但内容未变时，会写入一个没有数据块的块映射。在一次文件包读取中，如果该映射位于一个未使用块级增量存储的文件之后，就不会被解密。受影响的文件足够多时，会耗尽重试次数，导致恢复失败。
 
@@ -1321,14 +1408,17 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **新功能：**
 
 - 新增 `--repo-storage-tag` 选项，用于创建对象标签。（*由 Stephen Frost、Stefan Fercot、Timothée Peignier 审核。*）
+
   设置 `repo-storage-tag` 可为写入 S3、GCS 或 Azure 仓库的对象添加标签。标签按仓库分别设置。
 
   议题 [#2150](https://github.com/pgbackrest/pgbackrest/issues/2150); 拉取请求 [#2159](https://github.com/pgbackrest/pgbackrest/pull/2159); 提交 [`1b4e0cc`](https://github.com/pgbackrest/pgbackrest/commit/1b4e0cce5f3ff5ea3ee0b889e6d4ce4de1430b04)
 - 为 SFTP 存储驱动添加已知主机（known hosts）检查。（*由 Reid Thompson 贡献，Stephen Frost、David Steele 审核。*）
+
   现在默认根据 known hosts 文件检查 SFTP 主机密钥，即 `repo-sftp-host-key-check-type=strict`。设置 `repo-sftp-host-key-check-type=accept-new` 可自动添加新主机，设置 `repo-sftp-host-key-check-type=none` 则像以前一样跳过检查。
 
   拉取请求 [#2125](https://github.com/pgbackrest/pgbackrest/pull/2125); 提交 [`ce9ba0f`](https://github.com/pgbackrest/pgbackrest/commit/ce9ba0fadee652d409488bee701ea6a51cafec75)
 - 支持双栈（dual stack）连接。（*由 Stephen Frost 审核。*）
+
   现在会依次尝试主机名解析出的每个地址，例如先尝试没有到主机路由的 IPv6 地址，再尝试 IPv4 地址，直到连接成功或超时。重复的重试错误也会在错误信息中汇总。
 
   [`5314dbf`](https://github.com/pgbackrest/pgbackrest/commit/5314dbffc761bc7507db02693f2421c1578efe10) 调整 Wait 对象，提高嵌套使用时的准确性。
@@ -1347,30 +1437,36 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - `check` 命令支持多 stanza。（*由 Stephen Frost 审核。*）
+
   未指定 `stanza` 时，`check` 命令现在会检查配置中的所有 stanza。
 
   拉取请求 [#2057](https://github.com/pgbackrest/pgbackrest/pull/2057); 提交 [`1141dc2`](https://github.com/pgbackrest/pgbackrest/commit/1141dc20708cf0c68296f83e74c872a7db9c2bd9)
 - 重试读取 `pg_control`，直到校验和有效。（*由 Stefan Fercot、Stephen Frost 审核。*）
+
   在 ext4 等某些文件系统上，并发写入期间读取 `pg_control` 可能得到部分新、部分旧的撕裂数据。现在会重试读取，直到校验和有效。
 
   拉取请求 [#2131](https://github.com/pgbackrest/pgbackrest/pull/2131); 提交 [`f42d927`](https://github.com/pgbackrest/pgbackrest/commit/f42d927d2dcd58cf5a80d68eaf6888bcf2c67a4b)
 - 优化成功备份后的 WAL 段检查。（*由 Stephen Frost 审核。*）
+
   备份后检查 WAL 段时，此前每个段都会列举一次存储内容。现在每个 WAL 目录只列举一次，并复用列表。
 
   拉取请求 [#2169](https://github.com/pgbackrest/pgbackrest/pull/2169); 提交 [`9d3a605`](https://github.com/pgbackrest/pgbackrest/commit/9d3a605900644059ff0e030d71a818b3965eb031)
 - 改进 GCS 多部分上传性能。（*由 Reid Thompson 审核。*）
+
   分段上传中的每个分段现在会在数据就绪后立即上传。
 
   拉取请求 [#2162](https://github.com/pgbackrest/pgbackrest/pull/2162); 提交 [`6cb9c40`](https://github.com/pgbackrest/pgbackrest/commit/6cb9c40fb8ea18e6572bf3f6e44bbb1d8f922682)
 - 允许在 stanza 停止时运行 `archive-get` 命令。（*由 Tom Swartz、David Christensen、Reid Thompson 审核。*）
+
   `archive-get` 命令不会写入仓库，因此现在可像 `restore` 一样，在 stanza 已停止时运行。
 
   提交 [`fbd992a`](https://github.com/pgbackrest/pgbackrest/commit/fbd992adc7b18db5e70774d675c160c8c8e2f031)
 - 支持 SFTP 公钥/私钥路径中的前导波浪号（`~`）。（*由 Reid Thompson 贡献，David Steele 审核。*）
+
   `repo-sftp-private-key-file` 和 `repo-sftp-public-key-file` 的路径现在可按文档所述以 `~` 开头。
 
   拉取请求 [#2136](https://github.com/pgbackrest/pgbackrest/pull/2136); 提交 [`eb32d6d`](https://github.com/pgbackrest/pgbackrest/commit/eb32d6de5e1575a37efb166abbf7df400d93352e)
-- 在续期认证令牌前重新加载 GCS 凭证。（*由 Stephen Frost 审核，Daniel Farina 建议。*）
+- 在续期认证令牌前重新加载 GCS 凭据。（*由 Stephen Frost 审核，Daniel Farina 建议。*）
 
   现在会在更新认证令牌之前重新读取服务密钥文件，因此可以在命令运行期间更换密钥。
 
@@ -1379,6 +1475,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档漏洞修复：**
 
 - 修复配置参考中 `tls-server-address` 选项的示例。（*由 Hartmut Goebel 修复，David Steele 审核。*）
+
   示例中的 `::*` 无效。IPv4 应使用 `*`，IPv6 应使用 `::`。
 
   拉取请求 [#2165](https://github.com/pgbackrest/pgbackrest/pull/2165); 提交 [`43524a4`](https://github.com/pgbackrest/pgbackrest/commit/43524a47a4c6a847f76514812f94b87cb7af4c05)
@@ -1389,7 +1486,6 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **测试套件改进：**
 
 - 允许在未安装 `libssh2` 的情况下运行 `storage/sftp` 单元测试。（*由 Reid Thompson 贡献，David Steele 审核，Wu Ning 建议。*）
-
 
   议题 [#2163](https://github.com/pgbackrest/pgbackrest/issues/2163); 拉取请求 [#2177](https://github.com/pgbackrest/pgbackrest/pull/2177); 提交 [`c3c0834`](https://github.com/pgbackrest/pgbackrest/commit/c3c0834e170196a1241a368779162fcca65f9ad5)
 
@@ -1402,24 +1498,29 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **漏洞修复：**
 
 - 在 delta 备份期间，在 manifest 中保留块级增量信息。（*由 Stephen Frost 审核，Francisco Miguel Biete Banon 报告。*）
+
   如果文件发生变化，以其当前状态作为新文件时不会使用块级增量（例如缩小到块级增量阈值以下，或时间戳前移足够久），它的块级增量信息此前会从 delta 备份的清单中丢失，即使该文件仍可引用前一次备份。
 
   [`1d42aed`](https://github.com/pgbackrest/pgbackrest/commit/1d42aed152563fff6ec70c517d86eb39158b3f20) 改进 command/backup 单元测试中对引用文件的验证。
 
   [`4c27d74`](https://github.com/pgbackrest/pgbackrest/commit/4c27d74bbd3a44d8ab1af140277d3cd8302060c2) 在 delta 备份期间保留清单中的块级增量信息。; 议题 [#2112](https://github.com/pgbackrest/pgbackrest/issues/2112); 拉取请求 [#2123](https://github.com/pgbackrest/pgbackrest/pull/2123)
 - 修复 `verify` 命令中的块级增量文件名问题。（*由 Reid Thompson 审核，Francisco Miguel Biete Banon 报告。*）
+
   对于存储在文件包之外的块级增量文件，`verify` 命令此前使用压缩扩展名而非 `.pgbi`，导致无法找到文件。
 
   议题 [#2112](https://github.com/pgbackrest/pgbackrest/issues/2112); 拉取请求 [#2120](https://github.com/pgbackrest/pgbackrest/pull/2120); 提交 [`cdb7e26`](https://github.com/pgbackrest/pgbackrest/commit/cdb7e26350822b55c00771d6d575242b1202e741)
 - 修复从备库备份时错误触发自动 delta 备份的问题。（*由 Stephen Frost 审核，krmozejko、Don Seiler 报告。*）
+
   备库上的文件大小可能不同于主库，例如空闲空间映射文件。下一次增量备份可能因此检测到主库文件大小改变，转为按校验和进行 delta 比较，耗时可能大幅增加。现在会在清单中保留原始大小，用于后续比较。
 
   议题 [#2020](https://github.com/pgbackrest/pgbackrest/issues/2020); 拉取请求 [#2124](https://github.com/pgbackrest/pgbackrest/pull/2124); 提交 [`5ed6f8d`](https://github.com/pgbackrest/pgbackrest/commit/5ed6f8df1487174985c42d6e13c367d70c2d8b8a)
 - 恢复类型为 `type=none` 时，跳过 PostgreSQL >= 12 的 `recovery.signal` 文件。（*由 Stefan Fercot 审核，T.Anastacio 报告。*）
+
   对于 PostgreSQL >= 12，设置 `type=none` 时不再写入 `recovery.signal`，与更早版本的行为保持一致。
 
   议题 [#2062](https://github.com/pgbackrest/pgbackrest/issues/2062); 拉取请求 [#2070](https://github.com/pgbackrest/pgbackrest/pull/2070); 提交 [`9cceed6`](https://github.com/pgbackrest/pgbackrest/commit/9cceed6ac4a32c14a797eba89a4ad1dc06d89d80)
 - 修复差异/增量备份的唯一标签生成问题。（*由 Andrey Sokolov 修复，David Steele 审核。*）
+
   如果至少有两个全量备份，而最新的备份已过期，差异或增量备份此前会因与该过期全量备份的标签比较而失败，表现得像系统时钟回拨。
 
   议题 [#1873](https://github.com/pgbackrest/pgbackrest/issues/1873); 拉取请求 [#2104](https://github.com/pgbackrest/pgbackrest/pull/2104); 提交 [`0ac0934`](https://github.com/pgbackrest/pgbackrest/commit/0ac09344dc17fb54e250705ce49399b86329bb3d)
@@ -1432,6 +1533,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 提升 SFTP 存储驱动的性能。（*由 Stephen Frost、Reid Thompson 贡献，David Steele 审核。*）
+
   libssh2 无法继续时，SFTP 存储驱动此前会等待固定时长。现在改为等待套接字可读或可写。
 
   [`e280ed9`](https://github.com/pgbackrest/pgbackrest/commit/e280ed9098a6f5da9bdabb541e9c69d4f24ffcf2) 使 storage/sftp 中的结果码处理更加一致。
@@ -1440,6 +1542,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
   [`28b6b2d`](https://github.com/pgbackrest/pgbackrest/commit/28b6b2d4659d78ce67c1bd3104d96e5705d955c9) 改进 SFTP 存储驱动的性能。; 拉取请求 [#2089](https://github.com/pgbackrest/pgbackrest/pull/2089)
 - 在 `info` 命令的日期/时间输出中添加时区偏移量。（*由 Stefan Fercot、Philip Hurst 审核，Philip Hurst 建议。*）
+
   `info` 命令输出的时间戳现在包含时区偏移量，可直接作为恢复目标，例如用于 `--target`。
 
   [`9efd5cd`](https://github.com/pgbackrest/pgbackrest/commit/9efd5cd0bb40c5dc2fcac2e21c9b62e554b94db6) 为 info 命令的日期时间输出添加时区偏移量。; 议题 [#2093](https://github.com/pgbackrest/pgbackrest/issues/2093); 拉取请求 [#2095](https://github.com/pgbackrest/pgbackrest/pull/2095)
@@ -1457,7 +1560,6 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 - 在用户指南中阐明优先从软件包安装的建议。（*由 Stefan Fercot 审核，dr-kd 建议。*）
 
-
   拉取请求 [#2090](https://github.com/pgbackrest/pgbackrest/pull/2090); 提交 [`a36f480`](https://github.com/pgbackrest/pgbackrest/commit/a36f480c85c7add6fdf0e5517748d740e3a7b424)
 
 ### v2.46 版本说明
@@ -1469,12 +1571,14 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **新功能：**
 
 - 支持块级备份（block incremental backup）。（*由 John Morris、Stephen Frost、Stefan Fercot 审核。*）
+
   块级增量仅存储文件自前一次备份后变化的部分，可在对大文件进行差异和增量备份时节省空间与时间。通过 `repo-block` 启用，且必须同时启用 `repo-bundle`。
 
   [`dd4e526`](https://github.com/pgbackrest/pgbackrest/commit/dd4e52679ecdc43539bd038b5aa9bd4ff9055cbf) 从增量块列表中移除分段和块编号。; 拉取请求 [#2029](https://github.com/pgbackrest/pgbackrest/pull/2029)
 
   [`822f2a5`](https://github.com/pgbackrest/pgbackrest/commit/822f2a584260a012b833455a7a2bd1c8487e3010) 完成块级增量功能。; 拉取请求 [#2053](https://github.com/pgbackrest/pgbackrest/pull/2053)
 - 支持 SFTP 作为仓库存储。（*由 Reid Thompson 贡献，Stephen Frost、David Steele 审核。*）
+
   设置 `repo-type=sftp` 和 `repo-sftp-host`，即可将仓库存储在 SFTP 服务器上。
 
   拉取请求 [#1959](https://github.com/pgbackrest/pgbackrest/pull/1959); 提交 [`87087fa`](https://github.com/pgbackrest/pgbackrest/commit/87087fac231d2110160b3219daee3f9fb91aec02)
@@ -1491,10 +1595,12 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 允许跳过页头检查。（*由 David Christensen 审核，David Christensen 建议。*）
+
   验证页面校验和时进行的页头检查，可能对加密页面误报错误。设置 `page-header-check=n` 可跳过这些检查；它们默认启用。
 
   拉取请求 [#2045](https://github.com/pgbackrest/pgbackrest/pull/2045); 提交 [`f5e6bc2`](https://github.com/pgbackrest/pgbackrest/commit/f5e6bc26983396ec51c6579aade37db39807f3a5)
 - 恢复期间避免对恢复文件调用 `chown()`。（*由 Stefan Fercot、Marcelo Henrique Neppel 审核，Marcelo Henrique Neppel 建议。*）
+
   恢复时，对所有者已经正确的已恢复文件会跳过 `chown()`，但对写出的恢复配置文件却不会。现在，如果所有者已经正确，Posix 驱动也会跳过 `chown()`。
 
   议题 [#2036](https://github.com/pgbackrest/pgbackrest/issues/2036); 拉取请求 [#2038](https://github.com/pgbackrest/pgbackrest/pull/2038); 提交 [`3ff88ff`](https://github.com/pgbackrest/pgbackrest/commit/3ff88ffbb495fd669e9a361478e60192930ee0a1)
@@ -1511,11 +1617,11 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档改进：**
 
 - 添加关于使用恢复类型 `type=none` 的警告说明。（*由 Stefan Fercot 审核。*）
+
   `type=none` 恢复在结束时不会递增时间线，这可能使 PostgreSQL 归档重复的 WAL；重复 WAL 被拒绝后可能导致磁盘占满，还可能使 `pg_rewind` 等工具失败或损坏集群。文档现在对此发出警告。
 
   议题 [#2062](https://github.com/pgbackrest/pgbackrest/issues/2062); 拉取请求 [#2069](https://github.com/pgbackrest/pgbackrest/pull/2069); 提交 [`a28b72c`](https://github.com/pgbackrest/pgbackrest/commit/a28b72c62431bcf9df02791219d9d6f5d0e60b54)
 - 添加关于在已创建仓库上运行 `stanza-create` 的注意事项。
-
 
   已存在的 stanza 会被跳过，因此可以安全地重复运行 `stanza-create`，例如配置新仓库后。
 
@@ -1626,11 +1732,11 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档改进：**
 
 - 添加在 `2.x` 版本之间升级的明确说明。（*由 Christophe Courtois 贡献，David Steele 审核。*）
+
   用户指南新增章节说明：在 `2.x` 版本之间升级，只需安装新的二进制文件。如果没有使用旧版本不支持的功能，也可以降级。
 
   议题 [#1774](https://github.com/pgbackrest/pgbackrest/issues/1774); 拉取请求 [#1993](https://github.com/pgbackrest/pgbackrest/pull/1993); 提交 [`15d5dcd`](https://github.com/pgbackrest/pgbackrest/commit/15d5dcdd3bb387aab28bbe7262011c38c7d6d22c)
 - 移除引入 TLS 后已过时的 SSH 相关说明。
-
 
   `repo-host`、`pg-host` 及其端口选项的帮助不再将 SSH 作为唯一远程协议，SSH 压缩相关的详细说明也已移除。
 
@@ -1647,10 +1753,12 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 移除对 PostgreSQL `9.0`/`9.1`/`9.2` 的支持。（*由 Stefan Fercot 审核。*）
+
   pgBackRest 现在支持十个 PostgreSQL 版本：五个仍受支持的版本，以及最近五个已结束生命周期的版本。以 PostgreSQL 15 为准，这意味着不再支持 `9.0`、`9.1` 和 `9.2`。
 
   拉取请求 [#1941](https://github.com/pgbackrest/pgbackrest/pull/1941); 提交 [`77c721e`](https://github.com/pgbackrest/pgbackrest/commit/77c721eb635c6d757d2d5ed6f2ffc083720c10a7)
 - 当没有备份与当前 PostgreSQL 版本匹配时，`restore` 操作报错退出。（*由 Stefan Fercot 贡献，David Steele 审核，Soulou 建议。*）
+
   执行 `stanza-upgrade` 后若未创建新备份，恢复此前会使用最新备份，而该备份来自旧 PostgreSQL 版本。以此方式创建的副本可能失败。现在这种情况会报错，除非指定了 `set` 或 `type=time`/`type=lsn`。
 
   议题 [#1942](https://github.com/pgbackrest/pgbackrest/issues/1942); 拉取请求 [#1967](https://github.com/pgbackrest/pgbackrest/pull/1967); 提交 [`b9be4fa`](https://github.com/pgbackrest/pgbackrest/commit/b9be4fa54039e2c79fad0dc1552c7ffaf883004c)
@@ -1663,23 +1771,26 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档改进：**
 
 - 添加关于在 Azure 存储上启用"分层命名空间"的警告。（*由 Stefan Fercot 审核，Vojtech Galda、Pluggi、asjonos 建议。*）
+
   启用“分层命名空间”后，Azure 要求单独删除目录，导致 `expire` 失败。用户指南现在明确提醒不要启用它。
 
   议题 [#1770](https://github.com/pgbackrest/pgbackrest/issues/1770); 拉取请求 [#1980](https://github.com/pgbackrest/pgbackrest/pull/1980); 提交 [`3aea997`](https://github.com/pgbackrest/pgbackrest/commit/3aea997df5ace85251d0579ccbe13fa938f587ee)
 - 在监控示例中添加换行符替换处理。（*由 Stefan Fercot 审核，rudonx、gmustdie、Ivan Shelestov 建议。*）
+
   当 `info` 输出包含换行符（例如某些错误信息中）时，监控示例会失败，因为 `COPY` 会将 `\n` 转换为 `jsonb` 不接受的实际换行符。示例现在会在转换为 `jsonb` 之前替换换行符。
 
   议题 [#1910](https://github.com/pgbackrest/pgbackrest/issues/1910); 拉取请求 [#1963](https://github.com/pgbackrest/pgbackrest/pull/1963); 提交 [`ae258f6`](https://github.com/pgbackrest/pgbackrest/commit/ae258f604e634f1d2a760ffdb92dd359fd1129bb)
 - 阐明 `target-action` 在各 PostgreSQL 版本上的行为。（*由 Chris Bandy 贡献，David Steele、Anton Kurochkin、Stefan Fercot 审核，Anton Kurochkin、Chris Bandy 建议。*）
+
   `pause` 的效果取决于 `hot_standby` 和 PostgreSQL 版本。设置 `hot_standby=off` 时，在 PostgreSQL >= 12 上，`pause` 等同于 `shutdown`；在更早版本上则等同于 `promote`。
 
   议题 [#987](https://github.com/pgbackrest/pgbackrest/issues/987); 议题 [#1314](https://github.com/pgbackrest/pgbackrest/issues/1314); 拉取请求 [#1960](https://github.com/pgbackrest/pgbackrest/pull/1960); 提交 [`84a3ff8`](https://github.com/pgbackrest/pgbackrest/commit/84a3ff8b7ac1243c0b47c6585697f4fcf3c12065)
 - 更新并完善索引页面内容。（*由 Stefan Fercot 审核。*）
+
   关于其他备份方案不支持并行处理的章节已不再准确，现已改写。其他章节也更新了术语，并改进了表达。
 
   拉取请求 [#1966](https://github.com/pgbackrest/pgbackrest/pull/1966); 提交 [`36ee30d`](https://github.com/pgbackrest/pgbackrest/commit/36ee30d118ce6cc7720653a3d3a49a06c655c463)
 - 为网站添加深色模式。（*由 Stephen Frost 建议。*）
-
 
   浏览器偏好深色配色时，网站会使用深色配色。
 
@@ -1705,7 +1816,6 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 - 当选项未指定索引时，添加相应提示信息。（*由 Stefan Fercot 审核。*）
 
-
   对必须指定索引的选项（例如 `repo-storage-ca-file`），错误现在会提示带索引的名称，例如 `repo1-storage-ca-file`。已弃用的选项也会提示其当前名称。
 
   议题 [#1925](https://github.com/pgbackrest/pgbackrest/issues/1925); 拉取请求 [#1929](https://github.com/pgbackrest/pgbackrest/pull/1929); 提交 [`3f363cb`](https://github.com/pgbackrest/pgbackrest/commit/3f363cb3aed1a7c6836ee6c32eae600129a6f6b8)
@@ -1720,7 +1830,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **漏洞修复：**
 
-- 修复文件捆绑模式的 `backup`/`restore`中的内存泄漏问题。 (*审核：John Morris. 测试：Oscar. 报告：Oscar.*)
+- 修复文件捆绑模式的 `backup`/`restore`中的内存泄漏问题。（*审核：John Morris. 测试：Oscar. 报告：Oscar.*）
 
   恢复此前只有在文件包中的所有文件都恢复后，才会释放某些 I/O 对象。包中包含大量小文件时，内存占用会不断增长，直至恢复因 "unable to allocate" 而失败。备份续传也存在类似但规模较小的泄漏。
 
@@ -1736,6 +1846,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 使用 bundling 时，不为零长度文件存储引用。（*由 Stefan Fercot 审核。*）
+
   使用文件打包的差异和增量备份，此前会为零长度文件存储指向前一次备份的引用，但这些文件实际上并不存储在任何备份中。恢复时会忽略该引用，但它仍占用清单空间。
 
   拉取请求 [#1887](https://github.com/pgbackrest/pgbackrest/pull/1887); 提交 [`f981fb4`](https://github.com/pgbackrest/pgbackrest/commit/f981fb45d9931e597afec764e13b1a53d8365d25)
@@ -1748,7 +1859,6 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **测试套件改进：**
 
 - 更新 `test.pl` 的 `--psql-bin` 选项以匹配命令行帮助。（*由 Koshi Shibagaki 贡献，David Steele 审核。*）
-
 
   帮助中显示的是 `--psql-bin`，实际选项名却是 `--pgsql-bin`。现在选项名称已与帮助一致。
 
@@ -1763,6 +1873,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **漏洞修复：**
 
 - 修复非默认仓库使用了错误时间过期策略的问题。（*由 Stefan Fercot 审核，Adam Brusselback 报告。*）
+
   未指定 `repo` 运行 `expire` 时，所有仓库基于时间的 `repo-retention-full` 值此前都取自编号最小的仓库。现在每个仓库使用各自的值。
 
   议题 [#1852](https://github.com/pgbackrest/pgbackrest/issues/1852); 拉取请求 [#1854](https://github.com/pgbackrest/pgbackrest/pull/1854); 提交 [`eda7f81`](https://github.com/pgbackrest/pgbackrest/commit/eda7f81ee4fd6818ce458768144fc3fc1e1f0f21)
@@ -1783,20 +1894,23 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 在 `info` 命令的 JSON 输出中支持 `--set` 参数。（*由 Stefan Fercot 贡献，David Steele 审核，Anton Kurochkin 建议。*）
+
   指定 `set` 后，`info` 的 JSON 输出现在包含此前仅文本输出显示的详情，例如错误列表和表空间列表。
 
   议题 [#1484](https://github.com/pgbackrest/pgbackrest/issues/1484); 拉取请求 [#1501](https://github.com/pgbackrest/pgbackrest/pull/1501); 提交 [`db75ffd`](https://github.com/pgbackrest/pgbackrest/commit/db75ffd27037d690a11eb02902f929250fe2bf5b)
 - 允许为对象存储配置上传分块大小。（*由 Stefan Fercot 审核，Anton Glushakov 建议。*）
+
   设置 `repo-storage-upload-chunk-size` 可调整 S3、GCS 或 Azure 每个上传分段的大小。更大的分段可能提高性能，但会占用更多内存。默认值保持不变。
 
   [`ff1188f`](https://github.com/pgbackrest/pgbackrest/commit/ff1188f92dfc9e8f6d4aeca8b71a9886f24f58b4) 允许在命令行帮助中使用 quote 标签。
 
   [`b05d31f`](https://github.com/pgbackrest/pgbackrest/commit/b05d31f531b55b747175cf94c963f95574c54d2b) 允许配置对象存储的上传分段大小。; 议题 [#1843](https://github.com/pgbackrest/pgbackrest/issues/1843); 拉取请求 [#1847](https://github.com/pgbackrest/pgbackrest/pull/1847)
 - 备份成功后更新 `archive.info` 的时间戳。（*由 Stefan Fercot 审核，Alex Richman 建议。*）
+
   `archive.info` 及其副本此前仅由 `stanza-create` 和 `stanza-upgrade` 写入，清理旧文件的对象存储生命周期策略可能将其删除。现在每次备份成功后都会更新它们的时间戳。
 
   议题 [#1853](https://github.com/pgbackrest/pgbackrest/issues/1853); 拉取请求 [#1855](https://github.com/pgbackrest/pgbackrest/pull/1855); 提交 [`3b5df1e`](https://github.com/pgbackrest/pgbackrest/commit/3b5df1e089234d425dd225f8c1976755dc947c8a)
-- 将备库时间线检查移至检查点之后执行。 (*审核：Stefan Fercot. 测试：Keith Fiske. 建议：Keith Fiske.*)
+- 将备库时间线检查移至检查点之后执行。（*审核：Stefan Fercot. 测试：Keith Fiske. 建议：Keith Fiske.*）
 
   检查备库是否位于预期时间线时，此前使用的是备份开始前的 `pg_control`。刚完成提升后，备库可能尚未将新时间线写入 `pg_control`，导致备份因 "standby is on timeline ... but expected ..." 而失败。现在在检查点之后执行检查。
 
@@ -1810,7 +1924,6 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档改进：**
 
 - 在 `pgbackrest.service` 中为 `kill` 添加绝对路径。（*由 Don Seiler 建议。*）
-
 
   `pgbackrest.service` 示例现在在 `ExecReload` 中使用 `/bin/kill`。旧版 systemd 要求绝对路径。
 
@@ -1827,10 +1940,12 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 支持 OpenSSL 3。（*由 Stephen Frost 审核。*）
+
   pgBackRest 现在可使用 OpenSSL 3 构建。弃用警告已被抑制，并会根据 OpenSSL 3 返回的错误码检测意外 EOF。
 
   拉取请求 [#1767](https://github.com/pgbackrest/pgbackrest/pull/1767); 提交 [`08242ee`](https://github.com/pgbackrest/pgbackrest/commit/08242ee6ac93b9eb9c05cc39e3db15bbafb9052c)
 - 列出路径内容时创建快照。（*由 John Morris、Stephen Frost 审核。*）
+
   不排序列出路径时，此前会边读取边处理条目。列举期间如果删除文件，某些文件系统可能跳过仍然存在的文件，导致路径无法删除。现在始终根据路径快照列举条目。
 
   [`61ca9b5`](https://github.com/pgbackrest/pgbackrest/commit/61ca9b58a000aa8789ef3267682519bdb15e8a6b) 在测试中用 TEST_STORAGE_LIST() 替代 hrnStorageInfoListCallback()。
@@ -1841,22 +1956,26 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
   [`75623d4`](https://github.com/pgbackrest/pgbackrest/commit/75623d4583bfdaccb3a19b935fd04d744b363923) 列举路径内容时创建快照。; 议题 [#1754](https://github.com/pgbackrest/pgbackrest/issues/1754); 拉取请求 [#1805](https://github.com/pgbackrest/pgbackrest/pull/1805)
 - 当恢复 `type=immediate` 时，强制设置 `target-timeline=current`。（*由 Stephen Frost 审核。*）
+
   在 PostgreSQL >= 12 上，默认目标时间线为 `latest`；如果无法从备份到达仓库中的最新时间线，恢复就可能失败。`type=immediate` 恢复不会切换时间线，因此现在将目标时间线设为 `current`。
 
   拉取请求 [#1814](https://github.com/pgbackrest/pgbackrest/pull/1814); 提交 [`364af16`](https://github.com/pgbackrest/pgbackrest/commit/364af1635d40431276cc6fd87d6ddd689b611e09)
 - 在 delta `restore` 期间，当文件大于预期时进行截断。（*由 Stephen Frost 审核。*）
+
   delta 恢复此前在文件大小与清单不同时，总会从仓库复制文件。现在先将较大的文件截断为清单中的大小，仅在校验和不匹配时才复制。只追加了内容的文件（如日志）不再需要复制。
 
   拉取请求 [#1758](https://github.com/pgbackrest/pgbackrest/pull/1758); 提交 [`7ec51e7`](https://github.com/pgbackrest/pgbackrest/commit/7ec51e7e6279ea576ad3b4b5c2ea1fc389d08ab5)
 - 当 `resume=n` 时，禁用增量 manifest 文件保存。（*由 Reid Thompson 贡献，David Steele 审核。*）
+
   备份期间会定期保存清单，以供续传使用。现在设置 `resume=n` 时会跳过这些保存操作。
 
   拉取请求 [#1760](https://github.com/pgbackrest/pgbackrest/pull/1760); 提交 [`60d70fa`](https://github.com/pgbackrest/pgbackrest/commit/60d70fa66fc3f709914f40dd088bac1b467001f2)
 - 在复制开始前将备份完成百分比置为零。（*由 Reid Thompson 贡献，David Steele 审核。*）
+
   运行中的备份此前只有在复制完第一个文件后才会报告进度。现在开始复制时就将进度设为零。
 
   拉取请求 [#1759](https://github.com/pgbackrest/pgbackrest/pull/1759); 提交 [`38ad283`](https://github.com/pgbackrest/pgbackrest/commit/38ad2838d553febae1b7fe0244d942dfaa9cf548)
-- 使用 S3 的 `IsTruncated` 标志判断列表是否需要继续。 (*审核：John Morris. 测试：Soulou. 建议：Christian Montagne.*)
+- 使用 S3 的 `IsTruncated` 标志判断列表是否需要继续。（*审核：John Morris. 测试：Soulou. 建议：Christian Montagne.*）
 
   新版 Scality 在列表未截断时会发送空的 `NextContinuationToken`，此前会导致无限循环。现在根据 `IsTruncated` 标志判断是否继续列举；如果列表已截断，但令牌缺失或为空，则报告错误。
 
@@ -1879,6 +1998,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **测试套件改进：**
 
 - 添加实验性 Meson 构建。（*由 Eli Schwartz、Sam Bassaly 审核。*）
+
   Meson 的语法比 autoconf/make 简单，性能也更好。它用于代码生成和测试构建，非调试构建会报错。打包维护者应继续使用 autoconf/make。
 
   [`2feaaea`](https://github.com/pgbackrest/pgbackrest/commit/2feaaeaac803d6c0193477b56dbeb622fd991156) 为被其他 C 文件包含的 C 文件添加 .inc 扩展名。
@@ -1893,9 +2013,9 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
   [`0eccbc8`](https://github.com/pgbackrest/pgbackrest/commit/0eccbc8bf47073ab8ec1f13fed9865d0bd7c3635) Meson 构建可在 0.45 版本上运行。
 - 允许向 `--test-path` 选项传递任意路径。（*由 Andrey Sokolov 贡献，David Steele 审核。*）
+
   拉取请求 [#1764](https://github.com/pgbackrest/pgbackrest/pull/1764); 提交 [`29b2a54`](https://github.com/pgbackrest/pgbackrest/commit/29b2a54fcc74457af5c63ffb505c5fbb24bb2ade)
 - 修复在定义 `DEBUG_EXEC_TIME` 但未定义 `DEBUG` 时的编译错误。（*由 Andrey Sokolov 贡献，David Steele 审核。*）
-
 
   未定义 `DEBUG` 时，使用开始时间的 `ASSERT()` 会展开为空，未使用的变量因此导致编译错误。该检查现在使用 `CHECK()`。
 
@@ -1910,12 +2030,13 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **漏洞修复：**
 
 - 修复 `FINALLY()` 中抛出的错误导致无限循环的问题。（*由 Stephen Frost 审核。*）
+
   在 `FINALLY()` 块内抛出错误后，此前会返回同一代码块，很可能再次抛出错误并陷入无限循环。现在 `FINALLY()` 只执行一次。
 
   [`9a271e9`](https://github.com/pgbackrest/pgbackrest/commit/9a271e925c6239fbd3577f9827c34940e7e43ae4) 修复从 FINALLY() 抛出错误导致无限循环的问题。; 拉取请求 [#1732](https://github.com/pgbackrest/pgbackrest/pull/1732)
 
   [`ef4c4ab`](https://github.com/pgbackrest/pgbackrest/commit/ef4c4ab8525f81c9ed22c7e82ed12096e81703c5) 使用变量而非函数跟踪 FINALLY() 状态。; 拉取请求 [#1744](https://github.com/pgbackrest/pgbackrest/pull/1744)
-- 除其他进程持有锁之外，对所有锁定失败情况报错。 (*审核：Reid Thompson. 测试：Geir Råness. 报告：Geir Råness.*)
+- 除其他进程持有锁之外，对所有锁定失败情况报错。（*审核：Reid Thompson. 测试：Geir Råness. 报告：Geir Råness.*）
 
   `archive-get`/`archive-push` 因权限等其他原因无法获取锁时，此前不会报错，也不会启动异步进程。用户只会收到笼统的失败信息，且没有异步日志。现在这些失败都会报错。
 
@@ -1924,6 +2045,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **新功能：**
 
 - 备份文件 bundling，改善对小文件的处理效果。（*由 Reid Thompson、Stefan Fercot、Chris Bandy 审核。*）
+
   文件打包将仓库中的小文件集中存储，可节省备份时间和空间，尤其适用于创建每个文件开销都较高的对象存储。通过 `repo-bundle` 启用，并用 `repo-bundle-size` 和 `repo-bundle-limit` 调整。恢复时会用一次读取获取包内相邻的文件。
 
   [`4d2fef1`](https://github.com/pgbackrest/pgbackrest/commit/4d2fef1c37d357965f0ffb9af0d7489f3be1371b) 移除重复的 restoreFile() 测试并改进覆盖率。
@@ -1976,16 +2098,19 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
   [`e6e1122`](https://github.com/pgbackrest/pgbackrest/commit/e6e1122dbcf5e667d683295f7e7e45de4bbf56bd) 在 manifestFileAdd() 中按引用传递文件。
 - 新增 `verify` 命令，用于验证仓库内容的有效性。（*由 Cynthia Shang、Reid Thompson 贡献，David Steele、Stefan Fercot 审核。*）
+
   `verify` 命令检查仓库中的备份和 WAL 是否有效。设置 `output=text` 可输出结果，设置 `verbose` 可在错误之外，同时列出验证成功的内容。
 
   拉取请求 [#1607](https://github.com/pgbackrest/pgbackrest/pull/1607); 提交 [`65d22e4`](https://github.com/pgbackrest/pgbackrest/commit/65d22e43257d46ff6523ffbdb3af59e30deeaea5)
 - 支持 PostgreSQL 15。（*由 Stefan Fercot 审核。*）
+
   PostgreSQL 15 移除了排他备份，重命名了备份开始和结束函数，并删除了 pgBackRest 已不再使用的 `pg_database.datlastsysoid`。
 
   [`692fe49`](https://github.com/pgbackrest/pgbackrest/commit/692fe496bdb5fa6dcffeb9f85b6188ceb1df707a) 移除对 pg_database.datlastsysoid 的依赖。; 拉取请求 [#1735](https://github.com/pgbackrest/pgbackrest/pull/1735)
 
   [`20782c8`](https://github.com/pgbackrest/pgbackrest/commit/20782c88bc8d0842d547bd5f4fecdb292e69d1f7) 支持 PostgreSQL 15。; 拉取请求 [#1736](https://github.com/pgbackrest/pgbackrest/pull/1736)
 - 在 `info` 输出中显示备份完成百分比。（*由 Reid Thompson 贡献，David Steele 审核。*）
+
   在备份运行的主机上，`info` 会显示运行中备份的完成百分比。JSON 输出将其表示为整数，即百分比乘以 100。
 
   [`d9088b2`](https://github.com/pgbackrest/pgbackrest/commit/d9088b2e2b16a89d29b967187a547976f96061fc) 在 info 输出中显示备份完成百分比。; 议题 [#1490](https://github.com/pgbackrest/pgbackrest/issues/1490); 拉取请求 [#1621](https://github.com/pgbackrest/pgbackrest/pull/1621)
@@ -1998,6 +2123,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
   [`9b2f10d`](https://github.com/pgbackrest/pgbackrest/commit/9b2f10dbb49a8b869cef2c419d9957ed4c550016) 重构锁代码。; 拉取请求 [#1643](https://github.com/pgbackrest/pgbackrest/pull/1643)
 - 为 `restore` 命令的 `--type=lsn` 自动选择备份。（*由 Reid Thompson 贡献，Stefan Fercot、David Steele 审核。*）
+
   使用 `type=lsn` 时，恢复现在会选择结束 LSN 不晚于 `target` LSN 的最新备份。
 
   [`08d9e26`](https://github.com/pgbackrest/pgbackrest/commit/08d9e269c6f03e7797584e90c53eb0743b787f60) 重构 restore 模块中的目标类型检查，使逻辑更清晰。
@@ -2006,6 +2132,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
   [`ea4d73f`](https://github.com/pgbackrest/pgbackrest/commit/ea4d73f375558c237fce696f20c19d1efef00bc1) 修正 command/restore 单元测试中 backup-lsn-stop 字段的顺序。
 - 当 `archive-mode-check` 被禁用时，抑制现有 WAL 的警告信息。（*由 Reid Thompson 贡献，David Steele 审核。*）
+
   设置 `archive-mode-check=n` 并从多台主机推送 WAL 时，归档中已存在校验和相同的 WAL 文件属于预期情况，不再记录警告。校验和不同时仍会报错。
 
   拉取请求 [#1711](https://github.com/pgbackrest/pgbackrest/pull/1711); 提交 [`aad7171`](https://github.com/pgbackrest/pgbackrest/commit/aad7171940afdb221a03825bee6eb2f1827289f1)
@@ -2018,34 +2145,42 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 允许在全量备份（full backup）后更改 `repo-hardlink` 选项。（*由 Reid Thompson 审核。*）
+
   更改 `repo-hardlink` 此前要求重新创建全量备份。现在可随时更改，例如为了使用文件打包而禁用它。
 
   拉取请求 [#1699](https://github.com/pgbackrest/pgbackrest/pull/1699); 提交 [`7afaac0`](https://github.com/pgbackrest/pgbackrest/commit/7afaac0a3d0e43e5598d1abf548559dbe6329363)
 - 提高 `backup` 和 `restore` 完成百分比日志的精度。（*由 Reid Thompson 贡献，David Steele 审核。*）
+
   日志中的完成百分比现在精确到小数点后两位，可更频繁地报告大规模备份和恢复的进度。
 
   拉取请求 [#1679](https://github.com/pgbackrest/pgbackrest/pull/1679); 提交 [`330e199`](https://github.com/pgbackrest/pgbackrest/commit/330e19900ee3415d920680cf6e6856bf5e8e9a69)
 - 改进 `repo-*` 命令的路径验证。（*由 Reid Thompson 贡献，David Steele 审核。*）
+
   路径不得包含 `//`，末尾的 `/` 会被移除，绝对路径必须位于仓库路径之内。
 
   [`5ae84d5`](https://github.com/pgbackrest/pgbackrest/commit/5ae84d5e474e95dcc00c174aa5111815a5a70ba5) 改进 repo-* 命令的路径验证。; 拉取请求 [#1697](https://github.com/pgbackrest/pgbackrest/pull/1697)
 
   [`19dd015`](https://github.com/pgbackrest/pgbackrest/commit/19dd015d589ed3efd31a2a238249a150fb3748c1) 修复 repo-* 命令改进后的路径验证中存在的问题。; 拉取请求 [#1751](https://github.com/pgbackrest/pgbackrest/pull/1751)
 - 改进 `stop` 命令以遵循 `stanza` 选项。（*由 Reid Thompson 贡献，David Steele 审核，ragaoua 建议。*）
+
   同时使用 `force` 和 `stanza` 的 `stop` 命令，现在仅终止持有该 stanza 锁的进程。此前会终止所有 stanza 的进程。
 
   议题 [#1608](https://github.com/pgbackrest/pgbackrest/issues/1608); 拉取请求 [#1676](https://github.com/pgbackrest/pgbackrest/pull/1676); 提交 [`f7ab002`](https://github.com/pgbackrest/pgbackrest/commit/f7ab002aa74dd2ca277123f7500018ae68a04c74)
 - 改进 `repo-azure-key` 无效时的错误信息。（*由 Reid Thompson 贡献，David Steele 审核，Seth Daniel 建议。*）
+
   设置 `repo-azure-key-type=shared` 时，现在会检查 `repo-azure-key` 是否为有效的 base64。
 
   议题 [#1686](https://github.com/pgbackrest/pgbackrest/issues/1686); 拉取请求 [#1688](https://github.com/pgbackrest/pgbackrest/pull/1688); 提交 [`7c9208b`](https://github.com/pgbackrest/pgbackrest/commit/7c9208ba856a71833dc7d8f1cf8cb2b4bb4b7414)
 - 在 `archive-get`/`archive-push` 异步出错时，添加检查日志的提示信息。（*由 Reid Thompson 审核。*）
+
   异步进程无法写入状态文件时，`archive-get`/`archive-push` 会超时并返回笼统的错误。现在错误会附带异步日志路径提示，该日志中包含实际错误。
 
   议题 [#1722](https://github.com/pgbackrest/pgbackrest/issues/1722); 提交 [`03c71aa`](https://github.com/pgbackrest/pgbackrest/commit/03c71aa606bc0dc89303b3907e7fcbd83ace79d6)
 - 新增 `ClockError`，用于处理意外的时钟偏差和时区变更。（*由 Greg Sabino Mullane、Stefan Fercot 审核，Greg Sabino Mullane 建议。*）
+
   拉取请求 [#1739](https://github.com/pgbackrest/pgbackrest/pull/1739); 提交 [`5f8c9cd`](https://github.com/pgbackrest/pgbackrest/commit/5f8c9cd66a1b39a47acaddfbc3cf443ae8057519)
 - 在错误信息中显示历史 manifest 文件前，去除其扩展名。（*由 Stefan Fercot 审核。*）
+
   新备份标签不晚于备份历史中的最新标签时，此前错误信息显示的是历史清单文件名，例如 `20220504-222042F_20220504-222141I.manifest.gz`。现在仅显示标签。
 
   拉取请求 [#1738](https://github.com/pgbackrest/pgbackrest/pull/1738); 提交 [`b6bfd9f`](https://github.com/pgbackrest/pgbackrest/commit/b6bfd9f99d74b1f5e631cf6462b68342589d2b80)
@@ -2061,8 +2196,10 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档漏洞修复：**
 
 - 修复用户指南中对 `stanza-update` 的错误引用。（*由 Abubakar Mohammed 修复，David Steele 审核。*）
+
   提交 [`3dd7960`](https://github.com/pgbackrest/pgbackrest/commit/3dd796045160c4d4dbf70ec2800ad483867629f1)
 - 修复配置参考中 `repo-gcs-key-type` 选项的示例。（*由 Reid Thompson 审核。*）
+
   示例此前为无效值 `none`，现在改为 `auto`。
 
   提交 [`166039c`](https://github.com/pgbackrest/pgbackrest/commit/166039c0da1875581a08d41ab8a44adf95fa6db1)
@@ -2075,19 +2212,21 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档改进：**
 
 - 简化文档中关于支持版本的描述。（*由 Stefan Fercot、Reid Thompson、Greg Sabino Mullane 审核。*）
+
   用户指南此前列出了 PostgreSQL 版本范围，使人误以为其他版本不受支持，例如 RHEL 上的 PostgreSQL 12。现在已移除这些范围，并在引言中说明指南覆盖哪些版本。
 
   拉取请求 [#1742](https://github.com/pgbackrest/pgbackrest/pull/1742); 提交 [`eefa0b1`](https://github.com/pgbackrest/pgbackrest/commit/eefa0b161a6a02b7843e18455443a4bce41cd4b9)
 - 添加选项类型描述。（*由 Reid Thompson 贡献，David Steele 审核。*）
+
   配置参考现在统一说明各选项类型，例如大小选项的单位，不再在每个选项下重复描述。
 
   拉取请求 [#1747](https://github.com/pgbackrest/pgbackrest/pull/1747); 提交 [`a913113`](https://github.com/pgbackrest/pgbackrest/commit/a913113fda5886ffd2ff136cdd52a3f469eca026)
 - 添加备份类型与恢复速度的常见问题解答。（*由 David Christensen 贡献，Reid Thompson 审核。*）
+
   新增 FAQ 说明：备份类型只影响备份过程，不决定恢复速度。
 
   拉取请求 [#1731](https://github.com/pgbackrest/pgbackrest/pull/1731); 提交 [`50d409a`](https://github.com/pgbackrest/pgbackrest/commit/50d409a812be577f2c296f3d6096cf97fab049ff)
 - 记录 Pull Request 所需的基础分支。（*由 David Christensen 贡献，Reid Thompson 审核。*）
-
 
   贡献指南现在明确说明，拉取请求必须基于 `integration` 分支。
 
@@ -2106,6 +2245,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **漏洞修复：**
 
 - 对 S3 批量文件删除中的错误进行重试。（*由 Reid Thompson 审核，Alex Richman 报告。*）
+
   批量删除失败会重试，但批次内单个文件的错误此前不会重试，可能导致 pgBackRest 在过期处理或删除无法续传的备份时终止。现在批次中失败的文件会单独删除，并使用常规 HTTP 重试机制。
 
   议题 [#1650](https://github.com/pgbackrest/pgbackrest/issues/1650); 拉取请求 [#1653](https://github.com/pgbackrest/pgbackrest/pull/1653); 提交 [`551e5bc`](https://github.com/pgbackrest/pgbackrest/commit/551e5bc6f67c91cf1e11da0cefe24f9650353adc)
@@ -2117,12 +2257,13 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **新功能：**
 
-- 新增使用 KMS 的 AWS S3 服务端加密支持。 (*贡献：Christoph Berg. 审核：David Steele. 测试：Tharindu Amila.*)
+- 新增使用 KMS 的 AWS S3 服务端加密支持。（*贡献：Christoph Berg. 审核：David Steele. 测试：Tharindu Amila.*）
 
   设置 `repo-s3-kms-key-id` 可使用 AWS KMS 管理的密钥加密对象。
 
   议题 [#1430](https://github.com/pgbackrest/pgbackrest/issues/1430); 拉取请求 [#1567](https://github.com/pgbackrest/pgbackrest/pull/1567); 提交 [`3097acd`](https://github.com/pgbackrest/pgbackrest/commit/3097acd73a21b630aa5352be57a82b031930f96b)
 - 新增 `archive-missing-retry` 选项。（*由 Stefan Fercot 审核。*）
+
   默认情况下，`archive-get` 会重试此前已报告缺失的 WAL 段，从而忽略上一次恢复留在 spool 路径中的缺失通知。设置 `archive-missing-retry=n` 后，即使仍在归档 WAL，PostgreSQL 也能检测归档结束并转为流复制。此时必须确保恢复开始时 spool 路径为空。
 
   拉取请求 [#1642](https://github.com/pgbackrest/pgbackrest/pull/1642); 提交 [`10038db`](https://github.com/pgbackrest/pgbackrest/commit/10038db9c9f2b4753c3821e0b246fa8626527184)
@@ -2135,6 +2276,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 在 `backup` 期间页面验证失败时进行重试。（*由 Stephen Frost、David Christensen 审核。*）
+
   页面校验和验证失败后，现在会重新读取该页；只有页面未改变时才报告错误。发生变化说明 PostgreSQL 正在写入，WAL 中会包含完整页面镜像。对零页面的检查也改为验证全部内容为零，不再只检查 `pd_upper` 字段。
 
   [`b489707`](https://github.com/pgbackrest/pgbackrest/commit/b4897077937ee4571ba719276a44d5db0a75510e) 移动 command/backup 模块中的 command/backup-common 测试。
@@ -2142,20 +2284,23 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
   [`9eec98c`](https://github.com/pgbackrest/pgbackrest/commit/9eec98c61302121134d2067326dbd2cd0f2f0b9c) 备份期间页面校验和验证失败时重试。; 议题 [#952](https://github.com/pgbackrest/pgbackrest/issues/952); 拉取请求 [#1667](https://github.com/pgbackrest/pgbackrest/pull/1667)
 
   [`53f1b25`](https://github.com/pgbackrest/pgbackrest/commit/53f1b2520434221c01caf92e052403a28c455c1b) 改进零页面验证。; 议题 [#952](https://github.com/pgbackrest/pgbackrest/issues/952); 拉取请求 [#1669](https://github.com/pgbackrest/pgbackrest/pull/1669)
-- 处理未能优雅关闭连接的 TLS 服务端。 (*审核：David Christensen, Stephen Frost. 测试：Rémi Vidier.*)
+- 处理未能优雅关闭连接的 TLS 服务端。（*审核：David Christensen, Stephen Frost. 测试：Rémi Vidier.*）
 
   某些服务器会直接关闭套接字，而非关闭 TLS 连接。如果响应没有内容长度或分块编码，且其内容能够解析，现在会将套接字关闭视为 EOF。这些服务器从 v2.35 起曾无法正常使用。
 
   议题 [#1638](https://github.com/pgbackrest/pgbackrest/issues/1638); 拉取请求 [#1677](https://github.com/pgbackrest/pgbackrest/pull/1677); 提交 [`59a5373`](https://github.com/pgbackrest/pgbackrest/commit/59a5373cf85e4ad0057b592bfe855495384dfcbd)
 - 在 `info` 命令输出中添加备份的 LSN 信息。（*由 Stefan Fercot 贡献，David Steele 审核。*）
+
   指定 `set` 时以及 JSON 输出中，会显示备份的开始和结束 LSN，可用于基于 LSN 的时间点恢复。
 
   拉取请求 [#1610](https://github.com/pgbackrest/pgbackrest/pull/1610); 提交 [`d866dd5`](https://github.com/pgbackrest/pgbackrest/commit/d866dd5c297dc046581134a108032cf9694cae0e)
 - 自动去除 `repo-ls` 路径末尾的斜杠。（*由 David Christensen 贡献，David Steele 审核。*）
+
   对某些仓库存储类型，路径末尾带斜杠会使 `repo-ls` 不显示任何内容。
 
   拉取请求 [#1673](https://github.com/pgbackrest/pgbackrest/pull/1673); 提交 [`6320712`](https://github.com/pgbackrest/pgbackrest/commit/632071232344a1160ef932d6e0d65eb3149ed226)
 - 不重试致命错误。（*由 Reid Thompson 审核。*）
+
   重试致命错误，尤其是内存不足错误，可能导致卡死。现在会直接报告断言和内存错误，不再重试。
 
   [`8573a2d`](https://github.com/pgbackrest/pgbackrest/commit/8573a2df14d0bfd5578333b68147cc12c93c6f96) 改进 protocolClientFree() 的协议模块错误测试。
@@ -2164,6 +2309,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
   [`8046f06`](https://github.com/pgbackrest/pgbackrest/commit/8046f0630715015d5adcced570c54e9a183c0e73) 不重试致命错误。; 拉取请求 [#1658](https://github.com/pgbackrest/pgbackrest/pull/1658)
 - 移除对 PostgreSQL `8.3`/`8.4` 的支持。（*由 Reid Thompson、Stefan Fercot 审核。*）
+
   没有证据表明这些版本仍在使用，而继续支持会占用开发和测试时间。若要备份这些版本或从中迁移，请使用旧版 pgBackRest。
 
   拉取请求 [#1611](https://github.com/pgbackrest/pgbackrest/pull/1611); 提交 [`bb4b30d`](https://github.com/pgbackrest/pgbackrest/commit/bb4b30ddd3f80c246c565eb4769efc82b9509648)
@@ -2176,10 +2322,12 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档漏洞修复：**
 
 - 将 TLS 文档中的 `repo` 选项移至 `global` 部分。（*由 Anton Kurochkin 报告。*）
+
   用户指南此前在 stanza 配置节中设置这些选项，虽然在某些情况下可行，却不是最佳实践。
 
   提交 [`53de3e3`](https://github.com/pgbackrest/pgbackrest/commit/53de3e3aeb71f8209f56167941df35bbfcb7cdc9)
 - 从 stanza 命令中移除未使用的 `backup-standby` 选项。（*由 Stefan Fercot 报告。*）
+
   `stanza-create` 和 `stanza-upgrade` 的命令参考及帮助此前列出了 `backup-standby`，但实际并未使用它。
 
   提交 [`5cbb4a3`](https://github.com/pgbackrest/pgbackrest/commit/5cbb4a3e6b13598b90cae46fad28c31604f9f094)
@@ -2192,15 +2340,16 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档改进：**
 
 - 在 systemd 服务配置中添加存活检查。（*由 Yogesh Sharma 建议。*）
+
   `pgbackrest.service` 示例现在会在服务器启动后不久检查它是否仍在运行。此前即使服务器启动失败，也不会报告错误，而 systemd 只是在后台重试。
 
   提交 [`f1bdf3e`](https://github.com/pgbackrest/pgbackrest/commit/f1bdf3e04b07dc9a2eaa1fdbe5278cc18371e868)
 - 添加解释 WAL 归档后缀的常见问题解答。（*由 Stefan Fercot 贡献，David Steele 审核。*）
+
   仓库中 WAL 文件的后缀是其 SHA1 校验和，用于验证文件，不能省略。
 
   议题 [#1485](https://github.com/pgbackrest/pgbackrest/issues/1485); 议题 [#1663](https://github.com/pgbackrest/pgbackrest/issues/1663); 拉取请求 [#1664](https://github.com/pgbackrest/pgbackrest/pull/1664); 提交 [`98d525d`](https://github.com/pgbackrest/pgbackrest/commit/98d525dba43ba259ff7989746b8e5be3382c189d)
 - 说明复制槽不会在恢复时被还原。（*由 Reid Thompson 贡献，David Steele、Stefan Fercot 审核，Christophe Courtois 建议。*）
-
 
   议题 [#1585](https://github.com/pgbackrest/pgbackrest/issues/1585); 拉取请求 [#1601](https://github.com/pgbackrest/pgbackrest/pull/1601); 提交 [`a82f017`](https://github.com/pgbackrest/pgbackrest/commit/a82f0179cdd5742e5c5b1e0bdfd23166753fdb38)
 
@@ -2215,6 +2364,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **漏洞修复：**
 
 - 修复 `restore` delta 链接映射中路径/文件已存在时的问题。（*由 Reid Thompson 审核，Younes Alhroub 报告。*）
+
   使用 `link-map` 或 `link-all` 将已存在的路径或文件映射为链接时，delta 恢复此前会保留原有路径或文件。现在会将其替换为链接。
 
   议题 [#1588](https://github.com/pgbackrest/pgbackrest/issues/1588); 拉取请求 [#1589](https://github.com/pgbackrest/pgbackrest/pull/1589); 提交 [`a73fe4e`](https://github.com/pgbackrest/pgbackrest/commit/a73fe4eb966f9685f6e4179c397a10c1e7f15f19)
@@ -2226,7 +2376,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **新功能：**
 
-- 新增 TLS 服务端。 (*审核：Stephen Frost, Reid Thompson. 测试：Andrew L'Ecuyer.*)
+- 新增 TLS 服务端。（*审核：Stephen Frost, Reid Thompson. 测试：Andrew L'Ecuyer.*）
 
   `server` 命令启动 TLS 服务器，可代替 SSH 访问仓库主机和 PostgreSQL 主机。在客户端设置 `repo-host-type=tls` 或 `pg-host-type=tls`，并通过 `tls-server-*` 选项配置证书和客户端授权。`SIGHUP` 重新加载配置，`SIGTERM` 停止服务器。
 
@@ -2256,33 +2406,40 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 在备份开始后立即检查归档。（*由 Reid Thompson、David Christensen 审核。*）
+
   此前 WAL 归档不工作时，只有在复制完所有文件后，备份才会失败。现在在备份开始后立即检查归档。在空闲系统上，会创建恢复点以切换 WAL 段。
 
   议题 [#152](https://github.com/pgbackrest/pgbackrest/issues/152); 拉取请求 [#1570](https://github.com/pgbackrest/pgbackrest/pull/1570); 提交 [`1f14f45`](https://github.com/pgbackrest/pgbackrest/commit/1f14f45dfb0d1677a695719381cbd5a8a3c6c986)
 - 为备份添加时间线和检查点检查。（*由 Stefan Fercot、Reid Thompson 审核。*）
+
   备份现在会检查 `pg_control` 中的检查点和时间线是否对应备份开始时的状态，并确认备库正在跟随主库，即处于同一时间线且其检查点不晚于备份检查点。
 
   拉取请求 [#1581](https://github.com/pgbackrest/pgbackrest/pull/1581); 提交 [`49145d7`](https://github.com/pgbackrest/pgbackrest/commit/49145d72bac16498cdbf5eeb3cd6128ea0be0667)
 - 在备份期间检查集群是否存活且配置正确。（*由 Stefan Fercot 审核。*）
+
   集群停止或备库提升时，备份现在会立即失败。此前只有到备份结束时才会检测到主库停止，也不会检测备库提升。
 
   拉取请求 [#1584](https://github.com/pgbackrest/pgbackrest/pull/1584); 提交 [`bd2ba80`](https://github.com/pgbackrest/pgbackrest/commit/bd2ba802db11c505ec69943fa81b2b379073fbf4)
 - 当 `restore` 无法找到匹配时间目标的备份时，报错退出。（*由 Reid Thompson、Douglas J Hunley 审核，Douglas J Hunley 建议。*）
+
   此前这只是一条容易被忽略的警告，用户可能花费大量时间恢复一个无法到达目标的备份。
 
   议题 [#1582](https://github.com/pgbackrest/pgbackrest/issues/1582); 拉取请求 [#1586](https://github.com/pgbackrest/pgbackrest/pull/1586); 提交 [`be4ac39`](https://github.com/pgbackrest/pgbackrest/commit/be4ac3923cb77873da298a30aca5d847b3c635af)
 - 解析 S3/Azure 端点中的协议/端口。（*由 Reid Thompson 贡献，David Steele 审核。*）
+
   `repo-s3-endpoint`、`repo-azure-endpoint` 和 `repo-storage-host` 现在可以包含协议和端口，例如 `https://host:9000`。
 
   议题 [#1560](https://github.com/pgbackrest/pgbackrest/issues/1560); 拉取请求 [#1591](https://github.com/pgbackrest/pgbackrest/pull/1591); 提交 [`6a12458`](https://github.com/pgbackrest/pgbackrest/commit/6a12458440168f13cb05d70f36ea54b1860e390c)
-- 当 `checkpoint_timeout` 超过 `db-timeout` 时发出警告。 (*贡献：Stefan Fercot. 审核：David Steele.*)
+- 当 `checkpoint_timeout` 超过 `db-timeout` 时发出警告。（*贡献：Stefan Fercot. 审核：David Steele.*）
 
   设置 `start-fast=n` 时，如果 `checkpoint_timeout` 大于 `db-timeout`，备份可能在等待检查点时超时。现在会对这种情况发出警告。
 
   拉取请求 [#1564](https://github.com/pgbackrest/pgbackrest/pull/1564); 提交 [`6723305`](https://github.com/pgbackrest/pgbackrest/commit/672330593789f07aaad90bbafcd2597cbc602686)
 - 在 HTTP 错误输出中添加请求方法（verb）。（*由 Christoph Berg 贡献，David Steele 审核。*）
+
   拉取请求 [#1566](https://github.com/pgbackrest/pgbackrest/pull/1566); 提交 [`c38e2d3`](https://github.com/pgbackrest/pgbackrest/commit/c38e2d31709804eb4b9125a15ad84c8fc813f366)
 - 允许布尔命令行选项使用 y/n 作为参数。（*由 Reid Thompson 贡献，David Steele 审核。*）
+
   拉取请求 [#1571](https://github.com/pgbackrest/pgbackrest/pull/1571); 提交 [`1a0560d`](https://github.com/pgbackrest/pgbackrest/commit/1a0560d363d28737befb8c222647783d4fc2ca29)
 - 使备份大小日志与 `info` 命令输出完全一致。（*由 Reid Thompson 贡献，David Steele 审核，Mahomed Hussein 建议。*）
 
@@ -2301,13 +2458,14 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档改进：**
 
 - 以合适的单位显示大小选项的默认值和允许范围。（*由 Reid Thompson 审核。*）
+
   [`cff961e`](https://github.com/pgbackrest/pgbackrest/commit/cff961ede7e41fa8035ffe7451a22eb5ea0e46c1) 集中处理配置呈现期间构建值列表的逻辑。
 
   [`038abaa`](https://github.com/pgbackrest/pgbackrest/commit/038abaa71d816cc87b382bd81d3df62ddec9455a) 使用合适的单位显示大小选项的默认值和允许值。; 拉取请求 [#1557](https://github.com/pgbackrest/pgbackrest/pull/1557)
 - 修复 `tablespace-map-all` 选项的错别字并改进文档。（*由 Reid Thompson 审核，Reid Thompson 建议。*）
+
   提交 [`df89eff`](https://github.com/pgbackrest/pgbackrest/commit/df89eff429e9b8fbc68d9e9895badf9719fd31d2)
 - 移除关于未来多仓库支持的过时说明。（*由 David Christensen 建议。*）
-
 
   文档此前声称仅允许一个仓库，但从 v2.33 起就已支持多仓库。
 
@@ -2324,6 +2482,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **漏洞修复：**
 
 - 允许将 `global` 用作 stanza 名称前缀。（*由 Stefan Fercot 审核，Younes Alhroub 报告。*）
+
   以 `global` 开头的 stanza 名称（例如 `global_stanza`）此前会被拒绝，因为配置解析器将其误认为全局配置节。
 
   议题 [#1524](https://github.com/pgbackrest/pgbackrest/issues/1524); 拉取请求 [#1525](https://github.com/pgbackrest/pgbackrest/pull/1525); 提交 [`498902e`](https://github.com/pgbackrest/pgbackrest/commit/498902e885c9d7a44648ccc01b20454094d5b742)
@@ -2336,6 +2495,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 允许 `link-map` 选项创建新链接。（*由 Don Seiler、Stefan Fercot、Chris Bandy 审核，Don Seiler 建议。*）
+
   `link-map` 此前只能重新映射备份中已有的链接。现在可以为备份中的任意路径或文件创建新链接。
 
   [`d89a677`](https://github.com/pgbackrest/pgbackrest/commit/d89a67776cfbb7b3047dbe297cc0c768e5c670e8) 重构 command/restore 单元中的 restoreManifestMap() 测试。
@@ -2344,12 +2504,13 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
   [`68c5f3e`](https://github.com/pgbackrest/pgbackrest/commit/68c5f3eaf18fc9bd10fde15a323890bcdcbf4534) 允许 link-map 选项创建新链接。; 议题 [#1409](https://github.com/pgbackrest/pgbackrest/issues/1409); 拉取请求 [#1520](https://github.com/pgbackrest/pgbackrest/pull/1520)
 - 将 `pg`/`repo` 选项允许的最大索引值提升至 256。（*由 Cynthia Shang 审核。*）
+
   `pg` 选项的最大索引此前为 8，`repo` 选项为 4。现在均为 256，例如 `pg256-path`。
 
   [`02b06aa`](https://github.com/pgbackrest/pgbackrest/commit/02b06aa4957cf3fe64ceb7a44cc1893bff12fe99) 将 pg/repo 选项允许的最大索引提高到 256。; 拉取请求 [#1481](https://github.com/pgbackrest/pgbackrest/pull/1481)
 
   [`71047a9`](https://github.com/pgbackrest/pgbackrest/commit/71047a9d6d1eea71b3fbd430983541a54049cc69) 使用 strncpy() 限制复制到 optionName 的字符数。
-- 为 AWS S3 添加 `WebIdentity` 认证支持。 (*审核：James Callahan, Reid Thompson, Andrew L'Ecuyer. 测试：Benjamin Blattberg.*)
+- 为 AWS S3 添加 `WebIdentity` 认证支持。（*审核：James Callahan, Reid Thompson, Andrew L'Ecuyer. 测试：Benjamin Blattberg.*）
 
   设置 `repo-s3-key-type=web-id` 可在 EKS 环境中自动获取凭据。
 
@@ -2364,14 +2525,17 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
   提交 [`096829b`](https://github.com/pgbackrest/pgbackrest/commit/096829b3b257444162417662612e80d8cb2ac6ec)
 - 在 `backup.info` 中报告备份文件验证错误。（*由 Stefan Fercot 贡献，David Steele 审核。*）
+
   备份中发现的错误（例如无效页面校验和）此前仅在 `info` 指定 `set` 时显示。现在通过 `backup.info` 中的标志，在文本和 JSON 输出中表明备份包含错误。查看详情仍需指定 `set`。
 
   议题 [#1484](https://github.com/pgbackrest/pgbackrest/issues/1484); 拉取请求 [#1508](https://github.com/pgbackrest/pgbackrest/pull/1508); 提交 [`34f7873`](https://github.com/pgbackrest/pgbackrest/commit/34f78734325743b4e34cb39224852e6debf49750)
 - 在在线备份恢复日志中添加恢复开始时间。（*由 Tom Swartz、Stefan Fercot 审核，Tom Swartz 建议。*）
+
   恢复现在会记录后续恢复重放的起始时间，便于判断需要重放多少 WAL。
 
   议题 [#1507](https://github.com/pgbackrest/pgbackrest/issues/1507); 拉取请求 [#1518](https://github.com/pgbackrest/pgbackrest/pull/1518); 提交 [`9e79f0e`](https://github.com/pgbackrest/pgbackrest/commit/9e79f0e64b661e944ce2b3897c366feea1544ac2)
 - 本地任务失败时，同时报告原始错误和重试信息。（*由 Stefan Fercot 审核。*）
+
   本地任务重试后仍失败时，现在会先报告原始错误及其堆栈跟踪，再列出重试错误。此前仅报告最后一个错误，而它往往只是协议失步等连锁失败。
 
   [`136d309`](https://github.com/pgbackrest/pgbackrest/commit/136d309dd4bc1ada9f3d775f036b62292fda390b) 允许为 errorInternalThrow() 指定堆栈跟踪。
@@ -2380,11 +2544,11 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
   [`6af827c`](https://github.com/pgbackrest/pgbackrest/commit/6af827cbb1e78cd4c5d649ed4cb24c49a7204b8f) 本地任务失败时报告原始错误及重试情况。; 拉取请求 [#1521](https://github.com/pgbackrest/pgbackrest/pull/1521)
 - 在 `info` 文本输出中，将页面校验和错误重命名为错误列表。（*由 Stefan Fercot 审核。*）
+
   `info` 文本输出中的标签现在为 "error list"，不再是 "page checksum error"。文件也可能存在对齐错误，而非页面校验和错误。
 
   拉取请求 [#1519](https://github.com/pgbackrest/pgbackrest/pull/1519); 提交 [`9346895`](https://github.com/pgbackrest/pgbackrest/commit/9346895f5b61627b50d431f09447e08d8a50caa8)
 - 在备库重放超时信息中添加提示。（*由 Cynthia Shang、Stefan Fercot 审核，Leigh Downs 建议。*）
-
 
   等待备库重放超时时，现在会提示检查复制是否运行，或禁用 `backup-standby` 改为从主库备份。
 
@@ -2392,7 +2556,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **文档漏洞修复：**
 
-- 修复用户指南中的错误主机名。 (*修复：Reid Thompson. 审核：David Steele.*)
+- 修复用户指南中的错误主机名。（*修复：Reid Thompson. 审核：David Steele.*）
 
   复制配置此前在 `pg_hba.conf` 中使用了 pg-primary 的 IP 地址，而非 pg-standby 的 IP 地址。
 
@@ -2422,7 +2586,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **漏洞修复：**
 
-- 检测 S3 多部分上传完成阶段的错误。 (*审核：Cynthia Shang. 测试：Marco Montagna. 报告：Marco Montagna, Lev Kokotov, Anderson A. Mallmann.*)
+- 检测 S3 多部分上传完成阶段的错误。（*审核：Cynthia Shang. 测试：Marco Montagna. 报告：Marco Montagna, Lev Kokotov, Anderson A. Mallmann.*）
 
   即使 S3 返回 HTTP 成功状态，完成分段上传仍可能失败。现在将不含 `ETag` 的响应视为失败，并重试任务。
 
@@ -2430,6 +2594,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
   [`25508a4`](https://github.com/pgbackrest/pgbackrest/commit/25508a48e0d3b0a3eabc6d1fe858b9c3dc12dc86) 补充 8e187cdb 遗漏的贡献者。
 - 修复循环符号链接的检测问题。（*由 Stefan Fercot 审核，Rohit Raveendran 报告。*）
+
   此前会先跟随链接，再进行检查，循环链接因此可能使清单构建陷入无限递归并崩溃。
 
   议题 [#1447](https://github.com/pgbackrest/pgbackrest/issues/1447); 拉取请求 [#1452](https://github.com/pgbackrest/pgbackrest/pull/1452); 提交 [`43b8746`](https://github.com/pgbackrest/pgbackrest/commit/43b874628c86ec4fe297dbd5cab5bd3f62b8639b)
@@ -2442,6 +2607,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 新增二进制协议。（*由 Cynthia Shang 审核。*）
+
   本地和远程进程现在使用二进制 pack 格式通信，不再使用 JSON。pack 更紧凑，生成和解析更快，且具有严格的类型。每条消息集中写入，降低了错误使协议处于异常状态的可能性，消息也不再有大小限制。
 
   [`6a1c033`](https://github.com/pgbackrest/pgbackrest/commit/6a1c0337ddee9900dda58b7d2fa74d82c0586ed2) 二进制协议。; 拉取请求 [#1424](https://github.com/pgbackrest/pgbackrest/pull/1424)
@@ -2452,18 +2618,22 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
   [`4fb6384`](https://github.com/pgbackrest/pgbackrest/commit/4fb6384f10f6cd26c422ab9b24feb5ae0ebeeee9) 修复 6a1c0337 中二进制协议引入的其他内存泄漏。
 - 在 `restore` 时自动创建数据目录。（*由 Stefan Fercot 贡献，David Steele 审核，Chris Bandy 建议。*）
+
   从 Perl 迁移过来的一项检查，阻止了恢复过程创建数据目录。
 
   议题 [#1445](https://github.com/pgbackrest/pgbackrest/issues/1445); 拉取请求 [#1454](https://github.com/pgbackrest/pgbackrest/pull/1454); 提交 [`056a307`](https://github.com/pgbackrest/pgbackrest/commit/056a3070e0dba299389c7b5049878d40dd91ec9a)
 - 允许 `restore` 使用 `--type=lsn`。（*由 Stefan Fercot 贡献，Cynthia Shang 审核，James Coleman 建议。*）
+
   在 PostgreSQL >= 10 上，设置 `type=lsn` 并在 `target` 中指定 LSN，即可恢复至该 LSN。
 
   议题 [#1339](https://github.com/pgbackrest/pgbackrest/issues/1339); 拉取请求 [#1462](https://github.com/pgbackrest/pgbackrest/pull/1462); 提交 [`563d117`](https://github.com/pgbackrest/pgbackrest/commit/563d117967ab9770f9f646c6186d0bc37121611f)
 - 将 `backup`/`restore` 已复制文件的日志级别更改为 `detail`。（*由 Stefan Fercot 审核，Jens Wilke 建议。*）
+
   此变更减少了 `info` 日志级别的输出噪声。将日志级别设为 `detail`，可查看每个已复制文件。
 
   议题 [#1277](https://github.com/pgbackrest/pgbackrest/issues/1277); 拉取请求 [#1455](https://github.com/pgbackrest/pgbackrest/pull/1455); 提交 [`849ab34`](https://github.com/pgbackrest/pgbackrest/commit/849ab343aa10d66fbbd27cad407eff981c186d06)
 - 等待检查点 LSN 赶上重放 LSN 时改为循环等待。（*由 Stefan Fercot 贡献，David Steele 审核，Fatih Mencutekin 建议。*）
+
   在备库上，检查点 LSN 在 `pg_control` 更新前可能略落后于重放 LSN。现在备份会持续检查，而非立即失败。
 
   议题 [#1450](https://github.com/pgbackrest/pgbackrest/issues/1450); 拉取请求 [#1460](https://github.com/pgbackrest/pgbackrest/pull/1460); 提交 [`8fac1ac`](https://github.com/pgbackrest/pgbackrest/commit/8fac1ac50d28557d162fbb251fbbdcc3c9fb950c)
@@ -2484,16 +2654,19 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档改进：**
 
 - 更新贡献文档并添加 Pull Request 模板。（*由 Cynthia Shang 贡献，David Steele 审核。*）
+
   贡献指南现在有目录，并增加了解读测试输出和提交拉取请求的章节。GitHub 现在会为新拉取请求显示模板。
 
   [`e3d05e2`](https://github.com/pgbackrest/pgbackrest/commit/e3d05e2b4aa80149219b6d49a3136b34fa268127) 更新贡献文档并添加拉取请求模板。; 拉取请求 [#1469](https://github.com/pgbackrest/pgbackrest/pull/1469)
 
   [`71b654f`](https://github.com/pgbackrest/pgbackrest/commit/71b654fc29497319862fe01c3917bbc353cc6dd9) 修复链接并更新子进程示例。; 拉取请求 [#1487](https://github.com/pgbackrest/pgbackrest/pull/1487)
 - 在用户指南中重新整理备份文档。（*由 Cynthia Shang 审核。*）
+
   “快速启动选项”和“归档超时”章节移至“快速入门 - 执行备份”。仅适用于 PostgreSQL <= 9.6 的“自动停止选项”章节已移除。
 
   拉取请求 [#1488](https://github.com/pgbackrest/pgbackrest/pull/1488); 提交 [`6ab18dc`](https://github.com/pgbackrest/pgbackrest/commit/6ab18dc0fa42885aea8eb9405ab0a943c2d49a71)
 - 在命令参考中阐明 `restore` 的 `--type` 行为。（*由 Cynthia Shang 贡献，David Steele 审核。*）
+
   参考文档现在明确说明：目标早于最新备份且 `type` 不是 `time` 时，必须指定 `set`。
 
   提交 [`a6691c6`](https://github.com/pgbackrest/pgbackrest/commit/a6691c6f615f90195aeb6c1c6657a6afd79a10d3)
@@ -2504,15 +2677,16 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **测试套件改进：**
 
 - 添加测试路径在仓库路径内的检查。（*由 Greg Sabino Mullane 审核，Greg Sabino Mullane 建议。*）
+
   测试路径位于仓库路径内时，由于仓库会被复制到测试路径，会导致奇怪的失败。`test.pl` 现在会对此报错。
 
   议题 [#1472](https://github.com/pgbackrest/pgbackrest/issues/1472); 拉取请求 [#1474](https://github.com/pgbackrest/pgbackrest/pull/1474); 提交 [`e32f9e1`](https://github.com/pgbackrest/pgbackrest/commit/e32f9e146b11389e3d16feba9665360b73737d66)
 - 添加 CodeQL 静态代码分析。（*由 Cynthia Shang 审核。*）
+
   CodeQL 现在在 CI 中运行。它发现的问题已修复，例如将 `gmtime()`/`localtime()` 替换为 `gmtime_r()`/`localtime_r()`。
 
   拉取请求 [#1457](https://github.com/pgbackrest/pgbackrest/pull/1457); 提交 [`3c8819e`](https://github.com/pgbackrest/pgbackrest/commit/3c8819e10f9eff89195566e7e02f349373f5c4c7)
 - 更新测试以使用标准模式。（*由 Cynthia Shang 贡献，David Steele 审核。*）
-
 
   [`3f9fbc3`](https://github.com/pgbackrest/pgbackrest/commit/3f9fbc3c24eab48e7ae2871484ea01273049e601) 更新 command/expire 测试，使用标准模式。; 拉取请求 [#1420](https://github.com/pgbackrest/pgbackrest/pull/1420)
 
@@ -2568,17 +2742,18 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **漏洞修复：**
 
-- 修复先前 `restore` 遗留的缓冲区文件问题。 (*审核：Cynthia Shang, Stefan Fercot. 测试：Floris van Nee. 报告：Floris van Nee.*)
+- 修复先前 `restore` 遗留的缓冲区文件问题。（*审核：Cynthia Shang, Stefan Fercot. 测试：Floris van Nee. 报告：Floris van Nee.*）
 
   前一次恢复留在 spool 路径中的通知，可能使 `archive-get` 将 WAL 段报告为缺失。现在如果在首次检查时发现该通知，会将其移除并再次运行异步进程。如果异步进程没有响应，会报告错误，而非报告 WAL 段缺失。
 
   议题 [#1357](https://github.com/pgbackrest/pgbackrest/issues/1357); 拉取请求 [#1371](https://github.com/pgbackrest/pgbackrest/pull/1371); 提交 [`f45e76f`](https://github.com/pgbackrest/pgbackrest/commit/f45e76fa2e8ce0f62317a74fdd51083d52659cd5)
-- 修复检查大量表空间链接时的问题。 (*审核：Cynthia Shang. 测试：Avinash Vallarapu. 报告：Avinash Vallarapu.*)
+- 修复检查大量表空间链接时的问题。（*审核：Cynthia Shang. 测试：Avinash Vallarapu. 报告：Avinash Vallarapu.*）
 
   表空间较多时，链接检查会消耗大量内存并可能崩溃。新的检查速度快得多，内存占用大幅降低，还能检测重复的文件链接。
 
   议题 [#1354](https://github.com/pgbackrest/pgbackrest/issues/1354); 拉取请求 [#1356](https://github.com/pgbackrest/pgbackrest/pull/1356); 提交 [`eba013b`](https://github.com/pgbackrest/pgbackrest/commit/eba013b49b850e53d59795ac6358fcb3381048a3)
 - 及时释放不再需要的远程连接，避免其在 `restore` 期间超时。（*由 Cynthia Shang 审核，Francisco Miguel Biete Banon 报告。*）
+
   此前远程连接会在整个恢复期间保持，可能超时，从而在长时间恢复结束时记录一条无害却令人困惑的警告。现在加载完清单后就会关闭这些连接。
 
   议题 [#1368](https://github.com/pgbackrest/pgbackrest/issues/1368); 拉取请求 [#1374](https://github.com/pgbackrest/pgbackrest/pull/1374); 提交 [`06fa185`](https://github.com/pgbackrest/pgbackrest/commit/06fa18582a405417c8ab4ba667cb01a13a5c3103)
@@ -2591,10 +2766,11 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **新功能：**
 
 - 新增 PostgreSQL 14 支持。（*由 Cynthia Shang 审核。*）
+
   相较于 PostgreSQL 13，支持 PostgreSQL 14 不需要修改代码。现在 PostgreSQL 在 beta/rc 阶段更改目录版本时，也无需发布新版 pgBackRest。
 
   拉取请求 [#1413](https://github.com/pgbackrest/pgbackrest/pull/1413); 提交 [`2452c4d`](https://github.com/pgbackrest/pgbackrest/commit/2452c4d5a4c230b8e3c33d3bddf69e56dfbec284)
-- 为 GCE 实例添加自动 GCS 认证。 (*审核：Jan Wieck. 测试：Daniel Farina.*)
+- 为 GCE 实例添加自动 GCS 认证。（*审核：Jan Wieck. 测试：Daniel Farina.*）
 
   设置 `repo-gcs-key-type=auto` 可在 GCE 实例上从实例元数据获取认证令牌。
 
@@ -2604,6 +2780,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
   [`9af0331`](https://github.com/pgbackrest/pgbackrest/commit/9af033194abc4b1cd3f06c3a97fff71c966c3827) 为 GCE 实例添加自动 GCS 认证。; 拉取请求 [#1395](https://github.com/pgbackrest/pgbackrest/pull/1395)
 - 新增 `repo-retention-history` 选项，用于过期备份历史记录。（*由 Stefan Fercot 贡献，Cynthia Shang、David Steele 审核。*）
+
   设置备份历史的保留天数。默认保留全部历史，仍在仓库中的备份历史永不过期。全量备份清单过期时，其差异和增量备份的清单也会过期。
 
   拉取请求 [#1389](https://github.com/pgbackrest/pgbackrest/pull/1389); 提交 [`5b332b2`](https://github.com/pgbackrest/pgbackrest/commit/5b332b22b508d896abb64fa6abe26c78c83a29bc)
@@ -2616,8 +2793,10 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 将归档过期日志从 `detail` 级别提升至 `info` 级别。（*由 Cynthia Shang 贡献，David Steele 审核。*）
+
   拉取请求 [#1416](https://github.com/pgbackrest/pgbackrest/pull/1416); 提交 [`aceb956`](https://github.com/pgbackrest/pgbackrest/commit/aceb956815a87f0c19ea171de25d2c3842a6d806)
 - 在 `restore` 时删除 stanza 归档缓冲（spool）路径。（*由 Cynthia Shang、Stefan Fercot 审核。*）
+
   spool 路径中的文件可能干扰新集群，例如旧的 `archive-push` 确认文件可能使新集群跳过 WAL 归档。
 
   议题 [#1357](https://github.com/pgbackrest/pgbackrest/issues/1357); 拉取请求 [#1386](https://github.com/pgbackrest/pgbackrest/pull/1386); 提交 [`320c6e1`](https://github.com/pgbackrest/pgbackrest/commit/320c6e1aad2cc9a8dabecb2bc91a9b34464de6ec)
@@ -2630,15 +2809,16 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档改进：**
 
 - 更新贡献文档。（*由 Cynthia Shang 贡献，David Steele、Stefan Fercot 审核。*）
+
   贡献指南补充了更多关于编写代码、添加配置选项和测试的示例。
 
   拉取请求 [#1400](https://github.com/pgbackrest/pgbackrest/pull/1400); 提交 [`68faf14`](https://github.com/pgbackrest/pgbackrest/commit/68faf1482a42ea14f5b00a91e19bd5aedec275b8)
 - 将 RHEL/CentOS 用户指南合并为单一文档。（*由 Cynthia Shang 审核。*）
+
   第二套指南主要用于说明 PostgreSQL <= 9.5 的 `stop-auto`，而这些版本现已结束生命周期。参考文档仍保留该选项的说明。
 
   拉取请求 [#1405](https://github.com/pgbackrest/pgbackrest/pull/1405); 提交 [`ccac75e`](https://github.com/pgbackrest/pgbackrest/commit/ccac75e7de8754b39bb691ff8830a2839ea7a285)
 - 阐明 `repo-s3-role` 不是 ARN。（*由 Isaac Yuen 贡献，David Steele 审核。*）
-
 
   拉取请求 [#1365](https://github.com/pgbackrest/pgbackrest/pull/1365); 提交 [`5bf1606`](https://github.com/pgbackrest/pgbackrest/commit/5bf160643b53699a28a8f0920c36d6ded767d249)
 
@@ -2651,15 +2831,18 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **漏洞修复：**
 
 - 修复选项警告破坏异步 `archive-get`/`archive-push` 的问题。（*由 Cynthia Shang 审核，Lev Kokotov 报告。*）
+
   异步进程的选项警告此前会写入已关闭的 stdout，导致进程中止。异步角色现在可能具有与默认角色不同的有效选项，因此更容易触发此问题。现在仅为默认角色记录选项警告。
 
   议题 [#1299](https://github.com/pgbackrest/pgbackrest/issues/1299); 拉取请求 [#1301](https://github.com/pgbackrest/pgbackrest/pull/1301); 提交 [`3837e61`](https://github.com/pgbackrest/pgbackrest/commit/3837e61a7504b1e211e4b3a70cbe97343c1cf2e6)
 - 修复备份期间归档复制中的内存泄漏。（*由 Cynthia Shang 审核，Christian ROUX、Efremov Egor 报告。*）
+
   使用 `archive-copy` 将 WAL 复制到备份中时会泄漏内存，尤其是在 WAL 需要重新压缩时。
 
   议题 [#1319](https://github.com/pgbackrest/pgbackrest/issues/1319); 提交 [`778adbf`](https://github.com/pgbackrest/pgbackrest/commit/778adbf19f71ceb90071f01197bf189d59b14df0)
-- 修复加密口令生成中的栈溢出问题。（*由 Cynthia Shang 审核，bsiara 报告。*）
-  生成口令的缓冲区没有为末尾的零字符预留空间。此问题在使用 musl libc 的 arm64 上被发现。
+- 修复加密密码生成中的栈溢出问题。（*由 Cynthia Shang 审核，bsiara 报告。*）
+
+  生成密码的缓冲区没有为末尾的零字符预留空间。此问题在使用 musl libc 的 arm64 上被发现。
 
   议题 [#1294](https://github.com/pgbackrest/pgbackrest/issues/1294); 拉取请求 [#1295](https://github.com/pgbackrest/pgbackrest/pull/1295); 提交 [`d29855b`](https://github.com/pgbackrest/pgbackrest/commit/d29855bd0bf8b957fa8c06445d22e425c443a704)
 - 修复 S3 仓库上 `repo-ls` `/` 的问题。（*由 Cynthia Shang 审核，Lesovsky Alexey 报告。*）
@@ -2671,6 +2854,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **新功能：**
 
 - 支持多仓库。（*由 Cynthia Shang、David Steele 贡献，Stefan Fercot、Stephen Frost 审核。*）
+
   最多可配置四个仓库，例如用于快速恢复的本地仓库，以及用于冗余的远程仓库。`archive-push` 向所有仓库推送 WAL，各仓库分别安排备份。某些命令可操作所有仓库，其他命令则要求指定 `repo`。仅配置 `repo1` 时，无需指定 `repo`。
 
   [`3408f1e`](https://github.com/pgbackrest/pgbackrest/commit/3408f1ee2ee3f774699a15de045e0afe3eaf9a26) 增强 expire 命令的多仓库支持。; 拉取请求 [#1289](https://github.com/pgbackrest/pgbackrest/pull/1289)
@@ -2700,7 +2884,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
   [`2789d3b`](https://github.com/pgbackrest/pgbackrest/commit/2789d3b6206c4de9299a3bc459e04cdab793abc9) 改进 info 命令的容错能力。; 拉取请求 [#1342](https://github.com/pgbackrest/pgbackrest/pull/1342)
 
   [`01b8e22`](https://github.com/pgbackrest/pgbackrest/commit/01b8e2258f6efa5386665c33cb5c267c154376fb) 改进 archive-push 命令的容错能力。; 拉取请求 [#1343](https://github.com/pgbackrest/pgbackrest/pull/1343)
-- 支持 GCS 作为仓库存储。 (*审核：Cynthia Shang. 测试：Daniel Farina.*)
+- 支持 GCS 作为仓库存储。（*审核：Cynthia Shang. 测试：Daniel Farina.*）
 
   设置 `repo-type=gcs` 可将仓库存储在 GCS 或兼容 GCS 的对象存储上。
 
@@ -2734,18 +2918,22 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **改进：**
 
 - 选择性恢复时包含重建的系统数据库。（*由 Stefan Fercot 贡献，Cynthia Shang 审核。*）
+
   被重新创建的系统数据库（`template0`、`template1` 或 `postgres`）的 OID，可能使其看起来像用户数据库。现在无论 OID 为何，都会恢复这些系统数据库。
 
   议题 [#986](https://github.com/pgbackrest/pgbackrest/issues/986); 拉取请求 [#1307](https://github.com/pgbackrest/pgbackrest/pull/1307); 提交 [`6942ff5`](https://github.com/pgbackrest/pgbackrest/commit/6942ff569dd950a5146faa0bebfee69e241c4179)
 - 从 S3 签名头部中排除 `content-length`。（*由 Cynthia Shang 审核，Brian P Bockelman 建议。*）
+
   某些代理会修改 `content-length` 头，如果签名包含该头，就会导致认证失败。
 
   议题 [#1340](https://github.com/pgbackrest/pgbackrest/issues/1340); 拉取请求 [#1341](https://github.com/pgbackrest/pgbackrest/pull/1341); 提交 [`7d7ac0e`](https://github.com/pgbackrest/pgbackrest/commit/7d7ac0e0eb63a02bbc1dd8bd8fc89c6008c740f8)
 - 合并较少使用的仓库存储选项。（*由 Cynthia Shang 审核。*）
+
   S3 和 Azure 的 CA、主机、端口和 TLS 验证选项重命名为 `repo-storage-*`，例如 `repo1-s3-host` 现在为 `repo1-storage-host`。旧名称仍可使用。
 
   拉取请求 [#1321](https://github.com/pgbackrest/pgbackrest/pull/1321); 提交 [`d1aa765`](https://github.com/pgbackrest/pgbackrest/commit/d1aa765a9d5f290738c1de00c5ea99d5f6056ba5)
 - 允许通过 `./configure --with-configdir` 自定义 `config-path` 的默认值。（*由 Michael Schout 贡献，David Steele 审核。*）
+
   打包维护者可在构建时为 `config-path` 设置不同的默认值。不使用此选项时，默认值仍为 `/etc/pgbackrest`。
 
   [`6a717e0`](https://github.com/pgbackrest/pgbackrest/commit/6a717e032f1309ddc9dc955042b5e2ac2bc7324d) 在 configure 脚本中设置配置路径。
@@ -2758,23 +2946,26 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 **文档改进：**
 
 - 更新参考文档，添加指向用户指南示例的链接。（*由 Cynthia Shang 贡献，David Steele 审核。*）
+
   命令参考现在链接到包含示例的用户指南章节，部分描述也更加明确，例如 `expire` 的 `set` 选项。
 
   拉取请求 [#1353](https://github.com/pgbackrest/pgbackrest/pull/1353); 提交 [`d372dd6`](https://github.com/pgbackrest/pgbackrest/commit/d372dd652c9a01b72444998d87f0f44464676803)
 - 更新选择性恢复文档，添加注意事项。（*由 Cynthia Shang、Stefan Fercot 审核。*）
+
   除非指定 `type=immediate`，否则恢复可能失败，因为 PostgreSQL 在达到一致状态后会将全零页面报告为错误。在 PostgreSQL >= 13 上可以使用 `ignore_invalid_pages`，但应检查日志，确认所选数据库中是否存在无效页面。
 
   议题 [#796](https://github.com/pgbackrest/pgbackrest/issues/796); 拉取请求 [#1329](https://github.com/pgbackrest/pgbackrest/pull/1329); 提交 [`92d12cc`](https://github.com/pgbackrest/pgbackrest/commit/92d12ccb9bd0787e30441794e2a2a4d4a4e0fe9c)
 - 为 `archive-copy` 文档添加 `compress-type` 说明。（*由 Cynthia Shang、Stefan Fercot 审核。*）
+
   `archive-push` 与 `backup` 使用不同的 `compress-type` 时，WAL 必须重新压缩，开销可能很高。
 
   议题 [#1319](https://github.com/pgbackrest/pgbackrest/issues/1319); 拉取请求 [#1327](https://github.com/pgbackrest/pgbackrest/pull/1327); 提交 [`9506ffa`](https://github.com/pgbackrest/pgbackrest/commit/9506ffae39dd86d2c5454511026f1249097d96a2)
 - 添加每种 `compress-type` 值对应的 `compress-level` 默认值。（*由 Cynthia Shang 贡献，David Steele 审核。*）
+
   默认压缩级别分别为：`bz2` 为 9，`gz` 为 6，`lz4` 为 1，`zst` 为 3。
 
   议题 [#1242](https://github.com/pgbackrest/pgbackrest/issues/1242); 拉取请求 [#1346](https://github.com/pgbackrest/pgbackrest/pull/1346); 提交 [`3e20608`](https://github.com/pgbackrest/pgbackrest/commit/3e206088e79c4a73a20b8f2fda1706c6b95fa188)
 - 添加关于 NFS 所需设置与 PostgreSQL 相同的注意事项。（*由 Cynthia Shang 贡献，David Steele 审核。*）
-
 
   议题 [#871](https://github.com/pgbackrest/pgbackrest/issues/871); 拉取请求 [#1347](https://github.com/pgbackrest/pgbackrest/pull/1347); 提交 [`7598762`](https://github.com/pgbackrest/pgbackrest/commit/75987621fab5f57d0e95b42eabd301731587c438)
 
@@ -2790,9 +2981,9 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **新功能：**
 
-- 新增 `repo-ls` 命令。 (*审核：Cynthia Shang. 测试：Stefan Fercot.*)
+- 新增 `repo-ls` 命令。（*审核：Cynthia Shang. 测试：Stefan Fercot.*）
 - 新增 `repo-get` 命令。（*由 Stefan Fercot、David Steele 贡献，Cynthia Shang 审核。*）
-- 新增 `archive-mode-check` 选项。 (*贡献：Stefan Fercot. 审核：David Steele. 测试：Michael Banck.*)
+- 新增 `archive-mode-check` 选项。（*贡献：Stefan Fercot. 审核：David Steele. 测试：Michael Banck.*）
 
 **改进：**
 
@@ -2818,13 +3009,13 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 - 支持历史文件的过期清理。（*由 Stefan Fercot 贡献，David Steele 审核。*）
 - 在 `info` 命令的 `text` 输出中报告页面校验和错误。（*由 Stefan Fercot 贡献，Cynthia Shang 审核。*）
-- 新增 `repo-azure-endpoint` 选项。 (*审核：Cynthia Shang. 测试：Brian Peterson. 建议：Brian Peterson.*)
+- 新增 `repo-azure-endpoint` 选项。（*审核：Cynthia Shang. 测试：Brian Peterson. 建议：Brian Peterson.*）
 - 新增 `pg-database` 选项。（*由 Cynthia Shang 审核。*）
 
 **改进：**
 
 - 改进 `info` 命令在指定 stanza 不存在时的输出提示。（*由 Stefan Fercot 贡献，Cynthia Shang、David Steele 审核，uspen 建议。*）
-- 提升 `backup`/`restore` 命令处理大量文件列表时的性能。 (*审核：Cynthia Shang. 测试：Oscar.*)
+- 提升 `backup`/`restore` 命令处理大量文件列表时的性能。（*审核：Cynthia Shang. 测试：Oscar.*）
 - 启动备份时为 PostgreSQL 连接等待添加重试机制。（*由 Cynthia Shang 审核，Vitaliy Kukharik 建议。*）
 
 **文档改进：**
@@ -2862,7 +3053,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 ### v2.29 版本说明
 
-*AWS 自动获取 S3 凭证*
+*AWS 自动获取 S3 凭据*
 
 *发布于 2020 年 8 月 31 日*
 
@@ -2873,14 +3064,14 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **新功能：**
 
-- 在 AWS 实例上自动获取临时 S3 凭证。 (*贡献：David Steele, Stephen Frost. 审核：Cynthia Shang, Aleš Zelený, Jeanette Bromage. 测试：David Youatt.*)
+- 在 AWS 实例上自动获取临时 S3 凭据。（*贡献：David Steele, Stephen Frost. 审核：Cynthia Shang, Aleš Zelený, Jeanette Bromage. 测试：David Youatt.*）
 - 新增 `archive-mode` 选项，用于在 `restore` 时禁用归档。（*由 Stephen Frost 审核，Stephen Frost 建议。*）
 
 **改进：**
 
 - 支持 PostgreSQL 13 beta3。后续 beta 版本中控制/目录/WAL 版本如有变更可能导致兼容性问题，pgBackRest 将随每个版本发布同步更新。
 - S3/Azure 存储的异步 `list`/`remove` 操作。（*由 Cynthia Shang、Stephen Frost 审核。*）
-- 优化 manifest 构建过程中未记录关系检测的内存使用效率。 (*审核：Cynthia Shang, Stephen Frost, Oscar. 测试：Brad Nicholson. 建议：Oscar, Brad Nicholson.*)
+- 优化 manifest 构建过程中未记录关系检测的内存使用效率。（*审核：Cynthia Shang, Stephen Frost, Oscar. 测试：Brad Nicholson. 建议：Oscar, Brad Nicholson.*）
 - 派生异步进程后主动关闭文件描述符。（*由 Stephen Frost、Cynthia Shang 审核。*）
 - 将备份远程连接的关闭延迟至归档检查完成之后。（*由 Floris van Nee 贡献，David Steele 审核。*）
 - 改进详细错误输出。（*由 Cynthia Shang 审核。*）
@@ -2909,12 +3100,12 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **新功能：**
 
-- 支持 Azure 作为仓库存储后端。 (*审核：Cynthia Shang. 测试：Don Seiler.*)
+- 支持 Azure 作为仓库存储后端。（*审核：Cynthia Shang. 测试：Don Seiler.*）
 - 新增 `expire-auto` 选项，用于禁止在成功备份后自动执行过期清理。（*由 Stefan Fercot 贡献，Cynthia Shang、David Steele 审核。*）
 
 **改进：**
 
-- 支持 S3 分片上传的异步处理。（*由 Stephen Frost 审核。*）
+- 支持 S3 分段上传的异步处理。（*由 Stephen Frost 审核。*）
 - 为 `backup`、`restore`、`archive-get` 和 `archive-push` 添加自动重试机制。（*由 Cynthia Shang 审核。*）
 - 在用于备份控制的 PostgreSQL 会话中禁用查询并行化。（*由 Stefan Fercot 审核。*）
 - 支持 PostgreSQL 13 beta2。后续 beta 版本中控制/目录/WAL 版本如有变更可能导致兼容性问题，pgBackRest 将随每个版本发布同步更新。
@@ -2980,7 +3171,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 **改进：**
 
-- 实现非阻塞 TLS。 (*审核：Cynthia Shang, Stephen Frost. 测试：Slava Moudry.*)
+- 实现非阻塞 TLS。（*审核：Cynthia Shang, Stephen Frost. 测试：Slava Moudry.*）
 - 仅对 WAL 记录的文件限制备份复制大小。此前的行为可能导致 `postgresql.conf` 或 `postgresql.auto.conf` 在备份中被截断。（*由 Cynthia Shang 审核。*）
 - TCP keep-alive 选项现在支持配置。（*由 Marc Cousin 建议。*）
 - 新增 `io-timeout` 选项。（*由 Cynthia Shang 审核。*）
@@ -3527,7 +3718,7 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 - 添加异步并行 `archive-get`。该特性维护一个 WAL 段预取队列，在 PostgreSQL 通过 `restore_command` 请求 WAL 段时降低等待延迟。
 - 支持附加的 pgBackRest 配置文件。配置文件目录由 `--config-include-path` 选项指定；新增 `--config-path` 选项用于覆盖 `--config` 和 `--config-include-path` 的默认基础路径。（*由 Cynthia Shang 贡献，David Steele 审核。*）
-- 添加 `repo-s3-token` 选项，支持配置临时凭证令牌。pgBackRest 目前不具备主动刷新凭证的能力，因此整个命令（如 `backup`、`restore`）必须在凭证过期前完成。（*由 Yogesh Sharma 贡献，David Steele 审核。*）
+- 添加 `repo-s3-token` 选项，支持配置临时凭据令牌。pgBackRest 目前不具备主动刷新凭据的能力，因此整个命令（如 `backup`、`restore`）必须在凭据过期前完成。（*由 Yogesh Sharma 贡献，David Steele 审核。*）
 
 **改进：**
 
