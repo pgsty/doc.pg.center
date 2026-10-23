@@ -20,7 +20,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/NEW
     * 修复 CVE-2026-107349：未经身份验证的客户端可发送包含空选项名（如 `-c=`）的启动参数 `options`，使 PgBouncer 1.20.0 至 1.26.0 在一个 CPU 核心上无限循环，从而停止为所有客户端提供服务。只有在 `ignore_startup_parameters` 非空且不包含 `options` 时，此问题才可被利用。
     * 修复 CVE-2026-107348：PgBouncer 1.21.0 至 1.26.0 的数据包缓冲区扩容逻辑存在整数溢出；当客户端发送声明长度超过 2^31 的数据包头时，可能使 PgBouncer 陷入无限循环。只有在 `max_packet_size` 设为 2147483649 或更大值时，此问题才可被利用；默认值 2147483647 不受影响。自 1.23.0 起，未经身份验证即可触发此问题。这与 CVE-2026-6668 属于同类缺陷，但位于另一种缓冲区实现中。
 - 修复
-    * 使 `ignore_startup_parameters` 优先于被跟踪的参数。自 1.26.0 起，`search_path` 默认被跟踪，导致 `ignore_startup_parameters = search_path` 悄然失效。该版本发布后，陆续收到多项有关 `search_path` 参数跟踪的缺陷报告。这些缺陷将在后续版本中解决。现在，将 `search_path` 加入 `ignore_startup_parameters` 可恢复 1.25 中忽略它的行为。（缺陷引入自 1.26.0）
+    * 使 `ignore_startup_parameters` 优先于被跟踪的参数。自 1.26.0 起，`search_path` 默认被跟踪，导致 `ignore_startup_parameters = search_path` 悄然失效。该版本发布后，陆续收到多项有关 `search_path` 参数跟踪的缺陷报告。这些缺陷将在后续版本中解决。现在，将 `search_path` 加入 `ignore_startup_parameters` 可恢复 1.25 中忽略它的行为。（引入自 1.26.0）
 
 **2026-09-23  -  PgBouncer 1.26.0  -  "Ignore all previous search_path（忽略此前所有 search_path）"**
 
