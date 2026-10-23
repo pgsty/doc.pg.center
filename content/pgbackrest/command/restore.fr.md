@@ -35,7 +35,7 @@ default: preserve
 example: --archive-mode=off
 ```
 
-### Option d’erreur en cas de sommes de contrôle de pages invalides (`--checksum-page-error`) {#error-on-invalid-page-checksums-option---checksum-page-error}
+### Option d'erreur en cas de sommes de contrôle de pages invalides (`--checksum-page-error`) {#error-on-invalid-page-checksums-option---checksum-page-error}
 
 Signaler une erreur en cas de sommes de contrôle de pages invalides.
 

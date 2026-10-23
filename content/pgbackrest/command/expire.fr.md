@@ -29,7 +29,7 @@ Cette option est principalement destinée aux dépôts en mode archive uniquemen
 example: --archive-expire-before=000000010000000000000010
 ```
 
-### Option d’erreur en cas de sommes de contrôle de pages invalides (`--checksum-page-error`) {#error-on-invalid-page-checksums-option---checksum-page-error}
+### Option d'erreur en cas de sommes de contrôle de pages invalides (`--checksum-page-error`) {#error-on-invalid-page-checksums-option---checksum-page-error}
 
 Signaler une erreur en cas de sommes de contrôle de pages invalides.
 

@@ -117,7 +117,7 @@ Par défaut, les échecs de validation des sommes de contrôle n'interrompent pa
 example: --no-checksum-page
 ```
 
-### Option d’erreur en cas de sommes de contrôle de pages invalides (`--checksum-page-error`) {#error-on-invalid-page-checksums-option---checksum-page-error}
+### Option d'erreur en cas de sommes de contrôle de pages invalides (`--checksum-page-error`) {#error-on-invalid-page-checksums-option---checksum-page-error}
 
 Signaler une erreur en cas de sommes de contrôle de pages invalides.
 

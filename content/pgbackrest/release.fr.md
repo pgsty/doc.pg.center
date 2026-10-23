@@ -31,13 +31,13 @@ Ce miroir couvre la v2.60.0. Consultez l'[historique des versions amont](https:/
 
 *Erreurs de somme de contrôle des pages et prélecture du stockage objet*
 
-*Publié le 18 octobre 2026*
+*Sortie le 18 octobre 2026*
 
 **REMARQUE IMPORTANTE** : La commande `restore` signale désormais une erreur et s'arrête si un fichier restauré contient une somme de contrôle de page invalide. Le cluster reste alors incomplet et ne peut pas démarrer ; il faut donc relancer la restauration. La commande `expire` refuse désormais d'effectuer l'expiration si la plus ancienne sauvegarde conservée devait contenir des erreurs de somme de contrôle, ce qui empêche aussi l'expiration des archives dans ce dépôt. Définissez `checksum-page-error=n` pour émettre un avertissement plutôt qu'une erreur.
 
 **Fonctionnalités :**
 
-- Ajout de l'option `checksum-page-error` pour signaler une erreur en cas de somme de contrôle de page invalide. (*Contribution de Andrew Pogrebnoi. Révisé par Douglas J Hunley, David Steele, Greg Sabino Mullane, Stefan Fercot. Suggestion de Greg Sabino Mullane.*)
+- Ajout de l'option `checksum-page-error` pour signaler une erreur en cas de somme de contrôle de page invalide. (*Contribution de Andrew Pogrebnoi. Révisé par Douglas J Hunley, David Steele, Greg Sabino Mullane, Stefan Fercot. Suggéré par Greg Sabino Mullane.*)
 
   Cette option s'applique aux commandes `backup`, `restore` et `expire`. Par défaut, la commande `backup` émet un avertissement pour chaque fichier, comme auparavant, et indique désormais aussi le nombre total d'avertissements de somme de contrôle à la fin de la sauvegarde. Les commandes `restore` et `expire` signalent une erreur par défaut. Auparavant, la commande `restore` ne signalait aucune somme de contrôle de page invalide.
 
@@ -67,7 +67,7 @@ Ce miroir couvre la v2.60.0. Consultez l'[historique des versions amont](https:/
   Lorsqu'une suppression par lot échoue dans Azure, le service peut renvoyer une seule réponse pour tout le lot. Les sous-requêtes sans réponse étaient considérées comme terminées : un seul fichier par lot était alors supprimé, tandis que la commande annonçait un succès. Les sous-requêtes sans réponse sont désormais réessayées.
 
   Ticket [#2840](https://github.com/pgbackrest/pgbackrest/issues/2840); Demande d’intégration [#2849](https://github.com/pgbackrest/pgbackrest/pull/2849); Commit [`567a245`](https://github.com/pgbackrest/pgbackrest/commit/567a2451244e0e7a4c54e41880fac1a007b49930)
-- Réduction des vérifications de manifestes lors de la reconstruction de `backup.info`. (*Révisé par Douglas J Hunley. Suggestion de todeb.*)
+- Réduction des vérifications de manifestes lors de la reconstruction de `backup.info`. (*Révisé par Douglas J Hunley. Suggéré par todeb.*)
 
   Les commandes `backup`, `expire` et `annotate` ne recherchent plus de `backup.manifest` lorsque le listing du dépôt indique que le chemin de sauvegarde n'existe pas, ou lorsqu'une sauvegarde différentielle ou incrémentale appartient à un jeu de sauvegardes complètes absent de `backup.info`. Chaque vérification constitue une requête ; sur un stockage objet, la recherche d'un manifeste absent est donc journalisée comme une erreur 404.
 
@@ -224,7 +224,7 @@ Ce miroir couvre la v2.60.0. Consultez l'[historique des versions amont](https:/
 
 *Bogue des sous-clés de chiffrement faibles*
 
-*Publié le 4 octobre 2026*
+*Sortie le 4 octobre 2026*
 
 **REMARQUE IMPORTANTE**: Dans les versions précédentes, une erreur d’accès aux données aléatoires du système pouvait entraîner la génération de sous-clés de chiffrement et de sels faibles. Consultez [Sous-clés de chiffrement et sels faibles](/fr/pgbackrest/news/#weak-encryption) pour plus d’informations.
 
@@ -814,7 +814,7 @@ Ce miroir couvre la v2.60.0. Consultez l'[historique des versions amont](https:/
   Cette version a été publiée avant l'existence d'une bêta de PostgreSQL 18 ; sa prise en charge était donc initialement expérimentale. Aucun changement affectant pgBackRest n'est intervenu avant PostgreSQL 18.0.
 
   Demande d’intégration [#2603](https://github.com/pgbackrest/pgbackrest/pull/2603); Commit [`565d2e0`](https://github.com/pgbackrest/pgbackrest/commit/565d2e0c47cd21df890a40b3a94a8c865bed76d9)
-- Permettre les connexions à PostgreSQL via des sockets de domaine abstraits. (*Testé par Chris Bandy. Suggestion de Chris Bandy.*)
+- Permettre les connexions à PostgreSQL via des sockets de domaine abstraits. (*Testé par Chris Bandy. Suggéré par Chris Bandy.*)
 
   `pg-socket-path` n'a plus besoin d'être un chemin absolu et peut donc désigner un socket de domaine abstrait. libpq rapporte un chemin non valide.
 
@@ -1904,7 +1904,7 @@ Ce miroir couvre la v2.60.0. Consultez l'[historique des versions amont](https:/
   `archive.info` et sa copie n'étaient écrits que par `stanza-create` et `stanza-upgrade`. Une politique de cycle de vie du stockage objet supprimant les anciens fichiers pouvait donc les effacer. Leurs horodatages sont désormais mis à jour après chaque sauvegarde réussie.
 
   Ticket [#1853](https://github.com/pgbackrest/pgbackrest/issues/1853); Demande d’intégration [#1855](https://github.com/pgbackrest/pgbackrest/pull/1855); Commit [`3b5df1e`](https://github.com/pgbackrest/pgbackrest/commit/3b5df1e089234d425dd225f8c1976755dc947c8a)
-- Déplacer la vérification du timeline de la base de secours après le point de contrôle. (*Révisé par Stefan Fercot. Testé par Keith Fiske. Suggestion de Keith Fiske.*)
+- Déplacer la vérification du timeline de la base de secours après le point de contrôle. (*Révisé par Stefan Fercot. Testé par Keith Fiske. Suggéré par Keith Fiske.*)
 
   La vérification de la timeline du serveur de secours utilisait le `pg_control` antérieur au début de la sauvegarde. Juste après une promotion, la nouvelle timeline pouvait ne pas encore avoir été écrite dans `pg_control`, et la sauvegarde échouait avec « standby is on timeline ... but expected ... ». La vérification s'effectue désormais après le point de contrôle.
 
@@ -1969,7 +1969,7 @@ Ce miroir couvre la v2.60.0. Consultez l'[historique des versions amont](https:/
   La progression d'une sauvegarde n'était rapportée qu'après la copie du premier fichier. Elle est désormais fixée à zéro dès le début de la copie.
 
   Demande d’intégration [#1759](https://github.com/pgbackrest/pgbackrest/pull/1759); Commit [`38ad283`](https://github.com/pgbackrest/pgbackrest/commit/38ad2838d553febae1b7fe0244d942dfaa9cf548)
-- Utiliser le drapeau S3 `IsTruncated` pour déterminer la continuation de la liste. (*Révisé par John Morris. Testé par Soulou. Suggestion de Christian Montagne.*)
+- Utiliser le drapeau S3 `IsTruncated` pour déterminer la continuation de la liste. (*Révisé par John Morris. Testé par Soulou. Suggéré par Christian Montagne.*)
 
   Les versions récentes de Scality envoient un `NextContinuationToken` vide lorsque la liste n'est pas tronquée, ce qui provoquait une boucle infinie. L'indicateur `IsTruncated` détermine désormais s'il faut poursuivre la liste ; un jeton absent ou vide pour une liste tronquée constitue une erreur.
 
@@ -2996,7 +2996,7 @@ Ce miroir couvre la v2.60.0. Consultez l'[historique des versions amont](https:/
 
 - Expire les fichiers d'historique. (*Contribution de Stefan Fercot. Révisé par David Steele.*)
 - Signale les erreurs de somme de contrôle de page dans la sortie de la commande `info` `text`. (*Contribution de Stefan Fercot. Révisé par Cynthia Shang.*)
-- Ajoute l'option `repo-azure-endpoint`. (*Révisé par Cynthia Shang. Testé par Brian Peterson. Suggestion de Brian Peterson.*)
+- Ajoute l'option `repo-azure-endpoint`. (*Révisé par Cynthia Shang. Testé par Brian Peterson. Suggéré par Brian Peterson.*)
 - Ajoute l'option `pg-database`. (*Révisé par Cynthia Shang.*)
 
 **Améliorations :**
@@ -3057,7 +3057,7 @@ Ce miroir couvre la v2.60.0. Consultez l'[historique des versions amont](https:/
 
 - Prise en charge de PostgreSQL 13 beta3. Les modifications apportées aux versions de contrôle/catalogue/WAL dans les versions beta ultérieures peuvent rompre la compatibilité, mais pgBackRest sera mis à jour à chaque version pour suivre l'évolution.
 - Prise en charge de l’asynchrone `list`/`remove` pour le stockage S3/Azure. (*Révisé par Cynthia Shang, Stephen Frost.*)
-- Amélioration de l'utilisation mémoire lors de la détection des relations non enregistrées lors de la construction du manifeste. (*Révisé par Cynthia Shang, Stephen Frost, Oscar. Testé par Brad Nicholson. Suggestion de Oscar, Brad Nicholson.*)
+- Amélioration de l'utilisation mémoire lors de la détection des relations non enregistrées lors de la construction du manifeste. (*Révisé par Cynthia Shang, Stephen Frost, Oscar. Testé par Brad Nicholson. Suggéré par Oscar, Brad Nicholson.*)
 - Fermeture proactive des descripteurs de fichiers après le fork du processus asynchrone. (*Révisé par Stephen Frost, Cynthia Shang.*)
 - Report de la fermeture de la connexion distante de la sauvegarde jusqu’après le contrôle de l’archive. (*Contribution de Floris van Nee. Révisé par David Steele.*)
 - Amélioration de la sortie détaillée des erreurs. (*Révisé par Cynthia Shang.*)
