@@ -28,7 +28,7 @@ pgBackRestは、最大規模のデータベースやワークロードにもシ�
 
 このドキュメントミラーはpgBackRest [v2.60.0](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.0)を対象としています。リリースノートは[リリース](/ja/pgbackrest/release/)ページにあります。
 
-2.60.0では、ページチェックサムエラー時の動作設定、オブジェクトストアからの読み取りのプリフェッチ、GCS Workload Identity Federationが追加されました。`restore`と`expire`は、ページチェックサムが無効な場合にデフォルトで停止するようになりました。[2.60.0リリースノート](/ja/pgbackrest/release/#v2600-release-notes)を参照してください。
+2.60.0では、ページチェックサムエラー時の動作設定、オブジェクトストアからの読み取りのプリフェッチ、GCS Workload Identity Federationが追加されました。`restore`と`expire`は、無効なページチェックサムを検出した場合にデフォルトで停止するようになりました。[2.60.0リリースノート](/ja/pgbackrest/release/#v2600-release-notes)を参照してください。
 
 2.59.3では、脆弱な暗号化サブキーやソルトが生成される可能性がある問題が修正されました。アップグレードしても、スタンザの既存の脆弱なサブキーは置き換わりません。確認手順と対処方法は[脆弱な暗号化サブキーとソルト](/ja/pgbackrest/news/#weak-encryption)を参照してください。
 

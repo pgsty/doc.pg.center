@@ -33,18 +33,18 @@ v1リリースのドキュメントは[こちら](https://pgbackrest.org/1)を�
 
 *2026年10月18日リリース*
 
-**重要な注意事項**: `restore`コマンドは、復元したファイルに無効なページチェックサムが含まれていると、エラーを報告して停止するようになりました。この場合、クラスターは不完全で起動できない状態になるため、復元を再実行する必要があります。`expire`コマンドは、保持する最古のバックアップにチェックサムエラーが含まれることになる場合、期限切れ処理を拒否するようになりました。そのリポジトリのアーカイブも期限切れ処理されません。エラーではなく警告にするには、`checksum-page-error=n`を設定してください。
+**重要な注意事項**：`restore`コマンドは、復元したファイルに無効なページチェックサムが含まれていると、エラーを報告して停止するようになりました。この場合、クラスターは不完全で起動できない状態になるため、復元を再実行する必要があります。`expire`コマンドは、保持する最古のバックアップにチェックサムエラーが含まれることになる場合、期限切れ処理を拒否するようになりました。そのリポジトリのアーカイブも期限切れ処理されません。エラーではなく警告にするには、`checksum-page-error=n`を設定してください。
 
 **新機能：**
 
-- ページチェックサムが無効な場合にエラーとする`checksum-page-error`オプションを追加しました。 (*貢献：Andrew Pogrebnoi。レビュー：Douglas J Hunley, David Steele, Greg Sabino Mullane, Stefan Fercot。提案：Greg Sabino Mullane。*)
+- 無効なページチェックサムを検出した場合にエラーとする`checksum-page-error`オプションを追加しました。 (*貢献：Andrew Pogrebnoi。レビュー：Douglas J Hunley, David Steele, Greg Sabino Mullane, Stefan Fercot。提案：Greg Sabino Mullane。*)
 
   このオプションは`backup`、`restore`、`expire`コマンドに適用されます。`backup`コマンドのデフォルトは従来どおりファイルごとの警告で、バックアップ終了時にはチェックサム警告の総数も報告するようになりました。`restore`と`expire`コマンドのデフォルトはエラーです。以前の`restore`コマンドは、無効なページチェックサムをまったく報告していませんでした。
 
   課題 [#2687](https://github.com/pgbackrest/pgbackrest/issues/2687); プルリクエスト [#2833](https://github.com/pgbackrest/pgbackrest/pull/2833); コミット [`d7f54b2`](https://github.com/pgbackrest/pgbackrest/commit/d7f54b2245c8a9467e9a811c65626fe77739376b)
 - GCS Workload Identity Federationをサポートしました。 (*貢献：Adol Rodriguez。レビュー：Douglas J Hunley, David Steele。*)
 
-  `repo-gcs-key-type=web-id`を設定し、`repo-gcs-key`に外部アカウントの認証情報ファイルを指定します。たとえば、`gcloud iam workload-identity-pools create-cred-config`で生成したファイルを使用できます。Web IDトークンは、サービスアカウントキーを使わずにアクセストークンと交換されます。交換のたびにトークンファイルを再読み込みし、Kubernetesの投影されたサービスアカウントトークンなど、ローテーションされたトークンを取り込みます。サービスアカウントの権限借用はサポートしていません。
+  `repo-gcs-key-type=web-id`を設定し、`repo-gcs-key`に外部アカウントの認証情報ファイルを指定します。たとえば、`gcloud iam workload-identity-pools create-cred-config`で生成したファイルを使用できます。Webアイデンティティトークンは、サービスアカウントキーを使わずにアクセストークンと交換されます。交換のたびにトークンファイルを再読み込みし、Kubernetesの投影されたサービスアカウントトークンなど、ローテーションされたトークンを取り込みます。サービスアカウントの権限借用はサポートしていません。
 
   課題 [#2838](https://github.com/pgbackrest/pgbackrest/issues/2838); プルリクエスト [#2839](https://github.com/pgbackrest/pgbackrest/pull/2839); コミット [`1d217e6`](https://github.com/pgbackrest/pgbackrest/commit/1d217e626301118ae2c1e7be39a6a4affa86e501)
 - オブジェクトストアからの複数ファイル／範囲の読み取りをプリフェッチするようにしました。 (*レビュー：Andrew Pogrebnoi, Douglas J Hunley。*)
@@ -57,9 +57,9 @@ v1リリースのドキュメントは[こちら](https://pgbackrest.org/1)を�
 
 **改善：**
 
-- リモートプロセスへのkeep-aliveリクエストを削減しました。 (*レビュー：Douglas J Hunley。*)
+- リモートプロセスへのキープアライブリクエストを削減しました。 (*レビュー：Douglas J Hunley。*)
 
-  以前は、`archive-push`と`backup`でジョブが完了するたびに、リクエストを送ったばかりのリモートを含め、すべてのリモートにkeep-aliveを送信していました。現在は、そのリモートに30秒間リクエストを送信していない場合にのみkeep-aliveを送信します。
+  以前は、`archive-push`と`backup`でジョブが完了するたびに、リクエストを送ったばかりのリモートを含め、すべてのリモートにキープアライブを送信していました。現在は、そのリモートに30秒間リクエストを送信していない場合にのみキープアライブを送信します。
 
   コミット [`f652261`](https://github.com/pgbackrest/pgbackrest/commit/f652261d32a4ffba98e7da26a41ef4ef1cd08da3)
 - Azureの応答に含まれていないバッチサブリクエストを再試行するようにしました。 (*レビュー：Douglas J Hunley。*)
@@ -116,15 +116,15 @@ v1リリースのドキュメントは[こちら](https://pgbackrest.org/1)を�
 
 **ドキュメントの改善：**
 
-- Webサイトを刷新しました。洞察に富んだ（そして愉快な）ロゴを作成してくれたJanに、特に感謝します。 (*貢献：David Steele, Jan Wieremjewicz。レビュー：Steve Atkins, Kai Wagner, Douglas J Hunley, Nikolaos Stamatopoulos, Matt Hudson, Stefan Fercot。*)
+- ウェブサイトを刷新しました。洞察に富んだ（そして愉快な）ロゴを作成してくれたJanに、特に感謝します。 (*貢献：David Steele, Jan Wieremjewicz。レビュー：Steve Atkins, Kai Wagner, Douglas J Hunley, Nikolaos Stamatopoulos, Matt Hudson, Stefan Fercot。*)
 
-  Webサイトを、ライト・ダークテーマとスマートフォンでも使えるレイアウトを備えた新しいデザインにしました。目次のあるページでは本文の横に目次を表示し、読んでいるセクションを示します。ボタンでコマンドや設定ファイルをコピーでき、設定ファイルでは各セクションで変更する行を示します。リリースノートは展開して詳しい説明を表示できます。
+  ウェブサイトを、ライト・ダークテーマとスマートフォンでも使えるレイアウトを備えた新しいデザインにしました。目次のあるページでは本文の横に目次を表示し、読んでいるセクションを示します。ボタンでコマンドや設定ファイルをコピーでき、設定ファイルでは各セクションで変更する行を示します。リリースノートは展開して詳しい説明を表示できます。
 
   [`5bc14b5`](https://github.com/pgbackrest/pgbackrest/commit/5bc14b581a054ab3dc9cd633954a689acc99a58f) ドキュメントのタイトルを短くし、曖昧さを解消しました。
 
   [`b668d71`](https://github.com/pgbackrest/pgbackrest/commit/b668d71f22489cbd4d5e120e7e6e73be0ca9e167) トップページのスポンサー欄を下へ移し、支援の呼びかけを短くしました。
 
-  [`60b85c5`](https://github.com/pgbackrest/pgbackrest/commit/60b85c58d98dd65d47747e6355f47c934cd6b430) Webサイトを刷新しました。
+  [`60b85c5`](https://github.com/pgbackrest/pgbackrest/commit/60b85c58d98dd65d47747e6355f47c934cd6b430) ウェブサイトを刷新しました。
 
   [`ab8df23`](https://github.com/pgbackrest/pgbackrest/commit/ab8df23807cc4c11768ef40196bcade70ebec23a) リンクを投稿した際に、ロゴではなくカードを表示するようにしました。
 
@@ -226,7 +226,7 @@ v1リリースのドキュメントは[こちら](https://pgbackrest.org/1)を�
 
 *2026年10月4日リリース*
 
-**重要な注意事項**: 以前のバージョンでは、システムのランダムデータへのアクセス時にエラーが発生すると、脆弱な暗号化サブキーやソルトが生成される可能性がありました。詳細は[脆弱な暗号化サブキーとソルト](/ja/pgbackrest/news/#weak-encryption)を参照してください。
+**重要な注意事項**：以前のバージョンでは、システムのランダムデータへのアクセス時にエラーが発生すると、脆弱な暗号化サブキーやソルトが生成される可能性がありました。詳細は[脆弱な暗号化サブキーとソルト](/ja/pgbackrest/news/#weak-encryption)を参照してください。
 
 **バグ修正:**
 
@@ -339,7 +339,7 @@ v1リリースのドキュメントは[こちら](https://pgbackrest.org/1)を�
 
 *2026年7月20日リリース*
 
-**パッケージ作成者への注意**: 生成済みのHTMLドキュメント、manページ、コードを含み、ビルド手順を簡素化する新しい配布用tarballを提供します。各リリースのアセットとして添付され、名前は`pgbackrest-{version}.tar.gz`です。詳細はtarball内の`README.md`を参照してください。今後のリリースでコード生成に必要となる追加のビルドツールを避けるため、新しい配布用tarballを使用してください。詳細は[新しい配布用tarball](/ja/pgbackrest/news/#distribution-tarball)を参照してください。<br/> <br/> **パッケージ作成者への注意**: 新たに`libsystemd`へのオプションの依存関係を追加しました。<br/> <br/> **重要な注意事項**: このリリース以降、デフォルトでrootとして実行できるのは`restore`コマンドだけです。他のコマンドをrootとして実行するには`allow-root`を使用してください（ただし、推奨しません）。
+**パッケージ作成者への注意**：生成済みのHTMLドキュメント、manページ、コードを含み、ビルド手順を簡素化する新しい配布用tarballを提供します。各リリースのアセットとして添付され、名前は`pgbackrest-{version}.tar.gz`です。詳細はtarball内の`README.md`を参照してください。今後のリリースでコード生成に必要となる追加のビルドツールを避けるため、新しい配布用tarballを使用してください。詳細は[新しい配布用tarball](/ja/pgbackrest/news/#distribution-tarball)を参照してください。<br/> <br/> **パッケージ作成者への注意**：新たに`libsystemd`へのオプションの依存関係を追加しました。<br/> <br/> **重要な注意事項**：このリリース以降、デフォルトでrootとして実行できるのは`restore`コマンドだけです。他のコマンドをrootとして実行するには`allow-root`を使用してください（ただし、推奨しません）。
 
 **バグ修正：**
 
@@ -1086,7 +1086,7 @@ v1リリースのドキュメントは[こちら](https://pgbackrest.org/1)を�
 
 *2024年7月22日リリース*
 
-**重要な注意事項**: `log-level-stderr`オプションのデフォルトを`warn`から`off`に変更しました。これにより、`stdout`だけをリダイレクトする場合にエラーを取得しやすくなります。以前の動作を維持するには`log-level-stderr=warn`を設定してください。<br/> <br/> **パッケージ作成者への注意**: mesonによるビルドでlz4ライブラリーが必須になりました。<br/> <br/> **パッケージ作成者への注意**: mesonによるビルドで、コンパイラーによる`__builtin_clzl()`と`__builtin_bswap64()`のサポートが必須になりました。
+**重要な注意事項**：`log-level-stderr`オプションのデフォルトを`warn`から`off`に変更しました。これにより、`stdout`だけをリダイレクトする場合にエラーを取得しやすくなります。以前の動作を維持するには`log-level-stderr=warn`を設定してください。<br/> <br/> **パッケージ作成者への注意**：mesonによるビルドでlz4ライブラリーが必須になりました。<br/> <br/> **パッケージ作成者への注意**：mesonによるビルドで、コンパイラーによる`__builtin_clzl()`と`__builtin_bswap64()`のサポートが必須になりました。
 
 **バグ修正：**
 
@@ -1788,7 +1788,7 @@ v1リリースのドキュメントは[こちら](https://pgbackrest.org/1)を�
   プルリクエスト [#1966](https://github.com/pgbackrest/pgbackrest/pull/1966); コミット [`36ee30d`](https://github.com/pgbackrest/pgbackrest/commit/36ee30d118ce6cc7720653a3d3a49a06c655c463)
 - ウェブサイトにダークモードを追加しました。 (*提案：Stephen Frost。*)
 
-  ブラウザーがダーク配色を希望する場合、Webサイトで暗い配色を使うようにしました。
+  ブラウザーがダーク配色を希望する場合、ウェブサイトで暗い配色を使うようにしました。
 
   コミット [`ed818b3`](https://github.com/pgbackrest/pgbackrest/commit/ed818b31867c640d72ef829dd36cd0a7feff12df)
 

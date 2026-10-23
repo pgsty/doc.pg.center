@@ -23,7 +23,7 @@ pgBackRestは[PostgreSQL Yum Repository](https://yum.postgresql.org)または[Po
 
 ### 主な新機能と改善 {#release-2-60-0-feature}
 
-- ページチェックサムが無効な場合にエラーにするchecksum-page-errorオプションを追加 (Andrew Pogrebnoi)
+- 無効なページチェックサムを検出した場合にエラーにするchecksum-page-errorオプションを追加 (Andrew Pogrebnoi)
 - GCS Workload Identity Federationをサポート (Adol Rodriguez)
 - オブジェクトストアからの複数ファイル／範囲の読み取りをプリフェッチ (David Steele)
 - リモートプロセスへのキープアライブリクエストを削減 (David Steele)

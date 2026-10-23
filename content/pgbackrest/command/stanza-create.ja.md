@@ -477,7 +477,7 @@ GCSリポジトリのキー種別です。
 
 次の認証方式をサポートします。
 
-- `auto` - インスタンスのサービスアカウントを使用して認可します。
+- `auto` - インスタンスのサービスアカウントを使用して認証します。
 - `service` - ローカルに保存したキーでサービスアカウントを使用します。
 - `token` - `fakegcs`などを使用するローカルテスト用です。
 - `web-id` - Workload Identity Federationを使用して認証します。
@@ -939,7 +939,7 @@ example: --repo1-storage-port=9000
 
 非推奨の名前：repo-azure-port, repo-s3-port
 
-### リポジトリストレージのプリフェッチオプション (`--repo-storage-prefetch`) {#repository-storage-prefetch-option---repo-storage-prefetch}
+### リポジトリストレージのプリフェッチオプション（`--repo-storage-prefetch`） {#repository-storage-prefetch-option---repo-storage-prefetch}
 
 リポジトリストレージのプリフェッチです。
 
@@ -953,7 +953,7 @@ allowed: [0, 1024]
 example: --repo1-storage-prefetch=7
 ```
 
-### リポジトリストレージの読み飛ばしオプション (`--repo-storage-read-over`) {#repository-storage-read-over-option---repo-storage-read-over}
+### リポジトリストレージの読み飛ばしオプション（`--repo-storage-read-over`） {#repository-storage-read-over-option---repo-storage-read-over}
 
 リポジトリストレージの読み飛ばしです。
 
