@@ -65,7 +65,7 @@ and publishes the site through its GitHub integration.
 
 Configure the Cloudflare Pages project with the repository root, build command
 `make build`, and output directory `public`. Set `HUGO_VERSION=0.168.0`,
-`GO_VERSION=1.27.2`, `GOWORK=off`, and `HUGO_MODULE_WORKSPACE=off`; leave
+`GO_VERSION=1.27.3`, `GOWORK=off`, and `HUGO_MODULE_WORKSPACE=off`; leave
 `HUGO_MODULE_REPLACEMENTS` unset. Add `doc.pg.center` as the custom domain.
 The source configuration keeps that domain as the canonical production URL.
 Production builds use the shared `pg.center` Google Analytics 4 property,

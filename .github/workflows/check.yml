@@ -19,7 +19,7 @@ defaults:
     shell: bash
 
 env:
-  GO_VERSION: stable
+  GO_VERSION: 1.27.3
   HUGO_VERSION: "0.168.0"
   # Keep shared assets cached through all eight language builds. Eviction at
   # the runner's default limit can republish them and trigger path warnings.
@@ -40,15 +40,15 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v7
         with:
-          go-version: ${{ env.GO_VERSION }}
+          go-version: 1.27.3
+          check-latest: true
           cache: true
 
       - name: Install Hugo Extended
-        run: |
-          curl --fail --location --silent --show-error \
-            --output "${RUNNER_TEMP}/hugo.deb" \
-            "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
-          sudo dpkg -i "${RUNNER_TEMP}/hugo.deb"
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
 
       - name: Download OINK module
         run: go mod download github.com/pgsty/oink

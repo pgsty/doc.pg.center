@@ -10,10 +10,11 @@ const { execFileSync } = require('node:child_process');
 const project = path.resolve(__dirname, '..');
 const publicDir = process.argv[2];
 assert(publicDir, 'usage: node scripts/test-pgbackrest-search.cjs PUBLIC_DIR');
-const moduleDir = execFileSync(
-  'go', ['list', '-m', '-f', '{{.Dir}}', 'github.com/pgsty/oink'],
+const moduleDir = JSON.parse(execFileSync(
+  'go', ['mod', 'download', '-json', 'github.com/pgsty/oink'],
   { cwd: project, encoding: 'utf8' },
-).trim();
+)).Dir;
+assert(moduleDir, 'published OINK module must resolve to a directory');
 global.window = {};
 const lunr = require(path.join(moduleDir, 'assets/js/third_party/lunr.min.js'));
 const local = require(path.join(project, 'assets/js/search-engine.js'));
