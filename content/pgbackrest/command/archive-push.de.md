@@ -1136,7 +1136,7 @@ example: --repo1-storage-prefetch=7
 
 Überlesen im Repository-Speicher.
 
-Bundles können Daten enthalten, die bei der Wiederherstellung nicht benötigt werden, etwa bereits vorhandene Dateien. Diese Option überspringt unnötige Daten durch fortgesetztes Lesen, ohne eine neue Leseanfrage an den Objektspeicher zu senden. Das ist in der Regel schneller, da eine neue Leseanfrage eine höhere Latenz verursacht als das Fortsetzen eines laufenden Lesevorgangs. Für die meisten Speicherklassen ist es auch kostengünstiger.
+Bündel können Daten enthalten, die bei der Wiederherstellung nicht benötigt werden, etwa bereits vorhandene Dateien. Diese Option überspringt unnötige Daten durch fortgesetztes Lesen, ohne eine neue Leseanfrage an den Objektspeicher zu senden. Das ist in der Regel schneller, da eine neue Leseanfrage eine höhere Latenz verursacht als das Fortsetzen eines laufenden Lesevorgangs. Für die meisten Speicherklassen ist es auch kostengünstiger.
 
 ```yaml
 default: 64KiB

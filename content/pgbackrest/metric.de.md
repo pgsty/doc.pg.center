@@ -69,6 +69,6 @@ Die Zweigabdeckung schließt Zweige innerhalb von Makros und `assert()`-Aufrufen
 | storage/remote       |      51/51 (100.00%) |     148/148 (100.00%) |      671/671 (100.00%) |
 | storage/s3           |      32/32 (100.00%) |     200/200 (100.00%) |      678/678 (100.00%) |
 | storage/sftp         |      39/39 (100.00%) |     408/408 (100.00%) |      763/763 (100.00%) |
-| GESAMT                              |  1733/1733 (100.00%) |  10784/10786 (99.98%) |  25462/25462 (100.00%) |
+| GESAMT               |  1733/1733 (100.00%) |  10784/10786 (99.98%) |  25462/25462 (100.00%) |
 
 Auch die C-Unit-Testmodule in `/test/src/module` haben eine vollständige Funktions- und Zeilenabdeckung, sind jedoch nicht im Bericht enthalten.

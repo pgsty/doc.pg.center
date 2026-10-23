@@ -68,7 +68,7 @@ Besonders kritisch sind die Unterschlüssel in `archive.info` und `backup.info`.
 
 Der WAL-Unterschlüssel wird in `archive.info` gespeichert, der Manifest-Unterschlüssel in `backup.info`. Ein schwacher Unterschlüssel lässt sich leichter erraten als ein zufälliger. Mit einem erratenen Unterschlüssel können die damit verschlüsselten Dateien ohne `repo-cipher-pass` entschlüsselt werden. Wie viel leichter dies ist, hängt vom Speicherinhalt ab, der je nach Plattform und Build variiert. Ein schwacher Unterschlüssel in `archive.info` gefährdet sämtliche WAL im Repository. Ein schwacher Unterschlüssel in `backup.info` gefährdet jedes Backup, da die Manifeste mit ihm verschlüsselt werden und jedes Manifest den Unterschlüssel für die Dateien seines Backups enthält. Dies betrifft auch WAL und Backups, die nach dem Upgrade hinzugefügt werden.
 
-Der Unterschlüssel für die Dateien eines Backups wird für jedes vollständige Backup erzeugt und auch von den darauf basierenden differentiellen und inkrementellen Backups verwendet. Ein schwacher Backup-Unterschlüssel gefährdet die Dateien in all diesen Backups.
+Der Unterschlüssel für die Dateien eines Backups wird für jedes vollständige Backup erzeugt und auch von den darauf basierenden differenziellen und inkrementellen Backups verwendet. Ein schwacher Backup-Unterschlüssel gefährdet die Dateien in all diesen Backups.
 
 Ein schwaches Salt legt keinen Unterschlüssel offen. Dateien, die mit demselben Unterschlüssel und Salt verschlüsselt werden, verwenden denselben Schlüssel und IV. Identische Daten in diesen Dateien ergeben daher identische verschlüsselte Daten. Das Salt wird unverschlüsselt am Anfang jeder Datei gespeichert. Ein schwaches Salt kann bis zu 8 Byte zuvor im Speicher vorhandener Daten enthalten.
 
@@ -96,7 +96,7 @@ pgBackRest-Versionen vor 2.53 konnten mit OpenSSL 1.0 gebaut werden. Wenn es kei
 
 - Führen Sie ein Upgrade auf pgBackRest 2.59.3 oder neuer durch. Diese Versionen melden einen Fehler, wenn keine Zufallsdaten erzeugt werden können.
 - Ist der Unterschlüssel in `archive.info` oder `backup.info` schwach, erstellen Sie die Stanza in einem neuen Repository und behalten Sie das alte Repository nur so lange, wie dessen Backups benötigt werden.
-- Erwägen Sie nach dem Upgrade ein neues vollständiges Backup, da differentielle und inkrementelle Backups den Unterschlüssel ihres vollständigen Backups verwenden.
+- Erwägen Sie nach dem Upgrade ein neues vollständiges Backup, da differenzielle und inkrementelle Backups den Unterschlüssel ihres vollständigen Backups verwenden.
 - Schwache Backup-Unterschlüssel und Salts werden entfernt, wenn die Backups und WAL aus der Zeit vor dem Upgrade ablaufen. Bei Backups mit langer Aufbewahrungsdauer bleiben sie bis zu deren Ablauf erhalten.
 
 

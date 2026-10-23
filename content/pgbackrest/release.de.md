@@ -29,7 +29,7 @@ Diese Spiegelung dokumentiert v2.60.0. Neuere Versionen sind in der [Versionsges
 
 ### v2.60.0 – Versionshinweise {#v2600-release-notes}
 
-*Seitenprüfsummenfehler und Vorablesen aus Objektspeichern*
+*Seitenprüfsummenfehler und Vorabladen aus Objektspeichern*
 
 *Veröffentlicht am 18. Oktober 2026*
 
@@ -44,14 +44,14 @@ Diese Spiegelung dokumentiert v2.60.0. Neuere Versionen sind in der [Versionsges
   Issue [#2687](https://github.com/pgbackrest/pgbackrest/issues/2687); Pull Request [#2833](https://github.com/pgbackrest/pgbackrest/pull/2833); Commit [`d7f54b2`](https://github.com/pgbackrest/pgbackrest/commit/d7f54b2245c8a9467e9a811c65626fe77739376b)
 - Unterstützung für GCS Workload Identity Federation. (*Beigetragen von Adol Rodriguez. Geprüft von Douglas J Hunley, David Steele.*)
 
-  Setzen Sie `repo-gcs-key-type=web-id` und `repo-gcs-key` auf eine Datei mit Anmeldedaten eines externen Kontos, wie sie etwa `gcloud iam workload-identity-pools create-cred-config` erzeugt. Das Web-Identity-Token wird ohne Dienstkontoschlüssel gegen ein Zugriffstoken ausgetauscht. Die Tokendatei wird bei jedem Austausch neu geladen, um rotierte Tokens zu übernehmen, beispielsweise projizierte Dienstkonto-Tokens von Kubernetes. Die Übernahme der Identität eines Dienstkontos wird nicht unterstützt.
+  Setzen Sie `repo-gcs-key-type=web-id` und geben Sie mit `repo-gcs-key` eine Datei mit Anmeldedaten eines externen Kontos an, wie sie etwa von `gcloud iam workload-identity-pools create-cred-config` erzeugt wird. Das Web-Identity-Token wird ohne Dienstkontoschlüssel gegen ein Zugriffstoken ausgetauscht. Die Tokendatei wird bei jedem Austausch neu geladen, um rotierte Tokens zu übernehmen, beispielsweise projizierte Dienstkonto-Tokens von Kubernetes. Die Übernahme der Identität eines Dienstkontos wird nicht unterstützt.
 
   Issue [#2838](https://github.com/pgbackrest/pgbackrest/issues/2838); Pull Request [#2839](https://github.com/pgbackrest/pgbackrest/pull/2839); Commit [`1d217e6`](https://github.com/pgbackrest/pgbackrest/commit/1d217e626301118ae2c1e7be39a6a4affa86e501)
-- Vorablesen mehrerer Dateien oder Bereiche aus Objektspeichern. (*Geprüft von Andrew Pogrebnoi, Douglas J Hunley.*)
+- Vorabladen mehrerer Dateien oder Bereiche aus Objektspeichern. (*Geprüft von Andrew Pogrebnoi, Douglas J Hunley.*)
 
   Anfragen werden vor dem aktuellen Lesevorgang eingereiht, sodass sie während des Lesens weiterlaufen. Kleine Lücken zwischen Dateien werden mitgelesen, statt eine neue Anfrage auszulösen. `Restore` nutzt dies zum Lesen gebündelter Dateien und blockinkrementeller Zuordnungen; `backup` liest damit blockinkrementelle Zuordnungen des vorherigen Backups. `repo-storage-prefetch` (Standard 3) legt die Anzahl eingereihter Anfragen fest, `repo-storage-read-over` (Standard 64KiB) die größte mitgelesene Lücke.
 
-  [`e63dec3`](https://github.com/pgbackrest/pgbackrest/commit/e63dec323b9e79513638b9858e4ad13b6072d060) Mehrere Dateien oder Bereiche aus Objektspeichern vorablesen.; Pull Request [#2783](https://github.com/pgbackrest/pgbackrest/pull/2783)
+  [`e63dec3`](https://github.com/pgbackrest/pgbackrest/commit/e63dec323b9e79513638b9858e4ad13b6072d060) Mehrere Dateien oder Bereiche aus Objektspeichern vorabladen.; Pull Request [#2783](https://github.com/pgbackrest/pgbackrest/pull/2783)
 
   [`5ae4015`](https://github.com/pgbackrest/pgbackrest/commit/5ae4015d37081eba4259f4de379a9d160236de0e) Lesevorgänge früherer blockinkrementeller Zuordnungen während des Backups zusammenfassen.; Pull Request [#2816](https://github.com/pgbackrest/pgbackrest/pull/2816)
 
@@ -62,14 +62,14 @@ Diese Spiegelung dokumentiert v2.60.0. Neuere Versionen sind in der [Versionsges
   Bei `archive-push` und `backup` wurde nach jedem abgeschlossenen Auftrag eine Keep-alive-Anfrage an jeden entfernten Prozess gesendet, selbst wenn dieser gerade eine Anfrage erhalten hatte. Eine Keep-alive-Anfrage wird nun nur gesendet, wenn seit 30 Sekunden keine Anfrage an den entfernten Prozess gesendet wurde.
 
   Commit [`f652261`](https://github.com/pgbackrest/pgbackrest/commit/f652261d32a4ffba98e7da26a41ef4ef1cd08da3)
-- Azure-Teilanforderungen ohne Antwort im Batch erneut ausführen. (*Geprüft von Douglas J Hunley.*)
+- Azure-Teilanfragen ohne Antwort im Batch erneut ausführen. (*Geprüft von Douglas J Hunley.*)
 
-  Schlägt eine Batch-Löschung bei Azure fehl, kann eine einzelne Antwort für den gesamten Batch zurückgegeben werden. Teilanforderungen ohne Antwort galten als abgeschlossen, sodass nur eine Datei pro Batch entfernt wurde, während der Befehl Erfolg meldete. Teilanforderungen ohne Antwort werden nun wiederholt.
+  Schlägt eine Batch-Löschung bei Azure fehl, kann eine einzelne Antwort für den gesamten Batch zurückgegeben werden. Teilanfragen ohne Antwort galten als abgeschlossen, sodass nur eine Datei pro Batch entfernt wurde, während der Befehl Erfolg meldete. Teilanfragen ohne Antwort werden nun wiederholt.
 
   Issue [#2840](https://github.com/pgbackrest/pgbackrest/issues/2840); Pull Request [#2849](https://github.com/pgbackrest/pgbackrest/pull/2849); Commit [`567a245`](https://github.com/pgbackrest/pgbackrest/commit/567a2451244e0e7a4c54e41880fac1a007b49930)
 - Manifestprüfungen beim Rekonstruieren von `backup.info` reduziert. (*Geprüft von Douglas J Hunley. Vorgeschlagen von todeb.*)
 
-  Die Befehle `backup`, `expire` und `annotate` prüfen nicht mehr auf ein `backup.manifest`, wenn die Repository-Auflistung zeigt, dass der Backup-Pfad nicht existiert, oder wenn ein differentielles bzw. inkrementelles Backup zu einem vollständigen Backup-Satz gehört, der nicht in `backup.info` enthalten ist. Jede Prüfung ist eine Anfrage; bei Objektspeichern wird die Prüfung auf ein fehlendes Manifest daher als 404 protokolliert.
+  Die Befehle `backup`, `expire` und `annotate` prüfen nicht mehr auf ein `backup.manifest`, wenn die Repository-Auflistung zeigt, dass der Backup-Pfad nicht existiert, oder wenn ein differenzielles bzw. inkrementelles Backup zu einem vollständigen Backup-Satz gehört, der nicht in `backup.info` enthalten ist. Jede Prüfung ist eine Anfrage; bei Objektspeichern wird die Prüfung auf ein fehlendes Manifest daher als 404 protokolliert.
 
   Issue [#2769](https://github.com/pgbackrest/pgbackrest/issues/2769); Pull Request [#2825](https://github.com/pgbackrest/pgbackrest/pull/2825); Commit [`0d3c340`](https://github.com/pgbackrest/pgbackrest/commit/0d3c340087bfb97263c29a8fd681cf079071236b)
 - Ursprüngliche Größe zur Entscheidung über das Bündeln einer Datei verwenden. (*Geprüft von Douglas J Hunley.*)
@@ -303,7 +303,7 @@ Diese Spiegelung dokumentiert v2.60.0. Neuere Versionen sind in der [Versionsges
   Issue [#2818](https://github.com/pgbackrest/pgbackrest/issues/2818); Pull Request [#2819](https://github.com/pgbackrest/pgbackrest/pull/2819); Commit [`a53e470`](https://github.com/pgbackrest/pgbackrest/commit/a53e470eca258c2db088af55be307403c8f43b7a)
 - Neue Backup-Kennzeichnung nur mit ihrem eigenen vollständigen Backup-Satz verglichen. (*Geprüft von Douglas J Hunley. Gemeldet von Anton Glushakov.*)
 
-  Einige Objektspeicher listen ein Präfix weiter auf, nachdem alle darunterliegenden Objekte gelöscht wurden, etwa MinIO mit Objektsperren oder SeaweedFS. Ein entferntes vollständiges Backup konnte dadurch weiterhin im Repository erscheinen. Alle folgenden differentiellen und inkrementellen Backups schlugen dann mit „new backup label ... is not later than latest backup label ...“ fehl. Eine neue Kennzeichnung wird nun nur mit den Backups ihres eigenen vollständigen Backup-Satzes verglichen.
+  Einige Objektspeicher listen ein Präfix weiter auf, nachdem alle darunterliegenden Objekte gelöscht wurden, etwa MinIO mit Objektsperren oder SeaweedFS. Ein entferntes vollständiges Backup konnte dadurch weiterhin im Repository erscheinen. Alle folgenden differenziellen und inkrementellen Backups schlugen dann mit „new backup label ... is not later than latest backup label ...“ fehl. Eine neue Kennzeichnung wird nun nur mit den Backups ihres eigenen vollständigen Backup-Satzes verglichen.
 
   Issue [#2792](https://github.com/pgbackrest/pgbackrest/issues/2792); Pull Request [#2824](https://github.com/pgbackrest/pgbackrest/pull/2824); Commit [`d01f77e`](https://github.com/pgbackrest/pgbackrest/commit/d01f77e8237f5d008bb7782c18ced12cd6d1971a)
 - Von GitHub erzeugte Quellcodearchive korrigiert, in denen für den Build erforderliche Dateien fehlten. (*Gemeldet von aardvarkzed.*)
@@ -471,7 +471,7 @@ Diese Spiegelung dokumentiert v2.60.0. Neuere Versionen sind in der [Versionsges
   Issue [#1693](https://github.com/pgbackrest/pgbackrest/issues/1693); Pull Request [#2812](https://github.com/pgbackrest/pgbackrest/pull/2812); Commit [`0daf53d`](https://github.com/pgbackrest/pgbackrest/commit/0daf53da03fb179b5771b6aaa559f9e0cc5842bb)
 - Anzahl binärer Suchen beim Erstellen des Manifests reduziert. (*Beigetragen von Gunnar Lindholm. Geprüft von David Steele.*)
 
-  Bei der Manifesterstellung eines differentiellen oder inkrementellen Backups wurde für jede Datei dreimal im vorherigen Manifest gesucht. Nun genügt eine Suche. Bei Clustern mit Millionen Dateien spart dies Millionen Suchvorgänge.
+  Bei der Manifesterstellung eines differenziellen oder inkrementellen Backups wurde für jede Datei dreimal im vorherigen Manifest gesucht. Nun genügt eine Suche. Bei Clustern mit Millionen Dateien spart dies Millionen Suchvorgänge.
 
   Pull Request [#2774](https://github.com/pgbackrest/pgbackrest/pull/2774); Commit [`f1ef629`](https://github.com/pgbackrest/pgbackrest/commit/f1ef62956adabf305a7e959477ea1bb668fd8d65)
 - Leistung bei der Positionierung innerhalb von Dateien während blockinkrementeller Delta-Wiederherstellungen verbessert. (*Geprüft von David Christensen, Douglas J Hunley.*)
@@ -878,7 +878,7 @@ Diese Spiegelung dokumentiert v2.60.0. Neuere Versionen sind in der [Versionsges
   Issue [#2591](https://github.com/pgbackrest/pgbackrest/issues/2591); Pull Request [#2595](https://github.com/pgbackrest/pgbackrest/pull/2595); Commit [`53a45d2`](https://github.com/pgbackrest/pgbackrest/commit/53a45d25c3e60e5067010b2676f5d6216638fbe3)
 - Entfernen abgelaufener inkrementeller Backups erläutert. (*Geprüft von Stefan Fercot.*)
 
-  Die Dokumentation erweckte den Eindruck, inkrementelle Backups würden anhand einer Anzahl entfernt. Nun erklärt sie deren Ablaufbehandlung und dass vollständige Backups bei der differentiellen Aufbewahrung als differentielle Backups mitzählen.
+  Die Dokumentation erweckte den Eindruck, inkrementelle Backups würden anhand einer Anzahl entfernt. Nun erklärt sie deren Ablaufbehandlung und dass vollständige Backups bei der differenziellen Aufbewahrung als differenzielle Backups mitzählen.
 
   Pull Request [#2601](https://github.com/pgbackrest/pgbackrest/pull/2601); Commit [`8bdba74`](https://github.com/pgbackrest/pgbackrest/commit/8bdba747981e8805a9bf355050f70cdf19e9babc)
 - Anforderung erläutert, dass die lokale und entfernte pgBackRest-Version übereinstimmen müssen. (*Beigetragen von Greg Clough. Geprüft von David Steele.*)
@@ -1157,7 +1157,7 @@ Diese Spiegelung dokumentiert v2.60.0. Neuere Versionen sind in der [Versionsges
 
 - Problem bei Dateien behoben, die auf dem Replikat größer sind als auf dem Primärserver. (*Geprüft von Stefan Fercot. Gemeldet von Nicolas Lassimonne.*)
 
-  Hatte eine Datei bei einem blockinkrementellen Backup vom Standby auf Primärserver und Standby unterschiedliche Größen, speicherte das nächste differentielle oder inkrementelle Backup die Größe vom Primärserver. Das darauf folgende Backup schlug mit „repo size must be > 0“ fehl.
+  Hatte eine Datei bei einem blockinkrementellen Backup vom Standby auf Primärserver und Standby unterschiedliche Größen, speicherte das nächste differenzielle oder inkrementelle Backup die Größe vom Primärserver. Das darauf folgende Backup schlug mit „repo size must be > 0“ fehl.
 
   [`83aaa86`](https://github.com/pgbackrest/pgbackrest/commit/83aaa868ef396348bf96589457f13c1805b25cb6) Unit-Tests für blockinkrementelle Backups vom Standby hinzufügen.
 
@@ -1251,7 +1251,7 @@ Diese Spiegelung dokumentiert v2.60.0. Neuere Versionen sind in der [Versionsges
   [`f287178`](https://github.com/pgbackrest/pgbackrest/commit/f287178b705cc90aa887d66c932e2a223029649b) Sichtbarkeit von Funktionen und Variablen auf hidden setzen.; Pull Request [#2265](https://github.com/pgbackrest/pgbackrest/pull/2265)
 - Unveränderte Dateien bei inkrementellen Backups ohne Delta erkannt. (*Geprüft von Stephen Frost.*)
 
-  Bei einem differentiellen oder inkrementellen Backup ohne Delta wird eine Datei, die in einen einzigen Puffer passt, sowie jede blockinkrementelle Datei mit der Datei im vorherigen Backup verglichen. Ist sie unverändert, wird sie referenziert statt gespeichert.
+  Bei einem differenziellen oder inkrementellen Backup ohne Delta wird eine Datei, die in einen einzigen Puffer passt, sowie jede blockinkrementelle Datei mit der Datei im vorherigen Backup verglichen. Ist sie unverändert, wird sie referenziert statt gespeichert.
 
   Pull Request [#2257](https://github.com/pgbackrest/pgbackrest/pull/2257); Commit [`9d91d1b`](https://github.com/pgbackrest/pgbackrest/commit/9d91d1b2f817b543fc8d970af56d1442c325ed7c)
 - Ungültige Recovery bei entferntem `backup_label` verhindert. (*Geprüft von Stephen Frost.*)
@@ -1266,7 +1266,7 @@ Diese Spiegelung dokumentiert v2.60.0. Neuere Versionen sind in der [Versionsges
   Pull Request [#2277](https://github.com/pgbackrest/pgbackrest/pull/2277); Commit [`cf17515`](https://github.com/pgbackrest/pgbackrest/commit/cf17515e409440eecfb04bf7186790d8baa8ab12)
 - Fortsetzen von Backups auf vollständige Backups beschränkt. (*Geprüft von Stephen Frost, Stefan Fercot.*)
 
-  Die Fortsetzung funktionierte bei differentiellen und inkrementellen Delta-Backups nicht richtig. Zudem ändert sich eine seit dem vorherigen Backup geänderte Datei wahrscheinlich vor einer Fortsetzung erneut. Deshalb werden nun nur vollständige Backups fortgesetzt.
+  Die Fortsetzung funktionierte bei differenziellen und inkrementellen Delta-Backups nicht richtig. Zudem ändert sich eine seit dem vorherigen Backup geänderte Datei wahrscheinlich vor einer Fortsetzung erneut. Deshalb werden nun nur vollständige Backups fortgesetzt.
 
   Pull Request [#2268](https://github.com/pgbackrest/pgbackrest/pull/2268); Commit [`dddcbcd`](https://github.com/pgbackrest/pgbackrest/commit/dddcbcd8e9a1cae578b0cc5bb2d1aa768330f3c5)
 - Fortsetzungsfunktion für blockinkrementelle Backups aktualisiert. (*Geprüft von Stephen Frost.*)
@@ -1519,7 +1519,7 @@ Diese Spiegelung dokumentiert v2.60.0. Neuere Versionen sind in der [Versionsges
   Issue [#2062](https://github.com/pgbackrest/pgbackrest/issues/2062); Pull Request [#2070](https://github.com/pgbackrest/pgbackrest/pull/2070); Commit [`9cceed6`](https://github.com/pgbackrest/pgbackrest/commit/9cceed6ac4a32c14a797eba89a4ad1dc06d89d80)
 - Erzeugung eindeutiger Kennzeichnungen für differenzielle/inkrementelle Backups korrigiert. (*Behoben von Andrey Sokolov. Geprüft von David Steele.*)
 
-  Gab es mindestens zwei vollständige Backups und war das neueste entfernt worden, schlug ein differentielles oder inkrementelles Backup wie bei einer zurückgestellten Uhr fehl. Seine Kennzeichnung wurde mit der des entfernten vollständigen Backups verglichen.
+  Gab es mindestens zwei vollständige Backups und war das neueste entfernt worden, schlug ein differenzielles oder inkrementelles Backup wie bei einer zurückgestellten Uhr fehl. Seine Kennzeichnung wurde mit der des entfernten vollständigen Backups verglichen.
 
   Issue [#1873](https://github.com/pgbackrest/pgbackrest/issues/1873); Pull Request [#2104](https://github.com/pgbackrest/pgbackrest/pull/2104); Commit [`0ac0934`](https://github.com/pgbackrest/pgbackrest/commit/0ac09344dc17fb54e250705ce49399b86329bb3d)
 - Zeitbasiertes Entfernen abgelaufener Archivdaten korrigiert, wenn keine Backups abgelaufen sind. (*Geprüft von Stefan Fercot.*)
@@ -1570,7 +1570,7 @@ Diese Spiegelung dokumentiert v2.60.0. Neuere Versionen sind in der [Versionsges
 
 - Blockinkrementelles Backup. (*Geprüft von John Morris, Stephen Frost, Stefan Fercot.*)
 
-  Die blockinkrementelle Verarbeitung speichert nur die seit dem vorherigen Backup geänderten Teile einer Datei. Das spart bei differentiellen und inkrementellen Backups großer Dateien Platz und Zeit. Aktivieren Sie sie mit `repo-block`, das `repo-bundle` voraussetzt.
+  Die blockinkrementelle Verarbeitung speichert nur die seit dem vorherigen Backup geänderten Teile einer Datei. Das spart bei differenziellen und inkrementellen Backups großer Dateien Platz und Zeit. Aktivieren Sie sie mit `repo-block`, das `repo-bundle` voraussetzt.
 
   [`dd4e526`](https://github.com/pgbackrest/pgbackrest/commit/dd4e52679ecdc43539bd038b5aa9bd4ff9055cbf) Aufteilung in Chunks und Blocknummern aus der inkrementellen Blockliste entfernen.; Pull Request [#2029](https://github.com/pgbackrest/pgbackrest/pull/2029)
 
@@ -1802,7 +1802,7 @@ Diese Spiegelung dokumentiert v2.60.0. Neuere Versionen sind in der [Versionsges
 
 - Fehlende Referenz bei differenziellen/inkrementellen Backups korrigiert. (*Geprüft von Stefan Fercot. Gemeldet von Marcel Borger, ulfedf, jaymefSO.*)
 
-  In v2.42 schlug ein differentielles oder inkrementelles Backup mit „unable to find '...' in string list“ fehl, wenn sein Vorgänger mit einer älteren Version erstellt worden war. Die für ein älteres Manifest aufgebaute Referenzliste enthält nun auch die Kennzeichnung des Backups selbst.
+  In v2.42 schlug ein differenzielles oder inkrementelles Backup mit „unable to find '...' in string list“ fehl, wenn sein Vorgänger mit einer älteren Version erstellt worden war. Die für ein älteres Manifest aufgebaute Referenzliste enthält nun auch die Kennzeichnung des Backups selbst.
 
   [`28f6604`](https://github.com/pgbackrest/pgbackrest/commit/28f660482aa5abb97850a9d7c89c2e5e9f23a4c9) Test für manifestBackupLabelSet() im Unit-Test info/manifest verschieben.
 
@@ -2769,7 +2769,7 @@ Diese Spiegelung dokumentiert v2.60.0. Neuere Versionen sind in der [Versionsges
   [`9af0331`](https://github.com/pgbackrest/pgbackrest/commit/9af033194abc4b1cd3f06c3a97fff71c966c3827) Automatische GCS-Authentifizierung für GCE-Instanzen hinzufügen.; Pull Request [#1395](https://github.com/pgbackrest/pgbackrest/pull/1395)
 - Option `repo-retention-history` zum Entfernen abgelaufener Backup-Historien hinzugefügt. (*Beigetragen von Stefan Fercot. Geprüft von Cynthia Shang, David Steele.*)
 
-  Legen Sie fest, wie viele Tage Backup-Historie aufbewahrt werden. Standardmäßig bleibt die gesamte Historie erhalten. Die Historie noch im Repository vorhandener Backups wird niemals entfernt. Läuft das Manifest eines vollständigen Backups ab, gilt dies auch für die Manifeste seiner differentiellen und inkrementellen Backups.
+  Legen Sie fest, wie viele Tage Backup-Historie aufbewahrt werden. Standardmäßig bleibt die gesamte Historie erhalten. Die Historie noch im Repository vorhandener Backups wird niemals entfernt. Läuft das Manifest eines vollständigen Backups ab, gilt dies auch für die Manifeste seiner differenziellen und inkrementellen Backups.
 
   Pull Request [#1389](https://github.com/pgbackrest/pgbackrest/pull/1389); Commit [`5b332b2`](https://github.com/pgbackrest/pgbackrest/commit/5b332b22b508d896abb64fa6abe26c78c83a29bc)
 - Option `db-exclude` hinzugefügt. (*Beigetragen von Stefan Fercot. Geprüft von Cynthia Shang.*)
