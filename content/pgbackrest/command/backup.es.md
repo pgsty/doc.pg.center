@@ -864,7 +864,7 @@ Se admiten los siguientes tipos de autorización:
 - `auto` - Autorizar usando la cuenta de servicio de la instancia.
 - `service` - Cuenta de servicio desde una clave almacenada localmente.
 - `token` - Para pruebas locales, p. ej., `fakegcs`.
-- `web-id` - Autorización mediante Workload Identity Federation.
+- `web-id` - Autoriza mediante Workload Identity Federation.
 
 Cuando `repo-gcs-key-type=service`, las credenciales se recargarán cuando se renueve el token de autenticación.
 

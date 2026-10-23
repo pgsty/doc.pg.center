@@ -33,7 +33,7 @@ example: --archive-expire-before=000000010000000000000010
 
 Notificar un error ante sumas de comprobación de páginas no válidas.
 
-Si está activada y la copia más antigua que se conservaría contiene errores en las sumas de comprobación, la orden `expire` termina con un error antes de realizar cualquier cambio. Si está desactivada, `expire` continúa y emite una advertencia si la copia más antigua conservada contiene esos errores.
+Si está activada y la copia más antigua que se conservaría contiene errores en las sumas de comprobación, el comando `expire` termina con un error antes de realizar cualquier cambio. Si está desactivada, `expire` continúa y emite una advertencia si la copia más antigua conservada contiene esos errores.
 
 Si se utiliza `--set`, `expire` continúa aunque esta opción esté activada. Se emite una advertencia si la copia más antigua conservada contiene errores en las sumas de comprobación.
 
@@ -523,7 +523,7 @@ Se admiten los siguientes tipos de autorización:
 - `auto` - Autorizar usando la cuenta de servicio de la instancia.
 - `service` - Cuenta de servicio desde una clave almacenada localmente.
 - `token` - Para pruebas locales, p. ej., `fakegcs`.
-- `web-id` - Autorización mediante Workload Identity Federation.
+- `web-id` - Autoriza mediante Workload Identity Federation.
 
 Cuando `repo-gcs-key-type=service`, las credenciales se recargarán cuando se renueve el token de autenticación.
 

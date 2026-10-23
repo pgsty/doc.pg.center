@@ -109,7 +109,7 @@ Todas las operaciones utilizan fsync a nivel de archivo y de directorio para gar
 
 Si las sumas de control de páginas están habilitadas, pgBackRest validará las sumas de control de cada archivo que se copie durante una copia de seguridad. Todas las sumas de control de páginas se validan durante una copia de seguridad completa y las sumas de control de los archivos que han cambiado se validan durante las copias de seguridad diferenciales e incrementales.
 
-De forma predeterminada, los fallos de validación no detienen la copia de seguridad, sino que se emiten advertencias a la consola y al archivo de registro con detalles de las páginas que han fallado. De forma predeterminada, restore notifica un error si la copia contiene sumas de control de páginas no válidas, y expire no permite que una copia con esos errores quede como la copia más antigua conservada.
+De forma predeterminada, los fallos de validación no detienen la copia de seguridad, sino que se emiten advertencias a la consola y al archivo de registro con detalles que indican exactamente qué páginas han fallado. De forma predeterminada, restore notifica un error si la copia contiene sumas de control de páginas no válidas, y expire no permite que una copia con esos errores quede como la copia más antigua conservada.
 
 Esta funcionalidad permite detectar temprano la corrupción a nivel de página, antes de que expiren las copias de seguridad que contienen copias válidas de los datos.
 
