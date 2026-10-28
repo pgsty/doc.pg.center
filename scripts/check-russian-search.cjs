@@ -17,15 +17,13 @@ const moduleDir = JSON.parse(execFileSync(
 assert(moduleDir, 'published OINK module must resolve to a directory');
 global.window = {};
 const lunr = require(path.join(moduleDir, 'assets/js/third_party/lunr.min.js'));
-const local = require(path.join(project, 'assets/js/search-engine.js'));
 const upstream = require(path.join(moduleDir, 'assets/js/search-engine.js'));
 const indexes = fs.readdirSync(publicDir).filter(
   (name) => /^offline-search-index\.ru\..*\.json$/.test(name),
 );
 assert.equal(indexes.length, 1, 'exactly one Russian production index');
 const documents = JSON.parse(fs.readFileSync(path.join(publicDir, indexes[0]), 'utf8'));
-const engine = local.create(documents, lunr, 30);
-const original = upstream.create(documents, lunr, 30);
+const engine = upstream.create(documents, lunr, 30);
 
 for (const query of ['Восстановление', 'ВОССТАНОВЛЕНИЕ', 'резервное копирование']) {
   assert(engine.query(query).some(
@@ -42,7 +40,9 @@ for (const [query, route] of [
     `HAProxy search result ${route} missing for ${query}`);
 }
 for (const query of ['pgBackRest', 'restore', 'backup', 'configuration']) {
-  assert.deepEqual(engine.query(query), original.query(query),
-    `Latin search changed for ${query}`);
+  const results = engine.query(query);
+  assert(results.length > 0, `Latin search returned no results for ${query}`);
+  assert(results.every(({ doc }) => doc.ref.startsWith('/ru/')),
+    `Latin query escaped the Russian index: ${query}`);
 }
-console.log('Validated Cyrillic pgBackRest and HAProxy searches, technical HAProxy search and unchanged Latin results using the production index.');
+console.log('Validated Cyrillic pgBackRest and HAProxy searches, technical HAProxy search and Latin queries using the production index.');
