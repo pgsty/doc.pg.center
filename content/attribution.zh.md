@@ -29,7 +29,7 @@ PG.CENTER 转载并整理了六个上游项目撰写的文档。每一个文档�
 | [PgBouncer](/zh/pgbouncer/) | [PgBouncer 文档](https://www.pgbouncer.org/) | v1.26.1 | [ISC](https://opensource.org/license/isc-license-txt) | [上游 `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/COPYRIGHT) |
 | [pgBadger](/zh/pgbadger/) | [pgBadger 文档](https://pgbadger.darold.net/) | v13.2 开发快照，提交 `f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/zh/haproxy/) | [HAProxy 3.4 手册](https://docs.haproxy.org/3.4/) | 3.4.7-57 文档快照（稳定版 3.4.7），提交 `0faeaed` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/zh/etcd/) | [etcd v3.7 文档](https://etcd.io/docs/v3.7/) | v3.7，提交 `d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [上游 `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [etcd](/zh/etcd/) | [etcd v3.7 文档](https://etcd.io/docs/v3.7/) | v3.7 文档，提交 `d20f8ae`；软件版本 v3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [上游 `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 所有文档集都是**改编**而非镜像：标题、锚点、交叉链接、代码签名、页面分组与导航结构都为本站重新组织，
 上游正文本身则予以保留。页末署名会明确说明这一点，并链接到本站中该页面的修改历史。
@@ -101,6 +101,12 @@ HAProxy 自身的授权说明、OpenSSL 例外条款与完整 GPLv2 文本发布
 [`d20f8ae346da`](https://github.com/etcd-io/website/commit/d20f8ae346da60ab6eb6f24f200753b328aa9fcc)。
 固定的上游源码树为
 [`content/en/docs/v3.7`](https://github.com/etcd-io/website/tree/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7)。
+
+2026-10-28，安装、Docker、Kubernetes 示例及版本更新摘要已同步至
+[etcd v3.7.3](https://github.com/etcd-io/etcd/releases/tag/v3.7.3)，发布提交为
+[`0a173d0`](https://github.com/etcd-io/etcd/commit/0a173d0410a96d01091b484daae81365bbcde57e)。
+该版本的 `go.mod` 固定使用 Go 1.26.10。文档快照与软件发布版本及来源校验和分别记录在
+`data/upstreams.yaml` 中。
 
 etcd 文档版权归 etcd Authors 所有（Copyright 2013-present）。其正文依
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 授权，代码与代码示例依

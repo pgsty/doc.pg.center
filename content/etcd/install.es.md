@@ -4,6 +4,7 @@ weight: 1150
 description: Instrucciones para instalar etcd a partir de binarios precompilados o a partir del código fuente.
 icon: fa-solid fa-download
 categories: [Tarea]
+search_keywords: [v3.7.3, "Go 1.26.10"]
 upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/install.md"
 ---
 
@@ -19,7 +20,7 @@ Antes de instalar etcd, consulta las páginas siguientes:
 La forma más sencilla de instalar etcd es a partir de binarios precompilados:
 
  1. Descarga el archivo comprimido para tu plataforma desde [Releases][releases],
-    eligiendo la versión [v3.7.2][tagged-release] o posterior.
+    eligiendo la versión [v3.7.3][tagged-release] o posterior.
  2. Descomprime el archivo. Esto da como resultado un directorio que contiene los binarios.
  3. Añade los binarios ejecutables a tu ruta. Por ejemplo, renombra y/o mueve
     los binarios a un directorio de tu ruta (como `/usr/local/bin`), o añade el
@@ -28,22 +29,22 @@ La forma más sencilla de instalar etcd es a partir de binarios precompilados:
 
     ```sh
     $ etcd --version
-    etcd Version: 3.7.2
+    etcd Version: 3.7.3
     ...
     ```
 
 ## Compilar a partir del código fuente {#build-from-source}
 
-Para etcd v3.7.2, usa [Go versión 1.26+][go]; la versión fija la cadena de herramientas Go 1.26.8.
+Para etcd v3.7.3, usa [Go versión 1.26+][go]; la versión fija la [cadena de herramientas Go 1.26.10][go-toolchain].
 Compila a partir del código fuente siguiendo estos pasos:
 
  1. [Descarga el repositorio de etcd como archivo zip][download] y descomprímelo, o clona el
     repositorio usando el siguiente comando.
 
     ```sh
-    $ git clone -b v3.7.2 https://github.com/etcd-io/etcd.git
+    $ git clone -b v3.7.3 https://github.com/etcd-io/etcd.git
     ```
-    Para compilar desde `main@HEAD`, omite la opción `-b v3.7.2`.
+    Para compilar desde `main@HEAD`, omite la opción `-b v3.7.3`.
 
  2. Cambia de directorio:
 
@@ -121,7 +122,7 @@ La forma recomendada de instalar etcd en Linux es mediante [binarios precompilad
 
     ```sh
     $ etcd --version
-    etcd Version: 3.7.2
+    etcd Version: 3.7.3
     ...
     ```
 
@@ -136,7 +137,7 @@ secundario.
 Para ejecutar etcd usando Docker:
 
 ```sh
-ETCD_VER=v3.7.2
+ETCD_VER=v3.7.3
 
 rm -rf /tmp/etcd-data.tmp && mkdir -p /tmp/etcd-data.tmp && \
   docker rmi gcr.io/etcd-development/etcd:${ETCD_VER} || true && \
@@ -177,12 +178,13 @@ docker exec etcd-gcr-${ETCD_VER} /usr/local/bin/etcdctl get foo
 Para una comprobación básica algo más detallada de tu instalación, consulta
 el [Inicio rápido][Quickstart].
 
-[download]: https://github.com/etcd-io/etcd/archive/v3.7.2.zip
+[download]: https://github.com/etcd-io/etcd/archive/v3.7.3.zip
 [go]: https://golang.org/doc/install
+[go-toolchain]: https://github.com/etcd-io/etcd/blob/0a173d0410a96d01091b484daae81365bbcde57e/go.mod
 [Hardware recommendations]: /es/etcd/op-guide/hardware/
 [Quickstart]: /es/etcd/quickstart/
 [Running etcd as a Kubernetes StatefulSet]: /es/etcd/op-guide/kubernetes/
 [releases]: https://github.com/etcd-io/etcd/releases/
-[tagged-release]: https://github.com/etcd-io/etcd/releases/tag/v3.7.2
+[tagged-release]: https://github.com/etcd-io/etcd/releases/tag/v3.7.3
 [Supported platforms]: /es/etcd/op-guide/supported-platform/
 [Homebrew can run on Linux]: <https://docs.brew.sh/Homebrew-on-Linux>

@@ -4,6 +4,7 @@ weight: 1150
 description: "ビルド済みバイナリーまたはソースからetcdをインストールする手順。"
 icon: fa-solid fa-download
 categories: [タスク]
+search_keywords: [v3.7.3, "Go 1.26.10"]
 upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/install.md"
 ---
 
@@ -19,7 +20,7 @@ etcdをインストールする前に、次のページを参照してくださ�
 etcdを最も簡単にインストールする方法は、ビルド済みバイナリーを使用することです。
 
  1. [リリース一覧][Releases]から、使用するプラットフォームの圧縮アーカイブをダウンロードします。
-    リリースは[v3.7.2][tagged-release]以降を選択してください。
+    リリースは[v3.7.3][tagged-release]以降を選択してください。
  2. アーカイブを展開します。バイナリーを含むディレクトリが作成されます。
  3. 実行可能バイナリーにパスを通します。たとえば、必要に応じてバイナリーの名前を変更して
     パスの通ったディレクトリ（`/usr/local/bin`など）へ移動するか、
@@ -28,22 +29,22 @@ etcdを最も簡単にインストールする方法は、ビルド済みバイ�
 
     ```sh
     $ etcd --version
-    etcd Version: 3.7.2
+    etcd Version: 3.7.3
     ...
     ```
 
 ## ソースからのビルド {#build-from-source}
 
-etcd v3.7.2では、[Goバージョン1.26以降][go]を使用してください。このリリースはGo 1.26.8のツールチェーンを指定しています。
+etcd v3.7.3では、[Goバージョン1.26以降][go]を使用してください。このリリースは[Go 1.26.10のツールチェーン][go-toolchain]を指定しています。
 次の手順でソースからetcdをビルドできます。
 
  1. [etcdリポジトリをzipファイルとしてダウンロード][download]して展開するか、
     次のコマンドでリポジトリをクローンします。
 
     ```sh
-    $ git clone -b v3.7.2 https://github.com/etcd-io/etcd.git
+    $ git clone -b v3.7.3 https://github.com/etcd-io/etcd.git
     ```
-    `main@HEAD`からビルドするには、`-b v3.7.2`フラグを省略します。
+    `main@HEAD`からビルドするには、`-b v3.7.3`フラグを省略します。
 
  2. ディレクトリを移動します。
 
@@ -121,7 +122,7 @@ Linuxへのetcdのインストールには、[ビルド済みバイナリー](#i
 
     ```sh
     $ etcd --version
-    etcd Version: 3.7.2
+    etcd Version: 3.7.3
     ...
     ```
 
@@ -135,7 +136,7 @@ etcdは、主なコンテナーレジストリとして[`gcr.io/etcd-development
 Dockerでetcdを実行するには、次のコマンドを使用します。
 
 ```sh
-ETCD_VER=v3.7.2
+ETCD_VER=v3.7.3
 
 rm -rf /tmp/etcd-data.tmp && mkdir -p /tmp/etcd-data.tmp && \
   docker rmi gcr.io/etcd-development/etcd:${ETCD_VER} || true && \
@@ -175,12 +176,13 @@ docker exec etcd-gcr-${ETCD_VER} /usr/local/bin/etcdctl get foo
 
 インストールが正常に行われたことをもう少し詳しく確認するには、[クイックスタート][Quickstart]を参照してください。
 
-[download]: https://github.com/etcd-io/etcd/archive/v3.7.2.zip
+[download]: https://github.com/etcd-io/etcd/archive/v3.7.3.zip
 [go]: https://golang.org/doc/install
+[go-toolchain]: https://github.com/etcd-io/etcd/blob/0a173d0410a96d01091b484daae81365bbcde57e/go.mod
 [Hardware recommendations]: /ja/etcd/op-guide/hardware/
 [Quickstart]: /ja/etcd/quickstart/
 [Running etcd as a Kubernetes StatefulSet]: /ja/etcd/op-guide/kubernetes/
 [releases]: https://github.com/etcd-io/etcd/releases/
-[tagged-release]: https://github.com/etcd-io/etcd/releases/tag/v3.7.2
+[tagged-release]: https://github.com/etcd-io/etcd/releases/tag/v3.7.3
 [Supported platforms]: /ja/etcd/op-guide/supported-platform/
 [Homebrew can run on Linux]: <https://docs.brew.sh/Homebrew-on-Linux>

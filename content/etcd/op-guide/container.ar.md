@@ -3,6 +3,7 @@ title: تشغيل عناقيد etcd داخل الحاويات
 weight: 4200
 description: تشغيل etcd مع Docker باستخدام التهيئة الأولية الثابتة
 categories: [مهمة]
+search_keywords: [v3.7.3]
 upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/container.md"
 ---
 
@@ -27,11 +28,11 @@ docker volume create --name etcd-data
 export DATA_DIR="etcd-data"
 ```
 
-شغّل أحدث إصدار من etcd‏ (`v3.7.2` في وقت
+شغّل أحدث إصدار من etcd‏ (`v3.7.3` في وقت
 كتابة هذا الدليل):
 
 ```
-ETCD_VERSION=v3.7.2
+ETCD_VERSION=v3.7.3
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd
@@ -62,7 +63,7 @@ REGISTRY=quay.io/coreos/etcd
 REGISTRY=gcr.io/etcd-development/etcd
 
 # For each machine
-ETCD_VERSION=v3.7.2
+ETCD_VERSION=v3.7.3
 TOKEN=my-etcd-token
 CLUSTER_STATE=new
 NAME_1=etcd-node-0
@@ -155,7 +156,7 @@ rkt run \
 يعيد مثال Docker التالي استخدام `NODE1` من الأعلى ويستخدم التهيئة الأولية الثابتة لتوضيح تثبيت وحدة تخزين الشهادات.
 
 ```
-ETCD_VERSION=v3.7.2
+ETCD_VERSION=v3.7.3
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd

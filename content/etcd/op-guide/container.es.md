@@ -3,6 +3,7 @@ title: Ejecutar clústeres de etcd en contenedores
 weight: 4200
 description: Ejecución de etcd con Docker mediante el arranque estático
 categories: [Tarea]
+search_keywords: [v3.7.3]
 upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/container.md"
 ---
 
@@ -27,11 +28,11 @@ docker volume create --name etcd-data
 export DATA_DIR="etcd-data"
 ```
 
-Ejecuta la última versión de etcd (`v3.7.2` en el momento de
+Ejecuta la última versión de etcd (`v3.7.3` en el momento de
 escribir esto):
 
 ```
-ETCD_VERSION=v3.7.2
+ETCD_VERSION=v3.7.3
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd
@@ -62,7 +63,7 @@ REGISTRY=quay.io/coreos/etcd
 REGISTRY=gcr.io/etcd-development/etcd
 
 # For each machine
-ETCD_VERSION=v3.7.2
+ETCD_VERSION=v3.7.3
 TOKEN=my-etcd-token
 CLUSTER_STATE=new
 NAME_1=etcd-node-0
@@ -155,7 +156,7 @@ rkt run \
 El ejemplo de Docker siguiente reutiliza el `NODE1` definido anteriormente y usa el arranque estático para demostrar el montaje de un volumen de certificados.
 
 ```
-ETCD_VERSION=v3.7.2
+ETCD_VERSION=v3.7.3
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd

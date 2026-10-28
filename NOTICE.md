@@ -17,7 +17,12 @@ adaptations use CC BY 4.0, subject to the original upstream terms identified bel
 | PgBouncer | v1.26.1, tag `pgbouncer_1_26_1` | Copyright (c) 2007-2009 Marko Kreen, Skype Technologies OÜ; ISC |
 | pgBadger | v13.2 development snapshot, commit `f373ac678c756f66a785c5ab4773d1f05f468d67` | Copyright (c) 2012-2026 Gilles Darold; PostgreSQL License |
 | HAProxy | 3.4.7-57, commit `0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3` | Copyright 2000-2026 Willy Tarreau; GPL-2.0-only |
-| etcd | v3.7, website commit `d20f8ae346da60ab6eb6f24f200753b328aa9fcc` | Copyright 2013-present etcd Authors; CC BY 4.0 for prose, Apache 2.0 for code and samples |
+| etcd | v3.7 docs, website commit `d20f8ae346da60ab6eb6f24f200753b328aa9fcc`; updated for release v3.7.3 | Copyright 2013-present etcd Authors; CC BY 4.0 for prose, Apache 2.0 for code and samples |
+
+The etcd installation, Docker, and Kubernetes examples and release summary were
+updated on 2026-10-28 for tag `v3.7.3`, release commit
+`0a173d0410a96d01091b484daae81365bbcde57e`, including its Go 1.26.10 toolchain.
+The v3.7 documentation snapshot remains pinned separately from the software release.
 
 The HAProxy edition follows a 3.4 maintenance-branch documentation snapshot after
 stable release 3.4.7. It includes the complete Starter, Configuration, and

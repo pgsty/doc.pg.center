@@ -3,6 +3,7 @@ title: Запуск кластеров etcd в контейнерах
 weight: 4200
 description: Запуск etcd в Docker со статической начальной инициализацией
 categories: [Задача]
+search_keywords: [v3.7.3]
 upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/container.md"
 ---
 
@@ -27,10 +28,10 @@ docker volume create --name etcd-data
 export DATA_DIR="etcd-data"
 ```
 
-Запустите последнюю версию etcd (на момент написания — `v3.7.2`):
+Запустите последнюю версию etcd (на момент написания — `v3.7.3`):
 
 ```
-ETCD_VERSION=v3.7.2
+ETCD_VERSION=v3.7.3
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd
@@ -61,7 +62,7 @@ REGISTRY=quay.io/coreos/etcd
 REGISTRY=gcr.io/etcd-development/etcd
 
 # For each machine
-ETCD_VERSION=v3.7.2
+ETCD_VERSION=v3.7.3
 TOKEN=my-etcd-token
 CLUSTER_STATE=new
 NAME_1=etcd-node-0
@@ -154,7 +155,7 @@ rkt run \
 Пример Docker ниже использует заданную выше переменную `NODE1` и показывает подключение тома с сертификатами при статической начальной инициализации.
 
 ```
-ETCD_VERSION=v3.7.2
+ETCD_VERSION=v3.7.3
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd

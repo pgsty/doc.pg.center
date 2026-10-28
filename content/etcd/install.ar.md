@@ -4,6 +4,7 @@ weight: 1150
 description: تعليمات لتثبيت etcd من الملفات الثنائية المبنية مسبقًا أو من المصدر.
 icon: fa-solid fa-download
 categories: [مهمة]
+search_keywords: [v3.7.3, "Go 1.26.10"]
 upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/install.md"
 ---
 
@@ -19,7 +20,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 أسهل طريقة لتثبيت etcd هي من الملفات الثنائية المبنية مسبقًا:
 
  1. نزّل الملف المضغوط لمنصتك من [الإصدارات المنشورة][releases]،
-    مع اختيار الإصدار [v3.7.2][tagged-release] أو أحدث.
+    مع اختيار الإصدار [v3.7.3][tagged-release] أو أحدث.
  2. فك ضغط الملف المضغوط. ينتج عن ذلك دليل يحتوي على الملفات الثنائية.
  3. أضف الملفات الثنائية القابلة للتنفيذ إلى مسارك. مثلًا، أعد تسمية الملفات
     الثنائية و/أو انقلها إلى دليل موجود في مسارك (مثل `/usr/local/bin`)، أو
@@ -28,22 +29,22 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 
     ```sh
     $ etcd --version
-    etcd Version: 3.7.2
+    etcd Version: 3.7.3
     ...
     ```
 
 ## البناء من المصدر {#build-from-source}
 
-بالنسبة لـ etcd v3.7.2، استخدم [Go إصدار 1.26+][go]؛ يثبّت هذا الإصدار سلسلة أدوات Go 1.26.8.
+بالنسبة لـ etcd v3.7.3، استخدم [Go إصدار 1.26+][go]؛ يثبّت هذا الإصدار [سلسلة أدوات Go 1.26.10][go-toolchain].
 ابنِ من المصدر باتباع الخطوات التالية:
 
  1. [نزّل مستودع etcd على شكل ملف zip][download] وفك ضغطه، أو استنسخ
     المستودع باستخدام الأمر التالي.
 
     ```sh
-    $ git clone -b v3.7.2 https://github.com/etcd-io/etcd.git
+    $ git clone -b v3.7.3 https://github.com/etcd-io/etcd.git
     ```
-    للبناء من `main@HEAD`، احذف العلامة `-b v3.7.2`.
+    للبناء من `main@HEAD`، احذف العلامة `-b v3.7.3`.
 
  2. غيّر الدليل:
 
@@ -121,7 +122,7 @@ $ etcd --version
 
     ```sh
     $ etcd --version
-    etcd Version: 3.7.2
+    etcd Version: 3.7.3
     ...
     ```
 
@@ -136,7 +137,7 @@ $ etcd --version
 لتشغيل etcd باستخدام Docker:
 
 ```sh
-ETCD_VER=v3.7.2
+ETCD_VER=v3.7.3
 
 rm -rf /tmp/etcd-data.tmp && mkdir -p /tmp/etcd-data.tmp && \
   docker rmi gcr.io/etcd-development/etcd:${ETCD_VER} || true && \
@@ -177,12 +178,13 @@ docker exec etcd-gcr-${ETCD_VER} /usr/local/bin/etcdctl get foo
 لإجراء فحص سلامة أكثر شمولًا قليلًا لتثبيتك، راجع
 [البدء السريع][Quickstart].
 
-[download]: https://github.com/etcd-io/etcd/archive/v3.7.2.zip
+[download]: https://github.com/etcd-io/etcd/archive/v3.7.3.zip
 [go]: https://golang.org/doc/install
+[go-toolchain]: https://github.com/etcd-io/etcd/blob/0a173d0410a96d01091b484daae81365bbcde57e/go.mod
 [Hardware recommendations]: /ar/etcd/op-guide/hardware/
 [Quickstart]: /ar/etcd/quickstart/
 [Running etcd as a Kubernetes StatefulSet]: /ar/etcd/op-guide/kubernetes/
 [releases]: https://github.com/etcd-io/etcd/releases/
-[tagged-release]: https://github.com/etcd-io/etcd/releases/tag/v3.7.2
+[tagged-release]: https://github.com/etcd-io/etcd/releases/tag/v3.7.3
 [Supported platforms]: /ar/etcd/op-guide/supported-platform/
 [Homebrew can run on Linux]: <https://docs.brew.sh/Homebrew-on-Linux>

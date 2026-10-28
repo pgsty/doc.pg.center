@@ -27,7 +27,7 @@ PG.CENTERは、6つのアップストリームプロジェクトが作成した�
 | [PgBouncer](/ja/pgbouncer/) | [PgBouncerドキュメント](https://www.pgbouncer.org/) | v1.26.1 | [ISC](https://opensource.org/license/isc-license-txt) | [アップストリームの`COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/COPYRIGHT) |
 | [pgBadger](/ja/pgbadger/) | [pgBadgerドキュメント](https://pgbadger.darold.net/) | v13.2開発スナップショット、コミット`f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/ja/haproxy/) | [HAProxy 3.4マニュアル](https://docs.haproxy.org/3.4/) | ドキュメントスナップショット3.4.7-57、コミット`0faeaed`、安定版3.4.7 | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/ja/etcd/) | [etcd v3.7ドキュメント](https://etcd.io/docs/v3.7/) | v3.7、コミット`d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [アップストリームの`LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [etcd](/ja/etcd/) | [etcd v3.7ドキュメント](https://etcd.io/docs/v3.7/) | v3.7ドキュメント、コミット`d20f8ae`；ソフトウェアリリースv3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [アップストリームの`LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 各ドキュメント集は単なるミラーではなく、**編集を加えたもの**です。見出し、アンカー、相互リンク、コードシグネチャ、ページの分類、ナビゲーションをこの版に合わせて再構成し、アップストリームの本文自体は保持しています。ページ末尾の帰属表示にその旨を記載し、閲覧中のページのサイト内変更履歴へリンクしています。
 
@@ -73,6 +73,11 @@ HAProxyの著作権表示はcopyright 2000-2026 Willy Tarreauです。[GNU Gener
 ## etcd {#etcd}
 
 公式etcd v3.7ドキュメントからインポートし、2026-10-13にコミット[`d20f8ae346da`](https://github.com/etcd-io/website/commit/d20f8ae346da60ab6eb6f24f200753b328aa9fcc)へ更新しました。固定したソースツリーは[`content/en/docs/v3.7`](https://github.com/etcd-io/website/tree/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7)です。
+
+2026-10-28に、インストール、Docker、Kubernetesの例とリリース概要を
+[etcd v3.7.3](https://github.com/etcd-io/etcd/releases/tag/v3.7.3)に合わせて更新しました。リリースコミットは
+[`0a173d0`](https://github.com/etcd-io/etcd/commit/0a173d0410a96d01091b484daae81365bbcde57e)です。
+このリリースの`go.mod`はGo 1.26.10を指定しています。ドキュメントのスナップショットとソフトウェアリリースは、ソースのチェックサムとともに`data/upstreams.yaml`に個別に記録されています。
 
 etcdドキュメントの著作権表示はcopyright 2013-present etcd Authorsです。本文は[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)、コードとコードサンプルは[Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)のもとでライセンスされています。完全な通知は[アップストリーム](https://github.com/etcd-io/website/blob/main/LICENSE)に保存されています。
 

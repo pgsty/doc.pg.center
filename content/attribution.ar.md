@@ -30,7 +30,7 @@ outputs: [HTML, markdown]
 | [PgBouncer](/ar/pgbouncer/) | [توثيق PgBouncer](https://www.pgbouncer.org/) | v1.26.1 | [ISC](https://opensource.org/license/isc-license-txt) | [`COPYRIGHT` الأصلي](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/COPYRIGHT) |
 | [pgBadger](/ar/pgbadger/) | [توثيق pgBadger](https://pgbadger.darold.net/) | v13.2، لقطة تطوير، الالتزام `f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/ar/haproxy/) | [أدلة HAProxy 3.4](https://docs.haproxy.org/3.4/) | 3.4.7-57؛ المستقرة v3.4.7، الالتزام `0faeaed` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/ar/etcd/) | [توثيق etcd v3.7](https://etcd.io/docs/v3.7/) | v3.7، الالتزام `d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [`LICENSE` الأصلي](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [etcd](/ar/etcd/) | [توثيق etcd v3.7](https://etcd.io/docs/v3.7/) | توثيق v3.7، الالتزام `d20f8ae`؛ إصدار البرنامج v3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [`LICENSE` الأصلي](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 كل مجموعة **مُعدَّلة** لا منسوخة حرفيًا. أُعيدت صياغة العناوين والمراسي والوصلات
 المتقاطعة وتواقيع الشيفرة وتجميع الصفحات والتنقل لهذه الطبعة؛ والنثر الأصلي
@@ -109,6 +109,12 @@ outputs: [HTML, markdown]
 [`d20f8ae346da`](https://github.com/etcd-io/website/commit/d20f8ae346da60ab6eb6f24f200753b328aa9fcc).
 شجرة المصدر المثبّتة هي
 [`content/en/docs/v3.7`](https://github.com/etcd-io/website/tree/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7).
+
+في 2026-10-28، حُدِّثت أمثلة التثبيت وDocker وKubernetes وملخّص تغييرات الإصدار لتوافق
+[etcd v3.7.3](https://github.com/etcd-io/etcd/releases/tag/v3.7.3)، عند التزام الإصدار
+[`0a173d0`](https://github.com/etcd-io/etcd/commit/0a173d0410a96d01091b484daae81365bbcde57e).
+يثبّت ملف `go.mod` لهذا الإصدار Go 1.26.10. تُسجَّل لقطة التوثيق وإصدار البرنامج
+بشكل منفصل في `data/upstreams.yaml`، مع قيم التحقق من ملفات المصدر.
 
 حقوق نشر توثيق etcd 2013-الآن محفوظة لمؤلفي etcd. نثره مرخّص بموجب
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)، بينما الشيفرة وأمثلتها مرخّصة

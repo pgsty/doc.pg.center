@@ -32,7 +32,7 @@ qué licencia y dónde se conserva el aviso original completo.
 | [PgBouncer](/es/pgbouncer/) | [Documentación de PgBouncer](https://www.pgbouncer.org/) | v1.26.1 | [ISC](https://opensource.org/license/isc-license-txt) | [`COPYRIGHT` original](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/COPYRIGHT) |
 | [pgBadger](/es/pgbadger/) | [Documentación de pgBadger](https://pgbadger.darold.net/) | v13.2, instantánea de desarrollo, commit `f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/es/haproxy/) | [Manuales de HAProxy 3.4](https://docs.haproxy.org/3.4/) | 3.4.7-57; estable v3.4.7, commit `0faeaed` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/es/etcd/) | [Documentación de etcd v3.7](https://etcd.io/docs/v3.7/) | v3.7, commit `d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [`LICENSE` original](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [etcd](/es/etcd/) | [Documentación de etcd v3.7](https://etcd.io/docs/v3.7/) | Documentación v3.7, commit `d20f8ae`; versión del software v3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [`LICENSE` original](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 Cada colección está **adaptada**, no replicada. Los títulos, anclas, enlaces cruzados, firmas de
 código, agrupación de páginas y navegación se reelaboraron para esta edición; la prosa original
@@ -113,6 +113,12 @@ Importada desde la documentación oficial de etcd v3.7 y actualizada el 2026-10-
 [`d20f8ae346da`](https://github.com/etcd-io/website/commit/d20f8ae346da60ab6eb6f24f200753b328aa9fcc).
 El árbol fuente fijado es
 [`content/en/docs/v3.7`](https://github.com/etcd-io/website/tree/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7).
+
+El 2026-10-28 se actualizaron los ejemplos de instalación, Docker y Kubernetes y el resumen
+de cambios para [etcd v3.7.3](https://github.com/etcd-io/etcd/releases/tag/v3.7.3), commit de
+publicación [`0a173d0`](https://github.com/etcd-io/etcd/commit/0a173d0410a96d01091b484daae81365bbcde57e).
+El archivo `go.mod` de esta versión fija Go 1.26.10. La instantánea de documentación y la
+versión del software se registran por separado en `data/upstreams.yaml`, junto con las sumas de comprobación de las fuentes.
 
 La documentación de etcd tiene derechos de autor 2013-actualidad de los autores de etcd. Su
 prosa está licenciada bajo [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), mientras

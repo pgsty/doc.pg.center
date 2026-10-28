@@ -85,8 +85,17 @@ etcd:
   documentation: https://etcd.io/docs/v3.7/
   source_commit: d20f8ae346da60ab6eb6f24f200753b328aa9fcc
   source_path: content/en/docs/v3.7
+  stable_release: 3.7.3
+  release_repository: https://github.com/etcd-io/etcd
+  release_ref: v3.7.3
+  release_commit: 0a173d0410a96d01091b484daae81365bbcde57e
+  release_go_mod_sha256: 3dcc9e3955a6d1d720b18dca9a0b83e707522300203b33a230775aa0e3979f5f
+  release_changelog:
+    commit: f164b70fdf458a17aba05dfefc685d7de4c9ca37
+    path: CHANGELOG/CHANGELOG-3.7.md
+    sha256: fd3bf66dd7ed7168cbc4cbd1a66b86f67a53fa9805f903e079715366017ec876
   copyright: Copyright 2013-present etcd Authors
   license: CC-BY-4.0
   notice: /attribution/#etcd
-  ref: v3.7, commit d20f8ae
+  ref: v3.7.3; docs d20f8ae
   modified: true

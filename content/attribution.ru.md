@@ -34,7 +34,7 @@ PG.CENTER повторно публикует документацию, напи
 | [PgBouncer](/ru/pgbouncer/) | [Документация PgBouncer](https://www.pgbouncer.org/) | v1.26.1 | [ISC](https://opensource.org/license/isc-license-txt) | [Исходный `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/COPYRIGHT) |
 | [pgBadger](/ru/pgbadger/) | [Документация pgBadger](https://pgbadger.darold.net/) | v13.2, снимок разработки, коммит `f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/ru/haproxy/) | [Руководства HAProxy 3.4](https://docs.haproxy.org/3.4/) | снимок документации 3.4.7-57, коммит `0faeaed`; стабильный выпуск v3.4.7 | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/ru/etcd/) | [Документация etcd v3.7](https://etcd.io/docs/v3.7/) | v3.7, коммит `d20f8ae` | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Исходный `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [etcd](/ru/etcd/) | [Документация etcd v3.7](https://etcd.io/docs/v3.7/) | Документация v3.7, коммит `d20f8ae`; выпуск ПО v3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Исходный `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 
 Каждый сборник **адаптирован**, а не зеркально скопирован. Заголовки, якоря, перекрёстные ссылки,
 сигнатуры кода, группировка страниц и навигация переработаны для этого издания; исходный текст при
@@ -116,6 +116,12 @@ PG.CENTER повторно публикует документацию, напи
 [`d20f8ae346da`](https://github.com/etcd-io/website/commit/d20f8ae346da60ab6eb6f24f200753b328aa9fcc).
 Зафиксированное дерево исходного кода находится в
 [`content/en/docs/v3.7`](https://github.com/etcd-io/website/tree/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7).
+
+2026-10-28 примеры установки, Docker и Kubernetes, а также сводка изменений обновлены
+для [etcd v3.7.3](https://github.com/etcd-io/etcd/releases/tag/v3.7.3), коммит выпуска
+[`0a173d0`](https://github.com/etcd-io/etcd/commit/0a173d0410a96d01091b484daae81365bbcde57e).
+В `go.mod` этого выпуска закреплён Go 1.26.10. Снимок документации и выпуск ПО
+зафиксированы отдельно в `data/upstreams.yaml` вместе с контрольными суммами исходных файлов.
 
 Авторские права на документацию etcd принадлежат etcd Authors (copyright 2013-present). Её текст
 распространяется по [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), а код и примеры кода —
