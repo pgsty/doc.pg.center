@@ -30,6 +30,7 @@ Der Lock-Dienst stellt clientseitige Sperrfunktionen als gRPC-Schnittstelle bere
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | key | key ist ein Schlüssel, der in etcd existiert, solange der Lock-Aufrufer die Sperre besitzt. Benutzer sollten diesen Schlüssel nicht ändern, da die Sperre sonst ein undefiniertes Verhalten zeigen kann. | bytes |
+{.wide .expand}
 
 ##### Nachricht `UnlockRequest` (server/etcdserver/api/v3lock/v3lockpb/v3lock.proto) {#message-unlockrequest-serveretcdserverapiv3lockv3lockpbv3lockproto}
 
@@ -54,6 +55,7 @@ Der Election-Dienst stellt clientseitige Wahlfunktionen als gRPC-Schnittstelle b
 | Leader | LeaderRequest | LeaderResponse | Leader gibt den aktuell für die Wahl veröffentlichten Wert zurück, sofern vorhanden. |
 | Observe | LeaderRequest | LeaderResponse | Observe überträgt die von den gewählten Leadern veröffentlichten Werte in ihrer Reihenfolge als Stream. |
 | Resign | ResignRequest | ResignResponse | Resign gibt die Führungsrolle der Wahl frei, sodass andere Kandidaten sie übernehmen können. |
+{.wide .expand}
 
 ##### Nachricht `CampaignRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-campaignrequest-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
@@ -69,6 +71,7 @@ Der Election-Dienst stellt clientseitige Wahlfunktionen als gRPC-Schnittstelle b
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | leader | leader beschreibt die Ressourcen, die zum Halten der Führungsrolle der Wahl verwendet werden. | LeaderKey |
+{.wide .expand}
 
 ##### Nachricht `LeaderKey` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-leaderkey-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
@@ -91,6 +94,7 @@ Der Election-Dienst stellt clientseitige Wahlfunktionen als gRPC-Schnittstelle b
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | kv | kv ist das Schlüssel-Wert-Paar, das die neueste Aktualisierung des Leaders repräsentiert. | mvccpb.KeyValue |
+{.wide .expand}
 
 ##### Nachricht `ProclaimRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-proclaimrequest-serveretcdserverapiv3electionv3electionpbv3electionproto}
 

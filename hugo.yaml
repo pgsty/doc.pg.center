@@ -649,6 +649,9 @@ params:
     translation_notice: false
     section_index: cards
     backlinks: true
+    # Enable the local translation comparison reader for all pages with a
+    # published sibling in another language.
+    compare: true
     dark_mode: true
     sidebar_icon_policy: all
     sidebar_menu_compact: true

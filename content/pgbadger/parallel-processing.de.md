@@ -17,6 +17,7 @@ pgBadger bietet zwei einander ergänzende Modi für die Parallelverarbeitung. W�
 |---|---|---|---|
 | `-j N` / `--jobs N` | Abschnitte einer Protokolldatei | eine große Protokolldatei mit wahlfreiem Zugriff | An Abschnittsgrenzen kann eine geringe Anzahl von Abfragen doppelt gezählt oder ausgelassen werden |
 | `-J N` / `--Jobs N` | vollständige Protokolldateien | viele unabhängige Protokolle | nützlich nur, wenn genügend Dateien vorhanden sind, um die Worker auszulasten |
+{.wide .expand}
 
 ## Eine große Datei mit `-j` aufteilen {#single-file-jobs}
 
@@ -56,6 +57,7 @@ Eine Datei mit 9.5 GB:
 |---|---:|---:|---:|---:|
 | `-j` | 1h41m18 | 50m25 | 25m39 | 15m58 |
 | `-J` | 1h41m18 | 54m28 | 41m16 | 34m45 |
+{.wide .expand}
 
 Zweihundert Dateien à 10 MB, insgesamt 2 GB:
 
@@ -63,6 +65,7 @@ Zweihundert Dateien à 10 MB, insgesamt 2 GB:
 |---|---:|---:|---:|---:|
 | `-j` | 20m15 | 9m56 | 5m20 | 4m20 |
 | `-J` | 20m15 | 9m49 | 5m00 | 2m40 |
+{.wide .expand}
 
 In der Praxis empfiehlt sich `-j` für wenige große Dateien und `-J` für viele kleine Dateien. Sie können beide Modi kombinieren, sofern Eingabe und Plattform dies unterstützen. Messen Sie jedoch die Leistung dieser Kombination: Die Protokollanalyse kann eher durch den Durchsatz des Speichersystems als durch die CPU-Leistung begrenzt werden.
 

@@ -35,6 +35,7 @@ etcd 使用 [Prometheus][prometheus] 进行指标报告。指标可用于实时�
 | proposals_applied_total   | 已应用的共识提案总数。                              | 仪表     |
 | proposals_pending         | 当前待处理的提案数量。                              | 仪表     |
 | proposals_failed_total    | 观察到的失败提案总数。                              | 计数器   |
+{.wide .expand}
 
 `has_leader` 表示成员是否具有领导者。如果某个成员没有领导者，则该成员完全不可用。如果集群中的所有成员均无领导者，则整个集群完全不可用。
 
@@ -58,6 +59,7 @@ etcd 使用 [Prometheus][prometheus] 进行指标报告。指标可用于实时�
 |------------------------------------|------------------------------------------------|-----------|
 | wal_fsync_duration_seconds         | WAL 调用 fsync 的延迟分布                     | 直方图    |
 | backend_commit_duration_seconds    | 后端调用 commit 的延迟分布                     | 直方图    |
+{.wide .expand}
 
 etcd 在应用日志条目之前将其持久化到磁盘时，会调用 `wal_fsync`。
 
@@ -80,6 +82,7 @@ etcd 在应用日志条目之前将其持久化到磁盘时，会调用 `wal_fsy
 | peer_round_trip_time_seconds    | 对等成员之间的往返时间（RTT）直方图。           | 直方图（To）   |
 | client_grpc_sent_bytes_total    | 发送到 gRPC 客户端的总字节数。                    | 计数器       |
 | client_grpc_received_bytes_total| 从 gRPC 客户端接收的总字节数。                | 计数器       |
+{.wide .expand}
 
 `peer_sent_bytes_total` 统计发送至特定对等成员的总字节数。通常，领导者成员发送的数据量多于其他成员，因为它负责传输已复制的数据。
 
@@ -98,6 +101,7 @@ etcd 在应用日志条目之前将其持久化到磁盘时，会调用 `wal_fsy
 | 名称                                       | 描述                                                       | 类型      |
 |--------------------------------------------|------------------------------------------------------------|-----------|
 | snapshot_save_total_duration_seconds       | 快照调用保存操作的总延迟分布                                 | 直方图     |
+{.wide .expand}
 
 快照持续时间异常高（`snapshot_save_total_duration_seconds`）表明存在磁盘问题，可能导致集群不稳定。
 

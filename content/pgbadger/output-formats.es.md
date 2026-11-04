@@ -20,6 +20,7 @@ pgBadger selecciona la salida a partir de la extensión del nombre de archivo o 
 | Binario | `.bin` | estadísticas intermedias combinables y reconstrucción de informes |
 | JSON | `.json` | integración con otro software; requiere `JSON::XS` |
 | CSV sin procesar | archivo de salida elegido | extracción orientada a filas con `--dump-raw-csv` |
+{.wide .expand}
 
 ## HTML y texto {#html-and-text}
 

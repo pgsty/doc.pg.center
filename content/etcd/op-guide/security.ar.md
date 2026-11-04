@@ -69,6 +69,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | خادم (من العميل إلى الخادم) | digitalSignature, keyEncipherment | serverAuth |
 | عميل | digitalSignature, keyEncipherment | clientAuth |
 | قرين (من خادم إلى خادم) | digitalSignature, keyEncipherment | serverAuth, clientAuth |
+{.wide .expand}
 
 ملاحظات:
 

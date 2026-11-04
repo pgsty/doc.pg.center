@@ -48,4 +48,4 @@ See [Configuration Introduction](/pgbackrest/configuration/#introduction) for in
 | [**`stop`**](/pgbackrest/command/stop/)                     | Prevent new pgBackRest processes and optionally force-stop running ones.                |
 | [**`verify`**](/pgbackrest/command/verify/)                 | Verify that backup and archive data in the repository is valid.                         |
 | [**`version`**](/pgbackrest/command/version/)               | Display the installed pgBackRest version.                                               |
-{.full-width}
+{.full-width .wide .expand}

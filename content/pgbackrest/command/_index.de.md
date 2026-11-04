@@ -48,4 +48,4 @@ Informationen zu den Optionentypen finden Sie in der [Einführung zur Konfigurat
 | [**`stop`**](/de/pgbackrest/command/stop/) | Neue pgBackRest-Prozesse verhindern und laufende Prozesse optional zwangsweise beenden. |
 | [**`verify`**](/de/pgbackrest/command/verify/) | Die Gültigkeit der Backup- und Archivdaten im Repository prüfen. |
 | [**`version`**](/de/pgbackrest/command/version/) | Die installierte pgBackRest-Version anzeigen. |
-{.full-width}
+{.full-width .wide .expand}

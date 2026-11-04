@@ -397,6 +397,7 @@ La métrica `patroni_postgres_state` proporciona una representación numérica d
 | 12    | stopped                 | PostgreSQL está detenido                    |
 | 13    | stop_failed             | La detención de PostgreSQL falló            |
 | 14    | crashed                 | PostgreSQL ha caído                         |
+{.wide .expand}
 
 Valores de estado de PostgreSQL
 
@@ -691,6 +692,7 @@ Los endpoints `POST /switchover` y `POST /failover` los usan [patronictl_switcho
 | Requiere candidato especificado | sí                 | no                                  |
 | Puede ejecutarse en pausa    | sí                    | sí (solo a un candidato específico) |
 | Puede programarse            | no                    | sí (si no está en pausa)            |
+{.wide .expand}
 
 Comparación entre conmutación por error y switchover
 

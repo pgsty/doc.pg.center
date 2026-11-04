@@ -29,6 +29,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | RoleDelete | AuthRoleDeleteRequest | AuthRoleDeleteResponse | RoleDelete удаляет указанную роль. |
 | RoleGrantPermission | AuthRoleGrantPermissionRequest | AuthRoleGrantPermissionResponse | RoleGrantPermission предоставляет указанной роли разрешение на заданный ключ или диапазон. |
 | RoleRevokePermission | AuthRoleRevokePermissionRequest | AuthRoleRevokePermissionResponse | RoleRevokePermission отзывает у указанной роли разрешение на ключ или диапазон. |
+{.wide .expand}
 
 ##### Служба `Cluster` (api/etcdserverpb/rpc.proto) {#service-cluster-apietcdserverpbrpcproto}
 
@@ -39,6 +40,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | MemberUpdate | MemberUpdateRequest | MemberUpdateResponse | MemberUpdate обновляет конфигурацию участника. |
 | MemberList | MemberListRequest | MemberListResponse | MemberList перечисляет всех участников кластера. |
 | MemberPromote | MemberPromoteRequest | MemberPromoteResponse | MemberPromote повышает обучающегося участника raft без права голоса до участника raft с правом голоса. |
+{.wide .expand}
 
 ##### Служба `KV` (api/etcdserverpb/rpc.proto) {#service-kv-apietcdserverpbrpcproto}
 
@@ -49,6 +51,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | DeleteRange | DeleteRangeRequest | DeleteRangeResponse | DeleteRange удаляет заданный диапазон из хранилища ключей и значений. Запрос удаления увеличивает ревизию хранилища и создаёт событие удаления в истории для каждого удалённого ключа. |
 | Txn | TxnRequest | TxnResponse | Txn обрабатывает несколько запросов в одной транзакции. Запрос txn увеличивает ревизию хранилища ключей и значений и создаёт события с одной ревизией для каждого выполненного запроса. Многократное изменение одного ключа в одной txn недопустимо. |
 | Compact | CompactionRequest | CompactionResponse | Compact компактизирует историю событий в хранилище ключей и значений etcd. Хранилище следует периодически компактизировать, иначе история событий будет расти бесконечно. |
+{.wide .expand}
 
 ##### Служба `Lease` (api/etcdserverpb/rpc.proto) {#service-lease-apietcdserverpbrpcproto}
 
@@ -59,6 +62,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | LeaseKeepAlive | LeaseKeepAliveRequest | LeaseKeepAliveResponse | LeaseKeepAlive поддерживает аренду активной, передавая потоком запросы поддержания активности от клиента серверу и ответы от сервера клиенту. |
 | LeaseTimeToLive | LeaseTimeToLiveRequest | LeaseTimeToLiveResponse | LeaseTimeToLive получает сведения об аренде. |
 | LeaseLeases | LeaseLeasesRequest | LeaseLeasesResponse | LeaseLeases перечисляет все существующие аренды. |
+{.wide .expand}
 
 ##### Служба `Maintenance` (api/etcdserverpb/rpc.proto) {#service-maintenance-apietcdserverpbrpcproto}
 
@@ -72,6 +76,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | Snapshot | SnapshotRequest | SnapshotResponse | Snapshot передаёт снимок всего бэкенда от участника клиенту потоком. |
 | MoveLeader | MoveLeaderRequest | MoveLeaderResponse | MoveLeader запрашивает у текущего узла-лидера передачу лидерства назначенному узлу. |
 | Downgrade | DowngradeRequest | DowngradeResponse | Downgrade запрашивает понижение версии, проверяет его допустимость или отменяет его для версии кластера. Поддерживается начиная с etcd 3.5. |
+{.wide .expand}
 
 ##### Служба `Watch` (api/etcdserverpb/rpc.proto) {#service-watch-apietcdserverpbrpcproto}
 
@@ -86,6 +91,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | memberID | memberID — идентификатор участника, связанного с активированным аварийным сигналом. | uint64 |
 | alarm | alarm — тип активированного аварийного сигнала. | AlarmType |
+{.wide .expand}
 
 ##### Сообщение `AlarmRequest` (api/etcdserverpb/rpc.proto) {#message-alarmrequest-apietcdserverpbrpcproto}
 
@@ -95,6 +101,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | action | action — тип отправляемого запроса аварийного сигнала. Действие может запрашивать состояния сигналов (GET), активировать сигнал (ACTIVATE) или отключать активированный сигнал (DEACTIVATE). | AlarmAction |
 | memberID | memberID — идентификатор участника, связанного с сигналом. Если memberID равен 0, запрос относится ко всем участникам. | uint64 |
 | alarm | alarm — тип аварийного сигнала, рассматриваемого запросом. | AlarmType |
+{.wide .expand}
 
 ##### Сообщение `AlarmResponse` (api/etcdserverpb/rpc.proto) {#message-alarmresponse-apietcdserverpbrpcproto}
 
@@ -103,6 +110,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | alarms | alarms — список аварийных сигналов, связанных с запросом. | (slice of) AlarmMember |
+{.wide .expand}
 
 ##### Сообщение `AuthDisableRequest` (api/etcdserverpb/rpc.proto) {#message-authdisablerequest-apietcdserverpbrpcproto}
 
@@ -136,6 +144,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | name | name — имя роли, добавляемой в систему аутентификации. | string |
+{.wide .expand}
 
 ##### Сообщение `AuthRoleAddResponse` (api/etcdserverpb/rpc.proto) {#message-authroleaddresponse-apietcdserverpbrpcproto}
 
@@ -179,6 +188,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | name | name — имя роли, которой будет предоставлено разрешение. | string |
 | perm | perm — разрешение, предоставляемое роли. | authpb.Permission |
+{.wide .expand}
 
 ##### Сообщение `AuthRoleGrantPermissionResponse` (api/etcdserverpb/rpc.proto) {#message-authrolegrantpermissionresponse-apietcdserverpbrpcproto}
 
@@ -231,6 +241,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | header |  | ResponseHeader |
 | enabled |  | bool |
 | authRevision | authRevision — текущая ревизия хранилища аутентификации | uint64 |
+{.wide .expand}
 
 ##### Сообщение `AuthUserAddRequest` (api/etcdserverpb/rpc.proto) {#message-authuseraddrequest-apietcdserverpbrpcproto}
 
@@ -257,6 +268,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | name | name — имя пользователя, пароль которого изменяется. | string |
 | password | password — новый пароль пользователя. Обратите внимание: это поле будет удалено на уровне API. | string |
 | hashedPassword | hashedPassword — новый хешированный пароль пользователя. Обратите внимание: это поле будет инициализировано на уровне API. | string |
+{.wide .expand}
 
 ##### Сообщение `AuthUserChangePasswordResponse` (api/etcdserverpb/rpc.proto) {#message-authuserchangepasswordresponse-apietcdserverpbrpcproto}
 
@@ -271,6 +283,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | name | name — имя удаляемого пользователя. | string |
+{.wide .expand}
 
 ##### Сообщение `AuthUserDeleteResponse` (api/etcdserverpb/rpc.proto) {#message-authuserdeleteresponse-apietcdserverpbrpcproto}
 
@@ -301,6 +314,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | user | user — имя пользователя, которому следует предоставить указанную роль. | string |
 | role | role — имя роли, предоставляемой пользователю. | string |
+{.wide .expand}
 
 ##### Сообщение `AuthUserGrantRoleResponse` (api/etcdserverpb/rpc.proto) {#message-authusergrantroleresponse-apietcdserverpbrpcproto}
 
@@ -353,6 +367,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | token | token — авторизованный токен, который можно использовать в последующих RPC | string |
+{.wide .expand}
 
 ##### Сообщение `CompactionRequest` (api/etcdserverpb/rpc.proto) {#message-compactionrequest-apietcdserverpbrpcproto}
 
@@ -363,6 +378,7 @@ CompactionRequest компактизирует хранилище ключей �
 | (versionpb.etcd_version_msg) |  | option |
 | revision | revision — ревизия хранилища ключей и значений для операции компактизации. | int64 |
 | physical | physical задаётся, чтобы RPC дождался физического применения компактизации к локальной базе данных и полного удаления компактизированных записей из базы данных бэкенда. | bool |
+{.wide .expand}
 
 ##### Сообщение `CompactionResponse` (api/etcdserverpb/rpc.proto) {#message-compactionresponse-apietcdserverpbrpcproto}
 
@@ -386,6 +402,7 @@ CompactionRequest компактизирует хранилище ключей �
 | value | value — значение заданного ключа в байтах. | bytes |
 | lease | lease — идентификатор аренды заданного ключа. | int64 |
 | range_end | range_end сравнивает заданную цель со всеми ключами диапазона [key, range_end). Подробнее о диапазонах ключей см. RangeRequest. | bytes |
+{.wide .expand}
 
 ##### Сообщение `DefragmentRequest` (api/etcdserverpb/rpc.proto) {#message-defragmentrequest-apietcdserverpbrpcproto}
 
@@ -408,6 +425,7 @@ CompactionRequest компактизирует хранилище ключей �
 | key | key — первый удаляемый ключ диапазона. | bytes |
 | range_end | range_end — ключ, следующий за последним удаляемым ключом диапазона [key, range_end). Если range_end не задан, диапазон содержит только аргумент key. Если range_end равен заданному ключу плюс один, диапазон содержит все ключи с префиксом заданного ключа. Если range_end равен '\0', диапазон содержит все ключи, большие либо равные аргументу key. | bytes |
 | prev_kv | Если prev_kv задан, etcd получает предыдущие пары «ключ — значение» перед удалением. Они возвращаются в ответе удаления. | bool |
+{.wide .expand}
 
 ##### Сообщение `DeleteRangeResponse` (api/etcdserverpb/rpc.proto) {#message-deleterangeresponse-apietcdserverpbrpcproto}
 
@@ -417,6 +435,7 @@ CompactionRequest компактизирует хранилище ключей �
 | header |  | ResponseHeader |
 | deleted | deleted — количество ключей, удалённых запросом удаления диапазона. | int64 |
 | prev_kvs | если в запросе задан prev_kv, возвращаются предыдущие пары «ключ — значение». | (slice of) mvccpb.KeyValue |
+{.wide .expand}
 
 ##### Сообщение `DowngradeInfo` (api/etcdserverpb/rpc.proto) {#message-downgradeinfo-apietcdserverpbrpcproto}
 
@@ -432,6 +451,7 @@ CompactionRequest компактизирует хранилище ключей �
 | (versionpb.etcd_version_msg) |  | option |
 | action | action — тип отправляемого запроса понижения версии. Действие может проверять целевую версию (VALIDATE), понижать версию кластера (DOWNGRADE) или отменять текущую задачу понижения (CANCEL). | DowngradeAction |
 | version | version — целевая версия понижения. | string |
+{.wide .expand}
 
 ##### Сообщение `DowngradeResponse` (api/etcdserverpb/rpc.proto) {#message-downgraderesponse-apietcdserverpbrpcproto}
 
@@ -440,6 +460,7 @@ CompactionRequest компактизирует хранилище ключей �
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | version | version — текущая версия кластера. | string |
+{.wide .expand}
 
 ##### Сообщение `DowngradeVersionTestRequest` (api/etcdserverpb/rpc.proto) {#message-downgradeversiontestrequest-apietcdserverpbrpcproto}
 
@@ -456,6 +477,7 @@ DowngradeVersionTestRequest используется только для тес�
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | revision | revision — ревизия хранилища ключей и значений для операции хеширования. | int64 |
+{.wide .expand}
 
 ##### Сообщение `HashKVResponse` (api/etcdserverpb/rpc.proto) {#message-hashkvresponse-apietcdserverpbrpcproto}
 
@@ -466,6 +488,7 @@ DowngradeVersionTestRequest используется только для тес�
 | hash | hash — значение хеша, вычисленное по ключам MVCC отвечающего участника до заданной ревизии. | uint32 |
 | compact_revision | compact_revision — компактизированная ревизия хранилища ключей и значений в момент начала хеширования. | int64 |
 | hash_revision | hash_revision — ревизия, до которой вычислен хеш. | int64 |
+{.wide .expand}
 
 ##### Сообщение `HashRequest` (api/etcdserverpb/rpc.proto) {#message-hashrequest-apietcdserverpbrpcproto}
 
@@ -480,6 +503,7 @@ DowngradeVersionTestRequest используется только для тес�
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | hash | hash — значение хеша, вычисленное по бэкенду KV отвечающего участника. | uint32 |
+{.wide .expand}
 
 ##### Сообщение `LeaseCheckpoint` (api/etcdserverpb/rpc.proto) {#message-leasecheckpoint-apietcdserverpbrpcproto}
 
@@ -488,6 +512,7 @@ DowngradeVersionTestRequest используется только для тес�
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID — идентификатор аренды для контрольной точки. | int64 |
 | remaining_TTL | Remaining_TTL — время, оставшееся до истечения аренды. | int64 |
+{.wide .expand}
 
 ##### Сообщение `LeaseCheckpointRequest` (api/etcdserverpb/rpc.proto) {#message-leasecheckpointrequest-apietcdserverpbrpcproto}
 
@@ -495,6 +520,7 @@ DowngradeVersionTestRequest используется только для тес�
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | checkpoints |  | (slice of) LeaseCheckpoint |
+{.wide .expand}
 
 ##### Сообщение `LeaseCheckpointResponse` (api/etcdserverpb/rpc.proto) {#message-leasecheckpointresponse-apietcdserverpbrpcproto}
 
@@ -510,6 +536,7 @@ DowngradeVersionTestRequest используется только для тес�
 | (versionpb.etcd_version_msg) |  | option |
 | TTL | TTL — рекомендуемый срок жизни в секундах. Истёкшая аренда возвращает -1. | int64 |
 | ID | ID — запрошенный идентификатор аренды. Если ID равен 0, арендодатель выбирает идентификатор. | int64 |
+{.wide .expand}
 
 ##### Сообщение `LeaseGrantResponse` (api/etcdserverpb/rpc.proto) {#message-leasegrantresponse-apietcdserverpbrpcproto}
 
@@ -520,6 +547,7 @@ DowngradeVersionTestRequest используется только для тес�
 | ID | ID — идентификатор выданной аренды. | int64 |
 | TTL | TTL — выбранный сервером срок жизни аренды в секундах. | int64 |
 | error |  | string |
+{.wide .expand}
 
 ##### Сообщение `LeaseKeepAliveRequest` (api/etcdserverpb/rpc.proto) {#message-leasekeepaliverequest-apietcdserverpbrpcproto}
 
@@ -527,6 +555,7 @@ DowngradeVersionTestRequest используется только для тес�
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID — идентификатор аренды, активность которой поддерживается. | int64 |
+{.wide .expand}
 
 ##### Сообщение `LeaseKeepAliveResponse` (api/etcdserverpb/rpc.proto) {#message-leasekeepaliveresponse-apietcdserverpbrpcproto}
 
@@ -536,6 +565,7 @@ DowngradeVersionTestRequest используется только для тес�
 | header |  | ResponseHeader |
 | ID | ID — идентификатор аренды из запроса поддержания активности. | int64 |
 | TTL | TTL — новый срок жизни аренды. | int64 |
+{.wide .expand}
 
 ##### Сообщение `LeaseLeasesRequest` (api/etcdserverpb/rpc.proto) {#message-leaseleasesrequest-apietcdserverpbrpcproto}
 
@@ -557,6 +587,7 @@ DowngradeVersionTestRequest используется только для тес�
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID — идентификатор отзываемой аренды. При отзыве ID все связанные ключи удаляются. | int64 |
+{.wide .expand}
 
 ##### Сообщение `LeaseRevokeResponse` (api/etcdserverpb/rpc.proto) {#message-leaserevokeresponse-apietcdserverpbrpcproto}
 
@@ -579,6 +610,7 @@ DowngradeVersionTestRequest используется только для тес�
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID — идентификатор аренды. | int64 |
 | keys | keys равно true для запроса всех ключей, присоединённых к этой аренде. | bool |
+{.wide .expand}
 
 ##### Сообщение `LeaseTimeToLiveResponse` (api/etcdserverpb/rpc.proto) {#message-leasetimetoliveresponse-apietcdserverpbrpcproto}
 
@@ -590,6 +622,7 @@ DowngradeVersionTestRequest используется только для тес�
 | TTL | TTL — оставшийся срок жизни аренды в секундах; аренда истечёт менее чем через TTL+1 секунд. | int64 |
 | grantedTTL | GrantedTTL — исходный выданный срок в секундах при создании или обновлении аренды. | int64 |
 | keys | Keys — список ключей, присоединённых к аренде. | (slice of) bytes |
+{.wide .expand}
 
 ##### Сообщение `Member` (api/etcdserverpb/rpc.proto) {#message-member-apietcdserverpbrpcproto}
 
@@ -601,6 +634,7 @@ DowngradeVersionTestRequest используется только для тес�
 | peerURLs | peerURLs — список URL, которые участник предоставляет кластеру для связи. | (slice of) string |
 | clientURLs | clientURLs — список URL, которые участник предоставляет клиентам для связи. Если участник не запущен, clientURLs пуст. | (slice of) string |
 | isLearner | isLearner указывает, является ли участник обучающимся участником raft. | bool |
+{.wide .expand}
 
 ##### Сообщение `MemberAddRequest` (api/etcdserverpb/rpc.proto) {#message-memberaddrequest-apietcdserverpbrpcproto}
 
@@ -609,6 +643,7 @@ DowngradeVersionTestRequest используется только для тес�
 | (versionpb.etcd_version_msg) |  | option |
 | peerURLs | peerURLs — список URL, которые добавленный участник использует для связи с кластером. | (slice of) string |
 | isLearner | isLearner указывает, является ли добавленный участник обучающимся участником raft. | bool |
+{.wide .expand}
 
 ##### Сообщение `MemberAddResponse` (api/etcdserverpb/rpc.proto) {#message-memberaddresponse-apietcdserverpbrpcproto}
 
@@ -618,6 +653,7 @@ DowngradeVersionTestRequest используется только для тес�
 | header |  | ResponseHeader |
 | member | member — сведения о добавленном участнике. | Member |
 | members | members — список всех участников после добавления нового. | (slice of) Member |
+{.wide .expand}
 
 ##### Сообщение `MemberListRequest` (api/etcdserverpb/rpc.proto) {#message-memberlistrequest-apietcdserverpbrpcproto}
 
@@ -633,6 +669,7 @@ DowngradeVersionTestRequest используется только для тес�
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | members — список всех участников, связанных с кластером. | (slice of) Member |
+{.wide .expand}
 
 ##### Сообщение `MemberPromoteRequest` (api/etcdserverpb/rpc.proto) {#message-memberpromoterequest-apietcdserverpbrpcproto}
 
@@ -640,6 +677,7 @@ DowngradeVersionTestRequest используется только для тес�
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID — идентификатор повышаемого участника. | uint64 |
+{.wide .expand}
 
 ##### Сообщение `MemberPromoteResponse` (api/etcdserverpb/rpc.proto) {#message-memberpromoteresponse-apietcdserverpbrpcproto}
 
@@ -648,6 +686,7 @@ DowngradeVersionTestRequest используется только для тес�
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | members — список всех участников после повышения участника. | (slice of) Member |
+{.wide .expand}
 
 ##### Сообщение `MemberRemoveRequest` (api/etcdserverpb/rpc.proto) {#message-memberremoverequest-apietcdserverpbrpcproto}
 
@@ -655,6 +694,7 @@ DowngradeVersionTestRequest используется только для тес�
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID — идентификатор удаляемого участника. | uint64 |
+{.wide .expand}
 
 ##### Сообщение `MemberRemoveResponse` (api/etcdserverpb/rpc.proto) {#message-memberremoveresponse-apietcdserverpbrpcproto}
 
@@ -663,6 +703,7 @@ DowngradeVersionTestRequest используется только для тес�
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | members — список всех участников после удаления участника. | (slice of) Member |
+{.wide .expand}
 
 ##### Сообщение `MemberUpdateRequest` (api/etcdserverpb/rpc.proto) {#message-memberupdaterequest-apietcdserverpbrpcproto}
 
@@ -671,6 +712,7 @@ DowngradeVersionTestRequest используется только для тес�
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID — идентификатор обновляемого участника. | uint64 |
 | peerURLs | peerURLs — новый список URL, которые участник использует для связи с кластером. | (slice of) string |
+{.wide .expand}
 
 ##### Сообщение `MemberUpdateResponse` (api/etcdserverpb/rpc.proto) {#message-memberupdateresponse-apietcdserverpbrpcproto}
 
@@ -679,6 +721,7 @@ DowngradeVersionTestRequest используется только для тес�
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | members — список всех участников после обновления участника. | (slice of) Member |
+{.wide .expand}
 
 ##### Сообщение `MoveLeaderRequest` (api/etcdserverpb/rpc.proto) {#message-moveleaderrequest-apietcdserverpbrpcproto}
 
@@ -686,6 +729,7 @@ DowngradeVersionTestRequest используется только для тес�
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | targetID | targetID — идентификатор узла нового лидера. | uint64 |
+{.wide .expand}
 
 ##### Сообщение `MoveLeaderResponse` (api/etcdserverpb/rpc.proto) {#message-moveleaderresponse-apietcdserverpbrpcproto}
 
@@ -705,6 +749,7 @@ DowngradeVersionTestRequest используется только для тес�
 | prev_kv | Если prev_kv задан, etcd получает предыдущую пару «ключ — значение» перед её изменением. Она возвращается в ответе put. | bool |
 | ignore_value | Если ignore_value задан, etcd обновляет ключ с его текущим значением. Если ключ не существует, возвращается ошибка. | bool |
 | ignore_lease | Если ignore_lease задан, etcd обновляет ключ с его текущей арендой. Если ключ не существует, возвращается ошибка. | bool |
+{.wide .expand}
 
 ##### Сообщение `PutResponse` (api/etcdserverpb/rpc.proto) {#message-putresponse-apietcdserverpbrpcproto}
 
@@ -713,6 +758,7 @@ DowngradeVersionTestRequest используется только для тес�
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | prev_kv | если в запросе задан prev_kv, возвращается предыдущая пара «ключ — значение». | mvccpb.KeyValue |
+{.wide .expand}
 
 ##### Сообщение `RangeRequest` (api/etcdserverpb/rpc.proto) {#message-rangerequest-apietcdserverpbrpcproto}
 
@@ -732,6 +778,7 @@ DowngradeVersionTestRequest используется только для тес�
 | max_mod_revision | max_mod_revision — верхняя граница возвращаемых ревизий изменения ключей; ключи с большими ревизиями отфильтровываются. | int64 |
 | min_create_revision | min_create_revision — нижняя граница возвращаемых ревизий создания ключей; ключи с меньшими ревизиями отфильтровываются. | int64 |
 | max_create_revision | max_create_revision — верхняя граница возвращаемых ревизий создания ключей; ключи с большими ревизиями отфильтровываются. | int64 |
+{.wide .expand}
 
 ##### Сообщение `RangeResponse` (api/etcdserverpb/rpc.proto) {#message-rangeresponse-apietcdserverpbrpcproto}
 
@@ -742,6 +789,7 @@ DowngradeVersionTestRequest используется только для тес�
 | kvs | kvs — список пар «ключ — значение», соответствующих диапазонному запросу. При запросе count поле kvs пусто. | (slice of) mvccpb.KeyValue |
 | more | more указывает, остались ли в запрошенном диапазоне ключи для возврата. | bool |
 | count | при запросе count содержит фактическое количество ключей в диапазоне. В отличие от Kvs, оно не зависит от ограничений и фильтров (например, Min/Max, Create/Modify, Revisions) и отражает полное количество в указанном диапазоне. | int64 |
+{.wide .expand}
 
 ##### Сообщение `RequestOp` (api/etcdserverpb/rpc.proto) {#message-requestop-apietcdserverpbrpcproto}
 
@@ -753,6 +801,7 @@ DowngradeVersionTestRequest используется только для тес�
 | request_put |  | PutRequest |
 | request_delete_range |  | DeleteRangeRequest |
 | request_txn |  | TxnRequest |
+{.wide .expand}
 
 ##### Сообщение `ResponseHeader` (api/etcdserverpb/rpc.proto) {#message-responseheader-apietcdserverpbrpcproto}
 
@@ -763,6 +812,7 @@ DowngradeVersionTestRequest используется только для тес�
 | member_id | member_id — идентификатор участника, отправившего ответ. | uint64 |
 | revision | revision — ревизия хранилища ключей и значений при применении запроса; для вызовов, не взаимодействующих с хранилищем, она не задана (то есть равна 0). В ответах о ходе наблюдения header.revision обозначает прогресс. Все последующие события в этом потоке гарантированно имеют номер ревизии выше номера header.revision. | int64 |
 | raft_term | raft_term — срок полномочий raft при применении запроса. | uint64 |
+{.wide .expand}
 
 ##### Сообщение `ResponseOp` (api/etcdserverpb/rpc.proto) {#message-responseop-apietcdserverpbrpcproto}
 
@@ -774,6 +824,7 @@ DowngradeVersionTestRequest используется только для тес�
 | response_put |  | PutResponse |
 | response_delete_range |  | DeleteRangeResponse |
 | response_txn |  | TxnResponse |
+{.wide .expand}
 
 ##### Сообщение `SnapshotRequest` (api/etcdserverpb/rpc.proto) {#message-snapshotrequest-apietcdserverpbrpcproto}
 
@@ -790,6 +841,7 @@ DowngradeVersionTestRequest используется только для тес�
 | remaining_bytes | remaining_bytes — количество байтов blob, отправляемых после этого сообщения | uint64 |
 | blob | blob содержит следующий фрагмент снимка в потоке снимка. | bytes |
 | version | Версия схемы хранилища, записанная в снимке. Она считывается из локального бэкенда участника и может отличаться от версии его двоичного файла. Указывает, какая версия хранилища etcd должна поддерживаться при восстановлении снимка. | string |
+{.wide .expand}
 
 ##### Сообщение `StatusRequest` (api/etcdserverpb/rpc.proto) {#message-statusrequest-apietcdserverpbrpcproto}
 
@@ -815,6 +867,7 @@ DowngradeVersionTestRequest используется только для тес�
 | storageVersion | storageVersion — версия файла БД. Она может обновляться с задержкой относительно целевой версии кластера. | string |
 | dbSizeQuota | dbSizeQuota — настроенная квота хранилища etcd в байтах (значение, переданное экземпляру etcd флагом --quota-backend-bytes) | int64 |
 | downgradeInfo | downgradeInfo указывает на наличие процесса понижения версии. | DowngradeInfo |
+{.wide .expand}
 
 ##### Сообщение `TxnRequest` (api/etcdserverpb/rpc.proto) {#message-txnrequest-apietcdserverpbrpcproto}
 
@@ -826,6 +879,7 @@ DowngradeVersionTestRequest используется только для тес�
 | compare | compare — список предикатов, представляющих конъюнкцию условий. Если сравнения успешны, запросы success обрабатываются по порядку, а ответ содержит их соответствующие ответы в том же порядке. Если сравнения неудачны, по порядку обрабатываются запросы failure, и ответ содержит соответствующие ответы по порядку. | (slice of) Compare |
 | success | success — список запросов, применяемых, когда compare истинно. | (slice of) RequestOp |
 | failure | failure — список запросов, применяемых, когда compare ложно. | (slice of) RequestOp |
+{.wide .expand}
 
 ##### Сообщение `TxnResponse` (api/etcdserverpb/rpc.proto) {#message-txnresponse-apietcdserverpbrpcproto}
 
@@ -835,6 +889,7 @@ DowngradeVersionTestRequest используется только для тес�
 | header |  | ResponseHeader |
 | succeeded | succeeded равно true, если compare истинно, и false в противном случае. | bool |
 | responses | responses — список ответов, соответствующих результатам применения success, если succeeded равно true, либо failure, если succeeded равно false. | (slice of) ResponseOp |
+{.wide .expand}
 
 ##### Сообщение `WatchCancelRequest` (api/etcdserverpb/rpc.proto) {#message-watchcancelrequest-apietcdserverpbrpcproto}
 
@@ -842,6 +897,7 @@ DowngradeVersionTestRequest используется только для тес�
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | watch_id | watch_id — идентификатор отменяемого наблюдателя, которому больше не будут передаваться события. | int64 |
+{.wide .expand}
 
 ##### Сообщение `WatchCreateRequest` (api/etcdserverpb/rpc.proto) {#message-watchcreaterequest-apietcdserverpbrpcproto}
 
@@ -856,6 +912,7 @@ DowngradeVersionTestRequest используется только для тес�
 | prev_kv | Если prev_kv задан, созданный наблюдатель получает предыдущий KV до события. Если предыдущий KV уже компактизирован, ничего не возвращается. | bool |
 | watch_id | Если предоставлен ненулевой watch_id, он назначается этому наблюдателю. Поскольку создание наблюдателя в etcd не является синхронной операцией, это помогает обеспечить правильный порядок при создании нескольких наблюдателей в одном потоке. Создание наблюдателя с уже используемым в потоке ID возвращает ошибку. | int64 |
 | fragment | fragment позволяет разбивать большие ревизии на несколько ответов наблюдения. | bool |
+{.wide .expand}
 
 ##### Сообщение `WatchProgressRequest` (api/etcdserverpb/rpc.proto) {#message-watchprogressrequest-apietcdserverpbrpcproto}
 
@@ -874,6 +931,7 @@ DowngradeVersionTestRequest используется только для тес�
 | create_request |  | WatchCreateRequest |
 | cancel_request |  | WatchCancelRequest |
 | progress_request |  | WatchProgressRequest |
+{.wide .expand}
 
 ##### Сообщение `WatchResponse` (api/etcdserverpb/rpc.proto) {#message-watchresponse-apietcdserverpbrpcproto}
 
@@ -888,6 +946,7 @@ DowngradeVersionTestRequest используется только для тес�
 | cancel_reason | cancel_reason указывает причину отмены наблюдателя. | string |
 | fragment | fragment равно true, если большой ответ наблюдения разбит на несколько ответов. | bool |
 | events |  | (slice of) mvccpb.Event |
+{.wide .expand}
 
 ##### Сообщение `Event` (api/mvccpb/kv.proto) {#message-event-apimvccpbkvproto}
 
@@ -921,12 +980,14 @@ DowngradeVersionTestRequest используется только для тес�
 | Поле | Описание | Тип |
 | ----- | ----------- | ---- |
 | LeaseTimeToLiveRequest |  | etcdserverpb.LeaseTimeToLiveRequest |
+{.wide .expand}
 
 ##### Сообщение `LeaseInternalResponse` (server/lease/leasepb/lease.proto) {#message-leaseinternalresponse-serverleaseleasepbleaseproto}
 
 | Поле | Описание | Тип |
 | ----- | ----------- | ---- |
 | LeaseTimeToLiveResponse |  | etcdserverpb.LeaseTimeToLiveResponse |
+{.wide .expand}
 
 ##### Сообщение `Permission` (api/authpb/auth.proto) {#message-permission-apiauthpbauthproto}
 

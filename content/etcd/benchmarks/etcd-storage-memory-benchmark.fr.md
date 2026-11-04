@@ -96,6 +96,7 @@ La consommation mémoire globale indique la quantité de mémoire RSS utilisée 
 | 100K | 5        | 64 octets  | 1 Ko          | 164 Mo              |
 | 1M   | 1        | 64 octets  | 1 Ko          | 587 Mo              |
 | 1M   | 5        | 64 octets  | 1 Ko          | 836 Mo              |
+{.wide .expand}
 
 En fonction des résultats, nous savons que la taille des valeurs n'a pas d'impact significatif sur la consommation mémoire. Une légère augmentation est observée en raison de données supplémentaires conservées dans le cache de pages du système d'exploitation.
 

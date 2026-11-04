@@ -19,6 +19,7 @@ upstream_ref: "site snapshot of 2026-08-15"
 | Полный отчёт | Активность PostgreSQL вместе со статистикой PgBouncer | [Открыть полный отчёт](/third_party/pgbadger/examples/sample.html) |
 | Инкрементальный отчёт | Календарный индекс, еженедельное агрегирование и ежедневные страницы | [Открыть индекс инкрементальных отчётов](/third_party/pgbadger/examples/report/index.html) |
 | Ошибки и события | Отчёт, ограниченный ошибками и эксплуатационными событиями | [Открыть отчёт об ошибках](/third_party/pgbadger/examples/errors.html) |
+{.wide .expand}
 
 ## Полный отчёт {#complete-report}
 

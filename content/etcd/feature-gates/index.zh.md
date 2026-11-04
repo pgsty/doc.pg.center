@@ -75,6 +75,7 @@ type Config struct {
 | SetMemberLocalAddr               | false    | Alpha  | 启用在与对等成员通信时，使用 initial-advertise-peer-urls 中指定的第一个非环回本地地址作为本地地址。                                     |
 | StopGRPCServiceOnDefrag          | false    | Alpha  | 启用在执行碎片整理时停止 etcd gRPC 服务对客户端请求的响应。                                                             |
 | TxnModeWriteWithSharedBuffer     | true     | Beta   | 启用写入事务在其只读检查操作中使用共享缓冲区。                                                                 |
+{.wide .expand}
 
 ## 使用某个功能 {#using-a-feature}
 

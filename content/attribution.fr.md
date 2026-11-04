@@ -30,6 +30,7 @@ Cette page est cet enregistrement. Elle indique ce qui a été importé, à quel
 | [pgBadger](/fr/pgbadger/) | [documentation de pgBadger](https://pgbadger.darold.net/) | v13.2, instantané de développement, commit `f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/fr/haproxy/) | [manuels HAProxy 3.4](https://docs.haproxy.org/3.4/) | instantané 3.4.7-57, commit `0faeaed` ; version stable 3.4.7 | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/fr/etcd/) | [documentation etcd v3.7](https://etcd.io/docs/v3.7/) | Documentation v3.7, commit `d20f8ae` ; version logicielle v3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Projet amont `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+{.wide .expand}
 
 Chaque collection est **adaptée**, et non miroirée. Les titres, ancres, liens croisés, signatures de code, regroupement des pages et navigation sont révisés pour cette édition ; le texte original du projet amont est lui-même conservé. Le crédit en fin de page le précise et fournit un lien vers l'historique des modifications de cette page sur le site.
 

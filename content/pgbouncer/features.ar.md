@@ -48,6 +48,7 @@ upstream_link: "https://www.pgbouncer.org/features.html"
 | إعادة ضبط الخطة المخزنة مؤقتًا        | نعم           |           نعم             |
 | عبارة LOAD                           | نعم           |          أبدًا             |
 | أقفال advisory على مستوى الجلسة      | نعم           |          أبدًا             |
+{.wide .expand}
 
 [^0]: منذ الإصدار 1.26.0، يتتبع PgBouncer جميع المعاملات التي يُبلِّغ عنها الخادم ويمكن للعملاء تغييرها: `application_name`، و`client_encoding`، و`DateStyle`، و`default_transaction_read_only` (PostgreSQL 14+)، و`IntervalStyle`، و`scram_iterations` (PostgreSQL 16+)، و`search_path` (PostgreSQL 18+)، و`session_authorization`، و`standard_conforming_strings`، و`TimeZone`. أما المعاملات التي لا يُبلِّغ عنها الخادم فيُتتبَّع فيها قيم بدء التشغيل فقط؛ وتغييرات `SET` اللاحقة لا تُتتبَّع. راجع [`track_extra_parameters`](/ar/pgbouncer/config/#track_extra_parameters) و[`ignore_startup_parameters`](/ar/pgbouncer/config/#ignore_startup_parameters) للتفاصيل وللمعاملات التي توفرها الامتدادات.
 

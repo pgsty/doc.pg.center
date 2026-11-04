@@ -397,6 +397,7 @@ Die Metrik `patroni_postgres_state` bildet den aktuellen Zustand der PostgreSQL-
 | 12    | stopped                 | PostgreSQL ist angehalten            |
 | 13    | stop_failed             | Anhalten von PostgreSQL fehlgeschlagen |
 | 14    | crashed                 | PostgreSQL ist abgestürzt            |
+{.wide .expand}
 
 PostgreSQL-Zustandswerte
 
@@ -691,6 +692,7 @@ Die Endpunkte `POST /switchover` und `POST /failover` werden von [patronictl_swi
 | Angabe eines Kandidaten erforderlich | ja | nein |
 | Im Pausenmodus ausführbar | ja | ja (nur zu einem bestimmten Kandidaten) |
 | Planbar | nein | ja (sofern nicht im Pausenmodus) |
+{.wide .expand}
 
 Vergleich von Failover und Switchover
 

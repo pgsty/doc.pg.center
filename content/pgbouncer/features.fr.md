@@ -48,6 +48,7 @@ Le tableau suivant répertorie plusieurs fonctionnalités de PostgreSQL et leur 
 | Réinitialisation des plans mis en cache | Oui                  | Oui                      |
 | Instruction LOAD                      | Oui                  | Jamais                   |
 | Verrous advisory au niveau de la session | Oui                  | Jamais                   |
+{.wide .expand}
 
 [^0]: Depuis la version 1.26.0, PgBouncer suit tous les paramètres signalés par le serveur que les clients peuvent modifier : `application_name`, `client_encoding`, `DateStyle`, `default_transaction_read_only` (PostgreSQL 14+), `IntervalStyle`, `scram_iterations` (PostgreSQL 16+), `search_path` (PostgreSQL 18+), `session_authorization`, `standard_conforming_strings` et `TimeZone`. Pour les paramètres que le serveur ne signale pas, seules les valeurs de démarrage sont suivies ; les modifications ultérieures par `SET` ne le sont pas. Consultez [`track_extra_parameters`](/fr/pgbouncer/config/#track_extra_parameters) et [`ignore_startup_parameters`](/fr/pgbouncer/config/#ignore_startup_parameters) pour plus de détails et pour les paramètres fournis par des extensions.
 

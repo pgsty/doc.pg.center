@@ -30,6 +30,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | key | key هو مفتاح سيوجد في etcd طوال المدة التي يمتلك فيها مستدعي Lock القفل. ينبغي للمستخدمين عدم تعديل هذا المفتاح وإلا فقد يُظهر القفل سلوكًا غير معرّف. | bytes |
+{.wide .expand}
 
 ##### الرسالة `UnlockRequest` (server/etcdserver/api/v3lock/v3lockpb/v3lock.proto) {#message-unlockrequest-serveretcdserverapiv3lockv3lockpbv3lockproto}
 
@@ -54,6 +55,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | Leader | LeaderRequest | LeaderResponse | يعيد Leader إعلان الانتخاب الحالي، إن وُجد. |
 | Observe | LeaderRequest | LeaderResponse | يبث Observe إعلانات الانتخاب بالترتيب كما يصدرها قادة الانتخاب المنتخبون. |
 | Resign | ResignRequest | ResignResponse | يحرر Resign قيادة الانتخاب حتى يتمكن مرشحون آخرون من اكتساب القيادة في الانتخاب. |
+{.wide .expand}
 
 ##### الرسالة `CampaignRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-campaignrequest-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
@@ -69,6 +71,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | leader | leader يصف الموارد المستخدمة للاحتفاظ بقيادة الانتخاب. | LeaderKey |
+{.wide .expand}
 
 ##### الرسالة `LeaderKey` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-leaderkey-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
@@ -91,6 +94,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | kv | kv هو زوج المفتاح-القيمة الذي يمثل آخر تحديث للقائد. | mvccpb.KeyValue |
+{.wide .expand}
 
 ##### الرسالة `ProclaimRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-proclaimrequest-serveretcdserverapiv3electionv3electionpbv3electionproto}
 

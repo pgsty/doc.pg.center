@@ -33,6 +33,7 @@ Con esta configuración, etcd puede escribir aproximadamente:
 | 10,000 | 8 | 256 | 1 | 1 | solo el líder | 583 | 1.6ms | 48 MB |
 | 100,000 | 8 | 256 | 100 | 1000 | solo el líder | 44,341 | 22ms |  124MB |
 | 100,000 | 8 | 256 | 100 | 1000 | todos los miembros |  50,104 | 20ms |  126MB |
+{.wide .expand}
 
 Comandos de ejemplo:
 
@@ -56,6 +57,7 @@ Las solicitudes de lectura linealizables pasan por un cuórum de los miembros de
 | 10,000 | 8 | 256 | 1 | 1 | Serializable | 2,909 | 0.3ms |
 | 100,000 | 8 | 256 | 100 | 1000 | Linealizable | 141,578 | 5.5ms |
 | 100,000 | 8 | 256 | 100 | 1000 | Serializable | 185,758 | 2.2ms |
+{.wide .expand}
 
 Comandos de ejemplo:
 

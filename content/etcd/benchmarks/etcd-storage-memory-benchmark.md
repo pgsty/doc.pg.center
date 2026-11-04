@@ -96,6 +96,7 @@ The overall memory usage captures how much RSS etcd consumes with the storage. T
 | 100K | 5        | 64bytes  | 1KB        | 164MB        |
 | 1M   | 1        | 64bytes  | 1KB        | 587MB        |
 | 1M   | 5        | 64bytes  | 1KB        | 836MB        |
+{.wide .expand}
 
 Based on the result, we know the value size does not significantly impact the memory consumption. There is some minor increase due to more data held in the OS page cache.
 

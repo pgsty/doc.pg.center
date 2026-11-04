@@ -40,6 +40,7 @@ etcdメンバー3つを、それぞれ別のマシンで実行します。
 | 64                | 256               | 全サーバー        | 33300    | 11.8      |
 | 256               | 64                | 全サーバー        | 24800    | 3.9      |
 | 256               | 256               | 全サーバー        | 33000    | 11.5      |
+{.wide .expand}
 
 ### 単一キーの書き込み {#writing-one-single-key}
 
@@ -55,6 +56,7 @@ etcdメンバー3つを、それぞれ別のマシンで実行します。
 | 64                | 256               | 全サーバー        | 3260      | 123.8 |
 | 256               | 64                | 全サーバー        | 1033      | 121.5 |
 | 256               | 256               | 全サーバー        | 3061      | 119.3 |
+{.wide .expand}
 
 [hack-benchmark]: https://github.com/etcd-io/etcd/tree/main/hack/benchmark
 [hey]: https://github.com/rakyll/hey

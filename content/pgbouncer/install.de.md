@@ -65,6 +65,7 @@ PgBouncer löst Hostnamen beim Verbindungsaufbau auf und nicht nur einmal beim E
 | evdns, libevent 2.x        | ja       | nein      | ja         | nein             | erkennt Änderungen an /etc/hosts nicht   |
 | getaddrinfo_a, glibc 2.9+  | ja       | ja (3)    | ja         | nein             | N/A (auf Systemen ohne glibc nicht verfügbar) |
 | getaddrinfo, libc          | nein     | ja (3)    | ja         | nein             | erfordert pthreads                       |
+{.wide .expand}
 
 1. EDNS0 ist erforderlich, wenn einem Hostnamen mehr als 8 Adressen zugeordnet sind.
 2. Eine SOA-Abfrage ist erforderlich, um Hostnamen bei einer Änderung der Zonen-Seriennummer erneut zu prüfen.

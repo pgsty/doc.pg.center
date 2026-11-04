@@ -48,6 +48,7 @@ upstream_link: "https://www.pgbouncer.org/features.html"
 | キャッシュプランのリセット       | はい                       | はい                               |
 | LOAD ステートメント              | はい                       | 不可                               |
 | セッションレベルのアドバイザリロック | はい                       | 不可                               |
+{.wide .expand}
 
 [^0]: 1.26.0 以降、PgBouncer はクライアントが変更可能な、サーバーが報告するすべてのパラメータを追跡します：`application_name`、`client_encoding`、`DateStyle`、`default_transaction_read_only`（PostgreSQL 14+）、`IntervalStyle`、`scram_iterations`（PostgreSQL 16+）、`search_path`（PostgreSQL 18+）、`session_authorization`、`standard_conforming_strings`、`TimeZone`。サーバーが報告しないパラメータについては、スタートアップ値のみが追跡され、後続の `SET` による変更は追跡されません。詳細および拡張機能が提供するパラメータについては、[`track_extra_parameters`](/ja/pgbouncer/config/#track_extra_parameters) および [`ignore_startup_parameters`](/ja/pgbouncer/config/#ignore_startup_parameters) を参照してください。
 

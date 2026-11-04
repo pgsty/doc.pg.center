@@ -50,6 +50,7 @@ Inicializa otra máquina y usa la herramienta de benchmark HTTP [hey][hey] para 
 | 64                | 256               | todos los servidores        | 55286 (-6%) | 7.4 (+6%) |
 | 256               | 64                | todos los servidores        | 46603 (-6%) | 2.1 (+5%) |
 | 256               | 256               | todos los servidores        | 55291 (-6%) | 7.3 (+4%) |
+{.wide .expand}
 
 ### escritura de una sola clave {#writing-one-single-key}
 
@@ -65,6 +66,7 @@ Inicializa otra máquina y usa la herramienta de benchmark HTTP [hey][hey] para 
 | 64                | 256               | todos los servidores        | 4868 (+35%) | 81.5 (-40%) |
 | 256               | 64                | todos los servidores        | 1925 (+72%) | 47.7 (-59%) |
 | 256               | 256               | todos los servidores        | 4975 (+36%) | 70.3 (-36%) |
+{.wide .expand}
 
 ### explicación de los cambios de rendimiento {#performance-changes-explanation}
 

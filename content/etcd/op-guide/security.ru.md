@@ -69,6 +69,7 @@ etcd использует библиотеки Go `crypto/tls` и `crypto/x509`,
 | Сервер (клиент — сервер) | digitalSignature, keyEncipherment | serverAuth |
 | Клиент | digitalSignature, keyEncipherment | clientAuth |
 | Одноранговый узел (сервер — сервер) | digitalSignature, keyEncipherment | serverAuth, clientAuth |
+{.wide .expand}
 
 Примечания:
 

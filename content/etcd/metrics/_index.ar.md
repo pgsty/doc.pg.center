@@ -35,6 +35,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | proposals_applied_total   | العدد الإجمالي لاقتراحات الإجماع المطبَّقة.         | Gauge   |
 | proposals_pending         | العدد الحالي للاقتراحات المعلقة.                 | Gauge   |
 | proposals_failed_total    | العدد الإجمالي للاقتراحات الفاشلة المرصودة.       | Counter |
+{.wide .expand}
 
 يشير `has_leader` إلى ما إذا كان للعضو قائد. إذا لم يكن للعضو قائد، فهو غير متاح تمامًا. وإذا لم يكن لأي عضو في العنقود قائد، فالعنقود بأكمله غير متاح تمامًا.
 
@@ -58,6 +59,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 |------------------------------------|-------------------------------------------------------|-----------|
 | wal_fsync_duration_seconds         | توزيعات زمن استجابة fsync المستدعاة من wal      | Histogram |
 | backend_commit_duration_seconds    | توزيعات زمن استجابة commit المستدعاة من backend.| Histogram |
+{.wide .expand}
 
 يُستدعى `wal_fsync` عندما يحفظ etcd مدخلات سجله على القرص على نحو دائم قبل تطبيقها.
 
@@ -80,6 +82,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | peer_round_trip_time_seconds    | مدرّج توزيع زمن الذهاب والإياب بين النظراء.                           | Histogram(To) |
 | client_grpc_sent_bytes_total    | العدد الإجمالي للبايتات المرسلة إلى عملاء grpc.                    | Counter       |
 | client_grpc_received_bytes_total| العدد الإجمالي للبايتات المستلمة من عملاء grpc.                | Counter       |
+{.wide .expand}
 
 يعدّ `peer_sent_bytes_total` العدد الإجمالي للبايتات المرسلة إلى نظير معين. عادةً يرسل العضو القائد بيانات أكثر من الأعضاء الآخرين لأنه المسؤول عن نقل البيانات المنسوخة.
 
@@ -98,6 +101,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | الاسم                                       | الوصف                                                | النوع      |
 |--------------------------------------------|------------------------------------------------------------|-----------|
 | snapshot_save_total_duration_seconds       | توزيعات زمن الاستجابة الإجمالي لعملية save المستدعاة من snapshot | Histogram |
+{.wide .expand}
 
 يشير زمن اللقطة المرتفع بشكل غير طبيعي (`snapshot_save_total_duration_seconds`) إلى مشكلات في القرص وقد يجعل العنقود غير مستقر.
 

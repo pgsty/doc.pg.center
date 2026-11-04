@@ -75,6 +75,7 @@ Les tableaux suivants résument les portes de fonctionnalité que vous pouvez ac
 | SetMemberLocalAddr                 | false             | Alpha   | Active l'utilisation de la première adresse locale spécifiée ne relevant pas de l'adresse de bouclage dans initial-advertise-peer-urls comme adresse locale lors de la communication avec un pair. |
 | StopGRPCServiceOnDefrag            | false             | Alpha   | Active l'arrêt du service gRPC etcd lors de la défragmentation afin de ne plus servir les requêtes clients.                                                                 |
 | TxnModeWriteWithSharedBuffer       | true              | Beta    | Active l'utilisation d'un tampon partagé lors des opérations de vérification en lecture seule dans les transactions d'écriture.                                                                 |
+{.wide .expand}
 
 ## Utilisation d'une fonctionnalité {#using-a-feature}
 

@@ -35,6 +35,7 @@ etcd2に関連するメトリクスは、[v2メトリクスガイド][v2-http-me
 | proposals_applied_total | 適用されたコンセンサス提案の総数。| Gauge |
 | proposals_pending | 現在保留中の提案数。| Gauge |
 | proposals_failed_total | 観測した失敗した提案の総数。| Counter |
+{.wide .expand}
 
 `has_leader`は、メンバーにリーダーが存在するかどうかを示します。メンバーにリーダーが存在しない場合、そのメンバーは完全に利用不能です。クラスター内のすべてのメンバーにリーダーが存在しない場合、クラスター全体が完全に利用不能です。
 
@@ -58,6 +59,7 @@ etcd2に関連するメトリクスは、[v2メトリクスガイド][v2-http-me
 |------------------------------------|-------------------------------------------------------|-----------|
 | wal_fsync_duration_seconds | walが呼び出すfsyncのレイテンシー分布。| Histogram |
 | backend_commit_duration_seconds | backendが呼び出すcommitのレイテンシー分布。| Histogram |
+{.wide .expand}
 
 `wal_fsync`は、etcdがログエントリーを適用する前にディスクへ永続化するときに呼び出されます。
 
@@ -80,6 +82,7 @@ etcd2に関連するメトリクスは、[v2メトリクスガイド][v2-http-me
 | peer_round_trip_time_seconds | ピア間の往復時間のヒストグラム。| Histogram(To) |
 | client_grpc_sent_bytes_total | grpcクライアントへ送信した総バイト数。| Counter |
 | client_grpc_received_bytes_total | grpcクライアントから受信した総バイト数。| Counter |
+{.wide .expand}
 
 `peer_sent_bytes_total`は、特定のピアへ送信した総バイト数です。通常、リーダーメンバーはレプリケーションデータの送信を担うため、他のメンバーより多くのデータを送信します。
 
@@ -98,6 +101,7 @@ etcd2に関連するメトリクスは、[v2メトリクスガイド][v2-http-me
 | 名前 | 説明 | 型 |
 |--------------------------------------------|------------------------------------------------------------|-----------|
 | snapshot_save_total_duration_seconds | snapshotが呼び出すsaveの合計レイテンシーの分布。| Histogram |
+{.wide .expand}
 
 スナップショットの所要時間（`snapshot_save_total_duration_seconds`）が異常に長い場合は、ディスクの問題を示しており、クラスターが不安定になる可能性があります。
 

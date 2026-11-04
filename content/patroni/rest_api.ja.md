@@ -397,6 +397,7 @@ patroni_failover_priority{scope="batman",name="patroni1"} 1
 | 12 | stopped | PostgreSQL は停止しています |
 | 13 | stop_failed | PostgreSQL の停止に失敗しました |
 | 14 | crashed | PostgreSQL がクラッシュしました |
+{.wide .expand}
 
 PostgreSQL 状態値
 

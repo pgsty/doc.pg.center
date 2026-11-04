@@ -35,6 +35,7 @@ Toutes ces métriques sont préfixées par `etcd_server_`
 | proposals_applied_total   | Nombre total de propositions de consensus appliquées.     | Gauge   |
 | proposals_pending         | Nombre actuel de propositions en attente.                 | Gauge   |
 | proposals_failed_total    | Nombre total de propositions défaillantes observées.       | Counter |
+{.wide .expand}
 
 `has_leader` indique si le membre dispose d'un leader. Si un membre ne dispose pas de leader, il est entièrement indisponible. Si aucun membre du cluster ne dispose de leader, l'ensemble du cluster est entièrement indisponible.
 
@@ -58,6 +59,7 @@ Toutes ces métriques sont préfixées par `etcd_disk_`.
 |------------------------------------|-------------------------------------------------------|-----------|
 | wal_fsync_duration_seconds         | Les distributions de latence de fsync appelées par le WAL | Histogram |
 | backend_commit_duration_seconds    | Les distributions de latence de commit appelées par le backend | Histogram |
+{.wide .expand}
 
 Un `wal_fsync` est appelé lorsqu'etcd enregistre de façon persistante ses entrées de journal sur le disque avant de les appliquer.
 
@@ -80,6 +82,7 @@ Toutes ces métriques sont préfixées par `etcd_network_`
 | peer_round_trip_time_seconds     | Histogramme du temps de trajet aller-retour entre pairs.                           | Histogram(To) |
 | client_grpc_sent_bytes_total     | Nombre total d'octets envoyés aux clients gRPC.                    | Counter       |
 | client_grpc_received_bytes_total | Nombre total d’octets reçus des clients gRPC.                | Counter       |
+{.wide .expand}
 
 `peer_sent_bytes_total` compte le nombre total d'octets envoyés à un pair spécifique. En général, le membre leader envoie plus de données que les autres membres, car il est chargé de transmettre les données répliquées.
 
@@ -98,6 +101,7 @@ Les métriques sous le préfixe `etcd_debugging` sont destinées au débogage. E
 | Nom                                        | Description                                                | Type      |
 |--------------------------------------------|------------------------------------------------------------|-----------|
 | snapshot_save_total_duration_seconds       | Les distributions de latence totale de l'appel save effectué par snapshot | Histogram |
+{.wide .expand}
 
 Une durée d'instantané anormalement élevée (`snapshot_save_total_duration_seconds`) indique des problèmes de disque et pourrait entraîner une instabilité du cluster.
 

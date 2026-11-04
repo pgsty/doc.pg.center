@@ -33,6 +33,7 @@ Avec cette configuration, etcd peut écrire approximativement :
 | 10 000 | 8 | 256 | 1 | 1 | leader uniquement | 583 | 1,6 ms | 48 Mo |
 | 100 000 | 8 | 256 | 100 | 1 000 | leader uniquement | 44 341 | 22 ms | 124 Mo |
 | 100 000 | 8 | 256 | 100 | 1 000 | tous les membres | 50 104 | 20 ms | 126 Mo |
+{.wide .expand}
 
 Commandes d'exemple :
 
@@ -56,6 +57,7 @@ Les requêtes de lecture linéarisable passent par un quorum de membres du clust
 | 10 000 | 8 | 256 | 1 | 1 | Sérialisable | 2 909 | 0,3 ms |
 | 100 000 | 8 | 256 | 100 | 1 000 | Linéarisable | 141 578 | 5,5 ms |
 | 100 000 | 8 | 256 | 100 | 1 000 | Sérialisable | 185 758 | 2,2 ms |
+{.wide .expand}
 
 Commandes d'exemple :
 

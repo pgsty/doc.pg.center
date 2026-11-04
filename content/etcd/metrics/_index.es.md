@@ -35,6 +35,7 @@ Todas estas métricas llevan el prefijo `etcd_server_`
 | proposals_applied_total   | El número total de propuestas de consenso aplicadas.     | Gauge   |
 | proposals_pending         | El número actual de propuestas pendientes.               | Gauge   |
 | proposals_failed_total    | El número total de propuestas fallidas observadas.       | Counter |
+{.wide .expand}
 
 `has_leader` indica si el miembro tiene un líder. Si un miembro no tiene líder, está
 totalmente no disponible. Si ninguno de los miembros del clúster tiene líder, todo el clúster
@@ -60,6 +61,7 @@ Todas estas métricas llevan el prefijo `etcd_disk_`.
 |------------------------------------|-------------------------------------------------------|-----------|
 | wal_fsync_duration_seconds         | Las distribuciones de latencia de fsync llamadas por wal.      | Histogram |
 | backend_commit_duration_seconds    | Las distribuciones de latencia de commit llamadas por el backend.| Histogram |
+{.wide .expand}
 
 Se llama a un `wal_fsync` cuando etcd persiste sus entradas de registro en el disco antes de aplicarlas.
 
@@ -82,6 +84,7 @@ Todas estas métricas llevan el prefijo `etcd_network_`
 | peer_round_trip_time_seconds    | Histograma del tiempo de ida y vuelta entre pares.                           | Histogram(To) |
 | client_grpc_sent_bytes_total    | El número total de bytes enviados a clientes gRPC.                    | Counter       |
 | client_grpc_received_bytes_total| El número total de bytes recibidos de clientes gRPC.                | Counter       |
+{.wide .expand}
 
 `peer_sent_bytes_total` cuenta el número total de bytes enviados a un par específico. Normalmente el miembro líder envía más datos que los demás miembros, ya que es responsable de transmitir los datos replicados.
 
@@ -100,6 +103,7 @@ Las métricas bajo el prefijo `etcd_debugging` sirven para la depuración. Depen
 | Nombre                                       | Descripción                                                | Tipo      |
 |--------------------------------------------|------------------------------------------------------------|-----------|
 | snapshot_save_total_duration_seconds       | Las distribuciones de latencia total de las llamadas a save realizadas por snapshot | Histogram |
+{.wide .expand}
 
 Una duración de instantánea anormalmente alta (`snapshot_save_total_duration_seconds`) indica problemas de disco y podría hacer que el clúster se vuelva inestable.
 

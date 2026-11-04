@@ -17,6 +17,7 @@ pgBadger tiene dos modos de multiprocesamiento complementarios. Elige según la 
 |---|---|---|---|
 | `-j N` / `--jobs N` | fragmentos de un archivo de registro | un registro grande, con acceso aleatorio (seekable) | los límites de los fragmentos pueden duplicar u omitir un pequeño número de consultas |
 | `-J N` / `--Jobs N` | archivos de registro completos | muchos registros independientes | solo resulta útil cuando hay suficientes archivos para mantener ocupados a los trabajadores |
+{.wide .expand}
 
 ## Divide un archivo grande con `-j` {#single-file-jobs}
 
@@ -56,6 +57,7 @@ Un archivo de 9.5 GB:
 |---|---:|---:|---:|---:|
 | `-j` | 1h41m18 | 50m25 | 25m39 | 15m58 |
 | `-J` | 1h41m18 | 54m28 | 41m16 | 34m45 |
+{.wide .expand}
 
 Doscientos archivos de 10 MB, 2 GB en total:
 
@@ -63,6 +65,7 @@ Doscientos archivos de 10 MB, 2 GB en total:
 |---|---:|---:|---:|---:|
 | `-j` | 20m15 | 9m56 | 5m20 | 4m20 |
 | `-J` | 20m15 | 9m49 | 5m00 | 2m40 |
+{.wide .expand}
 
 El valor predeterminado práctico es `-j` para pocos archivos grandes y `-J` para muchos archivos pequeños. Ambos modos pueden combinarse cuando la entrada y la plataforma lo admiten, pero haz una prueba de rendimiento de la combinación: el análisis de registros puede quedar limitado por el rendimiento del almacenamiento antes que por la CPU.
 

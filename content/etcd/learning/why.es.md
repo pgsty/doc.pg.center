@@ -35,6 +35,7 @@ La tabla siguiente es una referencia rápida práctica para detectar de un vista
 | Reconfiguración de la composición | [Sí][etcd-reconfig] | [>3.5.0][zk-reconfig] | [Sí][consul-reconfig] | Sí |
 | Tamaño máximo fiable de la base de datos | Varios gigabytes | Cientos de megabytes (a veces varios gigabytes) | Cientos de MB | Terabytes+ |
 | Latencia mínima de linealización de lectura | RTT de red | Sin linealización de lectura | RTT + fsync | Barreras de reloj (atómicas, NTP) |
+{.wide .expand}
 
 ### ZooKeeper {#zookeeper}
 

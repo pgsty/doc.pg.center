@@ -29,6 +29,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | RoleDelete | AuthRoleDeleteRequest | AuthRoleDeleteResponse | RoleDeleteは指定したロールを削除します。 |
 | RoleGrantPermission | AuthRoleGrantPermissionRequest | AuthRoleGrantPermissionResponse | RoleGrantPermissionは、指定したキーまたは範囲に対する権限を、指定したロールに付与します。 |
 | RoleRevokePermission | AuthRoleRevokePermissionRequest | AuthRoleRevokePermissionResponse | RoleRevokePermissionは、指定したロールからキーまたは範囲に対する権限を取り消します。 |
+{.wide .expand}
 
 ##### サービス `Cluster` (api/etcdserverpb/rpc.proto) {#service-cluster-apietcdserverpbrpcproto}
 
@@ -39,6 +40,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | MemberUpdate | MemberUpdateRequest | MemberUpdateResponse | MemberUpdateはメンバーの構成を更新します。 |
 | MemberList | MemberListRequest | MemberListResponse | MemberListはクラスター内のすべてのメンバーを一覧表示します。 |
 | MemberPromote | MemberPromoteRequest | MemberPromoteResponse | MemberPromoteは、Raftの学習者メンバー（投票権なし）を、Raftの投票メンバーに昇格させます。 |
+{.wide .expand}
 
 ##### サービス `KV` (api/etcdserverpb/rpc.proto) {#service-kv-apietcdserverpbrpcproto}
 
@@ -49,6 +51,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | DeleteRange | DeleteRangeRequest | DeleteRangeResponse | DeleteRangeはキー・バリューストアから指定した範囲を削除します。deleteリクエストはキー・バリューストアのリビジョンを増加させ、削除したキーごとにイベント履歴に削除イベントを生成します。 |
 | Txn | TxnRequest | TxnResponse | Txnは1つのトランザクション内で複数のリクエストを処理します。txnリクエストはキー・バリューストアのリビジョンを増加させ、完了したリクエストごとに、同じリビジョンを持つイベントを生成します。1つのtxn内で同じキーを複数回変更することはできません。 |
 | Compact | CompactionRequest | CompactionResponse | Compactは、etcdキー・バリューストアのイベント履歴をコンパクションします。キー・バリューストアは定期的にコンパクションすることを推奨します。そうしないと、イベント履歴は無制限に増え続けます。 |
+{.wide .expand}
 
 ##### サービス `Lease` (api/etcdserverpb/rpc.proto) {#service-lease-apietcdserverpbrpcproto}
 
@@ -59,6 +62,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | LeaseKeepAlive | LeaseKeepAliveRequest | LeaseKeepAliveResponse | LeaseKeepAliveは、クライアントからサーバーへキープアライブリクエストをストリーミングし、サーバーからクライアントへキープアライブレスポンスをストリーミングすることで、リースを維持します。 |
 | LeaseTimeToLive | LeaseTimeToLiveRequest | LeaseTimeToLiveResponse | LeaseTimeToLiveはリース情報を取得します。 |
 | LeaseLeases | LeaseLeasesRequest | LeaseLeasesResponse | LeaseLeasesは既存のすべてのリースを一覧表示します。 |
+{.wide .expand}
 
 ##### サービス `Maintenance` (api/etcdserverpb/rpc.proto) {#service-maintenance-apietcdserverpbrpcproto}
 
@@ -72,6 +76,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | Snapshot | SnapshotRequest | SnapshotResponse | Snapshotは、バックエンド全体のスナップショットを、メンバーからクライアントへストリームで送信します。 |
 | MoveLeader | MoveLeaderRequest | MoveLeaderResponse | MoveLeaderは、現在のリーダーノードに対し、移譲先へリーダーシップを移すよう要求します。 |
 | Downgrade | DowngradeRequest | DowngradeResponse | Downgradeは、クラスターのバージョンのダウングレードの要求、実行可能性の検証、またはダウングレードの取り消しを行います。etcd 3.5以降でサポートされています。 |
+{.wide .expand}
 
 ##### サービス `Watch` (api/etcdserverpb/rpc.proto) {#service-watch-apietcdserverpbrpcproto}
 
@@ -86,6 +91,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | memberID | memberIDは、発報されたアラームに関連付けられたメンバーのIDです。 | uint64 |
 | alarm | alarmは、発報されたアラームの種類です。 | AlarmType |
+{.wide .expand}
 
 ##### メッセージ `AlarmRequest` (api/etcdserverpb/rpc.proto) {#message-alarmrequest-apietcdserverpbrpcproto}
 
@@ -95,6 +101,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | action | actionは、発行するアラームリクエストの種類です。アクションには、アラーム状態のGET、アラームのACTIVATE、発報済みアラームのDEACTIVATEがあります。 | AlarmAction |
 | memberID | memberIDは、アラームに関連付けられたメンバーのIDです。memberIDが0の場合、アラームリクエストはすべてのメンバーを対象とします。 | uint64 |
 | alarm | alarmは、このリクエストで対象とするアラームの種類です。 | AlarmType |
+{.wide .expand}
 
 ##### メッセージ `AlarmResponse` (api/etcdserverpb/rpc.proto) {#message-alarmresponse-apietcdserverpbrpcproto}
 
@@ -103,6 +110,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | alarms | alarmsは、アラームリクエストに関連付けられたアラームの一覧です。 | (slice of) AlarmMember |
+{.wide .expand}
 
 ##### メッセージ `AuthDisableRequest` (api/etcdserverpb/rpc.proto) {#message-authdisablerequest-apietcdserverpbrpcproto}
 
@@ -136,6 +144,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | name | nameは、認証システムに追加するロールの名前です。 | string |
+{.wide .expand}
 
 ##### メッセージ `AuthRoleAddResponse` (api/etcdserverpb/rpc.proto) {#message-authroleaddresponse-apietcdserverpbrpcproto}
 
@@ -179,6 +188,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | name | nameは、権限を付与するロールの名前です。 | string |
 | perm | permは、ロールに付与する権限です。 | authpb.Permission |
+{.wide .expand}
 
 ##### メッセージ `AuthRoleGrantPermissionResponse` (api/etcdserverpb/rpc.proto) {#message-authrolegrantpermissionresponse-apietcdserverpbrpcproto}
 
@@ -231,6 +241,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | header |  | ResponseHeader |
 | enabled |  | bool |
 | authRevision | authRevisionは、認証ストアの現在のリビジョンです。 | uint64 |
+{.wide .expand}
 
 ##### メッセージ `AuthUserAddRequest` (api/etcdserverpb/rpc.proto) {#message-authuseraddrequest-apietcdserverpbrpcproto}
 
@@ -257,6 +268,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | name | nameは、パスワードを変更するユーザーの名前です。 | string |
 | password | passwordは、ユーザーの新しいパスワードです。このフィールドはAPIレイヤーで削除されることに注意してください。 | string |
 | hashedPassword | hashedPasswordは、ユーザーの新しいパスワードのハッシュ値です。このフィールドはAPIレイヤーで初期化されることに注意してください。 | string |
+{.wide .expand}
 
 ##### メッセージ `AuthUserChangePasswordResponse` (api/etcdserverpb/rpc.proto) {#message-authuserchangepasswordresponse-apietcdserverpbrpcproto}
 
@@ -271,6 +283,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | name | nameは、削除するユーザーの名前です。 | string |
+{.wide .expand}
 
 ##### メッセージ `AuthUserDeleteResponse` (api/etcdserverpb/rpc.proto) {#message-authuserdeleteresponse-apietcdserverpbrpcproto}
 
@@ -301,6 +314,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | user | userは、指定したロールを付与するユーザーの名前です。 | string |
 | role | roleは、ユーザーに付与するロールの名前です。 | string |
+{.wide .expand}
 
 ##### メッセージ `AuthUserGrantRoleResponse` (api/etcdserverpb/rpc.proto) {#message-authusergrantroleresponse-apietcdserverpbrpcproto}
 
@@ -353,6 +367,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | token | tokenは、後続のRPCで使用できる認可済みトークンです。 | string |
+{.wide .expand}
 
 ##### メッセージ `CompactionRequest` (api/etcdserverpb/rpc.proto) {#message-compactionrequest-apietcdserverpbrpcproto}
 
@@ -363,6 +378,7 @@ CompactionRequestは、指定したリビジョンまでのキー・バリュー
 | (versionpb.etcd_version_msg) |  | option |
 | revision | revisionは、コンパクション操作の対象となるキー・バリューストアのリビジョンです。 | int64 |
 | physical | physicalを設定すると、RPCはコンパクションがローカルデータベースに物理的に適用され、対象のエントリーがバックエンドデータベースから完全に削除されるまで待機します。 | bool |
+{.wide .expand}
 
 ##### メッセージ `CompactionResponse` (api/etcdserverpb/rpc.proto) {#message-compactionresponse-apietcdserverpbrpcproto}
 
@@ -386,6 +402,7 @@ CompactionRequestは、指定したリビジョンまでのキー・バリュー
 | value | valueは、指定したキーの値をバイト列で表したものです。 | bytes |
 | lease | leaseは、指定したキーのリースIDです。 | int64 |
 | range_end | range_endは、指定したtargetを範囲[key, range_end)内のすべてのキーと比較します。キー範囲の詳細はRangeRequestを参照してください。 | bytes |
+{.wide .expand}
 
 ##### メッセージ `DefragmentRequest` (api/etcdserverpb/rpc.proto) {#message-defragmentrequest-apietcdserverpbrpcproto}
 
@@ -408,6 +425,7 @@ CompactionRequestは、指定したリビジョンまでのキー・バリュー
 | key | keyは、範囲内で削除する最初のキーです。 | bytes |
 | range_end | range_endは、範囲[key, range_end)内で削除する最後のキーの次のキーです。range_endが指定されていない場合、範囲にはkey引数だけが含まれます。range_endが指定したキーに1を加えた値の場合、範囲にはそのキーを接頭辞に持つすべてのキーが含まれます。range_endが'\0'の場合、範囲にはkey引数以上のすべてのキーが含まれます。 | bytes |
 | prev_kv | prev_kvが設定されている場合、etcdは削除前のキー・バリューペアを取得します。削除前のキー・バリューペアはdeleteレスポンスで返されます。 | bool |
+{.wide .expand}
 
 ##### メッセージ `DeleteRangeResponse` (api/etcdserverpb/rpc.proto) {#message-deleterangeresponse-apietcdserverpbrpcproto}
 
@@ -417,6 +435,7 @@ CompactionRequestは、指定したリビジョンまでのキー・バリュー
 | header |  | ResponseHeader |
 | deleted | deletedは、範囲削除リクエストによって削除されたキーの数です。 | int64 |
 | prev_kvs | リクエストにprev_kvが設定されている場合、削除前のキー・バリューペアが返されます。 | (slice of) mvccpb.KeyValue |
+{.wide .expand}
 
 ##### メッセージ `DowngradeInfo` (api/etcdserverpb/rpc.proto) {#message-downgradeinfo-apietcdserverpbrpcproto}
 
@@ -432,6 +451,7 @@ CompactionRequestは、指定したリビジョンまでのキー・バリュー
 | (versionpb.etcd_version_msg) |  | option |
 | action | actionは、発行するダウングレードリクエストの種類です。アクションには、対象バージョンのVALIDATE、クラスターバージョンのDOWNGRADE、現在のダウングレードジョブのCANCELがあります。 | DowngradeAction |
 | version | versionは、ダウングレード先のバージョンです。 | string |
+{.wide .expand}
 
 ##### メッセージ `DowngradeResponse` (api/etcdserverpb/rpc.proto) {#message-downgraderesponse-apietcdserverpbrpcproto}
 
@@ -440,6 +460,7 @@ CompactionRequestは、指定したリビジョンまでのキー・バリュー
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | version | versionは、クラスターの現在のバージョンです。 | string |
+{.wide .expand}
 
 ##### メッセージ `DowngradeVersionTestRequest` (api/etcdserverpb/rpc.proto) {#message-downgradeversiontestrequest-apietcdserverpbrpcproto}
 
@@ -456,6 +477,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | revision | revisionは、ハッシュ操作の対象となるキー・バリューストアのリビジョンです。 | int64 |
+{.wide .expand}
 
 ##### メッセージ `HashKVResponse` (api/etcdserverpb/rpc.proto) {#message-hashkvresponse-apietcdserverpbrpcproto}
 
@@ -466,6 +488,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | hash | hashは、応答するメンバーのMVCCキーから、指定したリビジョンまでを対象として計算したハッシュ値です。 | uint32 |
 | compact_revision | compact_revisionは、ハッシュ計算の開始時点でコンパクションされていたキー・バリューストアのリビジョンです。 | int64 |
 | hash_revision | hash_revisionは、ハッシュ計算の対象とする上限のリビジョンです。 | int64 |
+{.wide .expand}
 
 ##### メッセージ `HashRequest` (api/etcdserverpb/rpc.proto) {#message-hashrequest-apietcdserverpbrpcproto}
 
@@ -480,6 +503,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | hash | hashは、応答するメンバーのKVバックエンドから計算したハッシュ値です。 | uint32 |
+{.wide .expand}
 
 ##### メッセージ `LeaseCheckpoint` (api/etcdserverpb/rpc.proto) {#message-leasecheckpoint-apietcdserverpbrpcproto}
 
@@ -488,6 +512,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | (versionpb.etcd_version_msg) |  | option |
 | ID | IDは、チェックポイントを作成するリースのIDです。 | int64 |
 | remaining_TTL | Remaining_TTLは、リースの有効期限までの残り時間です。 | int64 |
+{.wide .expand}
 
 ##### メッセージ `LeaseCheckpointRequest` (api/etcdserverpb/rpc.proto) {#message-leasecheckpointrequest-apietcdserverpbrpcproto}
 
@@ -510,6 +535,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | (versionpb.etcd_version_msg) |  | option |
 | TTL | TTLは、秒単位の希望する生存時間です。期限切れのリースでは-1が返されます。 | int64 |
 | ID | IDは、リースに要求するIDです。IDが0の場合、リースの貸し手がIDを選択します。 | int64 |
+{.wide .expand}
 
 ##### メッセージ `LeaseGrantResponse` (api/etcdserverpb/rpc.proto) {#message-leasegrantresponse-apietcdserverpbrpcproto}
 
@@ -520,6 +546,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | ID | IDは、付与されたリースのIDです。 | int64 |
 | TTL | TTLは、サーバーが選択した、秒単位のリースの生存時間です。 | int64 |
 | error |  | string |
+{.wide .expand}
 
 ##### メッセージ `LeaseKeepAliveRequest` (api/etcdserverpb/rpc.proto) {#message-leasekeepaliverequest-apietcdserverpbrpcproto}
 
@@ -527,6 +554,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | IDは、維持するリースのIDです。 | int64 |
+{.wide .expand}
 
 ##### メッセージ `LeaseKeepAliveResponse` (api/etcdserverpb/rpc.proto) {#message-leasekeepaliveresponse-apietcdserverpbrpcproto}
 
@@ -536,6 +564,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | header |  | ResponseHeader |
 | ID | IDは、キープアライブリクエストのリースIDです。 | int64 |
 | TTL | TTLは、リースの新しい生存時間です。 | int64 |
+{.wide .expand}
 
 ##### メッセージ `LeaseLeasesRequest` (api/etcdserverpb/rpc.proto) {#message-leaseleasesrequest-apietcdserverpbrpcproto}
 
@@ -557,6 +586,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | IDは、取り消すリースのIDです。そのIDが取り消されると、関連付けられたすべてのキーが削除されます。 | int64 |
+{.wide .expand}
 
 ##### メッセージ `LeaseRevokeResponse` (api/etcdserverpb/rpc.proto) {#message-leaserevokeresponse-apietcdserverpbrpcproto}
 
@@ -579,6 +609,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | (versionpb.etcd_version_msg) |  | option |
 | ID | IDは、そのリースのIDです。 | int64 |
 | keys | keysをtrueにすると、このリースに関連付けられたすべてのキーを照会します。 | bool |
+{.wide .expand}
 
 ##### メッセージ `LeaseTimeToLiveResponse` (api/etcdserverpb/rpc.proto) {#message-leasetimetoliveresponse-apietcdserverpbrpcproto}
 
@@ -590,6 +621,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | TTL | TTLは、秒単位のリースの残りTTLです。リースはTTL+1秒未満で期限切れになります。 | int64 |
 | grantedTTL | GrantedTTLは、リースの作成時または更新時に最初に付与された、秒単位の時間です。 | int64 |
 | keys | Keysは、このリースに関連付けられたキーの一覧です。 | (slice of) bytes |
+{.wide .expand}
 
 ##### メッセージ `Member` (api/etcdserverpb/rpc.proto) {#message-member-apietcdserverpbrpcproto}
 
@@ -601,6 +633,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | peerURLs | peerURLsは、クラスターとの通信用にメンバーが公開するURLの一覧です。 | (slice of) string |
 | clientURLs | clientURLsは、クライアントとの通信用にメンバーが公開するURLの一覧です。メンバーが起動していない場合、clientURLsは空になります。 | (slice of) string |
 | isLearner | isLearnerは、そのメンバーがRaftの学習者メンバーかどうかを示します。 | bool |
+{.wide .expand}
 
 ##### メッセージ `MemberAddRequest` (api/etcdserverpb/rpc.proto) {#message-memberaddrequest-apietcdserverpbrpcproto}
 
@@ -609,6 +642,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | (versionpb.etcd_version_msg) |  | option |
 | peerURLs | peerURLsは、追加するメンバーがクラスターとの通信に使用するURLの一覧です。 | (slice of) string |
 | isLearner | isLearnerは、追加するメンバーがRaftの学習者メンバーかどうかを示します。 | bool |
+{.wide .expand}
 
 ##### メッセージ `MemberAddResponse` (api/etcdserverpb/rpc.proto) {#message-memberaddresponse-apietcdserverpbrpcproto}
 
@@ -618,6 +652,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | header |  | ResponseHeader |
 | member | memberは、追加したメンバーの情報です。 | Member |
 | members | membersは、新しいメンバーを追加した後の、すべてのメンバーの一覧です。 | (slice of) Member |
+{.wide .expand}
 
 ##### メッセージ `MemberListRequest` (api/etcdserverpb/rpc.proto) {#message-memberlistrequest-apietcdserverpbrpcproto}
 
@@ -633,6 +668,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | membersは、クラスターに関連付けられたすべてのメンバーの一覧です。 | (slice of) Member |
+{.wide .expand}
 
 ##### メッセージ `MemberPromoteRequest` (api/etcdserverpb/rpc.proto) {#message-memberpromoterequest-apietcdserverpbrpcproto}
 
@@ -640,6 +676,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | IDは、昇格させるメンバーのメンバーIDです。 | uint64 |
+{.wide .expand}
 
 ##### メッセージ `MemberPromoteResponse` (api/etcdserverpb/rpc.proto) {#message-memberpromoteresponse-apietcdserverpbrpcproto}
 
@@ -648,6 +685,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | membersは、メンバーを昇格させた後の、すべてのメンバーの一覧です。 | (slice of) Member |
+{.wide .expand}
 
 ##### メッセージ `MemberRemoveRequest` (api/etcdserverpb/rpc.proto) {#message-memberremoverequest-apietcdserverpbrpcproto}
 
@@ -655,6 +693,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | IDは、削除するメンバーのメンバーIDです。 | uint64 |
+{.wide .expand}
 
 ##### メッセージ `MemberRemoveResponse` (api/etcdserverpb/rpc.proto) {#message-memberremoveresponse-apietcdserverpbrpcproto}
 
@@ -663,6 +702,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | membersは、メンバーを削除した後の、すべてのメンバーの一覧です。 | (slice of) Member |
+{.wide .expand}
 
 ##### メッセージ `MemberUpdateRequest` (api/etcdserverpb/rpc.proto) {#message-memberupdaterequest-apietcdserverpbrpcproto}
 
@@ -671,6 +711,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | (versionpb.etcd_version_msg) |  | option |
 | ID | IDは、更新するメンバーのメンバーIDです。 | uint64 |
 | peerURLs | peerURLsは、メンバーがクラスターとの通信に使用する、新しいURLの一覧です。 | (slice of) string |
+{.wide .expand}
 
 ##### メッセージ `MemberUpdateResponse` (api/etcdserverpb/rpc.proto) {#message-memberupdateresponse-apietcdserverpbrpcproto}
 
@@ -679,6 +720,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | membersは、メンバーを更新した後の、すべてのメンバーの一覧です。 | (slice of) Member |
+{.wide .expand}
 
 ##### メッセージ `MoveLeaderRequest` (api/etcdserverpb/rpc.proto) {#message-moveleaderrequest-apietcdserverpbrpcproto}
 
@@ -686,6 +728,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | targetID | targetIDは、新しいリーダーのノードIDです。 | uint64 |
+{.wide .expand}
 
 ##### メッセージ `MoveLeaderResponse` (api/etcdserverpb/rpc.proto) {#message-moveleaderresponse-apietcdserverpbrpcproto}
 
@@ -705,6 +748,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | prev_kv | prev_kvが設定されている場合、etcdは変更前のキー・バリューペアを取得します。変更前のキー・バリューペアはputレスポンスで返されます。 | bool |
 | ignore_value | ignore_valueが設定されている場合、etcdは現在の値を使ってキーを更新します。キーが存在しない場合はエラーを返します。 | bool |
 | ignore_lease | ignore_leaseが設定されている場合、etcdは現在のリースを使ってキーを更新します。キーが存在しない場合はエラーを返します。 | bool |
+{.wide .expand}
 
 ##### メッセージ `PutResponse` (api/etcdserverpb/rpc.proto) {#message-putresponse-apietcdserverpbrpcproto}
 
@@ -713,6 +757,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | prev_kv | リクエストにprev_kvが設定されている場合、変更前のキー・バリューペアが返されます。 | mvccpb.KeyValue |
+{.wide .expand}
 
 ##### メッセージ `RangeRequest` (api/etcdserverpb/rpc.proto) {#message-rangerequest-apietcdserverpbrpcproto}
 
@@ -732,6 +777,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | max_mod_revision | max_mod_revisionは、返すキーの変更リビジョンの上限です。変更リビジョンがこれより大きいキーはすべて除外されます。 | int64 |
 | min_create_revision | min_create_revisionは、返すキーの作成リビジョンの下限です。作成リビジョンがこれより小さいキーはすべて除外されます。 | int64 |
 | max_create_revision | max_create_revisionは、返すキーの作成リビジョンの上限です。作成リビジョンがこれより大きいキーはすべて除外されます。 | int64 |
+{.wide .expand}
 
 ##### メッセージ `RangeResponse` (api/etcdserverpb/rpc.proto) {#message-rangeresponse-apietcdserverpbrpcproto}
 
@@ -742,6 +788,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | kvs | kvsは、範囲リクエストに一致するキー・バリューペアの一覧です。件数を要求した場合、kvsは空になります。 | (slice of) mvccpb.KeyValue |
 | more | moreは、要求した範囲内に、返すべきキーがまだあるかどうかを示します。 | bool |
 | count | countは、要求された場合に、範囲内の実際のキー数に設定されます。Kvsとは異なり、上限やフィルター（Min/Max、Create/Modify、Revisionsなど）の影響を受けず、指定した範囲内の総数を反映します。 | int64 |
+{.wide .expand}
 
 ##### メッセージ `RequestOp` (api/etcdserverpb/rpc.proto) {#message-requestop-apietcdserverpbrpcproto}
 
@@ -753,6 +800,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | request_put |  | PutRequest |
 | request_delete_range |  | DeleteRangeRequest |
 | request_txn |  | TxnRequest |
+{.wide .expand}
 
 ##### メッセージ `ResponseHeader` (api/etcdserverpb/rpc.proto) {#message-responseheader-apietcdserverpbrpcproto}
 
@@ -763,6 +811,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | member_id | member_idは、レスポンスを送信したメンバーのIDです。 | uint64 |
 | revision | revisionは、リクエストが適用された時点のキー・バリューストアのリビジョンです。キー・バリューストアを操作しない呼び出しでは設定されません（したがって0です）。監視の進捗レスポンスでは、header.revisionが進捗を示します。このストリームで今後受信するすべてのイベントは、header.revisionより大きいリビジョン番号を持つことが保証されます。 | int64 |
 | raft_term | raft_termは、リクエストが適用された時点のRaftの任期です。 | uint64 |
+{.wide .expand}
 
 ##### メッセージ `ResponseOp` (api/etcdserverpb/rpc.proto) {#message-responseop-apietcdserverpbrpcproto}
 
@@ -774,6 +823,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | response_put |  | PutResponse |
 | response_delete_range |  | DeleteRangeResponse |
 | response_txn |  | TxnResponse |
+{.wide .expand}
 
 ##### メッセージ `SnapshotRequest` (api/etcdserverpb/rpc.proto) {#message-snapshotrequest-apietcdserverpbrpcproto}
 
@@ -790,6 +840,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | remaining_bytes | remaining_bytesは、このメッセージの後に送信するblobのバイト数です。 | uint64 |
 | blob | blobは、スナップショットストリームの次のスナップショットチャンクを保持します。 | bytes |
 | version | スナップショットに記録されたストレージスキーマのバージョンです。メンバーのローカルバックエンドから取得され、バイナリーのバージョンとは異なる場合があります。スナップショットのリストア時に対応している必要があるetcdのストレージバージョンを示します。 | string |
+{.wide .expand}
 
 ##### メッセージ `StatusRequest` (api/etcdserverpb/rpc.proto) {#message-statusrequest-apietcdserverpbrpcproto}
 
@@ -815,6 +866,7 @@ DowngradeVersionTestRequestは、テスト専用です。このリクエスト�
 | storageVersion | storageVersionは、dbファイルのバージョンです。目標のクラスターバージョンに対して、更新が遅れる場合があります。 | string |
 | dbSizeQuota | dbSizeQuotaは、設定されたetcdのストレージクォータ（バイト単位）です（--quota-backend-bytesフラグでetcdインスタンスに渡した値）。 | int64 |
 | downgradeInfo | downgradeInfoは、ダウングレード処理が存在するかどうかを示します。 | DowngradeInfo |
+{.wide .expand}
 
 ##### メッセージ `TxnRequest` (api/etcdserverpb/rpc.proto) {#message-txnrequest-apietcdserverpbrpcproto}
 
@@ -826,6 +878,7 @@ Googleのpaxosdb論文より：この実装の中心となるのは、MultiOpと
 | compare | compareは、条件の論理積を表す述語のリストです。比較が成功するとsuccessのリクエストを順番に処理し、レスポンスにはそれぞれの応答が同じ順序で含まれます。比較が失敗するとfailureのリクエストを順番に処理し、レスポンスにはそれぞれの応答が同じ順序で含まれます。 | (slice of) Compare |
 | success | successは、compareの評価結果がtrueの場合に適用するリクエストのリストです。 | (slice of) RequestOp |
 | failure | failureは、compareの評価結果がfalseの場合に適用するリクエストのリストです。 | (slice of) RequestOp |
+{.wide .expand}
 
 ##### メッセージ `TxnResponse` (api/etcdserverpb/rpc.proto) {#message-txnresponse-apietcdserverpbrpcproto}
 
@@ -835,6 +888,7 @@ Googleのpaxosdb論文より：この実装の中心となるのは、MultiOpと
 | header |  | ResponseHeader |
 | succeeded | succeededは、compareの評価結果がtrueの場合にtrueに、それ以外の場合にfalseに設定されます。 | bool |
 | responses | responsesは、succeededがtrueの場合にはsuccessを、falseの場合にはfailureを適用した結果に対応するレスポンスのリストです。 | (slice of) ResponseOp |
+{.wide .expand}
 
 ##### メッセージ `WatchCancelRequest` (api/etcdserverpb/rpc.proto) {#message-watchcancelrequest-apietcdserverpbrpcproto}
 
@@ -842,6 +896,7 @@ Googleのpaxosdb論文より：この実装の中心となるのは、MultiOpと
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | watch_id | watch_idは、これ以上イベントを送信しないようキャンセルするウォッチャーのIDです。 | int64 |
+{.wide .expand}
 
 ##### メッセージ `WatchCreateRequest` (api/etcdserverpb/rpc.proto) {#message-watchcreaterequest-apietcdserverpbrpcproto}
 
@@ -856,6 +911,7 @@ Googleのpaxosdb論文より：この実装の中心となるのは、MultiOpと
 | prev_kv | prev_kvが設定されている場合、作成したウォッチャーはイベント発生前のKVを取得します。以前のKVがすでにコンパクションされている場合、何も返されません。 | bool |
 | watch_id | watch_idが指定され、0でない場合、そのIDがこのウォッチャーに割り当てられます。etcdでのウォッチャー作成は同期操作ではないため、これを使うことで、同じストリーム上に複数のウォッチャーを作成する際に正しい順序を保てます。ストリーム上ですでに使用中のIDを持つウォッチャーを作成すると、エラーが返されます。 | int64 |
 | fragment | fragmentは、大きなリビジョンを複数の監視レスポンスに分割できるようにします。 | bool |
+{.wide .expand}
 
 ##### メッセージ `WatchProgressRequest` (api/etcdserverpb/rpc.proto) {#message-watchprogressrequest-apietcdserverpbrpcproto}
 
@@ -874,6 +930,7 @@ Googleのpaxosdb論文より：この実装の中心となるのは、MultiOpと
 | create_request |  | WatchCreateRequest |
 | cancel_request |  | WatchCancelRequest |
 | progress_request |  | WatchProgressRequest |
+{.wide .expand}
 
 ##### メッセージ `WatchResponse` (api/etcdserverpb/rpc.proto) {#message-watchresponse-apietcdserverpbrpcproto}
 
@@ -888,6 +945,7 @@ Googleのpaxosdb論文より：この実装の中心となるのは、MultiOpと
 | cancel_reason | cancel_reasonは、ウォッチャーをキャンセルする理由を示します。 | string |
 | fragment | fragmentは、大きな監視レスポンスが複数のレスポンスに分割された場合にtrueです。 | bool |
 | events |  | (slice of) mvccpb.Event |
+{.wide .expand}
 
 ##### メッセージ `Event` (api/mvccpb/kv.proto) {#message-event-apimvccpbkvproto}
 
@@ -921,12 +979,14 @@ Googleのpaxosdb論文より：この実装の中心となるのは、MultiOpと
 | フィールド | 説明 | 型 |
 | ----- | ----------- | ---- |
 | LeaseTimeToLiveRequest |  | etcdserverpb.LeaseTimeToLiveRequest |
+{.wide .expand}
 
 ##### メッセージ `LeaseInternalResponse` (server/lease/leasepb/lease.proto) {#message-leaseinternalresponse-serverleaseleasepbleaseproto}
 
 | フィールド | 説明 | 型 |
 | ----- | ----------- | ---- |
 | LeaseTimeToLiveResponse |  | etcdserverpb.LeaseTimeToLiveResponse |
+{.wide .expand}
 
 ##### メッセージ `Permission` (api/authpb/auth.proto) {#message-permission-apiauthpbauthproto}
 

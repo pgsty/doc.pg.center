@@ -16,6 +16,7 @@ Le service de verrouillage expose des fonctionnalités de verrouillage côté cl
 | ------ | ------------ | ------------- | ----------- |
 | Lock | LockRequest | LockResponse | Lock acquiert un verrou partagé distribué sur un verrou nommé donné. En cas de succès, elle retourne une clé unique qui reste existante tant que le verrou est détenu par l'appelant. Cette clé peut être utilisée conjointement avec des transactions afin de garantir en toute sécurité que les mises à jour sur etcd ne s'effectuent qu'en tenant le verrou. Le verrou est détenu jusqu'à ce que Unlock soit appelé sur la clé ou que le bail associé au propriétaire expire. |
 | Unlock | UnlockRequest | UnlockResponse | Unlock prend une clé retournée par Lock et libère la possession du verrou. Le prochain appelant de Lock en attente du verrou est alors réveillé et obtient la possession du verrou. |
+{.wide .expand}
 
 ##### message `LockRequest` (server/etcdserver/api/v3lock/v3lockpb/v3lock.proto) {#message-lockrequest-serveretcdserverapiv3lockv3lockpbv3lockproto}
 
@@ -30,6 +31,7 @@ Le service de verrouillage expose des fonctionnalités de verrouillage côté cl
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | key | key est une clé qui existera dans etcd pendant toute la durée où l'appelant de Lock détient le verrou. Les utilisateurs ne devraient pas modifier cette clé, sinon le verrou peut présenter un comportement indéfini. | bytes |
+{.wide .expand}
 
 ##### message `UnlockRequest` (server/etcdserver/api/v3lock/v3lockpb/v3lock.proto) {#message-unlockrequest-serveretcdserverapiv3lockv3lockpbv3lockproto}
 
@@ -54,6 +56,7 @@ Le service d'élection expose des fonctionnalités d'élection côté client sou
 | Leader | LeaderRequest | LeaderResponse | Leader retourne la proclamation actuelle de l'élection, le cas échéant. |
 | Observe | LeaderRequest | LeaderResponse | Observe diffuse les proclamations d'élection dans l'ordre, telles qu'elles sont émises par les leaders élus. |
 | Resign | ResignRequest | ResignResponse | Resign libère le leadership de l'élection afin que d'autres candidats puissent acquérir le leadership de l'élection. |
+{.wide .expand}
 
 ##### message `CampaignRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-campaignrequest-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
@@ -69,6 +72,7 @@ Le service d'élection expose des fonctionnalités d'élection côté client sou
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | leader | leader décrit les ressources utilisées pour la détention du rôle de leader lors de l'élection. | LeaderKey |
+{.wide .expand}
 
 ##### message `LeaderKey` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-leaderkey-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
@@ -91,6 +95,7 @@ Le service d'élection expose des fonctionnalités d'élection côté client sou
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | kv | kv est la paire clé-valeur représentant la dernière mise à jour du leader. | mvccpb.KeyValue |
+{.wide .expand}
 
 ##### message `ProclaimRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-proclaimrequest-serveretcdserverapiv3electionv3electionpbv3electionproto}
 

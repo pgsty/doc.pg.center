@@ -50,6 +50,7 @@ Die Leistung wird aus den Ergebnissen von 100 Benchmark-Durchläufen berechnet.
 | 64 | 256 | alle Server | 46592 | 1273 | 10.14 | 0.59 |
 | 256 | 64 | alle Server | 45332 | 1847 | 2.48| 0.12 |
 | 256 | 256 | alle Server | 46485 | 1340 | 10.18 | 0.74 |
+{.wide .expand}
 
 ### Schreibleistung für einen einzelnen Schlüssel {#single-key-write-performance}
 
@@ -65,6 +66,7 @@ Die Leistung wird aus den Ergebnissen von 100 Benchmark-Durchläufen berechnet.
 | 64 | 256 | alle Server | 4461 | 298 | 89.47 | 36.48 |
 | 256 | 64 | alle Server | 1599 | 94 | 60.11| 6.43 |
 | 256 | 256 | alle Server | 4315 | 193 | 88.98 | 7.01 |
+{.wide .expand}
 
 ## Leistungsänderungen {#performance-changes}
 

@@ -29,6 +29,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | RoleDelete | AuthRoleDeleteRequest | AuthRoleDeleteResponse | RoleDelete 删除指定角色。 |
 | RoleGrantPermission | AuthRoleGrantPermissionRequest | AuthRoleGrantPermissionResponse | RoleGrantPermission 为指定角色授予指定键或范围的权限。 |
 | RoleRevokePermission | AuthRoleRevokePermissionRequest | AuthRoleRevokePermissionResponse | RoleRevokePermission 撤销指定角色的指定键或范围的权限。 |
+{.wide .expand}
 
 ##### 服务 `Cluster` (api/etcdserverpb/rpc.proto) {#service-cluster-apietcdserverpbrpcproto}
 
@@ -39,6 +40,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | MemberUpdate | MemberUpdateRequest | MemberUpdateResponse | MemberUpdate 更新成员配置。 |
 | MemberList | MemberListRequest | MemberListResponse | MemberList 列出集群中的所有成员。 |
 | MemberPromote | MemberPromoteRequest | MemberPromoteResponse | MemberPromote 将学习者成员（非投票成员）提升为 Raft 投票成员。 |
+{.wide .expand}
 
 ##### 服务 `KV` (api/etcdserverpb/rpc.proto) {#service-kv-apietcdserverpbrpcproto}
 
@@ -49,6 +51,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | DeleteRange | DeleteRangeRequest | DeleteRangeResponse | DeleteRange 从键值存储中删除指定范围内的键。删除请求会递增键值存储的修订版本，并为每个被删除的键在事件历史中生成一个删除事件。 |
 | Txn | TxnRequest | TxnResponse | Txn 在单个事务中处理多个请求。事务请求会递增键值存储的修订版本，并为每个完成的请求生成具有相同修订版本的事件。不允许在同一个事务中多次修改同一键。 |
 | Compact | CompactionRequest | CompactionResponse | Compact 对 etcd 键值存储中的事件历史进行压缩。键值存储应定期执行压缩，否则事件历史将无限增长。 |
+{.wide .expand}
 
 ##### 服务 `Lease` (api/etcdserverpb/rpc.proto) {#service-lease-apietcdserverpbrpcproto}
 
@@ -59,6 +62,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | LeaseKeepAlive | LeaseKeepAliveRequest | LeaseKeepAliveResponse | LeaseKeepAlive 通过客户端向服务器流式发送保活请求，并从服务器流式接收保活响应，以维持租约的活跃状态。 |
 | LeaseTimeToLive | LeaseTimeToLiveRequest | LeaseTimeToLiveResponse | LeaseTimeToLive 获取租约信息。 |
 | LeaseLeases | LeaseLeasesRequest | LeaseLeasesResponse | LeaseLeases 列出所有现有的租约。 |
+{.wide .expand}
 
 ##### 服务 `Maintenance` (api/etcdserverpb/rpc.proto) {#service-maintenance-apietcdserverpbrpcproto}
 
@@ -72,6 +76,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | Snapshot | SnapshotRequest | SnapshotResponse | Snapshot 通过流将成员整个后端的快照发送给客户端。 |
 | MoveLeader | MoveLeaderRequest | MoveLeaderResponse | MoveLeader 用于请求当前领导者将其领导权转移给接收方。 |
 | Downgrade | DowngradeRequest | DowngradeResponse | Downgrade 用于请求对集群版本执行降级、验证可行性或取消降级。自 etcd 3.5 起支持。 |
+{.wide .expand}
 
 ##### 服务 `Watch` (api/etcdserverpb/rpc.proto) {#service-watch-apietcdserverpbrpcproto}
 
@@ -86,6 +91,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | memberID | memberID 是与触发告警相关的成员的 ID。 | uint64 |
 | alarm | alarm 是已触发的告警类型。 | AlarmType |
+{.wide .expand}
 
 ##### 消息 `AlarmRequest` (api/etcdserverpb/rpc.proto) {#message-alarmrequest-apietcdserverpbrpcproto}
 
@@ -95,6 +101,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | action | action 表示要发出的告警请求类型。action 可以是 GET（获取告警状态）、ACTIVATE（激活告警），或 DEACTIVATE（停用已触发的告警）。 | AlarmAction |
 | memberID | memberID 表示与告警关联的成员 ID。如果 memberID 为 0，则该告警请求涵盖所有成员。 | uint64 |
 | alarm | alarm 表示本次请求所考虑的告警类型。 | AlarmType |
+{.wide .expand}
 
 ##### 消息 `AlarmResponse` (api/etcdserverpb/rpc.proto) {#message-alarmresponse-apietcdserverpbrpcproto}
 
@@ -103,6 +110,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | alarms | alarms 是与告警请求相关联的告警列表。 | (slice of) AlarmMember |
+{.wide .expand}
 
 ##### 消息 `AuthDisableRequest` (api/etcdserverpb/rpc.proto) {#message-authdisablerequest-apietcdserverpbrpcproto}
 
@@ -136,6 +144,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | name | name 是要添加到身份认证系统中的角色名称。 | string |
+{.wide .expand}
 
 ##### 消息 `AuthRoleAddResponse` (api/etcdserverpb/rpc.proto) {#message-authroleaddresponse-apietcdserverpbrpcproto}
 
@@ -179,6 +188,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | name | name 是将被授予权限的角色名称。 | string |
 | perm | perm 是要授予角色的权限。 | authpb.Permission |
+{.wide .expand}
 
 ##### 消息 `AuthRoleGrantPermissionResponse` (api/etcdserverpb/rpc.proto) {#message-authrolegrantpermissionresponse-apietcdserverpbrpcproto}
 
@@ -231,6 +241,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | header |  | ResponseHeader |
 | enabled |  | bool |
 | authRevision | authRevision 是认证存储系统的当前修订版本 | uint64 |
+{.wide .expand}
 
 ##### 消息 `AuthUserAddRequest` (api/etcdserverpb/rpc.proto) {#message-authuseraddrequest-apietcdserverpbrpcproto}
 
@@ -257,6 +268,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | name | name 是要更改密码的用户的名称。 | string |
 | password | password 是用户的新密码。请注意，该字段将在 API 层被移除。 | string |
 | hashedPassword | hashedPassword 是用户的新的哈希密码。请注意，该字段将在 API 层被初始化。 | string |
+{.wide .expand}
 
 ##### 消息 `AuthUserChangePasswordResponse` (api/etcdserverpb/rpc.proto) {#message-authuserchangepasswordresponse-apietcdserverpbrpcproto}
 
@@ -271,6 +283,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | name | name 是要删除的用户名称。 | string |
+{.wide .expand}
 
 ##### 消息 `AuthUserDeleteResponse` (api/etcdserverpb/rpc.proto) {#message-authuserdeleteresponse-apietcdserverpbrpcproto}
 
@@ -301,6 +314,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | user | user 是应被授予指定角色的用户名。 | string |
 | role | role 是应授予用户的角色名称。 | string |
+{.wide .expand}
 
 ##### 消息 `AuthUserGrantRoleResponse` (api/etcdserverpb/rpc.proto) {#message-authusergrantroleresponse-apietcdserverpbrpcproto}
 
@@ -353,6 +367,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | token | token 是可用于后续 RPC 的授权令牌 | string |
+{.wide .expand}
 
 ##### 消息 `CompactionRequest` (api/etcdserverpb/rpc.proto) {#message-compactionrequest-apietcdserverpbrpcproto}
 
@@ -363,6 +378,7 @@ CompactionRequest 对键值存储执行压缩，直至指定的修订版本。�
 | (versionpb.etcd_version_msg) |  | option |
 | revision | revision 是执行压缩操作时键值存储的修订版本。 | int64 |
 | physical | physical 设置为 true 时，RPC 将等待压缩操作在本地数据库中物理应用，确保已压缩的条目从后端数据库中完全移除。 | bool |
+{.wide .expand}
 
 ##### 消息 `CompactionResponse` (api/etcdserverpb/rpc.proto) {#message-compactionresponse-apietcdserverpbrpcproto}
 
@@ -386,6 +402,7 @@ CompactionRequest 对键值存储执行压缩，直至指定的修订版本。�
 | value | value 是指定键的值，以字节形式表示。 | bytes |
 | lease | lease 是指定键的租约 ID。 | int64 |
 | range_end | range_end 将指定目标与键范围 [key, range_end) 内的所有键进行比较。有关键范围的更多详情，请参见 RangeRequest。 | bytes |
+{.wide .expand}
 
 ##### 消息 `DefragmentRequest` (api/etcdserverpb/rpc.proto) {#message-defragmentrequest-apietcdserverpbrpcproto}
 
@@ -408,6 +425,7 @@ CompactionRequest 对键值存储执行压缩，直至指定的修订版本。�
 | key | key 是范围中要删除的第一个键。 | bytes |
 | range_end | range_end 是范围 [key, range_end) 中最后一个要删除的键的下一个键。若未指定 range_end，则范围仅包含 key 参数。若 range_end 为给定键加一，则范围包含所有以该键为前缀的键。若 range_end 为 '\0'，则范围包含所有大于或等于 key 参数的键。 | bytes |
 | prev_kv | 若设置 prev_kv，etcd 会在删除前获取对应的键值对。删除响应中将返回先前的键值对。 | bool |
+{.wide .expand}
 
 ##### 消息 `DeleteRangeResponse` (api/etcdserverpb/rpc.proto) {#message-deleterangeresponse-apietcdserverpbrpcproto}
 
@@ -417,6 +435,7 @@ CompactionRequest 对键值存储执行压缩，直至指定的修订版本。�
 | header |  | ResponseHeader |
 | deleted | deleted 表示删除范围请求所删除的键的数量。 | int64 |
 | prev_kvs | 若请求中设置了 prev_kv，则返回之前的键值对。 | (slice of) mvccpb.KeyValue |
+{.wide .expand}
 
 ##### 消息 `DowngradeInfo` (api/etcdserverpb/rpc.proto) {#message-downgradeinfo-apietcdserverpbrpcproto}
 
@@ -432,6 +451,7 @@ CompactionRequest 对键值存储执行压缩，直至指定的修订版本。�
 | (versionpb.etcd_version_msg) |  | option |
 | action | action 是要发出的降级请求类型。action 可以是 VALIDATE 目标版本、DOWNGRADE 集群版本，或 CANCEL 当前的降级任务。 | DowngradeAction |
 | version | version 是要降级的目标版本。 | string |
+{.wide .expand}
 
 ##### 消息 `DowngradeResponse` (api/etcdserverpb/rpc.proto) {#message-downgraderesponse-apietcdserverpbrpcproto}
 
@@ -440,6 +460,7 @@ CompactionRequest 对键值存储执行压缩，直至指定的修订版本。�
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | version | version 是当前集群的版本。 | string |
+{.wide .expand}
 
 ##### 消息 `DowngradeVersionTestRequest` (api/etcdserverpb/rpc.proto) {#message-downgradeversiontestrequest-apietcdserverpbrpcproto}
 
@@ -456,6 +477,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | revision | revision 是哈希操作对应的键值存储修订版本。 | int64 |
+{.wide .expand}
 
 ##### 消息 `HashKVResponse` (api/etcdserverpb/rpc.proto) {#message-hashkvresponse-apietcdserverpbrpcproto}
 
@@ -466,6 +488,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | hash | hash 是根据响应成员截至给定修订版本的 MVCC 键计算得出的哈希值。 | uint32 |
 | compact_revision | compact_revision 是 hash 开始时键值存储的压缩修订版本。 | int64 |
 | hash_revision | hash_revision 是哈希计算所覆盖的修订版本。 | int64 |
+{.wide .expand}
 
 ##### 消息 `HashRequest` (api/etcdserverpb/rpc.proto) {#message-hashrequest-apietcdserverpbrpcproto}
 
@@ -480,6 +503,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | hash | hash 是响应成员的 KV 后端数据库计算得出的哈希值。 | uint32 |
+{.wide .expand}
 
 ##### 消息 `LeaseCheckpoint` (api/etcdserverpb/rpc.proto) {#message-leasecheckpoint-apietcdserverpbrpcproto}
 
@@ -488,6 +512,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID 是要对其执行检查点操作的租约 ID。 | int64 |
 | remaining_TTL | remaining_TTL 是租约到期前剩余的时间。 | int64 |
+{.wide .expand}
 
 ##### 消息 `LeaseCheckpointRequest` (api/etcdserverpb/rpc.proto) {#message-leasecheckpointrequest-apietcdserverpbrpcproto}
 
@@ -510,6 +535,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | (versionpb.etcd_version_msg) |  | option |
 | TTL | TTL 是建议的生存时间（秒）。过期的租约将返回 -1。 | int64 |
 | ID | ID 是租约请求的 ID。若 ID 设置为 0，则由租约发放方选择 ID。 | int64 |
+{.wide .expand}
 
 ##### 消息 `LeaseGrantResponse` (api/etcdserverpb/rpc.proto) {#message-leasegrantresponse-apietcdserverpbrpcproto}
 
@@ -520,6 +546,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | ID | ID 是授予租约的租约 ID。 | int64 |
 | TTL | TTL 是服务器选定的租约生存时间（秒）。 | int64 |
 | error |  | string |
+{.wide .expand}
 
 ##### 消息 `LeaseKeepAliveRequest` (api/etcdserverpb/rpc.proto) {#message-leasekeepaliverequest-apietcdserverpbrpcproto}
 
@@ -527,6 +554,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID 是要保持有效的租约的租约 ID。 | int64 |
+{.wide .expand}
 
 ##### 消息 `LeaseKeepAliveResponse` (api/etcdserverpb/rpc.proto) {#message-leasekeepaliveresponse-apietcdserverpbrpcproto}
 
@@ -536,6 +564,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | header |  | ResponseHeader |
 | ID | ID 是保活请求中提供的租约 ID。 | int64 |
 | TTL | TTL 是租约的新生存时间。 | int64 |
+{.wide .expand}
 
 ##### 消息 `LeaseLeasesRequest` (api/etcdserverpb/rpc.proto) {#message-leaseleasesrequest-apietcdserverpbrpcproto}
 
@@ -557,6 +586,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID 是要撤销的租约 ID。撤销 ID 后，所有关联的键将被删除。 | int64 |
+{.wide .expand}
 
 ##### 消息 `LeaseRevokeResponse` (api/etcdserverpb/rpc.proto) {#message-leaserevokeresponse-apietcdserverpbrpcproto}
 
@@ -579,6 +609,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID 是该租约的租约 ID。 | int64 |
 | keys | keys 为 true 时表示查询与该租约关联的所有键。 | bool |
+{.wide .expand}
 
 ##### 消息 `LeaseTimeToLiveResponse` (api/etcdserverpb/rpc.proto) {#message-leasetimetoliveresponse-apietcdserverpbrpcproto}
 
@@ -590,6 +621,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | TTL | TTL 是租约剩余的生存时间（秒）；租约将在不到 TTL+1 秒内过期。 | int64 |
 | grantedTTL | GrantedTTL 是租约创建或续期时初始授予的生存时间（秒）。 | int64 |
 | keys | keys 是附加到该租约的键列表。 | (slice of) bytes |
+{.wide .expand}
 
 ##### 消息 `Member` (api/etcdserverpb/rpc.proto) {#message-member-apietcdserverpbrpcproto}
 
@@ -601,6 +633,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | peerURLs | peerURLs 是成员向集群暴露的用于通信的 URL 列表。 | (slice of) string |
 | clientURLs | clientURLs 是成员向客户端暴露的用于通信的 URL 列表。如果成员未启动，clientURLs 将为空。 | (slice of) string |
 | isLearner | isLearner 表示该成员是否为 Raft 学习者成员。 | bool |
+{.wide .expand}
 
 ##### 消息 `MemberAddRequest` (api/etcdserverpb/rpc.proto) {#message-memberaddrequest-apietcdserverpbrpcproto}
 
@@ -609,6 +642,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | (versionpb.etcd_version_msg) |  | option |
 | peerURLs | peerURLs 是新增成员用于与集群通信的 URL 列表。 | (slice of) string |
 | isLearner | isLearner 表示新增成员是否为 Raft 学习者成员。 | bool |
+{.wide .expand}
 
 ##### 消息 `MemberAddResponse` (api/etcdserverpb/rpc.proto) {#message-memberaddresponse-apietcdserverpbrpcproto}
 
@@ -618,6 +652,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | header |  | ResponseHeader |
 | member | member 是新增成员的成员信息。 | Member |
 | members | members 是添加新成员后所有成员的列表。 | (slice of) Member |
+{.wide .expand}
 
 ##### 消息 `MemberListRequest` (api/etcdserverpb/rpc.proto) {#message-memberlistrequest-apietcdserverpbrpcproto}
 
@@ -633,6 +668,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | members 是与集群关联的所有成员的列表。 | (slice of) Member |
+{.wide .expand}
 
 ##### 消息 `MemberPromoteRequest` (api/etcdserverpb/rpc.proto) {#message-memberpromoterequest-apietcdserverpbrpcproto}
 
@@ -640,6 +676,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID 是要提升的成员的成员 ID。 | uint64 |
+{.wide .expand}
 
 ##### 消息 `MemberPromoteResponse` (api/etcdserverpb/rpc.proto) {#message-memberpromoteresponse-apietcdserverpbrpcproto}
 
@@ -648,6 +685,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | members 是提升成员后所有成员的列表。 | (slice of) Member |
+{.wide .expand}
 
 ##### 消息 `MemberRemoveRequest` (api/etcdserverpb/rpc.proto) {#message-memberremoverequest-apietcdserverpbrpcproto}
 
@@ -655,6 +693,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID 是要移除成员的成员 ID。 | uint64 |
+{.wide .expand}
 
 ##### 消息 `MemberRemoveResponse` (api/etcdserverpb/rpc.proto) {#message-memberremoveresponse-apietcdserverpbrpcproto}
 
@@ -663,6 +702,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | members 是移除成员后所有成员的列表。 | (slice of) Member |
+{.wide .expand}
 
 ##### 消息 `MemberUpdateRequest` (api/etcdserverpb/rpc.proto) {#message-memberupdaterequest-apietcdserverpbrpcproto}
 
@@ -671,6 +711,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID 是待更新成员的成员 ID。 | uint64 |
 | peerURLs | peerURLs 是成员与集群通信所使用的新的 URL 列表。 | (slice of) string |
+{.wide .expand}
 
 ##### 消息 `MemberUpdateResponse` (api/etcdserverpb/rpc.proto) {#message-memberupdateresponse-apietcdserverpbrpcproto}
 
@@ -679,6 +720,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | members 是更新成员后所有成员的列表。 | (slice of) Member |
+{.wide .expand}
 
 ##### 消息 `MoveLeaderRequest` (api/etcdserverpb/rpc.proto) {#message-moveleaderrequest-apietcdserverpbrpcproto}
 
@@ -686,6 +728,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | targetID | targetID 是新领导者的节点 ID。 | uint64 |
+{.wide .expand}
 
 ##### 消息 `MoveLeaderResponse` (api/etcdserverpb/rpc.proto) {#message-moveleaderresponse-apietcdserverpbrpcproto}
 
@@ -705,6 +748,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | prev_kv | 若设置 prev_kv，etcd 在修改前获取该键的先前键值对。先前的键值对将在 put 响应中返回。 | bool |
 | ignore_value | 若设置 ignore_value，etcd 使用键的当前值更新键。若键不存在，则返回错误。 | bool |
 | ignore_lease | 若设置 ignore_lease，etcd 使用键的当前租约更新键。若键不存在，则返回错误。 | bool |
+{.wide .expand}
 
 ##### 消息 `PutResponse` (api/etcdserverpb/rpc.proto) {#message-putresponse-apietcdserverpbrpcproto}
 
@@ -713,6 +757,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | prev_kv | 若请求中设置了 prev_kv，则返回之前的键值对。 | mvccpb.KeyValue |
+{.wide .expand}
 
 ##### 消息 `RangeRequest` (api/etcdserverpb/rpc.proto) {#message-rangerequest-apietcdserverpbrpcproto}
 
@@ -732,6 +777,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | max_mod_revision | max_mod_revision 是返回键修改修订版本的上界；所有修改修订版本较大的键将被过滤掉。 | int64 |
 | min_create_revision | min_create_revision 是返回键创建修订版本的下界；所有创建修订版本较小的键将被过滤掉。 | int64 |
 | max_create_revision | max_create_revision 是返回键创建修订版本的上界；所有创建修订版本较大的键将被过滤掉。 | int64 |
+{.wide .expand}
 
 ##### 消息 `RangeResponse` (api/etcdserverpb/rpc.proto) {#message-rangeresponse-apietcdserverpbrpcproto}
 
@@ -742,6 +788,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | kvs | kvs 是范围请求匹配的键值对列表。当请求计数时，kvs 为空。 | (slice of) mvccpb.KeyValue |
 | more | more 表示在请求的范围内是否还有更多键待返回。 | bool |
 | count | 当请求计数时，count 设置为指定范围内实际的键数量。与 kvs 不同，它不受限制和过滤器（例如 Min/Max、Create/Modify、Revisions）影响，反映指定范围内完整的键数量。 | int64 |
+{.wide .expand}
 
 ##### 消息 `RequestOp` (api/etcdserverpb/rpc.proto) {#message-requestop-apietcdserverpbrpcproto}
 
@@ -753,6 +800,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | request_put |  | PutRequest |
 | request_delete_range |  | DeleteRangeRequest |
 | request_txn |  | TxnRequest |
+{.wide .expand}
 
 ##### 消息 `ResponseHeader` (api/etcdserverpb/rpc.proto) {#message-responseheader-apietcdserverpbrpcproto}
 
@@ -763,6 +811,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | member_id | member_id 是发送响应的成员的 ID。 | uint64 |
 | revision | revision 是请求被应用时键值存储的修订版本，对于不与键值存储交互的调用，该字段未设置（即为 0）。对于监听进度响应，header.revision 表示进度。在此流中接收到的所有未来事件的修订版本号均保证高于 header.revision 号。 | int64 |
 | raft_term | raft_term 是请求被应用时的 Raft 任期。 | uint64 |
+{.wide .expand}
 
 ##### 消息 `ResponseOp` (api/etcdserverpb/rpc.proto) {#message-responseop-apietcdserverpbrpcproto}
 
@@ -774,6 +823,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | response_put |  | PutResponse |
 | response_delete_range |  | DeleteRangeResponse |
 | response_txn |  | TxnResponse |
+{.wide .expand}
 
 ##### 消息 `SnapshotRequest` (api/etcdserverpb/rpc.proto) {#message-snapshotrequest-apietcdserverpbrpcproto}
 
@@ -790,6 +840,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | remaining_bytes | remaining_bytes 表示在本消息之后还需发送的 blob 字节数。 | uint64 |
 | blob | blob 包含快照流中的下一个快照数据块。 | bytes |
 | version | 快照中记录的存储模式（schema）版本。该版本从成员的本地后端读取，可能与其二进制版本不同。用于指明恢复快照时必须支持的 etcd 存储版本。 | string |
+{.wide .expand}
 
 ##### 消息 `StatusRequest` (api/etcdserverpb/rpc.proto) {#message-statusrequest-apietcdserverpbrpcproto}
 
@@ -815,6 +866,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | storageVersion | storageVersion 是数据库文件的版本。该版本可能与目标集群版本存在延迟更新。 | string |
 | dbSizeQuota | dbSizeQuota 是配置的 etcd 存储配额，单位为字节（由标志 --quota-backend-bytes 传递给 etcd 实例）。 | int64 |
 | downgradeInfo | downgradeInfo 表示是否存在降级过程。 | DowngradeInfo |
+{.wide .expand}
 
 ##### 消息 `TxnRequest` (api/etcdserverpb/rpc.proto) {#message-txnrequest-apietcdserverpbrpcproto}
 
@@ -826,6 +878,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | compare | compare 是一组表示逻辑与关系的谓词。如果比较成功，则按顺序处理 success 请求，并在响应中按顺序返回各自的响应。如果比较失败，则按顺序处理 failure 请求，并在响应中按顺序返回各自的响应。 | (slice of) Compare |
 | success | success 是一组在 compare 求值为 true 时执行的请求。 | (slice of) RequestOp |
 | failure | failure 是一组在 compare 求值为 false 时执行的请求。 | (slice of) RequestOp |
+{.wide .expand}
 
 ##### 消息 `TxnResponse` (api/etcdserverpb/rpc.proto) {#message-txnresponse-apietcdserverpbrpcproto}
 
@@ -835,6 +888,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | header |  | ResponseHeader |
 | succeeded | 如果 compare 的评估结果为 true，则 succeeded 设置为 true；否则为 false。 | bool |
 | responses | responses 是一个响应列表，对应于当 succeeded 为 true 时执行 success 请求列表的结果，或当 succeeded 为 false 时执行 failure 请求列表的结果。 | (slice of) ResponseOp |
+{.wide .expand}
 
 ##### 消息 `WatchCancelRequest` (api/etcdserverpb/rpc.proto) {#message-watchcancelrequest-apietcdserverpbrpcproto}
 
@@ -842,6 +896,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | watch_id | watch_id 是要取消的监听器 ID，取消后将不再传输事件。 | int64 |
+{.wide .expand}
 
 ##### 消息 `WatchCreateRequest` (api/etcdserverpb/rpc.proto) {#message-watchcreaterequest-apietcdserverpbrpcproto}
 
@@ -856,6 +911,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | prev_kv | 若设置 prev_kv，创建的监听器会获取事件发生前的 KV。若前一个 KV 已被压缩，则不会返回任何内容。 | bool |
 | watch_id | 若提供非零的 watch_id，该 ID 将被分配给此监听器。由于在 etcd 中创建监听器并非同步操作，因此可通过该 ID 确保在同一流上创建多个监听器时顺序正确。若在流上已存在相同 ID 的监听器，则创建操作将返回错误。 | int64 |
 | fragment | fragment 启用将大修订版本拆分为多个监听响应。 | bool |
+{.wide .expand}
 
 ##### 消息 `WatchProgressRequest` (api/etcdserverpb/rpc.proto) {#message-watchprogressrequest-apietcdserverpbrpcproto}
 
@@ -874,6 +930,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | create_request |  | WatchCreateRequest |
 | cancel_request |  | WatchCancelRequest |
 | progress_request |  | WatchProgressRequest |
+{.wide .expand}
 
 ##### 消息 `WatchResponse` (api/etcdserverpb/rpc.proto) {#message-watchresponse-apietcdserverpbrpcproto}
 
@@ -888,6 +945,7 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | cancel_reason | cancel_reason 表示取消监听器的原因。 | string |
 | fragment | 如果大型监听响应被拆分到多个响应中，则 fragment 为 true。 | bool |
 | events |  | (slice of) mvccpb.Event |
+{.wide .expand}
 
 ##### 消息 `Event` (api/mvccpb/kv.proto) {#message-event-apimvccpbkvproto}
 
@@ -921,12 +979,14 @@ DowngradeVersionTestRequest 仅用于测试。请求中的版本将被读取为 
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
 | LeaseTimeToLiveRequest |  | etcdserverpb.LeaseTimeToLiveRequest |
+{.wide .expand}
 
 ##### 消息 `LeaseInternalResponse` (server/lease/leasepb/lease.proto) {#message-leaseinternalresponse-serverleaseleasepbleaseproto}
 
 | 字段 | 描述 | 类型 |
 | ----- | ----------- | ---- |
 | LeaseTimeToLiveResponse |  | etcdserverpb.LeaseTimeToLiveResponse |
+{.wide .expand}
 
 ##### 消息 `Permission` (api/authpb/auth.proto) {#message-permission-apiauthpbauthproto}
 

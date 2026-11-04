@@ -96,6 +96,7 @@ El uso de memoria global refleja cuánta memoria RSS consume etcd con el almacen
 | 100K | 5        | 64bytes  | 1KB        | 164MB        |
 | 1M   | 1        | 64bytes  | 1KB        | 587MB        |
 | 1M   | 5        | 64bytes  | 1KB        | 836MB        |
+{.wide .expand}
 
 A partir del resultado, sabemos que el tamaño de los valores no influye significativamente en el consumo de memoria. Existe un ligero aumento debido a la mayor cantidad de datos retenidos en la caché de páginas del sistema operativo.
 

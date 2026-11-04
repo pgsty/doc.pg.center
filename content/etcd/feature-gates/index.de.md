@@ -75,6 +75,7 @@ Die folgenden Tabellen fassen die Funktionsschalter zusammen, die für etcd gese
 | SetMemberLocalAddr               | false   | Alpha |Ermöglicht es, die erste in initial-advertise-peer-urls angegebene lokale Adresse, die keine Loopback-Adresse ist, bei der Kommunikation mit einem Peer als lokale Adresse zu verwenden.      |
 | StopGRPCServiceOnDefrag          | false   | Alpha |Ermöglicht es dem gRPC-Dienst von etcd, während der Defragmentierung keine Clientanfragen mehr zu bedienen.                                                                      |
 | TxnModeWriteWithSharedBuffer     | true    | Beta  |Ermöglicht einer Schreibtransaktion, für ihre schreibgeschützten Prüfoperationen einen gemeinsamen Puffer zu verwenden.                                                                                |
+{.wide .expand}
 
 ## Eine Funktion verwenden {#using-a-feature}
 

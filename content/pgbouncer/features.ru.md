@@ -48,6 +48,7 @@ upstream_link: "https://www.pgbouncer.org/features.html"
 | Сброс кэшированного плана        | Да               |          Да           |
 | Оператор LOAD                    | Да               |        Никогда        |
 | Сеансовые рекомендательные блокировки | Да           |        Никогда        |
+{.wide .expand}
 
 [^0]: Начиная с версии 1.26.0 PgBouncer отслеживает все сообщаемые сервером параметры, которые клиенты могут изменять: `application_name`, `client_encoding`, `DateStyle`, `default_transaction_read_only` (PostgreSQL 14+), `IntervalStyle`, `scram_iterations` (PostgreSQL 16+), `search_path` (PostgreSQL 18+), `session_authorization`, `standard_conforming_strings` и `TimeZone`. Для параметров, которые сервер не сообщает, отслеживаются только значения, заданные при запуске; последующие изменения через `SET` не отслеживаются. Подробности и сведения о параметрах, предоставляемых расширениями, см. в описаниях [`track_extra_parameters`](/ru/pgbouncer/config/#track_extra_parameters) и [`ignore_startup_parameters`](/ru/pgbouncer/config/#ignore_startup_parameters).
 

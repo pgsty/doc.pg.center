@@ -48,6 +48,7 @@ Die folgende Tabelle zeigt verschiedene PostgreSQL-Funktionen und ihre Kompatibi
 | Zurücksetzen zwischengespeicherter Pläne | Ja                | Ja                    |
 | LOAD-Anweisung                   | Ja                | Nie                   |
 | Advisory Locks auf Sitzungsebene | Ja                | Nie                   |
+{.wide .expand}
 
 [^0]: Seit 1.26.0 verfolgt PgBouncer alle vom Server gemeldeten Parameter nach, die Clients ändern können: `application_name`, `client_encoding`, `DateStyle`, `default_transaction_read_only` (PostgreSQL 14+), `IntervalStyle`, `scram_iterations` (PostgreSQL 16+), `search_path` (PostgreSQL 18+), `session_authorization`, `standard_conforming_strings` und `TimeZone`. Bei Parametern, die der Server nicht meldet, werden nur die Startwerte nachverfolgt; spätere Änderungen durch `SET` werden nicht nachverfolgt. Einzelheiten und Hinweise zu Parametern von Erweiterungen finden sich unter [`track_extra_parameters`](/de/pgbouncer/config/#track_extra_parameters) und [`ignore_startup_parameters`](/de/pgbouncer/config/#ignore_startup_parameters).
 

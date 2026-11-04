@@ -50,6 +50,7 @@ Bootstrap another machine and use the [hey HTTP benchmark tool][hey] to send req
 | 64                | 256               | all servers        | 55286 (-6%) | 7.4 (+6%) |
 | 256               | 64                | all servers        | 46603 (-6%) | 2.1 (+5%) |
 | 256               | 256               | all servers        | 55291 (-6%) | 7.3 (+4%) |
+{.wide .expand}
 
 ### writing one single key
 
@@ -65,6 +66,7 @@ Bootstrap another machine and use the [hey HTTP benchmark tool][hey] to send req
 | 64                | 256               | all servers        | 4868 (+35%) | 81.5 (-40%) |
 | 256               | 64                | all servers        | 1925 (+72%) | 47.7 (-59%) |
 | 256               | 256               | all servers        | 4975 (+36%) | 70.3 (-36%) |
+{.wide .expand}
 
 ### performance changes explanation
 

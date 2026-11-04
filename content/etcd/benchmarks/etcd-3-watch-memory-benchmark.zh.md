@@ -79,5 +79,6 @@ GCE n1-standard-2 机器类型
 | 1k | 50 | 100 | 5M | 2380MB |
 | 2k | 50 | 100 | 10M | 4672MB |
 | 5k | 50 | 100 | 25M | *OOM* |
+{.wide .expand}
 
 [rss]: https://en.wikipedia.org/wiki/Resident_set_size

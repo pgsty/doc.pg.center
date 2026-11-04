@@ -17,6 +17,7 @@ pgBadger has two complementary multiprocessing modes. Choose according to the sh
 |---|---|---|---|
 | `-j N` / `--jobs N` | chunks of one log file | one large, seekable log | chunk boundaries can duplicate or omit a small number of queries |
 | `-J N` / `--Jobs N` | whole log files | many independent logs | useful only when enough files are available to keep workers busy |
+{.wide .expand}
 
 ## Split one large file with `-j` {#single-file-jobs}
 
@@ -56,6 +57,7 @@ One 9.5 GB file:
 |---|---:|---:|---:|---:|
 | `-j` | 1h41m18 | 50m25 | 25m39 | 15m58 |
 | `-J` | 1h41m18 | 54m28 | 41m16 | 34m45 |
+{.wide .expand}
 
 Two hundred 10 MB files, 2 GB total:
 
@@ -63,6 +65,7 @@ Two hundred 10 MB files, 2 GB total:
 |---|---:|---:|---:|---:|
 | `-j` | 20m15 | 9m56 | 5m20 | 4m20 |
 | `-J` | 20m15 | 9m49 | 5m00 | 2m40 |
+{.wide .expand}
 
 The practical default is `-j` for a few large files and `-J` for many small files. Both modes can be combined when the input and platform support it, but benchmark the combination: log parsing may become limited by storage throughput before CPU.
 

@@ -19,6 +19,7 @@ upstream_ref: "site snapshot of 2026-08-15"
 | 完全版レポート | PostgreSQLの動作とPgBouncerの統計 | [完全版レポートを開く](/third_party/pgbadger/examples/sample.html) |
 | 増分レポート | カレンダー形式の目次、週次集計、日次ページ | [増分レポートの目次を開く](/third_party/pgbadger/examples/report/index.html) |
 | エラーとイベント | エラーと運用イベントに限定したレポート | [エラーレポートを開く](/third_party/pgbadger/examples/errors.html) |
+{.wide .expand}
 
 ## 完全版レポート {#complete-report}
 

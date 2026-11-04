@@ -69,6 +69,7 @@ The following table summarizes the recommended usages for common certificate rol
 | Server (client-to-server) | digitalSignature, keyEncipherment | serverAuth |
 | Client | digitalSignature, keyEncipherment | clientAuth |
 | Peer (server-to-server) | digitalSignature, keyEncipherment | serverAuth, clientAuth |
+{.wide .expand}
 
 Notes:
 

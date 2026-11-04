@@ -33,6 +33,7 @@ With this configuration, etcd can approximately write:
 | 10,000 | 8 | 256 | 1 | 1 | leader only | 583 | 1.6ms | 48 MB |
 | 100,000 | 8 | 256 | 100 | 1000 | leader only | 44,341 | 22ms |  124MB |
 | 100,000 | 8 | 256 | 100 | 1000 | all members |  50,104 | 20ms |  126MB |
+{.wide .expand}
 
 Sample commands are:
 
@@ -56,6 +57,7 @@ Linearizable read requests go through a quorum of cluster members for consensus 
 | 10,000 | 8 | 256 | 1 | 1 | Serializable | 2,909 | 0.3ms |
 | 100,000 | 8 | 256 | 100 | 1000 | Linearizable | 141,578 | 5.5ms |
 | 100,000 | 8 | 256 | 100 | 1000 | Serializable | 185,758 | 2.2ms |
+{.wide .expand}
 
 Sample commands are:
 

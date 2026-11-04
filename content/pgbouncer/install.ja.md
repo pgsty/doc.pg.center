@@ -59,6 +59,7 @@ PgBouncer は、設定の読み込み時に一度だけではなく、接続時�
 | evdns, libevent 2.x        | はい     | いいえ    | はい       | いいえ           | /etc/hosts の更新を確認しない         |
 | getaddrinfo_a, glibc 2.9+  | はい     | はい (3)  | はい       | いいえ           | non-glibc では N/A                     |
 | getaddrinfo, libc          | いいえ   | はい (3)  | はい       | いいえ           | pthreads を必要とする                 |
+{.wide .expand}
 
 1. EDNS0 は、1 つのホスト名の背後に 8 件を超えるアドレスがある場合に必要です。
 2. SOA の照会は、ゾーンシリアルの変更時にホスト名を再確認するために必要です。

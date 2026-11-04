@@ -70,5 +70,6 @@ La cobertura de ramas excluye las ramas dentro de las macros y las llamadas a `a
 | storage/s3           |      32/32 (100.00%) |     200/200 (100.00%) |      678/678 (100.00%) |
 | storage/sftp         |      39/39 (100.00%) |     408/408 (100.00%) |      763/763 (100.00%) |
 | TOTAL                |  1733/1733 (100.00%) |  10784/10786 (99.98%) |  25462/25462 (100.00%) |
+{.wide .expand}
 
 Los módulos de pruebas unitarias de C en `/test/src/module` también tienen una cobertura completa de funciones/líneas, pero no se incluyen en el informe.

@@ -33,6 +33,7 @@ Usa la [herramienta de benchmark de etcd v3][etcd-v3-benchmark].
 | 256               | 1                 | 2716  | 0.4      |
 | 256               | 64                | 16623 | 6.1      |
 | 256               | 256               | 16622 | 21.7     |
+{.wide .expand}
 
 El rendimiento es casi el mismo que el que se obtiene con un manejador de servidor vacío.
 
@@ -43,6 +44,7 @@ El rendimiento es casi el mismo que el que se obtiene con un manejador de servid
 | 256               | 1                 | 2269  | 0.5      |
 | 256               | 64                | 13582 | 8.6      |
 | 256               | 256               | 13262 | 47.5     |
+{.wide .expand}
 
 El rendimiento con un manejador de servidor vacío no se ve afectado por un put. Por lo
 tanto, la degradación del rendimiento debería estar causada por el paquete de almacenamiento.

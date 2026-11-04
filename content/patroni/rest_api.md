@@ -397,6 +397,7 @@ The `patroni_postgres_state` metric provides a numeric representation of the cur
 | 12    | stopped                 | PostgreSQL is stopped                |
 | 13    | stop_failed             | PostgreSQL stop failed               |
 | 14    | crashed                 | PostgreSQL has crashed               |
+{.wide .expand}
 
 PostgreSQL State Values
 

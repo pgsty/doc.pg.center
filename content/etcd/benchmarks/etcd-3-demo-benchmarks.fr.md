@@ -33,6 +33,7 @@ Utilisez l'outil de benchmark [etcd v3][etcd-v3-benchmark].
 | 256                         | 1                 | 2716           | 0,4                           |
 | 256                         | 64                | 16623          | 6,1                           |
 | 256                         | 256               | 16622          | 21,7                          |
+{.wide .expand}
 
 Les performances sont presque identiques à celles obtenues avec un gestionnaire de serveur vide.
 
@@ -43,6 +44,7 @@ Les performances sont presque identiques à celles obtenues avec un gestionnaire
 | 256                         | 1                 | 2269           | 0,5                           |
 | 256                         | 64                | 13582          | 8,6                           |
 | 256                         | 256               | 13262          | 47,5                          |
+{.wide .expand}
 
 La performance avec un gestionnaire de serveur vide n'est pas affectée par une opération put. La dégradation des performances devrait donc être causée par le package de stockage.
 

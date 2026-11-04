@@ -19,6 +19,7 @@ El contenido de ejemplo fue generado por pgBadger 11.8 en mayo de 2022. La naveg
 | Informe completo | Actividad de PostgreSQL junto con estadísticas de PgBouncer | [Abrir el informe completo](/third_party/pgbadger/examples/sample.html) |
 | Informe incremental | Índice de calendario, agregación semanal y páginas diarias | [Abrir el índice incremental](/third_party/pgbadger/examples/report/index.html) |
 | Errores y eventos | Un informe restringido a errores y eventos operativos | [Abrir el informe de errores](/third_party/pgbadger/examples/errors.html) |
+{.wide .expand}
 
 ## Informe completo {#complete-report}
 

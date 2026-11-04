@@ -68,6 +68,7 @@ Le tableau suivant résume les utilisations recommandées pour les rôles de cer
 | Serveur (client vers serveur) | digitalSignature, keyEncipherment | serverAuth |
 | Client | digitalSignature, keyEncipherment | clientAuth |
 | Pair (serveur vers serveur) | digitalSignature, keyEncipherment | serverAuth, clientAuth |
+{.wide .expand}
 
 Notes :
 

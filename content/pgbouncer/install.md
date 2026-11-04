@@ -69,6 +69,7 @@ their probing order:
 | evdns, libevent 2.x        | yes      | no        | yes        | no             | does not check /etc/hosts updates     |
 | getaddrinfo_a, glibc 2.9+  | yes      | yes (3)   | yes        | no             | N/A on non-glibc                      |
 | getaddrinfo, libc          | no       | yes (3)   | yes        | no             | requires pthreads                     |
+{.wide .expand}
 
 1. EDNS0 is required to have more than 8 addresses behind one host name.
 2. SOA lookup is needed to re-check host names on zone serial change.

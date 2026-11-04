@@ -69,6 +69,7 @@ La siguiente tabla resume los usos recomendados para los roles de certificado ha
 | Servidor (cliente-servidor) | digitalSignature, keyEncipherment | serverAuth |
 | Cliente | digitalSignature, keyEncipherment | clientAuth |
 | Par (servidor-servidor) | digitalSignature, keyEncipherment | serverAuth, clientAuth |
+{.wide .expand}
 
 Notas:
 

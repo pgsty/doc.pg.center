@@ -40,6 +40,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | 64                | 256               | جميع الخوادم        | 33300    | 11.8      |
 | 256               | 64                | جميع الخوادم        | 24800    | 3.9      |
 | 256               | 256               | جميع الخوادم        | 33000    | 11.5      |
+{.wide .expand}
 
 ### كتابة مفتاح واحد {#writing-one-single-key}
 
@@ -55,6 +56,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | 64                | 256               | جميع الخوادم        | 3260      | 123.8 |
 | 256               | 64                | جميع الخوادم        | 1033      | 121.5 |
 | 256               | 256               | جميع الخوادم        | 3061      | 119.3 |
+{.wide .expand}
 
 [hack-benchmark]: https://github.com/etcd-io/etcd/tree/main/hack/benchmark
 [hey]: https://github.com/rakyll/hey

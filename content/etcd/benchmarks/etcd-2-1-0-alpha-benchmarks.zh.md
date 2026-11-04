@@ -40,6 +40,7 @@ GCE n1-highcpu-2 机器类型
 | 64             | 256        | 所有服务器       | 33300    | 11.8                     |
 | 256            | 64         | 所有服务器       | 24800    | 3.9                      |
 | 256            | 256        | 所有服务器       | 33000    | 11.5                     |
+{.wide .expand}
 
 ### 写入单个键 {#writing-one-single-key}
 
@@ -55,6 +56,7 @@ GCE n1-highcpu-2 机器类型
 | 64             | 256        | 所有服务器       | 3260     | 123.8                    |
 | 256            | 64         | 所有服务器       | 1033     | 121.5                    |
 | 256            | 256        | 所有服务器       | 3061     | 119.3                    |
+{.wide .expand}
 
 [hack-benchmark]: https://github.com/etcd-io/etcd/tree/main/hack/benchmark
 [hey]: https://github.com/rakyll/hey

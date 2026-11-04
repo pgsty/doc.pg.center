@@ -55,6 +55,7 @@ Exemple de charge de travail d'application : un cluster Kubernetes à 50 nœuds
 |----------|------|-------|--------|------|----------------|
 | AWS | m4.large | 2 | 8 | 3600 | 56,25 |
 | GCE | n1-standard-2 + 50Go PD SSD | 2 | 7,5 | 1500 | 25 |
+{.wide .expand}
 
 
 ### Cluster de taille moyenne {#medium-cluster}
@@ -67,6 +68,7 @@ Exemple de charge de travail d'application : un cluster Kubernetes de 250 nœuds
 |----------|------|-------|--------|------|----------------|
 | AWS | m4.xlarge | 4 | 16 | 6000 | 93,75 |
 | GCE | n1-standard-4 + 150Go PD SSD | 4 | 15 | 4500 | 75 |
+{.wide .expand}
 
 
 ### Grand cluster {#large-cluster}
@@ -79,6 +81,7 @@ Exemple de charge de travail d'application : un cluster Kubernetes de 1 000 nœu
 |----------|------|-------|--------|------|----------------|
 | AWS | m4.2xlarge | 8 | 32 | 8000 | 125 |
 | GCE | n1-standard-8 + 250Go PD SSD | 8 | 30 | 7500 | 125 |
+{.wide .expand}
 
 
 ### Cluster xLarge {#xlarge-cluster}
@@ -91,6 +94,7 @@ Exemple de charge de travail d'application : un cluster Kubernetes de 3 000 nœu
 |----------|------|-------|--------|------|----------------|
 | AWS | m4.4xlarge | 16 | 64 | 16 000 | 250 |
 | GCE | n1-standard-16 + 500Go PD SSD | 16 | 60 | 15 000 | 250 |
+{.wide .expand}
 
 
 [diskbench]: https://github.com/ongardie/diskbenchmark

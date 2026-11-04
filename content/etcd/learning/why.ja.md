@@ -35,6 +35,7 @@ etcdが適しているように見えても、他の技術的な判断と同じ�
 | メンバーシップの再構成 | [対応][etcd-reconfig] | [>3.5.0][zk-reconfig] | [対応][consul-reconfig] | 対応 |
 | 信頼性を保てるデータベースの最大サイズ | 数GB | 数百MB（場合によっては数GB） | 数百MB | TB以上 |
 | 読み取りを線形化する最小レイテンシー | ネットワークRTT | 読み取りの線形化なし | RTT + fsync | クロックバリア（原子時計、NTP） |
+{.wide .expand}
 
 ### ZooKeeper {#zookeeper}
 

@@ -19,6 +19,7 @@ upstream_name: "pgBadger README.md"
 | Paquete RPM | Distribuciones Linux basadas en RPM | [PostgreSQL Yum Repository](https://yum.postgresql.org/packages/) |
 | Paquete Debian/Ubuntu | Distribuciones Linux basadas en APT | [PostgreSQL Apt Repository](https://wiki.postgresql.org/wiki/Apt) |
 | Código fuente de desarrollo | Código actual aún no publicado | [darold/pgbadger](https://github.com/darold/pgbadger) |
+{.wide .expand}
 
 La última versión estable comprobada el 2026-10-23 es [pgBadger 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2), publicada el 2025-12-29. El ejemplo siguiente, que usa el archivo de la versión, instala esa versión. Este manual también cubre una instantánea de desarrollo no publicada; usa el checkout fijado a un commit que aparece más abajo para reproducir sus nuevos comportamientos.
 

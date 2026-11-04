@@ -48,4 +48,4 @@ upstream_link: "https://pgbackrest.org/command.html"
 | [**`stop`**](/ja/pgbackrest/command/stop/) | 新しいpgBackRestプロセスの実行を禁止し、指定に応じて実行中のプロセスを強制停止します。 |
 | [**`verify`**](/ja/pgbackrest/command/verify/) | リポジトリ内のバックアップとアーカイブデータが有効であることを検証します。 |
 | [**`version`**](/ja/pgbackrest/command/version/) | インストールされているpgBackRestのバージョンを表示します。 |
-{.full-width}
+{.full-width .wide .expand}

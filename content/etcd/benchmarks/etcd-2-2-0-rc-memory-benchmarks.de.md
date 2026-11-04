@@ -43,6 +43,7 @@ Schlüsselnamen sind stets 64 Bytes lang, was einer angemessenen durchschnittlic
 | 1024 | 50000  | 48 | 1253 | 26x |
 | 1024 | 100000 | 96 | 2344 | 24x |
 | 1024 | 200000 | 192 | 4361 | 22x |
+{.wide .expand}
 
 ## Schwellenwert für die Datenmenge {#data-size-threshold}
 
@@ -53,3 +54,4 @@ Schlüsselnamen sind stets 64 Bytes lang, was einer angemessenen durchschnittlic
 |-------------|-----------------------|-----------------------------------|------------------|
 | 128 | 400K | 48 | 2400 |
 | 1024 | 300K | 292 | 6500 |
+{.wide .expand}

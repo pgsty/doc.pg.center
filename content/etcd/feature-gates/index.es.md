@@ -78,6 +78,7 @@ etcd.
 | SetMemberLocalAddr               | false   | Alpha |Activa el uso de la primera dirección local especificada en initial-advertise-peer-urls que no sea de loopback como dirección local al comunicarse con un par.      |
 | StopGRPCServiceOnDefrag          | false   | Alpha |Permite que el servicio gRPC de etcd deje de atender solicitudes de clientes durante la desfragmentación.                                                                      |
 | TxnModeWriteWithSharedBuffer     | true    | Beta  |Permite que la transacción de escritura use un búfer compartido en sus operaciones de comprobación de solo lectura.                                                                                |
+{.wide .expand}
 
 ## Uso de una funcionalidad {#using-a-feature}
 

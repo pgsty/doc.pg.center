@@ -40,6 +40,7 @@ Einen weiteren Rechner einrichten und mit dem [HTTP-Benchmarkwerkzeug hey][hey] 
 | 64                | 256               | alle Server        | 33300    | 11.8      |
 | 256               | 64                | alle Server        | 24800    | 3.9      |
 | 256               | 256               | alle Server        | 33000    | 11.5      |
+{.wide .expand}
 
 ### Einen einzelnen Schlüssel schreiben {#writing-one-single-key}
 
@@ -55,6 +56,7 @@ Einen weiteren Rechner einrichten und mit dem [HTTP-Benchmarkwerkzeug hey][hey] 
 | 64                | 256               | alle Server        | 3260      | 123.8 |
 | 256               | 64                | alle Server        | 1033      | 121.5 |
 | 256               | 256               | alle Server        | 3061      | 119.3 |
+{.wide .expand}
 
 [hack-benchmark]: https://github.com/etcd-io/etcd/tree/main/hack/benchmark
 [hey]: https://github.com/rakyll/hey

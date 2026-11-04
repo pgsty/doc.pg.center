@@ -12,6 +12,21 @@ callout_quote = 'Цитата'
 callout_details = 'Подробности'
 
 # Элементы интерфейса
+# OINK v1.5.0: labels for comparison, table reader, and search.
+ui_search_partial = "Частичное совпадение: {matched}/{total} слов"
+ui_search_partial_results = "Ни одна страница не содержит все слова; показаны частичные совпадения"
+ui_search_scope = "Искать в"
+ui_search_scope_all = "Все разделы"
+ui_compare_view = "Двуязычный вид"
+ui_shortcut_compare = "Открыть двуязычный вид"
+ui_table_reader = "Просмотр таблицы"
+ui_table_reader_scroll = "Содержимое таблицы, прокручивайте по горизонтали и вертикали"
+ui_table_expand = "Развернуть таблицу"
+ui_compare_sync = "Синхронная прокрутка"
+ui_compare_sync_approximate = "Заголовки совпадают не полностью; синхронизация использует приблизительный прогресс документа."
+ui_compare_sync_unavailable = "Синхронизация недоступна: заголовки повторяются или расположены в неправильном порядке."
+ui_compare_error = "Не удалось загрузить эту страницу."
+
 ui_pager_prev = 'Назад'
 ui_pager_next = 'Далее'
 ui_search = 'Поиск…'

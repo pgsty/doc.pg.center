@@ -35,6 +35,7 @@ Alle diese Metriken haben das Präfix `etcd_server_`
 | proposals_applied_total   | Gesamtzahl der angewendeten Konsensvorschläge.         | Gauge   |
 | proposals_pending         | Aktuelle Anzahl der ausstehenden Vorschläge.                 | Gauge   |
 | proposals_failed_total    | Gesamtzahl der beobachteten fehlgeschlagenen Vorschläge.               | Counter |
+{.wide .expand}
 
 `has_leader` zeigt an, ob das Mitglied einen Leader hat. Ohne Leader ist ein Mitglied vollständig nicht verfügbar. Hat kein Mitglied im Cluster einen Leader, ist der gesamte Cluster vollständig nicht verfügbar.
 
@@ -58,6 +59,7 @@ Alle diese Metriken haben das Präfix `etcd_disk_`.
 |------------------------------------|-------------------------------------------------------|-----------|
 | wal_fsync_duration_seconds         | Latenzverteilungen der von wal aufgerufenen fsync-Operationen      | Histogram |
 | backend_commit_duration_seconds    | Latenzverteilungen der vom Backend aufgerufenen commit-Operationen.| Histogram |
+{.wide .expand}
 
 `wal_fsync` wird aufgerufen, wenn etcd seine Protokolleinträge auf dem Datenträger dauerhaft speichert, bevor es sie anwendet.
 
@@ -80,6 +82,7 @@ Alle diese Metriken haben das Präfix `etcd_network_`
 | peer_round_trip_time_seconds    | Histogramm der Umlaufzeiten zwischen Peers.                           | Histogram(To) |
 | client_grpc_sent_bytes_total    | Gesamtzahl der an gRPC-Clients gesendeten Bytes.                    | Counter       |
 | client_grpc_received_bytes_total| Gesamtzahl der von gRPC-Clients empfangenen Bytes.                | Counter       |
+{.wide .expand}
 
 `peer_sent_bytes_total` zählt die Gesamtzahl der an einen bestimmten Peer gesendeten Bytes. Normalerweise sendet das Leader-Mitglied mehr Daten als andere Mitglieder, da es die replizierten Daten überträgt.
 
@@ -98,6 +101,7 @@ Die Metriken mit dem Präfix `etcd_debugging` dienen der Fehlersuche. Sie hänge
 | Name                                       | Beschreibung                                                | Typ      |
 |--------------------------------------------|------------------------------------------------------------|-----------|
 | snapshot_save_total_duration_seconds       | Verteilungen der Gesamtlatenz der von snapshot aufgerufenen save-Operationen | Histogram |
+{.wide .expand}
 
 Eine ungewöhnlich lange Snapshot-Dauer (`snapshot_save_total_duration_seconds`) weist auf Datenträgerprobleme hin und kann den Cluster instabil machen.
 
@@ -109,6 +113,7 @@ Die Prometheus-Clientbibliothek stellt zahlreiche Metriken in den Namensräumen 
 |-----------------------------------|--------------------------------------------|--------------|
 | process_open_fds                  | Anzahl offener Dateideskriptoren.           | Gauge        |
 | process_max_fds                   | Maximale Anzahl offener Dateideskriptoren.   | Gauge        |
+{.wide .expand}
 
 > [!NOTE]
 > Prozessmetriken wie `process_open_fds` und `process_max_fds` werden derzeit auf Darwin-Systemen (macOS) nicht unterstützt.

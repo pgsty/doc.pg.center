@@ -397,6 +397,7 @@ patroni_failover_priority{scope="batman",name="patroni1"} 1
 | 12    | stopped                 | PostgreSQL متوقف                     |
 | 13    | stop_failed             | فشل إيقاف PostgreSQL                 |
 | 14    | crashed                 | انهيار PostgreSQL                    |
+{.wide .expand}
 
 قيم حالة PostgreSQL
 
@@ -691,6 +692,7 @@ Successfully failed over to "postgresql1"
 | يتطلب تحديد عقدة مرشحة | نعم      | لا                                 |
 | يمكن تشغيله أثناء الإيقاف المؤقت | نعم | نعم (إلى عقدة مرشحة محددة فقط)     |
 | يمكن جدولته             | لا       | نعم (إذا لم يكن الإيقاف المؤقت مفعلًا) |
+{.wide .expand}
 
 مقارنة بين تجاوز الأعطال والتبديل
 

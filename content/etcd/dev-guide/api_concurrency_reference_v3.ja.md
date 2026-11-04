@@ -30,6 +30,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | key | keyは、Lockの呼び出し元がロックを所有している間、etcd上に存在するキーです。このキーは変更しないでください。変更すると、ロックの動作が未定義になる可能性があります。 | bytes |
+{.wide .expand}
 
 ##### メッセージ `UnlockRequest` (server/etcdserver/api/v3lock/v3lockpb/v3lock.proto) {#message-unlockrequest-serveretcdserverapiv3lockv3lockpbv3lockproto}
 
@@ -54,6 +55,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | Leader | LeaderRequest | LeaderResponse | Leaderは、現在の選挙の宣言があれば、それを返します。 |
 | Observe | LeaderRequest | LeaderResponse | Observeは、選挙で選出されたリーダーによる宣言を、発行された順にストリーミングします。 |
 | Resign | ResignRequest | ResignResponse | Resignは、他の立候補者がその選挙のリーダーシップを取得できるよう、リーダーシップを解放します。 |
+{.wide .expand}
 
 ##### メッセージ `CampaignRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-campaignrequest-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
@@ -69,6 +71,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | leader | leaderは、その選挙のリーダーシップを保持するために使用するリソースを表します。 | LeaderKey |
+{.wide .expand}
 
 ##### メッセージ `LeaderKey` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-leaderkey-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
@@ -91,6 +94,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | kv | kvは、リーダーの最新の更新を表すキー・バリューペアです。 | mvccpb.KeyValue |
+{.wide .expand}
 
 ##### メッセージ `ProclaimRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-proclaimrequest-serveretcdserverapiv3electionv3electionpbv3electionproto}
 

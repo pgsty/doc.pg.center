@@ -43,6 +43,7 @@ The length of key name is always 64 bytes, which is a reasonable length of avera
 | 1024 | 50000  | 48 | 1253 | 26x |
 | 1024 | 100000 | 96 | 2344 | 24x |
 | 1024 | 200000 | 192 | 4361 | 22x |
+{.wide .expand}
 
 ## Data Size Threshold
 
@@ -53,3 +54,4 @@ The length of key name is always 64 bytes, which is a reasonable length of avera
 |-------------|-----------------------|-----------------------------------|------------------|
 | 128 | 400K | 48 | 2400 |
 | 1024 | 300K | 292 | 6500 |
+{.wide .expand}

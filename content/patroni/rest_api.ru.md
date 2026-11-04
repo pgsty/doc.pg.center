@@ -397,6 +397,7 @@ patroni_failover_priority{scope="batman",name="patroni1"} 1
 | 12    | stopped                 | PostgreSQL остановлен                |
 | 13    | stop_failed             | Ошибка остановки PostgreSQL          |
 | 14    | crashed                 | PostgreSQL аварийно завершился       |
+{.wide .expand}
 
 Значения состояния PostgreSQL
 
@@ -691,6 +692,7 @@ Successfully failed over to "postgresql1"
 | Требуется указать кандидата  | да       | нет                                |
 | Можно выполнить в паузе      | да       | да (только на заданного кандидата) |
 | Можно запланировать          | нет      | да (если кластер не на паузе)      |
+{.wide .expand}
 
 Сравнение аварийного и планового переключения
 

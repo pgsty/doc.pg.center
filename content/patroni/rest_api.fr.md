@@ -397,6 +397,7 @@ La métrique `patroni_postgres_state` fournit une représentation numérique de 
 | 12    | stopped                  | PostgreSQL est arrêté                  |
 | 13    | stop_failed              | Échec de l'arrêt de PostgreSQL       |
 | 14    | crashed                  | PostgreSQL a planté                    |
+{.wide .expand}
 
 Valeurs d'état de PostgreSQL
 
@@ -691,6 +692,7 @@ Les points de terminaison `POST /switchover` et `POST /failover` sont utilisés 
 | Nécessite un candidat spécifié | oui    | non                                |
 | Peut être exécuté en pause   | oui      | oui (uniquement vers un candidat spécifique) |
 | Peut être planifié           | non      | oui (si non en pause)              |
+{.wide .expand}
 
 Comparaison entre basculement et basculement planifié
 

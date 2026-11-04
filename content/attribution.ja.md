@@ -28,6 +28,7 @@ PG.CENTERは、6つのアップストリームプロジェクトが作成した�
 | [pgBadger](/ja/pgbadger/) | [pgBadgerドキュメント](https://pgbadger.darold.net/) | v13.2開発スナップショット、コミット`f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/ja/haproxy/) | [HAProxy 3.4マニュアル](https://docs.haproxy.org/3.4/) | ドキュメントスナップショット3.4.7-57、コミット`0faeaed`、安定版3.4.7 | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/ja/etcd/) | [etcd v3.7ドキュメント](https://etcd.io/docs/v3.7/) | v3.7ドキュメント、コミット`d20f8ae`；ソフトウェアリリースv3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [アップストリームの`LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+{.wide .expand}
 
 各ドキュメント集は単なるミラーではなく、**編集を加えたもの**です。見出し、アンカー、相互リンク、コードシグネチャ、ページの分類、ナビゲーションをこの版に合わせて再構成し、アップストリームの本文自体は保持しています。ページ末尾の帰属表示にその旨を記載し、閲覧中のページのサイト内変更履歴へリンクしています。
 

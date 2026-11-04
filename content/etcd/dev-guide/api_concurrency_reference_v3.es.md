@@ -16,6 +16,7 @@ El servicio de bloqueo expone funcionalidades de bloqueo del lado del cliente co
 | ------ | ------------ | ------------- | ----------- |
 | Lock | LockRequest | LockResponse | Lock adquiere un bloqueo compartido distribuido sobre un bloqueo con nombre determinado. En caso de éxito, devolverá una clave única que existe mientras el bloqueo esté en poder del llamador. Esta clave puede usarse junto con transacciones para garantizar de forma segura que las actualizaciones a etcd solo ocurran mientras se mantiene la propiedad del bloqueo. El bloqueo se mantiene hasta que se llame a Unlock sobre la clave o hasta que expire la concesión asociada al propietario. |
 | Unlock | UnlockRequest | UnlockResponse | Unlock toma una clave devuelta por Lock y libera la retención del bloqueo. El siguiente llamador de Lock que esté esperando el bloqueo será entonces despertado y recibirá la propiedad del bloqueo. |
+{.wide .expand}
 
 ##### message `LockRequest` (server/etcdserver/api/v3lock/v3lockpb/v3lock.proto) {#message-lockrequest-serveretcdserverapiv3lockv3lockpbv3lockproto}
 
@@ -30,6 +31,7 @@ El servicio de bloqueo expone funcionalidades de bloqueo del lado del cliente co
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | key | key es una clave que existirá en etcd durante el tiempo en que el llamador de Lock posea el bloqueo. Los usuarios no deben modificar esta clave o el bloqueo podría presentar un comportamiento indefinido. | bytes |
+{.wide .expand}
 
 ##### message `UnlockRequest` (server/etcdserver/api/v3lock/v3lockpb/v3lock.proto) {#message-unlockrequest-serveretcdserverapiv3lockv3lockpbv3lockproto}
 
@@ -54,6 +56,7 @@ El servicio de elección expone funcionalidades de elección del lado del client
 | Leader | LeaderRequest | LeaderResponse | Leader devuelve la proclamación actual de la elección, si la hay. |
 | Observe | LeaderRequest | LeaderResponse | Observe transmite en orden las proclamaciones de la elección a medida que las realizan los líderes electos. |
 | Resign | ResignRequest | ResignResponse | Resign libera el liderazgo de la elección para que otros candidatos puedan adquirir el liderazgo de la elección. |
+{.wide .expand}
 
 ##### message `CampaignRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-campaignrequest-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
@@ -69,6 +72,7 @@ El servicio de elección expone funcionalidades de elección del lado del client
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | leader | leader describe los recursos utilizados para mantener el liderazgo de la elección. | LeaderKey |
+{.wide .expand}
 
 ##### message `LeaderKey` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-leaderkey-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
@@ -91,6 +95,7 @@ El servicio de elección expone funcionalidades de elección del lado del client
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | kv | kv es el par clave-valor que representa la última actualización del líder. | mvccpb.KeyValue |
+{.wide .expand}
 
 ##### message `ProclaimRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-proclaimrequest-serveretcdserverapiv3electionv3electionpbv3electionproto}
 

@@ -35,6 +35,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | proposals_applied_total   | Общее количество применённых предложений консенсуса.       | Gauge   |
 | proposals_pending         | Текущее количество ожидающих предложений.                  | Gauge   |
 | proposals_failed_total    | Общее количество обнаруженных неудачных предложений.       | Counter |
+{.wide .expand}
 
 `has_leader` показывает, есть ли у участника лидер. Если у участника нет лидера, он полностью недоступен. Если лидера нет ни у одного участника кластера, весь кластер полностью недоступен.
 
@@ -58,6 +59,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 |------------------------------------|---------------------------------------------------------|-----------|
 | wal_fsync_duration_seconds         | Распределение задержки вызова fsync подсистемой wal      | Histogram |
 | backend_commit_duration_seconds    | Распределение задержки вызова commit бэкендом.           | Histogram |
+{.wide .expand}
 
 `wal_fsync` вызывается, когда etcd сохраняет записи журнала на диск перед их применением.
 
@@ -80,6 +82,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | peer_round_trip_time_seconds    | Гистограмма времени прохождения туда и обратно между одноранговыми узлами. | Histogram(To) |
 | client_grpc_sent_bytes_total    | Общее количество байтов, отправленных клиентам grpc.                       | Counter       |
 | client_grpc_received_bytes_total| Общее количество байтов, полученных от клиентов grpc.                      | Counter       |
+{.wide .expand}
 
 `peer_sent_bytes_total` подсчитывает общее количество байтов, отправленных определённому одноранговому узлу. Обычно участник-лидер отправляет больше данных, чем остальные участники, поскольку отвечает за передачу реплицированных данных.
 
@@ -98,6 +101,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | Имя                                       | Описание                                                     | Тип       |
 |-------------------------------------------|--------------------------------------------------------------|-----------|
 | snapshot_save_total_duration_seconds      | Распределение общей длительности сохранения снимка        | Histogram |
+{.wide .expand}
 
 Аномально большая длительность создания снимка (`snapshot_save_total_duration_seconds`) указывает на проблемы с диском и может сделать кластер нестабильным.
 

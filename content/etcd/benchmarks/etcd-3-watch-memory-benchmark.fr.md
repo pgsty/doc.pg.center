@@ -80,5 +80,6 @@ La consommation mémoire globale indique la quantité de [RSS][rss] consommée p
 | 1k | 50 | 100 |   5M | 2380Mo |
 | 2k | 50 | 100 |  10M | 4672Mo |
 | 5k | 50 | 100 |  25M |  *OOM* |
+{.wide .expand}
 
 [rss]: https://en.wikipedia.org/wiki/Resident_set_size

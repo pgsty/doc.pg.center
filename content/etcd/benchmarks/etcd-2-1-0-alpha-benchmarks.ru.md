@@ -40,6 +40,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | 64                | 256               | все серверы          | 33300    | 11.8      |
 | 256               | 64                | все серверы          | 24800    | 3.9      |
 | 256               | 256               | все серверы          | 33000    | 11.5      |
+{.wide .expand}
 
 ### запись одного ключа {#writing-one-single-key}
 
@@ -55,6 +56,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | 64                | 256               | все серверы          | 3260      | 123.8 |
 | 256               | 64                | все серверы          | 1033      | 121.5 |
 | 256               | 256               | все серверы          | 3061      | 119.3 |
+{.wide .expand}
 
 [hack-benchmark]: https://github.com/etcd-io/etcd/tree/main/hack/benchmark
 [hey]: https://github.com/rakyll/hey

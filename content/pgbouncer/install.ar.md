@@ -68,6 +68,7 @@ upstream_link: "https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/REA
 | evdns, libevent 2.x           | نعم     | لا        | نعم        | لا              | لا يتحقق من تحديثات /etc/hosts            |
 | getaddrinfo_a, glibc 2.9+     | نعم     | نعم (3)   | نعم        | لا              | غير متاح على الأنظمة غير glibc            |
 | getaddrinfo, libc             | لا      | نعم (3)   | نعم        | لا              | يتطلب pthreads                            |
+{.wide .expand}
 
 1. يُتطلب EDNS0 ليكون هناك أكثر من 8 عناوين خلف اسم مضيف واحد.
 2. يلزم استعلام SOA لإعادة فحص أسماء المضيفين عند تغيّر الرقم التسلسلي للمنطقة.

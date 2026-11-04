@@ -48,6 +48,7 @@ La siguiente tabla enumera diversas características de PostgreSQL y su compatib
 | Restablecimiento de planes en caché | Sí                  | Sí                          |
 | Instrucción LOAD                  | Sí                    | Nunca                       |
 | Bloqueos consultivos a nivel de sesión | Sí                | Nunca                       |
+{.wide .expand}
 
 [^0]: Desde la versión 1.26.0, PgBouncer realiza un seguimiento de todos los parámetros reportados por el servidor que los clientes pueden modificar: `application_name`, `client_encoding`, `DateStyle`, `default_transaction_read_only` (PostgreSQL 14+), `IntervalStyle`, `scram_iterations` (PostgreSQL 16+), `search_path` (PostgreSQL 18+), `session_authorization`, `standard_conforming_strings` y `TimeZone`. Para los parámetros que el servidor no reporta, solo se realiza el seguimiento de los valores de inicio; los cambios posteriores con `SET` no se rastrean. Consulta [`track_extra_parameters`](/es/pgbouncer/config/#track_extra_parameters) e [`ignore_startup_parameters`](/es/pgbouncer/config/#ignore_startup_parameters) para más detalles y para los parámetros proporcionados por extensiones.
 

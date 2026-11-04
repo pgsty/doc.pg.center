@@ -33,6 +33,7 @@ qué licencia y dónde se conserva el aviso original completo.
 | [pgBadger](/es/pgbadger/) | [Documentación de pgBadger](https://pgbadger.darold.net/) | v13.2, instantánea de desarrollo, commit `f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/es/haproxy/) | [Manuales de HAProxy 3.4](https://docs.haproxy.org/3.4/) | 3.4.7-57; estable v3.4.7, commit `0faeaed` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/es/etcd/) | [Documentación de etcd v3.7](https://etcd.io/docs/v3.7/) | Documentación v3.7, commit `d20f8ae`; versión del software v3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [`LICENSE` original](https://github.com/etcd-io/website/blob/main/LICENSE) |
+{.wide .expand}
 
 Cada colección está **adaptada**, no replicada. Los títulos, anclas, enlaces cruzados, firmas de
 código, agrupación de páginas y navegación se reelaboraron para esta edición; la prosa original

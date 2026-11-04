@@ -48,6 +48,7 @@ The following table lists various PostgreSQL features and whether they are compa
 | Cached plan reset                | Yes              |          Yes          |
 | LOAD statement                   | Yes              |         Never         |
 | Session-level advisory locks     | Yes              |         Never         |
+{.wide .expand}
 
 [^0]: Since 1.26.0, PgBouncer tracks all server-reported parameters that clients can change: `application_name`, `client_encoding`, `DateStyle`, `default_transaction_read_only` (PostgreSQL 14+), `IntervalStyle`, `scram_iterations` (PostgreSQL 16+), `search_path` (PostgreSQL 18+), `session_authorization`, `standard_conforming_strings`, and `TimeZone`. For parameters that the server does not report, only startup values are tracked; later `SET` changes are not. See [`track_extra_parameters`](/pgbouncer/config/#track_extra_parameters) and [`ignore_startup_parameters`](/pgbouncer/config/#ignore_startup_parameters) for details and extension-provided parameters.
 

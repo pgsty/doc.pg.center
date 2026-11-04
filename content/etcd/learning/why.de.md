@@ -35,6 +35,7 @@ Die folgende Tabelle bietet einen schnellen Überblick über die Unterschiede zw
 | Neukonfiguration der Mitgliedschaft | [Ja][etcd-reconfig] | [>3.5.0][zk-reconfig] | [Ja][consul-reconfig] | Ja |
 | Maximal zuverlässig nutzbare Datenbankgröße | Mehrere Gigabyte | Hunderte Megabyte (manchmal mehrere Gigabyte) | Hunderte MB | Terabyte und mehr |
 | Minimale Latenz zur Linearisierung von Lesezugriffen | Netzwerk-RTT | Keine Linearisierung von Lesezugriffen | RTT + fsync | Uhrzeitbarrieren (Atomuhr, NTP) |
+{.wide .expand}
 
 ### ZooKeeper {#zookeeper}
 

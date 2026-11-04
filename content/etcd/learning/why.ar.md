@@ -35,6 +35,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | إعادة تهيئة العضوية | [نعم][etcd-reconfig] | [>3.5.0][zk-reconfig] | [نعم][consul-reconfig] | نعم |
 | الحد الأقصى لحجم قاعدة البيانات الموثوقة | عدة غيغابايت | مئات الميغابايت (أحيانًا عدة غيغابايت) | مئات الميغابايت | تيرابايت فأكثر |
 | الحد الأدنى لزمن خطّية القراءة | RTT الشبكة | لا خطّية للقراءة | RTT + fsync | حواجز ساعة (ذرية، NTP) |
+{.wide .expand}
 
 ### ZooKeeper {#zookeeper}
 

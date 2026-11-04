@@ -30,6 +30,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | key | key — ключ, существующий в etcd, пока вызывающая Lock сторона владеет блокировкой. Пользователи не должны изменять ключ, иначе поведение блокировки не определено. | bytes |
+{.wide .expand}
 
 ##### сообщение `UnlockRequest` (server/etcdserver/api/v3lock/v3lockpb/v3lock.proto) {#message-unlockrequest-serveretcdserverapiv3lockv3lockpbv3lockproto}
 
@@ -54,6 +55,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | Leader | LeaderRequest | LeaderResponse | Leader возвращает текущее объявление выборов, если оно существует. |
 | Observe | LeaderRequest | LeaderResponse | Observe потоково передаёт объявления выборов в порядке их публикации избранными лидерами. |
 | Resign | ResignRequest | ResignResponse | Resign освобождает лидерство, чтобы его мог получить другой кандидат. |
+{.wide .expand}
 
 ##### сообщение `CampaignRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-campaignrequest-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
@@ -69,6 +71,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | leader | leader описывает ресурсы, используемые для удержания лидерства на выборах. | LeaderKey |
+{.wide .expand}
 
 ##### сообщение `LeaderKey` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-leaderkey-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
@@ -91,6 +94,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | kv | kv — пара «ключ — значение», представляющая последнее обновление лидера. | mvccpb.KeyValue |
+{.wide .expand}
 
 ##### сообщение `ProclaimRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-proclaimrequest-serveretcdserverapiv3electionv3electionpbv3electionproto}
 

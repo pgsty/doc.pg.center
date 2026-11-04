@@ -55,6 +55,7 @@ Beispielarbeitslast: ein Kubernetes-Cluster mit 50 Knoten
 |----------|------|-------|--------|------|----------------|
 | AWS | m4.large | 2 | 8 | 3600 | 56.25 |
 | GCE | n1-standard-2 + 50GB PD SSD | 2 | 7.5 | 1500 | 25 |
+{.wide .expand}
 
 
 ### Mittlerer Cluster {#medium-cluster}
@@ -67,6 +68,7 @@ Beispielarbeitslast: ein Kubernetes-Cluster mit 250 Knoten
 |----------|------|-------|--------|------|----------------|
 | AWS | m4.xlarge | 4 | 16 | 6000 | 93.75 |
 | GCE | n1-standard-4 + 150GB PD SSD | 4 | 15 | 4500 | 75 |
+{.wide .expand}
 
 
 ### Großer Cluster {#large-cluster}
@@ -79,6 +81,7 @@ Beispielarbeitslast: ein Kubernetes-Cluster mit 1,000 Knoten
 |----------|------|-------|--------|------|----------------|
 | AWS | m4.2xlarge | 8 | 32 | 8000 | 125 |
 | GCE | n1-standard-8 + 250GB PD SSD | 8 | 30 | 7500 | 125 |
+{.wide .expand}
 
 
 ### Sehr großer Cluster {#xlarge-cluster}
@@ -91,6 +94,7 @@ Beispielarbeitslast: ein Kubernetes-Cluster mit 3,000 Knoten
 |----------|------|-------|--------|------|----------------|
 | AWS | m4.4xlarge | 16 | 64 | 16,000 | 250 |
 | GCE | n1-standard-16 + 500GB PD SSD | 16 | 60 | 15,000 | 250 |
+{.wide .expand}
 
 
 [diskbench]: https://github.com/ongardie/diskbenchmark

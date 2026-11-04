@@ -65,6 +65,7 @@ etcdの通信を保護するX.509証明書を生成するときは、その役�
 | サーバー（クライアントとサーバーの通信） | digitalSignature, keyEncipherment | serverAuth |
 | クライアント | digitalSignature, keyEncipherment | clientAuth |
 | ピア（サーバー間の通信） | digitalSignature, keyEncipherment | serverAuth, clientAuth |
+{.wide .expand}
 
 注意事項：
 

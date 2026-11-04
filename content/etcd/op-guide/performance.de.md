@@ -33,6 +33,7 @@ Mit dieser Konfiguration erreicht etcd ungefähr folgende Schreibleistung:
 | 10,000 | 8 | 256 | 1 | 1 | nur Leader | 583 | 1.6ms | 48 MB |
 | 100,000 | 8 | 256 | 100 | 1000 | nur Leader | 44,341 | 22ms |  124MB |
 | 100,000 | 8 | 256 | 100 | 1000 | alle Mitglieder |  50,104 | 20ms |  126MB |
+{.wide .expand}
 
 Beispielbefehle:
 
@@ -56,6 +57,7 @@ Linearisierbare Leseanfragen beziehen ein Quorum von Clustermitgliedern in die K
 | 10,000 | 8 | 256 | 1 | 1 | Serialisierbar | 2,909 | 0.3ms |
 | 100,000 | 8 | 256 | 100 | 1000 | Linearisierbar | 141,578 | 5.5ms |
 | 100,000 | 8 | 256 | 100 | 1000 | Serialisierbar | 185,758 | 2.2ms |
+{.wide .expand}
 
 Beispielbefehle:
 

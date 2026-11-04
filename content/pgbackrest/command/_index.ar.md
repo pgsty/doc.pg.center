@@ -48,4 +48,4 @@ upstream_link: "https://pgbackrest.org/command.html"
 | [**`stop`**](/ar/pgbackrest/command/stop/)                     | منع عمليات pgBackRest الجديدة مع إمكانية إيقاف العمليات الجارية قسرًا.                |
 | [**`verify`**](/ar/pgbackrest/command/verify/)                 | التحقق من أن بيانات النسخ الاحتياطي والأرشيف في المستودع صالحة.                         |
 | [**`version`**](/ar/pgbackrest/command/version/)               | عرض إصدار pgBackRest المثبت.                                               |
-{.full-width}
+{.full-width .wide .expand}

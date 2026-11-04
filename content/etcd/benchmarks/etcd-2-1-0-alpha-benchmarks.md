@@ -40,6 +40,7 @@ Bootstrap another machine and use the [hey HTTP benchmark tool][hey] to send req
 | 64                | 256               | all servers        | 33300    | 11.8      |
 | 256               | 64                | all servers        | 24800    | 3.9      |
 | 256               | 256               | all servers        | 33000    | 11.5      |
+{.wide .expand}
 
 ### writing one single key
 
@@ -55,6 +56,7 @@ Bootstrap another machine and use the [hey HTTP benchmark tool][hey] to send req
 | 64                | 256               | all servers        | 3260      | 123.8 |
 | 256               | 64                | all servers        | 1033      | 121.5 |
 | 256               | 256               | all servers        | 3061      | 119.3 |
+{.wide .expand}
 
 [hack-benchmark]: https://github.com/etcd-io/etcd/tree/main/hack/benchmark
 [hey]: https://github.com/rakyll/hey

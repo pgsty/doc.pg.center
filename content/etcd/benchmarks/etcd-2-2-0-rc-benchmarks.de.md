@@ -50,6 +50,7 @@ Einen weiteren Rechner einrichten und mit dem [HTTP-Benchmarkwerkzeug hey][hey] 
 | 64                | 256               | alle Server        | 55286 (-6%) | 7.4 (+6%) |
 | 256               | 64                | alle Server        | 46603 (-6%) | 2.1 (+5%) |
 | 256               | 256               | alle Server        | 55291 (-6%) | 7.3 (+4%) |
+{.wide .expand}
 
 ### Einen einzelnen Schlüssel schreiben {#writing-one-single-key}
 
@@ -65,6 +66,7 @@ Einen weiteren Rechner einrichten und mit dem [HTTP-Benchmarkwerkzeug hey][hey] 
 | 64                | 256               | alle Server        | 4868 (+35%) | 81.5 (-40%) |
 | 256               | 64                | alle Server        | 1925 (+72%) | 47.7 (-59%) |
 | 256               | 256               | alle Server        | 4975 (+36%) | 70.3 (-36%) |
+{.wide .expand}
 
 ### Erklärung der Leistungsänderungen {#performance-changes-explanation}
 

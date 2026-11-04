@@ -65,6 +65,7 @@ etcd 支持多个与证书相关的配置选项，可通过命令行标志或环
 | 服务器（客户端到服务器） | digitalSignature, keyEncipherment | serverAuth |
 | 客户端 | digitalSignature, keyEncipherment | clientAuth |
 | 对等成员（服务器到服务器） | digitalSignature, keyEncipherment | serverAuth, clientAuth |
+{.wide .expand}
 
 注意事项：
 

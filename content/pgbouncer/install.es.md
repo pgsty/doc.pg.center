@@ -70,6 +70,7 @@ admitidos y su orden de sondeo:
 | evdns, libevent 2.x        | sí       | no        | sí         | no               | no comprueba actualizaciones de /etc/hosts |
 | getaddrinfo_a, glibc 2.9+  | sí       | sí (3)    | sí         | no               | N/A en sistemas que no son glibc      |
 | getaddrinfo, libc          | no       | sí (3)    | sí         | no               | requiere pthreads                     |
+{.wide .expand}
 
 1. Se requiere EDNS0 para tener más de 8 direcciones detrás de un mismo nombre de host.
 2. La consulta SOA es necesaria para volver a comprobar los nombres de host cuando cambia el número de serie de la zona.

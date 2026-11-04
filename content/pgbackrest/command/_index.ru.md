@@ -48,4 +48,4 @@ upstream_link: "https://pgbackrest.org/command.html"
 | [**`stop`**](/ru/pgbackrest/command/stop/)                     | Запрет запуска новых процессов pgBackRest и, при необходимости, принудительная остановка работающих.                |
 | [**`verify`**](/ru/pgbackrest/command/verify/)                 | Проверка корректности данных резервных копий и архива в репозитории.                         |
 | [**`version`**](/ru/pgbackrest/command/version/)               | Вывод установленной версии pgBackRest.                                               |
-{.full-width}
+{.full-width .wide .expand}

@@ -66,6 +66,7 @@ PgBouncer effectue des recherches de noms d'hôte au moment de la connexion, et 
 | evdns, libevent 2.x        | oui       | non       | oui        | non             | ne vérifie pas les mises à jour de /etc/hosts |
 | getaddrinfo_a, glibc 2.9+  | oui       | oui (3)   | oui        | non             | N/A (non disponible sur les systèmes non-glibc) |
 | getaddrinfo, libc          | non       | oui (3)   | oui        | non             | nécessite pthreads                    |
+{.wide .expand}
 
 1. EDNS0 est requis pour avoir plus de 8 adresses derrière un même nom d'hôte.
 2. Une requête SOA est nécessaire pour vérifier à nouveau les noms d'hôte en cas de changement du numéro de série de la zone.

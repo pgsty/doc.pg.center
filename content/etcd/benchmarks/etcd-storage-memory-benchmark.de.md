@@ -96,6 +96,7 @@ Der gesamte Speicherverbrauch erfasst, wie viel RSS etcd mit der Speicherschicht
 | 100K | 5        | 64bytes  | 1KB        | 164MB        |
 | 1M   | 1        | 64bytes  | 1KB        | 587MB        |
 | 1M   | 5        | 64bytes  | 1KB        | 836MB        |
+{.wide .expand}
 
 Die Ergebnisse zeigen, dass die Größe der Werte den Speicherverbrauch nicht wesentlich beeinflusst. Er steigt geringfügig, weil der Seitencache des Betriebssystems mehr Daten vorhält.
 

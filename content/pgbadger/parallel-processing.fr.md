@@ -17,6 +17,7 @@ pgBadger dispose de deux modes de traitement parallèle complémentaires. Choisi
 |---|---|---|---|
 | `-j N` / `--jobs N` | tronçons d'un fichier journal | un seul fichier journal volumineux et permettant un accès direct aux positions dans le fichier | les limites des tronçons peuvent dupliquer ou omettre un petit nombre de requêtes |
 | `-J N` / `--Jobs N` | fichiers journaux entiers | plusieurs fichiers journaux indépendants | utile uniquement lorsque suffisamment de fichiers sont disponibles pour occuper les processus de travail |
+{.wide .expand}
 
 ## Découper un grand fichier avec `-j` {#single-file-jobs}
 
@@ -56,6 +57,7 @@ Un fichier de 9,5 Go :
 |---|---:|---:|---:|---:|
 | `-j` | 1h41m18 | 50m25 | 25m39 | 15m58 |
 | `-J` | 1h41m18 | 54m28 | 41m16 | 34m45 |
+{.wide .expand}
 
 Deux cents fichiers de 10 Mo, soit 2 Go au total :
 
@@ -63,6 +65,7 @@ Deux cents fichiers de 10 Mo, soit 2 Go au total :
 |---|---:|---:|---:|---:|
 | `-j` | 20m15 | 9m56 | 5m20 | 4m20 |
 | `-J` | 20m15 | 9m49 | 5m00 | 2m40 |
+{.wide .expand}
 
 En pratique, privilégiez `-j` pour quelques fichiers volumineux et `-J` pour de nombreux petits fichiers. Les deux modes peuvent être combinés lorsque l'entrée et la plateforme le permettent, mais testez cette combinaison : l'analyse des journaux peut devenir limitée par le débit de stockage avant le processeur.
 

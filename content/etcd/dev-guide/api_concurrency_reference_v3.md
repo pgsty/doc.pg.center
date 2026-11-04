@@ -30,6 +30,7 @@ The lock service exposes client-side locking facilities as a gRPC interface.
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | key | key is a key that will exist on etcd for the duration that the Lock caller owns the lock. Users should not modify this key or the lock may exhibit undefined behavior. | bytes |
+{.wide .expand}
 
 ##### message `UnlockRequest` (server/etcdserver/api/v3lock/v3lockpb/v3lock.proto)
 
@@ -54,6 +55,7 @@ The election service exposes client-side election facilities as a gRPC interface
 | Leader | LeaderRequest | LeaderResponse | Leader returns the current election proclamation, if any. |
 | Observe | LeaderRequest | LeaderResponse | Observe streams election proclamations in-order as made by the election's elected leaders. |
 | Resign | ResignRequest | ResignResponse | Resign releases election leadership so other campaigners may acquire leadership on the election. |
+{.wide .expand}
 
 ##### message `CampaignRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto)
 
@@ -69,6 +71,7 @@ The election service exposes client-side election facilities as a gRPC interface
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | leader | leader describes the resources used for holding leadereship of the election. | LeaderKey |
+{.wide .expand}
 
 ##### message `LeaderKey` (server/etcdserver/api/v3election/v3electionpb/v3election.proto)
 
@@ -91,6 +94,7 @@ The election service exposes client-side election facilities as a gRPC interface
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | kv | kv is the key-value pair representing the latest leader update. | mvccpb.KeyValue |
+{.wide .expand}
 
 ##### message `ProclaimRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto)
 

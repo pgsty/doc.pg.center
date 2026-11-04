@@ -77,6 +77,7 @@ type Config struct {
 | SetMemberLocalAddr               | false   | Alpha |Позволяет использовать первый заданный локальный адрес, не являющийся loopback, из initial-advertise-peer-urls как локальный адрес при связи с одноранговым участником.      |
 | StopGRPCServiceOnDefrag          | false   | Alpha |Позволяет службе gRPC etcd прекратить обслуживание клиентских запросов при дефрагментации.                                                                      |
 | TxnModeWriteWithSharedBuffer     | true    | Beta  |Позволяет транзакции записи использовать общий буфер при проверочных операциях только для чтения.                                                                                |
+{.wide .expand}
 
 ## Использование возможности {#using-a-feature}
 

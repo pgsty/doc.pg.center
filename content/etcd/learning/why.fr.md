@@ -35,6 +35,7 @@ Le tableau ci-dessous constitue une référence rapide pratique pour repérer fa
 | Réconfiguration de l'appartenance au cluster | [Oui][etcd-reconfig] | [>3.5.0][zk-reconfig] | [Oui][consul-reconfig] | Oui |
 | Taille maximale de base de données fiable | Plusieurs gigaoctets | Centaines de mégaoctets (parfois plusieurs gigaoctets) | Centaines de mégaoctets | Téraoctets+ |
 | Latence minimale de linéarisation en lecture | RTT réseau | Pas de linéarisation en lecture | RTT + fsync | Barrières d’horloge (horloges atomiques, NTP) |
+{.wide .expand}
 
 ### ZooKeeper {#zookeeper}
 

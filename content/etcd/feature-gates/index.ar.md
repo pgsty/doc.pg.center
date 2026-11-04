@@ -75,6 +75,7 @@ type Config struct {
 | SetMemberLocalAddr               | false   | Alpha |يمكّن من استخدام أول عنوان محلي محدد من initial-advertise-peer-urls ليس من عناوين loopback كعنوان محلي عند التواصل مع أحد الأقران.      |
 | StopGRPCServiceOnDefrag          | false   | Alpha |يمكّن خدمة gRPC في etcd من التوقف عن خدمة طلبات العملاء أثناء إزالة التجزئة.                                                                      |
 | TxnModeWriteWithSharedBuffer     | true    | Beta  |يمكّن معاملة الكتابة من استخدام مخزن مؤقت مشترك في عمليات التحقق للقراءة فقط.                                                                                |
+{.wide .expand}
 
 ## استخدام ميزة {#using-a-feature}
 

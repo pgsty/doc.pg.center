@@ -69,6 +69,7 @@ Die folgende Tabelle fasst die empfohlenen Verwendungszwecke für gängige Zerti
 | Server (Client-Server-Verbindung) | digitalSignature, keyEncipherment | serverAuth |
 | Client | digitalSignature, keyEncipherment | clientAuth |
 | Peer (Server-Server-Verbindung) | digitalSignature, keyEncipherment | serverAuth, clientAuth |
+{.wide .expand}
 
 Hinweise:
 

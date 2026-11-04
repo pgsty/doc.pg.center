@@ -29,6 +29,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | RoleDelete | AuthRoleDeleteRequest | AuthRoleDeleteResponse | RoleDelete يحذف دورًا محددًا. |
 | RoleGrantPermission | AuthRoleGrantPermissionRequest | AuthRoleGrantPermissionResponse | RoleGrantPermission يمنح إذن مفتاح أو نطاق محدد لدور محدد. |
 | RoleRevokePermission | AuthRoleRevokePermissionRequest | AuthRoleRevokePermissionResponse | RoleRevokePermission يسحب إذن مفتاح أو نطاق من دور محدد. |
+{.wide .expand}
 
 ##### service `Cluster` (api/etcdserverpb/rpc.proto) {#service-cluster-apietcdserverpbrpcproto}
 
@@ -39,6 +40,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | MemberUpdate | MemberUpdateRequest | MemberUpdateResponse | MemberUpdate يحدّث إعداد العضو. |
 | MemberList | MemberListRequest | MemberListResponse | MemberList يسرد جميع الأعضاء في العنقود. |
 | MemberPromote | MemberPromoteRequest | MemberPromoteResponse | MemberPromote يرقّي عضوًا من متعلم raft (غير مصوّت) إلى عضو مصوّت في raft. |
+{.wide .expand}
 
 ##### service `KV` (api/etcdserverpb/rpc.proto) {#service-kv-apietcdserverpbrpcproto}
 
@@ -49,6 +51,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | DeleteRange | DeleteRangeRequest | DeleteRangeResponse | DeleteRange يحذف النطاق المعطى من مخزن المفاتيح/القيم. يزيد طلب الحذف مراجعة مخزن المفاتيح/القيم ويولّد حدث حذف في سجل الأحداث لكل مفتاح محذوف. |
 | Txn | TxnRequest | TxnResponse | Txn يعالج طلبات متعددة في معاملة واحدة. يزيد طلب txn مراجعة مخزن المفاتيح/القيم ويولّد أحداثًا بالمراجعة نفسها لكل طلب مكتمل. لا يجوز تعديل المفتاح نفسه عدة مرات داخل txn واحد. |
 | Compact | CompactionRequest | CompactionResponse | Compact يضغط سجل الأحداث في مخزن مفاتيح/قيم etcd. ينبغي ضغط مخزن المفاتيح/القيم دوريًا وإلا استمر سجل الأحداث في النمو إلى ما لا نهاية. |
+{.wide .expand}
 
 ##### service `Lease` (api/etcdserverpb/rpc.proto) {#service-lease-apietcdserverpbrpcproto}
 
@@ -59,6 +62,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | LeaseKeepAlive | LeaseKeepAliveRequest | LeaseKeepAliveResponse | LeaseKeepAlive يبقي عقد الإيجار نشطًا عن طريق بث طلبات الحفاظ على الحياة (keep alive) من العميل إلى الخادم وبث ردود الحفاظ على الحياة من الخادم إلى العميل. |
 | LeaseTimeToLive | LeaseTimeToLiveRequest | LeaseTimeToLiveResponse | LeaseTimeToLive يسترجع معلومات عقد الإيجار. |
 | LeaseLeases | LeaseLeasesRequest | LeaseLeasesResponse | LeaseLeases يسرد جميع عقود الإيجار الموجودة. |
+{.wide .expand}
 
 ##### service `Maintenance` (api/etcdserverpb/rpc.proto) {#service-maintenance-apietcdserverpbrpcproto}
 
@@ -72,6 +76,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | Snapshot | SnapshotRequest | SnapshotResponse | Snapshot يرسل لقطة للواجهة الخلفية بأكملها من عضو عبر تدفق إلى عميل. |
 | MoveLeader | MoveLeaderRequest | MoveLeaderResponse | MoveLeader يطلب من عقدة القائد الحالية نقل قيادتها إلى المستلِم (transferee). |
 | Downgrade | DowngradeRequest | DowngradeResponse | Downgrade يطلب تخفيضات، أو يتحقق من الجدوى، أو يلغي التخفيض على إصدار العنقود. مدعوم منذ etcd 3.5. |
+{.wide .expand}
 
 ##### service `Watch` (api/etcdserverpb/rpc.proto) {#service-watch-apietcdserverpbrpcproto}
 
@@ -86,6 +91,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | memberID | memberID هو معرّف العضو المرتبط بالإنذار المُثار. | uint64 |
 | alarm | alarm هو نوع الإنذار الذي أُثير. | AlarmType |
+{.wide .expand}
 
 ##### message `AlarmRequest` (api/etcdserverpb/rpc.proto) {#message-alarmrequest-apietcdserverpbrpcproto}
 
@@ -95,6 +101,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | action | action هو نوع طلب الإنذار الذي سيُصدر. يمكن للإجراء أن يجلب (GET) حالات الإنذارات، أو يفعّل (ACTIVATE) إنذارًا، أو يعطّل (DEACTIVATE) إنذارًا مُثارًا. | AlarmAction |
 | memberID | memberID هو معرّف العضو المرتبط بالإنذار. إذا كان memberID يساوي 0، فإن طلب الإنذار يشمل جميع الأعضاء. | uint64 |
 | alarm | alarm هو نوع الإنذار المطلوب اعتباره لهذا الطلب. | AlarmType |
+{.wide .expand}
 
 ##### message `AlarmResponse` (api/etcdserverpb/rpc.proto) {#message-alarmresponse-apietcdserverpbrpcproto}
 
@@ -103,6 +110,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | alarms | alarms هي قائمة بالإنذارات المرتبطة بطلب الإنذار. | (slice of) AlarmMember |
+{.wide .expand}
 
 ##### message `AuthDisableRequest` (api/etcdserverpb/rpc.proto) {#message-authdisablerequest-apietcdserverpbrpcproto}
 
@@ -136,6 +144,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | name | name هو اسم الدور المراد إضافته إلى نظام المصادقة. | string |
+{.wide .expand}
 
 ##### message `AuthRoleAddResponse` (api/etcdserverpb/rpc.proto) {#message-authroleaddresponse-apietcdserverpbrpcproto}
 
@@ -179,6 +188,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | name | name هو اسم الدور الذي سيُمنح الإذن. | string |
 | perm | perm هو الإذن المطلوب منحه للدور. | authpb.Permission |
+{.wide .expand}
 
 ##### message `AuthRoleGrantPermissionResponse` (api/etcdserverpb/rpc.proto) {#message-authrolegrantpermissionresponse-apietcdserverpbrpcproto}
 
@@ -231,6 +241,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | header |  | ResponseHeader |
 | enabled |  | bool |
 | authRevision | authRevision هي المراجعة الحالية لمخزن المصادقة | uint64 |
+{.wide .expand}
 
 ##### message `AuthUserAddRequest` (api/etcdserverpb/rpc.proto) {#message-authuseraddrequest-apietcdserverpbrpcproto}
 
@@ -257,6 +268,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | name | name هو اسم المستخدم الجاري تغيير كلمة مروره. | string |
 | password | password هي كلمة المرور الجديدة للمستخدم. لاحظ أن هذا الحقل ستتم إزالته في طبقة API. | string |
 | hashedPassword | hashedPassword هي كلمة المرور المُجزّأة الجديدة للمستخدم. لاحظ أن هذا الحقل ستتم تهيئته في طبقة API. | string |
+{.wide .expand}
 
 ##### message `AuthUserChangePasswordResponse` (api/etcdserverpb/rpc.proto) {#message-authuserchangepasswordresponse-apietcdserverpbrpcproto}
 
@@ -271,6 +283,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | name | name هو اسم المستخدم المراد حذفه. | string |
+{.wide .expand}
 
 ##### message `AuthUserDeleteResponse` (api/etcdserverpb/rpc.proto) {#message-authuserdeleteresponse-apietcdserverpbrpcproto}
 
@@ -301,6 +314,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | user | user هو اسم المستخدم الذي ينبغي منحه دورًا معينًا. | string |
 | role | role هو اسم الدور المطلوب منحه للمستخدم. | string |
+{.wide .expand}
 
 ##### message `AuthUserGrantRoleResponse` (api/etcdserverpb/rpc.proto) {#message-authusergrantroleresponse-apietcdserverpbrpcproto}
 
@@ -353,6 +367,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | token | token هو رمز (token) مصرّح به يمكن استخدامه في استدعاءات RPC اللاحقة | string |
+{.wide .expand}
 
 ##### message `CompactionRequest` (api/etcdserverpb/rpc.proto) {#message-compactionrequest-apietcdserverpbrpcproto}
 
@@ -363,6 +378,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | revision | revision هي مراجعة مخزن المفاتيح/القيم لعملية الضغط. | int64 |
 | physical | يُضبط physical بحيث ينتظر RPC حتى يُطبَّق الضغط فعليًا على قاعدة البيانات المحلية بحيث تُزال المدخلات المضغوطة كليًا من قاعدة البيانات الخلفية. | bool |
+{.wide .expand}
 
 ##### message `CompactionResponse` (api/etcdserverpb/rpc.proto) {#message-compactionresponse-apietcdserverpbrpcproto}
 
@@ -386,6 +402,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | value | value هي قيمة المفتاح المعطى، بالبايتات. | bytes |
 | lease | lease هو معرّف عقد الإيجار للمفتاح المعطى. | int64 |
 | range_end | يقارن range_end الهدف المعطى بجميع المفاتيح في النطاق [key, range_end). راجع RangeRequest لمزيد من التفاصيل عن نطاقات المفاتيح. | bytes |
+{.wide .expand}
 
 ##### message `DefragmentRequest` (api/etcdserverpb/rpc.proto) {#message-defragmentrequest-apietcdserverpbrpcproto}
 
@@ -408,6 +425,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | key | key هو أول مفتاح يُحذف في النطاق. | bytes |
 | range_end | range_end هو المفتاح التالي لآخر مفتاح يُحذف للنطاق [key, range_end). إذا لم يُعطَ range_end، فسيُعرَّف النطاق ليحتوي وسيط المفتاح فقط. إذا كان range_end هو المفتاح المعطى زائد واحد، فالنطاق هو جميع المفاتيح ذات البادئة (المفتاح المعطى). إذا كان range_end هو '\0'، فالنطاق هو جميع المفاتيح الأكبر من وسيط المفتاح أو المساوية له. | bytes |
 | prev_kv | إذا ضُبط prev_kv، فسيحصل etcd على أزواج المفاتيح/القيم السابقة قبل حذفها. ستُرجَع أزواج المفاتيح/القيم السابقة في رد الحذف. | bool |
+{.wide .expand}
 
 ##### message `DeleteRangeResponse` (api/etcdserverpb/rpc.proto) {#message-deleterangeresponse-apietcdserverpbrpcproto}
 
@@ -417,6 +435,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | header |  | ResponseHeader |
 | deleted | deleted هو عدد المفاتيح التي حذفها طلب حذف النطاق. | int64 |
 | prev_kvs | إذا ضُبط prev_kv في الطلب، فستُرجَع أزواج المفاتيح/القيم السابقة. | (slice of) mvccpb.KeyValue |
+{.wide .expand}
 
 ##### message `DowngradeInfo` (api/etcdserverpb/rpc.proto) {#message-downgradeinfo-apietcdserverpbrpcproto}
 
@@ -432,6 +451,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | action | action هو نوع طلب التخفيض الذي سيُصدر. يمكن للإجراء أن يتحقق (VALIDATE) من الإصدار المستهدف، أو يخفّض (DOWNGRADE) إصدار العنقود، أو يلغي (CANCEL) مهمة التخفيض الجارية. | DowngradeAction |
 | version | version هي الإصدار المستهدف للتخفيض. | string |
+{.wide .expand}
 
 ##### message `DowngradeResponse` (api/etcdserverpb/rpc.proto) {#message-downgraderesponse-apietcdserverpbrpcproto}
 
@@ -440,6 +460,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | version | version هي إصدار العنقود الحالي. | string |
+{.wide .expand}
 
 ##### message `DowngradeVersionTestRequest` (api/etcdserverpb/rpc.proto) {#message-downgradeversiontestrequest-apietcdserverpbrpcproto}
 
@@ -456,6 +477,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | revision | revision هي مراجعة مخزن المفاتيح/القيم لعملية التجزئة. | int64 |
+{.wide .expand}
 
 ##### message `HashKVResponse` (api/etcdserverpb/rpc.proto) {#message-hashkvresponse-apietcdserverpbrpcproto}
 
@@ -466,6 +488,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | hash | hash هي قيمة التجزئة المحسوبة من مفاتيح MVCC للعضو المستجيب حتى مراجعة معينة. | uint32 |
 | compact_revision | compact_revision هي المراجعة المضغوطة لمخزن المفاتيح/القيم عند بدء التجزئة. | int64 |
 | hash_revision | hash_revision هي المراجعة التي تُحسب التجزئة حتى الوصول إليها. | int64 |
+{.wide .expand}
 
 ##### message `HashRequest` (api/etcdserverpb/rpc.proto) {#message-hashrequest-apietcdserverpbrpcproto}
 
@@ -480,6 +503,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | hash | hash هي قيمة التجزئة المحسوبة من الواجهة الخلفية للمفاتيح/القيم للعضو المستجيب. | uint32 |
+{.wide .expand}
 
 ##### message `LeaseCheckpoint` (api/etcdserverpb/rpc.proto) {#message-leasecheckpoint-apietcdserverpbrpcproto}
 
@@ -488,6 +512,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID هو معرّف عقد الإيجار المراد تسجيل نقطة تحقق (checkpoint) له. | int64 |
 | remaining_TTL | Remaining_TTL هو الوقت المتبقي حتى انتهاء صلاحية عقد الإيجار. | int64 |
+{.wide .expand}
 
 ##### message `LeaseCheckpointRequest` (api/etcdserverpb/rpc.proto) {#message-leasecheckpointrequest-apietcdserverpbrpcproto}
 
@@ -495,6 +520,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | checkpoints |  | (slice of) LeaseCheckpoint |
+{.wide .expand}
 
 ##### message `LeaseCheckpointResponse` (api/etcdserverpb/rpc.proto) {#message-leasecheckpointresponse-apietcdserverpbrpcproto}
 
@@ -510,6 +536,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | TTL | TTL هي مدة البقاء (time-to-live) الاستشارية بالثواني. سيرجع عقد الإيجار منتهي الصلاحية -1. | int64 |
 | ID | ID هو المعرّف المطلوب لعقد الإيجار. إذا ضُبط ID على 0، يختار المؤجِّر معرّفًا. | int64 |
+{.wide .expand}
 
 ##### message `LeaseGrantResponse` (api/etcdserverpb/rpc.proto) {#message-leasegrantresponse-apietcdserverpbrpcproto}
 
@@ -520,6 +547,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ID | ID هو معرّف عقد الإيجار لعقد الإيجار الممنوح. | int64 |
 | TTL | TTL هي مدة بقاء عقد الإيجار التي اختارها الخادم بالثواني. | int64 |
 | error |  | string |
+{.wide .expand}
 
 ##### message `LeaseKeepAliveRequest` (api/etcdserverpb/rpc.proto) {#message-leasekeepaliverequest-apietcdserverpbrpcproto}
 
@@ -527,6 +555,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID هو معرّف عقد الإيجار المطلوب إبقاؤه نشطًا. | int64 |
+{.wide .expand}
 
 ##### message `LeaseKeepAliveResponse` (api/etcdserverpb/rpc.proto) {#message-leasekeepaliveresponse-apietcdserverpbrpcproto}
 
@@ -536,6 +565,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | header |  | ResponseHeader |
 | ID | ID هو معرّف عقد الإيجار الوارد من طلب الحفاظ على الحياة. | int64 |
 | TTL | TTL هي مدة البقاء الجديدة لعقد الإيجار. | int64 |
+{.wide .expand}
 
 ##### message `LeaseLeasesRequest` (api/etcdserverpb/rpc.proto) {#message-leaseleasesrequest-apietcdserverpbrpcproto}
 
@@ -557,6 +587,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID هو معرّف عقد الإيجار المطلوب إبطاله. عند إبطال المعرّف، ستُحذف جميع المفاتيح المرتبطة. | int64 |
+{.wide .expand}
 
 ##### message `LeaseRevokeResponse` (api/etcdserverpb/rpc.proto) {#message-leaserevokeresponse-apietcdserverpbrpcproto}
 
@@ -579,6 +610,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID هو معرّف عقد الإيجار لعقد الإيجار. | int64 |
 | keys | keys تساوي true للاستعلام عن جميع المفاتيح المرفقة بعقد الإيجار هذا. | bool |
+{.wide .expand}
 
 ##### message `LeaseTimeToLiveResponse` (api/etcdserverpb/rpc.proto) {#message-leasetimetoliveresponse-apietcdserverpbrpcproto}
 
@@ -590,6 +622,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | TTL | TTL هي مدة البقاء المتبقية بالثواني لعقد الإيجار؛ ستنتهي صلاحية عقد الإيجار في أقل من TTL+1 ثانية. | int64 |
 | grantedTTL | GrantedTTL هو الوقت الممنوح مبدئيًا بالثواني عند إنشاء/تجديد عقد الإيجار. | int64 |
 | keys | Keys هي قائمة المفاتيح المرفقة بعقد الإيجار هذا. | (slice of) bytes |
+{.wide .expand}
 
 ##### message `Member` (api/etcdserverpb/rpc.proto) {#message-member-apietcdserverpbrpcproto}
 
@@ -601,6 +634,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | peerURLs | peerURLs هي قائمة عناوين URL التي يكشفها العضو للعنقود من أجل التواصل. | (slice of) string |
 | clientURLs | clientURLs هي قائمة عناوين URL التي يكشفها العضو للعملاء من أجل التواصل. إذا لم يُبدأ العضو، فستكون clientURLs فارغة. | (slice of) string |
 | isLearner | isLearner يشير إلى ما إذا كان العضو متعلم raft. | bool |
+{.wide .expand}
 
 ##### message `MemberAddRequest` (api/etcdserverpb/rpc.proto) {#message-memberaddrequest-apietcdserverpbrpcproto}
 
@@ -609,6 +643,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | peerURLs | peerURLs هي قائمة عناوين URL التي سيستخدمها العضو المضاف للتواصل مع العنقود. | (slice of) string |
 | isLearner | isLearner يشير إلى ما إذا كان العضو المضاف متعلم raft. | bool |
+{.wide .expand}
 
 ##### message `MemberAddResponse` (api/etcdserverpb/rpc.proto) {#message-memberaddresponse-apietcdserverpbrpcproto}
 
@@ -618,6 +653,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | header |  | ResponseHeader |
 | member | member هي معلومات العضو للعضو المضاف. | Member |
 | members | members هي قائمة بجميع الأعضاء بعد إضافة العضو الجديد. | (slice of) Member |
+{.wide .expand}
 
 ##### message `MemberListRequest` (api/etcdserverpb/rpc.proto) {#message-memberlistrequest-apietcdserverpbrpcproto}
 
@@ -633,6 +669,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | members هي قائمة بجميع الأعضاء المرتبطين بالعنقود. | (slice of) Member |
+{.wide .expand}
 
 ##### message `MemberPromoteRequest` (api/etcdserverpb/rpc.proto) {#message-memberpromoterequest-apietcdserverpbrpcproto}
 
@@ -640,6 +677,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID هو معرّف العضو للعضو المراد ترقيته. | uint64 |
+{.wide .expand}
 
 ##### message `MemberPromoteResponse` (api/etcdserverpb/rpc.proto) {#message-memberpromoteresponse-apietcdserverpbrpcproto}
 
@@ -648,6 +686,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | members هي قائمة بجميع الأعضاء بعد ترقية العضو. | (slice of) Member |
+{.wide .expand}
 
 ##### message `MemberRemoveRequest` (api/etcdserverpb/rpc.proto) {#message-memberremoverequest-apietcdserverpbrpcproto}
 
@@ -655,6 +694,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID هو معرّف العضو للعضو المراد إزالته. | uint64 |
+{.wide .expand}
 
 ##### message `MemberRemoveResponse` (api/etcdserverpb/rpc.proto) {#message-memberremoveresponse-apietcdserverpbrpcproto}
 
@@ -663,6 +703,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | members هي قائمة بجميع الأعضاء بعد إزالة العضو. | (slice of) Member |
+{.wide .expand}
 
 ##### message `MemberUpdateRequest` (api/etcdserverpb/rpc.proto) {#message-memberupdaterequest-apietcdserverpbrpcproto}
 
@@ -671,6 +712,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID هو معرّف العضو للعضو المراد تحديثه. | uint64 |
 | peerURLs | peerURLs هي القائمة الجديدة لعناوين URL التي سيستخدمها العضو للتواصل مع العنقود. | (slice of) string |
+{.wide .expand}
 
 ##### message `MemberUpdateResponse` (api/etcdserverpb/rpc.proto) {#message-memberupdateresponse-apietcdserverpbrpcproto}
 
@@ -679,6 +721,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | members هي قائمة بجميع الأعضاء بعد تحديث العضو. | (slice of) Member |
+{.wide .expand}
 
 ##### message `MoveLeaderRequest` (api/etcdserverpb/rpc.proto) {#message-moveleaderrequest-apietcdserverpbrpcproto}
 
@@ -686,6 +729,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | targetID | targetID هو معرّف العقدة للقائد الجديد. | uint64 |
+{.wide .expand}
 
 ##### message `MoveLeaderResponse` (api/etcdserverpb/rpc.proto) {#message-moveleaderresponse-apietcdserverpbrpcproto}
 
@@ -705,6 +749,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | prev_kv | إذا ضُبط prev_kv، فسيحصل etcd على زوج المفتاح/القيمة السابق قبل تغييره. سيُرجَع زوج المفتاح/القيمة السابق في رد الوضع (put). | bool |
 | ignore_value | إذا ضُبط ignore_value، فسيحدّث etcd المفتاح باستخدام قيمته الحالية. ويرجع خطأً إذا لم يكن المفتاح موجودًا. | bool |
 | ignore_lease | إذا ضُبط ignore_lease، فسيحدّث etcd المفتاح باستخدام عقد الإيجار الحالي له. ويرجع خطأً إذا لم يكن المفتاح موجودًا. | bool |
+{.wide .expand}
 
 ##### message `PutResponse` (api/etcdserverpb/rpc.proto) {#message-putresponse-apietcdserverpbrpcproto}
 
@@ -713,6 +758,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | prev_kv | إذا ضُبط prev_kv في الطلب، فسيُرجَع زوج المفتاح/القيمة السابق. | mvccpb.KeyValue |
+{.wide .expand}
 
 ##### message `RangeRequest` (api/etcdserverpb/rpc.proto) {#message-rangerequest-apietcdserverpbrpcproto}
 
@@ -732,6 +778,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | max_mod_revision | max_mod_revision هي الحد الأعلى لمراجعات تعديل المفاتيح المُرجَعة؛ ستُستبعد جميع المفاتيح ذات مراجعات التعديل الأكبر. | int64 |
 | min_create_revision | min_create_revision هي الحد الأدنى لمراجعات إنشاء المفاتيح المُرجَعة؛ ستُستبعد جميع المفاتيح ذات مراجعات الإنشاء الأقل. | int64 |
 | max_create_revision | max_create_revision هي الحد الأعلى لمراجعات إنشاء المفاتيح المُرجَعة؛ ستُستبعد جميع المفاتيح ذات مراجعات الإنشاء الأكبر. | int64 |
+{.wide .expand}
 
 ##### message `RangeResponse` (api/etcdserverpb/rpc.proto) {#message-rangeresponse-apietcdserverpbrpcproto}
 
@@ -742,6 +789,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | kvs | kvs هي قائمة أزواج المفاتيح/القيم التي طابقها طلب النطاق. تكون kvs فارغة عند طلب العد. | (slice of) mvccpb.KeyValue |
 | more | more تشير إلى ما إذا كانت هناك مفاتيح أخرى لإرجاعها في النطاق المطلوب. | bool |
 | count | تُضبط count على العدد الفعلي للمفاتيح داخل النطاق عند الطلب. وخلافًا لـKvs، لا تتأثر بالحدود والمرشحات (مثل Min/Max وCreate/Modify وRevisions) وتعكس العدد الكامل داخل النطاق المحدد. | int64 |
+{.wide .expand}
 
 ##### message `RequestOp` (api/etcdserverpb/rpc.proto) {#message-requestop-apietcdserverpbrpcproto}
 
@@ -753,6 +801,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | request_put |  | PutRequest |
 | request_delete_range |  | DeleteRangeRequest |
 | request_txn |  | TxnRequest |
+{.wide .expand}
 
 ##### message `ResponseHeader` (api/etcdserverpb/rpc.proto) {#message-responseheader-apietcdserverpbrpcproto}
 
@@ -763,6 +812,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | member_id | member_id هو معرّف العضو الذي أرسل الاستجابة. | uint64 |
 | revision | revision هي مراجعة مخزن المفاتيح/القيم عند تطبيق الطلب، وهي غير مضبوطة (أي 0) في حالة الاستدعاءات التي لا تتفاعل مع مخزن المفاتيح/القيم. بالنسبة لاستجابات تقدم المراقبة، تشير header.revision إلى التقدم. جميع الأحداث المستقبلية المستلمة في هذا التدفق مضمونة أن يكون رقم مراجعتها أعلى من رقم header.revision. | int64 |
 | raft_term | raft_term هي فترة raft عند تطبيق الطلب. | uint64 |
+{.wide .expand}
 
 ##### message `ResponseOp` (api/etcdserverpb/rpc.proto) {#message-responseop-apietcdserverpbrpcproto}
 
@@ -774,6 +824,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | response_put |  | PutResponse |
 | response_delete_range |  | DeleteRangeResponse |
 | response_txn |  | TxnResponse |
+{.wide .expand}
 
 ##### message `SnapshotRequest` (api/etcdserverpb/rpc.proto) {#message-snapshotrequest-apietcdserverpbrpcproto}
 
@@ -790,6 +841,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | remaining_bytes | remaining_bytes هو عدد بايتات الـblob التي سيتم إرسالها بعد هذه الرسالة | uint64 |
 | blob | blob يحتوي على الجزء التالي من اللقطة في تدفق اللقطة. | bytes |
 | version | إصدار مخطط التخزين المسجل في اللقطة. يُقرأ هذا من الواجهة الخلفية المحلية للعضو وقد يختلف عن إصداره الثنائي. يشير إلى إصدار تخزين etcd الذي يجب دعمه عند استعادة اللقطة. | string |
+{.wide .expand}
 
 ##### message `StatusRequest` (api/etcdserverpb/rpc.proto) {#message-statusrequest-apietcdserverpbrpcproto}
 
@@ -815,6 +867,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | storageVersion | storageVersion هي إصدار ملف قاعدة البيانات. قد تُحدَّث بتأخر بالنسبة إلى إصدار العنقود المستهدف. | string |
 | dbSizeQuota | dbSizeQuota هي حصة تخزين etcd المُهيَّأة بالبايتات (القيمة الممررة إلى نسخة etcd عبر العلم --quota-backend-bytes) | int64 |
 | downgradeInfo | downgradeInfo تشير إلى ما إذا كانت هناك عملية تخفيض. | DowngradeInfo |
+{.wide .expand}
 
 ##### message `TxnRequest` (api/etcdserverpb/rpc.proto) {#message-txnrequest-apietcdserverpbrpcproto}
 
@@ -826,6 +879,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | compare | compare هي قائمة من المسندات تمثل اقترانًا منطقيًا للعبارات. إذا نجحت المقارنات، فستُعالَج طلبات النجاح بالترتيب، وستحتوي الاستجابة على الاستجابات الخاصة بها بالترتيب. وإذا فشلت المقارنات، فستُعالَج طلبات الفشل بالترتيب، وستحتوي الاستجابة على الاستجابات الخاصة بها بالترتيب. | (slice of) Compare |
 | success | success هي قائمة بالطلبات التي ستُطبَّق عندما تكون نتيجة تقييم compare هي true. | (slice of) RequestOp |
 | failure | failure هي قائمة بالطلبات التي ستُطبَّق عندما تكون نتيجة تقييم compare هي false. | (slice of) RequestOp |
+{.wide .expand}
 
 ##### message `TxnResponse` (api/etcdserverpb/rpc.proto) {#message-txnresponse-apietcdserverpbrpcproto}
 
@@ -835,6 +889,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | header |  | ResponseHeader |
 | succeeded | تُضبط succeeded على true إذا كانت نتيجة تقييم compare هي true، وإلا فعلى false. | bool |
 | responses | responses هي قائمة بالاستجابات المقابلة للنتائج من تطبيق success إذا كانت succeeded تساوي true، أو failure إذا كانت succeeded تساوي false. | (slice of) ResponseOp |
+{.wide .expand}
 
 ##### message `WatchCancelRequest` (api/etcdserverpb/rpc.proto) {#message-watchcancelrequest-apietcdserverpbrpcproto}
 
@@ -842,6 +897,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | watch_id | watch_id هو معرّف المراقب المطلوب إلغاؤه بحيث لا تُنقل أحداث أخرى. | int64 |
+{.wide .expand}
 
 ##### message `WatchCreateRequest` (api/etcdserverpb/rpc.proto) {#message-watchcreaterequest-apietcdserverpbrpcproto}
 
@@ -856,6 +912,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | prev_kv | إذا ضُبط prev_kv، فسيحصل المراقب المُنشأ على زوج المفتاح/القيمة السابق قبل حدوث الحدث. إذا كان زوج المفتاح/القيمة السابق قد ضُغط بالفعل، فلن يُرجَع شيء. | bool |
 | watch_id | إذا قُدّم watch_id وكان غير صفري، فسيُعيَّن لهذا المراقب. وبما أن إنشاء مراقب في etcd ليس عملية متزامنة، يمكن استخدام هذا لضمان صحة الترتيب عند إنشاء عدة مراقبين على التدفق نفسه. سيؤدي إنشاء مراقب بمعرّف قيد الاستخدام بالفعل على التدفق إلى إرجاع خطأ. | int64 |
 | fragment | fragment يفعّل تقسيم المراجعات الكبيرة إلى استجابات مراقبة متعددة. | bool |
+{.wide .expand}
 
 ##### message `WatchProgressRequest` (api/etcdserverpb/rpc.proto) {#message-watchprogressrequest-apietcdserverpbrpcproto}
 
@@ -874,6 +931,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | create_request |  | WatchCreateRequest |
 | cancel_request |  | WatchCancelRequest |
 | progress_request |  | WatchProgressRequest |
+{.wide .expand}
 
 ##### message `WatchResponse` (api/etcdserverpb/rpc.proto) {#message-watchresponse-apietcdserverpbrpcproto}
 
@@ -888,6 +946,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | cancel_reason | cancel_reason يشير إلى سبب إلغاء المراقب. | string |
 | fragment | fragment تساوي true إذا قُسّمت استجابة مراقبة كبيرة على استجابات متعددة. | bool |
 | events |  | (slice of) mvccpb.Event |
+{.wide .expand}
 
 ##### message `Event` (api/mvccpb/kv.proto) {#message-event-apimvccpbkvproto}
 
@@ -921,12 +980,14 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | الحقل | الوصف | النوع |
 | ----- | ----------- | ---- |
 | LeaseTimeToLiveRequest |  | etcdserverpb.LeaseTimeToLiveRequest |
+{.wide .expand}
 
 ##### message `LeaseInternalResponse` (server/lease/leasepb/lease.proto) {#message-leaseinternalresponse-serverleaseleasepbleaseproto}
 
 | الحقل | الوصف | النوع |
 | ----- | ----------- | ---- |
 | LeaseTimeToLiveResponse |  | etcdserverpb.LeaseTimeToLiveResponse |
+{.wide .expand}
 
 ##### message `Permission` (api/authpb/auth.proto) {#message-permission-apiauthpbauthproto}
 

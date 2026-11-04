@@ -35,6 +35,7 @@ etcd 旨在作为大规模分布式系统的通用基础架构。这类系统无
 | 成员关系重配置 | [是][etcd-reconfig] | [高于 3.5.0][zk-reconfig] | [是][consul-reconfig] | 是 |
 | 最大可靠数据库容量 | 数 GB | 数百 MB（有时可达数 GB） | 数百 MB | 数 TB 以上 |
 | 最小读取线性化延迟 | 网络 RTT | 无读取线性化 | RTT + fsync | 时钟屏障（原子时钟、NTP） |
+{.wide .expand}
 
 ### ZooKeeper {#zookeeper}
 

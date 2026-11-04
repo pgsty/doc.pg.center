@@ -50,6 +50,7 @@ The performance is calculated through results of 100 benchmark rounds.
 | 64 | 256 | all servers | 46592 | 1273 | 10.14 | 0.59 |
 | 256 | 64 | all servers | 45332 | 1847 | 2.48| 0.12 |
 | 256 | 256 | all servers | 46485 | 1340 | 10.18 | 0.74 |
+{.wide .expand}
 
 ### Single Key Write Performance
 
@@ -65,6 +66,7 @@ The performance is calculated through results of 100 benchmark rounds.
 | 64 | 256 | all servers | 4461 | 298 | 89.47 | 36.48 |
 | 256 | 64 | all servers | 1599 | 94 | 60.11| 6.43 |
 | 256 | 256 | all servers | 4315 | 193 | 88.98 | 7.01 |
+{.wide .expand}
 
 ## Performance Changes
 

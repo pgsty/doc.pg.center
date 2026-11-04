@@ -48,4 +48,4 @@ Consulta la [Introducción a la configuración](/es/pgbackrest/configuration/#in
 | [**`stop`**](/es/pgbackrest/command/stop/)                     | Impedir nuevos procesos de pgBackRest y, opcionalmente, forzar la detención de los que están en ejecución.                |
 | [**`verify`**](/es/pgbackrest/command/verify/)                 | Verificar que los datos de copia de seguridad y archivado del repositorio son válidos.                         |
 | [**`version`**](/es/pgbackrest/command/version/)               | Mostrar la versión instalada de pgBackRest.                                               |
-{.full-width}
+{.full-width .wide .expand}

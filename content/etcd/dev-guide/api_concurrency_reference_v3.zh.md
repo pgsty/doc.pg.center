@@ -30,6 +30,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | key | key 是在 Lock 调用方持有锁期间存在于 etcd 中的键。用户不应修改此键，否则锁可能表现出未定义行为。 | bytes |
+{.wide .expand}
 
 ##### 消息 `UnlockRequest` (server/etcdserver/api/v3lock/v3lockpb/v3lock.proto) {#message-unlockrequest-serveretcdserverapiv3lockv3lockpbv3lockproto}
 
@@ -54,6 +55,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | Leader | LeaderRequest | LeaderResponse | Leader 返回当前选举的公布值（如有）。 |
 | Observe | LeaderRequest | LeaderResponse | Observe 以有序方式流式传输选举中当选领导者发布的公告。 |
 | Resign | ResignRequest | ResignResponse | Resign 释放选举中的领导权，使其他竞选者可获取领导权。 |
+{.wide .expand}
 
 ##### 消息 `CampaignRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-campaignrequest-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
@@ -69,6 +71,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | leader | leader 描述用于维持选举领导权的资源。 | LeaderKey |
+{.wide .expand}
 
 ##### 消息 `LeaderKey` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-leaderkey-serveretcdserverapiv3electionv3electionpbv3electionproto}
 
@@ -91,6 +94,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 | ----- | ----------- | ---- |
 | header |  | etcdserverpb.ResponseHeader |
 | kv | kv 表示最新的领导者更新的键值对。 | mvccpb.KeyValue |
+{.wide .expand}
 
 ##### 消息 `ProclaimRequest` (server/etcdserver/api/v3election/v3electionpb/v3election.proto) {#message-proclaimrequest-serveretcdserverapiv3electionv3electionpbv3electionproto}
 

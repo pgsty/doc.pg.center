@@ -40,6 +40,7 @@ Inicializa otra máquina y usa la herramienta de benchmark HTTP [hey][hey] para 
 | 64                | 256               | todos los servidores        | 33300    | 11.8      |
 | 256               | 64                | todos los servidores        | 24800    | 3.9      |
 | 256               | 256               | todos los servidores        | 33000    | 11.5      |
+{.wide .expand}
 
 ### escritura de una sola clave {#writing-one-single-key}
 
@@ -55,6 +56,7 @@ Inicializa otra máquina y usa la herramienta de benchmark HTTP [hey][hey] para 
 | 64                | 256               | todos los servidores        | 3260      | 123.8 |
 | 256               | 64                | todos los servidores        | 1033      | 121.5 |
 | 256               | 256               | todos los servidores        | 3061      | 119.3 |
+{.wide .expand}
 
 [hack-benchmark]: https://github.com/etcd-io/etcd/tree/main/hack/benchmark
 [hey]: https://github.com/rakyll/hey

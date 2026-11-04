@@ -43,6 +43,7 @@ La longitud del nombre de la clave es siempre de 64 bytes, lo que constituye una
 | 1024 | 50000  | 48 | 1253 | 26x |
 | 1024 | 100000 | 96 | 2344 | 24x |
 | 1024 | 200000 | 192 | 4361 | 22x |
+{.wide .expand}
 
 ## Umbral de tamaño de datos {#data-size-threshold}
 
@@ -53,3 +54,4 @@ La longitud del nombre de la clave es siempre de 64 bytes, lo que constituye una
 |-------------|-----------------------|-----------------------------------|------------------|
 | 128 | 400K | 48 | 2400 |
 | 1024 | 300K | 292 | 6500 |
+{.wide .expand}

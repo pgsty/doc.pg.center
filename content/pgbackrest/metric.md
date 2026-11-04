@@ -70,5 +70,6 @@ Branch coverage excludes branches inside macros and `assert()` calls. Macros hav
 | storage/s3           |      32/32 (100.00%) |     200/200 (100.00%) |      678/678 (100.00%) |
 | storage/sftp         |      39/39 (100.00%) |     408/408 (100.00%) |      763/763 (100.00%) |
 | TOTAL                |  1733/1733 (100.00%) |  10784/10786 (99.98%) |  25462/25462 (100.00%) |
+{.wide .expand}
 
 The C unit test modules in `/test/src/module` also have complete function/line coverage but are not included in the report.

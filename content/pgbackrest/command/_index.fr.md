@@ -48,4 +48,4 @@ Voir [Introduction à la configuration](/fr/pgbackrest/configuration/#introducti
 | [**`stop`**](/fr/pgbackrest/command/stop/)                     | Empêcher l’exécution de nouveaux processus pgBackRest et, éventuellement, forcer l’arrêt des processus en cours.                |
 | [**`verify`**](/fr/pgbackrest/command/verify/)                 | Vérifier que les données de sauvegarde et d’archive du dépôt sont valides.                         |
 | [**`version`**](/fr/pgbackrest/command/version/)               | Afficher la version installée de pgBackRest.                                               |
-{.full-width}
+{.full-width .wide .expand}

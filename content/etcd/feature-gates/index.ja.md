@@ -75,6 +75,7 @@ etcdに設定できるフィーチャーゲートを、次の表にまとめま�
 | SetMemberLocalAddr | false | Alpha |ピアとの通信時に、initial-advertise-peer-urlsで最初に指定されたループバック以外のローカルアドレスを、ローカルアドレスとして使用できるようにします。|
 | StopGRPCServiceOnDefrag | false | Alpha |デフラグメンテーション中、etcdのgRPCサービスがクライアントリクエストの処理を停止できるようにします。|
 | TxnModeWriteWithSharedBuffer | true | Beta |書き込みトランザクションが読み取り専用の確認処理で共有バッファーを使用できるようにします。|
+{.wide .expand}
 
 ## 機能の使用 {#using-a-feature}
 

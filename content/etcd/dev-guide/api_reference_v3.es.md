@@ -29,6 +29,7 @@ Esta referencia de API se genera automáticamente a partir de los archivos `.pro
 | RoleDelete | AuthRoleDeleteRequest | AuthRoleDeleteResponse | RoleDelete elimina un rol especificado. |
 | RoleGrantPermission | AuthRoleGrantPermissionRequest | AuthRoleGrantPermissionResponse | RoleGrantPermission otorga a un rol especificado un permiso sobre una clave o un rango especificados. |
 | RoleRevokePermission | AuthRoleRevokePermissionRequest | AuthRoleRevokePermissionResponse | RoleRevokePermission revoca un permiso de clave o de rango de un rol especificado. |
+{.wide .expand}
 
 ##### service `Cluster` (api/etcdserverpb/rpc.proto) {#service-cluster-apietcdserverpbrpcproto}
 
@@ -39,6 +40,7 @@ Esta referencia de API se genera automáticamente a partir de los archivos `.pro
 | MemberUpdate | MemberUpdateRequest | MemberUpdateResponse | MemberUpdate actualiza la configuración del miembro. |
 | MemberList | MemberListRequest | MemberListResponse | MemberList enumera todos los miembros del clúster. |
 | MemberPromote | MemberPromoteRequest | MemberPromoteResponse | MemberPromote asciende a un miembro de aprendiz de raft (sin derecho a voto) a miembro de raft con derecho a voto. |
+{.wide .expand}
 
 ##### service `KV` (api/etcdserverpb/rpc.proto) {#service-kv-apietcdserverpbrpcproto}
 
@@ -49,6 +51,7 @@ Esta referencia de API se genera automáticamente a partir de los archivos `.pro
 | DeleteRange | DeleteRangeRequest | DeleteRangeResponse | DeleteRange elimina del almacén clave-valor el rango dado. Una solicitud delete incrementa la revisión del almacén clave-valor y genera un evento de eliminación en el historial de eventos por cada clave eliminada. |
 | Txn | TxnRequest | TxnResponse | Txn procesa múltiples solicitudes en una sola transacción. Una solicitud txn incrementa la revisión del almacén clave-valor y genera eventos con la misma revisión por cada solicitud completada. No está permitido modificar la misma clave varias veces dentro de un txn. |
 | Compact | CompactionRequest | CompactionResponse | Compact compacta el historial de eventos del almacén clave-valor de etcd. El almacén clave-valor debería compactarse periódicamente o el historial de eventos seguirá creciendo indefinidamente. |
+{.wide .expand}
 
 ##### service `Lease` (api/etcdserverpb/rpc.proto) {#service-lease-apietcdserverpbrpcproto}
 
@@ -59,6 +62,7 @@ Esta referencia de API se genera automáticamente a partir de los archivos `.pro
 | LeaseKeepAlive | LeaseKeepAliveRequest | LeaseKeepAliveResponse | LeaseKeepAlive mantiene viva la concesión enviando en flujo solicitudes de keep alive del cliente al servidor y respuestas de keep alive del servidor al cliente. |
 | LeaseTimeToLive | LeaseTimeToLiveRequest | LeaseTimeToLiveResponse | LeaseTimeToLive recupera información de la concesión. |
 | LeaseLeases | LeaseLeasesRequest | LeaseLeasesResponse | LeaseLeases enumera todas las concesiones existentes. |
+{.wide .expand}
 
 ##### service `Maintenance` (api/etcdserverpb/rpc.proto) {#service-maintenance-apietcdserverpbrpcproto}
 
@@ -72,12 +76,14 @@ Esta referencia de API se genera automáticamente a partir de los archivos `.pro
 | Snapshot | SnapshotRequest | SnapshotResponse | Snapshot envía una instantánea de todo el backend de un miembro a un cliente mediante un flujo. |
 | MoveLeader | MoveLeaderRequest | MoveLeaderResponse | MoveLeader solicita al nodo líder actual que transfiera su liderazgo al destinatario. |
 | Downgrade | DowngradeRequest | DowngradeResponse | Downgrade solicita degradaciones, verifica la viabilidad o cancela la degradación de la versión del clúster. Soportado desde etcd 3.5. |
+{.wide .expand}
 
 ##### service `Watch` (api/etcdserverpb/rpc.proto) {#service-watch-apietcdserverpbrpcproto}
 
 | Método | Tipo de solicitud | Tipo de respuesta | Descripción |
 | ------ | ------------ | ------------- | ----------- |
 | Watch | WatchRequest | WatchResponse | Watch observa eventos que están ocurriendo o que ya han ocurrido. Tanto la entrada como la salida son flujos; el flujo de entrada sirve para crear y cancelar observadores y el flujo de salida envía eventos. Una RPC de watch puede observar varios rangos de claves, enviando en flujo eventos de varias observaciones a la vez. Se puede observar todo el historial de eventos comenzando por la última revisión de compactación. |
+{.wide .expand}
 
 ##### message `AlarmMember` (api/etcdserverpb/rpc.proto) {#message-alarmmember-apietcdserverpbrpcproto}
 
@@ -86,6 +92,7 @@ Esta referencia de API se genera automáticamente a partir de los archivos `.pro
 | (versionpb.etcd_version_msg) |  | option |
 | memberID | memberID es el ID del miembro asociado a la alarma generada. | uint64 |
 | alarm | alarm es el tipo de alarma que se ha generado. | AlarmType |
+{.wide .expand}
 
 ##### message `AlarmRequest` (api/etcdserverpb/rpc.proto) {#message-alarmrequest-apietcdserverpbrpcproto}
 
@@ -95,6 +102,7 @@ Esta referencia de API se genera automáticamente a partir de los archivos `.pro
 | action | action es el tipo de solicitud de alarma que se va a emitir. La acción puede obtener (GET) los estados de alarma, activar (ACTIVATE) una alarma o desactivar (DEACTIVATE) una alarma generada. | AlarmAction |
 | memberID | memberID es el ID del miembro asociado a la alarma. Si memberID es 0, la solicitud de alarma cubre a todos los miembros. | uint64 |
 | alarm | alarm es el tipo de alarma a considerar para esta solicitud. | AlarmType |
+{.wide .expand}
 
 ##### message `AlarmResponse` (api/etcdserverpb/rpc.proto) {#message-alarmresponse-apietcdserverpbrpcproto}
 
@@ -103,6 +111,7 @@ Esta referencia de API se genera automáticamente a partir de los archivos `.pro
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | alarms | alarms es una lista de alarmas asociadas a la solicitud de alarma. | (slice of) AlarmMember |
+{.wide .expand}
 
 ##### message `AuthDisableRequest` (api/etcdserverpb/rpc.proto) {#message-authdisablerequest-apietcdserverpbrpcproto}
 
@@ -136,6 +145,7 @@ Esta referencia de API se genera automáticamente a partir de los archivos `.pro
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | name | name es el nombre del rol que se va a añadir al sistema de autenticación. | string |
+{.wide .expand}
 
 ##### message `AuthRoleAddResponse` (api/etcdserverpb/rpc.proto) {#message-authroleaddresponse-apietcdserverpbrpcproto}
 
@@ -179,6 +189,7 @@ Esta referencia de API se genera automáticamente a partir de los archivos `.pro
 | (versionpb.etcd_version_msg) |  | option |
 | name | name es el nombre del rol al que se otorgará el permiso. | string |
 | perm | perm es el permiso que se otorga al rol. | authpb.Permission |
+{.wide .expand}
 
 ##### message `AuthRoleGrantPermissionResponse` (api/etcdserverpb/rpc.proto) {#message-authrolegrantpermissionresponse-apietcdserverpbrpcproto}
 
@@ -231,6 +242,7 @@ Esta referencia de API se genera automáticamente a partir de los archivos `.pro
 | header |  | ResponseHeader |
 | enabled |  | bool |
 | authRevision | authRevision es la revisión actual del almacén de autenticación | uint64 |
+{.wide .expand}
 
 ##### message `AuthUserAddRequest` (api/etcdserverpb/rpc.proto) {#message-authuseraddrequest-apietcdserverpbrpcproto}
 
@@ -241,6 +253,7 @@ Esta referencia de API se genera automáticamente a partir de los archivos `.pro
 | password |  | string |
 | options |  | authpb.UserAddOptions |
 | hashedPassword |  | string |
+{.wide .expand}
 
 ##### message `AuthUserAddResponse` (api/etcdserverpb/rpc.proto) {#message-authuseraddresponse-apietcdserverpbrpcproto}
 
@@ -257,6 +270,7 @@ Esta referencia de API se genera automáticamente a partir de los archivos `.pro
 | name | name es el nombre del usuario cuya contraseña se está cambiando. | string |
 | password | password es la contraseña nueva del usuario. Ten en cuenta que este campo se eliminará en la capa de API. | string |
 | hashedPassword | hashedPassword es la nueva contraseña con hash del usuario. Ten en cuenta que este campo se inicializará en la capa de API. | string |
+{.wide .expand}
 
 ##### message `AuthUserChangePasswordResponse` (api/etcdserverpb/rpc.proto) {#message-authuserchangepasswordresponse-apietcdserverpbrpcproto}
 
@@ -271,6 +285,7 @@ Esta referencia de API se genera automáticamente a partir de los archivos `.pro
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | name | name es el nombre del usuario que se va a eliminar. | string |
+{.wide .expand}
 
 ##### message `AuthUserDeleteResponse` (api/etcdserverpb/rpc.proto) {#message-authuserdeleteresponse-apietcdserverpbrpcproto}
 
@@ -301,6 +316,7 @@ Esta referencia de API se genera automáticamente a partir de los archivos `.pro
 | (versionpb.etcd_version_msg) |  | option |
 | user | user es el nombre del usuario al que se le debe otorgar un rol determinado. | string |
 | role | role es el nombre del rol que se otorga al usuario. | string |
+{.wide .expand}
 
 ##### message `AuthUserGrantRoleResponse` (api/etcdserverpb/rpc.proto) {#message-authusergrantroleresponse-apietcdserverpbrpcproto}
 
@@ -353,6 +369,7 @@ Esta referencia de API se genera automáticamente a partir de los archivos `.pro
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | token | token es un token autorizado que puede usarse en RPC posteriores | string |
+{.wide .expand}
 
 ##### message `CompactionRequest` (api/etcdserverpb/rpc.proto) {#message-compactionrequest-apietcdserverpbrpcproto}
 
@@ -363,6 +380,7 @@ CompactionRequest compacta el almacén clave-valor hasta una revisión dada. Tod
 | (versionpb.etcd_version_msg) |  | option |
 | revision | revision es la revisión del almacén clave-valor para la operación de compactación. | int64 |
 | physical | physical se establece para que la RPC espere hasta que la compactación se aplique físicamente a la base de datos local, de modo que las entradas compactadas se eliminen totalmente de la base de datos backend. | bool |
+{.wide .expand}
 
 ##### message `CompactionResponse` (api/etcdserverpb/rpc.proto) {#message-compactionresponse-apietcdserverpbrpcproto}
 
@@ -386,6 +404,7 @@ CompactionRequest compacta el almacén clave-valor hasta una revisión dada. Tod
 | value | value es el valor de la clave dada, en bytes. | bytes |
 | lease | lease es el ID de concesión de la clave dada. | int64 |
 | range_end | range_end compara el objetivo dado con todas las claves del rango [key, range_end). Consulta RangeRequest para más detalles sobre los rangos de claves. | bytes |
+{.wide .expand}
 
 ##### message `DefragmentRequest` (api/etcdserverpb/rpc.proto) {#message-defragmentrequest-apietcdserverpbrpcproto}
 
@@ -408,6 +427,7 @@ CompactionRequest compacta el almacén clave-valor hasta una revisión dada. Tod
 | key | key es la primera clave que se va a eliminar del rango. | bytes |
 | range_end | range_end es la clave siguiente a la última clave que se va a eliminar para el rango [key, range_end). Si no se proporciona range_end, el rango se define para contener solo el argumento key. Si range_end es la clave dada más uno, el rango son todas las claves con el prefijo (la clave dada). Si range_end es '\0', el rango son todas las claves mayores o iguales que el argumento key. | bytes |
 | prev_kv | Si prev_kv está establecido, etcd obtiene los pares clave-valor anteriores antes de eliminarlos. Los pares clave-valor anteriores se devolverán en la respuesta de eliminación. | bool |
+{.wide .expand}
 
 ##### message `DeleteRangeResponse` (api/etcdserverpb/rpc.proto) {#message-deleterangeresponse-apietcdserverpbrpcproto}
 
@@ -417,6 +437,7 @@ CompactionRequest compacta el almacén clave-valor hasta una revisión dada. Tod
 | header |  | ResponseHeader |
 | deleted | deleted es el número de claves eliminadas por la solicitud de eliminación de rango. | int64 |
 | prev_kvs | si prev_kv está establecido en la solicitud, se devolverán los pares clave-valor anteriores. | (slice of) mvccpb.KeyValue |
+{.wide .expand}
 
 ##### message `DowngradeInfo` (api/etcdserverpb/rpc.proto) {#message-downgradeinfo-apietcdserverpbrpcproto}
 
@@ -432,6 +453,7 @@ CompactionRequest compacta el almacén clave-valor hasta una revisión dada. Tod
 | (versionpb.etcd_version_msg) |  | option |
 | action | action es el tipo de solicitud de degradación que se va a emitir. La acción puede validar (VALIDATE) la versión objetivo, reducir (DOWNGRADE) la versión del clúster o cancelar (CANCEL) el trabajo de degradación actual. | DowngradeAction |
 | version | version es la versión objetivo a la que degradar. | string |
+{.wide .expand}
 
 ##### message `DowngradeResponse` (api/etcdserverpb/rpc.proto) {#message-downgraderesponse-apietcdserverpbrpcproto}
 
@@ -440,6 +462,7 @@ CompactionRequest compacta el almacén clave-valor hasta una revisión dada. Tod
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | version | version es la versión actual del clúster. | string |
+{.wide .expand}
 
 ##### message `DowngradeVersionTestRequest` (api/etcdserverpb/rpc.proto) {#message-downgradeversiontestrequest-apietcdserverpbrpcproto}
 
@@ -456,6 +479,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | revision | revision es la revisión del almacén clave-valor para la operación de hash. | int64 |
+{.wide .expand}
 
 ##### message `HashKVResponse` (api/etcdserverpb/rpc.proto) {#message-hashkvresponse-apietcdserverpbrpcproto}
 
@@ -466,6 +490,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | hash | hash es el valor de hash calculado a partir de las claves MVCC del miembro que responde hasta una revisión dada. | uint32 |
 | compact_revision | compact_revision es la revisión compactada del almacén clave-valor cuando comienza el hash. | int64 |
 | hash_revision | hash_revision es la revisión hasta la cual se calcula el hash. | int64 |
+{.wide .expand}
 
 ##### message `HashRequest` (api/etcdserverpb/rpc.proto) {#message-hashrequest-apietcdserverpbrpcproto}
 
@@ -480,6 +505,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | hash | hash es el valor de hash calculado a partir del backend de KV del miembro que responde. | uint32 |
+{.wide .expand}
 
 ##### message `LeaseCheckpoint` (api/etcdserverpb/rpc.proto) {#message-leasecheckpoint-apietcdserverpbrpcproto}
 
@@ -488,6 +514,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID es el ID de la concesión a la que se va a aplicar el checkpoint. | int64 |
 | remaining_TTL | Remaining_TTL es el tiempo restante hasta la expiración de la concesión. | int64 |
+{.wide .expand}
 
 ##### message `LeaseCheckpointRequest` (api/etcdserverpb/rpc.proto) {#message-leasecheckpointrequest-apietcdserverpbrpcproto}
 
@@ -495,6 +522,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | checkpoints |  | (slice of) LeaseCheckpoint |
+{.wide .expand}
 
 ##### message `LeaseCheckpointResponse` (api/etcdserverpb/rpc.proto) {#message-leasecheckpointresponse-apietcdserverpbrpcproto}
 
@@ -510,6 +538,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | (versionpb.etcd_version_msg) |  | option |
 | TTL | TTL es el tiempo de vida orientativo en segundos. Una concesión expirada devolverá -1. | int64 |
 | ID | ID es el ID solicitado para la concesión. Si ID se establece en 0, el otorgante elige un ID. | int64 |
+{.wide .expand}
 
 ##### message `LeaseGrantResponse` (api/etcdserverpb/rpc.proto) {#message-leasegrantresponse-apietcdserverpbrpcproto}
 
@@ -520,6 +549,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | ID | ID es el ID de la concesión otorgada. | int64 |
 | TTL | TTL es el tiempo de vida de la concesión elegido por el servidor, en segundos. | int64 |
 | error |  | string |
+{.wide .expand}
 
 ##### message `LeaseKeepAliveRequest` (api/etcdserverpb/rpc.proto) {#message-leasekeepaliverequest-apietcdserverpbrpcproto}
 
@@ -527,6 +557,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID es el ID de la concesión que se va a mantener viva. | int64 |
+{.wide .expand}
 
 ##### message `LeaseKeepAliveResponse` (api/etcdserverpb/rpc.proto) {#message-leasekeepaliveresponse-apietcdserverpbrpcproto}
 
@@ -536,6 +567,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | header |  | ResponseHeader |
 | ID | ID es el ID de la concesión de la solicitud de keep alive. | int64 |
 | TTL | TTL es el nuevo tiempo de vida de la concesión. | int64 |
+{.wide .expand}
 
 ##### message `LeaseLeasesRequest` (api/etcdserverpb/rpc.proto) {#message-leaseleasesrequest-apietcdserverpbrpcproto}
 
@@ -550,6 +582,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | leases |  | (slice of) LeaseStatus |
+{.wide .expand}
 
 ##### message `LeaseRevokeRequest` (api/etcdserverpb/rpc.proto) {#message-leaserevokerequest-apietcdserverpbrpcproto}
 
@@ -557,6 +590,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID es el ID de la concesión que se va a revocar. Cuando se revoca el ID, todas las claves asociadas se eliminarán. | int64 |
+{.wide .expand}
 
 ##### message `LeaseRevokeResponse` (api/etcdserverpb/rpc.proto) {#message-leaserevokeresponse-apietcdserverpbrpcproto}
 
@@ -579,6 +613,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID es el ID de la concesión. | int64 |
 | keys | keys es true para consultar todas las claves asociadas a esta concesión. | bool |
+{.wide .expand}
 
 ##### message `LeaseTimeToLiveResponse` (api/etcdserverpb/rpc.proto) {#message-leasetimetoliveresponse-apietcdserverpbrpcproto}
 
@@ -590,6 +625,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | TTL | TTL es el TTL restante en segundos para la concesión; la concesión expirará en menos de TTL+1 segundos. | int64 |
 | grantedTTL | GrantedTTL es el tiempo inicial otorgado en segundos al crearse o renovarse la concesión. | int64 |
 | keys | Keys es la lista de claves asociadas a esta concesión. | (slice of) bytes |
+{.wide .expand}
 
 ##### message `Member` (api/etcdserverpb/rpc.proto) {#message-member-apietcdserverpbrpcproto}
 
@@ -601,6 +637,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | peerURLs | peerURLs es la lista de URLs que el miembro expone al clúster para la comunicación. | (slice of) string |
 | clientURLs | clientURLs es la lista de URLs que el miembro expone a los clientes para la comunicación. Si el miembro no está iniciado, clientURLs estará vacía. | (slice of) string |
 | isLearner | isLearner indica si el miembro es aprendiz de raft. | bool |
+{.wide .expand}
 
 ##### message `MemberAddRequest` (api/etcdserverpb/rpc.proto) {#message-memberaddrequest-apietcdserverpbrpcproto}
 
@@ -609,6 +646,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | (versionpb.etcd_version_msg) |  | option |
 | peerURLs | peerURLs es la lista de URLs que el miembro añadido usará para comunicarse con el clúster. | (slice of) string |
 | isLearner | isLearner indica si el miembro añadido es aprendiz de raft. | bool |
+{.wide .expand}
 
 ##### message `MemberAddResponse` (api/etcdserverpb/rpc.proto) {#message-memberaddresponse-apietcdserverpbrpcproto}
 
@@ -618,6 +656,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | header |  | ResponseHeader |
 | member | member es la información del miembro del miembro añadido. | Member |
 | members | members es una lista de todos los miembros tras añadir el miembro nuevo. | (slice of) Member |
+{.wide .expand}
 
 ##### message `MemberListRequest` (api/etcdserverpb/rpc.proto) {#message-memberlistrequest-apietcdserverpbrpcproto}
 
@@ -633,6 +672,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | members es una lista de todos los miembros asociados al clúster. | (slice of) Member |
+{.wide .expand}
 
 ##### message `MemberPromoteRequest` (api/etcdserverpb/rpc.proto) {#message-memberpromoterequest-apietcdserverpbrpcproto}
 
@@ -640,6 +680,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID es el ID de miembro del miembro que se va a ascender. | uint64 |
+{.wide .expand}
 
 ##### message `MemberPromoteResponse` (api/etcdserverpb/rpc.proto) {#message-memberpromoteresponse-apietcdserverpbrpcproto}
 
@@ -648,6 +689,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | members es una lista de todos los miembros tras ascender al miembro. | (slice of) Member |
+{.wide .expand}
 
 ##### message `MemberRemoveRequest` (api/etcdserverpb/rpc.proto) {#message-memberremoverequest-apietcdserverpbrpcproto}
 
@@ -655,6 +697,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID es el ID de miembro del miembro que se va a eliminar. | uint64 |
+{.wide .expand}
 
 ##### message `MemberRemoveResponse` (api/etcdserverpb/rpc.proto) {#message-memberremoveresponse-apietcdserverpbrpcproto}
 
@@ -663,6 +706,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | members es una lista de todos los miembros tras eliminar al miembro. | (slice of) Member |
+{.wide .expand}
 
 ##### message `MemberUpdateRequest` (api/etcdserverpb/rpc.proto) {#message-memberupdaterequest-apietcdserverpbrpcproto}
 
@@ -671,6 +715,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | (versionpb.etcd_version_msg) |  | option |
 | ID | ID es el ID de miembro del miembro que se va a actualizar. | uint64 |
 | peerURLs | peerURLs es la lista nueva de URLs que el miembro usará para comunicarse con el clúster. | (slice of) string |
+{.wide .expand}
 
 ##### message `MemberUpdateResponse` (api/etcdserverpb/rpc.proto) {#message-memberupdateresponse-apietcdserverpbrpcproto}
 
@@ -679,6 +724,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | members | members es una lista de todos los miembros tras actualizar al miembro. | (slice of) Member |
+{.wide .expand}
 
 ##### message `MoveLeaderRequest` (api/etcdserverpb/rpc.proto) {#message-moveleaderrequest-apietcdserverpbrpcproto}
 
@@ -686,6 +732,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | targetID | targetID es el ID de nodo del nuevo líder. | uint64 |
+{.wide .expand}
 
 ##### message `MoveLeaderResponse` (api/etcdserverpb/rpc.proto) {#message-moveleaderresponse-apietcdserverpbrpcproto}
 
@@ -705,6 +752,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | prev_kv | Si prev_kv está establecido, etcd obtiene el par clave-valor anterior antes de cambiarlo. El par clave-valor anterior se devolverá en la respuesta de put. | bool |
 | ignore_value | Si ignore_value está establecido, etcd actualiza la clave usando su valor actual. Devuelve un error si la clave no existe. | bool |
 | ignore_lease | Si ignore_lease está establecido, etcd actualiza la clave usando su concesión actual. Devuelve un error si la clave no existe. | bool |
+{.wide .expand}
 
 ##### message `PutResponse` (api/etcdserverpb/rpc.proto) {#message-putresponse-apietcdserverpbrpcproto}
 
@@ -713,6 +761,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | (versionpb.etcd_version_msg) |  | option |
 | header |  | ResponseHeader |
 | prev_kv | si prev_kv está establecido en la solicitud, se devolverá el par clave-valor anterior. | mvccpb.KeyValue |
+{.wide .expand}
 
 ##### message `RangeRequest` (api/etcdserverpb/rpc.proto) {#message-rangerequest-apietcdserverpbrpcproto}
 
@@ -732,6 +781,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | max_mod_revision | max_mod_revision es el límite superior para las revisiones de modificación de las claves devueltas; todas las claves con revisiones de modificación mayores se excluirán. | int64 |
 | min_create_revision | min_create_revision es el límite inferior para las revisiones de creación de las claves devueltas; todas las claves con revisiones de creación menores se excluirán. | int64 |
 | max_create_revision | max_create_revision es el límite superior para las revisiones de creación de las claves devueltas; todas las claves con revisiones de creación mayores se excluirán. | int64 |
+{.wide .expand}
 
 ##### message `RangeResponse` (api/etcdserverpb/rpc.proto) {#message-rangeresponse-apietcdserverpbrpcproto}
 
@@ -742,6 +792,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | kvs | kvs es la lista de pares clave-valor que coinciden con la solicitud de rango. kvs está vacía cuando se solicita el recuento. | (slice of) mvccpb.KeyValue |
 | more | more indica si hay más claves que devolver en el rango solicitado. | bool |
 | count | count se establece con el número real de claves dentro del rango cuando se solicita. A diferencia de Kvs, no se ve afectado por límites ni filtros (p. ej., Min/Max, Create/Modify, Revisions) y refleja el recuento completo dentro del rango especificado. | int64 |
+{.wide .expand}
 
 ##### message `RequestOp` (api/etcdserverpb/rpc.proto) {#message-requestop-apietcdserverpbrpcproto}
 
@@ -753,6 +804,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | request_put |  | PutRequest |
 | request_delete_range |  | DeleteRangeRequest |
 | request_txn |  | TxnRequest |
+{.wide .expand}
 
 ##### message `ResponseHeader` (api/etcdserverpb/rpc.proto) {#message-responseheader-apietcdserverpbrpcproto}
 
@@ -763,6 +815,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | member_id | member_id es el ID del miembro que envió la respuesta. | uint64 |
 | revision | revision es la revisión del almacén clave-valor cuando se aplicó la solicitud, y no está establecida (por lo tanto, 0) en el caso de llamadas que no interactúan con el almacén clave-valor. Para las respuestas de progreso de watch, header.revision indica el progreso. Se garantiza que todos los eventos futuros recibidos en este flujo tengan un número de revisión mayor que el número de header.revision. | int64 |
 | raft_term | raft_term es el término de raft cuando se aplicó la solicitud. | uint64 |
+{.wide .expand}
 
 ##### message `ResponseOp` (api/etcdserverpb/rpc.proto) {#message-responseop-apietcdserverpbrpcproto}
 
@@ -774,6 +827,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | response_put |  | PutResponse |
 | response_delete_range |  | DeleteRangeResponse |
 | response_txn |  | TxnResponse |
+{.wide .expand}
 
 ##### message `SnapshotRequest` (api/etcdserverpb/rpc.proto) {#message-snapshotrequest-apietcdserverpbrpcproto}
 
@@ -790,6 +844,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | remaining_bytes | remaining_bytes es el número de bytes del blob que se enviarán después de este mensaje | uint64 |
 | blob | blob contiene el siguiente fragmento de la instantánea en el flujo de la instantánea. | bytes |
 | version | Versión del esquema de almacenamiento registrada en la instantánea. Se lee del backend local del miembro y puede diferir de su versión binaria. Indica qué versión de almacenamiento de etcd debe admitirse al restaurar la instantánea. | string |
+{.wide .expand}
 
 ##### message `StatusRequest` (api/etcdserverpb/rpc.proto) {#message-statusrequest-apietcdserverpbrpcproto}
 
@@ -815,6 +870,7 @@ DowngradeVersionTestRequest se usa solo para pruebas. La versión de esta solici
 | storageVersion | storageVersion es la versión del archivo de la base de datos. Podría actualizarse con retraso en relación con la versión objetivo del clúster. | string |
 | dbSizeQuota | dbSizeQuota es la cuota de almacenamiento de etcd configurada en bytes (el valor pasado a la instancia de etcd mediante la opción --quota-backend-bytes) | int64 |
 | downgradeInfo | downgradeInfo indica si hay un proceso de degradación. | DowngradeInfo |
+{.wide .expand}
 
 ##### message `TxnRequest` (api/etcdserverpb/rpc.proto) {#message-txnrequest-apietcdserverpbrpcproto}
 
@@ -826,6 +882,7 @@ Del artículo de Google sobre paxosdb: Nuestra implementación gira en torno a u
 | compare | compare es una lista de predicados que representan una conjunción de términos. Si las comparaciones tienen éxito, las solicitudes de éxito se procesarán en orden y la respuesta contendrá sus respuestas respectivas en orden. Si las comparaciones fallan, las solicitudes de fallo se procesarán en orden y la respuesta contendrá sus respuestas respectivas en orden. | (slice of) Compare |
 | success | success es una lista de solicitudes que se aplicarán cuando compare se evalúe como true. | (slice of) RequestOp |
 | failure | failure es una lista de solicitudes que se aplicarán cuando compare se evalúe como false. | (slice of) RequestOp |
+{.wide .expand}
 
 ##### message `TxnResponse` (api/etcdserverpb/rpc.proto) {#message-txnresponse-apietcdserverpbrpcproto}
 
@@ -835,6 +892,7 @@ Del artículo de Google sobre paxosdb: Nuestra implementación gira en torno a u
 | header |  | ResponseHeader |
 | succeeded | succeeded se establece en true si compare se evaluó como true, o en false en caso contrario. | bool |
 | responses | responses es una lista de respuestas correspondientes a los resultados de aplicar success si succeeded es true, o failure si succeeded es false. | (slice of) ResponseOp |
+{.wide .expand}
 
 ##### message `WatchCancelRequest` (api/etcdserverpb/rpc.proto) {#message-watchcancelrequest-apietcdserverpbrpcproto}
 
@@ -842,6 +900,7 @@ Del artículo de Google sobre paxosdb: Nuestra implementación gira en torno a u
 | ----- | ----------- | ---- |
 | (versionpb.etcd_version_msg) |  | option |
 | watch_id | watch_id es el ID del observador que se va a cancelar para que no se transmitan más eventos. | int64 |
+{.wide .expand}
 
 ##### message `WatchCreateRequest` (api/etcdserverpb/rpc.proto) {#message-watchcreaterequest-apietcdserverpbrpcproto}
 
@@ -856,6 +915,7 @@ Del artículo de Google sobre paxosdb: Nuestra implementación gira en torno a u
 | prev_kv | Si prev_kv está establecido, el observador creado obtiene el KV anterior antes de que ocurra el evento. Si el KV anterior ya está compactado, no se devolverá nada. | bool |
 | watch_id | Si se proporciona watch_id y es distinto de cero, se asignará a este observador. Como crear un observador en etcd no es una operación síncrona, esto puede usarse para asegurar que el orden sea correcto al crear varios observadores en el mismo flujo. Crear un observador con un ID ya en uso en el flujo provocará que se devuelva un error. | int64 |
 | fragment | fragment permite dividir revisiones grandes en múltiples respuestas de watch. | bool |
+{.wide .expand}
 
 ##### message `WatchProgressRequest` (api/etcdserverpb/rpc.proto) {#message-watchprogressrequest-apietcdserverpbrpcproto}
 
@@ -874,6 +934,7 @@ Solicita que el estado de progreso de un flujo de observación se envíe en el f
 | create_request |  | WatchCreateRequest |
 | cancel_request |  | WatchCancelRequest |
 | progress_request |  | WatchProgressRequest |
+{.wide .expand}
 
 ##### message `WatchResponse` (api/etcdserverpb/rpc.proto) {#message-watchresponse-apietcdserverpbrpcproto}
 
@@ -888,6 +949,7 @@ Solicita que el estado de progreso de un flujo de observación se envíe en el f
 | cancel_reason | cancel_reason indica el motivo de la cancelación del observador. | string |
 | fragment | fragment es true si una respuesta de watch grande se dividió en múltiples respuestas. | bool |
 | events |  | (slice of) mvccpb.Event |
+{.wide .expand}
 
 ##### message `Event` (api/mvccpb/kv.proto) {#message-event-apimvccpbkvproto}
 
@@ -921,12 +983,14 @@ Solicita que el estado de progreso de un flujo de observación se envíe en el f
 | Campo | Descripción | Tipo |
 | ----- | ----------- | ---- |
 | LeaseTimeToLiveRequest |  | etcdserverpb.LeaseTimeToLiveRequest |
+{.wide .expand}
 
 ##### message `LeaseInternalResponse` (server/lease/leasepb/lease.proto) {#message-leaseinternalresponse-serverleaseleasepbleaseproto}
 
 | Campo | Descripción | Tipo |
 | ----- | ----------- | ---- |
 | LeaseTimeToLiveResponse |  | etcdserverpb.LeaseTimeToLiveResponse |
+{.wide .expand}
 
 ##### message `Permission` (api/authpb/auth.proto) {#message-permission-apiauthpbauthproto}
 
