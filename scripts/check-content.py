@@ -37,6 +37,39 @@ def english_path(path: Path) -> Path:
     return path
 
 
+def heading_ids(text: str) -> list[str]:
+    """Read explicit heading IDs in order, ignoring examples and HTML comments."""
+    body = text.split("\n---\n", 1)[-1]
+    result = []
+    fence = None
+    comment = False
+    for raw in body.splitlines():
+        # Headings and fences can occur inside nested callouts.
+        line = re.sub(r"^(?:[ \t]*>[ \t]?)*", "", raw).lstrip()
+        if fence:
+            if re.fullmatch(re.escape(fence[0]) + "{" + str(fence[1]) + r",}\s*", line):
+                fence = None
+            continue
+        if comment:
+            if "-->" not in line:
+                continue
+            line = line.split("-->", 1)[1].lstrip()
+            comment = False
+        while "<!--" in line:
+            before, after = line.split("<!--", 1)
+            if "-->" not in after:
+                line, comment = before, True
+                break
+            line = before + after.split("-->", 1)[1]
+        opening = re.match(r"(`{3,}|~{3,})", line)
+        if opening:
+            fence = (opening[1][0], len(opening[1]))
+            continue
+        if re.match(r"#{1,6}\s", line):
+            result.extend(re.findall(r"\{#([^\s}]+)(?:\s[^}]*)?\}", line))
+    return result
+
+
 def main() -> int:
     errors = []
     pages = {path: path.read_text(encoding="utf-8") for path in CONTENT.rglob("*.md")}
@@ -79,6 +112,9 @@ def main() -> int:
                 errors.append(f"English source marked as a placeholder: {path.relative_to(PROJECT)}")
             elif f'<a href="{english_route(source)}" hreflang="en" lang="en">' not in text:
                 errors.append(f"Placeholder does not link its English page: {path.relative_to(PROJECT)}")
+        elif relative[0] == "cloudberry" and path.name.endswith(".zh.md") and source in pages:
+            if heading_ids(text) != heading_ids(pages[source]):
+                errors.append(f"Cloudberry heading IDs differ from English (including order): {path.relative_to(PROJECT)}")
 
     for source in sources:
         expected = languages_for(source)

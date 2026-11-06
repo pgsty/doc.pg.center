@@ -46,6 +46,20 @@ class Head(HTMLParser):
             self.redirect = (values.get("content") or "").partition("url=")[2]
 
 
+class LanguageSwitches(HTMLParser):
+    """Collect the direct language-cycle links from a rendered page."""
+
+    def __init__(self, html: str) -> None:
+        super().__init__()
+        self.routes: set[str] = set()
+        self.feed(html)
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        values = dict(attrs)
+        if tag == "a" and "td-language-selector__trigger" in (values.get("class") or "").split():
+            self.routes.add(urlsplit(values.get("href") or "").path)
+
+
 def navigation_routes(node: dict) -> set[str]:
     routes = {urlsplit(node["url"]).path}
     for child in node.get("children", []):
@@ -97,6 +111,9 @@ def main() -> None:
         component_locales = COMPONENT_LANGUAGES.get(relative.parts[0], LOCALES)
         alternates = {("" if lang == "en" else f"/{lang}") + logical for lang in component_locales}
         assert metadata.alternates == alternates, f"Incorrect language alternates: {canonical}"
+        if relative.parts[0] == "cloudberry":
+            switches = LanguageSwitches((root / canonical.strip("/") / "index.html").read_text())
+            assert switches.routes == alternates - {canonical}, f"Language switch leaves Cloudberry peer page: {canonical} -> {switches.routes}"
         assert (root / canonical.strip("/") / "index.md").is_file(), canonical
         assert f"](https://doc.pg.center{canonical}index.md)" in llms[language], f"Missing llms.txt entry: {canonical}"
         expected[language].add(canonical)
