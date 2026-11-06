@@ -16,4 +16,4 @@ upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23
 |------|----|----------|-----------|
 |`resgroupid`|oid|`pg_resgroup.oid`|关联资源组的对象 ID。|
 |`reslimittype`|smallint| |资源组限制类型：<br/><br/>1 — 并发数<br/><br/>2 — CPU_MAX_WEIGHT<br/><br/>3 — CPU_WEIGHT<br/><br/>4 — CPUSET<br/><br/>5 — MEMORY_QUOTA<br/><br/>6 — MIN_COST<br/><br/>7 — IO_LIMIT。|
-|`value`|opaque type| |为此记录引用的资源限制设置的具体值。此值的固定类型为 `text`，会根据所引用的限制转换为不同的数据类型。|
+|`value`|不透明类型| |为此记录引用的资源限制设置的具体值。此值的固定类型为 `text`，会根据所引用的限制转换为不同的数据类型。|
