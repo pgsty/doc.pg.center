@@ -1,9 +1,54 @@
 ---
 title: "CREATE GROUP"
+description: "定义新的数据库角色。"
 weight: 640
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sql-stmts/create-group.md"
-translation_status: "placeholder"
 ---
 
-> [!NOTE] 译文待补
-> 本页中文翻译尚未完成，请先阅读<a href="/cloudberry/reference/sql-stmts/create-group/" hreflang="en" lang="en">英文原文</a>。
+## 概要 {#synopsis}
+
+```sql
+CREATE GROUP <name> [[WITH] <option> [ ... ]]
+```
+
+其中 option 可以是：
+
+```sql
+      SUPERUSER | NOSUPERUSER
+    | CREATEDB | NOCREATEDB
+    | CREATEROLE | NOCREATEROLE
+    | CREATEEXTTABLE | NOCREATEEXTTABLE 
+      [ ( <attribute>='<value>'[, ...] ) ]
+           where <attributes> and <value> are:
+           type='readable'|'writable'
+           protocol='gpfdist'|'http'
+    | INHERIT | NOINHERIT
+    | LOGIN | NOLOGIN
+    | REPLICATION | NOREPLICATION
+    | BYPASSRLS | NOBYPASSRLS
+    | CONNECTION LIMIT <connlimit>
+    | [ ENCRYPTED | UNENCRYPTED ] PASSWORD '<password>' | PASSWORD NULL
+    | VALID UNTIL '<timestamp>' 
+    | IN ROLE <role_name> [, ...]
+    | IN GROUP <role_name> [, ...]
+    | ROLE <role_name> [, ...]
+    | ADMIN <role_name> [, ...]
+    | USER <role_name> [, ...]
+    | SYSID <uid> [, ...]
+    | RESOURCE QUEUE <queue_name>
+    | RESOURCE GROUP <group_name>
+    | [ DENY <deny_point> ]
+    | [ DENY BETWEEN <deny_point> AND <deny_point>]
+```
+
+## 描述 {#description}
+
+`CREATE GROUP` 是 [CREATE ROLE](/cloudberry/reference/sql-stmts/create-role/) 的别名。
+
+## 兼容性 {#compatibility}
+
+SQL 标准中没有 `CREATE GROUP` 语句。
+
+## 另见 {#see-also}
+
+[CREATE ROLE](/cloudberry/reference/sql-stmts/create-role/)
