@@ -23,7 +23,12 @@ import sys
 
 project, public = map(Path, sys.argv[1:])
 languages = ("en", "zh", "fr", "ja", "de", "ru", "ar", "es")
-components = ("patroni", "pgbackrest", "pgbouncer", "pgbadger", "haproxy", "etcd")
+components = ("patroni", "pgbackrest", "pgbouncer", "pgbadger", "haproxy", "etcd", "cloudberry")
+component_languages = {"cloudberry": ("en", "zh")}
+
+
+def published(language):
+    return [c for c in components if language in component_languages.get(c, languages)]
 
 class HeadAndLinks(HTMLParser):
     def __init__(self, text):
@@ -77,7 +82,7 @@ class HeadAndLinks(HTMLParser):
 for language in languages:
     prefix = "" if language == "en" else language + "/"
     parent = "https://pg.center/zh/" if language == "zh" else "https://pg.center/"
-    for route in ("", "search/", "attribution/", *(component + "/" for component in components)):
+    for route in ("", "search/", "attribution/", *(component + "/" for component in published(language))):
         page = public / prefix / route / "index.html"
         assert page.is_file() and page.stat().st_size, page
         html = page.read_text()
@@ -100,7 +105,7 @@ for language in languages:
         assert f"/{prefix}attribution/" in parsed.footer_links, page
     home = HeadAndLinks((public / prefix / "index.html").read_text())
     assert not home.fallbacks, f"Unexpected English fallback on {language} home"
-    for component in components:
+    for component in published(language):
         assert f"/{prefix}{component}/" in home.links, (language, component)
         assert f"/{prefix}{component}/" in home.footer_links, (language, component)
     assert parent in home.footer_links, f"Parent site missing from {language} footer"
@@ -133,4 +138,4 @@ python3 "$project_dir/scripts/check-docs-routes.py" "$build_dir/public"
 python3 "$project_dir/scripts/check-local-links.py" "$build_dir/public"
 node "$project_dir/scripts/check-russian-search.cjs" "$build_dir/public"
 node "$project_dir/scripts/test-pgbackrest-search.cjs" "$build_dir/public"
-printf 'Site checks passed for all eight languages.\n'
+printf 'Site checks passed for all eight languages and seven collections.\n'

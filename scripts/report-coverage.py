@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import re
 import sys
 
 
@@ -16,7 +17,16 @@ COMPONENTS = {
     "pgbadger": "pgBadger",
     "haproxy": "HAProxy",
     "etcd": "etcd",
+    "cloudberry": "Apache Cloudberry",
 }
+# Title-only pages awaiting translation do not count as translated.
+PLACEHOLDER = re.compile(r'^translation_status: "?placeholder"?$', re.M)
+
+
+def translated(path: Path) -> bool:
+    if not path.is_file():
+        return False
+    return not PLACEHOLDER.search(path.read_text(encoding="utf-8").split("\n---\n", 1)[0])
 
 
 def english_path(path: Path) -> Path:
@@ -30,7 +40,7 @@ def english_path(path: Path) -> Path:
 def counts(sources: list[Path]) -> list[int]:
     return [
         sum(
-            (source if language == "en" else source.with_suffix(f".{language}.md")).is_file()
+            translated(source if language == "en" else source.with_suffix(f".{language}.md"))
             for source in sources
         )
         for language in LANGUAGES

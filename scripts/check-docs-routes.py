@@ -12,8 +12,10 @@ from urllib.parse import unquote, urlsplit
 from xml.etree import ElementTree
 
 PROJECT = Path(__file__).resolve().parent.parent
-COMPONENTS = ("patroni", "pgbackrest", "pgbouncer", "pgbadger", "haproxy", "etcd")
+COMPONENTS = ("patroni", "pgbackrest", "pgbouncer", "pgbadger", "haproxy", "etcd", "cloudberry")
 LOCALES = ("en", "zh", "fr", "ja", "de", "ru", "ar", "es")
+# Collections published in only some languages.
+COMPONENT_LANGUAGES = {"cloudberry": ("en", "zh")}
 REMOVED_DOCS_ROUTE = re.compile(r"^/(?:(?:zh|fr|ja|de|ru|ar|es)/)?(?:_print/)?docs(?:/|$)")
 
 
@@ -92,7 +94,8 @@ def main() -> None:
         metadata = head(canonical)
         assert metadata.canonical == f"https://doc.pg.center{canonical}", canonical
         assert not metadata.redirect, canonical
-        alternates = {("" if lang == "en" else f"/{lang}") + logical for lang in LOCALES}
+        component_locales = COMPONENT_LANGUAGES.get(relative.parts[0], LOCALES)
+        alternates = {("" if lang == "en" else f"/{lang}") + logical for lang in component_locales}
         assert metadata.alternates == alternates, f"Incorrect language alternates: {canonical}"
         assert (root / canonical.strip("/") / "index.md").is_file(), canonical
         assert f"](https://doc.pg.center{canonical}index.md)" in llms[language], f"Missing llms.txt entry: {canonical}"
@@ -136,7 +139,10 @@ def main() -> None:
             urlsplit(node["url"]).path
             for node in navigation["root"].get("children", []) if node["kind"] == "section"
         }
-        assert top_sections == {f"/{prefix}{component}/" for component in COMPONENTS}, top_sections
+        assert top_sections == {
+            f"/{prefix}{component}/" for component in COMPONENTS
+            if language in COMPONENT_LANGUAGES.get(component, LOCALES)
+        }, top_sections
         indexes = list(root.glob(f"offline-search-index.{language}.*.json"))
         assert len(indexes) == 1, f"Expected one {language} search index"
         search_routes = {doc["ref"] for doc in json.loads(indexes[0].read_text())}
