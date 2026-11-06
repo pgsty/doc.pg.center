@@ -74,9 +74,9 @@ To ensure data security and service continuity, Apache Cloudberry adopts a multi
 > [!DETAILS] Click to view details
 > - **Checksum of data page**: In the underlying storage, Apache Cloudberry uses the checksum mechanism to detect bad blocks to ensure data integrity.
 >
-> - **Mirror node configuration**: By configuring mirror nodes among segments (or data nodes), Apache Cloudberry can achieve high availability and failover of services. Once an unrecoverable failure of the coordinator node is detected, the system will automatically switch to the backup segment to ensure that user queries will not be affected.
+> - **Mirror node configuration**: By configuring mirror nodes among segments (or data nodes), Apache Cloudberry can achieve high availability and failover of services. Once a primary segment failure is detected, the system automatically promotes the corresponding mirror segment to primary. Transactions in progress at the time of failure roll back and need to be retried.
 >
-> - **Backup of control nodes**: Similar to segments, coordinator nodes (or control nodes) can also be configured as backup nodes or standby nodes in case the coordinator node fails. Once the coordinator node fails, the system will automatically switch to the standby node to ensure the continuity of services.
+> - **Backup of control nodes**: Similar to segments, coordinator nodes (or control nodes) can also be configured as backup nodes or standby nodes in case the coordinator node fails. If the primary coordinator fails, an administrator must activate the standby coordinator with `gpactivatestandby`; this switch is not automatic.
 
 ## Rich data analysis support {#rich-data-analysis-support}
 

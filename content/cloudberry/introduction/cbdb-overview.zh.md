@@ -74,9 +74,9 @@ Apache Cloudberry 提供一系列高效、灵活的数据加载方案，满足�
 > [!DETAILS] 点击查看详情
 > - **数据页校验和**：在底层存储中，Apache Cloudberry 使用校验和机制检测坏块，确保数据完整性。
 >
-> - **镜像节点配置**：通过在 Segment（或数据节点）之间配置镜像节点，Apache Cloudberry 可以实现服务高可用和故障切换。一旦检测到 Coordinator 节点发生不可恢复的故障，系统会自动切换到备用 Segment，确保用户查询不受影响。
+> - **镜像节点配置**：通过在 Segment（或数据节点）之间配置镜像节点，Apache Cloudberry 可以实现服务高可用和故障切换。一旦检测到主 Segment 故障，系统会自动将对应的镜像 Segment 提升为主 Segment。故障发生时正在执行的事务会回滚，需要重试。
 >
-> - **控制节点备份**：与 Segment 类似，Coordinator 节点（或控制节点）也可以配置备份节点或 Standby Coordinator，以应对 Coordinator 节点故障。一旦 Coordinator 节点故障，系统就会自动切换到 Standby Coordinator，确保服务连续性。
+> - **控制节点备份**：与 Segment 类似，Coordinator 节点（或控制节点）也可以配置备份节点或 Standby Coordinator，以应对 Coordinator 节点故障。如果主 Coordinator 发生故障，管理员必须使用 `gpactivatestandby` 激活 Standby Coordinator；该切换不会自动发生。
 
 ## 丰富的数据分析支持 {#rich-data-analysis-support}
 
