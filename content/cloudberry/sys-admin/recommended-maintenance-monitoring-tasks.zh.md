@@ -22,8 +22,8 @@ upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23
   <tbody>
     <tr>
       <td>
-        列出当前处于 down 状态的 Segment。如果返回任何行，应生成警告或告警。
-        should generate a warning or alert.
+        列出当前处于 down 状态的 Segment。如果返回任何行，
+        应生成警告或告警。
         <p>建议频率：每 5 到 10 分钟运行一次</p>
         <p>严重性：重要</p>
       </td>
@@ -36,26 +36,26 @@ WHERE status = 'd';
     </code></pre>
 </td>
       <td>
-        如果查询返回任何行，请执行以下步骤纠正问题：
-        problem:
+        如果查询返回任何行，请执行以下步骤
+        纠正问题：
         <ol>
           <li>验证 down Segment 所在的主机是否有响应。</li>
           <li>
-            如果主机正常，请检查 down Segment 的主实例和镜像实例的日志文件，以查明 Segment 停止运行的根本原因。
-            of the down segments to discover the root cause of the segments
-            going down.
+            如果主机正常，请检查已停止运行的 Segment 的主实例和镜像实例
+            的日志文件，查明这些 Segment
+            停止运行的根本原因。
           </li>
           <li>
-            如果没有发现意外错误，请运行 <code>gprecoverseg</code> 工具，使 Segment 恢复在线。
-            <code>gprecoverseg</code> utility to bring the segments back online.
+            如果没有发现意外错误，请运行
+            <code>gprecoverseg</code> 工具，使 Segment 恢复在线。
           </li>
         </ol>
       </td>
     </tr>
     <tr>
       <td>
-        检查处于 up 状态但未同步的 Segment。如果返回行，应生成警告或告警。
-        this should generate a warning or alert.
+        检查处于 up 状态但未同步的 Segment。如果返回任何行，
+        应生成警告或告警。
         <p>建议频率：每 5 到 10 分钟运行一次</p>
       </td>
       <td>
@@ -69,18 +69,18 @@ WHERE mode = 'n' and status <br />
         </div>
       </td>
       <td>
-        如果查询返回行，Segment 可能正在从 <code>Not In Sync</code> 模式切换到 <code>Synchronized</code> 模式。使用 <code>gpstate -e</code> 跟踪进度。
-        moving from <code>Not In Sync</code> to
-        <code>Synchronized</code> mode. Use <code>gpstate -e</code> to track
-        progress.
+        如果查询返回行，则 Segment 可能正在
+        从 <code>Not In Sync</code> 模式转为
+        <code>Synchronized</code> 模式。使用 <code>gpstate -e</code> 跟踪
+        进度。
       </td>
     </tr>
     <tr>
       <td>
-        检查未以首选角色运行、但标记为 up 且处于 <code>Synchronized</code> 状态的 Segment。如果发现此类 Segment，集群可能不平衡。如果返回任何行，应生成警告或告警。
-        are marked as up and <code>Synchronized</code>. If any segments are
-        found, the cluster might not be balanced. If any rows are returned this
-        should generate a warning or alert.
+        检查未以首选角色运行，但标记为 up
+        且处于 <code>Synchronized</code> 状态的 Segment。如果发现此类 Segment，
+        集群可能不平衡。如果返回任何行，
+        应生成警告或告警。
         <p>建议频率：每 5 到 10 分钟运行一次</p>
         <p>严重性：重要</p>
       </td>
@@ -95,17 +95,17 @@ SELECT * FROM gp_segment_configuration<br />WHERE preferred_role &lt;&gt; <br />
         </div>
       </td>
       <td>
-          当 Segment 未以其首选角色运行时，处理负载可能发生倾斜。运行 <code>gprecoverseg -r</code>，使 Segment 恢复其首选角色。
-          When the segments are not running in their preferred role, processing
-          might be skewed. Run <code>gprecoverseg -r</code> to bring the
-          segments back into their preferred roles.
+        <p>
+          当 Segment 未以其首选角色运行时，处理负载
+          可能发生倾斜。运行 <code>gprecoverseg -r</code>，
+          使 Segment 恢复其首选角色。
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        运行分布式查询，测试查询是否在所有 Segment 上运行。每个主 Segment 应返回一行。
-        should be returned for each primary segment.
+        运行分布式查询，测试查询是否在所有 Segment 上运行。
+        每个主 Segment 应返回一行。
         <p>建议频率：每 5 到 10 分钟运行一次</p>
         <p>严重性：严重</p>
       </td>
@@ -122,24 +122,24 @@ GROUP BY 1;
         </div>
       </td>
       <td>
-          如果此查询失败，说明集群中某些 Segment 存在派发问题。这种情况很少见。检查无法派发到的主机，确保不存在硬件或网络问题。
-          If this query fails, there is an issue dispatching to some segments in
-          the cluster. This is a rare event. Check the hosts that are not able
-          to be dispatched to ensure there is no hardware or networking issue.
+        <p>
+          如果此查询失败，说明向集群中某些 Segment 派发查询时
+          出现了问题。这种情况很少见。检查无法派发到的主机，
+          确保不存在硬件或网络问题。
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        测试 Apache Cloudberry 上的 Coordinator 镜像状态。如果值不是 "STREAMING"，则会产生告警或警告。
-        value is not "STREAMING", an alert or warning will be raised.
+        测试 Apache Cloudberry 上的 Coordinator 镜像状态。如果
+        值不是 "STREAMING"，则会产生告警或警告。
         <p>建议频率：每 5 到 10 分钟运行一次</p>
         <p>严重性：重要</p>
       </td>
       <td>
         <div>
-          运行以下 <code>psql</code> 命令：
-          command:
+          运行以下 <code>psql</code>
+          命令：
           <pre>
             <code>
 psql &lt;dbname&gt; -c<br />
@@ -150,9 +150,9 @@ psql &lt;dbname&gt; -c<br />
       </td>
       <td>
         <p>
-          检查 Coordinator 和 Standby Coordinator 的日志文件是否有错误。如果没有意外错误且机器正常运行，请运行 <code>gpinitstandby</code> 工具使 Standby Coordinator 上线。
-          errors. If there are no unexpected errors and the machines are up, run
-          the <code>gpinitstandby</code> utility to bring the standby online.
+          检查 Coordinator 和 Standby Coordinator 的日志文件
+          是否有错误。如果没有意外错误且机器正常运行，请运行
+          <code>gpinitstandby</code> 工具，使 Standby Coordinator 上线。
         </p>
       </td>
     </tr>
@@ -173,10 +173,10 @@ psql &lt;dbname&gt; -c<br />
       </td>
       <td>
         <p>
-          如果此查询失败，活动 Coordinator 可能已停止运行。如果原 Coordinator 服务器已启动并运行，请尝试在其上启动数据库。如果失败，请尝试激活 Standby Coordinator，使其作为 Coordinator 运行。
-          the database on the original coordinator if the server is up and
-          running. If that fails, try to activate the standby coordinator as
-          coordinator.
+          如果此查询失败，活动 Coordinator 可能已停止运行。如果原 Coordinator
+          所在的服务器已启动并运行，请尝试在其上启动数据库。
+          如果失败，请尝试激活 Standby Coordinator，
+          使其作为 Coordinator 运行。
         </p>
       </td>
     </tr>
@@ -196,8 +196,8 @@ psql &lt;dbname&gt; -c<br />
   <tbody>
     <tr>
       <td>
-        检查 Apache Cloudberry 数据存储和操作系统使用的卷的磁盘空间。
-        storage and the OS.
+        检查 Apache Cloudberry 数据存储和操作系统
+        使用的卷的磁盘空间使用情况。
         <p>建议频率：每 5 到 30 分钟</p>
         <p>严重性：严重</p>
       </td>
@@ -205,19 +205,19 @@ psql &lt;dbname&gt; -c<br />
         <div>
           <ul>
             <li>
-              设置阈值，当磁盘达到容量的某个百分比时生成告警。建议阈值为使用率 75%。
-              of capacity. The recommended threshold is 75% full.
+              设置阈值，当磁盘使用量达到容量的某个百分比时生成告警。
+              建议阈值为容量的 75%。
             </li>
             <li>
-              不建议在容量接近 100% 时运行系统。
-              approaching 100%.
+              不建议在磁盘使用量
+              接近容量的 100% 时运行系统。
             </li>
           </ul>
         </div>
       </td>
       <td>
-        对用户表使用 <code>VACUUM</code>/<code>VACUUM FULL</code>，回收死行占用的空间。
-        reclaim space occupied by dead rows.
+        对用户表使用 <code>VACUUM</code>/<code>VACUUM FULL</code>，
+        回收死行占用的空间。
       </td>
     </tr>
     <tr>
@@ -242,8 +242,8 @@ psql &lt;dbname&gt; -c<br />
         <ul>
           <li>尽快更换故障磁盘。</li>
           <li>
-            与系统管理团队协作，尽快解决其他 RAID 或控制器错误。
-            controller errors as soon as possible.
+            与系统管理团队协作，尽快解决其他 RAID
+            或控制器错误。
           </li>
         </ul>
       </td>
@@ -252,29 +252,29 @@ psql &lt;dbname&gt; -c<br />
       <td>
         检查 I/O 带宽是否充足以及是否存在 I/O 倾斜。
         <p>
-          建议频率：创建集群时，或怀疑存在硬件问题时。
-          are suspected.
+          建议频率：创建集群时，或怀疑
+          存在硬件问题时。
         </p>
       </td>
       <td>
-        运行 Apache Cloudberry <code>gpcheckperf</code> 工具。
-        <code>gpcheckperf</code> utility.
+        运行 Apache Cloudberry
+        <code>gpcheckperf</code> 工具。
       </td>
       <td>
         <div>
-          如果数据传输速率与以下数值相差较大，集群的规格可能不足：
-          similar to the following:
+          如果数据传输速率与以下数值相差较大，
+          集群的硬件配置可能不足：
           <ul>
             <li>磁盘读取每秒 2 GB</li>
             <li>磁盘写入每秒 1 GB</li>
             <li>网络读写每秒 10 Gigabit</li>
           </ul>
-          如果传输速率低于预期，请与数据架构师讨论性能预期。
-          architect regarding performance expectations.
+          如果传输速率低于预期，请与数据架构师
+          讨论性能预期。
         </div>
         <p>
-          如果集群中的机器性能表现不均匀，请与系统管理团队协作修复故障机器。
-          work with the system administration team to fix faulty machines.
+          如果集群中各台机器的性能表现不均衡，
+          请与系统管理团队协作修复故障机器。
         </p>
       </td>
     </tr>
@@ -294,8 +294,8 @@ psql &lt;dbname&gt; -c<br />
   <tbody>
     <tr>
       <td>
-        在每个数据库中运行目录一致性检查，确保集群中每台主机上的目录一致且状态良好。
-        each host in the cluster is consistent and in a good state.
+        在每个数据库中运行目录一致性检查，确保集群中
+        每台主机上的目录一致且状态良好。
         <p>可以在数据库运行期间执行此命令。</p>
         <p>建议频率：每周</p>
         <p>严重性：重要</p>
@@ -304,15 +304,15 @@ psql &lt;dbname&gt; -c<br />
         在每个数据库中运行 Apache Cloudberry <code>gpcheckcat</code> 工具：
         <pre><code>gpcheckcat -O -p [target_port]</code></pre>
         <div>
-          注意：使用 <code>-O</code> 选项时，<code>gpcheckcat</code> 只运行通常 15 项测试中的 10 项。
-          <code>-O</code> option, <code>gpcheckcat</code> runs just 10 of its usual 15 tests.
+          注意：使用
+          <code>-O</code> 选项时，<code>gpcheckcat</code> 只运行通常 15 项测试中的 10 项。
         </div>
       </td>
       <td>针对发现的问题运行修复脚本。</td>
     </tr>
     <tr>
       <td>
-        检查没有对应 <code>pg_attribute</code> 条目的 <code>pg_class</code> 条目。
+        检查 <code>pg_class</code> 中是否有条目缺少对应的 <code>pg_attribute</code> 条目。
         <p>建议频率：每月</p>
         <p>严重性：重要</p>
       </td>
@@ -384,8 +384,8 @@ psql &lt;dbname&gt; -c<br />
     </tr>
     <tr>
       <td>
-        检查数据文件中存在膨胀（死空间）、且普通 <code>VACUUM</code> 命令无法回收的表。
-        be recovered by a regular <code>VACUUM</code> command.
+        检查数据文件中存在膨胀（死空间）、
+        且普通 <code>VACUUM</code> 命令无法回收这些空间的表。
         <p>建议频率：每周或每月</p>
         <p>严重性：警告</p>
       </td>
@@ -394,10 +394,10 @@ psql &lt;dbname&gt; -c<br />
         <pre><code>SELECT * FROM gp_toolkit.gp_bloat_diag;</code></pre>
       </td>
       <td>
-        <code>VACUUM FULL</code> 会对表加 <code>ACCESS EXCLUSIVE</code> 锁。请在用户和应用不需要访问这些表的时段运行 <code>VACUUM FULL</code>，例如运行负载较低时或维护窗口期间。
-        on tables. Run <code>VACUUM FULL</code> during a time when users and
-        applications do not require access to the tables, such as during a time
-        of low operation, or during a maintenance window.
+        <code>VACUUM FULL</code> 会对表加 <code>ACCESS EXCLUSIVE</code> 锁。
+        请在用户和应用不需要访问这些表的时段运行 <code>VACUUM FULL</code>，
+        例如运行负载较低时，
+        或维护窗口期间。
       </td>
     </tr>
   </tbody>
@@ -416,15 +416,15 @@ psql &lt;dbname&gt; -c<br />
   <tbody>
     <tr>
       <td>
-        回收堆表中已删除行占用的空间，使该空间可以重新使用。<p>建议频率：每天</p>
-        space they occupy can be reused.<p>Recommended frequency: daily</p>
+        回收堆表中已删除行占用的空间，
+        使这些空间可以重新使用。<p>建议频率：每天</p>
         <p>严重性：严重</p>
       </td>
       <td>
-        Vacuum 用户表：
+        清理用户表：
         <pre><code>VACUUM &lt;table&gt;;</code></pre>
       </td>
-      <td>定期 Vacuum 已更新的表，防止膨胀。</td>
+      <td>定期清理已更新的表，防止膨胀。</td>
     </tr>
     <tr>
       <td>
@@ -435,13 +435,13 @@ psql &lt;dbname&gt; -c<br />
         <p>严重性：严重</p>
       </td>
       <td>
-        分析用户表。可以使用 <code>analyzedb</code> 管理工具：
-        <code>analyzedb</code> management utility:
+        分析用户表。可以使用
+        <code>analyzedb</code> 管理工具：
         <pre><code>analyzedb -d &lt;database&gt; -a</code></pre>
       </td>
       <td>
-        定期分析已更新的表，使优化器能够生成高效的查询执行计划。
-        efficient query execution plans.
+        定期分析已更新的表，使优化器能够生成
+        高效的查询执行计划。
       </td>
     </tr>
     <tr>
@@ -451,22 +451,22 @@ psql &lt;dbname&gt; -c<br />
         <p>严重性：严重</p>
       </td>
       <td>
-        运行 <code>gpbackup</code> 工具，并行创建 Coordinator 和 Segment 数据库的备份。
-        parallel.
+        运行 <code>gpbackup</code> 工具，并行创建 Coordinator
+        和 Segment 数据库的备份。
       </td>
       <td>
-        最佳实践是准备当前备份，以便在必须恢复数据库时使用。
-        must be restored.
+        最佳实践是随时备有最新的备份，
+        以备必须恢复数据库时使用。
       </td>
     </tr>
     <tr>
       <td>
-        Vacuum、重建索引并分析系统目录，以维护高效的目录。
-        catalog.
+        清理系统目录、重建其索引并分析系统目录，
+        使其保持高效。
         <p>
-          建议频率：每周；如果数据库对象频繁创建和删除，则更频繁
-          created and dropped frequently
-        <p>严重性：重要</p>
+          建议频率：每周；如果数据库对象
+          频繁创建和删除，则应更频繁地执行
+        </p>
       </td>
       <td>
         <ol>
@@ -474,9 +474,9 @@ psql &lt;dbname&gt; -c<br />
             对每个数据库中的系统表执行 <code>VACUUM</code>。
           </li>
           <li>
-            在每个数据库中运行 <code>REINDEX SYSTEM</code>，或使用带 <code>-s</code> 选项的 <code>reindexdb</code> 命令行工具：
+            在每个数据库中运行 <code>REINDEX SYSTEM</code>，或使用
             <code>reindexdb</code>
-            command-line utility with the <code>-s</code> option:
+            命令行工具并指定 <code>-s</code> 选项：
             <pre><code>reindexdb -s &lt;database&gt;</code></pre>
           </li>
           <li>
@@ -486,10 +486,10 @@ psql &lt;dbname&gt; -c<br />
         </ol>
       </td>
       <td>
-        优化器从系统表中获取信息以创建查询计划。如果系统表和索引随着时间推移发生膨胀，扫描系统表会增加查询执行时间。重建索引后运行 <code>ANALYZE</code> 很重要，因为 <code>REINDEX</code> 会使索引没有统计信息。
-        query plans. If system tables and indexes are allowed to become bloated
-        over time, scanning the system tables increases query execution time. It
-        is important to run <code>ANALYZE</code> after reindexing, because <code>REINDEX</code> leaves indexes with no statistics.
+        优化器从系统表中获取信息以创建
+        查询计划。如果放任系统表和索引随时间推移而膨胀，
+        扫描系统表就会增加查询执行时间。
+        重建索引后务必运行 <code>ANALYZE</code>，因为 <code>REINDEX</code> 会使索引没有统计信息。
       </td>
     </tr>
   </tbody>

@@ -13,7 +13,7 @@ Apache Cloudberry 使用的 MVCC 事务并发模型意味着，已删除或更�
 
 对追加优化表执行 vacuum 的过程与堆表不同。在每个 Segment 上创建一个新的 Segment 文件，并将可见行从当前 Segment 复制到其中。Segment 文件复制完成后，原文件会被安排删除，新 Segment 文件变为可用。这要求有足够的可用磁盘空间，在原 Segment 文件删除之前保存可见行的副本。
 
-如果某个 Segment 文件中隐藏行与总行数的比率低于阈值（默认值为 10），则不会压缩该 Segment 文件。可以使用服务器配置参数 `gp_appendonly_compaction_threshold` 配置阈值。`VACUUM FULL` 会忽略 `gp_appendonly_compaction_threshold` 的值，无论比率如何都会重写 Segment 文件。
+如果某个 Segment 文件中隐藏行与总行数的比率低于阈值（默认值为 10），则不会压实该 Segment 文件。可以使用服务器配置参数 `gp_appendonly_compaction_threshold` 配置阈值。`VACUUM FULL` 会忽略 `gp_appendonly_compaction_threshold` 的值，无论比率如何都会重写 Segment 文件。
 
 可以使用 *gp_toolkit* 模式中的 `__gp_aovisimap_compaction_info()` 函数，调查对追加优化表执行 VACUUM 操作的效果。
 
