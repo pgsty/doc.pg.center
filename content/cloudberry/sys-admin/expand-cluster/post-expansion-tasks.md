@@ -27,7 +27,7 @@ You can safely remove the expansion schema after the expansion operation is comp
 ## Set up PXF on the new host {#set-up-pxf-on-the-new-host}
 
 > [!TIP]
-> You can visit [PXF](https://cloudberry.apache.org/pxf) guides for more details.
+> You can visit [PXF](/cloudberry/pxf/) guides for more details.
 
 If you are using PXF in your Apache Cloudberry cluster, you must perform some configuration steps on the new hosts.
 

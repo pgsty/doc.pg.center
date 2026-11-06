@@ -22,9 +22,9 @@ cascade:
 ---
 
 Apache Cloudberry (Incubating) is an open-source massively parallel processing (MPP) database
-derived from Greenplum Database 7 and built on a PostgreSQL 14.4 kernel. A coordinator accepts
-client connections and dispatches each query; segments store the data and execute their part of
-the query in parallel.
+derived from Greenplum Database 7. Cloudberry 2.2.0-incubating uses PostgreSQL 14.10;
+versions 2.0 and 2.1 used PostgreSQL 14.4. A Coordinator accepts client connections and dispatches
+each query; Segments store the data and execute their part of the query in parallel.
 
 This collection is the upstream 2.x documentation, which covers the current
 [2.2.0-incubating](https://cloudberry.apache.org/releases/2.2.0-incubating) release. Start with the
@@ -35,5 +35,5 @@ SQL syntax, utilities, configuration parameters, and system catalogs are under
 [References](/cloudberry/reference/).
 
 The upstream site publishes two related manuals separately:
-[Platform Extension Framework (PXF)](https://cloudberry.apache.org/pxf/) and
-[Apache Cloudberry Core Internals](https://cloudberry.apache.org/core-internals/).
+[Platform Extension Framework (PXF)](/cloudberry/pxf/) and
+[Apache Cloudberry Core Internals](/cloudberry/core-internals/).

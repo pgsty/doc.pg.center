@@ -19,11 +19,18 @@ adaptations use CC BY 4.0, subject to the original upstream terms identified bel
 | HAProxy | 3.4.7-57, commit `0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3` | Copyright 2000-2026 Willy Tarreau; GPL-2.0-only |
 | etcd | v3.7 docs, website commit `d20f8ae346da60ab6eb6f24f200753b328aa9fcc`; updated for release v3.7.3 | Copyright 2013-present etcd Authors; CC BY 4.0 for prose, Apache 2.0 for code and samples |
 | Apache Cloudberry | 2.x docs (`versioned_docs/version-2.x`), website commit `d4e372af8170f7e23d501b70deb3938efa1c978b`; release 2.2.0-incubating | Copyright 2024-2025 The Apache Software Foundation; Apache-2.0 |
+| Apache Cloudberry PXF | `docs/`, commit `dff2632d2a364f466b83682439c3ae97e655c1b7`; release 2.2.0-incubating | Copyright 2024-2026 The Apache Software Foundation; Apache-2.0 |
+| Apache Cloudberry Core Internals | `doc/core-internals/`, main commit `c2baef068a6f9f8b3c8110f9fdf5758306207693`; 3.0.0-devel / PostgreSQL 16.9 | Copyright 2024-2026 The Apache Software Foundation; Apache-2.0 and PostgreSQL License for cited PostgreSQL material |
 
 The etcd installation, Docker, and Kubernetes examples and release summary were
 updated on 2026-10-28 for tag `v3.7.3`, release commit
 `0a173d0410a96d01091b484daae81365bbcde57e`, including its Go 1.26.10 toolchain.
 The v3.7 documentation snapshot remains pinned separately from the software release.
+
+Cloudberry 2.2.0-incubating uses PostgreSQL 14.10; 2.0 and 2.1 used 14.4. The
+website documentation snapshot and software release are pinned separately in
+`data/upstreams.yaml`. Exact website LICENSE and NOTICE texts are retained in
+`static/third_party/cloudberry/`.
 
 The Apache Cloudberry collection is English only. Its Chinese pages carry translated
 titles and link to the English text until the translation is written. The upstream
@@ -31,6 +38,18 @@ titles and link to the English text until the translation is written. The upstre
 Greenplum Database, Copyright (c) 2004-2020 VMware, Inc. or its affiliates, under
 the Apache License 2.0. Apache Cloudberry is undergoing incubation at The Apache
 Software Foundation; Apache Cloudberry and Apache are trademarks of the ASF.
+
+The PXF collection follows the Cloudberry website-pinned `docs/` snapshot at
+`apache/cloudberry-pxf@dff2632d`. The published 2.2.0-incubating tag changes one
+HBase compatibility value from `2.3.7` to `2.5.x`; the snapshot is retained and
+the release is recorded separately. PXF retains Apache HAWQ and VMware
+attributions from its NOTICE and LICENSE files in `static/third_party/pxf/`.
+
+Core Internals follows Cloudberry `main` at `c2baef0`, a 3.0.0-devel / PostgreSQL
+16.9 development snapshot. Its cited PostgreSQL-derived material retains the
+PostgreSQL License and the exact PostgreSQL notice in
+`static/third_party/core-internals/LICENSE-postgresql.txt`; the ASF LICENSE and
+NOTICE are retained alongside it.
 
 The HAProxy edition follows a 3.4 maintenance-branch documentation snapshot after
 stable release 3.4.7. It includes the complete Starter, Configuration, and

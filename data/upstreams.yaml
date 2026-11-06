@@ -101,15 +101,77 @@ etcd:
   modified: true
 
 cloudberry:
-  name: Apache Cloudberry (Incubating) 2.x documentation
-  repository: https://github.com/apache/cloudberry-site
-  documentation: https://cloudberry.apache.org/docs/
-  source_commit: d4e372af8170f7e23d501b70deb3938efa1c978b
-  source_path: versioned_docs/version-2.x
-  sidebar: versioned_sidebars/version-2.x-sidebars.json
-  stable_release: 2.2.0-incubating
-  copyright: Copyright 2024-2025 The Apache Software Foundation
-  license: Apache-2.0
-  notice: /attribution/#cloudberry
-  ref: 2.x docs, commit d4e372a
+  name: "Apache Cloudberry (Incubating) 2.x documentation"
+  repository: "https://github.com/apache/cloudberry-site"
+  documentation: "https://cloudberry.apache.org/docs/"
+  source_commit: "d4e372af8170f7e23d501b70deb3938efa1c978b"
+  source_path: "versioned_docs/version-2.x"
+  source_git_tree: "a543f77f10e97214ea631808f56bc61d62c6cbe6"
+  source_manifest_sha256: "a518f653bdeb7c4115db93c81281f4bcb08fce7cfb1b5a8363f268c91d7aeac4"
+  sidebar: "versioned_sidebars/version-2.x-sidebars.json"
+  stable_release: "2.2.0-incubating"
+  release_repository: "https://github.com/apache/cloudberry"
+  release_ref: "2.2.0-incubating"
+  release_commit: "13d3c58eaa0c07afab350dcafbbae7ef610aa862"
+  release_postgresql_base: "14.10"
+  source_sha256:
+    LICENSE: "c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08"
+    NOTICE: "d82bcfae47a76ead12dccfd3f8a70505ac7a05a0b0c1434ae13a67ae8a9ffe2e"
+    versioned_sidebars/version-2.x-sidebars.json: "c8b2092fb412b2b284a3b1d0df601f3d88b7342596ca77f5d3c61942edb91445"
+  copyright: "Copyright 2024-2025 The Apache Software Foundation"
+  license: "Apache-2.0"
+  notice: "/attribution/#cloudberry"
+  ref: "2.x docs d4e372a; release 2.2.0-incubating"
+  modified: true
+
+pxf:
+  name: "Apache Cloudberry PXF documentation"
+  repository: "https://github.com/apache/cloudberry-pxf"
+  documentation: "https://cloudberry.apache.org/pxf/"
+  source_commit: "dff2632d2a364f466b83682439c3ae97e655c1b7"
+  source_path: "docs"
+  source_git_tree: "d0fbed85dc7293d6d91fb4fdf676faa369b8d758"
+  source_manifest_sha256: "b6f3ca899cb83d500b57c096933122032bbcc34fd2f9a5af3dc65a06ac045d29"
+  site_repository: "https://github.com/apache/cloudberry-site"
+  site_commit: "d4e372af8170f7e23d501b70deb3938efa1c978b"
+  site_submodule: "pxf"
+  stable_release: "2.2.0-incubating"
+  release_repository: "https://github.com/apache/cloudberry-pxf"
+  release_ref: "2.2.0-incubating"
+  release_commit: "01c2e00b64166740cabfcae1ceee42a72e520594"
+  release_tag_object: "7014385aacd01ff31f6443dc49a121aa44754af7"
+  release_docs_git_tree: "ea6b9185bfec0e1106651259978926545332ecb0"
+  source_sha256:
+    LICENSE: "bd6755e8591865e1b89643041369d2aef5d12643891a14833dab57a5c142b280"
+    NOTICE: "5833ac18ee82a4588a963070be82399b3785c0b70847c44c84d388828b557411"
+    docs/index.md: "35fd45484e4b22f38233df7a4ed88c03ad3970b2e05c7eaf3f7db0b2c743da81"
+  copyright: "Copyright 2024-2026 The Apache Software Foundation"
+  license: "Apache-2.0"
+  notice: "/attribution/#pxf"
+  ref: "docs dff2632d; release 2.2.0-incubating"
+  modified: true
+
+core_internals:
+  name: "Apache Cloudberry Core Internals (development snapshot)"
+  repository: "https://github.com/apache/cloudberry"
+  documentation: "https://cloudberry.apache.org/core-internals/"
+  source_ref: "main"
+  source_commit: "c2baef068a6f9f8b3c8110f9fdf5758306207693"
+  source_path: "doc/core-internals"
+  source_git_tree: "e95abaa4555f1ec3052b8a8a32e6a25c5aa2d8a7"
+  source_manifest_sha256: "c11481a2902db19de3c2c533aebff08886baa130cc3c27a4c0638e2dcb64dfd8"
+  site_repository: "https://github.com/apache/cloudberry-site"
+  site_commit: "d4e372af8170f7e23d501b70deb3938efa1c978b"
+  site_submodule: "core-internals"
+  software_version: "3.0.0-devel"
+  postgresql_base: "16.9"
+  source_sha256:
+    LICENSE: "48a015f52679b324c0e9ecf2934b2917b585a15468e6d8abac54d404ebcfa1a0"
+    NOTICE: "c769387691f08edfbae959d15563d77f46f839365672185e35f6de1ee2f2b59c"
+    configure.ac: "dc88c53142cf0343c8e4a856c63e33a9d61bd75d25ede1bc15d9d6257afc0be0"
+    licenses/LICENSE-postgresql.txt: "e3822c4797fadcab31a3fc73f75c28ac20c73d72b565da91e9974cf9398ef4d2"
+  copyright: "Copyright 2024-2026 The Apache Software Foundation"
+  license: "Apache-2.0"
+  notice: "/attribution/#core-internals"
+  ref: "main c2baef0; 3.0.0-devel; PostgreSQL 16.9"
   modified: true

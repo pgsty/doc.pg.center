@@ -51,11 +51,12 @@ outputs must use the component routes without a `/docs/` prefix.
 
 ### Apache Cloudberry
 
-`content/cloudberry/` is converted from the Docusaurus 2.x docs in
-`apache/cloudberry-site` (`versioned_docs/version-2.x`), pinned in
-`data/upstreams.yaml`. Its section tree follows the upstream 2.x sidebar, not the
-upstream directory layout: each sidebar category is a Hugo section, and a
-category's linked doc is that section's `_index.md`. Page bundles hold images.
+`content/cloudberry/` contains the Docusaurus 2.x docs in
+`apache/cloudberry-site` (`versioned_docs/version-2.x`) plus the independently
+navigated PXF and Core Internals manuals pinned in `data/upstreams.yaml`. Its
+section tree follows each upstream sidebar, not the upstream directory layout:
+each sidebar category is a Hugo section, and a category's linked doc is that
+section's `_index.md`. Page bundles hold images.
 Every heading carries the explicit `{#id}` that Docusaurus generates, so upstream
 anchors and future translations stay aligned.
 

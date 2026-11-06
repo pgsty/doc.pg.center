@@ -12,13 +12,13 @@ Hugo Extended and the OINK theme, and maintained by PGSTY.
 | pgBadger | Log analysis and sample reports |
 | HAProxy | Starter, Configuration, and Management manuals |
 | etcd | Operations, APIs, internals, and upgrades |
-| Apache Cloudberry | MPP database build, deployment, administration, and references |
+| Apache Cloudberry | MPP database build, deployment, administration, references, PXF, and Core Internals |
 
 The six component collections are available in eight languages: English,
 Simplified Chinese, French, Japanese, German, Russian, Arabic, and Spanish.
-English is the source for the other seven editions. Apache Cloudberry is in
-English; its Chinese pages carry translated titles and link to the English text
-until the translation is written.
+English is the source for the other seven editions. Apache Cloudberry is published
+in English, including PXF and Core Internals. Chinese translation is in progress;
+untranslated pages carry translated titles and link to the English text.
 
 The site uses the **PG.CENTER** name and PostgreSQL elephant logo. The Home
 navigation link returns to `https://pg.center/zh/` for Chinese and

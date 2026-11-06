@@ -34,6 +34,8 @@ which licence, and where the complete upstream notice is retained.
 | [HAProxy](/haproxy/) | [HAProxy 3.4 manuals](https://docs.haproxy.org/3.4/) | 3.4.7-57; stable v3.4.7, commit `0faeaed` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/etcd/) | [etcd v3.7 documentation](https://etcd.io/docs/v3.7/) | v3.7 docs, commit `d20f8ae`; release v3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Upstream `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 | [Apache Cloudberry](/cloudberry/) | [Apache Cloudberry 2.x documentation](https://cloudberry.apache.org/docs/) | 2.x docs, commit `d4e372a`; release 2.2.0-incubating | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [Upstream `LICENSE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/LICENSE) and [`NOTICE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/NOTICE) |
+| [PXF](/cloudberry/pxf/) | [Apache Cloudberry PXF](https://cloudberry.apache.org/pxf/) | Docs `dff2632d`; release 2.2.0-incubating | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](/third_party/pxf/LICENSE), [NOTICE](/third_party/pxf/NOTICE) |
+| [Core Internals](/cloudberry/core-internals/) | [Apache Cloudberry Core Internals](https://cloudberry.apache.org/core-internals/) | Main `c2baef0`; 3.0.0-devel / PostgreSQL 16.9 | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0), PostgreSQL | [LICENSE](/third_party/core-internals/LICENSE), [NOTICE](/third_party/core-internals/NOTICE) |
 {.wide .expand}
 
 Every collection is **adapted**, not mirrored. Headings, anchors, cross-links, code signatures,
@@ -137,6 +139,12 @@ Imported on 2026-11-06 from the Apache Cloudberry website repository at commit
 documentation in [`versioned_docs/version-2.x`](https://github.com/apache/cloudberry-site/tree/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x), which upstream publishes at
 <https://cloudberry.apache.org/docs/> for the 2.2.0-incubating release.
 
+The documentation snapshot and software release are recorded separately. Cloudberry
+`2.2.0-incubating` uses PostgreSQL `14.10`; versions `2.0` and `2.1` used `14.4`. Older
+recorded examples retain their original version output. Exact upstream copies of the
+[LICENSE](/third_party/cloudberry/LICENSE) and [NOTICE](/third_party/cloudberry/NOTICE)
+are retained with this edition.
+
 Navigation follows the upstream 2.x sidebar. Docusaurus admonitions, tabs, and collapsible blocks
 are rewritten as OINK callouts and tabs, and images live beside the pages that use them. Three pages
 that upstream publishes outside its sidebar, the TPC-H and TPC-DS benchmarks and `pg_restore`, are
@@ -157,6 +165,22 @@ a further review indicates that the infrastructure, communications, and decision
 stabilized in a manner consistent with other successful ASF projects. While incubation status is not
 necessarily a reflection of the completeness or stability of the code, it does indicate that the
 project has yet to be fully endorsed by the ASF.
+
+## Apache Cloudberry PXF {#pxf}
+
+The PXF collection is sourced from [`apache/cloudberry-pxf@dff2632d`](https://github.com/apache/cloudberry-pxf/commit/dff2632d2a364f466b83682439c3ae97e655c1b7), path `docs/`, pinned by the Cloudberry website at commit `d4e372af8170f7e23d501b70deb3938efa1c978b`. The published software release is [`2.2.0-incubating`](https://github.com/apache/cloudberry-pxf/releases/tag/2.2.0-incubating), commit `01c2e00b64166740cabfcae1ceee42a72e520594`. The website-pinned documentation remains a separate snapshot: the release tag changes the HBase compatibility entry from `2.3.7` to `2.5.x`, and its other 65 published Markdown pages are identical.
+
+The source is Copyright 2024-2026 The Apache Software Foundation and is licensed under Apache License 2.0. Its [NOTICE](https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/NOTICE) records software originally developed by Apache HAWQ, Copyright 2017 The Apache Software Foundation. The [LICENSE](https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/LICENSE) also retains the Greenplum Platform Extension Framework attribution, Copyright 2018-Present VMware, Inc. or its affiliates. The upstream [documentation index](https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/index.md#L26-L32) identifies `greenplum-db/pxf-archive` 6.10.1 as the documentation's origin; the software fork is identified separately as 6.10.1-SNAPSHOT. This community edition adapts the formatting, navigation, and links while retaining upstream notices.
+
+The exact upstream [LICENSE](/third_party/pxf/LICENSE) and [NOTICE](/third_party/pxf/NOTICE) are retained locally.
+
+## Apache Cloudberry Core Internals {#core-internals}
+
+Core Internals is sourced from [`apache/cloudberry@c2baef0`](https://github.com/apache/cloudberry/commit/c2baef068a6f9f8b3c8110f9fdf5758306207693), path `doc/core-internals`, as pinned by the Cloudberry website. It documents a `main` development snapshot: [configure.ac](https://github.com/apache/cloudberry/blob/c2baef068a6f9f8b3c8110f9fdf5758306207693/configure.ac#L23-L24) identifies Cloudberry `3.0.0-devel` and PostgreSQL `16.9`. Its implementation details must be read against that revision. Cloudberry `2.2.0-incubating` follows the PostgreSQL `14.10` line.
+
+The handbook carries ASF headers under Apache License 2.0. The repository [NOTICE](https://github.com/apache/cloudberry/blob/c2baef068a6f9f8b3c8110f9fdf5758306207693/NOTICE) states Copyright 2024-2026 The Apache Software Foundation and preserves the Greenplum Database attribution, Copyright (c) 2004-2020 VMware, Inc. or its affiliates. The [LICENSE](https://github.com/apache/cloudberry/blob/c2baef068a6f9f8b3c8110f9fdf5758306207693/LICENSE#L203-L206) separately identifies PostgreSQL-derived material under the [PostgreSQL License](https://github.com/apache/cloudberry/blob/c2baef068a6f9f8b3c8110f9fdf5758306207693/licenses/LICENSE-postgresql.txt), including the PostgreSQL Global Development Group and University of California notices. Code excerpts retain the licensing of their cited source files. This community edition adapts formatting, navigation, and links and retains the handbook's source citations and acknowledgments.
+
+The exact [LICENSE](/third_party/core-internals/LICENSE), [NOTICE](/third_party/core-internals/NOTICE), and [PostgreSQL License](/third_party/core-internals/LICENSE-postgresql.txt) are retained locally.
 
 ## This site {#site}
 

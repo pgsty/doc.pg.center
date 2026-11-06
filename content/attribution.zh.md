@@ -31,6 +31,8 @@ PG.CENTER 转载并整理了七个上游项目撰写的文档。每一个文档�
 | [HAProxy](/zh/haproxy/) | [HAProxy 3.4 手册](https://docs.haproxy.org/3.4/) | 3.4.7-57 文档快照（稳定版 3.4.7），提交 `0faeaed` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/zh/etcd/) | [etcd v3.7 文档](https://etcd.io/docs/v3.7/) | v3.7 文档，提交 `d20f8ae`；软件版本 v3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [上游 `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 | [Apache Cloudberry](/zh/cloudberry/) | [Apache Cloudberry 2.x 文档](https://cloudberry.apache.org/docs/) | 2.x 文档，提交 `d4e372a`；软件版本 2.2.0-incubating | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [上游 `LICENSE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/LICENSE) 与 [`NOTICE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/NOTICE) |
+| [PXF](/cloudberry/pxf/) | [Apache Cloudberry PXF](https://cloudberry.apache.org/pxf/) | 文档 `dff2632d`；软件版本 2.2.0-incubating | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](/third_party/pxf/LICENSE)、[NOTICE](/third_party/pxf/NOTICE) |
+| [内核原理](/cloudberry/core-internals/) | [Apache Cloudberry 内核原理](https://cloudberry.apache.org/core-internals/) | Main `c2baef0`；3.0.0-devel / PostgreSQL 16.9 | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)、PostgreSQL | [LICENSE](/third_party/core-internals/LICENSE)、[NOTICE](/third_party/core-internals/NOTICE) |
 {.wide .expand}
 
 所有文档集都是**改编**而非镜像：标题、锚点、交叉链接、代码签名、页面分组与导航结构都为本站重新组织，
@@ -122,6 +124,8 @@ etcd 文档版权归 etcd Authors 所有（Copyright 2013-present）。其正文
 [`versioned_docs/version-2.x`](https://github.com/apache/cloudberry-site/tree/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x) 中的 2.x 文档，上游将其发布于
 <https://cloudberry.apache.org/docs/>，对应 2.2.0-incubating 版本。
 
+文档快照与软件发布版本分别记录。Cloudberry `2.2.0-incubating` 采用 PostgreSQL `14.10`，`2.0` 与 `2.1` 采用 `14.4`。较早录制的示例保留原有版本输出。本站保留了上游 [LICENSE](/third_party/cloudberry/LICENSE) 与 [NOTICE](/third_party/cloudberry/NOTICE) 的完整原文。
+
 导航结构沿用上游 2.x 侧边栏。Docusaurus 的提示块、标签页和折叠块改写为 OINK 的提示框与标签页，
 图片与使用它的页面放在一起。上游发布但未列入侧边栏的三个页面（TPC-H、TPC-DS 基准测试与 `pg_restore`）
 也已收录。上游 19 个失效链接（遗留的 Greenplum 路径与拼写错误）改为指向其所指的页面，一处未闭合的提示块
@@ -137,6 +141,22 @@ Apache Cloudberry、Apache 以及 Apache 羽毛标识是 Apache 软件基金会�
 Apache 孵化器赞助下、于 Apache 软件基金会（ASF）孵化中的项目。所有新接收的项目都需要经历孵化，直到进一步
 评审表明其基础设施、沟通与决策流程已稳定到与其他成功的 ASF 项目一致的程度。孵化状态不一定反映代码的完整性
 或稳定性，但表明该项目尚未获得 ASF 的完全认可。
+
+## Apache Cloudberry PXF {#pxf}
+
+PXF 文档取自 [`apache/cloudberry-pxf@dff2632d`](https://github.com/apache/cloudberry-pxf/commit/dff2632d2a364f466b83682439c3ae97e655c1b7) 的 `docs/`，这是 Cloudberry 网站提交 `d4e372af8170f7e23d501b70deb3938efa1c978b` 固定的子模块版本。已发布的软件版本为 [`2.2.0-incubating`](https://github.com/apache/cloudberry-pxf/releases/tag/2.2.0-incubating)，对应提交 `01c2e00b64166740cabfcae1ceee42a72e520594`。网站采用的文档仍单独记录为快照：发布标签将 HBase 兼容性条目从 `2.3.7` 改为 `2.5.x`，其余 65 篇已发布 Markdown 文档完全相同。
+
+源文档的版权声明为 Copyright 2024-2026 The Apache Software Foundation，依 Apache License 2.0 授权。上游 [NOTICE](https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/NOTICE) 说明，产品包含最初由 Apache HAWQ 开发的软件，并保留 Copyright 2017 The Apache Software Foundation。[LICENSE](https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/LICENSE) 还保留了 Greenplum Platform Extension Framework 的版权声明：Copyright 2018-Present VMware, Inc. or its affiliates。上游[文档首页](https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/index.md#L26-L32) 明确说明，文档源自 `greenplum-db/pxf-archive` 6.10.1；软件分支的来源则单独标为 6.10.1-SNAPSHOT。本社区版调整了格式、导航与链接，并保留上游声明。
+
+本站保留上游 [LICENSE](/third_party/pxf/LICENSE) 与 [NOTICE](/third_party/pxf/NOTICE) 的完整原文。
+
+## Apache Cloudberry 内核原理 {#core-internals}
+
+Core Internals 内核原理手册取自 [`apache/cloudberry@c2baef0`](https://github.com/apache/cloudberry/commit/c2baef068a6f9f8b3c8110f9fdf5758306207693) 的 `doc/core-internals`，这是 Cloudberry 网站固定的子模块版本。它对应 `main` 分支的开发快照：[configure.ac](https://github.com/apache/cloudberry/blob/c2baef068a6f9f8b3c8110f9fdf5758306207693/configure.ac#L23-L24) 标明 Cloudberry `3.0.0-devel` 与 PostgreSQL `16.9`。阅读其中的实现细节时，应以该提交为准。Cloudberry `2.2.0-incubating` 则使用 PostgreSQL `14.10` 内核线。
+
+手册保留 ASF 许可证头，依 Apache License 2.0 授权。仓库 [NOTICE](https://github.com/apache/cloudberry/blob/c2baef068a6f9f8b3c8110f9fdf5758306207693/NOTICE) 声明 Copyright 2024-2026 The Apache Software Foundation，并保留 Greenplum Database 的归属：Copyright (c) 2004-2020 VMware, Inc. or its affiliates。[LICENSE](https://github.com/apache/cloudberry/blob/c2baef068a6f9f8b3c8110f9fdf5758306207693/LICENSE#L203-L206) 将源自 PostgreSQL 的材料单独列为 [PostgreSQL 协议](https://github.com/apache/cloudberry/blob/c2baef068a6f9f8b3c8110f9fdf5758306207693/licenses/LICENSE-postgresql.txt)授权，保留 PostgreSQL 全球开发组与加利福尼亚大学的版权声明。代码摘录继续适用其所引用源文件的授权条款。本社区版调整了格式、导航与链接，并保留手册中的源码引用与致谢。
+
+本站保留上游 [LICENSE](/third_party/core-internals/LICENSE)、[NOTICE](/third_party/core-internals/NOTICE) 与 [PostgreSQL 协议](/third_party/core-internals/LICENSE-postgresql.txt) 的完整原文。
 
 ## 本站 {#site}
 
