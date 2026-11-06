@@ -1,5 +1,6 @@
 ---
 title: "Create and configure the gpadmin User"
+description: "Create and configure the gpadmin user, sudo access, the Cloudberry environment, and SSH authentication for development."
 weight: 20
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/build/create-gpadmin-user.md"
 ---

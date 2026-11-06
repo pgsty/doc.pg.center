@@ -1,5 +1,6 @@
 ---
 title: "CREATE TEXT SEARCH TEMPLATE"
+description: "Define the functions used by text search dictionaries with CREATE TEXT SEARCH TEMPLATE."
 weight: 880
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sql-stmts/create-text-search-template.md"
 ---

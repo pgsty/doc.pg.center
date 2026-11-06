@@ -1,5 +1,6 @@
 ---
 title: "Identify and Mitigate Heap Table Performance Issues"
+description: "Diagnose and mitigate slow initial scans of heap tables caused by hint-bit updates and WAL logging after bulk changes."
 weight: 90
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/best-practices/identify-and-mitigate-heap-table-performance-issues.md"
 ---

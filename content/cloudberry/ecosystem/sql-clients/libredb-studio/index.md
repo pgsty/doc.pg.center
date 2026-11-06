@@ -1,5 +1,6 @@
 ---
 title: "LibreDB Studio"
+description: "Connect LibreDB Studio to Apache Cloudberry through its PostgreSQL driver to browse schemas and run queries."
 weight: 30
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/ecosystem/sql-clients/libredb-studio.md"
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Post installation"
+description: "Validate the Apache Cloudberry build with regression tests and run optional tests for features and extensions."
 weight: 90
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/build/post-installation.md"
 ---

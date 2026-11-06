@@ -1,5 +1,6 @@
 ---
 title: "CREATE TEXT SEARCH PARSER"
+description: "Define a text search parser and its token-processing functions with CREATE TEXT SEARCH PARSER."
 weight: 870
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sql-stmts/create-text-search-parser.md"
 ---

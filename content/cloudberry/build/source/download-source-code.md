@@ -1,5 +1,6 @@
 ---
 title: "Download Source Code"
+description: "Download an Apache Cloudberry release or development branch and its submodules as the gpadmin user."
 weight: 50
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/build/download-source-code.md"
 ---

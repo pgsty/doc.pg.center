@@ -1,6 +1,7 @@
 ---
 title: "Transactional Concurrency Control in Apache Cloudberry"
 linkTitle: "Concurrency Control for Transactions"
+description: "Understand MVCC, transaction isolation, lock modes, and global deadlock detection in Apache Cloudberry."
 weight: 70
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/transactional-concurrency-control.md"
 ---

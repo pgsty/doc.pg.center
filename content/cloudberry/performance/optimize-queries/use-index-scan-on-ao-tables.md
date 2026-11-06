@@ -1,5 +1,6 @@
 ---
 title: "Use IndexScan on AO Tables"
+description: "Use index scans on append-optimized tables to accelerate selective queries in Apache Cloudberry."
 weight: 100
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/use-index-scan-on-ao-tables.md"
 ---
@@ -53,6 +54,7 @@ CREATE INDEX idx_val ON tbl(val);
 EXPLAIN ANALYZE SELECT * FROM tbl WHERE val > 100 ORDER BY val LIMIT 10;
 
 (Execution Time: 5888.235 ms)
+
 
 -- Runs the query again after enabling AO IndexScan.
 SET gp_enable_ao_indexscan TO on;

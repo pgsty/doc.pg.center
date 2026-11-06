@@ -91,7 +91,7 @@ The columns of this view are described as follows:
 
 ## Check for locks {#check-for-locks}
 
-When a transaction accesses a relation (such as a table), it acquires a lock. Depending on the type of lock acquired, subsequent transactions may have to wait before they can access the same relation. For more information on the types of locks, see the [Transaction](/cloudberry/operate-with-data/work-with-transactions/). Apache Cloudberry resource queues (used for resource management) also use locks to control the admission of queries into the system.
+When a transaction accesses a relation (such as a table), it acquires a lock. Depending on the type of lock acquired, subsequent transactions may have to wait before they can access the same relation. For more information on the types of locks, see the [Transaction](/cloudberry/operate-with-data/transactional-concurrency-control/#lock-modes). Apache Cloudberry resource queues (used for resource management) also use locks to control the admission of queries into the system.
 
 The `gp_locks_*` family of views can help diagnose queries and sessions that are waiting to access an object due to a lock.
 
@@ -100,7 +100,7 @@ The `gp_locks_*` family of views can help diagnose queries and sessions that are
 
 ### gp_locks_on_relation {#gp_locks_on_relation}
 
-This view shows any locks currently being held on a relation, and the associated session information about the query associated with the lock. For more information on the types of locks, see the [Transaction](/cloudberry/operate-with-data/work-with-transactions/). This view is accessible to all users, however non-superusers will only be able to see the locks for relations that they have permission to access.
+This view shows any locks currently being held on a relation, and the associated session information about the query associated with the lock. For more information on the types of locks, see the [Transaction](/cloudberry/operate-with-data/transactional-concurrency-control/#lock-modes). This view is accessible to all users, however non-superusers will only be able to see the locks for relations that they have permission to access.
 
 The columns of this view are described as follows:
 

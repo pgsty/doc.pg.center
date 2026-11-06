@@ -1,5 +1,6 @@
 ---
 title: "Geospatial Analytics"
+description: "Build PostGIS and its dependencies for geospatial storage, queries, and indexing in Apache Cloudberry."
 weight: 10
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/advanced-analytics/postgis.md"
 ---
@@ -25,24 +26,24 @@ The following steps will be operated under the `gpadmin` user. Please make sure 
 
 ### 1. Install the pre-requested dependencies via the package manager. {#1-install-the-pre-requested-dependencies-via-the-package-manager}
 
-    ```bash {tab="For Rocky Linux 8"}
-    sudo dnf install -y libxml2-devel json-c pkg-config gettext \
-        protobuf-c gmp-devel boost-devel automake libtool make \
-        gcc gcc-c++ sqlite-devel mpfr-devel bzip2 xz libcurl-devel \
-        cmake protobuf-c-devel libxslt docbook-style-xsl
+```bash {tab="For Rocky Linux 8"}
+sudo dnf install -y libxml2-devel json-c pkg-config gettext \
+    protobuf-c gmp-devel boost-devel automake libtool make \
+    gcc gcc-c++ sqlite-devel mpfr-devel bzip2 xz libcurl-devel \
+    cmake protobuf-c-devel libxslt docbook-style-xsl
 
-    sudo dnf install -y --enablerepo=devel protobuf-devel json-c-devel
-    sudo dnf install -y --enablerepo=devel CUnit-devel # Optional, for PostGIS testing
-    ```
-    ```bash {tab="Rocky Linux 9"}
-    sudo dnf install -y libxml2-devel json-c pkg-config gettext \
-        protobuf-c gmp-devel boost-devel automake libtool make \
-        gcc gcc-c++ sqlite-devel mpfr-devel bzip2 xz libcurl-devel \
-        cmake libxslt docbook-style-xsl
+sudo dnf install -y --enablerepo=devel protobuf-devel json-c-devel
+sudo dnf install -y --enablerepo=devel CUnit-devel # Optional, for PostGIS testing
+```
+```bash {tab="Rocky Linux 9"}
+sudo dnf install -y libxml2-devel json-c pkg-config gettext \
+    protobuf-c gmp-devel boost-devel automake libtool make \
+    gcc gcc-c++ sqlite-devel mpfr-devel bzip2 xz libcurl-devel \
+    cmake libxslt docbook-style-xsl
 
-    sudo dnf install -y --enablerepo=crb protobuf-c-devel json-c-devel
-    sudo dnf install -y --enablerepo=crb CUnit-devel # Optional, for PostGIS testing
-    ```
+sudo dnf install -y --enablerepo=crb protobuf-c-devel json-c-devel
+sudo dnf install -y --enablerepo=crb CUnit-devel # Optional, for PostGIS testing
+```
 
 ### 2. Build the components (GDAL, CGAL, SFCGAL, and GEOS). {#2-build-the-components-gdal-cgal-sfcgal-and-geos}
 

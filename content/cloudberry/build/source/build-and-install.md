@@ -1,5 +1,6 @@
 ---
 title: "Build and Install Apache Cloudberry and contrib extensions"
+description: "Compile Apache Cloudberry and its contrib modules, install the binaries, and verify the installation."
 weight: 70
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/build/build-and-install.md"
 ---

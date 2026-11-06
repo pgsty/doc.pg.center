@@ -1,5 +1,6 @@
 ---
 title: "pg_statistic_ext_data"
+description: "Inspect the catalog fields that store data for extended planner statistics objects in pg_statistic_ext_data."
 weight: 400
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-statistic-ext-data.md"
 ---

@@ -1,11 +1,10 @@
 ---
 title: "Summary of Built-in Functions"
 linkTitle: "Built-in Functions"
+description: "Review built-in function categories and the execution restrictions for immutable, stable, and volatile functions in Apache Cloudberry."
 weight: 40
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/functions/index.md"
 ---
-
-#  Summary of Built-in Functions
 
 Apache Cloudberry supports built-in functions and operators including analytic functions and window functions that can be used in window expressions.
 

@@ -1,5 +1,6 @@
 ---
 title: "Tabularis"
+description: "Connect the Tabularis desktop SQL workspace to Apache Cloudberry through its PostgreSQL driver."
 weight: 40
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/ecosystem/sql-clients/tabularis.md"
 ---

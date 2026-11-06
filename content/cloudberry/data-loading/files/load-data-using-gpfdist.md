@@ -149,7 +149,7 @@ Creates a readable external table, `ext_expenses`, from all files with the txt e
    FORMAT 'TEXT' ( DELIMITER '|' NULL ' ');
 ``` -->
 
-### Example 3 — Single gpfdist instance with error logging
+### Example 3 — Single gpfdist instance with error logging {#example-3--single-gpfdist-instance-with-error-logging}
 
 Uses the gpfdist protocol to create a readable external table, `ext_expenses`, from all files with the txt extension. The column delimiter is a pipe (`|`) and NULL (' ') is a space.
 

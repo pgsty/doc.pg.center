@@ -1,5 +1,6 @@
 ---
 title: "DROP TEXT SEARCH PARSER"
+description: "Remove a text search parser and control dependent objects with DROP TEXT SEARCH PARSER."
 weight: 1360
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sql-stmts/drop-text-search-parser.md"
 ---

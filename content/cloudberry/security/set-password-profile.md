@@ -326,6 +326,7 @@ ALTER PROFILE myprofile LIMIT
 -- Allows the user myuser to use Profile.
 ALTER USER myuser ENABLE PROFILE;
 
+
 -- Checks the details in the catalog table (the pg_profile is the catalog table that stores all the details related to the user profile).
 -- Note that the time shown below is in seconds.
 

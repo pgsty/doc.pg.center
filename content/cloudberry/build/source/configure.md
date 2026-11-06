@@ -1,5 +1,6 @@
 ---
 title: "Configure Apache Cloudberry Build"
+description: "Prepare Python source packages and configure the Apache Cloudberry build for Rocky Linux or Ubuntu."
 weight: 60
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/build/configure.md"
 ---

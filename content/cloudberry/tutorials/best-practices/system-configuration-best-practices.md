@@ -198,7 +198,7 @@ Before raising the `gp_workfile_limit_files_per_query`, try reducing the number 
 
 The `gp_toolkit` schema includes views that allow you to see information about all the queries that are currently using spill files. This information can be used for troubleshooting and for tuning queries:
 
-- The `gp_workfile_entries` view contains one row for each operator using disk space for workfiles on a segment at the current time. See [How to Read Explain Plans](/cloudberry/performance/optimize-queries/) for information about operators.
+- The `gp_workfile_entries` view contains one row for each operator using disk space for workfiles on a segment at the current time. See [How to Read Explain Plans](/cloudberry/performance/optimize-queries/analyze-query-performance/#read-explain-output) for information about operators.
 - The `gp_workfile_usage_per_query` view contains one row for each query using disk space for workfiles on a segment at the current time.
 - The `gp_workfile_usage_per_segment` view contains one row for each segment. Each row displays the total amount of disk space used for workfiles on the segment at the current time.
 

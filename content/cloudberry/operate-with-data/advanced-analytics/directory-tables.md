@@ -33,6 +33,7 @@ CREATE TABLESPACE <tablespace_name>
 CREATE DIRECTORY TABLE <table_name>
        TABLESPACE <tablespace_name>;
 
+
 -- Method 2: To create a directory table in the default tablespace, simply omit the TABLESPACE clause.
 CREATE DIRECTORY TABLE <table_name>;
 ```

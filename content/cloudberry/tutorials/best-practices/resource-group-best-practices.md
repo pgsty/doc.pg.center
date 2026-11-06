@@ -41,7 +41,7 @@ The following operating system and Apache Cloudberry memory settings are signifi
 
 Other considerations:
 
-- Do not configure the operating system to use huge pages. See the [Recommended OS Parameters Settings](/cloudberry/deployment/prepare-to-deploy/) in the *Cloudberry Installation Guide*.
+- Do not configure the operating system to use huge pages. See the [Recommended OS Parameters Settings](/cloudberry/deployment/prepare-to-deploy/#recommended-os-parameters-settings) in the *Cloudberry Installation Guide*.
 - When you configure resource group memory, consider memory requirements for mirror segments that become primary segments during a failure to ensure that database operations can continue when primary segments or segment hosts fail.
 
 ## Consider memory when using resource groups {#consider-memory-when-using-resource-groups}

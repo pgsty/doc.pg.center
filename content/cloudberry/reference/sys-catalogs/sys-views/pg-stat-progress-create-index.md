@@ -1,5 +1,6 @@
 ---
 title: "pg_stat_progress_create_index"
+description: "Monitor CREATE INDEX and REINDEX progress through the pg_stat_progress_create_index system view."
 weight: 300
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-progress-create-index.md"
 ---

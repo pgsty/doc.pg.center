@@ -1,5 +1,6 @@
 ---
 title: "Perform Incremental Backup and Restore"
+description: "Create consistent incremental backup sets with gpbackup and restore them with gprestore."
 weight: 20
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/backup-and-restore/perform-incremental-backup-and-restore.md"
 ---

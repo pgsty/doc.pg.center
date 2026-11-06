@@ -261,11 +261,11 @@ Follow these steps below to identify and terminate overflowed backends.
     (4 rows)
     ``` -->
 
-## View metadata information about database objects
+## View metadata information about database objects {#view-metadata-information-about-database-objects}
 
 Apache Cloudberry tracks various metadata information in its system catalogs about the objects stored in a database, such as tables, views, indexes and so on, as well as global objects such as roles and tablespaces.
 
-### View the last operation performed
+### View the last operation performed {#view-the-last-operation-performed}
 
 You can use the system views `pg_stat_operations` and `pg_stat_partition_operations` to look up actions performed on an object, such as a table. For example, to see the actions performed on a table, such as when it was created and when it was last vacuumed and analyzed:
 
@@ -464,7 +464,7 @@ gpssh -f <seg_host_file>
 => gplogfilter -n 3 <seg_host_file>
 ``` -->
 
-## Use `gp_toolkit`
+## Use `gp_toolkit` {#use-gp_toolkit}
 
 Use the Apache Cloudberry administrative schema `gp_toolkit` to query the system catalogs, log files, and operating environment for system status information. The `gp_toolkit` schema contains several views you can access using SQL commands. The `gp_toolkit` schema is accessible to all database users. Some objects require superuser permissions. Use a command similar to the following to add the `gp_toolkit` schema to your schema search path:
 

@@ -27,6 +27,7 @@ sudo useradd -U -m -s /bin/bash gpadmin
 echo 'gpadmin ALL=(ALL) NOPASSWD:ALL' | sudo tee /etc/sudoers.d/90-gpadmin
 sudo -u gpadmin sudo whoami # if the output is root, the configuration is correct
 
+
 # Required configuration for gpadmin user
 sudo -u gpadmin bash <<'EOF'
 ## Add Cloudberry environment setup to .bashrc
@@ -48,6 +49,7 @@ chmod 700 /home/gpadmin/.ssh
 chmod 600 /home/gpadmin/.ssh/authorized_keys
 chmod 644 /home/gpadmin/.ssh/id_rsa.pub
 EOF
+
 
 # Configure system settings
 sudo tee /etc/security/limits.d/90-db-limits.conf << 'EOF'
@@ -207,6 +209,7 @@ sudo useradd -U -m -s /bin/bash gpadmin
 echo 'gpadmin ALL=(ALL) NOPASSWD:ALL' | sudo tee /etc/sudoers.d/90-gpadmin
 sudo -u gpadmin sudo whoami # if the output is root, the configuration is correct
 
+
 # Required configuration for gpadmin user
 sudo -u gpadmin bash <<'EOF'
 ## Add Cloudberry environment setup to .bashrc
@@ -228,6 +231,7 @@ chmod 700 /home/gpadmin/.ssh
 chmod 600 /home/gpadmin/.ssh/authorized_keys
 chmod 644 /home/gpadmin/.ssh/id_rsa.pub
 EOF
+
 
 # Configure system settings
 sudo tee /etc/security/limits.d/90-db-limits.conf << 'EOF'
@@ -378,6 +382,7 @@ sudo useradd -U -m -s /bin/bash gpadmin
 echo 'gpadmin ALL=(ALL) NOPASSWD:ALL' | sudo tee /etc/sudoers.d/90-gpadmin
 sudo -u gpadmin sudo whoami # if the output is root, the configuration is correct
 
+
 # Required configuration for gpadmin user
 sudo -u gpadmin bash <<'EOF'
 ## Add Cloudberry environment setup to .bashrc
@@ -399,6 +404,7 @@ chmod 700 /home/gpadmin/.ssh
 chmod 600 /home/gpadmin/.ssh/authorized_keys
 chmod 644 /home/gpadmin/.ssh/id_rsa.pub
 EOF
+
 
 # Configure system settings
 sudo tee /etc/security/limits.d/90-db-limits.conf << 'EOF'
