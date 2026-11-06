@@ -136,7 +136,7 @@ Identifies default storage options for the type when specified in a table column
 
 **BLOCKSIZE** — Set to the size, in bytes, for each block in the column. The `BLOCKSIZE` must be between 8192 and 2097152 bytes, and be a multiple of 8192. The default block size is 32768.
 
-    > **Note** storage_directives defined at the table- or column-level override the default storage options defined for a type.
+> **Note** storage_directives defined at the table- or column-level override the default storage options defined for a type.
 
 ## Notes {#notes}
 

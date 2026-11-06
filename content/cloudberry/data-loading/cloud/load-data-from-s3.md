@@ -114,21 +114,21 @@ FORMAT 'CSV'
 DISTRIBUTED BY (transaction_id);
 ```
 
-    For read-only s3 tables, the URL defines the location and prefix used to select existing data files that comprise the s3 table. For example:
+For read-only s3 tables, the URL defines the location and prefix used to select existing data files that comprise the s3 table. For example:
 
-    ```sql
-    CREATE READABLE EXTERNAL TABLE S3TBL (date text, time text, amt int)
-       LOCATION('s3://s3-us-west-2.amazonaws.com/s3test.example.com/dataset1/normal/ config=/home/gpadmin/aws_s3/s3.conf')
-       FORMAT 'csv';
-    ```
+```sql
+CREATE READABLE EXTERNAL TABLE S3TBL (date text, time text, amt int)
+   LOCATION('s3://s3-us-west-2.amazonaws.com/s3test.example.com/dataset1/normal/ config=/home/gpadmin/aws_s3/s3.conf')
+   FORMAT 'csv';
+```
 
-    For writable s3 tables, the protocol URL defines the S3 location in which Apache Cloudberry writes the data files that back the table for `INSERT` operations. You can also specify a prefix that Apache Cloudberry will add to the files that it creates. For example:
+For writable s3 tables, the protocol URL defines the S3 location in which Apache Cloudberry writes the data files that back the table for `INSERT` operations. You can also specify a prefix that Apache Cloudberry will add to the files that it creates. For example:
 
-    ```sql
-    CREATE WRITABLE EXTERNAL TABLE S3WRIT (LIKE S3TBL)
-       LOCATION('s3://s3-us-west-2.amazonaws.com/s3test.example.com/dataset1/normal/ config=/home/gpadmin/aws_s3/s3.conf')
-       FORMAT 'csv';
-    ```
+```sql
+CREATE WRITABLE EXTERNAL TABLE S3WRIT (LIKE S3TBL)
+   LOCATION('s3://s3-us-west-2.amazonaws.com/s3test.example.com/dataset1/normal/ config=/home/gpadmin/aws_s3/s3.conf')
+   FORMAT 'csv';
+```
 
 ## About the s3 Protocol LOCATION URL {#about-the-s3-protocol-location-url}
 

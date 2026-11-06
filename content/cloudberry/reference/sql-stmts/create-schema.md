@@ -46,7 +46,7 @@ The role name of the user who will own the new schema. If omitted, defaults to t
 
 An SQL statement defining an object to be created within the schema. Currently, only `CREATE TABLE`, `CREATE VIEW`, `CREATE INDEX`, `CREATE SEQUENCE`, `CREATE TRIGGER`, and `GRANT` are accepted as clauses within `CREATE SCHEMA`. Other kinds of objects may be created in separate commands after the schema is created.
 
-    > **Note** Apache Cloudberry does not support triggers.
+> **Note** Apache Cloudberry does not support triggers.
 
 **`IF NOT EXISTS`**
 

@@ -32,9 +32,9 @@ The table owner must first enable row-level security policies for a table before
 
 The table owner must first enable row-level security policy using the following command:
 
-    ```
-    ALTER TABLE <table_name> ENABLE ROW LEVEL SECURITY;
-    ```
+```
+ALTER TABLE <table_name> ENABLE ROW LEVEL SECURITY;
+```
 
 **Step 2.** Create policy
 
@@ -46,14 +46,14 @@ You can specify separate expressions to provide independent control over which r
 
 Refer to the following syntax to create a row-level security policy:
 
-    ```
-    CREATE POLICY <name> ON <table_name>
-        [ AS { PERMISSIVE | RESTRICTIVE } ]
-        [ FOR { ALL | SELECT | INSERT | UPDATE | DELETE } ]
-        [ TO { <role_name> | PUBLIC | CURRENT_USER | SESSION_USER } [, ...] ]
-        [ USING ( <using_expression> ) ]
-        [ WITH CHECK ( <check_expression> ) ]
-    ```
+```
+CREATE POLICY <name> ON <table_name>
+    [ AS { PERMISSIVE | RESTRICTIVE } ]
+    [ FOR { ALL | SELECT | INSERT | UPDATE | DELETE } ]
+    [ TO { <role_name> | PUBLIC | CURRENT_USER | SESSION_USER } [, ...] ]
+    [ USING ( <using_expression> ) ]
+    [ WITH CHECK ( <check_expression> ) ]
+```
 
 See the following parameter descriptions for detailed usage:
 
@@ -139,10 +139,10 @@ The following example sets up a row-level access security policy on a table that
 
 Because the value of `myapp.current_department` is set to `Engineering`, you would expect the following data to be returned:
 
-    ```
-    project_id | project_name | project_manager | department
-    ------------+--------------+-----------------+------------
-            1 | Project Alpha | zhangsan        | Engineering
-    ```
+```
+project_id | project_name | project_manager | department
+------------+--------------+-----------------+------------
+        1 | Project Alpha | zhangsan        | Engineering
+```
 
 Only the row related to the "Engineering" department will be visible to the user `zhangsan` because of the row-level security policy in place.

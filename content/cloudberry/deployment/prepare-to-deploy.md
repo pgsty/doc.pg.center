@@ -66,24 +66,24 @@ You should also deactivate firewall software such as `firewalld` (on RHEL system
 
     Check the status of `firewalld`:
 
-        ```bash
-        systemctl status firewalld
-        ```
+    ```bash
+    systemctl status firewalld
+    ```
 
     If `firewalld` is deactivated, the command output is:
 
-        ```
-        * firewalld.service - firewalld - dynamic firewall daemon
-        Loaded: loaded (/usr/lib/systemd/system/firewalld.service; disabled; vendor preset: enabled)
-        Active: inactive (dead)
-        ```
+    ```
+    * firewalld.service - firewalld - dynamic firewall daemon
+    Loaded: loaded (/usr/lib/systemd/system/firewalld.service; disabled; vendor preset: enabled)
+    Active: inactive (dead)
+    ```
 
     If necessary, run these commands as root to deactivate `firewalld`:
 
-        ```bash
-        systemctl stop firewalld.service
-        systemctl disable firewalld.service
-        ```
+    ```bash
+    systemctl stop firewalld.service
+    systemctl disable firewalld.service
+    ```
 
 - For Ubuntu (ufw)
 
@@ -525,13 +525,13 @@ cat /sys/kernel/mm/*transparent_hugepage/enabled
 
 If the output shows `[never]`, THP is already disabled. Otherwise, disable it permanently:
 
-    - For RHEL/Rocky Linux — use `grubby`. This command adds the parameter when run as root:
+- For RHEL/Rocky Linux — use `grubby`. This command adds the parameter when run as root:
 
     ```bash
     # grubby --update-kernel=ALL --args="transparent_hugepage=never"
     ```
 
-    - For Ubuntu — edit `/etc/default/grub` and run `update-grub`:
+- For Ubuntu — edit `/etc/default/grub` and run `update-grub`:
 
     ```bash
     # sed -i 's/GRUB_CMDLINE_LINUX="\(.*\)"/GRUB_CMDLINE_LINUX="\1 transparent_hugepage=never"/' /etc/default/grub
