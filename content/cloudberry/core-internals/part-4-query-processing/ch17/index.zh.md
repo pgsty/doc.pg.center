@@ -1059,7 +1059,7 @@ if (pxform->FImplementation())
 ... xform_set->ExchangeSet(exfid);
 ```
 
-| 类别 | 改写的内容 | 代表性规则 |
+| <span style="display:inline-block;min-width:8em">类别</span> | 改写的内容 | 代表性规则 |
 | --- | --- | --- |
 | 连接枚举（探索） | 将 n 元连接中间操作符展开为二叉树，并重新排列已有的二元连接 | `CXformExpandNAryJoin`、`CXformExpandNAryJoinDPv2`、`CXformInnerJoinCommutativity`、`CXformJoinAssociativity` |
 | 连接实现 | 逻辑连接 → 物理连接操作符 | `CXformImplementInnerJoin`、`CXformLeftOuterJoin2HashJoin`、`CXformLeftAntiSemiJoin2NLJoin`、`CXformImplementFullOuterMergeJoin` |
