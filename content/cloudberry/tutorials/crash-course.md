@@ -46,7 +46,7 @@ Take a quick look at the official [Cloudberry Documentation](/cloudberry/introdu
 To begin your journey with Cloudberry, you are expected to install Cloudberry in your preferred environment. The following options are available:
 
 - For testing or trying out Cloudberry in a sandbox environment, see [Install Cloudberry in a Sandbox](https://github.com/apache/cloudberry-bootcamp/tree/main/000-cbdb-sandbox/configs).
-- For deploying Cloudberry in other environments (including the production environment) and the prerequisite software/hardware configuration, see [Cloudberry Deployment Guide](http://localhost:3000/docs/next/deployment/).
+- For deploying Cloudberry in other environments (including the production environment) and the prerequisite software/hardware configuration, see [Cloudberry Deployment Guide](https://cloudberry.apache.org/docs/next/deployment/).
 
 ## Lesson 3. Cluster architecture {#lesson-3-cluster-architecture}
 
