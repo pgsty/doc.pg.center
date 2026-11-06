@@ -24,7 +24,7 @@ upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23
 
 > **重要** 大量执行 `UPDATE` 和 `DELETE` 操作后，对单个表运行 `VACUUM` 非常重要，这样可以避免以后必须运行 `VACUUM FULL`。
 
-定期对表运行 `VACUUM` 可以防止表增长过大。如果表确实严重膨胀，则必须使用 `VACUUM FULL` 压缩表数据。
+定期对表运行 `VACUUM` 可以防止表增长过大。如果表确实严重膨胀，则必须使用 `VACUUM FULL` 压实表数据。
 
 如果空闲空间映射不能容纳所有过期行，`VACUUM` 就无法回收溢出空闲空间映射的过期行所占空间。只有运行 `VACUUM FULL` 才能回收磁盘空间。该命令会锁定表、创建新表、将表数据复制到新表，然后删除旧表。这是高成本操作，对大型表可能需要非常长的时间才能完成。
 
@@ -72,7 +72,7 @@ gpadmin=# SELECT * FROM gp_toolkit.gp_bloat_expected_pages LIMIT 5;
 
 AO 表的处理方式与堆表大不相同。虽然 AO 表允许更新、插入和删除操作，但这些操作没有经过优化，并不建议在 AO 表上执行。如果遵循这一建议，将 AO 表用于*一次加载、多次读取*的工作负载，那么对 AO 表运行 `VACUUM` 几乎会立即完成。
 
-如果确实对 AO 表运行 `UPDATE` 或 `DELETE` 命令，过期行会记录在辅助位图中，而不是空闲空间映射中。`VACUUM` 是回收空间的唯一方式。对包含过期行的 AO 表运行 `VACUUM` 时，会通过重写整个表来压缩表，并去除过期行。但是，如果表中过期行的百分比超过配置参数 `gp_appendonly_compaction_threshold` 的值，则不会执行任何操作；该参数默认值为 10（10%）。每个 Segment 都会单独检查此阈值，因此某条 `VACUUM` 语句可能在部分 Segment 上压缩 AO 表，而在其他 Segment 上不压缩。将 `gp_appendonly_compaction` 参数设为 `no` 可以停用 AO 表压缩。
+如果确实对 AO 表运行 `UPDATE` 或 `DELETE` 命令，过期行会记录在辅助位图中，而不是空闲空间映射中。`VACUUM` 是回收空间的唯一方式。对包含过期行的 AO 表运行 `VACUUM` 时，会通过重写整个表来压实表，并去除过期行。但是，如果表中过期行的百分比超过配置参数 `gp_appendonly_compaction_threshold` 的值，则不会执行任何操作；该参数默认值为 10（10%）。每个 Segment 都会单独检查此阈值，因此某条 `VACUUM` 语句可能在部分 Segment 上压实 AO 表，而在其他 Segment 上不压实。将 `gp_appendonly_compaction` 参数设为 `no` 可以停用 AO 表压实。
 
 ## 清除索引膨胀 {#remove-bloat-from-indexes}
 

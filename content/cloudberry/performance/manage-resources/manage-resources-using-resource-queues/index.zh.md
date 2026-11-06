@@ -79,8 +79,8 @@ Apache Cloudberry 系统的默认配置只有一个名为 `pg_default` 的默认
 
 例如，考虑名为 `adhoc` 的资源队列，其设置如下：
 
-- `MEMORY_LIMIT` is 1.5GB
-- `ACTIVE_STATEMENTS` is 3
+- `MEMORY_LIMIT` 为 1.5GB
+- `ACTIVE_STATEMENTS` 为 3
 
 默认情况下，提交到该队列的每条语句分配 500MB 内存。现在考虑以下事件序列：
 
