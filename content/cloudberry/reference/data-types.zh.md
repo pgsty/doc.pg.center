@@ -1,10 +1,53 @@
 ---
 title: "Apache Cloudberry 数据类型"
 linkTitle: "数据类型"
+description: "Apache Cloudberry 提供了丰富的原生数据类型供用户使用。"
 weight: 20
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-types.md"
-translation_status: "placeholder"
 ---
 
-> [!NOTE] 译文待补
-> 本页中文翻译尚未完成，请先阅读<a href="/cloudberry/reference/data-types/" hreflang="en" lang="en">英文原文</a>。
+本文列出部分内置数据类型。除了这里列出的类型之外，还有一些内部使用的数据类型，例如 oid（对象标识符），本文不作介绍。
+
+SQL 标准规定了以下数据类型：bit、bit varying、boolean、character varying、varchar、character、char、date、double precision、integer、interval、numeric、decimal、real、smallint、time（带或不带时区）以及 timestamp（带或不带时区）。
+
+每种数据类型都有一种外部表示，由其输入和输出函数决定。许多内置类型的外部格式很直观。不过，有些类型是 PostgreSQL（以及 Apache Cloudberry）特有的，例如几何路径；另一些类型则可以使用多种格式，例如日期和时间类型。某些输入和输出函数不可逆，也就是说，与原始输入相比，输出函数的结果可能损失精度。
+
+| 名称 | 别名 | 大小 | 范围 | 描述 |
+|----------------------------|------------------------|-----------------|---------------------------------------------|----------------------------------------------------------|
+| `bigint`                   | `int8`                 | 8 字节 | `-9223372036854775808` 至 `9223372036854775807` | 大范围整数 |
+| `bigserial`                | `serial8`              | 8 字节 | `1` 至 `9223372036854775807` | 大范围自增整数 |
+| `bit [ (n) ]`              |                        | _n_ 位 | 位串常量 | 定长位串 |
+| `bit varying [ (n) ]`      | `varbit`               | 实际位数 | 位串常量 | 变长位串 |
+| `boolean`                  | `bool`                 | 1 字节 | `true`/`false`, `t`/`f`, `yes`/`no`, `y`/`n`, `1`/`0` | 逻辑布尔值（真/假） |
+| `box`                      |                        | 32 字节 | `((x1,y1),(x2,y2))`                         | 平面上的矩形，不允许用于分布键列。 |
+| `bytea1`                   |                        | 1 字节 + 二进制串大小 | 八位字节序列 | 变长二进制串 |
+| `character [ (n) ]`        | `char [ (n) ]`         | 1 字节 + n | 最多包含 `n` 个字符的字符串 | 定长，不足部分用空格填充 |
+| `character varying [ (n) ]`| `varchar [ (n) ]`      | 1 字节 + 字符串大小 | 最多包含 `n` 个字符的字符串 | 有长度限制的变长字符串 |
+| `cidr`                     |                        | 12 或 24 字节 |                                              | IPv4 和 IPv6 网络 |
+| `circle`                   |                        | 24 字节 | `<(x,y),r>`（圆心和半径） | 平面上的圆，不允许用于分布键列。 |
+| `date`                     |                        | 4 字节 | `'4714-11-24 BC'` - `'999999-12-31 AD'`     | 日历日期（年、月、日） |
+| `decimal [ (p, s) ]`1      | `numeric [ (p, s) ]`   | 可变 | 无限制 | 用户指定精度的精确数值 |
+| `double precision`         | `float8`               | 8 字节 | 15 位十进制数字精度 | 可变精度的非精确数值 |
+| `inet`                     |                        | 12 或 24 字节 |                                              | IPv4 和 IPv6 主机及网络 |
+| `integer`                  | `int4`                 | 4 字节 | `-2147483648` 至 `+2147483647` | 常用整数类型 |
+| `interval [ fields ] [ (p) ]` |                    | 16 字节 | `-178000000 years` 至 `178000000 years` | 时间间隔 |
+| `json`                     |                        | 1 字节 + json 大小 | 任意长度的 json | 无长度限制的变长数据 |
+| `jsonb`                    |                        | 1 字节 + 二进制串大小 | 以分解后的二进制格式表示的任意长度 json | 无长度限制的变长数据 |
+| `lseg`                     |                        | 32 字节 | `((x1,y1),(x2,y2))`                         | 平面上的线段，不允许用于分布键列。 |
+| `macaddr`                  |                        | 6 字节 |                                              | MAC 地址 |
+| `macaddr8`                 |                        | 8 字节 |                                              | MAC 地址（EUI-64 格式） |
+| `money`                    |                        | 8 字节 | `-92233720368547758.08` 至 `+92233720368547758.07` | 货币金额 |
+| `path`                     |                        | 16+16n 字节 | `[(x1,y1),...]`                              | 平面上的几何路径，不允许用于分布键列。 |
+| `point`                    |                        | 16 字节 | `(x,y)`                                      | 平面上的几何点，不允许用于分布键列。 |
+| `polygon`                  |                        | 40+16n 字节 | `((x1,y1),...)`                              | 平面上的封闭几何路径，不允许用于分布键列。 |
+| `real`                     | `float4`               | 4 字节 | 6 位十进制数字精度 | 可变精度的非精确数值 |
+| `serial`                   | `serial4`              | 4 字节 | `1` 至 `2147483647` | 自增整数 |
+| `smallint`                 | `int2`                 | 2 字节 | `-32768` 至 `+32767` | 小范围整数 |
+| `text`                     |                        | 1 字节 + 字符串大小 | 任意长度的字符串 | 无长度限制的变长字符串 |
+| `time [ (p) ] [ without time zone ]` |             | 8 字节 | `00:00:00[.000000]` - `24:00:00[.000000]`  | 仅包含一天中的时间 |
+| `time [ (p) ] with time zone` | `timetz`            | 12 字节 | `00:00:00+1559` - `24:00:00-1559`           | 仅包含一天中的时间，带时区 |
+| `timestamp [ (p) ] [ without time zone ]` |         | 8 字节 | `4713 BC` - `294,276 AD`                    | 包含日期和时间 |
+| `timestamp [ (p) ] with time zone` | `timestamptz`  | 8 字节 | `4713 BC` - `294,276 AD`                    | 包含日期和时间，带时区 |
+| `uuid`                     |                        | 16 字节 |                                              | 符合 RFC 4122、ISO/IEC 9834-8:2005 的通用唯一标识符 |
+| `xml`                      |                        | 1 字节 + XML 大小 | 任意长度的 XML | 无长度限制的变长数据 |
+| `txid_snapshot`            |                        |                 |                                              | 用户级事务 ID 快照 |
