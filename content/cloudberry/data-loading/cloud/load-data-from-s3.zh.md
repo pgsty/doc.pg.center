@@ -1,0 +1,10 @@
+---
+title: "使用 s3 协议从 Amazon S3 加载数据"
+linkTitle: "从 Amazon S3 加载数据"
+weight: 10
+upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/load-data-from-s3.md"
+translation_status: "placeholder"
+---
+
+> [!NOTE] 译文待补
+> 本页中文翻译尚未完成，请先阅读<a href="/cloudberry/data-loading/cloud/load-data-from-s3/" hreflang="en" lang="en">英文原文</a>。
