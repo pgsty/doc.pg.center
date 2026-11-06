@@ -98,6 +98,6 @@ PXF 安装，`<new-version>` 指面向新大版本的 PXF 安装。
 | `$PGPORT`            | 5432          | 连接 Coordinator 主机所用的端口号。     |
 | `$PGDATABASE`        | gpadmin       | 数据库名称。 |
 | `$PGUSER`            | gpadmin       | Apache Cloudberry 用户名。     |
-| `$PGPASSWORD`        | _none_        | 该用户的密码。 |
+| `$PGPASSWORD`        | _无_        | 该用户的密码。 |
 
 更多详细信息，请参阅 PostgreSQL 文档中的[环境变量](https://www.postgresql.org/docs/9.4/libpq-envars.html)主题。

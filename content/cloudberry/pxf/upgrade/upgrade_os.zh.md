@@ -24,7 +24,7 @@ upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b
 
 在新的一组主机上升级操作系统，并安装、配置和验证 Apache Cloudberry 之后，请执行以下过程：
 
-1. 从 [Apache Cloudberry PXF releases](https://github.com/apache/cloudberry-pxf/releases) 下载适用于升级后操作系统的 PXF 软件包。*必须下载与原 Apache Cloudberry 集群上运行的 PXF 相同的版本。*
+1. 从 [Apache Cloudberry PXF 发布页](https://github.com/apache/cloudberry-pxf/releases) 下载适用于升级后操作系统的 PXF 软件包。*必须下载与原 Apache Cloudberry 集群上运行的 PXF 相同的版本。*
 
 1. 在所有 Apache Cloudberry 主机上安装适用于升级后操作系统的 PXF。
 

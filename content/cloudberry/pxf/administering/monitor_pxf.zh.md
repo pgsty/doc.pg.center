@@ -98,7 +98,7 @@ http://localhost:5888/actuator/health
 
 ### 检查 PXF 指标 {#examining-pxf-metrics}
 
-PXF 通过与 Spring Boot 的集成公开 JVM、扩展 Tomcat 和系统指标。有关这些指标的更多信息，请参阅 Spring Boot 文档中的 [Supported Metrics](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-metrics-meter)。
+PXF 通过与 Spring Boot 的集成公开 JVM、扩展 Tomcat 和系统指标。有关这些指标的更多信息，请参阅 Spring Boot 文档中的[支持的指标](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-metrics-meter)。
 
 PXF 还公开了特定于其处理过程的指标，包括：
 

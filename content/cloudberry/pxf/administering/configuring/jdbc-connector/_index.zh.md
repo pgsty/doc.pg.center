@@ -71,12 +71,12 @@ JDBC 连接器支持以下 `jdbc.connection.transactionIsolation` 属性值：
 
 | SQL 级别 | PXF 属性值 |
 |----------------|-------------------------|
-| Read uncommitted | READ_UNCOMMITTED |
-| Read committed | READ_COMMITTED |
-| Repeatable Read | REPEATABLE_READ |
-| Serializable | SERIALIZABLE |
+| 读未提交 | READ_UNCOMMITTED |
+| 读已提交 | READ_COMMITTED |
+| 可重复读 | REPEATABLE_READ |
+| 可串行化 | SERIALIZABLE |
 
-例如，要将事务隔离级别设置为 *Read uncommitted*，请将以下属性块添加到 `jdbc-site.xml` 文件：
+例如，要将事务隔离级别设置为*读未提交*，请将以下属性块添加到 `jdbc-site.xml` 文件：
 
 ```xml
 <property>

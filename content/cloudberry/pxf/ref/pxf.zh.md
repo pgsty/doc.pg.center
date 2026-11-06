@@ -50,7 +50,7 @@ version
 <dt>help</dt>
 <dd>显示 `pxf` 管理工具的帮助信息，然后退出。</dd>
 
-<dt>init (deprecated)</dt>
+<dt>init（已弃用）</dt>
 <dd>该命令等同于 `register` 命令。</dd>
 
 <dt>migrate</dt>
@@ -62,7 +62,7 @@ version
 <dt>register</dt>
 <dd>将 PXF 扩展文件从主机上的 PXF 安装目录复制到该主机上的 Apache Cloudberry 安装目录。该命令要求已设置 `$GPHOME`；在首次安装 PXF 6.x 之后运行一次，或在升级 Apache Cloudberry 安装时运行。</dd>
 
-<dt>reset (deprecated)</dt>
+<dt>reset（已弃用）</dt>
 <dd>该命令不执行任何操作。</dd>
 
 <dt>restart</dt>

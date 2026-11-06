@@ -62,6 +62,6 @@ upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b
 | `$PGPORT`            | 5432          | 连接 Coordinator 主机所用的端口号。     |
 | `$PGDATABASE`        | gpadmin       | 数据库名称。 |
 | `$PGUSER`            | gpadmin       | Apache Cloudberry 用户名。     |
-| `$PGPASSWORD`        | _none_        | 该用户的密码。 |
+| `$PGPASSWORD`        | _无_        | 该用户的密码。 |
 
 更多详细信息，请参阅 PostgreSQL 文档中的[环境变量](https://www.postgresql.org/docs/9.4/libpq-envars.html)主题。
