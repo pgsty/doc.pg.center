@@ -63,7 +63,7 @@ PXF 支持以下 AWS SSE 加密密钥管理方案：
 
 #### 通过 S3 存储桶策略配置 SSE（推荐） {#configuring-sse-via-an-s3-bucket-policy-recommended}
 
-你可以创建 S3 <i>存储桶策略（Bucket Policy）</i>，指定要加密的对象、加密密钥管理方案以及对这些对象允许的写操作。有关 SSE 加密密钥管理方案的更多信息，请参阅 AWS S3 文档中的 [Protecting Data Using Server-Side Encryption](http://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html)。[How Do I Enable Default Encryption for an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/default-bucket-encryption.html) 介绍了如何设置默认加密存储桶策略。
+你可以创建 S3 <i>存储桶策略（Bucket Policy）</i>，指定要加密的对象、加密密钥管理方案以及对这些对象允许的写操作。有关 SSE 加密密钥管理方案的更多信息，请参阅 AWS S3 文档中的[使用服务端加密保护数据](http://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html)。[如何为 S3 存储桶启用默认加密？](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/default-bucket-encryption.html)介绍了如何设置默认加密存储桶策略。
 
 
 #### 在 PXF S3 服务器配置中指定 SSE 选项 {#specifying-sse-options-in-a-pxf-s3-server-configuration}

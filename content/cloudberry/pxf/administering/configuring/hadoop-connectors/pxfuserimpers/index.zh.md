@@ -202,4 +202,4 @@ PXF Hive 连接器使用 Hive MetaStore 确定 Hive 表的 HDFS 位置，然后�
 
 ## HBase 用户模拟 {#hbase-user-impersonation}
 
-要使用户模拟能够与 HBase 配合工作，必须在 HBase 配置中启用 `AccessController` 协处理器并重启集群。有关所需的 `hbase-site.xml` 配置设置，请参阅 Apache HBase 参考指南中的 [61.3 Server-side Configuration for Simple User Access Operation](http://hbase.apache.org/book.html#hbase.secure.configuration)。
+要使用户模拟能够与 HBase 配合工作，必须在 HBase 配置中启用 `AccessController` 协处理器并重启集群。有关所需的 `hbase-site.xml` 配置设置，请参阅 Apache HBase 参考指南中的 [61.3 简单用户访问操作的服务端配置](http://hbase.apache.org/book.html#hbase.secure.configuration)。

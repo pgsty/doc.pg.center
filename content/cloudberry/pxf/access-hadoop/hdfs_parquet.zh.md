@@ -72,21 +72,21 @@ Parquet 支持一小组基本数据类型，并使用元数据注解来扩展其
 
 | Parquet 数据类型 | PXF/Cloudberry 数据类型 |
 |-------------------|-------------------------|
-| list of \&lt;boolean&gt; | Boolean[] |
-| list of \&lt;binary&gt;  | Bytea[] |
-| list of \&lt;binary&gt; (Date) | Date[] |
-| list of \&lt;binary&gt; (Timestamp_millis) | Timestamp[] |
-| list of \&lt;binary&gt; (UTF8) | Text[] |
-| list of \&lt;double&gt; | Float8[] |
-| list of \<fixed\_len\_byte\_array> (Decimal) | Numeric[] |
-| list of \&lt;float&gt; | Real[] |
-| list of \&lt;int32&gt; (int_8) | Smallint[] |
-| list of \&lt;int32&gt; (Date) | Date[] |
-| list of \&lt;int32&gt; (Decimal) | Numeric[] |
-| list of \&lt;int32&gt; | Integer[] |
-| list of \&lt;int64&gt; (Decimal) | Numeric[] |
-| list of \&lt;int64&gt; | Bigint[] |
-| list of \&lt;int96&gt; | Timestamp[] |
+| 元素类型为 \&lt;boolean&gt; 的列表 | Boolean[] |
+| 元素类型为 \&lt;binary&gt; 的列表 | Bytea[] |
+| 元素类型为 \&lt;binary&gt; (Date) 的列表 | Date[] |
+| 元素类型为 \&lt;binary&gt; (Timestamp_millis) 的列表 | Timestamp[] |
+| 元素类型为 \&lt;binary&gt; (UTF8) 的列表 | Text[] |
+| 元素类型为 \&lt;double&gt; 的列表 | Float8[] |
+| 元素类型为 \<fixed\_len\_byte\_array> (Decimal) 的列表 | Numeric[] |
+| 元素类型为 \&lt;float&gt; 的列表 | Real[] |
+| 元素类型为 \&lt;int32&gt; (int_8) 的列表 | Smallint[] |
+| 元素类型为 \&lt;int32&gt; (Date) 的列表 | Date[] |
+| 元素类型为 \&lt;int32&gt; (Decimal) 的列表 | Numeric[] |
+| 元素类型为 \&lt;int32&gt; 的列表 | Integer[] |
+| 元素类型为 \&lt;int64&gt; (Decimal) 的列表 | Numeric[] |
+| 元素类型为 \&lt;int64&gt; 的列表 | Bigint[] |
+| 元素类型为 \&lt;int96&gt; 的列表 | Timestamp[] |
 
 
 ### 写映射 {#write-mapping}
@@ -109,7 +109,7 @@ Parquet 支持一小组基本数据类型，并使用元数据注解来扩展其
 | Timestamp<sup>2</sup> | int96 | -- |
 | Timestamptz<sup>3</sup> | int96 | -- |
 | Varchar | binary (byte\_array) | UTF8 |
-| OTHERS | UNSUPPORTED | -- |
+| 其他类型 | 不支持 | -- |
 
 <br/><sup>1</sup>&nbsp;由于 Parquet 不保存字段长度，PXF 写入 Parquet 的 Bpchar 将成为长度未定义的 text。
 <br/><sup>2</sup>&nbsp;PXF 会将 `Timestamp` 本地化为当前系统时区，并先转换为通用时间（UTC），最后再转换为 `int96`。
@@ -119,21 +119,21 @@ PXF 可以写入某些 Parquet 数据类型的一维 `LIST`。支持的映射如
 
 | PXF/Cloudberry 数据类型 |  Parquet 数据类型 |
 |-------------------|--------------------------|
-| Bigint[] | list of \&lt;int64&gt; |
-| Boolean[] | list of \&lt;boolean&gt; |
-| Bpchar[]<sup>1</sup> |  list of \&lt;binary&gt; (UTF8) |
-| Bytea[] | list of \&lt;binary&gt; |
-| Date[] | list of \&lt;int32&gt; (Date) |
-| Float8[] | list of \&lt;double&gt; |
-| Integer[] | list of \&lt;int32&gt; |
-| Numeric[]/Decimal[] | list of \<fixed\_len\_byte\_array> (Decimal) |
-| Real[] | list of \&lt;float&gt; |
-| SmallInt[] | list of \&lt;int32&gt; (int_8) |
-| Text[] |  list of \&lt;binary&gt; (UTF8) |
-| Timestamp[]<sup>2</sup> | list of \&lt;int96&gt; |
-| Timestamptz[]<sup>3</sup> | list of \&lt;int96&gt; |
-| Varchar[] | list of \&lt;binary&gt; (UTF8) |
-| OTHERS | UNSUPPORTED |
+| Bigint[] | 元素类型为 \&lt;int64&gt; 的列表 |
+| Boolean[] | 元素类型为 \&lt;boolean&gt; 的列表 |
+| Bpchar[]<sup>1</sup> |  元素类型为 \&lt;binary&gt; (UTF8) 的列表 |
+| Bytea[] | 元素类型为 \&lt;binary&gt; 的列表 |
+| Date[] | 元素类型为 \&lt;int32&gt; (Date) 的列表 |
+| Float8[] | 元素类型为 \&lt;double&gt; 的列表 |
+| Integer[] | 元素类型为 \&lt;int32&gt; 的列表 |
+| Numeric[]/Decimal[] | 元素类型为 \<fixed\_len\_byte\_array> (Decimal) 的列表 |
+| Real[] | 元素类型为 \&lt;float&gt; 的列表 |
+| SmallInt[] | 元素类型为 \&lt;int32&gt; (int_8) 的列表 |
+| Text[] |  元素类型为 \&lt;binary&gt; (UTF8) 的列表 |
+| Timestamp[]<sup>2</sup> | 元素类型为 \&lt;int96&gt; 的列表 |
+| Timestamptz[]<sup>3</sup> | 元素类型为 \&lt;int96&gt; 的列表 |
+| Varchar[] | 元素类型为 \&lt;binary&gt; (UTF8) 的列表 |
+| 其他类型 | 不支持 |
 
 ### 关于 Parquet 模式与数据 {#about-parquet-schemas-and-data}
 
