@@ -122,7 +122,7 @@ Perform the following procedure to configure a PXF JDBC server for Hive:
             <value>gpadmin</value>
         </property>
         ```
-        **Or**, turn on JDBC server-level user impersonation so that PXF automatically uses the Apache Cloudberry user name to connect to Hive; uncomment the `pxf.service.user.impersonation` property in `jdbc-site.xml` and set the value to `true:
+        **Or**, turn on JDBC server-level user impersonation so that PXF automatically uses the Apache Cloudberry user name to connect to Hive; uncomment the `pxf.service.user.impersonation` property in `jdbc-site.xml` and set the value to `true`:
 
         ```xml
         <property>

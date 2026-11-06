@@ -322,7 +322,7 @@ Perform the following procedure to create Apache Cloudberry writable external ta
     postgres=# INSERT INTO pxf_s3_writetbl_1 VALUES ( 'Cleveland', 'Oct', 3812, 96645.37 );
     ```
 
-3. (Optional) Insert the data from the `pxf_s3_textsimple` table that you created in [Example: Reading Text Data from S3] (#example-reading-text-data-from-s3) into `pxf_s3_writetbl_1`:
+3. (Optional) Insert the data from the `pxf_s3_textsimple` table that you created in [Example: Reading Text Data from S3](#example-reading-text-data-from-s3) into `pxf_s3_writetbl_1`:
 
     ```sql
     postgres=# INSERT INTO pxf_s3_writetbl_1 SELECT * FROM pxf_s3_textsimple;
