@@ -254,6 +254,12 @@ ui_preset_ink = "Ink"
 ui_preset_terminal = "Terminal"
 ui_preset_experimental = "Экспериментальный"
 
+# Навигация и параллельное чтение OINK 1.5
+ui_breadcrumb = 'Навигационная цепочка'
+ui_compare_sync_progress = 'Нет общих заголовков, подходящих для выравнивания страниц, поэтому синхронизация основана на общем прогрессе чтения документа.'
+ui_compare_loading = 'Загрузка…'
+ui_compare_retry = 'Повторить'
+
 [ui_taxonomy_pages]
 one = '{{ . }} страница'
 few = '{{ . }} страницы'
