@@ -265,7 +265,7 @@ $ ps -ef | grep -E "con188 (seg|cmd)" | grep -v grep | sed 's/  */ /g' | sed 's/
 
 ### 19.1.2 数据的三种形态 {#1912-three-shapes-of-data}
 
-[§16.1](/cloudberry/core-internals/part-4-query-processing/ch16/#161-the-locus-model-cdbpathlocus) 通过执行位置（locus）代数介绍了规划器一侧的模型。执行时，行集只有三种物理形态，Motion 就是用来在这些形态之间转换的。
+[§16.1](/cloudberry/core-internals/part-4-query-processing/ch16/#161-the-locus-model-cdbpathlocus) 通过分布位置（locus）代数介绍了规划器一侧的模型。执行时，行集只有三种物理形态，Motion 就是用来在这些形态之间转换的。
 
 - **分区（partitioned）** — N 个进程持有 N 个互不相交的行集，其并集才是完整结果。`DISTRIBUTED BY` 或 `DISTRIBUTED RANDOMLY` 表，以及任何 Redistribute 的输出都属于这种形态。大多数计划中的大多数行集都是如此。
 - **复制（replicated）** — N 个进程持有 N 份完全相同的行集。磁盘上的 `DISTRIBUTED REPLICATED` 表如此，Broadcast Motion 刚刚送达的数据也会暂时呈现这种形态。用它参与连接的成本低，但生成它的成本高。
@@ -1691,7 +1691,7 @@ EXPLAIN (costs off, verbose) UPDATE m194_rand r SET v = h.v FROM m194_hash h WHE
 ```
 
 > [!NOTE]
-> 关于特殊类型再补充两点。**Broadcast** 与 **Broadcast Workers** 对分发职责的分配不同：普通广播只用路由 `-2` 调用*一次* `SendTuple`，让传输层复制数据；并行变体则在 `doSendTuple` 内循环。因此，广播永远不能使用 [§19.4.3](#1943-serialization-and-chunking--and-who-chooses-the-chunk-size) 的零拷贝路径，因为 `CandidateForSerializeDirect()` 会直接拒绝路由 `-2`（`tupser.c`）。另外，**Explicit Gather Motion** 确实罕见：只有发送方执行位置为 `Replicated` 时才生成（`createplan.c` — `create_motion_plan()`），具体由哪个 Segment 发送取决于 `gp_session_id % numInputSegs`。这是一种分摊负载的办法，让相同查询在不同会话中由不同 Segment 发送。
+> 关于特殊类型再补充两点。**Broadcast** 与 **Broadcast Workers** 对分发职责的分配不同：普通广播只用路由 `-2` 调用*一次* `SendTuple`，让传输层复制数据；并行变体则在 `doSendTuple` 内循环。因此，广播永远不能使用 [§19.4.3](#1943-serialization-and-chunking--and-who-chooses-the-chunk-size) 的零拷贝路径，因为 `CandidateForSerializeDirect()` 会直接拒绝路由 `-2`（`tupser.c`）。另外，**Explicit Gather Motion** 确实罕见：只有发送方分布位置为 `Replicated` 时才生成（`createplan.c` — `create_motion_plan()`），具体由哪个 Segment 发送取决于 `gp_session_id % numInputSegs`。这是一种分摊负载的办法，让相同查询在不同会话中由不同 Segment 发送。
 
 ### 19.4.3 序列化、分块，以及谁决定块大小 {#1943-serialization-and-chunking--and-who-chooses-the-chunk-size}
 
@@ -2641,7 +2641,7 @@ ROLLBACK
 	{
 ```
 
-缺少 Gather 只由一个 `if` 决定。`planner.c` 的 `standard_planner()` 将选项记录为 `glob->is_parallel_cursor`；通常会在最便宜路径上附加 Motion-to-Entry 的位置，先检查这个标志。没有那次调用，就根本不会添加 Motion，顶层切片保持查询产生的执行位置（[§16.1](/cloudberry/core-internals/part-4-query-processing/ch16/#161-the-locus-model-cdbpathlocus)）。
+缺少 Gather 只由一个 `if` 决定。`planner.c` 的 `standard_planner()` 将选项记录为 `glob->is_parallel_cursor`；通常会在最便宜路径上附加 Motion-to-Entry 的位置，先检查这个标志。没有那次调用，就根本不会添加 Motion，顶层切片保持查询产生的分布位置（[§16.1](/cloudberry/core-internals/part-4-query-processing/ch16/#161-the-locus-model-cdbpathlocus)）。
 
 ```c {title="src/backend/cdb/cdbllize.c — cdbllize_adjust_top_path()"}
 		if (query->commandType == CMD_SELECT || query->returningList)
@@ -2677,7 +2677,7 @@ sequenceDiagram
 
 ### 19.6.2 端点落在哪里 {#1962-where-the-endpoints-land}
 
-游标得到多少端点、端点在哪里，完全由**计划顶部的执行位置**决定，再次使用 [§16.1](/cloudberry/core-internals/part-4-query-processing/ch16/#161-the-locus-model-cdbpathlocus) 的位置代数。`adjust_top_path_for_parallel_retrieve_cursor` 将执行位置转换为顶层切片的进程组类型，`GetParallelCursorEndpointPosition`（`cdbendpoint.c`）再将其转换为 `EXPLAIN` 打印的四类位置。
+游标得到多少端点、端点在哪里，完全由**计划顶部的分布位置**决定，再次使用 [§16.1](/cloudberry/core-internals/part-4-query-processing/ch16/#161-the-locus-model-cdbpathlocus) 的分布位置代数。`adjust_top_path_for_parallel_retrieve_cursor` 将分布位置转换为顶层切片的进程组类型，`GetParallelCursorEndpointPosition`（`cdbendpoint.c`）再将其转换为 `EXPLAIN` 打印的四类位置。
 
 ```c {title="src/backend/cdb/cdbllize.c — adjust_top_path_for_parallel_retrieve_cursor()"}
 	if (CdbPathLocus_IsSingleQE(path->locus)
@@ -2737,7 +2737,7 @@ ROLLBACK;
 ```
 
 > [!NOTE]
-> 表格最后四行说明了这项功能的实际边界：**并非总能生成不汇集的计划。** 全局 `ORDER BY`、`LIMIT`、最终聚合，凡是顶层节点必须在单个进程中看到全部 Segment 行的操作，仍以 `Gather Motion 3:1` 结束。此时，端点建立在元组已经汇集到的 *Coordinator 上*。这种游标仍完全可用，但只有一个端点，瓶颈仍在 Coordinator；能获得的并行度取决于计划的执行位置，`cdbendpoint.h` 的头部注释也明确如此说明。应将此功能用于结果能够保持分布的查询。
+> 表格最后四行说明了这项功能的实际边界：**并非总能生成不汇集的计划。** 全局 `ORDER BY`、`LIMIT`、最终聚合，凡是顶层节点必须在单个进程中看到全部 Segment 行的操作，仍以 `Gather Motion 3:1` 结束。此时，端点建立在元组已经汇集到的 *Coordinator 上*。这种游标仍完全可用，但只有一个端点，瓶颈仍在 Coordinator；能获得的并行度取决于计划的分布位置，`cdbendpoint.h` 的头部注释也明确如此说明。应将此功能用于结果能够保持分布的查询。
 
 *计划以归并 Gather 结束的游标：一个端点，gp_segment_id 为 -1，端口 7100。可以从 Coordinator 检索，九行全部有序返回，但没有任何并行检索。*
 
