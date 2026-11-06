@@ -696,9 +696,9 @@ postgres=# SELECT * FROM userinfo_hiveavro;
 
     `intarray` 和 `propmap` 同样被序列化为文本字符串。
 
-## 分区裁剪 {#partition-pruning}
+## 分区剪枝 {#partition-pruning}
 
-PXF Hive 连接器支持 Hive 分区裁剪和 Hive 分区目录结构。这使得可以对构成 Hive 表的选定 HDFS 文件进行分区排除。要使用分区过滤功能来减少网络流量和 I/O，请在 PXF 外部表上运行查询，并在 `WHERE` 子句中引用分区 Hive 表的特定分区列。
+PXF Hive 连接器支持 Hive 分区剪枝和 Hive 分区目录结构。这使得可以对构成 Hive 表的选定 HDFS 文件进行分区排除。要使用分区过滤功能来减少网络流量和 I/O，请在 PXF 外部表上运行查询，并在 `WHERE` 子句中引用分区 Hive 表的特定分区列。
 
 PXF Hive 连接器对 Hive 字符串类型和整数类型的分区过滤支持情况如下：
 

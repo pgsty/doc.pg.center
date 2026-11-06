@@ -51,17 +51,17 @@ PXF 通过不同连接器暴露的 profile 访问数据源，过滤条件下推�
 |-------|:------------------------:|:----:|:----:|:----:|:----:|:----:|:----:|
 | jdbc | Y | Y<sup>4</sup> | Y | N | Y | Y | Y | 
 | *:parquet | Y<sup>1</sup> | N | Y<sup>1</sup> | Y<sup>1</sup> | Y<sup>1</sup> | Y<sup>1</sup> | Y<sup>1</sup> |
-| *:orc (all except hive:orc) | Y<sup>1,3</sup> | N | Y<sup>1,3</sup> | Y<sup>1,3</sup> | Y<sup>1,3</sup> | Y<sup>1,3</sup> | Y<sup>1,3</sup> |
-| s3:parquet and s3:text with S3-Select | Y |  N | Y | Y | Y | Y | Y |
+| *:orc（hive:orc 除外） | Y<sup>1,3</sup> | N | Y<sup>1,3</sup> | Y<sup>1,3</sup> | Y<sup>1,3</sup> | Y<sup>1,3</sup> | Y<sup>1,3</sup> |
+| s3:parquet 和 s3:text（使用 S3-Select 时） | Y |  N | Y | Y | Y | Y | Y |
 | hbase | Y | N | Y | N | Y | Y | N |
 | hive:text | Y<sup>2</sup> | N | N | N | Y<sup>2</sup> | Y<sup>2</sup> | N |
-| hive:rc, hive (accessing stored as RCFile) | Y<sup>2</sup> |  N | Y | Y | Y, Y<sup>2</sup> | Y, Y<sup>2</sup> | Y |
-| hive:orc, hive (accessing stored as ORC) | Y, Y<sup>2</sup> |  N | Y | Y | Y, Y<sup>2</sup> | Y, Y<sup>2</sup> | Y |
-| hive (accessing stored as Parquet) | Y, Y<sup>2</sup> | N | N | Y | Y, Y<sup>2</sup> | Y, Y<sup>2</sup> | Y |
-| hive:orc and VECTORIZE=true | Y<sup>2</sup> |  N | N | N | Y<sup>2</sup> | Y<sup>2</sup> | N |
+| hive:rc、hive（访问以 RCFile 格式存储的数据时） | Y<sup>2</sup> |  N | Y | Y | Y, Y<sup>2</sup> | Y, Y<sup>2</sup> | Y |
+| hive:orc、hive（访问以 ORC 格式存储的数据时） | Y, Y<sup>2</sup> |  N | Y | Y | Y, Y<sup>2</sup> | Y, Y<sup>2</sup> | Y |
+| hive（访问以 Parquet 格式存储的数据时） | Y, Y<sup>2</sup> | N | N | Y | Y, Y<sup>2</sup> | Y, Y<sup>2</sup> | Y |
+| hive:orc（VECTORIZE=true 时） | Y<sup>2</sup> |  N | N | N | Y<sup>2</sup> | Y<sup>2</sup> | N |
 
 <br/><sup>1</sup>&nbsp;由 PXF 而不是远端系统应用谓词，从而降低 CPU 使用率和内存占用。
-<br/><sup>2</sup>&nbsp;PXF 支持基于分区键的分区裁剪。
+<br/><sup>2</sup>&nbsp;PXF 支持基于分区键的分区剪枝。
 <br/><sup>3</sup>&nbsp;PXF 的过滤基于文件级、条带级和行级 ORC 统计信息。
 <br/><sup>4</sup>&nbsp;PXF `jdbc` profile 仅对 `TEXT` 字段支持 `LIKE` 运算符。
 
@@ -73,4 +73,4 @@ PXF 通过不同连接器暴露的 profile 访问数据源，过滤条件下推�
 * 您用来访问外部数据源的 Apache Cloudberry 协议必须支持过滤条件下推。`pxf` 外部表协议支持下推。
 * 您访问的外部数据源必须支持下推。例如，HBase 和 Hive 支持下推。
 * 对于在使用 `pxf` 协议创建的外部表上执行的查询，底层的 PXF 连接器也必须支持过滤条件下推。例如，PXF Hive、HBase 和 JDBC 连接器支持下推，支持读取 ORC 和 Parquet 数据的 PXF 连接器同样如此。
-  - 有关 Hive 对该特性的支持的更多信息，请参阅 Hive [分区裁剪](/cloudberry/pxf/access-hadoop/hive_pxf/#partition-pruning)。
+  - 有关 Hive 对该特性的支持的更多信息，请参阅 Hive [分区剪枝](/cloudberry/pxf/access-hadoop/hive_pxf/#partition-pruning)。
