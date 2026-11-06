@@ -955,7 +955,7 @@ CREATE TABLE distributors (
 WITH (fillfactor=70);
 ```
 
-Create table `cinemas in tablespace `diskvol1`:
+Create table `cinemas` in tablespace `diskvol1`:
 
 ```sql
 CREATE TABLE cinemas (
