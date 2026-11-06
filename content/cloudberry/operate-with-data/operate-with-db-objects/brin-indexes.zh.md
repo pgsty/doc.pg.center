@@ -1,9 +1,49 @@
 ---
 title: "BRIN 索引"
+description: "当表非常大，且某些列的值与其物理存储位置存在天然相关性时，可以使用块范围索引（BRIN）。"
 weight: 100
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/brin-indexes.md"
-translation_status: "placeholder"
 ---
 
-> [!NOTE] 译文待补
-> 本页中文翻译尚未完成，请先阅读<a href="/cloudberry/operate-with-data/operate-with-db-objects/brin-indexes/" hreflang="en" lang="en">英文原文</a>。
+BRIN 索引为一段块（或页）的范围内的值生成摘要，每个范围包含表中一组物理上相邻的页。例如，在存储订单数据的表中，较早的订单通常出现在表的开头。类似地，在邮政编码表中，同一个城市的编码可能在物理上聚集在一起。
+
+BRIN 索引通过位图索引扫描参与查询。当索引中的摘要信息与查询条件匹配时，查询会访问该块范围内的所有页，并返回找到的所有元组。执行器随后逐一验证这些元组，过滤掉不满足条件的元组。因此，BRIN 是一种“有损”索引。由于 BRIN 索引通常很小，与顺序扫描相比，它只会引入很少的开销，同时能让系统跳过许多无关的块。
+
+BRIN 索引存储的数据类型及其可以加速的查询，取决于为各列选择的操作符类。对于线性有序的数据类型，索引记录每个范围内的最小值和最大值。对于几何类型，索引存储包围范围内所有对象的边界框。
+
+每个块范围的大小由创建索引时的 `pages_per_range` 参数决定。索引条目数等于表的总页数除以 `pages_per_range`。较小的值会产生更大的索引（更多条目），但摘要也会更精细，使扫描能够跳过更多无关的数据块。对于堆表，`pages_per_range` 的默认值为 `32`；对于 AO 表，默认值为 `1`。
+
+> [!NOTE]
+> 从 v2.0.0 开始，AO 表和 CO 表支持 BRIN 索引。系统使用链式 revmap 结构来优化存储并减少空间占用。这项优化既改进了存储布局，也改进了摘要维护，还允许使用 `brin_summarize_range()` 手动生成摘要。
+>
+> 虽然可以在 AO/CO 表上创建和维护 BRIN 索引，但查询规划器是否选择使用它们，取决于查询谓词、数据分布、页数以及启发式代价模型。因此，并非所有 BRIN 使用场景都能自动带来性能提升。BRIN 最适合数据聚集程度较高的大型数据集。
+
+## 维护 BRIN 索引 {#maintain-brin-indexes}
+
+创建 BRIN 索引时，Apache Cloudberry 会扫描现有堆页，并为每个块范围生成摘要元组，包括末尾可能不完整的范围。随着新数据填满更多页，系统会尝试更新已有摘要的范围的摘要信息。然而，对于尚未生成摘要的范围，系统不会自动创建摘要元组。这些范围会保持“未生成摘要”状态，需要手动干预来生成摘要。
+
+可以通过以下方法生成初始摘要：
+
+- 在 `VACUUM` 操作期间，系统会自动为所有尚未处理的块范围生成摘要。
+
+也可以使用以下函数手动控制摘要生成：
+
+- `brin_summarize_new_values(regclass)`：为所有尚未处理的块范围生成摘要。
+- `brin_summarize_range(regclass, bigint)`：仅为包含指定页的范围生成摘要，前提是该范围尚未生成摘要。
+
+如果要删除摘要信息，可以使用 `brin_desummarize_range(regclass, bigint)` 函数清除特定范围的摘要。当数据变更导致现有摘要不准确时，这尤其有用。
+
+下表列出了可用于维护 BRIN 索引的函数。这些函数不能在恢复模式下执行，并且仅限超级用户或索引所有者使用。
+
+| 名称                                                         | 返回类型 | 说明                                                                              |
+|--------------------------------------------------------------|-------------|------------------------------------------------------------------------------------------|
+| `brin_summarize_new_values(index regclass)`                  | integer     | 为所有尚未处理的块范围生成摘要。                                                 |
+| `brin_summarize_range(index regclass, blockNumber bigint)`   | integer     | 如果尚未生成摘要，则为包含指定块的范围生成摘要。          |
+| `brin_desummarize_range(index regclass, blockNumber bigint)` | integer     | 如果已生成摘要，则删除包含指定块的范围的摘要。 |
+
+`brin_summarize_new_values` 函数接受索引名称或 OID，并自动查找尚未生成摘要的范围。它扫描相应的表页，并生成新的摘要索引元组，返回创建的摘要条目数。`brin_summarize_range` 函数仅处理包含指定块号的范围。
+
+> [!NOTE]
+> - 通常，运行 `VACUUM` 后，`brin_summarize_new_values()` 函数不会生成新摘要，因为默认行为已包含在清理期间为所有新增块范围生成摘要。此函数主要用于手动刷新摘要，在禁用自动清理或表频繁更新时很有用。
+> - 如果表的页数较少，或者查询谓词的选择性不够高，规划器仍可能不选择 BRIN 索引路径。
+> - `brin_summarize_range` 和 `brin_desummarize_range` 函数只影响实际存在的范围。如果提供的块号不存在，函数会返回 `0`。由于数据分布不均，某些范围可能只存在于部分 Segment 上。在这种情况下，函数返回成功处理该范围的 Segment 数量。
