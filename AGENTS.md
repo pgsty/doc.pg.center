@@ -13,8 +13,8 @@ This repository contains the source for the **PG.CENTER** component documentatio
 site at **doc.pg.center**, part of **[pg.center](https://pg.center/)**, for the tools used
 to run PostgreSQL in production. PGSTY maintains this independent community
 edition. PostgreSQL core manuals, reference material, and ecosystem resources
-live on the parent site; this repository maintains the six component collections
-listed below. It uses Hugo Extended and the OINK theme, pinned as a Go module in
+live on the parent site; this repository maintains the seven documentation
+collections listed below. It uses Hugo Extended and the OINK theme, pinned as a Go module in
 `go.mod` and `go.sum`.
 
 Use **PG.CENTER** as the site identity in the title, navigation, footer, and
@@ -25,9 +25,10 @@ in all other languages. The local checkout is `~/www/doc.pg.center`.
 
 ## Documentation and languages
 
-Every collection is available in **English (`en`), Simplified Chinese (`zh`),
-French (`fr`), Japanese (`ja`), German (`de`), Russian (`ru`), Arabic (`ar`), and
-Spanish (`es`)**.
+The six component collections are available in **English (`en`), Simplified
+Chinese (`zh`), French (`fr`), Japanese (`ja`), German (`de`), Russian (`ru`),
+Arabic (`ar`), and Spanish (`es`)**. Apache Cloudberry is published in English
+with Chinese title placeholders; it has no other language editions yet.
 
 | Component | Documentation scope | Languages |
 | --- | --- | --- |
@@ -37,6 +38,7 @@ Spanish (`es`)**.
 | pgBadger | Log analysis, command reference, sample reports, and release history | en, zh, fr, ja, de, ru, ar, es |
 | HAProxy | Starter, Configuration, and Management manuals | en, zh, fr, ja, de, ru, ar, es |
 | etcd | Operations, APIs, development, internals, and upgrades | en, zh, fr, ja, de, ru, ar, es |
+| Apache Cloudberry | 2.x MPP database build, deployment, data, performance, security, administration, and references | en; zh titles only |
 
 English is the source language. Files without a language suffix are English;
 translations use the same path with `.zh.md`, `.fr.md`, `.ja.md`, `.de.md`,
@@ -46,6 +48,29 @@ the `docs` content type. English URLs start with the component name, such as
 `/patroni/`; translations prepend the language code, such as `/fr/patroni/`.
 There is no `/docs/` section or index. Internal links, aliases, and generated
 outputs must use the component routes without a `/docs/` prefix.
+
+### Apache Cloudberry
+
+`content/cloudberry/` is converted from the Docusaurus 2.x docs in
+`apache/cloudberry-site` (`versioned_docs/version-2.x`), pinned in
+`data/upstreams.yaml`. Its section tree follows the upstream 2.x sidebar, not the
+upstream directory layout: each sidebar category is a Hugo section, and a
+category's linked doc is that section's `_index.md`. Page bundles hold images.
+Every heading carries the explicit `{#id}` that Docusaurus generates, so upstream
+anchors and future translations stay aligned.
+
+The checkers know Cloudberry's languages (`en`, `zh`). Each `.zh.md` page has a
+translated title, `translation_status: placeholder`, and a callout that links to
+the English page with raw HTML, because the site's link hook would otherwise
+resolve the link back to the Chinese page itself. `check-content.py` verifies
+that link, and `report-coverage.py` counts placeholders as untranslated. When
+translating a page, replace the callout with the full text and remove the
+marker; never paste English prose into a Chinese page. Do not add Cloudberry menus, home cards,
+or footer links to other languages until those editions exist.
+
+Upstream prose escapes brackets as `\(` and `\[`. The site's math passthrough
+reads those as formula delimiters, so converted text uses plain brackets; keep it
+that way when syncing upstream changes.
 
 ## Repository layout
 

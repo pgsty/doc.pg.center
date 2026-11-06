@@ -99,3 +99,17 @@ etcd:
   notice: /attribution/#etcd
   ref: v3.7.3; docs d20f8ae
   modified: true
+
+cloudberry:
+  name: Apache Cloudberry (Incubating) 2.x documentation
+  repository: https://github.com/apache/cloudberry-site
+  documentation: https://cloudberry.apache.org/docs/
+  source_commit: d4e372af8170f7e23d501b70deb3938efa1c978b
+  source_path: versioned_docs/version-2.x
+  sidebar: versioned_sidebars/version-2.x-sidebars.json
+  stable_release: 2.2.0-incubating
+  copyright: Copyright 2024-2025 The Apache Software Foundation
+  license: Apache-2.0
+  notice: /attribution/#cloudberry
+  ref: 2.x docs, commit d4e372a
+  modified: true

@@ -11,6 +11,7 @@ columns:
       - { label: pgBadger, url: /pgbadger/ }
       - { label: HAProxy, url: /haproxy/ }
       - { label: etcd, url: /etcd/ }
+      - { label: Cloudberry, url: /cloudberry/ }
   - title: 上游项目
     links:
       - { label: Patroni, url: https://github.com/patroni/patroni, external: true }
@@ -19,6 +20,7 @@ columns:
       - { label: pgBadger, url: https://pgbadger.darold.net/, external: true }
       - { label: HAProxy, url: https://www.haproxy.org/, external: true }
       - { label: etcd, url: https://etcd.io/, external: true }
+      - { label: Cloudberry, url: https://cloudberry.apache.org/, external: true }
   - title: PG.CENTER
     links:
       - { label: "主站首页", url: "https://pg.center/zh/", external: true }

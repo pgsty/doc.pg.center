@@ -18,11 +18,19 @@ adaptations use CC BY 4.0, subject to the original upstream terms identified bel
 | pgBadger | v13.2 development snapshot, commit `f373ac678c756f66a785c5ab4773d1f05f468d67` | Copyright (c) 2012-2026 Gilles Darold; PostgreSQL License |
 | HAProxy | 3.4.7-57, commit `0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3` | Copyright 2000-2026 Willy Tarreau; GPL-2.0-only |
 | etcd | v3.7 docs, website commit `d20f8ae346da60ab6eb6f24f200753b328aa9fcc`; updated for release v3.7.3 | Copyright 2013-present etcd Authors; CC BY 4.0 for prose, Apache 2.0 for code and samples |
+| Apache Cloudberry | 2.x docs (`versioned_docs/version-2.x`), website commit `d4e372af8170f7e23d501b70deb3938efa1c978b`; release 2.2.0-incubating | Copyright 2024-2025 The Apache Software Foundation; Apache-2.0 |
 
 The etcd installation, Docker, and Kubernetes examples and release summary were
 updated on 2026-10-28 for tag `v3.7.3`, release commit
 `0a173d0410a96d01091b484daae81365bbcde57e`, including its Go 1.26.10 toolchain.
 The v3.7 documentation snapshot remains pinned separately from the software release.
+
+The Apache Cloudberry collection is English only. Its Chinese pages carry translated
+titles and link to the English text until the translation is written. The upstream
+`NOTICE` records that the product contains significant parts originally based on
+Greenplum Database, Copyright (c) 2004-2020 VMware, Inc. or its affiliates, under
+the Apache License 2.0. Apache Cloudberry is undergoing incubation at The Apache
+Software Foundation; Apache Cloudberry and Apache are trademarks of the ASF.
 
 The HAProxy edition follows a 3.4 maintenance-branch documentation snapshot after
 stable release 3.4.7. It includes the complete Starter, Configuration, and

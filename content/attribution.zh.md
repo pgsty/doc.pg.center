@@ -11,7 +11,7 @@ translation_notice: false
 outputs: [HTML, markdown]
 ---
 
-PG.CENTER 转载并整理了六个上游项目撰写的文档。每一个文档页面的末尾都有一行署名，指明该页改编自哪份作品、
+PG.CENTER 转载并整理了七个上游项目撰写的文档。每一个文档页面的末尾都有一行署名，指明该页改编自哪份作品、
 版权归属于谁、依据什么协议授权，并链接回本页对应的小节。
 
 本页就是那份记录：说明每份材料从哪里、在什么时间、从哪个固定版本导入，依据什么协议，以及完整的上游声明保存在何处。
@@ -30,6 +30,7 @@ PG.CENTER 转载并整理了六个上游项目撰写的文档。每一个文档�
 | [pgBadger](/zh/pgbadger/) | [pgBadger 文档](https://pgbadger.darold.net/) | v13.2 开发快照，提交 `f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/zh/haproxy/) | [HAProxy 3.4 手册](https://docs.haproxy.org/3.4/) | 3.4.7-57 文档快照（稳定版 3.4.7），提交 `0faeaed` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/zh/etcd/) | [etcd v3.7 文档](https://etcd.io/docs/v3.7/) | v3.7 文档，提交 `d20f8ae`；软件版本 v3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [上游 `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [Apache Cloudberry](/zh/cloudberry/) | [Apache Cloudberry 2.x 文档](https://cloudberry.apache.org/docs/) | 2.x 文档，提交 `d4e372a`；软件版本 2.2.0-incubating | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [上游 `LICENSE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/LICENSE) 与 [`NOTICE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/NOTICE) |
 {.wide .expand}
 
 所有文档集都是**改编**而非镜像：标题、锚点、交叉链接、代码签名、页面分组与导航结构都为本站重新组织，
@@ -113,6 +114,29 @@ etcd 文档版权归 etcd Authors 所有（Copyright 2013-present）。其正文
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 授权，代码与代码示例依
 [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) 授权。
 完整声明保存在[上游仓库](https://github.com/etcd-io/website/blob/main/LICENSE)。
+
+## Apache Cloudberry {#cloudberry}
+
+2026-11-06 从 Apache Cloudberry 网站仓库的提交
+[`d4e372af8170`](https://github.com/apache/cloudberry-site/commit/d4e372af8170f7e23d501b70deb3938efa1c978b) 导入。来源是
+[`versioned_docs/version-2.x`](https://github.com/apache/cloudberry-site/tree/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x) 中的 2.x 文档，上游将其发布于
+<https://cloudberry.apache.org/docs/>，对应 2.2.0-incubating 版本。
+
+导航结构沿用上游 2.x 侧边栏。Docusaurus 的提示块、标签页和折叠块改写为 OINK 的提示框与标签页，
+图片与使用它的页面放在一起。上游发布但未列入侧边栏的三个页面（TPC-H、TPC-DS 基准测试与 `pg_restore`）
+也已收录。上游 19 个失效链接（遗留的 Greenplum 路径与拼写错误）改为指向其所指的页面，一处未闭合的提示块
+已闭合，一处拼写错误的标题已更正。中文页面目前只有译名，正文链接到英文原文。
+
+Apache Cloudberry 网站版权归 Apache 软件基金会所有（Copyright 2024-2025 The Apache Software Foundation），
+依 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) 授权。其
+[`NOTICE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/NOTICE) 说明，该产品有相当部分最初基于 VMware, Inc. 或其关联公司的
+Greenplum Database（Copyright (c) 2004-2020），同样依 Apache License 2.0 授权。页末署名与本节说明这些页面
+经过修改。
+
+Apache Cloudberry、Apache 以及 Apache 羽毛标识是 Apache 软件基金会的商标。Apache Cloudberry 是一个在
+Apache 孵化器赞助下、于 Apache 软件基金会（ASF）孵化中的项目。所有新接收的项目都需要经历孵化，直到进一步
+评审表明其基础设施、沟通与决策流程已稳定到与其他成功的 ASF 项目一致的程度。孵化状态不一定反映代码的完整性
+或稳定性，但表明该项目尚未获得 ASF 的完全认可。
 
 ## 本站 {#site}
 

@@ -11,7 +11,7 @@ translation_notice: false
 outputs: [HTML, markdown]
 ---
 
-PG.CENTER republishes documentation written by six upstream projects. Every documentation page
+PG.CENTER republishes documentation written by seven upstream projects. Every documentation page
 carries a one-line credit at the end naming the work it is derived from, its copyright holder,
 its licence, and a link back to the section of this page that covers it.
 
@@ -33,6 +33,7 @@ which licence, and where the complete upstream notice is retained.
 | [pgBadger](/pgbadger/) | [pgBadger documentation](https://pgbadger.darold.net/) | v13.2 development snapshot, commit `f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
 | [HAProxy](/haproxy/) | [HAProxy 3.4 manuals](https://docs.haproxy.org/3.4/) | 3.4.7-57; stable v3.4.7, commit `0faeaed` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
 | [etcd](/etcd/) | [etcd v3.7 documentation](https://etcd.io/docs/v3.7/) | v3.7 docs, commit `d20f8ae`; release v3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Upstream `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [Apache Cloudberry](/cloudberry/) | [Apache Cloudberry 2.x documentation](https://cloudberry.apache.org/docs/) | 2.x docs, commit `d4e372a`; release 2.2.0-incubating | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [Upstream `LICENSE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/LICENSE) and [`NOTICE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/NOTICE) |
 {.wide .expand}
 
 Every collection is **adapted**, not mirrored. Headings, anchors, cross-links, code signatures,
@@ -128,6 +129,34 @@ The etcd documentation is copyright 2013-present etcd Authors. Its prose is lice
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), while code and code samples are
 licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). The complete notice is
 retained [upstream](https://github.com/etcd-io/website/blob/main/LICENSE).
+
+## Apache Cloudberry {#cloudberry}
+
+Imported on 2026-11-06 from the Apache Cloudberry website repository at commit
+[`d4e372af8170`](https://github.com/apache/cloudberry-site/commit/d4e372af8170f7e23d501b70deb3938efa1c978b). The source is the 2.x
+documentation in [`versioned_docs/version-2.x`](https://github.com/apache/cloudberry-site/tree/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x), which upstream publishes at
+<https://cloudberry.apache.org/docs/> for the 2.2.0-incubating release.
+
+Navigation follows the upstream 2.x sidebar. Docusaurus admonitions, tabs, and collapsible blocks
+are rewritten as OINK callouts and tabs, and images live beside the pages that use them. Three pages
+that upstream publishes outside its sidebar, the TPC-H and TPC-DS benchmarks and `pg_restore`, are
+included. Nineteen links that are broken upstream (legacy Greenplum paths and typos) point to the
+page they refer to, an unclosed note is closed, and a misspelled heading is corrected. The Chinese
+pages currently carry translated titles and link to the English text.
+
+The Apache Cloudberry website is Copyright 2024-2025 The Apache Software Foundation and is licensed
+under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0). Its
+[`NOTICE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/NOTICE) states that the product contains significant parts originally based on
+Greenplum Database from VMware, Inc. or its affiliates, Copyright (c) 2004-2020, also licensed under
+the Apache License 2.0. The page-end credit and this section identify the pages as modified.
+
+Apache Cloudberry, Apache, and the Apache feather logo are trademarks of The Apache Software
+Foundation. Apache Cloudberry is an effort undergoing incubation at The Apache Software Foundation
+(ASF), sponsored by the Apache Incubator. Incubation is required of all newly accepted projects until
+a further review indicates that the infrastructure, communications, and decision making process have
+stabilized in a manner consistent with other successful ASF projects. While incubation status is not
+necessarily a reflection of the completeness or stability of the code, it does indicate that the
+project has yet to be fully endorsed by the ASF.
 
 ## This site {#site}
 
