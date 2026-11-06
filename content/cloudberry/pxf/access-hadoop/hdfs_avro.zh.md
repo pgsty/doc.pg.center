@@ -202,7 +202,7 @@ CREATE FOREIGN TABLE [ IF NOT EXISTS ] <table_name>
 
 | 关键字  | 值 |
 |-------|-------------------------------------|
-| \<foreign_server\>    | PXF 用于访问数据的已命名服务器配置。您可以在 `CREATE SERVER` 语句中覆盖凭据，具体方法参见[为外部表覆盖 S3 服务器配置](/cloudberry/pxf/access-objectstores/access_s3/#overriding-the-s3-server-configuration-for-foreign-tables) |
+| \<foreign_server\>    | PXF 用于访问数据的已命名服务器配置。您可以在 `CREATE SERVER` 语句中覆盖凭据，具体方法参见[为外表覆盖 S3 服务器配置](/cloudberry/pxf/access-objectstores/access_s3/#overriding-the-s3-server-configuration-for-foreign-tables) |
 | resource \<path&#8209;to&#8209;file\>    | 对象存储中目录或文件的路径。当 `<server_name>` 配置包含 [`pxf.fs.basePath`](/cloudberry/pxf/administering/configuring/cfg_server/#about-the-pxffsbasepath-property) 属性设置时，PXF 将 \<path&#8209;to&#8209;file\> 视为相对于所指定基础路径的路径；否则，PXF 将其视为绝对路径。\<path&#8209;to&#8209;file\> 不得指定相对路径，也不得包含美元符号（`$`）字符。 |
 | format 'avro'  | 文件格式规范。 |
 | \<custom&#8209;option\>=\<value\> | Avro 专用的自定义选项见[上文](/cloudberry/pxf/access-hadoop/hdfs_avro/#custom-options)。 |
