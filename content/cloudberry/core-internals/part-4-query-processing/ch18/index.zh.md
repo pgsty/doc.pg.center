@@ -941,7 +941,7 @@ EXPLAIN (ANALYZE, TIMING OFF, COSTS OFF)
 ```
 
 > [!NOTE]
-> 这里有两个故意留出的未展开部分。驱动这些扫描的 `Partition Selector` 和 `Sequence` 节点属于**[§18.7](#187-cloudberry-specific-nodes)**。此外，`initNextTableToScan` 的后半部分——`build_attrmap_by_name_if_req` 接着 `change_varattnos_of_a_varno`——存在的原因是兄弟分区在执行 `DROP COLUMN` 后可能拥有不同的物理列编号；`Dynamic*` 节点从一个分区走向下一个分区时，会重新映射其限定条件和目标列表中的 `Var`，而 `Append` 计划在规划阶段就要完成同样的工作。
+> 这里有两个故意留出的未展开部分。驱动这些扫描的 `Partition Selector` 和 `Sequence` 节点属于 **[§18.7](#187-cloudberry-specific-nodes)**。此外，`initNextTableToScan` 的后半部分——`build_attrmap_by_name_if_req` 接着 `change_varattnos_of_a_varno`——存在的原因是兄弟分区在执行 `DROP COLUMN` 后可能拥有不同的物理列编号；`Dynamic*` 节点从一个分区走向下一个分区时，会重新映射其限定条件和目标列表中的 `Var`，而 `Append` 计划在规划阶段就要完成同样的工作。
 
 ### 18.2.7 Segment 内并行扫描 {#1827-intra-segment-parallel-scan}
 
@@ -1130,7 +1130,7 @@ EXPLAIN (ANALYZE, VERBOSE, TIMING OFF, COSTS OFF)
    Max Memory: 1728kB  Avg Memory: 1728kB (3 segments)
 ```
 
-6197 × 3 = 18 591 ≈ 18 593；1728 × 3 则恰好等于 5184。因此，解读排序执行统计数据的规则是：**`Memory:` 和 `Disk:` 按 Segment 求和，必须先除以 Segment 数量，才能与内存预算比较。**这*不是* `actual rows` 采用的约定；[§18.1](#181-executor-framework--lifecycle) 已经说明后者。两种汇总方式确实不同，只是在 `explain_gp.c` 中并排计算。有了逐 Segment 的数字，就可以核算其来源，因为排序的内存占用恰好分成两部分。第一部分是 `memtuples` 数组：每行对应一个 24 字节的 `SortTuple`（`tuplesort.h`），保存一个指针和 `datum1`。后者是预先提取的第一个排序键；如果类型支持，也可以是*缩略键*，即一个按值传递的替代值，大部分比较都无需访问元组本身（`tuplesort.h`）。数组从 1024 个槽位开始倍增（`grow_memtuples`，`tuplesort.c`），因此实际大小是高于行数的下一个 2 的幂。第二部分是元组本身，它们以 `MinimalTuple` 的形式复制到专用子上下文，并通过 `GetMemoryChunkSpace` 按实际分配大小计费（`tuplesort.c` — `tuplesort_puttuple_common()`）。
+6197 × 3 = 18 591 ≈ 18 593；1728 × 3 则恰好等于 5184。因此，解读排序执行统计数据的规则是：**`Memory:` 和 `Disk:` 按 Segment 求和，必须先除以 Segment 数量，才能与内存预算比较。** 这*不是* `actual rows` 采用的约定；[§18.1](#181-executor-framework--lifecycle) 已经说明后者。两种汇总方式确实不同，只是在 `explain_gp.c` 中并排计算。有了逐 Segment 的数字，就可以核算其来源，因为排序的内存占用恰好分成两部分。第一部分是 `memtuples` 数组：每行对应一个 24 字节的 `SortTuple`（`tuplesort.h`），保存一个指针和 `datum1`。后者是预先提取的第一个排序键；如果类型支持，也可以是*缩略键*，即一个按值传递的替代值，大部分比较都无需访问元组本身（`tuplesort.h`）。数组从 1024 个槽位开始倍增（`grow_memtuples`，`tuplesort.c`），因此实际大小是高于行数的下一个 2 的幂。第二部分是元组本身，它们以 `MinimalTuple` 的形式复制到专用子上下文，并通过 `GetMemoryChunkSpace` 按实际分配大小计费（`tuplesort.c` — `tuplesort_puttuple_common()`）。
 
 ![排序内存占用的两部分，大小依据实测数据绘制](fig-053.svg)
 
@@ -1193,7 +1193,7 @@ EXPLAIN (ANALYZE, VERBOSE, TIMING OFF, COSTS OFF) SELECT id FROM m183_s ORDER BY
    Max Memory: 4151kB  Avg Memory: 4140kB (3 segments)
 ```
 
-对于 `t_len` 为 33 的情况，预测值是 1536 kB 数组加上 33 462 × 56 = 1830 kB，即 generation 上下文占 **3366 kB**；`aset.c` 则占 1536 + 33 462 × 80 = **4150 kB**。实测值为 **3366 kB 和 4151 kB**。元组存储部分的用量比恰好为 80/56 = 1.43，总占用比为 1.23。宽度少一个字节、`t_len` 为 32 时，generation 上下文每行*反而多占* 8 字节（3366 对 3105 kB）；而对于 [§18.3.2](#1832-whose-kilobytes-are-those--and-where-do-they-go) 中 `m183_t` 的结构，两种分配器都使用 32 字节内存块，这项改动毫无收益。因此，如实的结论是：**机制确实存在，而且可以精确测量到字节，但“2.3–2.5 倍”不是 PostgreSQL 16 固有的性质，而是特定元组宽度的结果。**收益受限于 2 的幂大小类别与下一个 8 字节边界之间的差距；对于只占一个内存块的元组，元组部分的用量比最高接近 1.6，总占用的改善更小。至于实际耗时，在能够同条件比较的 [§18.3.1](#1831-sort-a-thin-node-over-tuplesort) 中，同一查询溢出与不溢出的耗时相差 1.2 倍。我们未能复现实际耗时的大幅改善，也不预期会看到：这里的排序只是 `Gather Motion` 后方三个并发排序之一，Interconnect 的开销很容易掩盖这点差异。
+对于 `t_len` 为 33 的情况，预测值是 1536 kB 数组加上 33 462 × 56 = 1830 kB，即 generation 上下文占 **3366 kB**；`aset.c` 则占 1536 + 33 462 × 80 = **4150 kB**。实测值为 **3366 kB 和 4151 kB**。元组存储部分的用量比恰好为 80/56 = 1.43，总占用比为 1.23。宽度少一个字节、`t_len` 为 32 时，generation 上下文每行*反而多占* 8 字节（3366 对 3105 kB）；而对于 [§18.3.2](#1832-whose-kilobytes-are-those--and-where-do-they-go) 中 `m183_t` 的结构，两种分配器都使用 32 字节内存块，这项改动毫无收益。因此，如实的结论是：**机制确实存在，而且可以精确测量到字节，但“2.3–2.5 倍”不是 PostgreSQL 16 固有的性质，而是特定元组宽度的结果。** 收益受限于 2 的幂大小类别与下一个 8 字节边界之间的差距；对于只占一个内存块的元组，元组部分的用量比最高接近 1.6，总占用的改善更小。至于实际耗时，在能够同条件比较的 [§18.3.1](#1831-sort-a-thin-node-over-tuplesort) 中，同一查询溢出与不溢出的耗时相差 1.2 倍。我们未能复现实际耗时的大幅改善，也不预期会看到：这里的排序只是 `Gather Motion` 后方三个并发排序之一，Interconnect 的开销很容易掩盖这点差异。
 
 > [!NOTE]
 > 有两点限制，都与本构建有关。第一，`--enable-cassert` 会启用 `MEMORY_CONTEXT_CHECKING`（`pg_config_manual.h`），使 `MemoryChunk` 从 8 字节增至 16 字节，并让 `generation.c` — `GenerationAlloc()` 通过 `MAXALIGN(size + 1)` 预留一个哨兵字节。在发布构建中，同一个 33 字节元组占 8 + 40 = 48 字节，而不是 56 字节，generation 的优势还会*扩大*，所以我们的发现偏保守，而非偏乐观。第二，`work_mem:` 行只出现在有界排序中，因为 `tuplesort_get_stats` 仅在设置了 `TUPLESORT_ALLOWBOUNDED` 时才填充 `stats->workmemused`（`tuplesort.c`）。这是执行统计数据的缺口，不是行为上的差异。
@@ -1503,7 +1503,7 @@ EXPLAIN (ANALYZE, TIMING OFF, COSTS OFF)
 ```
 
 > [!NOTE]
-> ORCA 有一个参数 `optimizer_force_window_hash_agg`，在 `CConfigParamMapping.cpp` 中映射到 `EopttraceEnableWindowHashAgg` 跟踪标志。**不要在本构建上使用它。**启用后，ORCA 会生成 `T_WindowHashAgg` 计划节点，但 `ExecInitNode` 没有对应分支；`grep T_WindowHashAgg src/backend/executor/` 找不到任何结果。因此，连 `EXPLAIN` 都会因 `ERROR: unrecognized node type: 63 (execProcnode.c — ExecInitNode)` 而失败。它被声明为开发者选项，在 `guc_gp.c`（`config_bool`）中带有注释 `// TODO: remove it before merge`，这足以概括其当前状态。
+> ORCA 有一个参数 `optimizer_force_window_hash_agg`，在 `CConfigParamMapping.cpp` 中映射到 `EopttraceEnableWindowHashAgg` 跟踪标志。**不要在本构建上使用它。** 启用后，ORCA 会生成 `T_WindowHashAgg` 计划节点，但 `ExecInitNode` 没有对应分支；`grep T_WindowHashAgg src/backend/executor/` 找不到任何结果。因此，连 `EXPLAIN` 都会因 `ERROR: unrecognized node type: 63 (execProcnode.c — ExecInitNode)` 而失败。它被声明为开发者选项，在 `guc_gp.c`（`config_bool`）中带有注释 `// TODO: remove it before merge`，这足以概括其当前状态。
 
 ### 18.3.10 `TupleSplit`：一次遍历处理多个 DISTINCT {#18310-tuplesplit-several-distincts-in-one-pass}
 
@@ -1707,7 +1707,7 @@ SELECT count(*) FROM m184_f f JOIN m184_d d ON f.did = d.did WHERE d.grp = 3;
 ```
 
 > [!NOTE]
-> **哪个优化器会生成归并连接？**实践中只有 PostgreSQL 规划器。ORCA 的整个 xform 库只有一条归并连接实现规则，即 `CXformImplementFullOuterMergeJoin.cpp`，所以只有 `FULL OUTER JOIN` 才可能使用归并连接；即便如此，本集群开启 `optimizer_enable_mergejoin=on`（隐藏的开发者 GUC，`guc_gp.c` — `config_bool`）后，仍然因代价更低而选择 `Hash Full Join`。因此，本节所有归并连接都先设置 `optimizer=off`，与 [§17.6](/cloudberry/core-internals/part-4-query-processing/ch17/#176-steering--introspection) 的观察一致。
+> **哪个优化器会生成归并连接？** 实践中只有 PostgreSQL 规划器。ORCA 的整个 xform 库只有一条归并连接实现规则，即 `CXformImplementFullOuterMergeJoin.cpp`，所以只有 `FULL OUTER JOIN` 才可能使用归并连接；即便如此，本集群开启 `optimizer_enable_mergejoin=on`（隐藏的开发者 GUC，`guc_gp.c` — `config_bool`）后，仍然因代价更低而选择 `Hash Full Join`。因此，本节所有归并连接都先设置 `optimizer=off`，与 [§17.6](/cloudberry/core-internals/part-4-query-processing/ch17/#176-steering--introspection) 的观察一致。
 
 ### 18.4.3 哈希连接：构建、探测与报告数字 {#1843-hash-join-build-probe-and-the-numbers-it-reports}
 
@@ -2105,7 +2105,7 @@ NOTICE:  prefetch join qual in slice 1 of plannode 3  (seg2 slice1 10.100.0.3:71
 从上到下阅读数组，设计便一目了然。运行时没有递归，也没有节点类型检查：步骤 1 从扫描槽位取出 `a`，步骤 2 调用 `int4gt`，步骤 3 判断能否跳过 `AND` 的剩余部分。短路不是从递归调用中 `return`，而是一个*索引*：步骤 3 带有 `jumpdone = 7`，指向最后一个合取项之后的步骤。
 
 > [!NOTE]
-> **本节的步骤数组如何获取。**编译后的表达式没有对应的 SQL 视图，因此我将 `gdb` 附加到 Segment 0 上的后端进程（通过 `PGOPTIONS='-c gp_role=utility' psql -p 7102` 打开），在 `ExecReadyInterpretedExpr` 上设断点——调用它时数组已经构建完毕——然后遍历 `state->steps`，输出 `(ExprEvalOp) opcode` 及相关的 `d` 联合体字段。下面的所有清单都是这些 printf 输出的节选。utility 模式下的 Segment 会话编译限定条件的方式与 QE 完全相同，而且只有一个进程，因此比 Coordinator 更适合作为实验环境。
+> **本节的步骤数组如何获取。** 编译后的表达式没有对应的 SQL 视图，因此我将 `gdb` 附加到 Segment 0 上的后端进程（通过 `PGOPTIONS='-c gp_role=utility' psql -p 7102` 打开），在 `ExecReadyInterpretedExpr` 上设断点——调用它时数组已经构建完毕——然后遍历 `state->steps`，输出 `(ExprEvalOp) opcode` 及相关的 `d` 联合体字段。下面的所有清单都是这些 printf 输出的节选。utility 模式下的 Segment 会话编译限定条件的方式与 QE 完全相同，而且只有一个进程，因此比 Coordinator 更适合作为实验环境。
 
 ### 18.5.1 从树到步骤数组 {#1851-from-tree-to-step-array}
 
@@ -2553,7 +2553,7 @@ EXPLAIN (ANALYZE, COSTS OFF, TIMING OFF)
 设置 `jit_above_cost = 0` 后，`PlannedStmt` 确实携带 `PGJIT_PERFORM | PGJIT_EXPR | PGJIT_DEFORM`，但 `EXPLAIN ANALYZE` 仍不输出 `JIT:` 块，因为没有创建任何函数时，`ExplainPrintJIT` 会立即返回（`explain.c`），这里确实一个也没有。与 [§18.5.5](#1855-quals-projection-and-the-per-tuple-context) 中未设置这些标志的运行相比，执行时间在测量噪声范围内没有变化。
 
 > [!NOTE]
-> **明确说明：**本构建无法实际测试 JIT。上文关于 `llvm_compile_expr` 的全部内容都来自对 `src/backend/jit/llvm/` 源码的阅读（5 146 行 C，另加 C++ 内联器），并非测量结果。其他地方关于 Cloudberry JIT 加速的任何说法，都必须建立在使用 `--with-llvm` 配置、且 `$GPHOME/lib/postgresql/` 中存在 `llvmjit.so` 的构建上才有意义；在 MPP 集群中，还必须*逐 Segment* 测量，因为每个 QE 都要为同一个表达式支付自己的编译成本。
+> **明确说明：** 本构建无法实际测试 JIT。上文关于 `llvm_compile_expr` 的全部内容都来自对 `src/backend/jit/llvm/` 源码的阅读（5 146 行 C，另加 C++ 内联器），并非测量结果。其他地方关于 Cloudberry JIT 加速的任何说法，都必须建立在使用 `--with-llvm` 配置、且 `$GPHOME/lib/postgresql/` 中存在 `llvmjit.so` 的构建上才有意义；在 MPP 集群中，还必须*逐 Segment* 测量，因为每个 QE 都要为同一个表达式支付自己的编译成本。
 
 执行器中负责计算值的部分到此结束。接下来是建立在它之上的节点类型：[§18.6](#186-subqueries--other-nodes) 的子查询与辅助节点，以及 [§18.7](#187-cloudberry-specific-nodes) 中 Cloudberry 自有的节点。
 
@@ -2830,7 +2830,7 @@ DETAIL:  Falling back to Postgres-based planner because GPORCA does not support
  Execution Time: 19.874 ms
 ```
 
-这在实际运行中确认了 [§17.1](/cloudberry/core-internals/part-4-query-processing/ch17/#171-entry--dispatch) 的回退机制，并带来一个应明确说明的结果：**`RecursiveUnion` 和 `WorkTableScan` 只会由 PostgreSQL 规划器路径生成。**无论怎样调整 ORCA，都不会改变递归查询的执行方式，因为它从未规划该查询。值得逐节点解读这个计划，因为计数器能精确还原遍历过程。种子是节点 1，树中每个节点有三个子节点，`depth < 6` 条件在六轮有产出的迭代后截断递归。
+这在实际运行中确认了 [§17.1](/cloudberry/core-internals/part-4-query-processing/ch17/#171-entry--dispatch) 的回退机制，并带来一个应明确说明的结果：**`RecursiveUnion` 和 `WorkTableScan` 只会由 PostgreSQL 规划器路径生成。** 无论怎样调整 ORCA，都不会改变递归查询的执行方式，因为它从未规划该查询。值得逐节点解读这个计划，因为计数器能精确还原遍历过程。种子是节点 1，树中每个节点有三个子节点，`depth < 6` 条件在六轮有产出的迭代后截断递归。
 
 <figure class="cloudberry-core-figure">
 <div><div style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;overflow-x:auto"> <div style="display:grid;grid-template-columns:74px 250px 250px 1fr;gap:5px 12px;align-items:center;min-width:660px"> <div style="color:#555;font-weight:600">迭代</div> <div style="color:#4a3a5e;font-weight:600">工作表 &mdash; WorkTable Scan 读取</div> <div style="color:#2c6a4c;font-weight:600">中间表 &mdash; RecursiveUnion 写入</div> <div style="color:#555;font-weight:600">发生了什么</div> <div>种子</div><div style="color:#707070">&mdash;</div> <div><span style="display:inline-block;height:9px;width:4px;background:#cfead9;border:1px solid #3f8f68"></span> 1</div> <div style="color:#666">非递归项：SELECT 1, 0</div> <div>1</div><div><span style="display:inline-block;height:9px;width:4px;background:#cdb4db"></span> 1</div> <div><span style="display:inline-block;height:9px;width:8px;background:#cfead9;border:1px solid #3f8f68"></span> 3</div><div></div> <div>2</div><div><span style="display:inline-block;height:9px;width:8px;background:#cdb4db"></span> 3</div> <div><span style="display:inline-block;height:9px;width:14px;background:#cfead9;border:1px solid #3f8f68"></span> 9</div><div></div> <div>3</div><div><span style="display:inline-block;height:9px;width:14px;background:#cdb4db"></span> 9</div> <div><span style="display:inline-block;height:9px;width:26px;background:#cfead9;border:1px solid #3f8f68"></span> 27</div><div></div> <div>4</div><div><span style="display:inline-block;height:9px;width:26px;background:#cdb4db"></span> 27</div> <div><span style="display:inline-block;height:9px;width:50px;background:#cfead9;border:1px solid #3f8f68"></span> 81</div><div></div> <div>5</div><div><span style="display:inline-block;height:9px;width:50px;background:#cdb4db"></span> 81</div> <div><span style="display:inline-block;height:9px;width:100px;background:#cfead9;border:1px solid #3f8f68"></span> 243</div><div></div> <div>6</div><div><span style="display:inline-block;height:9px;width:100px;background:#cdb4db"></span> 243</div> <div><span style="display:inline-block;height:9px;width:200px;background:#cfead9;border:1px solid #3f8f68"></span> 729</div><div></div> <div style="background:#fff4d6;border-radius:3px;padding:1px 4px">7</div> <div style="background:#fff4d6;border-radius:3px;padding:1px 4px"><span style="display:inline-block;height:9px;width:200px;background:#cdb4db"></span> 729</div> <div style="background:#fff4d6;border-radius:3px;padding:1px 4px">0</div> <div style="background:#fff4d6;border-radius:3px;padding:1px 4px;color:#5a4708">全部 729 行的深度都是 6，未通过过滤条件 &rarr; 中间表为空 &rarr; 循环结束</div> <div style="border-top:1px solid #ddd;padding-top:4px">总计</div> <div style="border-top:1px solid #ddd;padding-top:4px">读取 1093 行，364 行通过过滤条件</div> <div style="border-top:1px solid #ddd;padding-top:4px">递归项产生 1092 行</div> <div style="border-top:1px solid #ddd;padding-top:4px;color:#666"><span class="hl">1 + 1092 = 1093 = Recursive Union 的 actual rows</span></div> </div></div></div>

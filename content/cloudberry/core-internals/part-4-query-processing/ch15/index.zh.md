@@ -806,7 +806,7 @@ WHERE t.id < 100;
 
 反向对应：`Seq Scan on p154_t` ← 一个 `SeqScanPath`，`Hash Join` + `Hash` ← 一个 `HashPath`，`Gather Motion` ← 顶层的 `MotionPath`。Seq Scan 上的 `rows=33 width=12`，正是 [§15.3](#153-path-cost--add_path) 用于代价估算、再由 `copy_generic_path_info()` 复制过来的值。而 `Optimizer: Postgres query optimizer` 确认这就是本章介绍的基于代价的规划器，而非 ORCA。
 
-两个 **Motion** 节点就是向 Cloudberry 分布式规划交接的地方。由于两张表按不同的键分布，无法在本地完成连接：较小的 `p154_d` 被*广播*到每个 Segment，使其能与各自的 `p154_t` 数据切片连接，然后将结果*收集*到 Coordinator。在 Cloudberry 中，这一决策发生在路径生成阶段：`cdbpath_create_motion_path()`（`src/backend/cdb/cdbpath.c`）将 `MotionPath` 节点加入搜索，因此胜出的 Path 已经包含这些节点，`create_plan()` 再将每个节点转换为 `Motion` 计划节点（由 `cdbmutate.c` 中的 `make_union_motion()` 等辅助函数构建）。切片、重分布／广播代价模型以及 Interconnect 属于**第 [16](/cloudberry/core-internals/part-4-query-processing/ch16/) 章（分布式规划）**的内容；在本章中，这只是单节点计划转为分布式计划的衔接处。
+两个 **Motion** 节点就是向 Cloudberry 分布式规划交接的地方。由于两张表按不同的键分布，无法在本地完成连接：较小的 `p154_d` 被*广播*到每个 Segment，使其能与各自的 `p154_t` 数据切片连接，然后将结果*收集*到 Coordinator。在 Cloudberry 中，这一决策发生在路径生成阶段：`cdbpath_create_motion_path()`（`src/backend/cdb/cdbpath.c`）将 `MotionPath` 节点加入搜索，因此胜出的 Path 已经包含这些节点，`create_plan()` 再将每个节点转换为 `Motion` 计划节点（由 `cdbmutate.c` 中的 `make_union_motion()` 等辅助函数构建）。切片、重分布／广播代价模型以及 Interconnect 属于**第 [16](/cloudberry/core-internals/part-4-query-processing/ch16/) 章（分布式规划）** 的内容；在本章中，这只是单节点计划转为分布式计划的衔接处。
 
 ```c {title="src/backend/optimizer/plan/planner.c — standard_planner()"}
 if (Gp_role == GP_ROLE_DISPATCH)

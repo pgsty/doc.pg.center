@@ -54,7 +54,7 @@ flowchart TB
 
 数据库知道的一切——每个关系、列、类型、函数、命名空间和约束——都记录在一组普通表中。这些表位于 `pg_catalog` 模式，而其中令人惊讶之处在于：它们与**你自己的表完全以相同方式存储**，都是 `relkind = 'r'` 的堆关系。目录描述数据库，而且它*借助数据库自身*来完成描述。你可以像查询自己创建的表一样 `SELECT * FROM pg_class`。
 
-这种自引用解释了为什么一个新数据库在你创建任何表之前就已经包含大约一百个关系。`pg_class` 为每个关系保存一行，其中也包括**`pg_class` 自身的一行**。`pg_catalog` 模式隐式地始终位于 `search_path` 中，因此不必显式指定模式，未限定的目录名称也能解析。
+这种自引用解释了为什么一个新数据库在你创建任何表之前就已经包含大约一百个关系。`pg_class` 为每个关系保存一行，其中也包括 **`pg_class` 自身的一行**。`pg_catalog` 模式隐式地始终位于 `search_path` 中，因此不必显式指定模式，未限定的目录名称也能解析。
 
 ```mermaid
 flowchart TB
@@ -625,7 +625,7 @@ grep -n "F_INT4PL\|F_TEXTCAT\|F_NUMERIC_ADD" src/include/utils/fmgroids.h
 
 `initdb` 是这些文件的使用者。它以特殊模式启动后端——`postgres --boot`——该模式*不*要求目录已经存在；相反，它读取 `postgres.bki`，直接对新建的堆文件执行 `create`／`insert` 命令。`bootstrap_template1()` 读取脚本并构造 `--boot` 命令行，位置是 `src/bin/initdb/initdb.c`／`bootstrap_template1()`；`bki_file` 的位置由 `setup_data_file_paths()` 确定。四张引导表创建后，initdb 运行普通 SQL 文件，加入 `information_schema`、系统视图以及目录的其余部分。
 
-**Cloudberry 在这里增加了一个钩子。**除原生 PostgreSQL 行为外，initdb 还扫描 `cdb_init.d/` 目录，并运行找到的每个 `*.sql` 文件（`initdb.c`——`setup_cdb_schema()`，目录在 `setup_data_file_paths()` 中设置）。存储 AM 和其他组件便通过这个扩展点在集群创建时注册自身——PAX（[§6.1](/cloudberry/core-internals/part-2-storage-data-layout/ch06/#61-the-c-contrib-access-method)）正是通过这条路径安装的：
+**Cloudberry 在这里增加了一个钩子。** 除原生 PostgreSQL 行为外，initdb 还扫描 `cdb_init.d/` 目录，并运行找到的每个 `*.sql` 文件（`initdb.c`——`setup_cdb_schema()`，目录在 `setup_data_file_paths()` 中设置）。存储 AM 和其他组件便通过这个扩展点在集群创建时注册自身——PAX（[§6.1](/cloudberry/core-internals/part-2-storage-data-layout/ch06/#61-the-c-contrib-access-method)）正是通过这条路径安装的：
 
 ```c {title="src/bin/initdb/initdb.c — setup_cdb_schema()"}
 /*
@@ -663,7 +663,7 @@ SELECT 'pg_class'::regclass::oid          AS pg_class_oid,
 
 ### 8.5.1 每个查询都会读取目录，因此每个后端都会缓存它 {#851-every-query-reads-the-catalog--so-every-backend-caches-it}
 
-解析和规划最简单的语句时，都会反复查询目录：*这张表存在吗？它有哪些列，各是什么类型？哪个操作符实现了 `=`，用于 `int4` 类型？*每个答案都是 `pg_class`、`pg_attribute`、`pg_type`、`pg_operator` 中的一行。如果每条语句都从头读取这些堆页，规划器会不堪重负。因此，每个后端都维护两层内存缓存：**syscache**（单个目录*元组*）和 **relcache**（完整构建的 `Relation` 描述符）。缓存**命中**会立即返回；缓存**未命中**则读取一次目录堆并填充缓存。
+解析和规划最简单的语句时，都会反复查询目录：*这张表存在吗？它有哪些列，各是什么类型？哪个操作符实现了 `=`，用于 `int4` 类型？* 每个答案都是 `pg_class`、`pg_attribute`、`pg_type`、`pg_operator` 中的一行。如果每条语句都从头读取这些堆页，规划器会不堪重负。因此，每个后端都维护两层内存缓存：**syscache**（单个目录*元组*）和 **relcache**（完整构建的 `Relation` 描述符）。缓存**命中**会立即返回；缓存**未命中**则读取一次目录堆并填充缓存。
 
 ```mermaid
 flowchart TB

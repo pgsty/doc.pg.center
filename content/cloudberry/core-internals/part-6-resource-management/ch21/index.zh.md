@@ -1028,7 +1028,7 @@ uint64 PlanStateOperatorMemKB(const PlanState *ps)
 
 ### 21.2.6 优先级扫描器 {#2126-the-priority-sweeper}
 
-`ACTIVE_STATEMENTS`、`MAX_COST` 和 `MEMORY_LIMIT` 都在准入时起作用，语句一旦获准运行，它们便不再干预。`PRIORITY` 是唯一在执行*期间*起作用的设置，其机制与本章其他内容完全不同：没有锁，没有计数器，也没有 [§21.1](#211-resource-groups) 中描述的内核参与。Cloudberry 只是让低优先级后端休眠。每个 Segment 实例（包括 Coordinator）各运行一个名为 **sweeper（扫描器）**的后台工作进程（`ps` 中能看到 `postgres: 7100, sweeper process`，以及 7102、7103、7104 各自对应的进程）。它每隔 `gp_resqueue_priority_sweeper_interval` 毫秒——这里是 1000——从 `getrusage` 读取每个活动后端的 CPU 消耗，再按其权重，将一个 `targetUsage` 比例写入该后端的共享内存条目（`BackoffSweeper`，`backoff.c`）。随后，各后端自行执行目标限制：`CHECK_FOR_INTERRUPTS` 递增一个滴答计数器；计数到期后，后端比较实际 CPU 比例与目标值，并调用 `pg_usleep` 休眠相应的差额时长（`backoff.c` — `BackoffBackendTickExpired()`，其中执行休眠）。
+`ACTIVE_STATEMENTS`、`MAX_COST` 和 `MEMORY_LIMIT` 都在准入时起作用，语句一旦获准运行，它们便不再干预。`PRIORITY` 是唯一在执行*期间*起作用的设置，其机制与本章其他内容完全不同：没有锁，没有计数器，也没有 [§21.1](#211-resource-groups) 中描述的内核参与。Cloudberry 只是让低优先级后端休眠。每个 Segment 实例（包括 Coordinator）各运行一个名为 **sweeper（扫描器）** 的后台工作进程（`ps` 中能看到 `postgres: 7100, sweeper process`，以及 7102、7103、7104 各自对应的进程）。它每隔 `gp_resqueue_priority_sweeper_interval` 毫秒——这里是 1000——从 `getrusage` 读取每个活动后端的 CPU 消耗，再按其权重，将一个 `targetUsage` 比例写入该后端的共享内存条目（`BackoffSweeper`，`backoff.c`）。随后，各后端自行执行目标限制：`CHECK_FOR_INTERRUPTS` 递增一个滴答计数器；计数到期后，后端比较实际 CPU 比例与目标值，并调用 `pg_usleep` 休眠相应的差额时长（`backoff.c` — `BackoffBackendTickExpired()`，其中执行休眠）。
 
 *扫描器看到的权重，来自一个 PRIORITY 为 LOW 的队列。超级用户观察会话的级别为 MAX，既不受优先级限制，也不受队列限制。*
 

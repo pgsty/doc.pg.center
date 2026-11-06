@@ -1003,7 +1003,7 @@ SELECT itemoffset, blknum, value
       (6 rows)
 ```
 
-每一行都是一个范围的字面 `{min .. max}`。这里每个范围覆盖约 6 个月——范围很宽，因为 200 万行交错分布在 3 个 Segment 上，所以每个 Segment 接收约三分之一的行，而 128 页范围覆盖了半年。`consistent` 函数（`brin_minmax_consistent`，`brin_minmax.c`）执行的正是廉价的区间测试：*`[Feb01 00:00, Feb01 06:00]` 是否与这个范围的 `{min..max}` 重叠？*对于 2 月查询，只有包含这一天的范围会重叠；此处展示的其他范围各自只需检查**一个元组**就能排除——这就是跳过范围的过程。
+每一行都是一个范围的字面 `{min .. max}`。这里每个范围覆盖约 6 个月——范围很宽，因为 200 万行交错分布在 3 个 Segment 上，所以每个 Segment 接收约三分之一的行，而 128 页范围覆盖了半年。`consistent` 函数（`brin_minmax_consistent`，`brin_minmax.c`）执行的正是廉价的区间测试：*`[Feb01 00:00, Feb01 06:00]` 是否与这个范围的 `{min..max}` 重叠？* 对于 2 月查询，只有包含这一天的范围会重叠；此处展示的其他范围各自只需检查**一个元组**就能排除——这就是跳过范围的过程。
 
 *谓词 `ts ∈ [Feb01 00:00, Feb01 06:00]` 为什么会跳过大多数范围——对每个摘要执行重叠测试。*
 
@@ -1046,7 +1046,7 @@ SELECT amname, amhandler, amtype FROM pg_am WHERE amname='bitmap';
 
 `bmhandler` 是入口点——`src/backend/access/bitmap/bitmap.c`。它填充一个 `IndexAmRoutine`，其策略／支持编号借用了 B-树（`amstrategies = BTMaxStrategyNumber`，`bitmap.c`——`bmhandler()`），但构建、插入和扫描回调（`bmbuild`、`bminsert`、`bmgettuple`）是位图专用的。
 
-**它存在的原因：**面向大型 OLAP 表中**低基数**的列——性别、状态、区域、订单状态，以及从少数到数万个不同值——B-树需要为每一行存储一个索引条目（键 + 6 字节 TID），因此浪费空间。位图索引则为**每个不同值**存储一个压缩的位向量：当且仅当堆中的第 *i* 行拥有该值时，位 *i* 才为 1。对这些向量执行 AND／OR，就能几乎不花代价地回答多谓词分析过滤。README 将最佳场景的上限定为*“少于 50,000 个不同值”*（`README:14`）。
+**它存在的原因：** 面向大型 OLAP 表中**低基数**的列——性别、状态、区域、订单状态，以及从少数到数万个不同值——B-树需要为每一行存储一个索引条目（键 + 6 字节 TID），因此浪费空间。位图索引则为**每个不同值**存储一个压缩的位向量：当且仅当堆中的第 *i* 行拥有该值时，位 *i* 才为 1。对这些向量执行 AND／OR，就能几乎不花代价地回答多谓词分析过滤。README 将最佳场景的上限定为 *“少于 50,000 个不同值”*（`README:14`）。
 
 ```mermaid
 flowchart LR
@@ -1084,7 +1084,7 @@ typedef struct BMMetaPageData {
       } BMMetaPageData;
 ```
 
-**LOV——List Of Values，值列表。**不同值以 `BMLOVItemData` 记录的形式存储在*LOV 页*中（`bitmap.h`）。每个 LOV 项都是一个**位图向量的头部**：它保存该值向量的首个／最后一个位图页（`bm_lov_head`／`bm_lov_tail`），还保存正在构建的尾部字（`bm_last_compword` 和 `bm_last_word`）以及管理信息（`bm_last_tid_location`、`bm_last_setbit`）。为了在不进行线性扫描的情况下找到某个值对应的 LOV 项，构建过程会创建一个内部的**堆 + B-树**（`README:56-64`）：堆行是 `(indexed columns…, block#, offset#)`，B-树按这些列建立键。因此，一次探查的路径是：在 B-树中搜索值 →（块、偏移量）→ LOV 项 → 向量头。NULL 键使用一个保留槽位，即第一个 LOV 页的第一项（`bitmap.h`）。
+**LOV——List Of Values，值列表。** 不同值以 `BMLOVItemData` 记录的形式存储在*LOV 页*中（`bitmap.h`）。每个 LOV 项都是一个**位图向量的头部**：它保存该值向量的首个／最后一个位图页（`bm_lov_head`／`bm_lov_tail`），还保存正在构建的尾部字（`bm_last_compword` 和 `bm_last_word`）以及管理信息（`bm_last_tid_location`、`bm_last_setbit`）。为了在不进行线性扫描的情况下找到某个值对应的 LOV 项，构建过程会创建一个内部的**堆 + B-树**（`README:56-64`）：堆行是 `(indexed columns…, block#, offset#)`，B-树按这些列建立键。因此，一次探查的路径是：在 B-树中搜索值 →（块、偏移量）→ LOV 项 → 向量头。NULL 键使用一个保留槽位，即第一个 LOV 页的第一项（`bitmap.h`）。
 
 ![值的探查路径：元数据页命名辅助 B-树；B-树将值映射到 LOV 项；LOV 项的 bm_lov_head 指向该值的位图页链表的头部，页之间通过 bm_bitmap_next 链接。](fig-008.svg)
 
@@ -1092,7 +1092,7 @@ typedef struct BMMetaPageData {
 
 **位图页**保存压缩后的向量本身。`BMBitmapData` 页面（`bitmap.h`）由两个 64 位字数组组成（`BM_HRL_WORD`，`bitmap.h`）：`hwords[]`（头部位）和 `cwords[]`（内容）。页面的 `BMBitmapOpaqueData`（`bitmap.h`）保存 `bm_hrl_words_used`、下一个 `bm_bitmap_next` 块（向量是页面链）以及 `bm_last_tid_location`，因此搜索可以在不解压的情况下跳过整页。每页容量由页面大小决定：`cwords[]` 数组由 `BM_NUM_OF_HRL_WORDS_PER_PAGE`（`bitmap.h`）确定，在本源码版本的 32 KB 页面上等于 3968 个内容字（硬上限 `BM_MAX_NUM_OF_HRL_WORDS_PER_PAGE` 为 4091）。它上面的注释仍然写着*每个 8K 页面约 4078 个字*——那段注释早于 32 KB 默认值以及 `BM_HRL_WORD` 改为 64 位。
 
-**HRL 压缩。**编码采用混合游程长度（Hybrid Run-Length，`README:17`）。每个内容字要么是*字面值*（其头部位为 0，即 64 个原始位），要么是*填充*（头部位为 1——其最高位表示填充 0 还是填充 1，其余位是以 64 位为单位的游程长度；宏为 `FILL_LENGTH`／`GET_FILL_BIT`，见 `bitmap.h`）。连续的大段相同位——正是低基数列产生的形状——会压缩成一个字。
+**HRL 压缩。** 编码采用混合游程长度（Hybrid Run-Length，`README:17`）。每个内容字要么是*字面值*（其头部位为 0，即 64 个原始位），要么是*填充*（头部位为 1——其最高位表示填充 0 还是填充 1，其余位是以 64 位为单位的游程长度；宏为 `FILL_LENGTH`／`GET_FILL_BIT`，见 `bitmap.h`）。连续的大段相同位——正是低基数列产生的形状——会压缩成一个字。
 
 *README 中的计算示例（为便于阅读使用字长 8；实际字长为 64 位）。*
 
