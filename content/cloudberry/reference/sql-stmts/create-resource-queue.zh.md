@@ -33,17 +33,17 @@ CREATE RESOURCE QUEUE <name> WITH (<queue_attribute>=<value> [, ... ])
 
 设置 `ACTIVE_STATEMENTS` 阈值的资源队列会限制分配到该队列的角色可以运行的查询数量上限，即同时允许运行的活动查询数。`ACTIVE_STATEMENTS` 的值应为大于 0 的整数。
 
-设置 `MAX_COST` 阈值的资源队列会限制分配到该队列的角色可以运行的查询总成本上限。成本按查询计划器确定的查询*估算总成本*计量（查询的 `EXPLAIN` 输出会显示该值）。因此，管理员必须熟悉系统中通常运行的查询，才能为队列设置合适的成本阈值。成本以磁盘页读取次数为单位；1.0 等于顺序读取一个磁盘页。`MAX_COST` 的值指定为浮点数（例如 100.0），也可以指定为指数（例如 1e+2）。如果资源队列受成本阈值限制，管理员可以允许 `COST_OVERCOMMIT=TRUE`（默认值）。这意味着超过允许成本阈值的查询只有在系统空闲时才允许运行。如果指定 `COST_OVERCOMMIT=FALSE`，超过成本限制的查询将始终被拒绝，永远不会运行。指定 `MIN_COST` 值可以让管理员定义小查询的成本，使其免于进入资源队列。
+设置 `MAX_COST` 阈值的资源队列会限制分配到该队列的角色可以运行的查询总代价上限。代价按查询计划器确定的查询*估算总代价*计量（查询的 `EXPLAIN` 输出会显示该值）。因此，管理员必须熟悉系统中通常运行的查询，才能为队列设置合适的代价阈值。代价以磁盘页读取次数为单位；1.0 等于顺序读取一个磁盘页。`MAX_COST` 的值指定为浮点数（例如 100.0），也可以指定为指数（例如 1e+2）。如果资源队列受代价阈值限制，管理员可以允许 `COST_OVERCOMMIT=TRUE`（默认值）。这意味着超过允许代价阈值的查询只有在系统空闲时才允许运行。如果指定 `COST_OVERCOMMIT=FALSE`，超过代价限制的查询将始终被拒绝，永远不会运行。指定 `MIN_COST` 值可以让管理员定义小查询的代价，使其免于进入资源队列。
 
-> **注意** GPORCA 和 Postgres Planner 使用不同的查询成本模型，同一查询可能计算出不同成本。Apache Cloudberry 的资源队列资源管理方案既不区分也不对齐 GPORCA 与 Postgres Planner 的成本，而是使用优化器返回的实际成本值限制查询。
+> **注意** GPORCA 和 Postgres Planner 使用不同的查询代价模型，同一查询可能计算出不同代价。Apache Cloudberry 的资源队列资源管理方案既不区分也不对齐 GPORCA 与 Postgres Planner 的代价，而是使用优化器返回的实际代价值限制查询。
 
-基于资源队列的资源管理处于活动状态时，应使用资源队列的 `MEMORY_LIMIT` 和 `ACTIVE_STATEMENTS` 限制，而不是配置基于成本的限制。即使使用 GPORCA，Apache Cloudberry 也可能对某些查询回退到 Postgres Planner，因此使用基于成本的限制可能产生意外结果。
+基于资源队列的资源管理处于活动状态时，应使用资源队列的 `MEMORY_LIMIT` 和 `ACTIVE_STATEMENTS` 限制，而不是配置基于代价的限制。即使使用 GPORCA，Apache Cloudberry 也可能对某些查询回退到 Postgres Planner，因此使用基于代价的限制可能产生意外结果。
 
 如果未定义 `ACTIVE_STATEMENTS` 或 `MAX_COST` 的值，默认设为 `-1`（表示不限制）。定义资源队列后，必须使用 [ALTER ROLE](/cloudberry/reference/sql-stmts/alter-role/) 或 [CREATE ROLE](/cloudberry/reference/sql-stmts/create-role/) 命令将角色分配到该队列。
 
 可以选择为资源队列分配 `PRIORITY`，控制与其他资源队列相比，该队列关联查询所使用的可用 CPU 资源相对份额。如果未定义 `PRIORITY` 的值，队列关联查询的默认优先级为 `MEDIUM`。
 
-设置可选 `MEMORY_LIMIT` 阈值的资源队列会限制通过该队列提交的所有查询在 Segment 主机上可消耗的内存总量。它决定查询执行期间该查询所有工作进程在 Segment 主机上可消耗的内存总量。Apache Cloudberry 建议将 `MEMORY_LIMIT` 与 `ACTIVE_STATEMENTS` 配合使用，而不是与 `MAX_COST` 配合使用。基于语句的队列中，每个查询默认分配的内存为：`MEMORY_LIMIT / ACTIVE_STATEMENTS`。基于成本的队列中，每个查询默认分配的内存为：`MEMORY_LIMIT * (query_cost / MAX_COST)`。
+设置可选 `MEMORY_LIMIT` 阈值的资源队列会限制通过该队列提交的所有查询在 Segment 主机上可消耗的内存总量。它决定查询执行期间该查询所有工作进程在 Segment 主机上可消耗的内存总量。Apache Cloudberry 建议将 `MEMORY_LIMIT` 与 `ACTIVE_STATEMENTS` 配合使用，而不是与 `MAX_COST` 配合使用。基于语句的队列中，每个查询默认分配的内存为：`MEMORY_LIMIT / ACTIVE_STATEMENTS`。基于代价的队列中，每个查询默认分配的内存为：`MEMORY_LIMIT * (query_cost / MAX_COST)`。
 
 只要不超过 `MEMORY_LIMIT` 或 `max_statement_mem`，就可以使用服务器配置参数 `statement_mem`，按查询覆盖默认内存分配。例如，为某个查询分配更多内存：
 
@@ -73,15 +73,15 @@ CREATE RESOURCE QUEUE <name> WITH (<queue_attribute>=<value> [, ... ])
 
 **`MAX_COST float`**
 
-设置 `MAX_COST` 阈值的资源队列会限制分配到该队列的角色可以运行的查询总成本上限。成本按 Apache Cloudberry 查询优化器确定的查询*估算总成本*计量（查询的 `EXPLAIN` 输出会显示该值）。因此，管理员必须熟悉系统中通常运行的查询，才能为队列设置合适的成本阈值。成本以磁盘页读取次数为单位；1.0 等于顺序读取一个磁盘页。`MAX_COST` 的值指定为浮点数（例如 100.0），也可以指定为指数（例如 1e+2）。
+设置 `MAX_COST` 阈值的资源队列会限制分配到该队列的角色可以运行的查询总代价上限。代价按 Apache Cloudberry 查询优化器确定的查询*估算总代价*计量（查询的 `EXPLAIN` 输出会显示该值）。因此，管理员必须熟悉系统中通常运行的查询，才能为队列设置合适的代价阈值。代价以磁盘页读取次数为单位；1.0 等于顺序读取一个磁盘页。`MAX_COST` 的值指定为浮点数（例如 100.0），也可以指定为指数（例如 1e+2）。
 
 **`COST_OVERCOMMIT boolean`**
 
-如果资源队列受 `MAX_COST` 限制，管理员可以允许 `COST_OVERCOMMIT`（默认值）。这意味着超过允许成本阈值的查询只有系统空闲时才允许运行。如果指定 `COST_OVERCOMMIT=FALSE`，超过成本限制的查询将始终被拒绝，永远不会运行。
+如果资源队列受 `MAX_COST` 限制，管理员可以允许 `COST_OVERCOMMIT`（默认值）。这意味着超过允许代价阈值的查询只有系统空闲时才允许运行。如果指定 `COST_OVERCOMMIT=FALSE`，超过代价限制的查询将始终被拒绝，永远不会运行。
 
 **`MIN_COST float`**
 
-被视为小查询的最低查询成本限制。成本低于此限制的查询不会排队，会立即运行。成本按查询计划器确定的查询*估算总成本*计量（查询的 `EXPLAIN` 输出会显示该值）。因此，管理员必须熟悉系统中通常运行的查询，才能为小查询设置合适成本。成本以磁盘页读取次数为单位；1.0 等于顺序读取一个磁盘页。`MIN_COST` 的值指定为浮点数（例如 100.0），也可以指定为指数（例如 1e+2）。
+被视为小查询的最低查询代价限制。代价低于此限制的查询不会排队，会立即运行。代价按查询计划器确定的查询*估算总代价*计量（查询的 `EXPLAIN` 输出会显示该值）。因此，管理员必须熟悉系统中通常运行的查询，才能为小查询设置合适代价。代价以磁盘页读取次数为单位；1.0 等于顺序读取一个磁盘页。`MIN_COST` 的值指定为浮点数（例如 100.0），也可以指定为指数（例如 1e+2）。
 
 **`PRIORITY={MIN|LOW|MEDIUM|HIGH|MAX}`**
 
@@ -117,20 +117,20 @@ CREATE RESOURCE QUEUE myqueue WITH (ACTIVE_STATEMENTS=20,
   MEMORY_LIMIT='2000MB');
 ```
 
-创建查询成本上限为 3000.0 的资源队列：
+创建查询代价上限为 3000.0 的资源队列：
 
 ```sql
 CREATE RESOURCE QUEUE myqueue WITH (MAX_COST=3000.0);
 ```
 
-创建查询成本上限为 310（或 30000000000.0）且不允许超额提交的资源队列，并允许成本低于 500 的小查询立即运行：
+创建查询代价上限为 310（或 30000000000.0）且不允许超额提交的资源队列，并允许代价低于 500 的小查询立即运行：
 
 ```sql
 CREATE RESOURCE QUEUE myqueue WITH (MAX_COST=3e+10, 
   COST_OVERCOMMIT=FALSE, MIN_COST=500.0);
 ```
 
-同时设置活动查询上限和查询成本上限的资源队列：
+同时设置活动查询上限和查询代价上限的资源队列：
 
 ```sql
 CREATE RESOURCE QUEUE myqueue WITH (ACTIVE_STATEMENTS=30, 

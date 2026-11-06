@@ -229,13 +229,13 @@ flowchart TB
 
 *每次连接都要判断分布位置：两侧是否兼容？兼容则就地连接；不兼容则先用 Motion 改变一侧的分布位置。*
 
-这就是分布式规划的全部前提：路径携带分布位置，`cdbpathlocus_join()`（以及用于分组的同类函数）判断分布位置是否已经对齐，而每一处不匹配都会引入一个 Motion。[§16.2](#162-cdbmotionpath-generation) 将通过 `cdbpath_create_motion_path()`（`src/backend/cdb/cdbpath.c`）和 `cdbpath_motion_for_join()`，进一步介绍这些 Motion 的选择与成本估算，包括 Redistribute、Broadcast 和 Gather 之间的取舍。
+这就是分布式规划的全部前提：路径携带分布位置，`cdbpathlocus_join()`（以及用于分组的同类函数）判断分布位置是否已经对齐，而每一处不匹配都会引入一个 Motion。[§16.2](#162-cdbmotionpath-generation) 将通过 `cdbpath_create_motion_path()`（`src/backend/cdb/cdbpath.c`）和 `cdbpath_motion_for_join()`，进一步介绍这些 Motion 的选择与代价估算，包括 Redistribute、Broadcast 和 Gather 之间的取舍。
 
 ## 16.2 CdbMotionPath 的生成 {#162-cdbmotionpath-generation}
 
-[§16.1](#161-the-locus-model-cdbpathlocus) 确立了这样一条规则：当两条路径的分布位置*不兼容*时，行就无法在原位置连接，必须移动其中一部分数据。本节介绍规划器**如何**表达这种移动。规划器会将 **`CdbMotionPath`** 作为另一条具有成本的 `Path`，直接插入*路径搜索过程本身*，而不是等到规划结束后才添加 Motion。这样，“按这种方式移动数据”就会在 `add_path` 中与“按另一种方式移动数据”（以及所有不使用 Motion 的方案）竞争（[§15.3](/cloudberry/core-internals/part-4-query-processing/ch15/#153-path-cost--add_path)）。最终输出仍然是成本最低的路径，只不过它现在可能包含 Motion。
+[§16.1](#161-the-locus-model-cdbpathlocus) 确立了这样一条规则：当两条路径的分布位置*不兼容*时，行就无法在原位置连接，必须移动其中一部分数据。本节介绍规划器**如何**表达这种移动。规划器会将 **`CdbMotionPath`** 作为另一条具有代价的 `Path`，直接插入*路径搜索过程本身*，而不是等到规划结束后才添加 Motion。这样，“按这种方式移动数据”就会在 `add_path` 中与“按另一种方式移动数据”（以及所有不使用 Motion 的方案）竞争（[§15.3](/cloudberry/core-internals/part-4-query-processing/ch15/#153-path-cost--add_path)）。最终输出仍然是代价最低的路径，只不过它现在可能包含 Motion。
 
-Motion 只有**三种形态**：Redistribute、Broadcast 和 Gather。整个分布式连接规划，就是规划器选择在哪一侧采用哪种形态成本最低。我们先建立直观图景，再阅读实现它的代码，最后在端口 7100 上观察规划器实际选择各形态的过程（全程使用 `SET optimizer=off`；ORCA 以自己的方式规划 Motion，见第 [17](/cloudberry/core-internals/part-4-query-processing/ch17/) 章）。
+Motion 只有**三种形态**：Redistribute、Broadcast 和 Gather。整个分布式连接规划，就是规划器选择在哪一侧采用哪种形态代价最低。我们先建立直观图景，再阅读实现它的代码，最后在端口 7100 上观察规划器实际选择各形态的过程（全程使用 `SET optimizer=off`；ORCA 以自己的方式规划 Motion，见第 [17](/cloudberry/core-internals/part-4-query-processing/ch17/) 章）。
 
 ![包含 3 个 Segment 的集群上的三种 Motion 形态。Redistribute 在所有 Segment 之间对行重新哈希；Broadcast 将一个小关系复制到每个 Segment；Gather 将所有数据汇集到一个进程（QD）。](fig-039.svg)
 
@@ -254,7 +254,7 @@ Motion 只有**三种形态**：Redistribute、Broadcast 和 Gather。整个分�
 		return subpath;
 ```
 
-当*确实*需要 Motion 时，它会检查目标：*瓶颈*分布位置（Entry / SingleQE）对应 **Gather**；*Replicated* 目标对应 **Broadcast**；*Hashed*（分区分布）目标对应 **Redistribute**。无论是哪一种，节点都由共用的构造函数 **`make_motion_path()`**（`src/backend/cdb/cdbpath.c`）构建。它创建一个 `CdbMotionPath`，并且关键在于，会在返回前为其估算成本：
+当*确实*需要 Motion 时，它会检查目标：*瓶颈*分布位置（Entry / SingleQE）对应 **Gather**；*Replicated* 目标对应 **Broadcast**；*Hashed*（分区分布）目标对应 **Redistribute**。无论是哪一种，节点都由共用的构造函数 **`make_motion_path()`**（`src/backend/cdb/cdbpath.c`）构建。它创建一个 `CdbMotionPath`，并且关键在于，会在返回前为其估算代价：
 
 ```c {title="src/backend/cdb/cdbpath.c — make_motion_path()"}
 	pathnode = makeNode(CdbMotionPath);
@@ -266,15 +266,15 @@ Motion 只有**三种形态**：Redistribute、Broadcast 和 Gather。整个分�
 	cdbpath_cost_motion(root, pathnode);  /* fill in the cost */
 ```
 
-这个结构体本身很小：`CdbMotionPath` 只是一个封装了子路径的 `Path`，再加一个标志和一个策略（`src/include/nodes/pathnodes.h`）。由于它*本身就是*一个 `Path`，并且已设置 `total_cost`，因此可以直接参与 `add_path` 的成本比较（[§15.3](/cloudberry/core-internals/part-4-query-processing/ch15/#153-path-cost--add_path)）：Motion 不是事后进行的特殊改写，而是搜索过程中的另一个候选方案。
+这个结构体本身很小：`CdbMotionPath` 只是一个封装了子路径的 `Path`，再加一个标志和一个策略（`src/include/nodes/pathnodes.h`）。由于它*本身就是*一个 `Path`，并且已设置 `total_cost`，因此可以直接参与 `add_path` 的代价比较（[§15.3](/cloudberry/core-internals/part-4-query-processing/ch15/#153-path-cost--add_path)）：Motion 不是事后进行的特殊改写，而是搜索过程中的另一个候选方案。
 
 - **`path` / `subpath`**：Motion 是封装输入路径的 `Path` 节点；`subpath->locus` 表示行当前所在的位置，`path.locus` 表示行将到达的位置。
-- **`is_explicit_motion`**：用于标记写命令可能强制要求的显式重分布（例如 UPDATE 修改分布键），与成本无关。
+- **`is_explicit_motion`**：用于标记写命令可能强制要求的显式重分布（例如 UPDATE 修改分布键），与代价无关。
 - **`policy`**：当 Motion 按特定键集合重分布时，用于描述目标哈希分布的 `GpPolicy`。
 
-### 16.2.2 cdbpath_cost_motion：为何形态选择取决于成本 {#1622-cdbpath_cost_motion--why-shape-is-a-cost-question}
+### 16.2.2 cdbpath_cost_motion：为何形态选择取决于代价 {#1622-cdbpath_cost_motion--why-shape-is-a-cost-question}
 
-之所以没有“始终重分布”或“始终广播”这样的固定规则，是因为每种形态移动的*行数*不同，而 `cdbpath_cost_motion()`（`src/backend/cdb/cdbpath.c`）估算的正是这项成本。它从两侧的分布位置确定发送和接收 Segment 的数量，估算经由 Interconnect 传输的总行数，然后按行计费：
+之所以没有“始终重分布”或“始终广播”这样的固定规则，是因为每种形态移动的*行数*不同，而 `cdbpath_cost_motion()`（`src/backend/cdb/cdbpath.c`）估算的正是这项代价。它从两侧的分布位置确定发送和接收 Segment 的数量，估算经由 Interconnect 传输的总行数，然后按行计费：
 
 ```c {title="src/backend/cdb/cdbpath.c — cdbpath_cost_motion()"}
 	sendrows  = subpath->rows;
@@ -287,7 +287,7 @@ Motion 只有**三种形态**：Redistribute、Broadcast 和 Gather。整个分�
 关键变量是 `recvrows`。对于 **Redistribute**，`total_rows` 对应关系中的行重新分散到接收 Segment，每行只移动*一次*。对于 **Broadcast**，目标类型是 Replicated，因此每个接收 Segment 都会收到*整个关系*：`recvrows` 随 Segment 数量成倍增加。这就是最根本的权衡：把一个 `B` 字节的关系广播到 `N` 个 Segment，会在网络上传输 `N × B` 字节，而重分布只需传输一次 `B` 字节。只有当关系足够小，使得 `N × B` 仍然比重新分布*另一侧的大关系*更便宜时，Broadcast 才有优势。
 
 > [!NOTE]
-> `cost_per_row` 在设置了 `gp_motion_cost_per_row` 时取其值，否则使用 `2.0 * cpu_tuple_cost`（`cdbpath.c`，`cdbpath_cost_motion()`）。`0.5 * (sendrows + recvrows)` 的形式将发送和接收成本各计一半。这个线性模型很简单，却足以正确排列三种形态的成本。
+> `cost_per_row` 在设置了 `gp_motion_cost_per_row` 时取其值，否则使用 `2.0 * cpu_tuple_cost`（`cdbpath.c`，`cdbpath_cost_motion()`）。`0.5 * (sendrows + recvrows)` 的形式将发送和接收代价各计一半。这个线性模型很简单，却足以正确排列三种形态的代价。
 
 ### 16.2.3 cdbpath_motion_for_join：为连接选择 Motion 形态 {#1623-cdbpath_motion_for_join--picking-a-shape-for-a-join}
 
@@ -300,7 +300,7 @@ Motion 只有**三种形态**：Redistribute、Broadcast 和 Gather。整个分�
 		return cdbpathlocus_join(jointype, outer.locus, inner.locus);
 ```
 
-否则，函数进入*两侧均为分区分布*的分支（`src/backend/cdb/cdbpath.c`，`cdbpath_motion_for_join()`），按字节大小将两侧标记为 `large_rel` / `small_rel`，然后按**成本最低者优先**的顺序依次检查一系列 `else if`。其中最重要的几项如下：
+否则，函数进入*两侧均为分区分布*的分支（`src/backend/cdb/cdbpath.c`，`cdbpath_motion_for_join()`），按字节大小将两侧标记为 `large_rel` / `small_rel`，然后按**代价最低者优先**的顺序依次检查一系列 `else if`。其中最重要的几项如下：
 
 | 优先顺序 | 条件 | 选用的 Motion |
 | --- | --- | --- |
@@ -350,11 +350,11 @@ flowchart TB
   R3 -.-> G["last resort:<br/>Gather both to SingleQE"]
 ```
 
-*cdbpath_motion_for_join：成本最低者优先的逐级判断。每一级都检查成本或键是否匹配，第一个满足的条件决定 Motion 的形态。*
+*cdbpath_motion_for_join：代价最低者优先的逐级判断。每一级都检查代价或键是否匹配，第一个满足的条件决定 Motion 的形态。*
 
 ### 16.2.4 Redistribute 实例 {#1624-redistribute-live}
 
-下面观察这组判断如何生效。`m162_t` 是一张大表，采用 `DISTRIBUTED BY (id)`；`m162_u` 也是大表（60 万行），采用 `DISTRIBUTED BY (uid)`。按 `uid` 连接两表，这个列是 `m162_u` 的分布键，却**不是** `m162_t` 的分布键。这符合“*按较小／另一关系的分布键连接 → 重分布另一侧*”这一判断：只需移动 `m162_t`，按 `uid` 重新哈希，使其与 `m162_u` 的对应行汇合。由于 `m162_u` 很大，广播它的成本要高得多，因此选择 Redistribute：
+下面观察这组判断如何生效。`m162_t` 是一张大表，采用 `DISTRIBUTED BY (id)`；`m162_u` 也是大表（60 万行），采用 `DISTRIBUTED BY (uid)`。按 `uid` 连接两表，这个列是 `m162_u` 的分布键，却**不是** `m162_t` 的分布键。这符合“*按较小／另一关系的分布键连接 → 重分布另一侧*”这一判断：只需移动 `m162_t`，按 `uid` 重新哈希，使其与 `m162_u` 的对应行汇合。由于 `m162_u` 很大，广播它的代价要高得多，因此选择 Redistribute：
 
 *连接使用 m162_u 的分布键，却没有使用 m162_t 的分布键 → 规划器只重分布 m162_t。注意被移动一侧的 Hash Key。*
 
@@ -399,18 +399,18 @@ SELECT count(*) FROM m162_t t JOIN m162_d d ON t.uid = d.did;
                   ->  Seq Scan on m162_d d  (cost=0.00..1.17 rows=17)
 ```
 
-同样是两表连接，Motion 的形态却截然不同，决定因素只有成本。Broadcast Motion 位于 `Hash` 下方（较小关系被构建成哈希表，现在每个 Segment 上都有完整的哈希表），而 `m162_t` 保持原位，以流式方式参与连接。这对应图中的中间部分：将一个关系完整复制到全部三个 Segment。
+同样是两表连接，Motion 的形态却截然不同，决定因素只有代价。Broadcast Motion 位于 `Hash` 下方（较小关系被构建成哈希表，现在每个 Segment 上都有完整的哈希表），而 `m162_t` 保持原位，以流式方式参与连接。这对应图中的中间部分：将一个关系完整复制到全部三个 Segment。
 
 > [!NOTE]
-> 可以这样验证这完全由成本决定：对*相同*的连接（`t.uid = d.did`），如果 `m162_d` 很大，就会使 `small.bytes * N < large.bytes` 不成立，转而选择 Redistribute，正如前面大表 `m162_u` 的情况。`cdbpath.c`（`cdbpath_motion_for_join()`）中的这个判定条件就是切换依据。
+> 可以这样验证这完全由代价决定：对*相同*的连接（`t.uid = d.did`），如果 `m162_d` 很大，就会使 `small.bytes * N < large.bytes` 不成立，转而选择 Redistribute，正如前面大表 `m162_u` 的情况。`cdbpath.c`（`cdbpath_motion_for_join()`）中的这个判定条件就是切换依据。
 
 ### 16.2.6 Gather 及上述规划发生的位置 {#1626-gather--and-where-all-this-happens}
 
 第三种形态出现在上述*每个*计划的顶部：**`Gather Motion 3:1`**。连接在各个 Segment 上分布式执行之后，最终结果行必须到达负责向客户端返回结果的单个进程。当目标是*瓶颈*分布位置（Entry，即 QD）时，`cdbpath_create_motion_path()` 就会生成这种形态；它对应图中右侧的部分，三个 Segment 汇入一个进程。Gather 是 `N:1`，Redistribute 和 Broadcast 则是 `N:N`。
 
-最后来看调用位置。`cdbpath_motion_for_join()` 并非在规划结束后的分布式处理阶段调用，而是由 `src/backend/optimizer/util/pathnode.c` 中的连接路径构造函数调用（例如 `create_nestloop_path`，以及哈希连接和归并连接的对应函数）；这些构造函数又由 **`add_paths_to_joinrel()`**（`src/backend/optimizer/path/joinpath.c`，[§15.3](/cloudberry/core-internals/part-4-query-processing/ch15/#153-path-cost--add_path)）调用。因此，每条候选连接路径的成本都*包含其 Motion 的成本*，Redistribute 与 Broadcast 的选择，也由为其他路径排序的同一个 `add_path` 成本比较过程决定。Motion 是规划过程的一部分，不是事后补上的。
+最后来看调用位置。`cdbpath_motion_for_join()` 并非在规划结束后的分布式处理阶段调用，而是由 `src/backend/optimizer/util/pathnode.c` 中的连接路径构造函数调用（例如 `create_nestloop_path`，以及哈希连接和归并连接的对应函数）；这些构造函数又由 **`add_paths_to_joinrel()`**（`src/backend/optimizer/path/joinpath.c`，[§15.3](/cloudberry/core-internals/part-4-query-processing/ch15/#153-path-cost--add_path)）调用。因此，每条候选连接路径的代价都*包含其 Motion 的代价*，Redistribute 与 Broadcast 的选择，也由为其他路径排序的同一个 `add_path` 代价比较过程决定。Motion 是规划过程的一部分，不是事后补上的。
 
-[§16.1](#161-the-locus-model-cdbpathlocus) 介绍了分布位置和兼容性，本节则将不兼容的分布转化为具体且已估算成本的 `CdbMotionPath` 节点。接下来，[§16.3](#163-parallelization-cdbllize--cdbmutate) 将选出的路径连同其中的 Motion 转化为带有**切片表**的并行 `Plan`（`cdbllize`/`cdbmutate`）；[§13.3](/cloudberry/core-internals/part-4-query-processing/ch13/#133-dispatch-from-coordinator-plan-to-segment-execution) 正是依据这一结构将计划派发给进程组。至于这些 Motion 节点如何通过 Interconnect 实际传输元组，将在第 [19](/cloudberry/core-internals/part-4-query-processing/ch19/) 章介绍。
+[§16.1](#161-the-locus-model-cdbpathlocus) 介绍了分布位置和兼容性，本节则将不兼容的分布转化为具体且已估算代价的 `CdbMotionPath` 节点。接下来，[§16.3](#163-parallelization-cdbllize--cdbmutate) 将选出的路径连同其中的 Motion 转化为带有**切片表**的并行 `Plan`（`cdbllize`/`cdbmutate`）；[§13.3](/cloudberry/core-internals/part-4-query-processing/ch13/#133-dispatch-from-coordinator-plan-to-segment-execution) 正是依据这一结构将计划派发给进程组。至于这些 Motion 节点如何通过 Interconnect 实际传输元组，将在第 [19](/cloudberry/core-internals/part-4-query-processing/ch19/) 章介绍。
 
 ## 16.3 并行化（cdbllize / cdbmutate） {#163-parallelization-cdbllize--cdbmutate}
 
@@ -480,7 +480,7 @@ make_hashed_motion(Plan *lefttree, List *hashExprs,
 }
 ```
 
-`Motion` 计划节点（`src/include/nodes/plannodes.h`）是在普通 `Plan` 上增加了这些字段：`motionType`、用于哈希路由的 `hashExprs`/`hashFuncs`/`numHashSegments`、用于显式路由的 `segidColIdx`、用于归并 Gather 的排序列，以及由 [§16.3.3](#1633-slice-assignment--the-slicetable-is-born) 填充的 `senderSliceInfo` 指针。基础构造函数 `make_motion()` 复制子节点的成本和目标列表，并断言一个 Motion 不能直接叠加在另一个 Motion 之上。
+`Motion` 计划节点（`src/include/nodes/plannodes.h`）是在普通 `Plan` 上增加了这些字段：`motionType`、用于哈希路由的 `hashExprs`/`hashFuncs`/`numHashSegments`、用于显式路由的 `segidColIdx`、用于归并 Gather 的排序列，以及由 [§16.3.3](#1633-slice-assignment--the-slicetable-is-born) 填充的 `senderSliceInfo` 指针。基础构造函数 `make_motion()` 复制子节点的代价和目标列表，并断言一个 Motion 不能直接叠加在另一个 Motion 之上。
 
 | 目标分布位置 | 构造函数 | motionType | EXPLAIN 中的行 |
 | --- | --- | --- | --- |

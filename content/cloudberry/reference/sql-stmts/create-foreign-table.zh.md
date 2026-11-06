@@ -137,7 +137,7 @@ WITH ( MODULUS <numeric_literal>, REMAINDER <numeric_literal> )
 Apache Cloudberry 专用选项，用于标识外部数据包装器读取或写入数据的主机：
 
 - `coordinator`（默认值）— 从 Coordinator 主机读取或向其写入数据。
-- `any`— 根据哪条路径成本更低，从 Coordinator 主机或任意一个 Segment 读取数据。
+- `any`— 根据哪条路径代价更低，从 Coordinator 主机或任意一个 Segment 读取数据。
 - `all segments`— 从所有 Segment 读取或向其写入数据。要支持此选项值，外部数据包装器必须具有将 Segment 与数据匹配的策略。
 
 > **注意** 只有设置 `mpp_execute 'all segments'` 时，Apache Cloudberry 才支持并行写入外表。

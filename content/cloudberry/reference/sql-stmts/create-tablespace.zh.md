@@ -50,7 +50,7 @@ ID_i 是 Segment 实例的 content ID。directory_i 是该实例用作表空间�
 
 **`tablespace_option`**
 
-要设置或重置的表空间参数。目前只有 `seq_page_cost` 和 `random_page_cost` 两个参数。为特定表空间设置其中任一值，都会覆盖规划器通常依据同名配置参数确定的、从该表空间的表中读取页面的成本估计（见 `seq_page_cost`、`random_page_cost`）。当某个表空间位于比 I/O 子系统其他部分更快或更慢的磁盘上时，这可能有用。
+要设置或重置的表空间参数。目前只有 `seq_page_cost` 和 `random_page_cost` 两个参数。为特定表空间设置其中任一值，都会覆盖规划器通常依据同名配置参数确定的、从该表空间的表中读取页面的代价估算（见 `seq_page_cost`、`random_page_cost`）。当某个表空间位于比 I/O 子系统其他部分更快或更慢的磁盘上时，这可能有用。
 
 ## 注意事项 {#notes}
 

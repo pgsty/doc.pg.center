@@ -117,7 +117,7 @@ analyzedb -as pg_catalog -d $DBNAME
 
 ### 用于查询优化的 Vacuum 和 Analyze {#vacuum-and-analyze-for-query-optimization}
 
-Apache Cloudberry 使用基于成本的查询优化器，该优化器依赖数据库统计信息。准确的统计信息有助于查询优化器更好地估算选择率以及查询操作获取的行数。这些估算值有助于它选择最高效的查询计划。`ANALYZE` 命令收集查询优化器所需的列级统计信息。
+Apache Cloudberry 使用基于代价的查询优化器，该优化器依赖数据库统计信息。准确的统计信息有助于查询优化器更好地估算选择率以及查询操作获取的行数。这些估算值有助于它选择最高效的查询计划。`ANALYZE` 命令收集查询优化器所需的列级统计信息。
 
 可以在同一个命令中同时运行 `VACUUM` 和 `ANALYZE` 操作。例如：
 

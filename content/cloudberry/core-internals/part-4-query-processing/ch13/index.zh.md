@@ -117,7 +117,7 @@ querytree_list = pg_rewrite_query(query);
 
 ### 13.1.4 阶段 3——规划 {#1314-stage-3--plan}
 
-规划将 `Query` 描述的*做什么*转换成*怎么做*——即承载可执行计划树的 `PlannedStmt`（`src/include/nodes/plannodes.h`）。`pg_plan_queries()`（`src/backend/tcop/postgres.c`）对每个非工具类查询调用 `pg_plan_query()` → `planner()`（`src/backend/optimizer/plan/planner.c`）。Cloudberry 提供两个规划器：PostgreSQL 基于成本的 `standard_planner()`，以及通过 `planner_hook` 接入的 ORCA 优化器。本章只说明这一阶段的位置；深入内容见**第 [15](/cloudberry/core-internals/part-4-query-processing/ch15/) 章**（PostgreSQL 规划器）、**第 [16](/cloudberry/core-internals/part-4-query-processing/ch16/) 章**（分布式规划）和**第 [17](/cloudberry/core-internals/part-4-query-processing/ch17/) 章**（ORCA）；规划器统计信息见**第 [14](/cloudberry/core-internals/part-4-query-processing/ch14/) 章**。
+规划将 `Query` 描述的*做什么*转换成*怎么做*——即承载可执行计划树的 `PlannedStmt`（`src/include/nodes/plannodes.h`）。`pg_plan_queries()`（`src/backend/tcop/postgres.c`）对每个非工具类查询调用 `pg_plan_query()` → `planner()`（`src/backend/optimizer/plan/planner.c`）。Cloudberry 提供两个规划器：PostgreSQL 基于代价的 `standard_planner()`，以及通过 `planner_hook` 接入的 ORCA 优化器。本章只说明这一阶段的位置；深入内容见**第 [15](/cloudberry/core-internals/part-4-query-processing/ch15/) 章**（PostgreSQL 规划器）、**第 [16](/cloudberry/core-internals/part-4-query-processing/ch16/) 章**（分布式规划）和**第 [17](/cloudberry/core-internals/part-4-query-processing/ch17/) 章**（ORCA）；规划器统计信息见**第 [14](/cloudberry/core-internals/part-4-query-processing/ch14/) 章**。
 
 ```c {title="src/backend/optimizer/plan/planner.c"}
 if (planner_hook)          /* ORCA installs this hook */
@@ -382,11 +382,11 @@ if (plansource->generic_cost < avg_custom_cost)
 return true;
 ```
 
-因此，前 **五** 次 Bind 总是构建自定义计划，在这个预热阶段测量自定义计划的平均成本。从第六次开始，它只构建*一次*通用计划，然后比较成本：通用计划的成本*只有*执行成本，因为它避开了自定义计划平均成本中包含的每次 Bind 的规划成本。因此，除非自定义计划的*运行*成本低得多，否则通用计划就会胜出。
+因此，前 **五** 次 Bind 总是构建自定义计划，在这个预热阶段测量自定义计划的平均代价。从第六次开始，它只构建*一次*通用计划，然后比较代价：通用计划的代价*只有*执行代价，因为它避开了自定义计划平均代价中包含的每次 Bind 的规划代价。因此，除非自定义计划的*运行*代价低得多，否则通用计划就会胜出。
 
-![GetCachedPlan 的决策：先使用自定义计划预热，然后比较成本。](fig-026.svg)
+![GetCachedPlan 的决策：先使用自定义计划预热，然后比较代价。](fig-026.svg)
 
-*GetCachedPlan 的决策：先使用自定义计划预热，然后比较成本。*
+*GetCachedPlan 的决策：先使用自定义计划预热，然后比较代价。*
 
 PostgreSQL 16 允许通过 `EXPLAIN (GENERIC_PLAN)` 直接查看通用计划，无需任何 Bind：占位符 `$1` 直接显示在计划里。这是观察扩展协议思想最直接的方式：完全不依赖具体参数值构建一个计划。
 
@@ -406,7 +406,7 @@ EXPLAIN (GENERIC_PLAN)
  Optimizer: GPORCA
 ```
 
-与 [§13.2.2](#1322-prepared-statements-and-pg_prepared_statements) 中的自定义计划对比：自定义计划直接派发到**一个** Segment（`1:1`），因为它知道 `k = 42`；通用计划却必须分送到**全部三个** Segment（`3:1`），因为 `$1` 尚未解析为具体值，无法知道哪个 Segment 持有该值。这就是计数一直停在 *7 次自定义、0 次通用* 的原因：对于分布式表，CBDB 会为通用计划的成本加上**直接派发惩罚项**，使廉价的单 Segment 自定义计划持续胜出。
+与 [§13.2.2](#1322-prepared-statements-and-pg_prepared_statements) 中的自定义计划对比：自定义计划直接派发到**一个** Segment（`1:1`），因为它知道 `k = 42`；通用计划却必须分送到**全部三个** Segment（`3:1`），因为 `$1` 尚未解析为具体值，无法知道哪个 Segment 持有该值。这就是计数一直停在 *7 次自定义、0 次通用* 的原因：对于分布式表，CBDB 会为通用计划的代价加上**直接派发惩罚项**，使廉价的单 Segment 自定义计划持续胜出。
 
 ```c {title="src/backend/utils/cache/plancache.c — cached_plan_cost()"}
 /* A generic plan can't direct-dispatch, so it fans out to more segments.
@@ -414,7 +414,7 @@ EXPLAIN (GENERIC_PLAN)
 result += 10.0 * seq_page_cost * (maxsegments - 1);
 ```
 
-不过，这套机制确实存在；只需让通用计划真正具有成本竞争力，或者使用强制选择的 GUC。设置 `plan_cache_mode = force_generic_plan` 会覆盖 `choose_custom_plan`（`` `plancache.c` ``）的决定，计数器马上就会转向通用计划：
+不过，这套机制确实存在；只需让通用计划真正具有代价竞争力，或者使用强制选择的 GUC。设置 `plan_cache_mode = force_generic_plan` 会覆盖 `choose_custom_plan`（`` `plancache.c` ``）的决定，计数器马上就会转向通用计划：
 
 *强制使用通用计划路径，验证计数器机制。*
 

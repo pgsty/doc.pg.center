@@ -32,7 +32,7 @@ table1_name join_type table2_name [join_condition]
     - `LATERAL`
 
 > [!NOTE]
-> 对于 `FULL JOIN` 查询，ORCA 优化器会根据成本估算自动在 `Merge Join` 和 `Hash Join` 之间选择，因此用户无需手动指定连接方法。
+> 对于 `FULL JOIN` 查询，ORCA 优化器会根据代价估算自动在 `Merge Join` 和 `Hash Join` 之间选择，因此用户无需手动指定连接方法。
 
 ## 连接类型 {#join-types}
 

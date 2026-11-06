@@ -54,7 +54,7 @@ CREATE SERVER [ IF NOT EXISTS ] <server_name> [ TYPE '<server_type>' ] [ VERSION
 Apache Cloudberry 特有的选项，指定外部数据包装器在哪台主机上读写数据：
 
 - `coordinator`（默认值）——在 Coordinator 主机上读写数据。
-- `any`——在 Coordinator 主机或任意一个 Segment 上读取数据，取决于哪条路径的成本更低。
+- `any`——在 Coordinator 主机或任意一个 Segment 上读取数据，取决于哪条路径的代价更低。
 - `all segments`——在所有 Segment 上读写数据。要支持此选项值，外部数据包装器应具有将 Segment 与数据匹配的策略。
 
 > **注意** 只有设置 `mpp_execute 'all segments'` 时，Apache Cloudberry 才支持并行写入外表。
