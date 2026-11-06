@@ -1,0 +1,7 @@
+---
+title: "Developer"
+description: "Write extensions, background workers, foreign data wrappers, and procedural functions, and connect through drivers and BI tools."
+weight: 100
+icon: "fa-solid fa-code"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_sidebars/version-2.x-sidebars.json"
+---
