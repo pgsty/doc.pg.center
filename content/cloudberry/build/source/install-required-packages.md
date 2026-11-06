@@ -1,0 +1,248 @@
+---
+title: "Install required packages"
+description: "This step installs essential development tools, libraries, and dependencies required for building Apache Cloudberry."
+weight: 40
+upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/build/install-required-packages.md"
+---
+
+## Install basic system packages {#install-basic-system-packages}
+
+The following command installs the full set of primary packages required for Cloudberry development:
+
+{{< tabs >}}
+{{< tab label="For Rocky Linux 8+" >}}
+```bash
+sudo dnf install -y apr-devel \
+  bison \
+  bzip2-devel \
+  curl \
+  cmake3 \
+  diffutils \
+  flex \
+  gcc \
+  gcc-c++ \
+  glibc-langpack-en \
+  glibc-locale-source \
+  iproute \
+  krb5-devel \
+  libcurl-devel \
+  libevent-devel \
+  libxml2-devel \
+  libuuid-devel \
+  libzstd-devel \
+  lz4-devel \
+  net-tools \
+  openldap-devel \
+  openssl-devel \
+  openssh-server \
+  pam-devel \
+  perl \
+  perl-ExtUtils-Embed \
+  perl-Test-Simple \
+  perl-Env \
+  python3-devel \
+  python3-pip \
+  python3-setuptools \
+  readline-devel \
+  rsync \
+  wget \
+  which \
+  zlib-devel
+```
+
+### Enable additional development tools and libraries {#enable-additional-development-tools-and-libraries}
+
+For Rocky Linux, we also need to install `CodeReady Builder (CRB)` or `devel` repos- they can provide additional development tools and libraries.
+
+On Rocky Linux, they are disabled by default and must be explicitly enabled.
+
+{{< tabs >}}
+{{< tab label="For Rocky Linux 8" >}}
+- For Apache Cloudberry 2.2.0
+
+```bash
+sudo dnf install -y --enablerepo=devel liburing-devel libuv-devel libyaml-devel perl-IPC-Run protobuf-devel python3-wheel python3-Cython
+```
+
+- For Apache Cloudberry 2.1.0
+
+```bash
+sudo dnf install -y --enablerepo=devel liburing-devel libuv-devel libyaml-devel perl-IPC-Run protobuf-devel
+```
+
+- For Apache Cloudberry 2.0.0
+
+```bash
+sudo dnf install -y --enablerepo=devel libuv-devel libyaml-devel perl-IPC-Run protobuf-devel
+```
+{{< /tab >}}
+{{< tab label="For Rocky Linux 9" >}}
+- For Apache Cloudberry 2.2.0
+
+```bash
+sudo dnf install -y --enablerepo=crb liburing-devel libuv-devel libyaml-devel perl-IPC-Run protobuf-devel python3-wheel python3-Cython
+```
+
+- For Apache Cloudberry 2.1.0
+
+```bash
+sudo dnf install -y --enablerepo=crb liburing-devel libuv-devel libyaml-devel perl-IPC-Run protobuf-devel
+```
+
+- For Apache Cloudberry 2.0.0
+
+```bash
+sudo dnf install -y --enablerepo=crb libuv-devel libyaml-devel perl-IPC-Run protobuf-devel
+```
+{{< /tab >}}
+{{< tab label="For Rocky Linux 10" >}}
+- For Apache Cloudberry 2.2.0
+
+```bash
+sudo dnf install -y --enablerepo=crb liburing-devel libuv-devel libyaml-devel perl-IPC-Run protobuf-devel python3-wheel
+```
+{{< /tab >}}
+{{< /tabs >}}
+
+> [!NOTE]
+> In Red Hat Enterprise Linux (RHEL), this repository is called "PowerTools."
+
+### Install gcc and gcc-c++ 11+ for Rocky Linux 8 (Optional) {#install-gcc-and-gcc-c-11-for-rocky-linux-8-optional}
+
+> [!TIP]
+> This step is only required for Apache Cloudberry 2.0.0. You can skip this step when building Apache Cloudberry 2.1.0+.
+
+For Rocky Linux 8, we need to install the higher version of gcc and gcc-c++ to build Apache Cloudberry 2.0.0 with PAX support:
+
+```bash
+sudo yum install -y gcc-toolset-11-gcc gcc-toolset-11-gcc-c++
+scl enable gcc-toolset-11 bash # for temprory use
+sudo echo "source /opt/rh/gcc-toolset-11/enable" >> /etc/profile.d/gcc.sh
+sudo source /etc/profile.d/gcc.sh #  for permanent use
+```
+
+You can verify the gcc and gcc-c++ 11+ version by running:
+
+```bash
+gcc --version
+g++ --version
+```
+
+### Install Apache Xerces-C for ORCA {#install-apache-xerces-c-for-orca}
+
+Apache Xerces-C is a required dependency for enabling the Orca query optimizer in Cloudberry. The following steps download the source code, verify its integrity, build the library, and install it.
+
+1. Set variables (helper)
+
+    To streamline the commands and make them reusable, define the following helper variables:
+
+    ```bash
+    XERCES_LATEST_RELEASE=3.3.0
+    XERCES_INSTALL_PREFIX="/usr/local/xerces-c"
+    ```
+
+> [!NOTE]
+> These variables are used throughout the build process to specify the version of Apache Xerces-C being installed (XERCES_LATEST_RELEASE) and its installation directory (XERCES_INSTALL_PREFIX). This ensures consistency and simplifies the commands.
+
+2. Download and verify the source package
+
+    ```bash
+    wget -nv "https://dlcdn.apache.org//xerces/c/3/sources/xerces-c-${XERCES_LATEST_RELEASE}.tar.gz"
+    echo "$(curl -sL https://dlcdn.apache.org//xerces/c/3/sources/xerces-c-${XERCES_LATEST_RELEASE}.tar.gz.sha256)" | sha256sum -c -
+    ```
+
+> [!NOTE]
+> Ensure the SHA-256 checksum validation passes (output: `xerces-c-3.3.0.tar.gz: OK`). If it fails, do not proceed and verify the source package's integrity.
+
+3. Extract, configure, build, test, and install
+
+    ```bash
+    tar xf "xerces-c-${XERCES_LATEST_RELEASE}.tar.gz"
+    rm "xerces-c-${XERCES_LATEST_RELEASE}.tar.gz"
+    cd xerces-c-${XERCES_LATEST_RELEASE}
+
+    ./configure --prefix="${XERCES_INSTALL_PREFIX}-${XERCES_LATEST_RELEASE}" | tee configure-$(date "+%Y.%m.%d-%H.%M.%S").log
+    make -j$(nproc) | tee make-$(date "+%Y.%m.%d-%H.%M.%S").log
+    make check | tee make-check-$(date "+%Y.%m.%d-%H.%M.%S").log
+    sudo make install | tee make-install-$(date "+%Y.%m.%d-%H.%M.%S").log
+    sudo ln -s ${XERCES_INSTALL_PREFIX}-${XERCES_LATEST_RELEASE} ${XERCES_INSTALL_PREFIX}
+    ```
+
+> [!NOTE]
+> - The `make` command is run in parallel (`-j$(nproc)`) to leverage all available CPU cores for faster builds. The `nproc` command dynamically retrieves the number of cores.
+> - During `make check`, failures listed as **XFAIL** (expected failures) are acceptable and do not indicate a problem with the build.
+> - The output of the commands are saved to timestamped log files for future reference or troubleshooting.
+{{< /tab >}}
+{{< tab label="For Ubuntu 22.04+" >}}
+For Ubuntu users:
+
+- The gcc and g++ versions in Ubuntu 20.04+ are sufficient for building Apache Cloudberry.
+- We will use the default version of `libxerces-c` available in the Ubuntu repositories, which is compatible with Apache Cloudberry.
+
+```bash
+sudo apt install -y bison \
+  bzip2 \
+  cmake \
+  curl \
+  flex \
+  gcc \
+  g++ \
+  iproute2 \
+  iputils-ping \
+  language-pack-en \
+  locales \
+  libapr1-dev \
+  libbz2-dev \
+  libcurl4-gnutls-dev \
+  libevent-dev \
+  libkrb5-dev \
+  libipc-run-perl \
+  libldap2-dev \
+  libpam0g-dev \
+  libprotobuf-dev \
+  libreadline-dev \
+  libssl-dev \
+  libuv1-dev \
+  liblz4-dev \
+  libxerces-c-dev \
+  libxml2-dev \
+  libyaml-dev \
+  libzstd-dev \
+  libperl-dev \
+  make \
+  pkg-config \
+  protobuf-compiler \
+  python3-dev \
+  python3-pip \
+  python3-setuptools \
+  python3-wheel \
+  rsync
+```
+
+### Extra dependencies for building PAX (Optional) {#extra-dependencies-for-building-pax-optional}
+
+> [!TIP]
+> Only required for Apache Cloudberry 2.1.0+. You can skip this step when building Apache Cloudberry 2.0.0.
+
+In Apache Cloudberry 2.1.0+, we have introduced a new dependency `liburing` for building PAX.
+
+* For Ubuntu 22.04/24.04
+
+```bash
+sudo apt install -y liburing-dev
+```
+
+* For Ubuntu 20.04 (Apache Cloudberry 2.1)
+
+```bash
+sudo apt install -y git build-essential
+wget https://github.com/axboe/liburing/archive/refs/tags/liburing-2.1.tar.gz
+tar -xzf liburing-2.1.tar.gz
+rm "liburing-2.1.tar.gz"
+cd liburing-liburing-2.1
+make -j$(nproc)
+sudo make install
+sudo ldconfig
+```
+{{< /tab >}}
+{{< /tabs >}}
