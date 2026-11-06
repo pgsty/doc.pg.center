@@ -1,9 +1,23 @@
 ---
 title: "pg_cast"
+description: "`pg_catalog` 模式中的 `pg_cast` 表存储数据类型转换路径，包括内置路径和使用 `CREATE CAST` 定义的路径。"
 weight: 200
 upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-cast.md"
-translation_status: "placeholder"
 ---
 
-> [!NOTE] 译文待补
-> 本页中文翻译尚未完成，请先阅读<a href="/cloudberry/reference/sys-catalogs/sys-tables/pg-cast/" hreflang="en" lang="en">英文原文</a>。
+注意，`pg_cast` 并不表示系统所知的所有类型转换，而只表示无法从通用规则推导出的转换。例如，域与其基础类型之间的转换并不在 `pg_cast` 中显式表示。另一个重要例外是“自动 I/O 类型转换”，即使用数据类型自身的 I/O 函数在该类型与 `text` 或其他字符串类型之间进行的转换，它们也不在 `pg_cast` 中显式表示。
+
+`pg_cast` 中列出的转换函数必须以源类型作为第一个参数的类型，并以目标类型作为结果类型。转换函数最多可以有三个参数。第二个参数（如果存在）必须为 `integer` 类型；它接收与目标类型关联的类型修饰符，如果没有则接收 `-1`。第三个参数（如果存在）必须为 `boolean` 类型；显式转换时接收 `true`，否则接收 `false`。
+
+如果关联函数接受多个参数，则可以创建源类型与目标类型相同的 `pg_cast` 条目。这些条目表示“长度强制转换函数”，将该类型的值强制转换为符合某个特定类型修饰符值要求的值。
+
+当 `pg_cast` 条目的源类型与目标类型不同，且函数接受多个参数时，此条目会在一个步骤中同时完成类型转换和长度强制转换。如果没有这样的条目，强制转换为使用类型修饰符的类型时需要两步：先在数据类型之间转换，再应用修饰符。
+
+|列|类型|引用|说明|
+|------|----|----------|-----------|
+|`oid`|oid||对象 ID。|
+|`castsource`|oid|`pg_type.oid`|源数据类型的 OID。|
+|`casttarget`|oid|`pg_type.oid`|目标数据类型的 OID。|
+|`castfunc`|oid|`pg_proc.oid`|执行此类型转换所用函数的 OID。如果转换方法不需要函数，则存储零。|
+|`castcontext`|char| |指示可以在何种上下文中调用此转换。`e` 表示只能显式转换（使用 `CAST` 或 `::` 语法）。`a` 表示既可以显式转换，也可以在赋值给目标列时隐式转换。`i` 表示除了上述情况，还可以在表达式中隐式转换*。*|
+|`castmethod`|char| |指示如何执行类型转换：<br/><br/>`f` — 使用 `castfunc` 字段标识的函数。<br/><br/>`i` — 使用输入/输出函数。<br/><br/>`b` — 两种类型二进制兼容，无需转换。|
