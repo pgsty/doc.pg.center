@@ -129,7 +129,9 @@ etcd 文档版权归 etcd Authors 所有（Copyright 2013-present）。其正文
 导航结构沿用上游 2.x 侧边栏。Docusaurus 的提示块、标签页和折叠块改写为 OINK 的提示框与标签页，
 图片与使用它的页面放在一起。上游发布但未列入侧边栏的三个页面（TPC-H、TPC-DS 基准测试与 `pg_restore`）
 也已收录。上游 19 个失效链接（遗留的 Greenplum 路径与拼写错误）改为指向其所指的页面，一处未闭合的提示块
-已闭合，一处拼写错误的标题已更正。中文页面目前只有译名，正文链接到英文原文。
+已闭合，一处拼写错误的标题已更正。中文版已翻译完整的 2.x 文档、PXF 与内核原理手册，
+保留代码、命令、程序输出和英文标题锚点。另据 2.2 发布版源码，区分了需显式激活的 Coordinator
+故障切换与自动提升的 Segment 镜像，并更正了 AO 压实阈值条件；这些修正已同时用于中英文版。
 
 Apache Cloudberry 网站版权归 Apache 软件基金会所有（Copyright 2024-2025 The Apache Software Foundation），
 依 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) 授权。其

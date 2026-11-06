@@ -150,7 +150,11 @@ are rewritten as OINK callouts and tabs, and images live beside the pages that u
 that upstream publishes outside its sidebar, the TPC-H and TPC-DS benchmarks and `pg_restore`, are
 included. Nineteen links that are broken upstream (legacy Greenplum paths and typos) point to the
 page they refer to, an unclosed note is closed, and a misspelled heading is corrected. The Chinese
-pages currently carry translated titles and link to the English text.
+edition translates the complete 2.x documentation, PXF, and Core Internals, preserving code,
+commands, program output, and the English heading anchors. Local corrections also
+distinguish explicit Coordinator activation from automatic Segment promotion and
+correct the AO compaction threshold condition against the 2.2 release source; both
+language editions include these corrections.
 
 The Apache Cloudberry website is Copyright 2024-2025 The Apache Software Foundation and is licensed
 under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0). Its

@@ -30,10 +30,13 @@ The v3.7 documentation snapshot remains pinned separately from the software rele
 Cloudberry 2.2.0-incubating uses PostgreSQL 14.10; 2.0 and 2.1 used 14.4. The
 website documentation snapshot and software release are pinned separately in
 `data/upstreams.yaml`. Exact website LICENSE and NOTICE texts are retained in
-`static/third_party/cloudberry/`.
+`static/third_party/cloudberry/`. Local corrections distinguish explicit Coordinator
+activation from automatic Segment promotion and correct the AO compaction threshold
+condition; both English and Chinese pages include these corrections.
 
-The Apache Cloudberry collection is English only. Its Chinese pages carry translated
-titles and link to the English text until the translation is written. The upstream
+The Apache Cloudberry collection, including PXF and Core Internals, is published
+in English and Simplified Chinese. The Chinese edition translates explanatory text
+while preserving source code, commands, program output, and upstream anchors. The upstream
 `NOTICE` records that the product contains significant parts originally based on
 Greenplum Database, Copyright (c) 2004-2020 VMware, Inc. or its affiliates, under
 the Apache License 2.0. Apache Cloudberry is undergoing incubation at The Apache

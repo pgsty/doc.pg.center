@@ -17,8 +17,8 @@ Hugo Extended and the OINK theme, and maintained by PGSTY.
 The six component collections are available in eight languages: English,
 Simplified Chinese, French, Japanese, German, Russian, Arabic, and Spanish.
 English is the source for the other seven editions. Apache Cloudberry is published
-in English, including PXF and Core Internals. Chinese translation is in progress;
-untranslated pages carry translated titles and link to the English text.
+in English and Simplified Chinese, including the complete PXF and Core Internals
+manuals. The two editions contain 641 pages each.
 
 The site uses the **PG.CENTER** name and PostgreSQL elephant logo. The Home
 navigation link returns to `https://pg.center/zh/` for Chinese and

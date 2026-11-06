@@ -184,7 +184,7 @@ languages:
           weight: 70
           params:
             icon: fa-solid fa-cubes-stacked
-            description: 源自 Greenplum 的开源 MPP 数据库，中文译文准备中
+            description: 源自 Greenplum 的开源 MPP 数据库，含 PXF 与内核原理中文手册
 
   fr:
     label: Français

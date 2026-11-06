@@ -27,8 +27,9 @@ in all other languages. The local checkout is `~/www/doc.pg.center`.
 
 The six component collections are available in **English (`en`), Simplified
 Chinese (`zh`), French (`fr`), Japanese (`ja`), German (`de`), Russian (`ru`),
-Arabic (`ar`), and Spanish (`es`)**. Apache Cloudberry is published in English
-with Chinese title placeholders; it has no other language editions yet.
+Arabic (`ar`), and Spanish (`es`)**. Apache Cloudberry, including PXF and Core
+Internals, is published in English and Simplified Chinese; it has no other language
+editions yet.
 
 | Component | Documentation scope | Languages |
 | --- | --- | --- |
@@ -38,7 +39,7 @@ with Chinese title placeholders; it has no other language editions yet.
 | pgBadger | Log analysis, command reference, sample reports, and release history | en, zh, fr, ja, de, ru, ar, es |
 | HAProxy | Starter, Configuration, and Management manuals | en, zh, fr, ja, de, ru, ar, es |
 | etcd | Operations, APIs, development, internals, and upgrades | en, zh, fr, ja, de, ru, ar, es |
-| Apache Cloudberry | 2.x MPP database build, deployment, data, performance, security, administration, and references | en; zh titles only |
+| Apache Cloudberry | 2.x MPP database build, deployment, data, performance, security, administration, references, PXF, and Core Internals | en, zh |
 
 English is the source language. Files without a language suffix are English;
 translations use the same path with `.zh.md`, `.fr.md`, `.ja.md`, `.de.md`,
@@ -60,14 +61,25 @@ section's `_index.md`. Page bundles hold images.
 Every heading carries the explicit `{#id}` that Docusaurus generates, so upstream
 anchors and future translations stay aligned.
 
-The checkers know Cloudberry's languages (`en`, `zh`). Each `.zh.md` page has a
-translated title, `translation_status: placeholder`, and a callout that links to
-the English page with raw HTML, because the site's link hook would otherwise
-resolve the link back to the Chinese page itself. `check-content.py` verifies
-that link, and `report-coverage.py` counts placeholders as untranslated. When
-translating a page, replace the callout with the full text and remove the
-marker; never paste English prose into a Chinese page. Do not add Cloudberry menus, home cards,
-or footer links to other languages until those editions exist.
+The checkers know Cloudberry's languages (`en`, `zh`). Both editions contain
+641 complete pages, including PXF and Core Internals. Chinese headings retain the
+English `{#id}` sequence; `check-content.py` verifies it. Translate explanatory
+prose, descriptions, callout titles, tab labels, image alt text, and visible HTML
+figure/table text. Preserve code, commands, program output, Mermaid source, and
+link targets. Do not put English prose in Chinese pages or mark unfinished pages
+as translated. The checkers still recognize `translation_status: placeholder`
+for future additions and count those pages as untranslated. Such a placeholder
+must link to its English page with raw HTML, since the link hook localizes ordinary
+Markdown links. Do not add Cloudberry menus, home cards, or footer links to other
+languages until those editions exist.
+
+Chinese terminology distinguishes external table (外部表) from foreign table
+(外表); foreign data wrapper is 外部数据包装器. Use 故障切换 for failover,
+分区剪枝 for partition pruning, 压实 for compaction, 模式 for schema, 表空间
+for tablespace, and AO 表 for append-optimized table. Preserve Coordinator,
+Segment, Standby Coordinator, GPORCA, Interconnect, PXF, gpfdist, and tool names.
+Use 派发 for dispatch, 切片 for slice, 进程组 for gang, and 分布位置 for
+planner locus; optimizer cost is 代价, cost model is 代价模型. Do not confuse storage/WAL segments (段) with the Cloudberry Segment role.
 
 Upstream prose escapes brackets as `\(` and `\[`. The site's math passthrough
 reads those as formula delimiters, so converted text uses plain brackets; keep it
