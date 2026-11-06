@@ -74,7 +74,7 @@ After `gprecoverseg` has completed, the segments are in the states shown in the 
 | Segment Type |`preferred_role`|`role`|`mode`|`status`|
 |--------------|----------------|------|------|--------|
 |Primary|`p`(primary)|`m`(mirror)|`s`(Synchronized)|`u`(up)|
-|Mirror|`m`(mirror)`p`(primary)|`s`(Synchronized)|`u`(up)
+|Mirror|`m`(mirror)|`p`(primary)|`s`(Synchronized)|`u`(up)|
 
 The `gprecoverseg -r` command rebalances the system by returning the segment roles to their preferred roles.
 
