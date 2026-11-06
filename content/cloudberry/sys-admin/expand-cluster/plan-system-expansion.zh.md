@@ -59,7 +59,7 @@ gpstop -u
 - [ ] 开始表重分布前，停止所有自动快照进程或其他占用磁盘空间的进程。
 - [ ] 在扩容后的系统中重新分布表（`gpexpand`）。
 - [ ] 删除扩容模式（`gpexpand -c`）。
-- [ ] **重要：**运行 `analyze` 更新分布统计信息。扩容期间使用 `gpexpand -a`，扩容完成后使用 `analyze`。
+- [ ] **重要：** 运行 `analyze` 更新分布统计信息。扩容期间使用 `gpexpand -a`，扩容完成后使用 `analyze`。
 
 ### 备份数据库 {#back-up-databases}
 

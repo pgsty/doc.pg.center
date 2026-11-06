@@ -113,7 +113,7 @@ PXF 包含一个名为 `pxf-site.xml` 的模板文件，用于 PXF 特有的配�
 |----------------|--------------------------------------------|---------------|
 | pxf.service.kerberos.principal | Kerberos 主体名称。 | gpadmin/\_HOST@EXAMPLE.COM |
 | pxf.service.kerberos.keytab | Kerberos keytab 文件的文件系统路径。 | $PXF_BASE/keytabs/pxf.service.keytab |
-| pxf.service.kerberos.constrained-delegation | 启用/停用 [Kerberos 约束委派](/cloudberry/pxf/administering/configuring/hadoop-connectors/pxf_kerbhdfs/#about-kerberos-constrained-delegation)。**注意：**此属性仅适用于 Hadoop PXF 服务器配置，不适用于 JDBC PXF 服务器。 | false |
+| pxf.service.kerberos.constrained-delegation | 启用/停用 [Kerberos 约束委派](/cloudberry/pxf/administering/configuring/hadoop-connectors/pxf_kerbhdfs/#about-kerberos-constrained-delegation)。**注意：** 此属性仅适用于 Hadoop PXF 服务器配置，不适用于 JDBC PXF 服务器。 | false |
 | pxf.service.kerberos.ticket-renew-window| PXF 尝试续期/刷新 Kerberos 票据所需经过的最短生命周期（以百分比表示）。取值范围为 0（PXF 为所有请求生成新票据）到 1（PXF 在票据完整生命周期结束后续期）。 | 0.8 (80%) |
 | pxf.service.user.impersonation | 启用/停用连接远程系统时的用户模拟。 | 如果 `pxf-site.xml` 中缺少 `pxf.service.user.impersonation` 属性，则对 PXF Hadoop 服务器默认为 `true`（启用），对 JDBC 服务器默认为 `false`（停用）。 |
 | pxf.service.user.name | 远程系统的登录用户。 | 此属性默认被注释掉。属性未设置时，默认值为启动 pxf 进程的操作系统用户，通常是 `gpadmin`。属性已设置时，默认值取决于用户模拟设置，以及（访问 Hadoop 时）是否访问受 Kerberos 保护的集群；请参阅*配置 Hadoop 用户、用户模拟和代理*主题中的[用例和配置场景](/cloudberry/pxf/administering/configuring/hadoop-connectors/pxfuserimpers/#use-cases-and-configuration-scenarios)一节。 |

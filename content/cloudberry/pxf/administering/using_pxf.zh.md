@@ -32,7 +32,7 @@ Apache Cloudberry Platform Extension Framework (PXF) 实现了一个名为 `pxf`
 
 必须在计划使用该扩展的每个 Apache Cloudberry 数据库中显式注册 PXF 扩展。你必须具有 Apache Cloudberry 管理员权限才能注册扩展。
 
-对于要使用 PXF 的**_每个_**数据库，请执行以下步骤：
+对于要使用 PXF 的 **_每个_** 数据库，请执行以下步骤：
 
 1. 以 `gpadmin` 用户身份连接到数据库：
 

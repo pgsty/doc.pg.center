@@ -519,7 +519,7 @@ BEGIN ISOLATION LEVEL REPEATABLE READ;
 
 ## 10.3 清理与自动清理 {#103-vacuum--autovacuum}
 
-MVCC 从不原地覆盖行。每次 `UPDATE` 都留下旧版本并插入新版本；每次 `DELETE` 仅写入 `xmax`；即使中止的 `INSERT` 也会留下一个元组，其 `xmin` 永远不会提交（[§4.3](/cloudberry/core-internals/part-2-storage-data-layout/ch04/#43-operations-on-tuples)）。当任何活动快照都不再能看到这样的元组时，它就已**死亡**，只会浪费空间，使堆及其索引膨胀。**清理（Vacuum）**就是垃圾回收器，负责回收这些空间，供*关系内部复用*。这里必须准确区分：惰性 `VACUUM` 将空闲空间归还到表自身的空闲空间映射，而非操作系统；通过缩小文件向操作系统归还空间的是 `VACUUM FULL`/`CLUSTER`，见 [§10.6](#106-rebuilding-tables--indexes)。
+MVCC 从不原地覆盖行。每次 `UPDATE` 都留下旧版本并插入新版本；每次 `DELETE` 仅写入 `xmax`；即使中止的 `INSERT` 也会留下一个元组，其 `xmin` 永远不会提交（[§4.3](/cloudberry/core-internals/part-2-storage-data-layout/ch04/#43-operations-on-tuples)）。当任何活动快照都不再能看到这样的元组时，它就已**死亡**，只会浪费空间，使堆及其索引膨胀。**清理（Vacuum）** 就是垃圾回收器，负责回收这些空间，供*关系内部复用*。这里必须准确区分：惰性 `VACUUM` 将空闲空间归还到表自身的空闲空间映射，而非操作系统；通过缩小文件向操作系统归还空间的是 `VACUUM FULL`/`CLUSTER`，见 [§10.6](#106-rebuilding-tables--indexes)。
 
 可见性规则由 `HeapTupleSatisfiesVacuum` 决定：只有元组的 `xmax` 已提交，*并且*早于**可移除边界**时才能移除（即任何运行中事务可能需要的最老 xmin，由 `ComputeXidHorizons` 计算，见 [§10.4](#104-freezing--xid-wraparound)）。更晚的元组属于*最近死亡*：已经死亡，但尚不能移除。
 

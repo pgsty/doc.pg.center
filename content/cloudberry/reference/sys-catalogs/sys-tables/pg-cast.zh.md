@@ -19,5 +19,5 @@ upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23
 |`castsource`|oid|`pg_type.oid`|源数据类型的 OID。|
 |`casttarget`|oid|`pg_type.oid`|目标数据类型的 OID。|
 |`castfunc`|oid|`pg_proc.oid`|执行此类型转换所用函数的 OID。如果转换方法不需要函数，则存储零。|
-|`castcontext`|char| |指示可以在何种上下文中调用此转换。`e` 表示只能显式转换（使用 `CAST` 或 `::` 语法）。`a` 表示既可以显式转换，也可以在赋值给目标列时隐式转换。`i` 表示除了上述情况，还可以在表达式中隐式转换*。*|
+|`castcontext`|char| |指示可以在何种上下文中调用此转换。`e` 表示只能显式转换（使用 `CAST` 或 `::` 语法）。`a` 表示既可以显式转换，也可以在赋值给目标列时隐式转换。`i` 表示除了上述情况，还可以在表达式中隐式转换。|
 |`castmethod`|char| |指示如何执行类型转换：<br/><br/>`f` — 使用 `castfunc` 字段标识的函数。<br/><br/>`i` — 使用输入/输出函数。<br/><br/>`b` — 两种类型二进制兼容，无需转换。|

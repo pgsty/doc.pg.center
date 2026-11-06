@@ -42,7 +42,7 @@ PXF 内置了其依赖的所有 Hadoop JAR 文件，并支持以下 Hadoop 组�
 
 *连接器*是一个通用术语，用于概括读取或写入外部数据存储所需的实现细节。PXF 提供了面向 Hadoop（HDFS、Hive、HBase）、对象存储（Azure、Google Cloud Storage、MinIO、AWS S3 和 Dell ECS）以及 SQL 数据库（通过 JDBC）的内置连接器。
 
-PXF *服务器（Server）*是连接器的一份命名配置。服务器定义提供 PXF 访问外部数据源所需的信息。这些配置信息因数据存储而异，可能包括服务器位置、访问凭据及其他相关属性。
+PXF *服务器（Server）* 是连接器的一份命名配置。服务器定义提供 PXF 访问外部数据源所需的信息。这些配置信息因数据存储而异，可能包括服务器位置、访问凭据及其他相关属性。
 
 Apache Cloudberry 管理员会为每个允许 Apache Cloudberry 用户访问的外部数据存储至少配置一个服务器定义，并酌情发布可用的服务器名称。
 

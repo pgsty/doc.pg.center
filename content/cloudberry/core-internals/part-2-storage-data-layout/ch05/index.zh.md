@@ -385,7 +385,7 @@ typedef enum AoHeaderKind {
 
 ### 5.2.3 每块两个校验和：头部与内容 {#523-two-checksums-per-block--header-and-content}
 
-使用 `WITH (checksum=true)` 建表时，每块都会保存**两个** CRC-32 校验和，保护的内容各不相同。`src/backend/access/appendonly/README.md:42` 只提到*“头部还包含两个校验和”*；其原因见格式头文件：**头部校验和**会*先*验证，只有通过后，头部字段（长度、类型、rowCount）才可信；然后**块校验和**覆盖包含内容在内的整个块。
+使用 `WITH (checksum=true)` 建表时，每块都会保存**两个** CRC-32 校验和，保护的内容各不相同。`src/backend/access/appendonly/README.md:42` 只提到 *“头部还包含两个校验和”*；其原因见格式头文件：**头部校验和**会*先*验证，只有通过后，头部字段（长度、类型、rowCount）才可信；然后**块校验和**覆盖包含内容在内的整个块。
 
 ```c {title="src/include/cdb/cdbappendonlystorage_int.h"}
 /* 64 bit header + [ block checksum + header checksum ].
@@ -417,7 +417,7 @@ SELECT c.relname, a.blocksize, a.compresstype,
 
 `blocksize` 和 `compresstype`/`compresslevel` 直接来自 `pg_appendonly`（即上面的列）。块大小默认为 `32768`，限制每块*未压缩*内容的大小。压缩仅作用于绿色的内容区域：由 `compresstype` 选择 `none`、`zlib`、`zstd` 或 `rle_type`，级别由 `compresslevel` 决定。头部记录两个大小：`dataLength` 是未压缩大小，`compressedLength` 是磁盘大小，让读取者知道要读多少字节，以及解压后应有多少字节。
 
-如果压缩没能真正缩小缓冲区，写入者会原样保存，并设置 `compressedLength = 0`（`src/backend/cdb/cdbappendonlystoragewrite.c` 中的 `AppendOnlyStorageWrite_CompressAppend()`）；零值就是磁盘上表示*“此块未压缩”*的标志。读取者通过 `AppendOnlyStorageFormat_GetCompressedLen`（`src/include/cdb/cdbappendonlystorageformat.h`）提取磁盘长度，该函数只有一行位提取操作：
+如果压缩没能真正缩小缓冲区，写入者会原样保存，并设置 `compressedLength = 0`（`src/backend/cdb/cdbappendonlystoragewrite.c` 中的 `AppendOnlyStorageWrite_CompressAppend()`）；零值就是磁盘上表示 *“此块未压缩”* 的标志。读取者通过 `AppendOnlyStorageFormat_GetCompressedLen`（`src/include/cdb/cdbappendonlystorageformat.h`）提取磁盘长度，该函数只有一行位提取操作：
 
 ```c {title="src/backend/cdb/cdbappendonlystorageformat.c — AppendOnlyStorageFormat_GetCompressedLen()"}
 AppendOnlyStorageFormat_GetCompressedLen(uint8 *headerPtr) {
@@ -455,7 +455,7 @@ SELECT 'ao52_plain' AS tbl,
 
 ### 5.3.1 问题：堆能随机读取，AO 段文件只能从前向后读取 {#531-the-problem-a-heap-reads-anywhere-an-ao-segfile-reads-front-to-back}
 
-[§5.1](#51-memtuple--the-ao-file-format) 已说明，AO 数据保存在 **varblock** 中，块在段文件内首尾相接，没有槽位数组，也没有逐块寻址机制；读取时从文件的第 0 字节开始流式向前处理。这非常适合顺序扫描，却不利于其他访问方式。索引项指出*“目标行在那里”*，并期望能够**直接跳到该行**。堆可以这样做：堆 TID 为 `(block#, offset)`，将块号乘以 `BLCKSZ` 即可得到文件内的位置。AO 行没有这样的地址，只知道自己是*段文件 K 中的第 N 行*。
+[§5.1](#51-memtuple--the-ao-file-format) 已说明，AO 数据保存在 **varblock** 中，块在段文件内首尾相接，没有槽位数组，也没有逐块寻址机制；读取时从文件的第 0 字节开始流式向前处理。这非常适合顺序扫描，却不利于其他访问方式。索引项指出 *“目标行在那里”*，并期望能够**直接跳到该行**。堆可以这样做：堆 TID 为 `(block#, offset)`，将块号乘以 `BLCKSZ` 即可得到文件内的位置。AO 行没有这样的地址，只知道自己是*段文件 K 中的第 N 行*。
 
 Cloudberry 用两套机制弥合这一差距。首先，行需要一个系统其他部分可以保存和传递的**身份标识**，即伪装成堆 TID 的 `AOTupleId`。其次，这个标识必须能**解析**为物理文件偏移量，这由按需建立的额外间接层——**块目录**——完成。**README.md:128-130** 的说法是：*“与堆表相比，对 AO 表的索引扫描多了一层间接寻址。”* 本节沿着“索引 → AOTupleId → 块目录 → varblock → 元组”的路径展开。
 
@@ -465,7 +465,7 @@ Cloudberry 用两套机制弥合这一差距。首先，行需要一个系统其
 
 ### 5.3.2 AOTupleId：以堆 TID 形式表示（段文件号，行号） {#532-aotupleid--a-rows-identity-is-segfile-row-wearing-a-heap-tid-costume}
 
-索引、执行器、触发器代码、EXPLAIN 等*“系统的大部分其他组件，都期望每个元组具有唯一的物理标识符”*（**README.md:138-139**）。这个标识符是 6 字节的 `ItemPointer`，其中块号占 4 字节，偏移量占 2 字节。AO 没有堆块，因此构造了一个 48 位值：它*看起来*像合法的 `ItemPointer`，实际编码的是 `(segfile#, rowNum)`。**appendonlytid.h 中的 AOTupleId** 结构体由三个 `uint16` 组成，大小和对齐方式刻意与 `ItemPointer` 相同：
+索引、执行器、触发器代码、EXPLAIN 等 *“系统的大部分其他组件，都期望每个元组具有唯一的物理标识符”*（**README.md:138-139**）。这个标识符是 6 字节的 `ItemPointer`，其中块号占 4 字节，偏移量占 2 字节。AO 没有堆块，因此构造了一个 48 位值：它*看起来*像合法的 `ItemPointer`，实际编码的是 `(segfile#, rowNum)`。**appendonlytid.h 中的 AOTupleId** 结构体由三个 `uint16` 组成，大小和对齐方式刻意与 `ItemPointer` 相同：
 
 ```c {title="src/include/access/appendonlytid.h — AOTupleId"}
 typedef struct AOTupleId
@@ -1001,7 +1001,7 @@ DELETE 200
 
 ### 5.6.1 元数据相同，磁盘形态不同 {#561-same-metadata-a-different-shape-on-disk}
 
-[§5.1](#51-memtuple--the-ao-file-format)–[§5.5](#55-vacuum--compaction) 介绍的所有机制，包括**仅追加**段文件、aoseg 元数据表、块目录（[§5.3](#53-block-directory--fastsequence)）、可见性映射（[§5.4](#54-dml-scan--multi-version-control)）、`gp_fastsequence`，以及将（segno，rownum）伪装成堆 TID 的 `AOTupleId`，描述的都是**完整**存储行的表：元组依次写入同一组段文件。AOCS（追加优化**列**存储）保留**全部**机制，只改变一点：将每行拆成各列，把**每列写入各自的段文件**，而不再写入完整行。README 明确说明，AOCS *“采用类似布局，但增加了元数据，用于跟踪段文件与列之间的对应关系”*，其代码*“最初由仅追加存储代码复制而来”*，见 `src/backend/access/appendonly/README.md:10`。
+[§5.1](#51-memtuple--the-ao-file-format)–[§5.5](#55-vacuum--compaction) 介绍的所有机制，包括**仅追加**段文件、aoseg 元数据表、块目录（[§5.3](#53-block-directory--fastsequence)）、可见性映射（[§5.4](#54-dml-scan--multi-version-control)）、`gp_fastsequence`，以及将（segno，rownum）伪装成堆 TID 的 `AOTupleId`，描述的都是**完整**存储行的表：元组依次写入同一组段文件。AOCS（追加优化**列**存储）保留**全部**机制，只改变一点：将每行拆成各列，把**每列写入各自的段文件**，而不再写入完整行。README 明确说明，AOCS *“采用类似布局，但增加了元数据，用于跟踪段文件与列之间的对应关系”*，其代码 *“最初由仅追加存储代码复制而来”*，见 `src/backend/access/appendonly/README.md:10`。
 
 这样做有什么价值？一张分析型宽表可能有 80 列，但像 `SELECT count(flag) WHERE flag` 这样的查询只访问**一列**。行存必须从磁盘读出全部 80 列的每个字节，再丢弃其中 79 列。列存的扫描器只打开投影列的文件。这正是列存的核心优势，也引出了 Cloudberry 的原生列存引擎 PAX（[§6](/cloudberry/core-internals/part-2-storage-data-layout/ch06/)）。
 
@@ -1174,4 +1174,4 @@ EXPLAIN (ANALYZE, COSTS off, TIMING off, SUMMARY off)
 ```
 
 > [!NOTE]
-> **本章小结。** [§5.1](#51-memtuple--the-ao-file-format)–[§5.5](#55-vacuum--compaction) 构建了 AO 行存的完整图景：段文件与 varblock、aoseg/visimap/blkdir 辅助表、fastsequence，以及 AOTupleId。[§5.6](#56-aocs-the-column-store-variant) 说明 AOCS 复用全部机制，只将存储拆分为每列一组文件，从而支持逐列编解码和投影扫描。Cloudberry 的原生列存引擎 **PAX（[§6](/cloudberry/core-internals/part-2-storage-data-layout/ch06/)）**进一步发展了这一思路：将各列放入内置统计信息、能够自我描述的文件中，而不是沿用这里每列一个 128 段编号区间的方案。
+> **本章小结。** [§5.1](#51-memtuple--the-ao-file-format)–[§5.5](#55-vacuum--compaction) 构建了 AO 行存的完整图景：段文件与 varblock、aoseg/visimap/blkdir 辅助表、fastsequence，以及 AOTupleId。[§5.6](#56-aocs-the-column-store-variant) 说明 AOCS 复用全部机制，只将存储拆分为每列一组文件，从而支持逐列编解码和投影扫描。Cloudberry 的原生列存引擎 **PAX（[§6](/cloudberry/core-internals/part-2-storage-data-layout/ch06/)）** 进一步发展了这一思路：将各列放入内置统计信息、能够自我描述的文件中，而不是沿用这里每列一个 128 段编号区间的方案。

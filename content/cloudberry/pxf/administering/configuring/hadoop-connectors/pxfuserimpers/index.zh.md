@@ -7,7 +7,7 @@ upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b
 
 PXF 代表 Apache Cloudberry 最终用户访问 Hadoop 服务。模拟（Impersonation）是向远程系统呈现 Apache Cloudberry 最终用户身份的一种方式。在 PXF 中，可以通过配置 Hadoop 代理用户来实现这一点。当 Hadoop 服务通过 Kerberos 保护时，你还可以选择使用 Kerberos 约束委派进行模拟。
 
-启用用户模拟（默认）时，PXF 使用登录 Apache Cloudberry 并执行使用 PXF 连接器的操作的 Apache Cloudberry 用户账户的身份来访问非安全的 Hadoop 服务。请注意，PXF 访问 Hadoop 服务时只使用用户的_登录_身份。例如，如果用户以 `jane` 身份登录 Apache Cloudberry，然后运行 `SET ROLE` 或 `SET SESSION AUTHORIZATION` 来切换为另一个用户身份，所有 PXF 请求仍使用 `jane` 身份访问 Hadoop 服务。启用用户模拟后，必须显式配置每个 Hadoop 数据源（HDFS、Hive、HBase），以允许 PXF 充当代理来模拟特定的 Hadoop 用户或组。
+启用用户模拟（默认）时，PXF 使用登录 Apache Cloudberry 并执行使用 PXF 连接器的操作的 Apache Cloudberry 用户账户的身份来访问非安全的 Hadoop 服务。请注意，PXF 访问 Hadoop 服务时只使用用户的 _登录_ 身份。例如，如果用户以 `jane` 身份登录 Apache Cloudberry，然后运行 `SET ROLE` 或 `SET SESSION AUTHORIZATION` 来切换为另一个用户身份，所有 PXF 请求仍使用 `jane` 身份访问 Hadoop 服务。启用用户模拟后，必须显式配置每个 Hadoop 数据源（HDFS、Hive、HBase），以允许 PXF 充当代理来模拟特定的 Hadoop 用户或组。
 
 停用用户模拟时，PXF 以 PXF 进程所有者（通常是 `gpadmin`）或你指定的 Hadoop 用户身份运行所有 Hadoop 服务请求。这种行为无法针对不同的 Apache Cloudberry 用户控制对 Hadoop 服务的访问。它要求该用户有权访问 HDFS 中的所有文件和目录，以及 PXF 外部表定义中引用的 Hive 和 HBase 中的所有表。
 

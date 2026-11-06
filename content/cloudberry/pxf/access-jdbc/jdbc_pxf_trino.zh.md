@@ -105,7 +105,7 @@ upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b
 
 1. 如果您的 Trino 服务器配置了[全球信任证书](https://trino.io/docs/current/security/tls.html#add-a-tls-certificate)，可以跳过此步骤。如果您的 Trino 服务器配置为使用企业信任证书或生成的自签名证书，PXF 需要一份该服务器证书的副本，格式为 PEM 编码文件或 Java 密钥库（JKS）文件。
  
-    **注意：**您不需要 Trino 服务器的私钥。
+    **注意：** 您不需要 Trino 服务器的私钥。
 
     将证书复制到 `$PXF_BASE/servers/trino`；将服务器证书存放在 `$PXF_BASE/servers/trino` 内，可确保 `pxf cluster sync` 将证书复制到所有 Segment 主机。
 

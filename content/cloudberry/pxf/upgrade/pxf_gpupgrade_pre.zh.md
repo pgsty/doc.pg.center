@@ -41,7 +41,7 @@ upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b
     gpadmin@coordinator$ /usr/local/cloudberry-pxf-<current-version>/bin/pxf-pre-cbupgrade
     ```
 
-    **注意：**升级前脚本必须连接到正在运行的 Apache Cloudberry 集群。默认情况下，它会尝试以 `gpadmin` 用户（无密码）连接到 `localhost` 上端口 `5432` 的 `gpadmin` 数据库。如果需要自定义这些设置，请参阅[自定义 Apache Cloudberry 连接参数](#customizing-the-apache-cloudberry-connection-parameters)，了解如何为此设置环境变量。
+    **注意：** 升级前脚本必须连接到正在运行的 Apache Cloudberry 集群。默认情况下，它会尝试以 `gpadmin` 用户（无密码）连接到 `localhost` 上端口 `5432` 的 `gpadmin` 数据库。如果需要自定义这些设置，请参阅[自定义 Apache Cloudberry 连接参数](#customizing-the-apache-cloudberry-connection-parameters)，了解如何为此设置环境变量。
 
 1. 停止 PXF；请注意，在 Apache Cloudberry 升级过程中，PXF 外部表将无法访问。
 

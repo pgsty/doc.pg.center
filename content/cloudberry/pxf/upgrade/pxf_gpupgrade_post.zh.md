@@ -35,7 +35,7 @@ PXF 安装，`<new-version>` 指面向新大版本的 PXF 安装。
         gpadmin@coordinator$ /usr/local/cloudberry-pxf-<old-version>/bin/pxf-post-gpupgrade
         ```
 
-        **注意：**升级后脚本必须连接到正在运行的 Apache Cloudberry 集群。默认情况下，它会尝试以 `gpadmin` 用户（无密码）连接到 `localhost` 上端口 `5432` 的 `gpadmin` 数据库。如果需要自定义这些设置，请参阅[自定义 Apache Cloudberry 连接参数](#customizing-the-apache-cloudberry-connection-parameters)，了解如何为此设置环境变量。
+        **注意：** 升级后脚本必须连接到正在运行的 Apache Cloudberry 集群。默认情况下，它会尝试以 `gpadmin` 用户（无密码）连接到 `localhost` 上端口 `5432` 的 `gpadmin` 数据库。如果需要自定义这些设置，请参阅[自定义 Apache Cloudberry 连接参数](#customizing-the-apache-cloudberry-connection-parameters)，了解如何为此设置环境变量。
 
     1. 重启原 Apache Cloudberry 安装中运行的 PXF。
 
@@ -56,7 +56,7 @@ PXF 安装，`<new-version>` 指面向新大版本的 PXF 安装。
     gpadmin@coordinator$ /usr/local/cloudberry-pxf-<new-version>/bin/pxf-post-gpupgrade
     ```
 
-    **注意：**升级后脚本必须连接到正在运行的 Apache Cloudberry 集群。默认情况下，它会尝试以 `gpadmin` 用户（无密码）连接到 `localhost` 上端口 `5432` 的 `gpadmin` 数据库。如果需要自定义这些设置，请参阅[自定义 Apache Cloudberry 连接参数](#customizing-the-apache-cloudberry-connection-parameters)，了解如何为此设置环境变量。
+    **注意：** 升级后脚本必须连接到正在运行的 Apache Cloudberry 集群。默认情况下，它会尝试以 `gpadmin` 用户（无密码）连接到 `localhost` 上端口 `5432` 的 `gpadmin` 数据库。如果需要自定义这些设置，请参阅[自定义 Apache Cloudberry 连接参数](#customizing-the-apache-cloudberry-connection-parameters)，了解如何为此设置环境变量。
 
 1. 如果没有重新定位 `$PXF_BASE`，则必须将 PXF 配置从原 PXF 安装位置复制到新的 PXF 安装位置。例如：
 

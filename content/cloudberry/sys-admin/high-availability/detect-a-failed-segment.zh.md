@@ -21,7 +21,7 @@ FTS 循环运行，每轮之间有一个休眠间隔。每轮中，FTS 根据 `g
 
 如果无法建立连接，或在超时时间内未收到响应，就会重试探测该 Segment 实例。如果达到配置的最大探测次数后仍未成功，FTS 会探测该 Segment 的镜像，确认它正常运行，然后更新 `gp_segment_configuration` 表，将主 Segment 标记为“down”，并设置镜像承担主实例角色。FTS 将执行的操作记录到 [`gp_configuration_history`](/cloudberry/reference/sys-catalogs/sys-tables/gp-configuration-history/) 表中。
 
-当仅有主 Segment 处于活动状态，而对应镜像已停止运行时，主实例会进入*未同步（Not In Sync）*状态，继续记录数据库变更，使镜像恢复时可以完成同步，而无需从主实例向镜像完整复制数据。
+当仅有主 Segment 处于活动状态，而对应镜像已停止运行时，主实例会进入*未同步（Not In Sync）* 状态，继续记录数据库变更，使镜像恢复时可以完成同步，而无需从主实例向镜像完整复制数据。
 
 ## 配置 FTS 行为 {#configure-fts-behavior}
 

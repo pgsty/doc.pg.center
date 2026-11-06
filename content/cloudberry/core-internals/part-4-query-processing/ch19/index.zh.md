@@ -139,7 +139,7 @@ upstream_link: "https://github.com/apache/cloudberry/blob/c2baef068a6f9f8b3c8110
 
 这个设计选择决定了整个架构。[§18.1](/cloudberry/core-internals/part-4-query-processing/ch18/#181-executor-framework--lifecycle) 将执行器描述为按需拉取的火山模型：父节点对孩子调用 `ExecProcNode`，得到一个元组，或得到表示流结束的 NULL。Cloudberry 没有为这个协议增加*把数据发送到别处*的原语，而是插入一个**孩子恰好位于另一个进程中**的节点。Motion 的父节点调用 `ExecProcNode` 并取得元组，完全察觉不到元组是通过套接字到达的。Motion 的孩子也无法察觉：调用它的父节点会把结果横向发送出去，而不是向上返回。树中的其他节点对此一无所知，这也是我们能够独立讲解第 [13](/cloudberry/core-internals/part-4-query-processing/ch13/)–[18](/cloudberry/core-internals/part-4-query-processing/ch18/) 章的原因。
 
-这立即带来三个结果，也构成了本章余下部分的基本概念。第一，计划在 **Motion 边界处分割**为**查询切片（slice）**：[§16.3](/cloudberry/core-internals/part-4-query-processing/ch16/#163-parallelization-cdbllize--cdbmutate) 介绍了规划时如何分割，[§19.3](#193-slice-tables--planslice--gang-mapping) 将介绍相关数据结构。第二，每个查询切片由一个**进程组（gang）**运行：每个 Segment 一个进程，在不同数据上运行同一份计划的同一个切片（[§19.2](#192-the-dispatcher-gangs--async-dispatch)）。第三，也是这里最重要的一点：QD 派发完计划后，**就不再有任何全局调度**。每个进程运行自己的火山模型循环，输入为空时阻塞，输出缓冲区已满时也阻塞。执行期间不存在全局协调者。
+这立即带来三个结果，也构成了本章余下部分的基本概念。第一，计划在 **Motion 边界处分割**为**查询切片（slice）**：[§16.3](/cloudberry/core-internals/part-4-query-processing/ch16/#163-parallelization-cdbllize--cdbmutate) 介绍了规划时如何分割，[§19.3](#193-slice-tables--planslice--gang-mapping) 将介绍相关数据结构。第二，每个查询切片由一个**进程组（gang）** 运行：每个 Segment 一个进程，在不同数据上运行同一份计划的同一个切片（[§19.2](#192-the-dispatcher-gangs--async-dispatch)）。第三，也是这里最重要的一点：QD 派发完计划后，**就不再有任何全局调度**。每个进程运行自己的火山模型循环，输入为空时阻塞，输出缓冲区已满时也阻塞。执行期间不存在全局协调者。
 
 *本章贯穿始终的例子：一次聚合、两个 Motion、三个查询切片。*
 
@@ -955,7 +955,7 @@ ERROR:  terminating connection due to administrator command  (seg0 slice2 10.100
 (1 row)
 ```
 
-QE 的 `FATAL` 到达 QD 后变成了 `ERROR`。这是刻意设计的，`cdbdispatchresult.c` 中 `cdbdisp_get_PQerror()` 的注释明确指出：QE 死亡不能导致 QD 死亡。但这条语句必然失败。系统无法只重跑一个切片：该 QE 曾持有部分哈希表和一半重分布数据流，而它的对端 Motion 接收方已经在等待一条永远不会再产生数据块的路由。因此，派发器会升级处理：一旦任意 QE 报错且设置了 `cancelOnError`，`checkDispatchResult` 就将 `waitMode` 升为 `DISPATCH_WAIT_CANCEL`（`cdbdisp_async.c` — `checkDispatchResult()`）；`signalQEs` 向幸存者发送 libpq 取消请求，`cdbdisp_getDispatchResults` 重新抛出最先收集到的错误。清理随后通过 `RecycleGang` 进行，写入者与读取者的不对称关系在这里最后一次发挥作用：因为被杀的是*读取者*，只销毁了它的描述符，会话的写入进程组和事务存活，下一条语句在重建的读取者上正常运行。如果死亡的是写入者，`markCurrentGxactWriterGangLost`（`cdbutil.c` — `cdbcomponent_recycleIdleQE()`）就会强制执行 `resetSessionForPrimaryGangLoss`：分配新的 `gp_session_id`，删除临时表，并记录日志*“The previous session was reset because its gang was disconnected”*（`cdbgang.c` — `GpDropTempTables()`）。以上机制都没有涉及*准入*：集群允许同时持有多少个进程组，暂时不能准入时又会怎样。这是第 [21](/cloudberry/core-internals/part-6-resource-management/ch21/) 章的主题。在此之前，[§19.3](#193-slice-tables--planslice--gang-mapping) 将拆开载荷中的查询切片表，说明它如何告诉这九个进程各自所属的切片。
+QE 的 `FATAL` 到达 QD 后变成了 `ERROR`。这是刻意设计的，`cdbdispatchresult.c` 中 `cdbdisp_get_PQerror()` 的注释明确指出：QE 死亡不能导致 QD 死亡。但这条语句必然失败。系统无法只重跑一个切片：该 QE 曾持有部分哈希表和一半重分布数据流，而它的对端 Motion 接收方已经在等待一条永远不会再产生数据块的路由。因此，派发器会升级处理：一旦任意 QE 报错且设置了 `cancelOnError`，`checkDispatchResult` 就将 `waitMode` 升为 `DISPATCH_WAIT_CANCEL`（`cdbdisp_async.c` — `checkDispatchResult()`）；`signalQEs` 向幸存者发送 libpq 取消请求，`cdbdisp_getDispatchResults` 重新抛出最先收集到的错误。清理随后通过 `RecycleGang` 进行，写入者与读取者的不对称关系在这里最后一次发挥作用：因为被杀的是*读取者*，只销毁了它的描述符，会话的写入进程组和事务存活，下一条语句在重建的读取者上正常运行。如果死亡的是写入者，`markCurrentGxactWriterGangLost`（`cdbutil.c` — `cdbcomponent_recycleIdleQE()`）就会强制执行 `resetSessionForPrimaryGangLoss`：分配新的 `gp_session_id`，删除临时表，并记录日志 *“The previous session was reset because its gang was disconnected”*（`cdbgang.c` — `GpDropTempTables()`）。以上机制都没有涉及*准入*：集群允许同时持有多少个进程组，暂时不能准入时又会怎样。这是第 [21](/cloudberry/core-internals/part-6-resource-management/ch21/) 章的主题。在此之前，[§19.3](#193-slice-tables--planslice--gang-mapping) 将拆开载荷中的查询切片表，说明它如何告诉这九个进程各自所属的切片。
 
 ## 19.3 查询切片表与 PlanSlice ↔ 进程组映射 {#193-slice-tables--planslice--gang-mapping}
 
@@ -2568,7 +2568,7 @@ show gp_interconnect_type;
 
 本手册中的每份计划此前都以同样方式结束：三个 Segment 并行扫描、连接和聚合，然后通过 `Gather Motion 3:1` 将全部结果汇入一个进程，即 QD，再由它写入一个客户端套接字（[§13.1](/cloudberry/core-internals/part-4-query-processing/ch13/#131-the-simple-query-protocol)）。多数工作负载中，这个汇集口没有明显成本，因为真正需要的行很少。但客户端若需要*十亿*行，例如向 Spark 供数的连接器、机器学习训练加载器或批量导出，集群产生结果的速度就可能比单个 Coordinator 进程转发结果快数倍。第 [18](/cloudberry/core-internals/part-4-query-processing/ch18/) 章和第 19 章的 N 路机制，最终只剩单通道出口。
 
-**并行检索游标**移除了这个汇集口。计划刻意保持**不汇集**：顶部不添加 Motion，每个 QE 保留自己的那部分结果，将元组暂存到**端点（endpoint）**中，即 Segment 自身地址空间内的小型共享内存队列。随后 N 个客户端连接分别附着到 N 个 Segment，并发拉取。这是 Cloudberry 中普通客户端能够直接作为正式客户端与 Segment 通信的唯一场景，也适合作为数据传输章节的结尾：这里让 Interconnect *退出了最终数据路径*。
+**并行检索游标**移除了这个汇集口。计划刻意保持**不汇集**：顶部不添加 Motion，每个 QE 保留自己的那部分结果，将元组暂存到**端点（endpoint）** 中，即 Segment 自身地址空间内的小型共享内存队列。随后 N 个客户端连接分别附着到 N 个 Segment，并发拉取。这是 Cloudberry 中普通客户端能够直接作为正式客户端与 Segment 通信的唯一场景，也适合作为数据传输章节的结尾：这里让 Interconnect *退出了最终数据路径*。
 
 ![汇集瓶颈及绕行路径。左侧是本手册其他查询的形态：三个发送方、一个接收方、一个套接字……](fig-063.svg)
 

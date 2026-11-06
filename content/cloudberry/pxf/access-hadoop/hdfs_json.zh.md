@@ -374,7 +374,7 @@ LOCATION('pxf://data/pxf_examples/objperrow.jsonl?PROFILE=hdfs:json')
 FORMAT 'CUSTOM' (FORMATTER='pxfwritable_import');
 ```
 
-**注意**：使用此方法标识特定数组元素时，PXF _仅_向 Apache Cloudberry 提供这些值，而不是整个 JSON 数组。
+**注意**：使用此方法标识特定数组元素时，PXF _仅_ 向 Apache Cloudberry 提供这些值，而不是整个 JSON 数组。
 
 如果现有外部表定义使用数组元素投影，而您希望将数组读入 `TEXT[]` 列，可以使用 `ALTER EXTERNAL TABLE` 命令更新表定义。例如：
 

@@ -150,7 +150,7 @@ sdw1-1|50001|/data1/mirror/gpseg16
 sdw1-1|50001|/data1/mirror/gpseg16<SPACE>sdw4-1|50001|/data1/recover1/gpseg16
 ```
 
-### 获取示例文件** {#obtain-a-sample-file}
+### 获取示例文件 {#obtain-a-sample-file}
 
 可以使用 `-o` 选项输出示例恢复配置文件作为起点。输出文件列出当前无效的 Segment 及其默认恢复位置。此文件格式可配合 `-i` 选项用于就地（增量）恢复。
 

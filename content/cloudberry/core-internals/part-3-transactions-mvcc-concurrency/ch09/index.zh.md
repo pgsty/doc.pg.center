@@ -363,7 +363,7 @@ typedef struct FullTransactionId
 
 ### 9.2.2 延迟分配：虚拟 xid {#922-lazy-assignment-virtual-xids}
 
-由于 xid 数量有限，事务**只有在首次写入时**才获得真实 xid。只读事务完全不消耗 xid。在此之前，后端使用**虚拟事务 ID（VXID）**运行，即 `backendId/localXid` 二元组；其分配成本很低，只涉及当前后端，不需要全局锁。真实 xid 由 `AssignTransactionId` 按需生成：第一次调用 `GetCurrentTransactionId` 请求 xid 时（例如执行 `INSERT`），便会调用它：
+由于 xid 数量有限，事务**只有在首次写入时**才获得真实 xid。只读事务完全不消耗 xid。在此之前，后端使用**虚拟事务 ID（VXID）** 运行，即 `backendId/localXid` 二元组；其分配成本很低，只涉及当前后端，不需要全局锁。真实 xid 由 `AssignTransactionId` 按需生成：第一次调用 `GetCurrentTransactionId` 请求 xid 时（例如执行 `INSERT`），便会调用它：
 
 ```c {title="src/backend/access/transam/xact.c"}
 TransactionId
