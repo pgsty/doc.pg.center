@@ -1,13 +1,15 @@
-{{- /* OINK v1.5.0 language targets. Cloudberry publishes only its existing
-       translations; cycling languages must stay on the equivalent manual page. */ -}}
+{{- /* OINK v1.5.1 language targets. Bilingual collections offer only published
+       peer pages; switching languages must never jump to an unrelated home. */ -}}
 {{- $pages := dict -}}
 {{- range .AllTranslations -}}
   {{- $pages = merge $pages (dict .Language.Lang .) -}}
 {{- end -}}
 {{- $entries := slice -}}
 {{- $roots := slice -}}
+{{- $collection := index hugo.Data.collections .Section -}}
+{{- $partialEdition := and $collection (lt (len $collection.languages) (len hugo.Sites)) -}}
 {{- range hugo.Sites -}}
-  {{- if or (ne $.Section "cloudberry") (isset $pages .Language.Lang) -}}
+  {{- if or (not $partialEdition) (isset $pages .Language.Lang) -}}
     {{- $page := .Home -}}
     {{- with index $pages .Language.Lang -}}
       {{- $page = . -}}

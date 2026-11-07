@@ -1,0 +1,40 @@
+LicenseRef-IvorySQL-Docs:
+  name: Documentation terms
+  url: /ivorysql/site/license/
+LicenseRef-IvorySQL-Docs-en:
+  name: Documentation terms
+  url: /ivorysql/site/license/
+LicenseRef-IvorySQL-Docs-ZH:
+  name: 上游许可说明
+  url: /zh/ivorysql/site/license/
+LicenseRef-Babelfish-Website:
+  name: Upstream website license records
+  url: /babelfish/site/attribution/#license-records
+LicenseRef-Babelfish-Website-ZH:
+  name: 上游网站许可记录
+  url: /zh/babelfish/site/attribution/#license-records
+LicenseRef-pg-tde:
+  name: pg_tde License (PostgreSQL-style)
+  url: /percona/assets/legal/pg_tde-COPYRIGHT.txt
+MIT:
+  name: MIT License
+  url: https://opensource.org/license/mit
+LicenseRef-DocumentDB-Docs:
+  name: Documentation terms
+  url: /attribution/#documentdb
+LicenseRef-DocumentDB-Docs-ZH:
+  name: 文档许可说明
+  url: /zh/attribution/#documentdb
+
+LicenseRef-HaloDB-Docs:
+  name: Halo Database documentation terms
+  url: https://doc.halodbtech.com/
+  note: The official site does not identify a public documentation license in the captured snapshot; use the upstream site and rights holder as authoritative.
+LicenseRef-OpenHalo-Test-Report:
+  name: OpenHalo test report source terms
+  url: https://github.com/fxcollot/openHaloDocumentation/tree/80a8d077b1d329e397b251fa8c64dbded303bba2
+  note: The pinned report is summarized with a source link; no repository license was identified.
+
+LicenseRef-OrioleDB-Website:
+  name: Upstream terms
+  url: /orioledb/attribution/#copyright-and-licenses

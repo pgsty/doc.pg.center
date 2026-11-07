@@ -1,0 +1,207 @@
+{
+  "postgresql": {
+    "name": "PostgreSQL version guide",
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "group": "kernels",
+    "kind": "navigation",
+    "paired": true
+  },
+  "patroni": {
+    "name": "Patroni",
+    "languages": [
+      "en",
+      "zh",
+      "fr",
+      "ja",
+      "de",
+      "ru",
+      "ar",
+      "es"
+    ],
+    "group": "components",
+    "paired": true
+  },
+  "pgbackrest": {
+    "name": "pgBackRest",
+    "languages": [
+      "en",
+      "zh",
+      "fr",
+      "ja",
+      "de",
+      "ru",
+      "ar",
+      "es"
+    ],
+    "group": "components",
+    "paired": true
+  },
+  "pgbouncer": {
+    "name": "PgBouncer",
+    "languages": [
+      "en",
+      "zh",
+      "fr",
+      "ja",
+      "de",
+      "ru",
+      "ar",
+      "es"
+    ],
+    "group": "components",
+    "paired": true
+  },
+  "pgbadger": {
+    "name": "pgBadger",
+    "languages": [
+      "en",
+      "zh",
+      "fr",
+      "ja",
+      "de",
+      "ru",
+      "ar",
+      "es"
+    ],
+    "group": "components",
+    "paired": true
+  },
+  "haproxy": {
+    "name": "HAProxy",
+    "languages": [
+      "en",
+      "zh",
+      "fr",
+      "ja",
+      "de",
+      "ru",
+      "ar",
+      "es"
+    ],
+    "group": "components",
+    "paired": true
+  },
+  "etcd": {
+    "name": "etcd",
+    "languages": [
+      "en",
+      "zh",
+      "fr",
+      "ja",
+      "de",
+      "ru",
+      "ar",
+      "es"
+    ],
+    "group": "components",
+    "paired": true
+  },
+  "polardb": {
+    "name": "PolarDB",
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "group": "databases",
+    "paired": false
+  },
+  "ivorysql": {
+    "name": "IvorySQL",
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "group": "databases",
+    "paired": false
+  },
+  "openhalo": {
+    "name": "OpenHalo",
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "group": "databases",
+    "paired": true
+  },
+  "babelfish": {
+    "name": "Babelfish",
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "group": "databases",
+    "paired": true
+  },
+  "percona": {
+    "name": "Percona pg_tde",
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "group": "databases",
+    "paired": true
+  },
+  "cloudberry": {
+    "name": "Apache Cloudberry",
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "group": "databases",
+    "paired": true
+  },
+  "agensgraph": {
+    "name": "AgensGraph",
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "group": "databases",
+    "paired": false
+  },
+  "pgedge": {
+    "name": "pgEdge",
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "group": "databases",
+    "paired": false
+  },
+  "documentdb": {
+    "name": "DocumentDB",
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "group": "databases",
+    "paired": true,
+    "aligned_heading_ids": true,
+    "identical_code": true
+  },
+  "orioledb": {
+    "name": "OrioleDB",
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "group": "databases",
+    "paired": true,
+    "aligned_heading_ids": true,
+    "identical_code": true
+  },
+  "citus": {
+    "name": "Citus",
+    "languages": [
+      "en",
+      "zh"
+    ],
+    "group": "databases",
+    "paired": true,
+    "aligned_heading_ids": true,
+    "identical_code": true
+  }
+}

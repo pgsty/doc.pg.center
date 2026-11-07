@@ -10,12 +10,11 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 from xml.etree import ElementTree
+from collection_registry import COMPONENTS, SECTIONS, COMPONENT_LANGUAGES, language_of, english_path, source_route
 
 PROJECT = Path(__file__).resolve().parent.parent
-COMPONENTS = ("patroni", "pgbackrest", "pgbouncer", "pgbadger", "haproxy", "etcd", "cloudberry")
 LOCALES = ("en", "zh", "fr", "ja", "de", "ru", "ar", "es")
 # Collections published in only some languages.
-COMPONENT_LANGUAGES = {"cloudberry": ("en", "zh")}
 REMOVED_DOCS_ROUTE = re.compile(r"^/(?:(?:zh|fr|ja|de|ru|ar|es)/)?(?:_print/)?docs(?:/|$)")
 
 
@@ -92,13 +91,13 @@ def main() -> None:
         llms[language] = (root / prefix.lstrip("/") / "llms.txt").read_text()
 
     content = PROJECT / "content"
-    sources = sorted(source for component in COMPONENTS for source in (content / component).rglob("*.md"))
+    sources = sorted(source for component in SECTIONS for source in (content / component).rglob("*.md"))
     for source in sources:
         if source.name.startswith("_div_"):
             continue
         relative = source.relative_to(content)
         stem = source.stem
-        language = stem.rsplit(".", 1)[-1] if "." in stem else "en"
+        language = language_of(source)
         if language != "en":
             stem = stem.rsplit(".", 1)[0]
         route_path = relative.parent if stem in {"_index", "index"} else relative.with_name(stem)
@@ -109,11 +108,13 @@ def main() -> None:
         assert metadata.canonical == f"https://doc.pg.center{canonical}", canonical
         assert not metadata.redirect, canonical
         component_locales = COMPONENT_LANGUAGES.get(relative.parts[0], LOCALES)
-        alternates = {("" if lang == "en" else f"/{lang}") + logical for lang in component_locales}
+        base = english_path(source)
+        alternates = {("" if lang == "en" else f"/{lang}") + logical for lang in component_locales
+                      if (base if lang == "en" else base.with_suffix(f".{lang}.md")).is_file()}
         assert metadata.alternates == alternates, f"Incorrect language alternates: {canonical}"
-        if relative.parts[0] == "cloudberry":
+        if len(component_locales) < len(LOCALES):
             switches = LanguageSwitches((root / canonical.strip("/") / "index.html").read_text())
-            assert switches.routes == alternates - {canonical}, f"Language switch leaves Cloudberry peer page: {canonical} -> {switches.routes}"
+            assert switches.routes == alternates - {canonical}, f"Language switch leaves peer page: {canonical} -> {switches.routes}"
         assert (root / canonical.strip("/") / "index.md").is_file(), canonical
         assert f"](https://doc.pg.center{canonical}index.md)" in llms[language], f"Missing llms.txt entry: {canonical}"
         expected[language].add(canonical)
@@ -157,7 +158,7 @@ def main() -> None:
             for node in navigation["root"].get("children", []) if node["kind"] == "section"
         }
         assert top_sections == {
-            f"/{prefix}{component}/" for component in COMPONENTS
+            f"/{prefix}{component}/" for component in SECTIONS
             if language in COMPONENT_LANGUAGES.get(component, LOCALES)
         }, top_sections
         indexes = list(root.glob(f"offline-search-index.{language}.*.json"))

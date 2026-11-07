@@ -4,14 +4,11 @@
 from pathlib import Path
 import re
 import sys
+from collection_registry import COLLECTIONS, COMPONENTS, SECTIONS, COMPONENT_LANGUAGES, paired
 
 PROJECT = Path(__file__).resolve().parent.parent
 CONTENT = PROJECT / "content"
 LANGUAGES = ("en", "zh", "fr", "ja", "de", "ru", "ar", "es")
-COMPONENTS = ("patroni", "pgbackrest", "pgbouncer", "pgbadger", "haproxy", "etcd", "cloudberry")
-# Collections that are not yet published in every language. Their Chinese pages
-# may be title-only placeholders marked `translation_status: placeholder`.
-COMPONENT_LANGUAGES = {"cloudberry": ("en", "zh")}
 PLACEHOLDER = re.compile(r'^translation_status: "?placeholder"?$', re.M)
 
 
@@ -70,6 +67,23 @@ def heading_ids(text: str) -> list[str]:
     return result
 
 
+def code_blocks(text: str) -> list[str]:
+    """Compare executable examples and program output across paired editions."""
+    body = text.split("\n---\n", 1)[-1]
+    blocks, lines, fence = [], [], None
+    for line in body.splitlines():
+        marker = re.match(r"^\s*(`{3,}|~{3,})", line)
+        if fence:
+            if marker and marker[1][0] == fence[0] and len(marker[1]) >= len(fence):
+                blocks.append("\n".join(lines))
+                lines, fence = [], None
+            else:
+                lines.append(line)
+        elif marker:
+            fence = marker[1]
+    return blocks
+
+
 def main() -> int:
     errors = []
     pages = {path: path.read_text(encoding="utf-8") for path in CONTENT.rglob("*.md")}
@@ -77,13 +91,13 @@ def main() -> int:
     registry = (PROJECT / "data/upstreams.yaml").read_text(encoding="utf-8")
     if (CONTENT / "docs").exists():
         errors.append("Documentation must live in top-level component sections, not content/docs")
-    for component in COMPONENTS:
-        if not re.search(rf"^{component}:$", registry, re.M):
+    for component in SECTIONS:
+        if component in COMPONENTS and not re.search(rf"^{component}:$", registry, re.M):
             errors.append(f"Missing upstream registry entry: {component}")
         for language in COMPONENT_LANGUAGES.get(component, LANGUAGES):
             suffix = ".md" if language == "en" else f".{language}.md"
             index = CONTENT / component / ("_index" + suffix)
-            if f"upstream_source: {component}" not in pages.get(index, ""):
+            if component in COMPONENTS and f"upstream_source: {component}" not in pages.get(index, ""):
                 errors.append(f"Missing component attribution: {index.relative_to(PROJECT)}")
             front = pages.get(index, "").split("\n---\n", 1)[0]
             if not re.search(r"^type: docs$", front, re.M):
@@ -93,34 +107,39 @@ def main() -> int:
 
     for path, text in pages.items():
         source = english_path(path)
-        if source not in pages:
+        if source not in pages and paired(path):
             errors.append(f"Missing English source for {path.relative_to(PROJECT)}")
         if not text.startswith("---\n") or "\n---\n" not in text:
             errors.append(f"Missing YAML front matter: {path.relative_to(PROJECT)}")
         relative = path.relative_to(CONTENT).parts
         if len(relative) < 2:
             continue
-        if relative[0] not in COMPONENTS:
+        if relative[0] not in COLLECTIONS:
             errors.append(f"Unregistered documentation component: {relative[0]}")
+        if COLLECTIONS.get(relative[0], {}).get('kind') == 'navigation':
+            continue
         front = text.split("\n---\n", 1)[0]
         link = re.search(r"^upstream_link:\s*(.+)$", front, re.M)
         original = re.search(r"^upstream_link:\s*(.+)$", pages.get(source, "").split("\n---\n", 1)[0], re.M)
-        if not link or not original or link[1] != original[1]:
+        if not link or (paired(path) and (not original or link[1] != original[1])):
             errors.append(f"Missing or inconsistent upstream link: {path.relative_to(PROJECT)}")
         if PLACEHOLDER.search(front):
             if source == path:
                 errors.append(f"English source marked as a placeholder: {path.relative_to(PROJECT)}")
             elif f'<a href="{english_route(source)}" hreflang="en" lang="en">' not in text:
                 errors.append(f"Placeholder does not link its English page: {path.relative_to(PROJECT)}")
-        elif relative[0] == "cloudberry" and path.name.endswith(".zh.md") and source in pages:
-            if heading_ids(text) != heading_ids(pages[source]):
-                errors.append(f"Cloudberry heading IDs differ from English (including order): {path.relative_to(PROJECT)}")
+        elif path.name.endswith(".zh.md") and source in pages:
+            collection = COLLECTIONS.get(relative[0], {})
+            if (relative[0] == "cloudberry" or collection.get("aligned_heading_ids")) and heading_ids(text) != heading_ids(pages[source]):
+                errors.append(f"Heading IDs differ from English (including order): {path.relative_to(PROJECT)}")
+            if collection.get("identical_code") and code_blocks(text) != code_blocks(pages[source]):
+                errors.append(f"Code blocks differ from English: {path.relative_to(PROJECT)}")
 
     for source in sources:
         expected = languages_for(source)
         for language in LANGUAGES[1:]:
             translated = source.with_suffix(f".{language}.md")
-            if language in expected and translated not in pages:
+            if language in expected and translated not in pages and paired(source):
                 errors.append(f"Missing translation: {translated.relative_to(PROJECT)}")
             if language not in expected and translated in pages:
                 errors.append(f"Unregistered language edition: {translated.relative_to(PROJECT)}")

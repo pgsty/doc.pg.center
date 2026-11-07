@@ -175,3 +175,185 @@ core_internals:
   notice: "/attribution/#core-internals"
   ref: "main c2baef0; 3.0.0-devel; PostgreSQL 16.9"
   modified: true
+
+polardb:
+  name: PolarDB for PostgreSQL Documentation
+  repository: https://github.com/polardb/polardb-pg-docs
+  documentation: https://polardb.github.io/polardb-pg-docs/zh/
+  source_commit: b4733b0350888242afeba432a6837458c348a937
+  copyright: Copyright © Alibaba Group, Inc.
+  license: Apache-2.0
+  notice: /attribution/#polardb
+  ref: b4733b0
+ivorysql:
+  name: IvorySQL Documentation
+  copyright: IvorySQL documentation contributors
+  license: LicenseRef-IvorySQL-Docs
+  notice: /attribution/#ivorysql
+  ref: v5.6 · 7c3f4a67e7d3
+  repository: https://github.com/IvorySQL/ivorysql_docs
+  commit: 7c3f4a67e7d3dc92d3046ad54cac4de196aef4f1
+  snapshot_date: '2026-11-05'
+  software_license: Apache-2.0
+  license_note: The documentation repository has no standalone LICENSE or NOTICE at this revision; see the attribution
+    page for scope.
+babelfish:
+  name: Babelfish project website
+  copyright: Copyright Babelfish for PostgreSQL Contributors
+  license: LicenseRef-Babelfish-Website
+  notice: /attribution/#babelfish
+  ref: main @ f468c5ed3d38
+  modified: true
+agensgraph:
+  name: AgensGraph documentation
+  copyright: Copyright 2014–2026 SKAI Worldwide Co., Ltd.
+  license: Apache-2.0
+  notice: /attribution/#agensgraph
+  ref: 2.18.6.1
+  modified: true
+percona:
+  name: Percona pg_tde documentation
+  repository: https://github.com/percona/pg_tde
+  source_commit: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+  ref: 2.2.2; docs 1660e66a
+  copyright: Copyright © 2024–2025 Percona LLC and/or its affiliates
+  license: LicenseRef-pg-tde
+  notice: /attribution/#percona
+  modified: true
+pgedge:
+  name: pgEdge extension documentation
+  repository: https://github.com/pgEdge
+  ref: Fixed main snapshots; see component notices
+  copyright: Copyright pgEdge, Inc. and contributors
+  license: PostgreSQL
+  notice: /attribution/#pgedge
+  modified: true
+pgedge-spock:
+  name: pgEdge Spock
+  copyright: Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and
+    The Regents of the University of California.
+  license: PostgreSQL
+  notice: /attribution/#pgedge
+  ref: 4ac1aec2f080
+  link: https://github.com/pgEdge/spock
+pgedge-lolor:
+  name: pgEdge LOLOR
+  copyright: Copyright (c) 2024–2026, pgEdge, Inc.
+  license: PostgreSQL
+  notice: /attribution/#pgedge
+  ref: ac3893a7707a
+  link: https://github.com/pgEdge/lolor
+pgedge-safesession:
+  name: pgEdge SafeSession
+  copyright: Copyright (c) 2025–2026, pgEdge, Inc.
+  license: PostgreSQL
+  notice: /attribution/#pgedge
+  ref: b406cd1e82cf
+  link: https://github.com/pgEdge/pgedge-safesession
+pgedge-snowflake:
+  name: pgEdge Snowflake
+  copyright: Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and
+    The Regents of the University of California.
+  license: PostgreSQL
+  notice: /attribution/#pgedge
+  ref: 429a16803c8c
+  link: https://github.com/pgEdge/snowflake
+openhalo:
+  name: OpenHalo source documentation
+  repository: https://github.com/HaloTech-Co-Ltd/openHalo
+  documentation: https://www.openhalo.org/
+  source_commit: 90fc8d777c3f111d4c8d236625bb15b5d4b19d7c
+  ref: master 90fc8d7
+  copyright: Copyright Halo Tech Co., Ltd.; PostgreSQL contributors
+  license: GPL-3.0-only
+  notice: /attribution/#openhalo
+  modified: true
+halodb:
+  name: Halo Database MySQL compatibility documentation
+  documentation: https://doc.halodbtech.com/multi-mode-compatibility/mysql
+  website: https://doc.halodbtech.com/
+  product_version: 1.0.16
+  snapshot_date: '2026-11-07'
+  snapshot_sha256:
+    mysql: 513dafb9f4867fabd7704cef5897bb9ad528a2786769351006d35b4c5fd49a39
+    sql_syntax: 337eead3b01cac58117c4b62093bc0f4dc0ccc0e96569125a77609b1ebf57c3e
+    data_types: b656776883d57f5c0f6045887d20df75ec3f08b8127f5cc6a72d94d9f9db99ef
+    functions: d072f7ee44cd9c3141da2e0a429553ccf94c61254f298fc85ec39b8c6b69e0da
+    operators: 08e9997f57a4ddd177d57841f311b8674f3bbd1e92274921a4df6ce425e61d9b
+    misc_features: 36e56e9ee2a120df3a5bde65e6dcd3e2bf625c9affee1680a187265076c455cb
+    engine_parameters: e3162c17868712da6932aacb1cad8318efaf4ca3f2c1cfe2394c9163ee3c5499
+    modes: 05727c62f197c61f6216b2641201027dcbe1da709db6da2023fd4c3ff74da35b
+  copyright: Halo Tech Co., Ltd.
+  license: LicenseRef-HaloDB-Docs
+  license_note: Official documentation is linked and summarized here; no public documentation license was identified on the official documentation site.
+  notice: /attribution/#halodb
+openhalo-tests:
+  name: OpenHalo MySQL compatibility test report
+  repository: https://github.com/fxcollot/openHaloDocumentation
+  report: https://github.com/fxcollot/openHaloDocumentation/blob/80a8d077b1d329e397b251fa8c64dbded303bba2/TestingReport/OpenHaloMySQLCompatibilityTestingReport.md
+  source_commit: 80a8d077b1d329e397b251fa8c64dbded303bba2
+  ref: OpenHalo 1.0.14.18 test report
+  copyright: Copyright the report contributors; see the upstream repository
+  license: LicenseRef-OpenHalo-Test-Report
+  license_note: The repository license was not identified in the pinned report snapshot; this site summarizes results and links to the source instead of reproducing the report.
+  notice: /attribution/#openhalo-tests
+documentdb:
+  name: DocumentDB documentation
+  repository: https://github.com/documentdb/docs
+  documentation: https://documentdb.io/docs/
+  source_commit: cf69384e6da9524cc0fc723e8ac5b6c0689af432
+  website_repository: https://github.com/documentdb/documentdb.github.io
+  website_commit: 90cfa088351557cd618034dfc00ab817c35a5f76
+  snapshot_date: '2026-11-07'
+  ref: DocumentDB 1.0; docs cf69384; website 90cfa08
+  copyright: Copyright DocumentDB contributors
+  license: LicenseRef-DocumentDB-Docs
+  notice: /attribution/#documentdb
+  import_manifest: data/imports/documentdb.json
+  import_manifest_sha256: beed9d6a71c6bee7e2922325bbc3c0c57a4863a5d0e43e27ec9b4f94aad3b555
+  modified: true
+
+orioledb:
+  name: OrioleDB documentation
+  repository: https://github.com/orioledb/orioledb
+  documentation: https://www.orioledb.com/docs
+  source_edition: https://oriole.pgsty.com/
+  snapshot_date: '2026-11-06'
+  source_manifest_sha256: c9c350db9f87ceca5b532edd874444a19f881f8eb7e7956073ce8ff71cb2f574
+  import_manifest: data/imports/orioledb.json
+  copyright: Copyright (c) 2025-2026, Supabase Inc.
+  license: PostgreSQL
+  notice: /orioledb/attribution/
+  ref: website snapshot 2026-11-06
+  modified: true
+  source_sha256:
+    LICENSE-POSTGRESQL.txt: 765023a1a6fe200e9936c7d5c5026cda2199f41eca781029ac26a51e2ba0ad23
+orioledb-website:
+  name: OrioleDB benchmark guides
+  documentation: https://www.orioledb.com/
+  snapshot_date: '2026-11-06'
+  copyright: Copyright © 2026 Supabase Inc
+  license: LicenseRef-OrioleDB-Website
+  notice: /orioledb/attribution/
+  ref: website snapshot 2026-11-06; beta18 benchmark recipes
+  modified: true
+
+citus:
+  name: Citus 14 documentation
+  repository: https://github.com/MicrosoftDocs/azure-databases-docs
+  documentation: https://learn.microsoft.com/en-us/postgresql/citus/?view=citus-14
+  source_ref: citus-14
+  snapshot_date: '2026-11-07'
+  source_manifest: data/imports/citus.json
+  preserved_repository: https://github.com/Kiranchandratrey/azure-databases-docs
+  preserved_commit: ff9de504fdbe2b7aa9d06411e0f0472d39dc1f14
+  copyright: Copyright (c) Microsoft Corporation and contributors; original Citus article authors
+  license: CC-BY-4.0
+  code_license: MIT
+  notice: /citus/attribution/
+  ref: Citus 14; snapshot 2026-11-07
+  modified: true
+  source_sha256:
+    LICENSE: 7183ef9749eb9b75e710a81a4c812a9405cc184f087500581a973e5929ac3f5e
+    LICENSE-CODE: 91f7258203fd43ba6d6f7f72b644eaedee9e3430f035c053beb6f34052f045e2
+    ThirdPartyNotices.md: fbbd62e02566d47cf4ff0727de51a100f4658112fc3a8fb4386687abd5c39043

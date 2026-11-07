@@ -6,19 +6,12 @@ from __future__ import annotations
 from pathlib import Path
 import re
 import sys
+from collection_registry import COLLECTIONS, paired
 
 
 CONTENT = Path(__file__).resolve().parent.parent / "content"
 LANGUAGES = ("en", "zh", "fr", "ja", "de", "ru", "ar", "es")
-COMPONENTS = {
-    "patroni": "Patroni",
-    "pgbackrest": "pgBackRest",
-    "pgbouncer": "PgBouncer",
-    "pgbadger": "pgBadger",
-    "haproxy": "HAProxy",
-    "etcd": "etcd",
-    "cloudberry": "Apache Cloudberry",
-}
+COMPONENTS = {key: value['name'] for key, value in COLLECTIONS.items() if value.get('kind') != 'navigation'}
 # Title-only pages awaiting translation do not count as translated.
 PLACEHOLDER = re.compile(r'^translation_status: "?placeholder"?$', re.M)
 
@@ -59,13 +52,15 @@ def row(label: str, sources: list[Path]) -> str:
 def main() -> int:
     # _index files are published directory pages; _div files only label sidebars.
     files = sorted(path for path in CONTENT.rglob("*.md") if not path.name.startswith("_div_"))
-    orphans = [path for path in files if not english_path(path).is_file()]
+    orphans = [path for path in files if not english_path(path).is_file() and paired(path)]
     if orphans:
         for path in orphans:
             print(f"Missing English source: {path.relative_to(CONTENT)}", file=sys.stderr)
         return 1
 
-    sources = [path for path in files if english_path(path) == path]
+    # Upstream bilingual editions can differ (notably PolarDB and IvorySQL).
+    # Use the union of logical pages so Chinese-only source material is counted.
+    sources = sorted({english_path(path) for path in files})
     groups = {
         name: [path for path in sources if path.is_relative_to(CONTENT / name)]
         for name in COMPONENTS
@@ -74,6 +69,8 @@ def main() -> int:
     component_set = set(component_sources)
     site_sources = [path for path in sources if path not in component_set]
 
+    print("Page availability across the union of published routes; placeholders are excluded.")
+    print("This measures availability, not translation review; machine drafts retain their status.")
     print("| Collection | EN | ZH | FR | JA | DE | RU | AR | ES |")
     print("| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |")
     for name, label in COMPONENTS.items():
