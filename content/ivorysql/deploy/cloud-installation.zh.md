@@ -1,0 +1,398 @@
+---
+title: IvorySQL Cloud 安装
+linkTitle: IvorySQL Cloud安装
+description: IvorySQL v5.6 文档：IvorySQL Cloud 安装。
+type: docs
+weight: 110
+upstream_link: https://github.com/IvorySQL/ivorysql_docs/blob/7c3f4a67e7d3dc92d3046ad54cac4de196aef4f1/CN/modules/ROOT/pages/4.7.1.adoc
+upstream_source: ivorysql
+upstream_license: LicenseRef-IvorySQL-Docs
+upstream_modified: true
+---
+
+IvorySQL Cloud平台是一个综合性的解决方案，它集成了IvorySQL数据库以及周边生态，以提供全面的数据库和资源管理功能。安装前需要上github编译安装好
+
+前端：https://github.com/IvorySQL/ivory-cloud-web
+
+后端：https://github.com/IvorySQL/ivory-cloud
+
+搭建好K8S集群，并在集群master节点上安装ivory-operator
+
+<a href="https://github.com/IvorySQL/ivory-operator/tree/IVYO_REL_5_STABLE" class="bare">https://github.com/IvorySQL/ivory-operator/tree/IVYO_REL_5_STABLE</a>
+
+## 1. IvorySQL Cloud平台安装 {#ivorysql-cloud-platform-installation}
+
+IvorySQL Cloud平台，目前支持Linux系统下的安装，以下为各部分对应的安装包：
+
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 72%" />
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">组件</th>
+<th class="tableblock halign-left valign-top">安装包</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p>前端</p></td>
+<td class="tableblock halign-left valign-top"><p>dist</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p>后端</p></td>
+<td class="tableblock halign-left valign-top"><p>cloudnative-1.0-SNAPSHOT.jar</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p>K8S集群</p></td>
+<td class="tableblock halign-left valign-top"><ol>
+<li><p>docker.io/ivorysql/ivory-operator:v5.6</p></li>
+<li><p>docker.io/ivorysql/pgadmin:ubi8-9.9-5.0-1</p></li>
+<li><p>docker.io/ivorysql/pgbackrest:ubi8-2.56.0-5.0-1</p></li>
+<li><p>docker.io/ivorysql/postgres-exporter:ubi8-0.17.0-5.0-1</p></li>
+<li><p>docker.io/ivorysql/ivorysql:ubi8-5.0-5.0-1</p></li>
+</ol></td>
+</tr>
+</tbody>
+</table>
+
+另外，云服务平台还需要用户安装以下组件：
+
+- **后端数据库**：负责存储和管理所有与云资源、用户信息、权限控制、计费信息等相关的数据。需要使用PG系列数据库，如PostgreSQL、瀚高数据库、IvorySQL等。
+
+- **NGINX**：支持云服务平台的web服务。
+
+## 2. 安装前准备 {#pre-installation-checklist}
+
+安装前，所有服务器都必须完成以下准备工作。并且将IvorySQL Cloud平台部署在K8S（1.23）的服务器上，且该K8S集群需要有默认的storage class.
+
+### 2.1. 关闭防火墙 {#disable-the-firewall}
+
+所有服务器关闭防火墙，以保证他们之间的网络互通。
+
+```
+systemctl stop firewalld.service
+
+systemctl disable firewalld.service
+```
+
+### 2.2. 后端部署 {#backend-deployment}
+
+#### 2.2.1. 后端数据库 {#backend-db}
+
+IvorySQL Cloud平台的后端数据库需用户自行安装，请参考IvorySQL官网。
+
+#### 2.2.2. 后端服务程序 {#backend-services}
+
+##### 2.2.2.1. 编译后端服务程序 {#compile-the-backend-service}
+
+```
+# 克隆代码
+
+git clone https://github.com/IvorySQL/ivory-cloud.git
+
+# 进入到项目根目录
+
+cd ivory-cloud
+```
+
+请确保ivory-cloud\cloudnative\src\main\resources\monitor文件夹，及其所有的子文件夹下的以.sh结尾的文件是unix格式的，如果不是，请执行dos2unix命令转换成unix格式。
+
+```
+dos2unix cloudnative\src\main\resources\monitor\*
+
+# 编译
+
+mvn clean
+
+mvn package -D maven.test.skip=true
+
+打包完成后，可以在 ivory-cloud/cloudnative/target下找到cloudnative-1.0-SNAPSHOT.jar文件
+```
+
+##### 2.2.2.2. 部署程序 {#deploy-the-service}
+
+```
+在K8S服务器上执行如下操作：
+
+# 创建目录
+
+mkdir -p /home/ivory
+
+# 将上一步编译好的文件ivory-cloud/cloudnative/target/cloudnative-1.0-SNAPSHOT.jar上传至上述目录
+
+# 配置文件
+
+## 创建配置目录
+
+mkdir -p /home/ivory/config
+
+## 上传配置文件
+
+将源代码ivory-cloud/cloudnative/src/main/resources目录里的如下三个配置文件上传至 /home/ivory/config
+
+application.yaml
+
+application-native.yaml
+
+spring_pro_logback.xml
+
+## 修改配置文件，请将url、username、password修改为<<backend-db,后端数据库章节>>安装的数据库的信息。
+
+## /home/ivory/config/application-native.yaml
+
+datasource:
+
+druid:
+
+db-type: com.alibaba.druid.pool.DruidDataSource
+
+driver-class-name: org.postgresql.Driver
+
+url: jdbc:postgresql://127.0.0.1:5432/ivorysql
+
+username: ivorysql
+
+password: "ivory@123"
+```
+
+#### 2.2.3. 启动后端服务程序 {#start-the-backend-service}
+
+```
+# 安装jdk1.8
+
+yum install -y java-1.8.0-openjdk.x86_64
+
+[root@cloud ivory]# pwd
+
+/home/ivory/
+
+[root@cloud ivory]# nohup java -jar cloudnative-1.0-SNAPSHOT.jar > log_native 2>&1 &
+
+[root@cloud ivory]# ps -ef |grep java
+
+root 77494 1 0 10月09 ? 00:03:07 java -jar cloudnative-1.0-SNAPSHOT.jar
+```
+
+### 2.3. 前端部署 {#frontend-deployment}
+
+#### 2.3.1. 编译前端服务程序 {#compile-the-frontend}
+
+```
+## 获取代码
+
+git clone https://github.com/IvorySQL/ivory-cloud-web.git
+
+## 进入项目根目录
+
+cd ivorysql-cloud-web
+
+## 安装依赖
+
+npm install
+
+## 编译打包
+
+npm run build:prod
+```
+
+#### 2.3.2. 修改目录和文件权限 {#update-directory-and-file-permissions}
+
+```
+# 创建目录
+
+[root@cloud opt]# mkdir -p /opt/cloud/web
+
+# 将前端构建后的dist文件夹置于/opt/cloud/web
+
+# 授权
+
+[root@cloud web]# chmod 755 /opt/cloud/web/dist
+
+[root@cloud web]# chmod -R 777 /opt/cloud/web/dist
+```
+
+#### 2.3.3. 修改config.js {#update-config-js}
+
+修改文件
+
+```
+[root@cloud dist]# pwd
+
+/home/cloud/web/dist
+
+[root@cloud dist]# vi config.js
+
+var PLATFROM_CONFIG = {};
+
+// ip请更换为当前服务器地址
+
+PLATFROM_CONFIG.baseUrl = "http://192.168.31.43:8081/cloudapi/api/v1"
+
+//true: need to show "注册" on login page
+
+//false: don't show "注册" on login page
+
+globalShowRegister = true
+
+//是否隐藏云原生数据库， true: 隐藏云原生数据库；false:显示云原生数据库
+
+disableNative = false
+
+// 数据库类型
+
+dbtype = "IvorySQL"
+
+dbversion = "5.6"
+```
+
+### 2.4. 安装部署nginx {#install-and-configure-nginx}
+
+IvorySQL Cloud平台服务器需要安装nginx，以支持云服务平台的web服务。nginx需要用户自行安装，这里提供一种安装方法作为参考。
+
+#### 2.4.1. 下载nginx安装包 {#download-the-nginx-source-package}
+
+```
+[root@cloud web]# wget https://nginx.org/download/nginx-1.20.1.tar.gz
+
+[root@cloud web]# ls -lrt
+
+总用量 3924
+
+-rwxrwxr-x. 1 root root 1061461 5月 25 2021 nginx-1.20.1.tar.gz
+
+-rwxrwxr-x. 1 root root 2943732 10月 9 16:43 dist.tar.gz
+
+drwxrwxrwx. 4 root root 103 10月 21 13:20 dist
+```
+
+#### 2.4.2. 安装相关依赖 {#install-dependencies}
+
+```
+[root@host30 cloud]# yum -y install pcre-devel
+
+[root@host30 cloud]# yum -y install openssl openssl-devel
+```
+
+#### 2.4.3. 编译安装nginx {#build-and-install-nginx}
+
+nginx会被安装在configure时由—​prefix指定的目录下，例如这里的/opt/cloud/nginx：
+
+```
+## 解压缩nginx-1.20.1.tar.gz安装包
+
+[root@cloud web]# tar -zxvf nginx-1.20.1.tar.gz
+
+## 解压后生成nginx-1.20.1文件夹
+
+[root@cloud web]# ls -lrt
+
+总用量 3924
+
+-rwxrwxr-x. 1 root root 1061461 5月 25 2021 nginx-1.20.1.tar.gz
+
+-rwxrwxr-x. 1 root root 2943732 10月 9 16:43 dist.tar.gz
+
+drwxrwxr-x. 9 1001 1001 186 10月 9 16:53 nginx-1.20.1
+
+drwxrwxrwx. 4 root root 103 10月 21 13:20 dist
+
+## 配置导向
+
+[root@cloud web]# cd nginx-1.20.1
+
+[root@cloud nginx-1.20.1]# ./configure --prefix=/opt/cloud/nginx --with-http_ssl_module
+
+## 编译安装
+
+[root@cloud nginx-1.20.1]# make
+
+[root@cloud nginx-1.20.1]# make install
+```
+
+#### 2.4.4. 修改配置文件nginx.conf {#update-nginx-conf}
+
+配置文件在/opt/cloud/nginx路径下，可以按照github上readme对nginx.conf进行对比修改。ip请配置为当前服务器的ip。
+
+```
+server {
+
+listen 9104;
+
+server_name 192.168.31.43;
+
+location / {
+
+root /opt/cloud/web/dist;
+
+index index.html index.htm;
+
+}
+
+error_page 500 502 503 504 /50x.html;
+
+location = /50x.html {
+
+root html;
+
+}
+
+}
+```
+
+#### 2.4.5. 启动nginx {#start-nginx}
+
+```
+[root@cloud sbin]# pwd
+
+/opt/cloud/nginx/sbin
+
+[root@cloud sbin]# ./nginx -c /opt/cloud/nginx/conf/nginx.conf
+
+[root@cloud sbin]# ps -ef | grep nginx
+
+root 2179 131037 0 09:46 pts/1 00:00:00 grep --color=auto nginx
+
+root 55047 1 0 10月21 ? 00:00:00 nginx: master process ./nginx -c /opt/cloud/nginx/conf/nginx.conf
+
+nobody 55048 55047 0 10月21 ? 00:00:00 nginx: worker process
+```
+
+### 2.5. operator部署 {#operator-deployment}
+
+请自行搭建K8S，此处描述为在K8S集群上安装ivory-operator和load镜像。
+
+#### 2.5.1. 安装ivory-operator {#install-ivory-operator}
+
+参见
+
+<https://github.com/IvorySQL/ivory-operator/tree/IVYO_REL_5_STABLE>
+
+网站上的readme
+
+#### 2.5.2. load镜像 {#load-container-images}
+
+如果服务器可以直接访问到docker hub,可以跳过该章节。否则需要在所有的K8S集群节点提前load 如下docker镜像
+
+> [!TIP]
+>
+> 国内用户也可使用 IvorySQL 社区的 Harbor 镜像服务拉取以下镜像，将 `docker.io/` 替换为 `registry.highgo.com/` 即可。
+
+```
+docker.io/ivorysql/pgadmin:ubi8-9.9-5.0-1
+
+docker.io/ivorysql/pgbackrest:ubi8-2.56.0-5.0-1
+
+docker.io/ivorysql/pgbouncer:ubi8-1.23.0-5.0-1
+
+docker.io/ivorysql/postgres-exporter:ubi8-0.17.0-5.0-1
+
+docker.io/ivorysql/ivorysql:ubi8-5.0-5.0-1
+
+docker.io/prom/prometheus:v2.33.5
+
+docker.io/prom/alertmanager:v0.22.2
+
+docker.io/grafana/grafana:8.5.10
+```

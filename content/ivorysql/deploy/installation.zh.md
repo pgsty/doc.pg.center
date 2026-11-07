@@ -1,0 +1,312 @@
+---
+title: 安装指南
+linkTitle: 安装指南
+description: IvorySQL v5.6 文档：安装指南。
+type: docs
+weight: 50
+upstream_link: https://github.com/IvorySQL/ivorysql_docs/blob/7c3f4a67e7d3dc92d3046ad54cac4de196aef4f1/CN/modules/ROOT/pages/4.1.adoc
+upstream_source: ivorysql
+upstream_license: LicenseRef-IvorySQL-Docs
+upstream_modified: true
+---
+
+
+## 1. 概述 {#introduction}
+
+IvorySQL安装方式包括以下5种：
+
+- [yum源安装](#Yum-installation)
+
+- [docker安装](#Docker-installation)
+
+- [rpm安装](#Rpm-installation)
+
+- [源码安装](#Source-code-installation)
+
+- [deb安装](#deb-installation)
+
+本章将详细介绍每种方式的安装、运行及卸载过程。想要更快获得IvorySQL，请参阅[快速开始](/zh/ivorysql/getting-started/quick-start/)。
+
+同样，安装前请先创建一个用户，并赋予其root权限，安装、使用和卸载均以该用户执行。这里以ivorysql用户为例。
+
+## 2. yum源安装 {#Yum-installation}
+
+创建或编辑IvorySQL yum源配置文件/etc/yum.repos.d/ivorysql.repo
+
+```
+vim /etc/yum.repos.d/ivorysql.repo
+[ivorysql5]
+name=IvorySQL Server 5 $releasever - $basearch
+baseurl=https://yum.highgo.com/dists/ivorysql-rpms/5/redhat/rhel-$releasever-$basearch
+enabled=1
+gpgcheck=0
+```
+
+保存退出后，安装IvorySQL5
+
+```
+$ sudo dnf install -y ivorysql5-5.6
+```
+
+## 3. docker安装 {#Docker-installation}
+
+- 从Docker Hub上获取IvorySQL镜像
+
+```
+$ docker pull ivorysql/ivorysql:5.6-ubi8
+```
+
+> [!TIP]
+>
+> 国内用户也可使用 IvorySQL 社区的 Harbor 镜像服务加速拉取，将上述地址替换为 `registry.highgo.com/ivorysql/ivorysql:5.6-ubi8` 即可。
+
+- 运行IvorySQL
+
+```
+$ docker run --name ivorysql -p 5434:5432 -e IVORYSQL_PASSWORD=your_password -d ivorysql/ivorysql:5.6-ubi8
+```
+
+-e参数说明
+
+|  |  |  |
+|----|----|----|
+| 参数名 | 是否必填 | 描述 |
+| IVORYSQL_USER | 否 | 数据库用户，默认 ivorysql |
+| IVORYSQL_PASSWORD | 是 | 数据库用户密码 |
+| IVORYSQL_DB | 否 | 数据库名称，默认 ivorysql |
+| POSTGRES_HOST_AUTH_METHOD | 否 | 修改主机身份验证方式，参考值：md5 |
+| POSTGRES_INITDB_ARGS | 否 | 为initdb是添加额外参数，参考值："--data-checksums" |
+| PGDATA | 否 | 将数据目录定义到其他路径文件夹下（例如子目录），默认 /var/lib/ivorysql/data |
+| POSTGRES_INITDB_WALDIR | 否 | 定义IvorySQL transaction文件夹路径，默认在数据目录（PGDATA）的子目录中。 |
+
+> [!TIP]
+>
+> 1.  不推荐将POSTGRES_HOST_AUTH_METHOD参数填写为trust，这样将会使IVORYSQL_PASSWORD设置失效。
+>
+> 2.  如果POSTGRES_HOST_AUTH_METHOD参数设置为scram-sha-256，同时需将POSTGRES_INITDB_ARGS设置为—​auth-host=scram-sha-256，才会使数据库正确进行初始化。
+
+## 4. rpm安装 {#Rpm-installation}
+
+- 安装依赖
+
+```
+$ sudo dnf install -y lz4 libicu libxslt python3
+```
+
+- 获取rpm包
+
+```
+$ sudo wget https://github.com/IvorySQL/IvorySQL/releases/download/IvorySQL_5.6/IvorySQL-5.6-9d890e9-20251120.x86_64.rpm
+```
+
+- 安装rpm包
+
+  使用以下命令安装所有rpm包：
+
+```
+$ sudo yum --disablerepo=* localinstall *.rpm
+```
+
+数据库将被安装在/usr/ivory-5/路径下。
+
+## 5. 源码安装 {#Source-code-installation}
+
+- 安装依赖
+
+```
+# CentOS
+$ sudo dnf install -y bison readline-devel zlib-devel openssl-devel uuid-devel
+$ sudo dnf groupinstall -y 'Development Tools'
+
+# Ubuntu
+$ sudo apt install -y bison libreadline-dev zlib1g-dev libssl-dev
+$ sudo apt install -y build-essential
+$ sudo apt install -y pkg-config uuid-dev
+```
+
+- 获取IvorySQL源代码
+
+```
+$ git clone https://github.com/IvorySQL/IvorySQL.git
+$ cd IvorySQL
+$ git checkout -b IVORY_REL_5_STABLE origin/IVORY_REL_5_STABLE
+```
+
+- 配置
+
+  在IvorySQL目录下，执行以下命令进行配置，请使用—​prefix指定安装目录:
+
+```
+$ ./configure --prefix=/usr/local/ivorysql/ivorysql-5
+```
+
+- 编译
+
+  执行以下命令进行编译：
+
+```
+$ make
+```
+
+> [!TIP]
+>
+> 编译完毕，安装之前可先执行make check或make all-check-world测试刚刚编译的结果。
+
+- 安装
+
+  执行以下命令安装，数据库将被安装在上述由—​prefix指定的路径下：
+
+```
+$ sudo make install
+```
+
+## 6. deb安装 {#deb-installation}
+
+- 安装依赖
+
+```
+$ sudo apt -y install pkg-config libreadline-dev libicu-dev libldap2-dev uuid-dev tcl-dev libperl-dev python3-dev bison flex openssl libssl-dev libpam-dev libxml2-dev libxslt-dev libossp-uuid-dev libselinux-dev gettext
+```
+
+- 获取deb包
+
+```
+$ sudo wget https://github.com/IvorySQL/IvorySQL/releases/download/IvorySQL_5.6/IvorySQL-5.6-a50789d-20250304.amd64.deb
+```
+
+- 安装deb包
+
+```
+$ sudo dpkg -i IvorySQL-5.6-a50789d-20250304.amd64.deb
+```
+
+数据库将被安装在/usr/ivory-5/路径下。
+
+## 7. 启动数据库 {#start-database}
+
+参考[yum源安装](#Yum-installation)、[rpm安装](#Rpm-installation)、[源码安装](#Source-code-installation)、[deb安装](#deb-installation)的用户，需要手动启动数据库。
+
+- 赋权
+
+  执行以下命令为安装用户赋权，示例用户为ivorysql，安装目录为/usr/ivory-5/：
+
+```
+$ sudo chown -R ivorysql:ivorysql /usr/ivory-5/
+```
+
+<span id="anchor-cn-4.1-配置环境变量"></span>
+
+- 配置环境变量
+
+  将以下配置写入用户的~/.bash_profile文件并使用source命令该文件使环境变量生效：
+
+```
+PATH=/usr/ivory-5/bin:$PATH
+export PATH
+PGDATA=/usr/ivory-5/data
+export PGDATA
+```
+
+```
+$ source ~/.bash_profile
+```
+
+- 数据库初始化
+
+```
+$ mkdir /usr/ivory-5/data
+$ initdb -D /usr/ivory-5/data
+```
+
+其中-D参数用来指定数据库的数据目录。更多参数使用方法，请使用initdb --help命令获取。
+
+- 启动数据库服务
+
+```
+$ pg_ctl -D /usr/ivory-5/data -l ivory.log start
+```
+
+其中-D参数用来指定数据库的数据目录，如果[&#91;配置环境变量&#93;](#anchor-cn-4.1-配置环境变量) 配置了PGDATA，则该参数可以省略。-l参数用来指定日志文件。更多参数使用方法，请使用pg_ctl --help命令获取。
+
+查看确认数据库启动成功：
+
+```
+$ ps -ef | grep postgres
+ivorysql  130427       1  0 02:45 ?        00:00:00 /usr/ivory-5/bin/postgres -D /usr/ivory-5/data
+ivorysql  130428  130427  0 02:45 ?        00:00:00 postgres: checkpointer
+ivorysql  130429  130427  0 02:45 ?        00:00:00 postgres: background writer
+ivorysql  130431  130427  0 02:45 ?        00:00:00 postgres: walwriter
+ivorysql  130432  130427  0 02:45 ?        00:00:00 postgres: autovacuum launcher
+ivorysql  130433  130427  0 02:45 ?        00:00:00 postgres: logical replication launcher
+ivorysql  130445  130274  0 02:45 pts/1    00:00:00 grep --color=auto postgres
+```
+
+## 8. 数据库连接 {#connecting-to-ivorysql}
+
+psql连接数据库：
+
+```
+$ psql -d YOUR_DATABASE
+psql (18.6)
+Type "help" for help.
+
+ivorysql=#
+```
+
+其中-d参数用来指定想要连接到的数据库名称。IvorySQL默认使用ivorysql数据库，但较低版本的IvorySQL首次使用时需用户先连接postgres数据库，然后自己创建ivorysql数据库。较高版本的IvorySQL则已为用户创建好ivorysql数据库，可以直接连接。 更多参数使用方法，请使用psql --help命令获取。
+
+> [!TIP]
+>
+> Docker运行IvorySQL时，需要添加额外参数，参考：psql -d ivorysql -U ivorysql -h 127.0.0.1 -p 5434
+
+## 9. 卸载IvorySQL {#uninstallation}
+
+> [!CAUTION]
+>
+> 使用任何一种方法卸载前请先停止数据库服务并做好数据备份。
+
+### 9.1. yum源安装的卸载 {#uninstallation-for-yum-installation}
+
+执行以下命令依次卸载：
+
+```
+$ sudo dnf remove -y ivorysql5-5.0
+```
+
+### 9.2. docker安装的卸载 {#uninstallation-for-docker-installation}
+
+执行以下命令，使IvorySQL容器停止运行，并删除IvorySQL容器和镜像：
+
+```
+$ docker stop ivorysql
+$ docker rm ivorysql
+$ docker rmi ivorysql/ivorysql:5.6-ubi8
+```
+
+### 9.3. rpm安装的卸载 {#uninstallation-for-rpm-installation}
+
+执行以下命令卸载并清理文件夹：
+
+```
+$ sudo yum remove --disablerepo=* ivorysql5\*
+$ sudo rm -rf /usr/ivory-5
+```
+
+### 9.4. 源码安装的卸载 {#uninstallation-for-source-code-installation}
+
+执行以下命令卸载数据库并清理文件夹：
+
+```
+$ sudo make uninstall
+$ make clean
+$ sudo rm -rf /usr/ivory-5
+```
+
+### 9.5. deb安装的卸载 {#uninstallation-for-deb-installation}
+
+执行以下命令卸载数据库并清理文件夹：
+
+```
+$ sudo dpkg -P IvorySQL-5.6
+$ sudo rm -rf /usr/ivory-5
+```
