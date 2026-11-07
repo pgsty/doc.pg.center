@@ -5,12 +5,12 @@ description: "Apache Cloudberry 主分支的 PostgreSQL 16.9 内核实现原理�
 weight: 150
 upstream_link: "https://github.com/apache/cloudberry/blob/c2baef068a6f9f8b3c8110f9fdf5758306207693/doc/core-internals/index.md"
 type: "docs"
-sidebar_root_for: "self"
-sidebar_root_link_self: true
 section_index: "cards"
 outputs: ["HTML", "RSS", "print", "markdown"]
 upstream_source: "core_internals"
 cascade: {"type": "docs", "upstream_source": "core_internals"}
+sidebar_root_menu: false
+icon: fa-solid fa-microchip
 ---
 
 > [!NOTE] 源码与内核版本

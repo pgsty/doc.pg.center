@@ -5,12 +5,12 @@ description: "Apache Cloudberry Platform Extension Framework documentation index
 weight: 140
 upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/index.md"
 type: "docs"
-sidebar_root_for: "self"
-sidebar_root_link_self: true
 section_index: "cards"
 outputs: ["HTML", "RSS", "print", "markdown"]
 upstream_source: "pxf"
 cascade: {"type": "docs", "upstream_source": "pxf"}
+sidebar_root_menu: false
+icon: fa-solid fa-plug
 ---
 
 <!--
