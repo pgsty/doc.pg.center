@@ -1,0 +1,153 @@
+---
+title: OrioleDB overview
+linkTitle: Overview
+description: Installation, storage architecture and contribution guides for OrioleDB.
+weight: 10
+type: docs
+search_keywords: ["OrioleDB", "introduction"]
+upstream_link: https://www.orioledb.com/docs
+upstream_source: orioledb
+upstream_modified: true
+icon: fa-solid fa-dove
+upstream_notice: /orioledb/attribution/
+---
+
+
+OrioleDB is a **storage extension for PostgreSQL** which uses PostgreSQL's pluggable storage system.
+
+It is designed to be a drop-in replacement for PostgreSQL's existing storage engine. OrioleDB is built to take advantage of modern hardware and cloud infrastructure, providing better performance and scalability for PostgreSQL workloads.
+
+## Example {#example}
+
+OrioleDB uses Postgres Table Access Method (TAM) to provide a pluggable storage engine for PostgreSQL. Here is an example of how you can create a table using OrioleDB:
+
+``` sql
+-- Enable the OrioleDB extension
+CREATE EXTENSION orioledb;
+
+CREATE TABLE blog_post
+(
+  id int8 NOT NULL,
+  title text NOT NULL,
+  body text NOT NULL,
+  PRIMARY KEY(id)
+) USING orioledb; -- Use the OrioleDB storage engine
+```
+
+## Pluggable Storage in PostgreSQL {#pluggable-storage-in-postgresql}
+
+Pluggable Storage gives developers the ability to use different storage engines for different tables within the same database. Developers will be able to choose a storage method that is optimized for their specific needs: some tables could be configured for high transactional loads, others for analytics workloads, and still others for archiving.
+
+See examples
+
+``` sql
+create table analytics_data
+(
+  id int8,
+  created_at timestamptz,
+  event text
+) using parquet; -- Store data in a analytical optimized storage engine
+
+create table timeseries_data
+(
+  id int8,
+  created_at timestamptz,
+  event text
+) using timeseries; -- Store data in a time-series optimized storage engine
+```
+
+Something like this is already available in MySQL, which uses the `InnoDB` as the default storage engine since MySQL 5.5 (replacing `MyISAM`). Read more about the history of pluggable storage [here](https://supabase.com/blog/postgres-pluggable-strorage).
+
+## Using OrioleDB with existing PostgreSQL installations {#using-orioledb-with-existing-postgresql-installations}
+
+OrioleDB currently requires a set of patches to PostgreSQL to enhance the pluggable storage API and other PostgreSQL subsystems. All of these patches have been submitted to the PostgreSQL community and are under review.
+
+The important property of this set of patches is keeping the binary compatibility. That is, you can switch to the patched PostgreSQL binary while keeping the same data directory. The existing tables will continue working with the default `heap` engine until you switch them to use `orioledb`. Moreover, it's possible to switch back to using unpatched PostgreSQL binaries. You would just need to convert your `orioledb` tables back to heap before.
+
+The goal is to upstream everything: once these patches are accepted, OrioleDB will be able to run on any PostgreSQL installation without any modifications. This will also enable the entire PostgreSQL community to create their own pluggable storage engines.
+
+Until then, you can use our [pre-built Docker image](https://hub.docker.com/r/orioledb/orioledb) to try out OrioleDB. The Docker image includes a patched version of PostgreSQL with OrioleDB pre-installed. Follow the [Getting started](/orioledb/usage/getting-started/) guide to get started.
+
+## Patch set {#patch-set}
+
+You can get the full set of patches [here](https://github.com/orioledb/postgres/commits/patches16/). The following patches have been submitted to the PostgreSQL community to enhance the TAM interface and other subsystems.
+
+|  | Name | Link | Version |
+|----|----|----|----|
+| ✅ | Add missing inequality searches to rbtree | [Link](https://github.com/postgres/postgres/commit/e57519a4637a8d88ae993ac1273d2b59d03a0f75) | PostgreSQL 16 |
+| ✅ | Document the ability to specify TableAM for pgbench | [Link](https://github.com/postgres/postgres/commit/f77ff083350eb5a2625a4dbfca61d15b66c4918b) | PostgreSQL 16 |
+| ✅ | Remove Tuplesortstate.copytup function | [Link](https://github.com/postgres/postgres/commit/d47da3162b4d77c888c895dd36e4ef9cb92fcf19) | PostgreSQL 16 |
+| ✅ | Add new Tuplesortstate.removeabbrev function | [Link](https://github.com/postgres/postgres/commit/cadfdd1edff103d696bbfcdd126c2dee516aed9b) | PostgreSQL 16 |
+| ✅ | Put abbreviation logic into puttuple_common() | [Link](https://github.com/postgres/postgres/commit/033dd02db2248ed792332b950431ced4771b8304) | PostgreSQL 16 |
+| ✅ | Move memory management away from writetup() and tuplesort_put\*() | [Link](https://github.com/postgres/postgres/commit/097366c45f5dfe142eb232dc6d348ca0705a63a9) | PostgreSQL 16 |
+| ✅ | Split TuplesortPublic from Tuplesortstate | [Link](https://github.com/postgres/postgres/commit/ec92fe98356a8a36427fe9ef52873b50fe17852e) | PostgreSQL 16 |
+| ✅ | Split tuplesortvariants.c from tuplesort.c | [Link](https://github.com/postgres/postgres/commit/d0b193c0fad13cf35122b0d3dc805c76e323e8bf) | PostgreSQL 16 |
+| ✅ | Fix typo in comment for writetuple() function | [Link](https://github.com/postgres/postgres/commit/924954c670355f2a0ca1dd4173574a28fc0eedec) | PostgreSQL 16 |
+| ✅ | Support for custom slots in the custom executor nodes | [Link](https://github.com/postgres/postgres/commit/cee120951427fe39a54ab800abfa2834d85b8771) | PostgreSQL 16 |
+| ✉️ | Allow table AM to store complex data structures in rd_amcache | [Link](https://commitfest.postgresql.org/48/4958/) | PostgreSQL 18 |
+| ✉️ | Allow table AM tuple_insert() method to return the different slot | [Link](https://commitfest.postgresql.org/48/4958/) | PostgreSQL 18 |
+| ✉️ | Add TupleTableSlotOps.is_current_xact_tuple() method | [Link](https://commitfest.postgresql.org/48/4958/) | PostgreSQL 18 |
+| ✉️ | Allow locking updated tuples in tuple_update() and tuple_delete() | [Link](https://commitfest.postgresql.org/48/4958/) | PostgreSQL 18 |
+| ✉️ | Add EvalPlanQual delete returning isolation test | [Link](https://commitfest.postgresql.org/48/4958/) | PostgreSQL 18 |
+| ✉️ | Generalize relation analyze in table AM interface | [Link](https://commitfest.postgresql.org/48/4958/) | PostgreSQL 18 |
+| ✉️ | Custom reloptions for table AM | [Link](https://commitfest.postgresql.org/48/4958/) | PostgreSQL 18 |
+| ✉️ | Let table AM insertion methods control index insertion | [Link](https://commitfest.postgresql.org/48/4958/) | PostgreSQL 18 |
+{.wide .expand}
+
+##### Legend {#legend}
+
+✅ - Patch has been accepted.\
+✉️ - Patch is submitted and under review by the PostgreSQL community.\
+✏️ - Patch is being worked on.\
+
+## Features {#features}
+
+OrioleDB opens the door to a future of more powerful storage models that are optimized for cloud and modern hardware architectures.
+
+### Open source {#open-source}
+
+OrioleDB is distributed under the standard PostgreSQL license. The goal is to upstream all the patches required to run OrioleDB on any PostgreSQL installation without any modifications.
+
+### Designed for modern hardware {#designed-for-modern-hardware}
+
+OrioleDB design avoids legacy CPU bottlenecks on modern servers containing dozens and hundreds CPU cores, providing optimized usage of modern storage technologies such as SSD and NVRAM.
+
+### Reduced maintenance needs {#reduced-maintenance-needs}
+
+OrioleDB implements the concepts of undo log and page-mergins, eliminating the need for dedicated garbage collection processes. Additionally, OrioleDB implements default 64-bit transaction identifiers, thus eliminating the well-known and painful wraparound problem.
+
+### Designed to be distributed {#designed-to-be-distributed}
+
+OrioleDB implements a row-level write-ahead log with support for parallel apply. This log architecture is optimized for raft consensus-based replication allowing the implementation of active-active multimaster.
+
+## Differentiators {#differentiators}
+
+The key technical differentiations of OrioleDB are as follows:
+
+### No buffer mapping and lock-less page reading {#no-buffer-mapping-and-lock-less-page-reading}
+
+In-memory pages in OrioleDB are connected with direct links to the storage pages. This eliminates the need for in-buffer mapping along with its related bottlenecks. Additionally, in OrioleDB in-memory page reading doesn't involve atomic operations. Together, these design decisions bring vertical scalability for Postgres to the whole new level.
+
+### MVCC is based on the UNDO log concept {#mvcc-is-based-on-the-undo-log-concept}
+
+In OrioleDB, old versions of tuples do not cause bloat in the main storage system, but eviction into the undo log comprising undo chains. Page-level undo records allow the system to easily reclaim space occupied by deleted tuples as soon as possible. Together with page-mergins, these mechanisms eliminate bloat in the majority of cases. Dedicated VACUUMing of tables is not needed as well\*, removing a significant and common cause of system performance deterioration and database outages.
+
+\* VACUUM and ANALYZE are still required for maintaining [bridged indexes](/orioledb/usage/getting-started/#experimental-support-of-indexes-other-than-btree) (i.e. non-btree indexes) and for keeping planner statistics up to date.
+
+### Copy-on-write checkpoints and row-level WAL {#copy-on-write-checkpoints-and-row-level-wal}
+
+OrioleDB utilizes copy-on-write checkpoints, which provides a structurally consistent snapshot of data every moment of time. This is friendly for modern SSDs and allows row-level WAL logging. In turn, row-level WAL logging is easy to parallelize (done), compact and suitable for active-active multimaster (planned).
+
+## Resources {#resources}
+
+### Hacker news {#hacker-news}
+
+- [OrioleDB - solving some PostgreSQL wicked problems](https://news.ycombinator.com/item?id=30462695)
+- [PostgreSQL: No More Vacuum, No More Bloat](https://news.ycombinator.com/item?id=36740921)
+- [OrioleDB Reached Beta](https://news.ycombinator.com/item?id=36392765)
+
+### Solving PostgreSQL Wicked Problems {#solving-postgresql-wicked-problems}
+
+This talk covers how the new engine is integrated with PostgreSQL Core and solves the wicked PostgreSQL problems.
+
+Video: <https://www.youtube-nocookie.com/embed/coaJCB_H9cU?si=MHdGlhg-KOAPRlQ8>

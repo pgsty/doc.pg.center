@@ -1,0 +1,376 @@
+---
+title: Configuration
+linkTitle: Configuration
+description: Reference for memory pools, compression, recovery workers, rewind and S3 storage settings.
+weight: 20
+type: docs
+search_keywords: ["OrioleDB", "configuration", "GUC", "parameters", "参数"]
+upstream_link: https://www.orioledb.com/docs/usage/configuration
+upstream_source: orioledb
+upstream_modified: true
+upstream_notice: /orioledb/attribution/
+icon: fa-solid fa-sliders
+---
+
+
+## Main parameters {#main-parameters}
+
+All the GUC parameters require the postmaster restart.
+
+### `orioledb.main_buffers` {#orioledbmain_buffers}
+
+|             |       |
+|-------------|-------|
+| **Default** | 64 MB |
+
+the size of shared memory, where hot data pages of OrioleDB tables are cached. This parameter is analog of the built-in `shared_buffers` GUC parameter. A good starting point for this parameter if only OrioleDB tables are used is 1/4 of RAM and setting `shared_buffers` to default value `128 MB`. If OrioleDB and heap tables are used equally, then 1/8 of RAM for this parameter and 1/8 of RAM for `shared_buffers`.
+
+### `orioledb.undo_buffers` {#orioledbundo_buffers}
+
+|             |      |
+|-------------|------|
+| **Default** | 1 MB |
+
+The shared memory ring buffer size for older versions of rows and pages.
+
+Each undo type's circular buffer is at least `max_procs * 2 * O_MAX_UNDO_RECORD_SIZE` bytes, so the actual buffer at startup may be larger than what this GUC requested when `max_procs` is high.
+
+### `orioledb.recovery_pool_size` {#orioledbrecovery_pool_size}
+
+|             |     |
+|-------------|-----|
+| **Default** | 3   |
+
+The number of recovery workers for row-level WAL based recovery.
+
+Increasing the sum value of `orioledb.recovery_pool_size` and `orioledb.recovery_idx_pool_size` to 50-100% of number of available CPU cores speeds up recovery process for the cluster. You need to set `max_worker_processes` to more that this sum amount, otherwise OrioleDB will fallback to single-process index build in recovery or to single-process recovery.
+
+### `orioledb.recovery_idx_pool_size` {#orioledbrecovery_idx_pool_size}
+
+|             |     |
+|-------------|-----|
+| **Default** | 3   |
+
+The number of recovery parallel index build workers.
+
+Increasing the sum value of `orioledb.recovery_pool_size` and `orioledb.recovery_idx_pool_size` to 50-100% of number of available CPU cores speeds up recovery process for the cluster. You need to set `max_worker_processes` to more that this sum amount, otherwise OrioleDB will fallback to single-process index build in recovery or to single-process recovery.
+
+### `orioledb.recovery_queue_size` {#orioledbrecovery_queue_size}
+
+|             |      |
+|-------------|------|
+| **Default** | 8 MB |
+
+The size of shared memory for message queues related to recovery workers.
+
+### `orioledb.checkpoint_completion_ratio` {#orioledbcheckpoint_completion_ratio}
+
+|             |     |
+|-------------|-----|
+| **Default** | 0.5 |
+
+The fraction of OrioleDB tables checkpoint time within the whole checkpoint time. We recommend setting this value to `1.0` if only OrioleDB tables are used.
+
+### `orioledb.serializable` {#orioledbserializable}
+
+|             |              |
+|-------------|--------------|
+| **Default** | `table_lock` |
+
+How OrioleDB handles a client request for SERIALIZABLE isolation. OrioleDB does not implement true SSI predicate locking; this enum selects one of three approximations:
+
+- `table_lock` (default): take a heavyweight `ExclusiveLock` on every relation a SERIALIZABLE transaction touches. Two SERIALIZABLE transactions on the same table serialize via the lock manager, and SERIALIZABLE writers block concurrent non-SERIALIZABLE writers (`RowExclusiveLock`) on that table; non-SERIALIZABLE readers (`AccessShareLock`) are unaffected. Correct, but coarse — concurrent non-conflicting workloads degrade to serial execution.
+- `error`: reject SERIALIZABLE transactions with `ERRCODE_FEATURE_NOT_SUPPORTED` (the legacy behavior).
+- `repeatable_read`: treat SERIALIZABLE as `REPEATABLE READ` for OrioleDB tables only — no extra locks are taken, since OrioleDB's CSN-based snapshot already provides per-transaction stable reads. Heap tables in the same transaction continue to use PG's SSI as usual.
+
+### `orioledb.checksums_enabled` {#orioledbchecksums_enabled}
+
+|             |     |
+|-------------|-----|
+| **Default** | on  |
+
+Read-only. Shows whether OrioleDB page checksums are enabled. OrioleDB always stores and verifies page checksums independently of the PostgreSQL `data_checksums` cluster setting.
+
+## Advanced config options {#advanced-config-options}
+
+### `orioledb.free_tree_buffers` {#orioledbfree_tree_buffers}
+
+|             |      |
+|-------------|------|
+| **Default** | 8 MB |
+
+Shared memory size for metadata of block allocators for compressed tables. We recommend increasing the value of this parameter to work with large compressed tables.
+
+### `orioledb.catalog_buffers` {#orioledbcatalog_buffers}
+
+|             |      |
+|-------------|------|
+| **Default** | 8 MB |
+
+Shared memory size of table metadata. We recommend increasing the value of this parameter to work with a large number of tables.
+
+### `orioledb.temp_buffers` {#orioledbtemp_buffers}
+
+|             |       |
+|-------------|-------|
+| **Default** | 64 MB |
+
+Size of the per-backend local page pool used for OrioleDB temporary tables. Increase it to improve performance with large temporary tables. This memory is allocated in each backend's private memory, not in shared memory, so memory consumption will scale with the number of backends that touch OrioleDB temporary tables.
+
+### `orioledb.system_undo_circular_buffer_fraction` {#orioledbsystem_undo_circular_buffer_fraction}
+
+|             |     |
+|-------------|-----|
+| **Default** | 0.1 |
+
+Fraction of `orioledb.undo_buffers` for older versions of rows and pages in system tables. We recommend increasing the value of this parameter for DDL-intensive workloads. This replaces deprecated parameter `orioledb.undo_system_buffers` which did the same in absolute memory size.
+
+The remaining `orioledb.undo_buffers` (except the fraction specified by sum of `orioledb.system_undo_circular_buffer_fraction` and `orioledb.regular_block_undo_circular_buffer_fraction`) are reserved for row-level undo logs for regular tables.
+
+### `orioledb.regular_block_undo_circular_buffer_fraction` {#orioledbregular_block_undo_circular_buffer_fraction}
+
+|             |      |
+|-------------|------|
+| **Default** | 0.45 |
+
+Fraction of `orioledb.undo_buffers` for block-level undo logs for regular tables.
+
+The remaining `orioledb.undo_buffers` (except the fraction specified by sum of `orioledb.system_undo_circular_buffer_fraction` and `orioledb.regular_block_undo_circular_buffer_fraction`) are reserved for row-level undo logs for regular tables.
+
+### `orioledb.xid_buffers` {#orioledbxid_buffers}
+
+|             |     |
+|-------------|-----|
+| **Default** | 1MB |
+
+Size of OrioleDB in-memory xid buffers. Each MB can acommodate 65 thousands of xid items corresponding to open transactions. Consider increasing this parameter if you have very big transactions rate.
+
+### `orioledb.bgwriter_num_workers` {#orioledbbgwriter_num_workers}
+
+|             |     |
+|-------------|-----|
+| **Default** | 1   |
+
+The number of background writer processes, which flushes dirty pages of OrioleDB tables in the background. We recommend setting values greater than `1` for systems with a large number of CPU cores.
+
+### `orioledb.max_io_concurrency` {#orioledbmax_io_concurrency}
+
+|             |         |
+|-------------|---------|
+| **Default** | 0 (off) |
+
+Maximum number of concurrent IO operations issued by OrioleDB in parallel. We recommend setting this parameter when the OS kernel becomes a bottleneck for high concurrent IO.
+
+### `orioledb.device_filename` {#orioledbdevice_filename}
+
+|             |         |
+|-------------|---------|
+| **Default** | Not set |
+
+Path to the block device for block device mode.
+
+### `orioledb.device_length` {#orioledbdevice_length}
+
+|             |      |
+|-------------|------|
+| **Default** | 1 GB |
+
+The length of the block device.
+
+### `orioledb.use_mmap` {#orioledbuse_mmap}
+
+|             |     |
+|-------------|-----|
+| **Default** | off |
+
+Specify whether to use `mmap` to work with the block device. We recommend setting `on` value for NVRAM.
+
+### `orioledb.default_compress` {#orioledbdefault_compress}
+
+|             |                     |
+|-------------|---------------------|
+| **Default** | -1 (no compression) |
+
+Default block-level compression level for tables' data structures.
+
+### `orioledb.default_primary_compress` {#orioledbdefault_primary_compress}
+
+|             |                     |
+|-------------|---------------------|
+| **Default** | -1 (no compression) |
+
+Default block-level compression level for tables' primary keys.
+
+### `orioledb.default_toast_compress` {#orioledbdefault_toast_compress}
+
+|             |                     |
+|-------------|---------------------|
+| **Default** | -1 (no compression) |
+
+Default block-level compression level for tables' TOASTed values.
+
+### `orioledb.table_description_compress` {#orioledbtable_description_compress}
+
+|             |     |
+|-------------|-----|
+| **Default** | off |
+
+Display compression column in orioledb_table_description.
+
+### `orioledb.use_sparse_files` {#orioledbuse_sparse_files}
+
+|             |     |
+|-------------|-----|
+| **Default** | off |
+
+Return space freed by copy-on-write to the filesystem by punching holes in the data files.
+
+OrioleDB writes a modified page to a new location and frees the old one, and a freed block only becomes reusable once the checkpoint it was freed in has completed. Between those two points the block occupies disk without holding data, so a write-heavy workload can leave the data files several times larger than the data in them. Data files are never truncated, so that size is a high-water mark: it does not come back down on its own. With this option on, the freed blocks are punched out and the space is returned to the filesystem straight away.
+
+The file *length* is unaffected — only the space the filesystem charges for it. After enabling this, `ls -l` and `du --apparent-size` keep reporting the high-water mark while `du` and `df` report what is actually used, and the two can differ by a large factor. Monitoring that reads the apparent size will look wrong.
+
+Requires a filesystem that supports hole punching (`FALLOC_FL_PUNCH_HOLE`); ext4, XFS and Btrfs do. On one that does not, OrioleDB logs a single warning and carries on without punching. Compressed tables are not affected by this option, since their space is managed by extent rather than by block.
+
+### `orioledb.strict_mode` {#orioledbstrict_mode}
+
+|             |     |
+|-------------|-----|
+| **Default** | off |
+
+Controls how OrioleDB reacts when a session requests a feature it does not yet support on an OrioleDB table. When `off`, OrioleDB emits a `WARNING` and silently falls back to the non-concurrent or plain variant. When `on`, OrioleDB raises an `ERROR` instead, which is useful to catch unintended fallback in tests and CI.
+
+## Options for undo-based rewind (experimental) {#options-for-undo-based-rewind-experimental}
+
+> [!WARNING]
+>
+> Rewind is an experimental feature available only in development builds (`IS_DEV=1`). On production builds `orioledb.enable_rewind` can't be turned on.
+
+### `orioledb.enable_rewind` {#orioledbenable_rewind}
+
+|             |     |
+|-------------|-----|
+| **Default** | off |
+
+Enable undo-based rewind.
+
+### `orioledb.rewind_max_time` {#orioledbrewind_max_time}
+
+|             |     |
+|-------------|-----|
+| **Default** | 500 |
+
+Maximum age in seconds from now of transaction after which it is completed and removed from buffer. It's a time limit for a rewind.
+
+### `orioledb.rewind_max_transactions` {#orioledbrewind_max_transactions}
+
+|             |       |
+|-------------|-------|
+| **Default** | 86400 |
+
+Maximum number of rewind transaction items that are stored for a rewind. Older rewind transaction items are completed and removed from the buffer so this specifies maximum rewind age. If there are subtransactions they also occupy rewind items in a rewind buffer.
+
+`orioledb.rewind_max_transactions` and `orioledb.rewind_max_time` work together so if a transaction is older than any one of these thresholds it is past the rewind capability and could not be rewound to.
+
+### `orioledb.rewind_buffers` {#orioledbrewind_buffers}
+
+|             |     |
+|-------------|-----|
+| **Default** | 1MB |
+
+Size of OrioleDB in-memory rewind buffers. Each MB can acommodate around 8000 rewind transaction items. If you have enough memory set it near a value (`orioledb.rewind_max_transactions` / 8000) MB to avoid writing rewind info to disk.
+
+### `orioledb.logical_xid_buffers` {#orioledblogical_xid_buffers}
+
+|             |       |
+|-------------|-------|
+| **Default** | 512KB |
+
+Size of OrioleDB in-memory buffers for logical transaction IDs to be assigned to running subtransactions. Each MB can accommodate 8 million of running subtransactions. So default value corresponds to 4 million subtransactions.
+
+## Debugging options {#debugging-options}
+
+### `orioledb.debug_disable_pools_limit` {#orioledbdebug_disable_pools_limit}
+
+|             |     |
+|-------------|-----|
+| **Default** | off |
+
+Disable minimal limit for `orioledb.main_buffers`, `orioledb.free_tree_buffers`, `orioledb.catalog_buffers` for debug.
+
+### `orioledb.enable_stopevents` {#orioledbenable_stopevents}
+
+|             |     |
+|-------------|-----|
+| **Default** | off |
+
+Enable stop events.
+
+### `orioledb.trace_stopevents` {#orioledbtrace_stopevents}
+
+|             |     |
+|-------------|-----|
+| **Default** | off |
+
+Trace all the stop events to the system log.
+
+### `orioledb.debug_disable_bgwriter` {#orioledbdebug_disable_bgwriter}
+
+|             |     |
+|-------------|-----|
+| **Default** | off |
+
+Disable bgwriter for debug.
+
+### `orioledb.debug_checkpoint_timeout` {#orioledbdebug_checkpoint_timeout}
+
+|             |                      |
+|-------------|----------------------|
+| **Default** | `checkpoint_timeout` |
+
+Sets the maximum time between automatic WAL checkpoints. Setting this value to a lower value than `checkpoint_timeout` can make OrioleDB checkpoints more often for testing.
+
+### `orioledb.remove_old_checkpoint_files` {#orioledbremove_old_checkpoint_files}
+
+|             |     |
+|-------------|-----|
+| **Default** | on  |
+
+Remove temporary \*.tmp and \*.map files after checkpoint.
+
+### `orioledb.skip_unmodified_trees` {#orioledbskip_unmodified_trees}
+
+|             |     |
+|-------------|-----|
+| **Default** | on  |
+
+Skip reading of unmodified trees during checkpointing.
+
+### `orioledb.debug_max_bridge_ctid_blkno` {#orioledbdebug_max_bridge_ctid_blkno}
+
+|             |     |
+|-------------|-----|
+| **Default** | NA  |
+
+Sets maximum value for bridge ctid for its overflow testing.
+
+### `orioledb.debug_disable_downlink_fastpath` {#orioledbdebug_disable_downlink_fastpath}
+
+|             |     |
+|-------------|-----|
+| **Default** | off |
+
+Disable the fastpath downlink search. When on, `find_page()` descends level by level instead of jumping straight to a cached downlink. Useful for tests that need hikeys or downlink stop events.
+
+### `orioledb.replay_until_lsn` {#orioledbreplay_until_lsn}
+
+|             |     |
+|-------------|-----|
+| **Default** | NA  |
+
+Specifies the cutoff LSN at or after which OrioleDB will permanently stop applying its WAL records during recovery. Replay stops when the WAL read position reaches this LSN. `replay_until_lsn` must not be earlier than the LSN of the latest completed OrioleDB checkpoint. Specifying `replay_until_lsn` earlier than the LSN of the latest completed OrioleDB checkpoint will have no effect (a warning will be logged at next startup).
+
+> [!WARNING]
+>
+> This is a last-resort disaster recovery mechanism strictly comparable to `pg_resetwal`. It intentionally induces a split-brain state: PostgreSQL core catalogs and standard heap tables will continue replaying WAL, while OrioleDB tables remain at the specified LSN.
+
+[Additional GUC's for experimental s3 mode](/orioledb/usage/decoupled-storage/)

@@ -1,0 +1,1517 @@
+{
+  "component": "orioledb",
+  "source_site": "https://oriole.pgsty.com/",
+  "upstream_site": "https://www.orioledb.com/",
+  "snapshot_date": "2026-11-06",
+  "source_manifest_sha256": "c9c350db9f87ceca5b532edd874444a19f881f8eb7e7956073ce8ff71cb2f574",
+  "pages": [
+    {
+      "source": "content/benchmarks/_index.md",
+      "target": "content/orioledb/benchmarks/_index.md",
+      "language": "en",
+      "sha256": "a75be1a126bc1f9cfb3cbf8e4eec00dca608cd931eb17069653e8af5d987531c",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/benchmarks/_index.zh.md",
+      "target": "content/orioledb/benchmarks/_index.zh.md",
+      "language": "zh",
+      "sha256": "3f6a33e3e30656bdbbfb3571d16f176c3e34d936a56e6996bd0cbed475471d56",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/benchmarks/pgbench/index.md",
+      "target": "content/orioledb/benchmarks/pgbench/index.md",
+      "language": "en",
+      "sha256": "2790be73f54296dc65a084aba8a2049d87ac1ba18879a8d30c91815dd006b2ad",
+      "code_sha256": [
+        "1a0742b7c51928be914c50ef644121777cc6bfd2d7450600f0d64a533703d25b",
+        "d4356108da4f9f08edd423630b33d70e64287b6df35f0a5c097e36ea00b6890d",
+        "a958347be70bf0209aa844f7fc52e1c4681702b457febce6c0d1a4ac2bb34c5a",
+        "d376a2b9403a4123c49a6fe9121d978e8f819b2e301436fa1f58e8734c0f28b0",
+        "790d6b23229c59eb306e56b40d4c96c9ec0224092ea9fe90cf9cb9fa720f2dc5",
+        "2a8af48fa8c4d05418274fe34171097cfc7aec912a11a74d923dccb2b34ad62e",
+        "c9cb6211ea80eaa417a825ca37693dc82209251c3fdb29caf231a2421b85e239",
+        "be0519dc1fdaf0a1920c8e60beb798bc25beddd6aec0a006da29e0c8aece32bc",
+        "c47bf95de76fdc94b3d3531e159af43f3a3c03ca66df5202c58f1de24f4471e5"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/pgbench-benchmark",
+      "upstream_html_sha256": "636bd7d3b99baf25a8aace6f4c735701795d593139857587387a7db240b00594",
+      "heading_ids": [
+        "hardware",
+        "os-setup",
+        "build-dependencies",
+        "build-a--orioledb-beta18-on-the-patched-postgresql",
+        "build-b--stock-upstream-postgresql-186",
+        "driver-harness",
+        "running-the-sweep",
+        "the-orioledb-arm",
+        "the-heap-arm--against-stock-postgresql",
+        "what-the-two-tests-do",
+        "configuration-summary"
+      ]
+    },
+    {
+      "source": "content/benchmarks/pgbench/index.zh.md",
+      "target": "content/orioledb/benchmarks/pgbench/index.zh.md",
+      "language": "zh",
+      "sha256": "46f6687dd5cad26c3f46e9060ec5ac4a7f5b8fcec96c324e0fcadb66813a476e",
+      "code_sha256": [
+        "1a0742b7c51928be914c50ef644121777cc6bfd2d7450600f0d64a533703d25b",
+        "d4356108da4f9f08edd423630b33d70e64287b6df35f0a5c097e36ea00b6890d",
+        "a958347be70bf0209aa844f7fc52e1c4681702b457febce6c0d1a4ac2bb34c5a",
+        "d376a2b9403a4123c49a6fe9121d978e8f819b2e301436fa1f58e8734c0f28b0",
+        "790d6b23229c59eb306e56b40d4c96c9ec0224092ea9fe90cf9cb9fa720f2dc5",
+        "2a8af48fa8c4d05418274fe34171097cfc7aec912a11a74d923dccb2b34ad62e",
+        "c9cb6211ea80eaa417a825ca37693dc82209251c3fdb29caf231a2421b85e239",
+        "be0519dc1fdaf0a1920c8e60beb798bc25beddd6aec0a006da29e0c8aece32bc",
+        "c47bf95de76fdc94b3d3531e159af43f3a3c03ca66df5202c58f1de24f4471e5"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/pgbench-benchmark",
+      "upstream_html_sha256": "636bd7d3b99baf25a8aace6f4c735701795d593139857587387a7db240b00594",
+      "heading_ids": [
+        "hardware",
+        "os-setup",
+        "build-dependencies",
+        "build-a--orioledb-beta18-on-the-patched-postgresql",
+        "build-b--stock-upstream-postgresql-186",
+        "driver-harness",
+        "running-the-sweep",
+        "the-orioledb-arm",
+        "the-heap-arm--against-stock-postgresql",
+        "what-the-two-tests-do",
+        "configuration-summary"
+      ]
+    },
+    {
+      "source": "content/benchmarks/tracking/index.md",
+      "target": "content/orioledb/benchmarks/tracking/index.md",
+      "language": "en",
+      "sha256": "46de2c624f59df94cc7d363079b83f6ab6697b5bcb40e876732dc0c1ffe9fa5c",
+      "code_sha256": [
+        "e46f49d0fea17af8a6191acb57fdf4161216f384e0d5704a7bb14af4168ccb6a",
+        "d4356108da4f9f08edd423630b33d70e64287b6df35f0a5c097e36ea00b6890d",
+        "a958347be70bf0209aa844f7fc52e1c4681702b457febce6c0d1a4ac2bb34c5a",
+        "e3744dbb8348b660a6bf4c5d4844642139f0026e498feec2b0c30e0d4d38ddfc",
+        "4718c83c8a245111cb2d11f509fa3631eea5d6ba0f47baeeba0cad5e54c80b81",
+        "11caa1a7f5052186783907d453b7cfa58d89dcb6077a6f2ad4247e9726e31e63",
+        "612255f83b97453dfd2b3d91e0efb14fd7f59751d33aef16fbf544dde2b3881b"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/tracking-benchmark",
+      "upstream_html_sha256": "99e5698ffc49e7b4ad619718ee74a2b6c2722591108c2b7f27c43032d45fa0a4",
+      "heading_ids": [
+        "hardware",
+        "os-setup",
+        "build-dependencies",
+        "build--orioledb-beta18-on-the-patched-postgresql",
+        "driver",
+        "running-the-two-arms",
+        "what-the-workload-does",
+        "configuration-summary"
+      ]
+    },
+    {
+      "source": "content/benchmarks/tracking/index.zh.md",
+      "target": "content/orioledb/benchmarks/tracking/index.zh.md",
+      "language": "zh",
+      "sha256": "361c353e156ce7af8c5308a4f7cc835c7e2e1844f364b2847942a396d92c4a6e",
+      "code_sha256": [
+        "e46f49d0fea17af8a6191acb57fdf4161216f384e0d5704a7bb14af4168ccb6a",
+        "d4356108da4f9f08edd423630b33d70e64287b6df35f0a5c097e36ea00b6890d",
+        "a958347be70bf0209aa844f7fc52e1c4681702b457febce6c0d1a4ac2bb34c5a",
+        "e3744dbb8348b660a6bf4c5d4844642139f0026e498feec2b0c30e0d4d38ddfc",
+        "4718c83c8a245111cb2d11f509fa3631eea5d6ba0f47baeeba0cad5e54c80b81",
+        "11caa1a7f5052186783907d453b7cfa58d89dcb6077a6f2ad4247e9726e31e63",
+        "612255f83b97453dfd2b3d91e0efb14fd7f59751d33aef16fbf544dde2b3881b"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/tracking-benchmark",
+      "upstream_html_sha256": "99e5698ffc49e7b4ad619718ee74a2b6c2722591108c2b7f27c43032d45fa0a4",
+      "heading_ids": [
+        "hardware",
+        "os-setup",
+        "build-dependencies",
+        "build--orioledb-beta18-on-the-patched-postgresql",
+        "driver",
+        "running-the-two-arms",
+        "what-the-workload-does",
+        "configuration-summary"
+      ]
+    },
+    {
+      "source": "content/docs/_index.md",
+      "target": "content/orioledb/introduction/index.md",
+      "language": "en",
+      "sha256": "ee263f2cdf48367df580901cc1a2661f0af60ee15dcb22b9b2e35c75b9c9ebf0",
+      "code_sha256": [
+        "bd3af772fd642896bed6c9c0da7a3ff468b4c5be75e6a8c77f7951f5c7ee4c12",
+        "98e44e56846476880cf8d054a000016f8f587e4772a545b823c3fd214ef38461"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs",
+      "upstream_html_sha256": "7490616fa2497c9684940372cfdced408241885cb24939391b7870dcc3ad8d34",
+      "heading_ids": [
+        "example",
+        "pluggable-storage-in-postgresql",
+        "using-orioledb-with-existing-postgresql-installations",
+        "patch-set",
+        "legend",
+        "features",
+        "open-source",
+        "designed-for-modern-hardware",
+        "reduced-maintenance-needs",
+        "designed-to-be-distributed",
+        "differentiators",
+        "no-buffer-mapping-and-lock-less-page-reading",
+        "mvcc-is-based-on-the-undo-log-concept",
+        "copy-on-write-checkpoints-and-row-level-wal",
+        "resources",
+        "hacker-news",
+        "solving-postgresql-wicked-problems"
+      ]
+    },
+    {
+      "source": "content/docs/_index.zh.md",
+      "target": "content/orioledb/introduction/index.zh.md",
+      "language": "zh",
+      "sha256": "1aeb8939879493b5e2be27427cdcb92e4b3ed6ec11f52b590289b7fc17202c0b",
+      "code_sha256": [
+        "bd3af772fd642896bed6c9c0da7a3ff468b4c5be75e6a8c77f7951f5c7ee4c12",
+        "98e44e56846476880cf8d054a000016f8f587e4772a545b823c3fd214ef38461"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs",
+      "upstream_html_sha256": "7490616fa2497c9684940372cfdced408241885cb24939391b7870dcc3ad8d34",
+      "heading_ids": [
+        "example",
+        "pluggable-storage-in-postgresql",
+        "using-orioledb-with-existing-postgresql-installations",
+        "patch-set",
+        "legend",
+        "features",
+        "open-source",
+        "designed-for-modern-hardware",
+        "reduced-maintenance-needs",
+        "designed-to-be-distributed",
+        "differentiators",
+        "no-buffer-mapping-and-lock-less-page-reading",
+        "mvcc-is-based-on-the-undo-log-concept",
+        "copy-on-write-checkpoints-and-row-level-wal",
+        "resources",
+        "hacker-news",
+        "solving-postgresql-wicked-problems"
+      ]
+    },
+    {
+      "source": "content/docs/architecture/_index.md",
+      "target": "content/orioledb/architecture/_index.md",
+      "language": "en",
+      "sha256": "23166883d5b7ff211d453a32916bac04a9304b8c0bcfe9da6489d8984bfc21c2",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/architecture/_index.zh.md",
+      "target": "content/orioledb/architecture/_index.zh.md",
+      "language": "zh",
+      "sha256": "658e5589cd399c9fb72e82e1a79e16bf6cb32001501c3be45395fd44da61ec67",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/architecture/buffering/index.md",
+      "target": "content/orioledb/architecture/buffering/index.md",
+      "language": "en",
+      "sha256": "97b636b425bdd2742308d6b15c0a659b9ef94c9d6d3bd67c152e1d062fdaccd8",
+      "code_sha256": [],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/architecture/buffering",
+      "upstream_html_sha256": "ccaa33716ff44e307e502490e17f5080fddd5e20fd3553c3c3deadd463c1f7ad",
+      "heading_ids": []
+    },
+    {
+      "source": "content/docs/architecture/buffering/index.zh.md",
+      "target": "content/orioledb/architecture/buffering/index.zh.md",
+      "language": "zh",
+      "sha256": "5369551890b8f1b5b75e843e45932261f805990d46704402ddc9b7a4b6f4c845",
+      "code_sha256": [],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/architecture/buffering",
+      "upstream_html_sha256": "ccaa33716ff44e307e502490e17f5080fddd5e20fd3553c3c3deadd463c1f7ad",
+      "heading_ids": []
+    },
+    {
+      "source": "content/docs/architecture/checkpoints/index.md",
+      "target": "content/orioledb/architecture/checkpoints/index.md",
+      "language": "en",
+      "sha256": "429f2ef888108e9a26129073176421a6f5c13611fde50615bb32ecfb28d748a7",
+      "code_sha256": [
+        "7a75218f665a92ba058088450cb05c2343d4554d4f0d69318ad40a0721793f9e"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/architecture/checkpoints",
+      "upstream_html_sha256": "c94af2a111a7d614a72690adf675ef9c5b8b8a849e7722ff7900c75c1836a47e",
+      "heading_ids": [
+        "tree-walk-order",
+        "checkpoint-state",
+        "autonomous-non-leaf-pages",
+        "checkpointer-messages",
+        "walkdownwards",
+        "walkupwards",
+        "walkcontinue",
+        "sequential-buffers",
+        "what-are-sequential-buffers",
+        "why-are-sequential-buffers-used",
+        "why-are-there-two-slots-the-2-arrays",
+        "when-are-sequential-buffers-removed"
+      ]
+    },
+    {
+      "source": "content/docs/architecture/checkpoints/index.zh.md",
+      "target": "content/orioledb/architecture/checkpoints/index.zh.md",
+      "language": "zh",
+      "sha256": "75fad3a9668445eed344d4f0116e694e2fdccee7b2ac42d5f6cf04dcc16eadb0",
+      "code_sha256": [
+        "7a75218f665a92ba058088450cb05c2343d4554d4f0d69318ad40a0721793f9e"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/architecture/checkpoints",
+      "upstream_html_sha256": "c94af2a111a7d614a72690adf675ef9c5b8b8a849e7722ff7900c75c1836a47e",
+      "heading_ids": [
+        "tree-walk-order",
+        "checkpoint-state",
+        "autonomous-non-leaf-pages",
+        "checkpointer-messages",
+        "walkdownwards",
+        "walkupwards",
+        "walkcontinue",
+        "sequential-buffers",
+        "what-are-sequential-buffers",
+        "why-are-sequential-buffers-used",
+        "why-are-there-two-slots-the-2-arrays",
+        "when-are-sequential-buffers-removed"
+      ]
+    },
+    {
+      "source": "content/docs/architecture/concurrency/index.md",
+      "target": "content/orioledb/architecture/concurrency/index.md",
+      "language": "en",
+      "sha256": "77c5b4e5bbf272bd1b3fb88504dce30d085a993bce207e1ab1e49d745d8e7df8",
+      "code_sha256": [],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/architecture/concurrency",
+      "upstream_html_sha256": "e503d04ff38625cdba6d3b03d0d82d677ea92c92201c53fd38cf138d6dbaa29d",
+      "heading_ids": [
+        "page-change-count",
+        "rightlinks",
+        "page-eviction",
+        "page-load",
+        "page-merge"
+      ]
+    },
+    {
+      "source": "content/docs/architecture/concurrency/index.zh.md",
+      "target": "content/orioledb/architecture/concurrency/index.zh.md",
+      "language": "zh",
+      "sha256": "b17ac6452c3d5accc4498b5fc372bbd112a7bd8f8f583e7af3969eabd6c56cae",
+      "code_sha256": [],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/architecture/concurrency",
+      "upstream_html_sha256": "e503d04ff38625cdba6d3b03d0d82d677ea92c92201c53fd38cf138d6dbaa29d",
+      "heading_ids": [
+        "page-change-count",
+        "rightlinks",
+        "page-eviction",
+        "page-load",
+        "page-merge"
+      ]
+    },
+    {
+      "source": "content/docs/architecture/concurrent-index/index.md",
+      "target": "content/orioledb/architecture/concurrent-index/index.md",
+      "language": "en",
+      "sha256": "825d95d32e79084feeed571460664149accac9a07d48655c614daf55140779c7",
+      "code_sha256": [
+        "020b5c7b8720cc32e0ad9d281a03e6149441ab81e80b1f3517dd86773322f966",
+        "788399a091c6da67b252879d593d8174c5bd5850318ac102dd1873b38a5e5ba5",
+        "8cd6ec6820e7cd8d6415fda44f169144f3af7e1892d088110b4108f3091677f6",
+        "c4d42d1dcbba882b0fdb5f455a4f15b59f07309c3e012edb648ca1c97b19607f"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/architecture/concurrent-index",
+      "upstream_html_sha256": "0aed1ca5d43a0c0ea62f7d9ebba44bd93669ce764432a339b5e8bf5c67188957",
+      "heading_ids": [
+        "why-cic-is-different-in-orioledb",
+        "index-lifecycle-oindexstate",
+        "per-backend-spool",
+        "subxact-correct-reverse-op-emission",
+        "k-way-merge-replay",
+        "phase-orchestration",
+        "why-the-lock-dance-matters",
+        "covering-scan",
+        "sys-tree-state-re-read-on-the-capture-hot-path",
+        "standby-replay",
+        "crash-cleanup",
+        "tests",
+        "limitations"
+      ]
+    },
+    {
+      "source": "content/docs/architecture/concurrent-index/index.zh.md",
+      "target": "content/orioledb/architecture/concurrent-index/index.zh.md",
+      "language": "zh",
+      "sha256": "73bfecace54818e36f85cd3f940cae57156887ce8ece2474b4e342370185c7b9",
+      "code_sha256": [
+        "020b5c7b8720cc32e0ad9d281a03e6149441ab81e80b1f3517dd86773322f966",
+        "788399a091c6da67b252879d593d8174c5bd5850318ac102dd1873b38a5e5ba5",
+        "8cd6ec6820e7cd8d6415fda44f169144f3af7e1892d088110b4108f3091677f6",
+        "c4d42d1dcbba882b0fdb5f455a4f15b59f07309c3e012edb648ca1c97b19607f"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/architecture/concurrent-index",
+      "upstream_html_sha256": "0aed1ca5d43a0c0ea62f7d9ebba44bd93669ce764432a339b5e8bf5c67188957",
+      "heading_ids": [
+        "why-cic-is-different-in-orioledb",
+        "index-lifecycle-oindexstate",
+        "per-backend-spool",
+        "subxact-correct-reverse-op-emission",
+        "k-way-merge-replay",
+        "phase-orchestration",
+        "why-the-lock-dance-matters",
+        "covering-scan",
+        "sys-tree-state-re-read-on-the-capture-hot-path",
+        "standby-replay",
+        "crash-cleanup",
+        "tests",
+        "limitations"
+      ]
+    },
+    {
+      "source": "content/docs/architecture/fsm/index.md",
+      "target": "content/orioledb/architecture/fsm/index.md",
+      "language": "en",
+      "sha256": "1d6ee70e45034a3622625ada9088ddef6af93de22dd7734c869a80c3dea198f8",
+      "code_sha256": [],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/architecture/fsm",
+      "upstream_html_sha256": "c2ae8e2753fcf0027026a9a166cb356c6a6ef30abeb895be437989d4c605c500",
+      "heading_ids": [
+        "regular-trees",
+        "compressed-trees"
+      ]
+    },
+    {
+      "source": "content/docs/architecture/fsm/index.zh.md",
+      "target": "content/orioledb/architecture/fsm/index.zh.md",
+      "language": "zh",
+      "sha256": "f955e0c8c7fde33152073c989b1810973f7d741dac23a223e349294eca79ab87",
+      "code_sha256": [],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/architecture/fsm",
+      "upstream_html_sha256": "c2ae8e2753fcf0027026a9a166cb356c6a6ef30abeb895be437989d4c605c500",
+      "heading_ids": [
+        "regular-trees",
+        "compressed-trees"
+      ]
+    },
+    {
+      "source": "content/docs/architecture/overview/index.md",
+      "target": "content/orioledb/architecture/overview/index.md",
+      "language": "en",
+      "sha256": "081eb10833e2ef126f0d1eb28c13c34cf44a5dad5cd1cf2ee36f9fc155fa7bd1",
+      "code_sha256": [],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/architecture/overview",
+      "upstream_html_sha256": "7453a4b32b1a303eb408395c56b7b0d19147027fcb1f670d5423062da6c6a239",
+      "heading_ids": [
+        "indexes",
+        "dual-pointers",
+        "page-structure",
+        "copy-on-write-checkpoints",
+        "undo-log",
+        "row-level-wal",
+        "system-catalog",
+        "data-compression"
+      ]
+    },
+    {
+      "source": "content/docs/architecture/overview/index.zh.md",
+      "target": "content/orioledb/architecture/overview/index.zh.md",
+      "language": "zh",
+      "sha256": "334bed5b789a04e9184871bb7e00f65f0ba8a7cabeb4b05312ffce122ed7932a",
+      "code_sha256": [],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/architecture/overview",
+      "upstream_html_sha256": "7453a4b32b1a303eb408395c56b7b0d19147027fcb1f670d5423062da6c6a239",
+      "heading_ids": [
+        "indexes",
+        "dual-pointers",
+        "page-structure",
+        "copy-on-write-checkpoints",
+        "undo-log",
+        "row-level-wal",
+        "system-catalog",
+        "data-compression"
+      ]
+    },
+    {
+      "source": "content/docs/architecture/recovery/index.md",
+      "target": "content/orioledb/architecture/recovery/index.md",
+      "language": "en",
+      "sha256": "4f1ea0208cc8cacfdc844a891d96ff40035816d3f222f1591c336195309501f7",
+      "code_sha256": [],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/architecture/recovery",
+      "upstream_html_sha256": "f5d529e9b8dcd09c439b1f2e156663ebd4bb2f6105e137bfcbc09a2a65b07b31",
+      "heading_ids": [
+        "splitting-work-between-multiple-processes",
+        "primary-keys-toast-and-secondary-indexes"
+      ]
+    },
+    {
+      "source": "content/docs/architecture/recovery/index.zh.md",
+      "target": "content/orioledb/architecture/recovery/index.zh.md",
+      "language": "zh",
+      "sha256": "4b3a5ba693ff8dfd3bd2fe123618a85565a3e9848f3ca15b28b23528e45e4c9a",
+      "code_sha256": [],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/architecture/recovery",
+      "upstream_html_sha256": "f5d529e9b8dcd09c439b1f2e156663ebd4bb2f6105e137bfcbc09a2a65b07b31",
+      "heading_ids": [
+        "splitting-work-between-multiple-processes",
+        "primary-keys-toast-and-secondary-indexes"
+      ]
+    },
+    {
+      "source": "content/docs/architecture/row-level-concurrency/index.md",
+      "target": "content/orioledb/architecture/row-level-concurrency/index.md",
+      "language": "en",
+      "sha256": "56247b1267254332e61524ac1eb7b86ba8bb808b1824d8199961cd294aa14b2b",
+      "code_sha256": [
+        "ab42f5c7696635dcfd172fb3996378b96f1bbdc7b046aa53fef29496b0ca8928",
+        "ba9f8e396ec3ebf2989e5167b1ceea3afe67013f45ddaad33b0aacbbd9132c54",
+        "97154c1ff6cdd0c81ecc43c342b50a077f497ee437bd924cbbfbfe98cb48669a",
+        "ab42f5c7696635dcfd172fb3996378b96f1bbdc7b046aa53fef29496b0ca8928",
+        "c0df92d52495fd2ceb3ceff0c989605fdf2f9d3436e5899eba3fe7f5028b8ffd",
+        "c4865ebbf2257a038324cc318bbb347fba7974b8b62feb71780905cc29f4e2ce"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/architecture/row-level-concurrency",
+      "upstream_html_sha256": "ca0016976178cb9c8c6d911e9a2f8101bf002c50d923f7ccd16a827044b7698d",
+      "heading_ids": [
+        "update-of-the-primary-key",
+        "following-the-update-chain",
+        "transaction-id-allocation-and-heap-relations",
+        "sequence-generation-overhead"
+      ]
+    },
+    {
+      "source": "content/docs/architecture/row-level-concurrency/index.zh.md",
+      "target": "content/orioledb/architecture/row-level-concurrency/index.zh.md",
+      "language": "zh",
+      "sha256": "8a0181daf393ce1f6525f737172c2a75ca4379ec2584e5e55721d01da45bdbde",
+      "code_sha256": [
+        "ab42f5c7696635dcfd172fb3996378b96f1bbdc7b046aa53fef29496b0ca8928",
+        "ba9f8e396ec3ebf2989e5167b1ceea3afe67013f45ddaad33b0aacbbd9132c54",
+        "97154c1ff6cdd0c81ecc43c342b50a077f497ee437bd924cbbfbfe98cb48669a",
+        "ab42f5c7696635dcfd172fb3996378b96f1bbdc7b046aa53fef29496b0ca8928",
+        "c0df92d52495fd2ceb3ceff0c989605fdf2f9d3436e5899eba3fe7f5028b8ffd",
+        "c4865ebbf2257a038324cc318bbb347fba7974b8b62feb71780905cc29f4e2ce"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/architecture/row-level-concurrency",
+      "upstream_html_sha256": "ca0016976178cb9c8c6d911e9a2f8101bf002c50d923f7ccd16a827044b7698d",
+      "heading_ids": [
+        "update-of-the-primary-key",
+        "following-the-update-chain",
+        "transaction-id-allocation-and-heap-relations",
+        "sequence-generation-overhead"
+      ]
+    },
+    {
+      "source": "content/docs/contributing/_index.md",
+      "target": "content/orioledb/contributing/_index.md",
+      "language": "en",
+      "sha256": "6ce2e7f6cc45ab36fe3a1f257b4604a81dccf6f8c172cba9222f9bfdbe8b81de",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/contributing/_index.zh.md",
+      "target": "content/orioledb/contributing/_index.zh.md",
+      "language": "zh",
+      "sha256": "2275ced2dad95dcdd953d118197c74996d70ccc3b041f869a8deafaa2f07e78b",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/contributing/binary-compatibility/index.md",
+      "target": "content/orioledb/contributing/binary-compatibility/index.md",
+      "language": "en",
+      "sha256": "1a3dc7035552f2cc69c503bb736af9b0fb652bdf7b24f71a552c7f5bc2c05dd4",
+      "code_sha256": [],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/contributing/binary-compatibility",
+      "upstream_html_sha256": "7a7dccbaed55736cf31782327094d534e04224f94cd2197cfaec058411145e89",
+      "heading_ids": [
+        "version-variables",
+        "cross-architecture-support"
+      ]
+    },
+    {
+      "source": "content/docs/contributing/binary-compatibility/index.zh.md",
+      "target": "content/orioledb/contributing/binary-compatibility/index.zh.md",
+      "language": "zh",
+      "sha256": "141bda9b03f2fca3f60989b06642f5cafc741663fa463a90bc67362ec4622b61",
+      "code_sha256": [],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/contributing/binary-compatibility",
+      "upstream_html_sha256": "7a7dccbaed55736cf31782327094d534e04224f94cd2197cfaec058411145e89",
+      "heading_ids": [
+        "version-variables",
+        "cross-architecture-support"
+      ]
+    },
+    {
+      "source": "content/docs/contributing/code-structure/index.md",
+      "target": "content/orioledb/contributing/code-structure/index.md",
+      "language": "en",
+      "sha256": "6715c41fc8692cfdeea3e3d88f472f327f920942529d1f24b7877735d67d0932",
+      "code_sha256": [
+        "b3186f973c1c230f7a89b262248b016e7c9e5d59a9b59136a83bea4d1b3ecec1"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/contributing/code-structure",
+      "upstream_html_sha256": "83c66930890e3b084b5f5ba3bfc35f45f15581d9b5a28e710433533134ed9e9a",
+      "heading_ids": [
+        "file-structure",
+        "makefile-targets",
+        "extension-sql-scripts",
+        "tests",
+        "ci",
+        "checkyml",
+        "dockeryml",
+        "dockertestyml",
+        "pgindentyml",
+        "rpmyml",
+        "staticyml",
+        "stop-events"
+      ]
+    },
+    {
+      "source": "content/docs/contributing/code-structure/index.zh.md",
+      "target": "content/orioledb/contributing/code-structure/index.zh.md",
+      "language": "zh",
+      "sha256": "973d8714931fe519eff07a60b618c5bea7ef0566f2e6e31d0c0a8f538b5968df",
+      "code_sha256": [
+        "b3186f973c1c230f7a89b262248b016e7c9e5d59a9b59136a83bea4d1b3ecec1"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/contributing/code-structure",
+      "upstream_html_sha256": "83c66930890e3b084b5f5ba3bfc35f45f15581d9b5a28e710433533134ed9e9a",
+      "heading_ids": [
+        "file-structure",
+        "makefile-targets",
+        "extension-sql-scripts",
+        "tests",
+        "ci",
+        "checkyml",
+        "dockeryml",
+        "dockertestyml",
+        "pgindentyml",
+        "rpmyml",
+        "staticyml",
+        "stop-events"
+      ]
+    },
+    {
+      "source": "content/docs/contributing/docker-builds/index.md",
+      "target": "content/orioledb/contributing/docker-builds/index.md",
+      "language": "en",
+      "sha256": "4fd6a56bd535d9abc188e5b083223e6444d00c8f1e2fb80933684a51dcb4c8e4",
+      "code_sha256": [
+        "1236c736054255ec906b4853af7cfce06359ce512742d370f8469f253c7af0e0",
+        "da415e00e12724b0316c4286572181e7968c9058dfdace922526ba5c5a09f466",
+        "eaa33957e7e76617dcf0692223d47f224900d5ae89f546cdc58266d611486826",
+        "798346f889a9406318a650e65b12f8ba4c730de1e2c069dfbe1857eb751a8768",
+        "f7797aeb7235f98bf7621369c5a7f5e9a47ba6aecd247f4632dccf46bd05f01a",
+        "73d0c8aa3a080e062e20dc30bdb693778e060a75fbc7ba0a248fad09846a3c2e",
+        "f7797aeb7235f98bf7621369c5a7f5e9a47ba6aecd247f4632dccf46bd05f01a",
+        "c8881c04ddad5fc1865be6925b431d95a87cd83f2e9274f5a51cddcd45cc82f0",
+        "38c51e96144937e83a937b481783c961bb7e92e21dd713711e5e0cffe803939b",
+        "2f6ffe4a8d8b236cd41073076a271daf8460e061ab2566d310bc0722f6b1ac42",
+        "501e727785610d0b2f1d77021985ae6556d53ca4b0c8dca6f7ea94f3c0957d6e"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/contributing/docker-builds",
+      "upstream_html_sha256": "5f6b3ee0ae05fe9f01e96abfe347f80466068d141617c53f65d39eee0a8c3721",
+      "heading_ids": [
+        "prerequisites",
+        "quickstart",
+        "building-docker-images-1",
+        "to-build-postgresql-18--orioledb-extension",
+        "to-build-postgresql-17--orioledb-extension",
+        "supported-environment-variables",
+        "available-docker-build-args",
+        "experimental-orioledb--postgis-extension-build",
+        "step-1-create-image-orioletest17-gcc-alpine321",
+        "step2-build-the-oriolegis17-35-alpine-image",
+        "developer-notes",
+        "ubuntu",
+        "alpine",
+        "macos",
+        "other"
+      ]
+    },
+    {
+      "source": "content/docs/contributing/docker-builds/index.zh.md",
+      "target": "content/orioledb/contributing/docker-builds/index.zh.md",
+      "language": "zh",
+      "sha256": "ccc8f7ea07a5be4fd3507eedf827407671e5e532ebb8cb620528a72f53d029a9",
+      "code_sha256": [
+        "1236c736054255ec906b4853af7cfce06359ce512742d370f8469f253c7af0e0",
+        "da415e00e12724b0316c4286572181e7968c9058dfdace922526ba5c5a09f466",
+        "eaa33957e7e76617dcf0692223d47f224900d5ae89f546cdc58266d611486826",
+        "798346f889a9406318a650e65b12f8ba4c730de1e2c069dfbe1857eb751a8768",
+        "f7797aeb7235f98bf7621369c5a7f5e9a47ba6aecd247f4632dccf46bd05f01a",
+        "73d0c8aa3a080e062e20dc30bdb693778e060a75fbc7ba0a248fad09846a3c2e",
+        "f7797aeb7235f98bf7621369c5a7f5e9a47ba6aecd247f4632dccf46bd05f01a",
+        "c8881c04ddad5fc1865be6925b431d95a87cd83f2e9274f5a51cddcd45cc82f0",
+        "38c51e96144937e83a937b481783c961bb7e92e21dd713711e5e0cffe803939b",
+        "2f6ffe4a8d8b236cd41073076a271daf8460e061ab2566d310bc0722f6b1ac42",
+        "501e727785610d0b2f1d77021985ae6556d53ca4b0c8dca6f7ea94f3c0957d6e"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/contributing/docker-builds",
+      "upstream_html_sha256": "5f6b3ee0ae05fe9f01e96abfe347f80466068d141617c53f65d39eee0a8c3721",
+      "heading_ids": [
+        "prerequisites",
+        "quickstart",
+        "building-docker-images-1",
+        "to-build-postgresql-18--orioledb-extension",
+        "to-build-postgresql-17--orioledb-extension",
+        "supported-environment-variables",
+        "available-docker-build-args",
+        "experimental-orioledb--postgis-extension-build",
+        "step-1-create-image-orioletest17-gcc-alpine321",
+        "step2-build-the-oriolegis17-35-alpine-image",
+        "developer-notes",
+        "ubuntu",
+        "alpine",
+        "macos",
+        "other"
+      ]
+    },
+    {
+      "source": "content/docs/contributing/local-builds/index.md",
+      "target": "content/orioledb/contributing/local-builds/index.md",
+      "language": "en",
+      "sha256": "f066cedb8403672593a2b9c6eeae036d9be24c9230c03978728a15c0fd481d56",
+      "code_sha256": [
+        "863c349f47f382b9c4ed17cbdddeb184b84dc18c47a216f9e6243d7791bdb53b",
+        "287734ad18e7d5c94fd5753202ac9e6e0b0aef2c0c268ba75cc3fb8e9bc934f3",
+        "4b3fb46ec761567681672663980bc0f5e952213fc56d5dfeb07ac8708ab64d9a",
+        "13f8e9b667726880ffd5777f4c8a0573ed32ad92e2a94d8d8f68f8b8a379d975",
+        "d6468e0434020c6086e7c5c156804341c2ddd9f3224f05d1c3ae1ffa679296ae",
+        "31d9db1dfd897bdbd35e301c7410426f01554f19417af84eb9dd51c6adb53573",
+        "12149f5f0dad1ee11e98dcf6416046501fff86a39ab8445509554094f05db71d",
+        "05e1cbe792c98429a56532950bf51b0e348234d5729d691699e403049031f1cc",
+        "c17f03ed297ee084f7c303ba4e6280c394510e06f0b7490aff0bd01fba39de98",
+        "2afc3f5fd21b407e629155c9408a2afb9fb44c67d6b39e31b9a63a1655c1d141",
+        "e5bcc4ed5cabfdb8971ae06abe5587c473a79c834fe980cd9f4d920b9f192727",
+        "08c1fa0fa35cf066800940e104c937c6c8ac307781d70c22b804037219ce9af5",
+        "287734ad18e7d5c94fd5753202ac9e6e0b0aef2c0c268ba75cc3fb8e9bc934f3",
+        "4b3fb46ec761567681672663980bc0f5e952213fc56d5dfeb07ac8708ab64d9a",
+        "ab6a2120fe5244914a6bbbb719c07f23beb6f2b3bc40c702ae08d2cf0c4a1aca",
+        "31d9db1dfd897bdbd35e301c7410426f01554f19417af84eb9dd51c6adb53573",
+        "12149f5f0dad1ee11e98dcf6416046501fff86a39ab8445509554094f05db71d",
+        "705d26dd773f62317b3ed831fd31edff965ce78e5eb898fd39572fbe327b2afb",
+        "c17f03ed297ee084f7c303ba4e6280c394510e06f0b7490aff0bd01fba39de98",
+        "b2e4f7f27b37ae818f3ce805624754917e741288aa44625512348605a1c2de14",
+        "cdc1320c6be785478061142a8e4887abbf75500d21b580d2acb774c3f5cc226f",
+        "93cc8f48f1afe2a56d7d705cba96e189e4bd9cc4f3aadbddf35a361d17f79436",
+        "87980d8250b8d4964c1f8cc62d3883567846417c0ac669ea4116a58e5970fffb",
+        "287734ad18e7d5c94fd5753202ac9e6e0b0aef2c0c268ba75cc3fb8e9bc934f3",
+        "4b3fb46ec761567681672663980bc0f5e952213fc56d5dfeb07ac8708ab64d9a",
+        "13f8e9b667726880ffd5777f4c8a0573ed32ad92e2a94d8d8f68f8b8a379d975",
+        "d6468e0434020c6086e7c5c156804341c2ddd9f3224f05d1c3ae1ffa679296ae",
+        "31d9db1dfd897bdbd35e301c7410426f01554f19417af84eb9dd51c6adb53573",
+        "12149f5f0dad1ee11e98dcf6416046501fff86a39ab8445509554094f05db71d",
+        "696b7f2008b49ef1d4239a2b38ab642bb4cb70c71b48998fd3a850e4927322b8",
+        "7d0ede9e045d009b4cef4c2e960b9a64d618861d5b932ca92959f78b52170469",
+        "d07116e8c340a5afcaa0568d8a3e6896de2b346aa366f39d55184be0dd624625",
+        "833554588ef6ed0742d7f162d8663d27d45858fcafea9cc7fc2a204d29153b53"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/contributing/local-builds",
+      "upstream_html_sha256": "972b892122af2de209a31532e0cbed44ae3e6f210c2f162d7715033ea5a2cd1c",
+      "heading_ids": [
+        "linux",
+        "install-prerequisites",
+        "download-and-install-postgresql-17-with-patches",
+        "checkout-to-required-patchset",
+        "enable-valgrind-support-in-postgresql-code-optional",
+        "configure-and-build",
+        "install-python-requirements",
+        "download-and-build-the-orioledb-extension",
+        "download-and-install-visual-studio-code",
+        "check-installation",
+        "run-automated-tests",
+        "manual-installation-and-running",
+        "macos",
+        "disable-system-integrity-protection",
+        "install-homebrew",
+        "install-prerequisites-1",
+        "download-and-install-postgresql-17-with-patches-1",
+        "checkout-to-required-patchset-1",
+        "configure-and-build-1",
+        "install-python-requirements-1",
+        "download-and-build-the-orioledb-extension-1",
+        "download-and-install-visual-studio-code-1",
+        "check-installation-1",
+        "run-automated-tests-1",
+        "manual-installation-and-running-1",
+        "windows",
+        "install-ubuntu-in-wsl",
+        "install-prerequisites-2",
+        "download-and-install-postgresql-17-with-patches-2",
+        "checkout-to-required-patchset-2",
+        "enable-valgrind-support-in-postgresql-code-optional-1",
+        "configure-and-build-2",
+        "install-python-requirements-2",
+        "download-and-build-the-orioledb-extension-2",
+        "download-and-install-visual-studio-code-2",
+        "install-python-and-c-vscode-extensions",
+        "check-installation-2",
+        "run-automated-tests-2",
+        "manual-installation-and-running-2"
+      ]
+    },
+    {
+      "source": "content/docs/contributing/local-builds/index.zh.md",
+      "target": "content/orioledb/contributing/local-builds/index.zh.md",
+      "language": "zh",
+      "sha256": "2b141b881d46ddc452f3768c30b622aa23bd931f8ce7f01c5a8c7b9ef278c82d",
+      "code_sha256": [
+        "863c349f47f382b9c4ed17cbdddeb184b84dc18c47a216f9e6243d7791bdb53b",
+        "287734ad18e7d5c94fd5753202ac9e6e0b0aef2c0c268ba75cc3fb8e9bc934f3",
+        "4b3fb46ec761567681672663980bc0f5e952213fc56d5dfeb07ac8708ab64d9a",
+        "13f8e9b667726880ffd5777f4c8a0573ed32ad92e2a94d8d8f68f8b8a379d975",
+        "d6468e0434020c6086e7c5c156804341c2ddd9f3224f05d1c3ae1ffa679296ae",
+        "31d9db1dfd897bdbd35e301c7410426f01554f19417af84eb9dd51c6adb53573",
+        "12149f5f0dad1ee11e98dcf6416046501fff86a39ab8445509554094f05db71d",
+        "05e1cbe792c98429a56532950bf51b0e348234d5729d691699e403049031f1cc",
+        "c17f03ed297ee084f7c303ba4e6280c394510e06f0b7490aff0bd01fba39de98",
+        "2afc3f5fd21b407e629155c9408a2afb9fb44c67d6b39e31b9a63a1655c1d141",
+        "e5bcc4ed5cabfdb8971ae06abe5587c473a79c834fe980cd9f4d920b9f192727",
+        "08c1fa0fa35cf066800940e104c937c6c8ac307781d70c22b804037219ce9af5",
+        "287734ad18e7d5c94fd5753202ac9e6e0b0aef2c0c268ba75cc3fb8e9bc934f3",
+        "4b3fb46ec761567681672663980bc0f5e952213fc56d5dfeb07ac8708ab64d9a",
+        "ab6a2120fe5244914a6bbbb719c07f23beb6f2b3bc40c702ae08d2cf0c4a1aca",
+        "31d9db1dfd897bdbd35e301c7410426f01554f19417af84eb9dd51c6adb53573",
+        "12149f5f0dad1ee11e98dcf6416046501fff86a39ab8445509554094f05db71d",
+        "705d26dd773f62317b3ed831fd31edff965ce78e5eb898fd39572fbe327b2afb",
+        "c17f03ed297ee084f7c303ba4e6280c394510e06f0b7490aff0bd01fba39de98",
+        "b2e4f7f27b37ae818f3ce805624754917e741288aa44625512348605a1c2de14",
+        "cdc1320c6be785478061142a8e4887abbf75500d21b580d2acb774c3f5cc226f",
+        "93cc8f48f1afe2a56d7d705cba96e189e4bd9cc4f3aadbddf35a361d17f79436",
+        "87980d8250b8d4964c1f8cc62d3883567846417c0ac669ea4116a58e5970fffb",
+        "287734ad18e7d5c94fd5753202ac9e6e0b0aef2c0c268ba75cc3fb8e9bc934f3",
+        "4b3fb46ec761567681672663980bc0f5e952213fc56d5dfeb07ac8708ab64d9a",
+        "13f8e9b667726880ffd5777f4c8a0573ed32ad92e2a94d8d8f68f8b8a379d975",
+        "d6468e0434020c6086e7c5c156804341c2ddd9f3224f05d1c3ae1ffa679296ae",
+        "31d9db1dfd897bdbd35e301c7410426f01554f19417af84eb9dd51c6adb53573",
+        "12149f5f0dad1ee11e98dcf6416046501fff86a39ab8445509554094f05db71d",
+        "696b7f2008b49ef1d4239a2b38ab642bb4cb70c71b48998fd3a850e4927322b8",
+        "7d0ede9e045d009b4cef4c2e960b9a64d618861d5b932ca92959f78b52170469",
+        "d07116e8c340a5afcaa0568d8a3e6896de2b346aa366f39d55184be0dd624625",
+        "833554588ef6ed0742d7f162d8663d27d45858fcafea9cc7fc2a204d29153b53"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/contributing/local-builds",
+      "upstream_html_sha256": "972b892122af2de209a31532e0cbed44ae3e6f210c2f162d7715033ea5a2cd1c",
+      "heading_ids": [
+        "linux",
+        "install-prerequisites",
+        "download-and-install-postgresql-17-with-patches",
+        "checkout-to-required-patchset",
+        "enable-valgrind-support-in-postgresql-code-optional",
+        "configure-and-build",
+        "install-python-requirements",
+        "download-and-build-the-orioledb-extension",
+        "download-and-install-visual-studio-code",
+        "check-installation",
+        "run-automated-tests",
+        "manual-installation-and-running",
+        "macos",
+        "disable-system-integrity-protection",
+        "install-homebrew",
+        "install-prerequisites-1",
+        "download-and-install-postgresql-17-with-patches-1",
+        "checkout-to-required-patchset-1",
+        "configure-and-build-1",
+        "install-python-requirements-1",
+        "download-and-build-the-orioledb-extension-1",
+        "download-and-install-visual-studio-code-1",
+        "check-installation-1",
+        "run-automated-tests-1",
+        "manual-installation-and-running-1",
+        "windows",
+        "install-ubuntu-in-wsl",
+        "install-prerequisites-2",
+        "download-and-install-postgresql-17-with-patches-2",
+        "checkout-to-required-patchset-2",
+        "enable-valgrind-support-in-postgresql-code-optional-1",
+        "configure-and-build-2",
+        "install-python-requirements-2",
+        "download-and-build-the-orioledb-extension-2",
+        "download-and-install-visual-studio-code-2",
+        "install-python-and-c-vscode-extensions",
+        "check-installation-2",
+        "run-automated-tests-2",
+        "manual-installation-and-running-2"
+      ]
+    },
+    {
+      "source": "content/docs/usage/_index.md",
+      "target": "content/orioledb/usage/_index.md",
+      "language": "en",
+      "sha256": "30ae45ab0147cf5de283b5945a7be5292ca6191c1a73f61614f749f2e93df411",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/usage/_index.zh.md",
+      "target": "content/orioledb/usage/_index.zh.md",
+      "language": "zh",
+      "sha256": "7bfa1a79a84ec19be66a56d36eabbedbe2916182aaa25c4596c21c9b6157a69d",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/usage/configuration/index.md",
+      "target": "content/orioledb/usage/configuration/index.md",
+      "language": "en",
+      "sha256": "f8af0e754c03413dbc5b0e05f90cdc8b90c5814c0840ec311f6fd88e0b3cddb8",
+      "code_sha256": [],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/usage/configuration",
+      "upstream_html_sha256": "d62d716e66b392b8cd1b8fd4e56f5db59b00f166b04a46b947dfcbef4ba29d00",
+      "heading_ids": [
+        "main-parameters",
+        "orioledbmain_buffers",
+        "orioledbundo_buffers",
+        "orioledbrecovery_pool_size",
+        "orioledbrecovery_idx_pool_size",
+        "orioledbrecovery_queue_size",
+        "orioledbcheckpoint_completion_ratio",
+        "orioledbserializable",
+        "orioledbchecksums_enabled",
+        "advanced-config-options",
+        "orioledbfree_tree_buffers",
+        "orioledbcatalog_buffers",
+        "orioledbtemp_buffers",
+        "orioledbsystem_undo_circular_buffer_fraction",
+        "orioledbregular_block_undo_circular_buffer_fraction",
+        "orioledbxid_buffers",
+        "orioledbbgwriter_num_workers",
+        "orioledbmax_io_concurrency",
+        "orioledbdevice_filename",
+        "orioledbdevice_length",
+        "orioledbuse_mmap",
+        "orioledbdefault_compress",
+        "orioledbdefault_primary_compress",
+        "orioledbdefault_toast_compress",
+        "orioledbtable_description_compress",
+        "orioledbuse_sparse_files",
+        "orioledbstrict_mode",
+        "options-for-undo-based-rewind-experimental",
+        "orioledbenable_rewind",
+        "orioledbrewind_max_time",
+        "orioledbrewind_max_transactions",
+        "orioledbrewind_buffers",
+        "orioledblogical_xid_buffers",
+        "debugging-options",
+        "orioledbdebug_disable_pools_limit",
+        "orioledbenable_stopevents",
+        "orioledbtrace_stopevents",
+        "orioledbdebug_disable_bgwriter",
+        "orioledbdebug_checkpoint_timeout",
+        "orioledbremove_old_checkpoint_files",
+        "orioledbskip_unmodified_trees",
+        "orioledbdebug_max_bridge_ctid_blkno",
+        "orioledbdebug_disable_downlink_fastpath",
+        "orioledbreplay_until_lsn"
+      ]
+    },
+    {
+      "source": "content/docs/usage/configuration/index.zh.md",
+      "target": "content/orioledb/usage/configuration/index.zh.md",
+      "language": "zh",
+      "sha256": "747bd14651eae55319a6798794ab58634c0d36afc5e81fabaa7f31c34247d7aa",
+      "code_sha256": [],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/usage/configuration",
+      "upstream_html_sha256": "d62d716e66b392b8cd1b8fd4e56f5db59b00f166b04a46b947dfcbef4ba29d00",
+      "heading_ids": [
+        "main-parameters",
+        "orioledbmain_buffers",
+        "orioledbundo_buffers",
+        "orioledbrecovery_pool_size",
+        "orioledbrecovery_idx_pool_size",
+        "orioledbrecovery_queue_size",
+        "orioledbcheckpoint_completion_ratio",
+        "orioledbserializable",
+        "orioledbchecksums_enabled",
+        "advanced-config-options",
+        "orioledbfree_tree_buffers",
+        "orioledbcatalog_buffers",
+        "orioledbtemp_buffers",
+        "orioledbsystem_undo_circular_buffer_fraction",
+        "orioledbregular_block_undo_circular_buffer_fraction",
+        "orioledbxid_buffers",
+        "orioledbbgwriter_num_workers",
+        "orioledbmax_io_concurrency",
+        "orioledbdevice_filename",
+        "orioledbdevice_length",
+        "orioledbuse_mmap",
+        "orioledbdefault_compress",
+        "orioledbdefault_primary_compress",
+        "orioledbdefault_toast_compress",
+        "orioledbtable_description_compress",
+        "orioledbuse_sparse_files",
+        "orioledbstrict_mode",
+        "options-for-undo-based-rewind-experimental",
+        "orioledbenable_rewind",
+        "orioledbrewind_max_time",
+        "orioledbrewind_max_transactions",
+        "orioledbrewind_buffers",
+        "orioledblogical_xid_buffers",
+        "debugging-options",
+        "orioledbdebug_disable_pools_limit",
+        "orioledbenable_stopevents",
+        "orioledbtrace_stopevents",
+        "orioledbdebug_disable_bgwriter",
+        "orioledbdebug_checkpoint_timeout",
+        "orioledbremove_old_checkpoint_files",
+        "orioledbskip_unmodified_trees",
+        "orioledbdebug_max_bridge_ctid_blkno",
+        "orioledbdebug_disable_downlink_fastpath",
+        "orioledbreplay_until_lsn"
+      ]
+    },
+    {
+      "source": "content/docs/usage/decoupled-storage/index.md",
+      "target": "content/orioledb/usage/decoupled-storage/index.md",
+      "language": "en",
+      "sha256": "601b599b450e8a88111d7224ff89233133a25a2f534c6d43698253da2d885104",
+      "code_sha256": [
+        "a547364a36cdb9898427cf966dd1f38585ec8332893277b38108accfde2d0181"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/usage/decoupled-storage",
+      "upstream_html_sha256": "f1ce1a2836cbdeaa827cc20280f2c8df014f14e38b4f936f52713dea778d80de",
+      "heading_ids": [
+        "s3-database-storage",
+        "s3-loader-utility"
+      ]
+    },
+    {
+      "source": "content/docs/usage/decoupled-storage/index.zh.md",
+      "target": "content/orioledb/usage/decoupled-storage/index.zh.md",
+      "language": "zh",
+      "sha256": "137ca6f9a0d8c7fc9bc0fe20bc6e22bc2b1960bc261845296e9e2162929659d5",
+      "code_sha256": [
+        "a547364a36cdb9898427cf966dd1f38585ec8332893277b38108accfde2d0181"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/usage/decoupled-storage",
+      "upstream_html_sha256": "f1ce1a2836cbdeaa827cc20280f2c8df014f14e38b4f936f52713dea778d80de",
+      "heading_ids": [
+        "s3-database-storage",
+        "s3-loader-utility"
+      ]
+    },
+    {
+      "source": "content/docs/usage/getting-started/index.md",
+      "target": "content/orioledb/usage/getting-started/index.md",
+      "language": "en",
+      "sha256": "50f23aca7a47e8fe6632d013857c8b0b4fd05fd77c7c69b92a730192f2f1ccee",
+      "code_sha256": [
+        "8e0d49af5ef390567517df42d7954c433014a4766a1feccf6ce7656c5d1f4ecd",
+        "56cc51ead696b17557c011fc5590cec7221a0b5828b54c15f7e77192adedf053",
+        "ac6bd3d21578b20e27f2468bc49c43f822157e2fb7b616304f158a1a774bbd2f",
+        "b5849a57b9b90df2c3406defb2c81890a9f90ed98a6e41ddf2212607d0e3010d",
+        "7e45de443eb3812d88a5099917a20eaf342e5e00e2deb2cd9228625101dd204e",
+        "0e7a7a99d366932bf4cee5d2513ffc8d658e470ff784b757b9623914038577cc",
+        "274fc717f5b2df555b68c6e2d7a3350f34d4a0ca66641807b81d5e8c65f41c37",
+        "41504d49a2b851dc73f150c14f27911685856d62112e1f34dfcb7605f69d1702",
+        "d3791c091814cd5e32762c463b919399eeb3f93b7b4ed85b643077705f547c03",
+        "5bd86250770155c602cb5297439c8f13c55dc364175f52d02864ec88bbf87725",
+        "6c46ec9ff89d04ff7b388acb6382ef1516f1121c8cebe19f4e112f101bc2220d",
+        "9bdc8bc33a25392df3acda6b647a1be89ab64fa049fc1b3ada4391322ac026ce",
+        "7b1d6d4fa9db42d569b7277dfacf6ef44d2c9c1d13e89f6198a26b714e0264a9",
+        "ff1ce319c09a617ee3dd4af61093f0372f7085e0121fbcfebbbd1e43062631a3",
+        "74afb948fb72b2ef2ddb586b67bbba726abb36144cbac168716aa968f37e4672",
+        "f596ebfe491a2acd0d13861e1327b1f5ae71fabb75636cd48ffc7130b6965c6f",
+        "cc8a9b7187eced9a8d5bd6036a5013683c6ff3d3a0a99231248d1fba60e42b7e",
+        "52747725a82f3329f106bbd5a12e4219e7b382b595be16675bb0fc0266013a5b",
+        "ddc0e6321f0b95cd6365abc0198e9e9b8dc8ba3f810eef4dcee62264740df3a0",
+        "4e89e87b52624e3b047c03d66f12a71cb6b8992ae41143d20a2b3a06c1279b51",
+        "a6ab7e5976ee5b25f5dccd6edba4d2aeace510ec95a6808e42436bf181a20621"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/usage/getting-started",
+      "upstream_html_sha256": "d24c5aec5c339535ba764d3867888f433ca60c3adfb265ccf0003e5536c2bb53",
+      "heading_ids": [
+        "quick-start",
+        "start-postgresql",
+        "enable-the-extension",
+        "create-tables",
+        "query-tables",
+        "view-query-plans",
+        "advanced-usage",
+        "use-orioledb-tables-by-default",
+        "collations",
+        "block-level-data-compression",
+        "fillfactor",
+        "sequence-caching",
+        "undo-log-size-calculation",
+        "verifying-table-integrity",
+        "data-deletion",
+        "checkpoints-wal--recovery",
+        "experimental-support-of-the-block-devices",
+        "experimental-support-of-indexes-other-than-btree",
+        "current-limitations",
+        "links"
+      ]
+    },
+    {
+      "source": "content/docs/usage/getting-started/index.zh.md",
+      "target": "content/orioledb/usage/getting-started/index.zh.md",
+      "language": "zh",
+      "sha256": "e8242cd773482bb86298d61427a5a9efe82ce4b9b9f5091623a8f2de676dbedb",
+      "code_sha256": [
+        "8e0d49af5ef390567517df42d7954c433014a4766a1feccf6ce7656c5d1f4ecd",
+        "56cc51ead696b17557c011fc5590cec7221a0b5828b54c15f7e77192adedf053",
+        "ac6bd3d21578b20e27f2468bc49c43f822157e2fb7b616304f158a1a774bbd2f",
+        "b5849a57b9b90df2c3406defb2c81890a9f90ed98a6e41ddf2212607d0e3010d",
+        "7e45de443eb3812d88a5099917a20eaf342e5e00e2deb2cd9228625101dd204e",
+        "0e7a7a99d366932bf4cee5d2513ffc8d658e470ff784b757b9623914038577cc",
+        "274fc717f5b2df555b68c6e2d7a3350f34d4a0ca66641807b81d5e8c65f41c37",
+        "41504d49a2b851dc73f150c14f27911685856d62112e1f34dfcb7605f69d1702",
+        "d3791c091814cd5e32762c463b919399eeb3f93b7b4ed85b643077705f547c03",
+        "5bd86250770155c602cb5297439c8f13c55dc364175f52d02864ec88bbf87725",
+        "6c46ec9ff89d04ff7b388acb6382ef1516f1121c8cebe19f4e112f101bc2220d",
+        "9bdc8bc33a25392df3acda6b647a1be89ab64fa049fc1b3ada4391322ac026ce",
+        "7b1d6d4fa9db42d569b7277dfacf6ef44d2c9c1d13e89f6198a26b714e0264a9",
+        "ff1ce319c09a617ee3dd4af61093f0372f7085e0121fbcfebbbd1e43062631a3",
+        "74afb948fb72b2ef2ddb586b67bbba726abb36144cbac168716aa968f37e4672",
+        "f596ebfe491a2acd0d13861e1327b1f5ae71fabb75636cd48ffc7130b6965c6f",
+        "cc8a9b7187eced9a8d5bd6036a5013683c6ff3d3a0a99231248d1fba60e42b7e",
+        "52747725a82f3329f106bbd5a12e4219e7b382b595be16675bb0fc0266013a5b",
+        "ddc0e6321f0b95cd6365abc0198e9e9b8dc8ba3f810eef4dcee62264740df3a0",
+        "4e89e87b52624e3b047c03d66f12a71cb6b8992ae41143d20a2b3a06c1279b51",
+        "a6ab7e5976ee5b25f5dccd6edba4d2aeace510ec95a6808e42436bf181a20621"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/usage/getting-started",
+      "upstream_html_sha256": "d24c5aec5c339535ba764d3867888f433ca60c3adfb265ccf0003e5536c2bb53",
+      "heading_ids": [
+        "quick-start",
+        "start-postgresql",
+        "enable-the-extension",
+        "create-tables",
+        "query-tables",
+        "view-query-plans",
+        "advanced-usage",
+        "use-orioledb-tables-by-default",
+        "collations",
+        "block-level-data-compression",
+        "fillfactor",
+        "sequence-caching",
+        "undo-log-size-calculation",
+        "verifying-table-integrity",
+        "data-deletion",
+        "checkpoints-wal--recovery",
+        "experimental-support-of-the-block-devices",
+        "experimental-support-of-indexes-other-than-btree",
+        "current-limitations",
+        "links"
+      ]
+    },
+    {
+      "source": "content/docs/usage/pg-upgrade/index.md",
+      "target": "content/orioledb/usage/pg-upgrade/index.md",
+      "language": "en",
+      "sha256": "51d13e5039f6731517a3b2aa5e31bfbe8f901b3f9d87943f8eb3e9fcc5676edf",
+      "code_sha256": [
+        "94dc0990a6700437999d84cdccdba1b420ba09d3df966440cea92eded3bd4196",
+        "512fc33e84b7585b9b04a0ee2168fee4aa1dac7914e02a37176bae9dca4c3f0e",
+        "966d5b181b4f29a7be252d0b2b455d4a3010d8b370a15e7928a71efa8d907df9"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/usage/pg-upgrade",
+      "upstream_html_sha256": "fba426d0839c13a7125b0986de83e3c8d52ffe59256eb4b1b6c32b6293dc913a",
+      "heading_ids": [
+        "procedure",
+        "how-the-expression-rewrite-works"
+      ]
+    },
+    {
+      "source": "content/docs/usage/pg-upgrade/index.zh.md",
+      "target": "content/orioledb/usage/pg-upgrade/index.zh.md",
+      "language": "zh",
+      "sha256": "12eead00221505126af0540515bef75af2881faa97ce09e64090c716a74b413b",
+      "code_sha256": [
+        "94dc0990a6700437999d84cdccdba1b420ba09d3df966440cea92eded3bd4196",
+        "512fc33e84b7585b9b04a0ee2168fee4aa1dac7914e02a37176bae9dca4c3f0e",
+        "966d5b181b4f29a7be252d0b2b455d4a3010d8b370a15e7928a71efa8d907df9"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/usage/pg-upgrade",
+      "upstream_html_sha256": "fba426d0839c13a7125b0986de83e3c8d52ffe59256eb4b1b6c32b6293dc913a",
+      "heading_ids": [
+        "procedure",
+        "how-the-expression-rewrite-works"
+      ]
+    },
+    {
+      "source": "content/docs/usage/rewind/index.md",
+      "target": "content/orioledb/usage/rewind/index.md",
+      "language": "en",
+      "sha256": "212d0b0031b1b22fd726ac29e283ef0c2cc6453a66f72ab8229724625cd604e2",
+      "code_sha256": [
+        "a9d29b9998241b976bcc1075fa0d4d18c452a7882673cc5d4bcdb16cf397ebed",
+        "94881c26ecdbbc59530f8c13e32fc383e9dbe96b783edfee724869a8f33462b8",
+        "ae014c3ac2ce9781b2e206056071a955faf201d7115c28a604e18a5a46db1511"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/usage/rewind",
+      "upstream_html_sha256": "ba0185aa4351a1b8ebab123f2762dd0daa3a721ff6ec5ad1fff52aedd69149b9",
+      "heading_ids": [
+        "configuration",
+        "the-rewind-worker",
+        "key-responsibilities",
+        "rewind-functions",
+        "orioledb_rewind_by_timeseconds-int4-attempt_restart-bool",
+        "orioledb_rewind_to_timestamptarget_time-timestamptz-attempt_restart-bool",
+        "orioledb_rewind_to_transactionxid-int4-oxid-int8-attempt_restart-bool",
+        "examining-the-rewind-horizon",
+        "operational-workflow",
+        "examples",
+        "limitations-and-caveats"
+      ]
+    },
+    {
+      "source": "content/docs/usage/rewind/index.zh.md",
+      "target": "content/orioledb/usage/rewind/index.zh.md",
+      "language": "zh",
+      "sha256": "c7473c9ac37e25fb63b2cdda136e6ab909a5d2455f2c4f860828f0ee6b694ac5",
+      "code_sha256": [
+        "a9d29b9998241b976bcc1075fa0d4d18c452a7882673cc5d4bcdb16cf397ebed",
+        "94881c26ecdbbc59530f8c13e32fc383e9dbe96b783edfee724869a8f33462b8",
+        "ae014c3ac2ce9781b2e206056071a955faf201d7115c28a604e18a5a46db1511"
+      ],
+      "status": "imported",
+      "upstream_url": "https://www.orioledb.com/docs/usage/rewind",
+      "upstream_html_sha256": "ba0185aa4351a1b8ebab123f2762dd0daa3a721ff6ec5ad1fff52aedd69149b9",
+      "heading_ids": [
+        "configuration",
+        "the-rewind-worker",
+        "key-responsibilities",
+        "rewind-functions",
+        "orioledb_rewind_by_timeseconds-int4-attempt_restart-bool",
+        "orioledb_rewind_to_timestamptarget_time-timestamptz-attempt_restart-bool",
+        "orioledb_rewind_to_transactionxid-int4-oxid-int8-attempt_restart-bool",
+        "examining-the-rewind-horizon",
+        "operational-workflow",
+        "examples",
+        "limitations-and-caveats"
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "source": "static/images/orioledb/undo_buffer_1-55d5dbb3f9499dc72293cc56f77928a1.svg",
+      "target": "content/orioledb/architecture/buffering/undo_buffer_1-55d5dbb3f9499dc72293cc56f77928a1.svg",
+      "bytes": 152544,
+      "sha256": "8177ba38156f701a5a06fde9aa50d4da5671f2473c65677991070887f362596c"
+    },
+    {
+      "source": "static/images/orioledb/undo_buffer_2-c330086018aeab2fc207d0529bdf1521.svg",
+      "target": "content/orioledb/architecture/buffering/undo_buffer_2-c330086018aeab2fc207d0529bdf1521.svg",
+      "bytes": 152626,
+      "sha256": "1984d318037ca5241fcd574cce8ad900307bff3e99e83a82ab606419ffc745f5"
+    },
+    {
+      "source": "static/images/orioledb/undo_buffer_3-4a153e387f7dd14be88b95e9e3e053e6.svg",
+      "target": "content/orioledb/architecture/buffering/undo_buffer_3-4a153e387f7dd14be88b95e9e3e053e6.svg",
+      "bytes": 160961,
+      "sha256": "8224e55b369be205218c4071ab0fb8e550204d61cc87902d43f73045bfdb7419"
+    },
+    {
+      "source": "static/images/orioledb/undo_buffer_4-bec2b621efbe99df09850ec8fd9a0ad0.svg",
+      "target": "content/orioledb/architecture/buffering/undo_buffer_4-bec2b621efbe99df09850ec8fd9a0ad0.svg",
+      "bytes": 164172,
+      "sha256": "32e52984fca393e7fd1f7c92035bf9312bba6aa150c867a397ba60065ecc7e1d"
+    },
+    {
+      "source": "static/images/orioledb/undo_buffer_5-9db1da3cba8c5db82b43e0014ec808b9.svg",
+      "target": "content/orioledb/architecture/buffering/undo_buffer_5-9db1da3cba8c5db82b43e0014ec808b9.svg",
+      "bytes": 160930,
+      "sha256": "04fce5ecde239689155511650080cddf98a5806afd1e32882a9f65ecb4f57bc8"
+    },
+    {
+      "source": "static/images/orioledb/checkpoint_walk-75cef5c22e88d538f66f8c6b964e8183.svg",
+      "target": "content/orioledb/architecture/checkpoints/checkpoint_walk-75cef5c22e88d538f66f8c6b964e8183.svg",
+      "bytes": 187623,
+      "sha256": "6c8c9c2fdef5cbde00b7f5262835fa448536af8ef74bc5ffc23c16c41019f3c4"
+    },
+    {
+      "source": "static/images/orioledb/checkpoint_state_1-b3cafca552bdc5ed4cb43f7bf88486e6.svg",
+      "target": "content/orioledb/architecture/checkpoints/checkpoint_state_1-b3cafca552bdc5ed4cb43f7bf88486e6.svg",
+      "bytes": 206928,
+      "sha256": "32b912b0f1754cd4c52a41720cdd40f8ec80e9049e2ddbb2446f71d0e43cb323"
+    },
+    {
+      "source": "static/images/orioledb/checkpoint_state_2-50aad15d32853deddc072c1a9769ac75.svg",
+      "target": "content/orioledb/architecture/checkpoints/checkpoint_state_2-50aad15d32853deddc072c1a9769ac75.svg",
+      "bytes": 208918,
+      "sha256": "81a85cab5e7d468cb97fc3c6b1184a0432bece017a21014b10287e9c4a6b48b3"
+    },
+    {
+      "source": "static/images/orioledb/split_step_1-cf888f1f0c1456844f8dbef4e8a2df37.svg",
+      "target": "content/orioledb/architecture/concurrency/split_step_1-cf888f1f0c1456844f8dbef4e8a2df37.svg",
+      "bytes": 160481,
+      "sha256": "da1d6027e1b0c06615749e4d92ab96d585aca827d570cae2fdd6f90d1c8a4bd0"
+    },
+    {
+      "source": "static/images/orioledb/split_step_2-d4c3db54082db9a57d0cd431aeb517bf.svg",
+      "target": "content/orioledb/architecture/concurrency/split_step_2-d4c3db54082db9a57d0cd431aeb517bf.svg",
+      "bytes": 161916,
+      "sha256": "f25dfd15a29b32f6c20931c0d86e72928ce78a8b80341669fceae0db365a0db7"
+    },
+    {
+      "source": "static/images/orioledb/split_step_3-2e7d926710919ed810fd60104070463e.svg",
+      "target": "content/orioledb/architecture/concurrency/split_step_3-2e7d926710919ed810fd60104070463e.svg",
+      "bytes": 162358,
+      "sha256": "4ed9f6329b2e67b3c03bdb6685b052953f1057e78bf5aa88e74439bdb6c914bb"
+    },
+    {
+      "source": "static/images/orioledb/split_step_4-58dfe89afd00025847968a7511b4a78c.svg",
+      "target": "content/orioledb/architecture/concurrency/split_step_4-58dfe89afd00025847968a7511b4a78c.svg",
+      "bytes": 162100,
+      "sha256": "f6869705c766f4603ce3d40a9c4e72018434a95110779410ee0e45a1a6810ed5"
+    },
+    {
+      "source": "static/images/orioledb/evict_step_1-2d8d45619437eabbabdecfef74fccc52.svg",
+      "target": "content/orioledb/architecture/concurrency/evict_step_1-2d8d45619437eabbabdecfef74fccc52.svg",
+      "bytes": 164290,
+      "sha256": "a8b1cb30e6465707c53e061188710e5f688b8bde1b293b26c3e5732f7a6e89b3"
+    },
+    {
+      "source": "static/images/orioledb/evict_step_2-dbe8407493029a671b29e0b98fc6c2ad.svg",
+      "target": "content/orioledb/architecture/concurrency/evict_step_2-dbe8407493029a671b29e0b98fc6c2ad.svg",
+      "bytes": 164314,
+      "sha256": "159c7b73125a87342ab6268de04b5dd86b13e4914885debf16b827aff2ecca9d"
+    },
+    {
+      "source": "static/images/orioledb/evict_step_3-6cbda53e12f340699bfeaa6e978bd3ab.svg",
+      "target": "content/orioledb/architecture/concurrency/evict_step_3-6cbda53e12f340699bfeaa6e978bd3ab.svg",
+      "bytes": 162869,
+      "sha256": "9a49bfb1ee6a6fbf45439c412599ceff629cb182c96804e95c0fab9ef4c80add"
+    },
+    {
+      "source": "static/images/orioledb/evict_step_4-a82f3b1b906343695af9489f95806931.svg",
+      "target": "content/orioledb/architecture/concurrency/evict_step_4-a82f3b1b906343695af9489f95806931.svg",
+      "bytes": 162867,
+      "sha256": "278b763df6ed868466f16f4664e7da26418c9f3f4f26ad4d9d48339496bbc1f0"
+    },
+    {
+      "source": "static/images/orioledb/load_step_1-fa032b3aa981a07a8957490af8a8e056.svg",
+      "target": "content/orioledb/architecture/concurrency/load_step_1-fa032b3aa981a07a8957490af8a8e056.svg",
+      "bytes": 185046,
+      "sha256": "45bf21ae37141a6c3f06c906f7f5af1d2c8375a4f0a24b493196d2dc18972722"
+    },
+    {
+      "source": "static/images/orioledb/load_step_2-56590901bcbdbf762a6e4bb9f714fc88.svg",
+      "target": "content/orioledb/architecture/concurrency/load_step_2-56590901bcbdbf762a6e4bb9f714fc88.svg",
+      "bytes": 185040,
+      "sha256": "9ae98da599bca095ce60a2217bc0aa977611c9b98ea6a3561bcb9f5946170e7b"
+    },
+    {
+      "source": "static/images/orioledb/load_step_3-e51c8371d72edb0b1da6f938a2f4e7bf.svg",
+      "target": "content/orioledb/architecture/concurrency/load_step_3-e51c8371d72edb0b1da6f938a2f4e7bf.svg",
+      "bytes": 185048,
+      "sha256": "6245e3d97e69be25d7f3a8c654bfc8e799b89fae46a7e5a8521e18cfac578cfe"
+    },
+    {
+      "source": "static/images/orioledb/load_step_4-8a75ded946a626271f46a81e661578a6.svg",
+      "target": "content/orioledb/architecture/concurrency/load_step_4-8a75ded946a626271f46a81e661578a6.svg",
+      "bytes": 186469,
+      "sha256": "57e491eb83085c7f90fdc504959989075061a6da8ab2e723c09a27d8c92022b3"
+    },
+    {
+      "source": "static/images/orioledb/merge_step_1-3e0728402c0678450d0efca701158582.svg",
+      "target": "content/orioledb/architecture/concurrency/merge_step_1-3e0728402c0678450d0efca701158582.svg",
+      "bytes": 186414,
+      "sha256": "d103c1dc1645b41da2176468acf3ef4076f6f8901aef0631a6b45bc6e3ed8fdf"
+    },
+    {
+      "source": "static/images/orioledb/merge_step_2-214c72be54c4e4c6d5599b1e57d866f6.svg",
+      "target": "content/orioledb/architecture/concurrency/merge_step_2-214c72be54c4e4c6d5599b1e57d866f6.svg",
+      "bytes": 186398,
+      "sha256": "de74623c084c2bbd8edd8a085ec4e42c4e4917bc702233f03ecf76d58678e7d8"
+    },
+    {
+      "source": "static/images/orioledb/merge_step_3-332c4f4bb2693df5643186e2ef8821dd.svg",
+      "target": "content/orioledb/architecture/concurrency/merge_step_3-332c4f4bb2693df5643186e2ef8821dd.svg",
+      "bytes": 186406,
+      "sha256": "12f9c2d246dee0217a6cb5af14e18fa1e74b5d384e8d8eb764bd0d61b89306ea"
+    },
+    {
+      "source": "static/images/orioledb/merge_step_4-80a7445c3e71a02246743fe6d105fb3e.svg",
+      "target": "content/orioledb/architecture/concurrency/merge_step_4-80a7445c3e71a02246743fe6d105fb3e.svg",
+      "bytes": 194790,
+      "sha256": "a62ffea5802b13a08f977dd537ae2ced95c437a9695fe2525172dbc51c8eef59"
+    },
+    {
+      "source": "static/images/orioledb/merge_step_5-ba2dcf8d72e8879122ba4090b8dd2fdb.svg",
+      "target": "content/orioledb/architecture/concurrency/merge_step_5-ba2dcf8d72e8879122ba4090b8dd2fdb.svg",
+      "bytes": 188931,
+      "sha256": "589adb0eb55e1fbebd0db6eb558f848d1d5eb225038cb57d38a656ecfc0e4a44"
+    },
+    {
+      "source": "static/images/orioledb/fsm_1-adf809e9d395711325aef92af9b24c32.svg",
+      "target": "content/orioledb/architecture/fsm/fsm_1-adf809e9d395711325aef92af9b24c32.svg",
+      "bytes": 162224,
+      "sha256": "dde1c4670794f67ef4c0a700f1fa60d7e3217b183a9162098cedfd8cdd913a39"
+    },
+    {
+      "source": "static/images/orioledb/fsm_2-c2f28262ec01c90d483ac6eb23899f2c.svg",
+      "target": "content/orioledb/architecture/fsm/fsm_2-c2f28262ec01c90d483ac6eb23899f2c.svg",
+      "bytes": 198044,
+      "sha256": "7ef0b008063f43b0cc4c5b05789b9a31aaca3ec93616388101086acf07970371"
+    },
+    {
+      "source": "static/images/orioledb/vegetables_indexes-e4888e92fb47ea9f35d66d6b4ed54b4d.svg",
+      "target": "content/orioledb/architecture/overview/vegetables_indexes-e4888e92fb47ea9f35d66d6b4ed54b4d.svg",
+      "bytes": 16851,
+      "sha256": "0a350c5486172e0130c98f36cacf14bab149c21a3f639994bac2aaf530c7a809"
+    },
+    {
+      "source": "static/images/orioledb/dual_pointers-c34362f70cc796ee100490fd45189c13.svg",
+      "target": "content/orioledb/architecture/overview/dual_pointers-c34362f70cc796ee100490fd45189c13.svg",
+      "bytes": 36238,
+      "sha256": "ed310cee1638f73c809f7019f1965e02b02b7320c6382da6b5d2cff472fc5659"
+    },
+    {
+      "source": "static/images/orioledb/page_structure-c25c4df3b0fb4bb2b4de057d4e37bf1a.svg",
+      "target": "content/orioledb/architecture/overview/page_structure-c25c4df3b0fb4bb2b4de057d4e37bf1a.svg",
+      "bytes": 13654,
+      "sha256": "da98f79afb9bffe4625c3048f713d2a3fb0ababead4faece46727c93319a650a"
+    },
+    {
+      "source": "static/images/orioledb/cow_1-a18cad097a0f7201d66c2d1558976117.svg",
+      "target": "content/orioledb/architecture/overview/cow_1-a18cad097a0f7201d66c2d1558976117.svg",
+      "bytes": 16563,
+      "sha256": "46b54fa91836573faaaeafda28fc4ab66f520e8a78b6fcfbb618fbfa6eb4e707"
+    },
+    {
+      "source": "static/images/orioledb/cow_2-fd9717009b67e9635b4e0ee4d65da0f1.svg",
+      "target": "content/orioledb/architecture/overview/cow_2-fd9717009b67e9635b4e0ee4d65da0f1.svg",
+      "bytes": 19492,
+      "sha256": "944e7c4c73702142966d5a663058b0f6af55dca63ebaee44233b4856edc95c99"
+    },
+    {
+      "source": "static/images/orioledb/cow_3-e168a313cc630996cd5b55d91e2c997a.svg",
+      "target": "content/orioledb/architecture/overview/cow_3-e168a313cc630996cd5b55d91e2c997a.svg",
+      "bytes": 16579,
+      "sha256": "3553c2c041d0471dadcbf34548fab3405a3725ad6ae6b0613db1e68886b667ef"
+    },
+    {
+      "source": "static/images/orioledb/checkpoint_concurrent_1-9e4b9494695f65c3b0407e7cb8c424e4.svg",
+      "target": "content/orioledb/architecture/overview/checkpoint_concurrent_1-9e4b9494695f65c3b0407e7cb8c424e4.svg",
+      "bytes": 11624,
+      "sha256": "09f59b82fe5b25c0d32ce779e05897f779611cdf6b6fa37598b5c5b1d1fdbdca"
+    },
+    {
+      "source": "static/images/orioledb/checkpoint_concurrent_2-c0c618d050ed758b8e794a252c540f8b.svg",
+      "target": "content/orioledb/architecture/overview/checkpoint_concurrent_2-c0c618d050ed758b8e794a252c540f8b.svg",
+      "bytes": 16478,
+      "sha256": "b54ce26ed82f8fbbddb9542d1adecbaf5639b5258732121975c784f44d205fdb"
+    },
+    {
+      "source": "static/images/orioledb/checkpoint_concurrent_3-8778b37abd722fbdf5e1b8044c1e0b61.svg",
+      "target": "content/orioledb/architecture/overview/checkpoint_concurrent_3-8778b37abd722fbdf5e1b8044c1e0b61.svg",
+      "bytes": 18295,
+      "sha256": "f9fc309751e13ae247901f87f3d0badf9a420129cab5405b44fc7c9d5164dcef"
+    },
+    {
+      "source": "static/images/orioledb/checkpoint_concurrent_4-db21509d00094a12d86e1c30155bd89d.svg",
+      "target": "content/orioledb/architecture/overview/checkpoint_concurrent_4-db21509d00094a12d86e1c30155bd89d.svg",
+      "bytes": 22000,
+      "sha256": "1d594a62a2af165ba38540ae86943650695e08304f29a34e6b543e0be9564555"
+    },
+    {
+      "source": "static/images/orioledb/row_level_undo-439447274dbabf0213fa0ae03e1a34b0.svg",
+      "target": "content/orioledb/architecture/overview/row_level_undo-439447274dbabf0213fa0ae03e1a34b0.svg",
+      "bytes": 15434,
+      "sha256": "2a53cd8a277544bb18bc7a979b35ae8629e34d48c77b2b609017e049a253f00e"
+    },
+    {
+      "source": "static/images/orioledb/block_level_undo-c7f5c8c4e0eb4aa5e7ac022d8ef4a228.svg",
+      "target": "content/orioledb/architecture/overview/block_level_undo-c7f5c8c4e0eb4aa5e7ac022d8ef4a228.svg",
+      "bytes": 10398,
+      "sha256": "10e2b2ae085cf529b758a6140a7cd9709e6fff382204c84a55b02b18c1d8e03c"
+    },
+    {
+      "source": "static/images/orioledb/architecture-overview-inline.svg",
+      "target": "content/orioledb/architecture/overview/architecture-overview-inline.svg",
+      "bytes": 7645,
+      "sha256": "898bce730721f74ed66d7472b7fcdb01735c592ed1fe6e9ba6af27695263819d"
+    },
+    {
+      "source": "static/images/orioledb/recovery_distribute-9188aca398a03cc944bbe339acf3eb07.svg",
+      "target": "content/orioledb/architecture/recovery/recovery_distribute-9188aca398a03cc944bbe339acf3eb07.svg",
+      "bytes": 215447,
+      "sha256": "2980313c7c17a9d8946d3173d43fa53083009e8686ec172bef6210e1e411359b"
+    },
+    {
+      "source": "static/images/orioledb/recovery_undo-b6ec43be227dca05956dabf1f7b50b4b.svg",
+      "target": "content/orioledb/architecture/recovery/recovery_undo-b6ec43be227dca05956dabf1f7b50b4b.svg",
+      "bytes": 181659,
+      "sha256": "0a55297cf9be9da2b2c43b7951b78ac28873f1233eb5422c063f282b9cf43871"
+    },
+    {
+      "source": "static/images/orioledb/toast_version-1fe448453a74d2c03604efe9554da645.svg",
+      "target": "content/orioledb/architecture/recovery/toast_version-1fe448453a74d2c03604efe9554da645.svg",
+      "bytes": 179609,
+      "sha256": "00be89b88f8f467bd4d01435cd92a6436f4901121b94e9c56b6fa8ede6113a7e"
+    },
+    {
+      "source": "static/images/orioledb/recovery_secondary_indexes-e864171f44836fa597cae9d5f91aee6e.svg",
+      "target": "content/orioledb/architecture/recovery/recovery_secondary_indexes-e864171f44836fa597cae9d5f91aee6e.svg",
+      "bytes": 180519,
+      "sha256": "91495a82d3d54cec7157c197e98c1ee4a531f3f2039904fd1c355f581354bb7e"
+    },
+    {
+      "source": "static/files/tracking-bench.py",
+      "target": "static/orioledb/assets/tracking-bench.py",
+      "bytes": 28975,
+      "sha256": "626a8777450f4ec9d36676cacf36e87471e1978e41b7bfb4ebcca19c618fb3ad"
+    },
+    {
+      "source": "static/licenses/LICENSE-POSTGRESQL.txt",
+      "target": "static/third_party/orioledb/LICENSE-POSTGRESQL.txt",
+      "bytes": 938,
+      "sha256": "765023a1a6fe200e9936c7d5c5026cda2199f41eca781029ac26a51e2ba0ad23"
+    }
+  ]
+}
