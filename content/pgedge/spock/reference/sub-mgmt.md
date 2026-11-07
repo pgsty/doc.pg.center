@@ -1,0 +1,398 @@
+---
+title: Subscription Management Functions
+description: Each node in a multi-master scenario contains one or more subscriptions that identify the publisher
+  node; the subscriber acts as the replication target for the publisher.
+weight: 200
+upstream_source: pgedge-spock
+upstream_link: https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/spock_functions/sub_mgmt.md
+upstream_modified: true
+upstream_ref: 4ac1aec2f080
+source_kind: pinned-main-snapshot
+type: docs
+---
+
+
+
+Each node in a multi-master scenario contains one or more subscriptions that
+identify the publisher node; the subscriber acts as the replication target for
+the publisher.
+
+
+| Command  | Description
+|----------|-------------
+| [spock.sub_create](/pgedge/spock/reference/functions/spock-sub-create/) | Create a subscription.
+| [spock.sub_drop](/pgedge/spock/reference/functions/spock-sub-drop/) | Drop a subscription.
+| [spock.sub_disable](/pgedge/spock/reference/functions/spock-sub-disable/) | Disable a subscription and disconnect it from the provider.
+| [spock.sub_enable](/pgedge/spock/reference/functions/spock-sub-enable/) | Enables a disabled subscription.
+| [spock.sub_alter_interface](/pgedge/spock/reference/functions/spock-sub-alter-interface/) | Switch the subscription to use a different interface to connect to the provider node.
+| [spock.sub_alter_sync](/pgedge/spock/reference/functions/spock-sub-alter-sync/) | Synchronize all unsynchronized tables in a single operation.
+| [spock.sub_alter_options](/pgedge/spock/reference/functions/spock-sub-alter-options/) | Change one or more subscription options in a single atomic operation.
+| [spock.sub_resync_table](/pgedge/spock/reference/functions/spock-sub-resync-table/) | Resynchronize a single table.
+| [spock.sub_wait_for_sync](/pgedge/spock/reference/functions/spock-sub-wait-for-sync/) | Wait for a subscription to finish synchronization after a `spock.sub_create` or `spock.sub_alter_sync`.
+| [spock.table_wait_for_sync](/pgedge/spock/reference/functions/spock-table-wait-for-sync/) | Wait only for the subscription's initial sync and a named table.
+| [spock.sub_show_status](/pgedge/spock/reference/functions/spock-sub-show-status/) | Shows status and basic information about subscription.
+| [spock.sub_show_table](/pgedge/spock/reference/functions/spock-sub-show-table/) | Shows synchronization status of a table.
+| [spock.sub_add_repset](/pgedge/spock/reference/functions/spock-sub-add-repset/) | Adds a replication set to a subscriber.
+| [spock.sub_remove_repset](/pgedge/spock/reference/functions/spock-sub-remove-repset/) | Removes a replication set from a subscriber.
+
+## Creating a Subscription {#creating-a-subscription}
+
+To create a subscription from the current node to a publisher node with Spock,
+connect to the server with psql and invoke the `spock.sub_create` command:
+
+```sql
+SELECT spock.sub_create(subscription_name, provider_dsn, replication_sets,
+    synchronize_structure, synchronize_data, forward_origins, apply_delay,
+    force_text_transfer, enabled, skip_schema)
+```
+
+Parameters include:
+
+- `subscription_name` is the unique name of the subscription.
+- `provider_dsn` is the connection string to a provider.
+- `replication_sets` is an array of replication sets that you wish to
+  subscribe to. The sets must already exist; the default is
+  `{default,default_insert_only,ddl_sql}`.
+- `synchronize_structure` is a boolean value that specifies if Spock should
+  synchronize the structure from provider to the subscriber; the default is
+  `false`.
+- `synchronize_data` specifies if Spock should synchronize data from
+  provider to the subscriber; the default is `false`.
+- `forward_origins` is an array of origin names to forward. See
+  [Origin Forwarding](#origin-forwarding) below for supported values and the
+  restriction on combining this with other enabled subscriptions.
+- `apply_delay` specifies how long to delay replication; the default is `0`
+  seconds.
+- set `force_text_transfer` to `true` to force the provider to replicate all
+  columns using a text representation (which is slower, but may be used to
+  change the type of a replicated column on the subscriber); the default is
+  `false`.
+- `enabled` controls whether the subscription is started immediately after
+  creation. The default is `true`.
+- `skip_schema` is an array of schema names whose changes should be ignored
+  by the apply worker. The default is `{}` (an empty array, meaning no
+  schemas are skipped).
+
+For example, the following command:
+
+```sql
+SELECT spock.sub_create('accts',
+    'host=178.12.15.12 user=carol dbname=accounting',
+    ARRAY['payables']);
+```
+
+Creates a subscription named `accts` that connects to the `accounting`
+database on `178.12.15.12`, authenticating with the credentials of a user
+named `carol`. The `payables` replication set is subscribed to the new
+subscription.
+
+## Dropping a Subscription {#dropping-a-subscription}
+
+To drop a subscription with Spock, connect to the server with psql and invoke
+the `spock.sub_drop` command:
+
+```sql
+SELECT spock.sub_drop(subscription_name, ifexists)
+```
+
+Parameters include:
+
+- `subscription_name` is the name of the existing subscription.
+- if `ifexists` is `true`, an error is not thrown if the specified
+  subscription does not exist; the default is `false`.
+
+For example, the following command:
+
+```sql
+SELECT spock.sub_drop('accts', true);
+```
+
+Drops a subscription named `accts`; if the subscription does not exist, an
+error message will be suppressed by the `true` trailing parameter (`ifexists =
+true`).
+
+## Origin Forwarding {#origin-forwarding}
+
+`forward_origins` controls whether a subscription's apply worker also
+processes transactions that did not originate on the immediate provider, but
+were relayed through it from a peer further upstream (a cascade or multi-hop
+topology). `{}` (the default) forwards only the provider's own
+locally-originated changes — the setting used for ordinary bidirectional
+replication between two nodes, since forwarding a peer's changes back to
+itself would loop. `{all}` forwards every change regardless of origin.
+
+A forwarding worker advances the replication origin of the local subscription
+matching the peer it's relaying (for example, a subscription to that peer
+created disabled ahead of time, so it can later start from the right
+position instead of a full resync). At most one local subscription may match
+a given peer; if more than one does, replication fails with an ambiguous-match
+error. If the matching subscription is also enabled, its own apply worker
+owns the same origin, and the two would conflict. Spock avoids this by
+requiring that a subscription with forwarding active be the only enabled
+subscription on the node:
+
+- Enabling forwarding (`{all}`) on a subscription — via `spock.sub_create`
+  with `enabled := true`, `spock.sub_enable`, or `spock.sub_alter_options`
+  on an already-enabled subscription — fails if another subscription is
+  already enabled on this node.
+- Enabling a subscription (`spock.sub_create` with `enabled := true`, or
+  `spock.sub_enable`) fails if another subscription on this node already has
+  forwarding active.
+- Changing `forward_origins` on a subscription that stays disabled is always
+  allowed; the restriction is only checked once the subscription is actually
+  enabled.
+
+## Subscription Management Functions {#subscription-management-functions-1}
+
+You can use the following settings to control and manage your subscriptions.
+
+### spock.sub_create {#spocksub_create}
+
+Use `spock.sub_create` to create a subscription from current node to the
+provider node.
+
+`spock.sub_create(subscription_name name, provider_dsn text,
+replication_sets text[], synchronize_structure boolean,
+synchronize_data boolean, forward_origins text[], apply_delay interval,
+force_text_transfer boolean, enabled boolean, skip_schema text[])`
+
+The command does not wait for completion before returning to the caller.
+
+Parameters:
+
+- `subscription_name` is the unique name of the subscription.
+- `provider_dsn` is the connection string to a provider.
+- `replication_sets` is an array of existing replication sets to which you
+  are subscribing. The default is `{default,default_insert_only,ddl_sql}`.
+- `synchronize_structure` tells Spock if it should synchronize the
+  structure from the provider to the subscriber; the default is `false`.
+- `synchronize_data` tells Spock to synchronize data from provider to the
+  subscriber; the default is `false`.
+- `forward_origins` is an array of origin names to forward. See
+  [Origin Forwarding](#origin-forwarding) above for supported values and the
+  restriction on combining this with other enabled subscriptions.
+- `apply_delay` is the number of seconds to delay replication; the default
+  is `0` seconds.
+- `force_text_transfer` forces the provider to replicate all columns using
+  a text representation (which is slower, but may be used to change the type
+  of a replicated column on the subscriber) when set to `true`. The default
+  is `false`.
+- `enabled` controls whether the subscription is started immediately after
+  creation. The default is `true`.
+- `skip_schema` is an array of schema names whose changes should be ignored
+  by the apply worker. The default is `{}`.
+
+The `subscription_name` is used as `application_name` by the replication
+connection. This means that it's visible in the `pg_stat_replication`
+monitoring view. It can also be used in `synchronous_standby_names` when
+Spock is used as part of a synchronous replication setup.
+
+Use `spock.sub_wait_for_sync(subscription_name)` to wait for the
+subscription to asynchronously start replicating and complete any needed
+schema and/or data sync.
+
+### spock.sub_drop {#spocksub_drop}
+
+Use `spock.sub_drop` to disconnect the subscription and remove it from the
+catalog.
+
+`spock.sub_drop(subscription_name name, ifexists bool)`
+
+Parameters:
+
+- `subscription_name` is the name of an existing subscription.
+- `ifexists` tells the Spock extension how to handle the error if the
+  subscription does not exist. If `true`, an error is not thrown if the
+  subscription does not exist; the default is `false`.
+
+### spock.sub_disable {#spocksub_disable}
+
+Use `spock.sub_disable` to disable a subscription and disconnect it from the
+provider.
+
+`spock.sub_disable(subscription_name name, immediate bool)`
+
+Parameters:
+
+- `subscription_name` is the name of an existing subscription.
+- `immediate` tells Spock when to stop the subscription. If set to `true`,
+  the subscription is stopped immediately; if set to `false` (the default),
+  it will be only stopped at the end of current transaction.
+
+### spock.sub_enable {#spocksub_enable}
+
+Use `spock.sub_enable` to enable a disabled subscription.
+
+`spock.sub_enable(subscription_name name, immediate bool)`
+
+Parameters:
+- `subscription_name` is the name of the existing subscription.
+- `immediate` tells Spock when to start the subscription. If set to `true`,
+  the subscription is started immediately; if set to `false` (the default),
+  it will only be started at the end of the current transaction.
+
+This fails if another subscription on this node already has forwarding
+active; see [Origin Forwarding](#origin-forwarding) above.
+
+### spock.sub_alter_interface {#spocksub_alter_interface}
+
+Use `spock.sub_alter_interface` to modify the subscription to use a different
+interface to connect to provider node.
+
+`spock.sub_alter_interface(subscription_name name, interface_name name)`
+
+Parameters:
+
+- `subscription_name` is the name of an existing subscription.
+- `interface_name` is the name of an existing interface of the current
+  provider node.
+
+### spock.sub_alter_sync {#spocksub_alter_sync}
+
+Use `spock.sub_alter_sync` to synchronize all unsynchronized tables in all sets in a
+single operation.
+
+`spock.sub_alter_sync(subscription_name name, truncate boolean DEFAULT false)`
+
+Tables are copied and synchronized one by one. The command does not wait for
+completion before returning to the caller. Use `spock.sub_wait_for_sync` to
+wait for completion.
+
+Parameters:
+
+- `subscription_name` is the name of an existing subscription.
+- `truncate` tells Spock if it should truncate tables before copying. If
+  `true`, tables will be truncated before copy; the default is `false`.
+
+### spock.sub_resync_table {#spocksub_resync_table}
+
+Use `spock.sub_resync_table` to resynchronize an existing table.
+
+`spock.sub_resync_table(subscription_name name, relation regclass)`
+
+The table may not be the target of any foreign key constraints.
+
+After scheduling the resynchronization, the function raises a `WARNING` if
+the cached `spock.node` row of the provider differs from the provider's own
+row; see [spock.sub_resync_table](/pgedge/spock/reference/functions/spock-sub-resync-table/).
+
+
+> [!WARNING]
+> This function will truncate the table immediately, and only then begin
+> synchronising it, so it will be empty while being synced. The command does
+> not wait for completion before returning to the caller; use
+> `spock.table_wait_for_sync` to wait for completion.
+>
+
+Parameters:
+
+- `subscription_name` is the name of an existing subscription.
+- `relation` is the name of an existing table, optionally qualified.
+
+### spock.sub_wait_for_sync {#spocksub_wait_for_sync}
+
+Use `spock.sub_wait_for_sync` to wait for a subscription to finish
+synchronization after a `spock.sub_create` or `spock.sub_alter_sync`.
+
+`spock.sub_wait_for_sync(subscription_name name)`
+
+This function waits until the subscription's initial schema/data sync, if any,
+are done, and until any tables pending individual resynchronisation have also
+finished synchronising.
+
+Parameters:
+
+- `subscription_name` is the name of an existing subscription.
+
+For best results, run `SELECT spock.wait_slot_confirm_lsn(NULL, NULL)` on the
+provider after any replication set changes that requested resyncs, and only
+then call `spock.sub_wait_for_sync` on the subscriber.
+
+### spock.table_wait_for_sync {#spocktable_wait_for_sync}
+
+Use `spock.table_wait_for_sync` to wait only for the subscription's initial
+sync and the named table.
+
+`spock.table_wait_for_sync(subscription_name name, relation regclass)`
+
+Same as `spock.sub_wait_for_sync`, but waits only for the subscription's
+initial sync and the named table. Other tables pending resynchronisation are
+ignored.
+
+### spock.wait_slot_confirm_lsn {#spockwait_slot_confirm_lsn}
+
+Use `spock.wait_slot_confirm_lsn` to wait until all replication slots on the
+current node have replayed up to the xlog insert position at time of call on
+all providers.
+
+`SELECT spock.wait_slot_confirm_lsn(NULL, NULL)`
+
+Returns when all slots' `confirmed_flush_lsn` passes the
+`pg_current_wal_insert_lsn()` at time of call.
+
+Options include:
+
+- optionally may wait for only one replication slot (first argument).
+- optionally may wait for an arbitrary log sequence number (LSN) passed
+  instead of the insert LSN (second argument); both are usually just left
+  `NULL`.
+
+This function is very useful to ensure all subscribers have received changes
+up to a certain point on the provider.
+
+### spock.sub_show_status {#spocksub_show_status}
+
+Use `spock.sub_show_status` to show status and basic information about a
+subscription.
+
+`spock.sub_show_status(subscription_name name DEFAULT NULL)`
+
+Parameters:
+
+- `subscription_name` is the optional name of an existing subscription. If
+  omitted (or `NULL`), the function will show the status of all
+  subscriptions on the local node.
+
+The function returns one row per subscription with these columns:
+`subscription_name`, `status`, `provider_node`, `provider_dsn`,
+`slot_name`, `replication_sets`, `forward_origins`.
+
+### spock.sub_show_table {#spocksub_show_table}
+
+Use `spock.sub_show_table` to show the synchronization status of a table.
+
+`spock.sub_show_table(subscription_name name, relation regclass)`
+
+Parameters:
+
+- `subscription_name` is the name of an existing subscription.
+- `relation` is the name of an existing table, optionally qualified.
+
+### spock.sub_add_repset {#spocksub_add_repset}
+
+Use `spock.sub_add_repset` to add one replication set into a subscriber.
+
+`spock.sub_add_repset(subscription_name name, replication_set name)`
+
+Does not synchronize, only activates consumption of events.
+
+Parameters:
+
+- `subscription_name` is the name of an existing subscription.
+- `replication_set` is the name of a replication set to add to the
+  specified subscription.
+
+### spock.sub_remove_repset {#spocksub_remove_repset}
+
+Use `spock.sub_remove_repset` to remove one replication set from a subscriber.
+
+`spock.sub_remove_repset(subscription_name name, replication_set name)`
+
+Parameters:
+
+- `subscription_name` is the name of the existing subscription.
+- `replication_set` is the name of replication set to remove.
+
+---
+
+[Upstream source](https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/spock_functions/sub_mgmt.md) · `4ac1aec2f080` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).

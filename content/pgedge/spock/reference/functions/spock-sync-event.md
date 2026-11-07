@@ -1,0 +1,76 @@
+---
+title: spock.sync_event
+description: The spock.syncevent() function creates a synchronization event in the replication stream and returns
+  its Log Sequence Number (LSN).
+weight: 200
+upstream_source: pgedge-spock
+upstream_link: https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/spock_functions/functions/spock_sync_event.md
+upstream_modified: true
+upstream_ref: 4ac1aec2f080
+source_kind: pinned-main-snapshot
+type: docs
+---
+
+
+
+The `spock.sync_event()` function creates a synchronization event in the
+replication stream and returns its Log Sequence Number (LSN).
+
+## Synopsis {#synopsis}
+
+```sql
+spock.sync_event(transactional boolean DEFAULT false)
+```
+
+## Returns {#returns}
+
+The function returns the Log Sequence Number (LSN) of the created
+synchronization event as `pg_lsn`.
+
+## Description {#description}
+
+The `spock.sync_event()` function creates a synchronization event in the
+replication stream and returns its LSN.
+
+This function inserts a special synchronization marker into the logical
+replication stream at the current write position. The returned LSN identifies
+this marker's location in the write-ahead log and can be used with functions
+like `spock.wait_slot_confirm_lsn()` to verify that subscribers have processed
+replication up to this point.
+
+Synchronization events are useful for coordinating activities across multiple
+nodes in a replication topology. By creating a sync event on a provider and
+then waiting for subscribers to reach that LSN, you can ensure all nodes have
+processed a consistent set of changes before proceeding with operations that
+depend on synchronized state.
+
+The sync event itself does not contain data or modify any tables; the event
+serves purely as a coordination marker in the replication stream.
+
+This function modifies the replication stream by inserting a sync marker.
+
+## Arguments {#arguments}
+
+- `transactional` (optional, default `false`) - When `false`, the sync
+  event marker is emitted immediately into the WAL stream, independent of
+  the calling transaction. When `true`, the marker is bound to the calling
+  transaction and is only visible to subscribers if the transaction
+  commits.
+
+## Example {#example}
+
+In the following example, the `spock.sync_event()` function creates a
+synchronization event and returns the LSN:
+
+```sql
+SELECT spock.sync_event();
+-[ RECORD 1 ]---------
+sync_event | 0/333F410
+```
+
+For more information about using synchronization events with Zero-Downtime Add
+Node, see the [ZODAN Tutorial](/pgedge/spock/modify/zodan/zodan-tutorial/).
+
+---
+
+[Upstream source](https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/spock_functions/functions/spock_sync_event.md) · `4ac1aec2f080` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).
