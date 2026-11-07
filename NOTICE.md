@@ -91,3 +91,26 @@ the 32px and 256px PNG favicons and the touch icon are the original PNG entries
 extracted from that ICO without changing their pixels. It is a mark of the PostgreSQL
 Community Association of Canada and is used to refer to PostgreSQL under the
 project's trademark and logo policy. Its use does not imply endorsement.
+
+The collection marks that orbit Slonik on the home page are each project's
+own logo, listed in `data/logos.yaml` and stored under `static/img/logo/`
+(Patroni and pgBadger reuse the logos already shipped with their manuals under
+`static/img/patroni/` and `static/img/pgbadger/`). pgBackRest's armchair is
+`doc/resource/logo.svg` from the pgbackrest repository with its embedded
+colour-scheme stylesheet removed; the HAProxy Community Edition sphere is a
+downscaled raster of that logo; the etcd, PolarDB, IvorySQL, Babelfish,
+Percona, Apache Cloudberry, Citus, pgEdge, FerretDB (shown for the DocumentDB
+collection), and OrioleDB marks and the HaloTech mark shown for OpenHalo are
+the copies collected for the Pigsty website (`static/img/icon/` in
+`pgsty/pigsty.cc`), unmodified apart from scaling and the removal of
+PolarDB's inline size attribute; the AgensGraph mark is the "A" glyph cropped
+from the same copy of Bitnine's AGEDB wordmark. Each mark remains the
+trademark of its owner, is used only to refer to that project's documentation,
+and does not imply endorsement.
+
+PgBouncer publishes no logo, so `static/img/logo/pgbouncer.svg` is an
+original mark drawn for this site (an elephant on the rebound, in the tile
+style of the Patroni logo). It is site-authored artwork under the site's
+CC BY 4.0 terms, not an official PgBouncer logo, and it implies no
+endorsement by the PgBouncer project.
+

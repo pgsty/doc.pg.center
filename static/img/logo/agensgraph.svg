@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 373 430" width="373" height="430">
+<!-- The "A" of the AGEDB wordmark (Bitnine), cropped from the Pigsty website copy; see NOTICE.md. -->
+<defs><linearGradient id="paint5_linear_6_2" x1="6.3400002" y1="215.09" x2="1268.36" y2="215.09" gradientUnits="userSpaceOnUse"><stop stop-color="#31457F" id="stop49" /><stop offset="1" stop-color="#C42B5B" id="stop51" /></linearGradient></defs>
+<path d="M 316.15,299.61 194.16,19.09 185.84,0 177.61,19.09 1.53,426.64 0,430.18 h 68.84 l 221.13,-78.49 33.89,78.49 h 49.08 l -40.66,-93.51 -16.12,-37.06 z m -249.79,88.61 5.91,-13.73 113.57,-263.96 88.1,204.05 z" fill="url(#paint5_linear_6_2)" style="fill:url(#paint5_linear_6_2)" />
+</svg>

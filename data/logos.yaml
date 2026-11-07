@@ -1,0 +1,26 @@
+# Brand marks for the home page -- the hero orbit and the manual cards, both
+# resolved through layouts/_partials/pgsql/logo.html -- keyed by collection
+# route so the eight data/home/<lang>.yaml files need no per-language copy.
+# `src` is relative to static/. Every mark is shown in the same square box;
+# `dark` says how a card lifts a mark that would sink into the dark ground
+# (`mono`: white silhouette, `invert`: flip a black-and-white mark, `rim`: a
+# light edge). A collection without an entry falls back to the Font Awesome
+# `icon` of its home card. Sources and trademark notices: NOTICE.md.
+postgresql: { src: img/slonik.svg, dark: rim }
+patroni:    { src: img/patroni/patroni-logo.svg }
+pgbackrest: { src: img/logo/pgbackrest.svg, dark: mono }
+pgbouncer:  { src: img/logo/pgbouncer.svg }
+pgbadger:   { src: img/pgbadger/logo.png, dark: invert }
+haproxy:    { src: img/logo/haproxy.png }
+etcd:       { src: img/logo/etcd.svg }
+polardb:    { src: img/logo/polardb.svg }
+ivorysql:   { src: img/logo/ivorysql.svg }
+openhalo:   { src: img/logo/openhalo.png }
+babelfish:  { src: img/logo/babelfish.svg }
+percona:    { src: img/logo/percona.svg }
+cloudberry: { src: img/logo/cloudberry.svg }
+citus:      { src: img/logo/citus.svg, dark: mono }
+agensgraph: { src: img/logo/agensgraph.svg }
+pgedge:     { src: img/logo/pgedge.svg }
+documentdb: { src: img/logo/documentdb.svg, dark: mono }
+orioledb:   { src: img/logo/orioledb.png }

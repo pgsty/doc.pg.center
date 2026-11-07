@@ -1,0 +1,15 @@
+{{- /* Resolve the brand mark for a home-page item. The item's own `logo`
+     (a path, or a map with `src`/`wide`) wins; otherwise data/logos.yaml is
+     read by the last segment of the item's route (`/patroni/` -> patroni).
+     Returns a map that may be empty, so callers test `.src` and fall back to
+     the item's Font Awesome `icon`. Shared by the hero orbit and the manual
+     cards so the two cannot show different marks for one collection. */ -}}
+{{- $item := .item -}}
+{{- $logo := dict -}}
+{{- with ($item.url | default $item.href) -}}
+  {{- with index (hugo.Data.logos | default dict) (path.Base .) }}{{ $logo = . }}{{ end -}}
+{{- end -}}
+{{- with $item.logo -}}
+  {{- if reflect.IsMap . }}{{ $logo = . }}{{ else }}{{ $logo = dict "src" . }}{{ end -}}
+{{- end -}}
+{{- return $logo -}}
