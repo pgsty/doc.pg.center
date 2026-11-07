@@ -1,0 +1,12 @@
+---
+title: Administration
+description: Manage tables, diagnose queries, tune performance, and upgrade Citus.
+weight: 50
+type: docs
+icon: fa-solid fa-gears
+upstream_source: citus
+upstream_link: https://learn.microsoft.com/en-us/postgresql/citus/?view=citus-14
+section_index: list
+---
+
+
