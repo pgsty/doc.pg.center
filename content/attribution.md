@@ -42,7 +42,7 @@ which licence, and where the complete upstream notice is retained.
 | [Halo Database MySQL reference](/openhalo/mysql-compatibility/) | [Halo Database official documentation](https://doc.halodbtech.com/multi-mode-compatibility/mysql) | 1.0.16; snapshot 2026-11-07 | LicenseRef-HaloDB-Docs | [Source and terms](#halodb) |
 | [OpenHalo test evidence](/openhalo/mysql-compatibility-gaps/) | [OpenHalo MySQL compatibility report](https://github.com/fxcollot/openHaloDocumentation) | OpenHalo 1.0.14.18; commit 80a8d07 | LicenseRef-OpenHalo-Test-Report | [Source and terms](#openhalo-tests) |
 | [Babelfish](/babelfish/) | [Babelfish project website](https://github.com/babelfish-for-postgresql/babelfish_project_website) | main @ f468c5ed3d38 | LicenseRef-Babelfish-Website | [Source and full notices](/babelfish/site/attribution/) |
-| [Percona pg_tde](/percona/) | [Percona pg_tde documentation](https://github.com/percona/pg_tde) | 2.2.2; docs 1660e66a | LicenseRef-pg-tde | [Source and full notices](/percona/assets/legal/pg_tde-COPYRIGHT.txt) |
+| [Percona TDE](/percona/) | [Percona pg_tde documentation](https://github.com/percona/pg_tde) | 2.2.2; docs 1660e66a | LicenseRef-pg-tde | [Source and full notices](/percona/assets/legal/pg_tde-COPYRIGHT.txt) |
 | [AgensGraph](/agensgraph/) | [AgensGraph documentation](https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/index.html) | 2.18.6.1 | Apache-2.0 | [Source and full notices](/agensgraph/site/attribution/) |
 | [pgEdge](/pgedge/) | [pgEdge extension documentation](https://github.com/pgEdge) | Fixed main snapshots; see component notices | PostgreSQL | [Source and full notices](/pgedge/about/attribution/) |
 | [DocumentDB](/documentdb/) | [DocumentDB documentation](https://github.com/documentdb/docs) | DocumentDB 1.0; docs cf69384; website 90cfa08 | LicenseRef-DocumentDB-Docs | [Source and full notices](https://github.com/documentdb/docs/tree/cf69384e6da9524cc0fc723e8ac5b6c0689af432) |
@@ -263,7 +263,7 @@ Imported from the bilingual community edition of `babelfish-for-postgresql/babel
 
 [Source and full notices](/babelfish/site/attribution/).
 
-## Percona pg_tde {#percona}
+## Percona TDE {#percona}
 
 The Percona collection currently contains pg_tde 2.2.2 documentation at `percona/pg_tde@1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39`, with 66 English articles and their Chinese translations, section indexes and PGSTY editorial guides. It is not the entire Percona product documentation. The complete pg_tde copyright text, including the PostgreSQL, University of California and Percona portions, is retained.
 

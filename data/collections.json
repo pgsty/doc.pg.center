@@ -136,7 +136,7 @@
     "paired": true
   },
   "percona": {
-    "name": "Percona pg_tde",
+    "name": "Percona TDE",
     "languages": [
       "en",
       "zh"

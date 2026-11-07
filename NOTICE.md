@@ -156,7 +156,7 @@ Imported from the bilingual community edition of `babelfish-for-postgresql/babel
 
 Source records: `data/imports/babelfish.json`; registry: `data/upstreams.yaml`.
 
-## Percona pg_tde
+## Percona TDE
 
 The Percona collection currently contains pg_tde 2.2.2 documentation at `percona/pg_tde@1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39`, with 66 English articles and their Chinese translations, section indexes and PGSTY editorial guides. It is not the entire Percona product documentation. The complete pg_tde copyright text, including the PostgreSQL, University of California and Percona portions, is retained.
 

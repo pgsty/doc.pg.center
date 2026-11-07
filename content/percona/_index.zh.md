@@ -1,7 +1,7 @@
 ---
 upstream_link: https://github.com/percona/pg_tde/tree/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
-title: Percona pg_tde 文档
-linkTitle: Percona pg_tde
+title: Percona TDE 文档
+linkTitle: Percona TDE
 description: 从加密原理到安装、运维和参考的完整 pg_tde 文档。
 no_list: true
 type: docs

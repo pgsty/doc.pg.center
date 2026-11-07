@@ -53,7 +53,7 @@ recorded per collection.
 | IvorySQL | IvorySQL administration, Oracle compatibility, reference, migration, ecosystem, and development | en, zh |
 | OpenHalo | OpenHalo and Halo Database MySQL compatibility, usage, boundaries, build, and configuration | en, zh |
 | Babelfish | Babelfish usage, installation, compatibility, APIs, design, release history, and project material | en, zh |
-| Percona pg_tde | Transparent data encryption architecture, installation, configuration, commands, operations, and reference | en, zh |
+| Percona TDE | Transparent data encryption architecture, installation, configuration, commands, operations, and reference | en, zh |
 | Apache Cloudberry | 2.x MPP database build, deployment, data, performance, security, administration, references, PXF, and Core Internals | en, zh |
 | AgensGraph | Graph database concepts, SQL/Cypher querying, operations, search, reference, and release notes | en, zh |
 | pgEdge | Spock, LOLOR, SafeSession, Snowflake, installation, operations, recovery, and reference | en, zh |
@@ -183,7 +183,7 @@ The import preserves upstream asymmetry and incomplete translation honestly.
 PolarDB and IvorySQL retain unequal source language editions; AgensGraph keeps
 Chinese draft pages and guide-only placeholders; pgEdge keeps its Chinese draft
 coverage. DocumentDB has 300 complete English/Chinese page pairs. OpenHalo,
-Babelfish, Percona pg_tde, and Cloudberry also have paired English and Chinese pages
+Babelfish, Percona TDE, and Cloudberry also have paired English and Chinese pages
 for the imported scope. Do not put English prose into a Chinese page or label a
 placeholder or machine draft as reviewed translation.
 

@@ -187,7 +187,7 @@ kernels:
       icon: fa-solid fa-book-open
   - title: Babelfish
     meta: SQL Server 兼容
-    version: f468c5e
+    version: '6.2.0'
     icon: fa-solid fa-fish
     desc: 通过 TDS 协议执行 T-SQL，查阅安装流程、兼容范围与迁移方法。
     url: /babelfish/
@@ -207,7 +207,7 @@ kernels:
       icon: fa-solid fa-book-open
   - title: PolarDB
     meta: 共享存储
-    version: b4733b0
+    version: '17.10.1.0'
     icon: fa-solid fa-cloud
     desc: 查阅共享存储、弹性并行查询、部署运维与 PolarDB 内核原理。
     url: /polardb/
@@ -268,7 +268,7 @@ kernels:
       icon: fa-solid fa-book-open
   - title: pgEdge
     meta: 分布式 PostgreSQL
-    version: main 快照
+    version: '6.0.0-beta.2'
     icon: fa-solid fa-share-nodes
     desc: 以 Spock 运行多主复制，配合大对象复制、全局 ID 与会话保护。
     url: /pgedge/
@@ -286,13 +286,13 @@ kernels:
     - title: Snowflake
       url: /pgedge/snowflake/
       icon: fa-solid fa-book-open
-  - title: Percona pg_tde
+  - title: Percona TDE
     meta: 透明数据加密
     version: 2.2.2
     icon: fa-solid fa-shield-halved
     desc: 加密 PostgreSQL 数据表与 WAL，管理密钥并规划备份恢复流程。
     url: /percona/
-    shortcuts_label: Percona pg_tde 文档入口
+    shortcuts_label: Percona TDE 文档入口
     shortcuts:
     - title: 安装
       url: /percona/install/
@@ -308,7 +308,7 @@ kernels:
       icon: fa-solid fa-book-open
   - title: OpenHalo
     meta: MySQL 兼容
-    version: OpenHalo 90fc8d7 · Halo 1.0.16
+    version: '1.0.0-beta.1'
     icon: fa-solid fa-circle-nodes
     desc: 编译和配置 OpenHalo，在 PostgreSQL 上运行 MySQL 协议与 SQL。
     url: /openhalo/
@@ -328,7 +328,7 @@ kernels:
       icon: fa-solid fa-book-open
   - title: Apache Cloudberry
     meta: MPP 分析数据库
-    version: 2.2.0-incubating
+    version: '2.2.0'
     icon: fa-solid fa-cubes-stacked
     desc: 部署和管理 Cloudberry，查阅 SQL 参考、PXF 与内核原理手册。
     url: /cloudberry/

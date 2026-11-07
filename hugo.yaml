@@ -101,7 +101,7 @@ languages:
             icon: fa-solid fa-fish
         - identifier: percona
           parent: kernels
-          name: Percona
+          name: Percona TDE
           pageRef: /percona
           weight: 50
           params:
@@ -278,7 +278,7 @@ languages:
             icon: fa-solid fa-fish
         - identifier: percona
           parent: kernels
-          name: Percona
+          name: Percona TDE
           pageRef: /percona
           weight: 50
           params:

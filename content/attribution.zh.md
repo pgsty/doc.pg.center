@@ -39,7 +39,7 @@ PG.CENTER 转载并整理了PostgreSQL 运维工具和数据库内核项目的�
 | [Halo Database MySQL 参考](/openhalo/mysql-compatibility/) | [Halo Database 官方文档](https://doc.halodbtech.com/multi-mode-compatibility/mysql) | 1.0.16；2026-11-07 快照 | LicenseRef-HaloDB-Docs | [来源与条款](#halodb) |
 | [OpenHalo 测试证据](/openhalo/mysql-compatibility-gaps/) | [OpenHalo MySQL 兼容性测试报告](https://github.com/fxcollot/openHaloDocumentation) | OpenHalo 1.0.14.18；提交 80a8d07 | LicenseRef-OpenHalo-Test-Report | [来源与条款](#openhalo-tests) |
 | [Babelfish](/babelfish/) | [Babelfish project website](https://github.com/babelfish-for-postgresql/babelfish_project_website) | main @ f468c5ed3d38 | LicenseRef-Babelfish-Website | [来源与完整声明](/babelfish/site/attribution/) |
-| [Percona pg_tde](/percona/) | [Percona pg_tde documentation](https://github.com/percona/pg_tde) | 2.2.2; docs 1660e66a | LicenseRef-pg-tde | [来源与完整声明](/percona/assets/legal/pg_tde-COPYRIGHT.txt) |
+| [Percona TDE](/percona/) | [Percona pg_tde documentation](https://github.com/percona/pg_tde) | 2.2.2; docs 1660e66a | LicenseRef-pg-tde | [来源与完整声明](/percona/assets/legal/pg_tde-COPYRIGHT.txt) |
 | [AgensGraph](/agensgraph/) | [AgensGraph documentation](https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/index.html) | 2.18.6.1 | Apache-2.0 | [来源与完整声明](/agensgraph/site/attribution/) |
 | [pgEdge](/pgedge/) | [pgEdge extension documentation](https://github.com/pgEdge) | Fixed main snapshots; see component notices | PostgreSQL | [来源与完整声明](/pgedge/about/attribution/) |
 | [DocumentDB](/documentdb/) | [DocumentDB documentation](https://github.com/documentdb/docs) | DocumentDB 1.0; docs cf69384; website 90cfa08 | LicenseRef-DocumentDB-Docs | [来源与完整声明](https://github.com/documentdb/docs/tree/cf69384e6da9524cc0fc723e8ac5b6c0689af432) |
@@ -234,7 +234,7 @@ MySQL 兼容指南整理自 [Halo Database 官方文档](https://doc.halodbtech.
 
 [来源与完整声明](/babelfish/site/attribution/)。
 
-## Percona pg_tde {#percona}
+## Percona TDE {#percona}
 
 Percona 栏目目前收录 pg_tde 2.2.2，固定 `percona/pg_tde@1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39`，含 66 篇英文正文及其中文译文、栏目索引和 PGSTY 编辑导读，不代表全部 Percona 产品文档。完整保留 pg_tde 版权文本中的 PostgreSQL、加州大学与 Percona 各部分条款。
 

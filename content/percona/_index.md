@@ -1,7 +1,7 @@
 ---
 upstream_link: https://github.com/percona/pg_tde/tree/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
-title: Percona pg_tde documentation
-linkTitle: Percona pg_tde
+title: Percona TDE documentation
+linkTitle: Percona TDE
 description: The complete pg_tde documentation, organized from first principles through installation, operations,
   and reference.
 no_list: true

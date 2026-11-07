@@ -187,7 +187,7 @@ kernels:
       icon: fa-solid fa-book-open
   - title: Babelfish
     meta: SQL Server compatibility
-    version: f468c5e
+    version: '6.2.0'
     icon: fa-solid fa-fish
     desc: Run T-SQL over the TDS protocol, with migration and compatibility guidance.
     url: /babelfish/
@@ -207,7 +207,7 @@ kernels:
       icon: fa-solid fa-book-open
   - title: PolarDB
     meta: Shared storage
-    version: b4733b0
+    version: '17.10.1.0'
     icon: fa-solid fa-cloud
     desc: Explore shared storage, elastic queries, deployment, and PolarDB internals.
     url: /polardb/
@@ -268,7 +268,7 @@ kernels:
       icon: fa-solid fa-book-open
   - title: pgEdge
     meta: Distributed PostgreSQL
-    version: main snapshots
+    version: '6.0.0-beta.2'
     icon: fa-solid fa-share-nodes
     desc: Run Spock replication with LOLOR, Snowflake identifiers, and SafeSession.
     url: /pgedge/
@@ -286,13 +286,13 @@ kernels:
     - title: Snowflake
       url: /pgedge/snowflake/
       icon: fa-solid fa-book-open
-  - title: Percona pg_tde
+  - title: Percona TDE
     meta: Transparent data encryption
     version: 2.2.2
     icon: fa-solid fa-shield-halved
     desc: Encrypt PostgreSQL tables and WAL, manage keys, and plan backup and recovery.
     url: /percona/
-    shortcuts_label: Percona pg_tde documentation shortcuts
+    shortcuts_label: Percona TDE documentation shortcuts
     shortcuts:
     - title: Installation
       url: /percona/install/
@@ -308,7 +308,7 @@ kernels:
       icon: fa-solid fa-book-open
   - title: OpenHalo
     meta: MySQL compatibility
-    version: OpenHalo 90fc8d7 · Halo 1.0.16
+    version: '1.0.0-beta.1'
     icon: fa-solid fa-circle-nodes
     desc: Build PostgreSQL with MySQL SQL syntax and client protocol compatibility.
     url: /openhalo/
@@ -328,7 +328,7 @@ kernels:
       icon: fa-solid fa-book-open
   - title: Apache Cloudberry
     meta: MPP analytics
-    version: 2.2.0-incubating
+    version: '2.2.0'
     icon: fa-solid fa-cubes-stacked
     desc: Deploy and operate Cloudberry, with SQL references, PXF, and core internals.
     url: /cloudberry/

@@ -26,7 +26,7 @@ Extended and the OINK theme, and maintained by PGSTY.
 | IvorySQL | Oracle compatibility, administration, reference, and development |
 | OpenHalo | MySQL compatibility reference, usage, boundaries, build, and configuration |
 | Babelfish | SQL Server compatibility, usage, APIs, design, and releases |
-| Percona pg_tde | Transparent data encryption architecture, commands, and operations |
+| Percona TDE | Transparent data encryption architecture, commands, and operations |
 | Apache Cloudberry | MPP database, administration, references, PXF, and Core Internals |
 | AgensGraph | Graph concepts, SQL/Cypher querying, operations, and reference |
 | pgEdge | Spock, LOLOR, SafeSession, Snowflake, and operations |

@@ -26,7 +26,7 @@ columns:
     url: /agensgraph/
   - label: pgEdge
     url: /pgedge/
-  - label: Percona
+  - label: Percona TDE
     url: /percona/
   - label: OpenHalo
     url: /openhalo/
