@@ -626,8 +626,8 @@
   --pgsql-orbit-size: clamp(320px, 31vw, 460px);
   --pgsql-orbit-r1: calc(var(--pgsql-orbit-size) * 0.27);
   --pgsql-orbit-r2: calc(var(--pgsql-orbit-size) * 0.42);
-  --pgsql-orbit-period-1: 48s;
-  --pgsql-orbit-period-2: 96s;
+  --pgsql-orbit-period-1: 32s;
+  --pgsql-orbit-period-2: 64s;
   --pgsql-orbit-chip: clamp(42px, calc(var(--pgsql-orbit-size) * 0.118), 54px);
   --pgsql-halo: rgba(51, 103, 145, 0.1);
   --pgsql-ring: color-mix(in srgb, var(--td-blue) 28%, var(--td-line));
@@ -721,6 +721,12 @@
   position: absolute;
   inset: 0;
   transform: rotate(var(--a, 0deg));
+
+  // The transform creates a stacking context: lift the whole satellite so
+  // its label can paint above every other satellite, including the outer ring.
+  &:hover {
+    z-index: 1;
+  }
 }
 
 .pgsql-orbit__spin {
