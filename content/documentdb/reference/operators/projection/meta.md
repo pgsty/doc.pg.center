@@ -1,0 +1,177 @@
+---
+title: $meta
+description: The $meta operator returns a calculated metadata column with returned dataset.
+type: docs
+upstream_source: documentdb
+upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/projection/$meta.md
+weight: 10
+---
+
+The `$meta` projection operator is used to include metadata in the results of a query. It's useful for including metadata such as text search scores or other computed values in the output documents.
+
+## Syntax {#syntax}
+
+The syntax for using the `$meta` projection operator is as follows:
+
+```javascript
+db.collection.find({
+    $text: {
+        $search: < string >
+    }
+}, {
+    field: {
+        $meta: < metaDataKeyword >
+    }
+})
+```
+
+## Parameters {#parameters}
+
+| Parameter | Description |
+| --- | --- |
+| **`field`** | The name of the field in the output documents where the metadata gets included. |
+| **`metaDataKeyword`** | The type of metadata to include. See the keywords below. |
+{.fields}
+
+| Keyword | Returns |
+| --- | --- |
+| **`textScore`** | The relevance score of a `$text` search. |
+| **`searchScore`** | The similarity score of a [`$vectorSearch`](/documentdb/reference/operators/aggregation/vectorsearch/). |
+| **`vectorSearchScore`** | Alias for `searchScore`; the keyword MongoDB Atlas uses with `$vectorSearch`. |
+| **`indexKey`** | Not supported — rejected with `Returning indexKey for $meta not supported`. |
+
+Any other keyword is rejected with `Argument provided to the $meta is not supported: <keyword>`.
+
+`$meta` is not limited to `find()` projections — `searchScore` and `vectorSearchScore` are read from an aggregation `$project` stage following `$vectorSearch`:
+
+```javascript
+db.products.aggregate([
+  { $vectorSearch: { queryVector: [0.9, 0.1, 0.05], path: "embedding", limit: 2 } },
+  { $project: { _id: 0, name: 1, score: { $meta: "searchScore" } } }
+])
+```
+
+## Examples {#examples}
+
+Consider this sample document from the stores collection.
+
+```json
+{
+  "_id": "34f462fe-5085-4a77-a3de-53f4117466bd",
+  "name": "Wide World Importers",
+  "location": {
+    "lat": -63.5435,
+    "lon": 77.7226
+  },
+  "staff": {
+    "totalStaff": {
+      "fullTime": 16,
+      "partTime": 16
+    }
+  },
+  "sales": {
+    "totalSales": 41481,
+    "salesByCategory": [
+      {
+        "categoryName": "Holiday Tableware",
+        "totalSales": 41481
+      }
+    ]
+  },
+  "promotionEvents": [
+    {
+      "eventName": "Crazy Deal Days",
+      "promotionalDates": {
+        "startDate": {
+          "Year": 2023,
+          "Month": 11,
+          "Day": 13
+        },
+        "endDate": {
+          "Year": 2023,
+          "Month": 11,
+          "Day": 22
+        }
+      },
+      "discounts": [
+        {
+          "categoryName": "Gift Boxes",
+          "discountPercentage": 9
+        },
+        {
+          "categoryName": "Holiday Tableware",
+          "discountPercentage": 24
+        }
+      ]
+    },
+    {
+      "eventName": "Incredible Savings Showcase",
+      "promotionalDates": {
+        "startDate": {
+          "Year": 2024,
+          "Month": 5,
+          "Day": 11
+        },
+        "endDate": {
+          "Year": 2024,
+          "Month": 5,
+          "Day": 20
+        }
+      },
+      "discounts": [
+        {
+          "categoryName": "Ribbons",
+          "discountPercentage": 15
+        },
+        {
+          "categoryName": "Gift Bags",
+          "discountPercentage": 25
+        }
+      ]
+    }
+  ],
+  "tag": [
+    "#ShopLocal",
+    "#FashionStore",
+    "#SeasonalSale",
+    "#FreeShipping",
+    "#MembershipDeals"
+  ]
+}
+
+```
+
+### Example 1: Including text search scores {#example-1-including-text-search-scores}
+
+To include the text search score in the results of a text search query.
+
+```javascript
+db.stores.createIndex({ "name": "text"});
+
+db.stores.find(
+    { $text: { $search: "Equipment Furniture Finds" } },
+    { _id: 1, name: 1, score: { $meta: "textScore" } }
+).sort({ score: { $meta: "textScore" } }).limit(2)
+
+```
+
+The first two results returned by this query are:
+
+```json
+[
+  {
+    _id: 'cf1448e9-5493-49b5-95da-ab8a105b5240',
+    name: 'Tailwind Traders | Camera Market - Wolfmouth',
+    score: 4
+  },
+  {
+    _id: '4fd389af-4693-4c02-93cf-0d80ae8ace07',
+    name: 'Wide World Importers | Camera Collection - South Cordelia',
+    score: 4
+  }
+]
+```
+
+## Limitation {#limitation}
+
+- `{ $meta: "indexKey" }` is not supported. It is rejected with `Returning indexKey for $meta not supported` whether or not the query uses an index.
