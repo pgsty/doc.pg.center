@@ -1,0 +1,2254 @@
+{
+  "component": "percona",
+  "source_site": "https://pgtde.pgsty.com/",
+  "pages": [
+    {
+      "source": "content/about/_index.md",
+      "target": "content/percona/site/_index.md",
+      "language": "en",
+      "old_route": "/about/",
+      "route": "/percona/site/",
+      "sha256": "375217a8a8b885ab65e5a9996229eeb5dcd290cece0a1e4cb4b5283d8b452432",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/about/_index.zh.md",
+      "target": "content/percona/site/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/about/",
+      "route": "/zh/percona/site/",
+      "sha256": "19b90a5f7b7f40ab67d3f75adc448f1081a43411fb6f86fd04dd5d75192d7aaa",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/about/attribution.md",
+      "target": "content/percona/site/attribution.md",
+      "language": "en",
+      "old_route": "/about/attribution/",
+      "route": "/percona/site/attribution/",
+      "sha256": "b49cae6d854125f8f8c0d84616bdf95b86285509e00455ba369bcdac920b02b4",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/about/attribution.zh.md",
+      "target": "content/percona/site/attribution.zh.md",
+      "language": "zh",
+      "old_route": "/zh/about/attribution/",
+      "route": "/zh/percona/site/attribution/",
+      "sha256": "7038c54fb8da8ae5e308c9e9105b4b920d392c2211adc644d24ec47a07ddbd5e",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/about/errata.md",
+      "target": "content/percona/site/errata.md",
+      "language": "en",
+      "old_route": "/about/errata/",
+      "route": "/percona/site/errata/",
+      "sha256": "ad68cad6c0991180b117bee306a8e0b490ebedcc4fd390448adcf98a839444b5",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/about/errata.zh.md",
+      "target": "content/percona/site/errata.zh.md",
+      "language": "zh",
+      "old_route": "/zh/about/errata/",
+      "route": "/zh/percona/site/errata/",
+      "sha256": "fdf718a0717b06e30be041633db4f68422066092f3eabc4f45878ce72a88b685",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/_index.md",
+      "target": "content/percona/blog/_index.md",
+      "language": "en",
+      "old_route": "/blog/",
+      "route": "/percona/blog/",
+      "sha256": "5f348c67ac27d9c96d283c7662032df15f1438ad422e26826dc6de96dd51ae64",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/_index.zh.md",
+      "target": "content/percona/blog/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/",
+      "route": "/zh/percona/blog/",
+      "sha256": "70576120830f2ae5e31c9d41e6e1d8741a408d6da415898912ad8929112c9eb0",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/guide/_index.md",
+      "target": "content/percona/blog/guide/_index.md",
+      "language": "en",
+      "old_route": "/blog/guide/",
+      "route": "/percona/blog/guide/",
+      "sha256": "7876753e15b96e5c82346abd13b6159754f49bac02bae3d9e6d341fab83568eb",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/guide/_index.zh.md",
+      "target": "content/percona/blog/guide/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/guide/",
+      "route": "/zh/percona/blog/guide/",
+      "sha256": "25ca91fddb5b4b747ad2b80e9d8a3c26282aa370eb084bb338503d13094b5c57",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/guide/encryption-architecture.md",
+      "target": "content/percona/blog/guide/encryption-architecture.md",
+      "language": "en",
+      "old_route": "/blog/guide/encryption-architecture/",
+      "route": "/percona/blog/guide/encryption-architecture/",
+      "sha256": "ac1e8d67ba262eefb331a9b079e7531bdb687d09e3a63806c22491a6230981ce",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/guide/encryption-architecture.zh.md",
+      "target": "content/percona/blog/guide/encryption-architecture.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/guide/encryption-architecture/",
+      "route": "/zh/percona/blog/guide/encryption-architecture/",
+      "sha256": "6a0c0781ce168ea24d07f09ed005d1ceabaaa58a923f003f2bae12e6661a19f3",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/guide/production-checklist.md",
+      "target": "content/percona/blog/guide/production-checklist.md",
+      "language": "en",
+      "old_route": "/blog/guide/production-checklist/",
+      "route": "/percona/blog/guide/production-checklist/",
+      "sha256": "c210182e3eb087d2bbf60970581ce4d3e67b3d1f8e61165b09a03a9ce71d6301",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/guide/production-checklist.zh.md",
+      "target": "content/percona/blog/guide/production-checklist.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/guide/production-checklist/",
+      "route": "/zh/percona/blog/guide/production-checklist/",
+      "sha256": "f20ef65b281de9d1a8030d4cf350c5b686a116bc925123c90cc3e2b04303b993",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/percona/_index.md",
+      "target": "content/percona/blog/percona/_index.md",
+      "language": "en",
+      "old_route": "/blog/percona/",
+      "route": "/percona/blog/percona/",
+      "sha256": "3c706f7f7758a7fca0ab27445c39fef8cee21da97f6e999b49ed052ed7fd049e",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/percona/_index.zh.md",
+      "target": "content/percona/blog/percona/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/percona/",
+      "route": "/zh/percona/blog/percona/",
+      "sha256": "76e16dd92d92f43ecf292142a20a21aebd071a9450a941089ae074b709e9065b",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/percona/early-project-update.md",
+      "target": "content/percona/blog/percona/early-project-update.md",
+      "language": "en",
+      "old_route": "/blog/percona/early-project-update/",
+      "route": "/percona/blog/percona/early-project-update/",
+      "sha256": "d765343707ddf64e1ab5f6c64f08df25edbafd20ea5e51fa3dae321c503ceb01",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/percona/early-project-update.zh.md",
+      "target": "content/percona/blog/percona/early-project-update.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/percona/early-project-update/",
+      "route": "/zh/percona/blog/percona/early-project-update/",
+      "sha256": "ef67016ac701f94c0298a32e2143e73ea76570980a5d7abd9fc94714c30a1c63",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/percona/rc-announcement.md",
+      "target": "content/percona/blog/percona/rc-announcement.md",
+      "language": "en",
+      "old_route": "/blog/percona/rc-announcement/",
+      "route": "/percona/blog/percona/rc-announcement/",
+      "sha256": "2d870c78d75fa135f4080ae03ed0488209bc2952e55f6f60ce9fb7a72486a750",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/percona/rc-announcement.zh.md",
+      "target": "content/percona/blog/percona/rc-announcement.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/percona/rc-announcement/",
+      "route": "/zh/percona/blog/percona/rc-announcement/",
+      "sha256": "0da52c72475f4ae46fad3f09fcf723084ef5c513d2363f6f075014bd61765226",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/percona/webinar-qa.md",
+      "target": "content/percona/blog/percona/webinar-qa.md",
+      "language": "en",
+      "old_route": "/blog/percona/webinar-qa/",
+      "route": "/percona/blog/percona/webinar-qa/",
+      "sha256": "e7a6746a1e8e97c6bad9982e03abfb5895f5bcded5d982bb9768c5ab6909e9a4",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/percona/webinar-qa.zh.md",
+      "target": "content/percona/blog/percona/webinar-qa.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/percona/webinar-qa/",
+      "route": "/zh/percona/blog/percona/webinar-qa/",
+      "sha256": "094522d206abe3cf9832523a0643133893f549e7b73dadc513b0af2be805ae54",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/release/2.2.1.md",
+      "target": "content/percona/blog/release/2.2.1.md",
+      "language": "en",
+      "old_route": "/blog/release/2.2.1/",
+      "route": "/percona/blog/release/2.2.1/",
+      "sha256": "be22aab9e5a8ed10c3497b804a8153083706713cd1fb46c59ea9af4b10ba9e9d",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/release/2.2.1.zh.md",
+      "target": "content/percona/blog/release/2.2.1.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/release/2.2.1/",
+      "route": "/zh/percona/blog/release/2.2.1/",
+      "sha256": "31630385312a62bc08cf7ecb549ca52fe16d78a76249112693038a945a12b578",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/release/2.2.2.md",
+      "target": "content/percona/blog/release/2.2.2.md",
+      "language": "en",
+      "old_route": "/blog/release/2.2.2/",
+      "route": "/percona/blog/release/2.2.2/",
+      "sha256": "d47788c9c5427298b2b5ed96fb87710bd807d79f2bc66e5e1f22151a3f2ff172",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/release/2.2.2.zh.md",
+      "target": "content/percona/blog/release/2.2.2.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/release/2.2.2/",
+      "route": "/zh/percona/blog/release/2.2.2/",
+      "sha256": "99de9437a225da116769df7f4da47eebf1620590bc259634f4e8bff89da0ea77",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/release/_index.md",
+      "target": "content/percona/blog/release/_index.md",
+      "language": "en",
+      "old_route": "/blog/release/",
+      "route": "/percona/blog/release/",
+      "sha256": "cfe5704f35029f87f2e6a03f07aa8ff58267513eff617137c621169aef0f96c0",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/release/_index.zh.md",
+      "target": "content/percona/blog/release/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/release/",
+      "route": "/zh/percona/blog/release/",
+      "sha256": "8fe3bfa23b42fbefa0256ad596d2a53145dade686b1b4a678ab0ca7058871f21",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/_index.md",
+      "target": "content/percona/_index.md",
+      "language": "en",
+      "old_route": "/docs/",
+      "route": "/percona/",
+      "sha256": "2c3ec26ac12a5ad8f4c2dab0c534a345888fa675c7cb03b790709bf0af5c33ad",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/_index.zh.md",
+      "target": "content/percona/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/",
+      "route": "/zh/percona/",
+      "sha256": "78968cad8f1c77ac4d480b65b22eda9773e0bbf819dca3d765f49149d374480a",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/advanced-topics/_index.md",
+      "target": "content/percona/advanced-topics/_index.md",
+      "language": "en",
+      "old_route": "/docs/advanced-topics/",
+      "route": "/percona/advanced-topics/",
+      "sha256": "76920298f9568993cf3eb9eb738e11c99ae257674f28bbb627e97a27dadd9ce6",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/advanced-topics/_index.zh.md",
+      "target": "content/percona/advanced-topics/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/advanced-topics/",
+      "route": "/zh/percona/advanced-topics/",
+      "sha256": "73d31e52f25546fb3636a2d4983db85499e62a2f4de17a3282f847cbbf73698c",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/advanced-topics/tech-reference.md",
+      "target": "content/percona/advanced-topics/tech-reference.md",
+      "language": "en",
+      "old_route": "/docs/advanced-topics/tech-reference/",
+      "route": "/percona/advanced-topics/tech-reference/",
+      "sha256": "31218624484d6e72c56201b2613f313e7c1f0e53f5a4e5a8a6ec7ce3b2475123",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/advanced-topics/tech-reference.zh.md",
+      "target": "content/percona/advanced-topics/tech-reference.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/advanced-topics/tech-reference/",
+      "route": "/zh/percona/advanced-topics/tech-reference/",
+      "sha256": "1b0bad03d634248744aaeee52a952d253ad2103e8416994f9a6d5293f54eee1b",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/advanced-topics/usage-guide.md",
+      "target": "content/percona/advanced-topics/usage-guide.md",
+      "language": "en",
+      "old_route": "/docs/advanced-topics/usage-guide/",
+      "route": "/percona/advanced-topics/usage-guide/",
+      "sha256": "c6217c9f26ee150dec640fb39075936bc1364f4778030b1b54b80ac2adc7a8ea",
+      "code_sha256": [
+        "b15bf23b4daf67ed23d320bc8847965e6a6e32001aa9603af39c0ca9e4871b70",
+        "9de165c1550e3b4d6480bf097328a71ec4bf1d10d1df28e5d5f85c172e9280d5",
+        "3b2d69f96d5f9cc117e1a31eff102f9c6e21f3be3822929453e67c286ac1aa88",
+        "c7ada81d4cd399facfaf557eba43c4df76375543e40e598a015fb3007a001b06",
+        "144ca7a4de7a495235b8a186e0b5744125801d058f8ad488194f6b7b7ae7f9d3",
+        "b83801453bacd4737919ada9affccb43f6c850b031f8e3e60de5cfefeda7ac1d",
+        "deeb5d81847197ef35dfbdb9c313b58c50a832df9947a541a5e84a0feae3146a",
+        "58ff9b78c2737dd2e41c7309d9dcb69e6cc478a452dd9ef9afa3692ed97639db",
+        "d3c552f60257e49266fd3a46081c3ce141c2fc0f161dbd97fa4eddc2781c3d7a",
+        "fcaafba7caae71f262becd1e0345095b862f8d9240d3595f096cc7f2ce8839f5",
+        "9c3b21353ff69587fa293487ed6d62568cad7d4bbff27252fc7337b59909ebfe"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/advanced-topics/usage-guide.zh.md",
+      "target": "content/percona/advanced-topics/usage-guide.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/advanced-topics/usage-guide/",
+      "route": "/zh/percona/advanced-topics/usage-guide/",
+      "sha256": "ec0fe296562a2cbaaf58be2d2a206e1a62ca96fd1821e0498169e672230e4c2e",
+      "code_sha256": [
+        "b15bf23b4daf67ed23d320bc8847965e6a6e32001aa9603af39c0ca9e4871b70",
+        "9de165c1550e3b4d6480bf097328a71ec4bf1d10d1df28e5d5f85c172e9280d5",
+        "3b2d69f96d5f9cc117e1a31eff102f9c6e21f3be3822929453e67c286ac1aa88",
+        "c7ada81d4cd399facfaf557eba43c4df76375543e40e598a015fb3007a001b06",
+        "144ca7a4de7a495235b8a186e0b5744125801d058f8ad488194f6b7b7ae7f9d3",
+        "b83801453bacd4737919ada9affccb43f6c850b031f8e3e60de5cfefeda7ac1d",
+        "deeb5d81847197ef35dfbdb9c313b58c50a832df9947a541a5e84a0feae3146a",
+        "58ff9b78c2737dd2e41c7309d9dcb69e6cc478a452dd9ef9afa3692ed97639db",
+        "d3c552f60257e49266fd3a46081c3ce141c2fc0f161dbd97fa4eddc2781c3d7a",
+        "fcaafba7caae71f262becd1e0345095b862f8d9240d3595f096cc7f2ce8839f5",
+        "9c3b21353ff69587fa293487ed6d62568cad7d4bbff27252fc7337b59909ebfe"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/apt.md",
+      "target": "content/percona/apt.md",
+      "language": "en",
+      "old_route": "/docs/apt/",
+      "route": "/percona/apt/",
+      "sha256": "5a3ca03855e5a1cea2a6cd981f2710407a68abab3c651d21f6408c6e24794122",
+      "code_sha256": [
+        "2d9a131c20ba63e31bdc3de7b3fdd08ce5c3520357e104be7c214288576f4a6a",
+        "6d3f940ead53247d60ef45c87b1552f5cf8f866a151e9fa1c6c9e2bc9e115bb7",
+        "3810c802649d43475849cfc21a1845c599dcae84813e35780f30c80a25be67a0",
+        "c535eb4063f09fa5ab8a12b1b7bbf89f39bf2c4263c6566ba33d5b07bcd3b0bb",
+        "559ce732045028512c7d45fa123fb0ab2ecb96a2db53bdeffbbb086979e11e4c",
+        "d86151acda026988ec0124815ee0e6936cb408a71dc781c2f2ffca891b27c9cc",
+        "1e054c51f03a416b87cb54829574eaf3452b1f50a06aef262dc21d645c3cc0f7"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/apt.zh.md",
+      "target": "content/percona/apt.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/apt/",
+      "route": "/zh/percona/apt/",
+      "sha256": "871c902b164d96bf6422e34e8834b29b01cf4345efcb5d2563aef5c3985d9fbd",
+      "code_sha256": [
+        "2d9a131c20ba63e31bdc3de7b3fdd08ce5c3520357e104be7c214288576f4a6a",
+        "6d3f940ead53247d60ef45c87b1552f5cf8f866a151e9fa1c6c9e2bc9e115bb7",
+        "3810c802649d43475849cfc21a1845c599dcae84813e35780f30c80a25be67a0",
+        "c535eb4063f09fa5ab8a12b1b7bbf89f39bf2c4263c6566ba33d5b07bcd3b0bb",
+        "559ce732045028512c7d45fa123fb0ab2ecb96a2db53bdeffbbb086979e11e4c",
+        "d86151acda026988ec0124815ee0e6936cb408a71dc781c2f2ffca891b27c9cc",
+        "1e054c51f03a416b87cb54829574eaf3452b1f50a06aef262dc21d645c3cc0f7"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/architecture/_index.md",
+      "target": "content/percona/architecture/_index.md",
+      "language": "en",
+      "old_route": "/docs/architecture/",
+      "route": "/percona/architecture/",
+      "sha256": "58f411156488a72464da0cb4649eab52478f684f3cc7b782bfb822bc42544f24",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/architecture/_index.zh.md",
+      "target": "content/percona/architecture/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/architecture/",
+      "route": "/zh/percona/architecture/",
+      "sha256": "f9ffac50fafa584ef77b58ab55a12c4a1b6fff65a10198c5aacb40ed3fe95e3a",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/architecture/encryption-architecture.md",
+      "target": "content/percona/architecture/encryption-architecture.md",
+      "language": "en",
+      "old_route": "/docs/architecture/encryption-architecture/",
+      "route": "/percona/architecture/encryption-architecture/",
+      "sha256": "5d5749e98e0d8f679be8899032d66803c70751ea5d2b8a9b0daf5d3006988792",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/architecture/encryption-architecture.zh.md",
+      "target": "content/percona/architecture/encryption-architecture.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/architecture/encryption-architecture/",
+      "route": "/zh/percona/architecture/encryption-architecture/",
+      "sha256": "2b1440a7e9e6822014e68e5ce6807c5071777bc08186a51c8358262f690d421f",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/architecture/key-provider-management.md",
+      "target": "content/percona/architecture/key-provider-management.md",
+      "language": "en",
+      "old_route": "/docs/architecture/key-provider-management/",
+      "route": "/percona/architecture/key-provider-management/",
+      "sha256": "56dd1f148baa4a632f17b163876477c3e7bfd4784049c61e309775a173f5fd8d",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/architecture/key-provider-management.zh.md",
+      "target": "content/percona/architecture/key-provider-management.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/architecture/key-provider-management/",
+      "route": "/zh/percona/architecture/key-provider-management/",
+      "sha256": "0928ed0af920ad413483e7f57e3399ee40c9a04e609052d32883016087e9b904",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/architecture/overview.md",
+      "target": "content/percona/architecture/overview.md",
+      "language": "en",
+      "old_route": "/docs/architecture/overview/",
+      "route": "/percona/architecture/overview/",
+      "sha256": "2e3f597a8cf65a0af591f0724e5313596576a6c8fd91ee4e34ea259cc0f2dfc4",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/architecture/overview.zh.md",
+      "target": "content/percona/architecture/overview.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/architecture/overview/",
+      "route": "/zh/percona/architecture/overview/",
+      "sha256": "12c3e4d3c0507f53c329a3d7088d39ae272b67041259e932b01fae53c49edd06",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/command-line-tools/_index.md",
+      "target": "content/percona/command-line-tools/_index.md",
+      "language": "en",
+      "old_route": "/docs/command-line-tools/",
+      "route": "/percona/command-line-tools/",
+      "sha256": "16da24994bb0280f8e9ad74d52d4821455bc5d621a56a4d8364cd0615e03d425",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/command-line-tools/_index.zh.md",
+      "target": "content/percona/command-line-tools/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/command-line-tools/",
+      "route": "/zh/percona/command-line-tools/",
+      "sha256": "74e6fa58b76cb749248177568da48ab90c5a8edb3594e231c6b8b2fd20c6acf7",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/command-line-tools/cli-tools.md",
+      "target": "content/percona/command-line-tools/cli-tools.md",
+      "language": "en",
+      "old_route": "/docs/command-line-tools/cli-tools/",
+      "route": "/percona/command-line-tools/cli-tools/",
+      "sha256": "ad458efdd21ff0378c9595491d2bc90ab01ad704d4fa08985a2b377e65e8c3e5",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/command-line-tools/cli-tools.zh.md",
+      "target": "content/percona/command-line-tools/cli-tools.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/command-line-tools/cli-tools/",
+      "route": "/zh/percona/command-line-tools/cli-tools/",
+      "sha256": "381efdc6129045d34ef81a6ce055ade019215274451cd7d8fb14eda0ce51b430",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/command-line-tools/pg-tde-archive-decrypt.md",
+      "target": "content/percona/command-line-tools/pg-tde-archive-decrypt.md",
+      "language": "en",
+      "old_route": "/docs/command-line-tools/pg-tde-archive-decrypt/",
+      "route": "/percona/command-line-tools/pg-tde-archive-decrypt/",
+      "sha256": "cd647d0d0ab43cd6d6ec289a8eef379529475c8643c278b696073f019a59484b",
+      "code_sha256": [
+        "ff51130c25627f9a28f2dff4e6f1444033e7ec7007cbc54082df26e9cd8adda4",
+        "a584cc9c2a1995f749559ecc3d7887c4a231b6fdd4e28cfe687041a1ef1f541e",
+        "4df1ccbe50885395d7bd613bd6abc0d8cfe4668539763a16b091d3b3c0c01610",
+        "af7ff82463e85b4974aaad079b58aafd0cc6d3c5deba4411b609ed90a3804319"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/command-line-tools/pg-tde-archive-decrypt.zh.md",
+      "target": "content/percona/command-line-tools/pg-tde-archive-decrypt.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/command-line-tools/pg-tde-archive-decrypt/",
+      "route": "/zh/percona/command-line-tools/pg-tde-archive-decrypt/",
+      "sha256": "c8441f35ffd036ee91b8694342de2a4bd2b34b847aecfb63d48523eee5220d5e",
+      "code_sha256": [
+        "ff51130c25627f9a28f2dff4e6f1444033e7ec7007cbc54082df26e9cd8adda4",
+        "a584cc9c2a1995f749559ecc3d7887c4a231b6fdd4e28cfe687041a1ef1f541e",
+        "4df1ccbe50885395d7bd613bd6abc0d8cfe4668539763a16b091d3b3c0c01610",
+        "af7ff82463e85b4974aaad079b58aafd0cc6d3c5deba4411b609ed90a3804319"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/command-line-tools/pg-tde-change-key-provider.md",
+      "target": "content/percona/command-line-tools/pg-tde-change-key-provider.md",
+      "language": "en",
+      "old_route": "/docs/command-line-tools/pg-tde-change-key-provider/",
+      "route": "/percona/command-line-tools/pg-tde-change-key-provider/",
+      "sha256": "02a39c595aea7753534e7536768d11ba6b963db6d4107671301fb5e8a4442c46",
+      "code_sha256": [
+        "7685fb9eba1f70b520f12d17591f49277aadad0273ac5850c61ba2ea18d120ac",
+        "5de85d5fd5b87c0f77c2760e853ea021c558f96adb7cabf73ca04dcbba635c01"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/command-line-tools/pg-tde-change-key-provider.zh.md",
+      "target": "content/percona/command-line-tools/pg-tde-change-key-provider.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/command-line-tools/pg-tde-change-key-provider/",
+      "route": "/zh/percona/command-line-tools/pg-tde-change-key-provider/",
+      "sha256": "3f88b6b083e5cee41d827894a4b53bdc1376b997feea69f73e843cfb5371aaa9",
+      "code_sha256": [
+        "7685fb9eba1f70b520f12d17591f49277aadad0273ac5850c61ba2ea18d120ac",
+        "5de85d5fd5b87c0f77c2760e853ea021c558f96adb7cabf73ca04dcbba635c01"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/command-line-tools/pg-tde-checksums.md",
+      "target": "content/percona/command-line-tools/pg-tde-checksums.md",
+      "language": "en",
+      "old_route": "/docs/command-line-tools/pg-tde-checksums/",
+      "route": "/percona/command-line-tools/pg-tde-checksums/",
+      "sha256": "8b665a34b0e04f8272eb255fd1773890035b370939a8cef12511e7ecbf9dd2db",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/command-line-tools/pg-tde-checksums.zh.md",
+      "target": "content/percona/command-line-tools/pg-tde-checksums.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/command-line-tools/pg-tde-checksums/",
+      "route": "/zh/percona/command-line-tools/pg-tde-checksums/",
+      "sha256": "dfb72720260b4e2a8c445cb263c6ee94c6d3a3e2e161ac39acd4e1462680b2f5",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/command-line-tools/pg-tde-restore-encrypt.md",
+      "target": "content/percona/command-line-tools/pg-tde-restore-encrypt.md",
+      "language": "en",
+      "old_route": "/docs/command-line-tools/pg-tde-restore-encrypt/",
+      "route": "/percona/command-line-tools/pg-tde-restore-encrypt/",
+      "sha256": "485eb8a0923004d1a1df8c89977b417ac899553d6b113b8b6459e947de0f8a24",
+      "code_sha256": [
+        "fa871ed88e293f3749800f46f16d6905db0c9de80a97af187f6d6af14421670b",
+        "e22fd2e5172e9801c814becc3790053f1ca2e81b7a78500bfbc7c87db1e237f6",
+        "3e9b72ef0fff850afd614804d4608e9e20d1661db66027b13b053fbd36d02792",
+        "af7ff82463e85b4974aaad079b58aafd0cc6d3c5deba4411b609ed90a3804319"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/command-line-tools/pg-tde-restore-encrypt.zh.md",
+      "target": "content/percona/command-line-tools/pg-tde-restore-encrypt.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/command-line-tools/pg-tde-restore-encrypt/",
+      "route": "/zh/percona/command-line-tools/pg-tde-restore-encrypt/",
+      "sha256": "a479a9ae451201571d9c00a15ea544fac581b470df6db43385cc5c55ac20ebf7",
+      "code_sha256": [
+        "fa871ed88e293f3749800f46f16d6905db0c9de80a97af187f6d6af14421670b",
+        "e22fd2e5172e9801c814becc3790053f1ca2e81b7a78500bfbc7c87db1e237f6",
+        "3e9b72ef0fff850afd614804d4608e9e20d1661db66027b13b053fbd36d02792",
+        "af7ff82463e85b4974aaad079b58aafd0cc6d3c5deba4411b609ed90a3804319"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/command-line-tools/pg-tde-upgrade.md",
+      "target": "content/percona/command-line-tools/pg-tde-upgrade.md",
+      "language": "en",
+      "old_route": "/docs/command-line-tools/pg-tde-upgrade/",
+      "route": "/percona/command-line-tools/pg-tde-upgrade/",
+      "sha256": "abf220f4bdd85d0bce86a4d24a0279387e6123dbb8839eadbf36d0bacc0fe5a7",
+      "code_sha256": [
+        "a021e75a5b8a0d3b15ae795fc9f9e39573aad4a4aaec965412abd825c279d21d"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/command-line-tools/pg-tde-upgrade.zh.md",
+      "target": "content/percona/command-line-tools/pg-tde-upgrade.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/command-line-tools/pg-tde-upgrade/",
+      "route": "/zh/percona/command-line-tools/pg-tde-upgrade/",
+      "sha256": "9a307096cc7a71343440f8c026bd5195d69d489bc9fdde6843bf9ee661d2aae7",
+      "code_sha256": [
+        "a021e75a5b8a0d3b15ae795fc9f9e39573aad4a4aaec965412abd825c279d21d"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/command-line-tools/pg-tde-waldump.md",
+      "target": "content/percona/command-line-tools/pg-tde-waldump.md",
+      "language": "en",
+      "old_route": "/docs/command-line-tools/pg-tde-waldump/",
+      "route": "/percona/command-line-tools/pg-tde-waldump/",
+      "sha256": "0b3617ecf2e67ccd74114e7c29a1e37a5519201d2f629b8f764883948f3263cb",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/command-line-tools/pg-tde-waldump.zh.md",
+      "target": "content/percona/command-line-tools/pg-tde-waldump.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/command-line-tools/pg-tde-waldump/",
+      "route": "/zh/percona/command-line-tools/pg-tde-waldump/",
+      "sha256": "c8d945e5af18e4c626b359d16ba30200947e7d54ce478f7e37d1b45fb70470b8",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/contribute.md",
+      "target": "content/percona/contribute.md",
+      "language": "en",
+      "old_route": "/docs/contribute/",
+      "route": "/percona/contribute/",
+      "sha256": "2c2b452fcd4ab08d473ec1e991a7da4a3ffffa7ed8ce9a6f8807a26c1b81b760",
+      "code_sha256": [
+        "d93013cee356083cfba44113ab314ad2cd4cf2669e43592c75bd72fb72c111d6",
+        "8214ca70b8aa8f71930b59ede678dc338c14c1ab50386e6c697616789c211517",
+        "949ad9a80d3819e7bfee11b92443e92a85f0e597dfbbb8f8194db501adb97527",
+        "efccdaf6cbf21840c93f1ea53b906a7f81741dcbf274dd069d8c136df48dc7d2",
+        "f076158f08b8c53e87bcdf148f63f5fa6d1f9870f79d13a8660edbea8668963f",
+        "b2c2cf721f072b14ecb7d4b7a86ab739c1eaf7f02f8d117ea03eae7da0f84949",
+        "0cb709eb65694c0fea93120e23f1e2883e8f294d42646199abb8a0ba028d9fd3",
+        "0926a125914a7e28e196f896a147a4918de66ea9c6aa6a75b4446407760b0b3d",
+        "4aeae8d253fcd6dc0d7e1512a78f12b4b082eb465e436fd183b3a1fdac5f40e0",
+        "390a75fedb11e64a1a1fc141ae58ddef0c526c93d2bfa9a003cb0ca2def23ce7",
+        "0ec30f1828316120fd88bf53dc35d3f3c2817f42c4226f9f9bfccb524077fec4",
+        "c942992ded95c677caeeec772f31e6a5348b18dd3c514165b9d3554222d9ea9a"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/contribute.zh.md",
+      "target": "content/percona/contribute.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/contribute/",
+      "route": "/zh/percona/contribute/",
+      "sha256": "2a4330b387603e69fa4ffc91332f10e7bc310c1e2e0141968e526814cc938b80",
+      "code_sha256": [
+        "d93013cee356083cfba44113ab314ad2cd4cf2669e43592c75bd72fb72c111d6",
+        "8214ca70b8aa8f71930b59ede678dc338c14c1ab50386e6c697616789c211517",
+        "949ad9a80d3819e7bfee11b92443e92a85f0e597dfbbb8f8194db501adb97527",
+        "efccdaf6cbf21840c93f1ea53b906a7f81741dcbf274dd069d8c136df48dc7d2",
+        "f076158f08b8c53e87bcdf148f63f5fa6d1f9870f79d13a8660edbea8668963f",
+        "b2c2cf721f072b14ecb7d4b7a86ab739c1eaf7f02f8d117ea03eae7da0f84949",
+        "0cb709eb65694c0fea93120e23f1e2883e8f294d42646199abb8a0ba028d9fd3",
+        "0926a125914a7e28e196f896a147a4918de66ea9c6aa6a75b4446407760b0b3d",
+        "4aeae8d253fcd6dc0d7e1512a78f12b4b082eb465e436fd183b3a1fdac5f40e0",
+        "390a75fedb11e64a1a1fc141ae58ddef0c526c93d2bfa9a003cb0ca2def23ce7",
+        "0ec30f1828316120fd88bf53dc35d3f3c2817f42c4226f9f9bfccb524077fec4",
+        "c942992ded95c677caeeec772f31e6a5348b18dd3c514165b9d3554222d9ea9a"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/faq.md",
+      "target": "content/percona/faq.md",
+      "language": "en",
+      "old_route": "/docs/faq/",
+      "route": "/percona/faq/",
+      "sha256": "e70dd37e2ae0fc9989b992e58f9e104bd54be1a2c15ac63b6701fe8041f4aa0e",
+      "code_sha256": [
+        "0d43e08cfa57f556d6c02cf56e74b2092bd36758917b36acc983f86c5d0fa9b9"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/faq.zh.md",
+      "target": "content/percona/faq.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/faq/",
+      "route": "/zh/percona/faq/",
+      "sha256": "ea7c5aae52f0e3aab69b5dd740e1513b66ca39196b0ec000366f3eeca381d8e1",
+      "code_sha256": [
+        "0d43e08cfa57f556d6c02cf56e74b2092bd36758917b36acc983f86c5d0fa9b9"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/features.md",
+      "target": "content/percona/features.md",
+      "language": "en",
+      "old_route": "/docs/features/",
+      "route": "/percona/features/",
+      "sha256": "f9fb816f5d1643af1e09ee36e4819ee7aacfccde783d662a027952564637bdb2",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/features.zh.md",
+      "target": "content/percona/features.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/features/",
+      "route": "/zh/percona/features/",
+      "sha256": "7772197a263c59b8fa678cddbaa868118f32db4d32efa73eb08945ba8cbfc33b",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/functions.md",
+      "target": "content/percona/functions.md",
+      "language": "en",
+      "old_route": "/docs/functions/",
+      "route": "/percona/functions/",
+      "sha256": "af7aae5933ab23b5b7456e23b6ea029f25011950d4126e33e8ea8520e1de9247",
+      "code_sha256": [
+        "365886e7af9348d7c15f36f4b261fbe9b395f5486a6460806a6f2cd9df7674d9",
+        "d144d9f1ef90c213ea8d07a3a3d433b112266fb9406b4bca620fb0821ee9a853",
+        "2e6506cea896c9a76e8213a8fa9bd648052c2e844d526a83d4255e752fa68199",
+        "1be76073651e29357215a5fa7c83f4da77a18a6deb1d932e6888881b13951093",
+        "4e7250251a54395ff371088f1f4582e4b8bf88db748dbd106d2a50a93dfa609e",
+        "54b575695707f7f44b0d97894e15291d8ddbbd871b47c0b145fad94f803debe8",
+        "c1417ec06a135f1430e7a991534a8845a9fb3e6c34f262589a206f2d48a7723f",
+        "d8e345175b3a15f28ae662e1ed770a4df7b9a22afbbcd842292f8712fe73be5a",
+        "fd4f450000d3f540793928e5bd82d673847de4c66692c4ed97ca82f682022565",
+        "c33ceffa4f2e3ee27cb3045b38b7f53552412d791aa8e8765e943be32bd08928",
+        "b132b6a5574b42b8bf61c72d733ff823b51a14c5598927420e6335d28f1b09de",
+        "cc6305a1d0b701776e8d62d1cd2912573006b8cf4d892997a0ceea413eae4514",
+        "f928ce345f5a0173501e6823733edcd8e721eac9f1d7d836611f5051b3facf29",
+        "1fe8a344ac8830b1e740eb6c26dd0dbe719bc6498a45aa9543fcca337e78906b",
+        "d5acb65922bce2908f260e0093942aa28c9f44e5836260ed10c99ea857fcb29a",
+        "4f60b883d5d5615f9b7369d6bb8c63421b4e86b27c3adc3789724010d98fe0ab",
+        "f713cf4c76868150e7501c15ffdca98c00da2aa27416570c73cb4fa5341ed032",
+        "be2045f51e2e1baa1b63d787370042057f92cf474dca43d45d892f62ca9dfef6",
+        "aac7ae24f28323c31e63e43a64c7c2ec1f95a18a601815595efe288b0fcde676",
+        "000809b7d04cd46967580580af31e69733a599ffbc75644ae11f1a54e63ce81b",
+        "c78ef3250559908dad8f1f4ffbb187985fcc5233944a40d42bfcf1994c37952c",
+        "f8054bd14928aa445b063e4f8aa4d98585f260aca6f1c13f82e4cb5ac2f65e47"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/functions.zh.md",
+      "target": "content/percona/functions.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/functions/",
+      "route": "/zh/percona/functions/",
+      "sha256": "747616c7a0133e84a48c0bddb2c1c054fd41f14a2188de79fc419e9efa9c7a63",
+      "code_sha256": [
+        "365886e7af9348d7c15f36f4b261fbe9b395f5486a6460806a6f2cd9df7674d9",
+        "d144d9f1ef90c213ea8d07a3a3d433b112266fb9406b4bca620fb0821ee9a853",
+        "2e6506cea896c9a76e8213a8fa9bd648052c2e844d526a83d4255e752fa68199",
+        "1be76073651e29357215a5fa7c83f4da77a18a6deb1d932e6888881b13951093",
+        "4e7250251a54395ff371088f1f4582e4b8bf88db748dbd106d2a50a93dfa609e",
+        "54b575695707f7f44b0d97894e15291d8ddbbd871b47c0b145fad94f803debe8",
+        "c1417ec06a135f1430e7a991534a8845a9fb3e6c34f262589a206f2d48a7723f",
+        "d8e345175b3a15f28ae662e1ed770a4df7b9a22afbbcd842292f8712fe73be5a",
+        "fd4f450000d3f540793928e5bd82d673847de4c66692c4ed97ca82f682022565",
+        "c33ceffa4f2e3ee27cb3045b38b7f53552412d791aa8e8765e943be32bd08928",
+        "b132b6a5574b42b8bf61c72d733ff823b51a14c5598927420e6335d28f1b09de",
+        "cc6305a1d0b701776e8d62d1cd2912573006b8cf4d892997a0ceea413eae4514",
+        "f928ce345f5a0173501e6823733edcd8e721eac9f1d7d836611f5051b3facf29",
+        "1fe8a344ac8830b1e740eb6c26dd0dbe719bc6498a45aa9543fcca337e78906b",
+        "d5acb65922bce2908f260e0093942aa28c9f44e5836260ed10c99ea857fcb29a",
+        "4f60b883d5d5615f9b7369d6bb8c63421b4e86b27c3adc3789724010d98fe0ab",
+        "f713cf4c76868150e7501c15ffdca98c00da2aa27416570c73cb4fa5341ed032",
+        "be2045f51e2e1baa1b63d787370042057f92cf474dca43d45d892f62ca9dfef6",
+        "aac7ae24f28323c31e63e43a64c7c2ec1f95a18a601815595efe288b0fcde676",
+        "000809b7d04cd46967580580af31e69733a599ffbc75644ae11f1a54e63ce81b",
+        "c78ef3250559908dad8f1f4ffbb187985fcc5233944a40d42bfcf1994c37952c",
+        "f8054bd14928aa445b063e4f8aa4d98585f260aca6f1c13f82e4cb5ac2f65e47"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/get-help.md",
+      "target": "content/percona/get-help.md",
+      "language": "en",
+      "old_route": "/docs/get-help/",
+      "route": "/percona/get-help/",
+      "sha256": "2f427e9afbb0bb58d456c1f949afcf98371aab8f156cc2f3ae7f49cc2c1a5d97",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/get-help.zh.md",
+      "target": "content/percona/get-help.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/get-help/",
+      "route": "/zh/percona/get-help/",
+      "sha256": "acd208f2871748ab12f7994fb956459901e921bfc433794bcb3ee8b37540548e",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/_index.md",
+      "target": "content/percona/global-key-provider-configuration/_index.md",
+      "language": "en",
+      "old_route": "/docs/global-key-provider-configuration/",
+      "route": "/percona/global-key-provider-configuration/",
+      "sha256": "6f404cdba838ee13368c067c159b453d1e8a8998fb2a726206d97c44e265425e",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/_index.zh.md",
+      "target": "content/percona/global-key-provider-configuration/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/global-key-provider-configuration/",
+      "route": "/zh/percona/global-key-provider-configuration/",
+      "sha256": "6c8a7c5a3a5d116551edb70ad3468d566d788566e57f946b9efbe247d8fa8ae1",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/keyring.md",
+      "target": "content/percona/global-key-provider-configuration/keyring.md",
+      "language": "en",
+      "old_route": "/docs/global-key-provider-configuration/keyring/",
+      "route": "/percona/global-key-provider-configuration/keyring/",
+      "sha256": "47af8d0e88d8c714d953481ec51f619d930ef74782398c14c4ba6845f5b072b9",
+      "code_sha256": [
+        "239095be5776db81a27b1bf6a0fbe7c401add536747a5a90d768e20e7d91c947",
+        "fa46a0aa3e3739eaa68b3b2eb5cfd7b3d59310526e766f2175564c1d9bbb30f0",
+        "d9d73262f841cdc05ffde37d58650fca6f01981cc61a824316e9a38da08eb18b",
+        "7ddb9e49f25d309614774d3a2b388ead201e1b7aa0e994b252ebefe5eb324dfd",
+        "e29323764c46e7bb0746ecb6c267a0f0c2af79e30fc979a3bc96aa7c77494c12",
+        "4237c35d8e53572eb4385eb77e4a082efd09ed1936a9dcf259ac33e55b1e57de"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/keyring.zh.md",
+      "target": "content/percona/global-key-provider-configuration/keyring.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/global-key-provider-configuration/keyring/",
+      "route": "/zh/percona/global-key-provider-configuration/keyring/",
+      "sha256": "cb683bc5fe72b63bf29b45b1b9f7e2a33db5f2ef67fe51dee5de1097715b98b5",
+      "code_sha256": [
+        "239095be5776db81a27b1bf6a0fbe7c401add536747a5a90d768e20e7d91c947",
+        "fa46a0aa3e3739eaa68b3b2eb5cfd7b3d59310526e766f2175564c1d9bbb30f0",
+        "d9d73262f841cdc05ffde37d58650fca6f01981cc61a824316e9a38da08eb18b",
+        "7ddb9e49f25d309614774d3a2b388ead201e1b7aa0e994b252ebefe5eb324dfd",
+        "e29323764c46e7bb0746ecb6c267a0f0c2af79e30fc979a3bc96aa7c77494c12",
+        "4237c35d8e53572eb4385eb77e4a082efd09ed1936a9dcf259ac33e55b1e57de"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/kmip-akeyless.md",
+      "target": "content/percona/global-key-provider-configuration/kmip-akeyless.md",
+      "language": "en",
+      "old_route": "/docs/global-key-provider-configuration/kmip-akeyless/",
+      "route": "/percona/global-key-provider-configuration/kmip-akeyless/",
+      "sha256": "7de3e715f74289e8ec0864aa27601d471d8b253508a6a0807532cf426524f78b",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/kmip-akeyless.zh.md",
+      "target": "content/percona/global-key-provider-configuration/kmip-akeyless.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/global-key-provider-configuration/kmip-akeyless/",
+      "route": "/zh/percona/global-key-provider-configuration/kmip-akeyless/",
+      "sha256": "024ae44484d589f52a29fcb7f775d7da552b5a769ca9a6151fb74a818eae2f6d",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/kmip-fortanix.md",
+      "target": "content/percona/global-key-provider-configuration/kmip-fortanix.md",
+      "language": "en",
+      "old_route": "/docs/global-key-provider-configuration/kmip-fortanix/",
+      "route": "/percona/global-key-provider-configuration/kmip-fortanix/",
+      "sha256": "8b50411f4023d419d61176d1930629bad50ac411587a377abb4b3fceca05f0b3",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/kmip-fortanix.zh.md",
+      "target": "content/percona/global-key-provider-configuration/kmip-fortanix.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/global-key-provider-configuration/kmip-fortanix/",
+      "route": "/zh/percona/global-key-provider-configuration/kmip-fortanix/",
+      "sha256": "8b1925adfba0ff5a7ecee81491913b2e0b917e043c6cc0921ec7870d9a67e339",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/kmip-server.md",
+      "target": "content/percona/global-key-provider-configuration/kmip-server.md",
+      "language": "en",
+      "old_route": "/docs/global-key-provider-configuration/kmip-server/",
+      "route": "/percona/global-key-provider-configuration/kmip-server/",
+      "sha256": "b3202a06e3caf21012c3344b47e893f1073ba6fbf8b3494bae68d78b75acdb19",
+      "code_sha256": [
+        "806e4d9541c9840b9e834a9f3aff66a3b744d70335b556146de78d9abe3c6b96",
+        "c610cae5255243f46224f6ad01ba97d1d56baa2c2744824a3bd2f2ac45722b6a"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/kmip-server.zh.md",
+      "target": "content/percona/global-key-provider-configuration/kmip-server.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/global-key-provider-configuration/kmip-server/",
+      "route": "/zh/percona/global-key-provider-configuration/kmip-server/",
+      "sha256": "144a9f559c504aca9a52a84328ce705272a40a4031ecbfe59104b6db6ad5b2f0",
+      "code_sha256": [
+        "806e4d9541c9840b9e834a9f3aff66a3b744d70335b556146de78d9abe3c6b96",
+        "c610cae5255243f46224f6ad01ba97d1d56baa2c2744824a3bd2f2ac45722b6a"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/kmip-thales.md",
+      "target": "content/percona/global-key-provider-configuration/kmip-thales.md",
+      "language": "en",
+      "old_route": "/docs/global-key-provider-configuration/kmip-thales/",
+      "route": "/percona/global-key-provider-configuration/kmip-thales/",
+      "sha256": "6e8cc8bc6b62f29236bce10538d0fc783b391e8802d47b19d7ed832ace09dc6c",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/kmip-thales.zh.md",
+      "target": "content/percona/global-key-provider-configuration/kmip-thales.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/global-key-provider-configuration/kmip-thales/",
+      "route": "/zh/percona/global-key-provider-configuration/kmip-thales/",
+      "sha256": "7ce6eff4629736a3f9049573638692eb64bd7cf54e1d37c04442df6023dc079e",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/openbao.md",
+      "target": "content/percona/global-key-provider-configuration/openbao.md",
+      "language": "en",
+      "old_route": "/docs/global-key-provider-configuration/openbao/",
+      "route": "/percona/global-key-provider-configuration/openbao/",
+      "sha256": "8fb771b08fa6fff1c4d7fe8140984c5c573a3da80ecca1743642dce95f88a0a8",
+      "code_sha256": [
+        "4550e3f72c5b0ca3c15da68c97e77bb79d39fdfd70f6c5bbdb4ead9ebc23958c",
+        "d8ea377746611f5836911ea9fd504ccc2ae8b8bf362fda8f57be252cb2c922c5"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/openbao.zh.md",
+      "target": "content/percona/global-key-provider-configuration/openbao.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/global-key-provider-configuration/openbao/",
+      "route": "/zh/percona/global-key-provider-configuration/openbao/",
+      "sha256": "2b20d64a5e08f6c286dd06941d509cfb9818019ab0c3afc0b92307d527eae1d8",
+      "code_sha256": [
+        "4550e3f72c5b0ca3c15da68c97e77bb79d39fdfd70f6c5bbdb4ead9ebc23958c",
+        "d8ea377746611f5836911ea9fd504ccc2ae8b8bf362fda8f57be252cb2c922c5"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/overview.md",
+      "target": "content/percona/global-key-provider-configuration/overview.md",
+      "language": "en",
+      "old_route": "/docs/global-key-provider-configuration/overview/",
+      "route": "/percona/global-key-provider-configuration/overview/",
+      "sha256": "bab6fc2dcfafa8d91a0ef5736cb56ac38dfc11cc9858b5c3809c06ee6368e5d5",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/overview.zh.md",
+      "target": "content/percona/global-key-provider-configuration/overview.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/global-key-provider-configuration/overview/",
+      "route": "/zh/percona/global-key-provider-configuration/overview/",
+      "sha256": "cdaa3431b7233d68154ea1a91e7e864073246fd716c55d224f797e08d6336eb4",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/set-principal-key.md",
+      "target": "content/percona/global-key-provider-configuration/set-principal-key.md",
+      "language": "en",
+      "old_route": "/docs/global-key-provider-configuration/set-principal-key/",
+      "route": "/percona/global-key-provider-configuration/set-principal-key/",
+      "sha256": "4cb8a004c006ee1e8d8c57dbc9c398e9add3b61039199ae8cb51845320c362b2",
+      "code_sha256": [
+        "550d53850598bb1bba8b0708352ce025e3f733ba459640450329e7a435d33f5b",
+        "ab0ac85875824ddac2a31f5bbfbe09508bbdf826b0561383fedf70e1bd4517ab",
+        "e143ef5cd5673966cb17113678333b04e56b25e2618f96d9a3b5faee4a9452e0",
+        "e41b710e1102a31bdae26741aaa3cbb5a0892da2a4952343a5da16033bdaf106"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/set-principal-key.zh.md",
+      "target": "content/percona/global-key-provider-configuration/set-principal-key.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/global-key-provider-configuration/set-principal-key/",
+      "route": "/zh/percona/global-key-provider-configuration/set-principal-key/",
+      "sha256": "bfd5762f4d5fd17960f6512d0aa00604d645458806de9d27aeb6e02bb782b558",
+      "code_sha256": [
+        "550d53850598bb1bba8b0708352ce025e3f733ba459640450329e7a435d33f5b",
+        "ab0ac85875824ddac2a31f5bbfbe09508bbdf826b0561383fedf70e1bd4517ab",
+        "e143ef5cd5673966cb17113678333b04e56b25e2618f96d9a3b5faee4a9452e0",
+        "e41b710e1102a31bdae26741aaa3cbb5a0892da2a4952343a5da16033bdaf106"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/vault.md",
+      "target": "content/percona/global-key-provider-configuration/vault.md",
+      "language": "en",
+      "old_route": "/docs/global-key-provider-configuration/vault/",
+      "route": "/percona/global-key-provider-configuration/vault/",
+      "sha256": "9f1f8b1bfc47937c4b513bb82079a44b14219cd0feb60d3331372436725ec3bc",
+      "code_sha256": [
+        "34b43e325543c02aae8de08c127b8f3805ef4f1d8be5ea93dbe92ca44efeb691",
+        "3ff540033152f0c103a541fd50b304f88c2d4adb90fab734f0700a463189e840",
+        "3bb20dfe23f5418159c0908217f45aee79b87f59ec272103e1cf78f45abbff52",
+        "1ed2a5bbce635b3050799ce89dea39e00411a004ecc23adc1d2be05e68dc855a",
+        "d29b15fa01607d506934b7d5b72653584e1dd92edc6287be9b52e2cbe7743036",
+        "3b5d3d3b080ccd45e1d778d93280f72044373ea8d06aac6a672540665e84b8d2",
+        "41f2aa0e2cf0f32c3b8633aa7d3d233cae8c5e76133e05719feb754298fb3524",
+        "7b42b0c9e24f3196e7df127cf7158dcefe7938c346099492461af7936aad46b5",
+        "ca0a4eda9260882907935437a3d4300784ae87eeff227b8f8d09e8f01162f019",
+        "06b91d1440fadf4f7bcd2af1115c1048821f2d5a4054c6978bc196d45a8fdc45",
+        "3ba94b4f91d91c78ae7e03290c56c1239b5ea79fd26a6d16e9c27d010a1d6fad",
+        "0b7b809a5b1eabdb192d4539b58c34fb34aed6f0870ffc919c345b59a441844f",
+        "8a1e964f6d0adb12bf5db4ac8e87ce95f5bd24f123f8070d1e1162a2fc5580ef",
+        "edc9ca137cdc56f623009ca62bb8e5c7b2c906e023da23fe97a856451029fb36",
+        "a5ed74069f7b9d5a432b912839475d841ebad10ba8bd556c67acd1e9f493ef63",
+        "e5e20bba21707264dc49872a000f732c58600d38fe516ae35d4100ef3c097192",
+        "beb166fe98ffe2a6bf054eee82891c50a3eaab1a84239abe95dc96a5cd5f2261",
+        "0df2a3bc2b04bea88556c27db81ff2d5e2c432a9663ed1d1f7da25977b4bc543"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/global-key-provider-configuration/vault.zh.md",
+      "target": "content/percona/global-key-provider-configuration/vault.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/global-key-provider-configuration/vault/",
+      "route": "/zh/percona/global-key-provider-configuration/vault/",
+      "sha256": "b61aecae3324b84f5f7c29d7d1bb7255b0ddb1540e59d4521355105bc8c04803",
+      "code_sha256": [
+        "34b43e325543c02aae8de08c127b8f3805ef4f1d8be5ea93dbe92ca44efeb691",
+        "3ff540033152f0c103a541fd50b304f88c2d4adb90fab734f0700a463189e840",
+        "3bb20dfe23f5418159c0908217f45aee79b87f59ec272103e1cf78f45abbff52",
+        "1ed2a5bbce635b3050799ce89dea39e00411a004ecc23adc1d2be05e68dc855a",
+        "d29b15fa01607d506934b7d5b72653584e1dd92edc6287be9b52e2cbe7743036",
+        "3b5d3d3b080ccd45e1d778d93280f72044373ea8d06aac6a672540665e84b8d2",
+        "41f2aa0e2cf0f32c3b8633aa7d3d233cae8c5e76133e05719feb754298fb3524",
+        "7b42b0c9e24f3196e7df127cf7158dcefe7938c346099492461af7936aad46b5",
+        "ca0a4eda9260882907935437a3d4300784ae87eeff227b8f8d09e8f01162f019",
+        "06b91d1440fadf4f7bcd2af1115c1048821f2d5a4054c6978bc196d45a8fdc45",
+        "3ba94b4f91d91c78ae7e03290c56c1239b5ea79fd26a6d16e9c27d010a1d6fad",
+        "0b7b809a5b1eabdb192d4539b58c34fb34aed6f0870ffc919c345b59a441844f",
+        "8a1e964f6d0adb12bf5db4ac8e87ce95f5bd24f123f8070d1e1162a2fc5580ef",
+        "edc9ca137cdc56f623009ca62bb8e5c7b2c906e023da23fe97a856451029fb36",
+        "a5ed74069f7b9d5a432b912839475d841ebad10ba8bd556c67acd1e9f493ef63",
+        "e5e20bba21707264dc49872a000f732c58600d38fe516ae35d4100ef3c097192",
+        "beb166fe98ffe2a6bf054eee82891c50a3eaab1a84239abe95dc96a5cd5f2261",
+        "0df2a3bc2b04bea88556c27db81ff2d5e2c432a9663ed1d1f7da25977b4bc543"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/how-to/_index.md",
+      "target": "content/percona/how-to/_index.md",
+      "language": "en",
+      "old_route": "/docs/how-to/",
+      "route": "/percona/how-to/",
+      "sha256": "cfaa0bebdf729d1d674fb6dd2725514a708a3f32c2b9f26a1b0a7078e540a780",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/how-to/_index.zh.md",
+      "target": "content/percona/how-to/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/how-to/",
+      "route": "/zh/percona/how-to/",
+      "sha256": "62a33e0de3651aede5dddb4b57b1fea80097e45e13a2bb0a5b785188df1fdb0f",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/how-to/backup-wal-enabled.md",
+      "target": "content/percona/how-to/backup-wal-enabled.md",
+      "language": "en",
+      "old_route": "/docs/how-to/backup-wal-enabled/",
+      "route": "/percona/how-to/backup-wal-enabled/",
+      "sha256": "083b5eccff81fd96d39f80f29e9931d65ecf04cd8447080b78d914921d075d8c",
+      "code_sha256": [
+        "041b2b0cdc54d9b4165c1f82e8cb1fe94e3a6e267ef3cf41e38f0d0a1b6e66dd",
+        "8d679af18cb7eee8ae9307aefe363410ed2794ca56e7a1ffe6590001fa890448",
+        "3a57319356c14d6e1d025bc3ad7bb888dcbc1e1f3f3710e43de9bd35e8fcc698"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/how-to/backup-wal-enabled.zh.md",
+      "target": "content/percona/how-to/backup-wal-enabled.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/how-to/backup-wal-enabled/",
+      "route": "/zh/percona/how-to/backup-wal-enabled/",
+      "sha256": "1a9619ba506b8f6bc756f9d36528ce6220df8d46a180590b6317f11e7d1d525f",
+      "code_sha256": [
+        "041b2b0cdc54d9b4165c1f82e8cb1fe94e3a6e267ef3cf41e38f0d0a1b6e66dd",
+        "8d679af18cb7eee8ae9307aefe363410ed2794ca56e7a1ffe6590001fa890448",
+        "3a57319356c14d6e1d025bc3ad7bb888dcbc1e1f3f3710e43de9bd35e8fcc698"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/how-to/decrypt.md",
+      "target": "content/percona/how-to/decrypt.md",
+      "language": "en",
+      "old_route": "/docs/how-to/decrypt/",
+      "route": "/percona/how-to/decrypt/",
+      "sha256": "e7729c99fa03db7a5ac232b41535d14b3514a3898edde7da47237c912febfbb1",
+      "code_sha256": [
+        "2e207d57ca08a26f2c21a36b3f53ab1dfbcdc95617747dfeb1b087968e2451ca",
+        "e0d7626f0d6fbd220b2a4e90fcf3112b608c4da71df19a9bf3c1de5aba6a3958",
+        "0f5b385e8a6ec431ee51612799f628d347bba7e3ca910a4a644ca7590ca82dd8",
+        "eed511a035d93b4916df471b9d5a64a71dae8a79d36e23afb83c1e5ec8e7bbe3",
+        "5b21f91050fde1f20bc7616aa3e5b97f50b5191cc03794691f2330840d7c0ab0"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/how-to/decrypt.zh.md",
+      "target": "content/percona/how-to/decrypt.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/how-to/decrypt/",
+      "route": "/zh/percona/how-to/decrypt/",
+      "sha256": "4705455f060bb59ee06e5235911caaab469af244dca685e588caab757aee5101",
+      "code_sha256": [
+        "2e207d57ca08a26f2c21a36b3f53ab1dfbcdc95617747dfeb1b087968e2451ca",
+        "e0d7626f0d6fbd220b2a4e90fcf3112b608c4da71df19a9bf3c1de5aba6a3958",
+        "0f5b385e8a6ec431ee51612799f628d347bba7e3ca910a4a644ca7590ca82dd8",
+        "eed511a035d93b4916df471b9d5a64a71dae8a79d36e23afb83c1e5ec8e7bbe3",
+        "5b21f91050fde1f20bc7616aa3e5b97f50b5191cc03794691f2330840d7c0ab0"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/how-to/enforcement.md",
+      "target": "content/percona/how-to/enforcement.md",
+      "language": "en",
+      "old_route": "/docs/how-to/enforcement/",
+      "route": "/percona/how-to/enforcement/",
+      "sha256": "b35235330c4ea7f7726371609e4847f08623751105a2d638914a3ad18e1b0096",
+      "code_sha256": [
+        "d425d3c4a45b25eafe5180f8db5c51cea0ff3955689d455216fe113438e53cd3",
+        "150294fdbd8f1a3e92a90db8275ac9d51575a213a2e8915f3441c444fe13d467",
+        "288f58e2e38584766f6be2e8dfcc91377ef72a678a716e81e758171ec60b3b47",
+        "8feb48b4b47daf73757e7d2d524a4a9728a843ccfc243b858be602da633d6096"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/how-to/enforcement.zh.md",
+      "target": "content/percona/how-to/enforcement.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/how-to/enforcement/",
+      "route": "/zh/percona/how-to/enforcement/",
+      "sha256": "9e93fe0c2096e4f71553a04a95a4c5574b2bf25d5ccc01c2be96fb11b777a06c",
+      "code_sha256": [
+        "d425d3c4a45b25eafe5180f8db5c51cea0ff3955689d455216fe113438e53cd3",
+        "150294fdbd8f1a3e92a90db8275ac9d51575a213a2e8915f3441c444fe13d467",
+        "288f58e2e38584766f6be2e8dfcc91377ef72a678a716e81e758171ec60b3b47",
+        "8feb48b4b47daf73757e7d2d524a4a9728a843ccfc243b858be602da633d6096"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/how-to/multi-tenant-setup.md",
+      "target": "content/percona/how-to/multi-tenant-setup.md",
+      "language": "en",
+      "old_route": "/docs/how-to/multi-tenant-setup/",
+      "route": "/percona/how-to/multi-tenant-setup/",
+      "sha256": "744d4359b149926e0b8910eeae459d2e62c170a448525a9bccdfe54f09ab3aa9",
+      "code_sha256": [
+        "2259dec8f323bab4b862219e8e1c90241ce87d6b2f189c5ab56a3fbd5f40006e",
+        "c7ab0b3b0c3053708b73d4c38d3c537a6ebeccce3795a79c5957dee66d819d70",
+        "c7ab0b3b0c3053708b73d4c38d3c537a6ebeccce3795a79c5957dee66d819d70",
+        "e06ba7c5b29695965b6ee153d5ab83855c285f99ec81231582059674140ca232",
+        "d9e561c27d8a40388cff038dccbce1dc103c8cdce4d78ef64fca4725c191d25b",
+        "79b1eb6fd34d207f365d3771a22137ded8e88335dfae6add5bd83b099a83d6a4",
+        "62f952a2a56d996f734bd17a54f31a6774333baeed2cd5706b183d7af8277466",
+        "8134e33bace1bbba96df68edbbcf6a381b8992c1760c1b36ee06fa2ebf4f7a39",
+        "bed050fba6fb9d0892bfbc14966ade4c90f694904c206fab1c09cd11518b5076",
+        "d0fdb4a0f2f02ef27e243feba48a1108ff0a1b61d37c33c15afda566d3c5b138",
+        "8ae96c3612c2fa55cc9b1fb7ed4ee235bab74377b924486e8614f92b282d6ddb",
+        "0a5514a3a7924aa3bc69946387790f8409c3eed1343a99bf3c16bc29262bc694",
+        "7c9f23ddc9088d8eb5f54544b51415086b1f4c05969b0abe7315008906f192de",
+        "5aa6bbbdb78ce9eadfa60c9fdc627287cf3ee0a3cfcad12139403591063af8d3",
+        "d2a62c7918ab20db781e6a0309240d6703ffd8f476d21448750833ab9caccdc4"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/how-to/multi-tenant-setup.zh.md",
+      "target": "content/percona/how-to/multi-tenant-setup.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/how-to/multi-tenant-setup/",
+      "route": "/zh/percona/how-to/multi-tenant-setup/",
+      "sha256": "7f8cebd88919984b74d16d8d2d100451d0d9791ed0f04308fe89864f5588617f",
+      "code_sha256": [
+        "2259dec8f323bab4b862219e8e1c90241ce87d6b2f189c5ab56a3fbd5f40006e",
+        "c7ab0b3b0c3053708b73d4c38d3c537a6ebeccce3795a79c5957dee66d819d70",
+        "c7ab0b3b0c3053708b73d4c38d3c537a6ebeccce3795a79c5957dee66d819d70",
+        "e06ba7c5b29695965b6ee153d5ab83855c285f99ec81231582059674140ca232",
+        "d9e561c27d8a40388cff038dccbce1dc103c8cdce4d78ef64fca4725c191d25b",
+        "79b1eb6fd34d207f365d3771a22137ded8e88335dfae6add5bd83b099a83d6a4",
+        "62f952a2a56d996f734bd17a54f31a6774333baeed2cd5706b183d7af8277466",
+        "8134e33bace1bbba96df68edbbcf6a381b8992c1760c1b36ee06fa2ebf4f7a39",
+        "bed050fba6fb9d0892bfbc14966ade4c90f694904c206fab1c09cd11518b5076",
+        "d0fdb4a0f2f02ef27e243feba48a1108ff0a1b61d37c33c15afda566d3c5b138",
+        "8ae96c3612c2fa55cc9b1fb7ed4ee235bab74377b924486e8614f92b282d6ddb",
+        "0a5514a3a7924aa3bc69946387790f8409c3eed1343a99bf3c16bc29262bc694",
+        "7c9f23ddc9088d8eb5f54544b51415086b1f4c05969b0abe7315008906f192de",
+        "5aa6bbbdb78ce9eadfa60c9fdc627287cf3ee0a3cfcad12139403591063af8d3",
+        "d2a62c7918ab20db781e6a0309240d6703ffd8f476d21448750833ab9caccdc4"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/how-to/restore-backups.md",
+      "target": "content/percona/how-to/restore-backups.md",
+      "language": "en",
+      "old_route": "/docs/how-to/restore-backups/",
+      "route": "/percona/how-to/restore-backups/",
+      "sha256": "4d950542b910a1ca72d08a57f5b81f5aba3aea3f61b66c4bca4942aa511ce4b5",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/how-to/restore-backups.zh.md",
+      "target": "content/percona/how-to/restore-backups.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/how-to/restore-backups/",
+      "route": "/zh/percona/how-to/restore-backups/",
+      "sha256": "5c31c56da11ddb43957215feac4ea255cc382c5fe9391814c59eec561e29117c",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/how-to/uninstall.md",
+      "target": "content/percona/how-to/uninstall.md",
+      "language": "en",
+      "old_route": "/docs/how-to/uninstall/",
+      "route": "/percona/how-to/uninstall/",
+      "sha256": "d240ff727d8ad28083189552ba4945a91262ddd1f2227270b972323032b11e8c",
+      "code_sha256": [
+        "1310012bd4cf9200d6fe4b331c798e64564f0869d3f87f6acab52a800f723581",
+        "3ae1c60c6910f850fefa358bebff6030dd9660678dd7bf7ed438f2f0e073f7fa",
+        "8be884ff63f8292e10c94e3a1a13ccecb3ac8a6ed3f2999c26bd1e751fbc2aae",
+        "8c78d730e59911f7a24e03866cc74f2c4256bb4b2d7655360576114002caa245",
+        "39d0df714791f9baa3894e479e1041615bb34e21f846bb167faf3de7e96cd005",
+        "2ef8e76c703110c185b8cf471d3d0c47cdf69c8eacaa244c204e8075da35d960",
+        "c066a325b4c61e92be7a69524e5c72b8d6db02838add90f2d7c4f5787b2ad713",
+        "a288728d85770f0cc17054fd60e05827e1adb0a927ced523b14786cbe7b8f813",
+        "b80f328be019ab433d28a60af658f7f0c0bbfeb7e2197aecb1871d4f5a032bc3",
+        "c9363bd84a400a8305d84db7d94dd3a7e01187267411f8db38fe2af0dcf34a43"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/how-to/uninstall.zh.md",
+      "target": "content/percona/how-to/uninstall.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/how-to/uninstall/",
+      "route": "/zh/percona/how-to/uninstall/",
+      "sha256": "3a0ae4b78ddee0c7fad8e44e7a492d399c474d28095cd516b0b49dac38d882eb",
+      "code_sha256": [
+        "1310012bd4cf9200d6fe4b331c798e64564f0869d3f87f6acab52a800f723581",
+        "3ae1c60c6910f850fefa358bebff6030dd9660678dd7bf7ed438f2f0e073f7fa",
+        "8be884ff63f8292e10c94e3a1a13ccecb3ac8a6ed3f2999c26bd1e751fbc2aae",
+        "8c78d730e59911f7a24e03866cc74f2c4256bb4b2d7655360576114002caa245",
+        "39d0df714791f9baa3894e479e1041615bb34e21f846bb167faf3de7e96cd005",
+        "2ef8e76c703110c185b8cf471d3d0c47cdf69c8eacaa244c204e8075da35d960",
+        "c066a325b4c61e92be7a69524e5c72b8d6db02838add90f2d7c4f5787b2ad713",
+        "a288728d85770f0cc17054fd60e05827e1adb0a927ced523b14786cbe7b8f813",
+        "b80f328be019ab433d28a60af658f7f0c0bbfeb7e2197aecb1871d4f5a032bc3",
+        "c9363bd84a400a8305d84db7d94dd3a7e01187267411f8db38fe2af0dcf34a43"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/how-to/upgrade.md",
+      "target": "content/percona/how-to/upgrade.md",
+      "language": "en",
+      "old_route": "/docs/how-to/upgrade/",
+      "route": "/percona/how-to/upgrade/",
+      "sha256": "5942bdf553f9edeaae88cdf9bbf1eb4bef0f84243234915f381f1ba2e0d2d4cb",
+      "code_sha256": [
+        "ec6bb32935e2a86839a6d7312b46b487804892420df1eb7e6ad2076c2e9e6a2c",
+        "df00f0bc034337008e5f0cdb006dca16a36ac64200c83276f3d6c506ffb85cee"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/how-to/upgrade.zh.md",
+      "target": "content/percona/how-to/upgrade.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/how-to/upgrade/",
+      "route": "/zh/percona/how-to/upgrade/",
+      "sha256": "d5dcb26eaa065c35a58a34bfbb265eb7861e5e4ee34ce15be44945b6e40be971",
+      "code_sha256": [
+        "ec6bb32935e2a86839a6d7312b46b487804892420df1eb7e6ad2076c2e9e6a2c",
+        "df00f0bc034337008e5f0cdb006dca16a36ac64200c83276f3d6c506ffb85cee"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/_index.md",
+      "target": "content/percona/index/_index.md",
+      "language": "en",
+      "old_route": "/docs/index/",
+      "route": "/percona/index/",
+      "sha256": "5f7350cb8d9a4c2ef10e84666979cf2c4a18b99d7c27f991a4c61dfce473748a",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/_index.zh.md",
+      "target": "content/percona/index/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/index/",
+      "route": "/zh/percona/index/",
+      "sha256": "f0828e4a4baa2e193c0847f79bc828596856a60668d13ce59d6eaf3a88c342e3",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/about-tde.md",
+      "target": "content/percona/index/about-tde.md",
+      "language": "en",
+      "old_route": "/docs/index/about-tde/",
+      "route": "/percona/index/about-tde/",
+      "sha256": "86787e5fff05728596bc3b8cdd404a8d42944f0f24761af8638026bc7493fcc5",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/about-tde.zh.md",
+      "target": "content/percona/index/about-tde.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/index/about-tde/",
+      "route": "/zh/percona/index/about-tde/",
+      "sha256": "8537fbb40cc4a59b9cdeca43d16e07e2203d2941cede847766bbd3d41969401a",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/how-does-tde-work.md",
+      "target": "content/percona/index/how-does-tde-work.md",
+      "language": "en",
+      "old_route": "/docs/index/how-does-tde-work/",
+      "route": "/percona/index/how-does-tde-work/",
+      "sha256": "548d291b8481d3e2cc32158811f547e834d232dd7ec26b22d63eca06d6432578",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/how-does-tde-work.zh.md",
+      "target": "content/percona/index/how-does-tde-work.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/index/how-does-tde-work/",
+      "route": "/zh/percona/index/how-does-tde-work/",
+      "sha256": "847fbdf3008508d88e831e7878c3fd7b2641819870280ba78c1493eb8aac44ec",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/how-tde-helps.md",
+      "target": "content/percona/index/how-tde-helps.md",
+      "language": "en",
+      "old_route": "/docs/index/how-tde-helps/",
+      "route": "/percona/index/how-tde-helps/",
+      "sha256": "adae3c9b4d058b1d9b1cd48f059c370c4561f8c7043fbf9c1f3903d747b39d24",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/how-tde-helps.zh.md",
+      "target": "content/percona/index/how-tde-helps.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/index/how-tde-helps/",
+      "route": "/zh/percona/index/how-tde-helps/",
+      "sha256": "321cb732cb58c63276361e3bfc0248c1eb182a5ac8cba2b16165542626312f6c",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/supported-versions.md",
+      "target": "content/percona/index/supported-versions.md",
+      "language": "en",
+      "old_route": "/docs/index/supported-versions/",
+      "route": "/percona/index/supported-versions/",
+      "sha256": "77dfc420d4295ff7b205894af0ea558d6d1edb509a66b74efe1bd8c7bc1c19e3",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/supported-versions.zh.md",
+      "target": "content/percona/index/supported-versions.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/index/supported-versions/",
+      "route": "/zh/percona/index/supported-versions/",
+      "sha256": "8e5d47ea04f58d32973ed022d0a54ba010f919246a74bcccb594469177641653",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/table-access-method.md",
+      "target": "content/percona/index/table-access-method.md",
+      "language": "en",
+      "old_route": "/docs/index/table-access-method/",
+      "route": "/percona/index/table-access-method/",
+      "sha256": "c4b9a7100d096cfa74b381fa2a3ea5f476ea805f4fddbba1088ec32a6791cde1",
+      "code_sha256": [
+        "458290874747f46a868f90d44f0119668e439465bcf458159a97306300143f10",
+        "ce323ef683979267a070c69d895296d26c534d20abb20b4e0ece314d5464b18f",
+        "25da4d40f9b1fdcc9ccc7687812508fa5a4c5a0a0d0c5110bc9b412acfe3910f",
+        "eb6f48403694ac10088e3f843db830700aaaedbd73603d9bf30e5d827e1535ab",
+        "dff24986b790accfafd8956ab2489162cbce1ac1c178adcf86f2d0ac2ac092d0"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/table-access-method.zh.md",
+      "target": "content/percona/index/table-access-method.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/index/table-access-method/",
+      "route": "/zh/percona/index/table-access-method/",
+      "sha256": "1b80528dd17953ce5f613fa7f7300c891903d5f1e41c50a0dc1e1168e15a7a0c",
+      "code_sha256": [
+        "458290874747f46a868f90d44f0119668e439465bcf458159a97306300143f10",
+        "ce323ef683979267a070c69d895296d26c534d20abb20b4e0ece314d5464b18f",
+        "25da4d40f9b1fdcc9ccc7687812508fa5a4c5a0a0d0c5110bc9b412acfe3910f",
+        "eb6f48403694ac10088e3f843db830700aaaedbd73603d9bf30e5d827e1535ab",
+        "dff24986b790accfafd8956ab2489162cbce1ac1c178adcf86f2d0ac2ac092d0"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/tde-encrypts.md",
+      "target": "content/percona/index/tde-encrypts.md",
+      "language": "en",
+      "old_route": "/docs/index/tde-encrypts/",
+      "route": "/percona/index/tde-encrypts/",
+      "sha256": "4d92b382e2c8d8a2d9f47a296d691fe02fc15503293efd382c7e53d75f308bfd",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/tde-encrypts.zh.md",
+      "target": "content/percona/index/tde-encrypts.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/index/tde-encrypts/",
+      "route": "/zh/percona/index/tde-encrypts/",
+      "sha256": "4b165ebf11d80bf8eceeb7314920ba473215e57ff8f6633b17f3957ac7adf123",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/tde-limitations.md",
+      "target": "content/percona/index/tde-limitations.md",
+      "language": "en",
+      "old_route": "/docs/index/tde-limitations/",
+      "route": "/percona/index/tde-limitations/",
+      "sha256": "d72536170449693ca347e67c5981852c40c33f766fa8ecfa394da6b68ee5647c",
+      "code_sha256": [
+        "e2bc4eea000442e19bb6314808e5be603649d989f36a5587450cbcfbda0cd63a"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/tde-limitations.zh.md",
+      "target": "content/percona/index/tde-limitations.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/index/tde-limitations/",
+      "route": "/zh/percona/index/tde-limitations/",
+      "sha256": "5f40b95a13caa7ffefbb2749c602bafd77b87f48e5c8dff438824989c132af0a",
+      "code_sha256": [
+        "e2bc4eea000442e19bb6314808e5be603649d989f36a5587450cbcfbda0cd63a"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/what-tde-impacts.md",
+      "target": "content/percona/index/what-tde-impacts.md",
+      "language": "en",
+      "old_route": "/docs/index/what-tde-impacts/",
+      "route": "/percona/index/what-tde-impacts/",
+      "sha256": "39cb9757068992c2b4df21c8a1cef19680d74709e81ee299b9419c800a55e1f4",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/index/what-tde-impacts.zh.md",
+      "target": "content/percona/index/what-tde-impacts.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/index/what-tde-impacts/",
+      "route": "/zh/percona/index/what-tde-impacts/",
+      "sha256": "5a6e4688163627ff905caf81e42eea11c10353e438871b3ea7722c0d0f29845c",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/install.md",
+      "target": "content/percona/install.md",
+      "language": "en",
+      "old_route": "/docs/install/",
+      "route": "/percona/install/",
+      "sha256": "269f33df9dc1d26db075acff7c6aa3997771c148292d4e4f5d479f1b0d024a34",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/install.zh.md",
+      "target": "content/percona/install.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/install/",
+      "route": "/zh/percona/install/",
+      "sha256": "e0be0ca2aeed1eef7f73e6e0faf48890b3c2697cc607bc32eff2e3da3e377d28",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/legal-notice.md",
+      "target": "content/percona/legal-notice.md",
+      "language": "en",
+      "old_route": "/docs/legal-notice/",
+      "route": "/percona/legal-notice/",
+      "sha256": "4016008e1d9c517ec6d0a31fbb7f5c2b3ce3132cc2adb070f18bf17d49eac78f",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/legal-notice.zh.md",
+      "target": "content/percona/legal-notice.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/legal-notice/",
+      "route": "/zh/percona/legal-notice/",
+      "sha256": "74276f1fe3c08bbbc1a0d263711696008fc273247014ef72c30b608f96a8bfb7",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/overview.md",
+      "target": "content/percona/overview.md",
+      "language": "en",
+      "old_route": "/docs/overview/",
+      "route": "/percona/overview/",
+      "sha256": "2eab32b3f017df01795f2fbf8a0540befe71d943bbda002c80aebc29633afcea",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/overview.zh.md",
+      "target": "content/percona/overview.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/overview/",
+      "route": "/zh/percona/overview/",
+      "sha256": "f603127875378f43eccbcd33e7e929fcf822e51d6049329dd37c130092047a8c",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/_index.md",
+      "target": "content/percona/release-notes/_index.md",
+      "language": "en",
+      "old_route": "/docs/release-notes/",
+      "route": "/percona/release-notes/",
+      "sha256": "e12762f05ab9209b0b2ded3ebd12cb8c4a659523f4ec87d3aacc49d7c32945d0",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/_index.zh.md",
+      "target": "content/percona/release-notes/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/release-notes/",
+      "route": "/zh/percona/release-notes/",
+      "sha256": "3e4cc70ad6eafa29205c446d3cad395bf99d40ee110f25d85896caa469f5d1aa",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/alpha1.md",
+      "target": "content/percona/release-notes/alpha1.md",
+      "language": "en",
+      "old_route": "/docs/release-notes/alpha1/",
+      "route": "/percona/release-notes/alpha1/",
+      "sha256": "eef6fb644a617af90e90bd57741a3674ac56e4bf7001fbb32104a8d4a078590e",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/alpha1.zh.md",
+      "target": "content/percona/release-notes/alpha1.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/release-notes/alpha1/",
+      "route": "/zh/percona/release-notes/alpha1/",
+      "sha256": "2c5a312b49bf22f90853577abc27c8e03b0286734ee328116dd41eefbe4550b7",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/beta.md",
+      "target": "content/percona/release-notes/beta.md",
+      "language": "en",
+      "old_route": "/docs/release-notes/beta/",
+      "route": "/percona/release-notes/beta/",
+      "sha256": "bd348f108f619ae59c004e103d53a2dc4a32cb70f2e9853d76c6993508190044",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/beta.zh.md",
+      "target": "content/percona/release-notes/beta.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/release-notes/beta/",
+      "route": "/zh/percona/release-notes/beta/",
+      "sha256": "6fb09d9f370351db46fe381daa174f9f378c512a343c48cd2b7f71521a8aded3",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/beta2.md",
+      "target": "content/percona/release-notes/beta2.md",
+      "language": "en",
+      "old_route": "/docs/release-notes/beta2/",
+      "route": "/percona/release-notes/beta2/",
+      "sha256": "1275fde2b4630e3be903f32036f8fa44222e228dd109d51295fae2754da987a0",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/beta2.zh.md",
+      "target": "content/percona/release-notes/beta2.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/release-notes/beta2/",
+      "route": "/zh/percona/release-notes/beta2/",
+      "sha256": "2e00543e0181dad08c842aa4434dace57bd448260bddba1d5ff7ffd605b78694",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/mvp.md",
+      "target": "content/percona/release-notes/mvp.md",
+      "language": "en",
+      "old_route": "/docs/release-notes/mvp/",
+      "route": "/percona/release-notes/mvp/",
+      "sha256": "c6a3d5bcff41915a249ef5944f6ab6dfb534a8c671666abfc2e55d3c0b11ae57",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/mvp.zh.md",
+      "target": "content/percona/release-notes/mvp.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/release-notes/mvp/",
+      "route": "/zh/percona/release-notes/mvp/",
+      "sha256": "2ea5c083783bf1fc908e7581a1cf5909c5c89b456ec5fedf1c58643b2c54e899",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/rc.md",
+      "target": "content/percona/release-notes/rc.md",
+      "language": "en",
+      "old_route": "/docs/release-notes/rc/",
+      "route": "/percona/release-notes/rc/",
+      "sha256": "70f43c80652645b087b185cb89a3d8b1441bb11bc3dc0f5b8346d8c35bd4c7be",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/rc.zh.md",
+      "target": "content/percona/release-notes/rc.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/release-notes/rc/",
+      "route": "/zh/percona/release-notes/rc/",
+      "sha256": "38e468374f07ca5f8bf09924d33754aa2562aa599133c9f7963d334493aa976b",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/rc2.md",
+      "target": "content/percona/release-notes/rc2.md",
+      "language": "en",
+      "old_route": "/docs/release-notes/rc2/",
+      "route": "/percona/release-notes/rc2/",
+      "sha256": "da9d488f445c5c99cb6b3e0e6feb60dff6d492fd11c3ae6a7e8d368798825f4d",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/rc2.zh.md",
+      "target": "content/percona/release-notes/rc2.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/release-notes/rc2/",
+      "route": "/zh/percona/release-notes/rc2/",
+      "sha256": "fc923a33c006328cb9fb9e62cdfeb84f09745922552abbd6bd224e8e002d20ad",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes-v1.0.md",
+      "target": "content/percona/release-notes/release-notes-v1.0.md",
+      "language": "en",
+      "old_route": "/docs/release-notes/release-notes-v1.0/",
+      "route": "/percona/release-notes/release-notes-v1.0/",
+      "sha256": "e625e2d7364a5b3683041a2ed52a4f0aa545e02689fb3ea8c2d709711ff06ff0",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes-v1.0.zh.md",
+      "target": "content/percona/release-notes/release-notes-v1.0.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/release-notes/release-notes-v1.0/",
+      "route": "/zh/percona/release-notes/release-notes-v1.0/",
+      "sha256": "cc504ddd3d03cd214d3b0ebad01d9d62e6c492c26257ff4cc5cb747665088660",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes-v2.0.md",
+      "target": "content/percona/release-notes/release-notes-v2.0.md",
+      "language": "en",
+      "old_route": "/docs/release-notes/release-notes-v2.0/",
+      "route": "/percona/release-notes/release-notes-v2.0/",
+      "sha256": "24286b2e61e9b590b90a07c6f8789f35bdda2edf793213ba1258ee5c4278fb56",
+      "code_sha256": [
+        "c7476cbae8f275a55cfabe324d73bbf13e08c53981e780731e995ade494918a5"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes-v2.0.zh.md",
+      "target": "content/percona/release-notes/release-notes-v2.0.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/release-notes/release-notes-v2.0/",
+      "route": "/zh/percona/release-notes/release-notes-v2.0/",
+      "sha256": "61334e081eb33999c1615a5c3c950a1600293bb4b93846a0289476504baa2a8e",
+      "code_sha256": [
+        "c7476cbae8f275a55cfabe324d73bbf13e08c53981e780731e995ade494918a5"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes-v2.1.1.md",
+      "target": "content/percona/release-notes/release-notes-v2.1.1.md",
+      "language": "en",
+      "old_route": "/docs/release-notes/release-notes-v2.1.1/",
+      "route": "/percona/release-notes/release-notes-v2.1.1/",
+      "sha256": "2c3b814a4ce86ed811b97066454798349c0ca31b9c26be6b8e76349f5f04cfb5",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes-v2.1.1.zh.md",
+      "target": "content/percona/release-notes/release-notes-v2.1.1.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/release-notes/release-notes-v2.1.1/",
+      "route": "/zh/percona/release-notes/release-notes-v2.1.1/",
+      "sha256": "13a7460265b88ef2b4d18c63301062582685d31eb5781c0dd5c86ee730434a8c",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes-v2.1.2.md",
+      "target": "content/percona/release-notes/release-notes-v2.1.2.md",
+      "language": "en",
+      "old_route": "/docs/release-notes/release-notes-v2.1.2/",
+      "route": "/percona/release-notes/release-notes-v2.1.2/",
+      "sha256": "965f25a6bb70602ba8dededade1f9c2d761448ee8bf8b0731018e3e826749a16",
+      "code_sha256": [
+        "cf8c402cd0b416be932e3fa258dd0ff919c41fd50757c99b9ecfdb4492f6a2d7"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes-v2.1.2.zh.md",
+      "target": "content/percona/release-notes/release-notes-v2.1.2.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/release-notes/release-notes-v2.1.2/",
+      "route": "/zh/percona/release-notes/release-notes-v2.1.2/",
+      "sha256": "765fc0452400c0b0968a226f91fc6895b74d43ee0e1eabbf23af5eb8cd0a9e50",
+      "code_sha256": [
+        "cf8c402cd0b416be932e3fa258dd0ff919c41fd50757c99b9ecfdb4492f6a2d7"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes-v2.1.md",
+      "target": "content/percona/release-notes/release-notes-v2.1.md",
+      "language": "en",
+      "old_route": "/docs/release-notes/release-notes-v2.1/",
+      "route": "/percona/release-notes/release-notes-v2.1/",
+      "sha256": "9cadea0bc3dd0c2f2718217a5cf2ac6b0829ce8a76b4ff75a2ac52b2a6f6fa7a",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes-v2.1.zh.md",
+      "target": "content/percona/release-notes/release-notes-v2.1.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/release-notes/release-notes-v2.1/",
+      "route": "/zh/percona/release-notes/release-notes-v2.1/",
+      "sha256": "93c9ea6e629fc33f422507d892141c515cb24346be77a54f392fd92b1c7d06b2",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes-v2.2.0.md",
+      "target": "content/percona/release-notes/release-notes-v2.2.0.md",
+      "language": "en",
+      "old_route": "/docs/release-notes/release-notes-v2.2.0/",
+      "route": "/percona/release-notes/release-notes-v2.2.0/",
+      "sha256": "dc6688c60500e7622888d86d1c28d387f3c5ba30938be89240b9c39df98fbc14",
+      "code_sha256": [
+        "cf8c402cd0b416be932e3fa258dd0ff919c41fd50757c99b9ecfdb4492f6a2d7"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes-v2.2.0.zh.md",
+      "target": "content/percona/release-notes/release-notes-v2.2.0.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/release-notes/release-notes-v2.2.0/",
+      "route": "/zh/percona/release-notes/release-notes-v2.2.0/",
+      "sha256": "5f2a72cc952b76df9abf291b9fd127d9e0bed7d5ec4c1b2ac15c27b02018f942",
+      "code_sha256": [
+        "cf8c402cd0b416be932e3fa258dd0ff919c41fd50757c99b9ecfdb4492f6a2d7"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes-v2.2.1.md",
+      "target": "content/percona/release-notes/release-notes-v2.2.1.md",
+      "language": "en",
+      "old_route": "/docs/release-notes/release-notes-v2.2.1/",
+      "route": "/percona/release-notes/release-notes-v2.2.1/",
+      "sha256": "af84b10d0ee5486d14b304dcde2dd078acd4e56bd4da8bf2a2d103019b7a2373",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes-v2.2.1.zh.md",
+      "target": "content/percona/release-notes/release-notes-v2.2.1.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/release-notes/release-notes-v2.2.1/",
+      "route": "/zh/percona/release-notes/release-notes-v2.2.1/",
+      "sha256": "b0ed59551655f23cd8912609213cff4bb3c0d4e910b4f8d52e2c72e0ba1d4dfe",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes-v2.2.2.md",
+      "target": "content/percona/release-notes/release-notes-v2.2.2.md",
+      "language": "en",
+      "old_route": "/docs/release-notes/release-notes-v2.2.2/",
+      "route": "/percona/release-notes/release-notes-v2.2.2/",
+      "sha256": "da288e06fe10a5b4aad3bacb4c58e72b42988dcfc907efcfe42471d9c4fe5d7e",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes-v2.2.2.zh.md",
+      "target": "content/percona/release-notes/release-notes-v2.2.2.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/release-notes/release-notes-v2.2.2/",
+      "route": "/zh/percona/release-notes/release-notes-v2.2.2/",
+      "sha256": "794c26eb49a454a1aa0aa75ed7129973d514045c147cffa77b9d8c52d3399c93",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes.md",
+      "target": "content/percona/release-notes/release-notes.md",
+      "language": "en",
+      "old_route": "/docs/release-notes/release-notes/",
+      "route": "/percona/release-notes/release-notes/",
+      "sha256": "efb362cb0b02078d72ba0d639d621bb0159034e25175e4504d7313aaa8192893",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/release-notes/release-notes.zh.md",
+      "target": "content/percona/release-notes/release-notes.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/release-notes/release-notes/",
+      "route": "/zh/percona/release-notes/release-notes/",
+      "sha256": "7048a0b603ec6ca98f46160a4b7468d691b9119147212e1c2ab2a01237b9892d",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/replication.md",
+      "target": "content/percona/replication.md",
+      "language": "en",
+      "old_route": "/docs/replication/",
+      "route": "/percona/replication/",
+      "sha256": "4dc422aacebfccdd2af8b78e26251f5330487503863a55ce452ae8797152a289",
+      "code_sha256": [
+        "efc5ca81be7dffc37215cb0a28e1b917119826f68cb77a63c9d9aa91c1ad6ceb",
+        "e5d3e610e9d6bb3d593a5417f281b32696be5bcb8fe878417facff74dc6f916a",
+        "4a86c6e1f1b1148918318ffc8a85e19ae966bb719e673f7c63f90a4995937bd1",
+        "590f7cc173b0bcae7f7209ff65783a76ebf5a65ab7bf62f489d8727689f834df",
+        "20904d560f54b0e8d6075da9b9a86358317365d64c2cadbefc76f6c5b391a259",
+        "1dd69d3ddcff21f1083daf142920c7e828377de2c499dd3ba528df955a5d6f9a",
+        "16f3abeb50738c2a76582a3aed7f7bd0fd97ff05dee16cdb4cdcaff5523d5aa5",
+        "82902bbb2125a82ab11fa7be904e4edade01c311c6e468b90ca3d2b819c447bc",
+        "fee04f5c363e2d6c3daf680ae07da958e9e2edfd1ee3ba566ceb7b9f44e21439"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/replication.zh.md",
+      "target": "content/percona/replication.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/replication/",
+      "route": "/zh/percona/replication/",
+      "sha256": "8f8ca6804284728a152343bc4a0379a955857c18fe34e4644046a55c9568f4f3",
+      "code_sha256": [
+        "efc5ca81be7dffc37215cb0a28e1b917119826f68cb77a63c9d9aa91c1ad6ceb",
+        "e5d3e610e9d6bb3d593a5417f281b32696be5bcb8fe878417facff74dc6f916a",
+        "4a86c6e1f1b1148918318ffc8a85e19ae966bb719e673f7c63f90a4995937bd1",
+        "590f7cc173b0bcae7f7209ff65783a76ebf5a65ab7bf62f489d8727689f834df",
+        "20904d560f54b0e8d6075da9b9a86358317365d64c2cadbefc76f6c5b391a259",
+        "1dd69d3ddcff21f1083daf142920c7e828377de2c499dd3ba528df955a5d6f9a",
+        "16f3abeb50738c2a76582a3aed7f7bd0fd97ff05dee16cdb4cdcaff5523d5aa5",
+        "82902bbb2125a82ab11fa7be904e4edade01c311c6e468b90ca3d2b819c447bc",
+        "fee04f5c363e2d6c3daf680ae07da958e9e2edfd1ee3ba566ceb7b9f44e21439"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/setup.md",
+      "target": "content/percona/setup.md",
+      "language": "en",
+      "old_route": "/docs/setup/",
+      "route": "/percona/setup/",
+      "sha256": "48746be87b844947b1eb9760fdaca0301043ec00548acbfafc3335478ed133b3",
+      "code_sha256": [
+        "2c0e224dfe9da5de525a9dfe8426e48eaf75a5ac7282c787d25dfc16fa1dd803",
+        "2259dec8f323bab4b862219e8e1c90241ce87d6b2f189c5ab56a3fbd5f40006e",
+        "e66e355b035329f337c0a76cdbef8d9298c2ce76d2e678caa6a069e9c9b96ecf",
+        "c7ab0b3b0c3053708b73d4c38d3c537a6ebeccce3795a79c5957dee66d819d70",
+        "07687cf81909396d36a06e631d04449d8bf4b496ca7f34fd81ef6cbfe30ad2d4",
+        "39428fc3720f8dfaf577c69429ea068343c22e30c3f0fd78ab897553667059be"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/setup.zh.md",
+      "target": "content/percona/setup.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/setup/",
+      "route": "/zh/percona/setup/",
+      "sha256": "abef3084c1098b38847162c159cd871ca48e0e6bfd7e7206e05513fa0c932f40",
+      "code_sha256": [
+        "2c0e224dfe9da5de525a9dfe8426e48eaf75a5ac7282c787d25dfc16fa1dd803",
+        "2259dec8f323bab4b862219e8e1c90241ce87d6b2f189c5ab56a3fbd5f40006e",
+        "e66e355b035329f337c0a76cdbef8d9298c2ce76d2e678caa6a069e9c9b96ecf",
+        "c7ab0b3b0c3053708b73d4c38d3c537a6ebeccce3795a79c5957dee66d819d70",
+        "07687cf81909396d36a06e631d04449d8bf4b496ca7f34fd81ef6cbfe30ad2d4",
+        "39428fc3720f8dfaf577c69429ea068343c22e30c3f0fd78ab897553667059be"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/test.md",
+      "target": "content/percona/test.md",
+      "language": "en",
+      "old_route": "/docs/test/",
+      "route": "/percona/test/",
+      "sha256": "6c089d24f471c8fb31bdacea27400f0c426bb5ba47ef581106a1f0950c8e8644",
+      "code_sha256": [
+        "e7dd0c3e916de920f544c2899b08e3ac4a9b7cbe6a6c90aa69cb6635bbf084ca",
+        "e2cb75d9d6e6caec13e0821f4b6a7777444866bae620db295a2848d83cdd8eb1",
+        "3f75c62a7958514b5c52c2b510a78bc6fbb3273a8b6dd0a8a60a2ad3ff8ae04e",
+        "0d43e08cfa57f556d6c02cf56e74b2092bd36758917b36acc983f86c5d0fa9b9",
+        "9c73de1ee08148789c63a9210f844c535b163b7c71639b7f03e3cc1889da030c"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/test.zh.md",
+      "target": "content/percona/test.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/test/",
+      "route": "/zh/percona/test/",
+      "sha256": "a7118f44e7158e7bd669d6424c4c21498b396ae53aea3cc48fda12e6befa7aa9",
+      "code_sha256": [
+        "e7dd0c3e916de920f544c2899b08e3ac4a9b7cbe6a6c90aa69cb6635bbf084ca",
+        "e2cb75d9d6e6caec13e0821f4b6a7777444866bae620db295a2848d83cdd8eb1",
+        "3f75c62a7958514b5c52c2b510a78bc6fbb3273a8b6dd0a8a60a2ad3ff8ae04e",
+        "0d43e08cfa57f556d6c02cf56e74b2092bd36758917b36acc983f86c5d0fa9b9",
+        "9c73de1ee08148789c63a9210f844c535b163b7c71639b7f03e3cc1889da030c"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/variables.md",
+      "target": "content/percona/variables.md",
+      "language": "en",
+      "old_route": "/docs/variables/",
+      "route": "/percona/variables/",
+      "sha256": "a7703c439ab9696e50b28f74aa9c549b53848d2b6a5e02b652f6c2b5308fd275",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/variables.zh.md",
+      "target": "content/percona/variables.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/variables/",
+      "route": "/zh/percona/variables/",
+      "sha256": "22d67c5ad7810c1dc907384f037c70e50e55a69926042ea56b66149c875b590c",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/wal-encryption.md",
+      "target": "content/percona/wal-encryption.md",
+      "language": "en",
+      "old_route": "/docs/wal-encryption/",
+      "route": "/percona/wal-encryption/",
+      "sha256": "0753ce9b70d869eae7c2d32d9663571b8f75face63a0fa46d70f6c8eab038361",
+      "code_sha256": [
+        "af7ff82463e85b4974aaad079b58aafd0cc6d3c5deba4411b609ed90a3804319",
+        "ef40e242cb7a72bc392d73fb3de450d736f0cc25f26976f2c42f3303a5a0a477",
+        "5efc7b85fd29c73f169e10c39d76d216d64c20ae2ec85c8d1defd28e8491e5ab",
+        "a288728d85770f0cc17054fd60e05827e1adb0a927ced523b14786cbe7b8f813",
+        "dcd0cad20af1e3cdb8762a157bf6ae76235cb78c691c433775b41d885e3c1404",
+        "447a1d1dd8ce1b85f25d4e2d023340d01a19b15f37d07bfe958cbdee3992dc6b"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/wal-encryption.zh.md",
+      "target": "content/percona/wal-encryption.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/wal-encryption/",
+      "route": "/zh/percona/wal-encryption/",
+      "sha256": "6a385f6cb9ded6b6e4f58646903f36530854929cb7f200ccae48b8043da4f262",
+      "code_sha256": [
+        "af7ff82463e85b4974aaad079b58aafd0cc6d3c5deba4411b609ed90a3804319",
+        "ef40e242cb7a72bc392d73fb3de450d736f0cc25f26976f2c42f3303a5a0a477",
+        "5efc7b85fd29c73f169e10c39d76d216d64c20ae2ec85c8d1defd28e8491e5ab",
+        "a288728d85770f0cc17054fd60e05827e1adb0a927ced523b14786cbe7b8f813",
+        "dcd0cad20af1e3cdb8762a157bf6ae76235cb78c691c433775b41d885e3c1404",
+        "447a1d1dd8ce1b85f25d4e2d023340d01a19b15f37d07bfe958cbdee3992dc6b"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/yum.md",
+      "target": "content/percona/yum.md",
+      "language": "en",
+      "old_route": "/docs/yum/",
+      "route": "/percona/yum/",
+      "sha256": "466db17171c1d118328a456f817332a7b4aca029560b990727ec743092665ef7",
+      "code_sha256": [
+        "840bccde1528076a8fe48a86c83e049966a0a9ba43d1ce37891ff20ecaeef18d",
+        "c535eb4063f09fa5ab8a12b1b7bbf89f39bf2c4263c6566ba33d5b07bcd3b0bb",
+        "79f480d61a77baaa972f51cc89ed73de7e2e9b6812429463327304ed8d8c6618",
+        "708f4ffacb802c5de7716d446fce1260991533d931c1b142fc62cbfd900c57c7"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/yum.zh.md",
+      "target": "content/percona/yum.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/yum/",
+      "route": "/zh/percona/yum/",
+      "sha256": "67ec9471891759a4361ca307e4c6d71a6aff7a2a07e7578f7476a5e5f0232787",
+      "code_sha256": [
+        "840bccde1528076a8fe48a86c83e049966a0a9ba43d1ce37891ff20ecaeef18d",
+        "c535eb4063f09fa5ab8a12b1b7bbf89f39bf2c4263c6566ba33d5b07bcd3b0bb",
+        "79f480d61a77baaa972f51cc89ed73de7e2e9b6812429463327304ed8d8c6618",
+        "708f4ffacb802c5de7716d446fce1260991533d931c1b142fc62cbfd900c57c7"
+      ],
+      "status": "imported"
+    }
+  ],
+  "assets": [
+    {
+      "source": "static/images/key-hierarchy-en-dark.svg",
+      "target": "static/percona/assets/images/key-hierarchy-en-dark.svg",
+      "bytes": 1466,
+      "sha256": "7f70bdca30fd4761f9751dafbfb9a5bb7aed7102cf1b90f6630edb719440b9ea"
+    },
+    {
+      "source": "static/images/key-hierarchy-en.svg",
+      "target": "static/percona/assets/images/key-hierarchy-en.svg",
+      "bytes": 1460,
+      "sha256": "98bfe391bb91eb0edb3c5582fca593fdb96f1066ed9ff0e1808a582ee7c476a7"
+    },
+    {
+      "source": "static/images/key-hierarchy-zh-dark.svg",
+      "target": "static/percona/assets/images/key-hierarchy-zh-dark.svg",
+      "bytes": 1448,
+      "sha256": "37d9b413ce7f609179c71acbb42ca085a0d680c78b97bfc406271881326a1a61"
+    },
+    {
+      "source": "static/images/key-hierarchy-zh.svg",
+      "target": "static/percona/assets/images/key-hierarchy-zh.svg",
+      "bytes": 1442,
+      "sha256": "8e314b8939c059009f892b661e93b4d6cf3a5677e728fd3242c3e10dd9c30cab"
+    },
+    {
+      "source": "static/images/percona-logo.svg",
+      "target": "static/percona/assets/images/percona-logo.svg",
+      "bytes": 3148,
+      "sha256": "2785549d547e2d2e9aa6369275ab71d53042db8d0d5f65f1479f420d0922a961"
+    },
+    {
+      "source": "static/images/percona-logomark.png",
+      "target": "static/percona/assets/images/percona-logomark.png",
+      "bytes": 23993,
+      "sha256": "025edf5911c28f806f119ef5e66d00d4eab428b3204686af702030f32937515a"
+    },
+    {
+      "source": "static/images/pg_tde.png",
+      "target": "static/percona/assets/images/pg_tde.png",
+      "bytes": 26488,
+      "sha256": "2ee58f49f354d1345cf4dc9adb52c9ab4e074f0e74b37b5183f64fbe386efb95"
+    },
+    {
+      "source": "static/images/postgresql-logo.svg",
+      "target": "static/percona/assets/images/postgresql-logo.svg",
+      "bytes": 2183,
+      "sha256": "1dea9939e4f31ae243465c16c841f5d36f952e83c0fd38cef0d705624d623799"
+    },
+    {
+      "source": "static/images/postgresql-mark.svg",
+      "target": "static/percona/assets/images/postgresql-mark.svg",
+      "bytes": 2183,
+      "sha256": "1dea9939e4f31ae243465c16c841f5d36f952e83c0fd38cef0d705624d623799"
+    },
+    {
+      "source": "static/images/tde-flow.png",
+      "target": "static/percona/assets/images/tde-flow.png",
+      "bytes": 31099,
+      "sha256": "ec3f1f729114620f6c0508aa06826d85c2d6833331839579b064c1a8e4a4b255"
+    },
+    {
+      "source": "static/legal/pg_tde-COPYRIGHT.txt",
+      "target": "static/percona/assets/legal/pg_tde-COPYRIGHT.txt",
+      "bytes": 2695,
+      "sha256": "9ad1e748f13bbb035434796aa4f774bb83c9a58f5744eae51c9e059ab660df62"
+    },
+    {
+      "source": "static/legal/site-LICENSE.txt",
+      "target": "static/percona/assets/legal/site-LICENSE.txt",
+      "bytes": 1073,
+      "sha256": "33a6ae5ff8d5d779db2776f5293e6922b07064bdd42274aaef9da21c3fe34bf0"
+    },
+    {
+      "source": "static/source-manifest.json",
+      "target": "static/percona/assets/source-manifest.json",
+      "bytes": 31528,
+      "sha256": "8cac1e4f6cbc0607ecd295f745aa4bc3a6fa67989619d8fffe6f93684b872d1d"
+    }
+  ]
+}

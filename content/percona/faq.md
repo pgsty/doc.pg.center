@@ -1,0 +1,207 @@
+---
+title: FAQ
+linkTitle: FAQ
+description: Answers about encryption boundaries, recovery, key rotation, and PostgreSQL compatibility.
+type: docs
+translation_notice: false
+upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/faq.md
+upstream_name: percona/pg_tde documentation
+upstream_copyright: Copyright © 2024–2025 Percona LLC and/or its affiliates
+upstream_license: LicenseRef-pg-tde
+upstream_notice: /percona/site/attribution/
+upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_modified: true
+weight: 900
+upstream_source: percona
+---
+
+> [!NOTE] Editorial correction
+> The temporary-file scope and internal-key rotation guidance have been clarified using the current limitations and architecture documentation. Compliance-related statements below reflect the upstream document, not a certification of a particular deployment. See [site errata](/percona/site/errata/).
+
+## Why do I need TDE? {#why-do-i-need-tde}
+
+Using TDE provides the following benefits:
+
+- Compliance to security and legal regulations like General Data Protection Regulation (GDPR), Payment Card Industry Data Security Standard (PCI DSS), California Consumer Privacy Act (CCPA), Data Protection Act 2018 (DPA 2018) and others
+- Encryption of backups. Even when an authorized person gets physical access to a backup, encryption ensures that the data remains unreadable and secure.
+- Granular encryption of specific data sets and reducing the performance overhead that encryption brings.
+- Additional layer of security to existing security measures
+
+## When and how should I use TDE? {#when-and-how-should-i-use-tde}
+
+If you are dealing with Personally Identifiable Information (PII), data encryption is crucial. Especially if you are involved in areas with strict regulations like:
+
+* financial services where TDE helps to comply with PCI DSS
+* healthcare and insurance - compliance with HIPAA, HITECH, CCPA
+* telecommunications, government and education to ensure data confidentiality.
+
+Using TDE helps you avoid the following risks:
+
+* Data breaches
+* Identity theft that may lead to financial fraud and other crimes
+* Reputation damage leading to loss of customer trust and business
+* Legal consequences and financial losses for non-compliance with data protection regulations
+* Internal threats by misusing unencrypted sensitive data
+
+For pg_tde, the encrypted scope includes tables using `tde_heap` and WAL when WAL encryption is enabled. Temporary tables can use `tde_heap`, but temporary files from operations that exceed `work_mem` are **not encrypted**. See the [current limitations](/percona/index/tde-limitations/).
+
+`pg_tde` does not encrypt system catalogs yet. This means that statistics data and database metadata are not encrypted.
+
+## Will logical replication work with pg_tde? {#will-logical-replication-work-with-pgtde}
+
+Yes, logical replication works with the encrypted tables.
+
+## Does logical replication keep data encrypted on subscribers? {#does-logical-replication-keep-data-encrypted-on-subscribers}
+
+Logical replication **does not** preserve encryption state. If the publisher uses `pg_tde` but the subscriber does not, the replicated data will be stored **in plain text** on the subscriber.
+
+Encryption is not propagated to the data-block level due to how logical replication operates.
+
+> [!NOTE]
+>     This means encrypted publishers **do not guarantee** encrypted logical replicas.
+
+## I use disk-level encryption. Why should I care about TDE? {#i-use-disk-level-encryption-why-should-i-care-about-tde}
+
+Encrypting a hard drive encrypts all data, including system, application, and temporary files.
+
+Full disk encryption protects your data from people who have physical access to your device and even if it is lost or stolen. However, it doesn't protect the data after system boot-up: the data is automatically decrypted when the system runs or when an authorized user requests it.
+
+Another point to consider is PCI DSS compliance for Personal Account Numbers (PAN) encryption.
+
+* **PCI DSS 3.4.1** standards might consider disk encryption sufficient for compliance if you meet these requirements:
+
+   * Separate the logical data access from the operating system authentication.
+
+   * Ensure the decryption key is not linked to user accounts.
+
+   Note that PCI DSS 3.4.1 is retiring on March 31, 2025. Therefore, consider switching to PCI DSS 4.0.
+
+* **PCI DSS 4.0** standards consider using only disk and partition-level encryption not enough to ensure PAN protection. It requires an additional layer of security that `pg_tde` can provide.
+
+`pg_tde` focuses specifically on data files and offers more granular control over encrypted data. The data remains encrypted on disk during runtime and when you move it to another directory, another system or storage. An example of such data is backups. They remain encrypted when moved to the backup storage.
+
+Thus, to protect your sensitive data, consider using TDE to encrypt it at the table level. Then use disk-level encryption to encrypt a specific volume where this data is stored, or the entire disk.
+
+## Is TDE enough to ensure data security? {#is-tde-enough-to-ensure-data-security}
+
+**No.** Transparent Data Encryption (TDE) adds an extra layer of security for data at rest. You should also consider implementing the following additional security features:
+
+* Access control and authentication
+* Strong network security like TLS
+* Disk encryption
+* Regular monitoring and auditing
+* Additional data protection for sensitive fields (e.g., application-layer encryption)
+
+## How does pg_tde make my data safe? {#how-does-pgtde-make-my-data-safe}
+
+`pg_tde` uses two keys to encrypt data:
+
+* Internal encryption keys to encrypt the data. These keys are stored internally in an encrypted format, in a single `$PGDATA/pg_tde` directory.
+* Principal keys to encrypt internal encryption keys. These keys are stored externally, in the Key Management System (KMS).
+
+You can use the following KMSs:
+
+* [HashiCorp Vault](https://developer.hashicorp.com/vault/docs/what-is-vault). `pg_tde` supports the KV secrets engine v2 of Vault, for more information see [Vault Configuration](/percona/global-key-provider-configuration/vault/).
+* [OpenBao](https://openbao.org/) implementation of Vault
+* KMIP-compatible servers, KMIP is a standardized protocol for handling cryptographic workloads and secrets management, for more information see [KMIP configuration](/percona/global-key-provider-configuration/kmip-server/).
+
+> [!NOTE]
+> HashiCorp Vault can also act as a KMIP server, managing cryptographic keys for clients that use the KMIP protocol.
+> *(KMIP functionality is available in Vault's enterprise edition.)*
+
+Let's break the encryption down into two parts:
+
+### Encryption of data files {#encryption-of-data-files}
+
+First, data files are encrypted with internal keys. Each file that has a different [Object Identifier (OID)](https://www.postgresql.org/docs/current/datatype-oid.html) has an internal key. For example, a table with 4 indexes will have 5 internal keys - one for the table and one for each index.
+
+The initial decision on what file to encrypt is based on the table access method in PostgreSQL. When you run a `CREATE` or `ALTER TABLE` statement with the `USING tde_heap` clause, the newly created data files are marked as encrypted, and then file operations encrypt or decrypt the data. Later, if an initial file is re-created as a result of a `TRUNCATE` or `VACUUM FULL` command, the newly created file inherits the encryption information and is either encrypted or not.
+
+The principal key is used to encrypt the internal keys. The principal key is stored in the key management store. When you query the table, the principal key is retrieved from the key store to decrypt the table. Then the internal key for that table is used to decrypt the data.
+
+### WAL encryption {#wal-encryption}
+
+WAL encryption is done globally for the entire database cluster. All modifications to any database within a PostgreSQL cluster are written to the same WAL to maintain data consistency and integrity and ensure that PostgreSQL cluster can be restored to a consistent state. Therefore, WAL is encrypted globally.
+
+When you turn on WAL encryption, `pg_tde` encrypts entire WAL files starting from the first WAL write after the server was started with the encryption turned on.
+
+The same 2-key approach is used with WAL as with the table data: WAL pages are first encrypted with the internal key. Then the internal key is encrypted with the global principal key.
+
+You can turn WAL encryption on and off so WAL can contain both encrypted and unencrypted data. The WAL encryption GUC variable influences only writes.
+
+Whenever the WAL is being read (by the recovery process or tools), the decision on what should be decrypted is based solely on the metadata of WAL encryption keys.
+
+## Should I encrypt all my data? {#should-i-encrypt-all-my-data}
+
+It depends on your business requirements and the sensitivity of your data. Encrypting all data is a good practice but it can have a performance impact.
+
+Consider encrypting only tables that store sensitive data. You can decide what tables to encrypt and with what key. The [Set up multi-tenancy](/percona/how-to/multi-tenant-setup/) section in the documentation focuses on this approach.
+
+We advise encrypting the whole database only if all your data is sensitive, like PII, or if there is no other way to comply with data safety requirements.
+
+## What cipher mechanisms are used by pg_tde? {#what-cipher-mechanisms-are-used-by-pgtde}
+
+`pg_tde` currently uses the following encryption algorithms:
+
+* `AES-128-CBC`, `AES-256-CBC` for encrypting database files; encrypted with internal keys
+* `AES-128-CTR`, `AES-256-CTR` for WAL encryption; encrypted with internal keys
+* `AES-128-GCM`, `AES-256-GCM` for encrypting internal keys; encrypted with the principal key
+
+## Is post-quantum encryption supported? {#is-post-quantum-encryption-supported}
+
+No, it's not yet supported. In our implementation we reply on OpenSSL libraries that don't yet support post-quantum encryption.
+
+## Can I encrypt an existing table? {#can-i-encrypt-an-existing-table}
+
+Yes, you can encrypt an existing table. Run the `ALTER TABLE` command as follows:
+
+```sql
+ALTER TABLE table_name SET ACCESS METHOD tde_heap;
+```
+
+Since the `SET ACCESS METHOD` command drops hint bits and this may affect the performance, we recommend to run the `SELECT count(*)` command. It checks every tuple for visibility and sets its hint bits. Read more in the [Changing existing table](/percona/test/) section.
+
+## Do I have to restart the database to encrypt the data? {#do-i-have-to-restart-the-database-to-encrypt-the-data}
+
+You must restart the database in the following cases to apply the changes:
+
+* after you enabled the `pg_tde` extension
+* when enabling WAL encryption
+
+After that, no database restart is required. When you create or alter the table using the `tde_heap` access method, the files are marked as those that require encryption. The encryption happens at the storage manager level, before a transaction is written to disk. Read more about [how tde_heap works](/percona/index/table-access-method/#how-tdeheap-works-with-pgtde).
+
+## What happens to my data if I lose a principal key? {#what-happens-to-my-data-if-i-lose-a-principal-key}
+
+If you lose encryption keys, especially, the principal key, the data is lost. That's why it's critical to back up your encryption keys securely and use the Key Management service for key management.
+
+## Can I use pg_tde in a multi-tenant setup? {#can-i-use-pgtde-in-a-multi-tenant-setup}
+
+Multi-tenancy is the type of architecture where multiple users, or tenants, share the same resource. It can be a database, a schema or an entire cluster.
+
+In `pg_tde`, multi-tenancy is supported via a separate principal key per database. This means that a database owner can decide what tables to encrypt within a database. The same database can have both encrypted and non-encrypted tables.
+
+To control user access to the databases, you can use role-based access control (RBAC).
+
+<!--- WAL files are encrypted globally across the entire PostgreSQL cluster using the same encryption keys. Users don't interact with WAL files as these are used by the database management system to ensure data integrity and durability. --->
+
+## Are my backups safe? Can I restore from them? {#are-my-backups-safe-can-i-restore-from-them}
+
+`pg_tde` encrypts data at rest. This means that data is stored on disk in an encrypted form. During a backup, already encrypted data files are copied from disk onto the storage. This ensures the data safety in backups.
+
+Since the encryption happens on the database level, it makes no difference for your tools and applications. They work with the data in the same way.
+
+To restore from an encrypted backup, you must have the same principal encryption key, which was used to encrypt files in your backup.  
+
+## I'm using OpenSSL in FIPS mode and need to use pg_tde. Does pg_tde comply with FIPS requirements? Can I use my own FIPS-mode OpenSSL library with pg_tde? {#i-m-using-openssl-in-fips-mode-and-need-to-use-pgtde-does-pgtde-comply-with-fips-requirements-can-i-use-my-own-fips-mode-openssl-library-with-pgtde}
+
+Yes. `pg_tde` works with the FIPS-compliant version of OpenSSL, whether it is provided by your operating system or if you use your own OpenSSL libraries. If you use your own libraries, make sure they are FIPS certified.
+
+## How do I rotate internal encryption keys in pg_tde? {#how-do-i-rotate-internal-encryption-keys-in-pgtde}
+
+We don't have a dedicated function to rotate internal keys, because a key is effectively rotated any time a table's data file is completely rewritten. Operations like `VACUUM FULL`, `TRUNCATE`, or some but not all `ALTER TABLE` commands automatically generate a new internal key.
+
+A table rewrite with `VACUUM FULL` generates a new internal key. Ordinary `VACUUM` does not rewrite the whole table. Plan for the exclusive lock and disk space required by `VACUUM FULL`.
+
+## What tools are supported with `pg_tde` WAL encryption? {#what-tools-are-supported-with-pgtde-wal-encryption}
+
+For a comprehensive list of supported `pg_tde` WAL encryption tools see [Limitations of pg_tde](/percona/index/tde-limitations/).

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 390" role="img" aria-label="Principal key → Internal keys → Tables · Indexes · TOAST">
+ <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M1 1L6 4L1 7" fill="none" stroke="#8a969d" stroke-width="1.3"/></marker></defs>
+ <rect x="1" y="1" width="438" height="388" rx="16" fill="#faf8f3" stroke="#dcdedc"/>
+ <g font-family="system-ui, sans-serif" text-anchor="middle">
+ <rect x="40" y="25" width="360" height="82" rx="8" fill="#fff" stroke="#e2b17f"/>
+ <text x="220" y="49" font-size="10" letter-spacing="1.5" fill="#94602d">KEY PROVIDER</text>
+ <text x="220" y="80" font-size="23" font-weight="600" fill="#212e38">Principal key</text>
+ <path d="M220 108V149" fill="none" stroke="#8a969d" marker-end="url(#arrow)"/>
+ <rect x="40" y="160" width="360" height="82" rx="8" fill="#fff" stroke="#9cbbc8"/>
+ <text x="220" y="184" font-size="10" letter-spacing="1.5" fill="#376a80">POSTGRESQL</text>
+ <text x="220" y="215" font-size="23" font-weight="600" fill="#212e38">Internal keys</text>
+ <path d="M220 243V284" fill="none" stroke="#8a969d" marker-end="url(#arrow)"/>
+ <rect x="40" y="295" width="360" height="44" rx="8" fill="#e9eff0"/>
+ <text x="220" y="323" font-size="18" font-weight="500" fill="#244858">Tables · Indexes · TOAST</text>
+ <text x="220" y="368" font-size="11" fill="#647079">WAL uses a separate server principal key</text>
+ </g></svg>

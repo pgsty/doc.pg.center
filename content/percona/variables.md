@@ -1,0 +1,87 @@
+---
+title: GUC Variables
+linkTitle: GUC settings
+description: Reference for WAL encryption, enforcement, global providers, and cipher selection.
+type: docs
+translation_notice: false
+upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/variables.md
+upstream_name: percona/pg_tde documentation
+upstream_copyright: Copyright © 2024–2025 Percona LLC and/or its affiliates
+upstream_license: LicenseRef-pg-tde
+upstream_notice: /percona/site/attribution/
+upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_modified: true
+weight: 630
+upstream_source: percona
+---
+
+The `pg_tde` extension provides GUC variables to configure the behaviour of the extension:
+
+## pg_tde.wal_encrypt {#pgtde-walencrypt}
+
+**Type** - boolean <br>
+**Default** - off
+
+A `boolean` variable that controls if WAL writes are encrypted or not.
+
+Changing this variable requires a server restart, and can only be set at the server level.
+
+WAL encryption is controlled globally. If enabled, all WAL writes are encrypted in the entire PostgreSQL cluster.
+
+This variable only controls new writes to the WAL, it doesn't affect existing WAL records.
+
+`pg_tde` is always capable of reading existing encrypted WAL records, as long as the keys used for the encryption are still available.
+
+Enabling WAL encryption requires a configured global principal key. Refer to the [WAL encryption configuration](/percona/wal-encryption/) topic for more information.
+
+## pg_tde.enforce_encryption {#pgtde-enforceencryption}
+
+**Type** - boolean <br>
+**Default** - off
+
+A `boolean` variable that controls if the creation of new, not encrypted tables is allowed.
+
+If enabled, `CREATE TABLE` statements will fail unless they use the `tde_heap` access method.
+
+Similarly, `ALTER TABLE <x> SET ACCESS METHOD` is only allowed, if the access method is `tde_heap`.
+
+Other DDL operations are still allowed. For example other `ALTER` commands are allowed on unencrypted tables, as long as the access method isn't changed.
+
+You can set this variable at the following levels:
+
+* global - for the entire PostgreSQL cluster
+* database - for specific databases
+* user - for specific users
+* session - for the current session
+
+Setting or changing the value requires superuser permissions. For examples, see the [Encryption Enforcement](/percona/how-to/enforcement/) topic.
+
+## pg_tde.inherit_global_providers {#pgtde-inheritglobalproviders}
+
+**Type** - boolean <br>
+**Default** - on
+
+A `boolean` variable that controls if databases can use global key providers for storing principal keys.
+
+If disabled, functions that change the key providers can only work with database local key providers.
+
+In this case, the default principal key, if set, is also disabled.
+
+You can set this variable at the following levels:
+
+* global - for the entire PostgreSQL cluster
+* database - for specific databases
+* user - for specific users
+* session - for the current session
+
+> [!NOTE]
+> Setting this variable doesn't affect existing uses of global keys. It only prevents the creation of new principal keys using global providers.
+
+## pg_tde.cipher {#pgtde-cipher}
+
+**Type** - string <br>
+**Default** - aes_128
+
+A `string` variable that selects the cipher (encryption algorithm). Currently, the supported values are `aes_128` and `aes_256`, corresponding to AES 128-bit and 256-bit key lengths, respectively.
+
+The setting applies only to objects created after the value is set, including principal keys, internal keys, and data encrypted by those keys. Existing objects are not re-encrypted.

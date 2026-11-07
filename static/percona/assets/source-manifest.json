@@ -1,0 +1,591 @@
+{
+  "repository": "percona/pg_tde",
+  "commit": "1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39",
+  "retrieved": "2026-11-06",
+  "files": [
+    {
+      "path": "advanced-topics/tech-reference.md",
+      "source_path": "documentation/docs/advanced-topics/tech-reference.md",
+      "bytes": 1772,
+      "sha256": "2a2e543d0c6da987c978bd959b553a076eec8dde541811ccfc5f540d08d1d614",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/advanced-topics/tech-reference.md"
+    },
+    {
+      "path": "advanced-topics/usage-guide.md",
+      "source_path": "documentation/docs/advanced-topics/usage-guide.md",
+      "bytes": 6833,
+      "sha256": "74aa7f60e163852358d83fca9796a053bf6738ce15424b252bd0e0772d88a6d7",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/advanced-topics/usage-guide.md"
+    },
+    {
+      "path": "apt.md",
+      "source_path": "documentation/docs/apt.md",
+      "bytes": 2112,
+      "sha256": "d107a90de4a9dd6d9b17a26df565c725f082202fb9cc3fde42887c2f86406d0b",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/apt.md"
+    },
+    {
+      "path": "architecture/encryption-architecture.md",
+      "source_path": "documentation/docs/architecture/encryption-architecture.md",
+      "bytes": 5338,
+      "sha256": "0dbff583c6e121a864b02743f826339bfae615ab0fa791c2cc0e5b3e2e6c0e86",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/architecture/encryption-architecture.md"
+    },
+    {
+      "path": "architecture/key-provider-management.md",
+      "source_path": "documentation/docs/architecture/key-provider-management.md",
+      "bytes": 4305,
+      "sha256": "999417061758b7fd1ffe7f5426ea39fddf93067cf7116e262c6287ad37c854a7",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/architecture/key-provider-management.md"
+    },
+    {
+      "path": "architecture/overview.md",
+      "source_path": "documentation/docs/architecture/overview.md",
+      "bytes": 2325,
+      "sha256": "5f71c720e35735dbd99c9dfe511a97126b6d30d7d8861ed8261d43b5b9ccef18",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/architecture/overview.md"
+    },
+    {
+      "path": "command-line-tools/cli-tools.md",
+      "source_path": "documentation/docs/command-line-tools/cli-tools.md",
+      "bytes": 1563,
+      "sha256": "11e303b603e58a1bb80ca27eb7986d2a4fca038995422b46e1a256bb5fc7f105",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/command-line-tools/cli-tools.md"
+    },
+    {
+      "path": "command-line-tools/pg-tde-archive-decrypt.md",
+      "source_path": "documentation/docs/command-line-tools/pg-tde-archive-decrypt.md",
+      "bytes": 2258,
+      "sha256": "3eb6b62e24d319efb41448ecdcc45e9914cc40b5064dce4cb4b9c9a4b2168b54",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/command-line-tools/pg-tde-archive-decrypt.md"
+    },
+    {
+      "path": "command-line-tools/pg-tde-change-key-provider.md",
+      "source_path": "documentation/docs/command-line-tools/pg-tde-change-key-provider.md",
+      "bytes": 1926,
+      "sha256": "b1f23e2645c9a4494870d5733238073d35ba516ca2edfee4be87a49bcbebd128",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/command-line-tools/pg-tde-change-key-provider.md"
+    },
+    {
+      "path": "command-line-tools/pg-tde-checksums.md",
+      "source_path": "documentation/docs/command-line-tools/pg-tde-checksums.md",
+      "bytes": 321,
+      "sha256": "6c8f4631193a86fdcc358cc6bdc1775009aa9484221fe9c468bec502c55fb93f",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/command-line-tools/pg-tde-checksums.md"
+    },
+    {
+      "path": "command-line-tools/pg-tde-restore-encrypt.md",
+      "source_path": "documentation/docs/command-line-tools/pg-tde-restore-encrypt.md",
+      "bytes": 2004,
+      "sha256": "cb89d3986e4ff06d6fb297e91d6a7acae373d54b79e936d79698768835067286",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/command-line-tools/pg-tde-restore-encrypt.md"
+    },
+    {
+      "path": "command-line-tools/pg-tde-upgrade.md",
+      "source_path": "documentation/docs/command-line-tools/pg-tde-upgrade.md",
+      "bytes": 2530,
+      "sha256": "cb308951b288c607b752a1493541028d951774ead54f56929660c27a7ebc4546",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/command-line-tools/pg-tde-upgrade.md"
+    },
+    {
+      "path": "command-line-tools/pg-tde-waldump.md",
+      "source_path": "documentation/docs/command-line-tools/pg-tde-waldump.md",
+      "bytes": 667,
+      "sha256": "63c95fcb8036db0700885b6dfe878502ea861df84a0cc8e9ea7085122b56d787",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/command-line-tools/pg-tde-waldump.md"
+    },
+    {
+      "path": "contribute.md",
+      "source_path": "documentation/docs/contribute.md",
+      "bytes": 9156,
+      "sha256": "7f1f24bf920b784addba0224cad8b989366719a76db74cc7ef42a967444dc1a9",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/contribute.md"
+    },
+    {
+      "path": "faq.md",
+      "source_path": "documentation/docs/faq.md",
+      "bytes": 12312,
+      "sha256": "d7b4d6f30f93925efc6bc243c739c7f2746b1b2fdba388dd0b9f30601136000d",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/faq.md"
+    },
+    {
+      "path": "features.md",
+      "source_path": "documentation/docs/features.md",
+      "bytes": 1014,
+      "sha256": "8980f4ccfcb6d3fef41c0dff5d5af39af88121447b98b557ca8081b168bd5f8b",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/features.md"
+    },
+    {
+      "path": "functions.md",
+      "source_path": "documentation/docs/functions.md",
+      "bytes": 13671,
+      "sha256": "efe166b9dbf5f64f7d64ace0b53258a9f58b22ab7e16d7fbca6bf81f7893f42a",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/functions.md"
+    },
+    {
+      "path": "get-help.md",
+      "source_path": "documentation/docs/get-help.md",
+      "bytes": 3189,
+      "sha256": "1945e9a43fe779e74fd5e744006fe11c0249965fb36d3bd59e5f3d3f4a7f59e5",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/get-help.md"
+    },
+    {
+      "path": "global-key-provider-configuration/keyring.md",
+      "source_path": "documentation/docs/global-key-provider-configuration/keyring.md",
+      "bytes": 2956,
+      "sha256": "71bec35a48ce15bd0850214154d058ff62449e06451a6325a2a65b603bfa323d",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/global-key-provider-configuration/keyring.md"
+    },
+    {
+      "path": "global-key-provider-configuration/kmip-akeyless.md",
+      "source_path": "documentation/docs/global-key-provider-configuration/kmip-akeyless.md",
+      "bytes": 518,
+      "sha256": "e582c9ad50235ca580ab4635d10ce7eb4edd7abb714c4f6ed45fd082838aec30",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/global-key-provider-configuration/kmip-akeyless.md"
+    },
+    {
+      "path": "global-key-provider-configuration/kmip-fortanix.md",
+      "source_path": "documentation/docs/global-key-provider-configuration/kmip-fortanix.md",
+      "bytes": 461,
+      "sha256": "ed7d1a80b0477a9930d7fc1e8982d5a17637e56c5c487d58a7aab4596f7c9981",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/global-key-provider-configuration/kmip-fortanix.md"
+    },
+    {
+      "path": "global-key-provider-configuration/kmip-server.md",
+      "source_path": "documentation/docs/global-key-provider-configuration/kmip-server.md",
+      "bytes": 2126,
+      "sha256": "93d3800f10ba6d0229eede92a3a7fdc004aa5de47a4ffc2b484dcc34d3b21ab8",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/global-key-provider-configuration/kmip-server.md"
+    },
+    {
+      "path": "global-key-provider-configuration/kmip-thales.md",
+      "source_path": "documentation/docs/global-key-provider-configuration/kmip-thales.md",
+      "bytes": 473,
+      "sha256": "8c9e1ba91e4667059f823faf8af361485e562ce6233455509731278cfd6ea8fb",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/global-key-provider-configuration/kmip-thales.md"
+    },
+    {
+      "path": "global-key-provider-configuration/openbao.md",
+      "source_path": "documentation/docs/global-key-provider-configuration/openbao.md",
+      "bytes": 1858,
+      "sha256": "bd30ea0ede814e684eadfed07e979c1b058f84e9aba1f9c7e1297b29571a12a7",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/global-key-provider-configuration/openbao.md"
+    },
+    {
+      "path": "global-key-provider-configuration/overview.md",
+      "source_path": "documentation/docs/global-key-provider-configuration/overview.md",
+      "bytes": 2439,
+      "sha256": "8488559be3b5cb905790e438c24ea1122c29220fecd8a3c6695336e2bc971a86",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/global-key-provider-configuration/overview.md"
+    },
+    {
+      "path": "global-key-provider-configuration/set-principal-key.md",
+      "source_path": "documentation/docs/global-key-provider-configuration/set-principal-key.md",
+      "bytes": 2866,
+      "sha256": "d082524e6572847c62267e8ce96277f244ecc781665ffa62ed808f7a346cb838",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/global-key-provider-configuration/set-principal-key.md"
+    },
+    {
+      "path": "global-key-provider-configuration/vault.md",
+      "source_path": "documentation/docs/global-key-provider-configuration/vault.md",
+      "bytes": 6918,
+      "sha256": "2decf6ad4e8183dc8fad7d3775575f8a1382ba96108ca16717a105dcf50228b7",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/global-key-provider-configuration/vault.md"
+    },
+    {
+      "path": "how-to/backup-wal-enabled.md",
+      "source_path": "documentation/docs/how-to/backup-wal-enabled.md",
+      "bytes": 4151,
+      "sha256": "01a0b4a8d221e2452fde675142eef603066fed82823ebb17830af77b0f17d72a",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/how-to/backup-wal-enabled.md"
+    },
+    {
+      "path": "how-to/decrypt.md",
+      "source_path": "documentation/docs/how-to/decrypt.md",
+      "bytes": 1463,
+      "sha256": "5837d1651afea5143844d7e2786c3f1cdc40928cce2b7df381c0badbbb169d94",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/how-to/decrypt.md"
+    },
+    {
+      "path": "how-to/enforcement.md",
+      "source_path": "documentation/docs/how-to/enforcement.md",
+      "bytes": 2301,
+      "sha256": "7078af659b6020a0bf1c12c3ec3d5cfebfb7b2e5062054f3c2eeff7ef568e706",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/how-to/enforcement.md"
+    },
+    {
+      "path": "how-to/multi-tenant-setup.md",
+      "source_path": "documentation/docs/how-to/multi-tenant-setup.md",
+      "bytes": 7660,
+      "sha256": "d7001215d7742aad2cef0b3aa434c853727dfe188b467ac5189bdeb0d297edc2",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/how-to/multi-tenant-setup.md"
+    },
+    {
+      "path": "how-to/restore-backups.md",
+      "source_path": "documentation/docs/how-to/restore-backups.md",
+      "bytes": 1215,
+      "sha256": "c2777d83832e0dc1197fcbb2029d5aceb9183fe1371d5a3ca500c51bcf3be70c",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/how-to/restore-backups.md"
+    },
+    {
+      "path": "how-to/uninstall.md",
+      "source_path": "documentation/docs/how-to/uninstall.md",
+      "bytes": 4855,
+      "sha256": "4cba08c517df4d7b22eaece5972463c4febc36dafc843e72f07ae22ee58ba8b9",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/how-to/uninstall.md"
+    },
+    {
+      "path": "how-to/upgrade.md",
+      "source_path": "documentation/docs/how-to/upgrade.md",
+      "bytes": 1446,
+      "sha256": "f001bbdee971e244aff6d74cf0302ef9822b7f62e23657f28bea08018ecfecf6",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/how-to/upgrade.md"
+    },
+    {
+      "path": "index/about-tde.md",
+      "source_path": "documentation/docs/index/about-tde.md",
+      "bytes": 850,
+      "sha256": "14112d38f59e35542a489df008e7a71eb28e69b8f3fb0cd3b05cd80f8ad7a6ba",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/index/about-tde.md"
+    },
+    {
+      "path": "index/how-does-tde-work.md",
+      "source_path": "documentation/docs/index/how-does-tde-work.md",
+      "bytes": 1543,
+      "sha256": "c084720d2b58bdbbe3951090c4d40f2b5a443970d119e69326cbfa822c039d4b",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/index/how-does-tde-work.md"
+    },
+    {
+      "path": "index/how-tde-helps.md",
+      "source_path": "documentation/docs/index/how-tde-helps.md",
+      "bytes": 1284,
+      "sha256": "36e14cd992dca36b8859f91f410911f18528d7a002dc302a4acac2d399be8b1a",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/index/how-tde-helps.md"
+    },
+    {
+      "path": "index/supported-versions.md",
+      "source_path": "documentation/docs/index/supported-versions.md",
+      "bytes": 1783,
+      "sha256": "5d6fa839ea04012bf62fcf7411ee70d304db5dc57ee685860ccd544e3e252d64",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/index/supported-versions.md"
+    },
+    {
+      "path": "index/table-access-method.md",
+      "source_path": "documentation/docs/index/table-access-method.md",
+      "bytes": 4945,
+      "sha256": "4c7e0506941e31413162562252f27a562e06bcd58c5f1a81e51d42ceddf802e5",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/index/table-access-method.md"
+    },
+    {
+      "path": "index/tde-encrypts.md",
+      "source_path": "documentation/docs/index/tde-encrypts.md",
+      "bytes": 583,
+      "sha256": "d350ee12b15af10191498793d45eeecc7ccf4cd92f0e95f03cb435eb9401ced1",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/index/tde-encrypts.md"
+    },
+    {
+      "path": "index/tde-limitations.md",
+      "source_path": "documentation/docs/index/tde-limitations.md",
+      "bytes": 6170,
+      "sha256": "756c14ed3454d657bbe12feb665624289903bddea014618644c29846b58c9e69",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/index/tde-limitations.md"
+    },
+    {
+      "path": "index/what-tde-impacts.md",
+      "source_path": "documentation/docs/index/what-tde-impacts.md",
+      "bytes": 982,
+      "sha256": "35811948fa2d60f3e3ab11112406032f7aa2fa8906d6837c7d7043373b837d06",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/index/what-tde-impacts.md"
+    },
+    {
+      "path": "index.md",
+      "source_path": "documentation/docs/index.md",
+      "bytes": 1968,
+      "sha256": "a6ed4fa483ad584cc512fedbc07975f376e7ca4ee6b4a15f4bd81aff2aab1024",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/index.md"
+    },
+    {
+      "path": "install.md",
+      "source_path": "documentation/docs/install.md",
+      "bytes": 2691,
+      "sha256": "b4de20396b52845f4f58731202c2b7e1825237eea693f0d6ce72bdc97c6126ce",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/install.md"
+    },
+    {
+      "path": "legal-notice.md",
+      "source_path": "documentation/docs/legal-notice.md",
+      "bytes": 683,
+      "sha256": "825c4b0ee8ce2a54d847a09a66e0f92d51dc6d8756e436de063a7592a33fd1c8",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/legal-notice.md"
+    },
+    {
+      "path": "release-notes/alpha1.md",
+      "source_path": "documentation/docs/release-notes/alpha1.md",
+      "bytes": 2107,
+      "sha256": "309c99cd660131c8fab1ad843d9ffc34367f7b592686a6c57ae227a9a96b73e1",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/release-notes/alpha1.md"
+    },
+    {
+      "path": "release-notes/beta.md",
+      "source_path": "documentation/docs/release-notes/beta.md",
+      "bytes": 1451,
+      "sha256": "0513010fc4562a3821fdeb417523281e9d960bfb4eb170ef8ede64bfb377eb6a",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/release-notes/beta.md"
+    },
+    {
+      "path": "release-notes/beta2.md",
+      "source_path": "documentation/docs/release-notes/beta2.md",
+      "bytes": 3096,
+      "sha256": "57c54d2e4f5c0b4714022c5a031c154e2efa2a3da14a29f704a8a067a43a00bf",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/release-notes/beta2.md"
+    },
+    {
+      "path": "release-notes/mvp.md",
+      "source_path": "documentation/docs/release-notes/mvp.md",
+      "bytes": 365,
+      "sha256": "be499656c4704b230ea2fae24bff2fc75fa227681f0daf5539bf8753ea67f0a4",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/release-notes/mvp.md"
+    },
+    {
+      "path": "release-notes/rc.md",
+      "source_path": "documentation/docs/release-notes/rc.md",
+      "bytes": 9700,
+      "sha256": "39862b9d994f96a119921ad1042ac6d555bb043f8b7d36e3a8d9d050ff810bfa",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/release-notes/rc.md"
+    },
+    {
+      "path": "release-notes/rc2.md",
+      "source_path": "documentation/docs/release-notes/rc2.md",
+      "bytes": 9696,
+      "sha256": "af842aa28cafa8c2bebc310d94eb71bd21503bbc33467575d5acfbdc72a3ee65",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/release-notes/rc2.md"
+    },
+    {
+      "path": "release-notes/release-notes-v1.0.md",
+      "source_path": "documentation/docs/release-notes/release-notes-v1.0.md",
+      "bytes": 5181,
+      "sha256": "79a874791e87de88afe90bc57f8327e88238b5738be2ba0b0c00ce2e905f0482",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/release-notes/release-notes-v1.0.md"
+    },
+    {
+      "path": "release-notes/release-notes-v2.0.md",
+      "source_path": "documentation/docs/release-notes/release-notes-v2.0.md",
+      "bytes": 7265,
+      "sha256": "0c2ecc4387d047eff265eb37b7dc03c0d68c266b1fb74a9f7d99df0b1ca5e3e3",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/release-notes/release-notes-v2.0.md"
+    },
+    {
+      "path": "release-notes/release-notes-v2.1.1.md",
+      "source_path": "documentation/docs/release-notes/release-notes-v2.1.1.md",
+      "bytes": 2277,
+      "sha256": "126251dc762bc94e69fd22ea3cdf2969ffbedd647468eedf0f3c6a89c657999a",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/release-notes/release-notes-v2.1.1.md"
+    },
+    {
+      "path": "release-notes/release-notes-v2.1.2.md",
+      "source_path": "documentation/docs/release-notes/release-notes-v2.1.2.md",
+      "bytes": 3106,
+      "sha256": "acbaebdce88f7747d8129b2ceaa0df0b08e572930a76d2cce1f16dcf166002b7",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/release-notes/release-notes-v2.1.2.md"
+    },
+    {
+      "path": "release-notes/release-notes-v2.1.md",
+      "source_path": "documentation/docs/release-notes/release-notes-v2.1.md",
+      "bytes": 4405,
+      "sha256": "9b164ac768e5f4116f0871a45fd24aab48cfc763cc612fbcc4888ac4dd8354ac",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/release-notes/release-notes-v2.1.md"
+    },
+    {
+      "path": "release-notes/release-notes-v2.2.0.md",
+      "source_path": "documentation/docs/release-notes/release-notes-v2.2.0.md",
+      "bytes": 4040,
+      "sha256": "2487f82d61958cbfa92bdae0af038122fafa220079092875a10bb8546d6a43b3",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/release-notes/release-notes-v2.2.0.md"
+    },
+    {
+      "path": "release-notes/release-notes-v2.2.1.md",
+      "source_path": "documentation/docs/release-notes/release-notes-v2.2.1.md",
+      "bytes": 1830,
+      "sha256": "25c7a8f48efeb0b92c08ad1a1127077d483af3d506a2de19cff7f75b935336b7",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/release-notes/release-notes-v2.2.1.md"
+    },
+    {
+      "path": "release-notes/release-notes-v2.2.2.md",
+      "source_path": "documentation/docs/release-notes/release-notes-v2.2.2.md",
+      "bytes": 2394,
+      "sha256": "c39054da47badf6e9104486da98fc71efa2fde8f549215e9f7b0a402852bfc05",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/release-notes/release-notes-v2.2.2.md"
+    },
+    {
+      "path": "release-notes/release-notes.md",
+      "source_path": "documentation/docs/release-notes/release-notes.md",
+      "bytes": 918,
+      "sha256": "3d57285d1a7e199affb85b07325ee8bd41bc2118fd68aa5b72e2e7db637e47e8",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/release-notes/release-notes.md"
+    },
+    {
+      "path": "replication.md",
+      "source_path": "documentation/docs/replication.md",
+      "bytes": 3173,
+      "sha256": "4719d2616391e1d09c3f27dc09f000c4bbcc93095d599d8abad2b0ae73bcad97",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/replication.md"
+    },
+    {
+      "path": "setup.md",
+      "source_path": "documentation/docs/setup.md",
+      "bytes": 2249,
+      "sha256": "8285406afebbee936cee476432edad85eb21abbe8748d75bc6459252e604e32c",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/setup.md"
+    },
+    {
+      "path": "test.md",
+      "source_path": "documentation/docs/test.md",
+      "bytes": 1940,
+      "sha256": "97bb8b89ef2e418f1a0ccf623af18109a6f685495fb00754fac9c06cd3ea51d4",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/test.md"
+    },
+    {
+      "path": "variables.md",
+      "source_path": "documentation/docs/variables.md",
+      "bytes": 2850,
+      "sha256": "bace1547ce7fed5a4474f6ab545b6f1df953a7957ec33828be314888dc939817",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/variables.md"
+    },
+    {
+      "path": "wal-encryption.md",
+      "source_path": "documentation/docs/wal-encryption.md",
+      "bytes": 3281,
+      "sha256": "d21c0a4ce35ce92b1c0938d3792fef2ec4de4e3b36f13ef04deb6c70e43df225",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/wal-encryption.md"
+    },
+    {
+      "path": "yum.md",
+      "source_path": "documentation/docs/yum.md",
+      "bytes": 1134,
+      "sha256": "4ac8df50556ea29c34b6bbaafc115353c9e2954316694a1ad2dc1bb68b4b0310",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/yum.md"
+    }
+  ],
+  "supporting_files": [
+    {
+      "path": "COPYRIGHT",
+      "source_path": "COPYRIGHT",
+      "destination": "static/legal/pg_tde-COPYRIGHT.txt",
+      "bytes": 2695,
+      "sha256": "9ad1e748f13bbb035434796aa4f774bb83c9a58f5744eae51c9e059ab660df62",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/COPYRIGHT"
+    },
+    {
+      "path": "documentation/docs/_images/pg_tde.png",
+      "source_path": "documentation/docs/_images/pg_tde.png",
+      "destination": "static/images/pg_tde.png",
+      "bytes": 26488,
+      "sha256": "2ee58f49f354d1345cf4dc9adb52c9ab4e074f0e74b37b5183f64fbe386efb95",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/_images/pg_tde.png"
+    },
+    {
+      "path": "documentation/docs/_images/tde-flow.png",
+      "source_path": "documentation/docs/_images/tde-flow.png",
+      "destination": "static/images/tde-flow.png",
+      "bytes": 31099,
+      "sha256": "ec3f1f729114620f6c0508aa06826d85c2d6833331839579b064c1a8e4a4b255",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/_images/tde-flow.png"
+    },
+    {
+      "path": "documentation/docs/_images/Percona_Color_Dark.svg",
+      "source_path": "documentation/docs/_images/Percona_Color_Dark.svg",
+      "destination": "static/images/percona-logo.svg",
+      "bytes": 3148,
+      "sha256": "2785549d547e2d2e9aa6369275ab71d53042db8d0d5f65f1479f420d0922a961",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/_images/Percona_Color_Dark.svg"
+    },
+    {
+      "path": "documentation/docs/_images/postgresql-logo.svg",
+      "source_path": "documentation/docs/_images/postgresql-logo.svg",
+      "destination": "static/images/postgresql-logo.svg",
+      "bytes": 2183,
+      "sha256": "1dea9939e4f31ae243465c16c841f5d36f952e83c0fd38cef0d705624d623799",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/_images/postgresql-logo.svg"
+    },
+    {
+      "path": "documentation/docs/_images/postgresql-mark.svg",
+      "source_path": "documentation/docs/_images/postgresql-mark.svg",
+      "destination": "static/images/postgresql-mark.svg",
+      "bytes": 2183,
+      "sha256": "1dea9939e4f31ae243465c16c841f5d36f952e83c0fd38cef0d705624d623799",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/_images/postgresql-mark.svg"
+    },
+    {
+      "path": "documentation/docs/_images/postgresql-fav.svg",
+      "source_path": "documentation/docs/_images/postgresql-fav.svg",
+      "destination": "static/favicon-upstream.svg",
+      "bytes": 2009,
+      "sha256": "5b363090c31cf7c48f0da24452d865e044aed4827511262411057a3edb5e8804",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/_images/postgresql-fav.svg"
+    },
+    {
+      "path": "documentation/docs/_static/percona-logomark-one-color-dark.png",
+      "source_path": "documentation/docs/_static/percona-logomark-one-color-dark.png",
+      "destination": "static/images/percona-logomark.png",
+      "bytes": 23993,
+      "sha256": "025edf5911c28f806f119ef5e66d00d4eab428b3204686af702030f32937515a",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/_static/percona-logomark-one-color-dark.png"
+    },
+    {
+      "path": "documentation/variables.yml",
+      "source_path": "documentation/variables.yml",
+      "destination": null,
+      "bytes": 378,
+      "sha256": "bdc737ff108b7e932d0876e29f85602f99d2cd706ca60096d2eb4ff5876d4839",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/variables.yml"
+    },
+    {
+      "path": "documentation/mkdocs.yml",
+      "source_path": "documentation/mkdocs.yml",
+      "destination": null,
+      "bytes": 8082,
+      "sha256": "8442c868a2f482101fd12568ada2575a54988f28fa746ff5e516110876718840",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/mkdocs.yml"
+    },
+    {
+      "path": "documentation/snippets/kms-considerations.md",
+      "source_path": "documentation/snippets/kms-considerations.md",
+      "destination": null,
+      "bytes": 287,
+      "sha256": "716499447aa361b8a020a3d6ca2ac490b8537c81aa800bb0b52a2bb5c82220d4",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/snippets/kms-considerations.md"
+    },
+    {
+      "path": "src/pg_tde_guc.c",
+      "source_path": "src/pg_tde_guc.c",
+      "destination": null,
+      "bytes": 2286,
+      "sha256": "4065828ac280b3bb668fd18b160b4104901033bf838dff077d3f97c2332071ff",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/src/pg_tde_guc.c"
+    },
+    {
+      "path": "src/bin/pg_tde_restore_encrypt.c",
+      "source_path": "src/bin/pg_tde_restore_encrypt.c",
+      "destination": null,
+      "bytes": 6875,
+      "sha256": "45d21f639ea4a48319b01bf1f3560b1377c9bfd8c39d52abc36c51e100292924",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/src/bin/pg_tde_restore_encrypt.c"
+    },
+    {
+      "path": "src/catalog/tde_principal_key.c",
+      "source_path": "src/catalog/tde_principal_key.c",
+      "destination": null,
+      "bytes": 45399,
+      "sha256": "43be563bcdc874edd7f7a3ce696a956759d49b948d92760d39c1e8839bc4971c",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/src/catalog/tde_principal_key.c"
+    },
+    {
+      "path": "pg_tde--1.0.sql",
+      "source_path": "pg_tde--1.0.sql",
+      "destination": null,
+      "bytes": 13810,
+      "sha256": "36702415e2cd6da46719725536520a27b710de7bf6c0296889085f0c0ff29b75",
+      "upstream": "https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/pg_tde--1.0.sql"
+    }
+  ]
+}
