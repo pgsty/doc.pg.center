@@ -1,0 +1,165 @@
+{
+  "description": "Bilingual editorial annotations for inconsistencies in the pinned DocumentDB sources. Original examples and output are retained.",
+  "pages": {
+    "reference/operators/accumulators/stddevsamp.md": {
+      "en": "The introduction attributes random sampling to the standard-deviation operator. In the example, a separate `$sample` stage selects 10 documents before `$stdDevSamp` calculates their standard deviation. The source also uses the inconsistent spelling `$stddevsamp` in its introduction and syntax block.",
+      "zh": "简介将随机采样归于标准差运算符。示例实际先通过单独的 `$sample` 阶段选取 10 个文档，再由 `$stdDevSamp` 计算这些文档的标准差。原文在简介和语法块中还使用了不一致的拼写 `$stddevsamp`。"
+    },
+    "reference/operators/accumulators/stddevpop.md": {
+      "en": "The source uses `$stddevpop` in the introduction, while the example code uses `$stdDevPop`. The original spelling is retained; use the identifier shown in the code when reading the example.",
+      "zh": "原文简介使用 `$stddevpop`，而示例代码使用 `$stdDevPop`。此处保留原始拼写；阅读示例时，应以代码中的标识符为准。"
+    },
+    "reference/operators/accumulators/top.md": {
+      "en": "The `listOfFields` row says “last document”, which conflicts with the introduction's “first document”. The example sorts in descending order and selects the top result.",
+      "zh": "`listOfFields` 一行写的是“最后一个文档”，与简介中的“第一个文档”不一致。示例按降序排序，并选取排序后的首项。"
+    },
+    "reference/operators/accumulators/topn.md": {
+      "en": "The `listOfFields` row says “last document”, which conflicts with the introduction's “first N documents”. Read this row together with the sorting and selection shown in the example.",
+      "zh": "`listOfFields` 一行写的是“最后一个文档”，与简介中的“前 N 个文档”不一致。应结合示例中的排序和选取方式理解这一行。"
+    },
+    "reference/operators/aggregation/tobool.md": {
+      "en": "The behavior table says any numeric value becomes true, but the introduction explicitly says numeric zero becomes false. The table omits that zero exception.",
+      "zh": "行为表称任意数值都会转换为 true，但简介明确说明数值零会转换为 false。该表遗漏了零这一例外。"
+    },
+    "reference/operators/aggregation/tolong.md": {
+      "en": "The source's behavior table lists the same Long(\"1\") output for both true and false. This suspicious row is retained for traceability and should not be treated as a verified conversion result.",
+      "zh": "原文行为表对 true 和 false 都列出了 Long(\"1\") 这一输出。此处为便于追溯而保留这一可疑条目，不应将其视为已验证的转换结果。"
+    },
+    "reference/operators/aggregation/toobjectid.md": {
+      "en": "The introduction calls the operator `$toObject`; the page title and example use `$toObjectId`. The shorter name is an upstream spelling inconsistency.",
+      "zh": "简介将运算符写为 `$toObject`，而页面标题和示例使用 `$toObjectId`。前者是上游原文中的拼写不一致。"
+    },
+    "reference/operators/arithmetic-expression/pow.md": {
+      "en": "The example explanation says `$power`, while the page and executable example use `$pow`. The prose spelling is retained from the source.",
+      "zh": "示例说明写的是 `$power`，而本页及可执行示例使用 `$pow`。正文保留了来源中的拼写。"
+    },
+    "reference/operators/arithmetic-expression/subtract.md": {
+      "en": "The example explanation says `$diff`, while the code uses `$subtract` with `$abs`. The prose spelling is retained from the source.",
+      "zh": "示例说明写的是 `$diff`，而代码将 `$subtract` 与 `$abs` 配合使用。正文保留了来源中的拼写。"
+    },
+    "reference/operators/array-expression/zip.md": {
+      "en": "The upstream summary says “array or arrays”; the definition and example describe an array of arrays. Read the summary in that context.",
+      "zh": "上游摘要写的是“数组或多个数组”，而定义和示例描述的是“由数组组成的数组”。应结合正文理解摘要。"
+    },
+    "reference/operators/array-expression/map.md": {
+      "en": "The example heading says it extracts category names, but the code adds 500 to each sales value and stores those values under `categoryNames`. The heading and output field name are retained from upstream.",
+      "zh": "示例标题说的是提取类别名称，但代码实际给每个销售额加 500，并将结果放在 `categoryNames` 字段中。标题和输出字段名均沿用上游。"
+    },
+    "reference/operators/array-expression/slice.md": {
+      "en": "Keeping the first or last N elements does not by itself establish which entries are newest. The source's recency claim depends on array order and the chosen slice direction.",
+      "zh": "仅保留前 N 项或后 N 项，并不能确定哪些条目最新。原文关于保留最新条目的说法，还取决于数组顺序及切片方向。"
+    },
+    "reference/operators/array-update/addtoset.md": {
+      "en": "Example 3's heading says `$setWindowOperators` and its explanation says `$addToSet`, but the code uses `$setWindowFields` with `$push`. That code does not demonstrate deduplication with `$addToSet`.",
+      "zh": "示例 3 的标题写的是 `$setWindowOperators`，说明写的是 `$addToSet`，但代码实际在 `$setWindowFields` 中使用 `$push`。这段代码并未演示用 `$addToSet` 去重。"
+    },
+    "reference/operators/array-update/pullall.md": {
+      "en": "The explanation spells the operator `$pulAll` and calls the removed tag values discounts. The code uses `$pullAll` to remove values from the tag array.",
+      "zh": "说明将运算符拼为 `$pulAll`，并把被移除的标签值称作折扣。代码实际使用 `$pullAll` 从标签数组中移除值。"
+    },
+    "reference/operators/array-update/push.md": {
+      "en": "The window example refers to “distinct sales volumes”, but its `$push` expression only builds a list. The example contains no separate deduplication operation.",
+      "zh": "窗口示例提到“不同销售额”，但其中的 `$push` 表达式只是构建列表。示例没有单独的去重操作。"
+    },
+    "reference/operators/bitwise-query/bitsanyset.md": {
+      "en": "The example heading names pickup and drive-thru, while the explanation and bits 5 and 7 in the code refer to free Wi-Fi and home delivery, as shown in the feature table.",
+      "zh": "示例标题写的是店内自提和免下车服务，而说明及代码中的第 5、7 位，按功能表对应免费 Wi-Fi 和送货上门。"
+    },
+    "reference/operators/comparison-query/gte.md": {
+      "en": "The parameter table omits “or equal to”. As stated in the definition and examples, `$gte` includes equality at the threshold.",
+      "zh": "参数表遗漏了“或等于”。按定义和示例，`$gte` 包含等于阈值的情形。"
+    },
+    "reference/operators/conditional-expression/ifnull.md": {
+      "en": "The example heading refers to `store.manager`, but its explanation and code operate on `$staff.totalStaff.intern`. The code demonstrates the latter field.",
+      "zh": "示例标题引用 `store.manager`，但说明和代码操作的是 `$staff.totalStaff.intern`。代码演示的是后一个字段。"
+    },
+    "reference/operators/conditional-expression/switch.md": {
+      "en": "The source's branches description ends mid-sentence. The syntax block shows the structure explicitly: each branch contains a case expression and a then expression.",
+      "zh": "原文对 branches 的说明没有写完。语法块明确展示了结构：每个分支包含一个 case 表达式和一个 then 表达式。"
+    },
+    "reference/operators/conditional-expression/cond.md": {
+      "en": "The explanation uses lowercase “high” and “low”, while the code returns “High” and “Low”. The literal result strings follow the code's capitalization.",
+      "zh": "说明使用小写的“high”和“low”，而代码返回“High”和“Low”。实际结果字符串的大小写以代码为准。"
+    },
+    "reference/operators/date-expression/datesubtract.md": {
+      "en": "The example explanation mentions both `lastUpdated` and `storeOpeningDate`; the code subtracts from `storeOpeningDate`. These field names are inconsistent in the source prose.",
+      "zh": "示例说明同时提到 `lastUpdated` 和 `storeOpeningDate`，代码则从 `storeOpeningDate` 减去时间间隔。来源正文中的字段名不一致。"
+    },
+    "reference/operators/date-expression/dayofweek.md": {
+      "en": "The example incorrectly labels Sunday=1 through Saturday=7 as ISO-8601 ordering. This page's `$dayOfWeek` numbering differs from the Monday=1 through Sunday=7 convention described on the `$isoDayOfWeek` page.",
+      "zh": "示例将星期日为 1、星期六为 7 误称为 ISO-8601 顺序。本页 `$dayOfWeek` 的编号方式，与 `$isoDayOfWeek` 页面描述的星期一为 1、星期日为 7 不同。"
+    },
+    "reference/operators/date-expression/datetrunc.md": {
+      "en": "The introduction's word “nearest” is ambiguous. The example explicitly truncates downward to the start of the week; it does not round to whichever boundary is closest.",
+      "zh": "简介中“最近”的措辞有歧义。示例明确向下截断到一周的起点，并非舍入到距离最近的边界。"
+    },
+    "reference/operators/element-query/exists.md": {
+      "en": "The introduction contains the word “fall” where the parameter table says false. Treat this as a source typo, not an additional Boolean value.",
+      "zh": "简介中的“fall”与参数表中的 false 不一致。这是来源中的笔误，并非另一种布尔值。"
+    },
+    "reference/operators/evaluation-query/expr.md": {
+      "en": "The two example explanations give opposite comparison directions. The code tests whether the part-time count is greater than the full-time count.",
+      "zh": "示例前后的两处说明给出了相反的比较方向。代码实际检查的是兼职人数是否大于全职人数。"
+    },
+    "reference/operators/field-update/currentdate.md": {
+      "en": "The explanation's “typestamp” is inconsistent with the code's timestamp type. The original prose spelling is retained.",
+      "zh": "说明中的“typestamp”与代码里的 timestamp 类型不一致。此处保留了原文拼写。"
+    },
+    "reference/operators/evaluation-query/text.md": {
+      "en": "This fixed source snapshot marks case-sensitive search as forthcoming even though it includes a usage example. The example is not a confirmation that every DocumentDB version supports that capability.",
+      "zh": "本次固定的来源快照将区分大小写的搜索标为尚待发布，同时又给出了用法示例。该示例并不能证明所有 DocumentDB 版本都已支持这一能力。"
+    },
+    "reference/operators/geospatial/centersphere.md": {
+      "en": "The parameter table calls the angular radius a “sphere” radius, while the definition describes a circular search region on a sphere. The upstream warning about UTM zones and the dateline is retained as a source limitation, without independent verification here.",
+      "zh": "参数表将角半径称为“球体”半径，而定义描述的是球面上的圆形搜索区域。上游关于 UTM 分带与日期变更线的警告作为来源限制保留，此处未独立验证。"
+    },
+    "reference/operators/geospatial/geointersects.md": {
+      "en": "The final explanation uses `$geointersects`; the title and code use `$geoIntersects`. Operator capitalization in that prose is inconsistent with the example.",
+      "zh": "最后的说明使用 `$geointersects`，而标题和代码使用 `$geoIntersects`。该处正文中的运算符大小写与示例不一致。"
+    },
+    "reference/operators/geospatial/geometry.md": {
+      "en": "The headings of examples 2 and 3 say “nearest”, but the examples describe intersection and containment queries. Those headings should not be read as a promise of distance ordering.",
+      "zh": "示例 2、3 的标题写的是“最近”，但示例描述的分别是相交查询和包含查询。这些标题不表示结果一定按距离排序。"
+    },
+    "reference/operators/geospatial/near.md": {
+      "en": "The example explanation switches between 20–200 kilometers and 20–200 meters for the same range. The code uses distance limits of 20 and 200, then divides the returned distance by 1000 for its kilometer field. The prose contains a unit conflict.",
+      "zh": "示例说明对同一范围先写 20–200 千米，随后又写 20–200 米。代码使用的距离限制是 20 和 200，然后将返回的距离除以 1000，作为以千米为单位的字段值。原文说明存在单位冲突。"
+    },
+    "reference/operators/logical-query/nor.md": {
+      "en": "Example 2 joins its negative conditions with “or”, which conflicts with the page's `$nor` definition. All expressions inside `$nor` must fail for a document to match.",
+      "zh": "示例 2 用“或”连接各个否定条件，这与本页对 `$nor` 的定义不一致。只有 `$nor` 内的所有表达式均不成立，文档才会匹配。"
+    },
+    "reference/operators/object-expression/mergeobjects.md": {
+      "en": "The heading says grouping is by the sales subdocument, while the explanation and code group by city and merge the sales subdocuments within each group. The final code comment says three cities, but its limit is two.",
+      "zh": "标题称按 sales 子文档分组，而说明和代码按城市分组，再合并各组中的 sales 子文档。代码末尾注释写的是三个城市，但实际限制为两个。"
+    },
+    "reference/operators/object-expression/setfield.md": {
+      "en": "The field-parameter description discusses conversion to key-value pairs, which does not match this page's field-setting operation. The source also claims null removes a field. These statements are retained as source issues; that removal behavior has not been independently verified in this edition.",
+      "zh": "field 参数的说明谈的是转换为键值对，与本页设置字段的操作不符。原文还称 null 会移除字段。这些表述作为来源问题保留；本版本未独立验证所述移除行为。"
+    },
+    "reference/operators/set-expression/setissubset.md": {
+      "en": "The example explanation says both “and vice versa” and “doesn't do the reverse”. The code contains two subset expressions with the arguments reversed, so this example checks both directions separately.",
+      "zh": "示例说明既写“反向也检查”，又写“不进行反向检查”。代码包含两个参数顺序相反的子集表达式，因此该示例分别检查了两个方向。"
+    },
+    "reference/operators/window-operators/covariancepop.md": {
+      "en": "The source describes both `numericalExpression1` and `numericalExpression2` as the “first” expression. They occupy the first and second positions respectively in the syntax block.",
+      "zh": "原文将 `numericalExpression1` 和 `numericalExpression2` 都描述为“第一个”表达式。它们在语法块中分别处于第一、第二个位置。"
+    },
+    "reference/operators/window-operators/covariancesamp.md": {
+      "en": "The source describes both `numericalExpression1` and `numericalExpression2` as the “first” expression. They occupy the first and second positions respectively in the syntax block.",
+      "zh": "原文将 `numericalExpression1` 和 `numericalExpression2` 都描述为“第一个”表达式。它们在语法块中分别处于第一、第二个位置。"
+    },
+    "reference/operators/window-operators/locf.md": {
+      "en": "The explanation says `$lecf`, while the title and code use `$locf`. The former is an upstream spelling inconsistency.",
+      "zh": "说明写的是 `$lecf`，而标题和代码使用 `$locf`。前者是上游原文中的拼写不一致。"
+    },
+    "reference/operators/window-operators/derivative.md": {
+      "en": "The parameter table says “rate of range” and calls unit a “time window”; the page definition describes a rate of change. The Chinese translation interprets the obvious “range” typo as “change”, while retaining the source's unit description.",
+      "zh": "参数表写的是“rate of range”，并将 unit 称为“时间窗口”，而页面定义描述的是变化率。中文将明显误写的 range 按 change 理解，译为“变化率”，同时保留原文对 unit 的说明。"
+    },
+    "reference/operators/miscellaneous/samplerate.md": {
+      "en": "The operator's definition specifies a sampling probability. An example percentage should not be read as a guarantee of an exact result count in each run.",
+      "zh": "运算符定义指定的是采样概率。示例中的百分比并不保证每次运行都返回精确比例的文档数。"
+    }
+  }
+}
