@@ -36,7 +36,7 @@ languages:
     weight: 1
     title: PG.CENTER
     params:
-      description: "The pg.center documentation site for Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy, and etcd in eight languages, plus Apache Cloudberry."
+      description: "The pg.center documentation site for Patroni, pgBackRest, PgBouncer, pgBadger, HAProxy, and etcd in eight languages, plus eleven PostgreSQL database collections in English and Chinese."
       ui:
         command_palette:
           commands:
@@ -56,6 +56,104 @@ languages:
             icon: fa-solid fa-house
             description: PostgreSQL documentation and ecosystem resources
             new_tab: false
+        - identifier: kernels
+          name: Kernel
+          url: /#kernels
+          weight: 10
+          params:
+            icon: fa-solid fa-microchip
+            description: PostgreSQL kernels and variants
+        - identifier: postgresql
+          parent: kernels
+          name: PostgreSQL
+          url: https://pg.center/docs/18/index.html
+          weight: 1
+          params:
+            icon: pgsql-icon-postgresql
+            new_tab: false
+        - identifier: polardb
+          parent: kernels
+          name: PolarDB
+          pageRef: /polardb
+          weight: 10
+          params:
+            icon: fa-solid fa-cloud
+        - identifier: ivorysql
+          parent: kernels
+          name: IvorySQL
+          pageRef: /ivorysql
+          weight: 20
+          params:
+            icon: fa-solid fa-chess-rook
+        - identifier: openhalo
+          parent: kernels
+          name: OpenHalo
+          pageRef: /openhalo
+          weight: 30
+          params:
+            icon: fa-solid fa-circle-nodes
+        - identifier: babelfish
+          parent: kernels
+          name: Babelfish
+          pageRef: /babelfish
+          weight: 40
+          params:
+            icon: fa-solid fa-fish
+        - identifier: percona
+          parent: kernels
+          name: Percona
+          pageRef: /percona
+          weight: 50
+          params:
+            icon: fa-solid fa-shield-halved
+        - identifier: cloudberry
+          parent: kernels
+          name: Cloudberry
+          pageRef: /cloudberry
+          weight: 60
+          params:
+            icon: fa-solid fa-cubes-stacked
+        - identifier: agensgraph
+          parent: kernels
+          name: AgensGraph
+          pageRef: /agensgraph
+          weight: 70
+          params:
+            icon: fa-solid fa-diagram-project
+        - identifier: pgedge
+          parent: kernels
+          name: pgEdge
+          pageRef: /pgedge
+          weight: 80
+          params:
+            icon: fa-solid fa-share-nodes
+        - identifier: documentdb
+          parent: kernels
+          name: DocumentDB
+          pageRef: /documentdb
+          weight: 90
+          params:
+            icon: fa-solid fa-file-code
+        - identifier: orioledb
+          parent: kernels
+          name: OrioleDB
+          pageRef: /orioledb
+          weight: 100
+          params:
+            icon: fa-solid fa-dove
+        - identifier: citus
+          parent: kernels
+          name: Citus
+          pageRef: /citus
+          weight: 110
+          params:
+            icon: fa-solid fa-table-cells-large
+        - identifier: components
+          name: Community Components
+          url: /#components
+          weight: 20
+          params:
+            icon: fa-solid fa-toolbox
         - identifier: patroni
           name: Patroni
           pageRef: /patroni
@@ -63,6 +161,7 @@ languages:
           params:
             icon: fa-solid fa-heart-pulse
             description: PostgreSQL high availability and automatic failover
+          parent: components
         - identifier: pgbackrest
           name: pgBackRest
           pageRef: /pgbackrest
@@ -70,6 +169,7 @@ languages:
           params:
             icon: fa-solid fa-couch
             description: Reliable backup, restore, and archive management
+          parent: components
         - identifier: pgbouncer
           name: PgBouncer
           pageRef: /pgbouncer
@@ -77,6 +177,7 @@ languages:
           params:
             icon: fa-solid fa-arrows-turn-to-dots
             description: Lightweight connection pooling for PostgreSQL
+          parent: components
         - identifier: pgbadger
           name: pgBadger
           pageRef: /pgbadger
@@ -84,6 +185,7 @@ languages:
           params:
             icon: fa-solid fa-otter
             description: Fast PostgreSQL and PgBouncer log analysis
+          parent: components
         - identifier: haproxy
           name: HAProxy
           pageRef: /haproxy
@@ -91,6 +193,7 @@ languages:
           params:
             icon: fa-solid fa-network-wired
             description: Complete HAProxy 3.4 manuals
+          parent: components
         - identifier: etcd
           name: etcd
           pageRef: /etcd
@@ -98,13 +201,7 @@ languages:
           params:
             icon: fa-solid fa-gear
             description: Distributed key-value store operations and APIs
-        - identifier: cloudberry
-          name: Cloudberry
-          pageRef: /cloudberry
-          weight: 70
-          params:
-            icon: fa-solid fa-cubes-stacked
-            description: Open-source MPP database derived from Greenplum
+          parent: components
 
   zh:
     label: 简体中文
@@ -114,7 +211,7 @@ languages:
     hasCJKLanguage: true
     params:
       footer_center_info: "由 [OINK](https://oink.pgsty.com/zh/) 构建"
-      description: "pg.center 的组件文档站，提供 Patroni、pgBackRest、PgBouncer、pgBadger、HAProxy 和 etcd 的八种语言手册，以及 Apache Cloudberry 文档。"
+      description: "pg.center 的组件文档站，提供 Patroni、pgBackRest、PgBouncer、pgBadger、HAProxy 和 etcd 的八种语言手册，以及十一套英中双语 PostgreSQL 数据库内核文档。"
       time_format_default: 2006年1月2日
       ui:
         share: [weibo, x, telegram, linkedin, email, copy]
@@ -136,6 +233,104 @@ languages:
             icon: fa-solid fa-house
             description: PostgreSQL 文档、参考与生态资源
             new_tab: false
+        - identifier: kernels
+          name: 内核
+          url: /zh/#kernels
+          weight: 10
+          params:
+            icon: fa-solid fa-microchip
+            description: PostgreSQL 内核与数据库分支
+        - identifier: postgresql
+          parent: kernels
+          name: PostgreSQL
+          url: https://pgsql.cc/docs/18/index.html
+          weight: 1
+          params:
+            icon: pgsql-icon-postgresql
+            new_tab: false
+        - identifier: polardb
+          parent: kernels
+          name: PolarDB
+          pageRef: /polardb
+          weight: 10
+          params:
+            icon: fa-solid fa-cloud
+        - identifier: ivorysql
+          parent: kernels
+          name: IvorySQL
+          pageRef: /ivorysql
+          weight: 20
+          params:
+            icon: fa-solid fa-chess-rook
+        - identifier: openhalo
+          parent: kernels
+          name: OpenHalo
+          pageRef: /openhalo
+          weight: 30
+          params:
+            icon: fa-solid fa-circle-nodes
+        - identifier: babelfish
+          parent: kernels
+          name: Babelfish
+          pageRef: /babelfish
+          weight: 40
+          params:
+            icon: fa-solid fa-fish
+        - identifier: percona
+          parent: kernels
+          name: Percona
+          pageRef: /percona
+          weight: 50
+          params:
+            icon: fa-solid fa-shield-halved
+        - identifier: cloudberry
+          parent: kernels
+          name: Cloudberry
+          pageRef: /cloudberry
+          weight: 60
+          params:
+            icon: fa-solid fa-cubes-stacked
+        - identifier: agensgraph
+          parent: kernels
+          name: AgensGraph
+          pageRef: /agensgraph
+          weight: 70
+          params:
+            icon: fa-solid fa-diagram-project
+        - identifier: pgedge
+          parent: kernels
+          name: pgEdge
+          pageRef: /pgedge
+          weight: 80
+          params:
+            icon: fa-solid fa-share-nodes
+        - identifier: documentdb
+          parent: kernels
+          name: DocumentDB
+          pageRef: /documentdb
+          weight: 90
+          params:
+            icon: fa-solid fa-file-code
+        - identifier: orioledb
+          parent: kernels
+          name: OrioleDB
+          pageRef: /orioledb
+          weight: 100
+          params:
+            icon: fa-solid fa-dove
+        - identifier: citus
+          parent: kernels
+          name: Citus
+          pageRef: /citus
+          weight: 110
+          params:
+            icon: fa-solid fa-table-cells-large
+        - identifier: components
+          name: 社区组件
+          url: /zh/#components
+          weight: 20
+          params:
+            icon: fa-solid fa-toolbox
         - identifier: patroni
           name: Patroni
           pageRef: /patroni
@@ -143,6 +338,7 @@ languages:
           params:
             icon: fa-solid fa-heart-pulse
             description: PostgreSQL 高可用与自动故障转移
+          parent: components
         - identifier: pgbackrest
           name: pgBackRest
           pageRef: /pgbackrest
@@ -150,6 +346,7 @@ languages:
           params:
             icon: fa-solid fa-couch
             description: 可靠的备份、恢复与归档管理
+          parent: components
         - identifier: pgbouncer
           name: PgBouncer
           pageRef: /pgbouncer
@@ -157,6 +354,7 @@ languages:
           params:
             icon: fa-solid fa-arrows-turn-to-dots
             description: 轻量级 PostgreSQL 连接池
+          parent: components
         - identifier: pgbadger
           name: pgBadger
           pageRef: /pgbadger
@@ -164,6 +362,7 @@ languages:
           params:
             icon: fa-solid fa-otter
             description: 快速分析 PostgreSQL 与 PgBouncer 日志
+          parent: components
         - identifier: haproxy
           name: HAProxy
           pageRef: /haproxy
@@ -171,6 +370,7 @@ languages:
           params:
             icon: fa-solid fa-network-wired
             description: HAProxy 3.4 入门、配置与管理手册
+          parent: components
         - identifier: etcd
           name: etcd
           pageRef: /etcd
@@ -178,13 +378,7 @@ languages:
           params:
             icon: fa-solid fa-gear
             description: etcd 3.7 运维、API 与内部原理
-        - identifier: cloudberry
-          name: Cloudberry
-          pageRef: /cloudberry
-          weight: 70
-          params:
-            icon: fa-solid fa-cubes-stacked
-            description: 源自 Greenplum 的开源 MPP 数据库，含 PXF 与内核原理中文手册
+          parent: components
 
   fr:
     label: Français
@@ -214,6 +408,12 @@ languages:
             icon: fa-solid fa-house
             description: Documentation et ressources PostgreSQL
             new_tab: false
+        - identifier: components
+          name: Composants communautaires
+          url: /fr/#components
+          weight: 20
+          params:
+            icon: fa-solid fa-toolbox
         - identifier: patroni
           name: Patroni
           pageRef: /patroni
@@ -221,6 +421,7 @@ languages:
           params:
             icon: fa-solid fa-heart-pulse
             description: Haute disponibilité PostgreSQL et basculement automatique
+          parent: components
         - identifier: pgbackrest
           name: pgBackRest
           pageRef: /pgbackrest
@@ -228,6 +429,7 @@ languages:
           params:
             icon: fa-solid fa-couch
             description: Sauvegarde, restauration et archivage fiables
+          parent: components
         - identifier: pgbouncer
           name: PgBouncer
           pageRef: /pgbouncer
@@ -235,6 +437,7 @@ languages:
           params:
             icon: fa-solid fa-arrows-turn-to-dots
             description: Pooling de connexions PostgreSQL léger
+          parent: components
         - identifier: pgbadger
           name: pgBadger
           pageRef: /pgbadger
@@ -242,6 +445,7 @@ languages:
           params:
             icon: fa-solid fa-otter
             description: Analyse rapide des journaux PostgreSQL et PgBouncer
+          parent: components
         - identifier: haproxy
           name: HAProxy
           pageRef: /haproxy
@@ -249,6 +453,7 @@ languages:
           params:
             icon: fa-solid fa-network-wired
             description: Manuels de démarrage, de configuration et d'administration HAProxy 3.4
+          parent: components
         - identifier: etcd
           name: etcd
           pageRef: /etcd
@@ -256,6 +461,7 @@ languages:
           params:
             icon: fa-solid fa-gear
             description: Exploitation, API et fonctionnement interne d'etcd 3.7
+          parent: components
 
   ja:
     label: 日本語
@@ -287,6 +493,12 @@ languages:
             icon: fa-solid fa-house
             description: PostgreSQL のドキュメントとエコシステム
             new_tab: false
+        - identifier: components
+          name: コミュニティコンポーネント
+          url: /ja/#components
+          weight: 20
+          params:
+            icon: fa-solid fa-toolbox
         - identifier: patroni
           name: Patroni
           pageRef: /patroni
@@ -294,6 +506,7 @@ languages:
           params:
             icon: fa-solid fa-heart-pulse
             description: PostgreSQL の高可用性と自動フェイルオーバー
+          parent: components
         - identifier: pgbackrest
           name: pgBackRest
           pageRef: /pgbackrest
@@ -301,6 +514,7 @@ languages:
           params:
             icon: fa-solid fa-couch
             description: 信頼性の高いバックアップ、リストア、アーカイブ管理
+          parent: components
         - identifier: pgbouncer
           name: PgBouncer
           pageRef: /pgbouncer
@@ -308,6 +522,7 @@ languages:
           params:
             icon: fa-solid fa-arrows-turn-to-dots
             description: PostgreSQL 向けの軽量コネクションプーリング
+          parent: components
         - identifier: pgbadger
           name: pgBadger
           pageRef: /pgbadger
@@ -315,6 +530,7 @@ languages:
           params:
             icon: fa-solid fa-otter
             description: PostgreSQL と PgBouncer の高速ログ解析
+          parent: components
         - identifier: haproxy
           name: HAProxy
           pageRef: /haproxy
@@ -322,6 +538,7 @@ languages:
           params:
             icon: fa-solid fa-network-wired
             description: HAProxy 3.4 の入門、設定、管理マニュアル
+          parent: components
         - identifier: etcd
           name: etcd
           pageRef: /etcd
@@ -329,6 +546,7 @@ languages:
           params:
             icon: fa-solid fa-gear
             description: etcd 3.7 の運用、API、内部構造
+          parent: components
 
   de:
     label: Deutsch
@@ -357,6 +575,12 @@ languages:
             icon: fa-solid fa-house
             description: PostgreSQL-Dokumentation und Ressourcen
             new_tab: false
+        - identifier: components
+          name: Community-Komponenten
+          url: /de/#components
+          weight: 20
+          params:
+            icon: fa-solid fa-toolbox
         - identifier: patroni
           name: Patroni
           pageRef: /patroni
@@ -364,6 +588,7 @@ languages:
           params:
             icon: fa-solid fa-heart-pulse
             description: PostgreSQL-Hochverfügbarkeit und automatisches Failover
+          parent: components
         - identifier: pgbackrest
           name: pgBackRest
           pageRef: /pgbackrest
@@ -371,6 +596,7 @@ languages:
           params:
             icon: fa-solid fa-couch
             description: Zuverlässige Verwaltung von Sicherungen, Wiederherstellungen und Archiven
+          parent: components
         - identifier: pgbouncer
           name: PgBouncer
           pageRef: /pgbouncer
@@ -378,6 +604,7 @@ languages:
           params:
             icon: fa-solid fa-arrows-turn-to-dots
             description: Leichtgewichtiger Verbindungspool für PostgreSQL
+          parent: components
         - identifier: pgbadger
           name: pgBadger
           pageRef: /pgbadger
@@ -385,6 +612,7 @@ languages:
           params:
             icon: fa-solid fa-otter
             description: Schnelle Analyse von PostgreSQL- und PgBouncer-Protokollen
+          parent: components
         - identifier: haproxy
           name: HAProxy
           pageRef: /haproxy
@@ -392,6 +620,7 @@ languages:
           params:
             icon: fa-solid fa-network-wired
             description: Vollständige Handbücher zu HAProxy 3.4
+          parent: components
         - identifier: etcd
           name: etcd
           pageRef: /etcd
@@ -399,6 +628,7 @@ languages:
           params:
             icon: fa-solid fa-gear
             description: Betrieb, APIs und Interna des verteilten Schlüssel-Wert-Speichers etcd 3.7
+          parent: components
 
   ru:
     label: Русский
@@ -428,6 +658,12 @@ languages:
             icon: fa-solid fa-house
             description: Документация и ресурсы PostgreSQL
             new_tab: false
+        - identifier: components
+          name: Компоненты сообщества
+          url: /ru/#components
+          weight: 20
+          params:
+            icon: fa-solid fa-toolbox
         - identifier: patroni
           name: Patroni
           pageRef: /patroni
@@ -435,6 +671,7 @@ languages:
           params:
             icon: fa-solid fa-heart-pulse
             description: Высокая доступность PostgreSQL и автоматическое переключение при сбоях
+          parent: components
         - identifier: pgbackrest
           name: pgBackRest
           pageRef: /pgbackrest
@@ -442,6 +679,7 @@ languages:
           params:
             icon: fa-solid fa-couch
             description: Надёжное резервное копирование, восстановление и управление архивами
+          parent: components
         - identifier: pgbouncer
           name: PgBouncer
           pageRef: /pgbouncer
@@ -449,6 +687,7 @@ languages:
           params:
             icon: fa-solid fa-arrows-turn-to-dots
             description: Легковесный пул соединений для PostgreSQL
+          parent: components
         - identifier: pgbadger
           name: pgBadger
           pageRef: /pgbadger
@@ -456,6 +695,7 @@ languages:
           params:
             icon: fa-solid fa-otter
             description: Быстрый анализ журналов PostgreSQL и PgBouncer
+          parent: components
         - identifier: haproxy
           name: HAProxy
           pageRef: /haproxy
@@ -463,6 +703,7 @@ languages:
           params:
             icon: fa-solid fa-network-wired
             description: Полные руководства по HAProxy 3.4
+          parent: components
         - identifier: etcd
           name: etcd
           pageRef: /etcd
@@ -470,6 +711,7 @@ languages:
           params:
             icon: fa-solid fa-gear
             description: Эксплуатация распределённого хранилища ключ-значение и его API
+          parent: components
 
   ar:
     label: العربية
@@ -500,6 +742,12 @@ languages:
             icon: fa-solid fa-house
             description: توثيق PostgreSQL وموارد منظومته
             new_tab: false
+        - identifier: components
+          name: مكونات المجتمع
+          url: /ar/#components
+          weight: 20
+          params:
+            icon: fa-solid fa-toolbox
         - identifier: patroni
           name: Patroni
           pageRef: /patroni
@@ -507,6 +755,7 @@ languages:
           params:
             icon: fa-solid fa-heart-pulse
             description: التوافر العالي لـ PostgreSQL وتجاوز الأعطال التلقائي
+          parent: components
         - identifier: pgbackrest
           name: pgBackRest
           pageRef: /pgbackrest
@@ -514,6 +763,7 @@ languages:
           params:
             icon: fa-solid fa-couch
             description: نسخ احتياطي موثوق واستعادة وإدارة للأرشيف
+          parent: components
         - identifier: pgbouncer
           name: PgBouncer
           pageRef: /pgbouncer
@@ -521,6 +771,7 @@ languages:
           params:
             icon: fa-solid fa-arrows-turn-to-dots
             description: مجمّع اتصالات خفيف لـ PostgreSQL
+          parent: components
         - identifier: pgbadger
           name: pgBadger
           pageRef: /pgbadger
@@ -528,6 +779,7 @@ languages:
           params:
             icon: fa-solid fa-otter
             description: تحليل سريع لسجلات PostgreSQL وPgBouncer
+          parent: components
         - identifier: haproxy
           name: HAProxy
           pageRef: /haproxy
@@ -535,6 +787,7 @@ languages:
           params:
             icon: fa-solid fa-network-wired
             description: أدلة HAProxy 3.4 الكاملة
+          parent: components
         - identifier: etcd
           name: etcd
           pageRef: /etcd
@@ -542,6 +795,7 @@ languages:
           params:
             icon: fa-solid fa-gear
             description: تشغيل etcd 3.7 وواجهاته البرمجية وبنيته الداخلية
+          parent: components
 
   es:
     label: Español
@@ -571,6 +825,12 @@ languages:
             icon: fa-solid fa-house
             description: Documentación y recursos de PostgreSQL
             new_tab: false
+        - identifier: components
+          name: Componentes de la comunidad
+          url: /es/#components
+          weight: 20
+          params:
+            icon: fa-solid fa-toolbox
         - identifier: patroni
           name: Patroni
           pageRef: /patroni
@@ -578,6 +838,7 @@ languages:
           params:
             icon: fa-solid fa-heart-pulse
             description: Alta disponibilidad de PostgreSQL y conmutación por error automática
+          parent: components
         - identifier: pgbackrest
           name: pgBackRest
           pageRef: /pgbackrest
@@ -585,6 +846,7 @@ languages:
           params:
             icon: fa-solid fa-couch
             description: Copias de seguridad, restauración y archivado fiables
+          parent: components
         - identifier: pgbouncer
           name: PgBouncer
           pageRef: /pgbouncer
@@ -592,6 +854,7 @@ languages:
           params:
             icon: fa-solid fa-arrows-turn-to-dots
             description: Pool de conexiones ligero para PostgreSQL
+          parent: components
         - identifier: pgbadger
           name: pgBadger
           pageRef: /pgbadger
@@ -599,6 +862,7 @@ languages:
           params:
             icon: fa-solid fa-otter
             description: Análisis rápido de registros de PostgreSQL y PgBouncer
+          parent: components
         - identifier: haproxy
           name: HAProxy
           pageRef: /haproxy
@@ -606,6 +870,7 @@ languages:
           params:
             icon: fa-solid fa-network-wired
             description: Manuales completos de HAProxy 3.4
+          parent: components
         - identifier: etcd
           name: etcd
           pageRef: /etcd
@@ -613,6 +878,7 @@ languages:
           params:
             icon: fa-solid fa-gear
             description: Operación, API y funcionamiento interno de etcd 3.7
+          parent: components
 
 params:
   logo: img/slonik.svg
@@ -659,7 +925,7 @@ params:
     preset_menu: [paper, slate, ink, terminal]
     typography: technical
     theme_color: '#336791'
-    quick_links: [patroni, pgbackrest, pgbouncer, pgbadger, haproxy, etcd, cloudberry]
+    quick_links: [patroni, pgbackrest, pgbouncer, pgbadger, haproxy, etcd, kernels]
     translation_notice: false
     section_index: cards
     backlinks: true

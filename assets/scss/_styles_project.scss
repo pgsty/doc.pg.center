@@ -146,23 +146,8 @@
   object-fit: contain;
 }
 
-// Keep the top-level menu compact at every width; drawer links keep their names.
+// Three grouped entries leave room for readable desktop navigation labels.
 .td-site-header .td-nav-menu-zone .nav-link {
-  flex: 0 0 44px;
-  width: 44px;
-  min-width: 44px;
-  height: 44px;
-  min-height: 44px;
-  justify-content: center;
-  gap: 0;
-  padding: 0;
-  font-size: 1.125rem;
-
-  .td-navbar-entry__label,
-  .td-navbar-entry__external {
-    display: none;
-  }
-
   &.active {
     background: var(--td-brand-elev);
   }
@@ -194,6 +179,20 @@
 
     li + li { margin-top: 0; }
 
+    // The kernel column spans two tracks and runs its links down the first
+    // sub-column, then the second (`--td-footer-rows` from the data length).
+    &--wide {
+      grid-column: span 2;
+
+      ul {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(var(--td-footer-rows, 6), auto);
+        grid-auto-flow: column;
+        column-gap: 1.5rem;
+      }
+    }
+
     a {
       display: inline-flex;
       align-items: center;
@@ -223,18 +222,15 @@
     font-size: 0.95rem;
   }
 
-  // Keep the parent Home link reachable beside the brand on component pages,
-  // whose drawer contains the component tree rather than the global menu.
+  // Both documentation groups stay reachable from the compact navbar.
   .td-site-header .td-nav-menu-zone {
     display: flex;
 
-    > :not([data-td-navbar-id='home']) {
-      display: none;
+    .nav-link {
+      width: 36px;
+      min-width: 36px;
+      padding-inline: 0;
     }
-  }
-
-  .td-site-header .td-nav-util-zone > .td-site-nav__language {
-    display: inline-flex;
   }
 
   .td-site-header .td-nav-appearance {

@@ -1,39 +1,66 @@
 brand:
   name: PG.CENTER
-  tagline: "[pg.center](https://pg.center/zh/) 的生态组件文档站。"
-  slogan: "六个工具，八种语言，一站查阅。"
+  tagline: '[pg.center](https://pg.center/zh/) 的生态组件文档站。'
+  slogan: 运维工具与数据库内核，在此阅读。
+# 四栏六行：内核一栏横跨两栏，十二个条目先排满一列再排下一列（footer.html 读取 span）。
 columns:
-  - title: 组件文档
-    links:
-      - { label: Patroni, url: /patroni/ }
-      - { label: pgBackRest, url: /pgbackrest/ }
-      - { label: PgBouncer, url: /pgbouncer/ }
-      - { label: pgBadger, url: /pgbadger/ }
-      - { label: HAProxy, url: /haproxy/ }
-      - { label: etcd, url: /etcd/ }
-      - { label: Cloudberry, url: /cloudberry/ }
-  - title: 上游项目
-    links:
-      - { label: Patroni, url: https://github.com/patroni/patroni, external: true }
-      - { label: pgBackRest, url: https://pgbackrest.org/, external: true }
-      - { label: PgBouncer, url: https://www.pgbouncer.org/, external: true }
-      - { label: pgBadger, url: https://pgbadger.darold.net/, external: true }
-      - { label: HAProxy, url: https://www.haproxy.org/, external: true }
-      - { label: etcd, url: https://etcd.io/, external: true }
-      - { label: Cloudberry, url: https://cloudberry.apache.org/, external: true }
-  - title: PG.CENTER
-    links:
-      - { label: "主站首页", url: "https://pg.center/zh/", external: true }
-      - { label: "PostgreSQL 手册", url: "https://pg.center/zh/docs/", external: true }
-      - { label: "参考百科", url: "https://pg.center/zh/wiki/", external: true }
-      - { label: "扩展目录", url: "https://pg.center/zh/ext/", external: true }
-      - { label: "生态概览", url: "https://pg.center/zh/ecosystem/", external: true }
-      - { label: "PostgreSQL 中文文档", url: "https://pgsql.cc/docs/", external: true }
-  - title: "本站项目"
-    links:
-      - { label: "来源与授权", url: "/attribution/" }
-      - { label: "GitHub 仓库", url: "https://github.com/pgsty/doc.pg.center", external: true }
-      - { label: "反馈问题", url: "https://github.com/pgsty/doc.pg.center/issues", external: true }
-      - { label: "Pigsty", url: "https://pigsty.cc/", external: true }
-      - { label: "PGSTY", url: "https://pgsty.com/", external: true }
-      - { label: "OINK", url: "https://oink.pgsty.com/zh/", external: true }
+- title: 数据库内核
+  span: 2
+  links:
+  - label: PostgreSQL
+    url: /postgresql/
+  - label: Citus
+    url: /citus/
+  - label: DocumentDB
+    url: /documentdb/
+  - label: IvorySQL
+    url: /ivorysql/
+  - label: Babelfish
+    url: /babelfish/
+  - label: PolarDB
+    url: /polardb/
+  - label: OrioleDB
+    url: /orioledb/
+  - label: AgensGraph
+    url: /agensgraph/
+  - label: pgEdge
+    url: /pgedge/
+  - label: Percona
+    url: /percona/
+  - label: OpenHalo
+    url: /openhalo/
+  - label: Cloudberry
+    url: /cloudberry/
+- title: 社区组件
+  links:
+  - label: Patroni
+    url: /patroni/
+  - label: pgBackRest
+    url: /pgbackrest/
+  - label: PgBouncer
+    url: /pgbouncer/
+  - label: pgBadger
+    url: /pgbadger/
+  - label: HAProxy
+    url: /haproxy/
+  - label: etcd
+    url: /etcd/
+- title: 相关链接
+  links:
+  - label: pg.center 主站
+    url: https://pg.center/zh/
+    external: true
+  - label: PostgreSQL 中文文档
+    url: https://pgsql.cc/docs/
+    external: true
+  - label: 扩展目录
+    url: https://pg.center/zh/ext/
+    external: true
+  - label: 来源与授权
+    url: /attribution/
+  - label: GitHub 仓库
+    url: https://github.com/pgsty/doc.pg.center
+    external: true
+  - label: Pigsty
+    url: https://pigsty.cc/
+    external: true

@@ -26,7 +26,10 @@
         </div>
         <div class="td-site-footer__grid" style="--td-footer-cols: {{ len (.columns | default slice) | default 1 }}">
           {{- range .columns }}
-          <nav class="td-site-footer__column" aria-label="{{ .title }}">
+          {{- /* `span: 2` lets a long column (the kernels) take two tracks and
+                 run its links down one sub-column, then the next. */ -}}
+          {{- $span := int (.span | default 1) -}}
+          <nav class="td-site-footer__column{{ if gt $span 1 }} td-site-footer__column--wide{{ end }}" aria-label="{{ .title }}"{{ if gt $span 1 }} style="--td-footer-rows: {{ div (add (len .links) (sub $span 1)) $span }}"{{ end }}>
             <h2>{{ .title }}</h2>
             <ul>
               {{- range .links }}

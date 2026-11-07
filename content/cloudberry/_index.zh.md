@@ -4,7 +4,7 @@ linkTitle: "Cloudberry"
 description: "Apache Cloudberry（孵化中）2.x 构建、部署、数据加载、查询、调优、安全与运维文档。"
 type: docs
 outputs: [HTML, RSS, print, markdown, LLMSFULL]
-weight: 70
+weight: -40
 icon: fa-solid fa-cubes-stacked
 sidebar_root_for: self
 sidebar_root_link_self: true

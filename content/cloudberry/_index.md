@@ -4,7 +4,7 @@ linkTitle: "Cloudberry"
 description: "Apache Cloudberry (Incubating) 2.x guides and references for building, deploying, loading, querying, tuning, securing, and operating the MPP database."
 type: docs
 outputs: [HTML, RSS, print, markdown, LLMSFULL]
-weight: 70
+weight: -40
 icon: fa-solid fa-cubes-stacked
 sidebar_root_for: self
 sidebar_root_link_self: true
