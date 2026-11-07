@@ -11,7 +11,7 @@ translation_notice: false
 outputs: [HTML, markdown]
 ---
 
-PG.CENTER 转载并整理了七个上游项目撰写的文档。每一个文档页面的末尾都有一行署名，指明该页改编自哪份作品、
+PG.CENTER 转载并整理了PostgreSQL 运维工具和数据库内核项目的文档。每一个文档页面的末尾都有一行署名，指明该页改编自哪份作品、
 版权归属于谁、依据什么协议授权，并链接回本页对应的小节。
 
 本页就是那份记录：说明每份材料从哪里、在什么时间、从哪个固定版本导入，依据什么协议，以及完整的上游声明保存在何处。
@@ -33,6 +33,18 @@ PG.CENTER 转载并整理了七个上游项目撰写的文档。每一个文档�
 | [Apache Cloudberry](/zh/cloudberry/) | [Apache Cloudberry 2.x 文档](https://cloudberry.apache.org/docs/) | 2.x 文档，提交 `d4e372a`；软件版本 2.2.0-incubating | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [上游 `LICENSE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/LICENSE) 与 [`NOTICE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/NOTICE) |
 | [PXF](/cloudberry/pxf/) | [Apache Cloudberry PXF](https://cloudberry.apache.org/pxf/) | 文档 `dff2632d`；软件版本 2.2.0-incubating | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](/third_party/pxf/LICENSE)、[NOTICE](/third_party/pxf/NOTICE) |
 | [内核原理](/cloudberry/core-internals/) | [Apache Cloudberry 内核原理](https://cloudberry.apache.org/core-internals/) | Main `c2baef0`；3.0.0-devel / PostgreSQL 16.9 | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)、PostgreSQL | [LICENSE](/third_party/core-internals/LICENSE)、[NOTICE](/third_party/core-internals/NOTICE) |
+| [PolarDB](/polardb/) | [PolarDB for PostgreSQL Documentation](https://github.com/polardb/polardb-pg-docs) | b4733b0 | Apache-2.0 | [来源与完整声明](/polardb/site/attribution/) |
+| [IvorySQL](/ivorysql/) | [IvorySQL Documentation](https://github.com/IvorySQL/ivorysql_docs) | v5.6 · 7c3f4a67e7d3 | LicenseRef-IvorySQL-Docs | [来源与完整声明](/ivorysql/site/license/) |
+| [OpenHalo](/openhalo/) | [OpenHalo documentation](https://github.com/HaloTech-Co-Ltd/openHalo) | master 90fc8d7 | GPL-3.0-only | [来源与完整声明](/openhalo/assets/LICENSE.txt) |
+| [Halo Database MySQL 参考](/openhalo/mysql-compatibility/) | [Halo Database 官方文档](https://doc.halodbtech.com/multi-mode-compatibility/mysql) | 1.0.16；2026-11-07 快照 | LicenseRef-HaloDB-Docs | [来源与条款](#halodb) |
+| [OpenHalo 测试证据](/openhalo/mysql-compatibility-gaps/) | [OpenHalo MySQL 兼容性测试报告](https://github.com/fxcollot/openHaloDocumentation) | OpenHalo 1.0.14.18；提交 80a8d07 | LicenseRef-OpenHalo-Test-Report | [来源与条款](#openhalo-tests) |
+| [Babelfish](/babelfish/) | [Babelfish project website](https://github.com/babelfish-for-postgresql/babelfish_project_website) | main @ f468c5ed3d38 | LicenseRef-Babelfish-Website | [来源与完整声明](/babelfish/site/attribution/) |
+| [Percona pg_tde](/percona/) | [Percona pg_tde documentation](https://github.com/percona/pg_tde) | 2.2.2; docs 1660e66a | LicenseRef-pg-tde | [来源与完整声明](/percona/assets/legal/pg_tde-COPYRIGHT.txt) |
+| [AgensGraph](/agensgraph/) | [AgensGraph documentation](https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/index.html) | 2.18.6.1 | Apache-2.0 | [来源与完整声明](/agensgraph/site/attribution/) |
+| [pgEdge](/pgedge/) | [pgEdge extension documentation](https://github.com/pgEdge) | Fixed main snapshots; see component notices | PostgreSQL | [来源与完整声明](/pgedge/about/attribution/) |
+| [DocumentDB](/documentdb/) | [DocumentDB documentation](https://github.com/documentdb/docs) | DocumentDB 1.0; docs cf69384; website 90cfa08 | LicenseRef-DocumentDB-Docs | [来源与完整声明](https://github.com/documentdb/docs/tree/cf69384e6da9524cc0fc723e8ac5b6c0689af432) |
+| [OrioleDB](/orioledb/) | [OrioleDB 文档与基准测试](https://www.orioledb.com/docs) | 2026-11-06 网站快照 | PostgreSQL；网站材料保留上游条款 | [来源与完整声明](/orioledb/attribution/) |
+| [Citus](/zh/citus/) | [Microsoft Learn Citus 14](https://learn.microsoft.com/en-us/postgresql/citus/?view=citus-14) | 2026-11-07；逐页记录修订 | CC BY 4.0；代码 MIT | [来源与完整声明](/zh/citus/attribution/) |
 {.wide .expand}
 
 所有文档集都是**改编**而非镜像：标题、锚点、交叉链接、代码签名、页面分组与导航结构都为本站重新组织，
@@ -173,8 +185,101 @@ Core Internals 内核原理手册取自 [`apache/cloudberry@c2baef0`](https://gi
 在此用于指代 PostgreSQL。该标识归 PostgreSQL Community Association of Canada 所有，
 在此使用不代表其认可或背书。
 
-本站由 [OINK](https://oink.pgsty.com/) v1.2.0 构建，该 Hugo 主题依
+环绕大象的各文档集标识均为对应项目自身的 Logo，仅用于指代该项目的文档；
+DocumentDB 文档集以 FerretDB 标识呈现，AgensGraph 以 AGEDB 字标中的字母 A 呈现。
+这些标识仍归各自所有者所有，在此使用不代表其认可或背书。
+PgBouncer 项目没有发布 Logo，本站所用的 PgBouncer 标识是为本站绘制的原创图形，并非 PgBouncer 官方标识。
+各标识的具体来源见仓库中的 [NOTICE](https://github.com/pgsty/doc.pg.center/blob/main/NOTICE.md)。
+
+本站由 [OINK](https://oink.pgsty.com/) v1.5.1 构建，该 Hugo 主题依
 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) 授权，
 其自身的上游与内置依赖声明随模块源码一并提供。
 
 如果发现本页任何归属信息有误，欢迎通过[站点仓库](https://github.com/pgsty/doc.pg.center/issues)提出。
+
+
+## PolarDB {#polardb}
+
+从固定的 `polardb/polardb-pg-docs` 快照 `b4733b0350888242afeba432a6837458c348a937` 恢复原有 OINK 整理版，保留 8 篇英文、55 篇中文上游正文，以及一页中文缺译提示和栏目导读。上游两种语言的内容本来就不对称。Copyright © Alibaba Group, Inc.；上游站点声明采用 Apache 2.0。图片保留原始字节。
+
+[来源与完整声明](/polardb/site/attribution/)。
+
+## IvorySQL {#ivorysql}
+
+迁入现有 IvorySQL 整理版，来源为 `IvorySQL/ivorysql_docs` v5.6，提交 `7c3f4a67e7d3dc92d3046ad54cac4de196aef4f1`。含 75 篇英文、80 篇中文上游正文及栏目、来源声明，两种语言均来自上游各自版本。本次文档快照没有独立 LICENSE 或 NOTICE；不能把软件的 Apache 2.0 许可证扩展解释为全部文档或第三方图片的统一授权。
+
+[来源与完整声明](/ivorysql/site/license/)。
+
+## OpenHalo {#openhalo}
+
+整理并翻译 `HaloTech-Co-Ltd/openHalo` 提交 `90fc8d777c3f111d4c8d236625bb15b5d4b19d7c` 的 README，分为项目概览和编译配置两页，保留命令与两张原图。这部分只收录 OpenHalo 专用介绍，不重复收录 PostgreSQL 核心手册。保留 GPLv3、PostgreSQL 版权与第三方声明；产品商标归原权利人所有。
+
+[来源与完整声明](/openhalo/assets/LICENSE.txt)。
+
+## Halo Database 文档 {#halodb}
+
+MySQL 兼容指南整理自 [Halo Database 官方文档](https://doc.halodbtech.com/multi-mode-compatibility/mysql)，产品版本为 **1.0.16**，快照日期为 2026-11-07。上游页面覆盖 MySQL 模式、SQL 语法、数据类型、函数、操作符、其他兼容特性和引擎参数。本栏目是带有原文链接的短篇原创指南，没有复制完整手册。当前快照未在官方站点识别到公开的文档许可证，相关权利仍以原权利人和官方站点条款为准。
+
+[来源与条款](#halodb)。
+
+## OpenHalo 测试证据 {#openhalo-tests}
+
+兼容边界页整理了独立的 [OpenHalo MySQL 兼容性测试报告](https://github.com/fxcollot/openHaloDocumentation/blob/80a8d077b1d329e397b251fa8c64dbded303bba2/TestingReport/OpenHaloMySQLCompatibilityTestingReport.md)，固定提交为 `80a8d077b1d329e397b251fa8c64dbded303bba2`。报告测试的是 OpenHalo 1.0.14.18，不是 Halo Database 1.0.16。本站只将其作为历史证据并链接原文；固定快照中未识别到仓库许可证，也没有复制报告正文。
+
+[来源与条款](#openhalo-tests)。
+
+## Babelfish {#babelfish}
+
+迁入 `babelfish-for-postgresql/babelfish_project_website` 提交 `f468c5ed3d38849502ee924cb3e236357404d14d` 的双语社区整理版，涵盖文档、历史设计、发布文章、贡献者和来源声明。上游网站的许可记录与 Babelfish 软件的双许可证分别保留，不混为同一授权范围。
+
+[来源与完整声明](/babelfish/site/attribution/)。
+
+## Percona pg_tde {#percona}
+
+Percona 栏目目前收录 pg_tde 2.2.2，固定 `percona/pg_tde@1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39`，含 66 篇英文正文及其中文译文、栏目索引和 PGSTY 编辑导读，不代表全部 Percona 产品文档。完整保留 pg_tde 版权文本中的 PostgreSQL、加州大学与 Percona 各部分条款。
+
+[来源与完整声明](/percona/assets/legal/pg_tde-COPYRIGHT.txt)。
+
+## AgensGraph {#agensgraph}
+
+迁入现有 AgensGraph 2.18.6.1 整理版。文档版权为 Copyright 2014–2026 SKAI Worldwide Co., Ltd.，采用 Apache 2.0，并保留 PostgreSQL 版权声明。保留已有中文初稿及其审校状态；16 页仅有导读的页面明确标为缺译占位，另有 2 个英文页面没有中文对应页。完成迁移与构建不等于完成翻译审校。
+
+[来源与完整声明](/agensgraph/site/attribution/)。
+
+## pgEdge {#pgedge}
+
+迁入现有 OINK 站中的 Spock、LOLOR、SafeSession 和 Snowflake 四套文档。内容来自固定 main 快照，不是原站各发布版本的精确镜像。108 篇上游正文中，32 篇有中文机器翻译初稿，保留原有状态与待审说明。完整保留 PostgreSQL 许可证及各项目版权声明，固定提交见下表。
+
+[来源与完整声明](/pgedge/about/attribution/)。
+
+| 扩展 | 固定提交 |
+| --- | --- |
+| spock | [4ac1aec2f080](https://github.com/pgEdge/spock/tree/4ac1aec2f080) |
+| lolor | [ac3893a7707a](https://github.com/pgEdge/lolor/tree/ac3893a7707a) |
+| safesession | [b406cd1e82cf](https://github.com/pgEdge/pgedge-safesession/tree/b406cd1e82cf) |
+| snowflake | [429a16803c8c](https://github.com/pgEdge/snowflake/tree/429a16803c8c) |
+
+## DocumentDB {#documentdb}
+
+来源为官方 `documentdb/docs` 提交 `cf69384e6da9524cc0fc723e8ac5b6c0689af432`，以及发布网站 `documentdb/documentdb.github.io` 提交 `90cfa088351557cd618034dfc00ab817c35a5f76`，快照日期为 2026 年 11 月 7 日。296 份文档 Markdown 记录与 19 份网站文章正文合并为 300 页英文，并提供逐页对应的 300 页完整简体中文。收录范围包括网站生成的 Docker、软件包、运维与离线安装指南、安装引导、分类描述，以及上游架构专章尚未发布的提示。已被替代的来源指南保留正文和提示。独立版本的 Kubernetes Operator 手册链接到其官方网站。
+
+中文依据固定英文版本完成 AI 辅助翻译与逐项审校，并进行了并行双语复核及示例、字面量、链接、标题 ID 检查。代码、命令、输出和上游错误消息保留原文。40 页附有双语编者注，明确指出原文说明或示例中的不一致。文档与网站仓库在这些快照中没有独立的文档许可证；DocumentDB 软件采用 MIT，并不据此另行宣称全部文档获得统一授权。具体权利与许可说明以上游为准。
+
+[文档源文件](https://github.com/documentdb/docs/tree/cf69384e6da9524cc0fc723e8ac5b6c0689af432) · [网站源文件](https://github.com/documentdb/documentdb.github.io/tree/90cfa088351557cd618034dfc00ab817c35a5f76)。
+
+## OrioleDB {#orioledb}
+
+导入 PGSTY 已整理的 OrioleDB 双语社区版本，依据 **2026-11-06** 的上游在线网站快照。收录全部 18 篇文档、两份基准测试指南，加上章节索引与来源说明，中英文各 26 页。`data/imports/orioledb.json` 记录原始 HTML、Markdown、代码和资源的校验值。该网站快照不对应单一软件发布版本，基准测试指南使用 beta18。
+
+项目文档保留 **Copyright (c) 2025-2026, Supabase Inc.**，沿用来源版本从 Apache-2.0 OR PostgreSQL 双重授权中选择的 PostgreSQL 许可证，完整[许可证与免责声明](/third_party/orioledb/LICENSE-POSTGRESQL.txt)已保留。网站与基准测试材料保留 **Copyright © 2026 Supabase Inc** 及原有条款，未核实独立通用的网站内容许可。中文翻译与社区整理署名为 PGSTY；本次导入保留原有译文状态。
+
+[覆盖范围、权利与原文差异](/orioledb/attribution/)。
+
+
+## Citus {#citus}
+
+[Citus 14 文档集](/zh/citus/)依据 2026-11-07 的 Microsoft Learn 快照整理，
+导入 59 个页面（含十篇技术文章），保留本地配图，并提供中英文 OINK 导航。
+版权归 Microsoft Corporation 及贡献者所有；文档采用 CC BY 4.0，代码采用 MIT。
+完整许可与商标声明、逐页修订、仓库存档和翻译原则见[来源与许可](/zh/citus/attribution/)。
+英文原文为准，上游中文机器译文仅作参考。
