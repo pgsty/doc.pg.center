@@ -593,3 +593,39 @@
     }
   }
 }
+
+// Reuse the site's elephant in menus, the section switcher, and the home card.
+.pgsql-icon-postgresql {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  -webkit-mask: url('/img/slonik.svg') center / contain no-repeat;
+  mask: url('/img/slonik.svg') center / contain no-repeat;
+}
+
+// Fill the version guide's canvas and align columns across its three tables.
+.pgsql-versions-page .td-table-scroll > table {
+  width: 100%;
+  min-width: 100%;
+  max-width: none;
+  table-layout: fixed;
+
+  th:first-child {
+    width: 34%;
+  }
+}
+
+// Keep names readable when a narrow screen or the sidebar limits table space.
+@media screen and (max-width: 991.98px) {
+  .pgsql-versions-page .td-table-scroll > table {
+    width: 100%;
+    min-width: 38rem;
+    table-layout: auto;
+
+    th:first-child {
+      width: auto;
+    }
+  }
+}
+
