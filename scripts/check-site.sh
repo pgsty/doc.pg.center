@@ -11,20 +11,23 @@ export GOWORK=off HUGO_MODULE_WORKSPACE=off
 unset HUGO_MODULE_REPLACEMENTS
 
 python3 "$project_dir/scripts/check-content.py"
+python3 "$project_dir/scripts/check-documentdb.py"
+python3 "$project_dir/scripts/check-citus.py"
 python3 "$project_dir/scripts/report-coverage.py"
 make -C "$project_dir" build HUGO="${HUGO:-hugo}" DESTINATION="$build_dir/public"
 
 python3 - "$project_dir" "$build_dir/public" <<'PYTHON'
 from pathlib import Path
 from html.parser import HTMLParser
+from urllib.parse import urlsplit
 import json
 import struct
 import sys
 
 project, public = map(Path, sys.argv[1:])
-languages = ("en", "zh", "fr", "ja", "de", "ru", "ar", "es")
-components = ("patroni", "pgbackrest", "pgbouncer", "pgbadger", "haproxy", "etcd", "cloudberry")
-component_languages = {"cloudberry": ("en", "zh")}
+sys.path.insert(0, str(project / "scripts"))
+from collection_registry import LANGUAGES as languages, COMPONENTS as components, COMPONENT_LANGUAGES as component_languages, COLLECTIONS
+from collection_registry import source_route
 
 
 def published(language):
@@ -104,7 +107,18 @@ for language in languages:
         assert "https://github.com/pgsty/doc.pg.center" in parsed.footer_links, page
         assert f"/{prefix}attribution/" in parsed.footer_links, page
     home = HeadAndLinks((public / prefix / "index.html").read_text())
-    assert not home.fallbacks, f"Unexpected English fallback on {language} home"
+    # Unpaired collections can expose explicitly labelled English shortcuts
+    # while their Chinese edition is incomplete. Paired manuals (including
+    # Citus) must always stay in the selected language.
+    for link in home.fallbacks:
+        href = urlsplit(link.get("href", ""))
+        component = href.path.strip("/").split("/", 1)[0]
+        assert language != "en" and not href.netloc, (language, link)
+        assert link.get("data-fallback-language") == link.get("hreflang") == "en", link
+        assert component in COLLECTIONS and COLLECTIONS[component].get("paired") is False, link
+        assert language in component_languages[component], link
+        assert (public / href.path.strip("/") / "index.html").is_file(), link
+        assert not (public / prefix / href.path.strip("/") / "index.html").exists(), f"Available translation bypassed: {link}"
     for component in published(language):
         assert f"/{prefix}{component}/" in home.links, (language, component)
         assert f"/{prefix}{component}/" in home.footer_links, (language, component)
@@ -131,11 +145,29 @@ for filename, size in (("favicon-32x32.png", 32), ("favicon-256x256.png", 256), 
     assert png.startswith(b"\x89PNG\r\n\x1a\n") and struct.unpack_from(">II", png, 16) == (size, size), filename
 for obsolete in ("favicon-192x192.png", "favicon-512x512.png", "images/og-doc-pg-center.png"):
     assert not (public / obsolete).exists(), obsolete
+
+# OrioleDB exports must retain upstream rights as well as the readable pages.
+for source in (project / "content/orioledb").rglob("*.md"):
+    route = source_route(source)
+    exported = (public / route.strip("/") / "index.md").read_text()
+    assert "Supabase Inc" in exported, f"Missing export copyright: {route}"
+    assert "https://www.orioledb.com/" in exported, f"Missing export source: {route}"
+    assert "/orioledb/attribution/" in exported, f"Missing export notice: {route}"
+for language in ("en", "zh"):
+    prefix = "" if language == "en" else "zh/"
+    bundle = (public / prefix / "orioledb/llms-full.txt").read_text()
+    assert bundle.count("\nSource: https://doc.pg.center/") == 26, (language, "incomplete OrioleDB bundle")
+    assert bundle.count("Supabase Inc") >= 26, (language, "missing bundle notices")
+    for section in ("", "usage", "architecture", "contributing", "benchmarks"):
+        printed = (public / prefix / "_print/orioledb" / section / "index.html").read_text()
+        assert "Supabase Inc" in printed, (language, section, "missing print notice")
 print("Validated PG.CENTER branding, PostgreSQL icons, localized Home navigation, canonical URLs, alternate outputs, and static assets.")
 PYTHON
 
 python3 "$project_dir/scripts/check-docs-routes.py" "$build_dir/public"
+python3 "$project_dir/scripts/check-citus.py" --public "$build_dir/public"
 python3 "$project_dir/scripts/check-local-links.py" "$build_dir/public"
 node "$project_dir/scripts/check-russian-search.cjs" "$build_dir/public"
 node "$project_dir/scripts/test-pgbackrest-search.cjs" "$build_dir/public"
-printf 'Site checks passed for all eight languages and seven collections.\n'
+node "$project_dir/scripts/check-citus-search.cjs" "$build_dir/public"
+printf 'Site checks passed for all eight languages and registered documentation collections.\n'
