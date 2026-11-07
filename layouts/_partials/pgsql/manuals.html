@@ -18,9 +18,9 @@
     </header>
     {{- end }}
     {{- /* The kernel grid flows column by column (see _styles_project.scss),
-           so the row count for four and for two columns is computed here. */ -}}
+           so the row count for three and for two columns is computed here. */ -}}
     {{- $n := len $data.items -}}
-    <ul class="pgsql-manuals__grid" role="list" style="--pgsql-rows-4: {{ div (add $n 3) 4 }}; --pgsql-rows-2: {{ div (add $n 1) 2 }}">
+    <ul class="pgsql-manuals__grid" role="list" style="--pgsql-rows-3: {{ div (add $n 2) 3 }}; --pgsql-rows-2: {{ div (add $n 1) 2 }}">
       {{- range $item := $data.items }}
       {{- $target := partial "pgsql/link-target.html" (dict "page" $page "url" ($item.url | default "")) }}
       <li class="pgsql-manual">

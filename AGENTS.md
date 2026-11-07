@@ -228,8 +228,8 @@ the forthcoming architecture page.
 - `data/home/<lang>.yaml` + `layouts/_partials/pgsql/`: the home page is three
   site partials: `hero-orbit.html` (title, the eight reading languages, orbit),
   `manuals.html` (twelve kernel panels in `en` and `zh`, listed in the order
-  they fill a four-column grid top to bottom and column by column, followed by
-  six community tool panels with versions and shortcuts),
+  they fill a three-column, four-row grid top to bottom and column by column,
+  followed by six community tool panels with versions and shortcuts),
   and `about.html`. Keep the eight files in the same shape, and keep manual
   descriptions in a row to the same line count in every language. The kernel
   section uses `#kernels`, with `#databases` retained as a legacy anchor.

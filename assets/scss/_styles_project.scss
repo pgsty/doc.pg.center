@@ -324,13 +324,13 @@
   }
 }
 
-// Kernel cards read down four columns, three to a column, so each column
-// groups related kernels; the data lists them in that column order and the
-// template passes the row counts. Two columns of six on narrower screens, a
-// single column in data order on phones.
+// Kernel cards read down three columns, four to a column. The data lists
+// them in column order and the template passes the row counts.
+// Two columns of six on narrower screens, a single column in data order
+// on phones.
 .pgsql-manuals--kernels .pgsql-manuals__grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-template-rows: repeat(var(--pgsql-rows-4, 3), auto);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(var(--pgsql-rows-3, 4), auto);
   grid-auto-flow: column;
 
   @media (max-width: 1099.98px) {
