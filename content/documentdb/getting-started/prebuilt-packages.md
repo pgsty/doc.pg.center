@@ -1,0 +1,382 @@
+---
+title: Pre-built Packages
+description: Install the complete DocumentDB stack with a setup wizard, or choose individual PostgreSQL and gateway
+  packages. Includes PGDG and source-build options.
+type: docs
+upstream_source: documentdb
+upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/getting-started/prebuilt-packages.md
+source_status: superseded
+weight: 1070
+---
+
+> [!NOTE] Superseded upstream
+> The official website now directs this page to the [current guide](/documentdb/getting-started/packages/). The source document is retained here for existing links.
+
+Install a complete MongoDB-compatible service, or add only the components you need to a PostgreSQL instance you manage. Since v0.116, DocumentDB's packages include a setup wizard, administrator tools, and systemd integration.
+
+Get first-party packages from [documentdb.io](https://documentdb.io/packages), extension packages from [PGDG](#pgdg-extension-packages), or [build packages for another target](#community-builds) with the provided scripts.
+
+## Choose an installation path {#choose-an-installation-path}
+
+| You want | Installation |
+| --- | --- |
+| A working DocumentDB instance with minimal setup | **[Stand-alone stack](#set-up-and-connect), recommended:** install `documentdb` and run the wizard. |
+| MongoDB-compatible access to a PostgreSQL instance you manage | [Extension + gateway](#add-a-gateway): configure the components separately and retain your PostgreSQL service lifecycle. |
+| DocumentDB through SQL, without a gateway | [Extension only](#extension-only-installation): install the extension and optional administrator tools. |
+
+## First-party packages {#first-party-packages}
+
+The current release is [`v1.0-0`](https://github.com/documentdb/documentdb/releases/tag/v1.0-0), published on **2026-10-19**. See the [1.0 release notes](/documentdb/getting-started/release-notes-1.0/) for what changed and the known issues. First-party CI builds and tests the full stack for:
+
+| Distribution | PostgreSQL | Architectures |
+| --- | --- | --- |
+| Ubuntu 24.04 (DEB) | 17, 18 | amd64, arm64 |
+| RHEL-compatible 9 (RPM) | 17, 18 | x86_64, aarch64 |
+
+Ubuntu 24.04 with PostgreSQL 18 is the recommended default. Other targets may be available through PGDG or the build scripts; they are not part of this hosted matrix.
+
+For a clean host, the installer configures repositories, installs packages,
+and runs setup:
+
+```sh
+curl -fsSLo documentdb-install.sh https://documentdb.io/install.sh &&
+sudo sh documentdb-install.sh
+```
+
+This installs the current release on PostgreSQL 18. Use `--pg-major 17` for PostgreSQL 17. Run it with `sudo`: started as a normal user, it calls `sudo -v`, which asks for a password even on cloud images whose default user has passwordless sudo.
+
+It asks you to confirm the plan and to choose the admin password. For an unattended run, store the password in a root-owned file and pass `--yes`:
+
+```sh
+printf 'DocumentDB admin password: '; IFS= read -r -s PW; echo
+printf '%s\n' "$PW" | sudo install -m 600 /dev/stdin /root/documentdb-admin.pw
+sudo sh documentdb-install.sh --yes \
+  --admin-password-file /root/documentdb-admin.pw --accept-external-listen
+```
+
+`--accept-external-listen` acknowledges that the gateway listens on all interfaces.
+The manual steps below install the same release. To move an existing installation to 1.0, see [Upgrading to 1.0](#upgrading-to-10) instead.
+
+## Set up and connect {#set-up-and-connect}
+
+These steps are for a **new stand-alone installation**. For an existing deployment, read [Upgrading to 1.0](#upgrading-to-10) first.
+
+### 1. Install the stack {#1-install-the-stack}
+
+Use the [Package Finder](https://documentdb.io/packages) or [Linux Packages Quick Start](/documentdb/getting-started/packages/) to configure the repositories for your distribution and architecture. First-party packages depend on PostgreSQL and extensions from PGDG; EL9 also needs EPEL and CRB / CodeReady Builder.
+
+With the repositories configured, install the stack on Ubuntu:
+
+```bash
+sudo apt install documentdb
+```
+
+On EL9, use `sudo dnf install documentdb`. Both `documentdb` (the PG18 default) and `documentdb-18` (used by the Package Finder) install the complete stack.
+
+### 2. Run the setup wizard {#2-run-the-setup-wizard}
+
+> The gateway listens on all interfaces by default. Restrict access to port `10260` before setup on a network-accessible host; use a trusted certificate before allowing remote clients.
+
+```bash
+sudo documentdb-setup --pg-version 18 --use-new-postgres-instance --admin-user admin
+```
+
+The wizard prompts for the admin password, creates a private PostgreSQL 18 instance, configures extensions and the admin user, and starts the gateway. On systemd hosts it also enables the stack at boot.
+
+### 3. Connect {#3-connect}
+
+Install [mongosh](https://www.mongodb.com/docs/mongodb-shell/install/) separately, then connect interactively:
+
+```bash
+mongosh localhost:10260 --authenticationMechanism SCRAM-SHA-256 \
+  --tls --tlsAllowInvalidCertificates -u admin -p
+```
+
+Enter the password set in the wizard, then run:
+
+```javascript
+db.runCommand({ ping: 1 })
+```
+
+The local example accepts the generated self-signed certificate. A bare `-p` prompts for a password; non-interactive scripts must supply a password explicitly. `db.version()` reports the MongoDB version DocumentDB is compatible with, not the DocumentDB version; see [Check the version](#check-the-version).
+
+### Optional setup controls {#optional-setup-controls}
+
+| Requirement | How |
+| --- | --- |
+| Use PostgreSQL 17 | Install `documentdb-17` instead of `documentdb`, and use `--pg-version 17`. |
+| Preview changes | Add `--dry-run` before applying setup. |
+| Change the gateway port | Add `--listen-port 27017`, or another unused port. |
+| Load sample data | Add `--load-sample-data` to load [StoreData](/documentdb/documentdb-local/#built-in-sample-data); requires `mongosh`. |
+| Automate setup | Use `--yes` with `--admin-password-file /path/to/protected-file` (mode `0600`) or `--admin-password-stdin`. |
+| Adopt an existing local PostgreSQL instance | Replace `--use-new-postgres-instance` with `--target-postgres-instance 18/main`; review the proposed changes and plan PostgreSQL restarts. |
+
+Inspect state with `sudo documentdb-setup --pg-version 18 --status`. On systemd, restart this stack with `sudo systemctl restart documentdb-local@18.target`; adopted PostgreSQL retains its own lifecycle. See [Operating a package install](/documentdb/linux-packages/) for TLS and other operational guidance.
+
+### Remove the stack {#remove-the-stack}
+
+Delete the instance first, then the packages. `documentdb-local-reset` ships in `documentdb-common`, so it has to run before the purge; purging alone keeps the data directory.
+
+```bash
+sudo documentdb-local-reset --pg-version 18 --confirm-destroy
+sudo apt purge -y '*documentdb*'      # Ubuntu
+sudo dnf remove -y '*documentdb*'     # EL9
+```
+
+The reset is irreversible and only covers the stand-alone stack's private instance, not an adopted PostgreSQL. Open remove and purge problems are tracked in [#771](https://github.com/documentdb/documentdb/issues/771).
+
+## What each release publishes {#what-each-release-publishes}
+
+`N` is the PostgreSQL major version. The package manager installs the dependencies of your selected package.
+
+| Package | Purpose |
+| --- | --- |
+| `documentdb` | Convenience meta package selecting `documentdb-18`; also provides the `documentdb-local.target` alias. |
+| `documentdb-N` | Complete stand-alone stack for major N; owns its systemd lifecycle. |
+| `postgresql-N-documentdb` (DEB) / `postgresqlN-documentdb` (RPM) | Extension libraries and SQL files only; does not configure existing PostgreSQL instances. |
+| `documentdb-postgresql-tools` | `documentdb-tune`, `documentdb-createcluster`, `documentdb-register-gateway`, and `documentdb-gateway-admin`. |
+| `documentdb-gateway` | MongoDB wire-protocol runtime and its service; does not configure PostgreSQL. |
+| `documentdb-common` | Shared wizard, service templates, helpers, and sample data, pulled in by `documentdb-N`. |
+
+## Extension-only installation {#extension-only-installation}
+
+This **alternative** uses first-party packages on Ubuntu 24.04 with an administrator-managed PostgreSQL 18 cluster named `main`. Install only the extension and tools, not `documentdb` or `documentdb-N`:
+
+```bash
+sudo apt install postgresql-18-documentdb documentdb-postgresql-tools
+sudo documentdb-tune --pg-version 18 --cluster main --dry-run
+```
+
+Review the proposed configuration, then apply it during a suitable restart window:
+
+```bash
+sudo documentdb-tune --pg-version 18 --cluster main --yes &&
+sudo systemctl restart postgresql@18-main &&
+sudo -u postgres /usr/bin/psql --cluster 18/main -d postgres -v ON_ERROR_STOP=1 \
+  -c "CREATE EXTENSION IF NOT EXISTS documentdb CASCADE;" \
+  -c "CREATE EXTENSION IF NOT EXISTS documentdb_extended_rum CASCADE;"
+```
+
+Both extension statements are required after the restart; `CASCADE` does not create `documentdb_extended_rum`. Adjust the major and cluster name for your instance. For other layouts, follow the restart and connection commands printed by `documentdb-tune`.
+
+For a **new** Debian/Ubuntu cluster, `sudo documentdb-createcluster 18 docdb --start` combines cluster creation, tuning, startup, and extension creation. Choose a cluster name that does not already exist.
+
+### Add a gateway {#add-a-gateway}
+
+After the extension-only steps, install and register a gateway. Store the admin password in a protected file (mode `0600`) and substitute its path below:
+
+```bash
+sudo apt install documentdb-gateway
+sudo documentdb-register-gateway --target-postgres-instance 18/main \
+  --admin-user admin --admin-password-file /path/to/admin-password --yes
+sudo systemctl reload postgresql@18-main
+sudo systemctl enable --now documentdb-gateway
+```
+
+Registration configures authentication and the admin user. Connect with `mongosh` as above. This path uses `documentdb-gateway.service`, not the stand-alone target, and requires PostgreSQL on the **same host**; remote TCP/password backends are not supported by package-managed registration.
+
+## PGDG extension packages {#pgdg-extension-packages}
+
+DocumentDB is also included in the **PostgreSQL Global Development Group (PGDG) APT repository**, with packaging maintained by the Debian PostgreSQL team. This is an extension-only distribution: it does not include the first-party gateway, setup wizard, or administrator tools.
+
+For example, as of **2026-09-10**, PGDG publishes DocumentDB **0.116** for Debian 13 (`trixie-pgdg`), PostgreSQL **15-18**, on **amd64 and arm64**. Versions and targets differ from first-party releases; consult the [PGDG package pool](https://apt.postgresql.org/pub/repos/apt/pool/main/d/documentdb/).
+
+For a new Debian 13 installation, follow the [PGDG repository setup instructions](https://www.postgresql.org/download/linux/debian/#apt), then inspect the candidate for your chosen PostgreSQL major version:
+
+```bash
+sudo apt update
+apt-cache policy postgresql-16-documentdb
+```
+
+If PGDG provides a candidate for your host, install it:
+
+```bash
+sudo apt install postgresql-16-documentdb
+```
+
+Configure PostgreSQL and create the extensions for that packaged version separately; the first-party helper commands above do not apply. Do not use another distribution's repository to obtain a missing package, or treat a provider switch as an in-place upgrade.
+
+## Community builds {#community-builds}
+
+No package for your target? The supplied scripts build DEB or RPM packages with Docker; select the distribution and PostgreSQL major version rather than writing packaging files yourself.
+
+Use a Linux build environment with Git, Docker, Bash 4+, and GNU utilities, on the target architecture. For example, build the extension for Debian 12 and PostgreSQL 18:
+
+```bash
+git clone --depth 1 --branch v1.0-0 https://github.com/documentdb/documentdb.git
+cd documentdb
+./packaging/build_packages.sh --os deb12 --pg 18 --version 1.0.0 --output-dir packages
+```
+
+Pass `--version 1.0.0` explicitly. The `v1.0-0` tag shares its commit with `v1.0-RC2`, and without `--version` the build takes its version from the tag `git describe` picks, which can be the release candidate.
+
+For the full stand-alone DEB set, make `dpkg-deb` available on the build host, then build the gateway and shared packages:
+
+```bash
+./packaging/gateway/build_gateway_packages.sh --os deb12 --pg 18 \
+  --version 1.0.0 --output-dir packages
+./packaging/build_extra_packages.sh --type deb --pg 18 \
+  --version 1.0.0 --output-dir packages
+```
+
+Outputs go into `packages/`. RPM extras instead require host `rpmbuild` and applicable RPM macros. The [versioned packaging guide](https://github.com/documentdb/documentdb/blob/v1.0-0/packaging/README.md) lists targets, prerequisites, and clean-install checks.
+
+Validate builds for targets outside the first-party CI matrix in your environment. PostgreSQL 15 is extension-only; package-managed gateway setup requires PostgreSQL 16 or newer.
+
+## Download and verify {#download-and-verify}
+
+Use release assets when you need an exact first-party version rather than a repository install. Each release publishes its Linux packages with `SHA256SUMS` and `manifest.txt`.
+
+```bash
+gh release download v1.0-0 -R documentdb/documentdb -D pkgs && cd pkgs && sha256sum -c SHA256SUMS
+```
+
+This downloads all formats, architectures, and PostgreSQL major versions. Install only the matching subset below, not every downloaded file.
+
+## Install from downloaded assets {#install-from-downloaded-assets}
+
+Enable the dependency repositories first: PGDG, plus EPEL and CRB / CodeReady Builder on EL9. Pass the matching local files to **one** `apt` or `dnf` command so dependencies resolve in the same transaction.
+
+These examples install `documentdb-18` and its dependencies; the optional `documentdb` meta package is not needed.
+
+<span id="deb-ubuntu-24-04-postgre-sql-18-amd64"></span>
+
+### DEB (Ubuntu 24.04, PostgreSQL 18, amd64) {#deb-ubuntu-2404-postgresql-18-amd64}
+
+For arm64, replace `amd64` with `arm64`. Only the gateway and extension files are architecture-specific.
+
+```bash
+sudo apt install ./ubuntu24.04-documentdb-18_1.0.0_all.deb \
+                 ./ubuntu24.04-documentdb-common_1.0.0_all.deb \
+                 ./ubuntu24.04-documentdb-postgresql-tools_1.0.0_all.deb \
+                 ./ubuntu24.04-documentdb-gateway_1.0.0_amd64.deb \
+                 ./ubuntu24.04-postgresql-18-documentdb_1.0-0_amd64.deb
+```
+
+<span id="rpm-rhel-compatible-9-postgre-sql-18-x86-64"></span>
+
+### RPM (RHEL-compatible 9, PostgreSQL 18, x86_64) {#rpm-rhel-compatible-9-postgresql-18-x86_64}
+
+For arm64, replace `x86_64` with `aarch64`; leave `noarch` files unchanged.
+
+```bash
+sudo dnf install ./documentdb-18-1.0.0-1.noarch.rpm \
+                 ./documentdb-common-1.0.0-1.noarch.rpm \
+                 ./documentdb-postgresql-tools-1.0.0-1.noarch.rpm \
+                 ./documentdb-gateway-1.0.0-1.el9.x86_64.rpm \
+                 ./rhel9-postgresql18-documentdb-1.0.0-1.el9.x86_64.rpm
+```
+
+For PostgreSQL 17, replace the two PostgreSQL-specific files with their `17` equivalents; the shared packages stay the same. The `documentdb` meta package always selects PG18.
+
+For extension-only use, install the extension and tools files, then [configure PostgreSQL](#extension-only-installation). For a full stack, [run the wizard](#2-run-the-setup-wizard) with the installed major: use `--pg-version 17` for PG17.
+
+Filename prefixes such as `ubuntu24.04-` and `rhel9-` identify release assets, not package names. DEB extensions use version `1.0-0`, while other packages use `1.0.0`; RPMs use `1.0.0` with release `1` or `1.el9`.
+
+<span id="offline-air-gapped"></span>
+
+### Offline / air-gapped {#offline--air-gapped}
+
+Release assets do not include the full dependency set. Stage PostgreSQL, its required extensions, and all other dependencies on a connected machine of the **same distro, release, and architecture**. Include dependencies already installed on the staging machine. Follow [Offline / air-gapped install](/documentdb/linux-packages/offline/) to serve the bundle as a local repository.
+
+<span id="upgrading-to-1-0"></span>
+
+## Upgrading to 1.0 {#upgrading-to-10}
+
+A 0.116 or 0.117 package installation can be upgraded in place; move the whole stack together. Upgrading the packages replaces the libraries and installs the upgrade scripts, but doesn't change the databases: each PostgreSQL instance keeps reporting the old extension version until its extensions are updated. Back up first; there is no downgrade.
+
+Upgrading a host that ever ran a release candidate isn't supported, and the installer refuses it. Install 1.0 on a fresh host and move the data with `mongodump` and `mongorestore`. Removing packages keeps the PostgreSQL data; don't reset or reuse an adopted instance as an upgrade workaround.
+
+### Stand-alone stack {#stand-alone-stack}
+
+Stop the gateway so no client reaches the new libraries before the extensions are updated, upgrade the packages, restart PostgreSQL so it loads the new libraries, then re-run the setup wizard with the options you installed with. The wizard updates the extensions and then starts the gateway:
+
+```bash
+# Debian / Ubuntu
+sudo systemctl stop documentdb-gateway-local@18.service &&
+sudo apt update && sudo apt install --only-upgrade documentdb-18 postgresql-18-documentdb \
+  documentdb-common documentdb-gateway documentdb-postgresql-tools &&
+sudo systemctl restart documentdb-postgresql@18.service &&
+sudo documentdb-setup --pg-version 18 --use-new-postgres-instance --admin-user admin
+
+# RHEL-compatible 9
+sudo systemctl stop documentdb-gateway-local@18.service &&
+sudo dnf upgrade documentdb-18 postgresql18-documentdb \
+  documentdb-common documentdb-gateway documentdb-postgresql-tools &&
+sudo systemctl restart documentdb-postgresql@18.service &&
+sudo documentdb-setup --pg-version 18 --use-new-postgres-instance --admin-user admin
+```
+
+These commands assume the DocumentDB package repository, which carries 1.0 from the release date. If you installed from release assets, download the 1.0 assets and install the same set of files [the same way](#install-from-downloaded-assets) in place of the `apt`/`dnf` command, keeping the `&&` so the restart and setup run only if the install succeeds. The gateway stays stopped until the wizard finishes; if the wizard stops early, run it again. The shared packages (`documentdb-common`, `documentdb-gateway`, `documentdb-postgresql-tools`) serve every PostgreSQL major on the host, so if more than one major is installed, stop each major's gateway first, then upgrade and re-run setup for each of them.
+
+On a configured instance the wizard is a day-2 re-run: it keeps the gateway port and TLS settings and runs `ALTER EXTENSION ... UPDATE` for each DocumentDB extension. It also asks for the admin password and, after a warning and a confirmation, sets it on the existing admin user: enter the current password to keep it, because any other value replaces it and the old one stops working. For PostgreSQL 17, use `17` throughout. If pressing Enter at the password prompt aborts the wizard, run it again and type the password ([#772](https://github.com/documentdb/documentdb/issues/772)).
+
+<span id="extension-and-gateway-on-your-own-postgre-sql"></span>
+
+### Extension and gateway on your own PostgreSQL {#extension-and-gateway-on-your-own-postgresql}
+
+If you adopted the instance with `documentdb-setup --target-postgres-instance 18/main`, the wizard never restarts PostgreSQL for you. Stop the gateway (`sudo systemctl stop documentdb-gateway-local@18.service`), upgrade the packages, restart PostgreSQL yourself (`sudo systemctl restart postgresql@18-main` on Ubuntu, `sudo systemctl restart postgresql-18` on EL9), then re-run the same `documentdb-setup --pg-version 18 --target-postgres-instance 18/main --admin-user admin` command; it warns about the admin password as above, updates the extensions and then starts the gateway. If the wizard has to change `shared_preload_libraries`, it writes the change, asks you to restart PostgreSQL, and exits without updating the extensions: restart and run it once more.
+
+Otherwise, stop the gateway and upgrade the packages first. On Ubuntu with a cluster named `main`:
+
+```bash
+sudo systemctl stop documentdb-gateway &&
+sudo apt update && sudo apt install --only-upgrade postgresql-18-documentdb \
+  documentdb-postgresql-tools documentdb-gateway
+sudo -u postgres /usr/bin/psql --cluster 18/main -d postgres -Atc "SHOW shared_preload_libraries;"
+```
+
+1.0 loads the extended RUM library only from `shared_preload_libraries`; `CREATE EXTENSION documentdb_extended_rum` fails with `pg_documentdb_extended_rum can only be loaded via shared_preload_libraries` otherwise. If `pg_documentdb_extended_rum` isn't in the list (it may be missing on a 0.116 installation), add it with `documentdb-tune`, reviewing the dry run first:
+
+```bash
+sudo documentdb-tune --pg-version 18 --cluster main --dry-run
+sudo documentdb-tune --pg-version 18 --cluster main --yes
+```
+
+Then restart PostgreSQL so it loads the new libraries, and update the extensions in every database where you created them, in this order, because `ALTER EXTENSION` doesn't update dependencies. `-1` runs the statements as one transaction, so a failure leaves every extension at its old version, and the gateway starts again only on success. The transaction doesn't detect a missing preload, though: when `documentdb_extended_rum` already exists, the statements succeed without it and index builds fail later with `The index access method extended_rum could not be located`. That is why the preload check above comes first:
+
+```bash
+sudo systemctl restart postgresql@18-main &&
+sudo -u postgres /usr/bin/psql --cluster 18/main -d postgres -1 -v ON_ERROR_STOP=1 \
+  -c "ALTER EXTENSION documentdb_core UPDATE;" \
+  -c "ALTER EXTENSION documentdb UPDATE;" \
+  -c "CREATE EXTENSION IF NOT EXISTS documentdb_extended_rum CASCADE;" \
+  -c "ALTER EXTENSION documentdb_extended_rum UPDATE;" &&
+sudo systemctl start documentdb-gateway
+```
+
+### Check the version {#check-the-version}
+
+Connect with `mongosh` and run:
+
+```javascript
+db.hello().internal.documentdb_versions
+```
+
+It should print `[ '1.0-0', '1.0.0' ]`: the installed extension version, then the loaded library version. If the first value is still `0.116-0` or `0.117-0`, the extensions weren't updated. See [`hello`](/documentdb/reference/commands/diagnostic/hello/).
+
+### Containers {#containers}
+
+A newer DocumentDB Local image on an existing data volume does not update the extensions ([#773](https://github.com/documentdb/documentdb/issues/773)). Start 1.0 on a new volume and move the data with `mongodump` and `mongorestore`. See [Upgrading the image](/documentdb/documentdb-local/#upgrading-the-image).
+
+## Retired targets {#retired-targets}
+
+The hosted matrix excludes PostgreSQL 15/16, Debian 11/12/13, Ubuntu 22.04, and RHEL-compatible 8. Since v0.116, older packages for retired targets are not carried forward, including PG16 extensions formerly hosted for Ubuntu 24.04 and EL9. Existing installations keep running, but cannot update or reinstall those packages from documentdb.io.
+
+For older installations, use matching [GitHub release assets](https://github.com/documentdb/documentdb/releases), including their dependencies, or consider PGDG and source builds where available. Changing provider or platform requires compatibility and recovery planning; it is not an automatic migration.
+
+Retired URLs retain empty signed metadata so package-manager refreshes do not disrupt unrelated operations. If a host will no longer use first-party packages, remove its DocumentDB repository entry. This removes neither packages nor data; keep PGDG if other packages still use it.
+
+```bash
+# Debian / Ubuntu
+sudo rm -f /etc/apt/sources.list.d/documentdb.list
+sudo apt update
+
+# RHEL-compatible
+sudo rm -f /etc/yum.repos.d/documentdb.repo
+sudo dnf clean all
+```
+
+## Container image {#container-image}
+
+For macOS, Windows, or a container-based installation, follow [DocumentDB Local](/documentdb/documentdb-local/). Release 1.0 provides Linux amd64/arm64 images for PostgreSQL 15-18; use a versioned tag rather than `latest` when you need a reproducible version.
