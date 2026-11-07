@@ -10,6 +10,7 @@
     {{- printf "================\nSource: %s\n================\n\n" $source -}}
     {{- $page.Store.Set "tdOutputFormat" "markdown" -}}
     {{- partial "content/markdown-document.md" $page -}}
+    {{- partial "pgsql/export-annotations.md" $page -}}
     {{- printf "\n\n" -}}
   {{- end -}}
 {{- end -}}
