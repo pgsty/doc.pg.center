@@ -1,0 +1,168 @@
+---
+title: pgnodemx
+linkTitle: pgnodemx
+description: 'IvorySQL v5.6 documentation: pgnodemx.'
+type: docs
+weight: 470
+upstream_link: https://github.com/IvorySQL/ivorysql_docs/blob/7c3f4a67e7d3dc92d3046ad54cac4de196aef4f1/EN/modules/ROOT/pages/5.14.adoc
+upstream_source: ivorysql
+upstream_license: LicenseRef-IvorySQL-Docs-en
+upstream_modified: true
+---
+
+## 1. Overview {#overview}
+
+`pgnodemx` exposes Linux operating-system, process, filesystem, cgroup, and Kubernetes Downward API metrics through SQL. Monitoring agents can collect node and IvorySQL process metrics over an existing database connection without deploying a separate exporter endpoint.
+
+This guide was verified with IvorySQL 5.4 (PostgreSQL 18.4) and pgnodemx 1.7 on Ubuntu 22.04 x86_64.
+
+## 2. Verified compatibility {#verified-compatibility}
+
+| Capability | Status | Verification |
+|----|----|----|
+| PGXS build and installation | Supported | pgnodemx 1.7 built against IvorySQL 5.4 headers and libraries |
+| Linux `/proc` metrics | Supported | Memory, disk, process, network, load, and mount functions returned data |
+| cgroup detection | Supported with limitations | `cgroup_mode()` detected the host layout; upstream pgnodemx 1.7 does not support hybrid-mode metric reads |
+| Oracle-compatible sessions | Supported | Version, memory, and disk metric queries succeeded after switching compatibility mode |
+| Kubernetes Downward API | Environment dependent | Available when the configured Downward API volume exists |
+
+## 3. Prerequisites {#prerequisites}
+
+- IvorySQL 5.4 was built with server development headers and PGXS installed.
+
+- The target is Linux and exposes the required `/proc` and cgroup files to the IvorySQL server process.
+
+- A C compiler and GNU make are installed.
+
+- pgnodemx must be built with the same OpenSSL headers and libraries used by IvorySQL.
+
+> [!IMPORTANT]
+>
+> Do not mix OpenSSL major versions in the IvorySQL server process. If startup reports an undefined OpenSSL symbol after adding pgnodemx, rebuild pgnodemx against the matching IvorySQL build environment. Linking a second incompatible OpenSSL library into the extension is not a safe workaround.
+
+## 4. Build and install {#build-and-install}
+
+```
+git clone --branch v1.7 --depth 1 \
+  https://github.com/CrunchyData/pgnodemx.git
+cd pgnodemx
+
+make USE_PGXS=1 \
+  PG_CONFIG=/usr/local/ivorysql/ivorysql-5/bin/pg_config
+sudo make USE_PGXS=1 \
+  PG_CONFIG=/usr/local/ivorysql/ivorysql-5/bin/pg_config install
+```
+
+Confirm that the selected `pg_config` belongs to IvorySQL 5.4 before compiling:
+
+```
+/usr/local/ivorysql/ivorysql-5/bin/pg_config --version
+```
+
+## 5. Configure preloading {#configure-preloading}
+
+Append pgnodemx to the existing `shared_preload_libraries` value in `ivorysql.conf`. Do not remove IvorySQL’s existing preload libraries.
+
+``` ini
+shared_preload_libraries = 'liboracle_parser, ivorysql_ora, gb18030_2022, pgnodemx'
+```
+
+For a non-Kubernetes host, disable Downward API access to avoid unnecessary startup warnings:
+
+``` ini
+pgnodemx.kdapi_enabled = off
+```
+
+The other relevant defaults are:
+
+``` ini
+pgnodemx.cgroup_enabled = on
+pgnodemx.containerized = off
+pgnodemx.cgrouproot = '/sys/fs/cgroup'
+pgnodemx.kdapi_path = '/etc/podinfo'
+```
+
+Restart IvorySQL after changing `shared_preload_libraries`, then create the extension in each database that will expose metrics:
+
+``` sql
+CREATE EXTENSION pgnodemx;
+
+SELECT extversion
+FROM pg_extension
+WHERE extname = 'pgnodemx';
+```
+
+The expected extension version is `1.7`.
+
+## 6. Grant monitoring access {#grant-monitoring-access}
+
+pgnodemx checks that callers belong to the predefined `pg_monitor` role. Grant that role to a dedicated monitoring login rather than allowing the monitoring agent to connect as a superuser.
+
+``` sql
+CREATE ROLE node_monitor LOGIN PASSWORD 'replace-with-a-strong-password';
+GRANT pg_monitor TO node_monitor;
+GRANT CONNECT ON DATABASE monitoring TO node_monitor;
+```
+
+Also restrict `pg_hba.conf`, network access, and TLS configuration to the monitoring system.
+
+## 7. Query metrics {#query-metrics}
+
+### 7.1. Extension and runtime information {#extension-and-runtime-information}
+
+``` sql
+SELECT pgnodemx_version();
+SELECT exec_path();
+SELECT openssl_version();
+SELECT cgroup_mode();
+```
+
+### 7.2. Memory, CPU, disk, and network information {#memory-cpu-disk-and-network-information}
+
+``` sql
+SELECT * FROM proc_meminfo()
+WHERE key IN ('MemTotal', 'MemAvailable');
+
+SELECT * FROM proc_loadavg();
+SELECT * FROM proc_cputime();
+SELECT * FROM proc_diskstats();
+SELECT * FROM proc_network_stats();
+```
+
+### 7.3. IvorySQL process information {#ivorysql-process-information}
+
+``` sql
+SELECT * FROM proc_pid_cmdline();
+SELECT * FROM proc_pid_io();
+SELECT * FROM proc_pid_stat();
+```
+
+The functions read the operating-system view visible to the IvorySQL process. In a container, results therefore describe the namespaces and mounted filesystems made available to that container.
+
+## 8. Oracle-compatible mode {#oracle-compatible-mode}
+
+The extension remains available after a session changes mode:
+
+``` sql
+SET ivorysql.compatible_mode = oracle;
+
+SELECT pgnodemx_version() FROM dual;
+SELECT val FROM proc_meminfo() WHERE key = 'MemTotal';
+SELECT count(*) FROM proc_diskstats();
+```
+
+All three queries completed successfully in the IvorySQL 5.4 validation.
+
+## 9. Limitations and security {#limitations-and-security}
+
+- pgnodemx 1.7 supports cgroup v1 (`legacy`) and cgroup v2 (`unified`), but not the mixed `hybrid` layout. `/proc` functions remain usable when cgroup metric access is unavailable.
+
+- Kubernetes functions return NULL or no rows when `pgnodemx.kdapi_path` is absent; disable the facility outside Kubernetes.
+
+- Host files can contain sensitive process, mount, and environment information. Grant `pg_monitor` only to trusted monitoring roles.
+
+- Metric collection adds SQL and filesystem-read workload. Set an appropriate polling interval and select only required columns/functions.
+
+- This extension is Linux-specific and depends on the files exposed by the kernel, container runtime, and security policy.
+
+For the complete function list, see the [pgnodemx 1.7 documentation](https://access.crunchydata.com/documentation/pgnodemx/1.7/).

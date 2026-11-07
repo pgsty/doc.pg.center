@@ -1,0 +1,63 @@
+---
+title: userenv function design
+linkTitle: userenv
+description: 'IvorySQL v5.6 documentation: userenv function design.'
+type: docs
+weight: 720
+upstream_link: https://github.com/IvorySQL/ivorysql_docs/blob/7c3f4a67e7d3dc92d3046ad54cac4de196aef4f1/EN/modules/ROOT/pages/6.4.2.adoc
+upstream_source: ivorysql
+upstream_license: LicenseRef-IvorySQL-Docs-en
+upstream_modified: true
+---
+
+IvorySQL provides compatibility with Oracle’s built-in function `USERENV('parameter')`, which is used to return information about the current session. This is a legacy function, and IvorySQL recommends taht you can use the `SYS_CONTEXT` function with its built-in `USERENV` namespace for current functionality.
+
+## 1. Implementation Principle {#implementation-principle}
+
+`USERENV` parses function calls through Bison rules, checks parameter validity, and maps them to corresponding SQL functions. The parsing rules are implemented in `ora_gram.y`, with the following logic:
+
+``` c
+USERENV '(' Sconst ')'
+    {
+        char *normalized_param = downcase_identifier($3, strlen($3), true, true);
+
+        #define CHECK_AND_CALL(param, func_name) \
+            if (strcmp(normalized_param, param) == 0) \
+                $$ = (Node *) makeFuncCall(OracleSystemFuncName(func_name), NIL, COERCE_EXPLICIT_CALL, @1);
+
+        CHECK_AND_CALL("client_info", "get_client_info")
+        else CHECK_AND_CALL("entryid", "get_entryid")
+        else CHECK_AND_CALL("terminal", "get_terminal")
+        else CHECK_AND_CALL("isdba", "get_isdba")
+        else CHECK_AND_CALL("lang", "get_lang")
+        else CHECK_AND_CALL("language", "get_language")
+        else CHECK_AND_CALL("sessionid", "get_sessionid")
+        else CHECK_AND_CALL("sid", "get_sid")
+        else
+            ereport(ERROR,
+                    (errcode(ERRCODE_FEATURE_NOT_SUPPORTED),
+                     errmsg("invalid USERENV parameter: \"%s\".", $3)));
+        #undef CHECK_AND_CALL
+    }
+```
+
+The specific functionality is implemented in `builtin_functions—​1.0.sql`. For example:
+
+``` sql
+CREATE OR REPLACE FUNCTION sys.get_language()
+RETURNS varchar2
+AS $$
+    SELECT (regexp_split_to_array(current_setting('lc_monetary'), '\\.'))[1]||'.'||pg_client_encoding();
+$$ LANGUAGE sql STRICT;
+```
+
+## 2. Supported parameters {#supported-parameters}
+
+|  |  |
+|----|----|
+| Parameter Name | Return Value |
+| sid | The user ID of the current session. |
+| sessionid | Returns the audit session identifier. |
+| language | Returns the language, territory, and character set of the current database session. |
+| lang | Returns the ISO abbreviation of the language name. |
+| isdba | Returns "TRUE" if the user has been authenticated as an administrator or has administrator privileges through the operating system or password file; otherwise, returns "FALSE". |

@@ -1,0 +1,49 @@
+# IvorySQL 文档站 / IvorySQL documentation mirror
+
+This is an independent reading edition of the IvorySQL 5.6 documentation.
+It is not the official IvorySQL website and does not imply endorsement.
+
+## Source and attribution
+
+- Upstream: https://github.com/IvorySQL/ivorysql_docs
+- Branch: v5.6
+- Fixed commit: 7c3f4a67e7d3dc92d3046ad54cac4de196aef4f1
+- Snapshot commit date: 2026-11-05 (not an individual article publication date).
+- Chinese source: CN/modules/ROOT/pages/
+- English source: EN/modules/ROOT/pages/
+- Official documentation: https://docs.ivorysql.org/
+
+Credit belongs to the original IvorySQL documentation contributors. Names,
+authorship, release dates, and third-party attributions embedded in the sources
+are retained. The collective contributor label used in this site's footer is
+an attribution, not a newly discovered upstream copyright statement.
+
+The upstream welcome page describes IvorySQL as an open-source project proposed
+by Highgo Software and as Apache licensed. The IvorySQL software repository
+carries Apache License 2.0: https://github.com/IvorySQL/IvorySQL/blob/master/LICENSE
+A copy is included at /ivorysql/assets/legal/Apache-2.0.txt.
+
+At the pinned revision the documentation repository does not contain a standalone
+LICENSE or NOTICE file. The software's licence is therefore described separately
+from documentation terms; this mirror does not assert a new blanket licence over
+all prose, screenshots, third-party excerpts, or trademarks. Original authors and
+other rightsholders retain their rights. The local LICENSE covers original site
+configuration, scripts, and layout additions only, not upstream material.
+
+## Adaptations
+
+AsciiDoc has been converted to Markdown. Navigation and URLs have been reorganized;
+version attributes use the values in each language's antora.yml; code fences,
+anchors, links and table rendering have been repaired. Original image bytes are
+stored under content hashes. Each inherited page identifies its exact source and
+is marked upstream_modified: true. No language has been filled with a new machine
+translation. Historical versions, limitations, examples and plans remain as stated
+by the upstream text; source inconsistencies are not silently updated.
+
+The merged-site migration manifest is data/imports/ivorysql.json. The source
+revision is recorded in data/upstreams.yaml. Two empty 4.7.adoc files are excluded. Two screenshot
+references in the Chinese PostgreSQL parameter reference do not exist in the
+pinned source tree; their positions retain a notice and link to the source page.
+
+OINK is pinned to v1.5.1 and retains its own Apache-2.0 licence and bundled-asset
+notices. Collection icons are navigation symbols, not IvorySQL trademarks.
