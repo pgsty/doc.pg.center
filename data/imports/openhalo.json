@@ -1,0 +1,182 @@
+{
+  "component": "openhalo",
+  "source_repository": "https://github.com/HaloTech-Co-Ltd/openHalo",
+  "commit": "90fc8d777c3f111d4c8d236625bb15b5d4b19d7c",
+  "source_sha256": "8e2ef41c314ae39f84adf30cc2c96c0a66160345cd7f09750756d52455cb7f7b",
+  "pages": [
+    {
+      "source": "README.md",
+      "target": "content/openhalo/quick-start.zh.md",
+      "language": "zh",
+      "status": "translated"
+    },
+    {
+      "source": "README.md",
+      "target": "content/openhalo/quick-start.md",
+      "language": "en",
+      "status": "imported"
+    },
+    {
+      "source": "README.md",
+      "target": "content/openhalo/_index.zh.md",
+      "language": "zh",
+      "status": "translated"
+    },
+    {
+      "source": "README.md",
+      "target": "content/openhalo/_index.md",
+      "language": "en",
+      "status": "imported"
+    },
+    {
+      "source": "https://github.com/fxcollot/openHaloDocumentation/blob/80a8d077b1d329e397b251fa8c64dbded303bba2/TestingReport/OpenHaloMySQLCompatibilityTestingReport.md",
+      "target": "content/openhalo/mysql-compatibility-gaps.md",
+      "language": "en",
+      "status": "authored-summary"
+    },
+    {
+      "source": "https://github.com/fxcollot/openHaloDocumentation/blob/80a8d077b1d329e397b251fa8c64dbded303bba2/TestingReport/OpenHaloMySQLCompatibilityTestingReport.md",
+      "target": "content/openhalo/mysql-compatibility-gaps.zh.md",
+      "language": "zh",
+      "status": "authored-summary"
+    },
+    {
+      "source": "https://doc.halodbtech.com/multi-mode-compatibility/mysql",
+      "target": "content/openhalo/mysql-compatibility.md",
+      "language": "en",
+      "status": "authored-summary"
+    },
+    {
+      "source": "https://doc.halodbtech.com/multi-mode-compatibility/mysql",
+      "target": "content/openhalo/mysql-compatibility.zh.md",
+      "language": "zh",
+      "status": "authored-summary"
+    },
+    {
+      "source": "https://doc.halodbtech.com/multi-mode-compatibility/modes",
+      "target": "content/openhalo/mysql-configuration.md",
+      "language": "en",
+      "status": "authored-summary"
+    },
+    {
+      "source": "https://doc.halodbtech.com/multi-mode-compatibility/modes",
+      "target": "content/openhalo/mysql-configuration.zh.md",
+      "language": "zh",
+      "status": "authored-summary"
+    },
+    {
+      "source": "https://doc.halodbtech.com/multi-mode-compatibility/mysql/data-types",
+      "target": "content/openhalo/mysql-data-types.md",
+      "language": "en",
+      "status": "authored-summary"
+    },
+    {
+      "source": "https://doc.halodbtech.com/multi-mode-compatibility/mysql/data-types",
+      "target": "content/openhalo/mysql-data-types.zh.md",
+      "language": "zh",
+      "status": "authored-summary"
+    },
+    {
+      "source": "https://doc.halodbtech.com/multi-mode-compatibility/mysql/sql-syntax",
+      "target": "content/openhalo/mysql-statements.md",
+      "language": "en",
+      "status": "authored-summary"
+    },
+    {
+      "source": "https://doc.halodbtech.com/multi-mode-compatibility/mysql/sql-syntax",
+      "target": "content/openhalo/mysql-statements.zh.md",
+      "language": "zh",
+      "status": "authored-summary"
+    }
+  ],
+  "assets": [
+    {
+      "source": "how it works.png",
+      "target": "static/openhalo/assets/how-it-works.png",
+      "sha256": "b7d3a96ae361ac94efbf1a9575ddc16278f4f4118c87ba5ec07454dfa406e5ba",
+      "bytes": 27590
+    },
+    {
+      "source": "openhalo_q1.png",
+      "target": "static/openhalo/assets/mysql-query.png",
+      "sha256": "ec9d856ec1da95852a26cd868571ab71e943b57179063771d7b36f0bf2521fc5",
+      "bytes": 44859
+    },
+    {
+      "source": "LICENSE",
+      "target": "static/openhalo/assets/LICENSE.txt",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "bytes": 35149
+    },
+    {
+      "source": "COPYRIGHT",
+      "target": "static/openhalo/assets/COPYRIGHT.txt",
+      "sha256": "30f2d08bef4680f1a8e1e232f243a932dbf763ecae4ac9532388532c91e6c0e1",
+      "bytes": 2409
+    },
+    {
+      "source": "3party-legal-notices",
+      "target": "static/openhalo/assets/THIRD-PARTY.txt",
+      "sha256": "ffef62c24d043886d314989b2a18c378e366fc0cd044d8b00839588dcc968d5f",
+      "bytes": 1673
+    }
+  ],
+  "references": {
+    "official_halodb": {
+      "name": "Halo Database MySQL compatibility reference",
+      "product_version": "1.0.16",
+      "snapshot_date": "2026-11-07",
+      "status": "summarized",
+      "notice": "Official pages are linked and summarized; no public documentation license was identified in the captured site.",
+      "pages": [
+        {
+          "name": "overview",
+          "url": "https://doc.halodbtech.com/multi-mode-compatibility/mysql",
+          "sha256": "513dafb9f4867fabd7704cef5897bb9ad528a2786769351006d35b4c5fd49a39"
+        },
+        {
+          "name": "sql-syntax",
+          "url": "https://doc.halodbtech.com/multi-mode-compatibility/mysql/sql-syntax",
+          "sha256": "337eead3b01cac58117c4b62093bc0f4dc0ccc0e96569125a77609b1ebf57c3e"
+        },
+        {
+          "name": "data-types",
+          "url": "https://doc.halodbtech.com/multi-mode-compatibility/mysql/data-types",
+          "sha256": "b656776883d57f5c0f6045887d20df75ec3f08b8127f5cc6a72d94d9f9db99ef"
+        },
+        {
+          "name": "functions",
+          "url": "https://doc.halodbtech.com/multi-mode-compatibility/mysql/functions",
+          "sha256": "d072f7ee44cd9c3141da2e0a429553ccf94c61254f298fc85ec39b8c6b69e0da"
+        },
+        {
+          "name": "operators",
+          "url": "https://doc.halodbtech.com/multi-mode-compatibility/mysql/operators",
+          "sha256": "08e9997f57a4ddd177d57841f311b8674f3bbd1e92274921a4df6ce425e61d9b"
+        },
+        {
+          "name": "misc-features",
+          "url": "https://doc.halodbtech.com/multi-mode-compatibility/mysql/misc-features",
+          "sha256": "36e56e9ee2a120df3a5bde65e6dcd3e2bf625c9affee1680a187265076c455cb"
+        },
+        {
+          "name": "engine-parameters",
+          "url": "https://doc.halodbtech.com/multi-mode-compatibility/mysql-engine-parameters",
+          "sha256": "e3162c17868712da6932aacb1cad8318efaf4ca3f2c1cfe2394c9163ee3c5499"
+        },
+        {
+          "name": "modes",
+          "url": "https://doc.halodbtech.com/multi-mode-compatibility/modes",
+          "sha256": "05727c62f197c61f6216b2641201027dcbe1da709db6da2023fd4c3ff74da35b"
+        }
+      ]
+    },
+    "openhalo_test_report": {
+      "name": "OpenHalo MySQL compatibility testing report",
+      "commit": "80a8d077b1d329e397b251fa8c64dbded303bba2",
+      "url": "https://github.com/fxcollot/openHaloDocumentation/blob/80a8d077b1d329e397b251fa8c64dbded303bba2/TestingReport/OpenHaloMySQLCompatibilityTestingReport.md",
+      "status": "summarized",
+      "notice": "The report is summarized with a source link; no repository license was identified in the pinned snapshot."
+    }
+  }
+}
