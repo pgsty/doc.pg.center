@@ -1,0 +1,253 @@
+---
+title: Installing and Configuring the Spock Extension
+description: The Spock extension can be installed with pgEdge Postgres packages or built from source. pgEdge Postgres
+  deployments provide a simplified upgrade path that allows you to take advantage of important new features quickly
+  and easily.
+weight: 20
+upstream_source: pgedge-spock
+upstream_link: https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/install_spock.md
+upstream_modified: true
+upstream_ref: 4ac1aec2f080
+source_kind: pinned-main-snapshot
+linkTitle: Installation
+type: docs
+---
+
+
+
+The Spock extension can be installed with pgEdge Postgres packages or
+built from source. pgEdge Postgres deployments provide a simplified
+upgrade path that allows you to take advantage of important new features
+quickly and easily.
+
+Spock is open-source, with code available for review at
+[GitHub](https://github.com/pgEdge).
+
+
+> [!WARNING]
+>
+> Spock uses files stored in the `spock` schema to provide replication
+> functionality. Do not delete, create, or modify files in the `spock`
+> schema directly; use Spock functions and procedures to manage
+> replication.
+>
+
+For detailed information about using Spock to create a two-node cluster,
+see [Creating a Two-Node Cluster](/pgedge/spock/two-node/).
+
+
+## Installing Spock with pgEdge Enterprise Postgres {#installing-spock-with-pgedge-enterprise-postgres}
+
+The latest Spock extension is automatically installed with any
+[pgEdge Enterprise Postgres](https://docs.pgedge.com/enterprise) installation.
+A pgEdge deployment provides quick and easy access to the following features:
+
+- the latest minor version of your preferred Postgres version.
+- Spock [functions and procedures](/pgedge/spock/reference/).
+- [ACE consistency monitoring](https://docs.pgedge.com/platform/ace).
+- [Snowflake sequences](https://docs.pgedge.com/platform/snowflake).
+- [pgBackRest](https://docs.pgedge.com/platform/managing/pgbackrest) for
+  simplified backup and restore capabilities.
+- [LOLOR](https://docs.pgedge.com/lolor/v1-2-2/) large object support.
+- management tools for your active-active distributed cluster.
+
+
+## Building the Extension from Source {#building-the-extension-from-source}
+
+Spock is available as an [open-source project](https://github.com/pgEdge/spock) 
+that you can build from source code distributed at the GitHub project page.
+The Spock extension must be built on a version-specific build of Postgres
+that is patched to provide hooks so `spock` can access the Postgres engine.
+
+To patch the Postgres source code, download the source code from the
+[Postgres project](https://www.postgresql.org/ftp/source/), and move into
+the source directory. Then, clone the `spock` directory:
+
+```bash
+git clone https://github.com/pgEdge/spock.git
+```
+
+Then, apply the `.diff` files from the `spock/patches/version` directory
+that match your build version. To apply a patch, use the command:
+
+```bash
+patch -p1 < path_to_patch/patch_name
+```
+
+After applying version-specific patches, you can configure, `make`, and
+`make install` the Postgres server as described in the 
+[Postgres documentation](https://www.postgresql.org/docs/current/installation.html).
+When the build completes, add the location of your `pg_config` file to your
+`PATH` variable:
+
+```bash
+export PATH=path_to_pg_config_file
+```
+
+Before invoking `make` and `make install`, install the 
+[jansson library](https://jansson.readthedocs.io/en/1.1/gettingstarted.html) to meet
+Spock prerequisites.
+
+Then, move into the `spock` directory, and use a build process much like
+any other Postgres extension:
+
+```bash
+make
+make install
+```
+
+
+## Configuring Postgres for Spock Replication {#configuring-postgres-for-spock-replication}
+
+After installing Postgres on each node that will host a spock instance, use
+[initdb](https://www.postgresql.org/docs/18/app-initdb.html) to initialize
+a Postgres cluster. After initializing the cluster, you can connect with
+psql, and query the server for file locations and cluster details:
+
+```sql
+[sdouglas@lima-pg3 pg18]$ sudo -u postgres psql -U postgres -p 5432
+psql (18.1)
+Type "help" for help.
+
+postgres=# SHOW data_directory;
+SHOW config_file;
+SHOW hba_file;
+
+     data_directory     
+------------------------
+ /var/lib/pgsql/18/data
+(1 row)
+
+              config_file               
+----------------------------------------
+ /var/lib/pgsql/18/data/postgresql.conf
+(1 row)
+
+              hba_file              
+------------------------------------
+ /var/lib/pgsql/18/data/pg_hba.conf
+(1 row)
+```
+
+Then, use your choice of editor to update the `postgresql.conf` file, adding
+required Postgres parameters to the end of the file:
+
+```sql
+wal_level = logical
+max_worker_processes = 20   # see the sizing guide below
+max_replication_slots = 10
+max_wal_senders = 10
+shared_preload_libraries = 'spock'
+track_commit_timestamp = on
+output_plugin_libraries = 'pgoutput, test_decoding, spock_output'
+                            # only on servers that have this parameter; see below
+```
+
+The values above are a working starting point for a small cluster (two or
+three nodes, one replicated database). They are not one-size-fits-all: Spock
+launches a supervisor, a slot sync worker, one background worker per database
+in the instance, and one per subscription; subscription counts scale with node count multiplied by the number of
+replicated databases, and `max_worker_processes` is shared with parallel query
+workers. See
+[Sizing Postgres Resources for Spock](/pgedge/spock/sizing/) for the formulas and
+per-cluster recommendations before going to production.
+
+Set `output_plugin_libraries` only if your server has that parameter — it was
+added by a 2026 security fix and, without `spock_output` listed there, logical
+decoding fails with `library "spock_output" may not be used as an output
+plugin`. The check runs every time decoding starts, so it stops established
+clusters after a minor-version upgrade too, and it applies to every node. On
+older releases the parameter does not exist and setting it stops the server
+from starting. See [Configuring Spock](/pgedge/spock/configuration/) for how to check.
+
+Note on replication origin states:
+
+- PostgreSQL 15-17: The `max_replication_slots` parameter controls both the
+  number of replication slots and the number of replication origin states;
+  when sizing this parameter, account for both slots and origins (one origin
+  per subscription, and subscriptions are counted per replicated database).
+- PostgreSQL 18+: A new parameter `max_active_replication_origins` was
+  introduced to separately control the number of replication origin states;
+  the default value is 10, which may be insufficient for clusters with many
+  subscriptions; set this to at least the number of subscriptions this node
+  applies - `(nodes - 1) x replicated databases` in a full mesh - plus some
+  headroom (similar sizing to `max_replication_slots`).
+
+After modifying the Postgres parameters, use your OS-specific command to
+restart the Postgres server:
+
+```bash
+[sdouglas@lima-pg3 pg18]$ sudo systemctl restart postgresql-18
+[sdouglas@lima-pg3 pg18]$ sudo systemctl status postgresql-18
+● postgresql-18.service - PostgreSQL 18 database server
+     Loaded: loaded (/usr/lib/systemd/system/postgresql-18.service; enabled; preset: disabled)
+     Active: active (running) since Wed 2026-02-11 11:44:11 EST; 7s ago
+```
+
+Then, connect to the psql command line, and create the spock extension:
+
+```sql
+postgres=# CREATE EXTENSION spock;
+CREATE EXTENSION
+postgres=#
+```
+
+On each node that will host spock, modify the [`pg_hba.conf`
+file](https://www.postgresql.org/docs/current/auth-pg-hba-conf.html) and
+allow connections between `n1` and `n2`. The following snippet is provided
+as an example only, and is not recommended for a production system as it
+will open your system for connection from any client:
+
+```sql
+host    all          all          <node_1_IP_address>/32    trust
+host    all          all          <node_2_IP_address>/32    trust
+
+host    replication  all          <node_1_IP_address>/32    trust
+host    replication  all          <node_2_IP_address>/32    trust
+```
+
+### Creating a Replication Scenario {#creating-a-replication-scenario}
+
+After configuring the nodes, connect to the psql command line of the first
+provider node, and use the `spock.node_create` command to create the
+provider node:
+
+```sql
+SELECT spock.node_create(
+    node_name := 'provider1',
+    dsn := 'host=providerhost port=5432 dbname=db'
+);
+```
+
+Then, add the tables in the `public` schema to the `default` replication
+set:
+
+```sql
+SELECT spock.repset_add_all_tables('default', ARRAY['public']);
+```
+
+Once the provider node is configured, you can add subscribers. First,
+create the subscriber node:
+
+```sql
+SELECT spock.node_create(
+    node_name := 'subscriber1',
+    dsn := 'host=thishost port=5432 dbname=db'
+);
+```
+
+Then, create the subscription which will start synchronization and
+replication on the subscriber node:
+
+```sql
+SELECT spock.sub_create(
+    subscription_name := 'subscription1',
+    provider_dsn := 'host=providerhost port=5432 dbname=db'
+);
+
+SELECT spock.sub_wait_for_sync('subscription1');
+```
+
+---
+
+[Upstream source](https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/install_spock.md) · `4ac1aec2f080` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).

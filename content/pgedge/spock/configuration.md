@@ -1,0 +1,767 @@
+---
+title: Configuring Spock
+description: 'Add the following postgresql.conf settings on each node in your Spock replication scenario before
+  creating the Spock extension:'
+weight: 60
+upstream_source: pgedge-spock
+upstream_link: https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/configuring.md
+upstream_modified: true
+upstream_ref: 4ac1aec2f080
+source_kind: pinned-main-snapshot
+linkTitle: Configuration
+type: docs
+---
+
+
+
+Add the following `postgresql.conf` settings on each node in your Spock
+replication scenario before creating the Spock extension:
+
+```sql
+wal_level = 'logical'
+max_worker_processes = 20   # supervisor + slot sync worker + one per
+                            # database + one per subscription + sync workers,
+                            # and shared with parallel query - see the
+                            # sizing guide
+max_replication_slots = 10  # two per subscriber, per replicated database,
+                            # plus one per physical standby; 10 covers a
+                            # four-node mesh replicating one database
+max_wal_senders = 10        # keep equal to max_replication_slots
+shared_preload_libraries = 'spock'
+track_commit_timestamp = on # needed for conflict resolution
+output_plugin_libraries = 'pgoutput, test_decoding, spock_output'
+                            # only on servers that have this parameter; see below
+```
+
+These values suit a small cluster of two or three nodes replicating a single
+database. Subscriptions - and the workers, walsenders, and slots that follow
+from them - scale with node count *multiplied by* the number of replicated
+databases, so an instance replicating several databases needs proportionally
+more of each. For anything larger, or for an instance hosting several
+databases or other extensions that use background workers, size each parameter
+with the formulas in
+[Sizing Postgres Resources for Spock](/pgedge/spock/sizing/). All three require a server
+restart to change.
+
+
+> [!WARNING] `output_plugin_libraries`
+>
+> A 2026 PostgreSQL security fix (CVE-2026-6471, back-patched to every
+> supported major) added the `output_plugin_libraries` parameter, and a
+> library may no longer be used as an output plugin unless it is listed
+> there. Its default, `'pgoutput, test_decoding'`, does not include
+> `spock_output`, so on such a server logical decoding fails with:
+>
+> ```
+> ERROR:  library "spock_output" may not be used as an output plugin
+> ```
+>
+> The check runs every time decoding starts, not only when the slot is
+> created, so an established cluster stops replicating after a minor-version
+> upgrade too. Add `spock_output` to the list, keeping the core defaults, as
+> shown above, on every node — including standbys, which need it once
+> promoted.
+>
+> Only set the parameter if your server has it. On a PostgreSQL release
+> predating the fix an unrecognised parameter in `postgresql.conf` stops the
+> server from starting at all. To check, run against a server that is up:
+>
+> ```sql
+> SELECT current_setting('output_plugin_libraries', true);
+> ```
+>
+> A NULL result means the parameter does not exist and must not be set. You
+> can also ask the binary, with no server running:
+>
+> ```bash
+> postgres --describe-config | grep '^output_plugin_libraries'
+> ```
+>
+
+After modifying the parameters and restarting the Postgres server with your
+OS-specific restart command, connect with psql and create the Spock
+extension:
+
+```sql
+[pg18]$ sudo -u postgres psql -U postgres -p 5432
+psql (18.1)
+Type "help" for help.
+
+postgres=# CREATE EXTENSION spock;
+CREATE EXTENSION
+```
+
+You will also need to modify your
+[`pg_hba.conf` file](https://www.postgresql.org/docs/18/auth-pg-hba-conf.html)
+to allow logical replication connections from localhost and between nodes.
+Logical replication connections are treated by `pg_hba.conf` as regular
+connections to the provider database.
+
+After modifying the `pg_hba.conf` file on each node, reload the server
+configuration to apply the changes (no restart required):
+
+```sql
+SELECT pg_reload_conf();
+```
+
+
+## Advanced Configuration Options for Spock {#advanced-configuration-options-for-spock}
+
+You can use the following configuration parameters (GUCs) on the psql
+command line with a `SET` statement or in a Postgres configuration file
+(for example, `postgresql.conf`) to configure a Spock installation.
+
+### `spock.allow_ddl_from_functions` {#spockallow_ddl_from_functions}
+
+`spock.allow_ddl_from_functions` enables spock to automatically replicate
+DDL statements that are called within functions to also be automatically
+replicated. This can be turned `off` if these functions are expected to run
+on every node. When this is set to `off`, statements replicated from
+functions adhere to the same rule previously described for
+`include_ddl_repset`. If a table possesses a defined primary key, it will be
+added into the `default` replication set; alternatively, they will be added
+to the `default_insert_only` replication set.
+
+### `spock.apply_change_logging` {#spockapply_change_logging}
+
+`spock.apply_change_logging` controls per-change JSON logging by the apply
+worker. After each change is successfully applied locally, a single JSON
+object is written to the PostgreSQL server log (at `LOG` level) so that
+operators can correlate replayed changes with their origin and commit
+timestamp. This is intended for debugging and auditing; it adds log volume
+proportional to the apply workload, so leave it at the default in normal
+operation.
+
+The following values are possible:
+
+- `none` (the default) - no per-change logging.
+- `key_only` - for each `INSERT`/`UPDATE`/`DELETE`, log the action,
+  schema-qualified table, primary-key values, origin, and commit timestamp.
+- `verbose` - all of the above, plus the old and new row data for each
+  change.
+
+Replicated DDL is logged (with its SQL text) in both `key_only` and
+`verbose` modes. This option can be set by a superuser via `SET`, or
+reloaded with the `SIGHUP` mechanism (for example,
+`SELECT pg_reload_conf()`); a server restart is not required.
+
+### `spock.channel_counters` {#spockchannel_counters}
+
+`spock.channel_counters` is a boolean value (the default is `true`) that
+enables or disables the Spock channel statistic information collection. This
+option can only be set when the postmaster starts.
+
+### `spock.check_all_uc_indexes` {#spockcheck_all_uc_indexes}
+
+
+> [!NOTE]
+>
+> This feature is experimental and `OFF` by default. Use this feature at
+> your own risk.
+>
+
+This parameter enhances conflict resolution during `INSERT` operations in
+scenarios where a row exists that meets unique constraints defined on the
+table (rather than primary keys or replication identity).
+
+If this GUC is `enabled`, Spock will continue to check unique constraint
+indexes, after checking the primary key or replica identity index. Only one
+conflict will be resolved, using Last-Write-Wins logic. This includes the
+primary key or replica identity index. If a second conflict occurs, the outcome is recorded in the
+`spock.resolutions` table if `spock.save_resolutions` is enabled; otherwise
+it is not persisted.
+
+Partial unique constraints are supported, but nullable unique constraints
+are not. Deferrable constraints are not supported, are filtered out and are
+not checked, and therefore may still cause an exception during the final
+commit.
+
+Unique constraint indexes are checked in OID order, after the primary key.
+It is therefore possible for the resolution of a unique constraint to change
+the primary key value.
+
+Child tables / foreign keys are not checked or handled. Therefore, if
+resolving a unique constraint changes the primary key value, you can
+inadvertently create orphaned foreign key records.
+
+### `spock.conflict_resolution` {#spockconflict_resolution}
+
+`spock.conflict_resolution` sets the resolution method for any detected
+conflicts between local data and incoming changes. The only supported value
+in current Spock releases is:
+
+- `last_update_wins` (the default) - the version of data with the newest
+  commit timestamp will be kept (this can be either the local or the remote
+  version).
+
+To enable conflict resolution, the `track_commit_timestamp` setting must be
+enabled.
+
+### `spock.deny_all_ddl` {#spockdeny_all_ddl}
+
+`spock.deny_all_ddl` is a boolean value (the default is `false`) that
+enables or disables the execution of DDL statements within a Spock
+configured cluster. This option can be set at postmaster startup, with the
+SIGHUP mechanism, or on the command line with SQL if you're a superuser.
+
+### `spock.enable_ddl_replication` {#spockenable_ddl_replication}
+
+`spock.enable_ddl_replication` enables
+[automatic replication](/pgedge/spock/managing/spock-autoddl/) of ddl statements through
+the `default` replication set.
+
+### `spock.exception_behaviour` {#spock-exception_behaviour}
+
+Use this GUC to specify the commit behavior of Postgres when it encounters
+an ERROR within a transaction:
+
+- `transdiscard` (the default) - set `spock.exception_behaviour` to
+  `transdiscard` to instruct the server to discard a transaction if any
+  operation within that transaction returns an `ERROR`.
+- `discard` - set `spock.exception_behaviour` to `discard` to continue
+  processing (and replicating) without interrupting server use; the server
+  will commit any operation (any portion of a transaction) that does not
+  return an `ERROR` statement.
+- `sub_disable` - set `spock.exception_behaviour` to `sub_disable` to
+  disable the subscription for the node on which the exception was
+  reported; transactions for the disabled node will be added to a queue
+  that is written to the WAL log file; when the subscription is enabled,
+  replication will resume with the transaction that caused the exception,
+  followed by the other queued transactions; you can use the
+  `spock.sub_alter_skiplsn` function to skip the transaction that caused
+  the exception and resume processing with the next transaction in the
+  queue.
+
+Note that the value you choose for `spock.exception_behaviour` could
+potentially result in a large WAL log if transactions are allowed to
+accumulate.
+
+### `spock.event_history_size` {#spockevent_history_size}
+
+`spock.event_history_size` sets how many recent events the `spock.events`
+view keeps in shared memory. Once the history is full the oldest event is
+dropped for each new one. The parameter accepts values from `16` to
+`1048576` (the default is `1024`) and can only be set when the postmaster
+starts.
+
+### `spock.exception_logging` {#spockexception_logging}
+
+Use this GUC to specify which operations or transactions are written to the
+exception log table:
+
+- `all` (the default) - set `spock.exception_logging` to `all` to instruct
+  the server to record all transactions that contain one or more failed
+  operations in the `spock.exception_log` table; note that this setting
+  will log all operations that are part of a transaction if one operation
+  fails.
+- `discard` - add a row to the `spock.exception_log` table for any
+  discarded operation; successful transactions are not logged.
+- `none` - instructs the server to not log any operation or transactions to
+  the exception log table.
+
+### `spock.exception_replay_queue_size` - DEPRECATED {#spockexception_replay_queue_size---deprecated}
+
+This parameter will not be supported after version 5.X.
+
+When Spock encounters a replication exception, it attempts to resolve the
+exception by entering exception-handling mode, based on the value of
+`spock.exception_behaviour`. Spock then writes any transaction up to a
+default size of `4MB` to memory, and the apply worker replays the
+transaction from memory. This provides a massive speed and performance
+increase in the handling of the vast majority of exceptions. The memory
+size is configurable with `spock.exception_replay_queue_size`.
+
+Now, Spock performs as specified by the
+[`spock.exception_behaviour`](#spock-exception_behaviour) parameter.
+
+### `spock.extra_connection_options` {#spockextra_connection_options}
+
+You can use the `spock.extra_connection_options` parameter in the
+`postgresql.conf` file to assign connection options that apply to all
+connections made by Spock. This can be a useful place to set up custom
+keepalive options, etc.
+
+`spock` defaults to enabling TCP keepalives to ensure that it notices when
+the upstream server disappears unexpectedly. To disable them add
+`keepalives = 0` to `spock.extra_connection_options`.
+
+### `wal_sender_timeout` {#wal_sender_timeout}
+
+For Spock replication, set `wal_sender_timeout` to a conservative value such
+as `5min` (300000ms) on each node in `postgresql.conf`:
+
+```ini
+wal_sender_timeout = '5min'
+```
+
+The default PostgreSQL value of `60s` can cause spurious disconnects when
+the subscriber is busy applying a large transaction and cannot send feedback
+in time. A higher value gives the apply worker enough headroom while still
+detecting truly dead connections. Liveness detection is primarily handled by
+TCP keepalives, and `spock.apply_idle_timeout` provides an additional
+subscriber-side safety net.
+
+### `spock.apply_idle_timeout` {#spockapply_idle_timeout}
+
+Maximum idle time (in seconds) before the apply worker reconnects to the
+provider. This acts as a safety net for detecting a hung walsender that keeps
+the TCP connection alive but stops sending data. The timer resets on any
+received message. Set to `0` to disable and rely solely on TCP keepalive for
+liveness detection. Default: `300` (5 minutes).
+
+```ini
+spock.apply_idle_timeout = 300
+```
+
+### `spock.sync_timeout` {#spocksync_timeout}
+
+Overrides the time (in seconds) budgeted for a single synchronisation wait in
+the node management routines - waiting for a sync event to arrive on a peer,
+waiting for a node to catch up, or waiting for a subscription to start
+replicating. Default: `0`, meaning each routine keeps its own built-in limit
+(3 minutes). Only a positive value takes effect, so leaving this unset
+preserves the behaviour those routines have always had.
+
+Raise it on large databases. The built-in limits are sized for small clusters,
+where a node joins in seconds; when catchup legitimately takes minutes or hours,
+the routines fail with a timeout long before the work is done. It can be raised
+for a single operation rather than cluster-wide:
+
+```sql
+SET spock.sync_timeout = '2h';
+CALL spock.add_node(...);
+```
+
+This bounds a whole wait, not an individual probe of a remote node. Routines
+that additionally bound each remote probe - so that one unresponsive peer
+cannot consume the entire budget - keep their own, much smaller limit for that
+purpose.
+
+```ini
+spock.sync_timeout = 0
+```
+
+### `spock.read_retry_count` {#spockread_retry_count}
+
+Number of times the apply worker re-reads the local relation when a row
+targeted by a remote `UPDATE` or `DELETE` is not yet visible. On each retry
+the apply worker waits for any concurrently-applying transaction to finish
+and then searches the local relation again. If the row is still missing
+after the configured number of retries, the apply worker falls through to
+the standard row-missing handling path (conflict resolution and/or the
+exception handler, depending on the configured
+[`spock.exception_behaviour`](#spock-exception_behaviour)).
+
+Set to `0` to disable retries entirely (the row-missing path runs
+immediately). Valid range is `0` to `100`. Default: `5`. Changes take
+effect on `SIGHUP` (for example, `SELECT pg_reload_conf()`); a server
+restart is not required.
+
+```ini
+spock.read_retry_count = 5
+```
+
+### Logical Slot Failover (HA Standby) {#logical-slot-failover-ha-standby}
+
+Spock creates logical replication slots on each provider node. For high
+availability with a physical standby, these slots must be synchronized to the
+standby so that replication can resume without data loss after a failover.
+
+See [Logical Slot Failover](/pgedge/spock/logical-slot-failover/) for full setup
+instructions, including a runbook step for clearing
+`synchronized_standby_slots` on the promoted node after a failover.
+
+The behaviour depends on the PostgreSQL version:
+
+| PostgreSQL | Slot sync mechanism | Spock worker |
+|---|---|---|
+| 15, 16 | Spock built-in `spock_failover_slots` worker | Runs on every node |
+| 17 | Spock worker OR native `sync_replication_slots` | Spock worker yields to native if enabled |
+| 18+ | Native `sync_replication_slots` (required) | Not registered |
+{.wide .expand}
+
+Whichever mechanism applies, a slot sync worker is present on every node,
+primary and standby alike, so include one in the worker budget - see
+[Sizing Postgres Resources for Spock](/pgedge/spock/sizing/).
+
+#### PostgreSQL 17 and Later (Native Slot Sync) {#postgresql-17-and-later-native-slot-sync}
+
+On PostgreSQL 17+, Spock marks every logical slot with the `FAILOVER` flag
+at creation time. PostgreSQL's built-in slotsync worker then synchronizes
+those slots automatically.
+
+On **PostgreSQL 17**, Spock's worker only yields to native slotsync when you
+set `sync_replication_slots = on` (below). On **PostgreSQL 18+**, Spock's own
+failover worker is not registered, so the native mechanism is required.
+Either way, PostgreSQL's own slot synchronization must be configured. To
+switch a PostgreSQL 17 standby that Spock's worker has been syncing, follow
+[Switching a PostgreSQL 17 standby from the Spock worker](/pgedge/spock/logical-slot-failover/#switching-a-postgresql-17-standby-from-the-spock-worker);
+setting `sync_replication_slots = on` alone is not enough.
+
+First create the physical replication slot on the primary. The standby streams
+through it, and its `catalog_xmin` (fed back via `hot_standby_feedback`) is what
+protects the synchronized logical slots from being invalidated:
+
+```sql
+SELECT pg_create_physical_replication_slot('physical_slot_name');
+```
+
+**Primary (`postgresql.conf`):**
+```ini
+# Hold logical walsenders back until the standby has confirmed the changes.
+synchronized_standby_slots = 'physical_slot_name'
+```
+
+**Standby (`postgresql.conf`):**
+```ini
+sync_replication_slots = on                      # enable the native slotsync worker
+hot_standby_feedback   = on                      # required; pins the primary's catalog vacuum
+primary_slot_name      = 'physical_slot_name'    # the physical slot created above
+primary_conninfo       = 'host=<primary_host> dbname=<dbname> ...'   # must include dbname
+```
+
+Only logical slots created with `failover = true` are synchronized. Spock 6.0.0
+sets that flag when it creates a slot, and the upgrade from 5.x sets it on
+existing slots; see
+[Upgrading Spock to 6.0.0](/pgedge/spock/logical-slot-failover/#upgrading-spock-to-600)
+for any it skips.
+
+After a failover, subscribers only need to update their `host=` in the
+connection string — replication resumes from the last synchronized LSN with
+no data loss. **However**, if the promoted node has
+`synchronized_standby_slots` set, you must clear or update it first —
+otherwise its walsenders wait forever on the now-orphaned physical slot(s) and
+logical replication to subscribers freezes. See the
+[runbook in Logical Slot Failover](/pgedge/spock/logical-slot-failover/#runbook-clear-synchronized_standby_slots-after-promotion)
+for when this applies and the exact steps.
+
+#### PostgreSQL 15, 16, and 17 (Spock Built-in Worker) {#postgresql-15-16-and-17-spock-built-in-worker}
+
+On PostgreSQL 15, 16, and 17, Spock's `spock_failover_slots` background worker
+handles slot synchronization. On PostgreSQL 17 it yields to the native
+slotsync worker when `sync_replication_slots = on` is enabled. Configure it
+with the GUCs below.
+
+### `spock.synchronize_slot_names` {#spocksynchronize_slot_names}
+
+List of slot name patterns to synchronize from primary to physical standby.
+Accepts name prefixes (`name:foo`) or LIKE patterns (`name_like:spock%`).
+Default: `name_like:%%` (synchronize all logical slots).
+
+```ini
+spock.synchronize_slot_names = 'name_like:%%'
+```
+
+Used on PostgreSQL 15, 16, and 17 (when `sync_replication_slots` is not
+enabled). On PostgreSQL 17 with native slotsync active, or on PostgreSQL 18+,
+this setting is ignored.
+
+### `spock.drop_extra_slots` {#spockdrop_extra_slots}
+
+When `on` (the default), the `spock_failover_slots` worker drops any slots
+on the standby that do not match `spock.synchronize_slot_names`.
+
+```ini
+spock.drop_extra_slots = on
+```
+
+### `spock.primary_dsn` {#spockprimary_dsn}
+
+Connection string used by the `spock_failover_slots` worker to connect to
+the primary and read slot state. If empty, `primary_conninfo` from
+`postgresql.conf` is used.
+
+```ini
+spock.primary_dsn = ''
+```
+
+### `spock.pg_standby_slot_names` {#spockpg_standby_slot_names}
+
+Comma-separated list of physical replication slot names that must confirm
+durable flush of a given LSN before the walsender is allowed to replicate
+logical changes beyond that LSN. This prevents a physical standby from
+falling behind a logical subscriber.
+
+```ini
+spock.pg_standby_slot_names = 'physical_slot_1,physical_slot_2'
+```
+
+Used on every supported PostgreSQL version, with or without native slot
+sync. PostgreSQL's own `synchronized_standby_slots` has no equivalent of
+`spock.standby_slots_min_confirmed`: it waits for every slot it names, so
+with it one standby that is down stops logical replication to every
+subscriber. Use only one of them; setting both is redundant. For a failover slot
+`synchronized_standby_slots` is applied first and waits for all of its
+slots, so when it names every slot listed here this setting adds nothing,
+and the walsender logs that; a slot listed only here still counts. A
+listed slot that does not exist can never confirm: with the default `-1`
+the walsender waits until `wal_sender_timeout`, logs a warning naming the
+slot, and starts over, so after a promotion either create the slots on
+the new primary or clear the setting there.
+
+### `spock.standby_slots_min_confirmed` {#spockstandby_slots_min_confirmed}
+
+Number of slots from `spock.pg_standby_slot_names` that must confirm a
+given LSN before logical replication is allowed to proceed. The default
+`-1` requires all listed slots to confirm. `0` disables the check.
+
+```ini
+spock.standby_slots_min_confirmed = -1
+```
+
+With a value lower than the number of listed slots, subscribers can receive
+changes that some standbys do not have yet. After a failure, promote the
+standby with the highest `pg_last_wal_receive_lsn()`: it has every change
+sent to a subscriber. Promoting a standby that is further behind leaves
+subscribers with rows the new primary never had.
+
+### `spock.failover_slots_naptime` {#spockfailover_slots_naptime}
+
+How long the `spock_failover_slots` worker sleeps between slot-synchronization
+passes, in milliseconds. A smaller value keeps the standby's synchronized slots
+closer to the primary — narrowing the window in which a promotion can find a
+stale slot — at the cost of more frequent sync passes. Default: `1000` (1s).
+Range: `1`–`3600000`. Settable at runtime with `SIGHUP` (reload).
+
+```ini
+spock.failover_slots_naptime = 1000
+```
+
+Used on PostgreSQL 15, 16, and 17 (when `sync_replication_slots` is not
+enabled) — the versions on which the built-in worker performs the sync.
+
+### `spock.failover_slots_feedback_naptime` {#spockfailover_slots_feedback_naptime}
+
+Shorter retry interval, in milliseconds, used instead of
+`spock.failover_slots_naptime` while the standby has not yet received or fed
+back the WAL a slot needs. Default: `10000` (10s). Range: `1`–`3600000`.
+Settable at runtime with `SIGHUP` (reload).
+
+```ini
+spock.failover_slots_feedback_naptime = 10000
+```
+
+### `spock.failover_slots_recreate_invalidated` {#spockfailover_slots_recreate_invalidated}
+
+Whether the `spock_failover_slots` worker drops and recreates a synchronized
+slot whose copy on the standby was invalidated, for example because the
+standby removed WAL or the primary removed catalog rows the copy still
+needed. Such a copy looks current but cannot serve a subscriber after a
+promotion. With the default `on`, the worker reports it with a WARNING,
+drops it and creates it again from the primary. The new copy stays a
+temporary slot until the primary's slot has caught up with it, while the
+worker keeps synchronizing the other slots; if the standby is promoted
+before then, the copy is dropped. A temporary copy belongs to the worker
+process: if the worker exits for any reason, for example because the
+primary is restarting and cannot be reached, the copy is dropped with it,
+and the worker that the postmaster starts a minute later creates it again
+at the standby's position of that time, which the primary's slot has to
+pass again. If a temporary copy is invalidated while the worker holds it,
+PostgreSQL terminates the worker to release the slot, with the same
+effect. With `off`, the worker
+leaves the copy as it is and reports it once, so it can be looked at
+before anything is dropped; it is recreated on the first pass after the
+setting is turned back on. Settable at runtime with `SIGHUP` (reload).
+
+Used on PostgreSQL 15, 16, and 17 (when `sync_replication_slots` is not
+enabled). On PostgreSQL 17 with native slotsync active, or on PostgreSQL 18+,
+this setting is ignored.
+
+```ini
+spock.failover_slots_recreate_invalidated = on
+```
+
+### `spock.failover_slots_database` {#spockfailover_slots_database}
+
+The database the `spock_failover_slots` worker connects to on the standby.
+A synchronized slot copy holds the primary's positions, but not the
+snapshot the primary saved for the slot, which physical replication does
+not carry. After a promotion, decoding from such a copy has to build a new
+snapshot, and transactions that commit before it is consistent are never
+sent to the subscriber. When this setting names a database, the worker
+decodes each copy's WAL on the standby, as PostgreSQL 17's native slot sync
+does, so the copy only points at positions where the standby has saved a
+snapshot of its own. A new copy is made persistent only once that
+snapshot is consistent. While a transaction older than a copy's
+`restart_lsn` is still open on the primary, decoding cannot reach a
+consistent snapshot; the copy is reported once and left as it is until
+the transaction ends, and the worker goes on with the other slots.
+
+The check is off by default. While the setting is empty, every copy is
+synchronized without it, as in earlier releases, and is reported once (a
+WARNING on PostgreSQL 16 and 17, a LOG entry on 15); after a promotion,
+such a copy can still skip transactions the old primary committed shortly
+before the failover.
+
+On PostgreSQL 16 this must be the database the synchronized slots belong
+to, normally the Spock database. Copies in another database are
+synchronized without the check, reported once with a WARNING, and carry
+the same risk. The worker connects to one database only, so with Spock in
+several databases on PostgreSQL 16, name the most important one; the
+slots of the others are not protected. On PostgreSQL 17, any one database
+covers the slots of every database. The standby also needs
+`wal_level = logical`. PostgreSQL 15 cannot decode WAL on a standby, so
+there the check is not available and each copy is noted once in the log
+instead. Default: empty. Requires a restart.
+
+On PostgreSQL 16 and 17 the worker stays connected to this database on
+every node where the setting is present, including a primary, where it
+otherwise sleeps, and a PostgreSQL 17 standby using native slot sync. As
+with any open connection, `DROP DATABASE`, `ALTER DATABASE ... RENAME` and
+`CREATE DATABASE ... TEMPLATE` on that database then fail. Stopping the
+worker frees the database only until it restarts 60 seconds later; use
+`DROP DATABASE ... WITH (FORCE)`, or clear the setting and restart the
+server. If connecting fails, for example because the database does not
+exist, the worker reports it, carries on without the check, and does not
+try again until the server is restarted. The same happens when the
+database is dropped on the primary: replaying the drop on the standby ends
+the worker, the restarted worker cannot connect to the database, and the
+worker after that keeps synchronizing slots without the check.
+
+The check is made on PostgreSQL 16 and 17 (when `sync_replication_slots` is
+not enabled). On PostgreSQL 17 with native slot sync active, the worker still
+connects but makes no check. On PostgreSQL 17, native slot sync is the
+recommended setup; it gives every copy a consistent snapshot without this
+setting. Turning on `sync_replication_slots` alone is not enough to switch:
+native slot sync has further requirements and will not take over the copies
+the Spock worker made, so until those are dropped most or all slots stop
+being synchronized. See
+[Switching a PostgreSQL 17 standby from the Spock worker](/pgedge/spock/logical-slot-failover/#switching-a-postgresql-17-standby-from-the-spock-worker).
+On PostgreSQL 15 and 18+, this setting is ignored.
+
+On PostgreSQL 17, once the worker has taken over from native slot sync, a
+copy that native slot sync made is synchronized like any other, but a
+standby cannot drop it. If the primary drops that slot, the worker leaves
+the copy and reports it once; it is dropped on the promoted node.
+
+```ini
+spock.failover_slots_database = 'pgedge'
+```
+
+### `spock.include_ddl_repset` {#spockinclude_ddl_repset}
+
+`spock.include_ddl_repset` enables spock to automatically add tables to
+replication sets at the time they are created on each node. Tables with
+primary keys will be added to the `default` replication set, and tables
+without primary keys will be added to the `default_insert_only` replication
+set. Altering a table to add or remove a primary key will make the correct
+adjustment to which replication set the table is part of. Setting a table to
+unlogged will remove it from replication. Detaching a partition will not
+remove it from replication.
+
+### `spock.log_origin_change` {#spocklog_origin_change}
+
+`spock.log_origin_change` indicates whether changes to a row's
+origin should be logged to the PostgreSQL log. Rows may be being updated
+locally by regular SQL operations, or by replication from apply workers.
+Note that rows that are changed locally (not from replication) have the
+origin value of `0`. This is distinct from an unavailable or unknown origin:
+a `NULL` value in `spock.resolutions.local_origin`, or `unknown` in
+PostgreSQL logs, indicates that the origin metadata could not be determined
+— it does not mean the change was local. For example:
+
+```sql
+-- Rows resolved from a locally-originated conflict (origin = 0)
+SELECT * FROM spock.resolutions WHERE local_origin = 0;
+
+-- Rows where origin metadata was unavailable at resolution time
+SELECT * FROM spock.resolutions WHERE local_origin IS NULL;
+```
+
+The default of `none` is recommended because otherwise the amount of entries
+may become numerous. The other options allow for monitoring when updates
+occur outside expected patterns.
+
+The following configuration values are possible:
+
+- `none` (the default) - do not log any origin change information.
+- `remote_only_differs` - only log origin changes when the existing row was
+  from one remote publisher and was changed by another remote publisher.
+- `since_sub_creation` - log origin changes whether a publisher changed a
+  row that was previously from another publisher or updated it locally, but
+  only since the time when the subscription was created.
+
+### `spock.log_verbosity` {#spocklog_verbosity}
+
+`spock.log_verbosity` controls the verbosity of Spock's own debug log
+output. Spock emits internal `DEBUG1`/`DEBUG2` messages that are normally
+silent, because PostgreSQL's `log_min_messages` typically defaults to
+`warning`. Lowering `log_min_messages` globally would surface those
+messages, but it would also flood the log with unrelated PostgreSQL debug
+output.
+
+Instead, this setting *promotes* Spock's own debug messages to `LOG` level
+(which is written to the server log under any normal `log_min_messages`
+setting), without changing `log_min_messages`. The value controls how much
+detail is promoted:
+
+- `normal` (the default) - promote nothing; Spock's `DEBUG1`/`DEBUG2`
+  messages keep their native (normally silent) levels.
+- `debug1` - promote Spock's `DEBUG1` messages to `LOG`.
+- `debug2` - promote both Spock's `DEBUG1` and `DEBUG2` messages to `LOG`.
+
+This option can be set by a superuser via `SET`, or reloaded with the
+`SIGHUP` mechanism (for example, `SELECT pg_reload_conf()`); a server
+restart is not required.
+
+### `spock.non_conflicting_inserts` {#spocknon_conflicting_inserts}
+
+`spock.non_conflicting_inserts` is a boolean value (the default is `off`)
+with which you assert that a replicated `INSERT` can never collide with a row
+that already exists locally - because, for example, every node generates keys
+from its own range.
+
+Applying an `INSERT` normally costs two pieces of work that only a possible
+collision justifies: a lookup for the conflicting local row, and a
+speculative insertion that lets the unique indexes report a duplicate instead
+of raising one. When this parameter is `on`, the apply worker skips both and
+inserts the row directly.
+
+Nothing checks the assertion. If a collision does occur, the index raises
+`duplicate key value violates unique constraint`, the transaction is aborted,
+and the outcome is decided by
+[`spock.exception_behaviour`](#spock-exception_behaviour) - the row is not
+resolved by `spock.conflict_resolution` and is not recorded in
+`spock.resolutions`. Leave this parameter `off` unless collisions are
+impossible by design rather than merely rare.
+
+This option can only be set when the postmaster starts.
+
+### `spock.save_resolutions` {#spocksave_resolutions}
+
+`spock.save_resolutions` is a boolean value (the default is `false`) that
+logs all conflict resolutions to the `spock.resolutions` table. This option
+can only be set when the postmaster starts.
+
+### `spock.resolutions_retention_days` {#spockresolutions_retention_days}
+
+`spock.resolutions_retention_days` controls how long rows are kept in the
+`spock.resolutions` table before the apply worker automatically deletes them.
+The default is `100` days. Set to `0` to disable automatic cleanup entirely,
+in which case rows accumulate indefinitely until removed manually.
+
+This setting takes effect on `pg_reload_conf()` (no restart required).
+
+```ini
+spock.resolutions_retention_days = 100
+```
+
+### `spock.stats_max_entries` {#spockstats_max_entries}
+
+`spock.stats_max_entries` specifies the maximum number of entries that can
+be stored into the Spock channel statistic. This option can only be set when
+the postmaster starts.  The parameter accepts values from `-1` to `INT_MAX`
+(the default is `-1`).
+
+### `spock.temp_directory` {#spocktemp_directory}
+
+`spock.temp_directory` defines the system path where temporary files needed
+for schema synchronization are written. This path needs to exist and be
+writable by the user running Postgres. The default is `empty`, which tells
+Spock to use the default temporary directory based on environment or
+operating system settings.
+
+
+---
+
+[Upstream source](https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/configuring.md) · `4ac1aec2f080` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).

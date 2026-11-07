@@ -1,0 +1,154 @@
+---
+title: Finding Cluster Information
+description: 'The following table describes informational tables in the spock schema:'
+weight: 200
+upstream_source: pgedge-spock
+upstream_link: https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/monitoring/spock_info.md
+upstream_modified: true
+upstream_ref: 4ac1aec2f080
+source_kind: pinned-main-snapshot
+type: docs
+---
+
+
+
+The following table describes informational tables in the `spock` schema:
+
+| Table Name | Description |
+|---------------------|----------------------------|
+| `channel_table_stats` | This view tracks per-table statistics for a given subscription, including total inserts, updates, deletes, conflicts, and delta apply column changes. The view includes the following columns: `subid`, `relid`, `sub_name`, `table_name`, `n_tup_ins`, `n_tup_upd`, `n_tup_del`, `n_conflict`, `n_dca` |
+| `channel_summary_stats` | This view aggregates statistics from `channel_table_stats` across tables, showing overall metrics grouped by subscription. The view includes the following columns: `subid`, `sub_name`, `n_tup_ins`, `n_tup_upd`, `n_tup_del`, `n_conflict`, `n_dca` |
+| `events` | This view lists recent state changes of the node kept in shared memory: subscriptions enabled or disabled, workers started, stopped or failed, provider connects, extension upgrades. See [Monitoring a Node](/pgedge/spock/monitoring/node-monitoring/). The view includes the following columns: `event_id`, `event_time`, `event_type`, `severity`, `subscription_id`, `subscription_name`, `pid`, `lsn`, `detail` |
+| `depend` | This is an internal-use table that tracks dependent objects (e.g., tables added for replication or row filters). If such objects are dropped, they are also removed from Spock’s tracking. The table includes the following columns: `classid`, `objid`, `objsubid`, `refclassid`, `refobjid`, `refobjsubid`, `deptype` |
+| `exception_log` | This table logs unrecoverable errors or conflicts encountered by Spock during the replication process. The table includes the following columns: `remote_origin`, `remote_commit_ts`, `command_counter`, `retry_errored_at`, `remote_xid`, `local_origin`, `local_commit_ts`, `table_schema`, `table_name`, `operation` (contains one of the following: `BEGIN`, `COMMIT`, `INSERT`, `UPDATE`, `DELETE`, or `DDL`), `local_tup`, `remote_old_tup`, `remote_new_tup`, `ddl_statement`, `ddl_user`, `error_message` |
+| `exception_status` | This table is not used internally by Spock. This table exists to support ACE by tracking specific status details. The table includes the following information columns: `remote_origin`, `remote_commit_ts`, `retry_errored_at`, `remote_xid`, `status`, `resolved_at`, `resolution_details` |
+| `exception_status_detail` | The table includes the following columns: `remote_origin`, `remote_commit_ts`, `command_counter`, `retry_errored_at`, `remote_xid`, `status`, `resolved_at`, `resolution_details` |
+| `local_node` | This table contains one row with information for the local node. It contains the `node_id` and `node_local_interface` and can be joined with the previous two tables to show all local node information only. |
+| `local_sync_status` | This table displays the synchronization status of relations (tables) added to subscriptions. Shows all tables if a full sync was requested, or individual tables if sync was limited to specific tables. The table includes the following columns: `sync_kind`, `sync_subid`, `sync_nspname`, `sync_relname`, `sync_status`, `sync_statuslsn` |
+| `node` | This table contains one row per replication node. This table contains: `node_id`, `node_name`, and optionally the `location`, `country`, and `info`. |
+| `node_interface` | This table contains one row per node interface. This table contains: `if_id`, `if_name`, `if_nodeid`, and `if_dsn` columns which represent the connection information for that node. |
+| `node_status` | This view returns one row describing the whole node: versions, worker and subscription counts, WAL retained by slots, replication lag and the time of the last events. See [Monitoring a Node](/pgedge/spock/monitoring/node-monitoring/). |
+| `peer_status` | This view lists every node this node knows about with its interfaces and the subscription that brings its changes here. See [Monitoring a Node](/pgedge/spock/monitoring/node-monitoring/). |
+| `pii` | This is an optional table in which you can define columns that contain personally identifiable information (pii). You can add information such as the schema, table, and column names and then use this table to create column filters when adding tables to replication sets. The table contains the following columns: `id`, `pii_schema`, `pii_table`, `pii_column` |
+| `progress` | This is an internal-use table that tracks replication progress, including source node, commit LSN, commit timestamp, and origin’s current WAL insert location. The table includes the following columns: `node_id`, `remote_node_id`, `remote_commit_ts`, `remote_commit_lsn`, `remote_insert_lsn`, `last_updated_ts`, `updated_by_decode` |
+| `queue` | This is an internal-use table used during AutoDDL, subscription/table synchronization, and native sequence synchronization processes. The table includes the following information columns: `queued_at`, `role`, `replication_sets`, `message_type`, `message` |
+| `replication_set` | This table contains one row per replication set. It contains the `set_id`, `set_nodeid`, `set_name` and four boolean columns: `replicate_insert`, `replicate_update`, `replicate_delete`, and `replicate_truncate`. This table also contains three rows by default for the `default`, `default_insert_only`, and `ddl_sql` replication sets. |
+| `replication_set_seq` | This table contains one row per replication set sequence. It contains `set_id` and `set_seqoid`. |
+| `replication_set_table` | This table contains one row per table that is in any replication set. It contains the `set_id`, `set_reloid` (the table name), `set_att_list`, and `set_row_filter`. The last two columns contain the row and column filters on that table for replication. |
+| `replication_set_status` | This view lists the replication sets of the local node with their replicate flags and the number of tables, sequences and subscriptions using each. |
+| `resolutions` | This table contains one row per resolution made on this node. It contains the `id`, `node_name`, `log_time`, `relname`, `idxname`, `conflict_type` (`update_update`), `conflict_resolution` (`keep_local`), `local_origin`, `local_tuple`, `local_xid, local_timestamp`, `remote_origin`, `remote_tuple`, `remote_xid`, `remote_timestamp`, `remote_lsn`. |
+| `settings` | This view shows the spock parameters and the core parameters replication depends on, with unit, source and pending restart. |
+| `slot_status` | This view describes every spock replication slot of the database together with the walsender serving it, the WAL it holds back and the feedback lag. See [Monitoring a Node](/pgedge/spock/monitoring/node-monitoring/). |
+| `sequence_state` | This is an internal-use table that stores state information for native sequence synchronization. The table includes the following columns: `seqoid`, `cache_size`, `last_value` |
+| `subscription` | This table contains one row per subscription. It contains the following columns: `sub_id`, `sub_name`, `sub_origin`, `sub_target`, `sub_origin_if`, `sub_target_if`, `sub_enabled`, `sub_slot_name`, `sub_replication_sets` (an array of replication sets that have been added to the subscription), `sub_forward_origins`, `sub_apply_delay`, `sub_force_text_transfer`, `sub_skip_lsn` (a `pg_lsn` set by `spock.sub_alter_skiplsn`), `sub_skip_schema` (an array of schemas to skip during apply), and `sub_created_at` (timestamp of subscription creation). |
+| `subscription_stats` | This view returns the activity counters of every subscription: worker starts and failures, provider connects, messages and transactions received, tuple and conflict counters, and the last error. See [Monitoring a Node](/pgedge/spock/monitoring/node-monitoring/). |
+| `subscription_status` | This view describes every subscription on one row: configuration, status, the apply worker serving it, replication positions and lag, and the last error. See [Monitoring a Node](/pgedge/spock/monitoring/node-monitoring/). |
+| `system_status` | This view returns one row about the host and the instance: disk space, load, connections, long and idle transactions, wraparound age, database statistics and WAL archiving. See [Monitoring a Node](/pgedge/spock/monitoring/node-monitoring/). |
+| `table_sync_status` | This view shows `local_sync_status` with readable `sync_kind` and `sync_status` values. |
+| `tables` | This table contains one row per table in the database. It contains the following columns: `relid`, `nspname` (the schema), `relname` (the tablename), and `set_name` (`null` if that table is not added to any replication set). |
+| `worker_status` | This view lists the spock processes of the node: supervisor, manager, apply and sync workers, with their status and the subscription or table they serve. See [Monitoring a Node](/pgedge/spock/monitoring/node-monitoring/). |
+{.wide .expand}
+
+## Examples {#examples}
+
+The following examples demonstrate how to query the informational tables to
+monitor and validate your Spock replication cluster.
+
+### Validating Spock Configuration for a Two-Node Cluster {#validating-spock-configuration-for-a-two-node-cluster}
+
+You can use the Spock extension to confirm that nodes are created and
+replication is happening.
+
+Query `spock.node` to check node creation status: an empty result set means
+the node creation command has not yet been run, while a single row confirms
+the node exists.
+
+Query `spock.subscription` to check subscription creation status: an empty
+result set means no subscription has been created on this node, while a
+single row confirms a subscription exists.
+
+You can connect to the database server and query the `spock.node` table to
+return information about configured nodes:
+
+```json
+select * from spock.node;
+-[ RECORD 1 ]--------
+node_id   | 673694252
+node_name | n1
+location  |
+country   |
+info  	|
+-[ RECORD 2 ]--------
+node_id   | 560818415
+node_name | n2
+location  |
+country   |
+info  	|
+```
+
+### Confirming that a Functioning Subscription Exists {#confirming-that-a-functioning-subscription-exists}
+
+You can connect to the database server and query the `spock.subscription`
+table to return information about a subscription:
+
+```sql
+select * from spock.subscription;
+-[ RECORD 1 ]-----------+--------------------------------------------------
+sub_id              	| 3293941396
+sub_name            	| sub_n1n2
+sub_origin          	| 560818415
+sub_target          	| 673694252
+sub_origin_if       	| 4043145508
+sub_target_if       	| 1437190346
+sub_enabled         	| t
+sub_slot_name       	| spk_demo_n2_sub_n1n2
+sub_replication_sets	| {default,default_insert_only,ddl_sql,demo_repset}
+sub_forward_origins 	|
+sub_apply_delay     	| 00:00:00
+sub_force_text_transfer | f
+```
+Note that the value of `sub_enabled` is `t` if the subscription is currently
+replicating.
+
+### Listing Tables that are Part of a Replication Scenario {#listing-tables-that-are-part-of-a-replication-scenario}
+
+You can connect to the database server and query the
+`spock.replication_set_table` table to return similar information:
+
+```sql
+select * from spock.replication_set_table;
+-[ RECORD 1 ]--+-----------------
+set_id     	| 2403235102
+set_reloid 	| pgbench_accounts
+set_att_list   |
+set_row_filter |
+-[ RECORD 2 ]--+-----------------
+set_id     	| 2403235102
+set_reloid 	| pgbench_branches
+set_att_list   |
+set_row_filter |
+-[ RECORD 3 ]--+-----------------
+set_id     	| 2403235102
+set_reloid 	| pgbench_tellers
+set_att_list   |
+set_row_filter |
+```
+
+### Listing Tables that are not Part of a Replication Cluster {#listing-tables-that-are-not-part-of-a-replication-cluster}
+
+You can query the `spock.tables` table to identify tables that are not yet
+part of a replication set; if the set name is `null`, the table is not part
+of a replication set.
+
+```sql
+select * from spock.tables where set_name is null;
+-[ RECORD 1 ]-------------
+relid	| 24846
+nspname  | public
+relname  | pgbench_history
+set_name |
+```
+
+---
+
+[Upstream source](https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/monitoring/spock_info.md) · `4ac1aec2f080` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).
