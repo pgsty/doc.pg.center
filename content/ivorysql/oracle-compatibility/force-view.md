@@ -1,0 +1,71 @@
+---
+title: Force View
+linkTitle: Force View
+description: 'IvorySQL v5.6 documentation: Force View.'
+type: docs
+weight: 270
+upstream_link: https://github.com/IvorySQL/ivorysql_docs/blob/7c3f4a67e7d3dc92d3046ad54cac4de196aef4f1/EN/modules/ROOT/pages/7.18.adoc
+upstream_source: ivorysql
+upstream_license: LicenseRef-IvorySQL-Docs-en
+upstream_modified: true
+---
+
+## 1. Purpose {#purpose}
+
+- This document explains the purpose of Force View in IvorySQL and shows how it enables users to create placeholder views when dependencies are not yet ready while keeping the behavior aligned with Oracle.
+
+- Force View supports migrating views even when dependent tables are not yet ready, and can swiftly revert to regular views through automatic or explicit compilation once dependencies are satisfied.
+
+## 2. Feature Description {#feature-description}
+
+- `CREATE [OR REPLACE] FORCE VIEW`: Creates a view object even when the query references missing tables or functions. The system retains the SQL definition and returns the message `WARNING: View created with compilation errors`.
+
+- Automatic compilation: When a Force view is accessed, IvorySQL attempts recompilation. If it succeeds, the view becomes a normal view; if it fails, it raises `view "<schema>.<name>" has errors`.
+
+- Dependency fallback: When a normal view is invalidated because dependencies are removed or altered, IvorySQL automatically converts it into a Force view, preserving the latest valid definition so it can be restored quickly once dependencies are rebuilt.
+
+## 3. Test Cases {#test-cases}
+
+### 3.1. Create a Force View with Missing Dependencies {#create-a-force-view-with-missing-dependencies}
+
+``` sql
+-- The base table does not exist, but the Force view placeholder is created successfully.
+CREATE FORCE VIEW fv_customer AS
+SELECT c_id, c_name FROM missing_customer;
+-- Expected output: WARNING: View created with compilation errors
+```
+
+### 3.2. Automatic Compilation and Recovery {#automatic-compilation-and-recovery}
+
+``` sql
+-- Provide the missing dependency.
+CREATE TABLE missing_customer(
+  c_id   int primary key,
+  c_name text
+);
+INSERT INTO missing_customer VALUES (1, 'Alice');
+
+-- Accessing the Force view triggers automatic compilation.
+SELECT * FROM fv_customer;
+-- On success, the view becomes a normal view and returns data.
+```
+
+### 3.3. Explicit Compilation and Failure Fallback {#explicit-compilation-and-failure-fallback}
+
+``` sql
+-- Recreate the view definition as a Force view to make it invalid again.
+CREATE OR REPLACE FORCE VIEW fv_customer AS
+SELECT c_id, upper(c_name) AS c_name FROM missing_customer_v2;
+
+-- Explicit compilation fails because dependencies are still missing.
+ALTER VIEW fv_customer COMPILE;
+-- Expected output: WARNING: View altered with compilation errors
+
+-- Supply the required dependency and compile again.
+CREATE TABLE missing_customer_v2(
+  c_id   int,
+  c_name text
+);
+ALTER VIEW fv_customer COMPILE;
+-- Expected output: ALTER VIEW succeeds and the view returns to normal.
+```
