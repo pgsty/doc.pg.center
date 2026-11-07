@@ -1,0 +1,1704 @@
+{
+  "component": "babelfish",
+  "source_site": "https://bablefish.pgsty.com/",
+  "pages": [
+    {
+      "source": "content/about/_index.md",
+      "target": "content/babelfish/site/_index.md",
+      "language": "en",
+      "old_route": "/about/",
+      "route": "/babelfish/site/",
+      "sha256": "a36293f9521fd4ffe0acd14ad14b26d9adfde2d1115d3c65551e5b0fe7954476",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/about/_index.zh.md",
+      "target": "content/babelfish/site/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/about/",
+      "route": "/zh/babelfish/site/",
+      "sha256": "f6ceac9774fd9206bc68440fb2e81aa90dbba97a10dbcaf5d80a122c8ae38766",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/about/attribution.md",
+      "target": "content/babelfish/site/attribution.md",
+      "language": "en",
+      "old_route": "/about/attribution/",
+      "route": "/babelfish/site/attribution/",
+      "sha256": "a7562ae0ed65bc0778236095827cc687ad4e063fe98f8edb9546136f4587aa6e",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/about/attribution.zh.md",
+      "target": "content/babelfish/site/attribution.zh.md",
+      "language": "zh",
+      "old_route": "/zh/about/attribution/",
+      "route": "/zh/babelfish/site/attribution/",
+      "sha256": "903ef943db06552a4975b938b8e523b4fc9fd9f7fa8b94290071b019a3dc7ad3",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/about/contributors.md",
+      "target": "content/babelfish/site/contributors.md",
+      "language": "en",
+      "old_route": "/about/contributors/",
+      "route": "/babelfish/site/contributors/",
+      "sha256": "46580e223d063f91c885836177ca9e81810567a8b36f9e551e27061d09a5fda0",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/about/contributors.zh.md",
+      "target": "content/babelfish/site/contributors.zh.md",
+      "language": "zh",
+      "old_route": "/zh/about/contributors/",
+      "route": "/zh/babelfish/site/contributors/",
+      "sha256": "c8ad1c302c9cbf5dc47e59bf2c43c52dab9bb09d374a28c0b660a084b6dc5771",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/about/principles.md",
+      "target": "content/babelfish/site/principles.md",
+      "language": "en",
+      "old_route": "/about/principles/",
+      "route": "/babelfish/site/principles/",
+      "sha256": "1522d65f56915e05368a147ba8fe09476af755091f7ff75eca730dd8b0e4032c",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/about/principles.zh.md",
+      "target": "content/babelfish/site/principles.zh.md",
+      "language": "zh",
+      "old_route": "/zh/about/principles/",
+      "route": "/zh/babelfish/site/principles/",
+      "sha256": "d44ed2093ff7e501fc9ac75623924f4c1f299952b0f791177013509f30f06746",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/blog/_index.md",
+      "target": "content/babelfish/blog/_index.md",
+      "language": "en",
+      "old_route": "/blog/",
+      "route": "/babelfish/blog/",
+      "sha256": "1570f2e876fac8eee0e5e28b787e4fb746933ec00b3bd23e5344fe2396b33199",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/_index.zh.md",
+      "target": "content/babelfish/blog/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/",
+      "route": "/zh/babelfish/blog/",
+      "sha256": "e0f3d5886a83c848b8137c6190476875bd0d6e4b982f4b4c0f8b11d61ea596c9",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/release/_index.md",
+      "target": "content/babelfish/blog/release/_index.md",
+      "language": "en",
+      "old_route": "/blog/release/",
+      "route": "/babelfish/blog/release/",
+      "sha256": "143bbefcb28531258b3114635ff86c2f849fc13373132c5aa0096fd3979d8e7f",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/release/_index.zh.md",
+      "target": "content/babelfish/blog/release/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/release/",
+      "route": "/zh/babelfish/blog/release/",
+      "sha256": "291673c17ed8f46209a1247096ecc69956edb04f79a3f177578c203317f84890",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/release/babelfish-launch.md",
+      "target": "content/babelfish/blog/release/babelfish-launch.md",
+      "language": "en",
+      "old_route": "/blog/release/babelfish-launch/",
+      "route": "/babelfish/blog/release/babelfish-launch/",
+      "sha256": "691c33e5c183a5dd839e18d779a9265d99cba2d2d17e3278f65f59aa92dc59dd",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/release/babelfish-launch.zh.md",
+      "target": "content/babelfish/blog/release/babelfish-launch.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/release/babelfish-launch/",
+      "route": "/zh/babelfish/blog/release/babelfish-launch/",
+      "sha256": "403878390b6cef679e75435d2f7c82b61bfe233f666f09f601955f4d04259afb",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/blog/release/babelfish-release-4-0-0.md",
+      "target": "content/babelfish/blog/release/babelfish-release-4-0-0.md",
+      "language": "en",
+      "old_route": "/blog/release/babelfish-release-4-0-0/",
+      "route": "/babelfish/blog/release/babelfish-release-4-0-0/",
+      "sha256": "296d18331a0eaa99d1564f7ff0ca38700979ea507030691aeae849fd1a0f5e84",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/release/babelfish-release-4-0-0.zh.md",
+      "target": "content/babelfish/blog/release/babelfish-release-4-0-0.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/release/babelfish-release-4-0-0/",
+      "route": "/zh/babelfish/blog/release/babelfish-release-4-0-0/",
+      "sha256": "b4c01f910af5eebc43f18530ae8308f31e4100388710e615a9a08b4ff987d0db",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/blog/release/babelfish-release-5-1-0.md",
+      "target": "content/babelfish/blog/release/babelfish-release-5-1-0.md",
+      "language": "en",
+      "old_route": "/blog/release/babelfish-release-5-1-0/",
+      "route": "/babelfish/blog/release/babelfish-release-5-1-0/",
+      "sha256": "f3daa71f61cb1951c82514864d6d03107a370afb627928a68f3b260b251af472",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/release/babelfish-release-5-1-0.zh.md",
+      "target": "content/babelfish/blog/release/babelfish-release-5-1-0.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/release/babelfish-release-5-1-0/",
+      "route": "/zh/babelfish/blog/release/babelfish-release-5-1-0/",
+      "sha256": "46af90d354262ac32171fefd628866cdac1910a9af08cff17d92b582ed64cf89",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/blog/release/babelfish-website-announcement.md",
+      "target": "content/babelfish/blog/release/babelfish-website-announcement.md",
+      "language": "en",
+      "old_route": "/blog/release/babelfish-website-announcement/",
+      "route": "/babelfish/blog/release/babelfish-website-announcement/",
+      "sha256": "edd1517946af962108ad3c5519bc58a2f17034fd6ece42d404283ffafa979556",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/blog/release/babelfish-website-announcement.zh.md",
+      "target": "content/babelfish/blog/release/babelfish-website-announcement.zh.md",
+      "language": "zh",
+      "old_route": "/zh/blog/release/babelfish-website-announcement/",
+      "route": "/zh/babelfish/blog/release/babelfish-website-announcement/",
+      "sha256": "4792b0485679d86328c62d71c5f017a85e454d09b9b44e9646ab40f1b0397e02",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/_index.md",
+      "target": "content/babelfish/_index.md",
+      "language": "en",
+      "old_route": "/docs/",
+      "route": "/babelfish/",
+      "sha256": "59e7f3409a584156d9cda5b7a0a6262f88afe07f1472a1c42e0259f526f2ba4f",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/_index.zh.md",
+      "target": "content/babelfish/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/",
+      "route": "/zh/babelfish/",
+      "sha256": "e9591cb150356979dc0b5f5e59de3869b81a2479a3e8a97827b0fe3497f37084",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/architecture/_index.md",
+      "target": "content/babelfish/architecture/_index.md",
+      "language": "en",
+      "old_route": "/docs/architecture/",
+      "route": "/babelfish/architecture/",
+      "sha256": "8b1dff1ab3ac9f1f01e6119d240c32478783b18d98882af0ac222625aea0cb57",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/architecture/_index.zh.md",
+      "target": "content/babelfish/architecture/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/architecture/",
+      "route": "/zh/babelfish/architecture/",
+      "sha256": "1341053683e4abc59a950da0b22edbcae841c8e7cb3b257a307210b9d341697b",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/architecture/compatibility.md",
+      "target": "content/babelfish/architecture/compatibility.md",
+      "language": "en",
+      "old_route": "/docs/architecture/compatibility/",
+      "route": "/babelfish/architecture/compatibility/",
+      "sha256": "6f40f8c204777295ca0b7290bbdb0ae2ab4230bb5495091cc417bcc61aa1631b",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/architecture/compatibility.zh.md",
+      "target": "content/babelfish/architecture/compatibility.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/architecture/compatibility/",
+      "route": "/zh/babelfish/architecture/compatibility/",
+      "sha256": "42005cba05dc55bf7333a38f8d13caebc668bd854206a5f0a56e502c6afa296c",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/architecture/extensions.md",
+      "target": "content/babelfish/architecture/extensions.md",
+      "language": "en",
+      "old_route": "/docs/architecture/extensions/",
+      "route": "/babelfish/architecture/extensions/",
+      "sha256": "6171844a6870581a80b0e9a7236a18daf698ca89c61e65385d8c4a2b86793d42",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/architecture/extensions.zh.md",
+      "target": "content/babelfish/architecture/extensions.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/architecture/extensions/",
+      "route": "/zh/babelfish/architecture/extensions/",
+      "sha256": "0a9347443145e7f6ce777eda9d581795fb4eb7005ab771fe35e8359b407a9606",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/client/_index.md",
+      "target": "content/babelfish/client/_index.md",
+      "language": "en",
+      "old_route": "/docs/client/",
+      "route": "/babelfish/client/",
+      "sha256": "931efd9da908b5a8ccef15d757526ec49a60652f48a34ec38eb30ba36e7e0a71",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/client/_index.zh.md",
+      "target": "content/babelfish/client/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/client/",
+      "route": "/zh/babelfish/client/",
+      "sha256": "b9353e7b35696d7fd8baf1eaa590b99bc8661715785050f97ecf9d2c81cf6136",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/client/c.md",
+      "target": "content/babelfish/client/c.md",
+      "language": "en",
+      "old_route": "/docs/client/c/",
+      "route": "/babelfish/client/c/",
+      "sha256": "28d85b26912e47f5274c3043ee80440ea5f1212b7aae8e9e044940315ea96b55",
+      "code_sha256": [
+        "eb3be27cba2e5be9950b2a7c0ae40f4da1b04740d0505cac18e96b34a22fb203",
+        "c3b442068ec27d7515603d8a6a9be6882aa68ac4bab2df67398c07db0aa8c285",
+        "94700b6dd7dfe75c2dc55c38c695e043199af36087f5e264834c2b4ddb3b57a1",
+        "b7a052edc06ce61d234395bce31a48a6b4c76034c360869944953c1a160d941f",
+        "3d978c9c4199d59cd7a127267969b35ed1978a15958fd486d8f510dfc3646a96",
+        "58847296bee53344ec28b493d90dbb677c848f265fb8bdf8751077f21950970a",
+        "9b1e1caac286f91799a1b9a8507f2e1fd51fa26d25da3d9d49c88b11fae8dd51",
+        "a94672c0c64306d7acfabc90907b6516fae8a42e077eb3d9100045b0c5e49e3a",
+        "dadcdc2fe74140e8a9b3b2784b234d56b1ccc5f9bcd6b453879367752327564c"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/client/c.zh.md",
+      "target": "content/babelfish/client/c.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/client/c/",
+      "route": "/zh/babelfish/client/c/",
+      "sha256": "35e5473760d06077cc82e84fa5d108c09bd730ce1f4430ace31ffb7ec36261d4",
+      "code_sha256": [
+        "eb3be27cba2e5be9950b2a7c0ae40f4da1b04740d0505cac18e96b34a22fb203",
+        "c3b442068ec27d7515603d8a6a9be6882aa68ac4bab2df67398c07db0aa8c285",
+        "94700b6dd7dfe75c2dc55c38c695e043199af36087f5e264834c2b4ddb3b57a1",
+        "b7a052edc06ce61d234395bce31a48a6b4c76034c360869944953c1a160d941f",
+        "3d978c9c4199d59cd7a127267969b35ed1978a15958fd486d8f510dfc3646a96",
+        "58847296bee53344ec28b493d90dbb677c848f265fb8bdf8751077f21950970a",
+        "9b1e1caac286f91799a1b9a8507f2e1fd51fa26d25da3d9d49c88b11fae8dd51",
+        "a94672c0c64306d7acfabc90907b6516fae8a42e077eb3d9100045b0c5e49e3a",
+        "dadcdc2fe74140e8a9b3b2784b234d56b1ccc5f9bcd6b453879367752327564c"
+      ],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/client/csharp.md",
+      "target": "content/babelfish/client/csharp.md",
+      "language": "en",
+      "old_route": "/docs/client/csharp/",
+      "route": "/babelfish/client/csharp/",
+      "sha256": "98f21385fb2a847a7fc0f5ede5278fb0eb59f4844fad140ef56e72ddde573d9b",
+      "code_sha256": [
+        "b9272d101beeee42e14f41a404fce72eaa67376697b7a7a7e89d1704b5dc78da"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/client/csharp.zh.md",
+      "target": "content/babelfish/client/csharp.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/client/csharp/",
+      "route": "/zh/babelfish/client/csharp/",
+      "sha256": "09c5aaf0e39246147d864d22923bb7ea56b2a2b2e44008de3c3827601c3ce1dc",
+      "code_sha256": [
+        "b9272d101beeee42e14f41a404fce72eaa67376697b7a7a7e89d1704b5dc78da"
+      ],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/client/java.md",
+      "target": "content/babelfish/client/java.md",
+      "language": "en",
+      "old_route": "/docs/client/java/",
+      "route": "/babelfish/client/java/",
+      "sha256": "b7368e1bf3ab489cba7d433e0cdfebd8a0787632fa170ed95d0f4b45808bcd25",
+      "code_sha256": [
+        "231a93293d47ad1735da5bd81281041b53c271745da970f4017d379605fa609d"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/client/java.zh.md",
+      "target": "content/babelfish/client/java.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/client/java/",
+      "route": "/zh/babelfish/client/java/",
+      "sha256": "9f90c71dec743dccc64ec4df1470f99e9e80dddef8102b9bed4cecd58d3cffb0",
+      "code_sha256": [
+        "231a93293d47ad1735da5bd81281041b53c271745da970f4017d379605fa609d"
+      ],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/client/other-tools.md",
+      "target": "content/babelfish/client/other-tools.md",
+      "language": "en",
+      "old_route": "/docs/client/other-tools/",
+      "route": "/babelfish/client/other-tools/",
+      "sha256": "40a6cfe6fd0f89ee89d0b7c3db16fea21ee3c23248c770aefb0265d46835893a",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/client/other-tools.zh.md",
+      "target": "content/babelfish/client/other-tools.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/client/other-tools/",
+      "route": "/zh/babelfish/client/other-tools/",
+      "sha256": "af9be1d1933bb17dedbb676a4b02b115bcb1d6ea463ecd19e324ca500c74deaa",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/client/python.md",
+      "target": "content/babelfish/client/python.md",
+      "language": "en",
+      "old_route": "/docs/client/python/",
+      "route": "/babelfish/client/python/",
+      "sha256": "b568a2d614c60c1888dadace3075f2962cc03fc64053b55bb5e60183e6cc8c16",
+      "code_sha256": [
+        "838e9e9d7c5e437ea36c4758a30fd43732d01cb37b57d8ca97d43287171dfd47",
+        "4602d6ce2dddc9315a178435b8b3cb33d7cc778a894facec1c43b334df43d7d0",
+        "47963414a3cc68541a57e904f654fcf0685e08f90d6344bf03a7f5c477b67e7f",
+        "b6f761fbaaffb366eee79bce9974f4102de5be1ddd2ab6fc11aaf20f0f669d2f",
+        "d409ff4df203533e3b0a3249a739f82da7cbce846d50cd3635388dfd4ee97185",
+        "0826a9a768bb144f87a7be2283d202f79a195c2564ff3de6f2d426f5eb5bdeba",
+        "1be39b20c5efac911ccfa122f7f929d973d3c5eb34378b03eef86c683eca209c",
+        "a79e463456b359b20372abeb5beb32492cc8380750b0fb0a28778a03251acefa",
+        "2c1748f4f0f00bb45894d2cef51c5199ae09724c02c1714d5eed2ad61b5f5db3",
+        "2e6c0ba3ac062bff722d7dae198b651bf90939658637679b42aa3b3eeb9ca09c",
+        "35604d06a4f967a56578f88473bbf5d166ad49526d4368e3f498bc28edf77efb",
+        "2d02697fccc46461b20c9fecb04c43cee52cf8362b67dc727f702677302ac26d",
+        "3a934d3d1d3d5348b465a51d6680fe575e7f9a80b79242f25b24480aef0b80d4",
+        "fdc7e79fc2115e7ac4d364c08ccb3e4e20148c7f35c31087586f1ed4921cd671",
+        "dbdef919f4f61c3e28acf5c83756c93e3c5fd7fe0a637d4ba00842c52c756aea",
+        "ec900155bd9e2ea21f468c76c1267c29203b3a76a3b41ef23c79c6c3357e58ef",
+        "d8efe242527c794bc7a04aee43a3498805842c3c4e68375806537eaf8e522f3d",
+        "ab60a254b3ebb8c596b5630209c521a12faaeeb08c62dd4d0b13488969af4dfa"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/client/python.zh.md",
+      "target": "content/babelfish/client/python.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/client/python/",
+      "route": "/zh/babelfish/client/python/",
+      "sha256": "6e67ef25aec264d7478eb9595413aeb3598fb48de1974aea8e13653a9fe83e10",
+      "code_sha256": [
+        "838e9e9d7c5e437ea36c4758a30fd43732d01cb37b57d8ca97d43287171dfd47",
+        "4602d6ce2dddc9315a178435b8b3cb33d7cc778a894facec1c43b334df43d7d0",
+        "47963414a3cc68541a57e904f654fcf0685e08f90d6344bf03a7f5c477b67e7f",
+        "b6f761fbaaffb366eee79bce9974f4102de5be1ddd2ab6fc11aaf20f0f669d2f",
+        "d409ff4df203533e3b0a3249a739f82da7cbce846d50cd3635388dfd4ee97185",
+        "0826a9a768bb144f87a7be2283d202f79a195c2564ff3de6f2d426f5eb5bdeba",
+        "1be39b20c5efac911ccfa122f7f929d973d3c5eb34378b03eef86c683eca209c",
+        "a79e463456b359b20372abeb5beb32492cc8380750b0fb0a28778a03251acefa",
+        "2c1748f4f0f00bb45894d2cef51c5199ae09724c02c1714d5eed2ad61b5f5db3",
+        "2e6c0ba3ac062bff722d7dae198b651bf90939658637679b42aa3b3eeb9ca09c",
+        "35604d06a4f967a56578f88473bbf5d166ad49526d4368e3f498bc28edf77efb",
+        "2d02697fccc46461b20c9fecb04c43cee52cf8362b67dc727f702677302ac26d",
+        "3a934d3d1d3d5348b465a51d6680fe575e7f9a80b79242f25b24480aef0b80d4",
+        "fdc7e79fc2115e7ac4d364c08ccb3e4e20148c7f35c31087586f1ed4921cd671",
+        "dbdef919f4f61c3e28acf5c83756c93e3c5fd7fe0a637d4ba00842c52c756aea",
+        "ec900155bd9e2ea21f468c76c1267c29203b3a76a3b41ef23c79c6c3357e58ef",
+        "d8efe242527c794bc7a04aee43a3498805842c3c4e68375806537eaf8e522f3d",
+        "ab60a254b3ebb8c596b5630209c521a12faaeeb08c62dd4d0b13488969af4dfa"
+      ],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/contributing/_index.md",
+      "target": "content/babelfish/contributing/_index.md",
+      "language": "en",
+      "old_route": "/docs/contributing/",
+      "route": "/babelfish/contributing/",
+      "sha256": "4c0fe0e5dbbd3c18ec242789da49d4de22c9a27cd7fa043bc48ee9b1827c851f",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/contributing/_index.zh.md",
+      "target": "content/babelfish/contributing/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/contributing/",
+      "route": "/zh/babelfish/contributing/",
+      "sha256": "90af1ee6db66c610f337916c46c23c55f9557386c37862ce78850fa02e7df919",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/contributing/guidelines.md",
+      "target": "content/babelfish/contributing/guidelines.md",
+      "language": "en",
+      "old_route": "/docs/contributing/guidelines/",
+      "route": "/babelfish/contributing/guidelines/",
+      "sha256": "699bef90e0e4bcebefbaebaa69a73777b23771913322204c151436178dcfbf37",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/contributing/guidelines.zh.md",
+      "target": "content/babelfish/contributing/guidelines.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/contributing/guidelines/",
+      "route": "/zh/babelfish/contributing/guidelines/",
+      "sha256": "f9c70b0a4c057bfe1bb3e7ecae014fb03f7b5d587d802724ccd910772e00729b",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/contributing/writing-style-guidelines.md",
+      "target": "content/babelfish/contributing/writing-style-guidelines.md",
+      "language": "en",
+      "old_route": "/docs/contributing/writing-style-guidelines/",
+      "route": "/babelfish/contributing/writing-style-guidelines/",
+      "sha256": "091aabbe1047ef24734ef494deb537f966cddb9040f658c6c84e7278dd7ee6f2",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/contributing/writing-style-guidelines.zh.md",
+      "target": "content/babelfish/contributing/writing-style-guidelines.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/contributing/writing-style-guidelines/",
+      "route": "/zh/babelfish/contributing/writing-style-guidelines/",
+      "sha256": "71aacde82353209146480c5b185850c70b27c798b69ca6d2a15c27e2de82c4c5",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/faq/_index.md",
+      "target": "content/babelfish/faq/_index.md",
+      "language": "en",
+      "old_route": "/docs/faq/",
+      "route": "/babelfish/faq/",
+      "sha256": "2b334d369df562f06de185669ab4c0024b69d499ba7d24c74af49ebfdec31398",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/faq/_index.zh.md",
+      "target": "content/babelfish/faq/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/faq/",
+      "route": "/zh/babelfish/faq/",
+      "sha256": "54626e012c66eced9f60ba965553a9ca75d242267034889812e172cd7e90d142",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/faq/getting-help.md",
+      "target": "content/babelfish/faq/getting-help.md",
+      "language": "en",
+      "old_route": "/docs/faq/getting-help/",
+      "route": "/babelfish/faq/getting-help/",
+      "sha256": "fbd372bbefdd1e7e8989b8bc2247aca72cc5cd4f74006a60f1b478ad5ad13032",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/faq/getting-help.zh.md",
+      "target": "content/babelfish/faq/getting-help.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/faq/getting-help/",
+      "route": "/zh/babelfish/faq/getting-help/",
+      "sha256": "33258fd09198864f10775c8e7873424970366562ab1fb6b0ffb00e34faf90a21",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/faq/questions.md",
+      "target": "content/babelfish/faq/questions.md",
+      "language": "en",
+      "old_route": "/docs/faq/questions/",
+      "route": "/babelfish/faq/questions/",
+      "sha256": "9daca35f01d4b2302013623f0245ab86a885eab56337cb16eed9922044d014e6",
+      "code_sha256": [
+        "a22c7b1d7a5bd5e9e8f879912d305486f0626534501bca3da125f11db278702a",
+        "527632716b2fbf385d6f094e209c04130e9b03a3152a0a10aed28c6491df74b7",
+        "c2af4b8e941418bd65879bdcc26fd8a5086b989f4b6da705fe907ffd4b215f5e"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/faq/questions.zh.md",
+      "target": "content/babelfish/faq/questions.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/faq/questions/",
+      "route": "/zh/babelfish/faq/questions/",
+      "sha256": "fa7a957428fd5113b2e71bd3f78095a3cbda662ec8acd646a75e5f78cefdf5dc",
+      "code_sha256": [
+        "a22c7b1d7a5bd5e9e8f879912d305486f0626534501bca3da125f11db278702a",
+        "527632716b2fbf385d6f094e209c04130e9b03a3152a0a10aed28c6491df74b7",
+        "c2af4b8e941418bd65879bdcc26fd8a5086b989f4b6da705fe907ffd4b215f5e"
+      ],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/faq/troubleshooting.md",
+      "target": "content/babelfish/faq/troubleshooting.md",
+      "language": "en",
+      "old_route": "/docs/faq/troubleshooting/",
+      "route": "/babelfish/faq/troubleshooting/",
+      "sha256": "4ef09c6f50c05fc986d8f597db18ef903434bffadeadc96029f0d8e3446f2a0b",
+      "code_sha256": [
+        "c722cce646e1c75fd3b61550af7a2e1efba76960e0ed21c588fecedf48fc22bd",
+        "2002b326074057e9b51ab2a7dc43fdf361065754efa32cec00594284406f520a"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/faq/troubleshooting.zh.md",
+      "target": "content/babelfish/faq/troubleshooting.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/faq/troubleshooting/",
+      "route": "/zh/babelfish/faq/troubleshooting/",
+      "sha256": "112f252e0c9f44bd5e3dfa13dcf6f427266a4f6ec944e6c9e2e61c2700515a99",
+      "code_sha256": [
+        "c722cce646e1c75fd3b61550af7a2e1efba76960e0ed21c588fecedf48fc22bd",
+        "2002b326074057e9b51ab2a7dc43fdf361065754efa32cec00594284406f520a"
+      ],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/installation/_index.md",
+      "target": "content/babelfish/installation/_index.md",
+      "language": "en",
+      "old_route": "/docs/installation/",
+      "route": "/babelfish/installation/",
+      "sha256": "4e6866f81dbfe66aa09e86633e6dc9f878898bd90e0ff1b1f8619bc3741fe6b1",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/installation/_index.zh.md",
+      "target": "content/babelfish/installation/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/installation/",
+      "route": "/zh/babelfish/installation/",
+      "sha256": "7ab775474db6ba303f4a5e3ad9affa57dd6d534dac66499f1e63195bbc16e759",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/installation/compiling-babelfish-from-source.md",
+      "target": "content/babelfish/installation/compiling-babelfish-from-source.md",
+      "language": "en",
+      "old_route": "/docs/installation/compiling-babelfish-from-source/",
+      "route": "/babelfish/installation/compiling-babelfish-from-source/",
+      "sha256": "041fa053ee603729dc18b945687cdc4c0338c2d53c02953fb855a725851088d1",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/installation/compiling-babelfish-from-source.zh.md",
+      "target": "content/babelfish/installation/compiling-babelfish-from-source.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/installation/compiling-babelfish-from-source/",
+      "route": "/zh/babelfish/installation/compiling-babelfish-from-source/",
+      "sha256": "e2d32dc8dad30181c20aac02f62d7edaf6ac1c36fa1d96e4367cf2e874351985",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/installation/single-multiple.md",
+      "target": "content/babelfish/installation/single-multiple.md",
+      "language": "en",
+      "old_route": "/docs/installation/single-multiple/",
+      "route": "/babelfish/installation/single-multiple/",
+      "sha256": "2060a2ef17bc7c88bb4bc6faaacedc40e8c9558a28c11b13dd0af287385d24f3",
+      "code_sha256": [
+        "1afa28f058dfb248cfe4fbb169792da3017751fb5ff11a0a6a60f7db74226d2c"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/installation/single-multiple.zh.md",
+      "target": "content/babelfish/installation/single-multiple.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/installation/single-multiple/",
+      "route": "/zh/babelfish/installation/single-multiple/",
+      "sha256": "394c3e1928b760fa733aa708ee69be2337ddb0f6c8295b24c558020507616008",
+      "code_sha256": [
+        "1afa28f058dfb248cfe4fbb169792da3017751fb5ff11a0a6a60f7db74226d2c"
+      ],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/internals/_index.md",
+      "target": "content/babelfish/internals/_index.md",
+      "language": "en",
+      "old_route": "/docs/internals/",
+      "route": "/babelfish/internals/",
+      "sha256": "9ade48ca53b262084f4eb4516cb602f42bab6cf34ab62ce7cf186fefce3be70d",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/internals/_index.zh.md",
+      "target": "content/babelfish/internals/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/internals/",
+      "route": "/zh/babelfish/internals/",
+      "sha256": "12dd3637cf13199a6561b34df04c025fbe8a0a82bfdeabe19c5f3498492294f6",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/internals/babelfish-query-handling.md",
+      "target": "content/babelfish/internals/babelfish-query-handling.md",
+      "language": "en",
+      "old_route": "/docs/internals/babelfish-query-handling/",
+      "route": "/babelfish/internals/babelfish-query-handling/",
+      "sha256": "73905186f48bd6d4f3ad72b132e11bd16a182bfdd6db661f916d7e05240754d6",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/internals/babelfish-query-handling.zh.md",
+      "target": "content/babelfish/internals/babelfish-query-handling.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/internals/babelfish-query-handling/",
+      "route": "/zh/babelfish/internals/babelfish-query-handling/",
+      "sha256": "ca20bd5373e66af4acb3a1e4b71df89583374664969ee4490bebff09d28aae92",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/internals/configuration.md",
+      "target": "content/babelfish/internals/configuration.md",
+      "language": "en",
+      "old_route": "/docs/internals/configuration/",
+      "route": "/babelfish/internals/configuration/",
+      "sha256": "d8b90f7e9d5b5f2d1c774dcf5d928e70f0f30f0af1d6ee737a4ec4a9e1288121",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/internals/configuration.zh.md",
+      "target": "content/babelfish/internals/configuration.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/internals/configuration/",
+      "route": "/zh/babelfish/internals/configuration/",
+      "sha256": "fb840ec2c33c133491ff7d95bd60b81c396d0eeb90dcb3d6c9e07b3370ced47b",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/internals/postgresql-hooks.md",
+      "target": "content/babelfish/internals/postgresql-hooks.md",
+      "language": "en",
+      "old_route": "/docs/internals/postgresql-hooks/",
+      "route": "/babelfish/internals/postgresql-hooks/",
+      "sha256": "85a7b4e1da83a8b7e57bd8a2a095f420b572108aed865e4de8a424d5e122046a",
+      "code_sha256": [
+        "ead07abdcfa9bb00ae8a47543adab925cfdd4850c89e6d5588a3bc6c895eb9a6",
+        "f34a68d986a0b9f799a82c3c06489fe3543685483668c1635873d4d7e5bd79b3",
+        "5c57629b6d4819307538f7f74c1cb70d4c95709f240a5ac49bbab450a0c7c06f",
+        "f75af824758cabfe1cd5cf873b137a47400f68cc70401bb54e9176e32a00dd4b",
+        "9e5cb44e3422c2ea95c944c7692265fa4d36f6ff701a14d83a4ede1fa7d991c2",
+        "4667634643355833d828e02b3ac05e03f65e0616520f86f0349285422c214097",
+        "9984bb0468279a45e141f3f7f1155a04c24fdf29e2d4ddcc715e547a5ed97ae2",
+        "fc7c4476f9b2d77f70971ae97e3f65cd3a8b9750c8e77ee55012ac6692e08683",
+        "c6633bfa0e7a82b699cba8df8956e9a91cf0223f67fa9313f4d4676eb73525e4",
+        "b05b4c40ed77e15fabd3b6cccc3ba1660724418238b70718294bdc9a60692753",
+        "a8434411bb209e9d47aa021f37b6399c04c9948337594cfe74cefd73ebbe8644",
+        "aec08a4f3bc73bc9891c50ffabbc3dc1a5e28ed28cd23cde47b9d77e389efe62",
+        "5fb44df72a311c5ae078088d7a9c396ca3d344251167507d5f247e33a1151804",
+        "72063dab249e6c602bae8ea72a1ff4613c6de3edf8e825a8fd34a7de678527b7",
+        "6728569e253e4e7ba713a8733177af252c14541d0f34f6d326e5d79db89b3fce",
+        "27b40764b403b9c3313a5c2d843b8d86340e1ab141c669318cc21fb6d61d534c",
+        "538241f04115d65f969b1cb298fbc5b4ec3bad66a125e9962638c4e978320044",
+        "aa84feea3db517b5b2a48e991fc4aeaa0bc01dab3f9acd1f827b36ef23460ebd",
+        "cd9b83fe00390f20b5983fbe878d2c7a1f5b435b86d658f8b89a576f6a643550",
+        "8761dc9a3eef469be2f05db65f484bf3c77ae212b642c40b6eaaa0cce78fce84",
+        "a52f514b264845fc4963c04b19bd0df978f4367b534e16c2d31982de88cc1e80",
+        "46b67c8966dd9467607301b520d071a2b2fba81962cc098f2058ad4cb967ad13",
+        "6994eb604f52c9eddcab3c7d477e71bafa7b19d7fbb42cfb4605f01437667f1b",
+        "c447872bc8d090d15165749c9de2061a436417e5bf85b8f7362a6ba3ce472f7c",
+        "168fb001bb1c86f4a3ea630759d5d411e168a10e394a817fc75b45c398f3abfe",
+        "7add010bf8ec8c35f44c8ac3b6f0e17e538f008fa0742dbf46cfba38d5c7006a",
+        "9e2e748b1e7cfb57007d4c9a789dfe0c67f6e93cb807c50105b1b7f5342c05f1",
+        "6fd803efd99828c6ab64f9a214cda91370503d158bc9e7a34eaac5fa27295500",
+        "f83efe39767ee09441fdea39fdc642b1c526326ee863ca53b7a27f970a5686af",
+        "87a7d6b8d1b37b99e0318ad5389422580c89d622e592d97a149a48803758a4a8",
+        "9da423d7251b05e1cc083320dbe2d56d7d92e53816947848e7dd158eceb264bd",
+        "cf08945cd67c0ff780c79a7058440478749944126aa510c9d612b29b7f986da6",
+        "7c123babeff99c846ffe88d75fbf86791898db90bb2b7b1554882b149a63501f",
+        "82bb14831ad7c052da1bc3cf9c71c70269f0ed29cf4dbd84955281fd9c981d7f",
+        "758d8d2bd784cf01634238831f0b908c3b51093b6d090a5f5d699e1454182356",
+        "d51c1cf1f23bb44ff4152543a89ba879a92fc055e9fe2184e4ba5df8bba8bf41",
+        "a2cf5806ff14945ee9986543892d58e15f26f989866d9e74de8e4bfbb0b1b8a9",
+        "6eb786b75311d0bf4e88faf92a1af3b7378ac37997d39088c51f2c989af7d9ab",
+        "f57f7b56a12fdaab2baccc6e26083c88d12549d5a09bffee3862c85eeff693ee"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/internals/postgresql-hooks.zh.md",
+      "target": "content/babelfish/internals/postgresql-hooks.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/internals/postgresql-hooks/",
+      "route": "/zh/babelfish/internals/postgresql-hooks/",
+      "sha256": "e5aa53da3f7f02f49395dd5a106c6e2410dc687e14c616cc3b30b1eaaa2f4c25",
+      "code_sha256": [
+        "ead07abdcfa9bb00ae8a47543adab925cfdd4850c89e6d5588a3bc6c895eb9a6",
+        "f34a68d986a0b9f799a82c3c06489fe3543685483668c1635873d4d7e5bd79b3",
+        "5c57629b6d4819307538f7f74c1cb70d4c95709f240a5ac49bbab450a0c7c06f",
+        "f75af824758cabfe1cd5cf873b137a47400f68cc70401bb54e9176e32a00dd4b",
+        "9e5cb44e3422c2ea95c944c7692265fa4d36f6ff701a14d83a4ede1fa7d991c2",
+        "4667634643355833d828e02b3ac05e03f65e0616520f86f0349285422c214097",
+        "9984bb0468279a45e141f3f7f1155a04c24fdf29e2d4ddcc715e547a5ed97ae2",
+        "fc7c4476f9b2d77f70971ae97e3f65cd3a8b9750c8e77ee55012ac6692e08683",
+        "c6633bfa0e7a82b699cba8df8956e9a91cf0223f67fa9313f4d4676eb73525e4",
+        "b05b4c40ed77e15fabd3b6cccc3ba1660724418238b70718294bdc9a60692753",
+        "a8434411bb209e9d47aa021f37b6399c04c9948337594cfe74cefd73ebbe8644",
+        "aec08a4f3bc73bc9891c50ffabbc3dc1a5e28ed28cd23cde47b9d77e389efe62",
+        "5fb44df72a311c5ae078088d7a9c396ca3d344251167507d5f247e33a1151804",
+        "72063dab249e6c602bae8ea72a1ff4613c6de3edf8e825a8fd34a7de678527b7",
+        "6728569e253e4e7ba713a8733177af252c14541d0f34f6d326e5d79db89b3fce",
+        "27b40764b403b9c3313a5c2d843b8d86340e1ab141c669318cc21fb6d61d534c",
+        "538241f04115d65f969b1cb298fbc5b4ec3bad66a125e9962638c4e978320044",
+        "aa84feea3db517b5b2a48e991fc4aeaa0bc01dab3f9acd1f827b36ef23460ebd",
+        "cd9b83fe00390f20b5983fbe878d2c7a1f5b435b86d658f8b89a576f6a643550",
+        "8761dc9a3eef469be2f05db65f484bf3c77ae212b642c40b6eaaa0cce78fce84",
+        "a52f514b264845fc4963c04b19bd0df978f4367b534e16c2d31982de88cc1e80",
+        "46b67c8966dd9467607301b520d071a2b2fba81962cc098f2058ad4cb967ad13",
+        "6994eb604f52c9eddcab3c7d477e71bafa7b19d7fbb42cfb4605f01437667f1b",
+        "c447872bc8d090d15165749c9de2061a436417e5bf85b8f7362a6ba3ce472f7c",
+        "168fb001bb1c86f4a3ea630759d5d411e168a10e394a817fc75b45c398f3abfe",
+        "7add010bf8ec8c35f44c8ac3b6f0e17e538f008fa0742dbf46cfba38d5c7006a",
+        "9e2e748b1e7cfb57007d4c9a789dfe0c67f6e93cb807c50105b1b7f5342c05f1",
+        "6fd803efd99828c6ab64f9a214cda91370503d158bc9e7a34eaac5fa27295500",
+        "f83efe39767ee09441fdea39fdc642b1c526326ee863ca53b7a27f970a5686af",
+        "87a7d6b8d1b37b99e0318ad5389422580c89d622e592d97a149a48803758a4a8",
+        "9da423d7251b05e1cc083320dbe2d56d7d92e53816947848e7dd158eceb264bd",
+        "cf08945cd67c0ff780c79a7058440478749944126aa510c9d612b29b7f986da6",
+        "7c123babeff99c846ffe88d75fbf86791898db90bb2b7b1554882b149a63501f",
+        "82bb14831ad7c052da1bc3cf9c71c70269f0ed29cf4dbd84955281fd9c981d7f",
+        "758d8d2bd784cf01634238831f0b908c3b51093b6d090a5f5d699e1454182356",
+        "d51c1cf1f23bb44ff4152543a89ba879a92fc055e9fe2184e4ba5df8bba8bf41",
+        "a2cf5806ff14945ee9986543892d58e15f26f989866d9e74de8e4bfbb0b1b8a9",
+        "6eb786b75311d0bf4e88faf92a1af3b7378ac37997d39088c51f2c989af7d9ab",
+        "f57f7b56a12fdaab2baccc6e26083c88d12549d5a09bffee3862c85eeff693ee"
+      ],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/internals/software-architecture.md",
+      "target": "content/babelfish/internals/software-architecture.md",
+      "language": "en",
+      "old_route": "/docs/internals/software-architecture/",
+      "route": "/babelfish/internals/software-architecture/",
+      "sha256": "0238534e5f8bf364cc16fbfbe90034d1a52f505e5ccb3d2764c4f0e88e3afd99",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/internals/software-architecture.zh.md",
+      "target": "content/babelfish/internals/software-architecture.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/internals/software-architecture/",
+      "route": "/zh/babelfish/internals/software-architecture/",
+      "sha256": "6fab47c92ba790e9d9d1dcdbcb79cc37613be7c82c939e539981f9505ccb4e4c",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/internals/system-views.md",
+      "target": "content/babelfish/internals/system-views.md",
+      "language": "en",
+      "old_route": "/docs/internals/system-views/",
+      "route": "/babelfish/internals/system-views/",
+      "sha256": "b9cd4e9a1872940db6afc4ecaad7b2a5358fccc54100f38c2037091e9992879b",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/internals/system-views.zh.md",
+      "target": "content/babelfish/internals/system-views.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/internals/system-views/",
+      "route": "/zh/babelfish/internals/system-views/",
+      "sha256": "1992152740777aaff05bcffa0214dbd6958f16596d6c6a1d7baa2fff6706a3dc",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/internals/tds-protocol.md",
+      "target": "content/babelfish/internals/tds-protocol.md",
+      "language": "en",
+      "old_route": "/docs/internals/tds-protocol/",
+      "route": "/babelfish/internals/tds-protocol/",
+      "sha256": "d59a0956e3dcca4f62d74bef94d1d91a0ec8cfc4aa3b7a25322cdb777900beb6",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/internals/tds-protocol.zh.md",
+      "target": "content/babelfish/internals/tds-protocol.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/internals/tds-protocol/",
+      "route": "/zh/babelfish/internals/tds-protocol/",
+      "sha256": "2d83867402ea0860ea046fd6b72f250c29ca5ef8db845e7bf6e4b526a744d8f7",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/overview.md",
+      "target": "content/babelfish/overview.md",
+      "language": "en",
+      "old_route": "/docs/overview/",
+      "route": "/babelfish/overview/",
+      "sha256": "7d94e151d53248c410eb853e7493d4f343ba2c9aef48f9695274e7fafc95c62a",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/overview.zh.md",
+      "target": "content/babelfish/overview.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/overview/",
+      "route": "/zh/babelfish/overview/",
+      "sha256": "8e168661e6ebdcb53a83ad071719484fec56b6659f0f515bd64c180b1eeb91c0",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/purpose.md",
+      "target": "content/babelfish/purpose.md",
+      "language": "en",
+      "old_route": "/docs/purpose/",
+      "route": "/babelfish/purpose/",
+      "sha256": "71a214c8f63ce97140b9c3e3938cdac2563fe28fab31a8d791d1d449ecbb1c68",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/purpose.zh.md",
+      "target": "content/babelfish/purpose.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/purpose/",
+      "route": "/zh/babelfish/purpose/",
+      "sha256": "e55879b47bc9e111a812e8056e93c2ea05e0a4816b0304d25b02c690520b7382",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/usage/_index.md",
+      "target": "content/babelfish/usage/_index.md",
+      "language": "en",
+      "old_route": "/docs/usage/",
+      "route": "/babelfish/usage/",
+      "sha256": "8c4c376e3babe1a3c67ba33d3c2d069a3d926bedbaa77e68b59ad122ccc12267",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/usage/_index.zh.md",
+      "target": "content/babelfish/usage/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/usage/",
+      "route": "/zh/babelfish/usage/",
+      "sha256": "dd775c5b436d52c3157a513536c81ba8ccfc2950c26e3ed990d4c91942788a07",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/usage/char-set-support.md",
+      "target": "content/babelfish/usage/char-set-support.md",
+      "language": "en",
+      "old_route": "/docs/usage/char-set-support/",
+      "route": "/babelfish/usage/char-set-support/",
+      "sha256": "58f4ace8b8923d0951a85369da2af4d40e67cf2a490a625a7590c142298d1372",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/usage/char-set-support.zh.md",
+      "target": "content/babelfish/usage/char-set-support.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/usage/char-set-support/",
+      "route": "/zh/babelfish/usage/char-set-support/",
+      "sha256": "56a724d913dbcbe0754ea34c5adee413e344448bc0cf1e0b89b57a803948d633",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/usage/command-line.md",
+      "target": "content/babelfish/usage/command-line.md",
+      "language": "en",
+      "old_route": "/docs/usage/command-line/",
+      "route": "/babelfish/usage/command-line/",
+      "sha256": "c0e7592e3d7c3d45a92ef0e9f6ee9f3e18a9678bf82a8ea1abf9df1bf17891fa",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/usage/command-line.zh.md",
+      "target": "content/babelfish/usage/command-line.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/usage/command-line/",
+      "route": "/zh/babelfish/usage/command-line/",
+      "sha256": "676a9898098ffc8ff47b5f72ac7ab4b7cae84396210ad1b9fa70f20f5e57c357",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/usage/escape-hatches.md",
+      "target": "content/babelfish/usage/escape-hatches.md",
+      "language": "en",
+      "old_route": "/docs/usage/escape-hatches/",
+      "route": "/babelfish/usage/escape-hatches/",
+      "sha256": "d72a0a9a5012c8ea5ef95230fc0ab0172daa680f6b219fd91dfea51cf4f7f6b8",
+      "code_sha256": [
+        "a0dca1df8a035a3f92678b047de7a7c96d1afa960e515ab79ff9c4e5b1834191"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/usage/escape-hatches.zh.md",
+      "target": "content/babelfish/usage/escape-hatches.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/usage/escape-hatches/",
+      "route": "/zh/babelfish/usage/escape-hatches/",
+      "sha256": "67f8849faca39534aade3d5fbc57977ff1abddeb5aca37ec17239ca9a9bd3072",
+      "code_sha256": [
+        "a0dca1df8a035a3f92678b047de7a7c96d1afa960e515ab79ff9c4e5b1834191"
+      ],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/usage/interoperability.md",
+      "target": "content/babelfish/usage/interoperability.md",
+      "language": "en",
+      "old_route": "/docs/usage/interoperability/",
+      "route": "/babelfish/usage/interoperability/",
+      "sha256": "dc6e609649d8ce40fefbb0891f0e6951384eb4794f312c1974d78b6d387c7bd0",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/usage/interoperability.zh.md",
+      "target": "content/babelfish/usage/interoperability.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/usage/interoperability/",
+      "route": "/zh/babelfish/usage/interoperability/",
+      "sha256": "7a3cdc4ac21f7f7c92766c54915694acad704dc5899359293b3b2ea8148c9d38",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/usage/locales.md",
+      "target": "content/babelfish/usage/locales.md",
+      "language": "en",
+      "old_route": "/docs/usage/locales/",
+      "route": "/babelfish/usage/locales/",
+      "sha256": "cb1d312895710eddce4457a1cfea9cf7465d79da23fd401865ed5e1ff32f5016",
+      "code_sha256": [
+        "7821f2b1f7f40fab24183bb6b1d342894782a0aa3e84834a59f4b3889af0c4b6",
+        "6a12cb5d49a52800330cd0fea0de2668e058b312ba122c94f58d355df1f67a91",
+        "f144638f88eb538789d5fe7b25bd29cba941c3ae9fe0e32f9574e59f3d6830b0",
+        "b9f6634228362729404087285a8dfb0dd2d64d9420b3a7c5081bfed844eea478"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/usage/locales.zh.md",
+      "target": "content/babelfish/usage/locales.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/usage/locales/",
+      "route": "/zh/babelfish/usage/locales/",
+      "sha256": "a4fd3046953e5c607a8fd7af663e5cf2a7507af422bac7d48ed61c1c31a24576",
+      "code_sha256": [
+        "7821f2b1f7f40fab24183bb6b1d342894782a0aa3e84834a59f4b3889af0c4b6",
+        "6a12cb5d49a52800330cd0fea0de2668e058b312ba122c94f58d355df1f67a91",
+        "f144638f88eb538789d5fe7b25bd29cba941c3ae9fe0e32f9574e59f3d6830b0",
+        "b9f6634228362729404087285a8dfb0dd2d64d9420b3a7c5081bfed844eea478"
+      ],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/usage/migration.md",
+      "target": "content/babelfish/usage/migration.md",
+      "language": "en",
+      "old_route": "/docs/usage/migration/",
+      "route": "/babelfish/usage/migration/",
+      "sha256": "712c616e7d2e1079dc9a265a82d6e9a99be2a57fda3bdad417584e9c3fcb2ddd",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/usage/migration.zh.md",
+      "target": "content/babelfish/usage/migration.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/usage/migration/",
+      "route": "/zh/babelfish/usage/migration/",
+      "sha256": "3479b134e312e2fa0d1358300838d7807e04e90dd0ef748cf67c0106e970b8a0",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/usage/security.md",
+      "target": "content/babelfish/usage/security.md",
+      "language": "en",
+      "old_route": "/docs/usage/security/",
+      "route": "/babelfish/usage/security/",
+      "sha256": "67cad4d3ed34d00565abb480a5c90635300e00d1738faa346d6425ac563cca4e",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/usage/security.zh.md",
+      "target": "content/babelfish/usage/security.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/usage/security/",
+      "route": "/zh/babelfish/usage/security/",
+      "sha256": "48bd9d5dcc17656edc6f7912ba333b66e9521e8cdba88cfd7f150cd613816d9e",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/workaround/_index.md",
+      "target": "content/babelfish/workaround/_index.md",
+      "language": "en",
+      "old_route": "/docs/workaround/",
+      "route": "/babelfish/workaround/",
+      "sha256": "50de9f534ba86d06acb4046297c605a40d15cf8ec46b16e86d39bf0e951a4b69",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/workaround/_index.zh.md",
+      "target": "content/babelfish/workaround/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/workaround/",
+      "route": "/zh/babelfish/workaround/",
+      "sha256": "ecc6643c42388deed3fd50b7e2c9fe32bc052535ac77eff0e85e403ce0d48743",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/workaround/dynamically-defined-cursor.md",
+      "target": "content/babelfish/workaround/dynamically-defined-cursor.md",
+      "language": "en",
+      "old_route": "/docs/workaround/dynamically-defined-cursor/",
+      "route": "/babelfish/workaround/dynamically-defined-cursor/",
+      "sha256": "0f806452c6c80b35e4ea6a5bd63c18b5d8b8d61dc9a7f8c36d0ad626a5ed257b",
+      "code_sha256": [
+        "9fa73a8a495011dde9916ba0acf72c158fc14ba5a7cdd5712949563b6e2e75aa",
+        "a64acd44add4e5d0639506c1c7c08ec3955eaea01d9fab6ea034909341afa6a6",
+        "5ef0580922593a9475202bd46f25337ccd85bb2f07d52c1adbac2c97f3440b05"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/workaround/dynamically-defined-cursor.zh.md",
+      "target": "content/babelfish/workaround/dynamically-defined-cursor.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/workaround/dynamically-defined-cursor/",
+      "route": "/zh/babelfish/workaround/dynamically-defined-cursor/",
+      "sha256": "e4205fb8188afb8c4851ae4824462a31a3704b3c02578ec18882fcf7dcf35c20",
+      "code_sha256": [
+        "9fa73a8a495011dde9916ba0acf72c158fc14ba5a7cdd5712949563b6e2e75aa",
+        "a64acd44add4e5d0639506c1c7c08ec3955eaea01d9fab6ea034909341afa6a6",
+        "5ef0580922593a9475202bd46f25337ccd85bb2f07d52c1adbac2c97f3440b05"
+      ],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/workaround/rebuilding-table-indexes.md",
+      "target": "content/babelfish/workaround/rebuilding-table-indexes.md",
+      "language": "en",
+      "old_route": "/docs/workaround/rebuilding-table-indexes/",
+      "route": "/babelfish/workaround/rebuilding-table-indexes/",
+      "sha256": "ca883b1a2b03d3a574c245220e06fd5f00fc0ca3f45a2dcf0bdfbab7e2719dfb",
+      "code_sha256": [
+        "4e91a3ce19e19b86e6f98a3eb02f53ea2580f2b9cdf09be1215bcbd06acbefb8",
+        "27d28f09083bcce0b55b0b0c912fe75990c651b7b625b0864fbf3562ec30b657",
+        "cfca4366521d0106bdb5c771acf27e710008e2c05360036ca27f42421f6be77d",
+        "bd8ca4e957deece84fa4bb821993eee97b96e1532e58edb71597c95e6807cff1"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/workaround/rebuilding-table-indexes.zh.md",
+      "target": "content/babelfish/workaround/rebuilding-table-indexes.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/workaround/rebuilding-table-indexes/",
+      "route": "/zh/babelfish/workaround/rebuilding-table-indexes/",
+      "sha256": "6c318367fafc902837a8e13c7bd9639972bf96a89e255f1f0ffa73b5274bde8b",
+      "code_sha256": [
+        "4e91a3ce19e19b86e6f98a3eb02f53ea2580f2b9cdf09be1215bcbd06acbefb8",
+        "27d28f09083bcce0b55b0b0c912fe75990c651b7b625b0864fbf3562ec30b657",
+        "cfca4366521d0106bdb5c771acf27e710008e2c05360036ca27f42421f6be77d",
+        "bd8ca4e957deece84fa4bb821993eee97b96e1532e58edb71597c95e6807cff1"
+      ],
+      "status": "complete"
+    },
+    {
+      "source": "content/docs/workaround/workarounds.md",
+      "target": "content/babelfish/workaround/workarounds.md",
+      "language": "en",
+      "old_route": "/docs/workaround/workarounds/",
+      "route": "/babelfish/workaround/workarounds/",
+      "sha256": "3e15e2f682eb6dd2ca4b42eb4d90531314cf1252ffe62a2944ecbf5208c73864",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/workaround/workarounds.zh.md",
+      "target": "content/babelfish/workaround/workarounds.zh.md",
+      "language": "zh",
+      "old_route": "/zh/docs/workaround/workarounds/",
+      "route": "/zh/babelfish/workaround/workarounds/",
+      "sha256": "d2dbe64d4551457e661d4916aa3632e713f53a6cea1ed3f0436587b1a322a9fe",
+      "code_sha256": [],
+      "status": "complete"
+    },
+    {
+      "source": "content/downloads/_index.md",
+      "target": "content/babelfish/downloads/_index.md",
+      "language": "en",
+      "old_route": "/downloads/",
+      "route": "/babelfish/downloads/",
+      "sha256": "2c5e1458a3754757c660c3fc11093eae9ade7d5b9389c19b63e4731b9b91b379",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/downloads/_index.zh.md",
+      "target": "content/babelfish/downloads/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/downloads/",
+      "route": "/zh/babelfish/downloads/",
+      "sha256": "84bc4d3625968f7bef8758e8476e558e526f4d69085affa6f7ae6e7f37e019a0",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/source/_index.md",
+      "target": "content/babelfish/source/_index.md",
+      "language": "en",
+      "old_route": "/source/",
+      "route": "/babelfish/source/",
+      "sha256": "841dbbc503b80bd7e04c13e99d7887b1c8ebb927c5bb633a59794659bbc6965b",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/source/_index.zh.md",
+      "target": "content/babelfish/source/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/source/",
+      "route": "/zh/babelfish/source/",
+      "sha256": "6a123fc7baafcdc11aa68aceff276e3d047915cf836cf33ad3042517bc364b5e",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/versions/_index.md",
+      "target": "content/babelfish/versions/_index.md",
+      "language": "en",
+      "old_route": "/versions/",
+      "route": "/babelfish/versions/",
+      "sha256": "81960c272e916bc4c6637f02ba4a6195662676510d61755996f1c6b15c455617",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/versions/_index.zh.md",
+      "target": "content/babelfish/versions/_index.zh.md",
+      "language": "zh",
+      "old_route": "/zh/versions/",
+      "route": "/zh/babelfish/versions/",
+      "sha256": "23a261b51cd3b61484445c5939cd9ba3df0b2b569029281349eb11b6fa0c0e72",
+      "code_sha256": [],
+      "status": "imported"
+    }
+  ],
+  "assets": [
+    {
+      "source": "static/images/babelfish-architecture.png",
+      "target": "static/babelfish/assets/images/babelfish-architecture.png",
+      "bytes": 121411,
+      "sha256": "f2007fc316da8930af649d0eb2d64cabd53565efe41096d8c76f96d93a14dadd"
+    },
+    {
+      "source": "static/images/babelfish-header.png",
+      "target": "static/babelfish/assets/images/babelfish-header.png",
+      "bytes": 156990,
+      "sha256": "1318a4956d571afcc86b47a51c3ea516f868857c55c1a29f05c25365ffeabf4b"
+    },
+    {
+      "source": "static/images/babelfish-mark-dark.svg",
+      "target": "static/babelfish/assets/images/babelfish-mark-dark.svg",
+      "bytes": 1314,
+      "sha256": "b3a80c13e9bc9204b023f84dd66e8135f7254ad26bb0add340be3fce6dfc5e26"
+    },
+    {
+      "source": "static/images/babelfish-mark.svg",
+      "target": "static/babelfish/assets/images/babelfish-mark.svg",
+      "bytes": 1314,
+      "sha256": "2b9f0c7b900605749b4e3c563be0ef92f89427eeb21c0ab1c6cf0063a5563259"
+    },
+    {
+      "source": "static/images/contributors/aaron_congo.webp",
+      "target": "static/babelfish/assets/images/contributors/aaron_congo.webp",
+      "bytes": 4068,
+      "sha256": "fcd9d306f7fb386042f1c6740917a3cec9e238f6a6853d3fd3b7b80a4e583d57"
+    },
+    {
+      "source": "static/images/contributors/abhinav_singh.webp",
+      "target": "static/babelfish/assets/images/contributors/abhinav_singh.webp",
+      "bytes": 1926,
+      "sha256": "a1ddc89188d043f2b528c8ff2fd502525f4d596ca7e524f7830a0dbf160b49da"
+    },
+    {
+      "source": "static/images/contributors/alvaro_hernandez.webp",
+      "target": "static/babelfish/assets/images/contributors/alvaro_hernandez.webp",
+      "bytes": 3634,
+      "sha256": "d8cf5ff19cb12eed4947ce8241e2caa730a38ea9b56922b375f09cbbe4150ff0"
+    },
+    {
+      "source": "static/images/contributors/anand_sriramulu.webp",
+      "target": "static/babelfish/assets/images/contributors/anand_sriramulu.webp",
+      "bytes": 1734,
+      "sha256": "92358c948b141400deaad910745aa031dd81876f31444a00ca0eedefe6b55d5d"
+    },
+    {
+      "source": "static/images/contributors/ashutosh_agarwal.webp",
+      "target": "static/babelfish/assets/images/contributors/ashutosh_agarwal.webp",
+      "bytes": 6240,
+      "sha256": "b6b928c3d051e9f45847690264518ec48da7ffcd39f790711d834dffdde9d8e1"
+    },
+    {
+      "source": "static/images/contributors/avantika_dasgupta.webp",
+      "target": "static/babelfish/assets/images/contributors/avantika_dasgupta.webp",
+      "bytes": 2276,
+      "sha256": "5c27abd5f77a3ea6cb6b5ecb6d5c218a68ef0808080d6cd6bd09f4f250e39a5f"
+    },
+    {
+      "source": "static/images/contributors/bernd_helmle.webp",
+      "target": "static/babelfish/assets/images/contributors/bernd_helmle.webp",
+      "bytes": 2750,
+      "sha256": "7d6cedcf497f7188efecae967026c00fdd699a2312f5ea7d131332a8a3a76345"
+    },
+    {
+      "source": "static/images/contributors/bill_ramos.webp",
+      "target": "static/babelfish/assets/images/contributors/bill_ramos.webp",
+      "bytes": 4258,
+      "sha256": "eebf486250b83629909e7486b68e7a9dc03407177f28277328c6737400617a66"
+    },
+    {
+      "source": "static/images/contributors/brent_sienko.webp",
+      "target": "static/babelfish/assets/images/contributors/brent_sienko.webp",
+      "bytes": 5534,
+      "sha256": "2dd85cb5f927f6b815a98bb2f1a6328eda2c3cb03221bb031bc2dbcbd28db662"
+    },
+    {
+      "source": "static/images/contributors/clint_fu.webp",
+      "target": "static/babelfish/assets/images/contributors/clint_fu.webp",
+      "bytes": 2130,
+      "sha256": "c17d4c111b8dc8c4e60fc6dea21af3ecd8621663a3f4296dc9bb6be8d4cdc014"
+    },
+    {
+      "source": "static/images/contributors/di_wu.webp",
+      "target": "static/babelfish/assets/images/contributors/di_wu.webp",
+      "bytes": 2632,
+      "sha256": "cd6c8228719d21634064b6f94d488224571b695da8d2dd55d2f3379b05fb4e1f"
+    },
+    {
+      "source": "static/images/contributors/dipesh_dhameliya.webp",
+      "target": "static/babelfish/assets/images/contributors/dipesh_dhameliya.webp",
+      "bytes": 3156,
+      "sha256": "5faeef8c09e067acc7873dea108904b259f879e4b49b389693895f53682ddb39"
+    },
+    {
+      "source": "static/images/contributors/emanuel_calvo.webp",
+      "target": "static/babelfish/assets/images/contributors/emanuel_calvo.webp",
+      "bytes": 2746,
+      "sha256": "8f3636f573cbd115b9eb07d398acaa0cec8d706bfc7b242c3d1d5b6dc4eb898a"
+    },
+    {
+      "source": "static/images/contributors/favian_samatha.webp",
+      "target": "static/babelfish/assets/images/contributors/favian_samatha.webp",
+      "bytes": 3216,
+      "sha256": "d69931174213fa05d9172f7f03531129dd67ac2e0b7b789fb2504e745dc5bf66"
+    },
+    {
+      "source": "static/images/contributors/gopinath_pai.webp",
+      "target": "static/babelfish/assets/images/contributors/gopinath_pai.webp",
+      "bytes": 1774,
+      "sha256": "622777b3d574e23e34b48e7757ed1261670a1d63395caaaf1ae4aa9966cd1cac"
+    },
+    {
+      "source": "static/images/contributors/hans_jurgen_schonig.webp",
+      "target": "static/babelfish/assets/images/contributors/hans_jurgen_schonig.webp",
+      "bytes": 3962,
+      "sha256": "8354c6e72d6e53bece7dbefb760241874a75da32226d187dd02df7326fe3bfba"
+    },
+    {
+      "source": "static/images/contributors/harsh_lunagariya.webp",
+      "target": "static/babelfish/assets/images/contributors/harsh_lunagariya.webp",
+      "bytes": 2630,
+      "sha256": "81893b455936c70b64878766d3893186b205ee0c3d7ee9a2db510f5910f678a4"
+    },
+    {
+      "source": "static/images/contributors/huansong_fu.webp",
+      "target": "static/babelfish/assets/images/contributors/huansong_fu.webp",
+      "bytes": 3454,
+      "sha256": "a507fd793c167a0004c4998e7e9f123f02bea79d63d2b9e7f1afaa9459b1b919"
+    },
+    {
+      "source": "static/images/contributors/jason_teng.webp",
+      "target": "static/babelfish/assets/images/contributors/jason_teng.webp",
+      "bytes": 2482,
+      "sha256": "4c9f531c37e09601ca15bd4424f074bbbffc4c5c48a5a52bf595eb598a9d812e"
+    },
+    {
+      "source": "static/images/contributors/jignesh_shah.webp",
+      "target": "static/babelfish/assets/images/contributors/jignesh_shah.webp",
+      "bytes": 2220,
+      "sha256": "b4eefd988b4fa0387bdbb05113b9fa31cd743bde6bd237ade477f9f2d23d6ffa"
+    },
+    {
+      "source": "static/images/contributors/jim_finnerty.webp",
+      "target": "static/babelfish/assets/images/contributors/jim_finnerty.webp",
+      "bytes": 5502,
+      "sha256": "ed3c4a3b04962226e587218023cf1586da069a187621c586cc10578e2296fed1"
+    },
+    {
+      "source": "static/images/contributors/jungkook_lee.webp",
+      "target": "static/babelfish/assets/images/contributors/jungkook_lee.webp",
+      "bytes": 1426,
+      "sha256": "043712735029370f383967ef4447daed1004c3e307a7c82022a52b67cc7ef384"
+    },
+    {
+      "source": "static/images/contributors/karen_chen.webp",
+      "target": "static/babelfish/assets/images/contributors/karen_chen.webp",
+      "bytes": 7566,
+      "sha256": "7bb07c0cdb9986792cc10e555de88f20f495f2db4b46eb16a133ff71dd24de50"
+    },
+    {
+      "source": "static/images/contributors/korry_douglas.webp",
+      "target": "static/babelfish/assets/images/contributors/korry_douglas.webp",
+      "bytes": 2978,
+      "sha256": "84a922ae1bf7f3e467968124937e2fd738e696bedd5e6b89194495fd5b0b96e5"
+    },
+    {
+      "source": "static/images/contributors/kuntal_ghosh.webp",
+      "target": "static/babelfish/assets/images/contributors/kuntal_ghosh.webp",
+      "bytes": 3276,
+      "sha256": "07fd6e684a234fb010b226cf8452f5a31c71ae55c88f23d53fbdb6c9565ae5db"
+    },
+    {
+      "source": "static/images/contributors/kushaal_shroff.webp",
+      "target": "static/babelfish/assets/images/contributors/kushaal_shroff.webp",
+      "bytes": 2912,
+      "sha256": "0a93c3a5ee919780a367b3c00dbc6d839f2bfb5a8889f9ec32e48b8c1d126e0a"
+    },
+    {
+      "source": "static/images/contributors/laurenz_albe.webp",
+      "target": "static/babelfish/assets/images/contributors/laurenz_albe.webp",
+      "bytes": 2136,
+      "sha256": "3f910ce4d5cc9121fd7741c2444808c043f7a617aa85689ee941c74983126d28"
+    },
+    {
+      "source": "static/images/contributors/leszek_kurzyna.webp",
+      "target": "static/babelfish/assets/images/contributors/leszek_kurzyna.webp",
+      "bytes": 2722,
+      "sha256": "a67ef48f2d57e9829d45d2d0012775257146ac55371b6c71efe94e19390e3176"
+    },
+    {
+      "source": "static/images/contributors/luis_garcia.webp",
+      "target": "static/babelfish/assets/images/contributors/luis_garcia.webp",
+      "bytes": 5374,
+      "sha256": "7338806312a99c6fbd789cd033ae04261139dbe747d43e360a3c6c49d883c8b9"
+    },
+    {
+      "source": "static/images/contributors/maria_raphaeil.webp",
+      "target": "static/babelfish/assets/images/contributors/maria_raphaeil.webp",
+      "bytes": 2364,
+      "sha256": "a835e98e59f38b957fdc3f147b6b1aabffbe13d63381e6375c751cd8e41e598f"
+    },
+    {
+      "source": "static/images/contributors/matthew_hsu.webp",
+      "target": "static/babelfish/assets/images/contributors/matthew_hsu.webp",
+      "bytes": 5794,
+      "sha256": "d4c2e708fe188a481a506be265943bf111a21d32cee9ac16f3b233ed249468d7"
+    },
+    {
+      "source": "static/images/contributors/mohamed_ali.webp",
+      "target": "static/babelfish/assets/images/contributors/mohamed_ali.webp",
+      "bytes": 2048,
+      "sha256": "23dabad2a1808a6a21d8b699cccd3ea3d239e57b777950bce2f67af6c501197a"
+    },
+    {
+      "source": "static/images/contributors/murali-brahmadesam.webp",
+      "target": "static/babelfish/assets/images/contributors/murali-brahmadesam.webp",
+      "bytes": 2920,
+      "sha256": "5d40ee2163aebf3c70ba575cd860e24559f7d7a9bc7b125d5c8baec2d54b14ac"
+    },
+    {
+      "source": "static/images/contributors/nathan_bossart.webp",
+      "target": "static/babelfish/assets/images/contributors/nathan_bossart.webp",
+      "bytes": 6012,
+      "sha256": "b5ece330da87e8d66b45519404b2390883a3d7efd500098ce3035f584b1a9d7f"
+    },
+    {
+      "source": "static/images/contributors/prashant_bondada.webp",
+      "target": "static/babelfish/assets/images/contributors/prashant_bondada.webp",
+      "bytes": 2992,
+      "sha256": "62695f95db81f91a2786eaf54bb5965c266c34193d09b27c5780e2170541154a"
+    },
+    {
+      "source": "static/images/contributors/prateek_goel.webp",
+      "target": "static/babelfish/assets/images/contributors/prateek_goel.webp",
+      "bytes": 2498,
+      "sha256": "e1061712104e0c49faf2f61a052cf907fe0ae6af4d7228608a3f5d08b4454b0a"
+    },
+    {
+      "source": "static/images/contributors/rajnish_chitkara.webp",
+      "target": "static/babelfish/assets/images/contributors/rajnish_chitkara.webp",
+      "bytes": 4298,
+      "sha256": "1e80b1e1352391edfaaf212b0dc6d43a47057f133e0883afe0a7dc09030afdbb"
+    },
+    {
+      "source": "static/images/contributors/richard-waymire.webp",
+      "target": "static/babelfish/assets/images/contributors/richard-waymire.webp",
+      "bytes": 3352,
+      "sha256": "9c5aa53e571fca29ef089982b42c714f2f8a1a8df057c80544a79782e450296f"
+    },
+    {
+      "source": "static/images/contributors/rishabh_tanwar.webp",
+      "target": "static/babelfish/assets/images/contributors/rishabh_tanwar.webp",
+      "bytes": 6666,
+      "sha256": "1321f0c4543559b94843685fe869c88e1b1f37121111d68281c75328d75774b3"
+    },
+    {
+      "source": "static/images/contributors/rob_verschoor.webp",
+      "target": "static/babelfish/assets/images/contributors/rob_verschoor.webp",
+      "bytes": 3206,
+      "sha256": "1c40a2aa38e421315d0d64a5056b17b5ef0ae4cd24f307b021e52f9fdbca572e"
+    },
+    {
+      "source": "static/images/contributors/rudi_leibbrandt.webp",
+      "target": "static/babelfish/assets/images/contributors/rudi_leibbrandt.webp",
+      "bytes": 3732,
+      "sha256": "5bd37dde7ce657ac925993db58a9369f7a255feecef009560d1d4ba271d1eb51"
+    },
+    {
+      "source": "static/images/contributors/sangil_song.webp",
+      "target": "static/babelfish/assets/images/contributors/sangil_song.webp",
+      "bytes": 2288,
+      "sha256": "9fe04e99117829db4d340cba326ab2dcf5b93a75aa81f1aa07ca501d8b4f297e"
+    },
+    {
+      "source": "static/images/contributors/sergiy_voshchykov.webp",
+      "target": "static/babelfish/assets/images/contributors/sergiy_voshchykov.webp",
+      "bytes": 1690,
+      "sha256": "7735783b45426637e161cfd39d2b58e24f468f2f5d90e806e9bf59b91ec2c690"
+    },
+    {
+      "source": "static/images/contributors/shalini_lohia.webp",
+      "target": "static/babelfish/assets/images/contributors/shalini_lohia.webp",
+      "bytes": 3422,
+      "sha256": "75dec3ea45929aad0e0e917ec8135a4796c6ace26f1f1acba28992500fa3ccc7"
+    },
+    {
+      "source": "static/images/contributors/sharayu_mungel.webp",
+      "target": "static/babelfish/assets/images/contributors/sharayu_mungel.webp",
+      "bytes": 1880,
+      "sha256": "16ce644b9020a9b4e79014ddd178bb3d3ebca1c97607a6e22a1246c7d3bb2ec7"
+    },
+    {
+      "source": "static/images/contributors/sharu_goel.webp",
+      "target": "static/babelfish/assets/images/contributors/sharu_goel.webp",
+      "bytes": 7680,
+      "sha256": "5a515f1dc4f7c0f762c01c20729c9e8dc2518b5573eec3ce1a46ddf78ae965c3"
+    },
+    {
+      "source": "static/images/contributors/simon_lightstone.webp",
+      "target": "static/babelfish/assets/images/contributors/simon_lightstone.webp",
+      "bytes": 2940,
+      "sha256": "f3026f756f654556021e3e69e3a3b268645b07a6ce5bc93c2976ad3f2de211d1"
+    },
+    {
+      "source": "static/images/contributors/snigdha_goel.webp",
+      "target": "static/babelfish/assets/images/contributors/snigdha_goel.webp",
+      "bytes": 2108,
+      "sha256": "97ae9473176164a818af5bda0186ff64573fe174f22a530ebeb64f269f1b657b"
+    },
+    {
+      "source": "static/images/contributors/sravani_puttagunta.webp",
+      "target": "static/babelfish/assets/images/contributors/sravani_puttagunta.webp",
+      "bytes": 2350,
+      "sha256": "ccda5dbb149c34c74c760f0fbc68f8519e128675c9ed99af0c7ab30012a369d1"
+    },
+    {
+      "source": "static/images/contributors/stefan_karlsson.webp",
+      "target": "static/babelfish/assets/images/contributors/stefan_karlsson.webp",
+      "bytes": 3364,
+      "sha256": "9e424f13aa904b95eb7412aca83f0eda715f1396fd46474fa66a30c2c1bcb61d"
+    },
+    {
+      "source": "static/images/contributors/stefano_stefani.webp",
+      "target": "static/babelfish/assets/images/contributors/stefano_stefani.webp",
+      "bytes": 1558,
+      "sha256": "2dd96c65b5b67e5e54fbfa864a8339a8f1d249ebbe8e62b2f1713d17b784fca2"
+    },
+    {
+      "source": "static/images/contributors/suprio_pal.webp",
+      "target": "static/babelfish/assets/images/contributors/suprio_pal.webp",
+      "bytes": 4166,
+      "sha256": "c1f9740b1f4af90a1a8038e64bff23e4cb354b160d2e2aa58dfc9e0933ca7a38"
+    },
+    {
+      "source": "static/images/contributors/susan_douglas.webp",
+      "target": "static/babelfish/assets/images/contributors/susan_douglas.webp",
+      "bytes": 3178,
+      "sha256": "76ab27e5491a4f0f3f97d8aa17d9e792305801a77f7e1d7fd281343fd8d1ee86"
+    },
+    {
+      "source": "static/images/contributors/tim_chang.webp",
+      "target": "static/babelfish/assets/images/contributors/tim_chang.webp",
+      "bytes": 2370,
+      "sha256": "a21bc39bdfb3ef780f5eb1f9a162efb4a2f43da750a4e85d117003e6ed1f5e68"
+    },
+    {
+      "source": "static/images/contributors/tim_galvin.webp",
+      "target": "static/babelfish/assets/images/contributors/tim_galvin.webp",
+      "bytes": 3510,
+      "sha256": "7ffca6bd0319a3a880349c26ba6106cc7f89a9ca39e7df7c18bbd74042db9548"
+    },
+    {
+      "source": "static/images/contributors/tobias_ternstrom.webp",
+      "target": "static/babelfish/assets/images/contributors/tobias_ternstrom.webp",
+      "bytes": 4912,
+      "sha256": "80e2bf0dde85db53ab61797fcaf0e7524306d3d6862b20ca895581d0675c9af3"
+    },
+    {
+      "source": "static/images/contributors/tony_lin.webp",
+      "target": "static/babelfish/assets/images/contributors/tony_lin.webp",
+      "bytes": 2820,
+      "sha256": "a570f336b9d8849971f71aa342ecf414ce20aeb2c9cd666d71316537e50779c7"
+    },
+    {
+      "source": "static/images/contributors/vinicius_schmidt.webp",
+      "target": "static/babelfish/assets/images/contributors/vinicius_schmidt.webp",
+      "bytes": 3310,
+      "sha256": "764316d7df6fab51fcf2d2dea46afd47de4c227e195e6ec6b9c6d50cb991db05"
+    },
+    {
+      "source": "static/images/contributors/xavier_sierra.webp",
+      "target": "static/babelfish/assets/images/contributors/xavier_sierra.webp",
+      "bytes": 5814,
+      "sha256": "2732ec02331c75cb2a912ca73e524c370da6a0a7fe02ca8561685166c56dd023"
+    },
+    {
+      "source": "static/images/contributors/xiaohui_fanhe.webp",
+      "target": "static/babelfish/assets/images/contributors/xiaohui_fanhe.webp",
+      "bytes": 2620,
+      "sha256": "a4ac02dcd5fddc204bb015258c8d5ae92eebce65241d8f71d0ae2744c92c8aa5"
+    },
+    {
+      "source": "static/images/contributors/zhe_liu.webp",
+      "target": "static/babelfish/assets/images/contributors/zhe_liu.webp",
+      "bytes": 3022,
+      "sha256": "73204ffa9477403637d98186a1e6c3a6a718d983a3947997cf7ef19fdc9014ed"
+    },
+    {
+      "source": "static/images/contributors/zheng_li.webp",
+      "target": "static/babelfish/assets/images/contributors/zheng_li.webp",
+      "bytes": 3276,
+      "sha256": "819ef97074e1c4cd23f7ea28592fc869e4c62cb13cf9136656c3376ce3310168"
+    },
+    {
+      "source": "static/images/contributors/zitao_quan.webp",
+      "target": "static/babelfish/assets/images/contributors/zitao_quan.webp",
+      "bytes": 2720,
+      "sha256": "a77a087c95dead970b54a1cf0851764aed5c49ca67c8f59d56094d28995c2806"
+    },
+    {
+      "source": "static/legal/upstream-LICENSE.txt",
+      "target": "static/babelfish/assets/legal/upstream-LICENSE.txt",
+      "bytes": 10142,
+      "sha256": "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b"
+    },
+    {
+      "source": "static/legal/upstream-README.md",
+      "target": "static/babelfish/assets/legal/upstream-README.md",
+      "bytes": 8639,
+      "sha256": "d787a9d752dc5ea59b2a032ab57093ead41649470368bc9a982d08e649d853a0"
+    },
+    {
+      "source": "static/legal/upstream-THIRD-PARTY.txt",
+      "target": "static/babelfish/assets/legal/upstream-THIRD-PARTY.txt",
+      "bytes": 386,
+      "sha256": "fa2a8d655204e33002afd58425d494883754521a245014e6ab57a2c3977e3a87"
+    }
+  ]
+}
