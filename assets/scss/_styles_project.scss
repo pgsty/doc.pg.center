@@ -11,6 +11,10 @@
   .td-landing-hero__lead {
     max-width: 760px;
   }
+
+  .td-landing-hero__note > span {
+    text-wrap: balance;
+  }
 }
 
 // A two-line display title whose second line is twice as long as the first
@@ -29,98 +33,461 @@
   --pgsql-title-scale: 0.86;
 }
 
-// Between the theme's two-column breakpoint and 1280px the module's 50/50
-// split leaves the copy column too narrow for one-line bullets, while the
-// component board beside it is mostly padding at that size. Give the text the
-// extra room instead of cutting the sentences down to fit the narrowest case.
-@media (min-width: 1001px) and (max-width: 1279.98px) {
-  .td-landing-capabilities .td-landing-module {
-    grid-template-columns: minmax(0, 1.24fr) minmax(0, 0.76fr);
+// ---------------------------------------------------------------------------
+// Landing hero: reading languages + orbit
+// ---------------------------------------------------------------------------
+
+// The eight complete language editions take the place of CTA buttons: a
+// reader who lands in the wrong language switches here, before choosing a
+// manual. A quiet inline list, not eight buttons.
+.pgsql-hero__langs {
+  max-width: 600px;
+  margin: 26px 0 4px;
+  padding-block-start: 18px;
+  border-block-start: 1px solid var(--td-line);
+
+  // Eight editions as a 4 x 2 grid at every width: a wrapping row left one
+  // language stranded on a second line.
+  ul {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
   }
 
-  // Alternating modules move the copy to the second position with `order`,
-  // so the wide track has to move with it.
-  .td-landing-capabilities .td-landing-module--reverse {
-    grid-template-columns: minmax(0, 0.76fr) minmax(0, 1.24fr);
-  }
-}
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 4px 8px;
+    border: 1px solid var(--td-line);
+    border-radius: 8px;
+    background: var(--td-paper);
+    color: var(--td-soft);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
 
-// Between 901 and 1000px no split leaves the copy wide enough for one-line
-// sentences and the board wide enough to be legible, so the module stacks
-// there instead -- the same shape the theme already uses below 901px, just
-// entered a breakpoint earlier for this section.
-@media (min-width: 901px) and (max-width: 1000px) {
-  .td-landing-capabilities .td-landing-module {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 28px;
-  }
+    &:hover,
+    &:focus-visible {
+      border-color: color-mix(in srgb, var(--td-blue) 40%, var(--td-line));
+      color: var(--td-ink);
+    }
 
-  .td-landing-capabilities .td-landing-module--reverse {
-    .td-landing-module__copy,
-    > :last-child {
-      order: initial;
+    &[aria-current='page'] {
+      border-color: color-mix(in srgb, var(--td-blue) 55%, var(--td-line));
+      background: color-mix(in srgb, var(--td-blue) 9%, var(--td-paper));
+      color: var(--td-ink);
     }
   }
 }
 
+.pgsql-hero__langs-label {
+  display: block;
+  color: var(--td-muted);
+  font-family: var(--td-meta-font-family);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+}
+
 // ---------------------------------------------------------------------------
-// Landing hero: component link row + orbit
+// Manual index (pgsql/manuals.html) and site facts (pgsql/about.html)
 // ---------------------------------------------------------------------------
 
-// The six component links replace the hero's CTA buttons. They are quieter
-// than a button on purpose: six primary buttons would read as six calls to
-// action rather than one navigation choice.
-// Three across, two down. Wrapping a flex row left a 4 + 2 break whose second
-// row read as an afterthought; a fixed three-column grid gives the six
-// components the same shape they have in the card section below.
-.pgsql-hero__links {
+.pgsql-section-head {
+  margin-block-end: clamp(26px, 4vw, 40px);
+
+  h2 {
+    margin: 0;
+    color: var(--td-ink);
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  p {
+    margin: 12px 0 0;
+    color: var(--td-soft);
+    text-wrap: balance;
+  }
+}
+
+.pgsql-manuals__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  max-width: 540px;
-  margin: 26px 0 4px;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-@media (max-width: 480px) {
-  .pgsql-hero__links {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.pgsql-manual {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid var(--td-line);
+  border-radius: var(--td-radius-md);
+  background: var(--td-paper);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--td-blue) 40%, var(--td-line));
+    box-shadow: var(--td-shadow);
   }
 }
 
-.pgsql-hero__link {
+.pgsql-manual__main {
   display: flex;
-  align-items: center;
+  flex: 1 1 auto;
+  flex-direction: column;
   gap: 6px;
-  min-width: 0;
-  min-height: 44px;
-  padding: 9px 11px;
-  border: 1px solid var(--td-line);
-  border-radius: 999px;
-  background: var(--td-paper);
-  color: var(--td-ink);
-  font-size: 0.88rem;
-  font-weight: 600;
-  line-height: 1;
+  padding: 22px 22px 18px;
+  border-radius: var(--td-radius-md) var(--td-radius-md) 0 0;
+  color: inherit;
   text-decoration: none;
 
-  i {
-    width: 1em;
-    flex: none;
-    color: var(--td-blue);
-    font-size: 0.94rem;
+  &:hover .pgsql-manual__name {
+    color: var(--td-blue-strong);
+  }
+}
+
+.pgsql-manual__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-block-end: 4px;
+}
+
+.pgsql-manual__icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: color-mix(in srgb, #336791 12%, var(--td-paper));
+  color: #336791;
+  font-size: 1.05rem;
+}
+
+// A brand mark fills the card's icon box bare, with no frame, so every
+// collection shows the same 40px square whatever the mark's own proportions.
+// Font Awesome fallbacks keep the tinted square.
+.pgsql-manual__icon--logo {
+  border: 0;
+  background: none;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+// Reuse the site's elephant in menus, the section switcher, and the home card.
+.pgsql-icon-postgresql {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  -webkit-mask: url('/img/slonik.svg') center / contain no-repeat;
+  mask: url('/img/slonik.svg') center / contain no-repeat;
+}
+
+// Fill the version guide's canvas and align columns across its three tables.
+.pgsql-versions-page .td-table-scroll > table {
+  width: 100%;
+  min-width: 100%;
+  max-width: none;
+  table-layout: fixed;
+
+  th:first-child {
+    width: 34%;
+  }
+}
+
+// Keep names readable when a narrow screen or the sidebar limits table space.
+@media screen and (max-width: 991.98px) {
+  .pgsql-versions-page .td-table-scroll > table {
+    width: 100%;
+    min-width: 38rem;
+    table-layout: auto;
+
+    th:first-child {
+      width: auto;
+    }
+  }
+}
+
+[data-bs-theme='dark'] .pgsql-manual__icon {
+  background: color-mix(in srgb, #71a6d1 16%, var(--td-paper));
+  color: #9cc4e4;
+}
+
+// Marks drawn in black or dark navy would sink into the dark ground, so the
+// registry's `dark` hint lifts them: `mono` turns the mark into a white
+// silhouette, `invert` flips a black-and-white mark, `rim` adds a light edge
+// to Slonik's black contour.
+[data-bs-theme='dark'] .pgsql-manual__icon img[data-dark='mono'] {
+  filter: brightness(0) invert(1);
+}
+
+[data-bs-theme='dark'] .pgsql-manual__icon img[data-dark='invert'] {
+  filter: invert(1);
+}
+
+[data-bs-theme='dark'] .pgsql-manual__icon img[data-dark='rim'] {
+  filter: drop-shadow(0 0 1px rgba(233, 242, 250, 0.9));
+}
+
+.pgsql-manual__name {
+  // Grow into the head so the version badge stays on the name's line; a long
+  // name wraps inside its own box before the badge is pushed to the next line.
+  flex: 1 1 0;
+  min-width: 8ch;
+  color: var(--td-ink);
+  font-size: 1.22rem;
+  font-weight: 800;
+  line-height: 1.2;
+  transition: color 0.18s ease;
+}
+
+.pgsql-manual__version {
+  margin-inline-start: auto;
+  padding: 2px 8px;
+  border: 1px solid var(--td-line);
+  border-radius: 999px;
+  color: var(--td-soft);
+  font-family: var(--td-meta-font-family);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  unicode-bidi: isolate;
+  direction: ltr;
+}
+
+.pgsql-manual__meta {
+  color: var(--td-copper);
+  font-family: var(--td-meta-font-family);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.pgsql-manual__desc {
+  color: var(--td-soft);
+  font-size: 0.93rem;
+  line-height: 1.65;
+  text-wrap: balance;
+}
+
+.pgsql-manual__links {
+  margin: 0 22px;
+  padding: 6px 0 12px;
+  border-block-start: 1px solid var(--td-line);
+  list-style: none;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 36px;
+    padding: 6px 4px;
+    border-radius: 6px;
+    color: var(--td-ink);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+
+    i {
+      width: 1.1em;
+      flex: none;
+      color: var(--td-muted);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: var(--td-blue-strong);
+
+      i {
+        color: var(--td-blue);
+      }
+    }
+  }
+}
+
+// Kernel cards read down four columns, three to a column, so each column
+// groups related kernels; the data lists them in that column order and the
+// template passes the row counts. Two columns of six on narrower screens, a
+// single column in data order on phones.
+.pgsql-manuals--kernels .pgsql-manuals__grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(var(--pgsql-rows-4, 3), auto);
+  grid-auto-flow: column;
+
+  @media (max-width: 1099.98px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(var(--pgsql-rows-2, 6), auto);
   }
 
-  span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  @media (max-width: 639.98px) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-auto-flow: row;
+  }
+}
+
+// A single collection outside the six (Apache Cloudberry, en/zh only) spans
+// the row: identity on one side, its shortcuts in two columns on the other.
+.pgsql-manuals--wide {
+  padding-block-start: 0;
+  border-block-start: 0;
+
+  .pgsql-section-head {
+    margin-block-end: 18px;
+
+    h2 {
+      font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+      font-weight: 700;
+    }
+  }
+
+  .pgsql-manuals__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pgsql-manual {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .pgsql-manual__main {
+    border-radius: 0;
+    border-start-start-radius: var(--td-radius-md);
+    border-end-start-radius: var(--td-radius-md);
+  }
+
+  .pgsql-manual__links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: center;
+    gap: 0 18px;
+    margin-block: 18px;
+    margin-inline: 0 22px;
+    padding-block: 0;
+    padding-inline: 22px 0;
+    border-block-start: 0;
+    border-inline-start: 1px solid var(--td-line);
+  }
+}
+
+.pgsql-about {
+  padding-block-start: clamp(48px, 6vw, 80px);
+}
+
+.pgsql-about__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  > li {
+    display: flex;
+    min-width: 0;
+  }
+}
+
+.pgsql-about__card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 6px 16px;
+  width: 100%;
+  padding: 22px 24px;
+  border: 1px solid var(--td-line);
+  border-radius: var(--td-radius-md);
+  background: var(--td-paper);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.18s ease;
+
+  i {
+    grid-row: 1 / span 2;
+    margin-block-start: 3px;
+    color: #336791;
+    font-size: 1.1rem;
   }
 
   &:hover,
   &:focus-visible {
-    border-color: var(--td-copper-dim);
-    background: color-mix(in srgb, var(--td-blue) 7%, var(--td-paper));
-    color: var(--td-ink);
+    border-color: color-mix(in srgb, var(--td-blue) 40%, var(--td-line));
+  }
+}
+
+[data-bs-theme='dark'] .pgsql-about__card i {
+  color: #9cc4e4;
+}
+
+.pgsql-about__title {
+  color: var(--td-ink);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.pgsql-about__text {
+  color: var(--td-soft);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  text-wrap: balance;
+}
+
+@media (max-width: 991.98px) {
+  .pgsql-manuals__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767.98px) {
+  .pgsql-manuals--wide {
+    .pgsql-manual {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .pgsql-manual__main {
+      border-radius: var(--td-radius-md) var(--td-radius-md) 0 0;
+    }
+
+    .pgsql-manual__links {
+      margin-block: 0;
+      margin-inline: 22px;
+      padding-block: 6px 12px;
+      padding-inline: 0;
+      border-block-start: 1px solid var(--td-line);
+      border-inline-start: 0;
+    }
+  }
+}
+
+@media (max-width: 639.98px) {
+  .pgsql-manuals__grid,
+  .pgsql-about__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pgsql-manual,
+  .pgsql-manual__name {
+    transition: none;
   }
 }
 
@@ -248,17 +615,28 @@
 
 // --- Orbit -----------------------------------------------------------------
 //
-// Geometry lives here rather than in the template: the partial only sets each
-// satellite's starting angle, and the ring modifier picks its radius and
-// period. Radii derive from one container size so the whole system scales with
-// the viewport instead of needing breakpoint-specific coordinates.
+// A Bohr-style atom: Slonik is the nucleus, the operations tools fill the
+// inner shell and the kernel collections the outer one, and the two shells
+// turn in opposite directions. Geometry lives here rather than in the
+// template: the partial only sets each satellite's shell and starting angle,
+// and the shell modifier picks radius, period, and direction. Radii derive
+// from one container size so the whole system scales with the viewport; the
+// ring circles in the partial's 400-unit SVG use the same 0.27 / 0.42 ratios.
 .pgsql-orbit {
-  --pgsql-orbit-size: clamp(320px, 30vw, 440px);
-  --pgsql-orbit-inner: calc(var(--pgsql-orbit-size) * 0.275);
-  --pgsql-orbit-outer: calc(var(--pgsql-orbit-size) * 0.405);
-  --pgsql-orbit-inner-period: 44s;
-  --pgsql-orbit-outer-period: 72s;
-  --pgsql-halo: rgba(51, 103, 145, 0.09);
+  --pgsql-orbit-size: clamp(320px, 31vw, 460px);
+  --pgsql-orbit-r1: calc(var(--pgsql-orbit-size) * 0.27);
+  --pgsql-orbit-r2: calc(var(--pgsql-orbit-size) * 0.42);
+  --pgsql-orbit-period-1: 48s;
+  --pgsql-orbit-period-2: 96s;
+  --pgsql-orbit-chip: clamp(42px, calc(var(--pgsql-orbit-size) * 0.118), 54px);
+  --pgsql-halo: rgba(51, 103, 145, 0.1);
+  --pgsql-ring: color-mix(in srgb, var(--td-blue) 28%, var(--td-line));
+  // Brand marks are drawn for light grounds, so the discs stay light in both
+  // themes; dark mode only changes the rim and the shadow around them.
+  --pgsql-chip-bg: #fff;
+  --pgsql-chip-line: rgba(15, 23, 42, 0.08);
+  --pgsql-chip-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
+  --pgsql-chip-shadow-hover: 0 10px 26px rgba(15, 23, 42, 0.2);
 
   position: relative;
   width: var(--pgsql-orbit-size);
@@ -267,14 +645,19 @@
 }
 
 [data-bs-theme='dark'] .pgsql-orbit {
-  --pgsql-halo: rgba(126, 183, 229, 0.13);
+  --pgsql-halo: rgba(126, 183, 229, 0.16);
+  --pgsql-ring: color-mix(in srgb, #9cc4e4 32%, var(--td-line));
+  --pgsql-chip-bg: #f8fafc;
+  --pgsql-chip-line: rgba(255, 255, 255, 0.14);
+  --pgsql-chip-shadow: 0 0 0 3px rgba(126, 183, 229, 0.1), 0 8px 22px rgba(0, 0, 0, 0.45);
+  --pgsql-chip-shadow-hover: 0 0 0 4px rgba(126, 183, 229, 0.2), 0 14px 30px rgba(0, 0, 0, 0.55);
 }
 
 // Slonik's outer contour is black, which vanishes on the dark ground, so the
 // mark gets a light rim there instead of an invisible one.
 [data-bs-theme='dark'] .pgsql-orbit__planet {
   filter: drop-shadow(0 0 1px rgba(233, 242, 250, 0.9))
-    drop-shadow(0 0 14px rgba(126, 183, 229, 0.28));
+    drop-shadow(0 0 16px rgba(126, 183, 229, 0.3));
 }
 
 .pgsql-orbit__rings {
@@ -286,14 +669,14 @@
 
 .pgsql-orbit__ring {
   fill: none;
-  stroke: var(--td-line);
-  stroke-width: 1;
-  stroke-dasharray: 3 7;
-  opacity: 0.85;
+  stroke: var(--pgsql-ring);
+  stroke-width: 1.2;
+  opacity: 0.9;
 
-  &--outer {
-    stroke-dasharray: 2 9;
-    opacity: 0.6;
+  &--2 {
+    stroke-dasharray: 3 7;
+    stroke-linecap: round;
+    opacity: 0.75;
   }
 }
 
@@ -301,11 +684,11 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: calc(var(--pgsql-orbit-size) * 0.335);
+  width: calc(var(--pgsql-orbit-size) * 0.35);
   height: auto;
   pointer-events: none;
   transform: translate(-50%, -50%);
-  filter: drop-shadow(0 6px 18px rgba(15, 23, 42, 0.16));
+  filter: drop-shadow(0 8px 22px rgba(15, 23, 42, 0.18));
 }
 
 // Every satellite is a full-size box stacked on the others, so without this
@@ -331,8 +714,9 @@
 
 // One job per layer, so the animation never has to reproduce a static offset:
 // `--sat` holds the starting angle, `--spin` turns, `--arm` pushes the
-// satellite out to its radius, and `--counter` undoes the turn so the icon
-// stays upright.
+// satellite out to its radius, and `--counter` undoes the turn so the mark
+// stays upright. `animation-direction` is set after the shorthand because the
+// shorthand would reset it.
 .pgsql-orbit__sat {
   position: absolute;
   inset: 0;
@@ -343,20 +727,24 @@
   position: absolute;
   inset: 0;
   animation: pgsql-orbit-spin var(--period) linear infinite;
+  animation-direction: var(--direction, normal);
 }
 
 .pgsql-orbit__counter {
   animation: pgsql-orbit-counter var(--period) linear infinite;
+  animation-direction: var(--direction, normal);
 }
 
-.pgsql-orbit__sat--inner {
-  --period: var(--pgsql-orbit-inner-period);
-  --radius: var(--pgsql-orbit-inner);
+.pgsql-orbit__sat--1 {
+  --period: var(--pgsql-orbit-period-1);
+  --radius: var(--pgsql-orbit-r1);
+  --direction: normal;
 }
 
-.pgsql-orbit__sat--outer {
-  --period: var(--pgsql-orbit-outer-period);
-  --radius: var(--pgsql-orbit-outer);
+.pgsql-orbit__sat--2 {
+  --period: var(--pgsql-orbit-period-2);
+  --radius: var(--pgsql-orbit-r2);
+  --direction: reverse;
 }
 
 .pgsql-orbit__arm {
@@ -366,7 +754,7 @@
   transform: translate(-50%, -50%) translateY(calc(-1 * var(--radius)));
 }
 
-// The satellite's own starting angle is static, so the label is straightened
+// The satellite's own starting angle is static, so the mark is straightened
 // with the same static rotation in reverse.
 .pgsql-orbit__link {
   position: relative;
@@ -378,19 +766,25 @@
 
 .pgsql-orbit__chip {
   display: grid;
-  width: 50px;
-  height: 50px;
+  width: var(--pgsql-orbit-chip);
+  height: var(--pgsql-orbit-chip);
   place-items: center;
-  border: 1px solid var(--td-line);
-  border-radius: 15px;
-  background: var(--td-paper);
-  box-shadow: var(--td-shadow);
-  color: var(--td-blue);
-  font-size: 1.28rem;
+  border: 1px solid var(--pgsql-chip-line);
+  border-radius: 50%;
+  background: var(--pgsql-chip-bg);
+  box-shadow: var(--pgsql-chip-shadow);
+  color: #336791;
+  font-size: calc(var(--pgsql-orbit-chip) * 0.4);
   transition:
     transform 200ms ease,
-    border-color 200ms ease,
-    color 200ms ease;
+    box-shadow 200ms ease;
+}
+
+.pgsql-orbit__logo {
+  display: block;
+  width: 68%;
+  height: 68%;
+  object-fit: contain;
 }
 
 // Out of flow and out of hit-testing: in flow it pushed the chip off its
@@ -403,11 +797,13 @@
   transform: translateX(-50%);
   pointer-events: none;
   padding: 3px 9px;
+  border: 1px solid var(--td-line);
   border-radius: 999px;
   background: var(--td-paper);
-  color: var(--td-soft);
+  color: var(--td-ink);
   font-family: var(--td-meta-font-family);
-  font-size: 0.63rem;
+  font-size: 0.66rem;
+  font-weight: 600;
   letter-spacing: 0.04em;
   opacity: 0;
   transition: opacity 180ms ease;
@@ -416,9 +812,8 @@
 
 .pgsql-orbit__link:hover {
   .pgsql-orbit__chip {
-    border-color: var(--td-copper-dim);
-    color: var(--td-copper);
-    transform: scale(1.12);
+    box-shadow: var(--pgsql-chip-shadow-hover);
+    transform: scale(1.16);
   }
 
   .pgsql-orbit__label {
@@ -460,22 +855,6 @@
   }
 }
 
-// The whole component card is the link. The visible "Read the docs" anchor
-// keeps its own focus ring and remains the accessible name; the overlay only
-// widens the pointer target.
-.pgsql-components .td-landing-card {
-  position: relative;
-  cursor: pointer;
-
-  .td-landing-card-link::after {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    inset: 0;
-    border-radius: var(--td-radius-md);
-  }
-}
-
 .td-landing-landing {
   --td-grid: rgba(51, 103, 145, 0.075);
 }
@@ -511,10 +890,6 @@
   line-height: 1.2;
   letter-spacing: 0.04em;
   vertical-align: 0.12em;
-}
-
-.td-landing-component-board a .pgsql-link-fallback {
-  margin-inline-start: auto;
 }
 
 // Isolate inline commands and formulas so leading flags and punctuation
@@ -589,39 +964,3 @@
     }
   }
 }
-
-// Reuse the site's elephant in menus, the section switcher, and the home card.
-.pgsql-icon-postgresql {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  background-color: currentColor;
-  -webkit-mask: url('/img/slonik.svg') center / contain no-repeat;
-  mask: url('/img/slonik.svg') center / contain no-repeat;
-}
-
-// Fill the version guide's canvas and align columns across its three tables.
-.pgsql-versions-page .td-table-scroll > table {
-  width: 100%;
-  min-width: 100%;
-  max-width: none;
-  table-layout: fixed;
-
-  th:first-child {
-    width: 34%;
-  }
-}
-
-// Keep names readable when a narrow screen or the sidebar limits table space.
-@media screen and (max-width: 991.98px) {
-  .pgsql-versions-page .td-table-scroll > table {
-    width: 100%;
-    min-width: 38rem;
-    table-layout: auto;
-
-    th:first-child {
-      width: auto;
-    }
-  }
-}
-

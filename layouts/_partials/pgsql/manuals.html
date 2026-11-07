@@ -1,0 +1,55 @@
+{{- /* doc.pg.center manual index: one panel per component. The upper part
+     of a panel is a single link to the manual root (icon, name, upstream
+     version, area and one-sentence scope); below it, four shortcuts to the
+     pages readers open most. Every destination goes through
+     pgsql/link-target.html, so a missing translation would fall back to the
+     English page with an explicit marker instead of a dead link. The data is
+     `components.items`, shared with the hero orbit. */ -}}
+{{- $page := .page -}}
+{{- $data := .data -}}
+{{- $id := .id -}}
+<section id="{{ $id }}" class="td-landing-section pgsql-manuals{{ with $data.class }} {{ . }}{{ end }}"{{ with $data.title }} aria-labelledby="{{ $id }}-title"{{ end }}>
+  {{- with $data.legacy_id }}<span id="{{ . }}" aria-hidden="true"></span>{{ end }}
+  <div class="td-site-container">
+    {{- with $data.title }}
+    <header class="pgsql-section-head">
+      <h2 id="{{ $id }}-title">{{ partial "landing/markdown.html" (dict "page" $page "value" .) }}</h2>
+      {{- with ($data.desc | default $data.text) }}<p>{{ partial "landing/markdown.html" (dict "page" $page "value" .) }}</p>{{ end }}
+    </header>
+    {{- end }}
+    {{- /* The kernel grid flows column by column (see _styles_project.scss),
+           so the row count for four and for two columns is computed here. */ -}}
+    {{- $n := len $data.items -}}
+    <ul class="pgsql-manuals__grid" role="list" style="--pgsql-rows-4: {{ div (add $n 3) 4 }}; --pgsql-rows-2: {{ div (add $n 1) 2 }}">
+      {{- range $item := $data.items }}
+      {{- $target := partial "pgsql/link-target.html" (dict "page" $page "url" ($item.url | default "")) }}
+      <li class="pgsql-manual">
+        <a class="pgsql-manual__main" href="{{ $target.href | safeURL }}"{{ if $target.fallback }} hreflang="{{ $target.language }}" data-fallback-language="{{ $target.language }}"{{ end }}>
+          <span class="pgsql-manual__head">
+            {{- /* The same brand mark as the hero orbit; a collection without
+                   one keeps its Font Awesome icon. */ -}}
+            {{- $logo := partial "pgsql/logo.html" (dict "item" $item) -}}
+            {{- with $logo.src }}
+            <span class="pgsql-manual__icon pgsql-manual__icon--logo" aria-hidden="true"><img src="{{ . | relURL }}" alt="" width="40" height="40" loading="lazy" decoding="async"{{ with $logo.dark }} data-dark="{{ . }}"{{ end }}></span>
+            {{- else }}
+            {{- with $item.icon }}<span class="pgsql-manual__icon" aria-hidden="true"><i class="{{ . }}"></i></span>{{ end }}
+            {{- end }}
+            <span class="pgsql-manual__name">{{ $item.title }}</span>
+            {{- with $item.version }}<span class="pgsql-manual__version">{{ . }}</span>{{ end }}
+          </span>
+          {{- with $item.meta }}<span class="pgsql-manual__meta">{{ . }}</span>{{ end }}
+          {{- with $item.desc }}<span class="pgsql-manual__desc">{{ partial "landing/markdown.html" (dict "page" $page "value" .) }}</span>{{ end }}
+        </a>
+        {{- with $item.shortcuts }}
+        <ul class="pgsql-manual__links" role="list" aria-label="{{ $item.shortcuts_label | default $item.title }}">
+          {{- range . }}
+          {{- $link := partial "pgsql/link-target.html" (dict "page" $page "url" (.url | default "")) }}
+          <li><a href="{{ $link.href | safeURL }}"{{ if $link.fallback }} class="pgsql-link--fallback" hreflang="{{ $link.language }}" data-fallback-language="{{ $link.language }}"{{ end }}>{{ with .icon }}<i class="{{ . }}" aria-hidden="true"></i>{{ end }}<span>{{ .title }}</span>{{ if $link.fallback }}<small class="pgsql-link-fallback" aria-label="English fallback">EN</small>{{ end }}</a></li>
+          {{- end }}
+        </ul>
+        {{- end }}
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</section>

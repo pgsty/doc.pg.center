@@ -1,212 +1,109 @@
+# doc.pg.center home (fr): hero with the eight reading languages, the six
+# manuals with their most-used pages, and two facts about the site. Partials
+# live in layouts/_partials/pgsql/. Keep the eight language files in step.
 sections:
-  - key: hero
-    partial: pgsql/hero-orbit.html
-  - type: cards
-    key: components
-  - key: capabilities
-    partial: pgsql/capabilities.html
-  - faq
+  - { key: hero, partial: pgsql/hero-orbit.html }
+  - { key: components, partial: pgsql/manuals.html }
+  - { key: about, partial: pgsql/about.html }
 
 hero:
   class: pgsql-hero pgsql-hero--fit-title
-  eyebrow: "PG.CENTER / Documentation des composants"
   title_lines:
     - words:
-        - { mark: P, color: blue, text: ostgreSQL }
+        - { mark: "P", color: "blue", text: "ostgreSQL" }
     - words:
         - { text: "Documentation des composants" }
   lead: "Guides et références pour les outils qui accompagnent PostgreSQL en production."
   note: "Six composants, huit langues. Un site de [pg.center](https://pg.center/)."
   note_icon: fa-solid fa-book-open
-  links_label: Documentation des composants
+  languages_label: "Lire en"
   orbit:
     center_image: img/slonik.svg
 
 components:
-  class: pgsql-components
-  eyebrow: "Documentation"
-  title: "Trouvez le bon manuel"
-  text: "Chaque collection est disponible en anglais, chinois simplifié, français, japonais, allemand, russe, arabe et espagnol."
-  columns: 3
-  link_label: Lire la documentation
+  title: "Composants communautaires"
   items:
-    - title: Patroni
-      meta: Haute disponibilité
+    - title: "Patroni"
+      meta: "Haute disponibilité"
+      version: v4.1.5
       icon: fa-solid fa-heart-pulse
-      desc: Exploitez des clusters PostgreSQL avec consensus distribué et basculement automatique.
+      desc: "Exploitez des clusters PostgreSQL avec consensus distribué et basculement automatique."
       url: /patroni/
-    - title: pgBackRest
-      meta: Sauvegarde et restauration
+      shortcuts_label: "Raccourcis vers la documentation Patroni"
+      shortcuts:
+        - { title: "Installation", url: /patroni/installation/, icon: fa-solid fa-download }
+        - { title: "Configuration", url: /patroni/config/, icon: fa-solid fa-sliders }
+        - { title: "patronictl", url: /patroni/patronictl/, icon: fa-solid fa-terminal }
+        - { title: "API REST", url: /patroni/rest_api/, icon: fa-solid fa-plug }
+    - title: "pgBackRest"
+      meta: "Sauvegarde et restauration"
+      version: v2.60.0
       icon: fa-solid fa-couch
-      desc: Concevez des processus fiables de sauvegarde, restauration, archivage et récupération à un instant donné.
+      desc: "Sauvegarde, restauration et archivage fiables, avec récupération à un instant donné."
       url: /pgbackrest/
-    - title: PgBouncer
-      meta: Pooling de connexions
+      shortcuts_label: "Raccourcis vers la documentation pgBackRest"
+      shortcuts:
+        - { title: "Guide utilisateur", url: /pgbackrest/user-guide/, icon: fa-solid fa-route }
+        - { title: "Configuration", url: /pgbackrest/configuration/, icon: fa-solid fa-sliders }
+        - { title: "Commandes", url: /pgbackrest/command/, icon: fa-solid fa-terminal }
+        - { title: "FAQ", url: /pgbackrest/faq/, icon: fa-solid fa-circle-question }
+    - title: "PgBouncer"
+      meta: "Pooling de connexions"
+      version: v1.26.1
       icon: fa-solid fa-arrows-turn-to-dots
-      desc: Réduisez le coût des connexions avec le pooling par session, transaction ou instruction.
+      desc: "Réduisez le coût des connexions avec le pooling par session, transaction ou instruction."
       url: /pgbouncer/
-    - title: pgBadger
-      meta: Analyse des journaux
+      shortcuts_label: "Raccourcis vers la documentation PgBouncer"
+      shortcuts:
+        - { title: "Installation", url: /pgbouncer/install/, icon: fa-solid fa-wrench }
+        - { title: "Utilisation", url: /pgbouncer/usage/, icon: fa-solid fa-terminal }
+        - { title: "Configuration", url: /pgbouncer/config/, icon: fa-solid fa-sliders }
+        - { title: "FAQ", url: /pgbouncer/faq/, icon: fa-solid fa-circle-question }
+    - title: "pgBadger"
+      meta: "Analyse des journaux"
+      version: v13.2-dev
       icon: fa-solid fa-otter
-      desc: Transformez les journaux PostgreSQL et PgBouncer en rapports sur les requêtes, la charge et les erreurs.
+      desc: "Rapports sur les requêtes, la charge et les erreurs tirés des journaux PostgreSQL et PgBouncer."
       url: /pgbadger/
-    - title: HAProxy
-      meta: Répartition de charge
+      shortcuts_label: "Raccourcis vers la documentation pgBadger"
+      shortcuts:
+        - { title: "Journalisation PostgreSQL", url: /pgbadger/postgresql-logging/, icon: fa-solid fa-file-lines }
+        - { title: "Ligne de commande", url: /pgbadger/command-line/, icon: fa-solid fa-terminal }
+        - { title: "Rapports incrémentaux", url: /pgbadger/incremental-reports/, icon: fa-solid fa-calendar-days }
+        - { title: "Exemples de rapports", url: /pgbadger/sample-reports/, icon: fa-solid fa-chart-column }
+    - title: "HAProxy"
+      meta: "Répartition de charge"
+      version: v3.4
       icon: fa-solid fa-network-wired
-      desc: Consultez l'intégralité des guides de démarrage, de configuration et d'administration de HAProxy 3.4.
+      desc: "Les guides complets de HAProxy 3.4 : démarrage, configuration et administration."
       url: /haproxy/
-    - title: etcd
-      meta: Consensus et coordination
+      shortcuts_label: "Raccourcis vers la documentation HAProxy"
+      shortcuts:
+        - { title: "Guide de démarrage", url: /haproxy/load-balancing/, icon: fa-solid fa-compass }
+        - { title: "Manuel de configuration", url: /haproxy/http-fundamentals/, icon: fa-solid fa-file-code }
+        - { title: "Guide d'administration", url: /haproxy/prerequisites/, icon: fa-solid fa-screwdriver-wrench }
+        - { title: "ACL et échantillons", url: /haproxy/acls-and-samples/, icon: fa-solid fa-filter }
+    - title: "etcd"
+      meta: "Consensus et coordination"
+      version: v3.7.3
       icon: fa-solid fa-gear
-      desc: Exploitez un magasin clé-valeur fortement cohérent, ses API, son modèle Raft et ses mécanismes internes.
+      desc: "Exploitez un magasin clé-valeur cohérent : API, modèle Raft et fonctionnement interne."
       url: /etcd/
+      shortcuts_label: "Raccourcis vers la documentation etcd"
+      shortcuts:
+        - { title: "Démarrage rapide", url: /etcd/quickstart/, icon: fa-solid fa-bolt }
+        - { title: "Installation", url: /etcd/install/, icon: fa-solid fa-download }
+        - { title: "Configuration", url: /etcd/op-guide/configuration/, icon: fa-solid fa-sliders }
+        - { title: "API", url: /etcd/learning/api/, icon: fa-solid fa-code }
 
-capabilities:
-  eyebrow: Guides des composants
-  title: Le rôle de chaque composant et le meilleur point de départ
-  text: Lisez la courte présentation, puis utilisez l'index associé pour accéder directement au manuel.
+about:
+  title: "À propos de ce site"
   items:
-    - ref: 01 / HAUTE DISPONIBILITÉ
-      title: Patroni
-      url: /patroni/
-      motto: Un modèle de haute disponibilité pour PostgreSQL
-      bullets:
-        - Gère l'élection du leader et l'état du cluster au moyen d'un DCS.
-        - Automatise le basculement tout en contrôlant les changements planifiés.
-        - Couvre les serveurs physiques, les VM, Kubernetes et les environnements multirégionaux.
-      value: Commencez par l'installation et la configuration, puis abordez les interfaces d'exploitation.
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: Raccourcis vers la documentation Patroni
-        items:
-          - { icon: fa-solid fa-download, title: Installation, url: /patroni/installation/ }
-          - { icon: fa-solid fa-sliders, title: Configuration, url: /patroni/config/ }
-          - { icon: fa-solid fa-terminal, title: patronictl, url: /patroni/patronictl/ }
-          - { icon: fa-solid fa-plug, title: API REST, url: /patroni/rest_api/ }
-          - { icon: fa-solid fa-arrows-rotate, title: Modes de réplication, url: /patroni/replication_modes/ }
-          - { icon: fa-solid fa-circle-question, title: FAQ, url: /patroni/faq/ }
-    - ref: 02 / SAUVEGARDE ET RESTAURATION
-      title: pgBackRest
-      url: /pgbackrest/
-      motto: Sauvegarde, archivage, restauration et récupération fiables à un instant donné
-      bullets:
-        - Sauvegardes complètes, différentielles, incrémentales et par blocs.
-        - Gestion des dépôts, de la conservation et de l'archivage WAL.
-        - Procédures de déploiement guidées et référence de chaque commande.
-      value: Commencez par le guide de votre système, puis gardez la configuration et les commandes à portée de main.
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: Raccourcis vers la documentation pgBackRest
-        items:
-          - { icon: fa-solid fa-route, title: Guide utilisateur, url: /pgbackrest/user-guide/ }
-          - { icon: fa-brands fa-redhat, title: Guide RHEL, url: /pgbackrest/user-guide-rhel/ }
-          - { icon: fa-solid fa-sliders, title: Configuration, url: /pgbackrest/configuration/ }
-          - { icon: fa-solid fa-terminal, title: Commandes, url: /pgbackrest/command/ }
-          - { icon: fa-solid fa-tags, title: Versions, url: /pgbackrest/release/ }
-          - { icon: fa-solid fa-circle-question, title: FAQ, url: /pgbackrest/faq/ }
-    - ref: 03 / POOLING DE CONNEXIONS
-      title: PgBouncer
-      url: /pgbouncer/
-      motto: Un pooler de connexions léger pour PostgreSQL
-      bullets:
-        - Réutilise les connexions afin de réduire le coût de démarrage des backends.
-        - Propose le pooling par session, transaction et instruction.
-        - Couvre l'authentification, le routage, les limites et la console.
-      value: Découvrez d'abord le modèle de pooling, puis installez-le et adaptez-le à votre charge.
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: Raccourcis vers la documentation PgBouncer
-        items:
-          - { icon: fa-solid fa-list-check, title: Fonctionnalités, url: /pgbouncer/features/ }
-          - { icon: fa-solid fa-download, title: Téléchargement, url: /pgbouncer/download/ }
-          - { icon: fa-solid fa-wrench, title: Installation, url: /pgbouncer/install/ }
-          - { icon: fa-solid fa-terminal, title: Utilisation, url: /pgbouncer/usage/ }
-          - { icon: fa-solid fa-sliders, title: Configuration, url: /pgbouncer/config/ }
-          - { icon: fa-solid fa-circle-question, title: FAQ, url: /pgbouncer/faq/ }
-    - ref: 04 / ANALYSE DES JOURNAUX
-      title: pgBadger
-      url: /pgbadger/
-      motto: Analyse rapide des journaux PostgreSQL et PgBouncer
-      bullets:
-        - Analyse les journaux PostgreSQL et PgBouncer dans de nombreux formats.
-        - Signale les requêtes lentes, erreurs, verrous et activités de vacuum.
-        - Produit des sorties HTML, JSON, texte et CSV autonomes.
-      value: Configurez d'abord la journalisation, puis choisissez le mode ponctuel, parallèle ou incrémental.
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: Raccourcis vers la documentation pgBadger
-        items:
-          - { icon: fa-solid fa-download, title: Téléchargement, url: /pgbadger/download/ }
-          - { icon: fa-solid fa-terminal, title: Ligne de commande, url: /pgbadger/command-line/ }
-          - { icon: fa-solid fa-file-lines, title: Journalisation PostgreSQL, url: /pgbadger/postgresql-logging/ }
-          - { icon: fa-solid fa-calendar-days, title: Rapports incrémentaux, url: /pgbadger/incremental-reports/ }
-          - { icon: fa-solid fa-file-export, title: Formats de sortie, url: /pgbadger/output-formats/ }
-          - { icon: fa-solid fa-chart-column, title: Exemples de rapports, url: /pgbadger/sample-reports/ }
-          - { icon: fa-solid fa-tags, title: Versions, url: /pgbadger/releases/ }
-          - { icon: fa-solid fa-life-ring, title: Assistance, url: /pgbadger/support/ }
-    - ref: 05 / RÉPARTITION DE CHARGE
-      title: HAProxy
-      url: /haproxy/
-      motto: Gestion rapide et fiable du trafic TCP et HTTP
-      bullets:
-        - Le guide de démarrage 3.4 complet en neuf thèmes ciblés.
-        - Le manuel de configuration dans ses 12 chapitres d'origine.
-        - Le guide d'administration en 13 chapitres opérationnels.
-      value: Comprenez l'architecture, retrouvez chaque mot-clé et exploitez HAProxy.
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: Raccourcis vers la documentation HAProxy
-        items:
-          - { icon: fa-solid fa-compass, title: Guide de démarrage, url: /haproxy/load-balancing/ }
-          - { icon: fa-solid fa-file-code, title: Manuel de configuration, url: /haproxy/http-fundamentals/ }
-          - { icon: fa-solid fa-right-left, title: Directives de proxy, url: /haproxy/proxies/ }
-          - { icon: fa-solid fa-filter, title: ACL et échantillons, url: /haproxy/acls-and-samples/ }
-          - { icon: fa-solid fa-screwdriver-wrench, title: Guide d'administration, url: /haproxy/prerequisites/ }
-          - { icon: fa-solid fa-chart-line, title: CLI d'exécution et statistiques, url: /haproxy/statistics-and-monitoring/ }
-          - { icon: fa-solid fa-bug, title: Dépannage, url: /haproxy/debugging-and-performance/ }
-          - { icon: fa-solid fa-shield-halved, title: Sécurité, url: /haproxy/security/ }
-    - ref: 06 / CONSENSUS ET COORDINATION
-      title: etcd
-      url: /etcd/
-      motto: Un magasin clé-valeur distribué fortement cohérent
-      bullets:
-        - Une API clé-valeur durable fondée sur l'algorithme Raft.
-        - Couvre la configuration, la sécurité, la maintenance et l'optimisation.
-        - Documente les API clientes, les mises à niveau et la conception interne.
-      value: Commencez par le démarrage rapide, puis consultez le guide d'exploitation et la référence de l'API v3.
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: Raccourcis vers la documentation etcd
-        items:
-          - { icon: fa-solid fa-bolt, title: Démarrage rapide, url: /etcd/quickstart/ }
-          - { icon: fa-solid fa-download, title: Installation, url: /etcd/install/ }
-          - { icon: fa-solid fa-sliders, title: Configuration, url: /etcd/op-guide/configuration/ }
-          - { icon: fa-solid fa-screwdriver-wrench, title: Maintenance, url: /etcd/op-guide/maintenance/ }
-          - { icon: fa-solid fa-code, title: API, url: /etcd/learning/api/ }
-          - { icon: fa-solid fa-arrow-up-right-dots, title: Mise à niveau vers 3.7, url: /etcd/upgrades/upgrade_3_7/ }
-
-faq:
-  eyebrow: FAQ
-  title: Quelques réponses utiles
-  items:
-    - question: Par où commencer ?
-      answer: Choisissez le composant qui correspond à votre tâche. Chaque carte ouvre une collection documentaire indépendante, et la section détaillée ci-dessus renvoie directement vers ses pages les plus consultées.
-      open: true
-    - question: PG.CENTER est-il un site PostgreSQL officiel ?
-      answer: "Non. Ce site rassemble la documentation des composants de [PG.CENTER](https://pg.center/), maintenue par PGSTY. Cette édition communautaire indépendante renvoie aux projets d’origine et conserve leurs mentions d’attribution et leurs licences."
-    - question: "Quelles langues sont disponibles ?"
-      answer: "Les six collections sont disponibles en anglais, chinois simplifié, français, japonais, allemand, russe, arabe et espagnol. Le sélecteur de langue permet de consulter la même page dans une autre langue."
-    - question: Comment les sources amont sont-elles créditées ?
-      answer: Chaque page se termine par une ligne indiquant l'œuvre adaptée, son titulaire de droits, sa licence et un lien vers l'historique des modifications de cette page. La [page d'attribution](/fr/attribution/) rassemble les révisions épinglées, licences et mentions conservées pour les six collections.
+    - title: "Une édition communautaire indépendante"
+      text: "PG.CENTER est maintenu par PGSTY et n’est pas un site officiel de PostgreSQL. Chaque collection renvoie à son projet d’origine et conserve ses mentions d’attribution et sa licence."
+      icon: fa-solid fa-people-group
+      url: https://pg.center/
+    - title: "Sources et licences"
+      text: "Chaque page se termine par une ligne indiquant l’œuvre adaptée, son titulaire de droits et sa licence. La page d’attribution rassemble les révisions amont épinglées et les mentions conservées."
+      icon: fa-solid fa-scale-balanced
+      url: /attribution/

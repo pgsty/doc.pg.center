@@ -1,212 +1,359 @@
+# doc.pg.center home (en): hero with the eight reading languages, six tool
+# manuals with their most-used pages, PostgreSQL and eleven kernel collections, and
+# two facts about the site. Partials live in layouts/_partials/pgsql/. Keep the
+# eight language files in step.
 sections:
-  - key: hero
-    partial: pgsql/hero-orbit.html
-  - type: cards
-    key: components
-  - key: capabilities
-    partial: pgsql/capabilities.html
-  - faq
+  - { key: hero, partial: pgsql/hero-orbit.html }
+  - { key: kernels, partial: pgsql/manuals.html }
+  - { key: components, partial: pgsql/manuals.html }
+  - { key: about, partial: pgsql/about.html }
 
 hero:
   class: pgsql-hero pgsql-hero--fit-title
-  eyebrow: "PG.CENTER / Component documentation"
   title_lines:
     - words:
-        - { mark: P, color: blue, text: ostgreSQL }
+        - { mark: "P", color: "blue", text: "ostgreSQL" }
     - words:
         - { text: "Component documentation" }
-  lead: "Guides and references for the tools that keep PostgreSQL running."
-  note: "Six components, eight languages. Part of [pg.center](https://pg.center/)."
+  lead: "Guides and references for PostgreSQL tools and database variants."
+  note: "Six tools in eight languages; eleven database collections in English and Chinese. Part of [pg.center](https://pg.center/)."
   note_icon: fa-solid fa-book-open
-  links_label: Component documentation
+  languages_label: "Read in"
   orbit:
     center_image: img/slonik.svg
 
 components:
-  class: pgsql-components
-  eyebrow: "Documentation"
-  title: "Find the right manual"
-  text: "Every collection is available in English, Simplified Chinese, French, Japanese, German, Russian, Arabic, and Spanish."
-  columns: 3
-  link_label: Read the docs
+  title: "Community Components"
   items:
-    - title: Patroni
-      meta: High availability
+    - title: "Patroni"
+      meta: "High availability"
+      version: v4.1.5
       icon: fa-solid fa-heart-pulse
-      desc: Run PostgreSQL clusters with distributed consensus and automatic failover.
+      desc: "Run PostgreSQL clusters with distributed consensus and automatic failover."
       url: /patroni/
-    - title: pgBackRest
-      meta: Backup & recovery
+      shortcuts_label: "Patroni documentation shortcuts"
+      shortcuts:
+        - { title: "Installation", url: /patroni/installation/, icon: fa-solid fa-download }
+        - { title: "Configuration", url: /patroni/config/, icon: fa-solid fa-sliders }
+        - { title: "patronictl", url: /patroni/patronictl/, icon: fa-solid fa-terminal }
+        - { title: "REST API", url: /patroni/rest_api/, icon: fa-solid fa-plug }
+    - title: "pgBackRest"
+      meta: "Backup & recovery"
+      version: v2.60.0
       icon: fa-solid fa-couch
-      desc: Design reliable backup, restore, archive, and point-in-time recovery workflows.
+      desc: "Design reliable backup, restore, archive, and point-in-time recovery workflows."
       url: /pgbackrest/
-    - title: PgBouncer
-      meta: Connection pooling
+      shortcuts_label: "pgBackRest documentation shortcuts"
+      shortcuts:
+        - { title: "User guide", url: /pgbackrest/user-guide/, icon: fa-solid fa-route }
+        - { title: "Configuration", url: /pgbackrest/configuration/, icon: fa-solid fa-sliders }
+        - { title: "Commands", url: /pgbackrest/command/, icon: fa-solid fa-terminal }
+        - { title: "FAQ", url: /pgbackrest/faq/, icon: fa-solid fa-circle-question }
+    - title: "PgBouncer"
+      meta: "Connection pooling"
+      version: v1.26.1
       icon: fa-solid fa-arrows-turn-to-dots
-      desc: Cut connection overhead with session, transaction, and statement pooling.
+      desc: "Cut connection overhead with session, transaction, and statement pooling."
       url: /pgbouncer/
-    - title: pgBadger
-      meta: Log analysis
+      shortcuts_label: "PgBouncer documentation shortcuts"
+      shortcuts:
+        - { title: "Installation", url: /pgbouncer/install/, icon: fa-solid fa-wrench }
+        - { title: "Usage", url: /pgbouncer/usage/, icon: fa-solid fa-terminal }
+        - { title: "Configuration", url: /pgbouncer/config/, icon: fa-solid fa-sliders }
+        - { title: "FAQ", url: /pgbouncer/faq/, icon: fa-solid fa-circle-question }
+    - title: "pgBadger"
+      meta: "Log analysis"
+      version: v13.2-dev
       icon: fa-solid fa-otter
-      desc: Turn PostgreSQL and PgBouncer logs into query, workload, and error reports.
+      desc: "Turn PostgreSQL and PgBouncer logs into query, workload, and error reports."
       url: /pgbadger/
-    - title: HAProxy
-      meta: Load balancing
+      shortcuts_label: "pgBadger documentation shortcuts"
+      shortcuts:
+        - { title: "PostgreSQL logging", url: /pgbadger/postgresql-logging/, icon: fa-solid fa-file-lines }
+        - { title: "Command line", url: /pgbadger/command-line/, icon: fa-solid fa-terminal }
+        - { title: "Incremental reports", url: /pgbadger/incremental-reports/, icon: fa-solid fa-calendar-days }
+        - { title: "Sample reports", url: /pgbadger/sample-reports/, icon: fa-solid fa-chart-column }
+    - title: "HAProxy"
+      meta: "Load balancing"
+      version: v3.4
       icon: fa-solid fa-network-wired
-      desc: Read the complete HAProxy 3.4 Starter, Configuration, and Management manuals.
+      desc: "Read the complete HAProxy 3.4 Starter, Configuration, and Management manuals."
       url: /haproxy/
-    - title: etcd
-      meta: Consensus & coordination
+      shortcuts_label: "HAProxy documentation shortcuts"
+      shortcuts:
+        - { title: "Starter Guide", url: /haproxy/load-balancing/, icon: fa-solid fa-compass }
+        - { title: "Configuration Manual", url: /haproxy/http-fundamentals/, icon: fa-solid fa-file-code }
+        - { title: "Management Guide", url: /haproxy/prerequisites/, icon: fa-solid fa-screwdriver-wrench }
+        - { title: "ACLs & samples", url: /haproxy/acls-and-samples/, icon: fa-solid fa-filter }
+    - title: "etcd"
+      meta: "Consensus & coordination"
+      version: v3.7.3
       icon: fa-solid fa-gear
-      desc: Operate a strongly consistent key-value store, its APIs, Raft model, and internals.
+      desc: "Operate a strongly consistent key-value store, its APIs, Raft model, and internals."
       url: /etcd/
+      shortcuts_label: "etcd documentation shortcuts"
+      shortcuts:
+        - { title: "Quickstart", url: /etcd/quickstart/, icon: fa-solid fa-bolt }
+        - { title: "Install", url: /etcd/install/, icon: fa-solid fa-download }
+        - { title: "Configuration", url: /etcd/op-guide/configuration/, icon: fa-solid fa-sliders }
+        - { title: "API", url: /etcd/learning/api/, icon: fa-solid fa-code }
 
-capabilities:
-  eyebrow: Component guides
-  title: What each component does — and where to start
-  text: Read the short orientation, then use the linked index beside it to jump directly into the manual.
+kernels:
+  class: pgsql-manuals--kernels
+  legacy_id: databases
+  title: PostgreSQL Kernels
+  desc: PostgreSQL manuals and eleven kernel collections, with English and Chinese editions.
   items:
-    - ref: 01 / HIGH AVAILABILITY
-      title: Patroni
-      url: /patroni/
-      motto: A template for PostgreSQL high availability
-      bullets:
-        - Runs leader election and cluster state through a DCS.
-        - Automates failover, with controls for planned changes.
-        - Covers bare metal, VMs, Kubernetes, and multi-datacenter.
-      value: Start with installation and configuration, then the operational surfaces.
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: Patroni documentation shortcuts
-        items:
-          - { icon: fa-solid fa-download, title: Installation, url: /patroni/installation/ }
-          - { icon: fa-solid fa-sliders, title: Configuration, url: /patroni/config/ }
-          - { icon: fa-solid fa-terminal, title: patronictl, url: /patroni/patronictl/ }
-          - { icon: fa-solid fa-plug, title: REST API, url: /patroni/rest_api/ }
-          - { icon: fa-solid fa-arrows-rotate, title: Replication modes, url: /patroni/replication_modes/ }
-          - { icon: fa-solid fa-circle-question, title: FAQ, url: /patroni/faq/ }
-    - ref: 02 / BACKUP & RECOVERY
-      title: pgBackRest
-      url: /pgbackrest/
-      motto: Reliable backup, archive, restore, and point-in-time recovery
-      bullets:
-        - Full, differential, incremental, and block-level backups.
-        - Manages repositories, retention, and WAL archiving.
-        - Documents guided deployments and every command.
-      value: Start with your OS guide, then keep configuration and commands close.
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: pgBackRest documentation shortcuts
-        items:
-          - { icon: fa-solid fa-route, title: User guide, url: /pgbackrest/user-guide/ }
-          - { icon: fa-brands fa-redhat, title: RHEL guide, url: /pgbackrest/user-guide-rhel/ }
-          - { icon: fa-solid fa-sliders, title: Configuration, url: /pgbackrest/configuration/ }
-          - { icon: fa-solid fa-terminal, title: Commands, url: /pgbackrest/command/ }
-          - { icon: fa-solid fa-tags, title: Releases, url: /pgbackrest/release/ }
-          - { icon: fa-solid fa-circle-question, title: FAQ, url: /pgbackrest/faq/ }
-    - ref: 03 / CONNECTION POOLING
-      title: PgBouncer
-      url: /pgbouncer/
-      motto: A lightweight connection pooler for PostgreSQL
-      bullets:
-        - Reuses connections to cut backend startup cost.
-        - Offers session, transaction, and statement pooling.
-        - Covers authentication, routing, limits, and the console.
-      value: Read the pooling model first, then install and tune for your workload.
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: PgBouncer documentation shortcuts
-        items:
-          - { icon: fa-solid fa-list-check, title: Features, url: /pgbouncer/features/ }
-          - { icon: fa-solid fa-download, title: Download, url: /pgbouncer/download/ }
-          - { icon: fa-solid fa-wrench, title: Installation, url: /pgbouncer/install/ }
-          - { icon: fa-solid fa-terminal, title: Usage, url: /pgbouncer/usage/ }
-          - { icon: fa-solid fa-sliders, title: Configuration, url: /pgbouncer/config/ }
-          - { icon: fa-solid fa-circle-question, title: FAQ, url: /pgbouncer/faq/ }
-    - ref: 04 / LOG ANALYSIS
-      title: pgBadger
-      url: /pgbadger/
-      motto: Fast PostgreSQL and PgBouncer log analysis
-      bullets:
-        - Parses PostgreSQL and PgBouncer logs in many formats.
-        - Reports slow queries, errors, locks, and vacuum activity.
-        - Generates self-contained HTML, JSON, text, and CSV output.
-      value: Configure logging first, then pick one-shot, parallel, or incremental.
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: pgBadger documentation shortcuts
-        items:
-          - { icon: fa-solid fa-download, title: Download, url: /pgbadger/download/ }
-          - { icon: fa-solid fa-terminal, title: Command line, url: /pgbadger/command-line/ }
-          - { icon: fa-solid fa-file-lines, title: PostgreSQL logging, url: /pgbadger/postgresql-logging/ }
-          - { icon: fa-solid fa-calendar-days, title: Incremental reports, url: /pgbadger/incremental-reports/ }
-          - { icon: fa-solid fa-file-export, title: Output formats, url: /pgbadger/output-formats/ }
-          - { icon: fa-solid fa-chart-column, title: Sample reports, url: /pgbadger/sample-reports/ }
-          - { icon: fa-solid fa-tags, title: Releases, url: /pgbadger/releases/ }
-          - { icon: fa-solid fa-life-ring, title: Support, url: /pgbadger/support/ }
-    - ref: 05 / LOAD BALANCING
-      title: HAProxy
-      url: /haproxy/
-      motto: Fast, reliable TCP and HTTP traffic management
-      bullets:
-        - The complete 3.4 Starter Guide as nine focused topics.
-        - The Configuration Manual in its 12 native chapters.
-        - The Management Guide in 13 operational chapters.
-      value: Learn the architecture, look up every keyword, and operate HAProxy.
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: HAProxy documentation shortcuts
-        items:
-          - { icon: fa-solid fa-compass, title: Starter Guide, url: /haproxy/load-balancing/ }
-          - { icon: fa-solid fa-file-code, title: Configuration Manual, url: /haproxy/http-fundamentals/ }
-          - { icon: fa-solid fa-right-left, title: Proxy directives, url: /haproxy/proxies/ }
-          - { icon: fa-solid fa-filter, title: ACLs & samples, url: /haproxy/acls-and-samples/ }
-          - { icon: fa-solid fa-screwdriver-wrench, title: Management Guide, url: /haproxy/prerequisites/ }
-          - { icon: fa-solid fa-chart-line, title: Runtime CLI & stats, url: /haproxy/statistics-and-monitoring/ }
-          - { icon: fa-solid fa-bug, title: Debugging, url: /haproxy/debugging-and-performance/ }
-          - { icon: fa-solid fa-shield-halved, title: Security, url: /haproxy/security/ }
-    - ref: 06 / CONSENSUS & COORDINATION
-      title: etcd
-      url: /etcd/
-      motto: A strongly consistent distributed key-value store
-      bullets:
-        - A durable key-value API built on the Raft algorithm.
-        - Covers configuration, security, maintenance, and tuning.
-        - Documents client APIs, upgrades, and internal design.
-      value: Start with the quickstart, then the ops guide and v3 API reference.
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: etcd documentation shortcuts
-        items:
-          - { icon: fa-solid fa-bolt, title: Quickstart, url: /etcd/quickstart/ }
-          - { icon: fa-solid fa-download, title: Install, url: /etcd/install/ }
-          - { icon: fa-solid fa-sliders, title: Configuration, url: /etcd/op-guide/configuration/ }
-          - { icon: fa-solid fa-screwdriver-wrench, title: Maintenance, url: /etcd/op-guide/maintenance/ }
-          - { icon: fa-solid fa-code, title: API, url: /etcd/learning/api/ }
-          - { icon: fa-solid fa-arrow-up-right-dots, title: Upgrade to 3.7, url: /etcd/upgrades/upgrade_3_7/ }
+  - title: PostgreSQL
+    meta: The PostgreSQL core
+    version: '18.6'
+    icon: pgsql-icon-postgresql
+    desc: Read the supported releases, preview PostgreSQL 19, or browse the historical manuals.
+    url: /postgresql/
+    shortcuts_label: PostgreSQL documentation shortcuts
+    shortcuts:
+    - title: Current manual · 18.6
+      url: https://pg.center/docs/18/index.html
+      icon: fa-solid fa-book-open
+    - title: Supported versions
+      url: /postgresql/#supported
+      icon: fa-solid fa-layer-group
+    - title: PostgreSQL 19 preview
+      url: /postgresql/#development
+      icon: fa-solid fa-flask
+    - title: Historical versions
+      url: /postgresql/#historical
+      icon: fa-solid fa-clock-rotate-left
+  - title: Citus
+    meta: Distributed PostgreSQL
+    version: '14'
+    icon: fa-solid fa-table-cells-large
+    desc: Scale PostgreSQL with sharding, parallel queries, colocation, and distributed tables.
+    url: /citus/
+    shortcuts_label: Citus documentation shortcuts
+    shortcuts:
+    - title: Get started
+      url: /citus/installation/getting-started/
+      icon: fa-solid fa-rocket
+    - title: Data modeling
+      url: /citus/modeling/data-modeling/
+      icon: fa-solid fa-table-cells-large
+    - title: SQL and APIs
+      url: /citus/reference/
+      icon: fa-solid fa-code
+    - title: Articles
+      url: /citus/articles/
+      icon: fa-solid fa-newspaper
 
-faq:
-  eyebrow: FAQ
-  title: A few useful answers
+  - title: DocumentDB
+    meta: Document database
+    version: '1.0'
+    icon: fa-solid fa-file-code
+    desc: Store BSON documents, query and index them, and connect through a MongoDB gateway.
+    url: /documentdb/
+    shortcuts_label: DocumentDB documentation shortcuts
+    shortcuts:
+    - title: Quick start
+      url: /documentdb/getting-started/
+      icon: fa-solid fa-book-open
+    - title: Reference
+      url: /documentdb/reference/
+      icon: fa-solid fa-book-open
+    - title: Functions
+      url: /documentdb/postgres-api/functions/
+      icon: fa-solid fa-book-open
+    - title: Configuration
+      url: /documentdb/postgres-api/configuration/
+      icon: fa-solid fa-book-open
+  - title: IvorySQL
+    meta: Oracle compatibility
+    version: '5.6'
+    icon: fa-solid fa-chess-rook
+    desc: Use Oracle-compatible SQL, PL/SQL, migration tools, and PostgreSQL features.
+    url: /ivorysql/
+    shortcuts_label: IvorySQL documentation shortcuts
+    shortcuts:
+    - title: Get started
+      url: /ivorysql/getting-started/
+      icon: fa-solid fa-book-open
+    - title: Installation
+      url: /ivorysql/deploy/
+      icon: fa-solid fa-book-open
+    - title: Oracle SQL
+      url: /ivorysql/oracle-compatibility/
+      icon: fa-solid fa-book-open
+    - title: Reference
+      url: /ivorysql/reference/
+      icon: fa-solid fa-book-open
+  - title: Babelfish
+    meta: SQL Server compatibility
+    version: f468c5e
+    icon: fa-solid fa-fish
+    desc: Run T-SQL over the TDS protocol, with migration and compatibility guidance.
+    url: /babelfish/
+    shortcuts_label: Babelfish documentation shortcuts
+    shortcuts:
+    - title: Installation
+      url: /babelfish/installation/
+      icon: fa-solid fa-book-open
+    - title: Usage
+      url: /babelfish/usage/
+      icon: fa-solid fa-book-open
+    - title: Compatibility
+      url: /babelfish/usage/
+      icon: fa-solid fa-book-open
+    - title: FAQ
+      url: /babelfish/faq/
+      icon: fa-solid fa-book-open
+  - title: PolarDB
+    meta: Shared storage
+    version: b4733b0
+    icon: fa-solid fa-cloud
+    desc: Explore shared storage, elastic queries, deployment, and PolarDB internals.
+    url: /polardb/
+    shortcuts_label: PolarDB documentation shortcuts
+    shortcuts:
+    - title: Docker
+      url: /polardb/quick-start/
+      icon: fa-solid fa-book-open
+    - title: Architecture
+      url: /polardb/theory/arch-overview/
+      icon: fa-solid fa-book-open
+    - title: LogIndex
+      url: /polardb/theory/logindex/
+      icon: fa-solid fa-book-open
+    - title: Buffers
+      url: /polardb/theory/buffer-management/
+      icon: fa-solid fa-book-open
+  - title: OrioleDB
+    meta: Pluggable storage engine
+    version: '2026-11-06'
+    icon: fa-solid fa-dove
+    desc: Install and configure OrioleDB, explore storage internals, and reproduce benchmarks.
+    url: /orioledb/
+    shortcuts_label: OrioleDB documentation shortcuts
+    shortcuts:
+    - title: Get started
+      url: /orioledb/usage/getting-started/
+      icon: fa-solid fa-rocket
+    - title: Configuration
+      url: /orioledb/usage/configuration/
+      icon: fa-solid fa-sliders
+    - title: Architecture
+      url: /orioledb/architecture/overview/
+      icon: fa-solid fa-diagram-project
+    - title: Benchmarks
+      url: /orioledb/benchmarks/
+      icon: fa-solid fa-chart-line
+
+  - title: AgensGraph
+    meta: Property graph database
+    version: 2.18.6.1
+    icon: fa-solid fa-diagram-project
+    desc: Combine SQL and graph queries, then index, search, and manage property graphs.
+    url: /agensgraph/
+    shortcuts_label: AgensGraph documentation shortcuts
+    shortcuts:
+    - title: Get started
+      url: /agensgraph/get-started/
+      icon: fa-solid fa-book-open
+    - title: Queries
+      url: /agensgraph/querying/
+      icon: fa-solid fa-book-open
+    - title: SQL reference
+      url: /agensgraph/reference/
+      icon: fa-solid fa-book-open
+    - title: Operations
+      url: /agensgraph/operations/
+      icon: fa-solid fa-book-open
+  - title: pgEdge
+    meta: Distributed PostgreSQL
+    version: main snapshots
+    icon: fa-solid fa-share-nodes
+    desc: Run Spock replication with LOLOR, Snowflake identifiers, and SafeSession.
+    url: /pgedge/
+    shortcuts_label: pgEdge documentation shortcuts
+    shortcuts:
+    - title: Spock
+      url: /pgedge/spock/
+      icon: fa-solid fa-book-open
+    - title: LOLOR
+      url: /pgedge/lolor/
+      icon: fa-solid fa-book-open
+    - title: SafeSession
+      url: /pgedge/safesession/
+      icon: fa-solid fa-book-open
+    - title: Snowflake
+      url: /pgedge/snowflake/
+      icon: fa-solid fa-book-open
+  - title: Percona pg_tde
+    meta: Transparent data encryption
+    version: 2.2.2
+    icon: fa-solid fa-shield-halved
+    desc: Encrypt PostgreSQL tables and WAL, manage keys, and plan backup and recovery.
+    url: /percona/
+    shortcuts_label: Percona pg_tde documentation shortcuts
+    shortcuts:
+    - title: Installation
+      url: /percona/install/
+      icon: fa-solid fa-book-open
+    - title: Keys
+      url: /percona/global-key-provider-configuration/
+      icon: fa-solid fa-book-open
+    - title: Operations
+      url: /percona/how-to/
+      icon: fa-solid fa-book-open
+    - title: Release notes
+      url: /percona/release-notes/
+      icon: fa-solid fa-book-open
+  - title: OpenHalo
+    meta: MySQL compatibility
+    version: OpenHalo 90fc8d7 · Halo 1.0.16
+    icon: fa-solid fa-circle-nodes
+    desc: Build PostgreSQL with MySQL SQL syntax and client protocol compatibility.
+    url: /openhalo/
+    shortcuts_label: OpenHalo documentation shortcuts
+    shortcuts:
+    - title: Overview
+      url: /openhalo/
+      icon: fa-solid fa-book-open
+    - title: Build
+      url: /openhalo/quick-start/#installation
+      icon: fa-solid fa-book-open
+    - title: MySQL configuration
+      url: /openhalo/mysql-configuration/
+      icon: fa-solid fa-book-open
+    - title: MySQL reference
+      url: /openhalo/mysql-compatibility/
+      icon: fa-solid fa-book-open
+  - title: Apache Cloudberry
+    meta: MPP analytics
+    version: 2.2.0-incubating
+    icon: fa-solid fa-cubes-stacked
+    desc: Deploy and operate Cloudberry, with SQL references, PXF, and core internals.
+    url: /cloudberry/
+    shortcuts_label: Apache Cloudberry documentation shortcuts
+    shortcuts:
+    - title: Architecture
+      url: /cloudberry/introduction/cbdb-architecture/
+      icon: fa-solid fa-book-open
+    - title: Deployment
+      url: /cloudberry/deployment/
+      icon: fa-solid fa-book-open
+    - title: PXF
+      url: /cloudberry/pxf/
+      icon: fa-solid fa-book-open
+    - title: Core internals
+      url: /cloudberry/core-internals/
+      icon: fa-solid fa-book-open
+about:
+  title: "About this site"
   items:
-    - question: Where should I start?
-      answer: Choose the component that matches your current task. Each card opens an independent documentation root, and the detailed section above links directly to its most-used pages.
-      open: true
-    - question: Is PG.CENTER an official PostgreSQL website?
-      answer: "No. This is the component documentation section of [PG.CENTER](https://pg.center/), maintained by PGSTY. This independent community edition links to the original projects and preserves their attribution and licences."
-    - question: "Which languages are available?"
-      answer: "All six collections are available in English, Simplified Chinese, French, Japanese, German, Russian, Arabic, and Spanish. Use the language selector to open the same page in another language."
-    - question: How is the upstream documentation credited?
-      answer: Every page ends with one line naming the work it is adapted from, its copyright holder, its licence, and a link to this site's change history for that page. The [attribution page](/attribution/) collects the pinned revisions, licences, and retained notices for all six collections.
+    - title: "An independent community edition"
+      text: "PG.CENTER is maintained by PGSTY and is not an official PostgreSQL website. Each collection links to its original project and keeps its attribution and licence."
+      icon: fa-solid fa-people-group
+      url: https://pg.center/
+    - title: "Sources and licences"
+      text: "Every page ends with a line naming the work it adapts, its copyright holder and its licence. The attribution page lists the pinned upstream revisions and retained notices."
+      icon: fa-solid fa-scale-balanced
+      url: /attribution/

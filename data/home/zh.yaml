@@ -1,212 +1,359 @@
+# doc.pg.center home (zh): hero with the eight reading languages, six tool
+# manuals with their most-used pages, PostgreSQL and eleven kernel collections, and
+# two facts about the site. Partials live in layouts/_partials/pgsql/. Keep the
+# eight language files in step.
 sections:
-  - key: hero
-    partial: pgsql/hero-orbit.html
-  - type: cards
-    key: components
-  - key: capabilities
-    partial: pgsql/capabilities.html
-  - faq
+  - { key: hero, partial: pgsql/hero-orbit.html }
+  - { key: kernels, partial: pgsql/manuals.html }
+  - { key: components, partial: pgsql/manuals.html }
+  - { key: about, partial: pgsql/about.html }
 
 hero:
   class: pgsql-hero pgsql-hero--fit-title pgsql-hero--fit-title-cjk
-  eyebrow: "PG.CENTER / 生态组件文档"
   title_lines:
     - words:
-        - { mark: P, color: blue, text: ostgreSQL }
+        - { mark: "P", color: "blue", text: "ostgreSQL" }
     - words:
         - { text: "生态组件文档" }
-  lead: "查阅 PostgreSQL 生产运维工具的使用指南与参考手册。"
-  note: "六个组件，八种语言。本站是 [pg.center](https://pg.center/zh/) 的文档子站。"
+  lead: "查阅 PostgreSQL 运维工具与数据库内核的使用指南和参考手册。"
+  note: "六个组件提供八种语言，十一套内核文档收录英中两版。本站是 [pg.center](https://pg.center/zh/) 的文档子站。"
   note_icon: fa-solid fa-book-open
-  links_label: 组件文档
+  languages_label: "阅读语言"
   orbit:
     center_image: img/slonik.svg
 
 components:
-  class: pgsql-components
-  eyebrow: "组件文档"
-  title: "选择你需要的文档"
-  text: "所有组件文档均提供英文、简体中文、法文、日文、德文、俄文、阿拉伯文和西班牙文版本。"
-  columns: 3
-  link_label: 阅读文档
+  title: "社区组件"
   items:
-    - title: Patroni
-      meta: 高可用
+    - title: "Patroni"
+      meta: "高可用"
+      version: v4.1.5
       icon: fa-solid fa-heart-pulse
-      desc: 使用分布式共识、健康检查与自动故障转移，构建并运行 PostgreSQL 高可用集群。
+      desc: "使用分布式共识、健康检查与自动故障转移，构建并运行 PostgreSQL 高可用集群。"
       url: /patroni/
-    - title: pgBackRest
-      meta: 备份与恢复
+      shortcuts_label: "Patroni 文档快捷入口"
+      shortcuts:
+        - { title: "安装", url: /patroni/installation/, icon: fa-solid fa-download }
+        - { title: "配置", url: /patroni/config/, icon: fa-solid fa-sliders }
+        - { title: "patronictl", url: /patroni/patronictl/, icon: fa-solid fa-terminal }
+        - { title: "REST API", url: /patroni/rest_api/, icon: fa-solid fa-plug }
+    - title: "pgBackRest"
+      meta: "备份与恢复"
+      version: v2.60.0
       icon: fa-solid fa-couch
-      desc: 设计可靠的备份、恢复、归档、保留策略与时间点恢复工作流。
+      desc: "设计可靠的备份、恢复、归档、保留策略与时间点恢复工作流。"
       url: /pgbackrest/
-    - title: PgBouncer
-      meta: 连接池
+      shortcuts_label: "pgBackRest 文档快捷入口"
+      shortcuts:
+        - { title: "用户指南", url: /pgbackrest/user-guide/, icon: fa-solid fa-route }
+        - { title: "配置参考", url: /pgbackrest/configuration/, icon: fa-solid fa-sliders }
+        - { title: "命令参考", url: /pgbackrest/command/, icon: fa-solid fa-terminal }
+        - { title: "常见问题", url: /pgbackrest/faq/, icon: fa-solid fa-circle-question }
+    - title: "PgBouncer"
+      meta: "连接池"
+      version: v1.26.1
       icon: fa-solid fa-arrows-turn-to-dots
-      desc: 降低连接开销，理解会话、事务与语句池化模式的行为边界。
+      desc: "降低连接开销，理解会话、事务与语句池化模式的行为边界。"
       url: /pgbouncer/
-    - title: pgBadger
-      meta: 日志分析
+      shortcuts_label: "PgBouncer 文档快捷入口"
+      shortcuts:
+        - { title: "安装", url: /pgbouncer/install/, icon: fa-solid fa-wrench }
+        - { title: "使用方法", url: /pgbouncer/usage/, icon: fa-solid fa-terminal }
+        - { title: "配置参考", url: /pgbouncer/config/, icon: fa-solid fa-sliders }
+        - { title: "常见问题", url: /pgbouncer/faq/, icon: fa-solid fa-circle-question }
+    - title: "pgBadger"
+      meta: "日志分析"
+      version: v13.2-dev
       icon: fa-solid fa-otter
-      desc: 把 PostgreSQL 与 PgBouncer 日志转化为查询、负载、错误与运行报告。
+      desc: "把 PostgreSQL 与 PgBouncer 日志转化为查询、负载、错误与运行报告。"
       url: /pgbadger/
-    - title: HAProxy
-      meta: 负载均衡
+      shortcuts_label: "pgBadger 文档快捷入口"
+      shortcuts:
+        - { title: "PostgreSQL 日志", url: /pgbadger/postgresql-logging/, icon: fa-solid fa-file-lines }
+        - { title: "命令行", url: /pgbadger/command-line/, icon: fa-solid fa-terminal }
+        - { title: "增量报告", url: /pgbadger/incremental-reports/, icon: fa-solid fa-calendar-days }
+        - { title: "示例报告", url: /pgbadger/sample-reports/, icon: fa-solid fa-chart-column }
+    - title: "HAProxy"
+      meta: "负载均衡"
+      version: v3.4
       icon: fa-solid fa-network-wired
-      desc: 阅读完整的 HAProxy 3.4 入门、配置与管理中文手册。
+      desc: "阅读完整的 HAProxy 3.4 入门、配置与管理中文手册。"
       url: /haproxy/
-    - title: etcd
-      meta: 共识与协调
+      shortcuts_label: "HAProxy 中文文档快捷入口"
+      shortcuts:
+        - { title: "入门指南", url: /haproxy/load-balancing/, icon: fa-solid fa-compass }
+        - { title: "配置手册", url: /haproxy/http-fundamentals/, icon: fa-solid fa-file-code }
+        - { title: "管理指南", url: /haproxy/prerequisites/, icon: fa-solid fa-screwdriver-wrench }
+        - { title: "ACL 与样本提取", url: /haproxy/acls-and-samples/, icon: fa-solid fa-filter }
+    - title: "etcd"
+      meta: "共识与协调"
+      version: v3.7.3
       icon: fa-solid fa-gear
-      desc: 运维强一致分布式键值存储，并理解其 API、Raft 模型、版本升级与内部原理。
+      desc: "运维强一致分布式键值存储，并理解其 API、Raft 模型、版本升级与内部原理。"
       url: /etcd/
+      shortcuts_label: "etcd 文档快捷入口"
+      shortcuts:
+        - { title: "快速上手", url: /etcd/quickstart/, icon: fa-solid fa-bolt }
+        - { title: "安装", url: /etcd/install/, icon: fa-solid fa-download }
+        - { title: "配置", url: /etcd/op-guide/configuration/, icon: fa-solid fa-sliders }
+        - { title: "API", url: /etcd/learning/api/, icon: fa-solid fa-code }
 
-capabilities:
-  eyebrow: 组件指南
-  title: 每个组件解决什么问题，以及从哪里开始
-  text: 先读简短说明，再用右侧索引直接进入对应手册的具体页面。
+kernels:
+  class: pgsql-manuals--kernels
+  legacy_id: databases
+  title: PostgreSQL 内核
+  desc: PostgreSQL 全版本手册与十一套内核文档，提供英中两版入口。
   items:
-    - ref: 01 / 高可用
-      title: Patroni
-      url: /patroni/
-      motto: PostgreSQL 高可用方案模板
-      bullets:
-        - 通过分布式配置存储协调领导者选举与集群状态。
-        - 自动执行故障转移，同时为计划内运维保留明确、可控的操作接口。
-        - 覆盖物理机、虚拟机、Kubernetes、Watchdog 与多数据中心模式。
-      value: 从安装与配置开始，再学习日常运维接口。
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: Patroni 文档快捷入口
-        items:
-          - { icon: fa-solid fa-download, title: 安装, url: /patroni/installation/ }
-          - { icon: fa-solid fa-sliders, title: 配置, url: /patroni/config/ }
-          - { icon: fa-solid fa-terminal, title: patronictl, url: /patroni/patronictl/ }
-          - { icon: fa-solid fa-plug, title: REST API, url: /patroni/rest_api/ }
-          - { icon: fa-solid fa-arrows-rotate, title: 复制模式, url: /patroni/replication_modes/ }
-          - { icon: fa-solid fa-circle-question, title: 常见问题, url: /patroni/faq/ }
-    - ref: 02 / 备份与恢复
-      title: pgBackRest
-      url: /pgbackrest/
-      motto: 可靠地完成备份、归档、恢复与时间点恢复
-      bullets:
-        - 支持全量、差异、增量与块级备份，并可并行处理。
-        - 管理仓库、保留策略、加密、对象存储与异步 WAL 归档。
-        - 同时提供按系统编写的操作指南与覆盖全部命令的参考手册。
-      value: 先选择适合操作系统的指南，再把配置与命令参考放在手边。
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: pgBackRest 文档快捷入口
-        items:
-          - { icon: fa-solid fa-route, title: 用户指南, url: /pgbackrest/user-guide/ }
-          - { icon: fa-brands fa-redhat, title: RHEL 指南, url: /pgbackrest/user-guide-rhel/ }
-          - { icon: fa-solid fa-sliders, title: 配置参考, url: /pgbackrest/configuration/ }
-          - { icon: fa-solid fa-terminal, title: 命令参考, url: /pgbackrest/command/ }
-          - { icon: fa-solid fa-tags, title: 版本记录, url: /pgbackrest/release/ }
-          - { icon: fa-solid fa-circle-question, title: 常见问题, url: /pgbackrest/faq/ }
-    - ref: 03 / 连接池
-      title: PgBouncer
-      url: /pgbouncer/
-      motto: 轻量级 PostgreSQL 连接池
-      bullets:
-        - 复用 PostgreSQL 连接，减少后端进程启动成本与连接压力。
-        - 提供会话、事务与语句池化模式，并明确说明各自的兼容边界。
-        - 用一套紧凑手册讲清认证、路由、连接限制、超时与管理控制台。
-      value: 先理解池化模型，再针对工作负载安装并调整配置。
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: PgBouncer 文档快捷入口
-        items:
-          - { icon: fa-solid fa-list-check, title: 功能特性, url: /pgbouncer/features/ }
-          - { icon: fa-solid fa-download, title: 下载, url: /pgbouncer/download/ }
-          - { icon: fa-solid fa-wrench, title: 安装, url: /pgbouncer/install/ }
-          - { icon: fa-solid fa-terminal, title: 使用方法, url: /pgbouncer/usage/ }
-          - { icon: fa-solid fa-sliders, title: 配置参考, url: /pgbouncer/config/ }
-          - { icon: fa-solid fa-circle-question, title: 常见问题, url: /pgbouncer/faq/ }
-    - ref: 04 / 日志分析
-      title: pgBadger
-      url: /pgbadger/
-      motto: 快速分析 PostgreSQL 与 PgBouncer 日志
-      bullets:
-        - 解析多种 PostgreSQL 日志格式、压缩文件、远程输入与 PgBouncer 日志。
-        - 汇总慢查询、高频查询、错误、会话、锁、检查点与 Vacuum 活动等信息。
-        - 生成自包含 HTML、增量报告，以及 JSON、文本、二进制与 CSV 输出。
-      value: 先把日志配置正确，再选择一次性、并行或增量报告方式。
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: pgBadger 文档快捷入口
-        items:
-          - { icon: fa-solid fa-download, title: 下载, url: /pgbadger/download/ }
-          - { icon: fa-solid fa-terminal, title: 命令行, url: /pgbadger/command-line/ }
-          - { icon: fa-solid fa-file-lines, title: PostgreSQL 日志, url: /pgbadger/postgresql-logging/ }
-          - { icon: fa-solid fa-calendar-days, title: 增量报告, url: /pgbadger/incremental-reports/ }
-          - { icon: fa-solid fa-file-export, title: 输出格式, url: /pgbadger/output-formats/ }
-          - { icon: fa-solid fa-chart-column, title: 示例报告, url: /pgbadger/sample-reports/ }
-          - { icon: fa-solid fa-tags, title: 版本记录, url: /pgbadger/releases/ }
-          - { icon: fa-solid fa-life-ring, title: 支持, url: /pgbadger/support/ }
-    - ref: 05 / 负载均衡
-      title: HAProxy
-      url: /haproxy/
-      motto: 快速、可靠的 TCP 与 HTTP 流量管理
-      bullets:
-        - 从负载均衡、健康检查与连接管理开始，理解 HAProxy 的工作方式。
-        - 按需查阅全局配置、代理配置项、ACL 与 HTTP 处理规则。
-        - 通过运行时 CLI、监控、调试与安全指南完成日常运维。
-      value: 在同一个组件根中学习架构、查阅全部配置项并完成 HAProxy 运维。
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: HAProxy 中文文档快捷入口
-        items:
-          - { icon: fa-solid fa-compass, title: 入门指南, url: /haproxy/load-balancing/ }
-          - { icon: fa-solid fa-file-code, title: 配置手册, url: /haproxy/http-fundamentals/ }
-          - { icon: fa-solid fa-right-left, title: 代理配置项, url: /haproxy/proxies/ }
-          - { icon: fa-solid fa-filter, title: ACL 与样本提取, url: /haproxy/acls-and-samples/ }
-          - { icon: fa-solid fa-screwdriver-wrench, title: 管理指南, url: /haproxy/prerequisites/ }
-          - { icon: fa-solid fa-chart-line, title: 运行时 CLI 与统计, url: /haproxy/statistics-and-monitoring/ }
-          - { icon: fa-solid fa-bug, title: 调试与性能, url: /haproxy/debugging-and-performance/ }
-          - { icon: fa-solid fa-shield-halved, title: 安全, url: /haproxy/security/ }
-    - ref: 06 / 共识与协调
-      title: etcd
-      url: /etcd/
-      motto: 强一致分布式键值存储
-      bullets:
-        - 基于 Raft 共识算法提供持久化键值 API，为分布式系统提供协调能力。
-        - 覆盖集群配置、安全、维护、监控、恢复与性能调优。
-        - 包含客户端 API、开发任务、版本升级与降级，以及内部设计说明。
-      value: 先读快速上手，再进入运维指南与 v3 API 参考。
-      visual:
-        type: components
-        compact: true
-        columns: 2
-        aria_label: etcd 文档快捷入口
-        items:
-          - { icon: fa-solid fa-bolt, title: 快速上手, url: /etcd/quickstart/ }
-          - { icon: fa-solid fa-download, title: 安装, url: /etcd/install/ }
-          - { icon: fa-solid fa-sliders, title: 配置, url: /etcd/op-guide/configuration/ }
-          - { icon: fa-solid fa-screwdriver-wrench, title: 维护, url: /etcd/op-guide/maintenance/ }
-          - { icon: fa-solid fa-code, title: API, url: /etcd/learning/api/ }
-          - { icon: fa-solid fa-arrow-up-right-dots, title: 升级到 3.7, url: /etcd/upgrades/upgrade_3_7/ }
+  - title: PostgreSQL
+    meta: PostgreSQL 原生内核
+    version: '18.6'
+    icon: pgsql-icon-postgresql
+    desc: 阅读活跃版本手册、预览 PostgreSQL 19，或查阅历代版本的完整文档。
+    url: /postgresql/
+    shortcuts_label: PostgreSQL 文档快捷入口
+    shortcuts:
+    - title: 当前稳定版 · 18.6
+      url: https://pgsql.cc/docs/18/index.html
+      icon: fa-solid fa-book-open
+    - title: 活跃版本
+      url: /postgresql/#supported
+      icon: fa-solid fa-layer-group
+    - title: PostgreSQL 19 预览
+      url: /postgresql/#development
+      icon: fa-solid fa-flask
+    - title: 历史版本
+      url: /postgresql/#historical
+      icon: fa-solid fa-clock-rotate-left
+  - title: Citus
+    meta: 分布式 PostgreSQL
+    version: '14'
+    icon: fa-solid fa-table-cells-large
+    desc: 通过分片、并行查询、共置与分布式表扩展 PostgreSQL。
+    url: /citus/
+    shortcuts_label: Citus 文档快捷入口
+    shortcuts:
+    - title: 快速入门
+      url: /citus/installation/getting-started/
+      icon: fa-solid fa-rocket
+    - title: 数据建模
+      url: /citus/modeling/data-modeling/
+      icon: fa-solid fa-table-cells-large
+    - title: SQL 与 API
+      url: /citus/reference/
+      icon: fa-solid fa-code
+    - title: 专题与博客
+      url: /citus/articles/
+      icon: fa-solid fa-newspaper
 
-faq:
-  eyebrow: 常见问题
-  title: 几个有用的答案
+  - title: DocumentDB
+    meta: 文档数据库
+    version: '1.0'
+    icon: fa-solid fa-file-code
+    desc: 使用 BSON 文档存储、读写与索引，并通过 MongoDB 协议网关连接。
+    url: /documentdb/
+    shortcuts_label: DocumentDB 文档入口
+    shortcuts:
+    - title: 快速入门
+      url: /documentdb/getting-started/
+      icon: fa-solid fa-book-open
+    - title: 命令参考
+      url: /documentdb/reference/
+      icon: fa-solid fa-book-open
+    - title: 函数
+      url: /documentdb/postgres-api/functions/
+      icon: fa-solid fa-book-open
+    - title: 配置
+      url: /documentdb/postgres-api/configuration/
+      icon: fa-solid fa-book-open
+  - title: IvorySQL
+    meta: Oracle 兼容
+    version: '5.6'
+    icon: fa-solid fa-chess-rook
+    desc: 使用兼容 Oracle 的 SQL、PL/SQL 与迁移工具，保留 PostgreSQL 能力。
+    url: /ivorysql/
+    shortcuts_label: IvorySQL 文档入口
+    shortcuts:
+    - title: 快速上手
+      url: /ivorysql/getting-started/
+      icon: fa-solid fa-book-open
+    - title: 安装部署
+      url: /ivorysql/deploy/
+      icon: fa-solid fa-book-open
+    - title: Oracle 兼容
+      url: /ivorysql/oracle-compatibility/
+      icon: fa-solid fa-book-open
+    - title: 参考手册
+      url: /ivorysql/reference/
+      icon: fa-solid fa-book-open
+  - title: Babelfish
+    meta: SQL Server 兼容
+    version: f468c5e
+    icon: fa-solid fa-fish
+    desc: 通过 TDS 协议执行 T-SQL，查阅安装流程、兼容范围与迁移方法。
+    url: /babelfish/
+    shortcuts_label: Babelfish 文档入口
+    shortcuts:
+    - title: 安装
+      url: /babelfish/installation/
+      icon: fa-solid fa-book-open
+    - title: 使用
+      url: /babelfish/usage/
+      icon: fa-solid fa-book-open
+    - title: 兼容性
+      url: /babelfish/usage/
+      icon: fa-solid fa-book-open
+    - title: 常见问题
+      url: /babelfish/faq/
+      icon: fa-solid fa-book-open
+  - title: PolarDB
+    meta: 共享存储
+    version: b4733b0
+    icon: fa-solid fa-cloud
+    desc: 查阅共享存储、弹性并行查询、部署运维与 PolarDB 内核原理。
+    url: /polardb/
+    shortcuts_label: PolarDB 文档入口
+    shortcuts:
+    - title: Docker
+      url: /polardb/quick-start/
+      icon: fa-solid fa-book-open
+    - title: 架构概览
+      url: /polardb/theory/arch-overview/
+      icon: fa-solid fa-book-open
+    - title: LogIndex
+      url: /polardb/theory/logindex/
+      icon: fa-solid fa-book-open
+    - title: 缓冲区管理
+      url: /polardb/theory/buffer-management/
+      icon: fa-solid fa-book-open
+  - title: OrioleDB
+    meta: 可插拔存储引擎
+    version: '2026-11-06'
+    icon: fa-solid fa-dove
+    desc: 安装与配置 OrioleDB，理解存储引擎原理，并复现基准测试。
+    url: /orioledb/
+    shortcuts_label: OrioleDB 文档快捷入口
+    shortcuts:
+    - title: 快速入门
+      url: /orioledb/usage/getting-started/
+      icon: fa-solid fa-rocket
+    - title: 配置参考
+      url: /orioledb/usage/configuration/
+      icon: fa-solid fa-sliders
+    - title: 架构原理
+      url: /orioledb/architecture/overview/
+      icon: fa-solid fa-diagram-project
+    - title: 基准测试
+      url: /orioledb/benchmarks/
+      icon: fa-solid fa-chart-line
+
+  - title: AgensGraph
+    meta: 属性图数据库
+    version: 2.18.6.1
+    icon: fa-solid fa-diagram-project
+    desc: 结合 SQL 与图查询，完成属性图的创建、索引、检索和日常管理。
+    url: /agensgraph/
+    shortcuts_label: AgensGraph 文档入口
+    shortcuts:
+    - title: 快速上手
+      url: /agensgraph/get-started/
+      icon: fa-solid fa-book-open
+    - title: 查询
+      url: /agensgraph/querying/
+      icon: fa-solid fa-book-open
+    - title: 语法参考
+      url: /agensgraph/reference/
+      icon: fa-solid fa-book-open
+    - title: 运维
+      url: /agensgraph/operations/
+      icon: fa-solid fa-book-open
+  - title: pgEdge
+    meta: 分布式 PostgreSQL
+    version: main 快照
+    icon: fa-solid fa-share-nodes
+    desc: 以 Spock 运行多主复制，配合大对象复制、全局 ID 与会话保护。
+    url: /pgedge/
+    shortcuts_label: pgEdge 文档入口
+    shortcuts:
+    - title: Spock
+      url: /pgedge/spock/
+      icon: fa-solid fa-book-open
+    - title: LOLOR
+      url: /pgedge/lolor/
+      icon: fa-solid fa-book-open
+    - title: SafeSession
+      url: /pgedge/safesession/
+      icon: fa-solid fa-book-open
+    - title: Snowflake
+      url: /pgedge/snowflake/
+      icon: fa-solid fa-book-open
+  - title: Percona pg_tde
+    meta: 透明数据加密
+    version: 2.2.2
+    icon: fa-solid fa-shield-halved
+    desc: 加密 PostgreSQL 数据表与 WAL，管理密钥并规划备份恢复流程。
+    url: /percona/
+    shortcuts_label: Percona pg_tde 文档入口
+    shortcuts:
+    - title: 安装
+      url: /percona/install/
+      icon: fa-solid fa-book-open
+    - title: 密钥管理
+      url: /percona/global-key-provider-configuration/
+      icon: fa-solid fa-book-open
+    - title: 运维
+      url: /percona/how-to/
+      icon: fa-solid fa-book-open
+    - title: 发布说明
+      url: /percona/release-notes/
+      icon: fa-solid fa-book-open
+  - title: OpenHalo
+    meta: MySQL 兼容
+    version: OpenHalo 90fc8d7 · Halo 1.0.16
+    icon: fa-solid fa-circle-nodes
+    desc: 编译和配置 OpenHalo，在 PostgreSQL 上运行 MySQL 协议与 SQL。
+    url: /openhalo/
+    shortcuts_label: OpenHalo 文档入口
+    shortcuts:
+    - title: 概览
+      url: /openhalo/
+      icon: fa-solid fa-book-open
+    - title: 编译安装
+      url: /openhalo/quick-start/#installation
+      icon: fa-solid fa-book-open
+    - title: MySQL 配置
+      url: /openhalo/mysql-configuration/
+      icon: fa-solid fa-book-open
+    - title: MySQL 参考
+      url: /openhalo/mysql-compatibility/
+      icon: fa-solid fa-book-open
+  - title: Apache Cloudberry
+    meta: MPP 分析数据库
+    version: 2.2.0-incubating
+    icon: fa-solid fa-cubes-stacked
+    desc: 部署和管理 Cloudberry，查阅 SQL 参考、PXF 与内核原理手册。
+    url: /cloudberry/
+    shortcuts_label: Apache Cloudberry 文档入口
+    shortcuts:
+    - title: 架构
+      url: /cloudberry/introduction/cbdb-architecture/
+      icon: fa-solid fa-book-open
+    - title: 部署
+      url: /cloudberry/deployment/
+      icon: fa-solid fa-book-open
+    - title: PXF
+      url: /cloudberry/pxf/
+      icon: fa-solid fa-book-open
+    - title: 内核原理
+      url: /cloudberry/core-internals/
+      icon: fa-solid fa-book-open
+about:
+  title: "关于本站"
   items:
-    - question: 应该从哪里开始？
-      answer: 选择与你当前任务对应的组件。每张卡片都会进入一套独立文档；上方的详细说明还提供了常用页面的直达入口。
-      open: true
-    - question: PG.CENTER 是 PostgreSQL 官方网站吗？
-      answer: "不是。这是 [PG.CENTER](https://pg.center/zh/) 的组件文档，由 PGSTY 维护。这是独立的社区整理与翻译版本，保留各上游项目的链接、署名与授权声明。"
-    - question: "提供哪些语言版本？"
-      answer: "六套文档均提供英文、简体中文、法文、日文、德文、俄文、阿拉伯文和西班牙文版本。使用页面上的语言选择器，可以打开同一页面的其他语言版本。"
-    - question: 上游文档的归属如何标注？
-      answer: 每个页面末尾都有一行署名，指明该页改编自哪份作品、版权归属、授权协议，以及本站中该页面的修改历史链接。[归属与授权页面](/zh/attribution/)汇总了六套文档集的固定版本、授权协议与完整声明。
+    - title: "独立的社区版本"
+      text: "PG.CENTER 由 PGSTY 维护，不是 PostgreSQL 官方网站。各文档集都链接到原项目，并保留其署名与授权声明。"
+      icon: fa-solid fa-people-group
+      url: https://pg.center/zh/
+    - title: "来源与授权"
+      text: "每页末尾注明改编自哪份作品、版权归属与授权协议；归属页汇总各文档集的上游固定版本与保留的完整声明。"
+      icon: fa-solid fa-scale-balanced
+      url: /attribution/

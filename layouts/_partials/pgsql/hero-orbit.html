@@ -4,12 +4,14 @@
      its own `partial`, so this is an additive project template rather than a
      fork of the theme's hero: it keeps every `td-landing-hero*` class so the
      theme's grid, glow, typography, and below-900px collapse still apply, and
-     only adds the two things the stock hero has no field for -- a row of
-     component links in place of CTA buttons, and the orbit beside them.
+     only adds the two things the stock hero has no field for -- a row of the
+     eight reading languages in place of CTA buttons, and the orbit beside it.
+     The manuals themselves follow directly below (pgsql/manuals.html).
 
-     The six components are read from the same `components.items` the cards
-     section uses, so the hero, the orbit, and the card grid cannot disagree
-     about a component's name, icon, or destination. */ -}}
+     The orbit reads the same `components.items` and `kernels.items` the manual
+     grid uses, so the two cannot disagree about a collection's name or
+     destination. Brand marks are resolved by pgsql/logo.html (data/logos.yaml
+     keyed by route, an item's own `logo` first, its `icon` as the fallback). */ -}}
 {{- $page := .page -}}
 {{- $home := .home -}}
 {{- $hero := .data -}}
@@ -22,11 +24,28 @@
   {{- warnf "%s: hero.orbit must be a map; ignoring it" $page.Path -}}
   {{- $orbit = dict -}}
 {{- end -}}
+{{- /* The kernel whose route is `orbit.center` (PostgreSQL) is the nucleus,
+       not a satellite; every other kernel orbits. */ -}}
+{{- $center := $orbit.center | default "postgresql" -}}
+{{- $kernels := slice -}}
+{{- range (index ($home.kernels | default dict) "items") | default slice -}}
+  {{- if ne (path.Base (.url | default .href | default "")) $center }}{{ $kernels = $kernels | append . }}{{ end -}}
+{{- end -}}
 {{- $orbitOn := and $components (ne (index $orbit "enabled") false) -}}
-{{- /* Only three satellites fit legibly on a ring, so the first three
-       components take the inner ring and the rest the outer one. */ -}}
-{{- $split := int ($orbit.split | default 3) -}}
-{{- if or (lt $split 1) (gt $split (len $components)) }}{{ $split = 3 }}{{ end -}}
+{{- /* Two shells, as in the Bohr atom: the operations tools orbit close to the
+       core and the kernel collections take the outer shell. A language that
+       publishes only the tools splits them across both shells instead. */ -}}
+{{- $shells := slice -}}
+{{- if $kernels -}}
+  {{- $shells = slice $components $kernels -}}
+{{- else -}}
+  {{- $split := int ($orbit.split | default 3) -}}
+  {{- if or (lt $split 1) (ge $split (len $components)) }}{{ $split = 3 }}{{ end -}}
+  {{- $shells = slice (first $split $components) (after $split $components) -}}
+{{- end -}}
+{{- /* Ring radii in the 400-unit SVG below; _styles_project.scss derives the
+       satellite radii from the same 0.27 / 0.42 ratios of the orbit size. */ -}}
+{{- $radii := slice 108 168 -}}
 <section id="{{ $id }}"
   class="td-landing-hero{{ if $orbitOn }} td-landing-hero--with-media{{ end }}{{ with $hero.class }} {{ . }}{{ end }}"
   aria-labelledby="{{ $id }}-title">
@@ -34,10 +53,7 @@
   <div class="td-site-container">
     <div class="td-landing-hero__copy">
       {{- with $hero.eyebrow }}
-      <p class="td-landing-hero__eyebrow">
-        <span class="td-landing-status-dot" aria-hidden="true"></span>
-        <span>{{ partial "landing/markdown.html" (dict "page" $page "value" .) }}</span>
-      </p>
+      <p class="td-landing-hero__eyebrow"><span>{{ partial "landing/markdown.html" (dict "page" $page "value" .) }}</span></p>
       {{- end }}
       <h1 class="td-landing-hero__title" id="{{ $id }}-title">
         {{- with $titleLines -}}
@@ -61,27 +77,23 @@
       {{- with $hero.note }}
       <p class="td-landing-hero__note"><i class="{{ $hero.note_icon | default "fa-solid fa-circle-check" }}" aria-hidden="true"></i><span>{{ partial "landing/markdown.html" (dict "page" $page "value" .) }}</span></p>
       {{- end }}
-      {{- with $components }}
-      <nav class="pgsql-hero__links" aria-label="{{ $hero.links_label | default "Documentation" }}">
-        {{- range . }}
-        {{- $url := .url | default .href -}}
-        {{- if $url }}
-        {{- $target := partial "pgsql/link-target.html" (dict "page" $page "url" $url) }}
-        <a class="pgsql-hero__link{{ if $target.fallback }} pgsql-link--fallback{{ end }}" href="{{ $target.href | safeURL }}"{{ if $target.fallback }} hreflang="{{ $target.language }}" data-fallback-language="{{ $target.language }}"{{ end }}{{ if or $target.external (.external | default false) }} target="_blank" rel="noopener noreferrer"{{ end }}>
-          {{- with .icon }}<i class="{{ . }}" aria-hidden="true"></i>{{ end }}
-          <span>{{ .title | default .name }}</span>
-          {{- if $target.fallback }}<small class="pgsql-link-fallback" aria-label="English fallback">EN</small>{{ end }}
-        </a>
-        {{- end }}
-        {{- end }}
+      {{- /* Every language edition is complete, so each link opens that
+             language's home; the current one carries aria-current. */}}
+      <nav class="pgsql-hero__langs" aria-label="{{ $hero.languages_label | default "Languages" }}">
+        {{- with $hero.languages_label }}<span class="pgsql-hero__langs-label" aria-hidden="true">{{ . }}</span>{{ end }}
+        <ul role="list">
+          {{- range hugo.Sites }}
+          {{- $current := eq .Language.Lang $page.Language.Lang }}
+          <li><a href="{{ .Home.RelPermalink }}" hreflang="{{ .Language.Lang }}" lang="{{ .Language.Lang }}"{{ with .Language.Direction }} dir="{{ . }}"{{ end }}{{ if $current }} aria-current="page"{{ end }}>{{ .Language.Label }}</a></li>
+          {{- end }}
+        </ul>
       </nav>
-      {{- end }}
     </div>
     {{- if $orbitOn }}
-    {{- /* Decorative twin of the link row above: the same six destinations,
+    {{- /* Decorative twin of the manual grid below: the same destinations,
            already reachable by keyboard there, so this copy is hidden from
            assistive technology and taken out of the tab order rather than
-           announcing every component twice. */ -}}
+           announcing every collection twice. */ -}}
     <div class="pgsql-orbit" aria-hidden="true">
       <svg class="pgsql-orbit__rings" viewBox="0 0 400 400" role="presentation" focusable="false">
         <defs>
@@ -90,33 +102,40 @@
             <stop offset="100%" stop-color="var(--pgsql-halo)" stop-opacity="0"/>
           </radialGradient>
         </defs>
-        <circle class="pgsql-orbit__ring" cx="200" cy="200" r="110"/>
-        <circle class="pgsql-orbit__ring pgsql-orbit__ring--outer" cx="200" cy="200" r="162"/>
-        <circle cx="200" cy="200" r="94" fill="url(#{{ $id }}-halo)"/>
+        <circle cx="200" cy="200" r="96" fill="url(#{{ $id }}-halo)"/>
+        {{- range $s, $shell := $shells }}{{ if $shell }}
+        <circle class="pgsql-orbit__ring pgsql-orbit__ring--{{ add $s 1 }}" cx="200" cy="200" r="{{ index $radii $s }}"/>
+        {{- end }}{{ end }}
       </svg>
-      {{- /* Slonik is the body the six satellites orbit. It is a separate
+      {{- /* Slonik is the nucleus the satellites orbit. It is a separate
              element rather than an <image> inside the SVG above so it can carry
              its own drop shadow and dark-mode treatment. */ -}}
       <img class="pgsql-orbit__planet" src="{{ ($orbit.center_image | default "img/slonik.svg") | relURL }}"
            alt="" width="150" height="155" loading="eager">
       <div class="pgsql-orbit__field">
-        {{- range $i, $item := $components }}
+        {{- range $s, $shell := $shells }}
+        {{- $count := len $shell -}}
+        {{- range $i, $item := $shell }}
         {{- $url := $item.url | default $item.href -}}
-        {{- $inner := lt $i $split -}}
-        {{- $count := cond $inner $split (sub (len $components) $split) -}}
-        {{- $index := cond $inner $i (sub $i $split) -}}
-        {{- /* Evenly spaced on the ring; the outer ring is offset by half a
-               step so the two rings never line their satellites up. */ -}}
-        {{- $angle := div (mul 360.0 $index) $count -}}
-        {{- if not $inner }}{{ $angle = add $angle (div 180.0 $count) }}{{ end -}}
-        <div class="pgsql-orbit__sat pgsql-orbit__sat--{{ cond $inner "inner" "outer" }}" style="--a: {{ printf "%.2f" $angle }}deg">
+        {{- /* Evenly spaced on the shell; the outer shell is offset by half a
+               step so the two never line their satellites up. */ -}}
+        {{- $angle := div (mul 360.0 $i) $count -}}
+        {{- if eq $s 1 }}{{ $angle = add $angle (div 180.0 $count) }}{{ end -}}
+        {{- $logo := partial "pgsql/logo.html" (dict "item" $item) -}}
+        <div class="pgsql-orbit__sat pgsql-orbit__sat--{{ add $s 1 }}" style="--a: {{ printf "%.2f" $angle }}deg">
           <div class="pgsql-orbit__spin">
             <div class="pgsql-orbit__arm">
               <div class="pgsql-orbit__counter">
                 {{- if $url }}
                 {{- $target := partial "pgsql/link-target.html" (dict "page" $page "url" $url) }}
                 <a class="pgsql-orbit__link" href="{{ $target.href | safeURL }}" tabindex="-1"{{ if $target.fallback }} hreflang="{{ $target.language }}" data-fallback-language="{{ $target.language }}"{{ end }}{{ if or $target.external ($item.external | default false) }} target="_blank" rel="noopener noreferrer"{{ end }}>
-                  <span class="pgsql-orbit__chip">{{ with $item.icon }}<i class="{{ . }}"></i>{{ end }}</span>
+                  <span class="pgsql-orbit__chip">
+                    {{- with $logo.src -}}
+                    <img class="pgsql-orbit__logo" src="{{ . | relURL }}" alt="" width="32" height="32" loading="lazy" decoding="async">
+                    {{- else -}}
+                    {{ with $item.icon }}<i class="{{ . }}"></i>{{ end }}
+                    {{- end -}}
+                  </span>
                   <span class="pgsql-orbit__label">{{ $item.title | default $item.name }}</span>
                 </a>
                 {{- end }}
@@ -124,6 +143,7 @@
             </div>
           </div>
         </div>
+        {{- end }}
         {{- end }}
       </div>
     </div>

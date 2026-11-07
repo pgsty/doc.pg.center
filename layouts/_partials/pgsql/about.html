@@ -1,0 +1,25 @@
+{{- /* Two facts a reader should know before relying on these manuals, as
+     whole-card links: who maintains the site, and where the upstream
+     sources and licences are recorded. */ -}}
+{{- $page := .page -}}
+{{- $data := .data -}}
+{{- $id := .id -}}
+<section id="{{ $id }}" class="td-landing-section pgsql-about"{{ with $data.title }} aria-labelledby="{{ $id }}-title"{{ end }}>
+  <div class="td-site-container">
+    {{- with $data.title }}
+    <header class="pgsql-section-head"><h2 id="{{ $id }}-title">{{ . }}</h2></header>
+    {{- end }}
+    <ul class="pgsql-about__grid" role="list">
+      {{- range $data.items }}
+      {{- $target := partial "pgsql/link-target.html" (dict "page" $page "url" (.url | default "")) }}
+      <li>
+        <a class="pgsql-about__card" href="{{ $target.href | safeURL }}"{{ if $target.external }} target="_blank" rel="noopener noreferrer"{{ end }}>
+          {{- with .icon }}<i class="{{ . }}" aria-hidden="true"></i>{{ end }}
+          <span class="pgsql-about__title">{{ .title }}</span>
+          <span class="pgsql-about__text">{{ .text }}</span>
+        </a>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</section>
