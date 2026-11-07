@@ -1,0 +1,759 @@
+{
+  "retrieved": "2026-11-06T23:37:00+08:00",
+  "source_base": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/index.html",
+  "pages": [
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/appendix/cypher-compatibility.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/appendix/cypher-compatibility.md.txt",
+      "relative": "appendix/cypher-compatibility.md",
+      "bytes": 18596,
+      "sha256": "dae7e676fdf04d34d65a38ab3ffada3dd9a758636efd08f2fef81a19e4d65093"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/appendix/error-codes.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/appendix/error-codes.md.txt",
+      "relative": "appendix/error-codes.md",
+      "bytes": 3686,
+      "sha256": "8b77433f208c7c41f1ee722866d61509adb362fec211bdf5fe425e7398ac80e3"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/appendix/glossary.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/appendix/glossary.md.txt",
+      "relative": "appendix/glossary.md",
+      "bytes": 5659,
+      "sha256": "4385c5fe368bb099b6ddc01a9ab5a666d7ad60c603b055b809634d31ad76b7cd"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/appendix/gql-conformance.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/appendix/gql-conformance.md.txt",
+      "relative": "appendix/gql-conformance.md",
+      "bytes": 23070,
+      "sha256": "074c6322276067b84c74ee178a159af4b1181ffddf04cc77c40a0c506e03c178"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/appendix/keywords.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/appendix/keywords.md.txt",
+      "relative": "appendix/keywords.md",
+      "bytes": 7128,
+      "sha256": "b8f0a561dcf99a41762747a50968c2285902172cf757572d48cf3ff6107eaeee"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/appendix/limits.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/appendix/limits.md.txt",
+      "relative": "appendix/limits.md",
+      "bytes": 6100,
+      "sha256": "a24416678243aa1935218c0df06a4347517665707ca18c97c160b90f27bd70be"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/concepts/graph-on-postgresql.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/concepts/graph-on-postgresql.md.txt",
+      "relative": "concepts/graph-on-postgresql.md",
+      "bytes": 9221,
+      "sha256": "dc5b772e7709b25e03bd07c91e786de5dde1b0942a8d3cce142299b769e49114"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/concepts/label-inheritance.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/concepts/label-inheritance.md.txt",
+      "relative": "concepts/label-inheritance.md",
+      "bytes": 4186,
+      "sha256": "55fa68f6bb0e4b49761ab4af0c8ba80fa630f40664ba9af919843aff8d581346"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/concepts/languages.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/concepts/languages.md.txt",
+      "relative": "concepts/languages.md",
+      "bytes": 5594,
+      "sha256": "02b2176caad1b1b9426d10c80116bcab87223eeb399654390a5e441f3ad3b058"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/concepts/property-graph-model.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/concepts/property-graph-model.md.txt",
+      "relative": "concepts/property-graph-model.md",
+      "bytes": 5941,
+      "sha256": "c50cbfc2398cf68ef52d2ef18d97ce5e6ba88bc6b4ad0177b037f5a5b447b0af"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/drivers/ai-integrations.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/drivers/ai-integrations.md.txt",
+      "relative": "drivers/ai-integrations.md",
+      "bytes": 2795,
+      "sha256": "911793e93a71ad0fa72b903e3d536e6e7312401f301a1577007b0b89cea7b261"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/get_started/example-dataset.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/get_started/example-dataset.md.txt",
+      "relative": "get_started/example-dataset.md",
+      "bytes": 18001,
+      "sha256": "6050c31cc024ac369cb71678b41c7d894e6768e7f43ac70d11a0f11466418b46"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/get_started/first-query.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/get_started/first-query.md.txt",
+      "relative": "get_started/first-query.md",
+      "bytes": 8657,
+      "sha256": "1cc39e63d7905e7691dce59aa26cd51d724b065e88889c7bfde5c2d985dbd6d8"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/get_started/install.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/get_started/install.md.txt",
+      "relative": "get_started/install.md",
+      "bytes": 5413,
+      "sha256": "957eb4108817d7be2efcb6296e4812d4c57bf4a614def8d13c912bdd2ab6b531"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/get_started/what-is-agensgraph.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/get_started/what-is-agensgraph.md.txt",
+      "relative": "get_started/what-is-agensgraph.md",
+      "bytes": 3988,
+      "sha256": "8ca534b3058f2acd8948eedb8b0495c0ba47c0e0afb09e2fbd7a3edc4aa2b89a"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/guides/loading-data.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/guides/loading-data.md.txt",
+      "relative": "guides/loading-data.md",
+      "bytes": 10119,
+      "sha256": "174e2369b2761dbf0a5cba4bf5d8d47cf726e7890ffd707c89b8ae65c694194d"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/guides/search/full-text.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/guides/search/full-text.md.txt",
+      "relative": "guides/search/full-text.md",
+      "bytes": 10086,
+      "sha256": "d9ceb1da5b5e209ce07db69938e9f2673ab26e0c0a4039c429a8820927ddd255"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/guides/search/hybrid.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/guides/search/hybrid.md.txt",
+      "relative": "guides/search/hybrid.md",
+      "bytes": 10982,
+      "sha256": "945e03c1930c206be4a537be52b971fa1626e938ca4d1311487c71f28a3f0428"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/guides/search/vector.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/guides/search/vector.md.txt",
+      "relative": "guides/search/vector.md",
+      "bytes": 10676,
+      "sha256": "842f8186b1eba399f9a1e94f1231fa16f588239fab96905642d0a9520abdc1d0"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/operations/backup.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/operations/backup.md.txt",
+      "relative": "operations/backup.md",
+      "bytes": 5618,
+      "sha256": "ebc9c9871dd9d8c9abd05f8eced591c086b1339414e01c3ecf5485c4b0e47d7b"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/operations/configuration.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/operations/configuration.md.txt",
+      "relative": "operations/configuration.md",
+      "bytes": 8290,
+      "sha256": "02426b06692a8929c84d1ebc8f4936d7a7f11bedaf647fa9189601f9c6e63411"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/operations/deployment.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/operations/deployment.md.txt",
+      "relative": "operations/deployment.md",
+      "bytes": 7197,
+      "sha256": "0385885da759308b89d1e36e905598973377e696b67854fff39d9fd9fe7e05c8"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/operations/security.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/operations/security.md.txt",
+      "relative": "operations/security.md",
+      "bytes": 8618,
+      "sha256": "5e261c77cf75f2617e88a2bc3e7c9eaa5ec1cc61a66b610f0d3eb02f7b4e79b2"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/operations/tools.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/operations/tools.md.txt",
+      "relative": "operations/tools.md",
+      "bytes": 4611,
+      "sha256": "44dc069120151775e141d70b58f416f8923bdabfb8727531ef9f4872bbccf21f"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/querying/combining-sql-and-cypher.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/querying/combining-sql-and-cypher.md.txt",
+      "relative": "querying/combining-sql-and-cypher.md",
+      "bytes": 15124,
+      "sha256": "50bf343014a84b88f29cbb9e7a0810bb86ac650cc7331d0985055aafbe8c51c1"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/querying/composing.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/querying/composing.md.txt",
+      "relative": "querying/composing.md",
+      "bytes": 14065,
+      "sha256": "6253b35b3d3ad6117026d4c9fea4d26147294fa30a5c3dd56ddce15053e7540e"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/querying/indexes-and-constraints.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/querying/indexes-and-constraints.md.txt",
+      "relative": "querying/indexes-and-constraints.md",
+      "bytes": 24207,
+      "sha256": "79001dcbc3472a4c074cf632402f06642cfc0451e1f1a3142cbfdfb98c8a4134"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/querying/paths.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/querying/paths.md.txt",
+      "relative": "querying/paths.md",
+      "bytes": 14602,
+      "sha256": "091a1f8d882a0976df887892823065e94788a3e45efeb2bf1eff267914a1774b"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/querying/performance.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/querying/performance.md.txt",
+      "relative": "querying/performance.md",
+      "bytes": 24407,
+      "sha256": "6ac0aff3e845ca451873074d0e5906c4a67e3fb2430f544f1fb05738dd39b41b"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/querying/reading.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/querying/reading.md.txt",
+      "relative": "querying/reading.md",
+      "bytes": 17056,
+      "sha256": "8662e69fcf11a3455afca0223d22665cf928e1bef6a1bf45e205b7880d9394ba"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/querying/typed-columns.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/querying/typed-columns.md.txt",
+      "relative": "querying/typed-columns.md",
+      "bytes": 22937,
+      "sha256": "4ef180d65d3744a8790861bde19fd0aba5c3130208f1eb7bbcd68458ff9a3654"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/querying/writing.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/querying/writing.md.txt",
+      "relative": "querying/writing.md",
+      "bytes": 12434,
+      "sha256": "38b07312823696b34b9e1f2ed981223deb1b296bda91b0dc4c708f70414efe00"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/agens.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/agens.md.txt",
+      "relative": "reference/agens.md",
+      "bytes": 13159,
+      "sha256": "e8a83fbaf87377fa717393b30bab846d1b46eeb88beb76652de763a7be549130"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/call-subquery.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/call-subquery.md.txt",
+      "relative": "reference/clauses/call-subquery.md",
+      "bytes": 10908,
+      "sha256": "0c5d91cba14833ebb712f8d550b7b5f5c3b6cddb8de57d94c673e391692c38de"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/call-yield.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/call-yield.md.txt",
+      "relative": "reference/clauses/call-yield.md",
+      "bytes": 10124,
+      "sha256": "be8fadedc1dc71ce191b5a385f4b385ac21208b576d365a7b765fc4fe08eaaf6"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/call.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/call.md.txt",
+      "relative": "reference/clauses/call.md",
+      "bytes": 8146,
+      "sha256": "580eedb966796486a0e3773b4f42d089a8ba51053e5c1df774b92112aac37fed"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/create.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/create.md.txt",
+      "relative": "reference/clauses/create.md",
+      "bytes": 6623,
+      "sha256": "0e027edd918a045658e53e010365a1c5bf7408f8a5fa49c2fbc47691584865d8"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/delete.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/delete.md.txt",
+      "relative": "reference/clauses/delete.md",
+      "bytes": 6165,
+      "sha256": "87e929b274baf9419f68466701c3de82af5b8534fdb21f3b14ffb3bf0e7dd293"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/filter.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/filter.md.txt",
+      "relative": "reference/clauses/filter.md",
+      "bytes": 5767,
+      "sha256": "3bd0a050cd6a8d020100d1d2af307ac54ccc4528eb261a27a8c316064869087c"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/finish.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/finish.md.txt",
+      "relative": "reference/clauses/finish.md",
+      "bytes": 5228,
+      "sha256": "f551d7483a99a612cb4cf6602d857524c19065b3c225c9bd971a9b76a4cd7ea7"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/for.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/for.md.txt",
+      "relative": "reference/clauses/for.md",
+      "bytes": 6915,
+      "sha256": "021db495a763842c25320f61f8a603b8ebd41111df6e57328912cc00b2b76789"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/insert.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/insert.md.txt",
+      "relative": "reference/clauses/insert.md",
+      "bytes": 7006,
+      "sha256": "96aa23392c6c93dddc9bcd1487c9c68c1cd4afa012084f79c809d4422707f2da"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/let.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/let.md.txt",
+      "relative": "reference/clauses/let.md",
+      "bytes": 4107,
+      "sha256": "e450cee13c31d3944dac29c2c83d667b34ec9ae74ff790bb6739ff94ee303bea"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/load-from.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/load-from.md.txt",
+      "relative": "reference/clauses/load-from.md",
+      "bytes": 5556,
+      "sha256": "8fe438584ad4558db8f0137befe0e1c489b1b3c57f789bc231e9b14883ff9fa5"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/match.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/match.md.txt",
+      "relative": "reference/clauses/match.md",
+      "bytes": 14973,
+      "sha256": "bb12de676bf09507e43caa9cdb0e586aa291dbf2b2a216f6b785f376085df7ee"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/merge.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/merge.md.txt",
+      "relative": "reference/clauses/merge.md",
+      "bytes": 8399,
+      "sha256": "6a35c2d4c7fc6c98db0b07ad3ca8187cb19ad812c4bd3fc5315dc925cbad1289"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/next.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/next.md.txt",
+      "relative": "reference/clauses/next.md",
+      "bytes": 6485,
+      "sha256": "fc0d3d46215a8979644fec45921988cc067b37dd7d51e7c58539adc5a6acb62f"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/optional-call.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/optional-call.md.txt",
+      "relative": "reference/clauses/optional-call.md",
+      "bytes": 8058,
+      "sha256": "1a645d3abf0c51674b1ae2992bd094584355b03b441beb8c8f8fe842fc903a7a"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/optional-match.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/optional-match.md.txt",
+      "relative": "reference/clauses/optional-match.md",
+      "bytes": 5334,
+      "sha256": "545002497c42080669da23baea6bdeadee9d7c9f85f54456668c65ba6aa5c489"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/order-by.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/order-by.md.txt",
+      "relative": "reference/clauses/order-by.md",
+      "bytes": 7451,
+      "sha256": "80b8f93aadce778cc7f5c567767c9eb7ec6bc7ed281c9421ce8306d7d774465d"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/remove.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/remove.md.txt",
+      "relative": "reference/clauses/remove.md",
+      "bytes": 5648,
+      "sha256": "ed4af3755ff5add1ded1bb7ec8c1c6a87de605543cf4211f4a9abd4cc663395e"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/return.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/return.md.txt",
+      "relative": "reference/clauses/return.md",
+      "bytes": 8831,
+      "sha256": "8516f8a5f740cbe15160b1284abf1ace258aa24fa72f2ef4f12fba3aeba3b1ce"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/set.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/set.md.txt",
+      "relative": "reference/clauses/set.md",
+      "bytes": 8289,
+      "sha256": "202258dd9920fe030fcfde9f0d76740a6996e04f90b64b9f508fc6e9d36a536c"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/skip-and-limit.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/skip-and-limit.md.txt",
+      "relative": "reference/clauses/skip-and-limit.md",
+      "bytes": 5899,
+      "sha256": "352616e30dd13fed3a96c291251cbeab8060ae421e2501a09f6fde171b4beef2"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/subquery-expressions.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/subquery-expressions.md.txt",
+      "relative": "reference/clauses/subquery-expressions.md",
+      "bytes": 12227,
+      "sha256": "9ec7943d7e320bdc9eee2c078a988600f721e7e0e3a3731bb14d4a0e2abf06cb"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/union.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/union.md.txt",
+      "relative": "reference/clauses/union.md",
+      "bytes": 8180,
+      "sha256": "edf665ea217b983c484ead3dd4882f30cc66b2029a3c205b923f7e0144901fd8"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/unwind.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/unwind.md.txt",
+      "relative": "reference/clauses/unwind.md",
+      "bytes": 5325,
+      "sha256": "d0859396367ed86ebae3cfee36c308679f398a91d9aae9fc4e853cfd1f2a0c21"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/where.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/where.md.txt",
+      "relative": "reference/clauses/where.md",
+      "bytes": 7006,
+      "sha256": "d8b927c38d2cb1b739659a1bd7efdb8c643e6339917e50f316cba6ae4982f35c"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/with.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/with.md.txt",
+      "relative": "reference/clauses/with.md",
+      "bytes": 7833,
+      "sha256": "dd83a35446ac4be323f40bbde5ac1130701a8a1078e6ebf38294a8c8582ef8cf"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/ddl/alter-label.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/ddl/alter-label.md.txt",
+      "relative": "reference/ddl/alter-label.md",
+      "bytes": 17832,
+      "sha256": "339e43b161fb9ce688eb57f5b9ab79149aace0c1f1a38fbc5f40fc9774348fed"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/ddl/create-constraint.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/ddl/create-constraint.md.txt",
+      "relative": "reference/ddl/create-constraint.md",
+      "bytes": 12902,
+      "sha256": "0bd2c8aefe7caa5667aa45c7a3017e78b400b996779ea9e1363140f7a2bc9de2"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/ddl/create-elabel.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/ddl/create-elabel.md.txt",
+      "relative": "reference/ddl/create-elabel.md",
+      "bytes": 14300,
+      "sha256": "2efc6cbfb596591028f1cfc628b3a12485b9b0f364f6aa6031e4517310ea27bf"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/ddl/create-graph.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/ddl/create-graph.md.txt",
+      "relative": "reference/ddl/create-graph.md",
+      "bytes": 6489,
+      "sha256": "0a4df014a7acfe9ca5f323a3a20b177910953e71c3291c8a0b0c1ad05389e81d"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/ddl/create-property-index.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/ddl/create-property-index.md.txt",
+      "relative": "reference/ddl/create-property-index.md",
+      "bytes": 20935,
+      "sha256": "a807ed8ee15a781711918342c44152c862438d8a82f550ccba5fa038d3bdf836"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/ddl/create-vlabel.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/ddl/create-vlabel.md.txt",
+      "relative": "reference/ddl/create-vlabel.md",
+      "bytes": 21353,
+      "sha256": "c16bff57058c8bbacd2abbeb40aac6c24c8423116253ce25506a419a3ef5f6fa"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/ddl/drop-constraint.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/ddl/drop-constraint.md.txt",
+      "relative": "reference/ddl/drop-constraint.md",
+      "bytes": 7387,
+      "sha256": "4c026bdbfd233e5a02e4c83d7f8fc3116b805ccb2128c1422c713db6e917bafc"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/ddl/drop-graph.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/ddl/drop-graph.md.txt",
+      "relative": "reference/ddl/drop-graph.md",
+      "bytes": 5170,
+      "sha256": "fc5c31dfb33f179462061bdcf6946c3bb95442426cdd1201e084e06c9af30c7b"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/ddl/drop-label.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/ddl/drop-label.md.txt",
+      "relative": "reference/ddl/drop-label.md",
+      "bytes": 7074,
+      "sha256": "7e20b83eb21b6a9361a1fdc2a8ce0b477633b80b5009d6fbd73911f76b8abc85"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/ddl/drop-property-index.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/ddl/drop-property-index.md.txt",
+      "relative": "reference/ddl/drop-property-index.md",
+      "bytes": 6475,
+      "sha256": "a55aebe81e9a92d4bf54a8683b539b08364fd607e122e2395dffe587624248c7"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/ddl/reindex.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/ddl/reindex.md.txt",
+      "relative": "reference/ddl/reindex.md",
+      "bytes": 8840,
+      "sha256": "bd93135168ebd60aba68ee90ddfb22741a15f925d9f422f9ae9255b8af9e4912"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/functions/aggregate.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/functions/aggregate.md.txt",
+      "relative": "reference/functions/aggregate.md",
+      "bytes": 7304,
+      "sha256": "39213ddd96db51456782088de50bebbbc443a2328f58766cd47e7674e5f9787d"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/functions/all-functions.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/functions/all-functions.md.txt",
+      "relative": "reference/functions/all-functions.md",
+      "bytes": 29547,
+      "sha256": "8bc449fab71e30aeedb7f6d48d5ea890f9d0f1bbd76cf96dfd303d2a0805df9f"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/functions/jsonb.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/functions/jsonb.md.txt",
+      "relative": "reference/functions/jsonb.md",
+      "bytes": 11754,
+      "sha256": "69c645a7054880518c7ddf0702375e587447472832c278380150a18b5c92804b"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/functions/list.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/functions/list.md.txt",
+      "relative": "reference/functions/list.md",
+      "bytes": 6424,
+      "sha256": "d0661d208139650bb68006332b9c5058fc3a91273647c9a19379da8edc5db451"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/functions/numeric.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/functions/numeric.md.txt",
+      "relative": "reference/functions/numeric.md",
+      "bytes": 9686,
+      "sha256": "b90628fd51b197679bb10a7d4299ee57ac802e8a4fc16e8751d99e9239489e99"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/functions/path.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/functions/path.md.txt",
+      "relative": "reference/functions/path.md",
+      "bytes": 10966,
+      "sha256": "6244073da95da56adb7c16a8664e57cebea05643259d51771655a6171b235c3e"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/functions/predicate.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/functions/predicate.md.txt",
+      "relative": "reference/functions/predicate.md",
+      "bytes": 6398,
+      "sha256": "7a6bacf12d8fb699e55bbc00219cc8065bb651afb612954f3e32c5c90b32451e"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/functions/scalar.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/functions/scalar.md.txt",
+      "relative": "reference/functions/scalar.md",
+      "bytes": 16299,
+      "sha256": "edda89c1402379c0a366f490c16169d4959006484c8ae7e6437a197a5c6d963f"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/functions/string.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/functions/string.md.txt",
+      "relative": "reference/functions/string.md",
+      "bytes": 9561,
+      "sha256": "17a2b8db90073977ba9f50ae3ad523f246024c59508fcae6bb5c2ee65a14b829"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/functions/type-conversion.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/functions/type-conversion.md.txt",
+      "relative": "reference/functions/type-conversion.md",
+      "bytes": 7748,
+      "sha256": "87cdd189a532f8b6a21753e39ed081724ae9a22c6937b23e63480bc2a8a3fac5"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/guc.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/guc.md.txt",
+      "relative": "reference/guc.md",
+      "bytes": 24800,
+      "sha256": "362e934d5a51d22a79f843d658ca6b1c6c6067d9d393397df2d79faff51a0137"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/syntax.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/syntax.md.txt",
+      "relative": "reference/syntax.md",
+      "bytes": 21441,
+      "sha256": "eede3bef62f3e82ad5fc3d5a79ee70dfcaec7fdee4117003127007340aad58af"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/types.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/types.md.txt",
+      "relative": "reference/types.md",
+      "bytes": 22472,
+      "sha256": "2483fae6cfa2e2d69e4ac906f5e5a409a112b9f33d623964db273a0ff813c2d7"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/release_notes/2.17.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/release_notes/2.17.md.txt",
+      "relative": "release_notes/2.17.md",
+      "bytes": 4711,
+      "sha256": "6a0be219343eec26b9fbd64c56481b87e1eb7ecbd8dc4a1af347a0da6de371ce"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/release_notes/2.18.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/release_notes/2.18.md.txt",
+      "relative": "release_notes/2.18.md",
+      "bytes": 14088,
+      "sha256": "f751de799ca54a7e1a525393d8fe10ad69fdbf5a09141631738f51fa94dafbec"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/release_notes/upgrade-to-2.18.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/release_notes/upgrade-to-2.18.md.txt",
+      "relative": "release_notes/upgrade-to-2.18.md",
+      "bytes": 13427,
+      "sha256": "422bd0e3d6272ec4279183d876f307db9ba1877145de46655f4d940b7959f6b5"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/release_notes/upgrade-walkthrough.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/release_notes/upgrade-walkthrough.md.txt",
+      "relative": "release_notes/upgrade-walkthrough.md",
+      "bytes": 7807,
+      "sha256": "9f730df4231e60226e3da4a764f85d7c875d9da739990acfdb4af63df871b2fd"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/system_catalogs/catalogs.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/system_catalogs/catalogs.md.txt",
+      "relative": "system_catalogs/catalogs.md",
+      "bytes": 5939,
+      "sha256": "087347257a58d78dbaa592d8a1a7fe9c367ff36c5635c79105609475ff5d2e72"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/system_catalogs/graph-metadata.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/system_catalogs/graph-metadata.md.txt",
+      "relative": "system_catalogs/graph-metadata.md",
+      "bytes": 15209,
+      "sha256": "0338ab67500a8afae5743818264759bb0bad09b2b08ca1d9dd38e9be765ad771"
+    },
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/system_catalogs/views.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/system_catalogs/views.md.txt",
+      "relative": "system_catalogs/views.md",
+      "bytes": 3423,
+      "sha256": "46eb0344deea7d42e800fc21af0f941ad38354d733c254cbd47452b36ebe508d"
+    }
+  ],
+  "index_pages": [
+    {
+      "relative": "index.rst",
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/index.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/index.rst.txt",
+      "bytes": 3788,
+      "sha256": "2729b5a37d1a6d03481cc34309526c3ee491618ade2c77404b5aa5e3098ea756",
+      "format": "rst"
+    },
+    {
+      "relative": "get_started/index.rst",
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/get_started/index.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/get_started/index.rst.txt",
+      "bytes": 214,
+      "sha256": "f26cf8d73a62a2cddd2b289af2d8750914bc26fa90bcdeceb4c96b0a81e3ad23",
+      "format": "rst"
+    },
+    {
+      "relative": "concepts/index.rst",
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/concepts/index.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/concepts/index.rst.txt",
+      "bytes": 254,
+      "sha256": "81f653f2a0bf289109865c30610618fbd6c6d2a6e98ae5d382cd4a98beb16e17",
+      "format": "rst"
+    },
+    {
+      "relative": "querying/index.rst",
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/querying/index.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/querying/index.rst.txt",
+      "bytes": 359,
+      "sha256": "16a340f9d8b4e93bf63230a7a97f5a7bfd19af051e7a40ef3b6361fcef6e5f90",
+      "format": "rst"
+    },
+    {
+      "relative": "reference/index.rst",
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/index.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/index.rst.txt",
+      "bytes": 393,
+      "sha256": "ed42600282dd8affb441363abfad9aa73d84d95499b41c387a6e291865e4ddd8",
+      "format": "rst"
+    },
+    {
+      "relative": "reference/clauses/index.rst",
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/clauses/index.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/clauses/index.rst.txt",
+      "bytes": 971,
+      "sha256": "c3d458f566c0a7d5552b345900ae9b5b7c0d0f73e10ba362cdbd725d0abaac65",
+      "format": "rst"
+    },
+    {
+      "relative": "reference/ddl/index.rst",
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/ddl/index.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/ddl/index.rst.txt",
+      "bytes": 405,
+      "sha256": "1e2760f5eac6c8f71d79d643c51d5660c9f9ddf2786f10182f564f109def1880",
+      "format": "rst"
+    },
+    {
+      "relative": "reference/functions/index.rst",
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/reference/functions/index.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/reference/functions/index.rst.txt",
+      "bytes": 169,
+      "sha256": "0e62a518810963b6709837c07cfcd8b8c2b18f739e682d08af5039526e9de4ec",
+      "format": "rst"
+    },
+    {
+      "relative": "guides/index.rst",
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/guides/index.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/guides/index.rst.txt",
+      "bytes": 196,
+      "sha256": "98e2d3597d72b835e7e8d00bcdbd3054ed4e3547b235882bcfa6f5315bb993e2",
+      "format": "rst"
+    },
+    {
+      "relative": "drivers/index.rst",
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/drivers/index.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/drivers/index.rst.txt",
+      "bytes": 4192,
+      "sha256": "e6509ab8a523883811266e1d54ecb0724e2a408edd9f8843043715fd1062ae16",
+      "format": "rst"
+    },
+    {
+      "relative": "operations/index.rst",
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/operations/index.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/operations/index.rst.txt",
+      "bytes": 227,
+      "sha256": "0069f828c210c091b34dfa9c672349020810414b3ccbea4a4c8cec1d7a06c9e0",
+      "format": "rst"
+    },
+    {
+      "relative": "system_catalogs/index.rst",
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/system_catalogs/index.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/system_catalogs/index.rst.txt",
+      "bytes": 195,
+      "sha256": "26768fa7adb35b8e831e36804395a3ead511943935b7d6e85c065ad072efb36d",
+      "format": "rst"
+    },
+    {
+      "relative": "release_notes/index.rst",
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/release_notes/index.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/release_notes/index.rst.txt",
+      "bytes": 196,
+      "sha256": "b169547aef9e72e78f139698a19c2153558adb07fcd87d49b76271483777f302",
+      "format": "rst"
+    },
+    {
+      "relative": "appendix/index.rst",
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/appendix/index.html",
+      "source_url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_sources/appendix/index.rst.txt",
+      "bytes": 145,
+      "sha256": "8fca7b33e7ba4edfdb84583eeab197dff8478fd72e9755d1fcffa568fa2b195c",
+      "format": "rst"
+    }
+  ],
+  "assets": [
+    {
+      "url": "https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/_images/property_model.png",
+      "local": "static/images/upstream/property_model.png",
+      "bytes": 11334,
+      "sha256": "4dbe62527d88e7b17620d4f576a793041eba79766b44ed7340a91057a31aae20"
+    }
+  ],
+  "version_source_verified": "2026-11-07"
+}
