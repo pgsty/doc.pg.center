@@ -6,13 +6,18 @@
 {{- $summaryLength := partial "validate.html" (dict
     "value" .Site.Params.offline_search_summary_length "kind" "int"
     "min" 1 "fallback" 70 "key" "params.offline_search_summary_length") -}}
-{{- $.Scratch.Add "offline-search-index" slice -}}
+{{- $documents := slice -}}
 {{- $pages := where .Site.Pages "Kind" "in" (slice "page" "section") -}}
 {{- range $pages -}}
 {{- if .Params.search_exclude }}{{ continue }}{{ end -}}
 {{- if or (not .RelPermalink) .Params.sidebar_divider }}{{ continue }}{{ end -}}
-{{- /* Directory pages remain searchable even when their body is empty. */ -}}
+{{- /* Keep body-less topic indexes discoverable alongside imported pages. */ -}}
 {{- if and (not .RawContent) (ne .Kind "section") }}{{ continue }}{{ end -}}
+{{- /* Site.Pages can retain the context of an earlier RSS/Print/Markdown
+     traversal. Search reads semantic HTML and must not cache that output's
+     fallback as the page's Content. Restore the caller's flag afterwards. */ -}}
+{{- $previousFormat := .Store.Get "tdOutputFormat" -}}
+{{- .Store.Set "tdOutputFormat" "html" -}}
 {{- /* We have to apply `htmlUnescape` again after `truncate` because `truncate` applies `html.EscapeString` if the argument is not HTML. */ -}}
 {{- /* Individual taxonomies can be added in the next line by add '"taxonomy-name" (.Params.taxonomy-name | default "")' to the dict (as seen for categories and tags). */ -}}
 {{- $summary := "" -}}
@@ -23,12 +28,16 @@
   {{- $summary = .Summary | plainify | htmlUnescape | strings.TrimSpace -}}
 {{- end -}}
 {{- $headings := "" -}}
+{{- $sections := dict -}}
 {{- if ne $scope "title" -}}
-  {{- $headings = replace .TableOfContents "</a>" "</a> " | plainify | htmlUnescape | strings.TrimSpace -}}
+  {{- $sections = partial "search/sections.html" (dict "page" . "scope" $scope) -}}
+  {{- $titles := slice -}}
+  {{- range $sections.sections }}{{ $titles = $titles | append .title }}{{ end -}}
+  {{- $headings = delimit $titles " " -}}
 {{- end -}}
 {{- $plain := "" -}}
 {{- if or (not $summary) (eq $scope "content") -}}
-  {{- $plain = .Plain | htmlUnescape -}}
+  {{- $plain = $sections.body | default (.Plain | htmlUnescape) -}}
 {{- end -}}
 {{- $excerpt := $summary | default $plain -}}
 {{- $metadata := partial "search/metadata.html" . -}}
@@ -39,6 +48,7 @@
       "tags" (.Params.tags | default "")
       "excerpt" ($excerpt | truncate $summaryLength | htmlUnescape)
 ) -}}
+{{- with $sections.sections }}{{ $doc = merge $doc (dict "sections" .) }}{{ end -}}
 {{- if eq $scope "heading" -}}
   {{- $doc = merge $doc (dict "headings" $headings) -}}
 {{- else if eq $scope "summary" -}}
@@ -49,9 +59,7 @@
         "description" $summary
         "body" $plain) -}}
 {{- end -}}
-{{- $.Scratch.Add
-    "offline-search-index"
-    $doc
--}}
+{{- $documents = $documents | append $doc -}}
+{{- if $previousFormat }}{{ .Store.Set "tdOutputFormat" $previousFormat }}{{ else }}{{ .Store.Delete "tdOutputFormat" }}{{ end -}}
 {{- end -}}
-{{- $.Scratch.Get "offline-search-index" | jsonify -}}
+{{- $documents | jsonify -}}
