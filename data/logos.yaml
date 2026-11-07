@@ -9,7 +9,7 @@
 postgresql: { src: img/slonik.svg, dark: rim }
 patroni:    { src: img/patroni/patroni-logo.svg }
 pgbackrest: { src: img/logo/pgbackrest.svg, dark: mono }
-pgbouncer:  { src: img/logo/pgbouncer.svg }
+pgbouncer:  { src: img/logo/pgbouncer.png }
 pgbadger:   { src: img/pgbadger/logo.png, dark: invert }
 haproxy:    { src: img/logo/haproxy.png }
 etcd:       { src: img/logo/etcd.svg }

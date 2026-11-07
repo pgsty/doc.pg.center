@@ -111,11 +111,12 @@ from the same copy of Bitnine's AGEDB wordmark. Each mark remains the
 trademark of its owner, is used only to refer to that project's documentation,
 and does not imply endorsement.
 
-PgBouncer publishes no logo, so `static/img/logo/pgbouncer.svg` is an
-original mark drawn for this site (an elephant on the rebound, in the tile
-style of the Patroni logo). It is site-authored artwork under the site's
-CC BY 4.0 terms, not an official PgBouncer logo, and it implies no
-endorsement by the PgBouncer project.
+PgBouncer publishes no logo, so `static/img/logo/pgbouncer.png` is a
+site-authored adaptation of the generated elephant artwork supplied for this
+site. The asset keeps the blue-and-white elephant, removes its drop shadow,
+and uses a transparent square canvas. It is not an official PgBouncer logo,
+is provided under the site's CC BY 4.0 terms, and implies no endorsement by
+the PgBouncer project.
 
 
 # Database collections integrated on 2026-11-07
