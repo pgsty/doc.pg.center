@@ -1,0 +1,176 @@
+---
+title: $[]
+description: The $[] all positional operator applies an update to every element of an array.
+type: docs
+upstream_source: documentdb
+upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-update/$positional-all.md
+weight: 20
+---
+
+The `$[]` all positional operator applies an update to every element of an array in each matched document. Unlike `$`, it doesn't depend on which element the query matched, and unlike `$[<identifier>]`, it takes no `arrayFilters`. If the path holds a value that isn't an array, the update fails.
+
+## Syntax {#syntax}
+
+```javascript
+db.collection.update(
+   <query>,
+   {
+     $set: {
+       <arrayField>.$[]: <value>
+     }
+   }
+)
+```
+
+## Parameters {#parameters}
+
+| Parameter | Description |
+| --- | --- |
+| **`<query>`** | The selection criteria for the documents to update. |
+| **`<arrayField>`** | The field containing the array to update. |
+| **`<value>`** | The value to set for each element in the array. |
+{.fields}
+
+## Examples {#examples}
+
+Consider this sample document from the stores collection.
+
+```json
+{
+    "_id": "0fcc0bf0-ed18-4ab8-b558-9848e18058f4",
+    "name": "First Up Consultants | Beverage Shop - Satterfieldmouth",
+    "location": {
+        "lat": -89.2384,
+        "lon": -46.4012
+    },
+    "staff": {
+        "totalStaff": {
+            "fullTime": 8,
+            "partTime": 20
+        }
+    },
+    "sales": {
+        "totalSales": 75670,
+        "salesByCategory": [
+            {
+                "categoryName": "Wine Accessories",
+                "totalSales": 34440
+            },
+            {
+                "categoryName": "Bitters",
+                "totalSales": 39496
+            },
+            {
+                "categoryName": "Rum",
+                "totalSales": 1734
+            }
+        ]
+    },
+    "promotionEvents": [
+        {
+            "eventName": "Unbeatable Bargain Bash",
+            "promotionalDates": {
+                "startDate": {
+                    "Year": 2024,
+                    "Month": 6,
+                    "Day": 23
+                },
+                "endDate": {
+                    "Year": 2024,
+                    "Month": 7,
+                    "Day": 2
+                }
+            },
+            "discounts": [
+                {
+                    "categoryName": "Whiskey",
+                    "discountPercentage": 7
+                },
+                {
+                    "categoryName": "Bitters",
+                    "discountPercentage": 15
+                },
+                {
+                    "categoryName": "Brandy",
+                    "discountPercentage": 8
+                },
+                {
+                    "categoryName": "Sports Drinks",
+                    "discountPercentage": 22
+                },
+                {
+                    "categoryName": "Vodka",
+                    "discountPercentage": 19
+                }
+            ]
+        },
+        {
+            "eventName": "Steal of a Deal Days",
+            "promotionalDates": {
+                "startDate": {
+                    "Year": 2024,
+                    "Month": 9,
+                    "Day": 21
+                },
+                "endDate": {
+                    "Year": 2024,
+                    "Month": 9,
+                    "Day": 29
+                }
+            },
+            "discounts": [
+                {
+                    "categoryName": "Organic Wine",
+                    "discountPercentage": 19
+                },
+                {
+                    "categoryName": "White Wine",
+                    "discountPercentage": 20
+                },
+                {
+                    "categoryName": "Sparkling Wine",
+                    "discountPercentage": 19
+                },
+                {
+                    "categoryName": "Whiskey",
+                    "discountPercentage": 17
+                },
+                {
+                    "categoryName": "Vodka",
+                    "discountPercentage": 23
+                }
+            ]
+        }
+    ]
+}
+```
+
+### Example 1: Updating Discount Percentages {#example-1-updating-discount-percentages}
+
+This query updates all elements in the discounts array inside each promotion event.
+
+```javascript
+db.stores.updateOne(
+  { _id: "0fcc0bf0-ed18-4ab8-b558-9848e18058f4" },
+  {
+    $inc: {
+      "promotionEvents.$[].discounts.$[].discountPercentage": 5
+    }
+  }
+)
+```
+
+### Example 2: Updating Sales by Category {#example-2-updating-sales-by-category}
+
+This query increase the total sales for all categories by 10% by using the $[] operator.
+
+```javascript
+db.stores.update(
+  { _id: "0fcc0bf0-ed18-4ab8-b558-9848e18058f4" },
+  {
+    $mul: {
+      "sales.salesByCategory.$[].totalSales": 1.10
+    }
+  }
+)
+```
