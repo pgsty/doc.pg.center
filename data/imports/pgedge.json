@@ -1,0 +1,2428 @@
+{
+  "component": "pgedge",
+  "source_site": "https://edge.pgsty.com/",
+  "pages": [
+    {
+      "source": "content/docs/_index.en.md",
+      "target": "content/pgedge/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/",
+      "route": "/pgedge/",
+      "sha256": "40e1d8f0669f4a8e568a1260110d7013445e92891569801c2c932767968c0824",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/_index.md",
+      "target": "content/pgedge/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/",
+      "route": "/zh/pgedge/",
+      "sha256": "43b2f405ae5384f10d752f107dc97923149f6e76015f882e3448fe4f8ad60388",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/about/_index.en.md",
+      "target": "content/pgedge/about/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/about/",
+      "route": "/pgedge/about/",
+      "sha256": "e719dd6c8471f2d67b47ec6394c70f5384ef9a27c2fe549735a90bee8a2c2516",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/about/_index.md",
+      "target": "content/pgedge/about/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/about/",
+      "route": "/zh/pgedge/about/",
+      "sha256": "c6b6a3985cd5b268bee809e3d8f61753f03adc758b1f2b648f78c628bd4ab9e9",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/about/attribution.en.md",
+      "target": "content/pgedge/about/attribution.md",
+      "language": "en",
+      "old_route": "/en/docs/about/attribution/",
+      "route": "/pgedge/about/attribution/",
+      "sha256": "657c505059936c0ff5b2c34f05a23ec1440b236cabf53611fdd079ab75b9612d",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/about/attribution.md",
+      "target": "content/pgedge/about/attribution.zh.md",
+      "language": "zh",
+      "old_route": "/docs/about/attribution/",
+      "route": "/zh/pgedge/about/attribution/",
+      "sha256": "32816478e6f9edf7e381db552d2c0e5ab9062378d4aba27401711d0a545c4615",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/about/license.en.md",
+      "target": "content/pgedge/about/license.md",
+      "language": "en",
+      "old_route": "/en/docs/about/license/",
+      "route": "/pgedge/about/license/",
+      "sha256": "650276b696901ea4ad9263557455861612c4f6e0ea6e374f8edbfa1690202d8a",
+      "code_sha256": [
+        "8dc852e10cb4464747d5fa0ecde754ae7c064c8557770789ea5879251a2ae0db",
+        "ecdc574c7442629cbd3763529b307111de7d835ec17ef77ead92e337560a3532",
+        "42fa81a87f841e0c1b4bf5cd19e880433bcdf73f64601a6c77266661032d6ddb",
+        "7f93a12c54adcd0022dc18d74b72029bcdccbd9e4b5ce2677354f6f3b5e5cd66",
+        "5643c0b1332575fa8515ed68b1b4726782df9cce84f604862a101c3a713d65ae",
+        "90e5e50e2a0e3642b0f8d2c33380b625ee407cf8f097fe9b7b4e6537139c650a"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/about/license.md",
+      "target": "content/pgedge/about/license.zh.md",
+      "language": "zh",
+      "old_route": "/docs/about/license/",
+      "route": "/zh/pgedge/about/license/",
+      "sha256": "752fff0bc34706d5ca019f82bfc5615818756faa118e9ad59703d3f9d071c1a3",
+      "code_sha256": [
+        "8dc852e10cb4464747d5fa0ecde754ae7c064c8557770789ea5879251a2ae0db",
+        "ecdc574c7442629cbd3763529b307111de7d835ec17ef77ead92e337560a3532",
+        "42fa81a87f841e0c1b4bf5cd19e880433bcdf73f64601a6c77266661032d6ddb",
+        "7f93a12c54adcd0022dc18d74b72029bcdccbd9e4b5ce2677354f6f3b5e5cd66",
+        "5643c0b1332575fa8515ed68b1b4726782df9cce84f604862a101c3a713d65ae",
+        "90e5e50e2a0e3642b0f8d2c33380b625ee407cf8f097fe9b7b4e6537139c650a"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/about/maintenance.en.md",
+      "target": "content/pgedge/about/maintenance.md",
+      "language": "en",
+      "old_route": "/en/docs/about/maintenance/",
+      "route": "/pgedge/about/maintenance/",
+      "sha256": "065f028a35a729eba78788d827abf8377a50df9cb374aae039dc6d06b3fd96c3",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/about/maintenance.md",
+      "target": "content/pgedge/about/maintenance.zh.md",
+      "language": "zh",
+      "old_route": "/docs/about/maintenance/",
+      "route": "/zh/pgedge/about/maintenance/",
+      "sha256": "5503acef47f0bed6f0b5e63a1efbce06da16d14fc9ee722a96b5d55a928f1da4",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/lolor/_index.en.md",
+      "target": "content/pgedge/lolor/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/lolor/",
+      "route": "/pgedge/lolor/",
+      "sha256": "8bc0c30ce89ca8de0c2656e74fe4194a2b6badae82e8bbe46ace95cdb4091365",
+      "code_sha256": [
+        "8a97990ac8225c8804e6859e0ada260e92e43da8986901820f3ddd5cb22125b1",
+        "44a184018f7179c67f3264daff67d3b26c68a54794636c7ee6e27f60a77f2722",
+        "8904addfa54e71b609966d5cd195a1acf85424a0825ee42b9389537d1ec3f384",
+        "6a9e03f4d62b9b6d2fa7c642b6cc88ba84e54dee50d1a53ef66b187c194dac8f",
+        "9e0db4d386e08a57b2e1acd8c5d832fe1a6441fc17e2c66ec220df09a31b1068"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/lolor/_index.md",
+      "target": "content/pgedge/lolor/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/lolor/",
+      "route": "/zh/pgedge/lolor/",
+      "sha256": "eba6ea9577788051b0f5dfba17103d7f96b3b594c556cf24a7e14be869c56ce4",
+      "code_sha256": [
+        "8a97990ac8225c8804e6859e0ada260e92e43da8986901820f3ddd5cb22125b1",
+        "44a184018f7179c67f3264daff67d3b26c68a54794636c7ee6e27f60a77f2722",
+        "8904addfa54e71b609966d5cd195a1acf85424a0825ee42b9389537d1ec3f384",
+        "6a9e03f4d62b9b6d2fa7c642b6cc88ba84e54dee50d1a53ef66b187c194dac8f",
+        "9e0db4d386e08a57b2e1acd8c5d832fe1a6441fc17e2c66ec220df09a31b1068"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/lolor/install-configure.en.md",
+      "target": "content/pgedge/lolor/install-configure.md",
+      "language": "en",
+      "old_route": "/en/docs/lolor/install-configure/",
+      "route": "/pgedge/lolor/install-configure/",
+      "sha256": "0ffd4bfe6558fdf03abcfc5beb8d7faaf087b1f1324155b20732799bc1571403",
+      "code_sha256": [
+        "defd97215a51fdcbbec01d3cbfa38953681d133265e04eea139721020b291ec5",
+        "838b8197de6a13f3355fd0064765739e23413bff44849a068e8bbcf68eb714ba",
+        "3e806c083286d53c5beca567a1cdb47d0eec364e7e471937693cfd891c6b3182",
+        "6e5f672f99a9ae116526a90769ccc78df7c36e7ec64420ffbec4002475b11aaa",
+        "43e78b12a016b1a6924ed09f77cf6cfdc777a6e1163ce19592ad4c5f92512fab",
+        "745f7ea7876ece2090015b0fb678ae606fb529fb10541a2538f2a0f69f275c4a"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/lolor/install-configure.md",
+      "target": "content/pgedge/lolor/install-configure.zh.md",
+      "language": "zh",
+      "old_route": "/docs/lolor/install-configure/",
+      "route": "/zh/pgedge/lolor/install-configure/",
+      "sha256": "26954237791f37df2262d9b78280b1b385ab8b00046031ef061741049245c21d",
+      "code_sha256": [
+        "defd97215a51fdcbbec01d3cbfa38953681d133265e04eea139721020b291ec5",
+        "838b8197de6a13f3355fd0064765739e23413bff44849a068e8bbcf68eb714ba",
+        "3e806c083286d53c5beca567a1cdb47d0eec364e7e471937693cfd891c6b3182",
+        "6e5f672f99a9ae116526a90769ccc78df7c36e7ec64420ffbec4002475b11aaa",
+        "43e78b12a016b1a6924ed09f77cf6cfdc777a6e1163ce19592ad4c5f92512fab",
+        "745f7ea7876ece2090015b0fb678ae606fb529fb10541a2538f2a0f69f275c4a"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/lolor/lolor-release-notes.en.md",
+      "target": "content/pgedge/lolor/lolor-release-notes.md",
+      "language": "en",
+      "old_route": "/en/docs/lolor/lolor-release-notes/",
+      "route": "/pgedge/lolor/lolor-release-notes/",
+      "sha256": "7f879a04791b87fa2a3945198f7a10172033652ce6bf04a4ddf9d019562aa4c9",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/lolor/lolor-release-notes.md",
+      "target": "content/pgedge/lolor/lolor-release-notes.zh.md",
+      "language": "zh",
+      "old_route": "/docs/lolor/lolor-release-notes/",
+      "route": "/zh/pgedge/lolor/lolor-release-notes/",
+      "sha256": "7567681edd9abb824dbe3d7628137eddbd9062f808994c13530e6385cd3b10ec",
+      "code_sha256": [],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/lolor/pg-upgrade-with-lolor.en.md",
+      "target": "content/pgedge/lolor/pg-upgrade-with-lolor.md",
+      "language": "en",
+      "old_route": "/en/docs/lolor/pg-upgrade-with-lolor/",
+      "route": "/pgedge/lolor/pg-upgrade-with-lolor/",
+      "sha256": "2f5aba7d5371a2fd2428c9cc8250633ca06e136bbf08d922ad63272c6a3185a5",
+      "code_sha256": [
+        "de7c54f5c5223da16d425e99c2914580865c7f674079911dbe331a464d1a8388",
+        "9694e1a795c944bf16e824b9d80f5c0b6940a7bea901853ada6d5569f4560829",
+        "b38f49a7939378478f83667ae48f150e2936bb5e2516c487238ca8151e5716eb"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/lolor/pg-upgrade-with-lolor.md",
+      "target": "content/pgedge/lolor/pg-upgrade-with-lolor.zh.md",
+      "language": "zh",
+      "old_route": "/docs/lolor/pg-upgrade-with-lolor/",
+      "route": "/zh/pgedge/lolor/pg-upgrade-with-lolor/",
+      "sha256": "707811f4b86324d1e2c5898c62bc6574ac2da1c3c3d977594ea995f83c557734",
+      "code_sha256": [
+        "de7c54f5c5223da16d425e99c2914580865c7f674079911dbe331a464d1a8388",
+        "9694e1a795c944bf16e824b9d80f5c0b6940a7bea901853ada6d5569f4560829",
+        "b38f49a7939378478f83667ae48f150e2936bb5e2516c487238ca8151e5716eb"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/lolor/using-lolor.en.md",
+      "target": "content/pgedge/lolor/using-lolor.md",
+      "language": "en",
+      "old_route": "/en/docs/lolor/using-lolor/",
+      "route": "/pgedge/lolor/using-lolor/",
+      "sha256": "c15f715e129d52900f0c8f96ac13d2db938e4a1f7ae9701691e8da11d54da8d7",
+      "code_sha256": [
+        "b853b549e11f0a7609628d1d25f7e7ce89397db493250eab413cd946fc64c0b7"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/lolor/using-lolor.md",
+      "target": "content/pgedge/lolor/using-lolor.zh.md",
+      "language": "zh",
+      "old_route": "/docs/lolor/using-lolor/",
+      "route": "/zh/pgedge/lolor/using-lolor/",
+      "sha256": "af0112e87d1c1c6ea7f568615883845db27a98e9fa54e715895a31ceb33f5368",
+      "code_sha256": [
+        "b853b549e11f0a7609628d1d25f7e7ce89397db493250eab413cd946fc64c0b7"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/quick-start/_index.en.md",
+      "target": "content/pgedge/quick-start/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/quick-start/",
+      "route": "/pgedge/quick-start/",
+      "sha256": "1d226de168e2c58e69ac71763733e79359236ab2e16230bab4f9da25706611d3",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/quick-start/_index.md",
+      "target": "content/pgedge/quick-start/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/quick-start/",
+      "route": "/zh/pgedge/quick-start/",
+      "sha256": "2e3ffc856ad876666f38f366a5d906897736ee4cbcd58118e2e323dfa16109c6",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/safesession/_index.en.md",
+      "target": "content/pgedge/safesession/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/safesession/",
+      "route": "/pgedge/safesession/",
+      "sha256": "31a8935ed1dea0921cd2c465d13f6189f44dd94b64d34a6409d1eade69d2c3c9",
+      "code_sha256": [
+        "fa182ac32066d92f07834c142026439998371ae0d091ea1b7c03dc644544c1c4",
+        "d968b5a1dd6a00896a1639a5916a8cd5b71b9003c79dd71d1e4d67f2d1fca55c",
+        "128cc3242c002c1fe3ccfcd764aac3559a17b0141f72ef8538579a4417fb5e85",
+        "7c5ad5a595f53aae440da5e7ab5f83efef6ccc3255f2bc5a12b8cd97e3c5d13d",
+        "5a7818161bc19866746186f281c89a93b94cd6fdcb0540f9f420c77f9934a87a"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/safesession/_index.md",
+      "target": "content/pgedge/safesession/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/safesession/",
+      "route": "/zh/pgedge/safesession/",
+      "sha256": "442fbb6f2c3718ad6933512a8c9984cbb5ef3742d28ef4de8bb2dafb326c66d5",
+      "code_sha256": [
+        "fa182ac32066d92f07834c142026439998371ae0d091ea1b7c03dc644544c1c4",
+        "d968b5a1dd6a00896a1639a5916a8cd5b71b9003c79dd71d1e4d67f2d1fca55c",
+        "128cc3242c002c1fe3ccfcd764aac3559a17b0141f72ef8538579a4417fb5e85",
+        "7c5ad5a595f53aae440da5e7ab5f83efef6ccc3255f2bc5a12b8cd97e3c5d13d",
+        "5a7818161bc19866746186f281c89a93b94cd6fdcb0540f9f420c77f9934a87a"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/safesession/changelog.en.md",
+      "target": "content/pgedge/safesession/changelog.md",
+      "language": "en",
+      "old_route": "/en/docs/safesession/changelog/",
+      "route": "/pgedge/safesession/changelog/",
+      "sha256": "8faaea3d702609fc63ad6ea8dcce185b4f0480707bbbf22391494fbf8fd5b70e",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/safesession/changelog.md",
+      "target": "content/pgedge/safesession/changelog.zh.md",
+      "language": "zh",
+      "old_route": "/docs/safesession/changelog/",
+      "route": "/zh/pgedge/safesession/changelog/",
+      "sha256": "4a245d67c9763fb582a09b3594f10152ed06d496b58156652f8ed121e5aded8d",
+      "code_sha256": [],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/safesession/licence.en.md",
+      "target": "content/pgedge/safesession/licence.md",
+      "language": "en",
+      "old_route": "/en/docs/safesession/licence/",
+      "route": "/pgedge/safesession/licence/",
+      "sha256": "d07d9fa2983004e5e2b3cb0c636b1ba946c10ee84003d63f10f8b7c2536720d3",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/snowflake/_index.en.md",
+      "target": "content/pgedge/snowflake/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/snowflake/",
+      "route": "/pgedge/snowflake/",
+      "sha256": "66501e09be29c4a832a66d040e10540d59f2efde093cb29c367a728cd8798276",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/snowflake/_index.md",
+      "target": "content/pgedge/snowflake/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/snowflake/",
+      "route": "/zh/pgedge/snowflake/",
+      "sha256": "22180c56fe7924f164cbf74beefcd78171da1ba79380aff270a9fc9812dcab13",
+      "code_sha256": [],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/snowflake/changelog.en.md",
+      "target": "content/pgedge/snowflake/changelog.md",
+      "language": "en",
+      "old_route": "/en/docs/snowflake/changelog/",
+      "route": "/pgedge/snowflake/changelog/",
+      "sha256": "87a7371a751df08e205c03d44568243fbc0e4b6aeb9597a277737544a4743530",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/snowflake/changelog.md",
+      "target": "content/pgedge/snowflake/changelog.zh.md",
+      "language": "zh",
+      "old_route": "/docs/snowflake/changelog/",
+      "route": "/zh/pgedge/snowflake/changelog/",
+      "sha256": "9391efb33ddf376884049a4ba797fc1680613be7574735d202d898c299532631",
+      "code_sha256": [],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/snowflake/converting.en.md",
+      "target": "content/pgedge/snowflake/converting.md",
+      "language": "en",
+      "old_route": "/en/docs/snowflake/converting/",
+      "route": "/pgedge/snowflake/converting/",
+      "sha256": "ce082c424a8034a541bac9a6c850ff39a9c00142344635951d72a50c10054269",
+      "code_sha256": [
+        "be5fb95b52a3f1725d7f9b46e250a6a0089931accf523292aa213c6ca8c1be4f",
+        "9ab20a39feb08018f52d245363698e369359a442a8131df2cfbffd5c4799eb3f",
+        "733a9761fab19887983e6634484a6b8dc13d371715b386f69864a7203c5ebbf6",
+        "587b2774e438fecc28dd6d86a41ecc208651cb6f91ad1401d9c9fb8f7fd4f586",
+        "2d50d50f16e17c1e7ebb126c1a38c69ef4a53bc642e16700af1031b63d9a109a",
+        "d2d7dfc09f51c8798ba58df2e557ff923ddd6a877064d7f80b079f0211579def",
+        "c68a9a9e5bf391753e982bd4c4bb31f252b496754acfc55f907f291ede45306a",
+        "ee2c513e209089d34353f4908d5b2947c5b58ed8e8c544ec33366d00153d5819"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/snowflake/converting.md",
+      "target": "content/pgedge/snowflake/converting.zh.md",
+      "language": "zh",
+      "old_route": "/docs/snowflake/converting/",
+      "route": "/zh/pgedge/snowflake/converting/",
+      "sha256": "959a6320b582e9add6a3819744add340546f0786e5aedff9f3524c8fbc2132e0",
+      "code_sha256": [
+        "be5fb95b52a3f1725d7f9b46e250a6a0089931accf523292aa213c6ca8c1be4f",
+        "9ab20a39feb08018f52d245363698e369359a442a8131df2cfbffd5c4799eb3f",
+        "733a9761fab19887983e6634484a6b8dc13d371715b386f69864a7203c5ebbf6",
+        "587b2774e438fecc28dd6d86a41ecc208651cb6f91ad1401d9c9fb8f7fd4f586",
+        "2d50d50f16e17c1e7ebb126c1a38c69ef4a53bc642e16700af1031b63d9a109a",
+        "d2d7dfc09f51c8798ba58df2e557ff923ddd6a877064d7f80b079f0211579def",
+        "c68a9a9e5bf391753e982bd4c4bb31f252b496754acfc55f907f291ede45306a",
+        "ee2c513e209089d34353f4908d5b2947c5b58ed8e8c544ec33366d00153d5819"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/snowflake/creating.en.md",
+      "target": "content/pgedge/snowflake/creating.md",
+      "language": "en",
+      "old_route": "/en/docs/snowflake/creating/",
+      "route": "/pgedge/snowflake/creating/",
+      "sha256": "09c0157917ccc8d80a9c96a81edf5ca4c71d2d4dd16b616dbf967c2e2768c674",
+      "code_sha256": [
+        "d163b47efb8d3fa8e69b51e171b7d801622102e63c903ba33655d114c389a49b",
+        "f5ca7c01ae5affb1f30bfb7d3b0365f142ce9cde8078dc073e787ab07c3b1af3",
+        "4a86c6e1f1b1148918318ffc8a85e19ae966bb719e673f7c63f90a4995937bd1",
+        "80f2ef1f6f67dde86a31d7340647cbdaa19307c92f9e80252b9127c2e9613454"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/snowflake/creating.md",
+      "target": "content/pgedge/snowflake/creating.zh.md",
+      "language": "zh",
+      "old_route": "/docs/snowflake/creating/",
+      "route": "/zh/pgedge/snowflake/creating/",
+      "sha256": "143c61e6219d6cf81d6dae94d6e1174045c5e7102daca96a796e0d313aa545a6",
+      "code_sha256": [
+        "d163b47efb8d3fa8e69b51e171b7d801622102e63c903ba33655d114c389a49b",
+        "f5ca7c01ae5affb1f30bfb7d3b0365f142ce9cde8078dc073e787ab07c3b1af3",
+        "4a86c6e1f1b1148918318ffc8a85e19ae966bb719e673f7c63f90a4995937bd1",
+        "80f2ef1f6f67dde86a31d7340647cbdaa19307c92f9e80252b9127c2e9613454"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/snowflake/review-seq.en.md",
+      "target": "content/pgedge/snowflake/review-seq.md",
+      "language": "en",
+      "old_route": "/en/docs/snowflake/review-seq/",
+      "route": "/pgedge/snowflake/review-seq/",
+      "sha256": "5c98dff4fffd137f5d5b51f18c1298ebf7992385a24e531cfc164b7f12978e5d",
+      "code_sha256": [
+        "3fea4a3384da14b17fbea2ec2835c0200ade7bbc838be761218ce55f9ac55e4e",
+        "a2f85a1e92ec9b4e0d82bd7ba543cc7a4eb467887f01cff4f32a2be38f638518"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/snowflake/review-seq.md",
+      "target": "content/pgedge/snowflake/review-seq.zh.md",
+      "language": "zh",
+      "old_route": "/docs/snowflake/review-seq/",
+      "route": "/zh/pgedge/snowflake/review-seq/",
+      "sha256": "3e47b458b70f0a9c52e6ad1210c7b867ec70fcf88369bd19322998733bb3ece0",
+      "code_sha256": [
+        "3fea4a3384da14b17fbea2ec2835c0200ade7bbc838be761218ce55f9ac55e4e",
+        "a2f85a1e92ec9b4e0d82bd7ba543cc7a4eb467887f01cff4f32a2be38f638518"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/snowflake/snowflake-functions.en.md",
+      "target": "content/pgedge/snowflake/snowflake-functions.md",
+      "language": "en",
+      "old_route": "/en/docs/snowflake/snowflake-functions/",
+      "route": "/pgedge/snowflake/snowflake-functions/",
+      "sha256": "7a37e005b6679e3fadf924d97592093851dc45d548d5f26136c782b2f064ae8d",
+      "code_sha256": [
+        "2b10fb11fe5fe37c5ab235b0c18412fdd61a05163e5806f47a435a24b0db8ec6",
+        "b2a68b53cba46fbe47034823846b292e65a61d15cb4c99692562f932605afb30",
+        "2ce88f415a1442a97a1f1b184a67a01b88f4c73db742aacc0b80bfd7a65eab65",
+        "5e672e9bfa36a201cf850f86e961573672b602ef6e73daee5d94066fe9cd409b",
+        "88fac45252f6d587b273844356fd4e20977c421b4caa0433214ed0f4a61dc030",
+        "3f4d531ae253a891a7800df34a5936d015a2c8a3c6b425c421f734d19f91bb5e",
+        "9d9ab8f18882318f8ed625775f6eca3d0dd1109da76aace12de56022406d68ba"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/snowflake/snowflake-functions.md",
+      "target": "content/pgedge/snowflake/snowflake-functions.zh.md",
+      "language": "zh",
+      "old_route": "/docs/snowflake/snowflake-functions/",
+      "route": "/zh/pgedge/snowflake/snowflake-functions/",
+      "sha256": "0f82b2ff7cdcfb8d7596ed6c6fa1f0d9dff717bf642c1b65b43431980c4c0a61",
+      "code_sha256": [
+        "2b10fb11fe5fe37c5ab235b0c18412fdd61a05163e5806f47a435a24b0db8ec6",
+        "b2a68b53cba46fbe47034823846b292e65a61d15cb4c99692562f932605afb30",
+        "2ce88f415a1442a97a1f1b184a67a01b88f4c73db742aacc0b80bfd7a65eab65",
+        "5e672e9bfa36a201cf850f86e961573672b602ef6e73daee5d94066fe9cd409b",
+        "88fac45252f6d587b273844356fd4e20977c421b4caa0433214ed0f4a61dc030",
+        "3f4d531ae253a891a7800df34a5936d015a2c8a3c6b425c421f734d19f91bb5e",
+        "9d9ab8f18882318f8ed625775f6eca3d0dd1109da76aace12de56022406d68ba"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/_index.en.md",
+      "target": "content/pgedge/spock/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/",
+      "route": "/pgedge/spock/",
+      "sha256": "75e03b440e5018f5f574926ab4db65370277febc460b7f0a4f0fab6f29604a58",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/_index.md",
+      "target": "content/pgedge/spock/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/",
+      "route": "/zh/pgedge/spock/",
+      "sha256": "adc6755f0ff49e536648337260f862f04253f768f7425e6e7a82d672256c4dd9",
+      "code_sha256": [],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/configuration.en.md",
+      "target": "content/pgedge/spock/configuration.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/configuration/",
+      "route": "/pgedge/spock/configuration/",
+      "sha256": "df9432e951b15a3ac8e4fa9235f1a8bb15c471cb038b53e9e29d6671ed7de69f",
+      "code_sha256": [
+        "dc6b93ef6b6b137d901165c8904e084d871e45f8f0f2cfbf330515e61f32db86",
+        "af0b1c1e9a7a75cc0ca7a29fb9a844f861b65bb27beec4a18958a8e9b6f5c90a",
+        "ef6e6a6ae21e0b1d6a4847418d8ea1c9d9bdd15a9fd4f1463728cb58bb93c6d1",
+        "429a8ad770a0239f51170fd1cb298e13c17f3d4bb93ce42c3af611feb1b9ed03",
+        "bd9d13a1f4a039bbde5d085d6c640c2ea363527d0e9fd3420b09a197d47dae20",
+        "4a86c6e1f1b1148918318ffc8a85e19ae966bb719e673f7c63f90a4995937bd1",
+        "cfdf630c9b7dcaaef864ccfe6656efa8e1295adfa4261aac991822e5d14043f7",
+        "13fd7795cf7fa5bebd83388d15767a2c944f790670bafb4a2f8730f1bc210a1f",
+        "0ce9205fa0615671097d6f9a2d2dc42dd366807c6574008ba5e67594432071f5",
+        "ecc4cf4ff4c27d66fd287da67857d595bf3244e1128b77d977dc436e72193202",
+        "4750a90066068e9e12ff596d2eb2962520cb647c06f13bce291b5c68a22d1ab7",
+        "b2cc7d461758a218679b805e41cdc21939c7b8d30adfd34118ff6f012202064d",
+        "051e6f62703bab650f9deeec55aa5de18887c39560166e1196a1929da2c21a9d",
+        "5dc7a37bc3f578c379706fe976c2855d024b69aa1ca9be9de31edb3addeee863",
+        "988ef6d86051767b5ec6fc2eb76c7d3c29e9f05b16bd0dfd3fe93556aee7dfaa",
+        "3a6681004e8311b1d6584e828d8b3845f7e9167a7083ad9eadf17074c2b4ec28",
+        "890718885a1c3d2b841a2ad6cf564ac53a48a98ae697e21b583b50dff180be18",
+        "496ad655598ef0a61246d3539606c04d643052f22332d06def0464324ef24ae1",
+        "263e7e331991dc5f6a914719e8b73c483058654ac926c8723dd7dca875535fc6",
+        "f75b4786d0c4f005b9f56311528494972f153bee9f5fec8b0ac51ea361d5113a",
+        "31c1fda60dadb5ae2f30986b8764c2ed7786c7355e31ad6302c47012696f2882",
+        "56af4241119ecb55111d6b872882bb023fb83937d99a68e7c9b693a1ceb8d4a2",
+        "f5db299174884f31a9c6265ef433de79c3509ee821fffeea27f7abe2455cda72",
+        "aaf48e0d82081cc9b4e4ea7e7da829a924a21ee3917b73cfbad9c23a879b1604",
+        "92f80fcdb192027c9d7c305daaebc0dd8b348625a44ec26f1a975aa7741deac3"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/configuration.md",
+      "target": "content/pgedge/spock/configuration.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/configuration/",
+      "route": "/zh/pgedge/spock/configuration/",
+      "sha256": "bb6c1d1001bd518a59086393eb4d68f9222a742f329eec113e8db5a076cfc31e",
+      "code_sha256": [
+        "dc6b93ef6b6b137d901165c8904e084d871e45f8f0f2cfbf330515e61f32db86",
+        "af0b1c1e9a7a75cc0ca7a29fb9a844f861b65bb27beec4a18958a8e9b6f5c90a",
+        "ef6e6a6ae21e0b1d6a4847418d8ea1c9d9bdd15a9fd4f1463728cb58bb93c6d1",
+        "429a8ad770a0239f51170fd1cb298e13c17f3d4bb93ce42c3af611feb1b9ed03",
+        "bd9d13a1f4a039bbde5d085d6c640c2ea363527d0e9fd3420b09a197d47dae20",
+        "4a86c6e1f1b1148918318ffc8a85e19ae966bb719e673f7c63f90a4995937bd1",
+        "cfdf630c9b7dcaaef864ccfe6656efa8e1295adfa4261aac991822e5d14043f7",
+        "13fd7795cf7fa5bebd83388d15767a2c944f790670bafb4a2f8730f1bc210a1f",
+        "0ce9205fa0615671097d6f9a2d2dc42dd366807c6574008ba5e67594432071f5",
+        "ecc4cf4ff4c27d66fd287da67857d595bf3244e1128b77d977dc436e72193202",
+        "4750a90066068e9e12ff596d2eb2962520cb647c06f13bce291b5c68a22d1ab7",
+        "b2cc7d461758a218679b805e41cdc21939c7b8d30adfd34118ff6f012202064d",
+        "051e6f62703bab650f9deeec55aa5de18887c39560166e1196a1929da2c21a9d",
+        "5dc7a37bc3f578c379706fe976c2855d024b69aa1ca9be9de31edb3addeee863",
+        "988ef6d86051767b5ec6fc2eb76c7d3c29e9f05b16bd0dfd3fe93556aee7dfaa",
+        "3a6681004e8311b1d6584e828d8b3845f7e9167a7083ad9eadf17074c2b4ec28",
+        "890718885a1c3d2b841a2ad6cf564ac53a48a98ae697e21b583b50dff180be18",
+        "496ad655598ef0a61246d3539606c04d643052f22332d06def0464324ef24ae1",
+        "263e7e331991dc5f6a914719e8b73c483058654ac926c8723dd7dca875535fc6",
+        "f75b4786d0c4f005b9f56311528494972f153bee9f5fec8b0ac51ea361d5113a",
+        "31c1fda60dadb5ae2f30986b8764c2ed7786c7355e31ad6302c47012696f2882",
+        "56af4241119ecb55111d6b872882bb023fb83937d99a68e7c9b693a1ceb8d4a2",
+        "f5db299174884f31a9c6265ef433de79c3509ee821fffeea27f7abe2455cda72",
+        "aaf48e0d82081cc9b4e4ea7e7da829a924a21ee3917b73cfbad9c23a879b1604",
+        "92f80fcdb192027c9d7c305daaebc0dd8b348625a44ec26f1a975aa7741deac3"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/conflict-avoidance.en.md",
+      "target": "content/pgedge/spock/conflict-avoidance.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/conflict-avoidance/",
+      "route": "/pgedge/spock/conflict-avoidance/",
+      "sha256": "444d22633ac701536df2dcf433a3a9b6f04860b23ae444dc7e30e5f39adfed94",
+      "code_sha256": [
+        "402ecb0c6e6d3c880a5ba7ac2e7a5308daf32d99d02f7a577009f3cb30b5dfa1"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/conflict-avoidance.md",
+      "target": "content/pgedge/spock/conflict-avoidance.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/conflict-avoidance/",
+      "route": "/zh/pgedge/spock/conflict-avoidance/",
+      "sha256": "f898f6626c313faa812f23780cdc6a61a622a4cf97c3f44b96c47583e03da65c",
+      "code_sha256": [
+        "402ecb0c6e6d3c880a5ba7ac2e7a5308daf32d99d02f7a577009f3cb30b5dfa1"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/conflicts.en.md",
+      "target": "content/pgedge/spock/conflicts.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/conflicts/",
+      "route": "/pgedge/spock/conflicts/",
+      "sha256": "079adcc04ee2f3727e6e3b27ba3a776beae97b4d9ecd9fff07a0347bb203fb9b",
+      "code_sha256": [
+        "bbd64aa701794ae5b3bd7ef2a1c3e5d58e3f6d09415cd722e16c4fdad3a68f9a",
+        "5d059ba3df905b0b5a74bf4d5430354e906df8e9017c7d5a524f76e5013313d9"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/conflicts.md",
+      "target": "content/pgedge/spock/conflicts.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/conflicts/",
+      "route": "/zh/pgedge/spock/conflicts/",
+      "sha256": "43b882d2e50a0525755815c55da6b5f939d1dc7d04a71fe2b0a6cb9f50482867",
+      "code_sha256": [
+        "bbd64aa701794ae5b3bd7ef2a1c3e5d58e3f6d09415cd722e16c4fdad3a68f9a",
+        "5d059ba3df905b0b5a74bf4d5430354e906df8e9017c7d5a524f76e5013313d9"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/faq.en.md",
+      "target": "content/pgedge/spock/faq.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/faq/",
+      "route": "/pgedge/spock/faq/",
+      "sha256": "7fa9f5ceef5b4efa1a1ed4943198f469cb0eb4a636b82cd3e46d02c7fd904e26",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/getting-started.en.md",
+      "target": "content/pgedge/spock/getting-started.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/getting-started/",
+      "route": "/pgedge/spock/getting-started/",
+      "sha256": "a7d3a62d42b0c171566e4e25b7a3382f98eeafa6067aee1c93982a9595498141",
+      "code_sha256": [
+        "7515884773638bae5c5927cce23059271b1adbcb785ee4bef9e2d337bc6951fd",
+        "3a73eced4ea6671582f663f558943496e73e5806cd274ddbeff10905a6fc59cf",
+        "9e4e70391556aaa946f6620ae278f4b521bfc64e2405a669e285340ba97778a4",
+        "2c21b14c5035d062881ef25e2f475abecac2a1809751981b1cd87e40afd6a909",
+        "0107773e835d516ab89218780e64eddd6b8a0a5b6d98832371fd0c24ae890ec6",
+        "b03d779e87e0cd1adf8b3f98a112b750e9283a69c06ef2948eac9598e17d835e",
+        "28656ac65cf7fc864da4e7b69b885f41b48ac40c9d6e1b6d31e689388aab704d",
+        "14212d646e55dc31377b6cbe1521e5f98ca7ca4bb1ad3401f78bb4958379011b",
+        "0b6c06c9c5f1258b8e21c6c5c0e4d301f9082c7142ebd176d41e38f60b6bf7e2",
+        "c674525926177b1b2287493dde8d9265e3d86a10b8b4bc8a4025cc7be150130a",
+        "66153d05931adb43b97d90b4dc41ad9dc11700269052f52aef6208ce388c5aa9",
+        "8e2c6665d2006b2671c8cf8cae260e2e1ad4cf1dcb4fc6a28bb393da68c83cb4",
+        "afe75a11ce03402f020d8add84cd05b084f7e5f6472b2012b950c397411f8fd7",
+        "7c7e747445021898601bd3e3173d0d608d7d52ed54c1412a2548190d12af6ac5",
+        "a6bdd6dadab29980d6710a63eaa61fe511c89da5593d29c0b9d8caf03f486e8e",
+        "f01fb1fcce26068d03ca33d9743a1bda27f33d529c97267d87520715e429f815",
+        "a82f569a5bd3eb6962b31c3ee759f7a471cc8364a6e9ceada02943785546a248",
+        "4d0ee9db256874a15e22b4d046e4b67482d58b92d563f57ed9b1abe2dedcba97",
+        "4a86c6e1f1b1148918318ffc8a85e19ae966bb719e673f7c63f90a4995937bd1",
+        "a819f508dd0cd8e6f8ed1763c1a8f938cd6db3909471cd7ff59da76bda14d073",
+        "d4d7910d5f799165c66644c5f8dcbdd1b730ec3c236d0822cc5c04a2633f69e8",
+        "ac3e9f51f65cf1915a18717c41aee5fdc74a668eab5fa3286a694a9d371e6b0b",
+        "1a1867f2ca321352d64e1ec557e06ef210ba8093b7c452193f20aab15e3a5ea0",
+        "ac3e9f51f65cf1915a18717c41aee5fdc74a668eab5fa3286a694a9d371e6b0b",
+        "759b37f1b141f0aed3826be3f806e6ca41db25842c34a753eb44527b20c73040",
+        "4239b699b3e983efa56762bf7be56c2c88af894c501960183eea0b7083f13534",
+        "79fa3ae43d0551b2e22e2099ba7ae7505b29aa1d40d10f76c6ea7a99fd2fe946",
+        "9eea52bd07c983dc94bdc619322f365adf09741fa07de2106951107d4960a4f4",
+        "c19814e00aa709b32379ebb99160c1c28bc565eebe13e8a3ce72357c88cb24e3",
+        "0d0a0922a9f612db03539d5c63354841adb8df3ce5ad4874a86bf3ee9b225053",
+        "4189b14b7c60406392c43336363705eedff3338900b0911ba8026a5178f8642b",
+        "0b3c36ea6eba52ad57a3cd58d117c3cf8bddcead003990810c792e057bda7148",
+        "dee3998cd4f8409cdb714768113f8b7f55064d0dd8c43deb331b97c872d782c4",
+        "dff8df84209657e5a4d6cc077f07496eae57984348e57e2476032d2bf3de3bd2",
+        "7d9a67128d5ca2c144369edb84b28bf69130149142b9f83c3270e85264a188a9",
+        "dee3998cd4f8409cdb714768113f8b7f55064d0dd8c43deb331b97c872d782c4",
+        "d26e35cdb6540fcb0b395457cd33dba615d3021d421abd2d3686e7a4133cbe54"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/getting-started.md",
+      "target": "content/pgedge/spock/getting-started.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/getting-started/",
+      "route": "/zh/pgedge/spock/getting-started/",
+      "sha256": "d2037542250b27184fbf5d9ea83f650c9d3e91f78717d77f62facf0b826fb4e5",
+      "code_sha256": [
+        "7515884773638bae5c5927cce23059271b1adbcb785ee4bef9e2d337bc6951fd",
+        "3a73eced4ea6671582f663f558943496e73e5806cd274ddbeff10905a6fc59cf",
+        "9e4e70391556aaa946f6620ae278f4b521bfc64e2405a669e285340ba97778a4",
+        "2c21b14c5035d062881ef25e2f475abecac2a1809751981b1cd87e40afd6a909",
+        "0107773e835d516ab89218780e64eddd6b8a0a5b6d98832371fd0c24ae890ec6",
+        "b03d779e87e0cd1adf8b3f98a112b750e9283a69c06ef2948eac9598e17d835e",
+        "28656ac65cf7fc864da4e7b69b885f41b48ac40c9d6e1b6d31e689388aab704d",
+        "14212d646e55dc31377b6cbe1521e5f98ca7ca4bb1ad3401f78bb4958379011b",
+        "0b6c06c9c5f1258b8e21c6c5c0e4d301f9082c7142ebd176d41e38f60b6bf7e2",
+        "c674525926177b1b2287493dde8d9265e3d86a10b8b4bc8a4025cc7be150130a",
+        "66153d05931adb43b97d90b4dc41ad9dc11700269052f52aef6208ce388c5aa9",
+        "8e2c6665d2006b2671c8cf8cae260e2e1ad4cf1dcb4fc6a28bb393da68c83cb4",
+        "afe75a11ce03402f020d8add84cd05b084f7e5f6472b2012b950c397411f8fd7",
+        "7c7e747445021898601bd3e3173d0d608d7d52ed54c1412a2548190d12af6ac5",
+        "a6bdd6dadab29980d6710a63eaa61fe511c89da5593d29c0b9d8caf03f486e8e",
+        "f01fb1fcce26068d03ca33d9743a1bda27f33d529c97267d87520715e429f815",
+        "a82f569a5bd3eb6962b31c3ee759f7a471cc8364a6e9ceada02943785546a248",
+        "4d0ee9db256874a15e22b4d046e4b67482d58b92d563f57ed9b1abe2dedcba97",
+        "4a86c6e1f1b1148918318ffc8a85e19ae966bb719e673f7c63f90a4995937bd1",
+        "a819f508dd0cd8e6f8ed1763c1a8f938cd6db3909471cd7ff59da76bda14d073",
+        "d4d7910d5f799165c66644c5f8dcbdd1b730ec3c236d0822cc5c04a2633f69e8",
+        "ac3e9f51f65cf1915a18717c41aee5fdc74a668eab5fa3286a694a9d371e6b0b",
+        "1a1867f2ca321352d64e1ec557e06ef210ba8093b7c452193f20aab15e3a5ea0",
+        "ac3e9f51f65cf1915a18717c41aee5fdc74a668eab5fa3286a694a9d371e6b0b",
+        "759b37f1b141f0aed3826be3f806e6ca41db25842c34a753eb44527b20c73040",
+        "4239b699b3e983efa56762bf7be56c2c88af894c501960183eea0b7083f13534",
+        "79fa3ae43d0551b2e22e2099ba7ae7505b29aa1d40d10f76c6ea7a99fd2fe946",
+        "9eea52bd07c983dc94bdc619322f365adf09741fa07de2106951107d4960a4f4",
+        "c19814e00aa709b32379ebb99160c1c28bc565eebe13e8a3ce72357c88cb24e3",
+        "0d0a0922a9f612db03539d5c63354841adb8df3ce5ad4874a86bf3ee9b225053",
+        "4189b14b7c60406392c43336363705eedff3338900b0911ba8026a5178f8642b",
+        "0b3c36ea6eba52ad57a3cd58d117c3cf8bddcead003990810c792e057bda7148",
+        "dee3998cd4f8409cdb714768113f8b7f55064d0dd8c43deb331b97c872d782c4",
+        "dff8df84209657e5a4d6cc077f07496eae57984348e57e2476032d2bf3de3bd2",
+        "7d9a67128d5ca2c144369edb84b28bf69130149142b9f83c3270e85264a188a9",
+        "dee3998cd4f8409cdb714768113f8b7f55064d0dd8c43deb331b97c872d782c4",
+        "d26e35cdb6540fcb0b395457cd33dba615d3021d421abd2d3686e7a4133cbe54"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/installation.en.md",
+      "target": "content/pgedge/spock/installation.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/installation/",
+      "route": "/pgedge/spock/installation/",
+      "sha256": "0f60b825b5c02b36c3798973653ed57ef1a94360f344c33ce7ab2fcb8c7d8dcb",
+      "code_sha256": [
+        "77f3587657b27bcfa690979363911621ab59d26b03631c92a2f295614ef1618e",
+        "1281ba7861219620875ffb96b72a478d581a750e557eabbbf0e1e2bd791729b7",
+        "d8913ddd4fc75e17116cee7385a7f09062318b6625e327c1ed0318b032d91d1a",
+        "fa182ac32066d92f07834c142026439998371ae0d091ea1b7c03dc644544c1c4",
+        "8322311ea8b9284804b3b9d72c93d9c42a4ba47527f868d1f704de74f9f4dae9",
+        "3176c91e14d473025b89c8eb80130ac891d277b03a90a5d230e61d43abe136fc",
+        "38620199c1dca1ea79eb2d0a7cbf00d74bc3cd258a9309f5d4828104325bf5d1",
+        "8c0df3ea6aedd85dbaaf5463c5fd6850a1d6f5967372c1071f4a8853b235d951",
+        "f73a13ee766c2cb7b94b3e32312c4489e90a0aefb49901dff2c1691bbfbe0a49",
+        "28d8429561ca21e4d610340f2407a1eca075a405e260688b63005101c3154def",
+        "338f2c506585c80759920872cbf58c1c669d14db7b47f6323b83bec0b6203927",
+        "abc37bdb7af2940298438e6a342ea9e2111ceba464ddbaa1ed6563c883c1a4dc",
+        "052de9b9d8ab9dab7ca0e2d82515e3f0dea005cf3b9bd17055ff8ab2f69cba4c"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/installation.md",
+      "target": "content/pgedge/spock/installation.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/installation/",
+      "route": "/zh/pgedge/spock/installation/",
+      "sha256": "30e28f046d0fc027655460518c966e8e66cc9cfffc10e1ce80fd30e26e37402a",
+      "code_sha256": [
+        "77f3587657b27bcfa690979363911621ab59d26b03631c92a2f295614ef1618e",
+        "1281ba7861219620875ffb96b72a478d581a750e557eabbbf0e1e2bd791729b7",
+        "d8913ddd4fc75e17116cee7385a7f09062318b6625e327c1ed0318b032d91d1a",
+        "fa182ac32066d92f07834c142026439998371ae0d091ea1b7c03dc644544c1c4",
+        "8322311ea8b9284804b3b9d72c93d9c42a4ba47527f868d1f704de74f9f4dae9",
+        "3176c91e14d473025b89c8eb80130ac891d277b03a90a5d230e61d43abe136fc",
+        "38620199c1dca1ea79eb2d0a7cbf00d74bc3cd258a9309f5d4828104325bf5d1",
+        "8c0df3ea6aedd85dbaaf5463c5fd6850a1d6f5967372c1071f4a8853b235d951",
+        "f73a13ee766c2cb7b94b3e32312c4489e90a0aefb49901dff2c1691bbfbe0a49",
+        "28d8429561ca21e4d610340f2407a1eca075a405e260688b63005101c3154def",
+        "338f2c506585c80759920872cbf58c1c669d14db7b47f6323b83bec0b6203927",
+        "abc37bdb7af2940298438e6a342ea9e2111ceba464ddbaa1ed6563c883c1a4dc",
+        "052de9b9d8ab9dab7ca0e2d82515e3f0dea005cf3b9bd17055ff8ab2f69cba4c"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/internals-doc/_index.en.md",
+      "target": "content/pgedge/spock/internals-doc/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/internals-doc/",
+      "route": "/pgedge/spock/internals-doc/",
+      "sha256": "625206724796d75207c444429bd56fef1c7ae3cea71e7c311636ff4156d58638",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/internals-doc/_index.md",
+      "target": "content/pgedge/spock/internals-doc/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/internals-doc/",
+      "route": "/zh/pgedge/spock/internals-doc/",
+      "sha256": "40a8c3cb7b963b3dbaee298d96702d51699945bf7dc4c37b58b6fd7ce8d0fd0f",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/internals-doc/design.en.md",
+      "target": "content/pgedge/spock/internals-doc/design.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/internals-doc/design/",
+      "route": "/pgedge/spock/internals-doc/design/",
+      "sha256": "4c4f52daea6efe410a27c38a71c2015e560cf6edb7de99d95362725741647b6c",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/internals-doc/output.en.md",
+      "target": "content/pgedge/spock/internals-doc/output.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/internals-doc/output/",
+      "route": "/pgedge/spock/internals-doc/output/",
+      "sha256": "318799600826410940b7ed77165b85e5b46672f1eeb30250d7fc0298a7e732ce",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/internals-doc/plans/2026-04-30-recover-remote-commit-ts-plan.en.md",
+      "target": "content/pgedge/spock/internals-doc/plans/2026-04-30-recover-remote-commit-ts-plan.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/internals-doc/plans/2026-04-30-recover-remote-commit-ts-plan/",
+      "route": "/pgedge/spock/internals-doc/plans/2026-04-30-recover-remote-commit-ts-plan/",
+      "sha256": "7716800e93558d35d7cc39b88c73564721b34bfec230d0a14ac90cd26c3bac20",
+      "code_sha256": [
+        "15a15ddd1ad54a761eb53c273bd2d4167f28bf41f30b16a6c92af45dc03a7862",
+        "7fd4e960e4258bc619794786b5c15eaedc1d1a47d43b848c453f1b44de10da6b",
+        "877ab4a9d879093cdad69c71a2de67d39569d3590c61b531f868479ff5b352ea",
+        "b21f7ce9ec401c8cea31172af89e16180a1ee9b4403eeb2e9de726bc6098027a",
+        "d3d8065a39675dd94da05135004a90f00ede5a0f87d93de9917c8c5281670401",
+        "ca5abfa22da55a0a1935d24632fa0984f0c05b322c93ecdd3ad03c211480b3e1",
+        "e77b6450587e8cef4572f50c01408361e88a6c387dbdd6666863413061e69cc1",
+        "e4ab3a2efdf0393beaba9a6500e9f6a1fbad0fc76e2bc49488af998083dac470",
+        "d73a05f56008fdeb4a019d045c9a079f724e85baed7fb6589802a1203904e6f5",
+        "ce712719d37d8d402579928a2b0335a859ebd59d7b8ecfeeee93260d8c8a5a6d",
+        "db3261db7e131525f37e7f4e3fa70e4120ebd1c86137b3df4e911bd73ab38494",
+        "cd5b86174a487d72bc1868067f935ccb92f6df774a58829f3322b4c6bee80933",
+        "d73a05f56008fdeb4a019d045c9a079f724e85baed7fb6589802a1203904e6f5",
+        "5b10d6a7722f027830a3eb9643de3d5128bbc0c43a332b8266d8b68996e6334d",
+        "692dc101edb395eeb87994cb3b8c67938106d13bb43758be0439df0cb9fa9891",
+        "91fd632de523db513c6e49a9e90a23879935112cf037bd664d23374ea2c9c5e7",
+        "539381b60a8fc8d8f9889a5c51af8ff72ee7744488b26c3de38a3140489e1377",
+        "442084a82ef9fa5d46527d79b3799ab4f1d6235634b785e1b8f1158d10d04cf8",
+        "d205bdec9b8ff69834a5499859a861d7417194e102c06feb7f288755d2e05b8e",
+        "100b4c7c79826824558128662f6a7e6d9620dc4888697fdec23aba4eb21f180b",
+        "f689e4af5dd5bd6b914c4649e333e47681e61b7c9848a13460e525db9a90484f",
+        "89eb3863f6da838d1d2124ed68ce7ce2dcb10fa4958f65828c7e215bba1cb14e",
+        "91adede9b88b93d6cb52c4836415684b5baeb016302c73803488b83152e611e6",
+        "0d5f5a68eb0310f0dca684e6fa640031da2e10a0c3f145337668667b4ae9bf13",
+        "9a4cb7a497af8945c6b258c23dfb8a1ec6fec6380398c7a65c3d6234896140d5",
+        "8e95577531491a7b5fb54db1d65bd3cb85e604260c04c4b043a64740dab53b78",
+        "6d7b27aebf841e7789981ec87198002d4f09eabca2fff42b940ac8f131b778b9",
+        "002226be6ceed3233b23e8f399f316ceb7eac6d9491ef774906c2a181a226b0d",
+        "1bf8971de404cb7edbc12251979d08e2717b01ca80c4a161e84b902446d616e9",
+        "8baea79c812b228e741f01cc240224b6f8624809715c581075256cf8838147ed",
+        "05375c4dce79045284e6441084df29ce2a861b71c330ed5dc036e32e2148f18a",
+        "b8eef673ff0250c88675939f9b6579fdd94290c4c7e19ba4bb90acdd890e1e03",
+        "322f58494c6572e47b86b0fbec88073d336357aa89e4bb420fa21050e71dbdae",
+        "ef161812d45a37e42c38a210eea28a1cd54b3d2f16f3b09b4352d9be5132828c",
+        "d73a05f56008fdeb4a019d045c9a079f724e85baed7fb6589802a1203904e6f5",
+        "b8eef673ff0250c88675939f9b6579fdd94290c4c7e19ba4bb90acdd890e1e03",
+        "4c113d732db576fb917db9e347bd3c620a9540650b2793d7f62405591be82e00",
+        "30c183c8271eeda6639b88471bde42a18293c1b2f36f324c126d26206c6d931d",
+        "297c392a56adc393d78955a04366255528ffea1fbc22590b3c48f203aef4a36d",
+        "f4715ed375e6ad4123654fdb752fc2e36c3c1ef0e61ddd199e8da6bed1727736",
+        "d2127e845a4c95fac22e816ad872b7855a6fca98252f7bd9e834e903caac2cb0",
+        "e6a9696a2ed72f7eedf033ce25fe22c3f3caa362f4e8270b4ab3cb70a8a70e46",
+        "c66491df19ecaa65618597a6f80d8200792c37cc7d2bcbbb6bbb01e28bff5171",
+        "fd860f53da96df2ddb649b34fbc889a6bfe6118b8b4283c4b0df4f56199260b7"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/internals-doc/plans/_index.en.md",
+      "target": "content/pgedge/spock/internals-doc/plans/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/internals-doc/plans/",
+      "route": "/pgedge/spock/internals-doc/plans/",
+      "sha256": "775e559f09cd42bb68fbc369c1ae0c8125800b0eeab37d9df7a2cb725c664c89",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/internals-doc/plans/_index.md",
+      "target": "content/pgedge/spock/internals-doc/plans/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/internals-doc/plans/",
+      "route": "/zh/pgedge/spock/internals-doc/plans/",
+      "sha256": "812e06b7f8478eaffa341a1343e4e347749fc0af762dca00cf4ed6ed06d73125",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/internals-doc/protocol.en.md",
+      "target": "content/pgedge/spock/internals-doc/protocol.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/internals-doc/protocol/",
+      "route": "/pgedge/spock/internals-doc/protocol/",
+      "sha256": "8d7a4ba9e280b3d1ef526bd19528acf36a8a5404f1806f129f8630cd18f1fae9",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/internals-doc/specs/_index.en.md",
+      "target": "content/pgedge/spock/internals-doc/specs/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/internals-doc/specs/",
+      "route": "/pgedge/spock/internals-doc/specs/",
+      "sha256": "a317781fca86d853ea4c1bdd8ab367ab137a4f8f25ba3492731f48b3c7def557",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/internals-doc/specs/_index.md",
+      "target": "content/pgedge/spock/internals-doc/specs/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/internals-doc/specs/",
+      "route": "/zh/pgedge/spock/internals-doc/specs/",
+      "sha256": "b43483643aadd6fe4025df4e6a053265b3b3403a0c926591bda248e029d2afde",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/internals-doc/specs/spock-monitor-design.en.md",
+      "target": "content/pgedge/spock/internals-doc/specs/spock-monitor-design.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/internals-doc/specs/spock-monitor-design/",
+      "route": "/pgedge/spock/internals-doc/specs/spock-monitor-design/",
+      "sha256": "c0bd2efe58a3465f7238b51bb2491a9f61cbebe4bb3f4bb42b51eb9ffd45ae86",
+      "code_sha256": [
+        "6129f0a6d2973753d077dd144675187ee60a2bdd688daf242854e231aa2164db",
+        "84cf223f36d5389cc3945a0d81bf85af7a0ef5b488adac99310666f36788c94c"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/internals-doc/specs/spock-progress-no-checkpoint-hook-design.en.md",
+      "target": "content/pgedge/spock/internals-doc/specs/spock-progress-no-checkpoint-hook-design.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/internals-doc/specs/spock-progress-no-checkpoint-hook-design/",
+      "route": "/pgedge/spock/internals-doc/specs/spock-progress-no-checkpoint-hook-design/",
+      "sha256": "d2e0a4c76fe20cf887779ae7d0b291bcd331aa0561d4a4b926f8b725f6277d0e",
+      "code_sha256": [
+        "eac43f08af6631f362c9a9d3d3b51f1702d9e4f43f9850d30ec1071624463331"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/limitations.en.md",
+      "target": "content/pgedge/spock/limitations.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/limitations/",
+      "route": "/pgedge/spock/limitations/",
+      "sha256": "0fa9bca392bbf58828d62f44a9606cb9fea6ccee9afe28f478cf2548bc900946",
+      "code_sha256": [
+        "925082023ed318dfba4b82373e81bfea86a548fe886714edbfc7ac6478e05b12",
+        "cc54b9e91a3542475bb055b8240d3d0549eed8a147fef78abbf7514791d4dcff"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/limitations.md",
+      "target": "content/pgedge/spock/limitations.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/limitations/",
+      "route": "/zh/pgedge/spock/limitations/",
+      "sha256": "6f9100ab3bac60fc37ff8bb8894896f2f27b46ecd0908d5acfa01c41acd978e8",
+      "code_sha256": [
+        "925082023ed318dfba4b82373e81bfea86a548fe886714edbfc7ac6478e05b12",
+        "cc54b9e91a3542475bb055b8240d3d0549eed8a147fef78abbf7514791d4dcff"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/logical-slot-failover.en.md",
+      "target": "content/pgedge/spock/logical-slot-failover.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/logical-slot-failover/",
+      "route": "/pgedge/spock/logical-slot-failover/",
+      "sha256": "b282fc120988bf0f6c505c3cbd7c1faa3b159792e4bdf9769f42299cd38a0263",
+      "code_sha256": [
+        "6e7035d89ee169efb44ae84ce08edb6af64ae99f8f4125395cd0bf0e95830462",
+        "c57a7eef428681ad2aa27b54dc8e0241d4590e6a1765cceb9c21348e555eb970",
+        "c57a7eef428681ad2aa27b54dc8e0241d4590e6a1765cceb9c21348e555eb970",
+        "62e5f517d3c246645e7c36ec146e3c2c8c10defabf3e922bd10f04195ff387d3",
+        "802370f39e5dcb99826325bc147c741df255b5120208bf20bdb0790d04c17703",
+        "1234a99bfa77b3f3d46e4f8a34e5e5c60c1941e541b54ba3bc0ee9cfc05cf4a7",
+        "e00704bf6ee5a71663d71b4a9ed9cb1e323816a50c7fff516185bfac37d12f49",
+        "ab9dbcafc41c2ffcf87d54b8e4b91b36ece6de1d46095c6e2d756fb86ea99c7e",
+        "ef018cefc457f709eaec9c84cd8400013503e0ee949ecef1f3ad0ae577400206",
+        "4669bb2ee8bb9e786b27ff9196d5f4ef978513d0ce14ba891d6e09c19ea92b94",
+        "dcc0b5fbf72fb551bf3169cf53d710147f7f9735f9e480ca516ee52363075bd1",
+        "e459e3b26f80cd1899007b3686a01715122dfd0e083a9542529d353a944a314b",
+        "8ad88e6968abd1a782383c00f25864890a44082b7eac577ddd262e684691cb32",
+        "82b77c2e27dfed4efffddc8ee7a4b5214e7e06916d036f32b732dfbf34c8216c",
+        "ea97c3ae3d0881837cba9dd7dd0aa7c555841a12600f246064d179a118110ddb",
+        "127636deaeba39a7bb3f9dea898bf492c79c05a67038cdd111fe9ab396991895",
+        "3acb7dad1ca0b6268a7493544c27e990788b3545c96d9e3b67f613926f1e79b4",
+        "af2ccd6dd0b8d1fb61129601128ceacc08ed1691d98438513fb75fb21ba7ea34",
+        "0dcb5d1907011fc8c18fb6be82505fa22b0d5f8629e8de73135da9c986b3164f",
+        "f8983a92c722831386cc7ba977e9d30b17749f840cc79d31d79f009a2314856d",
+        "2446bf9883881659dba22266b075c49766a831107476d6a230ebc1d653fec1b2",
+        "89704f74b6f30bcc8046a2a0e10eedca58bfd6ea32510f2fddc11d7e2a136773",
+        "85c8d5fa5f0ef1c8566009d5180ced5856f99a3be4fdeb9e265836711f2ddfa6"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/managing/_index.en.md",
+      "target": "content/pgedge/spock/managing/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/managing/",
+      "route": "/pgedge/spock/managing/",
+      "sha256": "cc15fffdda8933a65fa3a778204efa9d6873ac905a8deea1b8e1c7078af3b910",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/managing/_index.md",
+      "target": "content/pgedge/spock/managing/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/managing/",
+      "route": "/zh/pgedge/spock/managing/",
+      "sha256": "e0ed70a6feb29887254fcb2a59679fc67bfeb54e2de68609f7493eab8721865b",
+      "code_sha256": [],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/managing/filtering.en.md",
+      "target": "content/pgedge/spock/managing/filtering.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/managing/filtering/",
+      "route": "/pgedge/spock/managing/filtering/",
+      "sha256": "b552a6b9e2ae63facb354e6a82b7e3090b3517c6a475717d1f12a0a6c5705583",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/managing/filtering.md",
+      "target": "content/pgedge/spock/managing/filtering.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/managing/filtering/",
+      "route": "/zh/pgedge/spock/managing/filtering/",
+      "sha256": "617cd543075a4e188f703a545a2de54a99641858547ee0985f5f6b2255f39bcd",
+      "code_sha256": [],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/managing/lolor.en.md",
+      "target": "content/pgedge/spock/managing/lolor.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/managing/lolor/",
+      "route": "/pgedge/spock/managing/lolor/",
+      "sha256": "cfcbb4421859160a327855f8095cfb53218f65c8d2384976a6c115fe24f6425d",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/managing/lolor.md",
+      "target": "content/pgedge/spock/managing/lolor.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/managing/lolor/",
+      "route": "/zh/pgedge/spock/managing/lolor/",
+      "sha256": "6ce5c427a8b1dc8a652c9cfb9312d7c3226bf09f569ec38f65ea4bc6e73240e9",
+      "code_sha256": [],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/managing/partition-mgmt.en.md",
+      "target": "content/pgedge/spock/managing/partition-mgmt.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/managing/partition-mgmt/",
+      "route": "/pgedge/spock/managing/partition-mgmt/",
+      "sha256": "6f4d0868dde8b1727ed428e44e00dac6c57d3a3af3d9aa0ad40c08d44cb06f31",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/managing/partition-mgmt.md",
+      "target": "content/pgedge/spock/managing/partition-mgmt.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/managing/partition-mgmt/",
+      "route": "/zh/pgedge/spock/managing/partition-mgmt/",
+      "sha256": "fd83f11fc05eed302d6a8c8cd938f739702e5bb0d888e0838bc61c0ab352334a",
+      "code_sha256": [],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/managing/read-only.en.md",
+      "target": "content/pgedge/spock/managing/read-only.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/managing/read-only/",
+      "route": "/pgedge/spock/managing/read-only/",
+      "sha256": "d0423e0840a2390d2bae45858ad6da96aeb9b4cd41d71dfd6baa3467dc4d177e",
+      "code_sha256": [
+        "9d53fd40c5422a0d352bfd859ae6c471d17534a68ec327f74cddb0945b99efbd",
+        "dcbeaa3b06271d52de1be4d58dda939db25cd21e28778493528a7d727edfb834",
+        "6067747248c2fbcd587355ad3060fb704119f298fd4bedba2086b2113c15cdca",
+        "d539de320936f75965812ea9787c8d22bd3c86e26b063aeb196fe31baf1e4dd2"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/managing/read-only.md",
+      "target": "content/pgedge/spock/managing/read-only.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/managing/read-only/",
+      "route": "/zh/pgedge/spock/managing/read-only/",
+      "sha256": "e3f96b3901cd686a62ace8b7971e8c5a951ca303fecdd3afbe15320c01515469",
+      "code_sha256": [
+        "9d53fd40c5422a0d352bfd859ae6c471d17534a68ec327f74cddb0945b99efbd",
+        "dcbeaa3b06271d52de1be4d58dda939db25cd21e28778493528a7d727edfb834",
+        "6067747248c2fbcd587355ad3060fb704119f298fd4bedba2086b2113c15cdca",
+        "d539de320936f75965812ea9787c8d22bd3c86e26b063aeb196fe31baf1e4dd2"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/managing/repset-trigger.en.md",
+      "target": "content/pgedge/spock/managing/repset-trigger.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/managing/repset-trigger/",
+      "route": "/pgedge/spock/managing/repset-trigger/",
+      "sha256": "2631f24bcca12000eae8a8aeaf6a0e68751760114fd219bb4c8e6cc9d9753588",
+      "code_sha256": [
+        "cb8479a2733059521278eb1dd1e85d083dbe5b98ec29169307f1b95d7198391b",
+        "3839f4dfb2b9ef52e4d559c0b43ac259405f2888ef68311af3ee602f4ce756a1"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/managing/repset-trigger.md",
+      "target": "content/pgedge/spock/managing/repset-trigger.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/managing/repset-trigger/",
+      "route": "/zh/pgedge/spock/managing/repset-trigger/",
+      "sha256": "2b4b5dd1208c78b2f45a88e434bcdd27e9b9320a95585b23f36da473f777771e",
+      "code_sha256": [
+        "cb8479a2733059521278eb1dd1e85d083dbe5b98ec29169307f1b95d7198391b",
+        "3839f4dfb2b9ef52e4d559c0b43ac259405f2888ef68311af3ee602f4ce756a1"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/managing/snowflake.en.md",
+      "target": "content/pgedge/spock/managing/snowflake.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/managing/snowflake/",
+      "route": "/pgedge/spock/managing/snowflake/",
+      "sha256": "f7ad5c3bb6e6d1ebdd70a98fae99421a19a60d12dcb56be43508853ec1b9929f",
+      "code_sha256": [
+        "64a8aa01681e595281caf04fa70ccc4fdbb9caec5a3320a29d5e78a058a306b1"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/managing/snowflake.md",
+      "target": "content/pgedge/spock/managing/snowflake.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/managing/snowflake/",
+      "route": "/zh/pgedge/spock/managing/snowflake/",
+      "sha256": "901423f3d83e55b5d1298caab038eb861f13cb8fa8c8ee53fd0ba6d8c4d32717",
+      "code_sha256": [
+        "64a8aa01681e595281caf04fa70ccc4fdbb9caec5a3320a29d5e78a058a306b1"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/managing/spock-autoddl.en.md",
+      "target": "content/pgedge/spock/managing/spock-autoddl.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/managing/spock-autoddl/",
+      "route": "/pgedge/spock/managing/spock-autoddl/",
+      "sha256": "dd4299267de08235d5449703ee03ac8f9375e2a75f2f3f091ba906f7242408ca",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/managing/spock-autoddl.md",
+      "target": "content/pgedge/spock/managing/spock-autoddl.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/managing/spock-autoddl/",
+      "route": "/zh/pgedge/spock/managing/spock-autoddl/",
+      "sha256": "6c56ebf3f36a44c788b9a1ad7f8f9b5395d37da1c30bd6bf7de4ca1ff4761b01",
+      "code_sha256": [],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/modify/_index.en.md",
+      "target": "content/pgedge/spock/modify/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/modify/",
+      "route": "/pgedge/spock/modify/",
+      "sha256": "7b2b54515975a50a96a5d5c3cc3c8309c1c42ebfcc66d1cb8b3afc11b04ecf14",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/modify/_index.md",
+      "target": "content/pgedge/spock/modify/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/modify/",
+      "route": "/zh/pgedge/spock/modify/",
+      "sha256": "eae8c8fb7b900396e91c4354d149cc0aa3574f1736d997a46bc255e62bf636fc",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/modify/add-node-pgbackrest.en.md",
+      "target": "content/pgedge/spock/modify/add-node-pgbackrest.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/modify/add-node-pgbackrest/",
+      "route": "/pgedge/spock/modify/add-node-pgbackrest/",
+      "sha256": "2994314ecfc6f0f45c395feaa1c05f2dc13398ac58919a9c8b7ad77bce03370a",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/modify/pg-upgrade-rolling-tutorial.en.md",
+      "target": "content/pgedge/spock/modify/pg-upgrade-rolling-tutorial.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/modify/pg-upgrade-rolling-tutorial/",
+      "route": "/pgedge/spock/modify/pg-upgrade-rolling-tutorial/",
+      "sha256": "f0514f8e6f931cb19632ffd86a9a499cd68e998397533fcab522fa8665e577a5",
+      "code_sha256": [
+        "21a2a81a24a558aa3e07db37082c56b91432a23612a32ced3ed3bb886b48b7e8",
+        "bd28034dc9704e8c6734548b01e6e5d7f9418a569edc00271e0d1416ea0223d6",
+        "b9f5f1157ecdfd14b014439c7c1bbf776a18b7186115d0683e0daaf88fa4c09f",
+        "b4935fdb856facd6ee25573677c091f499f5a57c4f08446b859c785797e9d0aa",
+        "ef5c653db4d25b208302795115e51bfd3fabc296a20a3875573201faf761192c",
+        "c6216c3387172f8231619d323a1253590f6803d734ab6cee56d6a04cbb01ca7f",
+        "1f4963a942d659f0e3be2fd647b781196d806098afdfb402f1991201bb557072",
+        "e924303a27a243674a5b4ef3086061bafc698532519da799312fef7d3fc0bf7b",
+        "8952800ecf6639eb7a878c093d0d55e02923236e6b78b7440dff7e9e81fcafc9",
+        "81acb9f687d0e3b49d53d53e7fa762e479ae24f0b494c9024ddcfe91fd58d8e9",
+        "bb0e5465081a40cae0111fed5e5d03a86e522cfe77031314eb26b621c13d0c3f",
+        "5bceaf6d5507a13f3d7affeceddd3b3a124b2603cab1cc444122ccdf4cb330ea",
+        "cd5afff61214dc7c1ea918868fa4cec4563d7d3e057c104b073ee16f6518d185",
+        "a8285ea61b3c475593eefc6a2e6541355e2722cd7effa438387fe54fab546726",
+        "278d38166edc52002e95dc34c622cbe1161a1a86352854f276016b195d156dba",
+        "12a31997a1d7be1a93c9685b8475ec7b50ed6305743dc2930da6568528fdea71",
+        "e613ad5ee0c6c74b33c8ad90cc8318aac5377c16606c1c117788155fcc40dbd8",
+        "8b19f5e22f08d0551460972ee5647d3c965ca072b1c76ec6ce88e7daedaf5c08",
+        "302e95ab7161af502ff4840d47d2320769a3e74a5caf2b5a29371df5285a4c64",
+        "d4bb81993f10fe994164f8e91bc010a3d0e1d0c6032b3b2befb1beeac8fb37c6",
+        "2c3ff3f0e45966ab92c195288377fbe6f041cde7d1a415658d8e3fdbfb75ec7b",
+        "26a88a1d6ed735bbc567216e44b991c6bf903e72e9138ffa73faccfc83f3116f",
+        "7719fd9019a9059022a6c15c2c5972517863aafa7e16c7180bbeb4db4ba28c68",
+        "cc22fbdd5af9c9b944e591a999447257a2ca8fc5dae03c3c3ae259d4e34b85bd",
+        "de6641b220f634b63ea8491d2427dcacf69d55633132b517741be1727db03e8b",
+        "a45d0470522f95a721dad028aa772c1ed8b540a805383b4140bd0c96cce14201",
+        "cedfef1a2019dfafaa7479bf59beb9ff9c9ee2fd65f8baf574552f502ebe745a",
+        "6adb829cc7b38c186d1f8dc6019df48b8aa51462ffc28155cad40737080043b0",
+        "c804815437178314e6102f76ba7225256f030173257018e6ea168e162bd00016",
+        "72dc6eaf847e47704e7e2336c2951d9d5cadfff54812bf3205ebe3bf7c039838",
+        "cf53bcd2dd8818ba15980a72af9e8ffe90451e8203238fe6acb4a4ec453ede65",
+        "a1a88eb71efc9509a0eb147f76eac6bca841414adcb86a31f8578e1b5a75a8c6",
+        "76c73ed9a0e553e71c9f4fb750544f0a29d13dfe1a7c3d2bcbeb666093c1c64a",
+        "e4b454f9bf3e6699a75809085e3ef9b251c09af1d971ab32c558d8e09f0f9b00",
+        "1694bb6c6f8d8f21b7b69156cce80f3addcfd71bccd7d868b5c6d8343ad8382c",
+        "e5bcfb7a6051d8ce4ce27f2513bdb51033e43ae828f2fb517bf82ea477e677cb",
+        "df9f8836fca338bd372528d5d05a5dc476f53ceb11936352ab39e315d9a21e88",
+        "6610eb36c4fd61eda3e6c9871adcdf9f7f3786e3bb85941ef5b0559f937f7f7b",
+        "775dc2772d96b34ff15b13cf8bbdf048859ea176b531c7c765c810bd403babb5",
+        "56e1717283a6b0fa3d2a26a7f662644ae85b320082ba7eea4ee08e74194064a2",
+        "f9b867d1ea6cf3e7f5839b7b26c2b1626dd2be8bdb05b5efb7ac662536125830",
+        "da1f80a1c9a2a3cd0b8791c193e1fa067fa61d5ef50b2ec739066803d38a9095",
+        "934715da5a1f566f6f9c9e4af8b503ace04608d8c805bbc3c026e9f48e65e307",
+        "e05b9f0dd78c5500eeafda5cf608351d5c1615daa350a8b8654278efbd7c590a",
+        "34d6ba9c46550f6ec20c998922a23ea8534545884729df816c3669ddc4bb2660"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/modify/zodan/_index.en.md",
+      "target": "content/pgedge/spock/modify/zodan/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/modify/zodan/",
+      "route": "/pgedge/spock/modify/zodan/",
+      "sha256": "07db054bdbb6d90cea7b05c11e19a8af9fc96983fa60fea9012f2e45deb6de58",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/modify/zodan/_index.md",
+      "target": "content/pgedge/spock/modify/zodan/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/modify/zodan/",
+      "route": "/zh/pgedge/spock/modify/zodan/",
+      "sha256": "73d47c8d0df06aa2883d23f778ac2ec94e7f08bcce6fb221b1272a116dd8fc62",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/modify/zodan/zodan-readme.en.md",
+      "target": "content/pgedge/spock/modify/zodan/zodan-readme.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/modify/zodan/zodan-readme/",
+      "route": "/pgedge/spock/modify/zodan/zodan-readme/",
+      "sha256": "26c3994ee1f567fb0cb3bb84734f5c2d99de560738e6abd3c228df77eec6031a",
+      "code_sha256": [
+        "55c16d7f8114578f2706685d675fe5aa8886a7e653b8d00011c504385af0fdfd",
+        "5762a38400fe1bc0df148ac9e309291bf33ee09d1864a24326f742cfb55ed98b",
+        "7abe401a666a4dc9a7dc2e60e5c19785889520e1fbdd87c62597298db784270b",
+        "9b5be4ee9fdada1c9b79e366db96d95692811801f668162954b49ec1f24dcd9e"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/modify/zodan/zodan-rolling-pg-version-tutorial.en.md",
+      "target": "content/pgedge/spock/modify/zodan/zodan-rolling-pg-version-tutorial.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/modify/zodan/zodan-rolling-pg-version-tutorial/",
+      "route": "/pgedge/spock/modify/zodan/zodan-rolling-pg-version-tutorial/",
+      "sha256": "4ef65a389280e8bf2c8197b91862f08455b3eb0c4c3a82c3dc2bb84f5f80f83b",
+      "code_sha256": [
+        "02f95773634768e275a7a1f0cf3f83504606af1cb1f8f8ab46d33c109d536d5c",
+        "b03d779e87e0cd1adf8b3f98a112b750e9283a69c06ef2948eac9598e17d835e",
+        "28656ac65cf7fc864da4e7b69b885f41b48ac40c9d6e1b6d31e689388aab704d",
+        "af2f1767a8c593a85bb4602ae7dd1de3e90948020756a9855976b2a5a1493fb1",
+        "6b2bf51ae4fd7e35196e1e49e8640d91906f7df051d0c4f2d0ba823d71320706",
+        "507153ab32ac45246ba65e2327c39794f321db2b38e94e9e8099e96f17a6c4fa",
+        "84263b5b1c45284e3f22c26cdeb1b933d441884d5c05e665c5d14e0522db6ffc",
+        "42b8204157134d3233ea31c6910943d2dfb0c316b82e60e7b91b62a870967eba",
+        "cdfc62dd26abd99015c99485f1735d7d123b031f7e91ea2f9ae67cb592f7ccd6",
+        "2a1ff8936def7e2cc49fe98740318c40dd701feb457e9edfec68cf681f4a7bee",
+        "a99e659287db87836c4eccba8d9a4844bc2bacc5eeb393ecc2b7a3dc06f6f0e6",
+        "51520c0c7abe11de263f34f774274a8b6911d9a92d53b596f9950d0aaa87b06e",
+        "a9082017c185e5a2eeefcb6e1bd6e29ff63e8a8a79bd1189a1b2ae46f5f612d3",
+        "44662b786a4b35c57634caf34d11468a456af90b73a2acf9254fad6a9f64c730",
+        "bda46f2eca166a739970182f1e62db8283c5d04d214b80b98fd1ebce41c25185",
+        "ac1d41af8ac3e1dcdb38c27f0cddee51c401fea7a22c3837a12e663be7b2dc41",
+        "e97fea5a2c6c0a4cf21a990a2fe519760a086f00d2f140734a4c51e73d848210",
+        "0364bdd12a86553dafb440cd947d0d514bfde4a99f67af3413b1e0cc25fcb01d",
+        "3db8ebd63191fb69321d20e472325140df5e066629c932099d20078abc216cc0",
+        "6d089fb17a77ed5c74cfd173ffea9871e887cd6b46e1ba02ad525edc7890006a",
+        "26a88a1d6ed735bbc567216e44b991c6bf903e72e9138ffa73faccfc83f3116f",
+        "1d0868a38598017bc8221bfcc8e347db20a53c3641005254852f4dcf7b51fcce",
+        "cc22fbdd5af9c9b944e591a999447257a2ca8fc5dae03c3c3ae259d4e34b85bd",
+        "de6641b220f634b63ea8491d2427dcacf69d55633132b517741be1727db03e8b",
+        "c2d9bf61993fd8eec26dbf63ef93d3cf1c89e3de6cd39a0deb70129a2d07abab",
+        "7e68f792bfea6cbae07a0621fe2614f691831bfa07fd0197edd43a150fbd1363",
+        "a89f79c56c30e1625ede317f88ab822e37cb89545672d6c368a12a161dc41b7d",
+        "aeb417a8e23f848c01bfb1f3e7e73b9c1f3c690f41732d73a17290f148caf3ec",
+        "3098e1320f4249f2d0ada934357375f744831e3e67c1dc8bb0975f074ec66e72",
+        "76c73ed9a0e553e71c9f4fb750544f0a29d13dfe1a7c3d2bcbeb666093c1c64a",
+        "3c4f9db03cc88ed0fa8b32920698d876e4fa8730c891cbe1eea061b488ad367b",
+        "1afedbab4757e47cec7338bc4e60c7f139d05ec783be7d4737015b054874726f",
+        "fcdef38adc66615206e18cc551780ad81e63a43cfb1b3f969ea35555319b0073",
+        "a4295b3140462667f4f3c662de4edf27c01a7a71da6e2dbb3242bd450d245193",
+        "317d0482679016008fd234b91e75ff46a3a899a693e3b181859ddd9ffbb62b77",
+        "21a2a81a24a558aa3e07db37082c56b91432a23612a32ced3ed3bb886b48b7e8",
+        "d3b92b9f41b5a071ffc5d5b9751ba2241ca76a0af333f7c3852f4e8b93dac43e",
+        "60f0d356b81fac20ca7752358f9c476f9935f4b009a38a41435c32c8a0f8064a",
+        "fc9ec5c03a2f61a457ac52cd5291ea38d8b84695ccdee5858188163591c2bdbf",
+        "e05b9f0dd78c5500eeafda5cf608351d5c1615daa350a8b8654278efbd7c590a",
+        "bbf62be34c2a02c1c66f9a696c9152d0f1f4aeed2196a3d6352d0963f041a64a"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/modify/zodan/zodan-tutorial.en.md",
+      "target": "content/pgedge/spock/modify/zodan/zodan-tutorial.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/modify/zodan/zodan-tutorial/",
+      "route": "/pgedge/spock/modify/zodan/zodan-tutorial/",
+      "sha256": "1d59ed0c475786e93a8178a7b6fa85c29db5435cfbb218fdee9193d5dd31fae2",
+      "code_sha256": [
+        "b72fa21b106f5509241cbe631887ce251f266a67124792341fd54627f7d948d9",
+        "cafcc28133d5c69a352fb1479c9f10633786bb190bd1d716e168a1e9d2c1dfd1",
+        "02b80d687821c6124fc806ce376f4c32efd181816a2137154896fbc95a6acaf8",
+        "f48aca4f87e2b22d1ddb94116e4a3384f0594d1e19ab52e2839721d53df4227b",
+        "45335746638181ce11bca1220f852db4b03fba3e44029b0fb740613872383981",
+        "fc1a3223b093c9e853d7b90bc7f9e71f296dad060b607cee23b1adfdab83d49f",
+        "75cc2963b36accaa3017d1f0f6a05bb4651af138a52b898a9017e95efd6191ef",
+        "4c9cd0a84d1aed66bcb749fa9ced8756e555521cb307ac6faef2ab31dcba0a79",
+        "02f6ef8b9563e4049dc16c61dc9f8f0b3d8c984ddd1c682c09fb2d6e7d27578b",
+        "84ab87c45a66754910a3683e1460eca80e491939186ca80c7aa66ac302cdf0e4",
+        "c15981a5fc2e305183c1a2ccee13c9001ac523de45109770f368055d6a68ad26",
+        "e726becea487f08a905b48242dd53cb1f74120444a004df556ff66431a723e91",
+        "0f9e90b6a92dfb79d9a7e537d04163cdfbf0a70334ef840cd31e4823ffeeccc6",
+        "bd5a1ca5d70e929c969846d19232a55f7180651f99a9637a9c7af78d26b32b95",
+        "5819576e1529b8d33b5970f5339646c356aa3fc1c5084589797f01b28180b48f",
+        "31330364849727124a90051c0697c4619c162802f228971ccef6cdbea6ee081e",
+        "5b989f285540b1aadad33917077f76a207a03dadc6c654d21cc6aa6326da2361",
+        "6109ee5049a294841a10132919a5e8823a75ef8dfc859329e1b04eca6a51b3a6",
+        "b8af8de118b4df335bde17d77818e21a08084f05928d9a04b21ba223c0db49d0",
+        "eac52ae2824872ddff889c607c7698077cd79ec728efc9c6fd8aa61d9a90fe92",
+        "4a4d6e758fc5df09b5dca01e0af3541d8352326b907e672d658a2486a807e10c",
+        "a51178cc3cb623564ca9cd1e02b5952938879dd07421d819274a9d0885ccd1d5",
+        "b08adcce4b861727d8686767646345ec8a3214bd20b3c5df1ae1c9d499066ab1",
+        "16e2c207d3852459f765a86c6ede921fa08789d0d8493eb0b507e25a0899c386",
+        "0a2900f0c8e2dea43ca9e0fedc7a766280f6ee3b3a6fcc5e04291a2b00710491",
+        "cc3f50e99fc09eb5de682d48549ff8781c3de647249a59088d47e9d77c0e1327",
+        "924b139a86ba1286909b7135485dcec5656a8c91fa80153be4a4022198f57fb0",
+        "1d9da2760b424ef67acd9bdff885898d15b02076415fa51cdb934296cceedd2a",
+        "a6de9815b2b3c895fe01491a12574abd1f6ecc3cdcbfd04a467c1e8fd8af1a1f",
+        "528b62034c5d247fdb64373fe1e2c20446ca1e4b406479494db3dfaedc7a7925",
+        "8e7bc2db73e88a057e2f82a96c266ee9e7be7c4d55e0815381097ee0707404f1",
+        "b9c0b1439eb0d492206c37d4aee19634e15c6031e4f6538aa458e710f0441f86",
+        "abc3894ff3fcfd8f75661aaae45ffc97dfcb3e591b5cab694aa45f7d715e3e8e",
+        "e4b86062023f4806d321c454d72284a490d97fb8d2b5bb1068253ad678e58b76",
+        "3784f9fcf3289e4127a1f2c4ad9236aa998a0d925c8a6ca56d85745056a5ebc1",
+        "629047474e7bb83fb8b5131cdb2d2c002b48888feafe260b4b3ff7f7e41a0d18",
+        "74c8eb335e6bae6422ed01686e61a533453b0af8e2fdd9078f6651cf3424ecf1",
+        "be850932eebe366610b7dea0ada539517ca51e0ba62d25d6a37cd9cecdb635da",
+        "690ffaa187c259b3a1f0626109e7725dcd51feeaf873f7b7e4e0666e0974482c",
+        "a9ff02e15bb541d20963dea63b503f35c14373e821eb70b7fd3fce3563bd980b",
+        "82405dd3e41007beb1b6f724cb6bd02dd730dd5274994a064f89d620fd9485c5",
+        "6fa9f328539b96dfa764d138cb0ea50f7cdb8ba3c36cc51b5100c4dcdbb3d9bb",
+        "06f13573f073100102ea61ab3ef91fc272803962b9c0218bc4c0d5b7f9d8607c",
+        "d9982ca1dd1491f153f19c21391c30c10d88787c3660c203695b36d65227b8b8",
+        "45335746638181ce11bca1220f852db4b03fba3e44029b0fb740613872383981",
+        "65e55a01a210d426cdea18c17c47f0e553a84b9add974660a31a93b8ab7b1905",
+        "adfabc50824dc2ee2bb0da7e7b2e16f38f2fa304314ff56c3e941b3b3fccb5ac"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/monitoring/_index.en.md",
+      "target": "content/pgedge/spock/monitoring/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/monitoring/",
+      "route": "/pgedge/spock/monitoring/",
+      "sha256": "c3b0dfd4b2a3180fb7f66cdb759e38d30c7dbfb7d3b3f9320c63d83b9d0b1db1",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/monitoring/_index.md",
+      "target": "content/pgedge/spock/monitoring/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/monitoring/",
+      "route": "/zh/pgedge/spock/monitoring/",
+      "sha256": "59ab190d9e7e369b75751f41285cfcb9777139411ea748cb438453fd03eaf60d",
+      "code_sha256": [],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/monitoring/lag-tracking.en.md",
+      "target": "content/pgedge/spock/monitoring/lag-tracking.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/monitoring/lag-tracking/",
+      "route": "/pgedge/spock/monitoring/lag-tracking/",
+      "sha256": "3645093a7e656ba33bc753d9f603b004613d80f75df4d0e7e0c2cdf5121f0a7e",
+      "code_sha256": [
+        "cb46040ba180a69e8eb4d36971428d1108d7f996d47ca77fcbdf585b38385aa2"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/monitoring/node-monitoring.en.md",
+      "target": "content/pgedge/spock/monitoring/node-monitoring.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/monitoring/node-monitoring/",
+      "route": "/pgedge/spock/monitoring/node-monitoring/",
+      "sha256": "b6ac0cfc1d7e7f070a5f5fa4f0ad739a38361301fdd426ecd9199111b1437985",
+      "code_sha256": [
+        "e79fe10bd5f8e05ce852f1b851d0ff75f6a746e8f3199cc343ed67248e5696f7",
+        "aedbd9ab4fb8da7c682100be4cd4dfece47340b0d058f8aed546b10bf8b3f84e",
+        "d07356a3d13ae289faeb22da0bf85722eb58740c96ab5338ae9eff4de229a8c3",
+        "dcc26a07117893f772822e51710e4b120c6eca30d93fd923cd736358ce798858",
+        "6f0eeb56dcff92a4735fd910d3505c29308793686bd5dd953cba7aa29a0b11b4",
+        "c3b52b0dd35f4e5b55fc3249f760d848d941f6d0c819b6338dbe023fcf7a0a5e",
+        "d3c5dd99cc88a81c6ba3dea86e7a802b45dfebd9b927b414d804f4196f956810",
+        "8612e699aa69efebf71475e5e925a97c2d8ae0a6719f65f507eee874649c4364",
+        "07f4ed07738707a25bcdf45aa9eea7244ed533f1360bd8266924d7b31020ad78",
+        "483606c704d9c7438a9d83f4e481fae98b406f395f1b91ea764d37bb644517aa",
+        "7f88d19c7cc0845186915db203c903676fc458605bbd7f7ba82ad4f9fc2c4c37",
+        "501ba1bccabddc682f6c1a27fee220c3fe460b7aa9bdbad2e14a9775d3dba742",
+        "4fd24385f0d24e197e8db4d3588ed884e90da5f9fccc1a5ff5d3ebca50ae634c",
+        "30606e8c248c34b60409005288db1568c8da7f7d5cc5e649f3c20a0971fc669c",
+        "c03fba865ac48b345819b2ddedf07adb27d10fb09ea05ba2321f2e69ad22c5a8",
+        "24856cf44d1d51daf753479a49655106e164084e88df81b598dd7efbc650435e",
+        "92f37db86f1625a0e8224e5b6e1030dc3885f3d39e8d2dd06de2701897b1238d",
+        "cc85444a7625ae3fe37e0217ec642191f654596f735ec702b2f956ec9231d621"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/monitoring/spock-info.en.md",
+      "target": "content/pgedge/spock/monitoring/spock-info.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/monitoring/spock-info/",
+      "route": "/pgedge/spock/monitoring/spock-info/",
+      "sha256": "6ad907ef56b2aaafbadf4b706f36b030b76d2b0a02cf67612066369f51db2490",
+      "code_sha256": [
+        "dce7e567b0de235965557ba8df9fba734c924dad7ba704c032041fd68fb13d51",
+        "b0e52d7caddd9e2d34e88033d414e8f147ee45312b3f87a9a7389702c78d3793",
+        "eb7ab3603e9da4f985db045cc229196f8c2d6688dc9d23c863096692883a4cb2",
+        "7a2cd62072c750d966a12315566b928c88b70827b4f1f1cf8e4f85b78697724b"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/monitoring/spock-sync-event.en.md",
+      "target": "content/pgedge/spock/monitoring/spock-sync-event.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/monitoring/spock-sync-event/",
+      "route": "/pgedge/spock/monitoring/spock-sync-event/",
+      "sha256": "7904412037521af9bca35e1a49dfb54f90386c1c8698e9fe65d1c86ab124ee1d",
+      "code_sha256": [
+        "ab2d611c018256b248a3177c8aa09aa354236ae4fdc26e3b5697bc74b41dd8b2",
+        "224e9689375438cf5d864395f92c59fe69ddb14d4348dd31ac6ceabb2b9f0a14",
+        "893a402e91b35de8f7f3ccd5a4cb4bac942da501be3506866c03a178011dcae2",
+        "4fc5a641f39f44ec913d89d15e55ca8836c9e5010ae59faed13692bf79f300e2"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/pgl-cheat-sheet.en.md",
+      "target": "content/pgedge/spock/pgl-cheat-sheet.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/pgl-cheat-sheet/",
+      "route": "/pgedge/spock/pgl-cheat-sheet/",
+      "sha256": "8136acbd676f5cf88d7fe66bc22c16d1d55f7ba947ff1637b620558bd721b1c3",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/recovery/_index.en.md",
+      "target": "content/pgedge/spock/recovery/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/recovery/",
+      "route": "/pgedge/spock/recovery/",
+      "sha256": "abd940316a10306b7e4543b894107cbf31c75fbcdd5cadf4673fb157f1a0fac9",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/recovery/_index.md",
+      "target": "content/pgedge/spock/recovery/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/recovery/",
+      "route": "/zh/pgedge/spock/recovery/",
+      "sha256": "8d97712fcaab09d9324f8e20b5abf0046e9a9ec74667380d62831a7ed0645f51",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/recovery/catastrophic-node-failure.en.md",
+      "target": "content/pgedge/spock/recovery/catastrophic-node-failure.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/recovery/catastrophic-node-failure/",
+      "route": "/pgedge/spock/recovery/catastrophic-node-failure/",
+      "sha256": "8679e3bc75f59591c9dcb2233da809c7efb824e9065cc7fbd28caf758bc947cc",
+      "code_sha256": [
+        "c119cbe257640b3eab1c896c8f3f27f75c0c8d8bb986c4c3b10cebe6dcc878bd",
+        "a11c96317d6029f607c7c3453816a00f4957b44602d71b0c4335d95729adb5ea",
+        "f7a7b8b1d664a26f2f79234566db812d8a722863b6c4206d80155e59226905e7",
+        "46cf80eda5be9e81c19e9511448c8dc6bff5c4a99b598baf2212c9b65b413d80",
+        "0d0a0922a9f612db03539d5c63354841adb8df3ce5ad4874a86bf3ee9b225053",
+        "08cbe5b54e665a0a125a0c2ecc53d23aa3b5a10f6f6cc5a8aa892a2ac7a166df",
+        "be2830978bdf264f9a1256cf9fe3f86a0bac217ecd48dff0a044d56db65532cf",
+        "4bd898453950631c0e9765ab3ae934970ab3da4d55209cc29626d7e8551aceaa",
+        "018410281e40d4437998a6cd8e4cc59841f573a77d155ac0a44fc13b25454a4a",
+        "9750375b7dc7cd6050609046caa0e79c535a3cdae4268d520401e2368b73687c",
+        "b2623408c9a51bab01052f260a260d48f2b8b08a60f6c0135bd5b8c98a9ee9b6",
+        "169f52701af1b2f34e34838ea38811ef2d60f4237a42defb763d32a90bc30f1c",
+        "f2744ca97a63fc6ca842cb6074b27ba6f531d4f33d6152d1f30c05b92a3ac655",
+        "042c081df035ee487d527a7a27180adbf02bfba0bc122187c21b1b69a1772b4f",
+        "d50e8f9680b9cce58c6c356f548e80a0d8c3fc6768d66aac3483d9780beca706",
+        "bbc4d041f57201c8353758283e6343ec378669e09a4f39abf3547d728d36833d",
+        "56c195045a1b9ac14e7a27a17e30f61bd4f35c5fc6e0a1b11051443c89fd4748",
+        "4319fbac18df188c1241650f650aa917fa94ecf8b3000427e30f026f3f83cea0",
+        "979f35aefd11b07de29ae1594d6ba3795fa9092018337438b856a972fb10fe47"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/_index.en.md",
+      "target": "content/pgedge/spock/reference/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/",
+      "route": "/pgedge/spock/reference/",
+      "sha256": "dc9bd075bd3eef29dc2a175539dc6bf4db5bb646fb6853449275de72410ca54b",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/_index.md",
+      "target": "content/pgedge/spock/reference/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/reference/",
+      "route": "/zh/pgedge/spock/reference/",
+      "sha256": "a8deb746371bb43e49838199d1141093a609f6e2c4561284a88d1e78ec761043",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/_index.en.md",
+      "target": "content/pgedge/spock/reference/functions/_index.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/",
+      "route": "/pgedge/spock/reference/functions/",
+      "sha256": "854f34520df8271234e359881a7ef8b1e048be92ab36a5677f620fd497bb2858",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/_index.md",
+      "target": "content/pgedge/spock/reference/functions/_index.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/reference/functions/",
+      "route": "/zh/pgedge/spock/reference/functions/",
+      "sha256": "b8700aeb514181622912088516c98b71ad5cd4aef6114790047cc42f3115ddd8",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-cleanup-resolutions.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-cleanup-resolutions.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-cleanup-resolutions/",
+      "route": "/pgedge/spock/reference/functions/spock-cleanup-resolutions/",
+      "sha256": "3e3c5cce3ead09ea92163f515316b9337dbf5be163d054c8a911d1b974b83543",
+      "code_sha256": [
+        "0fcad686a96ab285157a5706cbc22733973725b4e6d8787ec68f72aa302eeed7",
+        "e446303e183f49a3255923c936139b74e5216086cd85853053961eb8bcd1f38c",
+        "a533e27507a946958d55e19b97a7872ace0361dddcb0686c8a336aef3fc3c0b3"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-gen-slot-name.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-gen-slot-name.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-gen-slot-name/",
+      "route": "/pgedge/spock/reference/functions/spock-gen-slot-name/",
+      "sha256": "bfb606c4f0ef186fa06cf888cf069925e8eb691f3a971f05e8f26870385de07b",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-get-country.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-get-country.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-get-country/",
+      "route": "/pgedge/spock/reference/functions/spock-get-country/",
+      "sha256": "6e34dcd0646392c3d0016e1ae9a6fcd5a0b9083ae0f8bbbca804ad77e2514c01",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-max-proto-version.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-max-proto-version.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-max-proto-version/",
+      "route": "/pgedge/spock/reference/functions/spock-max-proto-version/",
+      "sha256": "6dea3498192483731850f65605322dbbeecd3b0179fe2b6f3876182ec374197b",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-min-proto-version.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-min-proto-version.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-min-proto-version/",
+      "route": "/pgedge/spock/reference/functions/spock-min-proto-version/",
+      "sha256": "265b034f167391573a3f07e2519b155fcae5928f93fc773daa65e3131607217e",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-node-add-interface.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-node-add-interface.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-node-add-interface/",
+      "route": "/pgedge/spock/reference/functions/spock-node-add-interface/",
+      "sha256": "45d7cbd5dff8db7af521b3b6207f5ca873d2cfd57d9c84ee76ba7e2229eaeb88",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-node-alter.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-node-alter.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-node-alter/",
+      "route": "/pgedge/spock/reference/functions/spock-node-alter/",
+      "sha256": "ade195a572cab287f1c03b690c46108025fea39d4e4e5959d2f6d2cb8ac0e5ac",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-node-create.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-node-create.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-node-create/",
+      "route": "/pgedge/spock/reference/functions/spock-node-create/",
+      "sha256": "b36f0b4e912a383b43d7ff208d3309db5c92af37ef06f52f1922ae1b9f1a0dd3",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-node-drop-interface.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-node-drop-interface.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-node-drop-interface/",
+      "route": "/pgedge/spock/reference/functions/spock-node-drop-interface/",
+      "sha256": "bde7f0537aeadbb64c1b93fb3e54cccbee6b6fcd43f3518421b356f1735a4b88",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-node-drop.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-node-drop.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-node-drop/",
+      "route": "/pgedge/spock/reference/functions/spock-node-drop/",
+      "sha256": "4b591ca1310e9c7e08f7df7e77bf11f8cd7faacf02f1dcd8b2775a957eb127dd",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-node-info.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-node-info.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-node-info/",
+      "route": "/pgedge/spock/reference/functions/spock-node-info/",
+      "sha256": "28f2f13440457f8d9386ae030ea3f73080c27654b9707eb758790618cbb4473e",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-node-refresh-info.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-node-refresh-info.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-node-refresh-info/",
+      "route": "/pgedge/spock/reference/functions/spock-node-refresh-info/",
+      "sha256": "9f98404f479b34e047e097a641486e51b2ca0eb91fd0ce16402e3a11e3c4b4a5",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-replicate-ddl.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-replicate-ddl.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-replicate-ddl/",
+      "route": "/pgedge/spock/reference/functions/spock-replicate-ddl/",
+      "sha256": "f1ad725cd3da8b2d2bcf6dff1ee6f17cbfa8936b5bd85c1b91ba810c5a4e2d05",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-repset-add-all-seqs.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-repset-add-all-seqs.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-repset-add-all-seqs/",
+      "route": "/pgedge/spock/reference/functions/spock-repset-add-all-seqs/",
+      "sha256": "768cd1d2bd2b38f4712ca9833d2c45883fc2fe935e51de9de5a9e4cdf5135530",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-repset-add-all-tables.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-repset-add-all-tables.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-repset-add-all-tables/",
+      "route": "/pgedge/spock/reference/functions/spock-repset-add-all-tables/",
+      "sha256": "ed371d7fda1af2dd0109bc775ea4e1733124e47c400f06f3aae530cc67fd4978",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-repset-add-partition.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-repset-add-partition.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-repset-add-partition/",
+      "route": "/pgedge/spock/reference/functions/spock-repset-add-partition/",
+      "sha256": "966aaf5a881ed79f006a543eaed39e22c4ba3a98a9665e2b5502f8442ec61fa3",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-repset-add-seq.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-repset-add-seq.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-repset-add-seq/",
+      "route": "/pgedge/spock/reference/functions/spock-repset-add-seq/",
+      "sha256": "9bc038c5aeb6281af38a1ee9b0ad26b88b0939a8faef598be834b719d0d12e67",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-repset-add-table.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-repset-add-table.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-repset-add-table/",
+      "route": "/pgedge/spock/reference/functions/spock-repset-add-table/",
+      "sha256": "0156541c097968cbe782edf0b548e0cc797dfc015d64ed718862eae541e23555",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-repset-alter.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-repset-alter.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-repset-alter/",
+      "route": "/pgedge/spock/reference/functions/spock-repset-alter/",
+      "sha256": "4ba6a63d27fab9d95c4435095b6ec0224a8a3af6ae06b8c5c4d4d27190f64ce4",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-repset-create.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-repset-create.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-repset-create/",
+      "route": "/pgedge/spock/reference/functions/spock-repset-create/",
+      "sha256": "c04dbc336ace2885b5e3d5256baa5f5489d5db6181529547e80df609319e7db5",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-repset-drop.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-repset-drop.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-repset-drop/",
+      "route": "/pgedge/spock/reference/functions/spock-repset-drop/",
+      "sha256": "c6fa3540842878aca8689ae7221c4c9ec78ee2cb87dd1c1b348fe72ee91116df",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-repset-remove-partition.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-repset-remove-partition.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-repset-remove-partition/",
+      "route": "/pgedge/spock/reference/functions/spock-repset-remove-partition/",
+      "sha256": "06dcf9f397c00bd46132c567580e8c1f0043a3b37793c09a7fcb1b31d15da8be",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-repset-remove-seq.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-repset-remove-seq.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-repset-remove-seq/",
+      "route": "/pgedge/spock/reference/functions/spock-repset-remove-seq/",
+      "sha256": "bc8d0c012eb2a07024d5a1f3dc4f12cd5444c244e3c4d0cd2dfa717ce090b17b",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-repset-remove-table.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-repset-remove-table.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-repset-remove-table/",
+      "route": "/pgedge/spock/reference/functions/spock-repset-remove-table/",
+      "sha256": "1bfda4e327e446713db063947ba07fba1bc6e211d5b87861899032234b8457ac",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-repset-show-table.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-repset-show-table.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-repset-show-table/",
+      "route": "/pgedge/spock/reference/functions/spock-repset-show-table/",
+      "sha256": "b420ce14c8504c54bdd17437cbe5c3bf8544494da3978289ddefd4ce02a6e6d7",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-sub-add-repset.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-sub-add-repset.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-sub-add-repset/",
+      "route": "/pgedge/spock/reference/functions/spock-sub-add-repset/",
+      "sha256": "54ab8cf90e6f335bfdc84b548d7f70e4aa1b140e391cb1b0369331fa5df01863",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-sub-alter-interface.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-sub-alter-interface.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-sub-alter-interface/",
+      "route": "/pgedge/spock/reference/functions/spock-sub-alter-interface/",
+      "sha256": "a9fe433b923303aacd7805ab02300cb3f446ebf87af1ac5fad85712bf985c418",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-sub-alter-options.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-sub-alter-options.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-sub-alter-options/",
+      "route": "/pgedge/spock/reference/functions/spock-sub-alter-options/",
+      "sha256": "ce43120d1121374cd7f3cb00bf5f3c54271dc3640323d8ab827f1a4e65586d3f",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-sub-alter-skiplsn.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-sub-alter-skiplsn.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-sub-alter-skiplsn/",
+      "route": "/pgedge/spock/reference/functions/spock-sub-alter-skiplsn/",
+      "sha256": "8f930891b9ca621bdcfd9b0fc229e114e8d29c1ef4e9e2d3ac9c58380f7e5c15",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-sub-alter-sync.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-sub-alter-sync.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-sub-alter-sync/",
+      "route": "/pgedge/spock/reference/functions/spock-sub-alter-sync/",
+      "sha256": "60d70e59e9f6a6622c54135209ca379e2cfc8c0bcc10ba0120aa4edab59b1341",
+      "code_sha256": [
+        "a9857302a1c6734e89c4068040309d6eb082ab12d10a791e96cc3ed1adcadbb1",
+        "c985cda36f34db375be8de1e5c561b0548411998ff39567d5ae11e6021119bc1"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-sub-create.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-sub-create.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-sub-create/",
+      "route": "/pgedge/spock/reference/functions/spock-sub-create/",
+      "sha256": "e29d5e6b658ded510d4520d3735d8e1e5eae59e6323b063606f0fe1597882cca",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-sub-disable.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-sub-disable.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-sub-disable/",
+      "route": "/pgedge/spock/reference/functions/spock-sub-disable/",
+      "sha256": "6eada9045a85e1eade46fac4fb3c0eda9c3e3c2620da1830dcaec51c1ba4e9df",
+      "code_sha256": [
+        "5ef7aa3d8f317219c5f020d1efb606c89df4cc60afc5f4dbd7345a74a97f1af2",
+        "8251c9bfb09cfa08c49cc393d4d9d3258e9a09326be4facbba55d9fdf224fb9c"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-sub-drop.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-sub-drop.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-sub-drop/",
+      "route": "/pgedge/spock/reference/functions/spock-sub-drop/",
+      "sha256": "bd3ea0bf85f36fc6f19005cf11889ecae89467162d5683019460bf394a56a5eb",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-sub-enable.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-sub-enable.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-sub-enable/",
+      "route": "/pgedge/spock/reference/functions/spock-sub-enable/",
+      "sha256": "70e470924ad576b0584c918ef4f62cc5478b33a4c8ca86858ac40ee2251ff065",
+      "code_sha256": [
+        "3cb8dd7a34f6a38594e5843cd8076d87b6381b4e0aa9f4f6ecc99ec78f471935",
+        "629a383733a968a5cea89b717693ad87c046cdbe78e16a96e74685bbbbad61c1"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-sub-remove-repset.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-sub-remove-repset.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-sub-remove-repset/",
+      "route": "/pgedge/spock/reference/functions/spock-sub-remove-repset/",
+      "sha256": "22f8d89aa5dbc9187596fd9d212bb4a8f5c5ccaa39cb91a715620ec7994a4124",
+      "code_sha256": [
+        "28f8a1af1a2012c4abfb50af2f3fa0654c9c86ef4921b6c0dc2c6241bbcd3b76",
+        "7ff305d3f557f70594dccac507fafde27b7f5631188f5ece6df718b44743730b"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-sub-resync-table.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-sub-resync-table.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-sub-resync-table/",
+      "route": "/pgedge/spock/reference/functions/spock-sub-resync-table/",
+      "sha256": "5524632099cccae0d1b9002128baf3a5dc585b0e78184025bec797726d080d3f",
+      "code_sha256": [
+        "209e3821cbb80f4d99150f0909e484e11a6f66c96ec318a59bdfaa7e6887f87a",
+        "6652d2b9b111a165f1bbdd821a2026ad33ccac03cefcdc050d41c1cf7a28b25b"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-sub-show-status.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-sub-show-status.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-sub-show-status/",
+      "route": "/pgedge/spock/reference/functions/spock-sub-show-status/",
+      "sha256": "84c740d898744bcaca25dbdc7c400994886e5eb38559ee1c4677edf99dd76e15",
+      "code_sha256": [
+        "dc4bb98ab58e1fd9fac4bb55cedc63be2bf7b8a3c3c5ff22e73deb4f26ad56e8",
+        "0d0a0922a9f612db03539d5c63354841adb8df3ce5ad4874a86bf3ee9b225053",
+        "8db56023ad1586212913ebb797432dd169ac487388d4e5e8e8a2a217e52e1b6c"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-sub-show-table.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-sub-show-table.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-sub-show-table/",
+      "route": "/pgedge/spock/reference/functions/spock-sub-show-table/",
+      "sha256": "7cb60b48517e4e030ce5711a666ead80e578542d96520f3ee9ded2a6c59e1775",
+      "code_sha256": [
+        "9078e627ea3e6fcc7696619547b0b4694f8dcc1fa78c4523ccc41a44d192fa89",
+        "04809c24243e28e43e95971b2a08a11ff3089f6f1fde2b930cf41df938e69153"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-sub-wait-for-sync.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-sub-wait-for-sync.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-sub-wait-for-sync/",
+      "route": "/pgedge/spock/reference/functions/spock-sub-wait-for-sync/",
+      "sha256": "4e7d28b603282820944518a7efcdbbe419b1b6849f7a1508f79aadfac234b472",
+      "code_sha256": [
+        "f55e433e40b3e774e2daf4d4bb5becf300845066d3d83d9524e61f9c9f353f07",
+        "f6d9a87802ec0fd2cfefd8bd4a1d362aa01886546c738d12fb9a960e28baed71"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-sync-event.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-sync-event.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-sync-event/",
+      "route": "/pgedge/spock/reference/functions/spock-sync-event/",
+      "sha256": "f55c3280c50d1d618bf4b2a89d228d7c1c8ae0e636c5e293e5fc1623070d8f3e",
+      "code_sha256": [
+        "f7898ba24127ffb0ff13d08e502d745154af122cce33ad3efa93af4005f7c14e",
+        "4d2a0010e277bd8faef4e23a368e24816e490ed10324b8124f47a1b95235ab24"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-sync-seq.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-sync-seq.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-sync-seq/",
+      "route": "/pgedge/spock/reference/functions/spock-sync-seq/",
+      "sha256": "d31db1bded374ccd533d58e7926ce0da5887c7497de098549f26d74e8e75f428",
+      "code_sha256": [
+        "c830205f5fad5d79f2a09599e79026122568951934a3a43b09d0400947e2450a",
+        "16dd39b5c8409707aa5865f15e40148dd1c410d6d6723b551714246bb061f940"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-table-wait-for-sync.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-table-wait-for-sync.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-table-wait-for-sync/",
+      "route": "/pgedge/spock/reference/functions/spock-table-wait-for-sync/",
+      "sha256": "326d9c6c3d0502296499e21d38ac98779fbd3aa0cacc4c8414236687810f6a13",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-version-num.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-version-num.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-version-num/",
+      "route": "/pgedge/spock/reference/functions/spock-version-num/",
+      "sha256": "34a7d6cdf6c9806cbe9e66cdfbc8273f21d229707ef457911804ea77e2df94f7",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-version.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-version.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-version/",
+      "route": "/pgedge/spock/reference/functions/spock-version/",
+      "sha256": "23aeb9403881eeb11233cf68c58ec240ba9a8477ec0d0b405e7e07c5b8da48e8",
+      "code_sha256": [
+        "4735c5c8e74504dddd0ed7cd70c3a23752988d6e5379fdc43fafec01b1ad9ca8"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-wait-slot-confirm-lsn.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-wait-slot-confirm-lsn.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-wait-slot-confirm-lsn/",
+      "route": "/pgedge/spock/reference/functions/spock-wait-slot-confirm-lsn/",
+      "sha256": "cc553f05d441d4fc1800f0b8d70e3c20696f649683a07cead371e41d84a451d1",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/functions/spock-xact-commit-timestamp-origin.en.md",
+      "target": "content/pgedge/spock/reference/functions/spock-xact-commit-timestamp-origin.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/functions/spock-xact-commit-timestamp-origin/",
+      "route": "/pgedge/spock/reference/functions/spock-xact-commit-timestamp-origin/",
+      "sha256": "3481ea518d305442c302528e55b32be521ad33d10060f8a97f3175e776af4735",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/gen-mgmt.en.md",
+      "target": "content/pgedge/spock/reference/gen-mgmt.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/gen-mgmt/",
+      "route": "/pgedge/spock/reference/gen-mgmt/",
+      "sha256": "049281be57eefd106bf913245ab84b6a5cb191fb37900bc7363fc7badd40dfae",
+      "code_sha256": [],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/node-mgmt.en.md",
+      "target": "content/pgedge/spock/reference/node-mgmt.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/node-mgmt/",
+      "route": "/pgedge/spock/reference/node-mgmt/",
+      "sha256": "385a8118a66948be3742cc86a3de2ac1242194c9adb7f24daf03508d4cdc8875",
+      "code_sha256": [
+        "bf0fdfe8b5830e0b7752dec622f8c19e08b403f2a9e367f22564cd122800e15c",
+        "f957f8014c9f34afcee67ee49e1f678d6a822c04e98bbd93e58b80091a6333d2",
+        "db5a47c5b141ca03ef736e4ba31a1e46f210d945dbefc6ab01ce591f091b6d50",
+        "0ab78d2d0a3d01e9795a3d947bf9c77f68595f59d063dfc9a75229b49051f71b"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/repset-mgmt.en.md",
+      "target": "content/pgedge/spock/reference/repset-mgmt.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/repset-mgmt/",
+      "route": "/pgedge/spock/reference/repset-mgmt/",
+      "sha256": "16c116eaaef4420b05a759b566974e9136f3da7296f8daebf047f80383a6e71a",
+      "code_sha256": [
+        "aae887196efe6c04163a28b287b1833403c81b2c5eebea3efe99f7efd65f725b",
+        "fae5f1de58bdc134c70f6eb3580883f2d709d29470c49db43ec9af5c507c9b7c",
+        "0ec5f230d4fa20197d5e20c4e6aeec5ad88af1199d4ee64fb9b56428aea9369c",
+        "740e76f327bf793413897604c531023706158bcca5bba193180355ca45a9d829",
+        "faa9a24ccdb33c9b668a19d02cae476ae25c7de09dd9c9c9a56bd2a58d35f588",
+        "aab1ebf72d8f91bbed17c4b6730ffe6c75d0494422783e7828dc821d843d4851",
+        "bd855be01c2f282e83183a087ca4a461235374669e1b08e3a039ac79116318a8"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/reference/sub-mgmt.en.md",
+      "target": "content/pgedge/spock/reference/sub-mgmt.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/reference/sub-mgmt/",
+      "route": "/pgedge/spock/reference/sub-mgmt/",
+      "sha256": "c421f19f624dd498eb83d864a57fbc166413fd5c1a0a4b4dcd6822e30b8b76a0",
+      "code_sha256": [
+        "0d41b29d67ef2d00e243f8640162f7c708db962db916baf42b3379d4a4a572f8",
+        "0a257ed382aba5c93102fb6042c66cb7544624dc2f8ef71c0bfaf76bab2efb0b",
+        "5b232f6170230444221add814f624342143894c486cb6393442057a328fea7c4",
+        "bcdffa21b0e08519990d5c6172b719ccd8055a0b776a1df27b099532b3952d7f"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/sizing.en.md",
+      "target": "content/pgedge/spock/sizing.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/sizing/",
+      "route": "/pgedge/spock/sizing/",
+      "sha256": "5a7e6397079036fe9bded67c8393e9d127898d3cd2760c72f00035fd90ed56af",
+      "code_sha256": [
+        "8eaee6c6b4282534093da87119bd7059dfce82b123bb189467f4f92d1617b4e6",
+        "25ce0242aefd851ffa315e29e2e9e79e66e5ff18e1d8a3014bb06669c6ddbb3c",
+        "3b4419a87be9ed3920a54dc77079f13df000d0bec3f1310601ed4731827e4e93",
+        "01df61ab8f842b41f8abbb21560ce873ebc3fbfddecf065210236e096a23683a"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/sizing.md",
+      "target": "content/pgedge/spock/sizing.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/sizing/",
+      "route": "/zh/pgedge/spock/sizing/",
+      "sha256": "7266649595aab6459e0acabcf13b85f9aef4409825d5cb3a06d652ebe5d58bbc",
+      "code_sha256": [
+        "8eaee6c6b4282534093da87119bd7059dfce82b123bb189467f4f92d1617b4e6",
+        "25ce0242aefd851ffa315e29e2e9e79e66e5ff18e1d8a3014bb06669c6ddbb3c",
+        "3b4419a87be9ed3920a54dc77079f13df000d0bec3f1310601ed4731827e4e93",
+        "01df61ab8f842b41f8abbb21560ce873ebc3fbfddecf065210236e096a23683a"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/spock-release-notes.en.md",
+      "target": "content/pgedge/spock/spock-release-notes.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/spock-release-notes/",
+      "route": "/pgedge/spock/spock-release-notes/",
+      "sha256": "68ccb16ad25d8e21cf79be834ebc89f00f2df2789016f6575a51e6f1a6fe78fc",
+      "code_sha256": [
+        "4af6c91badfe6ea829d2727d9bcf453f9b47bb742a66a24bdaeeabf10f770054",
+        "84d60a7934fa19057caf6cf3a90b1458cb3d76b885e512418dfb39b810d33d52",
+        "be1d0fe0b0863be4f8afa224bb9e0a563bfe33bc8e4266fdc519ef5f6d76317a"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/troubleshooting.en.md",
+      "target": "content/pgedge/spock/troubleshooting.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/troubleshooting/",
+      "route": "/pgedge/spock/troubleshooting/",
+      "sha256": "615b5b067a225d97c737b6fe427f6893e7d4dde17bfca5212c5fa9d99f519267",
+      "code_sha256": [
+        "249677ce4bf71b562c3974dfbbe6158ed8a51b4f7a2b57a1085f2298082e4457",
+        "b7294d504aebc3761944f5d8a2a0670f18a926ee0fb10db163c5ec8ea457798e",
+        "eb6b290fd38cf5d702adcb77915688c81d49eff20370cf3a029ef7ed9d7ba5c1",
+        "54e2e11c5c5f462c24e215e39df2ee680c57ccc79f463f9fa6cfdd10e1fdfb67",
+        "e7e4996caf2cefd8bb79e38481c38444f19e3619e35305ed1f557c790bf9b801",
+        "dc2debbe2d007ac694a62105368908689e483856e04338bb9cbf2fa8c5e4194a",
+        "f9ccc36bb104aef45668456234b608ed2ad7444376da120be8e86c14dee52b01",
+        "a55840ade03d8e575191a4b09a19b1bf3b1085df14dd6c6f58fec820ed13220c",
+        "9c53ba9337dc1d517b67ee0d8a9890b08927f9e01a93d73450f10ca5dac9782b",
+        "42e52eef46f746d849c4dc5356a02c927b63cf683398588310c425967029dd87",
+        "664fbff1ad39390d7f99b0745994512a274f8fbe392d69e43e854b9b3f9b72f7",
+        "08faf0a7a8279548c57f4b065f21e7fd4622b3f6d50fdf539a62673e69073b5c",
+        "62b04ef5ed129e4d7281a41bbea87376699b4effdef20fadf7551dbb96035714",
+        "5ea807b97bba5d0a79c73788f2026e6f6230b8ca6ad2b72c0b0020f630e3f438",
+        "4d47d499534b3826f4eda6e41b07fe60987eb54135246e9bd169f150da81ba52",
+        "154ad95341d717a593c8eec2202d2406efeb2a22ebcd27961a61af235d88182b",
+        "0be89a36ec7e08916ea9c15651e903debf5773c83822a8b2570096bce6f07f49",
+        "dfce32b80094a68438df63cbdfcd5fee44a325f305c24279dfa1bdefb8cc4c8f",
+        "08c07930419b7f891c0e7f74a72d04a8371c1d11d3992108fd6ab326e3de38d3",
+        "4e2ae1b0acbfaa345bea3f798e4b9d7872e1662ae05eec2fb7a024d6c0c27aa5",
+        "a69d45e5cfd3a81beb733e3deab8c8bf4825c3e4c8dfeb41d3393b027c5f0834",
+        "0e91e763273cdf5d543a12aee6d97249f7dce18c4d84c83659339e5491280076",
+        "58ed9cbba909dd66a2e6d03a1d97e4432788507ec94bbc163e62e1a2993b10df",
+        "6baf5a619010e139e04e038e1c347a2b06e22eb00735ad92423b96e8bed13167",
+        "70fc4d32f2ee2e993e962d7a80d6c9b8dba90fc76ed9a0099919b3c7c68609bd",
+        "bd17f3ac8b76a1a5fa8a5162df105c3032bdc5120ebcebc53d611d493388fd5f",
+        "94f3c5fda2d61065962350cdda92d299489b5d94777d736cb2e69e45b41a3549",
+        "bc03bef9455be672cbadce46fb4c6ae6544f72a3978e56538b61e9283d8ed1ae",
+        "6c7b7b6470379a6a42779f4ea555ab42e411ccd6c9c16290ba98f22303edd342",
+        "773d1e5f4e13f11ca8909f69756177852008f86b397fc517343cfa134e36fceb",
+        "5e310e32cd6f3954a88d8ad32d8b77b438f72223596bfc9b3cd93939f363efd4",
+        "051627f5734ebf395d4d1368405adb9e763e67b65e1e8a9f1a13b9156ef6224e",
+        "0d29f8a3e817bb3cb3184d59f569e8121cbfe9ad3deca40fcdc0a502f1e18eb0",
+        "64850c79b295a2b02a6290bcec03b24f26c9469b709c7c6109b1fea4aa5240c9",
+        "ad36d0572c225a1951562b8b016c68518daa6d6b5a05188d35513ae489ee1e7c",
+        "fe7e3587f9a73a4c1175a22a32edfd0f6470a0384e09ed5aba989831d5a5e261",
+        "cc3336299cb543c57809eb035516b68441a5b697899df3410422d67a5581d1da",
+        "50931277e6e27719c1eedeee83590edd1565420d2308c328148a159e706f1def",
+        "5400332944b26bb5c1a9cf293a766f20e72d00192c0c4bd00b004582bca10076",
+        "e05b9f0dd78c5500eeafda5cf608351d5c1615daa350a8b8654278efbd7c590a",
+        "6739bc7ac1fa8d58768998f64d8d581ad8ca2c970cb9d20d5ccc91a30b4e1457",
+        "3e17279526753ba47cf10c76a45769b563486f49c8052a9fccb4cf1a455b7e5a",
+        "908d1f44da32fa159ad8b30e643d63ba6a7c3dcdf7be15d98dff7b40c02ba6a0",
+        "211f203c657903deee0d125ddd9f6fe58d9f4638e4d99d560d9798998674d719",
+        "6ac4472e041cf58664cc5808b08db5b15aa17488e1723fdd5633392c7b6cf24f",
+        "ce813039384ec4d498e3a1e16bd95bb013466a0f51f551ec8411467a87a46f58"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/two-node.en.md",
+      "target": "content/pgedge/spock/two-node.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/two-node/",
+      "route": "/pgedge/spock/two-node/",
+      "sha256": "d47f6a614d1885da97517682fe72ce2aac8a821c555f5bbef935bd712dc59c65",
+      "code_sha256": [
+        "6f020013ae31bb36e26103930bbb4c89cf4d1e6ccb744356e7cbf613ec75c667"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/two-node.md",
+      "target": "content/pgedge/spock/two-node.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/two-node/",
+      "route": "/zh/pgedge/spock/two-node/",
+      "sha256": "5b54879e27f1ba8796ded9f642e6c34bc559d787ddcc0b04af5773e70afb5193",
+      "code_sha256": [
+        "6f020013ae31bb36e26103930bbb4c89cf4d1e6ccb744356e7cbf613ec75c667"
+      ],
+      "status": "machine-draft"
+    },
+    {
+      "source": "content/docs/spock/upgrading.en.md",
+      "target": "content/pgedge/spock/upgrading.md",
+      "language": "en",
+      "old_route": "/en/docs/spock/upgrading/",
+      "route": "/pgedge/spock/upgrading/",
+      "sha256": "94c11145426e36935bfb398db2aa386d0f7773a1bd31fb417867fb552a11ed4f",
+      "code_sha256": [
+        "a58e7b94efdf77e40ba6a25a74f703b603503752674305ec1ec6428767d72641",
+        "3208a773f852d36e10aa65f0b2b1d667d951a3bc22fbd34e3dd301a32fa9cd7d",
+        "4a86c6e1f1b1148918318ffc8a85e19ae966bb719e673f7c63f90a4995937bd1",
+        "eb6e7571b57b13b27b6bb057fd6a12c20abce4f27758df5f4d788058aeee3de3",
+        "1f941b585664604d237101694892102ac642fb8d00d0da14e226a08bd7f39552",
+        "05119293b9f7c3c553c4aded70ee3e7aa9ffbe8c03c3ed08e0e4e2060c1944c6",
+        "40de2d8afbacea2aebb7c8184de1a583ccee228906cef0f0660665f02dd90805",
+        "68d87e5b4b21ad00acc0b7211e8e90a016d2a0992c43dccd79132909bdc5b6d2",
+        "2e03c0a7306df31d583ca9ed677a4fa2134b358289ca7281fccb47dbad2b3123",
+        "fadd00ba783dc8312f9b179bd6c8698952e87201f259f626a551ce5ef024556d",
+        "505cf14f4562a6e05bb215178b0854c367385eee159baa033b7fd42201866aac",
+        "d1ee8898dced6f40ddb7a3b975db13779b132b5287ac999cd2688c24fa91fc72",
+        "e93e9a2ea06d05bfa10eb597ffcf09c0fe5d9e9b608ddfd74ff263e6c7eb74c4",
+        "9eea52bd07c983dc94bdc619322f365adf09741fa07de2106951107d4960a4f4",
+        "e05b9f0dd78c5500eeafda5cf608351d5c1615daa350a8b8654278efbd7c590a",
+        "8cb62515645eedebd087a4496c73c3f92c73bbe7ae95451915152bc589fffc27",
+        "4a86c6e1f1b1148918318ffc8a85e19ae966bb719e673f7c63f90a4995937bd1",
+        "2e03c0a7306df31d583ca9ed677a4fa2134b358289ca7281fccb47dbad2b3123",
+        "8cf6cadf4a897839906acea65c87c9060a72c9ad117ab08fc74e2034b1b237d3"
+      ],
+      "status": "imported"
+    },
+    {
+      "source": "content/docs/spock/upgrading.md",
+      "target": "content/pgedge/spock/upgrading.zh.md",
+      "language": "zh",
+      "old_route": "/docs/spock/upgrading/",
+      "route": "/zh/pgedge/spock/upgrading/",
+      "sha256": "a54a1f3e59c9addb61bf120576b95ead00ea20f5bc71f31abcdd4792a31968ca",
+      "code_sha256": [
+        "a58e7b94efdf77e40ba6a25a74f703b603503752674305ec1ec6428767d72641",
+        "3208a773f852d36e10aa65f0b2b1d667d951a3bc22fbd34e3dd301a32fa9cd7d",
+        "4a86c6e1f1b1148918318ffc8a85e19ae966bb719e673f7c63f90a4995937bd1",
+        "eb6e7571b57b13b27b6bb057fd6a12c20abce4f27758df5f4d788058aeee3de3",
+        "1f941b585664604d237101694892102ac642fb8d00d0da14e226a08bd7f39552",
+        "05119293b9f7c3c553c4aded70ee3e7aa9ffbe8c03c3ed08e0e4e2060c1944c6",
+        "40de2d8afbacea2aebb7c8184de1a583ccee228906cef0f0660665f02dd90805",
+        "68d87e5b4b21ad00acc0b7211e8e90a016d2a0992c43dccd79132909bdc5b6d2",
+        "2e03c0a7306df31d583ca9ed677a4fa2134b358289ca7281fccb47dbad2b3123",
+        "fadd00ba783dc8312f9b179bd6c8698952e87201f259f626a551ce5ef024556d",
+        "505cf14f4562a6e05bb215178b0854c367385eee159baa033b7fd42201866aac",
+        "d1ee8898dced6f40ddb7a3b975db13779b132b5287ac999cd2688c24fa91fc72",
+        "e93e9a2ea06d05bfa10eb597ffcf09c0fe5d9e9b608ddfd74ff263e6c7eb74c4",
+        "9eea52bd07c983dc94bdc619322f365adf09741fa07de2106951107d4960a4f4",
+        "e05b9f0dd78c5500eeafda5cf608351d5c1615daa350a8b8654278efbd7c590a",
+        "8cb62515645eedebd087a4496c73c3f92c73bbe7ae95451915152bc589fffc27",
+        "4a86c6e1f1b1148918318ffc8a85e19ae966bb719e673f7c63f90a4995937bd1",
+        "2e03c0a7306df31d583ca9ed677a4fa2134b358289ca7281fccb47dbad2b3123",
+        "8cf6cadf4a897839906acea65c87c9060a72c9ad117ab08fc74e2034b1b237d3"
+      ],
+      "status": "machine-draft"
+    }
+  ],
+  "assets": [
+    {
+      "source": "static/images/replication-dark.svg",
+      "target": "static/pgedge/assets/images/replication-dark.svg",
+      "bytes": 1571,
+      "sha256": "a21d2686e308bd408beb68882c20bcabb50a36864626c22f442bf2ef1f34164c"
+    },
+    {
+      "source": "static/images/replication-light.svg",
+      "target": "static/pgedge/assets/images/replication-light.svg",
+      "bytes": 1565,
+      "sha256": "b0cfafe74f01c0ed4bfbb1b6353ce414db47c41c971544195f75f17399bdda5b"
+    },
+    {
+      "source": "static/legal/lolor-LICENSE.txt",
+      "target": "static/pgedge/assets/legal/lolor-LICENSE.txt",
+      "bytes": 963,
+      "sha256": "af9fdeecd67ac7e7c3a81e7de4a775663fef29d6f22a323f27de2177245077b5"
+    },
+    {
+      "source": "static/legal/safesession-LICENCE.txt",
+      "target": "static/pgedge/assets/legal/safesession-LICENCE.txt",
+      "bytes": 962,
+      "sha256": "5788a4b08f920398c891db32107621776cc690602710d9fed0ebe90a2aa92904"
+    },
+    {
+      "source": "static/legal/snowflake-COPYRIGHT",
+      "target": "static/pgedge/assets/legal/snowflake-COPYRIGHT",
+      "bytes": 225,
+      "sha256": "97d3dda6228b4911e6312dec80fa9548b4c44223ca25dd9d85d853a4eb821598"
+    },
+    {
+      "source": "static/legal/snowflake-LICENSE.txt",
+      "target": "static/pgedge/assets/legal/snowflake-LICENSE.txt",
+      "bytes": 963,
+      "sha256": "2250de89c725966d910b3fe9920b3c5455a64dd4204c6c0198d26da3e1b34136"
+    },
+    {
+      "source": "static/legal/spock-COPYRIGHT",
+      "target": "static/pgedge/assets/legal/spock-COPYRIGHT",
+      "bytes": 182,
+      "sha256": "a14d0f68533669e67eeb4c62d76c9a2a35526ddd06a626b9da2f30f23381d1c8"
+    },
+    {
+      "source": "static/legal/spock-LICENSE.txt",
+      "target": "static/pgedge/assets/legal/spock-LICENSE.txt",
+      "bytes": 1112,
+      "sha256": "0ba825ec4a9324bc364e86202ef45b94dc7d1caef0b612e06cf1804caf2f3965"
+    }
+  ]
+}
