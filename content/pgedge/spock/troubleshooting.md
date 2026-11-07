@@ -1,0 +1,627 @@
+---
+title: Troubleshooting Spock
+description: This document provides solutions to common issues encountered when using Spock for PostgreSQL logical
+  replication.
+weight: 120
+upstream_source: pgedge-spock
+upstream_link: https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/troubleshooting.md
+upstream_modified: true
+upstream_ref: 4ac1aec2f080
+source_kind: pinned-main-snapshot
+linkTitle: Troubleshooting
+type: docs
+---
+
+
+
+This document provides solutions to common issues encountered when using
+Spock for PostgreSQL logical replication.
+
+## Start with the Status Views {#start-with-the-status-views}
+
+Before reading the server log, query the
+[status views](/pgedge/spock/monitoring/node-monitoring/). They hold the last error of
+every apply worker and a history of recent events on the node:
+
+```sql
+SELECT * FROM spock.node_status;
+SELECT subscription_name, status, worker_status, last_error_message
+  FROM spock.subscription_status;
+SELECT event_time, event_type, severity, detail
+  FROM spock.events WHERE severity <> 'info' ORDER BY event_id DESC LIMIT 20;
+```
+
+## Common Replication Issues {#common-replication-issues}
+
+This section describes common problems that prevent replication from
+working correctly and provides solutions for each issue.
+
+### Replication Not Starting {#replication-not-starting}
+
+If replication fails to start, check the following items:
+
+- Verify `pg_hba.conf` entries allow secure connections between nodes.
+- Test network connectivity between nodes with the following command:
+
+  ```bash
+  psql -h <remote_node_ip> -U postgres -d <database_name>
+  ```
+
+- You can check the PostgreSQL logs for detailed error messages with this
+  command:
+
+  ```bash
+  tail -f /var/lib/pgsql/18/data/log/postgresql-*.log
+  ```
+
+- You can verify that the Spock extension is created on both nodes with this
+  query:
+
+  ```sql
+  SELECT extname, extversion FROM pg_extension WHERE extname = 'spock';
+  ```
+
+### Subscription Stuck in Initializing State {#subscription-stuck-in-initializing-state}
+
+If a subscription remains in the initializing state, verify the following
+configuration parameters.
+
+- Check that `max_replication_slots` is set to a sufficient value:
+
+  ```sql
+  SHOW max_replication_slots;
+  ```
+
+  A subscription that is initializing needs *two* slots on the provider: the
+  one held by its apply stream, plus one created for the sync worker that
+  copies the table data. Subscriptions are per database, so size for
+  `2 x subscribers x replicated databases` per node, plus any physical or
+  failover slots. On PostgreSQL 15-17 this parameter also caps replication
+  origins.
+
+- Verify that `max_wal_senders` is set to a sufficient value:
+
+  ```sql
+  SHOW max_wal_senders;
+  ```
+
+  Set this equal to `max_replication_slots`: every slot has a walsender behind
+  it while it streams, so the accounting above applies unchanged. A shortfall
+  here is the most common reason a cluster that replicates fine in steady
+  state cannot add or resync a table.
+
+- For PostgreSQL 18+, check the `max_active_replication_origins` setting:
+
+  ```sql
+  SHOW max_active_replication_origins;
+  ```
+
+  Ensure that the value is at least the number of subscriptions this node
+  applies - `(nodes - 1) x replicated databases` in a full mesh - plus
+  headroom.
+
+- If parameters were modified, restart PostgreSQL with this command:
+
+  ```bash
+  sudo systemctl restart postgresql-18
+  ```
+
+- Check the subscription status with this query:
+
+  ```sql
+  SELECT * FROM spock.sub_show_status();
+  ```
+
+### DDL Not Replicating {#ddl-not-replicating}
+
+If DDL statements are not replicating across nodes, check the following
+settings.
+
+- Verify that automatic DDL replication is enabled with this query:
+
+  ```sql
+  SHOW spock.enable_ddl_replication;
+  ```
+
+  The value should be `on`.
+
+- Check that the `include_ddl_repset` parameter is enabled:
+
+  ```sql
+  SHOW spock.include_ddl_repset;
+  ```
+
+- Ensure that schema structures match on both nodes before enabling auto-DDL.
+- To confirm that DDL is replicated from functions, verify this setting is
+  enabled:
+
+  ```sql
+  SHOW spock.allow_ddl_from_functions;
+  ```
+
+
+> [!WARNING]
+>
+> Some DDL statements are intentionally not replicated, such as `CREATE
+> DATABASE`. The `CREATE TABLE...AS...` statement generates a warning:
+> "DDL statement replicated, but could be unsafe."
+>
+
+### UPDATE or DELETE Operations Fail {#update-or-delete-operations-fail}
+
+If `UPDATE` or `DELETE` operations fail with *unable to find tuple* errors,
+the table may be missing a primary key or replica identity.
+
+To resolve this issue, choose one of the following solutions:
+
+- Add a primary key to the table with the following command:
+
+  ```sql
+  ALTER TABLE table_name ADD PRIMARY KEY (column_name);
+  ```
+
+- Alternatively, set a replica identity using a unique index:
+
+  ```sql
+  ALTER TABLE table_name REPLICA IDENTITY USING INDEX index_name;
+  ```
+
+The unique index must be non-partial, non-deferrable, and use `NOT NULL`
+columns.
+
+
+> [!NOTE]
+>
+> `REPLICA IDENTITY FULL` is only supported with Delta-Apply columns on
+> primary key tables.
+>
+
+### Unique Constraint Conflicts {#unique-constraint-conflicts}
+
+If you encounter unique constraint violations during replication, ensure
+only one `UNIQUE` index or constraint exists on downstream tables.
+
+The error message for deferrable index constraints appears as follows:
+
+```text
+ERROR: spock doesn't support index rechecks needed for deferrable indexes
+DETAIL: relation "public"."test_relation" has deferrable indexes: "index1"
+```
+
+To resolve this issue, convert deferrable constraints to non-deferrable:
+
+```sql
+ALTER TABLE table_name DROP CONSTRAINT constraint_name;
+ALTER TABLE table_name ADD CONSTRAINT constraint_name UNIQUE (column_name);
+```
+
+### Delta-Apply Column Errors {#delta-apply-column-errors}
+
+If you receive a *delta apply column can't operate NULL values* error,
+ensure all Delta-Apply columns have NOT NULL constraints.
+
+```sql
+ALTER TABLE table_name ALTER COLUMN column_name SET NOT NULL;
+```
+
+Then configure the Delta-Apply column with the following command:
+
+```sql
+ALTER TABLE table_name ALTER COLUMN column_name
+  SET (log_old_value=true, delta_apply_function=spock.delta_apply);
+```
+
+## Configuration Issues {#configuration-issues}
+
+This section covers problems related to PostgreSQL and Spock configuration
+parameters that can cause replication issues.
+
+### Missing Required Parameters {#missing-required-parameters}
+
+The following parameters are required in `postgresql.conf` for Spock to
+function properly:
+
+```sql
+wal_level = logical
+max_worker_processes = 20
+max_replication_slots = 10
+max_wal_senders = 10
+shared_preload_libraries = 'spock'
+track_commit_timestamp = on
+```
+
+The three numeric values shown are a small-cluster starting point. If you are
+troubleshooting worker registration failures, stuck subscriptions, or apply
+workers that will not start, size them from your actual topology using
+[Sizing Postgres Resources for Spock](/pgedge/spock/sizing/) - the defaults in the
+tutorials do not account for parallel query workers sharing the
+`max_worker_processes` pool, nor for the per-database managers, the
+supervisor, and the slot sync worker that every node runs.
+
+After modifying `postgresql.conf`, restart PostgreSQL with this command:
+
+```bash
+sudo systemctl restart postgresql-18
+```
+
+### Decoding Fails on `spock_output` {#decoding-fails-on-spock_output}
+
+Replication stops — either a new subscription never leaves the initializing
+state, or an established subscription stops applying after a minor-version
+upgrade — and the provider's log records:
+
+```
+ERROR:  library "spock_output" may not be used as an output plugin
+HINT:   If it is safe for all REPLICATION users to use this library as an
+        output plugin, add it to "output_plugin_libraries" and reload the
+        server configuration.
+```
+
+A 2026 PostgreSQL security fix (CVE-2026-6471, back-patched to every supported
+major) added the `output_plugin_libraries` parameter, and a library may no
+longer be used as an output plugin unless it is listed there. The default,
+`'pgoutput, test_decoding'`, excludes `spock_output`.
+
+The check runs whenever logical decoding starts, not only when the slot is
+created, so this is not limited to new subscriptions: a cluster that has been
+replicating for months will stop the first time a walsender starts decoding
+after the upgrade. Add the library on **every** node a subscription may connect
+to — which, in a mesh, is all of them — keeping the core defaults:
+
+```sql
+output_plugin_libraries = 'pgoutput, test_decoding, spock_output'
+```
+
+Include physical standbys and Patroni replicas that hold synchronized failover
+slots: a copied slot keeps `spock_output` as its plugin, so a standby missing
+this setting serves replication only until it is promoted, and then fails.
+
+The parameter is `PGC_SUSET`, so `SELECT pg_reload_conf();` is enough — no
+restart needed. The apply worker on the subscriber treats the failure as a
+lost connection and reconnects by itself once the provider has been
+reloaded; the subscription is not disabled.
+
+Only set the parameter if your server has it; on a release predating the fix,
+an unrecognised parameter in `postgresql.conf` stops the server from starting.
+Check with:
+
+```sql
+SELECT current_setting('output_plugin_libraries', true);
+```
+
+A NULL result means the parameter does not exist and must not be set.
+
+### Conflict Resolution Issues {#conflict-resolution-issues}
+
+If conflicts are causing replication to stop, check the conflict
+resolution setting with this query:
+
+```sql
+SHOW spock.conflict_resolution;
+```
+
+The only supported value is:
+
+- `last_update_wins` - Keep the version with the newest commit timestamp.
+
+To change the setting, use the following command:
+
+```sql
+ALTER SYSTEM SET spock.conflict_resolution = 'last_update_wins';
+SELECT pg_reload_conf();
+```
+
+
+> [!NOTE]
+>
+> The `last_update_wins` setting requires `track_commit_timestamp = on`.
+>
+
+### Exception Handling Behavior {#exception-handling-behavior}
+
+If replication is stopping due to errors, check the exception behavior
+setting with this query:
+
+```sql
+SHOW spock.exception_behaviour;
+```
+
+The following values are available:
+
+- `transdiscard` - Discard the entire transaction on ERROR.
+- `discard` - Continue processing without the ERROR statement.
+- `sub_disable` - Disable the subscription and queue transactions.
+
+To change the setting, use the following command:
+
+```sql
+ALTER SYSTEM SET spock.exception_behaviour = 'discard';
+SELECT pg_reload_conf();
+```
+
+You can check the exception log table for details with this query:
+
+```sql
+SELECT * FROM spock.exception_log ORDER BY timestamp DESC LIMIT 10;
+```
+
+## Performance Issues {#performance-issues}
+
+This section addresses performance-related problems that can affect
+replication speed and efficiency.
+
+### High Replication Lag {#high-replication-lag}
+
+If replication lag is increasing, check the lag status with this query:
+
+```sql
+SELECT subscription_name, provider_node, replication_lag_bytes,
+       replication_lag, worker_status
+  FROM spock.subscription_status;
+```
+
+The query displays `replication_lag_bytes` and `replication_lag` for each
+subscription. `spock.lag_tracker` shows the same figures per node pair. On
+the provider, `spock.slot_status` shows how much WAL each subscriber still
+has to fetch in `pending_wal_bytes`.
+
+Possible causes and solutions include:
+
+- Insufficient `max_worker_processes` - increase the value; see
+  [Sizing Postgres Resources for Spock](/pgedge/spock/sizing/). Remember that parallel
+  query workers draw from the same pool, so a parallel-heavy workload can
+  starve apply workers even when the value looks generous, and that the
+  supervisor, the per-database managers, and the slot sync worker each consume
+  a slot before any apply worker starts.
+- Network bandwidth limitations - check network throughput.
+- Large transactions - break into smaller transactions if possible.
+- Slow subscriber hardware - upgrade hardware or reduce workload.
+
+## Node Failure and Recovery {#node-failure-and-recovery}
+
+This section explains how to recover from node failures and restore
+replication after a node becomes unavailable.
+
+### Catastrophic Node Failure {#catastrophic-node-failure}
+
+If a node fails catastrophically, use ACE (Active Consistency Engine) to
+recover missing data.
+
+The recovery workflow involves five phases:
+
+1. Assess damage by checking subscription status on surviving nodes.
+
+2. Clean up Spock metadata by dropping subscriptions to the failed node:
+
+   ```sql
+   SELECT spock.sub_drop(subscription_name := 'sub_to_failed_node');
+   SELECT spock.node_drop(node_name := 'failed_node');
+   ```
+
+3. Identify missing data using ACE table-diff with these flags:
+
+   ```bash
+   ./ace table-diff --nodes n2,n3,n4 --preserve-origin n1 \
+     --until 2026-02-11T14:30:00Z --output json cluster public.table_name
+   ```
+
+4. Repair affected tables using ACE table-repair:
+
+   ```bash
+   ./ace table-repair --diff-file=diff_file.json \
+     --nodes n2,n3,n4 --recovery-mode --source-of-truth n3 \
+     --preserve-origin cluster public.table_name
+   ```
+
+5. Validate by re-running table-diff without flags to confirm tables match.
+
+
+> [!WARNING]
+>
+> Always use the `--preserve-origin` flag during recovery to maintain
+> replication metadata. Without this flag, repaired rows get wrong
+> origin IDs and timestamps, causing conflicts.
+>
+
+### Subscription Down Status {#subscription-down-status}
+
+If a subscription shows `down` status, check the following items:
+
+- Read the last error of the apply worker and the recent events of the
+  subscription:
+
+  ```sql
+  SELECT worker_status, worker_terminated_at, last_error_message
+    FROM spock.subscription_status WHERE subscription_name = 'sub_name';
+  SELECT event_time, event_type, detail FROM spock.events
+   WHERE subscription_name = 'sub_name' ORDER BY event_id DESC LIMIT 20;
+  ```
+
+  A `worker_status` of `restart pending` means the worker failed and the
+  manager will retry after `worker_restart_delay` milliseconds.
+- Verify the provider node is running and accessible.
+- Check replication slots on the provider with this query:
+
+  ```sql
+  SELECT slot_name, active, retained_wal_bytes FROM spock.slot_status;
+  ```
+
+- Review PostgreSQL logs on both provider and subscriber nodes if the views
+  do not explain the failure.
+- Restart the subscription with these commands:
+
+  ```sql
+  SELECT spock.sub_disable(subscription_name := 'sub_name');
+  SELECT spock.sub_enable(subscription_name := 'sub_name');
+  ```
+
+## Upgrade Issues {#upgrade-issues}
+
+This section provides guidance on verifying and troubleshooting Spock
+installations after upgrading to a new version.
+
+### Post-Upgrade Verification {#post-upgrade-verification}
+
+After upgrading Spock, verify the installation with the following checks.
+
+1. Check that the extension matches the installed library and that the
+   upgrade was recorded:
+
+   ```sql
+   SELECT spock_version, extension_version, extension_update_pending
+     FROM spock.node_status;
+   SELECT event_time, detail FROM spock.events
+    WHERE event_type = 'extension_upgraded';
+   ```
+
+2. Verify subscription status with this query:
+
+   ```sql
+   SELECT subscription_name, enabled, status, worker_status
+     FROM spock.subscription_status;
+   ```
+
+3. Check replication slots on each provider with this query:
+
+   ```sql
+   SELECT slot_name, active, state, retained_wal_bytes FROM spock.slot_status;
+   ```
+
+4. Monitor replication lag with this query:
+
+   ```sql
+   SELECT subscription_name, replication_lag_bytes, replication_lag
+     FROM spock.subscription_status;
+   ```
+
+### DDL Replication After Upgrade {#ddl-replication-after-upgrade}
+
+If DDL replication was disabled for the upgrade, re-enable it on all
+nodes with the following commands:
+
+```sql
+ALTER SYSTEM SET spock.enable_ddl_replication = on;
+SELECT pg_reload_conf();
+```
+
+## Special Feature Issues {#special-feature-issues}
+
+This section covers troubleshooting for advanced Spock features including
+row filters, column filters, and partitioned tables.
+
+### Row Filter Errors {#row-filter-errors}
+
+If row filters are causing replication to stop, check for volatile
+functions in the filter expression.
+
+Volatile functions (like `random()` or `now()`) can produce different
+results on evaluation and cause errors.
+
+Replace volatile functions with stable or immutable alternatives, or
+remove them from the filter.
+
+### Column Filter Issues {#column-filter-issues}
+
+If columns are missing after filtering, note the following behaviors:
+
+- System columns (`oid`, `xmin`) cannot be filtered.
+- Dropping a filtered column automatically removes it from the filter.
+- New columns are not automatically included in existing filters.
+
+Update the filter to include new columns with this command:
+
+```sql
+SELECT spock.repset_alter_table(
+    set_name := 'default',
+    relation := 'public.table_name',
+    columns := ARRAY['col1', 'col2', 'new_col']
+);
+```
+
+### Partitioned Table Replication {#partitioned-table-replication}
+
+If new partitions are not replicating, add them manually with the
+following command:
+
+```sql
+SELECT spock.repset_add_partition(
+    parent := 'public.parent_table',
+    partition := 'public.new_partition'
+);
+```
+
+The parent table is synced during initial sync, but new partitions
+created after sync must be added explicitly. Pass `partition := NULL`
+(or omit it) to add every existing partition of the parent at once.
+You can also pass an optional `row_filter` argument to restrict which
+rows from the partition are replicated.
+
+
+## Checking Logs {#checking-logs}
+
+Most replication errors are visible without the log: the last error of each
+apply worker is in `spock.subscription_status.last_error_message`, and errors
+raised in a spock worker are recorded as `worker_error` rows in
+`spock.events`.
+
+Not every one of them reaches that view. Connection failures and PANIC are
+left out, and an event is dropped rather than waited for when the ring is
+briefly locked. The log remains the place for the full context of an error,
+such as the statement and the detail lines, and the place to look when a
+worker failed and the views do not say why.
+
+PostgreSQL logs provide detailed information about replication errors and
+issues.
+
+Locate log files with this query:
+
+```sql
+SHOW log_directory;
+SHOW log_filename;
+```
+
+On RHEL/Rocky Linux, logs are typically located at:
+
+```text
+/var/lib/pgsql/18/data/log/
+```
+
+Monitor logs in real-time with this command:
+
+```bash
+tail -f /var/lib/pgsql/18/data/log/postgresql-*.log
+```
+
+Filter for Spock-related messages with this command:
+
+```bash
+grep -i spock /var/lib/pgsql/18/data/log/postgresql-*.log
+```
+
+## Getting Help {#getting-help}
+
+If you cannot resolve your issue using this troubleshooting guide, gather
+the following information before requesting support:
+
+- Spock version from `SELECT extversion FROM pg_extension WHERE extname = 'spock';`
+- PostgreSQL version from `SELECT version();`
+- Operating system and version
+- Configuration settings from `postgresql.conf`
+- Relevant error messages from PostgreSQL logs
+- Subscription status from `SELECT * FROM spock.sub_show_status();`
+- Node status from `SELECT * FROM spock.node;`
+- Replication lag from `SELECT * FROM spock.lag_tracker;`
+
+For more information, see the following resources:
+
+- The [Spock Functions Reference](/pgedge/spock/reference/) document
+  provides detailed function documentation.
+- The [Configuring Spock](/pgedge/spock/configuration/) document describes configuration
+  parameters and settings.
+- The [Limitations and Restrictions](/pgedge/spock/limitations/) document explains
+  known limitations and constraints that may affect your replication setup.
+- The [FAQ](/pgedge/spock/faq/) document answers frequently asked questions.
+
+---
+
+[Upstream source](https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/troubleshooting.md) · `4ac1aec2f080` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).
