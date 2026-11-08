@@ -20,6 +20,7 @@ Halo Database 1.0.16 文档说明其兼容 MySQL 5.6 至 8.0 的常用功能，�
 - [兼容的 MySQL 语句](/openhalo/mysql-statements/)：`REPLACE`、`INSERT IGNORE`、`ON DUPLICATE KEY UPDATE`、`LIMIT`、预处理语句和用户变量。
 - [兼容的 MySQL 数据类型](/openhalo/mysql-data-types/)：数字、字符、日期时间、`ENUM`、`SET` 和 `YEAR`。
 - [已知兼容边界](/openhalo/mysql-compatibility-gaps/)：独立 OpenHalo 测试报告的版本化结果和迁移测试计划。
+- [OpenHalo 18 与 MySQL 5.7 实测报告](/openhalo/mysql57-compatibility-review/)：固定提交 `9dc937f` 的独立构建、真实 MySQL 5.7.32 对照、迁移结果和阻断问题。
 
 {.cards}
 

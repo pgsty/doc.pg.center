@@ -20,6 +20,7 @@ The open-source [openHalo project](https://github.com/HaloTech-Co-Ltd/openHalo) 
 - [Compatible MySQL statements](/openhalo/mysql-statements/): `REPLACE`, `INSERT IGNORE`, `ON DUPLICATE KEY UPDATE`, `LIMIT`, prepared statements, and user variables.
 - [Compatible MySQL data types](/openhalo/mysql-data-types/): numeric, character, date/time, `ENUM`, `SET`, and `YEAR`.
 - [Known compatibility boundaries](/openhalo/mysql-compatibility-gaps/): versioned results from an independent OpenHalo test report and a migration test plan.
+- [OpenHalo 18 and MySQL 5.7 review](/openhalo/mysql57-compatibility-review/): independent builds, real MySQL 5.7.32 comparisons, migration results, and blocking issues at fixed commit `9dc937f`.
 
 {.cards}
 

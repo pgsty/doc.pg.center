@@ -60,5 +60,6 @@ OpenHalo 支持常用的 MySQL SQL 方言与通信协议。旧应用可以像连
 - [兼容的 MySQL 语句](/openhalo/mysql-statements/)
 - [兼容的 MySQL 数据类型](/openhalo/mysql-data-types/)
 - [已知兼容边界](/openhalo/mysql-compatibility-gaps/)
+- [OpenHalo 18 与真实 MySQL 5.7 独立验收报告](/openhalo/mysql57-compatibility-review/)
 
 {.cards}

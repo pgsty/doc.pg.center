@@ -57,5 +57,6 @@ Use the focused reference pages when the goal is to run an existing MySQL applic
 - [Compatible MySQL statements](/openhalo/mysql-statements/)
 - [Compatible MySQL data types](/openhalo/mysql-data-types/)
 - [Known compatibility boundaries](/openhalo/mysql-compatibility-gaps/)
+- [OpenHalo 18 vs. real MySQL 5.7: independent review](/openhalo/mysql57-compatibility-review/)
 
 {.cards}
