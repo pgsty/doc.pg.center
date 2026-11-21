@@ -34,6 +34,10 @@ PolarDB for PostgreSQL is an Alibaba Cloud database with a compute-storage separ
   Read the original plans preserved with the documentation snapshot.
 {.cards columns=2}
 
+## Release context {#release-context}
+
+The current software release checked on November 21, 2026 is [PolarDB for PostgreSQL 17.11.1.0](https://github.com/polardb/PolarDB-for-PostgreSQL/releases/tag/v17.11.1.0). The documentation repository remains at `b4733b0350888242afeba432a6837458c348a937`; this release check does not change the imported language coverage or the historical roadmap.
+
 ## Language coverage {#languages}
 
 The <a href="/zh/polardb/" hreflang="zh" lang="zh">Chinese edition</a> also covers deployment, operations, performance, availability, security, and elastic parallel query. Several files in the upstream English directory contain Chinese text; they are linked to their Chinese counterparts instead of being presented as English translations.

@@ -96,7 +96,9 @@
       "route": "/polardb/",
       "sha256": "3992e84c2ede69ca4751b3bf6acdeff6c754c77cda580a5086bf38b79d9b94ee",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "3a012a27874e089f27c0f5da80aa72352bf93446301886a0197c274516e3716b",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/_index.md",
@@ -2273,5 +2275,10 @@
       "bytes": 178415,
       "sha256": "fe65f8ee88c8bf0919359ef102a5c486a800c9cbaba309266bba18432c2b163e"
     }
-  ]
+  ],
+  "english_update": {
+    "date": "2026-11-21",
+    "inventory": "data/updates/2026-11-21.json",
+    "translation_status": "pending; previous source and review basis retained"
+  }
 }
