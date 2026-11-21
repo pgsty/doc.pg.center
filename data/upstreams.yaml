@@ -395,6 +395,35 @@ pgbadger-20261121:
   source_sha256:
     ChangeLog: 0ede5b99e8c09edf7e3be2ef01faa61b7c96d4261a9d8787556434bee98b386e
 
+etcd-20261121:
+  name: etcd v3.7 documentation
+  repository: https://github.com/etcd-io/website
+  documentation: https://etcd.io/docs/v3.7/
+  source_commit: e60635a46b57b7d74ca80c52c59aa0d37bed01a8
+  source_path: content/en/docs/v3.7
+  stable_release: 3.7.4
+  release_repository: https://github.com/etcd-io/etcd
+  release_ref: v3.7.4
+  release_commit: 2e8a5c99e4982c8d4c521be15364ea4c5c68a489
+  release_go_mod_sha256: d661049ebb2882d3b59925cf985bace45537fc8b27320dd98460036645343a03
+  release_changelog:
+    commit: 1ce5a2b779143279c89ed8c7e33a42e51fb697fa
+    path: CHANGELOG/CHANGELOG-3.7.md
+    sha256: c01a6270ee94344bf96262c0e92ea727964748fc2c79e6bf3a95085ef88b1c9f
+  copyright: Copyright 2013-present etcd Authors
+  license: CC-BY-4.0
+  notice: /attribution/#etcd
+  ref: v3.7.4; docs e60635a
+  modified: true
+  source_ref: main
+  snapshot_date: '2026-11-21'
+  language: en
+  translation_baseline: etcd
+  source_sha256:
+    content/en/docs/v3.7/integrations.md: 7a07ceac725c007027a5bee2aee0a65db11a0ac955e833f32effc23314fce005
+    content/en/docs/v3.7/learning/api.md: 4c3e4a9348010aa2a3b65a27fb1f64072cad450b081a459be5c64e18c8fdf787
+    content/en/docs/v3.7/op-guide/versioning.md: 4b985b3a51951b720d689ec159f48b468e6040275aaa22be0504f8bb13c7eda3
+
 haproxy-20261121:
   name: HAProxy 3.4 documentation
   repository: https://git.haproxy.org/?p=haproxy-3.4.git

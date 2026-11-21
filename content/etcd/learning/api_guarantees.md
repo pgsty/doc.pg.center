@@ -3,7 +3,7 @@ title: etcd API guarantees
 weight: 2750
 description: API guarantees made by etcd
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/api_guarantees.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/api_guarantees.md"
 ---
 
 etcd is a consistent and durable key value store.
