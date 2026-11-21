@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/bind-and-server-options/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
+upstream_ref: "v3.4.8, chapter 5"
 ---
 
 The "bind", "server" and "default-server" keywords support a number of settings depending on some
@@ -365,6 +365,9 @@ For each PEM file, HAProxy also checks for the presence of file at the same path
 ".sctl". If such file is found, support for Certificate Transparency (RFC6962) TLS extension is
 enabled. The file must contain a valid Signed Certificate Timestamp List, as described in RFC. File
 is parsed to check basic syntax, but no signatures are verified.
+
+SCT delivery over TLS 1.2 and earlier is supported with OpenSSL 1.0.2 and later or AWS-LC.
+TLS 1.3 requires OpenSSL 1.1.1 and later or AWS-LC. SCT delivery over QUIC is not supported.
 
 There are cases where it is desirable to support multiple key types, e.g. RSA and ECDSA in the
 cipher suites offered to the clients. This allows clients that support EC certificates to be able to
@@ -1916,6 +1919,9 @@ available or not available.
 
 Optional application-level health checks can be configured with "option httpchk", "option
 mysql-check" "option smtpchk", "option pgsql-check", "option ldap-check", or "option redis-check".
+
+For log backends, although UDP endpoints are supported, TCP will be used for checks as the implicit
+protocol, because there is no such thing as raw UDP checks, and ICMP checks are not available.
 
 Example:
 

@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/proxies/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 4"
+upstream_ref: "v3.4.8, chapter 4"
 ---
 
 Proxy configuration can be located in a set of sections:
@@ -4473,7 +4473,13 @@ When this option is set, the following rules are observed:
       requests;
 
     * In H1 only, no check will be performed against the authority and the Host
-      header value.
+      header value;
+
+    * In H1 only, when a request has no Host header, a Host header is built
+      from the authority of its target (the request-target itself for CONNECT
+      requests). But it is not added when the authority contains characters
+      forbidden in the Host header or, for CONNECT requests, when the
+      authority is invalid.
 
     * In H1 only, tests on the HTTP version will be relaxed. It will allow
       HTTP/0.9 GET requests to pass through (no version specified), as well as

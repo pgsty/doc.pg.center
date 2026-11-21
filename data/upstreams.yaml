@@ -394,3 +394,22 @@ pgbadger-20261121:
   translation_baseline: pgbadger
   source_sha256:
     ChangeLog: 0ede5b99e8c09edf7e3be2ef01faa61b7c96d4261a9d8787556434bee98b386e
+
+haproxy-20261121:
+  name: HAProxy 3.4 documentation
+  repository: https://git.haproxy.org/?p=haproxy-3.4.git
+  documentation: https://docs.haproxy.org/3.4/
+  source_ref: v3.4.8
+  stable_release: 3.4.8
+  source_sha256:
+    doc/intro.txt: 48c138f6c57e0328abe1cf0595453cb83e1542940ad5a7c8dd4ae4e03f8585d0
+    doc/management.txt: ad377db9c62e740c76acbf4ae506dc12795b16378519d15db1347242ba95a85b
+    doc/configuration.txt: d708d8153d3f6c69707250d87af729e9f7e3e199e50a47ad186b792b889b4c43
+  copyright: Copyright 2000-2026 Willy Tarreau
+  license: GPL-2.0-only
+  notice: /attribution/#haproxy
+  ref: v3.4.8 LTS
+  modified: true
+  snapshot_date: '2026-11-21'
+  language: en
+  translation_baseline: haproxy

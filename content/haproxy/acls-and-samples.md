@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/acls-and-samples/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 7"
+upstream_ref: "v3.4.8, chapter 7"
 ---
 
 HAProxy is capable of extracting data from request or response streams, from client or server
