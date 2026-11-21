@@ -1,5 +1,5 @@
 ---
-title: "pgBackRest 2.60.0 Documentation"
+title: "pgBackRest 2.60.1 Documentation"
 linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
@@ -10,12 +10,12 @@ sidebar_root_link_self: true
 description: "Reliable PostgreSQL Backup & Restore — pgBackRest documentation and reference."
 module: [PGBACKREST]
 categories: [Concept]
-upstream_source: pgbackrest
-upstream_ref: v2.60.0
+upstream_source: pgbackrest-20261121
+upstream_ref: v2.60.1
 upstream_link: "https://pgbackrest.org/"
 cascade:
-  upstream_source: pgbackrest
-  upstream_ref: v2.60.0
+  upstream_source: pgbackrest-20261121
+  upstream_ref: v2.60.1
   type: docs
   module: [PGBACKREST]
 ---
@@ -26,7 +26,9 @@ cascade:
 
 pgBackRest is a reliable backup and restore solution for PostgreSQL that seamlessly scales up to the largest databases and workloads.
 
-This documentation mirror covers pgBackRest [v2.60.0](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.0). Release notes are on the [Releases](/pgbackrest/release/) page.
+This documentation mirror covers pgBackRest [v2.60.1](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.1). Release notes are on the [Releases](/pgbackrest/release/) page.
+
+Version 2.60.1 fixes incorrect repository updates by `annotate`, SFTP restore failures, excessive memory retention, and TLS configuration/error handling. See the [2.60.1 release notes](/pgbackrest/release/#v2601-release-notes).
 
 Version 2.60.0 adds configurable page-checksum errors, object-store read prefetch, and GCS Workload Identity Federation. `restore` and `expire` now stop on invalid page checksums by default; see the [2.60.0 release notes](/pgbackrest/release/#v2600-release-notes).
 
@@ -38,6 +40,8 @@ Please give us a star on [GitHub](https://github.com/pgbackrest/pgbackrest) if y
 --------
 
 ## News
+
+**November 16, 2026** - [pgBackRest 2.60.1 Released](/pgbackrest/news/#release-2-60-1)
 
 **October 18, 2026** - [pgBackRest 2.60.0 Released](/pgbackrest/news/#release-2-60-0)
 

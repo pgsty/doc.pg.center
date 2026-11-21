@@ -357,3 +357,23 @@ citus:
     LICENSE: 7183ef9749eb9b75e710a81a4c812a9405cc184f087500581a973e5929ac3f5e
     LICENSE-CODE: 91f7258203fd43ba6d6f7f72b644eaedee9e3430f035c053beb6f34052f045e2
     ThirdPartyNotices.md: fbbd62e02566d47cf4ff0727de51a100f4658112fc3a8fb4386687abd5c39043
+
+pgbackrest-20261121:
+  name: pgBackRest documentation
+  repository: https://github.com/pgbackrest/pgbackrest
+  documentation: https://pgbackrest.org/
+  source_ref: release/2.60.1
+  source_commit: 7aeba299c49abd768ca741506569007a5cab0870
+  copyright: Copyright (c) 2015-2026 The PostgreSQL Global Development Group and David Steele
+  license: MIT
+  notice: /attribution/#pgbackrest
+  ref: v2.60.1
+  modified: true
+  snapshot_date: '2026-11-21'
+  language: en
+  translation_baseline: pgbackrest
+  source_sha256:
+    doc/xml/news.xml: 97616d945b5d7e59897f9f7b945648e0c855c64aedeb4c473702d82ed7655a26
+    doc/xml/reference.xml: 9733b729ba0e864c10eabdeded2ef3b7f7f67c98f1afea24d771afe666eade9d
+    doc/xml/release.xml: d760d75d7161a77e39edaa1353c837c176ed20f9ce59c51d12c5439afcfd92b7
+    doc/xml/release/2020s/2026/2.60.1.xml: c58447e816971907c63709d03b4e2b6a8bffd3bbb04c62fe694c7a0079b36f97

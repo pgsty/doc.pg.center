@@ -11,6 +11,44 @@ upstream_link: "https://pgbackrest.org/news.html"
 
 --------
 
+## pgBackRest 2.60.1 Released {#release-2-60-1}
+
+**November 16, 2026**
+
+The pgBackRest community is pleased to announce the release of [pgBackRest](https://pgbackrest.org) 2.60.1, the latest version of the reliable, easy-to-use backup and restore solution that can seamlessly scale up to the largest databases and workloads.
+
+pgBackRest supports a robust set of features for managing your backup and recovery infrastructure, including: parallel backup/restore, full/differential/incremental backups, block incremental backup, multiple repositories, delta restore, parallel asynchronous archiving, malware/ransomware protection, per-file checksums, page checksums (when enabled) validated during backup, multiple compression types, encryption, partial/failed backup resume, backup from standby, tablespace and link support, S3/Azure/GCS/SFTP support, backup expiration, local/remote operation via SSH or TLS, flexible configuration, and more.
+
+pgBackRest can be installed from the [PostgreSQL Yum Repository](https://yum.postgresql.org) or the [PostgreSQL APT Repository](https://apt.postgresql.org) and packages are also available for many other distributions. Source code can be downloaded from [releases](/pgbackrest/release/).
+
+### Bug Fixes {#release-2-60-1-feature}
+
+- Fix `annotate` saving `backup.info` to the default repository (David Steele).
+- Fix possible block incremental restore failure on SFTP storage (David Steele).
+- Fix use of SFTP file handles after a reconnect (David Steele).
+- Fix excessive memory use by the memory context free list (Vasiliy Koshkin).
+- Do not lower a minimum TLS version set by the OpenSSL config (David Steele).
+- Fix reporting of OpenSSL errors (David Steele).
+
+See the [2.60.1 Release Notes](/pgbackrest/release/#v2601-release-notes) for additional fixes and improvements.
+
+### Important Notes {#release-2-60-1-note}
+
+- PostgreSQL 19rc2 is supported by v2.59.2 and later, including this release.
+
+### Links {#release-2-60-1-link}
+
+- [Website](/pgbackrest/)
+- [User Guides](/pgbackrest/user-guide/)
+- [Release Notes](/pgbackrest/release/)
+
+### Sponsorship {#release-2-60-1-sponsorship}
+
+This release was made possible by the generous sponsorship of [AWS](https://aws.amazon.com), [Supabase](https://supabase.com), [pgEdge](https://pgedge.com), [Tiger Data](https://tigerdata.com), [Percona](https://percona.com), [Eon](https://eon.io), [Xata](https://xata.io), [Dalibo](https://dalibo.com), and [Data Egret](https://dataegret.com/).
+
+
+--------
+
 ## pgBackRest 2.60.0 Released {#release-2-60-0}
 
 **October 18, 2026**

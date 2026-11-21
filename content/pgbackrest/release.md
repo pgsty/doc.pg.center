@@ -25,7 +25,67 @@ The notes for a release may also contain "Additional Notes" but changes in this 
 
 ## Documented Stable Release {#current-stable-release}
 
-This mirror covers v2.60.0. See the [upstream release history](https://pgbackrest.org/release.html) for newer versions.
+This mirror covers v2.60.1. See the [upstream release history](https://pgbackrest.org/release.html) for newer versions.
+
+### v2.60.1 Release Notes {#v2601-release-notes}
+
+*Annotate and SFTP Fixes*
+
+*Released November 16, 2026*
+
+**Bug Fixes:**
+
+- Fix `annotate` saving `backup.info` to the default repository. (*Contributed by David Steele. Reviewed by Stefan Fercot, Douglas J Hunley.*)
+
+  When `repo` was not specified, the `annotate` command searched each repository for the backup set but saved the updated `backup.info` to the default repository. Annotating a backup set that was not in the default repository replaced the `backup.info` of the default repository with the `backup.info` of the repository where the backup set was found. If the default repository was encrypted, the key required to read its backups was lost, so those backups could no longer be restored.
+
+  Pull request [#2916](https://github.com/pgbackrest/pgbackrest/pull/2916)
+
+- Fix possible block incremental restore failure on SFTP storage. (*Contributed by David Steele. Reviewed by Douglas J Hunley. Suggested by fineline19.*)
+
+  Each super block read left a file open on the server until the session ended. A restore could reach the open file limit of the server and fail with an error such as "sftp errno [4]" or "client state is 'response' but expected 'idle'". Super block reads are now closed before they are freed.
+
+  Issue [#2884](https://github.com/pgbackrest/pgbackrest/issues/2884); Pull request [#2902](https://github.com/pgbackrest/pgbackrest/pull/2902)
+
+- Fix use of SFTP file handles after a reconnect. (*Contributed by David Steele. Reviewed by Douglas J Hunley.*)
+
+  A reconnect freed the session while other files could still be open on it and the next read or write of one of those files used freed memory. These now fail with "connection was lost", which allows the job to be retried.
+
+  Issue [#2884](https://github.com/pgbackrest/pgbackrest/issues/2884); Pull request [#2903](https://github.com/pgbackrest/pgbackrest/pull/2903)
+
+- Fix excessive memory use by the memory context free list. (*Contributed by Vasiliy Koshkin. Reviewed by David Steele, Douglas J Hunley.*)
+
+  The free list retained freed allocations of 64KiB or more for reuse. Buffers that grow as data is written, e.g. object store upload buffers, and allocations that did not repeat filled the list without being reused. Each process could retain up to 64MiB so memory use increased significantly with a high `process-max`. Only allocations of `buffer-size` are now retained.
+
+  Issue [#2911](https://github.com/pgbackrest/pgbackrest/issues/2911); Pull request [#2912](https://github.com/pgbackrest/pgbackrest/pull/2912)
+
+- Do not lower a minimum TLS version set by the OpenSSL config. (*Contributed by David Steele. Reviewed by Douglas J Hunley, Stefan Fercot.*)
+
+  The minimum TLS version was set to 1.2 after the OpenSSL config was applied. This lowered a higher minimum such as `MinProtocol = TLSv1.3` so TLS 1.2 connections were still allowed. The minimum is now set only when the minimum from the config is lower than TLS 1.2.
+
+  Issue [#2889](https://github.com/pgbackrest/pgbackrest/issues/2889); Pull request [#2899](https://github.com/pgbackrest/pgbackrest/pull/2899)
+
+- Fix reporting of OpenSSL errors. (*Contributed by David Steele. Reviewed by Douglas J Hunley, Stefan Fercot.*)
+
+  An error queued by the OpenSSL config or left over from an earlier failure could be reported instead of the actual failure, e.g. "ssl command section not found" for an invalid `tls-cipher-12` value. System errors such as a missing CA file reported "no details available" with OpenSSL >= 3.0 and now report the system error message.
+
+  Issue [#2889](https://github.com/pgbackrest/pgbackrest/issues/2889); Pull request [#2900](https://github.com/pgbackrest/pgbackrest/pull/2900)
+
+**Documentation Improvements:**
+
+- Document TLS settings skipped when `repo-storage-verify-tls=n`. (*Contributed by David Steele.*)
+
+  With `repo-storage-verify-tls=n` the TLSv1.2 minimum is not set and the `tls-cipher-12` and `tls-cipher-13` options are ignored for repository storage connections.
+
+**Documentation Development:**
+
+- Remove stale files from site paths written by the documentation build. (*Contributed by David Steele.*)
+
+- End patch release note history at the integration-x.y.z-ci branch. (*Contributed by David Steele.*)
+
+**Test Development:**
+
+- CI updates. (*Contributed by David Steele.*)
 
 ### v2.60.0 Release Notes {#v2600-release-notes}
 

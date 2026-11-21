@@ -628,7 +628,7 @@ All TLS connections between the pgBackRest client and server are encrypted. By d
 
 NOTE:
 
-The absolute minimum security level for any transport connection is TLSv1.2.
+The absolute minimum security level for any transport connection is TLSv1.2 unless `repo-storage-verify-tls=n`.
 
 The accepted cipher suites can be adjusted if need arises. The example is reasonable choice unless you have specific security requirements. If unset (the default), the default of the underlying OpenSSL library applies.
 
@@ -644,7 +644,7 @@ All TLS connections between the pgBackRest client and server are encrypted. By d
 
 NOTE:
 
-The absolute minimum security level for any transport connection is TLSv1.2.
+The absolute minimum security level for any transport connection is TLSv1.2 unless `repo-storage-verify-tls=n`.
 
 The accepted cipher suites can be adjusted if need arises. If unset (the default), the default of the underlying OpenSSL library applies.
 
@@ -1709,11 +1709,15 @@ allow range (depending on repo-type):
 example: repo1-storage-upload-chunk-size=16MiB
 ```
 
-### Repository Storage Certificate Verify Option (`--repo-storage-verify-tls`)
+<span id="repository-storage-certificate-verify-option---repo-storage-verify-tls"></span>
 
-Repository storage certificate verify.
+### Repository Storage TLS Verify Option (`--repo-storage-verify-tls`)
+
+Repository storage TLS verify.
 
 This option provides the ability to enable/disable verification of the storage (e.g. S3, Azure) server TLS certificate. Disabling should only be used for testing or other scenarios where a certificate has been self-signed.
+
+Disabling also removes the TLSv1.2 minimum and ignores the `tls-cipher-12` and `tls-cipher-13` options for repository storage connections.
 
 ```text
 default: y
