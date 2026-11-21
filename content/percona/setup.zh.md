@@ -4,15 +4,15 @@ linkTitle: 加载扩展
 description: 配置共享预加载库、重启 PostgreSQL，并在目标数据库中创建 pg_tde 扩展。
 type: docs
 translation_notice: en
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/setup.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/setup.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: 版权所有 © 2024–2025 Percona LLC 及其关联方
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 230
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 使用 `pg_tde` 加密数据之前，必须启用扩展，并配置 PostgreSQL 在启动时加载它。这确保加密操作所需的钩子和共享内存可用。

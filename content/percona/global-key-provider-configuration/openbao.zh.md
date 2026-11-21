@@ -4,15 +4,15 @@ linkTitle: OpenBao
 description: 将 OpenBao 注册为全局密钥提供商，并配置令牌、挂载点、CA 和命名空间。
 type: docs
 translation_notice: en
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/global-key-provider-configuration/openbao.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/global-key-provider-configuration/openbao.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: 版权所有 © 2024–2025 Percona LLC 及其关联方
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 340
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 可以将 OpenBao 配置为 `pg_tde` 的全局密钥提供商，安全地管理加密密钥。

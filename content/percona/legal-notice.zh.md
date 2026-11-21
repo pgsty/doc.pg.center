@@ -4,15 +4,15 @@ linkTitle: 上游服务声明
 description: Percona 上游 AI 聊天服务法律声明的保留译文；本站未嵌入该服务。
 type: docs
 translation_notice: en
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/legal-notice.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/legal-notice.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: 版权所有 © 2024–2025 Percona LLC 及其关联方
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 1020
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 以下为上游 AI 聊天机器人服务的法律声明译文。本站保留此页作为上游文档的一部分；本站未嵌入该聊天机器人。

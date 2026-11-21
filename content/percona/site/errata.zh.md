@@ -3,8 +3,8 @@ title: 文档勘误
 description: 固定版本 pg_tde 文档的本站更正与核验依据。
 type: docs
 translation_notice: false
-upstream_source: percona
-upstream_link: https://github.com/percona/pg_tde/tree/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_source: percona-20261121
+upstream_link: https://github.com/percona/pg_tde/tree/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 ---
 
 

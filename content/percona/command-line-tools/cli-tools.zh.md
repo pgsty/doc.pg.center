@@ -4,15 +4,15 @@ linkTitle: 工具概览
 description: 用于加密集群的 pg_tde 归档、恢复、备份、校验、WAL 和升级工具。
 type: docs
 translation_notice: en
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/command-line-tools/cli-tools.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/command-line-tools/cli-tools.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: 版权所有 © 2024–2025 Percona LLC 及其关联方
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 710
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 `pg_tde` 扩展提供一组专门处理加密数据和集群的命令行工具。它们与标准 PostgreSQL 工具并存，但操作由 `pg_tde` 加密的数据时，**必须**使用这些工具。

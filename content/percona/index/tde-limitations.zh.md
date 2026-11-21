@@ -4,15 +4,15 @@ linkTitle: 已知限制
 description: pg_tde 的加密范围限制、扩展兼容性、恢复要求，以及支持和不支持的 WAL 工具。
 type: docs
 translation_notice: en
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/index/tde-limitations.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/index/tde-limitations.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: 版权所有 © 2024–2025 Percona LLC 及其关联方
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 200
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 ## Percona Server for PostgreSQL 的已知不兼容项 {#known-incompatibilities-in-percona-server-for-postgresql}
@@ -30,7 +30,7 @@ upstream_source: percona
 
 ## 使用 pg_tde 时的限制 {#limitations-when-using-pgtde}
 
-`pg_tde` 2.2.2 的限制：
+`pg_tde` 2.3.0 的限制：
 
 * PostgreSQL 内部系统表（包括统计信息和元数据）不加密。
 * 查询超过 `work_mem` 时创建的临时文件不加密。这些文件可能在长时间运行的查询期间或服务器崩溃后保留，从而使敏感数据以明文形式暴露在磁盘上。

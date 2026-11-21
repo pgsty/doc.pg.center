@@ -4,15 +4,15 @@ linkTitle: 密钥与提供商
 description: 主密钥轮换、内部密钥重建、密钥存储布局和密钥提供商迁移。
 type: docs
 translation_notice: en
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/architecture/key-provider-management.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/architecture/key-provider-management.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: 版权所有 © 2024–2025 Percona LLC 及其关联方
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 430
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 `pg_tde` 使用由主密钥和内部密钥构成的层次结构加密数据库文件。本章介绍密钥轮换、重新生成、存储和密钥提供商配置，帮助你确保加密数据安全且可访问。

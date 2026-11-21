@@ -4,15 +4,15 @@ linkTitle: 贡献与支持
 description: 向 Percona pg_tde 贡献代码和文档的流程、CLA、测试与上游 MkDocs 构建方法。
 type: docs
 translation_notice: en
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/contribute.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/contribute.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: 版权所有 © 2024–2025 Percona LLC 及其关联方
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 1000
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 欢迎参与 `pg_tde`——PostgreSQL 透明数据加密扩展！
@@ -132,7 +132,7 @@ git fetch upstream
 5. 创建独立分支：
 
 ```sh
-git checkout -b <PG-123-my_branch> upstream/release-2.2.2
+git checkout -b <PG-123-my_branch> upstream/release-2.3
 ```
 
 6. 修改文档。

@@ -4,15 +4,15 @@ linkTitle: 配置多租户
 description: 为不同数据库配置独立密钥与提供商，实现 pg_tde 多租户加密隔离。
 type: docs
 translation_notice: en
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/how-to/multi-tenant-setup.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/how-to/multi-tenant-setup.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: 版权所有 © 2024–2025 Percona LLC 及其关联方
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 540
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 以下步骤介绍如何使用 `pg_tde` 配置多租户。多租户允许不同数据库使用不同密钥加密，提供精细的数据控制，并允许为每个数据库设置不同的安全策略和访问控制，确保只有相应数据库的授权用户能够访问数据。

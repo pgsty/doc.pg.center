@@ -4,15 +4,15 @@ linkTitle: 架构概览
 description: pg_tde 的可定制加密模型、服务器内核改动、扩展与 keyring API。
 type: docs
 translation_notice: en
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/architecture/overview.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/architecture/overview.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: 版权所有 © 2024–2025 Percona LLC 及其关联方
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 410
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 `pg_tde` 是一个**可定制、完整的静态数据加密扩展**。“扩展”指 `pg_tde` 以 PostgreSQL 扩展的形式交付。
@@ -46,7 +46,7 @@ upstream_source: percona
 
 * **服务器内核改动**主要用于提高服务器的可扩展性，让 `pg_tde` 的主要逻辑能够作为扩展独立存在。内核改动还为部分需要直接操作加密表或加密 WAL 文件的命令行工具增加了加密支持。
 
-    源码见[这里](https://github.com/percona/postgres/tree/release-2.2.2)。
+    源码见[这里](https://github.com/percona/postgres/tree/release-2.3)。
 
 * **`pg_tde` 扩展**通过接入内核改动引入的扩展点，以及 PostgreSQL 服务器已有的扩展点，实现加密逻辑。
 

@@ -22,7 +22,18 @@
       "route": "/zh/percona/site/",
       "sha256": "19b90a5f7b7f40ab67d3f75adc448f1081a43411fb6f86fd04dd5d75192d7aaa",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "82c1f8fc07a4891fe8fed5944401b5861ea12011851f461f506daf6a65d76d33",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/site/_index.zh.md",
+        "source": "content/percona/site/_index.md",
+        "source_sha256": "dac40d43fa60e5abdc0eaea5301810d62477565dce51100a0198741d6a03de14",
+        "maintained_sha256": "82c1f8fc07a4891fe8fed5944401b5861ea12011851f461f506daf6a65d76d33",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/about/attribution.md",
@@ -33,7 +44,7 @@
       "sha256": "b49cae6d854125f8f8c0d84616bdf95b86285509e00455ba369bcdac920b02b4",
       "code_sha256": [],
       "status": "imported",
-      "maintained_sha256": "2c6e5b54f13688b02b59eb26ee8cc90f08122991e0c2229b8e7178b67b981fe3",
+      "maintained_sha256": "2d8a5e71ab860d803f44d14fb921950f11fc4b1ccc6c3d2226479f95988bbb5a",
       "update_batch": "2026-11-21"
     },
     {
@@ -44,7 +55,18 @@
       "route": "/zh/percona/site/attribution/",
       "sha256": "7038c54fb8da8ae5e308c9e9105b4b920d392c2211adc644d24ec47a07ddbd5e",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "fb42cb6e497f3efd12cfe860a07571b20ee8bd462402b3e62b94bbeea041c686",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/site/attribution.zh.md",
+        "source": "content/percona/site/attribution.md",
+        "source_sha256": "2d8a5e71ab860d803f44d14fb921950f11fc4b1ccc6c3d2226479f95988bbb5a",
+        "maintained_sha256": "fb42cb6e497f3efd12cfe860a07571b20ee8bd462402b3e62b94bbeea041c686",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/about/errata.md",
@@ -66,7 +88,18 @@
       "route": "/zh/percona/site/errata/",
       "sha256": "fdf718a0717b06e30be041633db4f68422066092f3eabc4f45878ce72a88b685",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "5c601d500de2741bc656e7cc7418af70ece54c1f426f9ae2641d4f3c28a79c0d",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/site/errata.zh.md",
+        "source": "content/percona/site/errata.md",
+        "source_sha256": "02bfcd30e3854d96e4b8fe68815ecdf1014052477f7f250e61c08bc5cc7776b3",
+        "maintained_sha256": "5c601d500de2741bc656e7cc7418af70ece54c1f426f9ae2641d4f3c28a79c0d",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/blog/_index.md",
@@ -88,7 +121,18 @@
       "route": "/zh/percona/blog/",
       "sha256": "70576120830f2ae5e31c9d41e6e1d8741a408d6da415898912ad8929112c9eb0",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "cda4731ac7b66dbe17a2c44753b5043ce16380e4c943bd3025b11212c50c71a5",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/blog/_index.zh.md",
+        "source": "content/percona/blog/_index.md",
+        "source_sha256": "1d9456de01ae37739294b90e091be7849035570755b644128b77b1c1be1e6b06",
+        "maintained_sha256": "cda4731ac7b66dbe17a2c44753b5043ce16380e4c943bd3025b11212c50c71a5",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/blog/guide/_index.md",
@@ -110,7 +154,18 @@
       "route": "/zh/percona/blog/guide/",
       "sha256": "25ca91fddb5b4b747ad2b80e9d8a3c26282aa370eb084bb338503d13094b5c57",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "0f314136f4534432ed2a44a01b35587901aed454822689bddf684e293afd354d",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/blog/guide/_index.zh.md",
+        "source": "content/percona/blog/guide/_index.md",
+        "source_sha256": "d53eeca569f5b6d94bfe75f1efb22e6eca5866755e32a6322918ea787ddad4d0",
+        "maintained_sha256": "0f314136f4534432ed2a44a01b35587901aed454822689bddf684e293afd354d",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/blog/guide/encryption-architecture.md",
@@ -132,7 +187,18 @@
       "route": "/zh/percona/blog/guide/encryption-architecture/",
       "sha256": "6a0c0781ce168ea24d07f09ed005d1ceabaaa58a923f003f2bae12e6661a19f3",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "deb74a24b1732443442725c03e4c1c159d145fd0161babcdbd6da871e037491a",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/blog/guide/encryption-architecture.zh.md",
+        "source": "content/percona/blog/guide/encryption-architecture.md",
+        "source_sha256": "70cc1b61f7ac545aa760c8660486f680255240f7cf5c9ff7d5295ed8a42df720",
+        "maintained_sha256": "deb74a24b1732443442725c03e4c1c159d145fd0161babcdbd6da871e037491a",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/blog/guide/production-checklist.md",
@@ -154,7 +220,18 @@
       "route": "/zh/percona/blog/guide/production-checklist/",
       "sha256": "f20ef65b281de9d1a8030d4cf350c5b686a116bc925123c90cc3e2b04303b993",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "ff2a807e9604389cb75347cacde0446c65c273ab2c208bb3c8d2da4b208d4116",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/blog/guide/production-checklist.zh.md",
+        "source": "content/percona/blog/guide/production-checklist.md",
+        "source_sha256": "49ef75e1865fd1a673c3deab55cb2e16f529b92501fe7f2643ef47019e40a7e1",
+        "maintained_sha256": "ff2a807e9604389cb75347cacde0446c65c273ab2c208bb3c8d2da4b208d4116",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/blog/percona/_index.md",
@@ -176,7 +253,18 @@
       "route": "/zh/percona/blog/percona/",
       "sha256": "76e16dd92d92f43ecf292142a20a21aebd071a9450a941089ae074b709e9065b",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "218ec82d8060dda8da3fc35fe6569fcd0052783144bf01a3017821bbfd297b42",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/blog/percona/_index.zh.md",
+        "source": "content/percona/blog/percona/_index.md",
+        "source_sha256": "691d79fbad68b3bd413aae4de93a2c7f20c99131f051537339dd6f9d3acac6d1",
+        "maintained_sha256": "218ec82d8060dda8da3fc35fe6569fcd0052783144bf01a3017821bbfd297b42",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/blog/percona/early-project-update.md",
@@ -198,7 +286,18 @@
       "route": "/zh/percona/blog/percona/early-project-update/",
       "sha256": "ef67016ac701f94c0298a32e2143e73ea76570980a5d7abd9fc94714c30a1c63",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "9fcc72bfb9f994aa0d0075b93cbe72ec2792b511833a8dfacb3f847ff39a5b8d",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/blog/percona/early-project-update.zh.md",
+        "source": "content/percona/blog/percona/early-project-update.md",
+        "source_sha256": "60b82bba1d5018b406a720a748a501ff43974dcb7e2a3aa3e42875f0999b98c8",
+        "maintained_sha256": "9fcc72bfb9f994aa0d0075b93cbe72ec2792b511833a8dfacb3f847ff39a5b8d",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/blog/percona/rc-announcement.md",
@@ -220,7 +319,18 @@
       "route": "/zh/percona/blog/percona/rc-announcement/",
       "sha256": "0da52c72475f4ae46fad3f09fcf723084ef5c513d2363f6f075014bd61765226",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "be9ae8e289f2c9f4d03bb01d88de11840b3881feee3a1ade43744398957d459e",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/blog/percona/rc-announcement.zh.md",
+        "source": "content/percona/blog/percona/rc-announcement.md",
+        "source_sha256": "750459722735b77d25471d63490f028a73ba55aba26479f86ff64e69911226d5",
+        "maintained_sha256": "be9ae8e289f2c9f4d03bb01d88de11840b3881feee3a1ade43744398957d459e",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/blog/percona/webinar-qa.md",
@@ -242,7 +352,18 @@
       "route": "/zh/percona/blog/percona/webinar-qa/",
       "sha256": "094522d206abe3cf9832523a0643133893f549e7b73dadc513b0af2be805ae54",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "476f8d4f5f0018e12b3a60b7e602dde94cc4a75f15cb4381dcec60d22500f475",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/blog/percona/webinar-qa.zh.md",
+        "source": "content/percona/blog/percona/webinar-qa.md",
+        "source_sha256": "7c954b12d25e3d3279a7f59466176816a5d1ca0ad2619124488ab0328e9d93ac",
+        "maintained_sha256": "476f8d4f5f0018e12b3a60b7e602dde94cc4a75f15cb4381dcec60d22500f475",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/blog/release/2.2.1.md",
@@ -264,7 +385,18 @@
       "route": "/zh/percona/blog/release/2.2.1/",
       "sha256": "31630385312a62bc08cf7ecb549ca52fe16d78a76249112693038a945a12b578",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "ffe81167c861d31314a4618cae64aa033aa37407fd08ecacda5344e4bb1e5ba5",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/blog/release/2.2.1.zh.md",
+        "source": "content/percona/blog/release/2.2.1.md",
+        "source_sha256": "e84d23a4725fb60b055396cfc59c67391e65b1a8efc8d29653e55e2952cf7f95",
+        "maintained_sha256": "ffe81167c861d31314a4618cae64aa033aa37407fd08ecacda5344e4bb1e5ba5",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/blog/release/2.2.2.md",
@@ -286,7 +418,18 @@
       "route": "/zh/percona/blog/release/2.2.2/",
       "sha256": "99de9437a225da116769df7f4da47eebf1620590bc259634f4e8bff89da0ea77",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "a46d04cc24c11cdcc825fa499dc2633d237fa7665e5c6713c835113adf89054e",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/blog/release/2.2.2.zh.md",
+        "source": "content/percona/blog/release/2.2.2.md",
+        "source_sha256": "be15609a61c8b0ce896dc0a96d4c7eb72c995959c857aed7a8d9ccfd4acfe645",
+        "maintained_sha256": "a46d04cc24c11cdcc825fa499dc2633d237fa7665e5c6713c835113adf89054e",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/blog/release/_index.md",
@@ -308,7 +451,18 @@
       "route": "/zh/percona/blog/release/",
       "sha256": "8fe3bfa23b42fbefa0256ad596d2a53145dade686b1b4a678ab0ca7058871f21",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "8410e2320a094dc102aa221e3ca802b9e2fa20bd7592d9f9c4747d8e6d544737",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/blog/release/_index.zh.md",
+        "source": "content/percona/blog/release/_index.md",
+        "source_sha256": "6c996176d14f8c1a3572af397719e3cfa4bb42b494bc231b7448f407346fc15a",
+        "maintained_sha256": "8410e2320a094dc102aa221e3ca802b9e2fa20bd7592d9f9c4747d8e6d544737",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/_index.md",
@@ -319,7 +473,7 @@
       "sha256": "2c3ec26ac12a5ad8f4c2dab0c534a345888fa675c7cb03b790709bf0af5c33ad",
       "code_sha256": [],
       "status": "imported",
-      "maintained_sha256": "22b5f1b0faba22a8252f9b498c2df1f1bca3c2158b0bfa36d4394834b3e4175a",
+      "maintained_sha256": "2b71914bde9f315e0266e9447882a270446ee9cc6d4d216277723840ec304c23",
       "update_batch": "2026-11-21"
     },
     {
@@ -330,7 +484,18 @@
       "route": "/zh/percona/",
       "sha256": "78968cad8f1c77ac4d480b65b22eda9773e0bbf819dca3d765f49149d374480a",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "681ab9a145c85598704da8e990fd057834a520ea7468dfdaf4e08409a20dcdc9",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/_index.zh.md",
+        "source": "content/percona/_index.md",
+        "source_sha256": "2b71914bde9f315e0266e9447882a270446ee9cc6d4d216277723840ec304c23",
+        "maintained_sha256": "681ab9a145c85598704da8e990fd057834a520ea7468dfdaf4e08409a20dcdc9",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/advanced-topics/_index.md",
@@ -352,7 +517,18 @@
       "route": "/zh/percona/advanced-topics/",
       "sha256": "73d31e52f25546fb3636a2d4983db85499e62a2f4de17a3282f847cbbf73698c",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "cbe7fb51f41cf195bbceac871c098fd2efe2f3acab596562e222217de8ddf3df",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/advanced-topics/_index.zh.md",
+        "source": "content/percona/advanced-topics/_index.md",
+        "source_sha256": "3973ef73c4fa426fe29c319a65e65ed5f222da5b137cfc1860e4fae48aff6b8f",
+        "maintained_sha256": "cbe7fb51f41cf195bbceac871c098fd2efe2f3acab596562e222217de8ddf3df",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/advanced-topics/tech-reference.md",
@@ -374,7 +550,18 @@
       "route": "/zh/percona/advanced-topics/tech-reference/",
       "sha256": "1b0bad03d634248744aaeee52a952d253ad2103e8416994f9a6d5293f54eee1b",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "73f341012500c28f49a3d6da126424e8f24fcd082a266acc8e5d0acc6d0b351b",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/advanced-topics/tech-reference.zh.md",
+        "source": "content/percona/advanced-topics/tech-reference.md",
+        "source_sha256": "0670923ee2a2ff9798f509f841bd9c35716b28fb0a1d55903a9db1bec78b1504",
+        "maintained_sha256": "73f341012500c28f49a3d6da126424e8f24fcd082a266acc8e5d0acc6d0b351b",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/advanced-topics/usage-guide.md",
@@ -420,7 +607,18 @@
         "fcaafba7caae71f262becd1e0345095b862f8d9240d3595f096cc7f2ce8839f5",
         "9c3b21353ff69587fa293487ed6d62568cad7d4bbff27252fc7337b59909ebfe"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "0aa46061703f9c845375f4653874613378e05c78f510c44aff6bcc5c11c0d947",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/advanced-topics/usage-guide.zh.md",
+        "source": "content/percona/advanced-topics/usage-guide.md",
+        "source_sha256": "d68aa7e03f87a782bd8a696dd1b8faa353ebe7f744b80f95a229467ae6380ca3",
+        "maintained_sha256": "0aa46061703f9c845375f4653874613378e05c78f510c44aff6bcc5c11c0d947",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/apt.md",
@@ -458,7 +656,18 @@
         "d86151acda026988ec0124815ee0e6936cb408a71dc781c2f2ffca891b27c9cc",
         "1e054c51f03a416b87cb54829574eaf3452b1f50a06aef262dc21d645c3cc0f7"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "60b6b7b735d41e0f13f9b9bafa2ffa416a34acca134e505feb8446737bc5e300",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/apt.zh.md",
+        "source": "content/percona/apt.md",
+        "source_sha256": "d6f1d230717573ec0739fee56aae6a15836850b00e49a34fff914d435e13ca9b",
+        "maintained_sha256": "60b6b7b735d41e0f13f9b9bafa2ffa416a34acca134e505feb8446737bc5e300",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/architecture/_index.md",
@@ -480,7 +689,18 @@
       "route": "/zh/percona/architecture/",
       "sha256": "f9ffac50fafa584ef77b58ab55a12c4a1b6fff65a10198c5aacb40ed3fe95e3a",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "3c851fa420e6601efa9b774123c44e1900bb5bcb35484145886533b2e0179de6",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/architecture/_index.zh.md",
+        "source": "content/percona/architecture/_index.md",
+        "source_sha256": "d1255bdf4f7ad87fca2438343f82503d19baf2d6138cba3350e6906925d46378",
+        "maintained_sha256": "3c851fa420e6601efa9b774123c44e1900bb5bcb35484145886533b2e0179de6",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/architecture/encryption-architecture.md",
@@ -502,7 +722,18 @@
       "route": "/zh/percona/architecture/encryption-architecture/",
       "sha256": "2b1440a7e9e6822014e68e5ce6807c5071777bc08186a51c8358262f690d421f",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "538b8b98044f4b2ce3990e583f3996d9c2d2dda4bc3758dc9c86cb8af0cdb194",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/architecture/encryption-architecture.zh.md",
+        "source": "content/percona/architecture/encryption-architecture.md",
+        "source_sha256": "a048faab5b6df4d718018b4d361a2dfaf5f8040b1b22f70daeb36221503dc059",
+        "maintained_sha256": "538b8b98044f4b2ce3990e583f3996d9c2d2dda4bc3758dc9c86cb8af0cdb194",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/architecture/key-provider-management.md",
@@ -524,7 +755,18 @@
       "route": "/zh/percona/architecture/key-provider-management/",
       "sha256": "0928ed0af920ad413483e7f57e3399ee40c9a04e609052d32883016087e9b904",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "d280b0a8ce88c0b8e13d36662323b1e797e9532303ab67b7750abdfa071bdebb",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/architecture/key-provider-management.zh.md",
+        "source": "content/percona/architecture/key-provider-management.md",
+        "source_sha256": "5194fed68b792be09003837ab0261d947313d41184f02561b69dc7a50eb39628",
+        "maintained_sha256": "d280b0a8ce88c0b8e13d36662323b1e797e9532303ab67b7750abdfa071bdebb",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/architecture/overview.md",
@@ -546,7 +788,18 @@
       "route": "/zh/percona/architecture/overview/",
       "sha256": "12c3e4d3c0507f53c329a3d7088d39ae272b67041259e932b01fae53c49edd06",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "a4cb94b3274900752fe8b358c232c08c4c3b347544522ba4a12d45f69b83291c",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/architecture/overview.zh.md",
+        "source": "content/percona/architecture/overview.md",
+        "source_sha256": "14c2368071264e70cfa2083fcad8cd0cd40dda5796abaa4b033927137654c83d",
+        "maintained_sha256": "a4cb94b3274900752fe8b358c232c08c4c3b347544522ba4a12d45f69b83291c",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/command-line-tools/_index.md",
@@ -568,7 +821,18 @@
       "route": "/zh/percona/command-line-tools/",
       "sha256": "74e6fa58b76cb749248177568da48ab90c5a8edb3594e231c6b8b2fd20c6acf7",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "1c9fe25434c3411490e69592b66fefa66dd455d9268e7ab7d7d54248af9d4d0b",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/command-line-tools/_index.zh.md",
+        "source": "content/percona/command-line-tools/_index.md",
+        "source_sha256": "23faaf6e9ea3000bced6b663775f3aee06084e7823dc85eb2726956f42297907",
+        "maintained_sha256": "1c9fe25434c3411490e69592b66fefa66dd455d9268e7ab7d7d54248af9d4d0b",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/command-line-tools/cli-tools.md",
@@ -590,7 +854,18 @@
       "route": "/zh/percona/command-line-tools/cli-tools/",
       "sha256": "381efdc6129045d34ef81a6ce055ade019215274451cd7d8fb14eda0ce51b430",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "88c962b55384c8b36c836bc3aa9186e5863fd683fe8e05f035d9dce1b5bf119f",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/command-line-tools/cli-tools.zh.md",
+        "source": "content/percona/command-line-tools/cli-tools.md",
+        "source_sha256": "064d73ffae0d0f41876172a4b0f63d184fbdf45800d96394a52097e8845b54cf",
+        "maintained_sha256": "88c962b55384c8b36c836bc3aa9186e5863fd683fe8e05f035d9dce1b5bf119f",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/command-line-tools/pg-tde-archive-decrypt.md",
@@ -622,7 +897,18 @@
         "4df1ccbe50885395d7bd613bd6abc0d8cfe4668539763a16b091d3b3c0c01610",
         "af7ff82463e85b4974aaad079b58aafd0cc6d3c5deba4411b609ed90a3804319"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "869b794f1428ae82d9724f15242f43743bdea6907f57e27a410b5f7840142695",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/command-line-tools/pg-tde-archive-decrypt.zh.md",
+        "source": "content/percona/command-line-tools/pg-tde-archive-decrypt.md",
+        "source_sha256": "10013d9e497bda7519380d0f3d054e7d8560fa11d8d3eb9eddc3c75d886c2dc7",
+        "maintained_sha256": "869b794f1428ae82d9724f15242f43743bdea6907f57e27a410b5f7840142695",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/command-line-tools/pg-tde-change-key-provider.md",
@@ -650,7 +936,18 @@
         "7685fb9eba1f70b520f12d17591f49277aadad0273ac5850c61ba2ea18d120ac",
         "5de85d5fd5b87c0f77c2760e853ea021c558f96adb7cabf73ca04dcbba635c01"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "8223f0c15b111fc259c0b1a3511b126677852e10682580b09388107b4ddd9dcd",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/command-line-tools/pg-tde-change-key-provider.zh.md",
+        "source": "content/percona/command-line-tools/pg-tde-change-key-provider.md",
+        "source_sha256": "d99a01ac2323ad97f0e577ba6851e1dfc59add8463784312e788ec90b2344b39",
+        "maintained_sha256": "8223f0c15b111fc259c0b1a3511b126677852e10682580b09388107b4ddd9dcd",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/command-line-tools/pg-tde-checksums.md",
@@ -672,7 +969,18 @@
       "route": "/zh/percona/command-line-tools/pg-tde-checksums/",
       "sha256": "dfb72720260b4e2a8c445cb263c6ee94c6d3a3e2e161ac39acd4e1462680b2f5",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "4830ba06e47b168e7fa22b87eef529b70318ae2228a9dc0a976f8b9e6984c0b5",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/command-line-tools/pg-tde-checksums.zh.md",
+        "source": "content/percona/command-line-tools/pg-tde-checksums.md",
+        "source_sha256": "8178a37140be33101e7e936add4921f82f5e18af6c7e707cb8fbc2c8bd37e9bb",
+        "maintained_sha256": "4830ba06e47b168e7fa22b87eef529b70318ae2228a9dc0a976f8b9e6984c0b5",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/command-line-tools/pg-tde-restore-encrypt.md",
@@ -704,7 +1012,18 @@
         "3e9b72ef0fff850afd614804d4608e9e20d1661db66027b13b053fbd36d02792",
         "af7ff82463e85b4974aaad079b58aafd0cc6d3c5deba4411b609ed90a3804319"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "9d450f5ce695a92ddf41e44e92aad145bd77032d4527a72db5d495f67ff2e2f5",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/command-line-tools/pg-tde-restore-encrypt.zh.md",
+        "source": "content/percona/command-line-tools/pg-tde-restore-encrypt.md",
+        "source_sha256": "9a37d46b4937af6541e9ce3b7427f8d203ab8cd0fb652a9578036796685a4a28",
+        "maintained_sha256": "9d450f5ce695a92ddf41e44e92aad145bd77032d4527a72db5d495f67ff2e2f5",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/command-line-tools/pg-tde-upgrade.md",
@@ -730,7 +1049,18 @@
       "code_sha256": [
         "a021e75a5b8a0d3b15ae795fc9f9e39573aad4a4aaec965412abd825c279d21d"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "892adc73eecdc7c8a52eff08ec724a4ea609e936037c58e0dd7f486ee66ffe96",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/command-line-tools/pg-tde-upgrade.zh.md",
+        "source": "content/percona/command-line-tools/pg-tde-upgrade.md",
+        "source_sha256": "ab59b73ac935246ec6bf6faa8eb8981d0cd6d0629ba7a1ff70bae012b9e045a5",
+        "maintained_sha256": "892adc73eecdc7c8a52eff08ec724a4ea609e936037c58e0dd7f486ee66ffe96",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/command-line-tools/pg-tde-waldump.md",
@@ -752,7 +1082,18 @@
       "route": "/zh/percona/command-line-tools/pg-tde-waldump/",
       "sha256": "c8d945e5af18e4c626b359d16ba30200947e7d54ce478f7e37d1b45fb70470b8",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "e4456944c22c122778bffb4f897a902e4d48eb6a829ac62b17d9c0019afd6d50",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/command-line-tools/pg-tde-waldump.zh.md",
+        "source": "content/percona/command-line-tools/pg-tde-waldump.md",
+        "source_sha256": "95d68b334f307adfd14cf0e2eb3fbc602db3df379ed4e22924f43fd1b346102c",
+        "maintained_sha256": "e4456944c22c122778bffb4f897a902e4d48eb6a829ac62b17d9c0019afd6d50",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/contribute.md",
@@ -800,7 +1141,18 @@
         "0ec30f1828316120fd88bf53dc35d3f3c2817f42c4226f9f9bfccb524077fec4",
         "c942992ded95c677caeeec772f31e6a5348b18dd3c514165b9d3554222d9ea9a"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "4f451bcd4125bd8a9ef83ea6e07e3a08a423c28c7d05ae08d6025c71008795ed",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/contribute.zh.md",
+        "source": "content/percona/contribute.md",
+        "source_sha256": "cf58247043042ee078e4b8a0f2bf1e741bdd1a8e5dbcd1f0b2149b8add9e4038",
+        "maintained_sha256": "4f451bcd4125bd8a9ef83ea6e07e3a08a423c28c7d05ae08d6025c71008795ed",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/faq.md",
@@ -826,7 +1178,18 @@
       "code_sha256": [
         "0d43e08cfa57f556d6c02cf56e74b2092bd36758917b36acc983f86c5d0fa9b9"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "ce33123674a515f8614b98613971446329b98f8220534e7400662439ca06ed65",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/faq.zh.md",
+        "source": "content/percona/faq.md",
+        "source_sha256": "f6b7dcfb8d903148863488dc58ed7ffc369e15c29a8850f1264d9d4987257afc",
+        "maintained_sha256": "ce33123674a515f8614b98613971446329b98f8220534e7400662439ca06ed65",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/features.md",
@@ -848,7 +1211,18 @@
       "route": "/zh/percona/features/",
       "sha256": "7772197a263c59b8fa678cddbaa868118f32db4d32efa73eb08945ba8cbfc33b",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "1bc763432829d8edec92384ed58ad587fe6990f2589345d643d94be43732fd99",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/features.zh.md",
+        "source": "content/percona/features.md",
+        "source_sha256": "500143b1ef56e14d73c90fe97743f76d3ff24bbab056856c92ee193b5f7ff3d3",
+        "maintained_sha256": "1bc763432829d8edec92384ed58ad587fe6990f2589345d643d94be43732fd99",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/functions.md",
@@ -916,7 +1290,18 @@
         "c78ef3250559908dad8f1f4ffbb187985fcc5233944a40d42bfcf1994c37952c",
         "f8054bd14928aa445b063e4f8aa4d98585f260aca6f1c13f82e4cb5ac2f65e47"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "5680a9e88e9db2889367d54cc1100a0124ff8e9afca81c05c40d2a22a52ad463",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/functions.zh.md",
+        "source": "content/percona/functions.md",
+        "source_sha256": "fb9bb2bbfc6c9c243e407de8cd63eaf0d0bd4e0b096997d9d1ae10d25ed67808",
+        "maintained_sha256": "5680a9e88e9db2889367d54cc1100a0124ff8e9afca81c05c40d2a22a52ad463",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/get-help.md",
@@ -938,7 +1323,18 @@
       "route": "/zh/percona/get-help/",
       "sha256": "acd208f2871748ab12f7994fb956459901e921bfc433794bcb3ee8b37540548e",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "65210ec922db854e06767529f2a157ee4a4f185f25286faed54e6c2c8460b57a",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/get-help.zh.md",
+        "source": "content/percona/get-help.md",
+        "source_sha256": "3c506a5091628fdf088356e82df761034a85bfdcf92b042173d034f564ff3bef",
+        "maintained_sha256": "65210ec922db854e06767529f2a157ee4a4f185f25286faed54e6c2c8460b57a",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/global-key-provider-configuration/_index.md",
@@ -960,7 +1356,18 @@
       "route": "/zh/percona/global-key-provider-configuration/",
       "sha256": "6c8a7c5a3a5d116551edb70ad3468d566d788566e57f946b9efbe247d8fa8ae1",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "f7350eeed2c99b901c232cf5fd2b801c3cc96bf78340fb11029dc4447dc6f151",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/global-key-provider-configuration/_index.zh.md",
+        "source": "content/percona/global-key-provider-configuration/_index.md",
+        "source_sha256": "6965107a7905c9be02f80178f75fc4bd5c78daf81d04aeaa90a5c2e8151aaabd",
+        "maintained_sha256": "f7350eeed2c99b901c232cf5fd2b801c3cc96bf78340fb11029dc4447dc6f151",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/global-key-provider-configuration/keyring.md",
@@ -996,7 +1403,18 @@
         "e29323764c46e7bb0746ecb6c267a0f0c2af79e30fc979a3bc96aa7c77494c12",
         "4237c35d8e53572eb4385eb77e4a082efd09ed1936a9dcf259ac33e55b1e57de"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "551b3c5eb4441546ca9b75bb47c4662f700c0bded390ad982727373149a7d6b5",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/global-key-provider-configuration/keyring.zh.md",
+        "source": "content/percona/global-key-provider-configuration/keyring.md",
+        "source_sha256": "cc308a26723187dc6e747501b8a8950c8d43fac684a3f79ef9065267635ef309",
+        "maintained_sha256": "551b3c5eb4441546ca9b75bb47c4662f700c0bded390ad982727373149a7d6b5",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/global-key-provider-configuration/kmip-akeyless.md",
@@ -1018,7 +1436,18 @@
       "route": "/zh/percona/global-key-provider-configuration/kmip-akeyless/",
       "sha256": "024ae44484d589f52a29fcb7f775d7da552b5a769ca9a6151fb74a818eae2f6d",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "b5b5d10d5c862f0b5378295f2110d220e453626f4df14531cde9fd71a55f29c2",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/global-key-provider-configuration/kmip-akeyless.zh.md",
+        "source": "content/percona/global-key-provider-configuration/kmip-akeyless.md",
+        "source_sha256": "96ee112c6c3b89de4de0b02e510dbd8b80e4c9884692d10aa30f56c8fd493983",
+        "maintained_sha256": "b5b5d10d5c862f0b5378295f2110d220e453626f4df14531cde9fd71a55f29c2",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/global-key-provider-configuration/kmip-fortanix.md",
@@ -1040,7 +1469,18 @@
       "route": "/zh/percona/global-key-provider-configuration/kmip-fortanix/",
       "sha256": "8b1925adfba0ff5a7ecee81491913b2e0b917e043c6cc0921ec7870d9a67e339",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "6db59bd7bf1568a28fb1ffd13aaa76267571e293428dc064ef4b45bd1cd717fa",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/global-key-provider-configuration/kmip-fortanix.zh.md",
+        "source": "content/percona/global-key-provider-configuration/kmip-fortanix.md",
+        "source_sha256": "4250c7eea6ab12152ed48536cd94572b73bc81ec5a33ac32456b32bd76aa9070",
+        "maintained_sha256": "6db59bd7bf1568a28fb1ffd13aaa76267571e293428dc064ef4b45bd1cd717fa",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/global-key-provider-configuration/kmip-server.md",
@@ -1068,7 +1508,18 @@
         "806e4d9541c9840b9e834a9f3aff66a3b744d70335b556146de78d9abe3c6b96",
         "c610cae5255243f46224f6ad01ba97d1d56baa2c2744824a3bd2f2ac45722b6a"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "a27509ccbe42abd662c18b50afc2b88362c1a63cfeeb9b46bedaf83060e1b260",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/global-key-provider-configuration/kmip-server.zh.md",
+        "source": "content/percona/global-key-provider-configuration/kmip-server.md",
+        "source_sha256": "7fc06ee96bea0cafe5cff495ecfd700417ced35554bfcc4e35cb5548721cf2a4",
+        "maintained_sha256": "a27509ccbe42abd662c18b50afc2b88362c1a63cfeeb9b46bedaf83060e1b260",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/global-key-provider-configuration/kmip-thales.md",
@@ -1090,7 +1541,18 @@
       "route": "/zh/percona/global-key-provider-configuration/kmip-thales/",
       "sha256": "7ce6eff4629736a3f9049573638692eb64bd7cf54e1d37c04442df6023dc079e",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "9e694a7c7031c7fe5b064e93f827c5f52cf249c9f71fbf3ba2a714808596210b",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/global-key-provider-configuration/kmip-thales.zh.md",
+        "source": "content/percona/global-key-provider-configuration/kmip-thales.md",
+        "source_sha256": "37b40f74e151e8a945725a0db8e087020a6c258ad3d0552437814c7d8e6b823a",
+        "maintained_sha256": "9e694a7c7031c7fe5b064e93f827c5f52cf249c9f71fbf3ba2a714808596210b",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/global-key-provider-configuration/openbao.md",
@@ -1118,7 +1580,18 @@
         "4550e3f72c5b0ca3c15da68c97e77bb79d39fdfd70f6c5bbdb4ead9ebc23958c",
         "d8ea377746611f5836911ea9fd504ccc2ae8b8bf362fda8f57be252cb2c922c5"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "537a4484c834060e154afccce3a7ecc3a5b4cdedf1da1ad3903879cae21a59f8",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/global-key-provider-configuration/openbao.zh.md",
+        "source": "content/percona/global-key-provider-configuration/openbao.md",
+        "source_sha256": "56d2d40173177070bb2d253a8bade2c67b7bf73c02cf8f447a034f86e26c559f",
+        "maintained_sha256": "537a4484c834060e154afccce3a7ecc3a5b4cdedf1da1ad3903879cae21a59f8",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/global-key-provider-configuration/overview.md",
@@ -1140,7 +1613,18 @@
       "route": "/zh/percona/global-key-provider-configuration/overview/",
       "sha256": "cdaa3431b7233d68154ea1a91e7e864073246fd716c55d224f797e08d6336eb4",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "2ec4e469df80b884c7dc319491a3843a1c7f81e9c2383ea8b1e761a146c68008",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/global-key-provider-configuration/overview.zh.md",
+        "source": "content/percona/global-key-provider-configuration/overview.md",
+        "source_sha256": "4a917879130d1d4908851702ca9d9fec9db298561dc6f3c79db72d21f52e9b9a",
+        "maintained_sha256": "2ec4e469df80b884c7dc319491a3843a1c7f81e9c2383ea8b1e761a146c68008",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/global-key-provider-configuration/set-principal-key.md",
@@ -1172,7 +1656,18 @@
         "e143ef5cd5673966cb17113678333b04e56b25e2618f96d9a3b5faee4a9452e0",
         "e41b710e1102a31bdae26741aaa3cbb5a0892da2a4952343a5da16033bdaf106"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "90f4d2e3e32df69b7afd70df6f011b81cb668009e49cb32921fa6116ea9165bd",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/global-key-provider-configuration/set-principal-key.zh.md",
+        "source": "content/percona/global-key-provider-configuration/set-principal-key.md",
+        "source_sha256": "5cd38d6f1d4c01b435d0595ae8377632d9fbe0f09bf2a2744e33f2a78208ef85",
+        "maintained_sha256": "90f4d2e3e32df69b7afd70df6f011b81cb668009e49cb32921fa6116ea9165bd",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/global-key-provider-configuration/vault.md",
@@ -1232,7 +1727,18 @@
         "beb166fe98ffe2a6bf054eee82891c50a3eaab1a84239abe95dc96a5cd5f2261",
         "0df2a3bc2b04bea88556c27db81ff2d5e2c432a9663ed1d1f7da25977b4bc543"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "24b472ebcbf138e9a3b5cd67a73ab507d6afb44808efcfcf6e398e8c21ba8abb",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/global-key-provider-configuration/vault.zh.md",
+        "source": "content/percona/global-key-provider-configuration/vault.md",
+        "source_sha256": "8047df45d77469ce421d737a2ac1632a26d0c5c4152449adbf88b29623ae7513",
+        "maintained_sha256": "24b472ebcbf138e9a3b5cd67a73ab507d6afb44808efcfcf6e398e8c21ba8abb",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/how-to/_index.md",
@@ -1254,7 +1760,18 @@
       "route": "/zh/percona/how-to/",
       "sha256": "62a33e0de3651aede5dddb4b57b1fea80097e45e13a2bb0a5b785188df1fdb0f",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "2dfb32eb368e6a893000113495b15ca01e38b09233fdba042eb1027fa6631863",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/how-to/_index.zh.md",
+        "source": "content/percona/how-to/_index.md",
+        "source_sha256": "bea5ba2bace1c78ba0bbbcf34ce9a01bf56cb7831ee2d33a10c4eb4c6f547241",
+        "maintained_sha256": "2dfb32eb368e6a893000113495b15ca01e38b09233fdba042eb1027fa6631863",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/how-to/backup-wal-enabled.md",
@@ -1284,7 +1801,18 @@
         "8d679af18cb7eee8ae9307aefe363410ed2794ca56e7a1ffe6590001fa890448",
         "3a57319356c14d6e1d025bc3ad7bb888dcbc1e1f3f3710e43de9bd35e8fcc698"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "72d9eb6c8e936b4e9f14f3d963c98f6eedea164ca3054f096f7199713952597c",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/how-to/backup-wal-enabled.zh.md",
+        "source": "content/percona/how-to/backup-wal-enabled.md",
+        "source_sha256": "a45530ff8cc6828a3442a6e32c800136121162f2962fb31b03a9071f46012aba",
+        "maintained_sha256": "72d9eb6c8e936b4e9f14f3d963c98f6eedea164ca3054f096f7199713952597c",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/how-to/decrypt.md",
@@ -1318,7 +1846,18 @@
         "eed511a035d93b4916df471b9d5a64a71dae8a79d36e23afb83c1e5ec8e7bbe3",
         "5b21f91050fde1f20bc7616aa3e5b97f50b5191cc03794691f2330840d7c0ab0"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "aee1b95741058496ec884aa70cdaaa79d0b4ffd8d8f48b8a93b8235c1359e1cc",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/how-to/decrypt.zh.md",
+        "source": "content/percona/how-to/decrypt.md",
+        "source_sha256": "c82966887327419d068adb61cd3b63e33dba39d497f0c0e7c066077504aeae3e",
+        "maintained_sha256": "aee1b95741058496ec884aa70cdaaa79d0b4ffd8d8f48b8a93b8235c1359e1cc",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/how-to/enforcement.md",
@@ -1350,7 +1889,18 @@
         "288f58e2e38584766f6be2e8dfcc91377ef72a678a716e81e758171ec60b3b47",
         "8feb48b4b47daf73757e7d2d524a4a9728a843ccfc243b858be602da633d6096"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "58886f503347b435c51813a1c07ce6a3541f360f8d38f3b9a56f1bcc586834a3",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/how-to/enforcement.zh.md",
+        "source": "content/percona/how-to/enforcement.md",
+        "source_sha256": "6bd2bedb1e904242f9085ff624d907d24eafd44d9414688bfba7c5092085e5dc",
+        "maintained_sha256": "58886f503347b435c51813a1c07ce6a3541f360f8d38f3b9a56f1bcc586834a3",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/how-to/multi-tenant-setup.md",
@@ -1404,7 +1954,18 @@
         "5aa6bbbdb78ce9eadfa60c9fdc627287cf3ee0a3cfcad12139403591063af8d3",
         "d2a62c7918ab20db781e6a0309240d6703ffd8f476d21448750833ab9caccdc4"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "2a2aafe95e6dc50baabb11ba0be4acb4ba312af784e8aa561d3b5979ad5ffdf6",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/how-to/multi-tenant-setup.zh.md",
+        "source": "content/percona/how-to/multi-tenant-setup.md",
+        "source_sha256": "c70027d37b36825ed2fb5a37b168bfaea0833f99124a1acd4be2cc638ba3fed4",
+        "maintained_sha256": "2a2aafe95e6dc50baabb11ba0be4acb4ba312af784e8aa561d3b5979ad5ffdf6",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/how-to/restore-backups.md",
@@ -1426,7 +1987,18 @@
       "route": "/zh/percona/how-to/restore-backups/",
       "sha256": "5c31c56da11ddb43957215feac4ea255cc382c5fe9391814c59eec561e29117c",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "46c0fa2ed2818c95f6407b7ea4d061143e29df198fccd66fad21a46b020d4a0f",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/how-to/restore-backups.zh.md",
+        "source": "content/percona/how-to/restore-backups.md",
+        "source_sha256": "40e5e386de533f03d4609548d6afc49849c85db38bcc86379254c0a0623f20ec",
+        "maintained_sha256": "46c0fa2ed2818c95f6407b7ea4d061143e29df198fccd66fad21a46b020d4a0f",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/how-to/uninstall.md",
@@ -1470,7 +2042,18 @@
         "b80f328be019ab433d28a60af658f7f0c0bbfeb7e2197aecb1871d4f5a032bc3",
         "c9363bd84a400a8305d84db7d94dd3a7e01187267411f8db38fe2af0dcf34a43"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "a127f87363b38aab048d8aee58bcf4e1bcbed9de1188b0a58f378b1d6cba7de9",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/how-to/uninstall.zh.md",
+        "source": "content/percona/how-to/uninstall.md",
+        "source_sha256": "07d5fa3cbff6ede70083232457f2959eabfdbfc0519cec9f7825e6e588b8728b",
+        "maintained_sha256": "a127f87363b38aab048d8aee58bcf4e1bcbed9de1188b0a58f378b1d6cba7de9",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/how-to/upgrade.md",
@@ -1498,7 +2081,18 @@
         "ec6bb32935e2a86839a6d7312b46b487804892420df1eb7e6ad2076c2e9e6a2c",
         "df00f0bc034337008e5f0cdb006dca16a36ac64200c83276f3d6c506ffb85cee"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "e0e9d59ea4908b132b701b2f4e612919ee8ac34b4160883bb2484319d7cc275b",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/how-to/upgrade.zh.md",
+        "source": "content/percona/how-to/upgrade.md",
+        "source_sha256": "479080c68f704c253b08dcd0b745e351e2e5f976df074e8c6ec90259544939e7",
+        "maintained_sha256": "e0e9d59ea4908b132b701b2f4e612919ee8ac34b4160883bb2484319d7cc275b",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/index/_index.md",
@@ -1520,7 +2114,18 @@
       "route": "/zh/percona/index/",
       "sha256": "f0828e4a4baa2e193c0847f79bc828596856a60668d13ce59d6eaf3a88c342e3",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "08bd3e168ab686b7858ba6c49998a74542e6e4eaa5907e547aef18158cb42bf3",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/index/_index.zh.md",
+        "source": "content/percona/index/_index.md",
+        "source_sha256": "9e6e6a516f6f4cbaa03b37c55b8dcfc9ec6992ab43451aca7911c380949e0158",
+        "maintained_sha256": "08bd3e168ab686b7858ba6c49998a74542e6e4eaa5907e547aef18158cb42bf3",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/index/about-tde.md",
@@ -1542,7 +2147,18 @@
       "route": "/zh/percona/index/about-tde/",
       "sha256": "8537fbb40cc4a59b9cdeca43d16e07e2203d2941cede847766bbd3d41969401a",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "665e259bbb3fe7c091e9d7d597c7a02e4441ac5f20a52740cff32fa5adee392a",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/index/about-tde.zh.md",
+        "source": "content/percona/index/about-tde.md",
+        "source_sha256": "08cb1e6facfab1d1b02df75d790f0fb0f12d60e75db33aba301e7599e11e7e8a",
+        "maintained_sha256": "665e259bbb3fe7c091e9d7d597c7a02e4441ac5f20a52740cff32fa5adee392a",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/index/how-does-tde-work.md",
@@ -1564,7 +2180,18 @@
       "route": "/zh/percona/index/how-does-tde-work/",
       "sha256": "847fbdf3008508d88e831e7878c3fd7b2641819870280ba78c1493eb8aac44ec",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "ea67ed14f53286fe689355484a208402f3e8bb432dc01d545b8684fde94b92d6",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/index/how-does-tde-work.zh.md",
+        "source": "content/percona/index/how-does-tde-work.md",
+        "source_sha256": "e6106543f355f68c5fb6667d498a0884a9732d94f5b1da43da7035050eaf53d0",
+        "maintained_sha256": "ea67ed14f53286fe689355484a208402f3e8bb432dc01d545b8684fde94b92d6",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/index/how-tde-helps.md",
@@ -1586,7 +2213,18 @@
       "route": "/zh/percona/index/how-tde-helps/",
       "sha256": "321cb732cb58c63276361e3bfc0248c1eb182a5ac8cba2b16165542626312f6c",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "62561fda2b66f81dde9bfad2e8dc31ae07c1c6c6dc7a1da2791da1ed3827aa8b",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/index/how-tde-helps.zh.md",
+        "source": "content/percona/index/how-tde-helps.md",
+        "source_sha256": "70bb101631a5bd36f3586fb6cc97a9f45bb1e77f9ff10072030b284a81036e86",
+        "maintained_sha256": "62561fda2b66f81dde9bfad2e8dc31ae07c1c6c6dc7a1da2791da1ed3827aa8b",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/index/supported-versions.md",
@@ -1608,7 +2246,18 @@
       "route": "/zh/percona/index/supported-versions/",
       "sha256": "8e5d47ea04f58d32973ed022d0a54ba010f919246a74bcccb594469177641653",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "d7d853b8079434ba0c30e963312f041160d1d73250776932de1684e9f96acb8f",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/index/supported-versions.zh.md",
+        "source": "content/percona/index/supported-versions.md",
+        "source_sha256": "946d3cae94a9ee03e9dd93f01755805d7b82fc3a99538c3963de7ebcaf9e7b33",
+        "maintained_sha256": "d7d853b8079434ba0c30e963312f041160d1d73250776932de1684e9f96acb8f",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/index/table-access-method.md",
@@ -1642,7 +2291,18 @@
         "eb6f48403694ac10088e3f843db830700aaaedbd73603d9bf30e5d827e1535ab",
         "dff24986b790accfafd8956ab2489162cbce1ac1c178adcf86f2d0ac2ac092d0"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "e0f8d63b335bcb2bb3e234ce178ee003c417a399eb597e636520b404b7221019",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/index/table-access-method.zh.md",
+        "source": "content/percona/index/table-access-method.md",
+        "source_sha256": "9042ed67ca75d087e7867aed93e50ab49c277e367768bf68bbdbac10f05fec18",
+        "maintained_sha256": "e0f8d63b335bcb2bb3e234ce178ee003c417a399eb597e636520b404b7221019",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/index/tde-encrypts.md",
@@ -1664,7 +2324,18 @@
       "route": "/zh/percona/index/tde-encrypts/",
       "sha256": "4b165ebf11d80bf8eceeb7314920ba473215e57ff8f6633b17f3957ac7adf123",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "561a3bf13eeb081ee293877740202b6d3da3a52c69e9af5bba8bdce1beb3a82e",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/index/tde-encrypts.zh.md",
+        "source": "content/percona/index/tde-encrypts.md",
+        "source_sha256": "61b3fdeb6851c0c9553b4b9fd3f7ec4ab52a362477236b5ea7999d84ff4e67b7",
+        "maintained_sha256": "561a3bf13eeb081ee293877740202b6d3da3a52c69e9af5bba8bdce1beb3a82e",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/index/tde-limitations.md",
@@ -1690,7 +2361,18 @@
       "code_sha256": [
         "e2bc4eea000442e19bb6314808e5be603649d989f36a5587450cbcfbda0cd63a"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "0b3987b6665d592abc6739bb2d309c9df8dbc34cdc49369231d27600af9cd8e9",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/index/tde-limitations.zh.md",
+        "source": "content/percona/index/tde-limitations.md",
+        "source_sha256": "12807b4bd5f2434c6547b3a382dd04243cad0e6a7679781dda95a5803a66c0d1",
+        "maintained_sha256": "0b3987b6665d592abc6739bb2d309c9df8dbc34cdc49369231d27600af9cd8e9",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/index/what-tde-impacts.md",
@@ -1712,7 +2394,18 @@
       "route": "/zh/percona/index/what-tde-impacts/",
       "sha256": "5a6e4688163627ff905caf81e42eea11c10353e438871b3ea7722c0d0f29845c",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "0ef2559656f46fb68418c64b6fb392b6b3f93a0727ac2a935d6602a48d6fc7c3",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/index/what-tde-impacts.zh.md",
+        "source": "content/percona/index/what-tde-impacts.md",
+        "source_sha256": "550fedcd776ea8d9125ff37051f36e4c33cd8af4f9a48aa237f4e97ea79643ad",
+        "maintained_sha256": "0ef2559656f46fb68418c64b6fb392b6b3f93a0727ac2a935d6602a48d6fc7c3",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/install.md",
@@ -1734,7 +2427,18 @@
       "route": "/zh/percona/install/",
       "sha256": "e0be0ca2aeed1eef7f73e6e0faf48890b3c2697cc607bc32eff2e3da3e377d28",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "47cf33d4fbcf146fb384b51160c4e3938345e0866c6511a53b67ae4a4fad82d7",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/install.zh.md",
+        "source": "content/percona/install.md",
+        "source_sha256": "252a3bb18c93acb49c2aa6f0829442e91b84b4bf8a049101cfde842b20d94a81",
+        "maintained_sha256": "47cf33d4fbcf146fb384b51160c4e3938345e0866c6511a53b67ae4a4fad82d7",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/legal-notice.md",
@@ -1756,7 +2460,18 @@
       "route": "/zh/percona/legal-notice/",
       "sha256": "74276f1fe3c08bbbc1a0d263711696008fc273247014ef72c30b608f96a8bfb7",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "d099d4bbf3cdea2128c6762925ae478436505c12291be2b872cab0b089c7624b",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/legal-notice.zh.md",
+        "source": "content/percona/legal-notice.md",
+        "source_sha256": "858c7b79c25c6bf8a1f01f0c727be852bf026bcfcf9f49150c21c539159ece3a",
+        "maintained_sha256": "d099d4bbf3cdea2128c6762925ae478436505c12291be2b872cab0b089c7624b",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/overview.md",
@@ -1778,7 +2493,18 @@
       "route": "/zh/percona/overview/",
       "sha256": "f603127875378f43eccbcd33e7e929fcf822e51d6049329dd37c130092047a8c",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "6e2618048092fc4e271fc7b4516bf7fe2c144ac28c02687cb0856b24b790b052",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/overview.zh.md",
+        "source": "content/percona/overview.md",
+        "source_sha256": "204b903913306200a72fe2751d89aee4b5647753fe0570f8d129db5e8b1efe7d",
+        "maintained_sha256": "6e2618048092fc4e271fc7b4516bf7fe2c144ac28c02687cb0856b24b790b052",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/release-notes/_index.md",
@@ -1800,7 +2526,18 @@
       "route": "/zh/percona/release-notes/",
       "sha256": "3e4cc70ad6eafa29205c446d3cad395bf99d40ee110f25d85896caa469f5d1aa",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "dc04916752624960edb01869a52720d70e42106d64dacc99f9e76d67ea89d127",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/release-notes/_index.zh.md",
+        "source": "content/percona/release-notes/_index.md",
+        "source_sha256": "aadebae31e3d4166eb42181003f9a893a800b17da9ba2f6e955f85edfe711aad",
+        "maintained_sha256": "dc04916752624960edb01869a52720d70e42106d64dacc99f9e76d67ea89d127",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/release-notes/alpha1.md",
@@ -1822,7 +2559,18 @@
       "route": "/zh/percona/release-notes/alpha1/",
       "sha256": "2c5a312b49bf22f90853577abc27c8e03b0286734ee328116dd41eefbe4550b7",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "31f268aab57eedee5ed02f2a1e2a8d218466d8cb2a9ece7de573f61b19052319",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/release-notes/alpha1.zh.md",
+        "source": "content/percona/release-notes/alpha1.md",
+        "source_sha256": "309c90f926f926c500e81341e1a3149ec29a8ea634de01201526a85ee458a2ec",
+        "maintained_sha256": "31f268aab57eedee5ed02f2a1e2a8d218466d8cb2a9ece7de573f61b19052319",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/release-notes/beta.md",
@@ -1844,7 +2592,18 @@
       "route": "/zh/percona/release-notes/beta/",
       "sha256": "6fb09d9f370351db46fe381daa174f9f378c512a343c48cd2b7f71521a8aded3",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "0856573154511eb4a81490ed147d505656736c1cd7e48513641a173413fa9e32",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/release-notes/beta.zh.md",
+        "source": "content/percona/release-notes/beta.md",
+        "source_sha256": "f32a9845f6c371fd87ea1cd06ef242385a20d88decc05bd4178f756db1b39d0d",
+        "maintained_sha256": "0856573154511eb4a81490ed147d505656736c1cd7e48513641a173413fa9e32",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/release-notes/beta2.md",
@@ -1866,7 +2625,18 @@
       "route": "/zh/percona/release-notes/beta2/",
       "sha256": "2e00543e0181dad08c842aa4434dace57bd448260bddba1d5ff7ffd605b78694",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "69d6989973d6f4b0c4f9263b3f8bb3cda25bfc8fae0dd9299d28388ada8d92b5",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/release-notes/beta2.zh.md",
+        "source": "content/percona/release-notes/beta2.md",
+        "source_sha256": "f04d65ff48c748b03d12d49d386a9f542670929d24e15924d9857425e669b8ce",
+        "maintained_sha256": "69d6989973d6f4b0c4f9263b3f8bb3cda25bfc8fae0dd9299d28388ada8d92b5",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/release-notes/mvp.md",
@@ -1888,7 +2658,18 @@
       "route": "/zh/percona/release-notes/mvp/",
       "sha256": "2ea5c083783bf1fc908e7581a1cf5909c5c89b456ec5fedf1c58643b2c54e899",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "32f7a4de9541b831404e05896ecb96c0d9016a148cf068ed1216b4a178c4e5a3",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/release-notes/mvp.zh.md",
+        "source": "content/percona/release-notes/mvp.md",
+        "source_sha256": "c7ef6e2331f93087d32eea3f210acdd9ef129cd3bbe772aec0a2bcced2daca45",
+        "maintained_sha256": "32f7a4de9541b831404e05896ecb96c0d9016a148cf068ed1216b4a178c4e5a3",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/release-notes/rc.md",
@@ -1910,7 +2691,18 @@
       "route": "/zh/percona/release-notes/rc/",
       "sha256": "38e468374f07ca5f8bf09924d33754aa2562aa599133c9f7963d334493aa976b",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "68122e9fb4ebd7776091841caa72589bd93538be21d70f90eda6ecd703e5664f",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/release-notes/rc.zh.md",
+        "source": "content/percona/release-notes/rc.md",
+        "source_sha256": "70dfe45f302c2f2b0b3e26cf6c2611ab594369ddd6e42f0910a44f80f61a2e7e",
+        "maintained_sha256": "68122e9fb4ebd7776091841caa72589bd93538be21d70f90eda6ecd703e5664f",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/release-notes/rc2.md",
@@ -1932,7 +2724,18 @@
       "route": "/zh/percona/release-notes/rc2/",
       "sha256": "fc923a33c006328cb9fb9e62cdfeb84f09745922552abbd6bd224e8e002d20ad",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "a44452e8bf782b1a305acc783874c2820517ca97312c1de26fd45e92fafcc73e",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/release-notes/rc2.zh.md",
+        "source": "content/percona/release-notes/rc2.md",
+        "source_sha256": "cd9390a6c724399e08477e158425468a71ac5040afb2e2ab7633a39c25739808",
+        "maintained_sha256": "a44452e8bf782b1a305acc783874c2820517ca97312c1de26fd45e92fafcc73e",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/release-notes/release-notes-v1.0.md",
@@ -1954,7 +2757,18 @@
       "route": "/zh/percona/release-notes/release-notes-v1.0/",
       "sha256": "cc504ddd3d03cd214d3b0ebad01d9d62e6c492c26257ff4cc5cb747665088660",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "0eba92d2b9e0571d9d659eca01baa1cb361b1648620bd5f134b8d704c8bfa50e",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/release-notes/release-notes-v1.0.zh.md",
+        "source": "content/percona/release-notes/release-notes-v1.0.md",
+        "source_sha256": "276796087716654165179997f147410c4d3a038639d9cbd17c685f827b4faef1",
+        "maintained_sha256": "0eba92d2b9e0571d9d659eca01baa1cb361b1648620bd5f134b8d704c8bfa50e",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/release-notes/release-notes-v2.0.md",
@@ -1980,7 +2794,18 @@
       "code_sha256": [
         "c7476cbae8f275a55cfabe324d73bbf13e08c53981e780731e995ade494918a5"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "2ad9c4f5458519bfcef39b85d3ccf66753196772e34810a1baf51bb89ef53380",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/release-notes/release-notes-v2.0.zh.md",
+        "source": "content/percona/release-notes/release-notes-v2.0.md",
+        "source_sha256": "515f3f98542b42e5f14ae78194a7392bd4e80cf39b4d358f9684c5ace58207a4",
+        "maintained_sha256": "2ad9c4f5458519bfcef39b85d3ccf66753196772e34810a1baf51bb89ef53380",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/release-notes/release-notes-v2.1.1.md",
@@ -2002,7 +2827,18 @@
       "route": "/zh/percona/release-notes/release-notes-v2.1.1/",
       "sha256": "13a7460265b88ef2b4d18c63301062582685d31eb5781c0dd5c86ee730434a8c",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "4a545ae1745ed1e7ccd1658a4262c38b41b99756752b3e4bbc888d10d36d5137",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/release-notes/release-notes-v2.1.1.zh.md",
+        "source": "content/percona/release-notes/release-notes-v2.1.1.md",
+        "source_sha256": "6531384c655adae88f20657bc75b072427cd60000d5b2faf85f3f379a5fb79dc",
+        "maintained_sha256": "4a545ae1745ed1e7ccd1658a4262c38b41b99756752b3e4bbc888d10d36d5137",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/release-notes/release-notes-v2.1.2.md",
@@ -2028,7 +2864,18 @@
       "code_sha256": [
         "cf8c402cd0b416be932e3fa258dd0ff919c41fd50757c99b9ecfdb4492f6a2d7"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "6a0fddc55a1acc061226428cc45ade6c7fb4375394b5a68fb0f2dbedad46be1e",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/release-notes/release-notes-v2.1.2.zh.md",
+        "source": "content/percona/release-notes/release-notes-v2.1.2.md",
+        "source_sha256": "dc5920e1171dfba27948d42b49f59fd1105f6b5eb36736d21adf1d7c76c4a47d",
+        "maintained_sha256": "6a0fddc55a1acc061226428cc45ade6c7fb4375394b5a68fb0f2dbedad46be1e",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/release-notes/release-notes-v2.1.md",
@@ -2050,7 +2897,18 @@
       "route": "/zh/percona/release-notes/release-notes-v2.1/",
       "sha256": "93c9ea6e629fc33f422507d892141c515cb24346be77a54f392fd92b1c7d06b2",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "3d13edbbe52145309dee3f6988cddb6d1bcc255153db7db2094625be48d9bccb",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/release-notes/release-notes-v2.1.zh.md",
+        "source": "content/percona/release-notes/release-notes-v2.1.md",
+        "source_sha256": "6108fa83890f8e64b5e915471f155f3584bf226686559682babe29ff07945dc7",
+        "maintained_sha256": "3d13edbbe52145309dee3f6988cddb6d1bcc255153db7db2094625be48d9bccb",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/release-notes/release-notes-v2.2.0.md",
@@ -2076,7 +2934,18 @@
       "code_sha256": [
         "cf8c402cd0b416be932e3fa258dd0ff919c41fd50757c99b9ecfdb4492f6a2d7"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "fd2dbf659dc2d2d2b0c728fa77d5c67f74d377cb9bd64e2dfe5fab31191a43ca",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/release-notes/release-notes-v2.2.0.zh.md",
+        "source": "content/percona/release-notes/release-notes-v2.2.0.md",
+        "source_sha256": "7c1d5c6001a25a5b27cfa7c2160f50b6f8ffe19143ea07b683e94999aa66f9cb",
+        "maintained_sha256": "fd2dbf659dc2d2d2b0c728fa77d5c67f74d377cb9bd64e2dfe5fab31191a43ca",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/release-notes/release-notes-v2.2.1.md",
@@ -2098,7 +2967,18 @@
       "route": "/zh/percona/release-notes/release-notes-v2.2.1/",
       "sha256": "b0ed59551655f23cd8912609213cff4bb3c0d4e910b4f8d52e2c72e0ba1d4dfe",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "d5f19664309d0e13031da737add73688f82b440e1b402cf145bfe029c2000b48",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/release-notes/release-notes-v2.2.1.zh.md",
+        "source": "content/percona/release-notes/release-notes-v2.2.1.md",
+        "source_sha256": "a00daecf5ab83a3b8f55edb18479fe505d73bf1f3393c4b24cfe9b413426d10d",
+        "maintained_sha256": "d5f19664309d0e13031da737add73688f82b440e1b402cf145bfe029c2000b48",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/release-notes/release-notes-v2.2.2.md",
@@ -2120,7 +3000,18 @@
       "route": "/zh/percona/release-notes/release-notes-v2.2.2/",
       "sha256": "794c26eb49a454a1aa0aa75ed7129973d514045c147cffa77b9d8c52d3399c93",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "0ec4d72fa025a5788d4c4b0061bec493736d211f09eecb71cd4f77b23e86e6ae",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/release-notes/release-notes-v2.2.2.zh.md",
+        "source": "content/percona/release-notes/release-notes-v2.2.2.md",
+        "source_sha256": "3b4c6e9ac4acf1aa08d3db442033798ba65d452b1e3052410112b65508503c20",
+        "maintained_sha256": "0ec4d72fa025a5788d4c4b0061bec493736d211f09eecb71cd4f77b23e86e6ae",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/release-notes/release-notes.md",
@@ -2142,7 +3033,18 @@
       "route": "/zh/percona/release-notes/release-notes/",
       "sha256": "7048a0b603ec6ca98f46160a4b7468d691b9119147212e1c2ab2a01237b9892d",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "cde0d6467e685fd8a18e59c355460875754865afd93e0b15d13c0fcf32892912",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/release-notes/release-notes.zh.md",
+        "source": "content/percona/release-notes/release-notes.md",
+        "source_sha256": "c893a6afef4ea32b9934f41649ac48e24524fecec5c7080b8c3e8f5fb5198a17",
+        "maintained_sha256": "cde0d6467e685fd8a18e59c355460875754865afd93e0b15d13c0fcf32892912",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/replication.md",
@@ -2184,7 +3086,18 @@
         "82902bbb2125a82ab11fa7be904e4edade01c311c6e468b90ca3d2b819c447bc",
         "fee04f5c363e2d6c3daf680ae07da958e9e2edfd1ee3ba566ceb7b9f44e21439"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "e83686f50dac6a499f3b54e06f94483cb26fd8f143cba9b2161a06bb3f53756b",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/replication.zh.md",
+        "source": "content/percona/replication.md",
+        "source_sha256": "a09a7a9e6824c7de33677efded074807e87687b1e935aebb78b8cde99f103d43",
+        "maintained_sha256": "e83686f50dac6a499f3b54e06f94483cb26fd8f143cba9b2161a06bb3f53756b",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/setup.md",
@@ -2220,7 +3133,18 @@
         "07687cf81909396d36a06e631d04449d8bf4b496ca7f34fd81ef6cbfe30ad2d4",
         "39428fc3720f8dfaf577c69429ea068343c22e30c3f0fd78ab897553667059be"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "b1b11b6044178675f435a1e949ca0ff9f872714751366ddbd18da5def31c015c",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/setup.zh.md",
+        "source": "content/percona/setup.md",
+        "source_sha256": "723e4ccd1793891decc27686254ae509ce014561a256d4743067982d315bf305",
+        "maintained_sha256": "b1b11b6044178675f435a1e949ca0ff9f872714751366ddbd18da5def31c015c",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/test.md",
@@ -2254,7 +3178,18 @@
         "0d43e08cfa57f556d6c02cf56e74b2092bd36758917b36acc983f86c5d0fa9b9",
         "9c73de1ee08148789c63a9210f844c535b163b7c71639b7f03e3cc1889da030c"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "8f740795b7a5f705163b175b9d9b1ac4b792b4bedb6d86123ed6b8e7f410bd03",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/test.zh.md",
+        "source": "content/percona/test.md",
+        "source_sha256": "c2cdd4d3fd754a05fb137722a939594f1a67cb8d7fee95575b9179c0f90463cf",
+        "maintained_sha256": "8f740795b7a5f705163b175b9d9b1ac4b792b4bedb6d86123ed6b8e7f410bd03",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/variables.md",
@@ -2276,7 +3211,18 @@
       "route": "/zh/percona/variables/",
       "sha256": "22d67c5ad7810c1dc907384f037c70e50e55a69926042ea56b66149c875b590c",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "d37d60eb7e1be6b422adcdd3c95120d4aac6806c3813c4462341eef4dbf30681",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/variables.zh.md",
+        "source": "content/percona/variables.md",
+        "source_sha256": "186d14154988f87894c699c32d8d75cc7a6bd2952ecbf8a2737e1391a51e496a",
+        "maintained_sha256": "d37d60eb7e1be6b422adcdd3c95120d4aac6806c3813c4462341eef4dbf30681",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/wal-encryption.md",
@@ -2312,7 +3258,18 @@
         "dcd0cad20af1e3cdb8762a157bf6ae76235cb78c691c433775b41d885e3c1404",
         "447a1d1dd8ce1b85f25d4e2d023340d01a19b15f37d07bfe958cbdee3992dc6b"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "edcce60d33be5e16bedff60ced1558255852bf198ea1c6d2ac003bc67e597ceb",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/wal-encryption.zh.md",
+        "source": "content/percona/wal-encryption.md",
+        "source_sha256": "bccdd28e0368503e860da1da014083ff9265b8dc07b6acb2c81bec187d095d76",
+        "maintained_sha256": "edcce60d33be5e16bedff60ced1558255852bf198ea1c6d2ac003bc67e597ceb",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/yum.md",
@@ -2344,7 +3301,18 @@
         "79f480d61a77baaa972f51cc89ed73de7e2e9b6812429463327304ed8d8c6618",
         "708f4ffacb802c5de7716d446fce1260991533d931c1b142fc62cbfd900c57c7"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "70d81661ac3fef9514836d5d2ed1112cb29b737ad79f62c80fb29a4ace15152e",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/percona/yum.zh.md",
+        "source": "content/percona/yum.md",
+        "source_sha256": "2e6268ab9f239f0a9522284abfdc74b1589137f7111963bda6e1b4ee591e257e",
+        "maintained_sha256": "70d81661ac3fef9514836d5d2ed1112cb29b737ad79f62c80fb29a4ace15152e",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "documentation/docs/release-notes/release-notes-v2.3.0.md",
@@ -2358,6 +3326,19 @@
       "status": "imported",
       "translation_status": "pending-translation",
       "update_batch": "2026-11-21"
+    },
+    {
+      "target": "content/percona/release-notes/release-notes-v2.3.0.zh.md",
+      "source": "content/percona/release-notes/release-notes-v2.3.0.md",
+      "source_sha256": "5f6a36322a1039ea0e82468d5c7ff5b855e62ee75802bafe17f2bf5bd05e723d",
+      "maintained_sha256": "d5250285bc8538809f9a11f5b87d4c83b7484305186229394f14442682d3f109",
+      "review_scope": "full new translation",
+      "review_mode": "self-review",
+      "date": "2026-11-22",
+      "language": "zh",
+      "route": "/zh/percona/release-notes/release-notes-v2.3.0/",
+      "status": "translated",
+      "code_sha256": []
     }
   ],
   "assets": [
@@ -2443,6 +3424,816 @@
   "english_update": {
     "date": "2026-11-21",
     "inventory": "data/updates/2026-11-21.json",
-    "translation_status": "pending; previous source and review basis retained"
+    "translation_status": "Chinese incremental updates reviewed; preexisting gaps and draft status retained"
+  },
+  "translation_update": {
+    "date": "2026-11-22",
+    "batch": "2026-11-21",
+    "review_mode": "self-review",
+    "reviewed_pages": 10,
+    "metadata_only_pages": 79,
+    "pages": [
+      {
+        "target": "content/percona/_index.zh.md",
+        "source": "content/percona/_index.md",
+        "source_sha256": "2b71914bde9f315e0266e9447882a270446ee9cc6d4d216277723840ec304c23",
+        "maintained_sha256": "681ab9a145c85598704da8e990fd057834a520ea7468dfdaf4e08409a20dcdc9",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/architecture/overview.zh.md",
+        "source": "content/percona/architecture/overview.md",
+        "source_sha256": "14c2368071264e70cfa2083fcad8cd0cd40dda5796abaa4b033927137654c83d",
+        "maintained_sha256": "a4cb94b3274900752fe8b358c232c08c4c3b347544522ba4a12d45f69b83291c",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/command-line-tools/pg-tde-waldump.zh.md",
+        "source": "content/percona/command-line-tools/pg-tde-waldump.md",
+        "source_sha256": "95d68b334f307adfd14cf0e2eb3fbc602db3df379ed4e22924f43fd1b346102c",
+        "maintained_sha256": "e4456944c22c122778bffb4f897a902e4d48eb6a829ac62b17d9c0019afd6d50",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/contribute.zh.md",
+        "source": "content/percona/contribute.md",
+        "source_sha256": "cf58247043042ee078e4b8a0f2bf1e741bdd1a8e5dbcd1f0b2149b8add9e4038",
+        "maintained_sha256": "4f451bcd4125bd8a9ef83ea6e07e3a08a423c28c7d05ae08d6025c71008795ed",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/index/tde-limitations.zh.md",
+        "source": "content/percona/index/tde-limitations.md",
+        "source_sha256": "12807b4bd5f2434c6547b3a382dd04243cad0e6a7679781dda95a5803a66c0d1",
+        "maintained_sha256": "0b3987b6665d592abc6739bb2d309c9df8dbc34cdc49369231d27600af9cd8e9",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/overview.zh.md",
+        "source": "content/percona/overview.md",
+        "source_sha256": "204b903913306200a72fe2751d89aee4b5647753fe0570f8d129db5e8b1efe7d",
+        "maintained_sha256": "6e2618048092fc4e271fc7b4516bf7fe2c144ac28c02687cb0856b24b790b052",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/_index.zh.md",
+        "source": "content/percona/release-notes/_index.md",
+        "source_sha256": "aadebae31e3d4166eb42181003f9a893a800b17da9ba2f6e955f85edfe711aad",
+        "maintained_sha256": "dc04916752624960edb01869a52720d70e42106d64dacc99f9e76d67ea89d127",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/release-notes-v2.3.0.zh.md",
+        "source": "content/percona/release-notes/release-notes-v2.3.0.md",
+        "source_sha256": "5f6a36322a1039ea0e82468d5c7ff5b855e62ee75802bafe17f2bf5bd05e723d",
+        "maintained_sha256": "d5250285bc8538809f9a11f5b87d4c83b7484305186229394f14442682d3f109",
+        "review_scope": "full new translation",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/release-notes.zh.md",
+        "source": "content/percona/release-notes/release-notes.md",
+        "source_sha256": "c893a6afef4ea32b9934f41649ac48e24524fecec5c7080b8c3e8f5fb5198a17",
+        "maintained_sha256": "cde0d6467e685fd8a18e59c355460875754865afd93e0b15d13c0fcf32892912",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/site/attribution.zh.md",
+        "source": "content/percona/site/attribution.md",
+        "source_sha256": "2d8a5e71ab860d803f44d14fb921950f11fc4b1ccc6c3d2226479f95988bbb5a",
+        "maintained_sha256": "fb42cb6e497f3efd12cfe860a07571b20ee8bd462402b3e62b94bbeea041c686",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/advanced-topics/_index.zh.md",
+        "source": "content/percona/advanced-topics/_index.md",
+        "source_sha256": "3973ef73c4fa426fe29c319a65e65ed5f222da5b137cfc1860e4fae48aff6b8f",
+        "maintained_sha256": "cbe7fb51f41cf195bbceac871c098fd2efe2f3acab596562e222217de8ddf3df",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/advanced-topics/tech-reference.zh.md",
+        "source": "content/percona/advanced-topics/tech-reference.md",
+        "source_sha256": "0670923ee2a2ff9798f509f841bd9c35716b28fb0a1d55903a9db1bec78b1504",
+        "maintained_sha256": "73f341012500c28f49a3d6da126424e8f24fcd082a266acc8e5d0acc6d0b351b",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/advanced-topics/usage-guide.zh.md",
+        "source": "content/percona/advanced-topics/usage-guide.md",
+        "source_sha256": "d68aa7e03f87a782bd8a696dd1b8faa353ebe7f744b80f95a229467ae6380ca3",
+        "maintained_sha256": "0aa46061703f9c845375f4653874613378e05c78f510c44aff6bcc5c11c0d947",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/apt.zh.md",
+        "source": "content/percona/apt.md",
+        "source_sha256": "d6f1d230717573ec0739fee56aae6a15836850b00e49a34fff914d435e13ca9b",
+        "maintained_sha256": "60b6b7b735d41e0f13f9b9bafa2ffa416a34acca134e505feb8446737bc5e300",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/architecture/_index.zh.md",
+        "source": "content/percona/architecture/_index.md",
+        "source_sha256": "d1255bdf4f7ad87fca2438343f82503d19baf2d6138cba3350e6906925d46378",
+        "maintained_sha256": "3c851fa420e6601efa9b774123c44e1900bb5bcb35484145886533b2e0179de6",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/architecture/encryption-architecture.zh.md",
+        "source": "content/percona/architecture/encryption-architecture.md",
+        "source_sha256": "a048faab5b6df4d718018b4d361a2dfaf5f8040b1b22f70daeb36221503dc059",
+        "maintained_sha256": "538b8b98044f4b2ce3990e583f3996d9c2d2dda4bc3758dc9c86cb8af0cdb194",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/architecture/key-provider-management.zh.md",
+        "source": "content/percona/architecture/key-provider-management.md",
+        "source_sha256": "5194fed68b792be09003837ab0261d947313d41184f02561b69dc7a50eb39628",
+        "maintained_sha256": "d280b0a8ce88c0b8e13d36662323b1e797e9532303ab67b7750abdfa071bdebb",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/blog/_index.zh.md",
+        "source": "content/percona/blog/_index.md",
+        "source_sha256": "1d9456de01ae37739294b90e091be7849035570755b644128b77b1c1be1e6b06",
+        "maintained_sha256": "cda4731ac7b66dbe17a2c44753b5043ce16380e4c943bd3025b11212c50c71a5",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/blog/guide/_index.zh.md",
+        "source": "content/percona/blog/guide/_index.md",
+        "source_sha256": "d53eeca569f5b6d94bfe75f1efb22e6eca5866755e32a6322918ea787ddad4d0",
+        "maintained_sha256": "0f314136f4534432ed2a44a01b35587901aed454822689bddf684e293afd354d",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/blog/guide/encryption-architecture.zh.md",
+        "source": "content/percona/blog/guide/encryption-architecture.md",
+        "source_sha256": "70cc1b61f7ac545aa760c8660486f680255240f7cf5c9ff7d5295ed8a42df720",
+        "maintained_sha256": "deb74a24b1732443442725c03e4c1c159d145fd0161babcdbd6da871e037491a",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/blog/guide/production-checklist.zh.md",
+        "source": "content/percona/blog/guide/production-checklist.md",
+        "source_sha256": "49ef75e1865fd1a673c3deab55cb2e16f529b92501fe7f2643ef47019e40a7e1",
+        "maintained_sha256": "ff2a807e9604389cb75347cacde0446c65c273ab2c208bb3c8d2da4b208d4116",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/blog/percona/_index.zh.md",
+        "source": "content/percona/blog/percona/_index.md",
+        "source_sha256": "691d79fbad68b3bd413aae4de93a2c7f20c99131f051537339dd6f9d3acac6d1",
+        "maintained_sha256": "218ec82d8060dda8da3fc35fe6569fcd0052783144bf01a3017821bbfd297b42",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/blog/percona/early-project-update.zh.md",
+        "source": "content/percona/blog/percona/early-project-update.md",
+        "source_sha256": "60b82bba1d5018b406a720a748a501ff43974dcb7e2a3aa3e42875f0999b98c8",
+        "maintained_sha256": "9fcc72bfb9f994aa0d0075b93cbe72ec2792b511833a8dfacb3f847ff39a5b8d",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/blog/percona/rc-announcement.zh.md",
+        "source": "content/percona/blog/percona/rc-announcement.md",
+        "source_sha256": "750459722735b77d25471d63490f028a73ba55aba26479f86ff64e69911226d5",
+        "maintained_sha256": "be9ae8e289f2c9f4d03bb01d88de11840b3881feee3a1ade43744398957d459e",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/blog/percona/webinar-qa.zh.md",
+        "source": "content/percona/blog/percona/webinar-qa.md",
+        "source_sha256": "7c954b12d25e3d3279a7f59466176816a5d1ca0ad2619124488ab0328e9d93ac",
+        "maintained_sha256": "476f8d4f5f0018e12b3a60b7e602dde94cc4a75f15cb4381dcec60d22500f475",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/blog/release/2.2.1.zh.md",
+        "source": "content/percona/blog/release/2.2.1.md",
+        "source_sha256": "e84d23a4725fb60b055396cfc59c67391e65b1a8efc8d29653e55e2952cf7f95",
+        "maintained_sha256": "ffe81167c861d31314a4618cae64aa033aa37407fd08ecacda5344e4bb1e5ba5",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/blog/release/2.2.2.zh.md",
+        "source": "content/percona/blog/release/2.2.2.md",
+        "source_sha256": "be15609a61c8b0ce896dc0a96d4c7eb72c995959c857aed7a8d9ccfd4acfe645",
+        "maintained_sha256": "a46d04cc24c11cdcc825fa499dc2633d237fa7665e5c6713c835113adf89054e",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/blog/release/_index.zh.md",
+        "source": "content/percona/blog/release/_index.md",
+        "source_sha256": "6c996176d14f8c1a3572af397719e3cfa4bb42b494bc231b7448f407346fc15a",
+        "maintained_sha256": "8410e2320a094dc102aa221e3ca802b9e2fa20bd7592d9f9c4747d8e6d544737",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/command-line-tools/_index.zh.md",
+        "source": "content/percona/command-line-tools/_index.md",
+        "source_sha256": "23faaf6e9ea3000bced6b663775f3aee06084e7823dc85eb2726956f42297907",
+        "maintained_sha256": "1c9fe25434c3411490e69592b66fefa66dd455d9268e7ab7d7d54248af9d4d0b",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/command-line-tools/cli-tools.zh.md",
+        "source": "content/percona/command-line-tools/cli-tools.md",
+        "source_sha256": "064d73ffae0d0f41876172a4b0f63d184fbdf45800d96394a52097e8845b54cf",
+        "maintained_sha256": "88c962b55384c8b36c836bc3aa9186e5863fd683fe8e05f035d9dce1b5bf119f",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/command-line-tools/pg-tde-archive-decrypt.zh.md",
+        "source": "content/percona/command-line-tools/pg-tde-archive-decrypt.md",
+        "source_sha256": "10013d9e497bda7519380d0f3d054e7d8560fa11d8d3eb9eddc3c75d886c2dc7",
+        "maintained_sha256": "869b794f1428ae82d9724f15242f43743bdea6907f57e27a410b5f7840142695",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/command-line-tools/pg-tde-change-key-provider.zh.md",
+        "source": "content/percona/command-line-tools/pg-tde-change-key-provider.md",
+        "source_sha256": "d99a01ac2323ad97f0e577ba6851e1dfc59add8463784312e788ec90b2344b39",
+        "maintained_sha256": "8223f0c15b111fc259c0b1a3511b126677852e10682580b09388107b4ddd9dcd",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/command-line-tools/pg-tde-checksums.zh.md",
+        "source": "content/percona/command-line-tools/pg-tde-checksums.md",
+        "source_sha256": "8178a37140be33101e7e936add4921f82f5e18af6c7e707cb8fbc2c8bd37e9bb",
+        "maintained_sha256": "4830ba06e47b168e7fa22b87eef529b70318ae2228a9dc0a976f8b9e6984c0b5",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/command-line-tools/pg-tde-restore-encrypt.zh.md",
+        "source": "content/percona/command-line-tools/pg-tde-restore-encrypt.md",
+        "source_sha256": "9a37d46b4937af6541e9ce3b7427f8d203ab8cd0fb652a9578036796685a4a28",
+        "maintained_sha256": "9d450f5ce695a92ddf41e44e92aad145bd77032d4527a72db5d495f67ff2e2f5",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/command-line-tools/pg-tde-upgrade.zh.md",
+        "source": "content/percona/command-line-tools/pg-tde-upgrade.md",
+        "source_sha256": "ab59b73ac935246ec6bf6faa8eb8981d0cd6d0629ba7a1ff70bae012b9e045a5",
+        "maintained_sha256": "892adc73eecdc7c8a52eff08ec724a4ea609e936037c58e0dd7f486ee66ffe96",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/faq.zh.md",
+        "source": "content/percona/faq.md",
+        "source_sha256": "f6b7dcfb8d903148863488dc58ed7ffc369e15c29a8850f1264d9d4987257afc",
+        "maintained_sha256": "ce33123674a515f8614b98613971446329b98f8220534e7400662439ca06ed65",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/features.zh.md",
+        "source": "content/percona/features.md",
+        "source_sha256": "500143b1ef56e14d73c90fe97743f76d3ff24bbab056856c92ee193b5f7ff3d3",
+        "maintained_sha256": "1bc763432829d8edec92384ed58ad587fe6990f2589345d643d94be43732fd99",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/functions.zh.md",
+        "source": "content/percona/functions.md",
+        "source_sha256": "fb9bb2bbfc6c9c243e407de8cd63eaf0d0bd4e0b096997d9d1ae10d25ed67808",
+        "maintained_sha256": "5680a9e88e9db2889367d54cc1100a0124ff8e9afca81c05c40d2a22a52ad463",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/get-help.zh.md",
+        "source": "content/percona/get-help.md",
+        "source_sha256": "3c506a5091628fdf088356e82df761034a85bfdcf92b042173d034f564ff3bef",
+        "maintained_sha256": "65210ec922db854e06767529f2a157ee4a4f185f25286faed54e6c2c8460b57a",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/global-key-provider-configuration/_index.zh.md",
+        "source": "content/percona/global-key-provider-configuration/_index.md",
+        "source_sha256": "6965107a7905c9be02f80178f75fc4bd5c78daf81d04aeaa90a5c2e8151aaabd",
+        "maintained_sha256": "f7350eeed2c99b901c232cf5fd2b801c3cc96bf78340fb11029dc4447dc6f151",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/global-key-provider-configuration/keyring.zh.md",
+        "source": "content/percona/global-key-provider-configuration/keyring.md",
+        "source_sha256": "cc308a26723187dc6e747501b8a8950c8d43fac684a3f79ef9065267635ef309",
+        "maintained_sha256": "551b3c5eb4441546ca9b75bb47c4662f700c0bded390ad982727373149a7d6b5",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/global-key-provider-configuration/kmip-akeyless.zh.md",
+        "source": "content/percona/global-key-provider-configuration/kmip-akeyless.md",
+        "source_sha256": "96ee112c6c3b89de4de0b02e510dbd8b80e4c9884692d10aa30f56c8fd493983",
+        "maintained_sha256": "b5b5d10d5c862f0b5378295f2110d220e453626f4df14531cde9fd71a55f29c2",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/global-key-provider-configuration/kmip-fortanix.zh.md",
+        "source": "content/percona/global-key-provider-configuration/kmip-fortanix.md",
+        "source_sha256": "4250c7eea6ab12152ed48536cd94572b73bc81ec5a33ac32456b32bd76aa9070",
+        "maintained_sha256": "6db59bd7bf1568a28fb1ffd13aaa76267571e293428dc064ef4b45bd1cd717fa",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/global-key-provider-configuration/kmip-server.zh.md",
+        "source": "content/percona/global-key-provider-configuration/kmip-server.md",
+        "source_sha256": "7fc06ee96bea0cafe5cff495ecfd700417ced35554bfcc4e35cb5548721cf2a4",
+        "maintained_sha256": "a27509ccbe42abd662c18b50afc2b88362c1a63cfeeb9b46bedaf83060e1b260",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/global-key-provider-configuration/kmip-thales.zh.md",
+        "source": "content/percona/global-key-provider-configuration/kmip-thales.md",
+        "source_sha256": "37b40f74e151e8a945725a0db8e087020a6c258ad3d0552437814c7d8e6b823a",
+        "maintained_sha256": "9e694a7c7031c7fe5b064e93f827c5f52cf249c9f71fbf3ba2a714808596210b",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/global-key-provider-configuration/openbao.zh.md",
+        "source": "content/percona/global-key-provider-configuration/openbao.md",
+        "source_sha256": "56d2d40173177070bb2d253a8bade2c67b7bf73c02cf8f447a034f86e26c559f",
+        "maintained_sha256": "537a4484c834060e154afccce3a7ecc3a5b4cdedf1da1ad3903879cae21a59f8",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/global-key-provider-configuration/overview.zh.md",
+        "source": "content/percona/global-key-provider-configuration/overview.md",
+        "source_sha256": "4a917879130d1d4908851702ca9d9fec9db298561dc6f3c79db72d21f52e9b9a",
+        "maintained_sha256": "2ec4e469df80b884c7dc319491a3843a1c7f81e9c2383ea8b1e761a146c68008",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/global-key-provider-configuration/set-principal-key.zh.md",
+        "source": "content/percona/global-key-provider-configuration/set-principal-key.md",
+        "source_sha256": "5cd38d6f1d4c01b435d0595ae8377632d9fbe0f09bf2a2744e33f2a78208ef85",
+        "maintained_sha256": "90f4d2e3e32df69b7afd70df6f011b81cb668009e49cb32921fa6116ea9165bd",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/global-key-provider-configuration/vault.zh.md",
+        "source": "content/percona/global-key-provider-configuration/vault.md",
+        "source_sha256": "8047df45d77469ce421d737a2ac1632a26d0c5c4152449adbf88b29623ae7513",
+        "maintained_sha256": "24b472ebcbf138e9a3b5cd67a73ab507d6afb44808efcfcf6e398e8c21ba8abb",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/how-to/_index.zh.md",
+        "source": "content/percona/how-to/_index.md",
+        "source_sha256": "bea5ba2bace1c78ba0bbbcf34ce9a01bf56cb7831ee2d33a10c4eb4c6f547241",
+        "maintained_sha256": "2dfb32eb368e6a893000113495b15ca01e38b09233fdba042eb1027fa6631863",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/how-to/backup-wal-enabled.zh.md",
+        "source": "content/percona/how-to/backup-wal-enabled.md",
+        "source_sha256": "a45530ff8cc6828a3442a6e32c800136121162f2962fb31b03a9071f46012aba",
+        "maintained_sha256": "72d9eb6c8e936b4e9f14f3d963c98f6eedea164ca3054f096f7199713952597c",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/how-to/decrypt.zh.md",
+        "source": "content/percona/how-to/decrypt.md",
+        "source_sha256": "c82966887327419d068adb61cd3b63e33dba39d497f0c0e7c066077504aeae3e",
+        "maintained_sha256": "aee1b95741058496ec884aa70cdaaa79d0b4ffd8d8f48b8a93b8235c1359e1cc",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/how-to/enforcement.zh.md",
+        "source": "content/percona/how-to/enforcement.md",
+        "source_sha256": "6bd2bedb1e904242f9085ff624d907d24eafd44d9414688bfba7c5092085e5dc",
+        "maintained_sha256": "58886f503347b435c51813a1c07ce6a3541f360f8d38f3b9a56f1bcc586834a3",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/how-to/multi-tenant-setup.zh.md",
+        "source": "content/percona/how-to/multi-tenant-setup.md",
+        "source_sha256": "c70027d37b36825ed2fb5a37b168bfaea0833f99124a1acd4be2cc638ba3fed4",
+        "maintained_sha256": "2a2aafe95e6dc50baabb11ba0be4acb4ba312af784e8aa561d3b5979ad5ffdf6",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/how-to/restore-backups.zh.md",
+        "source": "content/percona/how-to/restore-backups.md",
+        "source_sha256": "40e5e386de533f03d4609548d6afc49849c85db38bcc86379254c0a0623f20ec",
+        "maintained_sha256": "46c0fa2ed2818c95f6407b7ea4d061143e29df198fccd66fad21a46b020d4a0f",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/how-to/uninstall.zh.md",
+        "source": "content/percona/how-to/uninstall.md",
+        "source_sha256": "07d5fa3cbff6ede70083232457f2959eabfdbfc0519cec9f7825e6e588b8728b",
+        "maintained_sha256": "a127f87363b38aab048d8aee58bcf4e1bcbed9de1188b0a58f378b1d6cba7de9",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/how-to/upgrade.zh.md",
+        "source": "content/percona/how-to/upgrade.md",
+        "source_sha256": "479080c68f704c253b08dcd0b745e351e2e5f976df074e8c6ec90259544939e7",
+        "maintained_sha256": "e0e9d59ea4908b132b701b2f4e612919ee8ac34b4160883bb2484319d7cc275b",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/index/_index.zh.md",
+        "source": "content/percona/index/_index.md",
+        "source_sha256": "9e6e6a516f6f4cbaa03b37c55b8dcfc9ec6992ab43451aca7911c380949e0158",
+        "maintained_sha256": "08bd3e168ab686b7858ba6c49998a74542e6e4eaa5907e547aef18158cb42bf3",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/index/about-tde.zh.md",
+        "source": "content/percona/index/about-tde.md",
+        "source_sha256": "08cb1e6facfab1d1b02df75d790f0fb0f12d60e75db33aba301e7599e11e7e8a",
+        "maintained_sha256": "665e259bbb3fe7c091e9d7d597c7a02e4441ac5f20a52740cff32fa5adee392a",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/index/how-does-tde-work.zh.md",
+        "source": "content/percona/index/how-does-tde-work.md",
+        "source_sha256": "e6106543f355f68c5fb6667d498a0884a9732d94f5b1da43da7035050eaf53d0",
+        "maintained_sha256": "ea67ed14f53286fe689355484a208402f3e8bb432dc01d545b8684fde94b92d6",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/index/how-tde-helps.zh.md",
+        "source": "content/percona/index/how-tde-helps.md",
+        "source_sha256": "70bb101631a5bd36f3586fb6cc97a9f45bb1e77f9ff10072030b284a81036e86",
+        "maintained_sha256": "62561fda2b66f81dde9bfad2e8dc31ae07c1c6c6dc7a1da2791da1ed3827aa8b",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/index/supported-versions.zh.md",
+        "source": "content/percona/index/supported-versions.md",
+        "source_sha256": "946d3cae94a9ee03e9dd93f01755805d7b82fc3a99538c3963de7ebcaf9e7b33",
+        "maintained_sha256": "d7d853b8079434ba0c30e963312f041160d1d73250776932de1684e9f96acb8f",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/index/table-access-method.zh.md",
+        "source": "content/percona/index/table-access-method.md",
+        "source_sha256": "9042ed67ca75d087e7867aed93e50ab49c277e367768bf68bbdbac10f05fec18",
+        "maintained_sha256": "e0f8d63b335bcb2bb3e234ce178ee003c417a399eb597e636520b404b7221019",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/index/tde-encrypts.zh.md",
+        "source": "content/percona/index/tde-encrypts.md",
+        "source_sha256": "61b3fdeb6851c0c9553b4b9fd3f7ec4ab52a362477236b5ea7999d84ff4e67b7",
+        "maintained_sha256": "561a3bf13eeb081ee293877740202b6d3da3a52c69e9af5bba8bdce1beb3a82e",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/index/what-tde-impacts.zh.md",
+        "source": "content/percona/index/what-tde-impacts.md",
+        "source_sha256": "550fedcd776ea8d9125ff37051f36e4c33cd8af4f9a48aa237f4e97ea79643ad",
+        "maintained_sha256": "0ef2559656f46fb68418c64b6fb392b6b3f93a0727ac2a935d6602a48d6fc7c3",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/install.zh.md",
+        "source": "content/percona/install.md",
+        "source_sha256": "252a3bb18c93acb49c2aa6f0829442e91b84b4bf8a049101cfde842b20d94a81",
+        "maintained_sha256": "47cf33d4fbcf146fb384b51160c4e3938345e0866c6511a53b67ae4a4fad82d7",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/legal-notice.zh.md",
+        "source": "content/percona/legal-notice.md",
+        "source_sha256": "858c7b79c25c6bf8a1f01f0c727be852bf026bcfcf9f49150c21c539159ece3a",
+        "maintained_sha256": "d099d4bbf3cdea2128c6762925ae478436505c12291be2b872cab0b089c7624b",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/alpha1.zh.md",
+        "source": "content/percona/release-notes/alpha1.md",
+        "source_sha256": "309c90f926f926c500e81341e1a3149ec29a8ea634de01201526a85ee458a2ec",
+        "maintained_sha256": "31f268aab57eedee5ed02f2a1e2a8d218466d8cb2a9ece7de573f61b19052319",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/beta.zh.md",
+        "source": "content/percona/release-notes/beta.md",
+        "source_sha256": "f32a9845f6c371fd87ea1cd06ef242385a20d88decc05bd4178f756db1b39d0d",
+        "maintained_sha256": "0856573154511eb4a81490ed147d505656736c1cd7e48513641a173413fa9e32",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/beta2.zh.md",
+        "source": "content/percona/release-notes/beta2.md",
+        "source_sha256": "f04d65ff48c748b03d12d49d386a9f542670929d24e15924d9857425e669b8ce",
+        "maintained_sha256": "69d6989973d6f4b0c4f9263b3f8bb3cda25bfc8fae0dd9299d28388ada8d92b5",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/mvp.zh.md",
+        "source": "content/percona/release-notes/mvp.md",
+        "source_sha256": "c7ef6e2331f93087d32eea3f210acdd9ef129cd3bbe772aec0a2bcced2daca45",
+        "maintained_sha256": "32f7a4de9541b831404e05896ecb96c0d9016a148cf068ed1216b4a178c4e5a3",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/rc.zh.md",
+        "source": "content/percona/release-notes/rc.md",
+        "source_sha256": "70dfe45f302c2f2b0b3e26cf6c2611ab594369ddd6e42f0910a44f80f61a2e7e",
+        "maintained_sha256": "68122e9fb4ebd7776091841caa72589bd93538be21d70f90eda6ecd703e5664f",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/rc2.zh.md",
+        "source": "content/percona/release-notes/rc2.md",
+        "source_sha256": "cd9390a6c724399e08477e158425468a71ac5040afb2e2ab7633a39c25739808",
+        "maintained_sha256": "a44452e8bf782b1a305acc783874c2820517ca97312c1de26fd45e92fafcc73e",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/release-notes-v1.0.zh.md",
+        "source": "content/percona/release-notes/release-notes-v1.0.md",
+        "source_sha256": "276796087716654165179997f147410c4d3a038639d9cbd17c685f827b4faef1",
+        "maintained_sha256": "0eba92d2b9e0571d9d659eca01baa1cb361b1648620bd5f134b8d704c8bfa50e",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/release-notes-v2.0.zh.md",
+        "source": "content/percona/release-notes/release-notes-v2.0.md",
+        "source_sha256": "515f3f98542b42e5f14ae78194a7392bd4e80cf39b4d358f9684c5ace58207a4",
+        "maintained_sha256": "2ad9c4f5458519bfcef39b85d3ccf66753196772e34810a1baf51bb89ef53380",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/release-notes-v2.1.1.zh.md",
+        "source": "content/percona/release-notes/release-notes-v2.1.1.md",
+        "source_sha256": "6531384c655adae88f20657bc75b072427cd60000d5b2faf85f3f379a5fb79dc",
+        "maintained_sha256": "4a545ae1745ed1e7ccd1658a4262c38b41b99756752b3e4bbc888d10d36d5137",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/release-notes-v2.1.2.zh.md",
+        "source": "content/percona/release-notes/release-notes-v2.1.2.md",
+        "source_sha256": "dc5920e1171dfba27948d42b49f59fd1105f6b5eb36736d21adf1d7c76c4a47d",
+        "maintained_sha256": "6a0fddc55a1acc061226428cc45ade6c7fb4375394b5a68fb0f2dbedad46be1e",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/release-notes-v2.1.zh.md",
+        "source": "content/percona/release-notes/release-notes-v2.1.md",
+        "source_sha256": "6108fa83890f8e64b5e915471f155f3584bf226686559682babe29ff07945dc7",
+        "maintained_sha256": "3d13edbbe52145309dee3f6988cddb6d1bcc255153db7db2094625be48d9bccb",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/release-notes-v2.2.0.zh.md",
+        "source": "content/percona/release-notes/release-notes-v2.2.0.md",
+        "source_sha256": "7c1d5c6001a25a5b27cfa7c2160f50b6f8ffe19143ea07b683e94999aa66f9cb",
+        "maintained_sha256": "fd2dbf659dc2d2d2b0c728fa77d5c67f74d377cb9bd64e2dfe5fab31191a43ca",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/release-notes-v2.2.1.zh.md",
+        "source": "content/percona/release-notes/release-notes-v2.2.1.md",
+        "source_sha256": "a00daecf5ab83a3b8f55edb18479fe505d73bf1f3393c4b24cfe9b413426d10d",
+        "maintained_sha256": "d5f19664309d0e13031da737add73688f82b440e1b402cf145bfe029c2000b48",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/release-notes/release-notes-v2.2.2.zh.md",
+        "source": "content/percona/release-notes/release-notes-v2.2.2.md",
+        "source_sha256": "3b4c6e9ac4acf1aa08d3db442033798ba65d452b1e3052410112b65508503c20",
+        "maintained_sha256": "0ec4d72fa025a5788d4c4b0061bec493736d211f09eecb71cd4f77b23e86e6ae",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/replication.zh.md",
+        "source": "content/percona/replication.md",
+        "source_sha256": "a09a7a9e6824c7de33677efded074807e87687b1e935aebb78b8cde99f103d43",
+        "maintained_sha256": "e83686f50dac6a499f3b54e06f94483cb26fd8f143cba9b2161a06bb3f53756b",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/setup.zh.md",
+        "source": "content/percona/setup.md",
+        "source_sha256": "723e4ccd1793891decc27686254ae509ce014561a256d4743067982d315bf305",
+        "maintained_sha256": "b1b11b6044178675f435a1e949ca0ff9f872714751366ddbd18da5def31c015c",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/site/_index.zh.md",
+        "source": "content/percona/site/_index.md",
+        "source_sha256": "dac40d43fa60e5abdc0eaea5301810d62477565dce51100a0198741d6a03de14",
+        "maintained_sha256": "82c1f8fc07a4891fe8fed5944401b5861ea12011851f461f506daf6a65d76d33",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/site/errata.zh.md",
+        "source": "content/percona/site/errata.md",
+        "source_sha256": "02bfcd30e3854d96e4b8fe68815ecdf1014052477f7f250e61c08bc5cc7776b3",
+        "maintained_sha256": "5c601d500de2741bc656e7cc7418af70ece54c1f426f9ae2641d4f3c28a79c0d",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/test.zh.md",
+        "source": "content/percona/test.md",
+        "source_sha256": "c2cdd4d3fd754a05fb137722a939594f1a67cb8d7fee95575b9179c0f90463cf",
+        "maintained_sha256": "8f740795b7a5f705163b175b9d9b1ac4b792b4bedb6d86123ed6b8e7f410bd03",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/variables.zh.md",
+        "source": "content/percona/variables.md",
+        "source_sha256": "186d14154988f87894c699c32d8d75cc7a6bd2952ecbf8a2737e1391a51e496a",
+        "maintained_sha256": "d37d60eb7e1be6b422adcdd3c95120d4aac6806c3813c4462341eef4dbf30681",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/wal-encryption.zh.md",
+        "source": "content/percona/wal-encryption.md",
+        "source_sha256": "bccdd28e0368503e860da1da014083ff9265b8dc07b6acb2c81bec187d095d76",
+        "maintained_sha256": "edcce60d33be5e16bedff60ced1558255852bf198ea1c6d2ac003bc67e597ceb",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      },
+      {
+        "target": "content/percona/yum.zh.md",
+        "source": "content/percona/yum.md",
+        "source_sha256": "2e6268ab9f239f0a9522284abfdc74b1589137f7111963bda6e1b4ee591e257e",
+        "maintained_sha256": "70d81661ac3fef9514836d5d2ed1112cb29b737ad79f62c80fb29a4ace15152e",
+        "review_scope": "source provenance only; existing translation status retained",
+        "review_mode": "unchanged-prose-verification",
+        "date": "2026-11-22"
+      }
+    ]
   }
 }

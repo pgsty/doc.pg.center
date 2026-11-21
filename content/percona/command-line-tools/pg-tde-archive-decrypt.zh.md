@@ -4,15 +4,15 @@ linkTitle: 归档 WAL
 description: 在 WAL 归档前解密日志，并通过包装归档命令交给 cp 或 pgBackRest。
 type: docs
 translation_notice: en
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/command-line-tools/pg-tde-archive-decrypt.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/command-line-tools/pg-tde-archive-decrypt.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: 版权所有 © 2024–2025 Percona LLC 及其关联方
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 720
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 `pg_tde_archive_decrypt` 包装归档命令，在归档之前解密 WAL 文件，使外部工具能够访问未加密的 WAL。之所以需要这样做，是因为双层密钥结构中的 WAL 加密密钥与主机相关，在重放主机上可能不可用。

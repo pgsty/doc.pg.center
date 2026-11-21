@@ -3,8 +3,8 @@ title: 署名与版权
 description: 本站的来源、版权主体、许可全文及独立译站说明。
 type: docs
 translation_notice: false
-upstream_source: percona
-upstream_link: https://github.com/percona/pg_tde/tree/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_source: percona-20261121
+upstream_link: https://github.com/percona/pg_tde/tree/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 ---
 
 
@@ -12,13 +12,13 @@ upstream_link: https://github.com/percona/pg_tde/tree/1660e66a6a30d3b8a9020eef7d
 
 ## 文档来源 {#documentation-source}
 
-本站收录 66 篇英文文档及其完整中文译文，来源是 `documentation/docs` 目录的固定提交 [`1660e66a6a30`](https://github.com/percona/pg_tde/commit/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39)，对应文档版本 **2.2.2**，于 2026-11-06 提取。原作者为 Percona 与 pg_tde 贡献者；中文翻译和本站整理由 PGSTY 维护。
+英文版于 2026 年 11 月 21 日更新至 pg_tde **2.3.0**，对应 `percona/pg_tde@5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a`。本次在此前导入的 66 篇文章基础上加入 2.3.0 发布说明，另有章节索引和 PGSTY 编辑导读。中文版已根据英文增量同步。原作者为 Percona 与 pg_tde 贡献者。
 
 [来源清单](/percona/assets/source-manifest.json)记录文件路径、哈希、辅助素材及固定版本的原文链接。每个改编页面均链接到原文；依据源码核实的更正记录在[文档勘误](/zh/percona/site/errata/)中。
 
 ## 上游版权与许可 {#upstream-licence}
 
-上游仓库的 [COPYRIGHT](https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/COPYRIGHT) 包含 pg_tde 许可，其授权与免责声明采用 PostgreSQL 风格。本站原样保留[完整许可文本](/percona/assets/legal/pg_tde-COPYRIGHT.txt)，其中列明：
+上游仓库的 [COPYRIGHT](https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/COPYRIGHT) 包含 pg_tde 许可，其授权与免责声明采用 PostgreSQL 风格。本站原样保留[完整许可文本](/percona/assets/legal/pg_tde-COPYRIGHT.txt)，其中列明：
 
 - PostgreSQL Global Development Group：部分内容 © 1996–2024。
 - 加利福尼亚大学董事会（The Regents of the University of California）：部分内容 © 1994。

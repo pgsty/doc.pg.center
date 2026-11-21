@@ -4,15 +4,15 @@ linkTitle: 获取帮助
 description: 通过 Percona 社区论坛、专家支持、托管、咨询和培训获取帮助。
 type: docs
 translation_notice: en
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/get-help.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/get-help.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: 版权所有 © 2024–2025 Percona LLC 及其关联方
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 1010
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 文档包含丰富信息，但无法覆盖你需要了解的所有 `pg_tde` 知识，也无法涵盖每一种使用场景。遇到问题时，可以尝试探索并向社区提问。

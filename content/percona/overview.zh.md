@@ -4,15 +4,15 @@ linkTitle: 项目介绍
 description: Percona PostgreSQL 透明数据加密：安装、功能、架构与最新发布说明。
 type: docs
 translation_notice: en
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/index.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/index.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: 版权所有 © 2024–2025 Percona LLC 及其关联方
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 110
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 Percona Transparent Data Encryption for PostgreSQL（`pg_tde`）是一个开源、由社区驱动且面向长期发展的 PostgreSQL 扩展，通过透明数据加密（TDE）保护静态数据。`pg_tde` 确保磁盘上的数据以加密形式存储；即使有人取得物理存储介质，没有相应的加密密钥也无法读取数据。
@@ -41,4 +41,4 @@ Percona Transparent Data Encryption for PostgreSQL（`pg_tde`）是一个开源�
 
 了解 `pg_tde` 的版本发布和变更。
 
-[查看最新版本的变更](/zh/percona/release-notes/release-notes-v2.2.2/)
+[查看最新版本的变更](/zh/percona/release-notes/release-notes-v2.3.0/)

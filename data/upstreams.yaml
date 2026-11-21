@@ -433,7 +433,7 @@ percona-20261121:
   modified: true
   source_ref: 2.3.0
   snapshot_date: '2026-11-21'
-  language: en
+  languages: [en, zh]
   translation_baseline: percona
   source_sha256:
     documentation/variables.yml: ef7942387d23cea4a685ed2897aae7ea1a71117b038bd3e60aa0bb70886f81e1

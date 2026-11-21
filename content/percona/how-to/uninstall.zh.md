@@ -4,15 +4,15 @@ linkTitle: 卸载 pg_tde
 description: 先解密表并关闭 WAL 加密，再分两次重启移除 pg_tde 共享库和配置。
 type: docs
 translation_notice: en
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/how-to/uninstall.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/how-to/uninstall.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: 版权所有 © 2024–2025 Percona LLC 及其关联方
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 590
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 如果部署中不再需要透明数据加密（TDE），可以移除 `pg_tde` 扩展。

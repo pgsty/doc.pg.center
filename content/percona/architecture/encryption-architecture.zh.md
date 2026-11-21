@@ -4,15 +4,15 @@ linkTitle: 加密架构
 description: pg_tde 的双层密钥结构、AES 算法、SMGR 加密流程与 WAL 加密机制。
 type: docs
 translation_notice: en
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/architecture/encryption-architecture.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/architecture/encryption-architecture.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: 版权所有 © 2024–2025 Percona LLC 及其关联方
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 420
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 本节介绍 `pg_tde` 如何在 PostgreSQL 内部实现加密，涵盖密钥层次、支持的加密算法、加密流程，以及支持表、WAL 和其他数据库文件加密的内核改动。

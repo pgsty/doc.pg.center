@@ -4,15 +4,15 @@ linkTitle: 恢复加密备份
 description: 恢复旧密钥加密的备份时，确保 KMS 中的主密钥仍然可访问。
 type: docs
 translation_notice: en
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/how-to/restore-backups.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/how-to/restore-backups.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: 版权所有 © 2024–2025 Percona LLC 及其关联方
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 560
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 要恢复使用旧密钥创建的加密备份，必须确保该密钥仍保存在密钥管理系统（KMS）中。备份在磁盘上仍为**加密状态**，`pg_tde` 使用正确密钥透明地访问数据。
