@@ -3,7 +3,7 @@ title: "GPORCA 概述"
 linkTitle: "GPORCA 概述"
 description: "GPORCA 是在 PostgreSQL 规划器基础上构建的增强查询优化器，旨在改进查询规划和优化。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/use-orca/use-orca-overview.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/use-orca/use-orca-overview.md"
 ---
 
 它具有较高的可扩展性，尤其在多核架构上能提供更高效的优化。对于支持的查询，Apache Cloudberry 默认使用 GPORCA 生成执行计划。

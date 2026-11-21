@@ -2,7 +2,7 @@
 title: "读写定宽文本数据"
 description: "通过 PXF 读取 HDFS 中的定宽文本数据。"
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-hadoop/hdfs_fixedwidth.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-hadoop/hdfs_fixedwidth.md"
 ---
 
 PXF HDFS Connector 支持使用 Apache Cloudberry 定宽自定义格式化器（fixed width custom formatter）读写定宽文本。本节介绍如何使用 PXF 访问定宽文本，包括如何创建引用 HDFS 数据存储中文件的外部表、对其进行查询以及向其中插入数据。

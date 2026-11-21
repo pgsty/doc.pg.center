@@ -2,7 +2,7 @@
 title: "创建数据存储区域"
 description: "为 Coordinator、Standby Coordinator、主 Segment 和镜像 Segment 创建数据存储目录。"
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/deployment/create_data_dirs.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/deployment/create_data_dirs.md"
 ---
 
 ## 在 Coordinator 和 Standby Coordinator 主机上创建数据存储区域 {#creating-data-storage-areas-on-the-coordinator-and-standby-coordinator-hosts}

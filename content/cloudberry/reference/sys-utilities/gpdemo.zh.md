@@ -2,7 +2,7 @@
 title: "gpdemo"
 description: "使用内置的 `gpdemo` 脚本，只需一条命令即可快速部署具有指定数量 Segment 的集群。"
 weight: 110
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-utilities/gpdemo.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-utilities/gpdemo.md"
 ---
 
 `gpdemo` 与其他系统工具（如 `gpinitsystem`、`gpstart` 和 `gpstop`）一起安装在 `GPHOME/bin` 目录中。

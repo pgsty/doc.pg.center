@@ -2,7 +2,7 @@
 title: "COMMENT"
 description: "定义或更改对象的注释。"
 weight: 490
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sql-stmts/comment.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sql-stmts/comment.md"
 ---
 
 ## 概要 {#synopsis}

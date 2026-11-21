@@ -2,7 +2,7 @@
 title: "Coordinator 镜像概述"
 description: "可以在独立主机上部署 Coordinator 实例的备份或镜像。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/high-availability/coordinator-mirroring-overview.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/high-availability/coordinator-mirroring-overview.md"
 ---
 
 作为备份的 Coordinator 实例称为 *Standby Coordinator*，在主 Coordinator 无法运行时充当温备。可以在主 Coordinator 在线期间，从主 Coordinator 创建 Standby Coordinator。

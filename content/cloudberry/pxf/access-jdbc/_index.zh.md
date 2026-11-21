@@ -3,7 +3,7 @@ title: "访问 SQL 数据库（JDBC）"
 linkTitle: "使用 PXF 访问 SQL 数据库（JDBC）"
 description: "使用 PXF JDBC 连接器访问 SQL 数据库。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-jdbc/jdbc_pxf.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-jdbc/jdbc_pxf.md"
 ---
 
 <!--
@@ -61,15 +61,16 @@ PXF JDBC 连接器不支持上面未列出的任何数据类型。
 
 ### 关于通过 JDBC 访问 Hive {#about-accessing-hive-via-jdbc}
 
-PXF 内置 1.1.0 版本的 Hive JDBC 驱动程序。使用 PXF JDBC 连接器操作 Hive 表时，该版本**不**支持以下数据类型：
+PXF 内置 2.3.10 版本的 Hive JDBC 驱动程序。
 
-| 数据类型 | 修复该问题的 Hive JDBC 驱动程序版本 | 上游问题 | 不支持的操作 |
-|-----------|---------------------------|----------------| ---------- |
-| NUMERIC   | 2.3.0                     | [HIVE-13614](https://issues.apache.org/jira/browse/HIVE-13614) | 写 |
-| TIMESTAMP | 2.0.0                     | [HIVE-11748](https://issues.apache.org/jira/browse/HIVE-11748) | 写 |
-| DATE      | 1.3.0, 2.0.0              | [HIVE-11024](https://issues.apache.org/jira/browse/HIVE-11024) | 写 |
-| TIMESTAMPTZ | N/A              | [HIVE-576](https://issues.apache.org/jira/browse/HIVE-576) | 读、写 |
-| BYTEA     | N/A                       | N/A | 读、写 |
+该版本**不**支持以下数据类型：
+
+| 数据类型 | 不支持的操作 |
+|-----------|--------------------------|
+| DATE | 写 |
+| TIMESTAMP | 写 |
+| TIMESTAMPTZ | 读、写 |
+| BYTEA | 读、写 |
 
 ## 访问外部 SQL 数据库 {#accessing-an-external-sql-database}
 PXF JDBC 连接器对外部表支持名为 `jdbc` 的单一 Profile，对 FDW 支持 `jdbc_pxf_fdw` 外部数据包装器。您可以使用该 Profile 读取外部 SQL 数据库表中的数据，也可以向其写入数据。您还可以使用该连接器在外部 SQL 数据库中运行静态的具名查询并读取其结果。

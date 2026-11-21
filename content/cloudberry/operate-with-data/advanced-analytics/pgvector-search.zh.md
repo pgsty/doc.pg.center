@@ -2,7 +2,7 @@
 title: "使用 pgvector 进行向量相似性检索"
 description: "pgvector 是一个用于向量相似性检索的开源插件。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/advanced-analytics/pgvector-search.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/advanced-analytics/pgvector-search.md"
 ---
 
 它支持精确和近似最近邻检索，以及 L2 距离、内积和余弦距离。更多详情请参见 [pgvector/pgvector：Postgres 的开源向量相似性检索](https://github.com/pgvector/pgvector)。

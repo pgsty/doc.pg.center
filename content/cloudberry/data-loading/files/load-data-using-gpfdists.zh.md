@@ -3,7 +3,7 @@ title: "使用 gpfdists 安全加载数据"
 linkTitle: "使用 gpfdists 加载数据（安全）"
 description: "`gpfdists` 协议是 `gpfdist` 协议的安全版本，可在 Apache Cloudberry 与 gpfdist 文件服务器之间实现加密通信。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/load-data-using-gpfdists.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/load-data-using-gpfdists.md"
 ---
 
 使用 `gpfdists` 时，所有数据传输都通过 SSL 加密，以防止窃听和中间人攻击。

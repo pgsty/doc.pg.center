@@ -3,7 +3,7 @@ title: "访问 Azure、Google Cloud Storage 和兼容 S3 的对象存储"
 linkTitle: "使用 PXF 访问对象存储"
 description: "使用 PXF 访问 Azure、Google Cloud Storage、MinIO 和 S3 对象存储。"
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-objectstores/access_objstore.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-objectstores/access_objstore.md"
 ---
 
 <!--

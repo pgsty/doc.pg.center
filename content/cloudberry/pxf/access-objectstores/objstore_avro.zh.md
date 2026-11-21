@@ -2,7 +2,7 @@
 title: "读写对象存储中的 Avro 数据"
 description: "通过 PXF 读写对象存储中的 Avro 数据。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-objectstores/objstore_avro.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-objectstores/objstore_avro.md"
 ---
 
 <!--
@@ -44,6 +44,7 @@ PXF 对象存储连接器支持读取 Avro 格式的数据。本节介绍如何�
     - 必须在模式文件路径中包含存储桶（bucket）。该存储桶不必与 Avro 数据文件所在的存储桶相同。
     - 在 `SERVER` 配置中指定的密钥必须能够同时访问数据文件和模式文件所在的存储桶。
 - 模式文件路径中不得包含空格。
+- 绝对 `SCHEMA` 路径在配置的对象存储中解析，相对于 `pxf.fs.basePath`（或文件系统根目录）。PXF 不会直接在 PXF 主机的本地文件系统上打开该路径。相对模式路径会先在 PXF 类路径中查找。
 
 ## 创建外部表 {#creating-the-external-table}
 

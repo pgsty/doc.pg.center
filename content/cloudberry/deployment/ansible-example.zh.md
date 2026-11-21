@@ -2,7 +2,7 @@
 title: "Ansible Playbook 示例"
 description: "本示例 Ansible Playbook 将 Apache Cloudberry 软件发行版安装到组成 Apache Cloudberry 系统的各台主机上。"
 weight: 110
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/deployment/ansible-example.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/deployment/ansible-example.md"
 ---
 
 本 Ansible Playbook 展示了如何将[使用 RPM/DEB 软件包安装](/cloudberry/deployment/install_cloudberry/)中描述的任务通过 [Ansible](https://docs.ansible.com) 自动执行。

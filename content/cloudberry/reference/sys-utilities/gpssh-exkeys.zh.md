@@ -2,7 +2,7 @@
 title: "gpssh-exkeys"
 description: "在主机之间交换 SSH 公钥。"
 weight: 260
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-utilities/gpssh-exkeys.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-utilities/gpssh-exkeys.md"
 ---
 
 ## 概要 {#synopsis}

@@ -2,7 +2,7 @@
 title: "定义表的基础知识"
 description: "关系数据库中的表与纸面上的表格非常相似：由行和列组成。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/table-definition-basics.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/table-definition-basics.md"
 ---
 
 列的数量和顺序是固定的，每一列都有名称。行数是可变的——它反映某个时刻存储的数据量。SQL 不保证表中行的顺序。读取表时，除非明确请求排序，否则行将以未指定的顺序出现。此外，SQL 不会为行分配唯一标识符，因此表中可能有多行完全相同的记录。

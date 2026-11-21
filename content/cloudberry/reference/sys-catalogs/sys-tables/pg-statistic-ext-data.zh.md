@@ -2,7 +2,7 @@
 title: "pg_statistic_ext_data"
 description: "查看 pg_statistic_ext_data 中存储规划器扩展统计信息对象数据的目录字段。"
 weight: 400
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-statistic-ext-data.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-statistic-ext-data.md"
 ---
 
 `pg_statistic_ext_data` 系统目录表存储在 [pg_statistic_ext](/cloudberry/reference/sys-catalogs/sys-tables/pg-statistic-ext/) 中定义的规划器扩展统计信息的数据。此目录中的每一行都对应一个使用 [`CREATE STATISTICS`](/cloudberry/reference/sql-stmts/create-statistics/) 创建的*统计信息对象*。

@@ -2,7 +2,7 @@
 title: "BladePipe"
 description: "使用 BladePipe 的数据源和数据任务将 PostgreSQL 数据同步到 Apache Cloudberry。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/ecosystem/data-integration/bladepipe.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/ecosystem/data-integration/bladepipe.md"
 ---
 
 [BladePipe](https://www.bladepipe.com/) 是一款实时数据集成与变更数据捕获（CDC）平台。它可以帮助你在不同的数据库、数据仓库和数据湖之间构建数据流水线，无需编写代码；支持的数据库包括 Apache Cloudberry。

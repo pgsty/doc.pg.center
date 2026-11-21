@@ -2,7 +2,7 @@
 title: "创建和管理序列"
 description: "Apache Cloudberry 序列对象是一种特殊的单行表，充当数字生成器。"
 weight: 130
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-sequences.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-sequences.md"
 ---
 
 可以使用序列为添加到表中的行生成唯一的整数标识符。声明列的类型为 `SERIAL` 会隐式创建一个序列计数器，供该表列使用。

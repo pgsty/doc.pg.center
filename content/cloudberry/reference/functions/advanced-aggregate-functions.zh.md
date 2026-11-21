@@ -3,7 +3,7 @@ title: "Apache Cloudberry 高级聚合函数"
 linkTitle: "高级聚合函数"
 description: "以下内置高级分析函数是 Cloudberry 对 PostgreSQL 数据库的扩展。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/functions/advanced-aggregate-functions.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/functions/advanced-aggregate-functions.md"
 ---
 
 分析函数均为*不可变*函数。

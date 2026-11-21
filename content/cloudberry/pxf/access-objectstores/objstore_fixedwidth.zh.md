@@ -2,7 +2,7 @@
 title: "读写对象存储中的定宽文本数据"
 description: "通过 PXF 读取对象存储中的定宽文本数据。"
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-objectstores/objstore_fixedwidth.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-objectstores/objstore_fixedwidth.md"
 ---
 
 PXF 对象存储连接器通过 Apache Cloudberry 定宽自定义格式化器（fixed width custom formatter）支持读写定宽文本。本节介绍如何使用 PXF 访问定宽文本，包括如何创建、查询引用对象存储中文件的外部表，以及如何向其中插入数据。

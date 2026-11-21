@@ -2,7 +2,7 @@
 title: "如何检测故障 Segment"
 description: "启用 Segment 镜像后，当主 Segment 实例停止运行时，Apache Cloudberry 会自动进行故障切换，转到镜像 Segment 实例。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/high-availability/detect-a-failed-segment.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/high-availability/detect-a-failed-segment.md"
 ---
 
 只要每份数据都有一个在线的 Segment 实例，用户就可能察觉不到某个 Segment 已停止运行。如果故障发生时有事务正在执行，该事务会回滚，并在重新配置后的 Segment 集合上自动重新执行。可以使用 [`gpstate`](/cloudberry/reference/sys-utilities/gpstate/) 工具识别故障 Segment。该工具显示来自目录表的信息，包括 [`gp_segment_configuration`](/cloudberry/reference/sys-catalogs/sys-tables/gp-segment-configuration/)。

@@ -2,7 +2,7 @@
 title: "存储过程和用户定义函数"
 description: "Apache Cloudberry 提供了强大的扩展数据库功能的能力，支持使用存储过程（SP）和用户定义函数（UDF）。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/developer/functions-and-procedures/overview.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/developer/functions-and-procedures/overview.md"
 ---
 
 ## 用户定义函数（UDF） {#user-defined-functions-udfs}

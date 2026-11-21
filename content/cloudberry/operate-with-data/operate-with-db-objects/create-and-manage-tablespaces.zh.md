@@ -2,7 +2,7 @@
 title: "创建和管理表空间"
 description: "表空间允许数据库管理员在每台机器上使用多个文件系统，并决定如何最佳地利用物理存储来保存数据库对象。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-tablespaces.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-tablespaces.md"
 ---
 
 表空间允许为使用频繁和不频繁的数据库对象分配不同的存储，也可以控制某些数据库对象的 I/O 性能。例如，将频繁使用的表放在使用高性能固态硬盘（SSD）的文件系统上，将其他表放在标准硬盘上。

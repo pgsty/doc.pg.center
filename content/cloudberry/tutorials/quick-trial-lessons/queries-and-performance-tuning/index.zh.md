@@ -2,7 +2,7 @@
 title: "第 5 课：查询与性能调优"
 description: "了解 Apache Cloudberry 中的查询。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/quick-trial-lessons/queries-and-performance-tuning.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/quick-trial-lessons/queries-and-performance-tuning.md"
 ---
 
 本课概述 Apache Cloudberry 处理查询的过程。理解这一过程，有助于编写查询并进行调优。

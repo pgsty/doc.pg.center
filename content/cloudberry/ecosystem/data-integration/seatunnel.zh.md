@@ -2,7 +2,7 @@
 title: "Apache SeaTunnel"
 description: "Apache SeaTunnel 是一款易用、性能极高的分布式数据集成平台，支持海量数据实时同步。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/ecosystem/data-integration/seatunnel.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/ecosystem/data-integration/seatunnel.md"
 ---
 
 它每天能够稳定、高效地同步数百亿条数据，已有 3000 多家企业在生产环境中使用。

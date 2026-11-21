@@ -2,7 +2,7 @@
 title: "配置客户端认证"
 description: "本节介绍如何配置 Apache Cloudberry 的客户端连接和认证。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/security/client-auth.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/security/client-auth.md"
 ---
 
 Apache Cloudberry 系统首次初始化时，会包含一个预定义的*超级用户*角色。该角色与初始化 Apache Cloudberry 系统的操作系统用户同名，称为 `gpadmin`。默认情况下，系统配置为只允许 `gpadmin` 角色从本地连接数据库。如果希望允许其他角色连接，或允许来自远程主机的连接，就必须配置 Apache Cloudberry 以允许这些连接。本节介绍如何配置 Apache Cloudberry 的客户端连接和认证。

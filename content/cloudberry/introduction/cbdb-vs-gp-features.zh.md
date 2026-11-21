@@ -2,7 +2,7 @@
 title: "Apache Cloudberry 新特性"
 description: "Apache Cloudberry 以 Greenplum Database 的开源版本为基础，并与 Greenplum **高度向后兼容**。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/introduction/cbdb-vs-gp-features.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/introduction/cbdb-vs-gp-features.md"
 ---
 
 如果你用过 Greenplum，就会对 Apache Cloudberry 感到熟悉：大多数 SQL 语法、工具和运维流程的使用方式都相同。

@@ -3,7 +3,7 @@ title: "使用动态表加速查询并自动刷新数据"
 linkTitle: "使用动态表"
 description: "动态表是类似物化视图的数据库对象，可以自动刷新数据并加速查询。"
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/use-dynamic-tables.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/use-dynamic-tables.md"
 ---
 
 Apache Cloudberry 引入动态表，以加快查询处理并自动更新数据。

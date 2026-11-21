@@ -2,7 +2,7 @@
 title: "使用 PL/R"
 description: "PL/R 是一种过程语言，允许使用 R 编程语言编写 Apache Cloudberry 函数。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/developer/functions-and-procedures/use-pl-r.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/developer/functions-and-procedures/use-pl-r.md"
 ---
 
 使用 PL/R 扩展，可以直接在数据库中执行 R 命令、使用 R 模块和函数并执行分析。

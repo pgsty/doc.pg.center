@@ -3,7 +3,7 @@ title: "使用 gpload 向 Apache Cloudberry 加载数据"
 linkTitle: "使用 gpload 加载数据"
 description: "Apache Cloudberry 的 `gpload` 工具使用可读外部表和 Apache Cloudberry 并行文件服务器（gpfdist）加载数据。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/load-data-using-gpload.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/load-data-using-gpload.md"
 ---
 
 gpload 负责设置基于文件的并行外部表，并允许用户在单个配置文件中配置数据格式、外部表定义和 gpfdist 设置。

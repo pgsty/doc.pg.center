@@ -3,7 +3,7 @@ title: "使用自动物化视图优化查询"
 linkTitle: "使用自动物化视图优化查询"
 description: "Apache Cloudberry 支持在查询规划阶段自动使用物化视图处理部分或全部查询，此功能称为 AQUMV。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/use-auto-materialized-view-to-answer-queries.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/use-auto-materialized-view-to-answer-queries.md"
 ---
 
 此功能适用于大型表查询，可以大幅缩短查询处理时间。AQUMV 使用增量物化视图（IMV），因为相关表发生写操作时，IMV 通常能够保持数据最新。

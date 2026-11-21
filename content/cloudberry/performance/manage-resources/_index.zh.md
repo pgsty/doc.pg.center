@@ -2,7 +2,7 @@
 title: "资源管理"
 description: "Apache Cloudberry 提供多种功能，帮助你根据业务要求确定查询优先级并分配资源，同时在资源不足时阻止查询启动。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/manage-resources.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/manage-resources.md"
 ---
 
 可以通过资源管理功能限制并发查询数量、执行查询使用的内存量，以及用于处理查询的相对 CPU 份额。Apache Cloudberry 提供两种资源管理方案：[资源队列](/cloudberry/performance/manage-resources/manage-resources-using-resource-queues/)和[资源组](/cloudberry/performance/manage-resources/manage-resources-using-resource-groups/)。

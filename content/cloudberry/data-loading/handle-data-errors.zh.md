@@ -2,7 +2,7 @@
 title: "处理数据加载错误"
 description: "实际数据往往并不完美，可能存在格式错误、值缺失或数据类型不一致等问题。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/handle-data-errors.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/handle-data-errors.md"
 ---
 
 Apache Cloudberry 提供完善的错误处理机制，允许在加载格式正确的数据的同时隔离和管理有问题的行，确保提取、转换、加载（ETL）流程具备容错能力和可靠性。

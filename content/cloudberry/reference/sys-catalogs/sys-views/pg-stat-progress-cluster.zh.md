@@ -2,7 +2,7 @@
 title: "pg_stat_progress_cluster"
 description: "`pg_stat_progress_cluster` 视图显示 `CLUSTER` 和 `VACUUM FULL` 操作的进度。"
 weight: 280
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-progress-cluster.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-progress-cluster.md"
 ---
 
 每一行表示一个当前正在执行其中某个命令的后端进程，提供当前阶段、已扫描和写入的堆块数量、已重建的索引等详情。此视图有助于监控和管理长时间运行的表重组任务。

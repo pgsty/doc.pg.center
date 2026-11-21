@@ -2,7 +2,7 @@
 title: "使用 GPORCA 的注意事项"
 description: "为确保 GPORCA 获得最佳查询性能，应仔细检查查询条件。"
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/use-orca/gporca-usage-considerations.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/use-orca/gporca-usage-considerations.md"
 ---
 
 请确保满足以下条件：

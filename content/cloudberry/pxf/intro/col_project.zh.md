@@ -2,7 +2,7 @@
 title: "PXF 列投影概述"
 description: "PXF 在读取外部数据时如何执行列投影。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/intro/col_project.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/intro/col_project.md"
 ---
 
 PXF 支持列投影，且该功能始终处于启用状态。启用列投影后，只有外部表上的 `SELECT` 查询所需的列才会从外部数据源返回。这一过程可以提升查询性能，也可以减少传输到 Apache Cloudberry 的数据量。

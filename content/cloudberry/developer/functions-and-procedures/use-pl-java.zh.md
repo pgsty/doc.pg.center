@@ -2,7 +2,7 @@
 title: "使用 PL/Java"
 description: "PL/Java 是一种嵌入式受信任过程语言，允许使用 Java 编程语言编写 PostgreSQL 函数和触发器。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/developer/functions-and-procedures/use-pl-java.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/developer/functions-and-procedures/use-pl-java.md"
 ---
 
 使用 PL/Java 可以：

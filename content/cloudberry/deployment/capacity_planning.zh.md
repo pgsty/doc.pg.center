@@ -2,7 +2,7 @@
 title: "估算存储容量"
 description: "要估算 Apache Cloudberry 系统能容纳多少数据，可参考以下计算方法。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/deployment/capacity_planning.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/deployment/capacity_planning.md"
 ---
 
 还应考虑在每台 Segment 主机上预留额外空间，用于存放备份文件和数据加载文件。

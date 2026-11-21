@@ -2,7 +2,7 @@
 title: "识别并缓解堆表性能问题"
 description: "诊断和缓解批量变更后因提示位更新和 WAL 记录导致的堆表首次扫描缓慢问题。"
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/best-practices/identify-and-mitigate-heap-table-performance-issues.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/best-practices/identify-and-mitigate-heap-table-performance-issues.md"
 ---
 
 **症状**：

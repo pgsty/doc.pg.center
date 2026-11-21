@@ -2,7 +2,7 @@
 title: "推荐的监控与维护任务"
 description: "本节列出建议执行的监控和维护操作，以确保 Apache Cloudberry 集群具有高可用性并保持稳定性能。"
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/recommended-maintenance-monitoring-tasks.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/recommended-maintenance-monitoring-tasks.md"
 ---
 
 以下各节中的表格建议 Apache Cloudberry 系统管理员定期执行一些操作，以确保系统的所有组件都处于最佳运行状态。监控操作有助于尽早发现和诊断问题。维护操作有助于使系统保持最新状态，并避免性能恶化，例如系统表膨胀或可用磁盘空间逐渐减少。

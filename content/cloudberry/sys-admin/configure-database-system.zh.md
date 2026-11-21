@@ -2,7 +2,7 @@
 title: "配置数据库系统"
 description: "服务器配置参数会影响 Apache Cloudberry 的行为。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/configure-database-system.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/configure-database-system.md"
 ---
 
 这些参数属于 PostgreSQL 的“统一配置（Grand Unified Configuration）”系统，因此有时称为“GUC”。Apache Cloudberry 的大多数服务器配置参数与 PostgreSQL 的配置参数相同，但其中一部分是 Apache Cloudberry 特有的。

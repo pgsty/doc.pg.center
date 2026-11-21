@@ -2,7 +2,7 @@
 title: "PAX 存储格式"
 description: "Apache Cloudberry 支持 PAX（Partition Attributes Across）存储格式。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/pax-table-format.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/pax-table-format.md"
 ---
 
 PAX 是一种数据库存储格式，兼具行存（NSM，N 元存储模型）和列存（DSM，分解存储模型）的优势，旨在改善查询性能，尤其是缓存效率。在 OLAP 场景中，PAX 提供接近行存的批量写入性能，以及接近列存的读取性能。PAX 既适用于采用对象存储模型的云环境，也适用于传统的离线物理文件存储方式。

@@ -2,7 +2,7 @@
 title: "pg_stat_database"
 description: "`pg_stat_database` 视图提供集群中各数据库的累积统计信息。"
 weight: 230
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-database.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-database.md"
 ---
 
 其中包括已提交和已回滚的事务数量、磁盘块读取次数和缓存命中次数、返回或获取的元组数量，以及插入、更新和删除的行数等指标。此视图有助于监控数据库的整体活动和性能。

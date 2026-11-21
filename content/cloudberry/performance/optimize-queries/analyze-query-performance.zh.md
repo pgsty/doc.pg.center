@@ -2,7 +2,7 @@
 title: "分析查询性能"
 description: "检查性能不佳的查询的执行计划，识别可能的性能调优机会。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/analyze-query-performance.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/analyze-query-performance.md"
 ---
 
 Apache Cloudberry 为每个查询制定查询计划。选择与查询和数据结构相匹配的计划，是获得良好性能的必要条件。查询计划定义了 Apache Cloudberry 如何在并行执行环境中运行查询。

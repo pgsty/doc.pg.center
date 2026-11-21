@@ -2,7 +2,7 @@
 title: "pg_stat_progress_copy"
 description: "`pg_stat_progress_copy` 视图显示当前正在运行的 `COPY` 命令的进度。"
 weight: 290
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-progress-copy.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-progress-copy.md"
 ---
 
 每一行表示一个正在执行 `COPY` 操作的后端进程，提供命令类型（`COPY FROM` 或 `COPY TO`）、I/O 类型（例如 `FILE` 和 `PIPE`）、已处理的字节数和元组数，以及被排除或因错误而跳过的元组数等详情。此视图有助于监控长时间运行的 `COPY` 操作。

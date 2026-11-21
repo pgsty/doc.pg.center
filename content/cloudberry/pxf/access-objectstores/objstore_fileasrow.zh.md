@@ -2,7 +2,7 @@
 title: "将多行文本文件读入单个表行"
 description: "通过 PXF 将对象存储中的多行文本文件作为单个表行读取。"
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-objectstores/objstore_fileasrow.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-objectstores/objstore_fileasrow.md"
 ---
 
 PXF 对象存储连接器支持将多行文本文件作为单个表行读取。本节介绍如何使用 PXF 读取对象存储中的多行文本和 JSON 数据文件，包括如何创建引用存储中多个文件的外部表。

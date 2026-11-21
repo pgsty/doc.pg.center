@@ -2,7 +2,7 @@
 title: "Segment 镜像概述"
 description: "启用 Apache Cloudberry 高可用功能后，Segment 实例分为*主实例*和*镜像实例*两种。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/high-availability/segment-mirroring-overview.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/high-availability/segment-mirroring-overview.md"
 ---
 
 每个主 Segment 都有一个对应的镜像 Segment。主 Segment 实例接收 Coordinator 发来的请求，修改 Segment 数据，然后将变更复制到对应镜像。如果 Apache Cloudberry 检测到主 Segment 故障或不可用，就会将其镜像 Segment 的角色改为主 Segment，并将不可用的原主 Segment 角色改为镜像 Segment。故障发生时正在执行的事务会回滚，必须重新启动。随后，管理员必须恢复镜像 Segment，使其与当前主 Segment 同步，再交换主 Segment 与镜像 Segment 的角色，使两者恢复为首选角色。

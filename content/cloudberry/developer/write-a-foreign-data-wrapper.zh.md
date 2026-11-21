@@ -2,7 +2,7 @@
 title: "编写外部数据包装器"
 description: "本指南介绍如何为 Apache Cloudberry 编写新的外部数据包装器（FDW）。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/developer/write-a-foreign-data-wrapper.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/developer/write-a-foreign-data-wrapper.md"
 ---
 
 外部数据包装器是一个由一组函数组成的库，Apache Cloudberry 服务器通过调用这些函数访问外部数据源。FDW 负责从远程数据存储获取数据，并将其返回给 Apache Cloudberry 执行器。

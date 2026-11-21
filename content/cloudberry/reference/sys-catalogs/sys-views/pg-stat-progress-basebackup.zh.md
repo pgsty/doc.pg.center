@@ -2,7 +2,7 @@
 title: "pg_stat_progress_basebackup"
 description: "`pg_stat_progress_basebackup` 视图显示由 `pg_basebackup` 等工具发起的基础备份的进度。"
 weight: 270
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-progress-basebackup.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-progress-basebackup.md"
 ---
 
 每一行表示一个当前正在执行 `BASE_BACKUP` 命令的 WAL 发送进程，详细列出当前阶段、估计的数据总量、已流式传输的数据量以及已处理的表空间等信息。此视图有助于监控和管理正在进行的基础备份操作。

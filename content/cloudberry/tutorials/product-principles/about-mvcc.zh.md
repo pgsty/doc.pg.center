@@ -2,7 +2,7 @@
 title: "关于并发控制"
 description: "Apache Cloudberry 使用 PostgreSQL 多版本并发控制（MVCC）模型管理堆表上的并发事务。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/product-principles/about-mvcc.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/product-principles/about-mvcc.md"
 ---
 
 数据库管理系统中的并发控制允许并发查询在保证数据库完整性的同时得到正确结果。传统数据库使用两阶段锁协议，既阻止事务修改已被其他并发事务读取的数据，也阻止并发事务读取或写入已被其他事务更新的数据。用于协调事务的锁会增加数据库争用，降低总体事务吞吐量。

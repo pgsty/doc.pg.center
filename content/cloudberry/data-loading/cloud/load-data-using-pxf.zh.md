@@ -3,7 +3,7 @@ title: "使用平台扩展框架（PXF）加载数据"
 linkTitle: "使用 PXF 加载数据"
 description: "Apache Cloudberry 平台扩展框架（PXF）是一个可扩展框架，使 Apache Cloudberry 能够查询元数据不由数据库管理的外部数据文件。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/load-data-using-pxf.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/load-data-using-pxf.md"
 ---
 
 你可以使用其 `pxf://` 协议，访问对象存储系统（Azure、Google Cloud Storage、Minio、S3）、外部 Hadoop 系统（HDFS、Hive、HBase）和 SQL 数据库中的数据。

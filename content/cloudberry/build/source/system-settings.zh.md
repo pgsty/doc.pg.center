@@ -2,7 +2,7 @@
 title: "配置系统资源限制"
 description: "Apache Cloudberry 等数据库系统需要设置特定的系统资源限制，才能高效运行。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/build/system-settings.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/build/system-settings.md"
 ---
 
 应为运行数据库进程的 `gpadmin` 用户配置这些限制。

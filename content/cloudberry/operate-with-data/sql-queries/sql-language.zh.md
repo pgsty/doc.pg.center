@@ -2,7 +2,7 @@
 title: "SQL 语言"
 description: "本文介绍 Apache Cloudberry 所使用 SQL 的基础要素。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/sql-language.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/sql-language.md"
 ---
 
 定义查询时，理解这些要素至关重要，因为它们构成查询语句的基本构件。

@@ -3,7 +3,7 @@ title: "Apache Cloudberry 增量物化视图"
 linkTitle: "增量物化视图"
 description: "本文介绍 Apache Cloudberry 增量物化视图的使用场景、用法、限制和注意事项。"
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/use-incremental-materialized-view.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/use-incremental-materialized-view.md"
 ---
 
 增量物化视图是一种特殊的物化视图。当 Apache Cloudberry 中的基表数据发生插入、更新、删除等变化时，增量物化视图无需重新计算整个视图的全部数据，只更新自上次刷新以来发生变化的部分。这可以节省大量计算资源和时间，显著提高性能，尤其适合大型数据集。

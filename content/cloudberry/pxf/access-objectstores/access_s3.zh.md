@@ -2,7 +2,7 @@
 title: "访问 AWS S3 对象存储概述"
 description: "关于使用 PXF 访问 S3 对象存储。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-objectstores/access_s3.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-objectstores/access_s3.md"
 ---
 
 PXF 安装时附带了 AWS S3 对象存储连接器。该连接器还支持以下运行时功能：

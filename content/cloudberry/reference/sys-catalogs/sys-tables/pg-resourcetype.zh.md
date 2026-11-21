@@ -2,7 +2,7 @@
 title: "pg_resourcetype"
 description: "`pg_resourcetype` 系统目录表包含可分配给 Apache Cloudberry 资源队列的扩展属性信息。"
 weight: 290
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-resourcetype.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-resourcetype.md"
 ---
 
 每行详细描述一个属性及其固有特性，例如默认设置、是否必需，以及停用该属性的值（在允许停用时）。

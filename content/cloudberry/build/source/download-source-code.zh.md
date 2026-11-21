@@ -2,7 +2,7 @@
 title: "下载源码"
 description: "以 gpadmin 用户身份下载 Apache Cloudberry 发布版本或开发分支及其子模块。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/build/download-source-code.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/build/download-source-code.md"
 ---
 
 ## 从现在开始使用 `gpadmin` 用户 {#use-the-gpadmin-user-from-now-on}

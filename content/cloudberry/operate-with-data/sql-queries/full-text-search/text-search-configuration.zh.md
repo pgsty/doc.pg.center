@@ -2,7 +2,7 @@
 title: "文本检索配置示例"
 description: "本文介绍如何创建定制的文本检索配置，以处理文档文本和查询文本。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/text-search-configuration.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/text-search-configuration.md"
 ---
 
 文本检索配置指定了将文档转换为 `tsvector` 所需的全部选项：用于将文本拆分为词元的解析器，以及用于将每个词元转换为词位的词典。每次调用 `to_tsvector` 或 `to_tsquery` 都需要一个文本检索配置来执行处理。`default_text_search_config` 配置参数指定默认配置的名称；如果省略了显式配置参数，文本检索函数就会使用该配置。可以使用 `gpconfig` 命令行工具在 `postgresql.conf` 中设置它，也可以使用 `SET` 命令为单个会话设置它。

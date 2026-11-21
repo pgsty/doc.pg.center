@@ -2,7 +2,7 @@
 title: "gprestore"
 description: "恢复使用 `gpbackup` 工具创建的 Apache Cloudberry 备份。"
 weight: 220
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-utilities/gprestore.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-utilities/gprestore.md"
 ---
 
 默认情况下，`gprestore` 使用 Apache Cloudberry Coordinator 主机数据目录中的备份元数据文件和 DDL 文件，表数据则以 CSV 数据文件形式存储在各 Segment 主机本地。

@@ -2,7 +2,7 @@
 title: "关于 PXF 部署拓扑"
 description: "PXF 部署拓扑。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/deployment_topos.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/deployment_topos.md"
 ---
 
 PXF 默认的部署拓扑是同机部署（co-located）：在每台 Apache Cloudberry 主机上安装 PXF，PXF Service 在每台 Apache Cloudberry Segment 主机上启动并运行。

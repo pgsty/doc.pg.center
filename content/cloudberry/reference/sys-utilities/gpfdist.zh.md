@@ -2,7 +2,7 @@
 title: "gpfdist"
 description: "向 Apache Cloudberry Segment 提供数据文件，或将 Segment 数据写出到文件。"
 weight: 130
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-utilities/gpfdist.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-utilities/gpfdist.md"
 ---
 
 ## 概要 {#synopsis}

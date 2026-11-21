@@ -2,7 +2,7 @@
 title: "pg_stat_all_tables"
 description: "`pg_stat_all_tables` 视图为当前数据库中的每个表（包括 TOAST 表）显示一行，其中包含对该表的访问统计信息。"
 weight: 200
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-all-tables.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-all-tables.md"
 ---
 
 `pg_stat_user_tables` 和 `pg_stat_sys_table` 视图包含相同的信息，但经过筛选，分别仅显示用户表和系统表。

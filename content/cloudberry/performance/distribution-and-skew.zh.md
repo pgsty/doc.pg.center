@@ -2,7 +2,7 @@
 title: "数据分布与倾斜"
 description: "Apache Cloudberry 依赖数据在各 Segment 之间均匀分布。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/distribution-and-skew.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/distribution-and-skew.md"
 ---
 
 在 MPP 无共享环境中，查询的整体响应时间由所有 Segment 完成处理所需的时间决定。系统速度受最慢的 Segment 限制。如果数据发生倾斜，数据较多的 Segment 就需要更长时间才能完成。因此，各个 Segment 的行数应大致相等，处理量也应大致相同。如果某个 Segment 需要处理的数据远多于其他 Segment，就可能导致性能下降或内存不足。

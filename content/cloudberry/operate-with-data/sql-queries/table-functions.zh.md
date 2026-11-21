@@ -2,7 +2,7 @@
 title: "表函数"
 description: "表函数是生成一组行的函数，这些行由基础数据类型（标量类型）或复合数据类型（表行）组成。"
 weight: 120
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/table-functions.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/table-functions.md"
 ---
 
 它们在查询的 `FROM` 子句中以类似表、视图或子查询的方式使用。表函数返回的列可以像表、视图或子查询的列一样，用于 `SELECT`、`JOIN` 或 `WHERE` 子句。

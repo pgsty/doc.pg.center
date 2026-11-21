@@ -2,7 +2,7 @@
 title: "使用 PL/Container"
 description: "PL/Container 允许在 Docker 容器内运行过程语言函数，从而降低直接在 Apache Cloudberry Segment 主机上运行 Python 或 R 代码所带来的安全风险。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/developer/functions-and-procedures/use-pl-container.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/developer/functions-and-procedures/use-pl-container.md"
 ---
 
 本文介绍 PL/Container 的架构、配置、使用方法和高级主题。

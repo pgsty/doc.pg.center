@@ -2,7 +2,7 @@
 title: "视图存储概述"
 description: "视图与表相似，二者都是关系，也就是“带有列的某种对象”。"
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/view-storage.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/view-storage.md"
 ---
 
 所有这类对象都存储在目录表 `pg_class` 中。它们之间的主要区别如下：

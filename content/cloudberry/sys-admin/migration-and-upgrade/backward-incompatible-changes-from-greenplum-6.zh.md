@@ -2,7 +2,7 @@
 title: "来自 Greenplum 6.x 的向后不兼容变更"
 description: "本页列出了将工作负载从 Greenplum Database 6.x 迁移到 Apache Cloudberry 时可能遇到的向后不兼容（破坏性）变更。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/migration-and-upgrade/backward-incompatible-changes-from-greenplum-6.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/migration-and-upgrade/backward-incompatible-changes-from-greenplum-6.md"
 ---
 
 这些差异有两个来源：Cloudberry 底层使用了更新得多的 PostgreSQL 内核，以及对 Greenplum 特有语法、分区和系统目录进行的一系列有意清理。

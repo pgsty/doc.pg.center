@@ -3,7 +3,7 @@ title: "使用资源组管理资源"
 linkTitle: "资源组"
 description: "可以使用资源组管理和保障 Apache Cloudberry 中 CPU、内存、并发事务限制和磁盘 I/O 的资源分配。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/manage-resources-using-resource-groups.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/manage-resources-using-resource-groups.md"
 ---
 
 定义资源组后，可将其分配给一个或多个 Apache Cloudberry 角色，或者 PL/Container 等外部组件，以控制其资源使用。

@@ -2,7 +2,7 @@
 title: "读写 HDFS ORC 数据"
 description: "通过 PXF 读写 HDFS 中的 ORC 数据。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-hadoop/hdfs_orc.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-hadoop/hdfs_orc.md"
 ---
 
 使用 PXF HDFS 连接器的 `hdfs:orc` Profile 读写 ORC 格式的数据。本节介绍如何读写以 ORC 格式存储的 HDFS 文件，包括如何创建引用 HDFS 数据存储中文件的外部表，以及如何查询这些外部表并向其中插入数据。

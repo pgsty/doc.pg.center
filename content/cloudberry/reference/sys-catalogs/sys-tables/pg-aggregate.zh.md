@@ -2,7 +2,7 @@
 title: "pg_aggregate"
 description: "`pg_catalog` 模式中的 `pg_aggregate` 表存储聚合函数的信息。"
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-aggregate.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-aggregate.md"
 ---
 
 聚合函数对一组值（通常是满足查询条件的每一行中某一列的值）进行操作，并返回由这些值计算出的单个值。典型的聚合函数有 `sum`、`count` 和 `max`。`pg_aggregate` 中的每个条目都是 `pg_proc` 中某个条目的扩展。`pg_proc` 条目记录聚合的名称、输入和输出数据类型，以及与普通函数类似的其他信息。

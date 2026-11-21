@@ -3,7 +3,7 @@ title: "工具概览"
 linkTitle: "系统工具"
 description: "Apache Cloudberry 提供的命令行工具。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-utilities/index.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-utilities/index.md"
 ---
 
 Apache Cloudberry 使用标准的 PostgreSQL 客户端和服务器程序，并提供额外的管理工具，用于管理分布式 Apache Cloudberry 数据库管理系统。

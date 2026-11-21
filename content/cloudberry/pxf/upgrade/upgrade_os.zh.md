@@ -2,7 +2,7 @@
 title: "PXF 操作系统升级注意事项"
 description: "升级 PXF 主机上的操作系统。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/upgrade/upgrade_os.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/upgrade/upgrade_os.md"
 ---
 
 如果计划升级 Apache Cloudberry 集群主机上的操作系统，并且 Apache Cloudberry 安装中正在运行 PXF，则必须在升级操作系统之前和之后执行一些 PXF 特定的操作。

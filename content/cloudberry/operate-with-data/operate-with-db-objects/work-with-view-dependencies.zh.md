@@ -2,7 +2,7 @@
 title: "使用视图依赖"
 description: "如果表上存在视图依赖，则必须使用 `CASCADE` 关键字删除该表。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/work-with-view-dependencies.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/work-with-view-dependencies.md"
 ---
 
 此外，如果表上存在视图依赖，也不能修改该表。以下示例展示了表上的视图依赖。

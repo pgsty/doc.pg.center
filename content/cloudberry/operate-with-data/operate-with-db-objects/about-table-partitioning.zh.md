@@ -2,7 +2,7 @@
 title: "表分区概述"
 description: "Apache Cloudberry 支持使用表分区，将大表在逻辑上划分为更小、更易管理的部分。"
 weight: 120
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/about-table-partitioning.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/about-table-partitioning.md"
 ---
 
 这样一来，查询优化器只需扫描必要的数据，而不必扫描整张表，可以显著提高查询性能。分区是一种逻辑划分，不会改变表数据在各 Segment 上的物理分布。

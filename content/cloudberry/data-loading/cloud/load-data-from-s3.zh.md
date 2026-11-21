@@ -3,7 +3,7 @@ title: "使用 s3 协议从 Amazon S3 加载数据"
 linkTitle: "从 Amazon S3 加载数据"
 description: "`s3` 协议用于 URL 中，指定 Amazon S3 存储桶的位置，以及读取或写入桶内文件时使用的前缀。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/load-data-from-s3.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/load-data-from-s3.md"
 ---
 
 Amazon Simple Storage Service（Amazon S3）提供安全、持久且高度可扩展的对象存储。有关 Amazon S3 的信息，请参阅 [Amazon S3](https://aws.amazon.com/s3/)。

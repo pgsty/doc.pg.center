@@ -3,7 +3,7 @@ title: "以单计算节点部署 Apache Cloudberry"
 linkTitle: "（可选）以单计算节点部署"
 description: "Apache Cloudberry 并不完全兼容 PostgreSQL，部分功能和语法为 Apache Cloudberry 专有。"
 weight: 100
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/deployment/single-node.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/deployment/single-node.md"
 ---
 
 如果业务已经依赖 Apache Cloudberry，并希望在单个节点上使用其专有语法和功能，以避免与 PostgreSQL 的兼容性问题，可以考虑部署不包含 Segment 的 Apache Cloudberry。

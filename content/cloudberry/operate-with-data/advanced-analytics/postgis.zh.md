@@ -2,7 +2,7 @@
 title: "地理空间分析"
 description: "为 Apache Cloudberry 构建 PostGIS 及其依赖，以支持地理空间数据存储、查询和索引。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/advanced-analytics/postgis.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/advanced-analytics/postgis.md"
 ---
 
 [PostGIS](https://postgis.net/) 通过增加对地理空间数据存储、索引和查询的支持，扩展了 PostgreSQL 的能力。Apache Cloudberry 支持使用 PostGIS 进行地理空间分析。

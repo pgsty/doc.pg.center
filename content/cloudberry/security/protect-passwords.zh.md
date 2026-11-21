@@ -3,7 +3,7 @@ title: "在 Apache Cloudberry 中保护密码"
 linkTitle: "保护密码"
 description: "在默认配置下，Apache Cloudberry 将登录用户密码的 MD5 或 SCRAM-SHA-256 哈希值保存在 `pg_authid` 系统目录中，而不保存明文密码。"
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/security/protect-passwords.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/security/protect-passwords.md"
 ---
 
 任何能够查看 `pg_authid` 表的人都能看到哈希字符串，但看不到密码。这也确保了将数据库转储为备份文件时，密码仍然不会以明文呈现。

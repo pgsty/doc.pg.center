@@ -2,7 +2,7 @@
 title: "ALTER COLLATION"
 description: "更改一个排序规则的定义。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sql-stmts/alter-collation.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sql-stmts/alter-collation.md"
 ---
 
 ## 概要 {#synopsis}

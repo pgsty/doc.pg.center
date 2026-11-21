@@ -2,10 +2,12 @@
 title: "升级 PXF 软件包"
 description: "升级通过 rpm 或 deb 软件包安装的 PXF。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/upgrade/upgrade_pxf_rpm.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/upgrade/upgrade_pxf_rpm.md"
 ---
 
 如果通过 `rpm` 或 `deb` 软件包安装了 PXF，并且已在当前 Apache Cloudberry 安装中配置并正在使用 PXF，则在安装新版本的 PXF 时，必须执行一些升级操作。
+
+升级前，请阅读[不向后兼容的变更](/cloudberry/pxf/upgrade/upgrade_pxf/#backward-incompatible-changes)。
 
 PXF 升级过程分为两部分。在安装新版本之前执行一个过程，安装之后再执行另一个过程：
 

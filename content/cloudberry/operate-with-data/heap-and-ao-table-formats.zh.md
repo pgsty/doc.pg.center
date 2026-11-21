@@ -2,7 +2,7 @@
 title: "堆表与 AO 表格式"
 description: "Apache Cloudberry 支持两种存储模型：堆存储和追加优化（AO）存储。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/heap-and-ao-table-formats.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/heap-and-ao-table-formats.md"
 ---
 
 存储模型应根据数据类型和查询类型选择。本文介绍这两种存储模型，并为选择最优模型提供建议。

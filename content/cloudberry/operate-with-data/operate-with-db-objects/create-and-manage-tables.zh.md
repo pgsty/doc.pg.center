@@ -3,7 +3,7 @@ title: "在 Apache Cloudberry 中创建和管理表"
 linkTitle: "创建和管理表"
 description: "Apache Cloudberry 中的表与任何关系数据库中的表相似，但表行会分布到系统中的不同 Segment 上。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-tables.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-tables.md"
 ---
 
 创建表时，需要指定表的分布策略。

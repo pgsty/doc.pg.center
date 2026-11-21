@@ -2,10 +2,12 @@
 title: "使用 S3 Select 从 S3 读取 CSV 和 Parquet 数据"
 description: "使用 S3 Select 从 S3 读取 CSV 和 Parquet 数据。"
 weight: 100
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-objectstores/read_s3_s3select.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-objectstores/read_s3_s3select.md"
 ---
 
 PXF S3 连接器支持使用 Amazon S3 Select 服务从 S3 读取特定的 CSV 格式和 Parquet 格式数据。S3 Select 为存储在 Amazon S3 中的数据提供原地直接查询（query-in-place）功能。
+
+> **注意：** Amazon S3 Select 已不再向新的 AWS 客户提供。现有客户可以继续使用。参见 [Amazon S3 Select 文档](https://docs.aws.amazon.com/AmazonS3/latest/userguide/selecting-content-from-objects.html)。
 
 启用后，PXF 使用 S3 Select 过滤 S3 对象的内容，以检索所请求的数据子集。这通常既能减少传输到 Apache Cloudberry 的数据量，也能缩短查询时间。
 

@@ -3,7 +3,7 @@ title: "访问网络文件系统中的文件"
 linkTitle: "使用 PXF 访问网络文件系统中的文件"
 description: "使用 PXF 访问网络文件系统中的文件。"
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-nfs/nfs_pxf.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-nfs/nfs_pxf.md"
 ---
 
 您可以使用 PXF 读取位于已挂载到 Apache Cloudberry 主机上的网络文件系统中的数据。PXF 支持对网络文件系统中的以下文件类型进行读取和写入：

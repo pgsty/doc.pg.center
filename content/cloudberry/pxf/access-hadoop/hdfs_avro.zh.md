@@ -2,7 +2,7 @@
 title: "读写 HDFS Avro 数据"
 description: "通过 PXF 读写 HDFS 中的 Avro 数据。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-hadoop/hdfs_avro.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-hadoop/hdfs_avro.md"
 ---
 
 <!--
@@ -126,7 +126,9 @@ Avro 数据文件包含模式以及数据的紧凑二进制表示。Avro 数据�
 | 可写   | 是 | PXF 使用指定的模式。 |
 | 可写   | 否 | PXF 根据外部表定义创建 Avro 模式。 |
 
-向 PXF 提供 Avro 模式文件时，该文件必须位于每台 Apache Cloudberry 主机上的相同位置，**或者**位于 Hadoop 文件系统上。PXF 首先在 Apache Cloudberry 主机上按绝对文件路径查找。如果在那里没有找到模式文件，则相对于 PXF 类路径（classpath）查找该文件。如果 PXF 无法在本地找到模式文件，则会在 HDFS 上查找该文件。
+向 PXF 提供 Avro 模式文件时，该文件可以位于 Hadoop 文件系统上，也可以位于每台 Apache Cloudberry 主机的 PXF 类路径（classpath）中。对于相对模式路径，PXF 首先搜索 PXF 类路径。如果未找到模式文件，或模式路径是绝对路径，则使用 `SERVER` 配置的文件系统解析该路径。
+
+PXF 不会直接在 PXF 主机的本地文件系统上打开绝对 `SCHEMA` 路径。它将该路径视为相对于服务器的 `pxf.fs.basePath`；未设置基础路径时，则相对于配置的文件系统根目录。例如，设置 `pxf.fs.basePath=/data` 时，`SCHEMA=/schemas/example.avsc` 指向配置的文件系统上的 `/data/schemas/example.avsc`。模式路径不得包含父目录（`..`）分量或美元符号（`$`）。
 
 `$PXF_BASE/conf` 目录位于 PXF 类路径中。PXF 可以找到您添加到每台 Apache Cloudberry 主机上该目录中的 Avro 模式文件。
 
@@ -166,7 +168,7 @@ Apache Cloudberry [CREATE EXTERNAL TABLE](/cloudberry/reference/sql-stmts/create
 | COLLECTION_DELIM | 当 PXF 将 Avro 复杂数据类型映射到 text 列时，放置在顶层数组、映射或记录字段的各项之间的分隔符字符。默认为逗号（`,`）字符。（读）|
 | MAPKEY_DELIM | 当 PXF 将 Avro 复杂数据类型映射到 text 列时，放置在映射项的键与值之间的分隔符字符。默认为冒号 `:` 字符。（读）|
 | RECORDKEY_DELIM | 当 PXF 将 Avro 复杂数据类型映射到 text 列时，放置在记录项的字段名与值之间的分隔符字符。默认为冒号 `:` 字符。（读）|
-| SCHEMA | Avro 模式文件在 Apache Cloudberry 主机上或 HDFS 上的绝对路径，或模式文件在主机上的相对路径。（读和写）|
+| SCHEMA | 配置的文件系统上的 Avro 模式文件路径，相对于 `pxf.fs.basePath`（或文件系统根目录）解析；也可以是 PXF 类路径中的相对路径。绝对路径不会直接在 PXF 主机上打开。（读和写）|
 | IGNORE_MISSING_PATH | 布尔值，指定当 \<path-to-hdfs-file\> 缺失或无效时采取的操作。默认值为 `false`，此时 PXF 在这种情况下返回错误。当值为 `true` 时，PXF 忽略路径缺失错误并返回空分片（fragment）。（读） |
 
 PXF `hdfs:avro` profile 支持与编码和压缩相关的写选项。您在 `CREATE WRITABLE EXTERNAL TABLE` 的 `LOCATION` 子句中指定这些写选项。`hdfs:avro` profile 支持以下自定义写选项：

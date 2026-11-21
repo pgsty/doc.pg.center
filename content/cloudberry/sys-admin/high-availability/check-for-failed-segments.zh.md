@@ -2,7 +2,7 @@
 title: "检查故障 Segment"
 description: "启用镜像后，即使系统中存在故障 Segment 实例，服务也可能不中断，用户也可能察觉不到故障。"
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/high-availability/check-for-failed-segments.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/high-availability/check-for-failed-segments.md"
 ---
 
 可以使用 `gpstate` 工具、查看 `gp_segment_configuration` 目录表的内容，或检查日志文件来验证系统状态。

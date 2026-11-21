@@ -2,7 +2,7 @@
 title: "使用 PL/pgSQL"
 description: "PL/pgSQL 是一种可加载的过程语言，Apache Cloudberry 默认会安装并注册该语言。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/developer/functions-and-procedures/use-pl-pgsql.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/developer/functions-and-procedures/use-pl-pgsql.md"
 ---
 
 它为标准 SQL 增加了执行复杂计算和使用控制结构的能力。

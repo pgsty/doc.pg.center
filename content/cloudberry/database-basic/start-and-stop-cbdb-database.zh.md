@@ -3,7 +3,7 @@ title: "启动与停止 Apache Cloudberry"
 linkTitle: "启动与停止数据库"
 description: "在 Apache Cloudberry 数据库管理系统（DBMS）中，数据库服务器实例（Coordinator 和所有 Segment）需要在系统的所有主机上协调启动或停止，使其能够作为统一的 DBMS 协同工作。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/database-basic/start-and-stop-cbdb-database.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/database-basic/start-and-stop-cbdb-database.md"
 ---
 
 由于 Apache Cloudberry 系统分布在多台机器上，其启动和停止过程与普通 PostgreSQL 数据库管理系统（DBMS）不同。

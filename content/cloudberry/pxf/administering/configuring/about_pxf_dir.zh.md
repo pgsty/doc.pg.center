@@ -2,7 +2,7 @@
 title: "安装目录与配置目录"
 description: "PXF 安装目录与配置目录的布局。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/about_pxf_dir.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/about_pxf_dir.md"
 ---
 
 本文档使用 `<PXF_INSTALL_DIR>` 指代 PXF 安装目录。其取值取决于 PXF 的安装方式：

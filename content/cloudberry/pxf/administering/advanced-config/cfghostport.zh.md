@@ -2,7 +2,7 @@
 title: "服务监听地址、主机与端口"
 description: "配置 PXF 服务的主机和端口。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/advanced-config/cfghostport.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/advanced-config/cfghostport.md"
 ---
 
 在默认部署拓扑中，自 PXF 6.7.0 起，PXF Service 在 Apache Cloudberry 主机上启动，并监听 `localhost:5888`。在此配置下，PXF Service 监听 Apache Cloudberry 主机上的本地流量。您可以将 PXF 配置为监听其他监听地址，也可以将其配置为监听其他端口号，或运行在其他主机上。要更改默认配置，请设置下面列出的一个或多个属性：

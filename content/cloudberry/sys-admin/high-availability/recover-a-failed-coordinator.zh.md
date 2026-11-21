@@ -2,7 +2,7 @@
 title: "恢复故障 Coordinator"
 description: "如果主 Coordinator 故障，Apache Cloudberry 系统将无法访问，WAL 复制也会停止。"
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/high-availability/recover-a-failed-coordinator.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/high-availability/recover-a-failed-coordinator.md"
 ---
 
 使用 [`gpactivatestandby`](/cloudberry/reference/sys-utilities/gpactivatestandby/) 激活 Standby Coordinator。激活时，Apache Cloudberry 会重建 Coordinator 主机在最后一次成功提交事务时的状态。

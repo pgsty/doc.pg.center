@@ -3,7 +3,7 @@ title: "gp_toolkit 管理模式"
 linkTitle: "gp_toolkit"
 description: "Apache Cloudberry 提供名为 `gp_toolkit` 的管理模式，可用于查询系统目录、日志文件和运行环境，获取系统状态信息。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/gp_toolkit.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/gp_toolkit.md"
 ---
 
 `gp_toolkit` 模式包含多个可通过 SQL 命令访问的视图。所有数据库用户都可以访问 `gp_toolkit` 模式，但其中一些对象可能需要超级用户权限。为方便使用，可以将 `gp_toolkit` 模式加入模式搜索路径。例如：

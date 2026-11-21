@@ -2,7 +2,7 @@
 title: "测试与调试文本检索"
 description: "本文介绍可用于测试和调试检索配置，或配置中指定的单个解析器和词典的 Apache Cloudberry 函数。"
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/test-and-debug-text-search.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/test-and-debug-text-search.md"
 ---
 
 定制的文本检索配置的行为很容易变得令人困惑。本节介绍的函数可用于测试文本检索对象。可以测试完整配置，也可以分别测试解析器和词典。

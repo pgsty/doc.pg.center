@@ -2,7 +2,7 @@
 title: "文本检索的首选索引类型"
 description: "有两类索引可用于加快全文检索：GIN 和 GiST。"
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/preferred-indexes-for-full-text-search.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/preferred-indexes-for-full-text-search.md"
 ---
 
 全文检索不强制要求索引，但如果某列需要经常检索，通常应当为其建立索引。

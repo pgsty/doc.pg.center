@@ -2,7 +2,7 @@
 title: "DROP TEXT SEARCH PARSER"
 description: "使用 DROP TEXT SEARCH PARSER 删除文本检索解析器并控制依赖对象的处理方式。"
 weight: 1360
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sql-stmts/drop-text-search-parser.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sql-stmts/drop-text-search-parser.md"
 ---
 
 ## 描述 {#description}

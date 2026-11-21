@@ -2,7 +2,7 @@
 title: "第 4 课：数据加载"
 description: "将数据加载到 Apache Cloudberry。"
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/quick-trial-lessons/data-loading.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/quick-trial-lessons/data-loading.md"
 ---
 
 本教程简要介绍将示例数据 `FAA` 加载到上一教程[第 3 课：创建表](/cloudberry/tutorials/quick-trial-lessons/create-tables/)中创建的 Apache Cloudberry 表中的 3 种方法。继续之前，请确保已经完成上一教程。

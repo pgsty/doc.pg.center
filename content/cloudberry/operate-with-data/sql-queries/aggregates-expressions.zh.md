@@ -2,7 +2,7 @@
 title: "带聚合表达式的查询"
 description: "聚合表达式对查询选取的行应用聚合函数。"
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/aggregates-expressions.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/aggregates-expressions.md"
 ---
 
 聚合函数对一组值执行计算并返回单个值，例如该组值的总和或平均值。聚合表达式的语法形式如下之一：

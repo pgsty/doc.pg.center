@@ -2,7 +2,7 @@
 title: "内存与线程"
 description: "配置 PXF 的内存和线程。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/advanced-config/cfg_mem.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/advanced-config/cfg_mem.md"
 ---
 
 由于单个 PXF Service（JVM）要为 Segment 主机上的多个 Segment 提供服务，PXF 堆大小可能成为运行时的限制因素。在并发工作负载下，或对大文件执行查询时，这一点更为明显。你可能会遇到查询挂起或失败的情况，原因是内存不足，或 Java 垃圾回收影响了响应时间。为避免或解决这些问题，请先尝试增大 Java 最大堆大小，或减少 Tomcat 的最大线程数，具体取决于哪种做法最适合你的系统配置。你也可以将 PXF 配置为在检测到内存不足状况时[自动终止服务器](#auto-terminating-the-pxf-server)（默认已启用）或[转储 Java 堆](#dumping-the-java-heap)。

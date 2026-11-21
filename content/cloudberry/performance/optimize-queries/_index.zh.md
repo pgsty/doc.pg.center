@@ -3,7 +3,7 @@ title: "Apache Cloudberry 查询性能"
 linkTitle: "优化查询性能"
 description: "Apache Cloudberry 通过动态分区消除和自适应内存分配提高查询性能。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/index.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/index.md"
 ---
 
 这些机制有助于减少扫描的数据量、加快查询执行，并提高整体并发能力。

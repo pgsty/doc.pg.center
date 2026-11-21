@@ -3,7 +3,7 @@ title: "使用并行查询执行"
 linkTitle: "并行查询执行"
 description: "本文介绍 Apache Cloudberry 并行查询执行的使用场景、示例、限制和常见问题。"
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/parallel-query-execution.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/parallel-query-execution.md"
 ---
 
 Apache Cloudberry 执行查询时，会使用多个 CPU 核处理单个查询，从而提高查询性能。数据库根据数据量变化，动态调整计算节点（包括 `SeqScan` 算子）的数量。

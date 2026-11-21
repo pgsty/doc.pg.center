@@ -2,7 +2,7 @@
 title: "第 1 课：创建用户和角色"
 description: "通过本简介学习如何在 Apache Cloudberry 中创建用户和角色。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/quick-trial-lessons/create-users-and-roles.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/quick-trial-lessons/create-users-and-roles.md"
 ---
 
 Apache Cloudberry 使用角色管理数据库访问。最初只有一个超级用户角色，即初始化数据库实例的操作系统用户所关联的角色，通常是 `gpadmin`。该用户拥有 Apache Cloudberry 的所有文件和操作系统进程，因此应当只将 `gpadmin` 角色保留给系统任务使用。

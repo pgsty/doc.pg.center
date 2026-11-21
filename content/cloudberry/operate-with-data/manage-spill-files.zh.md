@@ -2,7 +2,7 @@
 title: "管理查询生成的溢出文件"
 description: "如果可用内存不足以执行 SQL 查询，Apache Cloudberry 会在磁盘上创建溢出文件，也称为工作文件。"
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/manage-spill-files.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/manage-spill-files.md"
 ---
 
 单个查询允许生成的最大溢出文件数由服务器配置参数 `gp_workfile_limit_files_per_query` 控制。默认值 `100000` 足以满足大多数查询的需求。

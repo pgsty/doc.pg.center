@@ -2,7 +2,7 @@
 title: "第 0 课：数据库与 Apache Cloudberry 架构简介"
 description: "本页介绍数据库的基本概念，并说明 Apache Cloudberry 的架构。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/quick-trial-lessons/introduction-to-database-and-cloudberry-architecture.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/quick-trial-lessons/introduction-to-database-and-cloudberry-architecture.md"
 ---
 
 ## 背景：数据库概念 {#background-database-concepts}

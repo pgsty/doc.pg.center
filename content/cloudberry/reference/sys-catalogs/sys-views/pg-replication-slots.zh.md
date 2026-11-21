@@ -2,7 +2,7 @@
 title: "pg_replication_slots"
 description: "`pg_replication_slots` 视图列出数据库集群中当前存在的所有复制槽及其当前状态。"
 weight: 190
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-replication-slots.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-replication-slots.md"
 ---
 
 其中包括槽名称、类型（物理或逻辑）、关联的数据库、活动状态和 WAL 位置等信息。此视图对于监控复制槽使用情况以及确保复制行为正确至关重要。

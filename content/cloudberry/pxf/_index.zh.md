@@ -3,12 +3,12 @@ title: "Apache Cloudberry 平台扩展框架（PXF）"
 linkTitle: "PXF"
 description: "Apache Cloudberry 平台扩展框架文档索引。"
 weight: 140
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/index.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/index.md"
 type: "docs"
 section_index: "cards"
 outputs: ["HTML", "RSS", "print", "markdown"]
-upstream_source: "pxf"
-cascade: {"type": "docs", "upstream_source": "pxf"}
+upstream_source: "pxf-20261121"
+cascade: {"type": "docs", "upstream_source": "pxf-20261121"}
 sidebar_root_menu: false
 icon: fa-solid fa-plug
 ---
@@ -31,6 +31,9 @@ KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
 -->
+
+> [!NOTE] 文档快照
+> 本版文档采用 `6683faa38ce4`（2026 年 11 月 21 日）的开发文档，中文已按英文增量同步。最新发布的 PXF 版本仍为 `2.2.0-incubating`；使用此快照中更新的 Java 和连接器要求时，必须核对实际安装的二进制版本。
 
 Apache Cloudberry 平台扩展框架（Platform Extension Framework，PXF）通过内置连接器，将 Apache Cloudberry 外部表定义映射到外部数据源，从而提供并行、高吞吐的数据访问能力，并支持跨异构数据源的联邦查询。PXF 源自 Apache HAWQ 项目。
 

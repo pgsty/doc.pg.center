@@ -3,7 +3,7 @@ title: "故障排查"
 linkTitle: "PXF 故障排查"
 description: "PXF 故障排查：日志、常见错误和内存问题。"
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/troubleshooting/troubleshooting_pxf.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/troubleshooting/troubleshooting_pxf.md"
 ---
 
 <!--
@@ -46,6 +46,12 @@ under the License.
 
 有关日志级别、配置以及 `pxf-app.out` 和 `pxf-service.log` 日志文件的更多信息，请参阅[日志](/cloudberry/pxf/administering/advanced-config/cfg_logging/)主题。
 
+
+## 升级后的 Java 版本错误 {#java-version-errors-after-an-upgrade}
+
+当前 PXF 类以 Java 17 为目标版本（类文件版本 61）。使用 Java 11 或更早版本启动时，可能出现 `UnsupportedClassVersionError`，错误中会提到版本 `61.0`；例如，Java 11 只能识别最高 `55.0` 的类文件版本。
+
+检查每台 Apache Cloudberry 主机上 `$PXF_BASE/conf/pxf-env.sh` 中的 `JAVA_HOME`。安装或选择 Java 17，同步 PXF 配置，然后重启服务。参见[为 PXF 安装 Java](/cloudberry/pxf/administering/configuring/install_java/)。
 
 ## 解决 PXF JDBC 连接器时区错误 {#addressing-pxf-jdbc-connector-time-zone-errors}
 

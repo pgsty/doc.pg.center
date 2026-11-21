@@ -2,7 +2,7 @@
 title: "pg_stat_bgwriter"
 description: "`pg_stat_bgwriter` 视图提供后台写入进程的累积统计信息，该进程负责在后台将脏缓冲区写入磁盘。"
 weight: 210
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-bgwriter.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-bgwriter.md"
 ---
 
 此视图有助于监控后台写入进程的效率以及整体缓冲区管理情况。其中包括检查点期间写入的缓冲区数量、后台写入进程清理的缓冲区数量，以及后端进程直接写入的缓冲区数量等指标。这些统计信息有助于调优数据库性能以及了解写入活动的规律。

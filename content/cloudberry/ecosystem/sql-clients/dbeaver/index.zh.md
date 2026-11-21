@@ -2,7 +2,7 @@
 title: "DBeaver"
 description: "DBeaver 是一款功能强大的数据库管理工具和 SQL 客户端软件，支持 MySQL、PostgreSQL、Apache Cloudberry 等多种数据库系统。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/ecosystem/sql-clients/dbeaver.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/ecosystem/sql-clients/dbeaver.md"
 ---
 
 本文介绍如何在 DBeaver 与 Apache Cloudberry 数据库之间建立连接。

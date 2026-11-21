@@ -2,7 +2,7 @@
 title: "安装所需软件包"
 description: "此步骤安装构建 Apache Cloudberry 所需的基本开发工具、库和依赖项。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/build/install-required-packages.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/build/install-required-packages.md"
 ---
 
 ## 安装基本系统软件包 {#install-basic-system-packages}

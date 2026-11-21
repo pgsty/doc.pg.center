@@ -2,7 +2,7 @@
 title: "连接查询"
 description: "在 Apache Cloudberry 中，`JOIN` 子句根据相关列值组合两个或多个表中的行。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/join-queries.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/join-queries.md"
 ---
 
 `JOIN` 子句是 `SELECT` 语句中 `FROM` 子句的一部分。

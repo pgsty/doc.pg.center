@@ -2,7 +2,7 @@
 title: "构建并安装 Apache Cloudberry 及 contrib 扩展"
 description: "编译 Apache Cloudberry 及其 contrib 模块，安装二进制文件并验证安装结果。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/build/build-and-install.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/build/build-and-install.md"
 ---
 
 ## 编译代码 {#compile-the-code}

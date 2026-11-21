@@ -2,7 +2,7 @@
 title: "pg_dumpall"
 description: "将 Apache Cloudberry 系统中的所有数据库导出到单个脚本文件或其他归档文件。"
 weight: 350
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-utilities/pg-dumpall.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-utilities/pg-dumpall.md"
 ---
 
 ## 概要 {#synopsis}

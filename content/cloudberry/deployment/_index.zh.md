@@ -4,7 +4,7 @@ linkTitle: "生产环境部署"
 description: "本指南介绍如何在生产环境中部署 Apache Cloudberry。"
 weight: 30
 icon: "fa-solid fa-server"
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/deployment/index.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/deployment/index.md"
 ---
 
 本指南涵盖从硬件规划到集群初始化和登录的完整部署流程。

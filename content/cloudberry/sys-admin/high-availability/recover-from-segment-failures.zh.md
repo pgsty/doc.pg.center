@@ -2,7 +2,7 @@
 title: "从 Segment 故障中恢复"
 description: "本节介绍一个或多个 Segment 或主机停止运行后，如何恢复这些故障 Segment。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/high-availability/recover-from-segment-failures.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/high-availability/recover-from-segment-failures.md"
 ---
 
 选择哪种恢复方式，主要取决于你的情况符合以下 3 种场景中的哪一种：

@@ -3,7 +3,7 @@ title: "更新 Apache Cloudberry 统计信息"
 linkTitle: "更新统计信息"
 description: "获得良好查询性能最重要的前提，是为表提供准确的统计信息。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/update-stats-using-analyze.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/update-stats-using-analyze.md"
 ---
 
 使用 `ANALYZE` 语句更新统计信息，可以帮助查询规划器生成最优查询计划。分析表时，数据相关信息会存储在系统目录表中。如果这些信息过时，规划器就可能生成低效的计划。

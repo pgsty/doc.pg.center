@@ -2,7 +2,7 @@
 title: "pg_stat_database_conflicts"
 description: "`pg_stat_database_conflicts` 视图提供 PostgreSQL 备库上因恢复冲突而取消查询的统计信息。"
 weight: 220
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-database-conflicts.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-database-conflicts.md"
 ---
 
 每一行对应一个数据库，包含由各种冲突类型导致的取消次数，例如表空间被删除、锁超时、旧快照、缓冲区被钉住以及死锁。此视图有助于监控和诊断备库上与复制冲突有关的问题。

@@ -2,7 +2,7 @@
 title: "监控长时间运行的操作"
 description: "Apache Cloudberry 可以在命令执行期间报告 `ANALYZE`、`CLUSTER`、`COPY`、`CREATE INDEX`、`REINDEX` 和 `VACUUM` 命令的进度。"
 weight: 110
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/monitor-long-running-operations.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/monitor-long-running-operations.md"
 ---
 
 Cloudberry 还可以报告正在运行的基础备份（在调用 [`gprecoverseg -F`](/cloudberry/reference/sys-utilities/gprecoverseg/) 时启动）的进度，从而可以监控这些可能长时间运行的操作。

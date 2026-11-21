@@ -2,7 +2,7 @@
 title: "gp_segment_endpoints"
 description: "`gp_segment_endpoints` 视图列出当前会话用户声明的所有活动并行检索游标在 QE 中创建的端点。"
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-segment-endpoints.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-segment-endpoints.md"
 ---
 
 Apache Cloudberry 超级用户访问此视图时，它会返回所有用户声明的所有并行检索游标在 QE 上创建的全部端点。

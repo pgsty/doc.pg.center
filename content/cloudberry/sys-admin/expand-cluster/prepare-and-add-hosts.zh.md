@@ -2,7 +2,7 @@
 title: "准备并添加主机"
 description: "验证新主机系统已准备好集成到现有 Cloudberry 系统中。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/expand-cluster/prepare-and-add-hosts.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/expand-cluster/prepare-and-add-hosts.md"
 ---
 
 准备新主机系统以进行扩容时，需要安装 Apache Cloudberry 软件二进制文件、交换所需的 SSH 密钥并运行性能测试。

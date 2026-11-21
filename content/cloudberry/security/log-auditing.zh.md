@@ -2,7 +2,7 @@
 title: "日志审计"
 description: "本文介绍 Apache Cloudberry 中会被记录、且应当监控以检测安全威胁的事件。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/security/log-auditing.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/security/log-auditing.md"
 ---
 
 Apache Cloudberry 能够审计多种事件，包括系统启动和关闭、Segment 数据库故障、导致错误的 SQL 语句，以及所有连接尝试和断开连接事件。Apache Cloudberry 还会记录 SQL 语句及其相关信息，并可通过多种配置方式调整审计信息的详细程度。`log_error_verbosity` 配置参数控制写入服务器日志的每条消息的详细程度。类似地，`log_min_error_statement` 参数允许管理员专门配置 SQL 语句记录的详细程度，而 `log_statement` 参数决定审计哪些类型的 SQL 语句。如果可审计事件由 Apache Cloudberry 外部的主体发起，Apache Cloudberry 会记录其用户名。

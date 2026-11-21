@@ -2,7 +2,7 @@
 title: "gpshrink"
 description: "Apache Cloudberry 使用系统工具 `gpshrink` 对集群进行缩容。"
 weight: 250
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-utilities/gpshrink.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-utilities/gpshrink.md"
 ---
 
 当集群资源闲置时，例如磁盘空间使用率持续低于 20%，或 CPU 和内存使用率较低，可以使用 `gpshrink` 缩小集群规模，节省服务器资源。用户可通过 `gpshrink` 工具移除冗余服务器上的 Segment，实现集群缩容。

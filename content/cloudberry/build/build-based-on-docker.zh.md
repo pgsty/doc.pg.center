@@ -2,7 +2,7 @@
 title: "使用 Docker 开发镜像构建"
 description: "本指南介绍如何使用基于 Docker 的开发环境构建 Apache Cloudberry。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/build/build-based-on-docker.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/build/build-based-on-docker.md"
 ---
 
 这种方式尤其适合在不同系统上保持一致的构建环境，并节省环境配置时间。

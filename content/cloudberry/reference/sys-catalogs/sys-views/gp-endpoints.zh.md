@@ -2,7 +2,7 @@
 title: "gp_endpoints"
 description: "`gp_endpoints` 视图列出当前会话用户在当前数据库中声明的所有活动并行检索游标所创建的端点。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-endpoints.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-endpoints.md"
 ---
 
 Apache Cloudberry 超级用户访问此视图时，它会返回当前数据库中所有用户声明的所有并行检索游标所创建的全部端点。

@@ -2,7 +2,7 @@
 title: "配置数据库授权"
 description: "本文介绍如何使用角色和权限，在用户级别限制对数据库数据的授权访问。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/security/configure-db-auth.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/security/configure-db-auth.md"
 ---
 
 ## 访问权限与角色 {#access-permissions-and-roles}

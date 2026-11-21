@@ -2,7 +2,7 @@
 title: "目录表"
 description: "Apache Cloudberry 引入了*目录表*，用于统一管理本地存储或对象存储中的非结构化数据。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/advanced-analytics/directory-tables.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/advanced-analytics/directory-tables.md"
 ---
 
 在大规模 AI 的背景下，AI 应用产生了管理非结构化多模态语料库的需求。人们需要持续准备大量经过高质量整理的非结构化语料，通过数据迭代训练大模型，并汇总丰富的知识库。因此，结构化语料的管理和处理面临技术挑战。

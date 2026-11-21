@@ -2,7 +2,7 @@
 title: "其他文本检索功能"
 description: "Apache Cloudberry 提供了其他函数和运算符，可用于操作检索向量和查询向量，以及重写检索查询。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/additional-text-search-features.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/additional-text-search-features.md"
 ---
 
 本节包含以下子主题：

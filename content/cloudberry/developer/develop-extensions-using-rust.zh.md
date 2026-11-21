@@ -2,7 +2,7 @@
 title: "使用 PGRX 开发数据库扩展"
 description: "本文介绍如何使用 Rust 和 PGRX 框架开发数据库扩展。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/developer/develop-extensions-using-rust.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/developer/develop-extensions-using-rust.md"
 ---
 
 PGRX 是一个用于为 Apache Cloudberry 开发扩展的 Rust 框架，可提供安全高效的开发体验。

@@ -2,7 +2,7 @@
 title: "配置系统"
 description: "介绍如何为安装 Apache Cloudberry 软件准备操作系统环境。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/deployment/prepare-to-deploy.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/deployment/prepare-to-deploy.md"
 ---
 
 在物理机或虚拟机上部署 Apache Cloudberry 之前，需要完成一些准备工作。开始部署前，请阅读本文和[平台要求](/cloudberry/deployment/platform-requirements/)。

@@ -2,7 +2,7 @@
 title: "TPC-H：Apache Cloudberry 决策支持基准测试"
 description: "在现有 Apache Cloudberry 集群上自动运行 TPC-H 基准测试。"
 weight: 110
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/benchmark/performance-benchmark-tpch.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/benchmark/performance-benchmark-tpch.md"
 ---
 
 本工具基于基准测试工具 [TPC-H](https://www.tpc.org/tpch/default5.asp)。

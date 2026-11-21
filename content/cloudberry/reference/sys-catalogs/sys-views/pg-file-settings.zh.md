@@ -2,7 +2,7 @@
 title: "pg_file_settings"
 description: "`pg_file_settings` 视图提供服务器配置文件的摘要，显示各参数的名称、值、源文件、行号、是否成功应用以及相关错误消息。"
 weight: 170
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-file-settings.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-file-settings.md"
 ---
 
 此视图有助于验证配置更改以及诊断配置文件中的问题。

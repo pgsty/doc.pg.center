@@ -2,7 +2,7 @@
 title: "在 AO 表上创建唯一索引"
 description: "在 Apache Cloudberry 中，可以为 AO 表或 AOCS 列存表创建唯一索引。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/use-unique-index-on-ao-tables.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/use-unique-index-on-ao-tables.md"
 ---
 
 有了唯一索引，Apache Cloudberry 会在向 AO 表插入数据时检查唯一约束，确保数据的唯一性。同时，数据库会通过优化器优化特定查询，提高查询性能。不过，维护唯一索引也会带来一定开销，尤其是在插入数据时。

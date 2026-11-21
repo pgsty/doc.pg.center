@@ -2,7 +2,7 @@
 title: "创建和管理分区表"
 description: "本文介绍如何使用推荐语法在 Apache Cloudberry 中创建和维护分区表。"
 weight: 110
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-partitioned-tables.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-partitioned-tables.md"
 ---
 
 有关分区表的更多信息，请参见[表分区概述](/cloudberry/operate-with-data/operate-with-db-objects/about-table-partitioning/)。

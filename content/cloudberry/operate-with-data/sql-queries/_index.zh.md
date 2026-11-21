@@ -2,7 +2,7 @@
 title: "SQL 查询"
 description: "Apache Cloudberry 构建于 PostgreSQL 之上，并遵循 SQL 标准进行数据定义、操作和分析。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/index.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/index.md"
 ---
 
 要有效地定义查询，需要理解决定 SQL 语法和语义的规则。

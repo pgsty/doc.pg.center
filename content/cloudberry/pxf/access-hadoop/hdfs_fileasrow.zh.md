@@ -2,7 +2,7 @@
 title: "将多行文本文件读入单个表行"
 description: "通过 PXF 将多行文本文件作为单个表行读取。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-hadoop/hdfs_fileasrow.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-hadoop/hdfs_fileasrow.md"
 ---
 
 您可以使用 PXF HDFS 连接器，将 HDFS 中的一个或多个多行文本文件分别作为单个表行读取。当您希望将多个文件读入同一个 Apache Cloudberry 外部表时，这种方式可能很有用，例如各个 JSON 文件分别包含一条独立记录的情况。

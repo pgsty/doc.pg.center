@@ -2,7 +2,7 @@
 title: "使用 RuntimeFilter 优化连接查询"
 description: "对大型表执行连接查询时，Apache Cloudberry 的 SQL 优化器经常使用 HashJoin 算子。"
 weight: 110
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/use-runtimefilter-to-optimize-queries.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/use-runtimefilter-to-optimize-queries.md"
 ---
 
 HashJoin 根据连接键构建 hash 表并匹配连接键，可能产生内存访问瓶颈和磁盘瓶颈。RuntimeFilter 是一种在 HashJoin 操作期间实时生成过滤器的优化技术，可以在执行 HashJoin 前预先过滤数据，加速 HashJoin。在某些场景中，RuntimeFilter 优化能使执行效率翻倍。

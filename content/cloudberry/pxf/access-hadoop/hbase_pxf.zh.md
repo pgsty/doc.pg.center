@@ -2,7 +2,7 @@
 title: "读取 HBase 表数据"
 description: "使用 PXF 读取 HBase 表数据。"
 weight: 100
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-hadoop/hbase_pxf.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-hadoop/hbase_pxf.md"
 ---
 
 Apache HBase 是建立在 Hadoop 之上的分布式、带版本的非关系型数据库。
@@ -15,7 +15,7 @@ PXF HBase 连接器读取存储在 HBase 表中的数据。HBase 连接器支持
 
 在处理 HBase 表数据之前，请确保您已经：
 
-- 将 `<PXF_INSTALL_DIR>/share/pxf-hbase-*.jar` 复制到 HBase 集群中的每个节点，并且该 PXF JAR 文件的位置位于 `$HBASE_CLASSPATH` 中。PXF HBase 连接器需要此配置才能支持过滤条件下推。
+- 将 `<PXF_INSTALL_DIR>/share/pxf-hbase-lib-*.jar` 复制到 HBase 集群中的每个节点，并将此 JAR 加入 `$HBASE_CLASSPATH`。该 JAR 包含 HBase RegionServer 使用的过滤比较器，兼容 Java 8。请从 RegionServer 的类路径中移除旧版完整 `pxf-hbase` JAR。
 - 满足 PXF Hadoop [前提条件](/cloudberry/pxf/access-hadoop/#prerequisites)。
 
 ## HBase 入门 {#hbase-primer}

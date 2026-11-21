@@ -2,7 +2,7 @@
 title: "数据库统计信息"
 description: "概述 Apache Cloudberry 中 ANALYZE 命令收集的统计信息。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/product-principles/about-statistics.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/product-principles/about-statistics.md"
 ---
 
 统计信息是描述数据库中所存数据的元数据。查询优化器需要最新的统计信息，才能为查询选择最佳执行计划。例如，查询连接两个表，且必须将其中一个表广播到所有 Segment 时，优化器可以选择较小的表，以减少网络流量。

@@ -2,7 +2,7 @@
 title: "从 Web 服务加载数据"
 description: "在 Apache Cloudberry 中，要从 Web 服务或任何可通过命令行访问的来源加载数据，可以创建外部 Web 表。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/load-data-from-web-services.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/load-data-from-web-services.md"
 ---
 
 支持的数据格式为 `TEXT` 和 `CSV`。

@@ -2,7 +2,7 @@
 title: "gp_distributed_log"
 description: "`gp_distributed_log` 视图包含分布式事务及其关联的本地事务的状态信息。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-distributed-log.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-distributed-log.md"
 ---
 
 分布式事务是涉及修改 Segment 实例上数据的事务。Apache Cloudberry 的分布式事务管理器确保各 Segment 保持同步。此视图可用于查看分布式事务的状态。

@@ -2,7 +2,7 @@
 title: "理解 Segment 恢复"
 description: "本节介绍 Segment 恢复的相关概念和原理。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/high-availability/understand-segment-recovery.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/high-availability/understand-segment-recovery.md"
 ---
 
 如果已有 Segment 停止运行，需要立即恢复，请参见[从 Segment 故障中恢复](/cloudberry/sys-admin/high-availability/recover-from-segment-failures/)中的操作说明。关于 Apache Cloudberry 如何检测 Segment 停止运行，以及用于跟踪故障 Segment 的容错服务器（FTS），参见 [Apache Cloudberry 如何检测 Segment 故障](/cloudberry/sys-admin/high-availability/detect-a-failed-segment/)。

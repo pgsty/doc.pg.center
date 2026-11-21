@@ -2,7 +2,7 @@
 title: "SET CONSTRAINTS"
 description: "设置当前事务的约束检查时机。"
 weight: 1690
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sql-stmts/set-constraints.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sql-stmts/set-constraints.md"
 ---
 
 > **注意** 接受引用完整性语法（外键约束），但不强制执行。

@@ -2,7 +2,7 @@
 title: "配置行级安全策略"
 description: "行级安全（RLS）策略允许表所有者定义访问策略，控制用户对表中特定行的访问。"
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/security/configure-row-level-security-policy.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/security/configure-row-level-security-policy.md"
 ---
 
 当用户尝试查询或更新表时，系统会先应用 RLS 策略，然后才执行用户发出的任何用于截断表中行的命令。

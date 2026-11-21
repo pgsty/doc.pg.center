@@ -2,7 +2,7 @@
 title: "模式设计最佳实践"
 description: "设计 Apache Cloudberry 模式的最佳实践。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/best-practices/schema-design-best-practices.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/best-practices/schema-design-best-practices.md"
 ---
 
 Apache Cloudberry 是一个采用无共享架构的分析型数据库，与高度规范化的事务型 SMP 数据库有很大差异。Apache Cloudberry 最适合采用面向 MPP 分析处理的非规范化模式设计，例如星型模式或雪花模式：使用大型中心事实表连接多个较小的维度表。

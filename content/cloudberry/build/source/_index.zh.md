@@ -3,7 +3,7 @@ title: "从源码构建 Apache Cloudberry：完整指南"
 linkTitle: "从源码构建（完整指南）"
 description: "本文面向希望探索 Apache Cloudberry，并可能参与贡献的开发者。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/build/index.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/build/index.md"
 ---
 
 本文所述构建环境仅针对开发和测试用途进行了优化。

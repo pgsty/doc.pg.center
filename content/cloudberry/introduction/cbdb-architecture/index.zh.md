@@ -3,7 +3,7 @@ title: "Apache Cloudberry 架构"
 linkTitle: "架构"
 description: "本文介绍 Apache Cloudberry 的产品架构及内部模块的实现机制。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/introduction/cbdb-architecture.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/introduction/cbdb-architecture.md"
 ---
 
 在大多数情况下，Apache Cloudberry 在 SQL 支持、特性、配置选项和面向用户的功能方面都与 PostgreSQL 相似。用户可以采用与独立 PostgreSQL 系统类似的方式使用 Apache Cloudberry。

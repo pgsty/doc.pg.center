@@ -2,7 +2,7 @@
 title: "pg_description"
 description: "`pg_description` 系统目录表为各个数据库对象存储可选的描述（注释）。"
 weight: 190
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-description.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-description.md"
 ---
 
 可以使用 `COMMENT` 命令管理描述，并通过 `psql` 的 `\d` 元命令查看。`pg_description` 的初始内容提供了许多内置系统对象的描述。另见 [pg_shdescription](/cloudberry/reference/sys-catalogs/sys-tables/pg-shdescription/)，它对 Cloudberry 系统共享对象的描述提供类似功能。

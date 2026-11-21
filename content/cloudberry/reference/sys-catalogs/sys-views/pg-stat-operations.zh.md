@@ -2,7 +2,7 @@
 title: "pg_stat_operations"
 description: "`pg_stat_operations` 视图显示对数据库对象（例如表、索引、视图或数据库）或全局对象（例如角色）执行的最后一次操作的详细信息。"
 weight: 250
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-operations.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-operations.md"
 ---
 
 |列|类型|引用|说明|

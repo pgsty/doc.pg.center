@@ -2,7 +2,7 @@
 title: "在数据库表中检索文本"
 description: "本文介绍如何使用文本检索运算符搜索数据库表，以及如何创建索引来加快文本检索。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/search-text-in-db.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/search-text-in-db.md"
 ---
 
 上一节中的示例使用简单的常量字符串展示了全文匹配。本节介绍如何搜索表数据，以及如何选择使用索引。

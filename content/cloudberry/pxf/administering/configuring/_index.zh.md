@@ -2,7 +2,7 @@
 title: "配置 PXF"
 description: "安装后配置 PXF。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/instcfg_pxf.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/instcfg_pxf.md"
 ---
 
 Apache Cloudberry 部署由一台 Coordinator 主机、一台 Standby Coordinator 主机和多台 Segment 主机组成。配置 Apache Cloudberry Platform Extension Framework (PXF) 之后，你需要在每台 Apache Cloudberry 主机上启动一个 PXF JVM 进程（PXF Service）。
@@ -11,7 +11,7 @@ PXF 提供了连接 Hadoop、Hive、HBase、对象存储、网络文件系统和
 
 要配置 PXF，必须：
 
-1. 按照[为 PXF 安装 Java](/cloudberry/pxf/administering/configuring/install_java/)中的说明，在每台 Apache Cloudberry 主机上安装 Java 8 或 11。如果 `JAVA_HOME` 不是 `/usr/java/default`，则必须在 `pxf-env.sh` [配置文件](/cloudberry/pxf/administering/configuring/config_files/)中指定其值，以告知 PXF `$JAVA_HOME` 的设置。
+1. 按照[为 PXF 安装 Java](/cloudberry/pxf/administering/configuring/install_java/)中的说明，在每台 Apache Cloudberry 主机上安装 Java 17 或 21。如果 `JAVA_HOME` 不是 `/usr/java/default`，则必须在 `pxf-env.sh` [配置文件](/cloudberry/pxf/administering/configuring/config_files/)中指定其值，以告知 PXF `$JAVA_HOME` 的设置。
     - 在 Apache Cloudberry Coordinator 主机上编辑 `$PXF_BASE/conf/pxf-env.sh` 文件。
 
         ```shell

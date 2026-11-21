@@ -2,7 +2,7 @@
 title: "控制文本检索"
 description: "本文介绍如何创建检索向量和查询向量、如何对检索结果排名，以及如何在文本检索查询的结果中突出显示检索词。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/control-text-search.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/control-text-search.md"
 ---
 
 要实现全文检索，必须有一个函数能够从文档创建 `tsvector`，并有一个函数能够从用户查询创建 `tsquery`。此外，还需要按有用的顺序返回结果，因此需要一个能够根据文档与查询的相关性比较文档的函数。能够以良好的方式显示结果也很重要。Apache Cloudberry 为所有这些功能提供了支持。

@@ -2,7 +2,7 @@
 title: "系统监控与维护"
 description: "确保 Apache Cloudberry 高可用和最佳性能的定期维护最佳实践。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/best-practices/system-monitor-and-maintain-best-practices.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/best-practices/system-monitor-and-maintain-best-practices.md"
 ---
 
 - [使用 ANALYZE 更新统计信息](/cloudberry/performance/update-stats-using-analyze/)

@@ -2,7 +2,7 @@
 title: "系统扩容概述"
 description: "可以在停机时间很短的情况下扩容 Apache Cloudberry，添加 Segment 实例和 Segment 主机。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/expand-cluster/system-expansion-overview.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/expand-cluster/system-expansion-overview.md"
 ---
 
 通常，向 Cloudberry 集群添加节点可以使性能和存储容量线性扩展。

@@ -2,7 +2,7 @@
 title: "执行增量备份与恢复"
 description: "使用 gpbackup 创建一致的增量备份集，并使用 gprestore 恢复这些备份。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/backup-and-restore/perform-incremental-backup-and-restore.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/backup-and-restore/perform-incremental-backup-and-restore.md"
 ---
 
 阅读本文前，应先阅读[执行全量备份与恢复](/cloudberry/sys-admin/backup-and-restore/perform-full-backup-and-restore/)。

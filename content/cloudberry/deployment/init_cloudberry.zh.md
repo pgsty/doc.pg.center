@@ -2,7 +2,7 @@
 title: "初始化 Apache Cloudberry"
 description: "Apache Cloudberry 是分布式系统，因此初始化 Apache Cloudberry 数据库管理系统时，需要初始化多个独立的 PostgreSQL 数据库实例（在 Cloudberry 中称为 *Segment 实例*）。"
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/deployment/init_cloudberry.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/deployment/init_cloudberry.md"
 ---
 
 必须初始化系统所有主机上的各个数据库实例（Coordinator 和所有 Segment），使它们能够协同工作，构成统一的 DBMS。Cloudberry 提供了自己的 `initdb` 版本，即 [gpinitsystem](/cloudberry/reference/sys-utilities/gpinitsystem/)，负责初始化 Coordinator 和每个 Segment 实例上的数据库，并按正确顺序启动各个实例。

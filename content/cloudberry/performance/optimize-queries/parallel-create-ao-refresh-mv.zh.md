@@ -2,7 +2,7 @@
 title: "并行创建 AO/AOCO 表和刷新物化视图"
 description: "Apache Cloudberry 支持使用 `CREATE TABLE AS` 语句并行创建 AO 行存表和 AOCO 列存表，并支持并行刷新基于 AO 或 AOCO 表的物化视图。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/parallel-create-ao-refresh-mv.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/parallel-create-ao-refresh-mv.md"
 ---
 
 并行处理可以加速表创建和物化视图刷新。

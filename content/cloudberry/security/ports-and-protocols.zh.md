@@ -3,7 +3,7 @@ title: "Apache Cloudberry 端口与协议"
 linkTitle: "端口与协议"
 description: "列出 Cloudberry 集群内部使用的网络端口和协议。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/security/ports-and-protocols.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/security/ports-and-protocols.md"
 ---
 
 Apache Cloudberry 客户端通过 TCP 连接到 Cloudberry Coordinator 实例的客户端连接端口，默认端口为 `5432`。可以在 postgresql.conf 配置文件中重新配置监听端口。客户端连接使用 PostgreSQL libpq API。`psql` 命令行接口、若干 Cloudberry 工具以及各编程语言的 API，都会直接使用 libpq 库，或在内部实现 `libpq` 协议。

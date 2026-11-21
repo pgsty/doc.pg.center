@@ -2,7 +2,7 @@
 title: "日常系统维护任务"
 description: "为了使 Apache Cloudberry 系统高效运行，必须定期清理过期数据并更新表统计信息，使查询优化器拥有准确的信息。"
 weight: 100
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/routine-maintain-tasks.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/routine-maintain-tasks.md"
 ---
 
 Apache Cloudberry 要求定期执行某些任务，以获得最佳性能。这里讨论的任务是必需的，但数据库管理员可以使用 `cron` 脚本等标准 UNIX 工具自动执行这些任务。管理员设置相应脚本，并检查脚本是否成功运行。有关可以实施的其他维护活动，请参见[推荐的监控与维护任务](/cloudberry/sys-admin/recommended-maintenance-monitoring-tasks/)，以使 Cloudberry 系统保持最佳运行状态。

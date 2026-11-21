@@ -2,7 +2,7 @@
 title: "使用列级压缩"
 description: "Apache Cloudberry 支持列级压缩，通过压缩指定列来减少存储空间占用。"
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/use-columnar-compression.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/use-columnar-compression.md"
 ---
 
 在某些情况下，列级压缩还可以提高查询性能，特别是在处理大规模数据时。

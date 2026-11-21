@@ -3,7 +3,7 @@ title: "Apache Cloudberry 中的事务并发控制"
 linkTitle: "事务并发控制"
 description: "了解 Apache Cloudberry 中的 MVCC、事务隔离、锁模式和全局死锁检测。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/transactional-concurrency-control.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/transactional-concurrency-control.md"
 ---
 
 本文介绍 Apache Cloudberry 的事务并发控制，包括：

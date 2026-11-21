@@ -3,10 +3,14 @@ title: "Apache Cloudberry 项目历程"
 linkTitle: "项目历程"
 description: "本页记录 Apache Cloudberry 从诞生至今的发展历程与关键里程碑。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/introduction/cloudberry-history.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/introduction/cloudberry-history.md"
 ---
 
 ## 时间线 {#timeline}
+
+- **2026 年 11 月：Apache Cloudberry（孵化中）2.2.0 发布**\
+  2.2.0 版本发布，将内核从 PostgreSQL 14.4 升级到 14.10，新增六个扩展，扩大平台支持范围，并协同发布 PXF、Backup 和首次发布的 Go Libs。\
+  [2.2 预览](https://cloudberry.apache.org/blog/apache-cloudberry-2.2.0-preview) · [公告](https://cloudberry.apache.org/blog/announce-apache-cloudberry-2.2.0) · [变更日志](https://cloudberry.apache.org/releases/2.2.0-incubating)
 
 - **2026 年 5 月：升级至 PostgreSQL 16.9 内核**\
   主分支将 PostgreSQL 内核从 14.4 升级至 PostgreSQL 16.9，为 MPP 平台带来现代 PostgreSQL 特性、性能改进和安全修复。\
@@ -31,6 +35,7 @@ upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23
 
 Apache Cloudberry 定期向 Apache 孵化器项目管理委员会（PMC）提交孵化报告，详细介绍社区发展、版本发布进展和项目成熟度。
 
+- [2026 年 8 月](https://cloudberry.apache.org/blog/apache-cloudberry-incubation-report-202608)
 - [2026 年 5 月](https://cloudberry.apache.org/blog/apache-cloudberry-incubation-report-202605)
 - [2026 年 2 月](https://cloudberry.apache.org/blog/apache-cloudberry-incubation-report-202602)
 - [2025 年 11 月](https://cloudberry.apache.org/blog/apache-cloudberry-incubation-report-202511)

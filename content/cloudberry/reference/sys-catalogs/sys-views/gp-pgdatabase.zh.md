@@ -2,7 +2,7 @@
 title: "gp_pgdatabase"
 description: "`gp_pgdatabase` 视图显示 Apache Cloudberry Segment 实例的状态，以及它们当前是镜像还是主实例。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-pgdatabase.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-pgdatabase.md"
 ---
 
 Apache Cloudberry 的故障检测和恢复工具在内部使用此视图来识别故障 Segment。

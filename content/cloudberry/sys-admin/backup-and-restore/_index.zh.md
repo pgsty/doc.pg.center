@@ -3,7 +3,7 @@ title: "备份与恢复概述"
 linkTitle: "备份与恢复"
 description: "Apache Cloudberry 提供并行和非并行的数据库备份与恢复方法。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/backup-and-restore/index.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/backup-and-restore/index.md"
 ---
 
 并行操作会同时将数据写入每个 Segment 主机的本地磁盘，因此能够高效处理大型系统。非并行操作则通过网络将所有数据传输到 Coordinator，再由 Coordinator 将数据写入自己的存储。这种方法不仅会把 I/O 集中到一台主机上，还要求 Coordinator 有足够的本地磁盘空间来保存整个数据库。

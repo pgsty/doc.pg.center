@@ -2,7 +2,7 @@
 title: "gp_distribution_policy"
 description: "`pg_catalog` 模式中的 `gp_distribution_policy` 表记录 Apache Cloudberry 表及其在各个 Segment 之间分布数据的策略。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/gp-distribution-policy.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/gp-distribution-policy.md"
 ---
 
 此表只在 Coordinator 上填充。此表不在全局共享，即每个数据库都有自己的副本。

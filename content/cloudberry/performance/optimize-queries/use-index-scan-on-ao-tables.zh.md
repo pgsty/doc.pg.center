@@ -2,7 +2,7 @@
 title: "在 AO 表上使用 IndexScan"
 description: "在 Apache Cloudberry 的 AO 表上使用索引扫描，加速选择性强的查询。"
 weight: 100
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/use-index-scan-on-ao-tables.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/use-index-scan-on-ao-tables.md"
 ---
 
 Apache Cloudberry 支持在查询 AO 表时使用 IndexScan，以提高特定场景中的查询效率，例如以下查询：

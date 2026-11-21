@@ -2,7 +2,7 @@
 title: "第 3 课：创建表"
 description: "学习如何在 Apache Cloudberry 中创建表。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/quick-trial-lessons/create-tables.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/quick-trial-lessons/create-tables.md"
 ---
 
 在[第 2 课：创建和准备数据库](/cloudberry/tutorials/quick-trial-lessons/create-and-prepare-database/)中创建并准备好数据库后，就可以开始在数据库中创建表。

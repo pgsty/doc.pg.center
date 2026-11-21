@@ -2,7 +2,7 @@
 title: "pg_resgroup"
 description: "`pg_resgroup` 系统目录表包含 Apache Cloudberry 资源组的信息，资源组用于管理并发语句、CPU 和内存资源。"
 weight: 270
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-resgroup.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-resgroup.md"
 ---
 
 > [!NOTE]

@@ -2,7 +2,7 @@
 title: "启用 Segment 镜像"
 description: "主 Segment 不可用时，镜像 Segment 允许数据库查询通过故障切换转到备用 Segment。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/high-availability/enable-segment-mirroring.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/high-availability/enable-segment-mirroring.md"
 ---
 
 默认情况下，镜像与主 Segment 配置在同一组主机上。也可以选择一组完全不同的主机部署镜像 Segment，使其不与任何主 Segment 共用机器。

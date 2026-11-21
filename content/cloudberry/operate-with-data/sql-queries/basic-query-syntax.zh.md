@@ -3,7 +3,7 @@ title: "Apache Cloudberry 基本查询"
 linkTitle: "基本查询语法"
 description: "本文介绍 Apache Cloudberry 的基本查询。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/basic-query-syntax.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/basic-query-syntax.md"
 ---
 
 Apache Cloudberry 是基于 PostgreSQL 和 Greenplum 开发的高性能、高度并行的数据仓库。下面是基本查询语法的一些示例。

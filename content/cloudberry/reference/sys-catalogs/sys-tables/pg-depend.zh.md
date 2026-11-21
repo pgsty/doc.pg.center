@@ -2,7 +2,7 @@
 title: "pg_depend"
 description: "`pg_depend` 系统目录表记录数据库对象之间的依赖关系。"
 weight: 180
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-depend.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-depend.md"
 ---
 
 这些信息让 `DROP` 命令能够确定执行 `DROP CASCADE` 时还必须删除哪些对象，或在使用 `DROP RESTRICT` 时阻止删除。另见 [pg_shdepend](/cloudberry/reference/sys-catalogs/sys-tables/pg-shdepend/)，它对涉及 Cloudberry 系统共享对象的依赖关系提供类似功能。

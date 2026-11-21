@@ -2,7 +2,7 @@
 title: "配置 PXF 服务器"
 description: "配置具名 PXF 服务器。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/cfg_server.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/cfg_server.md"
 ---
 
 本主题概述 PXF 服务器配置。要配置某个服务器，请参阅与要配置的连接器对应的主题。
@@ -46,10 +46,6 @@ gs-site.xml    hive-site.xml   minio-site.xml   wasbs-site.xml
     <property>
         <name>fs.s3a.secret.key</name>
         <value>YOUR_AWS_SECRET_ACCESS_KEY</value>
-    </property>
-    <property>
-        <name>fs.s3a.fast.upload</name>
-        <value>true</value>
     </property>
 </configuration>
 ```
@@ -132,6 +128,8 @@ PXF 包含一个名为 `pxf-site.xml` 的模板文件，用于 PXF 特有的配�
 你可以使用 `pxf.fs.basePath` 属性，将用户对文件的访问限制在特定的远程目录内。设置后，此属性适用于任何访问文件的 Profile，包括 `*:text`、`*:parquet`、`*:json` 等。
 
 为服务器配置 `pxf.fs.basePath` 属性后，PXF 会将 `CREATE EXTERNAL TABLE` 的 `LOCATION` 子句中指定的文件路径视为相对于此基础路径设置，并据此构造远程路径。
+
+在配置的文件系统中解析的 Avro 模式路径也使用此基础路径，包括 `SCHEMA` 选项中的绝对路径。例如，设置 `pxf.fs.basePath=/data` 时，`SCHEMA=/schemas/example.avsc` 解析为 `/data/schemas/example.avsc`。如果相对模式名称在 PXF 类路径中找到，则从类路径加载。参见 [Avro 模式与数据](/cloudberry/pxf/access-hadoop/hdfs_avro/#avro-schemas-and-data)。
 
 > <b>注意：</b>当你配置 PXF 服务器以通过 `file:*` Profile 访问网络文件系统时，必须设置 `pxf.fs.basePath`。对于访问 Hadoop 或对象存储中文件的 PXF 服务器，此属性是可选的。
 

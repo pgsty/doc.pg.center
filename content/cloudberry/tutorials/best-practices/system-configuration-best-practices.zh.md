@@ -3,7 +3,7 @@ title: "系统配置最佳实践"
 linkTitle: "系统配置"
 description: "为配置 Apache Cloudberry 集群主机的系统管理员提供的要求和最佳实践。"
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/best-practices/system-configuration-best-practices.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/best-practices/system-configuration-best-practices.md"
 ---
 
 Apache Cloudberry 集群通常以 root 身份配置。

@@ -2,7 +2,7 @@
 title: "pg_statistic"
 description: "`pg_statistic` 系统目录表存储数据库内容的统计数据。"
 weight: 380
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-statistic.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-statistic.md"
 ---
 
 这些条目由 [`ANALYZE`](/cloudberry/reference/sql-stmts/analyze/) 创建，随后供查询规划器使用。请注意，即使统计数据是最新的，它们本质上也都是近似值。

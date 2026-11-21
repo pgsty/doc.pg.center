@@ -2,7 +2,7 @@
 title: "重分布表"
 description: "重新分布表，使现有数据在扩容后的集群中保持平衡。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/expand-cluster/redistribute-tables.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/expand-cluster/redistribute-tables.md"
 ---
 
 创建扩容模式后，可以使用 [`gpexpand`](/cloudberry/reference/sys-utilities/gpexpand/) 在整个系统中重新分布表。计划在低使用时段执行此操作，此时工具的 CPU 使用和表锁对运行的影响最小。对要重新分布的表进行排序，优先处理最大或最关键的表。

@@ -2,7 +2,7 @@
 title: "内存概述"
 description: "内存是 Apache Cloudberry 系统的关键资源；高效利用内存可以保障高性能和高吞吐量。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/memory-overview.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/memory-overview.md"
 ---
 
 本节介绍 Segment 主机内存如何在各个 Segment 之间分配，以及管理员可以使用哪些选项配置内存。

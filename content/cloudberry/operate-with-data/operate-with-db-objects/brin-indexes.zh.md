@@ -2,7 +2,7 @@
 title: "BRIN 索引"
 description: "当表非常大，且某些列的值与其物理存储位置存在天然相关性时，可以使用块范围索引（BRIN）。"
 weight: 100
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/brin-indexes.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/brin-indexes.md"
 ---
 
 BRIN 索引为一段块（或页）的范围内的值生成摘要，每个范围包含表中一组物理上相邻的页。例如，在存储订单数据的表中，较早的订单通常出现在表的开头。类似地，在邮政编码表中，同一个城市的编码可能在物理上聚集在一起。

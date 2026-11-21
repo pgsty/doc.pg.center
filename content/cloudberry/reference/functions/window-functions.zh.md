@@ -3,7 +3,7 @@ title: "Apache Cloudberry 窗口函数"
 linkTitle: "窗口函数"
 description: "以下是 Apache Cloudberry 的内置窗口函数。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/functions/window-functions.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/functions/window-functions.md"
 ---
 
 所有窗口函数均为*不可变*函数。<!-- For more information about window functions, see "Window Expressions" in the *Apache Cloudberry Administrator Guide*. -->

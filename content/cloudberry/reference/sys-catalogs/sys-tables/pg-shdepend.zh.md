@@ -2,7 +2,7 @@
 title: "pg_shdepend"
 description: "`pg_shdepend` 系统目录表记录数据库对象与角色等共享对象之间的依赖关系。"
 weight: 340
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-shdepend.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-shdepend.md"
 ---
 
 这些信息使 Apache Cloudberry 能够在尝试删除这些对象之前，确保没有对象引用它们。另请参阅 [pg_depend](/cloudberry/reference/sys-catalogs/sys-tables/pg-depend/)，它为单个数据库内的对象依赖关系提供类似功能。与大多数系统目录不同，`pg_shdepend` 由 Cloudberry 系统中的所有数据库共享：每个系统只有一份 `pg_shdepend`，而不是每个数据库一份。

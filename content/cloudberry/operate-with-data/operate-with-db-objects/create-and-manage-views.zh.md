@@ -3,7 +3,7 @@ title: "在 Apache Cloudberry 中创建和管理视图"
 linkTitle: "创建和管理视图"
 description: "在 Apache Cloudberry 中，视图允许保存经常使用或复杂的查询，然后在 `SELECT` 语句中像访问表一样访问这些查询。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-views.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-views.md"
 ---
 
 视图不会在磁盘上物化：访问视图时，查询会作为子查询运行。

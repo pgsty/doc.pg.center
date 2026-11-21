@@ -2,7 +2,7 @@
 title: "验证硬件与网络"
 description: "使用 gpcheckperf 验证 Apache Cloudberry 主机的网络、磁盘 I/O 和内存带宽性能。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/deployment/validate.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/deployment/validate.md"
 ---
 
 Cloudberry 提供了名为 [gpcheckperf](/cloudberry/reference/sys-utilities/gpcheckperf/) 的管理工具，可用于识别 Apache Cloudberry 阵列中各台机器的硬件和系统层面问题。`gpcheckperf` 会在指定主机上启动会话，并运行以下性能测试：

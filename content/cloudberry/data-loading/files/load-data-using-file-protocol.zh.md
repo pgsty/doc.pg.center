@@ -3,7 +3,7 @@ title: "使用 file:// 协议向 Apache Cloudberry 加载数据"
 linkTitle: "使用 file 协议加载数据"
 description: "`file://` 协议是 Apache Cloudberry 特有的协议，允许你从本地 Segment 主机上的文件向 Apache Cloudberry 加载数据。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/load-data-using-file-protocol.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/load-data-using-file-protocol.md"
 ---
 
 `file://` 协议用于指定操作系统文件位置的 URI。使用 `file://` 协议创建的外部表是只读表。

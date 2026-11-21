@@ -2,7 +2,7 @@
 title: "第 2 课：创建和准备数据库"
 description: "创建一个新的 Apache Cloudberry 数据库。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/quick-trial-lessons/create-and-prepare-database.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/quick-trial-lessons/create-and-prepare-database.md"
 ---
 
 在 Apache Cloudberry 中创建新数据库时，可以在 `psql` 客户端中使用 `CREATE DATABASE` SQL 命令，也可以使用 `createdb` 工具。`createdb` 工具是 `CREATE DATABASE` 命令的封装。

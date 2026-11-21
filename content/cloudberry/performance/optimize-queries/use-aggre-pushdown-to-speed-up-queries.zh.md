@@ -3,7 +3,7 @@ title: "使用聚合下推加速查询执行"
 linkTitle: "使用聚合下推加速查询执行"
 description: "聚合下推是一种将聚合操作移近数据源的优化技术。"
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/use-aggre-pushdown-to-speed-up-queries.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/use-aggre-pushdown-to-speed-up-queries.md"
 ---
 
 Apache Cloudberry 支持下推聚合操作，即在连接算子之前执行聚合算子。

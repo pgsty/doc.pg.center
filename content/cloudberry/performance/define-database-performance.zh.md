@@ -2,7 +2,7 @@
 title: "定义数据库性能"
 description: "系统性能管理包括衡量性能、查明性能问题的原因，以及使用现有工具和技术解决问题。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/define-database-performance.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/define-database-performance.md"
 ---
 
 Apache Cloudberry 根据数据库管理系统（DBMS）向请求方提供信息的速率来衡量数据库性能。

@@ -2,7 +2,7 @@
 title: "表别名和列别名"
 description: "可以为表和复杂的表引用指定临时名称，以便在查询的其余部分引用派生表。"
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/table-and-column-aliases.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/table-and-column-aliases.md"
 ---
 
 这称为表别名。

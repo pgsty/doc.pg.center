@@ -2,7 +2,7 @@
 title: "使用 RPM/DEB 软件包安装"
 description: "本文介绍如何使用 RPM 或 DEB 软件包，在物理机或虚拟机上手动部署 Apache Cloudberry。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/deployment/install_cloudberry.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/deployment/install_cloudberry.md"
 ---
 
 阅读本文前，建议先阅读[平台要求](/cloudberry/deployment/platform-requirements/)和[配置系统](/cloudberry/deployment/prepare-to-deploy/)。

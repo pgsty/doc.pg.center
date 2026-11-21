@@ -3,7 +3,7 @@ title: "在 Apache Cloudberry 中管理角色与权限"
 linkTitle: "管理角色与权限"
 description: "Apache Cloudberry 的授权机制将角色及其访问数据库对象的权限存储在数据库中，并通过 SQL 语句或命令行工具进行管理。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/security/manage-roles-and-privileges.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/security/manage-roles-and-privileges.md"
 ---
 
 Apache Cloudberry 使用*角色*管理数据库访问权限。角色的概念涵盖了*用户*和*组*。角色可以是数据库用户、组，也可以同时兼具两者身份。角色可以拥有数据库对象（例如表），并将这些对象的权限授予其他角色，以控制对象访问。角色也可以是其他角色的成员，因此成员角色可以继承其父角色的对象权限。

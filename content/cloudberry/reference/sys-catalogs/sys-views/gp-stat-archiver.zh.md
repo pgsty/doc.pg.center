@@ -2,7 +2,7 @@
 title: "gp_stat_archiver"
 description: "`gp_stat_archiver` 视图提供 Apache Cloudberry 集群中每个 Segment 的 WAL 归档进程信息。"
 weight: 110
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-stat-archiver.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-stat-archiver.md"
 ---
 
 其中包括成功归档的 WAL 文件数量、最后一个已归档 WAL 文件的名称和归档时间、归档失败次数以及最近一次失败的详细信息等指标。此视图有助于监控和诊断整个集群的 WAL 归档情况。

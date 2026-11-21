@@ -2,7 +2,7 @@
 title: "pg_class"
 description: "系统目录表 `pg_class` 记录表，以及几乎所有其他具有列或在其他方面与表类似的对象。"
 weight: 210
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-class.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-class.md"
 ---
 
 这些对象包括索引（另见 `pg_index`）、序列、视图、物化视图、复合类型和 TOAST 表。下文统称这些对象为“关系”。并非所有列对每种关系类型都有意义。

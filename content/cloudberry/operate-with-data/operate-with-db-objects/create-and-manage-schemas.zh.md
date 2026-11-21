@@ -3,7 +3,7 @@ title: "在 Apache Cloudberry 中创建和管理模式"
 linkTitle: "创建和管理模式"
 description: "在 Apache Cloudberry 中，模式以逻辑方式组织数据库中的对象和数据。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-schemas.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-schemas.md"
 ---
 
 模式允许数据库中存在多个同名对象（例如表），只要这些对象位于不同模式中，就不会发生冲突。

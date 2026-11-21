@@ -2,7 +2,7 @@
 title: "创建并配置 gpadmin 用户"
 description: "为开发环境创建并配置 gpadmin 用户、sudo 权限、Cloudberry 环境和 SSH 认证。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/build/create-gpadmin-user.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/build/create-gpadmin-user.md"
 ---
 
 ## 安装 `sudo` 和 `git`（如果尚未安装） {#install-sudo--git-if-missing}

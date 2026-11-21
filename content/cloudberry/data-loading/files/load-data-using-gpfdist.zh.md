@@ -3,7 +3,7 @@ title: "使用 gpfdist 向 Apache Cloudberry 加载数据"
 linkTitle: "使用 gpfdist 加载数据"
 description: "要从本地主机文件或可通过内部网络访问的文件加载数据，可以在 `CREATE EXTERNAL TABLE` 语句中使用 `gpfdist` 协议。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/load-data-using-gpfdist.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/load-data-using-gpfdist.md"
 ---
 
 gpfdist 是一个文件服务器工具，运行在 Apache Cloudberry Coordinator 或 Standby Coordinator 以外的主机上。`gpfdist` 将该主机上某个目录中的文件提供给 Apache Cloudberry Segment。

@@ -2,7 +2,7 @@
 title: "[104-1] Apache Cloudberry 数据库内分析简介"
 description: "使用 MADlib 直接在 Apache Cloudberry 中运行分析。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/quick-trial-lessons/introduction-to-cloudberry-in-database-analytics.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/quick-trial-lessons/introduction-to-cloudberry-in-database-analytics.md"
 ---
 
 直接在 Apache Cloudberry 中运行分析，而不是将数据导出到独立的分析引擎，可以在探索大型数据集时获得更高的灵活性；由于分析过程可以在所有 Segment 之间并行执行，性能也会显著提高。

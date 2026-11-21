@@ -2,7 +2,7 @@
 title: "初始化新 Segment"
 description: "使用 `gpexpand` 工具创建并初始化新的 Segment 实例，并创建扩容模式。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/expand-cluster/initialize-new-segments.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/expand-cluster/initialize-new-segments.md"
 ---
 
 第一次使用有效输入文件运行 [`gpexpand`](/cloudberry/reference/sys-utilities/gpexpand/) 时，工具会创建并初始化 Segment 实例，并创建扩容模式。完成这些步骤后，再次运行 `gpexpand` 时，工具会检测扩容模式是否已创建；如果已创建，则执行表重分布。

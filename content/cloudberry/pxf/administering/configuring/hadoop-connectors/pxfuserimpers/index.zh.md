@@ -2,7 +2,7 @@
 title: "配置 Hadoop 用户、用户模拟和代理"
 description: "为 PXF 配置用户模拟和代理。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/hadoop-connectors/pxfuserimpers.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/hadoop-connectors/pxfuserimpers.md"
 ---
 
 PXF 代表 Apache Cloudberry 最终用户访问 Hadoop 服务。模拟（Impersonation）是向远程系统呈现 Apache Cloudberry 最终用户身份的一种方式。在 PXF 中，可以通过配置 Hadoop 代理用户来实现这一点。当 Hadoop 服务通过 Kerberos 保护时，你还可以选择使用 Kerberos 约束委派进行模拟。

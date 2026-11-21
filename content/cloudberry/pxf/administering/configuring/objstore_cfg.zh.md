@@ -2,7 +2,7 @@
 title: "配置 Azure 和 Google Cloud Storage 对象存储连接器（可选）"
 description: "配置连接 Azure 和 Google Cloud Storage 的 PXF 连接器。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/objstore_cfg.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/objstore_cfg.md"
 ---
 
 你可以使用 PXF 访问 Azure Data Lake Storage Gen2、Azure Blob Storage 和 Google Cloud Storage 对象存储。本主题介绍如何为这些外部数据源配置 PXF 连接器。

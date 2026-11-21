@@ -2,7 +2,7 @@
 title: "快速构建"
 description: "以下各节将详细、分步骤介绍如何从源码构建 Apache Cloudberry。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/build/quick-build.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/build/quick-build.md"
 ---
 
 不过，如果你熟悉这一流程，或希望快速上手，也可以直接复制并粘贴以下命令，将 Apache Cloudberry 运行起来。

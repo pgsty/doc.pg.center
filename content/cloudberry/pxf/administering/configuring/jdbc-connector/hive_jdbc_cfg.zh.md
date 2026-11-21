@@ -2,7 +2,7 @@
 title: "配置用于 Hive 访问的 JDBC 连接器（可选）"
 description: "配置用于 Hive 访问的 PXF JDBC 连接器。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/jdbc-connector/hive_jdbc_cfg.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/jdbc-connector/hive_jdbc_cfg.md"
 ---
 
 你可以使用 PXF JDBC 连接器从 Hive 检索数据。你也可以使用 JDBC 命名查询向 Hive 提交自定义 SQL 查询，并通过 JDBC 连接器检索结果。
@@ -14,7 +14,7 @@ upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b
 
 ## JDBC 服务器配置 {#jdbc-server-configuration}
 
-PXF JDBC 连接器安装时附带了通过 JDBC 访问 Hive 所需的 JAR 文件 `hive-jdbc-<version>.jar` 和 `hive-service-<version>.jar`，并会自动注册这些 JAR。
+PXF JDBC 连接器安装时附带了通过 JDBC 访问 Hive 所需的 JAR 文件，包括 `hive-jdbc-<version>.jar`、`hive-service-<version>.jar` 和 `hive-service-rpc-<version>.jar`，并会自动注册这些 JAR。
 
 为 Hive 访问配置 PXF JDBC 服务器时，必须指定 JDBC 驱动类名、数据库 URL 和客户端凭据，就像配置到 SQL 数据库的客户端连接一样。
 

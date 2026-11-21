@@ -496,7 +496,7 @@ cloudberry-20261121:
   modified: true
   source_ref: main
   snapshot_date: '2026-11-21'
-  language: en
+  languages: [en, zh]
   translation_baseline: cloudberry
 pxf-20261121:
   name: Apache Cloudberry PXF documentation
@@ -540,7 +540,7 @@ pxf-20261121:
   modified: true
   source_ref: main
   snapshot_date: '2026-11-21'
-  language: en
+  languages: [en, zh]
   translation_baseline: pxf
 documentdb-20261121:
   name: DocumentDB documentation

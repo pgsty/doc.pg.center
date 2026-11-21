@@ -2,7 +2,7 @@
 title: "加密数据与数据库连接"
 description: "本文介绍如何加密数据库中的静态数据和网络中传输的数据，以防止窃听和中间人攻击。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/security/encrypt-data-and-db-connections.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/security/encrypt-data-and-db-connections.md"
 ---
 
 - 客户端与 Coordinator 数据库之间的连接可以使用 SSL 加密。此功能由 `ssl` 服务器配置参数启用，该参数默认为 `off`。将 `ssl` 参数设为 `on` 后，客户端与 Coordinator 之间的通信就可以加密。必须为 Coordinator 数据库配置 SSL。有关使用 SSL 加密客户端连接的详细信息，请参阅[配置 OpenSSL](/cloudberry/security/client-auth/#openssl-configuration)。

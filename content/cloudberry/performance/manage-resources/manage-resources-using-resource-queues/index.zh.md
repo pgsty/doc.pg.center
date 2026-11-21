@@ -2,7 +2,7 @@
 title: "资源队列"
 description: "使用 Apache Cloudberry 资源队列根据业务要求确定查询优先级并分配资源，同时在资源不足时阻止查询启动。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/manage-resources-using-resource-queues.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/manage-resources-using-resource-queues.md"
 ---
 
 资源队列是管理 Apache Cloudberry 系统并发程度的一种工具。资源队列是使用 `CREATE RESOURCE QUEUE` SQL 语句创建的数据库对象。可以用它管理同时运行的活动查询数量、为不同类型查询分配的内存量，以及查询的相对优先级。资源队列还可以防止查询消耗过多资源而降低系统整体性能。

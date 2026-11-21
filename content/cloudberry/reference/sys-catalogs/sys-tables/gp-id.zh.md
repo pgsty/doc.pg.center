@@ -2,7 +2,7 @@
 title: "gp_id"
 description: "`pg_catalog` 模式中的 `gp_id` 系统目录表标识 Apache Cloudberry 系统的名称及其 Segment 数量。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/gp-id.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/gp-id.md"
 ---
 
 它还记录该表所在数据库实例（Segment 或 Coordinator）的 `local` 值。此表定义在 `pg_global` 表空间中，因此由系统中的所有数据库全局共享。

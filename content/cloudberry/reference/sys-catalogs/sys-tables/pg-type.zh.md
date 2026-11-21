@@ -2,7 +2,7 @@
 title: "pg_type"
 description: "`pg_type` 系统目录表存储数据类型的信息。"
 weight: 430
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-type.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-type.md"
 ---
 
 基本类型（标量类型）使用 `CREATE TYPE` 创建，域使用 `CREATE DOMAIN` 创建。数据库中的每个表都会自动创建一个复合类型，用于表示该表的行结构。也可以使用 `CREATE TYPE AS` 创建复合类型。

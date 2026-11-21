@@ -2,7 +2,7 @@
 title: "pg_rewrite"
 description: "`pg_rewrite` 系统目录表存储表和视图的重写规则。"
 weight: 320
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-rewrite.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-rewrite.md"
 ---
 
 如果一个表在此目录中有任何规则，其 `pg_class.relhasrules` 就必须为 true。

@@ -2,7 +2,7 @@
 title: "文本检索词典"
 description: "Apache Cloudberry 全文检索解析器生成的词元会依次经过一系列词典，生成规范化的术语或“词位”。"
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/text-search-dictionaries.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/text-search-dictionaries.md"
 ---
 
 词典可以针对不同方式和不同语言过滤、转换词元。本节包含以下子主题：

@@ -3,7 +3,7 @@ title: "配置 Hadoop 连接器（可选）"
 linkTitle: "配置 PXF Hadoop 连接器（可选）"
 description: "配置 PXF Hadoop 连接器（可选）。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/hadoop-connectors/client_instcfg.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/hadoop-connectors/client_instcfg.md"
 ---
 
 PXF 兼容 Cloudera、Hortonworks Data Platform 以及通用的 Apache Hadoop 发行版。本主题介绍如何配置 PXF 的 Hadoop、Hive 和 HBase 连接器。

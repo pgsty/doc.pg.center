@@ -2,7 +2,7 @@
 title: "文本检索解析器"
 description: "本文介绍 Apache Cloudberry 文本检索解析器从原始文本生成的词元类型。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/text-search-parsers.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/text-search-parsers.md"
 ---
 
 文本检索解析器负责将原始文档文本拆分为*词元*，并识别每个词元的类型；可能的类型集合由解析器本身定义。请注意，解析器不会修改文本——它只识别可能的单词边界。由于作用范围有限，与定制词典相比，应用程序对定制解析器的需求较少。目前，Apache Cloudberry 只提供一个内置解析器，但实践证明它适用于各种应用。

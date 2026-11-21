@@ -3,7 +3,7 @@ title: "在 Apache Cloudberry 中插入、更新和删除行数据"
 linkTitle: "插入、更新和删除行"
 description: "在 Apache Cloudberry 中插入、更新和删除表行、截断表，并使用 VACUUM 回收存储空间。"
 weight: 140
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/insert-update-delete-rows.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/insert-update-delete-rows.md"
 ---
 
 本文介绍如何在 Apache Cloudberry 中操作行数据，包括：

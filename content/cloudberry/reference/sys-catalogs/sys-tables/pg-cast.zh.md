@@ -2,7 +2,7 @@
 title: "pg_cast"
 description: "`pg_catalog` 模式中的 `pg_cast` 表存储数据类型转换路径，包括内置路径和使用 `CREATE CAST` 定义的路径。"
 weight: 200
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-cast.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-cast.md"
 ---
 
 注意，`pg_cast` 并不表示系统所知的所有类型转换，而只表示无法从通用规则推导出的转换。例如，域与其基础类型之间的转换并不在 `pg_cast` 中显式表示。另一个重要例外是“自动 I/O 类型转换”，即使用数据类型自身的 I/O 函数在该类型与 `text` 或其他字符串类型之间进行的转换，它们也不在 `pg_cast` 中显式表示。

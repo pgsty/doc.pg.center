@@ -2,7 +2,7 @@
 title: "pg_stat_all_indexes"
 description: "`pg_stat_all_indexes` 视图为当前数据库中的每个索引显示一行，其中包含对该索引的访问统计信息。"
 weight: 100
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-stat-all-indexes.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-stat-all-indexes.md"
 ---
 
 `pg_stat_user_indexes` 和 `pg_stat_sys_indexes` 视图包含相同的信息，但经过筛选，分别仅显示用户索引和系统索引。

@@ -3,7 +3,7 @@ title: "使用 COPY 向 Apache Cloudberry 加载数据"
 linkTitle: "使用 COPY 加载数据"
 description: "`COPY FROM` 将本地文件系统中的文件或标准输入的数据复制到表中，并将数据追加到表的现有内容中。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/load-data-using-copy.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/load-data-using-copy.md"
 ---
 
 `COPY` 不支持并行：数据在单个进程中通过 Apache Cloudberry Coordinator 实例加载。`COPY` 仅建议用于非常小的数据文件。

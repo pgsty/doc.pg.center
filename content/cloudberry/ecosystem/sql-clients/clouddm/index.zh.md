@@ -2,7 +2,7 @@
 title: "CloudDM"
 description: "CloudDM 是一款面向团队的开源数据库管理工具。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/ecosystem/sql-clients/clouddm.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/ecosystem/sql-clients/clouddm.md"
 ---
 
 它提供 Web 控制台，支持 SQL 查询、数据库管理、访问控制、SQL 审计、审批流程和数据库 CI/CD。它支持 MySQL、Oracle、StarRocks、Apache Cloudberry 等多种数据库。

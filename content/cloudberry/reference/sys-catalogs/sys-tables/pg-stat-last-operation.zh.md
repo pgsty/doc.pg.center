@@ -2,7 +2,7 @@
 title: "pg_stat_last_operation"
 description: "pg_stat_last_operation 表包含用于跟踪表、视图等数据库对象的元数据信息。"
 weight: 360
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-stat-last-operation.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-stat-last-operation.md"
 ---
 
 |列|类型|引用|说明|

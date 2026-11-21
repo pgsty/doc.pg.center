@@ -3,7 +3,7 @@ title: "Apache Cloudberry 数据类型"
 linkTitle: "数据类型"
 description: "Apache Cloudberry 提供了丰富的原生数据类型供用户使用。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-types.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-types.md"
 ---
 
 本文列出部分内置数据类型。除了这里列出的类型之外，还有一些内部使用的数据类型，例如 oid（对象标识符），本文不作介绍。

@@ -2,7 +2,7 @@
 title: "pg_proc"
 description: "`pg_proc` 系统目录表存储函数（或过程）的信息，包括内置函数和使用 `CREATE FUNCTION` 定义的函数。"
 weight: 260
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-proc.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-proc.md"
 ---
 
 此表不仅包含普通函数的数据，还包含聚合函数和窗口函数的数据。如果 `proisagg` 为真，`pg_aggregate` 中应有对应的行。

@@ -2,7 +2,7 @@
 title: "analyzedb"
 description: "对表执行增量并发 `ANALYZE` 操作的工具。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-utilities/analyzedb.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-utilities/analyzedb.md"
 ---
 
 对于 AO 表，analyzedb 仅在统计信息不是最新时更新统计信息。

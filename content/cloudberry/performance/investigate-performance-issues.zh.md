@@ -2,7 +2,7 @@
 title: "排查性能问题"
 description: "本文提供识别和排查 Apache Cloudberry 系统性能问题的指导。"
 weight: 100
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/investigate-performance-issues.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/investigate-performance-issues.md"
 ---
 
 本文列出可用于查明性能问题原因的步骤。如果问题仅影响特定工作负载或查询，可以集中调优该工作负载。如果问题影响整个系统，则可能由硬件问题、系统故障或资源争用引起。

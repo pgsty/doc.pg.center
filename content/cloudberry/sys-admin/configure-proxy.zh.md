@@ -2,7 +2,7 @@
 title: "为 Interconnect 配置代理"
 description: "可以配置 Cloudberry 系统使用互联代理进行互联通信，减少查询处理期间的连接和端口使用量。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/configure-proxy.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/configure-proxy.md"
 ---
 
 Cloudberry *Interconnect*（网络层）指 Segment 之间的进程间通信，以及这种通信所依赖的网络基础设施。有关 Cloudberry 架构和 Interconnect 的信息，参见 [Cloudberry 架构简介](/cloudberry/introduction/cbdb-architecture/)。

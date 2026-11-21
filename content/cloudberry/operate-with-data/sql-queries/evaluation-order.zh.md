@@ -2,7 +2,7 @@
 title: "表达式求值规则"
 description: "子表达式的求值顺序未定义。操作符或函数的输入不一定按从左到右或任何其他固定顺序求值。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/evaluation-order.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/evaluation-order.md"
 ---
 
 如果只对表达式的某些部分求值就能确定表达式结果，那么其他子表达式可能根本不会求值。例如，在以下表达式中：

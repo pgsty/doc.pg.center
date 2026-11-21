@@ -3,7 +3,7 @@ title: "WITH 查询（公用表表达式）"
 linkTitle: "公用表表达式"
 description: "`WITH` 子句提供了一种编写辅助语句、供更大查询使用的方式。"
 weight: 110
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/cte-queries.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/cte-queries.md"
 ---
 
 这些语句通常称为公用表表达式（Common Table Expressions，CTE），可以理解为定义了仅在一次查询中存在的临时表。

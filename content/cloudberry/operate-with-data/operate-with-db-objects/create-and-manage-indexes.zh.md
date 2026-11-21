@@ -3,7 +3,7 @@ title: "创建和管理索引"
 linkTitle: "创建和管理索引"
 description: "在传统数据库中，索引通常用于显著提高数据访问性能。"
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-indexes.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-indexes.md"
 ---
 
 然而，在 Apache Cloudberry 这样的分布式系统中，使用索引需要更加谨慎。Apache Cloudberry 提供高速顺序扫描，而索引查找依赖随机磁盘访问。由于数据分布在多个 Segment 上，每个 Segment 只需扫描本地的数据子集即可返回结果。结合表分区，还可以进一步减少查询期间扫描的数据量。因此，对于通常返回大型结果集的商业智能（BI）工作负载，索引可能带来性能开销，而非收益。

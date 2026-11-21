@@ -2,7 +2,7 @@
 title: "全文检索"
 description: "Apache Cloudberry 提供用于查询自然语言文档的数据类型、函数、运算符、索引类型和配置。"
 weight: 140
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/index.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/index.md"
 ---
 
 - **[关于全文检索](/cloudberry/operate-with-data/sql-queries/full-text-search/full-text-search-intro/)**：本主题概述 Apache Cloudberry 全文检索、基本文本检索表达式，以及文本检索的配置和定制。本文还将 Apache Cloudberry 全文检索与 Apache Cloudberry Text 进行比较。

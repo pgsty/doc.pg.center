@@ -2,7 +2,7 @@
 title: "值表达式"
 description: "值表达式是查询中用于计算、转换和引用数据的核心组成部分。"
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/value-expressions.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/value-expressions.md"
 ---
 
 定义查询时，理解这些表达式是编写灵活、高效 SQL 的关键。

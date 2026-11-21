@@ -2,7 +2,7 @@
 title: "日志"
 description: "配置 PXF 服务日志。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/advanced-config/cfg_logging.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/advanced-config/cfg_logging.md"
 ---
 
 PXF 提供两类消息日志：服务级日志和客户端级日志。

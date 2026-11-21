@@ -2,7 +2,7 @@
 title: "配置 JDBC 连接器（可选）"
 description: "配置 PXF JDBC 连接器。"
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/jdbc-connector/jdbc_cfg.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/jdbc-connector/jdbc_cfg.md"
 ---
 
 您可以使用 PXF 访问外部 SQL 数据库，包括 MySQL、ORACLE、Microsoft SQL Server、DB2、PostgreSQL、Hive 和 Apache Ignite。本主题介绍如何配置 PXF JDBC 连接器以访问这些外部数据源。
@@ -20,7 +20,7 @@ upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b
 
 ## JDBC 驱动程序 JAR 注册 {#jdbc-driver-jar-registration}
 
-PXF 自带 `postgresql-42.7.2.jar` JAR 文件。如果您需要其他 JDBC 驱动程序，请确保在每台 Apache Cloudberry 主机的 `$PXF_BASE/lib` 目录中安装外部 SQL 数据库对应的 JDBC 驱动程序 JAR 文件。请务必安装与您的 JRE 版本兼容的 JDBC 驱动程序 JAR 文件。更多信息请参见[注册 PXF 库依赖项](/cloudberry/pxf/administering/reg_jar_depend/)。
+PXF 自带 `postgresql-42.7.8.jar` JAR 文件。如果您需要其他 JDBC 驱动程序，请确保在每台 Apache Cloudberry 主机的 `$PXF_BASE/lib` 目录中安装外部 SQL 数据库对应的 JDBC 驱动程序 JAR 文件。请务必安装与您的 JRE 版本兼容的 JDBC 驱动程序 JAR 文件。更多信息请参见[注册 PXF 库依赖项](/cloudberry/pxf/administering/reg_jar_depend/)。
 
 ## JDBC 服务器配置 {#jdbc-server-configuration}
 

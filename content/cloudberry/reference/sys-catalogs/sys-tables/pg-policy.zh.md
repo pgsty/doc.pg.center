@@ -2,7 +2,7 @@
 title: "pg_policy"
 description: "`pg_policy` 目录存储表的行级安全策略。"
 weight: 250
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-policy.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-policy.md"
 ---
 
 策略包含其适用的命令类型（可能是所有命令）、适用的角色、向涉及该表的查询添加的安全屏障限定表达式，以及向尝试在该表中添加新记录的查询添加的 `WITH CHECK` 选项表达式。

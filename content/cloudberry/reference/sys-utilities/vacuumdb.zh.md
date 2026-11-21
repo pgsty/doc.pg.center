@@ -2,7 +2,7 @@
 title: "vacuumdb"
 description: "对数据库进行垃圾回收和分析。"
 weight: 400
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-utilities/vacuumdb.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-utilities/vacuumdb.md"
 ---
 
 ## 概要 {#synopsis}

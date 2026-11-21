@@ -2,7 +2,7 @@
 title: "配置 PXF 访问启用安全认证的 HDFS"
 description: "为启用 Kerberos 安全认证的 HDFS 配置 PXF。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/hadoop-connectors/pxf_kerbhdfs.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/hadoop-connectors/pxf_kerbhdfs.md"
 ---
 
 为 HDFS 文件系统启用 Kerberos 后，PXF 服务作为 HDFS 客户端，需要使用主体（principal）和 keytab 文件来认证对 HDFS 的访问。要在启用安全认证的 HDFS 上读取或写入文件，必须为 PXF 创建并部署 Kerberos 主体和 keytab，并确保 Kerberos 认证已启用且工作正常。

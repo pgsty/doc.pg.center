@@ -2,7 +2,7 @@
 title: "使用场景"
 description: "本文介绍 Apache Cloudberry 的使用场景。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/introduction/cbdb-scenarios.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/introduction/cbdb-scenarios.md"
 ---
 
 **场景 1：构建离线批处理数据仓库和数据集市**

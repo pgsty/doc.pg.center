@@ -2,7 +2,7 @@
 title: "管理与监控工具"
 description: "Apache Cloudberry 提供标准命令行工具，用于执行常见的监控和管理任务。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/product-principles/about-utilities.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/product-principles/about-utilities.md"
 ---
 
 Cloudberry 命令行工具位于 $GPHOME/bin 目录，在 Coordinator 主机上运行。Cloudberry 提供的工具可用于以下管理任务：

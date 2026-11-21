@@ -2,7 +2,7 @@
 title: "为 Apache Cloudberry 启用 Coordinator 镜像"
 description: "Apache Cloudberry 提供一系列高可用特性，确保数据库系统能够容忍硬件平台故障等意外事件，并能快速从中恢复。"
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/high-availability/enable-coordinator-mirroring.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/high-availability/enable-coordinator-mirroring.md"
 ---
 
 本节介绍如何配置 Coordinator 镜像，以确保 Coordinator 节点顺利完成故障切换。

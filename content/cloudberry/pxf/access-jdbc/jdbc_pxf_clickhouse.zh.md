@@ -2,7 +2,7 @@
 title: "示例：读写 ClickHouse 表"
 description: "在 ClickHouse 中使用 PXF JDBC。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-jdbc/jdbc_pxf_clickhouse.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-jdbc/jdbc_pxf_clickhouse.md"
 ---
 
 <!--
@@ -71,7 +71,7 @@ VALUES
 
 自动化测试针对 ClickHouse 服务器 **24** 和 **26** 版本，配合 ClickHouse JDBC 驱动程序进行。
 
-对于 ClickHouse，建议使用最新的 clickhouse-jdbc-all:0.9.7 或更高版本（带有重定位依赖的 fat jar 版本）。如果遇到 HTTP 可靠性问题，可以使用 Apache HttpClient：添加 JDBC URL 参数 `http_connection_provider=APACHE_HTTP_CLIENT`（例如 `jdbc:clickhouse://clickhousehost:8123/default?http_connection_provider=APACHE_HTTP_CLIENT`）。
+对于 ClickHouse，建议使用最新的 clickhouse-jdbc-all:0.11.1 或更高版本（带有重定位依赖的 fat jar 版本）。
 
 
 ## 读取 ClickHouse 表 {#read-from-the-clickhouse-table}

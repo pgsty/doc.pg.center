@@ -2,7 +2,7 @@
 title: "开发后台工作进程"
 description: "可以扩展 Apache Cloudberry，使其在独立进程中运行用户提供的代码。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/developer/develop-background-process-worker.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/developer/develop-background-process-worker.md"
 ---
 
 这些进程由 `postgres` 启动、停止和监控，因此其生命周期可以与服务器状态紧密关联。这些进程可以选择附加到 Apache Cloudberry 的共享内存区域，并从内部连接数据库；它们还可以像普通的客户端连接服务器进程一样，串行运行多个事务。通过链接 `libpq`，它们也可以连接服务器，像普通客户端应用程序一样运行。

@@ -3,7 +3,7 @@ title: "Apache Cloudberry JSON 函数和操作符"
 linkTitle: "JSON 函数和操作符"
 description: "使用 Apache Cloudberry 的函数、操作符和 SQL/JSON 路径语言创建与处理 JSON 数据。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/functions/json-functions-and-operators.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/functions/json-functions-and-operators.md"
 ---
 
 本文介绍：

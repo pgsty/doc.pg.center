@@ -2,7 +2,7 @@
 title: "配置 MinIO、AWS S3 和 Dell ECS 对象存储连接器（可选）"
 description: "配置连接 MinIO 和 S3 对象存储的 PXF 连接器。"
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/s3_objstore_cfg.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/s3_objstore_cfg.md"
 ---
 
 你可以使用 PXF 访问兼容 S3 的对象存储。本主题介绍如何为这些外部数据源配置 PXF 连接器。
@@ -25,7 +25,6 @@ MinIO 的模板配置文件是 `<PXF_INSTALL_DIR>/templates/minio-site.xml`。�
 | fs.s3a.endpoint | 要连接的 MinIO S3 端点。 | 你的端点。 |
 | fs.s3a.access.key | MinIO 账户访问密钥。 | 你的 MinIO 用户名。 |
 | fs.s3a.secret.key | 与访问密钥关联的 MinIO 秘密密钥。 | 你的 MinIO 密码。 |
-| fs.s3a.fast.upload | 控制快速上传的属性；默认值为 `false`。 | 设置为 `true` 以启用快速上传。 |
 | fs.s3a.path.style.access | 控制通过路径指定文件的属性；默认值为 `false`。 | 设置为 `true` 以启用路径样式访问。 |
 
 ## S3 服务器配置 {#s3-server-configuration}
@@ -37,7 +36,7 @@ S3 的模板配置文件是 `<PXF_INSTALL_DIR>/templates/s3-site.xml`。配置 S
 | fs.s3a.access.key | AWS 账户访问密钥 ID。 | 你的访问密钥。 |
 | fs.s3a.secret.key | 与 AWS 访问密钥 ID 关联的秘密密钥。 | 你的秘密密钥。 |
 
-如有需要，可以通过在 `s3-site.xml` 服务器配置文件中指定 Hadoop-AWS 模块文档 [S3A](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html#S3A) 一节中列出的属性，对 PXF 的 S3 连接进行微调。
+如有需要，可以通过在 `s3-site.xml` 服务器配置文件中指定 [Hadoop 3.3.6 S3A 文档](https://hadoop.apache.org/docs/r3.3.6/hadoop-aws/tools/hadoop-aws/index.html)中列出的属性，对 PXF 的 S3 连接进行微调。
 
 你可以通过在 `CREATE EXTERNAL TABLE` 命令的 `LOCATION` 子句中使用自定义选项直接指定 S3 访问 ID 和秘密密钥，覆盖 S3 服务器配置的凭据。有关更多信息，请参阅[为外部表覆盖 S3 服务器配置](/cloudberry/pxf/access-objectstores/access_s3/#overriding-the-s3-server-configuration-for-external-tables)。
 
@@ -109,7 +108,7 @@ PXF 支持以下 AWS SSE 加密密钥管理方案：
 
 将 `YOUR_AWS_SSE_KMS_KEY_ARN` 替换为你的密钥资源名称。如果不指定加密密钥，则使用 Amazon KMS 中定义的默认密钥。KMS 密钥示例：`arn:aws:kms:us-west-2:123456789012:key/1a23b456-7890-12cc-d345-6ef7890g12f3`。
 
-**注意**：请务必在同一个 Amazon 可用区中创建存储桶和密钥。
+**注意**：存储桶和 KMS 密钥必须位于同一个 AWS 区域。
 
 要对特定 S3 存储桶启用 SSE-KMS，请使用包含存储桶名称的属性名变体。例如：
 
@@ -183,10 +182,6 @@ PXF 支持以下 AWS SSE 加密密钥管理方案：
             <name>fs.s3a.secret.key</name>
             <value>secret_key_for_user1</value>
         </property>
-        <property>
-            <name>fs.s3a.fast.upload</name>
-            <value>true</value>
-        </property>
     </configuration>
     ```
 5. 保存更改并退出编辑器。
@@ -208,5 +203,4 @@ Dell ECS 没有模板服务器配置文件。你可以使用 MinIO 服务器配�
 | fs.s3a.endpoint | 要连接的 Dell ECS S3 端点。 | 你的 ECS 端点。 |
 | fs.s3a.access.key | Dell ECS 账户访问密钥。 | 你的 ECS 用户名。 |
 | fs.s3a.secret.key | 与访问密钥关联的 Dell ECS 秘密密钥。 | 你的 ECS 秘密密钥1。 |
-| fs.s3a.fast.upload | 控制快速上传的属性；默认值为 `false`。 | 设置为 `true` 以启用快速上传。 |
 | fs.s3a.path.style.access | 控制通过路径指定文件的属性；默认值为 `false`。 | 设置为 `true` 以启用路径样式访问。 |

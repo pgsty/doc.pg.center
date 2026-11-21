@@ -3,7 +3,7 @@ title: "高可用概述"
 linkTitle: "高可用"
 description: "通过提供容错硬件平台、启用 Apache Cloudberry 高可用特性，以及定期监控和维护以确保各系统组件健康运行，可以使 Apache Cloudberry 系统具备高可用性。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/high-availability/high-availability-overview.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/high-availability/high-availability-overview.md"
 ---
 
 无论是正常磨损还是意外情况，硬件组件最终都会发生故障。断电可能导致组件暂时不可用。为可能发生故障的组件提供冗余备用组件，可以使系统具备高可用性，在故障发生时继续提供不中断的服务。有时，冗余成本超过了用户为避免服务中断所愿意付出的代价。此时，目标是确保能够在预期时间内恢复全部服务。

@@ -2,7 +2,7 @@
 title: "Tabularis"
 description: "通过 PostgreSQL 驱动将 Tabularis 桌面 SQL 工作区连接到 Apache Cloudberry。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/ecosystem/sql-clients/tabularis.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/ecosystem/sql-clients/tabularis.md"
 ---
 
 [Tabularis](https://tabularis.dev) 是一款适用于 Windows、macOS 和 Linux 的开源桌面 SQL 工作区，提供模式浏览器、SQL 编辑器、可视化 `EXPLAIN`、实体关系图和 SQL 笔记本。它使用内置的 PostgreSQL 驱动，通过 PostgreSQL 网络协议连接 Apache Cloudberry，方式与连接 PostgreSQL 本身相同。

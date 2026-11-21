@@ -4,7 +4,7 @@ linkTitle: "加载数据"
 description: "Apache Cloudberry 主要通过加载工具将外部数据转换为外部表（或外表）来加载数据。"
 weight: 50
 icon: "fa-solid fa-file-import"
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/index.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/index.md"
 ---
 
 然后，Apache Cloudberry 从这些外部表读取数据，或将数据写入这些外部表，以实现外部数据加载。

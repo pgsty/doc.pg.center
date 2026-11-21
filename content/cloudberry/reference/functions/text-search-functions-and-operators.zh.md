@@ -3,7 +3,7 @@ title: "Apache Cloudberry 文本搜索函数和操作符"
 linkTitle: "文本搜索函数和操作符"
 description: "下表汇总了用于全文搜索的函数和操作符。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/functions/text-search-functions-and-operators.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/functions/text-search-functions-and-operators.md"
 ---
 
 |操作符|描述|示例|结果|

@@ -2,7 +2,7 @@
 title: "使用压缩"
 description: "可以配置 Apache Cloudberry，在部分数据库功能和工具中使用数据压缩。压缩可以减少磁盘占用并提升整个系统的 I/O 性能，但会增加数据压缩和解压缩的额外开销。"
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/use-compression.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/use-compression.md"
 ---
 
 可以为以下功能和工具配置数据压缩支持。有关压缩支持的信息，请参见相应的功能或工具。

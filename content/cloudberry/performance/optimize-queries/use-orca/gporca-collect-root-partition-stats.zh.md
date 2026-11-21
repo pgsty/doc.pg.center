@@ -2,7 +2,7 @@
 title: "收集根分区统计信息"
 description: "对于分区表，GPORCA 使用表的根分区统计信息生成查询计划。"
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/use-orca/gporca-collect-root-partition-stats.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/use-orca/gporca-collect-root-partition-stats.md"
 ---
 
 这些统计信息用于确定连接顺序、拆分和合并聚合节点，以及估算各查询步骤的代价。相比之下，基于 Postgres 的规划器使用各叶子分区的统计信息。

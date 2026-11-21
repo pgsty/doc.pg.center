@@ -3,7 +3,7 @@ title: "检查 Apache Cloudberry 系统"
 linkTitle: "检查数据库系统"
 description: "可以使用系统自带或以插件形式提供的各种工具检查 Apache Cloudberry 系统。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/check-database-system.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/check-database-system.md"
 ---
 
 观察 Apache Cloudberry 系统的日常运行性能，有助于管理员了解系统行为、规划工作流并排查问题。本页介绍诊断数据库性能和活动的场景。

@@ -2,7 +2,7 @@
 title: "pg_filedump"
 description: "Filedump，也称为命令行工具 `pg_filedump`，是将 Apache Cloudberry 堆文件、索引文件和控制文件格式化为可读形式的系统工具。"
 weight: 360
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-utilities/pg-filedump.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-utilities/pg-filedump.md"
 ---
 
 使用 filedump，可以按[命令行选项](#command-line-options)一节所述，以多种方式格式化和转储文件，甚至直接转储二进制数据。

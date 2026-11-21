@@ -2,7 +2,7 @@
 title: "PXF 简介"
 description: "PXF 的概念、支持的平台、架构以及外部表语法。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/intro/intro_pxf.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/intro/intro_pxf.md"
 ---
 
 Apache Cloudberry 平台扩展框架（PXF）提供*连接器*，使您能够访问存储在 Apache Cloudberry 部署之外的数据源中的数据。这些连接器将外部数据源映射到 Apache Cloudberry *外部表*定义。创建 Apache Cloudberry 外部表时，您需要通过在命令中提供的*服务器*名称和 *profile* 名称来指定外部数据存储及数据格式。
@@ -22,7 +22,7 @@ PXF 与以下操作系统平台和 Apache Cloudberry 版本兼容：
 
 ### Java {#java}
 
-PXF 支持 Java 8 和 Java 11。
+PXF 支持 Java 17 和 21。
 
 
 ### Hadoop {#hadoop}
@@ -31,7 +31,7 @@ PXF 内置了其依赖的所有 Hadoop JAR 文件，并支持以下 Hadoop 组�
 
 | Hadoop 版本 | Hive Server 版本 | HBase Server 版本 |
 |----------------|---------------------|-------------|
-| 2.x、3.1+ | 1.x、2.x、3.1+ | 2.3.7 |
+| 2.x、3.1+ | 1.x、2.x、3.1+ | 2.5.x |
 
 ## 架构概览 {#architectural-overview}
 

@@ -2,7 +2,7 @@
 title: "LibreDB Studio"
 description: "通过 PostgreSQL 驱动将 LibreDB Studio 连接到 Apache Cloudberry，浏览模式并运行查询。"
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/ecosystem/sql-clients/libredb-studio.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/ecosystem/sql-clients/libredb-studio.md"
 ---
 
 [LibreDB Studio](https://libredb.org) 是一款基于 Web 的开源 SQL IDE，包含查询编辑器、对象浏览器和监控仪表板。它在同一个工作区中支持 PostgreSQL、MySQL、Oracle、ClickHouse 等 17 种数据库引擎。它通过 PostgreSQL 网络协议连接 Apache Cloudberry，方式与连接 PostgreSQL 本身相同。

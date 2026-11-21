@@ -1,9 +1,9 @@
 ---
 title: "Apache Cloudberry 功能概览"
 linkTitle: "功能概览"
-description: "Apache Cloudberry 基于最新的 PostgreSQL 14.4 内核构建，是现有开源 MPP 数据库中最先进、最成熟的产品之一。"
+description: "Apache Cloudberry 基于 PostgreSQL 14 内核构建，是现有开源 MPP 数据库中最先进、最成熟的产品之一。"
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/introduction/cbdb-overview.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/introduction/cbdb-overview.md"
 ---
 
 > [!WARNING]
@@ -118,7 +118,7 @@ Apache Cloudberry 的兼容性涵盖 SQL 语法、组件、工具与程序、硬
 > [!DETAILS] 点击查看详情
 > - **SQL 兼容性**：Apache Cloudberry 兼容 PostgreSQL 和 Greenplum 语法，支持 SQL-92、SQL-99 和 SQL 2003 标准，包括 SQL 2003 OLAP 扩展，如窗口函数、`rollup` 和 `cube`。
 >
-> - **组件兼容性**：Apache Cloudberry 基于 PostgreSQL 14.4 内核，兼容大多数常用 PostgreSQL 组件和扩展。
+> - **组件兼容性**：Apache Cloudberry 基于 PostgreSQL 14 内核，兼容大多数常用 PostgreSQL 组件和扩展。
 >
 > - **工具与程序兼容性**：能很好地连接各类 BI 工具、挖掘预测工具、ETL 工具和 J2EE/.NET 应用。
 >

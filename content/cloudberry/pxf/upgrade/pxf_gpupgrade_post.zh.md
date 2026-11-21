@@ -2,7 +2,7 @@
 title: "PXF 升级后操作（cbupgrade）"
 description: "Apache Cloudberry 原地大版本升级之后需要为 PXF 执行的任务。"
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/upgrade/pxf_gpupgrade_post.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/upgrade/pxf_gpupgrade_post.md"
 ---
 
 > [!WARNING] 前瞻性参考
