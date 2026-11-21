@@ -4,11 +4,11 @@ description: The Spock extension can be installed with pgEdge Postgres packages 
   deployments provide a simplified upgrade path that allows you to take advantage of important new features quickly
   and easily.
 weight: 20
-upstream_source: pgedge-spock
-upstream_link: https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/install_spock.md
+upstream_source: pgedge-spock-20261121
+upstream_link: https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/install_spock.md
 upstream_modified: true
-upstream_ref: 4ac1aec2f080
-source_kind: pinned-main-snapshot
+upstream_ref: d05e2e2b6a82
+source_kind: pinned-release-tag
 linkTitle: Installation
 type: docs
 ---
@@ -250,4 +250,4 @@ SELECT spock.sub_wait_for_sync('subscription1');
 
 ---
 
-[Upstream source](https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/install_spock.md) · `4ac1aec2f080` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).
+[Upstream source](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/install_spock.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).

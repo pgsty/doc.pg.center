@@ -10,7 +10,9 @@
       "route": "/pgedge/",
       "sha256": "40e1d8f0669f4a8e568a1260110d7013445e92891569801c2c932767968c0824",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "16b3d830919fad43747b0a534c80f08b36d886d49fefa120a4a2e2d39c368e15",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/_index.md",
@@ -50,7 +52,9 @@
       "route": "/pgedge/about/attribution/",
       "sha256": "657c505059936c0ff5b2c34f05a23ec1440b236cabf53611fdd079ab75b9612d",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "d3a35332561584179caf74fac1db11423f5c4e7c4d981931132307d3a7f82680",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/about/attribution.md",
@@ -130,7 +134,9 @@
         "6a9e03f4d62b9b6d2fa7c642b6cc88ba84e54dee50d1a53ef66b187c194dac8f",
         "9e0db4d386e08a57b2e1acd8c5d832fe1a6441fc17e2c66ec220df09a31b1068"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "6b6386b3728d6039cf0467654ade6a88f0551258b32cf98004d7ca95de6612ef",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/lolor/_index.md",
@@ -163,7 +169,9 @@
         "43e78b12a016b1a6924ed09f77cf6cfdc777a6e1163ce19592ad4c5f92512fab",
         "745f7ea7876ece2090015b0fb678ae606fb529fb10541a2538f2a0f69f275c4a"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "bd93cd4703e22494edd61ada01cf18c24043a95e1aea00c44fbbbdadb440e4bd",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/lolor/install-configure.md",
@@ -190,7 +198,9 @@
       "route": "/pgedge/lolor/lolor-release-notes/",
       "sha256": "7f879a04791b87fa2a3945198f7a10172033652ce6bf04a4ddf9d019562aa4c9",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "2a23a901b1c4616a99ce9c603de3abb329aa89a70a491fa5537ef609aa79f15b",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/lolor/lolor-release-notes.md",
@@ -214,7 +224,9 @@
         "9694e1a795c944bf16e824b9d80f5c0b6940a7bea901853ada6d5569f4560829",
         "b38f49a7939378478f83667ae48f150e2936bb5e2516c487238ca8151e5716eb"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "9e696b96ead2b9661bbf575c7d320244b2d90792049d4f31149bf0f0af550fbf",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/lolor/pg-upgrade-with-lolor.md",
@@ -240,7 +252,9 @@
       "code_sha256": [
         "b853b549e11f0a7609628d1d25f7e7ce89397db493250eab413cd946fc64c0b7"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "f0607a43de104e5e7d52d241dbfc2dbe80e7ef6b89868ef5bf44b420a40f0c0c",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/lolor/using-lolor.md",
@@ -288,7 +302,9 @@
         "7c5ad5a595f53aae440da5e7ab5f83efef6ccc3255f2bc5a12b8cd97e3c5d13d",
         "5a7818161bc19866746186f281c89a93b94cd6fdcb0540f9f420c77f9934a87a"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "7e0804ee4cd400020f4d501a43bcb7f6d89be9f9d4f3c5f8e665287604da1031",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/safesession/_index.md",
@@ -314,7 +330,9 @@
       "route": "/pgedge/safesession/changelog/",
       "sha256": "8faaea3d702609fc63ad6ea8dcce185b4f0480707bbbf22391494fbf8fd5b70e",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "f3e4a9bbaceca213934c8ba98474021c4d0d83afddcb6dedaf5354e4fff8f09a",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/safesession/changelog.md",
@@ -334,7 +352,9 @@
       "route": "/pgedge/safesession/licence/",
       "sha256": "d07d9fa2983004e5e2b3cb0c636b1ba946c10ee84003d63f10f8b7c2536720d3",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "640c7a3bba80486627a276695f94667211deefad2a1d3e9b35960abc6b14274c",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/snowflake/_index.en.md",
@@ -344,7 +364,9 @@
       "route": "/pgedge/snowflake/",
       "sha256": "66501e09be29c4a832a66d040e10540d59f2efde093cb29c367a728cd8798276",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "f8ff3726bef4e6688702b7a4d49a366057ed86a940acc471c1fb9f5e2d48e932",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/snowflake/_index.md",
@@ -364,7 +386,9 @@
       "route": "/pgedge/snowflake/changelog/",
       "sha256": "87a7371a751df08e205c03d44568243fbc0e4b6aeb9597a277737544a4743530",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "a3df2bb0d3eaeaeb6b7a3f7d899c14395835effedd290fb94398a7a1b1f2aaf6",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/snowflake/changelog.md",
@@ -393,7 +417,9 @@
         "c68a9a9e5bf391753e982bd4c4bb31f252b496754acfc55f907f291ede45306a",
         "ee2c513e209089d34353f4908d5b2947c5b58ed8e8c544ec33366d00153d5819"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "25056a7a9b8d666d499a27c188d0f6d815812cb990b2ead768e5ed21746fb96e",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/snowflake/converting.md",
@@ -427,7 +453,9 @@
         "4a86c6e1f1b1148918318ffc8a85e19ae966bb719e673f7c63f90a4995937bd1",
         "80f2ef1f6f67dde86a31d7340647cbdaa19307c92f9e80252b9127c2e9613454"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "6d906af378f55fdd2803b382185794eb1a42d1060f587ecae8c9833520233902",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/snowflake/creating.md",
@@ -455,7 +483,9 @@
         "3fea4a3384da14b17fbea2ec2835c0200ade7bbc838be761218ce55f9ac55e4e",
         "a2f85a1e92ec9b4e0d82bd7ba543cc7a4eb467887f01cff4f32a2be38f638518"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "6789ff178a9dc340acffad016bc1ffe96fb343ccc0dfa7fe727a8267d8c27a77",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/snowflake/review-seq.md",
@@ -486,7 +516,9 @@
         "3f4d531ae253a891a7800df34a5936d015a2c8a3c6b425c421f734d19f91bb5e",
         "9d9ab8f18882318f8ed625775f6eca3d0dd1109da76aace12de56022406d68ba"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "d0bba9fd8923ad72963df0ed0f87f256fd3b0644b99538da4902a696ffe03116",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/snowflake/snowflake-functions.md",
@@ -514,7 +546,9 @@
       "route": "/pgedge/spock/",
       "sha256": "75e03b440e5018f5f574926ab4db65370277febc460b7f0a4f0fab6f29604a58",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "d70b4f75a55ace1c5bb33fad10bfbdf79e92e077500f50816734f2c34f7392bf",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/_index.md",
@@ -560,7 +594,9 @@
         "aaf48e0d82081cc9b4e4ea7e7da829a924a21ee3917b73cfbad9c23a879b1604",
         "92f80fcdb192027c9d7c305daaebc0dd8b348625a44ec26f1a975aa7741deac3"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "b40138b72ff984b8a85c8c942159eeac3dd545308e6b18bb655aa8bc9e6734fe",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/configuration.md",
@@ -608,7 +644,9 @@
       "code_sha256": [
         "402ecb0c6e6d3c880a5ba7ac2e7a5308daf32d99d02f7a577009f3cb30b5dfa1"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "bc4c484c88a52a783bb074d3831e2882171f852061969d57ae04949f1dfe18cf",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/conflict-avoidance.md",
@@ -633,7 +671,9 @@
         "bbd64aa701794ae5b3bd7ef2a1c3e5d58e3f6d09415cd722e16c4fdad3a68f9a",
         "5d059ba3df905b0b5a74bf4d5430354e906df8e9017c7d5a524f76e5013313d9"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "8633f3d23964b235888f31bbb8dbbc48b5e8145c3e1b00bdcff2198491709ea9",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/conflicts.md",
@@ -656,7 +696,9 @@
       "route": "/pgedge/spock/faq/",
       "sha256": "7fa9f5ceef5b4efa1a1ed4943198f469cb0eb4a636b82cd3e46d02c7fd904e26",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "a271122ebb4a2e21412b34bb7cd95afa4f958d1f02d2a33cd120b225d190efbf",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/getting-started.en.md",
@@ -704,7 +746,9 @@
         "dee3998cd4f8409cdb714768113f8b7f55064d0dd8c43deb331b97c872d782c4",
         "d26e35cdb6540fcb0b395457cd33dba615d3021d421abd2d3686e7a4133cbe54"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "18e84e7073478f74e9c3fdd0e1dbf71a7f800e62d34980d6d26a369e9aa244ff",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/getting-started.md",
@@ -776,7 +820,9 @@
         "abc37bdb7af2940298438e6a342ea9e2111ceba464ddbaa1ed6563c883c1a4dc",
         "052de9b9d8ab9dab7ca0e2d82515e3f0dea005cf3b9bd17055ff8ab2f69cba4c"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "c2bf8ec37afa4f2fecd326cb1215525ff34f308fb5b5b4f557a0e6f2a5a16c4a",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/installation.md",
@@ -810,7 +856,9 @@
       "route": "/pgedge/spock/internals-doc/",
       "sha256": "625206724796d75207c444429bd56fef1c7ae3cea71e7c311636ff4156d58638",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "00510008cba0b12d79d990be4c74426cd88b1db1b493d092e16354d903408068",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/internals-doc/_index.md",
@@ -830,7 +878,9 @@
       "route": "/pgedge/spock/internals-doc/design/",
       "sha256": "4c4f52daea6efe410a27c38a71c2015e560cf6edb7de99d95362725741647b6c",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "bb97fe2f558a04a92ae7d47b800b7ba1810c2d28b5d7bbf0772983c7b42577f2",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/internals-doc/output.en.md",
@@ -840,7 +890,9 @@
       "route": "/pgedge/spock/internals-doc/output/",
       "sha256": "318799600826410940b7ed77165b85e5b46672f1eeb30250d7fc0298a7e732ce",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "d240501c4653a312b3e1e06b6e3c83e263b5d9f67ba5cf1da7fa0e384e484c80",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/internals-doc/plans/2026-04-30-recover-remote-commit-ts-plan.en.md",
@@ -895,7 +947,9 @@
         "c66491df19ecaa65618597a6f80d8200792c37cc7d2bcbbb6bbb01e28bff5171",
         "fd860f53da96df2ddb649b34fbc889a6bfe6118b8b4283c4b0df4f56199260b7"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "278337be338c4f7b0d914969611a0d38772dea017c4c852c03b90399aefa6338",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/internals-doc/plans/_index.en.md",
@@ -905,7 +959,9 @@
       "route": "/pgedge/spock/internals-doc/plans/",
       "sha256": "775e559f09cd42bb68fbc369c1ae0c8125800b0eeab37d9df7a2cb725c664c89",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "078443e407296890fae3f3004f5e127633bcaea15f18609590952222660ea9b5",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/internals-doc/plans/_index.md",
@@ -925,7 +981,9 @@
       "route": "/pgedge/spock/internals-doc/protocol/",
       "sha256": "8d7a4ba9e280b3d1ef526bd19528acf36a8a5404f1806f129f8630cd18f1fae9",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "5eb8bbc9314222e26f6ad3bac51e35318014e6592e8946537583f17c217f871d",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/internals-doc/specs/_index.en.md",
@@ -935,7 +993,9 @@
       "route": "/pgedge/spock/internals-doc/specs/",
       "sha256": "a317781fca86d853ea4c1bdd8ab367ab137a4f8f25ba3492731f48b3c7def557",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "38b173750b6eb3ae9ac0dccbbbceb71ece6e17acf471cb5903c6d220259669e2",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/internals-doc/specs/_index.md",
@@ -958,7 +1018,9 @@
         "6129f0a6d2973753d077dd144675187ee60a2bdd688daf242854e231aa2164db",
         "84cf223f36d5389cc3945a0d81bf85af7a0ef5b488adac99310666f36788c94c"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "047a296d37b72ec90af11b718496d66be45dad1998ebd2858b31a2d3da8db49b",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/internals-doc/specs/spock-progress-no-checkpoint-hook-design.en.md",
@@ -970,7 +1032,9 @@
       "code_sha256": [
         "eac43f08af6631f362c9a9d3d3b51f1702d9e4f43f9850d30ec1071624463331"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "e0d2506feec8991db22f395022b8db3ce049335ea678265f6d4aaf9c7b7b3d46",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/limitations.en.md",
@@ -983,7 +1047,9 @@
         "925082023ed318dfba4b82373e81bfea86a548fe886714edbfc7ac6478e05b12",
         "cc54b9e91a3542475bb055b8240d3d0549eed8a147fef78abbf7514791d4dcff"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "eff62b5059b06aa54cd9307d0666fc48df4031940a64c87fa5393898e1aa4c20",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/limitations.md",
@@ -1030,7 +1096,9 @@
         "89704f74b6f30bcc8046a2a0e10eedca58bfd6ea32510f2fddc11d7e2a136773",
         "85c8d5fa5f0ef1c8566009d5180ced5856f99a3be4fdeb9e265836711f2ddfa6"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "1fbbc79ab0d7bd464d44672b48c6679cfe90496e49c8e3238dc67c593ba6ea3c",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/managing/_index.en.md",
@@ -1040,7 +1108,9 @@
       "route": "/pgedge/spock/managing/",
       "sha256": "cc15fffdda8933a65fa3a778204efa9d6873ac905a8deea1b8e1c7078af3b910",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "0fe48cacde8dbd3e741d5b900138d270e21b655964736efad79981539295381b",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/managing/_index.md",
@@ -1060,7 +1130,9 @@
       "route": "/pgedge/spock/managing/filtering/",
       "sha256": "b552a6b9e2ae63facb354e6a82b7e3090b3517c6a475717d1f12a0a6c5705583",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "26fd4f859a95b6612c41e56fb46c8b0644fa8d8472d1ca070e0dc006205f8ef0",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/managing/filtering.md",
@@ -1080,7 +1152,9 @@
       "route": "/pgedge/spock/managing/lolor/",
       "sha256": "cfcbb4421859160a327855f8095cfb53218f65c8d2384976a6c115fe24f6425d",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "435d7bd6badbab5e5797445506021dee19450f89463856d26b9af10af5f479cc",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/managing/lolor.md",
@@ -1100,7 +1174,9 @@
       "route": "/pgedge/spock/managing/partition-mgmt/",
       "sha256": "6f4d0868dde8b1727ed428e44e00dac6c57d3a3af3d9aa0ad40c08d44cb06f31",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "3f5c8c3cbf5d0d1668498ae3d427e9cfecefb7bf3db95ec75a0b728a29549f78",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/managing/partition-mgmt.md",
@@ -1125,7 +1201,9 @@
         "6067747248c2fbcd587355ad3060fb704119f298fd4bedba2086b2113c15cdca",
         "d539de320936f75965812ea9787c8d22bd3c86e26b063aeb196fe31baf1e4dd2"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "bb207601d838599ed7cccca80b00e3a6c8a87fbaf310e25fbdb4423ac125f64f",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/managing/read-only.md",
@@ -1153,7 +1231,9 @@
         "cb8479a2733059521278eb1dd1e85d083dbe5b98ec29169307f1b95d7198391b",
         "3839f4dfb2b9ef52e4d559c0b43ac259405f2888ef68311af3ee602f4ce756a1"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "c8613f5d8244795b38137b3029b6475c925842101b0c225846d533a69573a095",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/managing/repset-trigger.md",
@@ -1178,7 +1258,9 @@
       "code_sha256": [
         "64a8aa01681e595281caf04fa70ccc4fdbb9caec5a3320a29d5e78a058a306b1"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "fc4526138db6e58c2f5c3d2bf57910418006cf441d0f4cdc31988bd57ec492fc",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/managing/snowflake.md",
@@ -1200,7 +1282,9 @@
       "route": "/pgedge/spock/managing/spock-autoddl/",
       "sha256": "dd4299267de08235d5449703ee03ac8f9375e2a75f2f3f091ba906f7242408ca",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "2eb854ca73a151befea19648df5f5cee24022b2394524fbf648d3f17b78a3d19",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/managing/spock-autoddl.md",
@@ -1220,7 +1304,9 @@
       "route": "/pgedge/spock/modify/",
       "sha256": "7b2b54515975a50a96a5d5c3cc3c8309c1c42ebfcc66d1cb8b3afc11b04ecf14",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "c24e1f4e88f0fc27020e3f273caf5152ee242a906510f991b1a6e6d11a56969b",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/modify/_index.md",
@@ -1240,7 +1326,9 @@
       "route": "/pgedge/spock/modify/add-node-pgbackrest/",
       "sha256": "2994314ecfc6f0f45c395feaa1c05f2dc13398ac58919a9c8b7ad77bce03370a",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "d03eb13ac984a45faff067a5ad60efd479d6e6e5e3218de6267fbf8b425fc112",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/modify/pg-upgrade-rolling-tutorial.en.md",
@@ -1296,7 +1384,9 @@
         "e05b9f0dd78c5500eeafda5cf608351d5c1615daa350a8b8654278efbd7c590a",
         "34d6ba9c46550f6ec20c998922a23ea8534545884729df816c3669ddc4bb2660"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "eb8e04e690d49fcd9f9c77d2b3348298599c823f8be63014cb52618d83ab7a83",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/modify/zodan/_index.en.md",
@@ -1306,7 +1396,9 @@
       "route": "/pgedge/spock/modify/zodan/",
       "sha256": "07db054bdbb6d90cea7b05c11e19a8af9fc96983fa60fea9012f2e45deb6de58",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "ff43d9cc8e94e6f1d6fd189bdb4b1913c76bcba300f2b9e81bbafdc04cdf088b",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/modify/zodan/_index.md",
@@ -1331,7 +1423,9 @@
         "7abe401a666a4dc9a7dc2e60e5c19785889520e1fbdd87c62597298db784270b",
         "9b5be4ee9fdada1c9b79e366db96d95692811801f668162954b49ec1f24dcd9e"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "41c5eb335163976c0755fdb2fe9173acc0a5c3a293fa79dbed6b6c2abadb9e36",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/modify/zodan/zodan-rolling-pg-version-tutorial.en.md",
@@ -1383,7 +1477,9 @@
         "e05b9f0dd78c5500eeafda5cf608351d5c1615daa350a8b8654278efbd7c590a",
         "bbf62be34c2a02c1c66f9a696c9152d0f1f4aeed2196a3d6352d0963f041a64a"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "5803d56381d40689523e7628829640ceb92d3874c95a1afb5ecb16e055644d1d",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/modify/zodan/zodan-tutorial.en.md",
@@ -1441,7 +1537,9 @@
         "65e55a01a210d426cdea18c17c47f0e553a84b9add974660a31a93b8ab7b1905",
         "adfabc50824dc2ee2bb0da7e7b2e16f38f2fa304314ff56c3e941b3b3fccb5ac"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "dec0bd42a8538fac8a2bb1a2111f3b53ec199ccaec475068676b8ebecef55518",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/monitoring/_index.en.md",
@@ -1451,7 +1549,9 @@
       "route": "/pgedge/spock/monitoring/",
       "sha256": "c3b0dfd4b2a3180fb7f66cdb759e38d30c7dbfb7d3b3f9320c63d83b9d0b1db1",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "0831438c628c588a4fc460364228a20fed2a0a90dd8563e920a9e779f79f6a36",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/monitoring/_index.md",
@@ -1473,7 +1573,9 @@
       "code_sha256": [
         "cb46040ba180a69e8eb4d36971428d1108d7f996d47ca77fcbdf585b38385aa2"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "436a2a70f3ca5d0762f445a81df99bd2360ebf6628f3ec74fb1ffcbc9951ff7e",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/monitoring/node-monitoring.en.md",
@@ -1502,7 +1604,9 @@
         "92f37db86f1625a0e8224e5b6e1030dc3885f3d39e8d2dd06de2701897b1238d",
         "cc85444a7625ae3fe37e0217ec642191f654596f735ec702b2f956ec9231d621"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "925d97410ee41a6abfccc4cc4ccf26f3bc9ca92505c8582d7fa7d627253755ea",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/monitoring/spock-info.en.md",
@@ -1517,7 +1621,9 @@
         "eb7ab3603e9da4f985db045cc229196f8c2d6688dc9d23c863096692883a4cb2",
         "7a2cd62072c750d966a12315566b928c88b70827b4f1f1cf8e4f85b78697724b"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "8cea71cf7bfe703bac5471f0cafcee35cb7ef0ff31bd487c33b2873ce2d0109d",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/monitoring/spock-sync-event.en.md",
@@ -1532,7 +1638,9 @@
         "893a402e91b35de8f7f3ccd5a4cb4bac942da501be3506866c03a178011dcae2",
         "4fc5a641f39f44ec913d89d15e55ca8836c9e5010ae59faed13692bf79f300e2"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "9cebe0488afaa4ba920290dacd13d8dc30d98939fa9a66e5fcd9a4292712256c",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/pgl-cheat-sheet.en.md",
@@ -1542,7 +1650,9 @@
       "route": "/pgedge/spock/pgl-cheat-sheet/",
       "sha256": "8136acbd676f5cf88d7fe66bc22c16d1d55f7ba947ff1637b620558bd721b1c3",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "830811733b5c6bc48a7e6ae190e23a5265a65ee1b6b937ca72d95f2a275afb0b",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/recovery/_index.en.md",
@@ -1552,7 +1662,9 @@
       "route": "/pgedge/spock/recovery/",
       "sha256": "abd940316a10306b7e4543b894107cbf31c75fbcdd5cadf4673fb157f1a0fac9",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "b5e0be5dca839cd4bd2feeb6e39099ec054bc98c859bf1122b977edf6ae8595d",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/recovery/_index.md",
@@ -1592,7 +1704,9 @@
         "4319fbac18df188c1241650f650aa917fa94ecf8b3000427e30f026f3f83cea0",
         "979f35aefd11b07de29ae1594d6ba3795fa9092018337438b856a972fb10fe47"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "e2206d178589fcd2d9abd3d6168d13228cd007601035eb9995021f40cbdc26ab",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/_index.en.md",
@@ -1602,7 +1716,9 @@
       "route": "/pgedge/spock/reference/",
       "sha256": "dc9bd075bd3eef29dc2a175539dc6bf4db5bb646fb6853449275de72410ca54b",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "8bf851126a67f8b26f4a6ae7e9f592f7c1d8d813a1728fb840b9e30817a31914",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/_index.md",
@@ -1622,7 +1738,9 @@
       "route": "/pgedge/spock/reference/functions/",
       "sha256": "854f34520df8271234e359881a7ef8b1e048be92ab36a5677f620fd497bb2858",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "8142ff1267813794f30e344d80b6ac9290168b603dee4898fdc3c62c2b8517ba",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/_index.md",
@@ -1646,7 +1764,9 @@
         "e446303e183f49a3255923c936139b74e5216086cd85853053961eb8bcd1f38c",
         "a533e27507a946958d55e19b97a7872ace0361dddcb0686c8a336aef3fc3c0b3"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "1b3efd4c62434b50260c4e258c6cc28e0a5d1607c00e74b748a73939a5af1221",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-gen-slot-name.en.md",
@@ -1656,7 +1776,9 @@
       "route": "/pgedge/spock/reference/functions/spock-gen-slot-name/",
       "sha256": "bfb606c4f0ef186fa06cf888cf069925e8eb691f3a971f05e8f26870385de07b",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "bf426faee0d63b6b0dbb9ade490447520bc179a623b2f3737587cf117f93c7a8",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-get-country.en.md",
@@ -1666,7 +1788,9 @@
       "route": "/pgedge/spock/reference/functions/spock-get-country/",
       "sha256": "6e34dcd0646392c3d0016e1ae9a6fcd5a0b9083ae0f8bbbca804ad77e2514c01",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "df39cb739ed1e880a05f6c7d6998a0e57b5d8ee5ff58921b4f3cca377c50281c",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-max-proto-version.en.md",
@@ -1676,7 +1800,9 @@
       "route": "/pgedge/spock/reference/functions/spock-max-proto-version/",
       "sha256": "6dea3498192483731850f65605322dbbeecd3b0179fe2b6f3876182ec374197b",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "d2a4e44c0a3c877b5d61de1514368869b5e32cb1e74b50542a9e6bde5f5d7a66",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-min-proto-version.en.md",
@@ -1686,7 +1812,9 @@
       "route": "/pgedge/spock/reference/functions/spock-min-proto-version/",
       "sha256": "265b034f167391573a3f07e2519b155fcae5928f93fc773daa65e3131607217e",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "571b7a212f19a76d3410859b39fbf7535e73b4d97e6cf3734c76f61a01c9041e",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-node-add-interface.en.md",
@@ -1696,7 +1824,9 @@
       "route": "/pgedge/spock/reference/functions/spock-node-add-interface/",
       "sha256": "45d7cbd5dff8db7af521b3b6207f5ca873d2cfd57d9c84ee76ba7e2229eaeb88",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "a72ca4f594cacc8596cf485f904ef5121145480cd7bd33984e912868bc4b2fb9",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-node-alter.en.md",
@@ -1706,7 +1836,9 @@
       "route": "/pgedge/spock/reference/functions/spock-node-alter/",
       "sha256": "ade195a572cab287f1c03b690c46108025fea39d4e4e5959d2f6d2cb8ac0e5ac",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "f6c381c0c8f0b173a13377e00009a25d85c98aabb31279336aa8224cf6285e69",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-node-create.en.md",
@@ -1716,7 +1848,9 @@
       "route": "/pgedge/spock/reference/functions/spock-node-create/",
       "sha256": "b36f0b4e912a383b43d7ff208d3309db5c92af37ef06f52f1922ae1b9f1a0dd3",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "7a3e32a633678d63b35e7dbc10f2127190c2beeafdff8690af3a8c3498b94078",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-node-drop-interface.en.md",
@@ -1726,7 +1860,9 @@
       "route": "/pgedge/spock/reference/functions/spock-node-drop-interface/",
       "sha256": "bde7f0537aeadbb64c1b93fb3e54cccbee6b6fcd43f3518421b356f1735a4b88",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "7bc127f4ab032da31191e2bb01baeb0d9a1e3e15ecf4599468dbe4a463e6f085",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-node-drop.en.md",
@@ -1736,7 +1872,9 @@
       "route": "/pgedge/spock/reference/functions/spock-node-drop/",
       "sha256": "4b591ca1310e9c7e08f7df7e77bf11f8cd7faacf02f1dcd8b2775a957eb127dd",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "428bae347e5767f9e3bdde5bb19cc3bcce815aa383fb4b5f7994129d85ac28d8",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-node-info.en.md",
@@ -1746,7 +1884,9 @@
       "route": "/pgedge/spock/reference/functions/spock-node-info/",
       "sha256": "28f2f13440457f8d9386ae030ea3f73080c27654b9707eb758790618cbb4473e",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "54b21b7a77afa882d897e9973cda564f66255ed6a2e3b97b3363cb79cbb0faf5",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-node-refresh-info.en.md",
@@ -1756,7 +1896,9 @@
       "route": "/pgedge/spock/reference/functions/spock-node-refresh-info/",
       "sha256": "9f98404f479b34e047e097a641486e51b2ca0eb91fd0ce16402e3a11e3c4b4a5",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "32969da536d5d8240bd734eb9df1b57fe74be8c571e05ee43d581fb4570a180d",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-replicate-ddl.en.md",
@@ -1766,7 +1908,9 @@
       "route": "/pgedge/spock/reference/functions/spock-replicate-ddl/",
       "sha256": "f1ad725cd3da8b2d2bcf6dff1ee6f17cbfa8936b5bd85c1b91ba810c5a4e2d05",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "93e79bb0411157344e245e08ca4afbee50b045251fde24bd2f99d52785825703",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-repset-add-all-seqs.en.md",
@@ -1776,7 +1920,9 @@
       "route": "/pgedge/spock/reference/functions/spock-repset-add-all-seqs/",
       "sha256": "768cd1d2bd2b38f4712ca9833d2c45883fc2fe935e51de9de5a9e4cdf5135530",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "cd4de90ce3801718ea4565f3d216524ee0369913aebc0065629166afe2f6ccfc",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-repset-add-all-tables.en.md",
@@ -1786,7 +1932,9 @@
       "route": "/pgedge/spock/reference/functions/spock-repset-add-all-tables/",
       "sha256": "ed371d7fda1af2dd0109bc775ea4e1733124e47c400f06f3aae530cc67fd4978",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "19803528acaea193b58bec2336b93d37ac50211055fc937930ba77eea0f3d310",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-repset-add-partition.en.md",
@@ -1796,7 +1944,9 @@
       "route": "/pgedge/spock/reference/functions/spock-repset-add-partition/",
       "sha256": "966aaf5a881ed79f006a543eaed39e22c4ba3a98a9665e2b5502f8442ec61fa3",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "8de4ead8c8a483095695b9f3357e2e09dbc37151b18baa8a71e7a1eb9c09e857",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-repset-add-seq.en.md",
@@ -1806,7 +1956,9 @@
       "route": "/pgedge/spock/reference/functions/spock-repset-add-seq/",
       "sha256": "9bc038c5aeb6281af38a1ee9b0ad26b88b0939a8faef598be834b719d0d12e67",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "daae9b79d094ebb911df18d6da26a479464c5d6104bb49314f383a048f9893a4",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-repset-add-table.en.md",
@@ -1816,7 +1968,9 @@
       "route": "/pgedge/spock/reference/functions/spock-repset-add-table/",
       "sha256": "0156541c097968cbe782edf0b548e0cc797dfc015d64ed718862eae541e23555",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "9a01dc883fce93b9010748889b6417351b7c8bfe2def1270b8a1a6afc654116f",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-repset-alter.en.md",
@@ -1826,7 +1980,9 @@
       "route": "/pgedge/spock/reference/functions/spock-repset-alter/",
       "sha256": "4ba6a63d27fab9d95c4435095b6ec0224a8a3af6ae06b8c5c4d4d27190f64ce4",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "87f13095bb5802385290d4c297ed7c2375ba9662052ebec66fde5b248ba55345",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-repset-create.en.md",
@@ -1836,7 +1992,9 @@
       "route": "/pgedge/spock/reference/functions/spock-repset-create/",
       "sha256": "c04dbc336ace2885b5e3d5256baa5f5489d5db6181529547e80df609319e7db5",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "fc77f64e2858905317c6ebbe08022a8194219621c3148ace49c042266c336105",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-repset-drop.en.md",
@@ -1846,7 +2004,9 @@
       "route": "/pgedge/spock/reference/functions/spock-repset-drop/",
       "sha256": "c6fa3540842878aca8689ae7221c4c9ec78ee2cb87dd1c1b348fe72ee91116df",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "8c884beb4fb57f7e0f447ec735cadb9262ef242262d6be161252364a710235f0",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-repset-remove-partition.en.md",
@@ -1856,7 +2016,9 @@
       "route": "/pgedge/spock/reference/functions/spock-repset-remove-partition/",
       "sha256": "06dcf9f397c00bd46132c567580e8c1f0043a3b37793c09a7fcb1b31d15da8be",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "0c7859ae1376c5d78cc500e28415a69cb4bdd9727e8fbd29d80f4a9ac01730a5",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-repset-remove-seq.en.md",
@@ -1866,7 +2028,9 @@
       "route": "/pgedge/spock/reference/functions/spock-repset-remove-seq/",
       "sha256": "bc8d0c012eb2a07024d5a1f3dc4f12cd5444c244e3c4d0cd2dfa717ce090b17b",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "ac4cbdb0ac5e919bb8c6094c977eef309b9a49e41e8f35125c44310f1e940d2c",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-repset-remove-table.en.md",
@@ -1876,7 +2040,9 @@
       "route": "/pgedge/spock/reference/functions/spock-repset-remove-table/",
       "sha256": "1bfda4e327e446713db063947ba07fba1bc6e211d5b87861899032234b8457ac",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "174ef6acad3c54af074f866be7906b76f75a37ceebd240fb1eee661f9c29bf1f",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-repset-show-table.en.md",
@@ -1886,7 +2052,9 @@
       "route": "/pgedge/spock/reference/functions/spock-repset-show-table/",
       "sha256": "b420ce14c8504c54bdd17437cbe5c3bf8544494da3978289ddefd4ce02a6e6d7",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "d3920532765205984304047c75cdcf9b3b6f0fc309253cf986972e81d5d640f6",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-sub-add-repset.en.md",
@@ -1896,7 +2064,9 @@
       "route": "/pgedge/spock/reference/functions/spock-sub-add-repset/",
       "sha256": "54ab8cf90e6f335bfdc84b548d7f70e4aa1b140e391cb1b0369331fa5df01863",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "6abf1e276bc356533441d11946767c289aac3f08e1746b577d6f46eccdaba111",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-sub-alter-interface.en.md",
@@ -1906,7 +2076,9 @@
       "route": "/pgedge/spock/reference/functions/spock-sub-alter-interface/",
       "sha256": "a9fe433b923303aacd7805ab02300cb3f446ebf87af1ac5fad85712bf985c418",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "e7cbf33b5afd9f77008a0f18dafec7aa0d2852c99d5949e317e7528e920e34a9",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-sub-alter-options.en.md",
@@ -1916,7 +2088,9 @@
       "route": "/pgedge/spock/reference/functions/spock-sub-alter-options/",
       "sha256": "ce43120d1121374cd7f3cb00bf5f3c54271dc3640323d8ab827f1a4e65586d3f",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "c0d73628eb4d30311237d0756bc6650e616c96656d5269696965738763352d6e",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-sub-alter-skiplsn.en.md",
@@ -1926,7 +2100,9 @@
       "route": "/pgedge/spock/reference/functions/spock-sub-alter-skiplsn/",
       "sha256": "8f930891b9ca621bdcfd9b0fc229e114e8d29c1ef4e9e2d3ac9c58380f7e5c15",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "358712ce95502981529be92e0b9d8a273923d3054fd557781d8aaafad013db0d",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-sub-alter-sync.en.md",
@@ -1939,7 +2115,9 @@
         "a9857302a1c6734e89c4068040309d6eb082ab12d10a791e96cc3ed1adcadbb1",
         "c985cda36f34db375be8de1e5c561b0548411998ff39567d5ae11e6021119bc1"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "f622177142f5fb2ac60ade1f876c4342984f3147e491b947f3c265a35355f961",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-sub-create.en.md",
@@ -1949,7 +2127,9 @@
       "route": "/pgedge/spock/reference/functions/spock-sub-create/",
       "sha256": "e29d5e6b658ded510d4520d3735d8e1e5eae59e6323b063606f0fe1597882cca",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "69e6b07b6695f45e515b225464701a20bb5585cda5482e5960d2eef6977466a2",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-sub-disable.en.md",
@@ -1962,7 +2142,9 @@
         "5ef7aa3d8f317219c5f020d1efb606c89df4cc60afc5f4dbd7345a74a97f1af2",
         "8251c9bfb09cfa08c49cc393d4d9d3258e9a09326be4facbba55d9fdf224fb9c"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "93e21640a41b91a73468f253a972dc929b6d35d1f5eb60daa61b8d8512903ea8",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-sub-drop.en.md",
@@ -1972,7 +2154,9 @@
       "route": "/pgedge/spock/reference/functions/spock-sub-drop/",
       "sha256": "bd3ea0bf85f36fc6f19005cf11889ecae89467162d5683019460bf394a56a5eb",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "1a536c6f4c5a24eb6e47cb8a8772e478b0c6c117984e3a9547a5eb886f8802a7",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-sub-enable.en.md",
@@ -1985,7 +2169,9 @@
         "3cb8dd7a34f6a38594e5843cd8076d87b6381b4e0aa9f4f6ecc99ec78f471935",
         "629a383733a968a5cea89b717693ad87c046cdbe78e16a96e74685bbbbad61c1"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "ab10e9b2b4fe1ca4dfaca33535a3e89519701044617d992973ad22aec78e2f62",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-sub-remove-repset.en.md",
@@ -1998,7 +2184,9 @@
         "28f8a1af1a2012c4abfb50af2f3fa0654c9c86ef4921b6c0dc2c6241bbcd3b76",
         "7ff305d3f557f70594dccac507fafde27b7f5631188f5ece6df718b44743730b"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "c17bc764bbcb7ee75fe510debf47861e3cbedaa5e26ebc3adae832effc5e2fa8",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-sub-resync-table.en.md",
@@ -2011,7 +2199,9 @@
         "209e3821cbb80f4d99150f0909e484e11a6f66c96ec318a59bdfaa7e6887f87a",
         "6652d2b9b111a165f1bbdd821a2026ad33ccac03cefcdc050d41c1cf7a28b25b"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "3cc3862d71f33c5350932d238afe02503263a0048f2be86ed9b26138d9211a83",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-sub-show-status.en.md",
@@ -2025,7 +2215,9 @@
         "0d0a0922a9f612db03539d5c63354841adb8df3ce5ad4874a86bf3ee9b225053",
         "8db56023ad1586212913ebb797432dd169ac487388d4e5e8e8a2a217e52e1b6c"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "76c171f2e415975b0678d4a9e0ac272b12685d44add12ee37629caba649f34d7",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-sub-show-table.en.md",
@@ -2038,7 +2230,9 @@
         "9078e627ea3e6fcc7696619547b0b4694f8dcc1fa78c4523ccc41a44d192fa89",
         "04809c24243e28e43e95971b2a08a11ff3089f6f1fde2b930cf41df938e69153"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "7cef165ffc9b98f9b9c49328e95084ae3ec8ebbf5c10f9cddf2c1600faa9e612",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-sub-wait-for-sync.en.md",
@@ -2051,7 +2245,9 @@
         "f55e433e40b3e774e2daf4d4bb5becf300845066d3d83d9524e61f9c9f353f07",
         "f6d9a87802ec0fd2cfefd8bd4a1d362aa01886546c738d12fb9a960e28baed71"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "d287fd01949dc1ac981ebaaee3a93cd02248e2c263f3c738e23a3aae4d21a1db",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-sync-event.en.md",
@@ -2064,7 +2260,9 @@
         "f7898ba24127ffb0ff13d08e502d745154af122cce33ad3efa93af4005f7c14e",
         "4d2a0010e277bd8faef4e23a368e24816e490ed10324b8124f47a1b95235ab24"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "db9c2d70fcda07aad8bb1046e5377ec34e90fe429ec4366a7838287a63da21cd",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-sync-seq.en.md",
@@ -2077,7 +2275,9 @@
         "c830205f5fad5d79f2a09599e79026122568951934a3a43b09d0400947e2450a",
         "16dd39b5c8409707aa5865f15e40148dd1c410d6d6723b551714246bb061f940"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "7b2247aed4d68aa9e5afe3d1e3639858c0213e4ec9884f0829f8325cd214fa29",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-table-wait-for-sync.en.md",
@@ -2087,7 +2287,9 @@
       "route": "/pgedge/spock/reference/functions/spock-table-wait-for-sync/",
       "sha256": "326d9c6c3d0502296499e21d38ac98779fbd3aa0cacc4c8414236687810f6a13",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "8e0437b66227ddbba70da3228ddc151106459bd34d71b19a32d1392f4760496e",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-version-num.en.md",
@@ -2097,7 +2299,9 @@
       "route": "/pgedge/spock/reference/functions/spock-version-num/",
       "sha256": "34a7d6cdf6c9806cbe9e66cdfbc8273f21d229707ef457911804ea77e2df94f7",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "ac1548c8ca99019549c30ae17efa30d8bd01a7ee109e14f8b7bed6ca560eeb0d",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-version.en.md",
@@ -2109,7 +2313,9 @@
       "code_sha256": [
         "4735c5c8e74504dddd0ed7cd70c3a23752988d6e5379fdc43fafec01b1ad9ca8"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "7bffea189a9394184bbf94b0477e9aa25c95e15167dfe4c32f2473fab8c0ef70",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-wait-slot-confirm-lsn.en.md",
@@ -2119,7 +2325,9 @@
       "route": "/pgedge/spock/reference/functions/spock-wait-slot-confirm-lsn/",
       "sha256": "cc553f05d441d4fc1800f0b8d70e3c20696f649683a07cead371e41d84a451d1",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "364366add9f829cba888f3f422fc47c078077f91f1ae3550c74b6c9079c40dd3",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/functions/spock-xact-commit-timestamp-origin.en.md",
@@ -2129,7 +2337,9 @@
       "route": "/pgedge/spock/reference/functions/spock-xact-commit-timestamp-origin/",
       "sha256": "3481ea518d305442c302528e55b32be521ad33d10060f8a97f3175e776af4735",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "a68ef4506cc9838ee7c12becc0a4edf013d45e113eee64ac44495703ccd1ac90",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/gen-mgmt.en.md",
@@ -2139,7 +2349,9 @@
       "route": "/pgedge/spock/reference/gen-mgmt/",
       "sha256": "049281be57eefd106bf913245ab84b6a5cb191fb37900bc7363fc7badd40dfae",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "ce27e79028389a4c0055d5dd98536e22fe908b351b5bc953c01c721f967c2ca2",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/node-mgmt.en.md",
@@ -2154,7 +2366,9 @@
         "db5a47c5b141ca03ef736e4ba31a1e46f210d945dbefc6ab01ce591f091b6d50",
         "0ab78d2d0a3d01e9795a3d947bf9c77f68595f59d063dfc9a75229b49051f71b"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "d65fea3207aabc18287d93b10424b5fa26593190a2d6e29a246891a9b4a3c1fc",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/repset-mgmt.en.md",
@@ -2172,7 +2386,9 @@
         "aab1ebf72d8f91bbed17c4b6730ffe6c75d0494422783e7828dc821d843d4851",
         "bd855be01c2f282e83183a087ca4a461235374669e1b08e3a039ac79116318a8"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "c478c945a2c5266b39a361d2ec95dabf1c2be9732c5b0745fd35e90ea42f6bed",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/reference/sub-mgmt.en.md",
@@ -2187,7 +2403,9 @@
         "5b232f6170230444221add814f624342143894c486cb6393442057a328fea7c4",
         "bcdffa21b0e08519990d5c6172b719ccd8055a0b776a1df27b099532b3952d7f"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "eb9dce6300ed674567634149441131df28fcda7a90220cff6124ee5b6975698d",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/sizing.en.md",
@@ -2202,7 +2420,9 @@
         "3b4419a87be9ed3920a54dc77079f13df000d0bec3f1310601ed4731827e4e93",
         "01df61ab8f842b41f8abbb21560ce873ebc3fbfddecf065210236e096a23683a"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "caa2c760e02a42c20eb362b157cfb08f1c0a42fe58e38ce997fbf72d36cadc65",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/sizing.md",
@@ -2231,7 +2451,9 @@
         "84d60a7934fa19057caf6cf3a90b1458cb3d76b885e512418dfb39b810d33d52",
         "be1d0fe0b0863be4f8afa224bb9e0a563bfe33bc8e4266fdc519ef5f6d76317a"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "ea95db72b28d65620cfc3016fc3fd72852262747aa192a292ba964ccdde3efb4",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/troubleshooting.en.md",
@@ -2288,7 +2510,9 @@
         "6ac4472e041cf58664cc5808b08db5b15aa17488e1723fdd5633392c7b6cf24f",
         "ce813039384ec4d498e3a1e16bd95bb013466a0f51f551ec8411467a87a46f58"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "717874dabe29fddac9f6227be402653caecbddc0557ba4f4161162416996c4d5",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/two-node.en.md",
@@ -2300,7 +2524,9 @@
       "code_sha256": [
         "6f020013ae31bb36e26103930bbb4c89cf4d1e6ccb744356e7cbf613ec75c667"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "b4ca775fb7947d9b1405902e9433e43c53125bc8d994424dce74e08979543059",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/two-node.md",
@@ -2342,7 +2568,9 @@
         "2e03c0a7306df31d583ca9ed677a4fa2134b358289ca7281fccb47dbad2b3123",
         "8cf6cadf4a897839906acea65c87c9060a72c9ad117ab08fc74e2034b1b237d3"
       ],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "4a8f8b22b1ef9d56b5f03986fc61a6efa14a3116db3f4732937b6bd5861ffaa2",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/spock/upgrading.md",
@@ -2424,5 +2652,10 @@
       "bytes": 1112,
       "sha256": "0ba825ec4a9324bc364e86202ef45b94dc7d1caef0b612e06cf1804caf2f3965"
     }
-  ]
+  ],
+  "english_update": {
+    "date": "2026-11-21",
+    "inventory": "data/updates/2026-11-21.json",
+    "translation_status": "pending; previous source and review basis retained"
+  }
 }

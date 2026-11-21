@@ -3,11 +3,11 @@ title: Snowflake Functions
 description: You can query the following Snowflake functions at the psql command line to return useful information
   about tables that use Snowflake sequences.
 weight: 200
-upstream_source: pgedge-snowflake
-upstream_link: https://github.com/pgEdge/snowflake/blob/429a16803c8c6336fcfede7cce0ccd3de05216d8/docs/snowflake_functions.md
+upstream_source: pgedge-snowflake-20261121
+upstream_link: https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8/docs/snowflake_functions.md
 upstream_modified: true
-upstream_ref: 429a16803c8c
-source_kind: pinned-main-snapshot
+upstream_ref: 9506e1bd5c1f
+source_kind: pinned-release-tag
 type: docs
 ---
 
@@ -90,4 +90,4 @@ acctg=# SELECT * FROM snowflake.format(136169504773242881);
 
 ---
 
-[Upstream source](https://github.com/pgEdge/snowflake/blob/429a16803c8c6336fcfede7cce0ccd3de05216d8/docs/snowflake_functions.md) · `429a16803c8c` · Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).
+[Upstream source](https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8/docs/snowflake_functions.md) · `9506e1bd5c1f` · Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).

@@ -2,11 +2,11 @@
 title: 'Creating a Spock Cluster: End-to-End Installation Guide'
 description: This guide walks you through installing Spock and creating a two-node active-active replication cluster.
 weight: 30
-upstream_source: pgedge-spock
-upstream_link: https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/getting_started.md
+upstream_source: pgedge-spock-20261121
+upstream_link: https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/getting_started.md
 upstream_modified: true
-upstream_ref: 4ac1aec2f080
-source_kind: pinned-main-snapshot
+upstream_ref: d05e2e2b6a82
+source_kind: pinned-release-tag
 linkTitle: Getting started
 type: docs
 ---
@@ -95,13 +95,13 @@ The examples use PostgreSQL 18. If you switch to 15, 16, 17, or 19, update every
 For RHEL/Rocky Linux/AlmaLinux:
 
 ```bash
-sudo dnf install -y pgedge-postgres18-server pgedge-postgres18-contrib pgedge-spock18
+sudo dnf install -y pgedge-postgres18-server pgedge-postgres18-contrib pgedge-spock50_18
 ```
 
 For Ubuntu/Debian:
 
 ```bash
-sudo apt install -y pgedge-postgres18-server pgedge-postgres18-contrib pgedge-spock18
+sudo apt install -y pgedge-postgresql-18 pgedge-postgresql-18-spock50
 ```
 
 On each node, initialize the PostgreSQL database cluster.
@@ -576,4 +576,4 @@ For more information, see the following resources:
 
 ---
 
-[Upstream source](https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/getting_started.md) · `4ac1aec2f080` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).
+[Upstream source](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/getting_started.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).

@@ -2,10 +2,10 @@
 title: Installing and Configuring lolor
 description: lolor is supported on Postgres versions 16 and later.
 weight: 200
-upstream_source: pgedge-lolor
-upstream_link: https://github.com/pgEdge/lolor/blob/ac3893a7707a65f71f494f260b1e3cd88f171770/docs/install_configure.md
+upstream_source: pgedge-lolor-20261121
+upstream_link: https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/docs/install_configure.md
 upstream_modified: true
-upstream_ref: ac3893a7707a
+upstream_ref: 1548836b0df0
 source_kind: pinned-main-snapshot
 type: docs
 ---
@@ -54,14 +54,15 @@ SET search_path=lolor,"$user",public,pg_catalog
 
 lolor renames any existing methods in `pg_catalog.lo_*` to `pg_catalog.lo_*_orig`, and new versions of these methods are introduced.  If you remove the extension, the renamed `pg_catalog.lo_*_orig` functions are restored to their initial names.
 
-When you replicate large objects with Spock, the `pg_largeobject` and `pg_largeobject_metadata` tables must belong to your replication set. Connect to the lolor database and add them with `spock.repset_add_table`:
+When you replicate large objects with Spock, the tables `pg_largeobject`, `pg_largeobject_metadata` and `pg_largeobject_description` must belong to your replication set. The third table holds the comment of each object that was migrated from native storage; without it, a `lo_unlink()` leaves the comment behind on the other nodes, and a node that is added or resynchronized later does not receive the comments. Connect to the lolor database and add them with `spock.repset_add_table`:
 
 ```sql
 -- 'default' is Spock's built-in replication set; subscriptions consume it automatically.
 SELECT spock.repset_add_table('default', 'lolor.pg_largeobject');
 SELECT spock.repset_add_table('default', 'lolor.pg_largeobject_metadata');
+SELECT spock.repset_add_table('default', 'lolor.pg_largeobject_description');
 ```
 
 ---
 
-[Upstream source](https://github.com/pgEdge/lolor/blob/ac3893a7707a65f71f494f260b1e3cd88f171770/docs/install_configure.md) · `ac3893a7707a` · Copyright (c) 2024–2026, pgEdge, Inc. [PostgreSQL License](/pgedge/about/license/).
+[Upstream source](https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/docs/install_configure.md) · `1548836b0df0` · Copyright (c) 2024–2026, pgEdge, Inc. [PostgreSQL License](/pgedge/about/license/).

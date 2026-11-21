@@ -3,11 +3,11 @@ title: Snowflake
 description: Using a Snowflake sequence allows you to take full advantage of the benefits offered by a distributed,
   multi-master replication solution.
 weight: 30
-upstream_source: pgedge-snowflake
-upstream_link: https://github.com/pgEdge/snowflake/blob/429a16803c8c6336fcfede7cce0ccd3de05216d8/docs/index.md
+upstream_source: pgedge-snowflake-20261121
+upstream_link: https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8/docs/index.md
 upstream_modified: true
-upstream_ref: 429a16803c8c
-source_kind: pinned-main-snapshot
+upstream_ref: 9506e1bd5c1f
+source_kind: pinned-release-tag
 linkTitle: Snowflake
 icon: fa-solid fa-book-open
 sidebar_root_for: self
@@ -18,7 +18,7 @@ sidebar_root_menu: false
 
 
 > [!NOTE] Source version
-> This is a pinned snapshot of upstream `main`; it may differ from the versioned documentation website. Check [versions and sources](/pgedge/about/attribution/) before deploying.
+> The English source is **v2.6.1**, pinned at `9506e1bd5c1f`. The Chinese edition remains on its earlier source pending translation. Check [versions and sources](/pgedge/about/attribution/) before deploying.
 
 
 Using a [`Snowflake` sequence](https://github.com/pgEdge/snowflake?tab=readme-ov-file#snowflake-sequences-for-postgresql) allows you to take full advantage of the benefits offered by a distributed, multi-master replication solution. Snowflake is a Postgres extension that provides an int8 and sequence based unique ID solution to optionally replace the Postgres built-in bigserial data type. 
@@ -53,4 +53,4 @@ A Snowflake sequence is made up of a timestamp, a counter, and a unique node ide
 
 ---
 
-[Upstream source](https://github.com/pgEdge/snowflake/blob/429a16803c8c6336fcfede7cce0ccd3de05216d8/docs/index.md) · `429a16803c8c` · Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).
+[Upstream source](https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8/docs/index.md) · `9506e1bd5c1f` · Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).

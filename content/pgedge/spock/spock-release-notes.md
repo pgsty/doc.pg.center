@@ -2,11 +2,11 @@
 title: Spock Release Notes
 description: This section lists what changed since 6.0.0-beta.1, for those testing the beta.
 weight: 140
-upstream_source: pgedge-spock
-upstream_link: https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/spock_release_notes.md
+upstream_source: pgedge-spock-20261121
+upstream_link: https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/spock_release_notes.md
 upstream_modified: true
-upstream_ref: 4ac1aec2f080
-source_kind: pinned-main-snapshot
+upstream_ref: d05e2e2b6a82
+source_kind: pinned-release-tag
 linkTitle: Release notes
 type: docs
 ---
@@ -50,7 +50,8 @@ will be removed at general availability.
   `spock.reserved_object` catalog and its functions, the node metadata
   functions and the trigger on `spock.node`, and the monitoring views and
   functions with their `pg_monitor` grants), removes
-  `spock.wait_for_apply_worker()` and `spock.get_apply_worker_status()`,
+  `spock.wait_for_apply_worker()`, reimplements
+  `spock.get_apply_worker_status()` over `spock.get_worker_status()`,
   marks `spock.md5_agg` parallel safe on a node upgraded from 5.x, and sets
   the `failover` flag on existing slots.  The second only sets the version
   name back to `6.0.0`.
@@ -71,8 +72,8 @@ will be removed at general availability.
   Running the commands on a node that already has beta 2's
   catalog changes nothing.  These two update steps will be removed at general
   availability.
-* The upgrade from 5.0.x now starts at 5.0.13.  A 5.0.11 or 5.0.12 node
-  still upgrades in one `ALTER EXTENSION spock UPDATE`, through 5.0.13.
+* The upgrade from 5.0.x now starts at 5.0.14.  A 5.0.11, 5.0.12 or 5.0.13
+  node still upgrades in one `ALTER EXTENSION spock UPDATE`, through 5.0.14.
 * On a server with PostgreSQL's fix for CVE-2026-6471, `spock_output` must be
   listed in `output_plugin_libraries`.  See *Upgrading* below.
 * On PostgreSQL 18, `spock.pg_standby_slot_names` did nothing on beta 1, so a
@@ -137,13 +138,12 @@ schema is not, so a monitoring role needs that granted as well.
   `get_apply_stats()` and `get_pending_exceptions()` are executable by
   `pg_monitor` only, and `reset_events()` by superusers only.
 
-**Removed**
-
-* `spock.get_apply_worker_status()`, replaced by
-  `spock.get_worker_status()` and the `spock.worker_status` view.
-
 **Changed**
 
+* `spock.get_apply_worker_status()` is now a SQL function over
+  `spock.get_worker_status()`, with the same columns and rows as before.
+  `spock.get_worker_status()` and the `spock.worker_status` view cover
+  every worker type and give more detail.
 * `spock.reset_subscription_stats()` also resets the new activity counters,
   on every supported PostgreSQL version, and EXECUTE on it is revoked from
   PUBLIC.
@@ -194,7 +194,7 @@ above.
   DDL replication.
 * `spock.reserved_object_add(p_name name, p_kind text, p_exclude_from_dump
   boolean DEFAULT true, p_block_in_repset boolean DEFAULT true,
-  p_replicate_ddl boolean DEFAULT NULL)`.
+  p_replicate_ddl boolean DEFAULT true)`.
 * `spock.reserved_object_remove(p_name name, p_kind text)`.
 * `spock.node_alter(p_location text, p_country text, p_info_patch jsonb)`,
   which changes the local node's metadata and validates a `tiebreaker`
@@ -302,7 +302,7 @@ above.
   `SET`.
 * Documentation on running logical slot failover under Patroni, with the
   sample `samples/set_synchronized_standby_slots.sh`.
-* Bug fixes from 5.0.11, 5.0.12 and 5.0.13.  From 5.0.13: a promoted
+* Bug fixes from 5.0.11 to 5.0.14.  From 5.0.13: a promoted
   physical standby of a subscriber no longer asks the provider to resend
   transactions the subscriber had already applied, which showed up as
   conflicts or as duplicate rows in tables without a primary key;
@@ -312,8 +312,26 @@ above.
   during structure sync reports how the child exited instead of an
   unrelated error such as `Invalid argument`; and table sync no longer
   fails against an origin older than 5.0.7, which lacks
-  `spock.pause_apply_workers()`.
-* Builds against PostgreSQL 19 beta 3, beta 4 and RC1.
+  `spock.pause_apply_workers()`.  From 5.0.14, besides the failover-slots,
+  frozen-row and `CALL` fixes listed above: a slot named in
+  `spock.pg_standby_slot_names` that does not exist is reported even when
+  the other slots meet `spock.standby_slots_min_confirmed`, a slot named
+  twice is counted once, AutoDDL no longer replicates `CLUSTER` without
+  a table or `CLUSTER` on a partitioned table, and an apply worker no
+  longer reports the exception log full while it has free entries, or
+  leaves a Spock lock held when it really is full.
+* An error from the provider's startup message, or a malformed `BEGIN`,
+  no longer makes the apply worker write outside its exception log entry
+  in shared memory.  The worker restarts after
+  `spock.restart_delay_default` instead.
+* AutoDDL failed `CREATE SCHEMA ... CREATE TABLE ...` with `relation "..."
+  does not exist`, which aborted the statement.  This happened on
+  PostgreSQL 19 RC2, and on earlier versions when the statement ran from a
+  function or over the extended query protocol.
+* Builds against PostgreSQL 19 beta 3, beta 4, RC1 and RC2, and against
+  PostgreSQL 15.20, 16.16, 17.11, 17.12 and 18.7.  The `attoptions` server
+  patches were refreshed for changes in these releases; only context lines
+  changed.
 
 ## Spock 6.0.0 {#spock-600}
 
@@ -608,10 +626,11 @@ replication state through a set of views in the `spock` schema:
 
 The event history size is set by the new `spock.event_history_size` GUC.
 `spock.reset_subscription_stats()` now resets both the activity and the
-conflict counters. The internal `spock.get_apply_worker_status()` function
-is replaced by `spock.get_worker_status()` and the `spock.worker_status`
-view.  The GUC, views and functions are listed under *Node monitoring
-GUCs, views and functions* below.
+conflict counters. `spock.get_apply_worker_status()` is kept, now as a SQL
+function over the new `spock.get_worker_status()`, which with the
+`spock.worker_status` view covers every worker type.  The GUC, views and
+functions are listed under *Node monitoring GUCs, views and functions*
+below.
 
 ### Liveness and feedback refactoring {#liveness-and-feedback-refactoring}
 
@@ -739,7 +758,20 @@ AutoDDL has been refactored and hardened:
   dropped was queued for replication, even though every peer runs the same
   cleanup when it applies the `DROP EXTENSION`.  For lolor this left peers
   unable to drop the extension and stalled apply.  The `DROP EXTENSION`
-  itself still replicates.
+  itself still replicates, except for a node-local extension (below).
+* **`CREATE`, `ALTER` and `DROP EXTENSION lolor` are no longer
+  replicated.** lolor refuses to be created or dropped by an apply
+  worker, so every peer logged the replicated statement in
+  `spock.exception_log` and discarded it, while the node that ran it
+  reported it as replicated.  The `lolor` extension row in
+  `spock.reserved_object` has `replicate_ddl = false`, and AutoDDL runs
+  these statements only where they are issued, with a WARNING saying so.
+  Run them on each node.  `COMMENT ON EXTENSION lolor` and `SECURITY
+  LABEL ON EXTENSION lolor` stay local too.  A `DROP EXTENSION` naming
+  lolor together with another extension is refused while DDL replication
+  is on, and so is `CREATE EXTENSION ... CASCADE` of an extension that
+  requires lolor.  `spock.replicate_ddl()` refuses these statements for
+  lolor.
 
 ### Reserved schemas and extensions {#reserved-schemas-and-extensions}
 
@@ -747,10 +779,14 @@ Spock keeps some schemas and extensions out of the structure-sync dump and
 out of replication sets.  That list used to be fixed in the code.  It is now
 the `spock.reserved_object` catalog, with three settings per row:
 
-* `exclude_from_dump` — left out of the structure-sync dump.
-* `block_in_repset` — its tables may not be added to a replication set.
-* `replicate_ddl` (schemas only) — when `false`, DDL against the schema runs
-  only on the node where it is issued.
+* `exclude_from_dump`: left out of the structure-sync dump.
+* `block_in_repset`: its tables may not be added to a replication set.
+* `replicate_ddl`: when `false`, `CREATE`, `ALTER` and `DROP EXTENSION`
+  for the extension run only on the node where they are issued.  For a
+  schema, the same holds for the DDL statements AutoDDL can trace to the
+  schema; others, such as `GRANT`, still replicate.  See the list in
+  [Replication Set Management](/pgedge/spock/reference/repset-mgmt/).  The
+  default is `true`.
 
 The built-in rows cannot be changed or removed:
 
@@ -758,7 +794,7 @@ The built-in rows cannot be changed or removed:
 |--------------|-------------------|-----------------|---------------|
 | `spock`      | yes               | yes             | yes           |
 | `snowflake`  | yes               | yes             | yes           |
-| `lolor`      | yes               | no              | yes           |
+| `lolor`      | yes               | no              | schema yes, extension no |
 | `coldfront`  | yes               | no              | yes           |
 | `pgedge_ace` | yes               | yes             | no            |
 {.wide .expand}
@@ -1095,7 +1131,7 @@ or `NOTHING` is also rejected.
   restart skipping.
 * `spock.reserved_object_add(p_name name, p_kind text,
   p_exclude_from_dump boolean DEFAULT true, p_block_in_repset boolean
-  DEFAULT true, p_replicate_ddl boolean DEFAULT NULL)` — reserve a schema
+  DEFAULT true, p_replicate_ddl boolean DEFAULT true)` — reserve a schema
   or extension, or change an existing row.
 * `spock.reserved_object_remove(p_name name, p_kind text)` — remove a
   reserved schema or extension you added.
@@ -1185,16 +1221,13 @@ so a monitoring role needs that granted as well.
 * `spock.reset_subscription_stats(subid)` also resets the activity
   counters behind `spock.subscription_stats`, on every supported
   PostgreSQL version, and only superusers can run it.
-
-**Removed**
-
-* `spock.get_apply_worker_status()`: replaced by
-  `spock.get_worker_status()`, which covers every worker type, and the
-  `spock.worker_status` view.
+* `spock.get_apply_worker_status()` is now a SQL function over
+  `spock.get_worker_status()`, with the same columns and rows as before.
 
 ### Bug fixes carried forward from the 5.0.x line {#bug-fixes-carried-forward-from-the-50x-line}
 
-These shipped in 5.0.6 – 5.0.13 and are included in 6.0.0:
+These shipped in 5.0.6 – 5.0.14 and are included in 6.0.0.  The 5.0.14
+fixes are listed under *Other changes* in the 6.0.0-beta.2 notes above.
 
 * A promoted physical standby of a subscriber could replay transactions the
   subscriber had already applied.  The apply worker's commits record the
@@ -1279,17 +1312,18 @@ These shipped in 5.0.6 – 5.0.13 and are included in 6.0.0:
 
 ### Upgrading {#upgrading}
 
-The upgrade from 5.0.13 to 6.0.0 is a single `ALTER EXTENSION spock UPDATE`
+The upgrade from 5.0.14 to 6.0.0 is a single `ALTER EXTENSION spock UPDATE`
 once the binaries are swapped.  Earlier 5.0.x releases upgrade in the same
-single step, through 5.0.13.  The upgrade:
+single step, through 5.0.14.  The upgrade:
 
 * drops the legacy `spock.progress` table and recreates it as a view,
 * replaces the `spock.lag_tracker` view definition,
 * migrates `spock.resolutions.conflict_type` values,
 * adds the new functions, the `sub_id_generator` sequence and the
   `spock.reserved_object` catalog,
-* drops `spock.wait_for_apply_worker()` and
-  `spock.get_apply_worker_status()`,
+* drops `spock.wait_for_apply_worker()`,
+* replaces the C `spock.get_apply_worker_status()` with a SQL function over
+  `spock.get_worker_status()`,
 * adds the `node_info_broadcast_trigger` trigger on `spock.node`,
 * adds the monitoring views and functions, and grants the read side to
   `pg_monitor`,
@@ -1325,12 +1359,109 @@ as a deadlock or lock timeout.  If the problem never clears, expect the
 worker to restart every `spock.restart_delay_default` (5 seconds by default)
 instead of a disabled subscription or a discarded transaction.
 
-## Spock 5.0.13 {#spock-5013}
+## Spock 5.0.14 {#spock-5014}
 
 ### Upgrade Notes {#upgrade-notes}
-* There are no schema changes in 5.0.13.
+* There are no schema changes in 5.0.14.
+
+* On PostgreSQL 16 and later, we recommend setting the new
+  `spock.failover_slots_database` setting on each standby to the Spock
+  database. It makes sure a subscriber is not missing transactions after the
+  standby is promoted in a failover. Without it, a few transactions that
+  committed on the primary shortly before the failover may never be sent to
+  subscribers. Slot copies are then synchronized as in 5.0.13, and each one
+  is reported once with a WARNING. The database has to be named because the
+  failover slot worker runs once per server, not in any one database. The
+  setting requires a restart. While it is set, the worker stays connected to
+  that database, so `DROP DATABASE` and `ALTER DATABASE ... RENAME` on it fail
+  unless you use `WITH (FORCE)` or clear the setting. See
+  [Configuring Spock](/pgedge/spock/configuration/).
+
+* AutoDDL no longer replicates CLUSTER without a table, CLUSTER on a
+  partitioned table, or, on PostgreSQL 19, REPACK with ANALYZE or
+  CONCURRENTLY. These commit on their own partway through and broke the apply
+  worker. They now run only on the node where they are issued, so run them on
+  each node yourself. During a rolling upgrade, a node still on 5.0.13 can
+  still send them, so avoid them or turn off AutoDDL until every node is on
+  5.0.14.
 
 ### Bug Fixes {#bug-fixes}
+* On a physical standby, the failover slot worker kept advancing a slot copy
+  that had been invalidated, so it looked current but could not serve a
+  subscriber after a promotion. The worker now reports such a copy, drops it
+  and recreates it from the primary. The new
+  `spock.failover_slots_recreate_invalidated` setting turns that off.
+
+* Creating a slot copy on the standby held up the sync of every other slot
+  until the primary's slot caught up, and a copy still waiting at promotion
+  was kept with positions it could not serve. A new copy is now a temporary
+  slot until the primary has caught up, and is dropped if the standby is
+  promoted first.
+
+* A slot copy carried the primary's positions but not its snapshot, so after
+  a promotion the transactions that committed before decoding was consistent
+  were never sent. With the new `spock.failover_slots_database` setting the
+  worker decodes each copy on the standby so that it has a consistent
+  snapshot.
+
+* On PostgreSQL 17 and later, a copy made by native slot sync whose slot the
+  primary later dropped made the worker fail and restart every minute. The
+  worker now leaves it and reports it once.
+
+* A physical slot named in `spock.pg_standby_slot_names` that does not exist
+  was never reported when the other named slots already satisfied
+  `spock.standby_slots_min_confirmed`, so the walsender could wait on it
+  silently. The missing slot is now named in a warning even when the quorum
+  is met, and the warning is issued again if the setting is reloaded to name
+  a different missing slot.
+
+* A slot listed twice in `spock.pg_standby_slot_names` was counted twice, so
+  with the default `spock.standby_slots_min_confirmed` of -1, `'sb1,sb1'`
+  needed two confirmations from one slot and held replication until
+  `wal_sender_timeout` on every attempt. Repeated names are now ignored.
+
+* An apply worker could fail with `unable to find an empty exception log
+  slot` while most entries were still free, for example when subscriptions
+  with the same name in different databases started at the same time. The
+  error also left a Spock shared memory lock held, so the manager workers,
+  `spock.sub_create()` and `spock.sub_show_status()` hung until the server
+  was restarted. The error is now raised only when the log is really full,
+  the lock is released first, and the worker restarts after
+  `spock.restart_delay_default`.
+
+* Under `last_update_wins`, an incoming UPDATE always won against a local row
+  that VACUUM had frozen, even when the local change was newer, so nodes could
+  end up with different values. Since PostgreSQL 16, VACUUM can freeze
+  recently written rows. Spock now finds the commit timestamp of a frozen row
+  from its original transaction ID.
+
+* A procedure that ran COMMIT or ROLLBACK, called over the extended query
+  protocol (psycopg, JDBC) with a bound parameter, could crash the backend
+  and restart the node. `spock.wait_for_sync_event()` runs ROLLBACK, so just
+  waiting for a sync event from such a client was enough. Spock read the
+  statement after the procedure had freed it. It now decides whether the
+  statement is DDL before running it.
+
+* A replicated CLUSTER without a table crashed the apply worker on the
+  subscriber, restarting the postmaster and replaying the statement on every
+  restart. CLUSTER on a partitioned table, and REPACK with ANALYZE or
+  CONCURRENTLY on PostgreSQL 19, had the same problem or hung the worker.
+  These forms are no longer replicated. See Upgrade Notes.
+
+* Spock failed to build against PostgreSQL 19 RC1, which changed the
+  signature of `RelationFindReplTupleByIndex()`.
+
+* The Debian packages for different PostgreSQL major versions could not have
+  their debug symbol packages installed together, because each one shipped
+  the same build-id file for `spockctrl`. `spockctrl` is no longer in the
+  `-dbgsym` package.
+
+## Spock 5.0.13 {#spock-5013}
+
+### Upgrade Notes {#upgrade-notes-1}
+* There are no schema changes in 5.0.13.
+
+### Bug Fixes {#bug-fixes-1}
 * A promoted standby of a subscriber could replay transactions the subscriber
   had already applied. The subscription's replication origin was not written
   to the WAL, so a standby resumed from the last checkpoint's position. The
@@ -1351,7 +1482,7 @@ instead of a disabled subscription or a discarded transaction.
 
 ## Spock 5.0.12 {#spock-5012}
 
-### Upgrade Notes {#upgrade-notes-1}
+### Upgrade Notes {#upgrade-notes-2}
 * There are no schema changes in 5.0.12.
 
 * PostgreSQL's 2026 security fix for CVE-2026-6471 (back-patched to every
@@ -1375,7 +1506,7 @@ instead of a disabled subscription or a discarded transaction.
   restart every `spock.restart_delay_default` (5 seconds by default) rather
   than a disabled subscription or a discarded transaction.
 
-### Bug Fixes {#bug-fixes-1}
+### Bug Fixes {#bug-fixes-2}
 * The apply worker now retries after temporary errors. Some errors have
   nothing to do with the replicated data: PostgreSQL picked the apply worker
   as a deadlock victim, `lock_timeout` fired, the server briefly ran out of a
@@ -1550,7 +1681,7 @@ instead of a disabled subscription or a discarded transaction.
   state is node-local, so its objects are now excluded from both the schema
   copy and the data sync, even when an ACE table belongs to a replication set.
 
-### Bug Fixes {#bug-fixes-2}
+### Bug Fixes {#bug-fixes-3}
 
 * Fixed a bug where a transient provider connection loss could incorrectly
   disable a subscription under SUB_DISABLE exception handling. A transaction
@@ -1560,7 +1691,7 @@ instead of a disabled subscription or a discarded transaction.
 
 ## Spock 5.0.10 {#spock-5010}
 
-### Bug Fixes {#bug-fixes-3}
+### Bug Fixes {#bug-fixes-4}
 * Improve apply performance on tables with a unique index over a frequently
   NULL column. Rows with a NULL in such a key are now recognized as
   non-conflicting without an unnecessary index scan, avoiding a slowdown that
@@ -1595,7 +1726,7 @@ instead of a disabled subscription or a discarded transaction.
 * Initial PostgreSQL 19 support. Adds the server-side patches required to build
   and run Spock against PostgreSQL 19.
 
-### Bug Fixes {#bug-fixes-4}
+### Bug Fixes {#bug-fixes-5}
 * Fix silently dropped writes after a synchronous-standby failover.
   Spock could report an incorrect replication position to the publisher, so a
   promoted standby resumed from the wrong point and lost the changes in
@@ -1622,7 +1753,7 @@ instead of a disabled subscription or a discarded transaction.
 
 ## Spock 5.0.8 {#spock-508}
 
-### Bug Fixes {#bug-fixes-5}
+### Bug Fixes {#bug-fixes-6}
 * Fix subscriber crash on transactions larger than 2 GB. `apply_replay_bytes`
   was declared as `int`, causing signed-integer overflow and a crash when a
   single replicated transaction exceeded 2 GB of WAL data. Changed to
@@ -1663,7 +1794,7 @@ Logical Slot Failover Improvements
   to the native slotsync worker if `sync_replication_slots = on` is set,
   preventing conflicts.
 
-### Bug Fixes {#bug-fixes-6}
+### Bug Fixes {#bug-fixes-7}
 * Preserve the original error message in `spock.exception_log` when applying
   in `TRANSDISCARD` or `SUB_DISABLE` mode. Previously the original error was
   written only to the server log and lost before the retry pass; every row in
@@ -1741,7 +1872,7 @@ Logical Slot Failover Improvements
   batched and flushed at most once per second from the main apply loop.
   Shared memory is still updated immediately internally for correctness.
 
-### Bug Fixes {#bug-fixes-7}
+### Bug Fixes {#bug-fixes-8}
 * Fix initdb assertion failure in attoptions patch for PG15/16/17.
 * Fix two bugs in the table re-sync routine: WAL sending is now switched off
   during truncate and re-sync to prevent data loss, and the infinite wait was
@@ -1956,4 +2087,4 @@ the BDR/pg_logical base:
 
 ---
 
-[Upstream source](https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/spock_release_notes.md) · `4ac1aec2f080` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).
+[Upstream source](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/spock_release_notes.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).

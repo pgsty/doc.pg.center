@@ -3,11 +3,11 @@ title: 'Tutorial: Upgrading the Postgres Version In Place with pg_upgrade'
 description: If your database is too large for your system's free storage to hold a second full copy, you can upgrade
   the node's existing data directory in place with pgupgrade.
 weight: 200
-upstream_source: pgedge-spock
-upstream_link: https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/modify/pg_upgrade_rolling_tutorial.md
+upstream_source: pgedge-spock-20261121
+upstream_link: https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/modify/pg_upgrade_rolling_tutorial.md
 upstream_modified: true
-upstream_ref: 4ac1aec2f080
-source_kind: pinned-main-snapshot
+upstream_ref: d05e2e2b6a82
+source_kind: pinned-release-tag
 type: docs
 ---
 
@@ -221,13 +221,13 @@ our example. Finish all steps for one node before starting the next.
    For PostgreSQL 18 on RHEL, Rocky Linux, or AlmaLinux:
 
     ```bash
-    sudo dnf install -y pgedge-postgres18-server pgedge-postgres18-contrib pgedge-spock18
+    sudo dnf install -y pgedge-postgres18-server pgedge-postgres18-contrib pgedge-spock50_18
     ```
 
     On Ubuntu or Debian:
 
     ```bash
-    sudo apt install -y pgedge-postgres18-server pgedge-postgres18-contrib pgedge-spock18
+    sudo apt install -y pgedge-postgresql-18 pgedge-postgresql-18-spock50
     ```
 
     `pg_upgrade` recreates the Spock extension in the new cluster at
@@ -816,4 +816,4 @@ For more information, review the following resources:
 
 ---
 
-[Upstream source](https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/modify/pg_upgrade_rolling_tutorial.md) · `4ac1aec2f080` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).
+[Upstream source](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/modify/pg_upgrade_rolling_tutorial.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).

@@ -2,10 +2,10 @@
 title: Using lolor
 description: 'The following command examples demonstrate using lolor:'
 weight: 200
-upstream_source: pgedge-lolor
-upstream_link: https://github.com/pgEdge/lolor/blob/ac3893a7707a65f71f494f260b1e3cd88f171770/docs/using_lolor.md
+upstream_source: pgedge-lolor-20261121
+upstream_link: https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/docs/using_lolor.md
 upstream_modified: true
-upstream_ref: ac3893a7707a
+upstream_ref: 1548836b0df0
 source_kind: pinned-main-snapshot
 type: docs
 ---
@@ -70,4 +70,4 @@ lolor_db=# SELECT lo_unlink (1100449);
 
 ---
 
-[Upstream source](https://github.com/pgEdge/lolor/blob/ac3893a7707a65f71f494f260b1e3cd88f171770/docs/using_lolor.md) · `ac3893a7707a` · Copyright (c) 2024–2026, pgEdge, Inc. [PostgreSQL License](/pgedge/about/license/).
+[Upstream source](https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/docs/using_lolor.md) · `1548836b0df0` · Copyright (c) 2024–2026, pgEdge, Inc. [PostgreSQL License](/pgedge/about/license/).

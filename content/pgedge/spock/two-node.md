@@ -3,11 +3,11 @@ title: Using Spock to Create a Two-Node Cluster
 description: After installing and initializing Postgres and creating the Spock Extension, you can use the following
   steps to configure a two-node cluster.
 weight: 40
-upstream_source: pgedge-spock
-upstream_link: https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/two_node_cluster.md
+upstream_source: pgedge-spock-20261121
+upstream_link: https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/two_node_cluster.md
 upstream_modified: true
-upstream_ref: 4ac1aec2f080
-source_kind: pinned-main-snapshot
+upstream_ref: d05e2e2b6a82
+source_kind: pinned-release-tag
 linkTitle: Two-node tutorial
 type: docs
 ---
@@ -110,4 +110,4 @@ A simple test to check that your system is replicating is to connect to the Post
 
 ---
 
-[Upstream source](https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/two_node_cluster.md) · `4ac1aec2f080` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).
+[Upstream source](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/two_node_cluster.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).

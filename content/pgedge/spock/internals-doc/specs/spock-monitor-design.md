@@ -2,11 +2,11 @@
 title: 'Spock Node Monitoring: Design of the spock_monitor subsystem'
 description: A Word version of this document is kept next to it as spock-monitor-design.docx.
 weight: 200
-upstream_source: pgedge-spock
-upstream_link: https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/internals-doc/specs/spock-monitor-design.md
+upstream_source: pgedge-spock-20261121
+upstream_link: https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/internals-doc/specs/spock-monitor-design.md
 upstream_modified: true
-upstream_ref: 4ac1aec2f080
-source_kind: pinned-main-snapshot
+upstream_ref: d05e2e2b6a82
+source_kind: pinned-release-tag
 type: docs
 ---
 
@@ -346,11 +346,14 @@ the LSN alone is set for every transaction.
 ## 8. Compatibility and upgrade {#8-compatibility-and-upgrade}
 
 * The same SQL section is appended to `spock--6.0.0.sql` and to
-  `spock--5.0.13--6.0.0.sql`. Every catalog column the views reference
+  `spock--5.0.14--6.0.0.sql`. Every catalog column the views reference
   exists since 5.0.6, so an upgraded node ends with the same objects as a
   fresh install.
-* `spock.get_apply_worker_status()` is removed; nothing in the repository
-  used it. `spock.get_worker_status()` and `spock.worker_status` replace it.
+* `spock.get_apply_worker_status()` is kept for existing callers, as a SQL
+  function over `spock.get_worker_status()` returning the 5.x columns and
+  rows.  Its C symbol stays as a stub that raises an error, because
+  pg_upgrade from 5.x recreates the old C binding before the extension
+  update replaces it.
 * `spock_monitoring.c` is removed. `spock.wait_slot_confirm_lsn()`,
   `spock.get_channel_stats()`, `spock.reset_channel_stats()` and
   `spock.apply_group_progress()` keep their SQL definitions and C symbols
@@ -413,4 +416,4 @@ Values that vary between runs are compared, not printed. The full suite of
 
 ---
 
-[Upstream source](https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/internals-doc/specs/spock-monitor-design.md) · `4ac1aec2f080` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).
+[Upstream source](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/internals-doc/specs/spock-monitor-design.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).

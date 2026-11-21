@@ -2,11 +2,11 @@
 title: Logical Slot Failover
 description: Spock creates logical replication slots on each provider node.
 weight: 100
-upstream_source: pgedge-spock
-upstream_link: https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/logical_slot_failover.md
+upstream_source: pgedge-spock-20261121
+upstream_link: https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/logical_slot_failover.md
 upstream_modified: true
-upstream_ref: 4ac1aec2f080
-source_kind: pinned-main-snapshot
+upstream_ref: d05e2e2b6a82
+source_kind: pinned-release-tag
 linkTitle: Slot failover
 type: docs
 ---
@@ -629,8 +629,8 @@ ALTER EXTENSION spock UPDATE TO '6.0.0';
 ```
 
 PostgreSQL walks the version chain (5.0.8 to 5.0.9 to 5.0.10 to 5.0.11 to
-5.0.12 to 5.0.13 to 6.0.0) and runs each step in order. The 5.0.13 to 6.0.0
-step calls
+5.0.12 to 5.0.13 to 5.0.14 to 6.0.0) and runs each step in order. The 5.0.14
+to 6.0.0 step calls
 `spock.slot_enable_failover()` for you.
 
 `spock.slot_enable_failover()` behaves as follows:
@@ -739,4 +739,4 @@ switch a standby the Spock worker has been syncing, follow
 
 ---
 
-[Upstream source](https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/logical_slot_failover.md) · `4ac1aec2f080` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).
+[Upstream source](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/logical_slot_failover.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL License](/pgedge/about/license/).

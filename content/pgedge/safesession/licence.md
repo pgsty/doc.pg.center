@@ -4,11 +4,11 @@ description: Permission to use, copy, modify, and distribute this software and i
   without fee, and without a written agreement is hereby granted, provided that the above copyright notice and this
   paragraph and the following two paragraphs appear in all copies.
 weight: 200
-upstream_source: pgedge-safesession
-upstream_link: https://github.com/pgEdge/pgedge-safesession/blob/b406cd1e82cf21f30959351691c56de046562678/docs/LICENCE.md
+upstream_source: pgedge-safesession-20261121
+upstream_link: https://github.com/pgEdge/pgedge-safesession/blob/d66225fcceefa2b2cb2cdd7a0b8b84ccae8a4295/docs/LICENCE.md
 upstream_modified: true
-upstream_ref: b406cd1e82cf
-source_kind: pinned-main-snapshot
+upstream_ref: d66225fcceef
+source_kind: pinned-release-tag
 type: docs
 ---
 
@@ -25,4 +25,4 @@ pgEdge, Inc. SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED T
 
 ---
 
-[Upstream source](https://github.com/pgEdge/pgedge-safesession/blob/b406cd1e82cf21f30959351691c56de046562678/docs/LICENCE.md) · `b406cd1e82cf` · Copyright (c) 2025–2026, pgEdge, Inc. [PostgreSQL License](/pgedge/about/license/).
+[Upstream source](https://github.com/pgEdge/pgedge-safesession/blob/d66225fcceefa2b2cb2cdd7a0b8b84ccae8a4295/docs/LICENCE.md) · `d66225fcceef` · Copyright (c) 2025–2026, pgEdge, Inc. [PostgreSQL License](/pgedge/about/license/).

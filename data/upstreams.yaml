@@ -547,6 +547,80 @@ pxf-20261121:
   language: en
   translation_baseline: pxf
 
+pgedge-spock-20261121:
+  name: pgEdge Spock
+  copyright: Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents
+    of the University of California.
+  license: PostgreSQL
+  notice: /attribution/#pgedge
+  ref: v6.0.0-beta.2 (pre-release)
+  link: https://github.com/pgEdge/spock
+  source_commit: d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c
+  source_ref: v6.0.0-beta.2
+  snapshot_date: '2026-11-21'
+  language: en
+  translation_baseline: pgedge-spock
+  repository: https://github.com/pgEdge/spock
+  source_sha256:
+    docs/spock_release_notes.md: f94e9cb300c5ddfac584fc94ce86aacfa4cefddf005902ea649cfd060c2dff85
+    docs/getting_started.md: 53bdb0697efd16b373b82ba9b9629390fe7a87d83ba5c6f8a538ce967480b505
+    docs/logical_slot_failover.md: 2fc264c01dd4c68e72f2cd0c1022352b2013ff9f24ad428a399e52ba1862438f
+    docs/spock_functions/repset_mgmt.md: 48db1dff8d7496b759b7fdbe5e153694f8f90bc2db8c6aaf50420c41c2865908
+    docs/modify/pg_upgrade_rolling_tutorial.md: c7787448fcf1beb8a0aa8898dc0a99273cd162537bf82835add051fe895c98eb
+    docs/internals-doc/specs/spock-monitor-design.md: f77d802dbaf368a14e0c9dd89fd19eb224c97434f2f96ccfc7d38db8aad87f03
+    docs/modify/zodan/zodan_rolling_pg_version_tutorial.md: 9f5b27a7911308a4ed66dac834395514c7b9048960f8731e38d2f44998400560
+
+pgedge-lolor-20261121:
+  name: pgEdge LOLOR
+  copyright: Copyright (c) 2024–2026, pgEdge, Inc.
+  license: PostgreSQL
+  notice: /attribution/#pgedge
+  ref: 1.3.0 development snapshot; latest stable tag v1.2.3
+  link: https://github.com/pgEdge/lolor
+  source_commit: 1548836b0df0819e5415a9d0574afd93e9a64f1d
+  source_ref: main
+  snapshot_date: '2026-11-21'
+  language: en
+  translation_baseline: pgedge-lolor
+  repository: https://github.com/pgEdge/lolor
+  source_sha256:
+    docs/lolor_release_notes.md: 5e75ad786a6bdf9958fdb7ebb3246deed9e916550af1df11e5b9861b996ab92e
+    docs/install_configure.md: b9237726cb784fb6abd825c22f69356ee1fa0a5d9a0d91d3e2885e8b0a5aa853
+    docs/index.md: f7d738f50bb37108e71b8f68fa452bca1c43304f00a879d026417dfa89fc6697
+
+pgedge-safesession-20261121:
+  name: pgEdge SafeSession
+  copyright: Copyright (c) 2025–2026, pgEdge, Inc.
+  license: PostgreSQL
+  notice: /attribution/#pgedge
+  ref: v1.1
+  link: https://github.com/pgEdge/pgedge-safesession
+  source_commit: d66225fcceefa2b2cb2cdd7a0b8b84ccae8a4295
+  source_ref: v1.1
+  snapshot_date: '2026-11-21'
+  language: en
+  translation_baseline: pgedge-safesession
+  repository: https://github.com/pgEdge/pgedge-safesession
+  source_sha256:
+    docs/changelog.md: 86be235ce98fb92a8e024ef40f3eff09421ab71b08807ee631fa2db626bbdfcf
+
+pgedge-snowflake-20261121:
+  name: pgEdge Snowflake
+  copyright: Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents
+    of the University of California.
+  license: PostgreSQL
+  notice: /attribution/#pgedge
+  ref: v2.6.1
+  link: https://github.com/pgEdge/snowflake
+  source_commit: 9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8
+  source_ref: v2.6.1
+  snapshot_date: '2026-11-21'
+  language: en
+  translation_baseline: pgedge-snowflake
+  repository: https://github.com/pgEdge/snowflake
+  source_sha256:
+    docs/changelog.md: 99744b7f9191bb69e8416c59ee45930c54cec326c4ec889058c24cc25c7f29ae
+
 haproxy-20261121:
   name: HAProxy 3.4 documentation
   repository: https://git.haproxy.org/?p=haproxy-3.4.git

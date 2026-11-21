@@ -2,11 +2,11 @@
 title: Changelog
 description: All notable changes to the pgEdge SafeSession will be documented in this file.
 weight: 200
-upstream_source: pgedge-safesession
-upstream_link: https://github.com/pgEdge/pgedge-safesession/blob/b406cd1e82cf21f30959351691c56de046562678/docs/changelog.md
+upstream_source: pgedge-safesession-20261121
+upstream_link: https://github.com/pgEdge/pgedge-safesession/blob/d66225fcceefa2b2cb2cdd7a0b8b84ccae8a4295/docs/changelog.md
 upstream_modified: true
-upstream_ref: b406cd1e82cf
-source_kind: pinned-main-snapshot
+upstream_ref: d66225fcceef
+source_kind: pinned-release-tag
 type: docs
 ---
 
@@ -18,6 +18,22 @@ documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.1] - 2026-11-06 {#11---2026-11-06}
+
+### Changed {#changed}
+
+- Release workflow installs the repository client certificate
+  before configuring the pgEdge package repositories, and verifies
+  that the key matches the certificate, that the certificate and
+  its issuer are within their validity periods, and that the chain
+  issuer is the expected one
+- Release workflow fails if the repository rewrite fails
+- Release workflow pins the builder action by commit SHA
+- Packaging no longer builds for Debian bullseye
+- Packaging defaults now target v1.1
+- Removed pgEdge Labs branding from the README and documentation
+  landing page
 
 ## [1.0] - 2026-08-25 {#10---2026-08-25}
 
@@ -71,7 +87,7 @@ and this project adheres to
   SET TRANSACTION)
 - New regression tests for GUC toggle behavior
 
-### Changed {#changed}
+### Changed {#changed-1}
 
 - C-language function blocking now only blocks VOLATILE
   C functions by default. IMMUTABLE and STABLE C functions
@@ -217,4 +233,4 @@ and this project adheres to
 
 ---
 
-[Upstream source](https://github.com/pgEdge/pgedge-safesession/blob/b406cd1e82cf21f30959351691c56de046562678/docs/changelog.md) · `b406cd1e82cf` · Copyright (c) 2025–2026, pgEdge, Inc. [PostgreSQL License](/pgedge/about/license/).
+[Upstream source](https://github.com/pgEdge/pgedge-safesession/blob/d66225fcceefa2b2cb2cdd7a0b8b84ccae8a4295/docs/changelog.md) · `d66225fcceef` · Copyright (c) 2025–2026, pgEdge, Inc. [PostgreSQL License](/pgedge/about/license/).

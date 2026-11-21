@@ -15,7 +15,7 @@ cascade:
   type: docs
   upstream_source: pgedge
 upstream_source: pgedge
-upstream_link: https://github.com/pgEdge/spock/tree/4ac1aec2f0807dc7ee806ab99a6e99a4556186df
+upstream_link: https://github.com/pgEdge/spock/tree/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c
 linkTitle: pgEdge
 sidebar_root_link_self: true
 icon: fa-solid fa-share-nodes
@@ -29,6 +29,8 @@ Four extensions address concrete tasks in distributed PostgreSQL. Start with Spo
 - [LOLOR](/pgedge/lolor/) — Large object logical replication
 - [SafeSession](/pgedge/safesession/) — Read-only sessions by role
 {.cards}
+
+The English source set is Spock v6.0.0-beta.2, LOLOR 1.3.0 development, SafeSession v1.1, and Snowflake v2.6.1. Existing Chinese drafts await the incremental updates. See [sources and versions](/pgedge/about/attribution/).
 
 ## Start reading {#start}
 

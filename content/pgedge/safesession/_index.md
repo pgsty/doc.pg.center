@@ -3,11 +3,11 @@ title: SafeSession
 description: pgEdge SafeSession is a PostgreSQL extension that enforces read-only sessions for specified database
   roles.
 weight: 40
-upstream_source: pgedge-safesession
-upstream_link: https://github.com/pgEdge/pgedge-safesession/blob/b406cd1e82cf21f30959351691c56de046562678/docs/index.md
+upstream_source: pgedge-safesession-20261121
+upstream_link: https://github.com/pgEdge/pgedge-safesession/blob/d66225fcceefa2b2cb2cdd7a0b8b84ccae8a4295/docs/index.md
 upstream_modified: true
-upstream_ref: b406cd1e82cf
-source_kind: pinned-main-snapshot
+upstream_ref: d66225fcceef
+source_kind: pinned-release-tag
 linkTitle: SafeSession
 icon: fa-solid fa-book-open
 sidebar_root_for: self
@@ -18,7 +18,7 @@ sidebar_root_menu: false
 
 
 > [!NOTE] Source version
-> This is a pinned snapshot of upstream `main`; it may differ from the versioned documentation website. Check [versions and sources](/pgedge/about/attribution/) before deploying.
+> The English source is **v1.1**, pinned at `d66225fcceef`. The Chinese edition remains on its earlier source pending translation. Check [versions and sources](/pgedge/about/attribution/) before deploying.
 
 
 pgEdge SafeSession is a PostgreSQL extension that enforces
@@ -377,4 +377,4 @@ See the [Licence](/pgedge/safesession/licence/) page for details.
 
 ---
 
-[Upstream source](https://github.com/pgEdge/pgedge-safesession/blob/b406cd1e82cf21f30959351691c56de046562678/docs/index.md) · `b406cd1e82cf` · Copyright (c) 2025–2026, pgEdge, Inc. [PostgreSQL License](/pgedge/about/license/).
+[Upstream source](https://github.com/pgEdge/pgedge-safesession/blob/d66225fcceefa2b2cb2cdd7a0b8b84ccae8a4295/docs/index.md) · `d66225fcceef` · Copyright (c) 2025–2026, pgEdge, Inc. [PostgreSQL License](/pgedge/about/license/).
