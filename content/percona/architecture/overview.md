@@ -4,15 +4,15 @@ linkTitle: Architecture overview
 description: Follow encrypted tables, index files, and WAL through the pg_tde storage architecture.
 type: docs
 translation_notice: false
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/architecture/overview.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/architecture/overview.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: Copyright © 2024–2025 Percona LLC and/or its affiliates
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 410
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 `pg_tde` is a **customizable, complete, data at rest encryption extension**. Extension means that `pg_tde` is delivered as a PostgreSQL extension.
@@ -46,7 +46,7 @@ The main components of `pg_tde` are:
 
 * **Core server changes** focus on making the server more extensible, allowing the main logic of `pg_tde` to remain separate, as an extension. Core changes also add encryption-awareness to some command line tools that have to work directly with encrypted tables or encrypted WAL files. 
 
-    You can find the source code [here ](https://github.com/percona/postgres/tree/release-2.2.2).
+    You can find the source code [here ](https://github.com/percona/postgres/tree/release-2.3).
 
 * The **`pg_tde` extension** implements the encryption code by hooking into the extension points introduced in the core changes, and the already existing extension points in the PostgreSQL server.
 

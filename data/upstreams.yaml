@@ -424,6 +424,24 @@ etcd-20261121:
     content/en/docs/v3.7/learning/api.md: 4c3e4a9348010aa2a3b65a27fb1f64072cad450b081a459be5c64e18c8fdf787
     content/en/docs/v3.7/op-guide/versioning.md: 4b985b3a51951b720d689ec159f48b468e6040275aaa22be0504f8bb13c7eda3
 
+percona-20261121:
+  name: Percona pg_tde documentation
+  repository: https://github.com/percona/pg_tde
+  source_commit: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
+  ref: 2.3.0; docs 5dd7a9e
+  copyright: Copyright © 2024–2025 Percona LLC and/or its affiliates
+  license: LicenseRef-pg-tde
+  notice: /attribution/#percona
+  modified: true
+  source_ref: 2.3.0
+  snapshot_date: '2026-11-21'
+  language: en
+  translation_baseline: percona
+  source_sha256:
+    documentation/variables.yml: ef7942387d23cea4a685ed2897aae7ea1a71117b038bd3e60aa0bb70886f81e1
+    documentation/docs/release-notes/release-notes.md: c29e31f8ce154afe6bdf45711d507bb4af0c16c49375525c4131856e79d89cf2
+    documentation/docs/release-notes/release-notes-v2.3.0.md: c8d3723ffdee6c06a9ef49033d380a084ae56cda6fbad29c26f9a5b4d42a8001
+
 haproxy-20261121:
   name: HAProxy 3.4 documentation
   repository: https://git.haproxy.org/?p=haproxy-3.4.git

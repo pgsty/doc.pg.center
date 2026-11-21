@@ -4,15 +4,15 @@ linkTitle: Configure multi-tenancy
 description: Separate database keys and privileges for tenants sharing a PostgreSQL cluster.
 type: docs
 translation_notice: false
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/how-to/multi-tenant-setup.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/how-to/multi-tenant-setup.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: Copyright © 2024–2025 Percona LLC and/or its affiliates
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 540
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 The steps below describe how to set up multi-tenancy with `pg_tde`. Multi-tenancy allows you to encrypt different databases with different keys. This provides granular control over data and enables you to introduce different security policies and access controls for each database so that only authorized users of specific databases have access to the data.

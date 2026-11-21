@@ -4,15 +4,15 @@ linkTitle: Supported versions
 description: Check supported PostgreSQL distributions and the status of each supported major version.
 type: docs
 translation_notice: false
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/index/supported-versions.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/index/supported-versions.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: Copyright © 2024–2025 Percona LLC and/or its affiliates
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 190
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 The `pg_tde` extension is available for Percona Server for PostgreSQL [17.5](https://docs.percona.com/postgresql/17/) and later versions, an open source, drop-in replacement for PostgreSQL Community. These versions provide the `tde_heap` access method and offer full encryption capabilities, including encryption of tables, indexes and WAL data.

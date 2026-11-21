@@ -4,15 +4,15 @@ linkTitle: Upstream release index
 description: The upstream release index, with links to version-specific changes.
 type: docs
 translation_notice: false
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/release-notes/release-notes.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/release-notes/release-notes.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: Copyright © 2024–2025 Percona LLC and/or its affiliates
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 950
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 > [!NOTE] Historical release
@@ -22,6 +22,7 @@ This page lists all release notes for `pg_tde`, organized by year and version. U
 
 ## 2026 {#2026}
 
+* [2.3.0](/percona/release-notes/release-notes-v2.3.0/) (2026-11-17; upstream date variable pending)
 * [2.2.2](/percona/release-notes/release-notes-v2.2.2/) (2026-08-20)
 * [2.2.1](/percona/release-notes/release-notes-v2.2.1/) (2026-07-06)
 * [2.2.0](/percona/release-notes/release-notes-v2.2.0/) (2026-05-20)

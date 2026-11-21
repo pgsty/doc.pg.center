@@ -3,8 +3,8 @@ title: Attribution and copyright
 description: Sources, copyright holders, licence texts and the scope of this independent documentation site.
 type: docs
 translation_notice: false
-upstream_source: percona
-upstream_link: https://github.com/percona/pg_tde/tree/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_source: percona-20261121
+upstream_link: https://github.com/percona/pg_tde/tree/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 ---
 
 
@@ -12,13 +12,13 @@ This is an **independent documentation and translation site maintained by PGSTY*
 
 ## Documentation source {#documentation-source}
 
-The 66 English documents and their complete Chinese translations are based on `documentation/docs` at commit [`1660e66a6a30`](https://github.com/percona/pg_tde/commit/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39) (documentation version **2.2.2**), retrieved on 2026-11-06. PGSTY maintains the Chinese translation and downstream presentation. The original author is Percona and the pg_tde contributors.
+The English edition was updated on November 21, 2026 to pg_tde **2.3.0**, at `percona/pg_tde@5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a`. It adds the 2.3.0 release notes to the previously imported 66 articles, with section indexes and PGSTY editorial guides. The Chinese edition retains the reviewed 2.2.2 baseline pending incremental translation. The original authors are Percona and the pg_tde contributors.
 
 Read the [source manifest](/percona/assets/source-manifest.json) for file paths, hashes, supporting assets, and pinned source URLs. Each adapted page links to its original. The [errata](/percona/site/errata/) records corrections checked against this snapshot.
 
 ## Upstream copyright and licence {#upstream-licence}
 
-The repository’s [COPYRIGHT](https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/COPYRIGHT) contains the pg_tde licence, with PostgreSQL-style grants and warranty disclaimers. Its full, unmodified text is preserved in [pg_tde-COPYRIGHT.txt](/percona/assets/legal/pg_tde-COPYRIGHT.txt). It names:
+The repository’s [COPYRIGHT](https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/COPYRIGHT) contains the pg_tde licence, with PostgreSQL-style grants and warranty disclaimers. Its full, unmodified text is preserved in [pg_tde-COPYRIGHT.txt](/percona/assets/legal/pg_tde-COPYRIGHT.txt). It names:
 
 - PostgreSQL Global Development Group — portions © 1996–2024.
 - The Regents of the University of California — portions © 1994.

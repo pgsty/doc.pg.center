@@ -1,5 +1,5 @@
 ---
-upstream_link: https://github.com/percona/pg_tde/tree/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_link: https://github.com/percona/pg_tde/tree/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 title: Percona TDE documentation
 linkTitle: Percona TDE
 description: The complete pg_tde documentation, organized from first principles through installation, operations,
@@ -14,10 +14,10 @@ cascade:
   upstream_copyright: Copyright © 2024–2025 Percona LLC and/or its affiliates
   upstream_license: LicenseRef-pg-tde
   upstream_notice: /percona/site/attribution/
-  upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+  upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
   upstream_modified: true
-  upstream_source: percona
-upstream_source: percona
+  upstream_source: percona-20261121
+upstream_source: percona-20261121
 weight: -50
 outputs:
 - HTML
@@ -30,6 +30,8 @@ icon: fa-solid fa-shield-halved
 
 
 The pg_tde documentation follows the path a production PostgreSQL deployment takes: understand the encryption model, install the extension, configure key custody, validate encrypted tables, then operate WAL, backups, recovery, and upgrades.
+
+The current release is [pg_tde 2.3.0](/percona/release-notes/release-notes-v2.3.0/), adding PostgreSQL 19 support and pg_tde-aware WAL record inspection. The Chinese edition is awaiting these incremental changes.
 
 - [Overview](/percona/index/) — understand TDE, pg_tde, supported deployments, and limitations.
 - [Get started](/percona/install/) — install the package and create the extension.

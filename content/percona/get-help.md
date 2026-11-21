@@ -4,15 +4,15 @@ linkTitle: Get help
 description: Find community discussions, issue reporting, and Percona support channels.
 type: docs
 translation_notice: false
-upstream_link: https://github.com/percona/pg_tde/blob/1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39/documentation/docs/get-help.md
+upstream_link: https://github.com/percona/pg_tde/blob/5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a/documentation/docs/get-help.md
 upstream_name: percona/pg_tde documentation
 upstream_copyright: Copyright © 2024–2025 Percona LLC and/or its affiliates
 upstream_license: LicenseRef-pg-tde
 upstream_notice: /percona/site/attribution/
-upstream_ref: 1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39
+upstream_ref: 5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a
 upstream_modified: true
 weight: 1010
-upstream_source: percona
+upstream_source: percona-20261121
 ---
 
 Our documentation guides are packed with information, but they can't cover everything you need to know about `pg_tde`. They also won't cover every scenario you might come across. Don't be afraid to try things out and ask questions when you get stuck.
