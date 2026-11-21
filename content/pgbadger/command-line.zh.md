@@ -8,7 +8,7 @@ search_boost: 8
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [参考]
-upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/0514893e97296695c77755fa36c59288c3afef3e/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -164,7 +164,7 @@ logfile 可以是单个日志文件、文件列表，或返回文件列表的 sh
 pgBadger 可以通过免密 SSH 连接解析远程日志文件。使用 -r 或 --remote-host 指定
 主机 IP 地址或主机名。另有若干附加选项，可对 SSH 连接进行完整控制。
 
-在监视模式（`-w`）下，通过 SSH 读取的日志文件会先在远程主机上过滤，再传输到本地。CSV 记录使用 `awk` 过滤，并保留多行字段。这一行为属于本手册所述的 13.2 之后的开发快照。
+在监视模式（`-w`）下，通过 SSH 读取的日志文件会先在远程主机上过滤，再传输到本地。CSV 记录使用 `awk` 过滤，并保留多行字段。13.3 已包含这一行为。
 
 ```text
 --ssh-identity file      使用的身份密钥文件路径。

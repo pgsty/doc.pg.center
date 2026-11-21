@@ -1,5 +1,5 @@
 ---
-title: "pgBadger 13.2 开发快照中文文档"
+title: "pgBadger 13.3 中文文档"
 linkTitle: pgBadger
 weight: 40
 description: "快速分析 PostgreSQL 与 PgBouncer 日志，生成完整且可独立浏览的报告"
@@ -12,17 +12,17 @@ sidebar_root_link_self: true
 module: [PGBADGER]
 categories: [概念]
 aliases: [/pgbadger/documentation/]
-upstream_source: pgbadger
-upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
-upstream_link: "https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67"
+upstream_source: pgbadger-20261121
+upstream_ref: "v13.3"
+upstream_link: "https://github.com/darold/pgbadger/tree/0514893e97296695c77755fa36c59288c3afef3e"
 cascade:
-  upstream_source: pgbadger
-  upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
+  upstream_source: pgbadger-20261121
+  upstream_ref: "v13.3"
   type: docs
   module: [PGBADGER]
 ---
 
-本手册依据[尚未发布的开发快照 `f373ac6`](https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67)，该提交的时间为 2026-10-21（UTC），晚于 2025-12-29 发布的[稳定版 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2)。本快照中介绍的功能，包括监视模式下的远端过滤和经过编码的分数据库报告目录，均不包含在 13.2 发布归档中。
+本手册涵盖 2026 年 11 月 3 日发布的 [pgBadger 13.3](https://github.com/darold/pgbadger/releases/tag/v13.3)。该版本包含监视模式下的远端过滤、经过编码的分数据库报告目录、可滚动的图例，以及 [13.3 版本记录](/zh/pgbadger/releases/13/#v13-3)中列出的各项修复。
 
 ![pgBadger 标志](/img/pgbadger/logo.png "pgBadger")
 

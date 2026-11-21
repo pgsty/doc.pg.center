@@ -7,7 +7,7 @@ search_keywords: [--content-size, --help, --robot, --version, --zcat, JSON::XS, 
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [教程]
-upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/0514893e97296695c77755fa36c59288c3afef3e/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -20,7 +20,7 @@ upstream_name: "pgBadger README.md"
 | Debian/Ubuntu 软件包 | 基于 APT 的 Linux 发行版 | [PostgreSQL Apt 仓库](https://wiki.postgresql.org/wiki/Apt) |
 | 开发源码 | 尚未正式发布的最新代码 | [darold/pgbadger](https://github.com/darold/pgbadger) |
 
-截至 2026-10-23 核验的最新稳定版为 [pgBadger 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2)，发布于 2025-12-29。下方的发布归档示例安装的就是这个版本。本手册也涵盖尚未发布的开发快照；要复现其中的新行为，请使用下方固定到指定提交的检出命令。
+截至 2026-11-21 核验的最新稳定版为 [pgBadger 13.3](https://github.com/darold/pgbadger/releases/tag/v13.3)，发布于 2026-11-03。下方的发布归档示例和固定提交检出命令安装的都是本手册对应的版本。
 
 ## 运行要求 {#requirements}
 
@@ -58,8 +58,8 @@ $ sudo yum install perl-JSON-XS
 下载版本归档后，使用 Perl 的标准工具链构建并安装：
 
 ```console
-$ tar xzf pgbadger-13.2.tar.gz
-$ cd pgbadger-13.2
+$ tar xzf pgbadger-13.3.tar.gz
+$ cd pgbadger-13.3
 $ perl Makefile.PL
 $ make
 $ sudo make install
@@ -77,19 +77,19 @@ $ sudo make install
 
 上游也支持 `INSTALLDIRS=perl` 布局。向受包管理器管理的系统安装前，应先检查生成的目标路径。
 
-## 安装开发版源码 {#install-development-code}
+## 从固定版本源码安装 {#install-development-code}
 
 ```console
 $ git clone https://github.com/darold/pgbadger.git
 $ cd pgbadger
-$ git checkout --detach f373ac678c756f66a785c5ab4773d1f05f468d67
+$ git checkout --detach 0514893e97296695c77755fa36c59288c3afef3e
 $ perl Makefile.PL
 $ make
 $ make test
 $ sudo make install
 ```
 
-此检出对应本手册所述的未发布开发快照：[`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67)，提交于 2026-10-21（UTC）。它晚于稳定版 13.2，但不是新的稳定版本。开发代码可能包含尚未写入版本说明的改动；生产打包应优先使用带标签的发布归档。
+此检出对应[本手册介绍的 v13.3 版本](https://github.com/darold/pgbadger/releases/tag/v13.3)，固定在提交 `0514893e97296695c77755fa36c59288c3afef3e`。
 
 ## 验证安装 {#verify-installation}
 
