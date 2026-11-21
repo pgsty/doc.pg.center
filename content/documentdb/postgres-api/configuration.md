@@ -3,12 +3,12 @@ title: Configuration
 description: Server GUCs and gateway environment variables for configuring DocumentDB 1.0, including the required
   extended RUM index library, collation, and role management flags.
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/postgres-api/configuration.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/postgres-api/configuration.md
 weight: 30
 ---
 
-DocumentDB is configured at two layers: the PostgreSQL extension (via GUCs in `postgresql.conf`) and the gateway process (via environment variables or a JSON config file). This page covers the most commonly adjusted settings in DocumentDB 1.0.
+DocumentDB is configured at two layers: the PostgreSQL extension (via GUCs in `postgresql.conf`) and the gateway process (via environment variables or a JSON config file). This page covers the most commonly adjusted settings in DocumentDB 1.2.
 
 <span id="extension-gu-cs"></span>
 
@@ -50,9 +50,10 @@ When enabled, creating a unique ordered index on an existing collection no longe
 | GUC | Default | Description |
 | --- | --- | --- |
 | `documentdb_core.enableCollation` | `off` | Accepts the `collation` option on queries. It is defined by `pg_documentdb_core`, hence the `documentdb_core.` prefix, and can be set per session. |
+| `documentdb.enableCollationWithNonUniqueOrderedIndexes` | `off` | Accepts the `collation` option on `createIndexes`, for non-unique ordered indexes. While `off`, an index spec with `collation` fails with "createIndex.collation is not implemented yet". |
 {.fields}
 
-While `off`, `find`, `aggregate`, and `count` reject a `collation` option with "collation is not supported in the find command yet." (or `aggregate` / `count` in place of `find`). `delete` follows the flag too. `distinct`, `findAndModify` and `update` reject `collation` whether or not the flag is on.
+While `off`, `find`, `aggregate`, `count`, and `distinct` reject a `collation` option with "collation is not supported in the find command yet." (or the command's name in place of `find`). `delete`, `findAndModify` and `update` follow the flag too. `distinct`, `findAndModify` and `update` accept `collation` from 1.2, once the extension is updated to `1.2-0`.
 
 With the flag on, a few aggregation stages still reject a collation, including `$bucket`, `$bucketAuto`, `$densify`, `$fill`, `$geoNear`, `$merge`, `$setWindowFields`, and `$sortByCount`.
 

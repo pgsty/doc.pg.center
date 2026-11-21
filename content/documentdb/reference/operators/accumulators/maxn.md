@@ -2,8 +2,8 @@
 title: $maxN
 description: The $maxN opertor retrieves the top N values based on a specified filtering criteria
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$maxn.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$maxn.md
 weight: 100
 ---
 

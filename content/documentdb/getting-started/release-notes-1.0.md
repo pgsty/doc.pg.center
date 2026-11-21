@@ -3,8 +3,8 @@ title: DocumentDB 1.0 Release Notes
 description: What's new in DocumentDB 1.0, where to get it, how to upgrade from 0.117, and the known issues that
   ship with it.
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/getting-started/release-notes-1.0.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/getting-started/release-notes-1.0.md
 weight: 80
 ---
 
@@ -16,7 +16,8 @@ weight: 80
 | --- | --- | --- |
 | [Linux packages](/documentdb/getting-started/prebuilt-packages/) | packages `1.0.0`, extension `1.0-0` | Ubuntu 24.04 and RHEL-compatible 9, PostgreSQL 17 and 18, amd64 and arm64 |
 | [Container image](/documentdb/documentdb-local/) | `pg15-1.0.0` to `pg18-1.0.0`; `latest` is `pg17-1.0.0` | Linux amd64 and arm64 |
-| [Kubernetes operator](/documentdb/kubernetes-operator/) | operator `1.0.0`, which runs engine `1.0-0` | Kubernetes 1.33+ with the `ImageVolume` feature gate on (on by default from 1.35, GA in 1.36) |
+| [PGDG APT repository](/documentdb/getting-started/prebuilt-packages/#pgdg-extension-packages) | packages `1.0-0-1.pgdg…`, extension `1.0-0` (extension only) | Debian 13 and 14, Ubuntu 26.04 (including amd64 and arm64) and 26.10 (amd64), PostgreSQL 15 to 18 |
+| [Kubernetes operator](/documentdb/kubernetes-operator/) | operator `1.1.1`, which runs engine `1.0-0` | Kubernetes 1.32+; uses `ImageVolume` where the cluster supports it, otherwise a combined PostgreSQL 18 image |
 
 The SQL extension version is `1.0-0` everywhere, and `hello` reports it in `internal.documentdb_versions`.
 

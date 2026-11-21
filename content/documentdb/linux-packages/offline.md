@@ -3,9 +3,9 @@ title: Offline / Air-gapped Install
 description: Stage a full dependency closure on a connected machine and install DocumentDB on a host with no internet
   access.
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/documentdb.github.io/blob/90cfa088351557cd618034dfc00ab817c35a5f76/app/services/articleService.ts
-upstream_ref: website 90cfa08; DocumentDB 1.0
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/documentdb.github.io/blob/4a83a0712149e101a2bbb38934bed36497cdf40f/app/services/articleService.ts
+upstream_ref: website 4a83a07; DocumentDB 1.2.0
 weight: 20
 ---
 
@@ -74,5 +74,5 @@ Then continue with [Set up and connect](/documentdb/getting-started/packages/#se
 
 If the target already has PostgreSQL, the PGDG extension dependencies (`postgresql-N-cron`, `-pgvector`, `-postgis-3`) and `jq`, you do not need a bundle:
 
-- **Extension only, one file** — `sudo apt install ./ubuntu24.04-postgresql-18-documentdb_1.0-0_amd64.deb`. No gateway and no `documentdb-setup`.
+- **Extension only, one file** — `sudo apt install ./ubuntu24.04-postgresql-18-documentdb_1.2-0_amd64.deb`. No gateway and no `documentdb-setup`.
 - **Full stack from the release assets** — pass the five packages for the selected PostgreSQL major to a *single* `apt install` / `dnf install`: `documentdb-N`, the matching `postgresql-N-documentdb` / `postgresqlN-documentdb` extension, `documentdb-common`, `documentdb-gateway`, and `documentdb-postgresql-tools`. For PostgreSQL 18 only, the optional `documentdb` meta package may be included; it selects `documentdb-18`. Local files resolve dependencies only against enabled repositories, so a package whose dependencies are not included still fails.

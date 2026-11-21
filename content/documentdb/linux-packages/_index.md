@@ -3,9 +3,9 @@ title: Operating a Package Install
 description: Secure, manage, upgrade and remove a DocumentDB installed from Linux packages, including known package-install
   issues.
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/documentdb.github.io/blob/90cfa088351557cd618034dfc00ab817c35a5f76/app/services/articleService.ts
-upstream_ref: website 90cfa08; DocumentDB 1.0
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/documentdb.github.io/blob/4a83a0712149e101a2bbb38934bed36497cdf40f/app/services/articleService.ts
+upstream_ref: website 4a83a07; DocumentDB 1.2.0
 weight: 30
 ---
 
@@ -17,7 +17,7 @@ The gateway binds **all interfaces** (`0.0.0.0:10260` and `[::]:10260`) by defau
 
 Before using this anywhere but a private machine:
 
-- Restrict the listener with `DOCUMENTDB_LISTEN_ADDR=127.0.0.1:10260` in `/etc/documentdb/local/<major>/gateway.env` and restart the service, or firewall port `10260`. **Re-running `documentdb-setup` silently resets this to a wildcard bind**, so re-check with `grep DOCUMENTDB_LISTEN_ADDR /etc/documentdb/local/<major>/gateway.env` afterwards. A firewall rule is the more durable control.
+- Restrict the listener with `DOCUMENTDB_LISTEN_ADDR=127.0.0.1:10260` in `/etc/documentdb/local/<major>/gateway.env` and restart the service, or firewall port `10260`. Re-running `documentdb-setup` keeps a loopback address written this way, and prints `Keeping gateway bind address` when it does.
 - Use a strong admin password and create per-application users rather than sharing `admin`.
 
 ### Replace the self-signed certificate {#replace-the-self-signed-certificate}
@@ -102,7 +102,7 @@ Use the extension package for your PostgreSQL major: `postgresql-N-documentdb` o
 or `postgresqlN-documentdb` on EL9. You own PostgreSQL configuration, extension activation,
 and service restarts. Create `documentdb_extended_rum` as well as `documentdb`:
 `CREATE EXTENSION documentdb CASCADE` does not pull it in, and without it every index
-creation fails. Follow the matching release's [manual package instructions](https://github.com/documentdb/documentdb/blob/v1.0-0/packaging/README.md),
+creation fails. Follow the matching release's [manual package instructions](https://github.com/documentdb/documentdb/blob/v1.2-0/packaging/README.md),
 or the [extension-only offline instructions](/documentdb/linux-packages/offline/#smaller-offline-cases)
 when PostgreSQL and all extension dependencies are already installed.
 
@@ -123,7 +123,8 @@ For an adopted instance, use the operator's existing PostgreSQL connection inste
 
 ## Upgrading {#upgrading}
 
-Package installs from v0.116 or v0.117 upgrade in place to 1.0. Move the entire stack
+Package installs from v0.116, v0.117 or 1.0 upgrade in place to 1.2 on either channel; to take each new release as
+soon as it is published, [switch it to `latest`](#switch-from-stable-to-latest). Move the entire stack
 together; upgrading only `postgresql-N-documentdb` does not update the gateway, tools,
 common payload, or `documentdb-N`. These steps use systemd; upgrading a host without it isn't covered here.
 On a package-managed private PostgreSQL 18 instance:
@@ -203,6 +204,35 @@ updates the extensions and then starts the gateway. If
 setup has to change `shared_preload_libraries`, it exits without updating the extensions: restart
 PostgreSQL and run it once more. By hand, use that instance's own `psql` connection.
 
+## Switch from `stable` to `latest` {#switch-from-stable-to-latest}
+
+Both channels serve 1.2, and `stable` takes new releases later than `latest`. To have a host
+take each new release as soon as it is published, point its one repository file at `latest` and
+upgrade the packages. This is one-way: a release does not run correctly on data that a newer
+release has updated, so back up the data directory first.
+
+```bash
+# Debian / Ubuntu
+sudo sed -i 's/ stable ubuntu24$/ latest ubuntu24/' /etc/apt/sources.list.d/documentdb.list &&
+sudo apt update &&
+sudo apt upgrade
+
+# EL9: use this instead of the apt commands above
+sudo sed -i 's|/rpm/rhel9$|/rpm/latest/rhel9|' /etc/yum.repos.d/documentdb.repo &&
+sudo dnf upgrade
+```
+
+Then re-run setup with the PostgreSQL major, plus any `--data-dir` or `--pg-port` you installed
+with. It restarts PostgreSQL once to load the new libraries, updates the extensions, and starts the
+gateway; without `--admin-user` it keeps every admin user and password:
+
+```bash
+sudo documentdb-setup --pg-version 18 --yes
+```
+
+For an adopted PostgreSQL instance, run `sudo documentdb-setup --target-postgres-instance 18/main --yes`
+(with your cluster name) instead, then the restart and setup commands it prints.
+
 ## Remove or reset {#remove-or-reset}
 
 ### Greenfield: destroy the package-managed instance {#greenfield-destroy-the-package-managed-instance}
@@ -231,18 +261,17 @@ On a systemd host, a scoped restore stops and disables that major's gateway:
 sudo documentdb-setup --restore --pg-version 18
 ```
 
-On a host without systemd, the current setup tooling cannot safely attribute a nohup gateway process to one
-PostgreSQL major. If only one DocumentDB major is configured, use an unscoped restore so the
-orphan gateway sweep runs:
+On a host without systemd, the same scoped restore stops the gateway that setup started for
+that major and leaves other majors running. It skips a gateway it has no valid record of; if the
+port is still listening afterwards, find the process on it and stop it. Setup runs the gateway
+as `documentdb-gateway`, so `sudo -u documentdb-gateway ss -lntp` shows its PID even in a
+container where root's `ss` doesn't. An unscoped restore also stops nohup gateways started by
+the packaged binary's full path, but it detaches every configured major; re-run setup for the
+majors you are keeping:
 
 ```bash
 sudo documentdb-setup --restore --yes
 ```
-
-If more than one DocumentDB major is configured without systemd, schedule a maintenance window
-and use the same unscoped restore. It detaches every configured major and stops the nohup
-gateways; re-run setup for the majors you are keeping afterward. A scoped restore alone is not
-sufficient on a no-systemd host.
 
 Restart the adopted PostgreSQL service after restore to apply removal of the managed settings.
 On an unscoped multi-major restore, restart each operator-managed PostgreSQL service involved.
@@ -276,8 +305,7 @@ These are defects in this release, not expected behaviour. Most need a host with
 | --- | --- | --- |
 | Status | `documentdb-setup --status` can report "active" for any process holding port 10260 | **any host** |
 | Restart | Re-running `documentdb-setup` to restart can hang; redirecting output to a file avoids it | no systemd |
-| Stop | A scoped `documentdb-setup --restore --pg-version N` cannot stop a nohup gateway; follow the no-systemd brownfield removal steps above | no systemd |
-| Minimal RHEL | Install `procps-ng` first, or `--restore` reports success while the gateway keeps serving and a later run fails with `Port 10260 is already in use` | no systemd |
+| Stop | A scoped `documentdb-setup --restore --pg-version N` skips a nohup gateway it has no valid record of; follow the no-systemd brownfield removal steps above | no systemd |
 
 **Prefer a systemd host for anything you care about**, where the service lifecycle is managed by systemd rather than by the setup script.
 

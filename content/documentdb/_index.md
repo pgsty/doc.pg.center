@@ -1,9 +1,9 @@
 ---
 title: DocumentDB documentation
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/readme.md
-description: 'DocumentDB 1.0: installation, operations, PostgreSQL APIs, commands, and operators.'
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/readme.md
+description: 'DocumentDB 1.2.0: installation, operations, PostgreSQL APIs, commands, and operators.'
 linkTitle: DocumentDB
 weight: -10
 sidebar_root_for: self
@@ -18,13 +18,14 @@ outputs:
 - LLMSFULL
 cascade:
   type: docs
-  upstream_source: documentdb
+  upstream_source: documentdb-20261121
 ---
 
 DocumentDB provides a PostgreSQL-based document database with BSON storage,
 document operations, indexes, and a MongoDB wire protocol gateway. This edition
-includes the published DocumentDB 1.0 documentation and its Simplified Chinese translation.
+covers the published DocumentDB 1.2.0 documentation. The existing Simplified Chinese edition remains based on 1.0 while the incremental translation is pending.
 
+- [Release notes for 1.2](/documentdb/getting-started/release-notes-1.2/) — Compatibility, container startup, upgrades, and renamed metrics.
 - [Getting started](/documentdb/getting-started/) — Docker, Linux packages, and your first query with a shell, driver, or editor.
 - [DocumentDB Local](/documentdb/documentdb-local/) — Container options, persistent data, certificates, and telemetry.
 - [Linux package operations](/documentdb/linux-packages/) — Secure, operate, upgrade, and install without internet access.
@@ -34,7 +35,7 @@ includes the published DocumentDB 1.0 documentation and its Simplified Chinese t
 {.cards}
 
 > [!NOTE] Source edition
-> The documentation repository is pinned at `cf69384`; website-generated guides
-> and corrections are pinned at `90cfa08` (7 November 2026). The upstream
+> The documentation repository is pinned at `8fb7fda`; website-generated guides
+> and corrections are pinned at `4a83a07` (21 November 2026). The upstream
 > [architecture chapter](/documentdb/architecture/) is still forthcoming.
 > See [source and translation notices](/attribution/#documentdb).

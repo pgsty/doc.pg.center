@@ -4,8 +4,8 @@ description: Learn about pg_documentdb_core, pg_documentdb, pg_documentdb_extend
   three PostgreSQL extensions and the gateway that enable BSON support, document operations, indexing, and MongoDB
   wire protocol compatibility in Postgres.
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/postgres-api/index.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/postgres-api/index.md
 weight: 40
 linkTitle: PostgreSQL API
 ---
@@ -54,7 +54,7 @@ To use `pg_documentdb`, you need to have `pg_documentdb_core` installed and conf
 
 `pg_documentdb_extended_rum` (SQL extension name `documentdb_extended_rum`) is DocumentDB's fork of the PostgreSQL RUM index access method, which backs DocumentDB's document indexes. It keeps RUM's on-disk format and extends the query path for document workloads.
 
-It is required in 1.0: `documentdb.rum_library_load_option` defaults to `require_documentdb_extended_rum`, so `pg_documentdb` loads its index handler from the extended RUM library. The library loads only from `shared_preload_libraries`, and `CREATE EXTENSION documentdb CASCADE` does not create the extension, so a manually configured server needs both steps before indexes are built:
+It is required: `documentdb.rum_library_load_option` defaults to `require_documentdb_extended_rum`, so `pg_documentdb` loads its index handler from the extended RUM library. The library loads only from `shared_preload_libraries`, and `CREATE EXTENSION documentdb CASCADE` does not create the extension, so a manually configured server needs both steps before indexes are built:
 
 ```sql
 -- postgresql.conf: add pg_documentdb_extended_rum to shared_preload_libraries and set

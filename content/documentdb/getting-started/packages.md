@@ -3,23 +3,23 @@ title: Linux Packages Quick Start
 description: Install DocumentDB on Linux with Ubuntu APT or EL9 RPM/dnf packages, set up a private PostgreSQL instance,
   and run your first query.
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/documentdb.github.io/blob/90cfa088351557cd618034dfc00ab817c35a5f76/app/services/articleService.ts
-upstream_ref: website 90cfa08; DocumentDB 1.0
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/documentdb.github.io/blob/4a83a0712149e101a2bbb38934bed36497cdf40f/app/services/articleService.ts
+upstream_ref: website 4a83a07; DocumentDB 1.2.0
 weight: 30
 ---
 
 Install DocumentDB from the published package repository and get a MongoDB-compatible endpoint on your own host.
 
-The current official release publishes the full stack — extension, gateway, setup wizard and systemd units — for **Ubuntu 24.04 and EL9, on PostgreSQL 17 or 18, amd64 or arm64**. EL9 includes Rocky Linux, AlmaLinux, CentOS Stream, and registered Red Hat Enterprise Linux; [Linux packages installation](https://documentdb.io/packages?method=packages) supplies the prerequisite command for each family. Starting with v0.116, this is a deliberately smaller prebuilt matrix than earlier releases. The website repository mirrors only the current release assets and does not carry older packages forward to make other targets appear current.
+The current official release publishes the full stack — extension, gateway, setup wizard and systemd units — for **Ubuntu 24.04 and EL9, on PostgreSQL 17 or 18, amd64 or arm64**. EL9 includes Rocky Linux, AlmaLinux, CentOS Stream, and registered Red Hat Enterprise Linux; [Linux packages installation](https://documentdb.io/packages?method=packages) supplies the prerequisite command for each family. Starting with v0.116, this is a deliberately smaller prebuilt matrix than earlier releases. The website repository mirrors only official release assets and does not carry older packages forward to make other targets appear current.
 
 **Recommended:** install the complete stack, then create a new private PostgreSQL 18 instance. The commands detect architecture on the Linux host where you run them. For containers or macOS/Windows evaluation, choose [Docker installation](https://documentdb.io/packages?method=docker).
 
 > [!IMPORTANT]
-> Already running v0.116 or v0.117 from packages? Follow [Upgrading](/documentdb/linux-packages/#upgrading) instead of installing again. Hosts that ran a 1.0 release candidate have no upgrade path; use a clean host. Removing packages preserves database files; reinstalling is not a data reset.
+> Already running DocumentDB from packages? Follow [Upgrading](/documentdb/linux-packages/#upgrading) instead of installing again. Hosts that ran a 1.0 release candidate have no upgrade path; use a clean host. Removing packages preserves database files; reinstalling is not a data reset.
 
 > [!NOTE]
-> Need another distribution or PostgreSQL major? We welcome community builds. Check out the `v1.0-0` tag, pass `--version 1.0.0`, and use the version-parameterized [packaging scripts](https://github.com/documentdb/documentdb/blob/v1.0-0/packaging/README.md). `build_packages.sh` builds the extension, `gateway/build_gateway_packages.sh` builds the gateway, and `build_extra_packages.sh` builds the common, tools, stand-alone, and meta packages. PostgreSQL 15 is extension-only because the setup tools require PostgreSQL 16 or newer. These builds are on demand and are not official release assets hosted by documentdb.io.
+> Need another distribution or PostgreSQL major? On Debian 13 and 14 or Ubuntu 26.04 and 26.10, [PGDG publishes the extension](https://github.com/documentdb/docs/blob/main/getting-started/prebuilt-packages.md#pgdg-extension-packages) as `postgresql-N-documentdb` for PostgreSQL 15 to 18. It is extension only, with no gateway or setup wizard. Otherwise, we welcome community builds. Check out the `v1.2-0` tag, pass `--version 1.2.0`, and use the version-parameterized [packaging scripts](https://github.com/documentdb/documentdb/blob/v1.2-0/packaging/README.md). `build_packages.sh` builds the extension, `gateway/build_gateway_packages.sh` builds the gateway, and `build_extra_packages.sh` builds the common, tools, stand-alone, and meta packages. PostgreSQL 15 is extension-only because the setup tools require PostgreSQL 16 or newer. These builds are on demand and are not official release assets hosted by documentdb.io.
 
 You do not need PostgreSQL already installed — the setup wizard creates and manages its own instance. The install does add the PGDG repository and pull PostgreSQL, PostGIS and around 160 packages (about 140 MB), so pick a host you are willing to have PGDG on.
 
@@ -32,10 +32,16 @@ curl -fsSLo documentdb-install.sh https://documentdb.io/install.sh &&
 sudo sh documentdb-install.sh
 ```
 
-This installs the current release (v1.0-0) from the package repository on PostgreSQL 18; add `--pg-major 17` for 17.
-On a host where DocumentDB is already set up, the installer only reports its status and doesn't upgrade it; to move an existing install to 1.0, follow [Upgrading](/documentdb/linux-packages/#upgrading).
+This installs the current release (v1.2-0) from the `latest` channel of the package repository, on PostgreSQL 18; add `--pg-major 17` for 17. The host keeps that channel, so `apt upgrade` and `dnf upgrade` follow `latest` to new releases. To choose another release, add one option:
+
+- `--stable`: the `stable` channel, which serves v1.2-0 and takes new releases later than `latest`.
+- `--version 1.0.0`: exactly that release (1.0.0 or later), downloaded from its GitHub release. No DocumentDB repository is configured, so the package manager never upgrades it.
+
+The installer only sets up new installs: on a host where DocumentDB is already installed it changes no packages. To move an existing install to a newer release, follow [Upgrading](/documentdb/linux-packages/#upgrading).
 
 ## Install {#install}
+
+These commands use the `latest` channel. For `stable` (v1.2-0), write `stable` in place of `latest` in the DocumentDB APT line, or use `baseurl=https://documentdb.io/rpm/rhel9` on EL9.
 
 <span id="ubuntu-24-04-postgre-sql-18-apt"></span>
 
@@ -47,7 +53,7 @@ sudo apt install -y curl ca-certificates gnupg && \
 curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor --yes -o /usr/share/keyrings/postgresql.gpg && \
 echo "deb [signed-by=/usr/share/keyrings/postgresql.gpg] https://apt.postgresql.org/pub/repos/apt noble-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list >/dev/null && \
 curl -fsSL https://documentdb.io/documentdb-archive-keyring.gpg | sudo gpg --dearmor --yes -o /usr/share/keyrings/documentdb-archive-keyring.gpg && \
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/documentdb-archive-keyring.gpg] https://documentdb.io/deb stable ubuntu24" | sudo tee /etc/apt/sources.list.d/documentdb.list >/dev/null && \
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/documentdb-archive-keyring.gpg] https://documentdb.io/deb latest ubuntu24" | sudo tee /etc/apt/sources.list.d/documentdb.list >/dev/null && \
 sudo apt update && \
 sudo apt install -y documentdb-18
 ```
@@ -68,7 +74,7 @@ sudo rpm --import https://documentdb.io/documentdb-archive-keyring.gpg && \
 printf '%s\n' \
   '[documentdb]' \
   'name=DocumentDB Repository' \
-  'baseurl=https://documentdb.io/rpm/rhel9' \
+  'baseurl=https://documentdb.io/rpm/latest/rhel9' \
   'enabled=1' \
   'gpgcheck=1' \
   'gpgkey=https://documentdb.io/documentdb-archive-keyring.gpg' | sudo tee /etc/yum.repos.d/documentdb.repo >/dev/null && \
@@ -91,7 +97,7 @@ sudo rpm --import https://documentdb.io/documentdb-archive-keyring.gpg && \
 printf '%s\n' \
   '[documentdb]' \
   'name=DocumentDB Repository' \
-  'baseurl=https://documentdb.io/rpm/rhel9' \
+  'baseurl=https://documentdb.io/rpm/latest/rhel9' \
   'enabled=1' \
   'gpgcheck=1' \
   'gpgkey=https://documentdb.io/documentdb-archive-keyring.gpg' | sudo tee /etc/yum.repos.d/documentdb.repo >/dev/null && \
@@ -183,4 +189,4 @@ sudo rm -f /etc/yum.repos.d/documentdb.repo
 sudo dnf clean all
 ```
 
-To remain on an older target, use its GitHub release assets or build from the matching source tag. Neither path is part of the current hosted support matrix.
+To remain on an older target, use its GitHub release assets or build from the matching source tag. On Debian 13, [PGDG's extension package](https://github.com/documentdb/docs/blob/main/getting-started/prebuilt-packages.md#pgdg-extension-packages) is another option; switching to it is a provider change, not an in-place upgrade. None of these paths is part of the current hosted support matrix.

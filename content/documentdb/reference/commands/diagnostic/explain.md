@@ -2,12 +2,14 @@
 title: explain
 description: Explain supported DocumentDB read commands and select diagnostic verbosity.
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/diagnostic/explain.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/diagnostic/explain.md
 weight: 60
 ---
 
 Returns planning information for `find`, `aggregate`, `count`, or `distinct`. The default gateway does not explain write commands.
+
+For the explain response structure and field descriptions, see the [explain output JSON schema](https://github.com/documentdb/documentdb/blob/main/pg_documentdb_gw/documentdb_gateway_core/src/explain/documentdb_explain_output.schema.json) in the DocumentDB repository.
 
 ```javascript
 db.flights.find({ status: "Delayed" }).explain("executionStats")

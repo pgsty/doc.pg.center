@@ -2,8 +2,8 @@
 title: createIndexes
 description: Create indexes with supported standard and DocumentDB-specific options.
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/indexing/createIndexes.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/indexing/createIndexes.md
 weight: 10
 ---
 
@@ -48,7 +48,7 @@ db.flights.createIndex({ route_no: 1 })
 | **`min`** | (Optional) A number specifying the bounds for a `2d` index. |
 | **`max`** | (Optional) A number specifying the bounds for a `2d` index. |
 | **`bits`** | (Optional) An integer specifying `2d` precision, from `1` through `32`. |
-| **`collation`** | (Optional) A document specifying the non-empty comparison rules; requires collation support. |
+| **`collation`** | (Optional) A document specifying the non-empty comparison rules; requires `documentdb.enableCollationWithNonUniqueOrderedIndexes` and a non-unique ordered index. |
 | **`prepareUnique`** | (Optional) A boolean that is recognized only by the prepare-unique creation path; not a generally available creation option. |
 | **`storageEngine`** | (Optional) A document containing the DocumentDB-specific options below, not a choice of PostgreSQL storage engine. |
 {.fields}
@@ -247,5 +247,30 @@ Ordered/composite indexing is enabled by default, so normal index creation does 
 | --- | --- |
 | **`enableOrderedIndex`** | (Optional) A boolean or integer controlling ordered/composite indexing. Numeric values must be `-1`, `1`, or `2`; booleans are preferred. |
 {.fields}
+
+To explicitly request an ordered index alongside existing indexes on `flights`, give it a distinct name and set `storageEngine.enableOrderedIndex`:
+
+```javascript
+db.flights.createIndex(
+  { status: 1 },
+  {
+    name: "flight_status_ordered",
+    storageEngine: { enableOrderedIndex: true }
+  }
+)
+```
+
+This requests ordered/composite indexing explicitly rather than relying on the default.
+
+To verify that the index is ordered, use `$indexStats` and filter by the index name:
+
+```javascript
+db.flights.aggregate([
+  { $indexStats: {} },
+  { $match: { name: "flight_status_ordered" } }
+])
+```
+
+Check that the result includes `spec.storageEngine.enableOrderedIndex: true`. Use `$indexStats` for this check rather than relying on `getIndexes()` to expose the option.
 
 See [wire protocol and common fields](/documentdb/reference/commands/diagnostic/wire-protocol/). Source: `pg_documentdb/src/commands/create_indexes.c`, `ParseCreateIndexesArg`, `ParseIndexDefDoc`, `ParseCustomIndexDefOption`, and `pg_documentdb/src/vector/vector_index_kind_impl.c`; uniqueness conversion: `pg_documentdb/src/commands/coll_mod.c`, `HandleUniqueConversion` and `UpdatePostgresIndexesForUnique`.

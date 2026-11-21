@@ -2,8 +2,8 @@
 title: Distinct
 description: The distinct command is used to find the unique values for a specified field across a single collection.
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/aggregation/distinct.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/aggregation/distinct.md
 weight: 30
 ---
 
@@ -20,7 +20,7 @@ Returns unique values for a field path in `values`. This command does not create
 | **`query`** | (Optional) A document specifying the match filter; omitted or `null` means no filter. |
 | **`hint`** | (Optional) A string or document specifying the index name or key pattern. |
 | **`maxTimeMS`** | (Optional) A number specifying the execution timeout in milliseconds. |
-| **`collation`** | (Optional) A document specifying the comparison rules; requires `documentdb_core.enableCollation` and cluster version 1.1 or later. Rejected otherwise. |
+| **`collation`** | (Optional) A document specifying the comparison rules; requires `documentdb_core.enableCollation` and cluster version 1.2 or later. Rejected otherwise. |
 {.fields}
 
 ## Example: list arrival airports from one departure airport {#example-list-arrival-airports-from-one-departure-airport}
