@@ -2,10 +2,10 @@
 title: $inc
 description: $inc 运算符按指定增量增加字段值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/field-update/$inc.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/field-update/$inc.md
 weight: 20
-translation_source_sha256: d5bc572bca611582306a8e972ec673b94270a70fe359c806c5b235e721c48cc9
+translation_source_sha256: 546d1c3eb1e6f70dd3c94436c198f9d8d3587a86e97de6ef0c277d79681b6b7c
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

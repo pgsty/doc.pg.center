@@ -2,10 +2,10 @@
 title: $first
 description: $first 运算符根据分组的排序顺序返回该组中的第一个值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$first.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$first.md
 weight: 50
-translation_source_sha256: a6b09026c2495e374b57a36a238f69bd62918231e1337ec611dbc089da1b092d
+translation_source_sha256: b2fd128d321816efec72a968c0e9c2dc4cff6ca8887cc844a9d2b7c936d98f0e
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

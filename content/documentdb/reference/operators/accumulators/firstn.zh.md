@@ -2,10 +2,10 @@
 title: $firstN
 description: $firstN 运算符根据查询指定的一个或多个字段对文档进行排序，并返回匹配筛选条件的前 N 个文档
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$firstn.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$firstn.md
 weight: 60
-translation_source_sha256: 8fd3dce05949d76dd91146131b1dae2afa2cdaa07d3b829dc1b9a7dadc7d4ab0
+translation_source_sha256: d3dd30c70e81940fd5ceacf8fe3dc2de9dad7b99c4e746c42a264d0581b6c13c
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

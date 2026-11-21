@@ -2,10 +2,10 @@
 title: $avg
 description: $avg 运算符计算分组、分桶或窗口中文档的数值平均值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$avg.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$avg.md
 weight: 10
-translation_source_sha256: f6beeb2f7697698bd44ee2b31bfe23b40376b8099d72604559e2b0cd5d8f81a2
+translation_source_sha256: 8ef71090fdb8388ae4d31182071f5d519ac264c7f8d7517b4a0cce9c2b6353da
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

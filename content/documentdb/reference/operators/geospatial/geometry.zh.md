@@ -2,10 +2,10 @@
 title: $geometry
 description: $geometry 运算符为地理空间查询指定 GeoJSON 几何对象。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/geospatial/$geometry.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/geospatial/$geometry.md
 weight: 50
-translation_source_sha256: b3ba2214cc52e1e52cafb16c1bbb22113b93e975af68699f644629c49bebf947
+translation_source_sha256: 487a780b07cba8f875a86da29a4dea24bba9f7381da2259949602a62571e75ae
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

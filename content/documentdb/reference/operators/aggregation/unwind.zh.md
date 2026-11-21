@@ -2,10 +2,10 @@
 title: $unwind
 description: 聚合框架中的 $unwind 流水线阶段用于从输入文档中拆解数组字段，为数组中的每个元素输出一个文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$unwind.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$unwind.md
 weight: 440
-translation_source_sha256: 66e387fa912fcb40eedf314f22220df6a10156d9bddfa1f3d9cc07119b06abd3
+translation_source_sha256: 90a90e2719d513e907612b2b79ddac941905ba15cddb1f2b22a989cfcc9d4e81
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

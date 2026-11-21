@@ -2,10 +2,10 @@
 title: $and
 description: $and 运算符连接多个查询子句，返回满足所有指定条件的文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/logical-query/$and.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/logical-query/$and.md
 weight: 10
-translation_source_sha256: 440de92a9559fc4753333c1301527147014f1e9b06dbd7f2da58ffa8e241abf6
+translation_source_sha256: a064892accf9396e7fca9fd4b8245a692a6a5e3a725ba4c324b79021f26bb9f7
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $cmp
 description: $cmp 运算符比较两个值
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/comparison-query/$cmp.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/comparison-query/$cmp.md
 weight: 10
-translation_source_sha256: a1c131f3ec35212500adc92fb9b8261490eb86b3110072d14c529d286984e2ca
+translation_source_sha256: 4363322ad9a7a8339ab461f395c6dac9d26455c52e35eb149fb29bb650a7db5d
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

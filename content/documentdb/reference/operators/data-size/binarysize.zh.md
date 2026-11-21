@@ -2,10 +2,10 @@
 title: $binarySize
 description: $binarySize 运算符用于返回二进制数据字段的大小。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/data-size/$binarysize.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/data-size/$binarysize.md
 weight: 10
-translation_source_sha256: 1f488b12083056a0fbd65bb9b668e6ae5c5c6aa7c2da9c1b900e7ab097a4c115
+translation_source_sha256: 13c786f7b90181c72457d1fb240bc58e857aab22936f10fc6fbf98e9a4b73c84
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

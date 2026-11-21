@@ -2,10 +2,10 @@
 title: $nor
 description: $nor 运算符对表达式数组执行逻辑或非运算，并检索所有条件均不满足的文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/logical-query/$nor.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/logical-query/$nor.md
 weight: 20
-translation_source_sha256: c90f6f6fe3a639ca3e0528bab35928a31523231cc14049e4afd919625dd3db49
+translation_source_sha256: 67d0a687ec97fec9ed5cf140fa98256bde6679b7cbd5016503576b510db74f17
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

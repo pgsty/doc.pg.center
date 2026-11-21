@@ -2,10 +2,10 @@
 title: $week
 description: $week 运算符返回日期对应的周编号，取值范围为 0 到 53。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$week.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$week.md
 weight: 200
-translation_source_sha256: 3938fdfb08515cb9dc6cfd5edf3f40d23bda714c705e6fe790d895be06ba1149
+translation_source_sha256: f15d5530c0c9e3593148a8d280a850a32d36396c41bcc558c503b46cdb8929c4
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

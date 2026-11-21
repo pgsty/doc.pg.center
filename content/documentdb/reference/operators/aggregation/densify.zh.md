@@ -2,10 +2,10 @@
 title: $densify
 description: $densify 运算符在数组或集合内的值序列中添加缺失的数据点。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$densify.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$densify.md
 weight: 80
-translation_source_sha256: d316e033fa645b1f6591d477f90dafd511608d99d37cc4fd8e1c527dbf78f855
+translation_source_sha256: c94c7e49d7b39035c45847248e06a8d91a4c476881223778a8df3bfdf33bfb30
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

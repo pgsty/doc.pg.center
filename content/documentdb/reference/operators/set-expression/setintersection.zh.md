@@ -2,10 +2,10 @@
 title: $setIntersection
 description: $setIntersection 运算符返回所有输入数组中都存在的共同元素。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/set-expression/$setintersection.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/set-expression/$setintersection.md
 weight: 50
-translation_source_sha256: 05bb05f192961d16018adccbed650a592e0686898d81e5f8e8d6eec6283646ee
+translation_source_sha256: 491c19a89f569b4942c29dc966317f98c78469271e6e070e75651feedb8efa30
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

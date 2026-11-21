@@ -2,10 +2,10 @@
 title: $dateSubtract
 description: $dateSubtract 运算符从日期中减去指定时长。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$datesubtract.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$datesubtract.md
 weight: 50
-translation_source_sha256: f1041f47721b3b9db9e10f01b135bb2a660066677dba4622109170aa0e3e0100
+translation_source_sha256: e674f237646b0171513cd67b573ea924a156e1041ccc999e4012b9a0a477d1ef
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $redact
 description: $redact 运算符根据访问权限过滤文档内容。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$redact.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$redact.md
 weight: 240
-translation_source_sha256: 6fc154b7d55421c4b27464b7b47ae3840b9a24576b0a19adfe04ee1e6cddfa7a
+translation_source_sha256: d0b648c27a44fbd221ec801519929c8536e2b4f59af1fe52bab3d4af9ac3c4f8
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

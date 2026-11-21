@@ -2,10 +2,10 @@
 title: $bitAnd
 description: $bitAnd 运算符对整数值执行按位与运算，并以整数形式返回结果。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/bitwise/$bitand.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/bitwise/$bitand.md
 weight: 10
-translation_source_sha256: 7e35ca0808a1bd0d58470421c3c2c7f1a87204659d4cd05c913db20dca7f76ce
+translation_source_sha256: d1678d7ed4d90d9636f0bc514624cfe8c491deaec866def2c4418368a401cda8
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

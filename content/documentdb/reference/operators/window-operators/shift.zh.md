@@ -2,10 +2,10 @@
 title: $shift 在 DocumentDB 中的用法
 description: 在分区内偏移值并返回偏移后值的窗口运算符。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/window-operators/$shift.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/window-operators/$shift.md
 weight: 110
-translation_source_sha256: 7e8cf4fbd9e638b6cd55e71d1234b99494fed888a5ed887e7660e216eed2e048
+translation_source_sha256: 8552658016c6215a8ec869bdcbd43227dcfaeab77ba3850d9ad881bf2a4f7ba6
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

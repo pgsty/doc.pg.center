@@ -2,10 +2,10 @@
 title: $toLong
 description: $toLong 运算符将表达式转换为 Long 值
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$tolong.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$tolong.md
 weight: 390
-translation_source_sha256: bf44ab37e061bb3b9c73d617a4ea03db2e45d7122a06fb22ac4e1225f0f60f23
+translation_source_sha256: 2438eff19c01d7468bfde3e55704c4ba63a0406e689dc2d488bd18b3ce49cf01
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: 线协议命令支持与通用字段
 description: 与源码关联的 DocumentDB 线协议命令清单、共享选项、兼容性响应以及提供方依赖的命令。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/diagnostic/wire-protocol.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/diagnostic/wire-protocol.md
 weight: 100
-translation_source_sha256: 8eedbad23fd8d67dcbf0744dedf91ee18cf55c8e41574627387628905179077b
+translation_source_sha256: 02fa3beb573cc195a39c0055c4d00778a6ec8bb3b94647809c01160cfc298579
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

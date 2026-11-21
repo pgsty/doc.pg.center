@@ -1,11 +1,11 @@
 ---
 title: 变量表达式
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/variable-expression/_metadata.description.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/variable-expression/_metadata.description.md
 description: DocumentDB 变量表达式参考。
 weight: 270
-translation_source_sha256: bc6a76cca36d851190665a44d216beb599d0e96d28fde3263948f16ef29b6291
+translation_source_sha256: 49862fa9d7e4c0b2ec0542d632ec37be2adf9b3213340833c5f208ff109c50e8
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

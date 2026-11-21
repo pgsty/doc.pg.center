@@ -2,10 +2,10 @@
 title: $match
 description: 聚合流水线中的 $match 流水线阶段用于筛选符合指定条件的文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$match.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$match.md
 weight: 200
-translation_source_sha256: 4b5ad053ae99667a8180e31e9f0e5c03fd40eb150f510ec590656874129cc325
+translation_source_sha256: 4ffa8ccc7fe82068d6714cdce64cc6c2bb0882ed1d01bb12479df3ef9820e1c9
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

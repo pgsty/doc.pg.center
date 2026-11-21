@@ -2,10 +2,10 @@
 title: $gt
 description: $gt 查询运算符获取字段值大于指定值的文档
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/comparison-query/$gt.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/comparison-query/$gt.md
 weight: 30
-translation_source_sha256: 18edd3b27f23a8d2b79c9469f30639985d1d8f289a5b1741bc6884cf4ede497a
+translation_source_sha256: 0f6f7ae9d23fc1d8804338031f05dd8bbcffd292bf9e07d6bd67e7a0834b94cc
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

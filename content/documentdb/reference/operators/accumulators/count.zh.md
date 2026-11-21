@@ -2,10 +2,10 @@
 title: $count
 description: '`$count` 运算符用于计算符合查询过滤条件的文档数量。'
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$count.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$count.md
 weight: 40
-translation_source_sha256: 2e476d333255f05812c348790ef661e46c60380d6228d8d1ac9248545278bdb8
+translation_source_sha256: 0d140eb34ae8069b43d7cc4c34de5742bb65a3c1f2cd500c8acd9aaca8ffa163
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

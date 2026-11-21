@@ -2,10 +2,10 @@
 title: $concatArrays
 description: $concatArrays 用于将多个数组合并为一个数组。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-expression/$concatarrays.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-expression/$concatarrays.md
 weight: 30
-translation_source_sha256: 74f2d6717573e92b623ced7894df445908f1063f950d646ff0eaf135587ec00b
+translation_source_sha256: 7901add43d96b98814b93992285b9c28754e69544f6333f6720e4294ab1ebe21
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

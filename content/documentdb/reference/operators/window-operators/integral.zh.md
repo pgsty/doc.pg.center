@@ -2,10 +2,10 @@
 title: $integral
 description: $integral 运算符使用指定范围内相邻的文档进行计算，求得曲线下面积。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/window-operators/$integral.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/window-operators/$integral.md
 weight: 70
-translation_source_sha256: d472a24a33e931d405f24e6b8697313e6e806ee8857f048f6dcbb32f612140ad
+translation_source_sha256: 9401d84a2db8a2f9bc14de9b50320a508da1ee87308c50690be1f3df75c1aef2
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

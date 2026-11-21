@@ -2,10 +2,10 @@
 title: $filter
 description: $filter 运算符根据指定条件筛选数组中的元素。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-expression/$filter.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-expression/$filter.md
 weight: 40
-translation_source_sha256: 7c97eab027056fa1ec2ade6eb862723c67b2edc9dc6a719ba15ee3522a6d5d7e
+translation_source_sha256: 187a2a1d3556b5fbe5a04a6cec2dfcb261085e05bdd2bf11a010e063e46b0d62
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

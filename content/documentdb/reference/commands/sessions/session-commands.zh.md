@@ -2,10 +2,10 @@
 title: 会话命令
 description: 终止 DocumentDB 逻辑会话。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/sessions/session-commands.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/sessions/session-commands.md
 weight: 10
-translation_source_sha256: 8cfe4fd8e47003eef2db4d076b75248964032f60ea8c413eee16db82880242c2
+translation_source_sha256: 9126ee9a7e2a7a121afb6b283739ba8bb5353d3602292734f671da16db79f525
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

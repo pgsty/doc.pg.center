@@ -2,10 +2,10 @@
 title: $vectorSearch
 description: 聚合流水线中的 $vectorSearch 阶段在向量索引上执行近似最近邻搜索。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$vectorsearch.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$vectorsearch.md
 weight: 450
-translation_source_sha256: feea71b43a6dc0e50dfb01472dc7a40551997783f887312a1e11f151c6025d97
+translation_source_sha256: 99cd68a33304769eecbe89b5d6bf6d2f6a6e3bd52ccd3d562d0a6f38e21eca10
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

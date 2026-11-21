@@ -2,10 +2,10 @@
 title: $geoWithin
 description: $geoWithin 运算符选择 location 字段完全位于指定几何对象内部的文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/geospatial/$geowithin.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/geospatial/$geowithin.md
 weight: 60
-translation_source_sha256: 017e50a97e879decb015f22fbb6892edaf910a5bfdd1fdbb1584beaddc1d1787
+translation_source_sha256: ae1454067d007998ac0530393562d3aa93c1edf8438dfeabea0699ebf54d18af
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

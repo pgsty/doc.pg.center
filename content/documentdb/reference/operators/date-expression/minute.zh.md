@@ -2,10 +2,10 @@
 title: $minute
 description: $minute 运算符从日期值中提取分钟分量。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$minute.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$minute.md
 weight: 170
-translation_source_sha256: 421aea9afc5846c2ceabe08ac144c9221c89a0945b7796f5569eb4fae072020f
+translation_source_sha256: 7f0d47654b625b81ac2b90480049b719ee12801cf65cf3f9dbe3a007199892a6
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

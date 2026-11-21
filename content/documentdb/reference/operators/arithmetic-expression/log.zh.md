@@ -2,10 +2,10 @@
 title: $log
 description: $log 运算符计算一个数以指定底数为底的对数
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/arithmetic-expression/$log.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/arithmetic-expression/$log.md
 weight: 80
-translation_source_sha256: cf5eeac0f29d8799472bba8a8607402f511ceb6a81dffb60c3eec582d8e290e6
+translation_source_sha256: 9dbec8e9755c8d980a824e9e91152b490b780f3be81bd844cdcee40e100322f2
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

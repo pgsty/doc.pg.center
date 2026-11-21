@@ -2,10 +2,10 @@
 title: $unset
 description: 聚合流水线中的 $unset 阶段用于从文档中移除指定字段。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$unset.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$unset.md
 weight: 430
-translation_source_sha256: 8fe8eab746d8c9dfa49c4efda7c626c87f0f5ce9862eec9370b0333f78837fc7
+translation_source_sha256: dec8ea44bb931f1a261f23c46abdcd87eed288c353f8e415d81769ede6286f94
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

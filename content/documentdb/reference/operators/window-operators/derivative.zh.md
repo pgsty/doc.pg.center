@@ -2,10 +2,10 @@
 title: $derivative
 description: $derivative 运算符计算指定窗口内字段值的平均变化率。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/window-operators/$derivative.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/window-operators/$derivative.md
 weight: 40
-translation_source_sha256: 7095a072a6ede3dcf1ca914b60809959a451914374bcdc4fc6f5e9f6c88adcfa
+translation_source_sha256: fc2cb6af6e61af09ed60cbe694b857fb58f39bff67b9fd95a43c1a108b85791f
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

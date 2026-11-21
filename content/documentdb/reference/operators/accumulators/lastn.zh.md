@@ -2,10 +2,10 @@
 title: $lastN
 description: $lastN 累加器运算符返回文档组中的最后 N 个值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$lastn.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$lastn.md
 weight: 80
-translation_source_sha256: b3b3e004e62cf34303cfae13ece3b4a4bd86226f2da764b8b584c4ff8d51b6b5
+translation_source_sha256: 7cb7af22ee7f8efe970197651ee8c2d41aeb2ae41e7d0e2a275e0c426187422c
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

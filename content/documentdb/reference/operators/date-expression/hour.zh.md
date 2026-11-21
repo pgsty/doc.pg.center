@@ -2,10 +2,10 @@
 title: $hour
 description: $hour 运算符返回日期中的小时分量，取值范围为 0 到 23。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$hour.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$hour.md
 weight: 120
-translation_source_sha256: 7ef491ad0e1b319125a58fe13abdc8a549eb8aa912417ac2df66621bde9e8847
+translation_source_sha256: 98129b9506e000f61e7ac2ae558bcd5165aa38e8b34ed33d714aeee0e9cc759c
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

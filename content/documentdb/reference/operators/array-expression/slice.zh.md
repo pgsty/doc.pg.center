@@ -2,10 +2,10 @@
 title: $slice
 description: $slice 运算符从数组中的任意元素开始返回数组的子集。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-expression/$slice.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-expression/$slice.md
 weight: 110
-translation_source_sha256: 619f15b31291ce90f6a1613aa3af3edc637cf5dea4c5c03ea71bd0e72e154882
+translation_source_sha256: 867bd86e5dca63a1d82aef631469d6f73e15bb9307ad55e329560d01517a7898
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

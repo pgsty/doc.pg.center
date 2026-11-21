@@ -2,10 +2,10 @@
 title: $toDate
 description: $toDate 运算符将支持的类型转换为正确的 Date 对象。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$todate.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$todate.md
 weight: 350
-translation_source_sha256: 54506211c56839d24d5fc1b3680d4d926d0d51f7f911c30f0868005fc106ac88
+translation_source_sha256: 9148f893c3c575390b17f5064ce3e4b55181dcd5097b1a628b1c407a68743474
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $bitsAnyClear
 description: $bitsAnyClear 运算符匹配位掩码所指定的位中至少有一位未置位的文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/bitwise-query/$bitsAnyClear.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/bitwise-query/$bitsAnyClear.md
 weight: 30
-translation_source_sha256: 5e473a577b943b3d5dd1dd2ba0592b86b79710bf11b8965103ee0aba11fdcffd
+translation_source_sha256: e41d0e86cd390edb1220ee5bdef8454d12b2c911e2af78d2d8c720dae6b6e1c1
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

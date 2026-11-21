@@ -2,10 +2,10 @@
 title: hello
 description: hello 命令返回有关 DocumentDB 服务器的信息，包括拓扑角色、线协议限制和 DocumentDB 引擎版本。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/diagnostic/hello.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/diagnostic/hello.md
 weight: 70
-translation_source_sha256: e73bfb7ed0a15ed541c084085c1d977e0945417a7e12959771b8c0ac94d3da89
+translation_source_sha256: 34f905e1b452cc45d532ebabfd904557500c89d94389720d272122f591b6c9c3
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

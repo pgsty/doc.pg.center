@@ -2,10 +2,10 @@
 title: $getField
 description: $getField 运算符可从文档中获取指定字段的值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/miscellaneous/$getfield.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/miscellaneous/$getfield.md
 weight: 10
-translation_source_sha256: 0a21048c6f33579c12e075ced773707ab64e0446e93fc317576ff6343c61c8d3
+translation_source_sha256: b4953f8e9dfb77d6597c8abe61763e8df3c47ef982fb5d50e995a4e127391630
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

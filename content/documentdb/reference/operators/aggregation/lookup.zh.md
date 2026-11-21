@@ -2,10 +2,10 @@
 title: $lookup
 description: 聚合框架中的 $lookup 流水线阶段用于与其他集合执行左外连接。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$lookup.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$lookup.md
 weight: 190
-translation_source_sha256: c094a58a30b91ed1ee610a3460675dc9448d0615077b8482450118f667bbe889
+translation_source_sha256: 603c892a954bed483ce9111468b2c3af927d5252c268212f7ac444526f6ed08e
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

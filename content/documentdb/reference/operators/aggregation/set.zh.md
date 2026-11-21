@@ -2,10 +2,10 @@
 title: $set
 description: DocumentDB 中的 $set 运算符将字段更新为指定值，或创建具有指定值的新字段
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$set.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$set.md
 weight: 290
-translation_source_sha256: 2ab6266b35ad3e1b5f144c481ddb75c2e5ad188c973be908e46098ccf441e4c7
+translation_source_sha256: de7d68830ff51f1dcfd74f9b84f4f6078658d83775d08e8c78b78398077a041b
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

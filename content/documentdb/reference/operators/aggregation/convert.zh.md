@@ -2,10 +2,10 @@
 title: $convert
 description: $convert 运算符将表达式转换为指定类型
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$convert.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$convert.md
 weight: 60
-translation_source_sha256: a87aa2320171baf02dae1def74d06cc0c67ffd91b83085bb0c37fe6a08e9a18e
+translation_source_sha256: 3c15067045e8db37c6f20f5960fb4f392266dd3d3e4549b8a836ea6d3c281cc1
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

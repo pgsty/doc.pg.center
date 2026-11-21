@@ -1,11 +1,11 @@
 ---
 title: 元素查询
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/element-query/_metadata.description.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/element-query/_metadata.description.md
 description: DocumentDB 元素查询参考。
 weight: 150
-translation_source_sha256: 378189b82f69c3d6b11073b3384507796acf01547fc8d23c4e00460a8c1330d9
+translation_source_sha256: 6baf52950a22d0e929158470b64d477293b351804a0425e0b1194979cbefb158
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

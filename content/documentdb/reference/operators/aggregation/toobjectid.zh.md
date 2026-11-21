@@ -2,10 +2,10 @@
 title: $toObjectId
 description: $toObjectId 运算符将表达式转换为 ObjectId
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$toobjectid.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$toobjectid.md
 weight: 400
-translation_source_sha256: 281334288fd519d24ec24e228a94db50ba02c7d0259c2a84b3fa6bf61b277e71
+translation_source_sha256: 3c2da663c3fbc65db79dc2015869c97d1d63630b6cfdf55979a742d0dd519457
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

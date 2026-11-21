@@ -2,10 +2,10 @@
 title: $isArray
 description: $isArray 运算符用于判断指定值是否为数组。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-expression/$isarray.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-expression/$isarray.md
 weight: 60
-translation_source_sha256: fa04957f059be36fb031b2954ddcd6ee75f48a13924e9dac18ce1174d893aa3c
+translation_source_sha256: 9f8ac39c356b89a02df3a0313c4fceb3771326b1d1a62e1c779ffc34c3a487b7
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $project
 description: 聚合流水线中的 $project 阶段通过包含、排除或计算字段来调整文档结构。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$project.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$project.md
 weight: 230
-translation_source_sha256: 7d58428733249fa1ab328b9ac9489b7d31ab2b9e145f68d7a1cd778a31666253
+translation_source_sha256: 8d35fd93c886eb6f0dcd060d0e0ea7eb35be9172d8d9c62e74f77bc76d556cac
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

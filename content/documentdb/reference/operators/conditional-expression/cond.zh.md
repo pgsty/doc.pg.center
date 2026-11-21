@@ -2,10 +2,10 @@
 title: $cond
 description: $cond 运算符用于对条件求值，并根据结果返回两个表达式中的一个。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/conditional-expression/$cond.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/conditional-expression/$cond.md
 weight: 10
-translation_source_sha256: 8c92f55df22243ea41d3bae60ba44fae7677ba8358e15b7217bd718e218518ed
+translation_source_sha256: d7992246b4fa9d25b5005b6c5abe9b44fa364e2c896fbb2cc4de79ef6d83eee8
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,11 +2,11 @@
 title: DocumentDB 1.0 发布说明
 description: DocumentDB 1.0 的新功能、获取方式、从 0.117 升级方法，以及随版本发布的已知问题。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/getting-started/release-notes-1.0.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/getting-started/release-notes-1.0.md
 weight: 80
-translation_source_sha256: 9d3cf7a937102326000ef130fdaa5e7694bc4bb3356b00394e9de8a2ef4c0709
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: c443cf975fcc0c2351a61ee663d1ee506a845e86f53bbb6669ba8af7bdc90c1d
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
 [DocumentDB v1.0-0](https://github.com/documentdb/documentdb/releases/tag/v1.0-0) 于 **2026-10-19** 发布。它基于与第二个发布候选版本 v1.0-RC2 相同的提交。[变更日志](https://github.com/documentdb/documentdb/blob/v1.0-0/CHANGELOG.md) 列出了引擎的变更内容。
@@ -17,7 +17,8 @@ translation_review: AI-assisted bilingual review; 2026-11-07
 | --- | --- | --- |
 | [Linux 软件包](/documentdb/getting-started/prebuilt-packages/) | 软件包 `1.0.0`，扩展 `1.0-0` | Ubuntu 24.04 和 RHEL 兼容版本 9，PostgreSQL 17 和 18，amd64 和 arm64 |
 | [容器镜像](/documentdb/documentdb-local/) | `pg15-1.0.0` 至 `pg18-1.0.0`；`latest` 为 `pg17-1.0.0` | Linux amd64 和 arm64 |
-| [Kubernetes Operator](/documentdb/kubernetes-operator/) | Operator `1.0.0`，运行引擎 `1.0-0` | Kubernetes 1.33+ 且启用了 `ImageVolume` 特性门控（从 1.35 开始默认开启，1.36 GA） |
+| [PGDG APT 仓库](/documentdb/getting-started/prebuilt-packages/#pgdg-extension-packages) | 软件包 `1.0-0-1.pgdg…`，扩展 `1.0-0`（仅含扩展） | Debian 13 和 14、Ubuntu 26.04（包括 amd64 和 arm64）和 26.10（amd64），PostgreSQL 15 至 18 |
+| [Kubernetes Operator](/documentdb/kubernetes-operator/) | Operator `1.1.1`，运行引擎 `1.0-0` | Kubernetes 1.32+；集群支持时使用 `ImageVolume`，否则使用包含 PostgreSQL 18 的组合镜像 |
 
 SQL 扩展版本在所有位置均为 `1.0-0`，`hello` 在 `internal.documentdb_versions` 中报告该版本。
 

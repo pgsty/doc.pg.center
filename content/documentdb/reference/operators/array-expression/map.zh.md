@@ -2,10 +2,10 @@
 title: $map
 description: $map 运算符允许对数组中的每个元素应用表达式。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-expression/$map.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-expression/$map.md
 weight: 70
-translation_source_sha256: 1f240db16dc7c3b2ce6a94020133a8c5f4020b5ac42ea117ae6cd3d1ca2b9f98
+translation_source_sha256: fd153dec240ab17f3a6ac218058dbf1c495c6eb505e827fdd401c29a83abc169
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

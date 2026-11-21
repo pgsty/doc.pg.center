@@ -2,10 +2,10 @@
 title: $sortArray
 description: $sortArray 运算符有助于对数组中的元素进行排序。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-expression/$sortarray.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-expression/$sortarray.md
 weight: 120
-translation_source_sha256: f9011a094d78b390efb927cbbbbc2909278de343e81b7ff3841cb43dbe4847ee
+translation_source_sha256: ae2e10c3c3d0e4b3b21401d8c24359ec12be10fa789acedb5eae28b3c4d7825c
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

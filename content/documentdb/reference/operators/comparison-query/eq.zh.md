@@ -2,10 +2,10 @@
 title: $eq
 description: $eq 查询运算符将字段值与指定值进行比较
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/comparison-query/$eq.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/comparison-query/$eq.md
 weight: 20
-translation_source_sha256: d9bc41122bef317dc862543895461ed095337d503ec997e07d60cd7c2603db16
+translation_source_sha256: a7455c895ba6fca61b9ef1b3a4382064051ed36dc0bffe85183fde12b9e17f15
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

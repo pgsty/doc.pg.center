@@ -2,10 +2,10 @@
 title: 计数
 description: 计数命令用于统计集合中符合指定查询条件的文档数量。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/aggregation/count.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/aggregation/count.md
 weight: 20
-translation_source_sha256: 3ad620862a9f91022ea147a7cc55493b68cf16a848d4cff4d2dbe58e038f2721
+translation_source_sha256: 621a5a7aac08296b8820e17a9e8465506be6a851bfc54555357aeea59845be4d
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

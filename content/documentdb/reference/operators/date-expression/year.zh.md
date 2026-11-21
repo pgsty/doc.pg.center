@@ -2,10 +2,10 @@
 title: $year
 description: $year 运算符返回日期对应的年份，格式为四位数字。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$year.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$year.md
 weight: 210
-translation_source_sha256: 99055673184f8ea03fc78bbaf56def7f3c7f7d3e1cebc0673189449e6c2dc44f
+translation_source_sha256: 8487bd0cd46d9c0f1d69db8844e928acb1d98e104f099676b77d3e974aaf19b8
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

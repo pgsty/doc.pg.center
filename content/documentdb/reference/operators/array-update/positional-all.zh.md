@@ -2,10 +2,10 @@
 title: $[]
 description: $[] 全位置运算符会更新数组中的每个元素。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-update/$positional-all.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-update/$positional-all.md
 weight: 20
-translation_source_sha256: 4ba49f037af693c573956820808f48289d796b6fd18af641788b159a18e15d9c
+translation_source_sha256: bcb6778f208dee0e590e3d7eccc3ddb0768f3c82b4e5de80ff9790c57865cd0a
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

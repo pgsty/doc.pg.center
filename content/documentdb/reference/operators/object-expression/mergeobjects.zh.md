@@ -2,10 +2,10 @@
 title: $mergeObjects
 description: $mergeObjects 运算符将多个文档合并为一个文档
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/object-expression/$mergeobjects.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/object-expression/$mergeobjects.md
 weight: 10
-translation_source_sha256: ff14aaa36311ad4f8e5b31e5b5f5f642e931f6835e9d6da4f1cb4b1a11083fb2
+translation_source_sha256: d8f271a0ddcc04e07b3e5eb511e9477ad958522001883f91eeb96ba91580e55a
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

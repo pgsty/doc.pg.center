@@ -2,10 +2,10 @@
 title: $push
 description: $push 运算符向文档中的数组添加指定值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-update/$push.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-update/$push.md
 weight: 100
-translation_source_sha256: 6219e7730945fe8fded0e9147e3bb48c12a7a56618704c6470e524b1b26fd66b
+translation_source_sha256: 99b557b8f0d8a12c1500ef4e32412cc753c596ec7e35f3fb9ad9188116745400
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

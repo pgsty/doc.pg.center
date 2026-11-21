@@ -2,10 +2,10 @@
 title: getMore
 description: getMore 命令用于从现有游标中检索额外的数据批次。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/query-and-write/getMore.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/query-and-write/getMore.md
 weight: 40
-translation_source_sha256: 24c53c1cca9f9d7282761c7c3ef9a8ecce52fe6569f97f5a6394e4b009054fca
+translation_source_sha256: 2460e52df77ec41e3ec9899071c69a8454ba9577eff1c8bb2065fa033fe3c69c
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

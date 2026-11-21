@@ -2,11 +2,11 @@
 title: findAndModify
 description: findAndModify 命令用于原子性地修改并返回单个文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/query-and-write/findandmodify.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/query-and-write/findandmodify.md
 weight: 30
-translation_source_sha256: bf6678b4acb772d2779c4fb61f95a51b07a256644746c30e6800a7e06281da3d
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: f4eb18b789f55993f98378c0abad748d378e1f0988e0ad6991ae3da24fd5ca88
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
 `findAndModify` 命令用于原子性地修改并返回单个文档。该命令适用于需要在单一步骤中读取并更新文档的操作，确保数据一致性。常见用例包括实现计数器、队列以及其他原子操作。
@@ -27,7 +27,7 @@ translation_review: AI-assisted bilingual review; 2026-11-07
 | **`let`** | (可选) 指定命令作用域变量的文档，可在 `$$name` 中引用。 |
 | **`maxTimeMS`** | (可选) 指定执行超时时间的数值，单位为毫秒。 |
 | **`bypassDocumentValidation`** | (可选) 布尔值，仅在启用模式验证和验证绕过时生效；否则被忽略。 |
-| **`collation`** | (可选) 指定比较规则的文档；需要 `documentdb_core.enableCollation` 且集群版本为 1.1 或更高。 |
+| **`collation`** | (可选) 指定比较规则的文档；需要 `documentdb_core.enableCollation` 且集群版本为 1.2 或更高。 |
 | **`comment`** | (可选) 携带网关请求追踪上下文的字符串；参见 [通用请求字段](/documentdb/reference/commands/diagnostic/wire-protocol/)。 |
 {.fields}
 

@@ -2,10 +2,10 @@
 title: $centerSphere
 description: $centerSphere 运算符使用球面几何指定圆形区域，供 $geoWithin 查询使用。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/geospatial/$centersphere.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/geospatial/$centersphere.md
 weight: 30
-translation_source_sha256: 7b53b34cbe3bf7de8c5d341ed955faddf64920ada331af152ea215507501d909
+translation_source_sha256: a7568f13bffedb1cdfcfed3f88a42b5b6cb4974e35d64b512a47a891fad4d526
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

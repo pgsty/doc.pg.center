@@ -310,7 +310,7 @@ documentdb:
   license: LicenseRef-DocumentDB-Docs
   notice: /attribution/#documentdb
   import_manifest: data/imports/documentdb.json
-  import_manifest_sha256: 6f2e760f40e1cdab4af1e4f5dfdc74cf2d81e3d358ca6716cd3b6a854f953915
+  import_manifest_sha256: 950d70b7ec207eba205b459a744010a948f653c1c0bf12fca758e8939982ad97
   modified: true
 
 orioledb:
@@ -557,7 +557,7 @@ documentdb-20261121:
   import_manifest: data/imports/documentdb.json
   modified: true
   source_ref: main
-  language: en
+  languages: [en, zh]
   translation_baseline: documentdb
   source_sha256:
     readme.md: e429bc6f15dc0084c89332aaf0204c65e7e84157e70c3b16af158f3f0499f93a
@@ -594,7 +594,7 @@ documentdb-20261121:
     api-reference/commands/contrib/documentdb_distributed/sharding.md: d0f8cb5e60ca1e9c20b190d00810279f81d28ec00405336b3541c0350213c8c6
     api-reference/commands/contrib/documentdb_distributed/rebalancer.md: a29d478b97095000a7007063e2a6836355f49951cc4d472a17ee087faa251527
     api-reference/commands/contrib/documentdb_distributed/listShards.md: 01488e20e1c5d56286125f6b17091120abb909dc087d2223bd8e7d6348d2602a
-  import_manifest_sha256: 6f2e760f40e1cdab4af1e4f5dfdc74cf2d81e3d358ca6716cd3b6a854f953915
+  import_manifest_sha256: 950d70b7ec207eba205b459a744010a948f653c1c0bf12fca758e8939982ad97
 pgedge-spock-20261121:
   name: pgEdge Spock
   copyright: Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents

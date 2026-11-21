@@ -2,10 +2,10 @@
 title: $setEquals
 description: $setEquals 运算符在两个集合去重后的元素相同时返回 true。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/set-expression/$setequals.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/set-expression/$setequals.md
 weight: 40
-translation_source_sha256: 352c2d1fd3d935687f37485a8c1831da7819e1b78b6dbe0382821b309b4df7cd
+translation_source_sha256: 331515e641ad04b8628b7fe9693ab4472f1f2d5d125b350644e1e1a43795cbc9
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

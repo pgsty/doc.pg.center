@@ -2,10 +2,10 @@
 title: $min
 description: $min 运算符用于检索指定字段的最小值
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$min.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$min.md
 weight: 120
-translation_source_sha256: a712cc48259f38d617fd9ef813570b3929f7ce4ffe15e9f3a7b2a67cc001e3b1
+translation_source_sha256: eb5a4283f83600769d3203068363ce19b2a1068f4171bf5c5ec81d1e1fb1bf1f
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

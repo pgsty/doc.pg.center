@@ -2,10 +2,10 @@
 title: $abs
 description: $abs 运算符返回一个数字的绝对值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/arithmetic-expression/$abs.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/arithmetic-expression/$abs.md
 weight: 10
-translation_source_sha256: 7abfade4f99946814a4a1e220605f1dd52039134416c02f5e927b0dc324dd87a
+translation_source_sha256: eb7b7fab7d4a638ea783e47c56242d8e808a9a4e80d3d1182ab395ef3511d6b4
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

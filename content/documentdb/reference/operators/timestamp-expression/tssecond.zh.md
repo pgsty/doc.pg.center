@@ -2,10 +2,10 @@
 title: $tsSecond
 description: $tsSecond 运算符提取时间戳值中的秒数部分。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/timestamp-expression/$tssecond.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/timestamp-expression/$tssecond.md
 weight: 20
-translation_source_sha256: b127729eb0fe957e028261acefe344685e37cc581881841f8e3b79ceb5fd0599
+translation_source_sha256: 9b298bd75f86c67f7a3034f292a2057b6f3e7db1aec43b6cf20e6d909a2cc8a5
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $ceil
 description: $ceil 运算符返回大于或等于指定数字的最小整数。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/arithmetic-expression/$ceil.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/arithmetic-expression/$ceil.md
 weight: 30
-translation_source_sha256: 63e9df6da32dbd6e09b0e2d3529220c461af61fe0c71610046090d7a50a84a55
+translation_source_sha256: c4e20ede1e95fe1ea7f76f15f86c3bc84c180217760feaef5ef97c6750af130e
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

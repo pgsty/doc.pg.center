@@ -2,10 +2,10 @@
 title: $log10
 description: $log10 运算符计算指定数字以 10 为底的对数
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/arithmetic-expression/$log10.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/arithmetic-expression/$log10.md
 weight: 90
-translation_source_sha256: fa8b578f482e13c8770245df0f3a1107746e48099899184a311178dc074b5bab
+translation_source_sha256: f5ca60391bf8ac138763873b7842b9e02de16531701e8795ffb9e99e188b154c
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

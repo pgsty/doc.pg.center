@@ -2,10 +2,10 @@
 title: $subtract
 description: $subtract 运算符对两个数字进行相减并返回结果。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/arithmetic-expression/$subtract.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/arithmetic-expression/$subtract.md
 weight: 140
-translation_source_sha256: 6d294219567b3e3251b56da833bbd078fcb3a1ce639906764e64b1343f61a35e
+translation_source_sha256: 37a527a58c964196272bfdc75fcf358b6faf66b43ed748eb531aab81c9f2cd4c
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

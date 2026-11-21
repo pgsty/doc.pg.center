@@ -2,10 +2,10 @@
 title: $minDistance
 description: $minDistance 运算符指定地理空间查询中两点之间必须保持的最小距离。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/geospatial/$mindistance.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/geospatial/$mindistance.md
 weight: 80
-translation_source_sha256: 1a11c820ccff265b0be115bfff74b24c833df548a0035c3ba5e82982d12072d7
+translation_source_sha256: 958327294f5b914edad70b76f84bb38d6fd79ab69b287d599d36536bc4730aba
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

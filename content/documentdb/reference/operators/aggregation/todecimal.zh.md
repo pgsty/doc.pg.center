@@ -2,10 +2,10 @@
 title: $toDecimal
 description: $toDecimal 运算符将表达式转换为 Decimal 类型
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$todecimal.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$todecimal.md
 weight: 360
-translation_source_sha256: 1bd29ef1f4bfc07dfd52003b311c1a3581de62f2129868b9d4670080156778ea
+translation_source_sha256: f6d57eb5154832c7539ab6d20a5c373e73f098b77cbb2563f9b59b78bd5f10d0
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

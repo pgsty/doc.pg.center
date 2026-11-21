@@ -2,10 +2,10 @@
 title: $dateDiff
 description: $dateDiff 运算符以年、月、天等不同单位计算两个日期之间的差值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$datediff.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$datediff.md
 weight: 20
-translation_source_sha256: 9ba4901e101fb3a6e262f0a1bf882151327cdaa31447cb30a7cf3127c71a652c
+translation_source_sha256: 091b4cf6d3a74a78524d1fd4e1c38cb9269a7d396df40c3a31978363926f6745
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

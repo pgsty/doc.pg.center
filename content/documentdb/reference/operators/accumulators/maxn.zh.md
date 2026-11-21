@@ -2,10 +2,10 @@
 title: $maxN
 description: $maxN 运算符根据指定的筛选条件检索前 N 个最大值
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$maxn.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$maxn.md
 weight: 100
-translation_source_sha256: d6aa42685dcc5fa614e8d3cb8c3ed86d101b12f7602faefbed43ffb2bf79dce7
+translation_source_sha256: 08059f7f7ee1c695b389768040f70af5d8dd42622dc1541c86fc3d1de6dd1063
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

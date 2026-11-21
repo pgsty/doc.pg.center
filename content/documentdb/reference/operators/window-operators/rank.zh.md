@@ -2,10 +2,10 @@
 title: $rank
 description: $rank 运算符根据指定排序顺序，为分区内的文档排名。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/window-operators/$rank.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/window-operators/$rank.md
 weight: 100
-translation_source_sha256: 347fb4b73060d80ddd62954da96df4f4989b2f9aba084cf8f3c8ca6a6158430a
+translation_source_sha256: 746db6ebfbeac4c4ffae02aa53489fb2ce3b322fec0266e18b77ee9609ba8dd6
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

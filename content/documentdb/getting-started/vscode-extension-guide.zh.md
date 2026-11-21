@@ -2,12 +2,12 @@
 title: Visual Studio Code 扩展指南
 description: DocumentDB for VS Code 扩展可帮助你在编辑器中浏览、管理和查询 DocumentDB 与 MongoDB 数据库。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/documentdb.github.io/blob/90cfa088351557cd618034dfc00ab817c35a5f76/app/services/articleService.ts
-upstream_ref: website 90cfa08; DocumentDB 1.0
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/documentdb.github.io/blob/4a83a0712149e101a2bbb38934bed36497cdf40f/app/services/articleService.ts
+upstream_ref: website 4a83a07; DocumentDB 1.2.0
 source_status: superseded
 weight: 1090
-translation_source_sha256: ea1496669f6856e3894ecec6a6d32e0709631d5cfd3eed33d42f6bb7797f26e0
+translation_source_sha256: 60d7a2e53de2534e15e49cb17c718663dcfc6aca066a1258e84fcc12ca05595d
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

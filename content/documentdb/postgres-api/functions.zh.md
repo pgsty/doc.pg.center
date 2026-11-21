@@ -1,19 +1,19 @@
 ---
 title: 函数
-description: DocumentDB 1.0 中由 pg_documentdb 扩展暴露的 PostgreSQL 函数参考，包括 CRUD、模式、索引、诊断、用户和角色管理。
+description: DocumentDB 1.2 中由 pg_documentdb 扩展暴露的 PostgreSQL 函数参考，包括 CRUD、模式、索引、诊断、用户和角色管理。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/postgres-api/functions.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/postgres-api/functions.md
 weight: 20
-translation_source_sha256: 7cd3688e8d7642a32a0c5d083821518328788cf272dea75316802b542dc67248
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: 724e4f0e62934eb518ddc59ffe4fcb853e317ff608ec9e038e7ccc83614bcc2a
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
 `pg_documentdb` 通过 `documentdb_api` 模式中的 PostgreSQL 函数公开其公共 API。`pg_documentdb_gw` 处理的 MongoDB 线协议命令被实现为这些函数的轻量级包装器，因此你可直接从任何 PostgreSQL 客户端（例如 `psql`、`psycopg`、JDBC）调用它们。
 
 所有 BSON 参数都编码为 PostgreSQL 的 `bson` 值（由 `pg_documentdb_core` 扩展提供）。例如，可以在 `psql` 中通过 `'{ ... }'::documentdb_core.bson` 这样的类型转换传入 BSON 参数字面量。
 
-> **本页描述 DocumentDB 1.0**（扩展版本 `1.0-0`）。
+> **本页描述 DocumentDB 1.2**（扩展版本 `1.2-0`）。
 
 > **下文函数签名的读法。** 参数名与扩展在 `pg_documentdb/sql/udfs/` 中的实际声明一致，可直接用于 `p_database_name => 'mydb'` 这样的命名参数调用。这些标识符未加引号，PostgreSQL 会将其转换为小写：源码中的 `commandSpec` 在 `\df documentdb_api.*` 输出中显示为 `commandspec`；源码中的 `int8`/`bool`/`float8` 则显示为 `bigint`/`boolean`/`double precision`。调用时两种写法都可使用。类型名没有加模式限定：`bson` 和 `bsonsequence` 位于 `documentdb_core` 中。具有**两个或更多** `OUT` 参数的函数返回 `record`，应通过 `SELECT * FROM ...` 调用；只有一个 `OUT` 参数的函数直接返回该参数的类型，使用普通的 `SELECT fn(...)` 即可。少数线协议入口是 PostgreSQL `PROCEDURE`，必须通过 `CALL` 调用，下文会分别注明。
 
@@ -29,7 +29,7 @@ translation_review: AI-assisted bilingual review; 2026-11-07
 | `documentdb_api.find_and_modify(p_database_name text, p_message bson, p_transaction_id text DEFAULT NULL, OUT p_result bson, OUT p_success boolean)` | 执行 MongoDB `findAndModify` 命令。 |
 | `documentdb_api.insert_one(p_database_name text, p_collection_name text, p_document bson, p_transaction_id text DEFAULT NULL)` | 方便的包装函数，通过数据库和集合名称插入单个文档，并返回 `insert` 响应。 |
 | `documentdb_api_internal.insert_one(p_collection_id bigint, p_shard_key_value bigint, p_document bson, p_transaction_id text)` | **已弃用且不可用。** 实现为一个始终抛出 `insert_one is deprecated and should not be called` 的占位符。请使用上方的公共 `documentdb_api.insert_one`。 |
-| `CALL documentdb_api.bulkWrite(p_command bson, p_ops bsonsequence DEFAULT NULL, p_ns_info bsonsequence DEFAULT NULL, INOUT p_result bson DEFAULT NULL, INOUT p_success boolean DEFAULT NULL)` | **1.0 版本未实现。** `PROCEDURE` 存在，但每次调用均抛出 `bulkWrite is not yet implemented`，且在事务内部调用时也会被拒绝。 |
+| `CALL documentdb_api.bulkWrite(p_command bson, p_ops bsonsequence DEFAULT NULL, p_ns_info bsonsequence DEFAULT NULL, INOUT p_result bson DEFAULT NULL, INOUT p_success boolean DEFAULT NULL)` | **尚未实现。** `PROCEDURE` 存在，但每次调用均抛出 `bulkWrite is not yet implemented`，且在事务内部调用时也会被拒绝。 |
 | `documentdb_api.find_cursor_first_page(database text, commandSpec bson, cursorId int8 DEFAULT 0, OUT cursorPage bson, OUT continuation bson, OUT persistConnection bool, OUT cursorId int8)` | 为 `find` 命令打开游标并返回其第一页。省略 `cursorId` 由服务器自动生成。 |
 | `documentdb_api.aggregate_cursor_first_page(database text, commandSpec bson, cursorId int8 DEFAULT 0, OUT cursorPage bson, OUT continuation bson, OUT persistConnection bool, OUT cursorId int8)` | 为 `aggregate` 命令打开游标并返回其第一页。省略 `cursorId` 由服务器自动生成。 |
 | `documentdb_api.list_collections_cursor_first_page(database text, commandSpec bson, cursorId int8 DEFAULT 0, OUT cursorPage bson, OUT continuation bson, OUT persistConnection bool, OUT cursorId int8)` | 返回 `listCollections` 结果。尽管名称如此，结果始终为单个批次——请参见下方说明。 |

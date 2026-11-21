@@ -2,10 +2,10 @@
 title: $reverseArray
 description: $reverseArray 运算符用于反转数组中元素的顺序。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-expression/$reversearray.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-expression/$reversearray.md
 weight: 100
-translation_source_sha256: 7edf150a51b0edcadc2eac91655267dd320064adddd70ee5f3c3bb0c2b1fb21d
+translation_source_sha256: c567c322b72c4cac288738712c194382fa3ebe0d78e9a2c7fe7c9c0a077d637c
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

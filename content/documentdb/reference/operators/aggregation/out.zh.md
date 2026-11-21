@@ -2,10 +2,10 @@
 title: $out
 description: 聚合流水线中的 `$out` 流水线阶段将输出文档写入指定的集合。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$out.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$out.md
 weight: 220
-translation_source_sha256: d5935c34d3de2d12800d1214d33450e35ac1e090940eb4d40cfa4f3466cd3a00
+translation_source_sha256: 64ceabbc7f19d33a0e52c48e6d92a96f41dd9aad0dcfc3d8aa57a83cf0f723e8
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

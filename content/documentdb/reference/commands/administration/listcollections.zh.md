@@ -2,10 +2,10 @@
 title: listCollections
 description: 在 DocumentDB 中列出集合和视图的元数据，支持过滤和游标选项。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/administration/listCollections.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/administration/listCollections.md
 weight: 40
-translation_source_sha256: de39e235ea03013ff3f11de9019bcf20496f5b368dbef278fd0631170042e402
+translation_source_sha256: 3a07b286c506ed535e719c5bc3c0a84a20b82d4a3083b0830cd05be23ee20094
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

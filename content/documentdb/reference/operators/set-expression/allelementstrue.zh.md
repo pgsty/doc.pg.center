@@ -2,10 +2,10 @@
 title: $allElementsTrue
 description: $allElementsTrue 运算符在数组中所有元素的求值结果均为 true 时返回 true。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/set-expression/$allelementstrue.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/set-expression/$allelementstrue.md
 weight: 10
-translation_source_sha256: 2eb8cedb24212ef6a806c261b903baeb4756241211bb6ee5e77fa05fdadc6caa
+translation_source_sha256: 301bdc809a4906a73572e3e0855bdc4a3de6306496c21ec7c94e9aee8e1e532b
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

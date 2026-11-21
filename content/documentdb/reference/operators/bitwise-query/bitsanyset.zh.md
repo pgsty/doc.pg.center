@@ -2,10 +2,10 @@
 title: $bitsAnySet
 description: $bitsAnySet 运算符返回指定位中至少有一位为 1 的文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/bitwise-query/$bitsAnySet.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/bitwise-query/$bitsAnySet.md
 weight: 40
-translation_source_sha256: 30a01073667b61172f19e5c95a9b0b882f54c5189c0eb6b0a302b8a542b05e79
+translation_source_sha256: 03c20b3d6bf27a25144de1008bc4a7b1029e4a5015db5d021d77b17e5cc5af18
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $linearFill
 description: $linearFill 运算符使用线性插值对文档序列中的缺失值进行插值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/window-operators/$linearfill.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/window-operators/$linearfill.md
 weight: 80
-translation_source_sha256: d62364feb8cda03e643c961228b06721b6fd19ef965887901646cf61e540b860
+translation_source_sha256: 09c10b1fa818fbeefb7c4b4f7235e3f284e276bad86afa48a28e9baaa4956b20
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

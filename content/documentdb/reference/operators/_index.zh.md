@@ -1,11 +1,11 @@
 ---
 title: 运算符
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/_metadata.description.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/_metadata.description.md
 description: DocumentDB 运算符参考。
 weight: 20
-translation_source_sha256: f923e6bb768c5aff8bc4d43517c909ba6c7e9cc4ef89bb26a04ef1adb309d881
+translation_source_sha256: 2cb0b267845645c2ddd6fc077b99b55bc834d6d444b19d4099eaedb9df2fac17
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

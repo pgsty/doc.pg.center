@@ -2,10 +2,10 @@
 title: $ne
 description: $ne 运算符获取字段值不等于指定值的文档
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/comparison-query/$ne.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/comparison-query/$ne.md
 weight: 80
-translation_source_sha256: 688d8b8a08d962c5ed6d8a35e8ee031d4d4a83e90d7ce01aceecc8d106a99b25
+translation_source_sha256: 58575d4462d002660e35b5395c3c3aa7cc985866d70093b82589a87788995bac
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

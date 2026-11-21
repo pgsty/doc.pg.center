@@ -2,10 +2,10 @@
 title: $facet
 description: $facet 允许在单个流水线阶段内执行多个并行聚合。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$facet.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$facet.md
 weight: 100
-translation_source_sha256: d8c3dd7fffde06dd14b50adba03e2d98419bb49f2a483d6eb1feed12dcafeaa2
+translation_source_sha256: 583720a34b0e82fd1e11438d5e9881e06de1a1266913243f0e3790eb4716c496
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

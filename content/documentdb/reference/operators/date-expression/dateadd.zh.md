@@ -2,10 +2,10 @@
 title: $dateAdd
 description: $dateAdd 运算符为日期加上指定数量的时间单位（如天、小时、月等）。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$dateadd.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$dateadd.md
 weight: 10
-translation_source_sha256: dd58bd0bd81cc067b535c8b00f3cafd8786083b16e90199ad7e2b70222d2944c
+translation_source_sha256: cc553776c94a823e86372122ca58315490b25511d33b0073e4d47624496ef044
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

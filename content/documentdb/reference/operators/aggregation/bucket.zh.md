@@ -2,10 +2,10 @@
 title: $bucket
 description: $bucket 运算符根据指定的边界将输入文档分组到桶中。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$bucket.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$bucket.md
 weight: 20
-translation_source_sha256: 03d67552377050594881759c04936561814d6648de257528aeaac9c1b2e9a0fc
+translation_source_sha256: 67fa3188a1efe949d25caa0a91d58047e19ad48a10fd79c6b89a7fb3384af590
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

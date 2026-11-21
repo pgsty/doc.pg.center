@@ -2,10 +2,10 @@
 title: $exists
 description: $exists 运算符检索文档结构中包含指定字段的文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/element-query/$exists.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/element-query/$exists.md
 weight: 10
-translation_source_sha256: 5896abe26b868e5784bc547651c7cf853105eb013d08f851839bbfc25967af3a
+translation_source_sha256: b172e6287d007ee565dce3fb17df90654166e54f467863c297ab3e9df08f73cb
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

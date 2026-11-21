@@ -2,10 +2,10 @@
 title: insert
 description: DocumentDB 中的 insert 命令在集合中创建新文档
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/query-and-write/insert.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/query-and-write/insert.md
 weight: 50
-translation_source_sha256: db22efd593df8ec1338f4b5b8a37e73fa9686c4a7f1329a025882c5d7c20924f
+translation_source_sha256: 75930b416cf7e572bdd5b56a33105a5340c2e4210e76ad97b93398672c520529
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

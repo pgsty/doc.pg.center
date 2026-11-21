@@ -2,10 +2,10 @@
 title: delete
 description: DocumentDB 中的 delete 命令用于删除符合指定条件的文档
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/query-and-write/delete.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/query-and-write/delete.md
 weight: 10
-translation_source_sha256: 5fd391a9a3023f97d76d7f346530315456f7f815834920aaa4801e68b06f2523
+translation_source_sha256: 90e208b3ce48a51c855ac5c9020b03a57ab9ed64120ceef09ddf908d6e2bcb0e
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

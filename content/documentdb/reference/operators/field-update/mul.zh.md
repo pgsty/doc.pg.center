@@ -2,10 +2,10 @@
 title: $mul
 description: $mul 运算符将字段值乘以指定数值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/field-update/$mul.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/field-update/$mul.md
 weight: 30
-translation_source_sha256: c9147e6d0be45664b3a4897c7dd6ced3b8a88983988c94817531f3f6d9f6da5e
+translation_source_sha256: 2dc53a9eb36e3268bece249250fe689520d3cb61ef03a8394c1009974830c6be
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

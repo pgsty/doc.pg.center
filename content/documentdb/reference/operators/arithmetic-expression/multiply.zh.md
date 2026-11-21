@@ -2,10 +2,10 @@
 title: $multiply
 description: $multiply 运算符对输入的数值进行乘法运算
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/arithmetic-expression/$multiply.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/arithmetic-expression/$multiply.md
 weight: 100
-translation_source_sha256: 0d2cfcb559b43201448721748d9e003d9d48da29fcd17e11c5e8d6c2679ff13e
+translation_source_sha256: 44ffd91e3d39be8f21ae4cc0df0dca5f8b9baa59d398b51382215a5115238224
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

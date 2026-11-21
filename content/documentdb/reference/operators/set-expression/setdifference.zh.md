@@ -2,10 +2,10 @@
 title: $setDifference
 description: $setDifference 运算符返回一个集合，其中包含存在于第一个集合但不存在于第二个集合的元素。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/set-expression/$setdifference.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/set-expression/$setdifference.md
 weight: 30
-translation_source_sha256: b0960555d17a8b90947c23861fa96433924bc54a491e75a718204b20fb891d33
+translation_source_sha256: f76fe3f6f7be7e23c56e8717439b55976612fd1d79029b45137b5b3205ca85ee
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

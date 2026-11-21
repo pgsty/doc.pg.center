@@ -1,9 +1,9 @@
 ---
 title: DocumentDB 文档
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/readme.md
-description: DocumentDB 1.0：安装、运维、PostgreSQL API、命令和运算符。
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/readme.md
+description: DocumentDB 1.2.0：安装、运维、PostgreSQL API、命令和运算符。
 linkTitle: DocumentDB
 weight: -10
 sidebar_root_for: self
@@ -18,15 +18,16 @@ outputs:
 - LLMSFULL
 cascade:
   type: docs
-  upstream_source: documentdb
+  upstream_source: documentdb-20261121
   upstream_license: LicenseRef-DocumentDB-Docs-ZH
-translation_source_sha256: fab6b173238421516e4fea8d8890daa3649533166136564573cf02430e4dd81a
+translation_source_sha256: c75cd54ae9322a0ef9bfcc080d3db2f0eb86911d1a14b259db6fbd7373ba555d
 upstream_license: LicenseRef-DocumentDB-Docs-ZH
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
-DocumentDB 提供基于 PostgreSQL 的文档数据库，支持 BSON 存储、文档操作、索引以及 MongoDB 线协议网关。本版本包含已发布的 DocumentDB 1.0 文档及其简体中文翻译。
+DocumentDB 提供基于 PostgreSQL 的文档数据库，支持 BSON 存储、文档操作、索引以及 MongoDB 线协议网关。本版本涵盖已发布的 DocumentDB 1.2.0 文档，简体中文版已按英文增量同步，并包含全部十个新增页面。
 
+- [1.2 发布说明](/documentdb/getting-started/release-notes-1.2/) — 兼容性、容器启动、升级及指标重命名。
 - [快速入门](/documentdb/getting-started/) — 使用 Docker、Linux 软件包，通过 shell、驱动程序或编辑器执行你的首个查询。
 - [DocumentDB Local](/documentdb/documentdb-local/) — 容器选项、持久化数据、证书和遥测功能。
 - [Linux 软件包操作](/documentdb/linux-packages/) — 安全配置、运行、升级，以及无互联网连接环境下的安装。
@@ -36,6 +37,6 @@ DocumentDB 提供基于 PostgreSQL 的文档数据库，支持 BSON 存储、文
 {.cards}
 
 > [!NOTE] 源版本
-> 文档仓库固定在 `cf69384`；网站生成的指南和修正内容固定在 `90cfa08`（2026 年 11 月 7 日）。上游
+> 文档仓库固定在 `8fb7fda`；网站生成的指南和修正内容固定在 `4a83a07`（2026 年 11 月 21 日）。上游
 > [架构章节](/documentdb/architecture/) 仍在准备中。
 > 请参阅 [源文件与翻译说明](/attribution/#documentdb)。

@@ -2,10 +2,10 @@
 title: listIndexes
 description: 使用 DocumentDB 命令游标列出索引规范。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/indexing/listIndexes.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/indexing/listIndexes.md
 weight: 30
-translation_source_sha256: c3b625b2099a0c5b368ca1f4ed047022a9287cd9d59bcd34b45132cc3953b8c6
+translation_source_sha256: 42eb0939a45e921189e0824dd45dbd8f85c95cf28ed47f7533c89ac4b81bca3a
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

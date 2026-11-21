@@ -2,10 +2,10 @@
 title: $group
 description: $group 流水线阶段根据指定的标识符表达式对文档进行分组，并应用累加器表达式。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$group.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$group.md
 weight: 140
-translation_source_sha256: 67992f33fb354938abb5dcc44ef67af16899773021bf112d488276d2725d1535
+translation_source_sha256: 478b4010d400945cf88fbf82ffae962b5a4c1a10cfb819a29be5b128030d0603
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $collStats
 description: 聚合流水线中的 $collStats 流水线阶段用于返回集合的统计信息。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$collstats.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$collstats.md
 weight: 50
-translation_source_sha256: 630c0808ba7663dfcd488ea2feabec02c779daf6b78ef18c3ebf28eaaee497e2
+translation_source_sha256: a11000ea2640bb69e95e4145304ec5777aee95bd29df54e860aaae666fb82e40
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

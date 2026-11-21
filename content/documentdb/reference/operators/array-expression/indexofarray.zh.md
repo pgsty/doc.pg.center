@@ -2,10 +2,10 @@
 title: $indexOfArray
 description: $indexOfArray 运算符用于在数组中搜索元素，并返回该元素首次出现的下标。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-expression/$indexofarray.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-expression/$indexofarray.md
 weight: 50
-translation_source_sha256: 2d6e5b05c4a2a26a4103667e0bbd61f94cbe13580e532b9fae44d2fdcc3e9fc0
+translation_source_sha256: b349901dd6364cd4015410e4c042590b0b5fa34f5bf42ef52cb37a5cb94a79c5
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

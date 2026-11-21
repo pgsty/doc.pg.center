@@ -1,11 +1,11 @@
 ---
 title: 布尔表达式
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/boolean-expression/_metadata.description.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/boolean-expression/_metadata.description.md
 description: DocumentDB 的布尔表达式参考。
 weight: 100
-translation_source_sha256: 77948a2a976182ecbda9aeee043f4a1743f91b209f0169777884ad86b9d56467
+translation_source_sha256: 8d4dc17fee2c36c454b9ec5f1b7328b9df0398056c526fad97c0470bc142762a
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

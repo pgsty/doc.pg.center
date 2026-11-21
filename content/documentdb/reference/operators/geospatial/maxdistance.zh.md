@@ -2,10 +2,10 @@
 title: $maxDistance
 description: $maxDistance 运算符指定地理空间查询中两点之间允许的最大距离。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/geospatial/$maxdistance.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/geospatial/$maxdistance.md
 weight: 70
-translation_source_sha256: fd8dcce71a4324680f39c35a0c04be5002b37003b28081f60100f131920e50ee
+translation_source_sha256: 29e1202d5b42d9f7fbda2b63fecd9838c4fd7c3456bf467e9356bcd65a74859d
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

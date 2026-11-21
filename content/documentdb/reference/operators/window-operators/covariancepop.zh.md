@@ -2,10 +2,10 @@
 title: $covariancePop
 description: $covariancePop 运算符返回两个数值表达式的协方差
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/window-operators/$covariancepop.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/window-operators/$covariancepop.md
 weight: 10
-translation_source_sha256: 0a0a5a81707f83d3cb23039c4c4c248f6367ca05e63afe27ac21d5443b5272f5
+translation_source_sha256: f9e202d3b2dff36ef4915b3d2d601e7ccc564c31ddd2a435d8aa48e538af03ed
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

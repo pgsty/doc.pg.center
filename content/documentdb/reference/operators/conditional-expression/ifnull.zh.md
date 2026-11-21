@@ -2,10 +2,10 @@
 title: $ifNull
 description: $ifNull 运算符用于对表达式求值，并在结果为 null 时返回指定值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/conditional-expression/$ifnull.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/conditional-expression/$ifnull.md
 weight: 20
-translation_source_sha256: 766933ba59c73dc1d2430a4103c2fdc44486af6e56b3ed34c3bf7cfb325590f9
+translation_source_sha256: a7dfe6c089b87f39a70ef4e3dc72b88e11e21d4cfadcfb914d3b67448b30e370
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

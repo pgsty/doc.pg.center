@@ -2,10 +2,10 @@
 title: $near
 description: $near 运算符返回 location 字段所表示的位置靠近指定点的文档，并按距离排序。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/geospatial/$near.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/geospatial/$near.md
 weight: 90
-translation_source_sha256: 78c215328e9935189679536a58b0ae407f5311c94143e792f80d63545c46489b
+translation_source_sha256: 22ad287197466c00e10be7778f190a46f0f1a68de45f05b050089fc1631e07ca
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

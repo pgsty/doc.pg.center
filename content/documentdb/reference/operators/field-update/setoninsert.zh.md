@@ -2,10 +2,10 @@
 title: $setOnInsert
 description: $setOnInsert 运算符仅在 upsert 操作插入新文档时设置字段值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/field-update/$setoninsert.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/field-update/$setoninsert.md
 weight: 50
-translation_source_sha256: e8663b8ec1f0f8e49ead124c928142f66535c2275ca1afd5d285cfa3ef6f9e59
+translation_source_sha256: 96d7e41e074d87c4d85f64c231f3fa4b1983c64fcf590cf737d77f9768adac86
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $currentOp
 description: $currentOp 阶段返回数据库当前活动和排队操作的信息。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$currentop.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$currentop.md
 weight: 70
-translation_source_sha256: 290c4092f7de5af7dd8757dc81d3b338e68dac51188d3abc7d61b1d99ad2198d
+translation_source_sha256: 4eba52f0282cef88a2a3a6889042689bf53aac614a4fe8ab8e5992337bf28c9d
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

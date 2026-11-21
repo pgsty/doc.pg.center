@@ -2,11 +2,11 @@
 title: Mongo Shell 快速入门
 description: 使用 mongosh 通过 Docker 或 Linux 软件包连接 DocumentDB，并插入和读取你的第一个文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/documentdb.github.io/blob/90cfa088351557cd618034dfc00ab817c35a5f76/app/services/articleService.ts
-upstream_ref: website 90cfa08; DocumentDB 1.0
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/documentdb.github.io/blob/4a83a0712149e101a2bbb38934bed36497cdf40f/app/services/articleService.ts
+upstream_ref: website 4a83a07; DocumentDB 1.2.0
 weight: 70
-translation_source_sha256: 43a7cf9572af072183812f2bfd62448a53da51814f97d8876d6bda6a015d81bc
+translation_source_sha256: e6dff4c62d25c9ac88ec183577be6488cbc4be6b6e51647174399bf7ccffdd76
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

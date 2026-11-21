@@ -2,12 +2,12 @@
 title: 预编译软件包
 description: 通过设置向导安装完整的 DocumentDB 堆栈，或选择单独的 PostgreSQL 和网关包。包含 PGDG 和源码构建选项。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/getting-started/prebuilt-packages.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/getting-started/prebuilt-packages.md
 source_status: superseded
 weight: 1070
-translation_source_sha256: e49364fafe53e333ae16df1b264fa4ced71f621f440398964698ea907116a010
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: f1aea398b94bed1d6e338cf6c7f59790dfaaf91fa23b58dbd9d1c85a8f420a5b
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
 > [!NOTE] 已被上游版本取代
@@ -27,7 +27,7 @@ translation_review: AI-assisted bilingual review; 2026-11-07
 
 ## 官方软件包 {#first-party-packages}
 
-当前版本为 [`v1.0-0`](https://github.com/documentdb/documentdb/releases/tag/v1.0-0)，发布于 **2026-10-19**。请参阅 [1.0 版本发布说明](/documentdb/getting-started/release-notes-1.0/) 了解变更内容和已知问题。官方 CI 构建并测试了以下完整堆栈：
+当前版本为 [`v1.2-0`](https://github.com/documentdb/documentdb/releases/tag/v1.2-0)。变更内容见 [1.2 发布说明](/documentdb/getting-started/release-notes-1.2/)。官方 CI 构建并测试了以下完整堆栈：
 
 | 发行版 | PostgreSQL | 架构 |
 | --- | --- | --- |
@@ -45,6 +45,14 @@ sudo sh documentdb-install.sh
 
 此操作将在 PostgreSQL 18 上安装当前版本。请使用 `--pg-major 17` 安装 PostgreSQL 17。使用 `sudo` 运行：以普通用户身份启动时，会调用 `sudo -v`，即使在默认用户无需密码 sudo 的云镜像上也会提示输入密码。
 
+选择版本的方法如下：
+
+| 命令 | 安装内容 | 后续 `apt upgrade` / `dnf upgrade` 的行为 |
+| --- | --- | --- |
+| `sudo sh documentdb-install.sh` | `latest` 软件包通道的最新版本 | 跟随每个新版本升级 |
+| `sudo sh documentdb-install.sh --stable` | `stable` 通道；新版本发布后，它可能暂时保留上一版本 | 跟随 `stable` 升级 |
+| `sudo sh documentdb-install.sh --version 1.0.0` | 从 GitHub 发布文件安装指定版本（1.0.0 或更高） | 不升级：未配置 DocumentDB 仓库 |
+
 安装程序会要求确认计划并选择管理员密码。要无人值守运行，请将密码保存在 root 拥有的文件中，并传入 `--yes` 选项：
 
 ```sh
@@ -55,11 +63,11 @@ sudo sh documentdb-install.sh --yes \
 ```
 
 `--accept-external-listen` 确认网关默认监听所有接口。
-手动步骤安装的是相同版本。若需迁移现有安装至 1.0 版本，请参阅[升级至 1.0](#upgrading-to-10)。
+手动步骤安装的是相同版本。若需将现有安装升级到 1.2 版本，请参阅[升级至 1.2](#upgrading-to-12)。
 
 ## 设置并连接 {#set-up-and-connect}
 
-这些步骤适用于**全新独立安装**。对于现有部署，请先阅读[升级至 1.0](#upgrading-to-10)。
+这些步骤适用于**全新独立安装**。对于现有部署，请先阅读[升级至 1.2](#upgrading-to-12)。
 
 ### 1. 安装堆栈 {#1-install-the-stack}
 
@@ -179,22 +187,57 @@ sudo systemctl enable --now documentdb-gateway
 
 DocumentDB 也包含在 **PostgreSQL 全球开发组 (PGDG) APT 仓库** 中，由 Debian PostgreSQL 团队维护。这是一个仅扩展的分发版本：不包含官方网关、设置向导或管理员工具。
 
-例如，截至 **2026-09-10**，PGDG 为 Debian 13（`trixie-pgdg`）、PostgreSQL **15-18**，在 **amd64 和 arm64** 上发布 DocumentDB **0.116**。版本和目标与官方发布不同；请查阅 [PGDG 包池](https://apt.postgresql.org/pub/repos/apt/pool/main/d/documentdb/)。
+截至 **2026-11-15**，PGDG 为 PostgreSQL **15–18** 提供 DocumentDB **1.2**（扩展版本 `1.2-0`，软件包版本 `1.2-0-1.pgdg…`），覆盖 Debian 13（`trixie-pgdg`）、Debian 14（`forky-pgdg`，testing）和 Ubuntu 26.04（`resolute-pgdg`），包括 **amd64 和 arm64**；Ubuntu 26.10（`stonking-pgdg`）则仅提供 amd64。PGDG 构建可能落后于官方发布，目标平台也与官方支持范围不同；当前发布内容请查阅 [PGDG 包池](https://apt.postgresql.org/pub/repos/apt/pool/main/d/documentdb/)。
 
-对于新的 Debian 13 安装，请遵循 [PGDG 仓库设置说明](https://www.postgresql.org/download/linux/debian/#apt)，然后检查你所选 PostgreSQL 主版本的候选包：
+全新安装请按 [Debian](https://www.postgresql.org/download/linux/debian/#apt) 或 [Ubuntu](https://www.postgresql.org/download/linux/ubuntu/#apt) 的 PGDG 仓库设置说明配置，然后检查所选 PostgreSQL 主版本的候选软件包：
 
 ```bash
 sudo apt update
-apt-cache policy postgresql-16-documentdb
+apt-cache policy postgresql-18-documentdb
 ```
 
-如果 PGDG 提供了你主机的候选包，请安装它：
+如果候选版本为 `1.2-0-1.pgdg…` 或更高，请安装：
 
 ```bash
-sudo apt install postgresql-16-documentdb
+sudo apt install postgresql-18-documentdb
 ```
 
 单独配置 PostgreSQL 并为该打包版本创建扩展；上述官方辅助命令不适用。不要使用其他发行版的仓库获取缺失的包，或将供应商切换视为就地升级。
+
+较旧的 PGDG 安装可原地升级；1.2 软件包包含 PGDG 从 0.108 起发布过的所有版本的升级脚本。请先备份；不支持降级。停止应用和自行运行的网关，保持停止状态，直到扩展更新完成。以下命令使用 PostgreSQL 18、集群 `main` 和数据库 `postgres`：请在所有命令中替换为实际值，并更新所有创建过这些扩展的数据库。
+
+升级软件包，并检查 `shared_preload_libraries` 的设置位置：
+
+```bash
+sudo apt update && sudo apt install --only-upgrade postgresql-18-documentdb
+sudo -u postgres psql --cluster 18/main -d postgres -Atc \
+  "SELECT setting, sourcefile FROM pg_settings WHERE name = 'shared_preload_libraries';"
+```
+
+如果未列出 `pg_documentdb_extended_rum`（0.116 及更早版本可能缺少），在显示的文件中将其加到现有的 `pg_cron, pg_documentdb_core, pg_documentdb` 旁边，通常是 `/etc/postgresql/18/main/postgresql.conf`；通过 `ALTER SYSTEM` 设置的值位于 `postgresql.auto.conf`，会覆盖前者。DocumentDB [只从该设置加载此库](#extension-and-gateway-on-your-own-postgresql)；当 `documentdb_extended_rum` 扩展已经存在时，即使缺少该设置，扩展更新也会成功，但之后构建索引会失败。无论是否修改配置，接下来都要重启 PostgreSQL 以加载新库，并确认四个库均已列出：
+
+```bash
+sudo systemctl restart postgresql@18-main &&
+sudo -u postgres psql --cluster 18/main -d postgres -Atc "SHOW shared_preload_libraries;"
+```
+
+然后更新扩展，检查软件包、扩展和库版本；PGDG 不提供网关，无法执行下文的 `mongosh` 检查：
+
+```bash
+sudo -u postgres psql --cluster 18/main -d postgres -1 -v ON_ERROR_STOP=1 \
+  -c "ALTER EXTENSION documentdb_core UPDATE;" \
+  -c "ALTER EXTENSION documentdb UPDATE;" \
+  -c "CREATE EXTENSION IF NOT EXISTS documentdb_extended_rum CASCADE;" \
+  -c "ALTER EXTENSION documentdb_extended_rum UPDATE;"
+dpkg-query -W -f='${Version}\n' postgresql-18-documentdb
+sudo -u postgres psql --cluster 18/main -d postgres -At \
+  -c "SELECT extname, extversion FROM pg_extension WHERE extname LIKE 'documentdb%';" \
+  -c "SELECT documentdb_api.binary_version();"
+```
+
+预期软件包版本为 `1.2-0-1.pgdg…`，各扩展版本均为 `1.2-0`，库版本为 `1.2.0`。
+
+在安装 PGDG `1.0~RC1` 的主机上，`apt upgrade` 会提供 `1.2-0`，但不支持升级候选发布版。升级前请检查 `dpkg-query`：RC1 已经报告扩展版本 `1.0-0` 和库版本 `1.0.0`，只有软件包版本能将其与 1.0 区分开，且新库不会修复 RC 写入的数据。应将数据迁移到全新的 1.2 实例。`mongodump` 和 `mongorestore` 要求两个实例前端都有兼容 MongoDB 的网关，而 PGDG 不提供网关。
 
 ## 社区构建 {#community-builds}
 
@@ -203,23 +246,23 @@ sudo apt install postgresql-16-documentdb
 使用与目标架构相同的 Linux 构建环境，并准备 Git、Docker、Bash 4+ 和 GNU 工具。例如，为 Debian 12 和 PostgreSQL 18 构建扩展：
 
 ```bash
-git clone --depth 1 --branch v1.0-0 https://github.com/documentdb/documentdb.git
+git clone --depth 1 --branch v1.2-0 https://github.com/documentdb/documentdb.git
 cd documentdb
-./packaging/build_packages.sh --os deb12 --pg 18 --version 1.0.0 --output-dir packages
+./packaging/build_packages.sh --os deb12 --pg 18 --version 1.2.0 --output-dir packages
 ```
 
-显式传递 `--version 1.0.0`。`v1.0-0` 标签与 `v1.0-RC2` 共享其提交；若无 `--version`，构建将从 `git describe` 选取的标签中获取版本，该版本可以是发布候选版。
+显式传递 `--version 1.2.0`，使软件包带有正式发布版本号。
 
 对于完整的独立 DEB 集合，需在构建主机上提供 `dpkg-deb`，然后构建网关和共享包：
 
 ```bash
 ./packaging/gateway/build_gateway_packages.sh --os deb12 --pg 18 \
-  --version 1.0.0 --output-dir packages
+  --version 1.2.0 --output-dir packages
 ./packaging/build_extra_packages.sh --type deb --pg 18 \
-  --version 1.0.0 --output-dir packages
+  --version 1.2.0 --output-dir packages
 ```
 
-输出位于 `packages/`。RPM 额外组件则需要主机 `rpmbuild` 和适用的 RPM 宏。[版本化打包指南](https://github.com/documentdb/documentdb/blob/v1.0-0/packaging/README.md) 列出了目标、前提条件和干净安装检查项。
+输出位于 `packages/`。RPM 额外组件则需要主机 `rpmbuild` 和适用的 RPM 宏。[版本化打包指南](https://github.com/documentdb/documentdb/blob/v1.2-0/packaging/README.md) 列出了目标、前提条件和干净安装检查项。
 
 在你的环境中验证超出官方 CI 矩阵的目标构建。PostgreSQL 15 仅支持扩展；包管理网关设置需要 PostgreSQL 16 或更高版本。
 
@@ -228,7 +271,7 @@ cd documentdb
 当你需要确切的官方版本而非仓库安装时，请使用发布资产。每个发布都会发布其 Linux 软件包，包含 `SHA256SUMS` 和 `manifest.txt`。
 
 ```bash
-gh release download v1.0-0 -R documentdb/documentdb -D pkgs && cd pkgs && sha256sum -c SHA256SUMS
+gh release download v1.2-0 -R documentdb/documentdb -D pkgs && cd pkgs && sha256sum -c SHA256SUMS
 ```
 
 这将下载所有格式、架构和 PostgreSQL 主版本。仅安装下方匹配的子集，不要安装每个下载的文件。
@@ -246,11 +289,11 @@ gh release download v1.0-0 -R documentdb/documentdb -D pkgs && cd pkgs && sha256
 对于 arm64，请将 `amd64` 替换为 `arm64`。仅网关和扩展文件是架构相关的。
 
 ```bash
-sudo apt install ./ubuntu24.04-documentdb-18_1.0.0_all.deb \
-                 ./ubuntu24.04-documentdb-common_1.0.0_all.deb \
-                 ./ubuntu24.04-documentdb-postgresql-tools_1.0.0_all.deb \
-                 ./ubuntu24.04-documentdb-gateway_1.0.0_amd64.deb \
-                 ./ubuntu24.04-postgresql-18-documentdb_1.0-0_amd64.deb
+sudo apt install ./ubuntu24.04-documentdb-18_1.2.0_all.deb \
+                 ./ubuntu24.04-documentdb-common_1.2.0_all.deb \
+                 ./ubuntu24.04-documentdb-postgresql-tools_1.2.0_all.deb \
+                 ./ubuntu24.04-documentdb-gateway_1.2.0_amd64.deb \
+                 ./ubuntu24.04-postgresql-18-documentdb_1.2-0_amd64.deb
 ```
 
 <span id="rpm-rhel-compatible-9-postgre-sql-18-x86-64"></span>
@@ -260,18 +303,18 @@ sudo apt install ./ubuntu24.04-documentdb-18_1.0.0_all.deb \
 对于 arm64，请将 `x86_64` 替换为 `aarch64`；保持 `noarch` 文件不变。
 
 ```bash
-sudo dnf install ./documentdb-18-1.0.0-1.noarch.rpm \
-                 ./documentdb-common-1.0.0-1.noarch.rpm \
-                 ./documentdb-postgresql-tools-1.0.0-1.noarch.rpm \
-                 ./documentdb-gateway-1.0.0-1.el9.x86_64.rpm \
-                 ./rhel9-postgresql18-documentdb-1.0.0-1.el9.x86_64.rpm
+sudo dnf install ./documentdb-18-1.2.0-1.noarch.rpm \
+                 ./documentdb-common-1.2.0-1.noarch.rpm \
+                 ./documentdb-postgresql-tools-1.2.0-1.noarch.rpm \
+                 ./documentdb-gateway-1.2.0-1.el9.x86_64.rpm \
+                 ./rhel9-postgresql18-documentdb-1.2.0-1.el9.x86_64.rpm
 ```
 
 对于 PostgreSQL 17，请将两个 PostgreSQL 特定文件替换为它们的 `17` 对应项；共享包保持不变。`documentdb` 元包始终选择 PG18。
 
 对于仅扩展使用，安装扩展和工具文件，然后 [配置 PostgreSQL](#extension-only-installation)。对于完整堆栈，[运行向导](#2-run-the-setup-wizard) 并使用已安装的主版本：PG17 使用 `--pg-version 17`。
 
-文件名前缀如 `ubuntu24.04-` 和 `rhel9-` 用于标识发布资产，而非包名称。DEB 扩展使用版本 `1.0-0`，而其他包使用 `1.0.0`；RPM 使用 `1.0.0`，发布版本为 `1` 或 `1.el9`。
+文件名前缀如 `ubuntu24.04-` 和 `rhel9-` 用于标识发布资产，而非包名称。DEB 扩展使用版本 `1.2-0`，而其他包使用 `1.2.0`；RPM 使用 `1.2.0`，发布版本为 `1` 或 `1.el9`。
 
 <span id="offline-air-gapped"></span>
 
@@ -279,85 +322,88 @@ sudo dnf install ./documentdb-18-1.0.0-1.noarch.rpm \
 
 发布文件不包含全部依赖。请在与目标机器具有**相同发行版、版本和架构**的联网机器上，准备 PostgreSQL、所需扩展和所有其他依赖的软件包，也要包括准备机器上已经安装的依赖。按照[离线／隔离环境安装](/documentdb/linux-packages/offline/)的说明，将这些软件包作为本地仓库提供。
 
+<span id="upgrading-to-1-2"></span>
+
+<span id="upgrading-to-10"></span>
 <span id="upgrading-to-1-0"></span>
 
-## 升级至 1.0 {#upgrading-to-10}
+## 升级至 1.2 {#upgrading-to-12}
 
-0.116 或 0.117 版本的包安装可就地升级；将整个堆栈一起迁移。升级包会替换库文件并安装升级脚本，但不会更改数据库：每个 PostgreSQL 实例仍会报告旧的扩展版本，直到其扩展被更新。请先备份；不支持降级。
+通过软件包安装的 1.0 可原地升级；请一并升级所有 DocumentDB 软件包。新版本带有新库和新的扩展系统目录版本。PostgreSQL 只有重启后才会加载新库，各数据库中的系统目录也只有执行 `ALTER EXTENSION ... UPDATE` 后才会更新；两步都完成之前，部分命令会报 `InternalError`。请先备份；不支持降级。
 
-不支持对曾经运行过发布候选版的主机进行升级，安装程序会拒绝这种操作。请在全新主机上安装 1.0，再使用 `mongodump` 和 `mongorestore` 迁移数据。卸载软件包会保留 PostgreSQL 数据；不要通过重置或复用已接管的实例来绕过升级限制。
+曾运行候选发布版的主机不受升级支持，安装程序会拒绝升级。请在全新主机上安装 1.2，用 `mongodump` 和 `mongorestore` 迁移数据。卸载软件包会保留 PostgreSQL 数据；不要通过重置或复用被接管的实例绕过升级限制。
 
-### 独立堆栈 {#stand-alone-stack}
+### 独立部署组件 {#stand-alone-stack}
 
-停止网关，确保客户端在扩展更新前无法访问新库；升级包，重启 PostgreSQL 以加载新库，然后使用初始安装时的选项重新运行设置向导。向导将更新扩展，随后启动网关：
+由 1.0 安装程序或 `--stable` 配置的主机跟随 `stable` 软件包通道。两个通道现在均提供 1.2。若希望以后在新版本发布后立即获取，可先选择切换到 `latest`：
 
 ```bash
 # Debian / Ubuntu
-sudo systemctl stop documentdb-gateway-local@18.service &&
-sudo apt update && sudo apt install --only-upgrade documentdb-18 postgresql-18-documentdb \
-  documentdb-common documentdb-gateway documentdb-postgresql-tools &&
-sudo systemctl restart documentdb-postgresql@18.service &&
-sudo documentdb-setup --pg-version 18 --use-new-postgres-instance --admin-user admin
+sudo sed -i 's# stable ubuntu24$# latest ubuntu24#' /etc/apt/sources.list.d/documentdb.list
 
 # RHEL-compatible 9
-sudo systemctl stop documentdb-gateway-local@18.service &&
-sudo dnf upgrade documentdb-18 postgresql18-documentdb \
-  documentdb-common documentdb-gateway documentdb-postgresql-tools &&
-sudo systemctl restart documentdb-postgresql@18.service &&
-sudo documentdb-setup --pg-version 18 --use-new-postgres-instance --admin-user admin
+sudo sed -i 's#^baseurl=https://documentdb.io/rpm/rhel9$#baseurl=https://documentdb.io/rpm/latest/rhel9#' /etc/yum.repos.d/documentdb.repo
 ```
 
-这些命令假设使用了 DocumentDB 包仓库，该仓库自发布日起即包含 1.0 版本。若你是从发布资产安装，请下载 1.0 的资产，并以相同方式[安装相同的一组文件](#install-from-downloaded-assets)替代 `apt`/`dnf` 命令，保留 `&&` 以确保仅在安装成功时才重启和运行设置。网关在向导完成前保持停止状态；若向导提前终止，请再次运行。共享包（`documentdb-common`、`documentdb-gateway`、`documentdb-postgresql-tools`）服务于主机上的每个 PostgreSQL 主版本，因此若安装了多个主版本，请先停止每个主版本的网关，再依次升级并重新运行设置。
+然后升级软件包，并通过配置向导完成升级。指定安装使用的 PostgreSQL 主版本，以及当时使用的 `--data-dir` 或 `--pg-port` 参数：
 
-在已配置的实例上，向导为日常运维操作：它保留网关端口和 TLS 设置，并对每个 DocumentDB 扩展运行 `ALTER EXTENSION ... UPDATE`。它还会提示输入管理员密码，并在警告和确认后，将其设置在现有管理员用户上：输入当前密码以保留原值，任何其他值都会替换它，旧密码将失效。对于 PostgreSQL 17，请全程使用 `17`。若在密码提示处按 Enter 会中止向导，请再次运行向导并输入密码 ([#772](https://github.com/documentdb/documentdb/issues/772))。
+```bash
+# Debian / Ubuntu
+sudo apt update && sudo apt install --only-upgrade documentdb-18 postgresql-18-documentdb \
+  documentdb-common documentdb-gateway documentdb-postgresql-tools &&
+sudo documentdb-setup --pg-version 18 --yes
+
+# RHEL-compatible 9
+sudo dnf upgrade documentdb-18 postgresql18-documentdb \
+  documentdb-common documentdb-gateway documentdb-postgresql-tools &&
+sudo documentdb-setup --pg-version 18 --yes
+```
+
+软件包会重启网关，但不会重启 PostgreSQL。向导重启 `documentdb-postgresql@18` 一次以加载新库，然后更新 `documentdb_core`、`documentdb` 和 `documentdb_extended_rum`，并保留网关端口和 TLS 设置。未指定 `--admin-user` 时不需要密码，所有 admin 用户及密码保持原样；指定 `--admin-user` 时，会像其他重新运行向导的情况一样重置该用户的密码。PostgreSQL 17 请将所有相关位置改为 `17`。
+
+这些命令假定使用 DocumentDB 软件包仓库。如果原先从发布文件安装，请下载 1.2 发布文件，用[同样的方法](#install-from-downloaded-assets)安装相同的一组文件，以替代 `apt`/`dnf` 命令。共享软件包（`documentdb-common`、`documentdb-gateway`、`documentdb-postgresql-tools`）服务于主机上的所有 PostgreSQL 主版本，因此安装了多个主版本时，需分别运行配置向导。
 
 <span id="extension-and-gateway-on-your-own-postgre-sql"></span>
 
-### 在你自己的 PostgreSQL 上部署扩展和网关 {#extension-and-gateway-on-your-own-postgresql}
+### 在自行管理的 PostgreSQL 上运行扩展与网关 {#extension-and-gateway-on-your-own-postgresql}
 
-若你使用 `documentdb-setup --target-postgres-instance 18/main` 采用该实例，向导不会为你重启 PostgreSQL。请停止网关（`sudo systemctl stop documentdb-gateway-local@18.service`），升级包，自行重启 PostgreSQL（Ubuntu 上为 `sudo systemctl restart postgresql@18-main`，EL9 上为 `sudo systemctl restart postgresql-18`），然后再次运行相同的 `documentdb-setup --pg-version 18 --target-postgres-instance 18/main --admin-user admin` 命令；它会如上所述提示管理员密码，更新扩展，随后启动网关。若向导必须更改 `shared_preload_libraries`，它会写入配置更改，提示你重启 PostgreSQL，然后退出而不更新扩展：请重启并再次运行向导。
+如果通过 `documentdb-setup --target-postgres-instance 18/main` 接管了实例，先升级软件包，再运行：
 
-否则，请先停止网关并升级包。在使用名为 `main` 的集群的 Ubuntu 上：
+```bash
+sudo documentdb-setup --target-postgres-instance 18/main --yes
+```
+
+向导不会重启你的 PostgreSQL。它输出下一步需要运行的重启命令和配置命令，然后停止；请执行这两个命令。第二次运行会更新扩展并保留已有 admin 用户。
+
+其他情况下，按以下顺序停止网关、升级软件包、重启 PostgreSQL 以加载新库，再更新所有创建过这些扩展的数据库；`ALTER EXTENSION` 不会自动更新依赖项。在 Ubuntu 上，假设集群名为 `main`：
 
 ```bash
 sudo systemctl stop documentdb-gateway &&
 sudo apt update && sudo apt install --only-upgrade postgresql-18-documentdb \
-  documentdb-postgresql-tools documentdb-gateway
-sudo -u postgres /usr/bin/psql --cluster 18/main -d postgres -Atc "SHOW shared_preload_libraries;"
-```
-
-1.0 仅从 `shared_preload_libraries` 加载扩展的 RUM 库；否则 `CREATE EXTENSION documentdb_extended_rum` 会因 `pg_documentdb_extended_rum can only be loaded via shared_preload_libraries` 失败。若 `pg_documentdb_extended_rum` 不在列表中（在 0.116 安装中可能缺失），请使用 `documentdb-tune` 添加，先审查预演结果：
-
-```bash
-sudo documentdb-tune --pg-version 18 --cluster main --dry-run
-sudo documentdb-tune --pg-version 18 --cluster main --yes
-```
-
-然后重启 PostgreSQL，使其加载新库；接着在每个已创建这些扩展的数据库中按下列顺序更新扩展，因为 `ALTER EXTENSION` 不会更新依赖项。`-1` 将所有语句放在一个事务中执行，因此一旦失败，所有扩展都会保持原版本，网关也只会在更新成功后重新启动。不过，这个事务无法发现缺少预加载的问题：如果 `documentdb_extended_rum` 已经存在，即使未预加载，语句也能成功执行，但随后建立索引时会报错 `The index access method extended_rum could not be located`。所以必须先执行前面的预加载检查：
-
-```bash
+  documentdb-postgresql-tools documentdb-gateway &&
 sudo systemctl restart postgresql@18-main &&
 sudo -u postgres /usr/bin/psql --cluster 18/main -d postgres -1 -v ON_ERROR_STOP=1 \
   -c "ALTER EXTENSION documentdb_core UPDATE;" \
   -c "ALTER EXTENSION documentdb UPDATE;" \
-  -c "CREATE EXTENSION IF NOT EXISTS documentdb_extended_rum CASCADE;" \
   -c "ALTER EXTENSION documentdb_extended_rum UPDATE;" &&
 sudo systemctl start documentdb-gateway
 ```
 
+仅安装扩展时，省略网关命令。`-1` 将语句作为一个事务运行，失败时所有扩展保持旧版本，且只有成功后才重新启动网关。在 PostgreSQL 重启之前运行这些语句，会报 `could not find function ... in file ".../pg_documentdb.so"`。请在 `shared_preload_libraries` 中保留 `pg_documentdb_extended_rum`：DocumentDB 只通过此设置加载扩展 RUM 库。
+
 ### 检查版本 {#check-the-version}
 
-使用 `mongosh` 连接并运行：
+通过 `mongosh` 连接并运行：
 
 ```javascript
 db.hello().internal.documentdb_versions
 ```
 
-应输出 `[ '1.0-0', '1.0.0' ]`：已安装的扩展版本，随后是加载的库版本。若第一个值仍为 `0.116-0` 或 `0.117-0`，则扩展未被更新。参见 [`hello`](/documentdb/reference/commands/diagnostic/hello/)。
+预期输出为 `[ '1.2-0', '1.2.0' ]`：依次是已安装的扩展版本和已加载的库版本。如果第一个值仍为 `1.0-0`，说明扩展尚未更新。参见 [`hello`](/documentdb/reference/commands/diagnostic/hello/)。
 
 ### 容器 {#containers}
 
-在现有数据卷上使用更新的 DocumentDB Local 镜像不会更新扩展 ([#773](https://github.com/documentdb/documentdb/issues/773))。请在新卷上启动 1.0，并使用 `mongodump` 和 `mongorestore` 移动数据。参见 [升级镜像](/documentdb/documentdb-local/#upgrading-the-image)。
+较新的 DocumentDB Local 镜像会在启动时更新已有数据卷上的扩展。参见[升级镜像](/documentdb/documentdb-local/#upgrading-the-image)。
 
 ## 已弃用的目标 {#retired-targets}
 
@@ -379,4 +425,4 @@ sudo dnf clean all
 
 ## 容器镜像 {#container-image}
 
-对于 macOS、Windows 或基于容器的安装，请参阅 [DocumentDB Local](/documentdb/documentdb-local/)。版本 1.0 提供了适用于 PostgreSQL 15-18 的 Linux amd64/arm64 镜像；如需可复现的版本，请使用带版本标签的镜像，而非 `latest`。
+对于 macOS、Windows 或基于容器的安装，请参阅 [DocumentDB Local](/documentdb/documentdb-local/)。版本 1.2 提供了适用于 PostgreSQL 15-18 的 Linux amd64/arm64 镜像；如需可复现的版本，请使用带版本标签的镜像，而非 `latest`。

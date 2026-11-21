@@ -2,10 +2,10 @@
 title: $dayOfYear
 description: $dayOfYear 运算符从日期中提取当年的第几天。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$dayofyear.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$dayofyear.md
 weight: 110
-translation_source_sha256: 80654115065a030d0b0f08516f832f55bf69119396e7c8e0687cc0bad9fca359
+translation_source_sha256: 09df9699812632a3d0a8954b6443e3788278a25c583613a7f3cf9db895ae525d
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

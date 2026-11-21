@@ -1,15 +1,15 @@
 ---
 title: 配置
-description: 用于配置 DocumentDB 1.0 的服务器 GUC 和网关环境变量，包括必需的扩展 RUM 索引库、排序规则和角色管理标志。
+description: 用于配置 DocumentDB 1.2 的服务器 GUC 和网关环境变量，包括必需的扩展 RUM 索引库、排序规则和角色管理标志。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/postgres-api/configuration.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/postgres-api/configuration.md
 weight: 30
-translation_source_sha256: a75b19f7a5f8a77a1df8583f7eea82787c4bbafa852e18657cced00e92b0ba57
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: 8455f5c084972a7c4b80013cfb206172bbdc53cb8b5506295a717193956840f8
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
-DocumentDB 的配置分为两层：PostgreSQL 扩展通过 `postgresql.conf` 中的 GUC 参数配置，网关进程通过环境变量或 JSON 配置文件配置。本页介绍 DocumentDB 1.0 中最常调整的设置。
+DocumentDB 的配置分为两层：PostgreSQL 扩展通过 `postgresql.conf` 中的 GUC 参数配置，网关进程通过环境变量或 JSON 配置文件配置。本页介绍 DocumentDB 1.2 中最常调整的设置。
 
 <span id="extension-gu-cs"></span>
 
@@ -51,9 +51,10 @@ DocumentDB 的配置分为两层：PostgreSQL 扩展通过 `postgresql.conf` 中
 | GUC | 默认值 | 描述 |
 | --- | --- | --- |
 | `documentdb_core.enableCollation` | `off` | 在查询中接受 `collation` 选项。它由 `pg_documentdb_core` 定义，因此使用 `documentdb_core.` 前缀，且可按会话设置。 |
+| `documentdb.enableCollationWithNonUniqueOrderedIndexes` | `off` | 接受 `createIndexes` 的 `collation` 选项，适用于非唯一有序索引。为 `off` 时，包含 `collation` 的索引规范会失败，报错为 "createIndex.collation is not implemented yet"。 |
 {.fields}
 
-当 `off` 时，`find`、`aggregate` 和 `count` 拒绝 `collation` 选项，提示 "collation is not supported in the find command yet."（或使用 `aggregate` / `count` 替代 `find`）。`delete` 也遵循该标志。`distinct`、`findAndModify` 和 `update` 无论标志是否开启，均拒绝 `collation`。
+该标志为 `off` 时，`find`、`aggregate`、`count` 和 `distinct` 拒绝 `collation` 选项，提示 "collation is not supported in the find command yet."（或将 `find` 替换为相应命令名）。`delete`、`findAndModify` 和 `update` 也遵循该标志。从 1.2 开始，将扩展更新到 `1.2-0` 后，`distinct`、`findAndModify` 和 `update` 即可接受 `collation`。
 
 当该标志开启时，部分聚合阶段仍拒绝排序规则，包括 `$bucket`、`$bucketAuto`、`$densify`、`$fill`、`$geoNear`、`$merge`、`$setWindowFields` 和 `$sortByCount`。
 

@@ -2,10 +2,10 @@
 title: $limit
 description: 聚合流水线中的 $limit 阶段限制传递到下一阶段的文档数量。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$limit.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$limit.md
 weight: 180
-translation_source_sha256: e9a4848d07f8a1cdfd5de087c2e021cc0a6efbabc3a9e5b5fb6386a1cfd97df0
+translation_source_sha256: 2a9eb849a87bf4712bb32f720a077aab5c6d77df753635f7009c0d39abe49564
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

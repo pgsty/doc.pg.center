@@ -2,10 +2,10 @@
 title: $max
 description: $max 运算符从一组输入值中返回最大值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$max.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$max.md
 weight: 90
-translation_source_sha256: 96969f13b89f76625a3b60ef97f0ae02d4190e1c79dbbc6ecce6419a5228c2c9
+translation_source_sha256: 47647eab6339b8cf20a477d34780a14497431c1a52195769f554cd87d7f37d22
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

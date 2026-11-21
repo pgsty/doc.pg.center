@@ -2,10 +2,10 @@
 title: $comment
 description: $comment 运算符为查询添加注释，便于在日志和性能分析器输出中识别该查询。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/miscellaneous-query/$comment.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/miscellaneous-query/$comment.md
 weight: 10
-translation_source_sha256: 5f3f4ebdb88f0188df57a3e5633177263afbb2a051bb43b3427df7c618ed8de6
+translation_source_sha256: a78f748765266774c3bf9b8de544a25514bfd762d409dd60f7da32e981d0e934
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

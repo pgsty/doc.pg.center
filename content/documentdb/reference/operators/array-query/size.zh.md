@@ -2,10 +2,10 @@
 title: $size
 description: $size 运算符用于查询数组字段包含指定元素数量的文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-query/$size.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-query/$size.md
 weight: 30
-translation_source_sha256: 99209fb84a90f6353fecc04545333d0fff4a6114148b7a6bfb587f2bc3689ead
+translation_source_sha256: 0792ebddb142134fbea55cbe9eeae1f85861dae8cf4394448a13d265a23cdfa9
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

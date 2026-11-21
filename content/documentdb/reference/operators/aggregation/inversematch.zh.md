@@ -2,10 +2,10 @@
 title: $inverseMatch
 description: $inverseMatch 流水线阶段在聚合流水线中保留那些其存储查询与所提供文档匹配的文档，从而反转了通常的匹配方向。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$inversematch.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$inversematch.md
 weight: 160
-translation_source_sha256: 3ebbf3b4561179bd53b8e1a45c039b89885d9f1f28fd206baa4772198877a623
+translation_source_sha256: 45bb0752c3e1328ecb296dde6d94c18288a678bfd69254505731be4b32e50ba6
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

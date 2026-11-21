@@ -1,11 +1,11 @@
 ---
 title: 诊断
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/diagnostic/_metadata.description.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/diagnostic/_metadata.description.md
 description: DocumentDB 的诊断参考。
 weight: 30
-translation_source_sha256: be2c536246facaa919aab90f7a72fe841ee765ceab60bd6b943f9d81873be726
+translation_source_sha256: 182f2a7d93ba162d4376d7ce5020e40d580a5443e354e5de6be4ae1efe9bb91a
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

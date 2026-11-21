@@ -2,14 +2,16 @@
 title: explain
 description: 解释支持的 DocumentDB 读取命令，并选择诊断详细程度。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/diagnostic/explain.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/diagnostic/explain.md
 weight: 60
-translation_source_sha256: 746467107201bccb495cca9e29286b3786e262cb4498191c487279d1389876b2
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: bbc0e228f478930fb65605c7e28416835e4d7da732df6b0e748330aa9fbcba46
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
 返回 `find`、`aggregate`、`count` 或 `distinct` 的规划信息。默认网关不解释写入命令。
+
+explain 响应的结构和字段说明，见 DocumentDB 仓库中的 [explain 输出 JSON 模式](https://github.com/documentdb/documentdb/blob/main/pg_documentdb_gw/documentdb_gateway_core/src/explain/documentdb_explain_output.schema.json)。
 
 ```javascript
 db.flights.find({ status: "Delayed" }).explain("executionStats")

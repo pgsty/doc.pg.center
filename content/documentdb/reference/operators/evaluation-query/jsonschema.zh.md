@@ -2,10 +2,10 @@
 title: $jsonSchema
 description: $jsonSchema 运算符根据 JSON Schema 定义验证文档，以验证数据并强制要求文档符合指定结构。了解支持的功能及限制。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/evaluation-query/$jsonschema.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/evaluation-query/$jsonschema.md
 weight: 20
-translation_source_sha256: 0601f2c464913c336876c95e6dd11525018fe33c47f5e7183f6602776d44a143
+translation_source_sha256: 1c33b112222a4d5e3cea7884daf451586eede0502de1fca4a30a19b311fc6496
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

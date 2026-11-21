@@ -2,10 +2,10 @@
 title: $each
 description: $each 运算符用于在 `$addToSet` 或 `$push` 操作中，通过一次更新向数组字段添加多个元素。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-update/$each.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-update/$each.md
 weight: 50
-translation_source_sha256: 5670e6b3c836f2dcc9e7d5bac918fad15ebb883349a9c645937c2d5da6092785
+translation_source_sha256: d3b37c07491465338a11b4975fb82db8e5904f0f46c4e5183e4f5639049a7020
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

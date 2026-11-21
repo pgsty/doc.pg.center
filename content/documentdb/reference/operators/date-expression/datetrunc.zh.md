@@ -2,10 +2,10 @@
 title: $dateTrunc
 description: $dateTrunc 运算符将日期截断到指定单位。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$datetrunc.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$datetrunc.md
 weight: 80
-translation_source_sha256: 4a86b63ee9135ea05a629af835b602c5bee9b6e84f13a5b4fb0c41942e0c2045
+translation_source_sha256: 74c5970d00dadf62885d89068377076d22408874818aa3b384634086643c3fe1
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

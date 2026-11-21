@@ -2,10 +2,10 @@
 title: $dateFromString
 description: $dateFromString 运算符将日期／时间字符串转换为日期对象。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$datefromstring.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$datefromstring.md
 weight: 40
-translation_source_sha256: a178ff18e005d7eb4fc9b4bece83a5fcd33d2110d7aae0b64c3be2fcdd3de65b
+translation_source_sha256: 27a0780cf9a090dce8310c844da09ad08ca6a2a78872f74f06cae10352028f88
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

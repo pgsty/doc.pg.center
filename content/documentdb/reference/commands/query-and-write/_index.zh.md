@@ -1,11 +1,11 @@
 ---
 title: 查询和写入
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/query-and-write/_metadata.description.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/query-and-write/_metadata.description.md
 description: DocumentDB 的查询和写入参考。
 weight: 50
-translation_source_sha256: 2ccbc05d54c9357e8d235cd9b740d4b8d1c7ac5a487973e457df0c91c70228a1
+translation_source_sha256: 5574a6378157c4c51b2371ee5d1a4f3b1d7690ea938618877cce482330a04b41
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

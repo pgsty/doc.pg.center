@@ -2,10 +2,10 @@
 title: $median
 description: $median 运算符计算一组文档中数值字段的中位数。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$median.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$median.md
 weight: 110
-translation_source_sha256: 47da262b2fa5ec3895687839d404b3a7fa19a72be12e4d7f219bf3dd9124968d
+translation_source_sha256: 452ab29270d01b9c3e1ebdb9901546eb60bbc770644c7b6553fffc536c086523
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

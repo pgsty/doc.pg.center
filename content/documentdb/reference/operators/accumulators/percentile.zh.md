@@ -2,10 +2,10 @@
 title: $percentile
 description: $percentile 运算符用于计算符合筛选条件的数值的百分位数
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$percentile.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$percentile.md
 weight: 140
-translation_source_sha256: 6eb7ea277b90b0565aea78bb9e7640d330dd12f291b47ef2e6ec1b8bc7a4893f
+translation_source_sha256: aa3a68710c8187ce78f56a2b5f24b16b88bc619aa37e4c1ef483c8cd35c727c3
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

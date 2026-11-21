@@ -2,10 +2,10 @@
 title: $addFields
 description: 聚合流水线中的 $addFields 流水线阶段用于向文档添加新字段。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$addfields.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$addfields.md
 weight: 10
-translation_source_sha256: f1afd801ef8fad3ea20fe9687943927056a2c8519994772bd7ea6d3c2e12ad4b
+translation_source_sha256: c72fc49329ee2b3bf83da1cfe4357221200255b91b1b01440a5ef11a8ed06e23
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

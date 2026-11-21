@@ -2,12 +2,12 @@
 title: PostgreSQL 扩展与网关
 description: 了解 DocumentDB 的三个 PostgreSQL 扩展与协议网关，包括 BSON、文档操作、索引和 MongoDB 兼容连接。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/postgres-api/index.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/postgres-api/index.md
 weight: 40
 linkTitle: PostgreSQL API
-translation_source_sha256: 742b748b633e65609c459ff3e907c7d25acb4cf845c1212dbf07695fcdc98dc2
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: b6eee9266ac0e043dc7e70cf73d545a212121db0396e0830fbf83904e5a7a7c6
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
 DocumentDB 由三个 PostgreSQL 扩展和一个网关组成。它们协同工作，在 PostgreSQL 上提供兼容 MongoDB 的文档数据库功能。
@@ -48,7 +48,7 @@ DocumentDB 由三个 PostgreSQL 扩展和一个网关组成。它们协同工作
 
 `pg_documentdb_extended_rum`（SQL 扩展名为 `documentdb_extended_rum`）是 DocumentDB 对 PostgreSQL RUM 索引访问方法的分支，为文档索引提供支持。它保留 RUM 的磁盘格式，并针对文档负载扩展查询路径。
 
-DocumentDB 1.0 必须使用该扩展：`documentdb.rum_library_load_option` 默认为 `require_documentdb_extended_rum`，因此 `pg_documentdb` 从扩展 RUM 库加载索引处理器。该库只能通过 `shared_preload_libraries` 加载，而 `CREATE EXTENSION documentdb CASCADE` 不会创建这个扩展。因此，手动配置的服务器必须在建立索引前完成这两步：
+DocumentDB 必须使用该扩展：`documentdb.rum_library_load_option` 默认为 `require_documentdb_extended_rum`，因此 `pg_documentdb` 从扩展 RUM 库加载索引处理器。该库只能通过 `shared_preload_libraries` 加载，而 `CREATE EXTENSION documentdb CASCADE` 不会创建这个扩展。因此，手动配置的服务器必须在建立索引前完成这两步：
 
 ```sql
 -- postgresql.conf: add pg_documentdb_extended_rum to shared_preload_libraries and set

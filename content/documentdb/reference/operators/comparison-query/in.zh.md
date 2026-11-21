@@ -2,10 +2,10 @@
 title: $in
 description: $in 运算符将字段值与指定值组成的数组进行匹配
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/comparison-query/$in.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/comparison-query/$in.md
 weight: 50
-translation_source_sha256: 367c59f209fa84bd07969af8b613ec85c37b9ff52424417e31d6446b67ee9e27
+translation_source_sha256: c0f519f18cf28dd7c0b4b0a0ba32ca766b8ea8f4981da1516f3ec8358f7b9f36
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

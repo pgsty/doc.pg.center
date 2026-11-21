@@ -2,10 +2,10 @@
 title: $stddevsamp
 description: $stddevsamp 运算符计算的是指定样本值的标准差，而非整个总体的标准差
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$stddevsamp.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$stddevsamp.md
 weight: 160
-translation_source_sha256: e4d91c28d745a35756f110d9220449d786ad2dfb99d933f242ace26cc4682f30
+translation_source_sha256: b8222eed63eeefe92dfc25ab64e5aec001bbd2c59065982bbd96838b0d8970e6
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

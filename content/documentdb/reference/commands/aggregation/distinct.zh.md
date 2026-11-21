@@ -2,11 +2,11 @@
 title: 唯一值
 description: distinct 命令用于在单个集合中查找指定字段的唯一值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/aggregation/distinct.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/aggregation/distinct.md
 weight: 30
-translation_source_sha256: a529ac42c03b145022e577b5b26236b28156922301602af6a8ef751e23233f9f
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: 22187f906727634cc979b88fb702b4421bc1d9739a3ae09dfb10923c364452d8
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
 `distinct` 命令用于在单个集合中查找指定字段的唯一值。当需要识别字段的唯一值集合，而无需检索所有文档，或需要基于唯一值执行过滤或分组操作时，该命令非常有用。
@@ -22,7 +22,7 @@ translation_review: AI-assisted bilingual review; 2026-11-07
 | **`query`** | (可选) 指定匹配过滤条件的文档；省略或为 `null` 表示无过滤条件。 |
 | **`hint`** | (可选) 指定索引名称或键模式的字符串或文档。 |
 | **`maxTimeMS`** | (可选) 指定执行超时时间的数字，单位为毫秒。 |
-| **`collation`** | (可选) 指定比较规则的文档；需要 `documentdb_core.enableCollation`，且集群版本为 1.1 或更高版本。否则将被拒绝。 |
+| **`collation`** | (可选) 指定比较规则的文档；需要 `documentdb_core.enableCollation`，且集群版本为 1.2 或更高版本。否则将被拒绝。 |
 {.fields}
 
 ## 示例：从一个出发机场列出到达机场 {#example-list-arrival-airports-from-one-departure-airport}

@@ -2,10 +2,10 @@
 title: $literal
 description: $literal 运算符返回指定值，不将其解析为表达式，从而允许在聚合流水线中使用字面值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/literal-expression/$literal.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/literal-expression/$literal.md
 weight: 10
-translation_source_sha256: 5fd1984ce053ea497e3a5db43a29f15742b7832a6fb0b6f7e04b11e74b8864c3
+translation_source_sha256: 870929ab2f8a85ab87387dc3d107c91d1afbfa4e35ddc297f8e6c20c3d1d3d12
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $top
 description: $top 运算符返回按一个或多个字段排序后的结果集中的第一个文档
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$top.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$top.md
 weight: 180
-translation_source_sha256: 1fa76fb8ddd3ef9c51ea85a78003b8e6e5023288df82dc947251ebb82632240b
+translation_source_sha256: 0d7d52565bc91e821b9af7d8fcd3013b7b609b0306ee546398319c9015b6fddb
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

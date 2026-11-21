@@ -2,10 +2,10 @@
 title: $millisecond
 description: $millisecond 运算符从日期值中提取毫秒分量。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$millisecond.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$millisecond.md
 weight: 160
-translation_source_sha256: a575730bf92c74448212811864ca6449919c5e638ce64e33e7382ff97914322e
+translation_source_sha256: ca26f931b925b5581d871e513d35477b02566c733805079824321dc845a18d6e
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

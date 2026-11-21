@@ -2,10 +2,10 @@
 title: $isoDayOfWeek
 description: $isoDayOfWeek 运算符返回 ISO 8601 格式的星期序号，范围为 1（星期一）到 7（星期日）。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$isodayofweek.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$isodayofweek.md
 weight: 130
-translation_source_sha256: a2d08bbf92f553bdc4072226b998214fc8abb9166e209c99a76c94c128dad5f7
+translation_source_sha256: 29229903ea03c72f9631cca33d8451387868332e74d64af79b8ab13caede287b
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

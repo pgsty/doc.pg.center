@@ -2,10 +2,10 @@
 title: $geoIntersects
 description: $geoIntersects 运算符选择 location 字段与指定 GeoJSON 对象相交的文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/geospatial/$geointersects.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/geospatial/$geointersects.md
 weight: 40
-translation_source_sha256: b2c3508a0dbc216d37f87791d629ac142066bedb70c5c1ba948c9322fb3e1974
+translation_source_sha256: 4508b23700222887ef67739e14fa3066f704b766ca11e8e091bb36970426ade4
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

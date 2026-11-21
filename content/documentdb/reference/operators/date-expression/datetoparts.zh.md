@@ -2,10 +2,10 @@
 title: $dateToParts
 description: $dateToParts 运算符将日期拆分为年、月、日等各个分量。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$datetoparts.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$datetoparts.md
 weight: 60
-translation_source_sha256: 2a181328f59b29aa0c290aa694cfa7f47a8632b28adf8b34f9dc9191de4367ee
+translation_source_sha256: 9ccdf6512240da37e492f0d161b69552265bf437d65cd0be2d9117a86b83a955
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

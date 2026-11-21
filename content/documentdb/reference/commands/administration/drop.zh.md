@@ -2,10 +2,10 @@
 title: drop 和 dropDatabase
 description: 使用 DocumentDB 线协议命令删除集合或逻辑数据库。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/administration/drop.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/administration/drop.md
 weight: 30
-translation_source_sha256: 070002622a29b4efc3a868b2c93561dfb59468c3b1c9f558bf620971389231ca
+translation_source_sha256: 4c98675a944fa4fb1d4c9452eaecc5da05c21487a071c6a6a73bb8d511b49011
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

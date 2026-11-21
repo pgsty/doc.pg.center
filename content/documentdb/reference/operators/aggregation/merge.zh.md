@@ -2,10 +2,10 @@
 title: $merge
 description: 聚合流水线中的 $merge 阶段将聚合结果写入指定集合。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$merge.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$merge.md
 weight: 210
-translation_source_sha256: f5ad63aa86e4d32f65a5c5b2ecfb651716ddeafe76b41e3f5c14f827f84c920b
+translation_source_sha256: 2084a62d001c40dbcdcba0e2d3b2635d85840f97ec5a679b8def3142ac7de485
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

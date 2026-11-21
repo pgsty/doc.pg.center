@@ -2,10 +2,10 @@
 title: $graphLookup
 description: $graphLookup 流水线阶段在聚合流水线中执行对集合中文档的递归搜索。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$graphlookup.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$graphlookup.md
 weight: 130
-translation_source_sha256: d93308ed7a46579847200d994d416191e9af889031f9bdf142609471ddb53533
+translation_source_sha256: 18e69caecf103f3f30dbe44bdeb72554a8af34c298ca4db8a5f56cfe7b59babc
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

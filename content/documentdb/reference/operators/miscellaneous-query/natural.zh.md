@@ -2,10 +2,10 @@
 title: $natural
 description: $natural 运算符强制查询使用集合中文档的自然顺序，从而控制文档的排序和检索。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/miscellaneous-query/$natural.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/miscellaneous-query/$natural.md
 weight: 20
-translation_source_sha256: db6b50a83a0acee8ab604911aca2a5dda6c9a5a2b8a3feea987b936e131d5a86
+translation_source_sha256: e50c335ce03689d9cec4fff061d4f3a1547abafb21bded124760c2ace625d5a0
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

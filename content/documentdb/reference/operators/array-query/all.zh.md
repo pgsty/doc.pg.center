@@ -2,10 +2,10 @@
 title: $all
 description: $all 运算符可查找数组中包含全部指定元素的文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-query/$all.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-query/$all.md
 weight: 10
-translation_source_sha256: 8f269265427d2d4568379f8a7863f93629966a5eda6cd83e2cdb9041274ade6f
+translation_source_sha256: 53674c41073ebc1492aef4d2ffd8cd16cd976a137a5c7515c0c23d51229b1819
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

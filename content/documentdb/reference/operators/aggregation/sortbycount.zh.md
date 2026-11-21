@@ -2,10 +2,10 @@
 title: $sortByCount
 description: 聚合流水线中的 $sortByCount 流水线阶段用于按指定表达式对文档进行分组，然后按每组文档数量降序排序。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$sortbycount.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$sortbycount.md
 weight: 330
-translation_source_sha256: 3ea9d3620737739bf6600c6dd2a6fc2c9cde52c725a2339bfbef1aef37cf1497
+translation_source_sha256: 2c662d38bdf75bf377311820fbb154ac65e1ce768d8fbb608d44344e5c491e90
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

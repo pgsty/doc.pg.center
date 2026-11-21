@@ -2,10 +2,10 @@
 title: $addToSet
 description: addToSet 运算符会在元素不存在时将其添加到数组中，同时确保集合内元素的唯一性。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-update/$addtoset.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-update/$addtoset.md
 weight: 40
-translation_source_sha256: 2424a95401c1742ed881966dfa42c9a5b24b5ff2513ef5a0a29d28219abc89ca
+translation_source_sha256: 5f858cbbf1a70e5e6e448ee2d846c8d158d8a475ce3cb7f431f64231d5c108cd
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

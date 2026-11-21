@@ -2,10 +2,10 @@
 title: $mod
 description: $mod 运算符对字段值执行取模运算，并选择结果为指定值的文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/evaluation-query/$mod.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/evaluation-query/$mod.md
 weight: 30
-translation_source_sha256: 5f4883d5a548d59ba7d349b711640aa7211d220c5276429621ee9f724929a632
+translation_source_sha256: c365fda8928702297acd42dabe995b977826e1a95eec50661be4df106c266f46
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

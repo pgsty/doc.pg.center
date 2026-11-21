@@ -2,10 +2,10 @@
 title: $replaceRoot
 description: $replaceRoot 流水线阶段会将输入文档替换为指定的文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$replaceroot.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$replaceroot.md
 weight: 250
-translation_source_sha256: 45207d5000f4e688b77abeffd41b2a26f5043a4d033ba7793b4ed6b5c61d78fa
+translation_source_sha256: a2987e0a809c3f89fcbf271cffb13a039bea929f258a4dced984eace4365980b
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

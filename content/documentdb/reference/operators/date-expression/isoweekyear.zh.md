@@ -2,10 +2,10 @@
 title: $isoWeekYear
 description: $isoWeekYear 运算符返回 ISO 8601 格式的年份；对于年初或年末的日期，该年份可能与日历年不同。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$isoweekyear.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$isoweekyear.md
 weight: 150
-translation_source_sha256: cccc17380014d04603bbe3e7945b083466a0f35cf38d42e12e71ec8b56cb8918
+translation_source_sha256: fbeaac834c90228ca1b4070116d7444c87c45aaed549c497cdd2ad9eafc33372
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $dateToString
 description: $dateToString 运算符将日期对象转换为格式化字符串。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$datetostring.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$datetostring.md
 weight: 70
-translation_source_sha256: 8d2c97f9db7ad0dfea92429fae7364c42ece93d5454fd6758c0c82199ce40ba8
+translation_source_sha256: 4c336e6549d77db7c86155c82351fdc364c81ca0aebc268400b712c787ccf33e
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

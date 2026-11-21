@@ -2,10 +2,10 @@
 title: 1.0 发布候选版
 description: DocumentDB 1.0 发布候选版已结束。DocumentDB 1.0 已发布；不支持将运行过发布候选版的主机和卷升级至 1.0。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/getting-started/release-candidate.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/getting-started/release-candidate.md
 weight: 1010
-translation_source_sha256: 16945ed9192d63b0ca96c5491fd2855332ecb3c5cdc0944a982790bfcb5e04ae
+translation_source_sha256: 5a92ed413153c6f2b0ae9a9c82ea985ed2cf2e5e6dbaa4497b6072bc3b9b42b4
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

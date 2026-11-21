@@ -2,10 +2,10 @@
 title: $pull
 description: 从数组中移除某个值的所有实例。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-update/$pull.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-update/$pull.md
 weight: 80
-translation_source_sha256: 5cfa92536445bac936e7ac84aa5292a5ded80612bf706edb6113d62c83b85e4d
+translation_source_sha256: 59022cbc4182541c091c906887f78be6b09b1646a571a38c385f3f23cb4a15b8
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

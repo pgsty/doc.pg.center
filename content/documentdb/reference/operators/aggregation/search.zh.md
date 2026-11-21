@@ -2,10 +2,10 @@
 title: $search
 description: $search 阶段在聚合流水线中通过 cosmosSearch 或 knnBeta 运算符运行向量相似性搜索。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$search.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$search.md
 weight: 280
-translation_source_sha256: 8867cbd722d3d1b2e496b378012b7f441f0a9ae379de74111255633b2ce2cb11
+translation_source_sha256: 4b4b56094bde69e148070194db2b90581acab2e0f8a858aa8d7635030b0e7d92
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

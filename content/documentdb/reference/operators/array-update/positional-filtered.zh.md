@@ -2,10 +2,10 @@
 title: $[identifier]
 description: $[identifier] 运算符通过特定标识符，更新数组中满足查询条件的所有元素。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-update/$positional-filtered.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-update/$positional-filtered.md
 weight: 30
-translation_source_sha256: 6097ee941508d1ff19c6b8848dbc81c1cbf6c2610d571037cd2043df8d995b93
+translation_source_sha256: 9afa0d2f0ca817e5b8d2054aa7d7a06a83f10724935d0713ff1a254a3245cbb1
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

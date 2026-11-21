@@ -2,10 +2,10 @@
 title: $geoNear
 description: $geoNear 运算符根据文档与地理空间点的接近程度查找并排序文档，为每个文档返回距离信息。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$geonear.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$geonear.md
 weight: 120
-translation_source_sha256: 84b878f161210d969f0cac8feb06d813daddb574b768b78c05b2fe7716b25dcb
+translation_source_sha256: 16b678cec271efb908cc5111362eedd76592690af4a778f04fef7c1b6a24fffa
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

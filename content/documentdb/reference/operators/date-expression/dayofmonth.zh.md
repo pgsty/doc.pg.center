@@ -2,10 +2,10 @@
 title: $dayOfMonth
 description: $dayOfMonth 运算符从日期中提取当月的第几天。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$dayofmonth.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$dayofmonth.md
 weight: 90
-translation_source_sha256: b9b50cdb8e3692302286238e1df222c87fd9b268446bf35b2f4a0db970f8c189
+translation_source_sha256: 5726a326f1f1c144ff190c391a5ace2e0175faf0ce1821975d9e35becdbd584d
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

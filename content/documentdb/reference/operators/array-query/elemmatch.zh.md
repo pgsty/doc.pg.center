@@ -2,10 +2,10 @@
 title: $elemMatch
 description: $elemMatch 运算符返回完整的数组，其中包含至少一个满足匹配条件的数组元素。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-query/$elemmatch.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-query/$elemmatch.md
 weight: 20
-translation_source_sha256: 425f1802c21d5c484fd831344db89ffbf82af2f620b553b3a1384d36c0780f99
+translation_source_sha256: 9801a0e6a030341ef4c9b74550dc070419cd501206ff5f2e4a2c0976611d0493
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

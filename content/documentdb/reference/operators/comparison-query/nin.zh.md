@@ -2,10 +2,10 @@
 title: $nin
 description: $nin 运算符获取字段值与给定列表中的所有值都不匹配的文档
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/comparison-query/$nin.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/comparison-query/$nin.md
 weight: 90
-translation_source_sha256: 2919dd62e44eb6986ed3be63bdc7ab00c37c3a089cc28680b16af7dff4d88d1a
+translation_source_sha256: 512a755bad9292b5c4c5894e164e56f9e0be118d79ba6475bd14574cf6e59e6f
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

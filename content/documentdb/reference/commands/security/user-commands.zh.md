@@ -2,10 +2,10 @@
 title: 用户管理命令
 description: DocumentDB 中支持的 createUser、updateUser、dropUser、usersInfo 以及用户角色成员关系字段。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/security/user-commands.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/security/user-commands.md
 weight: 20
-translation_source_sha256: 82d3b6712061796c5308655c7e5d563c1ae2cc36690694eb5a9112f8acee4ddc
+translation_source_sha256: 3a286d347cb8f2069dd079886160bdfcac03e53cd72be2a817cb14a0174acd2e
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

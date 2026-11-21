@@ -2,11 +2,11 @@
 title: 入门指南
 description: 选择 Docker 或 Linux 软件包，创建 DocumentDB 实例，并通过 shell、驱动程序或编辑器插入和读取你的第一个文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/documentdb.github.io/blob/90cfa088351557cd618034dfc00ab817c35a5f76/app/services/articleService.ts
-upstream_ref: website 90cfa08; DocumentDB 1.0
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/documentdb.github.io/blob/4a83a0712149e101a2bbb38934bed36497cdf40f/app/services/articleService.ts
+upstream_ref: website 4a83a07; DocumentDB 1.2.0
 weight: 10
-translation_source_sha256: 07bd408774dc89ef027998ca6954f1886788fb33f9a99451245fc02361dbd2ab
+translation_source_sha256: 5aed49740c028b5ccda27893899406fbddcb15dc763fec62bb4933dbc2e96553
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

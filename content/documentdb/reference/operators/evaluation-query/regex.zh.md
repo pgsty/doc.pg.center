@@ -2,10 +2,10 @@
 title: $regex
 description: $regex 运算符提供正则表达式功能，用于在查询中进行模式匹配，支持灵活的字符串匹配和搜索。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/evaluation-query/$regex.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/evaluation-query/$regex.md
 weight: 40
-translation_source_sha256: 165c84867b77414fc88e9520fd0cf28db557b10f1f50572294f40434b8ec979d
+translation_source_sha256: fd55a958a660f2974948e015e7dbf5cc46f2bf800844d3519af249f5e2941680
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

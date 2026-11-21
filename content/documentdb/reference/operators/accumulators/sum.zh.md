@@ -2,10 +2,10 @@
 title: $sum
 description: $sum 运算符根据筛选条件计算字段值的总和
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$sum.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$sum.md
 weight: 170
-translation_source_sha256: f5e7a71db14a06d70ddb79a1f7dc80ad266c5f4611c4a4e7ecb9ce6f49f4e792
+translation_source_sha256: e0d5b78e57b1ee0b6d826cbe1a583d591ad82dbd823627b5be288024ffd9a3ad
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

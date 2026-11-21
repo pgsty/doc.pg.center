@@ -2,10 +2,10 @@
 title: $not
 description: $not 运算符对指定表达式执行逻辑非运算，选择不匹配该表达式的文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/logical-query/$not.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/logical-query/$not.md
 weight: 30
-translation_source_sha256: 3c7822171ac99b90829b7b50c84ab8554808cc8b8b2522f9040140238e404881
+translation_source_sha256: 49fd7ae6dbaa96689c30d0c9ea3beb8c30b950e70f1590c64f339e9e79cc643d
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

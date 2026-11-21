@@ -2,10 +2,10 @@
 title: $second
 description: $second 运算符从日期值中提取秒分量。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$second.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$second.md
 weight: 190
-translation_source_sha256: c13557e008585a87daf5b97aeed88efc57ba1a0b6f1555b9e35ecf2cba5e548b
+translation_source_sha256: 618eeb7ce99d8075820095ee528b66465d0176cc507d458e66e91e6b07f709ca
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

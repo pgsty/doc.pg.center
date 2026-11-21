@@ -2,10 +2,10 @@
 title: $pop
 description: $pop 运算符用于移除数组的第一个或最后一个元素。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-update/$pop.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-update/$pop.md
 weight: 60
-translation_source_sha256: 660b66fbfc687c763405f002bcba3087f860b45148e57e6980a3eea3c5785c5c
+translation_source_sha256: 05a169d9f0acb8b74d5f5f935112525f4e7f8da7eae1d55477168cd6d6918083
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

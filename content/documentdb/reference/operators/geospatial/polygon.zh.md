@@ -2,10 +2,10 @@
 title: $polygon
 description: $polygon 运算符为地理空间查询定义多边形，用于查找不规则形状内的位置。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/geospatial/$polygon.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/geospatial/$polygon.md
 weight: 110
-translation_source_sha256: 902fbc69eb94891eb008428d6fe1c84c01c7f41ba8b8df5ebb5881a30eba0fe8
+translation_source_sha256: 1f78b9b23e0acb9897df1e424ddb2a7d8ccfe8213faecb9a35e8750f6aea18f4
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

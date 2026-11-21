@@ -2,10 +2,10 @@
 title: $or
 description: $or 运算符通过逻辑或运算连接查询子句，返回至少满足一个指定条件的文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/logical-query/$or.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/logical-query/$or.md
 weight: 40
-translation_source_sha256: 9358d8a1155fecd113269cb1a714331bfdc917d7b31bbea72120877aa5d090e3
+translation_source_sha256: 1f2e47365b4ccf9e532cbe9788a37d1c88df653b6a81b31876bf3c9015c95de2
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

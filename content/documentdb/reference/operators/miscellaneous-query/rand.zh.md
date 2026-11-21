@@ -2,10 +2,10 @@
 title: $rand
 description: $rand 运算符生成介于 0 和 1 之间的随机浮点值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/miscellaneous-query/$rand.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/miscellaneous-query/$rand.md
 weight: 30
-translation_source_sha256: 9c3249c341368fa61ad376800d1d059a95c06bfa7b74b3a1119e8e3e034e75c8
+translation_source_sha256: 3fd6cda27a4a35130b80424a1eae31dc25653ed65ae44c37e0ebb0c90a7df04b
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

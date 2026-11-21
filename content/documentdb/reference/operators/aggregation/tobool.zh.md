@@ -2,10 +2,10 @@
 title: $toBool
 description: $toBool 运算符将表达式转换为布尔类型
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$tobool.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$tobool.md
 weight: 340
-translation_source_sha256: 08606ac0d4ad76b6b959c6cd4519834a2e36adcccc363c6a9df32583eab1718e
+translation_source_sha256: cbc06496ffe2974151449fed4c599714c50fb9cdef61a2953c1f2d65e8ce4a7e
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

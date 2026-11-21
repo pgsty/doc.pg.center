@@ -2,10 +2,10 @@
 title: $text
 description: $text 运算符对已建立索引的字符串字段内容执行文本搜索，实现全文搜索功能。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/evaluation-query/$text.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/evaluation-query/$text.md
 weight: 50
-translation_source_sha256: 146912affbc0f6b72038837f81b9dc520ba26f09a27be0ecd096831c18667e90
+translation_source_sha256: 4d58131eca03f0205635472c574a1e78dd6809ca804720cd7928cd1fa15fa1c7
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

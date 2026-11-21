@@ -2,10 +2,10 @@
 title: dbStats
 description: 返回当前逻辑 DocumentDB 数据库的统计信息。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/diagnostic/dbStats.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/diagnostic/dbStats.md
 weight: 50
-translation_source_sha256: a42cdd4ac15f4256164266269fd9ccb70f026e56275561cc757c01e19eea29ee
+translation_source_sha256: 2872f82e33489f78a960344a78c41e0c8af9cc3b8a2a1b54087691810a53a3db
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

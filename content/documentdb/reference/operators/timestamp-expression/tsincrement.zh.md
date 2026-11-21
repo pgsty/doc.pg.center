@@ -2,10 +2,10 @@
 title: $tsIncrement
 description: $tsIncrement 运算符提取时间戳值中的增量部分。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/timestamp-expression/$tsincrement.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/timestamp-expression/$tsincrement.md
 weight: 10
-translation_source_sha256: 13cf8675e64b743ee82c91a8d9750082ace58a67ae4d15ba7b58356ab8a0d386
+translation_source_sha256: 3d7813f35246d99f8552b18e81e136bb56e7c7b06efc18391eb89bee79d64e31
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

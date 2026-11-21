@@ -2,10 +2,10 @@
 title: 事务命令
 description: 使用 DocumentDB 会话和事务元数据提交或中止事务。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/sessions/transaction-commands.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/sessions/transaction-commands.md
 weight: 20
-translation_source_sha256: 30e6b6ab3888e1bbedb17a4ba823a0e66486802a3394882e89b574f94a816ea0
+translation_source_sha256: 355a5553faa5e1dcbfb5dd6502c71a4a3880f11e7ddb3368bd2682c92a47fa25
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

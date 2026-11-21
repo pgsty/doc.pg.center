@@ -2,10 +2,10 @@
 title: $replaceWith
 description: DocumentDB 中的 $replaceWith 运算符在将文档替换为指定文档后返回一个文档
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$replacewith.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$replacewith.md
 weight: 260
-translation_source_sha256: f129ccdd13fb9a35dc381a7375b22c1dd358b002b567a506c2592b998fa71c08
+translation_source_sha256: 5e23e7d4c6da996b58876930d3af9e0f6856d29104ca0987a1d2e94d4c6167ef
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

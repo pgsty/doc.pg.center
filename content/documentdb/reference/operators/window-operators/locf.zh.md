@@ -2,10 +2,10 @@
 title: $locf
 description: $locf 运算符在窗口查询的分区内，将最后观测到的非 null 值向后续文档传播。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/window-operators/$locf.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/window-operators/$locf.md
 weight: 90
-translation_source_sha256: c6eb29bb4c815545f839e786c86bd56205e82035c39f2f689cca680531297907
+translation_source_sha256: 090765e085adab72bc15b5f00d0cf0f948de17e54f424ecf9a5b932bc8979583
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

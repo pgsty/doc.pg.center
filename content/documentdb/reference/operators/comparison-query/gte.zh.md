@@ -2,10 +2,10 @@
 title: $gte
 description: $gte 运算符获取字段值大于或等于指定值的文档
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/comparison-query/$gte.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/comparison-query/$gte.md
 weight: 40
-translation_source_sha256: 55ec538f374c93c1e01f5e598712d22591fe02a63e4029f7312a2cc6d29f1ae9
+translation_source_sha256: 8dc17c8a858228ce5e3ea8ab95f66316d75a4cf5d9b0ba718451165f83bf931e
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

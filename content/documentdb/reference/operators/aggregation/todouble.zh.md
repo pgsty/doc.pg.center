@@ -2,10 +2,10 @@
 title: $toDouble
 description: $toDouble 运算符将表达式转换为 Double 值
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$todouble.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$todouble.md
 weight: 370
-translation_source_sha256: d4a73d71c04c7c400c5a16726306ef0e5c5fb2e3da790e5547f8cbdda6c92026
+translation_source_sha256: decb5c50173a213f41397d1be35c81677180d6301948b0a98009fd17768a0832
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

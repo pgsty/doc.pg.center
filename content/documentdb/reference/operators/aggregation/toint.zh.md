@@ -2,10 +2,10 @@
 title: $toInt
 description: $toInt 运算符将表达式转换为整数
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$toint.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$toint.md
 weight: 380
-translation_source_sha256: b0eae58922af9ae09800dce32e751921c24a2c96186f22636c2540a270ba8f7b
+translation_source_sha256: 280c52431d35f2ff66dc2f750a1ea17721355cbb6cd64b19c1f5a6fe69b69ad6
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

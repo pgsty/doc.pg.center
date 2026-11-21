@@ -2,10 +2,10 @@
 title: $meta
 description: $meta 运算符随返回的数据集一同返回计算得到的元数据列。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/projection/$meta.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/projection/$meta.md
 weight: 10
-translation_source_sha256: 1aa323f7b3ccd8a386516b2e8c51c2fafa8c3848c9cdc374df94c506934a81a1
+translation_source_sha256: 3212476f2e5c14f5a965ed25276779612d7183b61c9ea30cd1ca5ce5d4aa78fc
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

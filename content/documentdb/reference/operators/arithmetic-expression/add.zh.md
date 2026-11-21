@@ -2,10 +2,10 @@
 title: $add
 description: $add 运算符返回两个数字的和，或日期与数字的和。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/arithmetic-expression/$add.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/arithmetic-expression/$add.md
 weight: 20
-translation_source_sha256: 4d0c122fb9f4b1deb38dd15745141d1b70cbad727c539eb748b2106471ce791b
+translation_source_sha256: a959ffc66001e84cba5cb576f0bde54347710344ebe4eb74495e5acc93cb288e
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $bitXor
 description: $bitXor 运算符对整数值执行按位异或运算。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/bitwise/$bitxor.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/bitwise/$bitxor.md
 weight: 40
-translation_source_sha256: 92d87dc8c5a5f7afd5d42df96e0bcc53dae9e15cc5ae3a12cc8eca611028be3d
+translation_source_sha256: b4cf9c1e373029593aac12876fd155ca08ff323fac57ed217e8c84805d8afcbe
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

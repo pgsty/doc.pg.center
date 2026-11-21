@@ -2,10 +2,10 @@
 title: $floor
 description: $floor 运算符返回小于或等于指定数字的最大整数
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/arithmetic-expression/$floor.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/arithmetic-expression/$floor.md
 weight: 60
-translation_source_sha256: 0dd16aebb5b988bce1071909abd64d8d3a1b1387f500fee2153dc6ed87de3fb6
+translation_source_sha256: 529591dc9eb38ab21a9ca28df4bb3f955f800b68ab872c6f84ac58dc6eb0225e
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

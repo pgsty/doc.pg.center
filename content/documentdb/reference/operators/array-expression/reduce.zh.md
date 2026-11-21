@@ -2,10 +2,10 @@
 title: $reduce
 description: $reduce 运算符对数组中的每个元素应用表达式，并将结果累积为单个值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-expression/$reduce.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-expression/$reduce.md
 weight: 90
-translation_source_sha256: becd30530f2da9ca4257487ddcac3beaa457225aa930fe438dcfa125f61975b8
+translation_source_sha256: 5fdc23b60b9ae08f9e329b863600d3b8330d3733675f231a113e393afaf71e24
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

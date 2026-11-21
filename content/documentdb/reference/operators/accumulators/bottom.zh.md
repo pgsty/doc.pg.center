@@ -2,10 +2,10 @@
 title: $bottom
 description: $bottom 运算符返回按一个或多个字段排序后的查询结果集中的最后一个文档
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$bottom.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$bottom.md
 weight: 20
-translation_source_sha256: 13c4f892f356734dccec4fd5d591de2f73759acad653f07abc00479a7945eb12
+translation_source_sha256: 17577ffd4cacaf1dd5bb23b0561eae421b3b75ad5073a842c1e432bf9035ebe6
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

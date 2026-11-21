@@ -2,12 +2,12 @@
 title: 离线 / 隔离安装
 description: 在联网机器上准备完整的依赖闭包，并在无互联网访问的主机上安装 DocumentDB。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/documentdb.github.io/blob/90cfa088351557cd618034dfc00ab817c35a5f76/app/services/articleService.ts
-upstream_ref: website 90cfa08; DocumentDB 1.0
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/documentdb.github.io/blob/4a83a0712149e101a2bbb38934bed36497cdf40f/app/services/articleService.ts
+upstream_ref: website 4a83a07; DocumentDB 1.2.0
 weight: 20
-translation_source_sha256: 0650ca39576e974e60eb6c37c91b9dee6289d29ae92c2e132f987c2e5f7893d3
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: 671a5633c52103627e718323f7f3c92e88f42b54856db382729afc026d9cf29a
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
 隔离主机也无法访问 PGDG，而 DocumentDB 需要从那里获取 PostgreSQL、`pg_cron`、`pgvector` 和 PostGIS，因此仅有发布文件还不够。请在与目标主机**发行版、版本和架构完全相同**的联网机器上，准备包含全部直接及间接依赖的软件包。
@@ -75,5 +75,5 @@ sudo dnf install -y --disablerepo='*' --enablerepo=documentdb-offline documentdb
 
 如果目标主机已安装 PostgreSQL、PGDG 扩展依赖（`postgresql-N-cron`、`-pgvector`、`-postgis-3`）以及 `jq`，则无需打包文件：
 
-- **只安装扩展，只需一个文件**：`sudo apt install ./ubuntu24.04-postgresql-18-documentdb_1.0-0_amd64.deb`。不包含网关，也不运行 `documentdb-setup`。
+- **只安装扩展，只需一个文件**：`sudo apt install ./ubuntu24.04-postgresql-18-documentdb_1.2-0_amd64.deb`。不包含网关，也不运行 `documentdb-setup`。
 - **使用发布文件安装全套组件**：将所选 PostgreSQL 主版本的五个软件包交给*同一次* `apt install` / `dnf install` 命令：`documentdb-N`、对应的 `postgresql-N-documentdb` / `postgresqlN-documentdb` 扩展、`documentdb-common`、`documentdb-gateway` 和 `documentdb-postgresql-tools`。仅使用 PostgreSQL 18 时，还可以加入可选的 `documentdb` 元软件包，它会选择 `documentdb-18`。本地文件安装时只会从已启用的仓库解析依赖，因此缺少依赖的软件包仍会安装失败。

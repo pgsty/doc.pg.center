@@ -2,12 +2,12 @@
 title: 软件包安装的运维
 description: 通过 Linux 软件包安装 DocumentDB 后的安全配置、管理、升级和卸载，以及已知的软件包安装问题。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/documentdb.github.io/blob/90cfa088351557cd618034dfc00ab817c35a5f76/app/services/articleService.ts
-upstream_ref: website 90cfa08; DocumentDB 1.0
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/documentdb.github.io/blob/4a83a0712149e101a2bbb38934bed36497cdf40f/app/services/articleService.ts
+upstream_ref: website 4a83a07; DocumentDB 1.2.0
 weight: 30
-translation_source_sha256: f5bb1676c7758824e7a5e29ff1d89d5a73b05aea60a54bf50bf848b2b8161959
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: 8a27fbc655971d61290a90365f637023dad85a96ac627e35820442dc23a6e945
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
 通过 Linux 软件包安装 DocumentDB 后的日常运维：保护端点、管理服务、执行 SQL、升级和卸载。请先按 [Linux 软件包快速入门](/documentdb/getting-started/packages/)完成安装。
@@ -18,7 +18,7 @@ translation_review: AI-assisted bilingual review; 2026-11-07
 
 在除私有机器外的任何地方使用之前：
 
-- 在 `/etc/documentdb/local/<major>/gateway.env` 中设置 `DOCUMENTDB_LISTEN_ADDR=127.0.0.1:10260` 以限制监听地址，然后重启服务；也可以通过防火墙限制对端口 `10260` 的访问。**重新运行 `documentdb-setup` 会在不提示的情况下将其重置为监听所有地址**，因此之后应使用 `grep DOCUMENTDB_LISTEN_ADDR /etc/documentdb/local/<major>/gateway.env` 再次检查。防火墙规则是更持久的控制措施。
+- 在 `/etc/documentdb/local/<major>/gateway.env` 中设置 `DOCUMENTDB_LISTEN_ADDR=127.0.0.1:10260` 以限制监听地址，然后重启服务；也可以通过防火墙限制对端口 `10260` 的访问。重新运行 `documentdb-setup` 会保留以此方式设置的回环地址，并打印 `Keeping gateway bind address`。
 - 为管理员设置强密码，并为各应用创建独立用户，避免共享 `admin`。
 
 ### 替换自签名证书 {#replace-the-self-signed-certificate}
@@ -81,7 +81,7 @@ sudo documentdb-setup --target-postgres-instance 18/main --admin-user admin
 
 选择此高级路径以在你自行管理的 PostgreSQL 中启用面向 SQL 的 DocumentDB 功能。它**不**安装网关、为驱动程序创建网络端点，也不运行 `documentdb-setup`。Shell、驱动程序和 VS Code 快速入门需要完整的堆栈。
 
-根据 PostgreSQL 主版本选择扩展软件包：Ubuntu 使用 `postgresql-N-documentdb`，EL9 使用 `postgresqlN-documentdb`。PostgreSQL 配置、启用扩展和服务重启均由你负责。除 `documentdb` 外，还必须创建 `documentdb_extended_rum`：`CREATE EXTENSION documentdb CASCADE` 不会自动创建后者，缺少它时所有索引创建操作都会失败。请按对应发布版的[手动软件包安装说明](https://github.com/documentdb/documentdb/blob/v1.0-0/packaging/README.md)操作；如果已经安装 PostgreSQL 及扩展的全部依赖，也可以按[仅安装扩展的离线说明](/documentdb/linux-packages/offline/#smaller-offline-cases)操作。
+根据 PostgreSQL 主版本选择扩展软件包：Ubuntu 使用 `postgresql-N-documentdb`，EL9 使用 `postgresqlN-documentdb`。PostgreSQL 配置、启用扩展和服务重启均由你负责。除 `documentdb` 外，还必须创建 `documentdb_extended_rum`：`CREATE EXTENSION documentdb CASCADE` 不会自动创建后者，缺少它时所有索引创建操作都会失败。请按对应发布版的[手动软件包安装说明](https://github.com/documentdb/documentdb/blob/v1.2-0/packaging/README.md)操作；如果已经安装 PostgreSQL 及扩展的全部依赖，也可以按[仅安装扩展的离线说明](/documentdb/linux-packages/offline/#smaller-offline-cases)操作。
 
 ## 在软件包管理的私有实例上执行 SQL {#running-sql-against-a-package-managed-private-instance}
 
@@ -99,7 +99,7 @@ SELECT extname, extversion FROM pg_extension WHERE extname LIKE 'documentdb%';
 
 ## 升级 {#upgrading}
 
-通过 v0.116 或 v0.117 软件包安装的实例，可以原地升级到 1.0。应当一并升级整套组件；仅升级 `postgresql-N-documentdb` 不会更新网关、工具、公共组件或 `documentdb-N`。以下步骤使用 systemd，不涵盖没有 systemd 的主机。对于软件包管理的私有 PostgreSQL 18 实例：
+通过 v0.116、v0.117 或 1.0 软件包安装的实例，在任一通道都可原地升级到 1.2；若要在每次新版本发布后立即获取，可[切换到 `latest`](#switch-from-stable-to-latest)。应当一并升级整套组件；仅升级 `postgresql-N-documentdb` 不会更新网关、工具、公共组件或 `documentdb-N`。以下步骤使用 systemd，不涵盖没有 systemd 的主机。对于软件包管理的私有 PostgreSQL 18 实例：
 
 > [!WARNING]
 > 曾运行过 1.0 发布候选版（RC1 或 RC2）的主机无升级路径。请将其迁移至干净主机或新建的空 PostgreSQL 实例，并遵循 [全新安装](/documentdb/getting-started/packages/)。仅移除包不会创建全新数据库：包移除会保留 PostgreSQL 数据和数据库内内容，后续设置运行将复用已初始化的数据目录。
@@ -151,6 +151,29 @@ sudo systemctl start documentdb-gateway-local@18.service
 
 对于接管的 PostgreSQL 实例，配置向导从不重启 PostgreSQL。升级前先停止网关（`documentdb-gateway-local@18.service`），自行重启由运维人员管理的 PostgreSQL 服务，再运行 `documentdb-setup --pg-version 18 --target-postgres-instance 18/main --admin-user admin`（替换为实际集群名）；它会更新扩展，然后启动网关。如果向导需要修改 `shared_preload_libraries`，它会直接退出，不更新扩展：请重启 PostgreSQL，再运行一次向导。手动操作时，使用该实例自己的 `psql` 连接方式。
 
+## 从 `stable` 切换到 `latest` {#switch-from-stable-to-latest}
+
+两个通道均提供 1.2；`stable` 接收新版本的时间晚于 `latest`。若要让主机在新版本发布后立即获取，将其仓库配置文件指向 `latest`，然后升级软件包。升级只能向前进行：旧版本无法正确使用新版本已更新的数据，因此请先备份数据目录。
+
+```bash
+# Debian / Ubuntu
+sudo sed -i 's/ stable ubuntu24$/ latest ubuntu24/' /etc/apt/sources.list.d/documentdb.list &&
+sudo apt update &&
+sudo apt upgrade
+
+# EL9: use this instead of the apt commands above
+sudo sed -i 's|/rpm/rhel9$|/rpm/latest/rhel9|' /etc/yum.repos.d/documentdb.repo &&
+sudo dnf upgrade
+```
+
+然后使用安装时指定的 PostgreSQL 主版本，以及当时使用的 `--data-dir` 或 `--pg-port` 参数，重新运行配置向导。它重启 PostgreSQL 一次以加载新库，更新扩展并启动网关；未指定 `--admin-user` 时，会保留所有 admin 用户及密码：
+
+```bash
+sudo documentdb-setup --pg-version 18 --yes
+```
+
+对于接管的 PostgreSQL 实例，改为运行 `sudo documentdb-setup --target-postgres-instance 18/main --yes`（替换为实际集群名称），然后执行它输出的重启和配置命令。
+
 ## 移除或重置 {#remove-or-reset}
 
 ### 新建环境：销毁由包管理的实例 {#greenfield-destroy-the-package-managed-instance}
@@ -178,13 +201,11 @@ sudo dnf remove documentdb-18 postgresql18-documentdb && sudo dnf autoremove
 sudo documentdb-setup --restore --pg-version 18
 ```
 
-在没有 systemd 的主机上，当前配置工具无法可靠地判断某个 nohup 网关进程属于哪个 PostgreSQL 主版本。如果只配置了一个 DocumentDB 主版本，请执行不指定主版本的恢复操作，以触发遗留网关进程的清理：
+在没有 systemd 的主机上，同样的按主版本恢复操作会停止配置向导为该版本启动的网关，其他主版本继续运行。没有有效记录的网关会被跳过；如果之后端口仍在监听，请找出占用端口的进程并停止它。配置向导以 `documentdb-gateway` 用户运行网关，因此即使在 root 的 `ss` 看不到 PID 的容器中，`sudo -u documentdb-gateway ss -lntp` 仍可显示其 PID。不指定主版本的恢复操作还会停止通过软件包二进制文件完整路径启动的 nohup 网关，但会从所有已配置的主版本中分离 DocumentDB；之后需为保留的主版本重新运行配置向导：
 
 ```bash
 sudo documentdb-setup --restore --yes
 ```
-
-如果在没有 systemd 的主机上配置了多个 DocumentDB 主版本，请安排维护窗口，并执行同样的不指定主版本的恢复操作。它会从所有已配置的主版本中分离 DocumentDB，并停止 nohup 网关。之后，为需要保留的主版本重新运行配置向导。在没有 systemd 的主机上，仅执行指定主版本的恢复操作并不够。
 
 恢复后重启接管的 PostgreSQL 服务，使受管配置的移除生效。不指定主版本、恢复多个版本时，需重启涉及的每个由运维人员管理的 PostgreSQL 服务。
 
@@ -213,8 +234,7 @@ sudo dnf remove documentdb-18 postgresql18-documentdb && sudo dnf autoremove
 | --- | --- | --- |
 | 状态 | 任意进程占用端口 10260 时，`documentdb-setup --status` 都可能报告为 "active" | **任何主机** |
 | 重启 | 重新运行 `documentdb-setup` 进行重启可能卡住；将输出重定向到文件可避免此问题 | 无 systemd |
-| 停止 | 指定主版本的 `documentdb-setup --restore --pg-version N` 无法停止 nohup 网关；请按前文没有 systemd 时分离既有实例的步骤操作 | 无 systemd |
-| 最小化 RHEL | 请先安装 `procps-ng`，否则 `--restore` 会报告成功，但网关仍继续提供服务，后续运行会报错 `Port 10260 is already in use` | 无 systemd |
+| 停止 | 指定主版本的 `documentdb-setup --restore --pg-version N` 会跳过没有有效记录的 nohup 网关；请按前文没有 systemd 时分离既有实例的步骤操作 | 无 systemd |
 
 **重要环境应优先选择使用 systemd 的主机**，让 systemd 管理服务生命周期，而不是交给配置脚本。
 

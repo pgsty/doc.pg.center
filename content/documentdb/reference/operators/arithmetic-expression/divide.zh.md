@@ -2,10 +2,10 @@
 title: $divide
 description: $divide 运算符将两个数字相除并返回商。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/arithmetic-expression/$divide.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/arithmetic-expression/$divide.md
 weight: 40
-translation_source_sha256: 62282032892367080a4bfe7e6fefb64ff16e5d1fcc3bb3c54fdd581e357137d8
+translation_source_sha256: 1fa614deca4f2912493c53c5f8185b93700061a85a7fe9c2b1573c57a2fdff42
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

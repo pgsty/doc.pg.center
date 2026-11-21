@@ -2,10 +2,10 @@
 title: $box
 description: $box 运算符使用坐标对定义矩形区域，供地理空间查询使用。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/geospatial/$box.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/geospatial/$box.md
 weight: 10
-translation_source_sha256: e00b1341cf5e4ba8ead3232e5ae6b3d4db7f66532b7721b0207c3196d5a9f6d3
+translation_source_sha256: 70b356ec9c5485b3672bc2742b8d52685903a14d41dc8148db33e36ef4f1d6b6
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

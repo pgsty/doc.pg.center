@@ -2,10 +2,10 @@
 title: $switch
 description: $switch 运算符用于依次对一系列条件求值，并根据第一个求值结果为 true 的条件返回值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/conditional-expression/$switch.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/conditional-expression/$switch.md
 weight: 30
-translation_source_sha256: 64fb39120372a6f855e56f924bea02ff3dc5597d9929849ec7d3bb01abab91d5
+translation_source_sha256: a442cd98eecce7bc80fb8f1a95559c80a05dbd61077f6caecf02ae614967294f
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

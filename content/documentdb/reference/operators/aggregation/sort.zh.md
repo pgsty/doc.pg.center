@@ -2,10 +2,10 @@
 title: $sort
 description: 聚合流水线中的 $sort 阶段用于按指定的一个或多个字段对流水线中的文档进行排序。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$sort.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$sort.md
 weight: 320
-translation_source_sha256: eb63e3d3ab8298902fe03b930b71d66698dc1566c79303889d2acd06ebb486c7
+translation_source_sha256: 2f61f2111079eedb69df763b9a31feed4543810728a333a5f606b1803de6252c
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

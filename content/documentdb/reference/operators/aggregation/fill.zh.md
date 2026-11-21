@@ -2,10 +2,10 @@
 title: $fill
 description: $fill 阶段允许根据指定的方法和条件填充文档中的缺失值。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$fill.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$fill.md
 weight: 110
-translation_source_sha256: 4da25555ea527599825a5c7bc594a0bce807b79bf1a0ed5f09fb1a22d66388e9
+translation_source_sha256: 6b75d31445879ee73a6f0cf4e7e000276194591e55f35592f55e11d4d888deec
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

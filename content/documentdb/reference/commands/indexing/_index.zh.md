@@ -1,11 +1,11 @@
 ---
 title: 索引
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/indexing/_metadata.description.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/indexing/_metadata.description.md
 description: DocumentDB 索引参考。
 weight: 40
-translation_source_sha256: 2e3837df57aebb026bfafbbf931f04a405477cf14258b79ac6b042c103997dc7
+translation_source_sha256: c5b8d046a1d44b910d4e54ebf9f15832e88c75e8f80788390669e1bb6c2c3e48
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

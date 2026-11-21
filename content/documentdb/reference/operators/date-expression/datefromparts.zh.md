@@ -2,10 +2,10 @@
 title: $dateFromParts
 description: $dateFromParts 运算符根据各个分量构造日期。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$datefromparts.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$datefromparts.md
 weight: 30
-translation_source_sha256: fff32a9221c60a8e27ce5feb46f2202e5868c095d31aaa1a9f663fca830ac4f9
+translation_source_sha256: 33de10a4b0c2c430fcbba29acc64b329888d0e6cfc5bc48b88dc7c27fb2d07be
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

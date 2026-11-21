@@ -2,10 +2,10 @@
 title: $currentDate
 description: $currentDate 运算符将字段值设置为当前日期，类型可以是 Date 或时间戳。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/field-update/$currentdate.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/field-update/$currentdate.md
 weight: 10
-translation_source_sha256: 037dfc08268d3a6ff2ab7e720ab781d86bf07dc786b2821899bf2f921608a8a1
+translation_source_sha256: 5a708f12512f57a2eb673dd08462b8dbf42879cf51c91a9e4384a4f9312f39e0
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

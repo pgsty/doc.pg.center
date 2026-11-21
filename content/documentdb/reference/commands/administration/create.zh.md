@@ -2,10 +2,10 @@
 title: create
 description: 创建 DocumentDB 集合或视图并配置其支持的选项。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/administration/create.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/administration/create.md
 weight: 20
-translation_source_sha256: 5f45b29202a483e06a991db02b7db8efa591bd93b4d30ca049fa2dc192659b19
+translation_source_sha256: b4c1777e4ec2aa301e5a476a027c89af8cc34d24f94b514875e6c8c0e2a845b5
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $bucketAuto
 description: $bucketAuto 阶段根据分组表达式，自动将文档分配到指定数量的桶中。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$bucketauto.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$bucketauto.md
 weight: 30
-translation_source_sha256: 58ecc124a09ae9670db610d92a786c19f00027b87868f0009ff12e534a6c8d02
+translation_source_sha256: 1262961ec57908eefa45bb8811d4511a10c9f2ba6ba0d79c572f93ca66ccb66f
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $center
 description: $center 运算符使用传统坐标对指定圆形区域，供 $geoWithin 查询使用。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/geospatial/$center.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/geospatial/$center.md
 weight: 20
-translation_source_sha256: d21c7ed5f8da89d9ee0144ada13c26851783b9dfcb61c23758fdaa926172d9a1
+translation_source_sha256: 82bc87c2316b95165f89ee89d2bdec26068b4758ebdf637ef47e8410fea7cd1d
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

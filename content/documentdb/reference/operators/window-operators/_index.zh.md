@@ -1,11 +1,11 @@
 ---
 title: 窗口运算符
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/window-operators/_metadata.description.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/window-operators/_metadata.description.md
 description: DocumentDB 窗口运算符参考。
 weight: 280
-translation_source_sha256: c921e15853cbf86809e44e712507c0d4b5210bd68baf222c0c59f8188ab37d2a
+translation_source_sha256: f20b0bb1c01ce39ab3a5f0195ef70193af0b1f6e017323c6a80ad89935991bb6
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

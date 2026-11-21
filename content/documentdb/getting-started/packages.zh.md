@@ -2,25 +2,25 @@
 title: Linux 软件包快速入门
 description: 使用 Ubuntu APT 或 EL9 RPM/dnf 包在 Linux 上安装 DocumentDB，设置私有 PostgreSQL 实例，并运行你的第一个查询。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/documentdb.github.io/blob/90cfa088351557cd618034dfc00ab817c35a5f76/app/services/articleService.ts
-upstream_ref: website 90cfa08; DocumentDB 1.0
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/documentdb.github.io/blob/4a83a0712149e101a2bbb38934bed36497cdf40f/app/services/articleService.ts
+upstream_ref: website 4a83a07; DocumentDB 1.2.0
 weight: 30
-translation_source_sha256: 190cfa7bc91b29eeb0b037b37ae4c342830c2c9adfab8fe7139cf18855a68366
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: a942d977f5bd22ab6c1daae6cd2a5268cd98b86514198aa7a2513618ee49fbc4
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
 从官方发布的软件包仓库安装 DocumentDB，在自己的主机上获得兼容 MongoDB 的端点。
 
-当前正式版为 **Ubuntu 24.04 和 EL9、PostgreSQL 17 或 18、amd64 或 arm64** 提供全套组件，包括扩展、网关、配置向导和 systemd 单元。EL9 包括 Rocky Linux、AlmaLinux、CentOS Stream，以及已注册的 Red Hat Enterprise Linux；[Linux 软件包安装](https://documentdb.io/packages?method=packages)页面提供各发行版所需的依赖准备命令。从 v0.116 起，官方有意缩小了预编译软件包的支持范围。网站仓库只镜像当前版本的发布文件，不会沿用旧版软件包来造成其他目标平台也获得当前版本支持的假象。
+当前正式版为 **Ubuntu 24.04 和 EL9、PostgreSQL 17 或 18、amd64 或 arm64** 提供全套组件，包括扩展、网关、配置向导和 systemd 单元。EL9 包括 Rocky Linux、AlmaLinux、CentOS Stream，以及已注册的 Red Hat Enterprise Linux；[Linux 软件包安装](https://documentdb.io/packages?method=packages)页面提供各发行版所需的依赖准备命令。从 v0.116 起，官方有意缩小了预编译软件包的支持范围。网站仓库只镜像正式发布文件，不会沿用旧版软件包来造成其他目标平台也获得当前版本支持的假象。
 
 **推荐做法：** 安装全套组件，然后创建一个新的私有 PostgreSQL 18 实例。命令会检测执行它们的 Linux 主机架构。若要使用容器，或在 macOS/Windows 上试用，请选择 [Docker 安装](https://documentdb.io/packages?method=docker)。
 
 > [!IMPORTANT]
-> 如果已经通过软件包运行 v0.116 或 v0.117，请按[升级指南](/documentdb/linux-packages/#upgrading)操作，不要重新安装。运行过 1.0 发布候选版的主机没有受支持的升级路径，请改用全新主机。卸载软件包会保留数据库文件，重新安装也不会重置数据。
+> 如果已经通过软件包运行 DocumentDB，请按[升级指南](/documentdb/linux-packages/#upgrading)操作，不要重新安装。运行过 1.0 发布候选版的主机没有受支持的升级路径，请改用全新主机。卸载软件包会保留数据库文件，重新安装也不会重置数据。
 
 > [!NOTE]
-> 需要其他发行版或 PostgreSQL 主版本？欢迎社区自行构建。检出 `v1.0-0` 标签，传入 `--version 1.0.0`，使用支持版本参数的[打包脚本](https://github.com/documentdb/documentdb/blob/v1.0-0/packaging/README.md)。`build_packages.sh` 构建扩展，`gateway/build_gateway_packages.sh` 构建网关，`build_extra_packages.sh` 构建公共组件、工具、独立部署组件和元软件包。PostgreSQL 15 仅支持扩展，因为配置工具要求 PostgreSQL 16 或更新版本。这些按需构建的产物不属于 documentdb.io 托管的正式发布文件。
+> 需要其他发行版或 PostgreSQL 主版本？在 Debian 13 和 14、Ubuntu 26.04 和 26.10 上，[PGDG 以 `postgresql-N-documentdb` 提供扩展](https://github.com/documentdb/docs/blob/main/getting-started/prebuilt-packages.md#pgdg-extension-packages)，适用于 PostgreSQL 15 至 18。它只包含扩展，不含网关或配置向导。其他情况也欢迎社区自行构建。检出 `v1.2-0` 标签，传入 `--version 1.2.0`，使用支持版本参数的[打包脚本](https://github.com/documentdb/documentdb/blob/v1.2-0/packaging/README.md)。`build_packages.sh` 构建扩展，`gateway/build_gateway_packages.sh` 构建网关，`build_extra_packages.sh` 构建公共组件、工具、独立部署组件和元软件包。PostgreSQL 15 仅支持扩展，因为配置工具要求 PostgreSQL 16 或更新版本。这些按需构建的产物不属于 documentdb.io 托管的正式发布文件。
 
 无需预先安装 PostgreSQL，配置向导会创建并管理自己的实例。不过，安装过程会添加 PGDG 仓库，并安装 PostgreSQL、PostGIS 等约 160 个软件包（约 140 MB），因此请选用允许配置 PGDG 仓库的主机。
 
@@ -33,10 +33,16 @@ curl -fsSLo documentdb-install.sh https://documentdb.io/install.sh &&
 sudo sh documentdb-install.sh
 ```
 
-此操作会从软件包仓库安装当前版本（v1.0-0），使用 PostgreSQL 18；要使用 PostgreSQL 17，请添加 `--pg-major 17`。
-如果主机已配置 DocumentDB，安装程序只会报告状态，不会执行升级。要将现有安装升级到 1.0，请按[升级指南](/documentdb/linux-packages/#upgrading)操作。
+此操作会从软件包仓库的 `latest` 通道安装当前版本（v1.2-0），使用 PostgreSQL 18；要使用 PostgreSQL 17，请添加 `--pg-major 17`。主机会保留该通道，因此 `apt upgrade` 和 `dnf upgrade` 会跟随 `latest` 升级到新版本。要选择其他版本，可添加以下选项之一：
+
+- `--stable`：使用 `stable` 通道，目前提供 v1.2-0，接收新版本的时间晚于 `latest`。
+- `--version 1.0.0`：从 GitHub 发布文件下载并安装指定版本（1.0.0 或更高）。不会配置 DocumentDB 仓库，因此包管理器不会升级它。
+
+安装程序只用于全新安装：主机已安装 DocumentDB 时，它不会修改任何软件包。要升级现有安装，请按[升级指南](/documentdb/linux-packages/#upgrading)操作。
 
 ## 安装 {#install}
+
+这些命令使用 `latest` 通道。若要使用 `stable`（v1.2-0），请将 DocumentDB APT 配置行中的 `latest` 改为 `stable`；EL9 则使用 `baseurl=https://documentdb.io/rpm/rhel9`。
 
 <span id="ubuntu-24-04-postgre-sql-18-apt"></span>
 
@@ -48,7 +54,7 @@ sudo apt install -y curl ca-certificates gnupg && \
 curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor --yes -o /usr/share/keyrings/postgresql.gpg && \
 echo "deb [signed-by=/usr/share/keyrings/postgresql.gpg] https://apt.postgresql.org/pub/repos/apt noble-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list >/dev/null && \
 curl -fsSL https://documentdb.io/documentdb-archive-keyring.gpg | sudo gpg --dearmor --yes -o /usr/share/keyrings/documentdb-archive-keyring.gpg && \
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/documentdb-archive-keyring.gpg] https://documentdb.io/deb stable ubuntu24" | sudo tee /etc/apt/sources.list.d/documentdb.list >/dev/null && \
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/documentdb-archive-keyring.gpg] https://documentdb.io/deb latest ubuntu24" | sudo tee /etc/apt/sources.list.d/documentdb.list >/dev/null && \
 sudo apt update && \
 sudo apt install -y documentdb-18
 ```
@@ -69,7 +75,7 @@ sudo rpm --import https://documentdb.io/documentdb-archive-keyring.gpg && \
 printf '%s\n' \
   '[documentdb]' \
   'name=DocumentDB Repository' \
-  'baseurl=https://documentdb.io/rpm/rhel9' \
+  'baseurl=https://documentdb.io/rpm/latest/rhel9' \
   'enabled=1' \
   'gpgcheck=1' \
   'gpgkey=https://documentdb.io/documentdb-archive-keyring.gpg' | sudo tee /etc/yum.repos.d/documentdb.repo >/dev/null && \
@@ -91,7 +97,7 @@ sudo rpm --import https://documentdb.io/documentdb-archive-keyring.gpg && \
 printf '%s\n' \
   '[documentdb]' \
   'name=DocumentDB Repository' \
-  'baseurl=https://documentdb.io/rpm/rhel9' \
+  'baseurl=https://documentdb.io/rpm/latest/rhel9' \
   'enabled=1' \
   'gpgcheck=1' \
   'gpgkey=https://documentdb.io/documentdb-archive-keyring.gpg' | sudo tee /etc/yum.repos.d/documentdb.repo >/dev/null && \
@@ -183,4 +189,4 @@ sudo rm -f /etc/yum.repos.d/documentdb.repo
 sudo dnf clean all
 ```
 
-若要继续使用旧目标平台，请使用对应 GitHub 发布版的文件，或从匹配的源码标签自行构建。这两种方式都不属于当前托管仓库的支持范围。
+若要继续使用旧目标平台，可使用对应版本的 GitHub 发布文件，或从匹配的源码标签构建。Debian 13 还可选择 [PGDG 的扩展包](https://github.com/documentdb/docs/blob/main/getting-started/prebuilt-packages.md#pgdg-extension-packages)；切换到它属于更换提供商，不是原地升级。这些路径都不属于当前托管软件包的支持范围。

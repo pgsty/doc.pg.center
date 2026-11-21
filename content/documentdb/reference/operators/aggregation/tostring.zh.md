@@ -2,10 +2,10 @@
 title: $toString
 description: $toString 运算符将表达式转换为字符串
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$tostring.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$tostring.md
 weight: 410
-translation_source_sha256: a4d1b847a0ebccd7d548488ab81a97bc7a620b292ceeb1f405a85b03fb55bd84
+translation_source_sha256: 56664927c6dab23c08f4f51fd438634ea6e9f4e644e6bce0bca71bb7a3d0f158
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: validate
 description: 使用支持的验证模式验证 DocumentDB 集合元数据和索引。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/diagnostic/validate.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/diagnostic/validate.md
 weight: 90
-translation_source_sha256: 0905a6cece8b49dd7e3126ec3b35866880ec537fa043f00e1b2fb1bc766af8af
+translation_source_sha256: 6a221d9da6f9b6bbcd5c3dfca855880d7442d82cd76784c66c782af55b102573
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

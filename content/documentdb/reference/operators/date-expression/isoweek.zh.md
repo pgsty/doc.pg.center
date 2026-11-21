@@ -2,10 +2,10 @@
 title: $isoWeek
 description: $isoWeek 运算符返回 ISO 8601 格式的年内周编号，范围为 1 到 53。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$isoweek.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$isoweek.md
 weight: 140
-translation_source_sha256: 0295aa58e779ce7c03806d33c1cfa9816b914ad777d053989a57d1aa176134d7
+translation_source_sha256: 5e98f615f5393e62f222d881883a229140a7cb81bd93a993214a9a22c6bd237a
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $pullAll
 description: $pullAll 运算符用于从数组中移除指定值的所有实例。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-update/$pullall.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-update/$pullall.md
 weight: 90
-translation_source_sha256: 139b99a9d57d115c9deecff6682a04a5c627aadb583023bb9c3de8061dd07c4a
+translation_source_sha256: de600e4cb5ecfdb7b2d6a1ba58bfebe33593b4bf48d931bd7cdf2f845f7f08f2
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

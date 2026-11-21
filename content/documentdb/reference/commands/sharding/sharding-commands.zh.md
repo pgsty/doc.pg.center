@@ -2,14 +2,16 @@
 title: 分片命令
 description: DocumentDB 中支持的 shardCollection、reshardCollection、unshardCollection 和 getShardMap 线协议字段。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/sharding/sharding-commands.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/sharding/sharding-commands.md
 weight: 10
-translation_source_sha256: aad8282d16437a97805556f494a6beb04a4288a08fdc7dbf108aee7fb5f8105f
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: 09aef196d14e0bcb4e3713721ac7762ff4969ba3826242434801373e16420f9e
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
 分片行为和选项支持取决于已安装的实现。
+
+其他行为见[附加模块部分](/documentdb/reference/commands/contrib/)。
 
 <span id="shard-collection-and-reshard-collection"></span>
 

@@ -2,11 +2,11 @@
 title: Python 快速入门
 description: 使用 Docker 或 Linux 软件包通过 PyMongo 连接到 DocumentDB，并从 Python 运行你的首个查询。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/documentdb.github.io/blob/90cfa088351557cd618034dfc00ab817c35a5f76/app/services/articleService.ts
-upstream_ref: website 90cfa08; DocumentDB 1.0
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/documentdb.github.io/blob/4a83a0712149e101a2bbb38934bed36497cdf40f/app/services/articleService.ts
+upstream_ref: website 4a83a07; DocumentDB 1.2.0
 weight: 60
-translation_source_sha256: 589ee0f5e1fb0e08c1cf1f006210e43ad0d1cf2af059f51b22effa8f826a2979
+translation_source_sha256: 331db9bcd2d84e1ac96151b3d4168baddbb9acf3be6103da249070a30222d9ea
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

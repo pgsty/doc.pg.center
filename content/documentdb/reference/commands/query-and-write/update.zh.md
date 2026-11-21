@@ -2,11 +2,11 @@
 title: update
 description: DocumentDB 中的 update 命令用于修改集合中匹配特定筛选条件的文档
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/query-and-write/update.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/query-and-write/update.md
 weight: 70
-translation_source_sha256: f9b97da024b66c176db1643d00c551d5c3fb8d71ca4134ee61f4bc338fc2d271
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: e9685a109ead31ad483955e67fac3b4a2cc27a6933b8c0117a7c4710f77f00d0
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
 `update` 命令用于修改集合中的现有文档。`update` 命令可根据筛选条件更新一个或多个文档。字段的值可以更改，可以添加新字段和值，也可以移除现有字段。
@@ -36,7 +36,7 @@ translation_review: AI-assisted bilingual review; 2026-11-07
 | **`upsert`** | (可选) 布尔值，若无文档匹配，则插入新文档；默认为 `false`。 |
 | **`arrayFilters`** | (可选) 指定运算符更新中命名位置标识符的文档数组；与流水线更新不兼容。 |
 | **`sort`** | (可选) 指定按顺序选择第一个匹配文档的文档；不可与 `multi: true` 同时使用。 |
-| **`collation`** | (可选) 指定比较规则的文档；需配合 `documentdb_core.enableCollation` 使用，且集群版本为 1.1 或更高。 |
+| **`collation`** | (可选) 指定比较规则的文档；需配合 `documentdb_core.enableCollation` 使用，且集群版本为 1.2 或更高。 |
 {.fields}
 
 ## 示例：记录修订后的延迟 {#example-record-a-revised-delay}

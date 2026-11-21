@@ -2,11 +2,11 @@
 title: Node.js 快速入门
 description: 使用 MongoDB Node.js 驱动程序通过 Docker 或 Linux 软件包连接到 DocumentDB，并运行你的首个查询。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/documentdb.github.io/blob/90cfa088351557cd618034dfc00ab817c35a5f76/app/services/articleService.ts
-upstream_ref: website 90cfa08; DocumentDB 1.0
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/documentdb.github.io/blob/4a83a0712149e101a2bbb38934bed36497cdf40f/app/services/articleService.ts
+upstream_ref: website 4a83a07; DocumentDB 1.2.0
 weight: 50
-translation_source_sha256: 8db08a9337e44841f0f5ddbb3c32ba4c4e91dab2e51a8bac275885863cb15400
+translation_source_sha256: b0c3559174816316f353ecf93604c11c8af455a95fb2f68d9a75bd2cd1bd1afd
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

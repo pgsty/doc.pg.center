@@ -2,10 +2,10 @@
 title: $
 description: $ 位置运算符用于标识数组中要更新的元素，无需显式指定该元素在数组中的位置。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-update/$.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-update/$.md
 weight: 10
-translation_source_sha256: 02dee7c5630b079677f15745f552304bc7b5444b44a47216927651dc8bbc564a
+translation_source_sha256: 68256d597b7f1494477e0e9c011b4d66a094f326ef77f1145cc19eee14992242
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,12 +2,12 @@
 title: Docker 快速入门
 description: 使用 Docker 启动 DocumentDB Local，验证连接，并获取故障排除和下一步指导。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/documentdb.github.io/blob/90cfa088351557cd618034dfc00ab817c35a5f76/app/services/articleService.ts
-upstream_ref: website 90cfa08; DocumentDB 1.0
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/documentdb.github.io/blob/4a83a0712149e101a2bbb38934bed36497cdf40f/app/services/articleService.ts
+upstream_ref: website 4a83a07; DocumentDB 1.2.0
 weight: 20
-translation_source_sha256: 7ece05422b3339971c5b1c91ded4f6ba3055cdeca0236dff8c892c7ade2faf4a
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: 76f9665cda9325c9ffd4de45e72585ca5dfb627c2d5a3f8b0d7e2072a7368bfe
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
 使用 Docker 在本地运行 DocumentDB，验证环境可用后再编写使用驱动程序的应用代码。安装方式参见 [Docker 安装](https://documentdb.io/packages?method=docker)或 [Linux 软件包安装](https://documentdb.io/packages?method=packages)。
@@ -46,7 +46,7 @@ docker run -dt --name documentdb \
 >
 > `-p 127.0.0.1:10260:10260` 使端点只监听回环地址。仅写 `-p 10260:10260` 会将端口映射到**所有**网络接口，这通常不符合笔记本电脑上的使用需求。
 >
-> `--init-data true` 将内置示例数据加载到 `StoreData`，供下文的验证步骤查询。此选项**默认关闭**：不指定它时，容器启动后没有 `StoreData` 数据库，`use StoreData` 也不会返回任何内容。每个数据卷只加载一次示例数据。现有卷不会自动迁移；要重新加载，请重新创建卷。有关 `--init-data-path`、证书配置及其他运行时选项，参见 [DocumentDB Local](/documentdb/documentdb-local/)。
+> `--init-data true` 将内置示例数据加载到 `StoreData`，供下文的验证步骤查询。此选项**默认关闭**：不指定它时，容器启动后没有 `StoreData` 数据库，`use StoreData` 也不会返回任何内容。每个数据卷只加载一次示例数据。现有卷保留原先加载的示例数据；要重新加载，请重新创建卷。有关 `--init-data-path`、证书配置及其他运行时选项，参见 [DocumentDB Local](/documentdb/documentdb-local/)。
 
 ## 验证容器 {#verify-the-container}
 
@@ -128,7 +128,7 @@ docker pull ghcr.io/documentdb/documentdb/documentdb-local:latest
 
 在删除容器之前，再次执行 `docker run --name documentdb` 会失败，报错为 `Conflict. The container name "/documentdb" is already in use`。存储需要保留的数据之前，请先挂载命名卷（`-v documentdb-data:/data`）。
 
-在现有数据卷上使用新镜像，不会更新该卷中的 DocumentDB 模式（[documentdb#773](https://github.com/documentdb/documentdb/issues/773)）。要将旧版本或 1.0 发布候选版的数据迁移到 1.0，请在新卷上启动 1.0 镜像，再重新导入数据，例如使用 `mongodump` 和 `mongorestore`。
+从 1.2 开始，镜像启动时会更新已有的 1.0 或更高版本数据卷上的 DocumentDB 扩展，并记录 `Updating the DocumentDB extensions on this data volume`。更新失败时会回滚，容器退出，数据卷保持不变。此过程只支持向前升级：旧镜像虽然能在已更新的数据卷上启动，但部分命令会失败，因此若可能需要回退，应先备份数据卷。要迁移 1.0 之前的版本或 1.0 发布候选版的数据，请在新卷上启动镜像，再重新导入数据，例如使用 `mongodump` 和 `mongorestore`。
 
 ## 故障排除与调试 {#troubleshooting-and-debugging}
 

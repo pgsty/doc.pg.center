@@ -2,10 +2,10 @@
 title: killCursors
 description: 通过其 BSON 64 位标识符关闭 DocumentDB 游标。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/query-and-write/killCursors.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/query-and-write/killCursors.md
 weight: 60
-translation_source_sha256: ce422cfec1e85f7d0abd54667d3b7af7b53824ddb4fd7d2c4abda8b84b14e4ae
+translation_source_sha256: 534bf7a6bb7988f87b5448c093dad4489e8a7d1c6c0ff72cffd1a5ce771801b7
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

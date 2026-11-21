@@ -2,10 +2,10 @@
 title: renameCollection
 description: 在同一个逻辑数据库内重命名 DocumentDB 集合。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/administration/renameCollection.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/administration/renameCollection.md
 weight: 60
-translation_source_sha256: 7eef992760f08945c233bd4f6c3687eac7dbe36f7fc7abf40f8b172ef8d1ef76
+translation_source_sha256: a2de2e7a216aca3b914c4139417a2a52538a082689776aa25d74dd0b853ad068
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $changeStream
 description: $changeStream 阶段在 MongoDB 中打开变更流游标。DocumentDB 不支持该操作。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$changestream.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$changestream.md
 weight: 40
-translation_source_sha256: df8e1c95af5a7ec1d247829bb8e7196bcb483e554c4a8f6dc3e00c2e74f1a606
+translation_source_sha256: 2c556cb03c8acd507b8fa0beabe4e5762a0c5280765fa0a145a337cbe3415b1e
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

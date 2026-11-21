@@ -2,10 +2,10 @@
 title: $denseRank
 description: $denseRank 运算符根据指定排序顺序，为分区内的每个文档分配并返回位置排名
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/window-operators/$denserank.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/window-operators/$denserank.md
 weight: 30
-translation_source_sha256: a4949d8c1aa54f686396b3dbebcf7955cbc06f21f211eb6f0ea33d0cf52563e3
+translation_source_sha256: 669be91b224c15a3e760fa87522a2ed396090a344f822611bd176e347693b2f7
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

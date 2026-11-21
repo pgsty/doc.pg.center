@@ -2,10 +2,10 @@
 title: $rename
 description: $rename 运算符可在更新操作中重命名文档字段。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/field-update/$rename.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/field-update/$rename.md
 weight: 40
-translation_source_sha256: cf2cf4efabb821ac6204ef4d760799b562ccee6395c53c4fd60d6ab674846d6a
+translation_source_sha256: e43d85b62040d4cec5d76d918e4db1a73a4b793ae1108f5e678a3050c3c8fcfa
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -1,11 +1,11 @@
 ---
 title: 累加器
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/_metadata.description.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/_metadata.description.md
 description: DocumentDB 的累加器参考。
 weight: 10
-translation_source_sha256: 835e6ee91a68b620db256f6d67394b4a82ce9f9b4d380024e5f4a4982f79e2ba
+translation_source_sha256: d14e63a5953500ae0b660d6e3e1234bc4463fe8063e22f8f03d6d4095ae5c542
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

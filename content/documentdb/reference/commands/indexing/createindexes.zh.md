@@ -2,11 +2,11 @@
 title: createIndexes
 description: 使用受支持的标准选项和 DocumentDB 专有选项创建索引。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/indexing/createIndexes.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/indexing/createIndexes.md
 weight: 10
-translation_source_sha256: f3c7634438d830630b381cc176437e55a264732847a05c6bae956c9567163677
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: bbdf5c5e33450ba3933be83690d1879684c813fe8eedade77ce9a6574b19da61
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
 创建一个或多个索引。
@@ -50,7 +50,7 @@ db.flights.createIndex({ route_no: 1 })
 | **`min`** | (可选) 指定 `2d` 索引边界的数字。 |
 | **`max`** | (可选) 指定 `2d` 索引边界的数字。 |
 | **`bits`** | (可选) 指定 `2d` 精度的整数，范围从 `1` 到 `32`。 |
-| **`collation`** | (可选) 指定非空比较规则的文档；需要排序规则支持。 |
+| **`collation`** | (可选) 指定非空比较规则的文档；需要启用 `documentdb.enableCollationWithNonUniqueOrderedIndexes`，且索引须为非唯一有序索引。 |
 | **`prepareUnique`** | (可选) 仅被 prepare-unique 创建路径识别的布尔值；不是通用的创建选项。 |
 | **`storageEngine`** | (可选) 包含以下 DocumentDB 特定选项的文档，而非 PostgreSQL 存储引擎的选择。 |
 {.fields}
@@ -249,5 +249,30 @@ db.runCommand({
 | --- | --- |
 | **`enableOrderedIndex`** | (可选) 控制有序/复合索引的布尔值或整数。数值必须为 `-1`、`1` 或 `2`；建议使用布尔值。 |
 {.fields}
+
+在 `flights` 的现有索引之外显式请求有序索引时，为其指定一个不同的名称，并设置 `storageEngine.enableOrderedIndex`：
+
+```javascript
+db.flights.createIndex(
+  { status: 1 },
+  {
+    name: "flight_status_ordered",
+    storageEngine: { enableOrderedIndex: true }
+  }
+)
+```
+
+这会显式请求有序/复合索引，而不依赖默认值。
+
+要验证索引是否有序，使用 `$indexStats` 并按索引名称过滤：
+
+```javascript
+db.flights.aggregate([
+  { $indexStats: {} },
+  { $match: { name: "flight_status_ordered" } }
+])
+```
+
+检查结果是否包含 `spec.storageEngine.enableOrderedIndex: true`。请使用 `$indexStats` 进行此项检查，不要依赖 `getIndexes()` 返回该选项。
 
 参见[线协议和通用字段](/documentdb/reference/commands/diagnostic/wire-protocol/)。源码：`pg_documentdb/src/commands/create_indexes.c`、`ParseCreateIndexesArg`、`ParseIndexDefDoc`、`ParseCustomIndexDefOption` 和 `pg_documentdb/src/vector/vector_index_kind_impl.c`；唯一性转换：`pg_documentdb/src/commands/coll_mod.c`、`HandleUniqueConversion` 和 `UpdatePostgresIndexesForUnique`。

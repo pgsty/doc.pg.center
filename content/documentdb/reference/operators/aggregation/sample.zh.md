@@ -2,10 +2,10 @@
 title: $sample
 description: DocumentDB 中的 $sample 运算符返回随机选取的若干文档
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$sample.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$sample.md
 weight: 270
-translation_source_sha256: 330d7db7695b54352052443703f7ce47f69804537a0acb40ad61ccf9c8818c97
+translation_source_sha256: 283fdd7db69a9d3a44de43e5de72c2889d69dc377ccf2bb5cac8e57ca69b9de6
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

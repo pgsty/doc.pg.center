@@ -2,10 +2,10 @@
 title: $skip
 description: 聚合流水线中的 $skip 流水线阶段用于跳过输入中的指定数量文档，并将剩余文档传递给流水线中的下一阶段。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$skip.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$skip.md
 weight: 310
-translation_source_sha256: 51b8e0207fe07d2aed224192aed631c215440a1f2425f987107d79a3f642d922
+translation_source_sha256: 9ccf65a58d1de56d57bf85636d84029f619e4c0371cd0ef681f328c456f69bf2
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

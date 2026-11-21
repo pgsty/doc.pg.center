@@ -2,10 +2,10 @@
 title: 聚合
 description: aggregate 命令用于处理数据记录并返回计算结果。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/aggregation/aggregate.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/aggregation/aggregate.md
 weight: 10
-translation_source_sha256: 53e79a53d6269a4f861f999b40c5e527e8df317efd7d8312757f96830df04d53
+translation_source_sha256: 995a9aec0ed250c7fdf404f59fffff1e7ce531ce776debb678359110acb05092
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

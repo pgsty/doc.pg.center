@@ -2,10 +2,10 @@
 title: $position
 description: $position 用于指定新元素应插入到数组中的位置。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-update/$positional.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-update/$positional.md
 weight: 70
-translation_source_sha256: 22b8cc3ac765b37f256bf890cdb4f21058481f3edb6e72e3efbff5af471e4369
+translation_source_sha256: fdefe223edc0fee02a410ee6fb084984ae0172c9ccca28122623e12c56e1ba2e
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

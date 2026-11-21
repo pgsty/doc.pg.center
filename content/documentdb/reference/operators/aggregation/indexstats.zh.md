@@ -2,10 +2,10 @@
 title: $indexStats
 description: $indexStats 流水线阶段返回集合中每个索引的使用统计信息。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$indexstats.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$indexstats.md
 weight: 150
-translation_source_sha256: bb2604c46ae53768329ba596506e3d745712e2ab5d251c5a2e9e7350d0ea1832
+translation_source_sha256: f17d5526adb31e7cb8aad4b89440a986a81f8a416b427fff6ee0fe1f837f9dfd
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

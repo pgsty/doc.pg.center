@@ -2,10 +2,10 @@
 title: $let
 description: $let 运算符允许定义供指定表达式使用的变量，从而实现复杂计算并减少重复代码。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/variable-expression/$let.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/variable-expression/$let.md
 weight: 10
-translation_source_sha256: 9e07c25eb63b2c41a2063d2cff41806b1ba93b99ad0a9faf873eba2e2a5cf1a8
+translation_source_sha256: 7acfcfd026c8debb03646b533ba44eb1d31d194efe84852682504df6d11148ee
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: killOp
 description: 使用由 currentOp 报告的字符串标识符取消 DocumentDB 操作。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/diagnostic/killOp.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/diagnostic/killOp.md
 weight: 80
-translation_source_sha256: dbeb5de5134bcdb10ebe4b170514ef084f096ba0cfa56f9331f708f822eb6a21
+translation_source_sha256: e00ee6168814637a8710f4cbbba17a776cc12bf83c4f44e8a7078f454e932ee8
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

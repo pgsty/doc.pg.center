@@ -2,10 +2,10 @@
 title: $objectToArray
 description: objectToArray 命令用于将文档（对象）转换为键值对数组。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/object-expression/$objectToArray.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/object-expression/$objectToArray.md
 weight: 20
-translation_source_sha256: 5b7e1387400f0da3e30d8aca35500a1155f0251329ed1bf150116d77eddb9fba
+translation_source_sha256: 513277a1d2919272635806020d65b3263df1f9383b89a1915ba0141d089eafba
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

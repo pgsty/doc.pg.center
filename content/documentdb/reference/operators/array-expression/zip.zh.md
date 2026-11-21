@@ -2,10 +2,10 @@
 title: $zip
 description: $zip 运算符可将两个或更多数组中的对应元素合并为一个数组或多个数组。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-expression/$zip.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-expression/$zip.md
 weight: 130
-translation_source_sha256: d51b571060fa87ac2b2a0b6e10a875611677d479fc5eb15ac03b43b851e6042a
+translation_source_sha256: 745e01b41b6faa3bd6589f75c037ffe2e4f43d0345b35c3df37caf9c6f57bd08
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $anyElementTrue
 description: $anyElementTrue 运算符在数组中任意元素的求值结果为 true 时返回 true。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/set-expression/$anyelementtrue.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/set-expression/$anyelementtrue.md
 weight: 20
-translation_source_sha256: a2e43d3aec5ad3c4b3fb710d667c767bd0de2e2453b739292c937ead53253187
+translation_source_sha256: 610a4d8f6c84d5e1ad646c279f060d2759e49bd743e1b83e29e27d252db4ce0e
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

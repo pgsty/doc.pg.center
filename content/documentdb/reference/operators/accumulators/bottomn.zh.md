@@ -2,10 +2,10 @@
 title: $bottomN
 description: $bottomN 运算符返回按一个或多个字段排序后结果集的最后 N 个文档
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$bottomn.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$bottomn.md
 weight: 30
-translation_source_sha256: 6c9c852df03cdee71f4bb30bad63e568fb20fd2dcef337f2c87e63fc58e6cc53
+translation_source_sha256: c73f7587ca4daffc7645b63c5a2a5cc88289159d6a40f7bf657712a6b57b6843
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

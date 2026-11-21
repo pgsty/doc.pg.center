@@ -2,10 +2,10 @@
 title: $trunc
 description: $trunc 运算符将数字截断到指定的小数位数。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/arithmetic-expression/$trunc.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/arithmetic-expression/$trunc.md
 weight: 150
-translation_source_sha256: a89380a419b73f1f4e75b791cda3f7da3f6c4cd63f43a2eee376af78d7ae7538
+translation_source_sha256: fe8d9ad8b63e4e02a267b36841424997d97bc347aeb02407e46e1fd00344e090
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

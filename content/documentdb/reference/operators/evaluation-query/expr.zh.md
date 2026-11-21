@@ -2,10 +2,10 @@
 title: $expr
 description: $expr 运算符允许在查询语言中使用聚合表达式，实现复杂的字段比较和计算。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/evaluation-query/$expr.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/evaluation-query/$expr.md
 weight: 10
-translation_source_sha256: 8867324acf53cd432aba85995b15fbf83bfd36d84b741fd41a534f667749ef0d
+translation_source_sha256: 4e0c13fba75edf70559767e9b5b0a3b46fde00de1d4d1fae61fefaf4bcf7ac1e
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

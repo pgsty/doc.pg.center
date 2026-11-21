@@ -2,10 +2,10 @@
 title: $dayOfWeek
 description: $dayOfWeek 运算符从日期中提取星期序号。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$dayofweek.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$dayofweek.md
 weight: 100
-translation_source_sha256: 3e54bc1f95925d39a00371f44a58516d31d0c8f9fa892c786c3d708a9a750f06
+translation_source_sha256: 39e490a6c509c59100a24fa77818f422f3d9ddf15e028d4afa0300f33f9b3b8b
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

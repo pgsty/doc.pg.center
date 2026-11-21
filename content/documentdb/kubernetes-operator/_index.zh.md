@@ -2,11 +2,11 @@
 title: Kubernetes Operator
 description: 使用 DocumentDB Kubernetes Operator在 Kubernetes 上运行 DocumentDB。了解何时选择它、你的集群需要什么，以及如何找到Operator的文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/kubernetes-operator/index.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/kubernetes-operator/index.md
 weight: 60
-translation_source_sha256: 4a106cf357819ab1761749ba8a38b9b78a7a09ef91d98fe8863bc79d9910ecc2
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: 4f9b3e6e12013a4fdc6fe8435460d8bf47477f1b045e1e212cffef8b43d3c776
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
 [DocumentDB Kubernetes Operator](https://github.com/documentdb/documentdb-kubernetes-operator) 负责在 Kubernetes 上运行和管理 DocumentDB 集群。你通过 `DocumentDB` 资源描述集群，Operator 则负责创建集群，并处理高可用、故障切换、备份和升级；PostgreSQL 层以 [CloudNativePG](https://cloudnative-pg.io/docs/) 为基础。每个实例都将 PostgreSQL 容器与一个 DocumentDB 网关 sidecar 配对运行，因此应用可以像连接其他 DocumentDB 部署一样，直接使用兼容 MongoDB 的驱动连接。
@@ -15,11 +15,11 @@ Operator 是独立项目，有自己的代码仓库、发布节奏和文档。�
 
 ## 版本 {#versions}
 
-Operator **1.0.0** 运行 DocumentDB 引擎 **1.0-0**。请固定 Helm Chart 版本，以便重复安装时得到一致结果（必须先安装 cert-manager，参见下方快速入门）：
+Operator **1.1.1** 运行 DocumentDB 引擎 **1.0-0**。请固定 Helm Chart 版本，以便重复安装时得到一致结果（必须先安装 cert-manager，参见下方快速入门）：
 
 ```bash
 helm install documentdb-operator oci://ghcr.io/documentdb/documentdb-operator \
-  --version 1.0.0 \
+  --version 1.1.1 \
   --namespace documentdb-operator \
   --create-namespace \
   --wait
@@ -35,12 +35,12 @@ helm install documentdb-operator oci://ghcr.io/documentdb/documentdb-operator \
 
 ## 集群前提条件 {#what-your-cluster-needs}
 
-规划部署前，先检查一项要求。Operator 利用 Kubernetes 的 [ImageVolume](https://kubernetes.io/docs/concepts/storage/volumes/#image) 功能，将 DocumentDB 扩展挂载到 PostgreSQL Pod 中，这对运行环境有以下限制：
+Operator 要求 Kubernetes 1.32 或更高版本。规划部署前，还应确认 DocumentDB 扩展如何进入 PostgreSQL Pod。默认情况下，集群支持时，Operator 通过 Kubernetes 的 [ImageVolume](https://kubernetes.io/docs/concepts/storage/volumes/#image) 功能挂载扩展：
 
 - **Kubernetes 1.35 或更新版本。** ImageVolume 自 1.36 起正式可用（GA）。在 1.35 中，它处于 Beta 阶段且默认开启，需确认集群没有关闭 `ImageVolume` 特性门控。1.33 和 1.34 默认关闭该功能，必须同时在 API 服务器和 kubelet 上开启门控才能使用。
-- 容器运行时使用 **containerd 或 CRI-O**。Docker 运行时不支持 ImageVolume。
+- 容器运行时使用 **containerd 2.1 或更高版本，或 CRI-O 1.33 或更高版本**。Docker 运行时不支持 ImageVolume。
 
-若该功能不可用，Operator 的准入 webhook 会拒绝 `DocumentDB` 资源，并返回说明原因的错误，不会让 Pod 一直卡住。各托管 Kubernetes 服务提供的版本和运行时不同，本地工具通常也需要显式指定选项才能使用受支持的运行时，因此请提前确认这两点。[开始之前](https://documentdb.io/documentdb-kubernetes-operator/latest/preview/getting-started/before-you-start/)列出了完整的前提条件，包括支持的工具版本和资源规模。
+否则，Operator 使用同时包含 PostgreSQL 18 和该扩展的组合镜像。它在创建 `DocumentDB` 集群时决定采用哪种布局，之后集群保持该布局。各托管 Kubernetes 服务提供的版本和运行时不同，本地工具通常也需要显式指定选项才能使用受支持的运行时，因此若要使用 ImageVolume，请提前确认这两点。[开始之前](https://documentdb.io/documentdb-kubernetes-operator/latest/preview/getting-started/before-you-start/)列出了完整的前提条件，包括支持的工具版本和资源规模。
 
 ## Operator 文档 {#operator-documentation}
 

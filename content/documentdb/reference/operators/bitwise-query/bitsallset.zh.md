@@ -2,10 +2,10 @@
 title: $bitsAllSet
 description: bitsAllSet 命令用于匹配所有指定位均已置位的文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/bitwise-query/$bitsAllSet.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/bitwise-query/$bitsAllSet.md
 weight: 20
-translation_source_sha256: 3404452967dae0f85f11663f7f366a187175ddc4e855eb944d751702e406ec7d
+translation_source_sha256: 881415206814419f45357ffab915055c6f3c8f8838b9947887c9f0f7527dc40e
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

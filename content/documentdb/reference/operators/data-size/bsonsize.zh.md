@@ -2,10 +2,10 @@
 title: $bsonSize
 description: $bsonSize 运算符返回文档编码为 BSON 后的大小，单位为字节。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/data-size/$bsonsize.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/data-size/$bsonsize.md
 weight: 20
-translation_source_sha256: 26839fd81b95c0f72ff66c1d0a086f7ae36465f53260bd0f8c175668a2ddb01e
+translation_source_sha256: 73044ec90afc2a36c75729328267ef3cc77b74874ecf8a7fdcb58e92b9cbd047
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

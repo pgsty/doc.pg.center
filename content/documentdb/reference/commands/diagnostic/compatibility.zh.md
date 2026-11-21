@@ -2,10 +2,10 @@
 title: 兼容性命令
 description: 描述 DocumentDB 兼容线协议命令的简单响应。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/diagnostic/compatibility.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/diagnostic/compatibility.md
 weight: 30
-translation_source_sha256: efed95c9f7c112ab0be4b261f5f2a6adddccba29c55240999583bb3a94978cc2
+translation_source_sha256: e263d13780e642ee880bf7ee6ef2a238cbcf1c1e0641ba29ffb8d5e02d189ac2
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

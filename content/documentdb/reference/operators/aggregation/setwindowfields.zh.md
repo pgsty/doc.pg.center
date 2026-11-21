@@ -2,10 +2,10 @@
 title: $setWindowFields
 description: $setWindowFields 流水线阶段在指定文档范围（窗口）上执行操作，并根据所选窗口运算符返回结果。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/aggregation/$setwindowfields.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/aggregation/$setwindowfields.md
 weight: 300
-translation_source_sha256: 018eec0afa019a106407a0b601774b7ce672f46189261b9459ea47ceea1d1f30
+translation_source_sha256: 84011ea1d8f481bec26c76ad7dca86bf99636b4c4541ab3a842c34e4d2165b76
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

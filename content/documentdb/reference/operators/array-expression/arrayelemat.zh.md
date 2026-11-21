@@ -2,10 +2,10 @@
 title: $arrayElemAt
 description: $arrayElemAt 返回数组中指定下标处的元素。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-expression/$arrayelemat.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-expression/$arrayelemat.md
 weight: 10
-translation_source_sha256: 0be808143e9f3b66e7a67eba0b77b4910e021e48ea9e4931d465a00d318b542e
+translation_source_sha256: 7b074981bd141b46d1c7ad00288752fe0f318aea502f2bdb951c1d4862825c01
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

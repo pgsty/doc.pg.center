@@ -2,10 +2,10 @@
 title: dropIndexes
 description: 通过名称、键模式或名称列表删除 DocumentDB 索引。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/indexing/dropIndexes.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/indexing/dropIndexes.md
 weight: 20
-translation_source_sha256: cbd973b1d806102678bbe73cfa580b5a2cf02d635777ade2fdee6819786ed34a
+translation_source_sha256: 9563b963690e67b08105144842a455d5fb171be97a8e9e652f499c1889d68c8a
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

@@ -2,10 +2,10 @@
 title: $expMovingAvg
 description: $expMovingAvg 运算符根据指定的最高权重文档数量，计算字段的移动平均值
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/window-operators/$expmovingavg.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/window-operators/$expmovingavg.md
 weight: 60
-translation_source_sha256: 05f3402ff80dd68732d5594a47fa3680d2f82b31868e4206da783daaa5f04dc1
+translation_source_sha256: e2f092ca0ed4c7adca4e25ababc31117edb76a2dedfa87ea922748a09707e022
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

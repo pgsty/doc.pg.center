@@ -2,18 +2,18 @@
 title: DocumentDB Local
 description: 学习如何使用 Docker 安装和运行 DocumentDB Local，用于本地开发和测试。包含设置说明、配置选项和证书管理。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/documentdb-local/index.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/documentdb-local/index.md
 weight: 20
-translation_source_sha256: 090aa3b30dd78954d7f7fcbc541e14a89f92a9e47bd3d51382118ecdd3b8c586
-translation_review: AI-assisted bilingual review; 2026-11-07
+translation_source_sha256: 200a644736d2ca1e5d37c741dbc9494fee78cc4acdaf46c08420fa86087f4919
+translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
 DocumentDB Local 提供了一个轻量级、容器化的环境，用于在本地开发和测试应用程序，包括原型设计和集成测试。
 
-以下示例使用了版本 **1.0.0** 的 PostgreSQL 17 镜像。适用于 Linux amd64 和 arm64 的 PostgreSQL 15 到 18 的镜像分别标记为 `pg15-1.0.0` 到 `pg18-1.0.0`；`latest` 指向 `pg17-1.0.0`。当需要可复现的设置时，请使用带版本标签的镜像。[1.0 版本说明](/documentdb/getting-started/release-notes-1.0/) 列出了变更内容和已知问题。
+以下示例使用版本 **1.2.0** 的 PostgreSQL 17 镜像。适用于 Linux amd64 和 arm64 的 PostgreSQL 15 到 18 的镜像分别标记为 `pg15-1.2.0` 到 `pg18-1.2.0`；`latest` 和 `1.2` 指向 `pg17-1.2.0`。需要可复现的设置时，请使用带版本标签的镜像。[1.2 发布说明](/documentdb/getting-started/release-notes-1.2/)列出了变更内容。
 
-> **使用情况遥测默认开启。** 1.0 版本镜像在启动和每小时向 Scarf 报告其版本、平台和 CPU 架构。可通过 `-e DOCUMENTDB_USAGE_TELEMETRY=false` 关闭该功能。详见 [使用情况遥测](#usage-telemetry)。
+> **使用情况遥测默认开启。** 镜像在启动时及之后每小时向 Scarf 报告其版本、平台和 CPU 架构。可通过 `-e DOCUMENTDB_USAGE_TELEMETRY=false` 关闭该功能。详见 [使用情况遥测](#usage-telemetry)。
 
 ## 前提条件 {#prerequisites}
 
@@ -24,7 +24,7 @@ DocumentDB Local 提供了一个轻量级、容器化的环境，用于在本地
 使用 `docker pull` 获取 Docker 容器镜像。
 
 ```bash
-docker pull ghcr.io/documentdb/documentdb/documentdb-local:pg17-1.0.0
+docker pull ghcr.io/documentdb/documentdb/documentdb-local:pg17-1.2.0
 ```
 
 ## 运行 {#running}
@@ -43,17 +43,17 @@ export DOCUMENTDB_USERNAME DOCUMENTDB_PASSWORD
 docker run -dt -p 127.0.0.1:10260:10260 --name docdb \
   -e USERNAME="${DOCUMENTDB_USERNAME:?Set DOCUMENTDB_USERNAME first}" \
   -e PASSWORD="${DOCUMENTDB_PASSWORD:?Set DOCUMENTDB_PASSWORD first}" \
-  ghcr.io/documentdb/documentdb/documentdb-local:pg17-1.0.0
+  ghcr.io/documentdb/documentdb/documentdb-local:pg17-1.2.0
 
 docker ps
 ```
 
 ```output
 CONTAINER ID   IMAGE                                                         COMMAND                  CREATED         STATUS                            PORTS                        NAMES
-5aff734a3591   ghcr.io/documentdb/documentdb/documentdb-local:pg17-1.0.0     "/bin/bash -c '/home…"   5 seconds ago   Up 4 seconds (health: starting)   127.0.0.1:10260->10260/tcp   docdb
+5aff734a3591   ghcr.io/documentdb/documentdb/documentdb-local:pg17-1.2.0     "/bin/bash -c '/home…"   5 seconds ago   Up 4 seconds (health: starting)   127.0.0.1:10260->10260/tcp   docdb
 ```
 
-> 导出的变量将在下面的客户端示例中重复使用；如果打开新的 shell，需重新设置。这些检查可防止凭据为空时回退到镜像中公开已知的默认凭据；容器仍接受这些默认凭据，但会发出醒目的警告。凭据通过环境变量传递，因为 `--username` 和 `--password` 参数在容器进程列表中始终可见。
+> 导出的变量将在下面的客户端示例中重复使用；如果打开新的 shell，需重新设置。这些检查在 Docker 运行前阻止空值：没有密码时，容器会在启动时退出；用户名为空则回退到 `default_user`。无论通过环境变量还是 `--username` 和 `--password` 参数传入，凭据都可通过 `docker inspect` 查看。
 >
 > 回环绑定仅使网关在本机上可访问。若需允许远程客户端连接，请在使用 `-p 10260:10260` 之前，通过防火墙限制端口并配置远程客户端可验证的证书。
 >
@@ -105,7 +105,7 @@ For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
 |---|---|---|---|---|---|
 | 从容器将设置信息打印到 stdout | `--help`, `-h` | N/A | N/A | N/A | 显示可用配置信息 |
 | 指定 DocumentDB 的用户名。 | `--username [value]` | 覆盖 `USERNAME` 环境变量 | 字符串 | `default_user` | DocumentDB 的用户名。不得为内部 DocumentDB 角色名称，且不得以 `documentdb`、`citus`、`pg` 或 `internal_role` 开头（不区分大小写）。容器会拒绝保留名称并在启动前退出。 |
-| 指定 DocumentDB 的密码。 | `--password [value]` | 覆盖 `PASSWORD` 环境变量 | 字符串 | `Admin100` | DocumentDB 的密码。必须显式设置。内置默认密码广为人知，任何能访问映射到主机的端口的人都可使用它进行认证。当密码保持默认时，容器会在启动时打印警告；`DOCUMENTDB_ALLOW_DEFAULT_PASSWORD=true` 可禁用该警告。优先使用环境变量：`--password` 参数在容器进程列表中始终可见。在现有数据卷上更改密码将被忽略；卷将保留初始化时的管理员用户。 |
+| 指定 DocumentDB 的密码。 | `--password [value]` | 覆盖 `PASSWORD` 环境变量 | 字符串 | 无（必需） | admin 用户的密码。没有密码时，容器在启动时退出；设置 `--create-user false` 时，仅加载数据需要密码。仅用于短期本地评估时，可用 `DOCUMENTDB_ALLOW_DEFAULT_PASSWORD=true` 为新建用户设置公开的内置密码 `Admin100`；任何能访问映射到主机的端口的人都可用它认证。`--password` 和 `PASSWORD` 均可通过 `docker inspect` 查看。在已有数据卷上更改密码会被忽略；卷保留初始化时的管理员用户。 |
 | DocumentDB 端点的端口。 | `--documentdb-port [value]` | 覆盖 `DOCUMENTDB_PORT` 环境变量 | 整数 | `10260` | 必须将该端口映射到主机。用于本地使用时，仅绑定回环地址——例如，`-p 127.0.0.1:10260:10260`。若要使用主机端口 `27017` 而不更改网关端口，使用 `-p 127.0.0.1:27017:10260` 进行映射；仅在同时更改容器端口时才添加 `--documentdb-port 27017`。 |
 | 指定数据目录。 | `--data-path [value]` | 覆盖 `DATA_PATH` 环境变量。 | 字符串 | `/data` | 数据不会持久化，除非在此路径挂载卷——例如，`-v documentdb-data:/data`。若要使用不同目录，需同时设置挂载和标志，注意它们位于镜像名称的两侧：`-v` / `--mount` 是 `docker run` 选项，位于镜像名称前；`--data-path` 是容器参数，位于镜像名称后。详见下表下方的示例。 |
 | 指定所有者。 | `--owner [value]` | 覆盖 `OWNER` 环境变量。 | 字符串 | `documentdb` | 用于创建管理员用户的 PostgreSQL 角色。该镜像初始化的集群只有一个超级用户角色 `documentdb`，因此请保持默认值：任何其他值在 PostgreSQL 初始化后都会导致 `role "<value>" does not exist` 错误，容器将退出。 |
@@ -115,13 +115,13 @@ For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
 | 指定是否允许外部连接到 PostgreSQL。 | `--allow-external-connections [value]` | 覆盖 `ALLOW_EXTERNAL_CONNECTIONS` 环境变量 | `true`, `false` | `false` | 使容器内 PostgreSQL 服务器监听所有接口，并添加宽松的基于主机的认证规则（`host all all 0.0.0.0/0 scram-sha-256` 和 `host all all ::0/0 scram-sha-256`），允许任何角色从任意地址使用密码访问任意数据库。此设置仅更改容器内部的配置，因此还需将 PostgreSQL 端口映射到主机——例如 `-p 9712:9712`——才能从主机连接。当 `--start-pg false` 时被忽略。这不会影响网关，网关始终在 DocumentDB 端口上监听所有接口。 |
 | 指定用于保护流量的证书路径。 | `--cert-path [value]` | 覆盖 `CERT_PATH` 环境变量。 | STRING | NA | PEM 格式证书。必须与 `--key-file` 一同设置——仅设置其中一个会在启动时失败。你需要将此文件挂载到容器中。例如，要设置 `/mycert.pem`，请将此选项添加到 `docker run` 命令中：`--mount type=bind,source=./mycert.pem,target=/mycert.pem`。 |
 | 使用密钥文件中的密钥覆盖默认密钥。 | `--key-file [value]` | 覆盖 `KEY_FILE` 环境变量。 | STRING | NA | PEM 格式私钥。必须与 `--cert-path` 一同设置——仅设置其中一个会在启动时失败。你需要将此文件挂载到容器中。例如，要设置 `/mykey.key`，请将此选项添加到 `docker run` 命令中：`--mount type=bind,source=./mykey.key,target=/mykey.key` |
-| 设置客户端连接的 TLS 模式。 | `--tlsMode [value]` | 覆盖 `TLS_MODE` 环境变量 | `disabled`, `allowTLS`, `requireTLS` | `allowTLS` | 使用 `allowTLS` 时，网关同时接受明文和 TLS 连接；`disabled` 行为相同。`requireTLS` 拒绝明文连接，因此每个客户端必须使用 `tls=true` 进行连接。 |
+| 设置客户端连接的 TLS 模式。 | `--tlsMode [value]` | 覆盖 `TLS_MODE` 环境变量 | `disabled`, `allowTLS`, `requireTLS` | `allowTLS` | 使用 `allowTLS` 时，网关同时接受明文和 TLS 连接；`disabled` 行为相同。`requireTLS` 拒绝明文连接，因此每个客户端必须使用 `tls=true` 进行连接。空值或 `allowTLS,requireTLS` 这样的列表会被拒绝，容器随即退出。 |
 | 启用内置示例数据的初始化。 | `--init-data [value]` | 覆盖 `INIT_DATA` 环境变量 | `true`, `false` | `false` | 每个数据卷只加载一次 `StoreData` 数据集：卷内的标记文件记录是否执行过加载，因此即使卷内已有数据，只要从未加载过示例数据，也会执行加载。要再次加载示例数据，需使用新卷；参见[内置示例数据](#built-in-sample-data)。 |
 | 指定用于数据库初始化的脚本目录。 | `--init-data-path [value]` | 覆盖 `INIT_DATA_PATH` 环境变量 | STRING | `/init_doc_db.d` | JavaScript 文件按字母顺序使用 `mongosh` 执行，每个数据卷执行一次（标记文件记录尝试情况，因此也会在从未运行过的现有卷上执行），在启用内置示例数据时，其执行顺序在后者之前。遇到语法或运行时错误时，容器会报错并停止。重启时不会重复执行，因此需修复脚本并从全新卷启动。 |
 | 跳过内置示例数据的初始化。 | `--skip-init-data` | 覆盖 `SKIP_INIT_DATA` 环境变量 | `true`, `false`（仅 `SKIP_INIT_DATA` 有效——该标志本身不带值） | N/A | `--init-data false` 的旧版别名。注意 `SKIP_INIT_DATA=false` 的作用与该标志相反：当 `INIT_DATA` 未设置时，启用内置示例数据。不影响 `--init-data-path`。 |
 | 禁用索引的扩展 RUM。 | `--disable-extended-rum` | 覆盖 `DISABLE_EXTENDED_RUM` 环境变量 | N/A（不带值） | N/A | **已弃用且被忽略**，仅在启动时发出警告；将在后续版本中移除。`documentdb_extended_rum` 在此镜像初始化的卷上始终启用。 |
-| 启用遥测数据。 | `--enable-telemetry [value]` | 覆盖 `ENABLE_TELEMETRY` 环境变量 | `true`, `false` | `false` | 网关的运行指标，与 [使用情况遥测](#usage-telemetry) 无关。**已知问题**：值在启动时验证，但当前不产生遥测数据——网关的指标和追踪导出器在此镜像中被禁用，无效值只会导致启动中止。 |
-| 指定日志详细程度。 | `--log-level [value]` | 覆盖 `LOG_LEVEL` 环境变量。 | `quiet`, `error`, `warn`, `info`, `debug`, `trace` | `info` | **已知问题**：值在启动时验证，但当前不会改变容器的日志输出。要更改网关自身的详细程度，请设置 `DOCUMENTDB_LOG_LEVEL` 环境变量；其值为追踪过滤器，例如 `info` 或 `debug`（`quiet` 不是其有效值）。 |
+| 启用遥测数据。 | `--enable-telemetry [value]` | 覆盖 `ENABLE_TELEMETRY` 环境变量 | `true`, `false` | `false` | 网关的运行指标，与[使用情况遥测](#usage-telemetry)无关。接受该选项，但它不起作用：指标由网关配置文件中的 `TelemetryOptions` 设置，随镜像提供的配置默认关闭指标。不是 `true` 或 `false` 的值仍会使容器停止。 |
+| 指定日志详细程度。 | `--log-level [value]` | 覆盖 `LOG_LEVEL` 环境变量。 | `quiet`, `error`, `warn`, `info`, `debug`, `trace` | `info` | 网关日志的详细程度；`quiet` 仍显示错误。设置 `DOCUMENTDB_LOG_LEVEL` 或 `RUST_LOG` 时会覆盖此选项，前者优先于后者；两者均接受 `documentdb_gateway=debug` 这样的追踪过滤器。 |
 | 打开或关闭使用情况遥测。 | `--usage-telemetry [value]` | 覆盖 `DOCUMENTDB_USAGE_TELEMETRY` 环境变量 | `true`, `false`（也支持 `1`/`0`、`yes`/`no`、`on`/`off`，不区分大小写） | `true` | 在启动和每小时报告镜像版本、平台和 CPU 架构。无法识别的值将被视为 `false` 并发出警告，因此选择关闭遥测不会导致容器无法启动。参见 [使用情况遥测](#usage-telemetry)。 |
 | 关闭使用情况遥测。 | `--disable-usage-telemetry` | N/A | N/A（不带值） | N/A | 与 `--usage-telemetry false` 相同。 |
 | 设置 TOAST 压缩方式。 | `--toast-compression [value]` | 覆盖 `DOCUMENTDB_TOAST_COMPRESSION` 环境变量 | `lz4`, `pglz`, `default` | `lz4` | PostgreSQL 行外存储（TOAST）大值时采用的压缩方式。`lz4` 解压大文档的速度更快，`pglz` 是 PostgreSQL 内置方法，`default` 保留服务器自身的设置。仅影响新写入的值。指定 `--start-pg false` 时会忽略此选项并发出警告。 |
@@ -138,13 +138,13 @@ docker run -dt \
   --name docdb \
   -e USERNAME="${DOCUMENTDB_USERNAME:?Set DOCUMENTDB_USERNAME first}" \
   -e PASSWORD="${DOCUMENTDB_PASSWORD:?Set DOCUMENTDB_PASSWORD first}" \
-  ghcr.io/documentdb/documentdb/documentdb-local:pg17-1.0.0 \
+  ghcr.io/documentdb/documentdb/documentdb-local:pg17-1.2.0 \
   --init-data true
 ```
 
 ## 使用情况遥测 {#usage-telemetry}
 
-1.0 版本的镜像默认发送使用情况数据。原生包则不发送任何数据。
+镜像默认发送使用情况数据。原生包则不发送任何数据。
 
 在启动时以及每小时一次，镜像会向 [Scarf](https://scarf.sh) 报告其版本、平台和 CPU 架构。它从不发送数据库名、集合名或用户名、查询、文档或凭据。Scarf 会看到每个请求的源 IP 地址，隐私声明指出，一旦收到该地址，就不应假设其为匿名。容器日志中的 `[TELEMETRY]` 通知会在使用情况遥测开启时提示这一状态。
 
@@ -160,7 +160,7 @@ docker run -dt \
 
 在 CI 环境中，请显式关闭此功能，使用 `-e DOCUMENTDB_USAGE_TELEMETRY=false`。镜像仅在容器自身环境中设置了非空值的 `CI`、`GITHUB_ACTIONS` 或 `TF_BUILD` 时跳过遥测，并且 `docker run` 不传递运行器的变量：在 CI 运行器上启动的容器仍会报告，除非你显式转发一个变量，例如 `-e GITHUB_ACTIONS`。`--enable-telemetry` 是网关自身指标的独立设置，不影响此功能。
 
-详细信息请参见 [隐私声明](https://github.com/documentdb/documentdb/blob/v1.0-0/documentdb-local/PRIVACY.md)。镜像还将其包含在 `/home/documentdb/PRIVACY.md` 处。
+详细信息请参见 [隐私声明](https://github.com/documentdb/documentdb/blob/v1.2-0/documentdb-local/PRIVACY.md)。镜像还将其包含在 `/home/documentdb/PRIVACY.md` 处。
 
 ## 内置示例数据 {#built-in-sample-data}
 
@@ -178,19 +178,23 @@ db.getSiblingDB("StoreData").stores.countDocuments({})   // 41505
 db.getSiblingDB("StoreData").ratings.countDocuments({})  // 2
 ```
 
-每个数据卷只加载一次示例数据；要重新加载，请使用新的空卷。直接重新运行加载器时，它会容忍重复键，不会生成重复文档。手动运行加载器的说明见[对应版本的示例数据指南](https://github.com/documentdb/documentdb/tree/v1.0-0/documentdb-local/sample-data)。
+每个数据卷只加载一次示例数据；要重新加载，请使用新的空卷。直接重新运行加载器时，它会容忍重复键，不会生成重复文档。手动运行加载器的说明见[对应版本的示例数据指南](https://github.com/documentdb/documentdb/tree/v1.2-0/documentdb-local/sample-data)。
 
 ## 容器生命周期 {#container-lifecycle}
 
 - **健康检查。** 该镜像包含 Docker 健康检查。DocumentDB 能够接受连接后，`docker inspect -f '{{.State.Health.Status}}' docdb` 会报告 `healthy`。
-- **失效的 `postmaster.pid`。** 在 `docker kill`、`docker rm -f`、因内存不足被终止或主机崩溃后，下次启动会移除失效文件，但前提是卷上的锁表明该文件由 1.0 容器写入。否则，容器会拒绝启动，因为旧容器可能仍在使用该卷。确认没有其他进程或容器使用该卷后，先带上 `-e DOCUMENTDB_FORCE_REMOVE_STALE_POSTMASTER_PID=true` 重新创建一次容器，随后再去掉该变量重新创建容器（`docker start` 无法添加该变量）。不要在不同主机间共享卷。在已被使用的卷上启动第二个容器会使其立即退出。
+- **失效的 `postmaster.pid`。** 在 `docker kill`、`docker rm -f`、因内存不足被终止或主机崩溃后，下次启动会移除失效文件，但前提是卷上的锁表明该文件由 1.0 或更高版本的容器写入。否则，容器会拒绝启动，因为旧容器可能仍在使用该卷。确认没有其他进程或容器使用该卷后，先带上 `-e DOCUMENTDB_FORCE_REMOVE_STALE_POSTMASTER_PID=true` 重新创建一次容器，随后再去掉该变量重新创建容器（`docker start` 无法添加该变量）。不要在不同主机间共享卷。在已被使用的卷上启动第二个容器会使其立即退出。
 - **PostgreSQL 停止会使容器停止。** 如果容器内的 PostgreSQL 停止，网关会立即使请求失败，容器则会在 20 秒后（`DOCUMENTDB_POSTMASTER_EXIT_TIMEOUT`）退出，以便重启策略将其恢复。
 
 ## 升级镜像 {#upgrading-the-image}
 
-在现有数据卷上使用新镜像不会更新其中的 DocumentDB 扩展（[#773](https://github.com/documentdb/documentdb/issues/773)），因此卷会保留旧的模式，而使用新的二进制文件。1.0 版本不支持就地升级卷。要将数据从 0.117 容器迁移到 1.0，使用 `mongodump` 导出数据，然后在新卷上启动 1.0 容器，并使用 `mongorestore` 加载数据。镜像的 PostgreSQL 主版本必须与初始化卷的版本匹配。
+要将 1.0 数据卷升级到 1.2，在同一卷上启动新镜像：用 `docker rm` 移除容器，再使用相同的 `-v <volume>:/data` 运行 `docker run`，指定新标签；或运行 `docker compose pull && docker compose up -d`。启动时，容器更新卷上的 DocumentDB 扩展，并记录 `Updating the DocumentDB extensions on this data volume: ...`。若更新失败，则回滚更新，数据卷保持不变，容器退出。
 
-如果你在旧容器使用过的卷上启动 1.0 镜像，只要旧容器的 `postmaster.pid` 仍存在，1.0 镜像将拒绝启动；请参见 [容器生命周期](#container-lifecycle) 了解如何临时覆盖此检查，以及之后如何移除覆盖设置。对于 0.116 和 0.117 版本，请先使用 `docker stop` 停止旧容器，这会移除该文件；在 `docker kill`、`docker rm -f` 或崩溃后，该文件将保留。0.114 及更早版本的镜像通常不会干净地停止 PostgreSQL，因此其卷通常会保留该文件。
+镜像的 PostgreSQL 主版本必须与初始化卷时使用的主版本相同。新容器与其他容器一样需要密码（见 `--password`），但已有 admin 用户保留创建时的密码。
+
+不支持在同一数据卷上回退到旧镜像。旧版本会在新系统目录上启动，但部分命令会报 `InternalError`；1.2 及之后的镜像会在启动时给出警告，1.0 不会。如果可能需要回退，请在升级前备份数据卷。运行过候选发布版的数据卷没有受支持的升级路径。
+
+如果数据卷曾由 1.0 之前的容器使用，只要该容器的 `postmaster.pid` 仍在，1.0 或更高版本的镜像就会拒绝启动；参见[容器生命周期](#container-lifecycle)，了解如何临时覆盖此检查，以及之后如何移除覆盖设置。对于 0.116 和 0.117，先使用 `docker stop` 停止旧容器，这会移除该文件；`docker kill`、`docker rm -f` 或崩溃后，该文件会保留。0.114 及更早版本的镜像通常不会干净地停止 PostgreSQL，因此其卷通常会保留该文件。
 
 ## 功能支持 {#feature-support}
 
@@ -227,7 +231,7 @@ docker run -dt \
   --name docdb \
   -e USERNAME="${DOCUMENTDB_USERNAME:?Set DOCUMENTDB_USERNAME first}" \
   -e PASSWORD="${DOCUMENTDB_PASSWORD:?Set DOCUMENTDB_PASSWORD first}" \
-  ghcr.io/documentdb/documentdb/documentdb-local:pg17-1.0.0
+  ghcr.io/documentdb/documentdb/documentdb-local:pg17-1.2.0
 ```
 
 请将路径指向数据目录内部，而非单独的卷：单独创建的卷由 root 拥有，而网关（以非特权用户运行）无法向该目录写入密钥。权衡之处在于，密钥会包含在数据卷的任何备份中。如果入口点必须修复数据目录的所有权（当所有者不匹配，或遇到 `DOCUMENTDB_FORCE_OWNERSHIP_REPAIR=true` 时会执行此操作），它将对目录运行 `chmod -R 750`，这会导致私钥变为组可读，而非仅所有者可读。

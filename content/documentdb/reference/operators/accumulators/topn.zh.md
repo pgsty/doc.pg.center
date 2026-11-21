@@ -2,10 +2,10 @@
 title: $topN
 description: $topN 运算符返回按一个或多个字段排序后结果集中的前 N 个文档
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/accumulators/$topn.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/accumulators/$topn.md
 weight: 190
-translation_source_sha256: f6419f773ab1143b64827f114da6fff84371f9ff1ed6b4de3090557bba64d347
+translation_source_sha256: d3ea9f0c26847903e474643c05223811bab6e59d973e6b752c7989481aeb5175
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

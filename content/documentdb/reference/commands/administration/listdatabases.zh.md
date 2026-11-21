@@ -2,10 +2,10 @@
 title: listDatabases
 description: 列出逻辑 DocumentDB 数据库并过滤返回的元数据。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/commands/administration/listDatabases.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/administration/listDatabases.md
 weight: 50
-translation_source_sha256: 358243037cfca640ede968f3a5bfb0bd3f2d87aa2131fc480bfd6d54ad8f1809
+translation_source_sha256: 3168060b4d88f26e43e024e01f19bb9aa492ca07f920ff193851b036a9657590
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

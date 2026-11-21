@@ -2,10 +2,10 @@
 title: $month
 description: $month 运算符从日期值中提取月份分量。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/date-expression/$month.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/date-expression/$month.md
 weight: 180
-translation_source_sha256: 32196982b361d747f4afdfc5d9417cee4a7f28bc4042a87111caad33a4ce5700
+translation_source_sha256: 18fb3ffbb6da00e960373c8b4edb25d2b9c13ce88f0ce256f0bcf8919a6d54c3
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 

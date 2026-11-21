@@ -2,10 +2,10 @@
 title: $arrayToObject
 description: $arrayToObject 运算符允许将数组转换为单个文档。
 type: docs
-upstream_source: documentdb
-upstream_link: https://github.com/documentdb/docs/blob/cf69384e6da9524cc0fc723e8ac5b6c0689af432/api-reference/operators/array-expression/$arraytoobject.md
+upstream_source: documentdb-20261121
+upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/operators/array-expression/$arraytoobject.md
 weight: 20
-translation_source_sha256: 46d6a39144ac3b44bc0bfc5fc38c78b9aa5f2794f6b72fd45410a48e9a366890
+translation_source_sha256: 1e2c74d7ef7799e923ef26925e23d9fd1dc5fa7601c795a04608dfbcc8a7c0d7
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 
