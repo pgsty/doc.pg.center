@@ -1,12 +1,12 @@
 ---
 title: Snowflake 变更日志
-description: 记录 Snowflake 扩展 2.6.0 和 2.5.0 的新增、变更、修复与安全/CI 更新。
+description: 记录 Snowflake 扩展 2.6.1、2.6.0 和 2.5.0 的新增、变更、修复与安全/CI 更新。
 weight: 200
-upstream_source: pgedge-snowflake
-upstream_link: https://github.com/pgEdge/snowflake/blob/429a16803c8c6336fcfede7cce0ccd3de05216d8/docs/changelog.md
+upstream_source: pgedge-snowflake-20261121
+upstream_link: https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8/docs/changelog.md
 upstream_modified: true
-upstream_ref: 429a16803c8c
-source_kind: pinned-main-snapshot
+upstream_ref: 9506e1bd5c1f
+source_kind: pinned-release-tag
 translation_status: machine-draft
 translation_notice: en
 translator: PGSTY 社区
@@ -16,6 +16,12 @@ type: docs
 
 
 这里记录 Snowflake 扩展的所有重要变更。
+
+## 2.6.1 {#261}
+
+### 变更 {#changed-261}
+
+- 版本号更新为 2.6.1（系统目录没有变更）。包含自 2.6.0 以来的发布打包和 CI 更新。
 
 ## 2.6.0  {#260}
 
@@ -60,6 +66,6 @@ type: docs
 
 ---
 
-[上游原文](https://github.com/pgEdge/snowflake/blob/429a16803c8c6336fcfede7cce0ccd3de05216d8/docs/changelog.md) · `429a16803c8c` · Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
+[上游原文](https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8/docs/changelog.md) · `9506e1bd5c1f` · Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
 中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。

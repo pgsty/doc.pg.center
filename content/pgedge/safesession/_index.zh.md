@@ -2,11 +2,11 @@
 title: SafeSession
 description: pgEdge SafeSession 使用 executor 和 utility 钩子，为指定数据库角色强制执行只读会话。
 weight: 40
-upstream_source: pgedge-safesession
-upstream_link: https://github.com/pgEdge/pgedge-safesession/blob/b406cd1e82cf21f30959351691c56de046562678/docs/index.md
+upstream_source: pgedge-safesession-20261121
+upstream_link: https://github.com/pgEdge/pgedge-safesession/blob/d66225fcceefa2b2cb2cdd7a0b8b84ccae8a4295/docs/index.md
 upstream_modified: true
-upstream_ref: b406cd1e82cf
-source_kind: pinned-main-snapshot
+upstream_ref: d66225fcceef
+source_kind: pinned-release-tag
 translation_status: machine-draft
 translation_notice: en
 translator: PGSTY 社区
@@ -20,7 +20,7 @@ sidebar_root_menu: false
 
 
 > [!NOTE] 版本说明
-> 本文档来自上游 `main` 的固定源码快照；与原站的版本化文档可能存在差异。部署前请核对[版本与来源](/zh/pgedge/about/attribution/)。
+> 本版英文来源为 **v1.1**，固定于 `d66225fcceef`。中文已同步本轮增量，原有初稿未变部分仍待审校。部署前请核对[版本与来源](/zh/pgedge/about/attribution/)。
 
 
 pgEdge SafeSession 是一个 PostgreSQL 扩展，可为指定数据库角色强制执行只读会话。它通过 executor 和 utility 钩子提供纵深防御，阻断所有写操作、DDL 以及其他潜在危险命令。
@@ -216,6 +216,6 @@ COPY sales FROM '/tmp/in.csv'; -- ERROR
 
 ---
 
-[上游原文](https://github.com/pgEdge/pgedge-safesession/blob/b406cd1e82cf21f30959351691c56de046562678/docs/index.md) · `b406cd1e82cf` · Copyright (c) 2025–2026, pgEdge, Inc. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
+[上游原文](https://github.com/pgEdge/pgedge-safesession/blob/d66225fcceefa2b2cb2cdd7a0b8b84ccae8a4295/docs/index.md) · `d66225fcceef` · Copyright (c) 2025–2026, pgEdge, Inc. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
 中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。

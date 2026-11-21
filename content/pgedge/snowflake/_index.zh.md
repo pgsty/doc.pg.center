@@ -2,11 +2,11 @@
 title: Snowflake
 description: Snowflake 序列基于 int8 与 sequence，为分布式多主复制生成节点唯一、趋势有序的 64 位 ID。
 weight: 30
-upstream_source: pgedge-snowflake
-upstream_link: https://github.com/pgEdge/snowflake/blob/429a16803c8c6336fcfede7cce0ccd3de05216d8/docs/index.md
+upstream_source: pgedge-snowflake-20261121
+upstream_link: https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8/docs/index.md
 upstream_modified: true
-upstream_ref: 429a16803c8c
-source_kind: pinned-main-snapshot
+upstream_ref: 9506e1bd5c1f
+source_kind: pinned-release-tag
 translation_status: machine-draft
 translation_notice: en
 translator: PGSTY 社区
@@ -20,7 +20,7 @@ sidebar_root_menu: false
 
 
 > [!NOTE] 版本说明
-> 本文档来自上游 `main` 的固定源码快照；与原站的版本化文档可能存在差异。部署前请核对[版本与来源](/zh/pgedge/about/attribution/)。
+> 本版英文来源为 **v2.6.1**，固定于 `9506e1bd5c1f`。中文已同步本轮增量，原有初稿未变部分仍待审校。部署前请核对[版本与来源](/zh/pgedge/about/attribution/)。
 
 
 使用 [`Snowflake` 序列](https://github.com/pgEdge/snowflake?tab=readme-ov-file#snowflake-sequences-for-postgresql)可以充分利用分布式多主复制解决方案提供的优势。Snowflake 是一个 PostgreSQL 扩展，提供基于 int8 和 sequence 的唯一 ID 方案，可选择用于替代 PostgreSQL 内建的 bigserial 数据类型。
@@ -55,6 +55,6 @@ Snowflake 序列也能减轻网络延迟可能扰乱分布式事务序列的担�
 
 ---
 
-[上游原文](https://github.com/pgEdge/snowflake/blob/429a16803c8c6336fcfede7cce0ccd3de05216d8/docs/index.md) · `429a16803c8c` · Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
+[上游原文](https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8/docs/index.md) · `9506e1bd5c1f` · Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
 中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。

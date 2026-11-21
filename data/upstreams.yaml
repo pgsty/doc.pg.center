@@ -606,7 +606,7 @@ pgedge-spock-20261121:
   source_commit: d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c
   source_ref: v6.0.0-beta.2
   snapshot_date: '2026-11-21'
-  language: en
+  languages: [en, zh]
   translation_baseline: pgedge-spock
   repository: https://github.com/pgEdge/spock
   source_sha256:
@@ -627,7 +627,7 @@ pgedge-lolor-20261121:
   source_commit: 1548836b0df0819e5415a9d0574afd93e9a64f1d
   source_ref: main
   snapshot_date: '2026-11-21'
-  language: en
+  languages: [en, zh]
   translation_baseline: pgedge-lolor
   repository: https://github.com/pgEdge/lolor
   source_sha256:
@@ -644,7 +644,7 @@ pgedge-safesession-20261121:
   source_commit: d66225fcceefa2b2cb2cdd7a0b8b84ccae8a4295
   source_ref: v1.1
   snapshot_date: '2026-11-21'
-  language: en
+  languages: [en, zh]
   translation_baseline: pgedge-safesession
   repository: https://github.com/pgEdge/pgedge-safesession
   source_sha256:
@@ -660,7 +660,7 @@ pgedge-snowflake-20261121:
   source_commit: 9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8
   source_ref: v2.6.1
   snapshot_date: '2026-11-21'
-  language: en
+  languages: [en, zh]
   translation_baseline: pgedge-snowflake
   repository: https://github.com/pgEdge/snowflake
   source_sha256:

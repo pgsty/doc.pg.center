@@ -1,12 +1,12 @@
 ---
 title: pgEdge SafeSession 变更日志
-description: 记录 pgEdge SafeSession 1.0 与 1.0-beta1 的新增、变更和修复。
+description: 记录 pgEdge SafeSession 1.1、1.0 与 1.0-beta1 的新增、变更和修复。
 weight: 200
-upstream_source: pgedge-safesession
-upstream_link: https://github.com/pgEdge/pgedge-safesession/blob/b406cd1e82cf21f30959351691c56de046562678/docs/changelog.md
+upstream_source: pgedge-safesession-20261121
+upstream_link: https://github.com/pgEdge/pgedge-safesession/blob/d66225fcceefa2b2cb2cdd7a0b8b84ccae8a4295/docs/changelog.md
 upstream_modified: true
-upstream_ref: b406cd1e82cf
-source_kind: pinned-main-snapshot
+upstream_ref: d66225fcceef
+source_kind: pinned-release-tag
 translation_status: machine-draft
 translation_notice: en
 translator: PGSTY 社区
@@ -19,6 +19,17 @@ pgEdge SafeSession 的所有重要变更都会记录在这个文件中。
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/)，
 本项目遵循 [Semantic Versioning](https://semver.org/spec/v2.0.0.html)。
+
+## [1.1] - 2026-11-06 {#11---2026-11-06}
+
+### 变更 {#changed}
+
+- 发布工作流在配置 pgEdge 软件包仓库之前安装仓库客户端证书，并验证密钥与证书匹配、证书及其颁发者均处于有效期内，以及证书链的颁发者符合预期。
+- 仓库重写失败时，发布工作流也会失败。
+- 发布工作流通过提交 SHA 固定构建器 Action。
+- 打包不再为 Debian bullseye 构建软件包。
+- 默认打包目标改为 v1.1。
+- 从 README 和文档首页移除 pgEdge Labs 品牌标识。
 
 ## [1.0] - 2026-08-25 {#10---2026-08-25}
 
@@ -69,7 +80,7 @@ pgEdge SafeSession 的所有重要变更都会记录在这个文件中。
   SET TRANSACTION）
 - 针对 GUC 切换行为的新回归测试
 
-### 变更 {#changed}
+### 变更 {#changed-1}
 
 - C 语言函数阻断现在默认只阻断 VOLATILE
   C 函数。IMMUTABLE 和 STABLE C 函数
@@ -169,6 +180,6 @@ pgEdge SafeSession 的所有重要变更都会记录在这个文件中。
 
 ---
 
-[上游原文](https://github.com/pgEdge/pgedge-safesession/blob/b406cd1e82cf21f30959351691c56de046562678/docs/changelog.md) · `b406cd1e82cf` · Copyright (c) 2025–2026, pgEdge, Inc. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
+[上游原文](https://github.com/pgEdge/pgedge-safesession/blob/d66225fcceefa2b2cb2cdd7a0b8b84ccae8a4295/docs/changelog.md) · `d66225fcceef` · Copyright (c) 2025–2026, pgEdge, Inc. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
 中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。

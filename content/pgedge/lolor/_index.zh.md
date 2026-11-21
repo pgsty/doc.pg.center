@@ -2,10 +2,10 @@
 title: LOLOR
 description: lolor 将 PostgreSQL 风格大对象存储在可复制的非 catalog 表中，并提供双向迁移与一致性检查。
 weight: 20
-upstream_source: pgedge-lolor
-upstream_link: https://github.com/pgEdge/lolor/blob/ac3893a7707a65f71f494f260b1e3cd88f171770/docs/index.md
+upstream_source: pgedge-lolor-20261121
+upstream_link: https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/docs/index.md
 upstream_modified: true
-upstream_ref: ac3893a7707a
+upstream_ref: 1548836b0df0
 source_kind: pinned-main-snapshot
 translation_status: machine-draft
 translation_notice: en
@@ -20,7 +20,7 @@ sidebar_root_menu: false
 
 
 > [!NOTE] 版本说明
-> 本文档来自上游 `main` 的固定源码快照；与原站的版本化文档可能存在差异。部署前请核对[版本与来源](/zh/pgedge/about/attribution/)。
+> 本版英文来源为 **1.3.0 开发快照；最新稳定标签为 v1.2.3**，固定于 `1548836b0df0`。中文已同步本轮增量，原有初稿未变部分仍待审校。部署前请核对[版本与来源](/zh/pgedge/about/attribution/)。
 
 
 [lolor](https://github.com/pgEdge/lolor) 是一个扩展，使 PostgreSQL 风格的大对象与逻辑复制兼容。
@@ -32,6 +32,7 @@ lolor 在 `lolor` schema 中创建并管理与大对象相关的表：
 ```
 lolor.pg_largeobject
 lolor.pg_largeobject_metadata
+lolor.pg_largeobject_description
 ```
 
 PostgreSQL 大对象允许在数据库内存储大文件。每个大对象由创建时分配的 OID 标识。lolor 将对象以较小分段存储在独立系统表中，并为大对象生成关联 OID，这些 OID 与原生大对象的 OID 不同。
@@ -88,6 +89,63 @@ SELECT lolor.fix_orphans('some_role');  -- reassign them and drop dead ACL entri
 
 没有 spock 时，迁移 DML 无法从逻辑解码中排除，因此只要数据库中存在逻辑复制 slot，两个函数都会拒绝迁移：`migrate_from_native()` 会引发 `WARNING` 并返回 -1，不做任何事（0 保留给“没有可迁移对象”），而 `migrate_to_native()` 会引发 `ERROR`。请在迁移前删除所有逻辑复制 slot；仅禁用订阅并不足够，因为其 slot 会保留变更，并在复制恢复时投递它们。
 
+### 删除扩展 {#dropping-the-extension}
+
+在复制集群中，lolor 表会被发布、订阅，或兼有两者。只要仍处于其中任一种状态，就会拒绝删除：删除本身虽能成功，但另一端仍会发送或等待已不在此节点上的表的行。请先按以下顺序解除复制关系：
+
+1. 在每个节点上停止创建和修改大对象，等待待复制的变更全部应用。然后确认各节点的数据一致：
+
+   ```sql
+   SELECT * FROM lolor.digest();   -- run on every node; the output must match
+   ```
+
+2. 停止发布这些表。使用 Spock 时，在每个发布这些表的提供者节点上，将它们从复制集中移除：
+
+   ```sql
+   SELECT spock.repset_remove_table('default', 'lolor.pg_largeobject');
+   SELECT spock.repset_remove_table('default', 'lolor.pg_largeobject_metadata');
+   SELECT spock.repset_remove_table('default', 'lolor.pg_largeobject_description');
+   ```
+
+   使用原生逻辑复制时，改为将它们从发布中移除：
+
+   ```sql
+   ALTER PUBLICATION mypub DROP TABLE lolor.pg_largeobject, lolor.pg_largeobject_metadata,
+       lolor.pg_largeobject_description;
+   ```
+
+   使用 `FOR TABLES IN SCHEMA lolor` 创建的发布，通过 `ALTER PUBLICATION mypub DROP TABLES IN SCHEMA lolor` 移除这些表。`FOR ALL TABLES` 发布只要存在，就会一直发布这些表：请删除该发布，或使用明确的表列表重新创建。
+
+3. 停止订阅这些表。创建 spock 订阅时同步过这些表的节点，仍会将其视为复制表；在该节点上刷新订阅，使其不再保留已从提供者复制集中移除的表：
+
+   ```sql
+   SELECT spock.sub_alter_sync('mysub');
+   ```
+
+   原生订阅使用以下语句刷新：
+
+   ```sql
+   ALTER SUBSCRIPTION mysub REFRESH PUBLICATION;
+   ```
+
+   至此，没有节点再发布这些表，也没有订阅再等待它们的变更，因此下面各节点的操作可以按任意顺序进行。
+
+4. 直接连接每个节点，将各节点上的数据迁出；使用 spock 时，迁移在修复模式下运行，不会被复制：
+
+   ```sql
+   SELECT lolor.migrate_to_native();
+   ```
+
+   只要数据库中存在使用 spock 之外的插件的逻辑复制槽，迁移就会被拒绝。原生订阅即使刷新或禁用，也仍在发布者上保留复制槽。请在迁移该节点之前，删除指向该节点的原生订阅，从而删除其复制槽。
+
+5. 直接连接每个节点，在没有其他客户端会话连接该数据库的情况下删除扩展：
+
+   ```sql
+   DROP EXTENSION lolor;
+   ```
+
+不使用复制时，只有一个节点：停止使用大对象，运行 `lolor.migrate_to_native()`，然后删除扩展。lolor 启用期间，同样要求只有一个会话。
+
 ## 限制 {#limitations}
 
 - 使用 lolor 扩展期间，不能使用 PostgreSQL 原生大对象功能。
@@ -95,6 +153,8 @@ SELECT lolor.fix_orphans('some_role');  -- reassign them and drop dead ACL entri
 - 只要任何其他会话连接到数据库，`lolor.enable()`、`lolor.disable()`、迁移函数、`CREATE EXTENSION lolor`，以及 lolor 启用时删除扩展，都会拒绝执行；规则与 `ALTER DATABASE ... RENAME` 相同：重命名的函数保留其 OID，因此已经解析过 `lo_*` 函数的会话会继续调用旧实现，元组移动也无法对其他 backend 做成原子操作。调用会话必须在 `enable()` 或 `disable()` 后重新连接。这些操作也只允许从客户端会话运行，因此复制 DDL 无法在应用工作进程中驱动它们。只有客户端会话计入：复制应用工作进程等后台 worker 不会按名称调用 `lo_*` 函数。为了可靠计数，这些操作都会先对数据库取得排他锁，使新的数据库连接等待到操作事务结束。单用户模式下它们无需会话检查即可运行。
 - 对于 `lolor.enable()`、`lolor.disable()`、迁移函数、`lolor.check_orphans()`、`lolor.fix_orphans()` 和删除扩展，已加载库与已安装扩展必须是同一版本。安装新的库文件后，在每个数据库中运行 `ALTER EXTENSION lolor UPDATE` 再使用它们；在此之前它们会拒绝执行并指出两个版本。
 - lolor 存储中的对象是普通表中的行，因此不能参与 `pg_shdepend`。`DROP ROLE`、`DROP OWNED BY` 和 `REASSIGN OWNED BY` 看不到它们：拥有它们或出现在其 ACL 中的角色可以不经警告被删除，而 `REASSIGN OWNED` / `DROP OWNED` 不会触及它们。删除角色前，在每个启用了 lolor 的数据库中运行 `REASSIGN OWNED BY` 或 `DROP OWNED BY`，再运行 `DROP ROLE`。对于拥有扩展的角色，应使用 `REASSIGN OWNED BY`：`DROP OWNED BY` 会连扩展一起移除，并且在仍有对象位于 lolor 存储中时会被拒绝。之后在每个这样的数据库中运行 `lolor.check_orphans()`，并用 `lolor.fix_orphans(new_owner)` 修复其报告；存在 orphan 时 `lolor.migrate_to_native()` 会拒绝执行。
+- 只要 `lolor.pg_largeobject`、`lolor.pg_largeobject_metadata` 或 `lolor.pg_largeobject_description` 属于此节点上的 spock 复制集、发布或订阅，或曾通过 spock 订阅同步到此节点，无论采用哪种删除方式，删除 lolor 都会被拒绝。删除本身虽能成功，但之后复制会中断，因为另一端仍在发送此节点已不存在的表的行。先将这些表从复制集、发布或订阅中移除，再迁出对象并删除扩展。该限制在删除表时强制执行，并非仅由事件触发器执行，因此禁用事件触发器也无法绕过。spock 订阅者只根据初始同步获知哪些表参与复制；此后才添加到复制集的表，不会被该节点上的检查发现。具体步骤见[删除扩展](#dropping-the-extension)。
+
 - 角色 OID 来自集群范围计数器并会回绕，因此新角色可能获得已删除角色的 OID，并静默成为该角色 orphan 对象的 owner 或被授权者。这无法事后检测，也是删除角色后应尽快运行 `lolor.check_orphans()` 的另一个原因。
 - 大对象迁移是节点本地的。原生大对象位于 `pg_catalog.pg_largeobject`，该表永远不会被复制，因此每个节点持有独立集合，而 `migrate_from_native()` 只迁移本地节点对象；安装 spock 时，迁移 DML 在 repair mode 中运行，不会被复制。请在每个持有原生大对象的节点上直接连接该节点执行迁移。该函数拒绝在应用工作进程中运行，因此通过 DDL 复制发送它会在每个订阅者上失败。迁移后的对象保留其原始原生 OID，这些 OID 没有节点编码：如果不同节点在同一 OID 下持有不同对象，各节点的 lolor 内容会发散，之后对这些对象的复制变更可能冲突。新创建的大对象没有碰撞风险，因为新 OID 通过 `lolor.node` 做节点编码，并与既有行检查。要让该风险变成错误而不是静默发散，可使用 `lolor.native_lo_oids()` 收集其他节点的 OID 并传入：`SELECT lolor.migrate_from_native(peer_oids => ARRAY[...])` 会在任何碰撞时拒绝执行。迁移完每个节点后，跨节点比较 `lolor.digest()` 以确认它们已收敛。
 
@@ -107,6 +167,6 @@ SELECT lolor.fix_orphans('some_role');  -- reassign them and drop dead ACL entri
 
 ---
 
-[上游原文](https://github.com/pgEdge/lolor/blob/ac3893a7707a65f71f494f260b1e3cd88f171770/docs/index.md) · `ac3893a7707a` · Copyright (c) 2024–2026, pgEdge, Inc. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
+[上游原文](https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/docs/index.md) · `1548836b0df0` · Copyright (c) 2024–2026, pgEdge, Inc. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
 中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。

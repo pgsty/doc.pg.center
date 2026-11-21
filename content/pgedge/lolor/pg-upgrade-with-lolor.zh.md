@@ -2,10 +2,10 @@
 title: 在 lolor 中使用 pg_upgrade
 description: 说明满足哪些条件时可以在安装 lolor 的集群上使用 pg_upgrade，以及升级前后的启用和禁用步骤。
 weight: 200
-upstream_source: pgedge-lolor
-upstream_link: https://github.com/pgEdge/lolor/blob/ac3893a7707a65f71f494f260b1e3cd88f171770/docs/pg_upgrade_with_lolor.md
+upstream_source: pgedge-lolor-20261121
+upstream_link: https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/docs/pg_upgrade_with_lolor.md
 upstream_modified: true
-upstream_ref: ac3893a7707a
+upstream_ref: 1548836b0df0
 source_kind: pinned-main-snapshot
 translation_status: machine-draft
 translation_notice: en
@@ -47,6 +47,6 @@ db1_18=# SELECT lolor.enable();
 
 ---
 
-[上游原文](https://github.com/pgEdge/lolor/blob/ac3893a7707a65f71f494f260b1e3cd88f171770/docs/pg_upgrade_with_lolor.md) · `ac3893a7707a` · Copyright (c) 2024–2026, pgEdge, Inc. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
+[上游原文](https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/docs/pg_upgrade_with_lolor.md) · `1548836b0df0` · Copyright (c) 2024–2026, pgEdge, Inc. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
 中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。

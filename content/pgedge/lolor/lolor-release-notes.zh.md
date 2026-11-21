@@ -2,10 +2,10 @@
 title: lolor 发布说明
 description: 记录 lolor 1.3.0、1.2.3 与 1.2.2 的功能、安全修复、迁移行为和升级注意事项。
 weight: 200
-upstream_source: pgedge-lolor
-upstream_link: https://github.com/pgEdge/lolor/blob/ac3893a7707a65f71f494f260b1e3cd88f171770/docs/lolor_release_notes.md
+upstream_source: pgedge-lolor-20261121
+upstream_link: https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/docs/lolor_release_notes.md
 upstream_modified: true
-upstream_ref: ac3893a7707a
+upstream_ref: 1548836b0df0
 source_kind: pinned-main-snapshot
 translation_status: machine-draft
 translation_notice: en
@@ -16,6 +16,9 @@ type: docs
 
 
 ## lolor 1.3.0 {#lolor-130}
+
+> [!NOTE] 尚未发布的开发版本
+> 这些说明描述固定 `main` 提交的开发内容。截至 2026 年 11 月 21 日核查，最新稳定标签仍为 `v1.2.3`。
 
 * 新增 PostgreSQL 原生存储与 lolor 存储之间的双向大对象迁移，在 C 中实现为 relation 到 relation 的直接复制（`lolor.migrate_storage()`），而不是循环调用大对象 API：
   * `lolor.migrate_from_native(peer_oids oid[] DEFAULT NULL)` 将原生 PostgreSQL 大对象移入 lolor 存储。它是 `CREATE EXTENSION lolor` 之后的手动步骤，需要超级用户，返回移动的对象数；迁移被拒绝时返回 -1。
@@ -36,6 +39,8 @@ type: docs
   * 如果数据库在较早版本上运行过 `DROP EXTENSION lolor`，这些行仍会存在，并指向已经不存在的表，而升级脚本不会在那里运行。在该数据库中以超级用户手动清理：用 `SELECT DISTINCT classid FROM pg_shdepend WHERE dbid = (SELECT oid FROM pg_database WHERE datname = current_database()) AND classid NOT IN (SELECT oid FROM pg_class)` 找到过期 class OID，然后执行 `DELETE FROM pg_shdepend WHERE dbid = <that dbid> AND classid IN (<those OIDs>)`。
 * **lolor 现在必须列在 `shared_preload_libraries` 中。** 按需加载会被拒绝：`CREATE EXTENSION lolor`、`LOAD 'lolor'`，以及任何触达 lolor 函数的调用，都会以 `lolor must be loaded via "shared_preload_libraries"` 失败；lolor 未安装或禁用时，原生 `pg_catalog.lo_*` 函数不受影响。下述删除防护是对象访问钩子，只有预加载库时它才存在于每个 backend 和 worker 中；库缺失或损坏现在会在服务器启动时失败，而不是等到第一次 `lo_open()`。按以下顺序升级：安装新的库文件，把 `lolor` 加入 `shared_preload_libraries`，重启，然后在每个数据库中运行 `ALTER EXTENSION lolor UPDATE`。在文件安装和重启之间，任何按需加载新库的会话都会得到该错误，因此应尽快重启。
 * 删除扩展受对象访问钩子保护。只要 lolor 处于启用状态，或仍有对象留在 lolor 存储中，`DROP EXTENSION`、`DROP SCHEMA lolor CASCADE`、`DROP OWNED BY` 以及所有可达扩展的路径都会拒绝；检查由执行删除的 backend 在删除时刻查询 catalog。**删除操作本身不再迁移对象**：先运行 `lolor.migrate_to_native()`。事件触发器只会恢复原生 `pg_catalog.lo_*` 名称。新的超级用户设置 `lolor.allow_unsafe_drop` 会跳过两项检查并丢弃 lolor 存储内容。由于删除会把原生函数名称改回，它与 `lolor.disable()` 要求相同：没有其他会话连接到数据库，并且必须在客户端会话中执行。
+* 只要 lolor 的表属于此节点上的 spock 复制集、发布（包括使用 `FOR ALL TABLES` 或 `FOR TABLES IN SCHEMA lolor` 创建的发布）或订阅，或曾通过 spock 订阅同步到此节点，删除 lolor 就会被拒绝。删除本身虽能成功，但之后复制会中断：另一端仍在发送此节点已不存在的表的行，而通过 `DROP OWNED BY` 移除的订阅会留下复制槽。错误消息会指出这些表所属的复制集、发布或订阅；请先从中移除表。检查在删除表时强制执行，因此禁用事件触发器后仍然有效。
+
 * `lolor.enable()` 和 `lolor.disable()` 只允许从客户端会话运行，因此复制 DDL 无法在应用工作进程中执行它们；在那里被拒绝会让该节点的复制永远重试。
 * `CREATE EXTENSION lolor` 与 `lolor.enable()` 要求相同，因为安装脚本会以同样方式重命名原生函数：没有其他会话连接到数据库，并且必须在客户端会话中执行。
 * `lolor.enable()`、`lolor.disable()` 和 `lolor.is_enabled()` 现在在 `pg_catalog` 中探测精确函数签名。它们之前按 `proname` 在所有 schema 中匹配，因此任何在任一 schema 拥有 `CREATE` 权限的用户都可以定义名为 `lolor_lo_open` 的函数，把 lolor 卡在永久“不一致状态”，该状态还会阻止 `DROP EXTENSION`。这两个函数现在都会发出客户端会话必须重连的通知，因为 libpq 会按连接缓存大对象函数 OID；只要有任何其他会话连接到数据库，它们也会拒绝执行，因为重命名后的函数保留其 OID，其他会话无法被强制看到切换。
@@ -61,6 +66,6 @@ type: docs
 
 ---
 
-[上游原文](https://github.com/pgEdge/lolor/blob/ac3893a7707a65f71f494f260b1e3cd88f171770/docs/lolor_release_notes.md) · `ac3893a7707a` · Copyright (c) 2024–2026, pgEdge, Inc. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
+[上游原文](https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/docs/lolor_release_notes.md) · `1548836b0df0` · Copyright (c) 2024–2026, pgEdge, Inc. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
 中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。

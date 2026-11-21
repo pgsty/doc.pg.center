@@ -2,8 +2,8 @@
 title: 函数索引
 description: 函数索引：阅读目录。
 weight: 60
-upstream_source: pgedge
-upstream_link: https://github.com/pgEdge/spock/tree/4ac1aec2f0807dc7ee806ab99a6e99a4556186df
+upstream_source: pgedge-spock-20261121
+upstream_link: https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/spock_functions/functions/index.md
 type: docs
 ---
 

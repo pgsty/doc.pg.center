@@ -3,21 +3,21 @@ title: 来源与署名
 description: 固定源码版本、版权声明、内容改动与译文状态。
 weight: 10
 upstream_source: pgedge
-upstream_link: https://github.com/pgEdge/spock/tree/4ac1aec2f0807dc7ee806ab99a6e99a4556186df
+upstream_link: https://github.com/pgEdge/spock/tree/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c
 type: docs
 ---
 
 
 ## 版本与来源 {#versions}
 
-本站导入四个上游仓库 `main` 分支的固定快照，采集于 2026-11-07。源码快照可能包含版本化网站之后的更新；**本站不把这些内容统一标作 Spock 6.0.0 稳定版或其他指定发布版**。版本化网站的 Spock 6.0.0 Beta、LOLOR 1.2.3、SafeSession 1.0、Snowflake 2.6 入口一并保留，部署时请比对所用二进制版本。
+英文版于 2026 年 11 月 21 日更新。Spock 使用预发布标签，SafeSession 和 Snowflake 使用发布标签，LOLOR 使用尚未发布的 1.3.0 开发快照。中文已同步本轮增量；原有初稿未变部分仍待逐句审校。
 
-| 扩展 | 固定提交 | 原站版本入口 |
+| 扩展 | 英文来源 | 版本类型 |
 | --- | --- | --- |
-| spock | [`4ac1aec2f080`](https://github.com/pgEdge/spock/tree/4ac1aec2f0807dc7ee806ab99a6e99a4556186df) | [官方文档](https://docs.pgedge.com/spock-v6/v6-0-0-beta/) |
-| lolor | [`ac3893a7707a`](https://github.com/pgEdge/lolor/tree/ac3893a7707a65f71f494f260b1e3cd88f171770) | [官方文档](https://docs.pgedge.com/lolor/v1-2-3/) |
-| safesession | [`b406cd1e82cf`](https://github.com/pgEdge/pgedge-safesession/tree/b406cd1e82cf21f30959351691c56de046562678) | [官方文档](https://docs.pgedge.com/pgedge-safesession/v1-0/) |
-| snowflake | [`429a16803c8c`](https://github.com/pgEdge/snowflake/tree/429a16803c8c6336fcfede7cce0ccd3de05216d8) | [官方文档](https://docs.pgedge.com/snowflake/v2-6/) |
+| spock | [`d05e2e2b6a82`](https://github.com/pgEdge/spock/tree/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c) | v6.0.0-beta.2；预发布版 |
+| lolor | [`1548836b0df0`](https://github.com/pgEdge/lolor/tree/1548836b0df0819e5415a9d0574afd93e9a64f1d) | 1.3.0 开发快照；最新稳定版 v1.2.3 |
+| safesession | [`d66225fcceef`](https://github.com/pgEdge/pgedge-safesession/tree/d66225fcceefa2b2cb2cdd7a0b8b84ccae8a4295) | v1.1 |
+| snowflake | [`9506e1bd5c1f`](https://github.com/pgEdge/snowflake/tree/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8) | v2.6.1 |
 
 ## 版权与修改 {#copyright}
 

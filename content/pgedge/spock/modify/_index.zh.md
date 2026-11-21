@@ -2,8 +2,8 @@
 title: 调整集群
 description: 调整集群：阅读目录。
 weight: 70
-upstream_source: pgedge
-upstream_link: https://github.com/pgEdge/spock/tree/4ac1aec2f0807dc7ee806ab99a6e99a4556186df
+upstream_source: pgedge-spock-20261121
+upstream_link: https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/modify/index.md
 type: docs
 ---
 
@@ -12,4 +12,4 @@ type: docs
 
 - [Adding a Node with pgBackRest（英文）](/pgedge/spock/modify/add-node-pgbackrest/)
 - [Adding a Node to a Replicating Cluster（英文）](/pgedge/spock/modify/)
-- [Tutorial: Upgrading the Postgres Version In Place with pg_upgrade（英文）](/pgedge/spock/modify/pg-upgrade-rolling-tutorial/)
+- [教程：使用 pg_upgrade 原地升级 PostgreSQL 版本](/zh/pgedge/spock/modify/pg-upgrade-rolling-tutorial/)

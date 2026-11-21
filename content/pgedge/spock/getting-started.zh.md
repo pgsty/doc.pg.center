@@ -2,11 +2,11 @@
 title: 创建 Spock 集群：端到端安装指南
 description: 从 pgEdge 软件包或源码安装 Spock，并完成双节点 active-active 复制集群的配置与验证。
 weight: 30
-upstream_source: pgedge-spock
-upstream_link: https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/getting_started.md
+upstream_source: pgedge-spock-20261121
+upstream_link: https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/getting_started.md
 upstream_modified: true
-upstream_ref: 4ac1aec2f080
-source_kind: pinned-main-snapshot
+upstream_ref: d05e2e2b6a82
+source_kind: pinned-release-tag
 linkTitle: 快速上手
 translation_status: machine-draft
 translation_notice: en
@@ -91,13 +91,13 @@ sudo apt update
 对于 RHEL/Rocky Linux/AlmaLinux：
 
 ```bash
-sudo dnf install -y pgedge-postgres18-server pgedge-postgres18-contrib pgedge-spock18
+sudo dnf install -y pgedge-postgres18-server pgedge-postgres18-contrib pgedge-spock50_18
 ```
 
 对于 Ubuntu/Debian：
 
 ```bash
-sudo apt install -y pgedge-postgres18-server pgedge-postgres18-contrib pgedge-spock18
+sudo apt install -y pgedge-postgresql-18 pgedge-postgresql-18-spock50
 ```
 
 在每个节点上初始化 PostgreSQL 数据库集群。
@@ -520,6 +520,6 @@ forward_origins   |
 
 ---
 
-[上游原文](https://github.com/pgEdge/spock/blob/4ac1aec2f0807dc7ee806ab99a6e99a4556186df/docs/getting_started.md) · `4ac1aec2f080` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
+[上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/getting_started.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
 中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。

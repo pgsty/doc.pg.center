@@ -2,11 +2,11 @@
 title: 在新集群中创建 Snowflake 序列
 description: 说明托管部署如何自动分配 snowflake.node，以及自管或源码安装如何手动配置节点标识符。
 weight: 200
-upstream_source: pgedge-snowflake
-upstream_link: https://github.com/pgEdge/snowflake/blob/429a16803c8c6336fcfede7cce0ccd3de05216d8/docs/creating.md
+upstream_source: pgedge-snowflake-20261121
+upstream_link: https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8/docs/creating.md
 upstream_modified: true
-upstream_ref: 429a16803c8c
-source_kind: pinned-main-snapshot
+upstream_ref: 9506e1bd5c1f
+source_kind: pinned-release-tag
 translation_status: machine-draft
 translation_notice: en
 translator: PGSTY 社区
@@ -58,6 +58,6 @@ Snowflake 配置完成后，可以先[转换](/zh/pgedge/snowflake/converting/) 
 
 ---
 
-[上游原文](https://github.com/pgEdge/snowflake/blob/429a16803c8c6336fcfede7cce0ccd3de05216d8/docs/creating.md) · `429a16803c8c` · Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
+[上游原文](https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8/docs/creating.md) · `9506e1bd5c1f` · Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
 中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。

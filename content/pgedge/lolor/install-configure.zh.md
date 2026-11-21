@@ -2,10 +2,10 @@
 title: 安装并配置 lolor
 description: 安装 lolor 扩展，配置 shared_preload_libraries、节点编号，并把大对象表加入 Spock 复制集。
 weight: 200
-upstream_source: pgedge-lolor
-upstream_link: https://github.com/pgEdge/lolor/blob/ac3893a7707a65f71f494f260b1e3cd88f171770/docs/install_configure.md
+upstream_source: pgedge-lolor-20261121
+upstream_link: https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/docs/install_configure.md
 upstream_modified: true
-upstream_ref: ac3893a7707a
+upstream_ref: 1548836b0df0
 source_kind: pinned-main-snapshot
 translation_status: machine-draft
 translation_notice: en
@@ -57,16 +57,17 @@ SET search_path=lolor,"$user",public,pg_catalog
 
 lolor 会把 `pg_catalog.lo_*` 中的既有方法重命名为 `pg_catalog.lo_*_orig`，并引入这些方法的新版本。如果移除扩展，重命名后的 `pg_catalog.lo_*_orig` 函数会恢复其初始名称。
 
-使用 Spock 复制大对象时，`pg_largeobject` 和 `pg_largeobject_metadata` 表必须属于你的复制集。连接 lolor 数据库，并使用 `spock.repset_add_table` 添加它们：
+使用 Spock 复制大对象时，`pg_largeobject`、`pg_largeobject_metadata` 和 `pg_largeobject_description` 三张表必须属于你的复制集。第三张表保存从原生存储迁入的各个对象的注释；如果不复制它，`lo_unlink()` 会在其他节点上留下该注释，后来添加或重新同步的节点也收不到这些注释。连接 lolor 数据库，并使用 `spock.repset_add_table` 添加它们：
 
 ```sql
 -- 'default' is Spock's built-in replication set; subscriptions consume it automatically.
 SELECT spock.repset_add_table('default', 'lolor.pg_largeobject');
 SELECT spock.repset_add_table('default', 'lolor.pg_largeobject_metadata');
+SELECT spock.repset_add_table('default', 'lolor.pg_largeobject_description');
 ```
 
 ---
 
-[上游原文](https://github.com/pgEdge/lolor/blob/ac3893a7707a65f71f494f260b1e3cd88f171770/docs/install_configure.md) · `ac3893a7707a` · Copyright (c) 2024–2026, pgEdge, Inc. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
+[上游原文](https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/docs/install_configure.md) · `1548836b0df0` · Copyright (c) 2024–2026, pgEdge, Inc. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
 中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
