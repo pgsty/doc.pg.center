@@ -39,7 +39,7 @@ components:
         - { title: "REST API", url: /patroni/rest_api/, icon: fa-solid fa-plug }
     - title: "pgBackRest"
       meta: "备份与恢复"
-      version: v2.60.0
+      version: v2.60.1
       icon: fa-solid fa-couch
       desc: "设计可靠的备份、恢复、归档、保留策略与时间点恢复工作流。"
       url: /pgbackrest/
@@ -63,7 +63,7 @@ components:
         - { title: "常见问题", url: /pgbouncer/faq/, icon: fa-solid fa-circle-question }
     - title: "pgBadger"
       meta: "日志分析"
-      version: v13.2-dev
+      version: v13.3
       icon: fa-solid fa-otter
       desc: "把 PostgreSQL 与 PgBouncer 日志转化为查询、负载、错误与运行报告。"
       url: /pgbadger/
@@ -75,7 +75,7 @@ components:
         - { title: "示例报告", url: /pgbadger/sample-reports/, icon: fa-solid fa-chart-column }
     - title: "HAProxy"
       meta: "负载均衡"
-      version: v3.4
+      version: v3.4.8
       icon: fa-solid fa-network-wired
       desc: "阅读完整的 HAProxy 3.4 入门、配置与管理中文手册。"
       url: /haproxy/
@@ -87,7 +87,7 @@ components:
         - { title: "ACL 与样本提取", url: /haproxy/acls-and-samples/, icon: fa-solid fa-filter }
     - title: "etcd"
       meta: "共识与协调"
-      version: v3.7.3
+      version: v3.7.4
       icon: fa-solid fa-gear
       desc: "运维强一致分布式键值存储，并理解其 API、Raft 模型、版本升级与内部原理。"
       url: /etcd/
@@ -106,19 +106,19 @@ kernels:
   items:
   - title: PostgreSQL
     meta: PostgreSQL 原生内核
-    version: '18.6'
+    version: '19.0'
     icon: pgsql-icon-postgresql
-    desc: 阅读活跃版本手册、预览 PostgreSQL 19，或查阅历代版本的完整文档。
+    desc: 阅读活跃版本手册、探索开发版，或查阅历代版本的完整文档。
     url: /postgresql/
     shortcuts_label: PostgreSQL 文档快捷入口
     shortcuts:
-    - title: 当前稳定版 · 18.6
-      url: https://pgsql.cc/docs/18/index.html
+    - title: 当前稳定版 · 19.0
+      url: https://pgsql.cc/docs/19/index.html
       icon: fa-solid fa-book-open
     - title: 活跃版本
       url: /postgresql/#supported
       icon: fa-solid fa-layer-group
-    - title: PostgreSQL 19 预览
+    - title: PostgreSQL 20 开发版
       url: /postgresql/#development
       icon: fa-solid fa-flask
     - title: 历史版本
@@ -147,7 +147,7 @@ kernels:
 
   - title: DocumentDB
     meta: 文档数据库
-    version: '1.0'
+    version: '1.2.0'
     icon: fa-solid fa-file-code
     desc: 使用 BSON 文档存储、读写与索引，并通过 MongoDB 协议网关连接。
     url: /documentdb/
@@ -187,7 +187,7 @@ kernels:
       icon: fa-solid fa-book-open
   - title: Babelfish
     meta: SQL Server 兼容
-    version: '6.2.0'
+    version: '6.1 开源版 / 6.2 Aurora'
     icon: fa-solid fa-fish
     desc: 通过 TDS 协议执行 T-SQL，查阅安装流程、兼容范围与迁移方法。
     url: /babelfish/
@@ -207,7 +207,7 @@ kernels:
       icon: fa-solid fa-book-open
   - title: PolarDB
     meta: 共享存储
-    version: '17.10.1.0'
+    version: '17.11.1.0'
     icon: fa-solid fa-cloud
     desc: 查阅共享存储、弹性并行查询、部署运维与 PolarDB 内核原理。
     url: /polardb/
@@ -288,7 +288,7 @@ kernels:
       icon: fa-solid fa-book-open
   - title: Percona TDE
     meta: 透明数据加密
-    version: 2.2.2
+    version: 2.3.0
     icon: fa-solid fa-shield-halved
     desc: 加密 PostgreSQL 数据表与 WAL，管理密钥并规划备份恢复流程。
     url: /percona/

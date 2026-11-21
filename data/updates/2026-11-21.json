@@ -1,6 +1,6 @@
 {
   "date": "2026-11-21",
-  "status": "english-updated-translations-pending",
+  "status": "english-and-chinese-complete-other-languages-pending",
   "base_head": "ec52b35ed513f128fe4cf1755b2243e685695abe",
   "baseline": "Frozen working tree including preexisting OpenHalo edits; see external baseline-manifest.json",
   "artifact_directory": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables",
@@ -43,7 +43,7 @@
           "page_tasks": 1,
           "provenance_only_pages": 0,
           "existing_provenance_only_gaps": 0,
-          "status": "pending"
+          "status": "complete"
         }
       }
     },
@@ -117,7 +117,7 @@
           "page_tasks": 20,
           "provenance_only_pages": 0,
           "existing_provenance_only_gaps": 0,
-          "status": "pending"
+          "status": "complete"
         },
         "fr": {
           "page_tasks": 20,
@@ -219,49 +219,49 @@
       "english_target": "13.3",
       "note": "稳定版；发布记录和安装版本",
       "english_status": "updated",
-      "english_content_pages": 4,
-      "english_provenance_only_pages": 10,
+      "english_content_pages": 7,
+      "english_provenance_only_pages": 7,
       "english_added_pages": 0,
       "languages": {
         "zh": {
-          "page_tasks": 4,
-          "provenance_only_pages": 10,
+          "page_tasks": 7,
+          "provenance_only_pages": 7,
           "existing_provenance_only_gaps": 0,
-          "status": "pending"
+          "status": "complete"
         },
         "fr": {
-          "page_tasks": 4,
-          "provenance_only_pages": 10,
+          "page_tasks": 7,
+          "provenance_only_pages": 7,
           "existing_provenance_only_gaps": 0,
           "status": "pending"
         },
         "ja": {
-          "page_tasks": 4,
-          "provenance_only_pages": 10,
+          "page_tasks": 7,
+          "provenance_only_pages": 7,
           "existing_provenance_only_gaps": 0,
           "status": "pending"
         },
         "de": {
-          "page_tasks": 4,
-          "provenance_only_pages": 10,
+          "page_tasks": 7,
+          "provenance_only_pages": 7,
           "existing_provenance_only_gaps": 0,
           "status": "pending"
         },
         "ru": {
-          "page_tasks": 4,
-          "provenance_only_pages": 10,
+          "page_tasks": 7,
+          "provenance_only_pages": 7,
           "existing_provenance_only_gaps": 0,
           "status": "pending"
         },
         "ar": {
-          "page_tasks": 4,
-          "provenance_only_pages": 10,
+          "page_tasks": 7,
+          "provenance_only_pages": 7,
           "existing_provenance_only_gaps": 0,
           "status": "pending"
         },
         "es": {
-          "page_tasks": 4,
-          "provenance_only_pages": 10,
+          "page_tasks": 7,
+          "provenance_only_pages": 7,
           "existing_provenance_only_gaps": 0,
           "status": "pending"
         }
@@ -282,7 +282,7 @@
           "page_tasks": 4,
           "provenance_only_pages": 31,
           "existing_provenance_only_gaps": 0,
-          "status": "pending"
+          "status": "complete"
         },
         "fr": {
           "page_tasks": 4,
@@ -337,7 +337,7 @@
           "page_tasks": 7,
           "provenance_only_pages": 92,
           "existing_provenance_only_gaps": 0,
-          "status": "pending"
+          "status": "complete"
         },
         "fr": {
           "page_tasks": 7,
@@ -392,7 +392,7 @@
           "page_tasks": 1,
           "provenance_only_pages": 0,
           "existing_provenance_only_gaps": 0,
-          "status": "pending"
+          "status": "complete"
         }
       }
     },
@@ -449,7 +449,7 @@
           "page_tasks": 1,
           "provenance_only_pages": 0,
           "existing_provenance_only_gaps": 0,
-          "status": "pending"
+          "status": "complete"
         }
       }
     },
@@ -468,7 +468,7 @@
           "page_tasks": 10,
           "provenance_only_pages": 79,
           "existing_provenance_only_gaps": 0,
-          "status": "pending"
+          "status": "complete"
         }
       }
     },
@@ -487,7 +487,7 @@
           "page_tasks": 52,
           "provenance_only_pages": 594,
           "existing_provenance_only_gaps": 0,
-          "status": "pending"
+          "status": "complete"
         }
       }
     },
@@ -525,7 +525,7 @@
           "page_tasks": 17,
           "provenance_only_pages": 31,
           "existing_provenance_only_gaps": 66,
-          "status": "pending"
+          "status": "complete"
         }
       }
     },
@@ -544,7 +544,7 @@
           "page_tasks": 32,
           "provenance_only_pages": 278,
           "existing_provenance_only_gaps": 0,
-          "status": "pending"
+          "status": "complete"
         }
       }
     },
@@ -563,7 +563,7 @@
           "page_tasks": 1,
           "provenance_only_pages": 0,
           "existing_provenance_only_gaps": 0,
-          "status": "pending"
+          "status": "complete"
         }
       }
     },
@@ -601,7 +601,7 @@
           "page_tasks": 1,
           "provenance_only_pages": 0,
           "existing_provenance_only_gaps": 0,
-          "status": "pending"
+          "status": "complete"
         },
         "fr": {
           "page_tasks": 1,
@@ -675,47 +675,334 @@
   "translation_queue": [
     {
       "language": "zh",
-      "status": "pending",
-      "assignee": null,
-      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/translations/zh.md"
+      "status": "complete",
+      "assignee": "Codex",
+      "page_tasks": 154,
+      "provenance_only_pages": 1112,
+      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/supplement-2026-11-22/translations/zh.md"
     },
     {
       "language": "fr",
       "status": "pending",
       "assignee": null,
-      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/translations/fr.md"
+      "page_tasks": 39,
+      "provenance_only_pages": 130,
+      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/supplement-2026-11-22/translations/fr.md"
     },
     {
       "language": "ja",
       "status": "pending",
       "assignee": null,
-      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/translations/ja.md"
+      "page_tasks": 39,
+      "provenance_only_pages": 130,
+      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/supplement-2026-11-22/translations/ja.md"
     },
     {
       "language": "de",
       "status": "pending",
       "assignee": null,
-      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/translations/de.md"
+      "page_tasks": 39,
+      "provenance_only_pages": 130,
+      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/supplement-2026-11-22/translations/de.md"
     },
     {
       "language": "ru",
       "status": "pending",
       "assignee": null,
-      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/translations/ru.md"
+      "page_tasks": 39,
+      "provenance_only_pages": 130,
+      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/supplement-2026-11-22/translations/ru.md"
     },
     {
       "language": "ar",
       "status": "pending",
       "assignee": null,
-      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/translations/ar.md"
+      "page_tasks": 39,
+      "provenance_only_pages": 130,
+      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/supplement-2026-11-22/translations/ar.md"
     },
     {
       "language": "es",
       "status": "pending",
       "assignee": null,
-      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/translations/es.md"
+      "page_tasks": 39,
+      "provenance_only_pages": 130,
+      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/supplement-2026-11-22/translations/es.md"
     }
   ],
-  "validation": "See external validation.json; full make check remains blocked by untranslated differences.",
-  "release_status": "uncommitted; not deployed"
+  "validation": {
+    "build": "passed",
+    "english_chinese_content": "passed",
+    "documentdb_pairs": 310,
+    "routes": "passed",
+    "links": "passed",
+    "search": "passed",
+    "desktop_mobile_preview": "passed",
+    "make_check": "failed: 678 untranslated upstream-link differences in fr/ja/de/ru/ar/es",
+    "details": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/chinese/validation.json"
+  },
+  "release_status": "English and Chinese committed locally; not pushed or deployed",
+  "english_commits": [
+    {
+      "component": "pgbackrest",
+      "commit": "57dec5b3cb5d96fc74c22a3da52da40564c8eb4f"
+    },
+    {
+      "component": "pgbadger",
+      "commit": "4d210318521825a52f37d1b8c549a4b86bac7261"
+    },
+    {
+      "component": "haproxy",
+      "commit": "ca9e5b7bf1e4b727b74e5b425a31dd8002a4efba"
+    },
+    {
+      "component": "etcd",
+      "commit": "78cc40d93b87161bec61a1e21223117d1cbcab37"
+    },
+    {
+      "component": "percona",
+      "commit": "0b31b026af36220fd02b0cda67267300fb451a7b"
+    },
+    {
+      "component": "cloudberry",
+      "commit": "f8b038a7740c406eaae3d5184dcf8b96a3feb37e"
+    },
+    {
+      "component": "pgedge",
+      "commit": "577ff09690ff9f4f0ba734e485fa1c3fc4d756d6"
+    },
+    {
+      "component": "documentdb",
+      "commit": "df1bc33fbade8949a155903b6f2cc32a65fbe7e0"
+    },
+    {
+      "component": "polardb",
+      "commit": "108d523be8b5e33d0497fb72f9d0383d13284909"
+    },
+    {
+      "component": "babelfish",
+      "commit": "dcb15e052b82df771fe54a07a80bf01e16c98aac"
+    },
+    {
+      "component": "orioledb",
+      "commit": "84070fa3e3176ad556856ee2199d6dcdb5e469b9"
+    },
+    {
+      "component": "postgresql",
+      "commit": "f98e0ee7d02b47c40843c7a31fafa981f3d7ae7b"
+    },
+    {
+      "component": "site",
+      "commit": "489b10dece9ee81edf7f88cc5b0d700d5b663ce2"
+    },
+    {
+      "component": "etcd-review-fix",
+      "commit": "97036a89b9c4a63a7e1cfcf2a8e2e758756f5c7c"
+    },
+    {
+      "component": "etcd-response-review-fix",
+      "commit": "a66191d03404891bd46782783bdf0f6232351b3f"
+    },
+    {
+      "component": "pgbadger-label-review-fix",
+      "commit": "7abb546099a6689946f79965c5e1a3828a6e702f"
+    },
+    {
+      "component": "documentdb-label-review-fix",
+      "commit": "a6154d5098b3a1ed97f30014258bca79aa647743"
+    },
+    {
+      "component": "cloudberry-callout-review-fix",
+      "commit": "67be48541d921bcf027bc4ffe51013080cdb11d7"
+    }
+  ],
+  "chinese_execution": {
+    "status": "complete",
+    "total_page_tasks": 154,
+    "reviewed_page_tasks": 154,
+    "new_pages": 48,
+    "provenance_only_pages": 1112,
+    "review_mode": "three-pass self-review",
+    "ledger": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/chinese/ledger.json",
+    "validation": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/chinese/validation.json",
+    "scope_note": "Unchanged machine-draft material and preexisting translation gaps are not claimed as reviewed."
+  },
+  "chinese_commits": [
+    {
+      "component": "pgbackrest",
+      "commit": "89a3b1bcf16b82b9d3d419980cb990779fb9bce2"
+    },
+    {
+      "component": "pgbadger",
+      "commit": "9d87507d3d9a14afcfd989979b8030395148b31c"
+    },
+    {
+      "component": "haproxy",
+      "commit": "08321fdfd77635b8e5375b8b38d181b6c2000bea"
+    },
+    {
+      "component": "etcd",
+      "commit": "818255dc4c37978de07c08c6cd677f698c699c5c"
+    },
+    {
+      "component": "percona",
+      "commit": "b8d2438751fabff2684e41882716a35d3228c322"
+    },
+    {
+      "component": "cloudberry",
+      "commit": "842b5f932b7837db04a7983fc440ccee4208731c"
+    },
+    {
+      "component": "pgedge",
+      "commit": "bb354740a21ca981e839c454504d0f6738e62c8f"
+    },
+    {
+      "component": "documentdb",
+      "commit": "87caa46f3413c7fd74953b0ad50363bf997ccabf"
+    },
+    {
+      "component": "polardb",
+      "commit": "3c1cf276fe93e2d0dde8428d2a068353403d96d7"
+    },
+    {
+      "component": "babelfish",
+      "commit": "1cd0acc83b6416d546b0a5632e48062a8bd21fbe"
+    },
+    {
+      "component": "orioledb",
+      "commit": "1f7542b18d8ccbb9bf92195fd46c7a2381280ab2"
+    },
+    {
+      "component": "postgresql",
+      "commit": "03e825222d85e95bdf1c8e1026374472b1a271bd"
+    }
+  ],
+  "english_final_head": "22c2b6182e97ad02821d013a530818ca4762ac44",
+  "english_followups": [
+    {
+      "component": "pgbadger",
+      "commit": "7abb546099a6689946f79965c5e1a3828a6e702f",
+      "patch": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/chinese/english-pgbadger-label-fix.patch",
+      "changed_sources": [
+        "content/pgbadger/command-line.md",
+        "content/pgbadger/download.md",
+        "content/pgbadger/incremental-reports.md",
+        "content/pgbadger/parallel-processing.md",
+        "content/pgbadger/releases/_index.md"
+      ],
+      "languages": [
+        "zh",
+        "fr",
+        "ja",
+        "de",
+        "ru",
+        "ar",
+        "es"
+      ],
+      "status": "Chinese complete; other applicable languages pending"
+    },
+    {
+      "component": "cloudberry",
+      "commit": "67be48541d921bcf027bc4ffe51013080cdb11d7",
+      "patch": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/chinese/english-cloudberry-callout-fix.patch",
+      "changed_sources": [
+        "content/cloudberry/reference/modules/yezzey.md",
+        "content/cloudberry/sys-admin/migration-and-upgrade/upgrade-within-2x.md"
+      ],
+      "languages": [
+        "zh"
+      ],
+      "status": "English and Chinese complete"
+    },
+    {
+      "component": "cloudberry",
+      "commit": "551c59ec293d248e32b62d2b936a1adfcae19062",
+      "patch": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/chinese/english-cloudberry-source-status.patch",
+      "changed_sources": [
+        "content/cloudberry/_index.md",
+        "content/cloudberry/pxf/_index.md"
+      ],
+      "languages": [
+        "zh"
+      ],
+      "status": "English and Chinese complete"
+    },
+    {
+      "component": "pgedge",
+      "commit": "82cd97a300b467744c3e7a100c826cd86ef71ba3",
+      "patch": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/chinese/english-pgedge-final.patch",
+      "languages": [
+        "zh"
+      ],
+      "status": "English and Chinese complete"
+    },
+    {
+      "component": "documentdb",
+      "commit": "9fc66a92944fd87a3feb5695d2799043d2cf65c1",
+      "patch": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/chinese/english-documentdb-final.patch",
+      "languages": [
+        "zh"
+      ],
+      "status": "English and Chinese complete"
+    },
+    {
+      "component": "site",
+      "commit": "fe11d6538e7eb446e74a98304a791a46c9839448",
+      "patch": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/chinese/english-site-final.patch",
+      "languages": [
+        "zh",
+        "fr",
+        "ja",
+        "de",
+        "ru",
+        "ar",
+        "es"
+      ],
+      "status": "Chinese complete; other applicable languages pending"
+    },
+    {
+      "component": "haproxy",
+      "commit": "c95ad5760c37f7d47b809e5ae93e38a3d093ac90",
+      "patch": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/chinese/english-haproxy-status-final.patch",
+      "changed_sources": [
+        "content/haproxy/_index.md"
+      ],
+      "languages": [
+        "zh"
+      ],
+      "status": "English and Chinese complete"
+    },
+    {
+      "component": "percona",
+      "commit": "85df5463ab45d5ff7c9eae4200278c09cac2e93e",
+      "patch": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/chinese/english-percona-status-final.patch",
+      "changed_sources": [
+        "content/percona/_index.md",
+        "content/percona/site/attribution.md"
+      ],
+      "languages": [
+        "zh"
+      ],
+      "status": "English and Chinese complete"
+    },
+    {
+      "component": "documentdb",
+      "commit": "22c2b6182e97ad02821d013a530818ca4762ac44",
+      "patch": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/chinese/english-documentdb-search-final.patch",
+      "changed_sources": [
+        "content/documentdb/reference/commands/contrib/documentdb_distributed/rebalancer.md"
+      ],
+      "languages": [
+        "zh"
+      ],
+      "status": "English and Chinese complete"
+    }
+  ],
+  "supplement": {
+    "directory": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/supplement-2026-11-22",
+    "english_final_inventory": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/supplement-2026-11-22/english-final-inventory.json",
+    "translation_tasks": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/supplement-2026-11-22/translation-tasks.json",
+    "original_archive": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/doc-pg-center-english-update-2026-11-21.tar.gz",
+    "archive": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/doc-pg-center-update-complete-2026-11-22.tar.gz"
+  }
 }

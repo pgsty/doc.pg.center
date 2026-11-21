@@ -22,16 +22,18 @@ PG.CENTER 转载并整理了PostgreSQL 运维工具和数据库内核项目的�
 
 ## 总览 {#summary}
 
+以下英文更新于 **2026 年 11 月 21 日**完成审阅；中文增量于 **2026 年 11 月 22 日**完成三轮自审。其他译本仍采用原有来源版本，等待同步。`data/upstreams.yaml` 分别记录各语言的基线，页面中的来源链接指向对应修订。既有初稿与缺译提示继续保留。
+
 | 组件 | 上游作品 | 固定版本 | 授权协议 | 保留的完整声明 |
 |---|---|---|---|---|
 | [Patroni](/zh/patroni/) | [Patroni 文档](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [上游 `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/zh/pgbackrest/) | [pgBackRest 文档](https://pgbackrest.org/) | v2.60.0 | [MIT](https://opensource.org/license/mit) | [上游 `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [pgBackRest](/zh/pgbackrest/) | [pgBackRest 文档](https://pgbackrest.org/) | v2.60.1 | [MIT](https://opensource.org/license/mit) | [上游 `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
 | [PgBouncer](/zh/pgbouncer/) | [PgBouncer 文档](https://www.pgbouncer.org/) | v1.26.1 | [ISC](https://opensource.org/license/isc-license-txt) | [上游 `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/COPYRIGHT) |
-| [pgBadger](/zh/pgbadger/) | [pgBadger 文档](https://pgbadger.darold.net/) | v13.2 开发快照，提交 `f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/zh/haproxy/) | [HAProxy 3.4 手册](https://docs.haproxy.org/3.4/) | 3.4.7-57 文档快照（稳定版 3.4.7），提交 `0faeaed` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/zh/etcd/) | [etcd v3.7 文档](https://etcd.io/docs/v3.7/) | v3.7 文档，提交 `d20f8ae`；软件版本 v3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [上游 `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
-| [Apache Cloudberry](/zh/cloudberry/) | [Apache Cloudberry 2.x 文档](https://cloudberry.apache.org/docs/) | 2.x 文档，提交 `d4e372a`；软件版本 2.2.0-incubating | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [上游 `LICENSE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/LICENSE) 与 [`NOTICE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/NOTICE) |
-| [PXF](/cloudberry/pxf/) | [Apache Cloudberry PXF](https://cloudberry.apache.org/pxf/) | 文档 `dff2632d`；软件版本 2.2.0-incubating | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](/third_party/pxf/LICENSE)、[NOTICE](/third_party/pxf/NOTICE) |
+| [pgBadger](/zh/pgbadger/) | [pgBadger 文档](https://pgbadger.darold.net/) | v13.3，提交 `0514893` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
+| [HAProxy](/zh/haproxy/) | [HAProxy 3.4 手册](https://docs.haproxy.org/3.4/) | v3.4.8 LTS | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [etcd](/zh/etcd/) | [etcd v3.7 文档](https://etcd.io/docs/v3.7/) | v3.7 文档，提交 `e60635a`；软件版本 v3.7.4 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [上游 `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [Apache Cloudberry](/zh/cloudberry/) | [Apache Cloudberry 2.x 文档](https://cloudberry.apache.org/docs/) | 2.x 文档，提交 `e3a102d`；软件版本 2.2.0-incubating | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [上游 `LICENSE`](https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/LICENSE) 与 [`NOTICE`](https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/NOTICE) |
+| [PXF](/cloudberry/pxf/) | [Apache Cloudberry PXF](https://cloudberry.apache.org/pxf/) | 文档 `6683faa3`；软件版本 2.2.0-incubating | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](/third_party/pxf/LICENSE)、[NOTICE](/third_party/pxf/NOTICE) |
 | [内核原理](/cloudberry/core-internals/) | [Apache Cloudberry 内核原理](https://cloudberry.apache.org/core-internals/) | Main `c2baef0`；3.0.0-devel / PostgreSQL 16.9 | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)、PostgreSQL | [LICENSE](/third_party/core-internals/LICENSE)、[NOTICE](/third_party/core-internals/NOTICE) |
 | [PolarDB](/polardb/) | [PolarDB for PostgreSQL Documentation](https://github.com/polardb/polardb-pg-docs) | b4733b0 | Apache-2.0 | [来源与完整声明](/polardb/site/attribution/) |
 | [IvorySQL](/ivorysql/) | [IvorySQL Documentation](https://github.com/IvorySQL/ivorysql_docs) | v5.6 · 7c3f4a67e7d3 | LicenseRef-IvorySQL-Docs | [来源与完整声明](/ivorysql/site/license/) |
@@ -39,10 +41,10 @@ PG.CENTER 转载并整理了PostgreSQL 运维工具和数据库内核项目的�
 | [Halo Database MySQL 参考](/openhalo/mysql-compatibility/) | [Halo Database 官方文档](https://doc.halodbtech.com/multi-mode-compatibility/mysql) | 1.0.16；2026-11-07 快照 | LicenseRef-HaloDB-Docs | [来源与条款](#halodb) |
 | [OpenHalo 测试证据](/openhalo/mysql-compatibility-gaps/) | [OpenHalo MySQL 兼容性测试报告](https://github.com/fxcollot/openHaloDocumentation) | OpenHalo 1.0.14.18；提交 80a8d07 | LicenseRef-OpenHalo-Test-Report | [来源与条款](#openhalo-tests) |
 | [Babelfish](/babelfish/) | [Babelfish project website](https://github.com/babelfish-for-postgresql/babelfish_project_website) | main @ f468c5ed3d38 | LicenseRef-Babelfish-Website | [来源与完整声明](/babelfish/site/attribution/) |
-| [Percona TDE](/percona/) | [Percona pg_tde documentation](https://github.com/percona/pg_tde) | 2.2.2; docs 1660e66a | LicenseRef-pg-tde | [来源与完整声明](/percona/assets/legal/pg_tde-COPYRIGHT.txt) |
+| [Percona TDE](/percona/) | [Percona pg_tde documentation](https://github.com/percona/pg_tde) | 2.3.0；文档 5dd7a9e4 | LicenseRef-pg-tde | [来源与完整声明](/percona/assets/legal/pg_tde-COPYRIGHT.txt) |
 | [AgensGraph](/agensgraph/) | [AgensGraph documentation](https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/index.html) | 2.18.6.1 | Apache-2.0 | [来源与完整声明](/agensgraph/site/attribution/) |
-| [pgEdge](/pgedge/) | [pgEdge extension documentation](https://github.com/pgEdge) | Fixed main snapshots; see component notices | PostgreSQL | [来源与完整声明](/pgedge/about/attribution/) |
-| [DocumentDB](/documentdb/) | [DocumentDB documentation](https://github.com/documentdb/docs) | DocumentDB 1.0; docs cf69384; website 90cfa08 | LicenseRef-DocumentDB-Docs | [来源与完整声明](https://github.com/documentdb/docs/tree/cf69384e6da9524cc0fc723e8ac5b6c0689af432) |
+| [pgEdge](/pgedge/) | [pgEdge extension documentation](https://github.com/pgEdge) | Spock beta.2；LOLOR 开发快照；SafeSession 1.1；Snowflake 2.6.1 | PostgreSQL | [来源与完整声明](/pgedge/about/attribution/) |
+| [DocumentDB](/documentdb/) | [DocumentDB documentation](https://github.com/documentdb/docs) | DocumentDB 1.2.0；文档 8fb7fda；网站 4a83a07 | LicenseRef-DocumentDB-Docs | [来源与完整声明](https://github.com/documentdb/docs/tree/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5) |
 | [OrioleDB](/orioledb/) | [OrioleDB 文档与基准测试](https://www.orioledb.com/docs) | 2026-11-06 网站快照 | PostgreSQL；网站材料保留上游条款 | [来源与完整声明](/orioledb/attribution/) |
 | [Citus](/zh/citus/) | [Microsoft Learn Citus 14](https://learn.microsoft.com/en-us/postgresql/citus/?view=citus-14) | 2026-11-07；逐页记录修订 | CC BY 4.0；代码 MIT | [来源与完整声明](/zh/citus/attribution/) |
 {.wide .expand}
@@ -60,7 +62,7 @@ Patroni 版权归 Compose、Zalando SE 与 Patroni Contributors 所有（Copyrig
 
 ## pgBackRest {#pgbackrest}
 
-于 2026-08-15 从 [pgBackRest 文档站](https://pgbackrest.org/) 导入，并于 2026-10-23 更新至 **v2.60.0**，标签为 `release/2.60.0`，提交为 [`2e1c4f2`](https://github.com/pgbackrest/pgbackrest/commit/2e1c4f2ba727c45a0a23d4b326905088dc15b1a1)。
+于 2026-08-15 从 [pgBackRest 文档站](https://pgbackrest.org/) 导入，英文于 2026-11-21 更新、中文随后同步至 **v2.60.1**，标签为 `release/2.60.1`，提交为 [`7aeba29`](https://github.com/pgbackrest/pgbackrest/commit/7aeba299c49abd768ca741506569007a5cab0870)。
 
 pgBackRest 版权归 The PostgreSQL Global Development Group 与 David Steele 所有（Copyright (c) 2015-2026），
 依 [MIT 协议](https://opensource.org/license/mit)授权。
@@ -77,8 +79,8 @@ PgBouncer 版权归 Marko Kreen 与 Skype Technologies OÜ 所有（Copyright (c
 
 ## pgBadger {#pgbadger}
 
-于 2026-08-15 从 <https://pgbadger.darold.net/> 以及 [`darold/pgbadger`](https://github.com/darold/pgbadger) 导入，并于 2026-10-23 更新至提交 [`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67)。
-这是最新正式发布版本 v13.2 之后的开发文档快照，并非新的稳定版本。历史官网摘录与示例报告保留各自的来源。
+于 2026-08-15 从 <https://pgbadger.darold.net/> 以及 [`darold/pgbadger`](https://github.com/darold/pgbadger) 导入，英文于 2026-11-21 更新、中文随后同步至 v13.3，固定提交为 [`0514893`](https://github.com/darold/pgbadger/commit/0514893e97296695c77755fa36c59288c3afef3e)。
+这是 2026 年 11 月 3 日正式发布的 v13.3。历史官网摘录与示例报告保留各自的来源。
 
 pgBadger 版权归 Gilles Darold 所有（Copyright (c) 2012-2026），
 依 [PostgreSQL 协议](https://opensource.org/license/postgresql)授权。
@@ -95,12 +97,7 @@ pgBadger 版权归 Gilles Darold 所有（Copyright (c) 2012-2026），
 
 ## HAProxy {#haproxy}
 
-于 2026-08-16 从 HAProxy 3.4 官方维护仓库导入，于 2026-08-30 刷新，并于 2026-10-23 更新至与官方英文手册一致的
-`3.4.7-57` 维护分支文档快照，固定提交为
-[`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3)。
-最新稳定版另列为 `3.4.7`（标签 `v3.4.7`）；文档快照包含该稳定版发布之后的变更。
-英文正文取自完整的 `doc/intro.txt`、`doc/configuration.txt` 与 `doc/management.txt` 三份手册，
-分别为 1,695、33,246 与 5,305 行，共 40,246 行，重新组织为 34 个阅读页面。
+于 2026-08-16 导入，英文于 2026-11-21 更新至官方 [HAProxy v3.4.8 发布版](https://git.haproxy.org/?p=haproxy-3.4.git;a=tag;h=v3.4.8)。完整的 `doc/intro.txt`、`doc/configuration.txt` 和 `doc/management.txt` 三份手册重新组织为 34 个阅读页面。入门与管理手册的来源相比上一快照未变，配置手册的变化记录在更新 diff 中。中文已同步至 v3.4.8；其他译本仍为 `3.4.7-57`，等待同步。
 
 HAProxy 版权归 Willy Tarreau 所有（Copyright 2000-2026），
 依 [GNU 通用公共许可证第 2 版](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)授权。
@@ -113,16 +110,7 @@ HAProxy 自身的授权说明、OpenSSL 例外条款与完整 GPLv2 文本发布
 
 ## etcd {#etcd}
 
-从官方 etcd v3.7 文档导入，并于 2026-10-13 刷新到提交
-[`d20f8ae346da`](https://github.com/etcd-io/website/commit/d20f8ae346da60ab6eb6f24f200753b328aa9fcc)。
-固定的上游源码树为
-[`content/en/docs/v3.7`](https://github.com/etcd-io/website/tree/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7)。
-
-2026-10-28，安装、Docker、Kubernetes 示例及版本更新摘要已同步至
-[etcd v3.7.3](https://github.com/etcd-io/etcd/releases/tag/v3.7.3)，发布提交为
-[`0a173d0`](https://github.com/etcd-io/etcd/commit/0a173d0410a96d01091b484daae81365bbcde57e)。
-该版本的 `go.mod` 固定使用 Go 1.26.10。文档快照与软件发布版本及来源校验和分别记录在
-`data/upstreams.yaml` 中。
+英文 v3.7 手册于 2026-11-21 根据 [`etcd-io/website@e60635a46b57`](https://github.com/etcd-io/website/tree/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7) 刷新，中文已同步。安装示例与版本摘要对应 [v3.7.4](https://github.com/etcd-io/etcd/releases/tag/v3.7.4)，提交为 `2e8a5c99e4982c8d4c521be15364ea4c5c68a489`，使用 Go 1.26.11 构建。单独固定的更新日志仍以“v3.7.4 (TBC)”为标题，发布标签则确认该版本已发布。文档与软件来源的校验和分别记录在 `data/upstreams.yaml` 中。
 
 etcd 文档版权归 etcd Authors 所有（Copyright 2013-present）。其正文依
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 授权，代码与代码示例依
@@ -131,9 +119,9 @@ etcd 文档版权归 etcd Authors 所有（Copyright 2013-present）。其正文
 
 ## Apache Cloudberry {#cloudberry}
 
-2026-11-06 从 Apache Cloudberry 网站仓库的提交
-[`d4e372af8170`](https://github.com/apache/cloudberry-site/commit/d4e372af8170f7e23d501b70deb3938efa1c978b) 导入。来源是
-[`versioned_docs/version-2.x`](https://github.com/apache/cloudberry-site/tree/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x) 中的 2.x 文档，上游将其发布于
+英文于 2026-11-21 从 Apache Cloudberry 网站仓库的提交
+[`e3a102d15d0e`](https://github.com/apache/cloudberry-site/commit/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c) 导入。来源是
+[`versioned_docs/version-2.x`](https://github.com/apache/cloudberry-site/tree/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x) 中的 2.x 文档，上游将其发布于
 <https://cloudberry.apache.org/docs/>，对应 2.2.0-incubating 版本。
 
 文档快照与软件发布版本分别记录。Cloudberry `2.2.0-incubating` 采用 PostgreSQL `14.10`，`2.0` 与 `2.1` 采用 `14.4`。较早录制的示例保留原有版本输出。本站保留了上游 [LICENSE](/third_party/cloudberry/LICENSE) 与 [NOTICE](/third_party/cloudberry/NOTICE) 的完整原文。
@@ -141,13 +129,13 @@ etcd 文档版权归 etcd Authors 所有（Copyright 2013-present）。其正文
 导航结构沿用上游 2.x 侧边栏。Docusaurus 的提示块、标签页和折叠块改写为 OINK 的提示框与标签页，
 图片与使用它的页面放在一起。上游发布但未列入侧边栏的三个页面（TPC-H、TPC-DS 基准测试与 `pg_restore`）
 也已收录。上游 19 个失效链接（遗留的 Greenplum 路径与拼写错误）改为指向其所指的页面，一处未闭合的提示块
-已闭合，一处拼写错误的标题已更正。中文版已翻译完整的 2.x 文档、PXF 与内核原理手册，
+已闭合，一处拼写错误的标题已更正。中英文版现各有 672 页，包含本轮新增的 31 页与更新的 PXF 指南，覆盖 2.x 文档、PXF 与内核原理手册。中文
 保留代码、命令、程序输出和英文标题锚点。另据 2.2 发布版源码，区分了需显式激活的 Coordinator
 故障切换与自动提升的 Segment 镜像，并更正了 AO 压实阈值条件；这些修正已同时用于中英文版。
 
 Apache Cloudberry 网站版权归 Apache 软件基金会所有（Copyright 2024-2025 The Apache Software Foundation），
 依 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) 授权。其
-[`NOTICE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/NOTICE) 说明，该产品有相当部分最初基于 VMware, Inc. 或其关联公司的
+[`NOTICE`](https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/NOTICE) 说明，该产品有相当部分最初基于 VMware, Inc. 或其关联公司的
 Greenplum Database（Copyright (c) 2004-2020），同样依 Apache License 2.0 授权。页末署名与本节说明这些页面
 经过修改。
 
@@ -158,9 +146,9 @@ Apache 孵化器赞助下、于 Apache 软件基金会（ASF）孵化中的项�
 
 ## Apache Cloudberry PXF {#pxf}
 
-PXF 文档取自 [`apache/cloudberry-pxf@dff2632d`](https://github.com/apache/cloudberry-pxf/commit/dff2632d2a364f466b83682439c3ae97e655c1b7) 的 `docs/`，这是 Cloudberry 网站提交 `d4e372af8170f7e23d501b70deb3938efa1c978b` 固定的子模块版本。已发布的软件版本为 [`2.2.0-incubating`](https://github.com/apache/cloudberry-pxf/releases/tag/2.2.0-incubating)，对应提交 `01c2e00b64166740cabfcae1ceee42a72e520594`。网站采用的文档仍单独记录为快照：发布标签将 HBase 兼容性条目从 `2.3.7` 改为 `2.5.x`，其余 65 篇已发布 Markdown 文档完全相同。
+PXF 文档取自 [`apache/cloudberry-pxf@6683faa38ce4`](https://github.com/apache/cloudberry-pxf/commit/6683faa38ce4e2d146a77197991518aacb4b24e8) 的 `docs/`，由当前 Cloudberry 网站固定。该开发文档包含 Java 17/21 要求，以及比已发布的 [`2.2.0-incubating`](https://github.com/apache/cloudberry-pxf/releases/tag/2.2.0-incubating) 更新的连接器变更。中文已同步至这一快照。
 
-源文档的版权声明为 Copyright 2024-2026 The Apache Software Foundation，依 Apache License 2.0 授权。上游 [NOTICE](https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/NOTICE) 说明，产品包含最初由 Apache HAWQ 开发的软件，并保留 Copyright 2017 The Apache Software Foundation。[LICENSE](https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/LICENSE) 还保留了 Greenplum Platform Extension Framework 的版权声明：Copyright 2018-Present VMware, Inc. or its affiliates。上游[文档首页](https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/index.md#L26-L32) 明确说明，文档源自 `greenplum-db/pxf-archive` 6.10.1；软件分支的来源则单独标为 6.10.1-SNAPSHOT。本社区版调整了格式、导航与链接，并保留上游声明。
+源文档的版权声明为 Copyright 2024-2026 The Apache Software Foundation，依 Apache License 2.0 授权。上游 [NOTICE](https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/NOTICE) 说明，产品包含最初由 Apache HAWQ 开发的软件，并保留 Copyright 2017 The Apache Software Foundation。[LICENSE](https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/LICENSE) 还保留了 Greenplum Platform Extension Framework 的版权声明：Copyright 2018-Present VMware, Inc. or its affiliates。上游[文档首页](https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/index.md#L26-L32) 明确说明，文档源自 `greenplum-db/pxf-archive` 6.10.1；软件分支的来源则单独标为 6.10.1-SNAPSHOT。本社区版调整了格式、导航与链接，并保留上游声明。
 
 本站保留上游 [LICENSE](/third_party/pxf/LICENSE) 与 [NOTICE](/third_party/pxf/NOTICE) 的完整原文。
 
@@ -236,7 +224,7 @@ MySQL 兼容指南整理自 [Halo Database 官方文档](https://doc.halodbtech.
 
 ## Percona TDE {#percona}
 
-Percona 栏目目前收录 pg_tde 2.2.2，固定 `percona/pg_tde@1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39`，含 66 篇英文正文及其中文译文、栏目索引和 PGSTY 编辑导读，不代表全部 Percona 产品文档。完整保留 pg_tde 版权文本中的 PostgreSQL、加州大学与 Percona 各部分条款。
+Percona 英文栏目现收录 pg_tde 2.3.0，固定于 `percona/pg_tde@5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a`，在原有 66 篇正文、栏目索引和 PGSTY 编辑导读之外，新增了 2.3.0 发行说明。中文已完成 2.3.0 增量的翻译与审校。这里并非全部 Percona 产品文档；pg_tde 版权文本中的 PostgreSQL、加州大学与 Percona 各部分条款均完整保留。
 
 [来源与完整声明](/percona/assets/legal/pg_tde-COPYRIGHT.txt)。
 
@@ -248,24 +236,24 @@ Percona 栏目目前收录 pg_tde 2.2.2，固定 `percona/pg_tde@1660e66a6a30d3b
 
 ## pgEdge {#pgedge}
 
-迁入现有 OINK 站中的 Spock、LOLOR、SafeSession 和 Snowflake 四套文档。内容来自固定 main 快照，不是原站各发布版本的精确镜像。108 篇上游正文中，32 篇有中文机器翻译初稿，保留原有状态与待审说明。完整保留 PostgreSQL 许可证及各项目版权声明，固定提交见下表。
+迁入现有 OINK 站中的 Spock、LOLOR、SafeSession 和 Snowflake 四套文档。本轮英文来源为 Spock v6.0.0-beta.2、LOLOR 1.3.0 开发快照、SafeSession v1.1 和 Snowflake v2.6.1。中文已完成本轮增量审校，并新增六篇完整译文；原有初稿中未变的部分仍待审校。108 篇上游正文中，32 篇有中文机器翻译初稿，原有状态与待审说明继续保留。完整保留 PostgreSQL 许可证及各项目版权声明，固定提交见下表。
 
 [来源与完整声明](/pgedge/about/attribution/)。
 
 | 扩展 | 固定提交 |
 | --- | --- |
-| spock | [4ac1aec2f080](https://github.com/pgEdge/spock/tree/4ac1aec2f080) |
-| lolor | [ac3893a7707a](https://github.com/pgEdge/lolor/tree/ac3893a7707a) |
-| safesession | [b406cd1e82cf](https://github.com/pgEdge/pgedge-safesession/tree/b406cd1e82cf) |
-| snowflake | [429a16803c8c](https://github.com/pgEdge/snowflake/tree/429a16803c8c) |
+| spock | [d05e2e2b6a82](https://github.com/pgEdge/spock/tree/d05e2e2b6a82) |
+| lolor | [1548836b0df0](https://github.com/pgEdge/lolor/tree/1548836b0df0) |
+| safesession | [d66225fcceef](https://github.com/pgEdge/pgedge-safesession/tree/d66225fcceef) |
+| snowflake | [9506e1bd5c1f](https://github.com/pgEdge/snowflake/tree/9506e1bd5c1f) |
 
 ## DocumentDB {#documentdb}
 
-来源为官方 `documentdb/docs` 提交 `cf69384e6da9524cc0fc723e8ac5b6c0689af432`，以及发布网站 `documentdb/documentdb.github.io` 提交 `90cfa088351557cd618034dfc00ab817c35a5f76`，快照日期为 2026 年 11 月 7 日。296 份文档 Markdown 记录与 19 份网站文章正文合并为 300 页英文，并提供逐页对应的 300 页完整简体中文。收录范围包括网站生成的 Docker、软件包、运维与离线安装指南、安装引导、分类描述，以及上游架构专章尚未发布的提示。已被替代的来源指南保留正文和提示。独立版本的 Kubernetes Operator 手册链接到其官方网站。
+来源为官方 `documentdb/docs` 提交 `8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5`，以及发布网站 `documentdb/documentdb.github.io` 提交 `4a83a0712149e101a2bbb38934bed36497cdf40f`，快照日期为 2026 年 11 月 21 日。306 份文档 Markdown 记录与 20 份网站文章正文合并为 310 页英文，全部提供完整简体中文，其中包括本轮新增的十页。收录范围包括网站生成的 Docker、软件包、运维与离线安装指南、安装引导、分类描述，以及上游架构专章尚未发布的提示。已被替代的来源指南保留正文和提示。独立版本的 Kubernetes Operator 手册链接到其官方网站。
 
-中文依据固定英文版本完成 AI 辅助翻译与逐项审校，并进行了并行双语复核及示例、字面量、链接、标题 ID 检查。代码、命令、输出和上游错误消息保留原文。40 页附有双语编者注，明确指出原文说明或示例中的不一致。文档与网站仓库在这些快照中没有独立的文档许可证；DocumentDB 软件采用 MIT，并不据此另行宣称全部文档获得统一授权。具体权利与许可说明以上游为准。
+原有中文依据 11 月 7 日的固定英文版本完成 AI 辅助翻译与审校。本轮更新对照 11 月 21 日的英文变更进行了三轮自审，并检查了示例、字面量、链接和标题 ID。代码、命令、输出和上游错误消息保留原文。40 页附有双语编者注，明确指出原文说明或示例中的不一致。文档与网站仓库在这些快照中没有独立的文档许可证；DocumentDB 软件采用 MIT，并不据此另行宣称全部文档获得统一授权。具体权利与许可说明以上游为准。
 
-[文档源文件](https://github.com/documentdb/docs/tree/cf69384e6da9524cc0fc723e8ac5b6c0689af432) · [网站源文件](https://github.com/documentdb/documentdb.github.io/tree/90cfa088351557cd618034dfc00ab817c35a5f76)。
+[文档源文件](https://github.com/documentdb/docs/tree/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5) · [网站源文件](https://github.com/documentdb/documentdb.github.io/tree/4a83a0712149e101a2bbb38934bed36497cdf40f)。
 
 ## OrioleDB {#orioledb}
 
