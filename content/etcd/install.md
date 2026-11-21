@@ -180,7 +180,7 @@ For a slightly more involved sanity check of your installation, see
 
 [download]: https://github.com/etcd-io/etcd/archive/v3.7.4.zip
 [go]: https://golang.org/doc/install
-[go-toolchain]: https://github.com/etcd-io/etcd/blob/0a173d0410a96d01091b484daae81365bbcde57e/go.mod
+[go-toolchain]: https://github.com/etcd-io/etcd/blob/2e8a5c99e4982c8d4c521be15364ea4c5c68a489/go.mod
 [Hardware recommendations]: /etcd/op-guide/hardware/
 [Quickstart]: /etcd/quickstart/
 [Running etcd as a Kubernetes StatefulSet]: /etcd/op-guide/kubernetes/

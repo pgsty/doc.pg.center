@@ -332,7 +332,7 @@ message TxnRequest {
 }
 ```
 
-* `compare` - a list of predicates representing a conjuction of terms. If the comparaison succeed, then the success requests will be processed in the order, and the response will contain their respective responses in order.
+* `compare` - a list of predicates representing a conjunction of terms. If the comparison succeeds, then the success requests will be processed in order, and the response will contain their respective responses in order.
 * `success` - a list of requests to process if all compare tests evaluate to true.
 * `failure` - a list of requests which will be applied when compare evaluates to false.
 
@@ -347,7 +347,7 @@ message TxnResponse {
 ```
 
 * `succeeded` - true if the compare evaluated to true or false otherwise.
-* `responses` - a list of responses corresponding to the results from applying success if succeeded is true or failure is succeeded is false.
+* `responses` - a list of responses corresponding to the results from applying success if succeeded is true or failure if succeeded is false.
 
 ```protobuf
 message ResponseOp {
