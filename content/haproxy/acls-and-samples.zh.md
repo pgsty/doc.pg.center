@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/acls-and-samples/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 7"
+upstream_ref: "v3.4.8, chapter 7"
 ---
 
 HAProxy 可从请求或响应流、客户端或服务器信息、表格、环境信息等来源提取数据。提取此类数据的动作称为获取样本。获取后，这些样本可用于多种用途，例如作为粘性表的键，但最常见的用法是将其与称为模式的预定义常量数据进行匹配。

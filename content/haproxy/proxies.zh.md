@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/proxies/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 4"
+upstream_ref: "v3.4.8, chapter 4"
 ---
 
 代理配置可位于一组段中：
@@ -3360,9 +3360,14 @@ no option accept-unsafe-violations-in-http-request
 
     * 在 H1 和 H2 中，包含片段引用（位于路径之后的 '#'）的 URL 将被接受；
 
-    * 仅在 H1 中，不会对 CONNECT 请求的授权部分（authority）执行检查；
+    * 仅在 H1 中，不会对 CONNECT 请求的 authority 部分执行检查；
 
-    * 仅在 H1 中，不会对授权部分与 Host 头的值执行检查。
+    * 仅在 H1 中，不会对 authority 部分与 Host 头的值执行检查；
+
+    * 仅在 H1 中，当请求没有 Host 头时，会根据请求目标的 authority 部分构造
+      Host 头（对于 CONNECT 请求，使用请求目标本身）。但是，如果 authority
+      部分包含 Host 头中禁止的字符，或者在 CONNECT 请求中 authority 部分
+      无效，则不会添加该头。
 
     * 仅在 H1 中，对 HTTP 版本的测试将放宽。它允许 HTTP/0.9 的 GET 请求
       通过（不指定版本），也允许不同的协议名称（例如 RTSP），以及主版本

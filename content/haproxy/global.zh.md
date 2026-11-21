@@ -6,11 +6,12 @@ description: "进程安全、性能调优、调试和 HTTP 客户端设置"
 icon: fa-solid fa-earth-americas
 module: [HAPROXY]
 categories: [参考]
+search_keywords: ["ocsp-update.timeout", "tune.ssl.ktls-unsafe"]
 aliases:
   - /haproxy/configuration/global/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
+upstream_ref: "v3.4.8, chapter 3"
 ---
 
 “global” 段中的参数为进程级配置，通常与操作系统相关。这些参数通常只需一次性设置，一旦配置正确便无需再修改。部分参数在命令行中也有对应选项。
@@ -84,6 +85,7 @@ upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
   - ocsp-update.mindelay
   - ocsp-update.httpproxy
   - ocsp-update.mode
+  - ocsp-update.timeout
   - pidfile
   - pp2-never-send-local
   - presetenv
@@ -285,6 +287,7 @@ upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
   - tune.ssl.hard-maxrecord
   - tune.ssl.keylog
   - tune.ssl.keyupdate-rate-limit
+  - tune.ssl.ktls-unsafe
   - tune.ssl.lifetime
   - tune.ssl.maxrecord
   - tune.ssl.ssl-ctx-cache-size
@@ -1348,6 +1351,16 @@ ocsp-update.mode [ on | off ]
 ```
 
 设置配置中所有证书的默认 ocsp-update 模式。此全局选项可被 crt-list 的 "ocsp-update" 选项覆盖。该选项默认设置为 "off"。有关自动更新机制的更多信息，请参见选项 "ocsp-update"。
+
+<a id="entry-3-1-ocsp-update-timeout"></a>
+
+**`ocsp-update.timeout <timeout>`**
+
+```haproxy
+ocsp-update.timeout <timeout>
+```
+
+设置自动更新过程中获取 OCSP 响应的请求超时时间。该超时覆盖整个请求，从尝试建立连接到收到完整响应。达到超时时间后，此次更新会被视为失败，并按失败记录日志。超时值默认以毫秒为单位，也可以在数值后附加单位来指定其他时间单位，具体规则见本文开头。默认值为 10s。有关自动更新机制的更多信息，请参见选项 "ocsp-update"。
 
 <a id="entry-3-1-pidfile"></a>
 
@@ -3839,7 +3852,19 @@ $HAPROXY_KEYLOG_BC_LOG_FMT   后端（面向服务器）连接的密钥
 tune.ssl.keyupdate-rate-limit <limit>
 ```
 
-每秒允许接受的 KeyUpdate 数量上限设为 `<limit>`，超过该值即视为洪水攻击并终止连接。处理 KeyUpdate 操作消耗大量 CPU 资源，且极少有必要接收大量此类消息。设置为 "0" 可禁用速率限制。默认值为 100。<a id="entry-3-2-tune-ssl-lifetime"></a>
+每秒允许接受的 KeyUpdate 数量上限设为 `<limit>`，超过该值即视为洪水攻击并终止连接。处理 KeyUpdate 操作消耗大量 CPU 资源，且极少有必要接收大量此类消息。设置为 "0" 可禁用速率限制。默认值为 100。
+
+<a id="entry-3-2-tune-ssl-ktls-unsafe"></a>
+
+**`tune.ssl.ktls-unsafe`**
+
+```haproxy
+tune.ssl.ktls-unsafe
+```
+
+即使所用 OpenSSL 版本受某个缺陷影响，也使用 kTLS：该缺陷会在复用待处理记录的缓冲区时破坏数据流，已在 OpenSSL 3.4.6 和 3.5.7 中修复。在受影响的版本上，除非设置此选项，否则 HAProxy 会拒绝使用 kTLS，并在解析 "ktls on" 时发出提示。此选项对已修复的版本及其他 SSL 库均无影响。默认禁用。
+
+<a id="entry-3-2-tune-ssl-lifetime"></a>
 
 **`tune.ssl.lifetime <timeout>`**
 

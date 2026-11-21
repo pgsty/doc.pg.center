@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/bind-and-server-options/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
+upstream_ref: "v3.4.8, chapter 5"
 ---
 
 “bind”、“server” 和 “default-server” 关键字支持多种设置，具体取决于构建选项以及 HAProxy 所基于的系统。这些设置通常由一个单词组成，有时后接一个值，与 “bind” 或 “server” 语句位于同一行。所有这些选项均在本节中描述。
@@ -239,6 +239,8 @@ HAProxy 使用缓存系统，证书文件仅在证书存储中加载一次，后
 对于每个 PEM 文件，HAProxy 会检查同路径下是否存有以 ".ocsp" 为后缀的文件。若找到该文件，将自动启用 TLS 证书状态请求扩展（亦称“OCSP 装订”，OCSP stapling）支持。该文件内容为可选项。若不为空，必须包含以 DER 格式编码的有效 OCSP 响应。有效的 OCSP 响应必须满足以下规则：状态必须为良好，必须是针对 PEM 文件中证书的单一响应，且在添加时必须处于有效状态。若不满足上述规则，OCSP 响应将被忽略，并发出警告。为确定 OCSP 响应适用于哪个证书，需提供颁发者证书。若 PEM 文件中未找到颁发者证书，HAProxy 将尝试从与 PEM 文件同路径下以 ".issuer" 为后缀的文件中加载，若该文件不存在则操作失败并报错。
 
 对于每个 PEM 文件，HAProxy 还会检查同路径下附加 ".sctl" 后缀的文件是否存在。若找到该文件，将启用证书透明度（Certificate Transparency，RFC6962）TLS 扩展。该文件必须包含符合 RFC 描述的有效签名证书时间戳列表。HAProxy 会解析文件以检查基本语法，但不会验证签名。
+
+通过 TLS 1.2 及更早版本传递 SCT，需要 OpenSSL 1.0.2 及后续版本或 AWS-LC。TLS 1.3 则需要 OpenSSL 1.1.1 及后续版本或 AWS-LC。不支持通过 QUIC 传递 SCT。
 
 在某些情况下，支持多种密钥类型（例如，在向客户端提供的密码套件中同时支持 RSA 和 ECDSA）是可取的。这使得支持 EC 证书的客户端能够使用 EC 密码套件，同时仍可兼容仅支持 RSA 的旧版客户端。
 
@@ -1344,6 +1346,8 @@ check
 可以使用 "inter" 关键字设置健康检查的间隔时间，使用 "rise" 和 "fall" 关键字可定义需要多少次成功或失败的健康检查，才能将服务器标记为可用或不可用。
 
 可选的应用层健康检查可通过配置 "option httpchk"、"option mysql-check"、"option smtpchk"、"option pgsql-check"、"option ldap-check" 或 "option redis-check" 实现。
+
+对于日志后端，虽然支持 UDP 端点，但健康检查会隐式使用 TCP 协议，因为没有原始 UDP 检查，也不提供 ICMP 检查。
 
 示例：
 
