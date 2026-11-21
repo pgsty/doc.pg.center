@@ -1513,5 +1513,10 @@
       "bytes": 938,
       "sha256": "765023a1a6fe200e9936c7d5c5026cda2199f41eca781029ac26a51e2ba0ad23"
     }
-  ]
+  ],
+  "english_update": {
+    "date": "2026-11-21",
+    "inventory": "data/updates/2026-11-21.json",
+    "translation_status": "pending; previous source and review basis retained"
+  }
 }

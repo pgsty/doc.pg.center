@@ -32,6 +32,12 @@ OrioleDB is a PostgreSQL storage engine built around index-organized tables, und
 - [Sources and licensing](/orioledb/attribution/) — Snapshot coverage and original rights.
 {.cards}
 
+## Release update {#release-update}
+
+[OrioleDB v1.10.3](https://github.com/orioledb/orioledb/releases/tag/v1.10.3), published on November 9, 2026, fixes `INSERT ... ON CONFLICT DO UPDATE` silently skipping a row with a committed foreign-key lock whose undo has already been passed by a checkpoint or by time. The SQL extension version remains `1.10`; the release changes neither the storage format nor the WAL format.
+
+The guides remain the website snapshot described above, and historical benchmark recipes retain their original versions. This release notice does not change the project's Beta status or the requirement for patched PostgreSQL.
+
 ## Start reading {#start}
 
 Start with [Getting started](/orioledb/usage/getting-started/) to create your first OrioleDB table, then consult the [configuration reference](/orioledb/usage/configuration/). For implementation details, begin with the [architecture overview](/orioledb/architecture/overview/).
