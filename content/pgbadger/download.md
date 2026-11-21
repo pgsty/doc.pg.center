@@ -78,7 +78,7 @@ $ sudo make install
 
 `INSTALLDIRS=perl` is another upstream-supported layout. Inspect the generated paths before installing into a managed system.
 
-## Install development code {#install-development-code}
+## Install from the pinned source {#install-development-code}
 
 ```console
 $ git clone https://github.com/darold/pgbadger.git

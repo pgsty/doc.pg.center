@@ -15,11 +15,11 @@ pgBadger 9.x–13.x release history, grouped by major series and ordered newest 
 
 The latest stable release listed here is [13.3](/pgbadger/releases/13/#v13-3), released on 2026-11-03. This manual follows that release; historical release notes retain their original dates.
 
-These entries describe behavior at the time of each release. Historical defaults, configuration names, and upgrade instructions may differ from 13.2; use the current command-line reference and PostgreSQL logging guide for operational settings.
+These entries describe behavior at the time of each release. Historical defaults, configuration names, and upgrade instructions may differ from 13.3; use the current command-line reference and PostgreSQL logging guide for operational settings.
 
 | Series | Versions included | First–last release | Page |
 |---|---|---|---|
-| 13.x | 13.0–13.2 | 2024-12-08 – 2025-12-29 | [Read 13.x](/pgbadger/releases/13/) |
+| 13.x | 13.0–13.3 | 2024-12-08 – 2026-11-03 | [Read 13.x](/pgbadger/releases/13/) |
 | 12.x | 12.0–12.4 | 2022-09-13 – 2023-12-25 | [Read 12.x](/pgbadger/releases/12/) |
 | 11.x | 11.0–11.8 | 2019-06-25 – 2022-04-08 | [Read 11.x](/pgbadger/releases/11/) |
 | 10.x | 10.0–10.3 | 2018-09-09 – 2019-02-14 | [Read 10.x](/pgbadger/releases/10/) |

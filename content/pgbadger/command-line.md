@@ -241,7 +241,7 @@ pgBadger is able to parse a remote log file using a passwordless ssh connection.
 Use -r or --remote-host to set the host IP address or hostname. There are also
 some additional options to fully control the ssh connection.
 
-In watch mode (`-w`), SSH log files are filtered on the remote host before being transferred. CSV records are filtered with `awk`, and multiline fields are preserved. This behavior is part of the documented development snapshot after 13.2.
+In watch mode (`-w`), SSH log files are filtered on the remote host before being transferred. CSV records are filtered with `awk`, and multiline fields are preserved. This behavior is included in 13.3.
 
 ```text
 --ssh-identity file      path to the identity file to use.

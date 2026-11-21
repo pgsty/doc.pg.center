@@ -55,7 +55,7 @@ All reports and their versioned resource directory must be moved together.
 
 ## Per-database reports {#per-database-reports}
 
-With `-E` / `--explode`, each database's reports are stored in a subdirectory of the output directory named after the database. In the documented development snapshot after 13.2, database names that are unsafe as paths are percent-encoded: `/`, `\`, `%`, and control characters; a leading dot; purely numeric names; and names of files that pgBadger writes in the output directory, such as `LAST_PARSED`. Ordinary database names are unchanged.
+With `-E` / `--explode`, each database's reports are stored in a subdirectory of the output directory named after the database. In 13.3, database names that are unsafe as paths are percent-encoded: `/`, `\`, `%`, and control characters; a leading dot; purely numeric names; and names of files that pgBadger writes in the output directory, such as `LAST_PARSED`. Ordinary database names are unchanged.
 
 For example, database `2025` uses directory `%32025`, and database `../foo` uses `%2E.%2Ffoo`. Because these directory names contain percent signs, each `%` must be written as `%25` in the report URL:
 
