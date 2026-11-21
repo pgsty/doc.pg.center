@@ -236,9 +236,8 @@ After an RPM upgrade, you can find such files in the directory of the previous r
     source /usr/local/cloudberry-db/cloudberry-env.sh
     ```
 
-    :::note
-    Apache Cloudberry 2.0 uses the file name `greenplum_path.sh`. Later releases use `cloudberry-env.sh`. If you upgrade from 2.0, change the `source` line in the shell startup file of the `gpadmin` user, for example `~/.bashrc`, on every host.
-    :::
+    > [!NOTE]
+    > Apache Cloudberry 2.0 uses the file name `greenplum_path.sh`. Later releases use `cloudberry-env.sh`. If you upgrade from 2.0, change the `source` line in the shell startup file of the `gpadmin` user, for example `~/.bashrc`, on every host.
 
 2. Start the cluster.
 

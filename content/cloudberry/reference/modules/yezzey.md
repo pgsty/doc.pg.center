@@ -133,9 +133,8 @@ For the complete list of YProxy settings, see the YProxy documentation.
 
     The extension creates the `yezzey` schema and grants `USAGE` on it to `PUBLIC`. The extension is marked as trusted, so a non-superuser who has the `CREATE` privilege on the database can create it.
 
-    :::note
-    The functions of the extension can be run by `PUBLIC`, and `yezzey.offload_relation()` and `yezzey.load_relation()` do not check the ownership of the table. Revoke `EXECUTE` on the functions from `PUBLIC` if only administrators should offload, load, or clean up tables.
-    :::
+    > [!NOTE]
+    > The functions of the extension can be run by `PUBLIC`, and `yezzey.offload_relation()` and `yezzey.load_relation()` do not check the ownership of the table. Revoke `EXECUTE` on the functions from `PUBLIC` if only administrators should offload, load, or clean up tables.
 
 ## Configuration parameters {#configuration-parameters}
 
