@@ -377,3 +377,20 @@ pgbackrest-20261121:
     doc/xml/reference.xml: 9733b729ba0e864c10eabdeded2ef3b7f7f67c98f1afea24d771afe666eade9d
     doc/xml/release.xml: d760d75d7161a77e39edaa1353c837c176ed20f9ce59c51d12c5439afcfd92b7
     doc/xml/release/2020s/2026/2.60.1.xml: c58447e816971907c63709d03b4e2b6a8bffd3bbb04c62fe694c7a0079b36f97
+
+pgbadger-20261121:
+  name: pgBadger documentation
+  repository: https://github.com/darold/pgbadger
+  documentation: https://pgbadger.darold.net/
+  source_commit: 0514893e97296695c77755fa36c59288c3afef3e
+  copyright: Copyright (c) 2012-2026 Gilles Darold
+  license: PostgreSQL
+  notice: /attribution/#pgbadger
+  ref: v13.3
+  modified: true
+  source_ref: v13.3
+  snapshot_date: '2026-11-21'
+  language: en
+  translation_baseline: pgbadger
+  source_sha256:
+    ChangeLog: 0ede5b99e8c09edf7e3be2ef01faa61b7c96d4261a9d8787556434bee98b386e

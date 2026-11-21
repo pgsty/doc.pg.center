@@ -1,5 +1,5 @@
 ---
-title: "pgBadger 13.2 Development Snapshot Documentation"
+title: "pgBadger 13.3 Documentation"
 linkTitle: pgBadger
 weight: 40
 description: "Fast PostgreSQL and PgBouncer log analysis with detailed, self-contained reports"
@@ -12,17 +12,17 @@ sidebar_root_link_self: true
 module: [PGBADGER]
 categories: [Concept]
 aliases: [/pgbadger/documentation/]
-upstream_source: pgbadger
-upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
-upstream_link: "https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67"
+upstream_source: pgbadger-20261121
+upstream_ref: "v13.3"
+upstream_link: "https://github.com/darold/pgbadger/tree/0514893e97296695c77755fa36c59288c3afef3e"
 cascade:
-  upstream_source: pgbadger
-  upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
+  upstream_source: pgbadger-20261121
+  upstream_ref: "v13.3"
   type: docs
   module: [PGBADGER]
 ---
 
-This manual follows the [unreleased development snapshot `f373ac6`](https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67), committed on 2026-10-21 (UTC), after the [stable 13.2 release](https://github.com/darold/pgbadger/releases/tag/v13.2) of 2025-12-29. Features described for this snapshot, including remote filtering in watch mode and encoded per-database report directories, are not part of the 13.2 release tarball.
+This manual covers [pgBadger 13.3](https://github.com/darold/pgbadger/releases/tag/v13.3), released on November 3, 2026. The release includes remote filtering in watch mode, encoded per-database report directories, scrollable graph legends, and the fixes listed in the [13.3 release notes](/pgbadger/releases/13/#v13-3).
 
 ![pgBadger logo](/img/pgbadger/logo.png "pgBadger")
 

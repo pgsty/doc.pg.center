@@ -8,7 +8,7 @@ search_boost: 8
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [Reference]
-upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/0514893e97296695c77755fa36c59288c3afef3e/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
