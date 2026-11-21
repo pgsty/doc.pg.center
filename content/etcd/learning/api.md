@@ -260,7 +260,7 @@ message DeleteRangeResponse {
 ```
 
 * `deleted` - number of keys deleted by the delete range request.
-* `prev_kv` - when set, the previous key-value pairs will be returned.
+* `prev_kvs` - the previous key-value pairs, returned when `prev_kv` is set in the request.
 
 ### Transaction
 
