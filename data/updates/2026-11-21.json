@@ -1,0 +1,721 @@
+{
+  "date": "2026-11-21",
+  "status": "english-updated-translations-pending",
+  "base_head": "ec52b35ed513f128fe4cf1755b2243e685695abe",
+  "baseline": "Frozen working tree including preexisting OpenHalo edits; see external baseline-manifest.json",
+  "artifact_directory": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables",
+  "summary": {
+    "english_changed_pages": 1332,
+    "english_content_pages": 151,
+    "english_provenance_only_pages": 1181,
+    "english_added_pages": 42,
+    "translation_page_tasks": 367,
+    "translation_page_tasks_by_language": {
+      "zh": 151,
+      "fr": 36,
+      "ja": 36,
+      "de": 36,
+      "ru": 36,
+      "ar": 36,
+      "es": 36
+    },
+    "new_english_page_translation_tasks": 42,
+    "existing_missing_page_translation_tasks": 6,
+    "existing_draft_incremental_tasks": 9,
+    "provenance_batches": 25,
+    "provenance_target_pages": 1913,
+    "retained_preexisting_provenance_only_gaps": 66,
+    "shared_site_tasks": 8
+  },
+  "components": [
+    {
+      "component": "postgresql",
+      "name": "PostgreSQL 版本导航",
+      "previous": "18.6 当前版；19 preview",
+      "english_target": "19.0 当前版；20devel",
+      "note": "18.7/17.12/16.16/15.20；14.25 转历史/EOL",
+      "english_status": "updated",
+      "english_content_pages": 1,
+      "english_provenance_only_pages": 0,
+      "english_added_pages": 0,
+      "languages": {
+        "zh": {
+          "page_tasks": 1,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "component": "patroni",
+      "name": "Patroni",
+      "previous": "4.1.5",
+      "english_target": "4.1.5",
+      "note": "无更新",
+      "english_status": "checked-no-change",
+      "english_content_pages": 0,
+      "english_provenance_only_pages": 0,
+      "english_added_pages": 0,
+      "languages": {
+        "zh": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        },
+        "fr": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        },
+        "ja": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        },
+        "de": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        },
+        "ru": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        },
+        "ar": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        },
+        "es": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        }
+      }
+    },
+    {
+      "component": "pgbackrest",
+      "name": "pgBackRest",
+      "previous": "2.60.0",
+      "english_target": "2.60.1",
+      "note": "稳定版；TLS 选项说明和发布记录",
+      "english_status": "updated",
+      "english_content_pages": 20,
+      "english_provenance_only_pages": 0,
+      "english_added_pages": 0,
+      "languages": {
+        "zh": {
+          "page_tasks": 20,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "fr": {
+          "page_tasks": 20,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "ja": {
+          "page_tasks": 20,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "de": {
+          "page_tasks": 20,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "ru": {
+          "page_tasks": 20,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "ar": {
+          "page_tasks": 20,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "es": {
+          "page_tasks": 20,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "component": "pgbouncer",
+      "name": "PgBouncer",
+      "previous": "1.26.1",
+      "english_target": "1.26.1",
+      "note": "无更新",
+      "english_status": "checked-no-change",
+      "english_content_pages": 0,
+      "english_provenance_only_pages": 0,
+      "english_added_pages": 0,
+      "languages": {
+        "zh": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        },
+        "fr": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        },
+        "ja": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        },
+        "de": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        },
+        "ru": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        },
+        "ar": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        },
+        "es": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        }
+      }
+    },
+    {
+      "component": "pgbadger",
+      "name": "pgBadger",
+      "previous": "13.2 后开发快照",
+      "english_target": "13.3",
+      "note": "稳定版；发布记录和安装版本",
+      "english_status": "updated",
+      "english_content_pages": 4,
+      "english_provenance_only_pages": 10,
+      "english_added_pages": 0,
+      "languages": {
+        "zh": {
+          "page_tasks": 4,
+          "provenance_only_pages": 10,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "fr": {
+          "page_tasks": 4,
+          "provenance_only_pages": 10,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "ja": {
+          "page_tasks": 4,
+          "provenance_only_pages": 10,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "de": {
+          "page_tasks": 4,
+          "provenance_only_pages": 10,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "ru": {
+          "page_tasks": 4,
+          "provenance_only_pages": 10,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "ar": {
+          "page_tasks": 4,
+          "provenance_only_pages": 10,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "es": {
+          "page_tasks": 4,
+          "provenance_only_pages": 10,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "component": "haproxy",
+      "name": "HAProxy",
+      "previous": "3.4.7-57 文档快照",
+      "english_target": "3.4.8 LTS",
+      "note": "稳定版；新增全局参数、TLS 与 Host 处理",
+      "english_status": "updated",
+      "english_content_pages": 4,
+      "english_provenance_only_pages": 31,
+      "english_added_pages": 0,
+      "languages": {
+        "zh": {
+          "page_tasks": 4,
+          "provenance_only_pages": 31,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "fr": {
+          "page_tasks": 4,
+          "provenance_only_pages": 31,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "ja": {
+          "page_tasks": 4,
+          "provenance_only_pages": 31,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "de": {
+          "page_tasks": 4,
+          "provenance_only_pages": 31,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "ru": {
+          "page_tasks": 4,
+          "provenance_only_pages": 31,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "ar": {
+          "page_tasks": 4,
+          "provenance_only_pages": 31,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "es": {
+          "page_tasks": 4,
+          "provenance_only_pages": 31,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "component": "etcd",
+      "name": "etcd",
+      "previous": "3.7.3 / d20f8ae",
+      "english_target": "3.7.4 / e60635a",
+      "note": "稳定版和 v3.7 文档；API、安装、支持周期",
+      "english_status": "updated",
+      "english_content_pages": 7,
+      "english_provenance_only_pages": 92,
+      "english_added_pages": 0,
+      "languages": {
+        "zh": {
+          "page_tasks": 7,
+          "provenance_only_pages": 92,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "fr": {
+          "page_tasks": 7,
+          "provenance_only_pages": 92,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "ja": {
+          "page_tasks": 7,
+          "provenance_only_pages": 92,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "de": {
+          "page_tasks": 7,
+          "provenance_only_pages": 92,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "ru": {
+          "page_tasks": 7,
+          "provenance_only_pages": 92,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "ar": {
+          "page_tasks": 7,
+          "provenance_only_pages": 92,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "es": {
+          "page_tasks": 7,
+          "provenance_only_pages": 92,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "component": "polardb",
+      "name": "PolarDB",
+      "previous": "17.10.1.0",
+      "english_target": "17.11.1.0",
+      "note": "发布上下文更新；文档源无增量",
+      "english_status": "updated",
+      "english_content_pages": 1,
+      "english_provenance_only_pages": 0,
+      "english_added_pages": 0,
+      "languages": {
+        "zh": {
+          "page_tasks": 1,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "component": "ivorysql",
+      "name": "IvorySQL",
+      "previous": "5.6",
+      "english_target": "5.6",
+      "note": "无更新",
+      "english_status": "checked-no-change",
+      "english_content_pages": 0,
+      "english_provenance_only_pages": 0,
+      "english_added_pages": 0,
+      "languages": {
+        "zh": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        }
+      }
+    },
+    {
+      "component": "openhalo",
+      "name": "OpenHalo",
+      "previous": "18.6.1",
+      "english_target": "18.6.1",
+      "note": "无本轮更新；保留用户已有修改",
+      "english_status": "checked-no-change",
+      "english_content_pages": 0,
+      "english_provenance_only_pages": 0,
+      "english_added_pages": 0,
+      "languages": {
+        "zh": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        }
+      }
+    },
+    {
+      "component": "babelfish",
+      "name": "Babelfish",
+      "previous": "原 6.2.0 标签",
+      "english_target": "OSS 6.1.0 / Aurora 6.2.0",
+      "note": "区分两个发行渠道；文档正文未扩充",
+      "english_status": "updated",
+      "english_content_pages": 1,
+      "english_provenance_only_pages": 0,
+      "english_added_pages": 0,
+      "languages": {
+        "zh": {
+          "page_tasks": 1,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "component": "percona",
+      "name": "Percona TDE",
+      "previous": "pg_tde 2.2.2",
+      "english_target": "pg_tde 2.3.0",
+      "note": "稳定版；PostgreSQL 19、waldump 与发布记录",
+      "english_status": "updated",
+      "english_content_pages": 10,
+      "english_provenance_only_pages": 79,
+      "english_added_pages": 1,
+      "languages": {
+        "zh": {
+          "page_tasks": 10,
+          "provenance_only_pages": 79,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "component": "cloudberry",
+      "name": "Apache Cloudberry",
+      "previous": "2.x d4e372a / PXF dff2632",
+      "english_target": "2.x e3a102d / PXF 6683faa",
+      "note": "文档快照；稳定软件仍为 2.2.0-incubating；Core Internals 无更新",
+      "english_status": "updated",
+      "english_content_pages": 52,
+      "english_provenance_only_pages": 594,
+      "english_added_pages": 31,
+      "languages": {
+        "zh": {
+          "page_tasks": 52,
+          "provenance_only_pages": 594,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "component": "agensgraph",
+      "name": "AgensGraph",
+      "previous": "2.18.6.1",
+      "english_target": "2.18.6.1",
+      "note": "无更新",
+      "english_status": "checked-no-change",
+      "english_content_pages": 0,
+      "english_provenance_only_pages": 0,
+      "english_added_pages": 0,
+      "languages": {
+        "zh": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        }
+      }
+    },
+    {
+      "component": "pgedge",
+      "name": "pgEdge",
+      "previous": "各子项目旧快照",
+      "english_target": "Spock beta.2；LOLOR 1.3 开发；SafeSession 1.1；Snowflake 2.6.1",
+      "note": "Spock 预发布；LOLOR 稳定版仍为 1.2.3",
+      "english_status": "updated",
+      "english_content_pages": 17,
+      "english_provenance_only_pages": 97,
+      "english_added_pages": 0,
+      "languages": {
+        "zh": {
+          "page_tasks": 17,
+          "provenance_only_pages": 31,
+          "existing_provenance_only_gaps": 66,
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "component": "documentdb",
+      "name": "DocumentDB",
+      "previous": "1.0",
+      "english_target": "1.2.0",
+      "note": "同时固定 docs 和网站修订；新增分布式命令",
+      "english_status": "updated",
+      "english_content_pages": 32,
+      "english_provenance_only_pages": 278,
+      "english_added_pages": 10,
+      "languages": {
+        "zh": {
+          "page_tasks": 32,
+          "provenance_only_pages": 278,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "component": "orioledb",
+      "name": "OrioleDB",
+      "previous": "网站 2026-11-06 快照",
+      "english_target": "1.10.3 发布上下文",
+      "note": "20 篇网站源未变；保留原快照和历史 benchmark 标签",
+      "english_status": "updated",
+      "english_content_pages": 1,
+      "english_provenance_only_pages": 0,
+      "english_added_pages": 0,
+      "languages": {
+        "zh": {
+          "page_tasks": 1,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        }
+      }
+    },
+    {
+      "component": "citus",
+      "name": "Citus",
+      "previous": "Citus 14，2026-11-07",
+      "english_target": "Citus 14 / 14.3.0",
+      "note": "59 篇 English Markdown 源无变化；14.3.0 早于原快照",
+      "english_status": "checked-no-change",
+      "english_content_pages": 0,
+      "english_provenance_only_pages": 0,
+      "english_added_pages": 0,
+      "languages": {
+        "zh": {
+          "page_tasks": 0,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "no-update"
+        }
+      }
+    },
+    {
+      "component": "site",
+      "name": "全站署名页",
+      "previous": "原来源表",
+      "english_target": "2026-11-21 英文来源表",
+      "note": "其他语言只同步其已发布集合；首页与导航单列",
+      "english_status": "updated",
+      "english_content_pages": 1,
+      "english_provenance_only_pages": 0,
+      "english_added_pages": 0,
+      "languages": {
+        "zh": {
+          "page_tasks": 1,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "fr": {
+          "page_tasks": 1,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "ja": {
+          "page_tasks": 1,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "de": {
+          "page_tasks": 1,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "ru": {
+          "page_tasks": 1,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "ar": {
+          "page_tasks": 1,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        },
+        "es": {
+          "page_tasks": 1,
+          "provenance_only_pages": 0,
+          "existing_provenance_only_gaps": 0,
+          "status": "pending"
+        }
+      }
+    }
+  ],
+  "artifacts": {
+    "english-all.patch": {
+      "path": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/english-all.patch",
+      "sha256": "8d65f163ee7ed78995c42fc6df6f8f45ffa2f0f09336bd4aba8a4640cfb340ad"
+    },
+    "english-content.patch": {
+      "path": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/english-content.patch",
+      "sha256": "b0d84fbbf7831cd1db44c03c508481626af4afdd7bab703c74e6b57ba8449e6e"
+    },
+    "metadata.patch": {
+      "path": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/metadata.patch",
+      "sha256": "735a11e15f3757b121a4a838b12cf7a4a04bca630d54d1af52e1f5c202bfc8a3"
+    },
+    "translation-tasks.json": {
+      "path": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/translation-tasks.json",
+      "sha256": "520010628aa1865d262a278db231865b0a27352dbc304116fe259814fa63c477"
+    },
+    "translation-tasks.md": {
+      "path": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/translation-tasks.md",
+      "sha256": "b448bfce1d3ba96bcf6c1bf94b479f7136611234c4d445159a769a1f02243d5c"
+    },
+    "english-inventory.json": {
+      "path": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/english-inventory.json",
+      "sha256": "fad7f762a08eef9884558d5deb1ace066d4c304beb16ed83b2b222837e604608"
+    },
+    "baseline-manifest.json": {
+      "path": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/baseline-manifest.json",
+      "sha256": "27717d5e9e0efc260aa26f10b8955b59e9a33f71b4bf31ec1c0f2a887d2e1fc8"
+    }
+  },
+  "translation_queue": [
+    {
+      "language": "zh",
+      "status": "pending",
+      "assignee": null,
+      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/translations/zh.md"
+    },
+    {
+      "language": "fr",
+      "status": "pending",
+      "assignee": null,
+      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/translations/fr.md"
+    },
+    {
+      "language": "ja",
+      "status": "pending",
+      "assignee": null,
+      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/translations/ja.md"
+    },
+    {
+      "language": "de",
+      "status": "pending",
+      "assignee": null,
+      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/translations/de.md"
+    },
+    {
+      "language": "ru",
+      "status": "pending",
+      "assignee": null,
+      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/translations/ru.md"
+    },
+    {
+      "language": "ar",
+      "status": "pending",
+      "assignee": null,
+      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/translations/ar.md"
+    },
+    {
+      "language": "es",
+      "status": "pending",
+      "assignee": null,
+      "checklist": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables/translations/es.md"
+    }
+  ],
+  "validation": "See external validation.json; full make check remains blocked by untranslated differences.",
+  "release_status": "uncommitted; not deployed"
+}

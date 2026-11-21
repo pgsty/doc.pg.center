@@ -39,7 +39,7 @@ components:
         - { title: "REST API", url: /patroni/rest_api/, icon: fa-solid fa-plug }
     - title: "pgBackRest"
       meta: "Backup & recovery"
-      version: v2.60.0
+      version: v2.60.1
       icon: fa-solid fa-couch
       desc: "Design reliable backup, restore, archive, and point-in-time recovery workflows."
       url: /pgbackrest/
@@ -63,7 +63,7 @@ components:
         - { title: "FAQ", url: /pgbouncer/faq/, icon: fa-solid fa-circle-question }
     - title: "pgBadger"
       meta: "Log analysis"
-      version: v13.2-dev
+      version: v13.3
       icon: fa-solid fa-otter
       desc: "Turn PostgreSQL and PgBouncer logs into query, workload, and error reports."
       url: /pgbadger/
@@ -75,7 +75,7 @@ components:
         - { title: "Sample reports", url: /pgbadger/sample-reports/, icon: fa-solid fa-chart-column }
     - title: "HAProxy"
       meta: "Load balancing"
-      version: v3.4
+      version: v3.4.8
       icon: fa-solid fa-network-wired
       desc: "Read the complete HAProxy 3.4 Starter, Configuration, and Management manuals."
       url: /haproxy/
@@ -87,7 +87,7 @@ components:
         - { title: "ACLs & samples", url: /haproxy/acls-and-samples/, icon: fa-solid fa-filter }
     - title: "etcd"
       meta: "Consensus & coordination"
-      version: v3.7.3
+      version: v3.7.4
       icon: fa-solid fa-gear
       desc: "Operate a strongly consistent key-value store, its APIs, Raft model, and internals."
       url: /etcd/
@@ -106,19 +106,19 @@ kernels:
   items:
   - title: PostgreSQL
     meta: The PostgreSQL core
-    version: '18.6'
+    version: '19.0'
     icon: pgsql-icon-postgresql
-    desc: Read the supported releases, preview PostgreSQL 19, or browse the historical manuals.
+    desc: Read supported PostgreSQL releases, explore development, or browse historical manuals.
     url: /postgresql/
     shortcuts_label: PostgreSQL documentation shortcuts
     shortcuts:
-    - title: Current manual · 18.6
-      url: https://pg.center/docs/18/index.html
+    - title: Current manual · 19.0
+      url: https://pg.center/docs/19/index.html
       icon: fa-solid fa-book-open
     - title: Supported versions
       url: /postgresql/#supported
       icon: fa-solid fa-layer-group
-    - title: PostgreSQL 19 preview
+    - title: PostgreSQL 20 development
       url: /postgresql/#development
       icon: fa-solid fa-flask
     - title: Historical versions
@@ -147,7 +147,7 @@ kernels:
 
   - title: DocumentDB
     meta: Document database
-    version: '1.0'
+    version: '1.2.0'
     icon: fa-solid fa-file-code
     desc: Store BSON documents, query and index them, and connect through a MongoDB gateway.
     url: /documentdb/
@@ -187,7 +187,7 @@ kernels:
       icon: fa-solid fa-book-open
   - title: Babelfish
     meta: SQL Server compatibility
-    version: '6.2.0'
+    version: '6.1 OSS / 6.2 Aurora'
     icon: fa-solid fa-fish
     desc: Run T-SQL over the TDS protocol, with migration and compatibility guidance.
     url: /babelfish/
@@ -207,7 +207,7 @@ kernels:
       icon: fa-solid fa-book-open
   - title: PolarDB
     meta: Shared storage
-    version: '17.10.1.0'
+    version: '17.11.1.0'
     icon: fa-solid fa-cloud
     desc: Explore shared storage, elastic queries, deployment, and PolarDB internals.
     url: /polardb/
@@ -288,7 +288,7 @@ kernels:
       icon: fa-solid fa-book-open
   - title: Percona TDE
     meta: Transparent data encryption
-    version: 2.2.2
+    version: 2.3.0
     icon: fa-solid fa-shield-halved
     desc: Encrypt PostgreSQL tables and WAL, manage keys, and plan backup and recovery.
     url: /percona/

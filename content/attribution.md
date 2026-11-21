@@ -25,16 +25,18 @@ which licence, and where the complete upstream notice is retained.
 
 ## Summary {#summary}
 
+English updates below were reviewed on **November 21, 2026**. Chinese and the other translated editions retain their previous source revisions until the corresponding incremental translation is complete. `data/upstreams.yaml` keeps both edition baselines; page-level source links identify the English revisions.
+
 | Component | Upstream work | Pinned at | Licence | Retained notice |
 |---|---|---|---|---|
 | [Patroni](/patroni/) | [Patroni documentation](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/pgbackrest/) | [pgBackRest documentation](https://pgbackrest.org/) | v2.60.0 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [pgBackRest](/pgbackrest/) | [pgBackRest documentation](https://pgbackrest.org/) | v2.60.1 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
 | [PgBouncer](/pgbouncer/) | [PgBouncer documentation](https://www.pgbouncer.org/) | v1.26.1 | [ISC](https://opensource.org/license/isc-license-txt) | [Upstream `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/COPYRIGHT) |
-| [pgBadger](/pgbadger/) | [pgBadger documentation](https://pgbadger.darold.net/) | v13.2 development snapshot, commit `f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/haproxy/) | [HAProxy 3.4 manuals](https://docs.haproxy.org/3.4/) | 3.4.7-57; stable v3.4.7, commit `0faeaed` | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/etcd/) | [etcd v3.7 documentation](https://etcd.io/docs/v3.7/) | v3.7 docs, commit `d20f8ae`; release v3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Upstream `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
-| [Apache Cloudberry](/cloudberry/) | [Apache Cloudberry 2.x documentation](https://cloudberry.apache.org/docs/) | 2.x docs, commit `d4e372a`; release 2.2.0-incubating | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [Upstream `LICENSE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/LICENSE) and [`NOTICE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/NOTICE) |
-| [PXF](/cloudberry/pxf/) | [Apache Cloudberry PXF](https://cloudberry.apache.org/pxf/) | Docs `dff2632d`; release 2.2.0-incubating | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](/third_party/pxf/LICENSE), [NOTICE](/third_party/pxf/NOTICE) |
+| [pgBadger](/pgbadger/) | [pgBadger documentation](https://pgbadger.darold.net/) | v13.3, commit `0514893` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
+| [HAProxy](/haproxy/) | [HAProxy 3.4 manuals](https://docs.haproxy.org/3.4/) | v3.4.8 LTS | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [etcd](/etcd/) | [etcd v3.7 documentation](https://etcd.io/docs/v3.7/) | v3.7 docs, commit `e60635a`; release v3.7.4 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Upstream `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [Apache Cloudberry](/cloudberry/) | [Apache Cloudberry 2.x documentation](https://cloudberry.apache.org/docs/) | 2.x docs, commit `e3a102d`; release 2.2.0-incubating | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [Upstream `LICENSE`](https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/LICENSE) and [`NOTICE`](https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/NOTICE) |
+| [PXF](/cloudberry/pxf/) | [Apache Cloudberry PXF](https://cloudberry.apache.org/pxf/) | Docs `6683faa3`; release 2.2.0-incubating | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) | [LICENSE](/third_party/pxf/LICENSE), [NOTICE](/third_party/pxf/NOTICE) |
 | [Core Internals](/cloudberry/core-internals/) | [Apache Cloudberry Core Internals](https://cloudberry.apache.org/core-internals/) | Main `c2baef0`; 3.0.0-devel / PostgreSQL 16.9 | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0), PostgreSQL | [LICENSE](/third_party/core-internals/LICENSE), [NOTICE](/third_party/core-internals/NOTICE) |
 | [PolarDB](/polardb/) | [PolarDB for PostgreSQL Documentation](https://github.com/polardb/polardb-pg-docs) | b4733b0 | Apache-2.0 | [Source and full notices](/polardb/site/attribution/) |
 | [IvorySQL](/ivorysql/) | [IvorySQL Documentation](https://github.com/IvorySQL/ivorysql_docs) | v5.6 · 7c3f4a67e7d3 | LicenseRef-IvorySQL-Docs | [Source and full notices](/ivorysql/site/license/) |
@@ -42,10 +44,10 @@ which licence, and where the complete upstream notice is retained.
 | [Halo Database MySQL reference](/openhalo/mysql-compatibility/) | [Halo Database official documentation](https://doc.halodbtech.com/multi-mode-compatibility/mysql) | 1.0.16; snapshot 2026-11-07 | LicenseRef-HaloDB-Docs | [Source and terms](#halodb) |
 | [OpenHalo test evidence](/openhalo/mysql-compatibility-gaps/) | [OpenHalo MySQL compatibility report](https://github.com/fxcollot/openHaloDocumentation) | OpenHalo 1.0.14.18; commit 80a8d07 | LicenseRef-OpenHalo-Test-Report | [Source and terms](#openhalo-tests) |
 | [Babelfish](/babelfish/) | [Babelfish project website](https://github.com/babelfish-for-postgresql/babelfish_project_website) | main @ f468c5ed3d38 | LicenseRef-Babelfish-Website | [Source and full notices](/babelfish/site/attribution/) |
-| [Percona TDE](/percona/) | [Percona pg_tde documentation](https://github.com/percona/pg_tde) | 2.2.2; docs 1660e66a | LicenseRef-pg-tde | [Source and full notices](/percona/assets/legal/pg_tde-COPYRIGHT.txt) |
+| [Percona TDE](/percona/) | [Percona pg_tde documentation](https://github.com/percona/pg_tde) | 2.3.0; docs 5dd7a9e4 | LicenseRef-pg-tde | [Source and full notices](/percona/assets/legal/pg_tde-COPYRIGHT.txt) |
 | [AgensGraph](/agensgraph/) | [AgensGraph documentation](https://tech.skaiworldwide.com/docs/en/agensgraph/18.6.1/index.html) | 2.18.6.1 | Apache-2.0 | [Source and full notices](/agensgraph/site/attribution/) |
-| [pgEdge](/pgedge/) | [pgEdge extension documentation](https://github.com/pgEdge) | Fixed main snapshots; see component notices | PostgreSQL | [Source and full notices](/pgedge/about/attribution/) |
-| [DocumentDB](/documentdb/) | [DocumentDB documentation](https://github.com/documentdb/docs) | DocumentDB 1.0; docs cf69384; website 90cfa08 | LicenseRef-DocumentDB-Docs | [Source and full notices](https://github.com/documentdb/docs/tree/cf69384e6da9524cc0fc723e8ac5b6c0689af432) |
+| [pgEdge](/pgedge/) | [pgEdge extension documentation](https://github.com/pgEdge) | Spock beta.2; LOLOR development; SafeSession 1.1; Snowflake 2.6.1 | PostgreSQL | [Source and full notices](/pgedge/about/attribution/) |
+| [DocumentDB](/documentdb/) | [DocumentDB documentation](https://github.com/documentdb/docs) | DocumentDB 1.2.0; docs 8fb7fda; website 4a83a07 | LicenseRef-DocumentDB-Docs | [Source and full notices](https://github.com/documentdb/docs/tree/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5) |
 | [OrioleDB](/orioledb/) | [OrioleDB documentation and benchmarks](https://www.orioledb.com/docs) | Website snapshot 2026-11-06 | PostgreSQL; website materials retain upstream terms | [Source and full notices](/orioledb/attribution/) |
 | [Citus](/citus/) | [Microsoft Learn Citus 14](https://learn.microsoft.com/en-us/postgresql/citus/?view=citus-14) | 2026-11-07; per-page revisions | CC BY 4.0; MIT code | [Sources and full notices](/citus/attribution/) |
 {.wide .expand}
@@ -67,8 +69,8 @@ the [MIT License](https://opensource.org/license/mit). The complete licence text
 ## pgBackRest {#pgbackrest}
 
 Imported on 2026-08-15 from the [pgBackRest documentation site](https://pgbackrest.org/)
-and refreshed on 2026-10-23 to **v2.60.0**, tag `release/2.60.0`, commit
-[`2e1c4f2`](https://github.com/pgbackrest/pgbackrest/commit/2e1c4f2ba727c45a0a23d4b326905088dc15b1a1).
+and refreshed in English on 2026-11-21 to **v2.60.1**, tag `release/2.60.1`, commit
+[`7aeba29`](https://github.com/pgbackrest/pgbackrest/commit/7aeba299c49abd768ca741506569007a5cab0870).
 
 pgBackRest is copyright (c) 2015-2026 The PostgreSQL Global Development Group and David Steele,
 and is distributed under the [MIT License](https://opensource.org/license/mit). The complete
@@ -87,10 +89,9 @@ retained [upstream](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1
 ## pgBadger {#pgbadger}
 
 Imported on 2026-08-15 from <https://pgbadger.darold.net/> and from
-[`darold/pgbadger`](https://github.com/darold/pgbadger), and refreshed on 2026-10-23 at commit
-[`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67).
-This is a development documentation snapshot after the latest published release, v13.2; it is
-not a new stable release. Historical website excerpts and sample reports retain their own sources.
+[`darold/pgbadger`](https://github.com/darold/pgbadger), and refreshed in English on 2026-11-21 for v13.3 at commit
+[`0514893`](https://github.com/darold/pgbadger/commit/0514893e97296695c77755fa36c59288c3afef3e).
+This is the published v13.3 release of November 3, 2026. Historical website excerpts and sample reports retain their own sources.
 
 pgBadger is copyright (c) 2012-2026 Gilles Darold and is distributed under the
 [PostgreSQL License](https://opensource.org/license/postgresql). The complete licence text is
@@ -108,13 +109,7 @@ retained beside the offline examples as
 
 ## HAProxy {#haproxy}
 
-Imported on 2026-08-16, refreshed on 2026-08-30, and updated on
-2026-10-23 with the official English HAProxy 3.4 maintenance snapshot `3.4.7-57`, commit
-[`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3).
-The latest stable release is `3.4.7` (tag `v3.4.7`); the documentation snapshot includes
-maintenance-branch changes made after that release.
-The English prose is derived from the complete `doc/intro.txt`, `doc/configuration.txt`, and
-`doc/management.txt` manuals — 40,246 lines in total — reorganized into 34 reading pages.
+Imported on 2026-08-16 and updated in English on 2026-11-21 to the official [HAProxy v3.4.8 release](https://git.haproxy.org/?p=haproxy-3.4.git;a=tag;h=v3.4.8). The complete `doc/intro.txt`, `doc/configuration.txt`, and `doc/management.txt` scope is reorganized into 34 reading pages. The Starter and Management sources are unchanged from the preceding snapshot; Configuration changes are recorded in the update diff. Translations remain on `3.4.7-57` pending synchronization.
 
 HAProxy is copyright 2000-2026 Willy Tarreau and is distributed under the
 [GNU General Public License version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
@@ -128,16 +123,7 @@ published as [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) and
 
 ## etcd {#etcd}
 
-Imported from the official etcd v3.7 documentation and refreshed on 2026-10-13 at commit
-[`d20f8ae346da`](https://github.com/etcd-io/website/commit/d20f8ae346da60ab6eb6f24f200753b328aa9fcc).
-The pinned source tree is
-[`content/en/docs/v3.7`](https://github.com/etcd-io/website/tree/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7).
-
-On 2026-10-28, the installation, Docker, and Kubernetes examples and the release summary
-were updated for [etcd v3.7.3](https://github.com/etcd-io/etcd/releases/tag/v3.7.3),
-release commit [`0a173d0`](https://github.com/etcd-io/etcd/commit/0a173d0410a96d01091b484daae81365bbcde57e).
-The release's `go.mod` pins Go 1.26.10. The documentation snapshot and software release
-are recorded separately in `data/upstreams.yaml`, together with source checksums.
+The English v3.7 manual was refreshed on 2026-11-21 from [`etcd-io/website@e60635a46b57`](https://github.com/etcd-io/website/tree/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7). Installation examples and the release summary target [v3.7.4](https://github.com/etcd-io/etcd/releases/tag/v3.7.4), commit `2e8a5c99e4982c8d4c521be15364ea4c5c68a489`, built with Go 1.26.11. The separately pinned changelog remains headed “v3.7.4 (TBC)”; the release tag confirms publication. The documentation and software source checksums are recorded separately in `data/upstreams.yaml`.
 
 The etcd documentation is copyright 2013-present etcd Authors. Its prose is licensed under
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), while code and code samples are
@@ -146,9 +132,9 @@ retained [upstream](https://github.com/etcd-io/website/blob/main/LICENSE).
 
 ## Apache Cloudberry {#cloudberry}
 
-Imported on 2026-11-06 from the Apache Cloudberry website repository at commit
-[`d4e372af8170`](https://github.com/apache/cloudberry-site/commit/d4e372af8170f7e23d501b70deb3938efa1c978b). The source is the 2.x
-documentation in [`versioned_docs/version-2.x`](https://github.com/apache/cloudberry-site/tree/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x), which upstream publishes at
+Updated in English on 2026-11-21 from the Apache Cloudberry website repository at commit
+[`e3a102d15d0e`](https://github.com/apache/cloudberry-site/commit/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c). The source is the 2.x
+documentation in [`versioned_docs/version-2.x`](https://github.com/apache/cloudberry-site/tree/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x), which upstream publishes at
 <https://cloudberry.apache.org/docs/> for the 2.2.0-incubating release.
 
 The documentation snapshot and software release are recorded separately. Cloudberry
@@ -161,16 +147,16 @@ Navigation follows the upstream 2.x sidebar. Docusaurus admonitions, tabs, and c
 are rewritten as OINK callouts and tabs, and images live beside the pages that use them. Three pages
 that upstream publishes outside its sidebar, the TPC-H and TPC-DS benchmarks and `pg_restore`, are
 included. Nineteen links that are broken upstream (legacy Greenplum paths and typos) point to the
-page they refer to, an unclosed note is closed, and a misspelled heading is corrected. The Chinese
-edition translates the complete 2.x documentation, PXF, and Core Internals, preserving code,
-commands, program output, and the English heading anchors. Local corrections also
+page they refer to, an unclosed note is closed, and a misspelled heading is corrected. The English edition now has 672 pages. The 641-page Chinese edition covers the preceding 2.x,
+PXF, and Core Internals snapshot; the 31 additions and changed pages await translation. Existing
+Chinese pages preserve code, commands, program output, and their source English heading anchors. Local corrections also
 distinguish explicit Coordinator activation from automatic Segment promotion and
 correct the AO compaction threshold condition against the 2.2 release source; both
 language editions include these corrections.
 
 The Apache Cloudberry website is Copyright 2024-2025 The Apache Software Foundation and is licensed
 under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0). Its
-[`NOTICE`](https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/NOTICE) states that the product contains significant parts originally based on
+[`NOTICE`](https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/NOTICE) states that the product contains significant parts originally based on
 Greenplum Database from VMware, Inc. or its affiliates, Copyright (c) 2004-2020, also licensed under
 the Apache License 2.0. The page-end credit and this section identify the pages as modified.
 
@@ -184,9 +170,9 @@ project has yet to be fully endorsed by the ASF.
 
 ## Apache Cloudberry PXF {#pxf}
 
-The PXF collection is sourced from [`apache/cloudberry-pxf@dff2632d`](https://github.com/apache/cloudberry-pxf/commit/dff2632d2a364f466b83682439c3ae97e655c1b7), path `docs/`, pinned by the Cloudberry website at commit `d4e372af8170f7e23d501b70deb3938efa1c978b`. The published software release is [`2.2.0-incubating`](https://github.com/apache/cloudberry-pxf/releases/tag/2.2.0-incubating), commit `01c2e00b64166740cabfcae1ceee42a72e520594`. The website-pinned documentation remains a separate snapshot: the release tag changes the HBase compatibility entry from `2.3.7` to `2.5.x`, and its other 65 published Markdown pages are identical.
+The English PXF collection is sourced from [`apache/cloudberry-pxf@6683faa38ce4`](https://github.com/apache/cloudberry-pxf/commit/6683faa38ce4e2d146a77197991518aacb4b24e8), path `docs/`, as pinned by the current Cloudberry website. This development documentation includes Java 17/21 requirements and connector changes newer than the published [`2.2.0-incubating`](https://github.com/apache/cloudberry-pxf/releases/tag/2.2.0-incubating) release. The Chinese edition remains on the earlier `dff2632d` snapshot pending translation.
 
-The source is Copyright 2024-2026 The Apache Software Foundation and is licensed under Apache License 2.0. Its [NOTICE](https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/NOTICE) records software originally developed by Apache HAWQ, Copyright 2017 The Apache Software Foundation. The [LICENSE](https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/LICENSE) also retains the Greenplum Platform Extension Framework attribution, Copyright 2018-Present VMware, Inc. or its affiliates. The upstream [documentation index](https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/index.md#L26-L32) identifies `greenplum-db/pxf-archive` 6.10.1 as the documentation's origin; the software fork is identified separately as 6.10.1-SNAPSHOT. This community edition adapts the formatting, navigation, and links while retaining upstream notices.
+The source is Copyright 2024-2026 The Apache Software Foundation and is licensed under Apache License 2.0. Its [NOTICE](https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/NOTICE) records software originally developed by Apache HAWQ, Copyright 2017 The Apache Software Foundation. The [LICENSE](https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/LICENSE) also retains the Greenplum Platform Extension Framework attribution, Copyright 2018-Present VMware, Inc. or its affiliates. The upstream [documentation index](https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/index.md#L26-L32) identifies `greenplum-db/pxf-archive` 6.10.1 as the documentation's origin; the software fork is identified separately as 6.10.1-SNAPSHOT. This community edition adapts the formatting, navigation, and links while retaining upstream notices.
 
 The exact upstream [LICENSE](/third_party/pxf/LICENSE) and [NOTICE](/third_party/pxf/NOTICE) are retained locally.
 
@@ -265,7 +251,7 @@ Imported from the bilingual community edition of `babelfish-for-postgresql/babel
 
 ## Percona TDE {#percona}
 
-The Percona collection currently contains pg_tde 2.2.2 documentation at `percona/pg_tde@1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39`, with 66 English articles and their Chinese translations, section indexes and PGSTY editorial guides. It is not the entire Percona product documentation. The complete pg_tde copyright text, including the PostgreSQL, University of California and Percona portions, is retained.
+The English Percona collection now contains pg_tde 2.3.0 documentation at `percona/pg_tde@5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a`, with the 2.3.0 release notes added to the previous 66 articles, section indexes, and PGSTY editorial guides. Chinese remains on the reviewed 2.2.2 baseline pending translation. It is not the entire Percona product documentation. The complete pg_tde copyright text, including the PostgreSQL, University of California and Percona portions, is retained.
 
 [Source and full notices](/percona/assets/legal/pg_tde-COPYRIGHT.txt).
 
@@ -277,28 +263,28 @@ Imported from the existing AgensGraph 2.18.6.1 edition. Documentation copyright 
 
 ## pgEdge {#pgedge}
 
-Includes Spock, LOLOR, SafeSession and Snowflake from their existing OINK edition. These are fixed `main` snapshots, not exact mirrors of the versioned release websites. Of 108 imported upstream articles, 32 have Chinese machine drafts; their status and review notices remain visible. The PostgreSQL licence and project-specific copyright notices are retained. Source commits are listed below.
+Includes Spock, LOLOR, SafeSession and Snowflake from their existing OINK edition. The English source set is Spock v6.0.0-beta.2, LOLOR 1.3.0 development, SafeSession v1.1, and Snowflake v2.6.1. Chinese retains its earlier source set pending updates. Of 108 imported upstream articles, 32 have Chinese machine drafts; their status and review notices remain visible. The PostgreSQL licence and project-specific copyright notices are retained. Source commits are listed below.
 
 [Source and full notices](/pgedge/about/attribution/).
 
 | Extension | Fixed commit |
 | --- | --- |
-| spock | [4ac1aec2f080](https://github.com/pgEdge/spock/tree/4ac1aec2f080) |
-| lolor | [ac3893a7707a](https://github.com/pgEdge/lolor/tree/ac3893a7707a) |
-| safesession | [b406cd1e82cf](https://github.com/pgEdge/pgedge-safesession/tree/b406cd1e82cf) |
-| snowflake | [429a16803c8c](https://github.com/pgEdge/snowflake/tree/429a16803c8c) |
+| spock | [d05e2e2b6a82](https://github.com/pgEdge/spock/tree/d05e2e2b6a82) |
+| lolor | [1548836b0df0](https://github.com/pgEdge/lolor/tree/1548836b0df0) |
+| safesession | [d66225fcceef](https://github.com/pgEdge/pgedge-safesession/tree/d66225fcceef) |
+| snowflake | [9506e1bd5c1f](https://github.com/pgEdge/snowflake/tree/9506e1bd5c1f) |
 
 ## DocumentDB {#documentdb}
 
-Imported from the official `documentdb/docs` repository at `cf69384e6da9524cc0fc723e8ac5b6c0689af432` and the published website at `documentdb/documentdb.github.io` commit `90cfa088351557cd618034dfc00ab817c35a5f76` (7 November 2026). The 296 documentation Markdown records and 19 website article bodies produce 300 English pages and 300 complete Simplified Chinese counterparts. This includes the website-generated Docker, package, operations, and offline-install guides, the installation primer, category descriptions, and the upstream forthcoming architecture notice. Superseded source guides are retained with notices. The independently versioned Kubernetes Operator manual remains linked at its official site.
+Imported from the official `documentdb/docs` repository at `8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5` and the published website at `documentdb/documentdb.github.io` commit `4a83a0712149e101a2bbb38934bed36497cdf40f` (21 November 2026). The 306 documentation Markdown records and 20 website article bodies produce 310 English pages. The 300 existing Simplified Chinese pages remain based on the previous 1.0 edition until the incremental changes and ten new pages are translated. This includes the website-generated Docker, package, operations, and offline-install guides, the installation primer, category descriptions, and the upstream forthcoming architecture notice. Superseded source guides are retained with notices. The independently versioned Kubernetes Operator manual remains linked at its official site.
 
-The Chinese edition was translated and reviewed against the fixed English edition with AI assistance, including parallel bilingual review and checks of examples, literals, links, and heading IDs. Code, commands, output, and upstream error messages are preserved. Forty pages include bilingual editorial notes identifying inconsistencies in the original prose or examples. The documentation and website repositories have no standalone documentation licence in these snapshots. DocumentDB software is MIT-licensed, which is not asserted here as a separate blanket licence grant for all documentation. The upstream sources and their rights notices remain authoritative.
+The Chinese edition was translated and reviewed against the November 7 English edition with AI assistance, including parallel bilingual review and checks of examples, literals, links, and heading IDs. Code, commands, output, and upstream error messages are preserved. Forty pages include bilingual editorial notes identifying inconsistencies in the original prose or examples. The documentation and website repositories have no standalone documentation licence in these snapshots. DocumentDB software is MIT-licensed, which is not asserted here as a separate blanket licence grant for all documentation. The upstream sources and their rights notices remain authoritative.
 
-[Documentation sources](https://github.com/documentdb/docs/tree/cf69384e6da9524cc0fc723e8ac5b6c0689af432) · [Website sources](https://github.com/documentdb/documentdb.github.io/tree/90cfa088351557cd618034dfc00ab817c35a5f76).
+[Documentation sources](https://github.com/documentdb/docs/tree/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5) · [Website sources](https://github.com/documentdb/documentdb.github.io/tree/4a83a0712149e101a2bbb38934bed36497cdf40f).
 
 ## OrioleDB {#orioledb}
 
-Imported from PGSTY's bilingual OrioleDB community edition, based on the live website snapshot of **2026-11-06**. The collection contains all 18 documentation articles and two benchmark recipes, plus section indexes and source notes: 26 pages per language. Original HTML and Markdown checksums, code fingerprints, and asset hashes are recorded in `data/imports/orioledb.json`. The snapshot is not tied to one software release; the benchmark recipes use beta18.
+Imported from PGSTY's bilingual OrioleDB community edition, based on the live website snapshot of **2026-11-06**. The collection contains all 18 documentation articles and two benchmark recipes, plus section indexes and source notes: 26 pages per language. Original HTML and Markdown checksums, code fingerprints, and asset hashes are recorded in `data/imports/orioledb.json`. The snapshot is not tied to one software release; the benchmark recipes use beta18. The English homepage additionally records the v1.10.3 release of November 9, 2026 without changing those historical benchmark versions.
 
 Project documentation retains **Copyright (c) 2025-2026, Supabase Inc.**, under the PostgreSQL License selected by the source edition from the project's dual Apache-2.0 OR PostgreSQL license. The complete [license and warranty disclaimer](/third_party/orioledb/LICENSE-POSTGRESQL.txt) are retained. Website and benchmark materials retain **Copyright © 2026 Supabase Inc** and their original terms; no separate blanket website-content license was identified. Chinese translation and curation are credited to PGSTY. This import preserves the existing translation status.
 

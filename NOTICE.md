@@ -10,24 +10,28 @@ adaptations use CC BY 4.0, subject to the original upstream terms identified bel
 
 ## Upstream documentation
 
+The English edition was updated on 2026-11-21. Translated editions retain their prior
+source baselines until incremental translation is complete. Both baselines are recorded
+in `data/upstreams.yaml`; the update inventory records the pending language work.
+
 | Collection | English source edition | Upstream copyright and license |
 | --- | --- | --- |
 | Patroni | v4.1.5 | Copyright (c) 2025 Compose, Zalando SE, Patroni Contributors; MIT |
-| pgBackRest | v2.60.0, commit `2e1c4f2ba727c45a0a23d4b326905088dc15b1a1` | Copyright (c) 2015-2026 The PostgreSQL Global Development Group and David Steele; MIT |
+| pgBackRest | v2.60.1, commit `7aeba299c49abd768ca741506569007a5cab0870` | Copyright (c) 2015-2026 The PostgreSQL Global Development Group and David Steele; MIT |
 | PgBouncer | v1.26.1, tag `pgbouncer_1_26_1` | Copyright (c) 2007-2009 Marko Kreen, Skype Technologies OÜ; ISC |
-| pgBadger | v13.2 development snapshot, commit `f373ac678c756f66a785c5ab4773d1f05f468d67` | Copyright (c) 2012-2026 Gilles Darold; PostgreSQL License |
-| HAProxy | 3.4.7-57, commit `0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3` | Copyright 2000-2026 Willy Tarreau; GPL-2.0-only |
-| etcd | v3.7 docs, website commit `d20f8ae346da60ab6eb6f24f200753b328aa9fcc`; updated for release v3.7.3 | Copyright 2013-present etcd Authors; CC BY 4.0 for prose, Apache 2.0 for code and samples |
-| Apache Cloudberry | 2.x docs (`versioned_docs/version-2.x`), website commit `d4e372af8170f7e23d501b70deb3938efa1c978b`; release 2.2.0-incubating | Copyright 2024-2025 The Apache Software Foundation; Apache-2.0 |
-| Apache Cloudberry PXF | `docs/`, commit `dff2632d2a364f466b83682439c3ae97e655c1b7`; release 2.2.0-incubating | Copyright 2024-2026 The Apache Software Foundation; Apache-2.0 |
+| pgBadger | v13.3, commit `0514893e97296695c77755fa36c59288c3afef3e` | Copyright (c) 2012-2026 Gilles Darold; PostgreSQL License |
+| HAProxy | v3.4.8 LTS | Copyright 2000-2026 Willy Tarreau; GPL-2.0-only |
+| etcd | v3.7 docs, website commit `e60635a46b57b7d74ca80c52c59aa0d37bed01a8`; updated for release v3.7.4 | Copyright 2013-present etcd Authors; CC BY 4.0 for prose, Apache 2.0 for code and samples |
+| Apache Cloudberry | 2.x docs (`versioned_docs/version-2.x`), website commit `e3a102d15d0e85928a0cb5aaec24e67e6b40be7c`; release 2.2.0-incubating | Copyright 2024-2025 The Apache Software Foundation; Apache-2.0 |
+| Apache Cloudberry PXF | `docs/`, commit `6683faa38ce4e2d146a77197991518aacb4b24e8`; release 2.2.0-incubating | Copyright 2024-2026 The Apache Software Foundation; Apache-2.0 |
 | Apache Cloudberry Core Internals | `doc/core-internals/`, main commit `c2baef068a6f9f8b3c8110f9fdf5758306207693`; 3.0.0-devel / PostgreSQL 16.9 | Copyright 2024-2026 The Apache Software Foundation; Apache-2.0 and PostgreSQL License for cited PostgreSQL material |
 | Halo Database MySQL compatibility documentation | Halo Database 1.0.16, captured 2026-11-07 | Copyright Halo Tech Co., Ltd.; no public documentation licence identified in the captured site |
 | OpenHalo MySQL compatibility test report | OpenHalo 1.0.14.18, report commit `80a8d07` | Report contributors; repository licence not identified in the pinned snapshot |
 | Citus | Microsoft Learn Citus 14, captured 2026-11-07; per-page commits in `data/imports/citus.json` | Copyright (c) Microsoft Corporation and contributors; CC BY 4.0 documentation, MIT code; retained original article links |
 
 The etcd installation, Docker, and Kubernetes examples and release summary were
-updated on 2026-10-28 for tag `v3.7.3`, release commit
-`0a173d0410a96d01091b484daae81365bbcde57e`, including its Go 1.26.10 toolchain.
+updated in English on 2026-11-21 for tag `v3.7.4`, release commit
+`2e8a5c99e4982c8d4c521be15364ea4c5c68a489`, including its Go 1.26.11 toolchain.
 The v3.7 documentation snapshot remains pinned separately from the software release.
 
 Cloudberry 2.2.0-incubating uses PostgreSQL 14.10; 2.0 and 2.1 used 14.4. The
@@ -45,11 +49,12 @@ Greenplum Database, Copyright (c) 2004-2020 VMware, Inc. or its affiliates, unde
 the Apache License 2.0. Apache Cloudberry is undergoing incubation at The Apache
 Software Foundation; Apache Cloudberry and Apache are trademarks of the ASF.
 
-The PXF collection follows the Cloudberry website-pinned `docs/` snapshot at
-`apache/cloudberry-pxf@dff2632d`. The published 2.2.0-incubating tag changes one
-HBase compatibility value from `2.3.7` to `2.5.x`; the snapshot is retained and
-the release is recorded separately. PXF retains Apache HAWQ and VMware
-attributions from its NOTICE and LICENSE files in `static/third_party/pxf/`.
+The English PXF collection follows the development `docs/` snapshot at
+`apache/cloudberry-pxf@6683faa38ce4e2d146a77197991518aacb4b24e8`.
+The published release remains 2.2.0-incubating; the English snapshot includes later
+Java and connector changes. Chinese retains the preceding snapshot pending translation.
+PXF retains Apache HAWQ and VMware attributions from the NOTICE and LICENSE files in
+`static/third_party/pxf/`.
 
 Core Internals follows Cloudberry `main` at `c2baef0`, a 3.0.0-devel / PostgreSQL
 16.9 development snapshot. Its cited PostgreSQL-derived material retains the
@@ -57,16 +62,14 @@ PostgreSQL License and the exact PostgreSQL notice in
 `static/third_party/core-internals/LICENSE-postgresql.txt`; the ASF LICENSE and
 NOTICE are retained alongside it.
 
-The HAProxy edition follows a 3.4 maintenance-branch documentation snapshot after
-stable release 3.4.7. It includes the complete Starter, Configuration, and
+The English HAProxy edition follows stable release 3.4.8. It includes the complete Starter, Configuration, and
 Management manual scope, with adapted headings, links, examples, and page grouping.
 HAProxy-derived pages retain GPLv2 terms and are not covered by the site's CC BY 4.0
 license. The upstream license explanation, OpenSSL exception, and complete GPLv2
 text are published from `static/third_party/haproxy/LICENSE` and
 `static/third_party/haproxy/GPL-2.0`.
 
-The pgBadger source is a development documentation snapshot after v13.2, not a
-new stable release. Historical website excerpts and sample reports retain their
+The English pgBadger source is the stable v13.3 release of 2026-11-03. Historical website excerpts and sample reports retain their
 original sources. The pgBadger license is retained in `static/third_party/pgbadger/LICENSE`.
 pgBadger embeds a modified `SQL::Beautify` module under Artistic License 2.0.
 Its report resources include MIT, GPL-2.0, and SIL Open Font License 1.1 components;
@@ -159,7 +162,7 @@ Source records: `data/imports/babelfish.json`; registry: `data/upstreams.yaml`.
 
 ## Percona TDE
 
-The Percona collection currently contains pg_tde 2.2.2 documentation at `percona/pg_tde@1660e66a6a30d3b8a9020eef7d1fba51bf7e8e39`, with 66 English articles and their Chinese translations, section indexes and PGSTY editorial guides. It is not the entire Percona product documentation. The complete pg_tde copyright text, including the PostgreSQL, University of California and Percona portions, is retained.
+The English Percona collection now contains pg_tde 2.3.0 documentation at `percona/pg_tde@5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a`, with the 2.3.0 release notes added to the previous 66 articles, section indexes, and PGSTY editorial guides. Chinese remains on the reviewed 2.2.2 baseline pending translation. It is not the entire Percona product documentation. The complete pg_tde copyright text, including the PostgreSQL, University of California and Percona portions, is retained.
 
 Source records: `data/imports/percona.json`; registry: `data/upstreams.yaml`.
 
@@ -171,15 +174,15 @@ Source records: `data/imports/agensgraph.json`; registry: `data/upstreams.yaml`.
 
 ## pgEdge
 
-Includes Spock, LOLOR, SafeSession and Snowflake from their existing OINK edition. These are fixed `main` snapshots, not exact mirrors of the versioned release websites. Of 108 imported upstream articles, 32 have Chinese machine drafts; their status and review notices remain visible. The PostgreSQL licence and project-specific copyright notices are retained. Source commits are listed below.
+Includes Spock, LOLOR, SafeSession and Snowflake from their existing OINK edition. The English source set is Spock v6.0.0-beta.2, LOLOR 1.3.0 development, SafeSession v1.1, and Snowflake v2.6.1. Chinese retains its earlier source set pending updates. Of 108 imported upstream articles, 32 have Chinese machine drafts; their status and review notices remain visible. The PostgreSQL licence and project-specific copyright notices are retained. Source commits are listed below.
 
 Source records: `data/imports/pgedge.json`; registry: `data/upstreams.yaml`.
 
 ## DocumentDB
 
-Imported from the official `documentdb/docs` repository at `cf69384e6da9524cc0fc723e8ac5b6c0689af432` and the published website at `documentdb/documentdb.github.io` commit `90cfa088351557cd618034dfc00ab817c35a5f76` (7 November 2026). The 296 documentation Markdown records and 19 website article bodies produce 300 English pages and 300 complete Simplified Chinese counterparts. This includes the website-generated Docker, package, operations, and offline-install guides, the installation primer, category descriptions, and the upstream forthcoming architecture notice. Superseded source guides are retained with notices. The independently versioned Kubernetes Operator manual remains linked at its official site.
+Imported from the official `documentdb/docs` repository at `8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5` and the published website at `documentdb/documentdb.github.io` commit `4a83a0712149e101a2bbb38934bed36497cdf40f` (21 November 2026). The 306 documentation Markdown records and 20 website article bodies produce 310 English pages. The 300 existing Simplified Chinese pages remain based on the previous 1.0 edition until the incremental changes and ten new pages are translated. This includes the website-generated Docker, package, operations, and offline-install guides, the installation primer, category descriptions, and the upstream forthcoming architecture notice. Superseded source guides are retained with notices. The independently versioned Kubernetes Operator manual remains linked at its official site.
 
-The Chinese edition was translated and reviewed against the fixed English edition with AI assistance, including parallel bilingual review and checks of examples, literals, links, and heading IDs. Code, commands, output, and upstream error messages are preserved. Forty pages include bilingual editorial notes identifying inconsistencies in the original prose or examples. The documentation and website repositories have no standalone documentation licence in these snapshots. DocumentDB software is MIT-licensed, which is not asserted here as a separate blanket licence grant for all documentation. The upstream sources and their rights notices remain authoritative.
+The Chinese edition was translated and reviewed against the November 7 English edition with AI assistance, including parallel bilingual review and checks of examples, literals, links, and heading IDs. Code, commands, output, and upstream error messages are preserved. Forty pages include bilingual editorial notes identifying inconsistencies in the original prose or examples. The documentation and website repositories have no standalone documentation licence in these snapshots. DocumentDB software is MIT-licensed, which is not asserted here as a separate blanket licence grant for all documentation. The upstream sources and their rights notices remain authoritative.
 
 Source records: `data/imports/documentdb.json`; registry: `data/upstreams.yaml`.
 

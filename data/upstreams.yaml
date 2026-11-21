@@ -358,6 +358,7 @@ citus:
     LICENSE-CODE: 91f7258203fd43ba6d6f7f72b644eaedee9e3430f035c053beb6f34052f045e2
     ThirdPartyNotices.md: fbbd62e02566d47cf4ff0727de51a100f4658112fc3a8fb4386687abd5c39043
 
+# English update of 2026-11-21. Earlier keys remain the translation baselines.
 pgbackrest-20261121:
   name: pgBackRest documentation
   repository: https://github.com/pgbackrest/pgbackrest
@@ -377,7 +378,6 @@ pgbackrest-20261121:
     doc/xml/reference.xml: 9733b729ba0e864c10eabdeded2ef3b7f7f67c98f1afea24d771afe666eade9d
     doc/xml/release.xml: d760d75d7161a77e39edaa1353c837c176ed20f9ce59c51d12c5439afcfd92b7
     doc/xml/release/2020s/2026/2.60.1.xml: c58447e816971907c63709d03b4e2b6a8bffd3bbb04c62fe694c7a0079b36f97
-
 pgbadger-20261121:
   name: pgBadger documentation
   repository: https://github.com/darold/pgbadger
@@ -394,7 +394,6 @@ pgbadger-20261121:
   translation_baseline: pgbadger
   source_sha256:
     ChangeLog: 0ede5b99e8c09edf7e3be2ef01faa61b7c96d4261a9d8787556434bee98b386e
-
 etcd-20261121:
   name: etcd v3.7 documentation
   repository: https://github.com/etcd-io/website
@@ -423,7 +422,6 @@ etcd-20261121:
     content/en/docs/v3.7/integrations.md: 7a07ceac725c007027a5bee2aee0a65db11a0ac955e833f32effc23314fce005
     content/en/docs/v3.7/learning/api.md: 4c3e4a9348010aa2a3b65a27fb1f64072cad450b081a459be5c64e18c8fdf787
     content/en/docs/v3.7/op-guide/versioning.md: 4b985b3a51951b720d689ec159f48b468e6040275aaa22be0504f8bb13c7eda3
-
 percona-20261121:
   name: Percona pg_tde documentation
   repository: https://github.com/percona/pg_tde
@@ -441,7 +439,6 @@ percona-20261121:
     documentation/variables.yml: ef7942387d23cea4a685ed2897aae7ea1a71117b038bd3e60aa0bb70886f81e1
     documentation/docs/release-notes/release-notes.md: c29e31f8ce154afe6bdf45711d507bb4af0c16c49375525c4131856e79d89cf2
     documentation/docs/release-notes/release-notes-v2.3.0.md: c8d3723ffdee6c06a9ef49033d380a084ae56cda6fbad29c26f9a5b4d42a8001
-
 cloudberry-20261121:
   name: Apache Cloudberry (Incubating) 2.x documentation
   repository: https://github.com/apache/cloudberry-site
@@ -501,7 +498,6 @@ cloudberry-20261121:
   snapshot_date: '2026-11-21'
   language: en
   translation_baseline: cloudberry
-
 pxf-20261121:
   name: Apache Cloudberry PXF documentation
   repository: https://github.com/apache/cloudberry-pxf
@@ -546,7 +542,6 @@ pxf-20261121:
   snapshot_date: '2026-11-21'
   language: en
   translation_baseline: pxf
-
 documentdb-20261121:
   name: DocumentDB documentation
   repository: https://github.com/documentdb/docs
@@ -600,7 +595,6 @@ documentdb-20261121:
     api-reference/commands/contrib/documentdb_distributed/rebalancer.md: a29d478b97095000a7007063e2a6836355f49951cc4d472a17ee087faa251527
     api-reference/commands/contrib/documentdb_distributed/listShards.md: 01488e20e1c5d56286125f6b17091120abb909dc087d2223bd8e7d6348d2602a
   import_manifest_sha256: 6f2e760f40e1cdab4af1e4f5dfdc74cf2d81e3d358ca6716cd3b6a854f953915
-
 pgedge-spock-20261121:
   name: pgEdge Spock
   copyright: Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents
@@ -623,7 +617,6 @@ pgedge-spock-20261121:
     docs/modify/pg_upgrade_rolling_tutorial.md: c7787448fcf1beb8a0aa8898dc0a99273cd162537bf82835add051fe895c98eb
     docs/internals-doc/specs/spock-monitor-design.md: f77d802dbaf368a14e0c9dd89fd19eb224c97434f2f96ccfc7d38db8aad87f03
     docs/modify/zodan/zodan_rolling_pg_version_tutorial.md: 9f5b27a7911308a4ed66dac834395514c7b9048960f8731e38d2f44998400560
-
 pgedge-lolor-20261121:
   name: pgEdge LOLOR
   copyright: Copyright (c) 2024–2026, pgEdge, Inc.
@@ -641,7 +634,6 @@ pgedge-lolor-20261121:
     docs/lolor_release_notes.md: 5e75ad786a6bdf9958fdb7ebb3246deed9e916550af1df11e5b9861b996ab92e
     docs/install_configure.md: b9237726cb784fb6abd825c22f69356ee1fa0a5d9a0d91d3e2885e8b0a5aa853
     docs/index.md: f7d738f50bb37108e71b8f68fa452bca1c43304f00a879d026417dfa89fc6697
-
 pgedge-safesession-20261121:
   name: pgEdge SafeSession
   copyright: Copyright (c) 2025–2026, pgEdge, Inc.
@@ -657,7 +649,6 @@ pgedge-safesession-20261121:
   repository: https://github.com/pgEdge/pgedge-safesession
   source_sha256:
     docs/changelog.md: 86be235ce98fb92a8e024ef40f3eff09421ab71b08807ee631fa2db626bbdfcf
-
 pgedge-snowflake-20261121:
   name: pgEdge Snowflake
   copyright: Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents
@@ -674,7 +665,6 @@ pgedge-snowflake-20261121:
   repository: https://github.com/pgEdge/snowflake
   source_sha256:
     docs/changelog.md: 99744b7f9191bb69e8416c59ee45930c54cec326c4ec889058c24cc25c7f29ae
-
 haproxy-20261121:
   name: HAProxy 3.4 documentation
   repository: https://git.haproxy.org/?p=haproxy-3.4.git
