@@ -10,9 +10,11 @@ adaptations use CC BY 4.0, subject to the original upstream terms identified bel
 
 ## Upstream documentation
 
-The English edition was updated on 2026-11-21. Translated editions retain their prior
-source baselines until incremental translation is complete. Both baselines are recorded
-in `data/upstreams.yaml`; the update inventory records the pending language work.
+The English edition was updated on 2026-11-21, and its Chinese incremental updates
+completed three-pass self-review on 2026-11-22. Other translated editions retain their
+prior source baselines pending synchronization. Existing draft and missing-translation
+notices remain. `data/upstreams.yaml` records language-specific baselines; the update
+inventory records completed Chinese work and the pending language tasks.
 
 | Collection | English source edition | Upstream copyright and license |
 | --- | --- | --- |
@@ -52,7 +54,7 @@ Software Foundation; Apache Cloudberry and Apache are trademarks of the ASF.
 The English PXF collection follows the development `docs/` snapshot at
 `apache/cloudberry-pxf@6683faa38ce4e2d146a77197991518aacb4b24e8`.
 The published release remains 2.2.0-incubating; the English snapshot includes later
-Java and connector changes. Chinese retains the preceding snapshot pending translation.
+Java and connector changes. Chinese is synchronized with this snapshot.
 PXF retains Apache HAWQ and VMware attributions from the NOTICE and LICENSE files in
 `static/third_party/pxf/`.
 
@@ -162,7 +164,7 @@ Source records: `data/imports/babelfish.json`; registry: `data/upstreams.yaml`.
 
 ## Percona TDE
 
-The English Percona collection now contains pg_tde 2.3.0 documentation at `percona/pg_tde@5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a`, with the 2.3.0 release notes added to the previous 66 articles, section indexes, and PGSTY editorial guides. Chinese remains on the reviewed 2.2.2 baseline pending translation. It is not the entire Percona product documentation. The complete pg_tde copyright text, including the PostgreSQL, University of California and Percona portions, is retained.
+The English Percona collection now contains pg_tde 2.3.0 documentation at `percona/pg_tde@5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a`, with the 2.3.0 release notes added to the previous 66 articles, section indexes, and PGSTY editorial guides. Chinese includes the reviewed 2.3.0 incremental updates. It is not the entire Percona product documentation. The complete pg_tde copyright text, including the PostgreSQL, University of California and Percona portions, is retained.
 
 Source records: `data/imports/percona.json`; registry: `data/upstreams.yaml`.
 
@@ -174,15 +176,15 @@ Source records: `data/imports/agensgraph.json`; registry: `data/upstreams.yaml`.
 
 ## pgEdge
 
-Includes Spock, LOLOR, SafeSession and Snowflake from their existing OINK edition. The English source set is Spock v6.0.0-beta.2, LOLOR 1.3.0 development, SafeSession v1.1, and Snowflake v2.6.1. Chinese retains its earlier source set pending updates. Of 108 imported upstream articles, 32 have Chinese machine drafts; their status and review notices remain visible. The PostgreSQL licence and project-specific copyright notices are retained. Source commits are listed below.
+Includes Spock, LOLOR, SafeSession and Snowflake from their existing OINK edition. The English source set is Spock v6.0.0-beta.2, LOLOR 1.3.0 development, SafeSession v1.1, and Snowflake v2.6.1. Chinese includes this batch's reviewed incremental updates and six newly translated articles; unchanged draft portions still await review. Of 108 imported upstream articles, 32 have Chinese machine drafts; their status and review notices remain visible. The PostgreSQL licence and project-specific copyright notices are retained. Source commits are listed below.
 
 Source records: `data/imports/pgedge.json`; registry: `data/upstreams.yaml`.
 
 ## DocumentDB
 
-Imported from the official `documentdb/docs` repository at `8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5` and the published website at `documentdb/documentdb.github.io` commit `4a83a0712149e101a2bbb38934bed36497cdf40f` (21 November 2026). The 306 documentation Markdown records and 20 website article bodies produce 310 English pages. The 300 existing Simplified Chinese pages remain based on the previous 1.0 edition until the incremental changes and ten new pages are translated. This includes the website-generated Docker, package, operations, and offline-install guides, the installation primer, category descriptions, and the upstream forthcoming architecture notice. Superseded source guides are retained with notices. The independently versioned Kubernetes Operator manual remains linked at its official site.
+Imported from the official `documentdb/docs` repository at `8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5` and the published website at `documentdb/documentdb.github.io` commit `4a83a0712149e101a2bbb38934bed36497cdf40f` (21 November 2026). The 306 documentation Markdown records and 20 website article bodies produce 310 English pages. All 310 pages have complete Simplified Chinese counterparts, including the ten additions. This includes the website-generated Docker, package, operations, and offline-install guides, the installation primer, category descriptions, and the upstream forthcoming architecture notice. Superseded source guides are retained with notices. The independently versioned Kubernetes Operator manual remains linked at its official site.
 
-The Chinese edition was translated and reviewed against the November 7 English edition with AI assistance, including parallel bilingual review and checks of examples, literals, links, and heading IDs. Code, commands, output, and upstream error messages are preserved. Forty pages include bilingual editorial notes identifying inconsistencies in the original prose or examples. The documentation and website repositories have no standalone documentation licence in these snapshots. DocumentDB software is MIT-licensed, which is not asserted here as a separate blanket licence grant for all documentation. The upstream sources and their rights notices remain authoritative.
+The original Chinese edition was translated and reviewed against the November 7 English edition with AI assistance. This update batch received three-pass self-review against the November 21 English changes, plus checks of examples, literals, links, and heading IDs. Code, commands, output, and upstream error messages are preserved. Forty pages include bilingual editorial notes identifying inconsistencies in the original prose or examples. The documentation and website repositories have no standalone documentation licence in these snapshots. DocumentDB software is MIT-licensed, which is not asserted here as a separate blanket licence grant for all documentation. The upstream sources and their rights notices remain authoritative.
 
 Source records: `data/imports/documentdb.json`; registry: `data/upstreams.yaml`.
 
