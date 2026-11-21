@@ -4,7 +4,7 @@ weight: 1200
 description: 常见问题解答
 icon: fa-solid fa-circle-question
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/faq.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/faq.md"
 ---
 
 ## etcd，通用 {#etcd-general}

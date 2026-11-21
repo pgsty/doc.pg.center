@@ -3,7 +3,7 @@ title: Go 模块
 weight: 1650
 description: etcd 项目的 Go 模块组织
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-internal/modules.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-internal/modules.md"
 ---
 
 etcd 项目（自版本 3.5 起）采用多个 [golang 模块](https://golang.org/ref/mod)，托管于 [单个仓库](https://golang.org/ref/mod#vcs-dir) 中。

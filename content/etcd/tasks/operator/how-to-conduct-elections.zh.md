@@ -3,7 +3,7 @@ title: 如何在 etcd 集群中进行领导者选举
 description: 通过 etcdctl 客户端开展领导者选举的步骤
 weight: 900
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/operator/how-to-conduct-elections.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/tasks/operator/how-to-conduct-elections.md"
 ---
 
 ## 先决条件 {#prerequisites}

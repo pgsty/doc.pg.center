@@ -3,7 +3,7 @@ title: 监控 etcd
 weight: 4500
 description: 监控 etcd 系统健康状况并调试集群
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/monitoring.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/monitoring.md"
 ---
 
 每个 etcd 服务器通过其客户端端口上的 HTTP 端点提供本地监控信息。监控数据对于系统健康检查和集群调试均具有实用价值。

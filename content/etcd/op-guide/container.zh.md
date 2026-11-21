@@ -3,8 +3,8 @@ title: 在容器中运行 etcd 集群
 weight: 4200
 description: 使用静态引导在 Docker 中运行 etcd
 categories: [任务]
-search_keywords: [v3.7.3]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/container.md"
+search_keywords: [v3.7.4]
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/container.md"
 ---
 
 本文指南展示了如何使用 Docker 以 [静态引导过程](/zh/etcd/op-guide/clustering/#static)运行 etcd。
@@ -28,10 +28,10 @@ docker volume create --name etcd-data
 export DATA_DIR="etcd-data"
 ```
 
-运行最新版本的 etcd（`v3.7.3`，撰写本文时的版本）：
+运行最新版本的 etcd（`v3.7.4`，撰写本文时的版本）：
 
 ```
-ETCD_VERSION=v3.7.3
+ETCD_VERSION=v3.7.4
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd
@@ -62,7 +62,7 @@ REGISTRY=quay.io/coreos/etcd
 REGISTRY=gcr.io/etcd-development/etcd
 
 # For each machine
-ETCD_VERSION=v3.7.3
+ETCD_VERSION=v3.7.4
 TOKEN=my-etcd-token
 CLUSTER_STATE=new
 NAME_1=etcd-node-0
@@ -155,7 +155,7 @@ rkt run \
 以下 Docker 示例沿用上方设置的 `NODE1`，以静态引导方式展示证书卷挂载。
 
 ```
-ETCD_VERSION=v3.7.3
+ETCD_VERSION=v3.7.4
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd

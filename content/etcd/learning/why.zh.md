@@ -3,7 +3,7 @@ title: etcd 与其它键值存储系统比较
 weight: 2875
 description: etcd 的历史与用途及与其他工具的比较
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/why.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/why.md"
 ---
 
 etcd 这个名称源自两个理念：Unix 系统中的“/etc”目录和“d”istributed（分布式）系统。其中，“/etc”目录是用于存储单个系统配置数据的路径，而 etcd 则用于存储大规模分布式系统的配置信息。因此，“d”istributed “/etc”即为 etcd。

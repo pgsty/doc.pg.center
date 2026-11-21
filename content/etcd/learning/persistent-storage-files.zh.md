@@ -3,7 +3,7 @@ title: etcd 持久化存储文件
 weight: 2650
 description: 持久化存储格式与文件参考
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/persistent-storage-files.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/persistent-storage-files.md"
 ---
 
 本文介绍了 etcd 持久化存储格式：命名规则、内容结构以及可供开发者用于检查存储内容的工具。后续应随着存储模型的变更持续扩展本文内容。本文面向 etcd 开发者，旨在帮助其满足数据恢复需求。

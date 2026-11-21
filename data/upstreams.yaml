@@ -416,7 +416,7 @@ etcd-20261121:
   modified: true
   source_ref: main
   snapshot_date: '2026-11-21'
-  language: en
+  languages: [en, zh]
   translation_baseline: etcd
   source_sha256:
     content/en/docs/v3.7/integrations.md: 7a07ceac725c007027a5bee2aee0a65db11a0ac955e833f32effc23314fce005

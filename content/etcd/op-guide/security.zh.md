@@ -3,7 +3,7 @@ title: 传输安全模型
 weight: 4125
 description: 确保数据传输安全
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/security.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/security.md"
 ---
 
 etcd 支持自动 TLS，以及通过客户端证书实现的客户端到服务器和对等成员（服务器到服务器 / 集群）通信的身份认证。**请注意，etcd 默认不启用 [基于 RBAC 的身份认证][auth] 或传输层的身份认证功能，以降低用户入门时的使用门槛。此外，更改此默认设置将对该项目造成破坏性变更，该项目自 2013 年确立以来一直保持该设定。未启用安全功能的 etcd 集群可能使数据暴露于任意客户端。**

@@ -3,7 +3,7 @@ title: etcd 客户端设计
 weight: 2250
 description: 客户端架构决策及其实现细节
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/design-client.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/design-client.md"
 ---
 
 etcd 客户端设计 {#etcd-client-design}

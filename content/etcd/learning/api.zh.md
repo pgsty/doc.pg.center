@@ -3,7 +3,7 @@ title: etcd API
 weight: 2625
 description: etcd API 核心设计概述
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/api.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/api.md"
 ---
 
 本文旨在概述 v3 版 etcd API 的核心设计。
@@ -17,14 +17,17 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 发送至 etcd 服务器的每个 API 请求均为 gRPC 远程过程调用。etcd 中的 RPC 按功能划分为不同的服务。
 
 与 etcd 键空间相关的关键服务包括：
+
 * KV - 创建、更新、获取和删除键值对。
 * Watch - 监听键的变化。
 * Lease - 客户端保活消息的消费原语。
 
 管理集群自身的服务包括：
+
 * Auth - 基于角色的身份认证机制，用于用户身份认证。
 * Cluster - 提供成员信息和配置管理功能。
 * Maintenance - 创建用于恢复的快照、整理存储碎片以及返回各成员状态信息。
+
 ### 请求与响应 {#requests-and-responses}
 
 etcd 中的所有 RPC 均遵循相同的格式。每个 RPC 都有一个函数 `Name`，它接收 `NameRequest` 作为参数，并返回 `NameResponse` 作为响应。例如，以下是 `Range` RPC 的描述：
@@ -49,16 +52,16 @@ message ResponseHeader {
 }
 ```
 
-* Cluster_ID - 生成响应的集群的 ID。
-* Member_ID - 生成响应的成员的 ID。
-* Revision - 生成响应时键值存储的修订版本。
-* Raft_Term - 生成响应时成员的 Raft 任期。
+* `cluster_id` - 生成响应的集群的 ID。
+* `member_id` - 生成响应的成员的 ID。
+* `revision` - 生成响应时键值存储的修订版本。
+* `raft_term` - 生成响应时成员的 Raft 任期。
 
-应用程序可读取 `Cluster_ID` 或 `Member_ID` 字段，以确保其与预期的集群（成员）进行通信。
+应用程序可读取 `cluster_id` 或 `member_id` 字段，以确保其与预期的集群（成员）进行通信。
 
-应用程序可使用 `Revision` 字段了解键值存储的最新修订版本。当应用程序指定历史修订版本以执行 `time travel query` 操作，并希望获知请求时刻的最新修订版本时，此功能尤为有用。
+应用程序可使用 `revision` 字段了解键值存储的最新修订版本。当应用程序指定历史修订版本以执行 `time travel query` 操作，并希望获知请求时刻的最新修订版本时，此功能尤为有用。
 
-应用程序可以使用 `Raft_Term` 检测集群完成新的领导者选举。
+应用程序可以使用 `raft_term` 检测集群完成新的领导者选举。
 
 ## 键值 API {#key-value-api}
 
@@ -81,12 +84,12 @@ message KeyValue {
 }
 ```
 
-* Key - 以字节表示的键。不允许使用空键。
-* Value - 以字节表示的值。
-* Version - 键的版本号。删除操作会将版本重置为零，对键的任何修改都会增加其版本号。
-* Create_Revision - 键最后一次创建时的修订版本。
-* Mod_Revision - 键最后一次修改时的修订版本。
-* Lease - 附加到键的租约 ID。若租约为 0，则表示该键未附加任何租约。
+* `key` - 以字节表示的键。不允许使用空键。
+* `value` - 以字节表示的值。
+* `version` - 键的版本号。删除操作会将版本重置为零，对键的任何修改都会增加其版本号。
+* `create_revision` - 键最后一次创建时的修订版本。
+* `mod_revision` - 键最后一次修改时的修订版本。
+* `lease` - 附加到键的租约 ID。若租约为 0，则表示该键未附加任何租约。
 
 除了键和值之外，etcd 还在键消息中附加了额外的修订版本元数据。该修订版本信息按创建和修改时间对键进行排序，有助于管理分布式同步中的并发。etcd 客户端的[分布式共享锁][locks] 使用创建修订版本来等待锁所有权。类似地，修改修订版本用于检测[软件事务内存][STM]读集冲突，并等待[选举][elections]更新。
 
@@ -100,9 +103,9 @@ etcd 维护一个 64 位的集群范围计数器，即存储修订版本，每�
 
 etcd 的数据模型将所有键索引于一个扁平的二进制键空间中。这与其它键值存储系统不同，后者采用层级结构将键组织为目录。etcd 不通过目录列出键，而是通过键区间列出键 `[a, b)`。
 
-这些区间在 etcd 中通常被称为“范围”。对范围的操作比对目录的操作更强大。与分层存储类似，范围支持通过 `[a, a+1)` 进行单个键查找（例如，['a', 'a\x00') 查找键 'a'），并可通过编码键的目录深度实现目录查找。除上述操作外，范围还可编码前缀；例如，范围 `['a', 'b')` 用于查找所有以字符串 'a' 为前缀的键。
+这些区间在 etcd 中通常被称为“范围”。对范围的操作比对目录的操作更强大。与分层存储类似，范围支持通过 `[a, a+1)` 进行单个键查找（例如，`['a', 'a\x00')` 查找键 `'a'`），并可通过编码键的目录深度实现目录查找。除上述操作外，范围还可编码前缀；例如，范围 `['a', 'b')` 用于查找所有以字符串 'a' 为前缀的键。
 
-按照惯例，请求的范围由字段 `key` 和 `range_end` 表示。`key` 字段为范围的起始键，应非空。`range_end` 字段为范围最后一个键之后的键。若 `range_end` 未指定或为空，则范围仅包含键参数本身。若 `range_end` 为 `key` 加一（例如，“aa”+1 == “ab”，"a\xff"+1 == “b”），则范围表示所有以该键为前缀的键。若 `key` 和 `range_end` 均为 '\0'，则范围表示所有键。若 `range_end` 为 '\0'，则范围表示所有大于或等于键参数的键。
+按照惯例，请求的范围由字段 `key` 和 `range_end` 表示。`key` 字段为范围的起始键，应非空。`range_end` 字段为范围最后一个键之后的键。若 `range_end` 未指定或为空，则范围仅包含键参数本身。若 `range_end` 为 `key` 加一（例如，`"aa"+1 == "ab"`、`"a\xff"+1 == "b"`），则范围表示所有以该键为前缀的键。若 `key` 和 `range_end` 均为 `'\0'`，则范围表示所有键。若 `range_end` 为 `'\0'`，则范围表示所有大于或等于键参数的键。
 
 ### Range {#range}
 
@@ -111,9 +114,9 @@ etcd 的数据模型将所有键索引于一个扁平的二进制键空间中。
 ```protobuf
 message RangeRequest {
   enum SortOrder {
-	NONE = 0; // default, no sorting
-	ASCEND = 1; // lowest target value first
-	DESCEND = 2; // highest target value first
+    NONE = 0; // default, no sorting
+    ASCEND = 1; // lowest target value first
+    DESCEND = 2; // highest target value first
   }
   enum SortTarget {
 	KEY = 0;
@@ -139,18 +142,18 @@ message RangeRequest {
 }
 ```
 
-* Key, Range_End - 要获取的键范围。
-* Limit - 请求返回的最大键数量。当 Limit 设置为 0 时，表示无限制。
-* Revision - 用于范围查询的键值存储的时间点。若 Revision 小于或等于 0，则范围覆盖最新的键值存储。若指定的 Revision 已被压缩，返回 ErrCompacted 作为响应。
-* Sort_Order - 已排序请求的排序顺序。
-* Sort_Target - 用于排序的键值字段。
-* Serializable - 将范围请求设置为使用可串行化的成员本地读取。默认情况下，Range 为线性一致；其反映集群当前的共识状态。为获得更好的性能和可用性，可接受可能的陈旧读取，可串行化范围请求由本地提供服务，无需与集群中的其他节点达成共识。
-* Keys_Only - 仅返回键，不返回值。
-* Count_Only - 仅返回范围内键的数量。
-* Min_Mod_Revision - 键修改修订版本的下限；过滤掉小于该值的修改修订版本。
-* Max_Mod_Revision - 键修改修订版本的上限；过滤掉大于该值的修改修订版本。
-* Min_Create_Revision - 键创建修订版本的下限；过滤掉小于该值的创建修订版本。
-* Max_Create_Revision - 键创建修订版本的上限；过滤掉大于该值的创建修订版本。
+* `key`, `range_end` - 要获取的键范围。
+* `limit` - 请求返回的最大键数量。当 `limit` 设置为 0 时，表示无限制。
+* `revision` - 用于范围查询的键值存储的时间点。若 `revision` 小于或等于 0，则范围覆盖最新的键值存储。若指定的 `revision` 已被压缩，返回 `ErrCompacted` 作为响应。
+* `sort_order` - 已排序请求的排序顺序。
+* `sort_target` - 用于排序的键值字段。
+* `serializable` - 将范围请求设置为使用可串行化的成员本地读取。默认情况下，Range 为线性一致；其反映集群当前的共识状态。可串行化范围请求在本地处理，无需与集群中的其他节点达成共识，以可能读到陈旧数据为代价，换取更好的性能和可用性。
+* `keys_only` - 仅返回键，不返回值。
+* `count_only` - 仅返回范围内键的数量。
+* `min_mod_revision` - 返回键的修改修订版本下限；修改修订版本小于该值的所有键都会被过滤掉。
+* `max_mod_revision` - 键修改修订版本的上限；修改修订版本大于该值的所有键都会被过滤掉。
+* `min_create_revision` - 返回键的创建修订版本下限；创建修订版本小于该值的所有键都会被过滤掉。
+* `max_create_revision` - 返回键的创建修订版本上限；创建修订版本大于该值的所有键都会被过滤掉。
 
 客户端从 `Range` 调用接收到 `RangeResponse` 消息：
 
@@ -163,9 +166,9 @@ message RangeResponse {
 }
 ```
 
-* Kvs - 范围请求匹配的键值对列表。当 `Count_Only` 设置时，`Kvs` 为空。
-* More - 当 `limit` 设置时，表示请求范围内还有更多键待返回。
-* Count - 满足范围请求的键的总数。
+* `kvs` - 范围请求匹配的键值对列表。当 `count_only` 设置时，`kvs` 为空。
+* `more` - 表示请求范围内是否还有更多键待返回。
+* `count` - 发起请求时，范围内键的实际数量。与 `kvs` 不同，它不受数量限制和过滤条件（例如创建/修改修订版本的最小值、最大值）影响，反映的是指定范围内的完整键数量。
 
 对于键范围较大且不希望缓冲完整响应的情况，请参见 [RangeStream](#rangestream)。
 
@@ -183,8 +186,8 @@ message RangeStreamResponse {
 
 跨块的字段填充：
 
-* Kvs - 每个数据块携带结果的不相交片段。按接收顺序拼接每个数据块的 `kvs`，可得到与单次 `Range` 调用相同的结果键集合。
-* Header, More, Count - 仅在最后一个数据块中填充，且仅在流无错误完成时。早期数据块中的这些字段保持零值。对每个数据块的 `range_response` 应用 `proto.Merge`，可得到与 `Range` 返回结果等价的 `RangeResponse`。
+* `kvs` - 每个数据块携带结果的不相交片段。按接收顺序拼接每个数据块的 `kvs`，可得到与单次 `Range` 调用相同的结果键集合。
+* `header`, `more`, `count` - 仅在最后一个数据块中填充，且仅在流无错误完成时。早期数据块中的这些字段保持零值。对每个数据块的 `range_response` 应用 `proto.Merge`，可得到与 `Range` 返回结果等价的 `RangeResponse`。
 
 如果流以错误结束，则没有任何数据块携带有效的 `header`、`more` 或 `count`。
 
@@ -212,12 +215,12 @@ message PutRequest {
 }
 ```
 
-* Key - 要写入键值存储的键名称。
-* Value - 以字节为单位的值，与键值存储中的键关联。
-* Lease - 与键值存储中键关联的租约 ID。租约值为 0 表示无租约。
-* Prev_Kv - 设置后，响应中包含本次 `Put` 请求更新前的键值对数据。
-* Ignore_Value - 设置后，更新键而不更改其当前值。若键不存在，返回错误。
-* Ignore_Lease - 设置后，更新键而不更改其当前租约。若键不存在，返回错误。
+* `key` - 要写入键值存储的键名称。
+* `value` - 以字节为单位的值，与键值存储中的键关联。
+* `lease` - 与键值存储中键关联的租约 ID。租约值为 0 表示无租约。
+* `prev_kv` - 设置后，etcd 会在更改键值对之前获取其旧值，并在 `Put` 响应中返回更改前的键值对。
+* `ignore_value` - 设置后，更新键而不更改其当前值。若键不存在，返回错误。
+* `ignore_lease` - 设置后，更新键而不更改其当前租约。若键不存在，返回错误。
 
 客户端从 `Put` 调用接收到 `PutResponse` 消息：
 
@@ -228,7 +231,8 @@ message PutResponse {
 }
 ```
 
-* Prev_Kv - 若在 `PutRequest` 中设置了 `Prev_Kv`，则为 `Put` 覆盖的键值对。
+* `prev_kv` - 若在请求中设置了 `prev_kv`，则返回更改前的键值对。
+
 ### 删除范围 {#delete-range}
 
 使用 `DeleteRange` 调用删除键的范围，该调用接受 `DeleteRangeRequest`：
@@ -241,8 +245,8 @@ message DeleteRangeRequest {
 }
 ```
 
-* Key, Range_End - 要删除的键范围。
-* Prev_Kv - 设置后，返回被删除的键值对内容。
+* `key` - 范围内要删除的第一个键。
+* `range_end` - 范围 `[key, range_end)` 内要删除的最后一个键之后的键。
 
 客户端从 `DeleteRange` 调用接收到 `DeleteRangeResponse` 消息：
 
@@ -254,8 +258,9 @@ message DeleteRangeResponse {
 }
 ```
 
-* Deleted - 已删除的键的数量。
-* Prev_Kv - `DeleteRange` 操作所删除的所有键值对的列表。
+* `deleted` - 范围删除请求删除的键的数量。
+* `prev_kvs` - 删除前的键值对；仅在请求中设置了 `prev_kv` 时返回。
+
 ### 事务 {#transaction}
 
 事务是对键值存储的原子性 If/Then/Else 构造。它提供了一种将请求分组为原子块（即 Then/Else）的原语，其执行受键值存储内容的保护（即 If）。事务可用于防止键被意外的并发更新，构建比较并交换操作，并开发更高级别的并发控制。
@@ -294,10 +299,10 @@ message Compare {
 }
 ```
 
-* Result - 逻辑比较操作的类型（例如，相等、小于等）。
-* Target - 要比较的键值字段。可以是键的版本、创建修订版本、修改修订版本或值。
-* Key - 用于比较的键。
-* Target_Union - 用户指定的用于比较的数据。
+* `result` - 逻辑比较操作的类型（例如，相等、小于等）。
+* `target` - 要比较的键值字段。可以是键的版本、创建修订版本、修改修订版本或值。
+* `key` - 用于比较的键。
+* `target_union` - 用户指定的用于比较的数据。
 
 处理完比较块后，事务会应用一个请求块。块是一组 `RequestOp` 消息：
 
@@ -312,9 +317,9 @@ message RequestOp {
 }
 ```
 
-* Request_Range - 一个 `RangeRequest`。
-* Request_Put - 一个 `PutRequest`。键必须唯一。不得与任何其他 Put 或 Delete 操作共享键。
-* Request_Delete_Range - 一个 `DeleteRangeRequest`。不得与任何 Put 或 Delete 请求共享键。
+* `request_range` - 一个 `RangeRequest`。
+* `request_put` - 一个 `PutRequest`。键必须唯一。不得与任何其他 Put 或 Delete 操作共享键。
+* `request_delete_range` - 一个 `DeleteRangeRequest`。不得与任何 Put 或 Delete 请求共享键。
 
 所有操作合并为一个事务，通过 `Txn` API 调用发起，该调用接收一个 `TxnRequest`：
 
@@ -326,9 +331,9 @@ message TxnRequest {
 }
 ```
 
-* Compare - 用于保护事务的一组谓词，表示各项条件的合取。
-* Success - 所有 Compare 测试结果均为真时要执行的一组请求。
-* Failure - 任意一个 Compare 测试结果为假时要执行的一组请求。
+* `compare` - 一组谓词，表示各项条件的合取。如果比较成功，则会按顺序处理 `success` 请求，响应中也会按相同顺序包含各请求的响应。
+* `success` - 所有 `compare` 测试结果均为真时要执行的一组请求。
+* `failure` - `compare` 求值为 false 时执行的请求列表。
 
 客户端从 `Txn` 调用接收到 `TxnResponse` 消息：
 
@@ -340,10 +345,8 @@ message TxnResponse {
 }
 ```
 
-* Succeeded - `Compare` 评估结果为 true 或 false。
-* Responses - 若 succeeded 为 true，则为应用 `Success` 块所得结果的响应列表；若 succeeded 为 false，则为 `Failure` 的响应列表。
-
-`Responses` 列表对应于应用 `RequestOp` 列表后的结果，每个响应均以 `ResponseOp` 编码：
+* `succeeded` - `compare` 求值为 true 时为 true，否则为 false。
+* `responses` - 若 `succeeded` 为 true，则为应用 `success` 块所得结果的响应列表；若 `succeeded` 为 false，则为 `failure` 的响应列表。
 
 ```protobuf
 message ResponseOp {
@@ -379,9 +382,10 @@ message Event {
 }
 ```
 
-* Type - 事件类型。PUT 类型表示键已存储新数据。DELETE 类型表示键已被删除。
-* KV - 与事件关联的 KeyValue。PUT 事件包含当前的键值对。PUT 事件中 kv.Version=1 表示键的创建。DELETE 事件包含被删除的键，其修改修订版本设置为删除操作的修订版本。
-* Prev_KV - 事件发生前紧邻修订版本的键对应的键值对。为节省带宽，仅在监听操作显式启用时才填充。
+* `type` - 事件类型。PUT 类型表示键已存储新数据。DELETE 类型表示键已被删除。
+* `kv` - 与事件关联的 KeyValue。PUT 事件包含当前的键值对。PUT 事件中 kv.Version=1 表示键的创建。DELETE 事件包含被删除的键，其修改修订版本设置为删除操作的修订版本。
+* `prev_kv` - 事件发生前紧邻修订版本的键对应的键值对。为节省带宽，仅在监听操作显式启用时才填充。
+
 ### 监听流 {#watch-streams}
 
 监听是长期运行的请求，使用 gRPC 流来传输事件数据。监听流为双向通信；客户端通过向流写入来建立监听，通过读取来接收监听事件。通过用各监听器专属的标识符标记事件，单个监听流可复用多个不同的监听。这种复用有助于降低核心 etcd 集群的内存占用和连接开销。
@@ -406,11 +410,11 @@ message WatchCreateRequest {
 }
 ```
 
-* Key, Range_End - 要监听的键范围。
-* Start_Revision - 可选的修订版本，用于指定监听的起始位置（包含该修订版本）。若未指定，则从监听创建响应头中的修订版本之后的事件开始流式传输。可以从最后一次压缩修订版本开始，监听全部可用的事件历史。
-* Progress_Notify - 若启用，当无新事件时，监听器将周期性地收到一个无事件的 WatchResponse。这在客户端希望从最近已知的修订版本恢复断开的监听器时非常有用。etcd 服务器根据当前负载决定通知的发送频率。
-* Filters - 服务器端要滤除的事件类型列表。
-* Prev_Kv - 若启用，监听器将接收事件发生前的键值数据。这有助于了解哪些数据已被覆盖。
+* `key`, `range_end` - 要监听的键范围。
+* `start_revision` - 可选的修订版本，用于指定监听的起始位置（包含该修订版本）。若未指定，则从监听创建响应头中的修订版本之后的事件开始流式传输。可以从最后一次压缩修订版本开始，监听全部可用的事件历史。
+* `progress_notify` - 若启用，当无新事件时，监听器将周期性地收到一个无事件的 WatchResponse。这在客户端希望从最近已知的修订版本恢复断开的监听器时非常有用。etcd 服务器根据当前负载决定通知的发送频率。
+* `filters` - 服务器端要滤除的事件类型列表。
+* `prev_kv` - 若启用，监听器将接收事件发生前的键值数据。这有助于了解哪些数据已被覆盖。
 
 当收到 `WatchCreateRequest` 或某个已建立的监听存在新事件时，客户端将收到 `WatchResponse`：
 
@@ -426,11 +430,11 @@ message WatchResponse {
 }
 ```
 
-* Watch_ID - 与响应对应的监听器 ID。
-* Created - 若响应对应创建监听器请求，则设为 true。客户端应存储该 ID，并预期在流中接收该监听器的事件。发送至已创建监听器的所有事件均具有相同的 watch_id。
-* Canceled - 若响应对应取消监听器请求，则设为 true。不再向已取消的监听器发送任何事件。
-* Compact_Revision - 若监听器尝试在已压缩的修订版本上监听，则设为 etcd 可用的最小历史修订版本。此情况发生在以已压缩的修订版本创建监听器，或监听器无法跟上键值存储的进度时。监听器将被取消；使用相同 start_revision 创建新监听器将失败。
-* Events - 与指定监听器 ID 对应的新事件序列列表。
+* `watch_id` - 与响应对应的监听器 ID。
+* `created` - 若响应对应创建监听器请求，则设为 true。客户端应存储该 ID，并预期在流中接收该监听器的事件。发送至已创建监听器的所有事件均具有相同的 watch_id。
+* `canceled` - 若响应对应取消监听器请求，则设为 true。不再向已取消的监听器发送任何事件。
+* `compact_revision` - 若监听器尝试在已压缩的修订版本上监听，则设为 etcd 可用的最小历史修订版本。此情况发生在以已压缩的修订版本创建监听器，或监听器无法跟上键值存储的进度时。监听器将被取消；使用相同 start_revision 创建新监听器将失败。
+* `events` - 与指定监听器 ID 对应的新事件序列列表。
 
 如果客户端希望停止接收某个监听的事件，它会发出 `WatchCancelRequest`：
 
@@ -440,7 +444,8 @@ message WatchCancelRequest {
 }
 ```
 
-* Watch_ID - 用于取消监听的 ID，以停止后续事件的传输。
+* `watch_id` - 用于取消监听的 ID，以停止后续事件的传输。
+
 ## 租约 API {#lease-api}
 
 租约是一种用于检测客户端活跃状态的机制。集群会授予带有生存时间（TTL）的租约。如果在指定的 TTL 期间内，etcd 集群未收到客户端的保活请求，该租约将到期。
@@ -458,8 +463,8 @@ message LeaseGrantRequest {
 }
 ```
 
-* TTL - 建议的生存时间，单位为秒。
-* ID - 租约请求的 ID。若 ID 设置为 0，etcd 将自动选择一个 ID。
+* `TTL` - 建议的生存时间，单位为秒。
+* `ID` - 租约请求的 ID。若 ID 设置为 0，etcd 将自动选择一个 ID。
 
 客户端从 `LeaseGrant` 调用接收到 `LeaseGrantResponse`：
 
@@ -471,15 +476,16 @@ message LeaseGrantResponse {
 }
 ```
 
-* ID - 已授予租约的租约 ID。
-* TTL - 服务器为该租约选定的生存时间，以秒为单位。
+* `ID` - 已授予租约的租约 ID。
+* `TTL` - 服务器为该租约选定的生存时间，以秒为单位。
 ```protobuf
 message LeaseRevokeRequest {
   int64 ID = 1;
 }
 ```
 
-* ID - 要撤销的租约 ID。撤销租约后，所有关联的键将被删除。
+* `ID` - 要撤销的租约 ID。撤销租约后，所有关联的键将被删除。
+
 ### 保活 {#keep-alives}
 
 租约通过使用 `LeaseKeepAlive` API 调用创建的双向流进行刷新。当客户端希望刷新租约时，它会通过该流发送 `LeaseKeepAliveRequest`：
@@ -490,7 +496,7 @@ message LeaseKeepAliveRequest {
 }
 ```
 
-* ID - 要保活的租约的租约 ID。
+* `ID` - 要保活的租约的租约 ID。
 
 保活流以 `LeaseKeepAliveResponse` 响应：
 
@@ -502,8 +508,8 @@ message LeaseKeepAliveResponse {
 }
 ```
 
-* ID - 已通过新 TTL 刷新的租约。
-* TTL - 租约剩余的有效时间，单位为秒。
+* `ID` - 已通过新 TTL 刷新的租约。
+* `TTL` - 租约剩余的有效时间，单位为秒。
 [watch-api-guarantees]: /zh/etcd/learning/api_guarantees/#watch-apis
 [elections]: https://github.com/etcd-io/etcd/blob/main/client/v3/concurrency/election.go
 [grpc-api]: /zh/etcd/dev-guide/api_reference_v3/

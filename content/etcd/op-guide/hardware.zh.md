@@ -3,7 +3,7 @@ title: 硬件推荐
 weight: 4400
 description: etcd 集群的硬件指南
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/hardware.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/hardware.md"
 ---
 
 etcd 在资源有限的开发或测试环境中通常运行良好；在笔记本电脑或廉价云主机上开发 etcd 是常见做法。然而，在生产环境中运行 etcd 集群时，遵循一些硬件建议有助于实现有效的系统管理。这些建议并非硬性规定，而是构建稳健生产部署的良好起点。和往常一样，部署前应使用模拟工作负载进行测试。

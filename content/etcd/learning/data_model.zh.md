@@ -3,7 +3,7 @@ title: 数据模型
 weight: 2125
 description: etcd 数据存储方法
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/data_model.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/data_model.md"
 ---
 
 etcd 旨在可靠地存储更新频率较低的数据，并提供可靠的监听查询。etcd 通过暴露键值对的旧版本，支持低成本的快照和监听历史事件（“时间旅行查询”）。持久化、多版本、并发控制的数据模型非常适合这些应用场景。

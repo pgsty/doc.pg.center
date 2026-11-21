@@ -3,7 +3,7 @@ title: 日志记录约定
 weight: 1600
 description: 日志级别类别
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-internal/logging.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-internal/logging.md"
 ---
 
 etcd 使用 [zap][zap] 库记录应用程序输出，输出按 *级别* 进行分类。日志消息的级别依据以下约定确定：

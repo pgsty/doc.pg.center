@@ -4,7 +4,7 @@ weight: 1400
 description: 如何为 etcd 项目提交问题报告
 icon: fa-solid fa-bug
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/reporting_bugs.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/reporting_bugs.md"
 ---
 
 如果 etcd 项目任何部分存在缺陷或文档错误，请通过 [创建 Issue][etcd-issue]告知我们。我们高度重视缺陷和错误，认为任何问题都不算太小。创建缺陷报告前，请确认尚未存在报告相同问题的议题。

@@ -3,7 +3,7 @@ title: 身份认证
 description: etcd 集群身份认证指南
 weight: 4050
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/authentication/authentication.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/authentication/authentication.md"
 ---
 
 `auth`、`user`、`role` 用于身份认证：

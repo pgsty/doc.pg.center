@@ -3,7 +3,7 @@ title: 数据损坏
 weight: 5000
 description: etcd 数据损坏和恢复
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/data_corruption.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/data_corruption.md"
 ---
 
 etcd 内置了自动数据损坏检测机制，以防止成员状态发生不一致。

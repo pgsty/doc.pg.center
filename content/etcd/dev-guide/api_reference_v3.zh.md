@@ -3,7 +3,7 @@ title: API 参考
 weight: 3800
 description: "etcd v3 API 完整参考"
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/api_reference_v3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/api_reference_v3.md"
 ---
 
 本文 API 参考由命名的 `.proto` 文件自动生成。

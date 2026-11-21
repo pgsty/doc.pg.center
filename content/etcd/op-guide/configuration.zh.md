@@ -3,7 +3,7 @@ title: 配置选项
 weight: 4050
 description: etcd 配置文件、命令行标志和环境变量
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/configuration.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/configuration.md"
 ---
 
 可以通过以下方式配置 etcd：

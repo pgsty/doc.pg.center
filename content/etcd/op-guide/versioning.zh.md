@@ -3,7 +3,7 @@ title: 版本管理
 weight: 4900
 description: etcd 的版本支持
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/versioning.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/versioning.md"
 ---
 
 本文描述了 etcd 项目所支持的版本。
@@ -13,9 +13,9 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 etcd 版本号采用 **x.y.z** 格式，其中 **x** 表示主版本号，**y** 表示次版本号，**z** 表示补丁版本号，遵循 [语义化版本控制](https://semver.org/)规范。
 新次版本号可能向 API 添加额外功能。
 
-etcd 项目为当前版本及前一个版本维护发布分支。例如，当 v3.5 为当前版本时，v3.4 仍受支持。当 v3.6 发布后，v3.4 即停止支持。
+etcd 项目为当前版本及之前的两个版本维护发布分支。例如，当 v3.7 为当前版本时，v3.6 和 v3.5 仍受支持。当 v3.8 发布后，v3.5 即停止支持。
 
-根据严重性和可行性，适用于这两个发布分支的修复（包括安全修复）可能被回溯应用。
+根据严重性和可行性，适用于这三个发布分支的修复（包括安全修复）可能被回溯应用。
 必要时，将从这些分支中发布补丁版本。
 
 项目[维护者](https://github.com/etcd-io/etcd/blob/main/OWNERS) 拥有此决策权。

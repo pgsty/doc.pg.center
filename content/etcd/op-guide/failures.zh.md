@@ -3,7 +3,7 @@ title: 故障模式
 weight: 4250
 description: 不同类型的故障及 etcd 的容错能力
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/failures.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/failures.md"
 ---
 
 在大规模机器部署中，故障是常见现象。当硬件或软件发生故障时，机器会失效。若出现断电或网络问题，多台机器可能同时失效。多种类型的故障也可能同时发生；几乎无法穷举所有可能的故障场景。

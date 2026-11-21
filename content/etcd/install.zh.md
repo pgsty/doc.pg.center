@@ -4,8 +4,8 @@ weight: 1150
 description: 从预构建二进制文件或源码安装 etcd 的步骤
 icon: fa-solid fa-download
 categories: [任务]
-search_keywords: [v3.7.3, "Go 1.26.10"]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/install.md"
+search_keywords: [v3.7.4, "Go 1.26.11"]
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/install.md"
 ---
 
 ## 先决条件 {#requirements}
@@ -19,28 +19,28 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 
 安装 etcd 最简便的方式是使用预构建的二进制文件：
 
-1. 从 [发布页面][releases] 下载适用于当前平台的压缩归档文件，选择 [v3.7.3][tagged-release] 或更高版本。
+1. 从 [发布页面][releases] 下载适用于当前平台的压缩归档文件，选择 [v3.7.4][tagged-release] 或更高版本。
 2. 解压归档文件。解压后会生成一个包含二进制文件的目录。
 3. 将可执行二进制文件添加到 PATH。例如，可将二进制文件重命名或移动到 PATH 中的目录（如 `/usr/local/bin`），也可将上一步创建的目录添加到 PATH。
 4. 在 shell 中验证 `etcd` 是否位于 PATH 中：
 
     ```sh
     $ etcd --version
-    etcd Version: 3.7.3
+    etcd Version: 3.7.4
     ...
     ```
 
 ## 从源码构建 {#build-from-source}
 
-对于 etcd v3.7.3，请使用 [Go 版本 1.26+][go]；该版本固定使用 [Go 1.26.10 工具链][go-toolchain]。
+对于 etcd v3.7.4，请使用 [Go 版本 1.26+][go]；该版本固定使用 [Go 1.26.11 工具链][go-toolchain]。
 按以下步骤从源码构建 etcd：
 
 1. [下载 etcd 仓库的 zip 文件][download] 并解压，或使用以下命令克隆仓库。
 
     ```sh
-    $ git clone -b v3.7.3 https://github.com/etcd-io/etcd.git
+    $ git clone -b v3.7.4 https://github.com/etcd-io/etcd.git
     ```
-    如需从 `main@HEAD` 构建，请省略 `-b v3.7.3` 标志。
+    如需从 `main@HEAD` 构建，请省略 `-b v3.7.4` 标志。
 
 2. 切换目录：
 
@@ -118,7 +118,7 @@ $ etcd --version
 
     ```sh
     $ etcd --version
-    etcd Version: 3.7.3
+    etcd Version: 3.7.4
     ...
     ```
 
@@ -131,7 +131,7 @@ etcd 使用 [`gcr.io/etcd-development/etcd`](https://gcr.io/etcd-development/etc
 使用 Docker 运行 etcd：
 
 ```sh
-ETCD_VER=v3.7.3
+ETCD_VER=v3.7.4
 
 rm -rf /tmp/etcd-data.tmp && mkdir -p /tmp/etcd-data.tmp && \
   docker rmi gcr.io/etcd-development/etcd:${ETCD_VER} || true && \
@@ -171,13 +171,13 @@ docker exec etcd-gcr-${ETCD_VER} /usr/local/bin/etcdctl get foo
 
 若需对安装进行稍复杂的完整性检查，请参阅[快速入门][Quickstart]。
 
-[download]: https://github.com/etcd-io/etcd/archive/v3.7.3.zip
+[download]: https://github.com/etcd-io/etcd/archive/v3.7.4.zip
 [go]: https://golang.org/doc/install
-[go-toolchain]: https://github.com/etcd-io/etcd/blob/0a173d0410a96d01091b484daae81365bbcde57e/go.mod
+[go-toolchain]: https://github.com/etcd-io/etcd/blob/2e8a5c99e4982c8d4c521be15364ea4c5c68a489/go.mod
 [Hardware recommendations]: /zh/etcd/op-guide/hardware/
 [Quickstart]: /zh/etcd/quickstart/
 [Running etcd as a Kubernetes StatefulSet]: /zh/etcd/op-guide/kubernetes/
 [releases]: https://github.com/etcd-io/etcd/releases/
-[tagged-release]: https://github.com/etcd-io/etcd/releases/tag/v3.7.3
+[tagged-release]: https://github.com/etcd-io/etcd/releases/tag/v3.7.4
 [Supported platforms]: /zh/etcd/op-guide/supported-platform/
 [Homebrew can run on Linux]: <https://docs.brew.sh/Homebrew-on-Linux>

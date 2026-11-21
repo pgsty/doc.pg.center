@@ -3,7 +3,7 @@ title: 性能
 weight: 4550
 description: "理解性能：延迟与吞吐量"
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/performance.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/performance.md"
 ---
 
 ## 理解性能 {#understanding-performance}

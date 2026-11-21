@@ -4,7 +4,7 @@ weight: 1300
 description: etcd 工具和客户端库列表
 icon: fa-solid fa-puzzle-piece
 categories: [参考]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/integrations.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/integrations.md"
 ---
 
 请注意，以下第三方库和工具未托管在 https://github.com/etcd-io 下，也未经 etcd 团队测试或维护。使用前应自行阅读相关资料并评估其可靠性。
@@ -23,6 +23,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 - [etcdloadtest](https://github.com/sinsharat/etcdloadtest) - 用于 etcd 3.0 及以上版本的命令行负载测试客户端
 - [etcd-tui](https://github.com/olamilekan000/etcd-tui) - 用于与 etcd 数据库交互的现代终端用户界面（TUI），可在终端中导航键、查看值、过滤数据，并直接管理 etcd 集群
 - [etcdfinder](https://etcdfinder.github.io) - 一款快速、现代的 Web UI，支持 etcd v2 和 v3，具备即时搜索功能
+- [LibreDB Studio](https://github.com/libredb/libredb-studio) - 支持 etcd v3 的自托管 Web 数据库 IDE。可按前缀浏览键、运行部分 etcdctl 命令并编辑值。能够识别 Kubernetes，拒绝向 Kubernetes 键前缀下写入数据。
 - [lucas](https://github.com/ringtail/lucas) - 用于 Kubernetes etcd 3.0+ 集群的 Web 端键值查看器
 - [etcd-manager](https://etcdmanager.io) - 一款现代、高效、跨平台且免费的 etcd 3.x 图形界面与客户端工具，支持 Windows、Linux 和 Mac
 - [etcd-backup-restore](https://github.com/gardener/etcd-backup-restore) - 用于定期且增量备份与恢复 etcd 的工具

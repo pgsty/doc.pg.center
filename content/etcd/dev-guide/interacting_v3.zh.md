@@ -3,7 +3,7 @@ title: 与 etcd 交互
 weight: 3250
 description: "etcdctl：与 etcd 服务器交互的命令行工具"
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/interacting_v3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/interacting_v3.md"
 ---
 
 用户通常通过设置或获取键的值来与 etcd 交互。本节介绍如何使用 etcdctl（用于与 etcd 服务器交互的命令行工具）实现这一操作。此处描述的概念同样适用于 gRPC API 或客户端库 API。

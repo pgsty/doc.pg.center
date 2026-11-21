@@ -3,7 +3,7 @@ title: 将 etcd 从 3.4 升级到 3.5
 weight: 6650
 description: 升级 etcd 3.4 至 3.5 的流程、检查清单与注意事项
 categories: [任务]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_5.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/upgrades/upgrade_3_5.md"
 ---
 
 在一般情况下，从 etcd 3.4 升级到 3.5 可以实现零停机滚动升级：
