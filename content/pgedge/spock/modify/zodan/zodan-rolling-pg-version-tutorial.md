@@ -680,7 +680,7 @@ SELECT pg_reload_conf();
 
 ## Verifying the Rollout {#verifying-the-rollout}
 
-After replacing each node, confirm the whole cluster runs the
+After replacing all nodes, confirm the whole cluster runs the
 target PostgreSQL version and reports a clean replication topology:
 
 ```sql

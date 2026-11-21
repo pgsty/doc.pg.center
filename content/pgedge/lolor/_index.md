@@ -17,7 +17,7 @@ sidebar_root_menu: false
 
 
 > [!NOTE] Source version
-> The English source is **1.3.0 development snapshot; latest stable tag v1.2.3**, pinned at `1548836b0df0`. The Chinese edition remains on its earlier source pending translation. Check [versions and sources](/pgedge/about/attribution/) before deploying.
+> The English source is **1.3.0 development snapshot; latest stable tag v1.2.3**, pinned at `1548836b0df0`. The Chinese edition includes the reviewed incremental updates; unchanged draft material still awaits review. Check [versions and sources](/pgedge/about/attribution/) before deploying.
 
 
 [lolor](https://github.com/pgEdge/lolor) is an extension that makes Postgres-style large objects compatible with logical Replication.

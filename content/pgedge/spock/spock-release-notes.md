@@ -2046,7 +2046,7 @@ Logical Slot Failover Improvements
   [Large Object Logical Replication](https://github.com/pgedge/lolor)
 * Support for pg17
 
-Our current production version is v3.3 and includes the following
+The retained v3.3 production-release notes list the following
 enhancements over v3.2:
 
 * Automatic replication of DDL statements

@@ -10,7 +10,7 @@ type: docs
 
 ## Versions and sources {#versions}
 
-The English edition was updated on November 21, 2026. Spock follows a pre-release tag; SafeSession and Snowflake follow release tags; LOLOR follows unreleased 1.3.0 development. The Chinese drafts retain the November 7 source baseline until their incremental translation is reviewed.
+The English edition was updated on November 21, 2026. Spock follows a pre-release tag; SafeSession and Snowflake follow release tags; LOLOR follows unreleased 1.3.0 development. The Chinese edition includes the reviewed incremental updates. Unchanged portions of existing drafts still await sentence-by-sentence review.
 
 | Extension | English source | Channel |
 | --- | --- | --- |

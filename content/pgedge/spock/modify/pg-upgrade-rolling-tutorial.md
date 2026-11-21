@@ -375,7 +375,7 @@ our example. Finish all steps for one node before starting the next.
     alongside its existing installation, the same way you did for the
     primary in step 4.
 
-    ### Updating Patroni to use the Upgraded Instance
+    ### Updating Patroni to use the Upgraded Instance {#updating-patroni-to-use-the-upgraded-instance}
 
 11. If this standby pair already runs under Patroni, you can reuse
     this node's own existing Patroni cluster and the DCS (Distributed
