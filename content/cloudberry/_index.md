@@ -38,4 +38,4 @@ The upstream site publishes two related manuals separately:
 [Platform Extension Framework (PXF)](/cloudberry/pxf/) and
 [Apache Cloudberry Core Internals](/cloudberry/core-internals/).
 
-The English snapshot checked on November 21, 2026 adds the [extension module reference](/cloudberry/reference/modules/) and [upgrades within 2.x](/cloudberry/sys-admin/migration-and-upgrade/upgrade-within-2x/). Chinese synchronization of these additions and the changed PXF guides is pending.
+The English snapshot checked on November 21, 2026 adds the [extension module reference](/cloudberry/reference/modules/) and [upgrades within 2.x](/cloudberry/sys-admin/migration-and-upgrade/upgrade-within-2x/). The Chinese edition includes these additions and the changed PXF guides.
