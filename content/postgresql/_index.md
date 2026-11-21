@@ -1,7 +1,7 @@
 ---
 title: "PostgreSQL documentation"
 linkTitle: PostgreSQL
-description: "English and Chinese PostgreSQL manuals: supported releases, PostgreSQL 19 previews, development snapshots, and historical versions."
+description: "English and Chinese PostgreSQL manuals: supported releases, development snapshots, and historical versions."
 type: docs
 weight: -100
 icon: pgsql-icon-postgresql
@@ -11,33 +11,32 @@ page_width: wide
 body_class: pgsql-versions-page
 translation_notice: false
 outputs: [HTML, RSS, print, markdown, LLMSFULL]
-search_keywords: [PostgreSQL, Postgres, "18.6", "19", devel, versions, archive]
+search_keywords: [PostgreSQL, Postgres, "19.0", "19", devel, versions, archive]
 cascade:
   type: docs
 ---
 
 Choose the manual for your PostgreSQL major version. This guide links to the English and Chinese editions on [PG.CENTER](https://pg.center/docs/) and [PGSQL.CC](https://pgsql.cc/docs/).
 
-**Current stable release: PostgreSQL 18.6** — [Read the English manual](https://pg.center/docs/18/index.html) · [Read the Chinese manual](https://pgsql.cc/docs/18/index.html).
+**Current stable release: PostgreSQL 19.0** — [Read the English manual](https://pg.center/docs/19/index.html) · [Read the Chinese manual](https://pgsql.cc/docs/19/index.html).
 
 ## Supported versions {#supported}
 
 | Version | PG.CENTER · EN | PG.CENTER · 中文 | PGSQL.CC · 中文 |
 | --- | --- | --- | --- |
-| PostgreSQL 18.6 | [English](https://pg.center/docs/18/index.html) | [Chinese](https://pg.center/zh/docs/18/index.html) | [Chinese](https://pgsql.cc/docs/18/index.html) |
-| PostgreSQL 17.11 | [English](https://pg.center/docs/17/index.html) | [Chinese](https://pg.center/zh/docs/17/index.html) | [Chinese](https://pgsql.cc/docs/17/index.html) |
-| PostgreSQL 16.15 | [English](https://pg.center/docs/16/index.html) | [Chinese](https://pg.center/zh/docs/16/index.html) | [Chinese](https://pgsql.cc/docs/16/index.html) |
-| PostgreSQL 15.19 | [English](https://pg.center/docs/15/index.html) | [Chinese](https://pg.center/zh/docs/15/index.html) | [Chinese](https://pgsql.cc/docs/15/index.html) |
-| PostgreSQL 14.24 | [English](https://pg.center/docs/14/index.html) | [Chinese](https://pg.center/zh/docs/14/index.html) | [Chinese](https://pgsql.cc/docs/14/index.html) |
+| PostgreSQL 19.0 | [English](https://pg.center/docs/19/index.html) | [Chinese](https://pg.center/zh/docs/19/index.html) | [Chinese](https://pgsql.cc/docs/19/index.html) |
+| PostgreSQL 18.7 | [English](https://pg.center/docs/18/index.html) | [Chinese](https://pg.center/zh/docs/18/index.html) | [Chinese](https://pgsql.cc/docs/18/index.html) |
+| PostgreSQL 17.12 | [English](https://pg.center/docs/17/index.html) | [Chinese](https://pg.center/zh/docs/17/index.html) | [Chinese](https://pgsql.cc/docs/17/index.html) |
+| PostgreSQL 16.16 | [English](https://pg.center/docs/16/index.html) | [Chinese](https://pg.center/zh/docs/16/index.html) | [Chinese](https://pgsql.cc/docs/16/index.html) |
+| PostgreSQL 15.20 | [English](https://pg.center/docs/15/index.html) | [Chinese](https://pg.center/zh/docs/15/index.html) | [Chinese](https://pgsql.cc/docs/15/index.html) |
 {.full-width}
 
 ## Development and preview versions {#development}
 
-PostgreSQL 19 is a preview release; 20 devel tracks the next development branch. Both manuals can change as development continues.
+PostgreSQL 20 devel tracks the next development branch. Its manual can change as development continues.
 
 | Version | PG.CENTER · EN | PG.CENTER · 中文 | PGSQL.CC · 中文 |
 | --- | --- | --- | --- |
-| PostgreSQL 19 · Preview | [English](https://pg.center/docs/19/index.html) | [Chinese](https://pg.center/zh/docs/19/index.html) | [Chinese](https://pgsql.cc/docs/19/index.html) |
 | PostgreSQL 20 · devel | [English](https://pg.center/docs/20devel/index.html) | [Chinese](https://pg.center/zh/docs/20devel/index.html) | [Chinese](https://pgsql.cc/docs/devel/index.html) |
 {.full-width}
 
@@ -47,6 +46,7 @@ These releases have reached the end of community support. Their manuals remain a
 
 | Version | PG.CENTER · EN | PG.CENTER · 中文 | PGSQL.CC · 中文 |
 | --- | --- | --- | --- |
+| PostgreSQL 14.25 | [English](https://pg.center/docs/14/index.html) | [Chinese](https://pg.center/zh/docs/14/index.html) | [Chinese](https://pgsql.cc/docs/14/index.html) |
 | PostgreSQL 13 | [English](https://pg.center/docs/13/index.html) | [Chinese](https://pg.center/zh/docs/13/index.html) | [Chinese](https://pgsql.cc/docs/13/index.html) |
 | PostgreSQL 12 | [English](https://pg.center/docs/12/index.html) | [Chinese](https://pg.center/zh/docs/12/index.html) | [Chinese](https://pgsql.cc/docs/12/index.html) |
 | PostgreSQL 11 | [English](https://pg.center/docs/11/index.html) | [Chinese](https://pg.center/zh/docs/11/index.html) | [Chinese](https://pgsql.cc/docs/11/index.html) |
@@ -73,5 +73,5 @@ These releases have reached the end of community support. Their manuals remain a
 | PostgreSQL 6.3 | [English](https://pg.center/docs/6.3/book01.htm) | [Chinese](https://pg.center/zh/docs/6.3/index.html) | [Chinese](https://pgsql.cc/docs/6.3/index.html) |
 {.full-width}
 
-Version listings and support status checked on November 7, 2026. Full catalogs: [PG.CENTER](https://pg.center/docs/) and [PGSQL.CC](https://pgsql.cc/docs/manuals/archive/).
+Version listings and [community support status](https://www.postgresql.org/support/versioning/) checked on November 21, 2026. PostgreSQL 19.0 was released on November 19; PostgreSQL 14 reached end of life on November 12. Full catalogs: [PG.CENTER](https://pg.center/docs/) and [PGSQL.CC](https://pgsql.cc/docs/manuals/archive/).
 
