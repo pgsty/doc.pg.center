@@ -243,7 +243,7 @@ languages:
         - identifier: postgresql
           parent: kernels
           name: PostgreSQL
-          url: https://pgsql.cc/docs/18/index.html
+          url: https://pgsql.cc/docs/19/index.html
           weight: 1
           params:
             icon: pgsql-icon-postgresql
