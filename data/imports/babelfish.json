@@ -222,7 +222,18 @@
       "route": "/zh/babelfish/",
       "sha256": "e9591cb150356979dc0b5f5e59de3869b81a2479a3e8a97827b0fe3497f37084",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "df9ff0f8578c787e9c6bd3d10981fb480cfc699ad60689e7ffbdd29a1b31812c",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/babelfish/_index.zh.md",
+        "source": "content/babelfish/_index.md",
+        "source_sha256": "e201088792f37234a450a3b79f3ddc1827b689602d37af8cfa34aeb0ba73fa6e",
+        "maintained_sha256": "df9ff0f8578c787e9c6bd3d10981fb480cfc699ad60689e7ffbdd29a1b31812c",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/architecture/_index.md",
@@ -1706,6 +1717,24 @@
   "english_update": {
     "date": "2026-11-21",
     "inventory": "data/updates/2026-11-21.json",
-    "translation_status": "pending; previous source and review basis retained"
+    "translation_status": "Chinese incremental updates reviewed; preexisting gaps and draft status retained"
+  },
+  "translation_update": {
+    "date": "2026-11-22",
+    "batch": "2026-11-21",
+    "review_mode": "self-review",
+    "reviewed_pages": 1,
+    "metadata_only_pages": 0,
+    "pages": [
+      {
+        "target": "content/babelfish/_index.zh.md",
+        "source": "content/babelfish/_index.md",
+        "source_sha256": "e201088792f37234a450a3b79f3ddc1827b689602d37af8cfa34aeb0ba73fa6e",
+        "maintained_sha256": "df9ff0f8578c787e9c6bd3d10981fb480cfc699ad60689e7ffbdd29a1b31812c",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      }
+    ]
   }
 }
