@@ -332,7 +332,7 @@ example: --tcp-keep-alive-interval=30
 
 pgBackRest 客户端与服务端之间的所有 TLS 连接均已加密，默认情况下与对象存储（如 S3）的连接也使用加密。
 
-> **注意：** 任何传输连接的最低安全级别为 TLSv1.2。
+> **注意：** 任何传输连接的最低安全级别为 TLSv1.2，但设置 `repo-storage-verify-tls=n` 时例外。
 
 如有需要，可调整允许使用的加密套件。示例中的配置是合理选择，除非有特定安全要求。若未设置（默认），则使用底层 OpenSSL 库的默认值。
 
@@ -346,7 +346,7 @@ example: --tls-cipher-12=HIGH:MEDIUM:+3DES:!aNULL
 
 pgBackRest 客户端与服务端之间的所有 TLS 连接均已加密，默认情况下与对象存储（如 S3）的连接也使用加密。
 
-> **注意：** 任何传输连接的最低安全级别为 TLSv1.2。
+> **注意：** 任何传输连接的最低安全级别为 TLSv1.2，但设置 `repo-storage-verify-tls=n` 时例外。
 
 如有需要，可调整允许使用的加密套件。若未设置（默认），则使用底层 OpenSSL 库的默认值。
 
@@ -1091,11 +1091,16 @@ allow range (depending on repo-type):
 example: --repo1-storage-upload-chunk-size=16MiB
 ```
 
-### 仓库存储证书验证选项（`--repo-storage-verify-tls`）
+<span id="仓库存储证书验证选项--repo-storage-verify-tls"></span>
+<span id="repository-storage-certificate-verify-option---repo-storage-verify-tls"></span>
 
-仓库存储证书验证。
+### 仓库存储 TLS 验证选项（`--repo-storage-verify-tls`） {#repository-storage-tls-verify-option---repo-storage-verify-tls}
+
+仓库存储 TLS 验证。
 
 启用或禁用对存储（如 S3、Azure）服务器 TLS 证书的验证。仅在测试或使用自签名证书的场景下才应禁用验证。
+
+禁用验证还会取消仓库存储连接的 TLSv1.2 最低版本限制，并忽略 `tls-cipher-12` 和 `tls-cipher-13` 选项。
 
 ```yaml
 default: y

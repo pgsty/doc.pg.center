@@ -628,7 +628,7 @@ pgBackRest 客户端与服务端之间的所有 TLS 连接均已加密。默认�
 
 注意：
 
-任何传输连接的最低安全级别为 TLSv1.2。
+任何传输连接的最低安全级别为 TLSv1.2，但设置 `repo-storage-verify-tls=n` 时例外。
 
 可以根据需要调整可接受的密码套件。除非有特定的安全要求，示例中的值是合理的选择。若未设置（默认），则使用底层 OpenSSL 库的默认值。
 
@@ -644,7 +644,7 @@ pgBackRest 客户端与服务端之间的所有 TLS 连接均已加密。默认�
 
 注意：
 
-任何传输连接的最低安全级别为 TLSv1.2。
+任何传输连接的最低安全级别为 TLSv1.2，但设置 `repo-storage-verify-tls=n` 时例外。
 
 可以根据需要调整可接受的密码套件。若未设置（默认），则使用底层 OpenSSL 库的默认值。
 
@@ -1709,11 +1709,16 @@ allow range (depending on repo-type):
 example: repo1-storage-upload-chunk-size=16MiB
 ```
 
-### 仓库存储证书验证选项（`--repo-storage-verify-tls`）
+<span id="仓库存储证书验证选项--repo-storage-verify-tls"></span>
+<span id="repository-storage-certificate-verify-option---repo-storage-verify-tls"></span>
 
-仓库存储证书验证。
+### 仓库存储 TLS 验证选项（`--repo-storage-verify-tls`） {#repository-storage-tls-verify-option---repo-storage-verify-tls}
+
+仓库存储 TLS 验证。
 
 启用或禁用对存储（如 S3、Azure）服务端 TLS 证书的验证。禁用此选项仅应用于测试场景或使用自签名证书的情况。
+
+禁用验证还会取消仓库存储连接的 TLSv1.2 最低版本限制，并忽略 `tls-cipher-12` 和 `tls-cipher-13` 选项。
 
 ```text
 default: y

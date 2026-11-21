@@ -1,5 +1,5 @@
 ---
-title: "pgBackRest 2.60.0 中文文档"
+title: "pgBackRest 2.60.1 中文文档"
 linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
@@ -10,12 +10,12 @@ sidebar_root_link_self: true
 description: "可靠的 PostgreSQL 备份与恢复工具 —— pgBackRest 文档与参考手册。"
 module: [PGBACKREST]
 categories: [概念]
-upstream_source: pgbackrest
-upstream_ref: v2.60.0
+upstream_source: pgbackrest-20261121
+upstream_ref: v2.60.1
 upstream_link: "https://pgbackrest.org/"
 cascade:
-  upstream_source: pgbackrest
-  upstream_ref: v2.60.0
+  upstream_source: pgbackrest-20261121
+  upstream_ref: v2.60.1
   type: docs
   module: [PGBACKREST]
 ---
@@ -26,7 +26,9 @@ cascade:
 
 pgBackRest 是一款可靠的 PostgreSQL 备份与恢复解决方案，可无缝扩展以应对超大规模数据库和各类工作负载。
 
-本站文档对应 pgBackRest [`v2.60.0`](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.0)。发布说明请查阅 [**发布历史**](/zh/pgbackrest/release/) 页面。
+本站文档对应 pgBackRest [`v2.60.1`](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.1)。发布说明请查阅 [**发布历史**](/zh/pgbackrest/release/) 页面。
+
+2.60.1 修复了 `annotate` 错误更新仓库、SFTP 恢复失败、内存保留过多，以及 TLS 配置和错误处理方面的问题。详见 [2.60.1 版本说明](/zh/pgbackrest/release/#v2601-release-notes)。
 
 2.60.0 新增了可配置的页面校验和错误处理、对象存储读取预取和 GCS 工作负载身份联合。`restore` 和 `expire` 现在默认在页面校验和无效时停止；详见 [2.60.0 版本说明](/zh/pgbackrest/release/#v2600-release-notes)。
 
@@ -38,6 +40,8 @@ pgBackRest 是一款可靠的 PostgreSQL 备份与恢复解决方案，可无缝
 --------
 
 ## 新闻
+
+**2026 年 11 月 16 日** - [pgBackRest 2.60.1 正式发布](/zh/pgbackrest/news/#release-2-60-1)
 
 **2026 年 10 月 18 日** - [pgBackRest 2.60.0 正式发布](/zh/pgbackrest/news/#release-2-60-0)
 

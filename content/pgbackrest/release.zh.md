@@ -25,7 +25,67 @@ v1 版本的文档可在[此处](https://pgbackrest.org/1)查阅。
 
 ## 本站文档版本 {#current-stable-release}
 
-本文档镜像覆盖 v2.60.0。更新版本请查阅[上游发布历史](https://pgbackrest.org/release.html)。
+本文档镜像覆盖 v2.60.1。更新版本请查阅[上游发布历史](https://pgbackrest.org/release.html)。
+
+### v2.60.1 版本说明 {#v2601-release-notes}
+
+*Annotate 与 SFTP 修复*
+
+*发布于 2026 年 11 月 16 日*
+
+**缺陷修复：**
+
+- 修复 `annotate` 将 `backup.info` 保存到默认仓库的问题。（*贡献：David Steele。审核：Stefan Fercot、Douglas J Hunley。*）
+
+  未指定 `repo` 时，`annotate` 命令会逐个搜索仓库以查找备份集，却把更新后的 `backup.info` 保存到默认仓库。对不在默认仓库中的备份集添加注解时，默认仓库的 `backup.info` 会被替换为备份集所在仓库的 `backup.info`。如果默认仓库已加密，读取其备份所需的密钥就会丢失，导致这些备份无法再恢复。
+
+  拉取请求 [#2916](https://github.com/pgbackrest/pgbackrest/pull/2916)
+
+- 修复 SFTP 存储上块级增量恢复可能失败的问题。（*贡献：David Steele。审核：Douglas J Hunley。建议：fineline19。*）
+
+  每次读取超级块后，服务端都会留下一个打开的文件，直到会话结束才关闭。恢复过程可能触及服务端的打开文件数上限，并因错误而失败，例如 "sftp errno [4]" 或 "client state is 'response' but expected 'idle'"。现在会在释放超级块读取对象之前先将其关闭。
+
+  议题 [#2884](https://github.com/pgbackrest/pgbackrest/issues/2884)；拉取请求 [#2902](https://github.com/pgbackrest/pgbackrest/pull/2902)
+
+- 修复重新连接后继续使用 SFTP 文件句柄的问题。（*贡献：David Steele。审核：Douglas J Hunley。*）
+
+  重新连接会释放原会话，但该会话中可能仍有打开的文件；下一次读写这些文件时就会访问已释放的内存。现在，这些操作会报错 "connection was lost"，使作业可以重试。
+
+  议题 [#2884](https://github.com/pgbackrest/pgbackrest/issues/2884)；拉取请求 [#2903](https://github.com/pgbackrest/pgbackrest/pull/2903)
+
+- 修复内存上下文空闲列表占用过多内存的问题。（*贡献：Vasiliy Koshkin。审核：David Steele、Douglas J Hunley。*）
+
+  空闲列表会保留已释放且大小不小于 64KiB 的内存分配，以供复用。随着数据写入而增长的缓冲区（例如对象存储上传缓冲区），以及大小不再重复出现的内存分配，会占满列表却得不到复用。每个进程最多可能保留 64MiB，因此较高的 `process-max` 会显著增加内存占用。现在只保留大小为 `buffer-size` 的内存分配。
+
+  议题 [#2911](https://github.com/pgbackrest/pgbackrest/issues/2911)；拉取请求 [#2912](https://github.com/pgbackrest/pgbackrest/pull/2912)
+
+- 不再降低 OpenSSL 配置设定的 TLS 最低版本。（*贡献：David Steele。审核：Douglas J Hunley、Stefan Fercot。*）
+
+  此前，在应用 OpenSSL 配置之后，TLS 最低版本会被设为 1.2。这会降低配置中更高的最低版本要求（例如 `MinProtocol = TLSv1.3`），使 TLS 1.2 连接仍被允许。现在只有当配置中的最低版本低于 TLS 1.2 时，才会设置最低版本。
+
+  议题 [#2889](https://github.com/pgbackrest/pgbackrest/issues/2889)；拉取请求 [#2899](https://github.com/pgbackrest/pgbackrest/pull/2899)
+
+- 修复 OpenSSL 错误报告。（*贡献：David Steele。审核：Douglas J Hunley、Stefan Fercot。*）
+
+  OpenSSL 配置加入错误队列的错误，或前一次失败遗留的错误，可能被报告出来，掩盖实际失败原因。例如，`tls-cipher-12` 的值无效时可能报告 "ssl command section not found"。对于 CA 文件缺失等系统错误，OpenSSL >= 3.0 此前会报告 "no details available"，现在改为报告系统错误消息。
+
+  议题 [#2889](https://github.com/pgbackrest/pgbackrest/issues/2889)；拉取请求 [#2900](https://github.com/pgbackrest/pgbackrest/pull/2900)
+
+**文档改进：**
+
+- 说明设置 `repo-storage-verify-tls=n` 时跳过的 TLS 设置。（*贡献：David Steele。*）
+
+  设置 `repo-storage-verify-tls=n` 时，不会设置 TLSv1.2 最低版本限制，并且仓库存储连接会忽略 `tls-cipher-12` 和 `tls-cipher-13` 选项。
+
+**文档开发：**
+
+- 从文档构建写入的站点路径中移除残留文件。（*贡献：David Steele。*）
+
+- 补丁版本的发布说明历史以 integration-x.y.z-ci 分支为终点。（*贡献：David Steele。*）
+
+**测试开发：**
+
+- CI 更新。（*贡献：David Steele。*）
 
 ### v2.60.0 版本说明 {#v2600-release-notes}
 

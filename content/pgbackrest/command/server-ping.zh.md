@@ -182,7 +182,7 @@ example: --tcp-keep-alive-interval=30
 
 pgBackRest 客户端与服务器之间的所有 TLS 连接均经过加密。默认情况下，与对象存储（如 S3）的连接也会加密。
 
-> **注意：** 任何传输连接的最低安全级别为 TLSv1.2。
+> **注意：** 任何传输连接的最低安全级别为 TLSv1.2，但设置 `repo-storage-verify-tls=n` 时例外。
 
 如有需要，可调整允许的加密套件。除非有特定的安全要求，否则示例值是一个合理的选择。若未设置（默认），则使用底层 OpenSSL 库的默认值。
 
@@ -196,7 +196,7 @@ example: --tls-cipher-12=HIGH:MEDIUM:+3DES:!aNULL
 
 pgBackRest 客户端与服务器之间的所有 TLS 连接均经过加密。默认情况下，与对象存储（如 S3）的连接也会加密。
 
-> **注意：** 任何传输连接的最低安全级别为 TLSv1.2。
+> **注意：** 任何传输连接的最低安全级别为 TLSv1.2，但设置 `repo-storage-verify-tls=n` 时例外。
 
 如有需要，可调整允许的加密套件。若未设置（默认），则使用底层 OpenSSL 库的默认值。
 

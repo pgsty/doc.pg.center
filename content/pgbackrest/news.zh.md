@@ -11,6 +11,44 @@ upstream_link: "https://pgbackrest.org/news.html"
 
 --------
 
+## pgBackRest 2.60.1 正式发布 {#release-2-60-1}
+
+**2026 年 11 月 16 日**
+
+pgBackRest 社区很高兴地宣布 [pgBackRest](https://pgbackrest.org) 2.60.1 正式发布。pgBackRest 是一款可靠、易用的备份与恢复解决方案，可无缝扩展以应对超大规模数据库和工作负载。
+
+pgBackRest 为管理备份与恢复基础设施提供了丰富而强大的功能，包括：并行备份与恢复、全量/差异/增量备份、块级增量备份、多仓库、delta 恢复、并行异步归档、恶意软件/勒索软件防护、逐文件校验和、备份期间验证页面校验和（启用时）、多种压缩类型、加密、部分备份/失败备份续传、从备库执行备份、表空间与链接支持、S3/Azure/GCS/SFTP 支持、备份过期、本地或通过 SSH/TLS 进行远程操作、灵活配置，以及更多功能。
+
+pgBackRest 可从 [PostgreSQL Yum 仓库](https://yum.postgresql.org) 或 [PostgreSQL APT 仓库](https://apt.postgresql.org) 安装，许多其他发行版也提供相应软件包。源码可从 [版本发布](/zh/pgbackrest/release/) 页面下载。
+
+### 缺陷修复 {#release-2-60-1-feature}
+
+- 修复 `annotate` 将 `backup.info` 保存到默认仓库的问题（David Steele）。
+- 修复 SFTP 存储上块级增量恢复可能失败的问题（David Steele）。
+- 修复重新连接后继续使用 SFTP 文件句柄的问题（David Steele）。
+- 修复内存上下文空闲列表占用过多内存的问题（Vasiliy Koshkin）。
+- 不再降低 OpenSSL 配置设定的 TLS 最低版本（David Steele）。
+- 修复 OpenSSL 错误报告（David Steele）。
+
+更多修复与改进请参阅 [2.60.1 版本说明](/zh/pgbackrest/release/#v2601-release-notes)。
+
+### 重要提示 {#release-2-60-1-note}
+
+- v2.59.2 及后续版本（包括本版本）支持 PostgreSQL 19rc2。
+
+### 相关链接 {#release-2-60-1-link}
+
+- [网站](/zh/pgbackrest/)
+- [用户指南](/zh/pgbackrest/user-guide/)
+- [版本说明](/zh/pgbackrest/release/)
+
+### 赞助 {#release-2-60-1-sponsorship}
+
+感谢 [AWS](https://aws.amazon.com)、[Supabase](https://supabase.com)、[pgEdge](https://pgedge.com)、[Tiger Data](https://tigerdata.com)、[Percona](https://percona.com)、[Eon](https://eon.io)、[Xata](https://xata.io)、[Dalibo](https://dalibo.com) 和 [Data Egret](https://dataegret.com/) 的慷慨赞助，使本次发布成为可能。
+
+
+--------
+
 ## pgBackRest 2.60.0 正式发布 {#release-2-60-0}
 
 **2026 年 10 月 18 日**
