@@ -210,7 +210,9 @@
       "route": "/babelfish/",
       "sha256": "59e7f3409a584156d9cda5b7a0a6262f88afe07f1472a1c42e0259f526f2ba4f",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "e201088792f37234a450a3b79f3ddc1827b689602d37af8cfa34aeb0ba73fa6e",
+      "update_batch": "2026-11-21"
     },
     {
       "source": "content/docs/_index.zh.md",
@@ -1700,5 +1702,10 @@
       "bytes": 386,
       "sha256": "fa2a8d655204e33002afd58425d494883754521a245014e6ab57a2c3977e3a87"
     }
-  ]
+  ],
+  "english_update": {
+    "date": "2026-11-21",
+    "inventory": "data/updates/2026-11-21.json",
+    "translation_status": "pending; previous source and review basis retained"
+  }
 }
