@@ -47,4 +47,4 @@ placeholders separate the manuals in the sidebar without adding directory levels
 
 The complete original manuals are available at the pinned upstream revision linked above. The
 [upstream license notice](/third_party/haproxy/LICENSE) and [GPLv2 text](/third_party/haproxy/GPL-2.0)
-are published beside the manuals. The existing Simplified Chinese companion edition remains available while the 3.4.8 changes are translated.
+are published beside the manuals. The Simplified Chinese companion edition includes the reviewed 3.4.8 updates.
