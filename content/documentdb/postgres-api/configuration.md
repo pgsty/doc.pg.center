@@ -1,6 +1,6 @@
 ---
 title: Configuration
-description: Server GUCs and gateway environment variables for configuring DocumentDB 1.0, including the required
+description: Server GUCs and gateway environment variables for configuring DocumentDB 1.2, including the required
   extended RUM index library, collation, and role management flags.
 type: docs
 upstream_source: documentdb-20261121

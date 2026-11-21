@@ -335,7 +335,7 @@ Upgrading a host that ever ran a release candidate isn't supported, and the inst
 
 ### Stand-alone stack {#stand-alone-stack}
 
-A host set up by the 1.0 installer, or with `--stable`, follows the `stable` package channel, which still serves 1.0. To upgrade it now, point it at the `latest` channel first:
+A host set up by the 1.0 installer, or with `--stable`, follows the `stable` package channel. Both channels now serve 1.2. To receive future releases as soon as they are published, optionally switch to `latest` first:
 
 ```bash
 # Debian / Ubuntu

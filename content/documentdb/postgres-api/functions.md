@@ -1,6 +1,6 @@
 ---
 title: Functions
-description: Reference for the PostgreSQL functions exposed by the pg_documentdb extension in DocumentDB 1.0, including
+description: Reference for the PostgreSQL functions exposed by the pg_documentdb extension in DocumentDB 1.2, including
   CRUD, schema, index, diagnostics, user and role management.
 type: docs
 upstream_source: documentdb-20261121
