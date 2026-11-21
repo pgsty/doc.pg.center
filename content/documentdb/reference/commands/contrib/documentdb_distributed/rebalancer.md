@@ -2,6 +2,7 @@
 title: Distributed rebalancer
 description: Start, inspect, and stop DocumentDB distributed shard rebalancing through wire protocol commands.
 type: docs
+search_keywords: [rebalancer, balancerStart, balancerStatus, balancerStop, documentdb_distributed]
 upstream_source: documentdb-20261121
 upstream_link: https://github.com/documentdb/docs/blob/8fb7fdaffb37c4f5e4c8ba670bd2a05323a92ec5/api-reference/commands/contrib/documentdb_distributed/rebalancer.md
 weight: 20
