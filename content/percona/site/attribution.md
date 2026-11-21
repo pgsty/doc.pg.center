@@ -12,7 +12,7 @@ This is an **independent documentation and translation site maintained by PGSTY*
 
 ## Documentation source {#documentation-source}
 
-The English edition was updated on November 21, 2026 to pg_tde **2.3.0**, at `percona/pg_tde@5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a`. It adds the 2.3.0 release notes to the previously imported 66 articles, with section indexes and PGSTY editorial guides. The Chinese edition retains the reviewed 2.2.2 baseline pending incremental translation. The original authors are Percona and the pg_tde contributors.
+The English edition was updated on November 21, 2026 to pg_tde **2.3.0**, at `percona/pg_tde@5dd7a9e4e3599d88546f5de67ff0f4ef3fe51a9a`. It adds the 2.3.0 release notes to the previously imported 66 articles, with section indexes and PGSTY editorial guides. The Chinese edition includes the reviewed 2.3.0 incremental changes. The original authors are Percona and the pg_tde contributors.
 
 Read the [source manifest](/percona/assets/source-manifest.json) for file paths, hashes, supporting assets, and pinned source URLs. Each adapted page links to its original. The [errata](/percona/site/errata/) records corrections checked against this snapshot.
 

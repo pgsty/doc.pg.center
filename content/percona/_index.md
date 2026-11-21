@@ -31,7 +31,7 @@ icon: fa-solid fa-shield-halved
 
 The pg_tde documentation follows the path a production PostgreSQL deployment takes: understand the encryption model, install the extension, configure key custody, validate encrypted tables, then operate WAL, backups, recovery, and upgrades.
 
-The current release is [pg_tde 2.3.0](/percona/release-notes/release-notes-v2.3.0/), adding PostgreSQL 19 support and pg_tde-aware WAL record inspection. The Chinese edition is awaiting these incremental changes.
+The current release is [pg_tde 2.3.0](/percona/release-notes/release-notes-v2.3.0/), adding PostgreSQL 19 support and pg_tde-aware WAL record inspection. The Chinese edition includes these reviewed incremental changes.
 
 - [Overview](/percona/index/) — understand TDE, pg_tde, supported deployments, and limitations.
 - [Get started](/percona/install/) — install the package and create the extension.
