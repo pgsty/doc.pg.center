@@ -108,7 +108,18 @@
       "route": "/zh/polardb/",
       "sha256": "86828827abc853c94e7ad1a8ec133fc7dd0e1fd5ef5da0c486629c9d8905ef2b",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "e415e517f71ef0c71cb2c827545aebf2331843ce3f60b030e9b95e4f058acc78",
+      "update_batch": "2026-11-21",
+      "translation_update": {
+        "target": "content/polardb/_index.zh.md",
+        "source": "content/polardb/_index.md",
+        "source_sha256": "3a012a27874e089f27c0f5da80aa72352bf93446301886a0197c274516e3716b",
+        "maintained_sha256": "e415e517f71ef0c71cb2c827545aebf2331843ce3f60b030e9b95e4f058acc78",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      }
     },
     {
       "source": "content/docs/contributing/_index.en.md",
@@ -2279,6 +2290,24 @@
   "english_update": {
     "date": "2026-11-21",
     "inventory": "data/updates/2026-11-21.json",
-    "translation_status": "pending; previous source and review basis retained"
+    "translation_status": "Chinese incremental updates reviewed; preexisting gaps and draft status retained"
+  },
+  "translation_update": {
+    "date": "2026-11-22",
+    "batch": "2026-11-21",
+    "review_mode": "self-review",
+    "reviewed_pages": 1,
+    "metadata_only_pages": 0,
+    "pages": [
+      {
+        "target": "content/polardb/_index.zh.md",
+        "source": "content/polardb/_index.md",
+        "source_sha256": "3a012a27874e089f27c0f5da80aa72352bf93446301886a0197c274516e3716b",
+        "maintained_sha256": "e415e517f71ef0c71cb2c827545aebf2331843ce3f60b030e9b95e4f058acc78",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      }
+    ]
   }
 }

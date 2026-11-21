@@ -38,6 +38,10 @@ PolarDB for PostgreSQL 是阿里云研发的数据库，采用存储计算分离
   贡献代码和文档，提交问题，了解编码规范。
 {.cards columns=2}
 
+## 版本背景 {#release-context}
+
+2026 年 11 月 21 日核查的软件当前版本为 [PolarDB for PostgreSQL 17.11.1.0](https://github.com/polardb/PolarDB-for-PostgreSQL/releases/tag/v17.11.1.0)。文档仓库仍固定于 `b4733b0350888242afeba432a6837458c348a937`；此次版本核查不改变已导入的语言覆盖范围，也不改写历史版本规划。
+
 ## 第一次使用 {#first-steps}
 
 1. 阅读[架构简介](/zh/polardb/deploying/introduction/)，理解计算节点与共享存储的关系。
