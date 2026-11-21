@@ -2,7 +2,7 @@
 title: "Configuring Connectors to MinIO, AWS S3, and Dell ECS Object Stores (Optional)"
 description: "Configuring PXF connectors to MinIO and S3 object stores."
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/s3_objstore_cfg.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/s3_objstore_cfg.md"
 ---
 
 You can use PXF to access S3-compatible object stores. This topic describes how to configure the PXF connectors to these external data sources.
@@ -25,7 +25,6 @@ The template configuration file for MinIO is `<PXF_INSTALL_DIR>/templates/minio-
 | fs.s3a.endpoint | The MinIO S3 endpoint to which to connect. | Your endpoint. |
 | fs.s3a.access.key | The MinIO account access key. | Your MinIO user name. |
 | fs.s3a.secret.key | The MinIO secret key associated with the access key. | Your MinIO password. |
-| fs.s3a.fast.upload | Property that governs fast upload; the default value is `false`. | Set to `true` to enable fast upload. |
 | fs.s3a.path.style.access | Property that governs file specification via paths; the default value is `false`. | Set to `true` to enable path style access. |
 
 ## S3 Server Configuration {#s3-server-configuration}
@@ -37,7 +36,7 @@ The template configuration file for S3 is `<PXF_INSTALL_DIR>/templates/s3-site.x
 | fs.s3a.access.key | The AWS account access key ID. | Your access key. |
 | fs.s3a.secret.key | The secret key associated with the AWS access key ID. | Your secret key. |
 
-If required, fine-tune PXF S3 connectivity by specifying properties identified in the [S3A](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html#S3A) section of the Hadoop-AWS module documentation in your `s3-site.xml` server configuration file.
+If required, fine-tune PXF S3 connectivity by specifying properties identified in the [Hadoop 3.3.6 S3A documentation](https://hadoop.apache.org/docs/r3.3.6/hadoop-aws/tools/hadoop-aws/index.html) in your `s3-site.xml` server configuration file.
 
 You can override the credentials for an S3 server configuration by directly specifying the S3 access ID and secret key via custom options in the `CREATE EXTERNAL TABLE` command `LOCATION` clause. Refer to [Overriding the S3 Server Configuration for External Tables](/cloudberry/pxf/access-objectstores/access_s3/#overriding-the-s3-server-configuration-for-external-tables) for additional information.
 
@@ -109,7 +108,7 @@ To enable SSE-KMS on any file that you write to any S3 bucket, set both the encr
 
 Substitute `YOUR_AWS_SSE_KMS_KEY_ARN` with your key resource name. If you do not specify an encryption key, the default key defined in the Amazon KMS is used. Example KMS key: `arn:aws:kms:us-west-2:123456789012:key/1a23b456-7890-12cc-d345-6ef7890g12f3`.
 
-**Note**: Be sure to create the bucket and the key in the same Amazon Availability Zone.
+**Note**: The bucket and KMS key must be in the same AWS Region.
 
 To enable SSE-KMS for a specific S3 bucket, use property name variants that include the bucket name. For example:
 
@@ -183,10 +182,6 @@ In this procedure, you name and add a PXF server configuration in the `$PXF_BASE
             <name>fs.s3a.secret.key</name>
             <value>secret_key_for_user1</value>
         </property>
-        <property>
-            <name>fs.s3a.fast.upload</name>
-            <value>true</value>
-        </property>
     </configuration>
     ```
 5. Save your changes and exit the editor.
@@ -208,5 +203,4 @@ When you configure a Dell ECS server, you must provide the following server conf
 | fs.s3a.endpoint | The Dell ECS S3 endpoint to which to connect. | Your ECS endpoint. |
 | fs.s3a.access.key | The Dell ECS account access key. | Your ECS user name. |
 | fs.s3a.secret.key | The Dell ECS secret key associated with the access key. | Your ECS secret key1. |
-| fs.s3a.fast.upload | Property that governs fast upload; the default value is `false`. | Set to `true` to enable fast upload. |
 | fs.s3a.path.style.access | Property that governs file specification via paths; the default value is `false`. | Set to `true` to enable path style access. |

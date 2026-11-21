@@ -3,7 +3,7 @@ title: "Create and Manage Views in Apache Cloudberry"
 linkTitle: "Create and Manage Views"
 description: "In Apache Cloudberry, views enable you to save frequently used or complex queries, then access them in a `SELECT` statement as if they were a table."
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-views.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-views.md"
 ---
 
 A view is not physically materialized on disk: the query runs as a subquery when you access the view.

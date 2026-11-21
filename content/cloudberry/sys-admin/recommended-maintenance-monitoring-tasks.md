@@ -2,7 +2,7 @@
 title: "Recommended Monitoring and Maintenance Tasks"
 description: "This section lists monitoring and maintenance operations recommended to ensure high availability and consistent performance of your Apache Cloudberry cluster."
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/recommended-maintenance-monitoring-tasks.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/recommended-maintenance-monitoring-tasks.md"
 ---
 
 The tables in the following sections suggest operations that a Apache Cloudberry system administrator can perform periodically to ensure that all components of the system are operating optimally. Monitoring operations help you to detect and diagnose problems early. Maintenance operations help you to keep the system up-to-date and avoid deteriorating performance, for example, from bloated system tables or diminishing free disk space.

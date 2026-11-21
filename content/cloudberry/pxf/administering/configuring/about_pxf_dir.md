@@ -2,7 +2,7 @@
 title: "About the Installation and Configuration Directories"
 description: "PXF installation and configuration directory layout."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/about_pxf_dir.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/about_pxf_dir.md"
 ---
 
 This documentation uses `<PXF_INSTALL_DIR>` to refer to the PXF installation directory. Its value depends on how you have installed PXF:

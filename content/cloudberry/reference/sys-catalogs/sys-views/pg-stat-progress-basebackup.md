@@ -2,7 +2,7 @@
 title: "pg_stat_progress_basebackup"
 description: "The `pg_stat_progress_basebackup` view shows the progress of base backups initiated by tools like `pg_basebackup`."
 weight: 270
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-progress-basebackup.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-progress-basebackup.md"
 ---
 
 Each row represents a WAL sender process currently performing a `BASE_BACKUP` command, detailing information such as the current phase, estimated total data size, data streamed so far, and tablespaces processed. This view helps monitor and manage ongoing base backup operations.

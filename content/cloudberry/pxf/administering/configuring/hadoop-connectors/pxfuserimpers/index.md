@@ -2,7 +2,7 @@
 title: "Configuring the Hadoop User, User Impersonation, and Proxying"
 description: "Configuring user impersonation and proxying for PXF."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/hadoop-connectors/pxfuserimpers.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/hadoop-connectors/pxfuserimpers.md"
 ---
 
 PXF accesses Hadoop services on behalf of Apache Cloudberry end users. Impersonation is a way to present an Apache Cloudberry end user identity to a remote system. You can achieve this with PXF by configuring a Hadoop proxy user. When the Hadoop service is secured with Kerberos, you also have the option of impersonation using Kerberos constrained delegation.

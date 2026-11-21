@@ -2,7 +2,7 @@
 title: "Memory and Threading"
 description: "Configuring PXF memory and threading."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/advanced-config/cfg_mem.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/advanced-config/cfg_mem.md"
 ---
 
 Because a single PXF Service (JVM) serves multiple segments on a segment host, the PXF heap size can be a limiting runtime factor. This becomes more evident under concurrent workloads or with queries against large files. You may run into situations where a query hangs or fails due to insufficient memory or the Java garbage collector impacting response times. To avert or remedy these situations, first try increasing the Java maximum heap size or decreasing the Tomcat maximum number of threads, depending upon what works best for your system configuration. You may also choose to configure PXF to [auto-terminate the server](#auto-terminating-the-pxf-server) (activated by default) or [dump the Java heap](#dumping-the-java-heap) when it detects an out of memory condition.

@@ -2,7 +2,7 @@
 title: "TPC-H: Decision Support Benchmark for Apache Cloudberry"
 description: "Run the TPC-H benchmark automatically on an existing Apache Cloudberry cluster."
 weight: 110
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/benchmark/performance-benchmark-tpch.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/benchmark/performance-benchmark-tpch.md"
 ---
 
 This tool is based on the benchmark tool [TPC-H](https://www.tpc.org/tpch/default5.asp).

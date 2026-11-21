@@ -2,7 +2,7 @@
 title: "Monitor Long-Running Operations"
 description: "Apache Cloudberry can report the progress of `ANALYZE`, `CLUSTER`, `COPY`, `CREATE INDEX`, `REINDEX`, and `VACUUM` commands during command execution."
 weight: 110
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/monitor-long-running-operations.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/monitor-long-running-operations.md"
 ---
 
 Cloudberry can also report the progress of a running base backup (initiated during [`gprecoverseg -F`](/cloudberry/reference/sys-utilities/gprecoverseg/)) command invocation, allowing you to monitor the progress of these possibly long-running operations.

@@ -2,7 +2,7 @@
 title: "Create and Manage Sequences"
 description: "An Apache Cloudberry sequence object is a special single row table that functions as a number generator."
 weight: 130
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-sequences.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-sequences.md"
 ---
 
 You can use a sequence to generate unique integer identifiers for a row that you add to a table. Declaring a column of type `SERIAL` implicitly creates a sequence counter for use in that table column.

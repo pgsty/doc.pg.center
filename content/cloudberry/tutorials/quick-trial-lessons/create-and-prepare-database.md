@@ -2,7 +2,7 @@
 title: "Lesson 2: Create and Prepare Database"
 description: "Let's create one new database in the Apache Cloudberry."
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/quick-trial-lessons/create-and-prepare-database.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/quick-trial-lessons/create-and-prepare-database.md"
 ---
 
 To create a new database in Apache Cloudberry, you can either use the `CREATE DATABASE` SQL command in the `psql` client, or use the `createdb` utility. The `createdb` utility is a wrapper around the `CREATE DATABASE` command.

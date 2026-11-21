@@ -2,7 +2,7 @@
 title: "pg_resqueuecapability"
 description: "The `pg_resqueuecapability` system catalog table contains information about the extended attributes, or capabilities, of existing Apache Cloudberry resource queues."
 weight: 310
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-resqueuecapability.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-resqueuecapability.md"
 ---
 
 > [!NOTE]

@@ -3,7 +3,7 @@ title: "Create and Manage indexes"
 linkTitle: "Create and Manage Indexes"
 description: "In traditional databases, indexes are commonly used to significantly improve data access performance."
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-indexes.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-indexes.md"
 ---
 
 However, in distributed systems like Apache Cloudberry, indexes must be used more cautiously. Apache Cloudberry provides high-speed sequential scans, while index lookups rely on random disk access. Because data is distributed across multiple segments, each segment only needs to scan its local subset of data to return results. Combined with table partitioning, the amount of data scanned during a query can be further reduced. As a result, in business intelligence (BI) workloads—which typically return large result sets—indexes might introduce performance overhead instead of benefits.

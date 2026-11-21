@@ -2,7 +2,7 @@
 title: "Validating Hardware and Network"
 description: "Use gpcheckperf to validate network, disk I/O, and memory bandwidth performance on Apache Cloudberry hosts."
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/deployment/validate.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/deployment/validate.md"
 ---
 
 Cloudberry provides a management utility called [gpcheckperf](/cloudberry/reference/sys-utilities/gpcheckperf/), which can be used to identify hardware and system-level issues on the machines in your Apache Cloudberry array. `gpcheckperf` starts a session on the specified hosts and runs the following performance tests:

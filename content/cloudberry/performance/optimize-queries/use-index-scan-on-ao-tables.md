@@ -2,7 +2,7 @@
 title: "Use IndexScan on AO Tables"
 description: "Use index scans on append-optimized tables to accelerate selective queries in Apache Cloudberry."
 weight: 100
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/use-index-scan-on-ao-tables.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/use-index-scan-on-ao-tables.md"
 ---
 
 Apache Cloudberry supports IndexScan when querying on App-Optimized (AO) tables to improve query efficiency in certain scenarios, such as the following query:

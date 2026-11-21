@@ -2,7 +2,7 @@
 title: "pg_stat_progress_copy"
 description: "The `pg_stat_progress_copy` view displays the progress of currently running `COPY` commands."
 weight: 290
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-progress-copy.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-progress-copy.md"
 ---
 
 Each row represents a backend process executing a `COPY` operation and provides details such as the command type (`COPY FROM` or `COPY TO`), I/O type (for example, `FILE` and `PIPE`), number of bytes and tuples processed, and counts of tuples excluded or skipped due to errors. This view is useful for monitoring long-running `COPY` operations.

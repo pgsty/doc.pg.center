@@ -2,7 +2,7 @@
 title: "[104-1] Introduction to Apache Cloudberry In-Database Analytics"
 description: "Run analytics directly in the Apache Cloudberry by MADlib."
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/quick-trial-lessons/introduction-to-cloudberry-in-database-analytics.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/quick-trial-lessons/introduction-to-cloudberry-in-database-analytics.md"
 ---
 
 Running analytics directly in Apache Cloudberry, rather than exporting data to a separate analytics engine, allows greater agility when exploring large data sets and much better performance due to parallelizing the analytic processes across all the segments.

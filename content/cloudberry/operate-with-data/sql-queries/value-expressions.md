@@ -2,7 +2,7 @@
 title: "Value Expressions"
 description: "Value expressions are the core components that allow you to calculate, transform, and reference data within a query."
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/value-expressions.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/value-expressions.md"
 ---
 
 When defining queries, understanding these expressions is key to writing flexible and effective SQL.

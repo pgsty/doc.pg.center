@@ -3,7 +3,7 @@ title: "Troubleshooting"
 linkTitle: "Troubleshooting PXF"
 description: "Troubleshooting PXF: logs, common errors, and memory issues."
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/troubleshooting/troubleshooting_pxf.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/troubleshooting/troubleshooting_pxf.md"
 ---
 
 <!--
@@ -45,6 +45,16 @@ Most PXF error messages include a `HINT` that you can use to resolve the error, 
 ## PXF Logging {#pxf-logging}
 
 Refer to the [Logging](/cloudberry/pxf/administering/advanced-config/cfg_logging/) topic for more information about logging levels, configuration, and the `pxf-app.out` and `pxf-service.log` log files.
+
+## Java Version Errors After an Upgrade {#java-version-errors-after-an-upgrade}
+
+The current PXF classes target Java 17 (class-file version 61). Starting them
+with Java 11 or earlier can fail with `UnsupportedClassVersionError`, mentioning
+version `61.0`; Java 11, for example, only recognizes versions up to `55.0`.
+
+Check `JAVA_HOME` in `$PXF_BASE/conf/pxf-env.sh` on every Apache Cloudberry host.
+Install/select Java 17, synchronize the PXF configuration, and restart the service.
+See [Installing Java for PXF](/cloudberry/pxf/administering/configuring/install_java/).
 
 
 ## Addressing PXF JDBC Connector Time Zone Errors {#addressing-pxf-jdbc-connector-time-zone-errors}

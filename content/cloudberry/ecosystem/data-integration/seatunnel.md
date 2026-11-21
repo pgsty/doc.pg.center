@@ -2,7 +2,7 @@
 title: "Apache SeaTunnel"
 description: "Apache SeaTunnel is a very easy-to-use, ultra-high-performance, distributed data integration platform that supports real-time synchronization of massive data."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/ecosystem/data-integration/seatunnel.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/ecosystem/data-integration/seatunnel.md"
 ---
 
 It can synchronize tens of billions of data stably and efficiently on a daily basis and has been used in production by 3000+ enterprises.

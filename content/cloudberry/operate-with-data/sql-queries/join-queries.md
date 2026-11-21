@@ -2,7 +2,7 @@
 title: "Join Queries"
 description: "In Apache Cloudberry, the `JOIN` clause combines rows from two or more tables based on related column values."
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/join-queries.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/join-queries.md"
 ---
 
 The `JOIN` clause is part of the `FROM` clause in a `SELECT` statement.

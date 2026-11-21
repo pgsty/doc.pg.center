@@ -2,7 +2,7 @@
 title: "Quick Deployment Guide"
 description: "This guide provides a streamlined, copy-paste-friendly procedure for experienced administrators."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/deployment/quick-deploy.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/deployment/quick-deploy.md"
 ---
 
 This guide shows how to deploy a 5-node Apache Cloudberry cluster:

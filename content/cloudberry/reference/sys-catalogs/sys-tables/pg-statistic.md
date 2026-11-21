@@ -2,7 +2,7 @@
 title: "pg_statistic"
 description: "The `pg_statistic` system catalog table stores statistical data about the contents of the database."
 weight: 380
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-statistic.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-statistic.md"
 ---
 
 Entries are created by [`ANALYZE`](/cloudberry/reference/sql-stmts/analyze/) and subsequently used by the query planner. Note that all the statistical data is inherently approximate, even assuming that it is up-to-date.

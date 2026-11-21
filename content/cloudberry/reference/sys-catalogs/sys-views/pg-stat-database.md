@@ -2,7 +2,7 @@
 title: "pg_stat_database"
 description: "The `pg_stat_database` view provides cumulative statistics for each database in the cluster."
 weight: 230
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-database.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-database.md"
 ---
 
 It includes metrics such as the number of committed and rolled-back transactions, disk block reads and cache hits, tuples returned or fetched, and counts of inserted, updated, and deleted rows. This view is useful for monitoring overall database activity and performance.

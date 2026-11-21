@@ -2,7 +2,7 @@
 title: "gp_stat_progress_dtx_recovery"
 description: "The `gp_stat_progress_dtx_recovery` view is a cluster-wide view that displays the progress of the Distributed Transaction (DTX) Recovery process, which runs in the backgroup during Postgres startup."
 weight: 120
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-stat-progress-dtx-recovery.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-stat-progress-dtx-recovery.md"
 ---
 
 This view might be useful if a coordinator restart remains in a recovery state for a long time. Apache Cloudberry will not accept connections until all "in-doubt" transactions are resolved. In-doubt transactions are transactions that have been prepared but not committed yet. If there were many transactions running before the coordinator restarted, the recovery of the database might take longer than expected, and you might use this view to monitor the current phase of the recovery. Note that in this scenario, as Apache Cloudberry is still starting up, you will need to access the database in utility mode to check this view.

@@ -2,7 +2,7 @@
 title: "psql Support"
 description: "The psql command-line utility provides a meta-command to display information about Apache Cloudberry full text search configurations."
 weight: 100
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/text-search-psql-support.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/text-search-psql-support.md"
 ---
 
 Information about text search configuration objects can be obtained in psql using a set of commands:

@@ -3,7 +3,7 @@ title: "Start and Stop Apache Cloudberry"
 linkTitle: "Start and Stop Database"
 description: "In a Apache Cloudberry DBMS, the database server instances (the coordinator and all segments) are started or stopped across all of the hosts in the system in such a way that they can work together as a unified DBMS."
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/database-basic/start-and-stop-cbdb-database.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/database-basic/start-and-stop-cbdb-database.md"
 ---
 
 Because a Apache Cloudberry system is distributed across many machines, the process for starting and stopping a Apache Cloudberry system is different than the process for starting and stopping a regular PostgreSQL DBMS.

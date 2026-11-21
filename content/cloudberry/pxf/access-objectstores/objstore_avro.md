@@ -2,7 +2,7 @@
 title: "Reading and Writing Avro Data in an Object Store"
 description: "Reading and writing Avro data in object stores via PXF."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-objectstores/objstore_avro.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-objectstores/objstore_avro.md"
 ---
 
 <!--
@@ -44,6 +44,7 @@ When you read or write Avro data in an object store:
     - You must include the bucket in the schema file path. This bucket need not specify the same bucket as the Avro data file.
     - The secrets that you specify in the `SERVER` configuration must provide access to both the data file and schema file buckets.
 - The schema file path must not include spaces.
+- An absolute `SCHEMA` path is resolved in the configured object store, relative to `pxf.fs.basePath` (or the file system root). PXF does not open it directly on the local file system of the PXF host. A relative schema path is searched in the PXF classpath first.
 
 ## Creating the External Table {#creating-the-external-table}
 

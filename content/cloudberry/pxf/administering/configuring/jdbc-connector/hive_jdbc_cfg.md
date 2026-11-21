@@ -2,7 +2,7 @@
 title: "Configuring the JDBC Connector for Hive Access (Optional)"
 description: "Configuring the PXF JDBC connector for Hive access."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/jdbc-connector/hive_jdbc_cfg.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/jdbc-connector/hive_jdbc_cfg.md"
 ---
 
 You can use the PXF JDBC Connector to retrieve data from Hive. You can also use a JDBC named query to submit a custom SQL query to Hive and retrieve the results using the JDBC Connector.
@@ -14,7 +14,7 @@ This topic describes how to configure the PXF JDBC Connector to access Hive. Whe
 
 ## JDBC Server Configuration {#jdbc-server-configuration}
 
-The PXF JDBC Connector is installed with the JAR files required to access Hive via JDBC, `hive-jdbc-<version>.jar` and `hive-service-<version>.jar`, and automatically registers these JARs.
+The PXF JDBC Connector is installed with the JAR files required to access Hive via JDBC, including `hive-jdbc-<version>.jar`, `hive-service-<version>.jar`, and `hive-service-rpc-<version>.jar`, and automatically registers these JARs.
 
 When you configure a PXF JDBC server for Hive access, you must specify the JDBC driver class name, database URL, and client credentials just as you would when configuring a client connection to an SQL database.
 

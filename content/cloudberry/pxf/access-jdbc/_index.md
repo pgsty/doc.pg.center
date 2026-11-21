@@ -3,7 +3,7 @@ title: "Accessing an SQL Database (JDBC)"
 linkTitle: "Accessing SQL Databases with PXF (JDBC)"
 description: "Accessing SQL databases with the PXF JDBC connector."
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-jdbc/jdbc_pxf.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-jdbc/jdbc_pxf.md"
 ---
 
 <!--
@@ -61,15 +61,16 @@ Any data type not listed above is not supported by the PXF JDBC connector.
 
 ### About Accessing Hive via JDBC {#about-accessing-hive-via-jdbc}
 
-PXF includes version 1.1.0 of the Hive JDBC driver. This version does **not** support the following data types when you use the PXF JDBC connector to operate on a Hive table:
+PXF includes version 2.3.10 of the Hive JDBC driver.
 
-| Data Type | Fixed in Hive JDBC Driver | Upstream Issue | Operations Not Supported |
-|-----------|---------------------------|----------------| ---------- |
-| NUMERIC   | 2.3.0                     | [HIVE-13614](https://issues.apache.org/jira/browse/HIVE-13614) | Write |
-| TIMESTAMP | 2.0.0                     | [HIVE-11748](https://issues.apache.org/jira/browse/HIVE-11748) | Write |
-| DATE      | 1.3.0, 2.0.0              | [HIVE-11024](https://issues.apache.org/jira/browse/HIVE-11024) | Write |
-| TIMESTAMPTZ | N/A              | [HIVE-576](https://issues.apache.org/jira/browse/HIVE-576) | Read, Write |
-| BYTEA     | N/A                       | N/A | Read, Write |
+This version does **not** support the following data types:
+
+| Data Type | Operations Not Supported |
+|-----------|--------------------------|
+| DATE | Write |
+| TIMESTAMP | Write |
+| TIMESTAMPTZ | Read, Write |
+| BYTEA | Read, Write |
 
 ## Accessing an External SQL Database {#accessing-an-external-sql-database}
 The PXF JDBC connector supports a single profile named `jdbc` for external tables and `jdbc_pxf_fdw` foreign data wrapper for FDW. You can both read data from and write data to an external SQL database table with this profile. You can also use the connector to run a static, named query in external SQL database and read the results.

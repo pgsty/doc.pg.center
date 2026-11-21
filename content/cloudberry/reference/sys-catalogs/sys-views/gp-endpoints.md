@@ -2,7 +2,7 @@
 title: "gp_endpoints"
 description: "The `gp_endpoints` view lists the endpoints created for all active parallel retrieve cursors declared by the current session user in the current database."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-endpoints.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-endpoints.md"
 ---
 
 When the Apache Cloudberry superuser accesses this view, it returns a list of all endpoints created for all parallel retrieve cursors declared by all users in the current database.

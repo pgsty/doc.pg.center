@@ -2,7 +2,7 @@
 title: "gp_stat_archiver"
 description: "The `gp_stat_archiver` view provides information about the WAL archiver process for each segment in the Apache Cloudberry cluster."
 weight: 110
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-stat-archiver.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-stat-archiver.md"
 ---
 
 It includes metrics such as the number of successfully archived WAL files, the name and time of the last archived WAL file, the number of failed archival attempts, and details of the last failure. This view is useful for monitoring and diagnosing WAL archiving across the cluster.

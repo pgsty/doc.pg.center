@@ -2,7 +2,7 @@
 title: "About Concurrency Control"
 description: "Apache Cloudberry uses the PostgreSQL Multiversion Concurrency Control (MVCC) model to manage concurrent transactions for heap tables."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/product-principles/about-mvcc.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/product-principles/about-mvcc.md"
 ---
 
 Concurrency control in a database management system allows concurrent queries to complete with correct results while ensuring the integrity of the database. Traditional databases use a two-phase locking protocol that prevents a transaction from modifying data that has been read by another concurrent transaction and prevents any concurrent transaction from reading or writing data that another transaction has updated. The locks required to coordinate transactions add contention to the database, reducing overall transaction throughput.

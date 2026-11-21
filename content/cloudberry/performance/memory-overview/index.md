@@ -2,7 +2,7 @@
 title: "Memory Overview"
 description: "Memory is a key resource for a Apache Cloudberry system and, when used efficiently, can ensure high performance and throughput."
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/memory-overview.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/memory-overview.md"
 ---
 
 This topic describes how segment host memory is allocated between segments and the options available to administrators to configure memory.

@@ -3,7 +3,7 @@ title: "Use Automatic Materialized Views for Query Optimization"
 linkTitle: "Use Auto Materialized Views for Query Optimization"
 description: "Apache Cloudberry supports automatically using materialized views to process some or all queries (called AQUMV) during the query planning phase."
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/use-auto-materialized-view-to-answer-queries.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/use-auto-materialized-view-to-answer-queries.md"
 ---
 
 This feature is suitable for queries on large tables and can greatly reduce query processing time. AQUMV uses incremental materialized views (IMVs) because IMVs usually keep the latest data when related tables have write operations.

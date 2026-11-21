@@ -2,7 +2,7 @@
 title: "Log Auditing"
 description: "This document describes Apache Cloudberry events that are logged and should be monitored to detect security threats."
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/security/log-auditing.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/security/log-auditing.md"
 ---
 
 Apache Cloudberry is capable of auditing a variety of events, including startup and shutdown of the system, segment database failures, SQL statements that result in an error, and all connection attempts and disconnections. Apache Cloudberry also logs SQL statements and information regarding SQL statements, and can be configured in a variety of ways to record audit information with more or less detail. The `log_error_verbosity` configuration parameter controls the amount of detail written in the server log for each message that is logged.  Similarly, the `log_min_error_statement` parameter allows administrators to configure the level of detail recorded specifically for SQL statements, and the `log_statement` parameter determines the kind of SQL statements that are audited. Apache Cloudberry records the username for all auditable events, when the event is initiated by a subject outside the Apache Cloudberry.

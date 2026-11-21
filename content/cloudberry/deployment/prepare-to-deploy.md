@@ -2,7 +2,7 @@
 title: "Configuring Your Systems"
 description: "Describes how to prepare your operating system environment for Apache Cloudberry software installation."
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/deployment/prepare-to-deploy.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/deployment/prepare-to-deploy.md"
 ---
 
 Before deploying Apache Cloudberry on physical or virtual machines, you need to do some preparations. Read this document and [Software and Hardware Configuration Requirements](/cloudberry/deployment/platform-requirements/) before you start to deploy Apache Cloudberry.

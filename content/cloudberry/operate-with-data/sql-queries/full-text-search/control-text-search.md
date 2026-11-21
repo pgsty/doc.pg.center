@@ -2,7 +2,7 @@
 title: "Control Text Search"
 description: "This document shows how to create search and query vectors, how to rank search results, and how to highlight search terms in the results of text search queries."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/control-text-search.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/control-text-search.md"
 ---
 
 To implement full text searching there must be a function to create a `tsvector` from a document and a `tsquery` from a user query. Also, you need to return results in a useful order, so you need a function that compares documents with respect to their relevance to the query. It's also important to be able to display the results nicely. Apache Cloudberry provides support for all of these functions.

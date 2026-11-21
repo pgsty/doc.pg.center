@@ -2,7 +2,7 @@
 title: "pg_stat_progress_cluster"
 description: "The `pg_stat_progress_cluster` view shows the progress of `CLUSTER` and `VACUUM FULL` operations."
 weight: 280
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-progress-cluster.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-progress-cluster.md"
 ---
 
 Each row represents a backend process currently executing one of these commands, providing details such as the current phase, number of heap blocks scanned and written, and indexes rebuilt. This view helps monitor and manage long-running table reorganization tasks.

@@ -2,7 +2,7 @@
 title: "Use ODBC"
 description: "Because Apache Cloudberry is compatible with Greenplum and PostgreSQL, ODBC access methods are the same as those for Greenplum/PostgreSQL."
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/developer/use-odbc-driver.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/developer/use-odbc-driver.md"
 ---
 
 This guide explains how to connect to Apache Cloudberry using ODBC on Linux or macOS and perform database operations.

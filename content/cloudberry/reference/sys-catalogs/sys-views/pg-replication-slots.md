@@ -2,7 +2,7 @@
 title: "pg_replication_slots"
 description: "The `pg_replication_slots` view provides a listing of all replication slots that currently exist on the database cluster, along with their current state."
 weight: 190
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-replication-slots.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-replication-slots.md"
 ---
 
 It includes information such as slot name, type (physical or logical), associated database, activity status, and WAL positions. This view is essential for monitoring replication slot usage and ensuring proper replication behavior.

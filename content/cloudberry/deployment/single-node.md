@@ -3,7 +3,7 @@ title: "Deploy Apache Cloudberry with a Single Computing Node"
 linkTitle: "(Optional) Deploy with a Single Computing Node"
 description: "Apache Cloudberry is not fully compatible with PostgreSQL, and some features and syntax are Apache Cloudberry-specific."
 weight: 100
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/deployment/single-node.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/deployment/single-node.md"
 ---
 
 If your business already relies on Apache Cloudberry and you want to use the Apache Cloudberry-specific syntax and features on a single node to avoid compatibility issues with PostgreSQL, you can consider deploying Apache Cloudberry free of segments.

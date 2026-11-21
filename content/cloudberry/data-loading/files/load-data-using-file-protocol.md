@@ -3,7 +3,7 @@ title: "Load Data into Apache Cloudberry Using the file:// Protocol"
 linkTitle: "Load Data Using the File Protocol"
 description: "The `file://` protocol is a Apache Cloudberry-specific protocol that allows you to load data from a local segment host server file into Apache Cloudberry."
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/load-data-using-file-protocol.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/load-data-using-file-protocol.md"
 ---
 
 The `file://` protocol is used in a URI that specifies the location of an operating system file. External tables that you create that specify the `file://` protocol are read-only tables.

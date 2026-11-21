@@ -2,7 +2,7 @@
 title: "About Accessing the AWS S3 Object Store"
 description: "About accessing the S3 object store with PXF."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-objectstores/access_s3.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-objectstores/access_s3.md"
 ---
 
 PXF is installed with a connector to the AWS S3 object store. PXF supports the following additional runtime features with this connector:

@@ -3,7 +3,7 @@ title: "The gp_toolkit Administrative Schema"
 linkTitle: "gp_toolkit"
 description: "Apache Cloudberry provides an administrative schema called `gp_toolkit` that you can use to query the system catalogs, log files, and operating environment for system status information."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/gp_toolkit.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/gp_toolkit.md"
 ---
 
 The `gp_toolkit` schema contains a number of views that you can access using SQL commands. The `gp_toolkit` schema is accessible to all database users, although some objects may require superuser permissions. For convenience, you may want to add the `gp_toolkit` schema to your schema search path. For example:

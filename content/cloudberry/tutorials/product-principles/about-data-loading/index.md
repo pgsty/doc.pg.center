@@ -2,7 +2,7 @@
 title: "About Parallel Data Loading"
 description: "This topic provides a short introduction to Apache Cloudberry data loading features."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/product-principles/about-data-loading.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/product-principles/about-data-loading.md"
 ---
 
 In a large scale, multi-terabyte data warehouse, large amounts of data must be loaded within a relatively small maintenance window. Cloudberry supports fast, parallel data loading with its external tables feature. Administrators can also load external tables in single row error isolation mode to filter bad rows into a separate error log while continuing to load properly formatted rows. Administrators can specify an error threshold for a load operation to control how many improperly formatted rows cause Cloudberry to cancel the load operation.

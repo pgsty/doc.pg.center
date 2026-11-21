@@ -2,7 +2,7 @@
 title: "Configuring Connectors to Azure and Google Cloud Storage Object Stores (Optional)"
 description: "Configuring PXF connectors to Azure and Google Cloud Storage."
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/objstore_cfg.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/objstore_cfg.md"
 ---
 
 You can use PXF to access Azure Data Lake Storage Gen2, Azure Blob Storage, and Google Cloud Storage object stores. This topic describes how to configure the PXF connectors to these external data sources.

@@ -2,7 +2,7 @@
 title: "Manage Resources"
 description: "Apache Cloudberry provides features to help you prioritize and allocate resources to queries according to business requirements and to prevent queries from starting when resources are unavailable."
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/manage-resources.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/manage-resources.md"
 ---
 
 You can use resource management features to limit the number of concurrent queries, the amount of memory used to run a query, and the relative amount of CPU devoted to processing a query. Apache Cloudberry provides two schemes to manage resources: [Resource Queues](/cloudberry/performance/manage-resources/manage-resources-using-resource-queues/) and [Resource Groups](/cloudberry/performance/manage-resources/manage-resources-using-resource-groups/).

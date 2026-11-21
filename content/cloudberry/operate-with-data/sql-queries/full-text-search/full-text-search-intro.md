@@ -2,7 +2,7 @@
 title: "About Full Text Search"
 description: "This document provides an overview of Apache Cloudberry full text search, basic text search expressions, configuring, and customizing text search."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/full-text-search-intro.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/full-text-search-intro.md"
 ---
 
 This section contains the following subtopics:

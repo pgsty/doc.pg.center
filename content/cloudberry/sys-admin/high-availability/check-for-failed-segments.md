@@ -2,7 +2,7 @@
 title: "Check for Failed Segments"
 description: "With mirroring enabled, you can have failed segment instances in the system without interruption of service or any indication that a failure has occurred."
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/high-availability/check-for-failed-segments.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/high-availability/check-for-failed-segments.md"
 ---
 
 You can verify the status of your system using the `gpstate` utility, by examing the contents of the `gp_segment_configuration` catalog table, or by checking log files.

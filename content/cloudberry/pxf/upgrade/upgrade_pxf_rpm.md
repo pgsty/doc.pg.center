@@ -2,10 +2,12 @@
 title: "Upgrading the PXF Package"
 description: "Upgrading PXF installed from an rpm or deb package."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/upgrade/upgrade_pxf_rpm.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/upgrade/upgrade_pxf_rpm.md"
 ---
 
 If you installed PXF from the `rpm` or `deb` package and have configured and are using PXF in your current Apache Cloudberry installation, you must perform some upgrade actions when you install a new version of PXF.
+
+Before upgrading, review the [backward-incompatible changes](/cloudberry/pxf/upgrade/upgrade_pxf/#backward-incompatible-changes).
 
 The PXF upgrade procedure has two parts. You perform one procedure before, and one procedure after, you install the new version:
 

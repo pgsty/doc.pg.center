@@ -3,7 +3,7 @@ title: "Query Performance in Apache Cloudberry"
 linkTitle: "Optimize Query Performance"
 description: "Apache Cloudberry improves query performance through dynamic partition elimination and adaptive memory allocation."
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/index.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/index.md"
 ---
 
 These mechanisms help reduce the amount of data scanned, speed up query execution, and enhance overall concurrency.

@@ -2,7 +2,7 @@
 title: "What's New in Apache Cloudberry"
 description: "Apache Cloudberry is built on the open-source lineage of Greenplum Database and is **highly backward-compatible** with Greenplum."
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/introduction/cbdb-vs-gp-features.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/introduction/cbdb-vs-gp-features.md"
 ---
 
 If you are coming from Greenplum, you will feel right at home — most SQL syntax, utilities, and operational workflows work the same way.

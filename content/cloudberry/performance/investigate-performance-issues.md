@@ -2,7 +2,7 @@
 title: "Investigate Performance Issues"
 description: "This document provides guidelines for identifying and troubleshooting performance problems in a Apache Cloudberry system."
 weight: 100
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/investigate-performance-issues.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/investigate-performance-issues.md"
 ---
 
 This document lists steps you can take to help identify the cause of a performance problem. If the problem affects a particular workload or query, you can focus on tuning that particular workload. If the performance problem is system-wide, then hardware problems, system failures, or resource contention may be the cause.

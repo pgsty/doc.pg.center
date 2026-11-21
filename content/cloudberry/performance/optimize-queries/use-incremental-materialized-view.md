@@ -3,7 +3,7 @@ title: "Incremental Materialized View in Apache Cloudberry"
 linkTitle: "Incremental Materialized View"
 description: "This document introduces the usage scenarios of the incremental materialized view in Apache Cloudberry, how to use it, the restrictions, and the things to note."
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/use-incremental-materialized-view.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/use-incremental-materialized-view.md"
 ---
 
 The incremental materialized view is a special form of materialized view. When data changes in a base table in Apache Cloudberry (such as insertion, update, and deletion), the incremental materialized view does not need to recalculate all the data in the entire view. Instead, it only updates the parts that have changed since the last refresh. This can save a lot of computing resources and time, and significantly improve performance, especially when dealing with large datasets.

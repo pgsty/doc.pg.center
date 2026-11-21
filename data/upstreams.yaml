@@ -442,6 +442,111 @@ percona-20261121:
     documentation/docs/release-notes/release-notes.md: c29e31f8ce154afe6bdf45711d507bb4af0c16c49375525c4131856e79d89cf2
     documentation/docs/release-notes/release-notes-v2.3.0.md: c8d3723ffdee6c06a9ef49033d380a084ae56cda6fbad29c26f9a5b4d42a8001
 
+cloudberry-20261121:
+  name: Apache Cloudberry (Incubating) 2.x documentation
+  repository: https://github.com/apache/cloudberry-site
+  documentation: https://cloudberry.apache.org/docs/
+  source_commit: e3a102d15d0e85928a0cb5aaec24e67e6b40be7c
+  source_path: versioned_docs/version-2.x
+  sidebar: versioned_sidebars/version-2.x-sidebars.json
+  stable_release: 2.2.0-incubating
+  release_repository: https://github.com/apache/cloudberry
+  release_ref: 2.2.0-incubating
+  release_commit: 13d3c58eaa0c07afab350dcafbbae7ef610aa862
+  release_postgresql_base: '14.10'
+  source_sha256:
+    LICENSE: c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08
+    NOTICE: d82bcfae47a76ead12dccfd3f8a70505ac7a05a0b0c1434ae13a67ae8a9ffe2e
+    versioned_sidebars/version-2.x-sidebars.json: e17402fc079f743f75f4b6ec21e7d3751fe5c8380426c02d64544db089bbcb6e
+    versioned_docs/version-2.x/config-params-guc-list.md: b0013a800e9290f667361fda20f068a6d2698d59315e3ef7ad8875670dc5fb7e
+    versioned_docs/version-2.x/introduction/cbdb-overview.md: 0c1bf116eab953781e42e20d9acec97d5a5ce0b839838ab046fc972d49de2da4
+    versioned_docs/version-2.x/introduction/cloudberry-history.md: fdce41c4c6de03ba9ebef5d6c18d9f6552155f3091179b0c275971ffd6b81bb7
+    versioned_docs/version-2.x/modules/postgres-fdw.md: 6c63e6c1d85b94027993cab953c95069a3f4fe0e995e78a40af83722c6f6ac3c
+    versioned_docs/version-2.x/modules/tsm-system-time.md: 92a9d577af5c3167481a0671a391f3692c4f6422305ef0937af91e61c54cd06d
+    versioned_docs/version-2.x/modules/citext.md: 8cf9de1464ba7a60a04f979fb608e10ee90e668dcae753ab02ce97e12dd9a4ba
+    versioned_docs/version-2.x/modules/orafce.md: 315bdf13406117adc8ea3c471ecd2732e7962ae26d3a12c501c89a5e2cea2bf0
+    versioned_docs/version-2.x/modules/btree-gin.md: 24a9425252e28efa78f37c2bec9661b1850f979985146d1a8769e66ade4aea98
+    versioned_docs/version-2.x/modules/gp-exttable-fdw.md: 5f2218d1fa06eab41ffbfc28d16f04501244d5acbb6410d18ed069a2ad26df1a
+    versioned_docs/version-2.x/modules/uuid-ossp.md: 64dfd8806a87a6674d09f4924c093c4c9d0247fa71db0a55917cf3532cf3af66
+    versioned_docs/version-2.x/modules/auto-explain.md: 5a33ec400e787e84494793cfeba4998c233fe32937ffe7acf89262edc71d4339
+    versioned_docs/version-2.x/modules/gp-sparse-vector.md: e806aaa9fca64a5f0b5e6076142943dc061f775ed438489a121b7300607fd448
+    versioned_docs/version-2.x/modules/isn.md: 67ccbd6b56465babb32501a43b8334532bf2209dbb8bb17944163f3e10c98d6e
+    versioned_docs/version-2.x/modules/hstore.md: c9dffeb53ea8d3ca0a08109bdb9eafd36da90b1f5157af71cdc4f36158d08db0
+    versioned_docs/version-2.x/modules/yezzey.md: 216604a2da07ec6f81b3a07d18ed774c7eadf3a1f14b133a89cdcd5e1f6ad846
+    versioned_docs/version-2.x/modules/gp-legacy-string-agg.md: ab01b962bff78219e37335450d6611e70faa5edc7cabe57f277628f1ba4cc46b
+    versioned_docs/version-2.x/modules/gp-stats-collector.md: ae10225ad1d4f10defb35dc8310b517e681a009e9f544182ed00cb2c22c8d41d
+    versioned_docs/version-2.x/modules/pgcrypto.md: 23669d64773c0006d0adac0ee797474113797d883c4c6bfc93b3966a76119ff7
+    versioned_docs/version-2.x/modules/pg-trgm.md: 70a30b6f99cb42d995f6cd86d0dadbe91de493a837a77b5ba5ac6016c2bfb676
+    versioned_docs/version-2.x/modules/reject-partition-fullscan.md: 1977cfe5d7469bb4b7ae5064c2c95a5ba1f7c3c3875261f1b47592d0c28d3c9b
+    versioned_docs/version-2.x/modules/sslinfo.md: 700c6f07a1370522a0289dc0c6f31fdab86458347c67dc9e4f5bc1d49eb1bf73
+    versioned_docs/version-2.x/modules/fuzzystrmatch.md: 85557b09daddd35d52f47fb51d8066b10ef0c614e021fa4213eb95263dc04757
+    versioned_docs/version-2.x/modules/index.md: 3ff2276211136cb353c5e33e8375751db585521f3deafd1c8f1e290115e09af1
+    versioned_docs/version-2.x/modules/tablefunc.md: bd358fb950946df6d4befc47cd7c2808935ff233e7522a6c45f3200141445ae1
+    versioned_docs/version-2.x/modules/pg-buffercache.md: 867a48bbb0a334bd8ad0818ff33e96d52b025ef5fbc3d80e70893ad4c0fd8aad
+    versioned_docs/version-2.x/modules/gp-relsizes-stats.md: 1fa68855b36b0d7a1408a84695f73d75f93798af93fbbd173954f9954872669f
+    versioned_docs/version-2.x/modules/diskquota.md: 1788974303e14f0d2b1eefa3a0f12d50d98eee297fb118327574e060ad804482
+    versioned_docs/version-2.x/modules/tsm-system-rows.md: 422187307cd7ac4a4facc3a561edba73b29cc3e7001333b8aa7ea7fe29b1efb8
+    versioned_docs/version-2.x/modules/gp-distribution-policy.md: a8bb3fb1151bfca152d4c5d3a17089482e949177fd052175c7a8941871bf42c4
+    versioned_docs/version-2.x/modules/pageinspect.md: 495bb146595396719317a2c58f824802fcdaa12ad02997d89626d9310829452e
+    versioned_docs/version-2.x/modules/dblink.md: b24a043d4d34ec6babc9cf2e22b0afee8d05b92a668ced966ec63a24b1c2f950
+    versioned_docs/version-2.x/modules/ltree.md: f3ddd9bc394e2b1f97106e8c5d44cdc458b9c85fb8bf711145526dc74500e36c
+    versioned_docs/version-2.x/modules/gp-internal-tools.md: f2db775b5fe57ee7f8f8fdf12e34cf7d14077d37827184c39aa2c3ff80f0d6a5
+    versioned_docs/version-2.x/sys-admin/migration-and-upgrade/upgrade-within-2x.md: 9305eb52912a26080d82dba5829aa75d7da98bb6fb4090d70140118ce14b9ea6
+  copyright: Copyright 2024-2025 The Apache Software Foundation
+  license: Apache-2.0
+  notice: /attribution/#cloudberry
+  ref: 2.x docs e3a102d; release 2.2.0-incubating
+  modified: true
+  source_ref: main
+  snapshot_date: '2026-11-21'
+  language: en
+  translation_baseline: cloudberry
+
+pxf-20261121:
+  name: Apache Cloudberry PXF documentation
+  repository: https://github.com/apache/cloudberry-pxf
+  documentation: https://cloudberry.apache.org/pxf/
+  source_commit: 6683faa38ce4e2d146a77197991518aacb4b24e8
+  source_path: docs
+  site_repository: https://github.com/apache/cloudberry-site
+  site_commit: e3a102d15d0e85928a0cb5aaec24e67e6b40be7c
+  site_submodule: pxf
+  stable_release: 2.2.0-incubating
+  release_repository: https://github.com/apache/cloudberry-pxf
+  release_ref: 2.2.0-incubating
+  release_commit: 01c2e00b64166740cabfcae1ceee42a72e520594
+  release_tag_object: 7014385aacd01ff31f6443dc49a121aa44754af7
+  release_docs_git_tree: ea6b9185bfec0e1106651259978926545332ecb0
+  source_sha256:
+    LICENSE: bd6755e8591865e1b89643041369d2aef5d12643891a14833dab57a5c142b280
+    NOTICE: 5833ac18ee82a4588a963070be82399b3785c0b70847c44c84d388828b557411
+    docs/index.md: 35fd45484e4b22f38233df7a4ed88c03ad3970b2e05c7eaf3f7db0b2c743da81
+    docs/upgrade/upgrade_pxf_rpm.md: b4e23a87e93ac8002288ccf81a91a4e01c4bf2b8d70bbde8cfe0ad5106bc2164
+    docs/upgrade/upgrade_pxf.md: 81264c3490c17e51b7869c60a86f09fa5c32c6ddafaa028b9b5667b0820aefd7
+    docs/intro/intro_pxf.md: 590169ce2d45bd38ac17f838f0d828d63934ea6e93e481cebc0c8754f361296a
+    docs/access-hadoop/hdfs_avro.md: 34e0e961c6768c7c97aa4baf3d2d78be603605c15f42ba3b5140106c95f51f44
+    docs/access-hadoop/hbase_pxf.md: 02f8d5bb1407eb861273e6234027b8f036f2d32cde04762a041d75675f68b751
+    docs/troubleshooting/troubleshooting_pxf.md: 9392364ea7c3b7c4674e5db4c6434a7ab1991d7a08334cef0d4d3a83b6f99ef3
+    docs/access-jdbc/jdbc_pxf.md: c0cf6b4d918f548ec0b4775887ed8243c7179550ec6a10c377be1a6c3fa6200d
+    docs/access-jdbc/jdbc_pxf_clickhouse.md: dbe37b88ee1f89dfe0d4aae5a0cfedae392cbaab781abb981c8ae4435d74bb89
+    docs/access-objectstores/read_s3_s3select.md: b51a34d3aa3d245e83779b04907086b4f3e2cfc8eb40a3a9a1d015dbfb820408
+    docs/access-objectstores/objstore_avro.md: b66501c5011303b9ad41955d2070e3f73e3e74a9dfea67d5392d25eee5dbea62
+    docs/administering/configuring/cfg_server.md: 12c09e35b1d747ca89031d101f04a8e3254e3de163c5f082d3932bb6113be45a
+    docs/administering/configuring/instcfg_pxf.md: a5bb9ed28680d367ed43a99d97e7596e33fea431a409bc220beaf8b364f28116
+    docs/administering/configuring/install_java.md: d24f556295d41553eb7532538ea43383ccc8d5b465960c83bd6ad20ea32d185e
+    docs/administering/configuring/s3_objstore_cfg.md: c6c29b3817af4813945a9d82873c038ea43939bac16bf67568cba2431717e793
+    docs/administering/configuring/jdbc-connector/jdbc_cfg.md: 832d76b3a7ece398a017871ac778730d76aeed2d22846091817966d75d76d425
+    docs/administering/configuring/jdbc-connector/hive_jdbc_cfg.md: 07652dcfd6773c4f78d3d87771c0c3afbf804fc86a493d4ecc07694fa152a0d8
+  copyright: Copyright 2024-2026 The Apache Software Foundation
+  license: Apache-2.0
+  notice: /attribution/#pxf
+  ref: development docs 6683faa; release 2.2.0-incubating
+  modified: true
+  source_ref: main
+  snapshot_date: '2026-11-21'
+  language: en
+  translation_baseline: pxf
+
 haproxy-20261121:
   name: HAProxy 3.4 documentation
   repository: https://git.haproxy.org/?p=haproxy-3.4.git

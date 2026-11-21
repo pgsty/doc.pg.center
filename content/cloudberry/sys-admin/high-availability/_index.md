@@ -3,7 +3,7 @@ title: "High Availability Overview"
 linkTitle: "High Availability"
 description: "An Apache Cloudberry system can be made highly available by providing a fault-tolerant hardware platform, by enabling Apache Cloudberry high-availability features, and by performing regular monitoring and maintenance procedures to ensure the health of all system components."
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/high-availability/high-availability-overview.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/high-availability/high-availability-overview.md"
 ---
 
 Hardware components will eventually fail, whether due to normal wear or an unexpected circumstance. Loss of power can lead to temporarily unavailable components. A system can be made highly available by providing redundant standbys for components that can fail so that services can continue uninterrupted when a failure does occur. In some cases, the cost of redundancy is higher than users' tolerance for interruption in service. When this is the case, the goal is to ensure that full service is able to be restored, and can be restored within an expected timeframe.

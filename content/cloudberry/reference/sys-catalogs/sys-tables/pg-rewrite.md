@@ -2,7 +2,7 @@
 title: "pg_rewrite"
 description: "The `pg_rewrite` system catalog table stores rewrite rules for tables and views."
 weight: 320
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-rewrite.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-rewrite.md"
 ---
 
 `pg_class.relhasrules` must be true if a table has any rules in this catalog.

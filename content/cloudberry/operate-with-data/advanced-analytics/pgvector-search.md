@@ -2,7 +2,7 @@
 title: "Use pgvector for Vector Similarity Search"
 description: "pgvector is an open-source plugin for vector similarity search."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/advanced-analytics/pgvector-search.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/advanced-analytics/pgvector-search.md"
 ---
 
 It supports both exact and approximate nearest neighbor searches, as well as L2 distance, inner product, and cosine distance. For more details, see [pgvector/pgvector: Open-source vector similarity search for Postgres](https://github.com/pgvector/pgvector).

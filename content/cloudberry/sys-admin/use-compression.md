@@ -2,7 +2,7 @@
 title: "Use Compression"
 description: "You can configure Apache Cloudberry to use data compression with some database features and with some utilities.Compression reduces disk usage and improves I/O across the system, however, it adds some performance overhead when compressing and decompressing data."
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/use-compression.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/use-compression.md"
 ---
 
 You can configure support for data compression with these features and utilities. See the specific feature or utility for information about support for compression.

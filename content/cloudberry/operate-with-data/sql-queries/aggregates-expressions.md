@@ -2,7 +2,7 @@
 title: "Queries with Aggregate Expressions"
 description: "An aggregate expression applies an aggregate function across the rows that a query selects."
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/aggregates-expressions.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/aggregates-expressions.md"
 ---
 
 An aggregate function performs a calculation on a set of values and returns a single value, such as the sum or average of the set of values. The syntax of an aggregate expression is one of the following:

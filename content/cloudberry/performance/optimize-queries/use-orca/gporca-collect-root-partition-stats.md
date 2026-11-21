@@ -2,7 +2,7 @@
 title: "Collect Root Partition Statistics"
 description: "For a partitioned table, GPORCA uses statistics of the table root partition to generate query plans."
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/use-orca/gporca-collect-root-partition-stats.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/use-orca/gporca-collect-root-partition-stats.md"
 ---
 
 These statistics are used for determining the join order, for splitting and joining aggregate nodes, and for costing the query steps. In contrast, the Postgres-based planner uses the statistics of each leaf partition.

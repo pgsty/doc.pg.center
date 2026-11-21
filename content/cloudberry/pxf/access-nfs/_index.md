@@ -3,7 +3,7 @@ title: "Accessing Files on a Network File System"
 linkTitle: "Accessing Files on a Network File System with PXF"
 description: "Accessing files on a network file system with PXF."
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-nfs/nfs_pxf.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-nfs/nfs_pxf.md"
 ---
 
 You can use PXF to read data that resides on a network file system mounted on your Apache Cloudberry hosts. PXF supports reading and writing the following file types from a network file system:

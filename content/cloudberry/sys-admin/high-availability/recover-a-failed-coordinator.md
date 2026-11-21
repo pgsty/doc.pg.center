@@ -2,7 +2,7 @@
 title: "Recover a Failed Coordinator"
 description: "If the primary coordinator fails, the Apache Cloudberry system is not accessible and WAL replication stops."
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/high-availability/recover-a-failed-coordinator.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/high-availability/recover-a-failed-coordinator.md"
 ---
 
 Use [`gpactivatestandby`](/cloudberry/reference/sys-utilities/gpactivatestandby/) to activate the standby coordinator. Upon activation of the standby coordinator, Apache Cloudberry reconstructs the coordinator host state at the time of the last successfully committed transaction.

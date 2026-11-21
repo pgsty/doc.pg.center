@@ -2,7 +2,7 @@
 title: "LibreDB Studio"
 description: "Connect LibreDB Studio to Apache Cloudberry through its PostgreSQL driver to browse schemas and run queries."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/ecosystem/sql-clients/libredb-studio.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/ecosystem/sql-clients/libredb-studio.md"
 ---
 
 [LibreDB Studio](https://libredb.org) is an open source, web-based SQL IDE with a query editor, an object browser, and a monitoring dashboard. It supports seventeen database engines, including PostgreSQL, MySQL, Oracle, and ClickHouse, from a single workspace. It connects to Apache Cloudberry over the PostgreSQL wire protocol, the same way it connects to PostgreSQL itself.

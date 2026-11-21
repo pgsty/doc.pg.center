@@ -2,7 +2,7 @@
 title: "Write a Foreign Data Wrapper"
 description: "This guide outlines how to write a new foreign data wrapper (FDW) for Apache Cloudberry."
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/developer/write-a-foreign-data-wrapper.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/developer/write-a-foreign-data-wrapper.md"
 ---
 
 A foreign data wrapper is a library that consists of a set of functions that the Apache Cloudberry server calls to access external data sources. The FDW is responsible for fetching data from remote data stores and returning it to the Apache Cloudberry executor.

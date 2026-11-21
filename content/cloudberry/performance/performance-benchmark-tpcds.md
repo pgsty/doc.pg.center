@@ -2,7 +2,7 @@
 title: "TPC-DS: Decision Support Benchmark for Apache Cloudberry"
 description: "Run the TPC-DS benchmark automatically on an existing Apache Cloudberry cluster."
 weight: 120
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/benchmark/performance-benchmark-tpcds.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/benchmark/performance-benchmark-tpcds.md"
 ---
 
 This tool is based on the benchmark tool [Pivotal TPC-DS](https://github.com/pivotal/TPC-DS). This repo contains automation of running the DS benchmark on an existing Apache Cloudberry cluster.

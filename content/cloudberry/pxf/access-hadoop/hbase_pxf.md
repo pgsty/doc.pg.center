@@ -2,7 +2,7 @@
 title: "Reading HBase Table Data"
 description: "Reading HBase table data with PXF."
 weight: 100
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-hadoop/hbase_pxf.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-hadoop/hbase_pxf.md"
 ---
 
 Apache HBase is a distributed, versioned, non-relational database on Hadoop.
@@ -15,7 +15,7 @@ This section describes how to use the PXF HBase connector.
 
 Before working with HBase table data, ensure that you have:
 
-- Copied `<PXF_INSTALL_DIR>/share/pxf-hbase-*.jar` to each node in your HBase cluster, and that the location of this PXF JAR file is in the `$HBASE_CLASSPATH`. This configuration is required for the PXF HBase connector to support filter pushdown.
+- Copied `<PXF_INSTALL_DIR>/share/pxf-hbase-lib-*.jar` to each node in your HBase cluster, and added the JAR to `$HBASE_CLASSPATH`. This JAR contains the filter comparators used by HBase RegionServers and is compatible with Java 8. Remove any older full `pxf-hbase` JAR from the RegionServer classpath.
 - Met the PXF Hadoop [Prerequisites](/cloudberry/pxf/access-hadoop/#prerequisites).
 
 ## HBase Primer {#hbase-primer}

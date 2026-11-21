@@ -2,7 +2,7 @@
 title: "Routine System Maintenance Tasks"
 description: "To keep a Apache Cloudberry system running efficiently, the database must be regularly cleared of expired data and the table statistics must be updated so that the query optimizer has accurate information."
 weight: 100
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/routine-maintain-tasks.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/routine-maintain-tasks.md"
 ---
 
 Apache Cloudberry requires that certain tasks be performed regularly to achieve optimal performance. The tasks discussed here are required, but database administrators can automate them using standard UNIX tools such as `cron` scripts. An administrator sets up the appropriate scripts and checks that they ran successfully. See [Recommended Monitoring and Maintenance Tasks](/cloudberry/sys-admin/recommended-maintenance-monitoring-tasks/) for additional suggested maintenance activities you can implement to keep your Cloudberry system running optimally.

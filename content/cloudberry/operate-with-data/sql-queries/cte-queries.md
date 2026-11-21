@@ -3,7 +3,7 @@ title: "WITH Queries (Common Table Expressions)"
 linkTitle: "Common Table Expressions"
 description: "The `WITH` clause provides a way to write auxiliary statements for use in a larger query."
 weight: 110
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/cte-queries.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/cte-queries.md"
 ---
 
 These statements, which are often referred to as Common Table Expressions or CTEs, can be thought of as defining temporary tables that exist just for one query.

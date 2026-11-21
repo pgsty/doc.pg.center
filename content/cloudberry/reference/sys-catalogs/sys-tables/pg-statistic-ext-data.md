@@ -2,7 +2,7 @@
 title: "pg_statistic_ext_data"
 description: "Inspect the catalog fields that store data for extended planner statistics objects in pg_statistic_ext_data."
 weight: 400
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-statistic-ext-data.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-statistic-ext-data.md"
 ---
 
 The `pg_statistic_ext_data` system catalog table holds data for extended planner statistics defined in [pg_statistic_ext](/cloudberry/reference/sys-catalogs/sys-tables/pg-statistic-ext/). Each row in this catalog corresponds to a *statistics object* created with [`CREATE STATISTICS`](/cloudberry/reference/sql-stmts/create-statistics/).

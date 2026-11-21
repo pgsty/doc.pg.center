@@ -2,7 +2,7 @@
 title: "Example Ansible Playbook"
 description: "A sample Ansible playbook to install an Apache Cloudberry software release onto the hosts that will comprise an Apache Cloudberry system."
 weight: 110
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/deployment/ansible-example.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/deployment/ansible-example.md"
 ---
 
 This Ansible playbook shows how tasks described in [Installing the Apache Cloudberry Software](/cloudberry/deployment/install_cloudberry/) might be automated using [Ansible](https://docs.ansible.com).

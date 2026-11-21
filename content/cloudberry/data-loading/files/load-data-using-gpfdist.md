@@ -3,7 +3,7 @@ title: "Load Data into Apache Cloudberry Using gpfdist"
 linkTitle: "Load Data Using gpfdist"
 description: "To load data from local host files or files accessible via internal network, you can use the `gpfdist` protocol in the `CREATE EXTERNAL TABLE` statement."
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/load-data-using-gpfdist.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/load-data-using-gpfdist.md"
 ---
 
 gpfdist is a file server utility that runs on a host other than the Apache Cloudberry coordinator or standby coordinator. `gpfdist` serves files from a directory on the host to Apache Cloudberry segments.

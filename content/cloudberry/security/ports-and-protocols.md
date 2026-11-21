@@ -3,7 +3,7 @@ title: "Apache Cloudberry Ports and Protocols"
 linkTitle: "Ports and Protocols"
 description: "Lists network ports and protocols used within the Cloudberry cluster."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/security/ports-and-protocols.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/security/ports-and-protocols.md"
 ---
 
 Apache Cloudberry clients connect with TCP to the Cloudberry coordinator instance at the client connection port, `5432` by default. The listen port can be reconfigured in the postgresql.conf configuration file. Client connections use the PostgreSQL libpq API. The `psql` command-line interface, several Cloudberry utilities, and language-specific programming APIs all either use the libpq library directly or implement the `libpq` protocol internally.

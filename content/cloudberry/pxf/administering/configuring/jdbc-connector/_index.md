@@ -2,7 +2,7 @@
 title: "Configuring the JDBC Connector (Optional)"
 description: "Configuring the PXF JDBC connector."
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/jdbc-connector/jdbc_cfg.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/jdbc-connector/jdbc_cfg.md"
 ---
 
 You can use PXF to access an external SQL database including MySQL, ORACLE, Microsoft SQL Server, DB2, PostgreSQL, Hive, and Apache Ignite. This topic describes how to configure the PXF JDBC Connector to access these external data sources.
@@ -20,7 +20,7 @@ You can supply the JDBC driver class name, database URL, and client credentials 
 
 ## JDBC Driver JAR Registration {#jdbc-driver-jar-registration}
 
-PXF is bundled with the `postgresql-42.7.2.jar` JAR file. If you require a different JDBC driver, ensure that you install the JDBC driver JAR file for the external SQL database in the `$PXF_BASE/lib` directory on each Apache Cloudberry host. Be sure to install JDBC driver JAR files that are compatible with your JRE version. See [Registering PXF Library Dependencies](/cloudberry/pxf/administering/reg_jar_depend/) for additional information.
+PXF is bundled with the `postgresql-42.7.8.jar` JAR file. If you require a different JDBC driver, ensure that you install the JDBC driver JAR file for the external SQL database in the `$PXF_BASE/lib` directory on each Apache Cloudberry host. Be sure to install JDBC driver JAR files that are compatible with your JRE version. See [Registering PXF Library Dependencies](/cloudberry/pxf/administering/reg_jar_depend/) for additional information.
 
 ## JDBC Server Configuration {#jdbc-server-configuration}
 

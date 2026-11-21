@@ -2,7 +2,7 @@
 title: "pg_resourcetype"
 description: "The `pg_resourcetype` system catalog table contains information about the extended attributes that can be assigned to Apache Cloudberry resource queues."
 weight: 290
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-resourcetype.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-resourcetype.md"
 ---
 
 Each row details an attribute and inherent qualities such as its default setting, whether it is required, and the value to deactivate it (when allowed).

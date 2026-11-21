@@ -2,7 +2,7 @@
 title: "Load Data from Web Services"
 description: "In Apache Cloudberry, to load data from web services or from any source accessible by command lines, you can create external web tables."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/load-data-from-web-services.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/load-data-from-web-services.md"
 ---
 
 The supported data formats are `TEXT` and `CSV`.

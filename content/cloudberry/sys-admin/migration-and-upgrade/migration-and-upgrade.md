@@ -2,7 +2,7 @@
 title: "Migration and Upgrade"
 description: "Use cbcopy to migrate Greenplum databases or upgrade Apache Cloudberry databases from 1.x to 2.x."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/migration-and-upgrade/migration-and-upgrade.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/migration-and-upgrade/migration-and-upgrade.md"
 ---
 
 This guide provides detailed instructions for two scenarios:

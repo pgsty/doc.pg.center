@@ -3,7 +3,7 @@ title: "JSON Functions and Operators in Apache Cloudberry"
 linkTitle: "JSON Functions and Operators"
 description: "Create and process JSON data with Apache Cloudberry functions, operators, and the SQL/JSON path language."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/functions/json-functions-and-operators.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/functions/json-functions-and-operators.md"
 ---
 
 This document describes:

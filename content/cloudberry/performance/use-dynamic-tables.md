@@ -3,7 +3,7 @@ title: "Use Dynamic Tables to Speed Up Queries and Auto-Refresh Data"
 linkTitle: "Use Dynamic Tables"
 description: "Dynamic tables are database objects similar to materialized views that refresh data automatically and speed up queries."
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/use-dynamic-tables.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/use-dynamic-tables.md"
 ---
 
 Apache Cloudberry introduces dynamic tables to make query processing faster and data updates automatic.

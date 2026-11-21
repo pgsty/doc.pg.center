@@ -2,7 +2,7 @@
 title: "WHERE Clauses"
 description: "Filter query rows with WHERE search conditions, including predicates, joins, and correlated subqueries."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/where-clauses.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/where-clauses.md"
 ---
 
 The syntax of the `WHERE` clause is:

@@ -2,7 +2,7 @@
 title: "Enable Coordinator Mirroring for Apache Cloudberry"
 description: "Apache Cloudberry provides a series of high-availability features to make sure your database system can tolerate unexpected incidents such as a hardware platform failure and can be quickly recovered from such incidents."
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/high-availability/enable-coordinator-mirroring.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/high-availability/enable-coordinator-mirroring.md"
 ---
 
 This topic describes how to configure coordinator mirroring to ensure a smooth coordinator node failover.

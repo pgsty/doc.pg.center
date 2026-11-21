@@ -2,7 +2,7 @@
 title: "Reading and Writing HDFS ORC Data"
 description: "Reading and writing ORC data in HDFS via PXF."
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-hadoop/hdfs_orc.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-hadoop/hdfs_orc.md"
 ---
 
 Use the PXF HDFS connector `hdfs:orc` profile to read and write ORC-formatted data. This section describes how to read and write HDFS files that are stored in ORC format, including how to create, query, and insert into external tables that references files in the HDFS data store.

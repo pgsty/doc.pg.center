@@ -2,7 +2,7 @@
 title: "pg_depend"
 description: "The `pg_depend` system catalog table records the dependency relationships between database objects."
 weight: 180
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-depend.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-depend.md"
 ---
 
 This information allows `DROP` commands to find which other objects must be dropped by `DROP CASCADE` or prevent dropping in the `DROP RESTRICT` case. See also [pg_shdepend](/cloudberry/reference/sys-catalogs/sys-tables/pg-shdepend/), which performs a similar function for dependencies involving objects that are shared across a Cloudberry system.

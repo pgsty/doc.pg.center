@@ -2,7 +2,7 @@
 title: "Use PL/R"
 description: "PL/R is a procedural language that allows you to write Apache Cloudberry functions using the R programming language."
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/developer/functions-and-procedures/use-pl-r.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/developer/functions-and-procedures/use-pl-r.md"
 ---
 
 With the PL/R extension, you can execute R commands, use R modules and functions, and perform analytics directly within the database.

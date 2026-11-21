@@ -2,7 +2,7 @@
 title: "Use RuntimeFilter to Optimize Join Queries"
 description: "When performing join queries on large tables, the SQL optimizer of Apache Cloudberry often uses the HashJoin operator."
 weight: 110
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/use-runtimefilter-to-optimize-queries.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/use-runtimefilter-to-optimize-queries.md"
 ---
 
 HashJoin builds a hash table based on the join key to match the join key, which might cause a memory access bottleneck and disk bottleneck. RuntimeFilter is an optimization technique that generates filters in real-time during HashJoin operations, which can pre-filter data before executing HashJoin to speed up HashJoin operations. In some scenarios, the RuntimeFilter optimization can double execution efficiency.

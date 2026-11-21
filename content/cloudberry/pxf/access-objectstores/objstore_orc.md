@@ -2,7 +2,7 @@
 title: "Reading and Writing ORC Data in an Object Store"
 description: "Reading and writing ORC data in object stores via PXF."
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-objectstores/objstore_orc.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-objectstores/objstore_orc.md"
 ---
 
 The PXF object store connectors support reading and writing ORC-formatted data. This section describes how to use PXF to access ORC data in an object store, including how to create and query an external table that references a file in the store.

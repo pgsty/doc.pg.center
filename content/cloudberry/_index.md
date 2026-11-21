@@ -12,11 +12,11 @@ section_index: cards
 section_index_columns: 3
 module: [CLOUDBERRY]
 categories: [Concept]
-upstream_source: cloudberry
+upstream_source: cloudberry-20261121
 search_keywords: [Greenplum, MPP, CBDB, "2.2.0", gpdb]
-upstream_link: "https://github.com/apache/cloudberry-site/tree/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x"
+upstream_link: "https://github.com/apache/cloudberry-site/tree/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x"
 cascade:
-  upstream_source: cloudberry
+  upstream_source: cloudberry-20261121
   type: docs
   module: [CLOUDBERRY]
 ---
@@ -37,3 +37,5 @@ SQL syntax, utilities, configuration parameters, and system catalogs are under
 The upstream site publishes two related manuals separately:
 [Platform Extension Framework (PXF)](/cloudberry/pxf/) and
 [Apache Cloudberry Core Internals](/cloudberry/core-internals/).
+
+The English snapshot checked on November 21, 2026 adds the [extension module reference](/cloudberry/reference/modules/) and [upgrades within 2.x](/cloudberry/sys-admin/migration-and-upgrade/upgrade-within-2x/). Chinese synchronization of these additions and the changed PXF guides is pending.

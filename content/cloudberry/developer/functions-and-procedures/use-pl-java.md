@@ -2,7 +2,7 @@
 title: "Use PL/Java"
 description: "PL/Java is an embedded trusted procedural language that allows you to write PostgreSQL functions and triggers using the Java programming language."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/developer/functions-and-procedures/use-pl-java.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/developer/functions-and-procedures/use-pl-java.md"
 ---
 
 With PL/Java, you can:

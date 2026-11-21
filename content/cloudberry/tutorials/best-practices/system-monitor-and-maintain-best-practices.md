@@ -2,7 +2,7 @@
 title: "System Monitoring and Maintenance"
 description: "Best practices for regular maintenance that will ensure Apache Cloudberry high availability and optimal performance."
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/best-practices/system-monitor-and-maintain-best-practices.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/best-practices/system-monitor-and-maintain-best-practices.md"
 ---
 
 - [Update Statistics with ANALYZE](/cloudberry/performance/update-stats-using-analyze/)

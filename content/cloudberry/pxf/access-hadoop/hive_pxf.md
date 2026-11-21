@@ -2,7 +2,7 @@
 title: "Reading Hive Table Data"
 description: "Reading Hive table data with PXF."
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-hadoop/hive_pxf.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-hadoop/hive_pxf.md"
 ---
 
 <!--

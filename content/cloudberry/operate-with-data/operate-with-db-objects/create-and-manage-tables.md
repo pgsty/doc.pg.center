@@ -3,7 +3,7 @@ title: "Create and Manage Tables in Apache Cloudberry"
 linkTitle: "Create and Manage Tables"
 description: "Apache Cloudberry tables are similar to tables in any relational database, except that table rows are distributed across the different segments in the system."
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-tables.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-tables.md"
 ---
 
 When you create a table, you specify the table's distribution policy.

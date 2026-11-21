@@ -2,7 +2,7 @@
 title: "Use PL/pgSQL"
 description: "PL/pgSQL is a loadable procedural language that is installed and registered by default with Apache Cloudberry."
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/developer/functions-and-procedures/use-pl-pgsql.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/developer/functions-and-procedures/use-pl-pgsql.md"
 ---
 
 It adds the ability to perform complex computations and usage of control structures to standard SQL.

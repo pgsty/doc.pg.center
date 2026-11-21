@@ -2,7 +2,7 @@
 title: "Configure Row-Level Security Policy"
 description: "Row-level security (RLS) policy allows the table owner to define access policies that control users' access to specific rows of the table."
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/security/configure-row-level-security-policy.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/security/configure-row-level-security-policy.md"
 ---
 
 When a user tries to query or update a table, the RLS policy will be applied first before any user command is executed to truncate the rows in the table.

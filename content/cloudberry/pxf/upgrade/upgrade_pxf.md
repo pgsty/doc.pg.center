@@ -2,7 +2,7 @@
 title: "Upgrading from an Earlier PXF Release"
 description: "Upgrading PXF between releases."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/upgrade/upgrade_pxf.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/upgrade/upgrade_pxf.md"
 ---
 
 If you have installed a PXF `rpm` or `deb` package and have configured and are using PXF in your current Apache Cloudberry installation, you must perform some upgrade actions when you install a new version of PXF.
@@ -45,6 +45,12 @@ Perform this procedure before you upgrade to a new version of PXF:
 
 ## Step 2: Install the New PXF {#step-2-install-the-new-pxf}
 
+PXF requires **Java 17 or 21**. Before installing the new PXF version,
+install one of these Java versions on every Apache Cloudberry host and set
+`JAVA_HOME` in `$PXF_BASE/conf/pxf-env.sh` to its installation directory.
+Verify the configured executable with `"$JAVA_HOME/bin/java" -version`. See
+[Installing Java for PXF](/cloudberry/pxf/administering/configuring/install_java/).
+
 Install the new version of PXF, and identify and note the new PXF version number.
 
 
@@ -72,6 +78,8 @@ After you install the new version of PXF, perform the following procedure:
 
 1. Review the [CHANGELOG](https://cloudberry.apache.org/releases) for the release you are upgrading to. If a release introduces new configuration properties or changes default behavior, update the affected `pxf-site.xml`, `pxf-application.properties`, or related files in `$PXF_BASE` accordingly.
 
+1. If you are upgrading from a PXF version that uses Hadoop 2, check `dfs.datanode.socket.write.timeout` in each copied `hdfs-site.xml`. With Hadoop 3.3.6, a value of `0` can cause HDFS writes to fail while waiting for DataNode acknowledgements. Set a positive timeout, such as `60000` milliseconds.
+
 1. Synchronize the PXF configuration from the coordinator host to the standby coordinator host and each Apache Cloudberry segment host. For example:
 
     ```shell
@@ -83,3 +91,16 @@ After you install the new version of PXF, perform the following procedure:
     ```shell
     gpadmin@coordinator$ pxf cluster start
     ```
+
+## Backward-Incompatible Changes {#backward-incompatible-changes}
+
+### Migrating Avro Schemas Previously Read from Local Paths {#migrating-avro-schemas-previously-read-from-local-paths}
+
+Earlier PXF releases searched the PXF host's local file system before the classpath and the configured file system. Tables that relied on this behavior must be updated. For example, `SCHEMA=/opt/pxf/schemas/example.avsc` no longer opens that file directly on the PXF host, even when the file exists.
+
+Choose one of the following migration options:
+
+- Place the schema in the file system configured by `SERVER` and update `SCHEMA` to its path relative to `pxf.fs.basePath` (or the file system root). For example, with `pxf.fs.basePath=/data`, place the schema at `/data/schemas/example.avsc` and use `SCHEMA=/schemas/example.avsc`.
+- Place the schema in `$PXF_BASE/conf` on every PXF host and use its relative classpath name. For example, place it at `$PXF_BASE/conf/schemas/example.avsc` and use `SCHEMA=schemas/example.avsc`. Synchronize the configuration with `pxf cluster sync`.
+
+These changes apply to both `.avsc` and `.avro` schema files, for read and write operations. With a `file:avro` profile, schema paths are resolved relative to the required `pxf.fs.basePath` of the file server, just like data paths.

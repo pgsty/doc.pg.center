@@ -2,7 +2,7 @@
 title: "About View Storage"
 description: "A view is similar to a table, both are relations - that is \"something with columns\"."
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/view-storage.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/view-storage.md"
 ---
 
 All such objects are stored in the catalog table `pg_class`. These are the general differences:

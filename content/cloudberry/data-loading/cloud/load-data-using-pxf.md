@@ -3,7 +3,7 @@ title: "Load Data Using the Platform Extension Framework (PXF)"
 linkTitle: "Load Data Using PXF"
 description: "The Apache Cloudberry Platform Extension Framework (PXF) is an extensible framework that allows Apache Cloudberry to query external data files whose metadata is not managed by the database."
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/load-data-using-pxf.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/load-data-using-pxf.md"
 ---
 
 You can use its `pxf://` protocol to access data residing in object store systems (Azure, Google Cloud Storage, Minio, S3), external Hadoop systems (HDFS, Hive, HBase), and SQL databases.

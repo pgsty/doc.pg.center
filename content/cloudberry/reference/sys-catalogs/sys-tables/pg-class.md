@@ -2,7 +2,7 @@
 title: "pg_class"
 description: "The system catalog table `pg_class` catalogs tables and most everything else that has columns or is otherwise similar to a table."
 weight: 210
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-class.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-class.md"
 ---
 
 This includes indexes (see also `pg_index`), sequences, views, materialized views, composite types, and TOAST tables. Below, when we mean all of these kinds of objects we speak of "relations". Not all columns are meaningful for all relation types.

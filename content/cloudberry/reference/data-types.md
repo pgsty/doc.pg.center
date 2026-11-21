@@ -3,7 +3,7 @@ title: "Apache Cloudberry Data Types"
 linkTitle: "Data Types"
 description: "Apache Cloudberry has a rich set of native data types available to users."
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-types.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-types.md"
 ---
 
 This document shows some of the built-in data types. In addition to the types listed here, there are also some internally used data types, such as oid (object identifier), but those are not documented in this document.

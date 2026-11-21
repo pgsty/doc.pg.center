@@ -2,7 +2,7 @@
 title: "Resource Queues"
 description: "Use Apache Cloudberry resource queues to prioritize and allocate resources to queries according to business requirements and to prevent queries from starting when resources are unavailable."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/manage-resources-using-resource-queues.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/manage-resources-using-resource-queues.md"
 ---
 
 Resource queues are one tool to manage the degree of concurrency in a Apache Cloudberry system. Resource queues are database objects that you create with the `CREATE RESOURCE QUEUE` SQL statement. You can use them to manage the number of active queries that may run concurrently, the amount of memory each type of query is allocated, and the relative priority of queries. Resource queues can also guard against queries that would consume too many resources and degrade overall system performance.

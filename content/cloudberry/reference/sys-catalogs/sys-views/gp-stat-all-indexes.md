@@ -2,7 +2,7 @@
 title: "pg_stat_all_indexes"
 description: "The `pg_stat_all_indexes` view shows one row for each index in the current database that displays statistics about accesses to that specific index."
 weight: 100
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-stat-all-indexes.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/gp-stat-all-indexes.md"
 ---
 
 The `pg_stat_user_indexes` and `pg_stat_sys_indexes` views contain the same information, but filtered to only show user and system indexes respectively.

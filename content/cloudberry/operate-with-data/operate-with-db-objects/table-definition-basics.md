@@ -2,7 +2,7 @@
 title: "Basics of Defining Tables"
 description: "A table in a relational database is much like a table on paper: It consists of rows and columns."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/table-definition-basics.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/table-definition-basics.md"
 ---
 
 The number and order of the columns is fixed, and each column has a name. The number of rows is variable — it reflects how much data is stored at a given moment. SQL does not make any guarantees about the order of the rows in a table. When a table is read, the rows will appear in an unspecified order, unless sorting is explicitly requested. In addition, SQL does not assign unique identifiers to rows, so it is possible to have several completely identical rows in a table.

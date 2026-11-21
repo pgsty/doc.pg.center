@@ -2,7 +2,7 @@
 title: "Lesson 1: Create Users and Roles"
 description: "Learn how to create users and roles in the Apache Cloudberry with this helpful introduction."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/quick-trial-lessons/create-users-and-roles.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/quick-trial-lessons/create-users-and-roles.md"
 ---
 
 Apache Cloudberry manages database access using roles. Initially, there is one superuser role, the role associated with the OS user who initialized the database instance, usually `gpadmin`. This user owns all of the Apache Cloudberry files and OS processes, so it is important to reserve the `gpadmin` role for system tasks only.

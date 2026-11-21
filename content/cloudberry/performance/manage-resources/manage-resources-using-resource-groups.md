@@ -3,7 +3,7 @@ title: "Manage Resources Using Resource Groups"
 linkTitle: "Resource Groups"
 description: "You can use resource groups to manage and protect the resource allocation of CPU, memory, concurrent transaction limits, and disk I/O in Apache Cloudberry."
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/manage-resources-using-resource-groups.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/manage-resources-using-resource-groups.md"
 ---
 
 Once you define a resource group, you assign the group to one or more Apache Cloudberry roles, or to an external component such as PL/Container, in order to control the resources used by them.

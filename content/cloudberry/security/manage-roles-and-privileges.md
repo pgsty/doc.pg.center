@@ -3,7 +3,7 @@ title: "Manage Roles and Privileges in Apache Cloudberry"
 linkTitle: "Manage Roles and Privileges"
 description: "The Apache Cloudberry authorization mechanism stores roles and privileges to access database objects in the database and is administered using SQL statements or command-line utilities."
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/security/manage-roles-and-privileges.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/security/manage-roles-and-privileges.md"
 ---
 
 Apache Cloudberry manages database access privileges using *roles*. The concept of roles subsumes the concepts of *users* and *groups*. A role can be a database user, a group, or both. Roles can own database objects (for example, tables) and can assign privileges on those objects to other roles to control access to the objects. Roles can be members of other roles, thus a member role can inherit the object privileges of its parent role.

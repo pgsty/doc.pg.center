@@ -2,7 +2,7 @@
 title: "Heap and AO Table Formats"
 description: "Apache Cloudberry supports two storage models: Heap storage and Appended-Optimized (AO) storage."
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/heap-and-ao-table-formats.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/heap-and-ao-table-formats.md"
 ---
 
 The choice of storage model should be determined based on your data type and query type. This document introduces both storage models and provides recommendations for selecting the optimal one.

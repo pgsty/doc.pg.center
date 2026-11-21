@@ -2,7 +2,7 @@
 title: "Example: Reading From and Writing to a ClickHouse Table"
 description: "Using PXF JDBC with ClickHouse."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-jdbc/jdbc_pxf_clickhouse.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-jdbc/jdbc_pxf_clickhouse.md"
 ---
 
 <!--
@@ -71,7 +71,7 @@ You do **not** need a `servers/clickhouse/jdbc-site.xml` if you pass connection 
 
 Automated tests exercise ClickHouse server versions **24** and **26** together with the ClickHouse JDBC drivers.
 
-For ClickHouse we recommend latest clickhouse-jdbc-all:0.9.7 or newer (fat jar version with shaded dependencies). In case you observe HTTP reliably issues you can use Apache HttpClient: add the JDBC URL parameter `http_connection_provider=APACHE_HTTP_CLIENT` (for example `jdbc:clickhouse://clickhousehost:8123/default?http_connection_provider=APACHE_HTTP_CLIENT`).
+For ClickHouse we recommend latest clickhouse-jdbc-all:0.11.1 or newer (fat jar version with shaded dependencies).
 
 
 ## Read from the ClickHouse Table {#read-from-the-clickhouse-table}

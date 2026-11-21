@@ -2,7 +2,7 @@
 title: "Create and Manage Partitioned Tables"
 description: "This document outlines how to create and maintain partitioned tables in Apache Cloudberry using the recommended syntax."
 weight: 110
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-partitioned-tables.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-partitioned-tables.md"
 ---
 
 For more information on partitioned tables, see [About Table Partitioning](/cloudberry/operate-with-data/operate-with-db-objects/about-table-partitioning/).

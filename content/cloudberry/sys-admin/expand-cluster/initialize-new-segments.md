@@ -2,7 +2,7 @@
 title: "Initialize New Segments"
 description: "Use the `gpexpand` utility to create and initialize the new segment instances and create the expansion schema."
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/expand-cluster/initialize-new-segments.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/expand-cluster/initialize-new-segments.md"
 ---
 
 The first time you run [`gpexpand`](/cloudberry/reference/sys-utilities/gpexpand/) with a valid input file it creates and initializes segment instances and creates the expansion schema. After these steps are completed, running `gpexpand` detects if the expansion schema has been created and, if so, performs table redistribution.

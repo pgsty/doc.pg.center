@@ -2,7 +2,7 @@
 title: "About Table Partitioning"
 description: "Apache Cloudberry enables you to logically divide large tables into smaller, more manageable pieces using table partitioning."
 weight: 120
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/about-table-partitioning.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/about-table-partitioning.md"
 ---
 
 This can significantly improve query performance by allowing the query optimizer to scan only the necessary data, rather than the entire table. Partitioning is a logical division; it does not change the physical distribution of table data across segments.

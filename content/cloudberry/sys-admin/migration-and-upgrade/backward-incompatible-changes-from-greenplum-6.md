@@ -2,7 +2,7 @@
 title: "Backward-incompatible changes from Greenplum 6.x"
 description: "This page lists the backward-incompatible (breaking) changes that you may encounter when migrating workloads from Greenplum Database 6.x to Apache Cloudberry."
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/migration-and-upgrade/backward-incompatible-changes-from-greenplum-6.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/migration-and-upgrade/backward-incompatible-changes-from-greenplum-6.md"
 ---
 
 The differences come from two sources: a much newer PostgreSQL kernel underneath Cloudberry, and a number of intentional cleanups in Greenplum-specific syntax, partitioning, and system catalogs.

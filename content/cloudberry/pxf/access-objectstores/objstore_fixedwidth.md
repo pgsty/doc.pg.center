@@ -2,7 +2,7 @@
 title: "Reading and Writing Fixed-Width Text Data in an Object Store"
 description: "Reading fixed-width text data in object stores via PXF."
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-objectstores/objstore_fixedwidth.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-objectstores/objstore_fixedwidth.md"
 ---
 
 The PXF object store connectors support reading and writing fixed-width text using the Apache Cloudberry fixed width custom formatter. This section describes how to use PXF to access fixed-width text, including how to create, query, and insert data into an external table that references files in the object store.

@@ -2,7 +2,7 @@
 title: "Estimating storage capacity"
 description: "To estimate how much data your Apache Cloudberry system can accommodate, use these measurements as guidelines."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/deployment/capacity_planning.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/deployment/capacity_planning.md"
 ---
 
 Also keep in mind that you may want to have extra space for landing backup files and data load files on each segment host.

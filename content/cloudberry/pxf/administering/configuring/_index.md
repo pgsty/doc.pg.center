@@ -2,7 +2,7 @@
 title: "Configuring PXF"
 description: "Configuring PXF after installation."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/instcfg_pxf.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/instcfg_pxf.md"
 ---
 
 Your Apache Cloudberry deployment consists of a coordinator host, a standby coordinator host, and multiple segment hosts. After you configure the Apache Cloudberry Platform Extension Framework (PXF), you start a single PXF JVM process (PXF Service) on each Apache Cloudberry host.
@@ -11,7 +11,7 @@ PXF provides connectors to Hadoop, Hive, HBase, object stores, network file syst
 
 To configure PXF, you must:
 
-1. Install Java 8 or 11 on each Apache Cloudberry host as described in [Installing Java for PXF](/cloudberry/pxf/administering/configuring/install_java/). If your `JAVA_HOME` is different from `/usr/java/default`, you must inform PXF of the `$JAVA_HOME` setting by specifying its value in the `pxf-env.sh` [configuration file](/cloudberry/pxf/administering/configuring/config_files/). 
+1. Install Java 17 or 21 on each Apache Cloudberry host as described in [Installing Java for PXF](/cloudberry/pxf/administering/configuring/install_java/). If your `JAVA_HOME` is different from `/usr/java/default`, you must inform PXF of the `$JAVA_HOME` setting by specifying its value in the `pxf-env.sh` [configuration file](/cloudberry/pxf/administering/configuring/config_files/).
     - Edit the `$PXF_BASE/conf/pxf-env.sh` file on the Apache Cloudberry coordinator host.
 
         ```shell

@@ -2,7 +2,7 @@
 title: "pg_backend_memory_contexts"
 description: "The `pg_backend_memory_contexts` system view displays all of the memory contexts in use by the server process attached to the current session."
 weight: 140
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-backend-memory-contexts.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-backend-memory-contexts.md"
 ---
 
 `pg_backend_memory_contexts` contains one row for each memory context.

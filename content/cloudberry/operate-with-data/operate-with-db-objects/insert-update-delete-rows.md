@@ -3,7 +3,7 @@ title: "Insert, Update, and Delete Row Data in Apache Cloudberry"
 linkTitle: "Insert, Update, and Delete Rows"
 description: "Insert, update, and delete table rows, truncate tables, and reclaim storage with VACUUM in Apache Cloudberry."
 weight: 140
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/insert-update-delete-rows.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/insert-update-delete-rows.md"
 ---
 
 This document introduces how to manipulate row data in Apache Cloudberry, including:

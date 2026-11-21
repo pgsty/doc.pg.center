@@ -2,7 +2,7 @@
 title: "Service Listen Address, Host, and Port"
 description: "Configuring the PXF service host and port."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/advanced-config/cfghostport.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/advanced-config/cfghostport.md"
 ---
 
 In the default deployment topology, since PXF 6.7.0, the PXF Service starts on an Apache Cloudberry host and listens on `localhost:5888`. With this configuration, the PXF Service listens for local traffic on the Apache Cloudberry host. You can configure PXF to listen on a different listen address. You can also configure PXF to listen on a different port number, or to run on a different host. To change the default configuration, you set one or more of the properties identified below:

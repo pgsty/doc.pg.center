@@ -2,7 +2,7 @@
 title: "pg_stat_bgwriter"
 description: "The `pg_stat_bgwriter` view provides cumulative statistics about the background writer process, which is responsible for writing dirty buffers to disk in the background."
 weight: 210
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-bgwriter.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-views/pg-stat-bgwriter.md"
 ---
 
 This view helps monitor the efficiency of the background writer and overall buffer management. It includes metrics such as the number of buffers written during checkpoints, buffers cleaned by the background writer, and buffers written directly by backend processes. These statistics are useful for tuning database performance and understanding write activity patterns.

@@ -3,11 +3,11 @@ title: "Platform Extension Framework (PXF) for Apache Cloudberry"
 linkTitle: "PXF"
 description: "Apache Cloudberry Platform Extension Framework documentation index."
 weight: 140
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/index.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/index.md"
 type: "docs"
 section_index: "cards"
 outputs: ["HTML", "RSS", "print", "markdown"]
-upstream_source: "pxf"
+upstream_source: "pxf-20261121"
 cascade: {"type": "docs", "upstream_source": "pxf"}
 sidebar_root_menu: false
 icon: fa-solid fa-plug
@@ -31,6 +31,9 @@ KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
 -->
+
+> [!NOTE] Documentation snapshot
+> This English edition follows development documentation at `6683faa38ce4` (November 21, 2026). The latest published PXF release remains `2.2.0-incubating`; newer Java and connector requirements in this snapshot must be checked against the binaries you install. Chinese updates are pending.
 
 The Apache Cloudberry Platform Extension Framework (PXF) provides parallel, high throughput data access and federated queries across heterogeneous data sources via built-in connectors that map an Apache Cloudberry external table definition to an external data source. PXF has its roots in the Apache HAWQ project.
 

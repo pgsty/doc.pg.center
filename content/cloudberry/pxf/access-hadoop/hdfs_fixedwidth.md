@@ -2,7 +2,7 @@
 title: "Reading and Writing Fixed-Width Text Data"
 description: "Reading fixed-width text data in HDFS via PXF."
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-hadoop/hdfs_fixedwidth.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-hadoop/hdfs_fixedwidth.md"
 ---
 
 The PXF HDFS Connector supports reading and writing fixed-width text using the Apache Cloudberry fixed width custom formatter. This section describes how to use PXF to access fixed-width text, including how to create, query, and insert data into an external table that references files in the HDFS data store.

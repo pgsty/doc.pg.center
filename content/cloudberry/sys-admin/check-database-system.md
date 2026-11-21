@@ -3,7 +3,7 @@ title: "Check Apache Cloudberry System"
 linkTitle: "Check Database System"
 description: "You can check a Apache Cloudberry system using a variety of tools included with the system or available as plugins."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-admin/check-database-system.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-admin/check-database-system.md"
 ---
 
 Observing the Apache Cloudberry system day-to-day performance helps administrators understand the system behavior, plan workflow, and troubleshoot problems. This document introduces scenarios for diagnosing database performance and activity.

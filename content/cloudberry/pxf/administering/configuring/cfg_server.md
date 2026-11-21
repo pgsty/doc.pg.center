@@ -2,7 +2,7 @@
 title: "Configuring PXF Servers"
 description: "Configuring named PXF servers."
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/cfg_server.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/cfg_server.md"
 ---
 
 This topic provides an overview of PXF server configuration. To configure a server, refer to the topic specific to the connector that you want to configure.
@@ -46,10 +46,6 @@ For example, the contents of the `s3-site.xml` template file follow:
     <property>
         <name>fs.s3a.secret.key</name>
         <value>YOUR_AWS_SECRET_ACCESS_KEY</value>
-    </property>
-    <property>
-        <name>fs.s3a.fast.upload</name>
-        <value>true</value>
     </property>
 </configuration>
 ```
@@ -132,6 +128,8 @@ Refer to [Configuring PXF Hadoop Connectors ](/cloudberry/pxf/administering/conf
 You can use the `pxf.fs.basePath` property to restrict a user's access to files in a specific remote directory. When set, this property applies to any profile that accesses a file, including `*:text`, `*:parquet`, `*:json`, etc.
 
 When you configure the `pxf.fs.basePath` property for a server, PXF considers the file path specified in the `CREATE EXTERNAL TABLE` `LOCATION` clause to be relative to this base path setting, and constructs the remote path accordingly.
+
+Avro schema paths resolved in the configured file system also use this base path, including absolute paths in the `SCHEMA` option. For example, with `pxf.fs.basePath=/data`, `SCHEMA=/schemas/example.avsc` resolves to `/data/schemas/example.avsc`. A relative schema name found in the PXF classpath is loaded from the classpath instead. See [Avro Schemas and Data](/cloudberry/pxf/access-hadoop/hdfs_avro/#avro-schemas-and-data).
 
 > <b>Note:</b> You must set `pxf.fs.basePath` when you configure a PXF server for access to a network file system with a `file:*` profile. This property is optional for a PXF server that accesses a file in Hadoop or in an object store.
 

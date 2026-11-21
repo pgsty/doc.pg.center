@@ -3,7 +3,7 @@ title: "Create and Manage Schemas in Apache Cloudberry"
 linkTitle: "Create and Manage Schemas"
 description: "In Apache Cloudberry, schemas logically organize objects and data in a database."
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-schemas.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/create-and-manage-schemas.md"
 ---
 
 Schemas allow you to have more than one object (such as tables) with the same name in the database without conflict if the objects are in different schemas.

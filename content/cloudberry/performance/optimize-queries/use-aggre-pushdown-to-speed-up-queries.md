@@ -3,7 +3,7 @@ title: "Use aggregation pushdown to speed up query execution"
 linkTitle: "Use Aggregation Pushdown to Speed Up Query Execution"
 description: "Aggregation pushdown is an optimization technique that moves the aggregation operation closer to the data source."
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/optimize-queries/use-aggre-pushdown-to-speed-up-queries.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/optimize-queries/use-aggre-pushdown-to-speed-up-queries.md"
 ---
 
 Apache Cloudberry supports pushing down aggregation operations, which means that the aggregation operator is processed before the join operator.

@@ -2,7 +2,7 @@
 title: "Lesson 4: Data Loading"
 description: "Load your data to the Apache Cloudberry."
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/quick-trial-lessons/data-loading.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/quick-trial-lessons/data-loading.md"
 ---
 
 This tutorial briefly introduces 3 methods to load the example data `FAA` into Apache Cloudberry tables you have created in the previous tutorial [Lesson 3: Create Tables](/cloudberry/tutorials/quick-trial-lessons/create-tables/). Before continuing, make sure you have completed the previous tutorial.

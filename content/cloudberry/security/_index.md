@@ -3,7 +3,7 @@ title: "Security and Permission"
 description: "This section describes how to secure a Apache Cloudberry system."
 weight: 80
 icon: "fa-solid fa-shield-halved"
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/security/index.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/security/index.md"
 ---
 
 The guide assumes knowledge of Linux/UNIX system administration and database management systems. Familiarity with structured query language (SQL) is helpful.

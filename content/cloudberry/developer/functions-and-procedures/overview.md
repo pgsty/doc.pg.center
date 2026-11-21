@@ -2,7 +2,7 @@
 title: "Stored Procedures and User-Defined Functions"
 description: "Apache Cloudberry provides powerful capabilities for extending the database functionality through Stored Procedures (SPs) and User-Defined Functions (UDFs)."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/developer/functions-and-procedures/overview.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/developer/functions-and-procedures/overview.md"
 ---
 
 ## User-Defined functions (UDFs) {#user-defined-functions-udfs}

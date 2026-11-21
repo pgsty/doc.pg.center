@@ -2,7 +2,7 @@
 title: "Introduction to PXF"
 description: "PXF concepts, supported platforms, architecture, and external table syntax."
 weight: 30
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/intro/intro_pxf.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/intro/intro_pxf.md"
 ---
 
 The Apache Cloudberry Platform Extension Framework (PXF) provides *connectors* that enable you to access data stored in sources external to your Apache Cloudberry deployment. These connectors map an external data source to an Apache Cloudberry *external table* definition. When you create the Apache Cloudberry external table, you identify the external data store and the format of the data via a *server* name and a *profile* name that you provide in the command.
@@ -22,7 +22,7 @@ PXF is compatible with these operating system platforms and Apache Cloudberry ve
 
 ### Java {#java}
 
-PXF supports Java 8 and Java 11.
+PXF supports Java 17 and 21.
 
 
 ### Hadoop {#hadoop}
@@ -31,7 +31,7 @@ PXF bundles all of the Hadoop JAR files on which it depends, and supports the fo
 
 | Hadoop Version | Hive Server Version | HBase Server Version |
 |----------------|---------------------|-------------|
-| 2.x, 3.1+ | 1.x, 2.x, 3.1+ | 2.3.7 |
+| 2.x, 3.1+ | 1.x, 2.x, 3.1+ | 2.5.x |
 
 ## Architectural Overview {#architectural-overview}
 

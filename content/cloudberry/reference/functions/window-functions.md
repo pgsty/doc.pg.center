@@ -3,7 +3,7 @@ title: "Window Functions in Apache Cloudberry"
 linkTitle: "Window Functions"
 description: "The following are Apache Cloudberry built-in window functions."
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/functions/window-functions.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/functions/window-functions.md"
 ---
 
 All window functions are *immutable*.<!-- For more information about window functions, see "Window Expressions" in the *Apache Cloudberry Administrator Guide*. -->

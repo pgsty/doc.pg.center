@@ -2,7 +2,7 @@
 title: "pg_stat_last_shoperation"
 description: "The pg_stat_last_shoperation table contains metadata tracking information about global objects (roles, tablespaces, etc.)."
 weight: 370
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-stat-last-shoperation.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-stat-last-shoperation.md"
 ---
 
 |column|type|references|description|

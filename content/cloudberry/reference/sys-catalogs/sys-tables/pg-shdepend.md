@@ -2,7 +2,7 @@
 title: "pg_shdepend"
 description: "The `pg_shdepend` system catalog table records the dependency relationships between database objects and shared objects, such as roles."
 weight: 340
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-shdepend.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-shdepend.md"
 ---
 
 This information allows Apache Cloudberry to ensure that those objects are unreferenced before attempting to delete them. See also [pg_depend](/cloudberry/reference/sys-catalogs/sys-tables/pg-depend/), which performs a similar function for dependencies involving objects within a single database. Unlike most system catalogs, `pg_shdepend` is shared across all databases of Cloudberry system: there is only one copy of `pg_shdepend` per system, not one per database.

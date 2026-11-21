@@ -2,7 +2,7 @@
 title: "Work with View Dependencies"
 description: "If there are view dependencies on a table, you need to use the `CASCADE` keyword to drop it."
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/work-with-view-dependencies.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/work-with-view-dependencies.md"
 ---
 
 Also, you cannot alter the table if there are view dependencies on it. This example shows a view dependency on a table.

@@ -3,7 +3,7 @@ title: "Load Data into Apache Cloudberry Using COPY"
 linkTitle: "Load Data Using COPY"
 description: "`COPY FROM` copies data from a file or standard input in a local file system into a table and appends the data to the table contents."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/load-data-using-copy.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/load-data-using-copy.md"
 ---
 
 `COPY` is non-parallel: data is loaded in a single process using the Apache Cloudberry coordinator instance. Using `COPY` is only recommended for very small data files.

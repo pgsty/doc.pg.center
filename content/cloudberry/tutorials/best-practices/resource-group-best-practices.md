@@ -2,7 +2,7 @@
 title: "Memory and Resource Management with Resource Groups"
 description: "Managing Apache Cloudberry resources with resource groups."
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/tutorials/best-practices/resource-group-best-practices.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/tutorials/best-practices/resource-group-best-practices.md"
 ---
 
 Memory, CPU, and concurrent transaction management have a significant impact on performance in a Apache Cloudberry cluster. Resource groups are a newer resource management scheme that enforce memory, CPU, and concurrent transaction limits in Apache Cloudberry.

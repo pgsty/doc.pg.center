@@ -2,7 +2,7 @@
 title: "BRIN Indexes"
 description: "When a table is very large and the values of certain columns are naturally correlated with their physical storage locations, you can use block range indexes (BRIN)."
 weight: 100
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/brin-indexes.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/operate-with-db-objects/brin-indexes.md"
 ---
 
 A BRIN index summarizes values for a range of blocks (or pages), where each range includes a group of physically adjacent pages in the table. For example, in a table that stores order data, earlier orders tend to appear at the beginning of the table. Similarly, in a table of postal codes, codes from the same city may be physically clustered.

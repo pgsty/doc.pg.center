@@ -2,7 +2,7 @@
 title: "pg_authid"
 description: "The `pg_authid` table in the `pg_catalog` schema contains information about database authorization identifiers (roles)."
 weight: 170
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-authid.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/sys-catalogs/sys-tables/pg-authid.md"
 ---
 
 A role subsumes the concepts of users and groups. A user is a role with the `rolcanlogin` flag set. Any role (with or without `rolcanlogin`) might have other roles as members. See [`pg_auth_members`](/cloudberry/reference/sys-catalogs/sys-tables/pg-auth-members/).

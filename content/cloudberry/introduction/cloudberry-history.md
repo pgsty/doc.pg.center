@@ -3,10 +3,14 @@ title: "Apache Cloudberry Project History"
 linkTitle: "Project History"
 description: "This page chronicles the key milestones in the development of Apache Cloudberry, from its origins to the present day."
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/introduction/cloudberry-history.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/introduction/cloudberry-history.md"
 ---
 
 ## Timeline {#timeline}
+
+- **November 2026: Apache Cloudberry (Incubating) 2.2.0 Released**\
+  Version 2.2.0 was released, moving the kernel from PostgreSQL 14.4 to 14.10, adding six new extensions, broadening platform support, and shipping coordinated releases of PXF, Backup, and, for the first time, Go Libs.\
+  [2.2 Preview](https://cloudberry.apache.org/blog/apache-cloudberry-2.2.0-preview) · [Announcement](https://cloudberry.apache.org/blog/announce-apache-cloudberry-2.2.0) · [Changelog](https://cloudberry.apache.org/releases/2.2.0-incubating)
 
 - **May 2026: PostgreSQL 16.9 Kernel Upgrade**\
   The main branch upgraded the PostgreSQL kernel from 14.4 to PostgreSQL 16.9, bringing the modern PostgreSQL features, performance improvements, and security fixes to the MPP platform.\
@@ -31,6 +35,7 @@ upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23
 
 Apache Cloudberry submits regular incubation reports to the Apache Incubator PMC. These reports provide detailed updates on community growth, release progress, and project maturity.
 
+- [August 2026](https://cloudberry.apache.org/blog/apache-cloudberry-incubation-report-202608)
 - [May 2026](https://cloudberry.apache.org/blog/apache-cloudberry-incubation-report-202605)
 - [February 2026](https://cloudberry.apache.org/blog/apache-cloudberry-incubation-report-202602)
 - [November 2025](https://cloudberry.apache.org/blog/apache-cloudberry-incubation-report-202511)

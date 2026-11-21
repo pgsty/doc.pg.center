@@ -3,7 +3,7 @@ title: "Update Statistics in Apache Cloudberry"
 linkTitle: "Update Statistics"
 description: "The most important prerequisite for good query performance is to begin with accurate statistics for the tables."
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/update-stats-using-analyze.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/update-stats-using-analyze.md"
 ---
 
 Updating statistics with the `ANALYZE` statement enables the query planner to generate optimal query plans. When a table is analyzed, information about the data is stored in the system catalog tables. If the stored information is out of date, the planner can generate inefficient plans.

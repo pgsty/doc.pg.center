@@ -2,7 +2,7 @@
 title: "Load Data from Kafka Using Kafka FDW"
 description: "Kafka Foreign Data Wrapper (FDW) allows Apache Cloudberry to connect directly to Apache Kafka, enabling it to read and process Kafka data as external tables."
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/load-data-from-kafka-using-fdw.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/load-data-from-kafka-using-fdw.md"
 ---
 
 This integration improves the efficiency, flexibility, and reliability of real-time Kafka data processing, enhancing data operations and business performance.

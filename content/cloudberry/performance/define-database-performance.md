@@ -2,7 +2,7 @@
 title: "Define Database Performance"
 description: "Managing system performance includes measuring performance, identifying the causes of performance problems, and applying the tools and techniques available to you to remedy the problems."
 weight: 10
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/performance/define-database-performance.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/performance/define-database-performance.md"
 ---
 
 Apache Cloudberry measures database performance based on the rate at which the database management system (DBMS) supplies information to requesters.

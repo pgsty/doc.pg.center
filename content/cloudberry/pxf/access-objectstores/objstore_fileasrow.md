@@ -2,7 +2,7 @@
 title: "Reading a Multi-Line Text File into a Single Table Row"
 description: "Reading a multi-line text file as a single table row from object storage via PXF."
 weight: 80
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-objectstores/objstore_fileasrow.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-objectstores/objstore_fileasrow.md"
 ---
 
 The PXF object store connectors support reading a multi-line text file as a single table row. This section describes how to use PXF to read multi-line text and JSON data files in an object store, including how to create an external table that references multiple files in the store.

@@ -2,7 +2,7 @@
 title: "Reading a Multi-Line Text File into a Single Table Row"
 description: "Reading a multi-line text file as a single table row via PXF."
 weight: 70
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-hadoop/hdfs_fileasrow.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-hadoop/hdfs_fileasrow.md"
 ---
 
 You can use the PXF HDFS connector to read one or more multi-line text files in HDFS each as a single table row. This may be useful when you want to read multiple files into the same Apache Cloudberry external table, for example when individual JSON files each contain a separate record.

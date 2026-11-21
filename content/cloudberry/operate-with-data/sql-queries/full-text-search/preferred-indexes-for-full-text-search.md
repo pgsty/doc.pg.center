@@ -2,7 +2,7 @@
 title: "Preferred Index Types for Text Search"
 description: "There are two kinds of indexes that can be used to speed up full text searches: GIN and GiST."
 weight: 90
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/preferred-indexes-for-full-text-search.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/sql-queries/full-text-search/preferred-indexes-for-full-text-search.md"
 ---
 
 Indexes are not mandatory for full text searching, but in cases where a column is searched on a regular basis, an index is usually desirable.

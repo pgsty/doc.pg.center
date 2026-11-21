@@ -3,7 +3,7 @@ title: "Load Data into Apache Cloudberry Using gpload"
 linkTitle: "Load Data Using gpload"
 description: "The `gpload` utility of Apache Cloudberry loads data using readable external tables and the Apache Cloudberry parallel file server (gpfdist)."
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/data-loading/load-data-using-gpload.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/data-loading/load-data-using-gpload.md"
 ---
 
 It handles parallel file-based external table setup and allows users to configure their data format, external table definition, and gpfdist setup in a single configuration file.

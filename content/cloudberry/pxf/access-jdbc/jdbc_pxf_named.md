@@ -2,7 +2,7 @@
 title: "Example: Using a Named Query with PostgreSQL"
 description: "Using PXF JDBC with named queries."
 weight: 60
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/access-jdbc/jdbc_pxf_named.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/access-jdbc/jdbc_pxf_named.md"
 ---
 
 <!--

@@ -2,7 +2,7 @@
 title: "Configuring for Secure HDFS"
 description: "Configuring PXF for Kerberos-secured HDFS."
 weight: 20
-upstream_link: "https://github.com/apache/cloudberry-pxf/blob/dff2632d2a364f466b83682439c3ae97e655c1b7/docs/administering/configuring/hadoop-connectors/pxf_kerbhdfs.md"
+upstream_link: "https://github.com/apache/cloudberry-pxf/blob/6683faa38ce4e2d146a77197991518aacb4b24e8/docs/administering/configuring/hadoop-connectors/pxf_kerbhdfs.md"
 ---
 
 When Kerberos is activated for your HDFS filesystem, the PXF Service, as an HDFS client, requires a principal and keytab file to authenticate access to HDFS. To read or write files on a secure HDFS, you must create and deploy Kerberos principals and keytabs for PXF, and ensure that Kerberos authentication is activated and functioning.

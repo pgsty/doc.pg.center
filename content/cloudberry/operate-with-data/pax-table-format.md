@@ -2,7 +2,7 @@
 title: "PAX Storage Format"
 description: "Apache Cloudberry supports the PAX (Partition Attributes Across) storage format."
 weight: 50
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/operate-with-data/pax-table-format.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/operate-with-data/pax-table-format.md"
 ---
 
 PAX is a database storage format that combines the benefits of row-based storage (NSM, N-ary Storage Model) and column-based storage (DSM, Decomposition Storage Model). It is designed to improve query performance, particularly in terms of cache efficiency. In OLAP scenarios, PAX offers batch write performance similar to row-based storage and read performance like column-based storage. PAX can adapt to both cloud environments with object storage models and traditional offline physical file-based storage methods.

@@ -2,7 +2,7 @@
 title: "Install required packages"
 description: "This step installs essential development tools, libraries, and dependencies required for building Apache Cloudberry."
 weight: 40
-upstream_link: "https://github.com/apache/cloudberry-site/blob/d4e372af8170f7e23d501b70deb3938efa1c978b/versioned_docs/version-2.x/build/install-required-packages.md"
+upstream_link: "https://github.com/apache/cloudberry-site/blob/e3a102d15d0e85928a0cb5aaec24e67e6b40be7c/versioned_docs/version-2.x/build/install-required-packages.md"
 ---
 
 ## Install basic system packages {#install-basic-system-packages}
