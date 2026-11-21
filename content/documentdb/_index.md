@@ -23,7 +23,7 @@ cascade:
 
 DocumentDB provides a PostgreSQL-based document database with BSON storage,
 document operations, indexes, and a MongoDB wire protocol gateway. This edition
-covers the published DocumentDB 1.2.0 documentation. The existing Simplified Chinese edition remains based on 1.0 while the incremental translation is pending.
+covers the published DocumentDB 1.2.0 documentation. The Simplified Chinese edition includes the reviewed incremental updates and all ten new pages.
 
 - [Release notes for 1.2](/documentdb/getting-started/release-notes-1.2/) — Compatibility, container startup, upgrades, and renamed metrics.
 - [Getting started](/documentdb/getting-started/) — Docker, Linux packages, and your first query with a shell, driver, or editor.
