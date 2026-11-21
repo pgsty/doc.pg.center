@@ -1517,6 +1517,24 @@
   "english_update": {
     "date": "2026-11-21",
     "inventory": "data/updates/2026-11-21.json",
-    "translation_status": "pending; previous source and review basis retained"
+    "translation_status": "Chinese incremental updates reviewed; preexisting gaps and draft status retained"
+  },
+  "translation_update": {
+    "date": "2026-11-22",
+    "batch": "2026-11-21",
+    "review_mode": "self-review",
+    "reviewed_pages": 1,
+    "metadata_only_pages": 0,
+    "pages": [
+      {
+        "target": "content/orioledb/_index.zh.md",
+        "source": "content/orioledb/_index.md",
+        "source_sha256": "8badf8ea17d3258909ac691cf7bdc14a59000f1100f6479df80dbb18dec25c1f",
+        "maintained_sha256": "0075cf9eff0132cda0719e9a8e057129bc350b89aea89b09267adfffa170d2ca",
+        "review_scope": "changed English spans and Chinese context",
+        "review_mode": "self-review",
+        "date": "2026-11-22"
+      }
+    ]
   }
 }

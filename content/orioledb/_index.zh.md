@@ -33,6 +33,12 @@ OrioleDB 是 PostgreSQL 的存储引擎，采用索引组织表、基于 undo �
 - [来源与许可](/zh/orioledb/attribution/) — 来源快照、版权与编辑说明。
 {.cards}
 
+## 版本更新 {#release-update}
+
+[OrioleDB v1.10.3](https://github.com/orioledb/orioledb/releases/tag/v1.10.3)于 2026 年 11 月 9 日发布，修复了 `INSERT ... ON CONFLICT DO UPDATE` 静默跳过行的问题：该行上存在已提交事务留下的外键锁，而相应 undo 已被检查点推进或时间推移越过。SQL 扩展版本仍为 `1.10`；本次发布既未改变存储格式，也未改变 WAL 格式。
+
+指南仍采用上述网站快照，历史基准测试步骤也保留原有版本。此发布说明不改变项目的 Beta 状态，也不改变其对带补丁 PostgreSQL 的要求。
+
 ## 开始阅读 {#start}
 
 先按[快速入门](/zh/orioledb/usage/getting-started/)创建第一张 OrioleDB 表，再查阅[配置参考](/zh/orioledb/usage/configuration/)。需要了解实现细节时，从[架构概览](/zh/orioledb/architecture/overview/)开始。
