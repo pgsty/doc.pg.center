@@ -8,3 +8,44 @@ This product includes software originally developed by Apache HAWQ.
 
 Apache HAWQ
 Copyright 2017 The Apache Software Foundation
+
+---------------------------------------------------------------------------
+
+This product includes software originally developed by VMware.
+
+Greenplum Platform Extension Framework
+Copyright 2018-Present VMware, Inc. or its affiliates. All Rights Reserved.
+
+---------------------------------------------------------------------------
+
+This product includes a Gradle wrapper installer script adapted from
+Project Nessie.
+
+Nessie
+Copyright 2015-2025 Dremio Corporation
+
+---------------------------------------------------------------------------
+
+This product includes code and configuration templates from the following
+Apache Software Foundation projects.
+
+Apache Hadoop
+Copyright 2006 and onwards The Apache Software Foundation.
+
+Apache HBase
+Copyright 2007-2026 The Apache Software Foundation
+
+Apache Hive
+Copyright 2008-2025 The Apache Software Foundation
+
+Apache Tez
+Copyright 2014-2024 The Apache Software Foundation
+
+Apache Ranger
+Copyright 2014-2019 The Apache Software Foundation
+
+Apache ZooKeeper
+Copyright 2009-2026 The Apache Software Foundation
+
+Apache Iceberg
+Copyright 2017-2025 The Apache Software Foundation
