@@ -25,7 +25,68 @@ upstream_link: "https://pgbackrest.org/release.html"
 
 ## الإصدار المستقر الموثّق {#current-stable-release}
 
-يغطي هذا التوثيق المطابق الإصدار v2.60.0. راجع [سجل إصدارات المنبع](https://pgbackrest.org/release.html) للإصدارات الأحدث.
+يغطي هذا التوثيق المطابق الإصدار v2.60.1. راجع [سجل إصدارات المنبع](https://pgbackrest.org/release.html) للإصدارات الأحدث.
+
+### ملاحظات إصدار v2.60.1 {#v2601-release-notes}
+
+*إصلاحات annotate وSFTP*
+
+*صدر في 16 نوفمبر 2026*
+
+**إصلاحات الأخطاء:**
+
+- إصلاح حفظ `annotate` لملف `backup.info` في المستودع الافتراضي. (*ساهم به David Steele. راجعه Stefan Fercot وDouglas J Hunley.*)
+
+  عندما لم يكن `repo` محددًا، كان أمر `annotate` يبحث في كل مستودع عن مجموعة النسخ الاحتياطي لكنه يحفظ `backup.info` المحدّث في المستودع الافتراضي. كان التعليق على مجموعة غير موجودة فيه يستبدل `backup.info` الخاص به بملف المستودع الذي وُجدت فيه المجموعة. إذا كان المستودع الافتراضي مشفرًا، فُقد المفتاح اللازم لقراءة نسخه الاحتياطية، فلم يعد ممكنًا استعادتها.
+
+  طلب الدمج [#2916](https://github.com/pgbackrest/pgbackrest/pull/2916)
+
+- إصلاح فشل محتمل لاستعادة النسخ التزايدي على مستوى الكتل في تخزين SFTP. (*ساهم به David Steele. راجعه Douglas J Hunley. اقترحه fineline19.*)
+
+  كانت كل قراءة كتلة فائقة تترك ملفًا مفتوحًا على الخادم حتى انتهاء الجلسة. كان الاستعادة قد تصل إلى حد الملفات المفتوحة للخادم وتفشل بخطأ مثل `sftp errno [4]` أو `client state is 'response' but expected 'idle'`. تُغلق قراءات الكتل الفائقة الآن قبل تحريرها.
+
+  المشكلة [#2884](https://github.com/pgbackrest/pgbackrest/issues/2884); طلب الدمج [#2902](https://github.com/pgbackrest/pgbackrest/pull/2902)
+
+- إصلاح استخدام مقابض ملفات SFTP بعد إعادة الاتصال. (*ساهم به David Steele. راجعه Douglas J Hunley.*)
+
+  كانت إعادة الاتصال تحرر الجلسة بينما قد تظل ملفات أخرى مفتوحة عليها، وكانت القراءة أو الكتابة التالية لأحد تلك الملفات تستخدم ذاكرة محررة. تفشل هذه العمليات الآن بخطأ `connection was lost`، ما يسمح بإعادة محاولة المهمة.
+
+  المشكلة [#2884](https://github.com/pgbackrest/pgbackrest/issues/2884); طلب الدمج [#2903](https://github.com/pgbackrest/pgbackrest/pull/2903)
+
+- إصلاح الاستخدام المفرط للذاكرة بواسطة قائمة التخصيصات الحرة لسياقات الذاكرة. (*ساهم به Vasiliy Koshkin. راجعه David Steele وDouglas J Hunley.*)
+
+  كانت القائمة تحتفظ للتخصيصات المحررة بحجم 64KiB أو أكثر لإعادة استخدامها. كانت المخازن المؤقتة التي تكبر أثناء كتابة البيانات، مثل مخازن الرفع إلى تخزين الكائنات، والتخصيصات غير المتكررة تملأ القائمة دون إعادة استخدامها. كان كل عملية قادرة على الاحتفاظ بما يصل إلى 64MiB، لذا زاد استخدام الذاكرة بشكل ملحوظ مع `process-max` مرتفع. يُحتفظ الآن فقط بالتخصيصات بحجم `buffer-size`.
+
+  المشكلة [#2911](https://github.com/pgbackrest/pgbackrest/issues/2911); طلب الدمج [#2912](https://github.com/pgbackrest/pgbackrest/pull/2912)
+
+- عدم خفض الحد الأدنى لإصدار TLS المحدد في إعداد OpenSSL. (*ساهم به David Steele. راجعه Douglas J Hunley وStefan Fercot.*)
+
+  كان الحد الأدنى لإصدار TLS يُضبط على 1.2 بعد تطبيق إعداد OpenSSL. كان ذلك يخفض حدًا أدنى أعلى مثل `MinProtocol = TLSv1.3`، فتبقى اتصالات TLS 1.2 مسموحة. يُضبط الحد الأدني الآن فقط عندما يكون الحد من الإعداد أقل من TLS 1.2.
+
+  المشكلة [#2889](https://github.com/pgbackrest/pgbackrest/issues/2889); طلب الدمج [#2899](https://github.com/pgbackrest/pgbackrest/pull/2899)
+
+- إصلاح الإبلاغ عن أخطاء OpenSSL. (*ساهم به David Steele. راجعه Douglas J Hunley وStefan Fercot.*)
+
+  كان خطأ في قائمة الانتظار بسبب إعداد OpenSSL أو متبقٍ من فشل سابق قد يُبلَّغ عنه بدل الفشل الفعلي، مثل `ssl command section not found` لقيمة `tls-cipher-12` غير صالحة. كانت أخطاء النظام مثل ملف CA مفقود تُبلَّغ كـ `no details available` مع OpenSSL >= 3.0، وتُبلَّغ الآن برسالة خطأ النظام.
+
+  المشكلة [#2889](https://github.com/pgbackrest/pgbackrest/issues/2889); طلب الدمج [#2900](https://github.com/pgbackrest/pgbackrest/pull/2900)
+
+**تحسينات التوثيق:**
+
+- توثيق إعدادات TLS التي يتم تخطيها عند `repo-storage-verify-tls=n`. (*ساهم به David Steele.*)
+
+  مع `repo-storage-verify-tls=n` لا يُضبط الحد الأدنى TLSv1.2، ويُتجاهل الخياران `tls-cipher-12` و`tls-cipher-13` لاتصالات تخزين المستودع.
+
+**تطوير التوثيق:**
+
+- إزالة الملفات القديمة من مسارات الموقع التي يكتبها بناء التوثيق. (*ساهم به David Steele.*)
+
+- إنهاء سجل ملاحظات إصدارات التصحيحات عند الفرع integration-x.y.z-ci. (*ساهم به David Steele.*)
+
+**تطوير الاختبارات:**
+
+- تحديثات CI. (*ساهم به David Steele.*)
+
 
 ### ملاحظات إصدار v2.60.0 {#v2600-release-notes}
 

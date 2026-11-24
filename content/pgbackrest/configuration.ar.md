@@ -628,7 +628,7 @@ example: tcp-keep-alive-interval=30
 
 ملاحظة:
 
-الحد الأدنى المطلق لمستوى الأمان لأي اتصال نقل هو TLSv1.2.
+الحد الأدنى المطلق لمستوى الأمان لأي اتصال نقل هو TLSv1.2، إلا إذا كانت `repo-storage-verify-tls=n`.
 
 يمكن تعديل حزم التشفير المقبولة عند الحاجة. والمثال خيار معقول ما لم تكن لديك متطلبات أمنية محددة. وإذا تُرك دون ضبط (وهو الافتراضي)، تُطبَّق القيمة الافتراضية لمكتبة OpenSSL الأساسية.
 
@@ -644,7 +644,7 @@ example: tls-cipher-12=HIGH:MEDIUM:+3DES:!aNULL
 
 ملاحظة:
 
-الحد الأدنى المطلق لمستوى الأمان لأي اتصال نقل هو TLSv1.2.
+الحد الأدنى المطلق لمستوى الأمان لأي اتصال نقل هو TLSv1.2، إلا إذا كانت `repo-storage-verify-tls=n`.
 
 يمكن تعديل حزم التشفير المقبولة عند الحاجة. وإذا تُرك دون ضبط (وهو الافتراضي)، تُطبَّق القيمة الافتراضية لمكتبة OpenSSL الأساسية.
 
@@ -1709,11 +1709,15 @@ allow range (depending on repo-type):
 example: repo1-storage-upload-chunk-size=16MiB
 ```
 
-### خيار التحقق من شهادة التخزين للمستودع (`--repo-storage-verify-tls`) {#repository-storage-certificate-verify-option---repo-storage-verify-tls}
+<span id="repository-storage-certificate-verify-option---repo-storage-verify-tls"></span>
 
-التحقق من شهادة تخزين المستودع.
+### خيار التحقق من TLS لتخزين المستودع (`--repo-storage-verify-tls`) {#repository-storage-tls-verify-option---repo-storage-verify-tls}
+
+التحقق من TLS لتخزين المستودع.
 
 يوفر هذا الخيار القدرة على تمكين/تعطيل التحقق من شهادة TLS لخادم التخزين (مثل S3 أو Azure). ولا ينبغي استخدام التعطيل إلا للاختبار أو للسيناريوهات الأخرى التي تكون فيها الشهادة موقعة ذاتيًا.
+
+يؤدي التعطيل أيضًا إلى إزالة الحد الأدنى TLSv1.2 وتجاهل الخيارين `tls-cipher-12` و`tls-cipher-13` لاتصالات تخزين المستودع.
 
 ```text
 default: y

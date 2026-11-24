@@ -25,7 +25,68 @@ Die Versionshinweise können auch „Zusätzliche Hinweise“ enthalten. Änderu
 
 ## Dokumentierte stabile Version {#current-stable-release}
 
-Diese Spiegelung dokumentiert v2.60.0. Neuere Versionen sind in der [Versionsgeschichte des Originalprojekts](https://pgbackrest.org/release.html) aufgeführt.
+Diese Spiegelung dokumentiert v2.60.1. Neuere Versionen sind in der [Versionsgeschichte des Originalprojekts](https://pgbackrest.org/release.html) aufgeführt.
+
+### v2.60.1 – Versionshinweise {#v2601-release-notes}
+
+*Korrekturen für annotate und SFTP*
+
+*Veröffentlicht am 16. November 2026*
+
+**Fehlerkorrekturen:**
+
+- Korrigiert, dass `annotate` `backup.info` im Standard-Repository speichert. (*Beigetragen von David Steele. Reviewed by Stefan Fercot, Douglas J Hunley.*)
+
+  Wenn `repo` nicht angegeben war, durchsuchte der Befehl `annotate` jedes Repository nach dem Backup-Set, speicherte die aktualisierte `backup.info` jedoch im Standard-Repository. Beim Annotieren eines Backup-Sets, das sich nicht im Standard-Repository befand, wurde die `backup.info` des Standard-Repositorys durch die `backup.info` des Repositorys ersetzt, in dem das Set gefunden wurde. War das Standard-Repository verschlüsselt, ging der Schlüssel verloren, der zum Lesen seiner Backups nötig war; diese Backups konnten danach nicht mehr wiederhergestellt werden.
+
+  Pull Request [#2916](https://github.com/pgbackrest/pgbackrest/pull/2916)
+
+- Mögliche Fehler bei der Block-Incremental-Wiederherstellung auf SFTP-Speicher korrigiert. (*Beigetragen von David Steele. Reviewed by Douglas J Hunley. Suggested by fineline19.*)
+
+  Jeder Superblock-Lesevorgang ließ eine Datei auf dem Server geöffnet, bis die Sitzung endete. Eine Wiederherstellung konnte das Limit offener Dateien des Servers erreichen und mit einem Fehler wie „sftp errno [4]“ oder „client state is 'response' but expected 'idle'“ fehlschlagen. Superblock-Lesevorgänge werden jetzt geschlossen, bevor sie freigegeben werden.
+
+  Issue [#2884](https://github.com/pgbackrest/pgbackrest/issues/2884); Pull Request [#2902](https://github.com/pgbackrest/pgbackrest/pull/2902)
+
+- Verwendung von SFTP-Datei-Handles nach einer Wiederverbindung korrigiert. (*Beigetragen von David Steele. Reviewed by Douglas J Hunley.*)
+
+  Eine Wiederverbindung gab die Sitzung frei, während andere Dateien auf ihr noch geöffnet sein konnten; das nächste Lesen oder Schreiben einer dieser Dateien verwendete freigegebenen Speicher. Diese Vorgänge schlagen jetzt mit „connection was lost“ fehl, wodurch der Auftrag erneut versucht werden kann.
+
+  Issue [#2884](https://github.com/pgbackrest/pgbackrest/issues/2884); Pull Request [#2903](https://github.com/pgbackrest/pgbackrest/pull/2903)
+
+- Übermäßige Speichernutzung durch die Freelist für Speicherkontexte korrigiert. (*Beigetragen von Vasiliy Koshkin. Reviewed by David Steele, Douglas J Hunley.*)
+
+  Die Freelist behielt freigegebene Zuordnungen von 64 KiB oder mehr zur Wiederverwendung. Puffer, die beim Schreiben von Daten wachsen, etwa Upload-Puffer für Objektspeicher, sowie Zuordnungen, die sich nicht wiederholten, füllten die Liste, ohne wiederverwendet zu werden. Jeder Prozess konnte bis zu 64 MiB behalten, daher stieg die Speichernutzung mit hohem `process-max` deutlich. Jetzt werden nur Zuordnungen der Größe `buffer-size` behalten.
+
+  Issue [#2911](https://github.com/pgbackrest/pgbackrest/issues/2911); Pull Request [#2912](https://github.com/pgbackrest/pgbackrest/pull/2912)
+
+- Eine durch die OpenSSL-Konfiguration festgelegte TLS-Mindestversion wird nicht mehr gesenkt. (*Beigetragen von David Steele. Reviewed by Douglas J Hunley, Stefan Fercot.*)
+
+  Die TLS-Mindestversion wurde nach dem Anwenden der OpenSSL-Konfiguration auf 1.2 gesetzt. Dadurch wurde ein höheres Minimum wie `MinProtocol = TLSv1.3` gesenkt, sodass TLS-1.2-Verbindungen weiterhin erlaubt waren. Das Minimum wird jetzt nur gesetzt, wenn das Minimum aus der Konfiguration niedriger als TLS 1.2 ist.
+
+  Issue [#2889](https://github.com/pgbackrest/pgbackrest/issues/2889); Pull Request [#2899](https://github.com/pgbackrest/pgbackrest/pull/2899)
+
+- Meldung von OpenSSL-Fehlern korrigiert. (*Beigetragen von David Steele. Reviewed by Douglas J Hunley, Stefan Fercot.*)
+
+  Ein Fehler, der durch die OpenSSL-Konfiguration in die Warteschlange gestellt worden war oder von einem früheren Fehler übrig geblieben war, konnte statt des tatsächlichen Fehlers gemeldet werden, etwa „ssl command section not found“ für einen ungültigen `tls-cipher-12`-Wert. Systemfehler wie eine fehlende CA-Datei meldeten mit OpenSSL >= 3.0 „no details available“ und geben jetzt die Systemfehlermeldung aus.
+
+  Issue [#2889](https://github.com/pgbackrest/pgbackrest/issues/2889); Pull Request [#2900](https://github.com/pgbackrest/pgbackrest/pull/2900)
+
+**Dokumentationsverbesserungen:**
+
+- TLS-Einstellungen dokumentiert, die bei `repo-storage-verify-tls=n` übersprungen werden. (*Beigetragen von David Steele.*)
+
+  Mit `repo-storage-verify-tls=n` wird das TLSv1.2-Minimum nicht gesetzt und die Optionen `tls-cipher-12` und `tls-cipher-13` werden für Repository-Speicherverbindungen ignoriert.
+
+**Dokumentationsentwicklung:**
+
+- Veraltete Dateien aus Website-Pfaden entfernt, die vom Dokumentationsbuild geschrieben werden. (*Beigetragen von David Steele.*)
+
+- Die Historie der Patchrelease-Hinweise endet jetzt am Branch integration-x.y.z-ci. (*Beigetragen von David Steele.*)
+
+**Testentwicklung:**
+
+- CI-Aktualisierungen. (*Beigetragen von David Steele.*)
+
 
 ### v2.60.0 – Versionshinweise {#v2600-release-notes}
 

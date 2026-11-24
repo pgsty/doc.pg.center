@@ -11,6 +11,44 @@ upstream_link: "https://pgbackrest.org/news.html"
 
 --------
 
+## pgBackRest 2.60.1 veröffentlicht {#release-2-60-1}
+
+**16. November 2026**
+
+Die pgBackRest-Community gibt gerne die Veröffentlichung von [pgBackRest](https://pgbackrest.org) 2.60.1 bekannt, der neuesten Version der zuverlässigen, leicht zu bedienenden Backup- und Restore-Lösung, die sich nahtlos bis zu den größten Datenbanken und Workloads skalieren lässt.
+
+pgBackRest unterstützt einen umfangreichen Funktionsumfang für die Verwaltung Ihrer Backup- und Recovery-Infrastruktur, darunter paralleles Backup/Wiederherstellung, vollständige/differentielle/incrementelle Backups, Block-Incremental-Backups, mehrere Repositorys, Delta-Wiederherstellung, paralleles asynchrones Archivieren, Schutz vor Schadsoftware/Ransomware, Prüfsummen pro Datei, Seitenprüfsummen (wenn aktiviert) mit Prüfung während des Backups, mehrere Komprimierungstypen, Verschlüsselung, Fortsetzen teilweisener/fehlgeschlagener Backups, Backup vom Standby, Tablespace- und Link-Unterstützung, S3/Azure/GCS/SFTP-Unterstützung, Backup-Ablauf, lokale/ferne Ausführung über SSH oder TLS sowie flexible Konfiguration.
+
+pgBackRest kann aus dem [PostgreSQL-Yum-Repository](https://yum.postgresql.org) oder dem [PostgreSQL-APT-Repository](https://apt.postgresql.org) installiert werden; für viele andere Distributionen sind ebenfalls Pakete verfügbar. Der Quellcode kann über [Releases](/de/pgbackrest/release/) heruntergeladen werden.
+
+### Fehlerkorrekturen {#release-2-60-1-feature}
+
+- Falsche Repository-Aktualisierungen durch `annotate` korrigiert (David Steele).
+- Mögliche Block-Incremental-Wiederherstellungsfehler auf SFTP-Speicher korrigiert (David Steele).
+- Verwendung von SFTP-Datei-Handles nach einer Wiederverbindung korrigiert (David Steele).
+- Übermäßige Speichernutzung durch die Freelist für Speicherkontexte korrigiert (Vasiliy Koshkin).
+- Eine durch die OpenSSL-Konfiguration festgelegte TLS-Mindestversion wird nicht mehr gesenkt (David Steele).
+- Meldung von OpenSSL-Fehlern korrigiert (David Steele).
+
+Weitere Korrekturen und Verbesserungen stehen in den [Versionshinweisen zu 2.60.1](/de/pgbackrest/release/#v2601-release-notes).
+
+### Wichtige Hinweise {#release-2-60-1-note}
+
+- PostgreSQL 19rc2 wird von v2.59.2 und neuer unterstützt, einschließlich dieser Version.
+
+### Links {#release-2-60-1-link}
+
+- [Website](/de/pgbackrest/)
+- [Benutzerhandbücher](/de/pgbackrest/user-guide/)
+- [Versionshinweise](/de/pgbackrest/release/)
+
+### Förderung {#release-2-60-1-sponsorship}
+
+Diese Version wurde durch die großzügige Förderung von [AWS](https://aws.amazon.com), [Supabase](https://supabase.com), [pgEdge](https://pgedge.com), [Tiger Data](https://tigerdata.com), [Percona](https://percona.com), [Eon](https://eon.io), [Xata](https://xata.io), [Dalibo](https://dalibo.com) und [Data Egret](https://dataegret.com/) ermöglicht.
+
+
+--------
+
 ## pgBackRest 2.60.0 veröffentlicht {#release-2-60-0}
 
 **18. Oktober 2026**

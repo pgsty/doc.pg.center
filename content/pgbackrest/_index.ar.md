@@ -1,5 +1,5 @@
 ---
-title: "وثائق pgBackRest 2.60.0"
+title: "وثائق pgBackRest 2.60.1"
 linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
@@ -10,12 +10,12 @@ sidebar_root_link_self: true
 description: "نسخ احتياطي واستعادة موثوقان لـ PostgreSQL — وثائق pgBackRest ومرجعها."
 module: [PGBACKREST]
 categories: [مفهوم]
-upstream_source: pgbackrest
-upstream_ref: v2.60.0
+upstream_source: pgbackrest-20261121
+upstream_ref: v2.60.1
 upstream_link: "https://pgbackrest.org/"
 cascade:
-  upstream_source: pgbackrest
-  upstream_ref: v2.60.0
+  upstream_source: pgbackrest-20261121
+  upstream_ref: v2.60.1
   type: docs
   module: [PGBACKREST]
 ---
@@ -26,7 +26,9 @@ cascade:
 
 pgBackRest هو حل موثوق للنسخ الاحتياطي والاستعادة لـ PostgreSQL يتمدد بسلاسة حتى أكبر قواعد البيانات وأحمال العمل.
 
-تغطي هذه المرآة للتوثيق pgBackRest [v2.60.0](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.0). وتوجد ملاحظات الإصدار في صفحة [الإصدارات](/ar/pgbackrest/release/).
+يصلح الإصدار 2.60.1 تحديثات المستودع غير الصحيحة بواسطة `annotate`، وفشل الاستعادة عبر SFTP، والاحتفاظ المفرط بالذاكرة، ومعالجة إعداد TLS والأخطاء. راجع [ملاحظات الإصدار 2.60.1](/ar/pgbackrest/release/#v2601-release-notes).
+
+تغطي هذه المرآة للتوثيق pgBackRest [v2.60.1](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.1). وتوجد ملاحظات الإصدار في صفحة [الإصدارات](/ar/pgbackrest/release/).60.1](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.1). وتوجد ملاحظات الإصدار في صفحة [الإصدارات](/ar/pgbackrest/release/).
 
 يضيف الإصدار 2.60.0 معالجة قابلة للضبط لأخطاء مجاميع تحقق الصفحات، والجلب المسبق للقراءة من مخازن الكائنات، ودعم GCS Workload Identity Federation. يتوقف `restore` و`expire` الآن افتراضيًا عند وجود مجاميع تحقق صفحات غير صالحة؛ راجع [ملاحظات الإصدار 2.60.0](/ar/pgbackrest/release/#v2600-release-notes).
 
@@ -38,6 +40,8 @@ pgBackRest هو حل موثوق للنسخ الاحتياطي والاستعاد
 --------
 
 ## الأخبار {#news}
+
+**16 نوفمبر 2026** - [صدور pgBackRest 2.60.1](/ar/pgbackrest/news/#release-2-60-1)
 
 **18 أكتوبر 2026** - [صدور pgBackRest 2.60.0](/ar/pgbackrest/news/#release-2-60-0)
 

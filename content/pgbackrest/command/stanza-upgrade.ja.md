@@ -255,7 +255,7 @@ example: --tcp-keep-alive-interval=30
 
 pgBackRestクライアントとサーバー間のすべてのTLS接続は暗号化されます。デフォルトでは、オブジェクトストア（例：S3）への接続も暗号化されます。
 
-> **注記：** どのトランスポート接続でも、セキュリティーの最低要件はTLSv1.2です。
+> **注記：** `repo-storage-verify-tls=n` の場合を除き、どのトランスポート接続でも、セキュリティーの最低要件はTLSv1.2です。
 
 必要に応じて、受け入れる暗号スイートを調整できます。特別なセキュリティー要件がなければ、例に示す値が妥当な選択です。未設定（デフォルト）の場合は、使用するOpenSSLライブラリのデフォルトが適用されます。
 
@@ -269,7 +269,7 @@ example: --tls-cipher-12=HIGH:MEDIUM:+3DES:!aNULL
 
 pgBackRestクライアントとサーバー間のすべてのTLS接続は暗号化されます。デフォルトでは、オブジェクトストア（例：S3）への接続も暗号化されます。
 
-> **注記：** どのトランスポート接続でも、セキュリティーの最低要件はTLSv1.2です。
+> **注記：** `repo-storage-verify-tls=n` の場合を除き、どのトランスポート接続でも、セキュリティーの最低要件はTLSv1.2です。
 
 必要に応じて、受け入れる暗号スイートを調整できます。未設定（デフォルト）の場合は、使用するOpenSSLライブラリのデフォルトが適用されます。
 
@@ -1001,11 +1001,15 @@ allow range (depending on repo-type):
 example: --repo1-storage-upload-chunk-size=16MiB
 ```
 
-### リポジトリストレージ証明書検証オプション（`--repo-storage-verify-tls`） {#repository-storage-certificate-verify-option---repo-storage-verify-tls}
+<span id="repository-storage-certificate-verify-option---repo-storage-verify-tls"></span>
 
-リポジトリストレージの証明書を検証します。
+### リポジトリストレージTLS検証オプション（`--repo-storage-verify-tls`） {#repository-storage-tls-verify-option---repo-storage-verify-tls}
+
+リポジトリストレージのTLSを検証します。
 
 このオプションでは、ストレージ（例：S3、Azure）サーバーのTLS証明書の検証を有効/無効にできます。無効化は、テストや自己署名証明書を使用する場合に限ってください。
+
+無効化するとTLSv1.2の最低要件も取り除かれ、リポジトリストレージ接続では`tls-cipher-12`および`tls-cipher-13`オプションが無視されます。
 
 ```yaml
 default: y

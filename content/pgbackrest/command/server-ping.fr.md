@@ -182,7 +182,7 @@ Suites de chiffrement TLSv1.2 autorisées.
 
 Toutes les connexions TLS entre le client pgBackRest et le serveur sont chiffrées. Par défaut, les connexions aux magasins d'objets (par exemple S3) sont également chiffrées.
 
-> **NOTE :** Le niveau de sécurité minimal absolu pour toute connexion de transport est TLSv1.2.
+> **NOTE :** Le niveau de sécurité minimal absolu pour toute connexion de transport est TLSv1.2, sauf si `repo-storage-verify-tls=n`.
 
 Les suites de chiffrement acceptées peuvent être ajustées si nécessaire. L'exemple proposé constitue un choix raisonnable sauf si des exigences de sécurité spécifiques s'appliquent. Si non définies (valeur par défaut), la valeur par défaut de la bibliothèque OpenSSL sous-jacente s'applique.
 
@@ -196,7 +196,7 @@ Suites de chiffrement TLSv1.3 autorisées.
 
 Toutes les connexions TLS entre le client pgBackRest et le serveur sont chiffrées. Par défaut, les connexions aux magasins d'objets (par exemple S3) sont également chiffrées.
 
-> **NOTE :** Le niveau de sécurité minimal absolu pour toute connexion de transport est TLSv1.2.
+> **NOTE :** Le niveau de sécurité minimal absolu pour toute connexion de transport est TLSv1.2, sauf si `repo-storage-verify-tls=n`.
 
 Les suites de chiffrement acceptées peuvent être ajustées si nécessaire. Si non définies (valeur par défaut), la valeur par défaut de la bibliothèque OpenSSL sous-jacente s'applique.
 

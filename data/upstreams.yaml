@@ -371,7 +371,7 @@ pgbackrest-20261121:
   ref: v2.60.1
   modified: true
   snapshot_date: '2026-11-21'
-  languages: [en, zh]
+  languages: [en, zh, fr, ja, de, ru, ar, es]
   translation_baseline: pgbackrest
   source_sha256:
     doc/xml/news.xml: 97616d945b5d7e59897f9f7b945648e0c855c64aedeb4c473702d82ed7655a26

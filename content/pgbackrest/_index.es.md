@@ -1,5 +1,5 @@
 ---
-title: "Documentación de pgBackRest 2.60.0"
+title: "Documentación de pgBackRest 2.60.1"
 linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
@@ -10,12 +10,12 @@ sidebar_root_link_self: true
 description: "Copias de seguridad y restauración fiables para PostgreSQL — documentación y referencia de pgBackRest."
 module: [PGBACKREST]
 categories: [Concepto]
-upstream_source: pgbackrest
-upstream_ref: v2.60.0
+upstream_source: pgbackrest-20261121
+upstream_ref: v2.60.1
 upstream_link: "https://pgbackrest.org/"
 cascade:
-  upstream_source: pgbackrest
-  upstream_ref: v2.60.0
+  upstream_source: pgbackrest-20261121
+  upstream_ref: v2.60.1
   type: docs
   module: [PGBACKREST]
 ---
@@ -26,7 +26,9 @@ cascade:
 
 pgBackRest es una solución fiable de copia de seguridad y restauración para PostgreSQL que escala sin problemas hasta las bases de datos y cargas de trabajo más grandes.
 
-Este espejo de la documentación cubre pgBackRest [v2.60.0](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.0). Las notas de la versión están en la página de [versiones](/es/pgbackrest/release/).
+La versión 2.60.1 corrige las actualizaciones incorrectas del repositorio hechas por `annotate`, los fallos de restauración por SFTP, la retención excesiva de memoria y el manejo de configuración y errores de TLS. Consulta las [notas de la versión 2.60.1](/es/pgbackrest/release/#v2601-release-notes).
+
+Este espejo de la documentación cubre pgBackRest [v2.60.1](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.1). Las notas de la versión están en la página de [versiones](/es/pgbackrest/release/).
 
 La versión 2.60.0 añade un tratamiento configurable de los errores de sumas de control de páginas, la lectura anticipada de almacenes de objetos y GCS Workload Identity Federation. Ahora `restore` y `expire` se detienen de forma predeterminada ante sumas de control de páginas no válidas; consulta las [notas de la versión 2.60.0](/es/pgbackrest/release/#v2600-release-notes).
 
@@ -38,6 +40,8 @@ La versión 2.59.3 corrigió posibles subclaves de cifrado débiles y sales. La 
 --------
 
 ## Novedades {#news}
+
+**16 de noviembre de 2026** - [Publicación de pgBackRest 2.60.1](/es/pgbackrest/news/#release-2-60-1)
 
 **18 de octubre de 2026** - [Publicación de pgBackRest 2.60.0](/es/pgbackrest/news/#release-2-60-0)
 

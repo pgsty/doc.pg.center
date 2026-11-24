@@ -1,5 +1,5 @@
 ---
-title: "pgBackRest 2.60.0 ドキュメント"
+title: "pgBackRest 2.60.1 ドキュメント"
 linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
@@ -10,12 +10,12 @@ sidebar_root_link_self: true
 description: "信頼性の高いPostgreSQLのバックアップとリストア — pgBackRestのドキュメントとリファレンス。"
 module: [PGBACKREST]
 categories: [概念]
-upstream_source: pgbackrest
-upstream_ref: v2.60.0
+upstream_source: pgbackrest-20261121
+upstream_ref: v2.60.1
 upstream_link: "https://pgbackrest.org/"
 cascade:
-  upstream_source: pgbackrest
-  upstream_ref: v2.60.0
+  upstream_source: pgbackrest-20261121
+  upstream_ref: v2.60.1
   type: docs
   module: [PGBACKREST]
 ---
@@ -26,7 +26,7 @@ cascade:
 
 pgBackRestは、最大規模のデータベースやワークロードにもシームレスに対応できる、PostgreSQL向けの信頼性の高いバックアップとリストアのソリューションです。
 
-このドキュメントミラーはpgBackRest [v2.60.0](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.0)を対象としています。リリースノートは[リリース](/ja/pgbackrest/release/)ページにあります。
+このドキュメントミラーはpgBackRest [v2.60.1](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.1)を対象としています。リリースノートは[リリース](/ja/pgbackrest/release/)ページにあります。リリースノートは[リリース](/ja/pgbackrest/release/)ページにあります。
 
 2.60.0では、ページチェックサムエラー時の動作設定、オブジェクトストアからの読み取りのプリフェッチ、GCS Workload Identity Federationが追加されました。`restore`と`expire`は、無効なページチェックサムを検出した場合にデフォルトで停止するようになりました。[2.60.0リリースノート](/ja/pgbackrest/release/#v2600-release-notes)を参照してください。
 
@@ -38,6 +38,8 @@ pgBackRestを気に入っていただけたら、[GitHub](https://github.com/pgb
 --------
 
 ## ニュース {#news}
+
+**2026年11月16日** - [pgBackRest 2.60.1リリース](/ja/pgbackrest/news/#release-2-60-1)
 
 **2026年10月18日** - [pgBackRest 2.60.0リリース](/ja/pgbackrest/news/#release-2-60-0)
 

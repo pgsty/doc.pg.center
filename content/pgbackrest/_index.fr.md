@@ -1,5 +1,5 @@
 ---
-title: "Documentation de pgBackRest 2.60.0"
+title: "Documentation de pgBackRest 2.60.1"
 linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
@@ -10,12 +10,12 @@ sidebar_root_link_self: true
 description: "Sauvegarde et restauration fiable de PostgreSQL — documentation et référence pgBackRest."
 module: [PGBACKREST]
 categories: [Concept]
-upstream_source: pgbackrest
-upstream_ref: v2.60.0
+upstream_source: pgbackrest-20261121
+upstream_ref: v2.60.1
 upstream_link: "https://pgbackrest.org/"
 cascade:
-  upstream_source: pgbackrest
-  upstream_ref: v2.60.0
+  upstream_source: pgbackrest-20261121
+  upstream_ref: v2.60.1
   type: docs
   module: [PGBACKREST]
 ---
@@ -26,7 +26,9 @@ cascade:
 
 pgBackRest est une solution fiable de sauvegarde et de restauration pour PostgreSQL, qui s'adapte sans heurt aux plus grandes bases de données et charges de travail.
 
-Ce miroir de documentation couvre pgBackRest [v2.60.0](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.0). Les notes de version se trouvent sur la page [Notes de version](/fr/pgbackrest/release/).
+La version 2.60.1 corrige les mises à jour incorrectes de dépôt par `annotate`, les échecs de restauration SFTP, la rétention excessive de mémoire et la gestion des erreurs de configuration TLS. Consultez les [notes de version 2.60.1](/fr/pgbackrest/release/#v2601-release-notes).
+
+Ce miroir de documentation couvre pgBackRest [v2.60.1](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.1). Les notes de version se trouvent sur la page [Notes de version](/fr/pgbackrest/release/).60.1](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.1). Les notes de version se trouvent sur la page [Notes de version](/fr/pgbackrest/release/).
 
 La version 2.60.0 ajoute la gestion configurable des erreurs de sommes de contrôle de pages, la prélecture depuis les stockages objet et GCS Workload Identity Federation. Par défaut, `restore` et `expire` s'arrêtent désormais en cas de sommes de contrôle de pages invalides ; consultez les [notes de version 2.60.0](/fr/pgbackrest/release/#v2600-release-notes).
 
@@ -38,6 +40,8 @@ Merci de nous donner une étoile sur [GitHub](https://github.com/pgbackrest/pgba
 --------
 
 ## Actualités {#news}
+
+**16 novembre 2026** - [pgBackRest 2.60.1 publié](/fr/pgbackrest/news/#release-2-60-1)
 
 **18 octobre 2026** - [pgBackRest 2.60.0 publié](/fr/pgbackrest/news/#release-2-60-0)
 

@@ -257,7 +257,7 @@ Zulässige TLSv1.2-Cipher-Suites.
 
 Alle TLS-Verbindungen zwischen pgBackRest-Client und -Server sind verschlüsselt. Standardmäßig sind auch Verbindungen zu Objektspeichern wie S3 verschlüsselt.
 
-> **HINWEIS:** TLSv1.2 ist das absolute Mindestsicherheitsniveau für jede Transportverbindung.
+> **HINWEIS:** TLSv1.2 ist das absolute Mindestsicherheitsniveau für jede Transportverbindung, außer `repo-storage-verify-tls=n` ist gesetzt.
 
 Die akzeptierten Cipher-Suites können bei Bedarf angepasst werden. Das Beispiel ist eine sinnvolle Wahl, sofern keine besonderen Sicherheitsanforderungen bestehen. Ist die Option nicht gesetzt (Standardeinstellung), gilt die Vorgabe der zugrunde liegenden OpenSSL-Bibliothek.
 
@@ -271,7 +271,7 @@ Zulässige TLSv1.3-Cipher-Suites.
 
 Alle TLS-Verbindungen zwischen pgBackRest-Client und -Server sind verschlüsselt. Standardmäßig sind auch Verbindungen zu Objektspeichern wie S3 verschlüsselt.
 
-> **HINWEIS:** TLSv1.2 ist das absolute Mindestsicherheitsniveau für jede Transportverbindung.
+> **HINWEIS:** TLSv1.2 ist das absolute Mindestsicherheitsniveau für jede Transportverbindung, außer `repo-storage-verify-tls=n` ist gesetzt.
 
 Die akzeptierten Cipher-Suites können bei Bedarf angepasst werden. Ist die Option nicht gesetzt (Standardeinstellung), gilt die Vorgabe der zugrunde liegenden OpenSSL-Bibliothek.
 
@@ -1003,11 +1003,15 @@ allow range (depending on repo-type):
 example: --repo1-storage-upload-chunk-size=16MiB
 ```
 
-### Option zur Zertifikatprüfung des Repository-Speichers (`--repo-storage-verify-tls`) {#repository-storage-certificate-verify-option---repo-storage-verify-tls}
+<span id="repository-storage-certificate-verify-option---repo-storage-verify-tls"></span>
 
-Zertifikatprüfung für den Repository-Speicher.
+### Option zur TLS-Prüfung des Repository-Speichers (`--repo-storage-verify-tls`) {#repository-storage-tls-verify-option---repo-storage-verify-tls}
+
+TLS-Prüfung des Repository-Speichers.
 
 Mit dieser Option lässt sich die Prüfung des TLS-Serverzertifikats des Speicherdienstes (z. B. S3 oder Azure) aktivieren oder deaktivieren. Die Prüfung sollte nur für Tests oder andere Situationen mit selbstsignierten Zertifikaten deaktiviert werden.
+
+Durch das Deaktivieren wird außerdem die TLSv1.2-Mindestversion entfernt und die Optionen `tls-cipher-12` und `tls-cipher-13` werden für Repository-Speicherverbindungen ignoriert.
 
 ```yaml
 default: y

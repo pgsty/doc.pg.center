@@ -1,5 +1,5 @@
 ---
-title: "Документация pgBackRest 2.60.0"
+title: "Документация pgBackRest 2.60.1"
 linkTitle: pgBackRest
 weight: 20
 icon: fa-solid fa-couch
@@ -10,12 +10,12 @@ sidebar_root_link_self: true
 description: "Надёжное резервное копирование и восстановление PostgreSQL — документация и справочник pgBackRest."
 module: [PGBACKREST]
 categories: [Концепция]
-upstream_source: pgbackrest
-upstream_ref: v2.60.0
+upstream_source: pgbackrest-20261121
+upstream_ref: v2.60.1
 upstream_link: "https://pgbackrest.org/"
 cascade:
-  upstream_source: pgbackrest
-  upstream_ref: v2.60.0
+  upstream_source: pgbackrest-20261121
+  upstream_ref: v2.60.1
   type: docs
   module: [PGBACKREST]
 ---
@@ -26,7 +26,9 @@ cascade:
 
 pgBackRest — надёжное решение для резервного копирования и восстановления PostgreSQL, которое легко масштабируется даже для крупнейших баз данных и самых высоких нагрузок.
 
-Это зеркало документации описывает pgBackRest [v2.60.0](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.0). Примечания к выпускам доступны на странице [Выпуски](/ru/pgbackrest/release/).
+Версия 2.60.1 исправляет неверные обновления репозитория командой `annotate`, сбои восстановления SFTP, чрезмерное удержание памяти, а также обработку конфигурации и ошибок TLS. См. [примечания к версии 2.60.1](/ru/pgbackrest/release/#v2601-release-notes).
+
+Это зеркало документации описывает pgBackRest [v2.60.1](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.1). Примечания к выпускам доступны на странице [Выпуски](/ru/pgbackrest/release/).
 
 В версии 2.60.0 добавлены настраиваемая обработка ошибок контрольных сумм страниц, предварительное чтение из объектных хранилищ и поддержка GCS Workload Identity Federation. Теперь `restore` и `expire` по умолчанию останавливаются при неверных контрольных суммах страниц; см. [примечания к выпуску 2.60.0](/ru/pgbackrest/release/#v2600-release-notes).
 
@@ -38,6 +40,8 @@ pgBackRest — надёжное решение для резервного ко�
 --------
 
 ## Новости {#news}
+
+**16 ноября 2026 г.** - [Выпущен pgBackRest 2.60.1](/ru/pgbackrest/news/#release-2-60-1)
 
 **18 октября 2026** - [Выпущен pgBackRest 2.60.0](/ru/pgbackrest/news/#release-2-60-0)
 
@@ -111,7 +115,7 @@ pgBackRest не существовал бы без спонсорства. На�
 
 По умолчанию сбои проверки не останавливают резервное копирование, но предупреждения с подробностями о том, какие именно страницы не прошли проверку, выводятся в консоль и файл журнала. По умолчанию restore выдаёт ошибку, если резервная копия содержит неверные контрольные суммы страниц, а expire не допускает, чтобы такая копия стала самой старой из сохраняемых копий.
 
-Эта функция позволяет обнаруживать повреждения на уровне страниц на ранней стадии, до истечения срока хранения резервных копий с неповреждёнными данными.
+Эта зеркальная документация охватывает pgBackRest [v2.60.1](https://github.com/pgbackrest/pgbackrest/releases/tag/release/2.60.1). Примечания к выпуску находятся на странице [выпусков](/ru/pgbackrest/release/).
 
 
 ### Возобновление резервного копирования {#backup-resume}

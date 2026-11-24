@@ -628,7 +628,7 @@ Todas las conexiones TLS entre el cliente y el servidor de pgBackRest están cif
 
 NOTA:
 
-El nivel de seguridad mínimo absoluto para cualquier conexión de transporte es TLSv1.2.
+El nivel de seguridad mínimo absoluto para cualquier conexión de transporte es TLSv1.2, salvo cuando se establece `repo-storage-verify-tls=n`.
 
 Los conjuntos de cifrado aceptados pueden ajustarse si surge la necesidad. El ejemplo es una elección razonable a menos que tengas requisitos de seguridad específicos. Si no se establece (el predeterminado), se aplica el predeterminado de la librería OpenSSL subyacente.
 
@@ -644,7 +644,7 @@ Todas las conexiones TLS entre el cliente y el servidor de pgBackRest están cif
 
 NOTA:
 
-El nivel de seguridad mínimo absoluto para cualquier conexión de transporte es TLSv1.2.
+El nivel de seguridad mínimo absoluto para cualquier conexión de transporte es TLSv1.2, salvo cuando se establece `repo-storage-verify-tls=n`.
 
 Los conjuntos de cifrado aceptados pueden ajustarse si surge la necesidad. Si no se establece (el predeterminado), se aplica el predeterminado de la librería OpenSSL subyacente.
 
@@ -1709,11 +1709,15 @@ allow range (depending on repo-type):
 example: repo1-storage-upload-chunk-size=16MiB
 ```
 
-### Opción de verificación de certificado del almacenamiento del repositorio (`--repo-storage-verify-tls`) {#repository-storage-certificate-verify-option---repo-storage-verify-tls}
+<span id="repository-storage-certificate-verify-option---repo-storage-verify-tls"></span>
 
-Verificación de certificado del almacenamiento del repositorio.
+### Opción de verificación TLS del almacenamiento del repositorio (`--repo-storage-verify-tls`) {#repository-storage-tls-verify-option---repo-storage-verify-tls}
+
+Verificación TLS del almacenamiento del repositorio.
 
 Esta opción proporciona la capacidad de activar/desactivar la verificación del certificado TLS del servidor de almacenamiento (p. ej., S3, Azure). La desactivación solo debería usarse para pruebas u otros escenarios donde un certificado haya sido autofirmado.
+
+La desactivación también elimina el mínimo de TLSv1.2 e ignora las opciones `tls-cipher-12` y `tls-cipher-13` para las conexiones al almacenamiento del repositorio.
 
 ```text
 default: y

@@ -182,7 +182,7 @@ Zulässige TLSv1.2-Cipher-Suites.
 
 Alle TLS-Verbindungen zwischen pgBackRest-Client und -Server sind verschlüsselt. Standardmäßig sind auch Verbindungen zu Objektspeichern wie S3 verschlüsselt.
 
-> **HINWEIS:** TLSv1.2 ist das absolute Mindestsicherheitsniveau für jede Transportverbindung.
+> **HINWEIS:** TLSv1.2 ist das absolute Mindestsicherheitsniveau für jede Transportverbindung, außer `repo-storage-verify-tls=n` ist gesetzt.
 
 Die akzeptierten Cipher-Suites können bei Bedarf angepasst werden. Das Beispiel ist eine sinnvolle Wahl, sofern keine besonderen Sicherheitsanforderungen bestehen. Ist die Option nicht gesetzt (Standardeinstellung), gilt die Vorgabe der zugrunde liegenden OpenSSL-Bibliothek.
 
@@ -196,7 +196,7 @@ Zulässige TLSv1.3-Cipher-Suites.
 
 Alle TLS-Verbindungen zwischen pgBackRest-Client und -Server sind verschlüsselt. Standardmäßig sind auch Verbindungen zu Objektspeichern wie S3 verschlüsselt.
 
-> **HINWEIS:** TLSv1.2 ist das absolute Mindestsicherheitsniveau für jede Transportverbindung.
+> **HINWEIS:** TLSv1.2 ist das absolute Mindestsicherheitsniveau für jede Transportverbindung, außer `repo-storage-verify-tls=n` ist gesetzt.
 
 Die akzeptierten Cipher-Suites können bei Bedarf angepasst werden. Ist die Option nicht gesetzt (Standardeinstellung), gilt die Vorgabe der zugrunde liegenden OpenSSL-Bibliothek.
 

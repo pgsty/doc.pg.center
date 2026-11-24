@@ -11,6 +11,44 @@ upstream_link: "https://pgbackrest.org/news.html"
 
 --------
 
+## pgBackRest 2.60.1リリース {#release-2-60-1}
+
+**2026年11月16日**
+
+pgBackRestコミュニティは、[pgBackRest](https://pgbackrest.org) 2.60.1のリリースをお知らせします。信頼性が高く使いやすいバックアップおよびリストアソリューションの最新版で、最大規模のデータベースやワークロードにもシームレスに対応できます。
+
+pgBackRestは、バックアップとリカバリー基盤を管理するための充実した機能を備えています。並列バックアップ／リストア、フル／差分／増分バックアップ、ブロック増分バックアップ、複数リポジトリ、差分リストア、並列非同期アーカイブ、マルウェア／ランサムウェア対策、ファイル単位のチェックサム、バックアップ時のページチェックサム検証（有効な場合）、複数の圧縮形式、暗号化、途中まで実行したバックアップや失敗したバックアップの再開、スタンバイからのバックアップ、テーブルスペースとリンク、S3／Azure／GCS／SFTP、バックアップの期限切れ処理、SSHまたはTLSによるローカル／リモート操作、柔軟な設定などです。
+
+pgBackRestは[PostgreSQL Yum Repository](https://yum.postgresql.org)または[PostgreSQL APT Repository](https://apt.postgresql.org)からインストールできます。他の多くのディストリビューション向けにもパッケージが提供されています。ソースコードは[リリース](/ja/pgbackrest/release/)からダウンロードできます。
+
+### バグ修正 {#release-2-60-1-feature}
+
+- `annotate`が`backup.info`をデフォルトリポジトリへ保存する問題を修正 (David Steele)
+- SFTPストレージでブロック増分リストアが失敗する可能性がある問題を修正 (David Steele)
+- 再接続後にSFTPファイルハンドルを使用する問題を修正 (David Steele)
+- メモリーコンテキストのフリーリストによる過剰なメモリー使用を修正 (Vasiliy Koshkin)
+- OpenSSL設定で指定された最低TLSバージョンを下げないようにしました (David Steele)
+- OpenSSLエラーの報告を修正 (David Steele)
+
+その他の修正と改善については、[2.60.1リリースノート](/ja/pgbackrest/release/#v2601-release-notes)を参照してください。
+
+### 重要な注意事項 {#release-2-60-1-note}
+
+- このリリースを含むv2.59.2以降では、PostgreSQL 19rc2をサポートしています。
+
+### リンク {#release-2-60-1-link}
+
+- [ウェブサイト](/ja/pgbackrest/)
+- [ユーザーガイド](/ja/pgbackrest/user-guide/)
+- [リリースノート](/ja/pgbackrest/release/)
+
+### スポンサー {#release-2-60-1-sponsorship}
+
+このリリースは、[AWS](https://aws.amazon.com)、[Supabase](https://supabase.com)、[pgEdge](https://pgedge.com)、[Tiger Data](https://tigerdata.com)、[Percona](https://percona.com)、[Eon](https://eon.io)、[Xata](https://xata.io)、[Dalibo](https://dalibo.com)、[Data Egret](https://dataegret.com/)の寛大なスポンサー支援により実現しました。
+
+
+--------
+
 ## pgBackRest 2.60.0リリース {#release-2-60-0}
 
 **2026年10月18日**

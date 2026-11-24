@@ -25,7 +25,68 @@ v1リリースのドキュメントは[こちら](https://pgbackrest.org/1)を�
 
 ## 本ドキュメントの対象となる安定版 {#current-stable-release}
 
-このミラーはv2.60.0を対象としています。より新しいバージョンについては、[アップストリームのリリース履歴](https://pgbackrest.org/release.html)を参照してください。
+このミラーはv2.60.1を対象としています。より新しいバージョンについては、[アップストリームのリリース履歴](https://pgbackrest.org/release.html)を参照してください。
+
+### v2.60.1リリースノート {#v2601-release-notes}
+
+*AnnotateおよびSFTPの修正*
+
+*2026年11月16日リリース*
+
+**バグ修正：**
+
+- `annotate`が`backup.info`をデフォルトリポジトリへ保存する問題を修正しました。 (*投稿：David Steele。レビュー：Stefan Fercot、Douglas J Hunley。*)
+
+  `repo`を指定しない場合、`annotate`コマンドは各リポジトリからバックアップセットを探しましたが、更新した`backup.info`はデフォルトリポジトリに保存していました。デフォルトリポジトリにないバックアップセットを注釈すると、デフォルトリポジトリの`backup.info`が、バックアップセットが見つかったリポジトリの`backup.info`で置き換えられていました。デフォルトリポジトリが暗号化されていた場合、そのバックアップを読み取るための鍵が失われ、それらのバックアップを復元できなくなっていました。
+
+  プルリクエスト [#2916](https://github.com/pgbackrest/pgbackrest/pull/2916)
+
+- SFTPストレージでブロック増分リストアが失敗する可能性がある問題を修正しました。 (*投稿：David Steele。レビュー：Douglas J Hunley。提案：fineline19。*)
+
+  各スーパーブロックの読み取りは、セッションが終了するまでサーバー上のファイルを開いたままにしていました。リストアがサーバーのオープンファイル上限に達し、`sftp errno [4]`や`client state is 'response' but expected 'idle'`などのエラーで失敗する可能性がありました。スーパーブロックの読み取りは、解放前に閉じられるようになりました。
+
+  課題 [#2884](https://github.com/pgbackrest/pgbackrest/issues/2884); プルリクエスト [#2902](https://github.com/pgbackrest/pgbackrest/pull/2902)
+
+- 再接続後にSFTPファイルハンドルを使用する問題を修正しました。 (*投稿：David Steele。レビュー：Douglas J Hunley。*)
+
+  再接続すると、他のファイルがそのセッション上で開いたままでもセッションが解放され、それらのファイルの次の読み取りまたは書き込みで解放済みメモリーが使われていました。現在はこれらが`connection was lost`で失敗し、ジョブを再試行できます。
+
+  課題 [#2884](https://github.com/pgbackrest/pgbackrest/issues/2884); プルリクエスト [#2903](https://github.com/pgbackrest/pgbackrest/pull/2903)
+
+- メモリーコンテキストのフリーリストによる過剰なメモリー使用を修正しました。 (*投稿：Vasiliy Koshkin。レビュー：David Steele、Douglas J Hunley。*)
+
+  フリーリストは、64KiB以上の解放済み割り当てを再利用のために保持していました。データ書き込みに伴って増大するバッファー（オブジェクトストアアップロードバッファーなど）や、繰り返されない割り当てが、再利用されないままリストを埋めていました。各プロセスが最大64MiBまで保持できたため、`process-max`が大きい場合にメモリー使用量が大幅に増加していました。現在は`buffer-size`サイズの割り当てのみ保持されます。
+
+  課題 [#2911](https://github.com/pgbackrest/pgbackrest/issues/2911); プルリクエスト [#2912](https://github.com/pgbackrest/pgbackrest/pull/2912)
+
+- OpenSSL設定で指定された最低TLSバージョンを下げないようにしました。 (*投稿：David Steele。レビュー：Douglas J Hunley、Stefan Fercot。*)
+
+  OpenSSL設定の適用後に最低TLSバージョンが1.2に設定されていました。そのため、`MinProtocol = TLSv1.3`のような高い最低値が下げられ、TLS 1.2接続が依然として許可されていました。現在は、設定の最低値がTLS 1.2未満の場合にのみ設定します。
+
+  課題 [#2889](https://github.com/pgbackrest/pgbackrest/issues/2889); プルリクエスト [#2899](https://github.com/pgbackrest/pgbackrest/pull/2899)
+
+- OpenSSLエラーの報告を修正しました。 (*投稿：David Steele。レビュー：Douglas J Hunley、Stefan Fercot。*)
+
+  OpenSSL設定によってキューに入れられたエラーや、以前の失敗時に残ったエラーが、実際の失敗の代わりに報告される可能性がありました。たとえば、無効な`tls-cipher-12`値に対して`ssl command section not found`が報告されていました。CAファイル不足などのシステムエラーは、OpenSSL >= 3.0では`no details available`と報告されていましたが、現在はシステムエラーメッセージを報告します。
+
+  課題 [#2889](https://github.com/pgbackrest/pgbackrest/issues/2889); プルリクエスト [#2900](https://github.com/pgbackrest/pgbackrest/pull/2900)
+
+**ドキュメント改善：**
+
+- `repo-storage-verify-tls=n`のときにスキップされるTLS設定を文書化しました。 (*投稿：David Steele。*)
+
+  `repo-storage-verify-tls=n`の場合、TLSv1.2の最低値は設定されず、リポジトリストレージ接続では`tls-cipher-12`および`tls-cipher-13`オプションが無視されます。
+
+**ドキュメント開発：**
+
+- ドキュメントビルドが書き出すサイトパスから古いファイルを削除しました。 (*投稿：David Steele。*)
+
+- パッチリリースノート履歴をintegration-x.y.z-ciブランチで終了させました。 (*投稿：David Steele。*)
+
+**テスト開発：**
+
+- CIを更新しました。 (*投稿：David Steele。*)
+
 
 ### v2.60.0リリースノート {#v2600-release-notes}
 

@@ -11,6 +11,44 @@ upstream_link: "https://pgbackrest.org/news.html"
 
 --------
 
+## pgBackRest 2.60.1 publié {#release-2-60-1}
+
+**16 novembre 2026**
+
+La communauté pgBackRest est heureuse d'annoncer la sortie de [pgBackRest](https://pgbackrest.org) 2.60.1, la dernière version de la solution fiable, facile à utiliser, de sauvegarde et de restauration, pouvant s'adapter sans heurt aux plus grandes bases de données et charges de travail.
+
+pgBackRest prend en charge un ensemble complet de fonctionnalités pour gérer votre infrastructure de sauvegarde et de récupération, notamment : sauvegarde/restauration en parallèle, sauvegardes complètes/différentielles/sauvegardes incrémentielles, sauvegarde incrémentielle par bloc, plusieurs dépôts, restauration par delta, archivage asynchrone en parallèle, protection contre les logiciels malveillants/rançongiciels, sommes de contrôle par fichier, sommes de contrôle par page (lorsqu’activées) validées pendant la sauvegarde, plusieurs types de compression, chiffrement, reprise partielle/échouée de sauvegarde, sauvegarde depuis un serveur secondaire, prise en charge des espaces de table et des liens, prise en charge de S3/Azure/GCS/SFTP, expiration des sauvegardes, opérations locales/distantes via SSH ou TLS, configuration flexible, et bien plus encore.
+
+pgBackRest peut être installé à partir du [dépôt Yum PostgreSQL](https://yum.postgresql.org) ou du [dépôt APT PostgreSQL](https://apt.postgresql.org) ; des paquets sont également disponibles pour de nombreuses autres distributions. Le code source peut être téléchargé depuis [versions](/fr/pgbackrest/release/).
+
+### Corrections de bugs {#release-2-60-1-feature}
+
+- Corriger l'enregistrement de `backup.info` par `annotate` dans le dépôt par défaut (David Steele).
+- Corriger un échec possible de restauration incrémentielle par blocs sur un stockage SFTP (David Steele).
+- Corriger l'utilisation de descripteurs de fichiers SFTP après une reconnexion (David Steele).
+- Corriger une utilisation excessive de mémoire par la liste libre de contextes mémoire (Vasiliy Koshkin).
+- Ne pas abaisser une version TLS minimale définie par la configuration OpenSSL (David Steele).
+- Corriger le signalement des erreurs OpenSSL (David Steele).
+
+Consultez les [notes de version 2.60.1](/fr/pgbackrest/release/#v2601-release-notes) pour les autres corrections et améliorations.
+
+### Remarques importantes {#release-2-60-1-note}
+
+- PostgreSQL 19rc2 est pris en charge par v2.59.2 et les versions ultérieures, y compris cette version.
+
+### Liens {#release-2-60-1-link}
+
+- [Site web](/fr/pgbackrest/)
+- [Guides utilisateur](/fr/pgbackrest/user-guide/)
+- [Notes de version](/fr/pgbackrest/release/)
+
+### Parrainage {#release-2-60-1-sponsorship}
+
+Cette version a été rendue possible grâce au généreux parrainage de [AWS](https://aws.amazon.com), [Supabase](https://supabase.com), [pgEdge](https://pgedge.com), [Tiger Data](https://tigerdata.com), [Percona](https://percona.com), [Eon](https://eon.io), [Xata](https://xata.io), [Dalibo](https://dalibo.com), et [Data Egret](https://dataegret.com/).
+
+
+--------
+
 ## pgBackRest 2.60.0 publié {#release-2-60-0}
 
 **18 octobre 2026**
