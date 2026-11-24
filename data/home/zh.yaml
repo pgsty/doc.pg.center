@@ -308,9 +308,9 @@ kernels:
       icon: fa-solid fa-book-open
   - title: OpenHalo
     meta: MySQL 兼容
-    version: '1.0.0-beta.1'
+    version: '18.6.1'
     icon: fa-solid fa-circle-nodes
-    desc: 编译和配置 OpenHalo，在 PostgreSQL 上运行 MySQL 协议与 SQL。
+    desc: 查阅 OpenHalo 18 的功能集合、修改记录、兼容边界与最终验收结论。
     url: /openhalo/
     shortcuts_label: OpenHalo 文档入口
     shortcuts:
@@ -318,13 +318,13 @@ kernels:
       url: /openhalo/
       icon: fa-solid fa-book-open
     - title: 编译安装
-      url: /openhalo/quick-start/#installation
+      url: /openhalo/18/configuration/#build
       icon: fa-solid fa-book-open
-    - title: MySQL 配置
-      url: /openhalo/mysql-configuration/
+    - title: 兼容边界
+      url: /openhalo/18/compatibility/
       icon: fa-solid fa-book-open
-    - title: MySQL 参考
-      url: /openhalo/mysql-compatibility/
+    - title: 修改与验收
+      url: /openhalo/18/changes/
       icon: fa-solid fa-book-open
   - title: Apache Cloudberry
     meta: MPP 分析数据库

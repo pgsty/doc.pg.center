@@ -10,11 +10,12 @@ adaptations use CC BY 4.0, subject to the original upstream terms identified bel
 
 ## Upstream documentation
 
-The English edition was updated on 2026-11-21, and its Chinese incremental updates
-completed three-pass self-review on 2026-11-22. Other translated editions retain their
-prior source baselines pending synchronization. Existing draft and missing-translation
-notices remain. `data/upstreams.yaml` records language-specific baselines; the update
-inventory records completed Chinese work and the pending language tasks.
+The November 21 English updates received a three-pass Chinese review on November 22.
+By November 23 the French, Japanese, German, Russian, Arabic, and Spanish editions
+had incorporated the changed pgBackRest, pgBadger, HAProxy, and etcd documentation.
+The component and language inventory in `data/updates/2026-11-23.json` records the
+release sources, the subsequent bilingual updates, and the outstanding Chinese
+translations and draft reviews.
 
 | Collection | English source edition | Upstream copyright and license |
 | --- | --- | --- |
@@ -128,7 +129,7 @@ the PgBouncer project.
 
 ## PolarDB
 
-The existing OINK edition was recovered from the pinned `polardb/polardb-pg-docs` snapshot `b4733b0350888242afeba432a6837458c348a937`. It preserves 8 English upstream articles and 55 Chinese articles, plus a Chinese translation notice and local section introductions. The upstream language editions are intentionally unequal. Copyright © Alibaba Group, Inc.; the upstream site declares Apache 2.0. Images retain their original bytes.
+The existing OINK edition was recovered from the pinned `polardb/polardb-pg-docs` snapshot `b4733b0350888242afeba432a6837458c348a937`. It preserves 8 English upstream articles and 55 Chinese articles, plus the community Chinese translation of the coding-style guide and local section introductions. The upstream language editions are intentionally unequal. Copyright © Alibaba Group, Inc.; the upstream site declares Apache 2.0. Images retain their original bytes.
 
 Source records: `data/imports/polardb.json`; registry: `data/upstreams.yaml`.
 
@@ -140,9 +141,13 @@ Source records: `data/imports/ivorysql.json`; registry: `data/upstreams.yaml`.
 
 ## OpenHalo
 
-Adapted and translated from `HaloTech-Co-Ltd/openHalo` README at `90fc8d777c3f111d4c8d236625bb15b5d4b19d7c`. The overview and installation guide retain the source commands and two original figures. This is the OpenHalo-specific introduction, not a second copy of the PostgreSQL core manual. Retained files include GPLv3, PostgreSQL copyright and third-party notices. Product names remain their owners’ trademarks.
+The collection homepage is a maintained version guide. `/openhalo/18/` and its Chinese edition document the PGSTY fork (`pgsty/openhalo`) at source tag `v18.6.1` (`2627e6f3e94ffdaba9ca6a835c4a1ae2fba34183`, `aux_mysql 1.9`) together with the 2026-11-10 independent final acceptance evidence pinned to commit `6a93e8fb914a4cc4b6a0c4e3f35af43b5f8dc41a` (the four commits `6a93e8f..2627e6f` add only copyright headers, `.gitignore` rules, and documentation updates). Multi-platform binary packages for `v18.6.1` remain pending package-level acceptance. New prose and translations are maintained by PGSTY; adapted upstream material retains its rights.
 
-Source records: `data/imports/openhalo.json`; registry: `data/upstreams.yaml`.
+The historical PG14 installation guide was adapted and translated from `HaloTech-Co-Ltd/openHalo` README at `90fc8d777c3f111d4c8d236625bb15b5d4b19d7c`; the original commands and two figures remain preserved. The initial PG18 compatibility review remains a separately dated record of `9dc937f`. Neither is silently relabeled as the current support matrix.
+
+Retained files include GPLv3, PostgreSQL copyright and third-party notices. In the maintained source, PostgreSQL and protocol hooks retain PostgreSQL License terms (Portions Copyright (c) 1996-2025, PostgreSQL Global Development Group); `aux_mysql` derives from GPLv3 OpenHalo (Copyright (c) 2025, Halo Tech Co., Ltd.; Portions Copyright (c) 2026, PGSTY PTE. LTD.), and builds including it are distributed under GPLv3. The commercial Halo Database summaries below remain separately attributed. Product names remain their owners' trademarks.
+
+Source records: `data/imports/openhalo.json`, `data/imports/openhalo-pgsty.json`; registry: `data/upstreams.yaml`.
 
 ## Halo Database MySQL reference
 
@@ -170,13 +175,13 @@ Source records: `data/imports/percona.json`; registry: `data/upstreams.yaml`.
 
 ## AgensGraph
 
-Imported from the existing AgensGraph 2.18.6.1 edition. Documentation copyright is 2014–2026 SKAI Worldwide Co., Ltd., under Apache 2.0, with PostgreSQL notices retained. The existing Chinese drafts and their review status are preserved. Sixteen guide-only pages are explicitly marked as untranslated placeholders; two additional English pages have no Chinese peer. A migration and successful build do not certify translation accuracy.
+Imported from the existing AgensGraph 2.18.6.1 edition. Documentation copyright is 2014–2026 SKAI Worldwide Co., Ltd., under Apache 2.0, with PostgreSQL notices retained. All 113 English pages have Chinese counterparts. The community translated the backup guide, upgrade walkthrough, and sixteen Cypher clause references against the maintained English edition.
 
 Source records: `data/imports/agensgraph.json`; registry: `data/upstreams.yaml`.
 
 ## pgEdge
 
-Includes Spock, LOLOR, SafeSession and Snowflake from their existing OINK edition. The English source set is Spock v6.0.0-beta.2, LOLOR 1.3.0 development, SafeSession v1.1, and Snowflake v2.6.1. Chinese includes this batch's reviewed incremental updates and six newly translated articles; unchanged draft portions still await review. Of 108 imported upstream articles, 32 have Chinese machine drafts; their status and review notices remain visible. The PostgreSQL licence and project-specific copyright notices are retained. Source commits are listed below.
+Includes Spock, LOLOR, SafeSession and Snowflake from their existing OINK edition. The English source set is Spock v6.0.0-beta.2, LOLOR 1.3.0 development, SafeSession v1.1, and Snowflake v2.6.1. The community added 66 Chinese pages, reviewed 32 earlier drafts against English and restored four section articles. All 118 routes have a Chinese counterpart. Security passages in the SafeSession manual and changelog and the LOLOR release notes are adapted for administrators. The PostgreSQL licence and project-specific copyright notices are retained. Source commits are listed below.
 
 Source records: `data/imports/pgedge.json`; registry: `data/upstreams.yaml`.
 

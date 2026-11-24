@@ -37,7 +37,7 @@ components:
         - { title: "REST API", url: /patroni/rest_api/, icon: fa-solid fa-plug }
     - title: "pgBackRest"
       meta: "バックアップとリカバリー"
-      version: v2.60.0
+      version: v2.60.1
       icon: fa-solid fa-couch
       desc: "信頼性の高いバックアップ、リストア、アーカイブ、ポイントインタイムリカバリーを設計します。"
       url: /pgbackrest/
@@ -61,7 +61,7 @@ components:
         - { title: "FAQ", url: /pgbouncer/faq/, icon: fa-solid fa-circle-question }
     - title: "pgBadger"
       meta: "ログ解析"
-      version: v13.2-dev
+      version: v13.3
       icon: fa-solid fa-otter
       desc: "PostgreSQL と PgBouncer のログから、クエリー、ワークロード、エラーのレポートを生成します。"
       url: /pgbadger/
@@ -73,7 +73,7 @@ components:
         - { title: "サンプルレポート", url: /pgbadger/sample-reports/, icon: fa-solid fa-chart-column }
     - title: "HAProxy"
       meta: "負荷分散"
-      version: v3.4
+      version: v3.4.8
       icon: fa-solid fa-network-wired
       desc: "HAProxy 3.4 の入門、設定、管理マニュアルをすべて参照できます。"
       url: /haproxy/
@@ -85,7 +85,7 @@ components:
         - { title: "ACL とサンプル", url: /haproxy/acls-and-samples/, icon: fa-solid fa-filter }
     - title: "etcd"
       meta: "コンセンサスと協調"
-      version: v3.7.3
+      version: v3.7.4
       icon: fa-solid fa-gear
       desc: "強い整合性を持つキー・バリューストア、その API、Raft モデル、内部構造を運用します。"
       url: /etcd/

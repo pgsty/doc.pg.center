@@ -22,14 +22,16 @@ Cette page est cet enregistrement. Elle indique ce qui a été importé, à quel
 
 ## Résumé {#summary}
 
+Les six manuels d’exploitation de cette édition suivent la version anglaise. Le 23 novembre 2026, la communauté a également achevé les 117 travaux de traduction et de relecture recensés pour les manuels de bases de données en chinois et complété quatre pages de section de pgEdge.
+
 | Composant | Travail du projet amont | Verrouillé à | Licence | Avis conservé |
 |---|---|---|---|---|
 | [Patroni](/fr/patroni/) | [documentation de Patroni](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Projet amont `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/fr/pgbackrest/) | [documentation de pgBackRest](https://pgbackrest.org/) | v2.60.0 | [MIT](https://opensource.org/license/mit) | [Projet amont `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [pgBackRest](/fr/pgbackrest/) | [documentation de pgBackRest](https://pgbackrest.org/) | v2.60.1 | [MIT](https://opensource.org/license/mit) | [Projet amont `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
 | [PgBouncer](/fr/pgbouncer/) | [documentation de PgBouncer](https://www.pgbouncer.org/) | v1.26.1 | [ISC](https://opensource.org/license/isc-license-txt) | [Projet amont `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/COPYRIGHT) |
-| [pgBadger](/fr/pgbadger/) | [documentation de pgBadger](https://pgbadger.darold.net/) | v13.2, instantané de développement, commit `f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/fr/haproxy/) | [manuels HAProxy 3.4](https://docs.haproxy.org/3.4/) | instantané 3.4.7-57, commit `0faeaed` ; version stable 3.4.7 | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/fr/etcd/) | [documentation etcd v3.7](https://etcd.io/docs/v3.7/) | Documentation v3.7, commit `d20f8ae` ; version logicielle v3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Projet amont `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [pgBadger](/fr/pgbadger/) | [documentation de pgBadger](https://pgbadger.darold.net/) | v13.3, commit `0514893` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
+| [HAProxy](/fr/haproxy/) | [manuels HAProxy 3.4](https://docs.haproxy.org/3.4/) | v3.4.8 LTS | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [etcd](/fr/etcd/) | [documentation etcd v3.7](https://etcd.io/docs/v3.7/) | Documentation v3.7, commit `e60635a` ; version logicielle v3.7.4 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Projet amont `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 {.wide .expand}
 
 Chaque collection est **adaptée**, et non miroirée. Les titres, ancres, liens croisés, signatures de code, regroupement des pages et navigation sont révisés pour cette édition ; le texte original du projet amont est lui-même conservé. Le crédit en fin de page le précise et fournit un lien vers l'historique des modifications de cette page sur le site.
@@ -43,7 +45,7 @@ Patroni est protégé par le droit d'auteur (c) 2025 Compose, Zalando SE, contri
 
 ## pgBackRest {#pgbackrest}
 
-Importé le 2026-08-15 depuis le [site de documentation pgBackRest](https://pgbackrest.org/) et mis à jour le 2026-10-23 vers **v2.60.0**, tag `release/2.60.0`, commit [`2e1c4f2`](https://github.com/pgbackrest/pgbackrest/commit/2e1c4f2ba727c45a0a23d4b326905088dc15b1a1).
+Importé le 2026-08-15 depuis le [site de documentation pgBackRest](https://pgbackrest.org/) et mis à jour le 2026-11-21 pour **v2.60.1**, tag `release/2.60.1`, commit [`7aeba29`](https://github.com/pgbackrest/pgbackrest/commit/7aeba299c49abd768ca741506569007a5cab0870). La présente édition traduite est synchronisée avec cette révision.
 
 pgBackRest est protégé par le droit d'auteur (c) 2015-2026 le Groupe de développement mondial de PostgreSQL et David Steele,
 et est distribué sous la licence [MIT License](https://opensource.org/license/mit). Le texte complet de la licence est conservé [en amont](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE).
@@ -61,8 +63,7 @@ Le texte intégral de la licence est conservé
 
 ## pgBadger {#pgbadger}
 
-Importé le 2026-08-15 depuis <https://pgbadger.darold.net/> et [`darold/pgbadger`](https://github.com/darold/pgbadger), puis mis à jour le 2026-10-23 au commit [`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67).
-Il s'agit d'un instantané de la documentation de développement postérieur à la dernière version publiée, v13.2, et non d'une nouvelle version stable. Les extraits historiques du site web et les exemples de rapports conservent leurs propres sources.
+Importé le 2026-08-15 depuis <https://pgbadger.darold.net/> et [`darold/pgbadger`](https://github.com/darold/pgbadger), puis mis à jour le 2026-11-21 pour la version publiée **v13.3**, au commit [`0514893`](https://github.com/darold/pgbadger/commit/0514893e97296695c77755fa36c59288c3afef3e). La présente édition traduite est synchronisée avec cette révision. Les extraits historiques du site web et les exemples de rapports conservent leurs propres sources.
 
 pgBadger est protégé par le droit d'auteur (c) 2012-2026 Gilles Darold et est distribué sous la licence [PostgreSQL License](https://opensource.org/license/postgresql). Le texte intégral de la licence est conservé à côté des exemples hors ligne sous le nom [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) et dans `static/third_party/pgbadger/LICENSE` du dépôt du site.
 
@@ -76,8 +77,7 @@ pgBadger est protégé par le droit d'auteur (c) 2012-2026 Gilles Darold et est 
 
 ## HAProxy {#haproxy}
 
-Importé le 2026-08-16, puis mis à jour le 2026-08-30 et le 2026-10-23 à partir du dépôt officiel de maintenance HAProxy 3.4. Cette édition suit la documentation anglaise à l’instantané **3.4.7-57**, fixé au commit [`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3). La dernière version stable est **3.4.7**, au tag `v3.4.7` ; l’instantané comprend des modifications de documentation postérieures à cette version.
-Le texte provient des manuels complets `doc/intro.txt`, `doc/configuration.txt` et `doc/management.txt` — au total 40 246 lignes — réorganisés en 34 pages de lecture.
+Importé le 2026-08-16, puis mis à jour le 2026-11-21 à partir du dépôt officiel HAProxy 3.4 pour la version [**v3.4.8 LTS**](https://git.haproxy.org/?p=haproxy-3.4.git;a=tag;h=v3.4.8). Le texte provient des manuels complets `doc/intro.txt`, `doc/configuration.txt` et `doc/management.txt`, réorganisés en 34 pages de lecture. Les guides Starter et Management sont inchangés par rapport à l’instantané précédent ; les changements du guide Configuration figurent dans le diff de mise à jour, et la présente édition traduite les inclut.
 
 HAProxy est protégé par le droit d'auteur de 2000 à 2026 par Willy Tarreau et est distribué sous la licence [GNU General Public License version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
 L'explication de la licence propre à HAProxy, son exception OpenSSL et le texte complet de la GPLv2 sont publiés dans [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) et [`/third_party/haproxy/GPL-2.0`](/third_party/haproxy/GPL-2.0).
@@ -88,15 +88,12 @@ L'explication de la licence propre à HAProxy, son exception OpenSSL et le texte
 
 ## etcd {#etcd}
 
-Importé de la documentation officielle etcd v3.7 et mis à jour le 2026-10-13 à l’issue du commit
-[`d20f8ae346da`](https://github.com/etcd-io/website/commit/d20f8ae346da60ab6eb6f24f200753b328aa9fcc).
-L’arborescence source verrouillée est
-[`content/en/docs/v3.7`](https://github.com/etcd-io/website/tree/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7).
+Importé de la documentation officielle etcd v3.7 et mis à jour le 2026-11-21 à l’issue du commit
+[`e60635a46b57`](https://github.com/etcd-io/website/tree/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7).
+L’arborescence source verrouillée est `content/en/docs/v3.7`.
 
-Le 2026-10-28, les exemples d’installation, Docker et Kubernetes ainsi que le résumé des
-changements ont été mis à jour pour [etcd v3.7.3](https://github.com/etcd-io/etcd/releases/tag/v3.7.3),
-commit de publication [`0a173d0`](https://github.com/etcd-io/etcd/commit/0a173d0410a96d01091b484daae81365bbcde57e).
-Le fichier `go.mod` de cette version fixe Go 1.26.10. L’instantané de documentation et la
+Les exemples d’installation et le résumé des changements ciblent [etcd v3.7.4](https://github.com/etcd-io/etcd/releases/tag/v3.7.4),
+commit de publication `2e8a5c99e4982c8d4c521be15364ea4c5c68a489`, construit avec Go 1.26.11. Le changelog séparément fixé conserve le titre « v3.7.4 (TBC) » ; le tag de publication confirme que la version est publiée. L’instantané de documentation et la
 version logicielle sont consignés séparément dans `data/upstreams.yaml`, avec les sommes de contrôle des sources.
 
 La documentation etcd est protégée par le droit d'auteur 2013-présent par les auteurs etcd. Son contenu est sous licence [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), tandis que le code et les exemples de code sont sous licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). La notice complète est conservée [en amont](https://github.com/etcd-io/website/blob/main/LICENSE).

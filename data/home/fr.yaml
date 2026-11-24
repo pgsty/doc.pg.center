@@ -37,7 +37,7 @@ components:
         - { title: "API REST", url: /patroni/rest_api/, icon: fa-solid fa-plug }
     - title: "pgBackRest"
       meta: "Sauvegarde et restauration"
-      version: v2.60.0
+      version: v2.60.1
       icon: fa-solid fa-couch
       desc: "Sauvegarde, restauration et archivage fiables, avec récupération à un instant donné."
       url: /pgbackrest/
@@ -61,7 +61,7 @@ components:
         - { title: "FAQ", url: /pgbouncer/faq/, icon: fa-solid fa-circle-question }
     - title: "pgBadger"
       meta: "Analyse des journaux"
-      version: v13.2-dev
+      version: v13.3
       icon: fa-solid fa-otter
       desc: "Rapports sur les requêtes, la charge et les erreurs tirés des journaux PostgreSQL et PgBouncer."
       url: /pgbadger/
@@ -73,7 +73,7 @@ components:
         - { title: "Exemples de rapports", url: /pgbadger/sample-reports/, icon: fa-solid fa-chart-column }
     - title: "HAProxy"
       meta: "Répartition de charge"
-      version: v3.4
+      version: v3.4.8
       icon: fa-solid fa-network-wired
       desc: "Les guides complets de HAProxy 3.4 : démarrage, configuration et administration."
       url: /haproxy/
@@ -85,7 +85,7 @@ components:
         - { title: "ACL et échantillons", url: /haproxy/acls-and-samples/, icon: fa-solid fa-filter }
     - title: "etcd"
       meta: "Consensus et coordination"
-      version: v3.7.3
+      version: v3.7.4
       icon: fa-solid fa-gear
       desc: "Exploitez un magasin clé-valeur cohérent : API, modèle Raft et fonctionnement interne."
       url: /etcd/

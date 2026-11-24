@@ -37,7 +37,7 @@ components:
         - { title: "REST API", url: /patroni/rest_api/, icon: fa-solid fa-plug }
     - title: "pgBackRest"
       meta: "النسخ الاحتياطي والاستعادة"
-      version: v2.60.0
+      version: v2.60.1
       icon: fa-solid fa-couch
       desc: "صمّم مسارات موثوقة للنسخ الاحتياطي والاستعادة والأرشفة والاستعادة إلى نقطة زمنية."
       url: /pgbackrest/
@@ -61,7 +61,7 @@ components:
         - { title: "الأسئلة الشائعة", url: /pgbouncer/faq/, icon: fa-solid fa-circle-question }
     - title: "pgBadger"
       meta: "تحليل السجلات"
-      version: v13.2-dev
+      version: v13.3
       icon: fa-solid fa-otter
       desc: "حوّل سجلات PostgreSQL وPgBouncer إلى تقارير عن الاستعلامات وحِمل العمل والأخطاء."
       url: /pgbadger/
@@ -73,7 +73,7 @@ components:
         - { title: "تقارير نموذجية", url: /pgbadger/sample-reports/, icon: fa-solid fa-chart-column }
     - title: "HAProxy"
       meta: "موازنة الحمل"
-      version: v3.4
+      version: v3.4.8
       icon: fa-solid fa-network-wired
       desc: "اقرأ أدلة HAProxy 3.4 الثلاثة كاملةً: دليل البدء ودليل الإعداد ودليل الإدارة."
       url: /haproxy/
@@ -85,7 +85,7 @@ components:
         - { title: "قوائم ACL والعيّنات", url: /haproxy/acls-and-samples/, icon: fa-solid fa-filter }
     - title: "etcd"
       meta: "التوافق والتنسيق"
-      version: v3.7.3
+      version: v3.7.4
       icon: fa-solid fa-gear
       desc: "شغّل مخزن مفاتيح–قيم متّسق بقوة، مع واجهاته البرمجية ونموذج Raft وبنيته الداخلية."
       url: /etcd/

@@ -37,7 +37,7 @@ components:
         - { title: "REST API", url: /patroni/rest_api/, icon: fa-solid fa-plug }
     - title: "pgBackRest"
       meta: "Резервное копирование и восстановление"
-      version: v2.60.0
+      version: v2.60.1
       icon: fa-solid fa-couch
       desc: "Надёжное резервное копирование, архивация и восстановление на момент времени."
       url: /pgbackrest/
@@ -61,7 +61,7 @@ components:
         - { title: "Частые вопросы", url: /pgbouncer/faq/, icon: fa-solid fa-circle-question }
     - title: "pgBadger"
       meta: "Анализ журналов"
-      version: v13.2-dev
+      version: v13.3
       icon: fa-solid fa-otter
       desc: "Отчёты о запросах, нагрузке и ошибках по журналам PostgreSQL и PgBouncer."
       url: /pgbadger/
@@ -73,7 +73,7 @@ components:
         - { title: "Примеры отчётов", url: /pgbadger/sample-reports/, icon: fa-solid fa-chart-column }
     - title: "HAProxy"
       meta: "Балансировка нагрузки"
-      version: v3.4
+      version: v3.4.8
       icon: fa-solid fa-network-wired
       desc: "Полные начальное, конфигурационное и эксплуатационное руководства по HAProxy 3.4."
       url: /haproxy/
@@ -85,7 +85,7 @@ components:
         - { title: "ACL и образцы", url: /haproxy/acls-and-samples/, icon: fa-solid fa-filter }
     - title: "etcd"
       meta: "Консенсус и координация"
-      version: v3.7.3
+      version: v3.7.4
       icon: fa-solid fa-gear
       desc: "Хранилище ключ-значение со строгой согласованностью, его API и модель Raft."
       url: /etcd/

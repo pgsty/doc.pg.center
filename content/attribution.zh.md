@@ -22,7 +22,7 @@ PG.CENTER 转载并整理了PostgreSQL 运维工具和数据库内核项目的�
 
 ## 总览 {#summary}
 
-以下英文更新于 **2026 年 11 月 21 日**完成审阅；中文增量于 **2026 年 11 月 22 日**完成三轮自审。其他译本仍采用原有来源版本，等待同步。`data/upstreams.yaml` 分别记录各语言的基线，页面中的来源链接指向对应修订。既有初稿与缺译提示继续保留。
+以下英文更新于 **2026 年 11 月 21 日**完成审阅；中文增量于 **2026 年 11 月 22 日**完成三轮自审。其他已审校语种已包含下列运维手册更新。`data/upstreams.yaml` 分别记录各语言的基线，页面中的来源链接指向对应修订。11 月 23 日的后续自审补齐了登记的 117 页中文欠项，另补全 4 个 pgEdge 章节入口。
 
 | 组件 | 上游作品 | 固定版本 | 授权协议 | 保留的完整声明 |
 |---|---|---|---|---|
@@ -37,7 +37,8 @@ PG.CENTER 转载并整理了PostgreSQL 运维工具和数据库内核项目的�
 | [内核原理](/cloudberry/core-internals/) | [Apache Cloudberry 内核原理](https://cloudberry.apache.org/core-internals/) | Main `c2baef0`；3.0.0-devel / PostgreSQL 16.9 | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)、PostgreSQL | [LICENSE](/third_party/core-internals/LICENSE)、[NOTICE](/third_party/core-internals/NOTICE) |
 | [PolarDB](/polardb/) | [PolarDB for PostgreSQL Documentation](https://github.com/polardb/polardb-pg-docs) | b4733b0 | Apache-2.0 | [来源与完整声明](/polardb/site/attribution/) |
 | [IvorySQL](/ivorysql/) | [IvorySQL Documentation](https://github.com/IvorySQL/ivorysql_docs) | v5.6 · 7c3f4a67e7d3 | LicenseRef-IvorySQL-Docs | [来源与完整声明](/ivorysql/site/license/) |
-| [OpenHalo](/openhalo/) | [OpenHalo documentation](https://github.com/HaloTech-Co-Ltd/openHalo) | master 90fc8d7 | GPL-3.0-only | [来源与完整声明](/openhalo/assets/LICENSE.txt) |
+| [OpenHalo 18](/openhalo/18/) | [PGSTY OpenHalo 18 源码与最终验收](https://github.com/pgsty/openhalo) | v18.6.1（`2627e6f`，aux_mysql 1.9）；2026-11-10 于 `6a93e8f` 验收 | GPL-3.0-only | [来源与完整声明](#openhalo) |
+| [OpenHalo（PG14 历史版）](/openhalo/quick-start/) | [OpenHalo documentation](https://github.com/HaloTech-Co-Ltd/openHalo) | master 90fc8d7 | GPL-3.0-only | [来源与完整声明](/openhalo/assets/LICENSE.txt) |
 | [Halo Database MySQL 参考](/openhalo/mysql-compatibility/) | [Halo Database 官方文档](https://doc.halodbtech.com/multi-mode-compatibility/mysql) | 1.0.16；2026-11-07 快照 | LicenseRef-HaloDB-Docs | [来源与条款](#halodb) |
 | [OpenHalo 测试证据](/openhalo/mysql-compatibility-gaps/) | [OpenHalo MySQL 兼容性测试报告](https://github.com/fxcollot/openHaloDocumentation) | OpenHalo 1.0.14.18；提交 80a8d07 | LicenseRef-OpenHalo-Test-Report | [来源与条款](#openhalo-tests) |
 | [Babelfish](/babelfish/) | [Babelfish project website](https://github.com/babelfish-for-postgresql/babelfish_project_website) | main @ f468c5ed3d38 | LicenseRef-Babelfish-Website | [来源与完整声明](/babelfish/site/attribution/) |
@@ -97,7 +98,7 @@ pgBadger 版权归 Gilles Darold 所有（Copyright (c) 2012-2026），
 
 ## HAProxy {#haproxy}
 
-于 2026-08-16 导入，英文于 2026-11-21 更新至官方 [HAProxy v3.4.8 发布版](https://git.haproxy.org/?p=haproxy-3.4.git;a=tag;h=v3.4.8)。完整的 `doc/intro.txt`、`doc/configuration.txt` 和 `doc/management.txt` 三份手册重新组织为 34 个阅读页面。入门与管理手册的来源相比上一快照未变，配置手册的变化记录在更新 diff 中。中文已同步至 v3.4.8；其他译本仍为 `3.4.7-57`，等待同步。
+于 2026-08-16 导入，英文于 2026-11-21 更新至官方 [HAProxy v3.4.8 发布版](https://git.haproxy.org/?p=haproxy-3.4.git;a=tag;h=v3.4.8)。完整的 `doc/intro.txt`、`doc/configuration.txt` 和 `doc/management.txt` 三份手册重新组织为 34 个阅读页面。入门与管理手册的来源相比上一快照未变，配置手册的变化记录在更新 diff 中。已审校译文均包含 v3.4.8 更新。
 
 HAProxy 版权归 Willy Tarreau 所有（Copyright 2000-2026），
 依 [GNU 通用公共许可证第 2 版](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)授权。
@@ -188,7 +189,7 @@ PgBouncer 项目没有发布 Logo，本站所用的 PgBouncer 标识是为本站
 
 ## PolarDB {#polardb}
 
-从固定的 `polardb/polardb-pg-docs` 快照 `b4733b0350888242afeba432a6837458c348a937` 恢复原有 OINK 整理版，保留 8 篇英文、55 篇中文上游正文，以及一页中文缺译提示和栏目导读。上游两种语言的内容本来就不对称。Copyright © Alibaba Group, Inc.；上游站点声明采用 Apache 2.0。图片保留原始字节。
+从固定的 `polardb/polardb-pg-docs` 快照 `b4733b0350888242afeba432a6837458c348a937` 恢复原有 OINK 整理版，保留 8 篇英文、55 篇中文上游正文，以及本站补译的编码风格指南和栏目导读。上游两种语言的内容本来就不对称。Copyright © Alibaba Group, Inc.；上游站点声明采用 Apache 2.0。图片保留原始字节。
 
 [来源与完整声明](/polardb/site/attribution/)。
 
@@ -200,7 +201,11 @@ PgBouncer 项目没有发布 Logo，本站所用的 PgBouncer 标识是为本站
 
 ## OpenHalo {#openhalo}
 
-整理并翻译 `HaloTech-Co-Ltd/openHalo` 提交 `90fc8d777c3f111d4c8d236625bb15b5d4b19d7c` 的 README，分为项目概览和编译配置两页，保留命令与两张原图。这部分只收录 OpenHalo 专用介绍，不重复收录 PostgreSQL 核心手册。保留 GPLv3、PostgreSQL 版权与第三方声明；产品商标归原权利人所有。
+栏目首页现为持续维护的版本导读。[OpenHalo 18 手册](/openhalo/18/)描述 [PGSTY 分支](https://github.com/pgsty/openhalo)的源码标签 `v18.6.1`（`2627e6f3e94ffdaba9ca6a835c4a1ae2fba34183`，`aux_mysql 1.9`）以及固定在提交 `6a93e8fb914a4cc4b6a0c4e3f35af43b5f8dc41a` 的 2026-11-10 独立最终验收原始证据（`6a93e8f..2627e6f` 的 4 个提交仅补充版权注释头、`.gitignore` 规则与文档修订）。`v18.6.1` 多平台二进制安装包仍待完成包级验收，本手册不暗示存在公开安装包下载链接。新增说明与译文由 PGSTY 维护，改编材料保留上游权利。
+
+历史 PG14 构建指南来自 `HaloTech-Co-Ltd/openHalo` 提交 `90fc8d777c3f111d4c8d236625bb15b5d4b19d7c` 的 README，保留原命令与两张原图。PG18 初次复核仍明确对应 `9dc937f`；当前手册不覆盖其历史证据，也不混同另行归属的商业 Halo Database 资料。
+
+保留 GPLv3、PostgreSQL 版权与第三方声明。PostgreSQL 及维护分支的协议钩子采用 PostgreSQL License 条款（部分版权归 PostgreSQL Global Development Group，1996–2025）；`aux_mysql` 派生自 GPLv3 OpenHalo（版权归易景科技 Halo Tech Co., Ltd.，2025；部分修改版权归 PGSTY PTE. LTD.，2026），包含它的构建按 GPLv3 分发。产品商标归原权利人所有。源码指纹与页面溯源记录在 `data/imports/openhalo.json`、`data/imports/openhalo-pgsty.json`。
 
 [来源与完整声明](/openhalo/assets/LICENSE.txt)。
 
@@ -230,13 +235,13 @@ Percona 英文栏目现收录 pg_tde 2.3.0，固定于 `percona/pg_tde@5dd7a9e4e
 
 ## AgensGraph {#agensgraph}
 
-迁入现有 AgensGraph 2.18.6.1 整理版。文档版权为 Copyright 2014–2026 SKAI Worldwide Co., Ltd.，采用 Apache 2.0，并保留 PostgreSQL 版权声明。保留已有中文初稿及其审校状态；16 页仅有导读的页面明确标为缺译占位，另有 2 个英文页面没有中文对应页。完成迁移与构建不等于完成翻译审校。
+迁入现有 AgensGraph 2.18.6.1 整理版。文档版权为 Copyright 2014–2026 SKAI Worldwide Co., Ltd.，采用 Apache 2.0，并保留 PostgreSQL 版权声明。全部 113 个英文页面均有对应中文。本轮对照英文补齐了备份指南、升级演练和 16 篇 Cypher 子句参考。
 
 [来源与完整声明](/agensgraph/site/attribution/)。
 
 ## pgEdge {#pgedge}
 
-迁入现有 OINK 站中的 Spock、LOLOR、SafeSession 和 Snowflake 四套文档。本轮英文来源为 Spock v6.0.0-beta.2、LOLOR 1.3.0 开发快照、SafeSession v1.1 和 Snowflake v2.6.1。中文已完成本轮增量审校，并新增六篇完整译文；原有初稿中未变的部分仍待审校。108 篇上游正文中，32 篇有中文机器翻译初稿，原有状态与待审说明继续保留。完整保留 PostgreSQL 许可证及各项目版权声明，固定提交见下表。
+迁入现有 OINK 站中的 Spock、LOLOR、SafeSession 和 Snowflake 四套文档。本轮英文来源为 Spock v6.0.0-beta.2、LOLOR 1.3.0 开发快照、SafeSession v1.1 和 Snowflake v2.6.1。本轮新增 66 篇中文，按英文逐篇译校 32 篇初稿，并补齐 4 个章节入口的正文。全部 118 个英文页面均有对应中文。SafeSession 手册、变更日志及 LOLOR 发布说明中的安全段落按管理员视角改编。完整保留 PostgreSQL 许可证及各项目版权声明，固定提交见下表。
 
 [来源与完整声明](/pgedge/about/attribution/)。
 

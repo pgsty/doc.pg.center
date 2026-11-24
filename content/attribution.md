@@ -25,7 +25,7 @@ which licence, and where the complete upstream notice is retained.
 
 ## Summary {#summary}
 
-English updates below were reviewed on **November 21, 2026**. The Chinese incremental updates were completed with three-pass self-review on **November 22, 2026**. Other translated editions retain their previous source revisions pending synchronization. `data/upstreams.yaml` records the language-specific baselines; page-level links identify each source revision. Existing draft and missing-translation notices remain in place.
+English updates below were reviewed on **November 21, 2026**. The Chinese incremental updates were completed with three-pass self-review on **November 22, 2026**. The other reviewed language editions include the operations-manual updates listed below. `data/upstreams.yaml` records the language-specific baselines; page-level links identify each source revision. The November 23 follow-up completed the 117 recorded Chinese translation tasks and restored the missing article text on four pgEdge section indexes.
 
 | Component | Upstream work | Pinned at | Licence | Retained notice |
 |---|---|---|---|---|
@@ -40,7 +40,8 @@ English updates below were reviewed on **November 21, 2026**. The Chinese increm
 | [Core Internals](/cloudberry/core-internals/) | [Apache Cloudberry Core Internals](https://cloudberry.apache.org/core-internals/) | Main `c2baef0`; 3.0.0-devel / PostgreSQL 16.9 | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0), PostgreSQL | [LICENSE](/third_party/core-internals/LICENSE), [NOTICE](/third_party/core-internals/NOTICE) |
 | [PolarDB](/polardb/) | [PolarDB for PostgreSQL Documentation](https://github.com/polardb/polardb-pg-docs) | b4733b0 | Apache-2.0 | [Source and full notices](/polardb/site/attribution/) |
 | [IvorySQL](/ivorysql/) | [IvorySQL Documentation](https://github.com/IvorySQL/ivorysql_docs) | v5.6 · 7c3f4a67e7d3 | LicenseRef-IvorySQL-Docs | [Source and full notices](/ivorysql/site/license/) |
-| [OpenHalo](/openhalo/) | [OpenHalo documentation](https://github.com/HaloTech-Co-Ltd/openHalo) | master 90fc8d7 | GPL-3.0-only | [Source and full notices](/openhalo/assets/LICENSE.txt) |
+| [OpenHalo 18](/openhalo/18/) | [PGSTY OpenHalo 18 source and acceptance](https://github.com/pgsty/openhalo) | v18.6.1 (`2627e6f`, aux_mysql 1.9); accepted at `6a93e8f` on 2026-11-10 | GPL-3.0-only | [Source and full notices](#openhalo) |
+| [OpenHalo (PG14 historical)](/openhalo/quick-start/) | [OpenHalo documentation](https://github.com/HaloTech-Co-Ltd/openHalo) | master 90fc8d7 | GPL-3.0-only | [Source and full notices](/openhalo/assets/LICENSE.txt) |
 | [Halo Database MySQL reference](/openhalo/mysql-compatibility/) | [Halo Database official documentation](https://doc.halodbtech.com/multi-mode-compatibility/mysql) | 1.0.16; snapshot 2026-11-07 | LicenseRef-HaloDB-Docs | [Source and terms](#halodb) |
 | [OpenHalo test evidence](/openhalo/mysql-compatibility-gaps/) | [OpenHalo MySQL compatibility report](https://github.com/fxcollot/openHaloDocumentation) | OpenHalo 1.0.14.18; commit 80a8d07 | LicenseRef-OpenHalo-Test-Report | [Source and terms](#openhalo-tests) |
 | [Babelfish](/babelfish/) | [Babelfish project website](https://github.com/babelfish-for-postgresql/babelfish_project_website) | main @ f468c5ed3d38 | LicenseRef-Babelfish-Website | [Source and full notices](/babelfish/site/attribution/) |
@@ -109,7 +110,7 @@ retained beside the offline examples as
 
 ## HAProxy {#haproxy}
 
-Imported on 2026-08-16 and updated in English on 2026-11-21 to the official [HAProxy v3.4.8 release](https://git.haproxy.org/?p=haproxy-3.4.git;a=tag;h=v3.4.8). The complete `doc/intro.txt`, `doc/configuration.txt`, and `doc/management.txt` scope is reorganized into 34 reading pages. The Starter and Management sources are unchanged from the preceding snapshot; Configuration changes are recorded in the update diff. Chinese is synchronized with v3.4.8; the other translations remain on `3.4.7-57` pending synchronization.
+Imported on 2026-08-16 and updated in English on 2026-11-21 to the official [HAProxy v3.4.8 release](https://git.haproxy.org/?p=haproxy-3.4.git;a=tag;h=v3.4.8). The complete `doc/intro.txt`, `doc/configuration.txt`, and `doc/management.txt` scope is reorganized into 34 reading pages. The Starter and Management sources are unchanged from the preceding snapshot; Configuration changes are recorded in the update diff. The reviewed translations include the v3.4.8 updates.
 
 HAProxy is copyright 2000-2026 Willy Tarreau and is distributed under the
 [GNU General Public License version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
@@ -214,7 +215,7 @@ Corrections to any attribution on this page are welcome through the
 
 ## PolarDB {#polardb}
 
-The existing OINK edition was recovered from the pinned `polardb/polardb-pg-docs` snapshot `b4733b0350888242afeba432a6837458c348a937`. It preserves 8 English upstream articles and 55 Chinese articles, plus a Chinese translation notice and local section introductions. The upstream language editions are intentionally unequal. Copyright © Alibaba Group, Inc.; the upstream site declares Apache 2.0. Images retain their original bytes.
+The existing OINK edition was recovered from the pinned `polardb/polardb-pg-docs` snapshot `b4733b0350888242afeba432a6837458c348a937`. It preserves 8 English upstream articles and 55 Chinese articles, plus the community Chinese translation of the coding-style guide and local section introductions. The upstream language editions are intentionally unequal. Copyright © Alibaba Group, Inc.; the upstream site declares Apache 2.0. Images retain their original bytes.
 
 [Source and full notices](/polardb/site/attribution/).
 
@@ -226,7 +227,11 @@ Imported from the local IvorySQL edition, which pins `IvorySQL/ivorysql_docs` v5
 
 ## OpenHalo {#openhalo}
 
-Adapted and translated from `HaloTech-Co-Ltd/openHalo` README at `90fc8d777c3f111d4c8d236625bb15b5d4b19d7c`. The overview and installation guide retain the source commands and two original figures. This is the OpenHalo-specific introduction, not a second copy of the PostgreSQL core manual. Retained files include GPLv3, PostgreSQL copyright and third-party notices. Product names remain their owners’ trademarks.
+The collection homepage is a maintained version guide. The [OpenHalo 18 manual](/openhalo/18/) describes the [PGSTY fork](https://github.com/pgsty/openhalo) at source tag `v18.6.1` (`2627e6f3e94ffdaba9ca6a835c4a1ae2fba34183`, `aux_mysql 1.9`) together with the retained independent final acceptance evidence pinned to commit `6a93e8fb914a4cc4b6a0c4e3f35af43b5f8dc41a` (dated 2026-11-10; the four commits `6a93e8f..2627e6f` add only copyright headers, `.gitignore` rules, and documentation updates). Multi-platform binary packages for `v18.6.1` remain pending package acceptance, and no binary download URL is implied. New prose and translations are maintained by PGSTY; adapted material retains upstream rights.
+
+The historical PG14 build guide derives from `HaloTech-Co-Ltd/openHalo` README at `90fc8d777c3f111d4c8d236625bb15b5d4b19d7c`, with original commands and two figures preserved. The initial PG18 review remains explicitly tied to `9dc937f`. The current manual does not replace their historical evidence or the separately attributed commercial Halo Database material.
+
+Retained files include GPLv3, PostgreSQL copyright and third-party notices. PostgreSQL and the maintained protocol hooks use PostgreSQL License terms (Portions Copyright (c) 1996–2025, PostgreSQL Global Development Group); `aux_mysql` derives from GPLv3 OpenHalo (Copyright (c) 2025, Halo Tech Co., Ltd.; Portions Copyright (c) 2026, PGSTY PTE. LTD.), and builds including it are distributed under GPLv3. Product names remain their owners' trademarks. Source fingerprints and page provenance are recorded in `data/imports/openhalo.json` and `data/imports/openhalo-pgsty.json`.
 
 [Source and full notices](/openhalo/assets/LICENSE.txt).
 
@@ -256,13 +261,13 @@ The English Percona collection now contains pg_tde 2.3.0 documentation at `perco
 
 ## AgensGraph {#agensgraph}
 
-Imported from the existing AgensGraph 2.18.6.1 edition. Documentation copyright is 2014–2026 SKAI Worldwide Co., Ltd., under Apache 2.0, with PostgreSQL notices retained. The existing Chinese drafts and their review status are preserved. Sixteen guide-only pages are explicitly marked as untranslated placeholders; two additional English pages have no Chinese peer. A migration and successful build do not certify translation accuracy.
+Imported from the existing AgensGraph 2.18.6.1 edition. Documentation copyright is 2014–2026 SKAI Worldwide Co., Ltd., under Apache 2.0, with PostgreSQL notices retained. All 113 English pages have Chinese counterparts. The community translated the backup guide, upgrade walkthrough, and sixteen Cypher clause references against the maintained English edition.
 
 [Source and full notices](/agensgraph/site/attribution/).
 
 ## pgEdge {#pgedge}
 
-Includes Spock, LOLOR, SafeSession and Snowflake from their existing OINK edition. The English source set is Spock v6.0.0-beta.2, LOLOR 1.3.0 development, SafeSession v1.1, and Snowflake v2.6.1. Chinese includes this batch's reviewed incremental updates and six newly translated articles; unchanged draft portions still await review. Of 108 imported upstream articles, 32 have Chinese machine drafts; their status and review notices remain visible. The PostgreSQL licence and project-specific copyright notices are retained. Source commits are listed below.
+Includes Spock, LOLOR, SafeSession and Snowflake from their existing OINK edition. The English source set is Spock v6.0.0-beta.2, LOLOR 1.3.0 development, SafeSession v1.1, and Snowflake v2.6.1. The community added 66 Chinese pages, reviewed 32 earlier drafts against English and restored four section articles. All 118 routes have a Chinese counterpart. Security passages in the SafeSession manual and changelog and the LOLOR release notes are adapted for administrators. The PostgreSQL licence and project-specific copyright notices are retained. Source commits are listed below.
 
 [Source and full notices](/pgedge/about/attribution/).
 

@@ -27,14 +27,16 @@ PG.CENTER повторно публикует документацию, напи
 
 ## Сводка {#summary}
 
+В шести руководствах по эксплуатации учтены изменения английской версии. 23 ноября 2026 года сообщество также завершило перевод и сверку 117 страниц китайских руководств по базам данных и дополнило текст четырёх вводных страниц разделов pgEdge.
+
 | Компонент | Исходная работа | Зафиксированная версия | Лицензия | Сохранённое уведомление |
 |---|---|---|---|---|
 | [Patroni](/ru/patroni/) | [Документация Patroni](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/ru/pgbackrest/) | [Документация pgBackRest](https://pgbackrest.org/) | v2.60.0 | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [pgBackRest](/ru/pgbackrest/) | [Документация pgBackRest](https://pgbackrest.org/) | v2.60.1 | [MIT](https://opensource.org/license/mit) | [Исходный `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
 | [PgBouncer](/ru/pgbouncer/) | [Документация PgBouncer](https://www.pgbouncer.org/) | v1.26.1 | [ISC](https://opensource.org/license/isc-license-txt) | [Исходный `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/COPYRIGHT) |
-| [pgBadger](/ru/pgbadger/) | [Документация pgBadger](https://pgbadger.darold.net/) | v13.2, снимок разработки, коммит `f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/ru/haproxy/) | [Руководства HAProxy 3.4](https://docs.haproxy.org/3.4/) | снимок документации 3.4.7-57, коммит `0faeaed`; стабильный выпуск v3.4.7 | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/ru/etcd/) | [Документация etcd v3.7](https://etcd.io/docs/v3.7/) | Документация v3.7, коммит `d20f8ae`; выпуск ПО v3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Исходный `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [pgBadger](/ru/pgbadger/) | [Документация pgBadger](https://pgbadger.darold.net/) | v13.3, коммит `0514893` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
+| [HAProxy](/ru/haproxy/) | [Руководства HAProxy 3.4](https://docs.haproxy.org/3.4/) | v3.4.8 LTS | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [etcd](/ru/etcd/) | [Документация etcd v3.7](https://etcd.io/docs/v3.7/) | Документация v3.7, коммит `e60635a`; выпуск ПО v3.7.4 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Исходный `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 {.wide .expand}
 
 Каждый сборник **адаптирован**, а не зеркально скопирован. Заголовки, якоря, перекрёстные ссылки,
@@ -53,7 +55,7 @@ PG.CENTER повторно публикует документацию, напи
 
 ## pgBackRest {#pgbackrest}
 
-Импортировано 2026-08-15 с [сайта документации pgBackRest](https://pgbackrest.org/) и обновлено 2026-10-23 до **v2.60.0**, тег `release/2.60.0`, коммит [`2e1c4f2`](https://github.com/pgbackrest/pgbackrest/commit/2e1c4f2ba727c45a0a23d4b326905088dc15b1a1).
+Импортировано 2026-08-15 с [сайта документации pgBackRest](https://pgbackrest.org/) и обновлено 2026-11-21 до **v2.60.1**, тег `release/2.60.1`, коммит [`7aeba29`](https://github.com/pgbackrest/pgbackrest/commit/7aeba299c49abd768ca741506569007a5cab0870). Этот перевод синхронизирован с указанной ревизией.
 
 Авторские права на pgBackRest принадлежат The PostgreSQL Global Development Group и David Steele
 (copyright (c) 2015-2026). Материалы распространяются по
@@ -73,8 +75,7 @@ PG.CENTER повторно публикует документацию, напи
 
 ## pgBadger {#pgbadger}
 
-Импортировано 2026-08-15 с <https://pgbadger.darold.net/> и из [`darold/pgbadger`](https://github.com/darold/pgbadger), обновлено 2026-10-23 до коммита [`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67).
-Это снимок документации разрабатываемой версии после последнего опубликованного выпуска v13.2, а не новый стабильный выпуск. Исторические выдержки с сайта и примеры отчётов сохраняют собственные источники.
+Импортировано 2026-08-15 с <https://pgbadger.darold.net/> и из [`darold/pgbadger`](https://github.com/darold/pgbadger), обновлено 2026-11-21 до опубликованного выпуска **v13.3**, коммит [`0514893`](https://github.com/darold/pgbadger/commit/0514893e97296695c77755fa36c59288c3afef3e). Этот перевод синхронизирован с указанной ревизией. Исторические выдержки с сайта и примеры отчётов сохраняют собственные источники.
 
 Авторские права на pgBadger принадлежат Gilles Darold (copyright (c) 2012-2026). Материалы
 распространяются по [лицензии PostgreSQL](https://opensource.org/license/postgresql). Полный текст
@@ -92,14 +93,7 @@ PG.CENTER повторно публикует документацию, напи
 
 ## HAProxy {#haproxy}
 
-Импортировано 2026-08-16, обновлено 2026-08-30 и приведено 2026-10-23
-к официальному английскому снимку документации `3.4.7-57` ветки
-сопровождения HAProxy 3.4, коммит
-[`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3).
-Последний стабильный выпуск — `3.4.7` (тег `v3.4.7`); снимок документации включает
-изменения в ветке сопровождения, внесённые после этого выпуска.
-Английский текст получен из полных руководств `doc/intro.txt`, `doc/configuration.txt`
-и `doc/management.txt` — всего 40,246 строк — и реорганизован в 34 страницы для чтения.
+Импортировано 2026-08-16 и обновлено 2026-11-21 до официальной версии HAProxy 3.4 [**v3.4.8 LTS**](https://git.haproxy.org/?p=haproxy-3.4.git;a=tag;h=v3.4.8). Полные руководства `doc/intro.txt`, `doc/configuration.txt` и `doc/management.txt` реорганизованы в 34 страницы для чтения. Руководства Starter и Management не изменились по сравнению с предыдущим снимком; изменения Configuration Manual зафиксированы в diff обновления и включены в этот перевод.
 
 Авторские права на HAProxy принадлежат Willy Tarreau (copyright 2000-2026). Материалы
 распространяются по [GNU General Public License version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
@@ -113,16 +107,11 @@ PG.CENTER повторно публикует документацию, напи
 
 ## etcd {#etcd}
 
-Импортировано из официальной документации etcd v3.7 и обновлено 2026-10-13 до коммита
-[`d20f8ae346da`](https://github.com/etcd-io/website/commit/d20f8ae346da60ab6eb6f24f200753b328aa9fcc).
-Зафиксированное дерево исходного кода находится в
-[`content/en/docs/v3.7`](https://github.com/etcd-io/website/tree/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7).
+Импортировано из официальной документации etcd v3.7 и обновлено 2026-11-21 до коммита
+[`e60635a46b57`](https://github.com/etcd-io/website/tree/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7).
+Зафиксированное дерево исходного кода находится в `content/en/docs/v3.7`.
 
-2026-10-28 примеры установки, Docker и Kubernetes, а также сводка изменений обновлены
-для [etcd v3.7.3](https://github.com/etcd-io/etcd/releases/tag/v3.7.3), коммит выпуска
-[`0a173d0`](https://github.com/etcd-io/etcd/commit/0a173d0410a96d01091b484daae81365bbcde57e).
-В `go.mod` этого выпуска закреплён Go 1.26.10. Снимок документации и выпуск ПО
-зафиксированы отдельно в `data/upstreams.yaml` вместе с контрольными суммами исходных файлов.
+Примеры установки и сводка изменений соответствуют [etcd v3.7.4](https://github.com/etcd-io/etcd/releases/tag/v3.7.4), коммит выпуска `2e8a5c99e4982c8d4c521be15364ea4c5c68a489`, собранному с Go 1.26.11. Отдельно зафиксированный changelog сохраняет заголовок «v3.7.4 (TBC)»; тег выпуска подтверждает публикацию. Снимок документации и выпуск ПО зафиксированы отдельно в `data/upstreams.yaml` вместе с контрольными суммами исходных файлов.
 
 Авторские права на документацию etcd принадлежат etcd Authors (copyright 2013-present). Её текст
 распространяется по [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), а код и примеры кода —

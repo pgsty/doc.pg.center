@@ -308,9 +308,9 @@ kernels:
       icon: fa-solid fa-book-open
   - title: OpenHalo
     meta: MySQL compatibility
-    version: '1.0.0-beta.1'
+    version: '18.6.1'
     icon: fa-solid fa-circle-nodes
-    desc: Build PostgreSQL with MySQL SQL syntax and client protocol compatibility.
+    desc: OpenHalo 18 functionality, changes, compatibility boundaries, and acceptance.
     url: /openhalo/
     shortcuts_label: OpenHalo documentation shortcuts
     shortcuts:
@@ -318,13 +318,13 @@ kernels:
       url: /openhalo/
       icon: fa-solid fa-book-open
     - title: Build
-      url: /openhalo/quick-start/#installation
+      url: /openhalo/18/configuration/#build
       icon: fa-solid fa-book-open
-    - title: MySQL configuration
-      url: /openhalo/mysql-configuration/
+    - title: Compatibility boundaries
+      url: /openhalo/18/compatibility/
       icon: fa-solid fa-book-open
-    - title: MySQL reference
-      url: /openhalo/mysql-compatibility/
+    - title: Changes and acceptance
+      url: /openhalo/18/changes/
       icon: fa-solid fa-book-open
   - title: Apache Cloudberry
     meta: MPP analytics

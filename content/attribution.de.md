@@ -28,14 +28,16 @@ importiert wurden und wo der vollständige Upstream-Hinweis aufbewahrt wird.
 
 ## Zusammenfassung {#summary}
 
+Die sechs Betriebshandbücher folgen in dieser Ausgabe dem englischen Stand. Am 23. November 2026 wurden außerdem 117 offene Übersetzungs- und Prüfaufgaben für die chinesischen Datenbankhandbücher abgeschlossen und vier chinesische pgEdge-Kapiteleinstiege vervollständigt.
+
 | Komponente | Ursprungswerk | Festgeschriebener Stand | Lizenz | Hinterlegter Hinweis |
 |---|---|---|---|---|
 | [Patroni](/de/patroni/) | [Patroni-Dokumentation](https://patroni.readthedocs.io/en/latest/) | v4.1.5 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/patroni/patroni/blob/master/LICENSE) |
-| [pgBackRest](/de/pgbackrest/) | [pgBackRest-Dokumentation](https://pgbackrest.org/) | v2.60.0 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
+| [pgBackRest](/de/pgbackrest/) | [pgBackRest-Dokumentation](https://pgbackrest.org/) | v2.60.1 | [MIT](https://opensource.org/license/mit) | [Upstream `LICENSE`](https://github.com/pgbackrest/pgbackrest/blob/main/LICENSE) |
 | [PgBouncer](/de/pgbouncer/) | [PgBouncer-Dokumentation](https://www.pgbouncer.org/) | v1.26.1 | [ISC](https://opensource.org/license/isc-license-txt) | [Upstream `COPYRIGHT`](https://github.com/pgbouncer/pgbouncer/blob/pgbouncer_1_26_1/COPYRIGHT) |
-| [pgBadger](/de/pgbadger/) | [pgBadger-Dokumentation](https://pgbadger.darold.net/) | v13.2, Entwicklungsstand, Commit `f373ac6` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
-| [HAProxy](/de/haproxy/) | [HAProxy-3.4-Handbücher](https://docs.haproxy.org/3.4/) | Dokumentationsstand 3.4.7-57, Commit `0faeaed`; stabile Version v3.4.7 | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
-| [etcd](/de/etcd/) | [etcd-v3.7-Dokumentation](https://etcd.io/docs/v3.7/) | Dokumentation v3.7, Commit `d20f8ae`; Softwareversion v3.7.3 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Upstream `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
+| [pgBadger](/de/pgbadger/) | [pgBadger-Dokumentation](https://pgbadger.darold.net/) | v13.3, Commit `0514893` | [PostgreSQL](https://opensource.org/license/postgresql) | [`/third_party/pgbadger/LICENSE`](/third_party/pgbadger/LICENSE) |
+| [HAProxy](/de/haproxy/) | [HAProxy-3.4-Handbücher](https://docs.haproxy.org/3.4/) | v3.4.8 LTS | [GPL-2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) | [`/third_party/haproxy/LICENSE`](/third_party/haproxy/LICENSE) |
+| [etcd](/de/etcd/) | [etcd-v3.7-Dokumentation](https://etcd.io/docs/v3.7/) | Dokumentation v3.7, Commit `e60635a`; Softwareversion v3.7.4 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | [Upstream `LICENSE`](https://github.com/etcd-io/website/blob/main/LICENSE) |
 {.wide .expand}
 
 Jede Sammlung ist **bearbeitet**, nicht gespiegelt. Überschriften, Anker,
@@ -57,7 +59,7 @@ aufbewahrt.
 
 ## pgBackRest {#pgbackrest}
 
-Am 2026-08-15 von der [pgBackRest-Dokumentationswebsite](https://pgbackrest.org/) importiert und am 2026-10-23 auf **v2.60.0**, Tag `release/2.60.0`, Commit [`2e1c4f2`](https://github.com/pgbackrest/pgbackrest/commit/2e1c4f2ba727c45a0a23d4b326905088dc15b1a1) aktualisiert.
+Am 2026-08-15 von der [pgBackRest-Dokumentationswebsite](https://pgbackrest.org/) importiert und am 2026-11-21 auf **v2.60.1**, Tag `release/2.60.1`, Commit [`7aeba29`](https://github.com/pgbackrest/pgbackrest/commit/7aeba299c49abd768ca741506569007a5cab0870) aktualisiert. Diese übersetzte Ausgabe ist auf diesen Stand abgeglichen.
 
 Copyright (c) 2015-2026 für pgBackRest: The PostgreSQL Global Development Group
 und David Steele. pgBackRest wird unter der
@@ -81,8 +83,7 @@ aufbewahrt.
 
 ## pgBadger {#pgbadger}
 
-Am 2026-08-15 von <https://pgbadger.darold.net/> und aus [`darold/pgbadger`](https://github.com/darold/pgbadger) importiert und am 2026-10-23 auf Commit [`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67) aktualisiert.
-Dies ist ein Stand der Entwicklungsdokumentation nach der neuesten veröffentlichten Version v13.2, keine neue stabile Version. Historische Website-Auszüge und Beispielberichte behalten ihre eigenen Quellen.
+Am 2026-08-15 von <https://pgbadger.darold.net/> und aus [`darold/pgbadger`](https://github.com/darold/pgbadger) importiert und am 2026-11-21 auf die veröffentlichte Version **v13.3**, Commit [`0514893`](https://github.com/darold/pgbadger/commit/0514893e97296695c77755fa36c59288c3afef3e), aktualisiert. Diese übersetzte Ausgabe ist auf diesen Stand abgeglichen. Historische Website-Auszüge und Beispielberichte behalten ihre eigenen Quellen.
 
 Copyright (c) 2012-2026 für pgBadger: Gilles Darold. pgBadger wird unter der
 [PostgreSQL License](https://opensource.org/license/postgresql) verbreitet. Der
@@ -102,15 +103,7 @@ Site-Repository unter `static/third_party/pgbadger/LICENSE` aufbewahrt.
 
 ## HAProxy {#haproxy}
 
-Am 2026-08-16 importiert, am 2026-08-30 aktualisiert und am 2026-10-23 auf den
-offiziellen englischen Dokumentationsstand `3.4.7-57` des
-HAProxy-3.4-Wartungszweigs aktualisiert, Commit
-[`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3).
-Die neueste stabile Version ist `3.4.7` (Tag `v3.4.7`); der Dokumentationsstand
-enthält Änderungen am Wartungszweig, die nach dieser Version vorgenommen wurden.
-Der englische Text stammt aus den vollständigen Handbüchern `doc/intro.txt`,
-`doc/configuration.txt` und `doc/management.txt` mit insgesamt 40,246 Zeilen,
-die in 34 Leseseiten neu gegliedert wurden.
+Am 2026-08-16 importiert und am 2026-11-21 auf die offizielle HAProxy-3.4-Version [**v3.4.8 LTS**](https://git.haproxy.org/?p=haproxy-3.4.git;a=tag;h=v3.4.8) aktualisiert. Die vollständigen Handbücher `doc/intro.txt`, `doc/configuration.txt` und `doc/management.txt` wurden in 34 Leseseiten neu gegliedert. Starter- und Management-Handbuch sind gegenüber dem vorherigen Stand unverändert; die Änderungen des Configuration-Handbuchs sind im Update-Diff erfasst und in dieser übersetzten Ausgabe enthalten.
 
 Copyright 2000-2026 für HAProxy: Willy Tarreau. HAProxy wird unter der
 [GNU General Public License version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
@@ -125,17 +118,11 @@ vollständige GPLv2-Text werden unter
 
 ## etcd {#etcd}
 
-Aus der offiziellen etcd-v3.7-Dokumentation importiert und am 2026-10-13 beim
-Commit
-[`d20f8ae346da`](https://github.com/etcd-io/website/commit/d20f8ae346da60ab6eb6f24f200753b328aa9fcc)
-aktualisiert. Der festgeschriebene Quellbaum ist
-[`content/en/docs/v3.7`](https://github.com/etcd-io/website/tree/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7).
+Aus der offiziellen etcd-v3.7-Dokumentation importiert und am 2026-11-21 beim
+Commit [`e60635a46b57`](https://github.com/etcd-io/website/tree/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7)
+aktualisiert. Der festgeschriebene Quellbaum ist `content/en/docs/v3.7`.
 
-Am 2026-10-28 wurden die Installations-, Docker- und Kubernetes-Beispiele sowie die
-Versionszusammenfassung für [etcd v3.7.3](https://github.com/etcd-io/etcd/releases/tag/v3.7.3)
-aktualisiert, Release-Commit [`0a173d0`](https://github.com/etcd-io/etcd/commit/0a173d0410a96d01091b484daae81365bbcde57e).
-Die `go.mod` dieser Version legt Go 1.26.10 fest. Dokumentationsstand und Softwareversion
-sind in `data/upstreams.yaml` zusammen mit den Prüfsummen der Quellen getrennt erfasst.
+Installationsbeispiele und Versionszusammenfassung zielen auf [etcd v3.7.4](https://github.com/etcd-io/etcd/releases/tag/v3.7.4), Release-Commit `2e8a5c99e4982c8d4c521be15364ea4c5c68a489`, gebaut mit Go 1.26.11. Das separat fixierte Changelog behält die Überschrift „v3.7.4 (TBC)“; der Release-Tag bestätigt die Veröffentlichung. Dokumentationsstand und Softwareversion sind in `data/upstreams.yaml` zusammen mit den Prüfsummen der Quellen getrennt erfasst.
 
 Copyright 2013–heute für die etcd-Dokumentation: etcd Authors. Ihr Fließtext
 steht unter [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), Code und

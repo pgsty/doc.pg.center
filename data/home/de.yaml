@@ -37,7 +37,7 @@ components:
         - { title: "REST-API", url: /patroni/rest_api/, icon: fa-solid fa-plug }
     - title: "pgBackRest"
       meta: "Sicherung und Wiederherstellung"
-      version: v2.60.0
+      version: v2.60.1
       icon: fa-solid fa-couch
       desc: "Zuverlässige Sicherung, Wiederherstellung und Archivierung samt Point-in-Time-Recovery."
       url: /pgbackrest/
@@ -61,7 +61,7 @@ components:
         - { title: "FAQ", url: /pgbouncer/faq/, icon: fa-solid fa-circle-question }
     - title: "pgBadger"
       meta: "Protokollanalyse"
-      version: v13.2-dev
+      version: v13.3
       icon: fa-solid fa-otter
       desc: "Berichte zu Abfragen, Last und Fehlern aus PostgreSQL- und PgBouncer-Protokollen."
       url: /pgbadger/
@@ -73,7 +73,7 @@ components:
         - { title: "Beispielberichte", url: /pgbadger/sample-reports/, icon: fa-solid fa-chart-column }
     - title: "HAProxy"
       meta: "Lastverteilung"
-      version: v3.4
+      version: v3.4.8
       icon: fa-solid fa-network-wired
       desc: "Die vollständigen HAProxy-3.4-Handbücher: Einstieg, Konfiguration und Verwaltung."
       url: /haproxy/
@@ -85,7 +85,7 @@ components:
         - { title: "ACLs und Samples", url: /haproxy/acls-and-samples/, icon: fa-solid fa-filter }
     - title: "etcd"
       meta: "Konsens und Koordination"
-      version: v3.7.3
+      version: v3.7.4
       icon: fa-solid fa-gear
       desc: "Ein stark konsistenter Schlüssel-Wert-Speicher: Betrieb, APIs, Raft-Modell und Interna."
       url: /etcd/
