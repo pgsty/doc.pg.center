@@ -8,7 +8,7 @@ search_boost: 8
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [Referencia]
-upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/0514893e97296695c77755fa36c59288c3afef3e/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -294,7 +294,7 @@ pgBadger puede analizar un archivo de registro remoto mediante una conexión ssh
 contraseña. Usa -r o --remote-host para indicar la dirección IP o el nombre de host.
 También hay algunas opciones adicionales para controlar por completo la conexión ssh.
 
-En el modo de vigilancia (`-w`), los archivos de registro leídos por SSH se filtran en el host remoto antes de transferirse. Los registros CSV se filtran con `awk`, conservando los campos multilínea. Este comportamiento forma parte de la instantánea de desarrollo posterior a 13.2 documentada aquí.
+En el modo de vigilancia (`-w`), los archivos de registro leídos por SSH se filtran en el host remoto antes de transferirse. Los registros CSV se filtran con `awk`, conservando los campos multilínea. Este comportamiento forma parte de la versión 13.3.
 
 ```text
 --ssh-identity file      ruta del archivo de identidad que se va a usar.

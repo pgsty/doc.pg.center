@@ -8,7 +8,7 @@ search_boost: 8
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [リファレンス]
-upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/0514893e97296695c77755fa36c59288c3afef3e/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -166,7 +166,7 @@ logfileには、単一のログファイル、複数のファイル、または�
 
 pgBadgerは、パスワードなしのSSH接続でリモートログファイルを解析できます。-rまたは --remote-host でホストのIPアドレスまたはホスト名を指定します。SSH接続を細かく制御する追加オプションもあります。
 
-監視モード（`-w`）では、SSH経由で読み取るログファイルは転送前にリモートホスト側でフィルタリングされます。CSVレコードは`awk`でフィルタリングされ、複数行にわたるフィールドは保持されます。この動作は、ここで説明している13.2より後の開発スナップショットに含まれます。
+監視モード（`-w`）では、SSH経由で読み取るログファイルは転送前にリモートホスト側でフィルタリングされます。CSVレコードは`awk`でフィルタリングされ、複数行にわたるフィールドは保持されます。この動作は、13.3に含まれます。
 
 ```text
 --ssh-identity file      使用する認証鍵ファイルのパス。

@@ -390,7 +390,7 @@ pgbadger-20261121:
   modified: true
   source_ref: v13.3
   snapshot_date: '2026-11-21'
-  languages: [en, zh]
+  languages: [en, zh, fr, ja, de, ru, ar, es]
   translation_baseline: pgbadger
   source_sha256:
     ChangeLog: 0ede5b99e8c09edf7e3be2ef01faa61b7c96d4261a9d8787556434bee98b386e

@@ -1,5 +1,5 @@
 ---
-title: "Documentación de la instantánea de desarrollo de pgBadger 13.2"
+title: "Documentación de pgBadger 13.3"
 linkTitle: pgBadger
 weight: 40
 description: "Análisis rápido de registros de PostgreSQL y PgBouncer con informes detallados y autónomos"
@@ -12,17 +12,17 @@ sidebar_root_link_self: true
 module: [PGBADGER]
 categories: [Concepto]
 aliases: [/pgbadger/documentation/]
-upstream_source: pgbadger
-upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
-upstream_link: "https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67"
+upstream_source: pgbadger-20261121
+upstream_ref: "v13.3"
+upstream_link: "https://github.com/darold/pgbadger/tree/0514893e97296695c77755fa36c59288c3afef3e"
 cascade:
-  upstream_source: pgbadger
-  upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
+  upstream_source: pgbadger-20261121
+  upstream_ref: "v13.3"
   type: docs
   module: [PGBADGER]
 ---
 
-Este manual sigue la [instantánea de desarrollo no publicada `f373ac6`](https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67), cuyo commit se realizó el 2026-10-21 (UTC), después de la [versión estable 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2) del 2025-12-29. Las funciones descritas para esta instantánea, como el filtrado remoto en modo de vigilancia y los directorios codificados de informes por base de datos, no forman parte del archivo de la versión 13.2.
+Este manual cubre [pgBadger 13.3](https://github.com/darold/pgbadger/releases/tag/v13.3), publicado el 3 de noviembre de 2026. La versión incluye filtrado remoto en modo de vigilancia, directorios de informes por base de datos codificados, leyendas de gráficas desplazables y las correcciones listadas en las [notas de la versión 13.3](/es/pgbadger/releases/13/#v13-3).
 
 ![logo de pgBadger](/img/pgbadger/logo.png "pgBadger")
 

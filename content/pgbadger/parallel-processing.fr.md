@@ -7,7 +7,7 @@ search_keywords: [--Jobs, --jobs, --tempdir, Jobs, jobs, tempdir]
 icon: fa-solid fa-gauge-high
 module: [PGBADGER]
 categories: [Tâche]
-upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/0514893e97296695c77755fa36c59288c3afef3e/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -72,7 +72,7 @@ En pratique, privilégiez `-j` pour quelques fichiers volumineux et `-J` pour de
 ## Limites et fichiers temporaires {#limits-and-temporary-files}
 
 - `-j` n'est pas disponible pour les entrées compressées ou au format CSV et repose sur la duplication de processus, il n'est donc pas compatible avec Windows.
-- Pour les journaux distants autres que CSV, utilisez le traitement par fichier entier avec `-J` ; le découpage d’un fichier avec `-j` nécessite une entrée locale autorisant le positionnement dans le fichier. Les journaux CSV peuvent être lus par SSH ; dans l’instantané de développement postérieur à la version 13.2 documenté ici, le mode de surveillance (`-w`) filtre les enregistrements CSV sur l’hôte distant avec `awk`, en préservant les champs multilignes. Consultez les [options de lecture distante](/fr/pgbadger/command-line/).
+- Pour les journaux distants autres que CSV, utilisez le traitement par fichier entier avec `-J` ; le découpage d’un fichier avec `-j` nécessite une entrée locale autorisant le positionnement dans le fichier. Les journaux CSV peuvent être lus par SSH ; dans la version 13.3, le mode de surveillance (`-w`) filtre les enregistrements CSV sur l’hôte distant avec `awk`, en préservant les champs multilignes. Consultez les [options de lecture distante](/fr/pgbadger/command-line/).
 - L'analyse parallèle crée des fichiers temporaires nommés comme `tmp_pgbadgerXXXX.bin` dans le répertoire temporaire sélectionné (par défaut, le répertoire temporaire du système).
 - Ne supprimez pas ces fichiers pendant l'exécution de pgBadger. Utilisez `--tempdir` pour les placer sur un stockage disposant d'une capacité suffisante.
 - Commencez avec un nombre modeste de processus de travail et surveillez la charge CPU, le débit de lecture, la consommation d'espace temporaire et le temps écoulé.

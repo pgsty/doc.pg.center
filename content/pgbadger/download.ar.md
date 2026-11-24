@@ -7,7 +7,7 @@ search_keywords: [--content-size, --help, --robot, --version, --zcat, JSON::XS, 
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [درس تعليمي]
-upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/0514893e97296695c77755fa36c59288c3afef3e/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -20,7 +20,7 @@ upstream_name: "pgBadger README.md"
 | حزمة Debian/Ubuntu | توزيعات Linux المعتمدة على APT | [مستودع PostgreSQL لـ Apt](https://wiki.postgresql.org/wiki/Apt) |
 | المصدر التطويري | الكود الحالي غير المُصدر بعد | [darold/pgbadger](https://github.com/darold/pgbadger) |
 
-أحدث إصدار مستقر جرى التحقق منه في 2026-10-23 هو [pgBadger 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2)، الصادر في 2025-12-29. يثبّت المثال أدناه، الذي يستخدم أرشيف الإصدار، هذه النسخة. يغطي هذا الدليل أيضًا لقطة تطوير غير منشورة؛ استخدم أمر الانتقال إلى الالتزام المحدد أدناه لإعادة إنتاج سلوكها الأحدث.
+أحدث إصدار مستقر جرى التحقق منه في 2026-11-21 هو [pgBadger 13.3](https://github.com/darold/pgbadger/releases/tag/v13.3)، الصادر في 2026-11-03. يثبّت كل من مثال أرشيف الإصدار أدناه ونسخة الكود المحددة هذه النسخة الموثقة.
 
 ## المتطلبات {#requirements}
 
@@ -58,8 +58,8 @@ $ sudo yum install perl-JSON-XS
 نزِّل أرشيف إصدار، ثم ابنِه وثبِّته باستخدام سلسلة أدوات Perl القياسية:
 
 ```console
-$ tar xzf pgbadger-13.2.tar.gz
-$ cd pgbadger-13.2
+$ tar xzf pgbadger-13.3.tar.gz
+$ cd pgbadger-13.3
 $ perl Makefile.PL
 $ make
 $ sudo make install
@@ -77,19 +77,19 @@ $ sudo make install
 
 التخطيط `INSTALLDIRS=perl` تخطيط آخر يدعمه المشروع الأصلي. افحص المسارات المولَّدة قبل التثبيت في نظام مُدار.
 
-## تثبيت الكود التطويري {#install-development-code}
+## التثبيت من المصدر المحدد {#install-development-code}
 
 ```console
 $ git clone https://github.com/darold/pgbadger.git
 $ cd pgbadger
-$ git checkout --detach f373ac678c756f66a785c5ab4773d1f05f468d67
+$ git checkout --detach 0514893e97296695c77755fa36c59288c3afef3e
 $ perl Makefile.PL
 $ make
 $ make test
 $ sudo make install
 ```
 
-تطابق نسخة الكود هذه لقطة التطوير غير المنشورة الموثقة هنا: [`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67)، التي سُجّل التزامها في 2026-10-21 (UTC). وهي أحدث من الإصدار المستقر 13.2، لكنها ليست إصدارًا مستقرًا جديدًا. قد يحتوي الكود التطويري على تغييرات لم تشملها ملاحظات الإصدار بعد؛ فضِّل أرشيفًا موسومًا بوسم إصدار عند إعداد حزم لبيئة الإنتاج.
+تطابق نسخة الكود هذه [إصدار v13.3 الموثق](https://github.com/darold/pgbadger/releases/tag/v13.3)، المثبت عند `0514893e97296695c77755fa36c59288c3afef3e`.
 
 ## التحقق من التثبيت {#verify-installation}
 

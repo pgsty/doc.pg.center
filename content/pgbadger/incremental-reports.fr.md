@@ -7,7 +7,7 @@ search_keywords: [--day-report, --explode, --extra-files, --incremental, --iso-w
 icon: fa-solid fa-calendar-days
 module: [PGBADGER]
 categories: [Tâche]
-upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/0514893e97296695c77755fa36c59288c3afef3e/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -55,7 +55,7 @@ Tous les rapports ainsi que leur répertoire de ressources versionnées doivent 
 
 ## Rapports par base de données {#per-database-reports}
 
-Avec `-E` / `--explode`, les rapports de chaque base de données sont stockés dans un sous-répertoire du répertoire de sortie portant le nom de cette base. Dans l’instantané de développement postérieur à la version 13.2 documenté ici, les noms de bases de données qui ne peuvent pas être utilisés tels quels comme chemins sont encodés avec des pourcentages : `/`, `\`, `%` et les caractères de contrôle ; un point initial ; les noms purement numériques ; ainsi que les noms des fichiers que pgBadger écrit dans le répertoire de sortie, tels que `LAST_PARSED`. Les noms ordinaires restent inchangés.
+Avec `-E` / `--explode`, les rapports de chaque base de données sont stockés dans un sous-répertoire du répertoire de sortie portant le nom de cette base. Dans la version 13.3, les noms de bases de données qui ne peuvent pas être utilisés tels quels comme chemins sont encodés avec des pourcentages : `/`, `\`, `%` et les caractères de contrôle ; un point initial ; les noms purement numériques ; ainsi que les noms des fichiers que pgBadger écrit dans le répertoire de sortie, tels que `LAST_PARSED`. Les noms ordinaires restent inchangés.
 
 Par exemple, la base `2025` utilise le répertoire `%32025`, et la base `../foo` utilise `%2E.%2Ffoo`. Comme ces noms de répertoires contiennent des signes pourcentage, chaque `%` doit être écrit `%25` dans l’URL du rapport :
 

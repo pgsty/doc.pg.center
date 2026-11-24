@@ -7,7 +7,7 @@ search_keywords: [--day-report, --explode, --extra-files, --incremental, --iso-w
 icon: fa-solid fa-calendar-days
 module: [PGBADGER]
 categories: [Aufgabe]
-upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/0514893e97296695c77755fa36c59288c3afef3e/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -55,7 +55,7 @@ Alle Berichte und das zugehörige versionierte Ressourcenverzeichnis müssen gem
 
 ## Berichte pro Datenbank {#per-database-reports}
 
-Mit `-E` / `--explode` werden die Berichte jeder Datenbank in einem nach ihr benannten Unterverzeichnis des Ausgabeverzeichnisses gespeichert. Im hier dokumentierten Entwicklungssnapshot nach Version 13.2 werden Datenbanknamen, die sich nicht unverändert als Pfade eignen, prozentkodiert: `/`, `\`, `%` und Steuerzeichen; ein führender Punkt; rein numerische Namen sowie Namen von Dateien, die pgBadger in das Ausgabeverzeichnis schreibt, etwa `LAST_PARSED`. Gewöhnliche Datenbanknamen bleiben unverändert.
+Mit `-E` / `--explode` werden die Berichte jeder Datenbank in einem nach ihr benannten Unterverzeichnis des Ausgabeverzeichnisses gespeichert. In Version 13.3 werden Datenbanknamen, die sich nicht unverändert als Pfade eignen, prozentkodiert: `/`, `\`, `%` und Steuerzeichen; ein führender Punkt; rein numerische Namen sowie Namen von Dateien, die pgBadger in das Ausgabeverzeichnis schreibt, etwa `LAST_PARSED`. Gewöhnliche Datenbanknamen bleiben unverändert.
 
 Beispielsweise verwendet die Datenbank `2025` das Verzeichnis `%32025` und die Datenbank `../foo` das Verzeichnis `%2E.%2Ffoo`. Da diese Verzeichnisnamen Prozentzeichen enthalten, muss jedes `%` in der Berichts-URL als `%25` geschrieben werden:
 

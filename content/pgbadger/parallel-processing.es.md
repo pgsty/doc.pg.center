@@ -7,7 +7,7 @@ search_keywords: [--Jobs, --jobs, --tempdir, Jobs, jobs, tempdir]
 icon: fa-solid fa-gauge-high
 module: [PGBADGER]
 categories: [Tarea]
-upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/0514893e97296695c77755fa36c59288c3afef3e/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -72,7 +72,7 @@ El valor predeterminado práctico es `-j` para pocos archivos grandes y `-J` par
 ## Límites y archivos temporales {#limits-and-temporary-files}
 
 - `-j` no está disponible para entrada comprimida o CSV y depende del fork de procesos, por lo que no es un modo para Windows.
-- Para los registros remotos que no sean CSV, usa el procesamiento de archivos completos con `-J`; la división de un solo archivo con `-j` requiere una entrada local que permita cambiar la posición de lectura. Los registros CSV pueden leerse por SSH; en la instantánea de desarrollo posterior a 13.2 documentada aquí, el modo de vigilancia (`-w`) filtra los registros CSV en el host remoto con `awk` y conserva los campos multilínea. Consulta las [opciones de entrada remota](/es/pgbadger/command-line/).
+- Para los registros remotos que no sean CSV, usa el procesamiento de archivos completos con `-J`; la división de un solo archivo con `-j` requiere una entrada local que permita cambiar la posición de lectura. Los registros CSV pueden leerse por SSH; en la versión 13.3, el modo de vigilancia (`-w`) filtra los registros CSV en el host remoto con `awk` y conserva los campos multilínea. Consulta las [opciones de entrada remota](/es/pgbadger/command-line/).
 - El análisis en paralelo crea archivos temporales con nombres como `tmp_pgbadgerXXXX.bin` bajo el directorio temporal seleccionado (por defecto, el directorio temporal del sistema).
 - No limpies esos archivos mientras pgBadger se está ejecutando. Usa `--tempdir` para ubicarlos en un almacenamiento con capacidad suficiente.
 - Comienza con un número modesto de trabajadores y vigila la CPU, el rendimiento de lectura, el consumo de espacio temporal y el tiempo transcurrido.

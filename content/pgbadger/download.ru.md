@@ -7,7 +7,7 @@ search_keywords: [--content-size, --help, --robot, --version, --zcat, JSON::XS, 
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [Руководство]
-upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/0514893e97296695c77755fa36c59288c3afef3e/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -21,7 +21,7 @@ upstream_name: "pgBadger README.md"
 | Разрабатываемый исходный код | Текущий код, ещё не вошедший в выпуск | [darold/pgbadger](https://github.com/darold/pgbadger) |
 {.wide .expand}
 
-Последняя стабильная версия, проверенная на 2026-10-23, — [pgBadger 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2), выпущенная 2025-12-29. Приведённый ниже пример установки из архива выпуска устанавливает эту версию. Руководство также охватывает неопубликованный снимок разработки; чтобы воспроизвести его новое поведение, используйте приведённые ниже команды с переходом на фиксированный коммит.
+Последняя стабильная версия, проверенная 2026-11-21, — [pgBadger 13.3](https://github.com/darold/pgbadger/releases/tag/v13.3), выпущенная 2026-11-03. Как пример установки из архива выпуска, так и закреплённая ниже копия устанавливают эту документированную версию.
 
 ## Требования {#requirements}
 
@@ -59,8 +59,8 @@ $ sudo yum install perl-JSON-XS
 Загрузите архив выпуска, затем соберите и установите его стандартными средствами Perl:
 
 ```console
-$ tar xzf pgbadger-13.2.tar.gz
-$ cd pgbadger-13.2
+$ tar xzf pgbadger-13.3.tar.gz
+$ cd pgbadger-13.3
 $ perl Makefile.PL
 $ make
 $ sudo make install
@@ -78,19 +78,19 @@ $ sudo make install
 
 Исходный проект также поддерживает схему `INSTALLDIRS=perl`. Перед установкой в управляемую систему проверьте сгенерированные пути.
 
-## Установка разрабатываемой версии {#install-development-code}
+## Установка из закреплённого исходного кода {#install-development-code}
 
 ```console
 $ git clone https://github.com/darold/pgbadger.git
 $ cd pgbadger
-$ git checkout --detach f373ac678c756f66a785c5ab4773d1f05f468d67
+$ git checkout --detach 0514893e97296695c77755fa36c59288c3afef3e
 $ perl Makefile.PL
 $ make
 $ make test
 $ sudo make install
 ```
 
-Полученный код соответствует описанному здесь неопубликованному снимку разработки: [`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67), коммит от 2026-10-21 (UTC). Он новее стабильной версии 13.2 и не является новым стабильным выпуском. Разрабатываемый код может содержать изменения, ещё не описанные в примечаниях к выпуску; для сборки пакетов для производственной среды предпочтительнее архив с тегом версии.
+Эта копия соответствует [документированному выпуску v13.3](https://github.com/darold/pgbadger/releases/tag/v13.3) и закреплена на `0514893e97296695c77755fa36c59288c3afef3e`.
 
 ## Проверка установки {#verify-installation}
 

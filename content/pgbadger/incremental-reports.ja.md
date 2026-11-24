@@ -7,7 +7,7 @@ search_keywords: [--day-report, --explode, --extra-files, --incremental, --iso-w
 icon: fa-solid fa-calendar-days
 module: [PGBADGER]
 categories: [タスク]
-upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/0514893e97296695c77755fa36c59288c3afef3e/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -55,7 +55,7 @@ $ pgbadger -X -I -O /var/www/pg_reports postgresql.log.1
 
 ## データベース別レポート {#per-database-reports}
 
-`-E` / `--explode`を使用すると、各データベースのレポートは、出力ディレクトリ内のデータベース名を付けたサブディレクトリに保存されます。ここで説明している13.2より後の開発スナップショットでは、パスとしてそのまま使用できないデータベース名にパーセントエンコーディングを適用します。対象は、`/`、`\`、`%`、制御文字、先頭のドット、数字のみの名前、および`LAST_PARSED`などpgBadgerが出力ディレクトリに書き込むファイルの名前です。通常のデータベース名は変更されません。
+`-E` / `--explode`を使用すると、各データベースのレポートは、出力ディレクトリ内のデータベース名を付けたサブディレクトリに保存されます。13.3では、パスとしてそのまま使用できないデータベース名にパーセントエンコーディングを適用します。対象は、`/`、`\`、`%`、制御文字、先頭のドット、数字のみの名前、および`LAST_PARSED`などpgBadgerが出力ディレクトリに書き込むファイルの名前です。通常のデータベース名は変更されません。
 
 たとえば、データベース`2025`にはディレクトリ`%32025`を、データベース`../foo`には`%2E.%2Ffoo`を使用します。これらのディレクトリ名にはパーセント記号が含まれるため、レポートのURLでは各`%`を`%25`と記述する必要があります。
 

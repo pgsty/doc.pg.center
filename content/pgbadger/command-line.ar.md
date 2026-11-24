@@ -8,7 +8,7 @@ search_boost: 8
 icon: fa-solid fa-terminal
 module: [PGBADGER]
 categories: [مرجع]
-upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/0514893e97296695c77755fa36c59288c3afef3e/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -240,7 +240,7 @@ upstream_name: "pgBadger README.md"
 استخدم -r أو --remote-host لتحديد عنوان IP للمضيف أو اسمه. وتوجد أيضًا
 بعض الخيارات الإضافية للتحكم الكامل في اتصال ssh.
 
-في وضع المراقبة (`-w`)، تُصفّى ملفات السجل المقروءة عبر SSH على المضيف البعيد قبل نقلها. تُصفّى سجلات CSV باستخدام `awk`، مع الحفاظ على الحقول متعددة الأسطر. هذا السلوك جزء من لقطة التطوير الموثقة هنا واللاحقة للإصدار 13.2.
+في وضع المراقبة (`-w`)، تُصفّى ملفات السجل المقروءة عبر SSH على المضيف البعيد قبل نقلها. تُصفّى سجلات CSV باستخدام `awk`، مع الحفاظ على الحقول متعددة الأسطر. هذا السلوك جزء من الإصدار 13.3.
 
 ```text
 --ssh-identity file      مسار ملف الهوية المطلوب استخدامه.

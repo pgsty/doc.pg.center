@@ -1,5 +1,5 @@
 ---
-title: "pgBadger 13.2開発スナップショットのドキュメント"
+title: "pgBadger 13.3ドキュメント"
 linkTitle: "pgBadger"
 weight: 40
 description: "PostgreSQLとPgBouncerのログを高速に解析し、詳細で自己完結型のレポートを生成します"
@@ -12,17 +12,17 @@ sidebar_root_link_self: true
 module: [PGBADGER]
 categories: [概念]
 aliases: [/pgbadger/documentation/]
-upstream_source: pgbadger
-upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
-upstream_link: "https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67"
+upstream_source: pgbadger-20261121
+upstream_ref: "v13.3"
+upstream_link: "https://github.com/darold/pgbadger/tree/0514893e97296695c77755fa36c59288c3afef3e"
 cascade:
-  upstream_source: pgbadger
-  upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
+  upstream_source: pgbadger-20261121
+  upstream_ref: "v13.3"
   type: docs
   module: [PGBADGER]
 ---
 
-このマニュアルは、[未リリースの開発スナップショット`f373ac6`](https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67)に基づいています。このコミットは2026-10-21（UTC）のもので、2025-12-29にリリースされた[安定版13.2](https://github.com/darold/pgbadger/releases/tag/v13.2)より後のものです。このスナップショットで説明する機能には、監視モードでのリモート側のフィルタリングや、エンコードされたデータベース別レポートディレクトリなどがあり、これらは13.2のリリースtarballには含まれません。
+このマニュアルは、2026年11月3日にリリースされた[pgBadger 13.3](https://github.com/darold/pgbadger/releases/tag/v13.3)を対象とします。このリリースには、監視モードでのリモートフィルタリング、エンコードされたデータベース別レポートディレクトリ、スクロール可能なグラフ凡例、および[13.3リリースノート](/ja/pgbadger/releases/13/#v13-3)に記載された修正が含まれます。
 
 ![pgBadgerロゴ](/img/pgbadger/logo.png "pgBadger")
 

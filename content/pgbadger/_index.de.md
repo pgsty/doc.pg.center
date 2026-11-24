@@ -1,5 +1,5 @@
 ---
-title: "Dokumentation zum Entwicklungssnapshot von pgBadger 13.2"
+title: "Dokumentation zu pgBadger 13.3"
 linkTitle: pgBadger
 weight: 40
 description: "Schnelle Analyse von PostgreSQL- und PgBouncer-Protokollen mit detaillierten, in sich geschlossenen Berichten"
@@ -12,17 +12,17 @@ sidebar_root_link_self: true
 module: [PGBADGER]
 categories: [Konzept]
 aliases: [/pgbadger/documentation/]
-upstream_source: pgbadger
-upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
-upstream_link: "https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67"
+upstream_source: pgbadger-20261121
+upstream_ref: "v13.3"
+upstream_link: "https://github.com/darold/pgbadger/tree/0514893e97296695c77755fa36c59288c3afef3e"
 cascade:
-  upstream_source: pgbadger
-  upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
+  upstream_source: pgbadger-20261121
+  upstream_ref: "v13.3"
   type: docs
   module: [PGBADGER]
 ---
 
-Dieses Handbuch folgt dem [unveröffentlichten Entwicklungssnapshot `f373ac6`](https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67), dessen Commit vom 2026-10-21 (UTC) nach der Veröffentlichung der [stabilen Version 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2) am 2025-12-29 liegt. Die für diesen Snapshot beschriebenen Funktionen, darunter die Filterung auf dem entfernten Host im Überwachungsmodus und kodierte Berichtsverzeichnisse pro Datenbank, sind nicht im Release-Tarball von 13.2 enthalten.
+Dieses Handbuch behandelt [pgBadger 13.3](https://github.com/darold/pgbadger/releases/tag/v13.3), veröffentlicht am 3. November 2026. Die Version enthält Filterung auf dem entfernten Host im Überwachungsmodus, kodierte Berichtsverzeichnisse pro Datenbank, scrollbare Diagrammlegenden und die in den [Versionshinweisen zu 13.3](/de/pgbadger/releases/13/#v13-3) aufgeführten Korrekturen.
 
 ![pgBadger-Logo](/img/pgbadger/logo.png "pgBadger")
 

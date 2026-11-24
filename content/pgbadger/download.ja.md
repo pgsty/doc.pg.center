@@ -7,7 +7,7 @@ search_keywords: [--content-size, --help, --robot, --version, --zcat, JSON::XS, 
 icon: fa-solid fa-cloud-arrow-down
 module: [PGBADGER]
 categories: [チュートリアル]
-upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/README.md"
+upstream_link: "https://github.com/darold/pgbadger/blob/0514893e97296695c77755fa36c59288c3afef3e/README.md"
 upstream_name: "pgBadger README.md"
 ---
 
@@ -21,7 +21,7 @@ upstream_name: "pgBadger README.md"
 | 開発用ソース | 未リリースの最新コード | [darold/pgbadger](https://github.com/darold/pgbadger) |
 {.wide .expand}
 
-2026-10-23時点で確認した最新の安定版は、2025-12-29にリリースされた[pgBadger 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2)です。以下のリリースtarballを使う例では、このバージョンをインストールします。このマニュアルは未リリースの開発スナップショットも対象にしています。新しい動作を再現するには、以下の特定コミットに固定したチェックアウトを使用してください。
+2026-11-21に確認した最新の安定版は、2026-11-03にリリースされた[pgBadger 13.3](https://github.com/darold/pgbadger/releases/tag/v13.3)です。以下のリリースアーカイブの例も、固定チェックアウトも、このドキュメント対象リリースをインストールします。
 
 ## 要件 {#requirements}
 
@@ -59,8 +59,8 @@ pgBadgerがアーカイブのメタデータを読み取れるよう、`xz`ユ�
 リリースアーカイブをダウンロードし、Perlの標準ツールチェーンでビルドしてインストールします。
 
 ```console
-$ tar xzf pgbadger-13.2.tar.gz
-$ cd pgbadger-13.2
+$ tar xzf pgbadger-13.3.tar.gz
+$ cd pgbadger-13.3
 $ perl Makefile.PL
 $ make
 $ sudo make install
@@ -78,20 +78,19 @@ $ sudo make install
 
 `INSTALLDIRS=perl`も、アップストリームでサポートされているレイアウトです。管理下のシステムにインストールする前に、生成されるパスを確認してください。
 
-## 開発版のコードをインストールする {#install-development-code}
+## 固定ソースからインストールする {#install-development-code}
 
 ```console
 $ git clone https://github.com/darold/pgbadger.git
 $ cd pgbadger
-$ git checkout --detach f373ac678c756f66a785c5ab4773d1f05f468d67
+$ git checkout --detach 0514893e97296695c77755fa36c59288c3afef3e
 $ perl Makefile.PL
 $ make
 $ make test
 $ sudo make install
 ```
 
-このチェックアウトは、ここで説明している未リリースの開発スナップショット[`f373ac6`](https://github.com/darold/pgbadger/commit/f373ac678c756f66a785c5ab4773d1f05f468d67)に対応します。コミット日時は2026-10-21（UTC）です。安定版13.2より新しいものですが、新たな安定版ではありません。開発版のコードには、リリースノートにまだ記載されていない変更が含まれる場合があります。本番環境向けのパッケージ作成には、タグ付きのアーカイブを優先してください。
-
+このチェックアウトは、[ドキュメント対象のv13.3リリース](https://github.com/darold/pgbadger/releases/tag/v13.3)に対応し、`0514893e97296695c77755fa36c59288c3afef3e`に固定されています。
 ## インストールを確認する {#verify-installation}
 
 ```console

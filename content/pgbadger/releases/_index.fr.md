@@ -7,19 +7,19 @@ search_keywords: []
 icon: fa-solid fa-clock-rotate-left
 module: [PGBADGER]
 categories: [Référence]
-upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/ChangeLog"
+upstream_link: "https://github.com/darold/pgbadger/blob/0514893e97296695c77755fa36c59288c3afef3e/ChangeLog"
 upstream_name: "pgBadger ChangeLog"
 ---
 
 Historique des versions de pgBadger 9.x à 13.x, regroupé par version majeure et présenté de la plus récente à la plus ancienne.
 
-La dernière version stable répertoriée ici est la 13.2, publiée le 2025-12-29. Le reste de ce manuel couvre également l’instantané de développement non publié `f373ac6`. Les notes de version historiques ci-dessous s’arrêtent à la version stable 13.2.
+La dernière version stable répertoriée ici est [13.3](/fr/pgbadger/releases/13/#v13-3), publiée le 2026-11-03. Ce manuel suit cette version ; les notes de version historiques conservent leurs dates d’origine.
 
-Les anciennes versions peuvent utiliser d’autres valeurs par défaut ou nécessiter des procédures de mise à niveau différentes. Pour la configuration de la version 13.2, consultez la référence de la ligne de commande et le guide de journalisation PostgreSQL.
+Ces entrées décrivent le comportement au moment de chaque version. Les valeurs par défaut, noms de configuration et procédures de mise à niveau historiques peuvent différer de 13.3 ; consultez la référence actuelle de ligne de commande et le guide de journalisation PostgreSQL pour les réglages opérationnels.
 
 | Série | Versions incluses | Première – dernière publication | Page |
 |---|---|---|---|
-| 13.x | 13.0–13.2 | 2024-12-08 – 2025-12-29 | [Lire 13.x](/fr/pgbadger/releases/13/) |
+| 13.x | 13.0–13.3 | 2024-12-08 – 2026-11-03 | [Lire 13.x](/fr/pgbadger/releases/13/) |
 | 12.x | 12.0–12.4 | 2022-09-13 – 2023-12-25 | [Lire 12.x](/fr/pgbadger/releases/12/) |
 | 11.x | 11.0–11.8 | 2019-06-25 – 2022-04-08 | [Lire 11.x](/fr/pgbadger/releases/11/) |
 | 10.x | 10.0–10.3 | 2018-09-09 – 2019-02-14 | [Lire 10.x](/fr/pgbadger/releases/10/) |

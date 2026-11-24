@@ -7,7 +7,7 @@ search_keywords: []
 icon: fa-solid fa-scale-balanced
 module: [PGBADGER]
 categories: [Справочник]
-upstream_link: "https://github.com/darold/pgbadger/blob/f373ac678c756f66a785c5ab4773d1f05f468d67/LICENSE"
+upstream_link: "https://github.com/darold/pgbadger/blob/0514893e97296695c77755fa36c59288c3afef3e/LICENSE"
 upstream_name: "pgBadger LICENSE"
 ---
 

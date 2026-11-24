@@ -1,5 +1,5 @@
 ---
-title: "Документация снимка разработки pgBadger 13.2"
+title: "Документация pgBadger 13.3"
 linkTitle: pgBadger
 weight: 40
 description: "Быстрый анализ журналов PostgreSQL и PgBouncer с подробными автономными отчётами"
@@ -12,17 +12,17 @@ sidebar_root_link_self: true
 module: [PGBADGER]
 categories: [Концепция]
 aliases: [/pgbadger/documentation/]
-upstream_source: pgbadger
-upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
-upstream_link: "https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67"
+upstream_source: pgbadger-20261121
+upstream_ref: "v13.3"
+upstream_link: "https://github.com/darold/pgbadger/tree/0514893e97296695c77755fa36c59288c3afef3e"
 cascade:
-  upstream_source: pgbadger
-  upstream_ref: "v13.2 development snapshot, commit f373ac6 (unreleased)"
+  upstream_source: pgbadger-20261121
+  upstream_ref: "v13.3"
   type: docs
   module: [PGBADGER]
 ---
 
-Это руководство соответствует [неопубликованному снимку разработки `f373ac6`](https://github.com/darold/pgbadger/tree/f373ac678c756f66a785c5ab4773d1f05f468d67), зафиксированному коммитом от 2026-10-21 (UTC), после выхода [стабильной версии 13.2](https://github.com/darold/pgbadger/releases/tag/v13.2) от 2025-12-29. Описанные для этого снимка возможности, включая удалённую фильтрацию в режиме наблюдения и кодирование имён каталогов отчётов по базам данных, не входят в архив выпуска 13.2.
+Это руководство охватывает [pgBadger 13.3](https://github.com/darold/pgbadger/releases/tag/v13.3), выпущенный 3 ноября 2026 г. Выпуск включает удалённую фильтрацию в режиме наблюдения, кодирование каталогов отчётов по базам данных, прокручиваемые легенды графиков и исправления из [примечаний к версии 13.3](/ru/pgbadger/releases/13/#v13-3).
 
 ![Логотип pgBadger](/img/pgbadger/logo.png "pgBadger")
 
