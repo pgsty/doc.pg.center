@@ -3,7 +3,7 @@ title: ترقية etcd من 2.3 إلى 3.0
 weight: 6900
 description: "العمليات وقوائم التحقق والملاحظات المتعلقة بترقية etcd من 2.3 إلى 3.0"
 categories: [مهمة]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_0.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/upgrades/upgrade_3_0.md"
 ---
 
 في الحالة العامة، يمكن أن تكون الترقية من etcd 2.3 إلى 3.0 ترقية متدرجة دون أي توقف:

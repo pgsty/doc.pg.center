@@ -4,7 +4,7 @@ weight: 1350
 description: Métricas para la supervisión y la depuración en tiempo real
 icon: fa-solid fa-chart-line
 categories: [Referencia]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/metrics/_index.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/metrics/_index.md"
 ---
 
 etcd usa [Prometheus][prometheus] para el reporte de métricas. Las métricas pueden usarse para la supervisión y la depuración en tiempo real. etcd no persiste sus métricas; si un miembro se reinicia, las métricas se restablecerán.

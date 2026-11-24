@@ -3,7 +3,7 @@ title: "実行時再構成の設計"
 weight: 4650
 description: "etcdの実行時再構成コマンドの設計"
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/runtime-reconf-design.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/runtime-reconf-design.md"
 ---
 
 実行時再構成は、分散システム、とりわけetcdのようにコンセンサスに基づくシステムで、実装が最も難しく、誤りが生じやすい機能の1つです。

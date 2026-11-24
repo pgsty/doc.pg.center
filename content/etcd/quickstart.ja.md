@@ -4,7 +4,7 @@ weight: 900
 description: 5分足らずでetcdを起動して使い始めましょう！
 icon: fa-solid fa-rocket
 categories: [チュートリアル]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/quickstart.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/quickstart.md"
 ---
 
 次の手順に従って、単一メンバーのetcdクラスターをローカルにインストールし、実行してテストします。

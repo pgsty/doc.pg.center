@@ -3,7 +3,7 @@ title: "gRPC-Proxy"
 weight: 4350
 description: "Ein zustandsloser etcd-Reverse-Proxy auf der gRPC-Schicht"
 categories: [Aufgabe]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/grpc_proxy.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/grpc_proxy.md"
 ---
 
 Der gRPC-Proxy ist ein zustandsloser etcd-Reverse-Proxy auf der gRPC-Schicht (L7). Er soll die gesamte Verarbeitungslast auf dem zentralen etcd-Cluster verringern. Für horizontale Skalierbarkeit führt er Watch- und Lease-API-Anfragen zusammen. Um den Cluster vor missbräuchlich arbeitenden Clients zu schützen, speichert er Anfragen für Schlüsselbereiche zwischen.

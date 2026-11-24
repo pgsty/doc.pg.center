@@ -3,7 +3,7 @@ title: خفض إصدار etcd من v3.6 إلى v3.5
 weight: 6650
 description: العمليات وقوائم التحقق والملاحظات المتعلقة بخفض إصدار etcd من v3.6 إلى v3.5
 categories: [مهمة]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/downgrades/downgrade_3_6.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/downgrades/downgrade_3_6.md"
 ---
 
 في الحالة العامة، يمكن أن يتم خفض الإصدار من etcd v3.6 إلى v3.5 دون أي توقف عن الخدمة، وبأسلوب متدرج:

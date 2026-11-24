@@ -3,7 +3,7 @@ title: Por qué usar la pasarela gRPC
 weight: 3375
 description: Por qué considerar el uso de la pasarela gRPC
 categories: [Concepto]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/api_grpc_gateway.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/api_grpc_gateway.md"
 ---
 
 etcd v3 usa [gRPC][grpc] como protocolo de mensajería. El proyecto etcd incluye un cliente [Go][go-client] basado en gRPC y una utilidad de línea de comandos, [etcdctl][etcdctl], para comunicarse con un clúster de etcd a través de gRPC. Para los lenguajes sin soporte de gRPC, etcd proporciona una [pasarela gRPC][grpc-gateway] en JSON. Esta pasarela ofrece un proxy RESTful que traduce las solicitudes HTTP/JSON en mensajes gRPC.

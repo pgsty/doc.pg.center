@@ -4,7 +4,7 @@ weight: 1400
 description: كيفية تقديم تقارير المشكلات لمشروع etcd
 icon: fa-solid fa-bug
 categories: [مهمة]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/reporting_bugs.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/reporting_bugs.md"
 ---
 
 إذا كان في أي جزء من مشروع etcd أخطاء برمجية أو أخطاء في التوثيق، فأخبرنا بذلك عبر [فتح قضية][etcd-issue]. نتعامل مع الأخطاء البرمجية وأخطاء التوثيق بجدية بالغة ونؤمن بأنه لا توجد قضية أصغر من أن تُذكر. قبل إنشاء تقرير خطأ برمجي، تحقق من عدم وجود قضية قائمة تبلغ عن المشكلة نفسها.

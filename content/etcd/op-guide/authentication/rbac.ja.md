@@ -3,7 +3,7 @@ title: "ロールベースのアクセス制御"
 weight: 4100
 description: "基本的な認証とロールベースのアクセス制御のガイド"
 categories: [タスク]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/authentication/rbac.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/authentication/rbac.md"
 ---
 
 ## 概要 {#overview}

@@ -3,7 +3,7 @@ title: etcd مقارنةً بمخازن المفاتيح/القيم الأخرى
 weight: 2875
 description: تاريخ etcd واستخداماته ومقارنته بالأدوات الأخرى
 categories: [مفهوم]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/why.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/why.md"
 ---
 
 نشأ اسم "etcd" عن فكرتين: مجلد "/etc" في unix، والأنظمة الموزعة «d»istributed. فمجلد "/etc" مكان لتخزين بيانات الإعداد لنظام واحد، بينما يخزن etcd معلومات الإعداد للأنظمة الموزعة واسعة النطاق. ومن ثم، فإن "/etc" «d»istributed هو "etcd".

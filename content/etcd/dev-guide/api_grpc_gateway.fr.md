@@ -3,7 +3,7 @@ title: Pourquoi utiliser une passerelle gRPC
 weight: 3375
 description: "Pourquoi envisager l'utilisation de la passerelle gRPC"
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/api_grpc_gateway.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/api_grpc_gateway.md"
 ---
 
 etcd v3 utilise [gRPC][grpc] comme protocole de messagerie. Le projet etcd inclut un client [Go][go-client] basé sur gRPC ainsi qu'un utilitaire en ligne de commande, [etcdctl][etcdctl], pour communiquer avec un cluster etcd via gRPC. Pour les langages ne disposant pas de prise en charge gRPC, etcd fournit une passerelle [gRPC][grpc-gateway] en JSON. Cette passerelle fournit un proxy RESTful qui traduit les requêtes HTTP/JSON en messages gRPC.

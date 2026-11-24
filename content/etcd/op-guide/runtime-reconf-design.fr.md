@@ -3,7 +3,7 @@ title: "Conception de la reconfiguration à l'exécution"
 weight: 4650
 description: "Conception des commandes de reconfiguration en temps d'exécution d'etcd"
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/runtime-reconf-design.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/runtime-reconf-design.md"
 ---
 
 La reconfiguration à l’exécution est l’une des fonctionnalités les plus complexes et sujettes aux erreurs dans un système distribué, en particulier dans un système fondé sur le consensus comme etcd.

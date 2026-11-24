@@ -3,7 +3,7 @@ title: Recuperación ante desastres
 weight: 4275
 description: funcionalidades de instantánea y restauración de etcd v3
 categories: [Tarea]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/recovery.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/recovery.md"
 ---
 
 etcd está diseñado para resistir fallos de máquina. Un clúster de etcd se recupera automáticamente de fallos temporales (por ejemplo, reinicios de máquina) y tolera hasta *(N-1)/2* fallos permanentes en un clúster de N miembros. Cuando un miembro falla de forma permanente, ya sea por un fallo de hardware o por corrupción del disco, pierde el acceso al clúster. Si el clúster pierde permanentemente más de *(N-1)/2* miembros, sufre un fallo catastrófico y pierde el cuórum de forma irrevocable. Una vez perdido el cuórum, el clúster no puede alcanzar consenso y, por lo tanto, no puede seguir aceptando actualizaciones.

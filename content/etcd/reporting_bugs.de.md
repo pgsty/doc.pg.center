@@ -4,7 +4,7 @@ weight: 1400
 description: "Fehlerberichte für das etcd-Projekt erstellen"
 icon: fa-solid fa-bug
 categories: [Aufgabe]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/reporting_bugs.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/reporting_bugs.md"
 ---
 
 Fehler in einem Teil des etcd-Projekts oder in seiner Dokumentation bitte durch [Erstellen eines Issues][etcd-issue] melden. Wir nehmen Fehler und Mängel sehr ernst und halten kein Problem für zu klein. Vor dem Erstellen eines Fehlerberichts bitte prüfen, ob dasselbe Problem bereits gemeldet wurde.

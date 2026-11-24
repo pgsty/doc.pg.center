@@ -3,7 +3,7 @@ title: التعافي من الكوارث
 weight: 4275
 description: مرافق اللقطات والاستعادة في etcd v3
 categories: [مهمة]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/recovery.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/recovery.md"
 ---
 
 صُمِّم etcd لتحمّل أعطال الأجهزة. يتعافى عنقود etcd تلقائيًا من الأعطال المؤقتة (مثل إعادة تشغيل الأجهزة) ويتحمّل حتى <bdi dir="ltr">*(N-1)/2*</bdi> من الأعطال الدائمة في عنقود مكوّن من N من الأعضاء. عندما يفشل عضو فشلًا دائمًا، سواء بسبب عطل في العتاد أو تلف في القرص، فإنه يفقد وصوله إلى العنقود. وإذا فقد العنقود بشكل دائم أكثر من <bdi dir="ltr">*(N-1)/2*</bdi> من الأعضاء، فإنه يفشل فشلًا كارثيًا، فاقدًا النصاب بصورة لا رجعة فيها. وبمجرد فقدان النصاب، لا يمكن للعنقود بلوغ إجماع، وبالتالي لا يمكنه مواصلة قبول التحديثات.

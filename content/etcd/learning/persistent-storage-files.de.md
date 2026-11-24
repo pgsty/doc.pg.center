@@ -3,7 +3,7 @@ title: Dateien der persistenten Speicherung in etcd
 weight: 2650
 description: Referenz der persistenten Speicherformate und Dateien
 categories: [Konzept]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/persistent-storage-files.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/persistent-storage-files.md"
 ---
 
 Dieses Dokument erläutert das Format der persistenten Speicherung in etcd: Benennung, Inhalt und Werkzeuge, mit denen Entwickler die Dateien untersuchen können. Künftig sollte es um Änderungen am Speichermodell erweitert werden. Es richtet sich an etcd-Entwickler und soll sie bei der Datenwiederherstellung unterstützen.

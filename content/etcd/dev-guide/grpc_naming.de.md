@@ -3,7 +3,7 @@ title: gRPC-Namensauflösung und Discovery
 weight: 3500
 description: "go-grpc: gRPC-Endpunkte mit einem etcd-Backend auflösen"
 categories: [Aufgabe]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/grpc_naming.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/grpc_naming.md"
 ---
 
 etcd stellt einen gRPC-Resolver für ein alternatives Namenssystem bereit, das Endpunkte aus etcd abruft, um gRPC-Dienste zu finden. Der zugrunde liegende Mechanismus beobachtet Änderungen an Schlüsseln, deren Präfix der Dienstname ist.

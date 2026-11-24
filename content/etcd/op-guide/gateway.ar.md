@@ -3,7 +3,7 @@ title: بوابة etcd (etcd gateway)
 weight: 4300
 description: "بوابة etcd، ومتى تستخدمها، وكيفية إعدادها"
 categories: [مهمة]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/gateway.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/gateway.md"
 ---
 
 ## ما هي بوابة etcd {#what-is-etcd-gateway}

@@ -3,7 +3,7 @@ title: Возможности etcd
 weight: 3750
 description: Использование возможностей etcd
 categories: [Справочник]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/features.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/features.md"
 ---
 
 В этом документе представлен обзор возможностей etcd, помогающий понять их назначение и связанный с ними процесс устаревания. Порядок разработки возможностей etcd описан в [рекомендациях для разработчиков](https://github.com/etcd-io/etcd/blob/main/Documentation/contributor-guide/features.md).

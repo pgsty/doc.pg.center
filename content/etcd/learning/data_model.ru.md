@@ -3,7 +3,7 @@ title: Модель данных
 weight: 2125
 description: Методы хранения данных в etcd
 categories: [Концепция]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/data_model.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/data_model.md"
 ---
 
 etcd предназначен для надёжного хранения редко обновляемых данных и выполнения надёжных запросов наблюдения. etcd предоставляет предыдущие версии пар «ключ — значение», поддерживая недорогие снимки и историю событий наблюдения («запросы с перемещением во времени»). Для этих сценариев хорошо подходит постоянная многоверсионная модель данных с управлением параллелизмом.

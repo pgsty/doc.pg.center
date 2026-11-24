@@ -4,7 +4,7 @@ weight: 1400
 description: etcdプロジェクトに問題を報告する方法
 icon: fa-solid fa-bug
 categories: [タスク]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/reporting_bugs.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/reporting_bugs.md"
 ---
 
 etcdプロジェクトのいずれかの部分にバグやドキュメントの誤りを見つけた場合は、[Issueを作成][etcd-issue]してお知らせください。私たちはバグや誤りを真剣に受け止めており、小さすぎて報告する必要のない問題はないと考えています。バグを報告する前に、同じ問題を報告するIssueがすでに存在していないか確認してください。

@@ -3,7 +3,7 @@ title: Gestion des versions
 weight: 4900
 description: Prise en charge de la gestion des versions par etcd
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/versioning.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/versioning.md"
 ---
 
 Ce document décrit les versions prises en charge par le projet etcd.
@@ -13,9 +13,9 @@ Ce document décrit les versions prises en charge par le projet etcd.
 Les versions d'etcd sont exprimées sous la forme **x.y.z**, où **x** représente la version majeure, **y** la version mineure et **z** la version de correctif, conformément à la terminologie [Semantic Versioning](https://semver.org/).
 Les nouvelles versions mineures peuvent ajouter des fonctionnalités supplémentaires à l'API.
 
-Le projet etcd maintient des branches de version pour la version actuelle et la version précédente. Par exemple, lorsque v3.5 est la version actuelle, v3.4 est prise en charge. Lorsque v3.6 est publiée, v3.4 n'est plus prise en charge.
+Le projet etcd maintient des branches de publication pour la version actuelle et les deux versions précédentes. Par exemple, lorsque v3.7 est la version actuelle, v3.6 et v3.5 sont prises en charge. Lorsque v3.8 sera publiée, v3.5 ne le sera plus.
 
-Les correctifs applicables, y compris les correctifs de sécurité, peuvent être appliqués en retour à ces deux branches de version, selon leur gravité et leur faisabilité.
+Les correctifs applicables, y compris les correctifs de sécurité, peuvent être appliqués en retour à ces trois branches de version, selon leur gravité et leur faisabilité.
 Les versions correctives sont créées à partir de ces branches lorsque nécessaire.
 
 Les [mainteneurs](https://github.com/etcd-io/etcd/blob/main/OWNERS) du projet prennent cette décision.

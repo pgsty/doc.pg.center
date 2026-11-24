@@ -3,7 +3,7 @@ title: etcdをv3.6からv3.5にダウングレード
 weight: 6650
 description: etcdをv3.6からv3.5にダウングレードする手順、チェックリスト、注意事項
 categories: [タスク]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/downgrades/downgrade_3_6.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/downgrades/downgrade_3_6.md"
 ---
 
 通常、etcd v3.6からv3.5へのダウングレードは、停止時間なしのローリングダウングレードで実行できます。

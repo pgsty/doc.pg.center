@@ -4,7 +4,7 @@ weight: 1350
 description: Метрики для мониторинга и отладки в реальном времени
 icon: fa-solid fa-chart-line
 categories: [Справочник]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/metrics/_index.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/metrics/_index.md"
 ---
 
 Для публикации метрик etcd использует [Prometheus][prometheus]. Метрики можно применять для мониторинга и отладки в реальном времени. etcd не сохраняет метрики: при перезапуске участника они сбрасываются.

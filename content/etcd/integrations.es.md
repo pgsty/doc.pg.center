@@ -4,7 +4,7 @@ weight: 1300
 description: Un listado de herramientas y bibliotecas cliente de etcd
 icon: fa-solid fa-puzzle-piece
 categories: [Referencia]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/integrations.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/integrations.md"
 ---
 
 Ten en cuenta que las bibliotecas y herramientas de terceros (no alojadas en https://github.com/etcd-io) mencionadas a continuación no están probadas ni mantenidas por el equipo de etcd. Antes de usarlas, se recomienda a los usuarios leerlas e investigarlas.
@@ -23,6 +23,7 @@ Ten en cuenta que las bibliotecas y herramientas de terceros (no alojadas en htt
 - [etcdloadtest](https://github.com/sinsharat/etcdloadtest) - Un cliente de prueba de carga de línea de comandos para etcd versión 3.0 y posteriores.
 - [etcd-tui](https://github.com/olamilekan000/etcd-tui) - Una interfaz de usuario de terminal (TUI) moderna para interactuar con tu base de datos etcd. Navega por las claves, consulta valores, filtra datos y gestiona tu clúster de etcd directamente desde tu terminal.
 - [etcdfinder](https://etcdfinder.github.io) - Una interfaz web moderna y ultrarrápida para etcd con búsqueda instantánea. Soporta tanto etcd v2 como v3.
+- [LibreDB Studio](https://github.com/libredb/libredb-studio) - Un IDE de base de datos web autoalojado con soporte para etcd v3. Explora claves por prefijo, ejecuta un subconjunto de comandos etcdctl y edita valores. Consciente de Kubernetes: se rechazan las escrituras bajo prefijos de claves de Kubernetes.
 - [lucas](https://github.com/ringtail/lucas) - Un visor web de clave-valor para clústeres etcd3.0+ de kubernetes.
 - [etcd-manager](https://etcdmanager.io) - Una herramienta GUI y cliente para etcd 3.x moderna, eficiente, multiplataforma y gratuita. Disponible para Windows, Linux y Mac.
 - [etcd-backup-restore](https://github.com/gardener/etcd-backup-restore) - Utilidad para hacer copias de seguridad y restaurar etcd de forma periódica e incremental.

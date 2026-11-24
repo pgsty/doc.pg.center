@@ -3,8 +3,8 @@ title: Exécuter des clusters etcd dans des conteneurs
 weight: 4200
 description: "Exécution d'etcd avec Docker en utilisant le bootstrap statique"
 categories: [Tâche]
-search_keywords: [v3.7.3]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/container.md"
+search_keywords: [v3.7.4]
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/container.md"
 ---
 
 Le guide suivant explique comment exécuter etcd avec Docker en utilisant le [processus de bootstrap statique](/fr/etcd/op-guide/clustering/#static).
@@ -28,10 +28,10 @@ docker volume create --name etcd-data
 export DATA_DIR="etcd-data"
 ```
 
-Exécutez la dernière version d’etcd (`v3.7.3` au moment de la rédaction) :
+Exécutez la dernière version d’etcd (`v3.7.4` au moment de la rédaction) :
 
 ```
-ETCD_VERSION=v3.7.3
+ETCD_VERSION=v3.7.4
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd
@@ -62,7 +62,7 @@ REGISTRY=quay.io/coreos/etcd
 REGISTRY=gcr.io/etcd-development/etcd
 
 # For each machine
-ETCD_VERSION=v3.7.3
+ETCD_VERSION=v3.7.4
 TOKEN=my-etcd-token
 CLUSTER_STATE=new
 NAME_1=etcd-node-0
@@ -155,7 +155,7 @@ rkt run \
 L’exemple Docker ci-dessous réutilise `NODE1` défini plus haut et utilise le bootstrap statique pour montrer le montage d’un volume de certificat.
 
 ```
-ETCD_VERSION=v3.7.3
+ETCD_VERSION=v3.7.4
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd

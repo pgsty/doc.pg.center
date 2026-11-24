@@ -3,7 +3,7 @@ title: Fichiers de stockage persistant d'etcd
 weight: 2650
 description: Référence du format de stockage persistant et des fichiers
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/persistent-storage-files.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/persistent-storage-files.md"
 ---
 
 Ce document explique le format de stockage persistant d’etcd : nomenclature, contenu et outils permettant aux développeurs d’en inspecter le contenu. À l’avenir, ce document devrait être mis à jour pour refléter les évolutions du modèle de stockage. Il s’adresse aux développeurs d’etcd afin de les aider dans leurs besoins de récupération de données.

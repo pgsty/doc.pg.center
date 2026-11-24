@@ -3,7 +3,7 @@ title: خفض إصدار etcd من 3.5 إلى 3.4
 weight: 6700
 description: العمليات وقوائم التحقق والملاحظات المتعلقة بخفض إصدار etcd من 3.5 إلى 3.4
 categories: [مهمة]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/downgrades/downgrade_3_5.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/downgrades/downgrade_3_5.md"
 ---
 
 في الحالة العامة، يمكن أن يتم خفض الإصدار من etcd 3.5 إلى 3.4 دون أي توقف عن الخدمة، وبأسلوب متدرج:

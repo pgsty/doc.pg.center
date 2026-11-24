@@ -3,7 +3,7 @@ title: "災害復旧"
 weight: 4275
 description: "etcd v3のスナップショットとリストア機能"
 categories: [タスク]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/recovery.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/recovery.md"
 ---
 
 etcdは、マシンの障害に耐えるよう設計されています。etcdクラスターは一時的な障害（マシンの再起動など）から自動的にリカバリーし、Nメンバーのクラスターでは最大*(N-1)/2*の恒久的な障害に耐えます。ハードウェアの故障やディスク破損などでメンバーが恒久的に停止すると、そのメンバーはクラスターにアクセスできなくなります。クラスターが*(N-1)/2*を超えるメンバーを恒久的に失うと、重大な障害となり、クォーラムを回復不能な形で失います。クォーラムを失うと、クラスターはコンセンサスに達することができず、更新を受け付け続けられません。

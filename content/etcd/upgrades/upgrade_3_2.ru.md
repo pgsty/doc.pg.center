@@ -3,7 +3,7 @@ title: Обновление etcd от 3.1 до 3.2
 weight: 6800
 description: "Процессы, списки действий и примечания по обновлению etcd с 3.1 до 3.2"
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_2.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/upgrades/upgrade_3_2.md"
 ---
 
 В общем случае переход с etcd 3.1 на 3.2 можно выполнить как поэтапное обновление без простоя:

@@ -3,7 +3,7 @@ title: Upgrade von etcd 3.4 auf 3.5
 weight: 6650
 description: Verfahren, Checklisten und Hinweise zum Upgrade von etcd 3.4 auf 3.5
 categories: [Aufgabe]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_5.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/upgrades/upgrade_3_5.md"
 ---
 
 Im Allgemeinen kann das Upgrade von etcd 3.4 auf 3.5 als Rolling Upgrade ohne Ausfallzeit erfolgen:

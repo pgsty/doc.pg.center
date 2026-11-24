@@ -4,7 +4,7 @@ weight: 1400
 description: Cómo presentar informes de problemas para el proyecto etcd
 icon: fa-solid fa-bug
 categories: [Tarea]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/reporting_bugs.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/reporting_bugs.md"
 ---
 
 Si cualquier parte del proyecto etcd tiene errores o erratas en la documentación, háznoslo saber [abriendo un issue][etcd-issue]. Tomamos los errores y las erratas muy en serio y creemos que ningún problema es demasiado pequeño. Antes de crear un informe de error, comprueba que no exista ya un issue que informe del mismo problema.

@@ -4,7 +4,7 @@ weight: 1400
 description: Как создавать отчёты о проблемах в проекте etcd
 icon: fa-solid fa-bug
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/reporting_bugs.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/reporting_bugs.md"
 ---
 
 Если в какой-либо части проекта etcd обнаружена ошибка или неточность в документации, сообщите нам, [создав issue][etcd-issue]. Мы очень серьёзно относимся к ошибкам и считаем, что незначительных проблем не бывает. Перед созданием отчёта убедитесь, что issue с описанием той же проблемы ещё не существует.

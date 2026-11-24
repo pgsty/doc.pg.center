@@ -3,7 +3,7 @@ title: أوضاع الأعطال
 weight: 4250
 description: "أنواع الأعطال ومدى تحمّل etcd لها"
 categories: [مفهوم]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/failures.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/failures.md"
 ---
 
 الأعطال شائعة في عمليات النشر الكبيرة للآلات. تتعطل الآلة عندما تختلّ أجهزتها أو برمجياتها. وتتعطل عدة آلات معًا عند حدوث انقطاعات في الطاقة أو مشكلات في الشبكة. كما يمكن أن تحدث أنواع متعددة من الأعطال في وقت واحد؛ ومن المستحيل تقريبًا تعداد جميع حالات الأعطال الممكنة.

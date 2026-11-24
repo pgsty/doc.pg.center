@@ -3,7 +3,7 @@ title: Понижение версии etcd от 3.5 до 3.4
 weight: 6700
 description: "Процессы, списки действий и примечания по понижению версии etcd от 3.5 до 3.4"
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/downgrades/downgrade_3_5.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/downgrades/downgrade_3_5.md"
 ---
 
 В общем случае переход с etcd 3.5 на 3.4 можно выполнить поэтапно без простоя:

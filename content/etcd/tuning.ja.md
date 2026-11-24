@@ -4,7 +4,7 @@ weight: 1450
 description: "ハートビート間隔と選出タイムアウトの設定を調整するタイミング"
 icon: fa-solid fa-sliders
 categories: [タスク]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tuning.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/tuning.md"
 ---
 
 etcdのデフォルト設定は、平均ネットワークレイテンシーが低いローカルネットワークであれば、通常は問題なく機能します。ただし、複数のデータセンターにまたがる環境やレイテンシーの高いネットワークでetcdを使用する場合は、ハートビート間隔と選出タイムアウトの調整が必要になることがあります。

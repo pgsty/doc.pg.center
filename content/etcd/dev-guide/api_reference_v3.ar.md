@@ -3,7 +3,7 @@ title: مرجع واجهة برمجة التطبيقات (API)
 weight: 3800
 description: "المرجع الكامل لواجهة برمجة تطبيقات etcd v3"
 categories: [مرجع]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/api_reference_v3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/api_reference_v3.md"
 ---
 
 هذا المرجع لواجهة برمجة التطبيقات مُولَّد تلقائيًا من ملفات `.proto` المذكورة.

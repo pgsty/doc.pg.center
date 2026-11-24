@@ -3,7 +3,7 @@ title: Interaction avec etcd
 weight: 3250
 description: "etcdctl : un outil en ligne de commande pour interagir avec le serveur etcd"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/interacting_v3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/interacting_v3.md"
 ---
 
 Les utilisateurs interagissent généralement avec etcd en définissant ou en récupérant la valeur d'une clé. Cette section décrit comment effectuer ces opérations à l'aide d'etcdctl, un outil en ligne de commande pour interagir avec le serveur etcd. Les concepts décrits ici s'appliquent également aux API gRPC ou aux API des bibliothèques clientes.

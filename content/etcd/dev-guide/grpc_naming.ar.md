@@ -3,7 +3,7 @@ title: تسمية gRPC واكتشافه
 weight: 3500
 description: "go-grpc: لتحليل نقاط نهاية gRPC بواجهة خلفية من etcd"
 categories: [مهمة]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/grpc_naming.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/grpc_naming.md"
 ---
 
 يوفر etcd محلل أسماء (resolver) لـgRPC يدعم نظام أسماء بديلًا يجلب نقاط النهاية من etcd لاكتشاف خدمات gRPC. تعتمد الآلية الكامنة على مراقبة التحديثات على المفاتيح التي تحمل اسم الخدمة كبادئة.

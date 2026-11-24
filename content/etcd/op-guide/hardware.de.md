@@ -3,7 +3,7 @@ title: "Hardwareempfehlungen"
 weight: 4400
 description: "Hardwarehinweise für die Verwaltung von etcd-Clustern"
 categories: [Referenz]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/hardware.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/hardware.md"
 ---
 
 etcd läuft für Entwicklung und Tests in der Regel auch mit begrenzten Ressourcen gut; die Entwicklung mit etcd auf einem Laptop oder einer günstigen Cloud-Instanz ist üblich. Für den produktiven Betrieb von etcd-Clustern helfen jedoch einige Hardwarehinweise bei der sachgerechten Verwaltung. Diese Empfehlungen sind keine starren Regeln, sondern ein guter Ausgangspunkt für eine robuste Produktivinstallation. Wie immer sollten Installationen vor dem produktiven Einsatz mit simulierten Arbeitslasten getestet werden.

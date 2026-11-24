@@ -3,7 +3,7 @@ title: "Benchmarks für etcd v2.2.0"
 weight: 5750
 description: "Leistungsmessungen für etcd v2.2.0"
 categories: [Referenz]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/benchmarks/etcd-2-2-0-benchmarks.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/benchmarks/etcd-2-2-0-benchmarks.md"
 ---
 
 ## Physische Rechner {#physical-machines}

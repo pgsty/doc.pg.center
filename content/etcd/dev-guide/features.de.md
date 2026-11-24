@@ -3,7 +3,7 @@ title: etcd-Funktionen
 weight: 3750
 description: etcd-Funktionen verwenden
 categories: [Referenz]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/features.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/features.md"
 ---
 
 Dieses Dokument gibt einen Überblick über die Funktionen von etcd und das Verfahren, nach dem sie als veraltet eingestuft werden. Wie Funktionen in etcd entwickelt werden, erläutern diese [Entwicklungsrichtlinien](https://github.com/etcd-io/etcd/blob/main/Documentation/contributor-guide/features.md).

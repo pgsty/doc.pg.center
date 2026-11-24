@@ -3,7 +3,7 @@ title: "Rétrogradation d'etcd de la version v3.7 à la v3.6"
 weight: 6600
 description: "Processus, listes de vérification et notes sur la rétrogradation d'etcd de la version 3.7 à la version 3.6"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/downgrades/downgrade_3_7.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/downgrades/downgrade_3_7.md"
 ---
 
 Dans le cas général, la rétrogradation d'etcd v3.7 vers v3.6 peut se faire sans interruption de service, par mise à jour progressive :

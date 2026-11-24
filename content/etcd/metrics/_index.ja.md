@@ -4,7 +4,7 @@ weight: 1350
 description: "リアルタイムの監視とデバッグに使用するメトリクス"
 icon: fa-solid fa-chart-line
 categories: [リファレンス]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/metrics/_index.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/metrics/_index.md"
 ---
 
 etcdはメトリクスの報告に[Prometheus][prometheus]を使用します。メトリクスはリアルタイムの監視やデバッグに利用できます。etcdはメトリクスを永続化しないため、メンバーを再起動するとメトリクスはリセットされます。

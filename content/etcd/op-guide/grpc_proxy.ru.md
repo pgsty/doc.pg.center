@@ -3,7 +3,7 @@ title: Прокси gRPC
 weight: 4350
 description: Не сохраняющий состояние обратный прокси etcd, работающий на уровне gRPC
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/grpc_proxy.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/grpc_proxy.md"
 ---
 
 Прокси gRPC — это не сохраняющий состояние обратный прокси etcd, работающий на уровне gRPC (L7). Он предназначен для снижения общей вычислительной нагрузки на основной кластер etcd. Для горизонтального масштабирования прокси объединяет запросы API наблюдения и аренды. Для защиты кластера от злоупотребляющих клиентов он кэширует запросы диапазонов ключей.

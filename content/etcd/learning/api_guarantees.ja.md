@@ -3,7 +3,7 @@ title: etcd APIの保証
 weight: 2750
 description: "etcd APIが提供する保証"
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/api_guarantees.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/api_guarantees.md"
 ---
 
 etcdは、一貫性と耐久性を備えたキー・バリューストアです。

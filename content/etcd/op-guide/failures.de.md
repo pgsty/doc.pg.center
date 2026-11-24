@@ -3,7 +3,7 @@ title: "Ausfallarten"
 weight: 4250
 description: "Arten von Ausfällen und ihre Tolerierung durch etcd"
 categories: [Konzept]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/failures.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/failures.md"
 ---
 
 In großen Rechnerinstallationen treten häufig Ausfälle auf. Ein Rechner fällt aus, wenn seine Hardware oder Software nicht ordnungsgemäß funktioniert. Bei Stromausfällen oder Netzwerkproblemen können mehrere Rechner gleichzeitig ausfallen. Auch mehrere Ausfallarten können zugleich auftreten; es ist nahezu unmöglich, alle denkbaren Ausfallszenarien aufzuzählen.

@@ -3,7 +3,7 @@ title: Protocolo del servicio de descubrimiento
 weight: 1500
 description: Descubrir a los demás miembros de etcd durante la fase de arranque de un clúster
 categories: [Referencia]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-internal/discovery_protocol.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-internal/discovery_protocol.md"
 ---
 
 El protocolo del servicio de descubrimiento ayuda a un nuevo miembro de etcd a descubrir a todos los demás miembros durante la fase de arranque del clúster, usando un token de descubrimiento compartido y una lista de endpoints.

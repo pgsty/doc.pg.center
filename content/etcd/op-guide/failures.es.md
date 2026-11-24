@@ -3,7 +3,7 @@ title: Modos de fallo
 weight: 4250
 description: Tipos de fallos y la tolerancia de etcd ante ellos
 categories: [Concepto]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/failures.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/failures.md"
 ---
 
 Los fallos son habituales en un despliegue de máquinas a gran escala. Una máquina falla cuando su hardware o su software funcionan de manera incorrecta. Varias máquinas fallan a la vez cuando se producen cortes de energía o problemas de red. También pueden ocurrir varios tipos de fallos simultáneamente; es casi imposible enumerar todos los casos de fallo posibles.

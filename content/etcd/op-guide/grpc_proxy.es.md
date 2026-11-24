@@ -3,7 +3,7 @@ title: Proxy gRPC
 weight: 4350
 description: Un proxy inverso de etcd sin estado que opera en la capa gRPC
 categories: [Tarea]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/grpc_proxy.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/grpc_proxy.md"
 ---
 
 El proxy gRPC es un proxy inverso de etcd sin estado que opera en la capa gRPC (L7). El proxy está diseñado para reducir la carga total de procesamiento sobre el clúster de etcd principal. Para conseguir escalabilidad horizontal, agrupa las solicitudes de watch y de concesiones de la API. Para proteger al clúster contra clientes abusivos, almacena en caché las solicitudes de rangos de claves.

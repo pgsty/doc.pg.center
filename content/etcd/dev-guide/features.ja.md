@@ -3,7 +3,7 @@ title: etcdの機能
 weight: 3750
 description: "etcdの機能の使用"
 categories: [リファレンス]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/features.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/features.md"
 ---
 
 このドキュメントでは、etcdの機能と、それに関連する非推奨化の手続きを理解できるよう、機能の概要を説明します。etcdで機能を開発する方法については、[開発ガイドライン](https://github.com/etcd-io/etcd/blob/main/Documentation/contributor-guide/features.md)を参照してください。

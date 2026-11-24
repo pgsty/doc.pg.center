@@ -4,7 +4,7 @@ weight: 1100
 description: etcdクラスターの操作手順
 icon: fa-solid fa-play
 categories: [チュートリアル]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/demo.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/demo.md"
 ---
 
 この一連の例では、etcdクラスターを操作するための基本的な手順を示します。

@@ -4,7 +4,7 @@ weight: 1300
 description: "etcdのツールとクライアントライブラリーの一覧"
 icon: fa-solid fa-puzzle-piece
 categories: [リファレンス]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/integrations.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/integrations.md"
 ---
 
 以下に挙げるサードパーティーのライブラリーやツール（https://github.com/etcd-io 以外で公開されているもの）は、etcdチームによるテストや保守の対象外です。利用する前に、それぞれのドキュメントを読み、調査することを推奨します。
@@ -23,6 +23,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 - [etcdloadtest](https://github.com/sinsharat/etcdloadtest) - etcdバージョン3.0以降向けのコマンドライン負荷テストクライアント。
 - [etcd-tui](https://github.com/olamilekan000/etcd-tui) - etcdデータベースを操作するためのモダンなターミナルユーザーインターフェース（TUI）。キーの参照、値の表示、データの絞り込み、etcdクラスターの管理をターミナルから直接行えます。
 - [etcdfinder](https://etcdfinder.github.io) - 即時検索を備えた、etcd用の高速でモダンなWeb UI。etcd v2とv3の両方に対応します。
+- [LibreDB Studio](https://github.com/libredb/libredb-studio) - etcd v3に対応した、セルフホストのWebベースのデータベースIDE。プレフィックスでキーを閲覧し、一部のetcdctlコマンドを実行し、値を編集できます。Kubernetesに対応しており、Kubernetesのキープレフィックス配下への書き込みは拒否されます。
 - [lucas](https://github.com/ringtail/lucas) - Kubernetesのetcd3.0以降のクラスター向けの、Webベースのキー・バリュービューアー。
 - [etcd-manager](https://etcdmanager.io) - モダンで効率的な、複数のプラットフォームに対応する無料のetcd 3.x GUI兼クライアントツール。Windows、Linux、Macで利用できます。
 - [etcd-backup-restore](https://github.com/gardener/etcd-backup-restore) - etcdの定期的な増分バックアップとリストアを行うユーティリティー。

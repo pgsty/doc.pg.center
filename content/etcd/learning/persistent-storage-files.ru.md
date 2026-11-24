@@ -3,7 +3,7 @@ title: Файлы постоянного хранилища etcd
 weight: 2650
 description: Справочник по формату и файлам постоянного хранилища
 categories: [Концепция]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/persistent-storage-files.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/persistent-storage-files.md"
 ---
 
 В этом документе описан формат постоянного хранилища etcd: именование, содержимое и инструменты, позволяющие разработчикам исследовать файлы. В дальнейшем документ следует дополнять по мере изменений модели хранения. Он предназначен для разработчиков etcd и помогает при восстановлении данных.

@@ -3,7 +3,7 @@ title: Degradación de etcd de 3.5 a 3.4
 weight: 6700
 description: Procesos, listas de verificación y notas sobre la degradación de etcd de 3.5 a 3.4
 categories: [Tarea]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/downgrades/downgrade_3_5.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/downgrades/downgrade_3_5.md"
 ---
 
 En el caso general, la degradación de etcd 3.5 a 3.4 puede ser una degradación gradual sin tiempo de inactividad:

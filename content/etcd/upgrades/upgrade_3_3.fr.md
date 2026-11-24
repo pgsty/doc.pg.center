@@ -3,7 +3,7 @@ title: Mettre à jour etcd de 3.2 vers 3.3
 weight: 6750
 description: "Processus, listes de vérification et notes sur la mise à jour d’etcd de la version 3.2 à la 3.3"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/upgrades/upgrade_3_3.md"
 ---
 
 Dans le cas général, la mise à niveau d’etcd 3.2 vers 3.3 peut être effectuée sans interruption de service, par mise à niveau progressive :

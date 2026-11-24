@@ -3,7 +3,7 @@ title: "ハードウェアの推奨事項"
 weight: 4400
 description: "etcdクラスターを管理するためのハードウェアの指針"
 categories: [リファレンス]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/hardware.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/hardware.md"
 ---
 
 開発やテストでは、etcdは通常、限られたリソースでも問題なく動作します。ノートPCや安価なクラウドマシンでetcdを使って開発することも一般的です。ただし、etcdクラスターを本番運用する場合は、適切に管理するうえでハードウェアの指針が役立ちます。ここでの提案は厳格な規則ではなく、堅牢な本番環境を構築する出発点です。どの環境でも、本番運用前に想定ワークロードを再現してテストすることを推奨します。

@@ -3,7 +3,7 @@ title: Módulos de Golang
 weight: 1650
 description: Organización de los módulos de Golang del proyecto etcd
 categories: [Referencia]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-internal/modules.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-internal/modules.md"
 ---
 
 El proyecto etcd (desde la versión 3.5) está organizado en varios

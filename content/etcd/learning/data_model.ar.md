@@ -3,7 +3,7 @@ title: نموذج البيانات
 weight: 2125
 description: منهجيات تخزين البيانات في etcd
 categories: [مفهوم]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/data_model.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/data_model.md"
 ---
 
 صُمِّم etcd لتخزين البيانات التي لا تُحدَّث بشكل متكرر بطريقة موثوقة، ولتوفير استعلامات مراقبة (watch) موثوقة. يكشف etcd عن الإصدارات السابقة من أزواج المفتاح والقيمة لدعم اللقطات منخفضة التكلفة وأحداث سجل تاريخ المراقبة («استعلامات السفر عبر الزمن»). يُعدّ نموذج البيانات الدائم متعدد الإصدارات مع التحكم في التزامن خيارًا مناسبًا لهذه الاستخدامات.

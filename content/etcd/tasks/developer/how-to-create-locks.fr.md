@@ -3,7 +3,7 @@ title: Comment créer des verrous
 description: Guide de création de verrous distribués dans etcd
 weight: 800
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/developer/how-to-create-locks.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/tasks/developer/how-to-create-locks.md"
 ---
 
 LOCK acquiert un verrou distribué portant un nom donné. Une fois le verrou acquis, il reste détenu jusqu'à la terminaison d'etcdctl.

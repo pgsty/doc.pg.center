@@ -3,7 +3,7 @@ title: Modes de défaillance
 weight: 4250
 description: "Types d'échecs et la tolérance d'etcd à leur égard"
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/failures.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/failures.md"
 ---
 
 Les défaillances sont fréquentes dans un déploiement à grande échelle de machines. Une machine défaillante est une machine dont le matériel ou le logiciel présente une anomalie. Plusieurs machines peuvent défaillir simultanément en cas de panne de courant ou de problèmes réseau. Plusieurs types de défaillances peuvent également survenir en même temps ; il est presque impossible d’énumérer toutes les situations de défaillance possibles.

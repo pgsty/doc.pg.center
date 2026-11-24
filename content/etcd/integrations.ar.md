@@ -4,7 +4,7 @@ weight: 1300
 description: قائمة بأدوات etcd ومكتبات العملاء
 icon: fa-solid fa-puzzle-piece
 categories: [مرجع]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/integrations.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/integrations.md"
 ---
 
 لاحظ أن مكتبات وأدوات الأطراف الخارجية (غير المستضافة على https://github.com/etcd-io) المذكورة أدناه لا يختبرها فريق etcd ولا يصونها. قبل استخدامها، يوصى المستخدمون بقراءتها وفحصها.
@@ -23,6 +23,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 - [etcdloadtest](https://github.com/sinsharat/etcdloadtest) - عميل اختبار تحميل يعمل من سطر الأوامر لإصدار etcd 3.0 وما بعده.
 - [etcd-tui](https://github.com/olamilekan000/etcd-tui) - واجهة مستخدم حديثة تعمل في الطرفية (TUI) للتفاعل مع قاعدة بيانات etcd الخاصة بك. تنقّل بين المفاتيح، واعرض القيم، ورشّح البيانات، وأدر عنقود etcd مباشرة من الطرفية.
 - [etcdfinder](https://etcdfinder.github.io) - واجهة ويب حديثة وفائقة السرعة لـ etcd مع بحث فوري. تدعم كلًا من etcd v2 و v3.
+- [LibreDB Studio](https://github.com/libredb/libredb-studio) - بيئة تطوير قواعد بيانات ويب ذاتية الاستضافة تدعم etcd v3. استعرض المفاتيح حسب البادئة، ونفّذ مجموعة جزئية من أوامر etcdctl، وحرّر القيم. تراعي Kubernetes: تُرفض عمليات الكتابة تحت بادئات مفاتيح Kubernetes.
 - [lucas](https://github.com/ringtail/lucas) - عارض مفتاح-قيمة يعمل عبر الويب لعناقيد kubernetes etcd3.0+.
 - [etcd-manager](https://etcdmanager.io) - أداة واجهة رسومية وعميل حديثة وفعالة ومتعددة المنصات ومجانية لـ etcd 3.x. متاحة لأنظمة Windows و Linux و Mac.
 - [etcd-backup-restore](https://github.com/gardener/etcd-backup-restore) - أداة للنسخ الاحتياطي والاستعادة الدوريين والتزايديين لـ etcd.

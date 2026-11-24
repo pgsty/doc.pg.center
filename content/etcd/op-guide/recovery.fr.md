@@ -3,7 +3,7 @@ title: Récupération après sinistre
 weight: 4275
 description: "Fonctionnalités d'instantané et de restauration d'etcd v3"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/recovery.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/recovery.md"
 ---
 
 etcd est conçu pour résister aux pannes de machines. Un cluster etcd se rétablit automatiquement après des pannes temporaires (par exemple, redémarrages de machine) et tolère jusqu'à *(N-1)/2* pannes permanentes pour un cluster composé de N membres. Lorsqu'un membre subit une panne permanente, qu'elle soit due à une défaillance matérielle ou à une corruption du disque, il perd accès au cluster. Si le cluster perd définitivement plus de *(N-1)/2* membres, il subit une panne catastrophique, perdant irrévocablement son quorum. Une fois le quorum perdu, le cluster ne peut plus atteindre de consensus et ne peut donc plus accepter de mises à jour.

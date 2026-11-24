@@ -4,7 +4,7 @@ weight: 1300
 description: Liste des outils et bibliothèques clientes etcd
 icon: fa-solid fa-puzzle-piece
 categories: [Référence]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/integrations.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/integrations.md"
 ---
 
 Notez que les bibliothèques et outils tiers (non hébergés sur https://github.com/etcd-io) mentionnés ci-dessous ne sont pas testés ni entretenus par l'équipe etcd. Avant de les utiliser, il est recommandé de consulter leur documentation et de les évaluer.
@@ -23,6 +23,7 @@ Notez que les bibliothèques et outils tiers (non hébergés sur https://github.
 - [etcdloadtest](https://github.com/sinsharat/etcdloadtest) - Client de test de charge en ligne de commande pour etcd 3.0 et versions ultérieures
 - [etcd-tui](https://github.com/olamilekan000/etcd-tui) - Une interface utilisateur moderne en mode terminal (TUI) pour interagir avec votre base de données etcd. Parcourez les clés, affichez les valeurs, filtrez les données et gérez votre cluster etcd directement depuis votre terminal.
 - [etcdfinder](https://etcdfinder.github.io) - Une interface web moderne et ultra-rapide pour etcd, avec recherche instantanée. Prend en charge à la fois etcd v2 et v3.
+- [LibreDB Studio](https://github.com/libredb/libredb-studio) - Un IDE de base de données web auto-hébergé avec prise en charge d'etcd v3. Parcourez les clés par préfixe, exécutez un sous-ensemble de commandes etcdctl et modifiez les valeurs. Connaît Kubernetes : les écritures sous les préfixes de clés Kubernetes sont refusées.
 - [lucas](https://github.com/ringtail/lucas) - Un visualiseur de paires clé-valeur basé sur le web pour les clusters etcd3.0+ de Kubernetes.
 - [etcd-manager](https://etcdmanager.io) - Outil graphique et client moderne, efficace, multiplateforme et gratuit pour etcd 3.x. Disponible pour Windows, Linux et Mac.
 - [etcd-backup-restore](https://github.com/gardener/etcd-backup-restore) - Utilitaire permettant de sauvegarder et de restaurer de manière périodique et incrémentielle etcd.

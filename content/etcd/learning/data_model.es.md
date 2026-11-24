@@ -3,7 +3,7 @@ title: Modelo de datos
 weight: 2125
 description: Metodologías de almacenamiento de datos de etcd
 categories: [Concepto]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/data_model.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/data_model.md"
 ---
 
 etcd está diseñado para almacenar de forma fiable datos que se actualizan con poca frecuencia y para proporcionar consultas de observación fiables. etcd expone las versiones anteriores de los pares clave-valor para admitir instantáneas poco costosas y eventos del historial de observación («consultas de viaje en el tiempo»). Un modelo de datos persistente, multiversión y con control de concurrencia se adapta bien a estos casos de uso.

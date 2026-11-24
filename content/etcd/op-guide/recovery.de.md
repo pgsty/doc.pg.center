@@ -3,7 +3,7 @@ title: "Recovery nach einem Totalausfall"
 weight: 4275
 description: "Snapshot- und Wiederherstellungsfunktionen von etcd v3"
 categories: [Aufgabe]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/recovery.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/recovery.md"
 ---
 
 etcd ist dafür ausgelegt, Rechnerausfälle zu verkraften. Ein etcd-Cluster erholt sich automatisch von vorübergehenden Ausfällen (z. B. Neustarts von Rechnern) und toleriert bei N Mitgliedern bis zu *(N-1)/2* dauerhafte Ausfälle. Fällt ein Mitglied dauerhaft aus, etwa durch einen Hardwaredefekt oder eine Datenbeschädigung auf dem Datenträger, verliert es den Zugriff auf den Cluster. Verliert der Cluster dauerhaft mehr als *(N-1)/2* Mitglieder, kommt es zum Totalausfall: Das Quorum geht unwiederbringlich verloren. Ohne Quorum kann der Cluster keinen Konsens mehr erreichen und daher keine weiteren Aktualisierungen annehmen.

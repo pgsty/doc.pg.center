@@ -3,7 +3,7 @@ title: توصيات الأجهزة
 weight: 4400
 description: "إرشادات الأجهزة لإدارة عناقيد etcd"
 categories: [مرجع]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/hardware.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/hardware.md"
 ---
 
 يعمل etcd عادةً بشكل جيد بموارد محدودة لأغراض التطوير أو الاختبار؛ ومن الشائع التطوير باستخدام etcd على حاسوب محمول أو آلة سحابية رخيصة. ومع ذلك، عند تشغيل عناقيد etcd في الإنتاج، تكون بعض الإرشادات المتعلقة بالأجهزة مفيدة للإدارة السليمة. وهذه الاقتراحات ليست قواعد صارمة؛ بل تشكل نقطة انطلاق جيدة لنشر إنتاجي متين. وكالعادة، يجب اختبار عمليات النشر بأعباء عمل محاكاة قبل تشغيلها في الإنتاج.

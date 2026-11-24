@@ -3,7 +3,7 @@ title: "データ破損"
 weight: 5000
 description: "etcdのデータ破損とリカバリー"
 categories: [タスク]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/data_corruption.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/data_corruption.md"
 ---
 
 etcdには、メンバー間で状態が分岐することを防ぐため、データ破損の自動検出機能が組み込まれています。

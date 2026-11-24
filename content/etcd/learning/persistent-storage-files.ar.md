@@ -3,7 +3,7 @@ title: ملفات التخزين الدائم لـ etcd
 weight: 2650
 description: مرجع لصيغة التخزين الدائم والملفات
 categories: [مفهوم]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/persistent-storage-files.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/persistent-storage-files.md"
 ---
 
 يشرح هذا المستند صيغة التخزين الدائم لـ etcd: التسمية، والمحتوى، والأدوات التي تتيح للمطورين فحصها. ومستقبلًا، ينبغي توسيع هذا المستند ليعكس التغييرات على نموذج التخزين. هذا المستند موجه إلى مطوري etcd لمساعدتهم في احتياجاتهم من استعادة البيانات.

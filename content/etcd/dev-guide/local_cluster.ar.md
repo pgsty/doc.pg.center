@@ -3,7 +3,7 @@ title: إعداد عنقود محلي
 weight: 3125
 description: إعداد عناقيد محلية للاختبار والتطوير
 categories: [درس تعليمي]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/local_cluster.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/local_cluster.md"
 ---
 
 لعمليات النشر المخصصة للاختبار والتطوير، تكون الطريقة الأسرع والأسهل هي إعداد عنقود محلي. لنشر إنتاجي، راجع قسم [إعداد العناقيد (clustering)][clustering].

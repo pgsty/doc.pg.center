@@ -3,7 +3,7 @@ title: キーの削除方法
 description: etcdのキーを削除する方法を説明します
 weight: 400
 categories: [タスク]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tasks/developer/how-to-delete-keys.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/tasks/developer/how-to-delete-keys.md"
 ---
 
 ## 前提条件 {#prerequisites}

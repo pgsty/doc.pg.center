@@ -3,8 +3,8 @@ title: "etcd-Cluster in Containern ausführen"
 weight: 4200
 description: "etcd mit Docker durch statische Initialisierung ausführen"
 categories: [Aufgabe]
-search_keywords: [v3.7.3]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/container.md"
+search_keywords: [v3.7.4]
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/container.md"
 ---
 
 Die folgende Anleitung zeigt, wie etcd mit Docker über die [statische Initialisierung](/de/etcd/op-guide/clustering/#static) ausgeführt wird.
@@ -28,10 +28,10 @@ docker volume create --name etcd-data
 export DATA_DIR="etcd-data"
 ```
 
-Die neueste Version von etcd ausführen (zum Zeitpunkt der Erstellung dieses Dokuments `v3.7.3`):
+Die neueste Version von etcd ausführen (zum Zeitpunkt der Erstellung dieses Dokuments `v3.7.4`):
 
 ```
-ETCD_VERSION=v3.7.3
+ETCD_VERSION=v3.7.4
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd
@@ -62,7 +62,7 @@ REGISTRY=quay.io/coreos/etcd
 REGISTRY=gcr.io/etcd-development/etcd
 
 # For each machine
-ETCD_VERSION=v3.7.3
+ETCD_VERSION=v3.7.4
 TOKEN=my-etcd-token
 CLUSTER_STATE=new
 NAME_1=etcd-node-0
@@ -155,7 +155,7 @@ rkt run \
 Das folgende Docker-Beispiel verwendet das oben gesetzte `NODE1` und zeigt das Einhängen eines Zertifikatsvolumes mit statischer Initialisierung.
 
 ```
-ETCD_VERSION=v3.7.3
+ETCD_VERSION=v3.7.4
 REGISTRY=quay.io/coreos/etcd
 # available from v3.2.5
 REGISTRY=gcr.io/etcd-development/etcd

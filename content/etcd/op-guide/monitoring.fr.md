@@ -3,7 +3,7 @@ title: Surveillance d’etcd
 weight: 4500
 description: "Surveillance d'etcd pour l'intégrité du système et le débogage du cluster"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/monitoring.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/monitoring.md"
 ---
 
 Chaque serveur etcd fournit des informations de surveillance locales sur son port client via des points de terminaison HTTP. Les données de surveillance sont utiles à la fois pour le contrôle de santé du système et le débogage du cluster.

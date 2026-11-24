@@ -3,7 +3,7 @@ title: Benchmarking de etcd v3
 weight: 5375
 description: Mediciones de rendimiento para etcd v3
 categories: [Referencia]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/benchmarks/etcd-3-demo-benchmarks.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/benchmarks/etcd-3-demo-benchmarks.md"
 ---
 
 ## Máquinas físicas {#physical-machines}

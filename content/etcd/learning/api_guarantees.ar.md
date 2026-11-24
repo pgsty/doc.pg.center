@@ -3,7 +3,7 @@ title: ضمانات واجهة etcd API
 weight: 2750
 description: ضمانات API التي يقدمها etcd
 categories: [مفهوم]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/api_guarantees.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/api_guarantees.md"
 ---
 
 etcd هو مخزن مفتاح-قيمة متسق ودائم.

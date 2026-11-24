@@ -3,7 +3,7 @@ title: Mettre à jour etcd de la version v3.6 à la version v3.7
 weight: 6550
 description: "Processus, listes de vérification et notes sur la mise à niveau d'etcd de v3.6 à v3.7"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_7.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/upgrades/upgrade_3_7.md"
 ---
 
 Dans le cas général, la mise à niveau d’etcd v3.6 vers v3.7 peut être une mise à niveau progressive sans interruption de service :

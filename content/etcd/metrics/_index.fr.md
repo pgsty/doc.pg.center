@@ -4,7 +4,7 @@ weight: 1350
 description: Métriques pour la surveillance en temps réel et le débogage
 icon: fa-solid fa-chart-line
 categories: [Référence]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/metrics/_index.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/metrics/_index.md"
 ---
 
 etcd utilise [Prometheus][prometheus] pour le reporting des métriques. Ces métriques peuvent être utilisées pour la surveillance en temps réel et le débogage. etcd ne rend pas ses métriques persistantes ; si un membre est redémarré, les métriques seront réinitialisées.

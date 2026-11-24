@@ -3,7 +3,7 @@ title: Протокол службы обнаружения
 weight: 1500
 description: Обнаружение других участников etcd на этапе начальной инициализации кластера
 categories: [Справочник]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-internal/discovery_protocol.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-internal/discovery_protocol.md"
 ---
 
 Протокол службы обнаружения помогает новому участнику etcd найти остальных участников на этапе начальной инициализации кластера с помощью общего токена обнаружения и списка конечных точек.

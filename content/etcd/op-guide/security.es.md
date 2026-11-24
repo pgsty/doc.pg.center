@@ -3,7 +3,7 @@ title: Modelo de seguridad del transporte
 weight: 4125
 description: Protección de los datos en tránsito
 categories: [Tarea]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/security.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/security.md"
 ---
 
 etcd admite TLS automático, así como autenticación mediante certificados de cliente, tanto para la comunicación de clientes con el servidor como para la comunicación entre pares (servidor a servidor / clúster). **Ten en cuenta que etcd no activa por defecto la [autenticación basada en RBAC][auth] ni la funcionalidad de autenticación en la capa de transporte, para reducir la fricción de los usuarios que empiezan con la base de datos. Además, cambiar este valor por defecto sería un cambio incompatible para el proyecto, establecido desde 2013. Un clúster de etcd que no active las funcionalidades de seguridad puede exponer sus datos a cualquier cliente.**

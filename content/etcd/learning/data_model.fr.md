@@ -3,7 +3,7 @@ title: Modèle de données
 weight: 2125
 description: Méthodes de stockage des données d'etcd
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/data_model.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/data_model.md"
 ---
 
 etcd est conçu pour stocker de manière fiable des données peu fréquemment mises à jour et fournir des requêtes de surveillance fiables. etcd expose les versions antérieures des paires clé-valeur afin de prendre en charge des instantanés à faible coût et les événements d'historique de surveillance (« requêtes de voyage dans le temps »). Un modèle de données persistant, à plusieurs versions et contrôlant la concurrence s’adapte parfaitement à ces cas d’utilisation.

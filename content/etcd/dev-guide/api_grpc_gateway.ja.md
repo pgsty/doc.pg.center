@@ -3,7 +3,7 @@ title: gRPCゲートウェイを使う理由
 weight: 3375
 description: "gRPCゲートウェイの使用を検討する理由"
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/api_grpc_gateway.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/api_grpc_gateway.md"
 ---
 
 etcd v3は、メッセージングプロトコルに[gRPC][grpc]を使用します。etcdプロジェクトは、gRPCでetcdクラスターと通信するための、gRPCベースの[Goクライアント][go-client]とコマンドラインユーティリティー[etcdctl][etcdctl]を提供しています。gRPCをサポートしない言語向けには、JSONの[gRPCゲートウェイ][grpc-gateway]を提供しています。このゲートウェイはRESTfulなプロキシとして動作し、HTTP/JSONリクエストをgRPCメッセージに変換します。

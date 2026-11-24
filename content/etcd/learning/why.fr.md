@@ -3,7 +3,7 @@ title: etcd par rapport aux autres magasins clé-valeur
 weight: 2875
 description: "Historique et usage d’etcd ainsi que comparaison avec d'autres outils"
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/why.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/why.md"
 ---
 
 Le nom « etcd » provient de deux idées : le dossier unix « /etc » et les systèmes « d »istribués. Le dossier « /etc » est un emplacement destiné au stockage des données de configuration d’un système unique, tandis qu’etcd stocke les informations de configuration pour des systèmes distribués à grande échelle. Ainsi, un « d »istribué « /etc » devient « etcd ».

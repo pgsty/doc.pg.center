@@ -3,7 +3,7 @@ title: Passerelle etcd
 weight: 4300
 description: "Quand utiliser la passerelle etcd et comment la configurer"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/gateway.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/gateway.md"
 ---
 
 ## Qu'est-ce que la passerelle etcd {#what-is-etcd-gateway}

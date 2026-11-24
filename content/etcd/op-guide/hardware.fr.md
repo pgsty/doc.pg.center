@@ -3,7 +3,7 @@ title: Recommandations matérielles
 weight: 4400
 description: "Recommandations matérielles pour l'administration des clusters etcd"
 categories: [Référence]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/hardware.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/hardware.md"
 ---
 
 etcd fonctionne généralement correctement avec des ressources limitées à des fins de développement ou de test ; il est courant de développer avec etcd sur un ordinateur portable ou une machine cloud peu coûteuse. Toutefois, lors de l'exécution de clusters etcd en production, certaines recommandations matérielles sont utiles pour une administration appropriée. Ces suggestions ne sont pas des règles strictes ; elles constituent un bon point de départ pour un déploiement robuste en production. Comme toujours, les déploiements doivent être testés avec des charges simulées avant d’être mis en production.

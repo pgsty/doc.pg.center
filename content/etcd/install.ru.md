@@ -4,8 +4,8 @@ weight: 1150
 description: Инструкции по установке etcd из готовых бинарных файлов или исходного кода.
 icon: fa-solid fa-download
 categories: [Задача]
-search_keywords: [v3.7.3, "Go 1.26.10"]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/install.md"
+search_keywords: [v3.7.4, "Go 1.26.11"]
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/install.md"
 ---
 
 ## Требования {#requirements}
@@ -20,7 +20,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 Проще всего установить etcd из готовых бинарных файлов:
 
  1. Загрузите с [Releases][releases] сжатый архив для своей платформы,
-    выбрав выпуск [v3.7.3][tagged-release] или новее.
+    выбрав выпуск [v3.7.4][tagged-release] или новее.
  2. Распакуйте архив. В результате появится каталог с бинарными файлами.
  3. Добавьте исполняемые файлы в путь поиска. Например, переименуйте и/или переместите
     их в каталог из пути поиска, такой как `/usr/local/bin`, либо добавьте в путь
@@ -29,22 +29,22 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 
     ```sh
     $ etcd --version
-    etcd Version: 3.7.3
+    etcd Version: 3.7.4
     ...
     ```
 
 ## Сборка из исходного кода {#build-from-source}
 
-Для etcd v3.7.3 используйте [Go версии 1.26+][go]; в выпуске закреплена [версия инструментария Go 1.26.10][go-toolchain].
+Для etcd v3.7.4 используйте [Go версии 1.26+][go]; в выпуске закреплена [версия инструментария Go 1.26.11][go-toolchain].
 Соберите etcd из исходного кода следующим образом:
 
  1. [Загрузите репозиторий etcd в виде zip-файла][download] и распакуйте его либо
     клонируйте репозиторий следующей командой.
 
     ```sh
-    $ git clone -b v3.7.3 https://github.com/etcd-io/etcd.git
+    $ git clone -b v3.7.4 https://github.com/etcd-io/etcd.git
     ```
-    Чтобы собрать `main@HEAD`, не указывайте флаг `-b v3.7.3`.
+    Чтобы собрать `main@HEAD`, не указывайте флаг `-b v3.7.4`.
 
  2. Перейдите в каталог:
 
@@ -123,7 +123,7 @@ etcd можно установить из официальных репозит�
 
     ```sh
     $ etcd --version
-    etcd Version: 3.7.3
+    etcd Version: 3.7.4
     ...
     ```
 
@@ -137,7 +137,7 @@ etcd можно установить из официальных репозит�
 Чтобы запустить etcd в Docker:
 
 ```sh
-ETCD_VER=v3.7.3
+ETCD_VER=v3.7.4
 
 rm -rf /tmp/etcd-data.tmp && mkdir -p /tmp/etcd-data.tmp && \
   docker rmi gcr.io/etcd-development/etcd:${ETCD_VER} || true && \
@@ -178,13 +178,13 @@ docker exec etcd-gcr-${ETCD_VER} /usr/local/bin/etcdctl get foo
 Более полная базовая проверка установки приведена в разделе
 [Быстрый старт][Quickstart].
 
-[download]: https://github.com/etcd-io/etcd/archive/v3.7.3.zip
+[download]: https://github.com/etcd-io/etcd/archive/v3.7.4.zip
 [go]: https://golang.org/doc/install
-[go-toolchain]: https://github.com/etcd-io/etcd/blob/0a173d0410a96d01091b484daae81365bbcde57e/go.mod
+[go-toolchain]: https://github.com/etcd-io/etcd/blob/2e8a5c99e4982c8d4c521be15364ea4c5c68a489/go.mod
 [Hardware recommendations]: /ru/etcd/op-guide/hardware/
 [Quickstart]: /ru/etcd/quickstart/
 [Running etcd as a Kubernetes StatefulSet]: /ru/etcd/op-guide/kubernetes/
 [releases]: https://github.com/etcd-io/etcd/releases/
-[tagged-release]: https://github.com/etcd-io/etcd/releases/tag/v3.7.3
+[tagged-release]: https://github.com/etcd-io/etcd/releases/tag/v3.7.4
 [Supported platforms]: /ru/etcd/op-guide/supported-platform/
 [Homebrew can run on Linux]: <https://docs.brew.sh/Homebrew-on-Linux>

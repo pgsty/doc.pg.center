@@ -3,7 +3,7 @@ title: ローカルクラスターの構築
 weight: 3125
 description: "テストと開発用のローカルクラスターを構成する"
 categories: [チュートリアル]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/local_cluster.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/local_cluster.md"
 ---
 
 テストや開発用にデプロイする場合、最も手早く簡単なのはローカルクラスターの構成です。本番環境へのデプロイについては、[クラスター構成][clustering]のセクションを参照してください。

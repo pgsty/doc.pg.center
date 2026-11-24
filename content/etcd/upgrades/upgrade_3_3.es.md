@@ -3,7 +3,7 @@ title: Actualizar etcd de 3.2 a 3.3
 weight: 6750
 description: Procesos, listas de verificación y notas sobre la actualización de etcd de 3.2 a 3.3
 categories: [Tarea]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/upgrades/upgrade_3_3.md"
 ---
 
 En el caso general, la actualización de etcd 3.2 a 3.3 puede realizarse sin tiempo de inactividad, mediante una actualización progresiva:

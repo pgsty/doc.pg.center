@@ -3,7 +3,7 @@ title: gRPCの名前解決と検出
 weight: 3500
 description: "go-grpc：etcdをバックエンドとしてgRPCエンドポイントを解決する"
 categories: [タスク]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/grpc_naming.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/grpc_naming.md"
 ---
 
 etcdは、etcdからエンドポイントを取得してgRPCサービスを検出する代替の名前システムを、gRPCリゾルバーで提供します。その仕組みは、サービス名を接頭辞に持つキーの更新の監視に基づいています。

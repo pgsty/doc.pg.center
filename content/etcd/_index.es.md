@@ -10,12 +10,12 @@ sidebar_root_for: self
 sidebar_root_link_self: true
 section_index: cards
 section_index_columns: 3
-upstream_source: etcd
+upstream_source: etcd-20261121
 categories: [Concepto]
-search_keywords: [v3.7.3, "Go 1.26.10", NewJournalWriter]
-upstream_link: "https://github.com/etcd-io/website/tree/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7"
+search_keywords: [v3.7.4, "Go 1.26.11", force-new-cluster, NewJournalWriter]
+upstream_link: "https://github.com/etcd-io/website/tree/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7"
 cascade:
-  upstream_source: etcd
+  upstream_source: etcd-20261121
   type: docs
   module: [ETCD]
 ---
@@ -29,9 +29,20 @@ Comienza con la [Guía de inicio rápido](/es/etcd/quickstart/) para un clúster
 miembro, [Instalación](/es/etcd/install/) para las rutas de instalación soportadas, o la [Guía de
 operaciones](/es/etcd/op-guide/) para despliegues en producción.
 
+## etcd v3.7.4 {#etcd-v3-7-4}
+
+La versión de mantenimiento actual es [v3.7.4](https://github.com/etcd-io/etcd/releases/tag/v3.7.4), publicada el 19 de noviembre de 2026. Los ejemplos de instalación, Docker y Kubernetes de esta edición usan esta versión.
+
+- Corrige la restauración con `--force-new-cluster` cuando el índice consistente del backend está por delante del WAL.
+- Usa un puntero atómico para el almacén de alarmas para evitar una condición de carrera.
+- Corrige un pánico durante el arranque al reproducir entradas WAL heredadas de atributos de miembro v2.
+- Se compila con Go 1.26.11.
+
+Consulta el [registro de cambios upstream fijado](https://github.com/etcd-io/etcd/blob/1ce5a2b779143279c89ed8c7e33a42e51fb697fa/CHANGELOG/CHANGELOG-3.7.md#v374-tbc). Su encabezado todavía dice «TBC»; la etiqueta de versión publicada confirma la disponibilidad.
+
 ## etcd v3.7.3 {#etcd-v3-7-3}
 
-La versión de mantenimiento actual es [v3.7.3](https://github.com/etcd-io/etcd/releases/tag/v3.7.3). Los ejemplos de instalación, Docker y Kubernetes de esta edición usan esta versión.
+La versión de mantenimiento anterior era [v3.7.3](https://github.com/etcd-io/etcd/releases/tag/v3.7.3).
 
 - Corrige condiciones de carrera entre `Hash` y `Restore` en el almacén MVCC y en las operaciones `RangeStream` que devuelven solo claves, además de una regresión del rendimiento de replicación causada por el envío de mensajes `MsgApp` en orden inverso por parte del líder.
 - Se compila con Go 1.26.10 y actualiza las dependencias OpenTelemetry y `golang.org/x/net` para resolver los problemas de seguridad notificados.

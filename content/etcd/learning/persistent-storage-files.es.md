@@ -3,7 +3,7 @@ title: "Archivos de almacenamiento persistente de etcd"
 weight: 2650
 description: Referencia del formato y los archivos de almacenamiento persistente
 categories: [Concepto]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/persistent-storage-files.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/persistent-storage-files.md"
 ---
 
 Este documento explica el formato de almacenamiento persistente de etcd: nomenclatura, contenido y herramientas que permiten a los desarrolladores inspeccionarlo. En el futuro, este documento debería ampliarse con los cambios del modelo de almacenamiento. Este documento va dirigido a los desarrolladores de etcd para ayudarles con sus necesidades de recuperación de datos.

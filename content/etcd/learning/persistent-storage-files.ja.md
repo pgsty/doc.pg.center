@@ -3,7 +3,7 @@ title: etcdの永続ストレージファイル
 weight: 2650
 description: "永続ストレージの形式とファイルのリファレンス"
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/persistent-storage-files.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/persistent-storage-files.md"
 ---
 
 このドキュメントでは、etcdの永続ストレージの形式、つまり命名、内容、開発者が内容を調べるためのツールを説明します。今後、ストレージモデルの変更に合わせて内容を拡充することを想定しています。etcd開発者のデータリカバリーに役立つことを目的としています。

@@ -3,7 +3,7 @@ title: Características de etcd
 weight: 3750
 description: uso de las características de etcd
 categories: [Referencia]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/features.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/features.md"
 ---
 
 Este documento ofrece una visión general de las características de etcd para ayudar a los usuarios a comprender mejor las características y el proceso de deprecación asociado. Si te interesa saber cómo se desarrollan las características en etcd, consulta estas [guías de desarrollo](https://github.com/etcd-io/etcd/blob/main/Documentation/contributor-guide/features.md).

@@ -3,7 +3,7 @@ title: etcd-API
 weight: 2625
 description: Überblick über den grundlegenden Entwurf der etcd-API
 categories: [Konzept]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/api.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/api.md"
 ---
 
 Dieses Dokument gibt einen Überblick über den grundlegenden Entwurf der etcd-v3-APIs.
@@ -17,11 +17,13 @@ Eine vollständige Liste aller etcd-RPCs ist in Markdown in der [gRPC-API-Übers
 Jede API-Anfrage an einen etcd-Server ist ein gRPC-Remote-Procedure-Call. Die RPCs von etcd werden nach ihrer Funktion in Dienste eingeteilt.
 
 Für die Arbeit mit dem Schlüsselraum von etcd sind folgende Dienste wichtig:
+
 * KV - Erstellt, aktualisiert, liest und löscht Schlüssel-Wert-Paare.
 * Watch - Überwacht Änderungen an Schlüsseln.
 * Lease - Grundoperationen zum Verarbeiten von Keepalive-Nachrichten der Clients.
 
 Den Cluster selbst verwalten folgende Dienste:
+
 * Auth - Rollenbasierter Authentifizierungsmechanismus zur Authentifizierung von Benutzern.
 * Cluster - Liefert Mitgliedschaftsinformationen und Konfigurationsfunktionen.
 * Maintenance - Erstellt Snapshots für die Wiederherstellung, defragmentiert den Speicher und liefert Statusinformationen pro Mitglied.
@@ -50,16 +52,16 @@ message ResponseHeader {
 }
 ```
 
-* Cluster_ID - Die ID des Clusters, der die Antwort erzeugt.
-* Member_ID - Die ID des Mitglieds, das die Antwort erzeugt.
-* Revision - Die Revision des Schlüssel-Wert-Speichers beim Erzeugen der Antwort.
-* Raft_Term - Der Raft-Term des Mitglieds beim Erzeugen der Antwort.
+* `cluster_id` - Die ID des Clusters, der die Antwort erzeugt.
+* `member_id` - Die ID des Mitglieds, das die Antwort erzeugt.
+* `revision` - Die Revision des Schlüssel-Wert-Speichers beim Erzeugen der Antwort.
+* `raft_term` - Der Raft-Term des Mitglieds beim Erzeugen der Antwort.
 
-Eine Anwendung kann das Feld `Cluster_ID` oder `Member_ID` lesen, um sicherzustellen, dass sie mit dem beabsichtigten Cluster beziehungsweise Mitglied kommuniziert.
+Eine Anwendung kann das Feld `cluster_id` oder `member_id` lesen, um sicherzustellen, dass sie mit dem beabsichtigten Cluster beziehungsweise Mitglied kommuniziert.
 
-Anwendungen können über das Feld `Revision` die neueste Revision des Schlüssel-Wert-Speichers ermitteln. Das ist besonders nützlich, wenn sie eine historische Revision für eine `Zeitreiseabfrage` angeben und die zum Anfragezeitpunkt neueste Revision kennen möchten.
+Anwendungen können über das Feld `revision` die neueste Revision des Schlüssel-Wert-Speichers ermitteln. Das ist besonders nützlich, wenn sie eine historische Revision für eine `Zeitreiseabfrage` angeben und die zum Anfragezeitpunkt neueste Revision kennen möchten.
 
-Mit `Raft_Term` können Anwendungen erkennen, wann der Cluster eine neue Leader-Wahl abgeschlossen hat.
+Mit `raft_term` können Anwendungen erkennen, wann der Cluster eine neue Leader-Wahl abgeschlossen hat.
 
 ## Schlüssel-Wert-API {#key-value-api}
 
@@ -82,12 +84,12 @@ message KeyValue {
 }
 ```
 
-* Key - Schlüssel als Bytes. Ein leerer Schlüssel ist nicht zulässig.
-* Value - Wert als Bytes.
-* Version - Version ist die Version des Schlüssels. Eine Löschung setzt sie auf null zurück, und jede Änderung des Schlüssels erhöht sie.
-* Create_Revision - Revision der letzten Erstellung des Schlüssels.
-* Mod_Revision - Revision der letzten Änderung des Schlüssels.
-* Lease - Die ID der dem Schlüssel zugeordneten Lease. Ist lease 0, ist dem Schlüssel keine Lease zugeordnet.
+* `key` - Schlüssel als Bytes. Ein leerer Schlüssel ist nicht zulässig.
+* `value` - Wert als Bytes.
+* `version` - Version ist die Version des Schlüssels. Eine Löschung setzt sie auf null zurück, und jede Änderung des Schlüssels erhöht sie.
+* `create_revision` - Revision der letzten Erstellung des Schlüssels.
+* `mod_revision` - Revision der letzten Änderung des Schlüssels.
+* `lease` - Die ID der dem Schlüssel zugeordneten Lease. Ist lease 0, ist dem Schlüssel keine Lease zugeordnet.
 
 
 Zusätzlich zu Schlüssel und Wert fügt etcd der Schlüsselnachricht Revisionsmetadaten hinzu. Diese Informationen ordnen Schlüssel nach Erstellungs- und Änderungszeitpunkt, was für die Nebenläufigkeitskontrolle bei verteilter Synchronisierung nützlich ist. Die [verteilten gemeinsamen Sperren][locks] des etcd-Clients verwenden die Erstellungsrevision, um auf den Besitz einer Sperre zu warten. Entsprechend dient die Änderungsrevision dazu, Konflikte in der Lesemenge von [Software Transactional Memory][STM] zu erkennen und auf Aktualisierungen bei der [Leader-Wahl][elections] zu warten.
@@ -102,9 +104,9 @@ Besonders nützlich sind Revisionen im Backend mit [Mehrversions-Nebenläufigkei
 
 Das Datenmodell von etcd indiziert alle Schlüssel in einem flachen binären Schlüsselraum. Es unterscheidet sich damit von anderen Schlüssel-Wert-Speichern, die Schlüssel hierarchisch in Verzeichnissen organisieren. Schlüssel werden über Schlüsselintervalle `[a, b)` statt nach Verzeichnissen aufgelistet.
 
-Diese Intervalle werden in etcd häufig als Bereiche bezeichnet. Bereichsoperationen sind leistungsfähiger als Verzeichnisoperationen. Wie ein hierarchischer Speicher unterstützen Intervalle einzelne Schlüsselabfragen über `[a, a+1)`, etwa ['a', 'a\x00') zum Abrufen von 'a', und Verzeichnisabfragen durch Kodierung der Schlüssel nach Verzeichnistiefe. Darüber hinaus können Intervalle auch Präfixe abbilden: Das Intervall `['a', 'b')` ruft beispielsweise alle Schlüssel mit dem Präfix 'a' ab.
+Diese Intervalle werden in etcd häufig als Bereiche bezeichnet. Bereichsoperationen sind leistungsfähiger als Verzeichnisoperationen. Wie ein hierarchischer Speicher unterstützen Intervalle einzelne Schlüsselabfragen über `[a, a+1)`, etwa `['a', 'a\x00')` zum Abrufen von `'a'`, und Verzeichnisabfragen durch Kodierung der Schlüssel nach Verzeichnistiefe. Darüber hinaus können Intervalle auch Präfixe abbilden: Das Intervall `['a', 'b')` ruft beispielsweise alle Schlüssel mit dem Präfix 'a' ab.
 
-Vereinbarungsgemäß werden Bereiche einer Anfrage durch die Felder `key` und `range_end` angegeben. Das Feld `key` ist der erste Schlüssel des Bereichs und sollte nicht leer sein. `range_end` ist der Schlüssel nach dem letzten Schlüssel des Bereichs. Ist `range_end` nicht angegeben oder leer, enthält der Bereich nur das Argument key. Ist `range_end` gleich `key` plus eins, etwa "aa"+1 == "ab" oder "a\xff"+1 == "b", umfasst der Bereich alle Schlüssel mit dem Präfix key. Sind `key` und `range_end` beide '\0', umfasst der Bereich alle Schlüssel. Ist `range_end` '\0', umfasst der Bereich alle Schlüssel größer oder gleich dem Argument key.
+Vereinbarungsgemäß werden Bereiche einer Anfrage durch die Felder `key` und `range_end` angegeben. Das Feld `key` ist der erste Schlüssel des Bereichs und sollte nicht leer sein. `range_end` ist der Schlüssel nach dem letzten Schlüssel des Bereichs. Ist `range_end` nicht angegeben oder leer, enthält der Bereich nur das Argument key. Ist `range_end` gleich `key` plus eins, etwa `"aa"+1 == "ab"` oder `"a\xff"+1 == "b"`, umfasst der Bereich alle Schlüssel mit dem Präfix key. Sind `key` und `range_end` beide `'\0'`, umfasst der Bereich alle Schlüssel. Ist `range_end` `'\0'`, umfasst der Bereich alle Schlüssel größer oder gleich dem Argument key.
 
 ### Range {#range}
 
@@ -141,18 +143,18 @@ message RangeRequest {
 }
 ```
 
-* Key, Range_End - Der abzurufende Schlüsselbereich.
-* Limit - Die maximale Anzahl der für die Anfrage zurückgegebenen Schlüssel. Der Wert 0 bedeutet keine Begrenzung.
-* Revision - Der für den Bereich zu verwendende Zeitpunkt im Schlüssel-Wert-Speicher. Ist revision kleiner oder gleich null, bezieht sich der Bereich auf den neuesten Stand. Wurde die Revision kompaktiert, wird ErrCompacted zurückgegeben.
-* Sort_Order - Die Reihenfolge für sortierte Anfragen.
-* Sort_Target - Das Schlüssel-Wert-Feld, nach dem sortiert wird.
-* Serializable - Legt fest, dass die Bereichsanfrage serialisierbare, auf das Mitglied beschränkte Lesezugriffe verwendet. Standardmäßig ist Range linearisierbar und spiegelt den aktuellen Konsens des Clusters wider. Für bessere Leistung und Verfügbarkeit auf Kosten möglicherweise veralteter Leseergebnisse wird eine serialisierbare Bereichsanfrage lokal bearbeitet, ohne einen Konsens mit anderen Clusterknoten herstellen zu müssen.
-* Keys_Only - Gibt nur die Schlüssel, nicht die Werte zurück.
-* Count_Only - Gibt nur die Anzahl der Schlüssel im Bereich zurück.
-* Min_Mod_Revision - Die Untergrenze für Änderungsrevisionen von Schlüsseln; kleinere Änderungsrevisionen werden herausgefiltert.
-* Max_Mod_Revision - Die Obergrenze für Änderungsrevisionen von Schlüsseln; größere Änderungsrevisionen werden herausgefiltert.
-* Min_Create_Revision - Die Untergrenze für Erstellungsrevisionen von Schlüsseln; kleinere Erstellungsrevisionen werden herausgefiltert.
-* Max_Create_Revision - Die Obergrenze für Erstellungsrevisionen von Schlüsseln; größere Erstellungsrevisionen werden herausgefiltert.
+* `key`, `range_end` - Der abzurufende Schlüsselbereich.
+* `limit` - Die maximale Anzahl der für die Anfrage zurückgegebenen Schlüssel. Der Wert 0 bedeutet keine Begrenzung.
+* `revision` - Der für den Bereich zu verwendende Zeitpunkt im Schlüssel-Wert-Speicher. Ist revision kleiner oder gleich null, bezieht sich der Bereich auf den neuesten Stand. Wurde die Revision kompaktiert, wird `ErrCompacted` zurückgegeben.
+* `sort_order` - Die Reihenfolge für sortierte Anfragen.
+* `sort_target` - Das Schlüssel-Wert-Feld, nach dem sortiert wird.
+* `serializable` - Legt fest, dass die Bereichsanfrage serialisierbare, auf das Mitglied beschränkte Lesezugriffe verwendet. Standardmäßig ist Range linearisierbar und spiegelt den aktuellen Konsens des Clusters wider. Für bessere Leistung und Verfügbarkeit auf Kosten möglicherweise veralteter Leseergebnisse wird eine serialisierbare Bereichsanfrage lokal bearbeitet, ohne einen Konsens mit anderen Clusterknoten herstellen zu müssen.
+* `keys_only` - Gibt nur die Schlüssel, nicht die Werte zurück.
+* `count_only` - Gibt nur die Anzahl der Schlüssel im Bereich zurück.
+* `min_mod_revision` - Die Untergrenze für die Änderungsrevisionen der zurückgegebenen Schlüssel; alle Schlüssel mit kleineren Änderungsrevisionen werden herausgefiltert.
+* `max_mod_revision` - Die Obergrenze für Änderungsrevisionen von Schlüsseln; alle Schlüssel mit größeren Änderungsrevisionen werden herausgefiltert.
+* `min_create_revision` - Die Untergrenze für die Erstellungsrevisionen der zurückgegebenen Schlüssel; alle Schlüssel mit kleineren Erstellungsrevisionen werden herausgefiltert.
+* `max_create_revision` - Die Obergrenze für Erstellungsrevisionen von Schlüsseln; alle Schlüssel mit größeren Erstellungsrevisionen werden herausgefiltert.
 
 Der Client erhält vom Aufruf `Range` eine Nachricht `RangeResponse`:
 
@@ -165,9 +167,9 @@ message RangeResponse {
 }
 ```
 
-* Kvs - Die Liste der Schlüssel-Wert-Paare, die der Bereichsanfrage entsprechen. Wenn `Count_Only` gesetzt ist, ist `Kvs` leer.
-* More - Gibt bei gesetztem `limit` an, ob im angeforderten Bereich weitere Schlüssel zurückzugeben sind.
-* Count - Die Gesamtzahl der Schlüssel, die die Bereichsanfrage erfüllen.
+* `kvs` - Die Liste der Schlüssel-Wert-Paare, die der Bereichsanfrage entsprechen. `kvs` ist leer, wenn `count_only` gesetzt ist.
+* `more` - Gibt an, ob im angeforderten Bereich weitere Schlüssel zurückzugeben sind.
+* `count` - Die tatsächliche Anzahl der Schlüssel im Bereich, wenn die Anfrage sie verlangt. Anders als `kvs` wird sie weder durch Begrenzungen noch durch Filter (z. B. Min/Max, Create/Modify, Revisions) beeinflusst und gibt die vollständige Anzahl innerhalb des angegebenen Bereichs wieder.
 
 Für große Schlüsselbereiche, deren vollständige Antwort nicht zwischengespeichert werden soll, siehe [RangeStream](#rangestream).
 
@@ -185,8 +187,8 @@ message RangeStreamResponse {
 
 Belegung der Felder über die Blöcke hinweg:
 
-* Kvs - Jeder Block enthält einen disjunkten Teil des Ergebnisses. Werden die `kvs` aller Blöcke in ihrer Empfangsreihenfolge aneinandergehängt, ergibt sich dieselbe Schlüsselmenge wie bei einem einzelnen `Range`-Aufruf.
-* Header, More, Count - Werden nur im letzten Block gesetzt, und nur wenn der Stream ohne Fehler endet. In früheren Blöcken behalten diese Felder ihre Nullwerte. Wird `proto.Merge` auf die `range_response` jedes Blocks angewendet, entsteht eine `RangeResponse`, die der Antwort von `Range` entspricht.
+* `kvs` - Jeder Block enthält einen disjunkten Teil des Ergebnisses. Werden die `kvs` aller Blöcke in ihrer Empfangsreihenfolge aneinandergehängt, ergibt sich dieselbe Schlüsselmenge wie bei einem einzelnen `Range`-Aufruf.
+* `header`, `more`, `count` - Werden nur im letzten Block gesetzt, und nur wenn der Stream ohne Fehler endet. In früheren Blöcken behalten diese Felder ihre Nullwerte. Wird `proto.Merge` auf die `range_response` jedes Blocks angewendet, entsteht eine `RangeResponse`, die der Antwort von `Range` entspricht.
 
 Endet der Stream mit einem Fehler, enthält kein Block einen gültigen Wert für `header`, `more` oder `count`.
 
@@ -214,12 +216,12 @@ message PutRequest {
 }
 ```
 
-* Key - Der Name des Schlüssels, der in den Schlüssel-Wert-Speicher geschrieben werden soll.
-* Value - Der Wert als Bytes, der dem Schlüssel im Schlüssel-Wert-Speicher zugeordnet werden soll.
-* Lease - Die Lease-ID, die dem Schlüssel im Schlüssel-Wert-Speicher zugeordnet werden soll. Der Lease-Wert 0 bedeutet keine Lease.
-* Prev_Kv - Wenn gesetzt, enthält die Antwort die Daten des Schlüssel-Wert-Paars vor der Aktualisierung durch diese `Put`-Anfrage.
-* Ignore_Value - Wenn gesetzt, wird der Schlüssel aktualisiert, ohne seinen aktuellen Wert zu ändern. Existiert der Schlüssel nicht, wird ein Fehler zurückgegeben.
-* Ignore_Lease - Wenn gesetzt, wird der Schlüssel aktualisiert, ohne seine aktuelle Lease zu ändern. Existiert der Schlüssel nicht, wird ein Fehler zurückgegeben.
+* `key` - Der Name des Schlüssels, der in den Schlüssel-Wert-Speicher geschrieben werden soll.
+* `value` - Der Wert als Bytes, der dem Schlüssel im Schlüssel-Wert-Speicher zugeordnet werden soll.
+* `lease` - Die Lease-ID, die dem Schlüssel im Schlüssel-Wert-Speicher zugeordnet werden soll. Der Lease-Wert 0 bedeutet keine Lease.
+* `prev_kv` - Wenn gesetzt, ruft etcd das vorherige Schlüssel-Wert-Paar ab, bevor es geändert wird. Das vorherige Schlüssel-Wert-Paar wird in der put-Antwort zurückgegeben.
+* `ignore_value` - Wenn gesetzt, wird der Schlüssel mit seinem aktuellen Wert aktualisiert. Existiert der Schlüssel nicht, wird ein Fehler zurückgegeben.
+* `ignore_lease` - Wenn gesetzt, aktualisiert etcd den Schlüssel mit seiner aktuellen Lease. Existiert der Schlüssel nicht, wird ein Fehler zurückgegeben.
 
 Der Client erhält vom Aufruf `Put` eine Nachricht `PutResponse`:
 
@@ -230,7 +232,7 @@ message PutResponse {
 }
 ```
 
-* Prev_Kv - Das durch `Put` überschriebene Schlüssel-Wert-Paar, wenn `Prev_Kv` in der `PutRequest` gesetzt war.
+* `prev_kv` - Wenn in der Anfrage `prev_kv` gesetzt ist, wird das vorherige Schlüssel-Wert-Paar zurückgegeben.
 
 ### Schlüsselbereich löschen {#delete-range}
 
@@ -244,8 +246,8 @@ message DeleteRangeRequest {
 }
 ```
 
-* Key, Range_End - Der zu löschende Schlüsselbereich.
-* Prev_Kv - Wenn gesetzt, wird der Inhalt der gelöschten Schlüssel-Wert-Paare zurückgegeben.
+* `key` - Der erste Schlüssel, der im Bereich gelöscht wird.
+* `range_end` - Der Schlüssel nach dem letzten Schlüssel, der für den Bereich `[key, range_end)` gelöscht wird.
 
 Der Client erhält vom Aufruf `DeleteRange` eine Nachricht `DeleteRangeResponse`:
 
@@ -257,8 +259,8 @@ message DeleteRangeResponse {
 }
 ```
 
-* Deleted - Anzahl der gelöschten Schlüssel.
-* Prev_Kv - Eine Liste aller durch die Operation `DeleteRange` gelöschten Schlüssel-Wert-Paare.
+* `deleted` - Anzahl der durch die Delete-Range-Anfrage gelöschten Schlüssel.
+* `prev_kvs` - Die vorherigen Schlüssel-Wert-Paare, die zurückgegeben werden, wenn in der Anfrage `prev_kv` gesetzt ist.
 
 ### Transaktion {#transaction}
 
@@ -298,10 +300,10 @@ message Compare {
 }
 ```
 
-* Result - Die Art der logischen Vergleichsoperation, etwa gleich oder kleiner als.
-* Target - Das zu vergleichende Schlüssel-Wert-Feld: Version, Erstellungsrevision, Änderungsrevision oder Wert des Schlüssels.
-* Key - Der Schlüssel für den Vergleich.
-* Target_Union - Die vom Benutzer angegebenen Daten für den Vergleich.
+* `result` - Die Art der logischen Vergleichsoperation, etwa gleich oder kleiner als.
+* `target` - Das zu vergleichende Schlüssel-Wert-Feld: Version, Erstellungsrevision, Änderungsrevision oder Wert des Schlüssels.
+* `key` - Der Schlüssel für den Vergleich.
+* `target_union` - Die vom Benutzer angegebenen Daten für den Vergleich.
 
 Nach dem Verarbeiten des Vergleichsblocks wendet die Transaktion einen Anfrageblock an. Ein Block ist eine Liste von `RequestOp`-Nachrichten:
 
@@ -316,9 +318,9 @@ message RequestOp {
 }
 ```
 
-* Request_Range - Eine `RangeRequest`.
-* Request_Put - Eine `PutRequest`. Die Schlüssel müssen eindeutig sein. Sie darf keine Schlüssel mit anderen Put- oder Delete-Anfragen gemeinsam haben.
-* Request_Delete_Range - Eine `DeleteRangeRequest`. Sie darf keine Schlüssel mit Put- oder Delete-Anfragen gemeinsam haben.
+* `request_range` - Eine `RangeRequest`.
+* `request_put` - Eine `PutRequest`. Die Schlüssel müssen eindeutig sein. Sie darf keine Schlüssel mit anderen Put- oder Delete-Anfragen gemeinsam haben.
+* `request_delete_range` - Eine `DeleteRangeRequest`. Sie darf keine Schlüssel mit Put- oder Delete-Anfragen gemeinsam haben.
 
 Zusammengesetzt wird eine Transaktion mit dem API-Aufruf `Txn` ausgeführt, der eine `TxnRequest` entgegennimmt:
 
@@ -330,9 +332,9 @@ message TxnRequest {
 }
 ```
 
-* Compare - Eine Liste von Prädikaten, die eine Konjunktion von Bedingungen zur Absicherung der Transaktion repräsentiert.
-* Success - Eine Liste von Anfragen, die verarbeitet werden, wenn alle Vergleiche true ergeben.
-* Failure - Eine Liste von Anfragen, die verarbeitet werden, wenn ein Vergleich false ergibt.
+* `compare` - Eine Liste von Prädikaten, die eine Konjunktion von Bedingungen darstellt. Ist der Vergleich erfolgreich, werden die success-Anfragen der Reihe nach verarbeitet, und die Antwort enthält ihre jeweiligen Antworten in dieser Reihenfolge.
+* `success` - Eine Liste von Anfragen, die verarbeitet werden, wenn alle Vergleiche true ergeben.
+* `failure` - Eine Liste von Anfragen, die angewendet werden, wenn der Vergleich false ergibt.
 
 Der Client erhält vom Aufruf `Txn` eine Nachricht `TxnResponse`:
 
@@ -344,10 +346,8 @@ message TxnResponse {
 }
 ```
 
-* Succeeded - Gibt an, ob `Compare` true oder false ergab.
-* Responses - Eine Liste von Antworten auf die Ergebnisse der Anwendung des Blocks `Success`, wenn succeeded true ist, beziehungsweise `Failure`, wenn succeeded false ist.
-
-Die Liste `Responses` entspricht den Ergebnissen der angewendeten Liste `RequestOp`. Jede Antwort ist als `ResponseOp` kodiert:
+* `succeeded` - true, wenn der Vergleich true ergab, andernfalls false.
+* `responses` - Eine Liste von Antworten auf die Ergebnisse der Anwendung von success, wenn succeeded true ist, beziehungsweise failure, wenn succeeded false ist.
 
 ```protobuf
 message ResponseOp {
@@ -383,9 +383,9 @@ message Event {
 }
 ```
 
-* Type - Die Art des Ereignisses. PUT zeigt an, dass neue Daten unter dem Schlüssel gespeichert wurden. DELETE zeigt an, dass der Schlüssel gelöscht wurde.
-* KV - Der dem Ereignis zugeordnete KeyValue. Ein PUT-Ereignis enthält das aktuelle kv-Paar. Ein PUT-Ereignis mit kv.Version=1 zeigt die Erstellung eines Schlüssels an. Ein DELETE-Ereignis enthält den gelöschten Schlüssel, dessen Änderungsrevision auf die Revision der Löschung gesetzt ist.
-* Prev_KV - Das Schlüssel-Wert-Paar aus der Revision unmittelbar vor dem Ereignis. Um Bandbreite zu sparen, wird es nur gesetzt, wenn der Watch dies ausdrücklich aktiviert hat.
+* `type` - Die Art des Ereignisses. PUT zeigt an, dass neue Daten unter dem Schlüssel gespeichert wurden. DELETE zeigt an, dass der Schlüssel gelöscht wurde.
+* `kv` - Der dem Ereignis zugeordnete KeyValue. Ein PUT-Ereignis enthält das aktuelle kv-Paar. Ein PUT-Ereignis mit kv.Version=1 zeigt die Erstellung eines Schlüssels an. Ein DELETE-Ereignis enthält den gelöschten Schlüssel, dessen Änderungsrevision auf die Revision der Löschung gesetzt ist.
+* `prev_kv` - Das Schlüssel-Wert-Paar aus der Revision unmittelbar vor dem Ereignis. Um Bandbreite zu sparen, wird es nur gesetzt, wenn der Watch dies ausdrücklich aktiviert hat.
 
 ### Watch-Streams {#watch-streams}
 
@@ -411,11 +411,11 @@ message WatchCreateRequest {
 }
 ```
 
-* Key, Range_End - Der zu beobachtende Schlüsselbereich.
-* Start_Revision - Eine optionale Revision, ab der einschließlich beobachtet wird. Ist sie nicht angegeben, werden Ereignisse nach der Revision im Antwortheader der Watch-Erstellung gestreamt. Der gesamte verfügbare Ereignisverlauf kann ab der letzten Kompaktierungsrevision beobachtet werden.
-* Progress_Notify - Wenn gesetzt und keine aktuellen Ereignisse vorliegen, erhält der Watch regelmäßig eine WatchResponse ohne Ereignisse. Das ist nützlich, wenn Clients einen unterbrochenen Watcher ab einer kürzlich bekannt gewordenen Revision wiederherstellen möchten. Der etcd-Server entscheidet anhand der aktuellen Serverlast, wie häufig er Benachrichtigungen sendet.
-* Filters - Eine Liste von Ereignistypen, die serverseitig herausgefiltert werden sollen.
-* Prev_Kv - Wenn gesetzt, erhält der Watch die Schlüssel-Wert-Daten vor dem Ereignis. So lässt sich erkennen, welche Daten überschrieben wurden.
+* `key`, `range_end` - Der zu beobachtende Schlüsselbereich.
+* `start_revision` - Eine optionale Revision, ab der einschließlich beobachtet wird. Ist sie nicht angegeben, werden Ereignisse nach der Revision im Antwortheader der Watch-Erstellung gestreamt. Der gesamte verfügbare Ereignisverlauf kann ab der letzten Kompaktierungsrevision beobachtet werden.
+* `progress_notify` - Wenn gesetzt und keine aktuellen Ereignisse vorliegen, erhält der Watch regelmäßig eine WatchResponse ohne Ereignisse. Das ist nützlich, wenn Clients einen unterbrochenen Watcher ab einer kürzlich bekannt gewordenen Revision wiederherstellen möchten. Der etcd-Server entscheidet anhand der aktuellen Serverlast, wie häufig er Benachrichtigungen sendet.
+* `filters` - Eine Liste von Ereignistypen, die serverseitig herausgefiltert werden sollen.
+* `prev_kv` - Wenn gesetzt, erhält der Watch die Schlüssel-Wert-Daten vor dem Ereignis. So lässt sich erkennen, welche Daten überschrieben wurden.
 
 Als Antwort auf eine `WatchCreateRequest` oder bei einem neuen Ereignis für einen eingerichteten Watch erhält der Client eine `WatchResponse`:
 
@@ -431,11 +431,11 @@ message WatchResponse {
 }
 ```
 
-* Watch_ID - Die ID des Watches, zu dem die Antwort gehört.
-* Created - Wird auf true gesetzt, wenn die Antwort zu einer Anfrage zum Erstellen eines Watches gehört. Der Client sollte die ID speichern und die Ereignisse für den Watch im Stream erwarten. Alle an den erstellten Watcher gesendeten Ereignisse haben dieselbe watch_id.
-* Canceled - Wird auf true gesetzt, wenn die Antwort zu einer Anfrage zum Abbrechen eines Watches gehört. An den abgebrochenen Watcher werden keine weiteren Ereignisse gesendet.
-* Compact_Revision - Wird auf die kleinste in etcd verfügbare historische Revision gesetzt, wenn ein Watcher versucht, eine kompaktierte Revision zu beobachten. Dies geschieht beim Erstellen eines Watchers an einer kompaktierten Revision oder wenn er den Fortschritt des Schlüssel-Wert-Speichers nicht einholen kann. Der Watcher wird abgebrochen; das Erstellen neuer Watches mit derselben start_revision schlägt fehl.
-* Events - Eine geordnete Liste neuer Ereignisse für die angegebene Watch-ID.
+* `watch_id` - Die ID des Watches, zu dem die Antwort gehört.
+* `created` - Wird auf true gesetzt, wenn die Antwort zu einer Anfrage zum Erstellen eines Watches gehört. Der Client sollte die ID speichern und die Ereignisse für den Watch im Stream erwarten. Alle an den erstellten Watcher gesendeten Ereignisse haben dieselbe watch_id.
+* `canceled` - Wird auf true gesetzt, wenn die Antwort zu einer Anfrage zum Abbrechen eines Watches gehört. An den abgebrochenen Watcher werden keine weiteren Ereignisse gesendet.
+* `compact_revision` - Wird auf die kleinste in etcd verfügbare historische Revision gesetzt, wenn ein Watcher versucht, eine kompaktierte Revision zu beobachten. Dies geschieht beim Erstellen eines Watchers an einer kompaktierten Revision oder wenn er den Fortschritt des Schlüssel-Wert-Speichers nicht einholen kann. Der Watcher wird abgebrochen; das Erstellen neuer Watches mit derselben start_revision schlägt fehl.
+* `events` - Eine geordnete Liste neuer Ereignisse für die angegebene Watch-ID.
 
 Wenn der Client keine weiteren Ereignisse für einen Watch empfangen möchte, sendet er eine `WatchCancelRequest`:
 
@@ -445,7 +445,7 @@ message WatchCancelRequest {
 }
 ```
 
-* Watch_ID - Die ID des abzubrechenden Watches, damit keine weiteren Ereignisse übertragen werden.
+* `watch_id` - Die ID des abzubrechenden Watches, damit keine weiteren Ereignisse übertragen werden.
 
 ## Lease-API {#lease-api}
 
@@ -464,8 +464,8 @@ message LeaseGrantRequest {
 }
 ```
 
-* TTL - Die als Richtwert angegebene Lebensdauer in Sekunden.
-* ID - Die angeforderte ID der Lease. Ist ID auf 0 gesetzt, wählt etcd eine ID aus.
+* `TTL` - Die als Richtwert angegebene Lebensdauer in Sekunden.
+* `ID` - Die angeforderte ID der Lease. Ist ID auf 0 gesetzt, wählt etcd eine ID aus.
 
 Der Client erhält vom Aufruf `LeaseGrant` eine `LeaseGrantResponse`:
 
@@ -477,8 +477,8 @@ message LeaseGrantResponse {
 }
 ```
 
-* ID - Die Lease-ID der gewährten Lease.
-* TTL - Die vom Server gewählte Lebensdauer der Lease in Sekunden.
+* `ID` - Die Lease-ID der gewährten Lease.
+* `TTL` - Die vom Server gewählte Lebensdauer der Lease in Sekunden.
 
 ```protobuf
 message LeaseRevokeRequest {
@@ -486,7 +486,7 @@ message LeaseRevokeRequest {
 }
 ```
 
-* ID - Die Lease-ID der zu widerrufenden Lease. Beim Widerruf werden alle zugeordneten Schlüssel gelöscht.
+* `ID` - Die Lease-ID der zu widerrufenden Lease. Beim Widerruf werden alle zugeordneten Schlüssel gelöscht.
 
 ### Keepalives {#keep-alives}
 
@@ -498,7 +498,7 @@ message LeaseKeepAliveRequest {
 }
 ```
 
-* ID - Die Lease-ID der am Leben zu haltenden Lease.
+* `ID` - Die Lease-ID der am Leben zu haltenden Lease.
 
 Der Keepalive-Stream antwortet mit einer `LeaseKeepAliveResponse`:
 
@@ -510,8 +510,8 @@ message LeaseKeepAliveResponse {
 }
 ```
 
-* ID - Die Lease, die mit einer neuen TTL erneuert wurde.
-* TTL - Die neue verbleibende Lebensdauer der Lease in Sekunden.
+* `ID` - Die Lease, die mit einer neuen TTL erneuert wurde.
+* `TTL` - Die neue verbleibende Lebensdauer der Lease in Sekunden.
 
 [watch-api-guarantees]: /de/etcd/learning/api_guarantees/#watch-apis
 [elections]: https://github.com/etcd-io/etcd/blob/main/client/v3/concurrency/election.go

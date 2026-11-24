@@ -4,7 +4,7 @@ weight: 1450
 description: متى ينبغي تحديث إعدادات فاصل نبض القلب ومهلة الانتخاب
 icon: fa-solid fa-sliders
 categories: [مهمة]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tuning.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/tuning.md"
 ---
 
 ينبغي أن تعمل الإعدادات الافتراضية في etcd بشكل جيد للتثبيتات على شبكة محلية يكون متوسط زمن استجابة الشبكة فيها منخفضًا. ومع ذلك، عند استخدام etcd عبر مراكز بيانات متعددة أو عبر شبكات ذات زمن استجابة مرتفع، قد يحتاج إعدادا فاصل نبض القلب ومهلة الانتخاب إلى ضبط.

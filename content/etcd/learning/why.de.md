@@ -3,7 +3,7 @@ title: etcd im Vergleich mit anderen Schlüssel-Wert-Speichern
 weight: 2875
 description: Geschichte und Verwendung von etcd im Vergleich mit anderen Werkzeugen
 categories: [Konzept]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/why.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/why.md"
 ---
 
 Der Name „etcd“ entstand aus zwei Ideen: dem Unix-Verzeichnis "/etc" und verteilten Systemen, auf Englisch „distributed systems“. Im Verzeichnis "/etc" liegen Konfigurationsdaten eines einzelnen Systems, während etcd Konfigurationsinformationen für große verteilte Systeme speichert. Aus „/etc“ und dem Anfangsbuchstaben von „distributed“ wird somit „etcd“.

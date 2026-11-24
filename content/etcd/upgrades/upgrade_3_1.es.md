@@ -3,7 +3,7 @@ title: Actualizar etcd de la versión 3.0 a la 3.1
 weight: 6850
 description: Procesos, listas de verificación y notas sobre la actualización de etcd de la versión 3.0 a la 3.1
 categories: [Tarea]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_1.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/upgrades/upgrade_3_1.md"
 ---
 
 En el caso general, actualizar de etcd 3.0 a 3.1 puede hacerse sin tiempo de inactividad, mediante una actualización gradual:

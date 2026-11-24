@@ -3,7 +3,7 @@ title: データモデル
 weight: 2125
 description: "etcdのデータ保存方式"
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/data_model.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/data_model.md"
 ---
 
 etcdは、更新頻度の低いデータを確実に保存し、信頼できる監視クエリーを提供するように設計されています。etcdはキー・バリューペアの過去のバージョンを公開し、低コストのスナップショットと過去のイベントの監視（「タイムトラベルクエリー」）を実現します。永続的な多版型同時実行制御のデータモデルは、このような用途に適しています。

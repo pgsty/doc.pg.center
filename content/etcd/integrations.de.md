@@ -4,7 +4,7 @@ weight: 1300
 description: "Eine Übersicht über etcd-Werkzeuge und Clientbibliotheken"
 icon: fa-solid fa-puzzle-piece
 categories: [Referenz]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/integrations.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/integrations.md"
 ---
 
 Die unten aufgeführten Bibliotheken und Werkzeuge von Drittanbietern, die nicht unter https://github.com/etcd-io gehostet werden, werden vom etcd-Team weder getestet noch gepflegt. Es wird empfohlen, sich vor der Verwendung darüber zu informieren und sie zu prüfen.
@@ -23,6 +23,7 @@ Die unten aufgeführten Bibliotheken und Werkzeuge von Drittanbietern, die nicht
 - [etcdloadtest](https://github.com/sinsharat/etcdloadtest) - Ein Befehlszeilenclient für Lasttests mit etcd ab Version 3.0.
 - [etcd-tui](https://github.com/olamilekan000/etcd-tui) - Eine moderne Terminaloberfläche (TUI) für die Interaktion mit einer etcd-Datenbank. Durch Schlüssel navigieren, Werte anzeigen, Daten filtern und den etcd-Cluster direkt im Terminal verwalten.
 - [etcdfinder](https://etcdfinder.github.io) - Eine sehr schnelle, moderne Weboberfläche (UI) für etcd mit Sofortsuche. Unterstützt sowohl etcd v2 als auch v3.
+- [LibreDB Studio](https://github.com/libredb/libredb-studio) - Eine selbst gehostete, webbasierte Datenbank-IDE mit Unterstützung für etcd v3. Schlüssel nach Präfix durchsuchen, eine Teilmenge der etcdctl-Befehle ausführen und Werte bearbeiten. Kubernetes-bewusst: Schreibvorgänge unter Kubernetes-Schlüsselpräfixen werden abgelehnt.
 - [lucas](https://github.com/ringtail/lucas) - Ein webbasierter Betrachter für Schlüssel-Wert-Paare in Kubernetes-Clustern mit etcd3.0+.
 - [etcd-manager](https://etcdmanager.io) - Eine moderne, effiziente, plattformübergreifende und kostenlose GUI samt Clientwerkzeug für etcd 3.x. Verfügbar für Windows, Linux und Mac.
 - [etcd-backup-restore](https://github.com/gardener/etcd-backup-restore) - Werkzeug für regelmäßige inkrementelle Backups und die Wiederherstellung von etcd.

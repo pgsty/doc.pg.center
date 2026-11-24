@@ -3,7 +3,7 @@ title: Protocole du service de découverte
 weight: 1500
 description: "Découvrir les membres etcd lors de la phase d'amorçage d'un cluster"
 categories: [Référence]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-internal/discovery_protocol.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-internal/discovery_protocol.md"
 ---
 
 Le protocole de service de découverte aide un nouveau membre etcd à découvrir tous les autres membres du cluster pendant la phase d'amorçage, en utilisant un jeton de découverte partagé et une liste de points de terminaison.

@@ -4,7 +4,7 @@ weight: 1300
 description: Перечень инструментов и клиентских библиотек etcd
 icon: fa-solid fa-puzzle-piece
 categories: [Справочник]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/integrations.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/integrations.md"
 ---
 
 Обратите внимание: перечисленные ниже сторонние библиотеки и инструменты (размещённые не на https://github.com/etcd-io) не тестируются и не сопровождаются командой etcd. Перед использованием рекомендуется их прочитать и изучить.
@@ -23,6 +23,7 @@ upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f
 - [etcdloadtest](https://github.com/sinsharat/etcdloadtest) — клиент командной строки для нагрузочного тестирования etcd версии 3.0 и выше.
 - [etcd-tui](https://github.com/olamilekan000/etcd-tui) — современный терминальный пользовательский интерфейс (TUI) для работы с базой данных etcd. Позволяет переходить по ключам, просматривать значения, фильтровать данные и управлять кластером etcd непосредственно из терминала.
 - [etcdfinder](https://etcdfinder.github.io) — сверхбыстрый современный веб-интерфейс etcd с мгновенным поиском. Поддерживает etcd v2 и v3.
+- [LibreDB Studio](https://github.com/libredb/libredb-studio) — саморазмещаемая веб-IDE для баз данных с поддержкой etcd v3. Просмотр ключей по префиксу, выполнение части команд etcdctl и редактирование значений. Учитывает Kubernetes: запись под префиксами ключей Kubernetes отклоняется.
 - [lucas](https://github.com/ringtail/lucas) — веб-средство просмотра ключей и значений для кластера Kubernetes etcd3.0+.
 - [etcd-manager](https://etcdmanager.io) — современный, эффективный, многоплатформенный и бесплатный графический интерфейс и клиентский инструмент etcd 3.x. Доступен для Windows, Linux и Mac.
 - [etcd-backup-restore](https://github.com/gardener/etcd-backup-restore) — утилита для периодического инкрементного резервного копирования и восстановления etcd.

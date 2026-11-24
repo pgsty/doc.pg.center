@@ -3,7 +3,7 @@ title: نموذج أمان النقل
 weight: 4125
 description: تأمين البيانات أثناء النقل
 categories: [مهمة]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/security.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/security.md"
 ---
 
 يدعم etcd خاصية TLS التلقائية وكذلك المصادقة عبر شهادات العملاء لاتصالات العميل إلى الخادم وكذلك لاتصالات الأقران (من خادم إلى خادم / العنقود). **لاحظ أن etcd لا يُمكّن [المصادقة القائمة على RBAC][auth] ولا ميزة المصادقة في طبقة النقل افتراضيًا لتقليل العوائق أمام المستخدمين الذين يبدؤون العمل مع قاعدة البيانات. علاوة على ذلك، فإن تغيير هذا الإعداد الافتراضي سيكون تغييرًا كاسرًا (breaking change) لمشروع تأسس منذ عام 2013. عنقود etcd الذي لا تُمكَّن فيه ميزات الأمان قد يعرّض بياناته لأي عميل.**

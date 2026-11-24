@@ -4,7 +4,7 @@ weight: 1400
 description: "Comment soumettre des rapports d'incident pour le projet etcd"
 icon: fa-solid fa-bug
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/reporting_bugs.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/reporting_bugs.md"
 ---
 
 Si une partie du projet etcd présente des bogues ou des erreurs de documentation, veuillez nous en informer en [ouvrant une demande][etcd-issue]. Nous prenons très au sérieux les bogues et les erreurs, et considérons qu'aucun problème n'est trop petit. Avant de créer un rapport de bogue, veuillez vérifier qu'une demande signalant le même problème n'existe pas déjà.

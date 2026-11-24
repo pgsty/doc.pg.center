@@ -3,7 +3,7 @@ title: "Intégration d'etcd dans une application Go"
 weight: 3562
 description: "Utilisez le paquet Go `embed` d’etcd pour exécuter un serveur etcd dans votre application"
 categories: [Tâche]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/golang_embed_pkg.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/golang_embed_pkg.md"
 ---
 
 Le paquet Go `embed` d’etcd fournit un moyen simple d'intégrer un serveur etcd directement dans votre application.

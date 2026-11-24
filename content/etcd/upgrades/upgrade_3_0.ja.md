@@ -3,7 +3,7 @@ title: etcdを2.3から3.0にアップグレード
 weight: 6900
 description: etcdを2.3から3.0にアップグレードする手順、チェックリスト、注意事項
 categories: [タスク]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_0.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/upgrades/upgrade_3_0.md"
 ---
 
 通常、etcd 2.3から3.0へのアップグレードは、停止時間なしのローリングアップグレードで実行できます。

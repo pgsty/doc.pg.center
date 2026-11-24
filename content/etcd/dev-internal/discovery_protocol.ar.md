@@ -3,7 +3,7 @@ title: بروتوكول خدمة الاكتشاف
 weight: 1500
 description: اكتشاف بقية أعضاء etcd في مرحلة التهيئة الأولية للعنقود
 categories: [مرجع]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-internal/discovery_protocol.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-internal/discovery_protocol.md"
 ---
 
 يساعد بروتوكول خدمة الاكتشاف عضو etcd الجديد على اكتشاف جميع الأعضاء الآخرين في مرحلة التهيئة الأولية للعنقود باستخدام رمز اكتشاف مشترك وقائمة نقاط نهاية.

@@ -10,12 +10,12 @@ sidebar_root_for: self
 sidebar_root_link_self: true
 section_index: cards
 section_index_columns: 3
-upstream_source: etcd
+upstream_source: etcd-20261121
 categories: [Концепция]
-search_keywords: [v3.7.3, "Go 1.26.10", NewJournalWriter]
-upstream_link: "https://github.com/etcd-io/website/tree/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7"
+search_keywords: [v3.7.4, "Go 1.26.11", force-new-cluster, NewJournalWriter]
+upstream_link: "https://github.com/etcd-io/website/tree/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7"
 cascade:
-  upstream_source: etcd
+  upstream_source: etcd-20261121
   type: docs
   module: [ETCD]
 ---
@@ -24,9 +24,20 @@ etcd — это строго согласованное распределённ
 
 Начните с [Краткого руководства](/ru/etcd/quickstart/) для локального кластера из одного участника, [Установки](/ru/etcd/install/) для поддерживаемых путей установки или [Руководства по эксплуатации](/ru/etcd/op-guide/) для промышленных развёртываний.
 
+## etcd v3.7.4 {#etcd-v3-7-4}
+
+Текущий корректирующий выпуск — [v3.7.4](https://github.com/etcd-io/etcd/releases/tag/v3.7.4), опубликованный 19 ноября 2026 г. Примеры установки, Docker и Kubernetes в этой редакции рассчитаны на этот выпуск.
+
+- Исправлено восстановление с `--force-new-cluster`, когда согласованный индекс backend-хранилища опережает WAL.
+- Для хранилища аварий используется атомарный указатель, что устраняет гонку.
+- Исправена паника при запуске во время воспроизведения устаревших записей WAL атрибутов участника v2.
+- Сборка выполняется с Go 1.26.11.
+
+См. [закреплённый upstream-журнал изменений](https://github.com/etcd-io/etcd/blob/1ce5a2b779143279c89ed8c7e33a42e51fb697fa/CHANGELOG/CHANGELOG-3.7.md#v374-tbc). Его заголовок всё ещё содержит «TBC»; опубликованный тег выпуска подтверждает доступность.
+
 ## etcd v3.7.3 {#etcd-v3-7-3}
 
-Текущий корректирующий выпуск — [v3.7.3](https://github.com/etcd-io/etcd/releases/tag/v3.7.3). Примеры установки, Docker и Kubernetes в этой редакции рассчитаны на этот выпуск.
+Предыдущим корректирующим выпуском был [v3.7.3](https://github.com/etcd-io/etcd/releases/tag/v3.7.3).
 
 - Исправлены гонки данных между `Hash` и `Restore` в хранилище MVCC и в операциях `RangeStream`, возвращающих только ключи, а также регрессия производительности репликации, вызванная отправкой сообщений `MsgApp` лидером в обратном порядке.
 - Сборка выполняется с Go 1.26.10; зависимости OpenTelemetry и `golang.org/x/net` обновлены для устранения известных проблем безопасности.

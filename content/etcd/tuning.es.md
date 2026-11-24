@@ -4,7 +4,7 @@ weight: 1450
 description: Cuándo actualizar los ajustes del intervalo de latido y del tiempo de espera de elección
 icon: fa-solid fa-sliders
 categories: [Tarea]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tuning.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/tuning.md"
 ---
 
 Los ajustes predeterminados de etcd deberían funcionar bien en instalaciones sobre una red local donde la latencia de red media es baja. Sin embargo, al usar etcd a través de varios centros de datos o sobre redes con una latencia alta, puede que los ajustes del intervalo de latido y del tiempo de espera de elección necesiten un ajuste fino.

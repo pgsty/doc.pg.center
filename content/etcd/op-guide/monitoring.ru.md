@@ -3,7 +3,7 @@ title: Мониторинг etcd
 weight: 4500
 description: Мониторинг etcd для проверки состояния системы и отладки кластера
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/monitoring.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/monitoring.md"
 ---
 
 Каждый сервер etcd предоставляет локальные сведения мониторинга через конечные

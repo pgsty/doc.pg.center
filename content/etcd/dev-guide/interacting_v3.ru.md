@@ -3,7 +3,7 @@ title: Взаимодействие с etcd
 weight: 3250
 description: "etcdctl: утилита командной строки для взаимодействия с сервером etcd"
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/interacting_v3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/interacting_v3.md"
 ---
 
 Пользователи чаще всего взаимодействуют с etcd, устанавливая или получая значение ключа. В этом разделе описано, как это сделать с помощью etcdctl — утилиты командной строки для взаимодействия с сервером etcd. Описанные здесь концепции должны быть применимы к API gRPC и API клиентских библиотек.

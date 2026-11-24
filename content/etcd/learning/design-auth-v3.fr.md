@@ -3,7 +3,7 @@ title: "Conception de l'authentification v3 d'etcd"
 weight: 2500
 description: Authentification v3 d'etcd
 categories: [Concept]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/design-auth-v3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/design-auth-v3.md"
 ---
 
 ## Pourquoi ne pas réutiliser le système d'authentification v2 ? {#why-not-reuse-the-v2-auth-system}

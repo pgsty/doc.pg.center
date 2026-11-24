@@ -3,7 +3,7 @@ title: Понижение версии кластеров etcd и приложе
 weight: 6500
 description: Документация по понижению версии кластеров etcd и приложений
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/downgrades/downgrading-etcd.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/downgrades/downgrading-etcd.md"
 ---
 
 В этом разделе содержатся документы, специфичные для понижения версии кластеров etcd и приложений.

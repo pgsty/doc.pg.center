@@ -3,8 +3,8 @@ title: تشغيل عناقيد etcd كـ StatefulSet في Kubernetes
 weight: 4200
 description: "تشغيل etcd كـ StatefulSet في Kubernetes"
 categories: [مهمة]
-search_keywords: [v3.7.3]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/kubernetes.md"
+search_keywords: [v3.7.4]
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/kubernetes.md"
 ---
 
 يوضح ما يلي كيفية تنفيذ [عملية التهيئة الأولية الثابتة](/ar/etcd/op-guide/clustering/#static) كـ StatefulSet في Kubernetes.
@@ -162,7 +162,7 @@ spec:
       containers:
       ## This example only has this etcd container.
       - name: etcd
-        image: quay.io/coreos/etcd:v3.7.3
+        image: quay.io/coreos/etcd:v3.7.4
         imagePullPolicy: IfNotPresent
         ports:
         - name: etcd-client

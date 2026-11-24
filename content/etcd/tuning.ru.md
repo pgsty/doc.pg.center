@@ -4,7 +4,7 @@ weight: 1450
 description: Когда следует изменять интервал heartbeat и тайм-аут выборов
 icon: fa-solid fa-sliders
 categories: [Задача]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/tuning.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/tuning.md"
 ---
 
 Настройки etcd по умолчанию хорошо подходят для локальных сетей с небольшой средней задержкой. Однако при использовании etcd в нескольких центрах обработки данных или в сети с высокой задержкой может потребоваться настроить интервал heartbeat и тайм-аут выборов.

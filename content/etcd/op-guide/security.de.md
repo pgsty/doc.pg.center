@@ -3,7 +3,7 @@ title: "Sicherheitsmodell für den Datentransport"
 weight: 4125
 description: "Daten während der Übertragung schützen"
 categories: [Aufgabe]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/security.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/security.md"
 ---
 
 etcd unterstützt automatisches TLS sowie die Authentifizierung über Clientzertifikate sowohl für die Kommunikation zwischen Clients und Servern als auch zwischen Peers (Servern bzw. innerhalb des Clusters). **etcd aktiviert weder die [RBAC-basierte Authentifizierung][auth] noch die Authentifizierung auf der Transportschicht standardmäßig, um den Einstieg in die Datenbank zu erleichtern. Eine Änderung dieses Standards würde außerdem die Kompatibilität des seit 2013 bestehenden Projekts brechen. Ein etcd-Cluster ohne aktivierte Sicherheitsfunktionen kann seine Daten beliebigen Clients zugänglich machen.**

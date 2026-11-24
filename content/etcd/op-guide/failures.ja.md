@@ -3,7 +3,7 @@ title: "障害の種類"
 weight: 4250
 description: "障害の種類とetcdの耐障害性"
 categories: [概念]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/failures.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/failures.md"
 ---
 
 大規模なマシン環境では、障害は珍しくありません。ハードウェアやソフトウェアの不具合によって、マシンに障害が発生します。停電やネットワークの問題では、複数のマシンに同時に障害が発生します。異なる種類の障害が同時に起きることもあるため、起こり得る障害をすべて列挙することはほぼ不可能です。

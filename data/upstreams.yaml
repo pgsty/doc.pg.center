@@ -404,11 +404,11 @@ etcd-20261121:
   release_repository: https://github.com/etcd-io/etcd
   release_ref: v3.7.4
   release_commit: 2e8a5c99e4982c8d4c521be15364ea4c5c68a489
-  release_go_mod_sha256: d661049ebb2882d3b59925cf985bace45537fc8b27320dd98460036645343a03
+  release_go_mod_sha256: de8edb1d53bf9f2157ea7dbd0f48dfbc883a7d431f5fbb397612f25a54eb502f
   release_changelog:
     commit: 1ce5a2b779143279c89ed8c7e33a42e51fb697fa
     path: CHANGELOG/CHANGELOG-3.7.md
-    sha256: c01a6270ee94344bf96262c0e92ea727964748fc2c79e6bf3a95085ef88b1c9f
+    sha256: 9114dd6507d492f5606dabc933dd7a7286306f782609e72f35ceffd69073f8f1
   copyright: Copyright 2013-present etcd Authors
   license: CC-BY-4.0
   notice: /attribution/#etcd
@@ -416,7 +416,7 @@ etcd-20261121:
   modified: true
   source_ref: main
   snapshot_date: '2026-11-21'
-  languages: [en, zh]
+  languages: [en, zh, fr, ja, de, ru, ar, es]
   translation_baseline: etcd
   source_sha256:
     content/en/docs/v3.7/integrations.md: 7a07ceac725c007027a5bee2aee0a65db11a0ac955e833f32effc23314fce005

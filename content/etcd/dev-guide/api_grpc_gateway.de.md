@@ -3,7 +3,7 @@ title: Warum ein gRPC-Gateway
 weight: 3375
 description: Gründe für die Verwendung des gRPC-Gateways
 categories: [Konzept]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/api_grpc_gateway.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/api_grpc_gateway.md"
 ---
 
 etcd v3 verwendet [gRPC][grpc] als Nachrichtenprotokoll. Das etcd-Projekt enthält einen gRPC-basierten [Go-Client][go-client] und das Befehlszeilenwerkzeug [etcdctl][etcdctl] zur Kommunikation mit einem etcd-Cluster über gRPC. Für Sprachen ohne gRPC-Unterstützung stellt etcd ein JSON-[gRPC-Gateway][grpc-gateway] bereit. Dieses Gateway dient als RESTful-Proxy, der HTTP/JSON-Anfragen in gRPC-Nachrichten übersetzt.

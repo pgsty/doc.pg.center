@@ -3,7 +3,7 @@ title: Recomendaciones de hardware
 weight: 4400
 description: Directrices de hardware para administrar clústeres de etcd
 categories: [Referencia]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/hardware.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/hardware.md"
 ---
 
 etcd suele funcionar bien con recursos limitados para fines de desarrollo o pruebas; es habitual desarrollar con etcd en un portátil o en una máquina cloud económica. Sin embargo, al ejecutar clústeres de etcd en producción, algunas directrices de hardware resultan útiles para una administración adecuada. Estas sugerencias no son reglas estrictas; sirven como un buen punto de partida para un despliegue de producción robusto. Como siempre, los despliegues deben probarse con cargas simuladas antes de ejecutarse en producción.

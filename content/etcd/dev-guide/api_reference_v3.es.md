@@ -3,7 +3,7 @@ title: Referencia de API
 weight: 3800
 description: "Referencia completa de la API v3 de etcd"
 categories: [Referencia]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/api_reference_v3.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/api_reference_v3.md"
 ---
 
 Esta referencia de API se genera automáticamente a partir de los archivos `.proto` nombrados.

@@ -3,7 +3,7 @@ title: "Entwurf der Laufzeitrekonfiguration"
 weight: 4650
 description: "Der Entwurf der etcd-Befehle zur Laufzeitrekonfiguration"
 categories: [Konzept]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/runtime-reconf-design.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/runtime-reconf-design.md"
 ---
 
 Die Laufzeitrekonfiguration gehört zu den schwierigsten und fehleranfälligsten Funktionen eines verteilten Systems, insbesondere eines konsensbasierten Systems wie etcd.

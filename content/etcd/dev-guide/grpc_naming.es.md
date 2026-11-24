@@ -3,7 +3,7 @@ title: Resolución de nombres y descubrimiento con gRPC
 weight: 3500
 description: "go-grpc: para resolver endpoints gRPC con un backend etcd"
 categories: [Tarea]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/grpc_naming.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/grpc_naming.md"
 ---
 
 etcd proporciona un resolvedor gRPC para admitir un sistema de nombres alternativo que obtiene de etcd los endpoints para descubrir servicios gRPC. El mecanismo subyacente se basa en observar las actualizaciones de las claves con el prefijo del nombre del servicio.

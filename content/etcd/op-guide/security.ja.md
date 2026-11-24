@@ -3,7 +3,7 @@ title: "通信のセキュリティーモデル"
 weight: 4125
 description: "通信中のデータの保護"
 categories: [タスク]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/security.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/security.md"
 ---
 
 etcdは、クライアントとサーバーの通信、およびピア間（サーバー間／クラスター内）の通信の両方で、自動TLSとクライアント証明書による認証に対応しています。**etcdは、データベースを使い始める際の負担を減らすため、[RBACによる認証][auth]も通信層の認証機能も、デフォルトでは有効にしません。また、このデフォルトは2013年のプロジェクト発足以来のもので、変更すると互換性を損ないます。セキュリティー機能を有効にしていないetcdクラスターは、あらゆるクライアントにデータを公開してしまう可能性があります。**

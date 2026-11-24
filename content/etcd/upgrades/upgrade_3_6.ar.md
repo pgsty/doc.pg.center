@@ -3,7 +3,7 @@ title: ترقية etcd من v3.5 إلى v3.6
 weight: 6600
 description: "العمليات وقوائم التحقق والملاحظات المتعلقة بترقية etcd من v3.5 إلى v3.6"
 categories: [مهمة]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/upgrades/upgrade_3_6.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/upgrades/upgrade_3_6.md"
 ---
 
 في الحالة العامة، يمكن أن تكون الترقية من etcd v3.5 إلى v3.6 ترقية متدرجة دون أي توقف:

@@ -3,7 +3,7 @@ title: لماذا استخدام بوابة gRPC
 weight: 3375
 description: لماذا ينبغي لك التفكير في استخدام بوابة gRPC
 categories: [مفهوم]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/dev-guide/api_grpc_gateway.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/dev-guide/api_grpc_gateway.md"
 ---
 
 يستخدم etcd v3 بروتوكول [gRPC][grpc] لتبادل الرسائل. يتضمن مشروع etcd عميل [Go][go-client] مبنيًا على gRPC وأداة سطر أوامر، [etcdctl][etcdctl]، للتواصل مع عنقود etcd عبر gRPC. أما بالنسبة للغات التي لا تدعم gRPC، فيوفر etcd [بوابة gRPC][grpc-gateway] تعمل بصيغة JSON. تعمل هذه البوابة كوكيل RESTful يترجم طلبات HTTP/JSON إلى رسائل gRPC.

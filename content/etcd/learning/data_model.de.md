@@ -3,7 +3,7 @@ title: Datenmodell
 weight: 2125
 description: Verfahren zur Datenspeicherung in etcd
 categories: [Konzept]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/data_model.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/data_model.md"
 ---
 
 etcd ist darauf ausgelegt, selten aktualisierte Daten zuverlässig zu speichern und zuverlässige Watch-Abfragen bereitzustellen. etcd macht frühere Versionen von Schlüssel-Wert-Paaren zugänglich, um kostengünstige Snapshots und die Beobachtung historischer Ereignisse zu ermöglichen („Zeitreiseabfragen“). Ein persistentes Datenmodell mit Mehrversions-Nebenläufigkeitskontrolle eignet sich gut für diese Anwendungsfälle.

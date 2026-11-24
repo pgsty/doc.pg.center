@@ -3,7 +3,7 @@ title: etcd API
 weight: 2625
 description: Visión general del diseño central de la API de etcd
 categories: [Concepto]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/learning/api.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/learning/api.md"
 ---
 
 Este documento pretende ofrecer una visión general del diseño central de las API de etcd v3.
@@ -17,11 +17,13 @@ Un listado completo de todas las RPC de etcd está documentado en markdown en el
 Cada solicitud de API enviada a un servidor etcd es una llamada a procedimiento remoto gRPC. Las RPC en etcd se clasifican según su funcionalidad en servicios.
 
 Los servicios importantes para trabajar con el espacio de claves de etcd incluyen:
+
 * KV - Crea, actualiza, obtiene y elimina pares clave-valor.
 * Watch - Observa los cambios en las claves.
 * Lease - Primitivas para consumir los mensajes keep-alive de los clientes.
 
 Los servicios que gestionan el propio clúster incluyen:
+
 * Auth - Mecanismo de autenticación basado en roles para autenticar usuarios.
 * Cluster - Proporciona información de pertenencia y utilidades de configuración.
 * Maintenance - Toma instantáneas de recuperación, desfragmenta el almacén y devuelve información de estado por miembro.
@@ -50,16 +52,16 @@ message ResponseHeader {
 }
 ```
 
-* Cluster_ID - el ID del clúster que genera la respuesta.
-* Member_ID - el ID del miembro que genera la respuesta.
-* Revision - la revisión del almacén clave-valor al generar la respuesta.
-* Raft_Term - el término de Raft del miembro al generar la respuesta.
+* `cluster_id` - el ID del clúster que genera la respuesta.
+* `member_id` - el ID del miembro que genera la respuesta.
+* `revision` - la revisión del almacén clave-valor al generar la respuesta.
+* `raft_term` - el término de Raft del miembro al generar la respuesta.
 
-Una aplicación puede leer el campo `Cluster_ID` o `Member_ID` para asegurarse de que se comunica con el clúster (miembro) previsto.
+Una aplicación puede leer el campo `cluster_id` o `member_id` para asegurarse de que se comunica con el clúster (miembro) previsto.
 
-Las aplicaciones pueden usar el campo `Revision` para conocer la última revisión del almacén clave-valor. Esto es especialmente útil cuando las aplicaciones especifican una revisión histórica para hacer una `time travel query` y desean conocer la última revisión en el momento de la solicitud.
+Las aplicaciones pueden usar el campo `revision` para conocer la última revisión del almacén clave-valor. Esto es especialmente útil cuando las aplicaciones especifican una revisión histórica para hacer una `time travel query` y desean conocer la última revisión en el momento de la solicitud.
 
-Las aplicaciones pueden usar `Raft_Term` para detectar cuándo el clúster completa una nueva elección de líder.
+Las aplicaciones pueden usar `raft_term` para detectar cuándo el clúster completa una nueva elección de líder.
 
 ## API clave-valor {#key-value-api}
 
@@ -82,12 +84,12 @@ message KeyValue {
 }
 ```
 
-* Key - clave en bytes. No se permite una clave vacía.
-* Value - valor en bytes.
-* Version - la versión de la clave. Una eliminación restablece la versión a cero y cualquier modificación de la clave incrementa su versión.
-* Create_Revision - revisión de la última creación de la clave.
-* Mod_Revision - revisión de la última modificación de la clave.
-* Lease - el ID de la concesión adjunta a la clave. Si lease es 0, no hay ninguna concesión adjunta a la clave.
+* `key` - clave en bytes. No se permite una clave vacía.
+* `value` - valor en bytes.
+* `version` - la versión de la clave. Una eliminación restablece la versión a cero y cualquier modificación de la clave incrementa su versión.
+* `create_revision` - revisión de la última creación de la clave.
+* `mod_revision` - revisión de la última modificación de la clave.
+* `lease` - el ID de la concesión adjunta a la clave. Si lease es 0, no hay ninguna concesión adjunta a la clave.
 
 
 Además de la clave y el valor, etcd adjunta metadatos de revisión adicionales como parte del mensaje de la clave. Esta información de revisión ordena las claves por su momento de creación y modificación, lo cual es útil para gestionar la concurrencia en la sincronización distribuida. Los [bloqueos compartidos distribuidos][locks] del cliente de etcd usan la revisión de creación para esperar la propiedad del bloqueo. De forma similar, la revisión de modificación se usa para detectar los conflictos del conjunto de lectura de la [memoria transaccional de software][STM] y para esperar las actualizaciones de la [elección de líder][elections].
@@ -102,9 +104,9 @@ Las revisiones se vuelven más valiosas al considerar el backend de [control de 
 
 El modelo de datos de etcd indexa todas las claves en un espacio de claves binario plano. Esto difiere de otros sistemas de almacén clave-valor que usan un sistema jerárquico de organización de claves en directorios. En lugar de listar las claves por directorio, las claves se listan por intervalos de claves `[a, b)`.
 
-Estos intervalos se denominan a menudo «rangos» en etcd. Las operaciones sobre rangos son más potentes que las operaciones sobre directorios. Igual que un almacén jerárquico, los intervalos permiten búsquedas de clave única mediante `[a, a+1)` (por ejemplo, ['a', 'a\x00') busca 'a') y búsquedas por directorio codificando las claves por su profundidad de directorio. Además de esas operaciones, los intervalos también pueden codificar prefijos; por ejemplo, el intervalo `['a', 'b')` busca todas las claves que tienen por prefijo la cadena 'a'.
+Estos intervalos se denominan a menudo «rangos» en etcd. Las operaciones sobre rangos son más potentes que las operaciones sobre directorios. Igual que un almacén jerárquico, los intervalos permiten búsquedas de clave única mediante `[a, a+1)` (por ejemplo, `['a', 'a\x00')` busca `'a'`) y búsquedas por directorio codificando las claves por su profundidad de directorio. Además de esas operaciones, los intervalos también pueden codificar prefijos; por ejemplo, el intervalo `['a', 'b')` busca todas las claves que tienen por prefijo la cadena 'a'.
 
-Por convención, los rangos de una solicitud se denotan con los campos `key` y `range_end`. El campo `key` es la primera clave del rango y debe ser no vacío. El `range_end` es la clave siguiente a la última clave del rango. Si `range_end` no se proporciona o está vacío, el rango se define para contener solo la clave del argumento. Si `range_end` es `key` más uno (por ejemplo, "aa"+1 == "ab", "a\xff"+1 == "b"), entonces el rango representa todas las claves que tienen por prefijo la clave. Si tanto `key` como `range_end` son '\0', el rango representa todas las claves. Si `range_end` es '\0', el rango son todas las claves mayores o iguales que la clave del argumento.
+Por convención, los rangos de una solicitud se denotan con los campos `key` y `range_end`. El campo `key` es la primera clave del rango y debe ser no vacío. El `range_end` es la clave siguiente a la última clave del rango. Si `range_end` no se proporciona o está vacío, el rango se define para contener solo la clave del argumento. Si `range_end` es `key` más uno (por ejemplo, `"aa"+1 == "ab"`, `"a\xff"+1 == "b"`), entonces el rango representa todas las claves que tienen por prefijo la clave. Si tanto `key` como `range_end` son `'\0'`, el rango representa todas las claves. Si `range_end` es `'\0'`, el rango son todas las claves mayores o iguales que la clave del argumento.
 
 ### Range {#range}
 
@@ -141,18 +143,18 @@ message RangeRequest {
 }
 ```
 
-* Key, Range_End - El rango de claves a obtener.
-* Limit - el número máximo de claves devueltas para la solicitud. Cuando limit se establece en 0, se trata como sin límite.
-* Revision - el punto temporal del almacén clave-valor que se usará para el rango. Si revision es menor o igual que cero, el rango se hace sobre el almacén clave-valor más reciente. Si la revisión está compactada, se devuelve ErrCompacted como respuesta.
-* Sort_Order - el orden para las solicitudes ordenadas.
-* Sort_Target - el campo clave-valor por el que ordenar.
-* Serializable - establece que la solicitud de rango use lecturas serializables locales al miembro. Por defecto, Range es linealizable; refleja el consenso actual del clúster. Para obtener mejor rendimiento y disponibilidad, a cambio de posibles lecturas obsoletas, una solicitud de rango serializable se atiende localmente sin necesidad de alcanzar consenso con los otros nodos del clúster.
-* Keys_Only - devuelve solo las claves y no los valores.
-* Count_Only - devuelve solo el número de claves del rango.
-* Min_Mod_Revision - el límite inferior para las revisiones de modificación de las claves; excluye las revisiones de modificación menores.
-* Max_Mod_Revision - el límite superior para las revisiones de modificación de las claves; excluye las revisiones de modificación mayores.
-* Min_Create_Revision - el límite inferior para las revisiones de creación de las claves; excluye las revisiones de creación menores.
-* Max_Create_Revision - el límite superior para las revisiones de creación de las claves; excluye las revisiones de creación mayores.
+* `key`, `range_end` - El rango de claves a obtener.
+* `limit` - el número máximo de claves devueltas para la solicitud. Cuando limit se establece en 0, se trata como sin límite.
+* `revision` - el punto temporal del almacén clave-valor que se usará para el rango. Si revision es menor o igual que cero, el rango se hace sobre el almacén clave-valor más reciente. Si la revisión está compactada, se devuelve `ErrCompacted` como respuesta.
+* `sort_order` - el orden para las solicitudes ordenadas.
+* `sort_target` - el campo clave-valor por el que ordenar.
+* `serializable` - establece que la solicitud de rango use lecturas serializables locales al miembro. Por defecto, Range es linealizable; refleja el consenso actual del clúster. Para obtener mejor rendimiento y disponibilidad, a cambio de posibles lecturas obsoletas, una solicitud de rango serializable se atiende localmente sin necesidad de alcanzar consenso con los otros nodos del clúster.
+* `keys_only` - devuelve solo las claves y no los valores.
+* `count_only` - devuelve solo el número de claves del rango.
+* `min_mod_revision` - el límite inferior para las revisiones de modificación de las claves devueltas; todas las claves con revisiones de modificación menores se filtran.
+* `max_mod_revision` - el límite superior para las revisiones de modificación de las claves; todas las claves con revisiones de modificación mayores se filtran.
+* `min_create_revision` - el límite inferior para las revisiones de creación de las claves devueltas; todas las claves con revisiones de creación menores se filtran.
+* `max_create_revision` - el límite superior para las revisiones de creación de las claves; todas las claves con revisiones de creación mayores se filtran.
 
 El cliente recibe un mensaje `RangeResponse` de la llamada `Range`:
 
@@ -165,9 +167,9 @@ message RangeResponse {
 }
 ```
 
-* Kvs - la lista de pares clave-valor que coinciden con la solicitud de rango. Cuando se establece `Count_Only`, `Kvs` está vacío.
-* More - indica si hay más claves que devolver en el rango solicitado si se establece `limit`.
-* Count - el número total de claves que satisfacen la solicitud de rango.
+* `kvs` - la lista de pares clave-valor que coinciden con la solicitud de rango. Cuando se establece `count_only`, `kvs` está vacío.
+* `more` - indica si hay más claves que devolver en el rango solicitado.
+* `count` - el número real de claves dentro del rango cuando la solicitud lo pide. A diferencia de `kvs`, no se ve afectado por los límites ni por los filtros (p. ej. Min/Max, Create/Modify, Revisions) y refleja el recuento completo dentro del rango especificado.
 
 Para rangos de claves grandes donde almacenar en búfer la respuesta completa no sea deseable, consulta [RangeStream](#rangestream).
 
@@ -185,8 +187,8 @@ message RangeStreamResponse {
 
 Relleno de los campos entre fragmentos:
 
-* Kvs - cada fragmento lleva una porción disjunta del resultado. Concatenar los `kvs` de cada fragmento en el orden en que llegan produce el mismo conjunto de claves que una única llamada `Range`.
-* Header, More, Count - se rellenan solo en el fragmento final, y solo cuando el flujo termina sin error. Los fragmentos anteriores dejan estos campos con valor cero. Aplicar `proto.Merge` sobre el `range_response` de cada fragmento produce un `RangeResponse` equivalente a lo que `Range` habría devuelto.
+* `kvs` - cada fragmento lleva una porción disjunta del resultado. Concatenar los `kvs` de cada fragmento en el orden en que llegan produce el mismo conjunto de claves que una única llamada `Range`.
+* `header`, `more`, `count` - se rellenan solo en el fragmento final, y solo cuando el flujo termina sin error. Los fragmentos anteriores dejan estos campos con valor cero. Aplicar `proto.Merge` sobre el `range_response` de cada fragmento produce un `RangeResponse` equivalente a lo que `Range` habría devuelto.
 
 Si el flujo termina con error, ningún fragmento lleva un `header`, `more` o `count` válidos.
 
@@ -214,12 +216,12 @@ message PutRequest {
 }
 ```
 
-* Key - el nombre de la clave a poner en el almacén clave-valor.
-* Value - el valor, en bytes, que asociar a la clave en el almacén clave-valor.
-* Lease - el ID de la concesión que asociar a la clave en el almacén clave-valor. Un valor de lease de 0 indica que no hay concesión.
-* Prev_Kv - cuando se establece, responde con los datos del par clave-valor previos a la actualización de esta solicitud `Put`.
-* Ignore_Value - cuando se establece, actualiza la clave sin cambiar su valor actual. Devuelve un error si la clave no existe.
-* Ignore_Lease - cuando se establece, actualiza la clave sin cambiar su concesión actual. Devuelve un error si la clave no existe.
+* `key` - el nombre de la clave a poner en el almacén clave-valor.
+* `value` - el valor, en bytes, que asociar a la clave en el almacén clave-valor.
+* `lease` - el ID de la concesión que asociar a la clave en el almacén clave-valor. Un valor de lease de 0 indica que no hay concesión.
+* `prev_kv` - cuando se establece, etcd obtiene el par clave-valor anterior antes de cambiarlo. El par clave-valor anterior se devuelve en la respuesta del put.
+* `ignore_value` - cuando se establece, actualiza la clave usando su valor actual. Devuelve un error si la clave no existe.
+* `ignore_lease` - cuando se establece, etcd actualiza la clave usando su concesión actual. Devuelve un error si la clave no existe.
 
 El cliente recibe un mensaje `PutResponse` de la llamada `Put`:
 
@@ -230,7 +232,7 @@ message PutResponse {
 }
 ```
 
-* Prev_Kv - el par clave-valor sobrescrito por `Put`, si `Prev_Kv` se estableció en el `PutRequest`.
+* `prev_kv` - si en la solicitud se establece `prev_kv`, se devuelve el par clave-valor anterior.
 
 ### Eliminar un rango {#delete-range}
 
@@ -244,8 +246,8 @@ message DeleteRangeRequest {
 }
 ```
 
-* Key, Range_End - El rango de claves a eliminar.
-* Prev_Kv - cuando se establece, devuelve el contenido de los pares clave-valor eliminados.
+* `key` - la primera clave a eliminar en el rango.
+* `range_end` - la clave siguiente a la última clave a eliminar para el rango `[key, range_end)`.
 
 El cliente recibe un mensaje `DeleteRangeResponse` de la llamada `DeleteRange`:
 
@@ -257,8 +259,8 @@ message DeleteRangeResponse {
 }
 ```
 
-* Deleted - número de claves eliminadas.
-* Prev_Kv - una lista de todos los pares clave-valor eliminados por la operación `DeleteRange`.
+* `deleted` - número de claves eliminadas por la solicitud de eliminación de rango.
+* `prev_kvs` - los pares clave-valor anteriores, devueltos cuando en la solicitud se establece `prev_kv`.
 
 ### Transacción {#transaction}
 
@@ -298,10 +300,10 @@ message Compare {
 }
 ```
 
-* Result - el tipo de operación de comparación lógica (por ejemplo, igual, menor que, etc.).
-* Target - el campo clave-valor que se va a comparar. Puede ser la versión de la clave, la revisión de creación, la revisión de modificación o el valor.
-* Key - la clave de la comparación.
-* Target_Union - los datos especificados por el usuario para la comparación.
+* `result` - el tipo de operación de comparación lógica (por ejemplo, igual, menor que, etc.).
+* `target` - el campo clave-valor que se va a comparar. Puede ser la versión de la clave, la revisión de creación, la revisión de modificación o el valor.
+* `key` - la clave de la comparación.
+* `target_union` - los datos especificados por el usuario para la comparación.
 
 Tras procesar el bloque de comparación, la transacción aplica un bloque de solicitudes. Un bloque es una lista de mensajes `RequestOp`:
 
@@ -316,9 +318,9 @@ message RequestOp {
 }
 ```
 
-* Request_Range - una `RangeRequest`.
-* Request_Put - una `PutRequest`. Las claves deben ser únicas. No puede compartir claves con ningún otro Put o Delete.
-* Request_Delete_Range - una `DeleteRangeRequest`. No puede compartir claves con ninguna solicitud Put o Delete.
+* `request_range` - una `RangeRequest`.
+* `request_put` - una `PutRequest`. Las claves deben ser únicas. No puede compartir claves con ningún otro Put o Delete.
+* `request_delete_range` - una `DeleteRangeRequest`. No puede compartir claves con ninguna solicitud Put o Delete.
 
 Todo junto, una transacción se emite con una llamada a la API `Txn`, que toma un `TxnRequest`:
 
@@ -330,9 +332,9 @@ message TxnRequest {
 }
 ```
 
-* Compare - Una lista de predicados que representan una conjunción de términos para proteger la transacción.
-* Success - Una lista de solicitudes que procesar si todas las pruebas de comparación se evalúan como true.
-* Failure - Una lista de solicitudes que procesar si alguna prueba de comparación se evalúa como false.
+* `compare` - una lista de predicados que representan una conjunción de términos. Si la comparación tiene éxito, las solicitudes success se procesan en orden y la respuesta contiene sus respuestas respectivas en ese orden.
+* `success` - Una lista de solicitudes que procesar si todas las pruebas de comparación se evalúan como true.
+* `failure` - Una lista de solicitudes que se aplican cuando la comparación se evalúa como false.
 
 El cliente recibe un mensaje `TxnResponse` de la llamada `Txn`:
 
@@ -344,10 +346,8 @@ message TxnResponse {
 }
 ```
 
-* Succeeded - Indica si `Compare` se evaluó como true o false.
-* Responses - Una lista de respuestas correspondientes a los resultados de aplicar el bloque `Success` si succeeded es true, o el bloque `Failure` si succeeded es false.
-
-La lista `Responses` corresponde a los resultados de la lista `RequestOp` aplicada, con cada respuesta codificada como un `ResponseOp`:
+* `succeeded` - true si la comparación se evaluó como true, o false en caso contrario.
+* `responses` - una lista de respuestas correspondientes a los resultados de aplicar success si succeeded es true, o failure si succeeded es false.
 
 ```protobuf
 message ResponseOp {
@@ -383,9 +383,9 @@ message Event {
 }
 ```
 
-* Type - El tipo de evento. Un tipo PUT indica que se han almacenado datos nuevos en la clave. Un tipo DELETE indica que la clave fue eliminada.
-* KV - El KeyValue asociado con el evento. Un evento PUT contiene el par clave-valor actual. Un evento PUT con kv.Version=1 indica la creación de una clave. Un evento DELETE contiene la clave eliminada con su revisión de modificación fijada en la revisión de la eliminación.
-* Prev_KV - El par clave-valor de la clave en la revisión inmediatamente anterior al evento. Para ahorrar ancho de banda, solo se rellena si la observación lo ha activado explícitamente.
+* `type` - El tipo de evento. Un tipo PUT indica que se han almacenado datos nuevos en la clave. Un tipo DELETE indica que la clave fue eliminada.
+* `kv` - El KeyValue asociado con el evento. Un evento PUT contiene el par clave-valor actual. Un evento PUT con kv.Version=1 indica la creación de una clave. Un evento DELETE contiene la clave eliminada con su revisión de modificación fijada en la revisión de la eliminación.
+* `prev_kv` - El par clave-valor de la clave en la revisión inmediatamente anterior al evento. Para ahorrar ancho de banda, solo se rellena si la observación lo ha activado explícitamente.
 
 ### Flujos de observación {#watch-streams}
 
@@ -411,11 +411,11 @@ message WatchCreateRequest {
 }
 ```
 
-* Key, Range_End - El rango de claves a observar.
-* Start_Revision - Una revisión opcional a partir de la cual empezar a observar de forma inclusiva. Si no se proporciona, se transmitirán los eventos posteriores a la revisión de la cabecera de la respuesta de creación de la observación. Todo el historial de eventos disponible puede observarse desde la última revisión de compactación.
-* Progress_Notify - Cuando se establece, la observación recibirá periódicamente una WatchResponse sin eventos, si no hay eventos recientes. Es útil cuando los clientes quieren recuperar una observación desconectada desde una revisión conocida reciente. El servidor etcd decide con qué frecuencia enviar notificaciones según la carga actual del servidor.
-* Filters - Una lista de tipos de eventos que excluir en el lado del servidor.
-* Prev_Kv - Cuando se establece, la observación recibe los datos clave-valor previos a que ocurra el evento. Esto es útil para saber qué datos se han sobrescrito.
+* `key`, `range_end` - El rango de claves a observar.
+* `start_revision` - Una revisión opcional a partir de la cual empezar a observar de forma inclusiva. Si no se proporciona, se transmitirán los eventos posteriores a la revisión de la cabecera de la respuesta de creación de la observación. Todo el historial de eventos disponible puede observarse desde la última revisión de compactación.
+* `progress_notify` - Cuando se establece, la observación recibirá periódicamente una WatchResponse sin eventos, si no hay eventos recientes. Es útil cuando los clientes quieren recuperar una observación desconectada desde una revisión conocida reciente. El servidor etcd decide con qué frecuencia enviar notificaciones según la carga actual del servidor.
+* `filters` - Una lista de tipos de eventos que excluir en el lado del servidor.
+* `prev_kv` - Cuando se establece, la observación recibe los datos clave-valor previos a que ocurra el evento. Esto es útil para saber qué datos se han sobrescrito.
 
 En respuesta a un `WatchCreateRequest`, o si hay un evento nuevo para alguna observación establecida, el cliente recibe un `WatchResponse`:
 
@@ -431,11 +431,11 @@ message WatchResponse {
 }
 ```
 
-* Watch_ID - el ID de la observación a la que corresponde la respuesta.
-* Created - se establece a true si la respuesta corresponde a una solicitud de creación de observación. El cliente debería almacenar el ID y esperar recibir eventos para esa observación en el flujo. Todos los eventos enviados a la observación creada tendrán el mismo watch_id.
-* Canceled - se establece a true si la respuesta corresponde a una solicitud de cancelación de observación. No se enviarán más eventos a la observación cancelada.
-* Compact_Revision - se establece a la mínima revisión histórica disponible en etcd si una observación intenta observar en una revisión compactada. Esto ocurre al crear una observación en una revisión compactada o cuando la observación no puede seguir el progreso del almacén clave-valor. La observación será cancelada; crear observaciones nuevas con la misma start_revision fallará.
-* Events - una lista de eventos nuevos en secuencia correspondiente al ID de observación dado.
+* `watch_id` - el ID de la observación a la que corresponde la respuesta.
+* `created` - se establece a true si la respuesta corresponde a una solicitud de creación de observación. El cliente debería almacenar el ID y esperar recibir eventos para esa observación en el flujo. Todos los eventos enviados a la observación creada tendrán el mismo watch_id.
+* `canceled` - se establece a true si la respuesta corresponde a una solicitud de cancelación de observación. No se enviarán más eventos a la observación cancelada.
+* `compact_revision` - se establece a la mínima revisión histórica disponible en etcd si una observación intenta observar en una revisión compactada. Esto ocurre al crear una observación en una revisión compactada o cuando la observación no puede seguir el progreso del almacén clave-valor. La observación será cancelada; crear observaciones nuevas con la misma start_revision fallará.
+* `events` - una lista de eventos nuevos en secuencia correspondiente al ID de observación dado.
 
 Si el cliente desea dejar de recibir eventos para una observación, emite un `WatchCancelRequest`:
 
@@ -445,7 +445,7 @@ message WatchCancelRequest {
 }
 ```
 
-* Watch_ID - el ID de la observación a cancelar para que no se transmitan más eventos.
+* `watch_id` - el ID de la observación a cancelar para que no se transmitan más eventos.
 
 ## API de concesiones {#lease-api}
 
@@ -464,8 +464,8 @@ message LeaseGrantRequest {
 }
 ```
 
-* TTL - el tiempo de vida orientativo, en segundos.
-* ID - el ID solicitado para la concesión. Si ID se establece en 0, etcd elegirá un ID.
+* `TTL` - el tiempo de vida orientativo, en segundos.
+* `ID` - el ID solicitado para la concesión. Si ID se establece en 0, etcd elegirá un ID.
 
 El cliente recibe un `LeaseGrantResponse` de la llamada `LeaseGrant`:
 
@@ -477,8 +477,8 @@ message LeaseGrantResponse {
 }
 ```
 
-* ID - el ID de la concesión de la concesión otorgada.
-* TTL - es el tiempo de vida, en segundos, seleccionado por el servidor para la concesión.
+* `ID` - el ID de la concesión de la concesión otorgada.
+* `TTL` - es el tiempo de vida, en segundos, seleccionado por el servidor para la concesión.
 
 ```protobuf
 message LeaseRevokeRequest {
@@ -486,7 +486,7 @@ message LeaseRevokeRequest {
 }
 ```
 
-* ID - el ID de la concesión a revocar. Cuando se revoca la concesión, todas las claves adjuntas se eliminan.
+* `ID` - el ID de la concesión a revocar. Cuando se revoca la concesión, todas las claves adjuntas se eliminan.
 
 ### Renovación de concesiones {#keep-alives}
 
@@ -498,7 +498,7 @@ message LeaseKeepAliveRequest {
 }
 ```
 
-* ID - el ID de la concesión que se debe mantener viva.
+* `ID` - el ID de la concesión que se debe mantener viva.
 
 El flujo de keep alive responde con un `LeaseKeepAliveResponse`:
 
@@ -510,8 +510,8 @@ message LeaseKeepAliveResponse {
 }
 ```
 
-* ID - la concesión que fue renovada con un nuevo TTL.
-* TTL - el nuevo tiempo de vida, en segundos, que le queda a la concesión.
+* `ID` - la concesión que fue renovada con un nuevo TTL.
+* `TTL` - el nuevo tiempo de vida, en segundos, que le queda a la concesión.
 
 [watch-api-guarantees]: /es/etcd/learning/api_guarantees/#watch-apis
 [elections]: https://github.com/etcd-io/etcd/blob/main/client/v3/concurrency/election.go

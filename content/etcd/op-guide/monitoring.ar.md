@@ -3,7 +3,7 @@ title: مراقبة etcd
 weight: 4500
 description: "مراقبة etcd لصحة النظام وتنقيح أخطاء العنقود"
 categories: [مهمة]
-upstream_link: "https://github.com/etcd-io/website/blob/d20f8ae346da60ab6eb6f24f200753b328aa9fcc/content/en/docs/v3.7/op-guide/monitoring.md"
+upstream_link: "https://github.com/etcd-io/website/blob/e60635a46b57b7d74ca80c52c59aa0d37bed01a8/content/en/docs/v3.7/op-guide/monitoring.md"
 ---
 
 يوفر كل خادم etcd معلومات مراقبة محلية على منفذ العميل الخاص به عبر نقاط نهاية http. وتكون بيانات المراقبة هذه مفيدة لفحص صحة النظام ولتنقيح أخطاء العنقود في آن واحد.
