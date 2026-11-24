@@ -6173,12 +6173,12 @@
       "effective_commit": "4a83a0712149e101a2bbb38934bed36497cdf40f",
       "effective_source": "app/services/articleService.ts",
       "status": "generated-upstream",
-      "target_sha256": "76f9665cda9325c9ffd4de45e72585ca5dfb627c2d5a3f8b0d7e2072a7368bfe",
+      "target_sha256": "269bc30915d3c74e9369a7b757e091f941b14a9096e08398ee1ab4b21288fdf8",
       "translation": {
         "target": "content/documentdb/getting-started/docker.zh.md",
         "route": "/zh/documentdb/getting-started/docker/",
-        "sha256": "81850922a985073c9ce5227ab2f335469de86d371a4339d6408916c4ff753f06",
-        "source_sha256": "76f9665cda9325c9ffd4de45e72585ca5dfb627c2d5a3f8b0d7e2072a7368bfe",
+        "sha256": "cf821b854f2a0ad0ddfd1ba0744cb565d463675fc4cfc8246518e71b5bd5d792",
+        "source_sha256": "269bc30915d3c74e9369a7b757e091f941b14a9096e08398ee1ab4b21288fdf8",
         "status": "reviewed",
         "review_scope": "2026-11-21 English changes and Chinese context; three-pass self-review"
       }
@@ -6196,12 +6196,12 @@
       "status": "generated-upstream",
       "additional_source": "app/docs/[section]/[[...slug]]/page.tsx",
       "additional_source_sha256": "4dce383fcc23c1d92b9f1ec74529c5a45bc7283b0d3c34e45d0653fa499cc8cb",
-      "target_sha256": "5aed49740c028b5ccda27893899406fbddcb15dc763fec62bb4933dbc2e96553",
+      "target_sha256": "d0e9e3323a57515f870e3c22009f1154996f28a7c85679a79c42fdf7afc6804a",
       "translation": {
         "target": "content/documentdb/getting-started/_index.zh.md",
         "route": "/zh/documentdb/getting-started/",
-        "sha256": "00b0aa1e05f79997d7f6ea84330b952a344fbc959f50f3040a24816a2fe909ce",
-        "source_sha256": "5aed49740c028b5ccda27893899406fbddcb15dc763fec62bb4933dbc2e96553",
+        "sha256": "e801f58e34662d275b04c24dedf79b843aa75d80dfe913e01aa4c7ad84f8cd73",
+        "source_sha256": "d0e9e3323a57515f870e3c22009f1154996f28a7c85679a79c42fdf7afc6804a",
         "status": "reviewed",
         "review_scope": "2026-11-07 reviewed prose retained; English body unchanged; 2026-11-21 provenance synchronization"
       }
@@ -6217,12 +6217,12 @@
       "effective_commit": "4a83a0712149e101a2bbb38934bed36497cdf40f",
       "effective_source": "app/services/articleService.ts",
       "status": "generated-upstream",
-      "target_sha256": "e6dff4c62d25c9ac88ec183577be6488cbc4be6b6e51647174399bf7ccffdd76",
+      "target_sha256": "5e7542e6b1167eddb377f20cbe48d39b8e09d77a659876c45755cd7f0eb9e2e0",
       "translation": {
         "target": "content/documentdb/getting-started/mongo-shell-quickstart.zh.md",
         "route": "/zh/documentdb/getting-started/mongo-shell-quickstart/",
-        "sha256": "905343d81a81235a524044b5331fbae50f7278fe4f96a6ee77884416ad05a995",
-        "source_sha256": "e6dff4c62d25c9ac88ec183577be6488cbc4be6b6e51647174399bf7ccffdd76",
+        "sha256": "c71115f37edd52cf56da2d6806e25c3e11547b2a4f68c116a6a1c5f754830b53",
+        "source_sha256": "5e7542e6b1167eddb377f20cbe48d39b8e09d77a659876c45755cd7f0eb9e2e0",
         "status": "reviewed",
         "review_scope": "2026-11-07 reviewed prose retained; English body unchanged; 2026-11-21 provenance synchronization"
       }
@@ -6238,12 +6238,12 @@
       "effective_commit": "4a83a0712149e101a2bbb38934bed36497cdf40f",
       "effective_source": "app/services/articleService.ts",
       "status": "generated-upstream",
-      "target_sha256": "b0c3559174816316f353ecf93604c11c8af455a95fb2f68d9a75bd2cd1bd1afd",
+      "target_sha256": "c8889ff807efe20e3fd5297c1a1c599c30e60426b45da407be641a583965dd07",
       "translation": {
         "target": "content/documentdb/getting-started/nodejs-setup.zh.md",
         "route": "/zh/documentdb/getting-started/nodejs-setup/",
-        "sha256": "9f71d2a83963d6d6d5271400afbb87b5b965282ad255e08bdd41387c049ea3cd",
-        "source_sha256": "b0c3559174816316f353ecf93604c11c8af455a95fb2f68d9a75bd2cd1bd1afd",
+        "sha256": "32fb879505b221d4598d91a791064207c23db364fb06582b70f0d8b414910f16",
+        "source_sha256": "c8889ff807efe20e3fd5297c1a1c599c30e60426b45da407be641a583965dd07",
         "status": "reviewed",
         "review_scope": "2026-11-07 reviewed prose retained; English body unchanged; 2026-11-21 provenance synchronization"
       }
@@ -6301,12 +6301,12 @@
       "effective_commit": "4a83a0712149e101a2bbb38934bed36497cdf40f",
       "effective_source": "app/services/articleService.ts",
       "status": "generated-upstream",
-      "target_sha256": "331db9bcd2d84e1ac96151b3d4168baddbb9acf3be6103da249070a30222d9ea",
+      "target_sha256": "560f4028f0a2f88ea79af152df196fc2e8cd48fb8a520aea4b481d1e13d5c98f",
       "translation": {
         "target": "content/documentdb/getting-started/python-setup.zh.md",
         "route": "/zh/documentdb/getting-started/python-setup/",
-        "sha256": "04d3b531f0799c0e42ae5fdc1412070a922bff49b9e5ec1f5735e66f11ab078a",
-        "source_sha256": "331db9bcd2d84e1ac96151b3d4168baddbb9acf3be6103da249070a30222d9ea",
+        "sha256": "f3a533dbacbb23955aee5e6abeafd7bc9bd9c11740a45401af25aea5543bce2b",
+        "source_sha256": "560f4028f0a2f88ea79af152df196fc2e8cd48fb8a520aea4b481d1e13d5c98f",
         "status": "reviewed",
         "review_scope": "2026-11-07 reviewed prose retained; English body unchanged; 2026-11-21 provenance synchronization"
       }
@@ -6406,12 +6406,12 @@
       "effective_commit": "4a83a0712149e101a2bbb38934bed36497cdf40f",
       "effective_source": "app/services/articleService.ts",
       "status": "generated-upstream",
-      "target_sha256": "acdfb613c2071ce66cffb161b647cfa69c4699c919abeb4651f0aed6aaff2893",
+      "target_sha256": "ed2104c72f3e9929a123f51fffa2c469adaad01b12843689ef93e709d516510d",
       "translation": {
         "target": "content/documentdb/getting-started/vscode-quickstart.zh.md",
         "route": "/zh/documentdb/getting-started/vscode-quickstart/",
-        "sha256": "a104d530fecb25ba7a5c55a44ed4657aaf45eddc286fe1e20f543f35f9fc35d7",
-        "source_sha256": "acdfb613c2071ce66cffb161b647cfa69c4699c919abeb4651f0aed6aaff2893",
+        "sha256": "547dd1cc059933d335eb3638012e7d8f410f7e0827fb62854d15bf276db03315",
+        "source_sha256": "ed2104c72f3e9929a123f51fffa2c469adaad01b12843689ef93e709d516510d",
         "status": "reviewed",
         "review_scope": "2026-11-07 reviewed prose retained; English body unchanged; 2026-11-21 provenance synchronization"
       }

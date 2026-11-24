@@ -6,7 +6,7 @@ upstream_source: documentdb-20261121
 upstream_link: https://github.com/documentdb/documentdb.github.io/blob/4a83a0712149e101a2bbb38934bed36497cdf40f/app/services/articleService.ts
 upstream_ref: website 4a83a07; DocumentDB 1.2.0
 weight: 10
-translation_source_sha256: 5aed49740c028b5ccda27893899406fbddcb15dc763fec62bb4933dbc2e96553
+translation_source_sha256: d0e9e3323a57515f870e3c22009f1154996f28a7c85679a79c42fdf7afc6804a
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 
@@ -27,7 +27,7 @@ translation_review: AI-assisted bilingual review; 2026-11-07
    ```
 
    > [!NOTE]
-   > DocumentDB Local 镜像默认发送使用情况遥测数据。若要关闭，请在镜像名称前添加 `-e DOCUMENTDB_USAGE_TELEMETRY=false`。参见[使用情况遥测](/documentdb/documentdb-local/#usage-telemetry)和[隐私声明](https://github.com/documentdb/documentdb/blob/v1.0-0/documentdb-local/PRIVACY.md)。
+   > DocumentDB Local 镜像默认发送使用情况遥测数据。若要关闭，请在镜像名称前添加 `-e DOCUMENTDB_USAGE_TELEMETRY=false`。参见[使用情况遥测](/documentdb/documentdb-local/#usage-telemetry)和[隐私声明](https://github.com/documentdb/documentdb/blob/v1.2-0/documentdb-local/PRIVACY.md)。
 
    等到 `docker logs documentdb` 中出现就绪提示后再连接。参见 [Docker 快速入门](/documentdb/getting-started/docker/)。
 
@@ -130,7 +130,7 @@ db.orders.find({ item: "widget" })
 - 使用 Linux 软件包时，检查 `sudo documentdb-setup --status`，并参见[软件包故障排查](/documentdb/getting-started/packages/#troubleshooting)。默认的 PostgreSQL 18 安装使用 `documentdb-local@18.target`，而不是元软件包的别名。
 - 使用 Docker 时，通过 `docker ps` 确认容器正在运行，且端口 `10260` 已映射到主机。通过 `docker logs documentdb` 检查启动、认证和 TLS 错误。
 - 若要验证证书，而不使用 `tlsAllowInvalidCertificates=true` 跳过验证，请按 Linux 软件包的[证书配置步骤](/documentdb/linux-packages/#before-exposing-it-to-a-network)操作；Docker 用户请参见 [DocumentDB Local](/documentdb/documentdb-local/)。
-- 如需更详细的 Docker 诊断信息，请使用 `-e DOCUMENTDB_LOG_LEVEL=debug` 重新创建 DocumentDB Local（`--log-level` 选项目前不生效）。可用的运行时选项见 [DocumentDB Local](/documentdb/documentdb-local/)。
+- 如需更详细的 Docker 诊断信息，请使用 `-e DOCUMENTDB_LOG_LEVEL=debug` 或所需的 `--log-level` 值重新创建 DocumentDB Local。可用的运行时选项见 [DocumentDB Local](/documentdb/documentdb-local/)。
 - 要更换安装方式，请打开 [Docker 安装](https://documentdb.io/packages?method=docker)或 [Linux 软件包安装](https://documentdb.io/packages?method=packages)页面。
 
 

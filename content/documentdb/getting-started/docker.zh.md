@@ -6,7 +6,7 @@ upstream_source: documentdb-20261121
 upstream_link: https://github.com/documentdb/documentdb.github.io/blob/4a83a0712149e101a2bbb38934bed36497cdf40f/app/services/articleService.ts
 upstream_ref: website 4a83a07; DocumentDB 1.2.0
 weight: 20
-translation_source_sha256: 76f9665cda9325c9ffd4de45e72585ca5dfb627c2d5a3f8b0d7e2072a7368bfe
+translation_source_sha256: 269bc30915d3c74e9369a7b757e091f941b14a9096e08398ee1ab4b21288fdf8
 translation_review: AI-assisted incremental bilingual self-review (fidelity, terminology, Chinese prose); 2026-11-21
 ---
 
@@ -40,7 +40,7 @@ docker run -dt --name documentdb \
 ```
 
 > [!NOTE]
-> DocumentDB Local 镜像默认发送使用情况遥测数据。若要关闭，请在镜像名称前添加 `-e DOCUMENTDB_USAGE_TELEMETRY=false`。参见[使用情况遥测](/documentdb/documentdb-local/#usage-telemetry)和[隐私声明](https://github.com/documentdb/documentdb/blob/v1.0-0/documentdb-local/PRIVACY.md)。
+> DocumentDB Local 镜像默认发送使用情况遥测数据。若要关闭，请在镜像名称前添加 `-e DOCUMENTDB_USAGE_TELEMETRY=false`。参见[使用情况遥测](/documentdb/documentdb-local/#usage-telemetry)和[隐私声明](https://github.com/documentdb/documentdb/blob/v1.2-0/documentdb-local/PRIVACY.md)。
 
 > 将 `<YOUR_USERNAME>` 和 `<YOUR_PASSWORD>` 替换为自己的凭据。
 >
@@ -136,7 +136,7 @@ docker pull ghcr.io/documentdb/documentdb/documentdb-local:latest
 
 - 确认端口 `10260` 可用，且 `docker ps` 显示容器正在运行
 - 使用 `docker logs documentdb` 检查启动、认证和 TLS 错误
-- 如需更详细的网关日志，请使用 `-e DOCUMENTDB_LOG_LEVEL=debug` 重新创建容器。启动时会校验 `--log-level` 选项，但该选项目前不会改变容器的日志内容；环境变量则在执行 `docker run` 时确定。`docker restart` 无法改变这两者。
+- 如需更详细的网关日志，请使用 `-e DOCUMENTDB_LOG_LEVEL=debug` 或所需的 `--log-level` 值重新创建容器。`--log-level` 设置网关日志详细程度；`DOCUMENTDB_LOG_LEVEL` 和 `RUST_LOG` 可以覆盖它。环境变量在执行 `docker run` 时确定，`docker restart` 无法改变。
 - 若客户端需要验证 TLS 证书，请按 [DocumentDB Local](/documentdb/documentdb-local/) 中的证书配置流程操作
 - 更完整的 shell 操作示例见 [Mongo Shell 快速入门](/documentdb/getting-started/mongo-shell-quickstart/)
 

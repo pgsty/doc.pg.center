@@ -38,7 +38,7 @@ docker run -dt --name documentdb \
 ```
 
 > [!NOTE]
-> The DocumentDB Local image sends usage telemetry by default. To turn it off, add `-e DOCUMENTDB_USAGE_TELEMETRY=false` before the image name. See [Usage telemetry](/documentdb/documentdb-local/#usage-telemetry) and the [privacy statement](https://github.com/documentdb/documentdb/blob/v1.0-0/documentdb-local/PRIVACY.md).
+> The DocumentDB Local image sends usage telemetry by default. To turn it off, add `-e DOCUMENTDB_USAGE_TELEMETRY=false` before the image name. See [Usage telemetry](/documentdb/documentdb-local/#usage-telemetry) and the [privacy statement](https://github.com/documentdb/documentdb/blob/v1.2-0/documentdb-local/PRIVACY.md).
 
 > Replace `<YOUR_USERNAME>` and `<YOUR_PASSWORD>` with your own credentials.
 >
@@ -150,7 +150,7 @@ If something does not work as expected:
 
 - Confirm port `10260` is available and that `docker ps` shows the container running
 - Inspect startup, authentication, and TLS errors with `docker logs documentdb`
-- For more gateway detail, re-create the container with `-e DOCUMENTDB_LOG_LEVEL=debug`. The `--log-level` flag is validated at startup but does not currently change what the container logs, and environment variables are fixed at `docker run` — `docker restart` cannot change either.
+- For more gateway detail, re-create the container with `-e DOCUMENTDB_LOG_LEVEL=debug` or the desired `--log-level` value. `--log-level` sets the gateway's log verbosity; `DOCUMENTDB_LOG_LEVEL` and `RUST_LOG` can override it, and environment variables are fixed at `docker run` — `docker restart` cannot change them.
 - Use the certificate flow in [DocumentDB Local](/documentdb/documentdb-local/) if your client should validate TLS certificates
 - Use [Mongo Shell Quick Start](/documentdb/getting-started/mongo-shell-quickstart/) for a fuller shell walkthrough
 

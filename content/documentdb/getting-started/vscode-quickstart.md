@@ -68,7 +68,7 @@ docker run -dt --pull always --name documentdb \
 ```
 
 > [!NOTE]
-> The DocumentDB Local image sends usage telemetry by default. To turn it off, add `-e DOCUMENTDB_USAGE_TELEMETRY=false` before the image name. See [Usage telemetry](/documentdb/documentdb-local/#usage-telemetry) and the [privacy statement](https://github.com/documentdb/documentdb/blob/v1.0-0/documentdb-local/PRIVACY.md).
+> The DocumentDB Local image sends usage telemetry by default. To turn it off, add `-e DOCUMENTDB_USAGE_TELEMETRY=false` before the image name. See [Usage telemetry](/documentdb/documentdb-local/#usage-telemetry) and the [privacy statement](https://github.com/documentdb/documentdb/blob/v1.2-0/documentdb-local/PRIVACY.md).
 
 If you prefer a host installation instead of Docker, use the [Linux Packages Quick Start](/documentdb/getting-started/packages/) on a distribution in the current release matrix.
 

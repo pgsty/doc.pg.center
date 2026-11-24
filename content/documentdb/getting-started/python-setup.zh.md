@@ -6,7 +6,7 @@ upstream_source: documentdb-20261121
 upstream_link: https://github.com/documentdb/documentdb.github.io/blob/4a83a0712149e101a2bbb38934bed36497cdf40f/app/services/articleService.ts
 upstream_ref: website 4a83a07; DocumentDB 1.2.0
 weight: 60
-translation_source_sha256: 331db9bcd2d84e1ac96151b3d4168baddbb9acf3be6103da249070a30222d9ea
+translation_source_sha256: 560f4028f0a2f88ea79af152df196fc2e8cd48fb8a520aea4b481d1e13d5c98f
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 
@@ -60,7 +60,7 @@ docker run -dt --pull always --name documentdb \
 ```
 
 > [!NOTE]
-> DocumentDB Local 镜像默认发送使用情况遥测数据。若要关闭，请在镜像名称前添加 `-e DOCUMENTDB_USAGE_TELEMETRY=false`。参见[使用情况遥测](/documentdb/documentdb-local/#usage-telemetry)和[隐私声明](https://github.com/documentdb/documentdb/blob/v1.0-0/documentdb-local/PRIVACY.md)。
+> DocumentDB Local 镜像默认发送使用情况遥测数据。若要关闭，请在镜像名称前添加 `-e DOCUMENTDB_USAGE_TELEMETRY=false`。参见[使用情况遥测](/documentdb/documentdb-local/#usage-telemetry)和[隐私声明](https://github.com/documentdb/documentdb/blob/v1.2-0/documentdb-local/PRIVACY.md)。
 
 等到 `docker logs documentdb` 中出现就绪提示后再连接，参见 [Docker 快速入门](/documentdb/getting-started/docker/#verify-the-container)。
 

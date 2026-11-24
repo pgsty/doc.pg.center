@@ -6,7 +6,7 @@ upstream_source: documentdb-20261121
 upstream_link: https://github.com/documentdb/documentdb.github.io/blob/4a83a0712149e101a2bbb38934bed36497cdf40f/app/services/articleService.ts
 upstream_ref: website 4a83a07; DocumentDB 1.2.0
 weight: 40
-translation_source_sha256: acdfb613c2071ce66cffb161b647cfa69c4699c919abeb4651f0aed6aaff2893
+translation_source_sha256: ed2104c72f3e9929a123f51fffa2c469adaad01b12843689ef93e709d516510d
 translation_review: AI-assisted bilingual review; 2026-11-07
 ---
 
@@ -69,7 +69,7 @@ docker run -dt --pull always --name documentdb \
 ```
 
 > [!NOTE]
-> DocumentDB Local 镜像默认发送使用情况遥测数据。若要关闭，请在镜像名称前添加 `-e DOCUMENTDB_USAGE_TELEMETRY=false`。参见[使用情况遥测](/documentdb/documentdb-local/#usage-telemetry)和[隐私声明](https://github.com/documentdb/documentdb/blob/v1.0-0/documentdb-local/PRIVACY.md)。
+> DocumentDB Local 镜像默认发送使用情况遥测数据。若要关闭，请在镜像名称前添加 `-e DOCUMENTDB_USAGE_TELEMETRY=false`。参见[使用情况遥测](/documentdb/documentdb-local/#usage-telemetry)和[隐私声明](https://github.com/documentdb/documentdb/blob/v1.2-0/documentdb-local/PRIVACY.md)。
 
 若要直接安装到主机，而不使用 Docker，请在当前版本支持的发行版上按 [Linux 软件包快速入门](/documentdb/getting-started/packages/)操作。
 

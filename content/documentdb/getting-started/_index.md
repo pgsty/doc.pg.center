@@ -33,7 +33,7 @@ and read a document using a shell, driver, or editor.
    > The DocumentDB Local image sends usage telemetry by default. To turn it off,
    > add `-e DOCUMENTDB_USAGE_TELEMETRY=false` before the image name. See
    > [Usage telemetry](/documentdb/documentdb-local/#usage-telemetry) and the
-   > [privacy statement](https://github.com/documentdb/documentdb/blob/v1.0-0/documentdb-local/PRIVACY.md).
+   > [privacy statement](https://github.com/documentdb/documentdb/blob/v1.2-0/documentdb-local/PRIVACY.md).
 
    Wait for the readiness banner in `docker logs documentdb` before connecting.
    See the [Docker Quick Start](/documentdb/getting-started/docker/).
@@ -146,7 +146,7 @@ If setup does not work on the first try:
 - For Linux packages, check `sudo documentdb-setup --status` and [package troubleshooting](/documentdb/getting-started/packages/#troubleshooting). The default PostgreSQL 18 install uses `documentdb-local@18.target`, not the meta-package alias.
 - For Docker, confirm the container is running and port `10260` is published with `docker ps`. Inspect startup, authentication, and TLS errors with `docker logs documentdb`.
 - If you want certificate validation instead of `tlsAllowInvalidCertificates=true`, follow the Linux package [certificate steps](/documentdb/linux-packages/#before-exposing-it-to-a-network) or [DocumentDB Local](/documentdb/documentdb-local/) for Docker.
-- For more verbose Docker diagnostics, re-create DocumentDB Local with `-e DOCUMENTDB_LOG_LEVEL=debug` (the `--log-level` flag is currently a no-op); the available runtime options are documented in [DocumentDB Local](/documentdb/documentdb-local/).
+- For more verbose Docker diagnostics, re-create DocumentDB Local with `-e DOCUMENTDB_LOG_LEVEL=debug` or the desired `--log-level` value; the available runtime options are documented in [DocumentDB Local](/documentdb/documentdb-local/).
 - To change your installation choice, open [Docker installation](https://documentdb.io/packages?method=docker) or [Linux packages installation](https://documentdb.io/packages?method=packages).
 
 
