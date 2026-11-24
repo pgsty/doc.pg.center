@@ -29,7 +29,7 @@ The machine-readable [source manifest](/agensgraph/assets/source-manifest.json) 
 
 - The Hugo / Oink shell, visual design, navigation, search, footer, and landing data are original site work.
 - English manual pages are converted to Oink Markdown routes, with relative links rewritten to local routes and upstream source links retained in front matter.
-- This collection publishes English and the available Chinese pages. Chinese drafts retain their status; unfinished guide-only pages link to the English source and are excluded from translation coverage. Code, query keywords, product names, and version identifiers are preserved.
+- All 113 English pages have Chinese counterparts. The community translated the backup guide, upgrade walkthrough, and sixteen Cypher clause references against the maintained English edition. Code, query keywords, product names and versions retain their original spelling.
 - Blog posts are PGSTY editorial summaries based on named upstream pages; they are not presented as SKAI Worldwide announcements.
 
 ## Upstream notice {#upstream-notice}
