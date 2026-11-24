@@ -199,6 +199,13 @@ ivorysql:
     page for scope.
 babelfish:
   name: Babelfish project website
+  repository: https://github.com/babelfish-for-postgresql/babelfish_project_website
+  source_commit: f468c5ed3d38849502ee924cb3e236357404d14d
+  oss_release:
+    url: https://github.com/babelfish-for-postgresql/babelfish-for-postgresql/releases/tag/BABEL_6_1_0__PG_18_4
+    commit: 86c24eb51382e04e7b8bed4422a60e2f6b5476c0
+    extension_ref: BABEL_6_1_0
+    extension_commit: 462668e806c9d33857cbe749ed185a7be9be42e5
   copyright: Copyright Babelfish for PostgreSQL Contributors
   license: LicenseRef-Babelfish-Website
   notice: /attribution/#babelfish

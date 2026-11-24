@@ -29,6 +29,6 @@ Install Babelfish, choose a migration mode, assess compatibility, then connect y
 
 ## Release channels {#release-channels}
 
-As of November 21, 2026, the latest public GitHub release of the [Babelfish open-source extensions](https://github.com/babelfish-for-postgresql/babelfish_extensions/releases) is **6.1.0**. [Babelfish 6.2.0 for Amazon Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraBabelfish.Updates.html), announced on September 29, is a separate distribution and release channel. The preserved website manual is not a version-matched reference for either channel; use the release notes for the binaries you deploy.
+The Babelfish project published [the open-source 6.1.0 release for PostgreSQL 18.4](https://github.com/babelfish-for-postgresql/babelfish-for-postgresql/releases/tag/BABEL_6_1_0__PG_18_4) on November 2, 2026. Its [extension source carries the tag `BABEL_6_1_0`](https://github.com/babelfish-for-postgresql/babelfish_extensions/tree/BABEL_6_1_0). Amazon announced [Babelfish 6.2.0 for Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraBabelfish.Updates.html) on September 29. This manual preserves the earlier project website. Consult the release notes for the distribution you deploy.
 
 New to Babelfish? Begin with the [overview](/babelfish/overview/), [source installation](/babelfish/installation/compiling-babelfish-from-source/), and [migration guide](/babelfish/usage/migration/).

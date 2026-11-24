@@ -32,6 +32,6 @@ outputs:
 
 ## 发布渠道 {#release-channels}
 
-截至 2026 年 11 月 21 日，[Babelfish 开源扩展](https://github.com/babelfish-for-postgresql/babelfish_extensions/releases)在 GitHub 上的最新公开发布版本为 **6.1.0**。[适用于 Amazon Aurora PostgreSQL 的 Babelfish 6.2.0](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraBabelfish.Updates.html)于 9 月 29 日公布，属于另一个发行版和发布渠道。本站保留的网站手册并非与上述任一渠道版本对应的参考文档；请查阅实际部署的二进制软件对应的发行说明。
+Babelfish 项目于 2026 年 11 月 2 日发布了[适用于 PostgreSQL 18.4 的开源版 6.1.0](https://github.com/babelfish-for-postgresql/babelfish-for-postgresql/releases/tag/BABEL_6_1_0__PG_18_4)，对应的[扩展源码标签为 `BABEL_6_1_0`](https://github.com/babelfish-for-postgresql/babelfish_extensions/tree/BABEL_6_1_0)。Amazon 于 9 月 29 日公布了[适用于 Aurora PostgreSQL 的 Babelfish 6.2.0](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraPostgreSQLReleaseNotes/AuroraBabelfish.Updates.html)。本手册保留了项目早期网站的内容。请按实际部署的发行版查阅发行说明。
 
 首次使用建议先阅读[项目概览](/zh/babelfish/overview/)、[源码安装](/zh/babelfish/installation/compiling-babelfish-from-source/)和[迁移指南](/zh/babelfish/usage/migration/)。
