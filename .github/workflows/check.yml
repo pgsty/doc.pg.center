@@ -19,8 +19,7 @@ defaults:
     shell: bash
 
 env:
-  GO_VERSION: 1.27.3
-  HUGO_VERSION: "0.168.0"
+  GO_VERSION: 1.27.4
   # Keep shared assets cached through all eight language builds. Eviction at
   # the runner's default limit can republish them and trigger path warnings.
   HUGO_MEMORYLIMIT: "4"
@@ -40,15 +39,14 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v7
         with:
-          go-version: 1.27.3
+          go-version: 1.27.4
           check-latest: true
           cache: true
 
-      - name: Install Hugo Extended
+      - name: Install Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: ${{ env.HUGO_VERSION }}
-          extended: true
+          hugo-version: latest
 
       - name: Download OINK module
         run: go mod download github.com/pgsty/oink
