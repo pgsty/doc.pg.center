@@ -47,25 +47,25 @@ This command must be executed by a superuser.
 
 ## ARGUMENTS {#arguments}
 
-set_name
+**`set_name`**
 
-    The name of an existing replication set.
+The name of an existing replication set.
 
-replicate_insert
+**`replicate_insert`**
 
-    If true, INSERT operations are replicated; the default is NULL.
+If true, INSERT operations are replicated; the default is NULL.
 
-replicate_update
+**`replicate_update`**
 
-    If true, UPDATE operations are replicated; the default is NULL.
+If true, UPDATE operations are replicated; the default is NULL.
 
-replicate_delete
+**`replicate_delete`**
 
-    If true, DELETE operations are replicated; the default is NULL.
+If true, DELETE operations are replicated; the default is NULL.
 
-replicate_truncate
+**`replicate_truncate`**
 
-    If true, TRUNCATE operations are replicated; the default is NULL.
+If true, TRUNCATE operations are replicated; the default is NULL.
 
 ## EXAMPLE {#example}
 

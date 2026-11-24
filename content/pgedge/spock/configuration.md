@@ -573,6 +573,9 @@ spock.failover_slots_recreate_invalidated = on
 
 ### `spock.failover_slots_database` {#spockfailover_slots_database}
 
+> [!NOTE]
+> The instructions below describe the 6.0.0-beta.2 snapshot. On the 5.0 maintenance branch, `v5.0.15-rc.2` adds connection retries and shortens the worker restart delay to 15 seconds. See the [5.0.15 candidate notes](/pgedge/spock/spock-release-notes/#spock-5015-rc) and its [configuration reference](https://github.com/pgEdge/spock/blob/e710faa6fe21126d898fa660e9b6dc8ed0da9438/docs/configuring.md).
+
 The database the `spock_failover_slots` worker connects to on the standby.
 A synchronized slot copy holds the primary's positions, but not the
 snapshot the primary saved for the slot, which physical replication does

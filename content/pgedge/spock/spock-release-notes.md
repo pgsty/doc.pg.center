@@ -1359,6 +1359,14 @@ as a deadlock or lock timeout.  If the problem never clears, expect the
 worker to restart every `spock.restart_delay_default` (5 seconds by default)
 instead of a disabled subscription or a discarded transaction.
 
+## Spock 5.0.15 release candidate (5.0 branch) {#spock-5015-rc}
+
+pgEdge published [`v5.0.15-rc.2`](https://github.com/pgEdge/spock/releases/tag/v5.0.15-rc.2) on November 23, 2026. The 5.0 branch still lists `v5.0.14` as its latest stable tag. The candidate has no schema changes. Its [release notes](https://github.com/pgEdge/spock/blob/e710faa6fe21126d898fa660e9b6dc8ed0da9438/docs/spock_release_notes.md) describe three fixes for the failover slot worker:
+
+- When the primary is idle, a new slot copy on the standby can now become permanent in the same synchronization pass. The worker waits for the standby to receive the primary slot's `restart_lsn`, then creates the copy at that position. Previously promotion could discard a temporary copy and leave the subscriber without a slot.
+- When the standby cannot decode the WAL for an existing copy, the worker keeps the copy's `restart_lsn` in place until the standby has received the WAL up to the intended position.
+- If `spock.failover_slots_database` is unavailable, slot synchronization continues without the consistent snapshot check. On a standby the worker retries when the database accepts connections. For other connection failures it retries immediately once, then after one minute, doubling the delay up to five minutes. The postmaster restarts an exited worker after 15 seconds, down from 60.
+
 ## Spock 5.0.14 {#spock-5014}
 
 ### Upgrade Notes {#upgrade-notes}

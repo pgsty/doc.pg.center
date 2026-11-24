@@ -564,6 +564,9 @@ FROM dblink(
 
 ### Configure Cross-Node Replication {#configure-cross-node-replication}
 
+> [!NOTE] Edition note on slot ownership
+> A logical slot retains WAL on the node where it is created. The following historical examples connect to n2 and n3. Those slots retain changes on n2 and n3. Before allowing writes on n4, verify the slots on n4 that will serve its subscribers. The examples below do not establish that protection on n4.
+
 Now prepare for replication directing the data flow from n4 to the replica
 nodes (n2, n3):
 

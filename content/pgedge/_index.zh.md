@@ -30,7 +30,7 @@ icon: fa-solid fa-share-nodes
 - [SafeSession](/zh/pgedge/safesession/) — 按角色限制只读会话
 {.cards}
 
-本版英文来源为 Spock v6.0.0-beta.2、LOLOR 1.3.0 开发快照、SafeSession v1.1 和 Snowflake v2.6.1。中文已同步本轮增量，原有初稿仍保留初稿标记。参见[来源与版本](/pgedge/about/attribution/)。
+本版英文来源为 Spock v6.0.0-beta.2、LOLOR 1.3.0 开发快照、SafeSession v1.1 和 Snowflake v2.6.1。全套 118 个英文页面均可切换到中文。参见[来源与版本](/zh/pgedge/about/attribution/)。
 
 ## 开始阅读 {#start}
 

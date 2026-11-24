@@ -43,38 +43,38 @@ This command must be executed by a superuser.
 
 ## ARGUMENTS {#arguments}
 
-node_name
+**`node_name`**
 
-    A unique name for the Spock node.
+A unique name for the Spock node.
 
-dsn
+**`dsn`**
 
-    A PostgreSQL connection string that other nodes will use to
-    connect to this node.
+A PostgreSQL connection string that other nodes will use to
+connect to this node.
 
-location
+**`location`**
 
-    Optional descriptive text indicating the physical or logical
-    location of the node. The default is NULL.
+Optional descriptive text indicating the physical or logical
+location of the node. The default is NULL.
 
-country
+**`country`**
 
-    Optional country code or name associated with the node. The default is 
-    NULL.
+Optional country code or name associated with the node. The default is 
+NULL.
 
-info
+**`info`**
 
-    Optional JSONB field for storing arbitrary metadata about
-    the node.  The default is NULL.
+Optional JSONB field for storing arbitrary metadata about
+the node.  The default is NULL.
 
-    A `tiebreaker` key in this field overrides the node's default
-    last-update-wins tiebreaker (otherwise the node's unique ID). Each
-    node caches this value locally, populated once when it first learns
-    about the node. A later change (via `spock.node_alter`, the
-    recommended way, or a raw `UPDATE`) propagates automatically to every
-    direct subscriber. `spock.node_refresh_info` updates a node that missed
-    the change -- see the Tiebreaker section in conflict_types.md for
-    details.
+A `tiebreaker` key in this field overrides the node's default
+last-update-wins tiebreaker (otherwise the node's unique ID). Each
+node caches this value locally, populated once when it first learns
+about the node. A later change (via `spock.node_alter`, the
+recommended way, or a raw `UPDATE`) propagates automatically to every
+direct subscriber. `spock.node_refresh_info` updates a node that missed
+the change -- see the Tiebreaker section in conflict_types.md for
+details.
 
 ## EXAMPLE {#example}
 

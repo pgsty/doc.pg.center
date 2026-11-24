@@ -8,7 +8,7 @@ upstream_modified: true
 upstream_ref: d05e2e2b6a82
 source_kind: pinned-release-tag
 linkTitle: 使用限制
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -26,7 +26,7 @@ Spock 有若干限制和约束；用户在设计并实现复制场景时应了�
 
 `UNLOGGED` 和 `TEMPORARY` 表不会被复制，也不能被复制，这与物理流复制类似。
 
-## 一次一个数据库 {#one-database-at-a-time}
+## 每个数据库单独配置 {#one-database-at-a-time}
 
 要复制多个数据库，必须为每个数据库分别建立提供者或订阅者关系。无法一次性为 PostgreSQL 安装中的所有数据库配置复制。
 
@@ -39,17 +39,17 @@ KEY` 或其他有效复制标识（例如使用索引）的表，`UPDATE` 和 `D
 
 ## 只能有唯一索引、唯一约束或 PK 中的一个 {#only-one-unique-index-or-constraint-or-pk}
 
-如果配置了多个上游，或者下游接受本地写入，下游被复制表上只应存在一个 `UNIQUE` 索引。冲突解析一次只能使用一个索引；因此，如果某行满足 `PRIMARY KEY` 但违反下游侧的 `UNIQUE` 约束，冲突行可能产生 `ERROR`。
+如果配置了多个上游，或者下游接受本地写入，下游被复制表上只应存在一个 `UNIQUE` 索引。冲突解决一次只能使用一个索引；因此，如果某行满足 `PRIMARY KEY` 但违反下游侧的 `UNIQUE` 约束，冲突行可能产生 `ERROR`。
 
 如果下游消费者只从某个上游接收写入，而不从任何其他来源接收写入，上游可以拥有额外的唯一约束。规则是，下游约束不得比上游约束更严格。
 
-允许使用部分二级唯一索引，但冲突解析会忽略它们。
+允许使用部分二级唯一索引，但冲突解决会忽略它们。
 
-`spock.check_all_uc_indexes` 是一个实验性 [GUC](/zh/pgedge/spock/configuration/)，允许 Spock 考虑所有唯一约束，而不仅仅是主键或复制标识，从而增加 `INSERT` 冲突解析能力。
+`spock.check_all_uc_indexes` 是一个实验性 [GUC](/zh/pgedge/spock/configuration/)，允许 Spock 考虑所有唯一约束，而不仅仅是主键或复制标识，从而增加 `INSERT` 冲突解决能力。
 
 ## 唯一约束不能是可延迟的 {#unique-constraints-must-not-be-deferrable}
 
-在 INSERT 冲突解析期间，可延迟的唯一约束和主键会被静默跳过。这意味着，如果表上唯一的唯一约束是可延迟的，就不会检测到 INSERT 冲突，可能导致订阅者节点上出现重复行。
+在 INSERT 冲突解决期间，可延迟的唯一约束和主键会被静默跳过。这意味着，如果表上唯一的唯一约束是可延迟的，就不会检测到 INSERT 冲突，可能导致订阅者节点上出现重复行。
 
 在下游端，spock 还可能发出以下错误：
 
@@ -61,7 +61,7 @@ DETAIL: relation "public"."test_relation" has deferrable indexes: "index1",
 
 建议：确保所有表至少有一个不可延迟的唯一约束（最好是主键），以便可靠检测冲突。
 
-## 不支持复制队列冲刷 {#no-replication-queue-flush}
+## 无法一次排空复制队列 {#no-replication-queue-flush}
 
 不支持在主节点上冻结事务，并等待所有仍在队列中的事务从槽中重放完成。
 
@@ -71,7 +71,7 @@ DETAIL: relation "public"."test_relation" has deferrable indexes: "index1",
 
 在多主配置中，仅使用 `spock.replicate_ddl` 并不够。提供者提交模式变更之后，订阅者可能仍会以旧结构生成新事务。用户必须确保在进行模式变更之前，所有节点都停止写入，并且所有槽都已追上。
 
-## FOREIGN KEYS {#foreign-keys}
+## 外键 {#foreign-keys}
 
 复制过程不强制执行外键约束——即使会违反 `FOREIGN KEY`，提供者侧成功的内容仍会被应用到订阅者。
 
@@ -103,7 +103,7 @@ SEQUENCE` 或 `ALTER SEQUENCE` 使用 `INCREMENT BY` 选项，并使用 `setval(
 
 ## PostgreSQL 版本差异 {#postgresql-version-differences}
 
-Spock 可以跨 PostgreSQL 主版本复制。尽管如此，长期跨版本复制不被视为设计目标，虽然它往往可以工作。跨版本复制时，更容易出现变更在提供者上有效、在订阅者上无效的问题。
+Spock 支持跨 PostgreSQL 主版本复制，但设计目标并不包括长期跨版本运行。即使通常可以运行，提供方接受的变更在另一版本的订阅方上也更容易出错。
 
 从旧版本复制到新版本更安全，因为 PostgreSQL 保持稳固的向后兼容性，但只有有限的前向兼容性。只有在相同 PostgreSQL 版本之间复制，或从较低版本复制到较高版本时，才支持初始模式同步。
 
@@ -121,7 +121,7 @@ PostgreSQL 的逻辑解码设施不支持解码[大对象](https://www.postgresq
 
 ## Delta-Apply 列要求 {#delta-apply-column-requirements}
 
-配置为 Delta-Apply 冲突解析的列必须有 `NOT NULL` 约束。如果在应用增量期间遇到 NULL 值，应用工作进程会报错：
+配置为 Delta-Apply 冲突解决的列必须有 `NOT NULL` 约束。如果在应用增量期间遇到 NULL 值，应用工作进程会报错：
 
 ```text
 ERROR: delta apply column can't operate NULL values
@@ -147,7 +147,7 @@ Spock 使用自己的 16 位 node_id（由节点名哈希派生）在提交时�
 
 行过滤器是普通 PostgreSQL 表达式，具有与 CHECK 约束相同的限制。
 
-易变函数（如 `random()` 或 `now()`）可以用于行过滤器，但它们在求值时可能产生不同结果，并导致停止复制的错误。请谨慎使用易变函数。
+行过滤器可以调用 `random()` 或 `now()`。`random()` 是易变函数（`VOLATILE`），每次调用都可能返回不同值。`now()` 返回当前事务的开始时间，属于稳定函数（`STABLE`），跨事务仍可能不同。编写过滤条件时应考虑求值时机，避免结果不一致导致复制中断。
 
 ### 行过滤器会话上下文 {#row-filter-session-context}
 
@@ -198,7 +198,7 @@ Spock 使用自己的 16 位 node_id（由节点名哈希派生）在提交时�
 
 ### 禁止直接修改 {#direct-modification-prohibited}
 
-不要直接删除、创建或修改 `spock` 模式中的文件。使用 Spock 函数和过程管理复制。直接修改模式可能损坏复制元数据，并导致复制失败。
+不要直接删除、创建或修改 `spock` 模式中的对象。使用 Spock 函数和过程管理复制。直接修改模式可能损坏复制元数据，并导致复制失败。
 
 ## 只读模式 {#read-only-mode}
 
@@ -206,7 +206,7 @@ Spock 使用自己的 16 位 node_id（由节点名哈希派生）在提交时�
 
 ### 仅在 SQL 层只读 {#read-only-at-sql-level-only}
 
-`spock.readonly` 参数在 SQL 层对非超级用户实施只读限制。但是，后台进程（checkpointer、background writer、WAL writer 和 autovacuum）仍会继续运行，并可能写入磁盘。
+`spock.readonly` 参数在 SQL 层对非超级用户实施只读限制。但是，后台进程（检查点进程、后台写入进程、WAL 写入进程和自动清理进程）仍会继续运行，并可能写入磁盘。
 
 这意味着数据库文件并非真正只读；即使启用只读模式，仍可能发生某些磁盘写入。
 
@@ -224,4 +224,4 @@ Spock 使用自己的 16 位 node_id（由节点名哈希派生）在提交时�
 
 [上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/limitations.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

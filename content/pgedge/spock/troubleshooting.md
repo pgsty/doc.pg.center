@@ -514,8 +514,7 @@ row filters, column filters, and partitioned tables.
 If row filters are causing replication to stop, check for volatile
 functions in the filter expression.
 
-Volatile functions (like `random()` or `now()`) can produce different
-results on evaluation and cause errors.
+`random()` is `VOLATILE` and can return different values on successive calls. `now()` is `STABLE` within a transaction and can differ across transactions. Review when the filter is evaluated.
 
 Replace volatile functions with stable or immutable alternatives, or
 remove them from the filter.

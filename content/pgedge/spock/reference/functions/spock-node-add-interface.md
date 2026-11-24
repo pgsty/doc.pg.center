@@ -44,21 +44,21 @@ This command must be executed by a superuser.
 
 ## ARGUMENTS {#arguments}
 
-node_name
+**`node_name`**
 
-    The name of an existing Spock node.
+The name of an existing Spock node.
 
-interface_name
+**`interface_name`**
 
-    A unique name for this interface on the node.
+A unique name for this interface on the node.
 
-dsn
+**`dsn`**
 
-    A PostgreSQL connection string that other nodes will use to connect to
-    this node. The user in this string should equal the OS user. This
-    connection string should be reachable from outside and match the one used
-    later in the sub-create command. For example: host=10.1.2.5 port=5432
-    user=rocky
+A PostgreSQL connection string that other nodes will use to connect to
+this node. The user in this string should equal the OS user. This
+connection string should be reachable from outside and match the one used
+later in the sub-create command. For example: host=10.1.2.5 port=5432
+user=rocky
 
 ## EXAMPLE {#example}
 

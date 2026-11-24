@@ -52,61 +52,61 @@ This command must be executed by a superuser.
 
 ## ARGUMENTS {#arguments}
 
-subscription_name
+**`subscription_name`**
 
-    A unique name for the subscription. Must be unique across the cluster.
-    This name appears in pg_stat_replication as application_name.
+A unique name for the subscription. Must be unique across the cluster.
+This name appears in pg_stat_replication as application_name.
 
-provider_dsn
+**`provider_dsn`**
 
-    A PostgreSQL connection string specifying how to connect to the
-    provider node.
+A PostgreSQL connection string specifying how to connect to the
+provider node.
 
-replication_sets
+**`replication_sets`**
 
-    An array of replication set names to subscribe to. Accepted values
-    are default, default_insert_only, ddl_sql.
+An array of replication set names to subscribe to. Accepted values
+are default, default_insert_only, ddl_sql.
 
-synchronize_structure
+**`synchronize_structure`**
 
-    If true, synchronize table and schema structure from the provider
-    before starting replication. Default is false.
+If true, synchronize table and schema structure from the provider
+before starting replication. Default is false.
 
-synchronize_data
+**`synchronize_data`**
 
-    If true, perform an initial data copy for all tables in the subscribed
-    replication sets. Default is false.
+If true, perform an initial data copy for all tables in the subscribed
+replication sets. Default is false.
 
-forward_origins
+**`forward_origins`**
 
-    Controls which changes to replicate based on their origin. Use '{}' to
-    only replicate changes originating locally on the provider node (origin ID 0,
-    i.e. not already replicated in from another node — useful for bidirectional
-    replication to avoid forwarding changes in a loop). Use {all} to replicate all
-    changes regardless of origin. The default is `{}` (local-origin changes only).
+Controls which changes to replicate based on their origin. Use '{}' to
+only replicate changes originating locally on the provider node (origin ID 0,
+i.e. not already replicated in from another node — useful for bidirectional
+replication to avoid forwarding changes in a loop). Use {all} to replicate all
+changes regardless of origin. The default is `{}` (local-origin changes only).
 
-    See [Origin Forwarding](/pgedge/spock/reference/sub-mgmt/#origin-forwarding) for the
-    restriction on combining this with other enabled subscriptions.
+See [Origin Forwarding](/pgedge/spock/reference/sub-mgmt/#origin-forwarding) for the
+restriction on combining this with other enabled subscriptions.
 
-apply_delay
+**`apply_delay`**
 
-    An interval specifying how long to delay applying changes from the
-    provider. Useful for delayed standby scenarios. Default is '0'.
+An interval specifying how long to delay applying changes from the
+provider. Useful for delayed standby scenarios. Default is '0'.
 
-force_text_transfer
+**`force_text_transfer`**
 
-    If true, replicate all columns using text representation. This is
-    slower but allows type conversions on the subscriber. Default is false.
+If true, replicate all columns using text representation. This is
+slower but allows type conversions on the subscriber. Default is false.
 
-enabled
+**`enabled`**
 
-    If true, the subscription is enabled immediately. If false, the
-    subscription is created but not activated. Default is true.
+If true, the subscription is enabled immediately. If false, the
+subscription is created but not activated. Default is true.
 
-skip_schema
+**`skip_schema`**
 
-    An array of schema names to exclude from structure and data
-    synchronization. Default is '{}' (no schemas skipped).
+An array of schema names to exclude from structure and data
+synchronization. Default is '{}' (no schemas skipped).
 
 ## EXAMPLE {#example}
 

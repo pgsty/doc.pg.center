@@ -7,7 +7,7 @@ upstream_link: https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574a
 upstream_modified: true
 upstream_ref: 1548836b0df0
 source_kind: pinned-main-snapshot
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -29,7 +29,7 @@ make USE_PGXS=1
 make USE_PGXS=1 install
 ```
 
-lolor 必须在服务器启动时加载。将其加入 `shared_preload_libraries`，该设置位于 `postgresql.conf`，然后重启；当库按需加载时，`CREATE EXTENSION lolor`、`LOAD 'lolor'` 以及任何会触达 lolor 函数的调用都会以 `lolor must be loaded via "shared_preload_libraries"` 失败；lolor 未安装或禁用时，原生 `pg_catalog.lo_*` 函数不受影响。删除扩展时保护大对象的防护机制是对象访问钩子，只有库被预加载时它才会存在于每个 backend。
+lolor 必须随服务器启动加载。请将它加入 `postgresql.conf` 中的 `shared_preload_libraries`，然后重启服务器。如果按需加载库，`CREATE EXTENSION lolor`、`LOAD 'lolor'` 以及任何调用 lolor 函数的操作都会报错 `lolor must be loaded via "shared_preload_libraries"`。未安装或已禁用 lolor 时，原生 `pg_catalog.lo_*` 函数不受影响。删除扩展时，lolor 依靠对象访问钩子保护大对象。只有预加载此库，才能保证每个后端进程都安装了该钩子。
 
 ```
 shared_preload_libraries = 'lolor'
@@ -49,7 +49,7 @@ CREATE EXTENSION lolor;
 lolor.node = 1
 ```
 
-也可以修改 `search_path`，以从 `lolor` schema 选取大对象相关表：
+还可以修改 `search_path`，从 `lolor` 模式查找大对象相关的表。
 
 ```
 SET search_path=lolor,"$user",public,pg_catalog
@@ -70,4 +70,4 @@ SELECT spock.repset_add_table('default', 'lolor.pg_largeobject_description');
 
 [上游原文](https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/docs/install_configure.md) · `1548836b0df0` · Copyright (c) 2024–2026, pgEdge, Inc. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

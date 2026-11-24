@@ -7,7 +7,7 @@ upstream_link: https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d
 upstream_modified: true
 upstream_ref: d05e2e2b6a82
 source_kind: pinned-release-tag
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -40,13 +40,16 @@ acctg=# SELECT id, snowflake.format(id), customer, invoice FROM orders;
 (4 rows)
 ```
 
+> [!NOTE] 示例的版本差异
+> 表格保留了上游的输出。按 v2.6.1 的位布局，表中两个较大的 ID 均来自节点 `0`，计数器均为 `1`。[Snowflake 函数](/zh/pgedge/snowflake/snowflake-functions/)
+
 ## Snowflake 序列结构 {#snowflake-sequence-structure}
 
 与传统 PostgreSQL 序列不同，Snowflake 序列由时间戳、计数器和唯一节点标识符组成；该结构确保可提供超过 18 万亿个唯一序列号。Snowflake 序列提供以下能力：
 
-- Snowflake 序列让你可以在不同区域添加或修改数据，同时确保事务序列唯一。
-- Snowflake 序列保留唯一事务标识符，无需人工管理编号方案。
-- Snowflake 序列准确识别全局分布式事务的执行顺序。
+- 位于不同区域的节点可以独立分配 ID，用于新增或修改数据。
+- 各节点使用唯一节点号即可保持 ID 唯一，无需手工分配编号区间。
+- ID 内含生成时的时间戳，可用来比较生成时间。跨节点时钟偏差和事务提交时机都会影响顺序，不能从 ID 推断全局提交顺序。
 
 在内部，Snowflake 序列是 64 位整数，对外表示为 `bigint` 值。这 64 位划分为以下位段：
 
@@ -55,10 +58,10 @@ acctg=# SELECT id, snowflake.format(id), customer, invoice FROM orders;
 - Bits 12–21 存储唯一的 pgEdge Distributed Postgres 节点号。
 - Bits 0–11 存储一毫秒内的计数器。
 
-时间戳是 41 位无符号值，表示毫秒精度，epoch 为 2023-01-01。计数器是 12 位无符号值，每次分配 ID 时递增；这提供每毫秒 4096 个唯一 ID，即每秒 400 万个 ID。节点号是全局集群内 PostgreSQL 实例的 10 位唯一标识符；该值通过 `snowflake.node` GUC 在 `postgresql.conf` 文件中设置。
+时间戳是 41 位无符号值，表示自 2023-01-01 起经过的毫秒数。计数器是 12 位无符号值，每次分配 ID 时递增；每个节点每毫秒可分配 4096 个唯一 ID，约合每秒 400 万个。节点号是全局集群内 PostgreSQL 实例的 10 位唯一标识符；该值通过 `snowflake.node` GUC 在 `postgresql.conf` 文件中设置。
 
 ---
 
 [上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/managing/snowflake.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

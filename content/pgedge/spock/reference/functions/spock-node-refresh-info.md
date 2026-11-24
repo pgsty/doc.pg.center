@@ -63,10 +63,10 @@ This command must be executed by a superuser.
 
 ## ARGUMENTS {#arguments}
 
-p_node_name
+**`p_node_name`**
 
-    Optional. The name of a single peer node to refresh. If omitted (or
-    NULL), every node other than the local one is refreshed.
+Optional. The name of a single peer node to refresh. If omitted (or
+NULL), every node other than the local one is refreshed.
 
 ## EXAMPLE {#example}
 

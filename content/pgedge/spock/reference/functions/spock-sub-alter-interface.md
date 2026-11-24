@@ -46,13 +46,13 @@ This command must be executed by a superuser.
 
 ## ARGUMENTS {#arguments}
 
-subscription_name
+**`subscription_name`**
 
-    The name of an existing subscription.
+The name of an existing subscription.
 
-interface_name
+**`interface_name`**
 
-    The name of an existing interface on the provider node.
+The name of an existing interface on the provider node.
 
 ## EXAMPLE {#example}
 

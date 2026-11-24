@@ -53,6 +53,9 @@ acctg=# SELECT id, snowflake.format(id), customer, invoice FROM orders;
 (4 rows)
 ```
 
+> [!NOTE] Version of the example
+> The table preserves upstream output. With the v2.6.1 bit layout, the two larger IDs both encode node `0` and count `1`. [Snowflake functions](/pgedge/snowflake/snowflake-functions/)
+
 ## Snowflake Sequence Structure {#snowflake-sequence-structure}
 
 Unlike Postgres sequences, a Snowflake sequence consists of a
@@ -64,8 +67,7 @@ provide the following capabilities:
   while ensuring a unique transaction sequence.
 - A Snowflake sequence preserves unique transaction identifiers without
   manual administrative management of a numbering scheme.
-- A Snowflake sequence accurately identifies the order in which
-  globally distributed transactions are performed.
+- A Snowflake sequence lets you compare ID generation times across nodes. Clock skew and the interval between ID generation and commit can affect the observed order.
 
 Internally, Snowflake sequences are 64-bit integers represented
 externally as `bigint` values. The 64 bits divide into the following

@@ -48,36 +48,42 @@ reached `replicating` status.
 
 ## ARGUMENTS {#arguments}
 
-subscription_name
+**`subscription_name`**
 
-    The name of an existing subscription.
+The name of an existing subscription.
 
-options
+**`options`**
 
-    A JSON object whose keys are the option names to change. Unrecognised
-    keys raise an error. Supported keys:
+A JSON object whose keys are the option names to change. Unrecognised
+keys raise an error. Supported keys:
 
-    forward_origins
 
-        A JSON array of origin names whose transactions the subscriber
-        should apply or receive based on their origin. The only accepted
-        element is the string "all". Pass an empty array ([]) to disable
-        origin forwarding.
+**`forward_origins`**
 
-        See [Origin Forwarding](/pgedge/spock/reference/sub-mgmt/#origin-forwarding) for the
-        restriction on combining this with other enabled subscriptions.
 
-    apply_delay
+A JSON array of origin names whose transactions the subscriber
+should apply or receive based on their origin. The only accepted
+element is the string "all". Pass an empty array ([]) to disable
+origin forwarding.
 
-        A PostgreSQL interval string (e.g. "2 seconds", "500ms", "0")
-        that sets how long the apply worker waits before applying each
-        transaction. The value must be a string; passing a bare number
-        raises an error.
+See [Origin Forwarding](/pgedge/spock/reference/sub-mgmt/#origin-forwarding) for the
+restriction on combining this with other enabled subscriptions.
 
-    skip_schema
 
-        A JSON array of schema names to exclude from apply. Pass an
-        empty array ([]) to clear the exclusion list.
+**`apply_delay`**
+
+
+A PostgreSQL interval string (e.g. "2 seconds", "500ms", "0")
+that sets how long the apply worker waits before applying each
+transaction. The value must be a string; passing a bare number
+raises an error.
+
+
+**`skip_schema`**
+
+
+A JSON array of schema names to exclude from apply. Pass an
+empty array ([]) to clear the exclusion list.
 
 ## EXAMPLE {#example}
 

@@ -17,7 +17,11 @@ sidebar_root_menu: false
 
 
 > [!NOTE] Source version
-> The English source is **1.3.0 development snapshot; latest stable tag v1.2.3**, pinned at `1548836b0df0`. The Chinese edition includes the reviewed incremental updates; unchanged draft material still awaits review. Check [versions and sources](/pgedge/about/attribution/) before deploying.
+> The English source is **1.3.0 development snapshot; latest stable tag v1.2.3**, pinned at `1548836b0df0`. A Chinese edition of this snapshot is available. Check [versions and sources](/pgedge/about/attribution/) before deploying.
+
+> [!NOTE] Removal in the 1.3.0 development snapshot
+> On a normal drop, the event trigger checks replication and stored objects, then calls `lolor.disable()` if needed to restore the native function names. The object-access hook rejects removal if those names are still parked. Migrate the objects back to native storage before dropping the extension. [Pinned implementation](https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/src/lolor.c#L982-L1060)
+
 
 
 [lolor](https://github.com/pgEdge/lolor) is an extension that makes Postgres-style large objects compatible with logical Replication.

@@ -17,6 +17,10 @@ type: docs
 > [!NOTE] Unreleased development version
 > These notes describe pinned `main` development. The latest stable tag checked on November 21, 2026 remains `v1.2.3`.
 
+
+> [!NOTE] Removal in the 1.3.0 development snapshot
+> On a normal drop, the event trigger checks replication and stored objects, then calls `lolor.disable()` if needed to restore the native function names. The object-access hook rejects removal if those names are still parked. Migrate the objects back to native storage before dropping the extension. [Pinned implementation](https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/src/lolor.c#L982-L1060)
+
 * Add bidirectional large object migration between native PostgreSQL and lolor storage, implemented as a direct relation-to-relation copy in C (`lolor.migrate_storage()`) rather than a loop through the large object API:
   * `lolor.migrate_from_native(peer_oids oid[] DEFAULT NULL)` moves native large objects into lolor storage. It is a manual step after `CREATE EXTENSION lolor`, requires superuser, and returns the number of objects moved or -1 if the migration was refused.
   * `lolor.migrate_to_native()` moves them back, whether or not lolor is enabled. It is a manual step before dropping the extension; the drop is refused while any object remains in lolor storage and no longer migrates anything itself.

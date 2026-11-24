@@ -7,7 +7,7 @@ upstream_link: https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d
 upstream_modified: true
 upstream_ref: d05e2e2b6a82
 source_kind: pinned-release-tag
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -28,7 +28,7 @@ ALTER SYSTEM SET spock.allow_ddl_from_functions=off;
 SELECT pg_reload_conf();
 ```
 
-你可以使用事件触发器设施描述为新建表定义复制集的规则。例如：
+可以用事件触发器定义新建表应当加入哪个复制集。例如：
 
 ```sql
     CREATE OR REPLACE FUNCTION spock_assign_repset()
@@ -60,4 +60,4 @@ SELECT pg_reload_conf();
 
 [上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/managing/repset_trigger.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

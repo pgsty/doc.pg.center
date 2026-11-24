@@ -23,10 +23,10 @@ spock.repset_add_seq (
 
 ## RETURNS {#returns}
 
-    - true if the sequence was successfully added to the replication set.
-    - Raises an ERROR if the sequence is already a member of the
-      replication set, or if the call has invalid parameters or
-      insufficient privileges.
+- true if the sequence was successfully added to the replication set.
+- Raises an ERROR if the sequence is already a member of the
+  replication set, or if the call has invalid parameters or
+  insufficient privileges.
 
 ## DESCRIPTION {#description}
 
@@ -46,19 +46,19 @@ This command must be executed by a superuser.
 
 ## ARGUMENTS {#arguments}
 
-set_name
+**`set_name`**
 
-    The name of an existing replication set.
+The name of an existing replication set.
 
-relation
+**`relation`**
 
-    The sequence to add, specified as a regclass
-    (for example, 'public.my_sequence').
+The sequence to add, specified as a regclass
+(for example, 'public.my_sequence').
 
-synchronize_data
+**`synchronize_data`**
 
-    If true, the current sequence value is synchronized to
-    all subscribers. The default is false.
+If true, the current sequence value is synchronized to
+all subscribers. The default is false.
 
 ## EXAMPLE {#example}
 

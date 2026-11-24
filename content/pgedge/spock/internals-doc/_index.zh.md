@@ -8,8 +8,8 @@ type: docs
 ---
 
 
-本栏目可先阅读英文原文；已有中文译文的页面直接链接译文。
+本节收录以下文档。
 
-- [Design decisions（英文）](/pgedge/spock/internals-doc/design/)
-- [spock Output Plugin（英文）](/pgedge/spock/internals-doc/output/)
-- [Spock Protocol（英文）](/pgedge/spock/internals-doc/protocol/)
+- [设计决策](/zh/pgedge/spock/internals-doc/design/)
+- [Spock 输出插件](/zh/pgedge/spock/internals-doc/output/)
+- [Spock 协议](/zh/pgedge/spock/internals-doc/protocol/)

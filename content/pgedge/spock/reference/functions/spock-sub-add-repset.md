@@ -47,13 +47,13 @@ This command must be executed by a superuser.
 
 ## ARGUMENTS {#arguments}
 
-subscription_name
+**`subscription_name`**
 
-    The name of an existing subscription.
+The name of an existing subscription.
 
-replication_set
+**`replication_set`**
 
-    The name of the replication set to add to the subscription.
+The name of the replication set to add to the subscription.
 
 ## EXAMPLE {#example}
 

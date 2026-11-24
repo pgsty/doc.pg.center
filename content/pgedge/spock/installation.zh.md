@@ -8,7 +8,7 @@ upstream_modified: true
 upstream_ref: d05e2e2b6a82
 source_kind: pinned-release-tag
 linkTitle: 安装与配置
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -23,7 +23,7 @@ Spock 是开源项目，代码可在 [GitHub](https://github.com/pgEdge) 上审�
 
 > [!WARNING]
 >
-> Spock 使用存储在 `spock` schema 中的文件来提供复制功能。不要直接删除、创建或修改 `spock` schema 中的文件；应使用 Spock 函数和过程管理复制。
+> Spock 使用`spock` 模式中的对象来提供复制功能。不要直接删除、创建或修改 `spock` 模式中的对象；应使用 Spock 函数和过程管理复制。
 >
 
 关于使用 Spock 创建双节点集群的详细信息，请参见[创建双节点集群](/zh/pgedge/spock/two-node/)。
@@ -34,17 +34,17 @@ Spock 是开源项目，代码可在 [GitHub](https://github.com/pgEdge) 上审�
 任何 [pgEdge Enterprise Postgres](https://docs.pgedge.com/enterprise) 安装都会自动附带最新版 Spock 扩展。pgEdge 部署让你可以快速、方便地使用以下特性：
 
 - 你所选 PostgreSQL 版本的最新次要版本。
-- Spock [函数和过程](/pgedge/spock/reference/)。
+- Spock [函数和过程](/zh/pgedge/spock/reference/)。
 - [ACE 一致性监控](https://docs.pgedge.com/platform/ace)。
 - [Snowflake 序列](https://docs.pgedge.com/platform/snowflake)。
 - [pgBackRest](https://docs.pgedge.com/platform/managing/pgbackrest)，提供更简单的备份与恢复能力。
 - [LOLOR](https://docs.pgedge.com/lolor/v1-2-2/) 大对象支持。
-- 用于 active-active 分布式集群的管理工具。
+- 用于双活分布式集群的管理工具。
 
 
 ## 从源码构建扩展 {#building-the-extension-from-source}
 
-Spock 是一个[开源项目](https://github.com/pgEdge/spock)，你可以使用 GitHub 项目页面发布的源码自行构建。Spock 扩展必须构建在打过补丁的 PostgreSQL 版本专属构建上；补丁会提供钩子，让 `spock` 能够访问 PostgreSQL 引擎。
+Spock 是一个[开源项目](https://github.com/pgEdge/spock)，你可以使用 GitHub 项目页面发布的源码自行构建。编译 Spock 前，必须为目标 PostgreSQL 版本应用配套补丁。Spock 通过补丁提供的钩子调用 PostgreSQL 引擎。
 
 要给 PostgreSQL 源码打补丁，请先从 [PostgreSQL 项目](https://www.postgresql.org/ftp/source/)下载源码，并进入源码目录。然后克隆 `spock` 目录：
 
@@ -116,14 +116,14 @@ output_plugin_libraries = 'pgoutput, test_decoding, spock_output'
                             # only on servers that have this parameter; see below
 ```
 
-上述值是小型集群（两到三个节点、一个复制数据库）的可用起点，并不是万能配置：Spock 会启动一个 supervisor、一个 slot sync worker、实例中每个数据库一个后台 worker，以及每个订阅一个后台 worker；订阅数量随节点数乘以被复制数据库数扩展，并且 `max_worker_processes` 会与并行查询 worker 共享。进入生产环境前，请参见[为 Spock 规划 PostgreSQL 资源](/zh/pgedge/spock/sizing/)中的公式和按集群给出的建议。
+上述值是小型集群（两到三个节点、一个复制数据库）的可用起点，并不是万能配置：Spock 会启动一个监督进程、一个复制槽同步工作进程、实例中每个数据库一个后台工作进程，以及每个订阅一个后台工作进程；订阅数量随节点数乘以被复制数据库数扩展，并且 `max_worker_processes` 会与并行查询工作进程共享。进入生产环境前，请参见[为 Spock 规划 PostgreSQL 资源](/zh/pgedge/spock/sizing/)中的公式和按集群给出的建议。
 
 只有当服务器拥有 `output_plugin_libraries` 参数时才设置它——该参数由 2026 年的一次安全修复引入；如果其中没有列出 `spock_output`，逻辑解码会以 `library "spock_output" may not be used as an output
 plugin` 失败。该检查在每次启动解码时都会运行，因此在次要版本升级后也会使已建立集群停止，并且适用于每个节点。在较旧版本中该参数不存在，设置它会导致服务器无法启动。如何检查请参见[配置 Spock](/zh/pgedge/spock/configuration/)。
 
 关于复制源状态的说明：
 
-- PostgreSQL 15-17：`max_replication_slots` 参数同时控制 replication slot 数量和复制源状态数量；为该参数估算容量时，需要同时考虑 slot 和复制源（每个订阅一个复制源，订阅按被复制的数据库计数）。
+- PostgreSQL 15-17：`max_replication_slots` 参数同时控制复制槽数量和复制源状态数量；为该参数估算容量时，需要同时考虑复制槽和复制源（每个订阅一个复制源，订阅按被复制的数据库计数）。
 - PostgreSQL 18+：引入了新参数 `max_active_replication_origins`，单独控制复制源状态数量；默认值为 10，对拥有大量订阅的集群可能不足；在全互联拓扑中，至少设置为该节点应用的订阅数，即 `(nodes - 1) x replicated databases`，并留出余量（容量规划与 `max_replication_slots` 类似）。
 
 修改 PostgreSQL 参数后，使用操作系统对应的命令重启 PostgreSQL 服务器：
@@ -156,7 +156,7 @@ host    replication  all          <node_2_IP_address>/32    trust
 
 ### 创建复制场景 {#creating-a-replication-scenario}
 
-配置节点后，连接第一个 provider 节点的 psql 命令行，并使用 `spock.node_create` 命令创建 provider 节点：
+配置节点后，连接第一个提供方节点的 psql 命令行，并使用 `spock.node_create` 命令创建提供方节点：
 
 ```sql
 SELECT spock.node_create(
@@ -165,13 +165,13 @@ SELECT spock.node_create(
 );
 ```
 
-然后将 `public` schema 中的表加入 `default` 复制集：
+然后将 `public` 模式中的表加入 `default` 复制集：
 
 ```sql
 SELECT spock.repset_add_all_tables('default', ARRAY['public']);
 ```
 
-provider 节点配置完成后，可以添加订阅者。首先创建订阅者节点：
+配置好提供方后，在订阅方创建本地节点。
 
 ```sql
 SELECT spock.node_create(
@@ -180,7 +180,7 @@ SELECT spock.node_create(
 );
 ```
 
-然后创建订阅；该订阅会在订阅者节点上启动同步和复制：
+然后在订阅方创建订阅，启动复制。是否执行初始表数据复制取决于 `synchronize_data` 的设置。
 
 ```sql
 SELECT spock.sub_create(
@@ -195,4 +195,4 @@ SELECT spock.sub_wait_for_sync('subscription1');
 
 [上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/install_spock.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

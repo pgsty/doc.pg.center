@@ -38,8 +38,8 @@ The function accepts the following arguments:
 - `subscription_name` - The name of an existing subscription.
 - `relation` - The name of an existing table, optionally schema qualified.
 - `truncate` - Truncate the table before synchronization; the default value is
-  `true`. If you do not include the truncate argument, conflicts between
-  existing rows and newly arriving rows may cause errors.
+  `true`. Omitting the argument truncates the target table. Pass `false` to keep
+  existing rows. In that case, conflicting incoming rows can cause errors.
 
 ## Example {#example}
 

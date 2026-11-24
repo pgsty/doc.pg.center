@@ -34,7 +34,7 @@ Zodan 的 `add_node` 和 `remove_node` 过程可以在节点之间迁移数据�
 > - 调用 `add_node` 或 `remove_node` 的节点必须安装 `dblink` 扩展。
 > - 如果节点的 PostgreSQL 构建具有 `output_plugin_libraries` 参数（[每一步之前检查 PostgreSQL 版本兼容性](#checking-postgresql-version-compatibility-before-each-step)中列出的补丁版本及之后版本），该参数必须包含 `spock_output`，否则 Spock 逻辑解码会失败。更早的构建没有此参数，不得设置。
 > - 步骤中途失败后不要立即重试。先按下方[故障排查](#troubleshooting)确认工作流创建的所有对象均已清除。
-> - `add_node` 每次等待节点间同步事件的时限为 180 秒。如果复制延迟超过此窗口，调用会抛出异常。开始前确认网络延迟和复制延迟在可接受范围内，或通过 [`spock.sync_timeout`](/pgedge/spock/configuration/#spocksync_timeout) 增大会话等待时限。
+> - `add_node` 每次等待节点间同步事件的时限为 180 秒。如果复制延迟超过此窗口，调用会抛出异常。开始前确认网络延迟和复制延迟在可接受范围内，或通过 [`spock.sync_timeout`](/zh/pgedge/spock/configuration/#spocksync_timeout) 增大会话等待时限。
 > - 替代节点报告 `replicating` 状态之前，不要移除旧节点。
 > - 始终保持至少两个节点运行；绝不要在同一窗口中同时移除倒数第二个旧节点和第一个新节点。
 > - PostgreSQL 滚动更新只能向前升级。与 Spock 版本不匹配不同，Zodan 不会自行检查 PostgreSQL 版本的先后顺序，参见[每一步之前检查 PostgreSQL 版本兼容性](#checking-postgresql-version-compatibility-before-each-step)。
@@ -73,7 +73,7 @@ SELECT * FROM dblink(
 
 ## 准备替代节点 {#preparing-a-replacement-node}
 
-每个替代节点都需要自己的主机（同机部署时使用独立端口）、数据目录，以及目标版本的 PostgreSQL 和 Spock，必须在调用 `add_node` 前准备好。按[安装 pgEdge Enterprise Postgres](/pgedge/spock/getting-started/#install-pgedge-enterprise-postgres-recommended-path)的说明，在替代节点主机添加 pgEdge 仓库，并安装目标版本的 pgEdge Enterprise Postgres 和 Spock。在 RHEL、Rocky Linux 或 AlmaLinux 上安装 PostgreSQL 18：
+每个替代节点都需要自己的主机（同机部署时使用独立端口）、数据目录，以及目标版本的 PostgreSQL 和 Spock，必须在调用 `add_node` 前准备好。按[安装 pgEdge Enterprise Postgres](/zh/pgedge/spock/getting-started/#install-pgedge-enterprise-postgres-recommended-path)的说明，在替代节点主机添加 pgEdge 仓库，并安装目标版本的 pgEdge Enterprise Postgres 和 Spock。在 RHEL、Rocky Linux 或 AlmaLinux 上安装 PostgreSQL 18：
 
 ```bash
 sudo dnf install -y pgedge-postgres18-server pgedge-postgres18-contrib pgedge-spock50_18
@@ -93,7 +93,7 @@ initdb -D /path/to/data/n1b --username=postgres
 
 首次启动替代节点之前，编辑 `postgresql.conf`：
 
-- 按[配置 Spock](/pgedge/spock/configuration/)设置 Spock 所需参数，沿用源节点的值。
+- 按[配置 Spock](/zh/pgedge/spock/configuration/)设置 Spock 所需参数，沿用源节点的值。
 - 按目标版本配置复制源跟踪容量。
 
 > [!NOTE]
@@ -207,7 +207,7 @@ psql -p 5442 -c "SELECT pg_reload_conf();"
         WHERE NOT temporary;
         ```
 
-完整参考见[逻辑复制槽故障切换（高可用备库）](/pgedge/spock/logical-slot-failover/)，其中包括 PostgreSQL 15/16 路径及现有槽的升级。
+完整参考见[逻辑复制槽故障切换（高可用备库）](/zh/pgedge/spock/logical-slot-failover/)，其中包括 PostgreSQL 15/16 路径及现有槽的升级。
 
 ## 在集群中滚动更新 {#rolling-the-update-across-the-cluster}
 
@@ -463,7 +463,7 @@ psql -p 5442 -c "SELECT pg_reload_conf();"
 
 ## 重新启用 DDL 复制 {#re-enabling-ddl-replication}
 
-所有节点替换完毕后，按照[升级 Spock](/pgedge/spock/upgrading/)的说明，在每个节点重新开启自动 DDL 复制：
+所有节点替换完毕后，按照[升级 Spock](/zh/pgedge/spock/upgrading/)的说明，在每个节点重新开启自动 DDL 复制：
 
 ```sql
 ALTER SYSTEM SET spock.enable_ddl_replication = on;
@@ -512,17 +512,17 @@ CALL spock.show_all_subscription_status(
 
 - **`add_node` 报告无法创建复制槽。** 检查替代节点的 `wal_level = logical` 和 `max_replication_slots`。只有使用 `verb := true` 时，`add_node` 才会以通知形式报告槽创建失败，并继续执行；随后创建的订阅不会复制。
 
-- **大型数据库上 `add_node` 等待同步事件超时。** 再次调用 `add_node` 前，通过 [`spock.sync_timeout`](/pgedge/spock/configuration/#spocksync_timeout) 增大会话等待时限。
+- **大型数据库上 `add_node` 等待同步事件超时。** 再次调用 `add_node` 前，通过 [`spock.sync_timeout`](/zh/pgedge/spock/configuration/#spocksync_timeout) 增大会话等待时限。
 
 - **`add_node` 中途失败。** 不要立即重试。先在部分加入的节点加载 `zodremove.sql` 并调用 `spock.remove_node()`，清除它创建的订阅和复制槽，再重新添加。
 
 更多信息参见：
 
-- [使用 Zodan 修改集群](/pgedge/spock/modify/zodan/)
-- [使用 Zodan 脚本与工作流](/pgedge/spock/modify/zodan/zodan-readme/)
-- [教程：零停机向集群添加节点](/pgedge/spock/modify/zodan/zodan-tutorial/)
-- [逻辑复制槽故障切换（高可用备库）](/pgedge/spock/logical-slot-failover/)
+- [使用 Zodan 修改集群](/zh/pgedge/spock/modify/zodan/)
+- [使用 Zodan 脚本与工作流](/zh/pgedge/spock/modify/zodan/zodan-readme/)
+- [教程：零停机向集群添加节点](/zh/pgedge/spock/modify/zodan/zodan-tutorial/)
+- [逻辑复制槽故障切换（高可用备库）](/zh/pgedge/spock/logical-slot-failover/)
 
 ---
 
-[上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/modify/zodan/zodan_rolling_pg_version_tutorial.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/pgedge/about/license/)。
+[上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/modify/zodan/zodan_rolling_pg_version_tutorial.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。

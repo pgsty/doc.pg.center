@@ -14,7 +14,7 @@ type: docs
 
 
 > [!NOTE] Editorial note
-> In step 3, the example path for `pg_hba.conf` incorrectly ends in `postgresql.conf`. Authentication rules belong in the actual `pg_hba.conf`; `SHOW hba_file;` reports its path. See [known upstream issues](/pgedge/about/maintenance/#upstream-issues).
+> The upstream example in step 3 gives `postgresql.conf` as the path to `pg_hba.conf`. Authentication rules belong in the actual `pg_hba.conf`; `SHOW hba_file;` reports its path. See [known upstream issues](/pgedge/about/maintenance/#upstream-issues).
 
 
 After installing and initializing Postgres and creating the Spock Extension, you can use the following steps to configure a two-node cluster.  In the examples that follow, we'll be creating a cluster that contains two nodes, named `n1` and `n2` that listen for Postgres server connections on port `5432`.
@@ -49,7 +49,7 @@ After installing and initializing Postgres and creating the Spock Extension, you
     database in the instance, one for the supervisor, and one more for the
     slot sync worker.
 
-3. Edit the [`pg_hba.conf` file](https://www.postgresql.org/docs/current/auth-pg-hba-conf.html) (located in `/var/lib/pgsql/current/data/postgresql.conf`) and allow connections between `n1` and `n2`; the following commands are provided as an example only, and are not recommended for production systems as they will open your system for connection from any client:
+3. Edit the [`pg_hba.conf` file](https://www.postgresql.org/docs/current/auth-pg-hba-conf.html) (use `SHOW hba_file;` to find its path) and allow connections between `n1` and `n2`; the following commands are provided as an example only, and are not recommended for production systems as they will open your system for connection from any client:
 
     `host all all 0.0.0.0/0 trust`
 

@@ -7,7 +7,7 @@ upstream_link: https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574a
 upstream_modified: true
 upstream_ref: 1548836b0df0
 source_kind: pinned-main-snapshot
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -75,4 +75,4 @@ lolor_db=# SELECT lo_unlink (1100449);
 
 [上游原文](https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/docs/using_lolor.md) · `1548836b0df0` · Copyright (c) 2024–2026, pgEdge, Inc. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

@@ -8,7 +8,7 @@ upstream_modified: true
 upstream_ref: d05e2e2b6a82
 source_kind: pinned-release-tag
 linkTitle: 增量应用
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -16,7 +16,7 @@ type: docs
 
 
 
-如果一个节点订阅了多个提供者，或者在订阅者节点上发生本地写入，就可能出现冲突。在没有 Spock 的情况下，逻辑复制在解析累计和（例如年初至今余额）的值时也可能遇到问题。
+一个节点订阅多个提供方，或订阅方本地也接受写入时，可能发生冲突。年初至今的累计余额就是一例：普通逻辑复制无法直接合并并发产生的增减额。
 
 
 > [!NOTE]
@@ -38,8 +38,7 @@ type: docs
 
 注意，在发生冲突的事务中，Delta-Apply 列也会被正确计算并应用。
 
-要把一个列设为无冲突 Delta-Apply 列，确保复制到给定记录的值是已提交变更的增量（旧值加上或减去任何新值），需要对该列应用以下设置：`log_old_value=true,
-delta_apply_function=spock.delta_apply`。例如：
+要把列设为 Delta-Apply 列，让订阅方把已提交变更的差额加到本地现值上，请为该列设置 `log_old_value=true, delta_apply_function=spock.delta_apply`。例如：
 
 ```sql
 ALTER TABLE pgbench_accounts ALTER COLUMN abalance
@@ -50,7 +49,7 @@ ALTER TABLE pgbench_tellers ALTER COLUMN tbalance
   SET (log_old_value=true, delta_apply_function=spock.delta_apply);
 ```
 
-作为一种特殊的安全阀特性，如果你需要重置 `log_old_value` 列，可以临时将该列改为 `log_old_value` 为 `false`。
+如需重置启用了 `log_old_value` 的列，可以暂时将该列的 `log_old_value` 设为 `false`。
 
 ## 冲突配置选项 {#conflict-configuration-options}
 
@@ -68,7 +67,7 @@ ALTER TABLE pgbench_tellers ALTER COLUMN tbalance
 
 扩展的约束冲突行为由 `spock.check_all_uc_indexes` 参数控制。默认值为 `off`；设置为 `on` 时，Spock 会执行以下操作：
 
-- 扫描所有有效唯一约束（以及主键和复制标识）。
+- 扫描所有有效的唯一约束（以及主键和复制标识）。
 - 按 OID 顺序扫描非空唯一约束（包括主键或复制标识索引）。
 - 定位并解析 `INSERT` 语句期间遇到的冲突行。
 
@@ -83,10 +82,10 @@ ALTER TABLE pgbench_tellers ALTER COLUMN tbalance
 
 ## 处理 `DELETE-RowMissing` 冲突 {#handling-delete-rowmissing-conflicts}
 
-鉴于 DELETE 语句的目的本来就是删除该行，我们不会把这些情况记录为异常，因为删除该行的预期结果显然已经以某种方式达成。相反，`DELETE-RowMissing` 冲突会自动写入 `spock.resolutions` 表，因为预期结果已经达成。
+收到 DELETE 时，如果目标行已经不存在，删除的预期结果就已达成。Spock 跳过这次删除，不将其作为异常处理。启用冲突记录时，`DELETE-RowMissing` 会记入 `spock.resolutions` 表。
 
 ---
 
 [上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/conflicts.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

@@ -16,7 +16,7 @@ This site maintains documentation, not pgEdge software support. Report software 
 
 ## Coverage {#coverage}
 
-English content covers the four docs directories in the pinned snapshots, including function references and release notes. Chinese coverage prioritizes getting started, conflicts, replication management, and companion extensions. Untranslated pages have explicit English links. SQL examples were not executed against a database; a successful site build does not validate deployment instructions.
+The four pinned upstream manuals have 118 English/Chinese page pairs, including section indexes, function references, release notes and source notices. Technical examples were compared with the English Markdown. Deployment procedures have not been exercised against a database in this documentation review.
 
 ## Known upstream issues {#upstream-issues}
 

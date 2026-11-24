@@ -58,22 +58,22 @@ not to gate access to the underlying table.
 
 ## ARGUMENTS {#arguments}
 
-p_location
+**`p_location`**
 
-    Optional. Replaces this node's `location`. Left unchanged if omitted
-    (or NULL).
+Optional. Replaces this node's `location`. Left unchanged if omitted
+(or NULL).
 
-p_country
+**`p_country`**
 
-    Optional. Replaces this node's `country`. Left unchanged if omitted
-    (or NULL).
+Optional. Replaces this node's `country`. Left unchanged if omitted
+(or NULL).
 
-p_info_patch
+**`p_info_patch`**
 
-    Optional. A JSON object merged into this node's existing `info`
-    (existing keys not mentioned are preserved). Left unchanged if
-    omitted (or NULL). A `tiebreaker` key, if present, must be a JSON
-    number representable as a 32-bit integer.
+Optional. A JSON object merged into this node's existing `info`
+(existing keys not mentioned are preserved). Left unchanged if
+omitted (or NULL). A `tiebreaker` key, if present, must be a JSON
+number representable as a 32-bit integer.
 
 ## EXAMPLE {#example}
 

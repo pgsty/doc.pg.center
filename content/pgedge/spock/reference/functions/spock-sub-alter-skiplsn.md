@@ -29,10 +29,14 @@ Advances the replication position of an existing subscription to the specified L
 This command must be executed by a superuser.
 
 ## ARGUMENTS {#arguments}
-    subscription_name
-        The name of an existing subscription.
-    lsn
-        The Log Sequence Number to which the subscription should advance.
+
+**`subscription_name`**
+
+The name of an existing subscription.
+
+**`lsn`**
+
+The Log Sequence Number to which the subscription should advance.
 
 ## EXAMPLE {#example}
 

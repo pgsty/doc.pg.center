@@ -8,7 +8,7 @@ upstream_modified: true
 upstream_ref: d05e2e2b6a82
 source_kind: pinned-release-tag
 linkTitle: 参数配置
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -16,7 +16,7 @@ type: docs
 
 
 
-在 Spock 复制场景中的每个节点上，创建 Spock 扩展之前，请在 `postgresql.conf` 中添加以下设置：
+创建 Spock 扩展前，先在每个参与复制的节点上配置 `postgresql.conf`。
 
 ```sql
 wal_level = 'logical'
@@ -34,7 +34,7 @@ output_plugin_libraries = 'pgoutput, test_decoding, spock_output'
                             # only on servers that have this parameter; see below
 ```
 
-这些值适合复制单个数据库的两节点或三节点小集群。订阅，以及随之而来的工作进程、walsender 和槽，随节点数*乘以*被复制数据库数扩展；因此复制多个数据库的实例需要按比例增加每项资源。对于更大的集群，或承载多个数据库或其他使用后台工作进程扩展的实例，请使用[为 Spock 规划 PostgreSQL 资源规模](/zh/pgedge/spock/sizing/)中的公式确定每个参数。修改这三个参数都需要重启服务器。
+这些值适合复制单个数据库的两节点或三节点小集群。订阅，以及随之而来的工作进程、WAL 发送进程和槽，随节点数*乘以*被复制数据库数扩展；因此复制多个数据库的实例需要按比例增加每项资源。对于更大的集群，或承载多个数据库或其他使用后台工作进程扩展的实例，请使用[为 Spock 规划 PostgreSQL 资源规模](/zh/pgedge/spock/sizing/)中的公式确定每个参数。修改这三个参数都需要重启服务器。
 
 
 > [!WARNING] `output_plugin_libraries`
@@ -112,7 +112,7 @@ SELECT pg_reload_conf();
 > 此特性是实验性的，默认为 `OFF`。使用此特性的风险由你自己承担。
 >
 
-在表中已存在满足其所定义唯一约束（而不是主键或复制标识）的行的场景中，此参数增强 `INSERT` 操作期间的冲突解析。
+对已有行执行 `INSERT` 时，除了主键或复制标识外，其他唯一约束也可能引发冲突。此参数让 Spock 检查这些约束。
 
 如果此 GUC 为 `enabled`，Spock 会在检查主键或复制标识索引之后继续检查唯一约束索引。只解析一个冲突，使用“最后写入者胜出”逻辑，其中包括主键或复制标识索引。如果发生第二个冲突，且启用了 `spock.save_resolutions`，结果会记录到 `spock.resolutions` 表；否则不会持久化。
 
@@ -128,7 +128,7 @@ SELECT pg_reload_conf();
 
 - `last_update_wins`（默认）——保留提交时间戳最新的数据版本（可以是本地版本，也可以是远程版本）。
 
-要启用冲突解析，必须启用 `track_commit_timestamp` 设置。
+要启用冲突解决，必须启用 `track_commit_timestamp` 设置。
 
 ### `spock.deny_all_ddl` {#spockdeny_all_ddl}
 
@@ -166,7 +166,7 @@ SELECT pg_reload_conf();
 
 当 Spock 遇到复制异常时，它会基于 `spock.exception_behaviour` 的值进入异常处理模式来尝试解决异常。然后，Spock 会把事务写入内存，默认大小上限为 `4MB`，应用工作进程从内存重放该事务。这使绝大多数异常的处理速度和性能大幅提升。内存大小可通过 `spock.exception_replay_queue_size` 配置。
 
-现在，Spock 按 [`spock.exception_behaviour`](#spock-exception_behaviour) 参数的指定运行。
+随后，Spock 按 [`spock.exception_behaviour`](#spock-exception_behaviour) 参数的设置处理异常。
 
 ### `spock.extra_connection_options` {#spockextra_connection_options}
 
@@ -182,11 +182,11 @@ SELECT pg_reload_conf();
 wal_sender_timeout = '5min'
 ```
 
-PostgreSQL 默认值 `60s` 可能导致虚假断开：当订阅者忙于应用大事务而无法及时发送反馈时，就会出现这种情况。更高的值为应用工作进程提供足够余量，同时仍能检测真正死亡的连接。存活检测主要由 TCP keepalive 处理，`spock.apply_idle_timeout` 则提供订阅者侧的额外安全网。
+订阅方应用大事务时可能来不及发送反馈，PostgreSQL 的默认超时 `60s` 会让正常连接意外断开。调高超时可以给应用工作进程留出时间，同时仍能发现已失效的连接。TCP 保活负责检测连接状态，订阅方还可通过 `spock.apply_idle_timeout` 检测长时间没有数据的连接。
 
 ### `spock.apply_idle_timeout` {#spockapply_idle_timeout}
 
-应用工作进程重新连接提供者前的最大空闲时间（秒）。它作为安全网，用于检测保持 TCP 连接存活但停止发送数据的挂起 walsender。收到任何消息都会重置计时器。设置为 `0` 可禁用它，仅依靠 TCP keepalive 进行存活检测。默认值：`300`（5 分钟）。
+应用工作进程重新连接提供者前的最大空闲时间（秒）。它作为安全网，用于检测保持 TCP 连接存活但停止发送数据的挂起 WAL 发送进程。收到任何消息都会重置计时器。设置为 `0` 可禁用它，仅依靠 TCP keepalive 进行存活检测。默认值：`300`（5 分钟）。
 
 ```ini
 spock.apply_idle_timeout = 300
@@ -203,7 +203,7 @@ SET spock.sync_timeout = '2h';
 CALL spock.add_node(...);
 ```
 
-它限制的是整次等待，而不是对远程节点的单次探测。对于额外限制每次远程探测的例程——使一个无响应的对端无法耗尽全部预算——该目的仍由它们自己小得多的限制控制。
+此参数限制一次等待的总时长。某些例程还为每次远程探测设置了更短的独立超时，以免一个无响应的节点耗尽整次等待的时间。
 
 ```ini
 spock.sync_timeout = 0
@@ -211,7 +211,7 @@ spock.sync_timeout = 0
 
 ### `spock.read_retry_count` {#spockread_retry_count}
 
-当远程 `UPDATE` 或 `DELETE` 目标的行尚未可见时，应用工作进程重新读取本地关系的次数。每次重试时，应用工作进程会等待任何正在并发应用的事务完成，然后再次搜索本地关系。如果在配置的重试次数后该行仍缺失，应用工作进程会进入标准的行缺失处理路径（根据配置的 [`spock.exception_behaviour`](#spock-exception_behaviour)，执行冲突解析和/或异常处理）。
+当远程 `UPDATE` 或 `DELETE` 目标的行尚未可见时，应用工作进程重新读取本地关系的次数。每次重试时，应用工作进程会等待任何正在并发应用的事务完成，然后再次搜索本地关系。如果在配置的重试次数后该行仍缺失，应用工作进程会进入标准的行缺失处理路径（根据配置的 [`spock.exception_behaviour`](#spock-exception_behaviour)，执行冲突解决和/或异常处理）。
 
 设置为 `0` 可完全禁用重试（行缺失路径立即运行）。有效范围是 `0` 到 `100`。默认值：`5`。变更在 `SIGHUP` 时生效（例如 `SELECT pg_reload_conf()`）；不需要重启服务器。
 
@@ -219,11 +219,11 @@ spock.sync_timeout = 0
 spock.read_retry_count = 5
 ```
 
-### 逻辑槽故障转移（HA 备库） {#logical-slot-failover-ha-standby}
+### 逻辑槽故障切换（HA 备库） {#logical-slot-failover-ha-standby}
 
-Spock 在每个提供者节点上创建逻辑复制槽。对于带物理备库的高可用场景，必须把这些槽同步到备库，才能在故障转移后无数据丢失地恢复复制。
+Spock 在每个提供者节点上创建逻辑复制槽。对于带物理备库的高可用场景，必须把这些槽同步到备库，才能在故障切换后无数据丢失地恢复复制。
 
-完整设置说明参见[逻辑槽故障转移](/pgedge/spock/logical-slot-failover/)，包括故障转移后在已提升节点上清理 `synchronized_standby_slots` 的操作手册步骤。
+完整设置说明参见[逻辑槽故障切换](/zh/pgedge/spock/logical-slot-failover/)，包括故障切换后在已提升节点上清理 `synchronized_standby_slots` 的操作手册步骤。
 
 行为取决于 PostgreSQL 版本：
 
@@ -238,11 +238,11 @@ Spock 在每个提供者节点上创建逻辑复制槽。对于带物理备库�
 
 #### PostgreSQL 17 及更高版本（原生槽同步） {#postgresql-17-and-later-native-slot-sync}
 
-在 PostgreSQL 17+ 上，Spock 在创建时为每个逻辑槽标记 `FAILOVER` 标志。PostgreSQL 内置 slotsync 工作进程随后会自动同步这些槽。
+在 PostgreSQL 17+ 上，Spock 在创建时为每个逻辑槽标记 `FAILOVER` 标志。PostgreSQL 内置槽同步工作进程随后会自动同步这些槽。
 
-在 **PostgreSQL 17** 上，只有设置 `sync_replication_slots = on`（见下文）后，Spock 的工作进程才会让位于原生 slotsync。在 **PostgreSQL 18+** 上，不会注册 Spock 自己的故障转移工作进程，因此原生机制是必需的。无论哪种情况，都必须配置 PostgreSQL 自己的槽同步。要切换一个已由 Spock 工作进程同步的 PostgreSQL 17 备库，请遵循[把 PostgreSQL 17 备库从 Spock 工作进程切换出来](/pgedge/spock/logical-slot-failover/#switching-a-postgresql-17-standby-from-the-spock-worker)；仅设置 `sync_replication_slots = on` 并不够。
+在 **PostgreSQL 17** 上，只有设置 `sync_replication_slots = on`（见下文）后，Spock 的工作进程才会让位于原生槽同步。在 **PostgreSQL 18+** 上，不会注册 Spock 自己的故障切换工作进程，因此原生机制是必需的。无论哪种情况，都必须配置 PostgreSQL 自己的槽同步。要切换一个已由 Spock 工作进程同步的 PostgreSQL 17 备库，请遵循[把 PostgreSQL 17 备库从 Spock 工作进程切换出来](/zh/pgedge/spock/logical-slot-failover/#switching-a-postgresql-17-standby-from-the-spock-worker)；仅设置 `sync_replication_slots = on` 并不够。
 
-首先在主库创建物理复制槽。备库通过它流式传输；备库的 `catalog_xmin`（通过 `hot_standby_feedback` 反馈）正是保护已同步逻辑槽不被失效的关键：
+首先在主库创建物理复制槽。备库通过它流式传输；备库的 `catalog_xmin`（通过 `hot_standby_feedback` 反馈）正是保护已同步逻辑槽不失效的关键：
 
 ```sql
 SELECT pg_create_physical_replication_slot('physical_slot_name');
@@ -262,13 +262,13 @@ primary_slot_name      = 'physical_slot_name'    # the physical slot created abo
 primary_conninfo       = 'host=<primary_host> dbname=<dbname> ...'   # must include dbname
 ```
 
-只有以 `failover = true` 创建的逻辑槽会被同步。Spock 6.0.0 创建槽时会设置该标志，从 5.x 升级时也会在现有槽上设置；对于任何未设置的槽，参见[把 Spock 升级到 6.0.0](/pgedge/spock/logical-slot-failover/#upgrading-spock-to-600)。
+只有以 `failover = true` 创建的逻辑槽会被同步。Spock 6.0.0 创建槽时会设置该标志，从 5.x 升级时也会在现有槽上设置；对于任何未设置的槽，参见[把 Spock 升级到 6.0.0](/zh/pgedge/spock/logical-slot-failover/#upgrading-spock-to-600)。
 
-故障转移后，订阅者只需更新连接字符串中的 `host=`——复制会从最后同步的 LSN 恢复，不丢失数据。**但是**，如果已提升节点设置了 `synchronized_standby_slots`，必须先清理或更新它——否则它的 walsender 会永远等待现已孤立的物理槽，到订阅者的逻辑复制会冻结。何时适用以及确切步骤参见[逻辑槽故障转移中的操作手册](/pgedge/spock/logical-slot-failover/#runbook-clear-synchronized_standby_slots-after-promotion)。
+故障切换后，订阅者只需更新连接字符串中的 `host=`——复制会从最后同步的 LSN 恢复，不丢失数据。**但是**，如果已提升节点设置了 `synchronized_standby_slots`，必须先清理或更新它——否则它的 WAL 发送进程会永远等待现已孤立的物理槽，到订阅者的逻辑复制会冻结。何时适用以及确切步骤参见[逻辑槽故障切换中的操作手册](/zh/pgedge/spock/logical-slot-failover/#runbook-clear-synchronized_standby_slots-after-promotion)。
 
 #### PostgreSQL 15、16 和 17（Spock 内置工作进程） {#postgresql-15-16-and-17-spock-built-in-worker}
 
-在 PostgreSQL 15、16 和 17 上，Spock 的 `spock_failover_slots` 后台工作进程处理槽同步。在 PostgreSQL 17 上，当启用 `sync_replication_slots = on` 时，它会退让给原生 slotsync 工作进程。请使用下面的 GUC 配置它。
+在 PostgreSQL 15、16 和 17 上，Spock 的 `spock_failover_slots` 后台工作进程处理槽同步。在 PostgreSQL 17 上，当启用 `sync_replication_slots = on` 时，它会退让给原生槽同步工作进程。请使用下面的 GUC 配置它。
 
 ### `spock.synchronize_slot_names` {#spocksynchronize_slot_names}
 
@@ -278,7 +278,7 @@ primary_conninfo       = 'host=<primary_host> dbname=<dbname> ...'   # must incl
 spock.synchronize_slot_names = 'name_like:%%'
 ```
 
-用于 PostgreSQL 15、16 和 17（未启用 `sync_replication_slots` 时）。在启用了原生 slotsync 的 PostgreSQL 17 上，或在 PostgreSQL 18+ 上，此设置会被忽略。
+用于 PostgreSQL 15、16 和 17（未启用 `sync_replication_slots` 时）。在启用了原生槽同步的 PostgreSQL 17 上，或在 PostgreSQL 18+ 上，此设置会被忽略。
 
 ### `spock.drop_extra_slots` {#spockdrop_extra_slots}
 
@@ -298,13 +298,13 @@ spock.primary_dsn = ''
 
 ### `spock.pg_standby_slot_names` {#spockpg_standby_slot_names}
 
-必须确认某个给定 LSN 已持久刷新之后，walsender 才能复制超过该 LSN 的逻辑变更的物理复制槽名称逗号分隔列表。这可防止物理备库落后于逻辑订阅者。
+用逗号分隔物理复制槽名称。WAL 发送进程只有收到所需备库的确认，得知给定 LSN 的 WAL 已刷入持久存储后，才会发送该位置之后的逻辑变更。这可防止物理备库落后于逻辑订阅方。
 
 ```ini
 spock.pg_standby_slot_names = 'physical_slot_1,physical_slot_2'
 ```
 
-在每个受支持的 PostgreSQL 版本上都会使用，无论是否启用原生槽同步。PostgreSQL 自己的 `synchronized_standby_slots` 没有等价于 `spock.standby_slots_min_confirmed` 的设置：它会等待其列出的每个槽；因此只要一个备库停机，它就会停止到每个订阅者的逻辑复制。两者只能使用一个；同时设置是冗余的。对于故障转移槽，`synchronized_standby_slots` 先应用并等待其所有槽；因此当它列出了此处的每个槽时，此设置不会增加任何效果，walsender 会记录这一点；只列在此处的槽仍会生效。列出的槽如果不存在，则永远无法确认：在默认 `-1` 下，walsender 会等待到 `wal_sender_timeout`，记录一个指名该槽的警告，然后重新开始；因此提升后，要么在新主库上创建这些槽，要么在那里清除此设置。
+在每个受支持的 PostgreSQL 版本上都会使用，无论是否启用原生槽同步。PostgreSQL 自己的 `synchronized_standby_slots` 没有等价于 `spock.standby_slots_min_confirmed` 的设置：它会等待其列出的每个槽；因此只要一个备库停机，它就会停止到每个订阅者的逻辑复制。两者只能使用一个；同时设置是冗余的。对于故障切换槽，`synchronized_standby_slots` 先应用并等待其所有槽；因此当它列出了此处的每个槽时，此设置不会增加任何效果，WAL 发送进程会记录这一点；只列在此处的槽仍会生效。列出的槽如果不存在，则永远无法确认：在默认 `-1` 下，WAL 发送进程会等待到 `wal_sender_timeout`，记录一个指名该槽的警告，然后重新开始；因此提升后，要么在新主库上创建这些槽，要么在那里清除此设置。
 
 ### `spock.standby_slots_min_confirmed` {#spockstandby_slots_min_confirmed}
 
@@ -336,9 +336,9 @@ spock.failover_slots_feedback_naptime = 10000
 
 ### `spock.failover_slots_recreate_invalidated` {#spockfailover_slots_recreate_invalidated}
 
-当某个已同步槽在备库上的副本被失效时——例如备库删除了 WAL，或主库删除了该副本仍需要的目录行——`spock_failover_slots` 工作进程是否删除并重建该槽。这样的副本看起来是新的，但提升后无法服务订阅者。在默认 `on` 下，工作进程会用 WARNING 报告它，删除它，并从主库重新创建。新副本会保持为临时槽，直到主库的槽追上它；在此期间工作进程会继续同步其他槽；如果备库在此之前提升，该副本会被删除。临时副本属于工作进程：如果工作进程因任何原因退出——例如主库正在重启且无法访问——该副本会随之删除；postmaster 一分钟后启动的工作进程会按当时备库的位置重新创建它，而主库的槽必须再次越过该位置。如果工作进程持有临时副本时该副本被失效，PostgreSQL 会终止工作进程以释放槽，效果相同。设置为 `off` 时，工作进程保留该副本原样并报告一次，使你能在删除任何内容之前查看它；把该设置重新打开后的第一轮同步会重建它。可在运行时通过 `SIGHUP`（重新加载）设置。
+当某个已同步槽在备库上的副本失效时——例如备库删除了 WAL，或主库删除了该副本仍需要的目录行——`spock_failover_slots` 工作进程是否删除并重建该槽。这样的副本看起来是新的，但提升后无法服务订阅者。在默认 `on` 下，工作进程会用 WARNING 报告它，删除它，并从主库重新创建。新副本会保持为临时槽，直到主库的槽追上它；在此期间工作进程会继续同步其他槽；如果备库在此之前提升，该副本会被删除。临时副本属于工作进程：如果工作进程因任何原因退出——例如主库正在重启且无法访问——该副本会随之删除；postmaster 一分钟后启动的工作进程会按当时备库的位置重新创建它，而主库的槽必须再次越过该位置。如果工作进程持有临时副本时该副本失效，PostgreSQL 会终止工作进程以释放槽，效果相同。设置为 `off` 时，工作进程保留该副本原样并报告一次，使你能在删除任何内容之前查看它；把该设置重新打开后的第一轮同步会重建它。可在运行时通过 `SIGHUP`（重新加载）设置。
 
-用于 PostgreSQL 15、16 和 17（未启用 `sync_replication_slots` 时）。在启用了原生 slotsync 的 PostgreSQL 17 上，或在 PostgreSQL 18+ 上，此设置会被忽略。
+用于 PostgreSQL 15、16 和 17（未启用 `sync_replication_slots` 时）。在启用了原生槽同步的 PostgreSQL 17 上，或在 PostgreSQL 18+ 上，此设置会被忽略。
 
 ```ini
 spock.failover_slots_recreate_invalidated = on
@@ -346,15 +346,18 @@ spock.failover_slots_recreate_invalidated = on
 
 ### `spock.failover_slots_database` {#spockfailover_slots_database}
 
+> [!NOTE]
+> 下文说明 6.0.0-beta.2 快照的行为。5.0 维护分支的 `v5.0.15-rc.2` 增加了连接重试，并将工作进程重启前的等待时间缩短到 15 秒。详见 [5.0.15 候选版发行说明](/zh/pgedge/spock/spock-release-notes/#spock-5015-rc)和[该版本的配置参考](https://github.com/pgEdge/spock/blob/e710faa6fe21126d898fa660e9b6dc8ed0da9438/docs/configuring.md)。
+
 `spock_failover_slots` 工作进程在备库上连接的数据库。已同步槽副本保存主库的位置，但不保存主库为该槽保存的快照；物理复制不会携带该快照。提升后，从这样的副本解码必须构建新快照，而在快照一致之前提交的事务永远不会发送给订阅者。当此设置指定数据库时，工作进程会在备库上解码每个副本的 WAL，就像 PostgreSQL 17 的原生槽同步那样；因此副本只会指向备库已保存自己快照的位置。只有该快照一致后，新副本才会变为持久槽。当主库上仍有早于副本 `restart_lsn` 的事务打开时，解码无法达到一致快照；该副本会被报告一次并保持原样，直到该事务结束，工作进程会继续处理其他槽。
 
-该检查默认关闭。此设置为空时，每个副本都会像早期版本一样在没有检查的情况下同步，并被报告一次（PostgreSQL 16 和 17 为 WARNING，15 为 LOG 条目）；提升后，这样的副本仍可能跳过旧主库在故障转移前不久提交的事务。
+该检查默认关闭。此设置为空时，每个副本都会像早期版本一样在没有检查的情况下同步，并被报告一次（PostgreSQL 16 和 17 为 WARNING，15 为 LOG 条目）；提升后，这样的副本仍可能跳过旧主库在故障切换前不久提交的事务。
 
 在 PostgreSQL 16 上，它必须是已同步槽所属的数据库，通常是 Spock 数据库。其他数据库中的副本会在没有检查的情况下同步，并用 WARNING 报告一次，带有相同风险。工作进程只连接一个数据库；因此在 PostgreSQL 16 上多个数据库运行 Spock 时，请指定最重要的那个；其他数据库的槽不受保护。在 PostgreSQL 17 上，任一数据库都覆盖每个数据库的槽。备库还需要 `wal_level = logical`。PostgreSQL 15 不能在备库上解码 WAL，因此该检查不可用，每个副本只会在日志中记录一次。默认值：空。需要重启。
 
 在 PostgreSQL 16 和 17 上，只要节点上存在此设置，工作进程就会在每个节点上保持连接到该数据库，包括主库（它否则会休眠）以及使用原生槽同步的 PostgreSQL 17 备库。与任何打开的连接一样，此后的 `DROP DATABASE`、`ALTER DATABASE ... RENAME` 和 `CREATE DATABASE ... TEMPLATE` 在该数据库上会失败。停止工作进程只能释放数据库到它 60 秒后重启为止；请使用 `DROP DATABASE ... WITH (FORCE)`，或清除该设置并重启服务器。如果连接失败（例如数据库不存在），工作进程会报告，继续不进行检查，并且在服务器重启前不会重试。数据库在主库上被删除时也会发生同样情况：在备库重放删除会结束工作进程，重启后的工作进程无法连接该数据库，之后的工作进程会继续在不检查的情况下同步槽。
 
-在 PostgreSQL 16 和 17 上会执行该检查（未启用 `sync_replication_slots` 时）。在启用了原生槽同步的 PostgreSQL 17 上，工作进程仍会连接但不检查。在 PostgreSQL 17 上，推荐使用原生槽同步；它无需此设置就能为每个副本提供一致快照。仅打开 `sync_replication_slots` 不足以完成切换：原生槽同步还有其他要求，并且不会接管 Spock 工作进程创建的副本；因此在那些副本删除之前，大多数或全部槽会停止同步。参见[把 PostgreSQL 17 备库从 Spock 工作进程切换出来](/pgedge/spock/logical-slot-failover/#switching-a-postgresql-17-standby-from-the-spock-worker)。在 PostgreSQL 15 和 18+ 上，此设置会被忽略。
+在 PostgreSQL 16 和 17 上会执行该检查（未启用 `sync_replication_slots` 时）。在启用了原生槽同步的 PostgreSQL 17 上，工作进程仍会连接但不检查。在 PostgreSQL 17 上，推荐使用原生槽同步；它无需此设置就能为每个副本提供一致快照。仅打开 `sync_replication_slots` 不足以完成切换：原生槽同步还有其他要求，并且不会接管 Spock 工作进程创建的副本；因此在那些副本删除之前，大多数或全部槽会停止同步。参见[把 PostgreSQL 17 备库从 Spock 工作进程切换出来](/zh/pgedge/spock/logical-slot-failover/#switching-a-postgresql-17-standby-from-the-spock-worker)。在 PostgreSQL 15 和 18+ 上，此设置会被忽略。
 
 在 PostgreSQL 17 上，一旦工作进程从原生槽同步接管，原生槽同步创建的副本会像其他副本一样同步，但备库不能删除它。如果主库删除该槽，工作进程会保留副本并报告一次；它会在提升后的节点上被删除。
 
@@ -383,7 +386,7 @@ SELECT * FROM spock.resolutions WHERE local_origin IS NULL;
 可能的配置值如下：
 
 - `none`（默认）——不记录任何复制源变更信息。
-- `remote_only_differs`——仅当现有行来自一个远程发布者，且被另一个远程发布者修改时，才记录复制源变更。
+- `remote_only_differs`——仅当现有行来自一个远程发布者，且被另一个远端发布者修改时，才记录复制源变更。
 - `since_sub_creation`——无论发布者修改了之前来自另一个发布者的行，还是在本地更新了它，都记录复制源变更，但只从订阅创建时开始。
 
 ### `spock.log_verbosity` {#spocklog_verbosity}
@@ -410,7 +413,7 @@ SELECT * FROM spock.resolutions WHERE local_origin IS NULL;
 
 ### `spock.save_resolutions` {#spocksave_resolutions}
 
-`spock.save_resolutions` 是布尔值（默认为 `false`），把所有冲突解析记录到 `spock.resolutions` 表。此选项只能在 postmaster 启动时设置。
+`spock.save_resolutions` 是布尔值（默认为 `false`），把所有冲突解决记录到 `spock.resolutions` 表。此选项只能在 postmaster 启动时设置。
 
 ### `spock.resolutions_retention_days` {#spockresolutions_retention_days}
 
@@ -434,4 +437,4 @@ spock.resolutions_retention_days = 100
 
 [上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/configuring.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

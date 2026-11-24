@@ -7,7 +7,7 @@ upstream_link: https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bd
 upstream_modified: true
 upstream_ref: 9506e1bd5c1f
 source_kind: pinned-release-tag
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -39,33 +39,23 @@ type: docs
 
 ### 变更 {#changed}
 
-- 采用三位数（`MAJOR.MINOR.PATCH`）版本号。扩展
-  版本现在是 `2.5.0`。
+- 采用三段式版本号（`MAJOR.MINOR.PATCH`）。当前扩展版本为 `2.5.0`。
 
 ### 修复 {#fixed}
 
-- 修复 snowflake 转换后序列的 dump/restore。
-  `convert_sequence_to_snowflake()` 之前把 `MAXVALUE`
-  保留为 `(old last_value + 1)`，但 `snowflake.nextval()`
-  会绕过 `MAXVALUE` 并写入 snowflake 规模的值，因此 `pg_dump`
-  可能生成无法恢复的 `setval()`。序列现在转换为
-  `AS bigint MAXVALUE 9223372036854775807`，较早版本转换的
-  序列会在升级时自动修复。(SUP-140)
-- 修复用于把序列转换为 Snowflake 的 SQL 命令。
+- 修复转换为 Snowflake 序列后的转储和恢复问题。过去，`convert_sequence_to_snowflake()` 将 `MAXVALUE` 保留为 `(old last_value + 1)`，而 `snowflake.nextval()` 生成的 Snowflake 序列值可以超过这个上限。因此，`pg_dump` 可能生成一条在恢复时报错的 `setval()` 调用。现在转换序列时会指定 `AS bigint MAXVALUE 9223372036854775807`。由早期版本转换的序列会在升级时自动修复。（SUP-140）
+- 修复将序列转换为 Snowflake 的 SQL 命令。
 
 ### 安全 / CI {#security--ci}
 
-- 把 GitHub Actions 固定到完整 commit SHA，以加固供应链
-  攻击防护。
-- 从测试运行器和辅助子进程调用中移除 `shell=True` 和 shell
-  注入风险；使用 `shlex.split()` 进行正确的参数分词。
-- 修复 `execute_sqlite_query` 中的 SQL 注入警告和缺失参数，
-  并抑制内部测试辅助子进程调用上的 Bandit B603 警告。
-- 修复新版 BuildKit 下的 Dockerfile `ARG` 处理。
-- 更新版权年份到 2026。
+- 将 GitHub Actions 固定到完整的提交 SHA，防范供应链攻击。
+- 移除测试运行器和辅助子进程中的 `shell=True`，消除相应的 shell 注入风险。使用 `shlex.split()` 正确拆分参数。
+- 修复 `execute_sqlite_query` 的 SQL 注入警告，并补上缺少的参数。对内部测试辅助程序的子进程调用，抑制 Bandit B603 警告。
+- 修复新版 BuildKit 下 Dockerfile 对 `ARG` 的处理。
+- 将版权年份更新为 2026 年。
 
 ---
 
 [上游原文](https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8/docs/changelog.md) · `9506e1bd5c1f` · Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

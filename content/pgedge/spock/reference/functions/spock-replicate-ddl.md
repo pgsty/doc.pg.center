@@ -52,46 +52,46 @@ the DDL command.
 
 ## ARGUMENTS {#arguments}
 
-command
+**`command`**
 
-    A DDL command as text, or an array of DDL commands to execute and
-    replicate.
+A DDL command as text, or an array of DDL commands to execute and
+replicate.
 
-replication_sets
+**`replication_sets`**
 
-    An array of replication set names. Only subscribers subscribed to one
-    of these sets will receive and execute the DDL. Default is '{ddl_sql}'.
+An array of replication set names. Only subscribers subscribed to one
+of these sets will receive and execute the DDL. Default is '{ddl_sql}'.
 
-search_path
+**`search_path`**
 
-    The schema search path to use when executing the DDL command. Default
-    is the current session's search_path setting.
+The schema search path to use when executing the DDL command. Default
+is the current session's search_path setting.
 
-role
+**`role`**
 
-    The role (user) under which to execute the DDL command. Default is the
-    current user.
+The role (user) under which to execute the DDL command. Default is the
+current user.
 
 ## EXAMPLES {#examples}
 
-    The following command creates a table and instructs Spock to replicate the
-    DDL to other nodes:
+The following command creates a table and instructs Spock to replicate the
+DDL to other nodes:
 
     postgres=# SELECT spock.replicate_ddl('CREATE TABLE users (id SERIAL PRIMARY KEY,
         name TEXT)');
     -[ RECORD 1 ]-+--
     replicate_ddl | t
 
-    The following command alters the table adding a column, and instructs Spock
-    to replicate the DDL to other nodes:
+The following command alters the table adding a column, and instructs Spock
+to replicate the DDL to other nodes:
 
     postgres=# SELECT spock.replicate_ddl('ALTER TABLE users ADD COLUMN email TEXT',
         '{default,ddl_sql}');
     -[ RECORD 1 ]-+--
     replicate_ddl | t
 
-    The following command creates a table and an index on the tables, and
-    instructs Spock to replicate DDL to other nodes:
+The following command creates a table and an index on the tables, and
+instructs Spock to replicate DDL to other nodes:
 
     postgres=# SELECT spock.replicate_ddl(ARRAY['CREATE TABLE orders (id SERIAL)',
         'CREATE INDEX ON orders(id)']);

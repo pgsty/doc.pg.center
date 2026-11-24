@@ -627,6 +627,15 @@ pgedge-spock-20261121:
   link: https://github.com/pgEdge/spock
   source_commit: d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c
   source_ref: v6.0.0-beta.2
+  maintenance_supplement:
+    source_ref: v5.0.15-rc.2
+    source_commit: e710faa6fe21126d898fa660e9b6dc8ed0da9438
+    published: '2026-11-23'
+    stable_5_0_ref: v5.0.14
+    languages: [en, zh]
+    source_sha256:
+      docs/spock_release_notes.md: 9bcb5df100fffb4d5278d058b3d2eed6a5740865600f5c2dfa9509b2cea88088
+      docs/configuring.md: 4ff1044c773d57a5dd7eab0722af56e4a20ec34d9ce48928ea0c803b1d5ab122
   snapshot_date: '2026-11-21'
   languages: [en, zh]
   translation_baseline: pgedge-spock

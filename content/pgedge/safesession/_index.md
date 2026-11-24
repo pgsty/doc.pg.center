@@ -18,7 +18,7 @@ sidebar_root_menu: false
 
 
 > [!NOTE] Source version
-> The English source is **v1.1**, pinned at `d66225fcceef`. The Chinese edition includes the reviewed incremental updates; unchanged draft material still awaits review. Check [versions and sources](/pgedge/about/attribution/) before deploying.
+> The English source is **v1.1**, pinned at `d66225fcceef`. A Chinese edition of this snapshot is available. Check [versions and sources](/pgedge/about/attribution/) before deploying.
 
 
 pgEdge SafeSession is a PostgreSQL extension that enforces

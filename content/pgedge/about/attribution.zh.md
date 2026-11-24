@@ -10,11 +10,12 @@ type: docs
 
 ## 版本与来源 {#versions}
 
-英文版于 2026 年 11 月 21 日更新。Spock 使用预发布标签，SafeSession 和 Snowflake 使用发布标签，LOLOR 使用尚未发布的 1.3.0 开发快照。中文已同步本轮增量；原有初稿未变部分仍待逐句审校。
+英文版于 2026 年 11 月 21 日更新。Spock 使用预发布标签，SafeSession 和 Snowflake 使用发布标签，LOLOR 使用尚未发布的 1.3.0 开发快照。四个组件的固定快照均有中文版本。
 
 | 扩展 | 英文来源 | 版本类型 |
 | --- | --- | --- |
 | spock | [`d05e2e2b6a82`](https://github.com/pgEdge/spock/tree/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c) | v6.0.0-beta.2；预发布版 |
+| Spock 5.0 维护分支补充资料 | [`e710faa6fe21`](https://github.com/pgEdge/spock/tree/e710faa6fe21126d898fa660e9b6dc8ed0da9438) | [v5.0.15-rc.2 发行说明](/zh/pgedge/spock/spock-release-notes/#spock-5015-rc)及配置变更 |
 | lolor | [`1548836b0df0`](https://github.com/pgEdge/lolor/tree/1548836b0df0819e5415a9d0574afd93e9a64f1d) | 1.3.0 开发快照；最新稳定版 v1.2.3 |
 | safesession | [`d66225fcceef`](https://github.com/pgEdge/pgedge-safesession/tree/d66225fcceefa2b2cb2cdd7a0b8b84ccae8a4295) | v1.1 |
 | snowflake | [`9506e1bd5c1f`](https://github.com/pgEdge/snowflake/tree/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8) | v2.6.1 |
@@ -29,7 +30,7 @@ type: docs
 
 ## 中文翻译 {#translation}
 
-中文初稿由 GLM 5.3 辅助生成，由本站维护流程做结构、代码和技术抽查。译文不代表 pgEdge 官方译本；完整人工逐句审校尚未完成。未翻译的文章保留英文入口，缺译目录明确标注。中文与对应英文共用标题 ID，供双语对照阅读。
+社区版共有 118 对中英文页面。本轮新增 66 篇中文，按英文逐篇译校了 32 篇曾由 GLM 辅助生成的初稿，并补入 4 个章节入口所缺的正文。SafeSession 手册、变更日志及 LOLOR 发布说明中的安全段落按管理员视角整理，说明影响及修复行为。导入清单逐页记录了本轮 AI 辅助自审的范围。
 
 ## 独立性 {#independence}
 

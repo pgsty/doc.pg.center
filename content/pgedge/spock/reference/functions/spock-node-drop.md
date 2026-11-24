@@ -45,14 +45,14 @@ tables.
 
 ## ARGUMENTS {#arguments}
 
-node_name
+**`node_name`**
 
-    The name of the existing Spock node to remove.
+The name of the existing Spock node to remove.
 
-ifexists
+**`ifexists`**
 
-    If true, do not raise an error when the node does not exist; return
-    false instead. Default is false.
+If true, do not raise an error when the node does not exist; return
+false instead. Default is false.
 
 ## EXAMPLE {#example}
 

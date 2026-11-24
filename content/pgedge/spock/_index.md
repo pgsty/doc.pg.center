@@ -18,7 +18,7 @@ sidebar_root_menu: false
 
 
 > [!NOTE] Source version
-> The English source is **v6.0.0-beta.2 (pre-release)**, pinned at `d05e2e2b6a82`. The Chinese edition includes the reviewed incremental updates; unchanged draft material still awaits review. Check [versions and sources](/pgedge/about/attribution/) before deploying.
+> The English source is **v6.0.0-beta.2 (pre-release)**, pinned at `d05e2e2b6a82`. A Chinese edition of this snapshot is available. Check [versions and sources](/pgedge/about/attribution/) before deploying.
 
 
 The Spock extension provides multi-master (active-active) replication for

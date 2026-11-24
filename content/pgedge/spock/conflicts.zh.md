@@ -8,7 +8,7 @@ upstream_modified: true
 upstream_ref: d05e2e2b6a82
 source_kind: pinned-release-tag
 linkTitle: 冲突类型
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -16,9 +16,9 @@ type: docs
 
 
 
-关于使用 delta-apply 列进行冲突*避免*，请参见[冲突避免与 delta-apply 列](/zh/pgedge/spock/conflict-avoidance/)。
+关于使用 delta-应用列进行冲突*避免*，请参见[冲突避免与 delta-应用列](/zh/pgedge/spock/conflict-avoidance/)。
 
-在多主复制环境中，当两个或更多节点在重叠时间修改同一行（由主键或复制标识识别）时，就会发生冲突。Spock 在订阅者节点的 apply 阶段检测这些冲突，并按可配置的解决策略处理。
+在多主复制环境中，两个或更多节点在相近时间修改同一行时可能发生冲突。Spock 通过主键或复制标识定位行，在订阅方应用变更时检测冲突，并按配置的策略处理。
 
 每个冲突都会归类为以下类型之一。可解决冲突会记录在 `spock.resolutions` 表中（启用 `spock.save_resolutions` 时）；不可解决冲突记录在 `spock.exception_log`。
 
@@ -45,7 +45,7 @@ type: docs
 
 Spock 会在唯一索引（主键、复制标识，以及在启用 `spock.check_all_uc_indexes` 时可选包含所有唯一约束）中查找传入元组来检测冲突。
 
-**解决方式：** 可配置冲突解决器（默认 `last_update_wins`）比较本地与远端行的提交时间戳。获胜者的值作为 UPDATE 应用到既有行。
+**解决方式：** 可配置冲突解决策略（默认 `last_update_wins`）比较本地与远端行的提交时间戳。获胜者的值作为 UPDATE 应用到既有行。
 
 ---
 
@@ -55,7 +55,7 @@ Spock 会在唯一索引（主键、复制标识，以及在启用 `spock.check_
 
 Spock 通过比较 `replorigin_session_origin`（传入变更的来源）与本地元组上记录的复制源来检测它。来自同一复制源或同一本地事务的变更会被静默应用，不报告冲突。
 
-**解决方式：** 可配置冲突解决器（默认 `last_update_wins`）决定获胜者。由于这是正常复制流程，无论哪一方获胜，事件都不会写入 `spock.resolutions`。
+**解决方式：** 可配置冲突解决策略（默认 `last_update_wins`）决定获胜者。由于这是正常复制流程，无论哪一方获胜，事件都不会写入 `spock.resolutions`。
 
 ---
 
@@ -85,7 +85,7 @@ Spock 会短暂等待并多次重试查找，以防并发事务正在插入该�
 
 如果本地元组与传入 DELETE 来自同一复制源，或来自同一本地事务，则 DELETE 会被静默应用，不报告冲突。
 
-**解决方式：** 可配置冲突解决器（默认 `last_update_wins`）决定获胜者。远端 DELETE 获胜时，删除继续执行。本地元组获胜（即更新）时，删除被跳过并保留该行；此情况会报告为 `delete_exists`。
+**解决方式：** 可配置冲突解决策略（默认 `last_update_wins`）决定获胜者。远端 DELETE 获胜时，删除继续执行。本地元组获胜（即更新）时，删除被跳过并保留该行；此情况会报告为 `delete_exists`。
 
 ---
 
@@ -120,11 +120,11 @@ Spock 会短暂等待并多次重试查找，以防并发事务正在插入该�
 
 `last_update_wins` 要求设置 `track_commit_timestamp = on`，该参数位于 `postgresql.conf`。
 
-**平局判定：** 当两行提交时间戳相同时，Spock 使用 `tiebreaker` 值决定获胜者；该值来自 `spock.node` 配置。tiebreaker 值较低的节点获胜。默认情况下，tiebreaker 设置为节点的唯一 ID。
+**提交时间戳相同时如何裁决。** Spock 比较 `spock.node` 中配置的 `tiebreaker` 值，值较小的节点获胜。每个节点的默认裁决值是其唯一 ID。
 
-**tiebreaker 解析始终是本地的。** 每个节点都保存自己认为的各节点 tiebreaker 值，并从*自己的* `spock.node.info` 列读取。节点自身的 `info`（包括 `tiebreaker`）只填充一次——在创建节点时，或在其他节点首次订阅它时（通过 `spock.sub_create()`，此时获取 provider 的节点元数据）。
+**tiebreaker 解析始终是本地的。** 每个节点都保存自己认为的各节点裁决值，并从*自己的* `spock.node.info` 列读取。节点自身的 `info`（包括 `tiebreaker`）只填充一次——在创建节点时，或在其他节点首次订阅它时（通过 `spock.sub_create()`，此时获取提供方的节点元数据）。
 
-节点自身的 `location`、`country` 和 `info`（包括 `tiebreaker`）之后可以通过 [`spock.node_alter`](/pgedge/spock/reference/functions/spock-node-alter/) 修改——这是推荐方式，因为它会验证 `tiebreaker` 值并合并 `info` 而不是替换——也可以通过原生 `UPDATE spock.node` 修改。任一方式都会**自动传播到每个直接订阅它的节点**（参见[自动节点元数据传播](/pgedge/spock/reference/node-mgmt/#automatic-node-metadata-propagation)）：
+节点自身的 `location`、`country` 和 `info`（包括 `tiebreaker`）之后可以通过 [`spock.node_alter`](/zh/pgedge/spock/reference/functions/spock-node-alter/) 修改——这是推荐方式，因为它会验证 `tiebreaker` 值并合并 `info` 而不是替换——也可以通过原生 `UPDATE spock.node` 修改。任一方式都会**自动传播到每个直接订阅它的节点**（参见[自动节点元数据传播](/zh/pgedge/spock/reference/node-mgmt/#automatic-node-metadata-propagation)）：
 
 ```sql
 -- on n1, one of these two (node_alter validates tiebreaker, UPDATE does not):
@@ -138,7 +138,7 @@ UPDATE spock.node
 
 每个直接订阅 `n1` 的节点都会获得该变更，无需进一步操作。该消息不会通过级联拓扑转发（Node A → Node B → Node C）：Node C 通常没有 `spock.node` 行用于记录 `n1`，除非它订阅 `n1`，因此没有可更新的对象。
 
-拥有 `n1` 行但未应用该消息的节点会保留旧值。这发生在携带消息的事务被异常处理跳过或丢弃时。可使用 [`spock.node_refresh_info`](/pgedge/spock/reference/functions/spock-node-refresh-info/) 按需追赶：
+拥有 `n1` 行但未应用该消息的节点会保留旧值。这发生在携带消息的事务被异常处理跳过或丢弃时。可使用 [`spock.node_refresh_info`](/zh/pgedge/spock/reference/functions/spock-node-refresh-info/) 主动刷新本地缓存：
 
 ```sql
 -- on a node that has a stale row for n1:
@@ -147,7 +147,7 @@ SELECT spock.node_refresh_info('n1');   -- one node
 SELECT spock.node_refresh_info();       -- or every known peer at once
 ```
 
-让部分节点保持未刷新状态等同于用不同值更新它们：集群对同一节点的 tiebreaker 值不一致，可能导致不同节点以不同方式解决完全相同的冲突。
+让部分节点保持未刷新状态等同于用不同值更新它们：集群对同一节点的裁决值不一致，可能导致不同节点以不同方式解决完全相同的冲突。
 
 ## 冻结元组与缺失时间戳数据 {#frozen-tuples-and-missing-timestamp-data}
 
@@ -180,7 +180,7 @@ PostgreSQL 18 为逻辑复制引入了内建冲突检测。Spock 的冲突类型
 | `delete_exists` | 无等价类型。 | Spock 独有。本地行比远端 DELETE 新，因此跳过 DELETE 并保留该行。 |
 {.wide .expand}
 
-**解决方式。** PostgreSQL 18 不解决冲突——它要么无条件应用远端变更，要么跳过操作，并记录事件。Spock 增加可配置解决策略（默认 `last_update_wins`）和平局判定机制，使较新的本地元组可以获胜。
+**解决方式。** PostgreSQL 18 不解决冲突——它要么无条件应用远端变更，要么跳过操作，并记录事件。Spock 增加可配置解决策略（默认 `last_update_wins`）和同时间戳裁决机制，使较新的本地元组可以获胜。
 
 **持久化。** PostgreSQL 18 只将冲突写入 PostgreSQL 服务器日志。Spock 还会将某些冲突持久化到 `spock.resolutions` 表（含 JSON 格式完整元组详情）——具体为 `insert_exists`、`delete_missing` 和 `delete_exists`——并将不可解决冲突（`update_missing`、`update_exists`）写入 `spock.exception_log`。复制源差异事件不会持久化到这两个表。
 
@@ -190,4 +190,4 @@ PostgreSQL 18 为逻辑复制引入了内建冲突检测。Spock 的冲突类型
 
 [上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/conflict_types.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

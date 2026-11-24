@@ -49,19 +49,19 @@ This command must be executed by a superuser.
 
 ## ARGUMENTS {#arguments}
 
-parent
+**`parent`**
 
-    The parent partitioned table, specified as a regclass.
+The parent partitioned table, specified as a regclass.
 
-partition
+**`partition`**
 
-    A specific partition table to add. If omitted, all
-    partitions of the parent are added. The default is NULL.
+A specific partition table to add. If omitted, all
+partitions of the parent are added. The default is NULL.
 
-row_filter
+**`row_filter`**
 
-    An optional SQL expression used to filter which rows
-    from the partition are replicated. The default is NULL.
+An optional SQL expression used to filter which rows
+from the partition are replicated. The default is NULL.
 
 ## EXAMPLE {#example}
 

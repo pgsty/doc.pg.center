@@ -7,7 +7,7 @@ upstream_link: https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574a
 upstream_modified: true
 upstream_ref: 1548836b0df0
 source_kind: pinned-main-snapshot
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -27,7 +27,7 @@ type: docs
 db1_17=# SELECT lolor.disable();
 ```
 
-接着执行升级。以下是一个 `pg_ugrade` 命令示例：
+接着执行升级。下面给出一条 `pg_upgrade` 命令示例。
 
 ```
 # pg_upgrade --old-datadir=/data/db1_17 \
@@ -43,10 +43,10 @@ db1_17=# SELECT lolor.disable();
 db1_18=# SELECT lolor.enable();
 ```
 
-之后重新连接所有客户端会话。`lolor.enable()` 和 `lolor.disable()` 会更改每个 `pg_catalog.lo_*` 名称对应的函数 OID，而 libpq 会在每个连接中解析一次这些 OID，并在连接生命周期内缓存。如果某个会话在切换前使用过大对象，它会继续调用之前的实现。
+随后应重新建立所有客户端连接。`lolor.enable()` 和 `lolor.disable()` 会改变各个 `pg_catalog.lo_*` 名称对应的函数 OID。libpq 只在每个连接上解析一次这些 OID，并将其缓存到连接结束。如果会话在切换前使用过大对象，又没有重新连接，它就会继续调用原来的实现。
 
 ---
 
 [上游原文](https://github.com/pgEdge/lolor/blob/1548836b0df0819e5415a9d0574afd93e9a64f1d/docs/pg_upgrade_with_lolor.md) · `1548836b0df0` · Copyright (c) 2024–2026, pgEdge, Inc. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

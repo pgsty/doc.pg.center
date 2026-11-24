@@ -187,7 +187,7 @@ type: docs
 
 `--preserve-origin` 标志很重要：它确保修复的行保留原始复制源 ID 和提交时间戳，使复制元数据保持正确、集群保持无冲突。不使用此标志，修复的行会被视为本地变更，可能触发虚假冲突。
 
-单节点和多节点故障场景均有说明。完整指南见[灾难性节点故障恢复](/pgedge/spock/recovery/catastrophic-node-failure/)。
+单节点和多节点故障场景均有说明。完整指南见[灾难性节点故障恢复](/zh/pgedge/spock/recovery/catastrophic-node-failure/)。
 
 ### 复制进度跟踪 {#replication-progress-tracking}
 
@@ -227,7 +227,7 @@ type: docs
 ### 逻辑槽故障切换 {#logical-slot-failover}
 
 * **PostgreSQL 17+**：Spock 创建所有逻辑复制槽时都设置 `FAILOVER` 标志，使 PostgreSQL 内置 slotsync 工作进程（`sync_replication_slots = on`）能够自动将它们同步到物理备库。
-* **PostgreSQL 18+**：不再注册 Spock 自己的 `spock_failover_slots` 后台工作进程，由 PostgreSQL 原生 slotsync 工作进程完全取代。所需的 `postgresql.conf` 设置见配置指南的[逻辑槽故障切换](/pgedge/spock/configuration/#logical-slot-failover-ha-standby)一节。
+* **PostgreSQL 18+**：不再注册 Spock 自己的 `spock_failover_slots` 后台工作进程，由 PostgreSQL 原生 slotsync 工作进程完全取代。所需的 `postgresql.conf` 设置见配置指南的[逻辑槽故障切换](/zh/pgedge/spock/configuration/#logical-slot-failover-ha-standby)一节。
 * **PostgreSQL 17**：Spock 工作进程仍然活动，但设置 `sync_replication_slots = on` 时自动让原生 slotsync 工作进程接管，避免冲突。
 * 在 Spock 自己的工作进程运行的版本上（PostgreSQL 15 至 17）：
   * 按 `spock.failover_slots_naptime` 同步槽（默认每秒一次），取代原先每 60 秒一次。
@@ -256,9 +256,9 @@ v5.0 中，DELETE 找到匹配的本地行后会立即应用，不经过冲突�
 
 ### 自动传播节点元数据 {#automatic-node-metadata-propagation}
 
-节点的 `location`、`country` 和 `info`（包括用于裁决同时间戳冲突的 `tiebreaker` 键，见 [conflict_types.md](/pgedge/spock/conflicts/) 中的*Tiebreaker*）过去每次修改后，都需要在其他每个节点上手动执行 `spock.node_refresh_info()` 重新获取。遗漏刷新的节点会悄然保留不同于其余集群的该对端裁决值。
+节点的 `location`、`country` 和 `info`（包括用于裁决同时间戳冲突的 `tiebreaker` 键，见 [conflict_types.md](/zh/pgedge/spock/conflicts/) 中的*Tiebreaker*）过去每次修改后，都需要在其他每个节点上手动执行 `spock.node_refresh_info()` 重新获取。遗漏刷新的节点会悄然保留不同于其余集群的该对端裁决值。
 
-v6.0 通过 `spock.node` 上新增的 `AFTER UPDATE` 触发器和自定义逻辑复制消息，将此类变更自动传播到每个*直接*订阅它的节点。设计上仅限直接订阅者，不通过级联拓扑转发，以免给现有复制流引入消息顺序依赖。推荐使用新函数 `spock.node_alter()` 修改：它验证 `tiebreaker` 值（必须是可容纳于 32 位整数的 JSON 整数），并合并 `info` 补丁，而非整体替换。直接对节点自身记录执行 `UPDATE spock.node` 仍有效，并以相同方式传播。如果携带变更的事务被跳过或丢弃，某节点缓存记录可能遗漏变更，可通过 `spock.node_refresh_info()` 刷新；提供者记录与缓存不同时，`spock.sub_resync_table()` 会发出警告。详见[自动传播节点元数据](/pgedge/spock/reference/node-mgmt/#automatic-node-metadata-propagation)和 [spock.node_alter](/pgedge/spock/reference/functions/spock-node-alter/)。
+v6.0 通过 `spock.node` 上新增的 `AFTER UPDATE` 触发器和自定义逻辑复制消息，将此类变更自动传播到每个*直接*订阅它的节点。设计上仅限直接订阅者，不通过级联拓扑转发，以免给现有复制流引入消息顺序依赖。推荐使用新函数 `spock.node_alter()` 修改：它验证 `tiebreaker` 值（必须是可容纳于 32 位整数的 JSON 整数），并合并 `info` 补丁，而非整体替换。直接对节点自身记录执行 `UPDATE spock.node` 仍有效，并以相同方式传播。如果携带变更的事务被跳过或丢弃，某节点缓存记录可能遗漏变更，可通过 `spock.node_refresh_info()` 刷新；提供者记录与缓存不同时，`spock.sub_resync_table()` 会发出警告。详见[自动传播节点元数据](/zh/pgedge/spock/reference/node-mgmt/#automatic-node-metadata-propagation)和 [spock.node_alter](/zh/pgedge/spock/reference/functions/spock-node-alter/)。
 
 ### 级联复制源跟踪 {#cascade-replication-origin-tracking}
 
@@ -266,7 +266,7 @@ v6.0 支持在级联拓扑（节点 A → 节点 B → 节点 C）中跟踪和�
 
 如果节点 C 还有一个直接订阅节点 A、但处于禁用状态的订阅，节点 A 的变更经节点 B 转发到达时，Spock 现在也会推进该直接订阅的复制源。之后启用直接订阅时，会从已转发变更结束的位置开始，避免再次发送已经通过节点 B 收到的行。
 
-同一节点上已有其他启用的订阅时，不能启用某订阅的 `forward_origins`；其他订阅正在转发时，也不能启用订阅。请先清除 `forward_origins`（通过 `spock.sub_alter_options`），或禁用另一个订阅。详见[复制源转发](/pgedge/spock/reference/sub-mgmt/#origin-forwarding)。
+同一节点上已有其他启用的订阅时，不能启用某订阅的 `forward_origins`；其他订阅正在转发时，也不能启用订阅。请先清除 `forward_origins`（通过 `spock.sub_alter_options`），或禁用另一个订阅。详见[复制源转发](/zh/pgedge/spock/reference/sub-mgmt/#origin-forwarding)。
 
 ### 按订阅统计冲突 {#per-subscription-conflict-statistics}
 
@@ -360,7 +360,7 @@ Spock 会将部分模式和扩展排除在结构同步转储及复制集之外�
 
 * `exclude_from_dump`：排除在结构同步转储之外。
 * `block_in_repset`：其表不得加入复制集。
-* `replicate_ddl`：为 `false` 时，针对该扩展的 `CREATE`、`ALTER` 和 `DROP EXTENSION` 只在发出语句的节点执行。对模式而言，AutoDDL 能追溯到该模式的 DDL 也如此；其他语句，如 `GRANT`，仍会复制。语句列表见[复制集管理](/pgedge/spock/reference/repset-mgmt/)。默认值为 `true`。
+* `replicate_ddl`：为 `false` 时，针对该扩展的 `CREATE`、`ALTER` 和 `DROP EXTENSION` 只在发出语句的节点执行。对模式而言，AutoDDL 能追溯到该模式的 DDL 也如此；其他语句，如 `GRANT`，仍会复制。语句列表见[复制集管理](/zh/pgedge/spock/reference/repset-mgmt/)。默认值为 `true`。
 
 内置记录不能修改或删除：
 
@@ -373,7 +373,7 @@ Spock 会将部分模式和扩展排除在结构同步转储及复制集之外�
 | `pgedge_ace` | 是 | 是 | 否 |
 {.wide .expand}
 
-通过 `spock.reserved_object_add()` 添加自己的记录，通过 `spock.reserved_object_remove()` 删除。自建记录会在转储和恢复后保留。详见[保留模式与扩展](/pgedge/spock/reference/repset-mgmt/#reserved-schemas-and-extensions)。
+通过 `spock.reserved_object_add()` 添加自己的记录，通过 `spock.reserved_object_remove()` 删除。自建记录会在转储和恢复后保留。详见[保留模式与扩展](/zh/pgedge/spock/reference/repset-mgmt/#reserved-schemas-and-extensions)。
 
 现在，无论订阅者上是否存在该对象，都会应用转储排除规则。此前，只存在于提供者上的对象从不会被排除。
 
@@ -437,7 +437,7 @@ Spock 会将部分模式和扩展排除在结构同步转储及复制集之外�
 * **PostgreSQL 18 支持**：适配内核补丁、initdb、行过滤器和编译器警告。
 * **重组源码树**：使用 `src/` 和 `include/` 目录。
 * **打包**：仓库现在自行构建 `spock60` 的 RPM 和 DEB 软件包。不再为已结束生命周期的 Debian bullseye 构建。
-* **文档**：新增按节点数和数据库数规划 Spock 所需 PostgreSQL 资源的指南（见[资源规划](/pgedge/spock/sizing/)）、说明漏洞报告方法的 `SECURITY.md`，并在 README、配置、安装和故障排查指南中补充 `output_plugin_libraries` 要求。从 5.0.12 纳入在 Patroni 下运行逻辑槽故障切换的指南及示例 `samples/set_synchronized_standby_slots.sh`，见[逻辑槽故障切换](/pgedge/spock/logical-slot-failover/)。
+* **文档**：新增按节点数和数据库数规划 Spock 所需 PostgreSQL 资源的指南（见[资源规划](/zh/pgedge/spock/sizing/)）、说明漏洞报告方法的 `SECURITY.md`，并在 README、配置、安装和故障排查指南中补充 `output_plugin_libraries` 要求。从 5.0.12 纳入在 Patroni 下运行逻辑槽故障切换的指南及示例 `samples/set_synchronized_standby_slots.sh`，见[逻辑槽故障切换](/zh/pgedge/spock/logical-slot-failover/)。
 
 ### GUC 变更 {#guc-changes}
 
@@ -574,13 +574,21 @@ Spock 会将部分模式和扩展排除在结构同步转储及复制集之外�
 * 在 `spock.node` 上添加 `node_info_broadcast_trigger` 触发器；
 * 添加监控视图和函数，并向 `pg_monitor` 授予读取权限；
 * 刷新 `spock.md5_agg_sfunc`、`spock.md5_agg` 和 `spock.spock_gen_slot_name` 的并行安全属性；
-* 调用 `spock.slot_enable_failover()`，为现有逻辑槽开启 `failover` 标志，使 PostgreSQL 17 和 18 的槽同步能发现它们。PostgreSQL 16 及更早版本以及备库上不执行此操作，正在使用的槽会被跳过。如何处理跳过的槽，见[逻辑槽故障切换](/pgedge/spock/logical-slot-failover/)。
+* 调用 `spock.slot_enable_failover()`，为现有逻辑槽开启 `failover` 标志，使 PostgreSQL 17 和 18 的槽同步能发现它们。PostgreSQL 16 及更早版本以及备库上不执行此操作，正在使用的槽会被跳过。如何处理跳过的槽，见[逻辑槽故障切换](/zh/pgedge/spock/logical-slot-failover/)。
 
 升级前，检查操作手册和自动化是否直接针对 `spock` 或 `snowflake` 模式执行 DDL。`DROP TABLE snowflake.x` 或在 `spock` 表上执行 `CREATE INDEX` 等语句，在 5.0.x 上可以成功，现在会报错，见上方*AutoDDL 改进*。必须继续这样操作的流程，需要先为会话设置 `spock.enable_ddl_replication = off`，错误提示也会这样说明。限制仅覆盖内置扩展拥有的模式；通过 `spock.reserved_object_add()` 自行保留的模式不受影响，`pgedge_ace` 仍接受 DDL 并将其保留在本地。
 
-PostgreSQL 2026 年针对 CVE-2026-6471 的安全修复新增 `output_plugin_libraries` 参数，其默认值不含 `spock_output`，因此带此修复的服务器上逻辑解码会失败。请在所有支持该参数的节点上（包括物理备库）设置 `output_plugin_libraries = 'pgoutput, test_decoding, spock_output'`；不支持该参数的服务器不要设置。见[配置 Spock](/pgedge/spock/configuration/)。
+PostgreSQL 2026 年针对 CVE-2026-6471 的安全修复新增 `output_plugin_libraries` 参数，其默认值不含 `spock_output`，因此带此修复的服务器上逻辑解码会失败。请在所有支持该参数的节点上（包括物理备库）设置 `output_plugin_libraries = 'pgoutput, test_decoding, spock_output'`；不支持该参数的服务器不要设置。见[配置 Spock](/zh/pgedge/spock/configuration/)。
 
 应用工作进程现在遇到死锁或锁超时等临时错误后会重启并重试。如果问题始终不消失，工作进程会每隔 `spock.restart_delay_default`（默认 5 秒）重启，而不是禁用订阅或丢弃事务。
+
+## Spock 5.0.15 候选版（5.0 分支） {#spock-5015-rc}
+
+pgEdge 于 2026 年 11 月 23 日发布了 [`v5.0.15-rc.2`](https://github.com/pgEdge/spock/releases/tag/v5.0.15-rc.2)。5.0 分支的最新稳定标签仍为 `v5.0.14`。候选版没有模式变更。[上游发行说明](https://github.com/pgEdge/spock/blob/e710faa6fe21126d898fa660e9b6dc8ed0da9438/docs/spock_release_notes.md)列出了故障切换槽工作进程的三项修复。
+
+- 主库空闲时，备库上的新槽副本现在可以在同一轮同步中转为永久槽。工作进程等备库收到主库复制槽的 `restart_lsn` 所指位置的 WAL，再从该位置创建副本。此前，提升备库时可能会丢弃临时副本，导致订阅者找不到复制槽。
+- 如果备库无法解码现有槽副本的 WAL，工作进程会保留副本当前的 `restart_lsn`，直到备库收到目标位置的 WAL。
+- 如果 `spock.failover_slots_database` 不可用，工作进程会继续同步复制槽，跳过一致性快照检查。备库上的目标数据库可以接受连接后，工作进程会重试。遇到其他连接错误时，它先立即重试一次，此后从一分钟开始将等待时间逐次加倍，最长五分钟。工作进程退出后，主服务进程将其重启的等待时间从 60 秒缩短到 15 秒。
 
 ## Spock 5.0.14 {#spock-5014}
 
@@ -588,7 +596,7 @@ PostgreSQL 2026 年针对 CVE-2026-6471 的安全修复新增 `output_plugin_lib
 
 * 5.0.14 没有模式变更。
 
-* 在 PostgreSQL 16 及之后版本，建议在每个备库将新增的 `spock.failover_slots_database` 设为 Spock 数据库。这能确保备库在故障切换中提升后，订阅者不遗漏事务。不设置时，主库在故障切换前不久提交的少量事务可能永远不会发送给订阅者。此时槽副本按 5.0.13 的方式同步，并为每个副本发出一次 WARNING。必须指定数据库，因为故障切换槽工作进程每台服务器只运行一个，不属于某个数据库。该设置需要重启。设置后，工作进程会持续连接该数据库，因此 `DROP DATABASE` 和 `ALTER DATABASE ... RENAME` 会失败，除非使用 `WITH (FORCE)` 或清空设置。见[配置 Spock](/pgedge/spock/configuration/)。
+* 在 PostgreSQL 16 及之后版本，建议在每个备库将新增的 `spock.failover_slots_database` 设为 Spock 数据库。这能确保备库在故障切换中提升后，订阅者不遗漏事务。不设置时，主库在故障切换前不久提交的少量事务可能永远不会发送给订阅者。此时槽副本按 5.0.13 的方式同步，并为每个副本发出一次 WARNING。必须指定数据库，因为故障切换槽工作进程每台服务器只运行一个，不属于某个数据库。该设置需要重启。设置后，工作进程会持续连接该数据库，因此 `DROP DATABASE` 和 `ALTER DATABASE ... RENAME` 会失败，除非使用 `WITH (FORCE)` 或清空设置。见[配置 Spock](/zh/pgedge/spock/configuration/)。
 
 * AutoDDL 不再复制未指定表的 CLUSTER、针对分区表的 CLUSTER，以及 PostgreSQL 19 上带 ANALYZE 或 CONCURRENTLY 的 REPACK。这些操作会在执行中途自行提交，破坏应用工作进程。现在仅在发出语句的节点运行，请自行在每个节点执行。滚动升级时，仍运行 5.0.13 的节点仍可能发送这些语句，因此在所有节点升级到 5.0.14 之前，应避免使用或关闭 AutoDDL。
 
@@ -642,7 +650,7 @@ PostgreSQL 2026 年针对 CVE-2026-6471 的安全修复新增 `output_plugin_lib
 * 5.0.12 没有模式变更。
 
 * PostgreSQL 2026 年针对 CVE-2026-6471 的安全修复（已回补至所有受支持的大版本）新增 `output_plugin_libraries` 参数。未列在其中的库不能再用作输出插件。默认值不含 `spock_output`，因此带此修复的服务器会在逻辑解码时报错 `library "spock_output" may not be used as an output
-  plugin`。每次开始解码都会检查，而不只在创建槽时检查，因此小版本升级后，既有集群也会停止复制，并非只影响新订阅。请在所有支持该参数的节点上（包括物理备库）设置 `output_plugin_libraries = 'pgoutput, test_decoding, spock_output'`；旧版本不识别该参数，设置后会阻止服务器启动。见[配置 Spock](/pgedge/spock/configuration/)。回归与 TAP 测试套件以及 Docker 测试镜像现在会自行检查并设置该参数。
+  plugin`。每次开始解码都会检查，而不只在创建槽时检查，因此小版本升级后，既有集群也会停止复制，并非只影响新订阅。请在所有支持该参数的节点上（包括物理备库）设置 `output_plugin_libraries = 'pgoutput, test_decoding, spock_output'`；旧版本不识别该参数，设置后会阻止服务器启动。见[配置 Spock](/zh/pgedge/spock/configuration/)。回归与 TAP 测试套件以及 Docker 测试镜像现在会自行检查并设置该参数。
 
 * 应用工作进程因与数据无关的原因失败，例如死锁、锁超时或提供者重启，现在会重启并重试，而非当作异常处理。见错误修复。如果问题持续存在，工作进程会每隔 `spock.restart_delay_default`（默认 5 秒）重启，而非禁用订阅或丢弃事务。
 
@@ -682,7 +690,7 @@ PostgreSQL 2026 年针对 CVE-2026-6471 的安全修复新增 `output_plugin_lib
 
 * 移除旧的 Z0DAN Python 文件及其 TAP 测试。`add_node` 和 `remove_node` 由 SQL 实现提供。
 
-* 新增在 PostgreSQL 17 及更高版本上配合 Patroni 使用逻辑复制槽故障切换的文档，涵盖所需参数、应写入引导 DCS 的设置，以及主备切换时如何处理 `synchronized_standby_slots`。Patroni `on_role_change` 回调示例 `samples/set_synchronized_standby_slots.sh` 会在提升后重置 `synchronized_standby_slots`。参见[逻辑复制槽故障切换](/pgedge/spock/logical-slot-failover/)。
+* 新增在 PostgreSQL 17 及更高版本上配合 Patroni 使用逻辑复制槽故障切换的文档，涵盖所需参数、应写入引导 DCS 的设置，以及主备切换时如何处理 `synchronized_standby_slots`。Patroni `on_role_change` 回调示例 `samples/set_synchronized_standby_slots.sh` 会在提升后重置 `synchronized_standby_slots`。参见[逻辑复制槽故障切换](/zh/pgedge/spock/logical-slot-failover/)。
 
 * 补充 `spock.wait_for_sync_event()` 的 `wait_if_disabled` 参数说明。
 
@@ -691,7 +699,7 @@ PostgreSQL 2026 年针对 CVE-2026-6471 的安全修复新增 `output_plugin_lib
 ## Spock 5.0.11 {#spock-5011}
 
 ### 新功能 {#new-features}
-* 新增 `spock.use_native_failover_slots`（默认为关闭，PGC_POSTMASTER）。启用后，Spock 在 PG17+ 上为逻辑复制槽设置 FAILOVER 标志；在 PG17 上，当 `sync_replication_slots=on` 时让 PostgreSQL 原生 slotsync 工作进程接管同步；在 PG18+ 上不再注册 Spock 自带的故障切换复制槽工作进程。关闭时保留现有的工作进程实现。该设置在创建逻辑复制槽的订阅者节点上读取，修改后需要重启服务器。配置步骤及提升后必须执行的 `synchronized_standby_slots` 操作流程，参见[逻辑复制槽故障切换](/pgedge/spock/logical-slot-failover/)。
+* 新增 `spock.use_native_failover_slots`（默认为关闭，PGC_POSTMASTER）。启用后，Spock 在 PG17+ 上为逻辑复制槽设置 FAILOVER 标志；在 PG17 上，当 `sync_replication_slots=on` 时让 PostgreSQL 原生 slotsync 工作进程接管同步；在 PG18+ 上不再注册 Spock 自带的故障切换复制槽工作进程。关闭时保留现有的工作进程实现。该设置在创建逻辑复制槽的订阅者节点上读取，修改后需要重启服务器。配置步骤及提升后必须执行的 `synchronized_standby_slots` 操作流程，参见[逻辑复制槽故障切换](/zh/pgedge/spock/logical-slot-failover/)。
 
 * 默认每 1 秒向备库同步一次故障切换复制槽，取代此前固定的 60 秒，缩短提升时遇到过期复制槽的时间窗口。现在可通过 `spock.failover_slots_naptime` 调整间隔，通过 `spock.failover_slots_feedback_naptime` 调整等待反馈的重试间隔；两者均以毫秒为单位，可通过 SIGHUP 重新加载。
 
@@ -742,7 +750,7 @@ PostgreSQL 2026 年针对 CVE-2026-6471 的安全修复新增 `output_plugin_lib
 逻辑复制槽故障切换改进
 
 * 在 **PostgreSQL 17+** 上，Spock 现在为所有逻辑复制槽设置 `FAILOVER` 标志，使 PostgreSQL 内置 slotsync 工作进程（`sync_replication_slots = on`）能够自动将它们同步到物理备库。
-* 在 **PostgreSQL 18+** 上，不再注册 Spock 自带的 `spock_failover_slots` 后台工作进程，完全由 PostgreSQL 原生 slotsync 工作进程替代。所需的 `postgresql.conf` 设置，参见配置指南的[逻辑复制槽故障切换](/pgedge/spock/configuration/#logical-slot-failover-ha-standby)一节。
+* 在 **PostgreSQL 18+** 上，不再注册 Spock 自带的 `spock_failover_slots` 后台工作进程，完全由 PostgreSQL 原生 slotsync 工作进程替代。所需的 `postgresql.conf` 设置，参见配置指南的[逻辑复制槽故障切换](/zh/pgedge/spock/configuration/#logical-slot-failover-ha-standby)一节。
 * 在 **PostgreSQL 17** 上，Spock 工作进程保持启用，但设置了 `sync_replication_slots = on` 时会自动让原生 slotsync 工作进程接管，以避免冲突。
 
 ### 缺陷修复 {#bug-fixes-7}
@@ -911,4 +919,4 @@ PostgreSQL 2026 年针对 CVE-2026-6471 的安全修复新增 `output_plugin_lib
 
 ---
 
-[上游来源](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/spock_release_notes.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/pgedge/about/license/)。
+[上游来源](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/spock_release_notes.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。

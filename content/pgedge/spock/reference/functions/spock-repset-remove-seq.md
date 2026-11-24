@@ -22,10 +22,10 @@ spock.repset_remove_seq (
 
 ## RETURNS {#returns}
 
-    - true if the sequence was successfully removed from the replication set.
-    - Raises an ERROR if the sequence is not a member of the replication
-      set, or if the call has invalid parameters or insufficient
-      privileges.
+- true if the sequence was successfully removed from the replication set.
+- Raises an ERROR if the sequence is not a member of the replication
+  set, or if the call has invalid parameters or insufficient
+  privileges.
 
 ## DESCRIPTION {#description}
 
@@ -41,14 +41,14 @@ This command must be executed by a superuser.
 
 ## ARGUMENTS {#arguments}
 
-set_name
+**`set_name`**
 
-    The name of an existing replication set.
+The name of an existing replication set.
 
-relation
+**`relation`**
 
-    The sequence to remove, specified as a regclass
-    (for example, 'public.my_sequence').
+The sequence to remove, specified as a regclass
+(for example, 'public.my_sequence').
 
 ## EXAMPLE {#example}
 

@@ -37,7 +37,7 @@ acctg=# SELECT * FROM snowflake.currval('orders_id_seq'::regclass);
 (1 row)
 ```
 
-**`snowflake.get_epoch(snowflake int8)`** Returns the timestamp part of a Snowflake as `EPOCH` (seconds since 2023-01-01) as a `NUMERIC` value with precision of three digits. For example, the timestamp of the following sequence value is `1704996539.845` seconds past Jan. 1, 2023:
+**`snowflake.get_epoch(snowflake int8)`** Returns the Unix timestamp in seconds as a `NUMERIC` with three decimal places. Snowflake IDs store milliseconds relative to 2023-01-01 UTC. The function adds the offset from the Unix epoch before returning the value. The example returns `1704996539.845`:
 
 ```sql
 acctg=# SELECT * FROM snowflake.get_epoch(136169504773242881);
@@ -57,6 +57,9 @@ acctg=# SELECT to_timestamp(snowflake.get_epoch(136169504773242881));
 (1 row)
 ```
 
+> [!NOTE] Node and counter in the upstream transcript
+> In v2.6.1, bits 12–21 of `136169504773242881` encode node `0` and the low 12 bits encode count `1`. For this ID, `get_node()` returns `0`, `get_count()` returns `1`, and `format()` reports `"id": 0` and `"count": 1`. The upstream transcripts below show different values. [Pinned bit layout](https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8/snowflake.c#L109-L122)
+
 **`snowflake.get_count(snowflake int8)`** Returns the count part of the given Snowflake as `int4` value; count resets to `0` for each new millisecond. For example:
 
 ```sql
@@ -67,7 +70,7 @@ acctg=# SELECT snowflake.get_count(136169504773242881);
 (1 row)
 ```
 
-**`snowflake.get_node(snowflake int8)`** Returns the value of `snowflake.node` in `postgresql.conf` for the host of the specified Snowflake sequence. For example, the Snowflake sequence number `136169504773242881` resides on Node `1`:
+**`snowflake.get_node(snowflake int8)`** Returns the node number encoded in the ID. It reflects the `snowflake.node` setting at allocation time. Decoding does not read the issuing host’s configuration file. The historical upstream transcript follows.
 
 ```sql
 acctg=# SELECT * FROM snowflake.get_node(136169504773242881);
@@ -77,7 +80,7 @@ acctg=# SELECT * FROM snowflake.get_node(136169504773242881);
 (1 row)
 ```
 
-**`snowflake.format(snowflake int8)`** Returns a `jsonb` object of the given Snowflake in the form: `{"node": 1, "ts": "2023-10-16 17:57:26.361+00", "count": 0}`.  For example:
+**`snowflake.format(snowflake int8)`** Returns a `jsonb` object of the given Snowflake in the form: `{"id": 1, "ts": "2023-10-16 17:57:26.361+00", "count": 0}`.  For example:
 
 ```sql
 acctg=# SELECT * FROM snowflake.format(136169504773242881);

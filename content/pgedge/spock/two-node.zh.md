@@ -8,7 +8,7 @@ upstream_modified: true
 upstream_ref: d05e2e2b6a82
 source_kind: pinned-release-tag
 linkTitle: 双节点教程
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -16,7 +16,7 @@ type: docs
 
 
 > [!NOTE] 本站校注
-> 原文第三步中 `pg_hba.conf` 的示例路径误写为 `postgresql.conf`。认证规则应写入实例实际使用的 `pg_hba.conf`；可用 `SHOW hba_file;` 查询路径。详见[已知上游问题](/zh/pgedge/about/maintenance/#upstream-issues)。
+> 上游原文第三步中 `pg_hba.conf` 的示例路径误写为 `postgresql.conf`。认证规则应写入实例实际使用的 `pg_hba.conf`；可用 `SHOW hba_file;` 查询路径。详见[已知上游问题](/zh/pgedge/about/maintenance/#upstream-issues)。
 
 
 安装并初始化 PostgreSQL、创建 Spock 扩展之后，可以按以下步骤配置双节点集群。下文示例创建的集群包含两个节点，名称分别为 `n1` 和 `n2`，它们在端口 `5432` 上监听 PostgreSQL 服务器连接。
@@ -41,9 +41,9 @@ type: docs
 
     `track_commit_timestamp = on`
 
-    这些值面向复制单个数据库的双节点示例。进入生产环境前，或添加节点/数据库时，请根据拓扑使用[为 Spock 规划 PostgreSQL 资源](/zh/pgedge/spock/sizing/)规划容量——订阅按数据库创建，因此 slot、walsender 和 worker 会随节点数乘以被复制数据库数扩展；`max_worker_processes` 还会与并行查询 worker 共享，并且实例中每个数据库需要一个槽位，supervisor 需要一个，slot sync worker 再需要一个。
+    这些值面向复制单个数据库的双节点示例。进入生产环境前，或添加节点/数据库时，请根据拓扑使用[为 Spock 规划 PostgreSQL 资源](/zh/pgedge/spock/sizing/)规划容量——订阅按数据库创建，因此复制槽、WAL 发送进程和工作进程会随节点数乘以被复制数据库数扩展；`max_worker_processes` 还会与并行查询工作进程共享，并且实例中每个数据库需要一个槽位，监督进程需要一个，复制槽同步工作进程再需要一个。
 
-3. 编辑 [`pg_hba.conf` 文件](https://www.postgresql.org/docs/current/auth-pg-hba-conf.html)（位于 `/var/lib/pgsql/current/data/postgresql.conf`），允许 `n1` 与 `n2` 之间建立连接；以下命令仅作示例，不建议用于生产系统，因为它们会让系统接受来自任意客户端的连接：
+3. 编辑 [`pg_hba.conf` 文件](https://www.postgresql.org/docs/current/auth-pg-hba-conf.html)（使用 `SHOW hba_file;` 确认实际路径），允许 `n1` 与 `n2` 之间建立连接；以下命令仅作示例，不建议用于生产系统，因为它们会让系统接受来自任意客户端的连接：
 
     `host all all 0.0.0.0/0 trust`
 
@@ -51,7 +51,7 @@ type: docs
 
     `host replication all 0.0.0.0/0 trust`
 
-4. 使用 [`spock.node_create`](/pgedge/spock/reference/functions/spock-node-create/) 命令创建 provider 与订阅者节点；在 `n1` 上使用命令：
+4. 使用 [`spock.node_create`](/zh/pgedge/spock/reference/functions/spock-node-create/) 命令创建提供方与订阅者节点；在 `n1` 上使用命令：
 
     `SELECT spock.node_create (node_name := 'n1', dsn := 'host=<n1_ip_address> port=<n1_port> dbname=<db_name>');`
 
@@ -59,17 +59,17 @@ type: docs
 
       `SELECT spock.node_create (node_name := 'n2', dsn := 'host=<n2_ip_address> port=<n2_port> dbname=<db_name>');`
 
-5. 在 `n1` 上，使用 [`spock.repset_add_all_tables`](/pgedge/spock/reference/functions/spock-repset-add-all-tables/) 命令将 `public` schema 中的表加入 `default` 复制集。如果在其他 schema 中操作，请按需自定义命令：
+5. 在 `n1` 上，使用 [`spock.repset_add_all_tables`](/zh/pgedge/spock/reference/functions/spock-repset-add-all-tables/) 命令将 `public` 模式中的表加入 `default` 复制集。如果在其他模式中操作，请按需自定义命令：
 
     `SELECT spock.repset_add_all_tables('default', ARRAY['public']);`
 
-6. 在 n2 上，使用 [`spock.sub_create`](/pgedge/spock/reference/functions/spock-sub-create/) 命令创建 n2 到 n1 的订阅；订阅名为 `sub_n2_n1`：
+6. 在 n2 上，使用 [`spock.sub_create`](/zh/pgedge/spock/reference/functions/spock-sub-create/) 命令订阅 n1 发布的变更；订阅名为 `sub_n2_n1`：
 
     `SELECT spock.sub_create (subscription_name := 'sub_n2_n1', provider_dsn := 'host=<n1_ip_address> port=<n1 port> dbname=<db_name>');`
 
     `SELECT spock.sub_wait_for_sync('sub_n2_n1');`
 
-7. 在 `n1` 上创建到 `n2` 的对应订阅，名称为 `sub_n1_n2`：
+7. 在 `n1` 上订阅 `n2` 发布的变更，名称为 `sub_n1_n2`：
 
     `SELECT spock.sub_create (subscription_name := 'sub_n1_n2', provider_dsn := 'host=<n2_ip_address> port=<n2_port> dbname=<db_name>');`
 
@@ -106,4 +106,4 @@ type: docs
 
 [上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/two_node_cluster.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

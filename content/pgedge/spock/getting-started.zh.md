@@ -8,7 +8,7 @@ upstream_modified: true
 upstream_ref: d05e2e2b6a82
 source_kind: pinned-release-tag
 linkTitle: 快速上手
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -16,7 +16,7 @@ type: docs
 
 
 
-本指南带你安装 Spock，并创建一个双节点 active-active 复制集群。
+本指南介绍如何安装 Spock，并创建支持双向写入和复制的双节点集群。
 
 开始之前，请确认满足以下前置条件：
 
@@ -157,7 +157,7 @@ pgEdge Enterprise Postgres 安装会自动包含以下组件：
 - Snowflake 序列。
 - 用于简化备份与恢复的 pgBackRest。
 - LOLOR 大对象支持。
-- active-active 分布式集群管理工具。
+- 双活分布式集群管理工具。
 
 ## 从源码安装（备选路径） {#install-from-source-alternative-path}
 
@@ -179,7 +179,7 @@ pgEdge Enterprise Postgres 安装会自动包含以下组件：
 
 4. 按 [PostgreSQL 文档](https://www.postgresql.org/docs/current/installation.html)中的说明配置、构建并安装 PostgreSQL。
 
-5. 使用以下命令将 `pg_config` 文件位置加入 PATH：
+5. 使用以下命令将 `pg_config` 所在目录加入 PATH：
 
     ```bash
     export PATH=path_to_pg_config_file
@@ -222,20 +222,20 @@ output_plugin_libraries = 'pgoutput, test_decoding, spock_output'
 
 > [!NOTE] 规划 `max_worker_processes` 容量
 >
-> 该参数覆盖的 worker 不止每个节点一个：Spock 会运行一个 supervisor、一个 slot sync worker（每个节点都有，无论是 primary 还是 standby）、实例中每个可连接数据库（包括 `postgres` 和 `template1`）各一个 manager、每个订阅一个应用工作进程，以及在表同步期间每个订阅一个 sync worker。订阅按数据库创建，因此其数量是其他节点数*乘以*被复制数据库数。该池还会与并行查询 worker 共享。公式请参见[为 Spock 规划 PostgreSQL 资源](/zh/pgedge/spock/sizing/)。
+> 该参数覆盖的工作进程不止每个节点一个：Spock 会运行一个监督进程、一个复制槽同步工作进程（每个节点都有，无论是主库还是备库）、实例中每个可连接数据库（包括 `postgres` 和 `template1`）各一个管理进程、每个订阅一个应用工作进程，以及在表同步期间每个订阅一个同步工作进程。订阅按数据库创建，因此其数量是其他节点数*乘以*被复制数据库数。该池还会与并行查询工作进程共享。公式请参见[为 Spock 规划 PostgreSQL 资源](/zh/pgedge/spock/sizing/)。
 >
 
 
 > [!NOTE]
 >
 > 只有当服务器拥有 `output_plugin_libraries` 参数时才设置它——该参数由 2026 年的一次安全修复引入；如果其中没有列出 `spock_output`，逻辑解码会以 `library "spock_output" may not be used as an
-> output plugin` 失败。该检查在每次启动解码时都会运行，因此在次要版本升级后也会使已建立集群停止，并且适用于每个节点。在较旧版本中该参数不存在，设置它会导致服务器无法启动。如何检查请参见[配置 Spock](/zh/pgedge/spock/configuration/)。
+> 输出插件` 失败。该检查在每次启动解码时都会运行，因此在次要版本升级后也会使已建立集群停止，并且适用于每个节点。在较旧版本中该参数不存在，设置它会导致服务器无法启动。如何检查请参见[配置 Spock](/zh/pgedge/spock/configuration/)。
 >
 
 
 > [!NOTE]
 >
-> - PostgreSQL 15-17：`max_replication_slots` 参数同时控制 slot 和复制源状态。估算容量时需同时考虑两者（每个订阅一个复制源，订阅按被复制的数据库计数）。
+> - PostgreSQL 15-17：`max_replication_slots` 参数同时控制复制槽和复制源状态。估算容量时需同时考虑两者（每个订阅一个复制源，订阅按被复制的数据库计数）。
 >
 > - PostgreSQL 18+：新参数 `max_active_replication_origins` 单独控制复制源状态。默认值为 10，可能不足。在全互联拓扑中，至少设置为该节点应用的订阅数，即 `(nodes - 1) x replicated
 >   databases`，并留出余量。
@@ -250,7 +250,7 @@ sudo systemctl restart postgresql-18
 sudo systemctl status postgresql-18
 ```
 
-确认服务处于 active 并正在运行。
+确认服务状态为 active（运行中）。
 
 在每个节点上修改 [`pg_hba.conf`](https://www.postgresql.org/docs/18/auth-pg-hba-conf.html) 文件，允许节点之间建立连接。
 
@@ -298,7 +298,7 @@ postgres=#
 
 > [!WARNING]
 >
-> Spock 使用 `spock` schema 提供复制功能。不要直接删除、创建或修改 `spock` schema 中的文件。应使用 Spock 函数和过程管理复制。
+> Spock 使用 `spock` 模式提供复制功能。不要直接删除、创建或修改 `spock` 模式中的对象。应使用 Spock 函数和过程管理复制。
 >
 
 ## 创建节点并配置复制 {#create-nodes-and-configure-replication}
@@ -324,7 +324,7 @@ postgres=#
     SELECT spock.repset_add_all_tables('default', ARRAY['public']);
     ```
 
-    如果操作所在 schema 不是 `public`，请相应调整 schema 名称。
+    如果操作所在模式不是 `public`，请相应调整模式名称。
 
 ### 在节点 2（n2）上 {#on-node-2-n2}
 
@@ -345,7 +345,7 @@ postgres=#
     SELECT spock.repset_add_all_tables('default', ARRAY['public']);
     ```
 
-3. 使用以下命令创建从 n2 到 n1 的订阅：
+3. 使用以下命令创建订阅，让 n2 接收 n1 的变更：
 
     ```sql
     SELECT spock.sub_create(
@@ -358,7 +358,7 @@ postgres=#
 
 ### 在节点 1（n1）上 {#on-node-1-n1-1}
 
-使用以下命令创建从 n1 到 n2 的反向订阅：
+使用以下命令创建反向订阅，让 n1 接收 n2 的变更：
 
 ```sql
 SELECT spock.sub_create(
@@ -500,7 +500,7 @@ forward_origins   |
 你的双节点 Spock 集群现已可用。以下文档介绍集群配置和管理的后续步骤。
 
 - [配置 Spock](/zh/pgedge/spock/configuration/) 介绍冲突解决设置和高级配置选项。
-- [Spock 函数参考](/pgedge/spock/reference/) 提供监控函数和复制管理的详细信息。
+- [Spock 函数参考](/zh/pgedge/spock/reference/) 提供监控函数和复制管理的详细信息。
 - [管理 DDL 复制](/zh/pgedge/spock/managing/spock-autoddl/) 说明如何控制自动 DDL 复制行为。
 
 ## 故障排查 {#troubleshooting}
@@ -508,13 +508,13 @@ forward_origins   |
 如果遇到问题，请查看以下常见问题和解决方案。
 
 - 如果复制没有启动，检查 `pg_hba.conf` 条目，并确认节点可以彼此连接。
-- 当订阅卡在 initializing 时，确认 `max_replication_slots` 和 `max_wal_senders` 设置为足够大的值。正在同步的订阅除了其 apply 流持有的资源外，还需要在 provider 上使用第二个 slot 和 walsender；参见[为 Spock 规划 PostgreSQL 资源](/zh/pgedge/spock/sizing/)。
+- 当订阅卡在 initializing 时，确认 `max_replication_slots` 和 `max_wal_senders` 设置为足够大的值。正在同步的订阅除了其应用流持有的资源外，还需要在提供方上使用第二个复制槽和 WAL 发送进程；参见[为 Spock 规划 PostgreSQL 资源](/zh/pgedge/spock/sizing/)。
 - 如果 DDL 没有复制，确认两个节点都启用了自动 DDL 复制设置。
 - 如果错误信息不明确，请查看 PostgreSQL 日志中的详细错误消息。
 
 更多信息请参见以下资源：
 
-- [Spock 函数参考](/pgedge/spock/reference/) 提供详细函数文档。
+- [Spock 函数参考](/zh/pgedge/spock/reference/) 提供详细函数文档。
 - [高级配置选项](/zh/pgedge/spock/configuration/) 介绍其他配置参数。
 - [管理 DDL 复制](/zh/pgedge/spock/managing/spock-autoddl/) 说明 DDL 复制功能。
 
@@ -522,4 +522,4 @@ forward_origins   |
 
 [上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/getting_started.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

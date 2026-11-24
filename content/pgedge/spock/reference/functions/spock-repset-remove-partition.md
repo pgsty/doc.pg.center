@@ -50,15 +50,15 @@ or PostgreSQL server configuration.
 
 ## ARGUMENTS {#arguments}
 
-parent
+**`parent`**
 
-    The parent partitioned table whose partition(s) should be removed
-    from replication.
+The parent partitioned table whose partition(s) should be removed
+from replication.
 
-partition
+**`partition`**
 
-    The specific partition to remove from replication. If NULL, all
-    partitions of the parent table are removed. Defaults to NULL.
+The specific partition to remove from replication. If NULL, all
+partitions of the parent table are removed. Defaults to NULL.
 
 ## EXAMPLE {#example}
 

@@ -50,14 +50,14 @@ completion.
 
 ## ARGUMENTS {#arguments}
 
-subscription_name
+**`subscription_name`**
 
-    The name of the subscription to monitor.
+The name of the subscription to monitor.
 
-relation
+**`relation`**
 
-    The name of the table to wait for, specified as a regclass (can
-    be schema-qualified).
+The name of the table to wait for, specified as a regclass (can
+be schema-qualified).
 
 ## EXAMPLE {#example}
 

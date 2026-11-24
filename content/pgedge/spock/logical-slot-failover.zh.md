@@ -28,7 +28,7 @@ Spock 在每个提供者节点上创建逻辑复制槽。使用物理备库实�
 | 18+ | 原生 `sync_replication_slots`（必需） | 不注册 |
 {.wide .expand}
 
-机制随版本变化，但要求不变：集群的每个节点上都运行复制槽同步工作进程，包括主库和备库。进程在服务器知道自身角色之前启动，因此在主库上会常驻并保持空闲，仅醒来检查服务器是否已进入恢复。Spock 自己的工作进程通过 `shared_preload_libraries` 注册，占用一个 `max_worker_processes` 槽位；PostgreSQL 原生工作进程则是该进程池之外的专用 postmaster 子进程。无论哪种机制，都要在每个节点上为它预留进程资源，参见[为 Spock 规划 PostgreSQL 资源](/pgedge/spock/sizing/)。
+机制随版本变化，但要求不变：集群的每个节点上都运行复制槽同步工作进程，包括主库和备库。进程在服务器知道自身角色之前启动，因此在主库上会常驻并保持空闲，仅醒来检查服务器是否已进入恢复。Spock 自己的工作进程通过 `shared_preload_libraries` 注册，占用一个 `max_worker_processes` 槽位；PostgreSQL 原生工作进程则是该进程池之外的专用 postmaster 子进程。无论哪种机制，都要在每个节点上为它预留进程资源，参见[为 Spock 规划 PostgreSQL 资源](/zh/pgedge/spock/sizing/)。
 
 在 **PostgreSQL 17+** 上，Spock 创建每个逻辑复制槽时都会设置 `FAILOVER` 标志，使 PostgreSQL 内置的 slotsync 工作进程能自动同步它们。
 
@@ -40,7 +40,7 @@ Spock 在每个提供者节点上创建逻辑复制槽。使用物理备库实�
 
 ### 基础设置（所有版本、每个节点） {#base-settings-all-versions-every-node}
 
-这些设置是 Spock 能够执行复制的基础要求，详见[安装与配置 Spock](/pgedge/spock/installation/)。
+这些设置是 Spock 能够执行复制的基础要求，详见[安装与配置 Spock](/zh/pgedge/spock/installation/)。
 
 ```ini
 wal_level = logical
@@ -51,7 +51,7 @@ max_replication_slots = 10
 max_wal_senders = 10
 ```
 
-请按集群规模规划这些值，不要直接照抄数字，参见[为 Spock 规划 PostgreSQL 资源](/pgedge/spock/sizing/)。复制槽、walsender 和复制源的数量随其他节点数与实例中参与复制的数据库数的乘积增长，`max_replication_slots` 和 `max_wal_senders` 应设为相同值。注意，物理备库会使主库所需的槽数再增加一个；复制槽同步工作进程在每个节点上占用一个 `max_worker_processes` 槽位。
+请按集群规模规划这些值，不要直接照抄数字，参见[为 Spock 规划 PostgreSQL 资源](/zh/pgedge/spock/sizing/)。复制槽、walsender 和复制源的数量随其他节点数与实例中参与复制的数据库数的乘积增长，`max_replication_slots` 和 `max_wal_senders` 应设为相同值。注意，物理备库会使主库所需的槽数再增加一个；复制槽同步工作进程在每个节点上占用一个 `max_worker_processes` 槽位。
 
 在 PostgreSQL 18 上，还要将 `max_active_replication_origins`（默认 10）设为至少等于此节点应用的订阅数，并留出一定余量；全网状拓扑中的订阅数为 `(nodes - 1) x replicated
 databases`。将其设为与 `max_replication_slots` 相同，是最简单的安全选择。
@@ -245,7 +245,7 @@ ignore_slots:
 | `wal_level` | `logical` | 动态配置 | 是 | 逻辑解码和槽同步所必需 |
 | `output_plugin_libraries` | 包含 `spock_output` | 动态配置，**每个成员** | 否（重新加载） | 仅用于具有此参数的服务器（见下文）。同步槽仍使用 `spock_output` 作为插件，因此缺少此设置的成员在提升后无法提供复制服务 |
 | `postgresql.use_slots` | `true` | Patroni 配置 | 不适用 | 默认值。Patroni 创建每个副本进行流复制所用的成员槽，并将 `primary_slot_name` 设为该槽，这是槽同步的要求 |
-| `max_replication_slots` / `max_wal_senders` | 按集群规模设置 | 动态配置 | 是 | 每个节点上的成员槽加 Spock 逻辑槽；参见[资源规划](/pgedge/spock/sizing/) |
+| `max_replication_slots` / `max_wal_senders` | 按集群规模设置 | 动态配置 | 是 | 每个节点上的成员槽加 Spock 逻辑槽；参见[资源规划](/zh/pgedge/spock/sizing/) |
 | `synchronized_standby_slots` | 备库成员槽名称 | 动态配置或回调 | 否（重新加载） | 可选但建议设置；让领导者的 walsender 等待备库收到 WAL。参见[主备切换的陷阱](#the-switchover-sharp-edge-synchronized_standby_slots) |
 {.wide .expand}
 
@@ -372,7 +372,7 @@ spock.drop_extra_slots = on
 
 Spock 6.0.0 新建的槽已具有 `failover = true`。旧版 Spock 创建的槽没有该标志，PostgreSQL 17 和 18 的原生槽同步会忽略它们。升级会为这些现有槽开启该标志。
 
-本节只涵盖升级中与故障切换相关的部分。完整流程（禁用自动 DDL、安装新二进制文件、逐个重启节点）请先按[升级 Spock 扩展](/pgedge/spock/upgrading/)执行。以下步骤在安装 6.0.0 二进制文件后进行。
+本节只涵盖升级中与故障切换相关的部分。完整流程（禁用自动 DDL、安装新二进制文件、逐个重启节点）请先按[升级 Spock 扩展](/zh/pgedge/spock/upgrading/)执行。以下步骤在安装 6.0.0 二进制文件后进行。
 
 ### 1. 执行扩展更新 {#1-run-the-extension-update}
 
@@ -462,4 +462,4 @@ Spock 不在 PG18 上注册自己的工作进程。如果未设置 `sync_replica
 
 ---
 
-[上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/logical_slot_failover.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/pgedge/about/license/)。
+[上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/logical_slot_failover.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。

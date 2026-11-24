@@ -7,7 +7,7 @@ upstream_link: https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d
 upstream_modified: true
 upstream_ref: d05e2e2b6a82
 source_kind: pinned-release-tag
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -23,7 +23,7 @@ spock 扩展可以自动复制 DDL 语句。要启用自动 DDL 复制，请把�
 
 * `spock.allow_ddl_from_functions` 让 spock 自动复制函数内部调用的 DDL 语句。如果预期每个函数都会在每个节点上执行，请把 `spock.allow_ddl_from_functions` 设置为 `off`。设置为 `off` 时，从函数复制的语句遵循为 `include_ddl_repset` 描述的相同规则。如果表具有主键，它会被加入 `default` 复制集；否则会被加入 `default_insert_only` 复制集。
 
-要完全阻止整个集群中的所有 DDL（包括原本会自动复制的 DDL），请使用：
+若要在整个集群的维护期间禁止 DDL（包括可自动复制的 DDL），请在每个节点上设置以下参数。
 
 * `spock.deny_all_ddl`——布尔值，默认为 `false`。设置为 `true` 时，Spock 会拒绝在该节点上执行的任何 DDL 语句。这在敏感维护窗口期间，或在添加、修复节点时，可用作保护措施。超级用户可以在运行时更改此设置（`PGC_SUSET`）；不需要重新加载服务器。
 
@@ -32,7 +32,7 @@ spock 扩展可以自动复制 DDL 语句。要启用自动 DDL 复制，请把�
 
 > [!NOTE]
 >
-> 你也可以使用 `spock.replicate_ddl()` 函数指示 Spock 启用自动 DDL 复制。用此函数启动自动 DDL 复制时，Spock 会检查每笔事务的语句类型，并执行和复制识别为 DDL 的语句。
+> 也可以调用 `spock.replicate_ddl()` 显式执行并复制指定的 DDL。函数会检查传入语句的类型，识别为 DDL 后才执行并复制。
 >
 
 在自动复制过程中，spock 会生成提供执行信息的消息。以下是每条消息的描述：
@@ -57,4 +57,4 @@ spock 扩展可以自动复制 DDL 语句。要启用自动 DDL 复制，请把�
 
 [上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/managing/spock_autoddl.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

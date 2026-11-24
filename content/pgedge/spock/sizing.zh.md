@@ -8,7 +8,7 @@ upstream_modified: true
 upstream_ref: d05e2e2b6a82
 source_kind: pinned-release-tag
 linkTitle: 资源规划
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -18,35 +18,35 @@ type: docs
 
 Spock 复制消耗三种独立且分别配置的 Postgres 资源：后台工作进程槽、WAL 发送进程槽，以及复制槽/复制源。每种资源由不同参数控制，并且每种都根据集群的不同属性来确定大小。
 
-教程中展示的许多值只是小型测试集群的起点，不是生产建议。本页解释 Spock 实际会启动哪些进程，以便你有意识地规划每个参数。
+教程中的配置值适用于小型测试集群。规划生产容量时，应按本页列出的进程和连接分别计算。
 
 
 > [!WARNING]
 >
-> 本页每个有明确建议支撑的参数都需要**重启服务器**才能修改。容量不足不是软失败：当工作进程无法注册时，Spock 会抛出 `ERROR`，supervisor 会循环重试，因此复制完全不会启动。公式中包含少量余量，部分就是为了防止这种情况。
+> 本页每个有明确建议支撑的参数都需要**重启服务器**才能修改。容量不足不是软失败：当工作进程无法注册时，Spock 会抛出 `ERROR`，监督进程会循环重试，因此复制完全不会启动。公式中包含少量余量，部分就是为了防止这种情况。
 >
 
 ## Spock 在每个节点上运行什么 {#what-spock-runs-on-each-node}
 
 | 进程 | 数量 | 计入 |
 |---|---|---|
-| Supervisor | 每个实例 1 个，始终运行 | `max_worker_processes` |
+| 监督进程 | 每个实例 1 个，始终运行 | `max_worker_processes` |
 | 槽同步工作进程 | 每个实例 1 个 | `max_worker_processes` |
-| Manager | 实例中每个**可连接数据库** 1 个 | `max_worker_processes` |
+| 管理进程 | 实例中每个**可连接数据库** 1 个 | `max_worker_processes` |
 | 应用工作进程 | 每个已启用订阅 1 个 | `max_worker_processes` |
 | 表同步工作进程 | 每个订阅最多同时 1 个 | `max_worker_processes` |
-| Walsender | 从此节点流式传输的每个订阅 1 个；表同步期间每个订阅另加 1 个 | `max_wal_senders` |
+| WAL 发送进程 | 从此节点流式传输的每个订阅 1 个；表同步期间每个订阅另加 1 个 | `max_wal_senders` |
 {.wide .expand}
 
 其中有四个数量常被误判。
 
-**槽同步工作进程存在于每个节点上，而不只是在备库上。**这些工作进程把逻辑复制槽复制到每个物理备库，使故障转移不会迫使每个订阅者进行完整重新同步。这些工作进程在主节点上保持空闲，但仍占用一个工作进程槽，因此计入公式。更多信息参见下文[槽同步](#slot-synchronization)。
+**槽同步工作进程存在于每个节点上，而不只是在备库上。**这些工作进程把逻辑复制槽复制到每个物理备库，使故障切换不会迫使每个订阅者进行完整重新同步。这些工作进程在主节点上保持空闲，但仍占用一个工作进程槽，因此计入公式。更多信息参见下文[槽同步](#slot-synchronization)。
 
-**Manager 会为每个可连接数据库启动，而不只是为使用 Spock 的数据库启动。**Supervisor 必须先连接数据库，才能确定该数据库是否包含 Spock 节点，而后台工作进程不能切换数据库。因此，它会为 `pg_database` 中每个 `datallowconn = true` 的数据库启动一个 manager；未找到 Spock 节点的 manager 会立即退出。在默认集群上，这意味着除了被复制的数据库之外，`postgres` 和 `template1` 各会有一个短暂的 manager。`template0` 被排除，因为它不允许连接。
+**管理进程会为每个可连接数据库启动，而不只是为使用 Spock 的数据库启动。**监督进程必须先连接数据库，才能确定该数据库是否包含 Spock 节点，而后台工作进程不能切换数据库。因此，它会为 `pg_database` 中每个 `datallowconn = true` 的数据库启动一个管理进程；未找到 Spock 节点的管理进程会立即退出。在默认集群上，这意味着除了被复制的数据库之外，`postgres` 和 `template1` 各会有一个短暂运行的管理进程。`template0` 被排除，因为它不允许连接。
 
-**Walsender 不是后台工作进程。**它们由 `max_wal_senders` 控制，并单独计入 `MaxBackends`。提高 `max_worker_processes` 对 walsender 耗尽没有任何帮助，反之亦然。
+**WAL 发送进程不是后台工作进程。**它们由 `max_wal_senders` 控制，并单独计入 `MaxBackends`。提高 `max_worker_processes` 对 WAL 发送进程耗尽没有任何帮助，反之亦然。
 
-**订阅按数据库计，而不是按节点计。**Spock 节点在单个数据库内创建，每个订阅把此实例上的一个数据库连接到另一个实例上的对应数据库。因此，复制多个数据库的实例中，每个被复制的数据库各有一个 Spock 节点，并且每个节点都携带自己的一整套订阅。订阅数量下游的所有内容，例如应用工作进程、表同步工作进程、walsender、槽和复制源，都随**节点数乘以被复制数据库数**扩展，而不只随节点数扩展。
+**订阅按数据库计，而不是按节点计。**Spock 节点在单个数据库内创建，每个订阅把此实例上的一个数据库连接到另一个实例上的对应数据库。因此，复制多个数据库的实例中，每个被复制的数据库各有一个 Spock 节点，并且每个节点都携带自己的一整套订阅。订阅数量下游的所有内容，例如应用工作进程、表同步工作进程、WAL 发送进程、槽和复制源，都随**节点数乘以被复制数据库数**扩展，而不只随节点数扩展。
 
 ### 槽同步 {#slot-synchronization}
 
@@ -56,10 +56,10 @@ Spock 复制消耗三种独立且分别配置的 Postgres 资源：后台工作�
 |---|---|---|
 | 15、16 | Spock 的 `spock_failover_slots` 后台工作进程 | 是 |
 | 17 | 二者之一，取决于 `sync_replication_slots` | 是——Spock 仍会注册自己的工作进程；当原生工作进程启用时，它会退出 |
-| 18+ | PostgreSQL 的原生 slotsync 工作进程 | 否——它是专用 postmaster 进程，单独计入 `MaxBackends` |
+| 18+ | PostgreSQL 的原生槽同步工作进程 | 否——它是专用 postmaster 进程，单独计入 `MaxBackends` |
 {.wide .expand}
 
-在每个节点和每个版本上都为它预留一个工作进程。如果由 PostgreSQL 提供工作进程，预留的槽只是变成余量；除了少量共享内存外没有成本，并让你避免依赖版本的公式。[逻辑槽故障转移](/pgedge/spock/logical-slot-failover/)介绍每种机制所需的配置。
+在每个节点和每个版本上都为它预留一个工作进程。如果由 PostgreSQL 提供工作进程，预留的槽只是变成余量；除了少量共享内存外没有成本，并让你避免依赖版本的公式。[逻辑槽故障切换](/zh/pgedge/spock/logical-slot-failover/)介绍每种机制所需的配置。
 
 ## 规划 `max_worker_processes` {#sizing-max_worker_processes}
 
@@ -104,11 +104,11 @@ Spock 复制消耗三种独立且分别配置的 Postgres 资源：后台工作�
 
 这些总数向上取整，为增长预留空间；过度配置 `max_worker_processes` 除了少量共享内存外没有明显成本，而且该参数不重启就无法修改。
 
-如果你的实例承载更多数据库、复制多个数据库，或运行其他注册后台工作进程的扩展，请在这些数字上继续增加。每个**额外被复制的数据库**需要 `1` 个 manager（如果该数据库尚未计入 `D`），以及 `2 * (N - 1)` 个用于其应用和同步工作进程的 worker；因此，复制三个数据库的 3 节点集群每个实例需要 `3 * 2 * 2 = 12` 个应用和同步工作进程，而不是 `4` 个。
+如果你的实例承载更多数据库、复制多个数据库，或运行其他注册后台工作进程的扩展，请在这些数字上继续增加。每个**额外被复制的数据库**需要 `1` 个管理进程（如果该数据库尚未计入 `D`），以及 `2 * (N - 1)` 个用于其应用和同步工作进程的工作进程；因此，复制三个数据库的 3 节点集群每个实例需要 `3 * 2 * 2 = 12` 个应用和同步工作进程，而不是 `4` 个。
 
 ## 规划 `max_replication_slots` 与 `max_wal_senders` {#sizing-max_replication_slots-and-max_wal_senders}
 
-每个节点为每个从它流式传输的订阅持有一个逻辑复制槽，并为每个进行中的表同步持有一个临时槽。同步槽会创建为持久槽（而不是临时槽），因此在同步完成并删除槽之前，每个同步槽都占用一个槽。流式传输时，每个槽背后都有一个 walsender；因此**把两个参数设置为相同值**，并基于槽数量一次性计算。
+每个订阅在提供方占用一个逻辑复制槽，每项正在进行的表同步还要额外占用一个槽。同步槽按持久槽创建，直到同步完成后才删除。每个正在传输数据的槽还占用一个 WAL 发送进程，因此本页按槽数统一计算，**将这两个参数设为相同值**。
 
 
 > [!NOTE] 默认值
@@ -132,7 +132,7 @@ Spock 复制消耗三种独立且分别配置的 Postgres 资源：后台工作�
 > PostgreSQL 逻辑复制文档建议把 `max_wal_senders` 设置为至少 `max_replication_slots` 加上同时连接的物理副本数量。这个额外项覆盖没有槽但进行流式传输的物理备库；上面的公式已经在 `physical_and_failover_slots` 中为每个物理备库分配了槽，因此再相加会导致重复计数。用同一公式规划每个节点（包括备库），也满足另一个规则：备库的 `max_wal_senders` 至少要与其主库一样高。
 >
 
-并非每条复制连接都是 walsender。表同步工作进程会打开第二条非复制连接来运行 `COPY`，它占用 `max_connections`。备库上的槽同步工作进程同样通过普通连接访问主库。Spock 的工作进程和 PostgreSQL 的原生工作进程都会让主库消耗一个 `max_connections` 槽，而不是 walsender。
+并非每条复制连接都是 WAL 发送进程。表同步工作进程会打开第二条非复制连接来运行 `COPY`，它占用 `max_connections`。备库上的槽同步工作进程同样通过普通连接访问主库。Spock 的工作进程和 PostgreSQL 的原生工作进程都会让主库消耗一个 `max_connections` 槽，而不是 WAL 发送进程。
 
 ## 复制源 {#replication-origins}
 
@@ -142,7 +142,7 @@ Postgres 使用*复制源*跟踪远程复制槽的本地状态。在内部，Pos
 
     max_active_replication_origins = max_replication_slots
 
-这应使 Postgres 18+ 拥有足够大的复制源池运行。
+按此值配置，可为 PostgreSQL 18 及更高版本预留足够的复制源。
 
 ## 示例 {#worked-examples}
 
@@ -217,22 +217,22 @@ SELECT current_setting('max_worker_processes')::int AS worker_limit,
 
 **`worker registration failed, you might want to increase max_worker_processes setting`**
 
-Postgres 拒绝注册后台工作进程，因为 `max_worker_processes` 已完全分配。用上面的公式重新计算，记住并行查询工作进程共享该池，然后重启。
+Postgres 拒绝注册后台工作进程，因为 `max_worker_processes` 已完全分配。用上面的公式重新计算，把共用此池的并行查询工作进程也计入，然后重启。
 
 **`could not register spock worker: all background worker slots are already used`**
 
-Spock 自己的工作进程跟踪数组——其大小在启动时按 `max_worker_processes` 确定——没有空闲条目。正常退出的工作进程会立即释放条目，但*崩溃*的工作进程会将其条目保留给同一数据库，直到该数据库的 manager（或 supervisor）回收它。因此，跨许多不同数据库反复发生的工作进程崩溃可能耗尽数组，而 Postgres 仍报告有空闲工作进程槽。检查服务器日志中的前一个崩溃并处理它；提高 `max_worker_processes` 会扩大数组，但不会修复底层故障。
+Spock 自己的工作进程跟踪数组——其大小在启动时按 `max_worker_processes` 确定——没有空闲条目。正常退出的工作进程会立即释放条目，但*崩溃*的工作进程会将其条目保留给同一数据库，直到该数据库的管理进程（或监督进程）回收它。因此，跨许多不同数据库反复发生的工作进程崩溃可能耗尽数组，而 Postgres 仍报告有空闲工作进程槽。检查服务器日志中的前一个崩溃并处理它；提高 `max_worker_processes` 会扩大数组，但不会修复底层故障。
 
 **订阅停留在 `initializing`**
 
-通常是*提供者*上的 `max_replication_slots` 或 `max_wal_senders` 不足。正在初始化的订阅除了应用流已持有的槽和 walsender 之外，还需要为其同步工作进程提供一个槽和一个 walsender；这就是稳定状态下复制正常的集群，在添加或重新同步表时可能失败的原因。参见[故障排查](/pgedge/spock/troubleshooting/)。
+通常是*提供者*上的 `max_replication_slots` 或 `max_wal_senders` 不足。正在初始化的订阅除了应用流已持有的槽和 WAL 发送进程之外，还需要为其同步工作进程提供一个槽和一个 WAL 发送进程；这就是稳定状态下复制正常的集群，在添加或重新同步表时可能失败的原因。参见[故障排查](/zh/pgedge/spock/troubleshooting/)。
 
 **复制延迟增加但应用工作进程空闲**
 
-如果 `spock.lag_tracker` 显示延迟增长但应用工作进程没有运行，请检查服务器日志中的工作进程注册失败——manager 会延迟重试注册，因此工作进程池耗尽会表现为间歇性应用，而不是立即停止。
+如果 `spock.lag_tracker` 显示延迟增长但应用工作进程没有运行，请检查服务器日志中的工作进程注册失败——管理进程会延迟重试注册，因此工作进程池耗尽会表现为间歇性应用，而不是立即停止。
 
 ---
 
 [上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/sizing.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

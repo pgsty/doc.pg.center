@@ -18,7 +18,7 @@ sidebar_root_menu: false
 
 
 > [!NOTE] Source version
-> The English source is **v2.6.1**, pinned at `9506e1bd5c1f`. The Chinese edition includes the reviewed incremental updates; unchanged draft material still awaits review. Check [versions and sources](/pgedge/about/attribution/) before deploying.
+> The English source is **v2.6.1**, pinned at `9506e1bd5c1f`. A Chinese edition of this snapshot is available. Check [versions and sources](/pgedge/about/attribution/) before deploying.
 
 
 Using a [`Snowflake` sequence](https://github.com/pgEdge/snowflake?tab=readme-ov-file#snowflake-sequences-for-postgresql) allows you to take full advantage of the benefits offered by a distributed, multi-master replication solution. Snowflake is a Postgres extension that provides an int8 and sequence based unique ID solution to optionally replace the Postgres built-in bigserial data type. 
@@ -37,7 +37,7 @@ Snowflake sequences let you:
 
 * add or modify data in different regions while ensuring a unique transaction sequence.
 * preserve unique transaction identifiers without manual/administrative management of a numbering scheme.
-* accurately identify the order in which globally distributed transactions are performed.
+* compare ID generation times across nodes. Clock skew and the interval between ID generation and commit can affect the observed order.
 
 Snowflake sequences also alleviate concerns that network lag could disrupt sequences in distributed transactions.
 

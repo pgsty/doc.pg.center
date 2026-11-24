@@ -130,7 +130,7 @@ type: docs
     pg_ctl -D /path/to/data/n1 stop
     ```
 
-4. 在主机上安装目标 PostgreSQL 版本及 Spock，与现有安装并存；参见[安装 pgEdge Enterprise Postgres](/pgedge/spock/getting-started/#install-pgedge-enterprise-postgres-recommended-path)。在 RHEL、Rocky Linux 或 AlmaLinux 上安装 PostgreSQL 18：
+4. 在主机上安装目标 PostgreSQL 版本及 Spock，与现有安装并存；参见[安装 pgEdge Enterprise Postgres](/zh/pgedge/spock/getting-started/#install-pgedge-enterprise-postgres-recommended-path)。在 RHEL、Rocky Linux 或 AlmaLinux 上安装 PostgreSQL 18：
 
     ```bash
     sudo dnf install -y pgedge-postgres18-server pgedge-postgres18-contrib pgedge-spock50_18
@@ -142,7 +142,7 @@ type: docs
     sudo apt install -y pgedge-postgresql-18 pgedge-postgresql-18-spock50
     ```
 
-    `pg_upgrade` 按步骤 3 记录的版本在新集群中重建 Spock 扩展，而新服务器会加载为目标 PostgreSQL 版本安装的 Spock 库。应为目标版本安装相同版本的 Spock。如果目标版本的软件包只有更新的 Spock，请在步骤 8 启动节点后、步骤 19 之前，在每个安装了 Spock 的数据库中执行 `ALTER EXTENSION spock UPDATE;`。其余节点在轮到自己之前保持原版本，因此升级过程中集群会混合运行不同 Spock 版本，与[升级 Spock](/pgedge/spock/upgrading/)中的逐节点流程相同。在通过 Zodan 添加节点之前，先完成所有节点的升级：`add_node` 要求新节点的 Spock 版本不低于任何现有节点。
+    `pg_upgrade` 按步骤 3 记录的版本在新集群中重建 Spock 扩展，而新服务器会加载为目标 PostgreSQL 版本安装的 Spock 库。应为目标版本安装相同版本的 Spock。如果目标版本的软件包只有更新的 Spock，请在步骤 8 启动节点后、步骤 19 之前，在每个安装了 Spock 的数据库中执行 `ALTER EXTENSION spock UPDATE;`。其余节点在轮到自己之前保持原版本，因此升级过程中集群会混合运行不同 Spock 版本，与[升级 Spock](/zh/pgedge/spock/upgrading/)中的逐节点流程相同。在通过 Zodan 添加节点之前，先完成所有节点的升级：`add_node` 要求新节点的 Spock 版本不低于任何现有节点。
 
 5. 使用目标 PostgreSQL 版本初始化新数据目录。`pg_upgrade` 将数据迁入已初始化的集群，不会自行创建集群。目标为 PostgreSQL 16 或更新版本时，`pg_upgrade` 会自行将旧集群的编码和区域设置复制到新集群，因此 `initdb` 不需要指定编码或区域选项。数据校验和设置不会复制，必须与旧集群一致，否则 `pg_upgrade` 会停止。从已停止的数据目录读取该设置：
 
@@ -490,7 +490,7 @@ type: docs
 
 ## 重新启用 DDL 复制 {#re-enabling-ddl-replication}
 
-所有节点升级完毕后，按照[升级 Spock](/pgedge/spock/upgrading/)的说明，在每个节点重新开启自动 DDL 复制：
+所有节点升级完毕后，按照[升级 Spock](/zh/pgedge/spock/upgrading/)的说明，在每个节点重新开启自动 DDL 复制：
 
 ```sql
 ALTER SYSTEM SET spock.enable_ddl_replication = on;
@@ -536,10 +536,10 @@ CALL spock.show_all_subscription_status(
 
 更多信息参见：
 
-- [修改集群](/pgedge/spock/modify/)
-- [逻辑复制槽故障切换（高可用备库）](/pgedge/spock/logical-slot-failover/)
-- [教程：通过滚动更新升级 PostgreSQL 版本](/pgedge/spock/modify/zodan/zodan-rolling-pg-version-tutorial/)
+- [修改集群](/zh/pgedge/spock/modify/)
+- [逻辑复制槽故障切换（高可用备库）](/zh/pgedge/spock/logical-slot-failover/)
+- [教程：通过滚动更新升级 PostgreSQL 版本](/zh/pgedge/spock/modify/zodan/zodan-rolling-pg-version-tutorial/)
 
 ---
 
-[上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/modify/pg_upgrade_rolling_tutorial.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/pgedge/about/license/)。
+[上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/modify/pg_upgrade_rolling_tutorial.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。

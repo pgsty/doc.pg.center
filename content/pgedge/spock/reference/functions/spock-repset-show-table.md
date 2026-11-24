@@ -60,14 +60,14 @@ This is a read-only query function that does not modify any data.
 
 ## ARGUMENTS {#arguments}
 
-relation
+**`relation`**
 
-    The table to query information about.
+The table to query information about.
 
-repsets
+**`repsets`**
 
-    An array of replication set names to check the table's
-    configuration within.
+An array of replication set names to check the table's
+configuration within.
 
 ## EXAMPLE {#example}
 

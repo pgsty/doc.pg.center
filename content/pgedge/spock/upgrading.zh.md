@@ -8,7 +8,7 @@ upstream_modified: true
 upstream_ref: d05e2e2b6a82
 source_kind: pinned-release-tag
 linkTitle: 升级
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -22,7 +22,7 @@ type: docs
 > [Postgres 扩展](https://www.postgresql.org/docs/17/extend-extensions.html#EXTEND-EXTENSIONS-UPDATES)一样移除、构建并升级 Spock 扩展。
 >
 
-如果你要升级一个安全的生产环境，请逐个关闭每个节点并执行以下步骤：
+升级生产集群时，请逐个节点执行以下步骤。
 
 1. 禁用 Auto-DDL。
 2. 停止 Postgres 服务器。
@@ -61,7 +61,7 @@ SELECT pg_reload_conf();
 
 ## 停止 Postgres 服务器 {#stopping-the-postgres-server}
 
-升级 Spock 二进制文件之前，在你正在操作的服务器上停止 Postmaster：
+在当前要升级的节点上，先停止 PostgreSQL 主进程，再替换 Spock 二进制文件。
 
 ```bash
 pg_ctl -D /path/to/data1 stop -m fast
@@ -123,7 +123,7 @@ pg_ctl -D /path/to/data1 restart
 
 ## 验证扩展升级 {#verifying-the-extension-upgrade}
 
-构建扩展后，你可以验证正在使用的扩展版本以及复制集群的状态。使用 psql 命令行调用后面的命令。
+重启完成后，用 psql 连接数据库，核对实际运行的扩展版本和复制状态。
 
 使用 psql 连接数据库：
 
@@ -202,4 +202,4 @@ FROM pg_stat_replication;
 
 [上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/upgrading_spock.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

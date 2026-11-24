@@ -14,17 +14,17 @@ type: docs
 
 | 命令 | 说明
 |----------|-------------
-| [spock.repset_create](/pgedge/spock/reference/functions/spock-repset-create/) | 创建复制集。
-| [spock.repset_alter](/pgedge/spock/reference/functions/spock-repset-alter/) | 修改现有复制集。
-| [spock.repset_drop](/pgedge/spock/reference/functions/spock-repset-drop/) | 删除复制集。
-| [spock.repset_add_table](/pgedge/spock/reference/functions/spock-repset-add-table/) | 将表添加到复制集。
-| [spock.repset_add_all_tables](/pgedge/spock/reference/functions/spock-repset-add-all-tables/) | 添加指定模式中的所有表。
-| [spock.repset_remove_table](/pgedge/spock/reference/functions/spock-repset-remove-table/) | 从复制集中移除表。
-| [spock.repset_add_seq](/pgedge/spock/reference/functions/spock-repset-add-seq/) | 将序列添加到复制集。
-| [spock.repset_add_all_seqs](/pgedge/spock/reference/functions/spock-repset-add-all-seqs/) | 添加指定模式中的所有序列。
-| [spock.repset_remove_seq](/pgedge/spock/reference/functions/spock-repset-remove-seq/) | 从复制集中移除序列。
-| [spock.sub_add_repset](/pgedge/spock/reference/functions/spock-sub-add-repset/) | 为订阅者添加复制集。
-| [spock.sub_remove_repset](/pgedge/spock/reference/functions/spock-sub-remove-repset/) | 从订阅者中移除复制集。
+| [spock.repset_create](/zh/pgedge/spock/reference/functions/spock-repset-create/) | 创建复制集。
+| [spock.repset_alter](/zh/pgedge/spock/reference/functions/spock-repset-alter/) | 修改现有复制集。
+| [spock.repset_drop](/zh/pgedge/spock/reference/functions/spock-repset-drop/) | 删除复制集。
+| [spock.repset_add_table](/zh/pgedge/spock/reference/functions/spock-repset-add-table/) | 将表添加到复制集。
+| [spock.repset_add_all_tables](/zh/pgedge/spock/reference/functions/spock-repset-add-all-tables/) | 添加指定模式中的所有表。
+| [spock.repset_remove_table](/zh/pgedge/spock/reference/functions/spock-repset-remove-table/) | 从复制集中移除表。
+| [spock.repset_add_seq](/zh/pgedge/spock/reference/functions/spock-repset-add-seq/) | 将序列添加到复制集。
+| [spock.repset_add_all_seqs](/zh/pgedge/spock/reference/functions/spock-repset-add-all-seqs/) | 添加指定模式中的所有序列。
+| [spock.repset_remove_seq](/zh/pgedge/spock/reference/functions/spock-repset-remove-seq/) | 从复制集中移除序列。
+| [spock.sub_add_repset](/zh/pgedge/spock/reference/functions/spock-sub-add-repset/) | 为订阅者添加复制集。
+| [spock.sub_remove_repset](/zh/pgedge/spock/reference/functions/spock-sub-remove-repset/) | 从订阅者中移除复制集。
 
 ## 创建复制集 {#creating-a-replication-set}
 
@@ -345,4 +345,4 @@ DEFAULT true)`
 
 ---
 
-[上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/spock_functions/repset_mgmt.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/pgedge/about/license/)。
+[上游原文](https://github.com/pgEdge/spock/blob/d05e2e2b6a82796d86e3c16ffb0d3fc38b1b329c/docs/spock_functions/repset_mgmt.md) · `d05e2e2b6a82` · Copyright (c) 2021–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。

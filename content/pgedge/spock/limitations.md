@@ -227,9 +227,7 @@ but the system columns themselves cannot be filtered.
 Row filters are normal PostgreSQL expressions with the same limitations as
 CHECK constraints.
 
-Volatile functions (like `random()` or `now()`) can be used in row
-filters, but they may produce different results on evaluation and cause
-errors that stop replication. Use volatile functions with caution.
+A row filter can call `random()` or `now()`. `random()` is `VOLATILE` and can change on each call. `now()` is `STABLE` within a transaction, but different transactions can see different values. Consider when the expression is evaluated to avoid inconsistent results and replication errors.
 
 ### Row Filter Session Context {#row-filter-session-context}
 

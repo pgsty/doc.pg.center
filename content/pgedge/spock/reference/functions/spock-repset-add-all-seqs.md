@@ -51,18 +51,18 @@ sequences in a distributed environment and avoid conflicts.
 
 ## ARGUMENTS {#arguments}
 
-set_name
+**`set_name`**
 
-    The name of an existing replication set.
+The name of an existing replication set.
 
-schema_names
+**`schema_names`**
 
-    An array of schema names from which all sequences will be added.
+An array of schema names from which all sequences will be added.
 
-synchronize_data
+**`synchronize_data`**
 
-    If true, synchronize the current value of each sequence immediately.
-    Default is false.
+If true, synchronize the current value of each sequence immediately.
+Default is false.
 
 ## EXAMPLE {#example}
 

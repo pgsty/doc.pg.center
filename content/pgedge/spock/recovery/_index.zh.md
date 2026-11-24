@@ -8,6 +8,6 @@ type: docs
 ---
 
 
-本栏目可先阅读英文原文；已有中文译文的页面直接链接译文。
+本节收录以下文档。
 
-- [Recovering from Catastrophic Node Failure（英文）](/pgedge/spock/recovery/catastrophic-node-failure/)
+- [从灾难性节点故障中恢复](/zh/pgedge/spock/recovery/catastrophic-node-failure/)

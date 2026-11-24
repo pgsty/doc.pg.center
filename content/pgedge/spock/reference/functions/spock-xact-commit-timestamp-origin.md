@@ -54,9 +54,9 @@ This is a read-only query function that does not modify any data.
 
 ## ARGUMENTS {#arguments}
 
-xid
+**`xid`**
 
-    The transaction ID to query.
+The transaction ID to query.
 
 ## EXAMPLE {#example}
 

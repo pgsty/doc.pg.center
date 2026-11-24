@@ -28,10 +28,10 @@ spock.repset_add_table (
 
 ## RETURNS {#returns}
 
-    - true if the table was successfully added to the replication set.
-    - Raises an ERROR if the table is already a member of the replication
-      set, or if the call has invalid parameters or insufficient
-      privileges.
+- true if the table was successfully added to the replication set.
+- Raises an ERROR if the table is already a member of the replication
+  set, or if the call has invalid parameters or insufficient
+  privileges.
 
 ## DESCRIPTION {#description}
 
@@ -40,9 +40,9 @@ Adds a specific table to an existing Spock replication set.
 This function allows fine-grained control over what data is replicated by
 optionally specifying:
 
-    - A subset of columns to replicate.
-    - A row filter to restrict which rows are replicated.
-    - Whether partitions of a partitioned table should also be included.
+- A subset of columns to replicate.
+- A row filter to restrict which rows are replicated.
+- Whether partitions of a partitioned table should also be included.
 
 If synchronize_data is set to true, existing table data is copied to all
 subscribers that are subscribed to this replication set. Otherwise, only
@@ -58,34 +58,34 @@ This command must be executed by a superuser.
 
 ## ARGUMENTS {#arguments}
 
-set_name
+**`set_name`**
 
-    The name of an existing replication set.
+The name of an existing replication set.
 
-relation
+**`relation`**
 
-    The table to add, specified as a regclass (for example,
-    'public.mytable').
+The table to add, specified as a regclass (for example,
+'public.mytable').
 
-synchronize_data
+**`synchronize_data`**
 
-    If true, existing table data is synchronized to all
-    subscribers. Default is false.
+If true, existing table data is synchronized to all
+subscribers. Default is false.
 
-columns
+**`columns`**
 
-    An optional list of column names to replicate. If NULL,
-    all columns are replicated.
+An optional list of column names to replicate. If NULL,
+all columns are replicated.
 
-row_filter
+**`row_filter`**
 
-    An optional SQL WHERE clause used to filter which rows
-    are replicated.
+An optional SQL WHERE clause used to filter which rows
+are replicated.
 
-include_partitions
+**`include_partitions`**
 
-    If true and the table is partitioned, all partitions are
-    included automatically. Default is true.
+If true and the table is partitioned, all partitions are
+included automatically. Default is true.
 
 ## EXAMPLE {#example}
 

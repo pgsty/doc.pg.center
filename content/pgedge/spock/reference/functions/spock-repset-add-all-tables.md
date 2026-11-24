@@ -77,18 +77,18 @@ This command must be executed by a superuser.
 
 ## ARGUMENTS {#arguments}
 
-set_name
+**`set_name`**
 
-    The name of an existing replication set.
+The name of an existing replication set.
 
-schema_names
+**`schema_names`**
 
-    An array of schema names from which all tables will be added.
+An array of schema names from which all tables will be added.
 
-synchronize_data
+**`synchronize_data`**
 
-    If true, synchronize existing table data to all subscribers
-    immediately. Default is false.
+If true, synchronize existing table data to all subscribers
+immediately. Default is false.
 
 ## EXAMPLE {#example}
 

@@ -24,7 +24,7 @@ Before running `pg_upgrade`, you must disable `lolor`. After executing pg_upgrad
 db1_17=# SELECT lolor.disable();
 ```
 
-Next, execute the upgrade. A sample `pg_ugrade` command appears below:
+Next, execute the upgrade. A sample `pg_upgrade` command appears below:
 
 ```
 # pg_upgrade --old-datadir=/data/db1_17 \

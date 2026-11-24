@@ -45,13 +45,13 @@ This command must be executed by a superuser.
 
 ## ARGUMENTS {#arguments}
 
-node_name
+**`node_name`**
 
-    The name of an existing Spock node.
+The name of an existing Spock node.
 
-interface_name
+**`interface_name`**
 
-    The name of the interface to remove from the node.
+The name of the interface to remove from the node.
 
 ## EXAMPLE {#example}
 

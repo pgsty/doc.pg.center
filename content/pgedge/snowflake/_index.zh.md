@@ -7,7 +7,7 @@ upstream_link: https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bd
 upstream_modified: true
 upstream_ref: 9506e1bd5c1f
 source_kind: pinned-release-tag
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 linkTitle: Snowflake
@@ -20,10 +20,10 @@ sidebar_root_menu: false
 
 
 > [!NOTE] 版本说明
-> 本版英文来源为 **v2.6.1**，固定于 `9506e1bd5c1f`。中文已同步本轮增量，原有初稿未变部分仍待审校。部署前请核对[版本与来源](/zh/pgedge/about/attribution/)。
+> 本版英文来源为 **v2.6.1**，固定于 `9506e1bd5c1f`。本页中文已按该版本完成全文译校。部署前请核对[版本与来源](/zh/pgedge/about/attribution/)。
 
 
-使用 [`Snowflake` 序列](https://github.com/pgEdge/snowflake?tab=readme-ov-file#snowflake-sequences-for-postgresql)可以充分利用分布式多主复制解决方案提供的优势。Snowflake 是一个 PostgreSQL 扩展，提供基于 int8 和 sequence 的唯一 ID 方案，可选择用于替代 PostgreSQL 内建的 bigserial 数据类型。
+使用 [`Snowflake` 序列](https://github.com/pgEdge/snowflake?tab=readme-ov-file#snowflake-sequences-for-postgresql)可以充分利用分布式多主复制解决方案提供的优势。Snowflake 是一个 PostgreSQL 扩展，提供通过 int8 和序列生成唯一 ID，可用来替代 PostgreSQL 内置的 bigserial 数据类型。
 
 在内部，snowflake 是 64 位整数，对外表示为 bigint 值。这 64 位被划分为若干位段：
 
@@ -31,15 +31,15 @@ sidebar_root_menu: false
 * bits 22-62 —— 毫秒精度时间戳
 * bits 12-21 —— 唯一的 pgEdge Distributed Postgres 节点号
 * bits 0-11 —— 一毫秒内的计数器
-* 时间戳是 41 位无符号值，表示毫秒精度，epoch 为 2023-01-01。
+* 时间戳是 41 位无符号值，表示毫秒精度，起算时间为 2023-01-01。
 * 计数器是 12 位无符号值，每次分配 ID 时递增。它可提供每毫秒 4096 个唯一 ID，即每秒 400 万个 ID。
 * 节点号是全局集群内 PostgreSQL 实例的 10 位唯一标识符。该值通过 `snowflake.node` GUC 在 `postgresql.conf` 文件中设置。
 
 Snowflake 序列让你能够：
 
 * 在不同区域添加或修改数据，同时确保事务序列唯一。
-* 无需手动或管理式维护编号方案，即可保留唯一事务标识符。
-* 准确识别全局分布式事务的执行顺序。
+* 无须管理员手工维护编号方案，也能保证事务标识符唯一。
+* 比较不同节点生成 ID 的时间。各节点的时钟误差以及从分配 ID 到提交之间的间隔，都会影响观察到的顺序。
 
 Snowflake 序列也能减轻网络延迟可能扰乱分布式事务序列的担忧。
 
@@ -57,4 +57,4 @@ Snowflake 序列也能减轻网络延迟可能扰乱分布式事务序列的担�
 
 [上游原文](https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8/docs/index.md) · `9506e1bd5c1f` · Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

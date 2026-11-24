@@ -7,7 +7,7 @@ upstream_link: https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bd
 upstream_modified: true
 upstream_ref: 9506e1bd5c1f
 source_kind: pinned-release-tag
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -15,7 +15,7 @@ type: docs
 
 
 
-如果在用 `\d+ orders` 命令执行序列转换之前查询表元数据，PostgreSQL 序列定义位于 `Default` 列：
+转换序列之前，在 psql 中用 `\d+ orders` 查看表的元数据，`Default` 列会显示 PostgreSQL 序列定义。
 
 ```sh
 acctg=# \d+ orders;
@@ -51,4 +51,4 @@ Access method: heap
 
 [上游原文](https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8/docs/review_seq.md) · `9506e1bd5c1f` · Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

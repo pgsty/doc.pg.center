@@ -8,6 +8,6 @@ type: docs
 ---
 
 
-本栏目可先阅读英文原文；已有中文译文的页面直接链接译文。
+本节收录以下文档。
 
-- [remote_commit_ts Recovery via pg_commit_ts Scan — Implementation Plan（英文）](/pgedge/spock/internals-doc/plans/2026-04-30-recover-remote-commit-ts-plan/)
+- [扫描 pg_commit_ts 恢复 remote_commit_ts 的实现计划](/zh/pgedge/spock/internals-doc/plans/2026-04-30-recover-remote-commit-ts-plan/)

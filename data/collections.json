@@ -173,7 +173,9 @@
       "zh"
     ],
     "group": "databases",
-    "paired": false
+    "paired": true,
+    "aligned_heading_ids": true,
+    "identical_code": true
   },
   "documentdb": {
     "name": "DocumentDB",

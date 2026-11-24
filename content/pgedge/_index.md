@@ -30,7 +30,7 @@ Four extensions address concrete tasks in distributed PostgreSQL. Start with Spo
 - [SafeSession](/pgedge/safesession/) — Read-only sessions by role
 {.cards}
 
-The English source set is Spock v6.0.0-beta.2, LOLOR 1.3.0 development, SafeSession v1.1, and Snowflake v2.6.1. The Chinese edition includes the reviewed incremental updates; unchanged portions of existing drafts retain their draft status. See [sources and versions](/pgedge/about/attribution/).
+The English source set is Spock v6.0.0-beta.2, LOLOR 1.3.0 development, SafeSession v1.1, and Snowflake v2.6.1. All 118 English pages have Chinese counterparts. See [sources and versions](/pgedge/about/attribution/).
 
 ## Start reading {#start}
 

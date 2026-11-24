@@ -40,14 +40,14 @@ This command must be executed by a superuser.
 
 ## ARGUMENTS {#arguments}
 
-subscription_name
+**`subscription_name`**
 
-    The name of the existing subscription to remove.
+The name of the existing subscription to remove.
 
-ifexists
+**`ifexists`**
 
-    If true, do not raise an error when the subscription does not exist.
-    Default is false.
+If true, do not raise an error when the subscription does not exist.
+Default is false.
 
 ## EXAMPLE {#example}
 

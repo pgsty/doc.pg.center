@@ -47,15 +47,15 @@ depending on replication lag and network conditions.
 
 ## ARGUMENTS {#arguments}
 
-slotname
+**`slotname`**
 
-    The name of the replication slot to monitor.
+The name of the replication slot to monitor.
 
-target
+**`target`**
 
-    The target Log Sequence Number to wait for. The function returns
-    when the slot's confirmed flush LSN reaches or exceeds this
-    value.
+The target Log Sequence Number to wait for. The function returns
+when the slot's confirmed flush LSN reaches or exceeds this
+value.
 
 ## EXAMPLE {#example}
 

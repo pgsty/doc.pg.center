@@ -38,17 +38,17 @@ Spock will generate for a given subscription configuration.
 
 ## ARGUMENTS {#arguments}
 
-dbname
+**`dbname`**
 
-    The name of the database.
+The name of the database.
 
-provider_node
+**`provider_node`**
 
-    The name of the provider node.
+The name of the provider node.
 
-subscription
+**`subscription`**
 
-    The name of the subscription.
+The name of the subscription.
 
 ## EXAMPLE {#example}
 

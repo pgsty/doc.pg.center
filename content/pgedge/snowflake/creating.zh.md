@@ -7,7 +7,7 @@ upstream_link: https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bd
 upstream_modified: true
 upstream_ref: 9506e1bd5c1f
 source_kind: pinned-release-tag
-translation_status: machine-draft
+translation_status: translated
 translation_notice: en
 translator: PGSTY 社区
 type: docs
@@ -21,9 +21,9 @@ type: docs
 
 pgEdge 部署会为你分配 `snowflake.node`，其值来自每个节点在集群中的位置：
 
-* Control Plane 从节点序号设置 `snowflake.node`。
-* pgEdge Helm chart 从每个节点名称推导 `snowflake.node`。
-* pgEdge Ansible playbook 从节点 zone 设置 `snowflake.node`。
+* Control Plane 按节点序号设置 `snowflake.node`。
+* pgEdge Helm chart 根据每个节点的名称推导 `snowflake.node`。
+* pgEdge Ansible playbook 根据节点所在区域（zone）设置 `snowflake.node`。
 
 使用这些方法部署时，无需再为节点标识符执行其他配置。
 
@@ -60,4 +60,4 @@ Snowflake 配置完成后，可以先[转换](/zh/pgedge/snowflake/converting/) 
 
 [上游原文](https://github.com/pgEdge/snowflake/blob/9506e1bd5c1f8f8c22df43bdc3efd2b00398ddd8/docs/creating.md) · `9506e1bd5c1f` · Copyright (c) 2023–2026, pgEdge, Inc.; portions Copyright the PostgreSQL Global Development Group and The Regents of the University of California. [PostgreSQL 许可证](/zh/pgedge/about/license/)。
 
-中文整理：PGSTY 社区。本文为翻译初稿，尚待逐句审校。
+中文译校：PGSTY 社区。

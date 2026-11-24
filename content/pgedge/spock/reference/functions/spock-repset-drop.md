@@ -52,14 +52,14 @@ or the Postgres server configuration.
 
 ## ARGUMENTS {#arguments}
 
-set_name
+**`set_name`**
 
-    The name of the replication set to drop.
+The name of the replication set to drop.
 
-ifexists
+**`ifexists`**
 
-    If true, the function returns false instead of raising an error
-    when the replication set does not exist. Defaults to false.
+If true, the function returns false instead of raising an error
+when the replication set does not exist. Defaults to false.
 
 ## EXAMPLE {#example}
 
