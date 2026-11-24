@@ -109,13 +109,11 @@ export ORACLE_HOME=/usr/lib/oracle/18.3/client64
 
 #### 3.2.4. Install DBD-PG (optional) {#install-dbd-pg-optional}
 
-Download address：https://metacpan.org/release/DBD-Pg/
-
-Set environment variables：
+The example uses the optional DBD::Pg driver for Perl DBI. Set `POSTGRES_HOME` to the target installation directory. The historical example uses `/opt/ivorysql/3.2`. [DBD-Pg 3.8.0 release](https://metacpan.org/release/TURNSTEP/DBD-Pg-3.8.0)
 
 ```
 export POSTGRES_HOME=/opt/ivorysql/3.2
-# tar -zxvf DBD-Pg-3.80.tar.gz
+# tar -zxvf DBD-Pg-3.8.0.tar.gz
 # source /home/ivorysql/.bashrc
 # cd DBD-Pg-3.8.0
 # perl Makefile.PL
@@ -158,7 +156,7 @@ Ora2Pg       --  24.0
 Perl         --  5.16.3
 ```
 
-Set environment variables
+Set `PERL5LIB` to the library directory used by this installation. Replace `<your_install_dir>` with that path.
 
 ```
 export PERL5LIB=<your_install_dir>
@@ -167,16 +165,17 @@ export PERL5LIB=<your_install_dir>
 
 ### 3.4. Source side preparation {#source-side-preparation}
 
-Update oracle statistics to improve performance
+Refresh the Oracle optimizer statistics before migration. In SQL*Plus, enter `/` on its own line to execute the completed PL/SQL block. [SQL*Plus slash command](https://docs.oracle.com/en/database/oracle/oracle-database/19/sqpug/slash.html)
 
 ```
 BEGIN
 DBMS_STATS.GATHER_SCHEMA_STATS('SH');
 DBMS_STATS.GATHER_SCHEMA_STATS('SCOTT');
 DBMS_STATS.GATHER_SCHEMA_STATS('HR');
-DBMS_STATS.GATHER_DATABASE_STATS ;
+DBMS_STATS.GATHER_DATABASE_STATS;
 DBMS_STATS.GATHER_DICTIONARY_STATS;
-END;/
+END;
+/
 ```
 
 Query the source end object pair type

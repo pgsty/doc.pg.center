@@ -105,6 +105,20 @@ export ORACLE_HOME=/opt/oracle/product/19c/dbhome_1
 # make && make install
 ```
 
+#### 3.2.4. 安装 DBD::Pg（可选） {#install-dbd-pg-optional}
+
+DBD::Pg 是 Perl DBI 的 PostgreSQL 驱动。本节依固定版英文指南补译。先将 `POSTGRES_HOME` 设为目标实例的安装目录，原文示例使用 `/opt/ivorysql/3.2`。下载示例对应的 3.8.0 版后，执行以下命令。[IvorySQL 英文原文](https://github.com/IvorySQL/ivorysql_docs/blob/7c3f4a67e7d3dc92d3046ad54cac4de196aef4f1/EN/modules/ROOT/pages/4.5.adoc) · [DBD-Pg 3.8.0](https://metacpan.org/release/TURNSTEP/DBD-Pg-3.8.0)
+
+```
+export POSTGRES_HOME=/opt/ivorysql/3.2
+# tar -zxvf DBD-Pg-3.8.0.tar.gz
+# source /home/ivorysql/.bashrc
+# cd DBD-Pg-3.8.0
+# perl Makefile.PL
+# make
+# make install
+```
+
 ### 3.3. 安装Ora2pg {#安装ora2pg}
 
 下载地址：https://sourceforge.net/projects/ora2pg/
@@ -142,21 +156,31 @@ DBD::Pg      --  3.8.0
 DBI          --  1.643
 Ora2Pg       --  24.0
 Perl         --  5.16.3
-设置环境变量
 ```
 
-export PERL5LIB=\<your_install_dir\> \#export PERL5LIB=/usr/local/bin/
+设置 `PERL5LIB` 时，将 `<your_install_dir>` 换成本次安装的 Perl 库目录。
 
 ```
-=== 源端准备工作
-
-更新oracle统计信息 提高性能
+export PERL5LIB=<your_install_dir>
+#export PERL5LIB=/usr/local/bin/
 ```
 
-BEGIN DBMS_STATS.GATHER_SCHEMA_STATS('SH'); DBMS_STATS.GATHER_SCHEMA_STATS('SCOTT'); DBMS_STATS.GATHER_SCHEMA_STATS('HR'); DBMS_STATS.GATHER_DATABASE_STATS; DBMS_STATS.GATHER_DICTIONARY_STATS; END;/
+### 3.4. 源端准备工作 {#source-side-preparation}
+
+迁移前，在 Oracle 源库更新优化器统计信息。在 SQL*Plus 中，输入完整的 PL/SQL 块后，另起一行输入 `/` 执行。[SQL*Plus 斜杠命令](https://docs.oracle.com/en/database/oracle/oracle-database/19/sqpug/slash.html)
 
 ```
-查询源端对象的类型
+BEGIN
+DBMS_STATS.GATHER_SCHEMA_STATS('SH');
+DBMS_STATS.GATHER_SCHEMA_STATS('SCOTT');
+DBMS_STATS.GATHER_SCHEMA_STATS('HR');
+DBMS_STATS.GATHER_DATABASE_STATS;
+DBMS_STATS.GATHER_DICTIONARY_STATS;
+END;
+/
+```
+
+查询源库中这些模式所含的对象类型。
 
 ```bash
 SYS@PROD1>set pagesize 200
@@ -177,7 +201,7 @@ VIEW
 11 rows selected.
 ```
 
-### 3.4. ora2pg导出表结构 {#ora2pg导出表结构}
+### 3.5. 使用 Ora2Pg 导出表结构 {#ora2pg导出表结构}
 
 **配置ora2pg.conf:**
 
@@ -210,7 +234,7 @@ OUTPUT     sh.sql
 >
 > 5.  建议导出表结构时，一个类型一个类型的操作，避免其它错误相互影响。
 
-#### 3.4.1. **测试连接** {#测试连接}
+#### 3.5.1. **测试连接** {#测试连接}
 
 设置Oracle数据库DSN后，您可以执行ora2pg以查看它是否有效：
 
@@ -220,7 +244,7 @@ OUTPUT     sh.sql
 Oracle Database 19c Enterprise Edition Release 19.0.0.0.0
 ```
 
-#### 3.4.2. 迁移成本评估 {#迁移成本评估}
+#### 3.5.2. 迁移成本评估 {#迁移成本评估}
 
 估算从Oracle到PostgreSQL的迁移过程的成本并不容易。为了获得对此迁移成本的良好评估，Ora2Pg将检查所有数据库对象，所有函数和存储过程，以检测是否仍有一些对象和PL / SQL代码无法由Ora2Pg自动转换。
 
@@ -287,7 +311,7 @@ Technical levels:
 -------------------------------------------------------------------------------
 ```
 
-#### 3.4.3. **导出SH表构** {#导出sh表构}
+#### 3.5.3. **导出 SH 表结构** {#导出sh表构}
 
 ```
 #  ora2pg  -c ora2pg.conf
@@ -321,7 +345,7 @@ Technical levels:
 Fixing function calls in output files....
 ```
 
-#### 3.4.4. **导出SH用户数据** {#导出sh用户数据}
+#### 3.5.4. **导出 SH 用户数据** {#导出sh用户数据}
 
 配置ora2pg.conf 的TYPE 为COPY 或 INSERT
 
@@ -433,7 +457,7 @@ Fixing function calls in output files...
 
 以同样的方法分别导出HR，SCOTT用户数据。
 
-### 3.5. 在IvorySQL环境中创建orcl库 {#在ivorysql环境中创建orcl库}
+### 3.6. 在 IvorySQL 中创建 orcl 数据库 {#在ivorysql环境中创建orcl库}
 
 创建ORCL 数据库
 
