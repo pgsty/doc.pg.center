@@ -4,15 +4,19 @@ upstream_source: halodb
 upstream_link: "" # Original summary; cite the reference below without claiming an upstream licence.
 upstream_ref: "Halo Database 1.0.16; documentation snapshot 2026-11-07"
 upstream_notice: /attribution/#halodb
-title: Configure MySQL compatibility
-linkTitle: Configuration and connection
-description: Enable the Halo MySQL endpoint, install aux_mysql, create a user, and connect with mysql.
+title: Configure MySQL compatibility (Halo Database 1.0.16)
+linkTitle: "Halo 1.0.16: configuration"
+description: Historical summary of commercial Halo Database 1.0.16 listener, tenant, role, and engine parameters.
 weight: 30
 ---
 
+
+> [!WARNING]
+> **Commercial Halo Database 1.0.16 reference — not for OpenHalo 18.** Parameters and tools on this page—such as `cluster_net_services`, `mysql.default_tenant`, `plmyssql`, `hsql -p 1921`, `SET password_encryption = 'mysql_native_password'`, and session `SET max_allowed_packet`—belong to commercial Halo Database 1.0.16 and do not apply to the PGSTY OpenHalo 18 fork. For OpenHalo 18, use [Build and configuration](/openhalo/18/configuration/).
+
 The current Halo Database instructions and the open-source OpenHalo README use different configuration names. Follow the section for the binary you are running.
 
-## Halo 16: current mode setup {#halo-16}
+## Halo 1.0.16 mode setup {#halo-16}
 
 Add the MySQL listener and its default database to `$PGDATA/postgresql.conf`:
 

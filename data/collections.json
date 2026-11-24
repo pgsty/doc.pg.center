@@ -124,7 +124,9 @@
       "zh"
     ],
     "group": "databases",
-    "paired": true
+    "paired": true,
+    "aligned_heading_ids": true,
+    "identical_code": true
   },
   "babelfish": {
     "name": "Babelfish",

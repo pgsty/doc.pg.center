@@ -4,11 +4,15 @@ upstream_source: openhalo-tests
 upstream_link: "" # Original summary; cite the reference below without claiming an upstream licence.
 upstream_ref: "OpenHalo 1.0.14.18 测试报告；提交 80a8d07"
 upstream_notice: /zh/attribution/#openhalo-tests
-title: 已知 MySQL 兼容边界
-linkTitle: 兼容边界
-description: 公开 OpenHalo 测试中需要改写或额外验证的 MySQL 功能。
+title: 已知 MySQL 兼容边界（PG14 测试报告）
+linkTitle: "PG14 测试报告"
+description: OpenHalo 1.0.14.18 在 57 个 MySQL SQL 用例上的 2025 年独立测试历史摘要。
 weight: 60
 ---
+
+
+> [!NOTE]
+> **历史 PG14 测试证据。** 本页概括 2025 年针对 OpenHalo `1.0.14.18 (251127)` 的独立测试报告。其中部分行为（如 `FORCE INDEX` 解析）在 OpenHalo 18 中已经改变，另一些（如 `JSON_*` 函数与 MySQL 存储过程）仍不受支持。请参阅当前 [OpenHalo 18 兼容边界](/openhalo/18/compatibility/)与[最终验收](/openhalo/18/acceptance/)。
 
 独立的 [OpenHalo MySQL 兼容性测试报告](https://github.com/fxcollot/openHaloDocumentation/blob/80a8d077b1d329e397b251fa8c64dbded303bba2/TestingReport/OpenHaloMySQLCompatibilityTestingReport.md) 在 2025 年 11 月 27 日至 12 月 3 日使用 MySQL 5.7.32 客户端测试了 OpenHalo `1.0.14.18 (251127)`。报告共测试 57 项，通过 42 项、失败 15 项。73.7% 只是该测试集的通过比例，不是产品整体的兼容率。
 

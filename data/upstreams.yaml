@@ -268,6 +268,21 @@ openhalo:
   license: GPL-3.0-only
   notice: /attribution/#openhalo
   modified: true
+openhalo-pgsty:
+  name: PGSTY OpenHalo 18 maintained manual
+  repository: https://github.com/pgsty/openhalo
+  source_ref: v18.6.1
+  source_commit: 2627e6f3e94ffdaba9ca6a835c4a1ae2fba34183
+  acceptance_commit: 6a93e8fb914a4cc4b6a0c4e3f35af43b5f8dc41a
+  ref: v18.6.1 (2627e6f, aux_mysql 1.9); accepted at 6a93e8f on 2026-11-10
+  snapshot_date: '2026-11-10'
+  release_status: source tag v18.6.1 published; multi-platform binary packages pending package acceptance
+  source_archive_sha256: e0a7fc4a2e278985847e575121e60a2f92e7cea5b3b5a1f551721c6fa4b2c6f5
+  copyright: Portions Copyright (c) 2026, PGSTY PTE. LTD.; Copyright (c) 2025, Halo Tech Co., Ltd.; Portions Copyright (c) 1996-2025, PostgreSQL Global Development Group
+  license: GPL-3.0-only
+  license_note: Maintained manual adapted from the fork's v18.6.1 documentation and 6a93e8f acceptance evidence. PostgreSQL kernel and protocol hooks retain PostgreSQL License terms; aux_mysql derives from GPLv3 OpenHalo. See the full notices for component distinctions.
+  notice: /attribution/#openhalo
+  modified: true
 halodb:
   name: Halo Database MySQL compatibility documentation
   documentation: https://doc.halodbtech.com/multi-mode-compatibility/mysql

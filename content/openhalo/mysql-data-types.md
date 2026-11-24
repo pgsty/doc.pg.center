@@ -4,11 +4,15 @@ upstream_source: halodb
 upstream_link: "" # Original summary; cite the reference below without claiming an upstream licence.
 upstream_ref: "Halo Database 1.0.16; documentation snapshot 2026-11-07"
 upstream_notice: /attribution/#halodb
-title: Compatible MySQL data types
-linkTitle: MySQL data types
-description: MySQL numeric, character, date/time, ENUM, SET, and YEAR types documented for Halo.
+title: Compatible MySQL data types (Halo Database 1.0.16)
+linkTitle: "Halo 1.0.16: types"
+description: Historical summary of MySQL numeric, character, date/time, ENUM, SET, and YEAR types documented for commercial Halo Database 1.0.16.
 weight: 50
 ---
+
+
+> [!WARNING]
+> **Commercial Halo Database 1.0.16 reference — not for OpenHalo 18.** In particular, native `ENUM` and `SET` declarations shown below are unsupported in OpenHalo 18 (`error 1091`), and `BIGINT UNSIGNED`, `DATETIME`/`TIMESTAMP`, and `NUL` byte handling follow explicit PostgreSQL 18 rules. See [OpenHalo 18 types](/openhalo/18/features/#types) and [compatibility boundaries](/openhalo/18/compatibility/#representation).
 
 The Halo 1.0.16 MySQL reference documents common numeric, character, date/time, and special MySQL types. Accepted type names do not make every range, cast, collation, or automatic-value rule identical to a native MySQL server; verify the values that the application depends on.
 

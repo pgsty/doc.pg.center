@@ -1,0 +1,269 @@
+{
+  "component": "openhalo",
+  "edition": "PGSTY OpenHalo 18 / v18.6.1 (aux_mysql 1.9)",
+  "snapshot_date": "2026-11-10",
+  "updated_date": "2026-11-11",
+  "source_repository": "https://github.com/pgsty/openhalo",
+  "source_ref": "v18.6.1",
+  "source_tag_object": "55aab1f7ef3ce5d4f2893dcf76e6a6c270c4cf89",
+  "source_commit": "2627e6f3e94ffdaba9ca6a835c4a1ae2fba34183",
+  "acceptance_commit": "6a93e8fb914a4cc4b6a0c4e3f35af43b5f8dc41a",
+  "delta_since_acceptance": "4 commits (e1f2424, 1d7e45e, 2ae3a15, 2627e6f): copyright comment headers, .gitignore, and documentation updates; zero executable C, SQL, or grammar rule changes",
+  "release_status": "source tag v18.6.1 (aux_mysql 1.9) published on main; multi-platform RPM/DEB binary packages still pending target-matrix build and package-level acceptance (earlier tag v18.6 includes aux_mysql 1.5)",
+  "release_status_at_acceptance": "at 2026-11-10 acceptance of 6a93e8f, remote master was at a000baaf68602eda91ccf0b83aca02a7bf694cb1 (lacking final boolean-default fix) and published v18.6 included aux_mysql 1.5",
+  "source_files": [
+    {
+      "path": "README.md",
+      "sha256": "ef3f66aa753dc0860b60adbc29d3371e9aa7d85c139206940a3955754f7150d1"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "92cc5acad4c2d4a1e15ea2809ac59af03a16d03bc8316abbf85d01225a38edee"
+    },
+    {
+      "path": "COPYRIGHT",
+      "sha256": "64980ed5adfff0340580e91185f78fbe54b9577b382b786108cc88e71c43fe21"
+    },
+    {
+      "path": "3party-legal-notices",
+      "sha256": "27984a67b272dba5ca39d858a18a084137890362aa928c043e884b71b013424c"
+    },
+    {
+      "path": "contrib/aux_mysql/README.md",
+      "sha256": "4ea8b6a16ba9b7ce4bda35c81685dd6ba9f507f9211ce741961c8fd501d5e175"
+    },
+    {
+      "path": "contrib/aux_mysql/MIGRATION.md",
+      "sha256": "31f643e0edf73a69f1c1474eae8fb23c81ed19f5c407903f2fd4eb2b84593e2f"
+    },
+    {
+      "path": "contrib/aux_mysql/TESTING.md",
+      "sha256": "0bdf04225cac3691d23d094da93fcc918f4de806c2f2ea5ecd6be9ea0db299b3"
+    },
+    {
+      "path": "contrib/aux_mysql/ROUTE_A_RECHECK.md",
+      "sha256": "d3f4e006a45a546614297bb1d1167e97fac26721c993ec93f5db112fcbef9d36"
+    },
+    {
+      "path": "contrib/aux_mysql/UPSTREAM.md",
+      "sha256": "36b0703a13c2bb7abc1e3b0fdc3b66d8ecfe8f4772910ba36309e2585ca42ad5"
+    }
+  ],
+  "source_files_at_acceptance_6a93e8f": [
+    {
+      "path": "README.md",
+      "sha256": "42f4435ad0490a6ebe2237ecd052156ba0149b725f081bc5cae5decb215b62b7"
+    },
+    {
+      "path": "contrib/aux_mysql/README.md",
+      "sha256": "35187ed5184b6465f03addcad6ddcaf397776893d13fda39128b0a95f0574137"
+    },
+    {
+      "path": "contrib/aux_mysql/MIGRATION.md",
+      "sha256": "78c20296d3c253fa42f820544786ca5f9e41222ae33d667826ec2878c8ec05bc"
+    },
+    {
+      "path": "contrib/aux_mysql/TESTING.md",
+      "sha256": "0bdf04225cac3691d23d094da93fcc918f4de806c2f2ea5ecd6be9ea0db299b3"
+    },
+    {
+      "path": "contrib/aux_mysql/ROUTE_A_RECHECK.md",
+      "sha256": "5e1a3d395cbad269b59d4b63267730a17fe8ce24e8e872cf7b815527ce785a79"
+    },
+    {
+      "path": "contrib/aux_mysql/UPSTREAM.md",
+      "sha256": "36b0703a13c2bb7abc1e3b0fdc3b66d8ecfe8f4772910ba36309e2585ca42ad5"
+    }
+  ],
+  "acceptance": {
+    "evaluated_commit": "6a93e8fb914a4cc4b6a0c4e3f35af43b5f8dc41a",
+    "source_archive_sha256": "e0a7fc4a2e278985847e575121e60a2f92e7cea5b3b5a1f551721c6fa4b2c6f5",
+    "report_sha256": "33cb29eb8e6d813581ef88e7b6ad3bb61271f8e322234f9157d5a8821d1280fd",
+    "verification_sha256": "cd261478d7986adafc3a5b61020a05221bb02f65edf43a27208f56942abf145f",
+    "evidence_archive_sha256": "df0c062078ab9cfdf612fea4c905aa7eb203ccfef614d3b6d55558799d78803c",
+    "evidence_archive_bytes": 33580392,
+    "artifact_status": "Retained audit evidence pinned to 6a93e8f; no public binary package download implied"
+  },
+  "authorship": "PGSTY maintained English explanation and reviewed Chinese translation; Portions Copyright (c) 2026, PGSTY PTE. LTD.; Copyright (c) 2025, Halo Tech Co., Ltd.; Portions Copyright (c) 1996-2025, PostgreSQL Global Development Group",
+  "historical_records": "data/imports/openhalo.json",
+  "pages": [
+    {
+      "english": "content/openhalo/_index.md",
+      "chinese": "content/openhalo/_index.zh.md",
+      "english_sha256": "26ea2afbdd193819baa45e6bfb4749a16e592575b3b389d4a309b245147d9577",
+      "chinese_sha256": "7cd2bf1ac3f9ca5ffc6356c828bb36b447f95cac1c3541a6dfa5aa1c003c6836",
+      "translation_basis_sha256": "26ea2afbdd193819baa45e6bfb4749a16e592575b3b389d4a309b245147d9577",
+      "status": "maintained-bilingual",
+      "heading_ids": [
+        "benefits",
+        "migration",
+        "how-it-works",
+        "performance",
+        "pace",
+        "mysql-compatibility"
+      ],
+      "code_blocks": 0,
+      "code_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "english": "content/openhalo/18/_index.md",
+      "chinese": "content/openhalo/18/_index.zh.md",
+      "english_sha256": "1a1f5ec0ca7b79070e6e7b0e921bfa5c2a68bf7d45d9b227646d26e13ee730b3",
+      "chinese_sha256": "04d0b8ceb0fd4211268057f7eebc56507a6ac53243030875c5da13a91754cdb1",
+      "translation_basis_sha256": "1a1f5ec0ca7b79070e6e7b0e921bfa5c2a68bf7d45d9b227646d26e13ee730b3",
+      "status": "maintained-bilingual",
+      "heading_ids": [
+        "manual",
+        "lineage",
+        "versions",
+        "contract",
+        "sources"
+      ],
+      "code_blocks": 0,
+      "code_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "english": "content/openhalo/18/acceptance.md",
+      "chinese": "content/openhalo/18/acceptance.zh.md",
+      "english_sha256": "b4e3225ab02e7503621c5451aae86866fd0f35ea371092ba3e3554021452a004",
+      "chinese_sha256": "46fe9df1c4e31e7d79a163c2eb48e028a14d81d51dfb1274439e7ddaa9681aa7",
+      "translation_basis_sha256": "b4e3225ab02e7503621c5451aae86866fd0f35ea371092ba3e3554021452a004",
+      "status": "maintained-bilingual",
+      "heading_ids": [
+        "identity",
+        "tests",
+        "upgrade",
+        "performance",
+        "evidence",
+        "release-gates",
+        "limits"
+      ],
+      "code_blocks": 0,
+      "code_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "english": "content/openhalo/18/changes.md",
+      "chinese": "content/openhalo/18/changes.zh.md",
+      "english_sha256": "9bf45e5ec9b44092e29c7c51940fdb312b18b7a65d71f63f5cdf58c615180aa9",
+      "chinese_sha256": "dd08bd490c4c3e8ed9473b3039cdeb3a1dca07fc7e11557257e4d0b2b369264b",
+      "translation_basis_sha256": "9bf45e5ec9b44092e29c7c51940fdb312b18b7a65d71f63f5cdf58c615180aa9",
+      "status": "maintained-bilingual",
+      "heading_ids": [
+        "foundation",
+        "initial-review",
+        "work-packages",
+        "final-fixes",
+        "default-example",
+        "performance",
+        "deferred"
+      ],
+      "code_blocks": 1,
+      "code_sha256": "fb6655ff6ecb8b846250e46f9d49071288b999af48edc10cc7e65580ee6b5647"
+    },
+    {
+      "english": "content/openhalo/18/compatibility.md",
+      "chinese": "content/openhalo/18/compatibility.zh.md",
+      "english_sha256": "2a76f0f37cdbd22e0525d668d6ff0b3e4378020a42109d7868339e862320e519",
+      "chinese_sha256": "f0eec726ecad2ebad9a31cf12b354b88cb18ea561ac4b7a6149713fece130cfc",
+      "translation_basis_sha256": "2a76f0f37cdbd22e0525d668d6ff0b3e4378020a42109d7868339e862320e519",
+      "status": "maintained-bilingual",
+      "heading_ids": [
+        "representation",
+        "collations",
+        "transactions",
+        "accepted-vs-implemented",
+        "expressions",
+        "objects",
+        "coexistence",
+        "operations",
+        "diagnostics"
+      ],
+      "code_blocks": 3,
+      "code_sha256": "55bff0e196152d9f9001a5a3d1a134963c309dfd66790b9e3ec1835eaf5f63cd"
+    },
+    {
+      "english": "content/openhalo/18/configuration.md",
+      "chinese": "content/openhalo/18/configuration.zh.md",
+      "english_sha256": "5500e8bf1a0fef9acc60c90b6a5606cd8a18439099da7af9ae9bdf7f839ae544",
+      "chinese_sha256": "33d6eb5f643cedfdf748be087f3156b6a87e71b01ce7c65090b494dfc715f850",
+      "translation_basis_sha256": "5500e8bf1a0fef9acc60c90b6a5606cd8a18439099da7af9ae9bdf7f839ae544",
+      "status": "maintained-bilingual",
+      "heading_ids": [
+        "build",
+        "initialize",
+        "authentication",
+        "parameters",
+        "session",
+        "old-settings"
+      ],
+      "code_blocks": 10,
+      "code_sha256": "7518591b48ea5c00511dc0b1f2b9de21a13e3466d69cda67484227a6ccc79a9b"
+    },
+    {
+      "english": "content/openhalo/18/features.md",
+      "chinese": "content/openhalo/18/features.zh.md",
+      "english_sha256": "2af493a8aa476eae210a6d9f3a1df8855c1bf9dbb7d120249bb050f0dfb1ed1e",
+      "chinese_sha256": "60784a713e7c880e3bfaee0fef60d1b7e4ee3e870d57d9bf045bdb3cbe3c0fa0",
+      "translation_basis_sha256": "2af493a8aa476eae210a6d9f3a1df8855c1bf9dbb7d120249bb050f0dfb1ed1e",
+      "status": "maintained-bilingual",
+      "heading_ids": [
+        "protocol",
+        "sql",
+        "transactions",
+        "types",
+        "indexes",
+        "generated",
+        "operations"
+      ],
+      "code_blocks": 7,
+      "code_sha256": "e7404fd29eea867fb60833e695110b3d7667b697d03bc00775931ac92a68110d"
+    },
+    {
+      "english": "content/openhalo/18/migration.md",
+      "chinese": "content/openhalo/18/migration.zh.md",
+      "english_sha256": "e9f1bbe301a961ba532de4bf52a079c423a86e705a546351132206831e90081e",
+      "chinese_sha256": "c9792c5b0b97a4d98d69f7637a5f2f6b571778db68bbdb3c3c23d3d51306dd64",
+      "translation_basis_sha256": "e9f1bbe301a961ba532de4bf52a079c423a86e705a546351132206831e90081e",
+      "status": "maintained-bilingual",
+      "heading_ids": [
+        "preflight",
+        "mysql",
+        "pg14",
+        "upgrade",
+        "audit",
+        "pending-fk",
+        "restore"
+      ],
+      "code_blocks": 6,
+      "code_sha256": "802f71cf9d191de5649c4ad3c2477f3423489295a34ad5abd8b9e41e41d971c5"
+    },
+    {
+      "english": "content/openhalo/mysql57-compatibility-review.md",
+      "chinese": "content/openhalo/mysql57-compatibility-review.zh.md",
+      "english_sha256": "c2943d801506c697927d9a2522a62f1e98cc8bd4a6f31e2326a9c97cc76f5513",
+      "chinese_sha256": "290aabdc21b1b013b4d49e2a1c164b5397c138af4133501274e96431600b1d91",
+      "translation_basis_sha256": "c2943d801506c697927d9a2522a62f1e98cc8bd4a6f31e2326a9c97cc76f5513",
+      "status": "historical-snapshot-bilingual",
+      "heading_ids": [
+        "environment",
+        "method",
+        "usable-scope",
+        "blocking-issues",
+        "other-differences",
+        "test-accounting",
+        "migration",
+        "research",
+        "evidence"
+      ],
+      "code_blocks": 3,
+      "code_sha256": "4dbf8899781d329647f60d4af08582ad9294c33a255328e84c1d848a30a39d0a"
+    }
+  ],
+  "additional_source_basis": [
+    "Historical initial review at 9dc937f, preserved in content/openhalo/mysql57-compatibility-review.md",
+    "Protocol, authentication, and prepared-statement implementation (src/mysql_proto.c, src/mys_auth.c, src/mys_stmt.c): port 3306 supports scram-sha-256/md5/password/trust/reject HBA rules (1045 on others), mysql_clear_password switches via AuthSwitchRequest (0xfe), COM_STMT_FETCH returns 1421, and session max_prepared_stmt_count is 16,382 (1461)",
+    "Transaction, DML, and system-variable implementation (src/backend/executor/nodeModifyTable.c, src/mysm/systemVar.c, src/mysm/sysvar_core.c, src/parser/mys_scan.l, src/parser/mys_gram.y): START TRANSACTION WITH CONSISTENT SNAPSHOT warns 138 outside REPEATABLE READ; REPLACE counts 1 on single-unique-key triggerless identical rows and 1 + deleted_rows when physically deleting/reinserting; non-default auto_increment_increment/auto_increment_offset, wait_timeout/interactive_timeout, and ANSI_QUOTES/PIPES_AS_CONCAT/REAL_AS_FLOAT/IGNORE_SPACE/NO_UNSIGNED_SUBTRACTION/HIGH_NOT_PRECEDENCE are echoed without runtime enforcement",
+    "Aggregate and type-mapping verification in contrib/aux_mysql/sql/aux_mysql.sql, contrib/aux_mysql/sql/aux_mysql_fix_compat.sql, and src/parser/mys_gram.y: mysql.sum(bool) returns bigint while AVG/MIN/MAX/STD/BIT_* on bool fail with 1305; FIND_IN_SET remains an SQL function; bare TIMESTAMP maps to timestamp without time zone",
+    "Raw acceptance probe results in verification.json and evidence/{release,mysql57,independent-comparison,package-state,historical_wrapper}.json: strict negative BIGINT UNSIGNED raises domain check 3819; SET NAMES ... COLLATE emits warning 1105 and falls back to utf8mb4_general_ci whereas direct SET collation_connection echoes verbatim without changing bare literal comparison"
+  ]
+}

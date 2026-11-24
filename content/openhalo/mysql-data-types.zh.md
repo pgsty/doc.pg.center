@@ -4,11 +4,15 @@ upstream_source: halodb
 upstream_link: "" # Original summary; cite the reference below without claiming an upstream licence.
 upstream_ref: "Halo Database 1.0.16；2026-11-07 文档快照"
 upstream_notice: /zh/attribution/#halodb
-title: 兼容的 MySQL 数据类型
-linkTitle: MySQL 数据类型
-description: Halo 文档列出的 MySQL 数字、字符、日期时间、ENUM、SET 和 YEAR 类型。
+title: 兼容的 MySQL 数据类型（Halo Database 1.0.16）
+linkTitle: "Halo 1.0.16：类型"
+description: 商业 Halo Database 1.0.16 文档列出的 MySQL 数字、字符、日期时间、ENUM、SET 和 YEAR 类型历史摘要。
 weight: 50
 ---
+
+
+> [!WARNING]
+> **商业 Halo Database 1.0.16 参考 —— 不适用于 OpenHalo 18。** 下文列出的原生 `ENUM` 与 `SET` 在 OpenHalo 18 中不受支持（报 `1091`），且 `BIGINT UNSIGNED`、`DATETIME`/`TIMESTAMP` 与 `NUL` 字节处理遵循明确的 PostgreSQL 18 规则。请参阅 [OpenHalo 18 类型能力](/openhalo/18/features/#types)与[兼容边界](/openhalo/18/compatibility/#representation)。
 
 Halo 1.0.16 的 MySQL 参考资料说明兼容常用的数字、字符、日期时间和特殊 MySQL 类型。接受某个类型名称，并不代表所有取值范围、转换、排序规则或自动值行为都与原生 MySQL 完全相同；请验证应用真正依赖的值和语义。
 

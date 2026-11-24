@@ -2,10 +2,15 @@
 type: docs
 upstream_source: openhalo
 upstream_link: https://github.com/HaloTech-Co-Ltd/openHalo/blob/90fc8d777c3f111d4c8d236625bb15b5d4b19d7c/README.md
-title: Build and configure OpenHalo
-description: Build from source, enable MySQL compatibility, and connect with the mysql client.
+title: Build and configure OpenHalo (PG14 historical)
+description: Historical upstream PG14 README workflow for building from source, enabling database_compat_mode, and connecting with mysql.
 weight: 10
+linkTitle: "PG14 build (historical)"
 ---
+
+
+> [!WARNING]
+> **Historical PG14 guide — not for OpenHalo 18.** This page preserves the upstream PostgreSQL 14 openHalo README at `90fc8d7`. Settings shown here—including `--with-uuid=ossp`, `database_compat_mode = 'mysql'`, and `set password_encryption=mysql_native_password`—do not exist in the PGSTY OpenHalo 18 fork and will fail. For OpenHalo 18, follow [Build and configuration](/openhalo/18/configuration/).
 
 This page preserves the source-build workflow from the openHalo README. For Halo Database 1.0.16's recommended MySQL endpoint configuration and connection rules, see [Configure MySQL compatibility](/openhalo/mysql-configuration/).
 

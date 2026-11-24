@@ -2,10 +2,15 @@
 type: docs
 upstream_source: openhalo
 upstream_link: https://github.com/HaloTech-Co-Ltd/openHalo/blob/90fc8d777c3f111d4c8d236625bb15b5d4b19d7c/README.md
-title: 编译与配置 OpenHalo
-description: 从源码编译 OpenHalo，启用 MySQL 兼容模式，并使用 mysql 客户端连接。
+title: 编译与配置 OpenHalo（PG14 历史）
+description: 历史上游 PG14 README 中的源码编译、database_compat_mode 配置与 mysql 客户端连接流程。
 weight: 10
+linkTitle: "PG14 构建（历史）"
 ---
+
+
+> [!WARNING]
+> **历史 PG14 指南 —— 不适用于 OpenHalo 18。** 本页保留上游 PostgreSQL 14 openHalo 在 `90fc8d7` 时的 README。文中的 `--with-uuid=ossp`、`database_compat_mode = 'mysql'` 与 `set password_encryption=mysql_native_password` 在 PGSTY OpenHalo 18 分支中均不存在，照搬执行会报错。OpenHalo 18 请使用[构建与配置](/openhalo/18/configuration/)。
 
 本页保留 openHalo README 中的源码编译流程。Halo Database 1.0.16 推荐的 MySQL 端点配置和连接规则见[配置 MySQL 兼容](/openhalo/mysql-configuration/)。
 

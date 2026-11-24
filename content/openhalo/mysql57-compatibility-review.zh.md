@@ -1,11 +1,15 @@
 ---
 type: docs
 upstream_link: ""
-title: OpenHalo 18 与 MySQL 5.7 兼容性研究报告
-linkTitle: MySQL 5.7 实测报告
+title: OpenHalo 18 初次复核（2026-11-07）
+linkTitle: "PG18 初次复核"
 description: 固定 OpenHalo 提交 9dc937f，独立构建并与真实 MySQL 5.7.32 差分测试，记录可用范围、迁移结果和七项阻断问题。
 weight: 65
 ---
+
+
+> [!NOTE]
+> **历史初次复核 · 2026-11-07。** 本报告记录 `9dc937ff4e81667882c42c3618eafcf4b28ac059` 上的初次 NO-GO，保留原始证据与后续分级，不代表对 `aux_mysql 1.9`（于 2026-11-10 在 `6a93e8f` 通过源码验收并发布于源码标签 `v18.6.1`）的结论。请阅读[完整修改记录](/openhalo/18/changes/)与 [2026-11-10 最终验收](/openhalo/18/acceptance/)。
 
 **OpenHalo 18 可以运行经过明确适配的有限 MySQL 应用；现有结果不足以支持将它作为 MySQL 5.7 的直接替代，也不能批准无改造的生产迁移。** 所测基础查询和客户端连接路径可用，但崩溃、约束未执行、事务设置无效和 DDL 往返改变数据规则等问题仍然构成阻断。
 

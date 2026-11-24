@@ -4,11 +4,15 @@ upstream_source: halodb
 upstream_link: "" # Original summary; cite the reference below without claiming an upstream licence.
 upstream_ref: "Halo Database 1.0.16；2026-11-07 文档快照"
 upstream_notice: /zh/attribution/#halodb
-title: 兼容的 MySQL 语句
-linkTitle: MySQL 语句
-description: Halo 文档列出的插入、分页、预处理语句和用户变量等 MySQL 语法。
+title: 兼容的 MySQL 语句（Halo Database 1.0.16）
+linkTitle: "Halo 1.0.16：SQL"
+description: 商业 Halo Database 1.0.16 文档列出的 MySQL 语句形式历史摘要。
 weight: 40
 ---
+
+
+> [!WARNING]
+> **商业 Halo Database 1.0.16 参考 —— 不适用于 OpenHalo 18。** 本页概括商业 Halo Database 1.0.16 文档。关于 PGSTY OpenHalo 18 分支的实际语句支持、冲突影响行数、连接 `UPDATE`/`DELETE` 范围及预备语句行为，请参阅 [OpenHalo 18 功能集合](/openhalo/18/features/#sql)与[兼容边界](/openhalo/18/compatibility/#expressions)。
 
 Halo 1.0.16 官方 SQL 语法页面列出了以下 MySQL 特有形式。示例反映文档描述的兼容面；应用中的实际语句仍应在确切的服务端版本上验证。
 

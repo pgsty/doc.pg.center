@@ -4,11 +4,15 @@ upstream_source: halodb
 upstream_link: "" # Original summary; cite the reference below without claiming an upstream licence.
 upstream_ref: "Halo Database 1.0.16；2026-11-07 文档快照"
 upstream_notice: /zh/attribution/#halodb
-title: MySQL 兼容
-linkTitle: MySQL 兼容
-description: Halo 的 MySQL 协议、SQL 语法、数据类型、函数与兼容范围。
+title: MySQL 兼容（Halo Database 1.0.16）
+linkTitle: "Halo 1.0.16：概览"
+description: 商业 Halo Database 1.0.16 的 MySQL 协议、SQL 语法、数据类型与兼容范围历史摘要。
 weight: 20
 ---
+
+
+> [!WARNING]
+> **商业 Halo Database 1.0.16 参考 —— 不是 OpenHalo 18 支持矩阵。** 本页概括商业 Halo Database 1.0.16 手册（包含 `ENUM`、`SET` 及 Halo 专有参数等在 OpenHalo 18 中不支持的内容）。PGSTY OpenHalo 18 分支请参阅 [OpenHalo 18 手册](/openhalo/18/)及其[兼容边界](/openhalo/18/compatibility/)。
 
 Halo Database 1.0.16 文档说明其兼容 MySQL 5.6 至 8.0 的常用功能，包括 MySQL 协议、数据类型、SQL 语法、操作符和系统函数。本栏目将这份参考资料整理成一套较短的使用与迁移指南。
 

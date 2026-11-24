@@ -1,11 +1,15 @@
 ---
 type: docs
 upstream_link: ""
-title: OpenHalo 18 and MySQL 5.7 compatibility review
-linkTitle: MySQL 5.7 review
+title: Initial OpenHalo 18 review (2026-11-07)
+linkTitle: "Initial PG18 review"
 description: Independent builds, real MySQL 5.7.32 differential tests, migration results, and seven blocking issues at OpenHalo commit 9dc937f.
 weight: 65
 ---
+
+
+> [!NOTE]
+> **Historical initial review · 2026-11-07.** This report records the initial NO-GO at `9dc937ff4e81667882c42c3618eafcf4b28ac059`, including its original evidence and later triage. Its findings are not a verdict on `aux_mysql 1.9` (accepted at `6a93e8f` on 2026-11-10 and published in source tag `v18.6.1`). Read the [complete change record](/openhalo/18/changes/) and [2026-11-10 final acceptance](/openhalo/18/acceptance/).
 
 **OpenHalo 18 can run a limited set of MySQL applications after explicit adaptation. These results do not support using it as a drop-in MySQL 5.7 replacement or approving an unmodified production migration.** Basic queries and client connections work in the tested paths, but crashes, unenforced constraints, ineffective transaction settings, and DDL round-trip changes remain blocking problems.
 

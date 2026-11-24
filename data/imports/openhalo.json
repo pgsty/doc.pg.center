@@ -17,16 +17,28 @@
       "status": "imported"
     },
     {
-      "source": "README.md",
+      "source": "Maintained version guide; see data/imports/openhalo-pgsty.json",
       "target": "content/openhalo/_index.zh.md",
       "language": "zh",
-      "status": "translated"
+      "status": "maintained-index",
+      "previous_source": {
+        "source": "README.md",
+        "commit": "90fc8d777c3f111d4c8d236625bb15b5d4b19d7c",
+        "status": "translated"
+      },
+      "updated": "2026-11-11"
     },
     {
-      "source": "README.md",
+      "source": "Maintained version guide; see data/imports/openhalo-pgsty.json",
       "target": "content/openhalo/_index.md",
       "language": "en",
-      "status": "imported"
+      "status": "maintained-index",
+      "previous_source": {
+        "source": "README.md",
+        "commit": "90fc8d777c3f111d4c8d236625bb15b5d4b19d7c",
+        "status": "imported"
+      },
+      "updated": "2026-11-11"
     },
     {
       "source": "https://github.com/fxcollot/openHaloDocumentation/blob/80a8d077b1d329e397b251fa8c64dbded303bba2/TestingReport/OpenHaloMySQLCompatibilityTestingReport.md",
@@ -178,5 +190,10 @@
       "status": "summarized",
       "notice": "The report is summarized with a source link; no repository license was identified in the pinned snapshot."
     }
+  },
+  "maintenance": {
+    "date": "2026-11-11",
+    "current_manual": "data/imports/openhalo-pgsty.json",
+    "historical_notices": "Added product/version notices without rewriting historical findings or commands."
   }
 }

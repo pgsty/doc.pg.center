@@ -4,15 +4,19 @@ upstream_source: halodb
 upstream_link: "" # Original summary; cite the reference below without claiming an upstream licence.
 upstream_ref: "Halo Database 1.0.16；2026-11-07 文档快照"
 upstream_notice: /zh/attribution/#halodb
-title: 配置 MySQL 兼容
-linkTitle: 配置与连接
-description: 启用 Halo MySQL 端点、安装 aux_mysql、创建用户并使用 mysql 客户端连接。
+title: 配置 MySQL 兼容（Halo Database 1.0.16）
+linkTitle: "Halo 1.0.16：配置"
+description: 商业 Halo Database 1.0.16 的监听器、默认租户库、角色与引擎参数历史摘要。
 weight: 30
 ---
 
+
+> [!WARNING]
+> **商业 Halo Database 1.0.16 参考 —— 不适用于 OpenHalo 18。** 本页中的 `cluster_net_services`、`mysql.default_tenant`、`plmyssql`、`hsql -p 1921`、`SET password_encryption = 'mysql_native_password'` 以及会话级 `SET max_allowed_packet` 均属于商业 Halo Database 1.0.16，不能用于 PGSTY OpenHalo 18 分支。OpenHalo 18 请使用[构建与配置](/openhalo/18/configuration/)。
+
 当前 Halo Database 文档与开源 OpenHalo README 使用的配置参数不同。请根据实际运行的二进制选择对应小节。
 
-## Halo 16：当前模式配置 {#halo-16}
+## Halo 1.0.16 模式配置 {#halo-16}
 
 在 `$PGDATA/postgresql.conf` 中加入 MySQL 监听器和默认数据库：
 

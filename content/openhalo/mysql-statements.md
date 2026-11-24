@@ -4,11 +4,15 @@ upstream_source: halodb
 upstream_link: "" # Original summary; cite the reference below without claiming an upstream licence.
 upstream_ref: "Halo Database 1.0.16; documentation snapshot 2026-11-07"
 upstream_notice: /attribution/#halodb
-title: Compatible MySQL statements
-linkTitle: MySQL statements
-description: Documented MySQL statement forms for inserts, pagination, prepared statements, and user variables in Halo.
+title: Compatible MySQL statements (Halo Database 1.0.16)
+linkTitle: "Halo 1.0.16: SQL"
+description: Historical summary of MySQL statement forms documented for commercial Halo Database 1.0.16.
 weight: 40
 ---
+
+
+> [!WARNING]
+> **Commercial Halo Database 1.0.16 reference — not for OpenHalo 18.** This page summarizes commercial Halo Database 1.0.16 documentation. For actual statement support, conflict row counts, joined `UPDATE`/`DELETE` limits, and prepared-statement behavior in the PGSTY OpenHalo 18 fork, use [OpenHalo 18 functionality](/openhalo/18/features/#sql) and [compatibility boundaries](/openhalo/18/compatibility/#expressions).
 
 The official Halo 1.0.16 SQL syntax page documents the following MySQL-specific forms. The examples show the documented compatibility surface; validate application-specific statements against the exact server build.
 

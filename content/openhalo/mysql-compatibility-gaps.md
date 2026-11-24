@@ -4,11 +4,15 @@ upstream_source: openhalo-tests
 upstream_link: "" # Original summary; cite the reference below without claiming an upstream licence.
 upstream_ref: "OpenHalo 1.0.14.18 test report; commit 80a8d07"
 upstream_notice: /attribution/#openhalo-tests
-title: Known MySQL compatibility boundaries
-linkTitle: Compatibility boundaries
-description: Versioned OpenHalo test results for MySQL features that require rewriting or additional validation.
+title: Known MySQL compatibility boundaries (PG14 test report)
+linkTitle: "PG14 test report"
+description: Historical 2025 independent test summary for OpenHalo 1.0.14.18 across 57 MySQL SQL cases.
 weight: 60
 ---
+
+
+> [!NOTE]
+> **Historical PG14 test evidence.** This page summarizes a 2025 student test report on OpenHalo `1.0.14.18 (251127)`. Several items (such as `FORCE INDEX` parsing) changed in OpenHalo 18, while others (such as `JSON_*` functions and MySQL stored procedures) remain unsupported. See the current [OpenHalo 18 compatibility boundaries](/openhalo/18/compatibility/) and [final acceptance](/openhalo/18/acceptance/).
 
 The independent [OpenHalo MySQL Compatibility Testing Report](https://github.com/fxcollot/openHaloDocumentation/blob/80a8d077b1d329e397b251fa8c64dbded303bba2/TestingReport/OpenHaloMySQLCompatibilityTestingReport.md) tested OpenHalo `1.0.14.18 (251127)` with a MySQL 5.7.32 client from November 27 to December 3, 2025. It recorded 42 passed and 15 failed cases out of 57. The 73.7% figure is the pass ratio for that test set, not a compatibility percentage for the product.
 

@@ -4,11 +4,15 @@ upstream_source: halodb
 upstream_link: "" # Original summary; cite the reference below without claiming an upstream licence.
 upstream_ref: "Halo Database 1.0.16; documentation snapshot 2026-11-07"
 upstream_notice: /attribution/#halodb
-title: MySQL compatibility
-linkTitle: MySQL compatibility
-description: MySQL protocol, SQL syntax, data types, functions, and compatibility scope in Halo.
+title: MySQL compatibility (Halo Database 1.0.16)
+linkTitle: "Halo 1.0.16: overview"
+description: Historical summary of MySQL protocol, SQL syntax, data types, and compatibility scope in commercial Halo Database 1.0.16.
 weight: 20
 ---
+
+
+> [!WARNING]
+> **Commercial Halo Database 1.0.16 reference — not the OpenHalo 18 matrix.** This page summarizes the commercial Halo Database 1.0.16 manual (including features such as `ENUM`, `SET`, and Halo-specific parameters that are unsupported on OpenHalo 18). For the PGSTY OpenHalo 18 fork, read the [OpenHalo 18 manual](/openhalo/18/) and its [compatibility boundaries](/openhalo/18/compatibility/).
 
 Halo Database 1.0.16 documents common MySQL 5.6 through 8.0 features: the MySQL protocol, data types, SQL syntax, operators, and system functions. This collection turns that reference into a shorter guide for running and assessing MySQL applications through Halo.
 
