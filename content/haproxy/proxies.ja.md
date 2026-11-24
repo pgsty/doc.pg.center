@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/proxies/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 4"
+upstream_ref: "v3.4.8, chapter 4"
 ---
 
 プロキシの設定は、次のセクションに記述できます。
@@ -3679,6 +3679,8 @@ HTTPリクエスト解析の制約緩和を有効または無効にします。
     * H1でのみ、CONNECTリクエストのauthorityを検査しません。
 
     * H1でのみ、authorityとHostヘッダーの値の照合を行いません。
+
+    * H1でのみ、リクエストにHostヘッダーがない場合、そのターゲットのauthority（CONNECTリクエストではrequest-target自体）からHostヘッダーを生成します。ただし、authorityにHostヘッダーで禁止されている文字が含まれる場合や、CONNECTリクエストでauthorityが無効な場合は追加しません。
 
     * H1でのみ、HTTPバージョンの検査を緩和します。バージョンを指定しないHTTP/0.9のGETリクエスト、異なるプロトコル名（RTSPなど）、およびメジャーバージョンとマイナーバージョンの両方に複数桁を使う表記を許可します。
 

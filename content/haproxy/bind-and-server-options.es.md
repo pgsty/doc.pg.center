@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/bind-and-server-options/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
+upstream_ref: "v3.4.8, chapter 5"
 ---
 
 Las palabras clave "bind", "server" y "default-server" soportan cierto número de parámetros según
@@ -377,6 +377,10 @@ sufijo ".sctl". Si se encuentra tal archivo, se habilita el soporte para la exte
 Certificate Transparency (RFC6962). El archivo debe contener una Signed Certificate Timestamp List
 válida, como se describe en el RFC. El archivo se analiza para comprobar la sintaxis básica, pero no
 se verifica ninguna firma.
+
+La entrega de SCT sobre TLS 1.2 y versiones anteriores es compatible con OpenSSL 1.0.2 y posteriores
+o AWS-LC. TLS 1.3 requiere OpenSSL 1.1.1 y posteriores o AWS-LC. La entrega de SCT sobre QUIC no es
+compatible.
 
 Hay casos en los que es deseable soportar múltiples tipos de clave, p. ej. RSA y ECDSA en los cipher
 suites ofrecidos a los clientes. Esto permite que los clientes que soportan certificados EC puedan
@@ -1973,6 +1977,8 @@ requieren para marcar un servidor como disponible o no disponible.
 Pueden configurarse comprobaciones de estado opcionales a nivel de aplicación con "option httpchk",
 "option mysql-check" "option smtpchk", "option pgsql-check", "option ldap-check" u "option
 redis-check".
+
+Para los backend de registro, aunque los endpoints UDP son compatibles, las comprobaciones usan TCP como protocolo implícito, porque no existen comprobaciones UDP puras y las comprobaciones ICMP no están disponibles.
 
 Ejemplo:
 

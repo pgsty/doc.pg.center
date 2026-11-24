@@ -10,7 +10,7 @@ aliases:
   - /haproxy/intro/resources/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapters 1 and 5"
+upstream_ref: "v3.4.8, chapters 1 and 5"
 ---
 
 ## 1. التوثيق المتاح {#section-1}

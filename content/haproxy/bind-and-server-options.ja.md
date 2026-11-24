@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/bind-and-server-options/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
+upstream_ref: "v3.4.8, chapter 5"
 ---
 
 "bind"、"server"、"default-server"キーワードは、ビルドオプションやHAProxyをビルドしたシステムに応じた各種設定をサポートします。各設定は通常、単語一つと、その後に続く場合がある値で構成され、"bind"行または"server"行と同じ行に記述します。このセクションでは、これらのオプションをすべて説明します。
@@ -234,6 +234,8 @@ PEMファイルの代わりにディレクトリ名を指定すると、その�
 HAProxyは各PEMファイルについて、同じパスに".ocsp"を付けたファイルがあるかを確認します。見つかると、TLS Certificate Status Request拡張（"OCSP stapling"とも呼ばれます）のサポートを自動的に有効にします。このファイルの内容は任意です。空でない場合、DER形式の有効なOCSP Responseを含める必要があります。OCSP Responseが有効とみなされるには、次の規則を満たす必要があります。goodの状態を示していること、PEMファイル内の証明書に対する単一のレスポンスであること、追加した時点で有効であることです。これらを満たさない場合、OCSP Responseを無視して警告を出します。OCSP Responseがどの証明書に適用されるかを特定するには、発行者の証明書が必要です。PEMファイル内に発行者の証明書が見つからなければ、PEMファイルと同じパスに".issuer"を付けたファイルが存在する場合はそこから読み込み、存在しなければエラーになります。
 
 HAProxyは各PEMファイルについて、同じパスの末尾に".sctl"を付けたファイルが存在するかどうかも確認します。そのファイルが見つかった場合、Certificate Transparency（RFC6962）TLS拡張のサポートが有効になります。ファイルには、RFCに記載された有効なSigned Certificate Timestamp Listが含まれていなければなりません。ファイルは基本的な構文を確認するために解析されますが、署名の検証は行われません。
+
+TLS 1.2以前におけるSCTの配信は、OpenSSL 1.0.2以降またはAWS-LCでサポートされます。TLS 1.3にはOpenSSL 1.1.1以降またはAWS-LCが必要です。QUICでのSCTの配信はサポートされていません。
 
 クライアントに提示する暗号スイートで、RSAやECDSAなど複数の鍵の種類をサポートしたい場合があります。これにより、EC証明書をサポートするクライアントはEC暗号を使いながら、RSAだけに対応した古いクライアントも同時にサポートできます。
 
@@ -1346,6 +1348,8 @@ server行に"sni"または"alpn"を設定しても、その値はヘルスチェ
 チェックの間隔は"inter"キーワードで設定でき、"rise"と"fall"で、サーバーを利用可能または利用不可と判断するために必要なヘルスチェックの成功回数や失敗回数を定義できます。
 
 任意指定のアプリケーションレベルのヘルスチェックは、"option httpchk"、"option mysql-check"、"option smtpchk"、"option pgsql-check"、"option ldap-check"、"option redis-check"で設定できます。
+
+ログバックエンドでは、UDPエンドポイントはサポートされますが、検証には暗黙のプロトコルとしてTCPが使われます。生のUDP検証は存在せず、ICMP検証も利用できないためです。
 
 例：
 

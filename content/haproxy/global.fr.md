@@ -5,12 +5,13 @@ weight: 140
 description: "Sécurité du processus, réglage des performances, débogage et paramètres du client HTTP"
 icon: fa-solid fa-earth-americas
 module: [HAPROXY]
+search_keywords: ["ocsp-update.timeout", "tune.ssl.ktls-unsafe"]
 categories: [Référence]
 aliases:
   - /haproxy/configuration/global/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
+upstream_ref: "v3.4.8, chapter 3"
 ---
 
 Les paramètres de la section « global » sont applicables à l'ensemble du processus et souvent spécifiques au système d'exploitation. Ils sont généralement définis une fois pour toutes et n'exigent pas de modification une fois correctement configurés. Certains d'entre eux ont des équivalents en ligne de commande.
@@ -84,6 +85,7 @@ Les mots-clés suivants sont pris en charge dans la section « global » :
   - ocsp-update.mindelay
   - ocsp-update.httpproxy
   - ocsp-update.mode
+  - ocsp-update.timeout
   - pidfile
   - pp2-never-send-local
   - presetenv
@@ -285,6 +287,7 @@ Les mots-clés suivants sont pris en charge dans la section « global » :
   - tune.ssl.hard-maxrecord
   - tune.ssl.keylog
   - tune.ssl.keyupdate-rate-limit
+  - tune.ssl.ktls-unsafe
   - tune.ssl.lifetime
   - tune.ssl.maxrecord
   - tune.ssl.ssl-ctx-cache-size
@@ -1340,6 +1343,16 @@ ocsp-update.mode [ on | off ]
 ```
 
 Définit le mode par défaut d'actualisation OCSP pour tous les certificats utilisés dans la configuration. Cette option globale peut être remplacée par l'option « ocsp-update » du bloc crt-list. Cette option est définie sur « off » par défaut. Voir l'option « ocsp-update » pour plus d'informations sur le mécanisme d'actualisation automatique.
+
+<a id="entry-3-1-ocsp-update-timeout"></a>
+
+**`ocsp-update.timeout <timeout>`**
+
+```haproxy
+ocsp-update.timeout <timeout>
+```
+
+Définit le délai d’expiration appliqué à la requête utilisée pour récupérer une réponse OCSP pendant une mise à jour automatique. Ce délai couvre toute la requête, de la tentative de connexion à la réception de la réponse complète. S’il est atteint, la mise à jour est considérée comme échouée et journalisée comme telle. La valeur est exprimée en millisecondes par défaut, mais toute autre unité est acceptée si le nombre est suivi de l’unité, comme expliqué en haut de ce document. La valeur par défaut est 10s. Consultez l’option « ocsp-update » pour plus d’informations sur le mécanisme de mise à jour automatique.
 
 <a id="entry-3-1-pidfile"></a>
 
@@ -3837,7 +3850,17 @@ $HAPROXY_KEYLOG_BC_LOG_FMT   clés de connexion backend (côté serveur)
 tune.ssl.keyupdate-rate-limit <limit>
 ```
 
-Limite la quantité de KeyUpdate par seconde que nous acceptons à `<limit>` avant de la considérer comme une inondation, et de tuer la connexion. Le traitement des KeyUpdate est coûteux en ressources CPU, et il y a peu de raisons de recevoir un grand nombre de ces messages. Une valeur de « 0 » désactive la limitation de débit. La valeur par défaut est 100. <a id="entry-3-2-tune-ssl-lifetime"></a>
+Limite la quantité de KeyUpdate par seconde que nous acceptons à `<limit>` avant de la considérer comme une inondation, et de tuer la connexion. Le traitement des KeyUpdate est coûteux en ressources CPU, et il y a peu de raisons de recevoir un grand nombre de ces messages. Une valeur de « 0 » désactive la limitation de débit. La valeur par défaut est 100. <a id="entry-3-2-tune-ssl-ktls-unsafe"></a>
+
+**`tune.ssl.ktls-unsafe`**
+
+```haproxy
+tune.ssl.ktls-unsafe
+```
+
+Utilise kTLS même sur les versions d’OpenSSL affectées par un bug qui corrompt les flux lorsqu’un tampon d’enregistrement en attente est réutilisé (corrigé dans 3.4.6 et 3.5.7). Sur ces versions, kTLS est refusé et un avis le signale lors de l’analyse de « ktls on », sauf si cette option est définie. Elle n’a aucun effet sur les versions corrigées ni sur les autres bibliothèques SSL. Désactivée par défaut.
+
+<a id="entry-3-2-tune-ssl-lifetime"></a>
 
 **`tune.ssl.lifetime <timeout>`**
 

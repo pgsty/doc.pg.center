@@ -11,7 +11,7 @@ aliases:
   - /haproxy/intro/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 2"
+upstream_ref: "v3.4.8, chapter 2"
 ---
 
 هذا المستند مقدمة إلى HAProxy لجميع من لا يعرفه، وكذلك لمن يعرفون الإصدارات الأقدم

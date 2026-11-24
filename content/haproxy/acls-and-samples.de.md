@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/acls-and-samples/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 7"
+upstream_ref: "v3.4.8, chapter 7"
 ---
 
 HAProxy ist in der Lage, Daten aus Anfrage- oder Antwortströmen, aus Client- oder Serverinformationen, aus Tabellen, Umgebungsdaten usw. zu extrahieren. Der Vorgang, solche Daten zu extrahieren, wird als Sample-Abruf bezeichnet. Nach dem Abruf können diese Samples für verschiedene Zwecke verwendet werden, beispielsweise als Schlüssel einer Stick Table. Am häufigsten werden sie jedoch mit vordefinierten konstanten Daten, sogenannten Mustern, verglichen.

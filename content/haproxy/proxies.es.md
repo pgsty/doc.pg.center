@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/proxies/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 4"
+upstream_ref: "v3.4.8, chapter 4"
 ---
 
 La configuración del proxy puede ubicarse en un conjunto de secciones:
@@ -4691,6 +4691,12 @@ Cuando se establece esta opción, se observan las siguientes reglas:
 
     * Solo en H1, no se realizará ninguna comprobación entre la autoridad y el
       valor de la cabecera Host.
+
+    * Solo en H1, cuando una solicitud no tiene cabecera Host, se construye
+      una cabecera Host a partir de la autoridad de su objetivo (la propia
+      request-target para solicitudes CONNECT). Pero no se añade cuando la
+      autoridad contiene caracteres prohibidos en la cabecera Host o, para
+      solicitudes CONNECT, cuando la autoridad no es válida.
 
     * Solo en H1, las pruebas sobre la versión HTTP se relajarán. Permitirá
       pasar solicitudes GET HTTP/0.9 (sin versión especificada), así como

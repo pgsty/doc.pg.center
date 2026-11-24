@@ -1,5 +1,5 @@
 ---
-title: "Documentación de HAProxy 3.4.7-57"
+title: "Documentación de HAProxy 3.4.8"
 linkTitle: HAProxy
 weight: 50
 description: "Edición Markdown completa en español de las guías de inicio, configuración y gestión de HAProxy 3.4"
@@ -11,10 +11,10 @@ sidebar_root_link_self: true
 no_list: true
 module: [HAPROXY]
 categories: [Referencia]
-upstream_source: haproxy
+upstream_source: haproxy-20261121
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 cascade:
-  upstream_source: haproxy
+  upstream_source: haproxy-20261121
   type: docs
   module: [HAPROXY]
 ---
@@ -23,10 +23,7 @@ cascade:
 HTTP, y la gestión del tráfico de aplicaciones. Este componente contiene la traducción completa al español de
 los tres manuales principales de HAProxy 3.4, reorganizada como una secuencia de lectura plana en Markdown para OINK.
 
-Esta edición sigue los manuales oficiales en inglés de la rama de mantenimiento en la instantánea `3.4.7-57`.
-La última versión estable es `3.4.7` (`v3.4.7`); la instantánea incluye cambios de documentación realizados
-después de esa versión. Su fuente exacta es el commit
-[`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3).
+Esta edición sigue el lanzamiento oficial **3.4.8 LTS** del 18 de noviembre de 2026, fijado en la [etiqueta v3.4.8](https://git.haproxy.org/?p=haproxy-3.4.git;a=tag;h=v3.4.8). Las traducciones revisadas incluyen las actualizaciones de 3.4.8.
 
 ## Elige un manual {#choose-a-manual}
 
@@ -40,7 +37,7 @@ después de esa versión. Su fuente exacta es el commit
 | Manual | Fuente upstream | Organización local |
 | --- | ---: | ---: |
 | Guía de inicio | 1,695 líneas | 9 páginas planas de temas |
-| Manual de configuración | 33,246 líneas | 12 páginas planas de capítulos |
+| Manual de configuración | 33,277 líneas | 12 páginas planas de capítulos |
 | Guía de gestión | 5,305 líneas | 13 páginas planas de capítulos |
 
 Las 34 páginas de lectura se encuentran directamente bajo la raíz del componente HAProxy. Tres marcadores divisores
@@ -48,5 +45,5 @@ sin enlaces separan los manuales en la barra lateral sin añadir niveles de dire
 
 Los manuales originales completos están disponibles en la revisión upstream fija enlazada más arriba. El
 [aviso de licencia upstream](/third_party/haproxy/LICENSE) y el [texto GPLv2](/third_party/haproxy/GPL-2.0) se
-publican junto a los manuales. Existe una edición complementaria revisada en chino simplificado disponible para
-cada página.
+publican junto a los manuales. La edición complementaria en chino simplificado incluye las actualizaciones
+revisadas de 3.4.8.

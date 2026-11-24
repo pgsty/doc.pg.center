@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/bind-and-server-options/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
+upstream_ref: "v3.4.8, chapter 5"
 ---
 
 Die Schlüsselwörter "bind", "server" und "default-server" unterstützen je nach Build-Optionen und der Systemumgebung, auf der HAProxy gebaut wurde, eine Reihe von Einstellungen. Diese Einstellungen bestehen in der Regel aus einem Wort, gegebenenfalls gefolgt von einem Wert, und werden in derselben Zeile wie die "bind"- oder "server"-Zeile angegeben. Alle diese Optionen werden in diesem Abschnitt beschrieben.
@@ -307,6 +307,10 @@ Endung ".sctl" vorhanden ist. Wird eine solche Datei gefunden, wird die Unterst�
 TLS-Erweiterung Certificate Transparency (RFC6962) aktiviert. Die Datei muss eine gültige Signed
 Certificate Timestamp List enthalten, wie im RFC beschrieben. Beim Einlesen wird die grundlegende
 Syntax geprüft, jedoch werden keine Signaturen verifiziert.
+
+Die SCT-Übermittlung über TLS 1.2 und früher wird mit OpenSSL 1.0.2 und später oder AWS-LC
+unterstützt. TLS 1.3 erfordert OpenSSL 1.1.1 und später oder AWS-LC. Die SCT-Übermittlung über QUIC
+wird nicht unterstützt.
 
 In manchen Fällen ist es sinnvoll, in den für Clients angebotenen Cipher-Suites mehrere
 Schlüsseltypen zu unterstützen, etwa RSA und ECDSA. So können Clients, die EC-Zertifikate
@@ -1789,6 +1793,8 @@ um einen Server als verfügbar bzw. nicht verfügbar zu markieren.
 Optionale Health Checks auf Anwendungsebene können mit "option httpchk", "option
 mysql-check", "option smtpchk", "option pgsql-check", "option ldap-check" oder "option redis-check"
 konfiguriert werden.
+
+Für Log-Backends werden UDP-Endpunkte zwar unterstützt, für Checks wird jedoch TCP als implizites Protokoll verwendet, da es keine rohen UDP-Checks gibt und ICMP-Checks nicht verfügbar sind.
 
 Beispiel:
 

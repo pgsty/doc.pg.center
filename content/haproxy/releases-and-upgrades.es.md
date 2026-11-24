@@ -10,7 +10,7 @@ aliases:
   - /haproxy/intro/releases-and-upgrades/
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 upstream_name: "HAProxy 3.4 Starter Guide"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3.7"
+upstream_ref: "v3.4.8, chapter 3.7"
 ---
 
 HAProxy es un proyecto de código abierto cubierto por la licencia GPLv2, lo que significa que cualquiera

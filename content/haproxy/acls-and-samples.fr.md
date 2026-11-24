@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/acls-and-samples/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 7"
+upstream_ref: "v3.4.8, chapter 7"
 ---
 
 HAProxy est capable d'extraire des données des flux de requêtes ou de réponses, des informations client ou serveur, des tables, des informations environnementales, etc. L'opération d'extraction de ces données est appelée « récupération d'un échantillon ». Une fois récupérés, ces échantillons peuvent être utilisés à diverses fins, par exemple comme clé dans une table de persistance, mais les usages les plus courants consistent à les comparer à des données constantes prédéfinies appelées modèles.

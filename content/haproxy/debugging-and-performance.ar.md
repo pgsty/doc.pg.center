@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/debugging-and-performance/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 12"
+upstream_ref: "v3.4.8, chapter 12"
 ---
 
 عندما يُبدَأ HAProxy بالخيار "-d"، فإنه يبقى في المقدمة ويطبع سطرًا واحدًا لكل حدث،

@@ -681,5 +681,5 @@ haproxy-20261121:
   ref: v3.4.8 LTS
   modified: true
   snapshot_date: '2026-11-21'
-  languages: [en, zh]
+  languages: [en, zh, fr, ja, de, ru, ar, es]
   translation_baseline: haproxy

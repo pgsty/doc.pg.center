@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/acls-and-samples/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 7"
+upstream_ref: "v3.4.8, chapter 7"
 ---
 
 HAProxyは、リクエストやレスポンスのストリーム、クライアントやサーバーの情報、テーブル、環境情報などからデータを抽出できます。このデータ抽出をサンプル取得と呼びます。取得したサンプルはスティックテーブルのキーなど、さまざまな用途に使用できますが、最も一般的な用途は、パターンと呼ばれる定義済みの定数データとの照合です。

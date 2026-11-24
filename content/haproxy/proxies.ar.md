@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/proxies/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 4"
+upstream_ref: "v3.4.8, chapter 4"
 ---
 
 يمكن أن تقع تهيئة الوكيل في مجموعة من الأقسام:
@@ -4210,6 +4210,11 @@ no option accept-unsafe-violations-in-http-request
 
     * في H1 فقط، لن يُجرى أي فحص للتحقق من تطابق سلطة الطلب (authority) مع قيمة ترويسة
       Host.
+
+    * في H1 فقط، عندما لا يحتوي الطلب على ترويسة Host، تُبنى ترويسة Host من سلطة
+      الهدف (authority) (الـ request-target نفسه لطلبات CONNECT). لكنها لا تُضاف عندما
+      تحتوي السلطة على محارف ممنوعة في ترويسة Host، أو لطلبات CONNECT عندما تكون
+      السلطة غير صالحة.
 
     * في H1 فقط، ستُخفف اختبارات إصدار HTTP. سيسمح ذلك بمرور طلبات
       GET‏ HTTP/0.9 (بلا إصدار محدد)، وكذلك بأسماء بروتوكولات مختلفة

@@ -1,5 +1,5 @@
 ---
-title: "HAProxy 3.4.7-57 Dokumentation"
+title: "HAProxy 3.4.8 Dokumentation"
 linkTitle: HAProxy
 weight: 50
 description: "Vollständige deutsche Markdown-Ausgabe der HAProxy-3.4-Handbücher für Einstieg, Konfiguration und Verwaltung."
@@ -11,17 +11,17 @@ sidebar_root_link_self: true
 no_list: true
 module: [HAPROXY]
 categories: [Referenz]
-upstream_source: haproxy
+upstream_source: haproxy-20261121
 upstream_link: "https://docs.haproxy.org/3.4/intro.html"
 cascade:
-  upstream_source: haproxy
+  upstream_source: haproxy-20261121
   type: docs
   module: [HAPROXY]
 ---
 
 **HAProxy** ist ein freier, schneller und zuverlässiger Reverse-Proxy für Hochverfügbarkeit, TCP- und HTTP-Lastverteilung sowie die Verwaltung des Anwendungsverkehrs. Diese Sammlung enthält die vollständige deutsche Übersetzung der drei grundlegenden HAProxy-3.4-Handbücher, neu gegliedert als eine flache Markdown-Lesefolge für OINK.
 
-Diese Ausgabe folgt den offiziellen englischen Handbüchern des Wartungszweigs zum Stand `3.4.7-57`. Die neueste stabile Version ist `3.4.7` (`v3.4.7`); der Dokumentationsstand enthält Änderungen nach dieser Veröffentlichung. Die genaue Quelle ist Commit [`0faeaeda6cdb`](https://git.haproxy.org/?p=haproxy-3.4.git;a=commit;h=0faeaeda6cdbb65c0e0cedb9a20489581bd7d4c3).
+Diese Ausgabe folgt der offiziellen **3.4.8 LTS**-Version vom 18. November 2026, fixiert auf [Tag v3.4.8](https://git.haproxy.org/?p=haproxy-3.4.git;a=tag;h=v3.4.8). Die geprüften Übersetzungen enthalten die 3.4.8-Aktualisierungen.
 
 ## Handbuch auswählen {#choose-a-manual}
 
@@ -35,9 +35,9 @@ Diese Ausgabe folgt den offiziellen englischen Handbüchern des Wartungszweigs z
 | Handbuch | Originalquelle | Lokale Gliederung |
 | --- | ---: | ---: |
 | Einsteigerhandbuch | 1,695 Zeilen | 9 flache Themenseiten |
-| Konfigurationshandbuch | 33,246 Zeilen | 12 flache Kapitelseiten |
+| Konfigurationshandbuch | 33,277 Zeilen | 12 flache Kapitelseiten |
 | Verwaltungshandbuch | 5,305 Zeilen | 13 flache Kapitelseiten |
 
 Alle 34 Leseseiten liegen direkt im HAProxy-Dokumentationsverzeichnis. Drei nicht verlinkte Trennelemente gliedern die Handbücher in der Seitenleiste, ohne zusätzliche Verzeichnisebenen oder Einträge in der Seitennavigation einzuführen.
 
-Die vollständigen Originalhandbücher sind in der oben verlinkten Upstream-Revision verfügbar. Der [Lizenzhinweis des Originalprojekts](/third_party/haproxy/LICENSE) und der [GPLv2-Text](/third_party/haproxy/GPL-2.0) werden zusammen mit den Handbüchern veröffentlicht. Für jede Seite ist eine geprüfte Übersetzung ins vereinfachte Chinesisch verfügbar.
+Die vollständigen Originalhandbücher sind in der oben verlinkten Upstream-Revision verfügbar. Der [Lizenzhinweis des Originalprojekts](/third_party/haproxy/LICENSE) und der [GPLv2-Text](/third_party/haproxy/GPL-2.0) werden zusammen mit den Handbüchern veröffentlicht. Die chinesische Begleitausgabe (vereinfachtes Chinesisch) enthält die geprüften Aktualisierungen für 3.4.8.

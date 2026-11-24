@@ -5,12 +5,13 @@ weight: 140
 description: "أمان العمليات، وضبط الأداء، وتصحيح الأخطاء، وإعدادات عميل HTTP"
 icon: fa-solid fa-earth-americas
 module: [HAPROXY]
+search_keywords: ["ocsp-update.timeout", "tune.ssl.ktls-unsafe"]
 categories: [مرجع]
 aliases:
   - /haproxy/configuration/global/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
+upstream_ref: "v3.4.8, chapter 3"
 ---
 
 المعاملات في قسم «global» تنطبق على العملية بأكملها وكثيرًا ما تكون خاصة بنظام التشغيل. تُضبط عمومًا
@@ -85,6 +86,7 @@ upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
   - ocsp-update.mindelay
   - ocsp-update.httpproxy
   - ocsp-update.mode
+  - ocsp-update.timeout
   - pidfile
   - pp2-never-send-local
   - presetenv
@@ -286,6 +288,7 @@ upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
   - tune.ssl.hard-maxrecord
   - tune.ssl.keylog
   - tune.ssl.keyupdate-rate-limit
+  - tune.ssl.ktls-unsafe
   - tune.ssl.lifetime
   - tune.ssl.maxrecord
   - tune.ssl.ssl-ctx-cache-size
@@ -1720,6 +1723,16 @@ ocsp-update.mode [ on | off ]
 يضبط وضع ocsp-update الافتراضي لجميع الشهادات المستخدمة في التهيئة. يمكن أن تتجاوزه خيارات
 «ocsp-update» في crt-list. يُضبط هذا الخيار على «off» افتراضيًا. انظر الخيار «ocsp-update»
 لمزيد من المعلومات عن آلية التحديث التلقائي.
+
+<a id="entry-3-1-ocsp-update-timeout"></a>
+
+**`ocsp-update.timeout <timeout>`**
+
+```haproxy
+ocsp-update.timeout <timeout>
+```
+
+يضبط المهلة المطبقة على الطلب المستخدم لجلب استجابة OCSP أثناء التحديث التلقائي. تغطي هذه المهلة الطلب بالكامل، من محاولة الاتصال حتى استلام الاستجابة الكاملة. إذا بلغتها، يُعد التحديث فاشلًا ويُسجَّل كذلك. القيمة بالمللي ثانية افتراضيًا، ويمكن استخدام وحدة أخرى بإلحاقها بالرقم كما هو مشروح في أعلى المستند. الافتراضي هو 10s. راجع الخيار «ocsp-update» لمزيد من المعلومات عن آلية التحديث التلقائي.
 
 <a id="entry-3-1-pidfile"></a>
 
@@ -5230,7 +5243,17 @@ tune.ssl.keyupdate-rate-limit <limit>
 
 يحد كمية رسائل KeyUpdate في الثانية التي نرضى بقبولها إلى `<limit>` قبل اعتبار الأمر
 فيضانًا، وقتل الاتصال. التعامل مع KeyUpdate مكلف للCPU، ولا سبب وجيهًا لاستقبال الكثير
-منها. استخدام قيمة "0" يعطل تحديد المعدل. القيمة الافتراضية هي 100. <a id="entry-3-2-tune-ssl-lifetime"></a>
+منها. استخدام قيمة "0" يعطل تحديد المعدل. القيمة الافتراضية هي 100. <a id="entry-3-2-tune-ssl-ktls-unsafe"></a>
+
+**`tune.ssl.ktls-unsafe`**
+
+```haproxy
+tune.ssl.ktls-unsafe
+```
+
+يستخدم kTLS حتى مع إصدارات OpenSSL المتأثرة بخطأ يفسد التدفقات عند إعادة استخدام مخزن سجل معلق (أُصلح في 3.4.6 و3.5.7). في تلك الإصدارات يُرفض kTLS ويُبلَّغ عن ذلك عند تحليل «ktls on»، ما لم يُضبط هذا الخيار. لا يؤثر في الإصدارات المصلحة ولا في مكتبات SSL الأخرى. معطل افتراضيًا.
+
+<a id="entry-3-2-tune-ssl-lifetime"></a>
 
 **`tune.ssl.lifetime <timeout>`**
 

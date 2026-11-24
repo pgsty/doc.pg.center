@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/bind-and-server-options/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
+upstream_ref: "v3.4.8, chapter 5"
 ---
 
 تدعم الكلمات المفتاحية "bind" و "server" و "default-server" عددًا من الإعدادات اعتمادًا على بعض خيارات
@@ -336,6 +336,9 @@ crt <cert>
 لكل ملف PEM، يتحقق HAProxy أيضًا من وجود ملف في المسار نفسه بلاحقة ".sctl". إذا وُجد ملف كهذا، يُفعَّل
 دعم امتداد TLS للشفافية للشهادات (RFC6962). يجب أن يحتوي الملف على قائمة Signed Certificate Timestamp
 صالحة كما هو موصوف في RFC. يُحلَّل الملف للتحقق من الصياغة الأساسية، لكن لا يُتحقق من أي تواقيع.
+
+يُدعم تسليم SCT عبر TLS 1.2 والإصدارات الأقدم مع OpenSSL 1.0.2 وما بعده أو AWS-LC. يتطلب TLS 1.3
+الإصدار OpenSSL 1.1.1 وما بعده أو AWS-LC. تسليم SCT عبر QUIC غير مدعوم.
 
 هناك حالات يكون من المرغوب فيها دعم أنواع مفاتيح متعددة، مثل RSA و ECDSA في مجموعات التشفير المعروضة
 على العملاء. يتيح ذلك للعملاء الذين يدعمون شهادات EC استخدام خوارزميات تشفير EC، مع دعم العملاء الأقدم
@@ -1766,6 +1769,8 @@ check
 
 يمكن تهيئة فحوص سلامة اختيارية على مستوى التطبيق بـ "option httpchk" و "option mysql-check" و
 "option smtpchk" و "option pgsql-check" و "option ldap-check" أو "option redis-check".
+
+بالنسبة إلى خوادم السجل الخلفية، رغم دعم نقاط UDP، تُستخدم TCP للفحوصات كبروتوكول ضمني، لأنه لا توجد فحوص UDP خام وليست فحوص ICMP متاحة.
 
 مثال:
 

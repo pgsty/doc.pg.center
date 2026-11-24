@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/acls-and-samples/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 7"
+upstream_ref: "v3.4.8, chapter 7"
 ---
 
 يستطيع HAProxy استخراج البيانات من تدفقات الطلبات أو الاستجابات، ومن معلومات العميل أو الخادم، ومن الجداول، ومن معلومات البيئة وغيرها. تُسمّى عملية استخراج مثل هذه البيانات جلب عينة (sample fetching). وبعد استرجاعها، يمكن استخدام هذه العينات لأغراض شتى مثل مفتاح في جدول ثبات (stick-table)، لكن أكثر الاستخدامات شيوعًا هو مطابقتها مع بيانات ثابتة معرّفة مسبقًا تُسمّى الأنماط (patterns).

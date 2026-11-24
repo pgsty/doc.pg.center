@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/file-descriptors/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
+upstream_ref: "v3.4.8, chapter 5"
 ---
 
 لضمان تقديم الخدمة لجميع الاتصالات الواردة بنجاح، يحسب HAProxy عند وقت التحميل العدد

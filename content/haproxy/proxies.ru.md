@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/proxies/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 4"
+upstream_ref: "v3.4.8, chapter 4"
 ---
 
 Конфигурация прокси может размещаться в нескольких типах секций:
@@ -3581,6 +3581,12 @@ no option accept-unsafe-violations-in-http-request
     * Только в H1 компонент authority для запросов CONNECT не проверяется;
 
     * Только в H1 компонент authority и значение заголовка Host не проверяются.
+
+    * Только в H1, если запрос не содержит заголовок Host, заголовок Host
+      формируется из компонента authority его цели (для запросов CONNECT —
+      из самого request-target). Но он не добавляется, если authority
+      содержит символы, запрещённые в заголовке Host, или, для запросов
+      CONNECT, если authority недопустим.
 
     * Только в H1 проверки версии HTTP ослабляются. Разрешается пропускать
       запросы HTTP/0.9 GET (без указания версии), другие имена протоколов

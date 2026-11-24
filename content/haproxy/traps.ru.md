@@ -10,7 +10,7 @@ aliases:
   - /haproxy/management/traps/
 upstream_link: "https://docs.haproxy.org/3.4/management.html"
 upstream_name: "HAProxy 3.4 Management Guide"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 11"
+upstream_ref: "v3.4.8, chapter 11"
 ---
 
 Время от времени кто-нибудь сообщает, что после перезагрузки системы служба haproxy не запустилась,

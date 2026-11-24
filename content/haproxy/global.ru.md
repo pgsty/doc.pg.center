@@ -5,12 +5,13 @@ weight: 140
 description: "Безопасность процессов, настройка производительности, отладка и параметры HTTP-клиента"
 icon: fa-solid fa-earth-americas
 module: [HAPROXY]
+search_keywords: ["ocsp-update.timeout", "tune.ssl.ktls-unsafe"]
 categories: [Справочник]
 aliases:
   - /haproxy/configuration/global/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
+upstream_ref: "v3.4.8, chapter 3"
 ---
 
 Параметры секции "global" действуют на весь процесс и часто зависят от ОС. Обычно их задают один раз, и после правильной настройки менять их не требуется. У некоторых есть эквиваленты в командной строке.
@@ -84,6 +85,7 @@ upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
   - ocsp-update.mindelay
   - ocsp-update.httpproxy
   - ocsp-update.mode
+  - ocsp-update.timeout
   - pidfile
   - pp2-never-send-local
   - presetenv
@@ -285,6 +287,7 @@ upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
   - tune.ssl.hard-maxrecord
   - tune.ssl.keylog
   - tune.ssl.keyupdate-rate-limit
+  - tune.ssl.ktls-unsafe
   - tune.ssl.lifetime
   - tune.ssl.maxrecord
   - tune.ssl.ssl-ctx-cache-size
@@ -1401,6 +1404,16 @@ ocsp-update.mode [ on | off ]
 ```
 
 Задаёт режим ocsp-update по умолчанию для всех сертификатов, используемых в конфигурации. Этот глобальный параметр может быть переопределён параметром "ocsp-update" в crt-list. По умолчанию он имеет значение "off". Подробности о механизме автоматического обновления см. в описании параметра "ocsp-update".
+
+<a id="entry-3-1-ocsp-update-timeout"></a>
+
+**`ocsp-update.timeout <timeout>`**
+
+```haproxy
+ocsp-update.timeout <timeout>
+```
+
+Задаёт тайм-аут запроса получения OCSP-ответа при автоматическом обновлении. Тайм-аут охватывает весь запрос, от попытки соединения до получения полного ответа. При его достижении обновление считается неудачным и фиксируется как неудачное. Значение по умолчанию задаётся в миллисекундах, но при суффиксе можно использовать другие единицы, как описано в начале документа. По умолчанию 10s. Подробнее о механизме автоматического обновления см. в описании опции «ocsp-update».
 
 <a id="entry-3-1-pidfile"></a>
 
@@ -3904,7 +3917,17 @@ tune.ssl.keyupdate-rate-limit <limit>
 Ограничивает принимаемое число KeyUpdate в секунду значением `<limit>`, после которого это считается
 потоком избыточных обновлений и соединение принудительно закрывается. Обработка KeyUpdate требует много CPU, и мало
 оснований получать их в большом числе. Значение "0" отключает ограничение интенсивности. Значение по умолчанию
-— 100. <a id="entry-3-2-tune-ssl-lifetime"></a>
+— 100. <a id="entry-3-2-tune-ssl-ktls-unsafe"></a>
+
+**`tune.ssl.ktls-unsafe`**
+
+```haproxy
+tune.ssl.ktls-unsafe
+```
+
+Использовать kTLS даже в версиях OpenSSL, затронутых ошибкой, повреждающей потоки при повторном использовании буфера ожидающей записи (исправлено в 3.4.6 и 3.5.7). В этих версиях kTLS отклоняется, а при разборе «ktls on» выводится уведомление, если не задана эта опция. Она не влияет на исправленные версии и другие SSL-библиотеки. По умолчанию отключена.
+
+<a id="entry-3-2-tune-ssl-lifetime"></a>
 
 **`tune.ssl.lifetime <timeout>`**
 

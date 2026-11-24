@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/bind-and-server-options/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 5"
+upstream_ref: "v3.4.8, chapter 5"
 ---
 
 Les mots-clés « bind », « server » et « default-server » prennent en charge un certain nombre de paramètres, selon certaines options de compilation et le système sur lequel HAProxy a été compilé. Ces paramètres sont généralement composés d’un mot, parfois suivi d’une valeur, écrits sur la même ligne que la directive « bind » ou « server ». Tous ces paramètres sont décrits dans cette section.
@@ -236,6 +236,8 @@ Certaines autorités de certification (comme GoDaddy) proposent une liste dérou
 Pour chaque fichier PEM, HAProxy vérifie la présence d’un fichier au même chemin, suffixé par ".ocsp". Si un tel fichier est trouvé, le support de l’extension « Certificate Status Request » TLS (également appelée « OCSP stapling ») est activé automatiquement. Le contenu de ce fichier est facultatif. S’il n’est pas vide, il doit contenir une réponse OCSP valide au format DER. Pour être valide, une réponse OCSP doit respecter les règles suivantes : indiquer un statut « bon », être une réponse unique pour le certificat du fichier PEM, et être valide au moment de son ajout. Si ces règles ne sont pas respectées, la réponse OCSP est ignorée et un avertissement est émis. Pour identifier le certificat auquel une réponse OCSP s’applique, le certificat de l’émetteur est nécessaire. Si le certificat de l’émetteur n’est pas présent dans le fichier PEM, il sera chargé à partir d’un fichier situé au même chemin que le fichier PEM, suffixé par ".issuer". Si ce fichier n’existe pas, l’opération échoue avec une erreur.
 
 Pour chaque fichier PEM, HAProxy vérifie également la présence d’un fichier au même chemin, suffixé par ".sctl". Si un tel fichier est trouvé, le support de l’extension TLS Certificate Transparency (RFC6962) est activé. Le fichier doit contenir une liste valide de timestamps de certificat signés, comme décrit dans le RFC. Le fichier est analysé pour vérifier sa syntaxe de base, mais aucune signature n’est vérifiée.
+
+La remise de SCT sur TLS 1.2 et versions antérieures est prise en charge avec OpenSSL 1.0.2 ou ultérieur, ou AWS-LC. TLS 1.3 nécessite OpenSSL 1.1.1 ou ultérieur, ou AWS-LC. La remise de SCT sur QUIC n'est pas prise en charge.
 
 Il existe des cas où il est souhaitable de prendre en charge plusieurs types de clés, par exemple RSA et ECDSA dans les suites de chiffrement proposées aux clients. Cela permet aux clients prenant en charge les certificats EC d'utiliser des chiffrements EC, tout en continuant à supporter les clients plus anciens ne prenant en charge que RSA.
 
@@ -1360,6 +1362,8 @@ Elle peut être modifiée à l'aide du mot-clé « source ».
 L'intervalle entre les contrôles d'état peut être défini à l'aide du mot-clé « inter », et les mots-clés « rise » et « fall » peuvent être utilisés pour préciser le nombre de contrôles d'état réussis ou échoués requis pour marquer un serveur comme disponible ou indisponible.
 
 Des contrôles d'état au niveau applicatif optionnels peuvent être configurés à l’aide de « option httpchk », « option mysql-check », « option smtpchk », « option pgsql-check », « option ldap-check » ou « option redis-check ».
+
+Pour les backends de journalisation, bien que les points de terminaison UDP soient pris en charge, TCP est utilisé pour les contrôles comme protocole implicite, car il n'existe pas de contrôles UDP bruts et les contrôles ICMP ne sont pas disponibles.
 
 Exemple :
 

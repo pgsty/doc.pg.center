@@ -10,7 +10,7 @@ aliases:
   - /haproxy/configuration/proxies/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 4"
+upstream_ref: "v3.4.8, chapter 4"
 ---
 
 La configuration du proxy peut être située dans un ensemble de sections :
@@ -3668,6 +3668,8 @@ Lorsque cette option est définie, les règles suivantes s'appliquent :
     * En H1 uniquement, aucune vérification n'est effectuée sur l'autorité pour les requêtes CONNECT ;
 
     * Dans H1 uniquement, aucune vérification ne sera effectuée contre la valeur de l'en-tête authority et de l'en-tête Host.
+
+    * Dans H1 uniquement, lorsqu'une requête n'a pas d'en-tête Host, un en-tête Host est construit à partir de l'autorité de sa cible (le request-target lui-même pour les requêtes CONNECT). Mais il n'est pas ajouté lorsque l'autorité contient des caractères interdits dans l'en-tête Host ou, pour les requêtes CONNECT, lorsque l'autorité est invalide.
 
     * Dans H1 uniquement, les contrôles de la version HTTP seront assouplis. Les requêtes GET HTTP/0.9 pourront ainsi être transmises sans version spécifiée, tout comme les requêtes utilisant d'autres noms de protocole, par exemple RTSP, ou plusieurs chiffres pour les versions majeure et mineure.
 

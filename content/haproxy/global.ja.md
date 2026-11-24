@@ -5,12 +5,13 @@ weight: 140
 description: "プロセスのセキュリティ、パフォーマンス調整、デバッグ、HTTPクライアントの設定"
 icon: fa-solid fa-earth-americas
 module: [HAPROXY]
+search_keywords: ["ocsp-update.timeout", "tune.ssl.ktls-unsafe"]
 categories: [リファレンス]
 aliases:
   - /haproxy/configuration/global/
 upstream_link: "https://docs.haproxy.org/3.4/configuration.html"
 upstream_name: "HAProxy 3.4 Configuration Manual"
-upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
+upstream_ref: "v3.4.8, chapter 3"
 ---
 
 "global" セクションのパラメーターはプロセス全体に適用され、多くはOSに依存します。通常は最初にまとめて設定し、正しく設定できれば変更する必要はありません。一部には対応するコマンドラインオプションがあります。
@@ -84,6 +85,7 @@ upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
   - ocsp-update.mindelay
   - ocsp-update.httpproxy
   - ocsp-update.mode
+  - ocsp-update.timeout
   - pidfile
   - pp2-never-send-local
   - presetenv
@@ -285,6 +287,7 @@ upstream_ref: "v3.4.7-57-g0faeaeda6cdb, chapter 3"
   - tune.ssl.hard-maxrecord
   - tune.ssl.keylog
   - tune.ssl.keyupdate-rate-limit
+  - tune.ssl.ktls-unsafe
   - tune.ssl.lifetime
   - tune.ssl.maxrecord
   - tune.ssl.ssl-ctx-cache-size
@@ -1325,6 +1328,16 @@ ocsp-update.mode [ on | off ]
 ```
 
 設定で使用するすべての証明書について、デフォルトのocsp-updateモードを設定します。このグローバルオプションは、crt-listの "ocsp-update" オプションで上書きできます。デフォルトは "off" です。自動更新の仕組みについては、"ocsp-update" オプションを参照してください。
+
+<a id="entry-3-1-ocsp-update-timeout"></a>
+
+**`ocsp-update.timeout <timeout>`**
+
+```haproxy
+ocsp-update.timeout <timeout>
+```
+
+自動更新中にOCSPレスポンスを取得する要求に適用するタイムアウトを設定します。このタイムアウトは、接続試行から完全なレスポンス受信までの要求全体を対象とします。タイムアウトに達すると更新は失敗とみなされ、そのようにログ記録されます。値はデフォルトでミリ秒単位ですが、ドキュメント先頭の説明にあるとおり、数値に単位を付けると他の単位も指定できます。デフォルトは10sです。自動更新機構の詳細は「ocsp-update」オプションを参照してください。
 
 <a id="entry-3-1-pidfile"></a>
 
@@ -3807,7 +3820,17 @@ $HAPROXY_KEYLOG_BC_LOG_FMT   バックエンド（サーバー側）の接続鍵
 tune.ssl.keyupdate-rate-limit <limit>
 ```
 
-毎秒受け入れるKeyUpdateの数を `<limit>` に制限し、超えると、フラッドとみなして接続を終了します。KeyUpdateの処理はCPU負荷が高く、大量に受信する理由はほとんどありません。値 "0" を使用すると、レート制限を無効にします。デフォルト値は100です。<a id="entry-3-2-tune-ssl-lifetime"></a>
+毎秒受け入れるKeyUpdateの数を `<limit>` に制限し、超えると、フラッドとみなして接続を終了します。KeyUpdateの処理はCPU負荷が高く、大量に受信する理由はほとんどありません。値 "0" を使用すると、レート制限を無効にします。デフォルト値は100です。<a id="entry-3-2-tune-ssl-ktls-unsafe"></a>
+
+**`tune.ssl.ktls-unsafe`**
+
+```haproxy
+tune.ssl.ktls-unsafe
+```
+
+保留中のレコードバッファーが再利用されるとストリームを破壊するバグの影響を受けるOpenSSLバージョンでもkTLSを使用します（3.4.6および3.5.7で修正済み）。これらのバージョンでは、このオプションを設定しない限りkTLSは拒否され、「ktls on」の解析時に注意が報告されます。修正済みバージョンや他のSSLライブラリには影響しません。デフォルトは無効です。
+
+<a id="entry-3-2-tune-ssl-lifetime"></a>
 
 **`tune.ssl.lifetime <timeout>`**
 

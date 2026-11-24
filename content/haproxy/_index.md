@@ -23,9 +23,9 @@ cascade:
 balancing, and application traffic management. This component contains the complete English text of
 the three core HAProxy 3.4 manuals, reorganized as one flat Markdown reading sequence for OINK.
 
-This English edition follows the official **3.4.8 LTS** release of November 18, 2026,
+This edition follows the official **3.4.8 LTS** release of November 18, 2026,
 pinned at [tag v3.4.8](https://git.haproxy.org/?p=haproxy-3.4.git;a=tag;h=v3.4.8).
-Translations still follow the preceding `3.4.7-57` documentation snapshot pending synchronization.
+The reviewed translations include the v3.4.8 updates.
 
 ## Choose a manual {#choose-a-manual}
 
