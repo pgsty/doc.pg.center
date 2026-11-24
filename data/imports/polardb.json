@@ -30,7 +30,10 @@
       "route": "/polardb/site/attribution/",
       "sha256": "4673dbc4dc12d592327ec5570afad1fa262bf5a03a0cde1158466fa92826b586",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "6f4d5f90cc09a54e495c2d84c64058ef6786083ae69636ebac7e4b844be45a25",
+      "update_batch": "2026-11-23-zh-acceptance",
+      "maintained_code_sha256": []
     },
     {
       "source": "content/about/attribution.md",
@@ -40,7 +43,17 @@
       "route": "/zh/polardb/site/attribution/",
       "sha256": "33b4c0d2f8bd4f5ad84a38e9e49d36448decf1f38f9e5e253dd8e19cd468f348",
       "code_sha256": [],
-      "status": "imported"
+      "status": "imported",
+      "maintained_sha256": "2a47df7eb5d26086c6d0557ede80cf86da9ee6061f7fb13049005764a7759f18",
+      "translation_update": {
+        "source": "content/polardb/site/attribution.md",
+        "source_sha256": "6f4d5f90cc09a54e495c2d84c64058ef6786083ae69636ebac7e4b844be45a25",
+        "maintained_sha256": "2a47df7eb5d26086c6d0557ede80cf86da9ee6061f7fb13049005764a7759f18",
+        "review_scope": "changed editorial text or navigation in context",
+        "review_mode": "AI-assisted self-review",
+        "date": "2026-11-23",
+        "batch": "2026-11-23-zh-acceptance"
+      }
     },
     {
       "source": "content/about/license.en.md",
@@ -159,7 +172,19 @@
       "route": "/zh/polardb/contributing/coding-style/",
       "sha256": "3b4e8d31e67d700904373d9f41d3242b91b243fe32de00abbde0f095160e576c",
       "code_sha256": [],
-      "status": "placeholder"
+      "status": "translated",
+      "import_status": "placeholder",
+      "maintained_sha256": "9479c6948a8bfe6390f97ada834e48f5a987911d47217772c5fe711a2b34259c",
+      "translation_update": {
+        "source": "content/polardb/contributing/coding-style.md",
+        "source_sha256": "7804d7ecde40bb08c12eb9e0b4fe3b4b2a99e22574646dd96cfb254cc9b87a19",
+        "maintained_sha256": "9479c6948a8bfe6390f97ada834e48f5a987911d47217772c5fe711a2b34259c",
+        "review_scope": "whole source and target",
+        "review_mode": "AI-assisted self-review",
+        "date": "2026-11-23",
+        "batch": "2026-11-23-zh-acceptance"
+      },
+      "maintained_code_sha256": []
     },
     {
       "source": "content/docs/contributing/contributing-polardb-docs.md",
@@ -2309,5 +2334,17 @@
         "date": "2026-11-22"
       }
     ]
+  },
+  "translation_acceptance": {
+    "date": "2026-11-23",
+    "inventory": "data/updates/2026-11-23-zh-acceptance.json",
+    "english_pages": 15,
+    "chinese_pages": 66,
+    "actions": {
+      "replace-placeholder": 1,
+      "sync-editorial-or-navigation": 1
+    },
+    "security_adaptations": [],
+    "review_mode": "AI-assisted self-review of the pages and scopes identified in translation_update. Earlier dated batch summaries retain their original counts."
   }
 }

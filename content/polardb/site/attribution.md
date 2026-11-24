@@ -37,7 +37,7 @@ Technical prose, SQL, commands, warnings, version conditions, and historical pla
 
 All 85 upstream Markdown files are accounted for in the migration manifest. They become 64 language pages: the Chinese edition retains the full topic range, while this English edition includes the English prose actually available upstream. Chinese duplicates in the upstream English directory map to their Chinese counterparts.
 
-The untranslated Chinese coding-style page is an explicit notice linking to the English original. It is not presented as a completed translation.
+The community translated the coding-style guide from the pinned English text. All 15 English pages have Chinese counterparts. The Chinese edition has 51 additional pages from the upstream Chinese collection.
 
 ## License and marks {#license}
 
