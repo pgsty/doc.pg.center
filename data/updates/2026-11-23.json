@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-23",
+  "timezone": "Asia/Shanghai",
+  "chinese_acceptance_followup": "data/updates/2026-11-23-zh-acceptance.json",
+  "previous_inventory": "data/updates/2026-11-21.json",
+  "base_commit": "ec52b35ed513f128fe4cf1755b2243e685695abe",
+  "head_at_inventory": "47497368a3cda027678cbd6023d0c9cd0ffdbb0d",
+  "comparison": "Base commit to the local working tree, including existing uncommitted changes and seven untracked English OpenHalo 18 pages. Counts refer to distinct Markdown sources. Homepage data, navigation, notices and import records are counted separately.",
+  "publication_scope": "data/collections.json",
+  "language_groups": {
+    "operations": ["en", "zh", "fr", "ja", "de", "ru", "ar", "es"],
+    "databases_and_version_guide": ["en", "zh"]
+  },
+  "english": {
+    "changed_existing_pages": 126,
+    "new_pages": 49,
+    "provenance_only_pages": 1172,
+    "total_changed_pages": 1347,
+    "changed_pages_since_head": 27,
+    "edited_in_this_pass": [
+      "content/babelfish/_index.md",
+      "content/pgedge/about/attribution.md",
+      "content/pgedge/spock/configuration.md",
+      "content/pgedge/spock/spock-release-notes.md"
+    ]
+  },
+  "incremental_translation": {
+    "scope": "Changed English content, titles and examples with their context. Synchronization of an increment does not certify the rest of a pre-existing draft.",
+    "zh": {"content_pages": 175, "provenance_only_pages": 1106, "remaining_content_tasks": 0},
+    "fr": {"content_pages": 39, "provenance_only_pages": 130, "remaining_content_tasks": 0},
+    "ja": {"content_pages": 39, "provenance_only_pages": 130, "remaining_content_tasks": 0},
+    "de": {"content_pages": 39, "provenance_only_pages": 130, "remaining_content_tasks": 0},
+    "ru": {"content_pages": 39, "provenance_only_pages": 130, "remaining_content_tasks": 0},
+    "ar": {"content_pages": 39, "provenance_only_pages": 130, "remaining_content_tasks": 0},
+    "es": {"content_pages": 39, "provenance_only_pages": 130, "remaining_content_tasks": 0},
+    "shared_tasks": {"localized_homepages": 7, "chinese_postgresql_navigation": 1}
+  },
+  "matrix_columns": ["english_edition", "language_group", "english_pages", "new_english", "content_changes_to_existing_english", "english_source_only", "zh_missing", "zh_placeholder", "zh_machine_draft", "zh_only"],
+  "components": {
+    "patroni": ["4.1.5", "operations", 24, 0, 0, 0, 0, 0, 0, 0],
+    "pgbackrest": ["2.60.1", "operations", 29, 0, 20, 0, 0, 0, 0, 0],
+    "pgbouncer": ["1.26.1", "operations", 9, 0, 0, 0, 0, 0, 0, 0],
+    "pgbadger": ["13.3", "operations", 16, 0, 7, 7, 0, 0, 0, 0],
+    "haproxy": ["3.4.8 LTS", "operations", 35, 0, 4, 31, 0, 0, 0, 0],
+    "etcd": ["3.7.4, website e60635a", "operations", 99, 0, 7, 92, 0, 0, 0, 0],
+    "polardb": ["17.11.1.0, docs b4733b0", "databases_and_version_guide", 15, 0, 1, 0, 0, 1, 0, 51],
+    "ivorysql": ["5.6, docs 7c3f4a6", "databases_and_version_guide", 91, 0, 0, 0, 0, 0, 0, 5],
+    "openhalo": ["PGSTY v18.6.1, historical PG14 and Halo Database 1.0.16", "databases_and_version_guide", 15, 7, 8, 0, 0, 0, 0, 0],
+    "babelfish": ["OSS 6.1.0, Aurora 6.2.0, retained website f468c5e", "databases_and_version_guide", 54, 0, 1, 0, 0, 0, 0, 0],
+    "percona": ["pg_tde 2.3.0", "databases_and_version_guide", 89, 1, 9, 79, 0, 0, 0, 0],
+    "cloudberry": ["2.2.0-incubating, site e3a102d, PXF 6683faa, Core Internals c2baef0", "databases_and_version_guide", 672, 31, 21, 594, 0, 0, 0, 0],
+    "agensgraph": ["2.18.6.1", "databases_and_version_guide", 113, 0, 0, 0, 2, 16, 0, 0],
+    "pgedge": ["Spock 6.0.0-beta.2 with 5.0.15-rc.2 supplement, LOLOR 1.3 development, SafeSession 1.1, Snowflake 2.6.1", "databases_and_version_guide", 118, 0, 18, 96, 66, 0, 32, 0],
+    "documentdb": ["1.2.0, docs 8fb7fda, website 4a83a07", "databases_and_version_guide", 310, 10, 27, 273, 0, 0, 0, 0],
+    "orioledb": ["1.10.3, website snapshot 2026-11-06", "databases_and_version_guide", 26, 0, 1, 0, 0, 0, 0, 0],
+    "citus": ["Citus 14, software 14.3.0", "databases_and_version_guide", 67, 0, 0, 0, 0, 0, 0, 0],
+    "postgresql": ["19.0 version navigation", "databases_and_version_guide", 1, 0, 1, 0, 0, 0, 0, 0],
+    "site": ["Shared attribution, home and navigation", "operations", 3, 0, 1, 0, 0, 0, 0, 0]
+  },
+  "historical_chinese_work": {
+    "totals": {"translate_missing": 68, "replace_placeholders": 17, "review_existing_drafts": 32},
+    "polardb": {"replace_placeholders": ["content/polardb/contributing/coding-style.zh.md"]},
+    "agensgraph": {"translate_missing": ["content/agensgraph/operations/backup.zh.md", "content/agensgraph/release-notes/upgrade-walkthrough.zh.md"], "replace_placeholders": 16},
+    "pgedge": {"translate_missing": 66, "review_existing_drafts": 32, "provenance_only_pages_without_a_translation": 66},
+    "worklist": "translations/zh.md",
+    "current_sources": "translation-tasks.json",
+    "localized_only": "PolarDB has 51 Chinese-only routes and IvorySQL has 5. These are upstream edition differences, outside the English-to-Chinese queue."
+  },
+  "diff_archive": {
+    "local_directory": "/Users/vonng/.codex/research/doc-pg-center-sync-2026-11-23/handoff",
+    "relative_paths_resolve_from": "local_directory",
+    "reading_guide": "README.md",
+    "per_page_hashes_and_patches": "english-inventory.json",
+    "translations_by_component_and_language": "matrix.json",
+    "patch_sha256": {
+      "english-all.patch": "5e6ffc684d7b13bc48626d868e3de4141cc5361eff6617db73686255675fc05c",
+      "english-since-head.patch": "695b63d46747d87d81a889940a7137303ee11c05185ac2f8c30f903f877bb3fc",
+      "english-2026-11-23.patch": "0b470eccf92fe808a9a9aa4cd933162973ff268ad0846484101fd68f819bc69c",
+      "shared-metadata.patch": "dc295418c8c208c4c4ebe12cc60fb5157996a98ebdc9f322643736a9ec2e00b9"
+    },
+    "verification": "All four patches were applied to copies of their baseline files and compared byte for byte with the working tree."
+  }
+}

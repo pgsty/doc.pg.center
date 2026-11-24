@@ -36,14 +36,13 @@ Extended and the OINK theme, and maintained by PGSTY.
 
 The six operations collections are available in English, Simplified Chinese,
 French, Japanese, German, Russian, Arabic, and Spanish. The eleven database
-collections use English and Simplified Chinese routes only. Cloudberry has 641
-paired pages; the other collections preserve the source project's actual coverage,
-including explicit notices for incomplete Chinese editions, placeholders, and
-machine drafts. OrioleDB includes all 18 documentation articles and two benchmark
+collections use English and Simplified Chinese routes only. Cloudberry has 672
+paired pages; AgensGraph has 113 pairs and pgEdge has 118. PolarDB and IvorySQL also
+retain 51 and five Chinese-only pages, respectively. OrioleDB includes all 18 documentation articles and two benchmark
 guides from the 2026-11-06 website snapshot: 26 paired pages including indexes
 and source notices. Its architecture figures are shared page-bundle resources;
 heading IDs and code blocks are checked for English/Chinese alignment. DocumentDB
-has 300 English/Chinese pairs from the fixed docs and website snapshots. Its OINK
+has 310 English/Chinese pairs from the fixed docs and website snapshots. Its OINK
 conversion includes website-generated guides, installation steps, platform tabs,
 field tables, stable heading aliases, and complete code/output preservation.
 Translation provenance records AI-assisted bilingual review and source hashes;
@@ -67,7 +66,7 @@ There is no `/docs/` index or URL prefix on this site.
 
 ## Develop
 
-Install Hugo Extended, Go, Python 3, and Node.js. CI pins Hugo Extended 0.168.0 and follows stable Go releases; no external Sass is required.
+Install Hugo Extended, Go, Python 3, and Node.js. CI pins Hugo Extended 0.168.0 and Go 1.27.3; no external Sass is required.
 
 CI sets `HUGO_MEMORYLIMIT=4` so shared build resources stay cached during the
 eight-language build.
@@ -87,6 +86,12 @@ Use Hugo Extended 0.168.0 for the current local theme. Development bypasses
 OINK vendor files; both workspaces remain disabled. Production targets clear
 inherited local replacements and keep the module pin.
 Run `python3 scripts/report-coverage.py` to see the current page coverage.
+The [November 23 synchronization inventory](data/updates/2026-11-23.json)
+lists the English changes per component, the languages that incorporated them,
+the archived diffs, and the original Chinese worklist. The [Chinese acceptance
+record](data/updates/2026-11-23-zh-acceptance.json) documents completion of
+those 117 tasks, four additional pgEdge section articles, and two repaired
+sections in the IvorySQL migration guide.
 
 See [AGENTS.md](AGENTS.md) for the repository layout and maintenance workflow:
 update and review English first, then synchronize the available Chinese and

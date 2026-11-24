@@ -1,0 +1,167 @@
+{
+  "date": "2026-11-23",
+  "previous_inventory": "data/updates/2026-11-23.json",
+  "source_scope": "17 pinned documentation collections plus PostgreSQL navigation and shared attribution",
+  "review_mode": "AI-assisted bilingual self-review using pg-translate",
+  "previous_queue": {
+    "replace-placeholder": 17,
+    "translate-page": 68,
+    "review-entire-draft": 32
+  },
+  "completed_original_queue": 117,
+  "additional_full_section_articles": [
+    "content/pgedge/spock/modify/_index.zh.md",
+    "content/pgedge/spock/modify/zodan/_index.zh.md",
+    "content/pgedge/spock/reference/_index.zh.md",
+    "content/pgedge/spock/reference/functions/_index.zh.md"
+  ],
+  "administrator_oriented_security_adaptations": [
+    "content/pgedge/lolor/lolor-release-notes.zh.md",
+    "content/pgedge/safesession/_index.zh.md",
+    "content/pgedge/safesession/changelog.zh.md"
+  ],
+  "components": {
+    "polardb": {
+      "english_pages": 15,
+      "chinese_pages": 66,
+      "original_queue_completed": 1,
+      "additional_section_articles": 0
+    },
+    "agensgraph": {
+      "english_pages": 113,
+      "chinese_pages": 113,
+      "original_queue_completed": 18,
+      "additional_section_articles": 0
+    },
+    "pgedge": {
+      "english_pages": 118,
+      "chinese_pages": 118,
+      "original_queue_completed": 98,
+      "additional_section_articles": 4
+    },
+    "ivorysql": {
+      "english_pages": 91,
+      "chinese_pages": 96,
+      "original_queue_completed": 0,
+      "additional_section_articles": 0,
+      "repaired_section_pages": 1
+    }
+  },
+  "chinese_only_upstream_routes": {
+    "polardb": 51,
+    "ivorysql": 5
+  },
+  "other_operating_manual_languages": {
+    "fr": {
+      "reviewed_operations_content": 38,
+      "updated_shared_attribution": 1,
+      "source_only": 130
+    },
+    "ja": {
+      "reviewed_operations_content": 38,
+      "updated_shared_attribution": 1,
+      "source_only": 130
+    },
+    "de": {
+      "reviewed_operations_content": 38,
+      "updated_shared_attribution": 1,
+      "source_only": 130
+    },
+    "ru": {
+      "reviewed_operations_content": 38,
+      "updated_shared_attribution": 1,
+      "source_only": 130
+    },
+    "ar": {
+      "reviewed_operations_content": 38,
+      "updated_shared_attribution": 1,
+      "source_only": 130
+    },
+    "es": {
+      "reviewed_operations_content": 38,
+      "updated_shared_attribution": 1,
+      "source_only": 130
+    }
+  },
+  "current_english_followup_pages": [
+    "content/agensgraph/site/attribution.md",
+    "content/attribution.md",
+    "content/ivorysql/migration/migration.md",
+    "content/pgedge/_index.md",
+    "content/pgedge/about/attribution.md",
+    "content/pgedge/about/maintenance.md",
+    "content/pgedge/lolor/_index.md",
+    "content/pgedge/lolor/lolor-release-notes.md",
+    "content/pgedge/lolor/pg-upgrade-with-lolor.md",
+    "content/pgedge/safesession/_index.md",
+    "content/pgedge/snowflake/_index.md",
+    "content/pgedge/snowflake/snowflake-functions.md",
+    "content/pgedge/spock/_index.md",
+    "content/pgedge/spock/limitations.md",
+    "content/pgedge/spock/managing/snowflake.md",
+    "content/pgedge/spock/modify/zodan/zodan-tutorial.md",
+    "content/pgedge/spock/recovery/catastrophic-node-failure.md",
+    "content/pgedge/spock/reference/functions/spock-gen-slot-name.md",
+    "content/pgedge/spock/reference/functions/spock-node-add-interface.md",
+    "content/pgedge/spock/reference/functions/spock-node-alter.md",
+    "content/pgedge/spock/reference/functions/spock-node-create.md",
+    "content/pgedge/spock/reference/functions/spock-node-drop-interface.md",
+    "content/pgedge/spock/reference/functions/spock-node-drop.md",
+    "content/pgedge/spock/reference/functions/spock-node-refresh-info.md",
+    "content/pgedge/spock/reference/functions/spock-replicate-ddl.md",
+    "content/pgedge/spock/reference/functions/spock-repset-add-all-seqs.md",
+    "content/pgedge/spock/reference/functions/spock-repset-add-all-tables.md",
+    "content/pgedge/spock/reference/functions/spock-repset-add-partition.md",
+    "content/pgedge/spock/reference/functions/spock-repset-add-seq.md",
+    "content/pgedge/spock/reference/functions/spock-repset-add-table.md",
+    "content/pgedge/spock/reference/functions/spock-repset-alter.md",
+    "content/pgedge/spock/reference/functions/spock-repset-create.md",
+    "content/pgedge/spock/reference/functions/spock-repset-drop.md",
+    "content/pgedge/spock/reference/functions/spock-repset-remove-partition.md",
+    "content/pgedge/spock/reference/functions/spock-repset-remove-seq.md",
+    "content/pgedge/spock/reference/functions/spock-repset-remove-table.md",
+    "content/pgedge/spock/reference/functions/spock-repset-show-table.md",
+    "content/pgedge/spock/reference/functions/spock-sub-add-repset.md",
+    "content/pgedge/spock/reference/functions/spock-sub-alter-interface.md",
+    "content/pgedge/spock/reference/functions/spock-sub-alter-options.md",
+    "content/pgedge/spock/reference/functions/spock-sub-alter-skiplsn.md",
+    "content/pgedge/spock/reference/functions/spock-sub-create.md",
+    "content/pgedge/spock/reference/functions/spock-sub-drop.md",
+    "content/pgedge/spock/reference/functions/spock-sub-resync-table.md",
+    "content/pgedge/spock/reference/functions/spock-table-wait-for-sync.md",
+    "content/pgedge/spock/reference/functions/spock-wait-slot-confirm-lsn.md",
+    "content/pgedge/spock/reference/functions/spock-xact-commit-timestamp-origin.md",
+    "content/pgedge/spock/troubleshooting.md",
+    "content/pgedge/spock/two-node.md",
+    "content/polardb/site/attribution.md"
+  ],
+  "provenance": "Original per-page sha256 values identify imported source bytes. The maintained_sha256 and translation_update fields identify the reviewed site files. Security adaptations and unchanged pages have separate review scopes.",
+  "additional_section_repairs": [
+    {
+      "source": "content/ivorysql/migration/migration.md",
+      "target": "content/ivorysql/migration/migration.zh.md",
+      "action": "repair-migration-sections",
+      "scope": "two migration sections: optional DBD::Pg and Oracle source preparation; native Chinese elsewhere"
+    }
+  ],
+  "diff_archive": {
+    "local_directory": "/Users/vonng/.codex/research/doc-pg-center-zh-acceptance-2026-11-23/acceptance",
+    "reading_guide": "README.md",
+    "matrix": "matrix.md",
+    "page_review": "pages.json",
+    "prior_english_archive": "/Users/vonng/.codex/research/doc-pg-center-sync-2026-11-23/handoff/english-all.patch",
+    "base_commit": "ec52b35ed513f128fe4cf1755b2243e685695abe",
+    "patches_in_order": [
+      {
+        "file": "english-all.patch",
+        "sha256": "5e6ffc684d7b13bc48626d868e3de4141cc5361eff6617db73686255675fc05c"
+      },
+      {
+        "file": "english-followup.patch",
+        "sha256": "7c6832c3e098ad738382d4a6ac5dd86335114dcd359b8e1224db5285d7d72cf4"
+      }
+    ],
+    "distinct_english_pages_replayed": 1351,
+    "verification": "patch-verification.json"
+  }
+}

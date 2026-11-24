@@ -1,6 +1,8 @@
 {
   "date": "2026-11-21",
   "status": "english-and-chinese-complete-other-languages-pending",
+  "status_as_of": "2026-11-22",
+  "superseded_by": "data/updates/2026-11-23.json",
   "base_head": "ec52b35ed513f128fe4cf1755b2243e685695abe",
   "baseline": "Frozen working tree including preexisting OpenHalo edits; see external baseline-manifest.json",
   "artifact_directory": "/Users/vonng/.codex/research/doc-pg-center-update-2026-11-21/deliverables",

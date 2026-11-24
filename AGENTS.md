@@ -179,10 +179,10 @@ revisions, notices, and per-file migration provenance. The PostgreSQL entry has
 The checkers validate its bilingual routes and outputs without requiring upstream
 import attribution.
 
-The import preserves upstream asymmetry and incomplete translation honestly.
-PolarDB and IvorySQL retain unequal source language editions; AgensGraph keeps
-Chinese draft pages and guide-only placeholders; pgEdge keeps its Chinese draft
-coverage. DocumentDB has 300 complete English/Chinese page pairs. OpenHalo,
+PolarDB and IvorySQL retain their upstream Chinese-only pages. AgensGraph has
+113 English/Chinese pairs and pgEdge has 118. The November 23 translation record
+identifies the pages reviewed in full and the three administrator-oriented
+security adaptations in pgEdge. DocumentDB has 310 English/Chinese page pairs. OpenHalo,
 Babelfish, Percona TDE, and Cloudberry also have paired English and Chinese pages
 for the imported scope. Do not put English prose into a Chinese page or label a
 placeholder or machine draft as reviewed translation.
