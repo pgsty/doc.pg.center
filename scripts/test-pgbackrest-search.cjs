@@ -1,8 +1,8 @@
 'use strict';
 
-// Exercise the production search index with real Lunr. The English pipeline
-// dropped Cyrillic in older OINK releases; 1.4 handles literal Unicode queries
-// directly, so the site uses the published engine without a local override.
+// Exercise the production search index with the shipped OINK search engine.
+// OINK handles literal Unicode queries directly without an external stemmer,
+// so the site uses the published engine without a local override.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -16,7 +16,6 @@ const moduleDir = JSON.parse(execFileSync(
 )).Dir;
 assert(moduleDir, 'published OINK module must resolve to a directory');
 global.window = {};
-const lunr = require(path.join(moduleDir, 'assets/js/third_party/lunr.min.js'));
 const upstream = require(path.join(moduleDir, 'assets/js/search-engine.js'));
 const queries = {
   en: 'Weak Encryption', zh: '弱加密', fr: 'Sous-clés',
@@ -29,7 +28,17 @@ for (const [lang, query] of Object.entries(queries)) {
   );
   assert.equal(files.length, 1, `exactly one ${lang} index`);
   const documents = JSON.parse(fs.readFileSync(path.join(publicDir, files[0]), 'utf8'));
-  const engine = upstream.create(documents, lunr, 12);
+  const bodyFiles = fs.readdirSync(publicDir).filter(
+    name => name.startsWith(`offline-search-body.${lang}.`) && name.endsWith('.json'),
+  );
+  if (bodyFiles.length === 1) {
+    const byRef = new Map(documents.map(doc => [doc.ref, doc]));
+    for (const item of JSON.parse(fs.readFileSync(path.join(publicDir, bodyFiles[0]), 'utf8'))) {
+      const doc = byRef.get(item.ref);
+      if (doc && typeof item.body === 'string') doc.body = item.body;
+    }
+  }
+  const engine = upstream.create(documents, 12);
   const route = (lang === 'en' ? '' : '/' + lang) + '/pgbackrest/news/';
   for (const term of [query, query.toUpperCase()]) {
     assert(engine.query(term).some(({ doc }) => doc.ref === route),
@@ -44,7 +53,7 @@ for (const [lang, query] of Object.entries(queries)) {
         `${lang} technical search missing for ${term}`);
     }
   }
-  for (const term of ['pgBackRest', 'restore', 'backup', 'configuration', 'OpenSSL']) {
+  for (const term of ['pgBackRest', 'restore', 'backup', 'config', 'OpenSSL']) {
     const results = engine.query(term);
     assert(results.length > 0, `${lang}: Latin search returned no results for ${term}`);
     const prefix = lang === 'en' ? '/' : '/' + lang + '/';

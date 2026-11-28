@@ -11,7 +11,6 @@ assert(publicDir, 'usage: node scripts/check-citus-search.cjs PUBLIC_DIR');
 const moduleDir = JSON.parse(execFileSync('go', ['mod', 'download', '-json', 'github.com/pgsty/oink'],
   { cwd: project, encoding: 'utf8' })).Dir;
 global.window = {};
-const lunr = require(path.join(moduleDir, 'assets/js/third_party/lunr.min.js'));
 const search = require(path.join(moduleDir, 'assets/js/search-engine.js'));
 
 for (const language of ['en', 'zh']) {
@@ -21,9 +20,19 @@ for (const language of ['en', 'zh']) {
     (name.startsWith(`offline-search-index.${language}.`) && name.endsWith('.json')));
   assert.equal(files.length, 1, `one ${language} index`);
   const documents = JSON.parse(fs.readFileSync(path.join(publicDir, files[0]), 'utf8'));
+  const bodyFiles = fs.readdirSync(publicDir).filter(name =>
+    name === `offline-search-body.${language}.json` ||
+    (name.startsWith(`offline-search-body.${language}.`) && name.endsWith('.json')));
+  if (bodyFiles.length === 1) {
+    const byRef = new Map(documents.map(doc => [doc.ref, doc]));
+    for (const item of JSON.parse(fs.readFileSync(path.join(publicDir, bodyFiles[0]), 'utf8'))) {
+      const doc = byRef.get(item.ref);
+      if (doc && typeof item.body === 'string') doc.body = item.body;
+    }
+  }
   const collection = documents.filter(doc => doc.ref.startsWith(prefix));
   assert.equal(collection.length, 67, `all ${language} Citus pages indexed`);
-  const engine = search.create(documents, lunr, 12);
+  const engine = search.create(documents, 12);
   const queries = [
     ['create_distributed_table', 'reference/api-udf/#create_distributed_table'],
     ['citus.node_conninfo', 'reference/api-guc/#citusnode_conninfo-text'],
